@@ -117,8 +117,13 @@ def sensitivity(strategy: Strategy, panel: pd.DataFrame, cfg: BacktestConfig) ->
     for values in combos:
         params = {**strategy.params(), **dict(zip(keys, values, strict=True))}
         variant = type(strategy)(**params)
+        ret = run(variant, panel, cfg).returns
+        eq = (1 + ret).cumprod().resample("W-FRI").last().dropna()
         rows.append({"params": dict(zip(keys, values, strict=True)),
-                     "sharpe": _sharpe(run(variant, panel, cfg).returns)})
+                     "sharpe": _sharpe(ret),
+                     "cagr": performance.cagr(ret),
+                     "max_drawdown": performance.max_drawdown(ret),
+                     "equity": [[d.date().isoformat(), round(float(v), 5)] for d, v in eq.items()]})
     sharpes = [x["sharpe"] for x in rows]
     return {"tried": len(rows), "share_positive": float(np.mean([s > 0 for s in sharpes])),
             "min": float(np.nanmin(sharpes)), "max": float(np.nanmax(sharpes)), "variants": rows}

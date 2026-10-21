@@ -55,4 +55,6 @@ The easiest way to fool yourself in this kind of research is to run many variati
 
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [GDE-0004: The research routine](../guides/0004-the-research-routine.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
+- [LOG-0002: Catalog, ledger and lab](../log/2026-10-20-catalog-ledger-and-lab.md)
 <!-- backlinks:end -->

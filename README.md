@@ -14,6 +14,8 @@ This is a proof of concept, not a product. If the answer is no, we will have lea
 | Beating the S&P 500 | None. All three fail all six tests against it ([EXP-0002](docs/experiments/0002-baseline-gauntlet.md)) |
 | Anything real? | Carry looks like a small real effect, too small to beat stocks. Trend faded after 2009. The oil idea shows nothing as built |
 | Next lead | A slower version of the oil idea ([HYP-0008](docs/hypotheses/0008-monthly-commodity-gap.md)) and stocks plus trend ([HYP-0007](docs/hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)) |
+| Official runs | 2, both failed their pre-registered bars ([ledger](ledger/README.md)) |
+| Catalog | 36 algorithms, 36 data sources, each with a report ([docs index](docs/README.md#algorithm)) |
 | Open hypotheses | See the [docs index](docs/README.md#open-questions-right-now) |
 
 ## How it works
@@ -51,6 +53,9 @@ Everything we decide, test and read is written down in [docs/](docs/README.md), 
 | Background theory | [RES-0004](docs/research/0004-exchange-rate-theory-primer.md) |
 | The tests every idea must pass | [REF-0006](docs/reference/0006-the-gauntlet.md) |
 | What to read | [RES-0001](docs/research/0001-reading-list.md) |
+| How research is done here | [GDE-0004](docs/guides/0004-the-research-routine.md) |
+| How official results work | [DEC-0007](docs/decisions/0007-official-results-come-only-from-the-ledger.md) |
+| How to invent new algorithms | [REF-0007](docs/reference/0007-ways-to-build-new-algorithms.md) |
 | How to add a strategy | [GDE-0002](docs/guides/0002-adding-a-strategy.md) |
 | How to write a doc | [GDE-0003](docs/guides/0003-writing-docs.md) |
 | Session history | [docs/log/](docs/README.md#log) |

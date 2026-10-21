@@ -88,4 +88,6 @@ An algorithm can stop at any stage. Most should stop early: a stage 2 entry that
 ## Referenced by
 
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
+- [LOG-0002: Catalog, ledger and lab](../log/2026-10-20-catalog-ledger-and-lab.md)
 <!-- backlinks:end -->

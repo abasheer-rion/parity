@@ -67,6 +67,9 @@ export interface Report {
   config: Record<string, unknown>;
   coverage: { fetched_at: string | null; series: CoverageRow[] };
   runs: StrategyRun[];
+  kind?: string;
+  run_id?: string | null;
+  series?: Record<string, SeriesBlock>;
 }
 
 export interface BatchSummary {
@@ -102,4 +105,105 @@ export interface GlossaryTerm {
   analogy: string;
   precise: string;
   related?: string[];
+}
+
+export interface ReportedResult {
+  source: string;
+  source_url: string;
+  period: string;
+  market: string;
+  sharpe: number | null;
+  annual_return: number | null;
+  volatility: number | null;
+  max_drawdown: number | null;
+  evidence_type: string;
+  costs_included: boolean | null;
+  verified_on_page: boolean;
+  notes?: string;
+}
+
+export interface Algorithm {
+  id: string;
+  slug: string;
+  name: string;
+  family: string;
+  markets: string[];
+  horizon: string;
+  tags: string[];
+  origin: { type: string; first_published: number | null; authors: string; source_title: string; source_url: string };
+  how_it_works: { simple: string; analogy: string; precise: string };
+  rule: string;
+  data_needed: string[];
+  economic_rationale: string;
+  why_it_might_fail: string;
+  reported_results: ReportedResult[];
+  post_publication_evidence: string;
+  implementations: { url: string; language?: string; license?: string; notes?: string }[];
+  relevance: { score: number; reason: string };
+  testable_with_free_data: boolean;
+  last_reviewed: string;
+  research: { stage: number; hypothesis: string | null; strategy: string | null; registrations: string[]; runs: string[]; verdict: string | null; notes: string };
+}
+
+export interface Dataset {
+  id: string;
+  slug: string;
+  name: string;
+  provider: string;
+  category: string;
+  url: string;
+  api_docs_url: string | null;
+  access: string;
+  rate_limits: string;
+  history_start: string;
+  frequency: string[];
+  what_it_has: string;
+  simple: string;
+  point_in_time: boolean | null;
+  license_terms: string;
+  quality_notes: string;
+  in_use_by_parity: boolean;
+  parity_keys: string[];
+  relevance: { score: number; reason: string };
+  sources: string[];
+  verified: boolean;
+  last_checked: string;
+}
+
+export interface LedgerEntry {
+  seq: number;
+  run_id: string;
+  recorded_at: string;
+  prev: string;
+  hash: string;
+  details_sha256: string;
+  kind: string;
+  registration: string;
+  git_sha: string;
+  data_snapshot: string;
+  trials_counted: number;
+  results: Record<string, {
+    sharpe: number | null; cagr: number | null; max_drawdown: number | null; deflated_sharpe: number | null;
+    gauntlet: string; tests: Record<string, boolean>; verdict: string; meets_registered_criteria: boolean | null;
+  }>;
+}
+
+export interface Registration {
+  id: string;
+  title: string;
+  created: string;
+  hypotheses: string[];
+  question: string;
+  strategies: { name: string; params: Record<string, unknown> }[];
+  pass_criteria: Record<string, unknown>;
+  prior_trials: number;
+  already_seen?: string;
+}
+
+export interface SeriesBlock {
+  description: string;
+  source: string;
+  code: string;
+  frequency: string;
+  points: Point[];
 }

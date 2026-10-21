@@ -22,8 +22,8 @@ class NotConfigured(RuntimeError):
 
 BATCH_SQL = """
 insert into public.research_batches
-  (generated_at, git_sha, schema_version, n_trials, config, coverage)
-values (%s, %s, %s, %s, %s, %s)
+  (generated_at, git_sha, schema_version, n_trials, config, coverage, kind, run_id, series)
+values (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 returning id
 """
 
@@ -42,7 +42,8 @@ def publish(doc: dict) -> str:
     with psycopg.connect(url, autocommit=False) as conn, conn.cursor() as cur:
         cur.execute(BATCH_SQL, (doc["generated_at"], doc.get("git_sha"), doc["schema_version"],
                                 doc["n_trials"], json.dumps(doc["config"]),
-                                json.dumps(doc["coverage"])))
+                                json.dumps(doc["coverage"]), doc.get("kind", "exploratory"),
+                                doc.get("run_id"), json.dumps(doc.get("series"))))
         batch_id = str(cur.fetchone()[0])
         cols = ", ".join(("batch_id", *RUN_FIELDS))
         marks = ", ".join(["%s"] * (len(RUN_FIELDS) + 1))

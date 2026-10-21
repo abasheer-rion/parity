@@ -3,7 +3,13 @@ import type { Session } from "@supabase/supabase-js";
 import { currentSession, listBatches, loadReport, sendSignInLink, source, supabase } from "./lib/data";
 import { date, REPO_URL } from "./lib/format";
 import type { BatchSummary, Report } from "./lib/types";
+import { AlgorithmReport } from "./pages/AlgorithmReport";
+import { Catalog } from "./pages/Catalog";
 import { DataPage } from "./pages/DataPage";
+import { DataSources } from "./pages/DataSources";
+import { Explore } from "./pages/Explore";
+import { Lab } from "./pages/Lab";
+import { LedgerPage } from "./pages/LedgerPage";
 import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { Signals } from "./pages/Signals";
@@ -66,11 +72,17 @@ function Dashboard() {
 
   const [, route, arg] = hash.split("/");
   const nav = [
-    { href: "#/", label: "Overview", active: !route },
+    { href: "#/", label: "Results", active: !route || route === "strategy" },
+    { href: "#/catalog", label: "Catalog", active: route === "catalog" || route === "algo" },
+    { href: "#/lab", label: "Lab", active: route === "lab" },
+    { href: "#/explore", label: "Explore", active: route === "explore" },
     { href: "#/signals", label: "Signals", active: route === "signals" },
-    { href: "#/data", label: "Data", active: route === "data" },
+    { href: "#/ledger", label: "Ledger", active: route === "ledger" },
+    { href: "#/sources", label: "Data sources", active: route === "sources" },
+    { href: "#/data", label: "Data health", active: route === "data" },
     { href: "#/learn", label: "Learn", active: route === "learn" },
   ];
+  const standalone = ["learn", "catalog", "algo", "ledger", "sources"].includes(route ?? "");
 
   return (
     <Shell
@@ -93,16 +105,22 @@ function Dashboard() {
       }
     >
       {route === "learn" && <Learn focus={arg} />}
-      {route !== "learn" && error && <div className="error">{error}</div>}
-      {route !== "learn" && !report && !error && <p className="muted">Loading results</p>}
-      {route !== "learn" && report && (
+      {route === "catalog" && <Catalog />}
+      {route === "algo" && arg && <AlgorithmReport slug={decodeURIComponent(arg)} />}
+      {route === "ledger" && <LedgerPage />}
+      {route === "sources" && <DataSources focus={arg} />}
+      {!standalone && error && <div className="error">{error}</div>}
+      {!standalone && !report && !error && <p className="muted">Loading results</p>}
+      {!standalone && report && (
         <>
-          {route === "strategy" && arg ? <StrategyPage report={report} name={decodeURIComponent(arg)} /> :
+          {route === "lab" ? <Lab report={report} /> :
+            route === "explore" ? <Explore report={report} /> :
+            route === "strategy" && arg ? <StrategyPage report={report} name={decodeURIComponent(arg)} /> :
             route === "signals" ? <Signals report={report} /> :
             route === "data" ? <DataPage report={report} /> :
             <Overview report={report} />}
           <footer className="muted small">
-            Run generated {date(report.generated_at)}
+            {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
             {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
             Research only, not investment advice.
           </footer>

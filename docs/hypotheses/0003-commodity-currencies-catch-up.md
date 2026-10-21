@@ -61,5 +61,6 @@ Code: `engine/src/parity/strategies/fx_commodity_gap.py` (strategy id `fx_commod
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](../research/0002-open-source-and-public-results.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [ALG-0020: Commodity gap (our own idea)](../algorithms/0020-parity-commodity-gap.md)
 <!-- backlinks:end -->

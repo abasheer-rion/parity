@@ -45,5 +45,6 @@ None yet.
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

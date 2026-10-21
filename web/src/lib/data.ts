@@ -65,6 +65,9 @@ export async function loadReport(batchId?: string): Promise<Report> {
     n_trials: batch.n_trials,
     config: batch.config,
     coverage: batch.coverage,
+    kind: batch.kind,
+    run_id: batch.run_id,
+    series: batch.series ?? undefined,
     runs: (runs ?? []) as StrategyRun[],
   };
 }

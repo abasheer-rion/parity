@@ -235,6 +235,8 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
+- [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
 - [DAT-0021: Kenneth R. French Data Library](datasets/0021-kenneth-french.md)
 - [DAT-0034: Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md)
@@ -279,6 +281,7 @@ Other people's code, bots and published results.
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
+- [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md)
@@ -321,6 +324,7 @@ How the team works together.
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
+- [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 
 ## strategy
 
@@ -333,6 +337,7 @@ A specific trading idea or its implementation.
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md)

@@ -6,6 +6,15 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 Nothing yet.
 
+## 0.3.0 (2026-10-20)
+
+- Algorithm catalog (36 entries) and data source catalog (36 entries), each with a generated report page and stage tracking enforced by the docs check.
+- Tamper-evident ledger, pre-registration and the official-run workflow ([DEC-0007](docs/decisions/0007-official-results-come-only-from-the-ledger.md)). First official runs: RUN-000001 and RUN-000002.
+- Results tables in docs are generated from the ledger and cannot be edited by hand.
+- Data fingerprints on every fetch.
+- Dashboard: Catalog, printable algorithm reports, Lab, Explore, Ledger and Data sources pages.
+- Supabase: write-only login for the nightly job, read-only for signed-in team members, batch kind and market series columns.
+
 ## 0.2.0 (2026-10-20)
 
 - The gauntlet: eleven fixed tests every strategy faces on every run, six on beating the S&P 500 and five on whether the effect is real ([REF-0006](docs/reference/0006-the-gauntlet.md)). Results in [EXP-0002](docs/experiments/0002-baseline-gauntlet.md).

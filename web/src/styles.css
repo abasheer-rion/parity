@@ -191,3 +191,42 @@ button.quiet { color: var(--text-2); }
 .gauntlet-group h3 { font-size: 13px; margin: 12px 0 4px; }
 table.gauntlet td.wrap { white-space: normal; text-align: left; min-width: 180px; }
 table.gauntlet th:not(:first-child) { text-align: left; }
+
+/* Catalog, reports, lab, ledger */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+.filters label { display: inline-flex; gap: 6px; align-items: center; color: var(--text-2); font-size: 13px; }
+.filters input[type="search"] { flex: 1; min-width: 220px; }
+table.catalog td { vertical-align: top; }
+table.catalog td.wrap, table td.wrap { white-space: normal; min-width: 200px; text-align: left; }
+tr.selected td { background: color-mix(in srgb, var(--series-1) 8%, transparent); }
+.badge.warn { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, var(--border)); }
+.badge.ev-live { color: var(--good); }
+.stagebar { display: inline-flex; gap: 2px; align-items: center; }
+.stagebar i { width: 8px; height: 8px; border-radius: 2px; background: var(--grid); display: inline-block; }
+.stagebar i.on { background: var(--series-1); }
+.report-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 12px; }
+.report .lead { font-size: 16px; color: var(--text-2); max-width: 760px; }
+.report h3 { font-size: 13px; margin: 14px 0 4px; }
+.report p.big { font-size: 15px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.fact { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+ol.stages { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; counter-reset: s; }
+ol.stages li { counter-increment: s; border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--muted); }
+ol.stages li::before { content: counter(s) ". "; }
+ol.stages li.done { color: var(--text); border-color: var(--series-1); }
+.runbox { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin: 10px 0; }
+.runhead { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.chip { font-size: 12px; padding: 3px 9px; border-radius: 999px; color: var(--text-2); }
+.chip.on { border-color: var(--series-1); color: var(--text); background: color-mix(in srgb, var(--series-1) 10%, var(--surface)); }
+.warning { color: var(--text-2); border-left: 3px solid var(--series-4); padding-left: 10px; }
+
+@media print {
+  .top, .noprint, footer { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .fact { border-color: #ccc; break-inside: avoid; }
+  main { max-width: none; padding: 0; }
+  a { color: #000; }
+}

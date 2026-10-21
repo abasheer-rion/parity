@@ -12,8 +12,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 3 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 6 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 1 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 2 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 36 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
@@ -34,9 +34,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - 2026-10-20 [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
+- 2026-10-20 [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - 2026-10-20 [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 - 2026-10-20 [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
-- 2026-10-20 [REF-0004: Glossary](reference/0004-glossary.md)
 
 ## intent
 
@@ -106,12 +106,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0004 | [Glossary](reference/0004-glossary.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
+| REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## log
 
 | ID | Title | Status | Updated | Tags |
 | --- | --- | --- | --- | --- |
 | LOG-0001 | [Project start](log/2026-10-20-project-start.md) | final | 2026-10-20 | [infra](TAGS.md#infra), [intent](TAGS.md#intent), [process](TAGS.md#process) |
+| LOG-0002 | [Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md) | final | 2026-10-20 | [method](TAGS.md#method), [open-source](TAGS.md#open-source), [process](TAGS.md#process) |
 
 ## algorithm
 

@@ -90,6 +90,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
         })
 
     return {
+        "series": market_series(data_dir),
         "schema_version": SCHEMA_VERSION,
         "kind": kind,
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
@@ -101,8 +102,25 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
     }
 
 
+def market_series(data_dir: Path = store.DEFAULT_DIR, start: str = "2000-01-01") -> dict:
+    """Weekly levels of every cached series, for the dashboard's data explorer."""
+    from .data import catalog
+
+    out = {}
+    for key, spec in catalog.CATALOG.items():
+        try:
+            s = store.load(key, data_dir)
+        except FileNotFoundError:
+            continue
+        s = s[s.index >= start].resample("W-FRI").last().dropna()
+        out[key] = {"description": spec.description, "source": spec.source, "code": spec.code,
+                    "frequency": spec.frequency,
+                    "points": [[d.date().isoformat(), float(f"{v:.6g}")] for d, v in s.items()]}
+    return out
+
+
 def write(doc: dict, out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / "latest.json"
-    path.write_text(json.dumps(doc, indent=1, default=str))
+    path.write_text(json.dumps(doc, separators=(",", ":"), default=str))
     return path

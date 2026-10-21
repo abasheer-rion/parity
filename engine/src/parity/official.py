@@ -95,7 +95,8 @@ def run_official(reg_id: str, dry_run: bool = False) -> dict:
         "record": record,
         "verdicts": verdicts,
         "coverage": coverage,
-        "report": {**{k: v for k, v in doc.items() if k != "runs"}, "runs": slim_runs},
+        "report": {**{k: v for k, v in doc.items() if k not in ("runs", "series")},
+                   "runs": slim_runs},
     }
 
     if dry_run:

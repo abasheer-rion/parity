@@ -162,5 +162,6 @@ What could make these results wrong, roughly from most to least worrying.
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](0001-baseline-backtests.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](0003-monthly-commodity-gap.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
+- [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->
