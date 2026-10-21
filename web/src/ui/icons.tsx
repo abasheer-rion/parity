@@ -44,6 +44,9 @@ const paths: Record<string, ReactNode> = {
   sparkle: <path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z" />,
   palette: <><circle cx="8" cy="8" r="5.8" /><path d="M5.2 7.2h.01M7.2 5h.01M10.2 5.6h.01M8.5 11c0-1 .8-1.7 1.8-1.7H13" /></>,
   external: <path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M11.5 9.5v4h-9v-9h4" />,
+  play: <path d="M5 3.2v9.6a.4.4 0 0 0 .6.35l7.6-4.8a.4.4 0 0 0 0-.7L5.6 2.85a.4.4 0 0 0-.6.35z" />,
+  pause: <path d="M5.5 3.5v9M10.5 3.5v9" />,
+  restart: <path d="M3 3.5v3.5h3.5M3.4 7A5 5 0 1 1 4.6 11.3" />,
 };
 
 export function Icon({ name, size = 16, className }: { name: keyof typeof paths | string; size?: number; className?: string }) {
