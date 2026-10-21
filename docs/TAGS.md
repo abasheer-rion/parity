@@ -241,6 +241,7 @@ Hosting, CI/CD, database and costs.
 - [DEC-0002: Use a free-tier stack of GitHub, Supabase and Cloudflare Pages](decisions/0002-free-tier-stack.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
+- [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0019: Interactive Brokers paper trading](datasets/0019-interactive-brokers-paper.md)
@@ -282,6 +283,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
+- [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
@@ -402,6 +404,7 @@ How the team works together.
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
+- [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 

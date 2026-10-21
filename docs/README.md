@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 7 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 8 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 3 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
@@ -29,6 +29,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-20 [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - 2026-10-20 [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - 2026-10-20 [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
@@ -36,7 +37,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - 2026-10-20 [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
-- 2026-10-20 [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 
 ## intent
 
@@ -111,6 +111,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## log
 

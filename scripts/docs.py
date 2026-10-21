@@ -839,6 +839,8 @@ def build_outputs(docs: list[Doc]) -> dict[Path, str]:
         lines.append("")
     out[tp] = "\n".join(lines).rstrip("\n") + "\n"
 
+    out[DOCS / "RESULTS.md"] = results_register()
+
     # glossary body is generated from glossary.json
     if GLOSSARY_DOC in ids:
         g = ids[GLOSSARY_DOC]
@@ -863,6 +865,49 @@ def build_outputs(docs: list[Doc]) -> dict[Path, str]:
         body = strip_backlinks(d.raw).rstrip("\n")
         out[d.path] = body + "\n\n" + "\n".join(block) + "\n"
     return out
+
+
+def results_register() -> str:
+    """docs/RESULTS.md: every official result, one row per strategy per run, tagged with
+    its plan, hypotheses, catalog entry, family and markets, so nothing gets lost."""
+    chain = ROOT / "ledger" / "runs.jsonl"
+    entries = [json.loads(x) for x in chain.read_text().splitlines() if x.strip()] \
+        if chain.exists() else []
+    regs = {}
+    for f in (ROOT / "registrations").glob("REG-*.json"):
+        d = json.loads(f.read_text())
+        regs[d["id"]] = (d, f.name)
+    algos = {}
+    for e in catalog_entries("algorithms"):
+        strat = e.get("research", {}).get("strategy")
+        if strat:
+            algos.setdefault(strat, e)
+    out = [GEN_NOTE, "# Results register", "",
+           "Every official result we have, one row per strategy per run, built from the ledger, "
+           "the registrations and the catalog. Nothing here is typed by hand. Exploratory runs "
+           "never appear here. How results are kept safe is in "
+           "[REF-0008](reference/0008-where-results-live.md).", "",
+           f"{len(entries)} official runs, "
+           f"{sum(len(e.get('results', {})) for e in entries)} strategy results.", "",
+           "| Run | Date | Plan | Hypotheses | Strategy | Catalog | Family | Markets | Sharpe "
+           "| Deflated Sharpe | Gauntlet | Meets plan | Data fingerprint |",
+           "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    for e in reversed(entries):
+        reg, fname = regs.get(e.get("registration"), ({}, None))
+        hyps = ", ".join(reg.get("hypotheses", [])) or "n/a"
+        plan = f"[{e.get('registration')}](../registrations/{fname})" if fname else \
+            e.get("registration")
+        for name, r in sorted(e.get("results", {}).items()):
+            a = algos.get(name)
+            cat = (f"[{a['id']}](algorithms/{a['id'][-4:]}-{a['slug']}.md)" if a else "n/a")
+            meets = {True: "yes", False: "no", None: "n/a"}[r.get("meets_registered_criteria")]
+            out.append(f"| [{e['run_id']}](../ledger/runs/{e['run_id']}.json) | "
+                       f"{e.get('recorded_at', '')[:10]} | {plan} | {hyps} | `{name}` | {cat} | "
+                       f"{a['family'] if a else 'n/a'} | "
+                       f"{', '.join(a['markets']) if a else 'n/a'} | {_num(r.get('sharpe'))} | "
+                       f"{_num(r.get('deflated_sharpe'))} | {r.get('gauntlet')} | {meets} | "
+                       f"`{(e.get('data_snapshot') or '')[:12]}` |")
+    return "\n".join(out) + "\n"
 
 
 def cmd_index(_args) -> int:

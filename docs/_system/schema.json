@@ -409,7 +409,8 @@
     "unchecked_markdown": [],
     "generated": [
       "docs/README.md",
-      "docs/TAGS.md"
+      "docs/TAGS.md",
+      "docs/RESULTS.md"
     ]
   }
 }

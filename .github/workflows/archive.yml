@@ -1,0 +1,63 @@
+# Weekly safety copy of everything that matters, and an integrity check.
+# Publishes a GitHub release "archive-YYYY-MM-DD" holding the ledger, registrations,
+# catalog, docs and a CSV export of every Supabase results table, with checksums.
+# Also checks that every official run still has its own release.
+# See docs/reference/0008-where-results-live.md.
+#
+# Secrets: SUPABASE_DB_URL (owner connection, read here only to export)
+name: Archive
+
+on:
+  schedule:
+    - cron: "0 6 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -q -e engine
+      - name: Ledger is intact
+        run: parity ledger verify
+      - name: Every official run has its release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          missing=0
+          for id in $(python3 -c "import json;[print(json.loads(l)['run_id']) for l in open('ledger/runs.jsonl') if l.strip()]"); do
+            gh release view "$id" > /dev/null 2>&1 || { echo "Missing release for $id"; missing=1; }
+          done
+          exit $missing
+      - name: Export Supabase tables
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir -p archive/supabase
+          if [ -z "$SUPABASE_DB_URL" ]; then echo "No database secret, skipping export"; exit 0; fi
+          sudo apt-get install -y -qq postgresql-client > /dev/null
+          for t in research_batches strategy_runs members; do
+            psql "$SUPABASE_DB_URL" -c "\copy (select * from public.$t) to 'archive/supabase/$t.csv' with csv header"
+          done
+      - name: Bundle and checksum
+        run: |
+          stamp=$(date -u +%Y-%m-%d)
+          tar -czf "archive/repo-records-$stamp.tar.gz" ledger registrations catalog docs
+          (cd archive && find . -type f ! -name SHA256SUMS -exec sha256sum {} \; > SHA256SUMS)
+          echo "STAMP=$stamp" >> "$GITHUB_ENV"
+      - name: Publish archive release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "archive-$STAMP" archive/repo-records-*.tar.gz archive/SHA256SUMS archive/supabase/*.csv \
+            --title "Archive $STAMP" --notes "Weekly safety copy: ledger, registrations, catalog, docs and Supabase results tables, with SHA-256 checksums." \
+            || gh release upload "archive-$STAMP" archive/* archive/supabase/* --clobber
