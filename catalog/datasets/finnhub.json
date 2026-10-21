@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0012",
+  "slug": "finnhub",
+  "name": "Finnhub",
+  "provider": "Finnhub Stock API",
+  "category": "news-sentiment",
+  "url": "https://finnhub.io",
+  "api_docs_url": "https://finnhub.io/docs/api",
+  "access": "freemium",
+  "rate_limits": "30 calls a second on every plan, on top of each plan's own limit (source: https://finnhub.io/docs/api/rate-limit). The free plan's per minute cap was not readable on the pricing page today.",
+  "history_start": "Not stated for market news.",
+  "frequency": [
+    "intraday"
+  ],
+  "what_it_has": "A free market news feed with a forex category. Forex candles, all forex rates and the economic calendar are marked Premium, and historical calendar surprises are Enterprise only.",
+  "simple": "A data company whose free plan gives live market headlines, but currency prices and the economic calendar cost money.",
+  "point_in_time": false,
+  "license_terms": "Free plan is for personal use; see Finnhub terms. https://finnhub.io/terms-of-service",
+  "quality_notes": "Premium flags read from Finnhub's own API spec (swagger.json). News history depth for backtests is unknown.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Fine for a live headline feed, not for FX prices or backtests."
+  },
+  "sources": [
+    "https://finnhub.io/static/swagger.json",
+    "https://finnhub.io/docs/api/rate-limit",
+    "https://finnhub.io/pricing"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

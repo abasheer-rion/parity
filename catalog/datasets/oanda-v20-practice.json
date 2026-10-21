@@ -1,0 +1,36 @@
+{
+  "id": "DAT-0026",
+  "slug": "oanda-v20-practice",
+  "name": "OANDA v20 REST API (practice account)",
+  "provider": "OANDA Corporation",
+  "category": "paper-trading",
+  "url": "https://www.oanda.com",
+  "api_docs_url": "https://developer.oanda.com/rest-live-v20/introduction/",
+  "access": "free-key",
+  "rate_limits": "About 100 requests a second on a persistent connection and 2 new connections a second (source: https://developer.oanda.com/rest-live-v20/best-practices/). Max 5,000 candles per request (search summary only).",
+  "history_start": "Unverified; candles go back many years for major pairs.",
+  "frequency": [
+    "tick",
+    "minute",
+    "hourly",
+    "daily"
+  ],
+  "what_it_has": "Live streaming prices, historical candles with bid, ask and mid, and full order placement on a free demo account (api-fxpractice.oanda.com).",
+  "simple": "A pretend trading account at a real currency broker. A program can see real prices and place fake trades.",
+  "point_in_time": false,
+  "license_terms": "Standard OANDA account and API terms; we did not read the data redistribution terms. Treat as personal use only.",
+  "quality_notes": "Prices are OANDA's own quotes with its spreads, not the interbank market. Demo accounts may close after inactivity (third party report, unverified). The practice endpoint returns 401 without a token (tested).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 5,
+    "reason": "Intraday FX with real spreads and paper trading in one free account."
+  },
+  "sources": [
+    "https://developer.oanda.com/rest-live-v20/best-practices/",
+    "https://help.oanda.com/us/en/faqs/rest-v20-api-troubleshooting-guide.htm",
+    "https://api-fxpractice.oanda.com/v3/accounts"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

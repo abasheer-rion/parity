@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0009",
+  "slug": "dukascopy",
+  "name": "Dukascopy historical data",
+  "provider": "Dukascopy Bank SA",
+  "category": "fx-prices",
+  "url": "https://www.dukascopy.com/swiss/english/marketwatch/historical/",
+  "api_docs_url": "",
+  "access": "free-no-key",
+  "rate_limits": "None published. The raw feed returned HTTP 429 after a handful of quick requests (tested 2026-10-20), so pace downloads.",
+  "history_start": "Unverified; third party guides say 15 or more years for major pairs.",
+  "frequency": [
+    "tick",
+    "minute",
+    "hourly",
+    "daily"
+  ],
+  "what_it_has": "Tick by tick bid and ask prices with volumes for FX, commodities and indices, as hourly LZMA compressed files. The web export tool gives CSV from tick to monthly bars.",
+  "simple": "A Swiss bank lets anyone download every tiny price change in currencies, which shows the real cost of trading.",
+  "point_in_time": false,
+  "license_terms": "No data specific license found. Treat as personal research use only and do not redistribute.",
+  "quality_notes": "One dealer's quotes, not the whole market. Files need decoding (open source downloaders exist). Gaps can appear around weekends and outages. We downloaded one 2024 EURUSD hour with no key (tested).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Best free tick history for measuring spreads, so our cost model is honest."
+  },
+  "sources": [
+    "https://www.dukascopy.com/swiss/english/marketwatch/historical/",
+    "https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

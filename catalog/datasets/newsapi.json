@@ -1,0 +1,31 @@
+{
+  "id": "DAT-0025",
+  "slug": "newsapi",
+  "name": "NewsAPI.org",
+  "provider": "NewsAPI.org",
+  "category": "news-sentiment",
+  "url": "https://newsapi.org",
+  "api_docs_url": "https://newsapi.org/docs",
+  "access": "freemium",
+  "rate_limits": "Free Developer plan: 100 requests a day (source: https://newsapi.org/pricing).",
+  "history_start": "Free plan searches articles up to a month old.",
+  "frequency": [
+    "daily"
+  ],
+  "what_it_has": "Headlines and articles from many news sites, searchable by keyword. Free articles are delayed 24 hours.",
+  "simple": "A news search service with a free plan that is only for testing, not real use.",
+  "point_in_time": false,
+  "license_terms": "Developer plan is for development and testing only and cannot be used in staging or production, even internally. https://newsapi.org/pricing",
+  "quality_notes": "One month of history is far too short for backtests. No sentiment scores.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Too short and too restricted for research use."
+  },
+  "sources": [
+    "https://newsapi.org/pricing"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

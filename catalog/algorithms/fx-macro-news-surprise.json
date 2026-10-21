@@ -1,0 +1,76 @@
+{
+  "id": "ALG-0010",
+  "slug": "fx-macro-news-surprise",
+  "name": "Trading FX on US macro announcement surprises",
+  "family": "event-news",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "macro-surprise",
+    "high-frequency",
+    "us-dollar",
+    "news-reaction"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2002,
+    "authors": "Andersen, Bollerslev, Diebold and Vega",
+    "source_title": "Micro effects of macro announcements: real-time price discovery in foreign exchange (American Economic Review 93(1), 2003; NBER WP 8959, 2002)",
+    "source_url": "https://www.nber.org/papers/w8959"
+  },
+  "how_it_works": {
+    "simple": "When US jobs or growth numbers come out better than experts expected, the dollar usually jumps up within minutes, and when they are worse it drops. The idea is to trade in the direction of that surprise.",
+    "analogy": "Like a school report card: what moves your parents is not the grade itself but how far it is from what they expected.",
+    "precise": "Andersen et al. show that announcement surprises (actual minus survey median, scaled) produce jumps in the conditional mean of 5-minute dollar exchange rates, with fast adjustment and little drift after. Good US growth news tends to strengthen the dollar, and bad news has a larger effect than good news."
+  },
+  "rule": "For each scheduled US release (e.g. nonfarm payrolls), compute the standardized surprise (actual minus consensus, divided by its historical standard deviation); immediately after release go long USD against major currencies if the surprise is positive growth news and short if negative, closing within minutes to hours. Because most of the move happens within the first 5 minutes, this needs very fast execution.",
+  "data_needed": [
+    "Intraday FX quotes (5-minute or tick)",
+    "Release times, actual values and consensus forecasts for US macro data",
+    "Bid-ask spreads around releases"
+  ],
+  "economic_rationale": "Andersen, Bollerslev, Diebold and Vega show exchange rates are linked to fundamentals at high frequency: news moves prices in the direction macro models predict.",
+  "why_it_might_fail": "The paper finds the adjustment is very quick, a jump right after the release and little movement after, so slower traders mostly arrive after the move. Consensus forecast data and intraday quotes are usually paid, and spreads widen at release time.",
+  "reported_results": [
+    {
+      "source": "Andersen, Bollerslev, Diebold and Vega (NBER WP 8959), event study",
+      "source_url": "https://www.nber.org/system/files/working_papers/w8959/w8959.pdf",
+      "period": "Jan 1992 - Dec 1998",
+      "market": "USD vs DM, GBP, JPY, CHF, EUR, 5-minute returns",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Not a trading backtest. A one standard deviation US payroll surprise moves DM/$ by about 0.16 percent, against an average DM/$ spread of about 0.06 percent; only 0.7 percent of 5-minute returns exceed 0.10 percent."
+    }
+  ],
+  "post_publication_evidence": "No direct out-of-sample test of a tradable surprise strategy was found on pages read. A related 2023 working paper (Antolin-Diaz, Cenedese, Han and Sarno) reports that long-short currency portfolios sorted on exposure to US interest rate surprises earned 5.27 percent a year with a Sharpe ratio of 0.72 from 2009 to 2019: https://fulcrumasset.com/wp-content/uploads/2024/07/us-interest-rate-surprises-and-currency-returns.pdf",
+  "implementations": [
+    {
+      "url": "https://github.com/macrosynergy/macrosynergy",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "notes": "General macro quant research toolkit from Macrosynergy, used in their economic surprise research; the underlying JPMaQS data is commercial."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Shows macro news moves FX, but the tradable edge is intraday and needs paid consensus and tick data, which is a poor fit for a free-data POC."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 3,
+    "hypothesis": "HYP-0004",
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

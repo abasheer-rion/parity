@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0019",
+  "slug": "interactive-brokers-paper",
+  "name": "Interactive Brokers paper trading",
+  "provider": "Interactive Brokers",
+  "category": "paper-trading",
+  "url": "https://www.interactivebrokers.com",
+  "api_docs_url": "https://www.interactivebrokers.com/campus/ibkr-api-page/twsapi-doc/",
+  "access": "free-key",
+  "rate_limits": "Not checked; the TWS API pacing rules live in the API docs.",
+  "history_start": "Not applicable (trading venue).",
+  "frequency": [
+    "tick",
+    "intraday",
+    "daily"
+  ],
+  "what_it_has": "A paper account requested from inside a live IBKR account, with the same permissions as the live account, prices from real market conditions, and access through TWS or IB Gateway. The separate free trial has delayed data except spot FX and metals, which are live.",
+  "simple": "A big real broker lets its customers practice with fake money using real prices, including currencies.",
+  "point_in_time": false,
+  "license_terms": "Standard IBKR account terms. Market data is licensed per subscription and cannot be redistributed.",
+  "quality_notes": "Needs a full brokerage application first. Third parties say API market data needs live data permissions on a funded account, and that the free trial cannot use the API (unverified).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Most realistic FX execution test, but heavy to set up."
+  },
+  "sources": [
+    "https://www.interactivebrokers.com/campus/trading-lessons/request-paper-trading-account/",
+    "https://portal.interactivebrokers.com/en/trading/free-trial.php",
+    "https://supa.is/article/how-to-set-up-ibkr-api-paper-trading-account-step-by-step-2026"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

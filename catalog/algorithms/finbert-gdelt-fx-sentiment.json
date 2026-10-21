@@ -1,0 +1,93 @@
+{
+  "id": "ALG-0030",
+  "slug": "finbert-gdelt-fx-sentiment",
+  "name": "FinBERT + GDELT news sentiment with XGBoost for FX and bonds",
+  "family": "sentiment-alternative-data",
+  "markets": [
+    "fx",
+    "rates"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "finbert",
+    "gdelt",
+    "xgboost",
+    "lookahead-risk",
+    "suspicious-sharpe"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2025,
+    "authors": "Yuke Zhang",
+    "source_title": "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study (arXiv 2505.16136)",
+    "source_url": "https://arxiv.org/abs/2505.16136"
+  },
+  "how_it_works": {
+    "simple": "A finance-trained language model reads world news every day and scores how positive or negative it is. A second model uses those scores to guess whether the euro or yen will go up or down tomorrow.",
+    "analogy": "Like guessing tomorrow's mood in a classroom by reading today's school newsletter.",
+    "precise": "Score GDELT articles with FinBERT, aggregate into daily indices of mean tone, dispersion and event impact, add lags (1 to 3 days) and 5 and 20 day moving averages plus technical features, and train an XGBoost classifier for next-day direction of EUR/USD, USD/JPY and 10-year Treasury futures with expanding-window cross-validation."
+  },
+  "rule": "At each day t close, build sentiment features from articles available up to t, predict P(up) for day t+1 with XGBoost, go long if P(up) > 0.5 and short otherwise, paying 0.02 percent per round trip on FX.",
+  "data_needed": [
+    "GDELT event and article tone data (free, 15-minute updates)",
+    "FinBERT model weights (free)",
+    "Daily EUR/USD, USD/JPY closes",
+    "10-year Treasury futures prices"
+  ],
+  "economic_rationale": "News tone and disagreement may carry macro information that FX prices absorb slowly, per the author.",
+  "why_it_might_fail": "A daily FX Sharpe near 6 would beat every known macro fund by a wide margin, which points to leakage or overfitting. GDELT timestamps are UTC while FX closes at 5pm New York, so articles after the close can enter day t features. Logistic regression on the same features gives Sharpe 0.66 to 0.83, so most of the result comes from the flexible model.",
+  "reported_results": [
+    {
+      "source": "Zhang (2025), arXiv 2505.16136, Table 1",
+      "source_url": "https://arxiv.org/abs/2505.16136",
+      "period": "about 2017-01 to 2025-04 (out-of-sample folds)",
+      "market": "EUR/USD",
+      "sharpe": 5.87,
+      "annual_return": 0.554,
+      "volatility": null,
+      "max_drawdown": -0.156,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Read on the arXiv HTML page. Win rate 72.7 percent. USD/JPY Sharpe 4.65, CAGR 53.2 percent, max drawdown -22.9 percent; ZN Sharpe 4.65, CAGR 22.1 percent. Very likely too good to be true: single author, no independent replication, hyperparameters tuned within the cross-validation scheme, and a possible close-time mismatch. The linked code repository returned 404 when checked."
+    },
+    {
+      "source": "Zhang (2025), logistic regression baseline",
+      "source_url": "https://arxiv.org/abs/2505.16136",
+      "period": "about 2017-01 to 2025-04",
+      "market": "EUR/USD",
+      "sharpe": 0.83,
+      "annual_return": 0.066,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "USD/JPY logistic Sharpe 0.66, CAGR 6.2 percent; ZN -0.15. The more plausible range for a daily news signal."
+    }
+  ],
+  "post_publication_evidence": "No independent replication or live results found. The code link in the paper (github.com/yukepenn/macro-news-sentiment-trading) returned 404 on 2026-10-20.",
+  "implementations": [
+    {
+      "url": "https://github.com/ProsusAI/finBERT",
+      "language": "Python",
+      "license": "Apache-2.0",
+      "notes": "FinBERT model used for sentiment scoring."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Directly targets FX with free data and is easy to replicate, which makes it a good leakage test case even if the headline numbers are not believable."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

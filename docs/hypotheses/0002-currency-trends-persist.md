@@ -50,4 +50,5 @@ Same steps as [HYP-0001](0001-carry-still-pays-after-costs.md#how-we-test-it), p
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [ALG-0015: FX time-series momentum (trend)](../algorithms/0015-fx-time-series-momentum.md)
 <!-- backlinks:end -->

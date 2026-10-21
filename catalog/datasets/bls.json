@@ -1,0 +1,34 @@
+{
+  "id": "DAT-0007",
+  "slug": "bls",
+  "name": "BLS Public Data API",
+  "provider": "US Bureau of Labor Statistics",
+  "category": "rates-macro",
+  "url": "https://www.bls.gov",
+  "api_docs_url": "https://www.bls.gov/developers/",
+  "access": "free-no-key",
+  "rate_limits": "Without a key: 25 queries a day, 25 series and 10 years per query. With a free key: 500 queries a day, 50 series and 20 years per query. Both: 50 requests per 10 seconds (source: https://www.bls.gov/developers/api_faqs.htm).",
+  "history_start": "Varies by series.",
+  "frequency": [
+    "monthly",
+    "quarterly",
+    "annual"
+  ],
+  "what_it_has": "US consumer prices (CPI), jobs and payrolls, wages and producer prices, at full detail.",
+  "simple": "The US government office that counts jobs and measures how fast prices go up.",
+  "point_in_time": false,
+  "license_terms": "US government data, generally public domain. See the API terms of service at https://www.bls.gov/developers/termsOfService.htm and linking and copyright info at https://www.bls.gov/bls/linksite.htm",
+  "quality_notes": "Serves the latest revised values only. Seasonal factors are revised each year. CPI for September 2026 pulled with no key (tested).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "FRED already carries the headline series; BLS only adds detail."
+  },
+  "sources": [
+    "https://www.bls.gov/developers/api_faqs.htm",
+    "https://api.bls.gov/publicAPI/v2/timeseries/data/CUUR0000SA0"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

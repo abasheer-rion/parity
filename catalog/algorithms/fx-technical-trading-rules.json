@@ -1,0 +1,125 @@
+{
+  "id": "ALG-0014",
+  "slug": "fx-technical-trading-rules",
+  "name": "FX technical trading rules (moving averages, filters, breakouts)",
+  "family": "technical-indicator",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "moving-average",
+    "trend-following",
+    "data-snooping",
+    "decayed",
+    "adaptive-markets"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1978,
+    "authors": "Cornell and Dietrich (early test); Hsu, Taylor and Wang (large-scale test used here)",
+    "source_title": "Technical trading: Is it still beating the foreign exchange market? (Journal of International Economics 102, 2016)",
+    "source_url": "https://doi.org/10.1016/j.jinteco.2016.03.012"
+  },
+  "how_it_works": {
+    "simple": "Look only at a currency's past prices. If the price today is above its average over recent weeks, buy it; if below, sell it.",
+    "analogy": "Like following the crowd on a busy street: if everyone has been walking one way for a while, you assume they will keep going that way.",
+    "precise": "Families of rules (moving average crossovers, filters, channel breakouts, support and resistance) produce long or short signals from past exchange rates. Hsu, Taylor and Wang test over 21,000 rules on 30 currencies with a stepwise test for data snooping and find significant profits, mostly in earlier decades and in emerging currencies."
+  },
+  "rule": "Example rule vma(S, L): each day go long the foreign currency against USD when its S-day moving average is above its L-day moving average and short otherwise (e.g. S=1, L=200 or S=5, L=20), earning the interest differential while in position and paying about 3 to 5 bp per one-way trade in developed currencies.",
+  "data_needed": [
+    "Daily FX spot rates (e.g. FRED H.10)",
+    "Daily short-term interest rates for each currency",
+    "Bid-ask spread estimates"
+  ],
+  "economic_rationale": "Hsu, Taylor and Wang attribute profits to temporarily not fully rational behavior and market immaturity; Neely, Weller and Ulrich (2009) frame it as the adaptive markets hypothesis, where profits exist until traders learn and compete them away.",
+  "why_it_might_fail": "Hsu, Taylor and Wang find no significant predictability in developed currencies since the 1992-1996 subperiod. Neely and Weller (2013) find that with developed currencies only, about half of their top portfolios lost money in 2000-2012 and none had significant Sharpe ratios.",
+  "reported_results": [
+    {
+      "source": "Hsu, Taylor and Wang (2016), best rules, developed currencies, Sharpe criterion",
+      "source_url": "http://www.cicfconf.org/sites/default/files/paper_412.pdf",
+      "period": "1971-2015",
+      "market": "9 developed currencies vs USD",
+      "sharpe": 0.752,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "In-sample best rule after data-snooping test. Significant Sharpe ratios: NZD 0.652, DEM/EUR 0.681, JPY 0.752 (value shown). Only 3 of 9 developed currencies were significant on this metric."
+    },
+    {
+      "source": "Hsu, Taylor and Wang (2016), best rules, developed currencies, mean return criterion",
+      "source_url": "http://www.cicfconf.org/sites/default/files/paper_412.pdf",
+      "period": "1971-2015",
+      "market": "5 of 9 developed currencies with significant rules",
+      "sharpe": null,
+      "annual_return": 0.069,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Average annualized excess return of the best significant rule per currency, range 6.5 to 7.7 percent. In-sample selection."
+    },
+    {
+      "source": "Hsu, Taylor and Wang (2016), out-of-sample check",
+      "source_url": "http://www.cicfconf.org/sites/default/files/paper_412.pdf",
+      "period": "Jan 2012 - Sep 2015",
+      "market": "Developed currencies, rules picked with data to 2011",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "5 of 6 selected developed-currency rules had positive returns, with out-of-sample Sharpe ratios of about 0.1 to 0.4; the Swiss franc rule lost money."
+    },
+    {
+      "source": "Neely and Weller (2013), best ex ante adaptive strategy",
+      "source_url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2011/2011-021.pdf",
+      "period": "Apr 1975 - Dec 2012",
+      "market": "Forex technical rules in major and emerging currencies plus carry",
+      "sharpe": 0.78,
+      "annual_return": 0.094,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Picks the top rule by past Sharpe every 20 days. Gross 10.08 percent, net 9.40 percent. Includes emerging currencies, where much of the later profit came from."
+    }
+  ],
+  "post_publication_evidence": "Rules published in the 1970s and 1980s lost their edge in developed currencies by the 1990s (Hsu, Taylor and Wang 2016, citing LeBaron 2002, Olson 2004 and Neely, Weller and Ulrich 2009). Neely and Weller (2013) find remaining profits migrated to emerging currencies.",
+  "implementations": [
+    {
+      "url": "https://github.com/pst-group/pysystemtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Rob Carver's systematic futures framework; its EWMAC trend rule is a moving average crossover. Repo moved from robcarver17 to pst-group."
+    },
+    {
+      "url": "https://github.com/kernc/backtesting.py",
+      "language": "Python",
+      "license": "AGPL-3.0",
+      "notes": "General backtester whose standard example is an SMA crossover; works on any daily price series including FX."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Easy to test with free daily FX data and a natural baseline for any currency strategy, though developed-currency evidence since the 1990s is weak."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

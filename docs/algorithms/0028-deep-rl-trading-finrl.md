@@ -1,0 +1,111 @@
+---
+id: ALG-0028
+title: Deep reinforcement learning trading agents (FinRL)
+type: algorithm
+status: sourced
+created: 2026-10-20
+updated: 2026-10-20
+authors: [ayan]
+tags: [crypto, open-source, strategy]
+related: []
+---
+
+# Deep reinforcement learning trading agents (FinRL)
+
+## In plain words
+
+A computer program learns to trade by trial and error in a simulated market, getting a reward when its money grows.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | reinforcement-learning |
+| Markets | equities, crypto |
+| Horizon | daily |
+| Tags | ppo, ddpg, backtest-overfitting, open-source |
+| Origin | open-source: Liu, Yang, Chen, Zhang, Yang, Xiao, Wang (AI4Finance Foundation) |
+| First published | 2020 (6 years ago) |
+| Primary source | [FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance (arXiv 2011.09607)](https://arxiv.org/abs/2011.09607) |
+| Research stage | 2 of 9: sourced |
+| Relevance to us | 2 of 5: Easy to run on FX with free data, but high overfitting risk makes it a poor first choice for a small proof of concept. |
+| Testable with free data | yes |
+
+This page is generated from `catalog/algorithms/deep-rl-trading-finrl.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** A computer program learns to trade by trial and error in a simulated market, getting a reward when its money grows.
+
+<details><summary>Analogy</summary>
+
+Like a video game player who learns a level by playing it thousands of times, which may not help on a new level.
+
+</details>
+
+<details><summary>Precise</summary>
+
+Model trading as a Markov decision process with state (cash, holdings, prices, technical indicators) and actions (share changes), train PPO, DDPG, TD3, SAC or A2C agents on historical data, and evaluate on a later window with transaction costs as a parameter.
+
+</details>
+
+### The rule
+
+Train a PPO agent on daily DJIA constituent data with technical indicators through 2018, then each day in the test window let the agent output target share changes subject to cash and 0.1 percent per-trade costs.
+
+### Data needed
+
+- Daily OHLCV for the asset universe (Yahoo Finance free)
+- Technical indicators computed from prices
+- Transaction cost assumption
+
+### Why it might work
+
+No specific risk premium; RL may learn nonlinear timing and allocation rules. The library authors present it mainly as an educational tool.
+
+### Why it might fail
+
+RL agents are very sensitive to hyperparameters and random seeds, and a single walk-forward test can select a lucky agent. Gort, Liu et al. (2022, arXiv 2209.05559), from the same group, state that existing DRL trading works optimistically report profits that may be false positives from backtest overfitting.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [FinRL paper, Table 2](https://arxiv.org/abs/2011.09607) | 2019-01-01 to 2020-09-23 | DJIA constituents, multiple stock trading | 1.38 | 21.4% | 14.6% | -11.5% | backtest | yes | yes |
+| [Gort, Liu, Gao, Chen, Wang (2022), arXiv 2209.05559](https://arxiv.org/abs/2209.05559) | test 2022-05-01 to 2022-06-27 | 10 cryptocurrencies | n/a | n/a | n/a | n/a | backtest | unclear | yes |
+
+Notes on these numbers:
+
+- **FinRL paper, Table 2:** Read in the arXiv PDF. TD3 agent; DJIA benchmark Sharpe 0.48. Test window under two years, one market regime, seeds and variance across runs not reported. Single-stock PPO results (Table 1) show SPY Sharpe 1.49 vs S&P 500 0.74 over the same window.
+- **Gort, Liu, Gao, Chen, Wang (2022), arXiv 2209.05559:** Proposes a probability-of-backtest-overfitting test and finds less overfitted agents did better than more overfitted ones over a two-month crash window. The test window is very short.
+
+### After publication
+
+The FinRL group itself later published work on backtest overfitting in DRL trading (arXiv 2209.05559). No audited live track record of FinRL agents was found.
+
+### Implementations
+
+- [https://github.com/AI4Finance-Foundation/FinRL](https://github.com/AI4Finance-Foundation/FinRL) (Python, license: MIT): Active library with tutorials.
+- [https://github.com/DLR-RM/stable-baselines3](https://github.com/DLR-RM/stable-baselines3) (Python, license: MIT): RL algorithms used by FinRL.
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | not yet |
+| 4. implemented | not yet |
+| 5. registered | not yet |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+Nothing links here yet.
+<!-- backlinks:end -->

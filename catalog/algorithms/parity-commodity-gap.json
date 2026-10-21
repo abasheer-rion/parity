@@ -1,0 +1,67 @@
+{
+  "id": "ALG-0020",
+  "slug": "parity-commodity-gap",
+  "name": "Commodity gap (our own idea)",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx",
+    "commodities"
+  ],
+  "horizon": "weekly",
+  "tags": [
+    "commodity-currency",
+    "lead-lag",
+    "residual",
+    "our-idea"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2026,
+    "authors": "Parity team",
+    "source_title": "HYP-0003 in this repository, building on Chen and Rogoff (2003) and Kohlscheen, Avalos and Schrimpf (2017)",
+    "source_url": "docs/hypotheses/0003-commodity-currencies-catch-up.md"
+  },
+  "how_it_works": {
+    "simple": "Canada and Norway sell lots of oil, so their money usually moves with oil. When oil moves and their money has not caught up yet, buy their money and wait for it to catch up.",
+    "analogy": "Like a dog on a lead walking behind its owner. If the owner has walked ahead, bet that the dog will catch up.",
+    "precise": "For CAD (WTI) and NOK (Brent), estimate the currency's sensitivity to oil over a trailing year, take the residual daily return after removing that oil exposure, sum it over 20 days, and z-score it over a year. Go long the currency when the residual is low (it has lagged oil) and short when high, sized by the z-score and capped."
+  },
+  "rule": "Each week, for CAD and NOK, compute a 20-day sum of the currency's return minus beta times its oil return (beta from the prior 250 days), z-score it over 250 days, and hold minus z over 2, capped at 1, split equally across the two currencies.",
+  "data_needed": [
+    "CAD and NOK against USD, daily",
+    "WTI and Brent crude, daily"
+  ],
+  "economic_rationale": "Commodity prices drive the terms of trade of exporters (Chen and Rogoff 2003), and commodity indices have predicted commodity currencies out of sample for up to two months (Kohlscheen, Avalos and Schrimpf 2017).",
+  "why_it_might_fail": "The oil and CAD link is strongest on the same day and fades at lower frequencies (Ferraro, Rogoff and Rossi 2015), currencies may lead commodities (Chen, Rogoff and Rossi 2010), and the oil to dollar link changed after 2020 (Rees 2025).",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "engine/src/parity/strategies/fx_commodity_gap.py",
+      "language": "Python",
+      "license": "private",
+      "notes": "Our implementation."
+    }
+  ],
+  "relevance": {
+    "score": 5,
+    "reason": "Our main attempt at an idea that is not already a standard retail or academic strategy."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 6,
+    "hypothesis": "HYP-0003",
+    "strategy": "fx_commodity_gap",
+    "registrations": [
+      "REG-0001",
+      "REG-0002"
+    ],
+    "runs": [
+      "RUN-000001",
+      "RUN-000002"
+    ],
+    "verdict": null,
+    "notes": "Weekly version fails the gauntlet (RUN-000001). The pre-registered monthly version (REG-0002, HYP-0008) also failed its own bar of 4 reality tests, passing 2 (RUN-000002). Both versions are retired unless a new hypothesis gives a fresh reason."
+  }
+}

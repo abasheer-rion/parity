@@ -1,0 +1,90 @@
+{
+  "id": "ALG-0023",
+  "slug": "crypto-cross-sectional-factors",
+  "name": "Crypto cross-sectional size and momentum factors (C-3 model)",
+  "family": "momentum-trend",
+  "markets": [
+    "crypto"
+  ],
+  "horizon": "weekly",
+  "tags": [
+    "cross-sectional",
+    "factor-model",
+    "size",
+    "long-short"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2019,
+    "authors": "Liu, Tsyvinski, Wu",
+    "source_title": "Common Risk Factors in Cryptocurrency (NBER w25882; Journal of Finance 2022)",
+    "source_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/jofi.13119"
+  },
+  "how_it_works": {
+    "simple": "Every week, sort all coins by size and by how much they rose recently. Small coins and recent winners have tended to do better than big coins and recent losers.",
+    "analogy": "Like picking players for next week's game based on who played well the last two weeks.",
+    "precise": "Sort coins with market cap above $1 million into quintiles on market cap and on 1 to 4 week past returns, rebalance weekly, and go long quintile 5 and short quintile 1. A three-factor model of crypto market, size (CSMB) and momentum (CMOM) prices nine significant long-short strategies."
+  },
+  "rule": "Every week, among coins with market cap above $1 million, buy the top quintile by past two-week return and short the bottom quintile (value-weighted); for size, buy the smallest quintile and short the largest. Where shorting is not possible, short BTC instead, as the authors test.",
+  "data_needed": [
+    "Daily prices, market caps and volumes for all listed coins (CoinMarketCap, CoinGecko)",
+    "T-bill rate",
+    "Borrow or perpetual funding costs for short legs"
+  ],
+  "economic_rationale": "Liu, Tsyvinski and Wu show crypto returns are not explained by stock factors but by crypto market, size and momentum; momentum is linked to investor attention and size to illiquidity premia.",
+  "why_it_might_fail": "The size premium lives in tiny coins that are hard or impossible to short and expensive to trade; the paper excludes costs. Momentum works only among larger coins (4.2 vs 0.6 percent per week). Delistings and dead coins create survivorship risk in free data.",
+  "reported_results": [
+    {
+      "source": "Liu, Tsyvinski, Wu NBER w25882, Table 4",
+      "source_url": "https://www.nber.org/system/files/working_papers/w25882/w25882.pdf",
+      "period": "2014-01 to 2018-12",
+      "market": "1,707 coins with market cap above $1 million",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Long-short excess returns of 2.7 (1-week), 3.3 (2-week), 4.1 (3-week) and 2.5 (4-week momentum) percent per week; small-minus-big size about 3.4 percent per week. No costs or shorting frictions. Weekly figures of this size compound to implausible annual numbers; treat as statistical evidence, not tradable returns."
+    },
+    {
+      "source": "Borri, Liu, Tsyvinski, Wu (2025), Table 2 Panel B",
+      "source_url": "https://arxiv.org/abs/2510.14435",
+      "period": "2020-01 to 2025-09",
+      "market": "All coins, value-weighted quintiles",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Post-2020 two-week momentum long-short 0.021 per week (t = 3.70); size long-short -0.009 (t = -1.69), weaker than the full-sample -0.023 (t = -2.66). Weekly means, not annualized."
+    }
+  ],
+  "post_publication_evidence": "Borri et al. (2025) find momentum still significant post-2020 but smaller, and size much weaker (t = -1.69). They cite Fieberg et al. (2024), who test 20,736 research designs and find size and momentum hold across specifications while other crypto factors do not.",
+  "implementations": [
+    {
+      "url": "https://github.com/freqtrade/freqtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Multi-pair support; cross-sectional ranking requires custom code (for example an informative pairs list)."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Cross-sectional momentum is directly transferable to a basket of currencies, but the crypto size effect is not."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

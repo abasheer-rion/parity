@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0033",
+  "slug": "lstm-sequence-models",
+  "name": "Deep sequence models (LSTM) for daily return direction",
+  "family": "machine-learning",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "lstm",
+    "deep-learning",
+    "decay",
+    "short-term-reversal"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2017,
+    "authors": "Fischer, Krauss",
+    "source_title": "Deep learning with long short-term memory networks for financial market predictions (FAU DP 11/2017; European Journal of Operational Research 2018)",
+    "source_url": "https://www.econstor.eu/bitstream/10419/157808/1/886576210.pdf"
+  },
+  "how_it_works": {
+    "simple": "A neural network with memory reads the last 240 days of returns for each stock and guesses whether it will beat the others tomorrow.",
+    "analogy": "Like a coach who watches each player's last season of games to guess who will score in the next match.",
+    "precise": "Train an LSTM on sequences of 240 standardized daily returns for S&P 500 constituents to classify whether next-day return exceeds the cross-sectional median; go long the top k and short the bottom k each day. Gains are partly explained by a short-term reversal pattern in volatile stocks."
+  },
+  "rule": "Each day, rank S&P 500 constituents by the LSTM's predicted probability of beating the median tomorrow; buy the top 10 and short the bottom 10 equally weighted at the close and hold one day; retrain every 250 trading days on the prior 750 days.",
+  "data_needed": [
+    "Daily total returns of index constituents with historical membership lists",
+    "Transaction cost assumption (5 bps per half-turn in the paper)"
+  ],
+  "economic_rationale": "Nonlinear models can pick up short-term reversal and volatility patterns that linear models miss (Fischer and Krauss).",
+  "why_it_might_fail": "The paper itself shows the edge deteriorating after 2010, with the LSTM roughly flat after costs over 2010-2015. Daily long-short on 20 stocks has high turnover, and a pre-cost Sharpe of 5.8 is typical of short-term reversal signals that do not survive realistic costs.",
+  "reported_results": [
+    {
+      "source": "Fischer and Krauss (2017), Table 3",
+      "source_url": "https://www.econstor.eu/bitstream/10419/157808/1/886576210.pdf",
+      "period": "1992-12 to 2015-10",
+      "market": "S&P 500 constituents, k = 10 long-short",
+      "sharpe": 2.3365,
+      "annual_return": 0.8229,
+      "volatility": 0.3323,
+      "max_drawdown": -0.5233,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "After 5 bps per half-turn. Before costs: Sharpe 5.83, 0.46 percent per day. Random forest after costs Sharpe 1.87. The authors note 2010-2015 as a period of deterioration where the LSTM only kept capital about constant after costs."
+    }
+  ],
+  "post_publication_evidence": "Within the paper's own sample, returns faded after 2010. Later Kaggle competitions (Jane Street Market Prediction 2021, Real-Time Market Data Forecasting 2024-25) used GRU/LSTM and tree ensembles, but their scores and live results were not verified for this entry.",
+  "implementations": [
+    {
+      "url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Includes RNN/LSTM return prediction examples."
+    },
+    {
+      "url": "https://github.com/microsoft/qlib",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Has LSTM, GRU and transformer baselines with standard datasets."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Shows how strong deep-learning backtests decay; for a handful of currencies there is too little data to train such models well."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

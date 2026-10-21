@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0025",
+  "slug": "crypto-grid-trading-bot",
+  "name": "Grid trading bot",
+  "family": "value-mean-reversion",
+  "markets": [
+    "crypto",
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "retail-bot",
+    "range-trading",
+    "mean-reversion",
+    "martingale-risk"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": 2025,
+    "authors": "Retail exchange bots; formal analysis by Chen, Chen, Jang",
+    "source_title": "Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance (arXiv 2506.11921)",
+    "source_url": "https://arxiv.org/abs/2506.11921"
+  },
+  "how_it_works": {
+    "simple": "You place many buy orders below the price and sell orders above it, like rungs on a ladder. Every time the price bounces up and down between rungs, you make a small profit.",
+    "analogy": "Like a shop that buys umbrellas cheap on sunny days and sells them dear on rainy days, as long as the weather keeps changing.",
+    "precise": "Place geometric or arithmetic buy and sell limit orders at fixed intervals around a center price; each round trip earns the grid step minus fees. Chen et al. show that under simple random-walk assumptions the expected return of a static grid is essentially zero; profits from oscillation are offset by inventory losses when price leaves the range."
+  },
+  "rule": "Choose a range [L, U] and N levels with ratio step g; buy one unit each time price falls through a level and sell one unit each time it rises through the level above. The dynamic version resets the grid around the current price when price exits the range.",
+  "data_needed": [
+    "1-minute OHLC candles (Binance or OKX public API)",
+    "Maker fee schedule"
+  ],
+  "economic_rationale": "Grids sell volatility: they profit when price mean-reverts inside a range. There is no clear risk premium; Chen et al. show the static grid has near-zero expectation before fees.",
+  "why_it_might_fail": "When price trends out of the range the grid is left holding a falling asset or all cash in a rally. Fees eat small grids. The dynamic grid results come from a parameter sweep over one bull-heavy sample (2021-2024), so the best cells are in-sample picks.",
+  "reported_results": [
+    {
+      "source": "Chen, Chen, Jang (2025), arXiv 2506.11921",
+      "source_url": "https://arxiv.org/abs/2506.11921",
+      "period": "2021-01 to 2024-07",
+      "market": "BTC and ETH, 1-minute data, OKX maker fee 0.08 percent",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": -0.5,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Read in the arXiv PDF. The dynamic grid IRR is reported as 'as high as 60-70%' for the best parameter cells, shown only in heatmaps; drawdown about 50 percent vs about 80 percent decline for buy-and-hold ETH. The static grid without fees fluctuates around zero, consistent with their zero-expectation result. No out-of-sample parameter selection."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/colachenkc/Dynamic-Grid-Trading",
+      "language": "Python",
+      "license": "none stated",
+      "notes": "Code for the arXiv paper; no license file found via the GitHub API."
+    },
+    {
+      "url": "https://github.com/hummingbot/hummingbot",
+      "language": "Python",
+      "license": "Apache-2.0",
+      "notes": "Has grid-style and pure market-making strategies."
+    }
+  ],
+  "relevance": {
+    "score": 1,
+    "reason": "Popular with retail but has no expected edge; useful only as a negative control for parity."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

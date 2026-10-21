@@ -1,0 +1,91 @@
+{
+  "id": "ALG-0009",
+  "slug": "fx-london-4pm-fix",
+  "name": "London 4pm fix flow and reversal effects",
+  "family": "market-making-liquidity",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "benchmark-fix",
+    "month-end",
+    "hedging-flows",
+    "reversal",
+    "intraday"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2015,
+    "authors": "Melvin and Prins; Evans; Krohn, Mueller and Whelan",
+    "source_title": "Equity hedging and exchange rates at the London 4p.m. fix (Journal of Financial Markets 22, 2015)",
+    "source_url": "https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html"
+  },
+  "how_it_works": {
+    "simple": "Big funds buy and sell lots of currency at 4pm London time, when the official daily exchange rate is set. Prices tend to get pushed one way before that moment and then bounce back after it.",
+    "analogy": "Like a crowded store right before closing: prices of the last items get pushed around by the rush, then settle once the crowd leaves.",
+    "precise": "Melvin and Prins show that relative equity gains over a month predict that country's currency weakening before the month-end 4pm fix, consistent with foreign equity investors resizing currency hedges. Evans finds extraordinary volatility and negative serial correlation around the fix across 21 currencies, and Krohn, Mueller and Whelan document the dollar rising before major fixes and falling after, every year from 1999 to 2018."
+  },
+  "rule": "Month-end version: on the last trading day of the month, if a country's equity market outperformed US equities over the month, sell its currency against USD a few hours before the 4pm London fix and close at the fix (Melvin and Prins). Daily version: go long USD in the hours before the fix and short USD after it, closing by the New York close (Krohn, Mueller and Whelan).",
+  "data_needed": [
+    "Intraday FX quotes around 4pm London (minute or tick)",
+    "Monthly equity index returns by country",
+    "Realistic bid-ask spreads"
+  ],
+  "economic_rationale": "Predictable, price-insensitive orders from passive equity hedgers and other benchmark users concentrate at the fix, and dealers who absorb them need compensation for inventory risk (Melvin and Prins; Krohn, Mueller and Whelan).",
+  "why_it_might_fail": "Krohn, Mueller and Whelan find the intraday swings mostly vanish with full bid-ask costs and only survive for traders with tighter spreads. Fix-related trading by banks drew regulatory fines (Evans), and the fix process changed after those reviews, so past patterns may not repeat.",
+  "reported_results": [
+    {
+      "source": "Krohn, Mueller and Whelan (2020 working paper; JF 2024), EUR around London fix",
+      "source_url": "https://sites.insead.edu/facultyresearch/research/file.cfm?fid=66802",
+      "period": "1999-2018",
+      "market": "EUR/USD",
+      "sharpe": 0.65,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Authors' example with conservative transaction costs: $1 in 1999 more than triples by 2018, realized Sharpe 0.65, about twice a passive S&P 500 position over the same period."
+    },
+    {
+      "source": "Krohn, Mueller and Whelan (2020 working paper), fix reversal strategy, gross",
+      "source_url": "https://sites.insead.edu/facultyresearch/research/file.cfm?fid=66802",
+      "period": "Jan 1999 - Dec 2018",
+      "market": "EUR around ECB fix, GBP around London fix, JPY around Tokyo fix",
+      "sharpe": null,
+      "annual_return": 0.136,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Table 8: gross annualized returns 13.6, 11.2 and 12.9 percent for euro, pound and yen (only the pound is traded around the London fix). With full indicative bid-ask spreads most windows turn negative; with spreads cut by 50 percent returns are 6.6, 4.2 and 3.4 percent, with Sharpe ratios of about 0.5 to 0.7. annual_return shows the euro gross figure."
+    }
+  ],
+  "post_publication_evidence": "Krohn, Mueller and Whelan (published Journal of Finance 2024) find the pre-fix dollar appreciation and post-fix reversal present in each of the twenty years of their 1999-2018 sample, after the Melvin and Prins (2015) and Evans (2018) papers, but say the swings are hard to exploit after costs.",
+  "implementations": [
+    {
+      "url": "https://github.com/amandanish882/fxfixaware_wpattern",
+      "language": "Python",
+      "license": "none",
+      "notes": "Small personal project on fix-aware quoting in CME FX futures based on Krohn, Mueller and Whelan. No license file; not reviewed in detail."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "A real flow effect, but it is intraday and cost-sensitive, so it is a weak candidate for a daily or monthly strategy meant to beat the S&P 500."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

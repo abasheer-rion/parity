@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0001",
+  "slug": "alpaca",
+  "name": "Alpaca paper trading",
+  "provider": "Alpaca Markets",
+  "category": "paper-trading",
+  "url": "https://alpaca.markets",
+  "api_docs_url": "https://docs.alpaca.markets/docs/paper-trading",
+  "access": "free-key",
+  "rate_limits": "Not stated on the paper trading page.",
+  "history_start": "Not applicable (trading venue). Paper accounts get IEX market data.",
+  "frequency": [
+    "intraday",
+    "daily"
+  ],
+  "what_it_has": "A free paper account open to anyone with an email, starting at 100,000 virtual dollars, for US stocks and crypto. No forex.",
+  "simple": "A pretend stock account where a program can practice buying and selling with fake money.",
+  "point_in_time": false,
+  "license_terms": "Paper only accounts may only use IEX market data. Standard Alpaca terms apply. https://docs.alpaca.markets/docs/paper-trading",
+  "quality_notes": "Fills ignore market impact, slippage, dividends and fees, and get random partial fills 10 percent of the time. FX is listed only as on the roadmap.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Good for paper trading the S&P 500 benchmark through an ETF, but no FX."
+  },
+  "sources": [
+    "https://docs.alpaca.markets/docs/paper-trading",
+    "https://docs.alpaca.markets/us/docs/about-alpaca"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

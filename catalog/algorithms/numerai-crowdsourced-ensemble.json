@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0035",
+  "slug": "numerai-crowdsourced-ensemble",
+  "name": "Crowdsourced ML ensemble (Numerai meta model)",
+  "family": "machine-learning",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "crowdsourcing",
+    "ensemble",
+    "staking",
+    "market-neutral"
+  ],
+  "origin": {
+    "type": "commercial",
+    "first_published": 2015,
+    "authors": "Numerai (Richard Craib)",
+    "source_title": "Numerai tournament documentation",
+    "source_url": "https://docs.numer.ai/"
+  },
+  "how_it_works": {
+    "simple": "Thousands of people build prediction models on the same disguised stock data and bet tokens on them. The company blends the best-backed predictions into one model and trades with it.",
+    "analogy": "Like a quiz show where the audience votes with real money and the host follows the weighted vote.",
+    "precise": "Participants train models on obfuscated stock features to predict 20 or 60 day targets, stake NMR on their predictions, and are paid or burned according to correlation (CORR) and meta model contribution (MMC). Only staked predictions are stake-weighted into the meta model that drives a global equity fund."
+  },
+  "rule": "For a replication, download the free Numerai dataset, train a gradient boosting model on the features to predict the main target, rank predictions each round, and evaluate per-era correlation with the target; there is no public way to trade the meta model itself.",
+  "data_needed": [
+    "Numerai tournament data (free, obfuscated features and targets)",
+    "numerapi client"
+  ],
+  "economic_rationale": "Averaging many weakly correlated models and paying for unique contribution can reduce overfitting and find signals a single team misses.",
+  "why_it_might_fail": "Features are obfuscated, so participants cannot relate signals to economics, and per-era correlations are small and noisy. Fund returns are reported by the manager, not audited publicly.",
+  "reported_results": [
+    {
+      "source": "Numerai blog, Numerai Raises $30M Series C",
+      "source_url": "https://blog.numer.ai/numerai-raises-30m-series-c-at-500m-valuation/",
+      "period": "2024",
+      "market": "Numerai global equity fund (meta model)",
+      "sharpe": null,
+      "annual_return": 0.2545,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Self-reported net return with a single down month in 2024. AUM grew from about $60m to $550m over three years, with JPMorgan capacity up to $500m. One good year from the manager's own announcement is weak evidence; earlier and later years not found."
+    }
+  ],
+  "post_publication_evidence": "The fund is live and scaling (AUM about $550m in November 2025 per Numerai). No independent multi-year performance record was found.",
+  "implementations": [
+    {
+      "url": "https://github.com/numerai/example-scripts",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Official example models."
+    },
+    {
+      "url": "https://github.com/numerai/numerapi",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "API client for data and submissions."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Good free practice data for ML workflow, but it is an equity signal and cannot be traded directly by parity."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

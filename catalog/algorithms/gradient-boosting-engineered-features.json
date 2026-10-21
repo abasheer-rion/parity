@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0031",
+  "slug": "gradient-boosting-engineered-features",
+  "name": "Gradient boosting on engineered features (G-Research crypto competition)",
+  "family": "machine-learning",
+  "markets": [
+    "crypto"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "lightgbm",
+    "kaggle",
+    "feature-engineering",
+    "walk-forward"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": 2021,
+    "authors": "G-Research and Kaggle competitors (Meme Lord Capital, Nathaniel Maddux, GABA)",
+    "source_title": "G-Research Crypto Forecasting competition",
+    "source_url": "https://www.kaggle.com/competitions/g-research-crypto-forecasting"
+  },
+  "how_it_works": {
+    "simple": "You turn price history into many hints, like how far price is from its recent average, and let a tree-based model learn which hints predict the next 15 minutes.",
+    "analogy": "Like a weather forecaster who combines dozens of small clues (wind, clouds, pressure) instead of relying on one.",
+    "precise": "Predict 15-minute residualized returns for 14 coins from minute bars with LightGBM on lagged price, volume and moving-average features; validate with walk-forward grouped folds with gaps. Scored by weighted Pearson correlation over three months of live data."
+  },
+  "rule": "Every minute, compute lagged return and moving-average-ratio features per coin, predict the 15-minute residual return with a LightGBM model retrained on an expanding window, and hold positions proportional to the cross-sectionally demeaned prediction.",
+  "data_needed": [
+    "Minute OHLCV for liquid coins (Kaggle dataset or exchange APIs)",
+    "Coin weights for the residualized target"
+  ],
+  "economic_rationale": "Short-horizon return predictability in crypto from reversal, momentum and cross-asset lead-lag can be captured by nonlinear models; G-Research notes feature work mattered more than model choice.",
+  "why_it_might_fail": "Winning live correlations in such competitions are small and the leaderboard was noisy, so ranks partly reflect luck. 15-minute signals need very low costs, and the edge may vanish after fees.",
+  "reported_results": [
+    {
+      "source": "G-Research, Wrapping up the G-Research Crypto Forecasting competition",
+      "source_url": "https://www.gresearch.com/news/wrapping-up-the-g-research-crypto-forecasting-competition/",
+      "period": "2021-11 to 2022-05, three months live scoring",
+      "market": "14 cryptocurrencies, minute data",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "competition",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "All top three used LightGBM; feature engineering mattered more than models; leaderboard fluctuated a lot. Winning correlation scores were not stated on the pages read, so no number is given."
+    }
+  ],
+  "post_publication_evidence": "Live scoring was part of the competition itself (three months after submissions closed). No later trading results from the winning models were found.",
+  "implementations": [
+    {
+      "url": "https://github.com/microsoft/qlib",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "LightGBM pipelines with walk-forward evaluation; not competition code."
+    },
+    {
+      "url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Gradient boosting trading notebooks."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "LightGBM on engineered features with walk-forward validation is the most practical ML baseline parity could run on FX and commodities."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

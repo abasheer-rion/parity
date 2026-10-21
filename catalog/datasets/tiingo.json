@@ -1,0 +1,31 @@
+{
+  "id": "DAT-0029",
+  "slug": "tiingo",
+  "name": "Tiingo",
+  "provider": "Tiingo Inc.",
+  "category": "equities",
+  "url": "https://www.tiingo.com",
+  "api_docs_url": "https://www.tiingo.com/documentation/general/overview",
+  "access": "freemium",
+  "rate_limits": "Free plan: 50 requests an hour, 1,000 a day, 500 unique symbols a month (source: https://www.tiingo.com/about/pricing).",
+  "history_start": "30 or more years of end of day prices for covered securities.",
+  "frequency": [
+    "daily"
+  ],
+  "what_it_has": "End of day prices for over 110,000 securities on the free plan. Real time, crypto, news and fundamentals need paid plans, and forex is not in the free plan.",
+  "simple": "A data company with a free plan for daily stock prices, which could be a backup for our S&P 500 benchmark.",
+  "point_in_time": false,
+  "license_terms": "Internal use only: personal use, no displaying or sharing the data with anyone else. https://www.tiingo.com/about/pricing",
+  "quality_notes": "Free plan has no FX. Adjusted prices are recomputed after corporate actions.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "A possible official backup for dividend adjusted SPY if the Yahoo endpoint breaks."
+  },
+  "sources": [
+    "https://www.tiingo.com/about/pricing"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

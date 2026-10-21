@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0023",
+  "slug": "massive",
+  "name": "Massive (formerly Polygon.io)",
+  "provider": "Massive.com (formerly Polygon.io)",
+  "category": "fx-prices",
+  "url": "https://massive.com",
+  "api_docs_url": "https://massive.com/docs",
+  "access": "freemium",
+  "rate_limits": "Free Currencies Basic: 5 API calls a minute (source: https://massive.com/pricing?product=currencies).",
+  "history_start": "2 years of history on the free plan.",
+  "frequency": [
+    "minute",
+    "daily"
+  ],
+  "what_it_has": "All forex and crypto tickers with end of day data, minute bars, reference data and technical indicators on the free plan. Polygon renamed itself Massive on 2025-10-30; old keys and api.polygon.io still work.",
+  "simple": "A market data company with a free plan for currency prices, but it only goes back two years.",
+  "point_in_time": false,
+  "license_terms": "Free plans are for individual use only. https://massive.com/pricing?product=currencies",
+  "quality_notes": "Two years is too short for a strategy test. Both api.polygon.io and api.massive.com run in parallel for now.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Free minute FX bars, but only two years deep."
+  },
+  "sources": [
+    "https://massive.com/pricing?product=currencies",
+    "https://massive.com/blog/polygon-is-now-massive"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

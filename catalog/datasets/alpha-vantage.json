@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0002",
+  "slug": "alpha-vantage",
+  "name": "Alpha Vantage",
+  "provider": "Alpha Vantage Inc.",
+  "category": "fx-prices",
+  "url": "https://www.alphavantage.co",
+  "api_docs_url": "https://www.alphavantage.co/documentation/",
+  "access": "freemium",
+  "rate_limits": "25 requests a day on the free key; unlimited for verified open source or educational projects (source: https://www.alphavantage.co/support/).",
+  "history_start": "FX daily from 2007-08 (FX_DAILY full output with the public demo key returned 5,000 days, tested).",
+  "frequency": [
+    "daily",
+    "weekly",
+    "monthly"
+  ],
+  "what_it_has": "Daily, weekly and monthly FX bars, US economic indicators, and NEWS_SENTIMENT with sentiment scores that can be filtered by currency (for example FOREX:USD). Intraday FX is premium.",
+  "simple": "A company with a free but very small allowance of price and news data each day.",
+  "point_in_time": false,
+  "license_terms": "Use under the Alpha Vantage terms of service, accepted when getting a key. https://www.alphavantage.co/terms_of_service/",
+  "quality_notes": "The 25 a day cap makes backfills slow. Economic indicators are actual values only, no forecasts. The source of FX quotes is not stated.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Currency tagged news sentiment is interesting, but the free cap is tiny unless we get the educational exemption."
+  },
+  "sources": [
+    "https://www.alphavantage.co/support/",
+    "https://www.alphavantage.co/documentation/",
+    "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

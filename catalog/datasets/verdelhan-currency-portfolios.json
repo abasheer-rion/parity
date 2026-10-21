@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0034",
+  "slug": "verdelhan-currency-portfolios",
+  "name": "Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)",
+  "provider": "Adrien Verdelhan (MIT Sloan)",
+  "category": "factor-research",
+  "url": "https://web.mit.edu/adrienv/www/Data.html",
+  "api_docs_url": "",
+  "access": "no-api",
+  "rate_limits": "Not applicable; Excel file downloads.",
+  "history_start": "Monthly currency portfolios from 1983; annual series from 1953.",
+  "frequency": [
+    "monthly",
+    "annual"
+  ],
+  "what_it_has": "Monthly excess returns of currency portfolios sorted by interest rate (the classic carry trade), dollar carry returns, and global FX risk factors, built from spot and forward rates with bid and ask spreads.",
+  "simple": "A professor's spreadsheets showing how buying high interest currencies and selling low interest ones did each month since the 1980s.",
+  "point_in_time": false,
+  "license_terms": "Posted for research with no stated license. Cite the papers (for example Lustig, Roussanov and Verdelhan, RFS 2011) and do not redistribute the files.",
+  "quality_notes": "The page says updated monthly, but the main file was last saved in June 2021 (HTTP Last-Modified), so recent years are missing. Built from forward points, which differ from our interbank rate approach.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The standard academic carry trade benchmark, a direct check on our carry backtest."
+  },
+  "sources": [
+    "https://web.mit.edu/adrienv/www/Data.html",
+    "https://web.mit.edu/adrienv/www/CurrencyPortfolios.xls"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

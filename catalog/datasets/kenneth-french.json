@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0021",
+  "slug": "kenneth-french",
+  "name": "Kenneth R. French Data Library",
+  "provider": "Eugene F. Fama and Kenneth R. French (Tuck School of Business, Dartmouth)",
+  "category": "factor-research",
+  "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+  "api_docs_url": "",
+  "access": "no-api",
+  "rate_limits": "Not applicable; zipped CSV file downloads.",
+  "history_start": "US returns from July 1926; international data from 1975 for some series.",
+  "frequency": [
+    "daily",
+    "weekly",
+    "monthly"
+  ],
+  "what_it_has": "Fama and French equity factors (market, size, value, profitability, investment, momentum), the risk free rate and many sorted and industry portfolios, for the US and international markets.",
+  "simple": "Two famous professors post free files showing how different kinds of stocks did each month back to 1926.",
+  "point_in_time": false,
+  "license_terms": "Marked Copyright Eugene F. Fama and Kenneth R. French, with no explicit license. Widely used in research with citation; do not redistribute the files. https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+  "quality_notes": "The full history is rebuilt every month, so past returns can change when CRSP revises its data or the method changes (major changes logged in 2012 to 2021). Equity only, no currencies.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Handy risk free rate and equity factors to check whether our returns are just stock market exposure."
+  },
+  "sources": [
+    "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

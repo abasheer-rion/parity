@@ -1,0 +1,36 @@
+{
+  "id": "DAT-0010",
+  "slug": "ecb-data-portal",
+  "name": "ECB Data Portal (SDMX web service)",
+  "provider": "European Central Bank",
+  "category": "rates-macro",
+  "url": "https://data.ecb.europa.eu",
+  "api_docs_url": "https://data.ecb.europa.eu/help/api/overview",
+  "access": "free-no-key",
+  "rate_limits": "None published. We pulled daily EUR/USD as CSV from data-api.ecb.europa.eu with no key (tested 2026-10-20).",
+  "history_start": "Euro reference rates from 1999-01-04; other series vary.",
+  "frequency": [
+    "daily",
+    "monthly",
+    "quarterly"
+  ],
+  "what_it_has": "All ECB statistics, including the daily euro reference exchange rates for about 32 currencies, euro money market rates and yield curves.",
+  "simple": "The European central bank's own data shop. It tells us the official daily price of the euro and European interest rates.",
+  "point_in_time": false,
+  "license_terms": "Free use of information from the site as long as it is reproduced accurately and the ECB is cited as the source. Extra notice rules apply if you sell it. The reference rates are for information only. https://www.ecb.europa.eu/home/disclaimer/html/index.en.html",
+  "quality_notes": "Reference rates are set around 14:10 CET and published around 16:00 CET, so they do not line up with New York closes. No rates on TARGET holidays. The ECB discourages using them for transactions.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Official euro FX fixings and euro area rates straight from the source, without the OECD delay."
+  },
+  "sources": [
+    "https://data.ecb.europa.eu/help/api/overview",
+    "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+    "https://www.ecb.europa.eu/home/disclaimer/html/index.en.html",
+    "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?lastNObservations=2&format=csvdata"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

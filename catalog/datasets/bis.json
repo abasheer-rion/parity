@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0006",
+  "slug": "bis",
+  "name": "BIS Data Portal (SDMX API)",
+  "provider": "Bank for International Settlements",
+  "category": "rates-macro",
+  "url": "https://data.bis.org",
+  "api_docs_url": "https://stats.bis.org/api-doc/v2/",
+  "access": "free-no-key",
+  "rate_limits": "None published. Daily US policy rate pulled as CSV with no key (tested 2026-10-20).",
+  "history_start": "Varies. The US policy rate series starts 1954-07-01; other countries start later.",
+  "frequency": [
+    "daily",
+    "monthly",
+    "quarterly"
+  ],
+  "what_it_has": "Central bank policy rates for many countries in one dataset, plus effective exchange rates, credit and banking statistics.",
+  "simple": "The central banks' own club keeps a list of every country's main interest rate. We can download it all in one place.",
+  "point_in_time": false,
+  "license_terms": "Free to reproduce if the BIS is cited as the source, the use is not misleading and does not imply BIS endorsement. Commercial products must not charge extra for the BIS data. https://data.bis.org/help/legal",
+  "quality_notes": "Policy rates are step series that only change on decision days. Series definitions change over time (the US series switches from fed funds effective to target midpoint in 1985), noted in the series metadata.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 5,
+    "reason": "Policy rates for every currency we trade in one place, which is what a carry signal needs."
+  },
+  "sources": [
+    "https://stats.bis.org/api-doc/v2/",
+    "https://data.bis.org/help/legal",
+    "https://stats.bis.org/api/v2/data/dataflow/BIS/WS_CBPOL/1.0/D.US?lastNObservations=2&format=csv"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

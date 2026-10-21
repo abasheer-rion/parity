@@ -1,0 +1,157 @@
+{
+  "id": "ALG-0001",
+  "slug": "fx-carry-g10",
+  "name": "G10 currency carry (sorted on interest rates)",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "cross-sectional",
+    "risk-premium",
+    "forward-premium-puzzle",
+    "g10",
+    "crash-risk"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2008,
+    "authors": "Lustig, Roussanov, Verdelhan",
+    "source_title": "Common risk factors in currency markets (NBER WP 14082; Review of Financial Studies 24(11), 2011)",
+    "source_url": "https://www.nber.org/papers/w14082"
+  },
+  "how_it_works": {
+    "simple": "Some countries pay more interest on their money than others. You save in the high-interest currencies and borrow in the low-interest ones, and keep the difference as long as exchange rates do not move against you.",
+    "analogy": "Like borrowing from a bank that charges 1 percent to put the money in a bank that pays 5 percent, knowing that once in a while the second bank's currency can drop sharply and wipe out years of gains.",
+    "precise": "Uncovered interest parity says high-yield currencies should depreciate by the interest differential, but since Fama (1984) they have tended not to, so forward discounts predict excess returns. Sorting currencies each month by forward discount (or short-rate differential) and going long the top bucket and short the bottom bucket gives a dollar-neutral factor (HML_FX in Lustig, Roussanov and Verdelhan) that earns a premium with negative skew and losses when global FX volatility jumps."
+  },
+  "rule": "At each month end, rank the G10 currencies (AUD, CAD, CHF, EUR, GBP, JPY, NOK, NZD, SEK, USD) by their 1-month interest rate or 1-month forward discount versus USD. Go long the top 3 and short the bottom 3 in equal weights via 1-month forwards, hold one month, and rebalance.",
+  "data_needed": [
+    "G10 spot exchange rates, daily or month end",
+    "1-month forward rates or 1-month interbank / policy interest rates for each currency",
+    "Bid-ask spreads if testing costs"
+  ],
+  "economic_rationale": "Investors are paid for holding currencies that lose value in bad global times: Lustig, Roussanov and Verdelhan (2011) link the premium to a global slope factor, and Menkhoff, Sarno, Schmeling and Schrimpf (2012) show high-yield currencies do badly when global FX volatility rises unexpectedly.",
+  "why_it_might_fail": "Returns are negatively skewed (crashes in 2008, and the H/L skewness is -1.03 in Menkhoff et al. 2012), and Chernov, Dahlquist and Lochstoer (2024) find G10 carry had little growth after 2008 as rate differentials compressed. Hutchinson et al. (2022) find carry predictability faded after publication.",
+  "reported_results": [
+    {
+      "source": "Menkhoff, Sarno, Schmeling, Schrimpf (2012), Journal of Finance, Table I",
+      "source_url": "https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf",
+      "period": "1983-12 to 2009-08",
+      "market": "48 currencies vs USD, 5 portfolios, long P5 short P1",
+      "sharpe": 0.74,
+      "annual_return": 0.0723,
+      "volatility": 0.0981,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Excess returns after quoted bid-ask spreads. Includes emerging currencies."
+    },
+    {
+      "source": "Menkhoff, Sarno, Schmeling, Schrimpf (2012), Journal of Finance, Table I",
+      "source_url": "https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf",
+      "period": "1983-12 to 2009-08",
+      "market": "15 developed currencies vs USD, 5 portfolios, long P5 short P1",
+      "sharpe": 0.56,
+      "annual_return": 0.0572,
+      "volatility": 0.1024,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Developed-country sample after bid-ask spreads; skewness -0.92."
+    },
+    {
+      "source": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (EQ strategy)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w20433/w20433.pdf",
+      "period": "1976-02 to 2013-08",
+      "market": "G10 currencies vs USD, equal weight, long if rate above USD rate, short otherwise",
+      "sharpe": 0.78,
+      "annual_return": 0.0396,
+      "volatility": 0.0506,
+      "max_drawdown": -0.12,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Sign-based G10 carry versus the dollar rather than a top-3/bottom-3 sort. Max drawdown of 12.0 percent is from their daily-data drawdown analysis (Table 22), it took 94 days."
+    },
+    {
+      "source": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (SPD strategy)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w20433/w20433.pdf",
+      "period": "1976-02 to 2013-08",
+      "market": "G10 currencies vs USD, weights proportional to interest differential",
+      "sharpe": 0.87,
+      "annual_return": 0.066,
+      "volatility": 0.0762,
+      "max_drawdown": -0.215,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Spread-weighted version. Worst drawdown 21.5 percent over 163 days from daily data."
+    },
+    {
+      "source": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, no costs)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w32900/revisions/w32900.rev0.pdf",
+      "period": "1985-2023",
+      "market": "G10 currencies, cross-sectional carry",
+      "sharpe": 0.49,
+      "annual_return": 0.0419,
+      "volatility": 0.0864,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Independent later replication that runs past the original publication dates. Skewness -0.75."
+    },
+    {
+      "source": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, costs = 100 percent of quoted spread)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w32900/revisions/w32900.rev0.pdf",
+      "period": "1985-2023",
+      "market": "G10 currencies, cross-sectional carry",
+      "sharpe": 0.25,
+      "annual_return": 0.0218,
+      "volatility": 0.0864,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Full quoted bid-offer cost. At 50 percent of the spread the Sharpe is 0.37. Adding floating emerging currencies raises the no-cost Sharpe to 0.71."
+    }
+  ],
+  "post_publication_evidence": "Hutchinson, Kyziropoulos, O'Brien, O'Reilly and Sharma (2022) replicate published carry, momentum and value studies and find the average out-of-sample Sharpe falls from +0.39 to -0.32 after publication (https://doi.org/10.1016/j.irfa.2022.102245). Chernov, Dahlquist and Lochstoer (2024) report that G10 carry shows little growth in the second half of their 1985-2023 sample, and Fan, Paseka, Qi and Zhang (2022) attribute the post-2008 decline to the disappearance of the downside risk that carry used to be paid for (https://ideas.repec.org/a/eee/intfin/v76y2022ics1042443121001670.html).",
+  "implementations": [
+    {
+      "url": "https://github.com/QuantConnect/Tutorials/tree/master/04%20Strategy%20Library/20%20Forex%20Carry%20Trade",
+      "language": "Python",
+      "license": "Apache-2.0",
+      "notes": "QuantConnect strategy library: 9 currencies, long highest central bank rate and short lowest, monthly rebalance. Needs the LEAN engine."
+    },
+    {
+      "url": "https://github.com/BenyaminSuicmez/FX_Carry_Trade_Backtest",
+      "language": "Python",
+      "license": "none",
+      "notes": "Small G10 carry backtest 2015-2025. No license file, so reuse rights are unclear."
+    }
+  ],
+  "relevance": {
+    "score": 5,
+    "reason": "The core FX risk premium and the natural baseline any parity currency strategy must beat, testable with free FRED rates and spot data."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 6,
+    "hypothesis": "HYP-0001",
+    "strategy": "fx_carry",
+    "registrations": [
+      "REG-0001"
+    ],
+    "runs": [
+      "RUN-000001"
+    ],
+    "verdict": null,
+    "notes": ""
+  }
+}

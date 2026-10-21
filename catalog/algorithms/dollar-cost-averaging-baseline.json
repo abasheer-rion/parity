@@ -1,0 +1,70 @@
+{
+  "id": "ALG-0029",
+  "slug": "dollar-cost-averaging-baseline",
+  "name": "Dollar-cost averaging (baseline)",
+  "family": "portfolio-construction",
+  "markets": [
+    "equities",
+    "crypto",
+    "multi-asset"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "baseline",
+    "retail",
+    "passive",
+    "benchmark"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 2023,
+    "authors": "Finlay, Zorn (Vanguard Research)",
+    "source_title": "Cost averaging: Invest now or temporarily hold your cash?",
+    "source_url": "https://www.nl.vanguard/professional/vanguard-365/cost-averaging"
+  },
+  "how_it_works": {
+    "simple": "Instead of investing all your money at once, you put in the same amount every month. You buy more when prices are low and less when they are high.",
+    "analogy": "Like filling your car with the same 40 dollars of gas every week no matter the price per gallon.",
+    "precise": "Split a lump sum into equal tranches invested at fixed intervals. Because markets drift upward on average, holding cash while waiting lowers expected return; DCA mainly reduces regret and timing risk rather than raising returns."
+  },
+  "rule": "Invest 1/k of the available cash into the target asset (for example an S&P 500 ETF or BTC) on the first trading day of each month for k months, holding the rest in cash; compare against investing everything on day one.",
+  "data_needed": [
+    "Monthly total-return index of the target asset",
+    "Cash or T-bill rate"
+  ],
+  "economic_rationale": "No return edge is claimed; Vanguard frames it as a behavioral tool that lowers the chance of investing everything just before a fall.",
+  "why_it_might_fail": "Vanguard finds lump sum beat cost averaging 61.6 to 73.7 percent of the time across markets from 1976 to 2022, because the uninvested cash misses the equity premium.",
+  "reported_results": [
+    {
+      "source": "Vanguard Research, Finlay and Zorn (2023), summarized on Vanguard NL page",
+      "source_url": "https://www.nl.vanguard/professional/vanguard-365/cost-averaging",
+      "period": "1976-2022",
+      "market": "US, UK, Canada, Europe, Australia, EM, global equity and balanced portfolios",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Lump sum won 61.6 to 73.7 percent of the time; 1-year outcomes were 2.2 percent higher for 100 percent equity, 1.8 percent for 60/40, 1.2 percent for 40/60 when invested at once. Base case splits into three monthly tranches."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "A simple, honest benchmark for parity: any FX strategy should be compared with both lump-sum and DCA into the S&P 500."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

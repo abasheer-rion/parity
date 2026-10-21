@@ -1,0 +1,107 @@
+{
+  "id": "ALG-0036",
+  "slug": "technical-indicator-trading-bots",
+  "name": "Technical indicator bots (freqtrade, Zenbot sample strategies)",
+  "family": "technical-indicator",
+  "markets": [
+    "crypto"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "retail-bot",
+    "moving-average",
+    "data-snooping",
+    "open-source"
+  ],
+  "origin": {
+    "type": "open-source",
+    "first_published": 2016,
+    "authors": "Zenbot (2016) and freqtrade (2017) communities; academic test by Hudson and Urquhart",
+    "source_title": "Technical trading and cryptocurrencies (Annals of Operations Research 2021)",
+    "source_url": "https://doi.org/10.1007/s10479-019-03357-1"
+  },
+  "how_it_works": {
+    "simple": "A program watches price charts and buys or sells when lines like moving averages or RSI cross certain levels.",
+    "analogy": "Like a thermostat that turns the heat on and off at set temperatures, whether or not the weather pattern has changed.",
+    "precise": "Rules built from moving averages, RSI, Bollinger bands, MACD and similar indicators on 1-minute to 1-day candles, often tuned with hyperparameter search (freqtrade hyperopt). Hudson and Urquhart test about 15,000 rules with multiple-testing corrections."
+  },
+  "rule": "Example freqtrade-style rule: on 5-minute candles, buy when RSI(14) < 30 and the fast EMA crosses above the slow EMA; sell when RSI > 70 or a fixed stop loss or take profit is hit.",
+  "data_needed": [
+    "OHLCV candles from exchange APIs (free)",
+    "Fee schedule"
+  ],
+  "economic_rationale": "Detzel et al. (2021) argue technical rules can be rational when fundamentals are hard to value, as with bitcoin.",
+  "why_it_might_fail": "Zenbot's README says default parameters will underperform buy-and-hold; freqtrade's docs say lookahead bias is easy to introduce and makes biased strategies look very profitable. Hudson and Urquhart find no predictability for Bitcoin out of sample.",
+  "reported_results": [
+    {
+      "source": "Hudson and Urquhart (2021), abstract (open access copy)",
+      "source_url": "https://centaur.reading.ac.uk/85715/8/Hudson-Urquhart2019_Article_TechnicalTradingAndCryptocurre.pdf",
+      "period": "CoinDesk BTC from 2010-07-18; other coins from later start dates",
+      "market": "Two BTC markets plus three other coins",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "In-sample: significant predictability for all five rule classes after data-snooping corrections, with breakeven costs above typical crypto costs. Out-of-sample: 'no predictability for Bitcoin', though some remains in other coins."
+    },
+    {
+      "source": "Zenbot README",
+      "source_url": "https://github.com/DeviaVir/zenbot",
+      "period": "n/a",
+      "market": "Crypto exchanges",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "README states default trade parameters will underperform a buy-hold strategy and that the project is no longer maintained (repo archived)."
+    }
+  ],
+  "post_publication_evidence": "Hudson and Urquhart's out-of-sample period shows no Bitcoin predictability. Zenbot was archived in 2022. Freqtrade added lookahead and recursive analysis tools because user strategies often contain leakage.",
+  "implementations": [
+    {
+      "url": "https://github.com/freqtrade/freqtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Active; includes backtesting, hyperopt, FreqAI, lookahead-analysis."
+    },
+    {
+      "url": "https://github.com/freqtrade/freqtrade-strategies",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Community sample strategies, explicitly not vetted for profit."
+    },
+    {
+      "url": "https://github.com/DeviaVir/zenbot",
+      "language": "JavaScript",
+      "license": "MIT",
+      "notes": "Archived, unmaintained."
+    },
+    {
+      "url": "https://github.com/jesse-ai/jesse",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Alternative backtest framework."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Freqtrade is good test plumbing, but indicator rules themselves show little out-of-sample edge on the main liquid asset."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "ALG-0024",
+  "slug": "crypto-google-search-attention",
+  "name": "Crypto investor attention from Google search volume",
+  "family": "sentiment-alternative-data",
+  "markets": [
+    "crypto"
+  ],
+  "horizon": "weekly",
+  "tags": [
+    "attention",
+    "google-trends",
+    "bitcoin",
+    "retail-flow"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2018,
+    "authors": "Liu, Tsyvinski",
+    "source_title": "Risks and Returns of Cryptocurrency (NBER w24877; Review of Financial Studies 2021)",
+    "source_url": "https://academic.oup.com/rfs/article-abstract/34/6/2689/5912024"
+  },
+  "how_it_works": {
+    "simple": "When lots of people suddenly search for 'Bitcoin' on Google, the price has tended to rise over the next couple of weeks.",
+    "analogy": "Like a restaurant that gets busier the week after it trends on social media.",
+    "precise": "Construct weekly Google search volume for the coin name (de-trended) and sort weeks into quintiles. Liu and Tsyvinski find a one standard deviation rise in Bitcoin search predicts a 2.3 percent higher 2-week-ahead return."
+  },
+  "rule": "Each Sunday, compute the change in Google Trends search index for 'Bitcoin' versus its trailing average; hold BTC next week if the change is in the top quintile of past values (cutoffs from past data only), otherwise hold cash.",
+  "data_needed": [
+    "Google Trends weekly search index (free)",
+    "Daily BTC prices"
+  ],
+  "economic_rationale": "Attention brings new retail buyers whose demand pushes prices up with a lag, consistent with Da, Engelberg and Gao style attention effects cited by Liu and Tsyvinski.",
+  "why_it_might_fail": "Google Trends values are rescaled each download and revised, which can create silent lookahead. Attention spikes also come before crashes. The evidence comes from 2011-2018, mostly one bubble.",
+  "reported_results": [
+    {
+      "source": "Liu and Tsyvinski NBER w24877, introduction and Section 4",
+      "source_url": "https://www.nber.org/system/files/working_papers/w24877/w24877.pdf",
+      "period": "2011-01-01 to 2018-05-31",
+      "market": "Bitcoin, weekly",
+      "sharpe": 0.48,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Weekly Sharpe of the top attention quintile (11.20 percent mean weekly return) vs 1.07 percent and Sharpe 0.08 for the bottom quintile. Quintile cutoffs are full sample in this table; the paper reports an out-of-sample cutoff version also positive."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/GeneralMills/pytrends",
+      "language": "Python",
+      "license": "NOASSERTION (no standard license detected)",
+      "notes": "Unofficial Google Trends client; repository is archived per the GitHub API."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "A free attention signal that could be tried on currency names or macro terms, though evidence is crypto-only and short."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

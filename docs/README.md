@@ -9,11 +9,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 7 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 2 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 3 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 6 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 1 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 36 |
+| [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
 ## Open questions right now
 
@@ -24,7 +26,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - [HYP-0005: Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md) (open)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) (open)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) (open)
-- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) (open)
 
 ## Recently updated
 
@@ -66,7 +67,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0005 | [Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md) | open | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
 | HYP-0006 | [The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) | open | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news) |
 | HYP-0007 | [The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) | open | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
-| HYP-0008 | [A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) | open | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| HYP-0008 | [A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) | rejected | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## experiment
 
@@ -74,6 +75,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | EXP-0001 | [Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
+| EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## research
 
@@ -110,3 +112,85 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ID | Title | Status | Updated | Tags |
 | --- | --- | --- | --- | --- |
 | LOG-0001 | [Project start](log/2026-10-20-project-start.md) | final | 2026-10-20 | [infra](TAGS.md#infra), [intent](TAGS.md#intent), [process](TAGS.md#process) |
+
+## algorithm
+
+| ID | Title | Status | Updated | Tags |
+| --- | --- | --- | --- | --- |
+| ALG-0001 | [G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md) | official | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0002 | [Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0003 | [Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0004 | [Commodity prices and terms of trade as a currency signal](algorithms/0004-fx-commodity-terms-of-trade.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0005 | [FX cross-sectional momentum](algorithms/0005-fx-cross-sectional-momentum.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0006 | [Dollar carry trade](algorithms/0006-fx-dollar-carry.md) | hypothesis | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0007 | [Economic momentum in currencies (Dahlquist and Hasseltoft 2020)](algorithms/0007-fx-economic-momentum.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0008 | [Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md) | hypothesis | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0009 | [London 4pm fix flow and reversal effects](algorithms/0009-fx-london-4pm-fix.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0010 | [Trading FX on US macro announcement surprises](algorithms/0010-fx-macro-news-surprise.md) | hypothesis | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0011 | [Machine learning smart carry (Filippou, Rapach, Taylor, Zhou)](algorithms/0011-fx-ml-smart-carry.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0012 | [Oil price to Canadian dollar daily link (Ferraro, Rogoff, Rossi)](algorithms/0012-fx-oil-cad-daily.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0013 | [FX order flow signal](algorithms/0013-fx-order-flow.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0014 | [FX technical trading rules (moving averages, filters, breakouts)](algorithms/0014-fx-technical-trading-rules.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0015 | [FX time-series momentum (trend)](algorithms/0015-fx-time-series-momentum.md) | official | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0016 | [Fundamentals-adjusted currency value (Menkhoff et al. 2017)](algorithms/0016-fx-value-adjusted.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0017 | [FX value (5-year real exchange rate reversal / PPP)](algorithms/0017-fx-value-ppp.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0018 | [FX volatility risk premium sort](algorithms/0018-fx-volatility-risk-premium.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0019 | [Pre-FOMC announcement drift](algorithms/0019-pre-fomc-drift.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0020 | [Commodity gap (our own idea)](algorithms/0020-parity-commodity-gap.md) | official | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0021 | [Avellaneda-Stoikov market making (Hummingbot)](algorithms/0021-avellaneda-stoikov-market-making.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0022 | [Crypto cash-and-carry basis trade (dated futures)](algorithms/0022-crypto-cash-and-carry-basis.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0023 | [Crypto cross-sectional size and momentum factors (C-3 model)](algorithms/0023-crypto-cross-sectional-factors.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0024 | [Crypto investor attention from Google search volume](algorithms/0024-crypto-google-search-attention.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [news](TAGS.md#news), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0025 | [Grid trading bot](algorithms/0025-crypto-grid-trading-bot.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0026 | [Crypto perpetual futures funding-rate carry](algorithms/0026-crypto-perp-funding-carry.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0027 | [Crypto time-series momentum (Liu and Tsyvinski)](algorithms/0027-crypto-time-series-momentum.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0028 | [Deep reinforcement learning trading agents (FinRL)](algorithms/0028-deep-rl-trading-finrl.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0029 | [Dollar-cost averaging (baseline)](algorithms/0029-dollar-cost-averaging-baseline.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy) |
+| ALG-0030 | [FinBERT + GDELT news sentiment with XGBoost for FX and bonds](algorithms/0030-finbert-gdelt-fx-sentiment.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0031 | [Gradient boosting on engineered features (G-Research crypto competition)](algorithms/0031-gradient-boosting-engineered-features.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0032 | [LLM (ChatGPT) news headline sentiment](algorithms/0032-llm-headline-sentiment.md) | sourced | 2026-10-20 | [news](TAGS.md#news), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0033 | [Deep sequence models (LSTM) for daily return direction](algorithms/0033-lstm-sequence-models.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0034 | [Regularized ML return forecasts (elastic net, trees, neural nets; Gu Kelly Xiu)](algorithms/0034-ml-return-prediction-elastic-net.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0035 | [Crowdsourced ML ensemble (Numerai meta model)](algorithms/0035-numerai-crowdsourced-ensemble.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0036 | [Technical indicator bots (freqtrade, Zenbot sample strategies)](algorithms/0036-technical-indicator-trading-bots.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+
+## dataset
+
+| ID | Title | Status | Updated | Tags |
+| --- | --- | --- | --- | --- |
+| DAT-0001 | [Alpaca paper trading](datasets/0001-alpaca.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DAT-0002 | [Alpha Vantage](datasets/0002-alpha-vantage.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0003 | [AQR Data Sets](datasets/0003-aqr-datasets.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method) |
+| DAT-0004 | [BEA Data API](datasets/0004-bea.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0005 | [Binance public data (data.binance.vision)](datasets/0005-binance-public-data.md) | candidate | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
+| DAT-0006 | [BIS Data Portal (SDMX API)](datasets/0006-bis.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0007 | [BLS Public Data API](datasets/0007-bls.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0008 | [CoinGecko API](datasets/0008-coingecko.md) | candidate | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
+| DAT-0009 | [Dukascopy historical data](datasets/0009-dukascopy.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0010 | [ECB Data Portal (SDMX web service)](datasets/0010-ecb-data-portal.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0011 | [EIA Open Data API v2](datasets/0011-eia.md) | candidate | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
+| DAT-0012 | [Finnhub](datasets/0012-finnhub.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0013 | [Forex Factory weekly calendar export](datasets/0013-forex-factory-calendar.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0014 | [Frankfurter](datasets/0014-frankfurter.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0015 | [FRED and ALFRED (Federal Reserve Bank of St. Louis)](datasets/0015-fred.md) | in-use | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0016 | [GDELT Project](datasets/0016-gdelt.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0017 | [HistData.com](datasets/0017-histdata.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0018 | [IMF Data API (SDMX 2.1 and 3.0)](datasets/0018-imf.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0019 | [Interactive Brokers paper trading](datasets/0019-interactive-brokers-paper.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DAT-0020 | [Macrosynergy JPMaQS sample (Kaggle)](datasets/0020-jpmaqs-kaggle.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0021 | [Kenneth R. French Data Library](datasets/0021-kenneth-french.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method) |
+| DAT-0022 | [Marketaux](datasets/0022-marketaux.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0023 | [Massive (formerly Polygon.io)](datasets/0023-massive.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0024 | [Nasdaq Data Link (formerly Quandl)](datasets/0024-nasdaq-data-link.md) | candidate | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
+| DAT-0025 | [NewsAPI.org](datasets/0025-newsapi.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0026 | [OANDA v20 REST API (practice account)](datasets/0026-oanda-v20-practice.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DAT-0027 | [OECD Data API (SDMX)](datasets/0027-oecd.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0028 | [Stooq](datasets/0028-stooq.md) | not-usable | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
+| DAT-0029 | [Tiingo](datasets/0029-tiingo.md) | candidate | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
+| DAT-0030 | [Trading Economics API](datasets/0030-trading-economics.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0031 | [US Treasury Fiscal Data API](datasets/0031-treasury-fiscal-data.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0032 | [TrueFX historical downloads](datasets/0032-truefx.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0033 | [Twelve Data](datasets/0033-twelve-data.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0034 | [Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method) |
+| DAT-0035 | [World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md) | candidate | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
+| DAT-0036 | [Yahoo Finance chart endpoint](datasets/0036-yahoo-chart.md) | in-use | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |

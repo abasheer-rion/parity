@@ -1,0 +1,32 @@
+{
+  "id": "DAT-0022",
+  "slug": "marketaux",
+  "name": "Marketaux",
+  "provider": "Marketaux (APILayer)",
+  "category": "news-sentiment",
+  "url": "https://www.marketaux.com",
+  "api_docs_url": "https://www.marketaux.com/documentation",
+  "access": "freemium",
+  "rate_limits": "Free plan: 100 requests a day, 3 articles per request (source: https://www.marketaux.com/pricing).",
+  "history_start": "Not stated on the pricing page.",
+  "frequency": [
+    "intraday"
+  ],
+  "what_it_has": "Financial news tagged by entity, including currencies, with a sentiment score from -1 to +1 for each entity. Time series stats need a paid plan.",
+  "simple": "A financial news service that marks each story as good or bad for the companies or currencies it mentions.",
+  "point_in_time": false,
+  "license_terms": "See Marketaux terms; the pricing page does not spell out free plan usage limits beyond volume. https://www.marketaux.com/pricing",
+  "quality_notes": "300 articles a day is too thin for a signal. Sentiment model is not documented in detail.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Currency tagged sentiment, but the free volume is too small."
+  },
+  "sources": [
+    "https://www.marketaux.com/pricing",
+    "https://www.marketaux.com/documentation"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

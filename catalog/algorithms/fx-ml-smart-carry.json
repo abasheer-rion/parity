@@ -1,0 +1,84 @@
+{
+  "id": "ALG-0011",
+  "slug": "fx-ml-smart-carry",
+  "name": "Machine learning smart carry (Filippou, Rapach, Taylor, Zhou)",
+  "family": "machine-learning",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "elastic-net",
+    "panel-regression",
+    "mean-variance"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2020,
+    "authors": "Filippou, Rapach, Taylor, Zhou",
+    "source_title": "Exchange Rate Prediction with Machine Learning and a Smart Carry Trade Portfolio (CEPR DP15305, SSRN 3696388)",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3696388"
+  },
+  "how_it_works": {
+    "simple": "The normal carry trade buys money that pays high interest. This version also asks a computer model whether each currency is likely to rise or fall, and adds that guess before deciding what to buy.",
+    "analogy": "Like choosing a savings account by its interest rate but also checking whether the bank looks shaky before you deposit.",
+    "precise": "Forecast monthly USD exchange rate changes with a panel elastic net (and neural nets) on 70 predictors: 10 country characteristics (inflation, interest rate, unemployment gap, valuation differentials and others) interacted with 6 global variables (uncertainty indices, geopolitical risk, global FX volatility, illiquidity, correlation). Expected excess return equals the interest differential plus the forecast currency change, and a mean-variance investor (risk aversion 5) allocates across currencies monthly."
+  },
+  "rule": "Each month, re-estimate the panel elastic net on an expanding window, forecast next month's spot change for each currency, set expected excess return = bill yield differential + forecast appreciation, and hold mean-variance optimal weights (risk aversion 5) for one month.",
+  "data_needed": [
+    "Monthly spot exchange rates vs USD for G10 (and legacy euro-area currencies)",
+    "Government bill yields by country",
+    "Country macro data: inflation, unemployment gap, equity valuation ratios",
+    "Global variables: economic and monetary policy uncertainty indices, geopolitical risk index, FX volatility and liquidity measures"
+  ],
+  "economic_rationale": "Plain carry ignores predictable currency moves; adding forecasts that react to global risk conditions (for example the dollar's safe-haven moves in 2008) improves allocations (Filippou, Rapach, Taylor and Zhou 2021).",
+  "why_it_might_fail": "Many predictors and hyperparameters create overfitting risk; the authors show plain OLS on the same predictors loses money out of sample. Results are from a single working paper with no live track record found.",
+  "reported_results": [
+    {
+      "source": "Filippou et al. July 2021 draft, Table 3 Panel A",
+      "source_url": "https://www.wu.ac.at/fileadmin/wu/d/ri/isk/VSFX_2021/Papers/Rapach_SmartCarry_07-02-2021.pdf",
+      "period": "1995:01-2020:09 (out of sample)",
+      "market": "G10 plus legacy euro-area currencies vs USD",
+      "sharpe": 0.94,
+      "annual_return": 0.1102,
+      "volatility": 0.1176,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Smart-Opt ensemble. Basic-Opt (carry only) had Sharpe 0.66; a conventional quintile carry sort had 0.33. With 75% of Datastream quoted bid-ask spreads, Smart-Opt Sharpe ratios are 0.64."
+    },
+    {
+      "source": "Filippou et al. July 2021 draft, Table 3 Panel C",
+      "source_url": "https://www.wu.ac.at/fileadmin/wu/d/ri/isk/VSFX_2021/Papers/Rapach_SmartCarry_07-02-2021.pdf",
+      "period": "2008:09-2020:09 (out of sample)",
+      "market": "G10 currencies vs USD",
+      "sharpe": 0.73,
+      "annual_return": 0.092,
+      "volatility": 0.1255,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Smart-Opt ensemble after the financial crisis; Basic-Opt carry Sharpe 0.15 and conventional carry -0.08 in the same period."
+    }
+  ],
+  "post_publication_evidence": "No independent post-publication test found. The paper itself notes conventional carry deteriorated after 2008, in line with Hutchinson et al. (2022, https://doi.org/10.1016/j.irfa.2022.102245).",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Combines carry with macro and news-type uncertainty indices, close to parity's thesis, and most inputs (FRED, policy uncertainty indices) are free."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

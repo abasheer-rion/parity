@@ -1,0 +1,77 @@
+{
+  "id": "ALG-0004",
+  "slug": "fx-commodity-terms-of-trade",
+  "name": "Commodity prices and terms of trade as a currency signal",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx",
+    "commodities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "commodity-currencies",
+    "terms-of-trade",
+    "time-series",
+    "cross-asset"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2016,
+    "authors": "Kohlscheen, Avalos, Schrimpf",
+    "source_title": "When the walk is not random: commodity prices and exchange rates (BIS Working Paper 551, 2016; International Journal of Central Banking 13(2), 2017)",
+    "source_url": "https://www.ijcb.org/sites/default/files/journal/v13n2/ijcb-v13n2-when-walk-not-random-commodity-prices-and-exchange-rates.pdf"
+  },
+  "how_it_works": {
+    "simple": "Countries like Australia, Canada and Norway sell a lot of raw materials. When the prices of what they sell go up, people want their money more, so it tends to rise.",
+    "analogy": "Like a farmer's bank balance going up when the price of wheat rises: the town that sells wheat gets richer too.",
+    "precise": "Build a country-specific commodity export price index (CXPI) weighting commodity prices by each country's export basket, then relate CXPI changes to that country's exchange rate. Kohlscheen et al. show daily CXPI changes beat a random walk for 11 exporters in out-of-sample fit tests, but mostly when the commodity move is the same day; lagged CXPI changes beat the random walk in only a few countries. Practitioners (Macrosynergy) use smoothed terms-of-trade changes as a slower signal."
+  },
+  "rule": "Daily, compute each exporter's export-weighted commodity price index; go long the currency (vs USD) after a rise in its index over the signal window and short after a fall, for example using the average of 1-week, 1-month and 1-year changes, sized by inverse volatility.",
+  "data_needed": [
+    "Daily spot FX for commodity exporters (AUD, CAD, NOK, NZD, BRL, CLP, ZAR, etc.)",
+    "Daily commodity prices (oil, metals, agriculturals)",
+    "Export shares by commodity per country (UN Comtrade)"
+  ],
+  "economic_rationale": "Higher prices for a country's exports raise expected export revenue and capital inflows, which supports its currency (terms-of-trade channel, Kohlscheen, Avalos and Schrimpf 2017).",
+  "why_it_might_fail": "The strong link is mostly contemporaneous, so it does not translate into a tradable forecast unless commodities themselves are predicted; the authors state lagged commodity prices beat the random walk in only a few countries. Central bank intervention weakens the link in some emerging markets.",
+  "reported_results": [
+    {
+      "source": "Kohlscheen, Avalos, Schrimpf 2017, Table 3 (IJCB)",
+      "source_url": "https://www.ijcb.org/sites/default/files/journal/v13n2/ijcb-v13n2-when-walk-not-random-commodity-prices-and-exchange-rates.pdf",
+      "period": "Jan 2009-Feb 2015 evaluation (data from Jan 2004)",
+      "market": "11 commodity exporter currencies vs USD, daily",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Forecast test, not a trading backtest. RMSE ratio vs random walk 0.850 for CAD and 0.858 for AUD using same-day commodity changes (pseudo out-of-sample fit). With lagged commodity prices only, few countries beat the random walk (Chile best)."
+    }
+  ],
+  "post_publication_evidence": "Macrosynergy research (https://macrosynergy.com/research/commodity-terms-of-trade/) reports using commodity-based terms-of-trade changes as an FX signal with point-in-time data; I could not open the page (bot protection), so no numbers are recorded here.",
+  "implementations": [
+    {
+      "url": "https://github.com/macrosynergy/macrosynergy",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "notes": "Macrosynergy's signal research package; its terms-of-trade examples rely on paid JPMaQS data."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Fits parity's commodities-plus-FX idea directly, and free daily commodity and FX prices are enough for a first test."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

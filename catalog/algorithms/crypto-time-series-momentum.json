@@ -1,0 +1,89 @@
+{
+  "id": "ALG-0027",
+  "slug": "crypto-time-series-momentum",
+  "name": "Crypto time-series momentum (Liu and Tsyvinski)",
+  "family": "momentum-trend",
+  "markets": [
+    "crypto"
+  ],
+  "horizon": "weekly",
+  "tags": [
+    "time-series",
+    "trend",
+    "bitcoin",
+    "short-horizon"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2018,
+    "authors": "Liu, Tsyvinski",
+    "source_title": "Risks and Returns of Cryptocurrency (NBER w24877; Review of Financial Studies 2021)",
+    "source_url": "https://academic.oup.com/rfs/article-abstract/34/6/2689/5912024"
+  },
+  "how_it_works": {
+    "simple": "If bitcoin went up a lot this week, it has tended to keep going up next week too. So you hold it after big up weeks and step aside after bad weeks.",
+    "analogy": "Like a rumor spreading through a school: once it starts, more people hear it over the next few days.",
+    "precise": "Regress next-period returns on current returns for BTC, XRP and ETH at daily and weekly frequency and sort weekly returns into quintiles. Liu and Tsyvinski find positive autocorrelation at 1 to 4 week horizons, which they link to investor attention, and no exposure to standard stock or macro factors."
+  },
+  "rule": "Every Sunday 23:59:59 UTC, rank this week's BTC return against quintile cutoffs set on past data only; hold BTC for the next week if it is in the top quintile (or above zero in a simpler version), otherwise hold cash.",
+  "data_needed": [
+    "Daily BTC, ETH, XRP close prices (CoinDesk, CoinGecko, exchange APIs)",
+    "T-bill rate"
+  ],
+  "economic_rationale": "Liu and Tsyvinski argue slow diffusion of attention among retail investors creates momentum; Google search for 'Bitcoin' also predicts returns.",
+  "why_it_might_fail": "The original sample is short (BTC from 2011 to May 2018) and dominated by the 2017 bubble. Their own Table 17 with no lookahead in quintile cutoffs shows smaller top-minus-bottom spreads (4.53 vs 8.62 percent per week at 1 week). Ethereum shows weaker momentum.",
+  "reported_results": [
+    {
+      "source": "Liu and Tsyvinski NBER w24877, Table 15",
+      "source_url": "https://www.nber.org/system/files/working_papers/w24877/w24877.pdf",
+      "period": "2011-01-01 to 2018-05-31",
+      "market": "Bitcoin, weekly",
+      "sharpe": 0.45,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Weekly (not annualized) Sharpe of the top formation-return quintile: mean 11.22 percent per week next week vs 2.60 percent and Sharpe 0.19 for the bottom quintile. Quintile cutoffs use the full sample (lookahead). Weekly Sharpe 0.45 implies roughly 3.2 annualized, which is not a realistic forward expectation."
+    },
+    {
+      "source": "Liu and Tsyvinski NBER w24877, Table 17 (no lookahead)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w24877/w24877.pdf",
+      "period": "2011-01-01 to 2018-05-31, first two years used only to set cutoffs",
+      "market": "Bitcoin, weekly",
+      "sharpe": 0.37,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Weekly Sharpe of the top quintile (7.88 percent per week mean) with out-of-sample cutoffs; bottom quintile 3.35 percent, Sharpe 0.25. The long-short spread shrinks to 4.53 percent per week."
+    }
+  ],
+  "post_publication_evidence": "Borri, Liu, Tsyvinski and Wu (2025) still find a two-week crypto momentum factor significant after 2020 (long-short 2.1 percent per week, t = 3.70), but BTC's own weekly Sharpe over 2014-2025 was 0.13 and drawdowns reached -83.62 percent.",
+  "implementations": [
+    {
+      "url": "https://github.com/freqtrade/freqtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Trend rules are easy to express as a strategy class; no official TSMOM strategy."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Same time-series momentum idea parity can test on FX, but crypto evidence rests on a short bubble-heavy sample."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

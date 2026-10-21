@@ -58,4 +58,5 @@ See [the reading list](../research/0001-reading-list.md#foundations).
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](../research/0002-open-source-and-public-results.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [ALG-0001: G10 currency carry (sorted on interest rates)](../algorithms/0001-fx-carry-g10.md)
 <!-- backlinks:end -->

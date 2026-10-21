@@ -1,0 +1,92 @@
+{
+  "id": "ALG-0003",
+  "slug": "fx-carver-trend-carry",
+  "name": "Rob Carver trend plus carry futures system (pysystemtrade)",
+  "family": "momentum-trend",
+  "markets": [
+    "fx",
+    "multi-asset"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "trend-following",
+    "carry",
+    "vol-targeting",
+    "futures",
+    "open-source"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 2015,
+    "authors": "Rob Carver",
+    "source_title": "Systematic Trading (2015) and the pysystemtrade framework; blog post Simulating my futures system",
+    "source_url": "https://qoppac.blogspot.com/2015/03/simulating-my-futures-system.html"
+  },
+  "how_it_works": {
+    "simple": "The system buys things that have been going up and sells things that have been going down, and also leans toward things that pay you to hold them. It keeps each bet small enough that no single market can hurt too much.",
+    "analogy": "Like a sailor who follows the wind (trend) but also prefers routes with a helpful current (carry), and reefs the sails when the sea gets rough.",
+    "precise": "Forecasts from several EWMA crossover speeds (and breakouts) plus a carry rule (roll yield, which for FX futures is the interest differential) are scaled to a common average absolute value, capped, and combined with fixed forecast weights. Positions are sized so each instrument contributes a target share of portfolio volatility, using recent standard deviation, with a buffer to cut trading costs."
+  },
+  "rule": "Daily, for each futures contract (including CME FX futures) compute EWMAC forecasts (e.g. 16/64, 32/128, 64/256 day spans) divided by price volatility and a carry forecast equal to annualized roll yield divided by volatility, scale each to average absolute 10, cap at 20, take a weighted average, and set position = forecast/10 x (annual vol target x capital x instrument weight x diversification multiplier) / (instrument price volatility in currency), trading only when the position moves outside a buffer.",
+  "data_needed": [
+    "Daily futures prices for current and next contracts (or spot plus interest rates to synthesize FX carry)",
+    "Contract specifications and costs",
+    "Daily FX rates for P&L conversion"
+  ],
+  "economic_rationale": "Trend captures slow reaction to news and herding; carry earns a risk premium for holding higher-yielding assets; volatility targeting keeps risk steady (Carver, Systematic Trading 2015).",
+  "why_it_might_fail": "Trend can lose for years when markets chop, and carry crashes in risk-off episodes. Carver himself says he would not expect to realize the backtested Sharpe ratio, partly because the backtest period had unusually strong returns.",
+  "reported_results": [
+    {
+      "source": "Carver blog, Simulating my futures system (2015)",
+      "source_url": "https://qoppac.blogspot.com/2015/03/simulating-my-futures-system.html",
+      "period": "1978-2015",
+      "market": "Up to 43 futures across asset classes (FX about 19% of risk)",
+      "sharpe": 0.88,
+      "annual_return": 0.16,
+      "volatility": 0.19,
+      "max_drawdown": -0.33,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Includes trend, carry, relative value and short volatility rules, not trend plus carry alone. 16% is described as an average over 32 years. Weights fitted on an expanding window. Excludes interest, FX margin effects and data fees."
+    },
+    {
+      "source": "Carver blog, Annual performance update year 12",
+      "source_url": "https://qoppac.blogspot.com/2026/04/annual-performance-update-year-12.html",
+      "period": "Apr 2025-Apr 2026",
+      "market": "Personal diversified futures account (bonds, FX, commodities, equities)",
+      "sharpe": 0.8,
+      "annual_return": 0.237,
+      "volatility": 0.173,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "One year of live trading, geometric net return; the post says it underperformed the SG CTA index and AHL on a vol-adjusted basis. Since-inception stats not given in this post."
+    }
+  ],
+  "post_publication_evidence": "Carver has published live annual results since 2014 on his blog; the year 12 review (Apr 2025 to Apr 2026) shows a 23.7% net return with Sharpe 0.80, behind AHL on a vol-adjusted basis.",
+  "implementations": [
+    {
+      "url": "https://github.com/pst-group/pysystemtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Full backtest and live trading framework by Carver; GPL-3 means derived code must stay open if distributed."
+    }
+  ],
+  "relevance": {
+    "score": 5,
+    "reason": "A documented, open-source trend plus carry system that can be run on FX futures or spot data and compared directly with the S&P 500."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

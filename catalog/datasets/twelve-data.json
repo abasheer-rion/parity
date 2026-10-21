@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0033",
+  "slug": "twelve-data",
+  "name": "Twelve Data",
+  "provider": "Twelve Data Pte. Ltd.",
+  "category": "fx-prices",
+  "url": "https://twelvedata.com",
+  "api_docs_url": "https://twelvedata.com/docs",
+  "access": "freemium",
+  "rate_limits": "Free Basic plan: 8 API credits a minute, 800 a day, plus 8 trial websocket credits (source: https://twelvedata.com/pricing).",
+  "history_start": "Not stated for the free plan.",
+  "frequency": [
+    "minute",
+    "hourly",
+    "daily"
+  ],
+  "what_it_has": "Real time and historical bars for forex, US stocks and ETFs, and crypto on the free plan.",
+  "simple": "A price data company with a small free plan that includes minute by minute currency prices.",
+  "point_in_time": false,
+  "license_terms": "The free Basic plan is for internal non-display use only. https://twelvedata.com/pricing",
+  "quality_notes": "History depth on the free plan is not stated. FX prices are aggregated from unnamed sources.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Handy intraday FX bars if OANDA is not enough."
+  },
+  "sources": [
+    "https://twelvedata.com/pricing"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

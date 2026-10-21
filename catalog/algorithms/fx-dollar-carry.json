@@ -1,0 +1,110 @@
+{
+  "id": "ALG-0006",
+  "slug": "fx-dollar-carry",
+  "name": "Dollar carry trade",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "time-series",
+    "risk-premium",
+    "usd",
+    "business-cycle",
+    "basket"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2010,
+    "authors": "Lustig, Roussanov, Verdelhan",
+    "source_title": "Countercyclical currency risk premia (NBER WP 16427; Journal of Financial Economics 111(3), 2014)",
+    "source_url": "http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf"
+  },
+  "how_it_works": {
+    "simple": "Look at whether US interest rates are higher or lower than the average of other rich countries. If other countries pay more, buy a basket of their currencies against the dollar; if the US pays more, hold the dollar against them.",
+    "analogy": "Like choosing whether to keep your savings at home or abroad by checking just one thing each month: which side pays more interest on average.",
+    "precise": "The strategy goes long an equal-weighted basket of foreign currency forwards when the average foreign forward discount versus USD is positive and short the basket otherwise. Lustig, Roussanov and Verdelhan (2014) show the average forward discount predicts the dollar basket's excess return, and the premium is countercyclical: investors are long foreign currency mostly in US recessions, when US rates are cut."
+  },
+  "rule": "At each month end, compute the average 1-month forward discount (foreign minus US short rate) across developed currencies. If it is positive, go long an equal-weighted basket of all foreign currencies versus USD for one month; if negative, go short the basket.",
+  "data_needed": [
+    "Developed-market spot rates vs USD, month end",
+    "1-month forward rates or 1-month interest rates for the US and each foreign country"
+  ],
+  "economic_rationale": "Lustig, Roussanov and Verdelhan (2014) argue the returns compensate US investors for shorting the dollar in US recessions and for being long the dollar in bad global times, so the premium is a reward for business-cycle risk rather than a free lunch.",
+  "why_it_might_fail": "The whole portfolio rides on one decision per month, so long stretches of wrong-way dollar moves hurt. When US rates sit above foreign rates for years (as after 2016 and in 2022-2024) the trade is a simple long-dollar bet that depends on dollar strength continuing. Chernov, Dahlquist and Lochstoer (2024) show a lower G10 Sharpe of 0.55 over 1985-2023 than the 0.66 in the original sample.",
+  "reported_results": [
+    {
+      "source": "Lustig, Roussanov, Verdelhan (2014), JFE, Table 1, Panel A (USD strategy)",
+      "source_url": "http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf",
+      "period": "1983-11 to 2010-06",
+      "market": "Developed currencies basket vs USD",
+      "sharpe": 0.66,
+      "annual_return": 0.056,
+      "volatility": 0.0853,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Bid-ask spreads on forwards and spot included. Same table reports the US equity market (CRSP, no costs) at 6.26 percent mean, 15.49 percent volatility, Sharpe 0.40, and the HML carry trade at Sharpe 0.31 for developed currencies."
+    },
+    {
+      "source": "Lustig, Roussanov, Verdelhan (2014), JFE, Table 1, Panel B (USD strategy)",
+      "source_url": "http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf",
+      "period": "1983-11 to 2010-06",
+      "market": "All currencies including emerging, basket vs USD",
+      "sharpe": 0.56,
+      "annual_return": 0.0428,
+      "volatility": 0.0761,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Signal still uses the developed-country average forward discount."
+    },
+    {
+      "source": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (Dollar Carry, G10, no costs)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w32900/revisions/w32900.rev0.pdf",
+      "period": "1985-2023",
+      "market": "G10 currencies",
+      "sharpe": 0.55,
+      "annual_return": 0.0434,
+      "volatility": 0.0795,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Independent replication that extends 13 years past the original sample. With costs at 100 percent of the quoted spread: 3.40 percent mean, Sharpe 0.43."
+    }
+  ],
+  "post_publication_evidence": "Chernov, Dahlquist and Lochstoer (2024) report G10 dollar carry Sharpe ratios of 0.55 before costs and 0.43 after full quoted costs over 1985-2023, so the strategy held up better than cross-sectional G10 carry in their data, though they do not split the sample at publication. Hutchinson et al. (2022) find the broader set of published currency carry, momentum and value strategies lost their performance after publication (https://doi.org/10.1016/j.irfa.2022.102245).",
+  "implementations": [
+    {
+      "url": "https://web.mit.edu/adrienv/www/Data.html",
+      "language": "Excel data",
+      "license": "unspecified",
+      "notes": "Verdelhan's page offers free monthly dollar carry excess returns (1983-12 to 2010-06) and currency portfolio returns for replication. Not code."
+    },
+    {
+      "url": "https://github.com/romashencia/Internation-Finance-Dollar-Carry-trade",
+      "language": "Jupyter Notebook",
+      "license": "none",
+      "notes": "Student project adapting dollar carry to a RUB base; no license file, not reviewed in depth."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "One signal, one basket, monthly, and the source paper benchmarks it directly against the US stock market, which is exactly the parity comparison."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 3,
+    "hypothesis": "HYP-0005",
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

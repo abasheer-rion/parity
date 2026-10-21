@@ -1,0 +1,36 @@
+{
+  "id": "DAT-0011",
+  "slug": "eia",
+  "name": "EIA Open Data API v2",
+  "provider": "US Energy Information Administration",
+  "category": "commodities-energy",
+  "url": "https://www.eia.gov/opendata/",
+  "api_docs_url": "https://www.eia.gov/opendata/documentation.php",
+  "access": "free-key",
+  "rate_limits": "Up to 5,000 rows per JSON request. Callers must throttle per second and per hour or the key is suspended for a while; exact numbers are not published (source: https://www.eia.gov/opendata/documentation.php).",
+  "history_start": "Varies; WTI spot from 1986, Henry Hub from 1997.",
+  "frequency": [
+    "daily",
+    "weekly",
+    "monthly",
+    "annual"
+  ],
+  "what_it_has": "Oil and gas spot prices, weekly crude and gas inventories, production, the Short Term Energy Outlook and international energy data.",
+  "simple": "The US government office that tracks oil and gas, including how much is stored each week.",
+  "point_in_time": false,
+  "license_terms": "US government data is public domain. EIA asks for a source line with the publication date. https://www.eia.gov/about/copyrights_reuse.php",
+  "quality_notes": "Without a key the API answers API_KEY_MISSING (tested). Weekly inventory numbers can be revised later and the API shows the latest values. WTI was negative on 2020-04-20.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 5,
+    "reason": "Weekly oil and gas inventory releases are the commodity news most likely to move CAD and NOK."
+  },
+  "sources": [
+    "https://www.eia.gov/opendata/documentation.php",
+    "https://www.eia.gov/about/copyrights_reuse.php",
+    "https://api.eia.gov/v2/petroleum/pri/spt/data/?frequency=daily"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

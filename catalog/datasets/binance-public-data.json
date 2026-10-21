@@ -1,0 +1,37 @@
+{
+  "id": "DAT-0005",
+  "slug": "binance-public-data",
+  "name": "Binance public data (data.binance.vision)",
+  "provider": "Binance",
+  "category": "crypto",
+  "url": "https://data.binance.vision",
+  "api_docs_url": "https://github.com/binance/binance-public-data",
+  "access": "free-no-key",
+  "rate_limits": "No published numbers for the file archive; the dataset terms say to respect posted limits or risk an IP ban. The live binance.com API returns HTTP 451 from US addresses (tested earlier).",
+  "history_start": "Spot BTCUSDT daily klines from 2017-08; USD-M futures funding rates from 2020-01.",
+  "frequency": [
+    "1-second",
+    "minute",
+    "hourly",
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "Daily and monthly zip files of spot and futures klines, trades and aggregate trades, plus futures funding rates, each with a SHA256 checksum.",
+  "simple": "The biggest crypto exchange posts free files of every past crypto price and trade.",
+  "point_in_time": false,
+  "license_terms": "Data is under CC BY-NC-SA 4.0 per the Binance Vision Dataset Terms (updated 2026-08-26). Academic research and personal backtesting are allowed; commercial use, live trading use and paid signals are not. https://github.com/binance/binance-public-data/blob/master/TERMS_AND_CONDITIONS.md",
+  "quality_notes": "Spot timestamps switch from milliseconds to microseconds from 2025-01-01. Binance sometimes replaces archived files; the repo logs these corrections. Crypto only.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Best free crypto history and funding rates if we compare FX carry with crypto carry."
+  },
+  "sources": [
+    "https://github.com/binance/binance-public-data",
+    "https://raw.githubusercontent.com/binance/binance-public-data/master/TERMS_AND_CONDITIONS.md",
+    "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?delimiter=/&prefix=data/futures/um/monthly/fundingRate/BTCUSDT/"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

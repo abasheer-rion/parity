@@ -1,0 +1,70 @@
+{
+  "id": "ALG-0012",
+  "slug": "fx-oil-cad-daily",
+  "name": "Oil price to Canadian dollar daily link (Ferraro, Rogoff, Rossi)",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx",
+    "commodities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "oil",
+    "usdcad",
+    "lead-lag",
+    "time-series"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2011,
+    "authors": "Ferraro, Rogoff, Rossi",
+    "source_title": "Can oil prices forecast exchange rates? An empirical analysis of the relationship between commodity prices and exchange rates (Journal of International Money and Finance 54, 116-141, 2015; NBER WP 17998)",
+    "source_url": "https://crei.cat/wp-content/uploads/2016/07/COPF_pub.pdf"
+  },
+  "how_it_works": {
+    "simple": "Canada sells a lot of oil. On days when oil goes up, the Canadian dollar usually goes up too. The trick is whether yesterday's oil move tells you anything about today's currency move.",
+    "analogy": "Like a shop whose takings rise on days the weather is good; knowing today's weather helps, knowing yesterday's helps much less.",
+    "precise": "Regress daily changes in USD/CAD on daily oil price changes over a rolling window. Same-day oil changes give a strongly significant out-of-sample fit at daily frequency (but not monthly or quarterly). With lagged oil changes the predictive ability is ephemeral and shows up only in some subsamples (around 2006-2007) once instability is allowed for."
+  },
+  "rule": "Each day, estimate a rolling regression of daily CAD/USD returns on the prior day's oil return; if the fitted forecast for tomorrow is positive go long CAD vs USD, if negative go short, holding one day.",
+  "data_needed": [
+    "Daily USD/CAD spot",
+    "Daily WTI or Brent oil price (e.g. FRED DCOILWTICO)",
+    "Optional: Canadian and US short-term interest rates"
+  ],
+  "economic_rationale": "Oil is Canada's main commodity export, so oil price shocks move Canada's terms of trade and the Canadian dollar (Ferraro, Rogoff and Rossi 2015).",
+  "why_it_might_fail": "The authors find the lagged relationship is ephemeral and the link vanishes at monthly and quarterly frequencies, so a tradable edge is unlikely after costs. Kohlscheen et al. (2017) also find lagged commodity prices beat the random walk in only a few countries.",
+  "reported_results": [
+    {
+      "source": "Ferraro, Rogoff, Rossi 2015 (JIMF published version)",
+      "source_url": "https://crei.cat/wp-content/uploads/2016/07/COPF_pub.pdf",
+      "period": "Dec 1984-Nov 2010 (daily, 6756 observations)",
+      "market": "USD/CAD",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Forecast tests only, no trading returns. Same-day oil changes beat the random walk in daily out-of-sample fit; lagged oil changes beat it significantly only around 2006-2007 per the Fluctuation test."
+    }
+  ],
+  "post_publication_evidence": "Kohlscheen, Avalos and Schrimpf (2017, IJCB) confirm the same-day link for CAD (RMSE ratio 0.850 vs random walk, 2009-2015) but find lagged commodity prices add little forecasting power, consistent with the original paper.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Easy to test with free FRED data and directly about commodities driving FX, but the evidence says the tradable lagged effect is weak."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

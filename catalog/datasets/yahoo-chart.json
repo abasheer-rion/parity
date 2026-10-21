@@ -1,0 +1,36 @@
+{
+  "id": "DAT-0036",
+  "slug": "yahoo-chart",
+  "name": "Yahoo Finance chart endpoint",
+  "provider": "Yahoo",
+  "category": "equities",
+  "url": "https://finance.yahoo.com",
+  "api_docs_url": "",
+  "access": "free-no-key",
+  "rate_limits": "Not published. Unofficial endpoint; it returned HTTP 429 to a plain curl request and worked with a browser style user agent (tested 2026-10-20).",
+  "history_start": "SPY from 1993-01-29 (first trade date in the response).",
+  "frequency": [
+    "daily",
+    "weekly",
+    "monthly"
+  ],
+  "what_it_has": "Daily prices for stocks and ETFs, including an adjusted close that folds in dividends and splits. We use it for SPY, our benchmark.",
+  "simple": "The back door to Yahoo Finance's price charts. It tells us how the S&P 500 fund did each day, counting dividends.",
+  "point_in_time": false,
+  "license_terms": "No official API or data license. Yahoo's terms forbid commercial use and automated collection of data without permission, so our use is a gray area at best. Keep raw data private. https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html",
+  "quality_notes": "Unofficial and can change or disappear without notice. Adjusted closes are recomputed after each dividend, so past values shift. Fallback is FRED SP500 plus a dividend estimate.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "eq.SPY"
+  ],
+  "relevance": {
+    "score": 5,
+    "reason": "It is our only source for the dividend adjusted S&P 500 benchmark today."
+  },
+  "sources": [
+    "https://query2.finance.yahoo.com/v8/finance/chart/SPY?range=5d&interval=1d",
+    "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

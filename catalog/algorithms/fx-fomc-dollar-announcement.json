@@ -1,0 +1,98 @@
+{
+  "id": "ALG-0008",
+  "slug": "fx-fomc-dollar-announcement",
+  "name": "Short the dollar on FOMC announcement days",
+  "family": "event-news",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "fomc",
+    "us-dollar",
+    "announcement-premium",
+    "calendar-event",
+    "monetary-policy"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2017,
+    "authors": "Mueller, Tahbaz-Salehi and Vedolin",
+    "source_title": "Exchange rates and monetary policy uncertainty (Journal of Finance 72(3), 2017)",
+    "source_url": "https://researchonline.lse.ac.uk/id/eprint/77256/"
+  },
+  "how_it_works": {
+    "simple": "Eight times a year the US central bank announces its interest rate decision. On those days, other currencies have tended to rise against the US dollar, so the idea is to bet against the dollar only on those days.",
+    "analogy": "Like an insurer who charges extra on the few days a storm is forecast: people holding currencies on uncertain Fed days seem to get paid more for the worry.",
+    "precise": "A portfolio short USD and long G10 currencies earns significantly higher excess returns on scheduled FOMC announcement days than on other days, with larger returns for high interest rate currencies, more monetary policy uncertainty and easing decisions. The authors read this as a premium for monetary policy uncertainty borne by constrained intermediaries."
+  },
+  "rule": "On each scheduled FOMC announcement day, hold an equal-weight long position in the other G10 currencies against USD from 4pm ET the day before to 4pm ET on the announcement day; hold cash otherwise. Variant from the paper: only buy currencies with a positive interest rate differential versus the US, and reverse the position right after the announcement if the Fed tightens.",
+  "data_needed": [
+    "Daily G10 spot and forward (or interest rate) data, sampled around 4pm",
+    "Scheduled FOMC announcement dates (Federal Reserve website)",
+    "Optional: intraday FX quotes to split pre and post announcement returns"
+  ],
+  "economic_rationale": "Mueller, Tahbaz-Salehi and Vedolin argue the returns compensate for heightened uncertainty about US monetary policy, carried by financiers whose risk-bearing capacity tightens on those days.",
+  "why_it_might_fail": "There are only 8 trades a year, so a few bad meetings can erase years of gains, and the paper's sample ends in 2013. A single practitioner blog that extended the data to 2025 still saw G10 currencies rise against the dollar on FOMC days on average, but it did not test performance after publication separately.",
+  "reported_results": [
+    {
+      "source": "Mueller, Tahbaz-Salehi and Vedolin (2017), Table II, dol portfolio on announcement days",
+      "source_url": "https://researchonline.lse.ac.uk/id/eprint/77256/2/Vedoli_exchange%20rates%20and%20monetary%201.pdf",
+      "period": "1994-2013",
+      "market": "9 G10 currencies vs USD, 160 FOMC days",
+      "sharpe": 0.51,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Mean 10.77 bp per announcement day (t = 2.27) versus 0.47 bp on other days. Sharpe annualized using 8 announcements per year. About 41% of the dol portfolio's annual return came on the 8 announcement days. Accepted manuscript version."
+    },
+    {
+      "source": "Mueller, Tahbaz-Salehi and Vedolin (2017), improved strategy",
+      "source_url": "https://researchonline.lse.ac.uk/id/eprint/77256/2/Vedoli_exchange%20rates%20and%20monetary%201.pdf",
+      "period": "1994-2013",
+      "market": "G10 currencies with positive rate differential vs USD",
+      "sharpe": 0.93,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Restricting to currencies with a positive rate differential and reversing after tightening raised announcement-day returns from 10.77 to 20.54 bp and the Sharpe ratio from 0.51 to 0.93 (introduction). Table VII reports S2 at 22.54 bp."
+    },
+    {
+      "source": "Mueller, Tahbaz-Salehi and Vedolin (2017), cost check",
+      "source_url": "https://researchonline.lse.ac.uk/id/eprint/77256/2/Vedoli_exchange%20rates%20and%20monetary%201.pdf",
+      "period": "1994-2013",
+      "market": "G10 currencies vs USD",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Authors state announcement day returns stay significant with annualized Sharpe ratios of up to 0.8 after adjusting for bid-ask spreads. No single figure given in the passage read."
+    }
+  ],
+  "post_publication_evidence": "No peer-reviewed out-of-sample test after 2013 was found. Quantseeker (practitioner blog, 2026, data Jan 1992 to Dec 2025) reports every G10 currency appreciated against USD on FOMC days on average and that the effect is almost entirely a post-2000 phenomenon, but gives no subperiod split after publication: https://www.quantseeker.com/p/the-fomc-day-puzzle-why-every-g10",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Simple, uses free daily FX data and public FOMC dates, and gives a calendar overlay a currency strategy could add, though with only 8 trades a year."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 3,
+    "hypothesis": "HYP-0006",
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

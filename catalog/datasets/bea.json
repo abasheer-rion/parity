@@ -1,0 +1,34 @@
+{
+  "id": "DAT-0004",
+  "slug": "bea",
+  "name": "BEA Data API",
+  "provider": "US Bureau of Economic Analysis",
+  "category": "rates-macro",
+  "url": "https://apps.bea.gov",
+  "api_docs_url": "https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf",
+  "access": "free-key",
+  "rate_limits": "100 requests a minute, 100 MB a minute and 30 errors a minute; going over blocks you for about a minute (source: BEA API user guide PDF).",
+  "history_start": "Varies by table.",
+  "frequency": [
+    "monthly",
+    "quarterly",
+    "annual"
+  ],
+  "what_it_has": "US GDP, PCE inflation, personal income, and international trade and investment figures.",
+  "simple": "The US government office that adds up how big the economy is and how much people spend.",
+  "point_in_time": false,
+  "license_terms": "Free key after giving a name and email and agreeing to the terms of service. US government data, generally public domain. https://apps.bea.gov/api/signup/",
+  "quality_notes": "GDP is revised several times after the first estimate and the API gives the latest values only. Use ALFRED if first estimates matter.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Mostly duplicated on FRED, and quarterly data is slow for FX signals."
+  },
+  "sources": [
+    "https://apps.bea.gov/api/signup/",
+    "https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

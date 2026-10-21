@@ -1,0 +1,34 @@
+{
+  "id": "DAT-0030",
+  "slug": "trading-economics",
+  "name": "Trading Economics API",
+  "provider": "Trading Economics",
+  "category": "calendar-consensus",
+  "url": "https://tradingeconomics.com",
+  "api_docs_url": "https://docs.tradingeconomics.com/",
+  "access": "paid",
+  "rate_limits": "Trial: 100 data requests and 100,000 data points (source: https://tradingeconomics.com/api/pricing.aspx).",
+  "history_start": "Calendar history by date range on paid plans.",
+  "frequency": [
+    "intraday",
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "Economic calendar with actual, previous, consensus forecast and its own forecast, plus indicators and market data for many countries.",
+  "simple": "A paid service with economic numbers and forecasts for almost every country.",
+  "point_in_time": null,
+  "license_terms": "Paid subscription only. The trial fee is not refundable and renews automatically unless cancelled. https://tradingeconomics.com/api/pricing.aspx",
+  "quality_notes": "The free guest:guest login now returns HTTP 410, the guest account has been discontinued (tested 2026-10-20). Unknown whether stored forecasts are as known before each release.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Paid only, so out of reach on a zero budget."
+  },
+  "sources": [
+    "https://tradingeconomics.com/api/pricing.aspx",
+    "https://api.tradingeconomics.com/calendar?c=guest:guest"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0027",
+  "slug": "oecd",
+  "name": "OECD Data API (SDMX)",
+  "provider": "Organisation for Economic Co-operation and Development",
+  "category": "rates-macro",
+  "url": "https://data-explorer.oecd.org",
+  "api_docs_url": "https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html",
+  "access": "free-no-key",
+  "rate_limits": "60 data downloads an hour, and VPN traffic is refused (source: search summary of https://www.oecd.org/en/data/insights/data-explainers/2024/11/Api-best-practices-and-recommendations.html; the page itself returned HTTP 403 to us).",
+  "history_start": "Varies by country and series; many monthly series start in the 1950s to 1990s.",
+  "frequency": [
+    "monthly",
+    "quarterly",
+    "annual"
+  ],
+  "what_it_has": "Key economic indicators by country: short and long interest rates, inflation, leading indicators and GDP. It is the original source of the 3-month interbank rates we pull through FRED.",
+  "simple": "A club of rich countries that collects the same economic numbers from each member so they can be compared side by side.",
+  "point_in_time": false,
+  "license_terms": "Most OECD content since 1 July 2024 is under CC BY 4.0, so reuse is allowed with attribution, but third party material is excluded (source: search summary of https://www.oecd.org/en/about/terms-conditions.html, page blocked to us).",
+  "quality_notes": "The API serves revised values only. Updates arrive with a lag; euro area and UK 3-month rates currently stop at 2026-01. We pulled the US 3-month rate to 2026-09 with no key (tested).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Upstream source of our rate series, useful to fill gaps, but slow and revised."
+  },
+  "sources": [
+    "https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_FINMARK,4.0/USA.M.IR3TIB.PA.....?lastNObservations=2&format=csvfile",
+    "https://www.oecd.org/en/data/insights/data-explainers/2024/11/Api-best-practices-and-recommendations.html",
+    "https://www.oecd.org/en/about/terms-conditions.html"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

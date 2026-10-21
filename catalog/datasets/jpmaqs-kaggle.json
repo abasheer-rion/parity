@@ -1,0 +1,32 @@
+{
+  "id": "DAT-0020",
+  "slug": "jpmaqs-kaggle",
+  "name": "Macrosynergy JPMaQS sample (Kaggle)",
+  "provider": "Macrosynergy and J.P. Morgan",
+  "category": "rates-macro",
+  "url": "https://www.kaggle.com/datasets/macrosynergy/fixed-income-returns-and-macro-trends",
+  "api_docs_url": "https://www.kaggle.com/docs/api",
+  "access": "free-key",
+  "rate_limits": "Not applicable; a single Kaggle download (about 224 MB) that needs a free Kaggle account.",
+  "history_start": "About 2000 to mid September 2022 (search summary). Kaggle copy last updated 2023-12-14.",
+  "frequency": [
+    "daily"
+  ],
+  "what_it_has": "A small sample of point in time macro indicators for 23 currency areas (growth, inflation, inflation targets, credit, real yields) plus FX forward, rates swap and equity future returns, carry and FX tradability flags.",
+  "simple": "A free sample from a big bank's data product that records what was known about each country's economy on each day.",
+  "point_in_time": true,
+  "license_terms": "Kaggle license reads Data files (c) Original Authors. The description says the data must not be used for trading and investment; academic studies can apply to Macrosynergy. https://www.kaggle.com/datasets/macrosynergy/fixed-income-returns-and-macro-trends",
+  "quality_notes": "Frozen sample that stops in 2022 or 2023, with only a few indicator groups. Values are Macrosynergy estimates built from real time vintages, not raw releases.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Rare free point in time macro and FX carry data across 23 currencies, good for research but stale and not for trading."
+  },
+  "sources": [
+    "https://www.kaggle.com/datasets/macrosynergy/fixed-income-returns-and-macro-trends",
+    "https://www.kaggle.com/api/v1/datasets/view/macrosynergy/fixed-income-returns-and-macro-trends"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

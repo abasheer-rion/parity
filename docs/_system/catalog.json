@@ -1,0 +1,82 @@
+{
+  "about": "Allowed values for catalog entries in catalog/algorithms and catalog/datasets. Read by scripts/docs.py.",
+  "families": [
+    "carry",
+    "momentum-trend",
+    "value-mean-reversion",
+    "macro-fundamental",
+    "event-news",
+    "statistical-arbitrage",
+    "market-making-liquidity",
+    "volatility",
+    "machine-learning",
+    "reinforcement-learning",
+    "sentiment-alternative-data",
+    "technical-indicator",
+    "seasonality-calendar",
+    "portfolio-construction"
+  ],
+  "markets": [
+    "fx",
+    "equities",
+    "commodities",
+    "rates",
+    "crypto",
+    "multi-asset"
+  ],
+  "horizons": [
+    "intraday",
+    "daily",
+    "weekly",
+    "monthly",
+    "quarterly"
+  ],
+  "origin_types": [
+    "academic",
+    "practitioner",
+    "open-source",
+    "commercial",
+    "community"
+  ],
+  "evidence_types": [
+    "backtest",
+    "live",
+    "index",
+    "paper-trading",
+    "competition"
+  ],
+  "stages": [
+    "catalogued",
+    "sourced",
+    "hypothesis",
+    "implemented",
+    "registered",
+    "official",
+    "reproduced",
+    "forward",
+    "verdict"
+  ],
+  "verdicts": [
+    "supported",
+    "rejected",
+    "inconclusive"
+  ],
+  "dataset_categories": [
+    "fx-prices",
+    "rates-macro",
+    "commodities-energy",
+    "equities",
+    "calendar-consensus",
+    "news-sentiment",
+    "crypto",
+    "paper-trading",
+    "factor-research"
+  ],
+  "dataset_access": [
+    "free-no-key",
+    "free-key",
+    "freemium",
+    "paid",
+    "no-api"
+  ]
+}

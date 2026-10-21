@@ -1,0 +1,97 @@
+{
+  "id": "ALG-0028",
+  "slug": "deep-rl-trading-finrl",
+  "name": "Deep reinforcement learning trading agents (FinRL)",
+  "family": "reinforcement-learning",
+  "markets": [
+    "equities",
+    "crypto"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "ppo",
+    "ddpg",
+    "backtest-overfitting",
+    "open-source"
+  ],
+  "origin": {
+    "type": "open-source",
+    "first_published": 2020,
+    "authors": "Liu, Yang, Chen, Zhang, Yang, Xiao, Wang (AI4Finance Foundation)",
+    "source_title": "FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance (arXiv 2011.09607)",
+    "source_url": "https://arxiv.org/abs/2011.09607"
+  },
+  "how_it_works": {
+    "simple": "A computer program learns to trade by trial and error in a simulated market, getting a reward when its money grows.",
+    "analogy": "Like a video game player who learns a level by playing it thousands of times, which may not help on a new level.",
+    "precise": "Model trading as a Markov decision process with state (cash, holdings, prices, technical indicators) and actions (share changes), train PPO, DDPG, TD3, SAC or A2C agents on historical data, and evaluate on a later window with transaction costs as a parameter."
+  },
+  "rule": "Train a PPO agent on daily DJIA constituent data with technical indicators through 2018, then each day in the test window let the agent output target share changes subject to cash and 0.1 percent per-trade costs.",
+  "data_needed": [
+    "Daily OHLCV for the asset universe (Yahoo Finance free)",
+    "Technical indicators computed from prices",
+    "Transaction cost assumption"
+  ],
+  "economic_rationale": "No specific risk premium; RL may learn nonlinear timing and allocation rules. The library authors present it mainly as an educational tool.",
+  "why_it_might_fail": "RL agents are very sensitive to hyperparameters and random seeds, and a single walk-forward test can select a lucky agent. Gort, Liu et al. (2022, arXiv 2209.05559), from the same group, state that existing DRL trading works optimistically report profits that may be false positives from backtest overfitting.",
+  "reported_results": [
+    {
+      "source": "FinRL paper, Table 2",
+      "source_url": "https://arxiv.org/abs/2011.09607",
+      "period": "2019-01-01 to 2020-09-23",
+      "market": "DJIA constituents, multiple stock trading",
+      "sharpe": 1.38,
+      "annual_return": 0.214,
+      "volatility": 0.146,
+      "max_drawdown": -0.1152,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Read in the arXiv PDF. TD3 agent; DJIA benchmark Sharpe 0.48. Test window under two years, one market regime, seeds and variance across runs not reported. Single-stock PPO results (Table 1) show SPY Sharpe 1.49 vs S&P 500 0.74 over the same window."
+    },
+    {
+      "source": "Gort, Liu, Gao, Chen, Wang (2022), arXiv 2209.05559",
+      "source_url": "https://arxiv.org/abs/2209.05559",
+      "period": "test 2022-05-01 to 2022-06-27",
+      "market": "10 cryptocurrencies",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Proposes a probability-of-backtest-overfitting test and finds less overfitted agents did better than more overfitted ones over a two-month crash window. The test window is very short."
+    }
+  ],
+  "post_publication_evidence": "The FinRL group itself later published work on backtest overfitting in DRL trading (arXiv 2209.05559). No audited live track record of FinRL agents was found.",
+  "implementations": [
+    {
+      "url": "https://github.com/AI4Finance-Foundation/FinRL",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Active library with tutorials."
+    },
+    {
+      "url": "https://github.com/DLR-RM/stable-baselines3",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "RL algorithms used by FinRL."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Easy to run on FX with free data, but high overfitting risk makes it a poor first choice for a small proof of concept."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

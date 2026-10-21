@@ -42,6 +42,7 @@ None yet.
 - [HYP-0002: Currency trends persist over months](0002-currency-trends-persist.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
+- [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)

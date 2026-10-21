@@ -48,4 +48,5 @@ None yet.
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [ALG-0010: Trading FX on US macro announcement surprises](../algorithms/0010-fx-macro-news-surprise.md)
 <!-- backlinks:end -->

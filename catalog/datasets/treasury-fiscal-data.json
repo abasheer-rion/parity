@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0031",
+  "slug": "treasury-fiscal-data",
+  "name": "US Treasury Fiscal Data API",
+  "provider": "US Department of the Treasury, Bureau of the Fiscal Service",
+  "category": "rates-macro",
+  "url": "https://fiscaldata.treasury.gov",
+  "api_docs_url": "https://fiscaldata.treasury.gov/api-documentation/",
+  "access": "free-no-key",
+  "rate_limits": "None published. Calls worked with no key (tested 2026-10-20).",
+  "history_start": "Varies; average interest rates on Treasury debt from 2001-01.",
+  "frequency": [
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "US government debt, spending, receipts, average interest rates on Treasury debt and Treasury exchange rates used for reporting.",
+  "simple": "The US government's own record of how much it owes, spends and pays in interest.",
+  "point_in_time": false,
+  "license_terms": "Free and without restriction, including commercial use and redistribution (source: https://fiscaldata.treasury.gov/api-documentation/).",
+  "quality_notes": "Every field comes back as a quoted string, so numbers must be converted. Daily yield curves are easier to get from FRED.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Useful fiscal background, but FRED covers the yields we need."
+  },
+  "sources": [
+    "https://fiscaldata.treasury.gov/api-documentation/",
+    "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?page[size]=1&sort=record_date"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

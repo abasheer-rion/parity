@@ -1,0 +1,134 @@
+{
+  "id": "ALG-0015",
+  "slug": "fx-time-series-momentum",
+  "name": "FX time-series momentum (trend)",
+  "family": "momentum-trend",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "time-series",
+    "trend-following",
+    "volatility-scaling",
+    "crisis-alpha"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2012,
+    "authors": "Moskowitz, Ooi, Pedersen",
+    "source_title": "Time series momentum (Journal of Financial Economics 104(2), 2012)",
+    "source_url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf"
+  },
+  "how_it_works": {
+    "simple": "For each currency on its own, if it has been rising against the dollar, buy it; if it has been falling, sell it. Check again next month.",
+    "analogy": "Like a surfer who paddles in the direction the wave is already moving, rather than guessing which wave will be biggest.",
+    "precise": "Each currency's own past excess return (commonly over 12 months, or 1 month in Burnside, Eichenbaum and Rebelo 2011) sets the sign of the position, and positions are often scaled by inverse ex ante volatility. Unlike cross-sectional momentum the portfolio can be net long or short the dollar. Moskowitz, Ooi and Pedersen (2012) find significant time-series momentum in 10 currency forwards, part of a pattern across 58 futures and forwards."
+  },
+  "rule": "At each month end, for each G10 currency vs USD, compute the excess return over the past 12 months (or 1 month). Go long if positive, short if negative, size each position to equal target volatility (e.g. 40 percent annual divided by the currency's 60-day EWMA volatility, as in Moskowitz et al.) and average across currencies. Hold one month.",
+  "data_needed": [
+    "G10 daily spot rates vs USD",
+    "1-month interest rates or forward rates",
+    "Optional: AQR free monthly TSMOM factor returns for a currency benchmark"
+  ],
+  "economic_rationale": "Moskowitz, Ooi and Pedersen (2012) attribute trends to initial under-reaction and delayed over-reaction, and find speculators profit at the expense of hedgers. Central bank smoothing of policy rates can also make currency moves persistent.",
+  "why_it_might_fail": "Trend strategies bleed in range-bound markets and get whipsawed at turning points. Chernov, Dahlquist and Lochstoer (2024) show G10 12-month TS momentum at a Sharpe of 0.33 before costs and 0.20 after full costs over 1985-2023, much less than early samples, and Hutchinson et al. (2022) find currency returns no longer show the autocorrelation the strategy needs.",
+  "reported_results": [
+    {
+      "source": "Burnside, Eichenbaum, Rebelo (2011), NBER WP 16942, Section 2.1 (momentum portfolio)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w16942/w16942.pdf",
+      "period": "1976-2010",
+      "market": "20 major currencies vs USD, equal-weighted, sign of last month's return",
+      "sharpe": 0.62,
+      "annual_return": 0.045,
+      "volatility": 0.073,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Payoffs abstract from transaction costs. A 50-50 mix with the equal-weighted carry trade gave 4.5 percent mean, 4.6 percent volatility, Sharpe 0.98. US stocks over the same period: 6.5 percent mean, Sharpe 0.41."
+    },
+    {
+      "source": "Moskowitz, Ooi, Pedersen (2012), Table 2 Panel E",
+      "source_url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+      "period": "1985-01 to 2009-12",
+      "market": "10 currency forwards (9 currencies vs USD)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Only t-statistics of alphas are tabulated for the currency sub-portfolio: 3.41 for a 12-month lookback and 1-month hold, 3.16 for a 1-month lookback. No currency-only Sharpe in the text tables."
+    },
+    {
+      "source": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 12, G10)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w32900/revisions/w32900.rev0.pdf",
+      "period": "1985-2023",
+      "market": "G10 currencies",
+      "sharpe": 0.33,
+      "annual_return": 0.0226,
+      "volatility": 0.0686,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "After full quoted costs: 1.34 percent mean, Sharpe 0.20."
+    },
+    {
+      "source": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 1, G10)",
+      "source_url": "https://www.nber.org/system/files/working_papers/w32900/revisions/w32900.rev0.pdf",
+      "period": "1985-2023",
+      "market": "G10 currencies",
+      "sharpe": 0.37,
+      "annual_return": 0.0231,
+      "volatility": 0.0619,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "1-month lookback. Positive skew (0.53). After full quoted costs: 1.36 percent mean, Sharpe 0.22."
+    }
+  ],
+  "post_publication_evidence": "Chernov, Dahlquist and Lochstoer (2024) find modest but positive G10 time-series momentum through 2023 (Sharpe 0.20 to 0.37 depending on lookback and costs). Hutchinson et al. (2022) find published currency momentum lost its edge after publication and that autocorrelation in currency excess returns disappeared (https://doi.org/10.1016/j.irfa.2022.102245). AQR keeps publishing an updated monthly TSMOM series that includes a currency sleeve, which allows an out-of-sample check from 2012 on.",
+  "implementations": [
+    {
+      "url": "https://www.aqr.com/Insights/Datasets/Time-Series-Momentum-Factors-Monthly",
+      "language": "Excel data",
+      "license": "AQR data terms",
+      "notes": "Free monthly TSMOM returns from 1985, 12-month lookback, with a currencies series. Data, not code."
+    },
+    {
+      "url": "https://github.com/pst-group/pysystemtrade",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Full trend-following futures system (EWMAC and breakout rules, volatility targeting); FX futures can be plugged in."
+    },
+    {
+      "url": "https://github.com/rkohli3/TSMOM",
+      "language": "Jupyter Notebook",
+      "license": "none",
+      "notes": "Replication of Moskowitz, Ooi and Pedersen. No license file."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Simple, works on free daily data, can be long or short the dollar, and historically paid off in equity crises, which matters for a test against the S&P 500."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 6,
+    "hypothesis": "HYP-0002",
+    "strategy": "fx_tsmom",
+    "registrations": [
+      "REG-0001"
+    ],
+    "runs": [
+      "RUN-000001"
+    ],
+    "verdict": null,
+    "notes": ""
+  }
+}

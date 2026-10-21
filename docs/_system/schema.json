@@ -149,6 +149,48 @@
       ],
       "append_only": true,
       "about": "A dated, append-only record of a working session. Corrections go in a new entry, not an edit."
+    },
+    "algorithm": {
+      "folder": "algorithms",
+      "prefix": "ALG",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "catalogued",
+        "sourced",
+        "hypothesis",
+        "implemented",
+        "registered",
+        "official",
+        "reproduced",
+        "forward",
+        "verdict"
+      ],
+      "sections": [
+        "In plain words",
+        "Summary",
+        "How it works",
+        "Reported results",
+        "Our research"
+      ],
+      "generated": true,
+      "about": "One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page."
+    },
+    "dataset": {
+      "folder": "datasets",
+      "prefix": "DAT",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "in-use",
+        "candidate",
+        "not-usable"
+      ],
+      "sections": [
+        "In plain words",
+        "Summary",
+        "Terms and quality"
+      ],
+      "generated": true,
+      "about": "One report per data source, generated from catalog/datasets/. Edit the JSON, not the page."
     }
   },
   "tags": {

@@ -1,0 +1,77 @@
+{
+  "id": "ALG-0021",
+  "slug": "avellaneda-stoikov-market-making",
+  "name": "Avellaneda-Stoikov market making (Hummingbot)",
+  "family": "market-making-liquidity",
+  "markets": [
+    "crypto",
+    "equities"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "limit-order-book",
+    "inventory-risk",
+    "retail-bot",
+    "high-frequency"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2008,
+    "authors": "Avellaneda, Stoikov",
+    "source_title": "High-frequency trading in a limit order book (Quantitative Finance)",
+    "source_url": "https://doi.org/10.1080/14697680701381228"
+  },
+  "how_it_works": {
+    "simple": "You keep offering to buy a little below the price and sell a little above it, earning the gap. If you end up holding too much, you shift your prices to get rid of it.",
+    "analogy": "Like a currency exchange booth at an airport that buys and sells at different rates and changes its rates if it runs low on euros.",
+    "precise": "Quote around a reservation price r = s - q*gamma*sigma^2*(T - t) that leans against inventory q, with an optimal total spread gamma*sigma^2*(T - t) + (2/gamma)*ln(1 + gamma/kappa). Gamma is risk aversion, sigma volatility, kappa the order-arrival decay with distance from mid."
+  },
+  "rule": "Every tick, compute mid s, inventory q and recent volatility sigma; post bid at r - delta/2 and ask at r + delta/2 using the formulas above with chosen gamma and kappa, cancel and replace when the quote drifts beyond a tolerance, and stop at the end of the session.",
+  "data_needed": [
+    "Level 2 order book and trade ticks",
+    "Maker and taker fees, rebates",
+    "Latency to the exchange"
+  ],
+  "economic_rationale": "Market makers earn the bid-ask spread as payment for providing liquidity and bearing inventory risk.",
+  "why_it_might_fail": "Retail bots face adverse selection from faster traders and pay fees that professional makers avoid. In Falces Marin et al. (2022) the tuned Avellaneda-Stoikov baseline had negative mean daily Sharpe on 30 BTC-USD test days.",
+  "reported_results": [
+    {
+      "source": "Falces Marin, Diaz Pardo de Vera, Lopez Gonzalo (2022), PLOS ONE",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9767337/",
+      "period": "2020-12-07 to 2021-01-08 (30 test days)",
+      "market": "BTC-USD L2 order book ticks",
+      "sharpe": -0.24,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Mean daily (not annualized) Sharpe of the genetically tuned AS model; median -0.26. Fixed-spread baselines -0.43 and -0.36; the deep-RL Alpha-AS variants -0.11 to -0.13. All variants lost money on average. Fees, latency and queue modeling not described on the page."
+    }
+  ],
+  "post_publication_evidence": "Hummingbot moved its Avellaneda strategy to a legacy 'V1 strategies' section and makes no performance claims; the docs warn that the optimal spread can push bids to zero or below in some settings.",
+  "implementations": [
+    {
+      "url": "https://github.com/hummingbot/hummingbot",
+      "language": "Python/Cython",
+      "license": "Apache-2.0",
+      "notes": "Docs: https://hummingbot.org/strategies/v1-strategies/avellaneda-market-making/"
+    }
+  ],
+  "relevance": {
+    "score": 1,
+    "reason": "Needs tick data and low latency; not testable or competitive for a student FX vs S&P 500 project."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

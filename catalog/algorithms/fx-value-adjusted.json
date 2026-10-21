@@ -1,0 +1,84 @@
+{
+  "id": "ALG-0016",
+  "slug": "fx-value-adjusted",
+  "name": "Fundamentals-adjusted currency value (Menkhoff et al. 2017)",
+  "family": "value-mean-reversion",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "quarterly",
+  "tags": [
+    "cross-sectional",
+    "real-exchange-rate",
+    "value",
+    "macro-adjusted"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2017,
+    "authors": "Menkhoff, Sarno, Schmeling, Schrimpf",
+    "source_title": "Currency Value (Review of Financial Studies 30(2), 416-441)",
+    "source_url": "https://ideas.repec.org/a/oup/rfinst/v30y2017i2p416-441..html"
+  },
+  "how_it_works": {
+    "simple": "Some currencies get cheap compared to what they can buy. But some are cheap for a good reason, like a country getting poorer. This strategy buys currencies that are cheap for no good reason and sells ones that are pricey for no good reason.",
+    "analogy": "Like shopping for a used car: a low price only counts as a bargain after you account for the mileage and condition.",
+    "precise": "Take each currency's 5-year change in the real exchange rate against the USD as the raw value signal. Each quarter, regress that signal cross-sectionally on (expected) productivity, export quality, net foreign assets over GDP and the output gap. The residual is the adjusted value signal; sort currencies on it and go long undervalued, short overvalued."
+  },
+  "rule": "Each quarter, compute the 5-year log real exchange rate change for each currency versus USD, regress it across countries on real GDP per capita, export quality, NFA/GDP and output gap (or their EWMA or VAR forecasts), and hold rank-weighted long positions in currencies with the most positive residual (cheapest) and short positions in those with the most negative residual, rebalanced quarterly.",
+  "data_needed": [
+    "Spot exchange rates vs USD, quarterly (end of quarter)",
+    "CPI by country (to build real exchange rates)",
+    "Forward rates or short-term interest rates for excess returns",
+    "Real GDP per capita, output gap, net foreign assets/GDP (Lane and Milesi-Ferretti), IMF export quality index"
+  ],
+  "economic_rationale": "Real exchange rates tend to revert, but part of a currency's real move reflects fundamentals that do not mean revert; stripping those out leaves a cleaner measure of the currency risk premium (Menkhoff, Sarno, Schmeling and Schrimpf 2017).",
+  "why_it_might_fail": "Macro inputs are low frequency, revised and partly unavailable in real time (the paper notes export quality data cover a short window), so live signals may be noisier than the backtest. Hutchinson et al. (2022) find currency value predictability disappeared after publication of the evidence.",
+  "reported_results": [
+    {
+      "source": "Menkhoff et al. 2017, Table 4 (CEPR working paper version)",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/14851/13/FXVALUE_Rev3_cepr.pdf",
+      "period": "1976Q1-2014Q1",
+      "market": "22 currencies vs USD (23 advanced and emerging economies)",
+      "sharpe": 0.5,
+      "annual_return": 0.0365,
+      "volatility": 0.0727,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Benchmark (unadjusted) value: rank portfolio sorted on 5-year real exchange rate change. HML of 4 bins had Sharpe 0.44, mean 3.89%, vol 8.93%. No transaction costs mentioned."
+    },
+    {
+      "source": "Menkhoff et al. 2017, Table 5 Panel D (CEPR working paper version)",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/14851/13/FXVALUE_Rev3_cepr.pdf",
+      "period": "1976Q1-2013Q4 (at most)",
+      "market": "22 currencies vs USD",
+      "sharpe": 0.9,
+      "annual_return": 0.0467,
+      "volatility": 0.0519,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Adjusted value: rank portfolio on residual after regressing on panel-VAR expected fundamentals. Linear-weight version: Sharpe 0.91, mean 2.43%, vol 2.68%. Gain comes from lower volatility, not higher mean. Expected fundamentals are estimated recursively, but regressions use the cross-section at each date."
+    }
+  ],
+  "post_publication_evidence": "Hutchinson, Kyziropoulos, O'Brien, O'Reilly and Sharma (2022, https://doi.org/10.1016/j.irfa.2022.102245; abstract at https://zenodo.org/records/7326532) replicated published currency carry, momentum and value studies and found the average out-of-sample Sharpe ratio fell from +0.39 before publication to -0.32 after it, with currencies no longer responding to interest rate and real exchange rate differentials.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "A slow, low-turnover FX signal that diversifies carry and momentum, but it needs macro data that is hard to assemble point in time for free."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

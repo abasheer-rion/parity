@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0013",
+  "slug": "forex-factory-calendar",
+  "name": "Forex Factory weekly calendar export",
+  "provider": "Fair Economy, Inc. (Forex Factory)",
+  "category": "calendar-consensus",
+  "url": "https://www.forexfactory.com/calendar",
+  "api_docs_url": "",
+  "access": "free-no-key",
+  "rate_limits": "About 2 downloads per 5 minutes before a Request Denied page (third party report on MQL5, unverified; our first request was once refused).",
+  "history_start": "Current week only. A community archive on Hugging Face covers 2007 to April 2025.",
+  "frequency": [
+    "weekly"
+  ],
+  "what_it_has": "This week's economic events with title, country, time with time zone, impact level, forecast and previous value, as JSON from nfs.faireconomy.media. There is no actual value field.",
+  "simple": "A free list of this week's big economic announcements and what experts expect each one to say.",
+  "point_in_time": false,
+  "license_terms": "Main site blocks our reader (HTTP 403), so terms are unread. Personal research use only, no redistribution.",
+  "quality_notes": "Only the current week, so we must save a copy every week to build our own history of forecasts. Forecast values can change during the week. The Hugging Face archive warns values may have been edited after the event.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The only free consensus forecast feed; a weekly snapshot job would build our own surprise history."
+  },
+  "sources": [
+    "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+    "https://www.mql5.com/en/blogs/post/762107",
+    "https://huggingface.co/datasets/Ehsanrs2/Forex_Factory_Calendar"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

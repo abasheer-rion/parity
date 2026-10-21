@@ -1,0 +1,111 @@
+{
+  "id": "ALG-0019",
+  "slug": "pre-fomc-drift",
+  "name": "Pre-FOMC announcement drift",
+  "family": "seasonality-calendar",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "fomc",
+    "announcement-premium",
+    "calendar-event",
+    "decayed"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2011,
+    "authors": "Lucca and Moench",
+    "source_title": "The pre-FOMC announcement drift (Journal of Finance 70(1), 2015; first FRBNY staff report 2011)",
+    "source_url": "https://doi.org/10.1111/jofi.12196"
+  },
+  "how_it_works": {
+    "simple": "US stocks used to go up a lot in the day before the Fed announced its interest rate decision. The strategy buys stocks only in that one day and sits in cash the rest of the time.",
+    "analogy": "Like ticket prices rising the evening before a big concert: the build-up, not the show itself, is where the move happened.",
+    "precise": "From 1994 to 2011 the S&P 500 earned on average about 49 bp in the 24 hours before scheduled FOMC announcements, roughly 80 percent of realized excess equity returns over the period, with no matching effect in Treasuries. Pre-announcement FX returns also exist in the dollar portfolio (Mueller et al. 2017), but the original drift is an equity finding."
+  },
+  "rule": "Buy the S&P 500 (index future or ETF) at 2pm ET on the day before a scheduled FOMC announcement and sell about 15 minutes before the announcement; hold cash at all other times. A daily approximation buys at the close two days before and sells at the close the day before, or holds close to close on the announcement day.",
+  "data_needed": [
+    "S&P 500 index or futures prices, intraday (2pm) or daily close",
+    "Scheduled FOMC announcement dates and times",
+    "Risk-free rate (T-bill)"
+  ],
+  "economic_rationale": "Lucca and Moench document the drift but say standard asset pricing models struggle to explain it; returns were higher when the yield curve slope was low and implied volatility was high.",
+  "why_it_might_fail": "Kurov, Wolfe and Gilbert (2021) extend the sample to December 2019 and find the drift essentially disappeared after 2015, with the mean falling from about 0.49 percent to about 0.05 percent per meeting according to a search summary of their paper.",
+  "reported_results": [
+    {
+      "source": "Lucca and Moench (2013 working paper version), pre-FOMC 2pm to 2pm window",
+      "source_url": "https://conference.nber.org/confer/2013/MEs13/Lucca_Moench.pdf",
+      "period": "Sep 1994 - Mar 2011",
+      "market": "S&P 500, 131 scheduled FOMC meetings",
+      "sharpe": 1.14,
+      "annual_return": 0.0389,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Average 48.8 bp in the 24 hours before announcements. 3.89 percent per year is the annualized excess return earned in those windows only (versus 0.88 percent on all other days). NBER conference draft dated Feb 2013, numbers may differ slightly from the 2015 JF version."
+    },
+    {
+      "source": "Lucca and Moench (2013 working paper version), close to close on FOMC day",
+      "source_url": "https://conference.nber.org/confer/2013/MEs13/Lucca_Moench.pdf",
+      "period": "Sep 1994 - Mar 2011",
+      "market": "S&P 500",
+      "sharpe": 0.84,
+      "annual_return": 0.027,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Close-to-close FOMC-day return about 33 bp; annualized 2.7 percent versus 2.08 percent on all other days. Shows a daily-data version also worked in that sample."
+    },
+    {
+      "source": "Kurov, Wolfe and Gilbert (2021), Finance Research Letters 40",
+      "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3134546",
+      "period": "Apr 2011 - Dec 2019",
+      "market": "S&P 500",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Abstract (read on IDEAS) says the drift essentially disappeared after 2015. Per-meeting means of 0.492 percent (1994-2011) and 0.047 percent (2011-2019) seen only in a search summary."
+    }
+  ],
+  "post_publication_evidence": "Kurov, Wolfe and Gilbert (2021) find the pre-FOMC drift essentially disappeared after 2015, both with and without press conferences, and suggest reduced uncertainty as a reason: https://ideas.repec.org/a/eee/finlet/v40y2021ics1544612320315956.html",
+  "implementations": [
+    {
+      "url": "https://github.com/angiekwang/pre-fomc-drift-replication",
+      "language": "R",
+      "license": "none",
+      "notes": "Replication of Table B.3 of Lucca and Moench (2013). No license file, so reuse rights are unclear."
+    },
+    {
+      "url": "https://github.com/johnhz0229/pre-fomc-backtest",
+      "language": "unknown",
+      "license": "none",
+      "notes": "Backtest of the Lucca and Moench strategy. No license file."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "A well known calendar effect on the S&P 500 benchmark itself, useful as a comparison or overlay, but evidence says it faded after 2015."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0035",
+  "slug": "world-bank",
+  "name": "World Bank Indicators API and Pink Sheet",
+  "provider": "World Bank",
+  "category": "commodities-energy",
+  "url": "https://www.worldbank.org/en/research/commodity-markets",
+  "api_docs_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation",
+  "access": "free-no-key",
+  "rate_limits": "None published for the Indicators API, which needs no key. The Pink Sheet is an Excel download with no API.",
+  "history_start": "Pink Sheet monthly prices from 1960-01 (checked in the file, latest 2026-09). Indicators mostly annual from 1960.",
+  "frequency": [
+    "monthly",
+    "annual"
+  ],
+  "what_it_has": "The Pink Sheet has monthly prices for oil, gas, coal, metals, food and fertilizers since 1960. The Indicators API has annual development numbers such as GDP.",
+  "simple": "The World Bank keeps a long list of what oil, metals and food cost each month going back to 1960, plus yearly facts about every country.",
+  "point_in_time": false,
+  "license_terms": "World Bank data is generally under CC BY 4.0 through its data catalog; the commodity page points to that licensing. Website terms: https://www.worldbank.org/en/about/legal/terms-and-conditions. Catalog licenses: https://datacatalog.worldbank.org/public-licenses",
+  "quality_notes": "Monthly averages, so too slow for daily signals. The file notes past revisions (some oilseed months were updated) and that some recent prices are World Bank estimates. Next Pink Sheet update is 2026-11-03.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Long monthly commodity history for background studies, not for trading signals."
+  },
+  "sources": [
+    "https://www.worldbank.org/en/research/commodity-markets",
+    "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+    "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation",
+    "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=2"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

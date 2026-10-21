@@ -41,4 +41,5 @@ None yet.
 
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [ALG-0008: Short the dollar on FOMC announcement days](../algorithms/0008-fx-fomc-dollar-announcement.md)
 <!-- backlinks:end -->

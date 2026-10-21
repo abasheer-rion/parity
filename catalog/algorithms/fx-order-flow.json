@@ -1,0 +1,104 @@
+{
+  "id": "ALG-0013",
+  "slug": "fx-order-flow",
+  "name": "FX order flow signal",
+  "family": "market-making-liquidity",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "order-flow",
+    "microstructure",
+    "cross-sectional",
+    "proprietary-data"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1999,
+    "authors": "Evans and Lyons",
+    "source_title": "Order flow and exchange rate dynamics (Journal of Political Economy 110(1), 2002; NBER WP 7317, 1999)",
+    "source_url": "https://www.nber.org/papers/w7317"
+  },
+  "how_it_works": {
+    "simple": "Count whether people are mostly buying or mostly selling a currency. Currencies that lots of informed customers are buying tend to keep rising for a while.",
+    "analogy": "Like watching which food stall has the longest queue: the queue tells you something about the food before you taste it.",
+    "precise": "Evans and Lyons show signed interdealer order flow explains over half of daily DM/$ and yen/$ changes, far more than macro variables. Menkhoff, Sarno, Schmeling and Schrimpf show lagged customer order flow from a large dealer predicts the cross-section of currency excess returns, especially flows from long-term asset managers."
+  },
+  "rule": "Each day standardize each currency's net customer order flow by its rolling 60-day standard deviation, rank currencies, and go long the top group (highest buying pressure) and short the bottom group against USD, rebalancing daily or every few days (Menkhoff et al. 2016).",
+  "data_needed": [
+    "Daily signed customer or interdealer order flow by currency (proprietary, from a dealer or platform)",
+    "Daily FX spot and forward rates",
+    "Bid-ask spreads"
+  ],
+  "economic_rationale": "Order flow aggregates dispersed private information about fundamentals and hedging demand, which moves prices (Evans and Lyons 2002); different customer groups differ in information and risk sharing (Menkhoff et al. 2016).",
+  "why_it_might_fail": "The data is proprietary and hard for outsiders to get, and the Evans and Lyons result is mostly contemporaneous, which explains prices but does not by itself forecast them. Free proxies such as weekly CFTC positioning are much coarser.",
+  "reported_results": [
+    {
+      "source": "Evans and Lyons (NBER WP 7317), explanatory model",
+      "source_url": "https://www.nber.org/system/files/working_papers/w7317/w7317.pdf",
+      "period": "May-Aug 1996 (4 months)",
+      "market": "DM/$ and yen/$ interdealer flow",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Not a trading backtest. Model of daily changes with order flow has R-squared about 64 percent for DM/$ and 45 percent for yen/$; $1 billion of net dollar purchases raises DM/$ by about 1 pfennig."
+    },
+    {
+      "source": "Menkhoff, Sarno, Schmeling and Schrimpf (2016), Table I, BMS portfolio, 15 currencies",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/13781/1/OFSORTS_JF_COPYEDIT_v4%20paper_and_IA.pdf",
+      "period": "Jan 2001 - May 2011",
+      "market": "15 currencies vs USD, customer flows from one large dealer",
+      "sharpe": 1.26,
+      "annual_return": 0.1031,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Gross daily-rebalanced long-short on lagged standardized flow. Authors report returns remain significant after bid-ask costs for rebalancing every 1 to 10 days (figure in Internet Appendix)."
+    },
+    {
+      "source": "Menkhoff, Sarno, Schmeling and Schrimpf (2016), Table I, long-term asset manager flows",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/13781/1/OFSORTS_JF_COPYEDIT_v4%20paper_and_IA.pdf",
+      "period": "Jan 2001 - May 2011",
+      "market": "15 currencies vs USD",
+      "sharpe": 1.79,
+      "annual_return": 0.1543,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Flows of long-term demand-side investment managers were most informative; individual investors' flows had Sharpe -1.55 (they traded the wrong way)."
+    }
+  ],
+  "post_publication_evidence": "Menkhoff et al. (2016) confirm order flow predicts currency returns in 2001-2011, after Evans and Lyons (2002). No public test on data after 2011 was found.",
+  "implementations": [
+    {
+      "url": "https://github.com/giorgiagaleazzi/fx-order-flow-microstructure",
+      "language": "R",
+      "license": "none",
+      "notes": "Small personal reproduction of an FX order flow paper using weekly UBS customer flow data 2001-2007. No license file; not reviewed in detail."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Strong academic results, but the needed order flow data is proprietary, so parity cannot test it with free data."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

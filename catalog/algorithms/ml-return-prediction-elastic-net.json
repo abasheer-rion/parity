@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0034",
+  "slug": "ml-return-prediction-elastic-net",
+  "name": "Regularized ML return forecasts (elastic net, trees, neural nets; Gu Kelly Xiu)",
+  "family": "machine-learning",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "elastic-net",
+    "cross-sectional",
+    "neural-network",
+    "benchmark-study"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2018,
+    "authors": "Gu, Kelly, Xiu",
+    "source_title": "Empirical Asset Pricing via Machine Learning (NBER w25398; Review of Financial Studies 2020)",
+    "source_url": "https://www.nber.org/system/files/working_papers/w25398/w25398.pdf"
+  },
+  "how_it_works": {
+    "simple": "You give a computer many facts about each stock and the economy, and it learns which combinations predict next month's return, with rules that stop it from memorizing noise.",
+    "analogy": "Like a teacher who grades on many small clues but is forced to ignore clues that only worked once.",
+    "precise": "Forecast monthly excess returns from 94 stock characteristics, their interactions with 8 macro predictors, and industry dummies, comparing OLS, elastic net, PCR, PLS, random forests, boosted trees and neural nets. Train 1957-1974, validate 1975-1986, test 1987-2016 with annual refits."
+  },
+  "rule": "Each month, fit the model on an expanding window, predict next-month returns for all stocks, and hold a value-weighted long top decile minus short bottom decile portfolio; for elastic net, tune lambda and the L1/L2 mix on the validation window.",
+  "data_needed": [
+    "Monthly stock returns and characteristics (CRSP/Compustat or open versions)",
+    "Macro predictors (dividend yield, term spread, default spread, etc.)",
+    "T-bill rate"
+  ],
+  "economic_rationale": "Many weak predictors combine nonlinearly; shrinkage and nonlinearity reduce overfitting compared with OLS on hundreds of signals (Gu, Kelly and Xiu).",
+  "why_it_might_fail": "Elastic net's out-of-sample R2 was only 0.11 percent per month for individual stocks. Much of the long-short profit may come from small, illiquid stocks, and the paper reports Sharpe ratios before trading costs.",
+  "reported_results": [
+    {
+      "source": "Gu, Kelly, Xiu NBER w25398, introduction",
+      "source_url": "https://www.nber.org/system/files/working_papers/w25398/w25398.pdf",
+      "period": "1987-2016 (out-of-sample)",
+      "market": "About 30,000 US stocks, value-weighted decile long-short",
+      "sharpe": 1.35,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Neural network forecasts; equal-weighted 2.45. OLS-3 benchmark: 0.61 value-weighted, 0.83 equal-weighted. Market timing the S&P 500 with NN forecasts: Sharpe 0.77 vs 0.51 buy-and-hold. Elastic net stock-level out-of-sample R2 0.11 percent per month."
+    }
+  ],
+  "post_publication_evidence": "Later studies (for example Avramov, Cheng and Metzker, Management Science 2023) report that ML gains shrink a lot once microcaps, distressed firms and costly trades are excluded; that paper was not re-read for this entry.",
+  "implementations": [
+    {
+      "url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Elastic net, trees and NN return prediction examples."
+    },
+    {
+      "url": "https://github.com/microsoft/qlib",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Benchmarks many ML models on stock data."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Elastic net on macro and carry or momentum features is a sensible, low-variance forecaster for a small set of currencies; this paper is the standard comparison."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

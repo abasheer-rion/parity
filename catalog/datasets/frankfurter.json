@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0014",
+  "slug": "frankfurter",
+  "name": "Frankfurter",
+  "provider": "Frankfurter (open source project)",
+  "category": "fx-prices",
+  "url": "https://frankfurter.dev",
+  "api_docs_url": "https://frankfurter.dev/docs/",
+  "access": "free-no-key",
+  "rate_limits": "No daily or monthly quota, only throttling to stop abuse (source: https://frankfurter.dev/).",
+  "history_start": "v1 (ECB only) from 1999-01-04, tested. v2 blends sources back to 1948; a 1960 USD/GBP query worked (tested).",
+  "frequency": [
+    "daily"
+  ],
+  "what_it_has": "Daily reference exchange rates for 223 currencies from 105 central banks and official sources. The older v1 feed is just the ECB rates and is deprecated but kept running.",
+  "simple": "A free and simple website that tells a program what each currency was worth on any day. It mostly repeats the official central bank prices.",
+  "point_in_time": false,
+  "license_terms": "Blended rates are free, including for commercial use. Asking for one provider's rates follows that provider's terms (for ECB data, cite the ECB). Open source and can be self hosted. https://frankfurter.dev/",
+  "quality_notes": "One fixing per day, so no intraday data. Blended v2 rates mix sources with different fixing times. It is a third party copy, so the ECB portal is the source of truth.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The easiest daily FX feed with no key, good for a second check on our FRED FX series."
+  },
+  "sources": [
+    "https://frankfurter.dev/",
+    "https://api.frankfurter.dev/v1/1999-01-04?symbols=USD",
+    "https://api.frankfurter.dev/v2/rates?date=1960-01-04&base=USD&quotes=GBP"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

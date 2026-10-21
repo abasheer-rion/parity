@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0007",
+  "slug": "fx-economic-momentum",
+  "name": "Economic momentum in currencies (Dahlquist and Hasseltoft 2020)",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "cross-sectional",
+    "macro-trend",
+    "growth",
+    "inflation"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2015,
+    "authors": "Dahlquist, Hasseltoft",
+    "source_title": "Economic momentum and currency returns (Journal of Financial Economics 136(1), 152-167, 2020; SSRN working paper 2015)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2019.09.002"
+  },
+  "how_it_works": {
+    "simple": "If a country's economy has been getting stronger for a while, its money tends to go up in value. So you buy money from countries that are improving and sell money from countries that are slipping.",
+    "analogy": "Like picking a sports team that has been winning more games each season, rather than one with a single lucky win.",
+    "precise": "Compute trends (past changes measured over 1 to 60 months) in country fundamentals linked to economic activity and inflation, relative to other countries. Rank currencies on the combined economic momentum score and go long the strongest, short the weakest. The authors report the strategy earns alpha against carry, momentum and value and subsumes the alpha of carry."
+  },
+  "rule": "At each month end, for each currency compute the change in activity and inflation indicators over several lookbacks between 1 and 60 months, standardize across countries, average into one economic momentum score, and hold equal-weight long the top group and short the bottom group of currencies (forward contracts vs USD) for one month.",
+  "data_needed": [
+    "Monthly spot and 1-month forward exchange rates (or short rates) vs USD",
+    "Monthly macro series by country: activity indicators (e.g. industrial production, unemployment) and inflation (CPI), with publication lags respected"
+  ],
+  "economic_rationale": "Markets appear to underreact to slowly building trends in growth and inflation, and those trends also line up with differences in interest rates, so the signal captures part of what carry captures (Dahlquist and Hasseltoft 2020).",
+  "why_it_might_fail": "Macro data are revised and released with lags, so a backtest on final data can overstate results. An independent replication by Papers With Backtest on 1990-2026 G10 data shows a Sharpe ratio of 0.21 and a 38.9% drawdown, far below the paper's 0.70.",
+  "reported_results": [
+    {
+      "source": "Dahlquist and Hasseltoft 2020, abstract (EconPapers)",
+      "source_url": "https://econpapers.repec.org/article/eeejfinec/v_3a136_3ay_3a2020_3ai_3a1_3ap_3a152-167.htm",
+      "period": "1976-2017",
+      "market": "Developed and emerging market currencies",
+      "sharpe": 0.7,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Sharpe 0.70 read in the abstract. The period (Jan 1976 to Mar 2017) and universe (21 developed plus some emerging markets) come from search summaries, not a page I read. A time-series version with Sharpe 0.59 was also only seen in a search summary. Full paper was paywalled."
+    },
+    {
+      "source": "Papers With Backtest replication",
+      "source_url": "https://paperswithbacktest.com/strategies/economic-momentum-and-currency-returns",
+      "period": "1990-2026",
+      "market": "G10 currencies vs USD (7 positions shown)",
+      "sharpe": 0.21,
+      "annual_return": 0.0134,
+      "volatility": 0.0783,
+      "max_drawdown": -0.3891,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Third-party implementation with monthly rebalancing; exact signal definition and cost treatment not shown on the page."
+    }
+  ],
+  "post_publication_evidence": "No peer-reviewed post-publication test found. The independent Papers With Backtest replication (1990-2026) reports a much weaker Sharpe ratio of 0.21. The broader currency anomaly decay documented by Hutchinson et al. (2022, https://doi.org/10.1016/j.irfa.2022.102245) covers carry, momentum and value, not this signal.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Directly matches parity's macro angle and uses free data (FRED, OECD), though real-time vintages matter."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

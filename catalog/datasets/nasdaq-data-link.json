@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0024",
+  "slug": "nasdaq-data-link",
+  "name": "Nasdaq Data Link (formerly Quandl)",
+  "provider": "Nasdaq",
+  "category": "commodities-energy",
+  "url": "https://data.nasdaq.com",
+  "api_docs_url": "https://docs.data.nasdaq.com/",
+  "access": "freemium",
+  "rate_limits": "Free key: 300 calls per 10 seconds, 2,000 per 10 minutes, 50,000 a day (search summary of Nasdaq's rate limit page, which now redirects).",
+  "history_start": "Varies by dataset.",
+  "frequency": [
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "A marketplace of mostly paid datasets with a small set of free ones. The free continuous futures set (CHRIS) is deprecated and no longer updated.",
+  "simple": "A data shop run by the Nasdaq exchange. Most of the good stuff costs money now.",
+  "point_in_time": null,
+  "license_terms": "Each dataset has its own license; free datasets carry their publisher's terms.",
+  "quality_notes": "Many free datasets are stale or retired. What remains free is mostly also on FRED. CHRIS deprecation is from a third party citing Nasdaq support (unverified).",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Little left for free that FRED does not already have."
+  },
+  "sources": [
+    "https://docs.data.nasdaq.com/docs/rate-limits-1",
+    "https://github.com/PacktPublishing/Python-for-Algorithmic-Trading-Cookbook/issues/5"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

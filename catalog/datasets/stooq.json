@@ -1,0 +1,31 @@
+{
+  "id": "DAT-0028",
+  "slug": "stooq",
+  "name": "Stooq",
+  "provider": "Stooq.com",
+  "category": "equities",
+  "url": "https://stooq.com",
+  "api_docs_url": "",
+  "access": "no-api",
+  "rate_limits": "Not applicable. The CSV download link now returns a JavaScript browser check page instead of data (tested 2026-10-20).",
+  "history_start": "Unknown today; we could not reach the data.",
+  "frequency": [
+    "daily"
+  ],
+  "what_it_has": "Used to offer free daily CSV prices for stocks, indexes, FX and commodities. Scripts now get a browser check page instead.",
+  "simple": "A Polish price website that used to let programs download prices for free. Now it blocks programs.",
+  "point_in_time": null,
+  "license_terms": "No published data license found. We do not work around the browser check.",
+  "quality_notes": "Blocked for scripts behind a proof of work browser check. Treat as unavailable.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Blocked for scripts, and other sources cover the same prices."
+  },
+  "sources": [
+    "https://stooq.com/q/d/l/?s=spy.us&i=d"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

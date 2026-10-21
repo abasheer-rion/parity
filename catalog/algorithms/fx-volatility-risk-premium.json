@@ -1,0 +1,83 @@
+{
+  "id": "ALG-0018",
+  "slug": "fx-volatility-risk-premium",
+  "name": "FX volatility risk premium sort",
+  "family": "volatility",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "cross-sectional",
+    "options-implied",
+    "risk-premium",
+    "currency-portfolios"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Della Corte, Ramadorai and Sarno",
+    "source_title": "Volatility risk premia and exchange rate predictability (Journal of Financial Economics 120(1), 2016)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2016.02.015"
+  },
+  "how_it_works": {
+    "simple": "For each currency, compare how jumpy options traders expect it to be with how jumpy it has actually been. Buy the currencies where insurance against big moves is cheap and sell the ones where it is expensive.",
+    "analogy": "Like house insurance: if people are paying a lot to insure houses in one town, they are worried about it, and that worry tends to show up later in prices.",
+    "precise": "The currency volatility risk premium is expected realized volatility minus model-free implied volatility from options. Sorting currencies monthly on the 1-year VRP and going long the cheapest-to-insure quintile and short the most expensive predicts spot rate changes, with low correlation to carry, momentum and value."
+  },
+  "rule": "At each month end compute, for each currency vs USD, the 1-year volatility risk premium (realized volatility proxy minus model-free implied volatility). Buy the top 20 percent (highest VRP, cheapest insurance) and sell the bottom 20 percent, equal weighted, using forwards; rebalance monthly.",
+  "data_needed": [
+    "Monthly FX spot and 1-month forward rates",
+    "FX option implied volatilities (ATM, risk reversals, butterflies) at 1-year tenor",
+    "Daily spot rates for realized volatility"
+  ],
+  "economic_rationale": "Della Corte, Ramadorai and Sarno link returns to the cost of insuring currency volatility: hedging demand and limits to arbitrage in options spill into spot prices, so expensive insurance predicts depreciation.",
+  "why_it_might_fail": "The sample is short (1998-2013, 16 years) and options data is costly. Hutchinson et al. (2022) found that carry, momentum and value currency strategies stopped working after publication, and VRP may face the same learning, though no direct test of VRP after 2016 was found.",
+  "reported_results": [
+    {
+      "source": "Della Corte, Ramadorai and Sarno (2016), Table 3, developed currencies",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/13156/1/VRP_Paper_18Feb2015%20%28with%20Figures%29.pdf",
+      "period": "Jan 1998 - Dec 2013",
+      "market": "10 developed currencies vs USD",
+      "sharpe": 0.61,
+      "annual_return": 0.0495,
+      "volatility": 0.0815,
+      "max_drawdown": -0.17,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Net of bid-ask costs. Spot component alone 5.45 percent a year. Accepted manuscript version; signs read from a text extraction that drops minus signs, so values are as reported positive."
+    },
+    {
+      "source": "Della Corte, Ramadorai and Sarno (2016), Table 3, developed and emerging",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/13156/1/VRP_Paper_18Feb2015%20%28with%20Figures%29.pdf",
+      "period": "Jan 1998 - Dec 2013",
+      "market": "Developed plus liquid emerging currencies",
+      "sharpe": 0.51,
+      "annual_return": 0.0416,
+      "volatility": 0.0814,
+      "max_drawdown": -0.244,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Same paper; carry had Sharpe 0.53 and max drawdown 28.2 percent in this sample, VRP had near-zero correlation with carry."
+    }
+  ],
+  "post_publication_evidence": "No independent test of the FX VRP strategy after publication was found. For related currency styles, Hutchinson et al. (2022) report the average out-of-sample Sharpe of published carry, momentum and value strategies falling from +0.39 to -0.32 after publication: https://doi.org/10.1016/j.irfa.2022.102245",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Strong and diversifying in the paper, but needs FX options data that is rarely free, which limits a student POC."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "DAT-0017",
+  "slug": "histdata",
+  "name": "HistData.com",
+  "provider": "HistData.com",
+  "category": "fx-prices",
+  "url": "https://www.histdata.com",
+  "api_docs_url": "",
+  "access": "no-api",
+  "rate_limits": "Not published. Manual downloads by pair, year and month as zip files.",
+  "history_start": "EURUSD 1-minute bars from 2000-05 (from a search summary, not confirmed on the site).",
+  "frequency": [
+    "tick",
+    "minute"
+  ],
+  "what_it_has": "Free tick and 1-minute bar data for over 80 FX pairs plus a few commodities and stock indexes, in ASCII, MetaTrader, NinjaTrader and Excel formats.",
+  "simple": "A free website with minute by minute currency prices going back many years, packed one month per file.",
+  "point_in_time": false,
+  "license_terms": "Free with no warranty; the FAQ says use the data at your own risk. No redistribution terms stated. Personal research use only.",
+  "quality_notes": "All timestamps are Eastern Standard Time with no daylight saving shift, which must be converted. Source of the quotes is not stated, and gaps are common.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Long free minute history for intraday tests, a backup to Dukascopy."
+  },
+  "sources": [
+    "https://www.histdata.com/f-a-q/",
+    "https://www.histdata.com/download-free-forex-data/"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-20"
+}

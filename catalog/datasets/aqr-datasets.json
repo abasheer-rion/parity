@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0003",
+  "slug": "aqr-datasets",
+  "name": "AQR Data Sets",
+  "provider": "AQR Capital Management",
+  "category": "factor-research",
+  "url": "https://www.aqr.com/Insights/Datasets",
+  "api_docs_url": "",
+  "access": "no-api",
+  "rate_limits": "Not applicable; Excel file downloads.",
+  "history_start": "Varies; time series momentum from 1985-01, Century of Factor Premia goes back about 100 years.",
+  "frequency": [
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "Factor return series from AQR papers. Time Series Momentum covers 58 futures and forwards including currencies; Century of Factor Premia has value, momentum, carry and defensive returns across six asset classes; Value and Momentum Everywhere includes currencies.",
+  "simple": "A big investment firm posts the results of its research, including how simple currency strategies would have done over many years.",
+  "point_in_time": false,
+  "license_terms": "AQR's site terms forbid reproducing, distributing or publishing any information from the site without written consent, with no carve out for personal use. Use for private comparison only. https://www.aqr.com/Terms-of-Use",
+  "quality_notes": "Series are rebuilt and updated on different schedules (TSMOM last updated 2026-05-29, Century of Factor Premia 2026-02-27). Returns are AQR's own constructions and gross of real costs.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Ready made currency carry, value and trend return series to compare our results against."
+  },
+  "sources": [
+    "https://www.aqr.com/Insights/Datasets",
+    "https://www.aqr.com/Insights/Datasets/Time-Series-Momentum-Factors-Monthly",
+    "https://www.aqr.com/Insights/Datasets/Century-of-Factor-Premia-Monthly",
+    "https://www.aqr.com/Terms-of-Use"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

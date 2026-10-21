@@ -51,6 +51,26 @@ make setup && make fetch && make run
 
 ## Results
 
+This experiment was first run exploratorily. It was then repeated as an official, pre-registered run ([REG-0001](../../registrations/REG-0001-baseline-gauntlet.json)) on a clean machine, with identical results:
+
+<!-- results:RUN-000001 -->
+Official run [RUN-000001](../../ledger/runs/RUN-000001.json) of `REG-0001`, recorded 2026-10-21, commit `d2d7569d`, data fingerprint `87741fa9da7a`, 39 trials counted. Generated from the ledger by `scripts/docs.py`; it cannot be edited by hand.
+
+| Strategy | Sharpe | CAGR | Max drawdown | Deflated Sharpe | Gauntlet | Meets plan |
+| --- | --- | --- | --- | --- | --- | --- |
+| `fx_carry` | 0.39 | 1.4% | -16.1% | 0.44 | 3/11 | no |
+| `fx_commodity_gap` | 0.06 | 0.2% | -16.1% | 0.03 | 1/11 | no |
+| `fx_tsmom` | 0.17 | 0.9% | -29.8% | 0.10 | 3/11 | no |
+
+| Strategy | A1 | A2 | A3 | A4 | A5 | A6 | B1 | B2 | B3 | B4 | B5 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `fx_carry` | fail | fail | fail | fail | fail | fail | pass | fail | pass | pass | fail |
+| `fx_commodity_gap` | fail | fail | fail | fail | fail | fail | fail | fail | pass | fail | fail |
+| `fx_tsmom` | fail | fail | fail | fail | fail | fail | fail | fail | pass | pass | pass |
+<!-- /results -->
+
+The tables below are the original exploratory write-up, kept for its detail.
+
 ### A. Does anything beat the S&P 500?
 
 No. Every strategy fails every test. SPY's numbers differ for the commodity gap because it starts in March 2001 and SPY is measured over the same dates.
@@ -140,6 +160,7 @@ What could make these results wrong, roughly from most to least worrying.
 - [HYP-0003: Commodity currencies catch up to their commodity](../hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](0001-baseline-backtests.md)
+- [EXP-0003: Pre-registered test of the monthly commodity gap](0003-monthly-commodity-gap.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

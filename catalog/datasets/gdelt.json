@@ -1,0 +1,34 @@
+{
+  "id": "DAT-0016",
+  "slug": "gdelt",
+  "name": "GDELT Project",
+  "provider": "The GDELT Project",
+  "category": "news-sentiment",
+  "url": "https://www.gdeltproject.org",
+  "api_docs_url": "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/",
+  "access": "free-no-key",
+  "rate_limits": "The DOC API told us to limit requests to one every 5 seconds (tested). Up to 250 records per call.",
+  "history_start": "Events from 1979 (GDELT 1.0), GDELT 2.0 from February 2015, GKG from April 2013. The DOC API searches a rolling 3 months.",
+  "frequency": [
+    "15-minute",
+    "daily"
+  ],
+  "what_it_has": "Worldwide news monitoring in 65 languages: events, themes, people, places and a tone score. The DOC 2.0 API gives article lists and tone timelines; raw files and Google BigQuery hold the long history.",
+  "simple": "A robot that reads news from around the world every 15 minutes and writes down what happened and whether the mood was good or bad.",
+  "point_in_time": true,
+  "license_terms": "The whole database is 100 percent free and open; citation of GDELT is expected. https://www.gdeltproject.org/data.html",
+  "quality_notes": "Machine coded, so noisy, with duplicate stories and mis-tagged events. Tone is a simple word count measure. Coverage of sources grows over time, which can bias trends.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The only free news source with years of history and a ready made tone score."
+  },
+  "sources": [
+    "https://www.gdeltproject.org/data.html",
+    "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/",
+    "https://api.gdeltproject.org/api/v2/doc/doc?query=euro%20dollar&mode=artlist&maxrecords=2&format=json"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}

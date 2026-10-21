@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0018",
+  "slug": "imf",
+  "name": "IMF Data API (SDMX 2.1 and 3.0)",
+  "provider": "International Monetary Fund",
+  "category": "rates-macro",
+  "url": "https://data.imf.org",
+  "api_docs_url": "https://data.imf.org/en/Resource-Pages/IMF-API",
+  "access": "free-no-key",
+  "rate_limits": "None published by the IMF. Data and dataflow calls to api.imf.org worked with no key (tested 2026-10-20).",
+  "history_start": "Varies by dataset.",
+  "frequency": [
+    "monthly",
+    "quarterly",
+    "annual"
+  ],
+  "what_it_has": "Exchange rates, interest rates, reserves, balance of payments, CPI, the World Economic Outlook and primary commodity prices (the source of our copper series).",
+  "simple": "The world's emergency lender for countries publishes a lot of numbers about every country's money and trade.",
+  "point_in_time": true,
+  "license_terms": "Free to download, copy, publish and redistribute with attribution to the IMF, without altering the data. Commercial reuse needs written permission (copyright@imf.org). https://www.imf.org/en/about/copyright-and-terms",
+  "quality_notes": "Mostly monthly or slower. The dataflow list includes named monthly vintages for some datasets (for example CPI_2026_FEB_VINTAGE), but only recent ones, so it is not a long point in time history. The swagger explorer asks for a sign in even though plain calls work.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Good country background and commodity indexes, too slow for timing trades."
+  },
+  "sources": [
+    "https://data.imf.org/en/Resource-Pages/IMF-API",
+    "https://www.imf.org/en/about/copyright-and-terms",
+    "https://api.imf.org/external/sdmx/2.1/dataflow"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-20"
+}
