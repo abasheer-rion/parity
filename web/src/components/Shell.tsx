@@ -100,7 +100,7 @@ export function Shell({
       <aside className="side" data-lenis-prevent>
         <div className="org">
           <a className="org-button" href="#/">
-            <span className="org-mark"><img src="/brand/2026-10-21/parity-mark.svg" alt="" width={24} height={24} /></span>
+            <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>
             <span className="org-name">Parity</span>
             <span className="org-badge">Beta</span>
           </a>
