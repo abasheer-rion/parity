@@ -6,6 +6,11 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 - Dashboard: Scenarios page (`#/scenarios`). Describe a made-up event and see what oil, currencies, stocks, the VIX and US rates did after similar past events; looks backwards only, does not predict.
 - Engine: `parity scenario` lists past events like a made-up one (76 sourced events in `catalog/events/`) with the median, middle half and hit rate of what followed; `parity scenario export` feeds the page. Method and limits in REF-0011.
+- News page (`#/news`): newest headlines from central banks, US statistics offices, regulators and GDELT, tagged by currency, commodity, region and kind, each with the market move after it as a signed change and a z-score; an article drawer with the price path; and the biggest market days since 1999 ([REF-0013](docs/reference/0013-news-sources-and-market-impact.md)).
+- Engine: `parity news fetch|list|impact|records|export`. Only headline, link and an allowed short summary are stored.
+- Hourly `News` workflow (no secrets, commits nothing); the deploy job exports the News JSON from the data cache.
+- Six new news sources in the catalog, and a "News use" section (licence, display rights, limits) on each news source page.
+- UI library: `Drawer` and a `news` icon.
 
 ## 0.3.0 (2026-10-20)
 

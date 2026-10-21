@@ -12,6 +12,14 @@ function localResults(): Plugin {
     name: "parity-local-results",
     apply: "serve",
     configureServer(server) {
+      // `parity news export ../engine/output` writes the News page's files here.
+      server.middlewares.use("/local/news", (req, res, next) => {
+        const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        const path = resolve(import.meta.dirname, "../engine/output/news", name);
+        if (!/^[a-z]+\.json$/.test(name) || !existsSync(path)) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
       server.middlewares.use("/local/latest.json", (_req, res) => {
         if (!existsSync(file)) {
           res.statusCode = 404;
@@ -70,7 +78,7 @@ export default defineConfig(({ command, mode }) => ({
       }
     : {
         sourcemap: false,
-        chunkSizeWarningLimit: 1700,
+        chunkSizeWarningLimit: 1800,
         outDir: "dist",
         emptyOutDir: false,
         assetsDir: "app/assets",

@@ -256,3 +256,9 @@
 /* Grids fold on narrow screens so cards never squeeze below reading width. */
 @media (max-width: 900px) { .ui-grid-3, .ui-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .ui-grid-2, .ui-grid-3 { grid-template-columns: minmax(0, 1fr); } }
+/* Drawer: a right-hand sheet for details (the News article drawer). */
+.ui-drawer-scrim { place-items: stretch end; padding: 0; }
+.ui-drawer { height: 100%; background: var(--surface-solid); border-left: 1px solid var(--border-2); box-shadow: var(--shadow-3); display: flex; flex-direction: column; animation: ui-drawer-in var(--dur-3) var(--ease-out); }
+.ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
+@keyframes ui-drawer-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ui-drawer { animation: none; } }

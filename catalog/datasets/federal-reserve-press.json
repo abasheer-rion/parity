@@ -1,0 +1,47 @@
+{
+  "id": "DAT-0042",
+  "slug": "federal-reserve-press",
+  "name": "Federal Reserve press releases",
+  "provider": "Board of Governors of the Federal Reserve System",
+  "category": "news-sentiment",
+  "url": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
+  "api_docs_url": "https://www.federalreserve.gov/feeds/feeds.htm",
+  "access": "free-no-key",
+  "rate_limits": "None published for the RSS feed. We read it once an hour.",
+  "history_start": "The feed holds the latest 20 releases; the website archive goes back to 1996.",
+  "frequency": [
+    "as released"
+  ],
+  "what_it_has": "Every Board press release: FOMC statements, minutes, bank approvals, enforcement actions and speeches, with title, link, time and a short description.",
+  "simple": "The US central bank's own announcements, straight from its website.",
+  "point_in_time": true,
+  "license_terms": "Public domain US government work: material may be copied and distributed without permission; credit the Board. https://www.federalreserve.gov/disclaimer.htm",
+  "quality_notes": "Many releases are routine bank approvals, not market news. The feed starts with a byte order mark, which our parser handles.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.fed"
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "FOMC statements and minutes are among the biggest scheduled dollar events."
+  },
+  "sources": [
+    "https://www.federalreserve.gov/feeds/press_all.xml",
+    "https://www.federalreserve.gov/disclaimer.htm"
+  ],
+  "news_use": {
+    "parity_source_ids": [
+      "fed"
+    ],
+    "feed_url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Credit the Federal Reserve Board",
+    "limits": "None published",
+    "terms_quote": "may be copied and distributed without permission",
+    "terms_url": "https://www.federalreserve.gov/disclaimer.htm",
+    "checked": "2026-10-21"
+  },
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

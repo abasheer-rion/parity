@@ -19,8 +19,10 @@
   "point_in_time": false,
   "license_terms": "US government data, generally public domain. See the API terms of service at https://www.bls.gov/developers/termsOfService.htm and linking and copyright info at https://www.bls.gov/bls/linksite.htm",
   "quality_notes": "Serves the latest revised values only. Seasonal factors are revised each year. CPI for September 2026 pulled with no key (tested).",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.bls"
+  ],
   "relevance": {
     "score": 2,
     "reason": "FRED already carries the headline series; BLS only adds detail."
@@ -30,5 +32,18 @@
     "https://api.bls.gov/publicAPI/v2/timeseries/data/CUUR0000SA0"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "bls"
+    ],
+    "feed_url": "https://www.bls.gov/feed/bls_latest.rss",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "None required",
+    "limits": "Blocked (HTTP 403) without contact details in the user agent; runs only with PARITY_CONTACT",
+    "terms_quote": "public domain; linking needs no permission",
+    "terms_url": "https://www.bls.gov/bls/linksite.htm",
+    "checked": "2026-10-21"
+  }
 }

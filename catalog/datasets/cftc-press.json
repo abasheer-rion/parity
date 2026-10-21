@@ -1,0 +1,47 @@
+{
+  "id": "DAT-0047",
+  "slug": "cftc-press",
+  "name": "CFTC press releases",
+  "provider": "US Commodity Futures Trading Commission",
+  "category": "news-sentiment",
+  "url": "https://www.cftc.gov/PressRoom/PressReleases",
+  "api_docs_url": "https://www.cftc.gov/RSS/index.htm",
+  "access": "free-no-key",
+  "rate_limits": "None published for RSS.",
+  "history_start": "The feed holds the latest 10 releases.",
+  "frequency": [
+    "as released"
+  ],
+  "what_it_has": "CFTC press releases on futures and swaps markets, including enforcement.",
+  "simple": "The US futures market regulator's announcements.",
+  "point_in_time": true,
+  "license_terms": "Public domain US government work; acknowledgement requested. https://www.cftc.gov/WebPolicy/index.htm",
+  "quality_notes": "Low volume and rarely market moving.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.cftc"
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Context for commodity and currency futures."
+  },
+  "sources": [
+    "https://www.cftc.gov/RSS/RSSGP/rssgp.xml",
+    "https://www.cftc.gov/WebPolicy/index.htm"
+  ],
+  "news_use": {
+    "parity_source_ids": [
+      "cftc"
+    ],
+    "feed_url": "https://www.cftc.gov/RSS/RSSGP/rssgp.xml",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Acknowledge the CFTC",
+    "limits": "None published",
+    "terms_quote": "public domain; acknowledgement requested",
+    "terms_url": "https://www.cftc.gov/WebPolicy/index.htm",
+    "checked": "2026-10-21"
+  },
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

@@ -106,6 +106,7 @@ Sources, scrapers, caching and data quality.
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
+- [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)
@@ -148,6 +149,12 @@ Sources, scrapers, caching and data quality.
 - [DAT-0039: CFTC Commitments of Traders](datasets/0039-cftc-cot.md)
 - [DAT-0040: CLS FX volume data (CLSMarketData)](datasets/0040-cls-fx-volume.md)
 - [DAT-0041: Databento CME FX futures (nanosecond)](datasets/0041-databento-cme-fx.md)
+- [DAT-0042: Federal Reserve press releases](datasets/0042-federal-reserve-press.md)
+- [DAT-0043: ECB press releases](datasets/0043-ecb-press.md)
+- [DAT-0044: Bank of England news](datasets/0044-bank-of-england-news.md)
+- [DAT-0045: Bank of Japan what's new](datasets/0045-bank-of-japan-news.md)
+- [DAT-0046: SEC press releases](datasets/0046-sec-press.md)
+- [DAT-0047: CFTC press releases](datasets/0047-cftc-press.md)
 
 ## docs
 
@@ -202,6 +209,7 @@ Foreign exchange in general.
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
+- [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md)
@@ -327,6 +335,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
+- [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
@@ -362,6 +371,7 @@ News, macro releases and event-driven signals.
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
+- [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [ALG-0008: Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md)
 - [ALG-0010: Trading FX on US macro announcement surprises](algorithms/0010-fx-macro-news-surprise.md)
 - [ALG-0024: Crypto investor attention from Google search volume](algorithms/0024-crypto-google-search-attention.md)
@@ -377,6 +387,12 @@ News, macro releases and event-driven signals.
 - [DAT-0022: Marketaux](datasets/0022-marketaux.md)
 - [DAT-0025: NewsAPI.org](datasets/0025-newsapi.md)
 - [DAT-0030: Trading Economics API](datasets/0030-trading-economics.md)
+- [DAT-0042: Federal Reserve press releases](datasets/0042-federal-reserve-press.md)
+- [DAT-0043: ECB press releases](datasets/0043-ecb-press.md)
+- [DAT-0044: Bank of England news](datasets/0044-bank-of-england-news.md)
+- [DAT-0045: Bank of Japan what's new](datasets/0045-bank-of-japan-news.md)
+- [DAT-0046: SEC press releases](datasets/0046-sec-press.md)
+- [DAT-0047: CFTC press releases](datasets/0047-cftc-press.md)
 
 ## open-source
 

@@ -602,6 +602,23 @@ def dataset_page(e: dict) -> str:
            "## Terms and quality", "", f"**Terms:** {e.get('license_terms') or 'n/a'}", "",
            f"**Quality:** {e.get('quality_notes') or 'n/a'}", "", "### Sources", ""]
     out += [f"- {u}" for u in e.get("sources", [])] or ["- n/a"]
+    nu = e.get("news_use")
+    if nu:
+        shown = {"yes": "yes", "no": "no, personal use only",
+                 "ask": "not yet, terms unclear"}[nu["display_on_shared_site"]]
+        out += ["", "## News use", "",
+                "How the News page uses this source (see "
+                "[REF-0013](../reference/0013-news-sources-and-market-impact.md)).", "",
+                "| | |", "| --- | --- |",
+                f"| Engine source ids | {', '.join(f'`{i}`' for i in nu['parity_source_ids'])} |",
+                f"| Feed or endpoint | {_cell(nu['feed_url'])} |",
+                f"| Shown on the shared site | {shown} |",
+                f"| What we store | {_cell(nu['what_we_store'])} |",
+                f"| Attribution | {_cell(nu['attribution'])} |",
+                f"| Limits | {_cell(nu['limits'])} |",
+                f"| Terms say | \"{_cell(nu['terms_quote'])}\" |",
+                f"| Terms page | {_cell(nu['terms_url'])} |",
+                f"| Checked | {nu['checked']} |"]
     return render_front_matter(meta) + "\n" + "\n".join(out).rstrip("\n") + "\n"
 
 

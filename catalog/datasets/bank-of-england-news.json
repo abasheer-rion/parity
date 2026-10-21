@@ -1,0 +1,47 @@
+{
+  "id": "DAT-0044",
+  "slug": "bank-of-england-news",
+  "name": "Bank of England news",
+  "provider": "Bank of England",
+  "category": "news-sentiment",
+  "url": "https://www.bankofengland.co.uk/news",
+  "api_docs_url": "https://www.bankofengland.co.uk/rss",
+  "access": "free-no-key",
+  "rate_limits": "None published for RSS.",
+  "history_start": "The feed holds the latest 50 items.",
+  "frequency": [
+    "as released"
+  ],
+  "what_it_has": "News, speeches and Monetary Policy Committee announcements with title, link, time and description.",
+  "simple": "The UK central bank's announcements.",
+  "point_in_time": true,
+  "license_terms": "Bank of England copyright. Data in its database is under the Open Government Licence; reuse of website text such as headlines is not spelled out. https://www.bankofengland.co.uk/legal",
+  "quality_notes": "We fetch it but keep it off the shared site until the Bank confirms headline and link reuse is fine.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.boe"
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Bank Rate decisions move sterling."
+  },
+  "sources": [
+    "https://www.bankofengland.co.uk/rss/news",
+    "https://www.bankofengland.co.uk/legal"
+  ],
+  "news_use": {
+    "parity_source_ids": [
+      "boe"
+    ],
+    "feed_url": "https://www.bankofengland.co.uk/rss/news",
+    "display_on_shared_site": "ask",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Credit the Bank of England",
+    "limits": "None published",
+    "terms_quote": "not stated for headlines; ask enquiries@bankofengland.co.uk",
+    "terms_url": "https://www.bankofengland.co.uk/legal",
+    "checked": "2026-10-21"
+  },
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

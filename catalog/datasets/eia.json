@@ -20,8 +20,11 @@
   "point_in_time": false,
   "license_terms": "US government data is public domain. EIA asks for a source line with the publication date. https://www.eia.gov/about/copyrights_reuse.php",
   "quality_notes": "Without a key the API answers API_KEY_MISSING (tested). Weekly inventory numbers can be revised later and the API shows the latest values. WTI was negative on 2020-04-20.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.eia",
+    "news.eia-press"
+  ],
   "relevance": {
     "score": 5,
     "reason": "Weekly oil and gas inventory releases are the commodity news most likely to move CAD and NOK."
@@ -32,5 +35,19 @@
     "https://api.eia.gov/v2/petroleum/pri/spt/data/?frequency=daily"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "eia",
+      "eia-press"
+    ],
+    "feed_url": "https://www.eia.gov/rss/todayinenergy.xml",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Source: U.S. Energy Information Administration (date)",
+    "limits": "None published for RSS",
+    "terms_quote": "public domain; cite EIA with the date",
+    "terms_url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "checked": "2026-10-21"
+  }
 }

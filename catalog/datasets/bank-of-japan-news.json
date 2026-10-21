@@ -1,0 +1,47 @@
+{
+  "id": "DAT-0045",
+  "slug": "bank-of-japan-news",
+  "name": "Bank of Japan what's new",
+  "provider": "Bank of Japan",
+  "category": "news-sentiment",
+  "url": "https://www.boj.or.jp/en/",
+  "api_docs_url": "https://www.boj.or.jp/en/rss/index.htm",
+  "access": "free-no-key",
+  "rate_limits": "None published for RSS.",
+  "history_start": "The feed holds the latest 46 items.",
+  "frequency": [
+    "as released"
+  ],
+  "what_it_has": "New releases on the Bank of Japan's English site: policy statements, data and speeches.",
+  "simple": "Japan's central bank's announcements.",
+  "point_in_time": true,
+  "license_terms": "Content may be copied or reproduced if the Bank of Japan is credited; commercial use needs permission; no altering. https://www.boj.or.jp/en/about/copyright.htm",
+  "quality_notes": "Many items are routine statistics releases.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.boj"
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Policy changes move the yen."
+  },
+  "sources": [
+    "https://www.boj.or.jp/en/rss/whatsnew.xml",
+    "https://www.boj.or.jp/en/about/copyright.htm"
+  ],
+  "news_use": {
+    "parity_source_ids": [
+      "boj"
+    ],
+    "feed_url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Credit the Bank of Japan",
+    "limits": "None published",
+    "terms_quote": "may be copied or reproduced crediting the Bank of Japan",
+    "terms_url": "https://www.boj.or.jp/en/about/copyright.htm",
+    "checked": "2026-10-21"
+  },
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

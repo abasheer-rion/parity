@@ -17,6 +17,7 @@ import { DataSources } from "./pages/DataSources";
 import { Explore } from "./pages/Explore";
 import { Lab } from "./pages/Lab";
 import { LedgerPage } from "./pages/LedgerPage";
+import { News } from "./pages/News";
 import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
@@ -48,7 +49,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
+const STANDALONE = ["news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -100,6 +101,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
+      {route === "news" && <News view={arg} />}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "settings" && (
         <Settings section={arg} />
