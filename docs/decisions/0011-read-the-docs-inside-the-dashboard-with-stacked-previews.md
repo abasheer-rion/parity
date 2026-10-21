@@ -33,8 +33,10 @@ A separate docs site would mean a second login and could not show our own charts
 2. The dashboard loads that file after the first page has drawn, so the dashboard stays fast and the reader opens instantly afterwards.
 3. Hover cards follow gwern.net's behaviour: a card stays while the pointer is on it or on a card it opened; clicking a card pins it; Escape closes the top card. On a phone the first tap previews and the card's "Open" link navigates.
 4. All doc HTML passes through DOMPurify before it is shown, even though it comes from this repo, because markdown allows raw HTML.
-5. The site uses one dark theme: a near-black background with a faint grid and soft blue glows, glass cards, and a single blue accent. Chart colours stay the validated palette.
-6. The docs stay the single source. Nothing is edited in the dashboard; `scripts/docs.py` still checks every file ([DEC-0004](0004-docs-are-checked-by-a-script.md)).
+5. The site's frame copies Mercury's banking app: a left sidebar with a workspace row, a switch between two areas (Markets and Research), nested items under the active section and a Bookmarks list; a slim top bar with search, the run picker, settings and a profile menu; Mercury-style cards on Home; and a Settings area where the sidebar becomes a settings menu and each page is a list of label and value rows. Tables follow Mercury's 48px rows.
+6. Charts merge Mercury and Robinhood. From Robinhood: a big value with a coloured change underneath, no y axis, a dotted line at the starting value, time range tabs (1M to ALL), and scrubbing that updates the header to the date under the pointer; a strategy page reads like a stock page (About, Key statistics, a verdict panel where the order panel would be, and research that mentions it instead of news). From Mercury: the soft gradient fill under the line, the dotted plot background, quiet date labels and the dark tooltip.
+7. Dark is the default: a near-black background with a faint grid and soft blue glows, and a single blue accent. A light theme matching Mercury's is available in Settings. Chart colours stay the validated palette.
+8. The docs stay the single source. Nothing is edited in the dashboard; `scripts/docs.py` still checks every file ([DEC-0004](0004-docs-are-checked-by-a-script.md)).
 
 ## Consequences
 

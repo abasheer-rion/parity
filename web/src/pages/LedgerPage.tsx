@@ -1,3 +1,4 @@
+import { Title } from "../components/Shell";
 import { Card, Pass } from "../components/ui";
 import { ledger, registrations } from "../lib/catalog";
 import { num, pct, REPO_URL } from "../lib/format";
@@ -9,7 +10,7 @@ export function LedgerPage() {
   return (
     <>
       <div className="page-head">
-        <h1>Ledger</h1>
+        <Title>Ledger</Title>
         <p>The official record. Every result we cite comes from one of these runs. Each entry is sealed to the one before
           it with a hash, so changing any old result breaks every seal after it. The full check runs in CI on every push
           (<code>parity ledger verify</code>); this page shows the chain links you can see at a glance. Every run also has

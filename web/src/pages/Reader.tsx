@@ -2,9 +2,12 @@
 // (components/Popups.tsx), backlinks, tags and the terms each doc uses.
 import { useEffect, useMemo, useState } from "react";
 import { Html } from "../components/Html";
+import { Title } from "../components/Shell";
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, search, TYPE_LABELS, TYPE_ORDER, useDocs, type DocEntry, type DocsData } from "../lib/docs";
 import { REPO_URL } from "../lib/format";
+import { toggleBookmark, usePrefs } from "../lib/prefs";
+import { Icon } from "../components/icons";
 
 function byType(docs: DocEntry[]): [string, DocEntry[]][] {
   const groups: Record<string, DocEntry[]> = {};
@@ -13,11 +16,12 @@ function byType(docs: DocEntry[]): [string, DocEntry[]][] {
   return order.filter((t) => groups[t]).map((t) => [t, groups[t]]);
 }
 
-export function DocsHome({ tag, query }: { tag?: string; query?: string }) {
+export function DocsHome({ tag, type: initialType, query }: { tag?: string; type?: string; query?: string }) {
   const data = useDocs();
   const [q, setQ] = useState(query ?? "");
-  const [type, setType] = useState<string>("");
+  const [type, setType] = useState<string>(initialType ?? "");
   useEffect(() => setQ(query ?? ""), [query]);
+  useEffect(() => setType(initialType ?? ""), [initialType]);
   if (!data) return <p className="muted">Loading docs</p>;
 
   const tagCounts: Record<string, number> = {};
@@ -29,7 +33,7 @@ export function DocsHome({ tag, query }: { tag?: string; query?: string }) {
   return (
     <>
       <div className="page-head">
-        <h1>{tag ? <>Docs tagged <span className="tag big">{tag}</span></> : "Research docs"}</h1>
+        <Title label={tag ? `Docs tagged ${tag}` : "Research docs"}>{tag ? <>Docs tagged <span className="tag big">{tag}</span></> : "Research docs"}</Title>
         <p>
           Every decision, experiment, paper note and log in the project. Hover any underlined word, doc link or source
           for a preview. Select any word or phrase to see everywhere it appears. Press <kbd>/</kbd> to search from anywhere.
@@ -134,10 +138,23 @@ export function DocPage({ id, anchor }: { id: string; anchor?: string }) {
           <span className={`status s-${doc.status}`}>{doc.status}</span>
           {doc.updated && <span className="muted">updated {doc.updated}</span>}
         </div>
+        <DocBookmark doc={doc} />
         <Html className="prose" html={doc.html} />
       </article>
       <DocRail data={data} doc={doc} />
     </div>
+  );
+}
+
+function DocBookmark({ doc }: { doc: DocEntry }) {
+  const prefs = usePrefs();
+  const href = `#/doc/${doc.id}`;
+  const on = prefs.bookmarks.some((b) => b.href === href);
+  return (
+    <button className={`round-btn doc-bm ${on ? "on" : ""}`} onClick={() => toggleBookmark(href, doc.title)}
+      aria-label={on ? "Remove from bookmarks" : "Add to bookmarks"} title={on ? "Remove from bookmarks" : "Add to bookmarks"}>
+      <Icon name="bookmark" size={13} />
+    </button>
   );
 }
 
@@ -239,7 +256,7 @@ export function RefsPage({ focus }: { focus?: string }) {
   return (
     <>
       <div className="page-head">
-        <h1>Sources</h1>
+        <Title>Bibliography</Title>
         <p>Everything the project relies on: papers, books, data providers, repos, courses and forum threads. Each link
           was checked by a script; the check result is shown next to it. Hover a doc to preview where a source is used.</p>
       </div>

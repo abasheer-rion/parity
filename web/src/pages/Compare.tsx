@@ -1,3 +1,4 @@
+import { Title } from "../components/Shell";
 import { Card } from "../components/ui";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
@@ -17,7 +18,7 @@ export function Compare({ report }: { report: Report }) {
   return (
     <>
       <div className="page-head">
-        <h1>Compare</h1>
+        <Title>Compare</Title>
         <p>Every strategy we have built, side by side on the same data since 1999: how they score, how they move together,
           and what each did in the five worst stock market episodes. All of this is exploratory unless the ledger says
           otherwise.</p>

@@ -132,9 +132,9 @@ export function LineChart({
     <figure className="chart" ref={ref}>
       <Legend items={series} />
       <svg width={width} height={height} role="img" aria-label={label}>
+        <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         {yTicks.map((v) => (
           <g key={v}>
-            <line className="grid" x1={pad.left} x2={pad.left + w} y1={y(v)} y2={y(v)} />
             <text className="tick" x={pad.left - 8} y={y(v)} dy="0.32em" textAnchor="end">
               {format(v)}
             </text>
@@ -243,9 +243,10 @@ export function BarChart({
     <figure className="chart" ref={ref}>
       <Legend items={legend} />
       <svg width={width} height={height} role="img" aria-label={label}>
+        <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         {ticks.map((v) => (
           <g key={v}>
-            <line className={v === 0 ? "axis" : "grid"} x1={pad.left} x2={pad.left + w} y1={y(v)} y2={y(v)} />
+            {v === 0 && <line className="axis" x1={pad.left} x2={pad.left + w} y1={y(v)} y2={y(v)} />}
             <text className="tick" x={pad.left - 8} y={y(v)} dy="0.32em" textAnchor="end">
               {format(v)}
             </text>
@@ -292,5 +293,223 @@ export function BarChart({
         </Tooltip>
       )}
     </figure>
+  );
+}
+
+let gridSeq = 0;
+
+/** Mercury's plot background: small dots on a grid, faded at the top and bottom. */
+export function DotGrid({ x, y, width, height, gap = 14 }: { x: number; y: number; width: number; height: number; gap?: number }) {
+  const [id] = useState(() => `dg${++gridSeq}`);
+  return (
+    <g aria-hidden>
+      <defs>
+        <pattern id={`${id}p`} x={x} y={y} width={gap} height={gap} patternUnits="userSpaceOnUse">
+          <circle cx={1} cy={1} r={1} className="dotgrid" />
+        </pattern>
+        <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.15" stopColor="#fff" stopOpacity="1" />
+          <stop offset="0.85" stopColor="#fff" stopOpacity="1" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <mask id={`${id}m`}><rect x={x} y={y} width={width} height={height} fill={`url(#${id}f)`} /></mask>
+      </defs>
+      <rect x={x} y={y} width={width} height={height} fill={`url(#${id}p)`} mask={`url(#${id}m)`} />
+    </g>
+  );
+}
+
+export const RANGES = ["1M", "3M", "YTD", "1Y", "5Y", "10Y", "ALL"] as const;
+export type RangeKey = (typeof RANGES)[number];
+
+const RANGE_LABEL: Record<RangeKey, string> = {
+  "1M": "Past month", "3M": "Past 3 months", YTD: "Year to date", "1Y": "Past year",
+  "5Y": "Past 5 years", "10Y": "Past 10 years", ALL: "All time",
+};
+
+/** The points that fall inside a range ending at the series' last date. */
+export function sliceRange(points: Point[], range: RangeKey): Point[] {
+  if (!points.length || range === "ALL") return points;
+  const last = new Date(points[points.length - 1][0]);
+  const from = new Date(last);
+  if (range === "YTD") { from.setMonth(0, 1); }
+  else {
+    const months = { "1M": 1, "3M": 3, "1Y": 12, "5Y": 60, "10Y": 120 }[range];
+    from.setMonth(from.getMonth() - months);
+  }
+  const cut = from.toISOString().slice(0, 10);
+  return points.filter((p) => p[0] >= cut);
+}
+
+function rebase(points: Point[], amount: number): Point[] {
+  const p0 = points[0]?.[1];
+  return p0 ? points.map(([d, v]) => [d, (v / p0) * amount]) : [];
+}
+
+function thin(points: Point[], max: number): Point[] {
+  if (points.length <= max) return points;
+  const step = points.length / max;
+  const out: Point[] = [];
+  for (let i = 0; i < max; i++) out.push(points[Math.floor(i * step)]);
+  out.push(points[points.length - 1]);
+  return out;
+}
+
+/** Money the way Mercury prints it: thousands separators, true minus, small raised cents. */
+export function Money({ value, cents = true, signed = false }: { value: number; cents?: boolean; signed?: boolean }) {
+  const neg = value < 0;
+  const abs = Math.abs(value);
+  const whole = Math.floor(abs).toLocaleString("en-US");
+  const c = Math.round((abs - Math.floor(abs)) * 100).toString().padStart(2, "0");
+  return (
+    <span className="money">
+      {neg ? "\u2212" : signed ? "+" : ""}${whole}
+      {cents && <span className="cents">.{c === "100" ? "99" : c}</span>}
+    </span>
+  );
+}
+
+const fmtDate = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+
+/**
+ * The headline chart: Robinhood's layout (big value, coloured change, no y axis, a
+ * dotted line at the starting value, range tabs below, scrubbing updates the header)
+ * drawn in Mercury's style (soft gradient fill, dotted background, quiet date labels).
+ */
+export function HeroChart({
+  title,
+  main,
+  compare,
+  amount,
+  range,
+  onRange,
+  height = 300,
+  aside,
+}: {
+  title: ReactNode;
+  main: { name: string; points: Point[] };
+  compare?: { name: string; points: Point[] };
+  amount: number;
+  range: RangeKey;
+  onRange: (r: RangeKey) => void;
+  height?: number;
+  aside?: ReactNode;
+}) {
+  const [ref, width] = useWidth<HTMLDivElement>();
+  const [hover, setHover] = useState<number | null>(null);
+  const [gid] = useState(() => `hc${++gridSeq}`);
+  const [showCmp, setShowCmp] = useState(true);
+  const pts = useMemo(() => thin(rebase(sliceRange(main.points, range), amount), 900), [main.points, range, amount]);
+  const cmp = useMemo(() => (compare && showCmp ? thin(rebase(sliceRange(compare.points, range), amount), 900) : []), [compare, range, amount, showCmp]);
+  const pad = { top: 22, right: 4, bottom: 24, left: 4 };
+  const w = width - pad.left - pad.right;
+  const h = height - pad.top - pad.bottom;
+
+  if (pts.length < 2) return <p className="muted">Not enough data for this range.</p>;
+  const t0 = new Date(pts[0][0]).getTime();
+  const t1 = new Date(pts[pts.length - 1][0]).getTime();
+  const tx = (d: string) => pad.left + ((new Date(d).getTime() - t0) / (t1 - t0 || 1)) * w;
+  const all = [...pts, ...cmp].map((p) => p[1]).concat(amount);
+  const lo = Math.min(...all);
+  const hi = Math.max(...all);
+  const yy = (v: number) => pad.top + h - ((v - lo) / (hi - lo || 1)) * h;
+  const line = (ps: Point[]) => ps.map((p) => `${tx(p[0]).toFixed(1)},${yy(p[1]).toFixed(1)}`).join(" ");
+
+  const last = pts[pts.length - 1];
+  const shown = hover != null ? pts[hover] : last;
+  const change = shown[1] - amount;
+  const up = last[1] >= amount;
+  const tone = up ? "var(--good)" : "var(--bad)";
+  const cmpAt = hover != null && cmp.length ? valueAt(cmp, shown[0]) : cmp.length ? cmp[cmp.length - 1][1] : null;
+
+  const onMove = (e: React.PointerEvent<SVGRectElement>) => {
+    const box = e.currentTarget.getBoundingClientRect();
+    const rel = Math.min(1, Math.max(0, (e.clientX - box.left) / box.width));
+    const target = t0 + rel * (t1 - t0);
+    let lo2 = 0, hi2 = pts.length - 1;
+    while (lo2 < hi2) { const mid = (lo2 + hi2) >> 1; if (new Date(pts[mid][0]).getTime() < target) lo2 = mid + 1; else hi2 = mid; }
+    setHover(lo2);
+  };
+
+  const xLabels = [0.1, 0.3, 0.5, 0.7, 0.9].map((f) => pts[Math.floor(f * (pts.length - 1))][0]);
+  const hx = hover != null ? tx(pts[hover][0]) : null;
+
+  return (
+    <div className="hero" ref={ref}>
+      <div className="hero-head">
+        <div>
+          <div className="hero-title">{title}</div>
+          <div className="hero-value"><Money value={shown[1]} /></div>
+          <div className="hero-change" style={{ color: change >= 0 ? "var(--good)" : "var(--bad)" }}>
+            <Money value={change} signed /> ({change >= 0 ? "+" : "\u2212"}{Math.abs((change / amount) * 100).toFixed(2)}%)
+            <span className="muted"> {hover != null ? fmtDate(shown[0]) : RANGE_LABEL[range]}</span>
+          </div>
+          {compare && showCmp && cmpAt != null && (
+            <div className="hero-compare muted">
+              {compare.name}: <Money value={cmpAt} /> ({cmpAt >= amount ? "+" : "\u2212"}{Math.abs(((cmpAt - amount) / amount) * 100).toFixed(2)}%)
+            </div>
+          )}
+        </div>
+        {aside}
+      </div>
+      <svg width={width} height={height} role="img" aria-label={`Growth of $${amount.toLocaleString()} in ${main.name}`}>
+        <defs>
+          <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={tone} stopOpacity="0.28" />
+            <stop offset="1" stopColor={tone} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
+        <line className="baseline" x1={pad.left} x2={pad.left + w} y1={yy(amount)} y2={yy(amount)} />
+        <polygon fill={`url(#${gid})`} points={`${tx(pts[0][0])},${pad.top + h} ${line(pts)} ${tx(last[0])},${pad.top + h}`} />
+        {cmp.length > 1 && <polyline className="hero-cmp" fill="none" points={line(cmp)} />}
+        <polyline fill="none" stroke={tone} strokeWidth={2} strokeLinejoin="round" points={line(pts)} />
+        {hx != null && (
+          <g>
+            <line className="crosshair" x1={hx} x2={hx} y1={pad.top} y2={pad.top + h} />
+            <text className="tick" x={Math.min(Math.max(hx, 40), width - 40)} y={12} textAnchor="middle">{fmtDate(shown[0])}</text>
+            {cmpAt != null && <circle cx={hx} cy={yy(cmpAt)} r={3.5} fill="var(--benchmark)" className="dot" />}
+            <circle cx={hx} cy={yy(shown[1])} r={5} fill={tone} className="dot" />
+          </g>
+        )}
+        {xLabels.map((d) => (
+          <text key={d} className={`tick ${hover != null ? "faint" : ""}`} x={tx(d)} y={height - 4} textAnchor="middle">
+            {range === "ALL" || range === "10Y" || range === "5Y" ? d.slice(0, 4) : fmtDate(d).replace(/, \d{4}$/, "")}
+          </text>
+        ))}
+        <rect x={pad.left} y={0} width={w} height={height} fill="transparent" onPointerMove={onMove} onPointerLeave={() => setHover(null)} />
+      </svg>
+      <div className="range-tabs" role="tablist" aria-label="Time range">
+        {RANGES.map((r) => (
+          <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => onRange(r)}
+            style={r === range ? { color: tone, borderColor: tone } : undefined}>{r}</button>
+        ))}
+        {compare && (
+          <span className="range-key">
+            <i style={{ background: tone }} />{main.name}
+            <button className={showCmp ? "" : "off"} onClick={() => setShowCmp((v) => !v)} aria-pressed={showCmp} title="Show or hide the comparison line">
+              <i className="cmp" />{compare.name}
+            </button>
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** A small line for lists, coloured by whether it ended above where it started. */
+export function Sparkline({ points, width = 84, height = 28 }: { points: Point[]; width?: number; height?: number }) {
+  const pts = thin(points, 60);
+  if (pts.length < 2) return <svg width={width} height={height} />;
+  const vals = pts.map((p) => p[1]);
+  const lo = Math.min(...vals);
+  const hi = Math.max(...vals);
+  const up = vals[vals.length - 1] >= vals[0];
+  const d = pts.map((p, i) => `${((i / (pts.length - 1)) * (width - 2) + 1).toFixed(1)},${(height - 2 - ((p[1] - lo) / (hi - lo || 1)) * (height - 4)).toFixed(1)}`).join(" ");
+  return (
+    <svg width={width} height={height} aria-hidden className="spark">
+      <polyline fill="none" stroke={up ? "var(--good)" : "var(--bad)"} strokeWidth={1.5} strokeLinejoin="round" points={d} />
+    </svg>
   );
 }

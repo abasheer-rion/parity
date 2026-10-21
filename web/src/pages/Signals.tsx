@@ -1,3 +1,4 @@
+import { Title } from "../components/Shell";
 import { BarChart } from "../components/charts";
 import { Card } from "../components/ui";
 import { colorMap } from "../lib/colors";
@@ -12,7 +13,7 @@ export function Signals({ report }: { report: Report }) {
   return (
     <>
       <div className="page-head">
-        <h1>Signals</h1>
+        <Title>Signals</Title>
         <p>
           Leading indicators: does each signal predict anything before portfolio rules and costs get in the way?
           A signal with real information but a poor backtest usually means the trading rule, not the idea, needs work.

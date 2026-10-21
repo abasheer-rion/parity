@@ -1,3 +1,4 @@
+import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
 import { useDocs } from "../lib/docs";
 import { categories, termById, terms } from "../lib/glossary";
@@ -23,7 +24,7 @@ export function Learn({ focus }: { focus?: string }) {
   return (
     <>
       <div className="page-head">
-        <h1>Learn</h1>
+        <Title>Learn</Title>
         <p>
           Every term used in this project, explained three ways. <strong>Simple</strong> is how you would explain it to a
           ten year old, <strong>Analogy</strong> compares it to everyday life, and <strong>Precise</strong> is what an

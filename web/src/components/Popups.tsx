@@ -10,6 +10,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, mentions, plainWords, sectionHtml, useDocs, type DocsData } from "../lib/docs";
 import { Html } from "./Html";
+import { getPrefs } from "../lib/prefs";
 
 type Kind = "term" | "doc" | "ref" | "find";
 interface Pop { key: string; kind: Kind; arg: string; anchor?: string; rect: DOMRect; level: number; pinned: boolean }
@@ -70,7 +71,7 @@ export function Popups() {
       if (a && !a.closest(".pop-head")) {
         over.current = lvl + 1;
         const what = describe(a);
-        if (what) openTimer.current = window.setTimeout(() => open({ ...what, rect: a.getBoundingClientRect(), level: lvl + 1 }), OPEN_DELAY);
+        if (what) openTimer.current = window.setTimeout(() => open({ ...what, rect: a.getBoundingClientRect(), level: lvl + 1 }), getPrefs().previewDelay ?? OPEN_DELAY);
       }
       scheduleClose();
     };
@@ -100,6 +101,7 @@ export function Popups() {
       if (e.key === "Escape") setStack((s) => s.slice(0, -1));
     };
     const onSelect = (e: MouseEvent) => {
+      if (!getPrefs().findOnSelect) return;
       if (!(e.target instanceof Element) || e.target.closest("input, textarea, select, button, a, .palette")) return;
       const sel = window.getSelection();
       const text = sel?.toString().replace(/\s+/g, " ").trim() ?? "";
