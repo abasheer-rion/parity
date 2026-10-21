@@ -10,9 +10,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 11 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 9 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 11 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 12 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 41 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-21 [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
+- 2026-10-21 [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
 - 2026-10-21 [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - 2026-10-21 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-21 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
-- 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
-- 2026-10-21 [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 
 ## intent
 
@@ -94,6 +94,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0006 | [What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | RES-0007 | [Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | RES-0008 | [Independent audit of our methods and code](research/0008-independent-audit.md) | current | 2026-10-21 | [method](TAGS.md#method), [process](TAGS.md#process) |
+| RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## guide
 
@@ -119,6 +120,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
+| REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## log
 
