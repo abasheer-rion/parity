@@ -25,12 +25,14 @@ Two questions, because their answers often differ:
 - **A. Does it beat the S&P 500?** All six must pass. This is the bar from [DEC-0006](../decisions/0006-how-we-define-beating-the-sp-500.md).
 - **B. Is there anything real here?** A strategy can fail A and still pass B. That means a real effect that is too small to beat stocks alone, which is still useful (for example as part of [HYP-0007](../hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)).
 
+Since [DEC-0009](../decisions/0009-excess-returns-financed-leverage-frozen-code.md), every Sharpe ratio in these tests is measured on returns above the T-bill.
+
 ## A. Does it beat the S&P 500?
 
 | Test | Asks, in plain words | Pass bar | Why it is there |
 | --- | --- | --- | --- |
 | A1 Better return for the risk | Does it earn more per unit of bumpiness than just holding the S&P 500? | Sharpe ratio above SPY's over the same dates | The basic comparison. |
-| A2 More money at the same risk | If we turn it up until it is as bumpy as stocks, does it make more money? | CAGR above SPY's when scaled to 15% volatility | A calm strategy can look good on Sharpe and still be useless if scaling it up breaks it. |
+| A2 More money at the same risk | If we turn it up until it is exactly as bumpy as stocks, and pay for any borrowing, does it make more money? | CAGR above the market's, at the market's own volatility over the same dates ([DEC-0009](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)) | A calm strategy can look good on Sharpe and still be useless if scaling it up breaks it. |
 | A3 Not just the best of many tries | We tried several ideas. Is this one good even after allowing for luck? | Deflated Sharpe ratio of 0.95 or more | Stops us picking the luckiest of many. |
 | A4 Survives double trading costs | If trading costs twice what we guessed, does it still win? | Sharpe above SPY's at 2x costs | Our cost guess could be wrong. |
 | A5 Wins in every era | Does it beat the S&P 500 in 2000 to 2008, 2009 to 2019 and 2020 on, separately? | Sharpe above SPY's in every era | A strategy that only worked in one decade may not work in the next. |
@@ -69,6 +71,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 ## Referenced by
 
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
+- [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
@@ -77,4 +80,5 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

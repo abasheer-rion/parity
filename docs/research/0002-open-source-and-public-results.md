@@ -224,4 +224,5 @@ What we would skip for now:
 - [RES-0003: What practitioners say in forums](0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](0005-zen-apps-and-free-apis.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

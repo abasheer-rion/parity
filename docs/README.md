@@ -7,13 +7,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 8 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 9 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 7 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 8 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 3 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
+- 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
+- 2026-10-21 [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - 2026-10-20 [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - 2026-10-20 [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - 2026-10-20 [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - 2026-10-20 [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
-- 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
-- 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
-- 2026-10-20 [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 
 ## intent
 
@@ -56,6 +56,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0006 | [What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | DEC-0007 | [Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md) | accepted | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | DEC-0008 | [Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
+| DEC-0009 | [Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md) | accepted | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## hypothesis
 
@@ -90,6 +91,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0005 | [Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md) | current | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
 | RES-0006 | [What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | RES-0007 | [Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| RES-0008 | [Independent audit of our methods and code](research/0008-independent-audit.md) | current | 2026-10-21 | [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## guide
 
@@ -120,6 +122,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0001 | [Project start](log/2026-10-20-project-start.md) | final | 2026-10-20 | [infra](TAGS.md#infra), [intent](TAGS.md#intent), [process](TAGS.md#process) |
 | LOG-0002 | [Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md) | final | 2026-10-20 | [method](TAGS.md#method), [open-source](TAGS.md#open-source), [process](TAGS.md#process) |
 | LOG-0003 | [Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md) | final | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data), [method](TAGS.md#method) |
+| LOG-0004 | [Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md) | final | 2026-10-21 | [intent](TAGS.md#intent), [process](TAGS.md#process) |
 
 ## algorithm
 

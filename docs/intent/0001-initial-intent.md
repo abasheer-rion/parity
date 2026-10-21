@@ -57,4 +57,5 @@ The first baseline run is in [EXP-0001](../experiments/0001-baseline-backtests.m
 - [DEC-0006: What "beating the S&P 500" means for us](../decisions/0006-how-we-define-beating-the-sp-500.md)
 - [GDE-0004: The research routine](../guides/0004-the-research-routine.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

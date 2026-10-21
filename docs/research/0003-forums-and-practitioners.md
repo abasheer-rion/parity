@@ -243,4 +243,5 @@ Collected from the threads above, roughly in order of how often they come up:
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](0006-courses-and-trader-beliefs.md)
 - [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

@@ -66,4 +66,5 @@ If any answer is "not sure", it is not ready to register.
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](../research/0006-courses-and-trader-beliefs.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [LOG-0002: Catalog, ledger and lab](../log/2026-10-20-catalog-ledger-and-lab.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

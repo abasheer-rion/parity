@@ -10,6 +10,7 @@ The S&P 500 bar and how we compare against it.
 - [INT-0001: Initial intent](intent/0001-initial-intent.md)
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md)
+- [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
@@ -253,6 +254,7 @@ Why the project exists and what success means.
 
 - [INT-0001: Initial intent](intent/0001-initial-intent.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 
 ## kpis
 
@@ -270,6 +272,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
+- [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
@@ -279,6 +282,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
+- [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -399,7 +403,9 @@ How the team works together.
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](decisions/0001-keep-a-decision-record.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md)
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
+- [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
+- [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
@@ -407,6 +413,7 @@ How the team works together.
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
+- [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 
 ## strategy
 

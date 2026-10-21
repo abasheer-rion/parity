@@ -1399,6 +1399,7 @@ Related: [p-value](#p-value), [Data snooping (multiple testing)](#data-snooping-
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [REF-0006: The gauntlet](0006-the-gauntlet.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](../algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](../algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](../algorithms/0003-fx-carver-trend-carry.md)

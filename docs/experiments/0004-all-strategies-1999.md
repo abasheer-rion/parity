@@ -16,6 +16,8 @@ related: [DEC-0008, RES-0007, REF-0006]
 
 We tested every strategy we have built, sixteen in total, on the same 27 years of data, against simply holding the whole US stock market. None of them beat it once we allowed for how many ideas we have tried. The ones that came closest are rules that hold stocks and step aside when stocks are falling. Of the currency strategies, the most useful finding is that currency trend made money in most stock market crashes.
 
+**Read with care:** this run was scored before two bugs were fixed (Sharpe ignored the risk-free rate, and borrowing was free). See [DEC-0009](../decisions/0009-excess-returns-financed-leverage-frozen-code.md). An official rerun will replace these numbers.
+
 ## Question
 
 With the Yahoo-free benchmark ([DEC-0008](../decisions/0008-benchmark-data-without-yahoo.md)) and history from 1999-01-04, does any strategy at default settings pass all six "beat the market" tests? Registered as [REG-0003](../../registrations/REG-0003-all-strategies-1999.json).
@@ -99,4 +101,5 @@ Crisis behaviour and the correlations between strategies are on the dashboard's 
 
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

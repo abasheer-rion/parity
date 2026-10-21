@@ -356,4 +356,5 @@ Optional later: a free BLS v2 key, a free FMP key (to test the calendar), and Al
 
 - [GDE-0004: The research routine](../guides/0004-the-research-routine.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

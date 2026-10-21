@@ -72,4 +72,5 @@ Two tables hold results: `research_batches` (one row per run of the report) and 
 - [GDE-0001: Getting started](../guides/0001-getting-started.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0008: Where results live and how they are tagged](0008-where-results-live.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

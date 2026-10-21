@@ -233,4 +233,5 @@ Kroencke, Schindler and Schrimpf (2014) and Barroso and Santa-Clara (2015) find 
 - [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

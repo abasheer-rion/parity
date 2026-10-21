@@ -48,4 +48,5 @@ Decisions are not rewritten once accepted. If we change our minds we write a new
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](0004-docs-are-checked-by-a-script.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

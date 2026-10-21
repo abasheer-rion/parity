@@ -165,4 +165,5 @@ What could make these results wrong, roughly from most to least worrying.
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

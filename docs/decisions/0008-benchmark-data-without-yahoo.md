@@ -42,4 +42,5 @@ Our benchmark was SPY from Yahoo's chart endpoint. Yahoo's terms forbid automate
 - [REF-0002: KPIs and how to read them](../reference/0002-kpis.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
+- [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->
