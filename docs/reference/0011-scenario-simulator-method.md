@@ -90,5 +90,5 @@ Add a file to `catalog/events/` with the same keys as the others, using only the
 
 ## Referenced by
 
-Nothing links here yet.
+- [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

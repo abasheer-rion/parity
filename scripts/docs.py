@@ -321,7 +321,7 @@ def check_append_only(base: str, r: Report):
             current = None
         elif current and line.startswith("-") and not line.startswith("---"):
             if BL_START in line or BL_END in line or line.startswith("-- [") \
-                    or line.startswith("-updated:"):
+                    or line.startswith("-updated:") or line.strip() == "-Nothing links here yet.":
                 continue  # generated backlinks and the updated date may change
             r.err(current, "log entries are append-only; add a new entry instead of editing")
             current = None
