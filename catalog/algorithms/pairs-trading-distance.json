@@ -1,0 +1,95 @@
+{
+  "id": "ALG-0045",
+  "slug": "pairs-trading-distance",
+  "name": "Pairs trading (distance method)",
+  "family": "statistical-arbitrage",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "mean-reversion",
+    "relative-value",
+    "market-neutral",
+    "long-short"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1999,
+    "authors": "Gatev, Goetzmann, Rouwenhorst",
+    "source_title": "Pairs Trading: Performance of a Relative-Value Arbitrage Rule (NBER WP 7032, 1999; Review of Financial Studies 2006)",
+    "source_url": "https://doi.org/10.1093/rfs/hhj020"
+  },
+  "how_it_works": {
+    "simple": "Find two stocks whose prices usually move together. When they drift apart, buy the cheap one and sell the expensive one, and wait for them to come back together.",
+    "analogy": "Like two dogs on one leash: when they pull apart you bet they will soon walk side by side again.",
+    "precise": "In a 12-month formation period, each stock is matched with the partner that minimizes the sum of squared differences in normalized price paths. In the next 6 months, a position opens when the spread exceeds two historical standard deviations and closes when prices cross. Gatev, Goetzmann and Rouwenhorst link profits to a common latent factor rather than to simple reversal."
+  },
+  "rule": "Formation: 12 months of normalized total return indices; pick the 20 pairs with the smallest sum of squared spread. Trading: next 6 months; open long the loser and short the winner when the spread exceeds 2 formation-period standard deviations; close when the normalized prices cross or at period end.",
+  "data_needed": [
+    "Daily total returns for a stock universe",
+    "Liquidity filters (exclude days with no trades)"
+  ],
+  "economic_rationale": "Temporary mispricing of close substitutes, linked to a common factor, is corrected over weeks (Gatev, Goetzmann and Rouwenhorst 2006).",
+  "why_it_might_fail": "Profits have trended down as the method spread (Do and Faff 2010), and waiting one day after the signal cut excess returns by about 200 basis points in the original working paper, showing sensitivity to execution and bid-ask bounce.",
+  "reported_results": [
+    {
+      "source": "Gatev, Goetzmann and Rouwenhorst (2006), RFS abstract",
+      "source_url": "https://doi.org/10.1093/rfs/hhj020",
+      "period": "1962-2002",
+      "market": "US stocks",
+      "sharpe": null,
+      "annual_return": 0.11,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Abstract: average annualized excess returns of up to 11% for self-financing portfolios of pairs; profits typically exceed conservative transaction-cost estimates. Abstract text read via the OpenAlex record for this DOI."
+    },
+    {
+      "source": "Gatev, Goetzmann and Rouwenhorst (1999), NBER WP 7032",
+      "source_url": "https://www.nber.org/system/files/working_papers/w7032/w7032.pdf",
+      "period": "1962-1997",
+      "market": "US stocks, top pairs portfolios",
+      "sharpe": null,
+      "annual_return": 0.12,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "About 12% average annualized excess return for top-pairs portfolios; annualized standard deviations of 4% to 6%; a one-day delay in trading lowered excess returns by about 200 basis points."
+    }
+  ],
+  "post_publication_evidence": "Do and Faff (2010, https://doi.org/10.2469/faj.v66.n4.1) confirm a continuing downward trend in pairs trading profits, though the strategy did well in long turbulent periods including the 2008 crisis. McLean and Pontiff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365).",
+  "implementations": [
+    {
+      "url": "https://github.com/hudson-and-thames/arbitragelab",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "notes": "Includes a distance_approach module (basic and Pearson distance methods)."
+    },
+    {
+      "url": "https://github.com/wywongbd/pairstrade-fyp-2019",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Student project testing distance, cointegration and reinforcement learning pairs methods."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Mostly an equity method, but the same spread logic can be tried on related currency pairs such as AUD and NZD."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

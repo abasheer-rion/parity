@@ -31,6 +31,7 @@ Interest rate differentials and carry trades.
 - [ALG-0006: Dollar carry trade](algorithms/0006-fx-dollar-carry.md)
 - [ALG-0022: Crypto cash-and-carry basis trade (dated futures)](algorithms/0022-crypto-cash-and-carry-basis.md)
 - [ALG-0026: Crypto perpetual futures funding-rate carry](algorithms/0026-crypto-perp-funding-carry.md)
+- [ALG-0038: Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md)
 
 ## commodities
 
@@ -47,6 +48,13 @@ Oil, gas, metals and their link to currencies.
 - [ALG-0004: Commodity prices and terms of trade as a currency signal](algorithms/0004-fx-commodity-terms-of-trade.md)
 - [ALG-0012: Oil price to Canadian dollar daily link (Ferraro, Rogoff, Rossi)](algorithms/0012-fx-oil-cad-daily.md)
 - [ALG-0020: Commodity gap (our own idea)](algorithms/0020-parity-commodity-gap.md)
+- [ALG-0038: Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md)
+- [ALG-0039: Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md)
+- [ALG-0041: EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md)
+- [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
+- [ALG-0044: EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md)
+- [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
+- [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
 - [DAT-0011: EIA Open Data API v2](datasets/0011-eia.md)
 - [DAT-0024: Nasdaq Data Link (formerly Quandl)](datasets/0024-nasdaq-data-link.md)
 - [DAT-0035: World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md)
@@ -183,6 +191,10 @@ Foreign exchange in general.
 - [ALG-0020: Commodity gap (our own idea)](algorithms/0020-parity-commodity-gap.md)
 - [ALG-0025: Grid trading bot](algorithms/0025-crypto-grid-trading-bot.md)
 - [ALG-0030: FinBERT + GDELT news sentiment with XGBoost for FX and bonds](algorithms/0030-finbert-gdelt-fx-sentiment.md)
+- [ALG-0041: EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md)
+- [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
+- [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
+- [ALG-0054: Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)
 - [DAT-0009: Dukascopy historical data](datasets/0009-dukascopy.md)
 - [DAT-0014: Frankfurter](datasets/0014-frankfurter.md)
@@ -252,6 +264,10 @@ Trend and momentum signals.
 - [ALG-0015: FX time-series momentum (trend)](algorithms/0015-fx-time-series-momentum.md)
 - [ALG-0023: Crypto cross-sectional size and momentum factors (C-3 model)](algorithms/0023-crypto-cross-sectional-factors.md)
 - [ALG-0027: Crypto time-series momentum (Liu and Tsyvinski)](algorithms/0027-crypto-time-series-momentum.md)
+- [ALG-0039: Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md)
+- [ALG-0040: Dual momentum (Antonacci global equities momentum)](algorithms/0040-dual-momentum.md)
+- [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
+- [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
 
 ## news
 
@@ -267,6 +283,8 @@ News, macro releases and event-driven signals.
 - [ALG-0024: Crypto investor attention from Google search volume](algorithms/0024-crypto-google-search-attention.md)
 - [ALG-0030: FinBERT + GDELT news sentiment with XGBoost for FX and bonds](algorithms/0030-finbert-gdelt-fx-sentiment.md)
 - [ALG-0032: LLM (ChatGPT) news headline sentiment](algorithms/0032-llm-headline-sentiment.md)
+- [ALG-0041: EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md)
+- [ALG-0044: EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md)
 - [DAT-0012: Finnhub](datasets/0012-finnhub.md)
 - [DAT-0013: Forex Factory weekly calendar export](datasets/0013-forex-factory-calendar.md)
 - [DAT-0016: GDELT Project](datasets/0016-gdelt.md)
@@ -311,6 +329,18 @@ Other people's code, bots and published results.
 - [ALG-0034: Regularized ML return forecasts (elastic net, trees, neural nets; Gu Kelly Xiu)](algorithms/0034-ml-return-prediction-elastic-net.md)
 - [ALG-0035: Crowdsourced ML ensemble (Numerai meta model)](algorithms/0035-numerai-crowdsourced-ensemble.md)
 - [ALG-0036: Technical indicator bots (freqtrade, Zenbot sample strategies)](algorithms/0036-technical-indicator-trading-bots.md)
+- [ALG-0038: Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md)
+- [ALG-0039: Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md)
+- [ALG-0040: Dual momentum (Antonacci global equities momentum)](algorithms/0040-dual-momentum.md)
+- [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
+- [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
+- [ALG-0045: Pairs trading (distance method)](algorithms/0045-pairs-trading-distance.md)
+- [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
+- [ALG-0048: 60/40 stock and bond portfolio](algorithms/0048-sixty-forty-portfolio.md)
+- [ALG-0049: S&P 500 buy and hold](algorithms/0049-sp500-buy-and-hold.md)
+- [ALG-0050: Statistical arbitrage on PCA or ETF residuals (Avellaneda-Lee)](algorithms/0050-stat-arb-pca-residuals.md)
+- [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
+- [ALG-0053: Value factor (Fama-French HML)](algorithms/0053-value-hml.md)
 
 ## process
 
@@ -374,6 +404,24 @@ A specific trading idea or its implementation.
 - [ALG-0034: Regularized ML return forecasts (elastic net, trees, neural nets; Gu Kelly Xiu)](algorithms/0034-ml-return-prediction-elastic-net.md)
 - [ALG-0035: Crowdsourced ML ensemble (Numerai meta model)](algorithms/0035-numerai-crowdsourced-ensemble.md)
 - [ALG-0036: Technical indicator bots (freqtrade, Zenbot sample strategies)](algorithms/0036-technical-indicator-trading-bots.md)
+- [ALG-0037: Betting against beta (low beta / low volatility)](algorithms/0037-betting-against-beta.md)
+- [ALG-0038: Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md)
+- [ALG-0039: Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md)
+- [ALG-0040: Dual momentum (Antonacci global equities momentum)](algorithms/0040-dual-momentum.md)
+- [ALG-0041: EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md)
+- [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
+- [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
+- [ALG-0044: EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md)
+- [ALG-0045: Pairs trading (distance method)](algorithms/0045-pairs-trading-distance.md)
+- [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
+- [ALG-0047: Sell in May (Halloween indicator)](algorithms/0047-sell-in-may-halloween.md)
+- [ALG-0048: 60/40 stock and bond portfolio](algorithms/0048-sixty-forty-portfolio.md)
+- [ALG-0049: S&P 500 buy and hold](algorithms/0049-sp500-buy-and-hold.md)
+- [ALG-0050: Statistical arbitrage on PCA or ETF residuals (Avellaneda-Lee)](algorithms/0050-stat-arb-pca-residuals.md)
+- [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
+- [ALG-0052: Turn-of-the-month effect](algorithms/0052-turn-of-the-month.md)
+- [ALG-0053: Value factor (Fama-French HML)](algorithms/0053-value-hml.md)
+- [ALG-0054: Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md)
 
 ## ui
 

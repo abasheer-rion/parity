@@ -557,7 +557,8 @@ def algorithm_page(e: dict) -> str:
         out += ["", rs["notes"]]
     for run in rs.get("runs", []):
         out += ["", f"### {run}", "", f"<!-- results:{run} -->", "<!-- /results -->"]
-    return render_front_matter(meta) + "\n" + "\n".join(out).rstrip("\n") + "\n"
+    text = "\n".join(line.rstrip() for line in "\n".join(out).splitlines())
+    return render_front_matter(meta) + "\n" + text.rstrip("\n") + "\n"
 
 
 def dataset_page(e: dict) -> str:
@@ -665,9 +666,11 @@ def check_catalog(r: Report):
             rs = e.get("research", {})
             stage = int(rs.get("stage", 1))
             own = "our-idea" in e.get("tags", [])
+            benchmark = "benchmark" in e.get("tags", [])
             gates = [
                 (2, bool(e.get("reported_results")) or own, "needs at least one reported result"),
-                (3, rs.get("hypothesis") in hyp_ids, "needs a hypothesis id that exists"),
+                (3, benchmark or rs.get("hypothesis") in hyp_ids,
+                 "needs a hypothesis id that exists"),
                 (4, bool(rs.get("strategy")) and f'name = "{rs.get("strategy")}"' in strategy_src,
                  "needs a strategy that exists in the engine"),
                 (5, bool(rs.get("registrations")) and all(

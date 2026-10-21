@@ -1,0 +1,112 @@
+{
+  "id": "ALG-0037",
+  "slug": "betting-against-beta",
+  "name": "Betting against beta (low beta / low volatility)",
+  "family": "volatility",
+  "markets": [
+    "equities",
+    "multi-asset"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "low-risk",
+    "leverage",
+    "long-short",
+    "factor"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2014,
+    "authors": "Frazzini, Pedersen",
+    "source_title": "Betting Against Beta (Journal of Financial Economics)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2013.10.005"
+  },
+  "how_it_works": {
+    "simple": "Calm stocks have done about as well as wild stocks, so buy extra of the calm ones and sell some of the wild ones.",
+    "analogy": "Like noticing that the slow, steady horse finishes nearly as fast as the jumpy one, and backing the steady horse more heavily.",
+    "precise": "BAB goes long low-beta assets levered to a beta of one and short high-beta assets de-levered to a beta of one, so it is market neutral. Frazzini and Pedersen's model says investors who cannot borrow buy high-beta assets instead, flattening the security market line; the effect appears in US and international stocks, Treasuries, credit and futures."
+  },
+  "rule": "Each month, estimate betas; rank stocks; build a low-beta portfolio and a high-beta portfolio weighted by beta rank; scale each to beta one at formation; BAB = low-beta portfolio minus high-beta portfolio (both in excess of the risk-free rate); rebalance monthly.",
+  "data_needed": [
+    "Daily stock returns to estimate betas",
+    "Market index returns",
+    "Or the free AQR BAB factor dataset"
+  ],
+  "economic_rationale": "Leverage and margin constraints push constrained investors into high-beta assets, so low-beta assets earn higher risk-adjusted returns (Frazzini and Pedersen 2014).",
+  "why_it_might_fail": "It needs leverage and shorting, and much of the paper return comes from small, costly-to-trade stocks; when funding tightens BAB returns are low, as the paper itself predicts.",
+  "reported_results": [
+    {
+      "source": "Frazzini and Pedersen, Betting Against Beta (May 2013 draft), Table III",
+      "source_url": "https://pages.stern.nyu.edu/~lpederse/papers/BettingAgainstBeta.pdf",
+      "period": "1926-01 to 2012-03",
+      "market": "US stocks (CRSP)",
+      "sharpe": 0.78,
+      "annual_return": 0.084,
+      "volatility": 0.107,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Table III shows 0.70% per month excess return (annual_return is 0.70 x 12) and 10.7% annualized volatility; Fama-French 3-factor alpha 0.73% per month (t = 7.39). Gross of costs."
+    },
+    {
+      "source": "Our calculation from AQR Betting Against Beta equity factors dataset (USA)",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Betting-Against-Beta-Equity-Factors-Monthly.xlsx",
+      "period": "1930-12 to 2026-08",
+      "market": "US stocks",
+      "sharpe": 0.7,
+      "annual_return": 0.078,
+      "volatility": 0.1114,
+      "max_drawdown": -0.546,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. "
+    },
+    {
+      "source": "Our calculation from AQR Betting Against Beta equity factors dataset (USA)",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Betting-Against-Beta-Equity-Factors-Monthly.xlsx",
+      "period": "2012-04 to 2026-08",
+      "market": "US stocks",
+      "sharpe": 0.71,
+      "annual_return": 0.0604,
+      "volatility": 0.0855,
+      "max_drawdown": -0.153,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. After the paper's sample end."
+    },
+    {
+      "source": "Our calculation from AQR Betting Against Beta equity factors dataset (Global)",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Betting-Against-Beta-Equity-Factors-Monthly.xlsx",
+      "period": "1987-02 to 2026-08",
+      "market": "Global developed stocks",
+      "sharpe": 0.86,
+      "annual_return": 0.0837,
+      "volatility": 0.0978,
+      "max_drawdown": -0.314,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. "
+    }
+  ],
+  "post_publication_evidence": "In AQR's own updated series the US BAB factor kept a Sharpe ratio of about 0.71 from April 2012 to August 2026 (catalog computation), close to its in-sample level, though these are gross returns of a levered long-short portfolio. McLean and Pontiff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365).",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "An equity and multi-asset low-risk factor; the same idea (low-beta currencies earn more per unit of risk) could be tested in FX."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

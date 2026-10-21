@@ -8,7 +8,7 @@ Nothing yet.
 
 ## 0.3.0 (2026-10-20)
 
-- Algorithm catalog (36 entries) and data source catalog (36 entries), each with a generated report page and stage tracking enforced by the docs check.
+- Algorithm catalog (54 entries) and data source catalog (36 entries), each with a generated report page and stage tracking enforced by the docs check.
 - Tamper-evident ledger, pre-registration and the official-run workflow ([DEC-0007](docs/decisions/0007-official-results-come-only-from-the-ledger.md)). First official runs: RUN-000001 and RUN-000002.
 - Results tables in docs are generated from the ledger and cannot be edited by hand.
 - Data fingerprints on every fetch.

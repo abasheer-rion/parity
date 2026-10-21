@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 2 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 36 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 54 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
 ## Open questions right now
@@ -155,6 +155,24 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0034 | [Regularized ML return forecasts (elastic net, trees, neural nets; Gu Kelly Xiu)](algorithms/0034-ml-return-prediction-elastic-net.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0035 | [Crowdsourced ML ensemble (Numerai meta model)](algorithms/0035-numerai-crowdsourced-ensemble.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0036 | [Technical indicator bots (freqtrade, Zenbot sample strategies)](algorithms/0036-technical-indicator-trading-bots.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0037 | [Betting against beta (low beta / low volatility)](algorithms/0037-betting-against-beta.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
+| ALG-0038 | [Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0039 | [Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0040 | [Dual momentum (Antonacci global equities momentum)](algorithms/0040-dual-momentum.md) | sourced | 2026-10-20 | [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0041 | [EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0042 | [Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md) | sourced | 2026-10-20 | [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0043 | [Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0044 | [EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0045 | [Pairs trading (distance method)](algorithms/0045-pairs-trading-distance.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0046 | [Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0047 | [Sell in May (Halloween indicator)](algorithms/0047-sell-in-may-halloween.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
+| ALG-0048 | [60/40 stock and bond portfolio](algorithms/0048-sixty-forty-portfolio.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0049 | [S&P 500 buy and hold](algorithms/0049-sp500-buy-and-hold.md) | official | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0050 | [Statistical arbitrage on PCA or ETF residuals (Avellaneda-Lee)](algorithms/0050-stat-arb-pca-residuals.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0051 | [Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0052 | [Turn-of-the-month effect](algorithms/0052-turn-of-the-month.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
+| ALG-0053 | [Value factor (Fama-French HML)](algorithms/0053-value-hml.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0054 | [Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

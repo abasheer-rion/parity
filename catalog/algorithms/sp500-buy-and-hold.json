@@ -1,0 +1,127 @@
+{
+  "id": "ALG-0049",
+  "slug": "sp500-buy-and-hold",
+  "name": "S&P 500 buy and hold",
+  "family": "portfolio-construction",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "benchmark",
+    "passive",
+    "equity-premium",
+    "beta"
+  ],
+  "origin": {
+    "type": "commercial",
+    "first_published": 1957,
+    "authors": "Standard and Poor's",
+    "source_title": "S&P 500 index (historical annual returns compiled by Aswath Damodaran)",
+    "source_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html"
+  },
+  "how_it_works": {
+    "simple": "Buy a little piece of the 500 biggest US companies and keep it. You get their dividends and their growth.",
+    "analogy": "Like planting an orchard of 500 trees and never picking which ones; some die, but the orchard as a whole grows.",
+    "precise": "A capitalization-weighted long-only position in the S&P 500 total return index, rebalanced only by the index provider. Its excess return over T-bills is the US equity risk premium. This is the benchmark parity must beat after costs and on a risk-adjusted basis."
+  },
+  "rule": "Hold 100% in an S&P 500 total return index fund (or SPY with dividends reinvested) at all times; never trade except to reinvest dividends.",
+  "data_needed": [
+    "S&P 500 total return index, daily or monthly",
+    "3-month T-bill rate for excess returns"
+  ],
+  "economic_rationale": "Investors demand a premium for holding risky equities rather than safe bills; Damodaran's annual data show S&P 500 returns well above T-bills since 1928.",
+  "why_it_might_fail": "Long stretches of poor returns are possible: per the Damodaran data the worst calendar year since 1928 was -43.8%, and from 2000 to 2025 the index compounded about 8.0% a year versus about 10.0% over the full 1928 to 2025 span.",
+  "reported_results": [
+    {
+      "source": "Our calculation from Damodaran historical returns (S&P 500 incl. dividends)",
+      "source_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+      "period": "1928-2025",
+      "market": "S&P 500",
+      "sharpe": 0.43,
+      "annual_return": 0.1002,
+      "volatility": 0.194,
+      "max_drawdown": -0.648,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog from the annual return table on the page. annual_return is the geometric mean; volatility is the standard deviation of annual returns; Sharpe uses annual excess over 3-month T-bills; drawdown measured on annual data, so it understates the intra-year drawdown."
+    },
+    {
+      "source": "Damodaran historical returns (S&P 500 incl. dividends)",
+      "source_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+      "period": "2025",
+      "market": "S&P 500",
+      "sharpe": null,
+      "annual_return": 0.1778,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Single calendar year return printed on the page (page updated January 5, 2026)."
+    },
+    {
+      "source": "Our calculation from Kenneth French data library, US market (Mkt-RF + RF)",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "1926-07 to 2026-08",
+      "market": "CRSP value-weighted US stocks",
+      "sharpe": 0.45,
+      "annual_return": 0.1038,
+      "volatility": 0.1833,
+      "max_drawdown": -0.837,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. annual_return here is the compound annual total return. CRSP total market, a close proxy for the S&P 500, not the S&P 500 itself."
+    },
+    {
+      "source": "Our calculation from Kenneth French data library, US market (Mkt-RF + RF)",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "1993-01 to 2026-08",
+      "market": "CRSP value-weighted US stocks",
+      "sharpe": 0.6,
+      "annual_return": 0.1099,
+      "volatility": 0.1522,
+      "max_drawdown": -0.503,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. annual_return is the compound annual total return. Window roughly matches the life of SPY (launched 1993)."
+    }
+  ],
+  "post_publication_evidence": "Not a published anomaly. The premium has persisted: in the Damodaran data the S&P 500 compounded about 8.0% a year over 2000 to 2025, lower than the 10.0% long-run figure but still well above T-bills (about 1.9% a year over the same span).",
+  "implementations": [
+    {
+      "url": "https://github.com/pmorissette/ffn",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Performance statistics (CAGR, drawdown, Sharpe) for a price series."
+    },
+    {
+      "url": "https://github.com/pmorissette/bt",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Backtesting framework; a buy and hold benchmark is a one-line strategy."
+    }
+  ],
+  "relevance": {
+    "score": 5,
+    "reason": "This is the benchmark parity is trying to beat, so its return, volatility and drawdown set the bar."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 6,
+    "hypothesis": null,
+    "strategy": "spy_buy_hold",
+    "registrations": [
+      "REG-0001"
+    ],
+    "runs": [
+      "RUN-000001"
+    ],
+    "verdict": null,
+    "notes": "This is our benchmark, run in every batch. It tests no hypothesis; every strategy is compared against it."
+  }
+}

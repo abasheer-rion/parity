@@ -1,0 +1,120 @@
+{
+  "id": "ALG-0046",
+  "slug": "risk-parity",
+  "name": "Risk parity (inverse volatility asset allocation)",
+  "family": "portfolio-construction",
+  "markets": [
+    "multi-asset",
+    "equities",
+    "rates",
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "inverse-volatility",
+    "diversification",
+    "volatility-targeting",
+    "leverage"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2012,
+    "authors": "Asness, Frazzini, Pedersen",
+    "source_title": "Leverage Aversion and Risk Parity (Financial Analysts Journal)",
+    "source_url": "https://doi.org/10.2469/faj.v68.n1.1"
+  },
+  "how_it_works": {
+    "simple": "Give each type of investment the same amount of wobble instead of the same amount of money. Calm things get more money, jumpy things get less.",
+    "analogy": "Like loading a canoe so every paddler carries the same effort, rather than giving each the same size bag.",
+    "precise": "Weights are set proportional to the inverse of each asset class's estimated volatility, so each contributes similar risk; the whole portfolio is then scaled (often with borrowing) to a target volatility. Asness, Frazzini and Pedersen argue that leverage-averse investors overprice risky assets, so safer assets like bonds carry higher risk-adjusted returns that a levered risk parity portfolio can collect."
+  },
+  "rule": "At each month end, set the weight of each asset class to k divided by its volatility, estimated from the past 36 monthly excess returns; choose k so the portfolio hits a volatility target (for example the volatility of a 60/40 or market portfolio); rebalance monthly.",
+  "data_needed": [
+    "Monthly total returns for equities, government bonds, credit, commodities",
+    "T-bill or futures financing rate"
+  ],
+  "economic_rationale": "Leverage aversion makes low-risk assets offer higher Sharpe ratios; risk parity overweights them and applies leverage (Asness, Frazzini and Pedersen 2012; Frazzini and Pedersen 2014).",
+  "why_it_might_fail": "It depends on bonds staying a good diversifier and on cheap borrowing; in 2022 stocks and bonds fell together (S&P 500 -18.0%, 10-year Treasury -17.8% per Damodaran), the setting where a bond-heavy levered portfolio is hurt most.",
+  "reported_results": [
+    {
+      "source": "Asness, Frazzini and Pedersen (2012), Table 2, RP (levered)",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/Leverage-Aversion-and-Risk-Parity.pdf",
+      "period": "1926-2010",
+      "market": "US stocks and bonds (CRSP)",
+      "sharpe": 0.53,
+      "annual_return": 0.0799,
+      "volatility": 0.1508,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Annual excess return over T-bills. Leverage chosen to match the ex post volatility of the value-weighted benchmark, which uses hindsight for scaling only. Trading costs not explicitly deducted; financing discussed in the paper's Appendix B."
+    },
+    {
+      "source": "Asness, Frazzini and Pedersen (2012), Table 2, RP unlevered",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/Leverage-Aversion-and-Risk-Parity.pdf",
+      "period": "1926-2010",
+      "market": "US stocks and bonds (CRSP)",
+      "sharpe": 0.52,
+      "annual_return": 0.022,
+      "volatility": 0.0425,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Weights rescaled to sum to one each month; annual excess return over T-bills."
+    },
+    {
+      "source": "Asness, Frazzini and Pedersen (2012), Table 2, 60/40 benchmark",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/Leverage-Aversion-and-Risk-Parity.pdf",
+      "period": "1926-2010",
+      "market": "US stocks and bonds (CRSP)",
+      "sharpe": 0.4,
+      "annual_return": 0.0465,
+      "volatility": 0.1168,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Comparison row from the same table; RP minus 60/40 had a 3.34% excess return (t = 2.93)."
+    },
+    {
+      "source": "Asness, Frazzini and Pedersen (2012), Table 2, RP broad sample",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/Leverage-Aversion-and-Risk-Parity.pdf",
+      "period": "1973-2010",
+      "market": "Global stocks, US bonds, credit, commodities",
+      "sharpe": 0.61,
+      "annual_return": 0.0615,
+      "volatility": 0.101,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Annual excess return over T-bills; value-weighted benchmark in the same sample had a Sharpe ratio of 0.43."
+    }
+  ],
+  "post_publication_evidence": "The 2012 paper's sample ends in 2010, during a long bond rally. The catalog did not find a verifiable post-2012 risk parity index series to quote; the 2022 joint stock and bond loss (Damodaran data) is the main known stress for the approach.",
+  "implementations": [
+    {
+      "url": "https://github.com/dcajasn/Riskfolio-Lib",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "notes": "Portfolio optimization library with risk parity and risk budgeting models."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "The same inverse-volatility weighting can size FX positions, and it is a common multi-asset benchmark."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

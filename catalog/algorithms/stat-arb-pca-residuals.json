@@ -1,0 +1,124 @@
+{
+  "id": "ALG-0050",
+  "slug": "stat-arb-pca-residuals",
+  "name": "Statistical arbitrage on PCA or ETF residuals (Avellaneda-Lee)",
+  "family": "statistical-arbitrage",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "mean-reversion",
+    "pca",
+    "market-neutral",
+    "ornstein-uhlenbeck"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2008,
+    "authors": "Avellaneda, Lee",
+    "source_title": "Statistical Arbitrage in the U.S. Equities Market (Quantitative Finance 2010; draft 2008)",
+    "source_url": "https://doi.org/10.1080/14697680903124632"
+  },
+  "how_it_works": {
+    "simple": "Work out how much of each stock's move is just the whole market or its industry moving. Bet that the leftover, stock-only part shrinks back to normal.",
+    "analogy": "Like a teacher who knows how a class usually scores; when one student is far off the class pattern, she expects them to drift back.",
+    "precise": "Each stock's daily returns are regressed on principal-component factors or a sector ETF over a 60-day window; the cumulative residual is modeled as an Ornstein-Uhlenbeck process and standardized into an s-score. The strategy trades the residual contrarian, hedging the factor exposure, across hundreds of stocks."
+  },
+  "rule": "Daily: regress each stock on 15 PCA factors (or its sector ETF) over the past 60 days; fit an OU process to the residual; s = standardized deviation. Open long if s < -1.25, open short if s > 1.25; close long when s > -0.50, close short when s < 0.75; hedge factor exposure; assume 5 bp cost per trade.",
+  "data_needed": [
+    "Daily returns for a large stock universe",
+    "Sector ETF returns",
+    "Daily volume (optional, for trading-time signals)"
+  ],
+  "economic_rationale": "Short-term liquidity shocks push stocks away from their factor-implied values and arbitrageurs are paid for providing liquidity (Avellaneda and Lee 2010, citing Khandani and Lo 2007).",
+  "why_it_might_fail": "Returns are crowded and fragile: the paper itself shows much weaker results after 2002 and documents the August 2007 quant fund drawdown when similar books unwound together.",
+  "reported_results": [
+    {
+      "source": "Avellaneda and Lee (June 2009 version), abstract",
+      "source_url": "https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf",
+      "period": "1997-2007",
+      "market": "US equities, PCA-based",
+      "sharpe": 1.44,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "After 5 bp per trade (10 bp round trip). Much stronger before 2003."
+    },
+    {
+      "source": "Avellaneda and Lee (June 2009 version), abstract",
+      "source_url": "https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf",
+      "period": "2003-2007",
+      "market": "US equities, PCA-based",
+      "sharpe": 0.9,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Average Sharpe ratio of PCA strategies in the later sub-period."
+    },
+    {
+      "source": "Avellaneda and Lee (June 2009 version), abstract",
+      "source_url": "https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf",
+      "period": "1997-2007",
+      "market": "US equities, sector ETF-based",
+      "sharpe": 1.1,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Similar degradation after 2002."
+    },
+    {
+      "source": "Avellaneda and Lee (June 2009 version), abstract",
+      "source_url": "https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf",
+      "period": "2003-2007",
+      "market": "US equities, ETF-based with volume (trading time) signals",
+      "sharpe": 1.51,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Volume adjustment improved ETF signals."
+    }
+  ],
+  "post_publication_evidence": "Within the paper, Sharpe ratios fell from 1.44 (1997 to 2007) to about 0.9 for 2003 to 2007 for PCA strategies, and the August 2007 unwind hit similar strategies. McLean and Pontiff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365).",
+  "implementations": [
+    {
+      "url": "https://github.com/hudson-and-thames/arbitragelab",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "notes": "other_approaches/pca_approach.py implements a PCA residual approach in this spirit."
+    },
+    {
+      "url": "https://github.com/Go1vf/Statistical-Arbitrage-Strategy",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Applies Avellaneda and Lee to 40 crypto tokens."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "An equity method; the residual idea could be applied to a currency cross-section after removing a dollar factor, but it is not central to parity."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

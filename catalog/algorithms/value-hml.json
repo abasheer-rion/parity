@@ -1,0 +1,118 @@
+{
+  "id": "ALG-0053",
+  "slug": "value-hml",
+  "name": "Value factor (Fama-French HML)",
+  "family": "value-mean-reversion",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "factor",
+    "book-to-market",
+    "long-short",
+    "anomaly"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1992,
+    "authors": "Fama, French",
+    "source_title": "The Cross-Section of Expected Stock Returns",
+    "source_url": "https://doi.org/10.1111/j.1540-6261.1992.tb04398.x"
+  },
+  "how_it_works": {
+    "simple": "Buy companies that look cheap compared with what their accounts say they own, and sell ones that look expensive.",
+    "analogy": "Like shopping the clearance rack: unloved items are cheap, and on average some of that discount comes back.",
+    "precise": "HML is long high book-to-market stocks and short low book-to-market stocks, built from six size and value portfolios. Fama and French (1992) find size and book-to-market capture the cross-section of average returns while market beta does not. Whether the premium is risk or mispricing is debated."
+  },
+  "rule": "Each June, sort stocks into two size groups and three book-to-market groups (30/40/30 NYSE breakpoints); HML = average of the two high B/M portfolios minus the average of the two low B/M portfolios, value-weighted, held July to June.",
+  "data_needed": [
+    "Monthly stock returns",
+    "Book equity and market equity",
+    "Or the free HML series from the Kenneth French library"
+  ],
+  "economic_rationale": "Fama and French interpret it as compensation for distress risk; behavioral accounts say investors overextrapolate past growth (Fama and French 1992, 1993).",
+  "why_it_might_fail": "Value had a long drought: French HML averaged about -1.3% a year from 2007 to mid 2026, with a -58% drawdown, and intangible assets make book value a weaker measure.",
+  "reported_results": [
+    {
+      "source": "Our calculation from Kenneth French data library, HML",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "1926-07 to 2026-08",
+      "market": "US stocks",
+      "sharpe": 0.34,
+      "annual_return": 0.0422,
+      "volatility": 0.1231,
+      "max_drawdown": -0.578,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. Long-short factor, gross of costs."
+    },
+    {
+      "source": "Our calculation from Kenneth French data library, HML",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "1963-07 to 1990-12",
+      "market": "US stocks",
+      "sharpe": 0.58,
+      "annual_return": 0.051,
+      "volatility": 0.0886,
+      "max_drawdown": -0.28,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. Close to the Fama and French (1992) sample window."
+    },
+    {
+      "source": "Our calculation from Kenneth French data library, HML",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "1992-07 to 2026-08",
+      "market": "US stocks",
+      "sharpe": 0.18,
+      "annual_return": 0.0206,
+      "volatility": 0.1133,
+      "max_drawdown": -0.578,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. After publication."
+    },
+    {
+      "source": "Our calculation from Kenneth French data library, HML",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "period": "2007-01 to 2026-08",
+      "market": "US stocks",
+      "sharpe": -0.11,
+      "annual_return": -0.0131,
+      "volatility": 0.1147,
+      "max_drawdown": -0.578,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. The value drought."
+    }
+  ],
+  "post_publication_evidence": "In the catalog's computation from French data, HML's Sharpe ratio fell from about 0.58 (1963 to 1990) to about 0.18 after mid 1992, and it was negative from 2007 to 2026. McLean and Pontiff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365).",
+  "implementations": [
+    {
+      "url": "https://github.com/pydata/pandas-datareader",
+      "language": "Python",
+      "license": "NOASSERTION (per GitHub API)",
+      "notes": "Has a Fama-French data reader for downloading HML and other factors."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "An equity factor; useful mainly as a decay benchmark and because currency value (PPP) is its FX cousin."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

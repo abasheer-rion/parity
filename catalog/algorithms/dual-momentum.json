@@ -1,0 +1,92 @@
+{
+  "id": "ALG-0040",
+  "slug": "dual-momentum",
+  "name": "Dual momentum (Antonacci global equities momentum)",
+  "family": "momentum-trend",
+  "markets": [
+    "equities",
+    "multi-asset"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "relative-momentum",
+    "absolute-momentum",
+    "tactical-allocation",
+    "etf"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 2012,
+    "authors": "Antonacci",
+    "source_title": "Risk Premia Harvesting Through Dual Momentum (SSRN); book Dual Momentum Investing (2014)",
+    "source_url": "https://doi.org/10.2139/ssrn.2042750"
+  },
+  "how_it_works": {
+    "simple": "Each month, pick whichever stock market did better over the past year, US or the rest of the world. If even the winner did worse than safe cash, hide in bonds instead.",
+    "analogy": "Like choosing between two runners by their recent times, but staying home if both are slower than walking.",
+    "precise": "Relative (cross-sectional) momentum chooses the stronger of US and non-US equities over a 12-month lookback; absolute (time-series) momentum then compares the winner's excess return with T-bills and switches to bonds when it is negative. The aim is to keep most of the equity premium while stepping aside in long bear markets."
+  },
+  "rule": "Each month end: compute 12-month total returns of US equities and non-US equities; take the higher one; if it beats the 12-month T-bill return hold that equity index next month, otherwise hold aggregate US bonds. (Rule as commonly described for Antonacci's GEM; the catalog could not open the original paper.)",
+  "data_needed": [
+    "US equity index total return, monthly",
+    "Non-US developed or all-world ex US equity index total return, monthly",
+    "T-bill rate",
+    "Aggregate bond index total return"
+  ],
+  "economic_rationale": "It combines cross-sectional momentum (Jegadeesh and Titman 1993) with time-series momentum (Moskowitz, Ooi and Pedersen 2012), both documented across assets.",
+  "why_it_might_fail": "It holds only one or two assets and trades on one signal, so a few whipsaws dominate results; in the catalog's simplified test it lagged the US market badly after 2013 (8.4% vs 15.0% a year).",
+  "reported_results": [
+    {
+      "source": "Our calculation from Catalog computation, simplified dual momentum on Kenneth French data",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/Developed_ex_US_3_Factors_CSV.zip",
+      "period": "1991-07 to 2026-08",
+      "market": "US market vs developed ex US market, T-bills as the safe asset",
+      "sharpe": 0.63,
+      "annual_return": 0.1006,
+      "volatility": 0.1253,
+      "max_drawdown": -0.232,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. Simplified variant: uses T-bills, not bonds, as the safe asset and French market factors, not MSCI indices. annual_return is compound total return. Same window US market: 11.26% a year, volatility 15.1%, Sharpe 0.62, max drawdown -50.3%. About 50 switches in 422 months. US data from https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip."
+    },
+    {
+      "source": "Our calculation from Catalog computation, simplified dual momentum on Kenneth French data",
+      "source_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/Developed_ex_US_3_Factors_CSV.zip",
+      "period": "2013-01 to 2026-08",
+      "market": "US market vs developed ex US market, T-bills as the safe asset",
+      "sharpe": 0.57,
+      "annual_return": 0.084,
+      "volatility": 0.1276,
+      "max_drawdown": -0.232,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. Same window US market: 14.98% a year, Sharpe 0.91, max drawdown -24.8%."
+    }
+  ],
+  "post_publication_evidence": "In the catalog's simplified replication, the strategy kept a similar Sharpe ratio to the US market over 1991 to 2026 with less than half the drawdown, but after 2013 it trailed the US market by about 6.6 percentage points a year. The catalog could not read Antonacci's own reported figures (SSRN and optimalmomentum.com returned access errors).",
+  "implementations": [
+    {
+      "url": "https://github.com/DamienGlobal/dual-momentum-portfolio",
+      "language": "unknown",
+      "license": "MIT",
+      "notes": "Small personal web app for the Antonacci strategy; not reviewed for correctness."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "A simple, popular attempt to beat the S&P 500 by switching assets, and the same relative plus absolute logic can be applied across currencies."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

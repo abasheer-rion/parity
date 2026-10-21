@@ -1,0 +1,120 @@
+{
+  "id": "ALG-0048",
+  "slug": "sixty-forty-portfolio",
+  "name": "60/40 stock and bond portfolio",
+  "family": "portfolio-construction",
+  "markets": [
+    "multi-asset",
+    "equities",
+    "rates"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "benchmark",
+    "rebalancing",
+    "stock-bond-mix",
+    "passive"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1952,
+    "authors": "Industry convention; mean-variance theory from Markowitz",
+    "source_title": "Portfolio Selection (Markowitz 1952) as the theory; the 60/40 split itself has no single paper",
+    "source_url": "https://doi.org/10.2307/2975974"
+  },
+  "how_it_works": {
+    "simple": "Put 60 dollars of every 100 in stocks and 40 in government bonds, and reset to that mix now and then.",
+    "analogy": "Like a meal that is mostly main course with a big side salad; when one part grows too big you move some back.",
+    "precise": "A static strategic allocation of 60% equities and 40% intermediate or long government bonds, rebalanced on a calendar schedule. Bonds historically had low or negative correlation with stocks, lowering volatility and drawdown at the cost of some return. It is the standard balanced benchmark for multi-asset strategies."
+  },
+  "rule": "At each month end (or year end), set weights to 60% S&P 500 total return and 40% 10-year US Treasury total return; hold until the next rebalance.",
+  "data_needed": [
+    "S&P 500 total return, monthly",
+    "10-year US Treasury total return or yield series, monthly",
+    "T-bill rate"
+  ],
+  "economic_rationale": "Combining two assets with imperfect correlation lowers risk per unit of return (Markowitz 1952); in the Damodaran annual data a 60/40 mix had a slightly higher Sharpe ratio than stocks alone over 1928 to 2025.",
+  "why_it_might_fail": "When stocks and bonds fall together the cushion disappears: in 2022 the S&P 500 returned -18.0% and the 10-year Treasury -17.8% per Damodaran, so a 60/40 mix lost about 18%.",
+  "reported_results": [
+    {
+      "source": "Hurst, Ooi and Pedersen, A Century of Evidence on Trend-Following Investing (AQR)",
+      "source_url": "https://www.trendfollowing.com/whitepaper/Century_Evidence_Trend_Following.pdf",
+      "period": "1880-2013",
+      "market": "60% US equities, 40% US 10-year bonds",
+      "sharpe": 0.38,
+      "annual_return": 0.078,
+      "volatility": 0.108,
+      "max_drawdown": -0.623,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Exhibit 4 of the AQR white paper. The paper notes that no fees or transaction costs are subtracted from the 60/40 portfolio."
+    },
+    {
+      "source": "Asness, Frazzini and Pedersen (2012), Leverage Aversion and Risk Parity, Table 2",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/Leverage-Aversion-and-Risk-Parity.pdf",
+      "period": "1926-2010",
+      "market": "US stocks and bonds (CRSP)",
+      "sharpe": 0.4,
+      "annual_return": 0.0465,
+      "volatility": 0.1168,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Return is annual excess return over T-bills, rebalanced monthly."
+    },
+    {
+      "source": "Our calculation from Damodaran historical returns, 60% S&P 500 and 40% 10-year T-bond",
+      "source_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+      "period": "1928-2025",
+      "market": "US stocks and Treasuries",
+      "sharpe": 0.46,
+      "annual_return": 0.0834,
+      "volatility": 0.1212,
+      "max_drawdown": -0.401,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog from the annual table on the page, rebalanced annually. annual_return is geometric; drawdown on annual data understates intra-year drawdown."
+    },
+    {
+      "source": "Our calculation from Damodaran historical returns, 60% S&P 500 and 40% 10-year T-bond",
+      "source_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+      "period": "2000-2025",
+      "market": "US stocks and Treasuries",
+      "sharpe": null,
+      "annual_return": 0.0694,
+      "volatility": 0.0995,
+      "max_drawdown": -0.18,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Computed by the catalog from the annual table on the page, rebalanced annually; geometric annual return."
+    }
+  ],
+  "post_publication_evidence": "No publication date to test against. The stock-bond hedge failed in 2022, when the Damodaran data show the S&P 500 at -18.0% and 10-year Treasuries at -17.8%, the worst joint year in the table.",
+  "implementations": [
+    {
+      "url": "https://github.com/pmorissette/bt",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Has fixed-weight and periodic rebalancing building blocks suited to a 60/40 backtest."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "A common balanced benchmark; useful as a second yardstick next to the S&P 500 when judging a lower-volatility FX strategy."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}
