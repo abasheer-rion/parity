@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useDocs } from "../lib/docs";
 import { categories, termById, terms } from "../lib/glossary";
 import type { GlossaryTerm } from "../lib/types";
 
@@ -67,6 +68,7 @@ function Tabs({ value, onChange, label }: { value: View; onChange: (v: View) => 
 
 function TermCard({ term, initial, focused }: { term: GlossaryTerm; initial: View; focused: boolean }) {
   const [view, setView] = useState<View>(initial);
+  const docs = useDocs()?.termDocs[term.id] ?? [];
   return (
     <article id={`term-${term.id}`} className={`term ${focused ? "focused" : ""}`}
       ref={(el) => { if (focused && el) el.scrollIntoView({ block: "center" }); }}>
@@ -79,8 +81,14 @@ function TermCard({ term, initial, focused }: { term: GlossaryTerm; initial: Vie
         <p className="related">
           Related:{" "}
           {term.related.filter((r) => termById[r]).map((r, i) => (
-            <span key={r}>{i > 0 && ", "}<a href={`#/learn/${r}`}>{termById[r].term}</a></span>
+            <span key={r}>{i > 0 && ", "}<a href={`#/learn/${r}`} data-term={r}>{termById[r].term}</a></span>
           ))}
+        </p>
+      )}
+      {docs.length > 0 && (
+        <p className="related">
+          Used in: {docs.slice(0, 5).map((d, i) => <span key={d}>{i > 0 && ", "}<a href={`#/doc/${d}`} data-doc={d}>{d}</a></span>)}
+          {docs.length > 5 && <> and {docs.length - 5} more</>}
         </p>
       )}
     </article>
@@ -91,5 +99,5 @@ function TermCard({ term, initial, focused }: { term: GlossaryTerm; initial: Vie
 export function Term({ id, children }: { id: string; children: React.ReactNode }) {
   const t = termById[id];
   if (!t) return <>{children}</>;
-  return <a className="term-link" href={`#/learn/${id}`} title={t.simple}>{children}</a>;
+  return <a className="term-link" href={`#/learn/${id}`} data-term={id}>{children}</a>;
 }

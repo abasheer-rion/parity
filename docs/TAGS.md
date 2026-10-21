@@ -145,6 +145,7 @@ How we write and organise these documents.
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](decisions/0001-keep-a-decision-record.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md)
 - [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
+- [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 
 ## economics
@@ -508,4 +509,5 @@ A specific trading idea or its implementation.
 
 The dashboard.
 
+- [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

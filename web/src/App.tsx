@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
+import { Palette } from "./components/Palette";
+import { Popups } from "./components/Popups";
 import { currentSession, listBatches, loadReport, sendSignInLink, source, supabase } from "./lib/data";
 import { date, REPO_URL } from "./lib/format";
+import { loadDocs } from "./lib/docs";
 import type { BatchSummary, Report } from "./lib/types";
 import { AlgorithmReport } from "./pages/AlgorithmReport";
 import { Catalog } from "./pages/Catalog";
@@ -13,6 +16,7 @@ import { Lab } from "./pages/Lab";
 import { LedgerPage } from "./pages/LedgerPage";
 import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
+import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Signals } from "./pages/Signals";
 import { StrategyPage } from "./pages/StrategyPage";
 
@@ -64,6 +68,9 @@ function Dashboard() {
 
   useEffect(() => {
     listBatches().then(setBatches).catch(() => setBatches([]));
+    // Fetch the docs once the page is idle, so previews and the reader open instantly.
+    const idle = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 300));
+    idle(() => void loadDocs());
   }, []);
 
   useEffect(() => {
@@ -71,8 +78,11 @@ function Dashboard() {
     loadReport(batchId).then(setReport).catch((e: Error) => setError(e.message));
   }, [batchId]);
 
-  const [, route, arg] = hash.split("/");
+  const [path, query = ""] = hash.split("?");
+  const [, route, arg, extra] = path.split("/");
+  const q = new URLSearchParams(query).get("q") ?? undefined;
   const nav = [
+    { href: "#/docs", label: "Read", active: route === "docs" || route === "doc" || route === "refs" },
     { href: "#/", label: "Results", active: !route || route === "strategy" },
     { href: "#/compare", label: "Compare", active: route === "compare" },
     { href: "#/catalog", label: "Catalog", active: route === "catalog" || route === "algo" },
@@ -84,11 +94,12 @@ function Dashboard() {
     { href: "#/data", label: "Data health", active: route === "data" },
     { href: "#/learn", label: "Learn", active: route === "learn" },
   ];
-  const standalone = ["learn", "catalog", "algo", "ledger", "sources"].includes(route ?? "");
+  const standalone = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs"].includes(route ?? "");
 
   return (
     <Shell
       nav={nav}
+      wide={route === "doc"}
       right={
         <>
           {batches.length > 0 && (
@@ -101,11 +112,15 @@ function Dashboard() {
               ))}
             </select>
           )}
+          <button className="quiet search-btn" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search <kbd>/</kbd></button>
           {source === "local" && <span className="badge">local run</span>}
           {supabase && <button className="quiet" onClick={() => supabase!.auth.signOut()}>Sign out</button>}
         </>
       }
     >
+      {route === "docs" && <DocsHome tag={arg === "tag" ? decodeURIComponent(extra ?? "") : undefined} query={q} />}
+      {route === "doc" && arg && <DocPage id={decodeURIComponent(arg)} anchor={extra ? decodeURIComponent(extra) : undefined} />}
+      {route === "refs" && <RefsPage focus={arg ? decodeURIComponent(arg) : undefined} />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={decodeURIComponent(arg)} />}
@@ -159,10 +174,12 @@ function Shell({
   children,
   nav = [],
   right,
+  wide = false,
 }: {
   children: React.ReactNode;
   nav?: { href: string; label: string; active: boolean }[];
   right?: React.ReactNode;
+  wide?: boolean;
 }) {
   return (
     <div className="app">
@@ -172,11 +189,11 @@ function Shell({
           {nav.map((n) => (
             <a key={n.href} href={n.href} className={n.active ? "active" : ""}>{n.label}</a>
           ))}
-          <a href={`${REPO_URL}/blob/main/docs/README.md`} target="_blank" rel="noreferrer">Docs</a>
         </nav>
         <div className="right">{right}</div>
       </header>
-      <main>{children}</main>
+      <main className={wide ? "wide" : ""}>{children}</main>
+      {nav.length > 0 && <><Popups /><Palette /></>}
     </div>
   );
 }

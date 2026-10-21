@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
+import { parityDocs } from "./plugins/docs";
 import react from "@vitejs/plugin-react";
 
 // In local development the dashboard can read the engine's latest run straight
@@ -25,9 +26,10 @@ function localResults(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), localResults()],
+  plugins: [react(), localResults(), parityDocs()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
-  // The catalog and glossary are bundled on purpose (about 170 kB gzipped).
-  build: { sourcemap: false, chunkSizeWarningLimit: 900 },
+  // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs
+  // chunk (about 350 kB gzipped) loads after first paint.
+  build: { sourcemap: false, chunkSizeWarningLimit: 1700 },
 });

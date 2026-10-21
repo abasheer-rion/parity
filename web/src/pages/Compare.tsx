@@ -6,8 +6,8 @@ import { Term } from "./Learn";
 
 const heat = (v: number) => {
   const a = Math.min(Math.abs(v), 1);
-  return v >= 0 ? `color-mix(in srgb, var(--series-1) ${Math.round(a * 70)}%, var(--surface))`
-    : `color-mix(in srgb, var(--series-8) ${Math.round(a * 70)}%, var(--surface))`;
+  return v >= 0 ? `color-mix(in srgb, var(--series-1) ${Math.round(a * 70)}%, var(--surface-solid))`
+    : `color-mix(in srgb, var(--series-8) ${Math.round(a * 70)}%, var(--surface-solid))`;
 };
 
 export function Compare({ report }: { report: Report }) {
