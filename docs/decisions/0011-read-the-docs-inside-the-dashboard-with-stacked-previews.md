@@ -40,7 +40,7 @@ A separate docs site would mean a second login and could not show our own charts
 
 ## Consequences
 
-- Every doc is in the dashboard's download, so the site must sit behind a login that covers files, not only pages. The Supabase sign-in only hides the pages. Cloudflare Access in front of the whole site fixes this, and the reader should not go live before it is on.
+- Every doc is in the dashboard's download, so the site must sit behind a login that covers files, not only pages. The Supabase sign-in only hides the pages. Since 2026-10-21 Cloudflare Access (Zero Trust, free plan, personal account) sits in front of `parity-research.pages.dev` and every preview subdomain: only the emails in the Supabase `members` list get in, by a one-time code sent by email, for 30 days at a time. Adding a teammate means adding them in both places.
 - The docs download is about 350 kB compressed. If the docs grow past a few megabytes we should split it by type.
 - Term linking uses the glossary names plus a short list of aliases in the build step. A term that appears in prose under another name will not be linked until an alias is added.
 - The accent colour is our best match for "Invicta blue"; it is one value (`--accent` in `web/src/styles.css`) if it needs changing.
