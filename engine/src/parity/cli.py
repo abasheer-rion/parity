@@ -4,6 +4,9 @@
     parity list                  show registered strategies
     parity run [names...]        backtest and write output/latest.json
     parity publish               send output/latest.json to Supabase
+    parity official REG-0001     run a registered plan and record it in the ledger
+    parity ledger verify         check the ledger's hash chain
+    parity registration check    check every registration in registrations/
 """
 
 from __future__ import annotations
@@ -86,6 +89,39 @@ def _publish(args) -> int:
     return 0
 
 
+def _official(args) -> int:
+    from .official import run_official
+
+    run_official(args.registration, dry_run=args.dry_run)
+    return 0
+
+
+def _ledger(args) -> int:
+    from . import ledger
+
+    problems = ledger.verify()
+    n = len(ledger.entries())
+    if problems:
+        print(f"Ledger BROKEN ({n} entries):")
+        for p in problems:
+            print(f"  - {p}")
+        return 1
+    print(f"Ledger intact: {n} entries, chain and detail files all match.")
+    return 0
+
+
+def _registration(args) -> int:
+    from . import registration
+
+    regs = [registration.load(args.id)] if args.id else registration.all_registrations()
+    bad = 0
+    for reg in regs:
+        issues = registration.problems(reg, require_committed=args.committed)
+        print(f"{reg.id}: {'ok' if not issues else '; '.join(issues)}")
+        bad += bool(issues)
+    return 1 if bad else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="parity", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -115,6 +151,22 @@ def main(argv: list[str] | None = None) -> int:
     pub.add_argument("--allow-missing", action="store_true",
                      help="exit 0 when Supabase credentials are not configured")
     pub.set_defaults(func=_publish)
+
+    o = sub.add_parser("official", help="run a registered plan and record it in the ledger")
+    o.add_argument("registration")
+    o.add_argument("--dry-run", action="store_true")
+    o.set_defaults(func=_official)
+
+    lg = sub.add_parser("ledger", help="ledger tools")
+    lg.add_argument("action", choices=["verify"])
+    lg.set_defaults(func=_ledger)
+
+    rg = sub.add_parser("registration", help="registration tools")
+    rg.add_argument("action", choices=["check"])
+    rg.add_argument("id", nargs="?")
+    rg.add_argument("--committed", action="store_true",
+                    help="also require the file to be committed and unchanged")
+    rg.set_defaults(func=_registration)
 
     args = p.parse_args(argv)
     return args.func(args)

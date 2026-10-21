@@ -1,0 +1,79 @@
+# The only way a result becomes official. Runs a committed registration on a clean
+# machine, appends the outcome to the hash-chained ledger, commits the ledger, and
+# publishes a GitHub release holding the outputs and the data fingerprint.
+# See docs/decisions/0007-official-results-come-only-from-the-ledger.md.
+#
+# Secrets: PARITY_WRITER_DB_URL (optional, also copies the run to Supabase), FRED_API_KEY (optional)
+name: Official run
+
+on:
+  workflow_dispatch:
+    inputs:
+      registration:
+        description: "Registration id, e.g. REG-0001"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-run
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/pyproject.toml
+      - run: pip install -e "engine[publish]"
+      - name: Ledger must be intact before we add to it
+        run: parity ledger verify
+      - name: Fetch data
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: parity fetch --strict
+      - name: Official run
+        id: run
+        env:
+          REG: ${{ inputs.registration }}
+        run: |
+          parity official "$REG" | tee official.log
+          echo "run_id=$(grep -o 'RUN-[0-9]*' official.log | head -1)" >> "$GITHUB_OUTPUT"
+      - name: Ledger must still be intact
+        run: parity ledger verify
+      - name: Commit ledger
+        env:
+          RUN_ID: ${{ steps.run.outputs.run_id }}
+          REG: ${{ inputs.registration }}
+        run: |
+          git config user.name "parity-ledger"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ledger
+          git commit -m "data(ledger): record $RUN_ID for $REG"
+          git push origin HEAD:main
+      - name: Release with outputs and data fingerprint
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.run.outputs.run_id }}
+          REG: ${{ inputs.registration }}
+        run: |
+          dir="engine/output/official/$RUN_ID"
+          tar -czf "$dir/data-snapshot.tar.gz" -C engine data
+          cp "ledger/runs/$RUN_ID.json" "$dir/ledger-entry-details.json"
+          gh release create "$RUN_ID" "$dir"/* --target main \
+            --title "$RUN_ID: official run of $REG" \
+            --notes "Official run of $REG. The ledger entry, full outputs and the exact data used are attached. Verify with: parity ledger verify"
+      - name: Copy to Supabase
+        env:
+          PARITY_WRITER_DB_URL: ${{ secrets.PARITY_WRITER_DB_URL }}
+          RUN_ID: ${{ steps.run.outputs.run_id }}
+        run: parity publish --allow-missing --file "engine/output/official/$RUN_ID/latest.json"

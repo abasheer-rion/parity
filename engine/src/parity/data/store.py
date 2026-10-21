@@ -7,6 +7,7 @@ ignored by git; the scheduled research run keeps its own copy in the Actions cac
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from datetime import UTC, datetime
@@ -35,15 +36,28 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
             path = _path(series, root)
             path.parent.mkdir(parents=True, exist_ok=True)
             data.to_frame().to_parquet(path)
-            entry.update(_describe(data), ok=True)
+            entry.update(_describe(data), ok=True, sha256=content_hash(data))
         except Exception as exc:  # keep going; one dead source should not stop the run
             entry.update(ok=False, error=str(exc))
         report.append(entry)
     root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(UTC).isoformat(timespec="seconds")
-    (root / "coverage.json").write_text(json.dumps({"fetched_at": stamp, "series": report},
-                                                   indent=2))
+    doc = {"fetched_at": stamp, "snapshot": snapshot_id(report), "series": report}
+    (root / "coverage.json").write_text(json.dumps(doc, indent=2))
     return report
+
+
+def content_hash(data: pd.Series) -> str:
+    """Fingerprint of a series' values, independent of file format, so the same
+    numbers always give the same hash."""
+    text = "\n".join(f"{d.date().isoformat()},{v:.10g}" for d, v in data.items())
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
+def snapshot_id(report: list[dict]) -> str:
+    """One fingerprint for the whole data set: changes if any series changes."""
+    parts = sorted(f"{r['key']}:{r.get('sha256', 'missing')}" for r in report)
+    return hashlib.sha256("\n".join(parts).encode()).hexdigest()
 
 
 def _describe(data: pd.Series) -> dict:

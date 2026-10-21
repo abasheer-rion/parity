@@ -77,4 +77,5 @@ Delete the file and open a pull request. Mark its hypothesis `rejected` or `park
 
 - [DEC-0003: Strategies are plug-ins that can be removed at any time](../decisions/0003-strategies-are-plugins.md)
 - [GDE-0001: Getting started](0001-getting-started.md)
+- [GDE-0004: The research routine](0004-the-research-routine.md)
 <!-- backlinks:end -->

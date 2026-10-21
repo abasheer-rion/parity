@@ -1,0 +1,91 @@
+---
+id: GDE-0004
+title: The research routine
+type: guide
+status: current
+created: 2026-10-20
+updated: 2026-10-20
+authors: [ayan]
+tags: [method, process]
+related: [DEC-0007, GDE-0002, GDE-0003, REF-0006]
+---
+
+# The research routine
+
+## In plain words
+
+Every trading idea goes down the same conveyor belt, one station at a time, and it cannot skip a station. At each station there is a checklist, and a program checks that the checklist was really done. We also follow the same habits every session and every week, so nothing depends on anyone remembering.
+
+## Summary
+
+Two parts. **The pipeline** is the nine stages every algorithm passes through, with the evidence each stage needs. **The routine** is what we do every session, week and month. The rules behind both are in [DEC-0007](../decisions/0007-official-results-come-only-from-the-ledger.md).
+
+## The pipeline
+
+Each algorithm in the catalog (`catalog/algorithms/`) has a `stage`. The docs check refuses a stage unless its evidence exists.
+
+| Stage | What it means | Evidence the checker requires |
+| --- | --- | --- |
+| 1. Catalogued | We know it exists and roughly how it works. | Catalog entry with source, family, tags, and simple, analogy and precise explanations. |
+| 2. Sourced | We have read the primary source and pulled out its claims. | At least one reported result with a link, and `verified_on_page` set honestly. Post-publication evidence searched. |
+| 3. Hypothesis | We have written down what we expect and what would prove us wrong. | A `hypothesis` id that exists in `docs/hypotheses/`. |
+| 4. Implemented | The rule is code. | A `strategy` name registered in the engine, linked back to the hypothesis. Tests pass. |
+| 5. Registered | The test plan is frozen. | At least one `registrations` id whose file exists and is committed. |
+| 6. Official | It has faced the gauntlet officially. | At least one `runs` id that exists in the ledger. |
+| 7. Reproduced | We checked our version against the source's own numbers, on the source's own period. | A run whose registration covers the source's period, and a note on how far apart the numbers are. Optional when the source gives no comparable numbers. |
+| 8. Forward | It is being tracked on data that arrived after it was registered. | A registration dated at least 30 days ago. |
+| 9. Verdict | We have decided. | `verdict` of supported, rejected or inconclusive, with the runs it rests on. |
+
+An algorithm can stop at any stage. Most should stop early: a stage 2 entry that says "the source's numbers were never checked independently, and the idea needs paid data" is a complete, useful result.
+
+## Every session
+
+1. Read the latest entry in `docs/log/` and the [docs index](../README.md#open-questions-right-now).
+2. Pick one thing. Write down what it is before starting.
+3. Exploratory runs are fine and encouraged. Note every variant you try in the session log, because each one counts as a trial.
+4. Never quote an exploratory number as a result. If it matters, register it.
+5. End with a log entry: `python3 scripts/docs.py new log "What we did"`. What happened, what was decided, what is still open.
+6. `make check` before pushing.
+
+## Every week
+
+1. Look at the nightly research runs on the dashboard. Anything broken or stale on the Data page gets fixed first.
+2. Save the week's economic calendar (Forex Factory export) so we build our own point-in-time history ([RES-0005](../research/0005-zen-apps-and-free-apis.md)).
+3. Move one or two catalog entries forward one stage each.
+4. At most one new official run per idea per week. Slower means fewer trials and less temptation to fish.
+
+## Every month
+
+1. Write a short research review in `docs/research/`: what moved, what was retired, what we learned.
+2. Check every registered strategy's forward performance since its registration date.
+3. Reread [INT-0001](../intent/0001-initial-intent.md). If our aims have drifted, write a new intent rather than drift silently.
+
+## Running an official test
+
+1. Write or update the hypothesis.
+2. Write the registration: `registrations/REG-NNNN-short-name.json`. Copy an existing one. Fill in every field honestly, especially `prior_trials` and `already_seen`.
+3. Commit and push it on its own. Do not run anything yet.
+4. On GitHub: Actions, then Official run, then Run workflow, and enter the registration id.
+5. When it finishes, the ledger has a new `RUN-` entry and there is a release with the outputs and data.
+6. In the experiment doc, add a results block and the checker fills it in:
+
+   ```markdown
+   <!-- results:RUN-000001 -->
+   <!-- /results -->
+   ```
+
+7. Update the catalog entry's stage and the hypothesis's status.
+
+## What never happens
+
+- Editing a registration after committing it.
+- Editing anything in `ledger/`.
+- Typing a result into a doc instead of using a results block.
+- Choosing a threshold after seeing the data.
+- Deleting a failed experiment.
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+- [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
+<!-- backlinks:end -->

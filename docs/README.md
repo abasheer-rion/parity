@@ -7,11 +7,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 6 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 7 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 2 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
-| [guide](#guide) | How to do something in this repo, step by step. | 3 |
+| [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 6 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 1 |
 
@@ -53,6 +53,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0004 | [Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md) | accepted | 2026-10-20 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | DEC-0005 | [Study news and commodity shocks at daily and intraday speed, not microseconds](decisions/0005-no-microsecond-trading-in-the-poc.md) | accepted | 2026-10-20 | [commodities](TAGS.md#commodities), [news](TAGS.md#news) |
 | DEC-0006 | [What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
+| DEC-0007 | [Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md) | accepted | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## hypothesis
 
@@ -91,6 +92,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0001 | [Getting started](guides/0001-getting-started.md) | current | 2026-10-20 | [process](TAGS.md#process) |
 | GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-20 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-20 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
+| GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## reference
 

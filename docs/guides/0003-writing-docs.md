@@ -97,4 +97,5 @@ Add a log entry at the end of each working session with what happened, what was 
 
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](../decisions/0004-docs-are-checked-by-a-script.md)
 - [GDE-0001: Getting started](0001-getting-started.md)
+- [GDE-0004: The research routine](0004-the-research-routine.md)
 <!-- backlinks:end -->

@@ -219,6 +219,7 @@ What we would skip for now:
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0003: What practitioners say in forums](0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](0005-zen-apps-and-free-apis.md)

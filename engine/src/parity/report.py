@@ -37,18 +37,29 @@ def _weekly(series: pd.Series, digits: int = 5) -> list[list]:
 
 
 def run_all(names: list[str] | None = None, config: BacktestConfig | None = None,
-            data_dir: Path = store.DEFAULT_DIR, gauntlet: bool = True) -> dict:
+            data_dir: Path = store.DEFAULT_DIR, gauntlet: bool = True,
+            specs: list[dict] | None = None, n_trials: int | None = None,
+            kind: str = "exploratory") -> dict:
+    """Run strategies and their gauntlets. `specs` ([{"name", "params"}]) pins exact
+    parameters, as official runs do; otherwise every registered strategy runs with
+    its defaults. `n_trials` overrides the trial count used for deflated Sharpe."""
     config = config or BacktestConfig()
     registry = strategies.available()
-    names = names or list(registry)
-    instances = {n: strategies.get(n) for n in names}
+    if specs:
+        instances = {s["name"]: strategies.get(s["name"], **s.get("params", {})) for s in specs}
+        if "spy_buy_hold" not in instances:
+            instances = {"spy_buy_hold": strategies.get("spy_buy_hold"), **instances}
+    else:
+        names = names or list(registry)
+        instances = {n: strategies.get(n) for n in names}
 
     keys = sorted({k for s in instances.values() for k in s.required()} | {"eq.SPY"})
     panel = store.panel(keys, data_dir)
 
     bench_cfg = BacktestConfig(**{**config.to_dict(), "target_vol": None, "cost_bps": 0.0})
     bench = run(strategies.get("spy_buy_hold"), panel, bench_cfg).returns
-    n_trials = sum(1 for s in instances.values() if not s.is_benchmark)
+    if n_trials is None:
+        n_trials = sum(1 for s in instances.values() if not s.is_benchmark)
 
     runs = []
     for name, strat in instances.items():
@@ -80,6 +91,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
 
     return {
         "schema_version": SCHEMA_VERSION,
+        "kind": kind,
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "git_sha": _git_sha(),
         "n_trials": n_trials,

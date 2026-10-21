@@ -119,11 +119,13 @@ Metrics that tell us if something works and where to look next.
 How we avoid fooling ourselves: backtest design, overfitting, statistics.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
+- [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
+- [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 
@@ -158,9 +160,11 @@ How the team works together.
 
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](decisions/0001-keep-a-decision-record.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md)
+- [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
+- [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 
 ## strategy

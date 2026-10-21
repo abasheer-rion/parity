@@ -336,6 +336,7 @@ def cmd_check(args) -> int:
             ids[did] = d
     for d in docs:
         check_meta(d, ids, r)
+        check_results(d, r)
     anchor_cache: dict = {}
     for p in all_markdown():
         if p.relative_to(ROOT).as_posix() in SCHEMA["layout"]["unchecked_markdown"]:
@@ -411,6 +412,81 @@ def glossary_body(title: str) -> str:
                                   for x in t["related"] if x in by_id)
                 out += ["", f"Related: {links}"]
     return "\n".join(out) + "\n"
+
+
+# ---------------------------------------------------------------- ledger results
+
+RESULTS_RE = re.compile(r"(<!-- results:(RUN-\d{6}) -->\n)(.*?)(<!-- /results -->)", re.S)
+LEDGER_DIR = ROOT / "ledger"
+
+
+def ledger_entry(run_id: str) -> tuple[dict, dict] | None:
+    chain = LEDGER_DIR / "runs.jsonl"
+    detail = LEDGER_DIR / "runs" / f"{run_id}.json"
+    if not chain.exists() or not detail.exists():
+        return None
+    for line in chain.read_text().splitlines():
+        if line.strip():
+            e = json.loads(line)
+            if e.get("run_id") == run_id:
+                return e, json.loads(detail.read_text())
+    return None
+
+
+def _pct(v):
+    return "n/a" if v is None else f"{v * 100:.1f}%"
+
+
+def _num(v):
+    return "n/a" if v is None else f"{v:.2f}"
+
+
+def results_block(run_id: str) -> str:
+    found = ledger_entry(run_id)
+    if not found:
+        return f"Run {run_id} is not in the ledger.\n"
+    e, _ = found
+    lines = [f"Official run [{run_id}](../../ledger/runs/{run_id}.json) of "
+             f"`{e.get('registration')}`, recorded {e.get('recorded_at', '')[:10]}, commit "
+             f"`{e.get('git_sha', '')[:8]}`, data fingerprint `{(e.get('data_snapshot') or '')[:12]}`, "
+             f"{e.get('trials_counted')} trials counted. Generated from the ledger by "
+             "`scripts/docs.py`; it cannot be edited by hand.", "",
+             "| Strategy | Sharpe | CAGR | Max drawdown | Deflated Sharpe | Gauntlet | Meets plan |",
+             "| --- | --- | --- | --- | --- | --- | --- |"]
+    res = e.get("results", {})
+    for name, r in res.items():
+        meets = {True: "yes", False: "no", None: "n/a"}[r.get("meets_registered_criteria")]
+        lines.append(f"| `{name}` | {_num(r.get('sharpe'))} | {_pct(r.get('cagr'))} | "
+                     f"{_pct(r.get('max_drawdown'))} | {_num(r.get('deflated_sharpe'))} | "
+                     f"{r.get('gauntlet')} | {meets} |")
+    ids = sorted({t for r in res.values() for t in r.get("tests", {})})
+    if ids:
+        lines += ["", "| Strategy | " + " | ".join(ids) + " |",
+                  "| --- | " + " | ".join("---" for _ in ids) + " |"]
+        for name, r in res.items():
+            marks = ["pass" if r["tests"].get(t) else "fail" for t in ids]
+            lines.append(f"| `{name}` | " + " | ".join(marks) + " |")
+    return "\n".join(lines) + "\n"
+
+
+def _outside_fences(text: str, fn) -> str:
+    """Apply fn only to parts of the text that are not inside fenced code blocks."""
+    parts = re.split(r"(^\s*(?:```|~~~).*?^\s*(?:```|~~~)[^\n]*$)", text, flags=re.S | re.M)
+    return "".join(part if i % 2 else fn(part) for i, part in enumerate(parts))
+
+
+def fill_results(text: str) -> str:
+    return _outside_fences(text, lambda t: RESULTS_RE.sub(
+        lambda m: m.group(1) + results_block(m.group(2)) + m.group(4), t))
+
+
+def check_results(doc: Doc, r: Report):
+    cited = []
+    _outside_fences(doc.raw, lambda t: cited.extend(m.group(2) for m in RESULTS_RE.finditer(t))
+                    or t)
+    for run_id in cited:
+        if not ledger_entry(run_id):
+            r.err(doc.rel, f"cites {run_id}, which is not in the ledger")
 
 
 # ---------------------------------------------------------------- index
@@ -493,6 +569,10 @@ def build_outputs(docs: list[Doc]) -> dict[Path, str]:
         g = ids[GLOSSARY_DOC]
         g.raw = render_front_matter(g.meta) + "\n" + glossary_body(g.meta["title"])
         g.body = g.raw.split("\n---\n", 1)[1]
+
+    # results tables come from the ledger, never from the author
+    for d in docs:
+        d.raw = fill_results(d.raw)
 
     # backlinks
     incoming: dict[str, set[str]] = {i: set() for i in ids}

@@ -348,15 +348,18 @@
   "layout": {
     "top_level": [
       ".editorconfig",
-      ".github",
       ".githooks",
+      ".github",
       ".gitignore",
       "CHANGELOG.md",
       "CONTRIBUTING.md",
       "Makefile",
       "README.md",
+      "catalog",
       "docs",
       "engine",
+      "ledger",
+      "registrations",
       "scripts",
       "supabase",
       "web"

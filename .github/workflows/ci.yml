@@ -56,6 +56,21 @@ jobs:
           python-version: "3.12"
       - name: Docs structure, links and wording
         run: python3 scripts/docs.py check ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
+      - name: Ledger and registrations
+        run: |
+          pip install -q -e engine
+          parity ledger verify
+          parity registration check
+      - name: Only the official-run workflow may change the ledger, and plans are frozen
+        if: github.event_name == 'pull_request'
+        run: |
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          if echo "$changed" | grep -q '^ledger/'; then
+            echo "This pull request edits ledger/. Only the official-run workflow writes there."; exit 1
+          fi
+          for f in $(git diff --name-only --diff-filter=M "origin/${{ github.base_ref }}...HEAD" -- registrations/); do
+            echo "$f was changed after being committed. Write a new registration instead."; exit 1
+          done
       - name: Pull request title
         if: github.event_name == 'pull_request'
         env:

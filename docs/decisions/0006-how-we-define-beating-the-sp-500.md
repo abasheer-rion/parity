@@ -43,6 +43,7 @@ Definitions of each number are in [REF-0002](../reference/0002-kpis.md).
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](0007-official-results-come-only-from-the-ledger.md)
 - [HYP-0001: Currency carry still pays after costs](../hypotheses/0001-carry-still-pays-after-costs.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](../hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
