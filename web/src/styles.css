@@ -230,3 +230,6 @@ ol.stages li.done { color: var(--text); border-color: var(--series-1); }
   main { max-width: none; padding: 0; }
   a { color: #000; }
 }
+table.heat td { text-align: center; font-size: 11px; padding: 4px 6px; }
+table.heat th.rot { height: 110px; white-space: nowrap; vertical-align: bottom; }
+table.heat th.rot span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; }

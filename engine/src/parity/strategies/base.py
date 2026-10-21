@@ -29,6 +29,8 @@ class Strategy(ABC):
     #: Nearby settings the gauntlet tries, to see if the result depends on one lucky choice.
     #: Keys are __init__ arguments. Keep it small; every combination counts as a trial.
     param_grid: ClassVar[dict[str, list]] = {}
+    #: Largest sum of absolute weights the strategy may hold. Overlays exceed 1.
+    max_gross: ClassVar[float] = 1.0
 
     @abstractmethod
     def instruments(self) -> list[str]:

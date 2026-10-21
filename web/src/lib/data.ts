@@ -68,6 +68,8 @@ export async function loadReport(batchId?: string): Promise<Report> {
     kind: batch.kind,
     run_id: batch.run_id,
     series: batch.series ?? undefined,
+    comparison: batch.coverage?.comparison,
+    source_checks: batch.coverage?.source_checks,
     runs: (runs ?? []) as StrategyRun[],
   };
 }

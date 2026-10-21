@@ -11,7 +11,7 @@ export function DataPage({ report }: { report: Report }) {
   const ref = fetched ? new Date(fetched).getTime() : Date.now();
   const rows = report.coverage.series.map((s) => {
     const lag = s.last ? Math.floor((ref - new Date(s.last).getTime()) / 86_400_000) : null;
-    const monthly = s.key.startsWith("rate.") || s.key === "cmd.COPPER";
+    const monthly = s.key.startsWith("rate.") || s.key.startsWith("reer.") || ["cmd.COPPER", "eq.US_MKT"].includes(s.key);
     const stale = !s.ok || lag == null || lag > (monthly ? STALE_MONTHLY : STALE_DAILY);
     return { ...s, lag, stale };
   });
@@ -26,6 +26,16 @@ export function DataPage({ report }: { report: Report }) {
           check here before trusting a number. Run {report.git_sha ? <code>{report.git_sha}</code> : "from a local checkout"}.
         </p>
       </div>
+      {report.source_checks && report.source_checks.length > 0 && (
+        <Card title="Sources checked against each other" help="Pairs of series that should agree. A drop in correlation or a jump in the gap means one source has changed or broken.">
+          <div className="table-wrap"><table>
+            <thead><tr><th>Check</th><th>Series</th><th>Since</th><th>Daily correlation</th><th>Gap in yearly return</th></tr></thead>
+            <tbody>{report.source_checks.map((c) => (
+              <tr key={c.a + c.b}><td className="wrap">{c.label}</td><td><code>{c.a}</code> vs <code>{c.b}</code></td><td>{c.from}</td><td>{c.daily_correlation.toFixed(3)}</td><td>{(c.annual_return_gap * 100).toFixed(2)}%</td></tr>
+            ))}</tbody>
+          </table></div>
+        </Card>
+      )}
       <Card title={problems.length ? `${problems.length} series need attention` : "All series are current"}>
         <div className="table-wrap">
           <table>

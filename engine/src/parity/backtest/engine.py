@@ -23,7 +23,7 @@ TRADING_DAYS = 252
 
 @dataclass
 class BacktestConfig:
-    start: str | None = "2000-01-01"
+    start: str | None = "1999-01-04"  # first trading day of the euro
     end: str | None = None
     cost_bps: float = 1.0  # one-way cost per unit of notional traded, in basis points
     include_carry: bool = True
@@ -51,8 +51,13 @@ class BacktestResult:
 
 
 def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bool) -> pd.DataFrame:
-    px = panel[instruments]
-    rets = px.pct_change(fill_method=None)
+    """Daily returns per instrument. `cash.USD` earns the US 3-month rate, so strategies
+    that step out of the market are not penalised for holding cash."""
+    priced = [c for c in instruments if c != "cash.USD"]
+    rets = panel[priced].pct_change(fill_method=None)
+    if "cash.USD" in instruments:
+        rets["cash.USD"] = panel["rate.USD"].shift(1) / 100 / TRADING_DAYS
+        rets = rets[instruments]
     if include_carry and "rate.USD" in panel:
         for col in instruments:
             if col.startswith("fx."):

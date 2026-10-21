@@ -5,7 +5,7 @@ from parity.gauntlet import run_gauntlet
 
 def _bench(panel):
     cfg = BacktestConfig(start=None, cost_bps=0)
-    return run(strategies.get("spy_buy_hold"), panel, cfg).returns
+    return run(strategies.get("us_market_buy_hold"), panel, cfg).returns
 
 
 def test_gauntlet_runs_and_is_reproducible(panel):

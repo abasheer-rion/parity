@@ -107,10 +107,10 @@ Not a published anomaly. The premium has persisted: in the Damodaran data the S&
 | 8. forward | not yet |
 | 9. verdict | not yet |
 
-- Strategy in the engine: `spy_buy_hold`
+- Strategy in the engine: `us_market_buy_hold`
 - Registration: [REG-0001](../../registrations/REG-0001-baseline-gauntlet.json)
 
-This is our benchmark, run in every batch. It tests no hypothesis; every strategy is compared against it.
+Our benchmark, run in every batch; it tests no hypothesis. Since DEC-0008 it is measured with the Fama and French US total market return extended by the S&P 500 index (daily correlation with SPY about 0.98). RUN-000001 and RUN-000002 used SPY from Yahoo.
 
 ### RUN-000001
 

@@ -5,6 +5,7 @@ import { date, REPO_URL } from "./lib/format";
 import type { BatchSummary, Report } from "./lib/types";
 import { AlgorithmReport } from "./pages/AlgorithmReport";
 import { Catalog } from "./pages/Catalog";
+import { Compare } from "./pages/Compare";
 import { DataPage } from "./pages/DataPage";
 import { DataSources } from "./pages/DataSources";
 import { Explore } from "./pages/Explore";
@@ -73,6 +74,7 @@ function Dashboard() {
   const [, route, arg] = hash.split("/");
   const nav = [
     { href: "#/", label: "Results", active: !route || route === "strategy" },
+    { href: "#/compare", label: "Compare", active: route === "compare" },
     { href: "#/catalog", label: "Catalog", active: route === "catalog" || route === "algo" },
     { href: "#/lab", label: "Lab", active: route === "lab" },
     { href: "#/explore", label: "Explore", active: route === "explore" },
@@ -113,7 +115,8 @@ function Dashboard() {
       {!standalone && !report && !error && <p className="muted">Loading results</p>}
       {!standalone && report && (
         <>
-          {route === "lab" ? <Lab report={report} /> :
+          {route === "compare" ? <Compare report={report} /> :
+            route === "lab" ? <Lab report={report} /> :
             route === "explore" ? <Explore report={report} /> :
             route === "strategy" && arg ? <StrategyPage report={report} name={decodeURIComponent(arg)} /> :
             route === "signals" ? <Signals report={report} /> :

@@ -40,9 +40,11 @@ def publish(doc: dict) -> str:
     import psycopg  # only needed when publishing
 
     with psycopg.connect(url, autocommit=False) as conn, conn.cursor() as cur:
+        coverage = {**doc["coverage"], "source_checks": doc.get("source_checks", []),
+                    "comparison": doc.get("comparison")}
         cur.execute(BATCH_SQL, (doc["generated_at"], doc.get("git_sha"), doc["schema_version"],
                                 doc["n_trials"], json.dumps(doc["config"]),
-                                json.dumps(doc["coverage"]), doc.get("kind", "exploratory"),
+                                json.dumps(coverage), doc.get("kind", "exploratory"),
                                 doc.get("run_id"), json.dumps(doc.get("series"))))
         batch_id = str(cur.fetchone()[0])
         cols = ", ".join(("batch_id", *RUN_FIELDS))

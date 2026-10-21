@@ -9,6 +9,7 @@ The S&P 500 bar and how we compare against it.
 
 - [INT-0001: Initial intent](intent/0001-initial-intent.md)
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
+- [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
@@ -83,6 +84,7 @@ Crypto markets, used as a comparison.
 
 Sources, scrapers, caching and data quality.
 
+- [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

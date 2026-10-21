@@ -28,11 +28,14 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
     """Download each series and overwrite its cache file. Returns a coverage report."""
     keys = keys or list(catalog.CATALOG)
     report = []
-    for key in keys:
+    derived = [k for k in keys if catalog.get(k).source == "derived"]
+    for key in [k for k in keys if k not in derived] + derived:
         series = catalog.get(key)
         entry = {"key": key, "source": series.source, "code": series.code}
+        entry["required"] = series.required
         try:
-            data = sources.fetch(series)
+            data = build_derived(series, root) if series.source == "derived" else \
+                sources.fetch(series)
             path = _path(series, root)
             path.parent.mkdir(parents=True, exist_ok=True)
             data.to_frame().to_parquet(path)
@@ -42,9 +45,34 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
         report.append(entry)
     root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(UTC).isoformat(timespec="seconds")
+    if len(report) < len(catalog.CATALOG):  # partial fetch: keep the other series' entries
+        fresh = {r["key"] for r in report}
+        report = report + [r for r in coverage(root).get("series", [])
+                           if r["key"] not in fresh and r["key"] in catalog.CATALOG]
     doc = {"fetched_at": stamp, "snapshot": snapshot_id(report), "series": report}
     (root / "coverage.json").write_text(json.dumps(doc, indent=2))
     return report
+
+
+def build_derived(series: catalog.Series, root: Path) -> pd.Series:
+    """eq.US_TOTAL: the Fama and French total return index, then S&P 500 price returns
+    plus a daily dividend accrual for the days French has not published yet. The
+    dividend accrual is the gap between the two over the last year they overlap."""
+    if series.key != "eq.US_TOTAL":
+        raise KeyError(f"No recipe for derived series {series.key}")
+    mkt = load("eq.US_MKT", root)
+    spx = load("eq.SPX", root).dropna()
+    last = mkt.index.max()
+    year = spx.loc[last - pd.DateOffset(years=1):last]
+    if len(year) > 200:
+        mkt_year = mkt.loc[year.index[0]:last]
+        gap = (mkt_year.iloc[-1] / mkt_year.iloc[0]) / (year.iloc[-1] / year.iloc[0]) - 1
+    else:
+        gap = 0.015  # typical S&P 500 dividend yield, used only if the overlap is too short
+    daily_div = max(gap, 0.0) / 252
+    after = spx.loc[spx.index[spx.index <= last].max():]
+    ext = (1 + after.pct_change().dropna() + daily_div).cumprod() * mkt.iloc[-1]
+    return pd.concat([mkt, ext]).rename(series.key)
 
 
 def content_hash(data: pd.Series) -> str:

@@ -23,4 +23,8 @@ def panel() -> pd.DataFrame:
     data["cmd.WTI"] = oil
     data["cmd.BRENT"] = oil * 1.05
     data["eq.SPY"] = np.exp(np.cumsum(rng.normal(0.0004, 0.011, n))) * 100
+    data["eq.US_TOTAL"] = data["eq.SPY"]
+    data["cmd.HH_GAS"] = np.exp(np.cumsum(rng.normal(0, 0.03, n))) * 3
+    for ccy in ["USD", *catalog.G10]:
+        data[f"reer.{ccy}"] = 100 * np.exp(np.cumsum(rng.normal(0, 0.003, n)))
     return pd.DataFrame(data, index=idx)

@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 7 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 8 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 3 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
@@ -55,6 +55,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0005 | [Study news and commodity shocks at daily and intraday speed, not microseconds](decisions/0005-no-microsecond-trading-in-the-poc.md) | accepted | 2026-10-20 | [commodities](TAGS.md#commodities), [news](TAGS.md#news) |
 | DEC-0006 | [What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | DEC-0007 | [Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md) | accepted | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
+| DEC-0008 | [Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
 
 ## hypothesis
 

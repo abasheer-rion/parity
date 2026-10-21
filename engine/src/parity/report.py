@@ -15,6 +15,7 @@ import pandas as pd
 
 from . import strategies
 from .backtest import BacktestConfig, run
+from .compare import SOURCE_PAIRS, source_checks, strategy_comparison
 from .data import store
 from .gauntlet import run_gauntlet
 from .metrics import performance, signal
@@ -47,21 +48,22 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
     registry = strategies.available()
     if specs:
         instances = {s["name"]: strategies.get(s["name"], **s.get("params", {})) for s in specs}
-        if "spy_buy_hold" not in instances:
-            instances = {"spy_buy_hold": strategies.get("spy_buy_hold"), **instances}
+        if "us_market_buy_hold" not in instances:
+            instances = {"us_market_buy_hold": strategies.get("us_market_buy_hold"), **instances}
     else:
         names = names or list(registry)
         instances = {n: strategies.get(n) for n in names}
 
-    keys = sorted({k for s in instances.values() for k in s.required()} | {"eq.SPY"})
+    needed = {k for s in instances.values() for k in s.required()}
+    keys = sorted(needed | {"eq.US_TOTAL", "rate.USD"})
     panel = store.panel(keys, data_dir)
 
     bench_cfg = BacktestConfig(**{**config.to_dict(), "target_vol": None, "cost_bps": 0.0})
-    bench = run(strategies.get("spy_buy_hold"), panel, bench_cfg).returns
+    bench = run(strategies.get("us_market_buy_hold"), panel, bench_cfg).returns
     if n_trials is None:
         n_trials = sum(1 for s in instances.values() if not s.is_benchmark)
 
-    runs = []
+    runs, all_returns = [], {}
     for name, strat in instances.items():
         cfg = bench_cfg if strat.is_benchmark else config
         res = run(strat, panel, cfg)
@@ -69,6 +71,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
                                       None if strat.is_benchmark else res.turnover,
                                       None if strat.is_benchmark else bench,
                                       n_trials=1 if strat.is_benchmark else n_trials)
+        all_returns[name] = res.returns
         sig = strat.signal(panel)
         runs.append({
             "strategy": name,
@@ -89,7 +92,15 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
             if gauntlet and not strat.is_benchmark else None,
         })
 
+    check_keys = sorted({k for a, b, _ in SOURCE_PAIRS
+                         for k in (a, b)})
+    try:
+        checks = source_checks(store.panel(check_keys, data_dir))
+    except FileNotFoundError:
+        checks = []
     return {
+        "comparison": strategy_comparison(all_returns),
+        "source_checks": checks,
         "series": market_series(data_dir),
         "schema_version": SCHEMA_VERSION,
         "kind": kind,

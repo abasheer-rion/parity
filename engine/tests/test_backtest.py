@@ -17,16 +17,16 @@ class _Fixed(Strategy):
         self.w = w
 
     def instruments(self):
-        return ["eq.SPY"]
+        return ["eq.US_TOTAL"]
 
     def weights(self, panel):
-        return pd.DataFrame(self.w, index=panel.index, columns=["eq.SPY"])
+        return pd.DataFrame(self.w, index=panel.index, columns=["eq.US_TOTAL"])
 
 
 def test_weights_are_held_from_the_next_day(panel):
     """A position decided on day t must not earn day t's return."""
     res = run(_Fixed(1.0), panel, BacktestConfig(start=None, cost_bps=0))
-    spy = panel["eq.SPY"].pct_change()
+    spy = panel["eq.US_TOTAL"].pct_change()
     # First active day is the day after the first weight, so returns line up with t+1.
     pd.testing.assert_series_equal(res.returns.iloc[1:], spy.loc[res.returns.index[1:]],
                                    check_names=False)
@@ -68,7 +68,7 @@ def test_every_registered_strategy_runs(panel, name):
     res = run(strat, panel, BacktestConfig(start=None))
     assert len(res.returns) > 100
     assert np.isfinite(res.returns).all()
-    assert res.weights.abs().sum(axis=1).max() <= 1.0 + 1e-9
+    assert res.weights.abs().sum(axis=1).max() <= strat.max_gross + 1e-9
 
 
 DOCS = Path(__file__).resolve().parents[2] / "docs"

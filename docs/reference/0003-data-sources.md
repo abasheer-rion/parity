@@ -29,7 +29,11 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `cmd.WTI`, `cmd.BRENT` | FRED, EIA | `DCOILWTICO`, `DCOILBRENTEU` | Daily | 1986, 1987 | WTI was negative on 2020-04-20. |
 | `cmd.HH_GAS` | FRED, EIA | `DHHNGSP` | Daily | 1997 | Henry Hub natural gas. |
 | `cmd.COPPER` | FRED, IMF | `PCOPPUSDM` | Monthly | 1992 | Too slow for daily signals. |
-| `eq.SPY` | Yahoo chart endpoint | `SPY` | Daily | 1993 | Adjusted close, dividends reinvested. Our benchmark. |
+| `eq.US_MKT` | Kenneth French data library | `F-F_Research_Data_Factors_daily` | Daily | 1926 | US market total return, about two months behind. |
+| `eq.US_TOTAL` | Built from the two rows above and below | | Daily | 1926 | Our benchmark ([DEC-0008](../decisions/0008-benchmark-data-without-yahoo.md)). |
+| `eq.SPY` | Yahoo chart endpoint | `SPY` | Daily | 1993 | Cross-check only, never used in results. |
+| `reer.<CCY>` (10) | FRED, BIS | `RB<CC>BIS` | Monthly | 1994 | Real effective exchange rates, for currency value. Used two months late to match publication. |
+| `bond.UST10Y`, `rate.TBILL3M` | FRED | `DGS10`, `DTB3` | Daily | 1962, 1954 | US Treasury yields. |
 | `eq.SPX` | FRED | `SP500` | Daily | Last 10 years only | Price only, no dividends. Kept as a cross-check. |
 | `risk.VIX` | FRED, CBOE | `VIXCLS` | Daily | 1990 | For splitting results by market stress. |
 
@@ -39,7 +43,7 @@ We use the public CSV download link, which needs no key. It stalls for Python HT
 
 ## Yahoo
 
-The chart endpoint is unofficial and could change or disappear without notice. If it does, the fallback is `eq.SPX` from FRED plus an estimate of dividends, which would understate SPY by about 1.5 to 2 percent a year.
+The chart endpoint is unofficial and its terms forbid automated collection, so since [DEC-0008](../decisions/0008-benchmark-data-without-yahoo.md) it is only a cross-check. The Data health page compares it with our benchmark on every run.
 
 ## Tried and not used
 
@@ -64,6 +68,7 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](../decisions/0008-benchmark-data-without-yahoo.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)

@@ -29,7 +29,7 @@ def _fetch(args) -> int:
     for r in rows:
         status = f"{r['first']} to {r['last']} ({r['rows']} rows)" if r["ok"] else r["error"]
         print(f"{r['key']:<{width}}  {'ok ' if r['ok'] else 'ERR'}  {status}")
-    failed = [r for r in rows if not r["ok"]]
+    failed = [r for r in rows if not r["ok"] and r.get("required", True)]
     return 1 if failed and args.strict else 0
 
 
@@ -44,8 +44,8 @@ def _run(args) -> int:
     cfg = BacktestConfig(start=args.start, end=args.end, cost_bps=args.cost_bps,
                          target_vol=args.target_vol, include_carry=not args.no_carry)
     names = args.names or None
-    if names and "spy_buy_hold" not in names:
-        names = ["spy_buy_hold", *names]
+    if names and "us_market_buy_hold" not in names:
+        names = ["us_market_buy_hold", *names]
     doc = report.run_all(names, cfg, gauntlet=not args.quick)
     path = report.write(doc, Path(args.out))
     print(f"Wrote {path}\n")
@@ -136,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
 
     r = sub.add_parser("run", help="backtest strategies")
     r.add_argument("names", nargs="*")
-    r.add_argument("--start", default="2000-01-01")
+    r.add_argument("--start", default="1999-01-04")
     r.add_argument("--end", default=None)
     r.add_argument("--cost-bps", type=float, default=1.0)
     r.add_argument("--target-vol", type=float, default=None,

@@ -70,6 +70,8 @@ export interface Report {
   kind?: string;
   run_id?: string | null;
   series?: Record<string, SeriesBlock>;
+  comparison?: Comparison;
+  source_checks?: SourceCheck[];
 }
 
 export interface BatchSummary {
@@ -207,3 +209,11 @@ export interface SeriesBlock {
   frequency: string;
   points: Point[];
 }
+
+export interface Comparison {
+  names: string[];
+  correlation: number[][];
+  crises: { name: string; start: string; end: string; returns: Record<string, number> }[];
+}
+
+export interface SourceCheck { a: string; b: string; label: string; days: number; from: string; daily_correlation: number; annual_return_gap: number }
