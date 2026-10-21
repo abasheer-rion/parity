@@ -20,12 +20,20 @@ concurrency:
 jobs:
   migrate:
     runs-on: ubuntu-latest
+    env:
+      HAS_SECRETS: ${{ secrets.SUPABASE_ACCESS_TOKEN != '' && vars.SUPABASE_PROJECT_REF != '' }}
     steps:
+      - name: Skip when Supabase is not connected yet
+        if: env.HAS_SECRETS != 'true'
+        run: echo "Supabase secrets are not set, nothing to migrate." >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/checkout@v7
+        if: env.HAS_SECRETS == 'true'
       - uses: supabase/setup-cli@v3
+        if: env.HAS_SECRETS == 'true'
         with:
           version: latest
       - name: Link and push
+        if: env.HAS_SECRETS == 'true'
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
