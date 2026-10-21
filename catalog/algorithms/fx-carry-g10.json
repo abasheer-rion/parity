@@ -146,10 +146,12 @@
     "hypothesis": "HYP-0001",
     "strategy": "fx_carry",
     "registrations": [
-      "REG-0001"
+      "REG-0001",
+      "REG-0003"
     ],
     "runs": [
-      "RUN-000001"
+      "RUN-000001",
+      "RUN-000003"
     ],
     "verdict": null,
     "notes": ""

@@ -55,11 +55,13 @@
     "strategy": "fx_commodity_gap",
     "registrations": [
       "REG-0001",
-      "REG-0002"
+      "REG-0002",
+      "REG-0003"
     ],
     "runs": [
       "RUN-000001",
-      "RUN-000002"
+      "RUN-000002",
+      "RUN-000003"
     ],
     "verdict": null,
     "notes": "Weekly version fails the gauntlet (RUN-000001). The pre-registered monthly version (REG-0002, HYP-0008) also failed its own bar of 4 reality tests, passing 2 (RUN-000002). Both versions are retired unless a new hypothesis gives a fresh reason."

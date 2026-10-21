@@ -72,6 +72,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
+- [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [GDE-0004: The research routine](../guides/0004-the-research-routine.md)
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](0007-ways-to-build-new-algorithms.md)

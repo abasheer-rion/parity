@@ -230,6 +230,7 @@ Kroencke, Schindler and Schrimpf (2014) and Barroso and Santa-Clara (2015) find 
 - [RES-0002: Open-source projects and public results](0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](0003-forums-and-practitioners.md)
 - [RES-0004: Exchange rate theory primer](0004-exchange-rate-theory-primer.md)
+- [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

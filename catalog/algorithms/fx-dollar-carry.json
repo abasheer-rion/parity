@@ -99,11 +99,15 @@
   "testable_with_free_data": true,
   "last_reviewed": "2026-10-20",
   "research": {
-    "stage": 3,
+    "stage": 6,
     "hypothesis": "HYP-0005",
-    "strategy": null,
-    "registrations": [],
-    "runs": [],
+    "strategy": "fx_dollar_carry",
+    "registrations": [
+      "REG-0003"
+    ],
+    "runs": [
+      "RUN-000003"
+    ],
     "verdict": null,
     "notes": ""
   }

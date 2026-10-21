@@ -240,5 +240,7 @@ Collected from the threads above, roughly in order of how often they come up:
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [RES-0002: Open-source projects and public results](0002-open-source-and-public-results.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](0005-zen-apps-and-free-apis.md)
+- [RES-0006: What trading courses and traders swear by, and what the evidence says](0006-courses-and-trader-beliefs.md)
+- [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

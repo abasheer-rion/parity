@@ -90,10 +90,14 @@
   "research": {
     "stage": 2,
     "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
-    "runs": [],
+    "strategy": "stocks_vol_managed",
+    "registrations": [
+      "REG-0003"
+    ],
+    "runs": [
+      "RUN-000003"
+    ],
     "verdict": null,
-    "notes": ""
+    "notes": "Implemented as `stocks_vol_managed` and run officially in RUN-000003, but no hypothesis doc yet, so the stage stays at 2 until one is written."
   }
 }

@@ -9,8 +9,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 8 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 3 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 7 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 2 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-20 [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
+- 2026-10-20 [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - 2026-10-20 [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - 2026-10-20 [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - 2026-10-20 [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 - 2026-10-20 [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
-- 2026-10-20 [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
-- 2026-10-20 [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
 
 ## intent
 
@@ -77,6 +77,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0001 | [Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
 | EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## research
 
@@ -87,6 +88,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0003 | [What practitioners say in forums](research/0003-forums-and-practitioners.md) | current | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
 | RES-0004 | [Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md) | current | 2026-10-20 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [economics](TAGS.md#economics), [fx](TAGS.md#fx) |
 | RES-0005 | [Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md) | current | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
+| RES-0006 | [What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
+| RES-0007 | [Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## guide
 
@@ -125,7 +128,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0003 | [Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0004 | [Commodity prices and terms of trade as a currency signal](algorithms/0004-fx-commodity-terms-of-trade.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0005 | [FX cross-sectional momentum](algorithms/0005-fx-cross-sectional-momentum.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
-| ALG-0006 | [Dollar carry trade](algorithms/0006-fx-dollar-carry.md) | hypothesis | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0006 | [Dollar carry trade](algorithms/0006-fx-dollar-carry.md) | official | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0007 | [Economic momentum in currencies (Dahlquist and Hasseltoft 2020)](algorithms/0007-fx-economic-momentum.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0008 | [Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md) | hypothesis | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | ALG-0009 | [London 4pm fix flow and reversal effects](algorithms/0009-fx-london-4pm-fix.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
