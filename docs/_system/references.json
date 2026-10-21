@@ -13,6 +13,31 @@
   ],
   "references": [
     {
+      "key": "acerbi2002",
+      "type": "paper",
+      "authors": [
+        "Acerbi, Carlo",
+        "Tasche, Dirk"
+      ],
+      "year": 2002,
+      "title": "On the coherence of expected shortfall",
+      "venue": "Journal of Banking and Finance 26(7), 1487-1503",
+      "doi": "10.1016/S0378-4266(02)00283-2",
+      "arxiv": "cond-mat/0104295",
+      "url": "https://doi.org/10.1016/S0378-4266(02)00283-2",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "alquist2020",
       "type": "paper",
       "authors": [
@@ -128,6 +153,34 @@
       }
     },
     {
+      "key": "andersen2003",
+      "type": "paper",
+      "authors": [
+        "Andersen, Torben G.",
+        "Bollerslev, Tim",
+        "Diebold, Francis X.",
+        "Vega, Clara"
+      ],
+      "year": 2003,
+      "title": "Micro Effects of Macro Announcements: Real-Time Price Discovery in Foreign Exchange",
+      "venue": "American Economic Review 93(1), 38-62",
+      "doi": "10.1257/000282803321455151",
+      "arxiv": null,
+      "url": "https://doi.org/10.1257/000282803321455151",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "anderson2003",
       "type": "paper",
       "authors": [
@@ -234,6 +287,32 @@
       }
     },
     {
+      "key": "arkes1985",
+      "type": "paper",
+      "authors": [
+        "Arkes, Hal R.",
+        "Blumer, Catherine"
+      ],
+      "year": 1985,
+      "title": "The psychology of sunk cost",
+      "venue": "Organizational Behavior and Human Decision Processes 35(1), 124-140",
+      "doi": "10.1016/0749-5978(85)90049-4",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0749-5978(85)90049-4",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "arnott2019",
       "type": "paper",
       "authors": [
@@ -257,6 +336,33 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "artzner1999",
+      "type": "paper",
+      "authors": [
+        "Artzner, Philippe",
+        "Delbaen, Freddy",
+        "Eber, Jean-Marc",
+        "Heath, David"
+      ],
+      "year": 1999,
+      "title": "Coherent Measures of Risk",
+      "venue": "Mathematical Finance 9(3), 203-228",
+      "doi": "10.1111/1467-9965.00068",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/1467-9965.00068",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -535,6 +641,81 @@
       }
     },
     {
+      "key": "banerjee1992",
+      "type": "paper",
+      "authors": [
+        "Banerjee, Abhijit V."
+      ],
+      "year": 1992,
+      "title": "A Simple Model of Herd Behavior",
+      "venue": "Quarterly Journal of Economics 107(3), 797-817",
+      "doi": "10.2307/2118364",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2118364",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "barber2000",
+      "type": "paper",
+      "authors": [
+        "Barber, Brad M.",
+        "Odean, Terrance"
+      ],
+      "year": 2000,
+      "title": "Trading Is Hazardous to Your Wealth: The Common Stock Investment Performance of Individual Investors",
+      "venue": "Journal of Finance 55(2), 773-806",
+      "doi": "10.1111/0022-1082.00226",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/0022-1082.00226",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "barber2001",
+      "type": "paper",
+      "authors": [
+        "Barber, Brad M.",
+        "Odean, Terrance"
+      ],
+      "year": 2001,
+      "title": "Boys Will Be Boys: Gender, Overconfidence, and Common Stock Investment",
+      "venue": "Quarterly Journal of Economics 116(1), 261-292",
+      "doi": "10.1162/003355301556400",
+      "arxiv": null,
+      "url": "https://doi.org/10.1162/003355301556400",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "barber2004",
       "type": "paper",
       "authors": [
@@ -564,6 +745,82 @@
       }
     },
     {
+      "key": "barber2008",
+      "type": "paper",
+      "authors": [
+        "Barber, Brad M.",
+        "Odean, Terrance"
+      ],
+      "year": 2008,
+      "title": "All That Glitters: The Effect of Attention and News on the Buying Behavior of Individual and Institutional Investors",
+      "venue": "Review of Financial Studies 21(2), 785-818",
+      "doi": "10.1093/rfs/hhm079",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhm079",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "barberis2003",
+      "type": "paper",
+      "authors": [
+        "Barberis, Nicholas",
+        "Thaler, Richard"
+      ],
+      "year": 2003,
+      "title": "A survey of behavioral finance",
+      "venue": "Handbook of the Economics of Finance, vol. 1B, 1053-1128",
+      "doi": "10.1016/S1574-0102(03)01027-6",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/S1574-0102(03)01027-6",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Handbook chapter, no open abstract.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "baron1988",
+      "type": "paper",
+      "authors": [
+        "Baron, Jonathan",
+        "Hershey, John C."
+      ],
+      "year": 1988,
+      "title": "Outcome bias in decision evaluation",
+      "venue": "Journal of Personality and Social Psychology 54(4), 569-579",
+      "doi": "10.1037/0022-3514.54.4.569",
+      "arxiv": null,
+      "url": "https://doi.org/10.1037/0022-3514.54.4.569",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "barroso2015",
       "type": "paper",
       "authors": [
@@ -585,6 +842,30 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "bcbs2019",
+      "type": "regulator",
+      "authors": [
+        "Basel Committee on Banking Supervision"
+      ],
+      "year": 2019,
+      "title": "Minimum capital requirements for market risk",
+      "venue": "Bank for International Settlements, BCBS d457",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bis.org/bcbs/publ/d457.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -616,6 +897,31 @@
       }
     },
     {
+      "key": "benartzi1995",
+      "type": "paper",
+      "authors": [
+        "Benartzi, Shlomo",
+        "Thaler, Richard H."
+      ],
+      "year": 1995,
+      "title": "Myopic Loss Aversion and the Equity Premium Puzzle",
+      "venue": "Quarterly Journal of Economics 110(1), 73-92",
+      "doi": "10.2307/2118511",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2118511",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "berkman2011",
       "type": "paper",
       "authors": [
@@ -637,6 +943,31 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "bessembinder2018",
+      "type": "paper",
+      "authors": [
+        "Bessembinder, Hendrik"
+      ],
+      "year": 2018,
+      "title": "Do stocks outperform Treasury bills?",
+      "venue": "Journal of Financial Economics 129(3), 440-457",
+      "doi": "10.1016/j.jfineco.2018.06.004",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2018.06.004",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -664,6 +995,31 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "bis2025",
+      "type": "regulator",
+      "authors": [
+        "Bank for International Settlements"
+      ],
+      "year": 2025,
+      "title": "OTC foreign exchange turnover in April 2025, Triennial Central Bank Survey",
+      "venue": "BIS statistical release, 30 September 2025",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bis.org/statistics/rpfx25_fx.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -751,6 +1107,31 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "brier1950",
+      "type": "paper",
+      "authors": [
+        "Brier, Glenn W."
+      ],
+      "year": 1950,
+      "title": "Verification of forecasts expressed in terms of probability",
+      "venue": "Monthly Weather Review 78(1), 1-3",
+      "doi": "10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+      "arxiv": null,
+      "url": "https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher page blocked our reader.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -923,6 +1304,33 @@
       }
     },
     {
+      "key": "caginalp1998a",
+      "type": "paper",
+      "authors": [
+        "Caginalp, Gunduz",
+        "Laurent, Henry"
+      ],
+      "year": 1998,
+      "title": "The predictive power of price patterns",
+      "venue": "Applied Mathematical Finance 5(3-4), 181-205",
+      "doi": "10.1080/135048698334637",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/135048698334637",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "caldara2022",
       "type": "paper",
       "authors": [
@@ -944,6 +1352,56 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "carhart1997",
+      "type": "paper",
+      "authors": [
+        "Carhart, Mark M."
+      ],
+      "year": 1997,
+      "title": "On Persistence in Mutual Fund Performance",
+      "venue": "Journal of Finance 52(1), 57-82",
+      "doi": "10.1111/j.1540-6261.1997.tb03808.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1997.tb03808.x",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "carver2015",
+      "type": "book",
+      "authors": [
+        "Carver, Robert"
+      ],
+      "year": 2015,
+      "title": "Systematic Trading: A Unique New Method for Designing Trading and Investing Systems",
+      "venue": "Harriman House",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -1027,6 +1485,30 @@
       }
     },
     {
+      "key": "cftc2010",
+      "type": "regulator",
+      "authors": [
+        "Commodity Futures Trading Commission"
+      ],
+      "year": 2010,
+      "title": "CFTC Releases Final Rules Regarding Retail Forex Transactions",
+      "venue": "CFTC press release 5883-10, 30 August 2010",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/5883-10",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "chague2025",
       "type": "paper",
       "authors": [
@@ -1102,6 +1584,33 @@
         "source": "repo",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "chang1999",
+      "type": "paper",
+      "authors": [
+        "Chang, P. H. Kevin",
+        "Osler, Carol L."
+      ],
+      "year": 1999,
+      "title": "Methodical Madness: Technical Analysis and the Irrationality of Exchange-Rate Forecasts",
+      "venue": "Economic Journal 109(458), 636-661",
+      "doi": "10.1111/1468-0297.00466",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/1468-0297.00466",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -1247,6 +1756,32 @@
       }
     },
     {
+      "key": "cowles1933",
+      "type": "paper",
+      "authors": [
+        "Cowles, Alfred"
+      ],
+      "year": 1933,
+      "title": "Can Stock Market Forecasters Forecast?",
+      "venue": "Econometrica 1(3), 309-324",
+      "doi": "10.2307/1907042",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/1907042",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. JSTOR page blocked; claim worded as not yet checked.",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "dahlquist2020",
       "type": "paper",
       "authors": [
@@ -1306,6 +1841,31 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "debondt1985",
+      "type": "paper",
+      "authors": [
+        "De Bondt, Werner F. M.",
+        "Thaler, Richard"
+      ],
+      "year": 1985,
+      "title": "Does the Stock Market Overreact?",
+      "venue": "Journal of Finance 40(3), 793-805",
+      "doi": "10.1111/j.1540-6261.1985.tb05004.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1985.tb05004.x",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -1395,6 +1955,33 @@
       }
     },
     {
+      "key": "dimson2002",
+      "type": "book",
+      "authors": [
+        "Dimson, Elroy",
+        "Marsh, Paul",
+        "Staunton, Mike"
+      ],
+      "year": 2002,
+      "title": "Triumph of the Optimists: 101 Years of Global Investment Returns",
+      "venue": "Princeton University Press",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "ding2024",
       "type": "preprint",
       "authors": [
@@ -1445,6 +2032,32 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "du2018",
+      "type": "paper",
+      "authors": [
+        "Du, Wenxin",
+        "Tepper, Alexander",
+        "Verdelhan, Adrien"
+      ],
+      "year": 2018,
+      "title": "Deviations from Covered Interest Rate Parity",
+      "venue": "Journal of Finance 73(3), 915-957",
+      "doi": "10.1111/jofi.12620",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12620",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -1684,6 +2297,31 @@
       }
     },
     {
+      "key": "feller1968",
+      "type": "book",
+      "authors": [
+        "Feller, William"
+      ],
+      "year": 1968,
+      "title": "An Introduction to Probability Theory and Its Applications, Volume 1, 3rd edition",
+      "venue": "Wiley",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "ferraro2011",
       "type": "paper",
       "authors": [
@@ -1798,6 +2436,31 @@
       }
     },
     {
+      "key": "fischhoff1975",
+      "type": "paper",
+      "authors": [
+        "Fischhoff, Baruch"
+      ],
+      "year": 1975,
+      "title": "Hindsight is not equal to foresight: The effect of outcome knowledge on judgment under uncertainty",
+      "venue": "Journal of Experimental Psychology: Human Perception and Performance 1(3), 288-299",
+      "doi": "10.1037/0096-1523.1.3.288",
+      "arxiv": null,
+      "url": "https://doi.org/10.1037/0096-1523.1.3.288",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract; the claim used matches the title only.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "franz2022",
       "type": "paper",
       "authors": [
@@ -1848,6 +2511,54 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "french2008",
+      "type": "paper",
+      "authors": [
+        "French, Kenneth R."
+      ],
+      "year": 2008,
+      "title": "Presidential Address: The Cost of Active Investing",
+      "venue": "Journal of Finance 63(4), 1537-1573",
+      "doi": "10.1111/j.1540-6261.2008.01368.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.2008.01368.x",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "fsb2014",
+      "type": "regulator",
+      "authors": [
+        "Financial Stability Board"
+      ],
+      "year": 2014,
+      "title": "Foreign Exchange Benchmarks: Final Report",
+      "venue": "Financial Stability Board, 30 September 2014",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fsb.org/2014/09/r_140930/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -1905,6 +2616,31 @@
       }
     },
     {
+      "key": "gawande2009",
+      "type": "book",
+      "authors": [
+        "Gawande, Atul"
+      ],
+      "year": 2009,
+      "title": "The Checklist Manifesto: How to Get Things Right",
+      "venue": "Metropolitan Books",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "gencay2026",
       "type": "preprint",
       "authors": [
@@ -1925,6 +2661,31 @@
       ],
       "metadata": {
         "source": "arxiv",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "gfxc2024",
+      "type": "regulator",
+      "authors": [
+        "Global Foreign Exchange Committee"
+      ],
+      "year": 2024,
+      "title": "FX Global Code",
+      "venue": "Global Foreign Exchange Committee",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.globalfxc.org/fx_global_code.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Page read on 2026-10-21; confirms what the Code is, but not its last look text, so we cite it only for the Code itself.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -1953,6 +2714,33 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "gilovich1985",
+      "type": "paper",
+      "authors": [
+        "Gilovich, Thomas",
+        "Vallone, Robert",
+        "Tversky, Amos"
+      ],
+      "year": 1985,
+      "title": "The hot hand in basketball: On the misperception of random sequences",
+      "venue": "Cognitive Psychology 17(3), 295-314",
+      "doi": "10.1016/0010-0285(85)90010-6",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0010-0285(85)90010-6",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -2068,6 +2856,31 @@
       }
     },
     {
+      "key": "greenwood2014",
+      "type": "paper",
+      "authors": [
+        "Greenwood, Robin",
+        "Shleifer, Andrei"
+      ],
+      "year": 2014,
+      "title": "Expectations of Returns and Expected Returns",
+      "venue": "Review of Financial Studies 27(3), 714-746",
+      "doi": "10.1093/rfs/hht082",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hht082",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "gu2018",
       "type": "preprint",
       "authors": [
@@ -2172,6 +2985,30 @@
       "metadata": {
         "source": "arxiv",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "heimer2016",
+      "type": "paper",
+      "authors": [
+        "Heimer, Rawley Z."
+      ],
+      "year": 2016,
+      "title": "Peer Pressure: Social Interaction and the Disposition Effect",
+      "venue": "Review of Financial Studies 29(11), 3177-3209",
+      "doi": "10.1093/rfs/hhw063",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhw063",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -2638,6 +3475,132 @@
       }
     },
     {
+      "key": "jorion2006",
+      "type": "book",
+      "authors": [
+        "Jorion, Philippe"
+      ],
+      "year": 2006,
+      "title": "Value at Risk: The New Benchmark for Managing Financial Risk, 3rd edition",
+      "venue": "McGraw-Hill",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "kahneman1979",
+      "type": "paper",
+      "authors": [
+        "Kahneman, Daniel",
+        "Tversky, Amos"
+      ],
+      "year": 1979,
+      "title": "Prospect Theory: An Analysis of Decision under Risk",
+      "venue": "Econometrica 47(2), 263-291",
+      "doi": "10.2307/1914185",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/1914185",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kahneman1990",
+      "type": "paper",
+      "authors": [
+        "Kahneman, Daniel",
+        "Knetsch, Jack L.",
+        "Thaler, Richard H."
+      ],
+      "year": 1990,
+      "title": "Experimental Tests of the Endowment Effect and the Coase Theorem",
+      "venue": "Journal of Political Economy 98(6), 1325-1348",
+      "doi": "10.1086/261737",
+      "arxiv": null,
+      "url": "https://doi.org/10.1086/261737",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kahneman1993",
+      "type": "paper",
+      "authors": [
+        "Kahneman, Daniel",
+        "Lovallo, Dan"
+      ],
+      "year": 1993,
+      "title": "Timid Choices and Bold Forecasts: A Cognitive Perspective on Risk Taking",
+      "venue": "Management Science 39(1), 17-31",
+      "doi": "10.1287/mnsc.39.1.17",
+      "arxiv": null,
+      "url": "https://doi.org/10.1287/mnsc.39.1.17",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kahneman2011",
+      "type": "book",
+      "authors": [
+        "Kahneman, Daniel"
+      ],
+      "year": 2011,
+      "title": "Thinking, Fast and Slow",
+      "venue": "Farrar, Straus and Giroux",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "kaminski2014",
       "type": "paper",
       "authors": [
@@ -2685,6 +3648,57 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "king2012",
+      "type": "paper",
+      "authors": [
+        "King, Michael R.",
+        "Osler, Carol L.",
+        "Rime, Dagfinn"
+      ],
+      "year": 2012,
+      "title": "Foreign Exchange Market Structure, Players, and Evolution",
+      "venue": "Handbook of Exchange Rates (James, Marsh, Sarno, eds.), Wiley, chapter 1",
+      "doi": "10.1002/9781118445785.ch1",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/9781118445785.ch1",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "klein2007",
+      "type": "paper",
+      "authors": [
+        "Klein, Gary"
+      ],
+      "year": 2007,
+      "title": "Performing a Project Premortem",
+      "venue": "Harvard Business Review 85(9), 18-19",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hbr.org/2007/09/performing-a-project-premortem",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "HBR page not reachable from our reader.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -2828,6 +3842,30 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "langer1975",
+      "type": "paper",
+      "authors": [
+        "Langer, Ellen J."
+      ],
+      "year": 1975,
+      "title": "The illusion of control",
+      "venue": "Journal of Personality and Social Psychology 32(2), 311-328",
+      "doi": "10.1037/0022-3514.32.2.311",
+      "arxiv": null,
+      "url": "https://doi.org/10.1037/0022-3514.32.2.311",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -3056,6 +4094,33 @@
       }
     },
     {
+      "key": "lo2000",
+      "type": "paper",
+      "authors": [
+        "Lo, Andrew W.",
+        "Mamaysky, Harry",
+        "Wang, Jiang"
+      ],
+      "year": 2000,
+      "title": "Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation",
+      "venue": "Journal of Finance 55(4), 1705-1765",
+      "doi": "10.1111/0022-1082.00265",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/0022-1082.00265",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "lo2005",
       "type": "preprint",
       "authors": [
@@ -3132,6 +4197,34 @@
       "metadata": {
         "source": "arxiv",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "lu2012",
+      "type": "paper",
+      "authors": [
+        "Lu, Tsung-Hsun",
+        "Shiu, Yung-Ming",
+        "Liu, Tsung-Chi"
+      ],
+      "year": 2012,
+      "title": "Profitable candlestick trading strategies: The evidence from a new perspective",
+      "venue": "Review of Financial Economics 21(2), 63-68",
+      "doi": "10.1016/j.rfe.2012.02.001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.rfe.2012.02.001",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -3245,6 +4338,84 @@
       }
     },
     {
+      "key": "maclean2011",
+      "type": "book",
+      "authors": [
+        "MacLean, Leonard C.",
+        "Thorp, Edward O.",
+        "Ziemba, William T."
+      ],
+      "year": 2011,
+      "title": "The Kelly Capital Growth Investment Criterion: Theory and Practice",
+      "venue": "World Scientific",
+      "doi": "10.1142/7598",
+      "arxiv": null,
+      "url": "https://doi.org/10.1142/7598",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "magdonismail2004",
+      "type": "paper",
+      "authors": [
+        "Magdon-Ismail, Malik",
+        "Atiya, Amir F.",
+        "Pratap, Amrit",
+        "Abu-Mostafa, Yaser S."
+      ],
+      "year": 2004,
+      "title": "On the maximum drawdown of a Brownian motion",
+      "venue": "Journal of Applied Probability 41(1), 147-161",
+      "doi": "10.1239/jap/1077134674",
+      "arxiv": null,
+      "url": "https://doi.org/10.1239/jap/1077134674",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "mandelbrot1963",
+      "type": "paper",
+      "authors": [
+        "Mandelbrot, Benoit"
+      ],
+      "year": 1963,
+      "title": "The Variation of Certain Speculative Prices",
+      "venue": "Journal of Business 36(4), 394-419",
+      "doi": "10.1086/294632",
+      "arxiv": null,
+      "url": "https://doi.org/10.1086/294632",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "markowitz1952",
       "type": "paper",
       "authors": [
@@ -3267,6 +4438,113 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "marshall2005",
+      "type": "book",
+      "authors": [
+        "Marshall, Ben R."
+      ],
+      "year": 2005,
+      "title": "Candlestick technical trading strategies: can they create value for investors? (PhD thesis)",
+      "venue": "Massey University, Palmerston North, New Zealand",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://mro.massey.ac.nz/bitstreams/7afc8049-23a1-4fe9-ac3a-792d6403ef1c/download",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "marshall2006",
+      "type": "paper",
+      "authors": [
+        "Marshall, Ben R.",
+        "Young, Martin R.",
+        "Rose, Lawrence C."
+      ],
+      "year": 2006,
+      "title": "Candlestick technical trading strategies: Can they create value for investors?",
+      "venue": "Journal of Banking and Finance 30(8), 2303-2323",
+      "doi": "10.1016/j.jbankfin.2005.08.001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jbankfin.2005.08.001",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher blocked; findings checked in the author's thesis, see marshall2005.",
+      "used_in": [
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "marshall2008",
+      "type": "paper",
+      "authors": [
+        "Marshall, Ben R.",
+        "Young, Martin R.",
+        "Cahan, Rochester"
+      ],
+      "year": 2008,
+      "title": "Are candlestick technical trading strategies profitable in the Japanese equity market?",
+      "venue": "Review of Quantitative Finance and Accounting 31(2), 191-207",
+      "doi": "10.1007/s11156-007-0068-1",
+      "arxiv": null,
+      "url": "https://doi.org/10.1007/s11156-007-0068-1",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. DOI corrected. Paywalled; text says we have not read it.",
+      "used_in": [
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "mccauley2014",
+      "type": "paper",
+      "authors": [
+        "McCauley, Robert N.",
+        "Shu, Chang",
+        "Ma, Guonan"
+      ],
+      "year": 2014,
+      "title": "Non-deliverable forwards: 2013 and beyond",
+      "venue": "BIS Quarterly Review, March 2014, 75-88",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bis.org/publ/qtrpdf/r_qt1403h.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Title confirmed on the BIS page on 2026-10-21; authors and the claim not shown there.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -3419,6 +4697,32 @@
       }
     },
     {
+      "key": "menkhoff2007",
+      "type": "paper",
+      "authors": [
+        "Menkhoff, Lukas",
+        "Taylor, Mark P."
+      ],
+      "year": 2007,
+      "title": "The Obstinate Passion of Foreign Exchange Professionals: Technical Analysis",
+      "venue": "Journal of Economic Literature 45(4), 936-972",
+      "doi": "10.1257/jel.45.4.936",
+      "arxiv": null,
+      "url": "https://doi.org/10.1257/jel.45.4.936",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "menkhoff2012",
       "type": "paper",
       "authors": [
@@ -3567,6 +4871,32 @@
       }
     },
     {
+      "key": "messmore1995",
+      "type": "paper",
+      "authors": [
+        "Messmore, Tom"
+      ],
+      "year": 1995,
+      "title": "Variance Drain",
+      "venue": "Journal of Portfolio Management 21(4), 104-110",
+      "doi": "10.3905/jpm.1995.409536",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jpm.1995.409536",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. DOI corrected. Paywalled; we cite it only for the term variance drain.",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "miao2017",
       "type": "paper",
       "authors": [
@@ -3591,6 +4921,31 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "miller2018",
+      "type": "paper",
+      "authors": [
+        "Miller, Joshua B.",
+        "Sanjurjo, Adam"
+      ],
+      "year": 2018,
+      "title": "Surprised by the Hot Hand Fallacy? A Truth in the Law of Small Numbers",
+      "venue": "Econometrica 86(6), 2019-2047",
+      "doi": "10.3982/ECTA14943",
+      "arxiv": null,
+      "url": "https://doi.org/10.3982/ECTA14943",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -3852,6 +5207,104 @@
       }
     },
     {
+      "key": "nickerson1998",
+      "type": "paper",
+      "authors": [
+        "Nickerson, Raymond S."
+      ],
+      "year": 1998,
+      "title": "Confirmation Bias: A Ubiquitous Phenomenon in Many Guises",
+      "venue": "Review of General Psychology 2(2), 175-220",
+      "doi": "10.1037/1089-2680.2.2.175",
+      "arxiv": null,
+      "url": "https://doi.org/10.1037/1089-2680.2.2.175",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "nison1991",
+      "type": "book",
+      "authors": [
+        "Nison, Steve"
+      ],
+      "year": 1991,
+      "title": "Japanese Candlestick Charting Techniques",
+      "venue": "New York Institute of Finance",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "odean1998",
+      "type": "paper",
+      "authors": [
+        "Odean, Terrance"
+      ],
+      "year": 1998,
+      "title": "Are Investors Reluctant to Realize Their Losses?",
+      "venue": "Journal of Finance 53(5), 1775-1798",
+      "doi": "10.1111/0022-1082.00072",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/0022-1082.00072",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "oomen2017",
+      "type": "paper",
+      "authors": [
+        "Oomen, Roel"
+      ],
+      "year": 2017,
+      "title": "Last look",
+      "venue": "Quantitative Finance 17(7), 1057-1070",
+      "doi": "10.1080/14697688.2016.1262545",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/14697688.2016.1262545",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "osler2000",
       "type": "paper",
       "authors": [
@@ -3881,6 +5334,32 @@
       }
     },
     {
+      "key": "osler2003",
+      "type": "paper",
+      "authors": [
+        "Osler, Carol L."
+      ],
+      "year": 2003,
+      "title": "Currency Orders and Exchange Rate Dynamics: An Explanation for the Predictive Success of Technical Analysis",
+      "venue": "Journal of Finance 58(5), 1791-1819",
+      "doi": "10.1111/1540-6261.00588",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/1540-6261.00588",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "parityteam2026",
       "type": "paper",
       "authors": [
@@ -3902,6 +5381,33 @@
         "source": "repo",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "park2007",
+      "type": "paper",
+      "authors": [
+        "Park, Cheol-Ho",
+        "Irwin, Scott H."
+      ],
+      "year": 2007,
+      "title": "What Do We Know About the Profitability of Technical Analysis?",
+      "venue": "Journal of Economic Surveys 21(4), 786-826",
+      "doi": "10.1111/j.1467-6419.2007.00519.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1467-6419.2007.00519.x",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -3931,6 +5437,31 @@
       }
     },
     {
+      "key": "peters2019",
+      "type": "paper",
+      "authors": [
+        "Peters, Ole"
+      ],
+      "year": 2019,
+      "title": "The ergodicity problem in economics",
+      "venue": "Nature Physics 15, 1216-1221",
+      "doi": "10.1038/s41567-019-0732-0",
+      "arxiv": null,
+      "url": "https://doi.org/10.1038/s41567-019-0732-0",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher page needs a login.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "ranaldo2010",
       "type": "paper",
       "authors": [
@@ -3945,14 +5476,15 @@
       "url": "https://doi.org/10.1093/rof/rfq007",
       "also_at": [],
       "accessed": "2026-10-21",
-      "verification": "not checked",
+      "verification": "ok",
       "used_in": [
-        "docs/reference/0011-scenario-simulator-method.md"
+        "docs/reference/0004-glossary.md"
       ],
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
-      }
+      },
+      "verification_checked": "2026-10-21"
     },
     {
       "key": "rees2025",
@@ -3999,6 +5531,416 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "samuelson1988",
+      "type": "paper",
+      "authors": [
+        "Samuelson, William",
+        "Zeckhauser, Richard"
+      ],
+      "year": 1988,
+      "title": "Status quo bias in decision making",
+      "venue": "Journal of Risk and Uncertainty 1(1), 7-59",
+      "doi": "10.1007/BF00055564",
+      "arxiv": null,
+      "url": "https://doi.org/10.1007/BF00055564",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "sharpe1991",
+      "type": "paper",
+      "authors": [
+        "Sharpe, William F."
+      ],
+      "year": 1991,
+      "title": "The Arithmetic of Active Management",
+      "venue": "Financial Analysts Journal 47(1), 7-9",
+      "doi": "10.2469/faj.v47.n1.7",
+      "arxiv": null,
+      "url": "https://doi.org/10.2469/faj.v47.n1.7",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Crossref has no abstract; claim not yet seen in the text.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "shefrin1985",
+      "type": "paper",
+      "authors": [
+        "Shefrin, Hersh",
+        "Statman, Meir"
+      ],
+      "year": 1985,
+      "title": "The Disposition to Sell Winners Too Early and Ride Losers Too Long: Theory and Evidence",
+      "venue": "Journal of Finance 40(3), 777-790",
+      "doi": "10.1111/j.1540-6261.1985.tb05002.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1985.tb05002.x",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "snb2015",
+      "type": "regulator",
+      "authors": [
+        "Swiss National Bank"
+      ],
+      "year": 2015,
+      "title": "Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%",
+      "venue": "SNB press release, 15 January 2015",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "staw1976",
+      "type": "paper",
+      "authors": [
+        "Staw, Barry M."
+      ],
+      "year": 1976,
+      "title": "Knee-deep in the big muddy: a study of escalating commitment to a chosen course of action",
+      "venue": "Organizational Behavior and Human Performance 16(1), 27-44",
+      "doi": "10.1016/0030-5073(76)90005-2",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0030-5073(76)90005-2",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "sullivan1999",
+      "type": "paper",
+      "authors": [
+        "Sullivan, Ryan",
+        "Timmermann, Allan",
+        "White, Halbert"
+      ],
+      "year": 1999,
+      "title": "Data-Snooping, Technical Trading Rule Performance, and the Bootstrap",
+      "venue": "Journal of Finance 54(5), 1647-1691",
+      "doi": "10.1111/0022-1082.00163",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/0022-1082.00163",
+      "also_at": [
+        "https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "taleb2007",
+      "type": "book",
+      "authors": [
+        "Taleb, Nassim Nicholas"
+      ],
+      "year": 2007,
+      "title": "The Black Swan: The Impact of the Highly Improbable",
+      "venue": "Random House",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "tetlock2005",
+      "type": "book",
+      "authors": [
+        "Tetlock, Philip E."
+      ],
+      "year": 2005,
+      "title": "Expert Political Judgment: How Good Is It? How Can We Know?",
+      "venue": "Princeton University Press",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "tetlock2015",
+      "type": "book",
+      "authors": [
+        "Tetlock, Philip E.",
+        "Gardner, Dan"
+      ],
+      "year": 2015,
+      "title": "Superforecasting: The Art and Science of Prediction",
+      "venue": "Crown",
+      "doi": null,
+      "arxiv": null,
+      "url": null,
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Book; not read this session. Cited for a general idea, not a number.",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "thaler1981",
+      "type": "paper",
+      "authors": [
+        "Thaler, Richard H.",
+        "Shefrin, H. M."
+      ],
+      "year": 1981,
+      "title": "An Economic Theory of Self-Control",
+      "venue": "Journal of Political Economy 89(2), 392-406",
+      "doi": "10.1086/260971",
+      "arxiv": null,
+      "url": "https://doi.org/10.1086/260971",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "thaler1985",
+      "type": "paper",
+      "authors": [
+        "Thaler, Richard H."
+      ],
+      "year": 1985,
+      "title": "Mental Accounting and Consumer Choice",
+      "venue": "Marketing Science 4(3), 199-214",
+      "doi": "10.1287/mksc.4.3.199",
+      "arxiv": null,
+      "url": "https://doi.org/10.1287/mksc.4.3.199",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "thaler1990",
+      "type": "paper",
+      "authors": [
+        "Thaler, Richard H.",
+        "Johnson, Eric J."
+      ],
+      "year": 1990,
+      "title": "Gambling with the House Money and Trying to Break Even: The Effects of Prior Outcomes on Risky Choice",
+      "venue": "Management Science 36(6), 643-660",
+      "doi": "10.1287/mnsc.36.6.643",
+      "arxiv": null,
+      "url": "https://doi.org/10.1287/mnsc.36.6.643",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "thorp2008",
+      "type": "paper",
+      "authors": [
+        "Thorp, Edward O."
+      ],
+      "year": 2008,
+      "title": "The Kelly criterion in blackjack, sports betting and the stock market",
+      "venue": "Handbook of Asset and Liability Management, vol. 1, 385-428",
+      "doi": "10.1016/B978-044453248-0.50015-0",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/B978-044453248-0.50015-0",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-21",
+      "note": "Details confirmed against Crossref or OpenAlex on 2026-10-21. Full text not reachable; the half Kelly figure in the glossary is our own arithmetic.",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "tversky1971",
+      "type": "paper",
+      "authors": [
+        "Tversky, Amos",
+        "Kahneman, Daniel"
+      ],
+      "year": 1971,
+      "title": "Belief in the law of small numbers",
+      "venue": "Psychological Bulletin 76(2), 105-110",
+      "doi": "10.1037/h0031322",
+      "arxiv": null,
+      "url": "https://doi.org/10.1037/h0031322",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "tversky1974",
+      "type": "paper",
+      "authors": [
+        "Tversky, Amos",
+        "Kahneman, Daniel"
+      ],
+      "year": 1974,
+      "title": "Judgment under Uncertainty: Heuristics and Biases",
+      "venue": "Science 185(4157), 1124-1131",
+      "doi": "10.1126/science.185.4157.1124",
+      "arxiv": null,
+      "url": "https://doi.org/10.1126/science.185.4157.1124",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "tversky1981",
+      "type": "paper",
+      "authors": [
+        "Tversky, Amos",
+        "Kahneman, Daniel"
+      ],
+      "year": 1981,
+      "title": "The Framing of Decisions and the Psychology of Choice",
+      "venue": "Science 211(4481), 453-458",
+      "doi": "10.1126/science.7455683",
+      "arxiv": null,
+      "url": "https://doi.org/10.1126/science.7455683",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/reference/0004-glossary.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },

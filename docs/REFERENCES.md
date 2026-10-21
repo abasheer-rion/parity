@@ -3,21 +3,27 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-650 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+726 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 113 |
+| [Papers](#papers) | 171 |
 | [Preprints and working papers](#preprints-and-working-papers) | 32 |
-| [Books](#books) | 8 |
+| [Books](#books) | 20 |
 | [Datasets](#datasets) | 53 |
 | [Software](#software) | 61 |
 | [Web pages](#web-pages) | 318 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 10 |
+| [Regulators](#regulators) | 16 |
 | [News](#news) | 3 |
 
 ## Papers
+
+### acerbi2002
+
+Acerbi, Carlo; Tasche, Dirk (2002). On the coherence of expected shortfall. *Journal of Banking and Finance 26(7), 1487-1503*. doi:10.1016/S0378-4266(02)00283-2 <https://doi.org/10.1016/S0378-4266(02)00283-2>. arXiv:cond-mat/0104295 <https://arxiv.org/abs/cond-mat/0104295>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### alquist2020
 
@@ -41,6 +47,12 @@ Also at: <https://data.mendeley.com/datasets/yxystdn2hz/2>.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### andersen2003
+
+Andersen, Torben G.; Bollerslev, Tim; Diebold, Francis X.; Vega, Clara (2003). Micro Effects of Macro Announcements: Real-Time Price Discovery in Foreign Exchange. *American Economic Review 93(1), 38-62*. doi:10.1257/000282803321455151 <https://doi.org/10.1257/000282803321455151>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### anderson2003
 
 Anderson, Torben G; Bollerslev, Tim; Diebold, Francis X; Vega, Clara (2003). Micro Effects of Macro Announcements: Real-Time Price Discovery in Foreign Exchange. *American Economic Review 93(1), 38-62*. doi:10.1257/000282803321455151 <https://doi.org/10.1257/000282803321455151>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -59,11 +71,25 @@ Apesteguia, Jose; Oechssler, Jörg; Weidenholzer, Simon (2020). Copy Trading. *M
 
 Cited in: [catalog/algorithms/copy-trading-signal-services.json](../catalog/algorithms/copy-trading-signal-services.json), [ALG-0057](algorithms/0057-copy-trading-signal-services.md).
 
+### arkes1985
+
+Arkes, Hal R.; Blumer, Catherine (1985). The psychology of sunk cost. *Organizational Behavior and Human Decision Processes 35(1), 124-140*. doi:10.1016/0749-5978(85)90049-4 <https://doi.org/10.1016/0749-5978(85)90049-4>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### arnott2019
 
 Arnott, Robert D.; Harvey, Campbell R.; Markowitz, Harry (2019). A Backtesting Protocol in the Era of Machine Learning. *Journal of Financial Data Science 1(1), 64-74*. doi:10.2139/ssrn.3275654 <https://doi.org/10.2139/ssrn.3275654>. <https://people.duke.edu/~charvey/Research/Published_Papers/SSRN-id3275654.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### artzner1999
+
+Artzner, Philippe; Delbaen, Freddy; Eber, Jean-Marc; Heath, David (1999). Coherent Measures of Risk. *Mathematical Finance 9(3), 203-228*. doi:10.1111/1467-9965.00068 <https://doi.org/10.1111/1467-9965.00068>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### asness2012
 
@@ -115,7 +141,7 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 
 Bailey, David; Borwein, Jonathan; López de Prado, Marcos; Zhu, Qiji Jim (2016). The probability of backtest overfitting. *The Journal of Computational Finance*. doi:10.21314/jcf.2016.322 <https://doi.org/10.21314/jcf.2016.322>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### bajgrowicz2012
 
@@ -125,6 +151,24 @@ Note: Cited in this repo as: Bajgrowicz and Scaillet (2012), abstract.
 
 Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [ALG-0061](algorithms/0061-golden-cross-50-200.md).
 
+### banerjee1992
+
+Banerjee, Abhijit V. (1992). A Simple Model of Herd Behavior. *Quarterly Journal of Economics 107(3), 797-817*. doi:10.2307/2118364 <https://doi.org/10.2307/2118364>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### barber2000
+
+Barber, Brad M.; Odean, Terrance (2000). Trading Is Hazardous to Your Wealth: The Common Stock Investment Performance of Individual Investors. *Journal of Finance 55(2), 773-806*. doi:10.1111/0022-1082.00226 <https://doi.org/10.1111/0022-1082.00226>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### barber2001
+
+Barber, Brad M.; Odean, Terrance (2001). Boys Will Be Boys: Gender, Overconfidence, and Common Stock Investment. *Quarterly Journal of Economics 116(1), 261-292*. doi:10.1162/003355301556400 <https://doi.org/10.1162/003355301556400>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### barber2004
 
 Barber, Lee, Liu and Odean (2004). <https://faculty.haas.berkeley.edu/odean/papers/Day%20Traders/Day%20Trade%20040330.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -132,6 +176,26 @@ Barber, Lee, Liu and Odean (2004). <https://faculty.haas.berkeley.edu/odean/pape
 Note: Cited in this repo as: Barber, Lee, Liu and Odean (2004), Do individual day traders make money? Evidence from Taiwan.
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md).
+
+### barber2008
+
+Barber, Brad M.; Odean, Terrance (2008). All That Glitters: The Effect of Attention and News on the Buying Behavior of Individual and Institutional Investors. *Review of Financial Studies 21(2), 785-818*. doi:10.1093/rfs/hhm079 <https://doi.org/10.1093/rfs/hhm079>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### barberis2003
+
+Barberis, Nicholas; Thaler, Richard (2003). A survey of behavioral finance. *Handbook of the Economics of Finance, vol. 1B, 1053-1128*. doi:10.1016/S1574-0102(03)01027-6 <https://doi.org/10.1016/S1574-0102(03)01027-6>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Handbook chapter, no open abstract.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### baron1988
+
+Baron, Jonathan; Hershey, John C. (1988). Outcome bias in decision evaluation. *Journal of Personality and Social Psychology 54(4), 569-579*. doi:10.1037/0022-3514.54.4.569 <https://doi.org/10.1037/0022-3514.54.4.569>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### barroso2015
 
@@ -145,11 +209,23 @@ Beckmann, Joscha; Czudaj, Robert L.; Arora, Vipin (2020). The relationship betwe
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### benartzi1995
+
+Benartzi, Shlomo; Thaler, Richard H. (1995). Myopic Loss Aversion and the Equity Premium Puzzle. *Quarterly Journal of Economics 110(1), 73-92*. doi:10.2307/2118511 <https://doi.org/10.2307/2118511>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### berkman2011
 
 Berkman, Henk; Jacobsen, Ben; Lee, John B. (2011). Time-varying rare disaster risk and stock returns. *Journal of Financial Economics 101(2), 313-332*. doi:10.1016/j.jfineco.2011.02.019 <https://doi.org/10.1016/j.jfineco.2011.02.019>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
+### bessembinder2018
+
+Bessembinder, Hendrik (2018). Do stocks outperform Treasury bills? *Journal of Financial Economics 129(3), 440-457*. doi:10.1016/j.jfineco.2018.06.004 <https://doi.org/10.1016/j.jfineco.2018.06.004>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### bortnikova2026
 
@@ -165,11 +241,19 @@ Bouman, Sven; Jacobsen, Ben (2002). The Halloween Indicator, "Sell in May and Go
 
 Cited in: [catalog/algorithms/sell-in-may-halloween.json](../catalog/algorithms/sell-in-may-halloween.json), [ALG-0047](algorithms/0047-sell-in-may-halloween.md).
 
+### brier1950
+
+Brier, Glenn W. (1950). Verification of forecasts expressed in terms of probability. *Monthly Weather Review 78(1), 1-3*. doi:10.1175/1520-0493(1950)078\<0001:VOFEIT\>2.0.CO;2 <https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher page blocked our reader.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### brock1992
 
 Brock, William; Lakonishok, Josef; LeBARON, BLAKE (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *The Journal of Finance 47(5), 1731-1764*. doi:10.1111/j.1540-6261.1992.tb04681.x <https://doi.org/10.1111/j.1540-6261.1992.tb04681.x>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [ALG-0061](algorithms/0061-golden-cross-50-200.md).
+Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [ALG-0061](algorithms/0061-golden-cross-50-200.md), [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
 
 ### brown1985
 
@@ -189,11 +273,23 @@ Caginalp and Laurent (1998). Japanese Candlestick Charting Techniques. *1991*. <
 
 Cited in: [catalog/algorithms/candlestick-price-action-patterns.json](../catalog/algorithms/candlestick-price-action-patterns.json), [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [catalog/algorithms/rsi-overbought-oversold.json](../catalog/algorithms/rsi-overbought-oversold.json), [catalog/algorithms/turtle-donchian-breakout.json](../catalog/algorithms/turtle-donchian-breakout.json), [ALG-0056](algorithms/0056-candlestick-price-action-patterns.md), [ALG-0061](algorithms/0061-golden-cross-50-200.md), [ALG-0070](algorithms/0070-rsi-overbought-oversold.md), [ALG-0072](algorithms/0072-turtle-donchian-breakout.md).
 
+### caginalp1998a
+
+Caginalp, Gunduz; Laurent, Henry (1998). The predictive power of price patterns. *Applied Mathematical Finance 5(3-4), 181-205*. doi:10.1080/135048698334637 <https://doi.org/10.1080/135048698334637>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### caldara2022
 
 Caldara, Dario; Iacoviello, Matteo (2022). Measuring Geopolitical Risk. *American Economic Review 112(4), 1194-1225*. doi:10.1257/aer.20191823 <https://doi.org/10.1257/aer.20191823>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
+### carhart1997
+
+Carhart, Mark M. (1997). On Persistence in Mutual Fund Performance. *Journal of Finance 52(1), 57-82*. doi:10.1111/j.1540-6261.1997.tb03808.x <https://doi.org/10.1111/j.1540-6261.1997.tb03808.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### cederburg2020
 
@@ -206,6 +302,12 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 Chague, Fernando; Giovannetti, Bruno (2025). The COVID-19 and day-trade pandemics in Brazil. *Brazilian Review of Finance 23, e202515*. doi:10.12660/rbfin.v23n1.2025.94291 <https://doi.org/10.12660/rbfin.v23n1.2025.94291>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md).
+
+### chang1999
+
+Chang, P. H. Kevin; Osler, Carol L. (1999). Methodical Madness: Technical Analysis and the Irrationality of Exchange-Rate Forecasts. *Economic Journal 109(458), 636-661*. doi:10.1111/1468-0297.00466 <https://doi.org/10.1111/1468-0297.00466>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### chen2003
 
@@ -225,6 +327,14 @@ Chong, Terence; Ng, Wing-Kam; Liew, Venus (2014). Revisiting the Performance of 
 
 Cited in: [catalog/algorithms/macd-crossover.json](../catalog/algorithms/macd-crossover.json), [catalog/algorithms/rsi-overbought-oversold.json](../catalog/algorithms/rsi-overbought-oversold.json), [ALG-0065](algorithms/0065-macd-crossover.md), [ALG-0070](algorithms/0070-rsi-overbought-oversold.md).
 
+### cowles1933
+
+Cowles, Alfred (1933). Can Stock Market Forecasters Forecast? *Econometrica 1(3), 309-324*. doi:10.2307/1907042 <https://doi.org/10.2307/1907042>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. JSTOR page blocked; claim worded as not yet checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### dahlquist2020
 
 Dahlquist, Magnus; Hasseltoft, Henrik (2020). Economic momentum and currency returns. *Journal of Financial Economics 136(1), 152-167*. doi:10.1016/j.jfineco.2019.09.002 <https://doi.org/10.1016/j.jfineco.2019.09.002>. <https://econpapers.repec.org/article/eeejfinec/v_3a136_3ay_3a2020_3ai_3a1_3ap_3a152-167.htm>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -232,6 +342,12 @@ Dahlquist, Magnus; Hasseltoft, Henrik (2020). Economic momentum and currency ret
 Also at: <https://doi.org/10.1016/j.jfineco.2019.09.002>.
 
 Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [RES-0001](research/0001-reading-list.md).
+
+### debondt1985
+
+De Bondt, Werner F. M.; Thaler, Richard (1985). Does the Stock Market Overreact? *Journal of Finance 40(3), 793-805*. doi:10.1111/j.1540-6261.1985.tb05004.x <https://doi.org/10.1111/j.1540-6261.1985.tb05004.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### dellacorte2016
 
@@ -260,6 +376,12 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 Do, Binh; Faff, Robert (2010). Does Simple Pairs Trading Still Work? *Financial Analysts Journal 66(4), 83-95*. doi:10.2469/faj.v66.n4.1 <https://doi.org/10.2469/faj.v66.n4.1>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+
+### du2018
+
+Du, Wenxin; Tepper, Alexander; Verdelhan, Adrien (2018). Deviations from Covered Interest Rate Parity. *Journal of Finance 73(3), 915-957*. doi:10.1111/jofi.12620 <https://doi.org/10.1111/jofi.12620>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### engel2005
 
@@ -295,7 +417,7 @@ Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
 Fama, Eugene F. (1984). Forward and spot exchange rates. *Journal of Monetary Economics 14(3), 319-338*. doi:10.1016/0304-3932(84)90046-1 <https://doi.org/10.1016/0304-3932(84)90046-1>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [GDE-0003](guides/0003-writing-docs.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### fama1992
 
@@ -329,6 +451,14 @@ Fischer, Thomas; Krauss, Christopher (2017). Deep learning with long short-term 
 
 Cited in: [catalog/algorithms/lstm-sequence-models.json](../catalog/algorithms/lstm-sequence-models.json), [ALG-0033](algorithms/0033-lstm-sequence-models.md).
 
+### fischhoff1975
+
+Fischhoff, Baruch (1975). Hindsight is not equal to foresight: The effect of outcome knowledge on judgment under uncertainty. *Journal of Experimental Psychology: Human Perception and Performance 1(3), 288-299*. doi:10.1037/0096-1523.1.3.288 <https://doi.org/10.1037/0096-1523.1.3.288>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract; the claim used matches the title only.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### franz2022
 
 Franz, Friedrich-Carl; Schmeling, Maik (2022). Crypto Carry. *SSRN working paper*. doi:10.2139/ssrn.3774118 <https://doi.org/10.2139/ssrn.3774118>. <https://www.bis.org/publ/work1087.htm>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -341,17 +471,37 @@ Frazzini, Andrea; Pedersen, Lasse Heje (2014). Betting against beta. *Journal of
 
 Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md).
 
+### french2008
+
+French, Kenneth R. (2008). Presidential Address: The Cost of Active Investing. *Journal of Finance 63(4), 1537-1573*. doi:10.1111/j.1540-6261.2008.01368.x <https://doi.org/10.1111/j.1540-6261.2008.01368.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### gatev2006
 
 Gatev, Evan; Goetzmann, William N.; Rouwenhorst, K. Geert (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. *Review of Financial Studies 19(3), 797-827*. doi:10.1093/rfs/hhj020 <https://doi.org/10.1093/rfs/hhj020>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
 
+### gilovich1985
+
+Gilovich, Thomas; Vallone, Robert; Tversky, Amos (1985). The hot hand in basketball: On the misperception of random sequences. *Cognitive Psychology 17(3), 295-314*. doi:10.1016/0010-0285(85)90010-6 <https://doi.org/10.1016/0010-0285(85)90010-6>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### gorton2006
 
 Gorton, Gary; Rouwenhorst, K. Geert (2006). Facts and Fantasies about Commodity Futures. *Financial Analysts Journal 62(2), 47-68*. doi:10.2469/faj.v62.n2.4083 <https://doi.org/10.2469/faj.v62.n2.4083>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md).
+
+### greenwood2014
+
+Greenwood, Robin; Shleifer, Andrei (2014). Expectations of Returns and Expected Returns. *Review of Financial Studies 27(3), 714-746*. doi:10.1093/rfs/hht082 <https://doi.org/10.1093/rfs/hht082>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### gu2020
 
@@ -363,7 +513,13 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 
 Harvey, Campbell R.; Liu, Yan; Zhu, Heqing (2015). ... and the Cross-Section of Expected Returns. *Review of Financial Studies 29(1), 5-68*. doi:10.1093/rfs/hhv059 <https://doi.org/10.1093/rfs/hhv059>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### heimer2016
+
+Heimer, Rawley Z. (2016). Peer Pressure: Social Interaction and the Disposition Effect. *Review of Financial Studies 29(11), 3177-3209*. doi:10.1093/rfs/hhw063 <https://doi.org/10.1093/rfs/hhw063>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### hoffmann2022
 
@@ -455,6 +611,24 @@ Jordà, Òscar; Taylor, Alan (2012). The Carry Trade and Fundamentals: Nothing t
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### kahneman1979
+
+Kahneman, Daniel; Tversky, Amos (1979). Prospect Theory: An Analysis of Decision under Risk. *Econometrica 47(2), 263-291*. doi:10.2307/1914185 <https://doi.org/10.2307/1914185>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### kahneman1990
+
+Kahneman, Daniel; Knetsch, Jack L.; Thaler, Richard H. (1990). Experimental Tests of the Endowment Effect and the Coase Theorem. *Journal of Political Economy 98(6), 1325-1348*. doi:10.1086/261737 <https://doi.org/10.1086/261737>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### kahneman1993
+
+Kahneman, Daniel; Lovallo, Dan (1993). Timid Choices and Bold Forecasts: A Cognitive Perspective on Risk Taking. *Management Science 39(1), 17-31*. doi:10.1287/mnsc.39.1.17 <https://doi.org/10.1287/mnsc.39.1.17>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### kaminski2014
 
 Kaminski, Kathryn M.; Lo, Andrew W. (2014). When do stop-loss rules stop losses? *Journal of Financial Markets 18, 234-254*. doi:10.1016/j.finmar.2013.07.001 <https://doi.org/10.1016/j.finmar.2013.07.001>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -466,6 +640,20 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Kilian, Lutz (2009). Not All Oil Price Shocks Are Alike: Disentangling Demand and Supply Shocks in the Crude Oil Market. *American Economic Review 99(3), 1053-1069*. doi:10.1257/aer.99.3.1053 <https://doi.org/10.1257/aer.99.3.1053>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md), [RES-0001](research/0001-reading-list.md).
+
+### king2012
+
+King, Michael R.; Osler, Carol L.; Rime, Dagfinn (2012). Foreign Exchange Market Structure, Players, and Evolution. *Handbook of Exchange Rates (James, Marsh, Sarno, eds.), Wiley, chapter 1*. doi:10.1002/9781118445785.ch1 <https://doi.org/10.1002/9781118445785.ch1>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### klein2007
+
+Klein, Gary (2007). Performing a Project Premortem. *Harvard Business Review 85(9), 18-19*. <https://hbr.org/2007/09/performing-a-project-premortem>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: HBR page not reachable from our reader.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### kohlscheen2017
 
@@ -492,6 +680,12 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 Lakonishok, Josef; Smidt, Seymour (1988). Are Seasonal Anomalies Real? A Ninety-Year Perspective. *Review of Financial Studies 1(4), 403-425*. doi:10.1093/rfs/1.4.403 <https://doi.org/10.1093/rfs/1.4.403>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [ALG-0052](algorithms/0052-turn-of-the-month.md).
+
+### langer1975
+
+Langer, Ellen J. (1975). The illusion of control. *Journal of Personality and Social Psychology 32(2), 311-328*. doi:10.1037/0022-3514.32.2.311 <https://doi.org/10.1037/0022-3514.32.2.311>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### lento2007
 
@@ -525,6 +719,18 @@ Lizardo, Radhamés A.; Mollick, André V. (2010). Oil price fluctuations and U.S
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### lo2000
+
+Lo, Andrew W.; Mamaysky, Harry; Wang, Jiang (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance 55(4), 1705-1765*. doi:10.1111/0022-1082.00265 <https://doi.org/10.1111/0022-1082.00265>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
+
+### lu2012
+
+Lu, Tsung-Hsun; Shiu, Yung-Ming; Liu, Tsung-Chi (2012). Profitable candlestick trading strategies: The evidence from a new perspective. *Review of Financial Economics 21(2), 63-68*. doi:10.1016/j.rfe.2012.02.001 <https://doi.org/10.1016/j.rfe.2012.02.001>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### lucca2015
 
 Lucca, David O.; Moench, Emanuel (2015). The Pre-FOMC Announcement Drift. *The Journal of Finance 70(1), 329-371*. doi:10.1111/jofi.12196 <https://doi.org/10.1111/jofi.12196>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -535,7 +741,7 @@ Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fom
 
 Lustig, Hanno; Roussanov, Nikolai; Verdelhan, Adrien (2011). Common Risk Factors in Currency Markets. *Review of Financial Studies 24(11), 3731-3777*. doi:10.1093/rfs/hhr068 <https://doi.org/10.1093/rfs/hhr068>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [GDE-0003](guides/0003-writing-docs.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### lustig2014
 
@@ -545,11 +751,47 @@ Also at: <http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf>.
 
 Cited in: [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [RES-0001](research/0001-reading-list.md).
 
+### magdonismail2004
+
+Magdon-Ismail, Malik; Atiya, Amir F.; Pratap, Amrit; Abu-Mostafa, Yaser S. (2004). On the maximum drawdown of a Brownian motion. *Journal of Applied Probability 41(1), 147-161*. doi:10.1239/jap/1077134674 <https://doi.org/10.1239/jap/1077134674>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### mandelbrot1963
+
+Mandelbrot, Benoit (1963). The Variation of Certain Speculative Prices. *Journal of Business 36(4), 394-419*. doi:10.1086/294632 <https://doi.org/10.1086/294632>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### markowitz1952
 
 Markowitz, Harry (1952). Portfolio Selection. *The Journal of Finance 7(1), 77*. doi:10.2307/2975974 <https://doi.org/10.2307/2975974>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/sixty-forty-portfolio.json](../catalog/algorithms/sixty-forty-portfolio.json), [ALG-0048](algorithms/0048-sixty-forty-portfolio.md).
+
+### marshall2006
+
+Marshall, Ben R.; Young, Martin R.; Rose, Lawrence C. (2006). Candlestick technical trading strategies: Can they create value for investors? *Journal of Banking and Finance 30(8), 2303-2323*. doi:10.1016/j.jbankfin.2005.08.001 <https://doi.org/10.1016/j.jbankfin.2005.08.001>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher blocked; findings checked in the author's thesis, see marshall2005.
+
+Cited in: [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
+
+### marshall2008
+
+Marshall, Ben R.; Young, Martin R.; Cahan, Rochester (2008). Are candlestick technical trading strategies profitable in the Japanese equity market? *Review of Quantitative Finance and Accounting 31(2), 191-207*. doi:10.1007/s11156-007-0068-1 <https://doi.org/10.1007/s11156-007-0068-1>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. DOI corrected. Paywalled; text says we have not read it.
+
+Cited in: [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
+
+### mccauley2014
+
+McCauley, Robert N.; Shu, Chang; Ma, Guonan (2014). Non-deliverable forwards: 2013 and beyond. *BIS Quarterly Review, March 2014, 75-88*. <https://www.bis.org/publ/qtrpdf/r_qt1403h.htm>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Title confirmed on the BIS page on 2026-10-21; authors and the claim not shown there.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### mcconnell2008
 
@@ -561,19 +803,25 @@ Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn
 
 McLean, R. David; Pontiff, Jeffrey (2016). Does Academic Research Destroy Stock Return Predictability? *The Journal of Finance 71(1), 5-32*. doi:10.1111/jofi.12365 <https://doi.org/10.1111/jofi.12365>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### meese1983
 
 Meese, Richard A.; Rogoff, Kenneth (1983). Empirical exchange rate models of the seventies. *Journal of International Economics 14(1-2), 3-24*. doi:10.1016/0022-1996(83)90017-x <https://doi.org/10.1016/0022-1996(83)90017-x>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md).
 
 ### melvin2015
 
 Melvin, Michael; Prins, John (2015). Equity hedging and exchange rates at the London 4p.m. fix. *Journal of Financial Markets 22, 50-72*. doi:10.1016/j.finmar.2014.11.001 <https://doi.org/10.1016/j.finmar.2014.11.001>. <https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md).
+
+### menkhoff2007
+
+Menkhoff, Lukas; Taylor, Mark P. (2007). The Obstinate Passion of Foreign Exchange Professionals: Technical Analysis. *Journal of Economic Literature 45(4), 936-972*. doi:10.1257/jel.45.4.936 <https://doi.org/10.1257/jel.45.4.936>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
 
 ### menkhoff2012
 
@@ -613,17 +861,31 @@ Also at: <https://openaccess.city.ac.uk/14851/>.
 
 Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [RES-0001](research/0001-reading-list.md).
 
+### messmore1995
+
+Messmore, Tom (1995). Variance Drain. *Journal of Portfolio Management 21(4), 104-110*. doi:10.3905/jpm.1995.409536 <https://doi.org/10.3905/jpm.1995.409536>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. DOI corrected. Paywalled; we cite it only for the term variance drain.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### miao2017
 
 Miao, Hong; Ramchander, Sanjay; Wang, Tianyang; Yang, Jian (2017). The impact of crude oil inventory announcements on prices: Evidence from derivatives markets. *Journal of Futures Markets 38(1), 38-65*. doi:10.1002/fut.21850 <https://doi.org/10.1002/fut.21850>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/eia-oil-inventory-announcement.json](../catalog/algorithms/eia-oil-inventory-announcement.json), [ALG-0041](algorithms/0041-eia-oil-inventory-announcement.md).
 
+### miller2018
+
+Miller, Joshua B.; Sanjurjo, Adam (2018). Surprised by the Hot Hand Fallacy? A Truth in the Law of Small Numbers. *Econometrica 86(6), 2019-2047*. doi:10.3982/ECTA14943 <https://doi.org/10.3982/ECTA14943>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### moreira2017
 
 Moreira, Alan; Muir, Tyler (2017). Volatility-Managed Portfolios. *The Journal of Finance 72(4), 1611-1644*. doi:10.1111/jofi.12513 <https://doi.org/10.1111/jofi.12513>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md).
+Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md), [REF-0004](reference/0004-glossary.md).
 
 ### moskowitz2012
 
@@ -663,7 +925,7 @@ Neely, Weller and Ulrich (2009). <https://s3.amazonaws.com/real.stlouisfed.org/w
 
 Note: Cited in this repo as: Neely, Weller and Ulrich (2009), abstract (working paper version).
 
-Cited in: [catalog/algorithms/turtle-donchian-breakout.json](../catalog/algorithms/turtle-donchian-breakout.json), [ALG-0072](algorithms/0072-turtle-donchian-breakout.md).
+Cited in: [catalog/algorithms/turtle-donchian-breakout.json](../catalog/algorithms/turtle-donchian-breakout.json), [ALG-0072](algorithms/0072-turtle-donchian-breakout.md), [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### neely2009a
 
@@ -681,13 +943,37 @@ Note: Cited in this repo as: Neely and Weller (2013), best ex ante adaptive stra
 
 Cited in: [catalog/algorithms/fx-technical-trading-rules.json](../catalog/algorithms/fx-technical-trading-rules.json), [ALG-0014](algorithms/0014-fx-technical-trading-rules.md).
 
+### nickerson1998
+
+Nickerson, Raymond S. (1998). Confirmation Bias: A Ubiquitous Phenomenon in Many Guises. *Review of General Psychology 2(2), 175-220*. doi:10.1037/1089-2680.2.2.175 <https://doi.org/10.1037/1089-2680.2.2.175>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### odean1998
+
+Odean, Terrance (1998). Are Investors Reluctant to Realize Their Losses? *Journal of Finance 53(5), 1775-1798*. doi:10.1111/0022-1082.00072 <https://doi.org/10.1111/0022-1082.00072>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### oomen2017
+
+Oomen, Roel (2017). Last look. *Quantitative Finance 17(7), 1057-1070*. doi:10.1080/14697688.2016.1262545 <https://doi.org/10.1080/14697688.2016.1262545>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### osler2000
 
 Osler (2000). *Support for resistance: technical analysis and intraday exchange rates, FRBNY Economic Policy Review*. <https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Note: Cited in this repo as: Technical Analysis of Stock Trends (1948); academic test by Osler (2000).
 
-Cited in: [catalog/algorithms/fibonacci-retracements.json](../catalog/algorithms/fibonacci-retracements.json), [catalog/algorithms/support-resistance-supply-demand-zones.json](../catalog/algorithms/support-resistance-supply-demand-zones.json), [ALG-0059](algorithms/0059-fibonacci-retracements.md), [ALG-0071](algorithms/0071-support-resistance-supply-demand-zones.md).
+Cited in: [catalog/algorithms/fibonacci-retracements.json](../catalog/algorithms/fibonacci-retracements.json), [catalog/algorithms/support-resistance-supply-demand-zones.json](../catalog/algorithms/support-resistance-supply-demand-zones.json), [ALG-0059](algorithms/0059-fibonacci-retracements.md), [ALG-0071](algorithms/0071-support-resistance-supply-demand-zones.md), [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### osler2003
+
+Osler, Carol L. (2003). Currency Orders and Exchange Rate Dynamics: An Explanation for the Predictive Success of Technical Analysis. *Journal of Finance 58(5), 1791-1819*. doi:10.1111/1540-6261.00588 <https://doi.org/10.1111/1540-6261.00588>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### parityteam2026
 
@@ -695,11 +981,25 @@ Parity team (2026). HYP-0003 in this repository, building on Chen and Rogoff (20
 
 Cited in: [catalog/algorithms/parity-commodity-gap.json](../catalog/algorithms/parity-commodity-gap.json).
 
+### park2007
+
+Park, Cheol-Ho; Irwin, Scott H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys 21(4), 786-826*. doi:10.1111/j.1467-6419.2007.00519.x <https://doi.org/10.1111/j.1467-6419.2007.00519.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### peters2019
+
+Peters, Ole (2019). The ergodicity problem in economics. *Nature Physics 15, 1216-1221*. doi:10.1038/s41567-019-0732-0 <https://doi.org/10.1038/s41567-019-0732-0>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher page needs a login.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### ranaldo2010
 
-Ranaldo, Angelo; Söderlind, Paul (2010). Safe Haven Currencies. *Review of Finance 14(3), 385-407*. doi:10.1093/rof/rfq007 <https://doi.org/10.1093/rof/rfq007>. Accessed 2026-10-21. Verification: not checked.
+Ranaldo, Angelo; Söderlind, Paul (2010). Safe Haven Currencies. *Review of Finance 14(3), 385-407*. doi:10.1093/rof/rfq007 <https://doi.org/10.1093/rof/rfq007>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0011](reference/0011-scenario-simulator-method.md).
 
 ### rees2025
 
@@ -712,6 +1012,88 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Rossi, Barbara (2013). Exchange Rate Predictability. *Journal of Economic Literature 51(4), 1063-1119*. doi:10.1257/jel.51.4.1063 <https://doi.org/10.1257/jel.51.4.1063>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### samuelson1988
+
+Samuelson, William; Zeckhauser, Richard (1988). Status quo bias in decision making. *Journal of Risk and Uncertainty 1(1), 7-59*. doi:10.1007/BF00055564 <https://doi.org/10.1007/BF00055564>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### sharpe1991
+
+Sharpe, William F. (1991). The Arithmetic of Active Management. *Financial Analysts Journal 47(1), 7-9*. doi:10.2469/faj.v47.n1.7 <https://doi.org/10.2469/faj.v47.n1.7>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Crossref has no abstract; claim not yet seen in the text.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### shefrin1985
+
+Shefrin, Hersh; Statman, Meir (1985). The Disposition to Sell Winners Too Early and Ride Losers Too Long: Theory and Evidence. *Journal of Finance 40(3), 777-790*. doi:10.1111/j.1540-6261.1985.tb05002.x <https://doi.org/10.1111/j.1540-6261.1985.tb05002.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### staw1976
+
+Staw, Barry M. (1976). Knee-deep in the big muddy: a study of escalating commitment to a chosen course of action. *Organizational Behavior and Human Performance 16(1), 27-44*. doi:10.1016/0030-5073(76)90005-2 <https://doi.org/10.1016/0030-5073(76)90005-2>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abstract (publisher blocked).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### sullivan1999
+
+Sullivan, Ryan; Timmermann, Allan; White, Halbert (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance 54(5), 1647-1691*. doi:10.1111/0022-1082.00163 <https://doi.org/10.1111/0022-1082.00163>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf>.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### thaler1981
+
+Thaler, Richard H.; Shefrin, H. M. (1981). An Economic Theory of Self-Control. *Journal of Political Economy 89(2), 392-406*. doi:10.1086/260971 <https://doi.org/10.1086/260971>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### thaler1985
+
+Thaler, Richard H. (1985). Mental Accounting and Consumer Choice. *Marketing Science 4(3), 199-214*. doi:10.1287/mksc.4.3.199 <https://doi.org/10.1287/mksc.4.3.199>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### thaler1990
+
+Thaler, Richard H.; Johnson, Eric J. (1990). Gambling with the House Money and Trying to Break Even: The Effects of Prior Outcomes on Risky Choice. *Management Science 36(6), 643-660*. doi:10.1287/mnsc.36.6.643 <https://doi.org/10.1287/mnsc.36.6.643>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### thorp2008
+
+Thorp, Edward O. (2008). The Kelly criterion in blackjack, sports betting and the stock market. *Handbook of Asset and Liability Management, vol. 1, 385-428*. doi:10.1016/B978-044453248-0.50015-0 <https://doi.org/10.1016/B978-044453248-0.50015-0>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Full text not reachable; the half Kelly figure in the glossary is our own arithmetic.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### tversky1971
+
+Tversky, Amos; Kahneman, Daniel (1971). Belief in the law of small numbers. *Psychological Bulletin 76(2), 105-110*. doi:10.1037/h0031322 <https://doi.org/10.1037/h0031322>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### tversky1974
+
+Tversky, Amos; Kahneman, Daniel (1974). Judgment under Uncertainty: Heuristics and Biases. *Science 185(4157), 1124-1131*. doi:10.1126/science.185.4157.1124 <https://doi.org/10.1126/science.185.4157.1124>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### tversky1981
+
+Tversky, Amos; Kahneman, Daniel (1981). The Framing of Decisions and the Psychology of Choice. *Science 211(4481), 453-458*. doi:10.1126/science.7455683 <https://doi.org/10.1126/science.7455683>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ### url-002b9789
 
@@ -807,7 +1189,7 @@ Brunnermeier, Markus; Nagel, Stefan; Pedersen, Lasse (2008). Carry Trades and Cu
 
 Also at: <https://www.nber.org/system/files/working_papers/w14473/w14473.pdf>.
 
-Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### burnside2011a
 
@@ -931,7 +1313,7 @@ Cited in: [catalog/algorithms/deep-rl-trading-finrl.json](../catalog/algorithms/
 
 Lo, Andrew; Repin, Dmitry; Steenbarger, Brett (2005). Fear and Greed in Financial Markets: A Clinical Study of Day-Traders. *NBER Working Paper w11243*. doi:10.3386/w11243 <https://doi.org/10.3386/w11243>. <https://www.nber.org/papers/w11243>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### lopezlira2023
 
@@ -973,6 +1355,14 @@ Cited in: [catalog/algorithms/finbert-gdelt-fx-sentiment.json](../catalog/algori
 
 ## Books
 
+### carver2015
+
+Carver, Robert (2015). Systematic Trading: A Unique New Method for Designing Trading and Investing Systems. *Harriman House*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### carver2019
 
 Carver (2019). Leveraged Trading. *Harriman House*. <https://www.harriman-house.com/authors/robert-carver/48419>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1005,6 +1395,30 @@ Note: Practical intro to building and testing a small quant strategy.
 
 Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### dimson2002
+
+Dimson, Elroy; Marsh, Paul; Staunton, Mike (2002). Triumph of the Optimists: 101 Years of Global Investment Returns. *Princeton University Press*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### feller1968
+
+Feller, William (1968). An Introduction to Probability Theory and Its Applications, Volume 1, 3rd edition. *Wiley*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### gawande2009
+
+Gawande, Atul (2009). The Checklist Manifesto: How to Get Things Right. *Metropolitan Books*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### ilmanen2011
 
 Ilmanen (2011). Expected Returns. *Wiley*. <https://www.aqr.com/Insights/Research/Book/Expected-Returns-An-Investors-Guide-to-Harvesting-Market-Rewards>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1021,6 +1435,22 @@ Note: End-to-end ML pipeline for trading, about 150 notebooks.
 
 Cited in: [catalog/algorithms/gradient-boosting-engineered-features.json](../catalog/algorithms/gradient-boosting-engineered-features.json), [catalog/algorithms/lstm-sequence-models.json](../catalog/algorithms/lstm-sequence-models.json), [catalog/algorithms/ml-return-prediction-elastic-net.json](../catalog/algorithms/ml-return-prediction-elastic-net.json), [ALG-0031](algorithms/0031-gradient-boosting-engineered-features.md), [ALG-0033](algorithms/0033-lstm-sequence-models.md), [ALG-0034](algorithms/0034-ml-return-prediction-elastic-net.md), [RES-0001](research/0001-reading-list.md), [RES-0002](research/0002-open-source-and-public-results.md).
 
+### jorion2006
+
+Jorion, Philippe (2006). Value at Risk: The New Benchmark for Managing Financial Risk, 3rd edition. *McGraw-Hill*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### kahneman2011
+
+Kahneman, Daniel (2011). Thinking, Fast and Slow. *Farrar, Straus and Giroux*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### lopezdeprado2020
 
 López de Prado, Marcos M. (2020). Machine Learning for Asset Managers. *Cambridge University Press*. doi:10.1017/9781108883658 <https://doi.org/10.1017/9781108883658>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -1029,6 +1459,26 @@ Note: Short companion to his 2018 book, focused on avoiding false discoveries.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### maclean2011
+
+MacLean, Leonard C.; Thorp, Edward O.; Ziemba, William T. (2011). The Kelly Capital Growth Investment Criterion: Theory and Practice. *World Scientific*. doi:10.1142/7598 <https://doi.org/10.1142/7598>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### marshall2005
+
+Marshall, Ben R. (2005). Candlestick technical trading strategies: can they create value for investors? (PhD thesis). *Massey University, Palmerston North, New Zealand*. <https://mro.massey.ac.nz/bitstreams/7afc8049-23a1-4fe9-ac3a-792d6403ef1c/download>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### nison1991
+
+Nison, Steve (1991). Japanese Candlestick Charting Techniques. *New York Institute of Finance*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
 ### pedersen2015
 
 Pedersen (2015). Efficiently Inefficient. *Princeton UP*. <https://www.aqr.com/Insights/Research/Book/Efficiently-Inefficient>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1036,6 +1486,30 @@ Pedersen (2015). Efficiently Inefficient. *Princeton UP*. <https://www.aqr.com/I
 Note: Why carry, trend and value earn money and when they fail.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### taleb2007
+
+Taleb, Nassim Nicholas (2007). The Black Swan: The Impact of the Highly Improbable. *Random House*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### tetlock2005
+
+Tetlock, Philip E. (2005). Expert Political Judgment: How Good Is It? How Can We Know? *Princeton University Press*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### tetlock2015
+
+Tetlock, Philip E.; Gardner, Dan (2015). Superforecasting: The Art and Science of Prediction. *Crown*. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Book; not read this session. Cited for a general idea, not a number.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
 
 ## Datasets
 
@@ -2053,7 +2527,7 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
 Barber, Lee, Liu, Odean and Zhang (2017 version), Do day traders rationally learn about their ability? (n.d.). *faculty.haas.berkeley.edu*. <https://faculty.haas.berkeley.edu/odean/papers/Day%20Traders/Day%20Trading%20and%20Learning%20110217.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### url-2273dca0
 
@@ -3125,7 +3599,7 @@ Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.js
 
 Chague, De-Losso and Giovannetti, 2020, SSRN 3423101. (n.d.). *ebicapital.nl*. <https://ebicapital.nl/wp-content/uploads/2022/05/day-trading.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### url-9e21d9bd
 
@@ -3785,7 +4259,7 @@ Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v
 
 Kelly, 1956. (n.d.). *princeton.edu*. <https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
 ### url-f05dfcdd
 
@@ -4253,6 +4727,44 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
 ## Regulators
 
+### bcbs2019
+
+Basel Committee on Banking Supervision (2019). Minimum capital requirements for market risk. *Bank for International Settlements, BCBS d457*. <https://www.bis.org/bcbs/publ/d457.htm>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### bis2025
+
+Bank for International Settlements (2025). OTC foreign exchange turnover in April 2025, Triennial Central Bank Survey. *BIS statistical release, 30 September 2025*. <https://www.bis.org/statistics/rpfx25_fx.htm>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### cftc2010
+
+Commodity Futures Trading Commission (2010). CFTC Releases Final Rules Regarding Retail Forex Transactions. *CFTC press release 5883-10, 30 August 2010*. <https://www.cftc.gov/PressRoom/PressReleases/5883-10>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### fsb2014
+
+Financial Stability Board (2014). Foreign Exchange Benchmarks: Final Report. *Financial Stability Board, 30 September 2014*. <https://www.fsb.org/2014/09/r_140930/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### gfxc2024
+
+Global Foreign Exchange Committee (2024). FX Global Code. *Global Foreign Exchange Committee*. <https://www.globalfxc.org/fx_global_code.htm>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
+
+Note: Page read on 2026-10-21; confirms what the Code is, but not its last look text, so we cite it only for the Code itself.
+
+Cited in: [REF-0004](reference/0004-glossary.md).
+
+### snb2015
+
+Swiss National Bank (2015). Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%. *SNB press release, 15 January 2015*. <https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
 ### url-01f83176
 
 press release. (n.d.). *ftc.gov*. <https://www.ftc.gov/news-events/news/press-releases/2022/04/federal-trade-commission-cracks-down-warrior-trading-misleading-consumers-false-investment-promises>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
@@ -4291,7 +4803,7 @@ ESMA agrees to prohibit binary options and restrict CFDs to protect retail inves
 
 Note: Linked in this repo as: ESMA product intervention press release, 27 March 2018.
 
-Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
 ### url-89c953ef
 

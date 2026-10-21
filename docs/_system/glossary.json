@@ -1,6 +1,6 @@
 {
   "about": "Single source for every term we use. scripts/docs.py builds docs/reference/0004-glossary.md from this file, and the dashboard's Learn tab reads it directly. Each term has three views: simple (explain it to a ten year old), analogy (something from everyday life), and precise (what an economist or statistician would write).",
-  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics"],
+  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics", "Candlesticks and chart patterns", "Biases and behaviour", "Risk and position sizing", "Capital and returns", "FX market structure", "Myths and false notions", "Conviction and decision making"],
   "terms": [
     {
       "id": "exchange-rate",
@@ -676,6 +676,1770 @@
       "analogy": "How often the student who topped the practice test ends up below average on the real one.",
       "precise": "From combinatorially symmetric cross-validation (Bailey, Borwein, Lopez de Prado and Zhu, 2016). On our roadmap.",
       "related": ["overfitting", "deflated-sharpe-ratio"]
+    },
+    {
+      "id": "technical-analysis",
+      "term": "Technical analysis",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Trying to guess where a price goes next by looking only at its past prices and trading volume on a chart.",
+      "analogy": "Like guessing tomorrow's weather only from the last few days of weather, without looking at the clouds or the season.",
+      "precise": "Forecasting from past prices and volume alone. A review of 95 modern studies found 56 reported profits, but many had problems with data snooping, rules picked after the fact and cost estimates [@park2007]. In currencies, simple rules made money in the 1970s and 1980s and much less after the early 1990s [@neely2009]. It is widespread among FX professionals [@menkhoff2007].",
+      "related": ["candlestick", "data-snooping", "moving-average-crossover", "support-and-resistance"]
+    },
+    {
+      "id": "candlestick",
+      "term": "Candlestick",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A little drawing that shows four prices for one stretch of time: where the price started, where it ended, the highest it went and the lowest it went.",
+      "analogy": "Like a thermometer with a mark for the morning temperature, the evening temperature, and the hottest and coldest moments of the day.",
+      "precise": "A chart mark for one period showing open, high, low and close. The box (body) spans open to close and the lines (wicks) reach the high and low. Popularised in the West by Nison (1991) [@nison1991]. A candle is just a picture of four numbers; it holds no information that the four numbers do not.",
+      "related": ["ohlc-bar", "candle-body", "candle-wick", "technical-analysis"]
+    },
+    {
+      "id": "ohlc-bar",
+      "term": "OHLC bar",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The four prices for a time period: open, high, low and close.",
+      "analogy": "Like a short diary of a day: how it started, the best moment, the worst moment and how it ended.",
+      "precise": "Open, high, low and close for one period (a minute, an hour, a day). Bar charts and candlestick charts draw the same four numbers in different shapes. Note that FX has no single official open or close, so different data vendors give slightly different daily bars.",
+      "related": ["candlestick", "trading-sessions"]
+    },
+    {
+      "id": "candle-body",
+      "term": "Candle body",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The thick box part of a candlestick. It shows how far the price moved from start to finish.",
+      "analogy": "Like the distance between where you started your walk and where you ended up, ignoring the detours.",
+      "precise": "The span between open and close. It is usually filled or coloured red when the close is below the open (a bearish candle) and hollow or green when the close is above the open (a bullish candle).",
+      "related": ["candlestick", "bullish-and-bearish-candles", "candle-wick"]
+    },
+    {
+      "id": "candle-wick",
+      "term": "Candle wick",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The thin lines sticking out of the top and bottom of a candle. They show the highest and lowest prices that were reached.",
+      "analogy": "Like the farthest you wandered off the path during a walk, even if you came back.",
+      "precise": "Also called shadows. The upper wick runs from the top of the body to the high, the lower wick from the bottom of the body to the low. Long wicks mean the price visited a level and then moved away from it within the period.",
+      "related": ["candlestick", "candle-body", "hammer", "shooting-star"]
+    },
+    {
+      "id": "bullish-and-bearish-candles",
+      "term": "Bullish and bearish candles",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A bullish candle closed higher than it opened. A bearish candle closed lower than it opened.",
+      "analogy": "Like a day that ended better than it began, or worse than it began.",
+      "precise": "Bullish: close above open. Bearish: close below open. The words describe what already happened in that period, not what will happen next.",
+      "related": ["candle-body", "candlestick"]
+    },
+    {
+      "id": "doji",
+      "term": "Doji",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A candle where the price ended almost exactly where it started, so the body is a thin line.",
+      "analogy": "Like a tug of war that ends with the rope in the same place it started.",
+      "precise": "A candle whose open and close are nearly equal, read by chartists as indecision. There is no agreed threshold for 'nearly equal'. A test of candlestick rules on Dow Jones stocks from 1992 to 2002 found no value [@marshall2005].",
+      "related": ["candlestick", "spinning-top"]
+    },
+    {
+      "id": "spinning-top",
+      "term": "Spinning top",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A candle with a small body and long wicks on both sides.",
+      "analogy": "Like a spinning top that wobbles a lot but stays in about the same place.",
+      "precise": "Small body, upper and lower wicks both longer than the body. Chartists read it as indecision, like a doji with a slightly larger body. We know of no large test that finds it predicts direction.",
+      "related": ["doji", "candle-wick"]
+    },
+    {
+      "id": "marubozu",
+      "term": "Marubozu",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A candle with a big body and almost no wicks: the price moved one way the whole time.",
+      "analogy": "Like a runner who sprints in a straight line from start to finish without slowing or turning.",
+      "precise": "A candle whose open is at or near one extreme and close at or near the other. Chartists read it as strong pressure in one direction. A test on Dow Jones stocks from 1992 to 2002 found candlestick strategies had no value [@marshall2005].",
+      "related": ["candle-body", "candlestick"]
+    },
+    {
+      "id": "hammer",
+      "term": "Hammer",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A candle with a small body at the top and a long wick below it, appearing after the price has been falling.",
+      "analogy": "Like a ball that is thrown hard at the floor and bounces most of the way back up.",
+      "precise": "Small body near the high, lower wick at least about twice the body, little or no upper wick, after a decline. Chartists read it as a possible turn up. A test of candlestick strategies on Dow Jones stocks from 1992 to 2002 found no value [@marshall2005].",
+      "related": ["hanging-man", "inverted-hammer", "candle-wick"]
+    },
+    {
+      "id": "hanging-man",
+      "term": "Hanging man",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The same shape as a hammer, but it shows up after the price has been rising.",
+      "analogy": "The same shape can mean different things depending on where you see it, like a raised hand in class or at a bus stop.",
+      "precise": "Small body near the high with a long lower wick, after an advance. Chartists read it as a possible turn down. That one shape gets opposite names by context is a warning sign about how flexible these rules are; the Dow Jones test found candlestick strategies had no value [@marshall2005].",
+      "related": ["hammer", "shooting-star"]
+    },
+    {
+      "id": "shooting-star",
+      "term": "Shooting star",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A candle with a small body at the bottom and a long wick above it, after the price has been rising.",
+      "analogy": "Like a rocket that shoots up and then falls back down to where it started.",
+      "precise": "Small body near the low, long upper wick, after an advance. Chartists read it as a possible turn down. As with other candles, the Dow Jones test found no value [@marshall2005].",
+      "related": ["inverted-hammer", "hanging-man", "candle-wick"]
+    },
+    {
+      "id": "inverted-hammer",
+      "term": "Inverted hammer",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The same shape as a shooting star, but it shows up after the price has been falling.",
+      "analogy": "An upside down hammer.",
+      "precise": "Small body near the low and a long upper wick, after a decline. Read by chartists as a possible turn up. No large test we know of supports it as a reliable signal.",
+      "related": ["shooting-star", "hammer"]
+    },
+    {
+      "id": "engulfing-pattern",
+      "term": "Engulfing pattern",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Two candles where the second one's body is bigger than the first and points the other way, like it swallowed the first one.",
+      "analogy": "Like a big wave that washes over the sandcastle the small wave built.",
+      "precise": "A two-candle pattern: a bullish engulfing is a bearish candle followed by a bullish candle whose body covers the first body; bearish engulfing is the reverse. Results are mixed: a test on Dow Jones stocks found no value [@marshall2005], while a study of Taiwan stocks found three bullish two-day patterns profitable [@lu2012].",
+      "related": ["harami", "candle-body"]
+    },
+    {
+      "id": "harami",
+      "term": "Harami",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Two candles where the second one is small and fits inside the body of the first one.",
+      "analogy": "Like a baby tucked inside its mother. Harami is Japanese for pregnant.",
+      "precise": "A large body followed by a small body contained within it, read by chartists as a possible pause or turn. The evidence is the same as for other candle patterns: no value in the Dow Jones test [@marshall2005].",
+      "related": ["engulfing-pattern", "doji"]
+    },
+    {
+      "id": "morning-star",
+      "term": "Morning star",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A three-candle pattern: a big down candle, a small candle, then a big up candle. Chartists say it signals a bottom.",
+      "analogy": "Like the morning star that appears just before sunrise, after the dark night.",
+      "precise": "A long bearish candle, a small-bodied candle that gaps or sits lower, then a long bullish candle closing well into the first body. Caginalp and Laurent (1998) found three-day candlestick patterns had predictive power in S&P 500 stocks from 1992 to 1996 [@caginalp1998a]; a test on Dow Jones stocks from 1992 to 2002 found no value [@marshall2005].",
+      "related": ["evening-star", "doji"]
+    },
+    {
+      "id": "evening-star",
+      "term": "Evening star",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The upside-down version of a morning star: a big up candle, a small candle, then a big down candle. Chartists say it signals a top.",
+      "analogy": "Like the evening star that shows up as the day ends.",
+      "precise": "A long bullish candle, a small-bodied candle, then a long bearish candle closing well into the first body. Same evidence as the morning star: support in one sample [@caginalp1998a], none in another [@marshall2005].",
+      "related": ["morning-star"]
+    },
+    {
+      "id": "three-white-soldiers",
+      "term": "Three white soldiers",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Three up candles in a row, each closing higher than the one before.",
+      "analogy": "Like three steps up a staircase.",
+      "precise": "Three consecutive long bullish candles, each opening within the prior body and closing near its high. Chartists read it as strong buying. Three up periods in a row also happen often by chance in a random walk; a rule needs testing against that baseline.",
+      "related": ["three-black-crows", "random-walk"]
+    },
+    {
+      "id": "three-black-crows",
+      "term": "Three black crows",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Three down candles in a row, each closing lower than the one before.",
+      "analogy": "Like three steps down a staircase.",
+      "precise": "The bearish mirror of three white soldiers. The same caution applies: streaks are common in random data [@tversky1971].",
+      "related": ["three-white-soldiers", "law-of-small-numbers"]
+    },
+    {
+      "id": "head-and-shoulders",
+      "term": "Head and shoulders",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A chart shape with three peaks where the middle one is the tallest, like a head between two shoulders. Chartists say it means the price will fall.",
+      "analogy": "Like seeing a face in the clouds: you can usually find one if you look for it.",
+      "precise": "A pattern of three peaks with the middle highest, and a 'neckline' through the troughs. On daily dollar exchange rates from 1973 to 1994, Chang and Osler (1999) found the rule was profitable but beaten by simpler trading rules [@chang1999]. Lo, Mamaysky and Wang (2000) found such patterns carry a little information in US stocks [@lo2000].",
+      "related": ["double-top-and-bottom", "technical-analysis"]
+    },
+    {
+      "id": "double-top-and-bottom",
+      "term": "Double top and double bottom",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A double top is when the price climbs to the same high twice and fails both times. A double bottom is the same at a low.",
+      "analogy": "Like a ball that hits the same ceiling twice before you give up throwing it.",
+      "precise": "Two peaks (or troughs) at a similar level separated by a pullback. Chartists read it as a reversal once price breaks the level between them. Algorithmic tests find these shapes have at most a small amount of information [@lo2000].",
+      "related": ["head-and-shoulders", "support-and-resistance"]
+    },
+    {
+      "id": "support-and-resistance",
+      "term": "Support and resistance",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Price levels where people believe a falling price tends to stop (support) or a rising price tends to stop (resistance).",
+      "analogy": "Like a floor and a ceiling in a room: the ball bounces off them, until one day it breaks through.",
+      "precise": "Levels where buying or selling interest is thought to gather. In FX there is some real support: levels published by six firms helped predict intraday trend stops from 1996 to 1998 [@osler2000], and customer stop-loss and take-profit orders cluster at round numbers, which can explain why such levels matter [@osler2003].",
+      "related": ["round-number-clustering", "breakout", "stop-loss"]
+    },
+    {
+      "id": "trendline",
+      "term": "Trendline",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A straight line drawn along the lows (or highs) of a chart to show which way the price has been heading.",
+      "analogy": "Like drawing a line along the edge of a hill to see how steep it is.",
+      "precise": "A line through two or more swing lows or highs. Which points to use is a choice, so two people can draw different trendlines on the same chart. This freedom makes trendline rules hard to test fairly.",
+      "related": ["support-and-resistance", "breakout"]
+    },
+    {
+      "id": "breakout",
+      "term": "Breakout",
+      "category": "Candlesticks and chart patterns",
+      "simple": "When the price moves past a level it had stopped at before, like support or resistance.",
+      "analogy": "Like water finally spilling over the top of a dam.",
+      "precise": "A move through a prior high, low or range boundary. Channel breakout rules are one of the simple trend-following rules that made money in FX before the 1990s [@neely2009]. Osler (2003) found that trends tend to speed up after rates cross round numbers, consistent with stop-loss orders being triggered [@osler2003].",
+      "related": ["false-breakout", "support-and-resistance", "momentum"]
+    },
+    {
+      "id": "false-breakout",
+      "term": "False breakout",
+      "category": "Candlesticks and chart patterns",
+      "simple": "When the price pokes past a level but then quickly comes back.",
+      "analogy": "Like someone stepping out the door, feeling the rain and stepping back inside.",
+      "precise": "A break of a level that reverses within a short time. Osler (2003) found that rates tend to reverse at round numbers, where take-profit orders cluster, so not every break of a level should be expected to continue [@osler2003].",
+      "related": ["breakout", "stop-hunting"]
+    },
+    {
+      "id": "chart-gap",
+      "term": "Chart gap",
+      "category": "Candlesticks and chart patterns",
+      "simple": "An empty space on a chart where the price jumped from one level to another without trading in between.",
+      "analogy": "Like skipping several stairs in one jump.",
+      "precise": "A period whose range does not overlap the previous period's range. FX trades around the clock on weekdays, so gaps appear mostly over weekends or after sudden news. A gap means a stop order can fill far from its level.",
+      "related": ["weekend-gap", "gap-risk"]
+    },
+    {
+      "id": "fibonacci-retracement",
+      "term": "Fibonacci retracement",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Lines drawn at certain fractions (like 38.2%, 50% and 61.8%) of a past move, where some traders expect the price to pause.",
+      "analogy": "Like believing a bouncing ball will always stop at the same fraction of its last bounce because of a famous number.",
+      "precise": "Levels at Fibonacci ratios of a prior swing. We found no peer-reviewed large-sample study showing these levels predict turning points better than other levels; they may matter a little only because many people watch them. The general technical analysis literature is cautious [@park2007].",
+      "related": ["support-and-resistance", "technical-analysis"]
+    },
+    {
+      "id": "moving-average",
+      "term": "Moving average",
+      "category": "Candlesticks and chart patterns",
+      "simple": "The average price over the last few days, recalculated each day, so it smooths out the wiggles.",
+      "analogy": "Like your average score over your last ten games, updated after every game.",
+      "precise": "The mean of the last N prices, either equally weighted (simple) or with more weight on recent prices (exponential). It always lags the price, because it is built from the past.",
+      "related": ["moving-average-crossover", "momentum"]
+    },
+    {
+      "id": "moving-average-crossover",
+      "term": "Moving average crossover",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A rule to buy when a short average climbs above a long average, and sell when it drops below.",
+      "analogy": "Like deciding a hill is going up once your last few steps are higher than your last fifty steps.",
+      "precise": "A trend rule comparing a short and a long moving average. In FX such rules earned excess returns in the 1970s and 1980s that faded after the early 1990s [@neely2009]. On the Dow Jones, the best rule from Brock, Lakonishok and LeBaron's (1992) sample did not keep working from 1987 to 1996 [@brock1992; @sullivan1999].",
+      "related": ["moving-average", "momentum", "data-snooping"]
+    },
+    {
+      "id": "rsi",
+      "term": "Relative strength index (RSI)",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A number from 0 to 100 that compares recent up moves to recent down moves. High is said to mean 'overbought', low 'oversold'.",
+      "analogy": "Like a speedometer that shows how fast the price has been climbing compared with falling.",
+      "precise": "An oscillator, usually over 14 periods: 100 minus 100 divided by (1 plus average gain over average loss). Readings above 70 or below 30 are common thresholds. 'Overbought' does not mean due to fall; in trending markets RSI can stay high for a long time. Evidence for RSI rules is part of the mixed technical analysis literature [@park2007].",
+      "related": ["mean-reversion", "macd", "technical-analysis"]
+    },
+    {
+      "id": "macd",
+      "term": "MACD",
+      "category": "Candlesticks and chart patterns",
+      "simple": "A tool that subtracts a slow moving average from a fast one to show whether a trend is speeding up or slowing down.",
+      "analogy": "Like comparing how fast you walked in the last minute with how fast you walked over the last ten.",
+      "precise": "Moving average convergence divergence: the 12-period exponential average minus the 26-period one, with a 9-period average of that difference as a signal line. It is a trend rule built from moving averages, with the same lag and the same mixed evidence.",
+      "related": ["moving-average-crossover", "rsi"]
+    },
+    {
+      "id": "bollinger-bands",
+      "term": "Bollinger Bands",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Lines drawn above and below a moving average at a distance that grows when the price is jumpy and shrinks when it is calm.",
+      "analogy": "Like the lane lines on a road that get wider when the traffic is swerving more.",
+      "precise": "A moving average plus and minus a multiple (often 2) of the rolling standard deviation. Touching a band is used by some as a reversal signal and by others as a breakout signal, which shows the rule does not by itself say which.",
+      "related": ["volatility", "mean-reversion", "breakout"]
+    },
+    {
+      "id": "price-action",
+      "term": "Price action",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Trading by reading the shapes the price makes on a chart, usually without other indicators.",
+      "analogy": "Like reading someone's mood from their face instead of asking them.",
+      "precise": "A discretionary style built on candles, levels and patterns. Because rules are rarely written down, it is hard to test, and we found no large-sample evidence for it as a whole. When written as rules, tests fall under the technical analysis literature [@park2007].",
+      "related": ["technical-analysis", "candlestick"]
+    },
+    {
+      "id": "round-number-clustering",
+      "term": "Round number clustering",
+      "category": "Candlesticks and chart patterns",
+      "simple": "Many traders put their orders at tidy prices like 1.1000 instead of 1.1037, so lots of orders pile up there.",
+      "analogy": "Like how prices in shops end in .99 or .00 more than any other number.",
+      "precise": "In customer order books at a large FX dealer, take-profit orders clustered at round numbers and stop-loss orders just beyond them, which helps explain why trends often reverse at round numbers and speed up after crossing them [@osler2003].",
+      "related": ["support-and-resistance", "stop-loss"]
+    },
+    {
+      "id": "cognitive-bias",
+      "term": "Cognitive bias",
+      "category": "Biases and behaviour",
+      "simple": "A shortcut in how our brains think that makes us get the same kind of thing wrong again and again.",
+      "analogy": "Like a bathroom scale that always reads two kilos light. It is not random; it is wrong in the same direction every time.",
+      "precise": "A systematic departure from what probability or logic would say. Tversky and Kahneman (1974) showed that rules of thumb for judging chances, such as representativeness, availability and anchoring, lead to predictable errors [@tversky1974]. Behavioural finance studies how these errors show up in prices and trading [@barberis2003].",
+      "related": ["overconfidence", "anchoring", "availability-heuristic", "representativeness"]
+    },
+    {
+      "id": "overconfidence",
+      "term": "Overconfidence",
+      "category": "Biases and behaviour",
+      "simple": "Thinking you know more, or are better at something, than you really are.",
+      "analogy": "Like most drivers saying they are better than the average driver, which cannot be true for most of them.",
+      "precise": "Overestimating the precision of one's information or one's skill. Barber and Odean (2001) found men traded 45% more than women and cut their net returns by 2.65 percentage points a year against 1.72 for women, consistent with overconfidence [@barber2001].",
+      "related": ["overtrading", "calibration", "illusion-of-control"]
+    },
+    {
+      "id": "loss-aversion",
+      "term": "Loss aversion",
+      "category": "Biases and behaviour",
+      "simple": "Losing something hurts more than winning the same thing feels good.",
+      "analogy": "Losing a ten pound note hurts more than finding one cheers you up.",
+      "precise": "Kahneman and Tversky (1979) found the value function is generally steeper for losses than for gains [@kahneman1979]. Later work put a number on how much steeper; we have not yet checked those estimates.",
+      "related": ["prospect-theory", "disposition-effect", "myopic-loss-aversion"]
+    },
+    {
+      "id": "prospect-theory",
+      "term": "Prospect theory",
+      "category": "Biases and behaviour",
+      "simple": "A theory that says people judge choices by gains and losses from where they are now, and hate losses more than they like gains.",
+      "analogy": "Like judging a test score by whether it beat your last one, not by the score itself.",
+      "precise": "Kahneman and Tversky (1979): outcomes are valued relative to a reference point, with a value function concave for gains, convex for losses and steeper for losses, and with decision weights in place of probabilities [@kahneman1979].",
+      "related": ["loss-aversion", "framing-effect", "disposition-effect"]
+    },
+    {
+      "id": "disposition-effect",
+      "term": "Disposition effect",
+      "category": "Biases and behaviour",
+      "simple": "The habit of selling winning trades too early and holding losing trades too long, hoping they come back.",
+      "analogy": "Like leaving a party you are enjoying, but staying at one you hate because you already paid for the ticket.",
+      "precise": "The tendency to realise gains more readily than losses [@shefrin1985]. In 10,000 US brokerage accounts, Odean (1998) found a strong preference for realising winners rather than losers, and later returns did not justify it [@odean1998]. Among retail traders, access to a social trading network nearly doubled the effect [@heimer2016].",
+      "related": ["loss-aversion", "sunk-cost-fallacy", "myth-hold-losers-until-they-come-back"]
+    },
+    {
+      "id": "recency-bias",
+      "term": "Recency bias",
+      "category": "Biases and behaviour",
+      "simple": "Giving too much weight to what just happened and too little to everything before.",
+      "analogy": "Like thinking summer will never end after three hot days, even though you remember last winter.",
+      "precise": "Overweighting recent observations when forming expectations. Investor surveys show expected returns track recent past returns, while being strongly negatively related to model-based expected returns [@greenwood2014].",
+      "related": ["extrapolation", "availability-heuristic"]
+    },
+    {
+      "id": "extrapolation",
+      "term": "Extrapolation",
+      "category": "Biases and behaviour",
+      "simple": "Expecting what has been happening to keep happening.",
+      "analogy": "Like expecting a growing puppy to become the size of a horse because it doubled in size this year.",
+      "precise": "Forming expectations by projecting recent trends forward. Greenwood and Shleifer (2014) found investor return expectations move with past returns but are strongly negatively related to model-based expected returns [@greenwood2014]. De Bondt and Thaler (1985) found past extreme losers later beat past extreme winners in US stocks, consistent with overreaction [@debondt1985].",
+      "related": ["recency-bias", "momentum", "mean-reversion"]
+    },
+    {
+      "id": "confirmation-bias",
+      "term": "Confirmation bias",
+      "category": "Biases and behaviour",
+      "simple": "Noticing and believing things that agree with what you already think, and ignoring things that do not.",
+      "analogy": "Like only reading reviews that praise the film you already decided to see.",
+      "precise": "The tendency to seek, interpret and remember evidence in ways that favour existing beliefs [@nickerson1998]. For traders it shows up as reading news that supports an open position and dismissing news against it.",
+      "related": ["hindsight-bias", "narrative-fallacy", "pre-mortem"]
+    },
+    {
+      "id": "hindsight-bias",
+      "term": "Hindsight bias",
+      "category": "Biases and behaviour",
+      "simple": "After something happens, feeling like you knew it would happen all along.",
+      "analogy": "Like saying 'I knew that team would win' only after the match is over.",
+      "precise": "Knowing an outcome makes people judge it as more predictable than it was [@fischhoff1975]. Charts make this worse: every past turning point looks obvious afterwards.",
+      "related": ["outcome-bias", "decision-journal", "lookahead-bias"]
+    },
+    {
+      "id": "gamblers-fallacy",
+      "term": "Gambler's fallacy",
+      "category": "Biases and behaviour",
+      "simple": "Thinking that after many reds on a roulette wheel, black is 'due'. It is not; the wheel does not remember.",
+      "analogy": "Like thinking a coin feels guilty after five heads and will try to land tails.",
+      "precise": "Believing independent events self-correct in the short run, a form of the 'law of small numbers' [@tversky1971; @tversky1974]. For trading: after a run of losses, the next trade of an independent strategy is not more likely to win.",
+      "related": ["law-of-small-numbers", "hot-hand", "myth-due-a-win"]
+    },
+    {
+      "id": "hot-hand",
+      "term": "Hot hand",
+      "category": "Biases and behaviour",
+      "simple": "Believing someone who has just had several wins in a row is more likely to win again.",
+      "analogy": "Like a basketball fan who wants the ball passed to whoever just scored three in a row.",
+      "precise": "Gilovich, Vallone and Tversky (1985) argued the hot hand in basketball was a misperception of random streaks [@gilovich1985]. Miller and Sanjurjo (2018) showed that study's measure was biased, and that once corrected its conclusion reverses [@miller2018]. The lesson for us: judging streaks is hard, and short track records say little.",
+      "related": ["gamblers-fallacy", "law-of-small-numbers"]
+    },
+    {
+      "id": "law-of-small-numbers",
+      "term": "Law of small numbers",
+      "category": "Biases and behaviour",
+      "simple": "The mistake of thinking a few results tell you the whole story.",
+      "analogy": "Like tasting one grape and deciding the whole vineyard is sour.",
+      "precise": "Tversky and Kahneman (1971): people expect small samples to look like the population they come from, so they read too much into short runs of data [@tversky1971]. A month of trading results is a small sample.",
+      "related": ["gamblers-fallacy", "sample-size", "hot-hand"]
+    },
+    {
+      "id": "anchoring",
+      "term": "Anchoring",
+      "category": "Biases and behaviour",
+      "simple": "Getting stuck on the first number you hear, even if it has nothing to do with the question.",
+      "analogy": "Like a shop showing a huge 'original price' so the sale price feels cheap.",
+      "precise": "Estimates are pulled toward an initial value, even an arbitrary one [@tversky1974]. Traders often anchor on their entry price, which has no effect on where the market goes next.",
+      "related": ["disposition-effect", "cognitive-bias"]
+    },
+    {
+      "id": "availability-heuristic",
+      "term": "Availability heuristic",
+      "category": "Biases and behaviour",
+      "simple": "Judging how likely something is by how easily examples come to mind.",
+      "analogy": "Like being scared of sharks after a shark film, though you are far more likely to be hurt driving to the beach.",
+      "precise": "Frequency or probability is judged by ease of recall [@tversky1974]. Vivid stories of big trading wins are easy to recall; quiet account closures are not.",
+      "related": ["survivorship-bias", "recency-bias"]
+    },
+    {
+      "id": "representativeness",
+      "term": "Representativeness",
+      "category": "Biases and behaviour",
+      "simple": "Judging something by how much it looks like a typical example, and forgetting how common it actually is.",
+      "analogy": "Like assuming a quiet person who loves books must be a librarian, though there are far more quiet salespeople than librarians.",
+      "precise": "Judging probability by similarity to a stereotype while neglecting base rates and sample size [@tversky1974]. A chart that 'looks like' a famous pattern is judged likely to behave like it.",
+      "related": ["base-rate-neglect", "law-of-small-numbers"]
+    },
+    {
+      "id": "illusion-of-control",
+      "term": "Illusion of control",
+      "category": "Biases and behaviour",
+      "simple": "Believing you can influence things that are really down to chance.",
+      "analogy": "Like people throwing dice harder when they want a high number.",
+      "precise": "Langer (1975) showed people act as if they have more control over chance outcomes when chance tasks include features of skill tasks, such as competition, choice, familiarity or involvement [@langer1975]. Watching screens and drawing lines can feel like control over prices that we do not have.",
+      "related": ["overconfidence", "overtrading"]
+    },
+    {
+      "id": "sunk-cost-fallacy",
+      "term": "Sunk cost fallacy",
+      "category": "Biases and behaviour",
+      "simple": "Sticking with something because you already put time or money into it, even when stopping is the better choice.",
+      "analogy": "Like finishing a terrible meal because you paid for it, so you lose your money and your evening.",
+      "precise": "Letting unrecoverable past costs affect present choices [@arkes1985]. The money already lost on a trade is gone either way; only the expected value from here matters.",
+      "related": ["escalation-of-commitment", "disposition-effect"]
+    },
+    {
+      "id": "escalation-of-commitment",
+      "term": "Escalation of commitment",
+      "category": "Biases and behaviour",
+      "simple": "Putting more and more into a losing plan because you do not want to admit it was wrong.",
+      "analogy": "Like digging a hole deeper to get out of it.",
+      "precise": "Staw (1976) found people who were responsible for a failing decision put more resources into it than people who were not [@staw1976]. In trading this looks like adding to a losing position without a rule that says to.",
+      "related": ["sunk-cost-fallacy", "averaging-down"]
+    },
+    {
+      "id": "herding",
+      "term": "Herding",
+      "category": "Biases and behaviour",
+      "simple": "Doing what everyone else is doing because they are doing it.",
+      "analogy": "Like choosing the busy restaurant over the empty one without looking at the menu.",
+      "precise": "Banerjee (1992) showed it can be rational for each person to copy others, yet the group as a whole can end up wrong [@banerjee1992]. Crowded trades can unwind suddenly when many leave at once [@brunnermeier2008].",
+      "related": ["fomo", "carry-trade"]
+    },
+    {
+      "id": "fomo",
+      "term": "Fear of missing out (FOMO)",
+      "category": "Biases and behaviour",
+      "simple": "Jumping into a trade because everyone seems to be making money and you feel left behind.",
+      "analogy": "Like buying a toy only because all your friends have it.",
+      "precise": "A popular term, not an academic one. The nearest evidence: individual investors are net buyers of stocks that grab attention, such as those in the news or with extreme one-day moves [@barber2008].",
+      "related": ["herding", "recency-bias"]
+    },
+    {
+      "id": "revenge-trading",
+      "term": "Revenge trading",
+      "category": "Biases and behaviour",
+      "simple": "Trading bigger or more often right after a loss to try to win the money back fast.",
+      "analogy": "Like a player who loses a game and immediately bets double to 'get even'.",
+      "precise": "A trader's term, not an academic one. The closest studied effect is the break-even effect: after a loss, people take more risk when it offers a chance to get back to even [@thaler1990].",
+      "related": ["house-money-effect", "tilt", "overtrading"]
+    },
+    {
+      "id": "tilt",
+      "term": "Tilt",
+      "category": "Biases and behaviour",
+      "simple": "When strong feelings after wins or losses make you trade badly.",
+      "analogy": "Like a pinball machine that stops working properly when shaken.",
+      "precise": "Poker slang for emotional decision making. In a small study of day traders, those with stronger emotional reactions to gains and losses had worse results [@lo2005].",
+      "related": ["revenge-trading", "myth-strong-emotion-helps"]
+    },
+    {
+      "id": "house-money-effect",
+      "term": "House money effect",
+      "category": "Biases and behaviour",
+      "simple": "Taking bigger risks with money you just won, as if it is not really yours.",
+      "analogy": "Like spending birthday money more freely than money you earned.",
+      "precise": "Thaler and Johnson (1990) found that after a gain people are more willing to take risks, treating winnings as 'house money' [@thaler1990]. Money is money: a profit already in the account is as real as the deposit.",
+      "related": ["mental-accounting", "revenge-trading"]
+    },
+    {
+      "id": "mental-accounting",
+      "term": "Mental accounting",
+      "category": "Biases and behaviour",
+      "simple": "Putting money into separate boxes in your head and treating each box differently, even though money is all the same.",
+      "analogy": "Like refusing to touch your 'holiday jar' while paying interest on a credit card.",
+      "precise": "Thaler (1985): people code, categorise and evaluate outcomes in separate mental accounts rather than by total wealth [@thaler1985]. Judging each trade alone, instead of the whole account, is one form.",
+      "related": ["house-money-effect", "disposition-effect"]
+    },
+    {
+      "id": "framing-effect",
+      "term": "Framing effect",
+      "category": "Biases and behaviour",
+      "simple": "Making a different choice depending on how the same thing is described.",
+      "analogy": "Like a yoghurt that is '90% fat free' sounding better than one with '10% fat'.",
+      "precise": "Tversky and Kahneman (1981) showed choices reverse when the same outcomes are described as gains or as losses [@tversky1981]. A '60% win rate' and 'loses 4 times in 10' are the same fact.",
+      "related": ["prospect-theory", "loss-aversion"]
+    },
+    {
+      "id": "myopic-loss-aversion",
+      "term": "Myopic loss aversion",
+      "category": "Biases and behaviour",
+      "simple": "Checking your results too often makes losses feel more frequent, so you get scared out of good long-term choices.",
+      "analogy": "Like weighing yourself every hour on a diet and panicking at every glass of water.",
+      "precise": "Benartzi and Thaler (1995): loss aversion plus frequent evaluation makes risky assets look worse, which can help explain the equity premium [@benartzi1995]. The more often a volatile strategy is checked, the more often it shows a loss.",
+      "related": ["loss-aversion", "volatility"]
+    },
+    {
+      "id": "endowment-effect",
+      "term": "Endowment effect",
+      "category": "Biases and behaviour",
+      "simple": "Valuing something more just because you own it.",
+      "analogy": "Like refusing to sell your old bike for a price you would never pay to buy it.",
+      "precise": "Kahneman, Knetsch and Thaler (1990) found that what owners ask to give up an object such as a mug greatly exceeds what buyers will pay, even in markets [@kahneman1990]. An open position can feel worth more than it is because it is ours.",
+      "related": ["status-quo-bias", "disposition-effect"]
+    },
+    {
+      "id": "status-quo-bias",
+      "term": "Status quo bias",
+      "category": "Biases and behaviour",
+      "simple": "Preferring to keep things as they are, even when a change would be better.",
+      "analogy": "Like always ordering the same meal because changing feels risky.",
+      "precise": "Samuelson and Zeckhauser (1988) found people choose the current option far more often than they would if it were not the default [@samuelson1988].",
+      "related": ["endowment-effect", "sunk-cost-fallacy"]
+    },
+    {
+      "id": "narrative-fallacy",
+      "term": "Narrative fallacy",
+      "category": "Biases and behaviour",
+      "simple": "Making up a neat story to explain random events, and then believing the story.",
+      "analogy": "Like deciding your team lost because you wore the wrong socks.",
+      "precise": "Taleb's term for our need to fit a cause-and-effect story to sequences of facts, which makes the world seem more predictable than it is [@taleb2007]. Daily market commentary often explains moves after they happen.",
+      "related": ["hindsight-bias", "confirmation-bias"]
+    },
+    {
+      "id": "outcome-bias",
+      "term": "Outcome bias",
+      "category": "Biases and behaviour",
+      "simple": "Judging a decision only by how it turned out, instead of by whether it was a good choice at the time.",
+      "analogy": "Like praising someone for driving home drunk because they did not crash.",
+      "precise": "Baron and Hershey (1988) found people rated the same decision as better when it had a good outcome [@baron1988]. One trade's result says very little about the quality of the decision.",
+      "related": ["process-vs-outcome", "hindsight-bias"]
+    },
+    {
+      "id": "overtrading",
+      "term": "Overtrading",
+      "category": "Biases and behaviour",
+      "simple": "Trading too often, so costs and mistakes eat your money.",
+      "analogy": "Like checking the oven every minute: the cake does not bake faster and you let the heat out.",
+      "precise": "Barber and Odean (2000) found the US households that traded most earned 11.4% a year against 17.9% for the market, mostly because of costs [@barber2000].",
+      "related": ["overconfidence", "transaction-costs", "turnover"]
+    },
+    {
+      "id": "position-sizing",
+      "term": "Position sizing",
+      "category": "Risk and position sizing",
+      "simple": "Deciding how much money to put into each trade.",
+      "analogy": "Like deciding how big a slice of cake to take, knowing you might drop it.",
+      "precise": "Choosing trade size given the account size, the expected edge and the risk of the trade. It often matters more for survival than the entry rule. Common methods: fixed fraction of equity at risk, volatility scaling and fractions of Kelly [@carver2015; @thorp2008].",
+      "related": ["risk-per-trade", "kelly-criterion", "volatility-position-sizing"]
+    },
+    {
+      "id": "risk-per-trade",
+      "term": "Risk per trade",
+      "category": "Risk and position sizing",
+      "simple": "The most money you agree to lose on one trade if it goes wrong, often a small share of your account.",
+      "analogy": "Like only betting pocket money you can afford to lose, never your bus fare home.",
+      "precise": "The loss if the stop is hit, as a share of equity. The common '1 to 2 percent' rule has little direct large-sample evidence (see RES-0006), but the arithmetic is sound: small fixed fractions make a long losing streak survivable. Gaps can make the real loss larger than planned.",
+      "related": ["fixed-fractional-sizing", "stop-loss", "gap-risk"]
+    },
+    {
+      "id": "fixed-fractional-sizing",
+      "term": "Fixed fractional sizing",
+      "category": "Risk and position sizing",
+      "simple": "Risking the same small percentage of whatever your account is worth now on every trade.",
+      "analogy": "Like always eating a quarter of whatever cake is left: you never run out, though the slices get smaller.",
+      "precise": "Each position risks a fixed fraction f of current equity, so size shrinks after losses and grows after gains. In theory this avoids total ruin, though costs, minimum trade sizes and gaps still allow it in practice. The Kelly criterion is the growth-optimal choice of f for a known edge [@thorp2008].",
+      "related": ["kelly-criterion", "risk-of-ruin"]
+    },
+    {
+      "id": "kelly-criterion",
+      "term": "Kelly criterion",
+      "category": "Risk and position sizing",
+      "simple": "A formula that tells you what share of your money to bet so it grows fastest over many bets, if you know your real chances.",
+      "analogy": "Like knowing exactly how hard to pedal uphill: too little and you crawl, too much and you burn out.",
+      "precise": "The fraction that maximises expected log wealth. For a bet paying b to 1 with win probability p, f = p minus (1 minus p) divided by b. For a continuous asset it is roughly expected excess return divided by variance. Derived by Kelly (1956) [@url-efa4ec7e]; its use in betting and markets is reviewed by Thorp [@thorp2008; @maclean2011]. It assumes the edge is known exactly, which it never is.",
+      "related": ["fractional-kelly", "position-sizing", "risk-of-ruin"]
+    },
+    {
+      "id": "fractional-kelly",
+      "term": "Fractional Kelly",
+      "category": "Risk and position sizing",
+      "simple": "Betting only a part, like half, of what the Kelly formula says, to be safer.",
+      "analogy": "Like driving a bit under the speed limit because you are not sure how icy the road is.",
+      "precise": "Betting a fraction c of the Kelly amount. With a known edge, growth at c times Kelly is proportional to c times (2 minus c), so half Kelly keeps three quarters of the maximum growth, and twice Kelly gives zero growth. Betting below Kelly is much less harmful if the edge was overestimated [@maclean2011].",
+      "related": ["kelly-criterion", "overconfidence"]
+    },
+    {
+      "id": "value-at-risk",
+      "term": "Value at risk (VaR)",
+      "category": "Risk and position sizing",
+      "simple": "A number that says 'on most days, we should not lose more than this much'.",
+      "analogy": "Like a weather report saying 'there is only a 1 in 20 chance of more than 10 mm of rain', which tells you nothing about how bad that 1 day might be.",
+      "precise": "The loss level not exceeded with a given probability over a given horizon, for example 99% one-day VaR. It says nothing about how large losses are beyond that level and is not always subadditive, so combining positions can appear to raise it [@jorion2006; @artzner1999].",
+      "related": ["expected-shortfall", "fat-tails", "tail-risk"]
+    },
+    {
+      "id": "expected-shortfall",
+      "term": "Expected shortfall",
+      "category": "Risk and position sizing",
+      "simple": "The average loss on the really bad days, the ones past the VaR line.",
+      "analogy": "If VaR says how deep the water usually gets, expected shortfall says how deep it is on average when it floods.",
+      "precise": "The expected loss given that the loss exceeds the VaR level, also called conditional VaR. It is a coherent risk measure [@acerbi2002; @artzner1999]. Bank market risk rules moved from VaR to expected shortfall in the Basel framework [@bcbs2019].",
+      "related": ["value-at-risk", "tail-risk"]
+    },
+    {
+      "id": "risk-of-ruin",
+      "term": "Risk of ruin",
+      "category": "Risk and position sizing",
+      "simple": "The chance of losing so much that you cannot keep trading.",
+      "analogy": "Like the chance a gambler runs out of chips before the night ends.",
+      "precise": "The probability that equity falls to a level where trading must stop. Classic gambler's ruin results show that with a fixed bet size even a favourable game has a positive ruin probability, and an unfavourable game ends in ruin with certainty given enough time [@feller1968]. Larger bets relative to capital raise it sharply.",
+      "related": ["gamblers-ruin", "fixed-fractional-sizing", "leverage"]
+    },
+    {
+      "id": "gamblers-ruin",
+      "term": "Gambler's ruin",
+      "category": "Risk and position sizing",
+      "simple": "The math showing that a player with less money, betting against a richer opponent in a fair or unfair game, will usually go broke eventually.",
+      "analogy": "Like playing tug of war against a team that never gets tired.",
+      "precise": "Results for a random walk with absorbing barriers: a player with finite capital in a game with zero or negative edge is ruined with probability 1 against an opponent with unlimited capital [@feller1968]. Martingale betting systems run into this.",
+      "related": ["risk-of-ruin", "martingale-betting"]
+    },
+    {
+      "id": "drawdown-duration",
+      "term": "Drawdown duration",
+      "category": "Risk and position sizing",
+      "simple": "How long it takes to climb back to your old best after a fall.",
+      "analogy": "Like how long it takes to get back to the top of the hill after sliding down.",
+      "precise": "The time from a peak in equity to the point where that peak is regained. For a random walk with positive drift, the expected maximum drawdown keeps growing with the time horizon, roughly like its logarithm; with zero drift it grows like the square root [@magdonismail2004]. Long stretches below a past peak are normal.",
+      "related": ["drawdown", "recovery-math", "sharpe-ratio"]
+    },
+    {
+      "id": "margin",
+      "term": "Margin",
+      "category": "Risk and position sizing",
+      "simple": "Money you must keep with your broker as a deposit when you trade with borrowed money.",
+      "analogy": "Like the deposit you pay to rent a bike: you get it back if you return the bike, and you lose it if you break it.",
+      "precise": "Collateral posted against a leveraged position. In the EU, retail CFD rules require initial margin of at least 3.33% for major currency pairs (30 to 1 leverage) [@url-46fb23ac]. In the US, the CFTC's 2010 rule has the National Futures Association set retail forex security deposits within limits the CFTC provides [@cftc2010].",
+      "related": ["leverage", "margin-call", "stop-out"]
+    },
+    {
+      "id": "margin-call",
+      "term": "Margin call",
+      "category": "Risk and position sizing",
+      "simple": "A warning from your broker that you have lost so much that your deposit is too small, so you must add money or close trades.",
+      "analogy": "Like the bike shop calling to say the deposit no longer covers the damage.",
+      "precise": "A demand to restore margin above the maintenance level. Retail FX and CFD brokers often skip the call and close positions automatically at a stop-out level.",
+      "related": ["margin", "stop-out"]
+    },
+    {
+      "id": "stop-out",
+      "term": "Stop-out",
+      "category": "Risk and position sizing",
+      "simple": "When the broker closes your trades for you because your account fell too low.",
+      "analogy": "Like a referee stopping a boxing match before someone gets badly hurt.",
+      "precise": "Automatic liquidation at a set margin level. ESMA's retail CFD rules require brokers to close positions once account equity falls to 50% of the required margin [@url-46fb23ac]. The fill can still be far from that level in a fast market.",
+      "related": ["margin-call", "negative-balance-protection", "gap-risk"]
+    },
+    {
+      "id": "negative-balance-protection",
+      "term": "Negative balance protection",
+      "category": "Risk and position sizing",
+      "simple": "A rule that you cannot lose more than the money in your account.",
+      "analogy": "Like a safety net under a trampoline: you can fall, but not below the net.",
+      "precise": "A requirement that retail clients' losses are capped at the funds in their account, part of ESMA's 2018 CFD measures [@url-46fb23ac]. It does not exist everywhere; after the Swiss franc floor was removed in January 2015, some clients ended with negative balances [@snb2015].",
+      "related": ["stop-out", "gap-risk", "leverage"]
+    },
+    {
+      "id": "stop-loss",
+      "term": "Stop loss",
+      "category": "Risk and position sizing",
+      "simple": "An order that closes your trade automatically if the price moves against you by a set amount.",
+      "analogy": "Like a smoke alarm that goes off before the whole house burns.",
+      "precise": "An order to exit once a price is reached. It becomes a market order, so in a gap it fills at the next available price, which may be much worse. FX stop orders cluster just beyond round numbers [@osler2003].",
+      "related": ["gap-risk", "take-profit", "trailing-stop", "myth-stops-always-protect"]
+    },
+    {
+      "id": "take-profit",
+      "term": "Take profit",
+      "category": "Risk and position sizing",
+      "simple": "An order that closes your trade automatically once it has made a set amount.",
+      "analogy": "Like deciding before a game that you will leave the arcade once you win ten tickets.",
+      "precise": "A limit order to exit at a target price. In FX these cluster at round numbers, which may be one reason trends often pause there [@osler2003].",
+      "related": ["stop-loss", "round-number-clustering"]
+    },
+    {
+      "id": "trailing-stop",
+      "term": "Trailing stop",
+      "category": "Risk and position sizing",
+      "simple": "A stop loss that moves up as the price moves in your favour, but never moves back down.",
+      "analogy": "Like a climber's rope clipped higher as they climb, so a fall is never all the way to the bottom.",
+      "precise": "A stop set a fixed distance or volatility multiple behind the best price since entry. It turns any trade into a simple trend rule on exit.",
+      "related": ["stop-loss", "average-true-range"]
+    },
+    {
+      "id": "slippage",
+      "term": "Slippage",
+      "category": "Risk and position sizing",
+      "simple": "The difference between the price you expected and the price you actually got.",
+      "analogy": "Like ordering a 2 pound sandwich and being charged 2.10 because the price changed while you queued.",
+      "precise": "Execution price minus the reference price at the time of the decision. It rises with order size, volatility and thin markets, and is part of total transaction costs.",
+      "related": ["transaction-costs", "spread", "liquidity"]
+    },
+    {
+      "id": "gap-risk",
+      "term": "Gap risk",
+      "category": "Risk and position sizing",
+      "simple": "The danger that the price jumps past your stop loss, so you lose more than you planned.",
+      "analogy": "Like planning to step off a moving walkway at a certain spot, but the floor drops away first.",
+      "precise": "Loss from discontinuous price moves. On 15 January 2015 the Swiss National Bank removed its 1.20 franc per euro floor [@snb2015], and the franc moved so far so fast that many stops filled far from their levels.",
+      "related": ["chart-gap", "stop-loss", "weekend-gap", "fat-tails"]
+    },
+    {
+      "id": "average-true-range",
+      "term": "Average true range (ATR)",
+      "category": "Risk and position sizing",
+      "simple": "A measure of how much the price usually moves in one period.",
+      "analogy": "Like knowing a river usually rises and falls about half a metre a day.",
+      "precise": "The average over N periods of the true range: the largest of high minus low, high minus previous close, and previous close minus low. Used to set stops and position sizes in units of typical movement.",
+      "related": ["volatility", "volatility-position-sizing"]
+    },
+    {
+      "id": "volatility-position-sizing",
+      "term": "Volatility position sizing",
+      "category": "Risk and position sizing",
+      "simple": "Making trades smaller when the price is jumpy and bigger when it is calm, so each trade carries about the same risk.",
+      "analogy": "Like walking more carefully on ice and striding out on dry pavement.",
+      "precise": "Size each position inversely to its forecast volatility. Moreira and Muir (2017) found scaling exposure by inverse variance raised Sharpe ratios for several factors [@moreira2017]. It is the core of Carver's sizing method [@carver2015].",
+      "related": ["volatility-targeting", "average-true-range", "position-sizing"]
+    },
+    {
+      "id": "risk-reward-ratio",
+      "term": "Risk-reward ratio",
+      "category": "Risk and position sizing",
+      "simple": "How much you could win on a trade compared with how much you could lose.",
+      "analogy": "Like a bet where you risk 1 sweet to win 3.",
+      "precise": "Distance to target divided by distance to stop. A high ratio is not good by itself: with a low enough chance of reaching the target the expected value is still negative. Only ratio and win rate together give expectancy.",
+      "related": ["expectancy", "hit-rate", "myth-high-win-rate"]
+    },
+    {
+      "id": "expectancy",
+      "term": "Expectancy",
+      "category": "Risk and position sizing",
+      "simple": "The average amount you expect to win or lose per trade over many trades.",
+      "analogy": "Like working out that a game where you win 1 pound half the time and lose 2 pounds the other half costs you 50p a go.",
+      "precise": "Win rate times average win minus loss rate times average loss, after costs. A strategy can win most trades and still have negative expectancy, or win few and be positive.",
+      "related": ["expected-value", "hit-rate", "risk-reward-ratio"]
+    },
+    {
+      "id": "tail-risk",
+      "term": "Tail risk",
+      "category": "Risk and position sizing",
+      "simple": "The risk of very rare but very big moves.",
+      "analogy": "Like the chance of a hundred-year flood: rare, but it can wipe out everything at once.",
+      "precise": "Risk from extreme outcomes far from the average. Mandelbrot (1963) proposed replacing the normal distribution of price changes with fatter-tailed stable laws [@mandelbrot1963]. Carry trades are a known example of strategies with crash risk [@brunnermeier2008].",
+      "related": ["fat-tails", "negative-skew", "expected-shortfall"]
+    },
+    {
+      "id": "martingale-betting",
+      "term": "Martingale betting",
+      "category": "Risk and position sizing",
+      "simple": "Doubling your bet after every loss so that one win gets everything back.",
+      "analogy": "Like chasing a runaway ball downhill faster and faster: it works until you trip.",
+      "precise": "A system that doubles stake after each loss. It turns many small wins into rare total losses, because capital or limits run out before the streak ends [@feller1968]. It does not change the expected value of the game.",
+      "related": ["gamblers-ruin", "averaging-down", "gamblers-fallacy"]
+    },
+    {
+      "id": "averaging-down",
+      "term": "Averaging down",
+      "category": "Risk and position sizing",
+      "simple": "Buying more of something after its price falls, to lower your average price.",
+      "analogy": "Like ordering more of a meal you did not like because the second plate is cheaper.",
+      "precise": "Adding to a losing position. It lowers the average entry price but raises exposure to a trade that is going wrong. Without a rule set in advance, it is a form of escalation of commitment [@staw1976].",
+      "related": ["martingale-betting", "escalation-of-commitment", "pyramiding"]
+    },
+    {
+      "id": "pyramiding",
+      "term": "Pyramiding",
+      "category": "Risk and position sizing",
+      "simple": "Adding to a trade that is already making money.",
+      "analogy": "Like adding more bricks to a wall only after the first layer has set.",
+      "precise": "Increasing a winning position in steps. It is the opposite of averaging down and is common in trend following. It still raises total exposure, so total risk must be capped.",
+      "related": ["averaging-down", "momentum"]
+    },
+    {
+      "id": "correlation-risk",
+      "term": "Correlation risk",
+      "category": "Risk and position sizing",
+      "simple": "The danger that trades you thought were separate all go wrong together.",
+      "analogy": "Like carrying eggs in five baskets that are all tied to the same rope.",
+      "precise": "Risk that positions move together more than expected, especially in stress. Most FX trades share the US dollar on one side (89.2% in April 2025 [@bis2025]), and a common dollar factor explains much of the movement of currencies [@lustig2011].",
+      "related": ["correlation", "diversification", "myth-many-pairs-diversify"]
+    },
+    {
+      "id": "stress-test",
+      "term": "Stress test",
+      "category": "Risk and position sizing",
+      "simple": "Checking what would happen to your money in a really bad scenario.",
+      "analogy": "Like a fire drill: practise the disaster before it happens.",
+      "precise": "Revaluing a portfolio under extreme but plausible moves, either historical (for example January 2015 in the franc, 2008 in carry trades) or made up. It complements VaR, which says little about extremes [@jorion2006].",
+      "related": ["value-at-risk", "tail-risk"]
+    },
+    {
+      "id": "compounding",
+      "term": "Compounding",
+      "category": "Capital and returns",
+      "simple": "Earning returns on your earlier returns, so money grows faster and faster over time.",
+      "analogy": "Like a snowball rolling downhill, picking up more snow the bigger it gets.",
+      "precise": "Growth where each period's return applies to the accumulated value: final value equals start times the product of (1 plus r) over all periods. It works the same way on losses, which is why big losses are so costly.",
+      "related": ["cagr", "recovery-math", "rule-of-72"]
+    },
+    {
+      "id": "arithmetic-mean-return",
+      "term": "Arithmetic mean return",
+      "category": "Capital and returns",
+      "simple": "The plain average of returns: add them up and divide by how many there are.",
+      "analogy": "Like averaging your test scores. It can look better than how much you actually learned over the year.",
+      "precise": "The simple average of period returns. It overstates what an investor actually earns over time when returns vary: +50% then -50% averages 0% but leaves you 25% down.",
+      "related": ["geometric-mean-return", "volatility-drag", "cagr"]
+    },
+    {
+      "id": "geometric-mean-return",
+      "term": "Geometric mean return",
+      "category": "Capital and returns",
+      "simple": "The steady yearly growth rate that would turn your starting money into your ending money.",
+      "analogy": "Like working out the one constant speed that would get you to the finish in the same time as your stop-start drive.",
+      "precise": "The nth root of the product of (1 plus r) minus 1. It is always at or below the arithmetic mean, and roughly equal to the arithmetic mean minus half the variance [@messmore1995]. Over years it is the same as CAGR.",
+      "related": ["arithmetic-mean-return", "volatility-drag", "cagr"]
+    },
+    {
+      "id": "volatility-drag",
+      "term": "Volatility drag",
+      "category": "Capital and returns",
+      "simple": "Big ups and downs make your money grow slower than the average return suggests.",
+      "analogy": "Like a car that speeds up and brakes a lot: it uses more fuel and gets there later than one that drives steadily.",
+      "precise": "The gap between arithmetic and geometric mean returns, about half the variance per period (also called variance drain) [@messmore1995]. A strategy with 10% average return and 30% volatility compounds at roughly 10% minus 4.5%, or 5.5%, a year.",
+      "related": ["geometric-mean-return", "volatility", "leverage"]
+    },
+    {
+      "id": "nominal-return",
+      "term": "Nominal return",
+      "category": "Capital and returns",
+      "simple": "How much your money grew in plain numbers, without thinking about prices going up.",
+      "analogy": "Like getting a bigger allowance without noticing sweets got more expensive too.",
+      "precise": "Return measured in currency units, before adjusting for inflation.",
+      "related": ["real-return", "inflation"]
+    },
+    {
+      "id": "real-return",
+      "term": "Real return",
+      "category": "Capital and returns",
+      "simple": "How much more stuff your money can buy after accounting for rising prices.",
+      "analogy": "Like checking how many more sweets your bigger allowance actually buys.",
+      "precise": "Nominal return adjusted for inflation: (1 plus nominal) divided by (1 plus inflation) minus 1, roughly nominal minus inflation. Long-run studies of world markets report real returns because nominal figures mislead across eras [@dimson2002].",
+      "related": ["nominal-return", "inflation"]
+    },
+    {
+      "id": "inflation",
+      "term": "Inflation",
+      "category": "Capital and returns",
+      "simple": "When prices of things in shops go up over time, so the same money buys less.",
+      "analogy": "Like a bag of crisps that costs a bit more every year.",
+      "precise": "The rate of change of a price index such as the consumer price index. Differences in inflation between countries are the base of purchasing power parity.",
+      "related": ["real-return", "purchasing-power-parity", "real-exchange-rate"]
+    },
+    {
+      "id": "annualised-return",
+      "term": "Annualised return",
+      "category": "Capital and returns",
+      "simple": "A return turned into a 'per year' number so that different time periods can be compared.",
+      "analogy": "Like saying a runner's pace in kilometres per hour even if they only ran for ten minutes.",
+      "precise": "For compounding: (1 plus total return) to the power (1 divided by years) minus 1. Annualising a short, lucky period gives huge and misleading numbers.",
+      "related": ["cagr", "annualised-volatility"]
+    },
+    {
+      "id": "annualised-volatility",
+      "term": "Annualised volatility",
+      "category": "Capital and returns",
+      "simple": "How jumpy returns are, scaled to a one-year number.",
+      "analogy": "Like converting a daily wobble into a yearly wobble so you can compare a boat and a ship.",
+      "precise": "Standard deviation of period returns times the square root of periods per year (about 252 trading days or 52 weeks), assuming returns are independent. Volatility grows with the square root of time, not with time.",
+      "related": ["volatility", "annualised-return", "sharpe-ratio"]
+    },
+    {
+      "id": "log-return",
+      "term": "Log return",
+      "category": "Capital and returns",
+      "simple": "A way of measuring returns that lets you just add them up over time.",
+      "analogy": "Like measuring a journey in steps you can add, instead of percentages of the distance left.",
+      "precise": "The natural log of (end price divided by start price). Log returns add across time, and a +x and -x log return cancel exactly, unlike simple returns.",
+      "related": ["simple-return", "compounding"]
+    },
+    {
+      "id": "simple-return",
+      "term": "Simple return",
+      "category": "Capital and returns",
+      "simple": "How much the price changed as a percent: end minus start, divided by start.",
+      "analogy": "Like saying your height went from 100 cm to 110 cm, a 10% gain.",
+      "precise": "(P1 minus P0) divided by P0. Simple returns add across assets in a portfolio but not across time; log returns add across time but not across assets.",
+      "related": ["log-return", "return"]
+    },
+    {
+      "id": "recovery-math",
+      "term": "Recovery math",
+      "category": "Capital and returns",
+      "simple": "After you lose some money, you need a bigger percent gain to get back to where you started.",
+      "analogy": "Like a ball dropped from a height: losing half needs doubling to get back up.",
+      "precise": "To recover from a loss L you need a gain of L divided by (1 minus L): 10% needs 11.1%, 25% needs 33.3%, 50% needs 100% and 90% needs 900%.",
+      "related": ["drawdown", "compounding", "drawdown-duration"]
+    },
+    {
+      "id": "rule-of-72",
+      "term": "Rule of 72",
+      "category": "Capital and returns",
+      "simple": "A shortcut: divide 72 by the yearly percent return to guess how many years it takes to double your money.",
+      "analogy": "At 8% a year, 72 divided by 8 is 9, so about 9 years to double.",
+      "precise": "An approximation to ln(2) divided by ln(1 plus r), accurate for rates around 6% to 10%. It also gives how fast inflation halves purchasing power.",
+      "related": ["compounding", "cagr"]
+    },
+    {
+      "id": "risk-free-rate",
+      "term": "Risk-free rate",
+      "category": "Capital and returns",
+      "simple": "The return you could get with almost no risk, like a short loan to the government.",
+      "analogy": "Like the interest from keeping money in the safest piggy bank there is.",
+      "precise": "Usually the yield on short-dated government bills in the relevant currency. Excess returns and the Sharpe ratio are measured over it. A strategy that does not beat it has earned nothing for the risk taken.",
+      "related": ["excess-return", "sharpe-ratio", "opportunity-cost"]
+    },
+    {
+      "id": "opportunity-cost",
+      "term": "Opportunity cost",
+      "category": "Capital and returns",
+      "simple": "What you give up by choosing one thing instead of another.",
+      "analogy": "If you spend Saturday at the cinema, you cannot also spend it at the beach.",
+      "precise": "The value of the best foregone alternative. For a trading strategy, the alternatives are cash at the risk-free rate and a cheap index fund; our S&P 500 benchmark is the second.",
+      "related": ["risk-free-rate", "benchmark"]
+    },
+    {
+      "id": "management-fee",
+      "term": "Management fee",
+      "category": "Capital and returns",
+      "simple": "A fee charged every year as a percent of the money a fund manages, whether it makes money or not.",
+      "analogy": "Like paying a gardener a fixed amount each month, even in months nothing grows.",
+      "precise": "An annual charge on assets under management. French (2008) estimated US investors spent about 0.67% of the total market value each year trying to beat the market, and that a typical investor would have done better in a passive fund [@french2008].",
+      "related": ["performance-fee", "net-vs-gross-return", "cost-of-active-management"]
+    },
+    {
+      "id": "performance-fee",
+      "term": "Performance fee",
+      "category": "Capital and returns",
+      "simple": "A fee taken as a share of the profits a fund makes.",
+      "analogy": "Like a coach who takes a cut of your prize money.",
+      "precise": "A share of returns above a hurdle, often 20%, usually charged only above a high-water mark. It is asymmetric: the manager shares gains but not losses, which can encourage risk taking.",
+      "related": ["high-water-mark", "management-fee"]
+    },
+    {
+      "id": "high-water-mark",
+      "term": "High-water mark",
+      "category": "Capital and returns",
+      "simple": "The highest value an account or fund has reached. Performance fees are usually only paid on gains above it.",
+      "analogy": "Like the line a flood leaves on a wall: the water has to rise above it to count as a new record.",
+      "precise": "The peak net asset value used to compute performance fees and drawdowns. A fund below its high-water mark is in drawdown.",
+      "related": ["performance-fee", "drawdown"]
+    },
+    {
+      "id": "net-vs-gross-return",
+      "term": "Net and gross return",
+      "category": "Capital and returns",
+      "simple": "Gross return is before costs and fees. Net return is what you actually keep.",
+      "analogy": "Like the price on a payslip before tax, and what lands in your bank.",
+      "precise": "Gross minus trading costs, fees, financing and taxes equals net. Barber and Odean (2000) found frequent traders' gross returns were close to the market but net returns far below it [@barber2000].",
+      "related": ["transaction-costs", "management-fee", "overtrading"]
+    },
+    {
+      "id": "cost-of-active-management",
+      "term": "Arithmetic of active management",
+      "category": "Capital and returns",
+      "simple": "Before costs, all the people trying to beat the market together just get the market return. After costs, they get less.",
+      "analogy": "If everyone at a poker table pays the house a fee, the table as a whole must lose.",
+      "precise": "Sharpe (1991): the average actively managed dollar must earn the market return before costs and less after costs [@sharpe1991]. Trading is zero-sum before costs relative to the market, and negative-sum after.",
+      "related": ["management-fee", "benchmark", "efficient-market"]
+    },
+    {
+      "id": "time-weighted-return",
+      "term": "Time-weighted return",
+      "category": "Capital and returns",
+      "simple": "A return that measures how well the strategy did, ignoring when money was added or taken out.",
+      "analogy": "Like timing a runner's laps, no matter how many people joined the race halfway.",
+      "precise": "Chain-linked returns between cash flows. It measures the manager or strategy, not the investor's timing, and is the standard for comparing funds.",
+      "related": ["money-weighted-return", "cagr"]
+    },
+    {
+      "id": "money-weighted-return",
+      "term": "Money-weighted return",
+      "category": "Capital and returns",
+      "simple": "A return that counts when you put money in and took it out, so it shows how you did, not just the strategy.",
+      "analogy": "Like a race where your score depends on how fast you ran while carrying the most weight.",
+      "precise": "The internal rate of return on all cash flows. If investors add money after good years and pull it after bad years, their money-weighted return can be well below the fund's time-weighted return.",
+      "related": ["time-weighted-return", "recency-bias"]
+    },
+    {
+      "id": "ergodicity",
+      "term": "Ergodicity",
+      "category": "Capital and returns",
+      "simple": "Whether the average over many people is the same as what happens to one person over time. In money, it often is not.",
+      "analogy": "A hundred people each playing Russian roulette once is not the same as one person playing it a hundred times.",
+      "precise": "A process is ergodic if time averages equal ensemble averages. Multiplicative wealth processes are not: an expected-value-positive bet can still make almost every individual poorer over time, which is why growth rates (log returns) matter [@peters2019]. This is the idea behind the Kelly criterion.",
+      "related": ["kelly-criterion", "volatility-drag", "geometric-mean-return"]
+    },
+    {
+      "id": "skewed-winners",
+      "term": "Few big winners",
+      "category": "Capital and returns",
+      "simple": "In stock markets, most of the gains came from a small number of companies. Most single stocks did worse than cash.",
+      "analogy": "Like a lottery: a few huge prizes make the average look good, while most tickets lose.",
+      "precise": "Bessembinder (2018) found that most US common stocks since 1926 had lifetime buy-and-hold returns below one-month Treasury bills, and about 4% of companies accounted for the net wealth created by the market [@bessembinder2018].",
+      "related": ["negative-skew", "diversification", "survivorship-bias"]
+    },
+    {
+      "id": "pip",
+      "term": "Pip",
+      "category": "FX market structure",
+      "simple": "The smallest usual step a currency price moves by. For most pairs it is the fourth decimal place, 0.0001.",
+      "analogy": "Like a single cent on a price tag.",
+      "precise": "One unit of the fourth decimal for most pairs (0.0001) and of the second decimal for yen pairs (0.01). Pip value in money depends on trade size and the quote currency: 1 pip on 100,000 EUR/USD is 10 US dollars.",
+      "related": ["pipette", "lot", "spread"]
+    },
+    {
+      "id": "pipette",
+      "term": "Pipette",
+      "category": "FX market structure",
+      "simple": "A tenth of a pip. Many platforms show prices with one extra decimal.",
+      "analogy": "Like a tenth of a cent.",
+      "precise": "The fifth decimal (or third for yen pairs). Quoting in pipettes lets spreads be shown more finely, such as 0.8 pips.",
+      "related": ["pip"]
+    },
+    {
+      "id": "lot",
+      "term": "Lot",
+      "category": "FX market structure",
+      "simple": "A standard bundle size for a trade.",
+      "analogy": "Like eggs sold by the dozen or half dozen.",
+      "precise": "In retail FX a standard lot is 100,000 units of the base currency, a mini lot 10,000 and a micro lot 1,000. In the interbank market, trades are quoted in millions.",
+      "related": ["pip", "notional-exposure"]
+    },
+    {
+      "id": "base-and-quote-currency",
+      "term": "Base and quote currency",
+      "category": "FX market structure",
+      "simple": "In a pair like EUR/USD, the euro is the base (the thing being priced) and the dollar is the quote (the money used to price it).",
+      "analogy": "Like the price tag on an apple: the apple is the base, the coins are the quote.",
+      "precise": "A quote of 1.10 for EUR/USD means 1 euro costs 1.10 dollars. Buying the pair means buying the base and selling the quote. Market conventions decide which currency is the base.",
+      "related": ["currency-pair", "exchange-rate"]
+    },
+    {
+      "id": "bid-and-ask",
+      "term": "Bid and ask",
+      "category": "FX market structure",
+      "simple": "The bid is the price someone will pay you to buy from you. The ask is the price you pay to buy. The ask is always a little higher.",
+      "analogy": "Like a currency booth at the airport that buys your euros cheap and sells them to you dear.",
+      "precise": "Best price to sell at (bid) and to buy at (ask or offer). The difference is the spread, which a trader pays by crossing it.",
+      "related": ["spread", "liquidity", "transaction-costs"]
+    },
+    {
+      "id": "major-minor-exotic-pairs",
+      "term": "Majors, crosses and exotics",
+      "category": "FX market structure",
+      "simple": "Majors are the most traded pairs with the US dollar, like EUR/USD. Crosses do not include the dollar, like EUR/GBP. Exotics include a less traded currency, like USD/TRY.",
+      "analogy": "Like main roads, side roads and dirt tracks: the dirt tracks cost more to drive and can be bumpy.",
+      "precise": "Common usage: majors are the dollar against EUR, JPY, GBP, CHF, CAD, AUD and NZD; crosses pair two non-dollar currencies; exotics involve emerging-market currencies with wider spreads and more gap risk. EU leverage limits are 30 to 1 on majors and 20 to 1 on the rest [@url-46fb23ac].",
+      "related": ["g10-currencies", "currency-pair", "spread"]
+    },
+    {
+      "id": "spot-settlement",
+      "term": "Spot settlement (T+2)",
+      "category": "FX market structure",
+      "simple": "When you trade currencies 'spot', the money actually changes hands two working days later for most pairs.",
+      "analogy": "Like buying a concert ticket today that gets delivered in two days.",
+      "precise": "Spot FX usually settles two business days after the trade date (T+2); USD/CAD and a few others settle T+1. The settlement day is the value date. Retail platforms roll positions each day so they never settle.",
+      "related": ["value-date", "rollover", "spot-rate"]
+    },
+    {
+      "id": "value-date",
+      "term": "Value date",
+      "category": "FX market structure",
+      "simple": "The day the two currencies in a trade are actually paid.",
+      "analogy": "Like the day a cheque actually clears.",
+      "precise": "The settlement date of an FX transaction. It must be a business day in both currencies' countries.",
+      "related": ["spot-settlement", "forward-points"]
+    },
+    {
+      "id": "rollover",
+      "term": "Rollover (swap)",
+      "category": "FX market structure",
+      "simple": "A small daily payment or charge for keeping a currency trade open overnight, based on the difference in interest rates.",
+      "analogy": "Like getting paid rent for lending out a room, while paying rent for the room you borrowed.",
+      "precise": "Retail positions held past the daily cut-off (usually 5 pm New York) are rolled to the next value date, with a credit or debit based on the interest rate differential (from tom-next swap points) minus a broker markup. It is how carry is paid or charged in retail FX.",
+      "related": ["carry", "forward-points", "fx-swap"]
+    },
+    {
+      "id": "forward-points",
+      "term": "Forward points",
+      "category": "FX market structure",
+      "simple": "The small number added to or taken from today's rate to get a future rate. It comes from the interest rate difference between the two currencies.",
+      "analogy": "Like the extra charged to hold an item at a shop until next month, depending on what the shop could have earned on the money.",
+      "precise": "Forward rate minus spot rate, quoted in pips. By covered interest parity they reflect the interest differential; since 2008 measurable deviations from this have persisted [@du2018].",
+      "related": ["forward-rate", "covered-interest-parity", "fx-swap"]
+    },
+    {
+      "id": "fx-swap",
+      "term": "FX swap",
+      "category": "FX market structure",
+      "simple": "A deal to swap currencies now and swap them back later at a set rate. It is mostly used to borrow one currency using another.",
+      "analogy": "Like lending a friend your bike for their skateboard, and agreeing to swap back next week.",
+      "precise": "A spot (or near) leg and an opposite forward leg in one trade. FX swaps are the most traded FX instrument: about 4 trillion US dollars a day in April 2025, 42% of turnover [@bis2025].",
+      "related": ["forward-points", "rollover", "triennial-survey"]
+    },
+    {
+      "id": "outright-forward",
+      "term": "Outright forward",
+      "category": "FX market structure",
+      "simple": "An agreement to exchange currencies on a future date at a price fixed today.",
+      "analogy": "Like booking a hotel room now at today's price for a trip next summer.",
+      "precise": "A single FX transaction settling after spot, at the spot rate plus forward points. Used by firms to hedge known future payments.",
+      "related": ["forward-rate", "forward-points", "ndf"]
+    },
+    {
+      "id": "ndf",
+      "term": "Non-deliverable forward (NDF)",
+      "category": "FX market structure",
+      "simple": "A forward deal for a currency that cannot be freely moved, where only the profit or loss is paid in dollars instead of swapping the currencies.",
+      "analogy": "Like betting on the price of a house you are not allowed to buy, and just settling the difference in cash.",
+      "precise": "A cash-settled forward, typically in US dollars, against an official fixing. Used for currencies with capital controls, such as the Indian rupee or Korean won. The BIS has tracked how this market has grown [@mccauley2014].",
+      "related": ["outright-forward", "fixing"]
+    },
+    {
+      "id": "fixing",
+      "term": "Fixing",
+      "category": "FX market structure",
+      "simple": "An official exchange rate taken at a set time each day, used by many funds and firms to value or trade.",
+      "analogy": "Like the official time on a station clock that everyone sets their watch by.",
+      "precise": "A benchmark rate computed from trades around a set time. The most used is the WM/Reuters 4 pm London fix. After manipulation cases, the Financial Stability Board recommended changes to how such benchmarks are set and traded around [@fsb2014].",
+      "related": ["london-4pm-fix", "ndf"]
+    },
+    {
+      "id": "london-4pm-fix",
+      "term": "London 4 pm fix",
+      "category": "FX market structure",
+      "simple": "The most widely used daily exchange rate snapshot, taken around 4 pm in London.",
+      "analogy": "Like a class photo at a set time: everyone wants to look right at that moment.",
+      "precise": "The WM/Reuters (now WM/Refinitiv) closing spot rate, used to value many index funds. Large orders done 'at the fix' create predictable flows around it, studied in our algorithm ALG-0009. Reforms followed the 2014 FSB report [@fsb2014].",
+      "related": ["fixing", "order-flow"]
+    },
+    {
+      "id": "otc-market",
+      "term": "Over-the-counter market",
+      "category": "FX market structure",
+      "simple": "A market with no single central exchange, where banks and traders deal directly with each other.",
+      "analogy": "Like a busy street market with many stalls instead of one big supermarket checkout.",
+      "precise": "Spot FX trades over the counter between dealers and clients and on several electronic venues, so there is no single official price or volume [@king2012]. Volume data come mainly from the BIS triennial survey [@bis2025].",
+      "related": ["interdealer-market", "ecn", "triennial-survey"]
+    },
+    {
+      "id": "interdealer-market",
+      "term": "Interdealer market",
+      "category": "FX market structure",
+      "simple": "Where the big banks trade currencies with each other.",
+      "analogy": "Like the wholesale market where shops buy their stock before selling it to you.",
+      "precise": "The segment where dealers trade among themselves, mostly on EBS and Refinitiv Matching for spot. Its share has fallen as dealers internalise client flow and non-bank market makers have grown [@king2012].",
+      "related": ["otc-market", "ecn", "market-maker"]
+    },
+    {
+      "id": "ecn",
+      "term": "ECN",
+      "category": "FX market structure",
+      "simple": "An electronic marketplace where many buyers and sellers post prices and trade with each other directly.",
+      "analogy": "Like an online auction site where everyone can see and accept offers.",
+      "precise": "Electronic communication network: a venue matching orders from many participants. Retail 'ECN' accounts usually route to liquidity providers and charge a commission plus a raw spread; how close this is to a true multilateral venue varies by broker.",
+      "related": ["otc-market", "a-book-and-b-book", "last-look"]
+    },
+    {
+      "id": "market-maker",
+      "term": "Market maker",
+      "category": "FX market structure",
+      "simple": "A firm that always offers to both buy and sell, and earns the small gap between the two prices.",
+      "analogy": "Like the airport currency booth, which makes money from the gap between its buy and sell rates.",
+      "precise": "A dealer quoting two-way prices and managing the resulting inventory. In FX these are large banks and, increasingly, non-bank electronic firms [@king2012]. Models such as Avellaneda and Stoikov describe how quotes shift with inventory (ALG-0021).",
+      "related": ["bid-and-ask", "spread", "a-book-and-b-book"]
+    },
+    {
+      "id": "a-book-and-b-book",
+      "term": "A-book and B-book",
+      "category": "FX market structure",
+      "simple": "Two ways a broker can handle your trade: pass it on to the market (A-book) or keep the other side itself (B-book).",
+      "analogy": "A-book is a travel agent booking your flight with an airline; B-book is a bookmaker taking your bet.",
+      "precise": "In a B-book model the broker is the counterparty, so client losses are broker revenue, which is a conflict of interest that must be managed. Many brokers use a mix, sending profitable clients' flow to the market. Broker practices are not standardised, so this is a description of common usage rather than a rule.",
+      "related": ["market-maker", "ecn", "cfd"]
+    },
+    {
+      "id": "last-look",
+      "term": "Last look",
+      "category": "FX market structure",
+      "simple": "A short pause that lets a price-giver decide whether to accept a trade at the price they showed.",
+      "analogy": "Like a shopkeeper who can still say 'sorry, the price changed' after you hand over your money.",
+      "precise": "A window in which a liquidity provider can reject or re-price a trade request against its quote. The FX Global Code sets good-practice principles for the wholesale FX market [@gfxc2024]. Oomen (2017) models how last look trades off tighter quotes against rejection risk [@oomen2017].",
+      "related": ["ecn", "slippage", "market-maker"]
+    },
+    {
+      "id": "liquidity",
+      "term": "Liquidity",
+      "category": "FX market structure",
+      "simple": "How easily you can buy or sell a lot of something quickly without moving the price much.",
+      "analogy": "Like how easily you can sell bread in a busy town versus a tiny village.",
+      "precise": "The ability to trade size quickly at low cost. In FX it is deepest in major pairs during the London and New York overlap and thinnest around the weekend open, holidays and the late New York afternoon.",
+      "related": ["market-depth", "spread", "trading-sessions"]
+    },
+    {
+      "id": "market-depth",
+      "term": "Market depth",
+      "category": "FX market structure",
+      "simple": "How much people are willing to buy or sell at each price near the current price.",
+      "analogy": "Like how many people are queuing to buy and sell at each stall in a market.",
+      "precise": "Quantity available at each price level of the order book. Shallow depth means larger orders move the price and cause slippage.",
+      "related": ["liquidity", "slippage", "order-flow"]
+    },
+    {
+      "id": "trading-sessions",
+      "term": "Trading sessions",
+      "category": "FX market structure",
+      "simple": "Currencies trade almost 24 hours on weekdays, passing from Asia to Europe to America as the day moves round the world.",
+      "analogy": "Like a relay race where the baton passes from Tokyo to London to New York.",
+      "precise": "FX trades from about Sunday evening to Friday 5 pm New York time. The UK has the largest share of trading at about 38%, then the US at about 19%, Singapore at 11.8% and Hong Kong at 7.0% (April 2025) [@bis2025].",
+      "related": ["liquidity", "london-new-york-overlap", "weekend-gap"]
+    },
+    {
+      "id": "london-new-york-overlap",
+      "term": "London and New York overlap",
+      "category": "FX market structure",
+      "simple": "The few hours each day when both London and New York are open, which is the busiest time for currency trading.",
+      "analogy": "Like rush hour, when two shifts of workers are on the road at once.",
+      "precise": "Roughly 8 am to noon New York time. Major US data releases and the 4 pm London fix fall in or near this window, so spreads are tight and moves can be large.",
+      "related": ["trading-sessions", "london-4pm-fix", "macro-surprise"]
+    },
+    {
+      "id": "weekend-gap",
+      "term": "Weekend gap",
+      "category": "FX market structure",
+      "simple": "A jump in price between Friday's close and Sunday's open, because the market was shut while news kept happening.",
+      "analogy": "Like coming back from holiday to find the shop prices all changed.",
+      "precise": "Retail FX venues close from about Friday 5 pm to Sunday 5 pm New York time. Stops cannot fill in between, so positions held over the weekend carry gap risk.",
+      "related": ["gap-risk", "chart-gap", "trading-sessions"]
+    },
+    {
+      "id": "triennial-survey",
+      "term": "BIS Triennial Survey",
+      "category": "FX market structure",
+      "simple": "A survey done every three years by central banks that counts how much currency trading happens around the world.",
+      "analogy": "Like a national census, but for currency trading.",
+      "precise": "The Bank for International Settlements' survey of FX turnover. April 2025: 9.6 trillion US dollars a day, up 28% from 2022; spot was 3 trillion (31%); the dollar was on one side of 89.2% of trades [@bis2025].",
+      "related": ["otc-market", "usd-dominance", "fx-swap"]
+    },
+    {
+      "id": "usd-dominance",
+      "term": "US dollar dominance",
+      "category": "FX market structure",
+      "simple": "Almost every currency trade involves the US dollar on one side.",
+      "analogy": "Like a train network where nearly every route goes through the same main station.",
+      "precise": "The dollar was on one side of 89.2% of all FX trades in April 2025 [@bis2025]. A common dollar factor explains much of the variation in currency returns [@lustig2011].",
+      "related": ["triennial-survey", "correlation-risk"]
+    },
+    {
+      "id": "cfd",
+      "term": "Contract for difference (CFD)",
+      "category": "FX market structure",
+      "simple": "A bet with a broker on whether a price goes up or down, where you never own the real thing.",
+      "analogy": "Like betting with a friend on a race instead of owning a horse.",
+      "precise": "A contract paying the change in an underlying price, usually on margin. ESMA found 74 to 89% of retail CFD accounts typically lost money and in 2018 restricted leverage, added margin close-out and negative balance protection, and required risk warnings [@url-46fb23ac].",
+      "related": ["leverage", "margin", "a-book-and-b-book", "myth-most-traders-who-persist-win"]
+    },
+    {
+      "id": "notional-exposure",
+      "term": "Notional exposure",
+      "category": "FX market structure",
+      "simple": "The full size of the trade, not just the deposit you put down.",
+      "analogy": "Like the full price of a house, not just the deposit you paid.",
+      "precise": "Position size times price in account currency. Effective leverage is total notional divided by account equity; it, not the broker's maximum, sets how much a 1% move changes the account.",
+      "related": ["leverage", "lot", "margin"]
+    },
+    {
+      "id": "safe-haven-currency",
+      "term": "Safe-haven currency",
+      "category": "FX market structure",
+      "simple": "A currency people buy when they are scared, like the Swiss franc or the Japanese yen.",
+      "analogy": "Like running indoors when it starts to rain.",
+      "precise": "A currency that tends to gain when global risk rises. Ranaldo and Soderlind (2010) found the Swiss franc and Japanese yen gained against the US dollar when US stocks fell and bond prices and FX volatility rose [@ranaldo2010].",
+      "related": ["funding-currency", "carry-trade"]
+    },
+    {
+      "id": "funding-currency",
+      "term": "Funding currency",
+      "category": "FX market structure",
+      "simple": "The low-interest currency people borrow to buy a higher-interest currency in a carry trade.",
+      "analogy": "Like borrowing cheaply from one bank to put money in another bank that pays more.",
+      "precise": "The short leg of a carry trade, such as the yen or Swiss franc at times of very low rates. When carry trades unwind in a crisis, funding currencies tend to jump [@brunnermeier2008].",
+      "related": ["carry-trade", "safe-haven-currency"]
+    },
+    {
+      "id": "central-bank-intervention",
+      "term": "Central bank intervention",
+      "category": "FX market structure",
+      "simple": "When a central bank buys or sells its own currency to push the exchange rate.",
+      "analogy": "Like a referee stepping into a game to stop it getting out of hand.",
+      "precise": "Official purchases or sales of foreign exchange. Some regimes defend a floor or peg; when one is abandoned the move can be sudden, as when the Swiss National Bank ended its 1.20 floor on 15 January 2015 [@snb2015].",
+      "related": ["central-bank", "gap-risk", "currency-peg"]
+    },
+    {
+      "id": "currency-peg",
+      "term": "Currency peg",
+      "category": "FX market structure",
+      "simple": "When a country fixes its currency to another currency, like the US dollar, at a set rate.",
+      "analogy": "Like tying a small boat to a big ship so they move together.",
+      "precise": "A fixed or tightly managed exchange rate kept by central bank policy. Pegs look calm until they break, which makes past volatility a poor guide to risk.",
+      "related": ["central-bank-intervention", "tail-risk"]
+    },
+    {
+      "id": "stop-hunting",
+      "term": "Stop hunting",
+      "category": "FX market structure",
+      "simple": "The idea that big traders push the price to where many stop losses sit, to trigger them.",
+      "analogy": "Like someone knocking over the first domino because they know a long row is lined up behind it.",
+      "precise": "Moves that trigger clustered stop orders can feed on themselves: Osler (2003) found trends speed up after rates cross round numbers, where stop-loss orders cluster [@osler2003]. Deliberate targeting by a specific party is hard to prove from public data; we found no large-sample evidence on intent.",
+      "related": ["round-number-clustering", "stop-loss", "false-breakout"]
+    },
+    {
+      "id": "myth-most-traders-who-persist-win",
+      "term": "Myth: if you stick with it, you will eventually make money",
+      "category": "Myths and false notions",
+      "simple": "Many people believe practice makes a profitable trader. The numbers say most people who keep day trading keep losing.",
+      "analogy": "Like believing that if you buy enough lottery tickets you are bound to come out ahead.",
+      "precise": "Among Brazilians who day traded futures on more than 300 days, 97% lost money and about 1% earned more than the minimum wage [@url-9d8bddf7]. In Taiwan, fewer than 1% of day traders were predictably profitable after fees [@url-1f7e3d9c]. ESMA found 74 to 89% of retail CFD accounts typically lose money [@url-46fb23ac].",
+      "related": ["cfd", "overconfidence", "survivorship-bias"]
+    },
+    {
+      "id": "myth-candles-predict",
+      "term": "Myth: candlestick patterns reliably predict the next move",
+      "category": "Myths and false notions",
+      "simple": "Books and videos say shapes like hammers and engulfing candles tell you where price goes next. Large tests mostly find they do not, after costs.",
+      "analogy": "Like reading tea leaves: the shapes are real, and whether they mean anything is still unproven.",
+      "precise": "Evidence is mixed. A test on Dow Jones stocks from 1992 to 2002 found no value [@marshall2005]. Other studies found patterns that worked in S&P 500 stocks (1992 to 1996) and Taiwan stocks [@caginalp1998a; @lu2012]. Many patterns are tested, so some will look good by chance [@sullivan1999].",
+      "related": ["candlestick", "data-snooping", "technical-analysis"]
+    },
+    {
+      "id": "myth-more-leverage-more-profit",
+      "term": "Myth: more leverage means more profit",
+      "category": "Myths and false notions",
+      "simple": "Borrowing more makes wins bigger, so it must be good. But it makes losses bigger too, and big losses can end your trading for good.",
+      "analogy": "Like driving faster to get home sooner: true until the first sharp bend.",
+      "precise": "Leverage scales both mean and volatility, and growth is roughly mean minus half variance, so past a point more leverage lowers long-run growth and raises risk of ruin [@thorp2008; @messmore1995]. Regulators cap retail leverage, for example 30 to 1 on major currency pairs in the EU [@url-46fb23ac]; in the US a security deposit is required [@cftc2010].",
+      "related": ["leverage", "volatility-drag", "kelly-criterion", "risk-of-ruin"]
+    },
+    {
+      "id": "myth-high-win-rate",
+      "term": "Myth: a high win rate means a good strategy",
+      "category": "Myths and false notions",
+      "simple": "People like strategies that win most of the time. But a strategy can win nine times out of ten and still lose money if the one loss is huge.",
+      "analogy": "Like picking up coins in front of a steamroller: you win often, until you do not.",
+      "precise": "Expectancy depends on win rate and the sizes of wins and losses together. Strategies that sell insurance, such as carry, often have high win rates with rare large losses (negative skew) [@brunnermeier2008]. The disposition effect, selling winners early, also pushes win rates up without improving results [@odean1998].",
+      "related": ["expectancy", "negative-skew", "hit-rate"]
+    },
+    {
+      "id": "myth-hold-losers-until-they-come-back",
+      "term": "Myth: it is not a loss until you sell",
+      "category": "Myths and false notions",
+      "simple": "Many people hold a losing trade hoping it comes back, because selling would make the loss 'real'. The loss is real either way.",
+      "analogy": "Like not opening a bill so you do not have to know how much you owe.",
+      "precise": "The account's value already reflects the loss. Odean (1998) found investors strongly preferred to realise winners rather than losers, and that this was not justified by how the holdings did afterwards [@odean1998; @shefrin1985].",
+      "related": ["disposition-effect", "sunk-cost-fallacy", "mental-accounting"]
+    },
+    {
+      "id": "myth-due-a-win",
+      "term": "Myth: after a losing streak, a win is due",
+      "category": "Myths and false notions",
+      "simple": "After many losses in a row, it feels like the next trade must win. The market does not know or care about your streak.",
+      "analogy": "Like a coin that has landed heads five times: it is still 50 50 next time.",
+      "precise": "For independent trades the probability is unchanged by the past streak; expecting a reversal is the gambler's fallacy [@tversky1971; @tversky1974]. Losing streaks are common even for strategies with an edge, so they say little either way.",
+      "related": ["gamblers-fallacy", "law-of-small-numbers", "martingale-betting"]
+    },
+    {
+      "id": "myth-great-backtest",
+      "term": "Myth: a great backtest proves a strategy works",
+      "category": "Myths and false notions",
+      "simple": "If a strategy made lots of money on past data, people assume it will keep doing so. Usually it was just fitted to the past.",
+      "analogy": "Like a key cut to fit one lock perfectly: it does not open any other door.",
+      "precise": "Testing many variations makes some look good by chance. Harvey, Liu and Zhu (2015) argued new factors need a t-statistic above about 3 [@harvey2015]; Bailey and coauthors showed how to estimate the probability that a selected backtest is overfit [@bailey2016].",
+      "related": ["overfitting", "data-snooping", "pbo", "deflated-sharpe-ratio"]
+    },
+    {
+      "id": "myth-edges-last",
+      "term": "Myth: once an edge is found, it keeps working",
+      "category": "Myths and false notions",
+      "simple": "People think a strategy that worked will always work. Many stop working once others find out about them.",
+      "analogy": "Like a secret fishing spot: once everyone knows, the fish are gone.",
+      "precise": "McLean and Pontiff (2016) found US stock return predictors earned 26% less out of sample and 58% less after publication [@mclean2016]. Simple FX trend rules faded after the early 1990s [@neely2009].",
+      "related": ["alpha-decay", "adaptive-markets", "out-of-sample"]
+    },
+    {
+      "id": "myth-high-rate-currency-falls",
+      "term": "Myth: high-interest currencies fall by exactly the rate gap",
+      "category": "Myths and false notions",
+      "simple": "Textbook theory says a currency paying higher interest should lose value to cancel out the extra interest. In practice it often did not, at least for a while.",
+      "analogy": "Like a theory that says a shop with higher wages must charge exactly that much more, when in fact it often does not.",
+      "precise": "Uncovered interest parity fails in the data: over many periods high-interest currencies tended to hold or gain value, the forward premium puzzle [@fama1984]. This is why carry has paid on average, with occasional crashes [@brunnermeier2008].",
+      "related": ["uncovered-interest-parity", "carry-trade", "myth-carry-is-free"]
+    },
+    {
+      "id": "myth-carry-is-free",
+      "term": "Myth: the carry trade is free money",
+      "category": "Myths and false notions",
+      "simple": "Earning the interest gap every day looks like free money. It is paid for by rare, sharp losses.",
+      "analogy": "Like collecting small fees for house insurance until the year a house burns down.",
+      "precise": "Carry returns are negatively skewed: positions unwind together in crises, and funding currencies jump [@brunnermeier2008]. The return is better seen as payment for crash risk than as a free lunch.",
+      "related": ["carry-trade", "negative-skew", "funding-currency"]
+    },
+    {
+      "id": "myth-models-beat-random-walk",
+      "term": "Myth: economic models predict short-term exchange rates",
+      "category": "Myths and false notions",
+      "simple": "It seems like knowing a country's economy should tell you where its currency goes next month. Mostly it does not.",
+      "analogy": "Like knowing a lot about a dog's breed but still not knowing which way it will run next.",
+      "precise": "Meese and Rogoff (1983) found structural exchange rate models did no better than a random walk at forecasting 1 to 12 months ahead out of sample [@meese1983]. This result has been hard to overturn at short horizons.",
+      "related": ["random-walk", "purchasing-power-parity"]
+    },
+    {
+      "id": "myth-trade-more",
+      "term": "Myth: trading more often makes more money",
+      "category": "Myths and false notions",
+      "simple": "Being active feels productive. For most people, more trades mean more costs and lower returns.",
+      "analogy": "Like changing lanes all the time in traffic: you rarely arrive sooner and you burn more fuel.",
+      "precise": "Barber and Odean (2000) found the most active US households earned 11.4% a year against 17.9% for the market [@barber2000]. Costs grow with turnover, while edge usually does not.",
+      "related": ["overtrading", "turnover", "transaction-costs"]
+    },
+    {
+      "id": "myth-experts-can-forecast",
+      "term": "Myth: experts and gurus can forecast the market",
+      "category": "Myths and false notions",
+      "simple": "People trust confident experts on TV and social media. Studies of forecasts find most do little better than chance or simple rules.",
+      "analogy": "Like a weather presenter who only tells you about the days they got right.",
+      "precise": "Persistence in mutual fund returns is almost fully explained by common factors and costs, and the results do not support skilled managers [@carhart1997]. Classic studies of forecasters reach similar conclusions [@cowles1933; @tetlock2005], though we have not yet checked their full texts.",
+      "related": ["calibration", "overconfidence", "survivorship-bias"]
+    },
+    {
+      "id": "myth-stops-always-protect",
+      "term": "Myth: a stop loss caps your loss exactly",
+      "category": "Myths and false notions",
+      "simple": "A stop loss feels like a guarantee. In a sudden jump, it fills at the next price, which can be far worse.",
+      "analogy": "Like an emergency brake that works on a normal road but not on ice.",
+      "precise": "Stops become market orders. When the Swiss National Bank removed the 1.20 franc floor on 15 January 2015, prices jumped past many stop levels at once [@snb2015]. Weekend gaps and news do the same on a smaller scale.",
+      "related": ["stop-loss", "gap-risk", "negative-balance-protection"]
+    },
+    {
+      "id": "myth-levels-are-superstition",
+      "term": "Myth: support and resistance are pure superstition",
+      "category": "Myths and false notions",
+      "simple": "Some say lines on charts mean nothing. In currencies there is evidence that some levels do matter, because real orders sit there.",
+      "analogy": "Like a crowd that stops at a painted line on the floor because everyone was told to wait there.",
+      "precise": "Published support and resistance levels predicted intraday trend interruptions in FX better than random levels [@osler2000], and order clustering at round numbers gives a reason [@osler2003]. The effect is small and short-lived, so this is not evidence that such levels are a profitable strategy after costs.",
+      "related": ["support-and-resistance", "round-number-clustering"]
+    },
+    {
+      "id": "myth-fat-tails-rare",
+      "term": "Myth: huge moves are too rare to worry about",
+      "category": "Myths and false notions",
+      "simple": "Big crashes feel like once-in-a-lifetime events. In markets they happen far more often than a bell curve says.",
+      "analogy": "Like a town that builds for the 'hundred-year flood' and gets three in twenty years.",
+      "precise": "Mandelbrot (1963) argued price changes follow fatter-tailed laws than the normal distribution [@mandelbrot1963]. Risk measures based on normal assumptions understate extreme losses, which is why expected shortfall and stress tests are used [@acerbi2002].",
+      "related": ["fat-tails", "tail-risk", "expected-shortfall"]
+    },
+    {
+      "id": "myth-beat-the-news",
+      "term": "Myth: you can trade the news before the market reacts",
+      "category": "Myths and false notions",
+      "simple": "It seems that reading the news fast lets you trade before prices move. Prices jump at the moment of release.",
+      "analogy": "Like trying to catch a train that left as soon as you heard the whistle.",
+      "precise": "Andersen, Bollerslev, Diebold and Vega (2003) found announcement surprises make exchange rates jump at release time [@andersen2003]. Professional systems read releases faster than any person can.",
+      "related": ["macro-surprise", "efficient-market"]
+    },
+    {
+      "id": "myth-many-pairs-diversify",
+      "term": "Myth: trading many currency pairs spreads your risk",
+      "category": "Myths and false notions",
+      "simple": "Holding EUR/USD, GBP/USD and AUD/USD feels like three different bets. Often it is one bet on the US dollar.",
+      "analogy": "Like owning three umbrellas that all break in the same storm.",
+      "precise": "The dollar is on one side of 89.2% of FX trades [@bis2025], and a common dollar factor drives much of currency returns [@lustig2011]. Real diversification needs positions whose returns are not driven by the same factor.",
+      "related": ["correlation-risk", "usd-dominance", "diversification"]
+    },
+    {
+      "id": "myth-strong-emotion-helps",
+      "term": "Myth: strong feelings give you conviction and help you trade",
+      "category": "Myths and false notions",
+      "simple": "Some say you need passion and gut feeling to win. In a study of day traders, the most emotional ones did worse.",
+      "analogy": "Like a driver who gets angrier in traffic: it does not get them home faster.",
+      "precise": "Lo, Repin and Steenbarger (2005) found day traders with more intense emotional reactions to gains and losses had worse trading results [@lo2005]. The sample was small, so this is suggestive rather than settled.",
+      "related": ["tilt", "conviction", "revenge-trading"]
+    },
+    {
+      "id": "myth-indicator-settings",
+      "term": "Myth: the right indicator settings will make a strategy work",
+      "category": "Myths and false notions",
+      "simple": "People try many settings for an indicator until one looks great. That usually finds luck, not a better rule.",
+      "analogy": "Like trying every key on a giant key ring on one lock and then thinking the one that worked is special.",
+      "precise": "Picking the best of many parameter sets inflates backtest results; Sullivan, Timmermann and White (1999) showed the apparent success of popular trading rules shrinks once the search is accounted for [@sullivan1999; @bailey2016].",
+      "related": ["overfitting", "data-snooping", "myth-great-backtest"]
+    },
+    {
+      "id": "myth-buy-anything-it-goes-up",
+      "term": "Myth: markets go up, so buying any single stock works out",
+      "category": "Myths and false notions",
+      "simple": "Because the stock market rises over time, people assume any stock will. Most single stocks did worse than cash.",
+      "analogy": "Like assuming every ticket in a lottery is a winner because the total prize pool is large.",
+      "precise": "Bessembinder (2018) found most US stocks since 1926 had lifetime returns below Treasury bills, and about 4% of firms produced all the net gain [@bessembinder2018]. The index rises because of a few large winners.",
+      "related": ["skewed-winners", "diversification", "benchmark"]
+    },
+    {
+      "id": "myth-fund-past-winners",
+      "term": "Myth: last year's best fund or trader will be next year's best",
+      "category": "Myths and false notions",
+      "simple": "People pick whoever did best recently. Past winners mostly do not stay on top.",
+      "analogy": "Like betting on the team that won last season, though the players and luck have changed.",
+      "precise": "Carhart (1997) found persistence in mutual fund returns was mostly explained by common factors and costs; only the worst funds persistently stayed bad [@carhart1997]. Selection on recent results is also hit by survivorship bias.",
+      "related": ["recency-bias", "survivorship-bias", "myth-experts-can-forecast"]
+    },
+    {
+      "id": "conviction",
+      "term": "Conviction",
+      "category": "Conviction and decision making",
+      "simple": "How sure you feel that a trade or idea is right.",
+      "analogy": "Like how firmly you hold a ladder: useful, but holding tighter does not make the ladder longer.",
+      "precise": "The degree of belief behind a position. Feeling sure is not evidence; conviction is only useful if it is calibrated, meaning that ideas held with 70% confidence come true about 70% of the time [@tetlock2015]. Sizing positions by conviction only makes sense if conviction is measured and tracked.",
+      "related": ["calibration", "overconfidence", "conviction-weighting"]
+    },
+    {
+      "id": "conviction-weighting",
+      "term": "Conviction weighting",
+      "category": "Conviction and decision making",
+      "simple": "Putting more money into ideas you feel surer about.",
+      "analogy": "Like betting more on the horse you feel best about, which only helps if your feelings about horses are any good.",
+      "precise": "Sizing by confidence in the signal. In systematic terms it means scaling position by forecast strength, as in Carver's forecast scaling [@carver2015]. It helps only when signal strength has been shown to predict returns out of sample.",
+      "related": ["conviction", "position-sizing", "signal"]
+    },
+    {
+      "id": "calibration",
+      "term": "Calibration",
+      "category": "Conviction and decision making",
+      "simple": "Being right as often as you say you will be. If you say '80% sure' many times, you should be right about 8 times in 10.",
+      "analogy": "Like a weather forecaster whose '30% chance of rain' days really do get rain about 3 times in 10.",
+      "precise": "Agreement between stated probabilities and observed frequencies. Measured with proper scoring rules such as the Brier score [@brier1950]. Tetlock (2005) studies expert calibration at length [@tetlock2005].",
+      "related": ["brier-score", "overconfidence", "conviction"]
+    },
+    {
+      "id": "brier-score",
+      "term": "Brier score",
+      "category": "Conviction and decision making",
+      "simple": "A way to score predictions given as percentages. Lower is better; 0 is perfect.",
+      "analogy": "Like golf: the fewer points, the better your forecasts were.",
+      "precise": "The mean squared difference between forecast probabilities and outcomes (0 or 1) [@brier1950]. Always saying 50% scores 0.25 on yes or no questions, which gives a baseline to beat.",
+      "related": ["calibration", "probabilistic-forecast"]
+    },
+    {
+      "id": "probabilistic-forecast",
+      "term": "Probabilistic forecast",
+      "category": "Conviction and decision making",
+      "simple": "Saying how likely something is, like '60% chance the euro rises this week', instead of just 'the euro will rise'.",
+      "analogy": "Like a weather forecast that gives a chance of rain instead of a promise.",
+      "precise": "A forecast stated as a probability or distribution, which can be scored and calibrated. Point forecasts without a probability cannot be checked for overconfidence [@tetlock2015].",
+      "related": ["calibration", "brier-score", "expected-value"]
+    },
+    {
+      "id": "base-rate",
+      "term": "Base rate",
+      "category": "Conviction and decision making",
+      "simple": "How often something happens in general, before you look at the details of one case.",
+      "analogy": "Before guessing whether a new restaurant will survive, remember that many new restaurants close in the first few years.",
+      "precise": "The prior frequency of an outcome in the reference class. For retail traders, the base rate of long-run profitability is low [@url-9d8bddf7; @url-46fb23ac], which any personal estimate should start from.",
+      "related": ["base-rate-neglect", "outside-view", "bayesian-updating"]
+    },
+    {
+      "id": "base-rate-neglect",
+      "term": "Base rate neglect",
+      "category": "Conviction and decision making",
+      "simple": "Ignoring how common something usually is because the story in front of you is convincing.",
+      "analogy": "Like believing a test that says you have a very rare illness without asking how often the test is wrong.",
+      "precise": "Underweighting prior frequencies in favour of case-specific information, a consequence of judging by representativeness [@tversky1974; @kahneman2011].",
+      "related": ["base-rate", "representativeness"]
+    },
+    {
+      "id": "outside-view",
+      "term": "Outside view",
+      "category": "Conviction and decision making",
+      "simple": "Asking 'how did things go for others who tried something like this?' instead of only thinking about your own plan.",
+      "analogy": "Like checking how long kitchen renovations usually take before trusting your builder's 'two weeks'.",
+      "precise": "Forecasting from a reference class of similar cases rather than from the details of the case at hand (the inside view). Kahneman and Lovallo (1993) argue the inside view breeds bold forecasts and the outside view corrects them [@kahneman1993].",
+      "related": ["base-rate", "overconfidence", "pre-mortem"]
+    },
+    {
+      "id": "expected-value",
+      "term": "Expected value",
+      "category": "Conviction and decision making",
+      "simple": "The average result you would get if you could repeat a choice many, many times.",
+      "analogy": "Like working out that a game costing 1 pound, with a 1 in 10 chance to win 8 pounds, loses you 20p a go on average.",
+      "precise": "The probability-weighted mean of outcomes. A positive expected value is needed but not enough: with large bets relative to capital, a positive-expected-value bet can still lead to ruin, so growth rate and sizing matter too [@peters2019; @thorp2008].",
+      "related": ["expectancy", "kelly-criterion", "ergodicity"]
+    },
+    {
+      "id": "edge",
+      "term": "Edge",
+      "category": "Conviction and decision making",
+      "simple": "A real, repeatable reason why a trading idea should make money on average after costs.",
+      "analogy": "Like a casino's small built-in advantage on every game.",
+      "precise": "Positive expected return after costs that persists out of sample, ideally with an economic reason for why someone pays it. Without a measured edge, sizing rules only change how fast an account loses.",
+      "related": ["expectancy", "out-of-sample", "risk-premium"]
+    },
+    {
+      "id": "process-vs-outcome",
+      "term": "Process and outcome",
+      "category": "Conviction and decision making",
+      "simple": "A good decision can turn out badly and a bad decision can turn out well, because of luck. Judge the decision, not just the result.",
+      "analogy": "Like wearing a seatbelt on a trip with no crash: it was still the right choice.",
+      "precise": "Separating decision quality from outcome quality avoids outcome bias [@baron1988]. With noisy returns, many trades are needed before results say much about the process.",
+      "related": ["outcome-bias", "decision-journal", "sample-size"]
+    },
+    {
+      "id": "decision-journal",
+      "term": "Decision journal",
+      "category": "Conviction and decision making",
+      "simple": "Writing down why you made a trade, how sure you were and what you expected, before you know how it turns out.",
+      "analogy": "Like writing your guess for a match score before kick-off, so you cannot pretend later.",
+      "precise": "A record made at decision time of reasons, expected outcome and confidence. It counters hindsight bias, which rewrites what we remember believing [@fischhoff1975], and makes calibration measurable. Large-sample evidence that journaling raises returns is lacking (see RES-0006).",
+      "related": ["hindsight-bias", "calibration", "process-vs-outcome"]
+    },
+    {
+      "id": "pre-mortem",
+      "term": "Pre-mortem",
+      "category": "Conviction and decision making",
+      "simple": "Before starting, imagine the plan has already failed and list all the reasons why.",
+      "analogy": "Like a football team imagining they lost the final and asking what went wrong, before the match.",
+      "precise": "Klein (2007): assume failure and generate explanations, which makes it easier to voice doubts [@klein2007]. A counter to overconfidence and confirmation bias.",
+      "related": ["confirmation-bias", "outside-view", "kill-criteria"]
+    },
+    {
+      "id": "kill-criteria",
+      "term": "Kill criteria",
+      "category": "Conviction and decision making",
+      "simple": "Rules written in advance that say when you will stop a strategy or close a trade.",
+      "analogy": "Like agreeing before a hike that you will turn back at 3 pm, wherever you are.",
+      "precise": "Pre-set conditions, such as a drawdown level or a failed out-of-sample test, that end a strategy. Setting them before results arrive guards against escalation of commitment [@staw1976] and the sunk cost fallacy [@arkes1985].",
+      "related": ["precommitment", "escalation-of-commitment", "drawdown"]
+    },
+    {
+      "id": "precommitment",
+      "term": "Precommitment",
+      "category": "Conviction and decision making",
+      "simple": "Binding yourself to a choice ahead of time so your future self cannot easily change it in the heat of the moment.",
+      "analogy": "Like Ulysses asking to be tied to the mast so he could hear the sirens without steering onto the rocks.",
+      "precise": "Thaler and Shefrin (1981) model self-control as a planner restricting a short-sighted doer [@thaler1981]. In trading: automated orders, fixed sizing rules and pre-registered tests.",
+      "related": ["kill-criteria", "trading-plan"]
+    },
+    {
+      "id": "trading-plan",
+      "term": "Trading plan",
+      "category": "Conviction and decision making",
+      "simple": "A written set of rules for what you trade, when you enter, when you exit and how much you risk.",
+      "analogy": "Like a recipe: you know the steps before you start cooking.",
+      "precise": "A specification of universe, signals, sizing, exits and limits. Writing it down makes it testable and makes deviations visible. We know of no large study showing that having a plan by itself improves returns; its value is that it can be tested and followed.",
+      "related": ["precommitment", "checklist", "position-sizing"]
+    },
+    {
+      "id": "checklist",
+      "term": "Checklist",
+      "category": "Conviction and decision making",
+      "simple": "A short list of things to check every time, so you do not forget the basics under pressure.",
+      "analogy": "Like a pilot's pre-flight checklist.",
+      "precise": "A fixed list of steps run before acting. Gawande (2009) describes checklists cutting errors in surgery and aviation [@gawande2009]. For us: costs included, no lookahead, out-of-sample result, sizing set.",
+      "related": ["trading-plan", "lookahead-bias"]
+    },
+    {
+      "id": "bayesian-updating",
+      "term": "Bayesian updating",
+      "category": "Conviction and decision making",
+      "simple": "Changing how sure you are a little at a time as new evidence comes in, starting from what you knew before.",
+      "analogy": "Like a detective who gets more sure of a suspect with each new clue, but not all at once.",
+      "precise": "Revising a prior probability to a posterior using Bayes' rule: posterior is proportional to prior times likelihood. Strong priors (like a low base rate of trading success) need strong evidence to move.",
+      "related": ["base-rate", "probabilistic-forecast"]
+    },
+    {
+      "id": "sample-size",
+      "term": "Sample size",
+      "category": "Conviction and decision making",
+      "simple": "How many examples you have. Small samples can easily mislead you.",
+      "analogy": "Like judging a restaurant from one meal.",
+      "precise": "The number of independent observations. For a strategy with a Sharpe ratio of 0.5, telling it apart from zero at the usual 5% level takes roughly 16 years of data, because the t-statistic is about Sharpe times the square root of years.",
+      "related": ["law-of-small-numbers", "t-statistic", "sharpe-ratio"]
+    },
+    {
+      "id": "regret-aversion",
+      "term": "Regret aversion",
+      "category": "Conviction and decision making",
+      "simple": "Avoiding choices because of how bad you would feel if they turned out wrong.",
+      "analogy": "Like never changing your answer on a test because it would hurt more to change from right to wrong.",
+      "precise": "Anticipated regret shapes choices; Shefrin and Statman (1985) use regret to help explain why investors hold losers and sell winners [@shefrin1985].",
+      "related": ["disposition-effect", "status-quo-bias"]
+    },
+    {
+      "id": "superforecasting",
+      "term": "Superforecasting",
+      "category": "Conviction and decision making",
+      "simple": "Some ordinary people turn out to be unusually good at predicting events, mostly by thinking in probabilities and updating often.",
+      "analogy": "Like a quiz player who keeps a careful score of how often their guesses are right and adjusts.",
+      "precise": "From a long forecasting tournament, Tetlock and Gardner (2015) report that the best forecasters broke problems into parts, started from base rates, updated in small steps and kept score [@tetlock2015].",
+      "related": ["calibration", "outside-view", "bayesian-updating"]
     }
   ]
 }
