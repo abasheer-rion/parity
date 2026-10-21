@@ -46,11 +46,35 @@ function localScenarios(): Plugin {
   };
 }
 
-export default defineConfig({
+// Two builds share this file (see package.json "build"):
+//   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
+//                            /verify/, with their assets in /assets/. Empties dist/.
+//   vite build               the app, /app/, with every asset under /app/assets/ so the
+//                            sign-in check in functions/_middleware.ts covers all of it.
+// `vite` (dev) serves all of them from one server.
+const SITE_PAGES = ["index", "login/index", "signup/index", "reset/index", "verify/index"];
+const here = (p: string) => resolve(import.meta.dirname, p);
+
+export default defineConfig(({ command, mode }) => ({
   plugins: [react(), localResults(), localScenarios(), parityDocs()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs
   // chunk (about 350 kB gzipped) loads after first paint.
-  build: { sourcemap: false, chunkSizeWarningLimit: 1700 },
-});
+  build: command === "build" && mode === "site"
+    ? {
+        sourcemap: false,
+        outDir: "dist",
+        emptyOutDir: true,
+        rollupOptions: { input: Object.fromEntries(SITE_PAGES.map((p) => [p.replace("/index", ""), here(`${p}.html`)])) },
+      }
+    : {
+        sourcemap: false,
+        chunkSizeWarningLimit: 1700,
+        outDir: "dist",
+        emptyOutDir: false,
+        assetsDir: "app/assets",
+        copyPublicDir: false,
+        rollupOptions: { input: { app: here("app/index.html") } },
+      },
+}));

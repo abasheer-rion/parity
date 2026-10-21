@@ -7,6 +7,6 @@ You are changing something sensitive on your Parity account, such as your passwo
 The code works once and expires in 60 minutes. If you did not ask for it, change your password.
 
 --
-Sent by Parity, a private research project, to {{ .Email }}.
+Sent by Parity to {{ .Email }}. Research only, not investment advice.
 You are getting this because someone used this address on Parity ({{ .SiteURL }}).
 If that was not you, you can ignore this email.

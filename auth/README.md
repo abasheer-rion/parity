@@ -1,17 +1,17 @@
 # Sign-in and email
 
-Everything about how people sign in to Parity and the emails they get. The reasons are in [DEC-0012](../docs/decisions/0012-sign-in-inside-the-app-uses-supabase-auth-behind-a-switch.md).
+Everything about how people sign in to Parity and the emails they get. The reasons are in [DEC-0012](../docs/decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md).
 
-**Status: built, switched off.** The live site still uses only the Cloudflare login. Nothing here has been sent to Supabase yet. See [Switching it on](#switching-it-on).
+**Status:** anyone can sign up and goes straight into the app. Email confirmation is off until we connect an email provider. Owner steps are in [What the owner must do](#what-the-owner-must-do).
 
 ## How it works
 
-- Supabase Auth holds the accounts. It is part of the Supabase project we already use (`ttqvpxvctnomfbeoqbbs`).
-- People sign in with email and password, or with a 6-digit code sent by email.
-- An email must be confirmed before anyone can sign in.
-- After sign-in, the app checks that the email is on the team list (`public.members`). The database checks the same list on every read, so someone not on the list sees nothing even if they get past the screen.
-- Every email link goes to one page in the app, `#/auth/verify`, which asks for one click before it uses the link. Some mail filters (Outlook's Safe Links, for example) open every link to scan it, and that would use up a one-time link.
-- In-app sign-in is off unless the site is built with `VITE_APP_AUTH=on`. When off, none of the sign-in code is downloaded.
+- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages. The app lives at `/app/` and needs a session.
+- Supabase Auth holds the accounts. People log in with email and password, a 6-digit email code, Google or GitHub (when switched on), or a passkey (when switched on). Accounts can add an authenticator app for two-step sign-in.
+- The browser keeps the session in a cookie. A Cloudflare Pages function (`web/functions/_middleware.ts`) checks that cookie's token against Supabase's public keys before it serves anything under `/app/` or `/data/`. No secret is needed for that check. Without a valid session, `/app/` sends you to `/login/` and `/data/` answers 401.
+- The database lets any signed-in person read published research. The team list (`public.members`) now only gives a "Parity team" badge in Account settings.
+- Every email link goes to `/verify/`, which asks for one click before it uses the link. Some mail filters open every link to scan it, and that would use up a one-time link.
+- Known limit: the middleware checks that you are signed in, not that you finished two-step sign-in. The app itself asks for the second step before it shows anything.
 
 ## What is where
 
@@ -25,8 +25,10 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 | `auth/dist/` | The finished emails. Generated: do not edit by hand. |
 | `auth/preview.html` | Every email in light, dark and plain text, with sample values. Generated. |
 | `auth/push_templates.sh` | Sends the finished emails (and optionally the settings) to Supabase. |
-| `auth/sql/` | Database changes for sign-in, not applied yet. |
-| `web/src/auth/` | The app side: Supabase client, session hooks, the guard and the sign-in pages. |
+| `auth/PROVIDERS.md` | How to switch on Google, GitHub and passkeys. |
+| `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in pages (entry `main.tsx`) and Account settings. |
+| `web/functions/_middleware.ts` | Lets only signed-in people fetch `/app/` and `/data/`. `web/public/_routes.json` limits it to those paths. |
+| `web/index.html` | The public front page: plain HTML and CSS, no script. |
 | `supabase/config.toml` | The `[auth]` section: sign-in rules and where each template lives. Drives local Supabase only. |
 
 ## The emails
@@ -51,16 +53,16 @@ The emails use these Supabase values ([Supabase email templates](https://supabas
 | `{{ .SiteURL }}` | The site address set in Supabase |
 | `{{ .Email }}` | The person's email |
 | `{{ .NewEmail }}` | The new address (email change only) |
-| `{{ .ConfirmationURL }}` | Supabase's own link. We do not use it; our links go to `#/auth/verify` instead. |
+| `{{ .ConfirmationURL }}` | Supabase's own link. We do not use it; our links go to `/verify/` instead. |
 
-Every link has the form `{{ .SiteURL }}/#/auth/verify?type=<type>&token_hash={{ .TokenHash }}`. `build.py` fails if an email uses a value its template does not have.
+Every link has the form `{{ .SiteURL }}/verify/?type=<type>&token_hash={{ .TokenHash }}`. `build.py` fails if an email uses a value its template does not have.
 
 ### Design rules
 
 - Tables for layout and inline styles, so Gmail, Outlook and Apple Mail all show the same thing.
 - Light by default. Apple Mail, iOS Mail and Outlook switch to our dark surfaces (`#10101a`, `#171721`) when the reader uses dark mode. Gmail applies its own dark mode, and every colour still reads after it does.
 - One blue button (`#2f6bff`) per email, drawn twice: once for Outlook on Windows, once for everyone else.
-- The logo is a PNG at `https://parity-research.pages.dev/brand/2026-10-21/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder must stay reachable without the Cloudflare login.
+- The logo is a PNG at `https://parity-research.pages.dev/brand/2026-10-21-starburst/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder is public.
 - Each email stays under 100 kB (Gmail cuts off longer ones). `build.py` checks.
 
 ## Changing an email
@@ -78,47 +80,35 @@ Supabase sends only the HTML version today. The plain-text files are kept so the
 
 ## Flows
 
-- **Sign up:** email and password (at least 10 characters, letters and numbers). The app then shows "Check your email". The person clicks the link or types the code. Until then they cannot sign in.
-- **Sign in with password:** if the email is not confirmed yet, the app sends them back to "Check your email".
-- **Sign in with a code:** the app emails a code (`magic_link`). It does not create new accounts.
-- **Forgot password:** email a link and code (`recovery`), then choose a new password at `#/auth/reset`.
-- **Change email (Settings, Account):** both the old and new address get an email and both must confirm.
-- **Change password (Settings, Account):** if the person has not signed in recently, Supabase emails a code (`reauthentication`) and the app asks for it.
+- **Sign up:** email and password (at least 10 characters, letters and numbers), or Google or GitHub. While confirmation is off, the person goes straight to `/app/`. When it is on, they see "Check your email" and confirm by link or code first.
+- **Log in:** password, an emailed code (`magic_link`, existing accounts only), a provider or a passkey. Then `/app/`, or the page they were trying to open.
+- **Two-step sign-in (Settings, Account):** scan a QR code with an authenticator app and type its code. From then on, logging in asks for a code from the app too. Remove it from the same place.
+- **Passkeys (Settings, Account):** add or remove passkeys once they are switched on (`auth/PROVIDERS.md`).
+- **Forgot password (`/reset/`):** email a link and code (`recovery`), then choose a new password.
+- **Change email or password (Settings, Account):** both addresses confirm an email change; a password change may ask for an emailed code (`reauthentication`).
 - **Delete my account (Settings, Account):** files a request in `public.account_deletion_requests`. The owner deletes the account by hand in the Supabase dashboard.
-- **Not on the team list:** the person can sign in but sees a page saying their email is not on the list, with a sign-out button.
 
-## Switching it on
+## What the owner must do
 
-Owner steps, in order. Nothing here has been done yet.
+1. **Merge the pull request.** The deploy publishes the new site and the middleware. The migrations workflow applies `supabase/migrations/20261021120000_open_sign_up.sql` (any signed-in person reads results; the team list becomes private; delete requests).
 
-1. **Create a Supabase access token.** Supabase dashboard, Account, Access Tokens, create one named `parity-auth-templates`. Store it in the Keychain and add its row to `~/.claude/CREDENTIALS.md`:
+2. **Push the sign-in settings and emails.** This needs a Supabase personal access token (Supabase dashboard, Account, Access Tokens) stored in the Keychain, with a row in `~/.claude/CREDENTIALS.md`:
 
    ```sh
    security add-generic-password -s vault:supabase-access-token -a "$USER" -w
-   ```
-
-   (It prompts for the value, so it never lands in shell history.) The token can change any project you can see, so delete it when the switch-on is done.
-
-2. **Pick an email provider and connect it** in Supabase, Authentication, Emails, SMTP Settings (see the next section). Until then only members of the Supabase organisation get emails, and only 2 an hour.
-
-3. **Send the templates and settings:**
-
-   ```sh
    auth/push_templates.sh                     # dry run: shows what would be sent
-   auth/push_templates.sh --apply --settings  # sends templates, site URL, redirect list, password rules
+   auth/push_templates.sh --apply --settings  # emails, site URL, redirects, sign-up open, confirmation off, authenticator apps on
    ```
 
-   This sets the site URL to `https://parity-research.pages.dev`, allows redirects to it, its preview subdomains and `127.0.0.1:5173`, requires email confirmation, requires both addresses to confirm an email change, asks for a code before a password change, and sets passwords to at least 10 characters with letters and numbers. If your plan has it, also turn on the leaked-password check in Authentication, Policies.
+   Until this runs, the hosted project keeps its old settings (for example, it may still ask new accounts to confirm their email, which only team addresses can receive).
 
-4. **Apply the database change.** Copy `auth/sql/0001_verified_members_and_deletion_requests.sql` to `supabase/migrations/<timestamp>_auth_verified_members.sql` and merge it. The migrations workflow applies it. It makes the team-list check require a confirmed email and adds the deletion request table.
+3. **Switch off Cloudflare Access** for `parity-research.pages.dev` once the new site is live. The middleware takes over.
 
-5. **Add yourself and the team to `public.members`** if they are not already there (lowercase emails).
+4. **Optional:** Google, GitHub and passkeys, in [PROVIDERS.md](PROVIDERS.md).
 
-6. **Turn on the switch.** In GitHub, Settings, Secrets and variables, Actions, Variables, add `APP_AUTH` = `on` and `SUPABASE_ANON_KEY` = the project's public anon key (Supabase, Project Settings, API). Both are public values, so variables, not secrets. The next deploy builds with sign-in on.
+### Email confirmation
 
-7. **Keep Cloudflare in front for now.** The research data is still copied into the site as files at deploy time, and only Cloudflare protects those files. Remove Cloudflare only after the data is read from the database instead.
-
-To switch off again, delete the `APP_AUTH` variable and redeploy.
+Off for now so people get straight in: Supabase's own sender only reaches members of the Supabase organisation, 2 emails an hour. To turn it back on: connect an email provider (next section), set `mailer_autoconfirm` to `False` in `push_templates.sh` and `enable_confirmations = true` in `supabase/config.toml`, then run `auth/push_templates.sh --apply --settings`. The confirmation email and the "Check your email" screen are already built.
 
 ## Email providers
 
@@ -136,7 +126,7 @@ Prices checked on 2026-10-21. Our recommendation for now: Resend's free plan. It
 
 ```sh
 supabase start                                   # local Supabase; emails appear at http://127.0.0.1:54324
-cd web && VITE_APP_AUTH=on VITE_SUPABASE_URL=http://127.0.0.1:54321 VITE_SUPABASE_ANON_KEY=<local anon key> npm run dev
+cd web && VITE_SUPABASE_URL=http://127.0.0.1:54321 VITE_SUPABASE_ANON_KEY=<local anon key> npm run dev
 ```
 
-Local Supabase reads `supabase/config.toml`, so it uses the templates in `auth/dist/` and the same rules as production. `supabase status` prints the local anon key.
+`npm run dev` serves the front page, the sign-in pages and the app (`/app/`) from one server; the middleware only runs on Cloudflare. Without the two variables, dev talks to the hosted project. Local Supabase reads `supabase/config.toml`, so it uses the templates in `auth/dist/` and the same rules as production. `supabase status` prints the local anon key.

@@ -1,11 +1,13 @@
 // Build-time settings read by the app. All are public; none is a secret.
 interface ImportMetaEnv {
-  /** "on" switches in-app sign-in on (auth/README.md). Anything else leaves it off. */
-  readonly VITE_APP_AUTH?: string;
   /** Supabase project URL. Defaults to the Parity project. */
   readonly VITE_SUPABASE_URL?: string;
-  /** Supabase public (anon or publishable) key. Needed only when VITE_APP_AUTH is on. */
+  /** Supabase publishable key. Defaults to the Parity project's key. */
   readonly VITE_SUPABASE_ANON_KEY?: string;
+  /** Sign-in providers to show, comma separated: google,github,apple,azure. */
+  readonly VITE_AUTH_PROVIDERS?: string;
+  /** "on" shows passkey sign-in (turn passkeys on in Supabase first). */
+  readonly VITE_AUTH_PASSKEYS?: string;
 }
 
 interface ImportMeta {

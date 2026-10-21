@@ -1,7 +1,4 @@
-// The auth module. Everything except config.ts loads lazily, and only when the site is
-// built with VITE_APP_AUTH=on, so the Cloudflare-only site downloads none of it.
-import { lazy } from "react";
-
-export { AUTH_ENABLED } from "./config";
-export const AuthGate = lazy(() => import("./AuthGate"));
-export const AccountSettings = lazy(() => import("./AccountSettings"));
+// The auth module: Supabase client, session hooks, the app guard and the public
+// sign-in pages (entry: main.tsx). See auth/README.md at the repo root.
+export { AppGuard } from "./AuthGate";
+export { default as AccountSettings } from "./AccountSettings";

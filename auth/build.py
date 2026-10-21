@@ -67,7 +67,7 @@ SAMPLE = {
 }
 
 TEXT_FOOTER = (
-    "\n--\nSent by Parity, a private research project, to {{ .Email }}.\n"
+    "\n--\nSent by Parity to {{ .Email }}. Research only, not investment advice.\n"
     "You are getting this because someone used this address on Parity ({{ .SiteURL }}).\n"
     "If that was not you, you can ignore this email.\n"
 )

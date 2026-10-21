@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "../../ui";
 import { explain, requireClient } from "../client";
 import { ROUTES } from "../config";
-import { AuthCard, Field, go, Notice, useSubmit } from "../form";
+import { AuthCard, Field, Notice, useSubmit } from "../form";
 
 export function Forgot() {
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ export function Forgot() {
   const { busy, error, run } = useSubmit();
 
   const send = run(async () => {
-    const { error } = await requireClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/` });
+    const { error } = await requireClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}${ROUTES.reset}` });
     if (error) return explain(error);
     setSent(true);
   });
@@ -20,7 +20,7 @@ export function Forgot() {
   const verify = run(async () => {
     const { error } = await requireClient().auth.verifyOtp({ email: email.trim(), token: code, type: "recovery" });
     if (error) return explain(error);
-    go(ROUTES.reset);
+    window.location.reload();
   });
 
   return (
@@ -40,7 +40,7 @@ export function Forgot() {
         </form>
       )}
       <div className="auth-links">
-        <a href={ROUTES.signIn}>Back to sign in</a>
+        <a href={ROUTES.login}>Back to log in</a>
       </div>
     </AuthCard>
   );

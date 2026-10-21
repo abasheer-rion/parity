@@ -3,14 +3,15 @@ import { useState } from "react";
 import { Button, toast } from "../../ui";
 import { explain, requireClient } from "../client";
 import { PASSWORD_MIN, ROUTES } from "../config";
-import { AuthCard, Field, go, hashParams, Notice, useSubmit } from "../form";
+import { AuthCard, Field, go, Notice, params, useSubmit } from "../form";
+import { Forgot } from "./Forgot";
 import type { SessionState } from "../session";
 
 export function Reset({ session }: { session: SessionState }) {
   const [password, setPassword] = useState("");
   const [again, setAgain] = useState("");
   const { busy, error, run } = useSubmit();
-  const invited = hashParams().get("from") === "invite";
+  const invited = params().get("from") === "invite";
 
   const save = run(async () => {
     if (password.length < PASSWORD_MIN) return `Use at least ${PASSWORD_MIN} characters.`;
@@ -19,16 +20,13 @@ export function Reset({ session }: { session: SessionState }) {
     const { error } = await requireClient().auth.updateUser({ password });
     if (error) return explain(error);
     toast("Password saved", { tone: "good" });
-    go("#/");
+    go(ROUTES.app);
   });
 
-  if (!session.loading && !session.session) {
-    return (
-      <AuthCard title="This link has expired" lead="Open the newest email again, or ask for a new reset email.">
-        <div className="auth-links"><a href={ROUTES.forgot}>Send a new reset email</a><a href={ROUTES.signIn}>Back to sign in</a></div>
-      </AuthCard>
-    );
-  }
+  // No session: this is the "forgot password" request. With one (from the email link
+  // or code), choose the new password.
+  if (session.loading) return <div className="auth-splash">Loading</div>;
+  if (!session.session) return <Forgot />;
 
   return (
     <AuthCard title={invited ? "Choose a password" : "Choose a new password"} lead={session.session?.user.email}>

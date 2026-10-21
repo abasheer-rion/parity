@@ -8,7 +8,6 @@ Writes, under the output folder:
   batches.json          newest first: id, generated_at, git_sha, kind, run_id
   batch/<id>.json       one report per run, in the shape web/src/lib/types.ts expects
   latest.json           a copy of the newest run
-  members.json          the team list (email, added_at)
 
 Usage: SITE_DATA_DB_URL=postgres://... python3 scripts/export_site_data.py web/dist/data
 Keeps every official run and the newest KEEP_EXPLORATORY exploratory runs.
@@ -74,10 +73,9 @@ def main(out: Path) -> int:
         (out / "batches.json").write_text(json.dumps(index))
         if index:
             (out / "latest.json").write_text((out / "batch" / f"{index[0]['id']}.json").read_text())
-        cur.execute("select email, added_at from public.members order by added_at")
-        members = [{"email": m["email"], "added_at": iso(m["added_at"])} for m in cur.fetchall()]
-        (out / "members.json").write_text(json.dumps(members))
-    print(f"exported {len(index)} runs ({len(batches)} published) and {len(members)} members to {out}")
+        # The team list is no longer exported: since sign-up is open (DEC-0012), every
+        # signed-in person can read /data, and team emails are private.
+    print(f"exported {len(index)} runs ({len(batches)} published) to {out}")
     return 0
 
 

@@ -56,7 +56,13 @@ if os.environ["SETTINGS"] == "1":
             "http://127.0.0.1:5173/**",
             "http://localhost:5173/**",
         ]),
-        "mailer_autoconfirm": False,                      # email confirmation required
+        "disable_signup": False,                          # anyone can make an account
+        "external_email_enabled": True,
+        # Email confirmation OFF until an email provider is connected (README).
+        # Set to False then, and push again.
+        "mailer_autoconfirm": True,
+        "mfa_totp_enroll_enabled": True,                  # authenticator apps
+        "mfa_totp_verify_enabled": True,
         "mailer_secure_email_change_enabled": True,       # old and new address both confirm
         "security_update_password_require_reauthentication": True,
         "password_min_length": 10,

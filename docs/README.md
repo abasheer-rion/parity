@@ -59,7 +59,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0009 | [Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md) | accepted | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [process](TAGS.md#process) |
 | DEC-0010 | [Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [method](TAGS.md#method) |
 | DEC-0011 | [Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
-| DEC-0012 | [Sign-in inside the app uses Supabase Auth, behind a switch](decisions/0012-sign-in-inside-the-app-uses-supabase-auth-behind-a-switch.md) | proposed | 2026-10-21 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0012 | [Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md) | accepted | 2026-10-21 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

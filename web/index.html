@@ -1,22 +1,79 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#171721" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="description" content="Parity tests currency trading strategies against the S&amp;P 500, honestly and in the open." />
+    <meta name="theme-color" content="#10101a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>Parity research</title>
+    <title>Parity: can a currency strategy beat the S&amp;P 500?</title>
+    <!-- The public front page. Plain HTML and CSS, no script, so it loads instantly. -->
+    <style>
+      :root { color-scheme: dark; --bg: #10101a; --card: #171721; --line: #26263a; --text: #ececf4; --muted: #9b9db2; --blue: #2f6bff; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: var(--bg); color: var(--text); }
+      body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+      a { color: inherit; }
+      .wrap { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 20px; }
+      header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; text-decoration: none; }
+      .brand img { border-radius: 8px; display: block; }
+      nav { display: flex; gap: 8px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--line); }
+      .btn:hover { border-color: #3a3a52; }
+      .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+      .btn.primary:hover { background: #2559d9; }
+      .btn.lg { height: 48px; padding: 0 24px; font-size: 16px; }
+      main { flex: 1; }
+      .hero { padding: 88px 0 56px; max-width: 720px; }
+      h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 20px; font-weight: 600; }
+      .lead { font-size: 19px; color: var(--muted); margin: 0 0 32px; max-width: 600px; }
+      .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+      .points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 24px 0 88px; list-style: none; margin: 0; }
+      .points li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+      .points h2 { font-size: 16px; margin: 0 0 6px; font-weight: 600; }
+      .points p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+      footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+      footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 28px; }
+      @media (max-width: 720px) {
+        .hero { padding: 48px 0 32px; }
+        .points { grid-template-columns: 1fr; padding-bottom: 48px; }
+        nav .btn:not(.primary) { display: none; }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="/"><img src="/brand/2026-10-21-starburst/parity-icon-dark.svg" width="32" height="32" alt="" />Parity</a>
+        <nav>
+          <a class="btn" href="/login/">Log in</a>
+          <a class="btn primary" href="/signup/">Sign up</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <section class="hero">
+        <h1>Can a currency strategy beat the S&amp;P&nbsp;500?</h1>
+        <p class="lead">Parity is an open research project that puts trading ideas to a fair, public test, and shows you every result, including the ones that fail.</p>
+        <div class="cta">
+          <a class="btn primary lg" href="/signup/">Sign up free</a>
+          <a class="btn lg" href="/login/">Log in</a>
+        </div>
+      </section>
+      <ul class="points">
+        <li><h2>Tested the hard way</h2><p>Every strategy runs through the same checks, after trading costs, against simply holding the S&amp;P 500.</p></li>
+        <li><h2>Watch them race</h2><p>Sim World replays the strategies side by side over decades of real market data.</p></li>
+        <li><h2>Ask what if</h2><p>Describe an event and see how markets moved after similar moments in the past.</p></li>
+      </ul>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>Research only, not investment advice.</span>
+        <span>&copy; 2026 Parity</span>
+      </div>
+    </footer>
   </body>
 </html>

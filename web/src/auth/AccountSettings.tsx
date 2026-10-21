@@ -1,23 +1,34 @@
-// Settings > Account when in-app sign-in is on: email, password, sign out, and a
-// request to delete the account. Loaded only when VITE_APP_AUTH=on.
+// Settings > Account: email, password, two-step sign-in, passkeys, sign out, and a
+// request to delete the account.
 import { useEffect, useState } from "react";
-import { Button, Dialog, SettingsRow, toast } from "../ui";
+import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
-import { PASSWORD_MIN } from "./config";
+import { PASSKEYS_ENABLED, PASSWORD_MIN } from "./config";
 import { Field, Notice, useSubmit } from "./form";
-import { signOut, useSession } from "./session";
+import { signOut, useSession, useTeamBadge } from "./session";
+import { Passkeys, TwoStep } from "./SecuritySettings";
 
 export default function AccountSettings() {
   const { session } = useSession();
   const email = session?.user.email ?? "";
+  const team = useTeamBadge(session?.user.id);
   return (
     <>
       <SettingsRow label="Email" help="The address you sign in with. Changing it sends a confirmation to both the old and the new address.">
         <ChangeEmail current={email} pending={session?.user.new_email} />
+        {team && <div style={{ marginTop: 8 }}><Badge tone="accent">Parity team</Badge></div>}
       </SettingsRow>
       <SettingsRow label="Password" help={`At least ${PASSWORD_MIN} characters, with letters and numbers. You may be asked for a code from your email first.`}>
         <ChangePassword />
       </SettingsRow>
+      <SettingsRow label="Two-step sign-in" help="After your password, also ask for a code from an authenticator app such as 1Password, Google Authenticator or Authy.">
+        <TwoStep />
+      </SettingsRow>
+      {PASSKEYS_ENABLED && (
+        <SettingsRow label="Passkeys" help="Log in with Face ID, Touch ID or Windows Hello instead of a password. Saved to this device or your password manager.">
+          <Passkeys />
+        </SettingsRow>
+      )}
       <SettingsRow label="Sign out" help="Ends your session in this browser.">
         <Button onClick={() => void signOut()} icon="external">Sign out</Button>
       </SettingsRow>

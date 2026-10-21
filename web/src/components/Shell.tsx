@@ -177,7 +177,7 @@ export function Shell({
           </button>
           {menu && (
             <div className="menu up" role="menu">
-              <div className="menu-head">{email ?? (import.meta.env.VITE_APP_AUTH === "on" ? "Signed in" : "Signed in through Cloudflare")}</div>
+              <div className="menu-head">{email ?? "Signed in"}</div>
               <a role="menuitem" href="#/settings/account"><Icon name="user" size={13} /> Account</a>
               <a role="menuitem" href="#/settings/appearance"><Icon name="gear" size={13} /> Settings</a>
               {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" size={13} /> Sign out</button>}

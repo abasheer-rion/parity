@@ -1,9 +1,9 @@
-import { Suspense, useEffect, useState } from "react";
-import { AUTH_ENABLED, AuthGate } from "./auth";
+import { useEffect, useState } from "react";
+import { AppGuard } from "./auth";
 import { Palette } from "./components/Palette";
 import { Popups } from "./components/Popups";
 import { Shell } from "./components/Shell";
-import { listBatches, loadReport, signOut, source, useIdentity, type BatchInfo } from "./lib/data";
+import { listBatches, loadReport, source, type BatchInfo } from "./lib/data";
 import { loadDocs } from "./lib/docs";
 import { date, REPO_URL } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
@@ -42,21 +42,9 @@ function useHash(): string {
 }
 
 export function App() {
-  // VITE_APP_AUTH=on: the app's own sign-in (Supabase) decides who gets in.
-  // Otherwise the Cloudflare login in front of the site does, as before.
-  if (AUTH_ENABLED) {
-    return (
-      <Suspense fallback={<div className="muted" style={{ padding: 24 }}>Loading</div>}>
-        <AuthGate>{(user) => <Dashboard email={user.email} onSignOut={user.signOut} />}</AuthGate>
-      </Suspense>
-    );
-  }
-  return <CloudflareApp />;
-}
-
-function CloudflareApp() {
-  const email = useIdentity();
-  return <Dashboard email={email} onSignOut={source === "static" ? signOut : undefined} />;
+  // Every page of the app needs a session (DEC-0012). The public pages (/, /login/,
+  // /signup/, /reset/, /verify/) are a separate entry: src/auth/main.tsx.
+  return <AppGuard>{(user) => <Dashboard email={user.email} onSignOut={user.signOut} />}</AppGuard>;
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
@@ -114,7 +102,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "ledger" && <LedgerPage />}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "settings" && (
-        <Settings section={arg} email={email} onSignOut={onSignOut} />
+        <Settings section={arg} />
       )}
       {!standalone && error && <div className="error">{error}</div>}
       {!standalone && !report && !error && <p className="muted">Loading results</p>}

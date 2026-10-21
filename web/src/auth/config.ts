@@ -1,23 +1,55 @@
-// In-app sign-in is off unless the site is built with VITE_APP_AUTH=on. While it is off
-// the site relies on the Cloudflare login only, and none of this module is downloaded.
-// See auth/README.md at the repo root.
-export const AUTH_ENABLED = import.meta.env.VITE_APP_AUTH === "on";
+// Sign-in settings for the browser. Every value here is public.
+// See auth/README.md (how sign-in works) and auth/PROVIDERS.md (Google, GitHub, passkeys).
 
-/** Supabase project URL. Not a secret; the default is the Parity project. */
+/** Supabase project URL. */
 export const SUPABASE_URL: string =
   (import.meta.env.VITE_SUPABASE_URL as string | undefined) || "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 
-/** The public (anon or publishable) key. Safe in the browser; RLS does the checking. */
-export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+/**
+ * The project's publishable key. It is meant to be in the browser: it only identifies
+ * the project, and row level security decides what anyone can read.
+ */
+export const SUPABASE_PUBLISHABLE_KEY: string =
+  (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) || "sb_publishable_12CQmnbBgVYpkflKhwHD-A_2Xby8b-x";
 
-/** Where the email links land. Every email links to #/auth/verify on this origin. */
+/** Public pages. Every email link lands on /verify/. */
 export const ROUTES = {
-  signIn: "#/auth/sign-in",
-  signUp: "#/auth/sign-up",
-  forgot: "#/auth/forgot",
-  reset: "#/auth/reset",
-  verify: "#/auth/verify",
+  home: "/",
+  app: "/app/",
+  login: "/login/",
+  signup: "/signup/",
+  reset: "/reset/",
+  verify: "/verify/",
 } as const;
 
 /** Must match minimum_password_length in supabase/config.toml and push_templates.sh. */
 export const PASSWORD_MIN = 10;
+
+export type ProviderId = "google" | "github" | "apple" | "azure";
+
+/**
+ * Sign-in providers the buttons can show. A button appears only when its id is listed
+ * in VITE_AUTH_PROVIDERS (comma separated, e.g. "google,github"), which the deploy
+ * reads from the GitHub variable AUTH_PROVIDERS. Turn a provider on in Supabase first
+ * (auth/PROVIDERS.md), then list it here.
+ */
+export const PROVIDERS: { id: ProviderId; label: string }[] = [
+  { id: "google", label: "Google" },
+  { id: "github", label: "GitHub" },
+  { id: "apple", label: "Apple" },
+  { id: "azure", label: "Microsoft" },
+];
+
+const listed = ((import.meta.env.VITE_AUTH_PROVIDERS as string | undefined) ?? "")
+  .split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+
+export const ENABLED_PROVIDERS = PROVIDERS.filter((p) => listed.includes(p.id));
+
+/** Passkeys (Face ID, Touch ID, Windows Hello). Experimental in Supabase; off unless "on". */
+export const PASSKEYS_ENABLED = import.meta.env.VITE_AUTH_PASSKEYS === "on";
+
+/** Where to go after signing in: the ?next= path if it points into the app, else /app/. */
+export function nextPath(): string {
+  const next = new URLSearchParams(window.location.search).get("next") ?? "";
+  return next.startsWith("/app/") && !next.startsWith("//") ? next : ROUTES.app;
+}

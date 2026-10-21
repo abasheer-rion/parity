@@ -7,8 +7,8 @@ export function AuthCard({ title, lead, children, foot }: { title: string; lead?
   return (
     <div className="auth-page">
       <div className="auth-card anim-rise">
-        <a className="auth-brand" href="#/" aria-label="Parity">
-          <img src="/brand/2026-10-21/parity-icon-dark.svg" width={32} height={32} alt="" />
+        <a className="auth-brand" href="/" aria-label="Parity">
+          <img src="/brand/2026-10-21-starburst/parity-icon-dark.svg" width={32} height={32} alt="" />
           <span>Parity</span>
         </a>
         <h1 className="auth-title">{title}</h1>
@@ -20,7 +20,7 @@ export function AuthCard({ title, lead, children, foot }: { title: string; lead?
   );
 }
 
-type Auto = "email" | "current-password" | "new-password" | "one-time-code" | "off";
+type Auto = "email" | "username webauthn" | "current-password" | "new-password" | "one-time-code" | "off";
 
 export function Field({ label, value, onChange, type = "text", auto, hint, autoFocus, minLength, name }: {
   label: string; value: string; onChange: (v: string) => void; type?: string; auto?: Auto;
@@ -32,7 +32,7 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
       <span className="ui-field-label">{label}</span>
       <input
         className={`ui-input ${code ? "auth-code-input" : ""}`}
-        name={name ?? auto}
+        name={name ?? (auto === "username webauthn" ? "email" : auto)}
         type={type}
         value={value}
         required
@@ -77,12 +77,12 @@ export function useSubmit() {
   return { busy, error, setError, run };
 }
 
-/** The query string inside the hash route, e.g. #/auth/verify?type=email&token_hash=... */
-export function hashParams(): URLSearchParams {
-  const q = window.location.hash.split("?")[1] ?? "";
-  return new URLSearchParams(q);
+/** The page's query string, e.g. /verify/?type=email&token_hash=... */
+export function params(): URLSearchParams {
+  return new URLSearchParams(window.location.search);
 }
 
-export function go(hash: string) {
-  window.location.hash = hash;
+/** Go to another page. replace() keeps one-time links out of the back button. */
+export function go(path: string) {
+  window.location.replace(path);
 }
