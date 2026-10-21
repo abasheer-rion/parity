@@ -28,5 +28,6 @@ export default defineConfig({
   plugins: [react(), localResults()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
-  build: { sourcemap: false },
+  // The catalog and glossary are bundled on purpose (about 170 kB gzipped).
+  build: { sourcemap: false, chunkSizeWarningLimit: 900 },
 });
