@@ -1,0 +1,32 @@
+{
+  "id": "DAT-0040",
+  "slug": "cls-fx-volume",
+  "name": "CLS FX volume data (CLSMarketData)",
+  "provider": "CLS Group",
+  "category": "fx-prices",
+  "url": "https://www.cls-group.com/products/data/",
+  "api_docs_url": "",
+  "access": "paid",
+  "rate_limits": "Not applicable: a paid data product.",
+  "history_start": "CLS says over 3 billion trades executed since 2011.",
+  "frequency": [
+    "hourly",
+    "daily"
+  ],
+  "what_it_has": "Settled FX volumes and flows from the CLS settlement system, sold as CLSMarketData. CLS also posts short monthly trading activity notes.",
+  "simple": "The company that settles most big currency trades sells counts of how much was traded.",
+  "point_in_time": false,
+  "license_terms": "No public licence or price list on the product page (checked 2026-10-21). Commercial licence by contract. Not usable for free.",
+  "quality_notes": "Covers trades settled through CLS only.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Best near real time volume measure, but paid."
+  },
+  "sources": [
+    "https://www.cls-group.com/products/data/"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-21"
+}

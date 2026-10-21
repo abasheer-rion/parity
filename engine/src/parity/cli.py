@@ -7,6 +7,10 @@
     parity official REG-0001     run a registered plan and record it in the ledger
     parity ledger verify         check the ledger's hash chain
     parity registration check    check every registration in registrations/
+    parity currencies [--all]    every ISO 4217 currency, --all adds withdrawn ones
+    parity market-size           BIS Triennial FX turnover by currency and instrument
+    parity ticks PAIR --date D   stored ticks for one day (--import FILE to add a file)
+    parity serve                 read-only JSON API on 127.0.0.1
 """
 
 from __future__ import annotations
@@ -122,6 +126,70 @@ def _registration(args) -> int:
     return 1 if bad else 0
 
 
+def _currencies(args) -> int:
+    import pandas as pd
+
+    from .data import currencies
+
+    table = currencies.load(include_withdrawn=args.all, refresh_cache=args.refresh)
+    if args.json:
+        from .api import _records
+
+        print(json.dumps(_records(table), indent=1))
+        return 0
+    for r in table.itertuples():
+        units = "-" if pd.isna(r.minor_units) else r.minor_units
+        extra = f"  withdrawn {r.withdrawn}" if r.status == "withdrawn" else ""
+        fund = " (fund)" if r.is_fund else ""
+        print(f"{r.code}  {r.numeric:>3}  {units!s:>2}  {r.name}{fund}{extra}  [{r.countries}]")
+    n_cur = int((table["status"] == "current").sum())
+    print(f"\n{len(table)} rows: {n_cur} current, {len(table) - n_cur} withdrawn. "
+          "Source: ISO 4217 lists published by SIX Group.")
+    return 0
+
+
+def _market_size(args) -> int:
+    from .data import market_size
+
+    table = market_size.load(refresh_cache=args.refresh)
+    rows = market_size.query(table, args.year, args.currency, args.instrument)
+    if rows.empty:
+        print("No rows for that filter.")
+        return 1
+    year = int(rows["year"].iloc[0])
+    print(f"FX turnover, daily average in April {year}, USD billions (BIS Triennial Survey)")
+    print("Shares add up to 200% because every trade has two currencies.\n")
+    for r in rows.head(args.top).itertuples():
+        print(f"{r.currency:<4} {r.instrument_name:<26} {r.turnover_usd_mn / 1000:>9,.1f}"
+              f"  {r.share_pct:6.1f}%")
+    print("\nSource: BIS Triennial Central Bank Survey, data.bis.org")
+    return 0
+
+
+def _ticks(args) -> int:
+    from .data import ticks
+
+    if args.import_file:
+        for r in ticks.import_file(Path(args.import_file), args.pair, args.format):
+            print(f"{r['pair']} {r['date']}: {r['rows']} ticks -> {r['path']}")
+        return 0
+    try:
+        day = ticks.load(args.pair, args.date)
+    except FileNotFoundError as exc:
+        print(exc)
+        return 1
+    print(json.dumps(ticks.summary(day), indent=1))
+    print(day.head(args.limit).to_string(index=False))
+    return 0
+
+
+def _serve(args) -> int:
+    from . import api
+
+    api.serve(args.port)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="parity", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -168,7 +236,38 @@ def main(argv: list[str] | None = None) -> int:
                     help="also require the file to be committed and unchanged")
     rg.set_defaults(func=_registration)
 
+    cu = sub.add_parser("currencies", help="list ISO 4217 currencies")
+    cu.add_argument("--all", action="store_true", help="include withdrawn currencies")
+    cu.add_argument("--refresh", action="store_true", help="download the lists again")
+    cu.add_argument("--json", action="store_true")
+    cu.set_defaults(func=_currencies)
+
+    ms = sub.add_parser("market-size", help="BIS Triennial FX turnover")
+    ms.add_argument("--year", type=int, default=None, help="survey year, default latest")
+    ms.add_argument("--currency", default=None, help="e.g. EUR; TO1 is the market total")
+    ms.add_argument("--instrument", default="A",
+                    help="A total, B spot, E forwards, G NDFs, H FX swaps, I currency swaps, "
+                         "R options, Z other")
+    ms.add_argument("--top", type=int, default=25)
+    ms.add_argument("--refresh", action="store_true", help="download from the BIS again")
+    ms.set_defaults(func=_market_size)
+
+    tk = sub.add_parser("ticks", help="FX ticks for one UTC day")
+    tk.add_argument("pair", help="e.g. EURUSD")
+    tk.add_argument("--date", help="YYYY-MM-DD (UTC)")
+    tk.add_argument("--import", dest="import_file", metavar="FILE",
+                    help="store a hand-downloaded HistData, TrueFX or ts_ns CSV (or zip)")
+    tk.add_argument("--format", default="auto", choices=["auto", "histdata", "truefx", "csv"])
+    tk.add_argument("--limit", type=int, default=10, help="rows to print")
+    tk.set_defaults(func=_ticks)
+
+    sv = sub.add_parser("serve", help="read-only JSON API on 127.0.0.1")
+    sv.add_argument("--port", type=int, default=8765)
+    sv.set_defaults(func=_serve)
+
     args = p.parse_args(argv)
+    if args.cmd == "ticks" and not args.import_file and not args.date:
+        p.error("ticks needs --date YYYY-MM-DD (or --import FILE)")
     return args.func(args)
 
 

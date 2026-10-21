@@ -5163,7 +5163,7 @@
       "type": "web-page",
       "authors": [],
       "year": null,
-      "title": "BIS Data Portal (SDMX API): API documentation",
+      "title": "BIS Triennial Survey FX turnover: API documentation",
       "venue": "Bank for International Settlements",
       "doi": null,
       "arxiv": null,
@@ -5173,8 +5173,10 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "catalog/datasets/bis-triennial-fx.json",
         "catalog/datasets/bis.json",
         "docs/datasets/0006-bis.md",
+        "docs/datasets/0038-bis-triennial-fx.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "metadata": {
@@ -5532,6 +5534,28 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0002-open-source-and-public-results.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2d16e385",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://publicreporting.cftc.gov/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-cot.json",
+        "docs/datasets/0039-cftc-cot.md"
       ],
       "metadata": {
         "source": "repo",
@@ -6067,6 +6091,28 @@
       }
     },
     {
+      "key": "url-3aeeae10",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Databento CME FX futures (nanosecond): API documentation",
+      "venue": "Databento",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://databento.com/docs/standards-and-conventions/common-fields-enums-types",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/databento-cme-fx.json",
+        "docs/datasets/0041-databento-cme-fx.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-3b304b26",
       "type": "forum-post",
       "authors": [],
@@ -6182,6 +6228,28 @@
         "catalog/datasets/frankfurter.json",
         "docs/datasets/0014-frankfurter.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3fdb8541",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "SIX Group for ISO",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/iso-4217-six.json",
+        "docs/datasets/0037-iso-4217-six.md"
       ],
       "metadata": {
         "source": "repo",
@@ -6745,6 +6813,28 @@
       }
     },
     {
+      "key": "url-4e46efdd",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "CLS FX volume data (CLSMarketData)",
+      "venue": "CLS Group",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cls-group.com/products/data/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cls-fx-volume.json",
+        "docs/datasets/0040-cls-fx-volume.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-4e621e26",
       "type": "forum-post",
       "authors": [],
@@ -7042,6 +7132,28 @@
       }
     },
     {
+      "key": "url-539803c3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "CFTC Commitments of Traders: API documentation",
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://publicreporting.cftc.gov/stories/s/COT-Help/p2fg-u73y/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-cot.json",
+        "docs/datasets/0039-cftc-cot.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-53fcc8e4",
       "type": "web-page",
       "authors": [],
@@ -7274,6 +7386,28 @@
       "used_in": [
         "catalog/datasets/twelve-data.json",
         "docs/datasets/0033-twelve-data.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a3da122",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "BIS Triennial Survey FX turnover",
+      "venue": "Bank for International Settlements",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://data.bis.org/topics/DER",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bis-triennial-fx.json",
+        "docs/datasets/0038-bis-triennial-fx.md"
       ],
       "metadata": {
         "source": "repo",
@@ -7757,6 +7891,28 @@
       }
     },
     {
+      "key": "url-677865b8",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "CFTC Commitments of Traders",
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-cot.json",
+        "docs/datasets/0039-cftc-cot.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-681eac41",
       "type": "web-page",
       "authors": [],
@@ -7851,6 +8007,28 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-69bf5130",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Bank for International Settlements",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://stats.bis.org/api/v2/data/dataflow/BIS/WS_DER_OTC_TOV/1.0/A.U.*.B.5J.A.5J.A.*.TO1.A.A.3.C?format=csv",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bis-triennial-fx.json",
+        "docs/datasets/0038-bis-triennial-fx.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
       }
     },
     {
@@ -8495,6 +8673,28 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0003-forums-and-practitioners.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-777e59be",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Dukascopy Bank SA",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.dukascopy.com/swiss/english/legal-pages/terms-of-use/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/dukascopy.json",
+        "docs/datasets/0009-dukascopy.md"
       ],
       "metadata": {
         "source": "repo",
@@ -10601,6 +10801,28 @@
       }
     },
     {
+      "key": "url-a5101b4c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "SIX Group for ISO",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/iso-4217-six.json",
+        "docs/datasets/0037-iso-4217-six.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-a595901b",
       "type": "web-page",
       "authors": [],
@@ -12195,6 +12417,28 @@
       }
     },
     {
+      "key": "url-d2d4d776",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "Databento CME FX futures (nanosecond)",
+      "venue": "Databento",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://databento.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/databento-cme-fx.json",
+        "docs/datasets/0041-databento-cme-fx.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-d3066200",
       "type": "web-page",
       "authors": [],
@@ -12259,6 +12503,28 @@
       "used_in": [
         "catalog/datasets/nasdaq-data-link.json",
         "docs/datasets/0024-nasdaq-data-link.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d4c3e0f7",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "ISO 4217 currency code lists",
+      "venue": "SIX Group for ISO",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.six-group.com/en/products-services/financial-information/data-standards.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/iso-4217-six.json",
+        "docs/datasets/0037-iso-4217-six.md"
       ],
       "metadata": {
         "source": "repo",
@@ -13121,8 +13387,10 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "catalog/datasets/bis-triennial-fx.json",
         "catalog/datasets/bis.json",
-        "docs/datasets/0006-bis.md"
+        "docs/datasets/0006-bis.md",
+        "docs/datasets/0038-bis-triennial-fx.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {

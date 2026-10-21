@@ -16,8 +16,8 @@
   "what_it_has": "Free tick and 1-minute bar data for over 80 FX pairs plus a few commodities and stock indexes, in ASCII, MetaTrader, NinjaTrader and Excel formats.",
   "simple": "A free website with minute by minute currency prices going back many years, packed one month per file.",
   "point_in_time": false,
-  "license_terms": "Free with no warranty; the FAQ says use the data at your own risk. No redistribution terms stated. Personal research use only.",
-  "quality_notes": "All timestamps are Eastern Standard Time with no daylight saving shift, which must be converted. Source of the quotes is not stated, and gaps are common.",
+  "license_terms": "FAQ: \"Since it's free data, you'll not get from us any kind of warranty or certification. Use the data at your own will and risk.\" No licence for automated use or redistribution is granted, and automated delivery (FTP) is a paid service, so we only import files a person downloaded by hand. https://www.histdata.com/f-a-q/",
+  "quality_notes": "All timestamps are Eastern Standard Time with no daylight saving shift, which must be converted. Source of the quotes is not stated, and gaps are common. Tick format checked 2026-10-21: YYYYMMDD HHMMSSmmm,bid,ask,volume, so timestamps are to the millisecond.",
   "in_use_by_parity": false,
   "parity_keys": [],
   "relevance": {
@@ -29,5 +29,5 @@
     "https://www.histdata.com/download-free-forex-data/"
   ],
   "verified": false,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21"
 }

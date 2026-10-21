@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ISO_4217 Pblshd="2026-09-17">
+	<CcyTbl>
+		<CcyNtry>
+			<CtryNm>ÅLAND ISLANDS</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>AMERICAN SAMOA</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ANDORRA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ANTARCTICA</CtryNm>
+			<CcyNm>No universal currency</CcyNm>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>AUSTRIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>BELGIUM</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>BONAIRE, SINT EUSTATIUS AND SABA</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>BRITISH INDIAN OCEAN TERRITORY (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>BULGARIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>CROATIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>CYPRUS</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ECUADOR</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>EL SALVADOR</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ESTONIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>EUROPEAN UNION</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>FINLAND</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>FRANCE</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>FRENCH GUIANA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>FRENCH SOUTHERN TERRITORIES (THE)</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>GERMANY</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>GREECE</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>GUADELOUPE</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>GUAM</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>HAITI</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>HOLY SEE (THE)</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>IRELAND</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ITALY</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>JAPAN</CtryNm>
+			<CcyNm>Yen</CcyNm>
+			<Ccy>JPY</Ccy>
+			<CcyNbr>392</CcyNbr>
+			<CcyMnrUnts>0</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>LATVIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>LITHUANIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>LUXEMBOURG</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MALTA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MARSHALL ISLANDS (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MARTINIQUE</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MAYOTTE</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MICRONESIA (FEDERATED STATES OF)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MONACO</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>MONTENEGRO</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>NETHERLANDS (THE)</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>NORTHERN MARIANA ISLANDS (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>PALAU</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>PALESTINE, STATE OF</CtryNm>
+			<CcyNm>No universal currency</CcyNm>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>PANAMA</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>PORTUGAL</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>PUERTO RICO</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>RÉUNION</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SAINT BARTHÉLEMY</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SAINT MARTIN (FRENCH PART)</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SAINT PIERRE AND MIQUELON</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SAN MARINO</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SLOVAKIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SLOVENIA</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</CtryNm>
+			<CcyNm>No universal currency</CcyNm>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SPAIN</CtryNm>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>SWITZERLAND</CtryNm>
+			<CcyNm IsFund="true">WIR Euro</CcyNm>
+			<Ccy>CHE</Ccy>
+			<CcyNbr>947</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>TIMOR-LESTE</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>TURKS AND CAICOS ISLANDS (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>UNITED STATES MINOR OUTLYING ISLANDS (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>UNITED STATES OF AMERICA (THE)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>VIRGIN ISLANDS (BRITISH)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>VIRGIN ISLANDS (U.S.)</CtryNm>
+			<CcyNm>US Dollar</CcyNm>
+			<Ccy>USD</Ccy>
+			<CcyNbr>840</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
+			<CtryNm>ZZ08_Gold</CtryNm>
+			<CcyNm>Gold</CcyNm>
+			<Ccy>XAU</Ccy>
+			<CcyNbr>959</CcyNbr>
+			<CcyMnrUnts>N.A.</CcyMnrUnts>
+		</CcyNtry>
+	</CcyTbl>
+</ISO_4217>

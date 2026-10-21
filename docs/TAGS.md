@@ -100,6 +100,7 @@ Sources, scrapers, caching and data quality.
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
+- [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)
@@ -137,6 +138,11 @@ Sources, scrapers, caching and data quality.
 - [DAT-0034: Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md)
 - [DAT-0035: World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md)
 - [DAT-0036: Yahoo Finance chart endpoint](datasets/0036-yahoo-chart.md)
+- [DAT-0037: ISO 4217 currency code lists](datasets/0037-iso-4217-six.md)
+- [DAT-0038: BIS Triennial Survey FX turnover](datasets/0038-bis-triennial-fx.md)
+- [DAT-0039: CFTC Commitments of Traders](datasets/0039-cftc-cot.md)
+- [DAT-0040: CLS FX volume data (CLSMarketData)](datasets/0040-cls-fx-volume.md)
+- [DAT-0041: Databento CME FX futures (nanosecond)](datasets/0041-databento-cme-fx.md)
 
 ## docs
 
@@ -186,6 +192,7 @@ Foreign exchange in general.
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
+- [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md)
@@ -237,6 +244,11 @@ Foreign exchange in general.
 - [DAT-0023: Massive (formerly Polygon.io)](datasets/0023-massive.md)
 - [DAT-0032: TrueFX historical downloads](datasets/0032-truefx.md)
 - [DAT-0033: Twelve Data](datasets/0033-twelve-data.md)
+- [DAT-0037: ISO 4217 currency code lists](datasets/0037-iso-4217-six.md)
+- [DAT-0038: BIS Triennial Survey FX turnover](datasets/0038-bis-triennial-fx.md)
+- [DAT-0039: CFTC Commitments of Traders](datasets/0039-cftc-cot.md)
+- [DAT-0040: CLS FX volume data (CLSMarketData)](datasets/0040-cls-fx-volume.md)
+- [DAT-0041: Databento CME FX futures (nanosecond)](datasets/0041-databento-cme-fx.md)
 
 ## infra
 

@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0037",
+  "slug": "iso-4217-six",
+  "name": "ISO 4217 currency code lists",
+  "provider": "SIX Group for ISO",
+  "category": "fx-prices",
+  "url": "https://www.six-group.com/en/products-services/financial-information/data-standards.html",
+  "api_docs_url": "",
+  "access": "free-no-key",
+  "rate_limits": "None published. Two static XML files, fetched once and cached.",
+  "history_start": "Withdrawn list goes back to codes withdrawn in the 1970s and 1980s.",
+  "frequency": [
+    "reference"
+  ],
+  "what_it_has": "List One: every current currency and fund with alphabetic code, numeric code, minor units and the countries that use it. List Three: every withdrawn currency with its withdrawal date.",
+  "simple": "The official list of every three letter currency code, including the ones that no longer exist.",
+  "point_in_time": false,
+  "license_terms": "SIX says it maintains the code lists \"on behalf of the International Organization for Standardization (ISO)\" and makes them \"available online and free of charge\". No other licence text was found on the page (checked 2026-10-21). robots.txt allows /dam, where the files live. We cite ISO 4217 and SIX as the source.",
+  "quality_notes": "Withdrawal dates are free text: usually YYYY-MM but sometimes a range such as 1989 to 1990. A code can be withdrawn more than once (VEF has three rows). Fetched with no key (tested 2026-10-21): 178 current and 152 withdrawn rows, 307 distinct codes.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "parity currencies"
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "The master list of currencies for every other table, including dead ones for long histories."
+  },
+  "sources": [
+    "https://www.six-group.com/en/products-services/financial-information/data-standards.html",
+    "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml",
+    "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

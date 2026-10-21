@@ -3,8 +3,8 @@ id: DAT-0009
 title: Dukascopy historical data
 type: dataset
 status: candidate
-created: 2026-10-20
-updated: 2026-10-20
+created: 2026-10-21
+updated: 2026-10-21
 authors: [ayan]
 tags: [data, fx]
 related: []
@@ -35,11 +35,11 @@ Tick by tick bid and ask prices with volumes for FX, commodities and indices, as
 | Relevance to us | 4 of 5: Best free tick history for measuring spreads, so our cost model is honest. |
 | Everything checked on the source | no, some details unverified |
 
-Generated from `catalog/datasets/dukascopy.json`, last checked 2026-10-20.
+Generated from `catalog/datasets/dukascopy.json`, last checked 2026-10-21.
 
 ## Terms and quality
 
-**Terms:** No data specific license found. Treat as personal research use only and do not redistribute.
+**Terms:** Dukascopy Terms of Use: "You shall not use or attempt to use any 'scraper,' 'robot,' 'bot,' 'spider,' 'data mining,' 'computer code,' or any other automate device... to access, acquire, copy, or monitor any portion of the WEBSITE". Downloads are allowed only "for your own personal, non-commercial use". So we never automate it; a person may export files by hand for personal research. https://www.dukascopy.com/swiss/english/legal-pages/terms-of-use/
 
 **Quality:** One dealer's quotes, not the whole market. Files need decoding (open source downloaders exist). Gaps can appear around weekends and outages. We downloaded one 2024 EURUSD hour with no key (tested).
 
