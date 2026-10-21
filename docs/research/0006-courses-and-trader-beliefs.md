@@ -176,4 +176,5 @@ Gaps: we did not read a Winton write-up or Lopez de Prado's "10 reasons most ML 
 ## Referenced by
 
 - [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
+- [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 <!-- backlinks:end -->

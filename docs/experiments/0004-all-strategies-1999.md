@@ -98,4 +98,5 @@ Crisis behaviour and the correlations between strategies are on the dashboard's 
 ## Referenced by
 
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
+- [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 <!-- backlinks:end -->

@@ -122,4 +122,5 @@ Official run [RUN-000003](../../ledger/runs/RUN-000003.json) of `REG-0003`, reco
 
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](0006-courses-and-trader-beliefs.md)
+- [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 <!-- backlinks:end -->

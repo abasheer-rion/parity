@@ -41,4 +41,5 @@ Our benchmark was SPY from Yahoo's chart endpoint. Yahoo's terms forbid automate
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [REF-0002: KPIs and how to read them](../reference/0002-kpis.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
+- [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 <!-- backlinks:end -->

@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 7 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 2 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 3 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 54 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
@@ -118,6 +118,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | LOG-0001 | [Project start](log/2026-10-20-project-start.md) | final | 2026-10-20 | [infra](TAGS.md#infra), [intent](TAGS.md#intent), [process](TAGS.md#process) |
 | LOG-0002 | [Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md) | final | 2026-10-20 | [method](TAGS.md#method), [open-source](TAGS.md#open-source), [process](TAGS.md#process) |
+| LOG-0003 | [Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md) | final | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data), [method](TAGS.md#method) |
 
 ## algorithm
 
