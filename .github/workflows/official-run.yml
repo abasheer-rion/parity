@@ -46,8 +46,9 @@ jobs:
         env:
           REG: ${{ inputs.registration }}
         run: |
-          parity official "$REG" | tee official.log
-          echo "run_id=$(grep -o 'RUN-[0-9]*' official.log | head -1)" >> "$GITHUB_OUTPUT"
+          set -o pipefail
+          parity official "$REG" | tee "$RUNNER_TEMP/official.log"
+          echo "run_id=$(grep -o 'RUN-[0-9]*' "$RUNNER_TEMP/official.log" | head -1)" >> "$GITHUB_OUTPUT"
       - name: Ledger must still be intact
         run: parity ledger verify
       - name: Commit ledger
