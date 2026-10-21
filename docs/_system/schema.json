@@ -397,6 +397,7 @@
       "CONTRIBUTING.md",
       "Makefile",
       "README.md",
+      "auth",
       "catalog",
       "docs",
       "engine",

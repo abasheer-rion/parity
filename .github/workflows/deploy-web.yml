@@ -42,6 +42,11 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run build
+        env:
+          # In-app sign-in stays off until the owner sets the repo variable APP_AUTH to "on"
+          # (auth/README.md). Both values are public; neither is a secret.
+          VITE_APP_AUTH: ${{ vars.APP_AUTH }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"

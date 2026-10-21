@@ -1,0 +1,12 @@
+<!--
+subject: Confirm your new email for Parity
+preheader: Confirm the change of email address on your Parity account.
+-->
+[[> heading text="Confirm your new email" ]]
+[[> paragraph text="Someone asked to change the email on your Parity account from {{ .Email }} to {{ .NewEmail }}. Confirm to finish the change." ]]
+[[> button url="{{ .SiteURL }}/#/auth/verify?type=email_change&amp;token_hash={{ .TokenHash }}" label="Confirm the change" ]]
+[[> note text="Or type this code in your account settings:" ]]
+[[> code ]]
+[[> rule ]]
+[[> link url="{{ .SiteURL }}/#/auth/verify?type=email_change&amp;token_hash={{ .TokenHash }}" ]]
+[[> note text="Both the old and the new address get an email like this one, and both must confirm. If you did not ask for this, ignore it and change your password." ]]

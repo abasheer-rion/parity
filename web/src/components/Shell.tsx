@@ -48,17 +48,13 @@ const RESEARCH: NavItem[] = [
   { href: "#/ui", label: "UI library", icon: "palette", routes: ["ui"] },
 ];
 
+// Settings are kept bare on purpose: a section exists only when there is a reason to
+// change something. The older sections (reading, shortcuts, runs, team, about) are kept
+// in pages/SettingsHidden.tsx and can come back by adding them here.
 export const SETTINGS_SECTIONS = [
-  { group: "Personal", items: [
-    { id: "profile", label: "Profile" },
+  { group: "Settings", items: [
+    { id: "account", label: "Account" },
     { id: "appearance", label: "Appearance" },
-    { id: "reading", label: "Reading" },
-    { id: "shortcuts", label: "Keyboard shortcuts" },
-  ] },
-  { group: "Research", items: [
-    { id: "runs", label: "Data runs" },
-    { id: "team", label: "Team" },
-    { id: "about", label: "About" },
   ] },
 ];
 
@@ -121,7 +117,7 @@ export function Shell({
               <div key={g.group} className="side-group">
                 <div className="side-label">{g.group}</div>
                 {g.items.map((i) => (
-                  <a key={i.id} href={`#/settings/${i.id}`} className={`side-item flat ${(arg ?? "profile") === i.id ? "active" : ""}`}><span className="lbl">{i.label}</span></a>
+                  <a key={i.id} href={`#/settings/${i.id}`} className={`side-item flat ${(arg ?? "account") === i.id ? "active" : ""}`}><span className="lbl">{i.label}</span></a>
                 ))}
               </div>
             ))}
@@ -181,8 +177,8 @@ export function Shell({
           </button>
           {menu && (
             <div className="menu up" role="menu">
-              <div className="menu-head">{email ?? "Signed in through Cloudflare"}</div>
-              <a role="menuitem" href="#/settings/profile"><Icon name="user" size={13} /> Profile</a>
+              <div className="menu-head">{email ?? (import.meta.env.VITE_APP_AUTH === "on" ? "Signed in" : "Signed in through Cloudflare")}</div>
+              <a role="menuitem" href="#/settings/account"><Icon name="user" size={13} /> Account</a>
               <a role="menuitem" href="#/settings/appearance"><Icon name="gear" size={13} /> Settings</a>
               {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" size={13} /> Sign out</button>}
             </div>
