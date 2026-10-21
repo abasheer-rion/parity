@@ -239,5 +239,6 @@ Collected from the threads above, roughly in order of how often they come up:
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [RES-0002: Open-source projects and public results](0002-open-source-and-public-results.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](0005-zen-apps-and-free-apis.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

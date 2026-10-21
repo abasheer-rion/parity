@@ -41,12 +41,14 @@ Oil, gas, metals and their link to currencies.
 Crypto markets, used as a comparison.
 
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 
 ## data
 
 Sources, scrapers, caching and data quality.
 
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 
@@ -140,6 +142,7 @@ News, macro releases and event-driven signals.
 - [HYP-0004: Macro and energy surprises move currencies in a predictable direction](hypotheses/0004-macro-surprises-move-fx-predictably.md)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 
 ## open-source
 
@@ -147,6 +150,7 @@ Other people's code, bots and published results.
 
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 
 ## process
 

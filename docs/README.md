@@ -10,7 +10,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 6 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 2 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 4 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 5 |
 | [guide](#guide) | How to do something in this repo, step by step. | 3 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 6 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 1 |
@@ -28,6 +28,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-20 [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - 2026-10-20 [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
@@ -35,7 +36,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-20 [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 - 2026-10-20 [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
 - 2026-10-20 [REF-0004: Glossary](reference/0004-glossary.md)
-- 2026-10-20 [REF-0003: Data sources](reference/0003-data-sources.md)
 
 ## intent
 
@@ -82,6 +82,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0002 | [Open-source projects and public results](research/0002-open-source-and-public-results.md) | current | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [method](TAGS.md#method), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | RES-0003 | [What practitioners say in forums](research/0003-forums-and-practitioners.md) | current | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
 | RES-0004 | [Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md) | current | 2026-10-20 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [economics](TAGS.md#economics), [fx](TAGS.md#fx) |
+| RES-0005 | [Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md) | current | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
 
 ## guide
 

@@ -46,5 +46,6 @@ None yet.
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](0006-short-the-dollar-on-fomc-days.md)
 - [RES-0003: What practitioners say in forums](../research/0003-forums-and-practitioners.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->
