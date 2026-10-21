@@ -4,10 +4,10 @@
 import { useEffect, useState } from "react";
 import { SETTINGS_SECTIONS } from "../components/Shell";
 import { Button, Kbd, Segmented, SettingsRow, Toggle } from "../ui";
-import { supabase, source } from "../lib/data";
+import { listMembers, source, type BatchInfo } from "../lib/data";
 import { date, REPO_URL } from "../lib/format";
 import { setPrefs, usePrefs, type Range, type Theme } from "../lib/prefs";
-import type { BatchSummary, Report } from "../lib/types";
+import type { Report } from "../lib/types";
 
 export function Settings({
   section = "profile",
@@ -22,7 +22,7 @@ export function Settings({
   email?: string | null;
   onSignOut?: () => void;
   report: Report | null;
-  batches: BatchSummary[];
+  batches: BatchInfo[];
   batchId?: string;
   setBatchId: (id: string | undefined) => void;
 }) {
@@ -35,9 +35,9 @@ export function Settings({
 
       {section === "profile" && (
         <>
-          <SettingsRow label="Email" help="The address you sign in with. Access is limited to the research team.">{email ?? "Local session, no sign-in"}</SettingsRow>
-          <SettingsRow label="Data source" help="Where results are read from.">{source === "supabase" ? "Supabase (published runs)" : source === "local" ? "This computer (engine output)" : "None"}</SettingsRow>
-          {onSignOut && <SettingsRow label="Sign out" help="Ends the session in this browser."><Button onClick={onSignOut} icon="external">Sign out</Button></SettingsRow>}
+          <SettingsRow label="Email" help="The address you signed in with. Only the research team's emails are let in, by a one-time code from Cloudflare.">{email ?? (source === "local" ? "Local session, no sign-in" : "Loading")}</SettingsRow>
+          <SettingsRow label="Data source" help="Where results are read from.">{source === "static" ? "Published runs, copied in when the site was last deployed" : "This computer (engine output)"}</SettingsRow>
+          {onSignOut && <SettingsRow label="Sign out" help="Ends the Cloudflare session in this browser. You will need a new code to come back."><Button onClick={onSignOut} icon="external">Sign out</Button></SettingsRow>}
         </>
       )}
 
@@ -97,7 +97,7 @@ export function Settings({
             {batches.length ? (
               <select value={batchId ?? ""} onChange={(e) => setBatchId(e.target.value || undefined)}>
                 <option value="">Latest run</option>
-                {batches.map((b) => <option key={b.id} value={b.id}>{date(b.generated_at)} {b.git_sha ?? ""}</option>)}
+                {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
               </select>
             ) : "Latest run"}
           </SettingsRow>
@@ -133,14 +133,12 @@ function Team() {
   const [rows, setRows] = useState<{ email: string; added_at: string }[] | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => {
-    if (!supabase) { setErr("Team members are listed when signed in through Supabase."); return; }
-    supabase.from("members").select("email, added_at").order("added_at").then(({ data, error }) => {
-      if (error) setErr(error.message); else setRows(data ?? []);
-    });
+    if (source === "local") { setErr("The team list is shown on the deployed site."); return; }
+    listMembers().then(setRows).catch((e: Error) => setErr(e.message));
   }, []);
   return (
     <>
-      <SettingsRow label="Members" help="Everyone who can sign in. Adding someone is done in Supabase by the owner.">
+      <SettingsRow label="Members" help="Everyone who can sign in. Adding someone means adding them to the team list in Supabase and to the Cloudflare login rule.">
         {err ? <span className="muted">{err}</span> : !rows ? "Loading" : (
           <ul className="plain-list">{rows.map((r) => <li key={r.email}>{r.email} <span className="muted small">since {date(r.added_at)}</span></li>)}</ul>
         )}

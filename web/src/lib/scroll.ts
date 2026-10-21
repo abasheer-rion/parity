@@ -1,0 +1,32 @@
+// Smooth, gliding page scroll (Lenis, MIT). Wheel and trackpad input is eased so the
+// page keeps moving briefly after you stop, instead of stepping. Anything that scrolls
+// on its own (sidebar, preview cards, search results, wide tables) opts out with
+// data-lenis-prevent, and people who ask for reduced motion get normal scrolling.
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+
+let lenis: Lenis | null = null;
+
+export function startSmoothScroll() {
+  if (lenis || typeof window === "undefined") return;
+  lenis = new Lenis({
+    autoRaf: true,
+    lerp: 0.11,
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 1,
+    respectReducedMotion: true,
+    prevent: (node) => !!node.closest?.("[data-lenis-prevent], .pop, .palette, .table-wrap, .side, .doc-rail, .doc-nav"),
+  });
+}
+
+/** Jump without easing (route changes), or glide (in-page links). */
+export function scrollToTop() {
+  if (lenis) lenis.scrollTo(0, { immediate: true });
+  else window.scrollTo(0, 0);
+}
+
+export function scrollToEl(el: HTMLElement, offset = -64) {
+  if (lenis) lenis.scrollTo(el, { offset, duration: 0.9 });
+  else el.scrollIntoView({ block: "start" });
+}

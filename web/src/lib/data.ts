@@ -1,75 +1,49 @@
-import { createClient, type Session, type SupabaseClient } from "@supabase/supabase-js";
-import type { BatchSummary, Report, StrategyRun } from "./types";
+// Where results come from. The site sits behind Cloudflare Access, so it no longer
+// signs in to Supabase: the deploy job copies published runs into static files
+// (scripts/export_site_data.py), and the browser reads those. In local development
+// the engine's own output is served instead.
+import { useEffect, useState } from "react";
+import type { BatchSummary, Report } from "./types";
 
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+export type Source = "static" | "local";
+export const source: Source = import.meta.env.DEV ? "local" : "static";
 
-export const supabase: SupabaseClient | null =
-  url && anonKey ? createClient(url, anonKey) : null;
+export interface BatchInfo extends BatchSummary { kind?: string; run_id?: string | null }
 
-/** Where results come from: Supabase when configured, the engine's output folder in dev. */
-export type Source = "supabase" | "local" | "none";
-export const source: Source = supabase ? "supabase" : import.meta.env.DEV ? "local" : "none";
-
-export async function currentSession(): Promise<Session | null> {
-  if (!supabase) return null;
-  const { data } = await supabase.auth.getSession();
-  return data.session;
+async function json<T>(url: string): Promise<T> {
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(res.status === 404 ? "No research runs have been published yet." : `Could not load ${url} (${res.status}).`);
+  return (await res.json()) as T;
 }
 
-export async function sendSignInLink(email: string): Promise<string | null> {
-  if (!supabase) return "Supabase is not configured.";
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: window.location.origin },
-  });
-  return error ? error.message : null;
-}
-
-export async function listBatches(): Promise<BatchSummary[]> {
-  if (!supabase) return [];
-  const { data, error } = await supabase
-    .from("research_batches")
-    .select("id, generated_at, git_sha")
-    .order("generated_at", { ascending: false })
-    .limit(30);
-  if (error) throw new Error(error.message);
-  return data ?? [];
+export async function listBatches(): Promise<BatchInfo[]> {
+  if (source === "local") return [];
+  return json<BatchInfo[]>("/data/batches.json");
 }
 
 export async function loadReport(batchId?: string): Promise<Report> {
-  if (source === "local") {
-    const res = await fetch("/local/latest.json");
-    if (!res.ok) throw new Error(await res.text());
-    return (await res.json()) as Report;
-  }
-  if (!supabase) throw new Error("No data source is configured.");
+  if (source === "local") return json<Report>("/local/latest.json");
+  return json<Report>(batchId ? `/data/batch/${batchId}.json` : "/data/latest.json");
+}
 
-  let query = supabase.from("research_batches").select("*");
-  query = batchId ? query.eq("id", batchId) : query.order("generated_at", { ascending: false });
-  const { data: batches, error } = await query.limit(1);
-  if (error) throw new Error(error.message);
-  const batch = batches?.[0];
-  if (!batch) throw new Error("No research runs have been published yet.");
+export async function listMembers(): Promise<{ email: string; added_at: string }[]> {
+  if (source === "local") return [];
+  return json("/data/members.json");
+}
 
-  const { data: runs, error: runError } = await supabase
-    .from("strategy_runs")
-    .select("*")
-    .eq("batch_id", batch.id);
-  if (runError) throw new Error(runError.message);
+/** Who is signed in, from Cloudflare Access. Null in local development. */
+export function useIdentity(): string | null {
+  const [email, setEmail] = useState<string | null>(null);
+  useEffect(() => {
+    if (source === "local") return;
+    fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setEmail(d?.email ?? null))
+      .catch(() => setEmail(null));
+  }, []);
+  return email;
+}
 
-  return {
-    schema_version: batch.schema_version,
-    generated_at: batch.generated_at,
-    git_sha: batch.git_sha,
-    n_trials: batch.n_trials,
-    config: batch.config,
-    coverage: batch.coverage,
-    kind: batch.kind,
-    run_id: batch.run_id,
-    series: batch.series ?? undefined,
-    comparison: batch.coverage?.comparison,
-    source_checks: batch.coverage?.source_checks,
-    runs: (runs ?? []) as StrategyRun[],
-  };
+export function signOut() {
+  window.location.href = "/cdn-cgi/access/logout";
 }

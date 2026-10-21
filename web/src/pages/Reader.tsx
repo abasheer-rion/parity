@@ -6,6 +6,7 @@ import { Title } from "../components/Shell";
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, search, TYPE_LABELS, TYPE_ORDER, useDocs, type DocEntry, type DocsData } from "../lib/docs";
 import { REPO_URL } from "../lib/format";
+import { scrollToEl, scrollToTop } from "../lib/scroll";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
 import { Icon } from "../ui/icons";
 
@@ -122,8 +123,8 @@ export function DocPage({ id, anchor }: { id: string; anchor?: string }) {
   useEffect(() => {
     if (!doc) return;
     const el = anchor ? document.getElementById(anchor) : null;
-    if (el) el.scrollIntoView({ block: "start" });
-    else window.scrollTo(0, 0);
+    if (el) scrollToEl(el);
+    else scrollToTop();
   }, [doc, anchor]);
 
   if (!data) return <p className="muted">Loading docs</p>;

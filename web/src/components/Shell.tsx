@@ -83,97 +83,124 @@ export function Shell({
   const prefs = usePrefs();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   useEffect(() => { setOpen(false); setMenu(false); }, [hash]);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 4);
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
   const research = RESEARCH.some((n) => n.routes.includes(route));
   const items = research ? RESEARCH : MARKETS;
   const settings = route === "settings";
 
   return (
     <div className={`frame ${open ? "nav-open" : ""}`}>
-      <aside className="side">
+      <aside className="side" data-lenis-prevent>
         <div className="org">
-          <span className="org-mark" aria-hidden />
-          <span className="org-name">Parity</span>
-          <span className="org-badge">POC</span>
+          <a className="org-button" href="#/">
+            <span className="org-mark"><img src="/brand/2026-10-21/parity-mark.svg" alt="" width={24} height={24} /></span>
+            <span className="org-name">Parity</span>
+            <span className="org-badge">Beta</span>
+          </a>
         </div>
         {settings ? (
-          <nav className="side-nav" aria-label="Settings">
-            <a className="side-back" href="#/"><Icon name="chevronLeft" /> Settings</a>
+          <nav className="side-nav settings-nav" aria-label="Settings">
+            <a className="side-back" href="#/"><span className="ico"><Icon name="chevronLeft" size={13} /></span> Settings</a>
             {SETTINGS_SECTIONS.map((g) => (
               <div key={g.group} className="side-group">
                 <div className="side-label">{g.group}</div>
                 {g.items.map((i) => (
-                  <a key={i.id} href={`#/settings/${i.id}`} className={`side-item flat ${(arg ?? "profile") === i.id ? "active" : ""}`}>{i.label}</a>
+                  <a key={i.id} href={`#/settings/${i.id}`} className={`side-item flat ${(arg ?? "profile") === i.id ? "active" : ""}`}><span className="lbl">{i.label}</span></a>
                 ))}
               </div>
             ))}
           </nav>
         ) : (
           <>
-            <div className="seg" role="tablist" aria-label="Area">
-              <a role="tab" aria-selected={!research} className={!research ? "on" : ""} href="#/"><Icon name="chart" size={13} /> Markets</a>
-              <a role="tab" aria-selected={research} className={research ? "on" : ""} href="#/docs"><Icon name="book" size={13} /> Research</a>
+            <div className="switcher">
+              <div className="seg" role="tablist" aria-label="Area">
+                <a role="tab" aria-selected={!research} className={!research ? "on" : ""} href="#/"><Icon name="chart" size={13} />Markets</a>
+                <a role="tab" aria-selected={research} className={research ? "on" : ""} href="#/docs"><Icon name="book" size={13} />Research</a>
+              </div>
             </div>
-            <nav className="side-nav" aria-label="Main">
-              {items.map((n) => {
-                const active = n.routes.includes(route);
-                return (
-                  <div key={n.href}>
-                    <a href={n.href} className={`side-item ${active ? "active" : ""}`}>
-                      <Icon name={n.icon} /> {n.label}
+            <div className="nav-wrap">
+              <nav className="side-nav" aria-label="Main">
+                {items.map((n) => {
+                  const active = n.routes.includes(route);
+                  return (
+                    <div key={n.href}>
+                      <a href={n.href} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
+                        <span className="ico"><Icon name={n.icon} size={14} /></span>
+                        <span className="lbl">{n.label}</span>
+                      </a>
+                      {n.children && (
+                        <div className={`side-children ${active ? "open" : ""}`}>
+                          <div>
+                            {n.children.map((c) => {
+                              const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
+                              return <a key={c.href} href={c.href} className={on ? "on" : ""} tabIndex={active ? 0 : -1}>{c.label}</a>;
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </nav>
+              <div className="side-sep" />
+              <div className="side-group">
+                <div className="side-label">Bookmarks</div>
+                {prefs.bookmarks.length === 0 && <p className="side-empty">Use the bookmark button next to a page title to pin it here.</p>}
+                <div className="bm-list">
+                  {prefs.bookmarks.map((b) => (
+                    <a key={b.href} href={b.href} className={`side-item bm ${hash === b.href ? "active" : ""}`}>
+                      <span className="ico"><Icon name="bookmark" size={12} /></span> <span className="lbl">{b.label}</span>
                     </a>
-                    {active && n.children && (
-                      <div className="side-children">
-                        {n.children.map((c) => {
-                          const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc"));
-                          return <a key={c.href} href={c.href} className={on ? "on" : ""}>{c.label}</a>;
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
-            <div className="side-sep" />
-            <div className="side-group">
-              <div className="side-label">Bookmarks</div>
-              {prefs.bookmarks.length === 0 && <p className="side-empty">Use the bookmark button next to a page title to pin it here.</p>}
-              {prefs.bookmarks.map((b) => (
-                <a key={b.href} href={b.href} className={`side-item bm ${hash === b.href ? "active" : ""}`}>
-                  <Icon name="bookmark" size={14} /> <span>{b.label}</span>
-                </a>
-              ))}
+                  ))}
+                </div>
+              </div>
             </div>
           </>
         )}
+        <div className="account">
+          <button className="account-row" onClick={() => setMenu((m) => !m)} aria-expanded={menu}>
+            <span className="avatar" aria-hidden>{initials(email)}</span>
+            <span className="account-name">{email ? email.split("@")[0] : "You"}</span>
+            <Icon name="dots" size={14} />
+          </button>
+          {menu && (
+            <div className="menu up" role="menu">
+              <div className="menu-head">{email ?? "Signed in through Cloudflare"}</div>
+              <a role="menuitem" href="#/settings/profile"><Icon name="user" size={13} /> Profile</a>
+              <a role="menuitem" href="#/settings/appearance"><Icon name="gear" size={13} /> Settings</a>
+              {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" size={13} /> Sign out</button>}
+            </div>
+          )}
+        </div>
       </aside>
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
-        <header className="topbar">
+        <header className={`topbar ${scrolled ? "scrolled" : ""}`}>
           <button className="icon-btn menu-btn" aria-label="Menu" onClick={() => setOpen(true)}><Icon name="menu" /></button>
           <button className="search-trigger" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
-            <Icon name="search" /> <span>Search for anything</span> <kbd>/</kbd>
+            <Icon name="search" size={13} /> <span>Search for anything</span>
           </button>
           <div className="topbar-right">
             {top}
-            <a className="icon-btn" href="#/settings/appearance" aria-label="Settings" title="Settings"><Icon name="gear" /></a>
-            <div className="avatar-wrap">
-              <button className="avatar" aria-label="Profile" onClick={() => setMenu((m) => !m)}>{(email ?? "P")[0].toUpperCase()}</button>
-              {menu && (
-                <div className="menu" role="menu">
-                  <div className="menu-head">{email ?? "Local session"}</div>
-                  <a role="menuitem" href="#/settings/profile"><Icon name="user" /> Profile</a>
-                  <a role="menuitem" href="#/settings/appearance"><Icon name="gear" /> Settings</a>
-                  {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" /> Sign out</button>}
-                </div>
-              )}
-            </div>
+            <a className="icon-btn" href="#/settings/appearance" aria-label="Settings" title="Settings"><Icon name="gear" size={15} /></a>
           </div>
         </header>
         <main className={wide ? "wide" : ""}>{children}</main>
       </div>
     </div>
   );
+}
+
+function initials(email?: string | null): string {
+  if (!email) return "P";
+  const name = email.split("@")[0].replace(/[^a-z]/gi, " ").trim().split(/\s+/);
+  return ((name[0]?.[0] ?? "P") + (name[1]?.[0] ?? "")).toUpperCase();
 }
 
 /** Page title with Mercury's round bookmark button beside it. */
