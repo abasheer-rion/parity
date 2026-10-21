@@ -1,0 +1,26 @@
+{
+  "id": "iran-deal-withdrawal-2018",
+  "name": "US quits the Iran nuclear deal",
+  "date": "2018-05-08",
+  "type": "sanctions",
+  "regions": [
+    "middle_east",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "iran"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "President Trump announced US withdrawal from the Iran nuclear deal and the return of sanctions, including on Iranian oil sales. Oil prices rose on expected losses of Iranian exports.",
+  "sources": [
+    {
+      "title": "United States withdrawal from the Iran nuclear deal",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action"
+    }
+  ]
+}

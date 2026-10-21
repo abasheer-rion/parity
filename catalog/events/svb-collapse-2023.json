@@ -1,0 +1,26 @@
+{
+  "id": "svb-collapse-2023",
+  "name": "Silicon Valley Bank collapses",
+  "date": "2023-03-10",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america",
+    "europe"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [
+    "metals"
+  ],
+  "description": "US regulators closed Silicon Valley Bank after a run on deposits, the largest bank failure since 2008. Bank stocks plunged, two-year Treasury yields had their biggest fall in decades and gold rallied.",
+  "sources": [
+    {
+      "title": "Collapse of Silicon Valley Bank",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank"
+    }
+  ]
+}

@@ -859,12 +859,14 @@ def check_references(r: Report):
             for u in refs.extract_urls(ln):
                 if refs.normalise_url(u) not in known:
                     r.err(f"{p.relative_to(ROOT).as_posix()}:{i}", f"source {u} {hint}")
-    for kind in ("algorithms", "datasets"):
+    for kind in ("algorithms", "datasets", "events"):
         for p in sorted((CATALOG / kind).glob("*.json")):
             try:
                 e = json.loads(p.read_text())
             except json.JSONDecodeError:
-                continue  # reported by check_catalog
+                if kind == "events":  # algorithms and datasets are reported by check_catalog
+                    r.err(p.relative_to(ROOT).as_posix(), "not valid JSON")
+                continue
             for field_name, value in refs.walk_strings(e):
                 for u in refs.extract_urls(value):
                     if refs.normalise_url(u) not in known:

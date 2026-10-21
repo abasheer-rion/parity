@@ -1,0 +1,27 @@
+{
+  "id": "israel-lebanon-war-2006",
+  "name": "Israel-Hezbollah war in Lebanon",
+  "date": "2006-07-12",
+  "type": "war",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "israel",
+    "lebanon",
+    "hezbollah",
+    "iran"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Hezbollah attacked an Israeli border patrol and Israel responded with air strikes and a ground war in Lebanon lasting 34 days. Oil reached record highs in July amid fears the conflict could draw in Iran.",
+  "sources": [
+    {
+      "title": "2006 Lebanon War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2006_Lebanon_War"
+    }
+  ]
+}

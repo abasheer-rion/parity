@@ -1,0 +1,26 @@
+{
+  "id": "north-korea-missile-over-japan-2017",
+  "name": "North Korean missile over Japan",
+  "date": "2017-08-29",
+  "type": "military_strike",
+  "regions": [
+    "east_asia"
+  ],
+  "actors": [
+    "north_korea",
+    "japan",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "metals"
+  ],
+  "description": "North Korea fired a Hwasong-12 ballistic missile over Hokkaido in northern Japan. The yen and gold rose as havens and Asian stocks fell briefly.",
+  "sources": [
+    {
+      "title": "2017 North Korean missile tests",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests"
+    }
+  ]
+}

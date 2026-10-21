@@ -1,0 +1,28 @@
+{
+  "id": "opec-plus-cut-2022",
+  "name": "OPEC+ cuts output by 2 million barrels a day",
+  "date": "2022-10-05",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "russia_cis",
+    "global"
+  ],
+  "actors": [
+    "opec",
+    "saudi_arabia",
+    "russia"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "OPEC+ agreed to lower its output target by 2 million barrels a day, the largest cut since 2020, despite US pressure to raise supply. Oil rose to its highest level in more than a month.",
+  "sources": [
+    {
+      "title": "2020-2022 world oil market chronology",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology"
+    }
+  ]
+}

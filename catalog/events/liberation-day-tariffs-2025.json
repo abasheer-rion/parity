@@ -1,0 +1,28 @@
+{
+  "id": "liberation-day-tariffs-2025",
+  "name": "Liberation Day tariffs",
+  "date": "2025-04-02",
+  "type": "trade_war",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "china",
+    "eu"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "President Trump announced sweeping tariffs on almost all US trading partners in a Rose Garden ceremony. Global stocks crashed over the next days, oil fell and, unusually, the dollar and Treasuries also sold off.",
+  "sources": [
+    {
+      "title": "Liberation Day tariffs",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Liberation_Day_tariffs"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "nixon-shock-1971",
+  "name": "Nixon ends dollar convertibility to gold",
+  "date": "1971-08-15",
+  "type": "central_bank_surprise",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 5,
+  "commodities": [
+    "metals"
+  ],
+  "description": "President Nixon suspended the conversion of US dollars into gold and announced wage and price controls and an import surcharge. It ended the Bretton Woods system of fixed exchange rates and started the era of floating currencies.",
+  "sources": [
+    {
+      "title": "Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Controls",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/gold-convertibility-ends"
+    },
+    {
+      "title": "Nixon shock",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Nixon_shock"
+    }
+  ]
+}

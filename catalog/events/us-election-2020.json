@@ -1,0 +1,22 @@
+{
+  "id": "us-election-2020",
+  "name": "2020 US election",
+  "date": "2020-11-03",
+  "type": "election",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Joe Biden defeated Donald Trump in a vote whose result took several days to confirm. Stocks rallied through election week as uncertainty faded.",
+  "sources": [
+    {
+      "title": "2020 United States presidential election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"
+    }
+  ]
+}

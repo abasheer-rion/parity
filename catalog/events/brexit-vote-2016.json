@@ -1,0 +1,25 @@
+{
+  "id": "brexit-vote-2016",
+  "name": "UK votes to leave the EU",
+  "date": "2016-06-23",
+  "type": "election",
+  "regions": [
+    "europe",
+    "global"
+  ],
+  "actors": [
+    "uk",
+    "eu",
+    "boe"
+  ],
+  "severity": 4,
+  "commodities": [],
+  "description": "The UK voted 52 to 48 percent to leave the European Union, against market expectations. Sterling had its largest one-day fall on record as results came in overnight and global stocks fell.",
+  "sources": [
+    {
+      "title": "2016 United Kingdom European Union membership referendum",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "russia-invades-ukraine-2022",
+  "name": "Russia invades Ukraine",
+  "date": "2022-02-24",
+  "type": "war",
+  "regions": [
+    "russia_cis",
+    "europe",
+    "global"
+  ],
+  "actors": [
+    "russia",
+    "ukraine",
+    "usa",
+    "eu"
+  ],
+  "severity": 5,
+  "commodities": [
+    "oil",
+    "gas",
+    "grains",
+    "metals"
+  ],
+  "description": "Russia launched a full-scale invasion of Ukraine. Oil, European gas, wheat and metals prices soared, deepening the global inflation shock and Europe's energy crisis.",
+  "sources": [
+    {
+      "title": "Russo-Ukrainian war (2022-present)",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine"
+    }
+  ]
+}

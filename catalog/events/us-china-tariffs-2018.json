@@ -1,0 +1,28 @@
+{
+  "id": "us-china-tariffs-2018",
+  "name": "US announces tariffs on China",
+  "date": "2018-03-22",
+  "type": "trade_war",
+  "regions": [
+    "north_america",
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "china"
+  ],
+  "severity": 3,
+  "commodities": [
+    "grains",
+    "metals"
+  ],
+  "description": "President Trump directed tariffs on 50 to 60 billion dollars of Chinese goods under Section 301, starting the US-China trade war. Stocks fell sharply as China prepared to retaliate on US farm goods.",
+  "sources": [
+    {
+      "title": "China-United States trade war",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war"
+    }
+  ]
+}

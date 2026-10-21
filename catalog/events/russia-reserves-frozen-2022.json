@@ -1,0 +1,30 @@
+{
+  "id": "russia-reserves-frozen-2022",
+  "name": "Russian central bank reserves frozen",
+  "date": "2022-02-28",
+  "type": "sanctions",
+  "regions": [
+    "russia_cis",
+    "europe",
+    "north_america"
+  ],
+  "actors": [
+    "russia",
+    "usa",
+    "eu",
+    "uk"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Western countries cut major Russian banks from SWIFT and blocked the Russian central bank from about 300 billion dollars of reserves. The ruble collapsed and Russia doubled its policy rate to 20 percent.",
+  "sources": [
+    {
+      "title": "International sanctions during the Russian invasion of Ukraine",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russian_invasion_of_Ukraine"
+    }
+  ]
+}

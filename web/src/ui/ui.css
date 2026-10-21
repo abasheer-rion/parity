@@ -252,3 +252,7 @@
 .gal > * { min-width: 0; }
 .gal-demo > * { min-width: 0; max-width: 100%; }
 .gal-demo.col > * { width: 100%; }
+
+/* Grids fold on narrow screens so cards never squeeze below reading width. */
+@media (max-width: 900px) { .ui-grid-3, .ui-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .ui-grid-2, .ui-grid-3 { grid-template-columns: minmax(0, 1fr); } }

@@ -1,0 +1,31 @@
+{
+  "id": "wti-negative-2020",
+  "name": "WTI oil goes negative",
+  "date": "2020-04-20",
+  "type": "oil_supply_shock",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "opec"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The front month WTI futures contract settled below zero for the first time as storage filled during lockdowns. Brent fell below 20 dollars the next day.",
+  "sources": [
+    {
+      "title": "2020-2022 world oil market chronology",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology"
+    },
+    {
+      "title": "Price of oil",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Price_of_oil"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "lehman-bankruptcy-2008",
+  "name": "Lehman Brothers bankruptcy",
+  "date": "2008-09-15",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 5,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "Lehman Brothers filed for Chapter 11, the largest bankruptcy in US history. Credit markets froze worldwide and the financial crisis turned into the deepest global recession since the 1930s.",
+  "sources": [
+    {
+      "title": "Bankruptcy of Lehman Brothers",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers"
+    }
+  ]
+}

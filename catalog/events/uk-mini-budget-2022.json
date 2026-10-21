@@ -1,0 +1,23 @@
+{
+  "id": "uk-mini-budget-2022",
+  "name": "UK mini-budget",
+  "date": "2022-09-23",
+  "type": "political_crisis",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk",
+    "boe"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The UK government announced large unfunded tax cuts. Gilt yields and sterling moved violently, the pound hit a record low against the dollar and the Bank of England had to buy gilts to stabilise pension funds.",
+  "sources": [
+    {
+      "title": "September 2022 United Kingdom mini-budget",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget"
+    }
+  ]
+}

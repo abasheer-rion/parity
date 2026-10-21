@@ -1,0 +1,28 @@
+{
+  "id": "iraq-invades-kuwait-1990",
+  "name": "Iraq invades Kuwait",
+  "date": "1990-08-02",
+  "type": "war",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "iraq",
+    "kuwait",
+    "usa",
+    "saudi_arabia"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Iraq invaded and occupied Kuwait, taking a large share of world oil supply off the market and threatening Saudi Arabia. Oil prices more than doubled within two months and stocks fell into a bear market.",
+  "sources": [
+    {
+      "title": "Iraqi invasion of Kuwait",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "asian-financial-crisis-1997",
+  "name": "Thailand floats the baht",
+  "date": "1997-07-02",
+  "type": "financial_crisis",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "thailand",
+    "indonesia",
+    "south_korea",
+    "malaysia"
+  ],
+  "severity": 4,
+  "commodities": [],
+  "description": "Thailand gave up defending its currency peg and floated the baht, which fell sharply. The crisis spread across East Asia, crushing currencies and stock markets in Indonesia, South Korea and Malaysia.",
+  "sources": [
+    {
+      "title": "1997 Asian financial crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis"
+    }
+  ]
+}

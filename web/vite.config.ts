@@ -25,8 +25,29 @@ function localResults(): Plugin {
   };
 }
 
+// The scenario simulator's file, written by `parity scenario export`. Dev only too.
+// PARITY_SCENARIOS_FILE points it at another file (a test fixture, say).
+function localScenarios(): Plugin {
+  const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(import.meta.dirname, "../engine/output/scenarios.json");
+  return {
+    name: "parity-local-scenarios",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/local/scenarios.json", (_req, res) => {
+        if (!existsSync(file)) {
+          res.statusCode = 404;
+          res.end("Run `parity scenario export` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(file));
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), localResults(), parityDocs()],
+  plugins: [react(), localResults(), localScenarios(), parityDocs()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

@@ -1,0 +1,25 @@
+{
+  "id": "iran-iraq-war-1980",
+  "name": "Iraq invades Iran",
+  "date": "1980-09-22",
+  "type": "war",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "iraq",
+    "iran"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Iraq launched a full-scale invasion of Iran, starting an eight-year war between two major oil exporters. Exports from both countries fell sharply and oil prices rose further.",
+  "sources": [
+    {
+      "title": "Iran-Iraq War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War"
+    }
+  ]
+}

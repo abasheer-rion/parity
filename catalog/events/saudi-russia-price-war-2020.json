@@ -1,0 +1,28 @@
+{
+  "id": "saudi-russia-price-war-2020",
+  "name": "Saudi-Russia oil price war",
+  "date": "2020-03-08",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "russia_cis",
+    "global"
+  ],
+  "actors": [
+    "saudi_arabia",
+    "russia",
+    "opec"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "After Russia rejected further OPEC+ cuts on 6 March, Saudi Arabia announced deep price discounts and plans to raise output. Oil fell about 25 percent when markets opened on 9 March, adding to the COVID crash.",
+  "sources": [
+    {
+      "title": "2020 Russia-Saudi Arabia oil price war",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war"
+    }
+  ]
+}

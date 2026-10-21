@@ -1,0 +1,34 @@
+{
+  "id": "arab-oil-embargo-1973",
+  "name": "Arab oil embargo",
+  "date": "1973-10-17",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "north_america",
+    "europe",
+    "global"
+  ],
+  "actors": [
+    "opec",
+    "saudi_arabia",
+    "usa"
+  ],
+  "severity": 5,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Arab oil producers announced production cuts on 17 October 1973 and an embargo on the United States two days later, in response to US support for Israel. Oil prices roughly quadrupled, feeding inflation and recession across the West.",
+  "sources": [
+    {
+      "title": "1973 oil crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1973_oil_crisis"
+    },
+    {
+      "title": "Oil Shock of 1973-74",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74"
+    }
+  ]
+}

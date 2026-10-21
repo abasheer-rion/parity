@@ -1,0 +1,24 @@
+{
+  "id": "boj-rate-hike-2024",
+  "name": "BoJ raises rates",
+  "date": "2024-07-31",
+  "type": "central_bank_surprise",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "japan",
+    "boj"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The Bank of Japan raised its policy rate to about 0.25 percent and set out a plan to slow bond buying. The yen surged, the yen carry trade unwound and Japanese stocks crashed on 5 August.",
+  "sources": [
+    {
+      "title": "Change in the Guideline for Money Market Operations and Decision on the Plan for the Reduction of the Purchase Amount of Japanese Government Bonds",
+      "publisher": "Bank of Japan",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240731a.pdf"
+    }
+  ]
+}

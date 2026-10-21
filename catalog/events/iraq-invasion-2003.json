@@ -1,0 +1,27 @@
+{
+  "id": "iraq-invasion-2003",
+  "name": "US-led invasion of Iraq",
+  "date": "2003-03-20",
+  "type": "war",
+  "regions": [
+    "middle_east",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "uk",
+    "iraq"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "A US-led coalition invaded Iraq. Oil had risen ahead of the war on supply fears and fell once fighting began, while stocks rallied in a classic sell the rumour, buy the news pattern.",
+  "sources": [
+    {
+      "title": "2003 invasion of Iraq",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2003_invasion_of_Iraq"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "paris-attacks-2015",
+  "name": "Paris attacks",
+  "date": "2015-11-13",
+  "type": "terrorist_attack",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "france"
+  ],
+  "severity": 1,
+  "commodities": [],
+  "description": "Islamic State gunmen and suicide bombers attacked a concert hall, a stadium and cafes in Paris, killing 130 people. European markets fell only briefly when they opened the following Monday.",
+  "sources": [
+    {
+      "title": "November 2015 Paris attacks",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/November_2015_Paris_attacks"
+    }
+  ]
+}

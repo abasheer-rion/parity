@@ -1,0 +1,24 @@
+{
+  "id": "black-monday-1987",
+  "name": "Black Monday stock market crash",
+  "date": "1987-10-19",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 4,
+  "commodities": [],
+  "description": "The Dow Jones Industrial Average fell about 23 percent in a single day, the largest one-day percentage drop in its history. The Fed issued a statement the next morning promising liquidity to the financial system.",
+  "sources": [
+    {
+      "title": "Stock Market Crash of 1987",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/stock-market-crash-of-1987"
+    }
+  ]
+}

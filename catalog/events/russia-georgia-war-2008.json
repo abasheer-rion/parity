@@ -1,0 +1,27 @@
+{
+  "id": "russia-georgia-war-2008",
+  "name": "Russia invades Georgia",
+  "date": "2008-08-08",
+  "type": "war",
+  "regions": [
+    "russia_cis",
+    "europe"
+  ],
+  "actors": [
+    "russia",
+    "georgia"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Russia launched a full-scale land, air and sea invasion of Georgia after fighting in South Ossetia. The ruble and Russian stocks fell and the war raised concerns about energy pipelines through the Caucasus.",
+  "sources": [
+    {
+      "title": "Russo-Georgian War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Russo-Georgian_War"
+    }
+  ]
+}

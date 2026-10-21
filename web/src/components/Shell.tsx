@@ -19,6 +19,7 @@ const MARKETS: NavItem[] = [
       { href: "#/signals", label: "Signals", routes: ["signals"] },
     ],
   },
+  { href: "#/scenarios", label: "Scenarios", icon: "compass", routes: ["scenarios"] },
   { href: "#/catalog", label: "Catalog", icon: "catalog", routes: ["catalog", "algo"] },
   { href: "#/ledger", label: "Ledger", icon: "ledger", routes: ["ledger"] },
   {

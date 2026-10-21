@@ -1,0 +1,27 @@
+{
+  "id": "hamas-attack-israel-2023",
+  "name": "Hamas attack on Israel",
+  "date": "2023-10-07",
+  "type": "war",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "israel",
+    "hamas",
+    "iran"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Hamas launched a surprise attack on southern Israel, killing about 1,200 people, and Israel declared war on Hamas in Gaza. Oil and gold rose on fears of a wider regional war involving Iran.",
+  "sources": [
+    {
+      "title": "October 7 attacks",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/October_7_attacks"
+    }
+  ]
+}

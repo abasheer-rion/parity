@@ -1,0 +1,24 @@
+{
+  "id": "greece-junk-downgrade-2010",
+  "name": "Greece downgraded to junk",
+  "date": "2010-04-27",
+  "type": "financial_crisis",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "greece",
+    "eu",
+    "ecb"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Standard and Poor's cut Greece's sovereign rating to junk, freezing it out of private markets. Days later the EU, ECB and IMF agreed a 110 billion euro bailout, and the euro debt crisis spread to other countries.",
+  "sources": [
+    {
+      "title": "Euro area crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/European_debt_crisis"
+    }
+  ]
+}

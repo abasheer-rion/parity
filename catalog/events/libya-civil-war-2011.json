@@ -1,0 +1,25 @@
+{
+  "id": "libya-civil-war-2011",
+  "name": "Libyan uprising begins",
+  "date": "2011-02-15",
+  "type": "war",
+  "regions": [
+    "africa",
+    "middle_east"
+  ],
+  "actors": [
+    "libya"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Protests in Benghazi escalated into civil war between Gaddafi loyalists and rebels, followed by NATO intervention in March. Most of Libya's oil exports stopped and Brent rose above 120 dollars.",
+  "sources": [
+    {
+      "title": "Libyan civil war (2011)",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Libyan_civil_war_(2011)"
+    }
+  ]
+}

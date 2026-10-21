@@ -1,0 +1,25 @@
+{
+  "id": "pelosi-taiwan-visit-2022",
+  "name": "Pelosi visits Taiwan",
+  "date": "2022-08-02",
+  "type": "political_crisis",
+  "regions": [
+    "east_asia",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "china",
+    "taiwan"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "US House Speaker Nancy Pelosi landed in Taiwan despite Chinese warnings. China responded with large military drills around the island, and Asian markets dipped briefly.",
+  "sources": [
+    {
+      "title": "2022 visit by Nancy Pelosi to Taiwan",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2022_visit_by_Nancy_Pelosi_to_Taiwan"
+    }
+  ]
+}

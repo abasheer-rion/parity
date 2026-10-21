@@ -1,0 +1,23 @@
+{
+  "id": "snb-floor-removal-2015",
+  "name": "SNB scraps the franc floor",
+  "date": "2015-01-15",
+  "type": "central_bank_surprise",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "switzerland",
+    "snb"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The Swiss National Bank unexpectedly abandoned its minimum rate of 1.20 francs per euro and cut its deposit rate to minus 0.75 percent. The franc jumped by around 30 percent at one point and several currency brokers failed.",
+  "sources": [
+    {
+      "title": "Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%",
+      "publisher": "Swiss National Bank",
+      "url": "https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115"
+    }
+  ]
+}

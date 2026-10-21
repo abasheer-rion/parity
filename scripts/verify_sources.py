@@ -321,6 +321,12 @@ def collect():
             else:
                 for _, u in find_urls(s):
                     urls[u].append({"file": rel, "where": path})
+    for f in sorted((ROOT / "catalog" / "events").glob("*.json")):
+        d = json.loads(f.read_text())
+        rel = str(f.relative_to(ROOT))
+        for i, src in enumerate(d.get("sources", [])):
+            if re.match(r"https?://", src.get("url", "")):
+                urls[src["url"].strip()].append({"file": rel, "where": f"sources[{i}].url"})
     for f in sorted((ROOT / "catalog" / "datasets").glob("*.json")):
         d = json.loads(f.read_text())
         rel = str(f.relative_to(ROOT))

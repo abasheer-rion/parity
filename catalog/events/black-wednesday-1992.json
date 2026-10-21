@@ -1,0 +1,24 @@
+{
+  "id": "black-wednesday-1992",
+  "name": "UK leaves the ERM (Black Wednesday)",
+  "date": "1992-09-16",
+  "type": "financial_crisis",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk",
+    "boe",
+    "germany"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The UK withdrew sterling from the European Exchange Rate Mechanism after failing to defend the pound with rate rises and reserve sales. Sterling fell sharply and the episode spread to other ERM currencies.",
+  "sources": [
+    {
+      "title": "Black Wednesday",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Black_Wednesday"
+    }
+  ]
+}

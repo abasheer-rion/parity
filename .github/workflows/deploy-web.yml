@@ -9,9 +9,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run"]
@@ -51,6 +51,12 @@ jobs:
         run: |
           pip install "psycopg[binary]>=3.2"
           python3 ../scripts/export_site_data.py dist/data
+      - name: Scenario analogues (event studies over public prices)
+        continue-on-error: true  # the page explains itself when this file is missing
+        run: |
+          pip install -q -e ../engine
+          parity fetch
+          parity scenario export --out dist/data/scenarios.json
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v4

@@ -1,0 +1,29 @@
+{
+  "id": "covid-global-spread-2020",
+  "name": "COVID-19 spreads outside China",
+  "date": "2020-02-24",
+  "type": "pandemic",
+  "regions": [
+    "global",
+    "europe",
+    "east_asia"
+  ],
+  "actors": [
+    "china",
+    "italy",
+    "south_korea"
+  ],
+  "severity": 5,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "Over a weekend, COVID-19 outbreaks grew sharply in Italy, South Korea and Iran. Markets fell more than 3 percent on Monday, the start of the fastest crash from a record high in history.",
+  "sources": [
+    {
+      "title": "2020 stock market crash",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2020_stock_market_crash"
+    }
+  ]
+}

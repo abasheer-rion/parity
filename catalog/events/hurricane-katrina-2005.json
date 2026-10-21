@@ -1,0 +1,25 @@
+{
+  "id": "hurricane-katrina-2005",
+  "name": "Hurricane Katrina",
+  "date": "2005-08-29",
+  "type": "natural_disaster",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Hurricane Katrina made landfall in Louisiana as a strong Category 3 storm and flooded New Orleans. It shut much of the Gulf of Mexico oil and gas output and many refineries, pushing gasoline and natural gas prices to records.",
+  "sources": [
+    {
+      "title": "Hurricane Katrina",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hurricane_Katrina"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 10 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 11 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 41 |
@@ -30,13 +30,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
+- 2026-10-21 [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - 2026-10-21 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-21 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 - 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - 2026-10-21 [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
-- 2026-10-21 [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 
 ## intent
 
@@ -118,6 +118,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
 | REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 
 ## log
 

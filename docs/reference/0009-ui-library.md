@@ -38,7 +38,7 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 | Layout | `PageHeader`, `Panel`, `Grid`, `Stat`, `KeyValues`, `Section`, `Badge`, `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState`, `Skeleton` |
 | Overlays | `Tooltip`, `Menu`, `Dialog`, `toast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
 | Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`; durations `--dur-1` to `--dur-4` |
-| Charts | `HeroChart`, `LineChart`, `BarChart`, `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |
+| Charts | `HeroChart`, `LineChart`, `BarChart`, `FanChart` (spread of outcomes after past events: single paths, middle-half and full-range bands, median), `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |
 | Icons | `Icon` with 45 names, 16px stroke icons drawn for this site |
 
 ## Rules

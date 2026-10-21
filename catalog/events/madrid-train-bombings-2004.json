@@ -1,0 +1,22 @@
+{
+  "id": "madrid-train-bombings-2004",
+  "name": "Madrid train bombings",
+  "date": "2004-03-11",
+  "type": "terrorist_attack",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "spain"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Bombs on commuter trains in Madrid killed 193 people three days before a Spanish general election. European stocks fell on the day and the attack was followed by a change of government.",
+  "sources": [
+    {
+      "title": "2004 Madrid train bombings",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2004_Madrid_train_bombings"
+    }
+  ]
+}

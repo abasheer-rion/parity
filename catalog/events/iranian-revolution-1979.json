@@ -1,0 +1,31 @@
+{
+  "id": "iranian-revolution-1979",
+  "name": "Shah leaves Iran",
+  "date": "1979-01-16",
+  "type": "political_crisis",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "iran",
+    "usa"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The Shah left Iran on 16 January 1979 as the revolution took hold, after strikes had already cut Iranian oil output. The disruption set off the second oil shock, with prices more than doubling over the following year.",
+  "sources": [
+    {
+      "title": "Iranian Revolution",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Iranian_Revolution"
+    },
+    {
+      "title": "Oil Shock of 1978-79",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1978-79"
+    }
+  ]
+}

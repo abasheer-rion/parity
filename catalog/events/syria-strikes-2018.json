@@ -1,0 +1,30 @@
+{
+  "id": "syria-strikes-2018",
+  "name": "US, UK and France strike Syria",
+  "date": "2018-04-14",
+  "type": "military_strike",
+  "regions": [
+    "middle_east",
+    "europe",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "uk",
+    "france",
+    "syria",
+    "russia"
+  ],
+  "severity": 1,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The United States, the UK and France struck Syrian chemical weapons sites after a gas attack in Douma. The strikes were limited and markets barely moved when they reopened.",
+  "sources": [
+    {
+      "title": "April 2018 missile strikes against Syria",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/April_2018_missile_strikes_against_Syria"
+    }
+  ]
+}

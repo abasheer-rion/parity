@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-565 sources. 112 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+650 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 108 |
+| [Papers](#papers) | 113 |
 | [Preprints and working papers](#preprints-and-working-papers) | 32 |
 | [Books](#books) | 8 |
 | [Datasets](#datasets) | 53 |
 | [Software](#software) | 61 |
-| [Web pages](#web-pages) | 238 |
+| [Web pages](#web-pages) | 318 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 10 |
 | [News](#news) | 3 |
@@ -145,6 +145,12 @@ Beckmann, Joscha; Czudaj, Robert L.; Arora, Vipin (2020). The relationship betwe
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### berkman2011
+
+Berkman, Henk; Jacobsen, Ben; Lee, John B. (2011). Time-varying rare disaster risk and stock returns. *Journal of Financial Economics 101(2), 313-332*. doi:10.1016/j.jfineco.2011.02.019 <https://doi.org/10.1016/j.jfineco.2011.02.019>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
 ### bortnikova2026
 
 Bortnikova, Kseniya; Bajzik, Josef; Kocenda, Evzen (2026). Macroeconomic News and Exchange Rates: A Meta-Analysis of Event Studies. *Journal of Economic Surveys*. doi:10.1111/joes.70159 <https://doi.org/10.1111/joes.70159>. <https://onlinelibrary.wiley.com/doi/10.1111/joes.70159>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -165,6 +171,12 @@ Brock, William; Lakonishok, Josef; LeBARON, BLAKE (1992). Simple Technical Tradi
 
 Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [ALG-0061](algorithms/0061-golden-cross-50-200.md).
 
+### brown1985
+
+Brown, Stephen J.; Warner, Jerold B. (1985). Using daily stock returns. *Journal of Financial Economics 14(1), 3-31*. doi:10.1016/0304-405x(85)90042-x <https://doi.org/10.1016/0304-405x(85)90042-x>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
 ### burnside2011
 
 Burnside, A. Craig; Eichenbaum, Martin; Kleshchelski, Isaac; Rebelo, Sergio (2011). Do Peso Problems Explain the Returns to the Carry Trade? *Review of Financial Studies 24(3), 853-891*. doi:10.3386/w14054 <https://doi.org/10.3386/w14054>. <https://www.nber.org/papers/w14054>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -176,6 +188,12 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Caginalp and Laurent (1998). Japanese Candlestick Charting Techniques. *1991*. <https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/candlestick-price-action-patterns.json](../catalog/algorithms/candlestick-price-action-patterns.json), [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [catalog/algorithms/rsi-overbought-oversold.json](../catalog/algorithms/rsi-overbought-oversold.json), [catalog/algorithms/turtle-donchian-breakout.json](../catalog/algorithms/turtle-donchian-breakout.json), [ALG-0056](algorithms/0056-candlestick-price-action-patterns.md), [ALG-0061](algorithms/0061-golden-cross-50-200.md), [ALG-0070](algorithms/0070-rsi-overbought-oversold.md), [ALG-0072](algorithms/0072-turtle-donchian-breakout.md).
+
+### caldara2022
+
+Caldara, Dario; Iacoviello, Matteo (2022). Measuring Geopolitical Risk. *American Economic Review 112(4), 1194-1225*. doi:10.1257/aer.20191823 <https://doi.org/10.1257/aer.20191823>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
 ### cederburg2020
 
@@ -266,6 +284,12 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Falces Marin, Javier; Díaz Pardo de Vera, David; Lopez Gonzalo, Eduardo (2022). A reinforcement learning approach to improve the performance of the Avellaneda-Stoikov market-making algorithm. *PLOS ONE 17(12), e0277042*. doi:10.1371/journal.pone.0277042 <https://doi.org/10.1371/journal.pone.0277042>. <https://pmc.ncbi.nlm.nih.gov/articles/PMC9767337/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/algorithms/avellaneda-stoikov-market-making.json), [ALG-0021](algorithms/0021-avellaneda-stoikov-market-making.md).
+
+### fama1969
+
+Fama, Eugene F.; Fisher, Lawrence; Jensen, Michael C.; Roll, Richard (1969). The Adjustment of Stock Prices to New Information. *International Economic Review 10(1), 1*. doi:10.2307/2525569 <https://doi.org/10.2307/2525569>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
 ### fama1984
 
@@ -441,7 +465,7 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
 Kilian, Lutz (2009). Not All Oil Price Shocks Are Alike: Disentangling Demand and Supply Shocks in the Crude Oil Market. *American Economic Review 99(3), 1053-1069*. doi:10.1257/aer.99.3.1053 <https://doi.org/10.1257/aer.99.3.1053>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md), [RES-0001](research/0001-reading-list.md).
 
 ### kohlscheen2017
 
@@ -670,6 +694,12 @@ Cited in: [catalog/algorithms/fibonacci-retracements.json](../catalog/algorithms
 Parity team (2026). HYP-0003 in this repository, building on Chen and Rogoff (2003) and Kohlscheen, Avalos and Schrimpf. *2017*. <docs/hypotheses/0003-commodity-currencies-catch-up.md>. Accessed 2026-10-21. Verification: ok.
 
 Cited in: [catalog/algorithms/parity-commodity-gap.json](../catalog/algorithms/parity-commodity-gap.json).
+
+### ranaldo2010
+
+Ranaldo, Angelo; Söderlind, Paul (2010). Safe Haven Currencies. *Review of Finance 14(3), 385-407*. doi:10.1093/rof/rfq007 <https://doi.org/10.1093/rof/rfq007>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
 ### rees2025
 
@@ -1717,6 +1747,12 @@ Interactive Brokers paper trading: API documentation. (n.d.). *Interactive Broke
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md).
 
+### url-0084a600
+
+Bankruptcy of Lehman Brothers. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/lehman-bankruptcy-2008.json](../catalog/events/lehman-bankruptcy-2008.json).
+
 ### url-00b49007
 
 FOREX Data - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/docs/v2/writing-algorithms/datasets/quantconnect/forex-data>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1724,6 +1760,18 @@ FOREX Data - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantcon
 Note: Linked in this repo as: FX data docs.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-00f23b97
+
+Federal Reserve issues FOMC statement. (n.d.). *Federal Reserve*. <https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/fed-emergency-cut-2020.json](../catalog/events/fed-emergency-cut-2020.json).
+
+### url-0140327c
+
+2015-2016 Chinese stock market turbulence. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2015%E2%80%932016_Chinese_stock_market_turbulence>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/china-yuan-devaluation-2015.json](../catalog/events/china-yuan-devaluation-2015.json).
 
 ### url-01ce8a0f
 
@@ -1761,6 +1809,24 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-079e8667
+
+Assassination of Qasem Soleimani. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/soleimani-strike-2020.json](../catalog/events/soleimani-strike-2020.json).
+
+### url-089e38b3
+
+2002-2004 SARS outbreak. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2002%E2%80%932004_SARS_outbreak>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/sars-global-alert-2003.json](../catalog/events/sars-global-alert-2003.json).
+
+### url-08ba8307
+
+China-United States trade war. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-china-tariffs-2018.json](../catalog/events/us-china-tariffs-2018.json), [catalog/events/us-china-trade-escalation-2019.json](../catalog/events/us-china-trade-escalation-2019.json).
+
 ### url-095b7d2f
 
 How Do Factor Premia Vary Over Time? A Century of Evidence, Factor Data Monthly. (n.d.). *AQR Capital Management*. <https://www.aqr.com/Insights/Datasets/Century-of-Factor-Premia-Monthly>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1777,6 +1843,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-09dbe3dc
+
+1998 Russian financial crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1998_Russian_financial_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/russia-default-1998.json](../catalog/events/russia-default-1998.json).
+
 ### url-0ac20b3f
 
 St. Louis Fed Web Services: fred/series/vintagedates. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/docs/api/fred/series_vintagedates.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1784,6 +1856,12 @@ St. Louis Fed Web Services: fred/series/vintagedates. (n.d.). *fred.stlouisfed.o
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-0ad0582c
+
+1973 oil crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1973_oil_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/arab-oil-embargo-1973.json](../catalog/events/arab-oil-embargo-1973.json).
 
 ### url-0ae2553a
 
@@ -1819,6 +1897,12 @@ No title recorded. (n.d.). *US Department of the Treasury, Bureau of the Fiscal 
 
 Cited in: [catalog/datasets/treasury-fiscal-data.json](../catalog/datasets/treasury-fiscal-data.json).
 
+### url-0e3aeacf
+
+2004 Madrid train bombings. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2004_Madrid_train_bombings>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/madrid-train-bombings-2004.json](../catalog/events/madrid-train-bombings-2004.json).
+
 ### url-0e9a3928
 
 \[mq5\] Download news data using Webrequest ==\> .json file - Market News - 27 April 2025 - Traders' Blogs. (n.d.). *Fair Economy, Inc. (Forex Factory)*. <https://www.mql5.com/en/blogs/post/762107>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1845,6 +1929,12 @@ Massive (formerly Polygon.io): API documentation. (n.d.). *Massive.com (formerly
 
 Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DAT-0023](datasets/0023-massive.md).
 
+### url-1596278d
+
+Euro area crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/European_debt_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/greece-junk-downgrade-2010.json](../catalog/events/greece-junk-downgrade-2010.json).
+
 ### url-15ad6ef3
 
 Three Crypto Edges. What Survived the Audit? - DEV Community. (n.d.). *dev.to*. <https://dev.to/pavel_kkkkazantsev/three-crypto-edges-three-different-killers-1i6o>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1859,6 +1949,12 @@ IMF Data API (SDMX 2.1 and 3.0): API documentation. (n.d.). *International Monet
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
 
+### url-16436119
+
+Collapse of Silicon Valley Bank. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/svb-collapse-2023.json](../catalog/events/svb-collapse-2023.json).
+
 ### url-1655590a
 
 GDELT Project: API documentation. (n.d.). *The GDELT Project*. <https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1872,6 +1968,12 @@ Free Finance Data Sets for the Quants | Dean Markwick. (n.d.). *dm13450.github.i
 Note: Linked in this repo as: Free finance datasets for quants, 2023.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-197d2a85
+
+7 July 2005 London bombings. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/7_July_2005_London_bombings>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/london-bombings-2005.json](../catalog/events/london-bombings-2005.json).
 
 ### url-1a7022ea
 
@@ -1909,6 +2011,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/eia.json](../catalog/datasets/eia.json), [DAT-0011](datasets/0011-eia.md).
 
+### url-1c26fadf
+
+Oil Shock of 1978-79. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/oil-shock-of-1978-79>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iranian-revolution-1979.json](../catalog/events/iranian-revolution-1979.json).
+
 ### url-1de065fc
 
 No title recorded. (n.d.). *US Energy Information Administration*. <https://api.eia.gov/v2/petroleum/pri/spt/data/?frequency=daily>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1920,6 +2028,12 @@ Cited in: [catalog/datasets/eia.json](../catalog/datasets/eia.json), [DAT-0011](
 forex topic. (n.d.). *udemy.com*. <https://www.udemy.com/topic/forex/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-1e79c280
+
+Russo-Ukrainian war (2022-present). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/russia-invades-ukraine-2022.json](../catalog/events/russia-invades-ukraine-2022.json).
 
 ### url-1f316539
 
@@ -1959,6 +2073,18 @@ Binance public data (data.binance.vision): API documentation. (n.d.). *Binance*.
 
 Cited in: [catalog/datasets/binance-public-data.json](../catalog/datasets/binance-public-data.json), [DAT-0005](datasets/0005-binance-public-data.md).
 
+### url-262208e6
+
+April 2024 Iranian strikes on Israel. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_on_Israel>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iran-strikes-israel-2024-04.json](../catalog/events/iran-strikes-israel-2024-04.json).
+
+### url-26a5c474
+
+Change in the Guideline for Money Market Operations and Decision on the Plan for the Reduction of the Purchase Amount of Japanese Government Bonds. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240731a.pdf>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/boj-rate-hike-2024.json](../catalog/events/boj-rate-hike-2024.json).
+
 ### url-2731d111
 
 No title recorded. (n.d.). *youtube.com*. <https://www.youtube.com/@InnerCircleTrader>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1983,6 +2109,12 @@ No title recorded. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/academy
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-2ab80190
+
+Iran-Iraq War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iran-iraq-war-1980.json](../catalog/events/iran-iraq-war-1980.json).
+
 ### url-2d46dac4
 
 academic liaison. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/academy/academic-liaison/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1996,6 +2128,24 @@ I built a crypto trading bot. It lost to doing nothing. - DEV Community. (n.d.).
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-2e730361
+
+October 7 attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/October_7_attacks>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/hamas-attack-israel-2023.json](../catalog/events/hamas-attack-israel-2023.json).
+
+### url-2e8ec70e
+
+Stock Market Crash of 1987. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/stock-market-crash-of-1987>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/black-monday-1987.json](../catalog/events/black-monday-1987.json).
+
+### url-2f34d17a
+
+Price of oil. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Price_of_oil>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/wti-negative-2020.json](../catalog/events/wti-negative-2020.json).
 
 ### url-31304d67
 
@@ -2017,11 +2167,23 @@ FRED and ALFRED (Federal Reserve Bank of St. Louis): API documentation. (n.d.). 
 
 Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015](datasets/0015-fred.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-32bf2590
+
+United States federal government credit-rating downgrades. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_federal_government_credit-rating_downgrades>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-credit-downgrade-2011.json](../catalog/events/us-credit-downgrade-2011.json).
+
 ### url-3365363a
 
 No title recorded. (n.d.). *Stooq.com*. <https://stooq.com/q/d/l/?s=spy.us&i=d>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/stooq.json](../catalog/datasets/stooq.json), [DAT-0028](datasets/0028-stooq.md).
+
+### url-3379a52d
+
+2009 swine flu pandemic in Mexico. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2009_swine_flu_pandemic_in_Mexico>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/h1n1-outbreak-2009.json](../catalog/events/h1n1-outbreak-2009.json).
 
 ### url-33969e0b
 
@@ -2030,6 +2192,24 @@ CFD Trading | CMC Markets. (n.d.). *cmcmarkets.com*. <https://www.cmcmarkets.com
 Note: Linked in this repo as: cmcmarkets.com CFD page.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-3398b560
+
+2020-2022 world oil market chronology. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/opec-plus-cut-2022.json](../catalog/events/opec-plus-cut-2022.json), [catalog/events/wti-negative-2020.json](../catalog/events/wti-negative-2020.json).
+
+### url-348d1f64
+
+Hurricane Harvey. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Hurricane_Harvey>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/hurricane-harvey-2017.json](../catalog/events/hurricane-harvey-2017.json).
+
+### url-37211841
+
+Gulf War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Gulf_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/desert-storm-1991.json](../catalog/events/desert-storm-1991.json).
 
 ### url-38591fba
 
@@ -2044,6 +2224,12 @@ The FOMC Day Puzzle: Why Every G10 Currency Rallies Against the Dollar. (n.d.). 
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-fomc-dollar-announcement.json](../catalog/algorithms/fx-fomc-dollar-announcement.json), [ALG-0008](algorithms/0008-fx-fomc-dollar-announcement.md).
+
+### url-3947a0b5
+
+Verbatim of the remarks made by Mario Draghi. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/press/key/date/2012/html/sp120726.en.html>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/draghi-whatever-it-takes-2012.json](../catalog/events/draghi-whatever-it-takes-2012.json).
 
 ### url-39fff508
 
@@ -2079,6 +2265,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-3c64e40b
+
+Russo-Georgian War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Russo-Georgian_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/russia-georgia-war-2008.json](../catalog/events/russia-georgia-war-2008.json).
+
 ### url-3c74def2
 
 Georgia Tech (n.d.). Machine Learning for Trading. *lucylabs.gatech.edu*. <https://lucylabs.gatech.edu/ml4t>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2098,6 +2290,12 @@ Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.js
 No title recorded. (n.d.). *SIX Group for ISO*. <https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
+
+### url-40552248
+
+October 2024 Israeli strikes on Iran. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/israel-strikes-iran-2024-10.json](../catalog/events/israel-strikes-iran-2024-10.json).
 
 ### url-41498be4
 
@@ -2179,6 +2377,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [REF-0003](reference/0003-data-sources.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-4c5ba82d
+
+2011 Tohoku earthquake and tsunami. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/tohoku-earthquake-2011.json](../catalog/events/tohoku-earthquake-2011.json).
+
 ### url-4dd21709
 
 Stock Market Tools | Tiingo. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/about/pricing>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2216,6 +2420,12 @@ Terms of Use. (n.d.). *AQR Capital Management*. <https://www.aqr.com/Terms-of-Us
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/aqr-datasets.json](../catalog/datasets/aqr-datasets.json), [DAT-0003](datasets/0003-aqr-datasets.md).
+
+### url-521aa37d
+
+2016 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2016_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/trump-election-2016.json](../catalog/events/trump-election-2016.json).
 
 ### url-52b8f71d
 
@@ -2313,6 +2523,12 @@ publisher page. (n.d.). *systematicmoney.org*. <https://www.systematicmoney.org/
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-5c13f005
+
+2025 United States strikes on Iranian nuclear sites. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2025_United_States_strikes_on_Iranian_nuclear_sites>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-strikes-iran-nuclear-sites-2025.json](../catalog/events/us-strikes-iran-nuclear-sites-2025.json).
+
 ### url-5c18c558
 
 Rest v20 API. (n.d.). *OANDA Corporation*. <https://help.oanda.com/us/en/faqs/rest-v20-api-troubleshooting-guide.htm>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2357,6 +2573,12 @@ example query. (n.d.). *data-api.ecb.europa.eu*. <https://data-api.ecb.europa.eu
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-6266193b
+
+2017 Shayrat missile strike. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2017_Shayrat_missile_strike>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-strike-syria-shayrat-2017.json](../catalog/events/us-strike-syria-shayrat-2017.json).
+
 ### url-640cd1cb
 
 Value and Momentum Everywhere: Factors, Monthly. (n.d.). *aqr.com*. <https://www.aqr.com/Insights/Datasets/Value-and-Momentum-Everywhere-Factors-Monthly>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2384,6 +2606,12 @@ Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-00
 Krohn, Mueller and Whelan (2020 working paper; JF 2024), EUR around London fix. (n.d.). *sites.insead.edu*. <https://sites.insead.edu/facultyresearch/research/file.cfm?fid=66802>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md).
+
+### url-6755fa04
+
+NATO bombing of Yugoslavia. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/NATO_bombing_of_Yugoslavia>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/nato-kosovo-bombing-1999.json](../catalog/events/nato-kosovo-bombing-1999.json).
 
 ### url-681eac41
 
@@ -2445,6 +2673,12 @@ Note: Linked in this repo as: a Python walk-through.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-6bb05aa8
+
+1997 Asian financial crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1997_Asian_financial_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/asian-financial-crisis-1997.json](../catalog/events/asian-financial-crisis-1997.json).
+
 ### url-6c55baa0
 
 Pricing | Massive. (n.d.). *Massive.com (formerly Polygon.io)*. <https://massive.com/pricing?product=currencies>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2489,6 +2723,24 @@ No title recorded. (n.d.). *Frankfurter (open source project)*. <https://api.fra
 
 Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.json), [DAT-0014](datasets/0014-frankfurter.md).
 
+### url-724ec5f1
+
+2020 Russia-Saudi Arabia oil price war. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/saudi-russia-price-war-2020.json](../catalog/events/saudi-russia-price-war-2020.json).
+
+### url-72eea26c
+
+Twelve-Day War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Twelve-Day_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/israel-strikes-iran-2025-06.json](../catalog/events/israel-strikes-iran-2025-06.json).
+
+### url-7384687e
+
+Statement on Monetary Policy. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2022/k221220a.pdf>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/boj-yield-curve-tweak-2022.json](../catalog/events/boj-yield-curve-tweak-2022.json).
+
 ### url-73f73992
 
 third party guide. (n.d.). *bluecapitaltrading.com*. <https://www.bluecapitaltrading.com/products/free-historical-data/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2500,6 +2752,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 No title recorded. (n.d.). *Dukascopy Bank SA*. <https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5>. Accessed 2026-10-21. Verification: error (checked 2026-10-21).
 
 Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
+
+### url-7710a4ba
+
+Liberation Day tariffs. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Liberation_Day_tariffs>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/liberation-day-tariffs-2025.json](../catalog/events/liberation-day-tariffs-2025.json).
 
 ### url-777e59be
 
@@ -2523,6 +2781,12 @@ Note: Linked in this repo as: WSO, May 2021 (archive).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-78fd770a
+
+Mexican peso crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Mexican_peso_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/mexican-peso-crisis-1994.json](../catalog/events/mexican-peso-crisis-1994.json).
+
 ### url-7a23b016
 
 eToro general risk disclosure page. (n.d.). *etoro.com*. <https://www.etoro.com/customer-service/general-risk-disclosure/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2543,6 +2807,12 @@ Note: Linked in this repo as: QuantConnect: backtesting vs live.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-7b991bf4
+
+September 2022 United Kingdom mini-budget. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/uk-mini-budget-2022.json](../catalog/events/uk-mini-budget-2022.json).
+
 ### url-7bbf84c9
 
 BLS Public Data API: API documentation. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developers/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2556,6 +2826,12 @@ Development Guide. (n.d.). *developer.oanda.com*. <https://developer.oanda.com/r
 Note: Linked in this repo as: development guide.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7cc77912
+
+November 2015 Paris attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/November_2015_Paris_attacks>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/paris-attacks-2015.json](../catalog/events/paris-attacks-2015.json).
 
 ### url-7d1ddeb9
 
@@ -2576,6 +2852,12 @@ Free Forex & Currency Exchange Rate API - ExchangeRate Host. (n.d.). *exchangera
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-8009f8f1
+
+United States withdrawal from the Iran nuclear deal. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iran-deal-withdrawal-2018.json](../catalog/events/iran-deal-withdrawal-2018.json).
 
 ### url-805e49fe
 
@@ -2653,6 +2935,18 @@ Note: Linked in this repo as: QuantConnect: FX macro economic sentiment algorith
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-865db757
+
+Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%. (n.d.). *Swiss National Bank*. <https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/snb-floor-removal-2015.json](../catalog/events/snb-floor-removal-2015.json).
+
+### url-86e37fdf
+
+Arab Spring. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Arab_Spring>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/egypt-revolution-2011.json](../catalog/events/egypt-revolution-2011.json).
+
 ### url-8876d5a7
 
 Nasdaq Data Link | Quandl API, Python & Ready-to-use datasets. (n.d.). *blog.quantinsti.com*. <https://blog.quantinsti.com/nasdaq-data-link/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2674,6 +2968,24 @@ API Documentation | Finnhub - Free APIs for realtime stock, forex, and cryptocur
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-8a601f0e
+
+OPEC. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/OPEC>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/opec-no-cut-2014.json](../catalog/events/opec-no-cut-2014.json).
+
+### url-8a764f51
+
+2024 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2024_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/trump-election-2024.json](../catalog/events/trump-election-2024.json).
+
+### url-8bc5888a
+
+2009 swine flu pandemic. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2009_swine_flu_pandemic>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/h1n1-outbreak-2009.json](../catalog/events/h1n1-outbreak-2009.json).
 
 ### url-8c0fd8f7
 
@@ -2747,6 +3059,12 @@ Note: Linked in this repo as: free trial.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-959feb3c
+
+International sanctions against Iran. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Sanctions_against_Iran>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/eu-iran-oil-embargo-2012.json](../catalog/events/eu-iran-oil-embargo-2012.json).
+
 ### url-96338c9e
 
 Tip: Free Historical Data for Backtesting - StrategyQuant Forum Topic. (n.d.). *strategyquant.com*. <https://strategyquant.com/forum/topic/tip-free-historical-data-for-backtesting/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2809,6 +3127,24 @@ Chague, De-Losso and Giovannetti, 2020, SSRN 3423101. (n.d.). *ebicapital.nl*. <
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-9e21d9bd
+
+Third Taiwan Strait Crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Third_Taiwan_Strait_Crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/taiwan-strait-missile-crisis-1996.json](../catalog/events/taiwan-strait-missile-crisis-1996.json).
+
+### url-9e2b6017
+
+Plaza Accord. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Plaza_Accord>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/plaza-accord-1985.json](../catalog/events/plaza-accord-1985.json).
+
+### url-9fa73178
+
+COVID-19 pandemic. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/COVID-19_pandemic>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/who-declares-covid-pandemic-2020.json](../catalog/events/who-declares-covid-pandemic-2020.json).
+
 ### url-9fc0c217
 
 Crypto Futures and Options Exchange - Deribit by Coinbase. (n.d.). *deribit.com*. <https://www.deribit.com/kb/deribit-rate-limits>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2816,6 +3152,12 @@ Crypto Futures and Options Exchange - Deribit by Coinbase. (n.d.). *deribit.com*
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-a16db72b
+
+1994 bond market crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1994_bond_market_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/fed-surprise-hike-1994.json](../catalog/events/fed-surprise-hike-1994.json).
 
 ### url-a36bd169
 
@@ -2869,6 +3211,18 @@ Note: Linked in this repo as: Business of Business.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-a6d17d96
+
+Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Controls. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/gold-convertibility-ends>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
+
+### url-a8359cfb
+
+2020 stock market crash. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020_stock_market_crash>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/covid-global-spread-2020.json](../catalog/events/covid-global-spread-2020.json).
+
 ### url-a848e23f
 
 No title recorded. (n.d.). *socialcrawl.dev*. <https://www.socialcrawl.dev/blog/reddit-data-api-2026>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2891,6 +3245,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-aa1fc24a
+
+2016 United Kingdom European Union membership referendum. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/brexit-vote-2016.json](../catalog/events/brexit-vote-2016.json).
+
 ### url-aab5f9ca
 
 World Bank Indicators API and Pink Sheet: API documentation. (n.d.). *World Bank*. <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2902,6 +3262,12 @@ Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json
 terms of trade as trading signals. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/research/terms-of-trade-as-trading-signals/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-ac041311
+
+International sanctions during the Russian invasion of Ukraine. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/International_sanctions_during_the_Russian_invasion_of_Ukraine>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/russia-reserves-frozen-2022.json](../catalog/events/russia-reserves-frozen-2022.json).
 
 ### url-ac41c572
 
@@ -2916,6 +3282,18 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https://docs.data.nasdaq.com/>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-aeacd993
+
+Black Wednesday. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Black_Wednesday>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/black-wednesday-1992.json](../catalog/events/black-wednesday-1992.json).
+
+### url-aeeff74a
+
+Introduction of Quantitative and Qualitative Monetary Easing with a Negative Interest Rate. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2016/k160129a.pdf>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/boj-negative-rates-2016.json](../catalog/events/boj-negative-rates-2016.json).
 
 ### url-af21ee14
 
@@ -2933,11 +3311,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-b0e2e26e
+
+September 11 attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/September_11_attacks>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/september-11-attacks-2001.json](../catalog/events/september-11-attacks-2001.json).
+
 ### url-b180e181
 
 No title recorded. (n.d.). *Organisation for Economic Co-operation and Development*. <https://www.oecd.org/en/about/terms-conditions.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/oecd.json](../catalog/datasets/oecd.json), [DAT-0027](datasets/0027-oecd.md).
+
+### url-b2570be7
+
+Near Failure of Long-Term Capital Management. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/ltcm-near-failure>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/ltcm-rescue-1998.json](../catalog/events/ltcm-rescue-1998.json).
 
 ### url-b259387e
 
@@ -2991,6 +3381,12 @@ OECD Data API (SDMX): API documentation. (n.d.). *Organisation for Economic Co-o
 
 Cited in: [catalog/datasets/oecd.json](../catalog/datasets/oecd.json), [DAT-0027](datasets/0027-oecd.md).
 
+### url-b5c6f6bd
+
+Volcker's Announcement of Anti-Inflation Measures. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/anti-inflation-measures>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/volcker-shock-1979.json](../catalog/events/volcker-shock-1979.json).
+
 ### url-b5d69f6b
 
 No title recorded. (n.d.). *OANDA Corporation*. <https://api-fxpractice.oanda.com/v3/accounts>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -3019,11 +3415,23 @@ No title recorded. (n.d.). *teamblind.com*. <https://www.teamblind.com/post/algo
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-ba533bf9
+
+Abqaiq-Khurais attack. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/abqaiq-attack-2019.json](../catalog/events/abqaiq-attack-2019.json).
+
 ### url-bb2fadee
 
 No title recorded. (n.d.). *International Monetary Fund*. <https://api.imf.org/external/sdmx/2.1/dataflow>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
+
+### url-be532ea3
+
+Yom Kippur War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Yom_Kippur_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/yom-kippur-war-1973.json](../catalog/events/yom-kippur-war-1973.json).
 
 ### url-be6b3cbc
 
@@ -3032,6 +3440,12 @@ Quantopian - Wikipedia. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wi
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-beec23b0
+
+Annexation of Crimea by the Russian Federation. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/crimea-seizure-2014.json](../catalog/events/crimea-seizure-2014.json).
 
 ### url-bf47509a
 
@@ -3054,6 +3468,12 @@ REST Rate Limits Overview - Coinbase Developer Documentation. (n.d.). *docs.cdp.
 Note: Linked in this repo as: rate limits.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-c2e30a7b
+
+Libyan civil war (2011). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Libyan_civil_war_(2011)>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/libya-civil-war-2011.json](../catalog/events/libya-civil-war-2011.json).
 
 ### url-c6b329f0
 
@@ -3153,6 +3573,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-d5f11dd9
+
+Nixon shock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nixon_shock>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
+
 ### url-d6e19278
 
 Tiingo: API documentation. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/documentation/general/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3166,6 +3592,12 @@ Data Access And Licensing - World Bank Data Catalog. (n.d.). *World Bank*. <http
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
+
+### url-d8dbdf57
+
+US-UK airstrikes on Yemen. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Operation_Poseidon_Archer>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-uk-strikes-houthis-2024.json](../catalog/events/us-uk-strikes-houthis-2024.json).
 
 ### url-d9c5e253
 
@@ -3181,6 +3613,12 @@ Frazzini and Pedersen, Betting Against Beta (May 2013 draft), Table III. (n.d.).
 
 Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md).
 
+### url-dcceb73b
+
+October 2024 Iranian strikes on Israel. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_on_Israel>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iran-missile-attack-israel-2024-10.json](../catalog/events/iran-missile-attack-israel-2024-10.json).
+
 ### url-de463277
 
 1,285 strategy sleeves, frozen before the test: the year-by-year table is the warning - DEV Community. (n.d.). *dev.to*. <https://dev.to/arhancanli/1285-strategy-sleeves-frozen-before-the-test-the-year-by-year-table-is-the-warning-2np4>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3195,11 +3633,29 @@ Barber, Lee, Liu and Odean, "The Cross-Section of Speculator Skill". (n.d.). *fa
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-e10c362d
+
+Hurricane Katrina. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Hurricane_Katrina>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/hurricane-katrina-2005.json](../catalog/events/hurricane-katrina-2005.json).
+
 ### url-e177aeb7
 
 No title recorded. (n.d.). *World Bank*. <https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD?format=json&per_page=2>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
+
+### url-e1d2a002
+
+Capture of the Crimean Parliament. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/crimea-seizure-2014.json](../catalog/events/crimea-seizure-2014.json).
+
+### url-e319ebc8
+
+April 2018 missile strikes against Syria. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/April_2018_missile_strikes_against_Syria>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/syria-strikes-2018.json](../catalog/events/syria-strikes-2018.json).
 
 ### url-e35fa120
 
@@ -3229,11 +3685,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-e719ee41
+
+Iranian Revolution. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iranian_Revolution>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iranian-revolution-1979.json](../catalog/events/iranian-revolution-1979.json).
+
 ### url-e72a5ff8
 
 EIA Open Data API v2: API documentation. (n.d.). *US Energy Information Administration*. <https://www.eia.gov/opendata/documentation.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/eia.json](../catalog/datasets/eia.json), [DAT-0011](datasets/0011-eia.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-e74404b9
+
+2022 visit by Nancy Pelosi to Taiwan. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2022_visit_by_Nancy_Pelosi_to_Taiwan>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/pelosi-taiwan-visit-2022.json](../catalog/events/pelosi-taiwan-visit-2022.json).
 
 ### url-e7933d7c
 
@@ -3241,17 +3709,47 @@ No title recorded. (n.d.). *wikifx.com*. <https://www.wikifx.com/en/dealer/21917
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-e7f32334
+
+War in Afghanistan (2001-2021). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/afghanistan-invasion-2001.json](../catalog/events/afghanistan-invasion-2001.json).
+
 ### url-e839bd98
 
 OANDA v20 REST API (practice account): API documentation. (n.d.). *OANDA Corporation*. <https://developer.oanda.com/rest-live-v20/introduction/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md).
 
+### url-e88319e7
+
+2006 Lebanon War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2006_Lebanon_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/israel-lebanon-war-2006.json](../catalog/events/israel-lebanon-war-2006.json).
+
 ### url-e8e7bb24
 
 Avellaneda and Lee (June 2009 version), abstract. (n.d.). *math.nyu.edu*. <https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
+
+### url-e97a72dc
+
+2003 invasion of Iraq. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2003_invasion_of_Iraq>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iraq-invasion-2003.json](../catalog/events/iraq-invasion-2003.json).
+
+### url-ea956ef7
+
+2020 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/us-election-2020.json](../catalog/events/us-election-2020.json).
+
+### url-ec56c25d
+
+Iraqi invasion of Kuwait. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/iraq-invades-kuwait-1990.json](../catalog/events/iraq-invades-kuwait-1990.json).
 
 ### url-ed21317e
 
@@ -3351,6 +3849,12 @@ BEA Data API: API documentation. (n.d.). *US Bureau of Economic Analysis*. <http
 
 Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f84c61b3
+
+2017 North Korean missile tests. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/north-korea-missile-over-japan-2017.json](../catalog/events/north-korea-missile-over-japan-2017.json).
+
 ### url-f90289be
 
 ECB Data Portal (SDMX web service): API documentation. (n.d.). *European Central Bank*. <https://data.ecb.europa.eu/help/api/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3384,6 +3888,12 @@ Numerai Raises $30M Series C At $500M Valuation. (n.d.). *blog.numer.ai*. <https
 Note: Linked in this repo as: Numerai blog, Numerai Raises $30M Series C.
 
 Cited in: [catalog/algorithms/numerai-crowdsourced-ensemble.json](../catalog/algorithms/numerai-crowdsourced-ensemble.json), [ALG-0035](algorithms/0035-numerai-crowdsourced-ensemble.md).
+
+### url-fc8bf6e6
+
+Oil Shock of 1973-74. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/oil-shock-of-1973-74>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
+
+Cited in: [catalog/events/arab-oil-embargo-1973.json](../catalog/events/arab-oil-embargo-1973.json).
 
 ### url-fe9b566b
 
