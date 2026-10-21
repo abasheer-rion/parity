@@ -20,6 +20,7 @@ import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Settings } from "./pages/Settings";
+import { SimWorld } from "./pages/SimWorld";
 import { UILibrary } from "./pages/UILibrary";
 import { Toaster } from "./ui";
 import { Signals } from "./pages/Signals";
@@ -110,7 +111,8 @@ function Dashboard({ email }: { email: string | null }) {
             route === "strategy" && arg ? <StrategyPage report={report} name={dec(arg)!} /> :
             route === "signals" ? <Signals report={report} /> :
             route === "data" ? <DataPage report={report} /> :
-            <Overview report={report} email={email} />}
+            route === "overview" ? <Overview report={report} email={email} /> :
+            <SimWorld report={report} />}
           <footer className="muted small">
             {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
             {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
