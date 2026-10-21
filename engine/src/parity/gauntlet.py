@@ -91,7 +91,8 @@ def bootstrap(strategy: pd.Series, bench: pd.Series, rng: np.random.Generator) -
     }
 
 
-def placebo(res: BacktestResult, cost_bps: float, rng: np.random.Generator) -> dict:
+def placebo(res: BacktestResult, cost_bps: float, rng: np.random.Generator,
+            funded: bool = False) -> dict:
     """Keep the strategy's positions but slide them to random other dates. This
     keeps how much it trades and how big its bets are, and destroys its timing.
     If the real strategy is not clearly better than most of these, its timing
@@ -99,8 +100,10 @@ def placebo(res: BacktestResult, cost_bps: float, rng: np.random.Generator) -> d
     w = res.weights.to_numpy()
     r = res.asset_returns.to_numpy()
     cost = res.turnover.to_numpy() * cost_bps / 1e4
+    if funded:  # funded books must beat the T-bill, so take it off as in the real result
+        cost = cost + (res.returns - res.excess_returns).to_numpy()
     n = len(w)
-    actual = _sharpe(res.returns)
+    actual = _sharpe(res.excess_returns)
     shifts = rng.integers(252, max(n - 252, 253), size=N_PLACEBO)
     null = np.array([_sharpe((np.roll(w, k, axis=0) * r).sum(axis=1) - cost) for k in shifts])
     return {"actual": actual, "p_value": float(np.mean(null >= actual)),
@@ -117,10 +120,11 @@ def sensitivity(strategy: Strategy, panel: pd.DataFrame, cfg: BacktestConfig) ->
     for values in combos:
         params = {**strategy.params(), **dict(zip(keys, values, strict=True))}
         variant = type(strategy)(**params)
-        ret = run(variant, panel, cfg).returns
+        vres = run(variant, panel, cfg)
+        ret = vres.returns
         eq = (1 + ret).cumprod().resample("W-FRI").last().dropna()
         rows.append({"params": dict(zip(keys, values, strict=True)),
-                     "sharpe": _sharpe(ret),
+                     "sharpe": _sharpe(vres.excess_returns),
                      "cagr": performance.cagr(ret),
                      "max_drawdown": performance.max_drawdown(ret),
                      "equity": [[d.date().isoformat(), round(float(v), 5)] for d, v in eq.items()]})
@@ -136,11 +140,15 @@ def _fmt(v: float | None, kind: str = "num") -> str:
 
 
 def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
-                 cfg: BacktestConfig, n_trials: int) -> dict:
+                 cfg: BacktestConfig, n_trials: int, bench_excess: pd.Series | None = None
+                 ) -> dict:
+    """Every Sharpe here is on returns above the T-bill (DEC-0009); `bench` is the
+    benchmark's total return and `bench_excess` its return above the T-bill."""
     rng = np.random.default_rng(SEED)
     res = run(strategy, panel, cfg)
-    r = res.returns
-    a, b = r.align(bench, join="inner")
+    bench_total = bench
+    bench = bench_excess if bench_excess is not None else bench
+    a, b = res.excess_returns.align(bench, join="inner")
     s, sb = _sharpe(a), _sharpe(b)
     tests: list[Test] = []
 
@@ -149,14 +157,24 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       "Does it earn more per unit of bumpiness than just holding the S&P 500?",
                       s > sb, f"{_fmt(s)} vs {_fmt(sb)}", "Sharpe above the S&P 500's"))
 
-    vol_cfg = BacktestConfig(**{**cfg.to_dict(), "target_vol": TARGET_VOL})
+    # A2: scale the strategy to the benchmark's own volatility over the same dates, pay
+    # for any borrowing, and compare total returns. Currency books may run up to 10x
+    # notional (margin); funded strategies up to 4x and pay interest on what they borrow.
+    target = float(bench_total.loc[a.index].std() * math.sqrt(252))
+    vol_cfg = BacktestConfig(**{**cfg.to_dict(), "target_vol": target,
+                                "max_leverage": 4.0 if strategy.funded else 10.0})
     rv = run(strategy, panel, vol_cfg).returns
-    av, bv = rv.align(bench, join="inner")
+    av, bv = rv.align(bench_total, join="inner")
+    reached = float(av.iloc[252:].std() * math.sqrt(252)) if len(av) > 300 else 0.0
     c_s, c_b = performance.cagr(av), performance.cagr(bv)
+    testable = reached >= 0.8 * target
     tests.append(Test("A2", "beat", "More money at the same risk",
-                      "If we turn it up until it is as bumpy as stocks, does it make more money?",
-                      c_s > c_b, f"{_fmt(c_s, 'pct')} vs {_fmt(c_b, 'pct')} a year",
-                      f"Yearly return above the S&P 500 at {TARGET_VOL:.0%} volatility"))
+                      "If we turn it up until it is exactly as bumpy as stocks, and pay for any "
+                      "borrowing, does it make more money?",
+                      (c_s > c_b) if testable else None,
+                      f"{_fmt(c_s, 'pct')} vs {_fmt(c_b, 'pct')} a year at {_fmt(reached, 'pct')}"
+                      f" volatility (target {_fmt(target, 'pct')})",
+                      "Yearly return above the market's at the market's own volatility"))
 
     dsr = performance.deflated_sharpe(a, n_trials)
     tests.append(Test("A3", "beat", "Not just the best of many tries",
@@ -165,7 +183,7 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       dsr >= 0.95, _fmt(dsr), "Deflated Sharpe of 0.95 or more"))
 
     cost2 = BacktestConfig(**{**cfg.to_dict(), "cost_bps": cfg.cost_bps * 2})
-    s2 = _sharpe(run(strategy, panel, cost2).returns.align(bench, join="inner")[0])
+    s2 = _sharpe(run(strategy, panel, cost2).excess_returns.align(bench, join="inner")[0])
     tests.append(Test("A4", "beat", "Survives double trading costs",
                       "If trading costs twice what we guessed, does it still beat the S&P 500?",
                       s2 > sb, f"{_fmt(s2)} vs {_fmt(sb)}",
@@ -202,7 +220,7 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       lo > 0, f"95% range {_fmt(lo)} to {_fmt(hi)}",
                       "The whole 95% range of Sharpe is above zero"))
 
-    pl = placebo(res, cfg.cost_bps, rng)
+    pl = placebo(res, cfg.cost_bps, rng, funded=strategy.funded)
     tests.append(Test("B2", "real", "Timing matters",
                       "If we keep the same bets but place them on random dates, does it do "
                       "much worse? If not, the signal is not telling us anything.",
@@ -229,7 +247,9 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       sr > 0, f"{_fmt(sr)} without {best_year}",
                       "Sharpe above zero without the best year"))
 
-    monthly = pd.DataFrame({"s": a, "b": b}).resample("ME").apply(lambda x: (1 + x).prod() - 1)
+    tot, btot = res.returns.align(bench_total, join="inner")
+    monthly = pd.DataFrame({"s": tot, "b": btot}).resample("ME").apply(
+        lambda x: (1 + x).prod() - 1)
     worst = monthly[monthly["b"] <= monthly["b"].quantile(0.05)]
     tail = float(worst["s"].mean()) if len(worst) else float("nan")
     tests.append(Test("B5", "real", "Does not crash with stocks",

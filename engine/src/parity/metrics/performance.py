@@ -106,19 +106,23 @@ def relative(returns: pd.Series, benchmark: pd.Series) -> dict:
 
 
 def summary(returns: pd.Series, gross: pd.Series | None = None, turnover: pd.Series | None = None,
-            benchmark: pd.Series | None = None, n_trials: int = 1) -> dict:
+            benchmark: pd.Series | None = None, n_trials: int = 1,
+            excess: pd.Series | None = None, benchmark_excess: pd.Series | None = None) -> dict:
+    """`returns` are total returns (CAGR, drawdown); `excess` are returns above the
+    T-bill and drive Sharpe, Sortino and deflated Sharpe (DEC-0009)."""
+    ex = excess if excess is not None else returns
     out = {
         "start": returns.index.min().date().isoformat() if len(returns) else None,
         "end": returns.index.max().date().isoformat() if len(returns) else None,
         "years": round(len(returns) / TRADING_DAYS, 2),
         "cagr": cagr(returns),
         "ann_vol": ann_vol(returns),
-        "sharpe": sharpe(returns),
-        "sortino": sortino(returns),
+        "sharpe": sharpe(ex),
+        "sortino": sortino(ex),
         "max_drawdown": max_drawdown(returns),
         "calmar": calmar(returns),
         "hit_rate": hit_rate(returns),
-        "deflated_sharpe": deflated_sharpe(returns, n_trials),
+        "deflated_sharpe": deflated_sharpe(ex, n_trials),
     }
     if turnover is not None and len(turnover):
         out["turnover_per_year"] = float(turnover.mean() * TRADING_DAYS)
@@ -127,6 +131,10 @@ def summary(returns: pd.Series, gross: pd.Series | None = None, turnover: pd.Ser
             out["breakeven_cost_bps"] = float(gross.mean() / turnover.mean() * 1e4)
     if benchmark is not None:
         out.update(relative(returns, benchmark))
+        if benchmark_excess is not None:
+            a, b = ex.align(benchmark_excess, join="inner")
+            out["benchmark_sharpe"] = sharpe(b)
+            out["correlation"] = float(a.corr(b))
     return {k: (None if isinstance(v, float) and not math.isfinite(v) else v)
             for k, v in out.items()}
 

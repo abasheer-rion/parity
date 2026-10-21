@@ -14,6 +14,7 @@ class UsMarketBuyAndHold(Strategy):
     summary = "Hold the whole US stock market (dividends reinvested) and never trade."
     reference = "reference/0002-kpis.md#the-benchmark"
     is_benchmark = True
+    funded = True
 
     def instruments(self) -> list[str]:
         return ["eq.US_TOTAL"]

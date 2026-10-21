@@ -18,6 +18,8 @@ MKT, CASH = "eq.US_TOTAL", "cash.USD"
 class _InOrOut(Strategy):
     """Base for rules that are either fully in the stock market or fully in cash."""
 
+    funded = True
+
     def instruments(self) -> list[str]:
         return [MKT, CASH]
 
@@ -105,6 +107,7 @@ class StocksVolManaged(Strategy):
     reference = "algorithms/0054-volatility-managed-portfolios.md"
     param_grid = {"window": [21, 63]}
     max_gross = 2.0
+    funded = True
 
     def __init__(self, window: int = 21, target: float = 0.16, cap: float = 2.0):
         self.window, self.target, self.cap = window, target, cap
@@ -154,13 +157,14 @@ class StocksPlusFxTrend(Strategy):
     summary = ("Half the risk in US stocks, half in currency trend, so the trend can "
                "cushion stock crashes.")
     reference = "hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md"
-    max_gross = 4.0
+    max_gross = 4.5
+    funded = True
 
     def instruments(self):
-        return [MKT] + FxTimeSeriesMomentum().instruments()
+        return [MKT, CASH] + FxTimeSeriesMomentum().instruments()
 
     def required(self):
-        return [MKT] + FxTimeSeriesMomentum().required()
+        return [MKT, "rate.USD"] + FxTimeSeriesMomentum().required()
 
     def weights(self, panel):
         fx = FxTimeSeriesMomentum().weights(panel)
@@ -171,4 +175,5 @@ class StocksPlusFxTrend(Strategy):
         scale = hold_between_rebalances(scale.to_frame(), "M").iloc[:, 0]
         out = fx.mul(0.5 * scale, axis=0)
         out[MKT] = 0.5
+        out[CASH] = 0.5  # the half not in stocks sits in cash and earns the T-bill
         return out[self.instruments()].fillna(0.0)

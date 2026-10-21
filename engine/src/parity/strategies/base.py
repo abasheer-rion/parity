@@ -31,6 +31,9 @@ class Strategy(ABC):
     param_grid: ClassVar[dict[str, list]] = {}
     #: Largest sum of absolute weights the strategy may hold. Overlays exceed 1.
     max_gross: ClassVar[float] = 1.0
+    #: True if the strategy invests its capital (stocks, cash). False for self-financing
+    #: long-short currency books, whose collateral earns the T-bill on top. See DEC-0009.
+    funded: ClassVar[bool] = False
 
     @abstractmethod
     def instruments(self) -> list[str]:

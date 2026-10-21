@@ -12,6 +12,7 @@ from parity.strategies.base import Strategy
 class _Fixed(Strategy):
     name = "_fixed"
     summary = "test helper"
+    funded = True
 
     def __init__(self, w):
         self.w = w
@@ -50,6 +51,8 @@ def test_carry_is_credited_for_fx_longs(panel):
     flat["fx.AUD"] = 1.0  # no price moves, so any return is carry
 
     class LongAud(_Fixed):
+        funded = False  # a currency book: collateral earns the T-bill on top
+
         def instruments(self):
             return ["fx.AUD"]
 
@@ -57,7 +60,8 @@ def test_carry_is_credited_for_fx_longs(panel):
             return pd.DataFrame(1.0, index=p.index, columns=["fx.AUD"])
 
     res = run(LongAud(1.0), flat, BacktestConfig(start=None, cost_bps=0))
-    expected = (flat["rate.AUD"] - flat["rate.USD"]).iloc[0] / 100 / 252
+    expected = (flat["rate.AUD"] - flat["rate.USD"]).iloc[0] / 100 / 252 \
+        + flat["rate.USD"].iloc[0] / 100 / 252
     assert res.returns.iloc[5] == pytest.approx(expected)
 
 
@@ -84,3 +88,35 @@ def test_every_strategy_links_to_a_doc_that_exists(name):
     if anchor:
         text = target.read_text().lower()
         assert f"# {anchor.replace('-', ' ')}" in text, f"{name}: no heading for #{anchor}"
+
+
+class _CashOnly(Strategy):
+    name = "_cash_only"
+    summary = "negative control: hold cash"
+    funded = True
+
+    def instruments(self):
+        return ["cash.USD"]
+
+    def required(self):
+        return ["rate.USD"]
+
+    def weights(self, panel):
+        return pd.DataFrame(1.0, index=panel.index, columns=["cash.USD"])
+
+
+def test_cash_earns_nothing_above_the_t_bill(panel):
+    """Negative control (DEC-0009): holding cash must have zero excess return."""
+    res = run(_CashOnly(), panel, BacktestConfig(start=None, cost_bps=0))
+    assert abs(res.excess_returns.iloc[5:]).max() < 1e-12
+
+
+def test_borrowing_is_charged(panel):
+    free = run(_Fixed(1.0), panel, BacktestConfig(start=None, cost_bps=0))
+    levered = run(_Fixed(2.0), panel, BacktestConfig(start=None, cost_bps=0))
+    spy = panel["eq.US_TOTAL"].pct_change()
+    rf = panel["rate.USD"].shift(1) / 100 / 252
+    day = levered.returns.index[10]
+    expected = 2 * spy[day] - (rf[day] + 0.005 / 252)
+    assert levered.returns[day] == pytest.approx(expected)
+    assert free.returns[day] == pytest.approx(spy[day])

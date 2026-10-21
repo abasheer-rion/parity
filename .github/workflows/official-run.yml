@@ -51,6 +51,10 @@ jobs:
           echo "run_id=$(grep -o 'RUN-[0-9]*' "$RUNNER_TEMP/official.log" | head -1)" >> "$GITHUB_OUTPUT"
       - name: Ledger must still be intact
         run: parity ledger verify
+      - name: Independent timestamp of the ledger (OpenTimestamps, anchored in Bitcoin)
+        run: |
+          pip install -q opentimestamps-client
+          ots stamp ledger/runs.jsonl || echo "Timestamp servers unreachable; ledger still recorded"
       - name: Commit ledger
         env:
           RUN_ID: ${{ steps.run.outputs.run_id }}

@@ -19,6 +19,7 @@ import pandas as pd
 from ..strategies.base import Strategy
 
 TRADING_DAYS = 252
+BORROW_SPREAD = 0.005  # 50 bp a year over the T-bill on borrowed money
 
 
 @dataclass
@@ -39,7 +40,8 @@ class BacktestConfig:
 class BacktestResult:
     strategy: str
     config: BacktestConfig
-    returns: pd.Series  # daily net returns
+    returns: pd.Series  # daily total returns, net of costs and financing (for CAGR, drawdown)
+    excess_returns: pd.Series  # returns above the T-bill (for Sharpe and every test)
     gross_returns: pd.Series  # before costs
     weights: pd.DataFrame  # weights actually held each day, after vol scaling
     turnover: pd.Series  # sum of absolute weight changes each day
@@ -91,14 +93,31 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     if len(turnover):
         turnover.iloc[0] = held.iloc[0].abs().sum()
     gross = (held * rets).sum(axis=1)
-    net = gross - turnover * config.cost_bps / 1e4
+    rf = risk_free(panel, held.index)
+    # Funded strategies pay the T-bill plus a spread on anything borrowed (long funded
+    # exposure above 100%). Self-financing currency books earn the T-bill on collateral.
+    funded_cols = [c for c in held.columns if not c.startswith("fx.")]
+    borrowed = (held[funded_cols].clip(lower=0).sum(axis=1) - 1).clip(lower=0) \
+        if funded_cols else 0.0
+    financing = borrowed * (rf + BORROW_SPREAD / TRADING_DAYS)
+    net = gross - turnover * config.cost_bps / 1e4 - financing
+    if not getattr(strategy, "funded", False):
+        net = net + rf
 
     # Drop the warm-up period before the strategy first holds anything.
     active = held.abs().sum(axis=1) > 0
     if active.any():
         first = active.idxmax()
-        net, gross, held, turnover, rets = (x.loc[first:] for x in (net, gross, held, turnover,
-                                                                     rets))
+        net, gross, held, turnover, rets, rf = (x.loc[first:] for x in (
+            net, gross, held, turnover, rets, rf))
 
-    return BacktestResult(strategy.name, config, net.rename(strategy.name), gross, held,
-                          turnover, rets)
+    return BacktestResult(strategy.name, config, net.rename(strategy.name),
+                          (net - rf).rename(strategy.name), gross, held, turnover, rets)
+
+
+def risk_free(panel: pd.DataFrame, index: pd.DatetimeIndex) -> pd.Series:
+    """Daily T-bill return, known at the start of each day."""
+    col = "rate.TBILL3M" if "rate.TBILL3M" in panel else "rate.USD"
+    if col not in panel:
+        return pd.Series(0.0, index=index)
+    return (panel[col].shift(1) / 100 / TRADING_DAYS).reindex(index).ffill().fillna(0.0)

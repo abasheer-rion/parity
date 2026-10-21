@@ -55,11 +55,12 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
         instances = {n: strategies.get(n) for n in names}
 
     needed = {k for s in instances.values() for k in s.required()}
-    keys = sorted(needed | {"eq.US_TOTAL", "rate.USD"})
+    keys = sorted(needed | {"eq.US_TOTAL", "rate.USD", "rate.TBILL3M"})
     panel = store.panel(keys, data_dir)
 
     bench_cfg = BacktestConfig(**{**config.to_dict(), "target_vol": None, "cost_bps": 0.0})
-    bench = run(strategies.get("us_market_buy_hold"), panel, bench_cfg).returns
+    bench_res = run(strategies.get("us_market_buy_hold"), panel, bench_cfg)
+    bench, bench_ex = bench_res.returns, bench_res.excess_returns
     if n_trials is None:
         n_trials = sum(1 for s in instances.values() if not s.is_benchmark)
 
@@ -70,8 +71,10 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
         metrics = performance.summary(res.returns, res.gross_returns,
                                       None if strat.is_benchmark else res.turnover,
                                       None if strat.is_benchmark else bench,
-                                      n_trials=1 if strat.is_benchmark else n_trials)
-        all_returns[name] = res.returns
+                                      n_trials=1 if strat.is_benchmark else n_trials,
+                                      excess=res.excess_returns,
+                                      benchmark_excess=None if strat.is_benchmark else bench_ex)
+        all_returns[name] = res.excess_returns
         sig = strat.signal(panel)
         runs.append({
             "strategy": name,
@@ -88,7 +91,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
             else [],
             "exposure": {k: round(float(v), 4) for k, v in res.weights.iloc[-1].items()}
             if len(res.weights) else {},
-            "gauntlet": run_gauntlet(strat, panel, bench, cfg, n_trials)
+            "gauntlet": run_gauntlet(strat, panel, bench, cfg, n_trials, bench_ex)
             if gauntlet and not strat.is_benchmark else None,
         })
 

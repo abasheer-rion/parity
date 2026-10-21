@@ -26,3 +26,12 @@ def test_noise_strategy_does_not_pass_the_reality_checks(panel):
     g = run_gauntlet(strategies.get("fx_tsmom"), panel, bench, BacktestConfig(start=None), 3)
     placebo = next(t for t in g["tests"] if t["id"] == "B2")
     assert placebo["passed"] is False
+
+
+def test_cash_only_control_fails_the_gauntlet(panel):
+    from test_backtest import _CashOnly
+
+    g = run_gauntlet(_CashOnly(), panel, _bench(panel), BacktestConfig(start=None), 3)
+    tests = {t["id"]: t["passed"] for t in g["tests"]}
+    assert not g["beats_sp500"]
+    assert tests["A1"] is False and tests["B1"] is False

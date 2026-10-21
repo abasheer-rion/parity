@@ -75,6 +75,13 @@ def problems(reg: Registration, require_committed: bool = True,
         elif first[1].strip() != reg.path.read_text().strip():
             out.append(f"changed since it was first committed in {first[0][:8]}; plans are "
                        "frozen, write a new registration instead")
+        if first is not None and d.get("code_frozen", True):
+            changed = ledger.git("diff", "--name-only", first[0], "HEAD", "--",
+                                 "engine/src").split()
+            if changed:
+                out.append("engine code changed since this plan was registered "
+                           f"({len(changed)} files, e.g. {changed[0]}); register a new plan "
+                           "so the code it runs is the code it promised")
         if require_clean and ledger.git_state()["dirty"]:
             out.append("uncommitted changes in the working tree; "
                        "official runs need a clean checkout")

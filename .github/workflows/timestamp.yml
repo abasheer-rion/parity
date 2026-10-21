@@ -1,0 +1,37 @@
+# Independent proof of when each registration existed. On every push that adds a
+# registration, stamp it with OpenTimestamps (anchored in the Bitcoin blockchain, free,
+# not controlled by us), so a plan provably existed before the run that tests it.
+name: Timestamp registrations
+
+on:
+  push:
+    branches: [main]
+    paths: ["registrations/REG-*.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -q opentimestamps-client
+      - name: Stamp new registrations
+        run: |
+          changed=0
+          for f in registrations/REG-*.json; do
+            [ -f "$f.ots" ] && continue
+            ots stamp "$f" && changed=1
+          done
+          if [ "$changed" = 1 ]; then
+            git config user.name "parity-ledger"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add registrations/*.ots
+            git commit -m "data(ledger): timestamp new registrations"
+            git push origin HEAD:main
+          fi
