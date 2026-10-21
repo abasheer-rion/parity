@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 9 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 10 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
@@ -32,11 +32,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
+- 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
+- 2026-10-21 [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - 2026-10-21 [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - 2026-10-20 [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - 2026-10-20 [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
-- 2026-10-20 [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
-- 2026-10-20 [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 
 ## intent
 
@@ -57,6 +57,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0007 | [Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md) | accepted | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | DEC-0008 | [Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
 | DEC-0009 | [Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md) | accepted | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [process](TAGS.md#process) |
+| DEC-0010 | [Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [method](TAGS.md#method) |
 
 ## hypothesis
 
@@ -99,7 +100,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | GDE-0001 | [Getting started](guides/0001-getting-started.md) | current | 2026-10-20 | [process](TAGS.md#process) |
 | GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-20 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
-| GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-20 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
+| GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## reference

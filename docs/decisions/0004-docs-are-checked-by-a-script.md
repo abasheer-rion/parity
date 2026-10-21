@@ -48,6 +48,7 @@ What it checks:
 ## Referenced by
 
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](0001-keep-a-decision-record.md)
+- [DEC-0010: Every source we rely on is in one checked bibliography](0010-every-source-in-one-bibliography.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [REF-0001: Architecture](../reference/0001-architecture.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)

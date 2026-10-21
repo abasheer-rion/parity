@@ -88,8 +88,10 @@ def extract_urls(text: str) -> list[str]:
 
 
 def ignored(u: str) -> bool:
+    """Local addresses and this project's own repository are not outside sources."""
     host = urllib.parse.urlsplit(u).hostname or ""
-    return host in IGNORED_HOSTS or host.endswith(".invalid") or host.endswith(".local")
+    return host in IGNORED_HOSTS or host.endswith(".invalid") or host.endswith(".local") or \
+        bool(re.search(r"github\.com/[^/]+/parity(\.git)?(/|$)", u))
 
 
 def normalise_url(u: str) -> str:
@@ -117,7 +119,7 @@ def ids_from_url(u: str) -> dict:
         out["doi"], out["doi_explicit"] = path[1:].rstrip("/").lower(), True
     elif m := re.match(r"^/doi/(?:abs/|full/|pdf/|epdf/)?(10\.\d{4,}/[^?#]+)", path):
         out["doi"], out["doi_explicit"] = m.group(1).rstrip("/").lower(), True
-    elif host.endswith("arxiv.org") and (m := re.match(r"^/(?:abs|pdf)/(\d{4}\.\d{4,5})", path)):
+    elif host.endswith("arxiv.org") and (m := re.match(r"^/(?:abs|pdf|html)/(\d{4}\.\d{4,5})", path)):
         out["arxiv"] = m.group(1)
     elif host.endswith("nber.org") and (m := re.search(r"/w(\d{3,6})(?:\.|/|$)", path)):
         out["doi"], out["doi_explicit"] = f"10.3386/w{m.group(1)}", False
@@ -199,7 +201,7 @@ def classify(url: str | None, hint: str | None, scholarly: bool) -> str:
     path = urllib.parse.urlsplit(url).path.lower()
     if re.search(r"\.(csv|zip|xlsx?|parquet|json|txt)$", path) or "kaggle.com/datasets" in url:
         return "dataset"
-    if scholarly and path.endswith(".pdf"):
+    if scholarly and not re.search(r"blog|medium\.com|substack|wordpress", url):
         return "paper"
     return "web-page"
 
@@ -302,12 +304,12 @@ def parse_reading_list() -> list[Mention]:
                 title = plain(bm.group("t")) + (f", {ed.group(1)}" if ed else "")
                 url = urls[0] if urls else None
                 # a book is a book even if the link is a code repository for it
-                kind = "book" if pub or yr else None
+                kind = "book" if pub else None
                 out.append(mention(url, path, "reading-list", authors=split_authors(bm.group("a")),
                                    year=int(yr.group(1)) if yr else None, title=title,
                                    venue=plain(pub.group(1)) if pub else None, type=kind,
                                    note=plain(cells[1]) if len(cells) > 1 else None,
-                                   scholarly=True))
+                                   scholarly=kind == "book"))
                 for u in urls[1:]:
                     out.append(mention(u, path, "reading-list"))
             else:
@@ -346,10 +348,14 @@ def parse_label(label: str | None) -> dict:
     m = re.match(r"^(?P<a>[A-Z][^()]{1,120}?) \((?P<y>\d{4})[a-z]?\)[,.:]?\s*(?P<rest>.*)$", label)
     if not m:
         return {"cited_as": label}
-    rest = re.split(r"(?:^|,\s*)(?:Table|Figure|Fig\.|Exhibit|p\.|pp\.|Section|abstract)\b",
+    rest = re.split(r"(?:^|,\s*)(?:Tables?|Figures?|Fig\.|Exhibit|p\.|pp\.|Sections?|abstract)\b",
                     m.group("rest"))[0]
+    rest = rest.strip(" ,.")
+    venue_like = r"Journal|Review|Econom|Financ|Studies|Letters|Quarterly|Notices|Annals|PLOS|" \
+                 r"Management|Science|\bWP\b|[Ww]orking [Pp]aper|NBER|SSRN|arXiv|Bank|Univers|" \
+                 r"Discussion|Proceedings|Research"
     return {"authors": split_authors(m.group("a")), "year": int(m.group("y")),
-            "venue_hint": rest.strip(" ,.") or None, "cited_as": label}
+            "venue_hint": rest if re.search(venue_like, rest) else None, "cited_as": label}
 
 
 def collect_catalog() -> list[Mention]:
@@ -363,15 +369,19 @@ def collect_catalog() -> list[Mention]:
             if title and re.match(r"^no (dated )?primary source", title, re.I):
                 title, venue = venue, None
             academic = o.get("type") == "academic"
-            out.append(mention(o["source_url"], path, "catalog-origin",
-                               authors=split_authors(o.get("authors")) if academic else None,
+            cited_as = None
+            if title and ";" in title:  # several works in one line: keep it as a note
+                cited_as, title, venue = plain(o.get("source_title")), None, None
+            out.append(mention(o["source_url"], path, "catalog-origin", cited_as=cited_as,
+                               authors=split_authors((o.get("authors") or "").split(";")[0])
+                               if academic else None,
                                year=o.get("first_published") if academic else None,
                                title=title, venue_hint=venue, scholarly=academic,
                                origin_type=o.get("type")))
             seen.add(o["source_url"])
         for r in e.get("reported_results", []):
             u = r.get("source_url")
-            if u and not ignored(u):
+            if u and re.match(r"^https?://", u) and not ignored(u):
                 lab = parse_label(r.get("source"))
                 out.append(mention(u, path, "reported-result", scholarly="authors" in lab, **lab))
                 seen.add(u)
@@ -431,7 +441,7 @@ def collect_docs() -> tuple[list[Mention], dict[str, set[str]]]:
         for u in dict.fromkeys(extract_urls(text)):
             out.append(mention(u, path, "link" if u in labels else "url", label=labels.get(u)))
         for m in CITE_RE.finditer(text):
-            for k in re.findall(r"@([a-z0-9-]+)", m.group(1)):
+            for k in re.findall(r"@([a-z0-9-]+)", m.group(0)):
                 cites.setdefault(k, set()).add(path)
     return out, cites
 
@@ -539,6 +549,7 @@ def build_record(ms: list[Mention]) -> dict:
         "metadata": {"source": "repo", "doi_explicit": bool(explicit)},
         "_label": first("label"),
         "_cited_as": first("cited_as"),
+        "_authors_from": next((m["source"] for m in ms if m.get("authors")), None),
         "_venue_hint": first("venue_hint"),
     }
     if first("note"):
@@ -607,9 +618,7 @@ def crossref_work(f: Fetcher, doi: str) -> dict | None | bool:
 
 
 def crossref_search(f: Fetcher, title: str, author: str | None) -> list[dict]:
-    q = {"query.bibliographic": title, "rows": "5", "mailto": MAILTO,
-         "select": "DOI,title,author,issued,container-title,type,publisher,volume,issue,page,"
-                   "institution,number,group-title"}
+    q = {"query.bibliographic": title, "rows": "5", "mailto": MAILTO}
     if author:
         q["query.author"] = author
     raw = f.get("https://api.crossref.org/works?" + urllib.parse.urlencode(q))
@@ -651,6 +660,23 @@ def arxiv_batch(f: Fetcher, ids: list[str]) -> dict[str, dict]:
     return out
 
 
+def tidy_name(name: str | None) -> str | None:
+    """Crossref sometimes stores names in capitals: 'ASNESS, CLIFFORD S.' -> 'Asness, Clifford S.'"""
+    if not name:
+        return name
+    letters = [c for c in name if c.isalpha()]
+    if letters and all(c.isupper() for c in letters) and len(letters) > 3:
+        name = re.sub(r"[^\W\d_]+", lambda m: m.group(0)[0] + m.group(0)[1:].lower()
+                      if len(m.group(0)) > 1 else m.group(0), name)
+        name = re.sub(r"\bMc([a-z])", lambda m: "Mc" + m.group(1).upper(), name)
+    return name
+
+
+def venue_match(hint: str | None, container: str | None) -> bool:
+    h, c = norm_title(hint), re.sub(r"^the ", "", norm_title(container))
+    return bool(h and c) and (c in h or re.sub(r"^the ", "", h) in c)
+
+
 def family_first(name: str | None) -> str | None:
     """'Lukas Menkhoff' -> 'Menkhoff, Lukas', keeping particles like 'de' with the family name."""
     if not name or "," in name:
@@ -668,7 +694,7 @@ def crossref_fields(msg: dict) -> dict:
     for a in msg.get("author", []) or []:
         name = ", ".join(x for x in (a.get("family"), a.get("given")) if x) or a.get("name")
         if name:
-            authors.append(plain(name))
+            authors.append(tidy_name(plain(name)))
     if not authors:
         authors = [plain(a.get("name")) for a in msg.get("editor", []) or [] if a.get("name")]
     year = None
@@ -692,7 +718,12 @@ def crossref_fields(msg: dict) -> dict:
                 venue += f"({msg['issue']})"
         if msg.get("page"):
             venue += f", {plain(msg['page'])}"
-    elif ctype in ("report", "report-component", "posted-content", "working-paper"):
+    elif (msg.get("DOI") or "").lower().startswith("10.3386/w"):
+        venue = "NBER Working Paper " + msg["DOI"].split("/", 1)[1]
+    elif ctype == "posted-content":
+        venue = plain(msg.get("group-title")) or publisher
+        venue = f"{venue} working paper" if venue == "SSRN" else venue
+    elif ctype in ("report", "report-component", "working-paper"):
         inst = plain(((msg.get("institution") or [{}])[0]).get("name")) or publisher
         num = msg.get("number") or ""
         venue = " ".join(x for x in (inst, "working paper" if ctype != "posted-content" else
@@ -748,7 +779,7 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
     want = sorted({r["arxiv"] for r in records if r.get("arxiv")})
     cached = {}
     for r in records:
-        o = old_by_key.get(r.get("key"))
+        o = old_by_key.get(r.get("_old"))
         if not refresh and o and o.get("arxiv") == r.get("arxiv") and \
                 o.get("metadata", {}).get("source") in ("arxiv", "crossref"):
             cached[r["arxiv"]] = o
@@ -773,7 +804,7 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
         doi = r.get("doi")
         if not doi:
             continue
-        o = old_by_key.get(r.get("key"))
+        o = old_by_key.get(r.get("_old"))
         if not refresh and o and o.get("doi") == doi and \
                 o.get("metadata", {}).get("source") in ("crossref", "crossref-search",
                                                         "crossref-not-found"):
@@ -796,8 +827,8 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
             continue
         if not r.get("title") or not r.get("authors") or not r.get("year"):
             continue
-        o = old_by_key.get(r.get("key"))
-        if not refresh and o and o.get("metadata", {}).get("searched"):
+        o = old_by_key.get(r.get("_old"))
+        if not refresh and o and (o.get("metadata", {}).get("searched") or o.get("doi")):
             copy_cached(r, o)
             continue
         r["metadata"]["searched"] = True
@@ -807,7 +838,13 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
             fam = [surname(x) for x in md["authors"]]
             if not title_match(r["title"], md["title"]) or surname(first_author) not in fam:
                 continue
-            if md["year"] and r["year"] and abs(md["year"] - int(r["year"])) > 3:
+            if not md["year"] or abs(md["year"] - int(r["year"])) > 1:
+                continue
+            cont = (item.get("container-title") or [None])[0]
+            working = re.search(r"working paper|\bWP\b|NBER|SSRN|discussion paper|preprint",
+                                r.get("venue") or r.get("_venue_hint") or "", re.I)
+            if (r.get("venue") or r.get("_venue_hint")) and not working and \
+                    not venue_match(r.get("venue") or r.get("_venue_hint"), cont):
                 continue
             r["doi"] = md["doi"]
             # keep the year and venue the repo cites, take names and title from Crossref
@@ -825,8 +862,8 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
         hint = r.get("_venue_hint") or r.get("venue")
         if not real or not r.get("year") or not hint:
             continue
-        o = old_by_key.get(r.get("key"))
-        if not refresh and o and o.get("metadata", {}).get("searched"):
+        o = old_by_key.get(r.get("_old"))
+        if not refresh and o and (o.get("metadata", {}).get("searched") or o.get("doi")):
             copy_cached(r, o)
             continue
         r["metadata"]["searched"] = True
@@ -840,15 +877,19 @@ def enrich(records: list[dict], old_by_key: dict, f: Fetcher, refresh: bool) -> 
                 continue
             if not md["year"] or abs(md["year"] - int(r["year"])) > 1:
                 continue
-            cont = norm_title(item.get("container-title", [""])[0] if item.get("container-title")
-                              else md.get("venue"))
-            if not cont or cont not in norm_title(hint):
+            cont = (item.get("container-title") or [None])[0]
+            if not venue_match(hint, cont):
                 continue
             hits.append(md)
         if len({h["doi"] for h in hits}) == 1:
             r["doi"] = hits[0]["doi"]
             apply_metadata(r, hits[0], "work", "crossref-search")
             r["metadata"]["doi_explicit"] = False
+
+
+def richness(r: dict) -> int:
+    return (2 if r["metadata"].get("source") not in ("repo", "crossref-not-found") else 0) + \
+        (1 if r.get("doi") else 0)
 
 
 def copy_cached(r: dict, o: dict):
@@ -884,9 +925,9 @@ def record_ids(r: dict) -> set[str]:
     return out
 
 
-def load_verification() -> dict[str, str]:
-    """Map normalised URL (or 'key:<key>') to a status. Accepts a list of records, a dict of
-    records under 'sources' or 'results', or a plain {url: status} map."""
+def load_verification() -> dict[str, dict]:
+    """Map normalised URL (or 'key:<key>') to {status, title, checked}. Accepts a list of
+    records, a dict of records under 'records', 'sources' or 'results', or {url: status}."""
     if not VERIFICATION.exists():
         return {}
     try:
@@ -895,7 +936,7 @@ def load_verification() -> dict[str, str]:
         return {}
     items = data
     if isinstance(data, dict):
-        for k in ("sources", "results", "records", "items", "urls"):
+        for k in ("records", "sources", "results", "items", "urls"):
             if k in data:
                 items = data[k]
                 break
@@ -910,11 +951,17 @@ def load_verification() -> dict[str, str]:
                     return v[k]
         return None
 
+    def info(v, s):
+        d = v if isinstance(v, dict) else {}
+        return {"status": s, "title": plain(d.get("title")),
+                "checked": str(d.get("checked_at") or d.get("checked") or "")[:10] or None}
+
     if isinstance(items, dict):
         for k, v in items.items():
             s = status_of(v)
             if s:
-                out[("url:" + normalise_url(k)) if re.match(r"^https?://", k) else "key:" + k] = s
+                out[("url:" + normalise_url(k)) if re.match(r"^https?://", k) else "key:" + k] = \
+                    info(v, s)
     elif isinstance(items, list):
         for v in items:
             if not isinstance(v, dict):
@@ -923,9 +970,9 @@ def load_verification() -> dict[str, str]:
             if not s:
                 continue
             if v.get("url"):
-                out["url:" + normalise_url(v["url"])] = s
+                out["url:" + normalise_url(v["url"])] = info(v, s)
             if v.get("key"):
-                out["key:" + v["key"]] = s
+                out["key:" + v["key"]] = info(v, s)
     return out
 
 
@@ -955,9 +1002,10 @@ def main() -> int:
     # reuse old keys so cached metadata can be found
     taken: set[str] = set()
     for r in records:
-        for i in sorted(record_ids(r)):
-            k = old_index.get(i)
-            if k and k not in taken:
+        olds = [old_index[i] for i in sorted(record_ids(r)) if i in old_index]
+        r["_old"] = olds[0] if olds else None  # where to find metadata fetched last time
+        for k in olds:
+            if k not in taken:
                 r["key"] = k
                 taken.add(k)
                 break
@@ -965,56 +1013,60 @@ def main() -> int:
     f = Fetcher(args.offline)
     enrich(records, old_by_key, f, args.refresh)
 
-    # second merge: two records that turned out to be the same DOI or arXiv id
-    merged: dict[str, dict] = {}
-    for r in records:
-        ident = ("doi:" + r["doi"]) if r.get("doi") else ("arxiv:" + r["arxiv"]) if r.get("arxiv") \
-            else None
-        if ident and ident in merged:
-            a = merged[ident]
-            a["used_in"] = sorted(set(a["used_in"]) | set(r["used_in"]))
-            for u in [r["url"]] + r["also_at"]:
-                if u and normalise_url(u) not in {normalise_url(x) for x in [a["url"]] + a["also_at"]
-                                                  if x}:
-                    a["also_at"].append(u)
-            a["key"] = a["key"] or r["key"]
-            continue
-        if ident:
-            merged[ident] = r
-        merged.setdefault(id(r), r)
-    records = list({id(r): r for r in merged.values()}.values())
+    # second merge: the same DOI or arXiv id, then the same first author, year and title
+    def merge_on(records: list[dict], ident_of) -> list[dict]:
+        kept: dict = {}
+        order = []
+        for r in records:
+            ident = ident_of(r)
+            if ident is None:
+                order.append(r)
+                continue
+            if ident not in kept:
+                kept[ident] = r
+                order.append(r)
+                continue
+            a = kept[ident]
+            base, other = (a, r) if richness(a) >= richness(r) else (r, a)
+            base["used_in"] = sorted(set(a["used_in"]) | set(r["used_in"]))
+            for u in [other["url"]] + other["also_at"]:
+                if u and normalise_url(u) not in {normalise_url(x) for x in
+                                                  [base["url"]] + base["also_at"] if x}:
+                    base["also_at"].append(u)
+            base["doi"] = base.get("doi") or other.get("doi")
+            base["key"] = base["key"] or other["key"]
+            if base is r:
+                order[order.index(a)] = r
+                kept[ident] = r
+        return order
 
-    # same work cited by two links that share no identifier: same first author, year, title
-    seen_work: dict[str, dict] = {}
-    kept = []
-    for r in records:
+    def work_id(r):
         real = [a for a in r.get("authors") or [] if a != "et al."]
-        w = "|".join([surname(real[0]) if real else "", str(r.get("year")),
-                      norm_title(r.get("title"))]) if r.get("title") and real else None
-        if w and w in seen_work and r["type"] in ("paper", "preprint", "book"):
-            a = seen_work[w]
-            a["used_in"] = sorted(set(a["used_in"]) | set(r["used_in"]))
-            for u in [r["url"]] + r["also_at"]:
-                if u and normalise_url(u) not in {normalise_url(x) for x in [a["url"]] + a["also_at"]
-                                                  if x}:
-                    a["also_at"].append(u)
-            a["doi"] = a.get("doi") or r.get("doi")
-            a["key"] = a["key"] or r["key"]
-            continue
-        if w:
-            seen_work[w] = r
-        kept.append(r)
-    records = kept
+        if not (r.get("title") and real and r["type"] in ("paper", "preprint", "book")):
+            return None
+        return "|".join([surname(real[0]), str(r.get("year")), norm_title(r.get("title"))])
+
+    records = merge_on(records, lambda r: ("doi:" + r["doi"]) if r.get("doi") else
+                       ("arxiv:" + r["arxiv"]) if r.get("arxiv") else None)
+    records = merge_on(records, work_id)
 
     for r in records:
-        r["title"] = r.get("title") or r.get("_label")
-        if not r["title"] and r.get("_cited_as"):
-            r["note"] = r.get("note") or f"Cited in the catalog as: {r['_cited_as']}"
-        r.pop("_cited_as", None)
+        scholarly = r["type"] in ("paper", "preprint", "book")
+        if not scholarly and r.get("_authors_from") == "reported-result":
+            r["authors"], r["year"] = [], None  # a label like "Carver blog (2015)" is not a byline
+        if not r.get("title"):
+            label = r.get("_cited_as") or r.get("_label")
+            if scholarly and label:
+                r["note"] = r.get("note") or f"Cited in this repo as: {label}"
+            else:
+                r["title"], r["_title_is_label"] = label, True
+        for k in ("_cited_as", "_authors_from"):
+            r.pop(k, None)
         r["venue"] = r.get("venue") or r.get("_venue_hint")
         if not r["venue"] and r.get("url") and r["type"] not in ("paper", "preprint", "book"):
             r["venue"] = host_of(r["url"])
         r.pop("_label", None)
+        r.pop("_old", None)
         r.pop("_venue_hint", None)
 
     # keys: keep old ones, give new ones, never collide
@@ -1033,11 +1085,25 @@ def main() -> int:
     for r in records:
         o = old_by_key.get(r["key"])
         r["accessed"] = (o or {}).get("accessed") or today
-        status = verification.get("key:" + r["key"])
+        found = verification.get("key:" + r["key"])
         for u in [r["url"]] + r["also_at"]:
-            if not status and u:
-                status = verification.get("url:" + normalise_url(u))
-        r["verification"] = status or "not checked"
+            if not found and u:
+                found = verification.get("url:" + normalise_url(u))
+        r["verification"] = found["status"] if found else "not checked"
+        if found and found.get("checked"):
+            r["verification_checked"] = found["checked"]
+        page_title = (verification.get("url:" + normalise_url(r["url"])) or {}).get("title") \
+            if r.get("url") else None
+        generic = r"^(just a moment|access denied|attention required|forbidden|403|404|page not " \
+                  r"found|not found|reddit - dive into anything|log ?in|sign ?in|error|untitled|" \
+                  r"home|redirecting|loading)\b"
+        good = page_title and len(page_title) > 8 and not re.match(generic, page_title, re.I)
+        if good and (not r.get("title") or r.get("_title_is_label")):
+            if r.get("_title_is_label") and r["title"] != page_title:
+                r["note"] = r.get("note") or f"Linked in this repo as: {r['title']}"
+            r["title"] = page_title
+            r.setdefault("metadata", {})["title_from"] = "page title found by verify_sources.py"
+        r.pop("_title_is_label", None)
         r["used_in"] = sorted(set(r["used_in"]) | cites.get(r["key"], set()))
         for k in ("title", "venue", "note"):
             if r.get(k):
@@ -1046,7 +1112,8 @@ def main() -> int:
         r["year"] = int(r["year"]) if r.get("year") else None
 
     order = ["key", "type", "authors", "year", "title", "venue", "doi", "arxiv", "url", "also_at",
-             "accessed", "verification", "used_in", "note", "software", "metadata"]
+             "accessed", "verification", "verification_checked", "used_in", "note", "software",
+             "metadata"]
     records = [{k: r[k] for k in order if k in r} for r in sorted(records, key=lambda r: r["key"])]
     data = {
         "about": "Every source the project relies on, one record each. Built by "

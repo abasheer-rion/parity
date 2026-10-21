@@ -410,7 +410,8 @@
     "generated": [
       "docs/README.md",
       "docs/TAGS.md",
-      "docs/RESULTS.md"
+      "docs/RESULTS.md",
+      "docs/REFERENCES.md"
     ]
   }
 }

@@ -144,6 +144,7 @@ How we write and organise these documents.
 
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](decisions/0001-keep-a-decision-record.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md)
+- [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 
 ## economics
@@ -273,6 +274,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
+- [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
