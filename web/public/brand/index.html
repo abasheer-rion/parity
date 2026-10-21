@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Parity brand</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg: #ffffff; --fg: #1e1e2a; --muted: #70707d; --line: #7073931a; color-scheme: light dark; font-family: Inter, system-ui, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #171721; --fg: #f4f5f9; --muted: #9d9da8; --line: #b4b7c81f; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); }
+  main { max-width: 1040px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-weight: 400; font-size: 28px; margin: 0 0 4px; }
+  p { color: var(--muted); margin: 0 0 24px; }
+  h2 { font-size: 15px; font-weight: 500; margin: 32px 0 12px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .cell { padding: 28px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; min-height: 140px; }
+  .dark { background: #10101a; } .light { background: #ffffff; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td, th { text-align: left; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 400; font-size: 13px; }
+  a { color: #2f6bff; }
+  .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+  .icons figure { margin: 0; padding: 12px 4px; text-align: center; font-size: 11px; color: var(--muted); }
+  .icons img { width: 20px; height: 20px; display: block; margin: 0 auto 6px; }
+  @media (prefers-color-scheme: dark) { .icons img { filter: invert(1); } }
+  @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Parity brand</h1>
+  <p>The crystal mark, its versions and the interface icons. Each set lives in a dated folder so older versions stay available; the site uses the copies at the top level of the public folder.</p>
+  <h2>Mark, 2026-10-21</h2>
+  <div class="row">
+    <div class="cell dark">
+      <img src="2026-10-21/parity-mark.svg" width="112" alt="Colour mark">
+      <img src="2026-10-21/parity-mark-white.svg" width="56" alt="White mark">
+      <img src="2026-10-21/parity-icon-dark.svg" width="88" alt="App icon, dark">
+      <img src="2026-10-21/parity-wordmark-on-dark.svg" width="220" alt="Wordmark on dark">
+    </div>
+    <div class="cell light">
+      <img src="2026-10-21/parity-mark.svg" width="112" alt="Colour mark">
+      <img src="2026-10-21/parity-mark-black.svg" width="56" alt="Dark mark">
+      <img src="2026-10-21/parity-icon-light.svg" width="88" alt="App icon, light">
+      <img src="2026-10-21/parity-wordmark-on-light.svg" width="220" alt="Wordmark on light">
+    </div>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <div class="cell dark"><img src="2026-10-21/favicon.svg" width="32" alt=""><img src="2026-10-21/favicon.svg" width="16" alt=""><span style="color:#9d9da8;font-size:13px">Favicon at 32 and 16 pixels</span></div>
+    <div class="cell light"><img src="2026-10-21/favicon.svg" width="32" alt=""><img src="2026-10-21/favicon.svg" width="16" alt=""><span style="color:#70707d;font-size:13px">Favicon at 32 and 16 pixels</span></div>
+  </div>
+  <h2>Files, 2026-10-21</h2>
+  <table>
+    <tr><th>File</th><th>Use</th></tr>
+    <tr><td><a href="2026-10-21/parity-mark.svg">parity-mark.svg</a></td><td>Colour mark on a transparent background, any theme</td></tr>
+    <tr><td><a href="2026-10-21/parity-mark-white.svg">parity-mark-white.svg</a></td><td>One colour, for dark backgrounds</td></tr>
+    <tr><td><a href="2026-10-21/parity-mark-black.svg">parity-mark-black.svg</a></td><td>One colour, for light backgrounds</td></tr>
+    <tr><td><a href="2026-10-21/parity-icon-dark.svg">parity-icon-dark.svg</a>, <a href="2026-10-21/parity-icon-light.svg">parity-icon-light.svg</a></td><td>App icon tiles</td></tr>
+    <tr><td><a href="2026-10-21/parity-wordmark-on-dark.svg">parity-wordmark-on-dark.svg</a>, <a href="2026-10-21/parity-wordmark-on-light.svg">on-light</a></td><td>Mark with the name</td></tr>
+    <tr><td><a href="2026-10-21/favicon.svg">favicon.svg</a> and the PNG sizes</td><td>Browser tab, home screen and app icons</td></tr>
+    <tr><td>icons/</td><td>The interface icons, 16px stroke, one SVG file each</td></tr>
+  </table>
+  <h2>Interface icons, 2026-10-21</h2>
+  <div class="icons" id="icons"></div>
+</main>
+<script>
+  fetch("2026-10-21/icons/index.json").then((r) => r.json()).then((names) => {
+    const box = document.getElementById("icons");
+    for (const n of names) {
+      const fig = document.createElement("figure");
+      const img = document.createElement("img");
+      img.src = `2026-10-21/icons/${n}.svg`;
+      img.alt = "";
+      fig.append(img, document.createTextNode(n));
+      box.append(fig);
+    }
+  }).catch(() => {});
+</script>
+</body>
+</html>

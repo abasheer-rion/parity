@@ -1,17 +1,22 @@
 # Builds the dashboard and deploys it to Cloudflare Pages.
 # main -> production, pull requests -> a preview URL posted in the job summary.
 #
-# Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID
-# Variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY (public values)
+# Also redeploys after every research or official run, so the site carries the newest results.
+# The site is behind Cloudflare Access; published runs are copied into it as files at deploy time.
+# Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "scripts/export_site_data.py", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Research run", "Official run"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -37,9 +42,15 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run build
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Copy published runs into the site
         env:
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          SITE_DATA_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          pip install "psycopg[binary]>=3.2"
+          python3 ../scripts/export_site_data.py dist/data
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v4
@@ -47,6 +58,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: web
-          command: pages deploy dist --project-name=parity-research --branch=${{ github.head_ref || github.ref_name }} --commit-hash=${{ github.sha }}
+          command: pages deploy dist --project-name=parity-research --branch=${{ github.head_ref || (github.event_name == 'workflow_run' && 'main') || github.ref_name }} --commit-hash=${{ github.sha }}
       - name: Summary
         run: echo "Deployed to ${{ steps.deploy.outputs.deployment-url }}" >> "$GITHUB_STEP_SUMMARY"

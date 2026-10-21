@@ -1,93 +1,84 @@
-/* Parity UI tokens. Every colour, size, radius, shadow and motion value the
-   library uses lives here; components read them as CSS variables. The gallery
-   (#/ui) reads these live, so what it shows is what the site uses.
+/* Parity UI tokens. Colours, type, space, radius and motion follow Mercury's design
+   system exactly (mercury-tokens.css, read from demo.mercury.com on 2026-10-21),
+   with Mercury's accent swapped for the Parity blue. The names below are the short
+   names the site uses; each points at a Mercury token, so light and dark both work.
 
    Colour rules (checked with the dataviz palette validator, see REF-0009):
    - series-1..8 are categorical and always assigned in this order, by name.
    - good/bad mark gains and losses. They are NOT colour-blind safe as a pair,
      so a gain or loss always carries a sign (+ or U+2212) or an arrow as well.
    - accent is for the one primary action and the selected state, never for data. */
-:root {
-  /* Dark is the default theme. */
-  color-scheme: dark;
-  --canvas: #0a0a0c;
-  --bg: #0f0f12;
-  --surface: rgb(255 255 255 / 0.035);
-  --surface-solid: #141418;
-  --border: rgb(255 255 255 / 0.08);
-  --grid: rgb(255 255 255 / 0.07);
-  --axis: rgb(255 255 255 / 0.22);
-  --text: rgb(255 255 255 / 0.96);
-  --text-2: rgb(255 255 255 / 0.66);
-  --muted: rgb(255 255 255 / 0.5);
-  --benchmark: #c3c2b7;
-  --accent: #2f6bff;
-  --accent-soft: rgb(47 107 255 / 0.16);
-  --series-1: #3987e5;
-  --series-2: #d95926;
-  --series-3: #199e70;
-  --series-4: #c98500;
-  --series-5: #d55181;
-  --series-6: #008300;
-  --series-7: #9085e9;
-  --series-8: #e66767;
-  --good: #4cc27a;
-  --bad: #f07d75;
-  --link: #7aa2ff;
-  --radius: 12px;
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
+@import "./mercury-tokens.css";
 
 :root {
-  --side-bg: rgb(255 255 255 / 0.02);
-  --border-2: rgb(255 255 255 / 0.12);
-  --hover: rgb(255 255 255 / 0.05);
-  --dot: rgb(255 255 255 / 0.13);
-  --side-w: 232px;
-}
+  --canvas: var(--ds-background-default);
+  --side-bg: var(--ds-background-sidebar);
+  --bg: var(--ds-background-canvas);
+  --surface: var(--ds-background-default);
+  --surface-solid: var(--ds-background-surface-floating);
+  --hover: var(--ds-background-default-hovered);
+  --border: var(--ds-border-default);
+  --border-2: var(--ds-border-emphasized);
+  --grid: var(--ds-border-default);
+  --axis: var(--ds-neutral-base-300);
+  --dot: var(--ds-neutral-base-300);
+  --text: var(--ds-text-emphasized);
+  --text-body: var(--ds-text-default);
+  --text-2: var(--ds-text-secondary);
+  --muted: var(--ds-text-tertiary);
+  --link: var(--ds-text-link);
+  --accent: var(--ds-background-primary);
+  --accent-hover: var(--ds-background-primary-hovered);
+  --accent-soft: var(--ds-background-emphasized);
+  --good: var(--ds-text-money-in);
+  --bad: var(--ds-text-money-out);
+  --benchmark: var(--ds-neutral-base-400);
+  --radius: var(--ds-border-radius-large);
 
-:root {
-  /* Type scale (size / line height) */
-  --fs-xs: 12px; --fs-sm: 13px; --fs-md: 15px; --fs-lg: 16px; --fs-xl: 22px; --fs-2xl: 28px; --fs-3xl: 36px;
-  --fw-regular: 400; --fw-medium: 500; --fw-bold: 600;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* Space: a 4px grid */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
-  /* Radius */
-  --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 14px; --radius-pill: 999px;
-  /* Elevation */
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.2);
-  --shadow-2: 0 8px 28px rgb(0 0 0 / 0.18);
-  --shadow-3: 0 20px 50px rgb(0 0 0 / 0.3);
-  /* Motion: short and quiet. Everything is turned off for people who ask for reduced motion. */
-  --dur-1: 90ms; --dur-2: 160ms; --dur-3: 240ms; --dur-4: 400ms;
-  --ease-out: cubic-bezier(.2, .8, .2, 1);
-  --ease-in-out: cubic-bezier(.4, 0, .2, 1);
-  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-  --canvas: #ffffff;
-  --bg: #f4f5f8;
-  --surface: #ffffff;
-  --surface-solid: #ffffff;
-  --side-bg: #fbfcfd;
-  --border: #7073931a;
-  --border-2: #70739329;
-  --hover: #7073930f;
-  --grid: #e4e4ea;
-  --axis: #c3c3cc;
-  --text: #1e1e2a;
-  --text-2: #535461;
-  --muted: #70707d;
-  --benchmark: #9d9da8;
+  /* Validated chart palette, light steps */
   --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
   --series-5: #e87ba4; --series-6: #008300; --series-7: #4a3aa7; --series-8: #e34948;
-  --good: #0a7a3b;
-  --bad: #b3261e;
-  --link: #2456d6;
-  --accent: #2f6bff;
-  --accent-soft: rgb(47 107 255 / 0.1);
-  --dot: #c3c3cc;
+
+  /* Mercury's type faces are licensed; Inter is the closest free match. */
+  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Mercury's type scale (size / line height / weight) */
+  --fs-xs: 12px; --fs-sm: 13px; --fs-14: 14px; --fs-md: 15px; --fs-lg: 17px; --fs-xl: 19px; --fs-2xl: 28px; --fs-3xl: 34px;
+  --fw-light: 360; --fw-regular: 400; --fw-display: 380; --fw-medium: 480; --fw-bold: 530;
+
+  /* Space, radius */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 12px; --radius-pill: 9999px;
+
+  /* Elevation: Mercury's own shadows */
+  --shadow-1: 0 1px 2px var(--ds-neutral-magic-600-alpha-3);
+  --shadow-2: 0 0 2px #afb2ce8f, 0 1px 4px #0404341a;
+  --shadow-3: 0 1px 4px #b7bbdb24, 0 0 1px #afb2cee6, 0 8px 12px #0e0e2d14, 0 14px 20px #04043405;
+
+  /* Motion: Mercury's durations and curves */
+  --dur-1: 100ms; --dur-2: 160ms; --dur-3: 250ms; --dur-4: 350ms;
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in-out: cubic-bezier(.2, .4, .2, 1);
+  --ease-spring: cubic-bezier(.2, .9, .25, 1);
+  --ease-fade: cubic-bezier(.35, 0, .5, 1);
+
+  --side-w: 220px;
+  --topbar-h: 48px;
+  --content-w: 968px;
+  color-scheme: light;
+  font-family: var(--font-text);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: var(--ds-background-surface-raised);
+  --axis: var(--ds-neutral-base-600);
+  --dot: var(--ds-neutral-base-700);
+  --shadow-2: 0 0 0 1px #b4b7c81a, 0 2px 6px #00000059;
+  --shadow-3: 0 0 0 1px #b4b7c81f, 0 8px 24px #00000080, 0 2px 6px #00000059;
+  /* Validated chart palette, dark steps */
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+  --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
 }
