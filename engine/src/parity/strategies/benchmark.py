@@ -11,6 +11,10 @@ from .base import Strategy
 @register
 class UsMarketBuyAndHold(Strategy):
     name = "us_market_buy_hold"
+    display_name = "US stock market"
+    description = "Owns the whole US stock market and never trades. This is the bar to beat."
+    tags = {"family": "benchmark", "asset": "stocks", "style": "buy and hold",
+            "horizon": "never trades"}
     summary = "Hold the whole US stock market (dividends reinvested) and never trade."
     reference = "reference/0002-kpis.md#the-benchmark"
     is_benchmark = True

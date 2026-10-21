@@ -3,7 +3,7 @@
 // bookmarks), a slim top bar (search, run picker, settings, profile) and the page.
 import { useEffect, useState, type ReactNode } from "react";
 import { Icon } from "../ui/icons";
-import { toggleBookmark, usePrefs } from "../lib/prefs";
+import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[] }
 
@@ -70,6 +70,7 @@ export function Shell({
   email,
   onSignOut,
   wide,
+  full,
   children,
 }: {
   route: string;
@@ -79,6 +80,8 @@ export function Shell({
   email?: string | null;
   onSignOut?: () => void;
   wide?: boolean;
+  /** Full-bleed page (Sim World): the sidebar can fold into a slim icon rail. */
+  full?: boolean;
   children: ReactNode;
 }) {
   const prefs = usePrefs();
@@ -96,7 +99,7 @@ export function Shell({
   const settings = route === "settings";
 
   return (
-    <div className={`frame ${open ? "nav-open" : ""}`}>
+    <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
       <aside className="side" data-lenis-prevent>
         <div className="org">
           <a className="org-button" href="#/">
@@ -104,6 +107,12 @@ export function Shell({
             <span className="org-name">Parity</span>
             <span className="org-badge">Beta</span>
           </a>
+          {full && (
+            <button className="rail-toggle" onClick={() => setPrefs({ rail: !prefs.rail })}
+              aria-label={prefs.rail ? "Expand sidebar" : "Collapse sidebar"} title={prefs.rail ? "Expand sidebar" : "Collapse sidebar"}>
+              <Icon name="sidebar" size={15} />
+            </button>
+          )}
         </div>
         {settings ? (
           <nav className="side-nav settings-nav" aria-label="Settings">
@@ -131,7 +140,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
+                      <a href={n.href} title={n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
                       </a>
@@ -192,7 +201,7 @@ export function Shell({
             <a className="icon-btn" href="#/settings/appearance" aria-label="Settings" title="Settings"><Icon name="gear" size={15} /></a>
           </div>
         </header>
-        <main className={wide ? "wide" : ""}>{children}</main>
+        <main className={full ? "full" : wide ? "wide" : ""}>{children}</main>
       </div>
     </div>
   );

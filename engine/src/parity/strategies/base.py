@@ -16,12 +16,26 @@ from typing import ClassVar
 
 import pandas as pd
 
+TAG_KEYS = ("family", "asset", "style", "horizon")
+FAMILIES = ("carry", "trend", "value", "calendar", "volatility", "mixed", "benchmark")
+ASSETS = ("fx", "stocks", "commodities", "mixed")
+
 
 class Strategy(ABC):
     #: Short unique id, used in the CLI, the database and the dashboard.
     name: ClassVar[str]
     #: One plain sentence on what the strategy bets on.
     summary: ClassVar[str]
+    #: Name people see on the dashboard, e.g. "Currency carry". Falls back to `name`.
+    display_name: ClassVar[str] = ""
+    #: One short plain sentence for people. Falls back to `summary`.
+    description: ClassVar[str] = ""
+    #: Labels for grouping and filtering. Keys are exactly TAG_KEYS.
+    #: family: carry, trend, value, calendar, volatility, mixed or benchmark
+    #: asset: fx, stocks, commodities or mixed
+    #: style: a short phrase, e.g. "momentum", "mean reversion", "risk premium"
+    #: horizon: how often it trades, e.g. "daily", "monthly", "multi-month"
+    tags: ClassVar[dict[str, str]] = {}
     #: Link to the hypothesis or paper this tests, relative to docs/.
     reference: ClassVar[str] = ""
     #: Treat as a benchmark rather than a candidate strategy.
@@ -61,3 +75,11 @@ class Strategy(ABC):
 
     def params(self) -> dict:
         return {k: v for k, v in vars(self).items() if not k.startswith("_")}
+
+    @classmethod
+    def label(cls) -> dict:
+        """display_name, description and tags with safe defaults, for reports."""
+        tags = {k: str(cls.tags.get(k) or "unknown") for k in TAG_KEYS}
+        return {"display_name": cls.display_name or cls.name,
+                "description": cls.description or cls.summary,
+                "tags": tags}

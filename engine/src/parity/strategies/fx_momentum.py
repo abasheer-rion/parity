@@ -21,6 +21,10 @@ from .base import Strategy
 @register
 class FxTimeSeriesMomentum(Strategy):
     name = "fx_tsmom"
+    display_name = "Currency trend"
+    description = "Owns currencies that rose over the past year and bets against those that fell."
+    tags = {"family": "trend", "asset": "fx", "style": "momentum",
+            "horizon": "monthly"}
     summary = "Long G10 currencies that rose over the past 12 months, short those that fell."
     reference = "hypotheses/0002-currency-trends-persist.md"
     param_grid = {"lookback": [126, 252, 504], "rebalance": ["W", "M"]}

@@ -88,7 +88,7 @@ function Dashboard({ email }: { email: string | null }) {
   );
 
   return (
-    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={source === "static" ? signOut : undefined} wide={route === "doc"}>
+    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={source === "static" ? signOut : undefined} wide={route === "doc"} full={route === "" || route === "home"}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}

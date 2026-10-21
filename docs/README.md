@@ -36,7 +36,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 - 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
-- 2026-10-21 [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
+- 2026-10-21 [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 
 ## intent
 
@@ -100,7 +100,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ID | Title | Status | Updated | Tags |
 | --- | --- | --- | --- | --- |
 | GDE-0001 | [Getting started](guides/0001-getting-started.md) | current | 2026-10-20 | [process](TAGS.md#process) |
-| GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-20 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
+| GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-21 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 

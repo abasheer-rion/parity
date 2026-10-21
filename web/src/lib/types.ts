@@ -32,8 +32,19 @@ export interface IcRow {
   observations: number;
 }
 
+export interface StrategyTags {
+  family: string;
+  asset: string;
+  style: string;
+  horizon: string;
+}
+
 export interface StrategyRun {
   strategy: string;
+  /** Human name, description and tags, written by the engine from schema 1 onward; older runs fall back to lib/strategyMeta.ts. */
+  display_name?: string;
+  description?: string;
+  tags?: StrategyTags;
   summary: string;
   reference: string;
   is_benchmark: boolean;

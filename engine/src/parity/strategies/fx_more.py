@@ -28,6 +28,11 @@ def _rank_long_short(sig: pd.DataFrame, k: int) -> pd.DataFrame:
 @register
 class FxDollarCarry(Strategy):
     name = "fx_dollar_carry"
+    display_name = "Dollar carry"
+    description = ("Owns the other major currencies against the dollar when they pay more "
+                   "interest than the dollar, and the reverse.")
+    tags = {"family": "carry", "asset": "fx", "style": "risk premium",
+            "horizon": "monthly"}
     summary = ("Long all G10 currencies against the dollar when their average rate is above "
                "the US rate, short when below.")
     reference = "hypotheses/0005-dollar-carry-beats-pair-carry.md"
@@ -54,6 +59,11 @@ class FxDollarCarry(Strategy):
 @register
 class FxCrossSectionalMomentum(Strategy):
     name = "fx_xs_momentum"
+    display_name = "Currency momentum ranking"
+    description = ("Owns the three currencies that rose most over the past year and bets "
+                   "against the three weakest.")
+    tags = {"family": "trend", "asset": "fx", "style": "momentum",
+            "horizon": "monthly"}
     summary = ("Long the 3 G10 currencies that rose most over the past year (skipping the "
                "last month), short the 3 weakest.")
     reference = "algorithms/0005-fx-cross-sectional-momentum.md"
@@ -76,6 +86,11 @@ class FxCrossSectionalMomentum(Strategy):
 @register
 class FxValueReer(Strategy):
     name = "fx_value_reer"
+    display_name = "Currency value"
+    description = ("Owns currencies that look cheap against their own long-run average and"
+                   " bets against the dear ones.")
+    tags = {"family": "value", "asset": "fx", "style": "mean reversion",
+            "horizon": "monthly"}
     summary = ("Long the 3 G10 currencies that are cheapest against their own 5-year "
                "average real exchange rate, short the 3 dearest.")
     reference = "algorithms/0017-fx-value-ppp.md"
@@ -109,6 +124,10 @@ class FxValueReer(Strategy):
 @register
 class FxCarryTrendValue(Strategy):
     name = "fx_carry_trend_value"
+    display_name = "Currency carry, trend and value"
+    description = "Splits the money equally between currency carry, trend and value."
+    tags = {"family": "mixed", "asset": "fx", "style": "blend",
+            "horizon": "monthly"}
     summary = "Equal parts carry, trend and value in G10 currencies, rebalanced monthly."
     reference = "algorithms/0051-trend-plus-carry-combined.md"
 
@@ -134,6 +153,11 @@ def _rsi(px: pd.DataFrame, n: int) -> pd.DataFrame:
 @register
 class FxRsiReversion(Strategy):
     name = "fx_rsi_reversion"
+    display_name = "Currency RSI bounce"
+    description = ("Buys a currency after a sharp fall and sells after a sharp rise, using"
+                   " the 14-day RSI.")
+    tags = {"family": "value", "asset": "fx", "style": "mean reversion",
+            "horizon": "daily"}
     summary = ("Retail favourite: buy a currency when its 14-day RSI is below 30, sell when "
                "above 70.")
     reference = "algorithms/0014-fx-technical-trading-rules.md"
@@ -157,6 +181,11 @@ class FxRsiReversion(Strategy):
 @register
 class FxMovingAverageCross(Strategy):
     name = "fx_ma_cross"
+    display_name = "Currency moving average cross"
+    description = ("Owns a currency while its 50-day average is above its 200-day average,"
+                   " and bets against it when below.")
+    tags = {"family": "trend", "asset": "fx", "style": "momentum",
+            "horizon": "daily"}
     summary = ("Retail favourite: long a currency when its 50-day average is above its "
                "200-day average, short when below.")
     reference = "algorithms/0014-fx-technical-trading-rules.md"

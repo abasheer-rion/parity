@@ -13,6 +13,10 @@ export interface Prefs {
   startingAmount: number;
   defaultRange: Range;
   bookmarks: { href: string; label: string }[];
+  /** Sim World: show the sidebar as a slim icon rail. */
+  rail: boolean;
+  /** Sim World: the data panels shown beside the race (report series keys). */
+  simWidgets: string[];
 }
 
 const KEY = "parity.prefs.v1";
@@ -22,6 +26,8 @@ const DEFAULTS: Prefs = {
   findOnSelect: true,
   startingAmount: 10_000,
   defaultRange: "ALL",
+  rail: true,
+  simWidgets: ["risk.VIX", "fx.JPY", "cmd.WTI"],
   bookmarks: [
     { href: "#/doc/RES-0007", label: "Comparing every algorithm" },
     { href: "#/doc/REF-0006", label: "The gauntlet" },
