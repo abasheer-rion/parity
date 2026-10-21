@@ -1,0 +1,29 @@
+# Data and results are reproducible from code; never commit them.
+engine/data/
+engine/output/
+
+# Environments and secrets
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+web/dist/
+
+# Supabase local state
+supabase/.temp/
+supabase/.branches/
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/

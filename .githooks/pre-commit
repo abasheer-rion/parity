@@ -1,0 +1,8 @@
+#!/bin/sh
+# Turned on by `make setup` (git config core.hooksPath .githooks).
+set -e
+root=$(git rev-parse --show-toplevel)
+python3 "$root/scripts/docs.py" check
+if git diff --cached --name-only | grep -q '^engine/.*\.py$'; then
+  "$root/engine/.venv/bin/ruff" check "$root/engine/src" "$root/engine/tests"
+fi

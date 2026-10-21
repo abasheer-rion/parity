@@ -1,0 +1,4 @@
+#!/bin/sh
+# Commit messages: "<type>(<optional scope>): <summary>", summary under 72 characters.
+# Types: feat fix docs data research exp test refactor ci chore
+python3 "$(git rev-parse --show-toplevel)/scripts/commit_msg.py" "$1"

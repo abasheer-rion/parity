@@ -1,0 +1,361 @@
+{
+  "about": "Single source of truth for how docs are organised. Read by scripts/docs.py. Change this file, not the checker, when a rule changes, and record why in a decision.",
+  "front_matter_keys": [
+    "id",
+    "title",
+    "type",
+    "status",
+    "created",
+    "updated",
+    "authors",
+    "tags",
+    "related"
+  ],
+  "types": {
+    "intent": {
+      "folder": "intent",
+      "prefix": "INT",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "current",
+        "superseded"
+      ],
+      "sections": [
+        "Summary",
+        "What we want",
+        "What we do not want",
+        "How we will know"
+      ],
+      "about": "Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one."
+    },
+    "decision": {
+      "folder": "decisions",
+      "prefix": "DEC",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "proposed",
+        "accepted",
+        "superseded",
+        "rejected"
+      ],
+      "sections": [
+        "Context",
+        "Decision",
+        "Consequences"
+      ],
+      "about": "One choice we made and why. Never edited after acceptance except to mark it superseded."
+    },
+    "hypothesis": {
+      "folder": "hypotheses",
+      "prefix": "HYP",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "open",
+        "testing",
+        "supported",
+        "rejected",
+        "parked"
+      ],
+      "sections": [
+        "Claim",
+        "Why it might be true",
+        "Why it might be false",
+        "How we test it",
+        "Result so far"
+      ],
+      "about": "A claim about markets that an experiment can support or reject."
+    },
+    "experiment": {
+      "folder": "experiments",
+      "prefix": "EXP",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "planned",
+        "running",
+        "done",
+        "abandoned"
+      ],
+      "sections": [
+        "Question",
+        "Setup",
+        "Results",
+        "What we learned",
+        "Next"
+      ],
+      "about": "One run or set of runs, with the exact settings, so anyone can reproduce it."
+    },
+    "research": {
+      "folder": "research",
+      "prefix": "RES",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "draft",
+        "current",
+        "outdated"
+      ],
+      "sections": [
+        "Summary"
+      ],
+      "about": "Reading notes, surveys of papers, code and forums."
+    },
+    "guide": {
+      "folder": "guides",
+      "prefix": "GDE",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "draft",
+        "current",
+        "outdated"
+      ],
+      "sections": [
+        "Summary"
+      ],
+      "about": "How to do something in this repo, step by step."
+    },
+    "reference": {
+      "folder": "reference",
+      "prefix": "REF",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "draft",
+        "current",
+        "outdated"
+      ],
+      "sections": [
+        "Summary"
+      ],
+      "about": "Facts to look up: definitions, data sources, architecture."
+    },
+    "log": {
+      "folder": "log",
+      "prefix": "LOG",
+      "filename": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "final"
+      ],
+      "sections": [
+        "What happened",
+        "Decisions",
+        "Open questions"
+      ],
+      "append_only": true,
+      "about": "A dated, append-only record of a working session. Corrections go in a new entry, not an edit."
+    }
+  },
+  "tags": {
+    "benchmark": {
+      "about": "The S&P 500 bar and how we compare against it",
+      "keywords": [
+        "s&p 500",
+        "spy",
+        "benchmark"
+      ]
+    },
+    "carry": {
+      "about": "Interest rate differentials and carry trades",
+      "keywords": [
+        "carry",
+        "interest rate",
+        "forward premium"
+      ]
+    },
+    "commodities": {
+      "about": "Oil, gas, metals and their link to currencies",
+      "keywords": [
+        "oil",
+        "wti",
+        "brent",
+        "natural gas",
+        "copper",
+        "commodit"
+      ]
+    },
+    "crypto": {
+      "about": "Crypto markets, used as a comparison",
+      "keywords": [
+        "crypto",
+        "bitcoin",
+        "funding rate"
+      ]
+    },
+    "data": {
+      "about": "Sources, scrapers, caching and data quality",
+      "keywords": [
+        "fred",
+        "scraper",
+        "dataset",
+        "data source",
+        "parquet"
+      ]
+    },
+    "docs": {
+      "about": "How we write and organise these documents",
+      "keywords": [
+        "front matter",
+        "documentation"
+      ]
+    },
+    "economics": {
+      "about": "Economic theory behind exchange rates",
+      "keywords": [
+        "parity",
+        "purchasing power",
+        "uncovered",
+        "macro"
+      ]
+    },
+    "fx": {
+      "about": "Foreign exchange in general",
+      "keywords": [
+        "currency",
+        "currencies",
+        "exchange rate",
+        "fx"
+      ]
+    },
+    "infra": {
+      "about": "Hosting, CI/CD, database and costs",
+      "keywords": [
+        "supabase",
+        "cloudflare",
+        "github actions",
+        "ci/cd",
+        "deploy",
+        "free tier"
+      ]
+    },
+    "intent": {
+      "about": "Why the project exists and what success means",
+      "keywords": [
+        "our intent",
+        "success means",
+        "proof of concept"
+      ]
+    },
+    "kpis": {
+      "about": "Metrics that tell us if something works and where to look next",
+      "keywords": [
+        "sharpe",
+        "drawdown",
+        "kpi",
+        "information coefficient"
+      ]
+    },
+    "method": {
+      "about": "How we avoid fooling ourselves: backtest design, overfitting, statistics",
+      "keywords": [
+        "overfitting",
+        "lookahead",
+        "deflated",
+        "out-of-sample"
+      ]
+    },
+    "momentum": {
+      "about": "Trend and momentum signals",
+      "keywords": [
+        "momentum",
+        "trend"
+      ]
+    },
+    "news": {
+      "about": "News, macro releases and event-driven signals",
+      "keywords": [
+        "news",
+        "announcement",
+        "calendar",
+        "sentiment"
+      ]
+    },
+    "open-source": {
+      "about": "Other people's code, bots and published results",
+      "keywords": [
+        "github.com",
+        "repository",
+        "repositories",
+        "freqtrade",
+        "open source",
+        "open-source"
+      ]
+    },
+    "process": {
+      "about": "How the team works together",
+      "keywords": [
+        "workflow",
+        "review",
+        "pull request"
+      ]
+    },
+    "strategy": {
+      "about": "A specific trading idea or its implementation",
+      "keywords": [
+        "strategy",
+        "signal",
+        "weights"
+      ]
+    },
+    "ui": {
+      "about": "The dashboard",
+      "keywords": [
+        "dashboard",
+        "chart",
+        "frontend"
+      ]
+    }
+  },
+  "authors": [
+    "ayan",
+    "amanda",
+    "abanish"
+  ],
+  "style": {
+    "banned_characters": {
+      "\u2014": "em dash",
+      "\u2013": "en dash",
+      "\u2018": "curly quote",
+      "\u2019": "curly quote",
+      "\u201c": "curly quote",
+      "\u201d": "curly quote",
+      "\u2026": "ellipsis character"
+    },
+    "banned_words": [
+      "delve",
+      "seamless",
+      "seamlessly",
+      "cutting-edge",
+      "comprehensive",
+      "game-changer",
+      "revolutionary",
+      "unlock",
+      "unleash",
+      "supercharge",
+      "synergy",
+      "groundbreaking",
+      "state-of-the-art",
+      "in conclusion",
+      "it is important to note"
+    ],
+    "max_line_length": 0
+  },
+  "layout": {
+    "top_level": [
+      ".editorconfig",
+      ".github",
+      ".githooks",
+      ".gitignore",
+      "CHANGELOG.md",
+      "CONTRIBUTING.md",
+      "Makefile",
+      "README.md",
+      "docs",
+      "engine",
+      "scripts",
+      "supabase",
+      "web"
+    ],
+    "unchecked_markdown": [],
+    "generated": [
+      "docs/README.md",
+      "docs/TAGS.md"
+    ]
+  }
+}
