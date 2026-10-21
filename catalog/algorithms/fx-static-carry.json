@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0073",
+  "slug": "fx-static-carry",
+  "name": "Static carry: hold the currencies that usually pay high interest",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "g10",
+    "low-turnover",
+    "interest-rates"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2019,
+    "authors": "Hassan and Mano",
+    "source_title": "Forward and Spot Exchange Rates in a Multi-Currency World (Quarterly Journal of Economics 134(1), 397-450)",
+    "source_url": "https://www.nber.org/papers/w20294"
+  },
+  "how_it_works": {
+    "simple": "Some countries pay high interest year after year. Instead of reshuffling every month, buy the currencies that have paid high interest on average in the past and sell the ones that have paid little, and mostly keep those positions.",
+    "analogy": "Like choosing a savings account by its long record rather than by this month's teaser rate.",
+    "precise": "Weights are proportional to each currency's average forward premium minus the cross-currency average, estimated on data before the trading period, and held with rolling one-month forwards. Hassan and Mano split carry into a static part, a dollar part and a dynamic part and find the static part carries most of the return."
+  },
+  "rule": "Estimate each currency's average forward premium (interest differential against USD) on a past window. Go long currencies with above-average premia and short those below, with weights proportional to the gap from the cross-currency average. Roll one-month forwards monthly and re-estimate the averages rarely (for example once a year).",
+  "data_needed": [
+    "Monthly spot and one-month forward rates, or short-term interest rates by country",
+    "Bid-ask spreads for costs"
+  ],
+  "economic_rationale": "Hassan and Mano find that most carry profit comes from currencies that pay high interest permanently, which points to a persistent risk premium rather than to short-term timing.",
+  "why_it_might_fail": "The static weights depend on which past window is used, and the 1994-2010 sample includes the years when carry worked best. Hutchinson et al. (2022) found published FX factors decayed after publication. The static trade is also exposed to the same crash risk as ordinary carry.",
+  "reported_results": [
+    {
+      "source": "Hassan and Mano (2019), NBER w20294, Table 2, static trade",
+      "source_url": "https://www.nber.org/system/files/working_papers/w20294/w20294.pdf",
+      "period": "12/1994-6/2010",
+      "market": "Currencies vs USD, '1 Rebalance' sample",
+      "sharpe": 0.39,
+      "annual_return": 0.0346,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"The mean annualized return on the static trade is 3.46% with a Sharpe ratio of 0.39.\" Table 2, column 1. The sentence does not say whether this is net of costs."
+    },
+    {
+      "source": "Hassan and Mano (2019), NBER w20294, Table 1, carry trade",
+      "source_url": "https://www.nber.org/system/files/working_papers/w20294/w20294.pdf",
+      "period": "12/1994-6/2010",
+      "market": "Currencies vs USD",
+      "sharpe": 0.54,
+      "annual_return": 0.0495,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"yields a mean annualized net return of 4.95% with a Sharpe ratio of 0.54\" Table 1, the ordinary (linear) carry trade for comparison; the paper says net return."
+    }
+  ],
+  "post_publication_evidence": "We found no independent replication. The paper itself says the static part contributes 70% of carry trade returns over 12/1994 to 6/2010.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Needs only interest rates and spot rates, trades rarely so costs are low, and gives a cleaner version of our carry test."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

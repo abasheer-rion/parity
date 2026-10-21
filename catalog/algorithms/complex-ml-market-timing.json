@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0082",
+  "slug": "complex-ml-market-timing",
+  "name": "Complex ridge market timing (virtue of complexity)",
+  "family": "machine-learning",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "market-timing",
+    "ridge",
+    "random-features",
+    "sp500"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2024,
+    "authors": "Kelly, Malamud and Zhou",
+    "source_title": "The Virtue of Complexity in Return Prediction (Journal of Finance 79(1), 459-503)",
+    "source_url": "https://ideas.repec.org/a/bla/jfinan/v79y2024i1p459-503.html"
+  },
+  "how_it_works": {
+    "simple": "Take 15 well-known economic indicators, turn them into thousands of random combinations, and fit a heavily restrained regression on the last year of data to decide how much of the US stock market to hold next month.",
+    "analogy": "Like asking thousands of slightly different weather forecasters and averaging them with a strong pull towards 'no change'.",
+    "precise": "The 15 Goyal-Welch predictors are mapped into P random Fourier features (up to 12,000). A ridge regression of next-month market return on the features is trained on a rolling 12-, 60- or 120-month window. The position is proportional to the forecast. The paper argues that more parameters than observations can help out of sample."
+  },
+  "rule": "Each month, using only past data: build random Fourier features of the 15 predictors, fit ridge regression on the last 12 months, forecast next month's market excess return, and hold the market in proportion to the forecast.",
+  "data_needed": [
+    "Goyal-Welch predictor data (free, monthly)",
+    "US market returns (free)"
+  ],
+  "economic_rationale": "The authors argue that simple models understate predictability and that heavily shrunk complex models can capture nonlinear signals without overfitting.",
+  "why_it_might_fail": "Results depend on choices of bandwidth, window and penalty, which adds hidden trials. Later work has questioned where the gains come from; we have not read it yet. Israel, Kelly and Moskowitz (2020) stress how few independent observations return prediction has.",
+  "reported_results": [
+    {
+      "source": "Kelly, Malamud and Zhou (2024), NBER w30217, introduction",
+      "source_url": "https://www.nber.org/system/files/working_papers/w30217/w30217.pdf",
+      "period": "1926-2020",
+      "market": "US stock market (CRSP)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Quote: \"Over the standard CRSP sample 1926-2020, out-of-sample market timing Sharpe ratio improvements (relative to market buy-and-hold) reach roughly 0.47 per annum with t-statistics near 3.0.\" Sharpe ratio improvement over buy-and-hold, not a Sharpe ratio; NBER w30217."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "It is a claim to beat our own benchmark with free monthly data, and our audit's lesson about hidden trials applies directly."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

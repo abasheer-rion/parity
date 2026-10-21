@@ -3,12 +3,12 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-726 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+783 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 171 |
-| [Preprints and working papers](#preprints-and-working-papers) | 32 |
+| [Papers](#papers) | 226 |
+| [Preprints and working papers](#preprints-and-working-papers) | 34 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 53 |
 | [Software](#software) | 61 |
@@ -18,6 +18,16 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [News](#news) | 3 |
 
 ## Papers
+
+### accominotti2016
+
+Accominotti, Olivier; Chambers, David (2016). If You're So Smart: John Maynard Keynes and Currency Speculation in the Interwar Years. *Journal of Economic History 76(2), 342-386*. doi:10.1017/S0022050716000589 <https://doi.org/10.1017/S0022050716000589>. <https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EDE2AA44C9394C69B54283D052B96B1E/S0022050716000589a.pdf/div-class-title-if-you-re-so-smart-john-maynard-keynes-and-currency-speculation-in-the-interwar-years-div.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/a/cup/jechis/v76y2016i02p342-386_00.html>, <https://doi.org/10.1017/S0022050716000589>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### acerbi2002
 
@@ -46,6 +56,16 @@ Amat, Christophe; Michalski, Tomasz; Stoltz, Gilles (2018). Fundamentals and exc
 Also at: <https://data.mendeley.com/datasets/yxystdn2hz/2>.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### andersen1998
+
+Andersen, Torben G.; Bollerslev, Tim (1998). Deutsche Mark-Dollar Volatility: Intraday Activity Patterns, Macroeconomic Announcements, and Longer Run Dependencies. *Journal of Finance 53(1), 219-265*. doi:10.1111/0022-1082.85732 <https://doi.org/10.1111/0022-1082.85732>. <https://www.nber.org/papers/w5783>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1111/0022-1082.85732>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### andersen2003
 
@@ -151,11 +171,31 @@ Note: Cited in this repo as: Bajgrowicz and Scaillet (2012), abstract.
 
 Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/golden-cross-50-200.json), [ALG-0061](algorithms/0061-golden-cross-50-200.md).
 
+### bakshi2013
+
+Bakshi, Gurdip; Panayotov, George (2013). Predictability of currency carry trades and asset pricing implications. *Journal of Financial Economics 110(1), 139-163*. doi:10.1016/j.jfineco.2013.04.010 <https://doi.org/10.1016/j.jfineco.2013.04.010>. <https://ideas.repec.org/a/eee/jfinec/v110y2013i1p139-163.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jfineco.2013.04.010>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### banerjee1992
 
 Banerjee, Abhijit V. (1992). A Simple Model of Herd Behavior. *Quarterly Journal of Economics 107(3), 797-817*. doi:10.2307/2118364 <https://doi.org/10.2307/2118364>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### bansal2000
+
+Bansal, Ravi; Dahlquist, Magnus (2000). The forward premium puzzle: different tales from developed and emerging economies. *Journal of International Economics 51(1), 115-144*. doi:10.1016/S0022-1996(99)00039-2 <https://doi.org/10.1016/S0022-1996(99)00039-2>. <https://ideas.repec.org/a/eee/inecon/v51y2000i1p115-144.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/S0022-1996(99)00039-2>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### barber2000
 
@@ -209,6 +249,16 @@ Beckmann, Joscha; Czudaj, Robert L.; Arora, Vipin (2020). The relationship betwe
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### bekaert2020
+
+Bekaert, Geert; Panayotov, George (2020). Good Carry, Bad Carry. *Journal of Financial and Quantitative Analysis 55(4), 1063-1094*. doi:10.1017/S0022109019000887 <https://doi.org/10.1017/S0022109019000887>. <https://www.nber.org/papers/w25420>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w25420/w25420.pdf>, <https://doi.org/10.1017/S0022109019000887>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-good-carry-g10.json](../catalog/algorithms/fx-good-carry-g10.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### benartzi1995
 
 Benartzi, Shlomo; Thaler, Richard H. (1995). Myopic Loss Aversion and the Equity Premium Puzzle. *Quarterly Journal of Economics 110(1), 73-92*. doi:10.2307/2118511 <https://doi.org/10.2307/2118511>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -240,6 +290,16 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Bouman, Sven; Jacobsen, Ben (2002). The Halloween Indicator, "Sell in May and Go Away": Another Puzzle. *American Economic Review 92(5), 1618-1635*. doi:10.1257/000282802762024683 <https://doi.org/10.1257/000282802762024683>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/sell-in-may-halloween.json](../catalog/algorithms/sell-in-may-halloween.json), [ALG-0047](algorithms/0047-sell-in-may-halloween.md).
+
+### breedon2013
+
+Breedon, Francis; Ranaldo, Angelo (2013). Intraday Patterns in FX Returns and Order Flow. *Journal of Money, Credit and Banking 45(5), 953-965*. doi:10.1111/jmcb.12032 <https://doi.org/10.1111/jmcb.12032>. <https://ideas.repec.org/a/wly/jmoncb/v45y2013i5p953-965.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.econstor.eu/bitstream/10419/97343/1/690223323.pdf>, <https://www.alexandria.unisg.ch/handle/20.500.14171/88927>, <https://doi.org/10.1111/jmcb.12032>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-local-hours-time-of-day.json](../catalog/algorithms/fx-local-hours-time-of-day.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### brier1950
 
@@ -285,17 +345,57 @@ Caldara, Dario; Iacoviello, Matteo (2022). Measuring Geopolitical Risk. *America
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
+### campbell2010
+
+Campbell, John Y.; Serfaty-de Medeiros, Karine; Viceira, Luis M. (2010). Global Currency Hedging. *Journal of Finance 65(1), 87-121*. doi:10.1111/j.1540-6261.2009.01524.x <https://doi.org/10.1111/j.1540-6261.2009.01524.x>. <https://ideas.repec.org/a/bla/jfinan/v65y2010i1p87-121.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w13088/w13088.pdf>, <https://doi.org/10.1111/j.1540-6261.2009.01524.x>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### carhart1997
 
 Carhart, Mark M. (1997). On Persistence in Mutual Fund Performance. *Journal of Finance 52(1), 57-82*. doi:10.1111/j.1540-6261.1997.tb03808.x <https://doi.org/10.1111/j.1540-6261.1997.tb03808.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### cartea2019
+
+Cartea, Alvaro; Jaimungal, Sebastian; Walton, Jamie (2019). Foreign exchange markets with Last Look. *Mathematics and Financial Economics 13(1), 1-30*. doi:10.1007/s11579-018-0218-3 <https://doi.org/10.1007/s11579-018-0218-3>. arXiv:1806.04460 <https://arxiv.org/abs/1806.04460>. <https://arxiv.org/abs/1806.04460>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://arxiv.org/pdf/1806.04460>, <https://doi.org/10.1007/s11579-018-0218-3>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### cederburg2020
 
 Cederburg, Scott; O'Doherty, Michael S.; Wang, Feifei; Yan, Xuemin (Sterling) (2020). On the performance of volatility-managed portfolios. *Journal of Financial Economics 138(1), 95-117*. doi:10.1016/j.jfineco.2020.04.015 <https://doi.org/10.1016/j.jfineco.2020.04.015>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md).
+
+### cespa2022
+
+Cespa, Giovanni; Gargano, Antonio; Riddiough, Steven J.; Sarno, Lucio (2022). Foreign Exchange Volume. *Review of Financial Studies 35(5), 2386-2427*. doi:10.1093/rfs/hhab095 <https://doi.org/10.1093/rfs/hhab095>. <https://openaccess.city.ac.uk/id/eprint/26188/1/DP16128.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/a/oup/rfinst/v35y2022i5p2386-2427..html>, <https://doi.org/10.1093/rfs/hhab095>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-low-volume-reversal.json](../catalog/algorithms/fx-low-volume-reversal.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### chaboud2014
+
+Chaboud, Alain P.; Chiquoine, Benjamin; Hjalmarsson, Erik; Vega, Clara (2014). Rise of the Machines: Algorithmic Trading in the Foreign Exchange Market. *Journal of Finance 69(5), 2045-2084*. doi:10.1111/jofi.12186 <https://doi.org/10.1111/jofi.12186>. <https://ideas.repec.org/a/bla/jfinan/v69y2014i5p2045-2084.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.federalreserve.gov/pubs/ifdp/2009/980/ifdp980.pdf>, <https://doi.org/10.1111/jofi.12186>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### chague2025
 
@@ -326,6 +426,36 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Chong, Terence; Ng, Wing-Kam; Liew, Venus (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management 7(1), 1-12*. doi:10.3390/jrfm7010001 <https://doi.org/10.3390/jrfm7010001>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/macd-crossover.json](../catalog/algorithms/macd-crossover.json), [catalog/algorithms/rsi-overbought-oversold.json](../catalog/algorithms/rsi-overbought-oversold.json), [ALG-0065](algorithms/0065-macd-crossover.md), [ALG-0070](algorithms/0070-rsi-overbought-oversold.md).
+
+### chordia2014
+
+Chordia, Tarun; Subrahmanyam, Avanidhar; Tong, Qing (2014). Have capital market anomalies attenuated in the recent era of high liquidity and trading activity? *Journal of Accounting and Economics 58(1), 41-58*. doi:10.1016/j.jacceco.2014.06.001 <https://doi.org/10.1016/j.jacceco.2014.06.001>. <https://ideas.repec.org/a/eee/jaecon/v58y2014i1p41-58.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jacceco.2014.06.001>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### colacito2020
+
+Colacito, Riccardo; Riddiough, Steven J.; Sarno, Lucio (2020). Business cycles and currency returns. *Journal of Financial Economics 137(3), 659-678*. doi:10.1016/j.jfineco.2020.04.005 <https://doi.org/10.1016/j.jfineco.2020.04.005>. <https://www.nber.org/papers/w26299>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w26299/w26299.pdf>, <https://doi.org/10.1016/j.jfineco.2020.04.005>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-output-gap-business-cycle.json](../catalog/algorithms/fx-output-gap-business-cycle.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### colombo2020
+
+Colombo, Emilio; Pelagatti, Matteo (2020). Statistical learning and exchange rate forecasting. *International Journal of Forecasting 36(4), 1260-1289*. doi:10.1016/j.ijforecast.2019.12.007 <https://doi.org/10.1016/j.ijforecast.2019.12.007>. <https://ideas.repec.org/a/eee/intfor/v36y2020i4p1260-1289.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.ijforecast.2019.12.007>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### cowles1933
 
@@ -365,6 +495,16 @@ Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367>.
 
 Cited in: [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md).
 
+### dellacorte2016b
+
+Della Corte, Pasquale; Riddiough, Steven J.; Sarno, Lucio (2016). Currency Premia and Global Imbalances. *Review of Financial Studies 29(8), 2161-2193*. doi:10.1093/rfs/hhw038 <https://doi.org/10.1093/rfs/hhw038>. <https://www.repository.cam.ac.uk/bitstreams/8c73c934-ac4f-4cf6-8044-1c5de19b8997/download>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.repository.cam.ac.uk/handle/1810/300392>, <https://doi.org/10.1093/rfs/hhw038>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-global-imbalances.json](../catalog/algorithms/fx-global-imbalances.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### demiguel2024
 
 DeMIGUEL, VICTOR; Martín-Utrera, Alberto; Uppal, Raman (2024). A Multifactor Perspective on Volatility-Managed Portfolios. *The Journal of Finance 79(6), 3859-3891*. doi:10.1111/jofi.13395 <https://doi.org/10.1111/jofi.13395>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -376,6 +516,16 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 Do, Binh; Faff, Robert (2010). Does Simple Pairs Trading Still Work? *Financial Analysts Journal 66(4), 83-95*. doi:10.2469/faj.v66.n4.1 <https://doi.org/10.2469/faj.v66.n4.1>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+
+### doskov2015
+
+Doskov, Nikolay; Swinkels, Laurens (2015). Empirical evidence on the currency carry trade, 1900-2012. *Journal of International Money and Finance 51, 370-389*. doi:10.1016/j.jimonfin.2014.12.001 <https://doi.org/10.1016/j.jimonfin.2014.12.001>. <https://ideas.repec.org/a/eee/jimfin/v51y2015icp370-389.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://pure.eur.nl/en/publications/72074184-1b23-40fd-ab50-881a42590969>, <https://doi.org/10.1016/j.jimonfin.2014.12.001>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### du2018
 
@@ -401,6 +551,16 @@ Evans, Martin D.; Lyons, Richard (2008). How is Macro News Transmitted to Exchan
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### evans2018
+
+Evans, Martin D. D. (2018). Forex trading and the WMR Fix. *Journal of Banking and Finance 87, 233-247*. doi:10.1016/j.jbankfin.2017.09.017 <https://doi.org/10.1016/j.jbankfin.2017.09.017>. <https://mpra.ub.uni-muenchen.de/81583/1/MPRA_paper_81583.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/a/eee/jbfina/v87y2018icp233-247.html>, <https://doi.org/10.1016/j.jbankfin.2017.09.017>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### falcesmarin2022
 
 Falces Marin, Javier; Díaz Pardo de Vera, David; Lopez Gonzalo, Eduardo (2022). A reinforcement learning approach to improve the performance of the Avellaneda-Stoikov market-making algorithm. *PLOS ONE 17(12), e0277042*. doi:10.1371/journal.pone.0277042 <https://doi.org/10.1371/journal.pone.0277042>. <https://pmc.ncbi.nlm.nih.gov/articles/PMC9767337/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -425,6 +585,16 @@ Fama, Eugene F.; French, Kenneth R. (1992). The Cross-Section of Expected Stock 
 
 Cited in: [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0053](algorithms/0053-value-hml.md).
 
+### farhi2016
+
+Farhi, Emmanuel; Gabaix, Xavier (2016). Rare Disasters and Exchange Rates. *Quarterly Journal of Economics 131(1), 1-52*. doi:10.1093/qje/qjv040 <https://doi.org/10.1093/qje/qjv040>. <https://www.nber.org/papers/w13805>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w13805/w13805.pdf>, <https://doi.org/10.1093/qje/qjv040>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### faust2007
 
 Faust, Jon; Rogers, John H.; Wang, Shing-Yi; Wright, Jonathan H. (2007). The High-Frequency Response of Exchange Rates and Interest Rates to Macroeconomic Announcements. *Journal of Monetary Economics 54(4), 1051-1068*. doi:10.2139/ssrn.465323 <https://doi.org/10.2139/ssrn.465323>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=465323>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -444,6 +614,16 @@ Cited in: [catalog/algorithms/fx-oil-cad-daily.json](../catalog/algorithms/fx-oi
 Ferraro, Domenico; Rogoff, Kenneth; Rossi, Barbara (2015). Can oil prices forecast exchange rates? An empirical analysis of the relationship between commodity prices and exchange rates. *Journal of International Money and Finance 54, 116-141*. doi:10.1016/j.jimonfin.2015.03.001 <https://doi.org/10.1016/j.jimonfin.2015.03.001>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### filippou2018
+
+Filippou, Ilias; Gozluklu, Arie E.; Taylor, Mark P. (2018). Global Political Risk and Currency Momentum. *Journal of Financial and Quantitative Analysis 53(5), 2227-2259*. doi:10.1017/S0022109018000686 <https://doi.org/10.1017/S0022109018000686>. <https://ideas.repec.org/a/cup/jfinqa/v53y2018i05p2227-2259_00.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.semanticscholar.org/graph/v1/paper/DOI:10.1017/S0022109018000686>, <https://doi.org/10.1017/S0022109018000686>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### fischer2017
 
@@ -509,11 +689,61 @@ Gu, Shihao; Kelly, Bryan; Xiu, Dacheng (2020). Empirical Asset Pricing via Machi
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### hansen2005
+
+Hansen, Peter Reinhard (2005). A Test for Superior Predictive Ability. *Journal of Business and Economic Statistics 23(4), 365-380*. doi:10.1198/073500105000000063 <https://doi.org/10.1198/073500105000000063>. <https://cdr.lib.unc.edu/downloads/zp38wf793>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/a/bes/jnlbes/v23y2005p365-380.html>, <https://api.openalex.org/works/doi:10.1198/073500105000000063>, <https://doi.org/10.1198/073500105000000063>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### harvey2015
 
 Harvey, Campbell R.; Liu, Yan; Zhu, Heqing (2015). ... and the Cross-Section of Expected Returns. *Review of Financial Studies 29(1), 5-68*. doi:10.1093/rfs/hhv059 <https://doi.org/10.1093/rfs/hhv059>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### harvey2015a
+
+Harvey, Campbell R.; Liu, Yan (2015). Backtesting. *Journal of Portfolio Management 42(1), 13-28*. doi:10.3905/jpm.2015.42.1.013 <https://doi.org/10.3905/jpm.2015.42.1.013>. <https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.3905/jpm.2015.42.1.013>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### hasbrouck2021
+
+Hasbrouck, Joel; Levich, Richard M. (2021). Network structure and pricing in the FX market. *Journal of Financial Economics 141(2), 705-729*. doi:10.1016/j.jfineco.2021.04.013 <https://doi.org/10.1016/j.jfineco.2021.04.013>. <https://ideas.repec.org/a/eee/jfinec/v141y2021i2p705-729.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jfineco.2021.04.013>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### hassan2019
+
+Hassan, Tarek A.; Mano, Rui C. (2019). Forward and Spot Exchange Rates in a Multi-Currency World. *Quarterly Journal of Economics 134(1), 397-450*. doi:10.1093/qje/qjy026 <https://doi.org/10.1093/qje/qjy026>. <https://www.nber.org/papers/w20294>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w20294/w20294.pdf>, <https://doi.org/10.1093/qje/qjy026>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-static-carry.json](../catalog/algorithms/fx-static-carry.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### hau2021
+
+Hau, Harald; Hoffmann, Peter; Langfield, Sam; Timmer, Yannick (2021). Discriminatory Pricing of Over-the-Counter Derivatives. *Management Science 67(11), 6660-6677*. doi:10.1287/mnsc.2020.3787 <https://doi.org/10.1287/mnsc.2020.3787>. <https://ideas.repec.org/a/inm/ormnsc/v67y2021i11p6660-6677.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1287/mnsc.2020.3787>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### heimer2016
 
@@ -587,6 +817,36 @@ Hutchinson, Mark C.; Kyziropoulos, Panagiotis E.; O'Brien, John; O'Reilly, Phili
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-ml-smart-carry.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [ALG-0011](algorithms/0011-fx-ml-smart-carry.md), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### inoue2019
+
+Inoue, Atsushi; Rossi, Barbara (2019). The effects of conventional and unconventional monetary policy on exchange rates. *Journal of International Economics 118, 419-447*. doi:10.1016/j.jinteco.2019.01.015 <https://doi.org/10.1016/j.jinteco.2019.01.015>. <https://ideas.repec.org/a/eee/inecon/v118y2019icp419-447.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w25021/w25021.pdf>, <https://doi.org/10.1016/j.jinteco.2019.01.015>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### israel2020
+
+Israel, Ronen; Kelly, Bryan; Moskowitz, Tobias (2020). Can Machines 'Learn' Finance? *Journal of Investment Management 18(2), 23-36*. doi:10.2139/ssrn.3624052 <https://doi.org/10.2139/ssrn.3624052>. <https://www.aqr.com/Insights/Research/Journal-Article/Can-Machines-Learn-Finance>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.aqr.com/-/media/AQR/Documents/Alternative-Thinking/AQR-Alternative-Thinking-2Q19-Can-Machines-Learn-Finance.pdf?sc_lang=en>, <https://doi.org/10.2139/ssrn.3624052>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### ito2017
+
+Ito, Takatoshi; Yamada, Masahiro (2017). Puzzles in the Tokyo fixing in the forex market: Order imbalances and Bank pricing. *Journal of International Economics 109, 214-234*. doi:10.1016/j.jinteco.2017.09.005 <https://doi.org/10.1016/j.jinteco.2017.09.005>. <https://ideas.repec.org/a/eee/inecon/v109y2017icp214-234.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/papers/w22820>, <https://www.nber.org/system/files/working_papers/w22820/w22820.pdf>, <https://doi.org/10.1016/j.jinteco.2017.09.005>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### jegadeesh1993
 
 Jegadeesh, Narasimhan; Titman, Sheridan (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *The Journal of Finance 48(1), 65-91*. doi:10.1111/j.1540-6261.1993.tb04702.x <https://doi.org/10.1111/j.1540-6261.1993.tb04702.x>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -610,6 +870,16 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Jordà, Òscar; Taylor, Alan (2012). The Carry Trade and Fundamentals: Nothing to Fear But FEER Itself. *Journal of International Economics 88, 74-90*. doi:10.3386/w15518 <https://doi.org/10.3386/w15518>. <http://www.nber.org/papers/w15518.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### jurek2014
+
+Jurek, Jakub W. (2014). Crash-neutral currency carry trades. *Journal of Financial Economics 113(3), 325-347*. doi:10.1016/j.jfineco.2014.05.004 <https://doi.org/10.1016/j.jfineco.2014.05.004>. <https://ideas.repec.org/a/eee/jfinec/v113y2014i3p325-347.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jfineco.2014.05.004>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### kahneman1979
 
@@ -635,6 +905,36 @@ Kaminski, Kathryn M.; Lo, Andrew W. (2014). When do stop-loss rules stop losses?
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### karnaukh2015
+
+Karnaukh, Nina; Ranaldo, Angelo; Soderlind, Paul (2015). Understanding FX Liquidity. *Review of Financial Studies 28(11), 3073-3108*. doi:10.1093/rfs/hhv029 <https://doi.org/10.1093/rfs/hhv029>. <https://ideas.repec.org/a/oup/rfinst/v28y2015i11p3073-3108..html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1315.pdf>, <https://doi.org/10.1093/rfs/hhv029>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### kearns2006
+
+Kearns, Jonathan; Manners, Phil (2006). The Impact of Monetary Policy on the Exchange Rate: A Study Using Intraday Data. *International Journal of Central Banking 2(4), 157-183*. <https://www.ijcb.org/journal/v2n4/impact-monetary-policy-exchange-rate-study-using-intraday-data>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.ijcb.org/sites/default/files/journal/v2n4/ijcb-v2n4-impact-monetary-policy-exchange-rate-study-using-intraday-data.pdf>, <https://www.rba.gov.au/publications/rdp/2005/pdf/rdp2005-02.pdf>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### kelly2024
+
+Kelly, Bryan; Malamud, Semyon; Zhou, Kangying (2024). The Virtue of Complexity in Return Prediction. *Journal of Finance 79(1), 459-503*. doi:10.1111/jofi.13298 <https://doi.org/10.1111/jofi.13298>. <https://ideas.repec.org/a/bla/jfinan/v79y2024i1p459-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/papers/w30217>, <https://www.nber.org/system/files/working_papers/w30217/w30217.pdf>, <https://doi.org/10.1111/jofi.13298>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/complex-ml-market-timing.json](../catalog/algorithms/complex-ml-market-timing.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### kilian2009
 
 Kilian, Lutz (2009). Not All Oil Price Shocks Are Alike: Disentangling Demand and Supply Shocks in the Crude Oil Market. *American Economic Review 99(3), 1053-1069*. doi:10.1257/aer.99.3.1053 <https://doi.org/10.1257/aer.99.3.1053>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -645,7 +945,9 @@ Cited in: [REF-0011](reference/0011-scenario-simulator-method.md), [RES-0001](re
 
 King, Michael R.; Osler, Carol L.; Rime, Dagfinn (2012). Foreign Exchange Market Structure, Players, and Evolution. *Handbook of Exchange Rates (James, Marsh, Sarno, eds.), Wiley, chapter 1*. doi:10.1002/9781118445785.ch1 <https://doi.org/10.1002/9781118445785.ch1>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md).
+Also at: <https://ideas.repec.org/p/bno/worpap/2011_10.html>, <https://www.norges-bank.no/en/news-events/news-publications/Papers/Working-Papers/2011/WP-201110/>, <https://www.norges-bank.no/globalassets/upload/english/publications/working-papers/2011/norges_bank_working_paper_2011_10.pdf>.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### klein2007
 
@@ -675,6 +977,16 @@ Kroencke, Tim A.; Schindler, Felix; Schrimpf, Andreas (2014). International Dive
 
 Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### krohn2024
+
+Krohn, Ingomar; Mueller, Philippe; Whelan, Paul (2024). Foreign Exchange Fixings and Returns around the Clock. *Journal of Finance 79(1), 541-578*. doi:10.1111/jofi.13306 <https://doi.org/10.1111/jofi.13306>. <https://ideas.repec.org/a/bla/jfinan/v79y2024i1p541-578.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1111/jofi.13306>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### lakonishok1988
 
 Lakonishok, Josef; Smidt, Seymour (1988). Are Seasonal Anomalies Real? A Ninety-Year Perspective. *Review of Financial Studies 1(4), 403-425*. doi:10.1093/rfs/1.4.403 <https://doi.org/10.1093/rfs/1.4.403>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -693,11 +1005,41 @@ Lento, C.; Gradojevic, N.; Wright, C. S. (2007). Investment information content 
 
 Cited in: [catalog/algorithms/bollinger-band-reversion-breakout.json](../catalog/algorithms/bollinger-band-reversion-breakout.json), [ALG-0055](algorithms/0055-bollinger-band-reversion-breakout.md).
 
+### lettau2014
+
+Lettau, Martin; Maggiori, Matteo; Weber, Michael (2014). Conditional risk premia in currency markets and other asset classes. *Journal of Financial Economics 114(2), 197-225*. doi:10.1016/j.jfineco.2014.07.001 <https://doi.org/10.1016/j.jfineco.2014.07.001>. <https://www.nber.org/papers/w18844>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w18844/w18844.pdf>, <https://ideas.repec.org/a/eee/jfinec/v114y2014i2p197-225.html>, <https://doi.org/10.1016/j.jfineco.2014.07.001>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### lilley2022
+
+Lilley, Andrew; Maggiori, Matteo; Neiman, Brent; Schreger, Jesse (2022). Exchange Rate Reconnect. *Review of Economics and Statistics 104(4), 845-855*. doi:10.1162/rest\_a\_00978 <https://doi.org/10.1162/rest_a_00978>. <https://ideas.repec.org/a/tpr/restat/v104y2022i4p845-855.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w26046/w26046.pdf>, <https://doi.org/10.1162/rest_a_00978>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### linn2004
 
 Linn, Scott C.; Zhu, Zhen (2004). Natural gas prices and the gas storage report: Public news and volatility in energy futures markets. *Journal of Futures Markets 24(3), 283-313*. doi:10.1002/fut.10115 <https://doi.org/10.1002/fut.10115>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/natural-gas-storage-report.json](../catalog/algorithms/natural-gas-storage-report.json), [ALG-0044](algorithms/0044-natural-gas-storage-report.md).
+
+### linnainmaa2018
+
+Linnainmaa, Juhani T.; Roberts, Michael R. (2018). The History of the Cross-Section of Stock Returns. *Review of Financial Studies 31(7), 2606-2649*. doi:10.1093/rfs/hhy030 <https://doi.org/10.1093/rfs/hhy030>. <https://www.nber.org/papers/w22894>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w22894/w22894.pdf>, <https://doi.org/10.1093/rfs/hhy030>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### liu2018
 
@@ -725,6 +1067,16 @@ Lo, Andrew W.; Mamaysky, Harry; Wang, Jiang (2000). Foundations of Technical Ana
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md).
 
+### londono2017
+
+Londono, Juan M.; Zhou, Hao (2017). Variance risk premiums and the forward premium puzzle. *Journal of Financial Economics 124(2), 415-440*. doi:10.1016/j.jfineco.2017.02.002 <https://doi.org/10.1016/j.jfineco.2017.02.002>. <https://ideas.repec.org/a/eee/jfinec/v124y2017i2p415-440.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.federalreserve.gov/pubs/ifdp/2012/1068/ifdp1068.pdf>, <https://doi.org/10.1016/j.jfineco.2017.02.002>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### lu2012
 
 Lu, Tsung-Hsun; Shiu, Yung-Ming; Liu, Tsung-Chi (2012). Profitable candlestick trading strategies: The evidence from a new perspective. *Review of Financial Economics 21(2), 63-68*. doi:10.1016/j.rfe.2012.02.001 <https://doi.org/10.1016/j.rfe.2012.02.001>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -751,11 +1103,31 @@ Also at: <http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf>.
 
 Cited in: [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [RES-0001](research/0001-reading-list.md).
 
+### lustig2019
+
+Lustig, Hanno; Stathopoulos, Andreas; Verdelhan, Adrien (2019). The Term Structure of Currency Carry Trade Risk Premia. *American Economic Review 109(12), 4142-4177*. doi:10.1257/aer.20180098 <https://doi.org/10.1257/aer.20180098>. <https://www.nber.org/papers/w19623>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w19623/w19623.pdf>, <https://doi.org/10.1257/aer.20180098>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### magdonismail2004
 
 Magdon-Ismail, Malik; Atiya, Amir F.; Pratap, Amrit; Abu-Mostafa, Yaser S. (2004). On the maximum drawdown of a Brownian motion. *Journal of Applied Probability 41(1), 147-161*. doi:10.1239/jap/1077134674 <https://doi.org/10.1239/jap/1077134674>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### mancini2013
+
+Mancini, Loriano; Ranaldo, Angelo; Wrampelmeyer, Jan (2013). Liquidity in the Foreign Exchange Market: Measurement, Commonality, and Risk Premiums. *Journal of Finance 68(5), 1805-1841*. doi:10.1111/jofi.12053 <https://doi.org/10.1111/jofi.12053>. <https://ideas.repec.org/a/bla/jfinan/v68y2013i5p1805-1841.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/p/snb/snbwpa/2010-03.html>, <https://www.snb.ch/public/asset/en/www-snb-ch/publications/research/working-papers/2010/working_paper_2010_03/publications0_en/working_paper_2010_03.n.pdf>, <https://doi.org/10.1111/jofi.12053>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### mandelbrot1963
 
@@ -816,6 +1188,26 @@ Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-readi
 Melvin, Michael; Prins, John (2015). Equity hedging and exchange rates at the London 4p.m. fix. *Journal of Financial Markets 22, 50-72*. doi:10.1016/j.finmar.2014.11.001 <https://doi.org/10.1016/j.finmar.2014.11.001>. <https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md).
+
+### melvin2017
+
+Melvin, Michael; Shand, Duncan (2017). When Carry Goes Bad: The Magnitude, Causes, and Duration of Currency Carry Unwinds. *Financial Analysts Journal 73(1), 121-144*. doi:10.2469/faj.v73.n1.4 <https://doi.org/10.2469/faj.v73.n1.4>. <https://ideas.repec.org/a/taf/ufajxx/v73y2017i1p121-144.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.openalex.org/works/doi:10.2469/faj.v73.n1.4>, <https://doi.org/10.2469/faj.v73.n1.4>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### melvin2020
+
+Melvin, Michael; Pan, Wenqiang; Wikstrom, Petra (2020). Retaining alpha: The effect of trade size and rebalancing frequency on FX strategy returns. *Journal of Financial Markets 51, 100545*. doi:10.1016/j.finmar.2020.100545 <https://doi.org/10.1016/j.finmar.2020.100545>. <https://www.ifo.de/DocDL/cesifo1_wp8143.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.finmar.2020.100545>, <https://doi.org/10.1016/j.finmar.2020.100545>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### menkhoff2007
 
@@ -949,17 +1341,59 @@ Nickerson, Raymond S. (1998). Confirmation Bias: A Ubiquitous Phenomenon in Many
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### novymarx2016
+
+Novy-Marx, Robert; Velikov, Mihail (2016). A Taxonomy of Anomalies and Their Trading Costs. *Review of Financial Studies 29(1), 104-147*. doi:10.1093/rfs/hhv063 <https://doi.org/10.1093/rfs/hhv063>. <https://www.nber.org/papers/w20721>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w20721/w20721.pdf>, <https://doi.org/10.1093/rfs/hhv063>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### odean1998
 
 Odean, Terrance (1998). Are Investors Reluctant to Realize Their Losses? *Journal of Finance 53(5), 1775-1798*. doi:10.1111/0022-1082.00072 <https://doi.org/10.1111/0022-1082.00072>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### okunev2003
+
+Okunev, John; White, Derek (2003). Do Momentum-Based Strategies Still Work in Foreign Currency Markets? *Journal of Financial and Quantitative Analysis 38(2), 425-447*. doi:10.2307/4126758 <https://doi.org/10.2307/4126758>. <https://ideas.repec.org/a/cup/jfinqa/v38y2003i02p425-447_00.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.openalex.org/works/doi:10.2307/4126758>, <https://doi.org/10.2307/4126758>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### oomen2017
 
 Oomen, Roel (2017). Last look. *Quantitative Finance 17(7), 1057-1070*. doi:10.1080/14697688.2016.1262545 <https://doi.org/10.1080/14697688.2016.1262545>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md).
+Also at: <https://ideas.repec.org/a/taf/quantf/v17y2017i7p1057-1070.html>, <https://eprints.lse.ac.uk/68811/1/Oomen_Last%20look_2017.pdf>.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### opie2020
+
+Opie, Wei; Riddiough, Steven J. (2020). Global currency hedging with common risk factors. *Journal of Financial Economics 136(3), 780-805*. doi:10.1016/j.jfineco.2019.12.001 <https://doi.org/10.1016/j.jfineco.2019.12.001>. <https://ideas.repec.org/a/eee/jfinec/v136y2020i3p780-805.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.jfineco.2019.12.001>, <https://doi.org/10.1016/j.jfineco.2019.12.001>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### orlov2016
+
+Orlov, Vitaly (2016). Currency momentum, carry trade, and market illiquidity. *Journal of Banking and Finance 67, 1-11*. doi:10.1016/j.jbankfin.2016.02.010 <https://doi.org/10.1016/j.jbankfin.2016.02.010>. <https://ideas.repec.org/a/eee/jbfina/v67y2016icp1-11.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.jbankfin.2016.02.010>, <https://doi.org/10.1016/j.jbankfin.2016.02.010>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### osler2000
 
@@ -973,7 +1407,9 @@ Cited in: [catalog/algorithms/fibonacci-retracements.json](../catalog/algorithms
 
 Osler, Carol L. (2003). Currency Orders and Exchange Rate Dynamics: An Explanation for the Predictive Success of Technical Analysis. *Journal of Finance 58(5), 1791-1819*. doi:10.1111/1540-6261.00588 <https://doi.org/10.1111/1540-6261.00588>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Also at: <https://ideas.repec.org/a/bla/jfinan/v58y2003i5p1791-1819.html>, <https://www.newyorkfed.org/research/staff_reports/sr125.html>, <https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr125.pdf>.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### parityteam2026
 
@@ -987,6 +1423,16 @@ Park, Cheol-Ho; Irwin, Scott H. (2007). What Do We Know About the Profitability 
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### payne2003
+
+Payne, Richard (2003). Informed trade in spot foreign exchange markets: an empirical investigation. *Journal of International Economics 61(2), 307-329*. doi:10.1016/S0022-1996(03)00003-5 <https://doi.org/10.1016/S0022-1996(03)00003-5>. <https://ideas.repec.org/a/eee/inecon/v61y2003i2p307-329.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
+
+Also at: <https://research-information.bris.ac.uk/en/publications/3e4c71e1-f08e-4ed0-a6e6-ee983d68644e>, <https://www.sciencedirect.com/science/article/abs/pii/S0022199603000035>, <https://doi.org/10.1016/S0022-1996(03)00003-5>.
+
+Note: Not read: Title, journal, volume and pages confirmed on IDEAS/RePEc and via Crossref, but IDEAS says 'No abstract is available for this item', ScienceDirect returned 403, Unpaywall and OpenAlex list no open copy, and the Bristol repository page showed no abstract. Web search budget was exhausted so no other host could be found. Nothing below is taken from the paper itself.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### peters2019
 
 Peters, Ole (2019). The ergodicity problem in economics. *Nature Physics 15, 1216-1221*. doi:10.1038/s41567-019-0732-0 <https://doi.org/10.1038/s41567-019-0732-0>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
@@ -995,17 +1441,117 @@ Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher pa
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### pojarliev2008
+
+Pojarliev, Momtchil; Levich, Richard M. (2008). Do Professional Currency Managers Beat the Benchmark? *Financial Analysts Journal 64(5), 18-32*. doi:10.2469/faj.v64.n5.4 <https://doi.org/10.2469/faj.v64.n5.4>. <https://ideas.repec.org/a/taf/ufajxx/v64y2008i5p18-32.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w13714/w13714.pdf>, <https://doi.org/10.2469/faj.v64.n5.4>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### qi2006
+
+Qi, Min; Wu, Yangru (2006). Technical Trading-Rule Profitability, Data Snooping, and Reality Check: Evidence from the Foreign Exchange Market. *Journal of Money, Credit, and Banking 38(8), 2135-2158*. doi:10.1353/mcb.2007.0006 <https://doi.org/10.1353/mcb.2007.0006>. <https://api.openalex.org/works/doi:10.1353/mcb.2007.0006>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1353/mcb.2007.0006>.
+
+Note: Not read: Publisher (Project MUSE) and IDEAS pages did not load the article; title and abstract were read on the OpenAlex record. Author full names are from the same OpenAlex record. No numbers beyond the abstract.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### ramadorai2008
+
+Ramadorai, Tarun (2008). What determines transaction costs in foreign exchange markets? *International Journal of Finance and Economics 13(1), 14-25*. doi:10.1002/ijfe.351 <https://doi.org/10.1002/ijfe.351>. <https://ideas.repec.org/a/ijf/ijfiec/v13y2008i1p14-25.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1002/ijfe.351>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### ranaldo2009
+
+Ranaldo, Angelo (2009). Segmentation and time-of-day patterns in foreign exchange markets. *Journal of Banking and Finance 33(12), 2199-2206*. doi:10.1016/j.jbankfin.2009.05.019 <https://doi.org/10.1016/j.jbankfin.2009.05.019>. <https://ideas.repec.org/a/eee/jbfina/v33y2009i12p2199-2206.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jbankfin.2009.05.019>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### ranaldo2010
 
 Ranaldo, Angelo; Söderlind, Paul (2010). Safe Haven Currencies. *Review of Finance 14(3), 385-407*. doi:10.1093/rof/rfq007 <https://doi.org/10.1093/rof/rfq007>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0011](reference/0011-scenario-simulator-method.md).
 
+### ranaldo2010a
+
+Ranaldo, Angelo; Rossi, Enzo (2010). The reaction of asset markets to Swiss National Bank communication. *Journal of International Money and Finance 29(3), 486-503*. doi:10.1016/j.jimonfin.2009.07.004 <https://doi.org/10.1016/j.jimonfin.2009.07.004>. <https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jimonfin.2009.07.004>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### ranaldo2021
+
+Ranaldo, Angelo; Somogyi, Fabricius (2021). Asymmetric information risk in FX markets. *Journal of Financial Economics 140(2), 391-411*. doi:10.1016/j.jfineco.2020.12.007 <https://doi.org/10.1016/j.jfineco.2020.12.007>. <https://ideas.repec.org/a/eee/jfinec/v140y2021i2p391-411.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1820.pdf>, <https://doi.org/10.1016/j.jfineco.2020.12.007>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-asymmetric-information-risk.json](../catalog/algorithms/fx-asymmetric-information-risk.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### raza2014
+
+Raza, Ahmad; Marshall, Ben R.; Visaltanachoti, Nuttawat (2014). Is there momentum or reversal in weekly currency returns? *Journal of International Money and Finance 45, 38-60*. doi:10.1016/j.jimonfin.2014.02.009 <https://doi.org/10.1016/j.jimonfin.2014.02.009>. <https://ideas.repec.org/a/eee/jimfin/v45y2014icp38-60.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1016/j.jimonfin.2014.02.009>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### ready2017
+
+Ready, Robert; Roussanov, Nikolai; Ward, Colin (2017). Commodity Trade and the Carry Trade: A Tale of Two Countries. *Journal of Finance 72(6), 2629-2684*. doi:10.1111/jofi.12546 <https://doi.org/10.1111/jofi.12546>. <https://www.nber.org/papers/w19371>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w19371/w19371.pdf>, <https://doi.org/10.1111/jofi.12546>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-commodity-trade-imx.json](../catalog/algorithms/fx-commodity-trade-imx.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### rees2025
 
 Rees, Daniel M. (2025). Commodity prices and the US dollar. *Journal of International Economics 157, 104114*. doi:10.1016/j.jinteco.2025.104114 <https://doi.org/10.1016/j.jinteco.2025.104114>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### rime2010
+
+Rime, Dagfinn; Sarno, Lucio; Sojli, Elvira (2010). Exchange rate forecasting, order flow and macroeconomic information. *Journal of International Economics 80(1), 72-88*. doi:10.1016/j.jinteco.2009.03.005 <https://doi.org/10.1016/j.jinteco.2009.03.005>. <https://ideas.repec.org/a/eee/inecon/v80y2010i1p72-88.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/p/bno/worpap/2007_02.html>, <https://www.norges-bank.no/globalassets/upload/english/publications/working-papers/2007/norges_bank_working_paper_2007_2.pdf>, <https://doi.org/10.1016/j.jinteco.2009.03.005>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### romano2005
+
+Romano, Joseph P.; Wolf, Michael (2005). Stepwise Multiple Testing as Formalized Data Snooping. *Econometrica 73(4), 1237-1282*. doi:10.1111/j.1468-0262.2005.00615.x <https://doi.org/10.1111/j.1468-0262.2005.00615.x>. <https://ideas.repec.org/a/ecm/emetrp/v73y2005i4p1237-1282.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://doi.org/10.1111/j.1468-0262.2005.00615.x>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### rossi2013
 
@@ -1047,9 +1593,9 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Sullivan, Ryan; Timmermann, Allan; White, Halbert (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance 54(5), 1647-1691*. doi:10.1111/0022-1082.00163 <https://doi.org/10.1111/0022-1082.00163>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Also at: <https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf>.
+Also at: <https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf>, <https://ideas.repec.org/a/bla/jfinan/v54y1999i5p1647-1691.html>.
 
-Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### thaler1981
 
@@ -1147,6 +1693,16 @@ Verdelhan, Adrien (2017). The Share of Systematic Variation in Bilateral Exchang
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### white2000
+
+White, Halbert (2000). A Reality Check for Data Snooping. *Econometrica 68(5), 1097-1126*. doi:10.1111/1468-0262.00152 <https://doi.org/10.1111/1468-0262.00152>. <https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://ideas.repec.org/a/ecm/emetrp/v68y2000i5p1097-1126.html>, <https://doi.org/10.1111/1468-0262.00152>.
+
+Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ## Preprints and working papers
 
 ### andersen2002
@@ -1168,6 +1724,14 @@ Cited in: [catalog/algorithms/dual-momentum.json](../catalog/algorithms/dual-mom
 Bailey, David H.; López de Prado, Marcos (2019). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality. *SSRN working paper*. doi:10.2139/ssrn.2460551 <https://doi.org/10.2139/ssrn.2460551>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### baz2015
+
+Baz, Jamil; Granger, Nicolas; Harvey, Campbell R.; Le Roux, Nicolas; Rattray, Sandy (2015). Dissecting Investment Strategies in the Cross Section and Time Series. *SSRN Working Paper 2695101*. doi:10.2139/ssrn.2695101 <https://doi.org/10.2139/ssrn.2695101>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
+
+Note: Not read: Title and authors were seen on Campbell Harvey's research page and in Crossref, but SSRN returned 403 and no abstract or full text was found, so no content is recorded.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### bhardwaj2015
 
@@ -1196,6 +1760,16 @@ Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/reta
 Burnside, Craig; Eichenbaum, Martin; Rebelo, Sergio (2011). Carry Trade and Momentum in Currency Markets. *NBER Working Paper w16942*. doi:10.3386/w16942 <https://doi.org/10.3386/w16942>. <https://www.nber.org/system/files/working_papers/w16942/w16942.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md).
+
+### caballero2012
+
+Caballero, Ricardo J.; Doyle, Joseph B. (2012). Carry Trade and Systemic Risk: Why are FX Options so Cheap? *NBER Working Paper 18644*. doi:10.3386/w18644 <https://doi.org/10.3386/w18644>. <https://www.nber.org/papers/w18644>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Also at: <https://www.nber.org/system/files/working_papers/w18644/w18644.pdf>, <https://doi.org/10.3386/w18644>.
+
+Note: Read for RES-0010 (full text).
+
+Cited in: [catalog/algorithms/fx-option-hedged-carry.json](../catalog/algorithms/fx-option-hedged-carry.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### chen2025
 

@@ -1,0 +1,97 @@
+{
+  "id": "ALG-0074",
+  "slug": "fx-output-gap-business-cycle",
+  "name": "Output gap currency strategy",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "business-cycle",
+    "output-gap",
+    "macro",
+    "vintage-data"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2020,
+    "authors": "Colacito, Riddiough and Sarno",
+    "source_title": "Business cycles and currency returns (Journal of Financial Economics 137(3), 659-678)",
+    "source_url": "https://www.nber.org/papers/w26299"
+  },
+  "how_it_works": {
+    "simple": "Buy the currencies of countries whose economies are running hotter than usual and sell the currencies of countries whose economies are running cold.",
+    "analogy": "Like backing the shops on the busiest street in town: when a country is booming, its money tends to be in demand.",
+    "precise": "Each month compute each country's output gap from industrial production with a Hodrick-Prescott filter, minus the US gap, using data vintages available at the time. Sort currencies into five portfolios and go long the highest relative gap and short the lowest (GAP-CS), or long all currencies with gaps above the US and short those below (GAP-TS)."
+  },
+  "rule": "Month end: for each country, output gap = industrial production minus its one-sided HP trend, using only data published by then. Subtract the US gap. Long the top quintile, short the bottom quintile, equal weights, via one-month forwards. Rebalance monthly.",
+  "data_needed": [
+    "Real-time (vintage) industrial production by country, for example OECD Main Economic Indicators vintages",
+    "Monthly spot and forward rates",
+    "Bid-ask spreads"
+  ],
+  "economic_rationale": "The authors argue that currencies of countries in strong phases of the business cycle carry higher risk premia, and they find the signal is unrelated to carry.",
+  "why_it_might_fail": "Industrial production is revised, so using today's data instead of the vintage known at the time adds look-ahead. HP filters are known to bend at the end of a sample. The 1999-2016 sample is short, and we found no outside replication.",
+  "reported_results": [
+    {
+      "source": "Colacito, Riddiough and Sarno (2020), NBER w26299, introduction, GAP-CS",
+      "source_url": "https://www.nber.org/system/files/working_papers/w26299/w26299.pdf",
+      "period": "1999-2016 (vintage data)",
+      "market": "Developed and emerging currencies vs USD",
+      "sharpe": 0.72,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Quote: \"Between 1999 and 2016, a high-minus-low cross-sectional strategy that sorts on relative output gaps across countries, which we denote as GAPCS, generates a Sharpe ratio of 0.72 before transaction costs, and 0.50 after costs.\" Before costs; the same sentence gives 0.50 after costs."
+    },
+    {
+      "source": "Colacito, Riddiough and Sarno (2020), NBER w26299, introduction, GAP-CS after costs",
+      "source_url": "https://www.nber.org/system/files/working_papers/w26299/w26299.pdf",
+      "period": "1999-2016 (vintage data)",
+      "market": "Developed and emerging currencies vs USD",
+      "sharpe": 0.5,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"Between 1999 and 2016, a high-minus-low cross-sectional strategy that sorts on relative output gaps across countries, which we denote as GAPCS, generates a Sharpe ratio of 0.72 before transaction costs, and 0.50 after costs.\""
+    },
+    {
+      "source": "Colacito, Riddiough and Sarno (2020), NBER w26299, introduction, GAP-TS after costs",
+      "source_url": "https://www.nber.org/system/files/working_papers/w26299/w26299.pdf",
+      "period": "1999-2016 (vintage data)",
+      "market": "Developed and emerging currencies vs USD",
+      "sharpe": 0.5,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"a time series strategy, which goes long (short) currencies issued by countries with output gaps above (below) the US, denoted as GAPTS, generates a Sharpe ratio of 0.65 before costs and 0.50 after costs.\" Time series version; 0.65 before costs."
+    }
+  ],
+  "post_publication_evidence": "None found by us. The paper reports correlations with carry that are essentially zero.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Monthly and diversifying, but it needs vintage macro data to avoid look-ahead, which takes effort to assemble."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

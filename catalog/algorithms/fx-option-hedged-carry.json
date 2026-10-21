@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0078",
+  "slug": "fx-option-hedged-carry",
+  "name": "Option-hedged carry trade",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "options",
+    "crash-risk",
+    "hedging"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2012,
+    "authors": "Caballero and Doyle; Jurek",
+    "source_title": "Carry Trade and Systemic Risk: Why are FX Options so Cheap? (NBER Working Paper 18644)",
+    "source_url": "https://www.nber.org/papers/w18644"
+  },
+  "how_it_works": {
+    "simple": "Do the carry trade, and each month buy insurance in the form of currency options that pay out if the trade suddenly crashes.",
+    "analogy": "Like a fruit seller who pays a little each month for crop insurance so one bad storm cannot wipe out the business.",
+    "precise": "Equal-weight carry across 25 currencies against USD, monthly, with at-the-money options bought on each position. Caballero and Doyle report the hedged trade earned a higher Sharpe ratio than the unhedged one over 2004-2012. Jurek (2014) finds crash risk premia explain at most one-third of carry returns."
+  },
+  "rule": "Monthly: long high-rate and short low-rate currencies against USD, equal weights. For each position buy a one-month at-the-money option that protects against the position's loss. Hold to expiry and repeat.",
+  "data_needed": [
+    "FX option implied volatilities or prices by currency (not free)",
+    "Monthly spot and forward rates"
+  ],
+  "economic_rationale": "If FX options were priced fairly for crash risk, hedged carry should earn little. Both papers find hedged carry kept most of its return, suggesting carry pays for something other than currency crash risk.",
+  "why_it_might_fail": "Option data are expensive and the 2004-2012 sample is short and includes 2008. Option bid-ask spreads can be wide for smaller currencies.",
+  "reported_results": [
+    {
+      "source": "Caballero and Doyle (2012), NBER w18644, hedged carry",
+      "source_url": "https://www.nber.org/system/files/working_papers/w18644/w18644.pdf",
+      "period": "3/2004-8/2012",
+      "market": "25 currencies vs USD",
+      "sharpe": 0.79,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"for hedged carry, the realized Sharpe ratio of 0.79 is nearly 40% higher than the 0.57 earned by its required returns\" NBER w18644 working paper only; we found no journal version."
+    },
+    {
+      "source": "Caballero and Doyle (2012), NBER w18644, unhedged carry",
+      "source_url": "https://www.nber.org/system/files/working_papers/w18644/w18644.pdf",
+      "period": "3/2004-8/2012",
+      "market": "25 currencies vs USD",
+      "sharpe": 0.47,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"For the unhedged carry, the annualized Sharpe ratio is 0.47, below the 0.57 of its required returns.\""
+    }
+  ],
+  "post_publication_evidence": "Jurek (2014, JFE) reaches a similar conclusion with G10 options over 1990-2012. We found no later out-of-sample test.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Answers whether carry's crash risk can be bought away, but option data are not free."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

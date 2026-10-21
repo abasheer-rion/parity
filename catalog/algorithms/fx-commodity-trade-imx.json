@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0076",
+  "slug": "fx-commodity-trade-imx",
+  "name": "Commodity exporters minus finished-goods exporters (IMX)",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "commodities",
+    "trade-structure",
+    "carry",
+    "annual-data"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2017,
+    "authors": "Ready, Roussanov and Ward",
+    "source_title": "Commodity Trade and the Carry Trade: A Tale of Two Countries (Journal of Finance 72(6), 2629-2684)",
+    "source_url": "https://www.nber.org/papers/w19371"
+  },
+  "how_it_works": {
+    "simple": "Countries that sell raw materials have riskier money than countries that sell finished goods. Buy the currencies of raw-material sellers and sell the currencies of finished-goods sellers.",
+    "analogy": "Like a farmer and a baker: when hard times come, the farmer's income swings more, so you ask more to lend to the farmer.",
+    "precise": "Signal = (net exports of basic goods + net imports of finished goods) / total trade, averaged over the prior four years. Long the highest-ranked currencies, short the lowest. Rankings update yearly; returns are monthly."
+  },
+  "rule": "Each year compute each country's trade ratio from the past four years of trade data. Long the top portfolio (commodity exporters), short the bottom portfolio (finished-goods exporters), equal weights, via forwards. Rebalance yearly, roll monthly.",
+  "data_needed": [
+    "Bilateral trade by product type (UN Comtrade, free)",
+    "Monthly spot and forward rates"
+  ],
+  "economic_rationale": "Ready, Roussanov and Ward model commodity countries as more exposed to global productivity shocks, so their currencies earn a premium and also pay high interest.",
+  "why_it_might_fail": "The return overlaps with carry. The sample ends in 2012, before the commodity bust of 2014-2016, and the commodity-currency link may have changed after 2020 (see RES-0001 on Rees, 2025).",
+  "reported_results": [
+    {
+      "source": "Ready, Roussanov and Ward (2017), NBER w19371, footnote and Table A-3",
+      "source_url": "https://www.nber.org/system/files/working_papers/w19371/w19371.pdf",
+      "period": "1988-2012",
+      "market": "Developed and emerging currencies vs USD",
+      "sharpe": 0.42,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"which imply a Sharpe ratio for the IMX strategy of 0.42, as reported in the Data Appendix Table A-3\" With bid and ask quotes. Annually rebalanced version with bid and ask quotes, NBER w19371 footnote citing Data Appendix Table A-3."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Fits our commodity-currency hypothesis (HYP-0003) with free yearly data, but it overlaps with carry."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}
