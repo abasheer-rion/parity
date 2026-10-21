@@ -1,0 +1,29 @@
+{
+  "id": "desert-storm-1991",
+  "name": "Operation Desert Storm begins",
+  "date": "1991-01-17",
+  "type": "war",
+  "regions": [
+    "middle_east",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "iraq",
+    "kuwait",
+    "uk",
+    "saudi_arabia"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "A US-led coalition began an air campaign against Iraq to expel it from Kuwait. Oil prices collapsed by about a third in one day and stocks rallied as fears of a long war faded.",
+  "sources": [
+    {
+      "title": "Gulf War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Gulf_War"
+    }
+  ]
+}

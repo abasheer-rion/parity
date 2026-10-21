@@ -4,7 +4,8 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 ## Unreleased
 
-Nothing yet.
+- Dashboard: Scenarios page (`#/scenarios`). Describe a made-up event and see what oil, currencies, stocks, the VIX and US rates did after similar past events; looks backwards only, does not predict.
+- Engine: `parity scenario` lists past events like a made-up one (76 sourced events in `catalog/events/`) with the median, middle half and hit rate of what followed; `parity scenario export` feeds the page. Method and limits in REF-0011.
 
 ## 0.3.0 (2026-10-20)
 

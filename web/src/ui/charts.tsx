@@ -502,3 +502,100 @@ export function Sparkline({ points, width = 84, height = 28 }: { points: Point[]
     </svg>
   );
 }
+
+export interface FanBand { day: number; median: number; q25: number; q75: number; min: number; max: number; count: number }
+
+/**
+ * What happened after a set of past events, day by day: a faint line per event, the
+ * full range lightly shaded, the middle half (25th to 75th percentile) shaded more,
+ * the median bold, and a dotted zero line. One series colour, one y axis.
+ */
+export function FanChart({
+  bands,
+  paths,
+  color,
+  format,
+  tickFormat,
+  label,
+  markers = [],
+  height = 240,
+}: {
+  bands: FanBand[];
+  paths: { name: string; values: number[] }[];
+  color: string;
+  format: (v: number) => string;
+  /** Shorter labels for the y axis; defaults to `format`. */
+  tickFormat?: (v: number) => string;
+  label: string;
+  markers?: { day: number; label: string }[];
+  height?: number;
+}) {
+  const [ref, width] = useWidth<HTMLDivElement>();
+  const [hover, setHover] = useState<number | null>(null);
+  const pad = { top: 12, right: 16, bottom: 26, left: 58 };
+  const w = width - pad.left - pad.right;
+  const h = height - pad.top - pad.bottom;
+  if (!bands.length) return <p className="muted">No path data for these events.</p>;
+
+  const lastDay = Math.max(bands[bands.length - 1].day, ...markers.map((m) => m.day));
+  const all = [0, ...bands.flatMap((b) => [b.min, b.max]), ...paths.flatMap((p) => p.values.filter((v) => v != null && !Number.isNaN(v)))];
+  let lo = Math.min(...all);
+  let hi = Math.max(...all);
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const ticks = niceLinearTicks(lo, hi, 5);
+  lo = Math.min(lo, ticks[0]);
+  hi = Math.max(hi, ticks[ticks.length - 1]);
+  const x = (d: number) => pad.left + (d / Math.max(lastDay, 1)) * w;
+  const y = (v: number) => pad.top + h - ((v - lo) / (hi - lo || 1)) * h;
+  const area = (top: (b: FanBand) => number, bottom: (b: FanBand) => number) =>
+    `${bands.map((b) => `${x(b.day).toFixed(1)},${y(top(b)).toFixed(1)}`).join(" ")} ${[...bands].reverse().map((b) => `${x(b.day).toFixed(1)},${y(bottom(b)).toFixed(1)}`).join(" ")}`;
+  const line = (vals: (number | null)[]) => vals.map((v, d) => (v == null || Number.isNaN(v) ? null : `${x(d).toFixed(1)},${y(v).toFixed(1)}`)).filter(Boolean).join(" ");
+
+  const onMove = (e: React.PointerEvent<SVGRectElement>) => {
+    const box = e.currentTarget.getBoundingClientRect();
+    const day = Math.round(Math.min(1, Math.max(0, (e.clientX - box.left) / box.width)) * lastDay);
+    let best = 0;
+    bands.forEach((b, i) => { if (Math.abs(b.day - day) < Math.abs(bands[best].day - day)) best = i; });
+    setHover(best);
+  };
+  const hb = hover != null ? bands[hover] : null;
+
+  return (
+    <figure className="chart" ref={ref}>
+      <svg width={width} height={height} role="img" aria-label={label}>
+        <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
+        {ticks.map((v) => (
+          <text key={v} className="tick" x={pad.left - 8} y={y(v)} dy="0.32em" textAnchor="end">{(tickFormat ?? format)(v)}</text>
+        ))}
+        {markers.map((m) => (
+          <g key={m.label}>
+            <line className="crosshair" strokeDasharray="2 4" x1={x(m.day)} x2={x(m.day)} y1={pad.top} y2={pad.top + h} opacity={0.6} />
+            <text className="tick" x={x(m.day)} y={height - 6} textAnchor="middle">{m.label}</text>
+          </g>
+        ))}
+        <polygon points={area((b) => b.max, (b) => b.min)} fill={color} opacity={0.08} />
+        <polygon points={area((b) => b.q75, (b) => b.q25)} fill={color} opacity={0.22} />
+        {paths.map((p) => (
+          <polyline key={p.name} fill="none" stroke={color} strokeWidth={1} opacity={0.28} strokeLinejoin="round" points={line(p.values)} />
+        ))}
+        <line className="baseline" x1={pad.left} x2={pad.left + w} y1={y(0)} y2={y(0)} />
+        <polyline fill="none" stroke={color} strokeWidth={2.25} strokeLinejoin="round" points={bands.map((b) => `${x(b.day).toFixed(1)},${y(b.median).toFixed(1)}`).join(" ")} />
+        {hb && (
+          <g>
+            <line className="crosshair" x1={x(hb.day)} x2={x(hb.day)} y1={pad.top} y2={pad.top + h} />
+            <circle cx={x(hb.day)} cy={y(hb.median)} r={4} fill={color} className="dot" />
+          </g>
+        )}
+        <rect x={pad.left} y={pad.top} width={w} height={h} fill="transparent" onPointerMove={onMove} onPointerLeave={() => setHover(null)} />
+      </svg>
+      {hb && (
+        <Tooltip x={x(hb.day)} width={width}>
+          <div className="tt-title">{hb.day} trading day{hb.day === 1 ? "" : "s"} after · {hb.count} event{hb.count === 1 ? "" : "s"}</div>
+          <div className="tt-row"><span className="swatch" style={{ background: color }} /><span>Middle outcome</span><strong>{format(hb.median)}</strong></div>
+          <div className="tt-row"><span className="swatch" style={{ background: color, opacity: 0.4 }} /><span>Middle half</span><strong>{format(hb.q25)} to {format(hb.q75)}</strong></div>
+          <div className="tt-row"><span className="swatch" style={{ background: color, opacity: 0.15 }} /><span>Full range</span><strong>{format(hb.min)} to {format(hb.max)}</strong></div>
+        </Tooltip>
+      )}
+    </figure>
+  );
+}

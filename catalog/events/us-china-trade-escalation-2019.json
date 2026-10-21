@@ -1,0 +1,28 @@
+{
+  "id": "us-china-trade-escalation-2019",
+  "name": "Trump raises China tariffs to 25%",
+  "date": "2019-05-05",
+  "type": "trade_war",
+  "regions": [
+    "north_america",
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "china"
+  ],
+  "severity": 3,
+  "commodities": [
+    "grains",
+    "metals"
+  ],
+  "description": "President Trump said tariffs on 200 billion dollars of Chinese goods would rise from 10 to 25 percent, breaking a truce in trade talks. Stocks fell, the yuan weakened and Treasury yields dropped.",
+  "sources": [
+    {
+      "title": "China-United States trade war",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war"
+    }
+  ]
+}

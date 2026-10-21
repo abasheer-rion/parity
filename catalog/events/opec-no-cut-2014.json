@@ -1,0 +1,26 @@
+{
+  "id": "opec-no-cut-2014",
+  "name": "OPEC declines to cut output",
+  "date": "2014-11-27",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "opec",
+    "saudi_arabia"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "At its Vienna meeting, OPEC led by Saudi Arabia refused to cut production despite a growing glut. Oil fell sharply and kept falling to below 30 dollars by early 2016, hurting oil exporters and their currencies.",
+  "sources": [
+    {
+      "title": "OPEC",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/OPEC"
+    }
+  ]
+}

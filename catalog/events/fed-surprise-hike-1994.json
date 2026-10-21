@@ -1,0 +1,24 @@
+{
+  "id": "fed-surprise-hike-1994",
+  "name": "Fed starts 1994 tightening",
+  "date": "1994-02-04",
+  "type": "central_bank_surprise",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The Fed raised its federal funds target from 3 percent to 3.25 percent, the first increase in five years. It set off a global bond market selloff that lasted most of the year.",
+  "sources": [
+    {
+      "title": "1994 bond market crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1994_bond_market_crisis"
+    }
+  ]
+}

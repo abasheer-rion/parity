@@ -11,6 +11,9 @@
     parity market-size           BIS Triennial FX turnover by currency and instrument
     parity ticks PAIR --date D   stored ticks for one day (--import FILE to add a file)
     parity serve                 read-only JSON API on 127.0.0.1
+    parity scenario --type military_strike --region middle_east --severity 4
+                                 what markets did after past events like a scenario
+    parity scenario export       write output/scenarios.json for the dashboard
 """
 
 from __future__ import annotations
@@ -190,6 +193,47 @@ def _serve(args) -> int:
     return 0
 
 
+def _scenario(args) -> int:
+    from . import scenarios as sc
+
+    events = sc.load_events()
+    problems = sc.validate(events)
+    if problems:
+        print("\n".join(problems), file=sys.stderr)
+        return 1
+    prices = sc.load_prices()
+    if args.action == "export":
+        doc = sc.export(events, prices)
+        out = Path(args.out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(doc, separators=(",", ":")))
+        print(f"Wrote {out}: {len(doc['events'])} events, data through {doc['data_through']}")
+        return 0
+    spec = sc.Spec(type=args.type, regions=args.region, actors=args.actor,
+                   severity=args.severity, commodities=args.commodity)
+    studied = sc.event_study(events, prices)
+    picked = sc.match(studied, spec, min_score=args.min_score, limit=args.limit)
+    if not picked:
+        print("No past event is close enough. Loosen the scenario or lower --min-score.")
+        return 0
+    print(f"{len(picked)} analogues (history, not a forecast)\n")
+    for s, ev in picked:
+        print(f"  {s:4.2f}  {ev['date']}  {ev['name']}")
+    assets = args.asset or ["oil", "usd", "jpy", "chf", "sp500", "vix", "ust10y"]
+    agg = sc.aggregate([ev for _, ev in picked], assets)
+    units = {a.key: {"pct": "%", "bp": " bp", "points": " pt"}[a.measure] for a in sc.ASSETS}
+    print(f"\n{'asset':<8}{'horizon':>8}{'n':>4}{'median':>11}{'middle half':>24}{'up':>7}")
+    for key, per in agg.items():
+        u = units[key]
+        for h, v in per.items():
+            mid = f"{v['q25']:+.1f}{u} to {v['q75']:+.1f}{u}"
+            med = f"{v['median']:+.1f}{u}"
+            print(f"{key:<8}{h:>8}{v['n']:>4}{med:>11}{mid:>24}"
+                  f"{v['up'] * 100:>6.0f}%")
+    print("\nSmall samples, changing regimes and events priced in beforehand all limit this.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="parity", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -264,6 +308,19 @@ def main(argv: list[str] | None = None) -> int:
     sv = sub.add_parser("serve", help="read-only JSON API on 127.0.0.1")
     sv.add_argument("--port", type=int, default=8765)
     sv.set_defaults(func=_serve)
+
+    sc = sub.add_parser("scenario", help="historical analogues for a made-up event")
+    sc.add_argument("action", nargs="?", choices=["show", "export"], default="show")
+    sc.add_argument("--type", help="e.g. military_strike, war, oil_supply_shock")
+    sc.add_argument("--region", action="append", default=[], help="repeatable")
+    sc.add_argument("--actor", action="append", default=[], help="repeatable, e.g. iran")
+    sc.add_argument("--severity", type=int, choices=range(1, 6))
+    sc.add_argument("--commodity", action="append", default=[], help="oil, gas, metals, grains")
+    sc.add_argument("--asset", action="append", default=[], help="asset keys to show")
+    sc.add_argument("--min-score", type=float, default=0.35)
+    sc.add_argument("--limit", type=int, default=12)
+    sc.add_argument("--out", default=str(DEFAULT_OUT / "scenarios.json"))
+    sc.set_defaults(func=_scenario)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:

@@ -1,0 +1,30 @@
+{
+  "id": "h1n1-outbreak-2009",
+  "name": "Swine flu outbreak in Mexico",
+  "date": "2009-04-24",
+  "type": "pandemic",
+  "regions": [
+    "latin_america",
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "mexico",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Mexico closed schools and public venues in Mexico City as a new H1N1 influenza strain spread, and the WHO soon declared a public health emergency. Airline and travel stocks and the Mexican peso fell before fears eased.",
+  "sources": [
+    {
+      "title": "2009 swine flu pandemic in Mexico",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic_in_Mexico"
+    },
+    {
+      "title": "2009 swine flu pandemic",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "london-bombings-2005",
+  "name": "London bombings",
+  "date": "2005-07-07",
+  "type": "terrorist_attack",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Suicide bombers attacked three Underground trains and a bus in central London during the morning rush hour. Sterling and UK stocks dropped sharply intraday before recovering most of the loss by the close.",
+  "sources": [
+    {
+      "title": "7 July 2005 London bombings",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings"
+    }
+  ]
+}

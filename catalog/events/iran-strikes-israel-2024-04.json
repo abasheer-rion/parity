@@ -1,0 +1,27 @@
+{
+  "id": "iran-strikes-israel-2024-04",
+  "name": "Iran's first direct strike on Israel",
+  "date": "2024-04-13",
+  "type": "military_strike",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "iran",
+    "israel",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "Iran launched drones and missiles directly at Israel for the first time, in retaliation for an Israeli strike on its consulate in Damascus. Almost all were intercepted and markets largely shrugged it off.",
+  "sources": [
+    {
+      "title": "April 2024 Iranian strikes on Israel",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_on_Israel"
+    }
+  ]
+}

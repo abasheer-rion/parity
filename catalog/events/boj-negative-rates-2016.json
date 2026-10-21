@@ -1,0 +1,23 @@
+{
+  "id": "boj-negative-rates-2016",
+  "name": "BoJ adopts negative rates",
+  "date": "2016-01-29",
+  "type": "central_bank_surprise",
+  "regions": [
+    "east_asia"
+  ],
+  "actors": [
+    "japan",
+    "boj"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The Bank of Japan surprised markets by introducing a negative interest rate of minus 0.1 percent on some reserves. The yen weakened at first but then strengthened sharply in the following weeks.",
+  "sources": [
+    {
+      "title": "Introduction of Quantitative and Qualitative Monetary Easing with a Negative Interest Rate",
+      "publisher": "Bank of Japan",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2016/k160129a.pdf"
+    }
+  ]
+}

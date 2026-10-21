@@ -1,0 +1,28 @@
+{
+  "id": "soleimani-strike-2020",
+  "name": "US kills Qasem Soleimani",
+  "date": "2020-01-03",
+  "type": "military_strike",
+  "regions": [
+    "middle_east",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "iran",
+    "iraq"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "A US drone strike in Baghdad killed Iranian general Qasem Soleimani. Oil and gold jumped on fears of war, then eased after Iran's limited missile reply on 8 January.",
+  "sources": [
+    {
+      "title": "Assassination of Qasem Soleimani",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani"
+    }
+  ]
+}

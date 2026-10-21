@@ -1,0 +1,24 @@
+{
+  "id": "fed-emergency-cut-2020",
+  "name": "Fed cuts rates to zero",
+  "date": "2020-03-15",
+  "type": "central_bank_surprise",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 4,
+  "commodities": [],
+  "description": "In a Sunday emergency move, the Fed cut its target range to 0 to 0.25 percent and announced large asset purchases. Stock futures still fell limit down and markets crashed again the next day.",
+  "sources": [
+    {
+      "title": "Federal Reserve issues FOMC statement",
+      "publisher": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm"
+    }
+  ]
+}

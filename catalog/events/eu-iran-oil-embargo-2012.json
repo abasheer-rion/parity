@@ -1,0 +1,27 @@
+{
+  "id": "eu-iran-oil-embargo-2012",
+  "name": "EU embargo on Iranian oil",
+  "date": "2012-01-23",
+  "type": "sanctions",
+  "regions": [
+    "middle_east",
+    "europe"
+  ],
+  "actors": [
+    "eu",
+    "iran",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The Council of the EU announced an embargo on imports of Iranian oil, effective July 2012, on top of new US sanctions on Iran's central bank. Iran threatened to close the Strait of Hormuz and oil prices stayed high.",
+  "sources": [
+    {
+      "title": "International sanctions against Iran",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Sanctions_against_Iran"
+    }
+  ]
+}

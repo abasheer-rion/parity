@@ -1,0 +1,24 @@
+{
+  "id": "taiwan-strait-missile-crisis-1996",
+  "name": "China missile tests near Taiwan",
+  "date": "1996-03-08",
+  "type": "military_strike",
+  "regions": [
+    "east_asia"
+  ],
+  "actors": [
+    "china",
+    "taiwan",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "China fired missiles into waters near Taiwan ahead of Taiwan's first direct presidential election, and the United States sent two carrier groups to the area. It was the most serious cross-strait military standoff in decades.",
+  "sources": [
+    {
+      "title": "Third Taiwan Strait Crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Third_Taiwan_Strait_Crisis"
+    }
+  ]
+}

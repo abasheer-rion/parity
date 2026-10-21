@@ -1,0 +1,25 @@
+{
+  "id": "egypt-revolution-2011",
+  "name": "Egyptian revolution begins",
+  "date": "2011-01-25",
+  "type": "political_crisis",
+  "regions": [
+    "middle_east",
+    "africa"
+  ],
+  "actors": [
+    "egypt"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Mass protests began in Egypt and forced President Mubarak to resign on 11 February 2011. Oil rose on fears for the Suez Canal and unrest spreading across the Arab world.",
+  "sources": [
+    {
+      "title": "Arab Spring",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Arab_Spring"
+    }
+  ]
+}

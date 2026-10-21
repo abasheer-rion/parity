@@ -7,6 +7,7 @@ Sources are collected from:
 
   * catalog/algorithms/*.json  (origin, reported_results, implementations, any other URL)
   * catalog/datasets/*.json    (url, api_docs_url, sources, any other URL)
+  * catalog/events/*.json      (sources[].url, cited by the source title and publisher)
   * every http(s) link in docs/**/*.md
   * the papers and books listed in docs/research/0001-reading-list.md
   * [@key] citations in docs (adds the citing page to that key's used_in)
@@ -235,7 +236,7 @@ def norm_title(t: str | None) -> str:
 # ---------------------------------------------------------------- collection
 
 PRIORITY = {"reading-list": 0, "catalog-origin": 1, "dataset": 1, "implementation": 1,
-            "reported-result": 2, "link": 3, "url": 4}
+            "reported-result": 2, "event": 2, "link": 3, "url": 4}
 
 
 class Mention(dict):
@@ -416,6 +417,20 @@ def collect_catalog() -> list[Mention]:
             for u in extract_urls(s):
                 if u not in seen:
                     out.append(mention(u, path, "url", venue=plain(e.get("provider"))))
+                    seen.add(u)
+    for p in sorted((CATALOG / "events").glob("*.json")):
+        e, path = json.loads(p.read_text()), rel(p)
+        seen = set()
+        for src in e.get("sources", []):
+            u = src.get("url")
+            if u and u not in seen and re.match(r"^https?://", u) and not ignored(u):
+                out.append(mention(u, path, "event", cited_as=plain(src.get("title")),
+                                   venue=plain(src.get("publisher"))))
+                seen.add(u)
+        for _k, s in walk_strings(e):
+            for u in extract_urls(s):
+                if u not in seen:
+                    out.append(mention(u, path, "url"))
                     seen.add(u)
     return out
 

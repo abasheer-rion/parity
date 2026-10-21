@@ -1,0 +1,23 @@
+{
+  "id": "trump-election-2016",
+  "name": "Trump wins 2016 US election",
+  "date": "2016-11-08",
+  "type": "election",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Donald Trump won the US presidential election against market expectations. Futures fell overnight and then reversed into a rally, with yields and the dollar rising on expected tax cuts and spending.",
+  "sources": [
+    {
+      "title": "2016 United States presidential election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2016_United_States_presidential_election"
+    }
+  ]
+}

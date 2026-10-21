@@ -1,0 +1,26 @@
+{
+  "id": "tohoku-earthquake-2011",
+  "name": "Tohoku earthquake and tsunami",
+  "date": "2011-03-11",
+  "type": "natural_disaster",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "japan",
+    "boj"
+  ],
+  "severity": 4,
+  "commodities": [
+    "gas"
+  ],
+  "description": "A magnitude 9 earthquake and tsunami struck northeast Japan and caused the Fukushima nuclear disaster. The yen surged to a record high, prompting joint G7 intervention, and Japanese stocks fell sharply.",
+  "sources": [
+    {
+      "title": "2011 Tohoku earthquake and tsunami",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami"
+    }
+  ]
+}

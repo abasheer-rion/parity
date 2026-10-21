@@ -1,0 +1,29 @@
+{
+  "id": "us-uk-strikes-houthis-2024",
+  "name": "US and UK strike Houthis in Yemen",
+  "date": "2024-01-12",
+  "type": "military_strike",
+  "regions": [
+    "middle_east",
+    "north_america",
+    "europe"
+  ],
+  "actors": [
+    "usa",
+    "uk",
+    "yemen",
+    "iran"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The United States and the UK struck Houthi targets in Yemen after months of attacks on Red Sea shipping. Shipping rerouted around Africa, raising freight costs, while oil rose modestly.",
+  "sources": [
+    {
+      "title": "US-UK airstrikes on Yemen",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Operation_Poseidon_Archer"
+    }
+  ]
+}

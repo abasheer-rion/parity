@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   Animate, Badge, BarChart, Button, ButtonGroup, Checkbox, CountUp, DataTable, Delta, Dialog, Divider, EmptyState, FilterBar, FilterChip,
-  Grid, Heading, HeroChart, Icon, ICON_NAMES, IconButton, Input, KeyValues, Kbd, Label, LineChart, Menu, Meter, Money, PageHeader, Panel,
+  FanChart, Grid, Heading, HeroChart, Icon, ICON_NAMES, IconButton, Input, KeyValues, Kbd, Label, LineChart, Menu, Meter, Money, PageHeader, Panel,
   RollingNumber, SearchInput, Section, Segmented, Select, Separator, SettingsRow, ShareBar, Skeleton, Sparkline, Stat, Status, Tabs, Text,
   Toggle, Tooltip, fmt, toast, useFilters, type Column, type RangeKey,
 } from "../ui";
@@ -554,6 +554,23 @@ function Hero() {
   );
 }
 
+// Sample fan data: five made-up random walks over 63 days, and their bands.
+const FAN = (() => {
+  let seed = 3;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647) - 0.5;
+  const paths = [0, 1, 2, 3, 4].map((i) => {
+    const values = [0];
+    for (let d = 1; d < 64; d++) values.push(values[d - 1] + rnd() * 2 + 0.05 * (i - 1));
+    return { name: `Sample ${i + 1}`, values };
+  });
+  const q = (xs: number[], p: number) => { const s = [...xs].sort((a, b) => a - b); const k = (s.length - 1) * p; const lo = Math.floor(k); return s[lo] + (s[Math.ceil(k)] - s[lo]) * (k - lo); };
+  const bands = paths[0].values.map((_, d) => {
+    const vs = paths.map((p) => p.values[d]);
+    return { day: d, median: q(vs, 0.5), q25: q(vs, 0.25), q75: q(vs, 0.75), min: Math.min(...vs), max: Math.max(...vs), count: vs.length };
+  });
+  return { paths, bands };
+})();
+
 function LineBar() {
   const years = ["2020", "2021", "2022", "2023", "2024"];
   return (
@@ -564,6 +581,11 @@ function LineBar() {
           { name: "Sample A", color: "var(--series-1)", points: SAMPLE_A, emphasis: true },
           { name: "Sample B", color: "var(--series-2)", points: SAMPLE_B },
         ]} />
+      </Item>
+      <Item title="FanChart" col code={`<FanChart label="…" color={color} bands={bands} paths={[{ name, values }]} markers={[{ day: 21, label: "1m" }]} format={(v) => \`\${v > 0 ? "+" : ""}\${v.toFixed(1)}%\`} />`}
+        rules={["One market per chart, in that market's series colour.", "Faint lines are single cases, the dark band the middle half, the light band the full range, the bold line the median, the dotted line zero."]}>
+        <FanChart label="Sample fan of outcomes" color="var(--series-1)" markers={[{ day: 5, label: "1w" }, { day: 21, label: "1m" }, { day: 63, label: "3m" }]}
+          format={(v) => `${v > 0 ? "+" : v < 0 ? "\u2212" : ""}${Math.abs(v).toFixed(1)}%`} paths={FAN.paths} bands={FAN.bands} />
       </Item>
       <Item title="BarChart" col code={`<BarChart label="…" format={(v) => fmt.pct(v, 0)} groups={[{ label: "2024", values: [{ name, color, value }] }]} />`}
         rules={["Bars are rounded only at the data end and square on the zero line.", "Hovering a group fades the others."]}>

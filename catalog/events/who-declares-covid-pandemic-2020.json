@@ -1,0 +1,28 @@
+{
+  "id": "who-declares-covid-pandemic-2020",
+  "name": "WHO declares COVID-19 a pandemic",
+  "date": "2020-03-11",
+  "type": "pandemic",
+  "regions": [
+    "global"
+  ],
+  "actors": [
+    "who",
+    "usa",
+    "china",
+    "eu"
+  ],
+  "severity": 5,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "The World Health Organization characterised COVID-19 as a pandemic, and the US announced a travel ban from Europe that evening. Stocks entered a bear market and volatility hit levels last seen in 2008.",
+  "sources": [
+    {
+      "title": "COVID-19 pandemic",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic"
+    }
+  ]
+}

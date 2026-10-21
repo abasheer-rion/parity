@@ -1,0 +1,29 @@
+{
+  "id": "plaza-accord-1985",
+  "name": "Plaza Accord",
+  "date": "1985-09-22",
+  "type": "central_bank_surprise",
+  "regions": [
+    "north_america",
+    "europe",
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "japan",
+    "germany",
+    "uk",
+    "france"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Finance ministers and central bank governors of the G5 agreed at the Plaza Hotel in New York to push the US dollar lower. The dollar fell sharply against the yen and the Deutsche Mark over the next two years.",
+  "sources": [
+    {
+      "title": "Plaza Accord",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Plaza_Accord"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "volcker-shock-1979",
+  "name": "Volcker anti-inflation measures",
+  "date": "1979-10-06",
+  "type": "central_bank_surprise",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 5,
+  "commodities": [
+    "metals"
+  ],
+  "description": "At a Saturday evening press conference, Fed Chairman Paul Volcker announced that the Fed would target bank reserves rather than interest rates to fight inflation. Short-term rates soared toward 20 percent and bond yields jumped.",
+  "sources": [
+    {
+      "title": "Volcker's Announcement of Anti-Inflation Measures",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/anti-inflation-measures"
+    }
+  ]
+}

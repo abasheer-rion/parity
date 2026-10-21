@@ -1,0 +1,29 @@
+{
+  "id": "israel-strikes-iran-2025-06",
+  "name": "Israel attacks Iran (Twelve-Day War)",
+  "date": "2025-06-13",
+  "type": "war",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "israel",
+    "iran",
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil",
+    "gas",
+    "metals"
+  ],
+  "description": "Israel launched surprise strikes on Iranian military and nuclear sites, starting a twelve-day war. Oil jumped on fears for supply through the Strait of Hormuz.",
+  "sources": [
+    {
+      "title": "Twelve-Day War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Twelve-Day_War"
+    }
+  ]
+}

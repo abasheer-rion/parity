@@ -1,0 +1,25 @@
+{
+  "id": "israel-strikes-iran-2024-10",
+  "name": "Israel strikes Iran",
+  "date": "2024-10-26",
+  "type": "military_strike",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "israel",
+    "iran"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Israel struck military targets in Iran, avoiding oil and nuclear sites. Oil fell about 6 percent the next trading day as the risk of supply disruption eased.",
+  "sources": [
+    {
+      "title": "October 2024 Israeli strikes on Iran",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran"
+    }
+  ]
+}

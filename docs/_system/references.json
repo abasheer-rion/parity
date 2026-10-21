@@ -616,6 +616,31 @@
       }
     },
     {
+      "key": "berkman2011",
+      "type": "paper",
+      "authors": [
+        "Berkman, Henk",
+        "Jacobsen, Ben",
+        "Lee, John B."
+      ],
+      "year": 2011,
+      "title": "Time-varying rare disaster risk and stock returns",
+      "venue": "Journal of Financial Economics 101(2), 313-332",
+      "doi": "10.1016/j.jfineco.2011.02.019",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2011.02.019",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "bhardwaj2015",
       "type": "preprint",
       "authors": [
@@ -757,6 +782,30 @@
       }
     },
     {
+      "key": "brown1985",
+      "type": "paper",
+      "authors": [
+        "Brown, Stephen J.",
+        "Warner, Jerold B."
+      ],
+      "year": 1985,
+      "title": "Using daily stock returns",
+      "venue": "Journal of Financial Economics 14(1), 3-31",
+      "doi": "10.1016/0304-405x(85)90042-x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0304-405X(85)90042-X",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "brunnermeier2008",
       "type": "preprint",
       "authors": [
@@ -871,6 +920,30 @@
         "source": "repo",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "caldara2022",
+      "type": "paper",
+      "authors": [
+        "Caldara, Dario",
+        "Iacoviello, Matteo"
+      ],
+      "year": 2022,
+      "title": "Measuring Geopolitical Risk",
+      "venue": "American Economic Review 112(4), 1194-1225",
+      "doi": "10.1257/aer.20191823",
+      "arxiv": null,
+      "url": "https://doi.org/10.1257/aer.20191823",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
       }
     },
     {
@@ -1504,6 +1577,32 @@
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "fama1969",
+      "type": "paper",
+      "authors": [
+        "Fama, Eugene F.",
+        "Fisher, Lawrence",
+        "Jensen, Michael C.",
+        "Roll, Richard"
+      ],
+      "year": 1969,
+      "title": "The Adjustment of Stock Prices to New Information",
+      "venue": "International Economic Review 10(1), 1",
+      "doi": "10.2307/2525569",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2525569",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
       }
     },
     {
@@ -2580,6 +2679,7 @@
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md",
         "docs/research/0001-reading-list.md"
       ],
       "metadata": {
@@ -3831,6 +3931,30 @@
       }
     },
     {
+      "key": "ranaldo2010",
+      "type": "paper",
+      "authors": [
+        "Ranaldo, Angelo",
+        "Söderlind, Paul"
+      ],
+      "year": 2010,
+      "title": "Safe Haven Currencies",
+      "venue": "Review of Finance 14(3), 385-407",
+      "doi": "10.1093/rof/rfq007",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rof/rfq007",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0011-scenario-simulator-method.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "rees2025",
       "type": "paper",
       "authors": [
@@ -3972,6 +4096,29 @@
       }
     },
     {
+      "key": "url-0084a600",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bankruptcy of Lehman Brothers",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/lehman-bankruptcy-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-00b49007",
       "type": "web-page",
       "authors": [],
@@ -4016,6 +4163,52 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00f23b97",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Federal Reserve issues FOMC statement",
+      "venue": "Federal Reserve",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/fed-emergency-cut-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-0140327c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2015-2016 Chinese stock market turbulence",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2015%E2%80%932016_Chinese_stock_market_turbulence",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/china-yuan-devaluation-2015.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -4290,6 +4483,76 @@
       }
     },
     {
+      "key": "url-079e8667",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Assassination of Qasem Soleimani",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/soleimani-strike-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-089e38b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2002-2004 SARS outbreak",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2002%E2%80%932004_SARS_outbreak",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/sars-global-alert-2003.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-08ba8307",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "China-United States trade war",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-china-tariffs-2018.json",
+        "catalog/events/us-china-trade-escalation-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-095b7d2f",
       "type": "web-page",
       "authors": [],
@@ -4339,6 +4602,29 @@
       }
     },
     {
+      "key": "url-09dbe3dc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1998 Russian financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/russia-default-1998.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-0ab6a2bc",
       "type": "forum-post",
       "authors": [],
@@ -4378,6 +4664,29 @@
         "docs/research/0003-forums-and-practitioners.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-0ad0582c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1973 oil crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1973_oil_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/arab-oil-embargo-1973.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -4542,6 +4851,29 @@
         "docs/research/0003-forums-and-practitioners.md"
       ],
       "note": "Linked in this repo as: Elite Trader: ultra-low-latency news feed delivery, Feb 2025",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-0e3aeacf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2004 Madrid train bombings",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2004_Madrid_train_bombings",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/madrid-train-bombings-2004.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -4736,6 +5068,29 @@
       }
     },
     {
+      "key": "url-1596278d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Euro area crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/European_debt_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/greece-junk-downgrade-2010.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-15ad6ef3",
       "type": "web-page",
       "authors": [],
@@ -4780,6 +5135,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-16436119",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collapse of Silicon Valley Bank",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/svb-collapse-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -4851,6 +5229,29 @@
         "docs/research/0003-forums-and-practitioners.md"
       ],
       "note": "Linked in this repo as: Free finance datasets for quants, 2023",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-197d2a85",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "7 July 2005 London bombings",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/london-bombings-2005.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -4995,6 +5396,29 @@
         "docs/datasets/0011-eia.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-1c26fadf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Oil Shock of 1978-79",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1978-79",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iranian-revolution-1979.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -5156,6 +5580,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1e79c280",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Russo-Ukrainian war (2022-present)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/russia-invades-ukraine-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -5375,6 +5822,52 @@
       }
     },
     {
+      "key": "url-262208e6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "April 2024 Iranian strikes on Israel",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_on_Israel",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iran-strikes-israel-2024-04.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-26a5c474",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Change in the Guideline for Money Market Operations and Decision on the Plan for the Reduction of the Purchase Amount of Japanese Government Bonds",
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240731a.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/boj-rate-hike-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-2731d111",
       "type": "web-page",
       "authors": [],
@@ -5541,6 +6034,29 @@
       }
     },
     {
+      "key": "url-2ab80190",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Iran-Iraq War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iran-iraq-war-1980.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-2d16e385",
       "type": "regulator",
       "authors": [],
@@ -5634,6 +6150,52 @@
       }
     },
     {
+      "key": "url-2e730361",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "October 7 attacks",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/October_7_attacks",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/hamas-attack-israel-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-2e8ec70e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stock Market Crash of 1987",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/stock-market-crash-of-1987",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/black-monday-1987.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-2ef0d137",
       "type": "software",
       "authors": [],
@@ -5675,6 +6237,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2f34d17a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Price of oil",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Price_of_oil",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/wti-negative-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -5806,6 +6391,29 @@
       }
     },
     {
+      "key": "url-32bf2590",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "United States federal government credit-rating downgrades",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/United_States_federal_government_credit-rating_downgrades",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-credit-downgrade-2011.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-3365363a",
       "type": "web-page",
       "authors": [],
@@ -5829,6 +6437,29 @@
       }
     },
     {
+      "key": "url-3379a52d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2009 swine flu pandemic in Mexico",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic_in_Mexico",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/h1n1-outbreak-2009.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-33969e0b",
       "type": "web-page",
       "authors": [],
@@ -5846,6 +6477,53 @@
         "docs/research/0006-courses-and-trader-beliefs.md"
       ],
       "note": "Linked in this repo as: cmcmarkets.com CFD page",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-3398b560",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2020-2022 world oil market chronology",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/opec-plus-cut-2022.json",
+        "catalog/events/wti-negative-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-348d1f64",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hurricane Harvey",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Hurricane_Harvey",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/hurricane-harvey-2017.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -5894,6 +6572,28 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0003-forums-and-practitioners.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-37211841",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Gulf War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Gulf_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/desert-storm-1991.json"
       ],
       "metadata": {
         "source": "repo",
@@ -6011,6 +6711,29 @@
         "docs/algorithms/0008-fx-fomc-dollar-announcement.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-3947a0b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Verbatim of the remarks made by Mario Draghi",
+      "venue": "European Central Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/press/key/date/2012/html/sp120726.en.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/draghi-whatever-it-takes-2012.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -6159,6 +6882,29 @@
       }
     },
     {
+      "key": "url-3c64e40b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Russo-Georgian War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Russo-Georgian_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/russia-georgia-war-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-3c74def2",
       "type": "web-page",
       "authors": [
@@ -6254,6 +7000,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-40552248",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "October 2024 Israeli strikes on Iran",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/israel-strikes-iran-2024-10.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -6787,6 +7556,29 @@
       }
     },
     {
+      "key": "url-4c5ba82d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2011 Tohoku earthquake and tsunami",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/tohoku-earthquake-2011.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-4dd21709",
       "type": "web-page",
       "authors": [],
@@ -7022,6 +7814,29 @@
         "docs/datasets/0003-aqr-datasets.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-521aa37d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2016 United States presidential election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2016_United_States_presidential_election",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/trump-election-2016.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -7486,6 +8301,29 @@
       }
     },
     {
+      "key": "url-5c13f005",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2025 United States strikes on Iranian nuclear sites",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2025_United_States_strikes_on_Iranian_nuclear_sites",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-strikes-iran-nuclear-sites-2025.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-5c18c558",
       "type": "web-page",
       "authors": [],
@@ -7744,6 +8582,29 @@
       }
     },
     {
+      "key": "url-6266193b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2017 Shayrat missile strike",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2017_Shayrat_missile_strike",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-strike-syria-shayrat-2017.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-640cd1cb",
       "type": "web-page",
       "authors": [],
@@ -7888,6 +8749,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6755fa04",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NATO bombing of Yugoslavia",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/NATO_bombing_of_Yugoslavia",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/nato-kosovo-bombing-1999.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -8165,6 +9049,29 @@
         "docs/research/0003-forums-and-practitioners.md"
       ],
       "note": "Linked in this repo as: a Python walk-through",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-6bb05aa8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1997 Asian financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/asian-financial-crisis-1997.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -8468,6 +9375,52 @@
       }
     },
     {
+      "key": "url-724ec5f1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2020 Russia-Saudi Arabia oil price war",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/saudi-russia-price-war-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-72eea26c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Twelve-Day War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Twelve-Day_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/israel-strikes-iran-2025-06.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-734d8a5c",
       "type": "software",
       "authors": [],
@@ -8492,6 +9445,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7384687e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Statement on Monetary Policy",
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2022/k221220a.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/boj-yield-curve-tweak-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -8680,6 +9656,29 @@
       }
     },
     {
+      "key": "url-7710a4ba",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Liberation Day tariffs",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Liberation_Day_tariffs",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/liberation-day-tariffs-2025.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-777e59be",
       "type": "web-page",
       "authors": [],
@@ -8769,6 +9768,29 @@
         "docs/research/0003-forums-and-practitioners.md"
       ],
       "note": "Linked in this repo as: WSO, May 2021 (archive)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-78fd770a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Mexican peso crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Mexican_peso_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/mexican-peso-crisis-1994.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -8896,6 +9918,29 @@
       }
     },
     {
+      "key": "url-7b991bf4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "September 2022 United Kingdom mini-budget",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/uk-mini-budget-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-7bbf84c9",
       "type": "web-page",
       "authors": [],
@@ -8989,6 +10034,29 @@
       }
     },
     {
+      "key": "url-7cc77912",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "November 2015 Paris attacks",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/November_2015_Paris_attacks",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/paris-attacks-2015.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-7d1ddeb9",
       "type": "web-page",
       "authors": [],
@@ -9051,6 +10119,29 @@
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-8009f8f1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "United States withdrawal from the Iran nuclear deal",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iran-deal-withdrawal-2018.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -9397,6 +10488,52 @@
       }
     },
     {
+      "key": "url-865db757",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%",
+      "venue": "Swiss National Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/snb-floor-removal-2015.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-86e37fdf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Arab Spring",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Arab_Spring",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/egypt-revolution-2011.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-86ecbb94",
       "type": "forum-post",
       "authors": [],
@@ -9554,6 +10691,74 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8a601f0e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OPEC",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/OPEC",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/opec-no-cut-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8a764f51",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 United States presidential election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_United_States_presidential_election",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/trump-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-8bc5888a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2009 swine flu pandemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/h1n1-outbreak-2009.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -9949,6 +11154,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-959feb3c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions against Iran",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Sanctions_against_Iran",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/eu-iran-oil-embargo-2012.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -10475,6 +11703,52 @@
       }
     },
     {
+      "key": "url-9e21d9bd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Third Taiwan Strait Crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Third_Taiwan_Strait_Crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/taiwan-strait-missile-crisis-1996.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-9e2b6017",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Plaza Accord",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Plaza_Accord",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/plaza-accord-1985.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-9eb68fd3",
       "type": "software",
       "authors": [],
@@ -10551,6 +11825,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9fa73178",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "COVID-19 pandemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/who-declares-covid-pandemic-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -10702,6 +11999,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a16db72b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1994 bond market crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1994_bond_market_crisis",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/fed-surprise-hike-1994.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -10943,6 +12263,52 @@
       }
     },
     {
+      "key": "url-a6d17d96",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Controls",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/gold-convertibility-ends",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/nixon-shock-1971.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-a8359cfb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2020 stock market crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2020_stock_market_crash",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/covid-global-spread-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-a848e23f",
       "type": "web-page",
       "authors": [],
@@ -11035,6 +12401,29 @@
       }
     },
     {
+      "key": "url-aa1fc24a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2016 United Kingdom European Union membership referendum",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/brexit-vote-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-aa21e093",
       "type": "dataset",
       "authors": [],
@@ -11103,6 +12492,29 @@
       }
     },
     {
+      "key": "url-ac041311",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions during the Russian invasion of Ukraine",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russian_invasion_of_Ukraine",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/russia-reserves-frozen-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-ac41c572",
       "type": "web-page",
       "authors": [],
@@ -11147,6 +12559,52 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aeacd993",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Black Wednesday",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Black_Wednesday",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/black-wednesday-1992.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-aeeff74a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Introduction of Quantitative and Qualitative Monetary Easing with a Negative Interest Rate",
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2016/k160129a.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/boj-negative-rates-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -11200,6 +12658,29 @@
       }
     },
     {
+      "key": "url-b0e2e26e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "September 11 attacks",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/September_11_attacks",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/september-11-attacks-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-b180e181",
       "type": "web-page",
       "authors": [],
@@ -11220,6 +12701,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b2570be7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Near Failure of Long-Term Capital Management",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/ltcm-rescue-1998.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -11394,6 +12898,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b5c6f6bd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Volcker's Announcement of Anti-Inflation Measures",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/anti-inflation-measures",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/volcker-shock-1979.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -11637,6 +13164,29 @@
       }
     },
     {
+      "key": "url-ba533bf9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Abqaiq-Khurais attack",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/abqaiq-attack-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-bb2fadee",
       "type": "web-page",
       "authors": [],
@@ -11733,6 +13283,29 @@
       }
     },
     {
+      "key": "url-be532ea3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Yom Kippur War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Yom_Kippur_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/yom-kippur-war-1973.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-be6b3cbc",
       "type": "web-page",
       "authors": [],
@@ -11750,6 +13323,29 @@
         "docs/research/0002-open-source-and-public-results.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-beec23b0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Annexation of Crimea by the Russian Federation",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/crimea-seizure-2014.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -11843,6 +13439,29 @@
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: rate limits",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-c2e30a7b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Libyan civil war (2011)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Libyan_civil_war_(2011)",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/libya-civil-war-2011.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -12556,6 +14175,29 @@
       }
     },
     {
+      "key": "url-d5f11dd9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nixon shock",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Nixon_shock",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/nixon-shock-1971.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-d6e19278",
       "type": "web-page",
       "authors": [],
@@ -12621,6 +14263,29 @@
         "docs/datasets/0035-world-bank.md"
       ],
       "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-d8dbdf57",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "US-UK airstrikes on Yemen",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Operation_Poseidon_Archer",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-uk-strikes-houthis-2024.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,
@@ -12740,6 +14405,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dcceb73b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "October 2024 Iranian strikes on Israel",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_on_Israel",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iran-missile-attack-israel-2024-10.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -12903,6 +14591,29 @@
       }
     },
     {
+      "key": "url-e10c362d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hurricane Katrina",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Hurricane_Katrina",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/hurricane-katrina-2005.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-e177aeb7",
       "type": "web-page",
       "authors": [],
@@ -12923,6 +14634,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e1d2a002",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Capture of the Crimean Parliament",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/crimea-seizure-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -12948,6 +14682,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e319ebc8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "April 2018 missile strikes against Syria",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/April_2018_missile_strikes_against_Syria",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/syria-strikes-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -13164,6 +14921,29 @@
       }
     },
     {
+      "key": "url-e719ee41",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Iranian Revolution",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Iranian_Revolution",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iranian-revolution-1979.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-e72a5ff8",
       "type": "web-page",
       "authors": [],
@@ -13188,6 +14968,29 @@
       }
     },
     {
+      "key": "url-e74404b9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2022 visit by Nancy Pelosi to Taiwan",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2022_visit_by_Nancy_Pelosi_to_Taiwan",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/pelosi-taiwan-visit-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-e7933d7c",
       "type": "web-page",
       "authors": [],
@@ -13207,6 +15010,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e7f32334",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "War in Afghanistan (2001-2021)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/afghanistan-invasion-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -13233,6 +15059,29 @@
       }
     },
     {
+      "key": "url-e88319e7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2006 Lebanon War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2006_Lebanon_War",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/israel-lebanon-war-2006.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-e8e7bb24",
       "type": "web-page",
       "authors": [],
@@ -13253,6 +15102,29 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e97a72dc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2003 invasion of Iraq",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2003_invasion_of_Iraq",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iraq-invasion-2003.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -13299,6 +15171,52 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ea956ef7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2020 United States presidential election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2020_United_States_presidential_election",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/us-election-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-ec56c25d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Iraqi invasion of Kuwait",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/iraq-invades-kuwait-1990.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
       }
     },
     {
@@ -13812,6 +15730,29 @@
       }
     },
     {
+      "key": "url-f84c61b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2017 North Korean missile tests",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/north-korea-missile-over-japan-2017.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
       "key": "url-f90289be",
       "type": "web-page",
       "authors": [],
@@ -13973,6 +15914,29 @@
         "docs/algorithms/0035-numerai-crowdsourced-ensemble.md"
       ],
       "note": "Linked in this repo as: Numerai blog, Numerai Raises $30M Series C",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-fc8bf6e6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Oil Shock of 1973-74",
+      "venue": "Federal Reserve History",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "verified",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/events/arab-oil-embargo-1973.json"
+      ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false,

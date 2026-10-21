@@ -1,0 +1,27 @@
+{
+  "id": "iran-missile-attack-israel-2024-10",
+  "name": "Iran fires missiles at Israel",
+  "date": "2024-10-01",
+  "type": "military_strike",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "iran",
+    "israel",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "Iran fired about 200 ballistic missiles at Israel, its largest attack yet. Oil jumped on fears that Israel would retaliate against Iranian oil facilities.",
+  "sources": [
+    {
+      "title": "October 2024 Iranian strikes on Israel",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_on_Israel"
+    }
+  ]
+}

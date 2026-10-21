@@ -1,0 +1,25 @@
+{
+  "id": "russia-default-1998",
+  "name": "Russia devalues and defaults",
+  "date": "1998-08-17",
+  "type": "financial_crisis",
+  "regions": [
+    "russia_cis",
+    "global"
+  ],
+  "actors": [
+    "russia"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Russia devalued the ruble, defaulted on its domestic debt and declared a moratorium on foreign debt payments. The shock caused a global flight to safety and led to the near failure of the hedge fund LTCM.",
+  "sources": [
+    {
+      "title": "1998 Russian financial crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis"
+    }
+  ]
+}

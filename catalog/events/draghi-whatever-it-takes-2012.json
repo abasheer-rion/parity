@@ -1,0 +1,23 @@
+{
+  "id": "draghi-whatever-it-takes-2012",
+  "name": "Draghi: whatever it takes",
+  "date": "2012-07-26",
+  "type": "central_bank_surprise",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "ecb",
+    "eu"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "ECB President Mario Draghi said in London that the ECB was ready to do whatever it takes to preserve the euro. Italian and Spanish bond yields fell sharply and the speech is seen as the turning point of the euro crisis.",
+  "sources": [
+    {
+      "title": "Verbatim of the remarks made by Mario Draghi",
+      "publisher": "European Central Bank",
+      "url": "https://www.ecb.europa.eu/press/key/date/2012/html/sp120726.en.html"
+    }
+  ]
+}

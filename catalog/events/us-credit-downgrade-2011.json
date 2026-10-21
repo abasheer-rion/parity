@@ -1,0 +1,25 @@
+{
+  "id": "us-credit-downgrade-2011",
+  "name": "S&P downgrades US credit rating",
+  "date": "2011-08-05",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [
+    "metals"
+  ],
+  "description": "Standard and Poor's cut the US rating from AAA to AA+ after a debt ceiling standoff. Stocks fell sharply the following Monday while Treasuries and gold rallied as havens.",
+  "sources": [
+    {
+      "title": "United States federal government credit-rating downgrades",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/United_States_federal_government_credit-rating_downgrades"
+    }
+  ]
+}

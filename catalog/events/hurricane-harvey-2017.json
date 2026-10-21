@@ -1,0 +1,25 @@
+{
+  "id": "hurricane-harvey-2017",
+  "name": "Hurricane Harvey",
+  "date": "2017-08-25",
+  "type": "natural_disaster",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Hurricane Harvey made landfall near Rockport, Texas, on the night of 25 August local time and caused catastrophic flooding in Houston. Many Gulf Coast refineries shut, pushing up gasoline prices while crude prices fell.",
+  "sources": [
+    {
+      "title": "Hurricane Harvey",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hurricane_Harvey"
+    }
+  ]
+}

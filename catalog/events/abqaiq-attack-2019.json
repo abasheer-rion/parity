@@ -1,0 +1,27 @@
+{
+  "id": "abqaiq-attack-2019",
+  "name": "Drone attack on Abqaiq",
+  "date": "2019-09-14",
+  "type": "military_strike",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "saudi_arabia",
+    "iran",
+    "yemen"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Drones and missiles struck the Abqaiq processing plant and Khurais oil field, briefly halving Saudi oil output. Brent jumped about 15 percent on the next trading day, its largest one-day rise in decades, before falling back.",
+  "sources": [
+    {
+      "title": "Abqaiq-Khurais attack",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack"
+    }
+  ]
+}

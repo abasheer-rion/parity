@@ -1,0 +1,32 @@
+{
+  "id": "crimea-seizure-2014",
+  "name": "Russian forces seize Crimea",
+  "date": "2014-02-27",
+  "type": "war",
+  "regions": [
+    "russia_cis",
+    "europe"
+  ],
+  "actors": [
+    "russia",
+    "ukraine"
+  ],
+  "severity": 3,
+  "commodities": [
+    "gas",
+    "grains"
+  ],
+  "description": "Unmarked Russian soldiers seized the Crimean parliament building, the start of Russia's annexation of Crimea. The ruble and Russian stocks fell hard and the West imposed its first round of sanctions.",
+  "sources": [
+    {
+      "title": "Capture of the Crimean Parliament",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament"
+    },
+    {
+      "title": "Annexation of Crimea by the Russian Federation",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation"
+    }
+  ]
+}

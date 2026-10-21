@@ -1,0 +1,24 @@
+{
+  "id": "nato-kosovo-bombing-1999",
+  "name": "NATO bombing of Yugoslavia",
+  "date": "1999-03-24",
+  "type": "military_strike",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "nato",
+    "usa",
+    "serbia"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "NATO began an air campaign against Yugoslavia over the Kosovo conflict, lasting until June 1999. It was the largest military action in Europe since 1945, though the market impact was modest.",
+  "sources": [
+    {
+      "title": "NATO bombing of Yugoslavia",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/NATO_bombing_of_Yugoslavia"
+    }
+  ]
+}

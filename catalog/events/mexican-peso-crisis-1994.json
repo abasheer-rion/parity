@@ -1,0 +1,24 @@
+{
+  "id": "mexican-peso-crisis-1994",
+  "name": "Mexico devalues the peso",
+  "date": "1994-12-20",
+  "type": "financial_crisis",
+  "regions": [
+    "latin_america",
+    "north_america"
+  ],
+  "actors": [
+    "mexico",
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Mexico devalued the peso by 13 to 15 percent, then let it float, after running short of reserves. The peso collapsed and the crisis spread to other emerging markets until a US-led rescue.",
+  "sources": [
+    {
+      "title": "Mexican peso crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mexican_peso_crisis"
+    }
+  ]
+}

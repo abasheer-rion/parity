@@ -1,0 +1,26 @@
+{
+  "id": "yom-kippur-war-1973",
+  "name": "Yom Kippur War begins",
+  "date": "1973-10-06",
+  "type": "war",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "egypt",
+    "syria",
+    "israel"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Egypt and Syria launched a surprise attack on Israel on the Jewish holy day of Yom Kippur. The war led directly to the Arab oil embargo and a fourfold rise in oil prices.",
+  "sources": [
+    {
+      "title": "Yom Kippur War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Yom_Kippur_War"
+    }
+  ]
+}

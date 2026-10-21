@@ -19,6 +19,7 @@ import { LedgerPage } from "./pages/LedgerPage";
 import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
+import { Scenarios } from "./pages/Scenarios";
 import { Settings } from "./pages/Settings";
 import { SimWorld } from "./pages/SimWorld";
 import { UILibrary } from "./pages/UILibrary";
@@ -45,7 +46,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui"];
+const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
 
 function Dashboard({ email }: { email: string | null }) {
   const hash = useHash();
@@ -92,6 +93,7 @@ function Dashboard({ email }: { email: string | null }) {
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
       {route === "ui" && <UILibrary section={arg} />}
+      {route === "scenarios" && <Scenarios />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}

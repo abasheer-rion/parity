@@ -1,0 +1,24 @@
+{
+  "id": "boj-yield-curve-tweak-2022",
+  "name": "BoJ widens yield curve band",
+  "date": "2022-12-20",
+  "type": "central_bank_surprise",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "japan",
+    "boj"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The Bank of Japan unexpectedly widened the range in which it lets the 10-year government bond yield move to about plus or minus 0.5 percent. The yen jumped and global bond yields rose.",
+  "sources": [
+    {
+      "title": "Statement on Monetary Policy",
+      "publisher": "Bank of Japan",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2022/k221220a.pdf"
+    }
+  ]
+}

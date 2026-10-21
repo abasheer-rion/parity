@@ -1,0 +1,25 @@
+{
+  "id": "sars-global-alert-2003",
+  "name": "WHO global alert on SARS",
+  "date": "2003-03-15",
+  "type": "pandemic",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china",
+    "hong_kong",
+    "canada"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The WHO issued a heightened global health alert about a new pneumonia, later named SARS, after cases appeared in Singapore and Canada. Travel and spending across East Asia fell sharply for several months.",
+  "sources": [
+    {
+      "title": "2002-2004 SARS outbreak",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2002%E2%80%932004_SARS_outbreak"
+    }
+  ]
+}

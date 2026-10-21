@@ -1,0 +1,23 @@
+{
+  "id": "trump-election-2024",
+  "name": "Trump wins 2024 US election",
+  "date": "2024-11-05",
+  "type": "election",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Donald Trump won the US presidential election. The dollar, Treasury yields and US stocks rose on expected tariffs, tax cuts and deregulation.",
+  "sources": [
+    {
+      "title": "2024 United States presidential election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"
+    }
+  ]
+}

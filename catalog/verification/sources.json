@@ -13113,6 +13113,1134 @@
      "where": "implementations[0].url"
     }
    ]
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/1973_oil_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 17 October 1973 for the OAPEC production cuts and 19 October 1973 for the US embargo",
+   "title": "1973 oil crisis",
+   "locations": [
+    {
+     "file": "catalog/events/arab-oil-embargo-1973.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/1994_bond_market_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives the 3-4 February 1994 FOMC decision to raise the target from 3 to 3.25 percent",
+   "title": "1994 bond market crisis",
+   "locations": [
+    {
+     "file": "catalog/events/fed-surprise-hike-1994.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1997-07-02 for the event",
+   "title": "1997 Asian financial crisis",
+   "locations": [
+    {
+     "file": "catalog/events/asian-financial-crisis-1997.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1998-08-17 for the event",
+   "title": "1998 Russian financial crisis",
+   "locations": [
+    {
+     "file": "catalog/events/russia-default-1998.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2002%E2%80%932004_SARS_outbreak",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 15 March 2003 for the WHO heightened global alert",
+   "title": "2002-2004 SARS outbreak",
+   "locations": [
+    {
+     "file": "catalog/events/sars-global-alert-2003.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2003_invasion_of_Iraq",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2003-03-20 for the event",
+   "title": "2003 invasion of Iraq",
+   "locations": [
+    {
+     "file": "catalog/events/iraq-invasion-2003.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2004_Madrid_train_bombings",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2004-03-11 for the event",
+   "title": "2004 Madrid train bombings",
+   "locations": [
+    {
+     "file": "catalog/events/madrid-train-bombings-2004.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2006_Lebanon_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2006-07-12 for the event",
+   "title": "2006 Lebanon War",
+   "locations": [
+    {
+     "file": "catalog/events/israel-lebanon-war-2006.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives late April 2009 for the WHO emergency declaration (month level only)",
+   "title": "2009 swine flu pandemic",
+   "locations": [
+    {
+     "file": "catalog/events/h1n1-outbreak-2009.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2009_swine_flu_pandemic_in_Mexico",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 24 April 2009 for the Mexico City closures",
+   "title": "2009 swine flu pandemic in Mexico",
+   "locations": [
+    {
+     "file": "catalog/events/h1n1-outbreak-2009.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2011-03-11 for the event",
+   "title": "2011 Tohoku earthquake and tsunami",
+   "locations": [
+    {
+     "file": "catalog/events/tohoku-earthquake-2011.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2015%E2%80%932016_Chinese_stock_market_turbulence",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2015-08-11 for the event",
+   "title": "2015-2016 Chinese stock market turbulence",
+   "locations": [
+    {
+     "file": "catalog/events/china-yuan-devaluation-2015.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2016-06-23 for the event",
+   "title": "2016 United Kingdom European Union membership referendum",
+   "locations": [
+    {
+     "file": "catalog/events/brexit-vote-2016.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2016_United_States_presidential_election",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2016-11-08 for the event",
+   "title": "2016 United States presidential election",
+   "locations": [
+    {
+     "file": "catalog/events/trump-election-2016.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2017-08-29 for the event",
+   "title": "2017 North Korean missile tests",
+   "locations": [
+    {
+     "file": "catalog/events/north-korea-missile-over-japan-2017.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2017_Shayrat_missile_strike",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 7 April 2017, 04:40 local time",
+   "title": "2017 Shayrat missile strike",
+   "locations": [
+    {
+     "file": "catalog/events/us-strike-syria-shayrat-2017.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 20 April 2020 for WTI below zero; it dates the OPEC+ 2 million barrel cut to the first week of October 2022 without the day (5 October is from other reporting, not this page)",
+   "title": "2020-2022 world oil market chronology",
+   "locations": [
+    {
+     "file": "catalog/events/opec-plus-cut-2022.json",
+     "where": "sources[0].url"
+    },
+    {
+     "file": "catalog/events/wti-negative-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 6 March 2020 for the OPEC+ breakdown and 8 March 2020 for the Saudi price discounts",
+   "title": "2020 Russia-Saudi Arabia oil price war",
+   "locations": [
+    {
+     "file": "catalog/events/saudi-russia-price-war-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2020_United_States_presidential_election",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2020-11-03 for the event",
+   "title": "2020 United States presidential election",
+   "locations": [
+    {
+     "file": "catalog/events/us-election-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2020_stock_market_crash",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives the 24 February 2020 selloff after the weekend spread of the outbreak",
+   "title": "2020 stock market crash",
+   "locations": [
+    {
+     "file": "catalog/events/covid-global-spread-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2022_visit_by_Nancy_Pelosi_to_Taiwan",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2022-08-02 for the event",
+   "title": "2022 visit by Nancy Pelosi to Taiwan",
+   "locations": [
+    {
+     "file": "catalog/events/pelosi-taiwan-visit-2022.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2024_United_States_presidential_election",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2024-11-05 for the event",
+   "title": "2024 United States presidential election",
+   "locations": [
+    {
+     "file": "catalog/events/trump-election-2024.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/2025_United_States_strikes_on_Iranian_nuclear_sites",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 22 June 2025, 02:10-02:35 Iran time",
+   "title": "2025 United States strikes on Iranian nuclear sites",
+   "locations": [
+    {
+     "file": "catalog/events/us-strikes-iran-nuclear-sites-2025.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2005-07-07 for the event",
+   "title": "7 July 2005 London bombings",
+   "locations": [
+    {
+     "file": "catalog/events/london-bombings-2005.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2019-09-14 for the event",
+   "title": "Abqaiq-Khurais attack",
+   "locations": [
+    {
+     "file": "catalog/events/abqaiq-attack-2019.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 26 February 2014 for the start of the occupation; the linked capture page gives 27 February",
+   "title": "Annexation of Crimea by the Russian Federation",
+   "locations": [
+    {
+     "file": "catalog/events/crimea-seizure-2014.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/April_2018_missile_strikes_against_Syria",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2018-04-14 for the event",
+   "title": "April 2018 missile strikes against Syria",
+   "locations": [
+    {
+     "file": "catalog/events/syria-strikes-2018.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_on_Israel",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives the evening of 13 April 2024 local time",
+   "title": "April 2024 Iranian strikes on Israel",
+   "locations": [
+    {
+     "file": "catalog/events/iran-strikes-israel-2024-04.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Arab_Spring",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 25 January 2011 for the start of the Egyptian revolution",
+   "title": "Arab Spring",
+   "locations": [
+    {
+     "file": "catalog/events/egypt-revolution-2011.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2020-01-03 for the event",
+   "title": "Assassination of Qasem Soleimani",
+   "locations": [
+    {
+     "file": "catalog/events/soleimani-strike-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2008-09-15 for the event",
+   "title": "Bankruptcy of Lehman Brothers",
+   "locations": [
+    {
+     "file": "catalog/events/lehman-bankruptcy-2008.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Black_Wednesday",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1992-09-16 for the event",
+   "title": "Black Wednesday",
+   "locations": [
+    {
+     "file": "catalog/events/black-wednesday-1992.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2020-03-11 for the event",
+   "title": "COVID-19 pandemic",
+   "locations": [
+    {
+     "file": "catalog/events/who-declares-covid-pandemic-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2014-02-27 for the event",
+   "title": "Capture of the Crimean Parliament",
+   "locations": [
+    {
+     "file": "catalog/events/crimea-seizure-2014.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 22 March 2018 for the Section 301 tariff memorandum and 5 May 2019 for the tariff increase announcement",
+   "title": "China-United States trade war",
+   "locations": [
+    {
+     "file": "catalog/events/us-china-tariffs-2018.json",
+     "where": "sources[0].url"
+    },
+    {
+     "file": "catalog/events/us-china-trade-escalation-2019.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2023-03-10 for the event",
+   "title": "Collapse of Silicon Valley Bank",
+   "locations": [
+    {
+     "file": "catalog/events/svb-collapse-2023.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/European_debt_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 27 April 2010 for the S&P junk downgrade of Greece",
+   "title": "Euro area crisis",
+   "locations": [
+    {
+     "file": "catalog/events/greece-junk-downgrade-2010.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Gulf_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1991-01-17 for the event",
+   "title": "Gulf War",
+   "locations": [
+    {
+     "file": "catalog/events/desert-storm-1991.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Hurricane_Harvey",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives landfall around 03:00 UTC on 26 August 2017, which is the night of 25 August local time",
+   "title": "Hurricane Harvey",
+   "locations": [
+    {
+     "file": "catalog/events/hurricane-harvey-2017.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Hurricane_Katrina",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2005-08-29 for the event",
+   "title": "Hurricane Katrina",
+   "locations": [
+    {
+     "file": "catalog/events/hurricane-katrina-2005.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russian_invasion_of_Ukraine",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 28 February 2022 for blocking the Russian central bank reserves",
+   "title": "International sanctions during the Russian invasion of Ukraine",
+   "locations": [
+    {
+     "file": "catalog/events/russia-reserves-frozen-2022.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1980-09-22 for the event",
+   "title": "Iran-Iraq War",
+   "locations": [
+    {
+     "file": "catalog/events/iran-iraq-war-1980.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Iranian_Revolution",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1979-01-16 for the event",
+   "title": "Iranian Revolution",
+   "locations": [
+    {
+     "file": "catalog/events/iranian-revolution-1979.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2-4 August 1990",
+   "title": "Iraqi invasion of Kuwait",
+   "locations": [
+    {
+     "file": "catalog/events/iraq-invades-kuwait-1990.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Liberation_Day_tariffs",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2025-04-02 for the event",
+   "title": "Liberation Day tariffs",
+   "locations": [
+    {
+     "file": "catalog/events/liberation-day-tariffs-2025.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Libyan_civil_war_(2011)",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2011-02-15 for the event",
+   "title": "Libyan civil war (2011)",
+   "locations": [
+    {
+     "file": "catalog/events/libya-civil-war-2011.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Mexican_peso_crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1994-12-20 for the event",
+   "title": "Mexican peso crisis",
+   "locations": [
+    {
+     "file": "catalog/events/mexican-peso-crisis-1994.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/NATO_bombing_of_Yugoslavia",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1999-03-24 for the event",
+   "title": "NATO bombing of Yugoslavia",
+   "locations": [
+    {
+     "file": "catalog/events/nato-kosovo-bombing-1999.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Nixon_shock",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1971-08-15 for the event",
+   "title": "Nixon shock",
+   "locations": [
+    {
+     "file": "catalog/events/nixon-shock-1971.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/November_2015_Paris_attacks",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2015-11-13 for the event",
+   "title": "November 2015 Paris attacks",
+   "locations": [
+    {
+     "file": "catalog/events/paris-attacks-2015.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/OPEC",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 27 November 2014 for the Vienna meeting where Saudi Arabia blocked cuts",
+   "title": "OPEC",
+   "locations": [
+    {
+     "file": "catalog/events/opec-no-cut-2014.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_on_Israel",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2024-10-01 for the event",
+   "title": "October 2024 Iranian strikes on Israel",
+   "locations": [
+    {
+     "file": "catalog/events/iran-missile-attack-israel-2024-10.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2024-10-26 for the event",
+   "title": "October 2024 Israeli strikes on Iran",
+   "locations": [
+    {
+     "file": "catalog/events/israel-strikes-iran-2024-10.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/October_7_attacks",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 7-8 October 2023",
+   "title": "October 7 attacks",
+   "locations": [
+    {
+     "file": "catalog/events/hamas-attack-israel-2023.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Operation_Poseidon_Archer",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 12 January 2024, about 02:30 Yemen time, for the first strikes",
+   "title": "US-UK airstrikes on Yemen",
+   "locations": [
+    {
+     "file": "catalog/events/us-uk-strikes-houthis-2024.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Plaza_Accord",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1985-09-22 for the event",
+   "title": "Plaza Accord",
+   "locations": [
+    {
+     "file": "catalog/events/plaza-accord-1985.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Price_of_oil",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 20 April 2020 for WTI futures below zero",
+   "title": "Price of oil",
+   "locations": [
+    {
+     "file": "catalog/events/wti-negative-2020.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2022-02-24 for the event",
+   "title": "Russo-Ukrainian war (2022-present)",
+   "locations": [
+    {
+     "file": "catalog/events/russia-invades-ukraine-2022.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Russo-Georgian_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2008-08-08 for the event",
+   "title": "Russo-Georgian War",
+   "locations": [
+    {
+     "file": "catalog/events/russia-georgia-war-2008.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Sanctions_against_Iran",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 23 January 2012 for the EU oil embargo announcement",
+   "title": "International sanctions against Iran",
+   "locations": [
+    {
+     "file": "catalog/events/eu-iran-oil-embargo-2012.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/September_11_attacks",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2001-09-11 for the event",
+   "title": "September 11 attacks",
+   "locations": [
+    {
+     "file": "catalog/events/september-11-attacks-2001.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2022-09-23 for the event",
+   "title": "September 2022 United Kingdom mini-budget",
+   "locations": [
+    {
+     "file": "catalog/events/uk-mini-budget-2022.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Third_Taiwan_Strait_Crisis",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1996-03-08 for the event",
+   "title": "Third Taiwan Strait Crisis",
+   "locations": [
+    {
+     "file": "catalog/events/taiwan-strait-missile-crisis-1996.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Twelve-Day_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2025-06-13 for the event",
+   "title": "Twelve-Day War",
+   "locations": [
+    {
+     "file": "catalog/events/israel-strikes-iran-2025-06.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/United_States_federal_government_credit-rating_downgrades",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2011-08-05 for the event",
+   "title": "United States federal government credit-rating downgrades",
+   "locations": [
+    {
+     "file": "catalog/events/us-credit-downgrade-2011.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2018-05-08 for the event",
+   "title": "United States withdrawal from the Iran nuclear deal",
+   "locations": [
+    {
+     "file": "catalog/events/iran-deal-withdrawal-2018.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2001-10-07 for the event",
+   "title": "War in Afghanistan (2001-2021)",
+   "locations": [
+    {
+     "file": "catalog/events/afghanistan-invasion-2001.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Yom_Kippur_War",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1973-10-06 for the event",
+   "title": "Yom Kippur War",
+   "locations": [
+    {
+     "file": "catalog/events/yom-kippur-war-1973.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2016/k160129a.pdf",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2016-01-29 for the event",
+   "title": "Introduction of Quantitative and Qualitative Monetary Easing with a Negative Interest Rate",
+   "locations": [
+    {
+     "file": "catalog/events/boj-negative-rates-2016.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2022/k221220a.pdf",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2022-12-20 for the event",
+   "title": "Statement on Monetary Policy",
+   "locations": [
+    {
+     "file": "catalog/events/boj-yield-curve-tweak-2022.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240731a.pdf",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2024-07-31 for the event",
+   "title": "Change in the Guideline for Money Market Operations and Decision on the Plan for the Reduction of the Purchase Amount of Japanese Government Bonds",
+   "locations": [
+    {
+     "file": "catalog/events/boj-rate-hike-2024.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.ecb.europa.eu/press/key/date/2012/html/sp120726.en.html",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2012-07-26 for the event",
+   "title": "Verbatim of the remarks made by Mario Draghi",
+   "locations": [
+    {
+     "file": "catalog/events/draghi-whatever-it-takes-2012.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2020-03-15 for the event",
+   "title": "Federal Reserve issues FOMC statement",
+   "locations": [
+    {
+     "file": "catalog/events/fed-emergency-cut-2020.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/anti-inflation-measures",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1979-10-06 for the event",
+   "title": "Volcker's Announcement of Anti-Inflation Measures",
+   "locations": [
+    {
+     "file": "catalog/events/volcker-shock-1979.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/gold-convertibility-ends",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1971-08-15 for the event",
+   "title": "Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Controls",
+   "locations": [
+    {
+     "file": "catalog/events/nixon-shock-1971.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1998-09-23 for the event",
+   "title": "Near Failure of Long-Term Capital Management",
+   "locations": [
+    {
+     "file": "catalog/events/ltcm-rescue-1998.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 19 October 1973 for the embargo announcement",
+   "title": "Oil Shock of 1973-74",
+   "locations": [
+    {
+     "file": "catalog/events/arab-oil-embargo-1973.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/oil-shock-of-1978-79",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives month-level timing only (revolution in 1978, oil output down by January 1979)",
+   "title": "Oil Shock of 1978-79",
+   "locations": [
+    {
+     "file": "catalog/events/iranian-revolution-1979.json",
+     "where": "sources[1].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.federalreservehistory.org/essays/stock-market-crash-of-1987",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 1987-10-19 for the event",
+   "title": "Stock Market Crash of 1987",
+   "locations": [
+    {
+     "file": "catalog/events/black-monday-1987.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
+  },
+  {
+   "url": "https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115",
+   "kind": "url",
+   "status": "verified",
+   "reason": "Read with WebFetch on 2026-10-21; checked the event date only: page gives 2015-01-15 for the event",
+   "title": "Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%",
+   "locations": [
+    {
+     "file": "catalog/events/snb-floor-removal-2015.json",
+     "where": "sources[0].url"
+    }
+   ],
+   "checked_at": "2026-10-21T12:00:00Z"
   }
  ]
 }

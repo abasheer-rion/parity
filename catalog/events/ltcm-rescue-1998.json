@@ -1,0 +1,24 @@
+{
+  "id": "ltcm-rescue-1998",
+  "name": "LTCM rescue",
+  "date": "1998-09-23",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "A group of banks agreed, in a meeting arranged by the New York Fed, to recapitalise the hedge fund Long-Term Capital Management. Fears that its forced selling would disrupt markets helped push the Fed to cut rates three times that autumn.",
+  "sources": [
+    {
+      "title": "Near Failure of Long-Term Capital Management",
+      "publisher": "Federal Reserve History",
+      "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "us-strike-syria-shayrat-2017",
+  "name": "US missile strike on Syria",
+  "date": "2017-04-07",
+  "type": "military_strike",
+  "regions": [
+    "middle_east",
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "syria",
+    "russia"
+  ],
+  "severity": 1,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The United States fired cruise missiles at Shayrat air base in Syria after a chemical attack. Oil and gold rose briefly, but the strike was limited and markets calmed within days.",
+  "sources": [
+    {
+      "title": "2017 Shayrat missile strike",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2017_Shayrat_missile_strike"
+    }
+  ]
+}
