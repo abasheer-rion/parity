@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0079",
+  "slug": "fx-local-hours-time-of-day",
+  "name": "Currencies weaken in their own trading hours",
+  "family": "seasonality-calendar",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "intraday",
+    "time-of-day",
+    "order-flow",
+    "eurusd"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Breedon and Ranaldo; Ranaldo",
+    "source_title": "Intraday Patterns in FX Returns and Order Flow (Journal of Money, Credit and Banking 45(5), 953-965)",
+    "source_url": "https://ideas.repec.org/a/wly/jmoncb/v45y2013i5p953-965.html"
+  },
+  "how_it_works": {
+    "simple": "A currency tends to fall while its own country is awake and trading, and rise while the other side of the world is trading. So sell the euro in the European morning and buy it back when New York is busy.",
+    "analogy": "Like a town's shoppers all buying foreign goods during the day: the local money is sold during local opening hours and recovers at night.",
+    "precise": "Breedon and Ranaldo use EBS data for six pairs, 1997-2007, and find currencies depreciate in local trading hours. For EUR/USD: short EUR from the European open to the US open, long EUR over the US session, at firm bid and ask prices. Ranaldo (2009) reports the same pattern and links it to local participants buying foreign currency in their own hours."
+  },
+  "rule": "Every trading day: sell EUR/USD at the European open (about 2am New York time), buy it back at the US open (about 8am), then buy EUR/USD and sell it at the US close. Use firm bid and ask prices.",
+  "data_needed": [
+    "Hourly or tick EUR/USD bid and ask quotes",
+    "A session calendar with daylight saving changes"
+  ],
+  "economic_rationale": "Local firms and investors are net buyers of foreign currency during their own working hours, which pushes the local currency down until the other region takes over.",
+  "why_it_might_fail": "Only EUR/USD survived costs; the other pairs were mostly negative after costs. The sample ends in 2007, the market has become more electronic since, and retail spreads are wider than EBS spreads.",
+  "reported_results": [
+    {
+      "source": "Breedon and Ranaldo (2013), working paper, Table 2 discussion",
+      "source_url": "https://www.econstor.eu/bitstream/10419/97343/1/690223323.pdf",
+      "period": "1997-2007",
+      "market": "EUR/USD, European morning short",
+      "sharpe": 1.3,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"this basic strategy has been profitable on average with Sharpe Ratios of 1.3 and 0.9 respectively for the morning short and afternoon long\" Working paper version, EBS prices."
+    },
+    {
+      "source": "Breedon and Ranaldo (2013), working paper, Table 2 discussion",
+      "source_url": "https://www.econstor.eu/bitstream/10419/97343/1/690223323.pdf",
+      "period": "1997-2007",
+      "market": "EUR/USD, US afternoon long",
+      "sharpe": 0.9,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"this basic strategy has been profitable on average with Sharpe Ratios of 1.3 and 0.9 respectively for the morning short and afternoon long\""
+    }
+  ],
+  "post_publication_evidence": "Krohn, Mueller and Whelan (2024) report a related intraday dollar pattern around the main fixes, 1999-2018. We found no direct out-of-sample test of the session rule after 2007.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "A clear, cheap-to-describe rule, but it needs intraday data and tight spreads, and only one pair worked after costs."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

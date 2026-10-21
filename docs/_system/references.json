@@ -13,6 +13,35 @@
   ],
   "references": [
     {
+      "key": "accominotti2016",
+      "type": "paper",
+      "authors": [
+        "Accominotti, Olivier",
+        "Chambers, David"
+      ],
+      "year": 2016,
+      "title": "If You're So Smart: John Maynard Keynes and Currency Speculation in the Interwar Years",
+      "venue": "Journal of Economic History 76(2), 342-386",
+      "doi": "10.1017/S0022050716000589",
+      "arxiv": null,
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EDE2AA44C9394C69B54283D052B96B1E/S0022050716000589a.pdf/div-class-title-if-you-re-so-smart-john-maynard-keynes-and-currency-speculation-in-the-interwar-years-div.pdf",
+      "also_at": [
+        "https://ideas.repec.org/a/cup/jechis/v76y2016i02p342-386_00.html",
+        "https://doi.org/10.1017/S0022050716000589"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "acerbi2002",
       "type": "paper",
       "authors": [
@@ -120,6 +149,34 @@
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "andersen1998",
+      "type": "paper",
+      "authors": [
+        "Andersen, Torben G.",
+        "Bollerslev, Tim"
+      ],
+      "year": 1998,
+      "title": "Deutsche Mark-Dollar Volatility: Intraday Activity Patterns, Macroeconomic Announcements, and Longer Run Dependencies",
+      "venue": "Journal of Finance 53(1), 219-265",
+      "doi": "10.1111/0022-1082.85732",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w5783",
+      "also_at": [
+        "https://doi.org/10.1111/0022-1082.85732"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
       }
     },
     {
@@ -641,6 +698,34 @@
       }
     },
     {
+      "key": "bakshi2013",
+      "type": "paper",
+      "authors": [
+        "Bakshi, Gurdip",
+        "Panayotov, George"
+      ],
+      "year": 2013,
+      "title": "Predictability of currency carry trades and asset pricing implications",
+      "venue": "Journal of Financial Economics 110(1), 139-163",
+      "doi": "10.1016/j.jfineco.2013.04.010",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v110y2013i1p139-163.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jfineco.2013.04.010"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "banerjee1992",
       "type": "paper",
       "authors": [
@@ -661,6 +746,34 @@
       ],
       "metadata": {
         "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "bansal2000",
+      "type": "paper",
+      "authors": [
+        "Bansal, Ravi",
+        "Dahlquist, Magnus"
+      ],
+      "year": 2000,
+      "title": "The forward premium puzzle: different tales from developed and emerging economies",
+      "venue": "Journal of International Economics 51(1), 115-144",
+      "doi": "10.1016/S0022-1996(99)00039-2",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v51y2000i1p115-144.html",
+      "also_at": [
+        "https://doi.org/10.1016/S0022-1996(99)00039-2"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -846,6 +959,35 @@
       }
     },
     {
+      "key": "baz2015",
+      "type": "preprint",
+      "authors": [
+        "Baz, Jamil",
+        "Granger, Nicolas",
+        "Harvey, Campbell R.",
+        "Le Roux, Nicolas",
+        "Rattray, Sandy"
+      ],
+      "year": 2015,
+      "title": "Dissecting Investment Strategies in the Cross Section and Time Series",
+      "venue": "SSRN Working Paper 2695101",
+      "doi": "10.2139/ssrn.2695101",
+      "arxiv": null,
+      "url": "https://doi.org/10.2139/ssrn.2695101",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "blocked",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Not read: Title and authors were seen on Campbell Harvey's research page and in Crossref, but SSRN returned 403 and no abstract or full text was found, so no content is recorded.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "bcbs2019",
       "type": "regulator",
       "authors": [
@@ -894,6 +1036,36 @@
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "bekaert2020",
+      "type": "paper",
+      "authors": [
+        "Bekaert, Geert",
+        "Panayotov, George"
+      ],
+      "year": 2020,
+      "title": "Good Carry, Bad Carry",
+      "venue": "Journal of Financial and Quantitative Analysis 55(4), 1063-1094",
+      "doi": "10.1017/S0022109019000887",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w25420",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w25420/w25420.pdf",
+        "https://doi.org/10.1017/S0022109019000887"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-good-carry-g10.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
       }
     },
     {
@@ -1111,6 +1283,37 @@
       }
     },
     {
+      "key": "breedon2013",
+      "type": "paper",
+      "authors": [
+        "Breedon, Francis",
+        "Ranaldo, Angelo"
+      ],
+      "year": 2013,
+      "title": "Intraday Patterns in FX Returns and Order Flow",
+      "venue": "Journal of Money, Credit and Banking 45(5), 953-965",
+      "doi": "10.1111/jmcb.12032",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/wly/jmoncb/v45y2013i5p953-965.html",
+      "also_at": [
+        "https://www.econstor.eu/bitstream/10419/97343/1/690223323.pdf",
+        "https://www.alexandria.unisg.ch/handle/20.500.14171/88927",
+        "https://doi.org/10.1111/jmcb.12032"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-local-hours-time-of-day.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "brier1950",
       "type": "paper",
       "authors": [
@@ -1271,6 +1474,36 @@
       }
     },
     {
+      "key": "caballero2012",
+      "type": "preprint",
+      "authors": [
+        "Caballero, Ricardo J.",
+        "Doyle, Joseph B."
+      ],
+      "year": 2012,
+      "title": "Carry Trade and Systemic Risk: Why are FX Options so Cheap?",
+      "venue": "NBER Working Paper 18644",
+      "doi": "10.3386/w18644",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w18644",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w18644/w18644.pdf",
+        "https://doi.org/10.3386/w18644"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-option-hedged-carry.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "caginalp1998",
       "type": "paper",
       "authors": [
@@ -1355,6 +1588,36 @@
       }
     },
     {
+      "key": "campbell2010",
+      "type": "paper",
+      "authors": [
+        "Campbell, John Y.",
+        "Serfaty-de Medeiros, Karine",
+        "Viceira, Luis M."
+      ],
+      "year": 2010,
+      "title": "Global Currency Hedging",
+      "venue": "Journal of Finance 65(1), 87-121",
+      "doi": "10.1111/j.1540-6261.2009.01524.x",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v65y2010i1p87-121.html",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w13088/w13088.pdf",
+        "https://doi.org/10.1111/j.1540-6261.2009.01524.x"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "carhart1997",
       "type": "paper",
       "authors": [
@@ -1376,6 +1639,36 @@
       ],
       "metadata": {
         "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "cartea2019",
+      "type": "paper",
+      "authors": [
+        "Cartea, Alvaro",
+        "Jaimungal, Sebastian",
+        "Walton, Jamie"
+      ],
+      "year": 2019,
+      "title": "Foreign exchange markets with Last Look",
+      "venue": "Mathematics and Financial Economics 13(1), 1-30",
+      "doi": "10.1007/s11579-018-0218-3",
+      "arxiv": "1806.04460",
+      "url": "https://arxiv.org/abs/1806.04460",
+      "also_at": [
+        "https://arxiv.org/pdf/1806.04460",
+        "https://doi.org/10.1007/s11579-018-0218-3"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -1485,6 +1778,38 @@
       }
     },
     {
+      "key": "cespa2022",
+      "type": "paper",
+      "authors": [
+        "Cespa, Giovanni",
+        "Gargano, Antonio",
+        "Riddiough, Steven J.",
+        "Sarno, Lucio"
+      ],
+      "year": 2022,
+      "title": "Foreign Exchange Volume",
+      "venue": "Review of Financial Studies 35(5), 2386-2427",
+      "doi": "10.1093/rfs/hhab095",
+      "arxiv": null,
+      "url": "https://openaccess.city.ac.uk/id/eprint/26188/1/DP16128.pdf",
+      "also_at": [
+        "https://ideas.repec.org/a/oup/rfinst/v35y2022i5p2386-2427..html",
+        "https://doi.org/10.1093/rfs/hhab095"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-low-volume-reversal.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "cftc2010",
       "type": "regulator",
       "authors": [
@@ -1506,6 +1831,37 @@
       "metadata": {
         "source": "manual",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "chaboud2014",
+      "type": "paper",
+      "authors": [
+        "Chaboud, Alain P.",
+        "Chiquoine, Benjamin",
+        "Hjalmarsson, Erik",
+        "Vega, Clara"
+      ],
+      "year": 2014,
+      "title": "Rise of the Machines: Algorithmic Trading in the Foreign Exchange Market",
+      "venue": "Journal of Finance 69(5), 2045-2084",
+      "doi": "10.1111/jofi.12186",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v69y2014i5p2045-2084.html",
+      "also_at": [
+        "https://www.federalreserve.gov/pubs/ifdp/2009/980/ifdp980.pdf",
+        "https://doi.org/10.1111/jofi.12186"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
       }
     },
     {
@@ -1756,6 +2112,94 @@
       }
     },
     {
+      "key": "chordia2014",
+      "type": "paper",
+      "authors": [
+        "Chordia, Tarun",
+        "Subrahmanyam, Avanidhar",
+        "Tong, Qing"
+      ],
+      "year": 2014,
+      "title": "Have capital market anomalies attenuated in the recent era of high liquidity and trading activity?",
+      "venue": "Journal of Accounting and Economics 58(1), 41-58",
+      "doi": "10.1016/j.jacceco.2014.06.001",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jaecon/v58y2014i1p41-58.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jacceco.2014.06.001"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "colacito2020",
+      "type": "paper",
+      "authors": [
+        "Colacito, Riccardo",
+        "Riddiough, Steven J.",
+        "Sarno, Lucio"
+      ],
+      "year": 2020,
+      "title": "Business cycles and currency returns",
+      "venue": "Journal of Financial Economics 137(3), 659-678",
+      "doi": "10.1016/j.jfineco.2020.04.005",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w26299",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w26299/w26299.pdf",
+        "https://doi.org/10.1016/j.jfineco.2020.04.005"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-output-gap-business-cycle.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "colombo2020",
+      "type": "paper",
+      "authors": [
+        "Colombo, Emilio",
+        "Pelagatti, Matteo"
+      ],
+      "year": 2020,
+      "title": "Statistical learning and exchange rate forecasting",
+      "venue": "International Journal of Forecasting 36(4), 1260-1289",
+      "doi": "10.1016/j.ijforecast.2019.12.007",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/intfor/v36y2020i4p1260-1289.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.ijforecast.2019.12.007"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "cowles1933",
       "type": "paper",
       "authors": [
@@ -1928,6 +2372,37 @@
       }
     },
     {
+      "key": "dellacorte2016b",
+      "type": "paper",
+      "authors": [
+        "Della Corte, Pasquale",
+        "Riddiough, Steven J.",
+        "Sarno, Lucio"
+      ],
+      "year": 2016,
+      "title": "Currency Premia and Global Imbalances",
+      "venue": "Review of Financial Studies 29(8), 2161-2193",
+      "doi": "10.1093/rfs/hhw038",
+      "arxiv": null,
+      "url": "https://www.repository.cam.ac.uk/bitstreams/8c73c934-ac4f-4cf6-8044-1c5de19b8997/download",
+      "also_at": [
+        "https://www.repository.cam.ac.uk/handle/1810/300392",
+        "https://doi.org/10.1093/rfs/hhw038"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-global-imbalances.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "demiguel2024",
       "type": "paper",
       "authors": [
@@ -2032,6 +2507,35 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "doskov2015",
+      "type": "paper",
+      "authors": [
+        "Doskov, Nikolay",
+        "Swinkels, Laurens"
+      ],
+      "year": 2015,
+      "title": "Empirical evidence on the currency carry trade, 1900-2012",
+      "venue": "Journal of International Money and Finance 51, 370-389",
+      "doi": "10.1016/j.jimonfin.2014.12.001",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v51y2015icp370-389.html",
+      "also_at": [
+        "https://pure.eur.nl/en/publications/72074184-1b23-40fd-ab50-881a42590969",
+        "https://doi.org/10.1016/j.jimonfin.2014.12.001"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -2165,6 +2669,34 @@
       }
     },
     {
+      "key": "evans2018",
+      "type": "paper",
+      "authors": [
+        "Evans, Martin D. D."
+      ],
+      "year": 2018,
+      "title": "Forex trading and the WMR Fix",
+      "venue": "Journal of Banking and Finance 87, 233-247",
+      "doi": "10.1016/j.jbankfin.2017.09.017",
+      "arxiv": null,
+      "url": "https://mpra.ub.uni-muenchen.de/81583/1/MPRA_paper_81583.pdf",
+      "also_at": [
+        "https://ideas.repec.org/a/eee/jbfina/v87y2018icp233-247.html",
+        "https://doi.org/10.1016/j.jbankfin.2017.09.017"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "falcesmarin2022",
       "type": "paper",
       "authors": [
@@ -2266,6 +2798,35 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "farhi2016",
+      "type": "paper",
+      "authors": [
+        "Farhi, Emmanuel",
+        "Gabaix, Xavier"
+      ],
+      "year": 2016,
+      "title": "Rare Disasters and Exchange Rates",
+      "venue": "Quarterly Journal of Economics 131(1), 1-52",
+      "doi": "10.1093/qje/qjv040",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w13805",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w13805/w13805.pdf",
+        "https://doi.org/10.1093/qje/qjv040"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -2375,6 +2936,36 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "filippou2018",
+      "type": "paper",
+      "authors": [
+        "Filippou, Ilias",
+        "Gozluklu, Arie E.",
+        "Taylor, Mark P."
+      ],
+      "year": 2018,
+      "title": "Global Political Risk and Currency Momentum",
+      "venue": "Journal of Financial and Quantitative Analysis 53(5), 2227-2259",
+      "doi": "10.1017/S0022109018000686",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/cup/jfinqa/v53y2018i05p2227-2259_00.html",
+      "also_at": [
+        "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1017/S0022109018000686",
+        "https://doi.org/10.1017/S0022109018000686"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -2934,6 +3525,35 @@
       }
     },
     {
+      "key": "hansen2005",
+      "type": "paper",
+      "authors": [
+        "Hansen, Peter Reinhard"
+      ],
+      "year": 2005,
+      "title": "A Test for Superior Predictive Ability",
+      "venue": "Journal of Business and Economic Statistics 23(4), 365-380",
+      "doi": "10.1198/073500105000000063",
+      "arxiv": null,
+      "url": "https://cdr.lib.unc.edu/downloads/zp38wf793",
+      "also_at": [
+        "https://ideas.repec.org/a/bes/jnlbes/v23y2005p365-380.html",
+        "https://api.openalex.org/works/doi:10.1198/073500105000000063",
+        "https://doi.org/10.1198/073500105000000063"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "harvey2015",
       "type": "paper",
       "authors": [
@@ -2956,6 +3576,122 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "harvey2015a",
+      "type": "paper",
+      "authors": [
+        "Harvey, Campbell R.",
+        "Liu, Yan"
+      ],
+      "year": 2015,
+      "title": "Backtesting",
+      "venue": "Journal of Portfolio Management 42(1), 13-28",
+      "doi": "10.3905/jpm.2015.42.1.013",
+      "arxiv": null,
+      "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+      "also_at": [
+        "https://doi.org/10.3905/jpm.2015.42.1.013"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "hasbrouck2021",
+      "type": "paper",
+      "authors": [
+        "Hasbrouck, Joel",
+        "Levich, Richard M."
+      ],
+      "year": 2021,
+      "title": "Network structure and pricing in the FX market",
+      "venue": "Journal of Financial Economics 141(2), 705-729",
+      "doi": "10.1016/j.jfineco.2021.04.013",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v141y2021i2p705-729.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jfineco.2021.04.013"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "hassan2019",
+      "type": "paper",
+      "authors": [
+        "Hassan, Tarek A.",
+        "Mano, Rui C."
+      ],
+      "year": 2019,
+      "title": "Forward and Spot Exchange Rates in a Multi-Currency World",
+      "venue": "Quarterly Journal of Economics 134(1), 397-450",
+      "doi": "10.1093/qje/qjy026",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w20294",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w20294/w20294.pdf",
+        "https://doi.org/10.1093/qje/qjy026"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-static-carry.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "hau2021",
+      "type": "paper",
+      "authors": [
+        "Hau, Harald",
+        "Hoffmann, Peter",
+        "Langfield, Sam",
+        "Timmer, Yannick"
+      ],
+      "year": 2021,
+      "title": "Discriminatory Pricing of Over-the-Counter Derivatives",
+      "venue": "Management Science 67(11), 6660-6677",
+      "doi": "10.1287/mnsc.2020.3787",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/inm/ormnsc/v67y2021i11p6660-6677.html",
+      "also_at": [
+        "https://doi.org/10.1287/mnsc.2020.3787"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -3335,6 +4071,95 @@
       }
     },
     {
+      "key": "inoue2019",
+      "type": "paper",
+      "authors": [
+        "Inoue, Atsushi",
+        "Rossi, Barbara"
+      ],
+      "year": 2019,
+      "title": "The effects of conventional and unconventional monetary policy on exchange rates",
+      "venue": "Journal of International Economics 118, 419-447",
+      "doi": "10.1016/j.jinteco.2019.01.015",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v118y2019icp419-447.html",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w25021/w25021.pdf",
+        "https://doi.org/10.1016/j.jinteco.2019.01.015"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "israel2020",
+      "type": "paper",
+      "authors": [
+        "Israel, Ronen",
+        "Kelly, Bryan",
+        "Moskowitz, Tobias"
+      ],
+      "year": 2020,
+      "title": "Can Machines 'Learn' Finance?",
+      "venue": "Journal of Investment Management 18(2), 23-36",
+      "doi": "10.2139/ssrn.3624052",
+      "arxiv": null,
+      "url": "https://www.aqr.com/Insights/Research/Journal-Article/Can-Machines-Learn-Finance",
+      "also_at": [
+        "https://www.aqr.com/-/media/AQR/Documents/Alternative-Thinking/AQR-Alternative-Thinking-2Q19-Can-Machines-Learn-Finance.pdf?sc_lang=en",
+        "https://doi.org/10.2139/ssrn.3624052"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ito2017",
+      "type": "paper",
+      "authors": [
+        "Ito, Takatoshi",
+        "Yamada, Masahiro"
+      ],
+      "year": 2017,
+      "title": "Puzzles in the Tokyo fixing in the forex market: Order imbalances and Bank pricing",
+      "venue": "Journal of International Economics 109, 214-234",
+      "doi": "10.1016/j.jinteco.2017.09.005",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v109y2017icp214-234.html",
+      "also_at": [
+        "https://www.nber.org/papers/w22820",
+        "https://www.nber.org/system/files/working_papers/w22820/w22820.pdf",
+        "https://doi.org/10.1016/j.jinteco.2017.09.005"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "jansen2020",
       "type": "book",
       "authors": [
@@ -3500,6 +4325,33 @@
       }
     },
     {
+      "key": "jurek2014",
+      "type": "paper",
+      "authors": [
+        "Jurek, Jakub W."
+      ],
+      "year": 2014,
+      "title": "Crash-neutral currency carry trades",
+      "venue": "Journal of Financial Economics 113(3), 325-347",
+      "doi": "10.1016/j.jfineco.2014.05.004",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v113y2014i3p325-347.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jfineco.2014.05.004"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "kahneman1979",
       "type": "paper",
       "authors": [
@@ -3626,6 +4478,97 @@
       }
     },
     {
+      "key": "karnaukh2015",
+      "type": "paper",
+      "authors": [
+        "Karnaukh, Nina",
+        "Ranaldo, Angelo",
+        "Soderlind, Paul"
+      ],
+      "year": 2015,
+      "title": "Understanding FX Liquidity",
+      "venue": "Review of Financial Studies 28(11), 3073-3108",
+      "doi": "10.1093/rfs/hhv029",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/oup/rfinst/v28y2015i11p3073-3108..html",
+      "also_at": [
+        "http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1315.pdf",
+        "https://doi.org/10.1093/rfs/hhv029"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kearns2006",
+      "type": "paper",
+      "authors": [
+        "Kearns, Jonathan",
+        "Manners, Phil"
+      ],
+      "year": 2006,
+      "title": "The Impact of Monetary Policy on the Exchange Rate: A Study Using Intraday Data",
+      "venue": "International Journal of Central Banking 2(4), 157-183",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ijcb.org/journal/v2n4/impact-monetary-policy-exchange-rate-study-using-intraday-data",
+      "also_at": [
+        "https://www.ijcb.org/sites/default/files/journal/v2n4/ijcb-v2n4-impact-monetary-policy-exchange-rate-study-using-intraday-data.pdf",
+        "https://www.rba.gov.au/publications/rdp/2005/pdf/rdp2005-02.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "kelly2024",
+      "type": "paper",
+      "authors": [
+        "Kelly, Bryan",
+        "Malamud, Semyon",
+        "Zhou, Kangying"
+      ],
+      "year": 2024,
+      "title": "The Virtue of Complexity in Return Prediction",
+      "venue": "Journal of Finance 79(1), 459-503",
+      "doi": "10.1111/jofi.13298",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v79y2024i1p459-503.html",
+      "also_at": [
+        "https://www.nber.org/papers/w30217",
+        "https://www.nber.org/system/files/working_papers/w30217/w30217.pdf",
+        "https://doi.org/10.1111/jofi.13298"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/complex-ml-market-timing.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "kilian2009",
       "type": "paper",
       "authors": [
@@ -3664,12 +4607,17 @@
       "doi": "10.1002/9781118445785.ch1",
       "arxiv": null,
       "url": "https://doi.org/10.1002/9781118445785.ch1",
-      "also_at": [],
+      "also_at": [
+        "https://ideas.repec.org/p/bno/worpap/2011_10.html",
+        "https://www.norges-bank.no/en/news-events/news-publications/Papers/Working-Papers/2011/WP-201110/",
+        "https://www.norges-bank.no/globalassets/upload/english/publications/working-papers/2011/norges_bank_working_paper_2011_10.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/reference/0004-glossary.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "metadata": {
         "source": "manual",
@@ -3820,6 +4768,35 @@
       }
     },
     {
+      "key": "krohn2024",
+      "type": "paper",
+      "authors": [
+        "Krohn, Ingomar",
+        "Mueller, Philippe",
+        "Whelan, Paul"
+      ],
+      "year": 2024,
+      "title": "Foreign Exchange Fixings and Returns around the Clock",
+      "venue": "Journal of Finance 79(1), 541-578",
+      "doi": "10.1111/jofi.13306",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v79y2024i1p541-578.html",
+      "also_at": [
+        "https://doi.org/10.1111/jofi.13306"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "lakonishok1988",
       "type": "paper",
       "authors": [
@@ -3897,6 +4874,68 @@
       }
     },
     {
+      "key": "lettau2014",
+      "type": "paper",
+      "authors": [
+        "Lettau, Martin",
+        "Maggiori, Matteo",
+        "Weber, Michael"
+      ],
+      "year": 2014,
+      "title": "Conditional risk premia in currency markets and other asset classes",
+      "venue": "Journal of Financial Economics 114(2), 197-225",
+      "doi": "10.1016/j.jfineco.2014.07.001",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w18844",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w18844/w18844.pdf",
+        "https://ideas.repec.org/a/eee/jfinec/v114y2014i2p197-225.html",
+        "https://doi.org/10.1016/j.jfineco.2014.07.001"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "lilley2022",
+      "type": "paper",
+      "authors": [
+        "Lilley, Andrew",
+        "Maggiori, Matteo",
+        "Neiman, Brent",
+        "Schreger, Jesse"
+      ],
+      "year": 2022,
+      "title": "Exchange Rate Reconnect",
+      "venue": "Review of Economics and Statistics 104(4), 845-855",
+      "doi": "10.1162/rest_a_00978",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/tpr/restat/v104y2022i4p845-855.html",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w26046/w26046.pdf",
+        "https://doi.org/10.1162/rest_a_00978"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "lim2016",
       "type": "preprint",
       "authors": [
@@ -3947,6 +4986,35 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "linnainmaa2018",
+      "type": "paper",
+      "authors": [
+        "Linnainmaa, Juhani T.",
+        "Roberts, Michael R."
+      ],
+      "year": 2018,
+      "title": "The History of the Cross-Section of Stock Returns",
+      "venue": "Review of Financial Studies 31(7), 2606-2649",
+      "doi": "10.1093/rfs/hhy030",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w22894",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w22894/w22894.pdf",
+        "https://doi.org/10.1093/rfs/hhy030"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -4147,6 +5215,35 @@
       }
     },
     {
+      "key": "londono2017",
+      "type": "paper",
+      "authors": [
+        "Londono, Juan M.",
+        "Zhou, Hao"
+      ],
+      "year": 2017,
+      "title": "Variance risk premiums and the forward premium puzzle",
+      "venue": "Journal of Financial Economics 124(2), 415-440",
+      "doi": "10.1016/j.jfineco.2017.02.002",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v124y2017i2p415-440.html",
+      "also_at": [
+        "https://www.federalreserve.gov/pubs/ifdp/2012/1068/ifdp1068.pdf",
+        "https://doi.org/10.1016/j.jfineco.2017.02.002"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "lopezdeprado2020",
       "type": "book",
       "authors": [
@@ -4338,6 +5435,36 @@
       }
     },
     {
+      "key": "lustig2019",
+      "type": "paper",
+      "authors": [
+        "Lustig, Hanno",
+        "Stathopoulos, Andreas",
+        "Verdelhan, Adrien"
+      ],
+      "year": 2019,
+      "title": "The Term Structure of Currency Carry Trade Risk Premia",
+      "venue": "American Economic Review 109(12), 4142-4177",
+      "doi": "10.1257/aer.20180098",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w19623",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w19623/w19623.pdf",
+        "https://doi.org/10.1257/aer.20180098"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "maclean2011",
       "type": "book",
       "authors": [
@@ -4387,6 +5514,37 @@
       ],
       "metadata": {
         "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "mancini2013",
+      "type": "paper",
+      "authors": [
+        "Mancini, Loriano",
+        "Ranaldo, Angelo",
+        "Wrampelmeyer, Jan"
+      ],
+      "year": 2013,
+      "title": "Liquidity in the Foreign Exchange Market: Measurement, Commonality, and Risk Premiums",
+      "venue": "Journal of Finance 68(5), 1805-1841",
+      "doi": "10.1111/jofi.12053",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v68y2013i5p1805-1841.html",
+      "also_at": [
+        "https://ideas.repec.org/p/snb/snbwpa/2010-03.html",
+        "https://www.snb.ch/public/asset/en/www-snb-ch/publications/research/working-papers/2010/working_paper_2010_03/publications0_en/working_paper_2010_03.n.pdf",
+        "https://doi.org/10.1111/jofi.12053"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -4694,6 +5852,65 @@
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "melvin2017",
+      "type": "paper",
+      "authors": [
+        "Melvin, Michael",
+        "Shand, Duncan"
+      ],
+      "year": 2017,
+      "title": "When Carry Goes Bad: The Magnitude, Causes, and Duration of Currency Carry Unwinds",
+      "venue": "Financial Analysts Journal 73(1), 121-144",
+      "doi": "10.2469/faj.v73.n1.4",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/taf/ufajxx/v73y2017i1p121-144.html",
+      "also_at": [
+        "https://api.openalex.org/works/doi:10.2469/faj.v73.n1.4",
+        "https://doi.org/10.2469/faj.v73.n1.4"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "melvin2020",
+      "type": "paper",
+      "authors": [
+        "Melvin, Michael",
+        "Pan, Wenqiang",
+        "Wikstrom, Petra"
+      ],
+      "year": 2020,
+      "title": "Retaining alpha: The effect of trade size and rebalancing frequency on FX strategy returns",
+      "venue": "Journal of Financial Markets 51, 100545",
+      "doi": "10.1016/j.finmar.2020.100545",
+      "arxiv": null,
+      "url": "https://www.ifo.de/DocDL/cesifo1_wp8143.pdf",
+      "also_at": [
+        "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.finmar.2020.100545",
+        "https://doi.org/10.1016/j.finmar.2020.100545"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
       }
     },
     {
@@ -5256,6 +6473,35 @@
       }
     },
     {
+      "key": "novymarx2016",
+      "type": "paper",
+      "authors": [
+        "Novy-Marx, Robert",
+        "Velikov, Mihail"
+      ],
+      "year": 2016,
+      "title": "A Taxonomy of Anomalies and Their Trading Costs",
+      "venue": "Review of Financial Studies 29(1), 104-147",
+      "doi": "10.1093/rfs/hhv063",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w20721",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w20721/w20721.pdf",
+        "https://doi.org/10.1093/rfs/hhv063"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "odean1998",
       "type": "paper",
       "authors": [
@@ -5281,6 +6527,35 @@
       }
     },
     {
+      "key": "okunev2003",
+      "type": "paper",
+      "authors": [
+        "Okunev, John",
+        "White, Derek"
+      ],
+      "year": 2003,
+      "title": "Do Momentum-Based Strategies Still Work in Foreign Currency Markets?",
+      "venue": "Journal of Financial and Quantitative Analysis 38(2), 425-447",
+      "doi": "10.2307/4126758",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/cup/jfinqa/v38y2003i02p425-447_00.html",
+      "also_at": [
+        "https://api.openalex.org/works/doi:10.2307/4126758",
+        "https://doi.org/10.2307/4126758"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "oomen2017",
       "type": "paper",
       "authors": [
@@ -5292,15 +6567,76 @@
       "doi": "10.1080/14697688.2016.1262545",
       "arxiv": null,
       "url": "https://doi.org/10.1080/14697688.2016.1262545",
-      "also_at": [],
+      "also_at": [
+        "https://ideas.repec.org/a/taf/quantf/v17y2017i7p1057-1070.html",
+        "https://eprints.lse.ac.uk/68811/1/Oomen_Last%20look_2017.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/reference/0004-glossary.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "metadata": {
         "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "opie2020",
+      "type": "paper",
+      "authors": [
+        "Opie, Wei",
+        "Riddiough, Steven J."
+      ],
+      "year": 2020,
+      "title": "Global currency hedging with common risk factors",
+      "venue": "Journal of Financial Economics 136(3), 780-805",
+      "doi": "10.1016/j.jfineco.2019.12.001",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v136y2020i3p780-805.html",
+      "also_at": [
+        "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.jfineco.2019.12.001",
+        "https://doi.org/10.1016/j.jfineco.2019.12.001"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "orlov2016",
+      "type": "paper",
+      "authors": [
+        "Orlov, Vitaly"
+      ],
+      "year": 2016,
+      "title": "Currency momentum, carry trade, and market illiquidity",
+      "venue": "Journal of Banking and Finance 67, 1-11",
+      "doi": "10.1016/j.jbankfin.2016.02.010",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jbfina/v67y2016icp1-11.html",
+      "also_at": [
+        "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.jbankfin.2016.02.010",
+        "https://doi.org/10.1016/j.jbankfin.2016.02.010"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -5345,14 +6681,19 @@
       "doi": "10.1111/1540-6261.00588",
       "arxiv": null,
       "url": "https://doi.org/10.1111/1540-6261.00588",
-      "also_at": [],
+      "also_at": [
+        "https://ideas.repec.org/a/bla/jfinan/v58y2003i5p1791-1819.html",
+        "https://www.newyorkfed.org/research/staff_reports/sr125.html",
+        "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr125.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md",
         "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
-        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "metadata": {
         "source": "manual",
@@ -5411,6 +6752,35 @@
       }
     },
     {
+      "key": "payne2003",
+      "type": "paper",
+      "authors": [
+        "Payne, Richard"
+      ],
+      "year": 2003,
+      "title": "Informed trade in spot foreign exchange markets: an empirical investigation",
+      "venue": "Journal of International Economics 61(2), 307-329",
+      "doi": "10.1016/S0022-1996(03)00003-5",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v61y2003i2p307-329.html",
+      "also_at": [
+        "https://research-information.bris.ac.uk/en/publications/3e4c71e1-f08e-4ed0-a6e6-ee983d68644e",
+        "https://www.sciencedirect.com/science/article/abs/pii/S0022199603000035",
+        "https://doi.org/10.1016/S0022-1996(03)00003-5"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "blocked",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Not read: Title, journal, volume and pages confirmed on IDEAS/RePEc and via Crossref, but IDEAS says 'No abstract is available for this item', ScienceDirect returned 403, Unpaywall and OpenAlex list no open copy, and the Bristol repository page showed no abstract. Web search budget was exhausted so no other host could be found. Nothing below is taken from the paper itself.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "pedersen2015",
       "type": "book",
       "authors": [
@@ -5462,6 +6832,117 @@
       }
     },
     {
+      "key": "pojarliev2008",
+      "type": "paper",
+      "authors": [
+        "Pojarliev, Momtchil",
+        "Levich, Richard M."
+      ],
+      "year": 2008,
+      "title": "Do Professional Currency Managers Beat the Benchmark?",
+      "venue": "Financial Analysts Journal 64(5), 18-32",
+      "doi": "10.2469/faj.v64.n5.4",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/taf/ufajxx/v64y2008i5p18-32.html",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w13714/w13714.pdf",
+        "https://doi.org/10.2469/faj.v64.n5.4"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "qi2006",
+      "type": "paper",
+      "authors": [
+        "Qi, Min",
+        "Wu, Yangru"
+      ],
+      "year": 2006,
+      "title": "Technical Trading-Rule Profitability, Data Snooping, and Reality Check: Evidence from the Foreign Exchange Market",
+      "venue": "Journal of Money, Credit, and Banking 38(8), 2135-2158",
+      "doi": "10.1353/mcb.2007.0006",
+      "arxiv": null,
+      "url": "https://api.openalex.org/works/doi:10.1353/mcb.2007.0006",
+      "also_at": [
+        "https://doi.org/10.1353/mcb.2007.0006"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "blocked",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Not read: Publisher (Project MUSE) and IDEAS pages did not load the article; title and abstract were read on the OpenAlex record. Author full names are from the same OpenAlex record. No numbers beyond the abstract.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ramadorai2008",
+      "type": "paper",
+      "authors": [
+        "Ramadorai, Tarun"
+      ],
+      "year": 2008,
+      "title": "What determines transaction costs in foreign exchange markets?",
+      "venue": "International Journal of Finance and Economics 13(1), 14-25",
+      "doi": "10.1002/ijfe.351",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/ijf/ijfiec/v13y2008i1p14-25.html",
+      "also_at": [
+        "https://doi.org/10.1002/ijfe.351"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ranaldo2009",
+      "type": "paper",
+      "authors": [
+        "Ranaldo, Angelo"
+      ],
+      "year": 2009,
+      "title": "Segmentation and time-of-day patterns in foreign exchange markets",
+      "venue": "Journal of Banking and Finance 33(12), 2199-2206",
+      "doi": "10.1016/j.jbankfin.2009.05.019",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jbfina/v33y2009i12p2199-2206.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jbankfin.2009.05.019"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "ranaldo2010",
       "type": "paper",
       "authors": [
@@ -5487,6 +6968,124 @@
       "verification_checked": "2026-10-21"
     },
     {
+      "key": "ranaldo2010a",
+      "type": "paper",
+      "authors": [
+        "Ranaldo, Angelo",
+        "Rossi, Enzo"
+      ],
+      "year": 2010,
+      "title": "The reaction of asset markets to Swiss National Bank communication",
+      "venue": "Journal of International Money and Finance 29(3), 486-503",
+      "doi": "10.1016/j.jimonfin.2009.07.004",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jimonfin.2009.07.004"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ranaldo2021",
+      "type": "paper",
+      "authors": [
+        "Ranaldo, Angelo",
+        "Somogyi, Fabricius"
+      ],
+      "year": 2021,
+      "title": "Asymmetric information risk in FX markets",
+      "venue": "Journal of Financial Economics 140(2), 391-411",
+      "doi": "10.1016/j.jfineco.2020.12.007",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v140y2021i2p391-411.html",
+      "also_at": [
+        "http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1820.pdf",
+        "https://doi.org/10.1016/j.jfineco.2020.12.007"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-asymmetric-information-risk.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "raza2014",
+      "type": "paper",
+      "authors": [
+        "Raza, Ahmad",
+        "Marshall, Ben R.",
+        "Visaltanachoti, Nuttawat"
+      ],
+      "year": 2014,
+      "title": "Is there momentum or reversal in weekly currency returns?",
+      "venue": "Journal of International Money and Finance 45, 38-60",
+      "doi": "10.1016/j.jimonfin.2014.02.009",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v45y2014icp38-60.html",
+      "also_at": [
+        "https://doi.org/10.1016/j.jimonfin.2014.02.009"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ready2017",
+      "type": "paper",
+      "authors": [
+        "Ready, Robert",
+        "Roussanov, Nikolai",
+        "Ward, Colin"
+      ],
+      "year": 2017,
+      "title": "Commodity Trade and the Carry Trade: A Tale of Two Countries",
+      "venue": "Journal of Finance 72(6), 2629-2684",
+      "doi": "10.1111/jofi.12546",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w19371",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w19371/w19371.pdf",
+        "https://doi.org/10.1111/jofi.12546"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/fx-commodity-trade-imx.json",
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "rees2025",
       "type": "paper",
       "authors": [
@@ -5507,6 +7106,65 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "rime2010",
+      "type": "paper",
+      "authors": [
+        "Rime, Dagfinn",
+        "Sarno, Lucio",
+        "Sojli, Elvira"
+      ],
+      "year": 2010,
+      "title": "Exchange rate forecasting, order flow and macroeconomic information",
+      "venue": "Journal of International Economics 80(1), 72-88",
+      "doi": "10.1016/j.jinteco.2009.03.005",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v80y2010i1p72-88.html",
+      "also_at": [
+        "https://ideas.repec.org/p/bno/worpap/2007_02.html",
+        "https://www.norges-bank.no/globalassets/upload/english/publications/working-papers/2007/norges_bank_working_paper_2007_2.pdf",
+        "https://doi.org/10.1016/j.jinteco.2009.03.005"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (full text)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "romano2005",
+      "type": "paper",
+      "authors": [
+        "Romano, Joseph P.",
+        "Wolf, Michael"
+      ],
+      "year": 2005,
+      "title": "Stepwise Multiple Testing as Formalized Data Snooping",
+      "venue": "Econometrica 73(4), 1237-1282",
+      "doi": "10.1111/j.1468-0262.2005.00615.x",
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/ecm/emetrp/v73y2005i4p1237-1282.html",
+      "also_at": [
+        "https://doi.org/10.1111/j.1468-0262.2005.00615.x"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },
@@ -5675,15 +7333,17 @@
       "arxiv": null,
       "url": "https://doi.org/10.1111/0022-1082.00163",
       "also_at": [
-        "https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf"
+        "https://researchonline.lse.ac.uk/id/eprint/119144/1/dp303.pdf",
+        "https://ideas.repec.org/a/bla/jfinan/v54y1999i5p1647-1691.html"
       ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md",
         "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
-        "docs/reference/0012-candlesticks-and-chart-patterns.md"
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "metadata": {
         "source": "manual",
@@ -18015,6 +19675,34 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "white2000",
+      "type": "paper",
+      "authors": [
+        "White, Halbert"
+      ],
+      "year": 2000,
+      "title": "A Reality Check for Data Snooping",
+      "venue": "Econometrica 68(5), 1097-1126",
+      "doi": "10.1111/1468-0262.00152",
+      "arxiv": null,
+      "url": "https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping",
+      "also_at": [
+        "https://ideas.repec.org/a/ecm/emetrp/v68y2000i5p1097-1126.html",
+        "https://doi.org/10.1111/1468-0262.00152"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Read for RES-0010 (abstract page)",
+      "metadata": {
+        "source": "repo",
         "doi_explicit": true
       }
     },

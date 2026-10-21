@@ -10,11 +10,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 11 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 9 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 12 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 41 |
 
 ## Open questions right now
@@ -29,6 +29,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-21 [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - 2026-10-21 [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - 2026-10-21 [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
@@ -36,7 +37,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-21 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-21 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
-- 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 
 ## intent
 
@@ -95,6 +95,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0007 | [Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | RES-0008 | [Independent audit of our methods and code](research/0008-independent-audit.md) | current | 2026-10-21 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 
 ## guide
 
@@ -207,6 +208,16 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0070 | [RSI overbought / oversold reversal (30 / 70)](algorithms/0070-rsi-overbought-oversold.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0071 | [Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0072 | [Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0073 | [Static carry: hold the currencies that usually pay high interest](algorithms/0073-fx-static-carry.md) | sourced | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0074 | [Output gap currency strategy](algorithms/0074-fx-output-gap-business-cycle.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0075 | [Global imbalances currency strategy](algorithms/0075-fx-global-imbalances.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0076 | [Commodity exporters minus finished-goods exporters (IMX)](algorithms/0076-fx-commodity-trade-imx.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0077 | [Good carry: G10 carry without the worst currencies](algorithms/0077-fx-good-carry-g10.md) | sourced | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0078 | [Option-hedged carry trade](algorithms/0078-fx-option-hedged-carry.md) | sourced | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0079 | [Currencies weaken in their own trading hours](algorithms/0079-fx-local-hours-time-of-day.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0080 | [Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0081 | [Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0082 | [Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md) | sourced | 2026-10-21 | [strategy](TAGS.md#strategy) |
 
 ## dataset
 

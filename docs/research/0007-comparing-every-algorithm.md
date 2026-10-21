@@ -125,6 +125,7 @@ Official run [RUN-000003](../../ledger/runs/RUN-000003.json) of `REG-0003`, reco
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](0008-independent-audit.md)
+- [RES-0010: Paper library: FX and market microstructure](0010-paper-library-fx-and-market-microstructure.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

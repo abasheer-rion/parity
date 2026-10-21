@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0077",
+  "slug": "fx-good-carry-g10",
+  "name": "Good carry: G10 carry without the worst currencies",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "g10",
+    "skewness",
+    "look-back-bias"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2020,
+    "authors": "Bekaert and Panayotov",
+    "source_title": "Good Carry, Bad Carry (Journal of Financial and Quantitative Analysis 55(4), 1063-1094)",
+    "source_url": "https://www.nber.org/papers/w25420"
+  },
+  "how_it_works": {
+    "simple": "The usual carry trade buys the five G10 currencies paying the most interest and sells the five paying the least. This version leaves out a few currencies, like the Australian dollar and the yen, that made the trade crash-prone in the past.",
+    "analogy": "Like dropping the two players who keep fouling: the team scores a bit less but gets fewer red cards.",
+    "precise": "Standard G10 carry: long the five highest forward premia, short the five lowest, equal weights, monthly. The good carry variants drop currencies, mostly AUD, JPY and NOK, chosen because removing them raised the past Sharpe ratio. The authors warn the selection uses hindsight."
+  },
+  "rule": "Monthly: rank G10 currencies by one-month forward premium against USD. Long the top five, short the bottom five, equal weights. Good carry variant: exclude the currencies the paper drops, or pick exclusions with a rolling past-Sharpe rule to avoid hindsight.",
+  "data_needed": [
+    "Monthly G10 spot and forward rates with bid and ask"
+  ],
+  "economic_rationale": "A few funding and investment currencies drive most carry crashes; leaving them out may keep the premium with less negative skew.",
+  "why_it_might_fail": "The authors themselves note look-back bias: the excluded currencies were chosen with knowledge of the full sample. A rolling version that chooses exclusions only from past data is the honest test.",
+  "reported_results": [
+    {
+      "source": "Bekaert and Panayotov (2020), NBER w25420, standard carry",
+      "source_url": "https://www.nber.org/system/files/working_papers/w25420/w25420.pdf",
+      "period": "12/1994-5/2014 (estimation from 12/1984)",
+      "market": "G10 currencies",
+      "sharpe": 0.32,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"The SC trade has an annualized Sharpe ratio of 0.32, and return skewness of -0.33.\" Standard carry, NBER w25420, Table 2 Panel A. Cost treatment not recorded in our notes."
+    },
+    {
+      "source": "Bekaert and Panayotov (2020), NBER w25420, enhanced carry",
+      "source_url": "https://www.nber.org/system/files/working_papers/w25420/w25420.pdf",
+      "period": "12/1994-5/2014",
+      "market": "G10 minus seven excluded currency positions",
+      "sharpe": 0.61,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"the Sharpe ratio is now 0.61, while skewness is positive, and both are marginally significantly different from the benchmark values\" In-sample selection; the authors flag look-back bias."
+    }
+  ],
+  "post_publication_evidence": "None found by us. Doskov and Swinkels (2015) report long-run carry Sharpe ratios of 0.2 to 0.4 for 1900-2012, so the standard figure of 0.32 is typical.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Easy to test with free data, but the improvement is in-sample, so it mainly serves as a check on our own carry rule."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

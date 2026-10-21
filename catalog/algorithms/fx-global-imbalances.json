@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0075",
+  "slug": "fx-global-imbalances",
+  "name": "Global imbalances currency strategy",
+  "family": "macro-fundamental",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "net-foreign-assets",
+    "external-debt",
+    "macro",
+    "annual-data"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2016,
+    "authors": "Della Corte, Riddiough and Sarno",
+    "source_title": "Currency Premia and Global Imbalances (Review of Financial Studies 29(8), 2161-2193)",
+    "source_url": "https://www.repository.cam.ac.uk/bitstreams/8c73c934-ac4f-4cf6-8044-1c5de19b8997/download"
+  },
+  "how_it_works": {
+    "simple": "Buy the currencies of countries that owe the rest of the world a lot, especially in foreign money, and sell the currencies of countries that are big lenders. Borrowers have to pay investors more to hold their currency.",
+    "analogy": "Like a lender charging a higher rate to a customer who already owes a lot in a currency they do not earn.",
+    "precise": "Sort currencies by net foreign assets to GDP, then within groups by the share of external liabilities in domestic currency, into five portfolios. Long the debtor portfolio with foreign-currency liabilities, short the creditor portfolio with domestic-currency liabilities. The signal updates once a year."
+  },
+  "rule": "Once a year, rank countries by net foreign assets / GDP (most negative = debtor) and by the share of their external liabilities in their own currency (low = more risk). Long the most indebted with foreign-currency liabilities, short the biggest creditors. Hold with monthly forwards.",
+  "data_needed": [
+    "Net foreign assets and liability currency shares by country (External Wealth of Nations data, Lane and Milesi-Ferretti; Benetrix et al.)",
+    "Monthly spot and forward rates"
+  ],
+  "economic_rationale": "Investors want compensation for holding the currency of a net debtor that borrows in foreign money, because that currency tends to fall in bad global times.",
+  "why_it_might_fail": "Balance sheet data arrive with a lag of a year or more, so using the year they describe instead of the year they were published adds look-ahead. Much of the return may overlap with carry, and we found no outside replication.",
+  "reported_results": [
+    {
+      "source": "Della Corte, Riddiough and Sarno (2016), Section 4.1, Table 1",
+      "source_url": "https://www.repository.cam.ac.uk/bitstreams/8c73c934-ac4f-4cf6-8044-1c5de19b8997/download",
+      "period": "10/1983-6/2014",
+      "market": "Up to 55 currencies (all countries)",
+      "sharpe": 0.68,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Quote: \"the global imbalance strategy has a Sharpe ratio that is at least as high as the carry trade strategy: 0.68 compared to 0.65 for all countries, and 0.59 compared to 0.43 for developed countries\" Accepted manuscript, January 2016. The same sentence gives 0.59 for developed countries against 0.43 for carry. Cost treatment not recorded in our notes."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Monthly and low turnover with free annual data, but publication lags must be handled with care."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}

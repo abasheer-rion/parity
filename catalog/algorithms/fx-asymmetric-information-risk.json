@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0081",
+  "slug": "fx-asymmetric-information-risk",
+  "name": "Asymmetric information risk (price impact) currency strategy",
+  "family": "market-making-liquidity",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "order-flow",
+    "price-impact",
+    "cls-data",
+    "microstructure"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2021,
+    "authors": "Ranaldo and Somogyi",
+    "source_title": "Asymmetric information risk in FX markets (Journal of Financial Economics 140(2), 391-411)",
+    "source_url": "https://ideas.repec.org/a/eee/jfinec/v140y2021i2p391-411.html"
+  },
+  "how_it_works": {
+    "simple": "In some currency pairs, trades push the price and it stays pushed, which means some traders know more than others. Buy those pairs and sell the pairs where trades barely move prices for good.",
+    "analogy": "Like a card game where some players can see more cards: you ask for a better deal to sit at that table.",
+    "precise": "For each pair, estimate the permanent price impact of order flow from CLS data, averaged across participant groups. Each month long the top third and short the bottom third, equal weights, dollar neutral, via forwards."
+  },
+  "rule": "Monthly: estimate permanent price impact per pair from the past month's order flow. Long the top tertile, short the bottom tertile. Hold one month.",
+  "data_needed": [
+    "Order flow by pair and participant type (CLS, paid)",
+    "Spot and forward quotes with bid and ask"
+  ],
+  "economic_rationale": "Holding currencies with more informed trading is riskier for uninformed investors, so they earn a premium.",
+  "why_it_might_fail": "Short sample (2012-2019) and paid data; we found no outside replication.",
+  "reported_results": [
+    {
+      "source": "Ranaldo and Somogyi (2021), working paper, introduction and Table 7",
+      "source_url": "http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1820.pdf",
+      "period": "2012-2019",
+      "market": "CLS currency pairs",
+      "sharpe": 0.83,
+      "annual_return": 0.0405,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Quote: \"AIPHML generates a both economically and statistically significant annualised return of 4.05% (3.16%) and a Sharpe ratio (SR) of 0.83 (0.65) before (after) transaction cost.\" St. Gallen working paper 2018/20, April 2020 version. After costs: 3.16% and Sharpe 0.65."
+    },
+    {
+      "source": "Ranaldo and Somogyi (2021), working paper, after costs",
+      "source_url": "http://ux-tauri.unisg.ch/RePEc/usg/sfwpfi/WPF-1820.pdf",
+      "period": "2012-2019",
+      "market": "CLS currency pairs",
+      "sharpe": 0.65,
+      "annual_return": 0.0316,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"AIPHML generates a both economically and statistically significant annualised return of 4.05% (3.16%) and a Sharpe ratio (SR) of 0.83 (0.65) before (after) transaction cost.\""
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Paid order flow data puts it out of reach; useful mainly as evidence that FX microstructure carries a premium."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from the paper library (RES-0010) on 2026-10-21."
+  }
+}
