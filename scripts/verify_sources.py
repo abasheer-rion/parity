@@ -146,17 +146,21 @@ class Fetcher:
         meta_p = key.with_suffix(".json")
         if not self.refresh and meta_p.exists():
             meta = json.loads(meta_p.read_text())
-            if meta.get("curl_exit") not in (28, 35, 56, 52, 7, 6) or meta.get("retried"):
+            if meta.get("curl_exit") not in (28, 35, 56, 52, 7, 6, 92, 16, 3) or meta.get("retried"):
                 return meta
         body_p = key.with_suffix(".body")
         dom = domain(url)
         meta = {}
+        http1 = False
         for attempt, mt in enumerate([max_time, 90]):
             lock = self._wait(dom)
             try:
-                cmd = ["curl", "-sSL", "--compressed", "--max-time", str(mt), "-A", UA,
-                       "--max-redirs", "10", "-o", str(body_p),
+                cmd = ["curl", "-sSL", "-g", "--compressed", "--max-time", str(mt), "-A", UA,
+                       "--max-redirs", "10", "-o", str(body_p), "-b", "/dev/null",
                        "-w", "%{http_code}\t%{url_effective}\t%{content_type}\t%{num_redirects}"]
+                if http1:  # server dropped our agent string: probe once with curl's default agent
+                    cmd[cmd.index("-A") + 1] = "curl/8"
+                    cmd[cmd.index("--max-time") + 1] = "20"
                 if not big_ok:
                     cmd += ["--max-filesize", "40000000"]
                 cmd.append(url)
@@ -185,8 +189,13 @@ class Fetcher:
             meta["fetched_at"] = now_iso()
             meta["body_path"] = str(body_p) if body_p.exists() else None
             meta["bytes"] = body_p.stat().st_size if body_p.exists() else 0
-            if meta.get("curl_exit") == 28 and attempt == 0:
+            if http1:
+                meta["probe_default_agent"] = {"http_code": meta.get("http_code"), "curl_exit": meta.get("curl_exit")}
+                meta["curl_exit"], meta["http_code"] = 92, 0
+                meta["error"] = "server resets the connection for our user agent"
+            if meta.get("curl_exit") in (28, 92, 16) and attempt == 0:
                 meta["retried"] = True
+                http1 = meta.get("curl_exit") in (92, 16)
                 continue
             break
         meta_p.write_text(json.dumps(meta))
@@ -239,6 +248,10 @@ def classify(meta: dict, body: bytes, kind_hint: str = "") -> tuple[str, str]:
     """Return (class, reason) for a fetched URL."""
     code = meta.get("http_code") or 0
     ex = meta.get("curl_exit")
+    if ex in (92, 16) and (meta.get("probe_default_agent") or {}).get("http_code") == 200:
+        return "blocked", "server drops our user agent; page exists (HTTP 200 with a plain curl agent)"
+    if ex == 47:
+        return "blocked", "endless redirect loop (site wants cookies or a real browser)"
     if ex == 63:  # file larger than --max-filesize: it exists
         return "ok", "file exists, larger than 40 MB so not downloaded"
     if code in (404, 410):
@@ -253,10 +266,11 @@ def classify(meta: dict, body: bytes, kind_hint: str = "") -> tuple[str, str]:
         return "error", meta.get("error") or "no response"
     if 200 <= code < 300:
         if body[:5] != b"%PDF-":
-            head = body[:60000].decode("utf-8", "replace").lower()
+            full = body.decode("utf-8", "replace")
+            head = full[:60000].lower()
             title = html_title(head).lower()
-            text_len = len(re.sub(r"\s+", " ", html_to_text(head)))
-            if any(b in head for b in BOT_MARKERS) and text_len < 4000:
+            words = len(html_to_text(full).split()) if body[:2] != b"PK" else 10**6
+            if any(b in title for b in BOT_MARKERS) or (any(b in head for b in BOT_MARKERS) and words < 300):
                 return "blocked", "bot or captcha page"
             if re.search(r"\b(404|page not found|not found|no longer available|does not exist)\b", title) and "github" not in domain(meta.get("final_url", "")):
                 return "not-found", f"soft 404 (title: {title[:80]})"
@@ -373,7 +387,17 @@ def page_text(fetcher: Fetcher, url: str, source_cache: dict) -> dict:
         if len(t.strip()) < 500:
             res["reason"] = "PDF text extraction failed or PDF is scanned images"
             return res
-        res.update(readable=True, reason="PDF text extracted", text=norm_text(t))
+        reason = "PDF text extracted"
+        if len(re.findall(r"\b\d+:\d{1,2}\b", t)) > 30:
+            # some TeX fonts extract the decimal point as a colon (8:15 for 8.15)
+            t = re.sub(r"(?<=\d):(?=\d)", ".", t)
+            reason = "PDF text extracted, decimal points came out as colons and were corrected"
+        res.update(readable=True, reason=reason, text=norm_text(t))
+        return res
+    ctype = (meta.get("content_type") or "").lower()
+    if body[:2] == b"PK" or body[:4] == b"\xd0\xcf\x11\xe0" or any(x in ctype for x in ("zip", "spreadsheet", "excel", "octet-stream", "csv")):
+        res["kind"] = "data"
+        res["reason"] = "source is a data file (spreadsheet, zip or CSV); the number is a calculation, not printed text"
         return res
     raw = body.decode("utf-8", errors="replace")
     t = norm_text(html_to_text(raw))
@@ -454,9 +478,9 @@ def dedupe(forms):
 PCT_AFTER = re.compile(r"\s?(%|percent|per cent|pct\b)", re.I)
 
 
-def search_forms(text: str, forms) -> dict | None:
+def search_forms(text: str, forms, field: str | None = None) -> dict | None:
     best = None
-    hit = _search(text, forms)
+    hit = _search(text, forms, field)
     if hit:
         return hit
     # the page may print one more digit than the catalog (0.744 for a catalog 0.74)
@@ -470,25 +494,42 @@ def search_forms(text: str, forms) -> dict | None:
             q = Decimal(1).scaleb(-d)
             if str(val.quantize(q, ROUND_HALF_UP)) == s or str(val.quantize(q, ROUND_HALF_EVEN)) == s:
                 snip = text[max(0, m.start() - 40): m.end() + 40]
-                return {"form": m.group(0), "strength": "rounded", "snippet": re.sub(r"\s+", " ", snip).strip()}
+                return {"form": m.group(0), "strength": "rounded", "snippet": re.sub(r"\s+", " ", snip).strip(),
+                        "near_keyword": None}
     return best
 
 
-def _search(text: str, forms) -> dict | None:
-    best = None
-    for s, strength, need_pct in forms:
-        pat = re.compile(r"(?<![\d.])" + re.escape(s) + r"(?![\d])(?!\.\d)")
-        for m in pat.finditer(text):
-            if need_pct and not PCT_AFTER.match(text, m.end()):
+FIELD_WORDS = {
+    "sharpe": r"sharpe|\bSR\b|information ratio|risk-adjusted",
+    "annual_return": r"return|mean|average|excess|p\.a\.|per annum|annual|cagr|profit|yield",
+    "volatility": r"volatil|std|standard dev|s\.d\.|\bsd\b|sigma|risk",
+    "max_drawdown": r"drawdown|draw-down|\bmdd\b|\bdd\b|peak|loss|decline|crash",
+}
+
+
+def _search(text: str, forms, field: str | None = None) -> dict | None:
+    """First exact hit that has a word for its field nearby, else the first exact hit, else a rounded one."""
+    kw = re.compile(FIELD_WORDS[field], re.I) if field in FIELD_WORDS else None
+    fallback = None
+    for want in ("exact", "rounded"):
+        for s, strength, need_pct in forms:
+            if strength != want:
                 continue
-            snip = text[max(0, m.start() - 40): m.end() + 40]
-            hit = {"form": s, "strength": strength, "snippet": re.sub(r"\s+", " ", snip).strip()}
-            if strength == "exact":
-                return hit
-            if best is None:
-                best = hit
-            break
-    return best
+            lead = r"(?<=[\s(\[=-])" if s.startswith(".") else r"(?<![\d.])"
+            pat = re.compile(lead + re.escape(s) + r"(?![\d])(?!\.\d)")
+            for m in pat.finditer(text):
+                if need_pct and not PCT_AFTER.match(text, m.end()):
+                    continue
+                snip = text[max(0, m.start() - 40): m.end() + 40]
+                near = bool(kw and kw.search(text, max(0, m.start() - 400), m.end() + 400))
+                hit = {"form": s, "strength": strength, "snippet": re.sub(r"\s+", " ", snip).strip(), "near_keyword": near}
+                if near or kw is None:
+                    return hit
+                if fallback is None:
+                    fallback = hit
+        if fallback:
+            return fallback
+    return fallback
 
 
 # ----------------------------------------------------------------------------- doc claims
@@ -552,6 +593,10 @@ def doc_numbers(block_text: str):
         raw, pct = m.group(1), bool(m.group(2))
         if "," in raw:
             continue
+        if m.start() > 1 and t[m.start() - 1] == "-" and t[m.start() - 2].isalpha():
+            continue  # GPL-3.0 and the like
+        if raw.startswith("-") and m.start() > 0 and t[m.start() - 1].isalnum():
+            continue
         before = t[max(0, m.start() - 30): m.start()].lower()
         if "." in raw or pct:
             out.append((raw, pct, t[max(0, m.start() - 50): m.end() + 30]))
@@ -602,8 +647,11 @@ NAME_STOP = {"The", "In", "See", "A", "An", "From", "By", "As", "And", "Of", "Al
              "Management", "Science", "Studies", "Critical", "International", "Money", "Monetary",
              "Portfolio", "Analysts", "It", "Its", "On", "For", "With", "But", "Then", "When", "Since",
              "Note", "Notes", "Source", "Sources", "Paper", "Book", "Open", "Copy", "Sharpe", "Updated",
+             "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+             "November", "December", "Cambridge", "Wiley", "Press", "University", "Communication", "Methods",
+             "Measures", "Retail", "Platforms", "Macroeconomics", "Annual", "Preprint", "Library", "Blog",
              "Later", "Original", "Independent", "Replication", "Relevance", "Both", "Same", "Here", "There"}
-NAME_PARTICLES = {"de", "van", "der", "von", "da", "del", "di", "le", "la", "den"}
+NAME_PARTICLES = {"de", "van", "der", "von", "da", "del", "della", "di", "le", "la", "den", "dos", "du", "ten"}
 
 
 def norm_id(kind: str, v: str) -> str:
@@ -683,7 +731,11 @@ def first_surname(authors: str) -> str | None:
         return None
     # "Lopez de Prado" -> "Lopez"; "J. Smith" -> "Smith"
     toks = [t for t in toks if not re.match(r"^[A-Z]\.$", t)]
-    return toks[0] if toks else None
+    if not toks or toks[0] in NAME_STOP or not toks[0][:1].isupper():
+        return None
+    if len(toks) > 1 and not any(t.lower() in NAME_PARTICLES for t in toks) and all(t[:1].isupper() for t in toks):
+        return toks[-1]  # "Yuke Zhang" -> "Zhang"
+    return toks[0]
 
 
 def same_author(a: str | None, b: str | None) -> bool:
@@ -907,18 +959,18 @@ def main():
                 forms = number_forms(f, v)
                 rec["forms_searched"] = [x[0] + ("%" if x[2] else "") for x in forms]
                 pt = get_text(u)
-                hit = search_forms(pt["text"], forms) if pt["readable"] else None
+                hit = search_forms(pt["text"], forms, f) if pt["readable"] else None
                 tried = [pt]
                 if not hit:
                     for at in alt_texts(u):
                         tried.append(at)
-                        hit = search_forms(at["text"], forms)
+                        hit = search_forms(at["text"], forms, f)
                         if hit:
                             pt = at
                             break
                 if hit:
                     rec.update(status="found", match=hit["form"], match_strength=hit["strength"], snippet=hit["snippet"],
-                               text_source=pt["text_source"])
+                               near_field_word=hit.get("near_keyword"), text_source=pt["text_source"])
                 else:
                     full = [t for t in tried if t["readable"] and not t["landing"]]
                     if full:
@@ -930,7 +982,52 @@ def main():
                                    text_source=u)
                     else:
                         rec.update(status="page-unreadable", reason=f"{pt['page_class']}: {pt['reason']}", text_source=u)
+                rec["own_calculation"] = bool(re.match(r"\s*(our|own|parity)\b.*\b(calculation|computed|calc)", (r.get("source") or ""), re.I))
                 numbers.append(rec)
+
+    # ---- 3a. are the found numbers of one reported result close together on the page (same table row)?
+    by_result = collections.defaultdict(list)
+    for rec in numbers:
+        by_result[(rec["slug"], rec["result_index"])].append(rec)
+    for key, recs in by_result.items():
+        found = [x for x in recs if x["status"] == "found"]
+        if len(found) < 2:
+            for x in found:
+                x["colocated"] = None
+            continue
+        src = found[0]["text_source"]
+        if any(x["text_source"] != src for x in found):
+            for x in found:
+                x["colocated"] = False
+                x["colocation_note"] = "numbers found in different documents"
+            continue
+        text = get_text(src)["text"]
+        pos_lists = []
+        for x in found:
+            forms = [f for f in number_forms(x["field"], x["value"])]
+            ps = []
+            for s_, strength, need_pct in forms + [(x["match"], "m", False)]:
+                lead = r"(?<=[\s(\[=-])" if s_.startswith(".") else r"(?<![\d.])"
+                for m in re.finditer(lead + re.escape(s_) + r"(?![\d])(?!\.\d)", text):
+                    if need_pct and not PCT_AFTER.match(text, m.end()):
+                        continue
+                    ps.append(m.start())
+            pos_lists.append(sorted(set(ps)))
+        events = sorted((p, i) for i, ps in enumerate(pos_lists) for p in ps)
+        need, have, best, lo = len(pos_lists), collections.Counter(), None, 0
+        for hi in range(len(events)):
+            have[events[hi][1]] += 1
+            while len(have) == need:
+                w = events[hi][0] - events[lo][0]
+                best = w if best is None or w < best else best
+                have[events[lo][1]] -= 1
+                if have[events[lo][1]] == 0:
+                    del have[events[lo][1]]
+                lo += 1
+        for x in found:
+            x["colocated"] = best is not None and best <= 1500
+            x["colocation_window_chars"] = best
+            x["occurrences_on_page"] = len(pos_lists[found.index(x)])
 
     # ---- 3b. numbers written next to links in the research docs
     doc_nums = []
@@ -1014,7 +1111,14 @@ def main():
                 if p["cited_first_author"] and meta.get("first_author") and not same_author(p["cited_first_author"], meta["first_author"]):
                     vs_reg.append({"place": f"{p['file']} {p['where']}", "type": "first-author",
                                    "detail": f"names {p['cited_first_author']}, {meta['registry']} says {meta['first_author']}"})
+        origin_only = False
+        if dis:
+            np_ = [p for p in pl if p["where"] != "origin.source_url"]
+            ys = {p["cited_year"] for p in np_ if p["cited_year"]}
+            au = [p["cited_first_author"] for p in np_ if p["cited_first_author"]]
+            origin_only = len(ys) <= 1 and all(same_author(a, au[0]) for a in au)
         crossrefs.append({"id": v, "type": k, "places_count": len(pl), "in_multiple_places": multi,
+                          "disagreement_only_with_origin_field": origin_only,
                           "registry": meta, "places": pl, "disagreements": dis, "registry_mismatches": vs_reg})
 
     # ---- 5. write outputs
@@ -1049,7 +1153,7 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     c_num = collections.Counter(n["status"] for n in numbers)
     c_doc = collections.Counter(n["status"] for n in doc_nums)
     weak = sum(1 for n in numbers if n["status"] == "found" and n.get("match_strength") == "rounded")
-    contra = [n for n in numbers if n["status"] == "not-found" and n.get("verified_on_page") is True]
+    contra = [n for n in numbers if n["status"] == "not-found" and n.get("verified_on_page") is True and not n.get("own_calculation")]
     contra_entries = sorted({(n["slug"], n["result_index"]) for n in contra})
     multi = [c for c in crossrefs if c["in_multiple_places"]]
     dis = [c for c in multi if c["disagreements"]]
@@ -1083,6 +1187,9 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     for k in ["found", "not-found", "page-unreadable"]:
         L.append(f"| {k} | {c_num.get(k, 0)} |")
     L.append("")
+    own_nf = sum(1 for n in numbers if n["status"] == "not-found" and n.get("own_calculation"))
+    own_un = sum(1 for n in numbers if n["status"] == "page-unreadable" and n.get("own_calculation"))
+    L.append(f"{own_nf} of the not-found and {own_un} of the unreadable numbers are the catalog's own calculations from data files (see below), not claims about a page.")
     L.append(f"Of the found numbers, {weak} matched only after rounding (for example 7.23 percent found as 7.2).")
     unread_landing = sum(1 for n in numbers if n["status"] == "page-unreadable" and "abstract" in n.get("reason", ""))
     L.append(f"Of the unreadable ones, {unread_landing} cite only an abstract or landing page, and the rest are blocked, broken or failed to extract.")
@@ -1102,9 +1209,44 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     L.append("")
     L.append("| Entry | Result | Field | Value | Claimed verified | Source | Page read |")
     L.append("|---|---|---|---|---|---|---|")
-    for n in sorted([n for n in numbers if n["status"] == "not-found"], key=lambda n: (n["slug"], n["result_index"], NUM_FIELDS.index(n["field"]))):
+    for n in sorted([n for n in numbers if n["status"] == "not-found" and not n.get("own_calculation")], key=lambda n: (n["slug"], n["result_index"], NUM_FIELDS.index(n["field"]))):
         L.append(f"| {n['slug']} | {n['result_index']} | {n['field']} | {fmt_val(n['field'], n['value'])} | "
                  f"{'yes' if n.get('verified_on_page') else 'no'} | {md_cell(n.get('source'))[:90]} | {md_cell(n.get('text_source'))} |")
+    L.append("")
+    own = [n for n in numbers if n.get("own_calculation")]
+    L.append("## Numbers the catalog says it calculated itself")
+    L.append("")
+    L.append(f"{len(own)} numbers in {len({(n['slug'], n['result_index']) for n in own})} reported results say \"our calculation\" from a public dataset. They cannot be")
+    L.append("checked by reading a page. They need to be recomputed from the data file. Entries: "
+             + ", ".join(sorted({n['slug'] for n in own})) + ".")
+    L.append("")
+    scat = sorted({(n["slug"], n["result_index"]) for n in numbers if n.get("colocated") is False})
+    L.append("## Found, but scattered across the page")
+    L.append("")
+    L.append("All numbers of these results were found, but not close together (more than 1,500 characters apart at best), so")
+    L.append("they may be matching unrelated places in the paper rather than one table row. Worth a look.")
+    L.append("")
+    L.append("| Entry | Result | Closest window (characters) | Source |")
+    L.append("|---|---|---|---|")
+    for slug, i in scat:
+        ns = [n for n in numbers if n["slug"] == slug and n["result_index"] == i and n.get("colocated") is False]
+        L.append(f"| {slug} | {i} | {ns[0].get('colocation_window_chars') or ns[0].get('colocation_note','')} | {md_cell(ns[0].get('source'))[:100]} |")
+    L.append("")
+    weak_single = []
+    for key in sorted({(n["slug"], n["result_index"]) for n in numbers}):
+        rs = [n for n in numbers if (n["slug"], n["result_index"]) == key]
+        fnd = [n for n in rs if n["status"] == "found"]
+        if len(fnd) == 1 and not fnd[0].get("own_calculation") and (fnd[0].get("near_field_word") is False or fnd[0].get("match_strength") == "rounded"):
+            weak_single.append(fnd[0])
+    L.append("## Found, but only weakly")
+    L.append("")
+    L.append("The only number of the result that was found, and either no matching word (Sharpe, return, volatility, drawdown) is nearby or it")
+    L.append("matched only after rounding. The match may be a coincidence.")
+    L.append("")
+    L.append("| Entry | Result | Field | Value | Snippet |")
+    L.append("|---|---|---|---|---|")
+    for n in weak_single:
+        L.append(f"| {n['slug']} | {n['result_index']} | {n['field']} | {n['value']} | {md_cell(n.get('snippet'))} |")
     L.append("")
     L.append("## verified_on_page claims that the page contradicts")
     L.append("")
@@ -1150,6 +1292,9 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     L.append("## Links that block automated readers")
     L.append("")
     L.append("These may work in a normal browser. They cannot be checked by script.")
+    nd = [s for s in sources if s.get("doi")]
+    L.append(f"Of these, {sum(1 for s in nd if s['status']=='blocked')} are DOI links that reach a publisher which blocks scripts. "
+             f"All {sum(1 for s in nd if s.get('doi_handle')=='registered')} of {len(nd)} DOI links are registered DOIs (checked with the doi.org handle API).")
     L.append("")
     bd = collections.Counter(domain(s["url"]) for s in sources if s["status"] == "blocked")
     L.append(", ".join(f"{d} ({c})" for d, c in bd.most_common()))
@@ -1161,10 +1306,23 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     L.append("The same paper (same DOI, arXiv, NBER or SSRN id) cited with a different year or first author in different places.")
     L.append("Year gaps of a few years are often a working paper year against a journal year, which is a style issue, not an error.")
     L.append("")
+    L.append("Real disagreements between citations of the same paper:")
+    L.append("")
     L.append("| Paper id | Problem | Places |")
     L.append("|---|---|---|")
-    for c in dis:
-        pl = "; ".join(f"{p['file'].split('/')[-1]} {p['where']}: {p['cited_first_author']} {p['cited_year']}" for p in c["places"])
+    for c in [c for c in dis if not c.get("disagreement_only_with_origin_field")]:
+        pl = "; ".join(f"{p['file'].split('/')[-1]} {p['where']}: {p['cited_first_author']} {p['cited_year']}" for p in c["places"] if p["cited_first_author"] or p["cited_year"])
+        L.append(f"| {c['type']}:{c['id']} | {md_cell('; '.join(d['detail'] for d in c['disagreements']))} | {md_cell(pl)[:400]} |")
+    L.append("")
+    L.append("Disagreements that involve only an entry's origin field. Either the origin names who first had the idea (for example")
+    L.append("Appel for MACD, 1979) while origin.source_url links a later paper by someone else, or the origin year is the working")
+    L.append("paper year while other places give the journal year. Not citation errors, but the origin link does not always point")
+    L.append("to the originator:")
+    L.append("")
+    L.append("| Paper id | Problem | Places |")
+    L.append("|---|---|---|")
+    for c in [c for c in dis if c.get("disagreement_only_with_origin_field")]:
+        pl = "; ".join(f"{p['file'].split('/')[-1]} {p['where']}: {p['cited_first_author']} {p['cited_year']}" for p in c["places"] if p["cited_first_author"] or p["cited_year"])
         L.append(f"| {c['type']}:{c['id']} | {md_cell('; '.join(d['detail'] for d in c['disagreements']))} | {md_cell(pl)[:400]} |")
     L.append("")
     L.append("## Citations that disagree with the registry")
@@ -1203,6 +1361,13 @@ def write_summary(date, sources, numbers, doc_nums, crossrefs, secs, nreq):
     if manual.exists():
         L.append(manual.read_text().rstrip())
         L.append("")
+    # say so when a table came out empty
+    out = []
+    for i, line in enumerate(L):
+        out.append(line)
+        if re.match(r"^\|(---\|)+$", line) and (i + 1 >= len(L) or not L[i + 1].startswith("|")):
+            out.append("| (none) |" + " |" * (line.count("|") - 2))
+    L = out
     text = "\n".join(L)
     for bad, good in (("—", "-"), ("–", "-"), ("‘", "'"), ("’", "'"), ("“", '"'), ("”", '"')):
         text = text.replace(bad, good)

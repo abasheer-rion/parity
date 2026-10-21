@@ -1,0 +1,4187 @@
+{
+ "run_date": "2026-10-21",
+ "records": [
+  {
+   "id": "2011.09607",
+   "type": "arxiv",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "arXiv",
+    "title": "FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance",
+    "first_author": "Liu",
+    "year": 2020,
+    "authors": [
+     "Xiao-Yang Liu",
+     "Hongyang Yang",
+     "Qian Chen",
+     "Runjia Zhang",
+     "Liuqing Yang",
+     "Bowen Xiao"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "origin.source_title",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance (arXiv 2011.09607)"
+    },
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "origin.source_url",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": "Liu",
+     "cited_year": 2020,
+     "context": "origin: Liu, Yang, Chen, Zhang, Yang, Xiao, Wang (AI4Finance Foundation) (2020), FinRL: A Deep Reinforcement Learning Library for Automated Stock Trading in Quantitative Finance (arXiv 2011.09607)"
+    },
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "reported_results[0].source_url",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": "FinRL",
+     "cited_year": null,
+     "context": "reported_results source: FinRL paper, Table 2"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: FinRL, Liu"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/deep-rl-trading-finrl.json reported_results[0].source_url",
+     "type": "first-author",
+     "detail": "names FinRL, arXiv says Liu"
+    }
+   ]
+  },
+  {
+   "id": "2209.05559",
+   "type": "arxiv",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Deep Reinforcement Learning for Cryptocurrency Trading: Practical Approach to Address Backtest Overfitting",
+    "first_author": "Gort",
+    "year": 2022,
+    "authors": [
+     "Berend Jelmer Dirk Gort",
+     "Xiao-Yang Liu",
+     "Xinghang Sun",
+     "Jiechao Gao",
+     "Shuaiyu Chen",
+     "Christina Dan Wang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "why_it_might_fail",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": "Gort",
+     "cited_year": 2022,
+     "context": "RL agents are very sensitive to hyperparameters and random seeds, and a single walk-forward test can select a lucky agent. Gort, Liu et al. (2022, arXiv 2209.05559), from the same group, state that existing "
+    },
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "reported_results[1].source",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": "Gort",
+     "cited_year": 2022,
+     "context": "Gort, Liu, Gao, Chen, Wang (2022), arXiv 2209.05559"
+    },
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "reported_results[1].source_url",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": "Gort",
+     "cited_year": 2022,
+     "context": "reported_results source: Gort, Liu, Gao, Chen, Wang (2022), arXiv 2209.05559"
+    },
+    {
+     "file": "catalog/algorithms/deep-rl-trading-finrl.json",
+     "where": "post_publication_evidence",
+     "slug": "deep-rl-trading-finrl",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "The FinRL group itself later published work on backtest overfitting in DRL trading (arXiv 2209.05559). No audited live track record of FinRL age"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2212.06888",
+   "type": "arxiv",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Fundamentals of Perpetual Futures",
+    "first_author": "He",
+    "year": 2022,
+    "authors": [
+     "Songrun He",
+     "Asaf Manela",
+     "Omri Ross",
+     "Victor von Wachter"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-perp-funding-carry.json",
+     "where": "reported_results[1].source_url",
+     "slug": "crypto-perp-funding-carry",
+     "cited_first_author": "He",
+     "cited_year": null,
+     "context": "reported_results source: He, Manela, Ross, von Wachter, Fundamentals of Perpetual Futures, Table 7 'Carry' column"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2304.07619",
+   "type": "arxiv",
+   "places_count": 6,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Can ChatGPT Forecast Stock Price Movements? Return Predictability and Large Language Models",
+    "first_author": "Lopez-Lira",
+    "year": 2023,
+    "authors": [
+     "Alejandro Lopez-Lira",
+     "Yuehua Tang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "origin.source_title",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Can ChatGPT Forecast Stock Price Movements? Return Predictability and Large Language Models (arXiv 2304.07619)"
+    },
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "origin.source_url",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": "Lopez-Lira",
+     "cited_year": 2023,
+     "context": "origin: Lopez-Lira, Tang (2023), Can ChatGPT Forecast Stock Price Movements? Return Predictability and Large Language Models (arXiv 2304.07619)"
+    },
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "reported_results[0].source",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Lopez-Lira and Tang, arXiv 2304.07619 v6"
+    },
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "reported_results[0].source_url",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": "Lopez-Lira",
+     "cited_year": null,
+     "context": "reported_results source: Lopez-Lira and Tang, arXiv 2304.07619 v6"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 156",
+     "cited_first_author": "Lopez-Lira",
+     "cited_year": 2023,
+     "context": "- **Lopez-Lira and Tang (2023). \"Can ChatGPT Forecast Stock Price Movements? Return Predictability and Large Language Models.\" arXiv:2304.07619.** https://arxiv.org/ab"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 93",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "and Tang find GPT headline scores predict next-day stock returns. Lopez-Lira himself expects the effect to fade as more people use these tools ([paper](https://arxiv.org/abs/2304.07619), [CNBC intervi"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2309.17322",
+   "type": "arxiv",
+   "places_count": 5,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Assessing Look-Ahead Bias in Stock Return Predictions Generated By GPT Sentiment Analysis",
+    "first_author": "Glasserman",
+    "year": 2023,
+    "authors": [
+     "Paul Glasserman",
+     "Caden Lin"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "reported_results[1].source",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": "Glasserman",
+     "cited_year": 2023,
+     "context": "Glasserman and Lin (2023), arXiv 2309.17322"
+    },
+    {
+     "file": "catalog/algorithms/llm-headline-sentiment.json",
+     "where": "reported_results[1].source_url",
+     "slug": "llm-headline-sentiment",
+     "cited_first_author": "Glasserman",
+     "cited_year": 2023,
+     "context": "reported_results source: Glasserman and Lin (2023), arXiv 2309.17322"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 132",
+     "cited_first_author": "Glasserman",
+     "cited_year": 2023,
+     "context": "21. **Glasserman and Lin (2023). \"Assessing Look-Ahead Bias in Stock Return Predictions Generated By GPT Sentiment Analysis.\" arXiv:2309.17322.** https://arxiv.org/ab"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 94",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - Glasserman and Lin show LLM backtests can carry lookahead bias from the model's training data. They propose anonymising the text as a check ([paper](https://arxiv.org/abs/2309.17322))."
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 168",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - LLM news scores can leak future knowledge from the model's training data ([Glasserman and Lin](https://arxiv.org/abs/2309.17322))."
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2408.13214",
+   "type": "arxiv",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "EUR-USD Exchange Rate Forecasting Based on Information Fusion with Large Language Models and Deep Learning Methods",
+    "first_author": "Ding",
+    "year": 2024,
+    "authors": [
+     "Hongcheng Ding",
+     "Xuanze Zhao",
+     "Ruiting Deng",
+     "Shamsul Nahar Abdullah",
+     "Deshinta Arrova Dewi"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 155",
+     "cited_first_author": "Ding",
+     "cited_year": 2024,
+     "context": "ng, Zhao, Deng, Abdullah and Dewi (2024). \"EUR-USD Exchange Rate Forecasting Based on Information Fusion with Large Language Models and Deep Learning Methods.\" arXiv:2408.13214. Preprint.** https://ar"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2505.16136",
+   "type": "arxiv",
+   "places_count": 6,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study",
+    "first_author": "Zhang",
+    "year": 2025,
+    "authors": [
+     "Yuke Zhang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/finbert-gdelt-fx-sentiment.json",
+     "where": "origin.source_title",
+     "slug": "finbert-gdelt-fx-sentiment",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study (arXiv 2505.16136)"
+    },
+    {
+     "file": "catalog/algorithms/finbert-gdelt-fx-sentiment.json",
+     "where": "origin.source_url",
+     "slug": "finbert-gdelt-fx-sentiment",
+     "cited_first_author": "Zhang",
+     "cited_year": 2025,
+     "context": "origin: Yuke Zhang (2025), Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study (arXiv 2505.16136)"
+    },
+    {
+     "file": "catalog/algorithms/finbert-gdelt-fx-sentiment.json",
+     "where": "reported_results[0].source",
+     "slug": "finbert-gdelt-fx-sentiment",
+     "cited_first_author": "Zhang",
+     "cited_year": 2025,
+     "context": "Zhang (2025), arXiv 2505.16136, Table 1"
+    },
+    {
+     "file": "catalog/algorithms/finbert-gdelt-fx-sentiment.json",
+     "where": "reported_results[0].source_url",
+     "slug": "finbert-gdelt-fx-sentiment",
+     "cited_first_author": "Zhang",
+     "cited_year": 2025,
+     "context": "reported_results source: Zhang (2025), arXiv 2505.16136, Table 1"
+    },
+    {
+     "file": "catalog/algorithms/finbert-gdelt-fx-sentiment.json",
+     "where": "reported_results[1].source_url",
+     "slug": "finbert-gdelt-fx-sentiment",
+     "cited_first_author": "Zhang",
+     "cited_year": 2025,
+     "context": "reported_results source: Zhang (2025), logistic regression baseline"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 129",
+     "cited_first_author": "Zhang",
+     "cited_year": 2025,
+     "context": "20. **Zhang (2025). \"Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study.\" arXiv:2505.16136. Preprint, not peer rev"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2506.11921",
+   "type": "arxiv",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance",
+    "first_author": "Chen",
+    "year": 2025,
+    "authors": [
+     "Kai-Yuan Chen",
+     "Kai-Hsin Chen",
+     "Jyh-Shing Roger Jang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-grid-trading-bot.json",
+     "where": "origin.source_title",
+     "slug": "crypto-grid-trading-bot",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance (arXiv 2506.11921)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-grid-trading-bot.json",
+     "where": "origin.source_url",
+     "slug": "crypto-grid-trading-bot",
+     "cited_first_author": null,
+     "cited_year": 2025,
+     "context": "origin: Retail exchange bots; formal analysis by Chen, Chen, Jang (2025), Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance (arXiv 2506.11921)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-grid-trading-bot.json",
+     "where": "reported_results[0].source",
+     "slug": "crypto-grid-trading-bot",
+     "cited_first_author": "Chen",
+     "cited_year": 2025,
+     "context": "Chen, Chen, Jang (2025), arXiv 2506.11921"
+    },
+    {
+     "file": "catalog/algorithms/crypto-grid-trading-bot.json",
+     "where": "reported_results[0].source_url",
+     "slug": "crypto-grid-trading-bot",
+     "cited_first_author": "Chen",
+     "cited_year": 2025,
+     "context": "reported_results source: Chen, Chen, Jang (2025), arXiv 2506.11921"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2510.14435",
+   "type": "arxiv",
+   "places_count": 9,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "arXiv",
+    "title": "Cryptocurrency as an Investable Asset Class: Coming of Age",
+    "first_author": "Borri",
+    "year": 2025,
+    "authors": [
+     "Nicola Borri",
+     "Yukun Liu",
+     "Aleh Tsyvinski",
+     "Xi Wu"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-cross-sectional-factors.json",
+     "where": "reported_results[1].source_url",
+     "slug": "crypto-cross-sectional-factors",
+     "cited_first_author": "Borri",
+     "cited_year": 2025,
+     "context": "reported_results source: Borri, Liu, Tsyvinski, Wu (2025), Table 2 Panel B"
+    },
+    {
+     "file": "catalog/algorithms/crypto-perp-funding-carry.json",
+     "where": "origin.source_title",
+     "slug": "crypto-perp-funding-carry",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Cryptocurrency as an Investable Asset Class: Coming of Age (arXiv 2510.14435), building on Crypto carry (BIS WP 996/1087"
+    },
+    {
+     "file": "catalog/algorithms/crypto-perp-funding-carry.json",
+     "where": "origin.source_url",
+     "slug": "crypto-perp-funding-carry",
+     "cited_first_author": "Schmeling",
+     "cited_year": 2022,
+     "context": "origin: Schmeling, Schrimpf, Todorov; updated by Borri, Liu, Tsyvinski, Wu (2022), Cryptocurrency as an Investable Asset Class: Coming of Age (arXiv 2510.14435), building on Crypto carry (BIS WP 996/1087)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-perp-funding-carry.json",
+     "where": "reported_results[0].source_url",
+     "slug": "crypto-perp-funding-carry",
+     "cited_first_author": "Borri",
+     "cited_year": 2025,
+     "context": "reported_results source: Borri, Liu, Tsyvinski, Wu (2025), stylized fact 6"
+    },
+    {
+     "file": "catalog/algorithms/crypto-perp-funding-carry.json",
+     "where": "post_publication_evidence",
+     "slug": "crypto-perp-funding-carry",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Borri et al. (arXiv 2510.14435 v4, 2026) find carry profitability compress"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 99",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - Borri, Liu, Tsyvinski and Wu report a Sharpe of 6.45 for 2020 to 2025 on Binance BTC. It falls to 4.06 from 2024 and turns negative in 2025 ([arXiv 2510.14435](https://arxiv.org/html"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 143",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "| Crypto funding carry ([arXiv](https://arxiv.org/html/2510.14435v4)) | BTC spot"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 172",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - In crypto it is serious, because many coins were delisted. The arXiv crypto study had to filter 16,468 coins ([arXiv](https://arxiv.org/html/2510.14435v4))."
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 175",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - Crypto carry went from a Sharpe of 6.45 to negative ([arXiv](https://arxiv.org/html/2510.14435v4))."
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 2022, 2025"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Borri, Schmeling"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/crypto-perp-funding-carry.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2022, arXiv says 2025"
+    },
+    {
+     "place": "catalog/algorithms/crypto-perp-funding-carry.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Schmeling, arXiv says Borri"
+    }
+   ]
+  },
+  {
+   "id": "2608.27734",
+   "type": "arxiv",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "arXiv",
+    "title": "What survives honest evaluation? Leakage-safe, search-aware assessment of LLM-driven trading strategy discovery",
+    "first_author": "Gen\u00e7ay",
+    "year": 2026,
+    "authors": [
+     "Eray Gen\u00e7ay"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 160",
+     "cited_first_author": "Gen\u00e7ay",
+     "cited_year": 2026,
+     "context": "- **Gen\u00e7ay (2026). \"What survives honest evaluation? Leakage-safe, search-aware assessment of LLM-driven trading strategy discovery.\" arXiv:2608.27734. Preprint, not peer rev"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1002/fut.10115",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Natural gas prices and the gas storage report: Public news and volatility in energy futures markets",
+    "first_author": "Linn",
+    "year": 2004,
+    "year_online": 2004,
+    "container": "Journal of Futures Markets",
+    "authors": [
+     "Linn",
+     "Zhu"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/natural-gas-storage-report.json",
+     "where": "origin.source_url",
+     "slug": "natural-gas-storage-report",
+     "cited_first_author": "Linn",
+     "cited_year": 2004,
+     "context": "origin: Linn, Zhu (2004), Natural gas prices and the gas storage report: Public news and volatility in energy futures markets (Journal of Futures Markets)"
+    },
+    {
+     "file": "catalog/algorithms/natural-gas-storage-report.json",
+     "where": "reported_results[0].source_url",
+     "slug": "natural-gas-storage-report",
+     "cited_first_author": "Linn",
+     "cited_year": 2004,
+     "context": "reported_results source: Linn and Zhu (2004), Journal of Futures Markets abstract"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1002/fut.21850",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The impact of crude oil inventory announcements on prices: Evidence from derivatives markets",
+    "first_author": "Miao",
+    "year": 2018,
+    "year_online": 2017,
+    "container": "Journal of Futures Markets",
+    "authors": [
+     "Miao",
+     "Ramchander",
+     "Wang",
+     "Yang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/eia-oil-inventory-announcement.json",
+     "where": "reported_results[2].source_url",
+     "slug": "eia-oil-inventory-announcement",
+     "cited_first_author": "Miao",
+     "cited_year": 2017,
+     "context": "reported_results source: Miao, Ramchander, Wang and Yang (2017), Journal of Futures Markets abstract"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1002/fut.22096",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The effect of oil price shocks on asset markets: Evidence from oil inventory news",
+    "first_author": "Alquist",
+    "year": 2020,
+    "year_online": 2020,
+    "container": "Journal of Futures Markets",
+    "authors": [
+     "Alquist",
+     "Ellwanger",
+     "Jin"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/eia-oil-inventory-announcement.json",
+     "where": "origin.source_url",
+     "slug": "eia-oil-inventory-announcement",
+     "cited_first_author": "Alquist",
+     "cited_year": 2020,
+     "context": "origin: Alquist, Ellwanger, Jin (2020), The Effect of Oil Price Shocks on Asset Markets: Evidence from Oil Inventory News (Bank of Canada SWP 2020-8; Journal of Futures Markets 2020)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1007/s10479-019-03357-1",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Technical trading and cryptocurrencies",
+    "first_author": "Hudson",
+    "year": 2021,
+    "year_online": 2019,
+    "container": "Annals of Operations Research",
+    "authors": [
+     "Hudson",
+     "Urquhart"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/technical-indicator-trading-bots.json",
+     "where": "origin.source_url",
+     "slug": "technical-indicator-trading-bots",
+     "cited_first_author": "Zenbot",
+     "cited_year": 2016,
+     "context": "origin: Zenbot (2016) and freqtrade (2017) communities; academic test by Hudson and Urquhart (2016), Technical trading and cryptocurrencies (Annals of Operations Research 2021)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/technical-indicator-trading-bots.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2016, Crossref says 2021 (online 2019)"
+    },
+    {
+     "place": "catalog/algorithms/technical-indicator-trading-bots.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Zenbot, Crossref says Hudson"
+    }
+   ]
+  },
+  {
+   "id": "10.1016/0022-1996(83)90017-x",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Empirical exchange rate models of the seventies",
+    "first_author": "Meese",
+    "year": 1983,
+    "year_online": null,
+    "container": "Journal of International Economics",
+    "authors": [
+     "Meese",
+     "Rogoff"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 37",
+     "cited_first_author": "Meese",
+     "cited_year": 1983,
+     "context": "| Meese and Rogoff (1983), \"Empirical exchange rate models of the seventies: do they fit out of sample?\", *Journal of International Economics*. [doi:10.1016/0022-1996(83)90017-X](https://do"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/0304-3932(84)90046-1",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Forward and spot exchange rates",
+    "first_author": "Fama",
+    "year": 1984,
+    "year_online": null,
+    "container": "Journal of Monetary Economics",
+    "authors": [
+     "Fama"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 38",
+     "cited_first_author": "Fama",
+     "cited_year": 1984,
+     "context": "| Fama (1984), \"Forward and spot exchange rates\", *Journal of Monetary Economics*. [doi:10.1016/0304-3932(84)90046-1](https://do"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.finmar.2013.07.001",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "When do stop-loss rules stop losses?",
+    "first_author": "Kaminski",
+    "year": 2014,
+    "year_online": null,
+    "container": "Journal of Financial Markets",
+    "authors": [
+     "Kaminski",
+     "Lo"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 74",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "- Against or conditional: Kaminski and Lo's paper on stop-loss rules ([DOI, Journal of Financial Markets](https://doi.org/10.1016/j.finmar.2013.07.001)) reportedl"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.irfa.2022.102245",
+   "type": "doi",
+   "places_count": 13,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Are carry, momentum and value still there in currencies?",
+    "first_author": "Hutchinson",
+    "year": 2022,
+    "year_online": null,
+    "container": "International Review of Financial Analysis",
+    "authors": [
+     "Hutchinson",
+     "Kyziropoulos",
+     "O'Brien",
+     "O'Reilly",
+     "Sharma"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "2) replicate published carry, momentum and value studies and find the average out-of-sample Sharpe falls from +0.39 to -0.32 after publication (https://doi.org/10.1016/j.irfa.2022.102245). Chernov, Dahlquist and Lochstoe"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "/intfin/v76y2022ics1042443121001670.html). Hutchinson et al. (2022) find published currency carry strategies lost their edge after publication (https://doi.org/10.1016/j.irfa.2022.102245). No out-of-sample test of this e"
+    },
+    {
+     "file": "catalog/algorithms/fx-cross-sectional-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-cross-sectional-momentum",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "ategies went from an average out-of-sample Sharpe of +0.39 to -0.32 after publication and that currency returns no longer show autocorrelation (https://doi.org/10.1016/j.irfa.2022.102245). Chernov, Dahlquist and Lochstoe"
+    },
+    {
+     "file": "catalog/algorithms/fx-dollar-carry.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-dollar-carry",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "chinson et al. (2022) find the broader set of published currency carry, momentum and value strategies lost their performance after publication (https://doi.org/10.1016/j.irfa.2022.102245)."
+    },
+    {
+     "file": "catalog/algorithms/fx-economic-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-economic-momentum",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "t replication (1990-2026) reports a much weaker Sharpe ratio of 0.21. The broader currency anomaly decay documented by Hutchinson et al. (2022, https://doi.org/10.1016/j.irfa.2022.102245) covers carry, momentum and value"
+    },
+    {
+     "file": "catalog/algorithms/fx-ml-smart-carry.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-ml-smart-carry",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "dependent post-publication test found. The paper itself notes conventional carry deteriorated after 2008, in line with Hutchinson et al. (2022, https://doi.org/10.1016/j.irfa.2022.102245)."
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "et al. (2022) find published currency momentum lost its edge after publication and that autocorrelation in currency excess returns disappeared (https://doi.org/10.1016/j.irfa.2022.102245). AQR keeps publishing an updated"
+    },
+    {
+     "file": "catalog/algorithms/fx-value-adjusted.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-value-adjusted",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "Hutchinson, Kyziropoulos, O'Brien, O'Reilly and Sharma (2022, https://doi.org/10.1016/j.irfa.2022.102245; abstract at https://zenodo.org/r"
+    },
+    {
+     "file": "catalog/algorithms/fx-value-ppp.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-value-ppp",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "e differentials after the value studies were published, as part of an average Sharpe drop from +0.39 to -0.32 across carry, momentum and value (https://doi.org/10.1016/j.irfa.2022.102245). In contrast, Chernov, Dahlquist"
+    },
+    {
+     "file": "catalog/algorithms/fx-volatility-risk-premium.json",
+     "where": "post_publication_evidence",
+     "slug": "fx-volatility-risk-premium",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "(2022) report the average out-of-sample Sharpe of published carry, momentum and value strategies falling from +0.39 to -0.32 after publication: https://doi.org/10.1016/j.irfa.2022.102245"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 143",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "O'Reilly and Sharma (2022). \"Are carry, momentum and value still there in currencies?\" International Review of Financial Analysis 83, 102245.** https://doi.org/10.1016/j.irfa.2022.102245 After pub"
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 81",
+     "cited_first_author": "Hutchinson",
+     "cited_year": 2022,
+     "context": "- Against: after publication, FX carry, momentum and value went from an average Sharpe of +0.39 to -0.32 ([Hutchinson et al., 2022](https://doi.org/10.1016/j.irfa.2022.102245), via our ear"
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 146",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "5. **Expect decay.** Published edges shrink ([McLean and Pontiff](https://doi.org/10.1111/jofi.12365); [Hutchinson et al.](https://doi.org/10.1016/j.irfa.2022.102245))."
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jfineco.2011.11.003",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Time series momentum",
+    "first_author": "Moskowitz",
+    "year": 2012,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Moskowitz",
+     "Ooi",
+     "Pedersen"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/commodity-time-series-momentum.json",
+     "where": "origin.source_url",
+     "slug": "commodity-time-series-momentum",
+     "cited_first_author": "Moskowitz",
+     "cited_year": 2012,
+     "context": "origin: Moskowitz, Ooi, Pedersen (2012), Time Series Momentum (Journal of Financial Economics)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 48",
+     "cited_first_author": "Moskowitz",
+     "cited_year": 2012,
+     "context": "| Moskowitz, Ooi and Pedersen (2012), \"Time series momentum\", *Journal of Financial Economics*. [doi:10.1016/j.jfineco.2011.11.003](https://d"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jfineco.2012.06.009",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Currency momentum strategies",
+    "first_author": "Menkhoff",
+    "year": 2012,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Menkhoff",
+     "Sarno",
+     "Schmeling",
+     "Schrimpf"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-cross-sectional-momentum.json",
+     "where": "origin.source_url",
+     "slug": "fx-cross-sectional-momentum",
+     "cited_first_author": "Menkhoff",
+     "cited_year": 2012,
+     "context": "origin: Menkhoff, Sarno, Schmeling, Schrimpf (2012), Currency momentum strategies (Journal of Financial Economics 106(3), 2012)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 47",
+     "cited_first_author": "Menkhoff",
+     "cited_year": 2012,
+     "context": "| Menkhoff, Sarno, Schmeling and Schrimpf (2012), \"Currency momentum strategies\", *Journal of Financial Economics*. [doi:10.1016/j.jfineco.2012.06.009](https://d"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jfineco.2013.10.005",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Betting against beta",
+    "first_author": "Frazzini",
+    "year": 2014,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Frazzini",
+     "Pedersen"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/betting-against-beta.json",
+     "where": "origin.source_url",
+     "slug": "betting-against-beta",
+     "cited_first_author": "Frazzini",
+     "cited_year": 2014,
+     "context": "origin: Frazzini, Pedersen (2014), Betting Against Beta (Journal of Financial Economics)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jfineco.2016.02.015",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Volatility risk premia and exchange rate predictability",
+    "first_author": "Della Corte",
+    "year": 2016,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Della Corte",
+     "Ramadorai",
+     "Sarno"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-volatility-risk-premium.json",
+     "where": "origin.source_url",
+     "slug": "fx-volatility-risk-premium",
+     "cited_first_author": "Della",
+     "cited_year": 2013,
+     "context": "origin: Della Corte, Ramadorai and Sarno (2013), Volatility risk premia and exchange rate predictability (Journal of Financial Economics 120(1), 2016)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 67",
+     "cited_first_author": "Corte",
+     "cited_year": 2016,
+     "context": "a Corte, Ramadorai and Sarno (2016). \"Volatility risk premia and exchange rate predictability.\" Journal of Financial Economics 120(1), 21-40.** https://doi.org/10.1016/j.jfineco.2016.02.015 (SSRN: htt"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 2013, 2016"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Corte, Della"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/fx-volatility-risk-premium.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2013, Crossref says 2016"
+    },
+    {
+     "place": "catalog/algorithms/fx-volatility-risk-premium.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Della, Crossref says Della Corte"
+    }
+   ]
+  },
+  {
+   "id": "10.1016/j.jfineco.2017.11.002",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Carry",
+    "first_author": "Koijen",
+    "year": 2018,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Koijen",
+     "Moskowitz",
+     "Pedersen",
+     "Vrugt"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/trend-plus-carry-combined.json",
+     "where": "origin.source_url",
+     "slug": "trend-plus-carry-combined",
+     "cited_first_author": "Koijen",
+     "cited_year": 2013,
+     "context": "origin: Koijen, Moskowitz, Pedersen, Vrugt (2013), Carry (NBER WP 19325, 2013; Journal of Financial Economics 2018)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 56",
+     "cited_first_author": "Koijen",
+     "cited_year": 2018,
+     "context": "| Koijen, Moskowitz, Pedersen and Vrugt (2018), \"Carry\", *Journal of Financial Economics*. [doi:10.1016/j.jfineco.2017.11.002](https://d"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 2013, 2018"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/trend-plus-carry-combined.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2013, Crossref says 2018"
+    }
+   ]
+  },
+  {
+   "id": "10.1016/j.jfineco.2019.09.002",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Economic momentum and currency returns",
+    "first_author": "Dahlquist",
+    "year": 2020,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Dahlquist",
+     "Hasseltoft"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-economic-momentum.json",
+     "where": "origin.source_url",
+     "slug": "fx-economic-momentum",
+     "cited_first_author": "Dahlquist",
+     "cited_year": 2015,
+     "context": "origin: Dahlquist, Hasseltoft (2015), Economic momentum and currency returns (Journal of Financial Economics 136(1), 152-167, 2020; SSRN working paper 2015)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/fx-economic-momentum.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2015, Crossref says 2020"
+    }
+   ]
+  },
+  {
+   "id": "10.1016/j.jfineco.2020.04.015",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "On the performance of volatility-managed portfolios",
+    "first_author": "Cederburg",
+    "year": 2020,
+    "year_online": null,
+    "container": "Journal of Financial Economics",
+    "authors": [
+     "Cederburg",
+     "O\u2019Doherty",
+     "Wang",
+     "Yan"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "post_publication_evidence",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": "Cederburg",
+     "cited_year": 2020,
+     "context": "Cederburg, O'Doherty, Wang and Yan (2020, https://doi.org/10.1016/j.jfineco.2020.04.015) find out-of-sample volatility"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jimonfin.2015.03.001",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Can oil prices forecast exchange rates? An empirical analysis of the relationship between commodity prices and exchange rates",
+    "first_author": "Ferraro",
+    "year": 2015,
+    "year_online": null,
+    "container": "Journal of International Money and Finance",
+    "authors": [
+     "Ferraro",
+     "Rogoff",
+     "Rossi"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 53",
+     "cited_first_author": "Ferraro",
+     "cited_year": 2015,
+     "context": "| Ferraro, Rogoff and Rossi (2015), \"Can oil prices forecast exchange rates?\", *Journal of International Money and Finance*. [doi:10.1016/j.jimonfin.2015.03.001](https://"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/j.jinteco.2016.03.012",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Technical trading: Is it still beating the foreign exchange market?",
+    "first_author": "Hsu",
+    "year": 2016,
+    "year_online": null,
+    "container": "Journal of International Economics",
+    "authors": [
+     "Hsu",
+     "Taylor",
+     "Wang"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-technical-trading-rules.json",
+     "where": "origin.source_url",
+     "slug": "fx-technical-trading-rules",
+     "cited_first_author": "Cornell",
+     "cited_year": 1978,
+     "context": "origin: Cornell and Dietrich (early test); Hsu, Taylor and Wang (large-scale test used here) (1978), Technical trading: Is it still beating the foreign exchange market? (Journal of International Economics 102, 2016)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 153",
+     "cited_first_author": "Hsu",
+     "cited_year": 2016,
+     "context": "aylor and Wang (2016). \"Technical trading: Is it still beating the foreign exchange market?\" Journal of International Economics 102, 188-208.** https://doi.org/10.1016/j.jinteco.2016.03.012. Tests ove"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 1978, 2016"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Cornell, Hsu"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/fx-technical-trading-rules.json origin.source_url",
+     "type": "year",
+     "detail": "cites 1978, Crossref says 2016"
+    },
+    {
+     "place": "catalog/algorithms/fx-technical-trading-rules.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Cornell, Crossref says Hsu"
+    }
+   ]
+  },
+  {
+   "id": "10.1016/j.jinteco.2025.104114",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Commodity prices and the US dollar",
+    "first_author": "Rees",
+    "year": 2025,
+    "year_online": null,
+    "container": "Journal of International Economics",
+    "authors": [
+     "Rees"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 116",
+     "cited_first_author": "Rees",
+     "cited_year": 2025,
+     "context": "17. **Rees (2025). \"Commodity prices and the US dollar.\" Journal of International Economics 157, 104114.** https://doi.org/10.1016/j.jinteco.2025.104114 After "
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1016/s0022-1996(02)00072-7",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Commodity currencies",
+    "first_author": "Chen",
+    "year": 2003,
+    "year_online": null,
+    "container": "Journal of International Economics",
+    "authors": [
+     "Chen",
+     "Rogoff"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 41",
+     "cited_first_author": "Chen",
+     "cited_year": 2003,
+     "context": "| Chen and Rogoff (2003), \"Commodity currencies\", *Journal of International Economics*. [doi:10.1016/S0022-1996(02)00072-7](https://d"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1017/9781108883658",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Machine Learning for Asset Managers",
+    "first_author": "L\u00f3pez de Prado",
+    "year": 2020,
+    "year_online": 2020,
+    "container": "",
+    "authors": [
+     "L\u00f3pez de Prado"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 171",
+     "cited_first_author": "Elements",
+     "cited_year": 2020,
+     "context": "ning for Asset Managers* (Cambridge Elements, 2020) | Short companion to his 2018 book, focused on avoiding false discoveries | No (low cost) | https://doi.org/10.1017/9781108883658 |"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "docs/research/0001-reading-list.md line 171",
+     "type": "first-author",
+     "detail": "names Elements, Crossref says L\u00f3pez de Prado"
+    }
+   ]
+  },
+  {
+   "id": "10.1017/s0022109009090103",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Adaptive Markets Hypothesis: Evidence from the Foreign Exchange Market",
+    "first_author": "Neely",
+    "year": 2009,
+    "year_online": 2009,
+    "container": "Journal of Financial and Quantitative Analysis",
+    "authors": [
+     "Neely",
+     "Weller",
+     "Ulrich"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 146",
+     "cited_first_author": "Neely",
+     "cited_year": 2009,
+     "context": " \"The Adaptive Markets Hypothesis: Evidence from the Foreign Exchange Market.\" Journal of Financial and Quantitative Analysis 44(2), 467-488.** https://doi.org/10.1017/S0022109009090103 (SSRN: https:/"
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 94",
+     "cited_first_author": "Neely",
+     "cited_year": 2009,
+     "context": "ia our earlier note), and the FX results above point the same way. Technical FX profits also shrank over time ([Neely, Weller and Ulrich, 2009](https://doi.org/10.1017/S0022109009090103), via our earl"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1080/14697680701381228",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "High-frequency trading in a limit order book",
+    "first_author": "Avellaneda",
+    "year": 2008,
+    "year_online": null,
+    "container": "Quantitative Finance",
+    "authors": [
+     "Avellaneda",
+     "Stoikov"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/avellaneda-stoikov-market-making.json",
+     "where": "origin.source_url",
+     "slug": "avellaneda-stoikov-market-making",
+     "cited_first_author": "Avellaneda",
+     "cited_year": 2008,
+     "context": "origin: Avellaneda, Stoikov (2008), High-frequency trading in a limit order book (Quantitative Finance)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1080/14697680903124632",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Statistical arbitrage in the US equities market",
+    "first_author": "Avellaneda",
+    "year": 2010,
+    "year_online": null,
+    "container": "Quantitative Finance",
+    "authors": [
+     "Avellaneda",
+     "Lee"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/stat-arb-pca-residuals.json",
+     "where": "origin.source_url",
+     "slug": "stat-arb-pca-residuals",
+     "cited_first_author": "Avellaneda",
+     "cited_year": 2008,
+     "context": "origin: Avellaneda, Lee (2008), Statistical Arbitrage in the U.S. Equities Market (Quantitative Finance 2010; draft 2008)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/stat-arb-pca-residuals.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2008, Crossref says 2010"
+    }
+   ]
+  },
+  {
+   "id": "10.1080/17446540701206576",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Investment information content in Bollinger Bands?",
+    "first_author": "Lento",
+    "year": 2007,
+    "year_online": null,
+    "container": "Applied Financial Economics Letters",
+    "authors": [
+     "Lento",
+     "Gradojevic",
+     "Wright"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/bollinger-band-reversion-breakout.json",
+     "where": "origin.source_url",
+     "slug": "bollinger-band-reversion-breakout",
+     "cited_first_author": "Bollinger",
+     "cited_year": 2001,
+     "context": "origin: John Bollinger (2001), Bollinger on Bollinger Bands (McGraw-Hill, 2001); the bands were in use from the 1980s"
+    },
+    {
+     "file": "catalog/algorithms/bollinger-band-reversion-breakout.json",
+     "where": "reported_results[0].source_url",
+     "slug": "bollinger-band-reversion-breakout",
+     "cited_first_author": "Lento",
+     "cited_year": 2007,
+     "context": "reported_results source: Lento, Gradojevic and Wright (2007), Applied Financial Economics Letters, abstract"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 2001, 2007"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Bollinger, Lento"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/bollinger-band-reversion-breakout.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2001, Crossref says 2007"
+    },
+    {
+     "place": "catalog/algorithms/bollinger-band-reversion-breakout.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Bollinger, Crossref says Lento"
+    }
+   ]
+  },
+  {
+   "id": "10.1080/19312458.2022.2128099",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Lifting the Veil on the Use of Big Data News Repositories: A Documentation and Critical Discussion of A Protest Event Analysis",
+    "first_author": "Hoffmann",
+    "year": 2022,
+    "year_online": 2022,
+    "container": "Communication Methods and Measures",
+    "authors": [
+     "Hoffmann",
+     "Santos",
+     "Neumayer",
+     "Mercea"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0003-forums-and-practitioners.md",
+     "where": "line 182",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "found only 21% of valid URLs behind protest events described an actual protest ([Communication Methods and Measures, 2022](https://www.tandfonline.com/doi/full/10.1080/19312458.2022.2128099)). Its DOC"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1086/324391",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Order Flow and Exchange Rate Dynamics",
+    "first_author": "Evans",
+    "year": 2002,
+    "year_online": null,
+    "container": "Journal of Political Economy",
+    "authors": [
+     "Evans",
+     "Lyons"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 39",
+     "cited_first_author": "Evans",
+     "cited_year": 2002,
+     "context": "| Evans and Lyons (2002), \"Order flow and exchange rate dynamics\", *Journal of Political Economy*. [doi:10.1086/324391](https://doi.org/10.1086/"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1086/429137",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Exchange Rates and Fundamentals",
+    "first_author": "Engel",
+    "year": 2005,
+    "year_online": null,
+    "container": "Journal of Political Economy",
+    "authors": [
+     "Engel",
+     "West"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 42",
+     "cited_first_author": "Engel",
+     "cited_year": 2005,
+     "context": "| Engel and West (2005), \"Exchange rates and fundamentals\", *Journal of Political Economy*. [doi:10.1086/429137](https://doi.org/10.1086/"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1093/rfs/1.4.403",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Are Seasonal Anomalies Real? A Ninety-Year Perspective",
+    "first_author": "Lakonishok",
+    "year": 1988,
+    "year_online": 1988,
+    "container": "Review of Financial Studies",
+    "authors": [
+     "Lakonishok",
+     "Smidt"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/turn-of-the-month.json",
+     "where": "origin.source_url",
+     "slug": "turn-of-the-month",
+     "cited_first_author": "Lakonishok",
+     "cited_year": 1988,
+     "context": "origin: Lakonishok, Smidt (1988), Are Seasonal Anomalies Real? A Ninety-Year Perspective (Review of Financial Studies)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1093/rfs/hhaa009",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Empirical Asset Pricing via Machine Learning",
+    "first_author": "Gu",
+    "year": 2020,
+    "year_online": 2020,
+    "container": "The Review of Financial Studies",
+    "authors": [
+     "Gu",
+     "Kelly",
+     "Xiu"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 154",
+     "cited_first_author": "Gu",
+     "cited_year": 2020,
+     "context": "- **Gu, Kelly and Xiu (2020). \"Empirical Asset Pricing via Machine Learning.\" Review of Financial Studies 33(5), 2223-2273.** https://doi.org/10.1093/rfs/hhaa009. Trees and neural ne"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1093/rfs/hhj020",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Pairs Trading: Performance of a Relative-Value Arbitrage Rule",
+    "first_author": "Gatev",
+    "year": 2006,
+    "year_online": 2006,
+    "container": "Review of Financial Studies",
+    "authors": [
+     "Gatev",
+     "Goetzmann",
+     "Rouwenhorst"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "origin.source_url",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "Gatev",
+     "cited_year": 1999,
+     "context": "origin: Gatev, Goetzmann, Rouwenhorst (1999), Pairs Trading: Performance of a Relative-Value Arbitrage Rule (NBER WP 7032, 1999; Review of Financial Studies 2006)"
+    },
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "reported_results[0].source_url",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "Gatev",
+     "cited_year": 2006,
+     "context": "reported_results source: Gatev, Goetzmann and Rouwenhorst (2006), RFS abstract"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 1999, 2006"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/pairs-trading-distance.json origin.source_url",
+     "type": "year",
+     "detail": "cites 1999, Crossref says 2006"
+    }
+   ]
+  },
+  {
+   "id": "10.1093/rfs/hhr068",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Common Risk Factors in Currency Markets",
+    "first_author": "Lustig",
+    "year": 2011,
+    "year_online": 2011,
+    "container": "Review of Financial Studies",
+    "authors": [
+     "Lustig",
+     "Roussanov",
+     "Verdelhan"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 45",
+     "cited_first_author": "Lustig",
+     "cited_year": 2011,
+     "context": "| Lustig, Roussanov and Verdelhan (2011), \"Common risk factors in currency markets\", *Review of Financial Studies*. [doi:10.1093/rfs/hhr068](https://doi.org/10.1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1093/rfs/hhv059",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "\u2026 and the Cross-Section of Expected Returns",
+    "first_author": "Harvey",
+    "year": 2016,
+    "year_online": 2015,
+    "container": "Review of Financial Studies",
+    "authors": [
+     "Harvey",
+     "Liu",
+     "Zhu"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 54",
+     "cited_first_author": "Harvey",
+     "cited_year": 2016,
+     "context": "| Harvey, Liu and Zhu (2016), \"... and the cross-section of expected returns\", *Review of Financial Studies*. [doi:10.1093/rfs/hhv059](https://doi.org/10.1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1093/rfs/hhy131",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Replicating Anomalies",
+    "first_author": "Hou",
+    "year": 2020,
+    "year_online": 2018,
+    "container": "The Review of Financial Studies",
+    "authors": [
+     "Hou",
+     "Xue",
+     "Zhang"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 137",
+     "cited_first_author": "Hou",
+     "cited_year": 2020,
+     "context": "22. **Hou, Xue and Zhang (2020). \"Replicating Anomalies.\" Review of Financial Studies 33(5), 2019-2133.** https://doi.org/10.1093/rfs/hhy131 65% of 452 equity"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/0022-1082.00342",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Profitability of Momentum Strategies: An Evaluation of Alternative Explanations",
+    "first_author": "Jegadeesh",
+    "year": 2001,
+    "year_online": 2002,
+    "container": "The Journal of Finance",
+    "authors": [
+     "Jegadeesh",
+     "Titman"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/equity-cross-sectional-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "equity-cross-sectional-momentum",
+     "cited_first_author": "Jegadeesh",
+     "cited_year": 2001,
+     "context": "Jegadeesh and Titman (2001, https://doi.org/10.1111/0022-1082.00342) report that momentum profits contin"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/j.1540-6261.1992.tb04398.x",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Cross\u2010Section of Expected Stock Returns",
+    "first_author": "FAMA",
+    "year": 1992,
+    "year_online": 2012,
+    "container": "The Journal of Finance",
+    "authors": [
+     "FAMA",
+     "FRENCH"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/value-hml.json",
+     "where": "origin.source_url",
+     "slug": "value-hml",
+     "cited_first_author": "Fama",
+     "cited_year": 1992,
+     "context": "origin: Fama, French (1992), The Cross-Section of Expected Stock Returns"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/j.1540-6261.1992.tb04681.x",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Simple Technical Trading Rules and the Stochastic Properties of Stock Returns",
+    "first_author": "BROCK",
+    "year": 1992,
+    "year_online": 2012,
+    "container": "The Journal of Finance",
+    "authors": [
+     "BROCK",
+     "LAKONISHOK",
+     "LeBARON"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/golden-cross-50-200.json",
+     "where": "origin.source_url",
+     "slug": "golden-cross-50-200",
+     "cited_first_author": null,
+     "cited_year": 1992,
+     "context": "origin: Retail and press lore; first rigorous test of the 200-day family by Brock, Lakonishok and LeBaron (1992), Simple technical trading rules and the stochastic properties of stock returns (Journal of Finance 47, 1992)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/j.1540-6261.1993.tb04702.x",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency",
+    "first_author": "JEGADEESH",
+    "year": 1993,
+    "year_online": 2012,
+    "container": "The Journal of Finance",
+    "authors": [
+     "JEGADEESH",
+     "TITMAN"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/equity-cross-sectional-momentum.json",
+     "where": "origin.source_url",
+     "slug": "equity-cross-sectional-momentum",
+     "cited_first_author": "Jegadeesh",
+     "cited_year": 1993,
+     "context": "origin: Jegadeesh, Titman (1993), Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/j.1540-6261.2012.01728.x",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Carry Trades and Global Foreign Exchange Volatility",
+    "first_author": "MENKHOFF",
+    "year": 2012,
+    "year_online": 2012,
+    "container": "The Journal of Finance",
+    "authors": [
+     "MENKHOFF",
+     "SARNO",
+     "SCHMELING",
+     "SCHRIMPF"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 46",
+     "cited_first_author": "Menkhoff",
+     "cited_year": 2012,
+     "context": "| Menkhoff, Sarno, Schmeling and Schrimpf (2012), \"Carry trades and global foreign exchange volatility\", *Journal of Finance*. [doi:10.1111/j.1540-6261.2012.01728.x](https:"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/joes.70159",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Macroeconomic News and Exchange Rates: A Meta\u2010Analysis of Event Studies",
+    "first_author": "Bortnikova",
+    "year": 2026,
+    "year_online": 2026,
+    "container": "Journal of Economic Surveys",
+    "authors": [
+     "Bortnikova",
+     "Bajzik",
+     "Kocenda"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 102",
+     "cited_first_author": "Bortnikova",
+     "cited_year": 2026,
+     "context": "economic News and Exchange Rates: A Meta-Analysis of Event Studies.\" Journal of Economic Surveys (online September 2026).** https://onlinelibrary.wiley.com/doi/10.1111/joes.70159 (working paper: https"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/jofi.12021",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Value and Momentum Everywhere",
+    "first_author": "ASNESS",
+    "year": 2013,
+    "year_online": 2013,
+    "container": "The Journal of Finance",
+    "authors": [
+     "ASNESS",
+     "MOSKOWITZ",
+     "PEDERSEN"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 50",
+     "cited_first_author": "Asness",
+     "cited_year": 2013,
+     "context": "| Asness, Moskowitz and Pedersen (2013), \"Value and momentum everywhere\", *Journal of Finance*. [doi:10.1111/jofi.12021](https://doi.org/10.1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/jofi.12196",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Pre\u2010FOMC Announcement Drift",
+    "first_author": "LUCCA",
+    "year": 2015,
+    "year_online": 2015,
+    "container": "The Journal of Finance",
+    "authors": [
+     "LUCCA",
+     "MOENCH"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/pre-fomc-drift.json",
+     "where": "origin.source_url",
+     "slug": "pre-fomc-drift",
+     "cited_first_author": "Lucca",
+     "cited_year": 2011,
+     "context": "origin: Lucca and Moench (2011), The pre-FOMC announcement drift (Journal of Finance 70(1), 2015; first FRBNY staff report 2011)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/pre-fomc-drift.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2011, Crossref says 2015"
+    }
+   ]
+  },
+  {
+   "id": "10.1111/jofi.12365",
+   "type": "doi",
+   "places_count": 12,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Does Academic Research Destroy Stock Return Predictability?",
+    "first_author": "MCLEAN",
+    "year": 2016,
+    "year_online": 2016,
+    "container": "The Journal of Finance",
+    "authors": [
+     "MCLEAN",
+     "PONTIFF"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/betting-against-beta.json",
+     "where": "post_publication_evidence",
+     "slug": "betting-against-beta",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/commodity-time-series-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "commodity-time-series-momentum",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/equity-cross-sectional-momentum.json",
+     "where": "post_publication_evidence",
+     "slug": "equity-cross-sectional-momentum",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/managed-futures-trend-following.json",
+     "where": "post_publication_evidence",
+     "slug": "managed-futures-trend-following",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "post_publication_evidence",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/stat-arb-pca-residuals.json",
+     "where": "post_publication_evidence",
+     "slug": "stat-arb-pca-residuals",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/trend-plus-carry-combined.json",
+     "where": "post_publication_evidence",
+     "slug": "trend-plus-carry-combined",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/turn-of-the-month.json",
+     "where": "post_publication_evidence",
+     "slug": "turn-of-the-month",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "catalog/algorithms/value-hml.json",
+     "where": "post_publication_evidence",
+     "slug": "value-hml",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "ff (2016) find that across 97 published stock return predictors, portfolio returns are 26% lower out of sample and 58% lower after publication (https://doi.org/10.1111/jofi.12365)."
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 140",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "23. **McLean and Pontiff (2016). \"Does Academic Research Destroy Stock Return Predictability?\" Journal of Finance 71(1), 5-32.** https://doi.org/10.1111/jofi.12365 Equity anomaly re"
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 94",
+     "cited_first_author": "McLean",
+     "cited_year": 2016,
+     "context": "able claim is that published edges shrink. That has support: equity anomaly returns are 58% lower after publication ([McLean and Pontiff, 2016](https://doi.org/10.1111/jofi.12365), via our earlier not"
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 146",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "5. **Expect decay.** Published edges shrink ([McLean and Pontiff](https://doi.org/10.1111/jofi.12365); [Hutchinson et al.]"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/jofi.12513",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Volatility\u2010Managed Portfolios",
+    "first_author": "MOREIRA",
+    "year": 2017,
+    "year_online": 2017,
+    "container": "The Journal of Finance",
+    "authors": [
+     "MOREIRA",
+     "MUIR"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "origin.source_url",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": "Moreira",
+     "cited_year": 2016,
+     "context": "origin: Moreira, Muir (2016), Volatility-Managed Portfolios (NBER WP 22208, 2016; Journal of Finance 2017)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/volatility-managed-portfolios.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2016, Crossref says 2017"
+    }
+   ]
+  },
+  {
+   "id": "10.1111/jofi.12587",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Share of Systematic Variation in Bilateral Exchange Rates",
+    "first_author": "VERDELHAN",
+    "year": 2018,
+    "year_online": 2017,
+    "container": "The Journal of Finance",
+    "authors": [
+     "VERDELHAN"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 73",
+     "cited_first_author": "Verdelhan",
+     "cited_year": 2018,
+     "context": "4. **Verdelhan (2018). \"The Share of Systematic Variation in Bilateral Exchange Rates.\" Journal of Finance 73(1), 375-418.** https://doi.org/10.1111/jofi.12587 Two factors (a dol"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/jofi.13119",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Common Risk Factors in Cryptocurrency",
+    "first_author": "LIU",
+    "year": 2022,
+    "year_online": 2022,
+    "container": "The Journal of Finance",
+    "authors": [
+     "LIU",
+     "TSYVINSKI",
+     "WU"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-cross-sectional-factors.json",
+     "where": "origin.source_url",
+     "slug": "crypto-cross-sectional-factors",
+     "cited_first_author": "Liu",
+     "cited_year": 2019,
+     "context": "origin: Liu, Tsyvinski, Wu (2019), Common Risk Factors in Cryptocurrency (NBER w25882; Journal of Finance 2022)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/crypto-cross-sectional-factors.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2019, Crossref says 2022"
+    }
+   ]
+  },
+  {
+   "id": "10.1111/jofi.13249",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Is There a Replication Crisis in Finance?",
+    "first_author": "JENSEN",
+    "year": 2023,
+    "year_online": 2023,
+    "container": "The Journal of Finance",
+    "authors": [
+     "JENSEN",
+     "KELLY",
+     "PEDERSEN"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 157",
+     "cited_first_author": "Jensen",
+     "cited_year": 2023,
+     "context": "- **Jensen, Kelly and Pedersen (2023). \"Is There a Replication Crisis in Finance?\" Journal of Finance 78(5), 2465-2518.** https://doi.org/10.1111/jofi.13249. The counterpoint to "
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1111/jofi.13395",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "A Multifactor Perspective on Volatility\u2010Managed Portfolios",
+    "first_author": "DeMIGUEL",
+    "year": 2024,
+    "year_online": 2024,
+    "container": "The Journal of Finance",
+    "authors": [
+     "DeMIGUEL",
+     "MART\u00cdN\u2010UTRERA",
+     "UPPAL"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "post_publication_evidence",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": "DeMiguel",
+     "cited_year": 2024,
+     "context": "generally earn lower Sharpe ratios than the unmanaged portfolios (abstract read via Semantic Scholar). DeMiguel, Martin-Utrera and Uppal (2024, https://doi.org/10.1111/jofi.13395) note Barroso and Detzel find they do not"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1155/2014/457636",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Effect of Temperature Shock and Inventory Surprises on Natural Gas and Heating Oil Futures Returns",
+    "first_author": "Hu",
+    "year": 2014,
+    "year_online": null,
+    "container": "The Scientific World Journal",
+    "authors": [
+     "Hu",
+     "Hu",
+     "Lin"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/natural-gas-storage-report.json",
+     "where": "reported_results[1].source_url",
+     "slug": "natural-gas-storage-report",
+     "cited_first_author": "Hu",
+     "cited_year": 2014,
+     "context": "reported_results source: Hu, Hu and Lin (2014), The Scientific World Journal (full text via Europe PMC PMC4122141)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1162/qjec.2010.125.3.1145",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Can Exchange Rates Forecast Commodity Prices?\n                    <sup>*</sup>",
+    "first_author": "Chen",
+    "year": 2010,
+    "year_online": null,
+    "container": "Quarterly Journal of Economics",
+    "authors": [
+     "Chen",
+     "Rogoff",
+     "Rossi"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 44",
+     "cited_first_author": "Chen",
+     "cited_year": 2010,
+     "context": "| Chen, Rogoff and Rossi (2010), \"Can exchange rates forecast commodity prices?\", *Quarterly Journal of Economics*. [doi:10.1162/qjec.2010.125.3.1145](https://do"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1257/000282802762024683",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Halloween Indicator, \u201cSell in May and Go Away\u201d: Another Puzzle",
+    "first_author": "Bouman",
+    "year": 2002,
+    "year_online": null,
+    "container": "American Economic Review",
+    "authors": [
+     "Bouman",
+     "Jacobsen"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/sell-in-may-halloween.json",
+     "where": "origin.source_url",
+     "slug": "sell-in-may-halloween",
+     "cited_first_author": "Bouman",
+     "cited_year": 2002,
+     "context": "origin: Bouman, Jacobsen (2002), The Halloween Indicator, Sell in May and Go Away: Another Puzzle (American Economic Review)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1257/000282803321455151",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Micro Effects of Macro Announcements: Real-Time Price Discovery in Foreign Exchange",
+    "first_author": "Anderson",
+    "year": 2003,
+    "year_online": null,
+    "container": "American Economic Review",
+    "authors": [
+     "Anderson",
+     "Bollerslev",
+     "Diebold",
+     "Vega"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 40",
+     "cited_first_author": "Andersen",
+     "cited_year": 2003,
+     "context": "| Andersen, Bollerslev, Diebold and Vega (2003), \"Micro effects of macro announcements\", *American Economic Review*. [doi:10.1257/000282803321455151](https://doi."
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "docs/research/0001-reading-list.md line 40",
+     "type": "first-author",
+     "detail": "names Andersen, Crossref says Anderson"
+    }
+   ]
+  },
+  {
+   "id": "10.1257/aer.99.3.1053",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Not All Oil Price Shocks Are Alike: Disentangling Demand and Supply Shocks in the Crude Oil Market",
+    "first_author": "Kilian",
+    "year": 2009,
+    "year_online": null,
+    "container": "American Economic Review",
+    "authors": [
+     "Kilian"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 43",
+     "cited_first_author": "Kilian",
+     "cited_year": 2009,
+     "context": "| Kilian (2009), \"Not all oil price shocks are alike\", *American Economic Review*. [doi:10.1257/aer.99.3.1053](https://doi.org/1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1257/jel.51.4.1063",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Exchange Rate Predictability",
+    "first_author": "Rossi",
+    "year": 2013,
+    "year_online": null,
+    "container": "Journal of Economic Literature",
+    "authors": [
+     "Rossi"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 51",
+     "cited_first_author": "Rossi",
+     "cited_year": 2013,
+     "context": "| Rossi (2013), \"Exchange rate predictability\", *Journal of Economic Literature*. [doi:10.1257/jel.51.4.1063](https://doi.org/1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.12660/rbfin.v23n1.2025.94291",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The COVID-19 and day-trade pandemics in Brazil",
+    "first_author": "Chague",
+    "year": 2025,
+    "year_online": 2025,
+    "container": "Brazilian Review of Finance",
+    "authors": [
+     "Chague",
+     "Giovannetti"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/one-minute-scalping.json",
+     "where": "reported_results[2].source_url",
+     "slug": "one-minute-scalping",
+     "cited_first_author": "Chague",
+     "cited_year": 2025,
+     "context": "reported_results source: Chague and Giovannetti (2025), The COVID-19 and day-trade pandemics in Brazil, Revista Brasileira de Financas, abstract"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.1287/mnsc.2019.3508",
+   "type": "doi",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Copy Trading",
+    "first_author": "Apesteguia",
+    "year": 2020,
+    "year_online": null,
+    "container": "Management Science",
+    "authors": [
+     "Apesteguia",
+     "Oechssler",
+     "Weidenholzer"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/copy-trading-signal-services.json",
+     "where": "origin.source_url",
+     "slug": "copy-trading-signal-services",
+     "cited_first_author": null,
+     "cited_year": 2010,
+     "context": "origin: Platforms such as eToro, ZuluTrade and MetaTrader signals; Telegram and Discord signal groups (2010), Platform launches around 2010 (date approximate); academic study by Apesteguia, Oechssler and Weidenholzer (2020)"
+    },
+    {
+     "file": "catalog/algorithms/copy-trading-signal-services.json",
+     "where": "reported_results[0].source_url",
+     "slug": "copy-trading-signal-services",
+     "cited_first_author": "Apesteguia",
+     "cited_year": 2020,
+     "context": "reported_results source: Apesteguia, Oechssler and Weidenholzer (2020), Copy trading, Management Science, abstract"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 2010, 2020"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/copy-trading-signal-services.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2010, Crossref says 2020"
+    }
+   ]
+  },
+  {
+   "id": "10.21314/jcf.2016.322",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The probability of backtest overfitting",
+    "first_author": "Bailey",
+    "year": 2016,
+    "year_online": 2016,
+    "container": "The Journal of Computational Finance",
+    "authors": [
+     "Bailey",
+     "Borwein",
+     "L\u00f3pez de Prado",
+     "Zhu"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 55",
+     "cited_first_author": "Bailey",
+     "cited_year": 2016,
+     "context": "| Bailey, Borwein, Lopez de Prado and Zhu (2016), \"The probability of backtest overfitting\", *Journal of Computational Finance*. [doi:10.21314/JCF.2016.322](https://doi.org/1"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.2307/2975974",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "error": "no record (HTTP 429)"
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/sixty-forty-portfolio.json",
+     "where": "origin.source_url",
+     "slug": "sixty-forty-portfolio",
+     "cited_first_author": "Industry",
+     "cited_year": 1952,
+     "context": "origin: Industry convention; mean-variance theory from Markowitz (1952), Portfolio Selection (Markowitz 1952) as the theory; the 60/40 split itself has no single paper"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.2469/faj.v62.n2.4083",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Facts and Fantasies about Commodity Futures",
+    "first_author": "Gorton",
+    "year": 2006,
+    "year_online": 2019,
+    "container": "Financial Analysts Journal",
+    "authors": [
+     "Gorton",
+     "Rouwenhorst"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "origin.source_url",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": "Gorton",
+     "cited_year": 2004,
+     "context": "origin: Gorton, Rouwenhorst (2004), Facts and Fantasies about Commodity Futures (NBER WP 10595, 2004; Financial Analysts Journal 2006)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/commodity-carry-roll-yield.json origin.source_url",
+     "type": "year",
+     "detail": "cites 2004, Crossref says 2006 (online 2019)"
+    }
+   ]
+  },
+  {
+   "id": "10.2469/faj.v66.n4.1",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Does Simple Pairs Trading Still Work?",
+    "first_author": "Do",
+    "year": 2010,
+    "year_online": 2018,
+    "container": "Financial Analysts Journal",
+    "authors": [
+     "Do",
+     "Faff"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "post_publication_evidence",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "Do",
+     "cited_year": 2010,
+     "context": "Do and Faff (2010, https://doi.org/10.2469/faj.v66.n4.1) confirm a continuing downward trend in"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.2469/faj.v68.n1.1",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Leverage Aversion and Risk Parity",
+    "first_author": "Asness",
+    "year": 2012,
+    "year_online": 2018,
+    "container": "Financial Analysts Journal",
+    "authors": [
+     "Asness",
+     "Frazzini",
+     "Pedersen"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/risk-parity.json",
+     "where": "origin.source_url",
+     "slug": "risk-parity",
+     "cited_first_author": "Asness",
+     "cited_year": 2012,
+     "context": "origin: Asness, Frazzini, Pedersen (2012), Leverage Aversion and Risk Parity (Financial Analysts Journal)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.2469/faj.v69.n4.4",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "\u201cSell in May and Go Away\u201d Just Won\u2019t Go           Away",
+    "first_author": "Andrade",
+    "year": 2013,
+    "year_online": 2018,
+    "container": "Financial Analysts Journal",
+    "authors": [
+     "Andrade",
+     "Chhaochharia",
+     "Fuerst"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/sell-in-may-halloween.json",
+     "where": "post_publication_evidence",
+     "slug": "sell-in-may-halloween",
+     "cited_first_author": "Andrade",
+     "cited_year": 2013,
+     "context": "sonal gap persisted after 1998 in US data but shrank after 2002 (catalog computation from French data). Andrade, Chhaochharia and Fuerst (2013, https://doi.org/10.2469/faj.v69.n4.4) titled their out-of-sample study 'Sell"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.3390/jrfm7010001",
+   "type": "doi",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": {
+    "registry": "Crossref",
+    "title": "Revisiting the Performance of MACD and RSI Oscillators",
+    "first_author": "Chong",
+    "year": 2014,
+    "year_online": 2014,
+    "container": "Journal of Risk and Financial Management",
+    "authors": [
+     "Chong",
+     "Ng",
+     "Liew"
+    ]
+   },
+   "places": [
+    {
+     "file": "catalog/algorithms/macd-crossover.json",
+     "where": "origin.source_url",
+     "slug": "macd-crossover",
+     "cited_first_author": "Appel",
+     "cited_year": 1979,
+     "context": "origin: Gerald Appel (1979), Moving Average Convergence-Divergence, introduced in Appel's newsletters in the late 1970s (date approximate)"
+    },
+    {
+     "file": "catalog/algorithms/macd-crossover.json",
+     "where": "reported_results[0].source_url",
+     "slug": "macd-crossover",
+     "cited_first_author": "Chong",
+     "cited_year": 2014,
+     "context": "reported_results source: Chong, Ng and Liew (2014), Journal of Risk and Financial Management 7(1), abstract"
+    },
+    {
+     "file": "catalog/algorithms/rsi-overbought-oversold.json",
+     "where": "reported_results[0].source_url",
+     "slug": "rsi-overbought-oversold",
+     "cited_first_author": "Chong",
+     "cited_year": 2014,
+     "context": "reported_results source: Chong, Ng and Liew (2014), abstract"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 1979, 2014"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Appel, Chong"
+    }
+   ],
+   "registry_mismatches": [
+    {
+     "place": "catalog/algorithms/macd-crossover.json origin.source_url",
+     "type": "year",
+     "detail": "cites 1979, Crossref says 2014"
+    },
+    {
+     "place": "catalog/algorithms/macd-crossover.json origin.source_url",
+     "type": "first-author",
+     "detail": "names Appel, Crossref says Chong"
+    }
+   ]
+  },
+  {
+   "id": "10.3905/jpm.2014.40.5.094",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "The Deflated Sharpe Ratio:\n                    <i>Correcting for Selection Bias, Backtest</i>\n                    <i>Overfitting, and Non-Normality</i>",
+    "first_author": "Bailey",
+    "year": 2014,
+    "year_online": 2014,
+    "container": "The Journal of Portfolio Management",
+    "authors": [
+     "Bailey",
+     "L\u00f3pez de Prado"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 52",
+     "cited_first_author": "Bailey",
+     "cited_year": 2014,
+     "context": "| Bailey and Lopez de Prado (2014), \"The deflated Sharpe ratio\", *Journal of Portfolio Management*. [doi:10.3905/jpm.2014.40.5.094](https://doi.o"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "10.3905/jpm.2017.44.1.015",
+   "type": "doi",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": {
+    "registry": "Crossref",
+    "title": "A Century of Evidence on Trend-Following Investing",
+    "first_author": "Hurst",
+    "year": 2017,
+    "year_online": 2017,
+    "container": "The Journal of Portfolio Management",
+    "authors": [
+     "Hurst",
+     "Ooi",
+     "Pedersen"
+    ]
+   },
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 88",
+     "cited_first_author": "Hurst",
+     "cited_year": 2017,
+     "context": "9. **Hurst, Ooi and Pedersen (2017). \"A Century of Evidence on Trend-Following Investing.\" Journal of Portfolio Management 44(1), 15-29.** https://doi.org/10.3905/jpm.2017.44.1.015 (SSRN: https:/"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w10595",
+   "type": "nber",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "origin.source_title",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Facts and Fantasies about Commodity Futures (NBER WP 10595, 2004; Financial Analysts Journal 2006)"
+    },
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "reported_results[0].source_url",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": "Gorton",
+     "cited_year": 2004,
+     "context": "reported_results source: Gorton and Rouwenhorst (2004 NBER version), Table 8, High minus Low basis"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w11243",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 98",
+     "cited_first_author": "Lo",
+     "cited_year": 2005,
+     "context": "th intense emotional reactions to gains and losses did significantly worse. The study found no distinct \"trader personality\" ([Lo, Repin and Steenbarger, 2005, NBER w11243](https://www.nber.org/papers"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w14054",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 151",
+     "cited_first_author": "Burnside",
+     "cited_year": 2011,
+     "context": "ichenbaum, Kleshchelski and Rebelo (2011). \"Do Peso Problems Explain the Returns to the Carry Trade?\" Review of Financial Studies 24(3), 853-891.** https://www.nber.org/papers/w14054. Carry payoffs ma"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w14082",
+   "type": "nber",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "origin.source_title",
+     "slug": "fx-carry-g10",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Common risk factors in currency markets (NBER WP 14082; Review of Financial Studies 24(11), 2011)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "origin.source_url",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Lustig",
+     "cited_year": 2008,
+     "context": "origin: Lustig, Roussanov, Verdelhan (2008), Common risk factors in currency markets (NBER WP 14082; Review of Financial Studies 24(11), 2011)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w14473",
+   "type": "nber",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/retail-swap-carry.json",
+     "where": "origin.source_title",
+     "slug": "retail-swap-carry",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Carry trades and currency crashes (NBER Macroeconomics Annual 2008; NBER WP 14473)"
+    },
+    {
+     "file": "catalog/algorithms/retail-swap-carry.json",
+     "where": "origin.source_url",
+     "slug": "retail-swap-carry",
+     "cited_first_author": null,
+     "cited_year": 2008,
+     "context": "origin: Retail practice (the 'Mrs Watanabe' yen carry); crash risk documented by Brunnermeier, Nagel and Pedersen (2008), Carry trades and currency crashes (NBER Macroeconomics Annual 2008; NBER WP 14473)"
+    },
+    {
+     "file": "catalog/algorithms/retail-swap-carry.json",
+     "where": "reported_results[0].source_url",
+     "slug": "retail-swap-carry",
+     "cited_first_author": "Brunnermeier",
+     "cited_year": 2008,
+     "context": "reported_results source: Brunnermeier, Nagel and Pedersen (2008), Table 2, 1 long and 1 short"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 49",
+     "cited_first_author": "Brunnermeier",
+     "cited_year": 2008,
+     "context": "| Brunnermeier, Nagel and Pedersen (2008), \"Carry trades and currency crashes\", *NBER Macroeconomics Annual*. [NBER w14473](https://www.nber.org/papers"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w15518",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 152",
+     "cited_first_author": "Jord\u00e0",
+     "cited_year": 2012,
+     "context": "- **Jord\u00e0 and Taylor (2012). \"The carry trade and fundamentals: Nothing to fear but FEER itself.\" Journal of International Economics 88, 74-90.** http://www.nber.org/papers/w15518.pdf. Adding a fai"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w16427",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-dollar-carry.json",
+     "where": "origin.source_title",
+     "slug": "fx-dollar-carry",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Countercyclical currency risk premia (NBER WP 16427; Journal of Financial Economics 111(3), 2014)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w16942",
+   "type": "nber",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[0].source",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Burnside",
+     "cited_year": 2011,
+     "context": "Burnside, Eichenbaum, Rebelo (2011), NBER WP 16942, Section 2.1 (momentum portfolio)"
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[0].source_url",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Burnside",
+     "cited_year": 2011,
+     "context": "reported_results source: Burnside, Eichenbaum, Rebelo (2011), NBER WP 16942, Section 2.1 (momentum portfolio)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w17998",
+   "type": "nber",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-oil-cad-daily.json",
+     "where": "origin.source_title",
+     "slug": "fx-oil-cad-daily",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "nge rates? An empirical analysis of the relationship between commodity prices and exchange rates (Journal of International Money and Finance 54, 116-141, 2015; NBER WP 17998)"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 89",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "l prices predict USD/CAD out of sample at a daily frequency, but not at monthly or quarterly ones. The predictive ability is short-lived and varies over time ([NBER w17998](https://www.nber.org/system"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 142",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "| Ferraro, Rogoff, Rossi ([NBER](https://www.nber.org/system/files/working_papers/w17"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w19325",
+   "type": "nber",
+   "places_count": 5,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "reported_results[2].source",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Koijen, Moskowitz, Pedersen and Vrugt, Carry (NBER WP 19325), Table II"
+    },
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "reported_results[2].source_url",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": "Koijen",
+     "cited_year": null,
+     "context": "reported_results source: Koijen, Moskowitz, Pedersen and Vrugt, Carry (NBER WP 19325), Table II"
+    },
+    {
+     "file": "catalog/algorithms/trend-plus-carry-combined.json",
+     "where": "origin.source_title",
+     "slug": "trend-plus-carry-combined",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Carry (NBER WP 19325, 2013; Journal of Financial Economics 2018)"
+    },
+    {
+     "file": "catalog/algorithms/trend-plus-carry-combined.json",
+     "where": "reported_results[0].source",
+     "slug": "trend-plus-carry-combined",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Koijen, Moskowitz, Pedersen and Vrugt, Carry (NBER WP 19325), Table II, global carry factor"
+    },
+    {
+     "file": "catalog/algorithms/trend-plus-carry-combined.json",
+     "where": "reported_results[0].source_url",
+     "slug": "trend-plus-carry-combined",
+     "cited_first_author": "Koijen",
+     "cited_year": null,
+     "context": "reported_results source: Koijen, Moskowitz, Pedersen and Vrugt, Carry (NBER WP 19325), Table II, global carry factor"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w20433",
+   "type": "nber",
+   "places_count": 13,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[2].source",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (EQ strategy)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[2].source_url",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "reported_results source: Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (EQ strategy)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[3].source",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (SPD strategy)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[3].source_url",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "reported_results source: Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (SPD strategy)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "origin.source_title",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "The carry trade: risks and drawdowns (NBER WP 20433; Critical Finance Review 2017)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "origin.source_url",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "origin: Daniel, Hodrick, Lu (2014), The carry trade: risks and drawdowns (NBER WP 20433; Critical Finance Review 2017)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[0].source",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (EQ-RR)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[0].source_url",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "reported_results source: Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (EQ-RR)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[1].source",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (SPD-RR)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[1].source_url",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "reported_results source: Daniel, Hodrick, Lu (2014), NBER WP 20433, Table 1 (SPD-RR)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[2].source",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "Daniel, Hodrick, Lu (2014), NBER WP 20433, Section 7 (unhedged EQ over option sample)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-volatility-timing.json",
+     "where": "reported_results[2].source_url",
+     "slug": "fx-carry-volatility-timing",
+     "cited_first_author": "Daniel",
+     "cited_year": 2014,
+     "context": "reported_results source: Daniel, Hodrick, Lu (2014), NBER WP 20433, Section 7 (unhedged EQ over option sample)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 76",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "5. **Daniel, Hodrick and Lu (2017). \"The Carry Trade: Risks and Drawdowns.\" Critical Finance Review 6(2), 211-262.** https://doi.org/10.2139/ssrn.2486275 (NBER w20433: https://www.nber.org/papers"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w21243",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/commodity-carry-roll-yield.json",
+     "where": "reported_results[1].source_url",
+     "slug": "commodity-carry-roll-yield",
+     "cited_first_author": "Bhardwaj",
+     "cited_year": 2015,
+     "context": "reported_results source: Bhardwaj, Gorton and Rouwenhorst (2015), Table 4, High minus Low basis, out of sample"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w22208",
+   "type": "nber",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "origin.source_title",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Volatility-Managed Portfolios (NBER WP 22208, 2016; Journal of Finance 2017)"
+    },
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "reported_results[0].source",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Moreira and Muir, NBER WP 22208"
+    },
+    {
+     "file": "catalog/algorithms/volatility-managed-portfolios.json",
+     "where": "reported_results[0].source_url",
+     "slug": "volatility-managed-portfolios",
+     "cited_first_author": "Moreira",
+     "cited_year": null,
+     "context": "reported_results source: Moreira and Muir, NBER WP 22208"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w24877",
+   "type": "nber",
+   "places_count": 9,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-google-search-attention.json",
+     "where": "origin.source_title",
+     "slug": "crypto-google-search-attention",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Risks and Returns of Cryptocurrency (NBER w24877; Review of Financial Studies 2021)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-google-search-attention.json",
+     "where": "reported_results[0].source",
+     "slug": "crypto-google-search-attention",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Liu and Tsyvinski NBER w24877, introduction and Section 4"
+    },
+    {
+     "file": "catalog/algorithms/crypto-google-search-attention.json",
+     "where": "reported_results[0].source_url",
+     "slug": "crypto-google-search-attention",
+     "cited_first_author": "Liu",
+     "cited_year": null,
+     "context": "reported_results source: Liu and Tsyvinski NBER w24877, introduction and Section 4"
+    },
+    {
+     "file": "catalog/algorithms/crypto-time-series-momentum.json",
+     "where": "origin.source_title",
+     "slug": "crypto-time-series-momentum",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Risks and Returns of Cryptocurrency (NBER w24877; Review of Financial Studies 2021)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-time-series-momentum.json",
+     "where": "reported_results[0].source",
+     "slug": "crypto-time-series-momentum",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Liu and Tsyvinski NBER w24877, Table 15"
+    },
+    {
+     "file": "catalog/algorithms/crypto-time-series-momentum.json",
+     "where": "reported_results[0].source_url",
+     "slug": "crypto-time-series-momentum",
+     "cited_first_author": "Liu",
+     "cited_year": null,
+     "context": "reported_results source: Liu and Tsyvinski NBER w24877, Table 15"
+    },
+    {
+     "file": "catalog/algorithms/crypto-time-series-momentum.json",
+     "where": "reported_results[1].source",
+     "slug": "crypto-time-series-momentum",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Liu and Tsyvinski NBER w24877, Table 17 (no lookahead)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-time-series-momentum.json",
+     "where": "reported_results[1].source_url",
+     "slug": "crypto-time-series-momentum",
+     "cited_first_author": "Liu",
+     "cited_year": null,
+     "context": "reported_results source: Liu and Tsyvinski NBER w24877, Table 17 (no lookahead)"
+    },
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 103",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "o momentum, academic.** Liu and Tsyvinski find strong time-series momentum at one- to four-week horizons, and that investor-attention proxies predict returns ([NBER w24877](https://www.nber.org/system"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w25398",
+   "type": "nber",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/ml-return-prediction-elastic-net.json",
+     "where": "origin.source_title",
+     "slug": "ml-return-prediction-elastic-net",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Empirical Asset Pricing via Machine Learning (NBER w25398; Review of Financial Studies 2020)"
+    },
+    {
+     "file": "catalog/algorithms/ml-return-prediction-elastic-net.json",
+     "where": "origin.source_url",
+     "slug": "ml-return-prediction-elastic-net",
+     "cited_first_author": "Gu",
+     "cited_year": 2018,
+     "context": "origin: Gu, Kelly, Xiu (2018), Empirical Asset Pricing via Machine Learning (NBER w25398; Review of Financial Studies 2020)"
+    },
+    {
+     "file": "catalog/algorithms/ml-return-prediction-elastic-net.json",
+     "where": "reported_results[0].source",
+     "slug": "ml-return-prediction-elastic-net",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Gu, Kelly, Xiu NBER w25398, introduction"
+    },
+    {
+     "file": "catalog/algorithms/ml-return-prediction-elastic-net.json",
+     "where": "reported_results[0].source_url",
+     "slug": "ml-return-prediction-elastic-net",
+     "cited_first_author": "Gu",
+     "cited_year": null,
+     "context": "reported_results source: Gu, Kelly, Xiu NBER w25398, introduction"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w25882",
+   "type": "nber",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/crypto-cross-sectional-factors.json",
+     "where": "origin.source_title",
+     "slug": "crypto-cross-sectional-factors",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Common Risk Factors in Cryptocurrency (NBER w25882; Journal of Finance 2022)"
+    },
+    {
+     "file": "catalog/algorithms/crypto-cross-sectional-factors.json",
+     "where": "reported_results[0].source",
+     "slug": "crypto-cross-sectional-factors",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Liu, Tsyvinski, Wu NBER w25882, Table 4"
+    },
+    {
+     "file": "catalog/algorithms/crypto-cross-sectional-factors.json",
+     "where": "reported_results[0].source_url",
+     "slug": "crypto-cross-sectional-factors",
+     "cited_first_author": "Liu",
+     "cited_year": null,
+     "context": "reported_results source: Liu, Tsyvinski, Wu NBER w25882, Table 4"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w32900",
+   "type": "nber",
+   "places_count": 14,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[4].source",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, no costs)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[4].source_url",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, no costs)"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[5].source",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, costs = 100 percent o"
+    },
+    {
+     "file": "catalog/algorithms/fx-carry-g10.json",
+     "where": "reported_results[5].source_url",
+     "slug": "fx-carry-g10",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Carry, G10, costs = 100 percent of quoted spread)"
+    },
+    {
+     "file": "catalog/algorithms/fx-cross-sectional-momentum.json",
+     "where": "reported_results[4].source",
+     "slug": "fx-cross-sectional-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Mom 12, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-cross-sectional-momentum.json",
+     "where": "reported_results[4].source_url",
+     "slug": "fx-cross-sectional-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Mom 12, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-dollar-carry.json",
+     "where": "reported_results[2].source",
+     "slug": "fx-dollar-carry",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (Dollar Carry, G10, no costs)"
+    },
+    {
+     "file": "catalog/algorithms/fx-dollar-carry.json",
+     "where": "reported_results[2].source_url",
+     "slug": "fx-dollar-carry",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (Dollar Carry, G10, no costs)"
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[2].source",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 12, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[2].source_url",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 12, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[3].source",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 1, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-time-series-momentum.json",
+     "where": "reported_results[3].source_url",
+     "slug": "fx-time-series-momentum",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (TS-Mom 1, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-value-ppp.json",
+     "where": "reported_results[2].source",
+     "slug": "fx-value-ppp",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Value, G10)"
+    },
+    {
+     "file": "catalog/algorithms/fx-value-ppp.json",
+     "where": "reported_results[2].source_url",
+     "slug": "fx-value-ppp",
+     "cited_first_author": "Chernov",
+     "cited_year": 2024,
+     "context": "reported_results source: Chernov, Dahlquist, Lochstoer (2024), NBER WP 32900, Table 1 (CS-Value, G10)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w7032",
+   "type": "nber",
+   "places_count": 3,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "origin.source_title",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Pairs Trading: Performance of a Relative-Value Arbitrage Rule (NBER WP 7032, 1999; Review of Financial Studies 2006)"
+    },
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "reported_results[1].source",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "Gatev",
+     "cited_year": 1999,
+     "context": "Gatev, Goetzmann and Rouwenhorst (1999), NBER WP 7032"
+    },
+    {
+     "file": "catalog/algorithms/pairs-trading-distance.json",
+     "where": "reported_results[1].source_url",
+     "slug": "pairs-trading-distance",
+     "cited_first_author": "Gatev",
+     "cited_year": 1999,
+     "context": "reported_results source: Gatev, Goetzmann and Rouwenhorst (1999), NBER WP 7032"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w7317",
+   "type": "nber",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-order-flow.json",
+     "where": "origin.source_title",
+     "slug": "fx-order-flow",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Order flow and exchange rate dynamics (Journal of Political Economy 110(1), 2002; NBER WP 7317, 1999)"
+    },
+    {
+     "file": "catalog/algorithms/fx-order-flow.json",
+     "where": "origin.source_url",
+     "slug": "fx-order-flow",
+     "cited_first_author": "Evans",
+     "cited_year": 1999,
+     "context": "origin: Evans and Lyons (1999), Order flow and exchange rate dynamics (Journal of Political Economy 110(1), 2002; NBER WP 7317, 1999)"
+    },
+    {
+     "file": "catalog/algorithms/fx-order-flow.json",
+     "where": "reported_results[0].source",
+     "slug": "fx-order-flow",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Evans and Lyons (NBER WP 7317), explanatory model"
+    },
+    {
+     "file": "catalog/algorithms/fx-order-flow.json",
+     "where": "reported_results[0].source_url",
+     "slug": "fx-order-flow",
+     "cited_first_author": "Evans",
+     "cited_year": null,
+     "context": "reported_results source: Evans and Lyons (NBER WP 7317), explanatory model"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w8959",
+   "type": "nber",
+   "places_count": 4,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-macro-news-surprise.json",
+     "where": "origin.source_title",
+     "slug": "fx-macro-news-surprise",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Micro effects of macro announcements: real-time price discovery in foreign exchange (American Economic Review 93(1), 2003; NBER WP 8959, 2002)"
+    },
+    {
+     "file": "catalog/algorithms/fx-macro-news-surprise.json",
+     "where": "origin.source_url",
+     "slug": "fx-macro-news-surprise",
+     "cited_first_author": "Andersen",
+     "cited_year": 2002,
+     "context": "origin: Andersen, Bollerslev, Diebold and Vega (2002), Micro effects of macro announcements: real-time price discovery in foreign exchange (American Economic Review 93(1), 2003; NBER WP 8959, 2002)"
+    },
+    {
+     "file": "catalog/algorithms/fx-macro-news-surprise.json",
+     "where": "reported_results[0].source",
+     "slug": "fx-macro-news-surprise",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "Andersen, Bollerslev, Diebold and Vega (NBER WP 8959), event study"
+    },
+    {
+     "file": "catalog/algorithms/fx-macro-news-surprise.json",
+     "where": "reported_results[0].source_url",
+     "slug": "fx-macro-news-surprise",
+     "cited_first_author": "Andersen",
+     "cited_year": null,
+     "context": "reported_results source: Andersen, Bollerslev, Diebold and Vega (NBER WP 8959), event study"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "w9433",
+   "type": "nber",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 96",
+     "cited_first_author": "Evans",
+     "cited_year": 2008,
+     "context": "11. **Evans and Lyons (2008). \"How is macro news transmitted to exchange rates?\" Journal of Financial Economics 88(1), 26-50.** https://www.nber.org/papers/w9433 About two thir"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "1403345",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 146",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "ket.\" Journal of Financial and Quantitative Analysis 44(2), 467-488.** https://doi.org/10.1017/S0022109009090103 (SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1403345) Profits from te"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "1541230",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 70",
+     "cited_first_author": "Lustig",
+     "cited_year": 2014,
+     "context": "3. **Lustig, Roussanov and Verdelhan (2014). \"Countercyclical currency risk premia.\" Journal of Financial Economics 111(3), 527-553.** https://ssrn.com/abstract=1541230 (author PDF: h"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2041460",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 82",
+     "cited_first_author": "Barroso",
+     "cited_year": 2015,
+     "context": "eyond the Carry Trade: Optimal Currency Portfolios.\" Journal of Financial and Quantitative Analysis 50(5), 1037-1056.** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2041460 Carry, momentum a"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2042750",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/dual-momentum.json",
+     "where": "origin.source_url",
+     "slug": "dual-momentum",
+     "cited_first_author": "Antonacci",
+     "cited_year": 2012,
+     "context": "origin: Antonacci (2012), Risk Premia Harvesting Through Dual Momentum (SSRN); book Dual Momentum Investing (2014)"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2156623",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 178",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - Published equity anomalies lose 58% of their returns after publication ([McLean and Pontiff](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623))."
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2233367",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 67",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "e predictability.\" Journal of Financial Economics 120(1), 21-40.** https://doi.org/10.1016/j.jfineco.2016.02.015 (SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367) Selling currenci"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2460551",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0002-open-source-and-public-results.md",
+     "where": "line 157",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": " - Tools to use: the Deflated Sharpe Ratio ([Bailey and Lopez de Prado](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551)) and a t-statistic "
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2486275",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 76",
+     "cited_first_author": "Daniel",
+     "cited_year": 2017,
+     "context": "5. **Daniel, Hodrick and Lu (2017). \"The Carry Trade: Risks and Drawdowns.\" Critical Finance Review 6(2), 211-262.** https://doi.org/10.2139/ssrn.2486275 (NBER w20433: https"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2628581",
+   "type": "ssrn",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": true,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/ichimoku-cloud.json",
+     "where": "origin.source_url",
+     "slug": "ichimoku-cloud",
+     "cited_first_author": "Hosoda",
+     "cited_year": 1969,
+     "context": "origin: Goichi Hosoda (1969), Ichimoku Kinko Hyo books, commonly dated to 1969 (date as usually cited, not verified)"
+    },
+    {
+     "file": "catalog/algorithms/ichimoku-cloud.json",
+     "where": "reported_results[0].source_url",
+     "slug": "ichimoku-cloud",
+     "cited_first_author": "Lim",
+     "cited_year": 2016,
+     "context": "reported_results source: Lim, Yanyali and Savidge (2016), Do Ichimoku cloud charts work and do they work better in Japan?, abstract"
+    }
+   ],
+   "disagreements": [
+    {
+     "type": "year",
+     "detail": "places cite different years: 1969, 2016"
+    },
+    {
+     "type": "first-author",
+     "detail": "places name different first authors: Hosoda, Lim"
+    }
+   ],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2705818",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 99",
+     "cited_first_author": "Mueller",
+     "cited_year": 2017,
+     "context": "baz-Salehi and Vedolin (2017). \"Exchange Rates and Monetary Policy Uncertainty.\" Journal of Finance 72(3), 1213-1252.** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2705818 Being short the "
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "2993026",
+   "type": "ssrn",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 88",
+     "cited_first_author": null,
+     "cited_year": null,
+     "context": "-Following Investing.\" Journal of Portfolio Management 44(1), 15-29.** https://doi.org/10.3905/jpm.2017.44.1.015 (SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026) Trend following "
+    },
+    {
+     "file": "docs/research/0006-courses-and-trader-beliefs.md",
+     "where": "line 80",
+     "cited_first_author": "Hurst",
+     "cited_year": 2017,
+     "context": "pederse/papers/TimeSeriesMomentum.pdf)). Trend was positive in every decade since 1880 ([Hurst, Ooi and Pedersen, 2017](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026), via our earlier no"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "3134546",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/pre-fomc-drift.json",
+     "where": "reported_results[2].source_url",
+     "slug": "pre-fomc-drift",
+     "cited_first_author": "Kurov",
+     "cited_year": 2021,
+     "context": "reported_results source: Kurov, Wolfe and Gilbert (2021), Finance Research Letters 40"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "3696388",
+   "type": "ssrn",
+   "places_count": 2,
+   "in_multiple_places": true,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "catalog/algorithms/fx-ml-smart-carry.json",
+     "where": "origin.source_url",
+     "slug": "fx-ml-smart-carry",
+     "cited_first_author": "Filippou",
+     "cited_year": 2020,
+     "context": "origin: Filippou, Rapach, Taylor, Zhou (2020), Exchange Rate Prediction with Machine Learning and a Smart Carry Trade Portfolio (CEPR DP15305, SSRN 3696388)"
+    },
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 123",
+     "cited_first_author": "Filippou",
+     "cited_year": 2020,
+     "context": "Exchange Rate Prediction with Machine Learning and a Smart Carry Trade Portfolio.\" SSRN working paper / CEPR DP15305.** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3696388 An elastic net o"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  },
+  {
+   "id": "465323",
+   "type": "ssrn",
+   "places_count": 1,
+   "in_multiple_places": false,
+   "disagreement_only_with_origin_field": false,
+   "registry": null,
+   "places": [
+    {
+     "file": "docs/research/0001-reading-list.md",
+     "where": "line 93",
+     "cited_first_author": "Faust",
+     "cited_year": 2007,
+     "context": "of exchange rates and interest rates to macroeconomic announcements.\" Journal of Monetary Economics 54(4), 1051-1068.** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=465323 Uses intraday dat"
+    }
+   ],
+   "disagreements": [],
+   "registry_mismatches": []
+  }
+ ]
+}
