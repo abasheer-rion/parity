@@ -1,0 +1,18 @@
+{
+  "id": "REG-0002",
+  "title": "Monthly commodity gap for CAD and NOK",
+  "created": "2026-10-20",
+  "authors": ["ayan"],
+  "hypotheses": ["HYP-0008"],
+  "experiment": null,
+  "question": "Does the commodity gap signal, rebalanced monthly with all other settings unchanged, show a real effect under the gauntlet?",
+  "strategies": [
+    {"name": "fx_commodity_gap", "params": {"mapping": {"fx.CAD": "cmd.WTI", "fx.NOK": "cmd.BRENT"}, "beta_window": 250, "gap_window": 20, "z_window": 250, "rebalance": "M"}}
+  ],
+  "backtest": {"start": "2000-01-01", "end": null, "cost_bps": 1.0, "include_carry": true, "target_vol": null, "vol_lookback": 60, "max_leverage": 4.0},
+  "pass_criteria": {"min_real_tests": 4},
+  "prior_trials": 12,
+  "prior_trials_note": "The weekly version and its 6-variant sweep in EXP-0002 count as 12 trials on this signal.",
+  "what_would_change_our_mind": "Passing at least 4 of 5 reality tests would make the slower signal worth a forward test. Fewer than 4 retires HYP-0008.",
+  "already_seen": "Partly. The monthly variant's full-sample Sharpe (0.26) was seen in the EXP-0002 sweep. Its gauntlet results have not been seen."
+}

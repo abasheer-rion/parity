@@ -1,0 +1,20 @@
+{
+  "id": "REG-0001",
+  "title": "Official rerun of the baseline gauntlet for carry, trend and the commodity gap",
+  "created": "2026-10-20",
+  "authors": ["ayan"],
+  "hypotheses": ["HYP-0001", "HYP-0002", "HYP-0003"],
+  "experiment": "EXP-0002",
+  "question": "Do the three starting strategies, at their original default settings, beat the S&P 500 under the gauntlet, and is any effect real? This repeats EXP-0002 as an official ledger run so its numbers can be cited.",
+  "strategies": [
+    {"name": "fx_carry", "params": {"k": 3, "rebalance": "M"}},
+    {"name": "fx_tsmom", "params": {"lookback": 252, "vol_window": 60, "rebalance": "M"}},
+    {"name": "fx_commodity_gap", "params": {"mapping": {"fx.CAD": "cmd.WTI", "fx.NOK": "cmd.BRENT"}, "beta_window": 250, "gap_window": 20, "z_window": 250, "rebalance": "W"}}
+  ],
+  "backtest": {"start": "2000-01-01", "end": null, "cost_bps": 1.0, "include_carry": true, "target_vol": null, "vol_lookback": 60, "max_leverage": 4.0},
+  "pass_criteria": {"beats_sp500": true},
+  "prior_trials": 36,
+  "prior_trials_note": "EXP-0001 and EXP-0002 already ran each strategy 12 times (3 strategies, 36 evaluations).",
+  "what_would_change_our_mind": "Any strategy passing all six A tests would contradict EXP-0002 and the literature, and would be checked for a bug before being believed.",
+  "already_seen": "Yes. These settings and their exploratory results were seen in EXP-0001 and EXP-0002. This run makes the record official; it is not a fresh test."
+}
