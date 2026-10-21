@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0055",
+  "slug": "bollinger-band-reversion-breakout",
+  "name": "Bollinger band reversion and squeeze breakout",
+  "family": "technical-indicator",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "volatility-bands",
+    "mean-reversion",
+    "breakout",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 2001,
+    "authors": "John Bollinger",
+    "source_title": "Bollinger on Bollinger Bands (McGraw-Hill, 2001); the bands were in use from the 1980s",
+    "source_url": "https://doi.org/10.1080/17446540701206576"
+  },
+  "how_it_works": {
+    "simple": "Draw a band two 'normal wiggles' above and below the 20-day average. Touching the bottom band means buy, touching the top means sell. When the band gets very narrow, wait for price to burst out and follow it.",
+    "analogy": "Like a dog on a leash: most of the time it stays near you, but when it suddenly pulls hard after being still, it is usually chasing something.",
+    "precise": "Middle band = SMA(20); upper and lower bands = SMA(20) plus or minus 2 rolling standard deviations. Reversion version: buy a close below the lower band, sell a close above the upper band, exit at the middle band. Squeeze version: when band width hits a multi-month low, trade in the direction of the first close outside the bands. Lento, Gradojevic and Wright (2007) test the reversion and contrarian forms."
+  },
+  "rule": "Daily: m = SMA20(close), s = 20-day standard deviation. Reversion: long when close < m - 2s, short when close > m + 2s, exit when close crosses m. Breakout: if (4s/m) is at a 120-day low, go long on the first close above m + 2s (short below m - 2s), exit on a close back through m.",
+  "data_needed": [
+    "Daily closing prices (SPY, FX spot)",
+    "Cost estimate"
+  ],
+  "economic_rationale": "Reversion assumes short-term overreaction; the squeeze assumes calm periods are followed by large moves (volatility clustering). No risk premium is claimed.",
+  "why_it_might_fail": "Lento, Gradojevic and Wright (2007) find the bands are 'consistently unable to earn profits in excess of the buy-and-hold' after costs, though a contrarian use did better. The two versions give opposite signals at the same band touch, so a trader can always find one that 'worked' in hindsight.",
+  "reported_results": [
+    {
+      "source": "Lento, Gradojevic and Wright (2007), Applied Financial Economics Letters, abstract",
+      "source_url": "https://doi.org/10.1080/17446540701206576",
+      "period": "Not stated in abstract",
+      "market": "Not stated in abstract (stock indices and an FX rate in the paper)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record. After transaction costs the bands do not beat buy and hold; profitability 'is improved using a contrarian's approach'. No numbers in the abstract."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/TA-Lib/ta-lib-python",
+      "language": "Python",
+      "license": "BSD-2-Clause",
+      "notes": "Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions."
+    },
+    {
+      "url": "https://github.com/bukosabino/ta",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Pure pandas indicator library, includes Ichimoku, Donchian channel, Bollinger, RSI, MACD."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Simple to test on daily FX and SPY; the one academic test is negative after costs."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

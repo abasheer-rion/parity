@@ -1,0 +1,60 @@
+{
+  "id": "ALG-0064",
+  "slug": "london-open-asian-range-breakout",
+  "name": "London open / Asian range breakout",
+  "family": "technical-indicator",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "session-breakout",
+    "opening-range",
+    "intraday",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Forum and course lore (BabyPips, Forex Factory threads, YouTube); no single author",
+    "source_title": "No dated primary source found",
+    "source_url": null
+  },
+  "how_it_works": {
+    "simple": "Mark the highest and lowest price during the quiet Asian night. When London opens and price breaks above that box, buy; if it breaks below, sell.",
+    "analogy": "Like waiting for the school bell: the hallway is calm until the bell rings, and then everyone rushes one way.",
+    "precise": "An opening range breakout on session boundaries: define the range from roughly 00:00 to 07:00 London time on GBP or EUR pairs, place a buy stop a few pips above the high and a sell stop below the low, cancel the other order when one fills, target 1 to 2 times the range, stop at the opposite side. The claimed edge is the jump in volume and volatility when European dealers arrive. We found no peer-reviewed test of this exact rule."
+  },
+  "rule": "On GBP/USD or EUR/USD 5-minute bars: range = high and low from 00:00 to 07:00 London time. At 07:00 place a buy stop at high + 3 pips and a sell stop at low - 3 pips; the first fill cancels the other; stop at the opposite end of the range; take profit at 1 x range or close at 16:00 London.",
+  "data_needed": [
+    "Intraday FX bars (5-minute or finer) with timestamps",
+    "Spread at the London open, which widens at 07:00"
+  ],
+  "economic_rationale": "Volatility is lower in Asian hours and higher when London opens, so breakouts may follow through. Osler (2002, NY Fed staff report) shows stop-loss orders cluster at certain levels and that trends become unusually fast when those levels are hit, which is one plausible mechanism for breakouts running.",
+  "why_it_might_fail": "We found no academic test of the session breakout itself; claims come from forum backtests with unknown spreads and fills. Osler finds the stop-loss effect lasts hours, not days, and the open is exactly when retail spreads widen, so a small edge may not survive costs. False breakouts that reverse into the range are common.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/mementum/backtrader",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Event-driven backtester with built-in indicators and order types (stops, OCO)."
+    }
+  ],
+  "relevance": {
+    "score": 1,
+    "reason": "Needs intraday FX data we do not have, and there is no credible published evidence."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

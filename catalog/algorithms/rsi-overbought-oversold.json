@@ -1,0 +1,86 @@
+{
+  "id": "ALG-0070",
+  "slug": "rsi-overbought-oversold",
+  "name": "RSI overbought / oversold reversal (30 / 70)",
+  "family": "technical-indicator",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "oscillator",
+    "mean-reversion",
+    "retail-classic",
+    "wilder"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1978,
+    "authors": "J. Welles Wilder",
+    "source_title": "New Concepts in Technical Trading Systems (1978)",
+    "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf"
+  },
+  "how_it_works": {
+    "simple": "RSI is a score from 0 to 100 for how hard price has been rising lately. Under 30 means it fell a lot, so buy; over 70 means it rose a lot, so sell.",
+    "analogy": "Like a rubber band: the further it is stretched one way, the more people expect it to snap back.",
+    "precise": "RSI(n) = 100 - 100/(1+RS), where RS is the average up-close over n days divided by the average down-close (Wilder 1978, as given in Park and Irwin 2004). The retail rule treats RSI(14) below 30 as oversold (buy) and above 70 as overbought (sell). Wilder himself described these zones as points where 'a reaction or reversal is imminent'."
+  },
+  "rule": "Daily RSI(14) on closes. Buy when RSI crosses back above 30 from below; sell or go short when it crosses back below 70 from above; exit at the opposite signal. A common variant buys below 30 and exits when RSI crosses 50.",
+  "data_needed": [
+    "Daily closing prices (SPY, FX spot)",
+    "Cost estimate"
+  ],
+  "economic_rationale": "Short-term overreaction could make extreme moves partly reverse. Chong, Ng and Liew (2014) report RSI(14,30/70) was profitable on the Dow Jones Industrials in their sample.",
+  "why_it_might_fail": "Shorting at RSI 70 fights trends, which are the main source of documented technical profits in FX and futures (Park and Irwin 2004). Chong, Ng and Liew find RSI rules work in some indices and not others, with no correction for testing many markets.",
+  "reported_results": [
+    {
+      "source": "Chong, Ng and Liew (2014), abstract",
+      "source_url": "https://doi.org/10.3390/jrfm7010001",
+      "period": "Not stated in abstract",
+      "market": "Five OECD stock indices",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record. RSI(21,50) significant in Milan and Toronto; 'the RSI(14,30/70) rule is also profitable in the Dow Jones Industrials Index'. No return numbers in the abstract."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/TA-Lib/ta-lib-python",
+      "language": "Python",
+      "license": "BSD-2-Clause",
+      "notes": "Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions."
+    },
+    {
+      "url": "https://github.com/kernc/backtesting.py",
+      "language": "Python",
+      "license": "AGPL-3.0",
+      "notes": "General daily-bar backtester; its standard example is an SMA crossover."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Testable on SPY and daily FX at once; a useful mean-reversion counterpart to the trend rules."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": "fx_rsi_reversion",
+    "registrations": [
+      "REG-0003"
+    ],
+    "runs": [
+      "RUN-000003"
+    ],
+    "verdict": null,
+    "notes": "Implemented as `fx_rsi_reversion` and run officially in RUN-000003 (see EXP-0004). No hypothesis doc yet, so the stage stays at 2."
+  }
+}

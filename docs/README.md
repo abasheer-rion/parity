@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 7 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 3 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 54 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
 
 ## Open questions right now
@@ -178,6 +178,24 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0052 | [Turn-of-the-month effect](algorithms/0052-turn-of-the-month.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
 | ALG-0053 | [Value factor (Fama-French HML)](algorithms/0053-value-hml.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0054 | [Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0055 | [Bollinger band reversion and squeeze breakout](algorithms/0055-bollinger-band-reversion-breakout.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0056 | [Candlestick price action (pin bars, engulfing, doji)](algorithms/0056-candlestick-price-action-patterns.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0057 | [Copy trading and paid signal services](algorithms/0057-copy-trading-signal-services.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0058 | [Elliott wave counting](algorithms/0058-elliott-wave.md) | catalogued | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0059 | [Fibonacci retracement entries (38.2, 50, 61.8 percent)](algorithms/0059-fibonacci-retracements.md) | catalogued | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0060 | [Martingale and averaging-down systems on FX](algorithms/0060-fx-martingale-averaging.md) | catalogued | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0061 | [Golden cross / death cross (50 and 200 day moving averages)](algorithms/0061-golden-cross-50-200.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0062 | [Ichimoku cloud (kumo breakout and TK cross)](algorithms/0062-ichimoku-cloud.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0063 | [ICT / smart money concepts (order blocks, fair value gaps, liquidity sweeps)](algorithms/0063-ict-smart-money-concepts.md) | catalogued | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0064 | [London open / Asian range breakout](algorithms/0064-london-open-asian-range-breakout.md) | catalogued | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0065 | [MACD signal-line crossover](algorithms/0065-macd-crossover.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0066 | [News straddle (pending orders around NFP and rate decisions)](algorithms/0066-news-straddle-trading.md) | catalogued | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0067 | [Scalping on 1-minute charts](algorithms/0067-one-minute-scalping.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0068 | [Prop firm challenge style trading](algorithms/0068-prop-firm-challenge-trading.md) | catalogued | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0069 | [Carry trade as taught to retail (hold a positive-swap pair)](algorithms/0069-retail-swap-carry.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0070 | [RSI overbought / oversold reversal (30 / 70)](algorithms/0070-rsi-overbought-oversold.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0071 | [Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0072 | [Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0062",
+  "slug": "ichimoku-cloud",
+  "name": "Ichimoku cloud (kumo breakout and TK cross)",
+  "family": "technical-indicator",
+  "markets": [
+    "fx",
+    "equities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "ichimoku",
+    "trend-following",
+    "breakout",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1969,
+    "authors": "Goichi Hosoda",
+    "source_title": "Ichimoku Kinko Hyo books, commonly dated to 1969 (date as usually cited, not verified)",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2628581"
+  },
+  "how_it_works": {
+    "simple": "Draw a shaded 'cloud' from averages of past highs and lows. Price above the cloud means up-trend, so buy; below means down-trend, so sell.",
+    "analogy": "Like reading weather from a cloud bank: you only go out sailing when the sky above you is clear of it.",
+    "precise": "Ichimoku uses midpoints of high-low ranges: Tenkan (9), Kijun (26), Senkou A ((Tenkan+Kijun)/2 shifted 26 ahead), Senkou B (52-period midpoint shifted 26 ahead); the space between A and B is the cloud. Retail rules buy when price closes above the cloud and Tenkan crosses above Kijun. Lim, Yanyali and Savidge (2016) argue it behaves like a momentum and breakout strategy with a natural stop loss."
+  },
+  "rule": "Daily: long when close > max(Senkou A, Senkou B) and Tenkan(9) > Kijun(26); short when close < min(Senkou A, Senkou B) and Tenkan < Kijun; exit when price closes back inside the cloud.",
+  "data_needed": [
+    "Daily high, low and close (FX OHLC from a free source such as Yahoo or Stooq; FRED gives closes only)"
+  ],
+  "economic_rationale": "Same trend logic as breakouts. Lim, Yanyali and Savidge (2016) say returns are positively skewed with a small left tail because of the built-in stop.",
+  "why_it_might_fail": "The only test we found is on single stocks in Japan and the US over 2005 to 2014, and we could only read the abstract. The 9/26/52 settings come from a six-day trading week and were never tuned out of sample.",
+  "reported_results": [
+    {
+      "source": "Lim, Yanyali and Savidge (2016), Do Ichimoku cloud charts work and do they work better in Japan?, abstract",
+      "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2628581",
+      "period": "2005-2014",
+      "market": "Single stocks in Japan and the USA",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record (SSRN page blocked to our fetcher). Long-only and short-only conservative and aggressive variants; the abstract gives no return numbers."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/bukosabino/ta",
+      "language": "Python",
+      "license": "MIT",
+      "notes": "Pure pandas indicator library, includes Ichimoku, Donchian channel, Bollinger, RSI, MACD."
+    },
+    {
+      "url": "https://github.com/mementum/backtrader",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Event-driven backtester with built-in indicators and order types (stops, OCO)."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Testable on daily FX with free OHLC data, but it is mostly a repackaged breakout rule with little independent evidence."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

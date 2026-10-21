@@ -1,0 +1,76 @@
+{
+  "id": "ALG-0056",
+  "slug": "candlestick-price-action-patterns",
+  "name": "Candlestick price action (pin bars, engulfing, doji)",
+  "family": "technical-indicator",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "candlestick",
+    "price-action",
+    "reversal-patterns",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1991,
+    "authors": "Japanese rice-trading tradition (attributed to Munehisa Homma); brought to the West by Steve Nison",
+    "source_title": "Japanese Candlestick Charting Techniques (1991)",
+    "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf"
+  },
+  "how_it_works": {
+    "simple": "Each day's bar has a shape. Some shapes, like a long tail that rejected lower prices (a pin bar) or a big bar that swallows the day before (engulfing), are read as signs that price will turn.",
+    "analogy": "Like reading someone's face: a certain expression is taken as a hint of what they will do next.",
+    "precise": "Patterns are defined from open, high, low and close of one to three bars. A bullish pin bar has a lower wick at least two thirds of the range with the close in the top third; a bullish engulfing bar has a body that covers the prior bar's opposite-colored body. Retail courses (for example Nial Fuller's) trade them at key levels with stops beyond the wick. Academic tests are mixed: Caginalp and Laurent (1998) found gains, later studies found little."
+  },
+  "rule": "Daily: after at least 3 lower closes, if today is a bullish engulfing bar (open below prior close, close above prior open) or a bullish pin bar, buy at the next open with a stop below today's low and exit after 2 to 10 days or at 2 x risk. Mirror for bearish patterns.",
+  "data_needed": [
+    "Daily OHLC (FX OHLC from Yahoo or Stooq; SPY OHLC)",
+    "Cost estimate"
+  ],
+  "economic_rationale": "Patterns might capture short-term overreaction and reversal. Caginalp and Laurent (1998) argued their reversal patterns carried information in S&P 500 stocks.",
+  "why_it_might_fail": "Park and Irwin (2004) warn that most pattern studies 'neither conducted parameter optimization and out-of-sample tests, nor paid much attention to data snooping'. Marshall, Young and Rose (2006, Journal of Banking and Finance) and Marshall, Young and Cahan (2008, Japan) are widely cited as finding candlesticks add no value; we could not open them, so they are not counted here.",
+  "reported_results": [
+    {
+      "source": "Caginalp and Laurent (1998), as summarized in Park and Irwin (2004)",
+      "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf",
+      "period": "1992-1996",
+      "market": "S&P 500 stocks",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Down-to-up reversal patterns: about 0.9 percent average over a two-day hold; 0.56 to 0.76 percent per trade after commissions and spreads on a 100,000 dollar trade. The 202 to 259 percent 'annual' figures are compounded trade returns, not a strategy return, so annual_return is left null. No out-of-sample test."
+    }
+  ],
+  "post_publication_evidence": "Later studies on US and Japanese stocks (Marshall and co-authors, 2006 and 2008) are cited as negative, but we did not read them.",
+  "implementations": [
+    {
+      "url": "https://github.com/TA-Lib/ta-lib-python",
+      "language": "Python",
+      "license": "BSD-2-Clause",
+      "notes": "Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Daily patterns are codable on free FX and SPY OHLC, but the positive evidence is old and not out of sample."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

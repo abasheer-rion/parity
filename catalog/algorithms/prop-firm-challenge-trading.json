@@ -1,0 +1,55 @@
+{
+  "id": "ALG-0068",
+  "slug": "prop-firm-challenge-trading",
+  "name": "Prop firm challenge style trading",
+  "family": "portfolio-construction",
+  "markets": [
+    "fx",
+    "equities",
+    "crypto"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "prop-firm",
+    "funded-account",
+    "drawdown-limits",
+    "retail-outcomes"
+  ],
+  "origin": {
+    "type": "commercial",
+    "first_published": 2015,
+    "authors": "Online 'prop firms' selling evaluation challenges (for example FTMO, founded around 2015; date approximate)",
+    "source_title": "No academic source found",
+    "source_url": null
+  },
+  "how_it_works": {
+    "simple": "You pay a fee to take a trading test on a practice account. If you hit a profit goal without losing too much, the firm lets you trade its money and keep most of the profit.",
+    "analogy": "Like paying to enter a contest where you must jump a high bar without ever touching the ground; most people pay the entry fee and few get the prize.",
+    "precise": "A typical challenge requires about a 10 percent gain with a 5 percent daily loss limit and a 10 percent maximum loss, then a second phase, before a 'funded' account with a profit split. Traders often adopt high-risk intraday styles to hit the target quickly. The firm's revenue comes largely from fees paid by those who fail, and funded accounts are often simulated."
+  },
+  "rule": "As commonly taught: risk 0.5 to 1 percent per trade on intraday FX or index setups, stop for the day after a 2 percent loss, aim for 1 to 2 percent a day until the 10 percent target is reached within the limits.",
+  "data_needed": [
+    "Intraday prices",
+    "The firm's exact rules (daily loss computation, news restrictions)"
+  ],
+  "economic_rationale": "Proponents say the fee is cheap access to capital for skilled traders. The structure itself adds no edge: it is a binary option on the trader's skill, with the fee as the premium.",
+  "why_it_might_fail": "We found no audited, published pass or payout rates; figures quoted online are unverified marketing or anecdotes, so we report none. If the trader's method has no edge, the drawdown limits make failure likely and the fee is the expected loss. Evidence on day traders generally (Barber et al. 2004; ESMA 2018) is strongly negative.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "A business model rather than a strategy; not testable with our data."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

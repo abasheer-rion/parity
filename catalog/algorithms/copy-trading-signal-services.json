@@ -1,0 +1,83 @@
+{
+  "id": "ALG-0057",
+  "slug": "copy-trading-signal-services",
+  "name": "Copy trading and paid signal services",
+  "family": "sentiment-alternative-data",
+  "markets": [
+    "fx",
+    "equities",
+    "crypto"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "social-trading",
+    "copy-trading",
+    "signals",
+    "retail-outcomes"
+  ],
+  "origin": {
+    "type": "commercial",
+    "first_published": 2010,
+    "authors": "Platforms such as eToro, ZuluTrade and MetaTrader signals; Telegram and Discord signal groups",
+    "source_title": "Platform launches around 2010 (date approximate); academic study by Apesteguia, Oechssler and Weidenholzer (2020)",
+    "source_url": "https://doi.org/10.1287/mnsc.2019.3508"
+  },
+  "how_it_works": {
+    "simple": "Instead of picking trades yourself, you let your account automatically copy another trader who has a good-looking record, or you pay for buy and sell alerts.",
+    "analogy": "Like copying the homework of the kid with the best grades last week, without knowing if they got lucky.",
+    "precise": "Platforms rank 'signal providers' by past return and let followers mirror their trades in proportion to account size. Rankings reward high recent returns, which favors high-risk strategies and survivors. Apesteguia, Oechssler and Weidenholzer (2020) show in an experiment that seeing others' success and being able to copy them increases risk taking."
+  },
+  "rule": "As commonly practiced: each quarter, allocate equally to the 5 providers with the highest trailing 12-month return and at least 12 months of history; copy all their trades proportionally; drop a provider if their drawdown exceeds 25 percent.",
+  "data_needed": [
+    "Platform leaderboard histories (not freely available as a clean, survivor-free dataset)"
+  ],
+  "economic_rationale": "If skill persists, following past winners could work; Barber et al. (2004) find some persistence among a small group of Taiwanese day traders. Proponents claim the crowd surfaces skilled traders.",
+  "why_it_might_fail": "Apesteguia, Oechssler and Weidenholzer (2020) conclude copy trading 'leads to excessive risk taking'. Leaderboards suffer from survivorship and selection on luck. eToro's own required disclosure says about half of its retail CFD accounts lose money, which covers its copiers too.",
+  "reported_results": [
+    {
+      "source": "Apesteguia, Oechssler and Weidenholzer (2020), Copy trading, Management Science, abstract",
+      "source_url": "https://doi.org/10.1287/mnsc.2019.3508",
+      "period": "Laboratory experiment",
+      "market": "Experimental asset market",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "paper-trading",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record. Information on others' success raises risk taking, and the option to copy raises it further. No return numbers."
+    },
+    {
+      "source": "eToro general risk disclosure page",
+      "source_url": "https://www.etoro.com/customer-service/general-risk-disclosure/",
+      "period": "As shown on 2026-10-20",
+      "market": "eToro retail CFD accounts",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Page shows the regulated warnings '50% of retail investor accounts lose money when trading CFDs with this provider' and, in another disclaimer block, '55%'. Figures differ by entity and are updated quarterly; they cover all retail CFD accounts, not copiers only."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Not a rule we can test, and there is no clean public dataset of follower returns."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

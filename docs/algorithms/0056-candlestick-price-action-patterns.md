@@ -1,0 +1,107 @@
+---
+id: ALG-0056
+title: Candlestick price action (pin bars, engulfing, doji)
+type: algorithm
+status: sourced
+created: 2026-10-20
+updated: 2026-10-20
+authors: [ayan]
+tags: [fx, open-source, strategy]
+related: []
+---
+
+# Candlestick price action (pin bars, engulfing, doji)
+
+## In plain words
+
+Each day's bar has a shape. Some shapes, like a long tail that rejected lower prices (a pin bar) or a big bar that swallows the day before (engulfing), are read as signs that price will turn.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | technical-indicator |
+| Markets | equities, fx |
+| Horizon | daily |
+| Tags | candlestick, price-action, reversal-patterns, retail-classic |
+| Origin | practitioner: Japanese rice-trading tradition (attributed to Munehisa Homma); brought to the West by Steve Nison |
+| First published | 1991 (35 years ago) |
+| Primary source | [Japanese Candlestick Charting Techniques (1991)](https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf) |
+| Research stage | 2 of 9: sourced |
+| Relevance to us | 2 of 5: Daily patterns are codable on free FX and SPY OHLC, but the positive evidence is old and not out of sample. |
+| Testable with free data | yes |
+
+This page is generated from `catalog/algorithms/candlestick-price-action-patterns.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** Each day's bar has a shape. Some shapes, like a long tail that rejected lower prices (a pin bar) or a big bar that swallows the day before (engulfing), are read as signs that price will turn.
+
+<details><summary>Analogy</summary>
+
+Like reading someone's face: a certain expression is taken as a hint of what they will do next.
+
+</details>
+
+<details><summary>Precise</summary>
+
+Patterns are defined from open, high, low and close of one to three bars. A bullish pin bar has a lower wick at least two thirds of the range with the close in the top third; a bullish engulfing bar has a body that covers the prior bar's opposite-colored body. Retail courses (for example Nial Fuller's) trade them at key levels with stops beyond the wick. Academic tests are mixed: Caginalp and Laurent (1998) found gains, later studies found little.
+
+</details>
+
+### The rule
+
+Daily: after at least 3 lower closes, if today is a bullish engulfing bar (open below prior close, close above prior open) or a bullish pin bar, buy at the next open with a stop below today's low and exit after 2 to 10 days or at 2 x risk. Mirror for bearish patterns.
+
+### Data needed
+
+- Daily OHLC (FX OHLC from Yahoo or Stooq; SPY OHLC)
+- Cost estimate
+
+### Why it might work
+
+Patterns might capture short-term overreaction and reversal. Caginalp and Laurent (1998) argued their reversal patterns carried information in S&P 500 stocks.
+
+### Why it might fail
+
+Park and Irwin (2004) warn that most pattern studies 'neither conducted parameter optimization and out-of-sample tests, nor paid much attention to data snooping'. Marshall, Young and Rose (2006, Journal of Banking and Finance) and Marshall, Young and Cahan (2008, Japan) are widely cited as finding candlesticks add no value; we could not open them, so they are not counted here.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Caginalp and Laurent (1998), as summarized in Park and Irwin (2004)](https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf) | 1992-1996 | S&P 500 stocks | n/a | n/a | n/a | n/a | backtest | yes | yes |
+
+Notes on these numbers:
+
+- **Caginalp and Laurent (1998), as summarized in Park and Irwin (2004):** Down-to-up reversal patterns: about 0.9 percent average over a two-day hold; 0.56 to 0.76 percent per trade after commissions and spreads on a 100,000 dollar trade. The 202 to 259 percent 'annual' figures are compounded trade returns, not a strategy return, so annual_return is left null. No out-of-sample test.
+
+### After publication
+
+Later studies on US and Japanese stocks (Marshall and co-authors, 2006 and 2008) are cited as negative, but we did not read them.
+
+### Implementations
+
+- [https://github.com/TA-Lib/ta-lib-python](https://github.com/TA-Lib/ta-lib-python) (Python, license: BSD-2-Clause): Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions.
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | not yet |
+| 4. implemented | not yet |
+| 5. registered | not yet |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+Nothing links here yet.
+<!-- backlinks:end -->

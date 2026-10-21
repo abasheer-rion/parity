@@ -1,0 +1,129 @@
+{
+  "id": "ALG-0061",
+  "slug": "golden-cross-50-200",
+  "name": "Golden cross / death cross (50 and 200 day moving averages)",
+  "family": "technical-indicator",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "moving-average",
+    "trend-following",
+    "retail-classic",
+    "data-snooping"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1992,
+    "authors": "Retail and press lore; first rigorous test of the 200-day family by Brock, Lakonishok and LeBaron",
+    "source_title": "Simple technical trading rules and the stochastic properties of stock returns (Journal of Finance 47, 1992)",
+    "source_url": "https://doi.org/10.1111/j.1540-6261.1992.tb04681.x"
+  },
+  "how_it_works": {
+    "simple": "Draw the average price of the last 50 days and of the last 200 days. When the short line climbs above the long line, buy. When it drops below, sell.",
+    "analogy": "Like judging the season by comparing this week's temperature with the average of the last few months: once the recent number is clearly higher, you assume summer is coming.",
+    "precise": "A variable-length moving average rule: long when MA(50) is above MA(200) (the golden cross), flat or short when below (the death cross). It is one member of the rule families that Brock, Lakonishok and LeBaron (1992) tested on the Dow from 1897 to 1986 (they used 1/50, 1/150, 5/150, 1/200 and 2/200). Later tests with data-snooping controls and costs found the edge faded after the 1980s."
+  },
+  "rule": "Each day compute the 50-day and 200-day simple moving averages of the close. Hold the asset (SPY, or a currency against USD) when MA50 > MA200, otherwise hold cash (or go short for the long/short version); trade at the next day's open.",
+  "data_needed": [
+    "Daily closing prices (SPY or index level, FX spot from FRED H.10)",
+    "Short-term interest rate for the cash leg",
+    "Spread or commission estimate"
+  ],
+  "economic_rationale": "Proponents say it catches long trends and sidesteps bear markets. Park and Irwin (2004) note that modern studies found profits at least until the early 1990s, which they and others attribute to noise traders and slow reaction to news.",
+  "why_it_might_fail": "Sullivan, Timmermann and White (1999), as summarized by Park and Irwin, found the best rule picked on 1897 to 1986 earned only 2.8 percent a year out of sample in 1987 to 1996 with no significance. Bajgrowicz and Scaillet (2012) find that on the Dow from 1897 to 2011 even in-sample profits are wiped out by low transaction costs. The crossover reacts late, so it gives back a lot in sharp V-shaped recoveries.",
+  "reported_results": [
+    {
+      "source": "Brock, Lakonishok and LeBaron (1992), as summarized in Park and Irwin (2004)",
+      "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf",
+      "period": "1897-1986",
+      "market": "Dow Jones Industrial Average",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Variable moving average rules (1/50 up to 2/200): buy days averaged 0.042 percent per day (about 12 percent a year) and sell days -0.025 percent per day (about -7 percent a year), versus 0.017 percent unconditional. No transaction costs. annual_return left null because the 12 percent figure is the return on buy days only, not a strategy return."
+    },
+    {
+      "source": "Sullivan, Timmermann and White (1999), as summarized in Park and Irwin (2004)",
+      "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf",
+      "period": "1897-1996",
+      "market": "Dow Jones Industrial Average, the 26 rules from Brock et al.",
+      "sharpe": 0.39,
+      "annual_return": 0.094,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Best rule in the Brock et al. universe was a 50-day moving average with a 1 percent band: 9.4 percent a year versus 4.3 percent for buy and hold, Sharpe 0.39 versus 0.034. In-sample selection; Reality Check p-value near zero for the full period but not in several subperiods."
+    },
+    {
+      "source": "Sullivan, Timmermann and White (1999) out-of-sample, as summarized in Park and Irwin (2004)",
+      "source_url": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf",
+      "period": "1987-1996",
+      "market": "Dow Jones Industrial Average",
+      "sharpe": null,
+      "annual_return": 0.028,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "The best full-universe rule (a 5-day moving average) chosen on 1897-1986 earned 2.8 percent a year out of sample, nominal p-value 0.32, i.e. not significant."
+    },
+    {
+      "source": "Bajgrowicz and Scaillet (2012), abstract",
+      "source_url": "https://archive-ouverte.unige.ch/unige:79889",
+      "period": "1897-2011",
+      "market": "Dow Jones Industrial Average, about 7,800 rules",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Abstract: 'even in-sample, the performance is completely offset by the introduction of low transaction costs' and 'an investor would never have been able to select ex ante the future best-performing rules'."
+    }
+  ],
+  "post_publication_evidence": "After Brock et al. (1992) the rules stopped working on the Dow: Sullivan, Timmermann and White's 1987 to 1996 holdout shows no significant return, and Bajgrowicz and Scaillet (2012) find no persistence through 2011. In FX, Neely, Weller and Ulrich (2009) find moving average profits had disappeared by the early 1990s.",
+  "implementations": [
+    {
+      "url": "https://github.com/kernc/backtesting.py",
+      "language": "Python",
+      "license": "AGPL-3.0",
+      "notes": "General daily-bar backtester; its standard example is an SMA crossover."
+    },
+    {
+      "url": "https://github.com/TA-Lib/ta-lib-python",
+      "language": "Python",
+      "license": "BSD-2-Clause",
+      "notes": "Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Trivial to test on SPY and daily FX with free data, and it is the single most cited retail rule, so it is a natural baseline against buy and hold."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": "stocks_golden_cross",
+    "registrations": [
+      "REG-0003"
+    ],
+    "runs": [
+      "RUN-000003"
+    ],
+    "verdict": null,
+    "notes": "Implemented as `stocks_golden_cross` and run officially in RUN-000003 (see EXP-0004). No hypothesis doc yet, so the stage stays at 2."
+  }
+}

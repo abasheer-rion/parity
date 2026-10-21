@@ -1,0 +1,76 @@
+{
+  "id": "ALG-0071",
+  "slug": "support-resistance-supply-demand-zones",
+  "name": "Support and resistance / supply and demand zones",
+  "family": "technical-indicator",
+  "markets": [
+    "fx",
+    "equities"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "support-resistance",
+    "price-levels",
+    "round-numbers",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1948,
+    "authors": "Edwards and Magee popularized chart levels; supply and demand zone branding is from later retail courses (for example Sam Seiden)",
+    "source_title": "Technical Analysis of Stock Trends (1948); academic test by Osler (2000)",
+    "source_url": "https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf"
+  },
+  "how_it_works": {
+    "simple": "Find prices where the market turned around before. Expect it to bounce there again: buy near the floor, sell near the ceiling.",
+    "analogy": "Like a ball in a room: it keeps bouncing off the same floor and ceiling until something breaks through.",
+    "precise": "Traders mark prior swing highs and lows, round numbers or 'zones' where price left quickly, and fade moves into them (or trade breaks through them). Osler (2000) tested support and resistance levels published daily by six FX firms in 1996 to 1998 against one-minute quotes and found rates bounced off published levels more often than off random levels, but the test measures turning points, not profits."
+  },
+  "rule": "Mark the most recent swing high and swing low on the daily chart (or published levels). When price comes within a small distance of a level, enter against the move (buy at support, sell at resistance) with a stop just beyond the level; if price closes through the level, flip to the breakout direction.",
+  "data_needed": [
+    "Intraday FX quotes (Osler used one-minute data)",
+    "Daily OHLC for swing levels"
+  ],
+  "economic_rationale": "Orders really do cluster at round numbers and visible levels: Osler (2000) reports 96 percent of published levels ended in 0 or 5, and Osler (2002) shows take-profit orders tend to stop trends and stop-loss orders tend to speed them up at such levels.",
+  "why_it_might_fail": "Osler's bounce edge is small (about 61 versus 56 percent) and she does not show a trading profit after spreads. Zones drawn by hand can be fitted after the fact; there is no published test of supply and demand zones as taught in retail courses.",
+  "reported_results": [
+    {
+      "source": "Osler (2000), Support for resistance: technical analysis and intraday exchange rates, FRBNY Economic Policy Review",
+      "source_url": "https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf",
+      "period": "Jan 1996 - Mar 1998",
+      "market": "USD/DEM, USD/JPY, GBP/USD, one-minute quotes, levels from six firms",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Rates bounced off published levels 60.8 percent of the time versus 56.2 percent for artificial levels; published beat artificial in all 16 firm-currency pairs. Predictive power lasted at least five business days. A predictability test, not a profit test, so no return numbers."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/mementum/backtrader",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Event-driven backtester with built-in indicators and order types (stops, OCO)."
+    }
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "The one solid test is intraday and measures bounces, not profits; a daily swing-level version could be coded on free data but is not what the evidence covers."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

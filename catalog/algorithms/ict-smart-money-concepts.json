@@ -1,0 +1,54 @@
+{
+  "id": "ALG-0063",
+  "slug": "ict-smart-money-concepts",
+  "name": "ICT / smart money concepts (order blocks, fair value gaps, liquidity sweeps)",
+  "family": "technical-indicator",
+  "markets": [
+    "fx",
+    "equities",
+    "crypto"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "smart-money-concepts",
+    "price-action",
+    "discretionary",
+    "untested"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Michael J. Huddleston ('The Inner Circle Trader'), mainly through YouTube and paid mentorships; widely copied as SMC",
+    "source_title": "No dated primary publication found; content is video based",
+    "source_url": null
+  },
+  "how_it_works": {
+    "simple": "The idea is that big banks push price to grab the stop-losses of small traders, then move the other way. You try to spot where they did that and follow them.",
+    "analogy": "Like watching footprints in snow to guess where the big animal went after it scared the small ones away.",
+    "precise": "SMC traders mark 'liquidity' above old highs and below old lows, wait for a 'sweep' that runs those stops, then enter at an 'order block' (the last opposite candle before a strong move) or a 'fair value gap' (a three-candle gap where the first and third candles' wicks do not overlap), usually during London or New York 'kill zones'. The terms are loosely defined and change between teachers."
+  },
+  "rule": "As commonly taught on 1 to 15 minute charts: in the New York morning session, after price trades above the prior session's high and then closes back below it (a sweep), sell at the nearest bearish fair value gap or order block, stop above the sweep high, target the prior session low. Mirror for longs.",
+  "data_needed": [
+    "Intraday price bars with session times"
+  ],
+  "economic_rationale": "Stop-loss clusters near prior highs and lows are real: Osler (2002, NY Fed staff report) shows stop-loss orders cluster at certain levels and that rates move unusually fast when they are hit, mostly over hours. Proponents go further and claim deliberate stop hunting by banks.",
+  "why_it_might_fail": "There is no peer-reviewed or audited evidence that SMC entries are profitable. Definitions of order blocks and fair value gaps vary by teacher, results shown are hand-picked chart examples, and the claim of a coordinated 'smart money algorithm' is not testable. Osler's finding that stop runs exist does not show that a retail trader can trade the reversal after paying spreads.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Intraday and loosely defined, so we cannot test it; listed because it is very popular with retail traders."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

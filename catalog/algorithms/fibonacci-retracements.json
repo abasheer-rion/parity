@@ -1,0 +1,61 @@
+{
+  "id": "ALG-0059",
+  "slug": "fibonacci-retracements",
+  "name": "Fibonacci retracement entries (38.2, 50, 61.8 percent)",
+  "family": "technical-indicator",
+  "markets": [
+    "fx",
+    "equities",
+    "crypto"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "fibonacci",
+    "price-levels",
+    "pullback",
+    "retail-classic"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Long-standing chart lore; the 50 percent rule is cited from Pring and Fibonacci levels as 'widely used' in Osler (2000)",
+    "source_title": "No dated primary source found",
+    "source_url": "https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf"
+  },
+  "how_it_works": {
+    "simple": "After a big move up, expect price to slide back part of the way, about 38, 50 or 62 percent, and then keep going up. Buy at those levels.",
+    "analogy": "Like a person climbing stairs who steps back a little before taking the next step up.",
+    "precise": "Take a swing low and swing high; draw horizontal levels at 23.6, 38.2, 50, 61.8 and 78.6 percent of the move. Retail rules buy a pullback that stalls at 50 or 61.8 percent in an uptrend with a stop below 78.6 percent and targets at the prior high or the 161.8 percent extension. The ratios come from the Fibonacci sequence; there is no economic reason they should matter beyond traders watching them."
+  },
+  "rule": "On daily bars, after a swing of at least 3 ATR from low L to high H, place a buy limit at H - 0.618(H - L) with a stop at H - 0.786(H - L) and a target at H; mirror for down-swings. Swing points defined by a 5-bar fractal.",
+  "data_needed": [
+    "Daily OHLC (FX, SPY)"
+  ],
+  "economic_rationale": "Proponents say the levels are self-fulfilling because many traders watch them. Osler (2000) notes Fibonacci levels are 'widely used' among methods for setting support and resistance, but she tests published levels in general, not Fibonacci levels.",
+  "why_it_might_fail": "We found no peer-reviewed evidence that Fibonacci levels predict turning points better than other levels. Shanaev and Gibson (2022, SSRN 4212430) test this directly but we could not open the paper, so we report nothing from it. Which swing to measure from is chosen by eye, so almost any reversal can be 'explained' afterward.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/mementum/backtrader",
+      "language": "Python",
+      "license": "GPL-3.0",
+      "notes": "Event-driven backtester with built-in indicators and order types (stops, OCO)."
+    }
+  ],
+  "relevance": {
+    "score": 1,
+    "reason": "Codable on daily data but has no supporting evidence; useful only as a placebo test against random levels."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

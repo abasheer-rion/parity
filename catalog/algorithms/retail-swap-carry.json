@@ -1,0 +1,69 @@
+{
+  "id": "ALG-0069",
+  "slug": "retail-swap-carry",
+  "name": "Carry trade as taught to retail (hold a positive-swap pair)",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "swap",
+    "single-pair",
+    "crash-risk"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": 2008,
+    "authors": "Retail practice (the 'Mrs Watanabe' yen carry); crash risk documented by Brunnermeier, Nagel and Pedersen",
+    "source_title": "Carry trades and currency crashes (NBER Macroeconomics Annual 2008; NBER WP 14473)",
+    "source_url": "https://www.nber.org/system/files/working_papers/w14473/w14473.pdf"
+  },
+  "how_it_works": {
+    "simple": "Borrow in a currency with low interest, like the yen, and hold one with high interest, like the Australian dollar. Your broker pays you the difference every night.",
+    "analogy": "Like borrowing money from a friend who charges almost nothing and putting it in a bank that pays a lot, as long as the exchange rate does not move against you.",
+    "precise": "The retail version is usually one pair (AUD/JPY, NZD/JPY, USD/TRY) held long for the positive overnight swap, often with high margin. It is a concentrated form of the G10 carry factor. Brunnermeier, Nagel and Pedersen (2008) show carry returns are negatively skewed because positions unwind suddenly when risk appetite and funding dry up."
+  },
+  "rule": "Each month, go long the pair with the largest positive interest differential among a small menu (for example AUD/JPY, NZD/JPY, USD/JPY), hold while the broker's swap is positive, and switch if another pair's differential becomes larger. No hedging.",
+  "data_needed": [
+    "Daily FX spot (FRED H.10)",
+    "Short-term interest rates per currency",
+    "The retail broker's swap rates, which include a markup over the interest differential"
+  ],
+  "economic_rationale": "Uncovered interest parity fails on average, so high-yield currencies have tended not to depreciate enough to offset the rate gap; Brunnermeier, Nagel and Pedersen (2008) explain the premium partly as compensation for crash risk.",
+  "why_it_might_fail": "A single pair has no diversification and the crash risk does not diversify away even across portfolios (BNP 2008). They cite the dollar's sharp fall against the yen on 7 and 8 October 1998 without fundamental news. Retail swaps add a broker markup, and 30:1 margin turns a carry crash into a margin call.",
+  "reported_results": [
+    {
+      "source": "Brunnermeier, Nagel and Pedersen (2008), Table 2, 1 long and 1 short",
+      "source_url": "https://www.nber.org/system/files/working_papers/w14473/w14473.pdf",
+      "period": "1992-2006 (weekly)",
+      "market": "Highest vs lowest interest rate currency, equal weighted",
+      "sharpe": 0.704,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Weekly average return 0.002, weekly standard deviation 0.017, skewness -0.717. Quarterly version (1986-2006) Sharpe 0.654, skewness -0.700. For comparison the US stock market Sharpe was 0.44 weekly. No transaction costs or retail swap markups. The single-pair portfolio is the closest analogue to retail carry."
+    }
+  ],
+  "post_publication_evidence": "Carry suffered a large drawdown in 2008, right as the paper was published; see the fx-carry-g10 and fx-carry-volatility-timing entries for the diversified version and its later record.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Testable with free daily data, but largely a concentrated duplicate of fx-carry-g10; useful to show how much single-pair risk retail traders take."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

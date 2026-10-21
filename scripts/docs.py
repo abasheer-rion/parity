@@ -492,7 +492,8 @@ def algorithm_page(e: dict) -> str:
            f"| Tags | {', '.join(e.get('tags', []))} |",
            f"| Origin | {o['type']}: {_cell(o.get('authors'))} |",
            f"| First published | {_cell(year)} ({age} ago) |",
-           f"| Primary source | [{_cell(o.get('source_title'))}]({_href(o.get('source_url'))}) |",
+           f"| Primary source | " + (f"[{_cell(o.get('source_title'))}]({_href(o.get('source_url'))})"
+                                    if o.get("source_url") else _cell(o.get("source_title"))) + " |",
            f"| Research stage | {stage} of 9: {STAGE_NAMES[stage - 1]} |",
            f"| Relevance to us | {e['relevance']['score']} of 5: {_cell(e['relevance']['reason'])} |",
            f"| Testable with free data | {'yes' if e.get('testable_with_free_data') else 'no'} |",

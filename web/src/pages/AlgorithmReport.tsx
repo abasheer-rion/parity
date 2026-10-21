@@ -57,7 +57,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
           <div><h3>Why it might work</h3><p>{a.economic_rationale}</p></div>
           <div><h3>Why it might fail</h3><p>{a.why_it_might_fail}</p></div>
         </div>
-        <p className="muted small">Source: <a href={repoLink(a.origin.source_url)} target="_blank" rel="noreferrer">{a.origin.source_title}</a>. Relevance: {a.relevance.reason}</p>
+        <p className="muted small">Source: {a.origin.source_url ? <a href={repoLink(a.origin.source_url)} target="_blank" rel="noreferrer">{a.origin.source_title}</a> : a.origin.source_title || "no single documented origin"}. Relevance: {a.relevance.reason}</p>
       </Card>
 
       <Card title="What others reported" help={<>These are the sources' own numbers. "Checked" means we read the number on the source page. Compare <Term id="backtest">backtest</Term> and live evidence separately, and treat very high <Term id="sharpe-ratio">Sharpe ratios</Term> with suspicion.</>}>

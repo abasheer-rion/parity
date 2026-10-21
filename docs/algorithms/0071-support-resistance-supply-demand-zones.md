@@ -1,0 +1,107 @@
+---
+id: ALG-0071
+title: Support and resistance / supply and demand zones
+type: algorithm
+status: sourced
+created: 2026-10-20
+updated: 2026-10-20
+authors: [ayan]
+tags: [fx, open-source, strategy]
+related: []
+---
+
+# Support and resistance / supply and demand zones
+
+## In plain words
+
+Find prices where the market turned around before. Expect it to bounce there again: buy near the floor, sell near the ceiling.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | technical-indicator |
+| Markets | fx, equities |
+| Horizon | intraday |
+| Tags | support-resistance, price-levels, round-numbers, retail-classic |
+| Origin | practitioner: Edwards and Magee popularized chart levels; supply and demand zone branding is from later retail courses (for example Sam Seiden) |
+| First published | 1948 (78 years ago) |
+| Primary source | [Technical Analysis of Stock Trends (1948); academic test by Osler (2000)](https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf) |
+| Research stage | 2 of 9: sourced |
+| Relevance to us | 2 of 5: The one solid test is intraday and measures bounces, not profits; a daily swing-level version could be coded on free data but is not what the evidence covers. |
+| Testable with free data | no |
+
+This page is generated from `catalog/algorithms/support-resistance-supply-demand-zones.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** Find prices where the market turned around before. Expect it to bounce there again: buy near the floor, sell near the ceiling.
+
+<details><summary>Analogy</summary>
+
+Like a ball in a room: it keeps bouncing off the same floor and ceiling until something breaks through.
+
+</details>
+
+<details><summary>Precise</summary>
+
+Traders mark prior swing highs and lows, round numbers or 'zones' where price left quickly, and fade moves into them (or trade breaks through them). Osler (2000) tested support and resistance levels published daily by six FX firms in 1996 to 1998 against one-minute quotes and found rates bounced off published levels more often than off random levels, but the test measures turning points, not profits.
+
+</details>
+
+### The rule
+
+Mark the most recent swing high and swing low on the daily chart (or published levels). When price comes within a small distance of a level, enter against the move (buy at support, sell at resistance) with a stop just beyond the level; if price closes through the level, flip to the breakout direction.
+
+### Data needed
+
+- Intraday FX quotes (Osler used one-minute data)
+- Daily OHLC for swing levels
+
+### Why it might work
+
+Orders really do cluster at round numbers and visible levels: Osler (2000) reports 96 percent of published levels ended in 0 or 5, and Osler (2002) shows take-profit orders tend to stop trends and stop-loss orders tend to speed them up at such levels.
+
+### Why it might fail
+
+Osler's bounce edge is small (about 61 versus 56 percent) and she does not show a trading profit after spreads. Zones drawn by hand can be fitted after the fact; there is no published test of supply and demand zones as taught in retail courses.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Osler (2000), Support for resistance: technical analysis and intraday exchange rates, FRBNY Economic Policy Review](https://www.newyorkfed.org/medialibrary/media/research/epr/00v06n2/0007osle.pdf) | Jan 1996 - Mar 1998 | USD/DEM, USD/JPY, GBP/USD, one-minute quotes, levels from six firms | n/a | n/a | n/a | n/a | backtest | unclear | yes |
+
+Notes on these numbers:
+
+- **Osler (2000), Support for resistance: technical analysis and intraday exchange rates, FRBNY Economic Policy Review:** Rates bounced off published levels 60.8 percent of the time versus 56.2 percent for artificial levels; published beat artificial in all 16 firm-currency pairs. Predictive power lasted at least five business days. A predictability test, not a profit test, so no return numbers.
+
+### After publication
+
+We found no evidence on how it did after it became known.
+
+### Implementations
+
+- [https://github.com/mementum/backtrader](https://github.com/mementum/backtrader) (Python, license: GPL-3.0): Event-driven backtester with built-in indicators and order types (stops, OCO).
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | not yet |
+| 4. implemented | not yet |
+| 5. registered | not yet |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+Nothing links here yet.
+<!-- backlinks:end -->

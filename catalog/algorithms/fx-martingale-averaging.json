@@ -1,0 +1,54 @@
+{
+  "id": "ALG-0060",
+  "slug": "fx-martingale-averaging",
+  "name": "Martingale and averaging-down systems on FX",
+  "family": "portfolio-construction",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "martingale",
+    "position-sizing",
+    "negative-control",
+    "retail-ea"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Gambling doubling system applied to FX by retail traders and MetaTrader expert advisors",
+    "source_title": "No dated primary source found",
+    "source_url": null
+  },
+  "how_it_works": {
+    "simple": "Every time a trade loses, the next trade is twice as big, so one win pays back all the losses. On FX it often means adding more and more to a losing position.",
+    "analogy": "Like doubling your bet at roulette after each loss: it works until you hit a long losing streak or the table limit, and then you lose everything at once.",
+    "precise": "A position-sizing scheme, not a signal. Classic martingale doubles size after each loss; FX 'averaging' adds a new lot every X pips against the position and closes the whole basket at a small profit from the average price. It turns many small wins into a rare, very large loss, so the backtest equity curve looks smooth until the account is wiped out. Expected value is unchanged by sizing if the entry signal has no edge."
+  },
+  "rule": "Common EA logic on EUR/USD: open 0.01 lot in the direction of a simple signal; if price moves 20 pips against it, open another position of double size in the same direction; close all positions when the basket shows a net profit of 10 pips on the average price. Repeat. On daily bars, apply the same logic with levels set in ATR units.",
+  "data_needed": [
+    "Daily (or intraday) FX prices",
+    "Swap rates, since baskets are often held for weeks",
+    "Margin rules (for example a 30:1 cap) to model forced liquidation"
+  ],
+  "economic_rationale": "None. Proponents say currencies 'always come back'; there is no evidence they must, and adding size after losses only changes the shape of the return distribution, not its mean.",
+  "why_it_might_fail": "A trend that runs further than the grid's capacity, like the October 1998 yen move that Brunnermeier, Nagel and Pedersen (2008) describe, forces a margin call and a loss larger than all earlier wins combined. We found no academic study of FX martingale returns; ESMA's figures on retail CFD losses cover such traders but do not isolate them.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Not a source of return, but easy to simulate on daily FX as a negative control that shows how smooth backtests can hide ruin; see also the crypto-grid-trading-bot entry."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

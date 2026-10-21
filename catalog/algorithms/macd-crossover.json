@@ -1,0 +1,82 @@
+{
+  "id": "ALG-0065",
+  "slug": "macd-crossover",
+  "name": "MACD signal-line crossover",
+  "family": "technical-indicator",
+  "markets": [
+    "equities",
+    "fx"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "oscillator",
+    "trend-following",
+    "retail-classic",
+    "momentum"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 1979,
+    "authors": "Gerald Appel",
+    "source_title": "Moving Average Convergence-Divergence, introduced in Appel's newsletters in the late 1970s (date approximate)",
+    "source_url": "https://doi.org/10.3390/jrfm7010001"
+  },
+  "how_it_works": {
+    "simple": "Take a fast average and a slow average of price and look at the gap between them. When that gap starts growing upward past its own average, buy; when it turns down past it, sell.",
+    "analogy": "Like watching a car's speed rather than its position: you act when it starts to speed up or slow down.",
+    "precise": "MACD is EMA(12) minus EMA(26) of price; the signal line is a 9-period EMA of MACD. The retail rule buys when MACD crosses above the signal line and sells when it crosses below; a variant (MACD(12,26,0)) trades the zero line. Chong and Ng (2008) and Chong, Ng and Liew (2014) test these on stock indices."
+  },
+  "rule": "Daily: MACD = EMA12(close) - EMA26(close); signal = EMA9(MACD). Go long when MACD crosses above the signal line, exit (or go short) when it crosses below. The academic variant MACD(12,26,0) uses the zero line instead of the signal line.",
+  "data_needed": [
+    "Daily closing prices (SPY, FX spot)",
+    "Cost estimate"
+  ],
+  "economic_rationale": "It is a smoothed momentum measure, so any edge would come from short-term trend persistence. Chong, Ng and Liew (2014) say their results 'shed some light on investors' belief' in it, not that a risk premium explains it.",
+  "why_it_might_fail": "Results in Chong, Ng and Liew (2014) are uneven across markets: the rule was significant in Milan and Toronto but not everywhere, which is what one would expect from chance across many market tests. The 12/26/9 parameters were never chosen with out-of-sample testing, and signal-line crossovers trade often, so costs matter.",
+  "reported_results": [
+    {
+      "source": "Chong, Ng and Liew (2014), Journal of Risk and Financial Management 7(1), abstract",
+      "source_url": "https://doi.org/10.3390/jrfm7010001",
+      "period": "Not stated in abstract",
+      "market": "Stock indices of five OECD countries",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record (full text blocked to our fetcher). MACD(12,26,0) and RSI(21,50) 'consistently generate significant abnormal returns' in the Milan Comit General and the S&P/TSX Composite; no numbers in the abstract. Builds on Chong and Ng (2008) for the FT30 in London."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [
+    {
+      "url": "https://github.com/TA-Lib/ta-lib-python",
+      "language": "Python",
+      "license": "BSD-2-Clause",
+      "notes": "Python wrapper for TA-Lib; has SMA, EMA, MACD, RSI, Bollinger bands and candlestick pattern functions."
+    },
+    {
+      "url": "https://github.com/kernc/backtesting.py",
+      "language": "Python",
+      "license": "AGPL-3.0",
+      "notes": "General daily-bar backtester; its standard example is an SMA crossover."
+    }
+  ],
+  "relevance": {
+    "score": 3,
+    "reason": "Easy to test on SPY and daily FX, but likely to behave like a noisier moving average crossover."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

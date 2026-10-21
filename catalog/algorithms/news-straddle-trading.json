@@ -1,0 +1,54 @@
+{
+  "id": "ALG-0066",
+  "slug": "news-straddle-trading",
+  "name": "News straddle (pending orders around NFP and rate decisions)",
+  "family": "event-news",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "news-trading",
+    "straddle",
+    "nfp",
+    "slippage"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Retail forex forums and broker education pages",
+    "source_title": "No dated primary source found",
+    "source_url": null
+  },
+  "how_it_works": {
+    "simple": "Just before a big news release, put an order to buy a bit above the price and an order to sell a bit below. Whichever way the news pushes price, one order gets filled and rides the move.",
+    "analogy": "Like putting a net on both sides of a river before the dam opens, so you catch fish whichever way the water rushes.",
+    "precise": "Two minutes before a scheduled release (US non-farm payrolls, FOMC, CPI), place a buy stop X pips above and a sell stop X pips below the current price; when one fills, cancel the other and use a tight stop and a fixed target. It relies on the large, fast moves that macro surprises cause. In practice spreads widen and liquidity thins at the release, so stops fill with slippage and both sides can be triggered in a whipsaw."
+  },
+  "rule": "Example: 2 minutes before US non-farm payrolls, place a buy stop 15 pips above and a sell stop 15 pips below EUR/USD; one-cancels-other; stop 10 pips, target 30 pips; close any open trade after 30 minutes.",
+  "data_needed": [
+    "Tick or 1-minute FX data around releases",
+    "Release calendar with exact times",
+    "Broker spread and slippage at release time"
+  ],
+  "economic_rationale": "Macro announcements do move exchange rates quickly; the fx-macro-news-surprise entry covers the academic evidence on that. The straddle tries to catch the move without forecasting direction.",
+  "why_it_might_fail": "We found no academic or audited test of the retail straddle itself. The first seconds after a release are when retail spreads are widest and stop orders slip most, and many brokers warn that pending orders may fill far from the requested price. A whipsaw can trigger both legs at a loss.",
+  "reported_results": [],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Intraday and execution-dependent, so not testable with our daily data."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 1,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}

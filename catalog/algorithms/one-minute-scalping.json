@@ -1,0 +1,112 @@
+{
+  "id": "ALG-0067",
+  "slug": "one-minute-scalping",
+  "name": "Scalping on 1-minute charts",
+  "family": "technical-indicator",
+  "markets": [
+    "fx",
+    "equities",
+    "crypto"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "scalping",
+    "day-trading",
+    "retail-outcomes",
+    "high-turnover"
+  ],
+  "origin": {
+    "type": "community",
+    "first_published": null,
+    "authors": "Day-trading courses and YouTube channels; no single author",
+    "source_title": "No dated primary source found",
+    "source_url": "https://faculty.haas.berkeley.edu/odean/papers/Day%20Traders/Day%20Trade%20040330.pdf"
+  },
+  "how_it_works": {
+    "simple": "Make dozens of very quick trades a day, each trying to grab a few cents or pips, using signals on charts where each bar is one minute.",
+    "analogy": "Like picking up coins in front of a steamroller: each coin is small, and the costs and one bad slip add up fast.",
+    "precise": "Typical rules combine fast EMAs (for example 9 and 21), VWAP or stochastic crosses on 1-minute bars, targets of 3 to 10 pips and stops of similar size, often several dozen trades a day. Because each gain is about the size of the spread and commission, costs dominate. The best evidence is on the people doing it: large studies of day traders in Taiwan and Brazil find the vast majority lose money."
+  },
+  "rule": "Example as taught: on EUR/USD 1-minute bars, buy when the 9 EMA crosses above the 21 EMA and price is above VWAP; take profit at 5 pips, stop at 5 pips; sell short on the opposite cross; no trades outside the London and New York sessions.",
+  "data_needed": [
+    "Tick or 1-minute FX data",
+    "Realistic spread and commission per trade"
+  ],
+  "economic_rationale": "Proponents claim short-term order-flow imbalances are predictable. Barber, Lee, Liu and Odean (2004) find a small group of day traders with persistent skill, so it is not impossible, but it is rare.",
+  "why_it_might_fail": "Barber et al. (2004) find more than eight in ten Taiwanese day traders lose money in a typical six-month period and heavy day traders' gross profits do not cover costs. Barber et al. (2017) find the aggregate performance of day traders is negative and fewer than 1 percent are predictably profitable. Chague and Giovannetti (2025) estimate Brazilian individual day traders lost R$9.9 billion from the pandemic to December 2023.",
+  "reported_results": [
+    {
+      "source": "Barber, Lee, Liu and Odean (2004), Do individual day traders make money? Evidence from Taiwan",
+      "source_url": "https://faculty.haas.berkeley.edu/odean/papers/Day%20Traders/Day%20Trade%20040330.pdf",
+      "period": "1995-1999",
+      "market": "Taiwan Stock Exchange, individual day traders",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "'In the typical six month period, more than eight out of ten day traders lose money.' Heavy day traders earn gross profits that do not cover costs. A small group with strong past performance keeps earning; their buys beat their sells by 62 bp per day."
+    },
+    {
+      "source": "Barber, Lee, Liu, Odean and Zhang (2017 version), Do day traders rationally learn about their ability?",
+      "source_url": "https://faculty.haas.berkeley.edu/odean/papers/Day%20Traders/Day%20Trading%20and%20Learning%20110217.pdf",
+      "period": "1992-2006",
+      "market": "Taiwan, individual day traders",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Aggregate day-trader performance is negative and 'the vast majority of day traders are unprofitable'; cites their 2010 finding that less than 1 percent of day traders predictably earn profits."
+    },
+    {
+      "source": "Chague and Giovannetti (2025), The COVID-19 and day-trade pandemics in Brazil, Revista Brasileira de Financas, abstract",
+      "source_url": "https://doi.org/10.12660/rbfin.v23n1.2025.94291",
+      "period": "Mar 2020 - Dec 2023",
+      "market": "All individual day traders on the Brazilian exchange",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Abstract read through its OpenAlex record. Gross losses of R$9.9 billion, an average loss of R$10,200 per individual, around 100,000 active day traders per day."
+    },
+    {
+      "source": "ESMA product intervention press release, 27 March 2018",
+      "source_url": "https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors",
+      "period": "Data cited by national regulators before 2018",
+      "market": "Retail CFD accounts in the EU (FX is the largest CFD market)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "live",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "'74-89% of retail accounts typically lose money on their investments, with average losses per client ranging from EUR 1,600 to EUR 29,000.' ESMA then limited retail positions on major FX pairs to 30 times the margin posted. Covers all retail CFD trading, not this strategy alone."
+    }
+  ],
+  "post_publication_evidence": "",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Needs tick or minute data and the evidence on people who try it is strongly negative."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-20",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": ""
+  }
+}
