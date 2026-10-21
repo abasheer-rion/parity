@@ -21,7 +21,7 @@ export async function sendSignInLink(email: string): Promise<string | null> {
   if (!supabase) return "Supabase is not configured.";
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: window.location.origin, shouldCreateUser: false },
+    options: { emailRedirectTo: window.location.origin },
   });
   return error ? error.message : null;
 }

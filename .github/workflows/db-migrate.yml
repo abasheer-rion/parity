@@ -1,7 +1,6 @@
 # Applies new files in supabase/migrations/ to the hosted project when they reach main.
 #
-# Secrets: SUPABASE_ACCESS_TOKEN, SUPABASE_DB_PASSWORD
-# Variables: SUPABASE_PROJECT_REF
+# Secrets: SUPABASE_DB_URL (owner connection string through the session pooler)
 name: Database migrations
 
 on:
@@ -21,7 +20,7 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     env:
-      HAS_SECRETS: ${{ secrets.SUPABASE_ACCESS_TOKEN != '' && vars.SUPABASE_PROJECT_REF != '' }}
+      HAS_SECRETS: ${{ secrets.SUPABASE_DB_URL != '' }}
     steps:
       - name: Skip when Supabase is not connected yet
         if: env.HAS_SECRETS != 'true'
@@ -35,8 +34,5 @@ jobs:
       - name: Link and push
         if: env.HAS_SECRETS == 'true'
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-        run: |
-          supabase link --project-ref "${{ vars.SUPABASE_PROJECT_REF }}"
-          supabase db push
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: supabase db push --db-url "$SUPABASE_DB_URL" --yes

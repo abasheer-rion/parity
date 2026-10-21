@@ -1,56 +1,53 @@
 """Send a research run to Supabase so the hosted dashboard can show it.
 
-Uses the PostgREST API directly so we do not need another dependency. Needs two
-environment variables, which the scheduled workflow reads from GitHub secrets:
+Connects straight to Postgres as `parity_writer`, a role that can only insert new
+batches and runs (see supabase/migrations/20261020010000_writer_role.sql). That is
+less power than the project's service key, which can do anything. Needs one
+environment variable, which the scheduled workflow reads from a GitHub secret:
 
-    SUPABASE_URL                https://<project-ref>.supabase.co
-    SUPABASE_SERVICE_ROLE_KEY   server-side key; never ship this to the browser
+    PARITY_WRITER_DB_URL   postgresql://parity_writer.<ref>:<password>@<pooler-host>:5432/postgres
 
-Table layout is in supabase/migrations/.
+Install with `pip install -e ".[publish]"`.
 """
 
 from __future__ import annotations
 
+import json
 import os
-
-import requests
 
 
 class NotConfigured(RuntimeError):
     pass
 
 
-def _client() -> tuple[str, dict]:
-    url = os.environ.get("SUPABASE_URL")
-    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
-    if not url or not key:
-        raise NotConfigured("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are not set")
-    headers = {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-        "Prefer": "return=representation",
-    }
-    return url.rstrip("/") + "/rest/v1", headers
+BATCH_SQL = """
+insert into public.research_batches
+  (generated_at, git_sha, schema_version, n_trials, config, coverage)
+values (%s, %s, %s, %s, %s, %s)
+returning id
+"""
+
+RUN_FIELDS = ("strategy", "summary", "reference", "is_benchmark", "params", "config", "metrics",
+              "yearly", "equity", "drawdown", "ic_decay", "exposure", "gauntlet")
+JSON_FIELDS = {"params", "config", "metrics", "yearly", "equity", "drawdown", "ic_decay",
+               "exposure", "gauntlet"}
 
 
 def publish(doc: dict) -> str:
-    base, headers = _client()
-    batch = {
-        "generated_at": doc["generated_at"],
-        "git_sha": doc.get("git_sha"),
-        "schema_version": doc["schema_version"],
-        "config": doc["config"],
-        "coverage": doc["coverage"],
-        "n_trials": doc["n_trials"],
-    }
-    resp = requests.post(f"{base}/research_batches", json=batch, headers=headers, timeout=60)
-    resp.raise_for_status()
-    batch_id = resp.json()[0]["id"]
+    url = os.environ.get("PARITY_WRITER_DB_URL")
+    if not url:
+        raise NotConfigured("PARITY_WRITER_DB_URL is not set")
+    import psycopg  # only needed when publishing
 
-    fields = ("strategy", "summary", "reference", "is_benchmark", "params", "config", "metrics",
-              "yearly", "equity", "drawdown", "ic_decay", "exposure", "gauntlet")
-    rows = [{"batch_id": batch_id, **{k: run[k] for k in fields}} for run in doc["runs"]]
-    resp = requests.post(f"{base}/strategy_runs", json=rows, headers=headers, timeout=120)
-    resp.raise_for_status()
+    with psycopg.connect(url, autocommit=False) as conn, conn.cursor() as cur:
+        cur.execute(BATCH_SQL, (doc["generated_at"], doc.get("git_sha"), doc["schema_version"],
+                                doc["n_trials"], json.dumps(doc["config"]),
+                                json.dumps(doc["coverage"])))
+        batch_id = str(cur.fetchone()[0])
+        cols = ", ".join(("batch_id", *RUN_FIELDS))
+        marks = ", ".join(["%s"] * (len(RUN_FIELDS) + 1))
+        rows = [(batch_id, *[json.dumps(run.get(f)) if f in JSON_FIELDS else run[f]
+                             for f in RUN_FIELDS]) for run in doc["runs"]]
+        cur.executemany(f"insert into public.strategy_runs ({cols}) values ({marks})", rows)
+        conn.commit()
     return batch_id

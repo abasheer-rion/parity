@@ -1,7 +1,7 @@
 # Nightly research run: fetch data, backtest every strategy, publish to Supabase.
 # The report is also kept as a build artifact for 30 days.
 #
-# Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, FRED_API_KEY (optional)
+# Secrets: PARITY_WRITER_DB_URL (insert-only database login), FRED_API_KEY (optional)
 name: Research run
 
 on:
@@ -35,7 +35,7 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: engine/pyproject.toml
-      - run: pip install -e .
+      - run: pip install -e ".[publish]"
       - name: Restore data cache
         uses: actions/cache@v6
         with:
@@ -57,6 +57,5 @@ jobs:
           retention-days: 30
       - name: Publish to Supabase
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          PARITY_WRITER_DB_URL: ${{ secrets.PARITY_WRITER_DB_URL }}
         run: parity publish --allow-missing
