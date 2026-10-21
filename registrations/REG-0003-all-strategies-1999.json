@@ -1,0 +1,145 @@
+{
+  "id": "REG-0003",
+  "title": "All fifteen strategies against the Yahoo-free US market benchmark, 1999 on",
+  "created": "2026-10-20",
+  "authors": [
+    "ayan"
+  ],
+  "hypotheses": [
+    "HYP-0001",
+    "HYP-0002",
+    "HYP-0003",
+    "HYP-0005",
+    "HYP-0007"
+  ],
+  "experiment": "EXP-0004",
+  "question": "With the benchmark measured without Yahoo and history from 1999-01-04, does any of the fifteen strategies, at default settings, pass all six A tests of the gauntlet?",
+  "strategies": [
+    {
+      "name": "commodity_tsmom",
+      "params": {
+        "lookback": 252
+      }
+    },
+    {
+      "name": "fx_carry",
+      "params": {
+        "k": 3,
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "fx_carry_trend_value",
+      "params": {}
+    },
+    {
+      "name": "fx_commodity_gap",
+      "params": {
+        "mapping": {
+          "fx.CAD": "cmd.WTI",
+          "fx.NOK": "cmd.BRENT"
+        },
+        "beta_window": 250,
+        "gap_window": 20,
+        "z_window": 250,
+        "rebalance": "W"
+      }
+    },
+    {
+      "name": "fx_dollar_carry",
+      "params": {
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "fx_ma_cross",
+      "params": {
+        "fast": 50,
+        "slow": 200
+      }
+    },
+    {
+      "name": "fx_rsi_reversion",
+      "params": {
+        "n": 14,
+        "band": 30
+      }
+    },
+    {
+      "name": "fx_tsmom",
+      "params": {
+        "lookback": 252,
+        "vol_window": 60,
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "fx_value_reer",
+      "params": {
+        "window_months": 60,
+        "k": 3,
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "fx_xs_momentum",
+      "params": {
+        "lookback": 252,
+        "skip": 21,
+        "k": 3,
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "stocks_golden_cross",
+      "params": {
+        "fast": 50,
+        "slow": 200
+      }
+    },
+    {
+      "name": "stocks_plus_fx_trend",
+      "params": {}
+    },
+    {
+      "name": "stocks_sell_in_may",
+      "params": {}
+    },
+    {
+      "name": "stocks_trend_10m",
+      "params": {
+        "days": 210
+      }
+    },
+    {
+      "name": "stocks_turn_of_month",
+      "params": {
+        "days_after": 3
+      }
+    },
+    {
+      "name": "stocks_vol_managed",
+      "params": {
+        "window": 21,
+        "target": 0.16,
+        "cap": 2.0
+      }
+    }
+  ],
+  "backtest": {
+    "start": "1999-01-04",
+    "end": null,
+    "cost_bps": 1.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "beats_sp500": true
+  },
+  "prior_trials": 172,
+  "prior_trials_note": "52 earlier evaluations of the first three strategies, plus about 10 exploratory evaluations of each of the twelve new strategies (one gauntlet run with its variants, and one quick run) on 2026-10-20.",
+  "what_would_change_our_mind": "A strategy passing all six A tests would be the first; it would get a separate forward-test registration before we believe it.",
+  "already_seen": "Yes. Exploratory gauntlet results for all fifteen were seen on 2026-10-20, with the same settings. This run makes them official and counts the trials honestly; it is not a fresh test."
+}
