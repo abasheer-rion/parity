@@ -588,3 +588,23 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 @media (max-width: 860px) { .topbar .chip-badge { display: none; } .two { grid-template-columns: minmax(0, 1fr); } }
 .range-tabs { flex-wrap: wrap; }
 @media (max-width: 860px) { .range-tabs button { padding: 8px 7px; } .range-key { margin-left: 0; width: 100%; padding: 6px 0; } }
+
+/* Full-bleed pages (Sim World) and the slim icon rail. The rail is desktop only;
+   phones keep the slide-in drawer. */
+.main-col main.full { max-width: none; padding: 20px 28px 112px; }
+.rail-toggle { flex: none; width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: var(--radius-md); background: none; color: var(--ds-icon-secondary); cursor: pointer; }
+.rail-toggle:hover { background: var(--hover); color: var(--text); }
+.org:has(.rail-toggle) .org-button { width: auto; flex: 1; min-width: 0; }
+@media (min-width: 861px) {
+  .frame { transition: grid-template-columns .25s var(--ease-out); }
+  .frame.railed { grid-template-columns: 60px minmax(0, 1fr); }
+  .railed .side { overflow-x: hidden; }
+  .railed .org { flex-direction: column; height: auto; gap: 6px; padding: 8px 0; }
+  .railed .org-button { width: 36px; flex: none; justify-content: center; padding: 4px; }
+  .railed .org-name, .railed .org-badge, .railed .switcher, .railed .side-group, .railed .side-sep,
+  .railed .side-item .lbl, .railed .side-item .count, .railed .side-children, .railed .account-name, .railed .account-row > .icon { display: none; }
+  .railed .side-nav { align-items: center; padding: 0; }
+  .railed .side-item { width: 40px; justify-content: center; padding: 0; }
+  .railed .account-row { justify-content: center; }
+}
+@media (max-width: 860px) { .rail-toggle { display: none; } .main-col main.full { padding: 16px 16px 72px; } }

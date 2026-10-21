@@ -78,6 +78,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
         sig = strat.signal(panel)
         runs.append({
             "strategy": name,
+            **type(strat).label(),
             "summary": strat.summary,
             "reference": strat.reference,
             "is_benchmark": strat.is_benchmark,

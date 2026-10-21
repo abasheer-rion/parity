@@ -14,6 +14,9 @@
     parity scenario --type military_strike --region middle_east --severity 4
                                  what markets did after past events like a scenario
     parity scenario export       write output/scenarios.json for the dashboard
+    parity new-strategy "Name" --family F --asset A
+                                 create the files for a new strategy
+    parity analyse NAME          strengths and weaknesses report for one strategy
 """
 
 from __future__ import annotations
@@ -231,6 +234,56 @@ def _scenario(args) -> int:
             print(f"{key:<8}{h:>8}{v['n']:>4}{med:>11}{mid:>24}"
                   f"{v['up'] * 100:>6.0f}%")
     print("\nSmall samples, changing regimes and events priced in beforehand all limit this.")
+def _new_strategy(args) -> int:
+    from .scaffold import REPO_ROOT, ScaffoldError, scaffold
+
+    try:
+        out = scaffold(args.name, args.family, args.asset, style=args.style,
+                       horizon=args.horizon, sid=args.id, description=args.description,
+                       root=Path(args.root) if args.root else REPO_ROOT, dry_run=args.dry_run)
+    except ScaffoldError as exc:
+        print(f"Refused: {exc}")
+        return 1
+    verb = "Would create" if out["dry_run"] else "Created"
+    print(f"{verb} strategy {out['id']} ({out['catalog_id']}):")
+    for f in out["files"]:
+        print(f"  {f}")
+    if not out["dry_run"] and out["doc"] != "built":
+        print(f"  catalog page: {out['doc']}. Run `python3 scripts/docs.py index`.")
+    print("\nNext steps:")
+    for i, step in enumerate(out["next_steps"], 1):
+        print(f"  {i}. {step}")
+    return 0
+
+
+def _analyse(args) -> int:
+    from .analysis import analyse_strategy, to_markdown
+    from .data import store
+
+    data_dir = Path(args.data_dir) if args.data_dir else store.DEFAULT_DIR
+    if not (data_dir / "raw").exists():
+        print(f"No data in {data_dir}. Run `parity fetch` or pass --data-dir.")
+        return 1
+    cfg = BacktestConfig(start=args.start, end=args.end, cost_bps=args.cost_bps)
+    try:
+        a = analyse_strategy(args.name, cfg, data_dir, n_trials=args.trials)
+    except KeyError as exc:
+        print(exc.args[0])
+        return 1
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    md, js = out / f"{args.name}.md", out / f"{args.name}.json"
+    md.write_text(to_markdown(a))
+    js.write_text(json.dumps(a, indent=2, default=str) + "\n")
+    print(f"Wrote {md}\nWrote {js}\n")
+    if a["verdict"]:
+        print(a["verdict"])
+    print("Strengths:")
+    for x in a["strengths"] or ["none found"]:
+        print(f"  + {x}")
+    print("Weaknesses:")
+    for x in a["weaknesses"] or ["none found"]:
+        print(f"  - {x}")
     return 0
 
 
@@ -321,6 +374,31 @@ def main(argv: list[str] | None = None) -> int:
     sc.add_argument("--limit", type=int, default=12)
     sc.add_argument("--out", default=str(DEFAULT_OUT / "scenarios.json"))
     sc.set_defaults(func=_scenario)
+    from .strategies.base import ASSETS, FAMILIES
+
+    ns = sub.add_parser("new-strategy", help="create the files for a new strategy")
+    ns.add_argument("name", help='human name, e.g. "Currency carry"')
+    ns.add_argument("--family", required=True, choices=FAMILIES)
+    ns.add_argument("--asset", required=True, choices=ASSETS)
+    ns.add_argument("--style", default=None, help='short phrase, e.g. "momentum"')
+    ns.add_argument("--horizon", default=None, help='e.g. "daily", "monthly", "multi-month"')
+    ns.add_argument("--id", default=None, help="snake_case id; default comes from the name")
+    ns.add_argument("--description", default=None, help="one short plain sentence")
+    ns.add_argument("--root", default=None, help="repo root to write into (for tests)")
+    ns.add_argument("--dry-run", action="store_true", help="show what would be created")
+    ns.set_defaults(func=_new_strategy)
+
+    an = sub.add_parser("analyse", help="strengths and weaknesses report for one strategy")
+    an.add_argument("name")
+    an.add_argument("--data-dir", default=None,
+                    help="data folder; default is engine/data or $PARITY_DATA_DIR")
+    an.add_argument("--start", default="1999-01-04")
+    an.add_argument("--end", default=None)
+    an.add_argument("--cost-bps", type=float, default=1.0)
+    an.add_argument("--trials", type=int, default=None,
+                    help="trial count for deflated Sharpe; default is every strategy")
+    an.add_argument("--out", default=str(DEFAULT_OUT / "analysis"))
+    an.set_defaults(func=_analyse)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:

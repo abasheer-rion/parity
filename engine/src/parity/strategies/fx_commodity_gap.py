@@ -27,6 +27,11 @@ DEFAULT_MAP = {"fx.CAD": "cmd.WTI", "fx.NOK": "cmd.BRENT"}
 @register
 class FxCommodityGap(Strategy):
     name = "fx_commodity_gap"
+    display_name = "Oil currency catch-up"
+    description = ("Buys the Canadian dollar or Norwegian krone when oil has moved and the"
+                   " currency has not caught up yet.")
+    tags = {"family": "value", "asset": "fx", "style": "mean reversion",
+            "horizon": "weekly"}
     summary = "Buy CAD or NOK when oil has moved more than the currency, and the reverse."
     reference = "hypotheses/0003-commodity-currencies-catch-up.md"
     param_grid = {"gap_window": [10, 20, 40], "rebalance": ["W", "M"]}

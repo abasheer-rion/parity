@@ -4,7 +4,7 @@ title: Adding or removing a strategy
 type: guide
 status: current
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 authors: [ayan]
 tags: [process, strategy]
 related: [DEC-0003, GDE-0001]
@@ -14,53 +14,66 @@ related: [DEC-0003, GDE-0001]
 
 ## In plain words
 
-How to add a new trading idea, or remove one. Write down the idea first, then write the code, then record what happened.
+How to add a new trading idea, or remove one. One command sets it up. Then write the idea down, write the rule, run it and read what it is good and bad at.
 
 ## Summary
 
-A strategy is one file. Write the hypothesis first, then the code, then record the experiment. Removing a strategy is deleting its file.
+A strategy is one file. One command creates it with everything around it. You write the rule, register the plan, run it, and read the analysis.
 
 ## Steps
 
-1. **Write the hypothesis.** `python3 scripts/docs.py new hypothesis "Your claim in plain words"`. Fill in why it might be true and why it might be false before looking at any backtest.
+1. **Create it.** From the repo root:
 
-2. **Create the file** `engine/src/parity/strategies/<your_name>.py`:
+   ```sh
+   engine/.venv/bin/parity new-strategy "Yen weekend drift" --family calendar --asset fx --horizon weekly
+   ```
+
+   `--family` is one of carry, trend, value, calendar, volatility or mixed. `--asset` is one of fx, stocks, commodities or mixed. `--style` (a short phrase like "momentum") and `--id` (the snake_case id) are optional. Add `--dry-run` to see what it would create. It refuses if the id is taken.
+
+   It creates:
+
+   - `engine/src/parity/strategies/<id>.py`, registered, with a human name, a one-line description and tags. It holds nothing until you write the rule, so it already runs.
+   - `engine/tests/test_strategy_<id>.py`, a first test.
+   - `catalog/algorithms/<slug>.json`, with TODO placeholders, and its page in `docs/algorithms/` built by `scripts/docs.py index`.
+
+   Then it prints these steps.
+
+2. **Write the hypothesis.** `python3 scripts/docs.py new hypothesis "Your claim in plain words"`. Fill in why it might be true and why it might be false before looking at any backtest. Put its ID in the catalog entry under `research.hypothesis`.
+
+3. **Write the rule.** Replace the TODO in `weights` and fill the TODOs in the catalog entry, then run `python3 scripts/docs.py index`. The file looks like this:
 
    ```python
-   import pandas as pd
-
-   from . import register
-   from ._util import hold_between_rebalances
-   from .base import Strategy
-
-
    @register
-   class MyIdea(Strategy):
-       name = "my_idea"
+   class YenWeekendDrift(Strategy):
+       name = "yen_weekend_drift"           # never change it once results exist
+       display_name = "Yen weekend drift"   # what people see
+       description = "One short plain sentence."
+       tags = {"family": "calendar", "asset": "fx", "style": "seasonal", "horizon": "weekly"}
        summary = "One plain sentence on what it bets on."
-       reference = "hypotheses/0008-your-claim.md"
+       reference = "algorithms/0073-yen-weekend-drift.md"
 
        def instruments(self) -> list[str]:
-           return ["fx.CAD"]
+           return ["fx.JPY"]
 
        def required(self) -> list[str]:
-           return ["fx.CAD", "cmd.WTI"]   # everything you read
-
-       def signal(self, panel: pd.DataFrame) -> pd.DataFrame:
-           ...                            # optional, but gives you the IC chart
+           return ["fx.JPY", "rate.JPY"]    # everything you read
 
        def weights(self, panel: pd.DataFrame) -> pd.DataFrame:
-           ...                            # use data up to each date only
+           ...                              # use data up to each date only
            return hold_between_rebalances(w, "W")
    ```
 
-3. **Rules the tests enforce.** Every registered strategy must run on the synthetic test data, return finite results, keep gross weights at or below 1, and point `reference` at a doc that exists.
+   Do not size or charge costs yourself. Return raw target weights. The backtester handles timing, costs, carry and volatility targeting the same way for everyone.
 
-4. **Do not size or charge costs yourself.** Return raw target weights. The backtester handles timing, costs, carry and volatility targeting the same way for everyone.
+4. **Test it.** `make test`. Every registered strategy must run on the synthetic test data, return finite results, keep gross weights at or below `max_gross`, point `reference` at a doc that exists, and have a name, description and valid tags.
 
-5. **Run it.** `make test`, then `parity run my_idea`. Every registered strategy also runs in the nightly batch.
+5. **Register it.** Before an official run, write the plan: add `registrations/REG-NNNN-<slug>.json` naming the strategy and its exact settings (copy an existing one), commit it, then `parity registration check REG-NNNN`.
 
-6. **Record it.** `python3 scripts/docs.py new experiment "What you ran"`, with the command, the commit and the numbers.
+6. **Run it.** `parity run <id>` to explore. `parity official REG-NNNN` for a result that goes in the ledger.
+
+7. **Analyse it.** `parity analyse <id>` writes `engine/output/analysis/<id>.md` and `.json`: how it did in market crises, its best and worst years, how trading costs change it, how closely it follows the stock market, which gauntlet tests it failed and what each failure means, and a short list of strengths and weaknesses. Use `--data-dir` if the data lives somewhere other than `engine/data`.
+
+8. **Record it.** `python3 scripts/docs.py new experiment "What you ran"`, with the command, the commit and the numbers.
 
 ## Removing a strategy
 

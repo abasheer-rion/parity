@@ -20,6 +20,8 @@ const paths: Record<string, ReactNode> = {
   search: <><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3 3" /></>,
   bookmark: <path d="M4 2.5h8v11L8 10.5l-4 3z" />,
   chevronLeft: <path d="M10 3.5 5.5 8l4.5 4.5" />,
+  chevronRight: <path d="M6 3.5 10.5 8 6 12.5" />,
+  sidebar: <><rect x="2.5" y="3" width="11" height="10" rx="1.5" /><path d="M6.5 3v10" /></>,
   chevronDown: <path d="M4 6l4 4 4-4" />,
   menu: <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" />,
   arrowUpRight: <path d="M5 11 11 5M6 5h5v5" />,

@@ -37,6 +37,10 @@ class _InOrOut(Strategy):
 @register
 class StocksTrend(_InOrOut):
     name = "stocks_trend_10m"
+    display_name = "Stock trend, 10-month"
+    description = "Holds US stocks while they are above their 10-month average, otherwise cash."
+    tags = {"family": "trend", "asset": "stocks", "style": "timing",
+            "horizon": "monthly"}
     summary = ("Hold US stocks when they are above their 10-month average, otherwise hold "
                "cash (Faber).")
     reference = "algorithms/0043-managed-futures-trend-following.md"
@@ -54,6 +58,11 @@ class StocksTrend(_InOrOut):
 @register
 class StocksGoldenCross(_InOrOut):
     name = "stocks_golden_cross"
+    display_name = "Stock golden cross"
+    description = ("Holds US stocks while the 50-day average is above the 200-day average,"
+                   " otherwise cash.")
+    tags = {"family": "trend", "asset": "stocks", "style": "timing",
+            "horizon": "daily"}
     summary = ("Retail favourite: hold US stocks when the 50-day average is above the "
                "200-day average, otherwise cash.")
     reference = "algorithms/0036-technical-indicator-trading-bots.md"
@@ -70,6 +79,10 @@ class StocksGoldenCross(_InOrOut):
 @register
 class StocksTurnOfMonth(_InOrOut):
     name = "stocks_turn_of_month"
+    display_name = "Stock turn of the month"
+    description = "Holds US stocks only for a few days around the turn of each month."
+    tags = {"family": "calendar", "asset": "stocks", "style": "seasonal",
+            "horizon": "daily"}
     summary = ("Hold US stocks only from the last trading day of each month to the third "
                "day of the next.")
     reference = "algorithms/0052-turn-of-the-month.md"
@@ -91,6 +104,10 @@ class StocksTurnOfMonth(_InOrOut):
 @register
 class StocksSellInMay(_InOrOut):
     name = "stocks_sell_in_may"
+    display_name = "Sell in May"
+    description = "Holds US stocks from November to April and cash for the rest of the year."
+    tags = {"family": "calendar", "asset": "stocks", "style": "seasonal",
+            "horizon": "multi-month"}
     summary = "Hold US stocks from November to April and cash from May to October."
     reference = "algorithms/0047-sell-in-may-halloween.md"
 
@@ -102,6 +119,10 @@ class StocksSellInMay(_InOrOut):
 @register
 class StocksVolManaged(Strategy):
     name = "stocks_vol_managed"
+    display_name = "Stock volatility managed"
+    description = "Holds more stock when markets have been calm and less when they have been wild."
+    tags = {"family": "volatility", "asset": "stocks", "style": "risk timing",
+            "horizon": "monthly"}
     summary = ("Hold more US stock market when it has been calm and less when it has been "
                "wild (Moreira and Muir).")
     reference = "algorithms/0054-volatility-managed-portfolios.md"
@@ -128,6 +149,11 @@ class StocksVolManaged(Strategy):
 @register
 class CommodityTrend(Strategy):
     name = "commodity_tsmom"
+    display_name = "Commodity trend"
+    description = ("Owns oil and gas when they rose over the past year and bets against "
+                   "them when they fell.")
+    tags = {"family": "trend", "asset": "commodities", "style": "momentum",
+            "horizon": "monthly"}
     summary = ("Long Brent oil and US natural gas when they rose over the past year, short "
                "when they fell (spot prices).")
     reference = "algorithms/0039-commodity-time-series-momentum.md"
@@ -154,6 +180,10 @@ class CommodityTrend(Strategy):
 @register
 class StocksPlusFxTrend(Strategy):
     name = "stocks_plus_fx_trend"
+    display_name = "Stocks plus currency trend"
+    description = "Holds US stocks and adds a currency trend book that may soften stock crashes."
+    tags = {"family": "mixed", "asset": "mixed", "style": "overlay",
+            "horizon": "monthly"}
     summary = ("Half the risk in US stocks, half in currency trend, so the trend can "
                "cushion stock crashes.")
     reference = "hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md"
