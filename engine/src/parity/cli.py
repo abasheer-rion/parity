@@ -43,7 +43,7 @@ def _run(args) -> int:
     names = args.names or None
     if names and "spy_buy_hold" not in names:
         names = ["spy_buy_hold", *names]
-    doc = report.run_all(names, cfg)
+    doc = report.run_all(names, cfg, gauntlet=not args.quick)
     path = report.write(doc, Path(args.out))
     print(f"Wrote {path}\n")
     print(f"{'strategy':<20}{'CAGR':>8}{'vol':>8}{'Sharpe':>8}{'maxDD':>8}{'DSR':>7}{'vs SPY':>9}")
@@ -59,6 +59,17 @@ def _run(args) -> int:
         print(f"{r['strategy']:<20}{pct(m['cagr'])}{pct(m['ann_vol'])}{num(m['sharpe'])}"
               f"{pct(m['max_drawdown'])}{num(m['deflated_sharpe'], 7)}"
               f"{pct(m.get('excess_cagr')) if not r['is_benchmark'] else '        -'}")
+    gauntlets = [r for r in doc["runs"] if r.get("gauntlet")]
+    if gauntlets:
+        print("\nGauntlet (A = beats the S&P 500, B = is it real)")
+        for r in gauntlets:
+            g = r["gauntlet"]
+            def mark(t):
+                return "pass" if t["passed"] else "FAIL" if t["passed"] is False else "n/a"
+
+            marks = " ".join(f"{t['id']}:{mark(t)}" for t in g["tests"])
+            print(f"  {r['strategy']:<18} {g['passed']}/{g['total']}  {marks}")
+            print(f"  {'':<18} {g['verdict']}")
     return 0
 
 
@@ -95,6 +106,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--target-vol", type=float, default=None,
                    help="annualised vol target, e.g. 0.15 to match the S&P 500")
     r.add_argument("--no-carry", action="store_true")
+    r.add_argument("--quick", action="store_true", help="skip the gauntlet tests")
     r.add_argument("--out", default=str(DEFAULT_OUT))
     r.set_defaults(func=_run)
 

@@ -1,5 +1,6 @@
 import { LineChart } from "../components/charts";
-import { Card, Pass, StatTile } from "../components/ui";
+import { Card, StatTile } from "../components/ui";
+import { Term } from "./Learn";
 import { colorMap } from "../lib/colors";
 import { num, pct, signedPct } from "../lib/format";
 import type { Report } from "../lib/types";
@@ -43,13 +44,15 @@ export function Overview({ report }: { report: Report }) {
         />
       </Card>
 
-      <Card title="Against the S&P 500" help="Each test from DEC-0006 that this run can answer. Out-of-sample and double-cost tests come from separate experiments.">
+      <Card title="Against the S&P 500" help="Underlined words open the Learn tab. The gauntlet column shows how many of the eleven tough tests each strategy passed; click a strategy to see them.">
         <div className="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Strategy</th><th>CAGR</th><th>Volatility</th><th>Sharpe</th><th>Max drawdown</th>
-                <th>Deflated Sharpe</th><th>Corr. with S&P</th><th>Excess CAGR</th><th>Higher Sharpe</th><th>Not luck</th>
+                <th>Strategy</th><th><Term id="cagr">CAGR</Term></th><th><Term id="volatility">Volatility</Term></th>
+                <th><Term id="sharpe-ratio">Sharpe</Term></th><th><Term id="drawdown">Max drawdown</Term></th>
+                <th><Term id="deflated-sharpe-ratio">Deflated Sharpe</Term></th><th><Term id="correlation">Corr. with S&P</Term></th>
+                <th><Term id="excess-return">Excess CAGR</Term></th><th>Gauntlet</th>
               </tr>
             </thead>
             <tbody>
@@ -69,8 +72,7 @@ export function Overview({ report }: { report: Report }) {
                     <td>{num(m.deflated_sharpe)}</td>
                     <td>{r.is_benchmark ? "1.00" : num(m.correlation)}</td>
                     <td>{r.is_benchmark ? "" : signedPct(m.excess_cagr)}</td>
-                    <td>{r.is_benchmark ? "" : <Pass ok={(m.sharpe ?? -9) > (bench?.metrics.sharpe ?? 9)} label="Sharpe above SPY" />}</td>
-                    <td>{r.is_benchmark ? "" : <Pass ok={(m.deflated_sharpe ?? 0) >= 0.95} label="Deflated Sharpe at least 0.95" />}</td>
+                    <td>{r.gauntlet ? <a href={`#/strategy/${r.strategy}`} title={r.gauntlet.verdict}>{r.gauntlet.passed} of {r.gauntlet.total}</a> : ""}</td>
                   </tr>
                 );
               })}

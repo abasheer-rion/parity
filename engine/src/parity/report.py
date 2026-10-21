@@ -16,6 +16,7 @@ import pandas as pd
 from . import strategies
 from .backtest import BacktestConfig, run
 from .data import store
+from .gauntlet import run_gauntlet
 from .metrics import performance, signal
 
 SCHEMA_VERSION = 1
@@ -36,7 +37,7 @@ def _weekly(series: pd.Series, digits: int = 5) -> list[list]:
 
 
 def run_all(names: list[str] | None = None, config: BacktestConfig | None = None,
-            data_dir: Path = store.DEFAULT_DIR) -> dict:
+            data_dir: Path = store.DEFAULT_DIR, gauntlet: bool = True) -> dict:
     config = config or BacktestConfig()
     registry = strategies.available()
     names = names or list(registry)
@@ -73,6 +74,8 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
             else [],
             "exposure": {k: round(float(v), 4) for k, v in res.weights.iloc[-1].items()}
             if len(res.weights) else {},
+            "gauntlet": run_gauntlet(strat, panel, bench, cfg, n_trials)
+            if gauntlet and not strat.is_benchmark else None,
         })
 
     return {

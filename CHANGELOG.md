@@ -6,6 +6,14 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 Nothing yet.
 
+## 0.2.0 (2026-10-20)
+
+- The gauntlet: eleven fixed tests every strategy faces on every run, six on beating the S&P 500 and five on whether the effect is real ([REF-0006](docs/reference/0006-the-gauntlet.md)). Results in [EXP-0002](docs/experiments/0002-baseline-gauntlet.md).
+- Glossary of 75 terms, each explained three ways (simple, analogy, precise), generated from one file into [REF-0004](docs/reference/0004-glossary.md) and the dashboard's new Learn tab.
+- Every doc now starts with an "In plain words" section, enforced by the docs check. Experiments must also list threats to validity.
+- Dashboard: gauntlet scorecard on each strategy page, glossary links on every metric.
+- Research surveys of open-source projects and forums ([RES-0002](docs/research/0002-open-source-and-public-results.md), [RES-0003](docs/research/0003-forums-and-practitioners.md)).
+
 ## 0.1.0 (2026-10-20)
 
 First version. See [LOG-0001](docs/log/2026-10-20-project-start.md).

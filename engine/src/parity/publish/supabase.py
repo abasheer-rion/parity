@@ -48,9 +48,9 @@ def publish(doc: dict) -> str:
     resp.raise_for_status()
     batch_id = resp.json()[0]["id"]
 
-    rows = [{"batch_id": batch_id, **{k: run[k] for k in (
-        "strategy", "summary", "reference", "is_benchmark", "params", "config", "metrics",
-        "yearly", "equity", "drawdown", "ic_decay", "exposure")}} for run in doc["runs"]]
+    fields = ("strategy", "summary", "reference", "is_benchmark", "params", "config", "metrics",
+              "yearly", "equity", "drawdown", "ic_decay", "exposure", "gauntlet")
+    rows = [{"batch_id": batch_id, **{k: run[k] for k in fields}} for run in doc["runs"]]
     resp = requests.post(f"{base}/strategy_runs", json=rows, headers=headers, timeout=120)
     resp.raise_for_status()
     return batch_id

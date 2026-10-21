@@ -12,6 +12,10 @@ related: [INT-0001, REF-0001, REF-0005]
 
 # Use a free-tier stack of GitHub, Supabase and Cloudflare Pages
 
+## In plain words
+
+We picked free tools for everything. GitHub keeps the code, a free database called Supabase keeps the results, and Cloudflare shows the website. We chose Cloudflare over Vercel because Vercel's free plan would block Amanda and Abanish from publishing changes.
+
 ## Context
 
 We want hosting, a database and CI/CD at no cost, for three people, on a private repository. We considered Vercel and Cloudflare Pages for the dashboard.

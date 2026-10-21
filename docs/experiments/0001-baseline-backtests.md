@@ -12,6 +12,10 @@ related: [DEC-0006, HYP-0001, HYP-0002, HYP-0003, HYP-0007]
 
 # Baseline backtests of carry, trend and the commodity gap
 
+## In plain words
+
+Our first test. We ran three ideas over 26 years of real data with standard settings and compared them with just holding the stock market. All three did worse. That is what most research predicted, and it gives us a starting line.
+
 ## Question
 
 Before tuning anything, how do the three starting strategies compare with the S&P 500 using textbook settings?
@@ -60,6 +64,10 @@ Mean rank information coefficient of each signal against forward returns:
 | fx_tsmom | 0.015 | 0.027 | 0.037 | 0.034 |
 | fx_commodity_gap | 0.019 | 0.033 | 0.069 | 0.125 |
 
+## Threats to validity
+
+The full list, with the stricter tests, is in [EXP-0002](0002-baseline-gauntlet.md#threats-to-validity). The short version: nothing here is truly out of sample, two interest rate series are stale in 2026, interbank rates overstate the carry a trader would earn, and the commodity gap compares prices taken at different times of day.
+
 ## What we learned
 
 1. **Nothing beats the S&P 500.** All three fail the first test in [DEC-0006](../decisions/0006-how-we-define-beating-the-sp-500.md). That matches the literature ([RES-0001](../research/0001-reading-list.md#summary)).
@@ -70,6 +78,8 @@ Mean rank information coefficient of each signal against forward returns:
 6. **Two rate series stop at January 2026** (euro area and UK), so carry for EUR and GBP uses a stale rate for most of 2026. Flagged on the Data page.
 
 ## Next
+
+- Done: the stricter tests are in [EXP-0002](0002-baseline-gauntlet.md).
 
 - Split all three by sub-period (2000 to 2008, 2009 to 2019, 2020 on).
 - For the commodity gap: measure the plain lead-lag first, then rebuild with a holding period chosen from the IC, not from returns ([HYP-0003](../hypotheses/0003-commodity-currencies-catch-up.md#how-we-test-it)).
@@ -84,6 +94,8 @@ Mean rank information coefficient of each signal against forward returns:
 - [HYP-0002: Currency trends persist over months](../hypotheses/0002-currency-trends-persist.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](../hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](../hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](0002-baseline-gauntlet.md)
 - [RES-0002: Open-source projects and public results](../research/0002-open-source-and-public-results.md)
 - [REF-0002: KPIs and how to read them](../reference/0002-kpis.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)

@@ -12,6 +12,10 @@ related: [DEC-0001, DEC-0004]
 
 # Writing and filing docs
 
+## In plain words
+
+How to write a document in this project so it passes the checks: which folder, which labels, how to link to other documents, and how to keep the writing plain.
+
 ## Summary
 
 Use `scripts/docs.py new` to start any document, write in plain words, and run `make docs` before you commit. The pre-commit hook and CI will tell you exactly what to fix. Why the rules exist is in [DEC-0004](../decisions/0004-docs-are-checked-by-a-script.md); the rules themselves are in `docs/_system/schema.json`.
@@ -68,6 +72,12 @@ related: [HYP-0003]
 - Put numbers in tables, with units.
 - Use commas, colons or parentheses instead of dashes between clauses. The checker rejects em dashes, en dashes, curly quotes, emojis and a short list of filler words.
 - Cite papers as "Author (year)" and put the full reference in [RES-0001](../research/0001-reading-list.md).
+
+## Plain words first
+
+Every doc starts with `## In plain words`: two to four sentences a ten year old could follow. No jargon in that section. If you need a term, explain it or link it to the [glossary](../reference/0004-glossary.md).
+
+To add a term, add an entry to `docs/_system/glossary.json` with `simple`, `analogy` and `precise` text, then run `python3 scripts/docs.py index`. The glossary page and the dashboard's Learn tab both update from that one file.
 
 ## Logs
 

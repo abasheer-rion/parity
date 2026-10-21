@@ -5,15 +5,19 @@ export function StatTile({
   value,
   note,
   tone,
+  learn,
 }: {
   label: string;
   value: string;
   note?: string;
   tone?: "good" | "bad";
+  learn?: string;
 }) {
   return (
     <div className="tile">
-      <div className="tile-label">{label}</div>
+      <div className="tile-label">
+        {learn ? <a className="term-link" href={`#/learn/${learn}`}>{label}</a> : label}
+      </div>
       <div className="tile-value">{value}</div>
       {note && (
         <div className={`tile-note ${tone ?? ""}`}>

@@ -1,4 +1,5 @@
 import { BarChart, LineChart } from "../components/charts";
+import { GauntletCard } from "../components/GauntletCard";
 import { Card, StatTile } from "../components/ui";
 import { colorMap } from "../lib/colors";
 import { docUrl, num, pct } from "../lib/format";
@@ -26,13 +27,15 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
       </div>
 
       <div className="tiles">
-        <StatTile label="Sharpe" value={num(m.sharpe)} note={bench && !run.is_benchmark ? `S&P 500: ${num(bench.metrics.sharpe)}` : undefined}
+        <StatTile label="Sharpe ratio" learn="sharpe-ratio" value={num(m.sharpe)} note={bench && !run.is_benchmark ? `S&P 500: ${num(bench.metrics.sharpe)}` : undefined}
           tone={bench && !run.is_benchmark ? ((m.sharpe ?? 0) > (bench.metrics.sharpe ?? 0) ? "good" : "bad") : undefined} />
-        <StatTile label="CAGR" value={pct(m.cagr)} note={`at ${pct(m.ann_vol)} volatility`} />
-        <StatTile label="Max drawdown" value={pct(m.max_drawdown)} />
-        <StatTile label="Deflated Sharpe" value={num(m.deflated_sharpe)} note="0.95 or more needed" />
-        {!run.is_benchmark && <StatTile label="Break-even cost" value={m.breakeven_cost_bps == null ? "n/a" : `${num(m.breakeven_cost_bps, 1)} bp`} note={`${num(m.turnover_per_year, 1)}x turnover a year`} />}
+        <StatTile label="CAGR" learn="cagr" value={pct(m.cagr)} note={`at ${pct(m.ann_vol)} volatility`} />
+        <StatTile label="Max drawdown" learn="drawdown" value={pct(m.max_drawdown)} />
+        <StatTile label="Deflated Sharpe" learn="deflated-sharpe-ratio" value={num(m.deflated_sharpe)} note="0.95 or more needed" />
+        {!run.is_benchmark && <StatTile label="Break-even cost" learn="break-even-cost" value={m.breakeven_cost_bps == null ? "n/a" : `${num(m.breakeven_cost_bps, 1)} bp`} note={`${num(m.turnover_per_year, 1)}x turnover a year`} />}
       </div>
+
+      {run.gauntlet && <GauntletCard gauntlet={run.gauntlet} />}
 
       <Card title="Drawdown" help="How far below its previous peak the strategy was at each point.">
         <LineChart
@@ -61,7 +64,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
       </Card>
 
       {run.ic_decay.length > 0 && (
-        <Card title="Signal information by horizon" help="Mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">
+        <Card title="Signal information by horizon" help="The information coefficient (see Learn): mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">
           <BarChart
             label={`Information coefficient by horizon for ${run.strategy}`}
             format={(v) => v.toFixed(2)}

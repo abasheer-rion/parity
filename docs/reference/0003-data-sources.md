@@ -12,6 +12,10 @@ related: [EXP-0001, REF-0001]
 
 # Data sources
 
+## In plain words
+
+Where our data comes from. All of it is free: the US central bank's data website (FRED) for currencies, interest rates and oil, and Yahoo for the stock market.
+
 ## Summary
 
 Everything the engine uses is free. The list of series is in `engine/src/parity/data/catalog.py`, and this page explains where each comes from and what to watch out for. `parity fetch` downloads all of them in about ten seconds.
@@ -61,6 +65,7 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [REF-0001: Architecture](0001-architecture.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

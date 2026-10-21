@@ -26,6 +26,9 @@ class Strategy(ABC):
     reference: ClassVar[str] = ""
     #: Treat as a benchmark rather than a candidate strategy.
     is_benchmark: ClassVar[bool] = False
+    #: Nearby settings the gauntlet tries, to see if the result depends on one lucky choice.
+    #: Keys are __init__ arguments. Keep it small; every combination counts as a trial.
+    param_grid: ClassVar[dict[str, list]] = {}
 
     @abstractmethod
     def instruments(self) -> list[str]:

@@ -23,6 +23,7 @@ class FxTimeSeriesMomentum(Strategy):
     name = "fx_tsmom"
     summary = "Long G10 currencies that rose over the past 12 months, short those that fell."
     reference = "hypotheses/0002-currency-trends-persist.md"
+    param_grid = {"lookback": [126, 252, 504], "rebalance": ["W", "M"]}
 
     def __init__(self, lookback: int = 252, vol_window: int = 60, rebalance: str = "M"):
         self.lookback = lookback

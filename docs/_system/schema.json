@@ -21,6 +21,7 @@
         "superseded"
       ],
       "sections": [
+        "In plain words",
         "Summary",
         "What we want",
         "What we do not want",
@@ -39,6 +40,7 @@
         "rejected"
       ],
       "sections": [
+        "In plain words",
         "Context",
         "Decision",
         "Consequences"
@@ -57,6 +59,7 @@
         "parked"
       ],
       "sections": [
+        "In plain words",
         "Claim",
         "Why it might be true",
         "Why it might be false",
@@ -76,9 +79,11 @@
         "abandoned"
       ],
       "sections": [
+        "In plain words",
         "Question",
         "Setup",
         "Results",
+        "Threats to validity",
         "What we learned",
         "Next"
       ],
@@ -94,6 +99,7 @@
         "outdated"
       ],
       "sections": [
+        "In plain words",
         "Summary"
       ],
       "about": "Reading notes, surveys of papers, code and forums."
@@ -108,6 +114,7 @@
         "outdated"
       ],
       "sections": [
+        "In plain words",
         "Summary"
       ],
       "about": "How to do something in this repo, step by step."
@@ -122,6 +129,7 @@
         "outdated"
       ],
       "sections": [
+        "In plain words",
         "Summary"
       ],
       "about": "Facts to look up: definitions, data sources, architecture."
@@ -134,6 +142,7 @@
         "final"
       ],
       "sections": [
+        "In plain words",
         "What happened",
         "Decisions",
         "Open questions"

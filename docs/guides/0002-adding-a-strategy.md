@@ -12,6 +12,10 @@ related: [DEC-0003, GDE-0001]
 
 # Adding or removing a strategy
 
+## In plain words
+
+How to add a new trading idea, or remove one. Write down the idea first, then write the code, then record what happened.
+
 ## Summary
 
 A strategy is one file. Write the hypothesis first, then the code, then record the experiment. Removing a strategy is deleting its file.

@@ -12,6 +12,10 @@ related: [GDE-0002, INT-0001, REF-0001]
 
 # Strategies are plug-ins that can be removed at any time
 
+## In plain words
+
+Each trading idea lives in its own file, like a Lego brick. You can add a brick or pull one out without breaking the rest. Every brick is tested the same way, so the comparison is fair.
+
 ## Context
 
 We expect most ideas to fail. The engine should make it cheap to add an idea, compare it fairly with everything else, and throw it away without leaving dead code behind.

@@ -12,6 +12,10 @@ related: [DEC-0002, DEC-0003, DEC-0005, DEC-0006]
 
 # Initial intent
 
+## In plain words
+
+We want to find out if a computer program that trades money from different countries can do better than the simplest thing anyone can do: buy a slice of the 500 biggest US companies and wait. We think it probably cannot, and that is fine. Either way we learn something, and maybe write a paper about it.
+
 ## Summary
 
 Parity is a research project by Ayan, Amanda and Abanish. We want to find out, honestly and with evidence, whether a systematic strategy built around currencies can beat the S&P 500. It is a proof of concept, not a business. If the answer is no, we lose nothing except time and come away understanding markets better. If the answer is yes, or partly yes, we would like to write it up as a paper.
@@ -51,6 +55,5 @@ The first baseline run is in [EXP-0001](../experiments/0001-baseline-backtests.m
 - [DEC-0003: Strategies are plug-ins that can be removed at any time](../decisions/0003-strategies-are-plugins.md)
 - [DEC-0005: Study news and commodity shocks at daily and intraday speed, not microseconds](../decisions/0005-no-microsecond-trading-in-the-poc.md)
 - [DEC-0006: What "beating the S&P 500" means for us](../decisions/0006-how-we-define-beating-the-sp-500.md)
-- [RES-0003: What practitioners say in forums](../research/0003-forums-and-practitioners.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

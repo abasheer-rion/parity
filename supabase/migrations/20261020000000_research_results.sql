@@ -37,6 +37,7 @@ create table public.strategy_runs (
   drawdown jsonb not null,
   ic_decay jsonb not null,
   exposure jsonb not null,
+  gauntlet jsonb,
   unique (batch_id, strategy)
 );
 

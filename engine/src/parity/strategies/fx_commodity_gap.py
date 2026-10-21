@@ -29,6 +29,7 @@ class FxCommodityGap(Strategy):
     name = "fx_commodity_gap"
     summary = "Buy CAD or NOK when oil has moved more than the currency, and the reverse."
     reference = "hypotheses/0003-commodity-currencies-catch-up.md"
+    param_grid = {"gap_window": [10, 20, 40], "rebalance": ["W", "M"]}
 
     def __init__(self, mapping: dict[str, str] | None = None, beta_window: int = 250,
                  gap_window: int = 20, z_window: int = 250, rebalance: str = "W"):

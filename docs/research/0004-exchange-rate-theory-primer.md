@@ -12,6 +12,10 @@ related: [REF-0004, RES-0001]
 
 # Exchange rate theory primer
 
+## In plain words
+
+The few big ideas from economics that explain why currency prices move, written for someone who has never studied economics. For each idea we say what the textbook claims and what really happens, because the gap between them is where trading ideas come from.
+
 ## Summary
 
 The handful of economic ideas behind every strategy in this repo, written for someone who has not studied international finance. Each idea comes with what the data says about it, because in currencies the textbook and the data often disagree, and that disagreement is where strategies come from.
@@ -70,6 +74,7 @@ Full citations are in [RES-0001](0001-reading-list.md).
 ## Referenced by
 
 - [HYP-0003: Commodity currencies catch up to their commodity](../hypotheses/0003-commodity-currencies-catch-up.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](0001-reading-list.md)
 - [REF-0004: Glossary](../reference/0004-glossary.md)
 <!-- backlinks:end -->

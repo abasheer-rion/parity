@@ -1,0 +1,681 @@
+{
+  "about": "Single source for every term we use. scripts/docs.py builds docs/reference/0004-glossary.md from this file, and the dashboard's Learn tab reads it directly. Each term has three views: simple (explain it to a ten year old), analogy (something from everyday life), and precise (what an economist or statistician would write).",
+  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics"],
+  "terms": [
+    {
+      "id": "exchange-rate",
+      "term": "Exchange rate",
+      "category": "Currencies and interest rates",
+      "simple": "How much of one country's money you get for another country's money. If 1 euro buys 1.12 US dollars, that is the exchange rate.",
+      "analogy": "Like swapping trading cards with a friend. Some days your card is worth two of theirs, some days only one, depending on how much people want each card.",
+      "precise": "The price of one currency in units of another. We store every rate as US dollars per one unit of the foreign currency, so a rising number means the foreign currency got stronger.",
+      "related": ["currency-pair", "spot-rate"]
+    },
+    {
+      "id": "currency-pair",
+      "term": "Currency pair",
+      "category": "Currencies and interest rates",
+      "simple": "Two currencies traded against each other, like euros and dollars. Buying one always means selling the other.",
+      "analogy": "A seesaw. If one side goes up, the other side goes down.",
+      "precise": "A quote such as EUR/USD gives the price of the first (base) currency in the second (quote) currency. A long EUR/USD position gains when the euro rises against the dollar.",
+      "related": ["exchange-rate", "long-and-short"]
+    },
+    {
+      "id": "g10-currencies",
+      "term": "G10 currencies",
+      "category": "Currencies and interest rates",
+      "simple": "The ten most traded currencies in the world: US dollar, euro, Japanese yen, British pound, Swiss franc, Canadian dollar, Australian dollar, New Zealand dollar, Norwegian krone and Swedish krona.",
+      "analogy": "The big, busy shops on the main street. Lots of people trade there, so prices are fair and it is cheap to buy and sell.",
+      "precise": "The group of developed-market currencies with the deepest markets and tightest spreads. We use the nine non-dollar G10 currencies against the US dollar.",
+      "related": ["spread"]
+    },
+    {
+      "id": "spot-rate",
+      "term": "Spot rate",
+      "category": "Currencies and interest rates",
+      "simple": "The exchange rate for swapping money right now.",
+      "analogy": "The price on the sticker today, as opposed to a price agreed for next month.",
+      "precise": "The rate for immediate delivery, which in FX means settlement two business days later.",
+      "related": ["forward-rate", "exchange-rate"]
+    },
+    {
+      "id": "forward-rate",
+      "term": "Forward rate",
+      "category": "Currencies and interest rates",
+      "simple": "An exchange rate agreed today for a swap that happens later.",
+      "analogy": "Booking a holiday now at a fixed price, even though you travel in three months.",
+      "precise": "The rate for delivery at a future date. By covered interest parity it equals the spot rate adjusted by the interest rate gap between the two currencies over that period.",
+      "related": ["covered-interest-parity", "spot-rate"]
+    },
+    {
+      "id": "interest-rate",
+      "term": "Interest rate",
+      "category": "Currencies and interest rates",
+      "simple": "What a bank pays you for keeping your money there, or what you pay to borrow. Every country's currency has its own interest rate.",
+      "analogy": "Rent for money. If you lend your money out, you get rent. If you borrow, you pay rent.",
+      "precise": "We use the 3-month interbank rate from the OECD for each currency: the rate banks charge each other to borrow for three months. It tracks the central bank's policy rate closely.",
+      "related": ["carry", "central-bank"]
+    },
+    {
+      "id": "central-bank",
+      "term": "Central bank",
+      "category": "Currencies and interest rates",
+      "simple": "The bank in charge of a country's money. It sets the main interest rate, like the Federal Reserve in the US.",
+      "analogy": "The referee who decides how expensive it is to borrow money in that country.",
+      "precise": "The institution that sets monetary policy, mainly through a short-term policy rate. Its decisions move interest rates and therefore exchange rates.",
+      "related": ["interest-rate", "fomc"]
+    },
+    {
+      "id": "fomc",
+      "term": "FOMC",
+      "category": "Currencies and interest rates",
+      "simple": "The group at the US central bank that meets eight times a year to decide US interest rates.",
+      "analogy": "A scheduled family meeting where the house rules for the next few months get decided. Everyone waits to hear the result.",
+      "precise": "The Federal Open Market Committee. Its scheduled announcements are among the biggest regular events for the dollar. See HYP-0006.",
+      "related": ["central-bank", "macro-surprise"]
+    },
+    {
+      "id": "carry",
+      "term": "Carry",
+      "category": "Currencies and interest rates",
+      "simple": "The interest you earn on the currency you hold minus the interest you pay on the one you borrowed to buy it.",
+      "analogy": "Borrowing money from a friend who charges you 1% and putting it in a bank that pays you 5%. The 4% gap is the carry, as long as nothing else changes.",
+      "precise": "The return a position earns if prices do not move. For a long foreign currency position funded in dollars, carry is roughly the foreign interest rate minus the US rate. Our backtester credits it daily.",
+      "related": ["carry-trade", "uncovered-interest-parity", "interest-rate"]
+    },
+    {
+      "id": "carry-trade",
+      "term": "Carry trade",
+      "category": "Currencies and interest rates",
+      "simple": "Borrowing in a currency with a low interest rate and putting the money in a currency with a high interest rate, to pocket the difference.",
+      "analogy": "Picking up coins in front of a steamroller. You collect a little almost every day, and once in a while you get flattened.",
+      "precise": "A long position in high-yield currencies funded by short positions in low-yield ones. It has paid on average but with large losses in risk-off episodes (Brunnermeier, Nagel and Pedersen, 2008). Tested in HYP-0001.",
+      "related": ["carry", "negative-skew", "uncovered-interest-parity"]
+    },
+    {
+      "id": "covered-interest-parity",
+      "term": "Covered interest parity",
+      "category": "Economic theory",
+      "simple": "A rule that says you cannot make free money by borrowing in one currency and lending in another if you lock in the future exchange rate today.",
+      "analogy": "If two shops sell the same toy, and one shop also lets you return it later at a fixed price, the prices have to line up or everyone would game it.",
+      "precise": "The forward premium equals the interest rate differential, otherwise there is a riskless arbitrage. It holds closely in normal times, with small, persistent deviations since 2008.",
+      "related": ["forward-rate", "uncovered-interest-parity", "arbitrage"]
+    },
+    {
+      "id": "uncovered-interest-parity",
+      "term": "Uncovered interest parity (UIP)",
+      "category": "Economic theory",
+      "simple": "A theory that says a currency with a high interest rate should lose value by about as much as the extra interest, so on average you cannot win by chasing high rates. In real data, this mostly does not happen.",
+      "analogy": "A theory that the shop with the bigger discount will always run out of stock, so the discount never really helps you. In practice the discount often does help.",
+      "precise": "The expected change in the spot rate equals the interest differential. Empirically the coefficient is close to zero or negative (Fama, 1984), which is the forward premium puzzle and the reason carry trades have paid.",
+      "related": ["carry", "covered-interest-parity", "risk-premium"]
+    },
+    {
+      "id": "purchasing-power-parity",
+      "term": "Purchasing power parity (PPP)",
+      "category": "Economic theory",
+      "simple": "The idea that the same basket of things should cost about the same everywhere once you convert the money. If a burger is much cheaper in one country, its currency is probably too cheap.",
+      "analogy": "If lemonade costs 1 dollar on your street and 3 dollars on the next one, people would walk over and the prices would move closer.",
+      "precise": "Exchange rates converge toward the level that equalises price levels. Deviations are large and halve only every three to five years, so PPP is a weak short-run signal but a basis for currency value strategies.",
+      "related": ["real-exchange-rate", "mean-reversion"]
+    },
+    {
+      "id": "real-exchange-rate",
+      "term": "Real exchange rate",
+      "category": "Economic theory",
+      "simple": "The exchange rate after accounting for how expensive things are in each country.",
+      "analogy": "Not just how many coins you get, but how much candy those coins actually buy.",
+      "precise": "The nominal rate multiplied by the ratio of price levels. It is the measure PPP says should be stable over the long run.",
+      "related": ["purchasing-power-parity"]
+    },
+    {
+      "id": "terms-of-trade",
+      "term": "Terms of trade",
+      "category": "Commodities",
+      "simple": "How much a country gets for what it sells to other countries compared with what it pays for what it buys from them.",
+      "analogy": "If you sell lemonade and buy lemons, your terms of trade improve when lemonade prices go up or lemon prices go down.",
+      "precise": "The ratio of export prices to import prices. A rise tends to strengthen the currency, which is the economic basis for HYP-0003.",
+      "related": ["commodity-currency", "commodity"]
+    },
+    {
+      "id": "commodity",
+      "term": "Commodity",
+      "category": "Commodities",
+      "simple": "A raw material that is the same no matter who sells it, like oil, natural gas, copper, wheat or gold.",
+      "analogy": "A barrel of oil is like a plain pencil: one is as good as another, so they all sell for the same price.",
+      "precise": "A standardised, interchangeable good traded on spot and futures markets. We use WTI and Brent crude, Henry Hub gas and copper prices from FRED.",
+      "related": ["wti-and-brent", "henry-hub", "commodity-currency"]
+    },
+    {
+      "id": "wti-and-brent",
+      "term": "WTI and Brent",
+      "category": "Commodities",
+      "simple": "The two most common prices for crude oil. WTI is oil from the United States, Brent is oil from the North Sea near Norway and the UK.",
+      "analogy": "Two well-known brands of the same thing. They usually cost about the same and move together.",
+      "precise": "Benchmark crude grades. WTI (West Texas Intermediate) is priced at Cushing, Oklahoma; Brent is the global seaborne benchmark. WTI settled below zero on 2020-04-20 when storage ran out.",
+      "related": ["commodity", "commodity-currency"]
+    },
+    {
+      "id": "henry-hub",
+      "term": "Henry Hub",
+      "category": "Commodities",
+      "simple": "The main price for natural gas in the United States.",
+      "analogy": "The gas price everyone in the US checks, like the price on the big sign at the busiest petrol station.",
+      "precise": "The delivery point in Louisiana whose spot price is the benchmark for US natural gas. Not the European price, which matters more for Norway.",
+      "related": ["commodity"]
+    },
+    {
+      "id": "commodity-currency",
+      "term": "Commodity currency",
+      "category": "Commodities",
+      "simple": "Money from a country that sells a lot of one raw material, so the currency goes up and down with that material's price. Canada and Norway with oil, Australia with metals, New Zealand with dairy.",
+      "analogy": "A lemonade stand's pocket money goes up in summer when lemonade sells well. The country's money is the pocket money, and the commodity is the lemonade.",
+      "precise": "A currency whose value is strongly linked to world prices of the issuing country's main exports (Chen and Rogoff, 2003). The link is strongest at short horizons and has changed since 2020 (Rees, 2025).",
+      "related": ["terms-of-trade", "commodity"]
+    },
+    {
+      "id": "sp-500",
+      "term": "S&P 500",
+      "category": "Markets and trading",
+      "simple": "A list of about 500 of the biggest companies in the US. Its value is the usual way to say how the US stock market is doing.",
+      "analogy": "A giant basket with a slice of 500 big companies in it. If most of them do well, the basket gets heavier.",
+      "precise": "A market-capitalisation weighted US equity index. We use SPY, an ETF that tracks it, with dividends reinvested, as our benchmark.",
+      "related": ["etf", "benchmark", "total-return"]
+    },
+    {
+      "id": "etf",
+      "term": "ETF",
+      "category": "Markets and trading",
+      "simple": "A fund you can buy like a single share, which holds lots of things inside it. SPY holds all the S&P 500 companies.",
+      "analogy": "A lunchbox with a bit of everything. You buy the box instead of each item one by one.",
+      "precise": "An exchange-traded fund. SPY is the oldest and largest S&P 500 ETF, trading since 1993.",
+      "related": ["sp-500"]
+    },
+    {
+      "id": "total-return",
+      "term": "Total return (dividends reinvested)",
+      "category": "Markets and trading",
+      "simple": "Counting both the price going up and the extra cash payments companies give you, and pretending you used that cash to buy more.",
+      "analogy": "Your apple tree grows bigger and also drops apples. Total return counts the bigger tree plus planting the dropped apples.",
+      "precise": "Price return plus dividends, compounded. For the S&P 500 dividends add about 1.5 to 2 percent a year, so leaving them out makes the benchmark easier to beat than it really is.",
+      "related": ["sp-500", "cagr"]
+    },
+    {
+      "id": "benchmark",
+      "term": "Benchmark",
+      "category": "Measuring results",
+      "simple": "The thing you compare against. Ours is the S&P 500: if we cannot beat simply holding it, our strategy is not worth the effort.",
+      "analogy": "The time to beat in a race. Running fast means nothing unless you know what fast is.",
+      "precise": "A passive reference portfolio. Ours is SPY buy-and-hold with dividends and no costs, measured over exactly the same dates as each strategy. Defined in DEC-0006.",
+      "related": ["sp-500", "excess-return"]
+    },
+    {
+      "id": "long-and-short",
+      "term": "Long and short",
+      "category": "Markets and trading",
+      "simple": "Long means you own something and win if its price goes up. Short means you bet against it and win if its price goes down.",
+      "analogy": "Long is buying a toy hoping it becomes rare. Short is borrowing a friend's toy, selling it now, and planning to buy it back cheaper later to give back.",
+      "precise": "A positive weight is a long position, a negative weight a short. In FX every position is long one currency and short another.",
+      "related": ["portfolio-weight", "currency-pair"]
+    },
+    {
+      "id": "portfolio-weight",
+      "term": "Portfolio weight",
+      "category": "Markets and trading",
+      "simple": "How much of your money is in each thing you hold.",
+      "analogy": "How you split your pocket money between sweets, stickers and saving.",
+      "precise": "The position in an asset as a fraction of capital. Strategies in this repo only output target weights; the backtester turns them into returns.",
+      "related": ["rebalancing", "leverage"]
+    },
+    {
+      "id": "leverage",
+      "term": "Leverage",
+      "category": "Markets and trading",
+      "simple": "Using borrowed money to make your bets bigger. Wins get bigger, and so do losses.",
+      "analogy": "Riding a bike downhill. You go faster, and falling hurts more.",
+      "precise": "Gross exposure above 100% of capital. Volatility targeting in our backtester can lever a calm strategy up to 4 times to compare it with stocks at equal risk.",
+      "related": ["volatility-targeting", "portfolio-weight"]
+    },
+    {
+      "id": "rebalancing",
+      "term": "Rebalancing",
+      "category": "Markets and trading",
+      "simple": "Changing what you hold back to the plan, every week or month.",
+      "analogy": "Tidying your room on Sundays so it matches how you like it, even if it got messy during the week.",
+      "precise": "Trading to bring actual weights back to target weights on a schedule. More frequent rebalancing follows the signal more closely and costs more.",
+      "related": ["turnover", "transaction-costs"]
+    },
+    {
+      "id": "turnover",
+      "term": "Turnover",
+      "category": "Markets and trading",
+      "simple": "How much buying and selling a strategy does.",
+      "analogy": "How many times you swap your trading cards in a year. Each swap has a small fee.",
+      "precise": "The sum of absolute weight changes. A turnover of 12 a year means trading the whole portfolio about once a month.",
+      "related": ["transaction-costs", "break-even-cost"]
+    },
+    {
+      "id": "spread",
+      "term": "Spread (bid and ask)",
+      "category": "Markets and trading",
+      "simple": "The small gap between the price you can buy at and the price you can sell at. That gap is a cost every time you trade.",
+      "analogy": "A currency exchange booth at the airport buys dollars from you a bit cheaper than it sells them. The difference is how it makes money.",
+      "precise": "The difference between the best ask and the best bid. For major G10 pairs it is around 0.5 to 2 basis points for institutions, more for retail.",
+      "related": ["transaction-costs", "basis-point"]
+    },
+    {
+      "id": "transaction-costs",
+      "term": "Transaction costs",
+      "category": "Markets and trading",
+      "simple": "Everything it costs to make a trade: the spread, fees and moving the price against yourself.",
+      "analogy": "The delivery fee on every online order. One order is fine, a hundred small orders add up.",
+      "precise": "We charge a fixed cost per unit of notional traded (1 basis point by default) and test at double that in the gauntlet. Real costs also include financing markups and slippage.",
+      "related": ["spread", "turnover", "break-even-cost"]
+    },
+    {
+      "id": "basis-point",
+      "term": "Basis point (bp)",
+      "category": "Markets and trading",
+      "simple": "One hundredth of one percent. 100 basis points is 1%.",
+      "analogy": "If 1% is a dollar, a basis point is one cent.",
+      "precise": "0.01%, or 0.0001 as a fraction. Used for small numbers like costs and interest rate changes.",
+      "related": ["spread"]
+    },
+    {
+      "id": "random-walk",
+      "term": "Random walk",
+      "category": "Economic theory",
+      "simple": "Something that moves up or down by chance each day, so yesterday's move tells you nothing about tomorrow's.",
+      "analogy": "Flipping a coin to decide whether to step left or right. Where you go next has nothing to do with where you came from.",
+      "precise": "A process whose changes are unpredictable. Meese and Rogoff (1983) found exchange rates are hard to forecast better than a random walk, which sets the bar for any currency strategy.",
+      "related": ["efficient-market", "mean-reversion"]
+    },
+    {
+      "id": "efficient-market",
+      "term": "Efficient market",
+      "category": "Economic theory",
+      "simple": "The idea that prices already include everything people know, so you cannot consistently beat the market without taking extra risk.",
+      "analogy": "If a shop had a hidden discount, so many people would find it that it would be gone in minutes.",
+      "precise": "The efficient market hypothesis: prices reflect available information, so predictable excess returns either compensate for risk or do not exist after costs.",
+      "related": ["adaptive-markets", "risk-premium", "random-walk"]
+    },
+    {
+      "id": "adaptive-markets",
+      "term": "Adaptive markets",
+      "category": "Economic theory",
+      "simple": "The idea that markets have chances to win now and then, but they shrink once lots of people notice them.",
+      "analogy": "A secret fishing spot. It is great until your friends tell their friends.",
+      "precise": "Profit opportunities exist, attract capital and decay (Neely, Weller and Ulrich, 2009). Consistent with published FX factors losing most of their returns after publication.",
+      "related": ["efficient-market", "alpha-decay"]
+    },
+    {
+      "id": "risk-premium",
+      "term": "Risk premium",
+      "category": "Economic theory",
+      "simple": "Extra money you get paid for taking a risk most people do not want.",
+      "analogy": "Getting paid more for a job that is sometimes unpleasant. The extra pay is there because someone has to do it.",
+      "precise": "Expected return in excess of the risk-free rate, earned for bearing risk that cannot be diversified away. One explanation for carry returns (Lustig, Roussanov and Verdelhan, 2011).",
+      "related": ["carry-trade", "efficient-market"]
+    },
+    {
+      "id": "arbitrage",
+      "term": "Arbitrage",
+      "category": "Economic theory",
+      "simple": "Making money with no risk by buying something cheap in one place and selling it for more somewhere else at the same time.",
+      "analogy": "Buying a sticker for 10 cents at one table and selling it for 20 cents at the next table, right away.",
+      "precise": "A riskless profit from price differences. Real arbitrage opportunities are rare and close fast.",
+      "related": ["covered-interest-parity"]
+    },
+    {
+      "id": "momentum",
+      "term": "Momentum",
+      "category": "Economic theory",
+      "simple": "Things that have been going up tend to keep going up for a while, and things going down keep going down.",
+      "analogy": "A ball rolling downhill keeps rolling for a bit before it slows down.",
+      "precise": "Time-series momentum: an asset's own past return predicts its future return (Moskowitz, Ooi and Pedersen, 2012). Cross-sectional momentum: past winners beat past losers. Tested in HYP-0002.",
+      "related": ["mean-reversion", "signal"]
+    },
+    {
+      "id": "mean-reversion",
+      "term": "Mean reversion",
+      "category": "Economic theory",
+      "simple": "When something moves far from normal, it tends to come back toward normal.",
+      "analogy": "A stretched rubber band snaps back.",
+      "precise": "A tendency for deviations from a long-run level to shrink over time. PPP deviations mean revert slowly; our commodity gap strategy bets on a faster kind of catch-up.",
+      "related": ["momentum", "purchasing-power-parity"]
+    },
+    {
+      "id": "macro-surprise",
+      "term": "Macro surprise",
+      "category": "Economic theory",
+      "simple": "When economic news, like how many jobs were created, comes out very different from what experts expected.",
+      "analogy": "Expecting a B on a test and getting an A or a D. The surprise, not the grade, is what changes your mood.",
+      "precise": "The actual value of a data release minus the consensus forecast, usually scaled by its standard deviation. Surprises move currencies within minutes (Andersen, Bollerslev, Diebold and Vega, 2003). See HYP-0004.",
+      "related": ["fomc", "order-flow"]
+    },
+    {
+      "id": "order-flow",
+      "term": "Order flow",
+      "category": "Economic theory",
+      "simple": "The net amount people are buying or selling. More buyers than sellers pushes the price up.",
+      "analogy": "If everyone at school suddenly wants the same sneakers, their price goes up, whatever the reason.",
+      "precise": "Signed transaction volume. Explains a large share of daily exchange rate moves (Evans and Lyons, 2002). Mostly not available to us for free.",
+      "related": ["macro-surprise"]
+    },
+    {
+      "id": "regime",
+      "term": "Regime",
+      "category": "Economic theory",
+      "simple": "A period when markets behave in a particular way, like calm years, crisis years, or years of high interest rates.",
+      "analogy": "Seasons. What works in summer, like shorts, does not work in winter.",
+      "precise": "A stretch of time with distinct statistical behaviour. Strategies that only work in one regime are fragile. The gauntlet's era test checks three regimes separately.",
+      "related": ["out-of-sample"]
+    },
+    {
+      "id": "alpha-decay",
+      "term": "Alpha decay",
+      "category": "Economic theory",
+      "simple": "When a way of making money stops working because too many people started doing it.",
+      "analogy": "A shortcut through the park is fast until everyone uses it and it gets crowded.",
+      "precise": "The erosion of a strategy's excess return as capital crowds in. Published equity anomalies lose about 58% after publication (McLean and Pontiff, 2016); published FX factors turned negative (Hutchinson et al., 2022).",
+      "related": ["adaptive-markets"]
+    },
+    {
+      "id": "return",
+      "term": "Return",
+      "category": "Measuring results",
+      "simple": "How much money you made or lost, as a percent of what you started with.",
+      "analogy": "If you plant 10 seeds and end up with 11 plants, your return is 10%.",
+      "precise": "The percentage change in value over a period. We work with daily returns net of costs.",
+      "related": ["cagr"]
+    },
+    {
+      "id": "cagr",
+      "term": "CAGR",
+      "category": "Measuring results",
+      "simple": "The average yearly growth, as if your money grew by the same percent every year.",
+      "analogy": "If a plant grew from 10 cm to 40 cm in two years, CAGR says how much it grew each year on average, counting that it got bigger each year.",
+      "precise": "Compound annual growth rate: final value over starting value, to the power one over the number of years, minus one.",
+      "related": ["return", "volatility"]
+    },
+    {
+      "id": "volatility",
+      "term": "Volatility",
+      "category": "Measuring results",
+      "simple": "How bumpy the ride is. High volatility means big ups and downs.",
+      "analogy": "A calm lake versus a stormy sea. Both might get you across, one is a lot scarier.",
+      "precise": "The standard deviation of returns, annualised by multiplying daily volatility by the square root of 252. The S&P 500 has run at about 15 to 19% a year.",
+      "related": ["sharpe-ratio", "volatility-targeting"]
+    },
+    {
+      "id": "volatility-targeting",
+      "term": "Volatility targeting",
+      "category": "Measuring results",
+      "simple": "Making bets bigger when markets are calm and smaller when they are wild, so the ride stays about equally bumpy.",
+      "analogy": "Driving faster on an empty straight road and slower on a winding one, so the trip feels the same.",
+      "precise": "Scaling positions by target volatility over recent realised volatility, using only past data. Lets us compare a calm currency strategy with stocks at the same risk.",
+      "related": ["volatility", "leverage"]
+    },
+    {
+      "id": "sharpe-ratio",
+      "term": "Sharpe ratio",
+      "category": "Measuring results",
+      "simple": "How much money a strategy makes for each unit of bumpiness. Higher is better. Around 0.5 is what the stock market has done.",
+      "analogy": "Points scored per foul. A player who scores a lot but fouls all the time might not be your best player.",
+      "precise": "Mean return divided by the standard deviation of returns, annualised by the square root of 252. We use a zero risk-free rate for both strategy and benchmark.",
+      "related": ["volatility", "deflated-sharpe-ratio", "sortino-ratio"]
+    },
+    {
+      "id": "sortino-ratio",
+      "term": "Sortino ratio",
+      "category": "Measuring results",
+      "simple": "Like the Sharpe ratio, but it only counts the bad bumps, the days you lose money.",
+      "analogy": "Judging a rollercoaster only by how scary the drops are, not by the climbs.",
+      "precise": "Mean return over downside deviation (root mean square of negative returns), annualised.",
+      "related": ["sharpe-ratio"]
+    },
+    {
+      "id": "drawdown",
+      "term": "Drawdown",
+      "category": "Measuring results",
+      "simple": "How far you have fallen from your highest point. The max drawdown is the worst fall ever.",
+      "analogy": "Climbing a hill and sliding back down part of it. The drawdown is how far you slid.",
+      "precise": "Equity divided by its running peak, minus one. The S&P 500 fell about 55% from 2007 to 2009.",
+      "related": ["calmar-ratio", "volatility"]
+    },
+    {
+      "id": "calmar-ratio",
+      "term": "Calmar ratio",
+      "category": "Measuring results",
+      "simple": "Yearly growth divided by the worst fall. It asks: how much did you earn for the worst pain you went through?",
+      "analogy": "How good the holiday was compared with the worst day of it.",
+      "precise": "CAGR divided by the absolute maximum drawdown.",
+      "related": ["drawdown", "cagr"]
+    },
+    {
+      "id": "hit-rate",
+      "term": "Hit rate",
+      "category": "Measuring results",
+      "simple": "The share of days the strategy made money.",
+      "analogy": "How often you win at a game. You can win rarely and still come out ahead if your wins are big.",
+      "precise": "Fraction of non-zero daily returns that are positive.",
+      "related": ["return"]
+    },
+    {
+      "id": "correlation",
+      "term": "Correlation",
+      "category": "Measuring results",
+      "simple": "How much two things move together, from minus 1 (always opposite) through 0 (unrelated) to plus 1 (always together).",
+      "analogy": "Ice cream sales and sunny days have a high correlation. Ice cream sales and your shoe size have none.",
+      "precise": "Pearson correlation of daily returns. A strategy with low or negative correlation with the S&P 500 could improve a stock portfolio even if it earns less.",
+      "related": ["beta", "diversification"]
+    },
+    {
+      "id": "beta",
+      "term": "Beta",
+      "category": "Measuring results",
+      "simple": "How much a strategy moves when the stock market moves. A beta of 1 moves just like the market, 0 ignores it.",
+      "analogy": "A small boat tied to a big ship. Beta is how much the small boat rocks when the ship rocks.",
+      "precise": "Covariance with the benchmark divided by the benchmark's variance.",
+      "related": ["correlation"]
+    },
+    {
+      "id": "diversification",
+      "term": "Diversification",
+      "category": "Measuring results",
+      "simple": "Not putting all your eggs in one basket, so one bad thing does not ruin everything.",
+      "analogy": "Bringing an umbrella and sunglasses. Whatever the weather, one of them helps.",
+      "precise": "Combining assets that are not perfectly correlated lowers portfolio volatility for the same expected return. The idea behind HYP-0007.",
+      "related": ["correlation"]
+    },
+    {
+      "id": "excess-return",
+      "term": "Excess return",
+      "category": "Measuring results",
+      "simple": "How much more (or less) the strategy made than the benchmark.",
+      "analogy": "How many seconds faster than the time to beat.",
+      "precise": "Strategy CAGR minus benchmark CAGR over the same dates. Only meaningful at comparable risk.",
+      "related": ["benchmark", "information-ratio"]
+    },
+    {
+      "id": "information-ratio",
+      "term": "Information ratio",
+      "category": "Measuring results",
+      "simple": "How steadily the strategy beats the benchmark, not just by how much.",
+      "analogy": "A runner who beats the record by a little every single race versus one who wins big once and loses the rest.",
+      "precise": "Mean active return (strategy minus benchmark) divided by its standard deviation (tracking error), annualised.",
+      "related": ["excess-return"]
+    },
+    {
+      "id": "negative-skew",
+      "term": "Negative skew",
+      "category": "Measuring results",
+      "simple": "Lots of small wins and a few huge losses.",
+      "analogy": "Selling lemonade every day and then once a year a storm knocks over the whole stand.",
+      "precise": "A return distribution with a long left tail. Carry trades are negatively skewed (Daniel, Hodrick and Lu, 2017), which a Sharpe ratio alone hides.",
+      "related": ["fat-tails", "carry-trade"]
+    },
+    {
+      "id": "fat-tails",
+      "term": "Fat tails",
+      "category": "Measuring results",
+      "simple": "Very big moves happen more often than a simple bell curve says they should.",
+      "analogy": "Weather forecasts that say a huge storm happens once in a hundred years, and then two hit in a decade.",
+      "precise": "Excess kurtosis. The deflated Sharpe ratio corrects for it, because fat tails make an observed Sharpe less reliable.",
+      "related": ["negative-skew", "deflated-sharpe-ratio"]
+    },
+    {
+      "id": "break-even-cost",
+      "term": "Break-even cost",
+      "category": "Measuring results",
+      "simple": "How expensive trading would have to be before the strategy stops making money.",
+      "analogy": "If you earn 5 dollars a week from your lemonade stand, the break-even cost is how high the rent can go before you earn nothing.",
+      "precise": "Average gross daily return divided by average daily turnover, in basis points. It should be several times real trading costs.",
+      "related": ["transaction-costs", "turnover"]
+    },
+    {
+      "id": "signal",
+      "term": "Signal",
+      "category": "Testing and statistics",
+      "simple": "The number a strategy uses to decide what to buy or sell, like a hint about the future.",
+      "analogy": "Dark clouds are a signal that it might rain. They are not always right, but they help.",
+      "precise": "A forecast score per instrument per day, before it is turned into weights. Strategies here can expose their signal so we can measure its information coefficient.",
+      "related": ["information-coefficient"]
+    },
+    {
+      "id": "information-coefficient",
+      "term": "Information coefficient (IC)",
+      "category": "Testing and statistics",
+      "simple": "How good the signal is at guessing what happens next. 0 means useless, 1 means perfect. In currency markets, 0.03 is already decent.",
+      "analogy": "How often the weather forecaster is right, beyond what you would get by guessing.",
+      "precise": "The rank correlation between the signal and the forward return across instruments on each date, averaged over time. We report it at 1, 5, 21 and 63 days ahead (IC decay).",
+      "related": ["signal", "ic-decay"]
+    },
+    {
+      "id": "ic-decay",
+      "term": "IC decay",
+      "category": "Testing and statistics",
+      "simple": "How long a signal's hint stays useful. Some hints are only good for a day, some for months.",
+      "analogy": "A weather forecast for tomorrow is good, one for next month much less so. Some clues fade fast, some slowly.",
+      "precise": "The information coefficient measured at several horizons. Where it peaks suggests how often to trade. Rising IC with horizon means trade slower.",
+      "related": ["information-coefficient", "rebalancing"]
+    },
+    {
+      "id": "backtest",
+      "term": "Backtest",
+      "category": "Testing and statistics",
+      "simple": "Pretending to run a strategy in the past to see how it would have done.",
+      "analogy": "Replaying an old football match with your new tactics on a video game. Useful, but the real match can go differently.",
+      "precise": "A historical simulation. Ours holds today's decision from tomorrow, charges costs, and credits carry. A backtest is evidence, never proof.",
+      "related": ["lookahead-bias", "overfitting"]
+    },
+    {
+      "id": "lookahead-bias",
+      "term": "Lookahead bias",
+      "category": "Testing and statistics",
+      "simple": "Accidentally using information from the future in a backtest. It makes results look much better than they could ever be.",
+      "analogy": "Betting on a race after you already saw the results.",
+      "precise": "Using data in a decision that was not available at the time, such as same-day closes, revised macro data, or full-sample estimates. Our backtester holds weights from the next day to prevent the most common form.",
+      "related": ["backtest", "out-of-sample"]
+    },
+    {
+      "id": "survivorship-bias",
+      "term": "Survivorship bias",
+      "category": "Testing and statistics",
+      "simple": "Only looking at the winners that are still around and forgetting the ones that disappeared.",
+      "analogy": "Saying all old buildings were built well, because the badly built ones already fell down.",
+      "precise": "Excluding assets that died, were delisted or redenominated. Small for G10 currencies, large for crypto and emerging markets.",
+      "related": ["backtest"]
+    },
+    {
+      "id": "overfitting",
+      "term": "Overfitting",
+      "category": "Testing and statistics",
+      "simple": "Tuning a strategy so it fits the past perfectly, including the random parts, so it fails in the future.",
+      "analogy": "Memorising last year's test answers instead of learning the subject. Great score on last year's test, bad score on this year's.",
+      "precise": "Fitting noise rather than signal. The more settings and ideas tried, the more likely the best one is overfit. Countered by deflated statistics, holdout data and sensitivity tests.",
+      "related": ["data-snooping", "deflated-sharpe-ratio", "out-of-sample"]
+    },
+    {
+      "id": "data-snooping",
+      "term": "Data snooping (multiple testing)",
+      "category": "Testing and statistics",
+      "simple": "Trying so many ideas that one of them looks great just by luck.",
+      "analogy": "If 100 people each flip a coin 10 times, someone will get 9 heads. That person is not a coin-flipping genius.",
+      "precise": "Inflated significance from testing many hypotheses on the same data. Harvey, Liu and Zhu (2016) argue for a t-statistic hurdle near 3 instead of 2.",
+      "related": ["overfitting", "deflated-sharpe-ratio", "t-statistic"]
+    },
+    {
+      "id": "out-of-sample",
+      "term": "Out of sample (holdout)",
+      "category": "Testing and statistics",
+      "simple": "Data you did not look at while designing the strategy, kept aside to test it fairly.",
+      "analogy": "A practice test the teacher keeps hidden until the end, so you cannot study the exact questions.",
+      "precise": "Observations excluded from model selection. Our gauntlet treats the last five years as the hardest test and checks three separate eras.",
+      "related": ["overfitting", "regime"]
+    },
+    {
+      "id": "deflated-sharpe-ratio",
+      "term": "Deflated Sharpe ratio",
+      "category": "Testing and statistics",
+      "simple": "A Sharpe ratio that is made harder to pass the more ideas we tried. It gives the chance, from 0 to 1, that the strategy is truly better than nothing. We want at least 0.95.",
+      "analogy": "If you take one shot and score, that is impressive. If you take 100 shots and score once, less so. This adjusts for the number of shots.",
+      "precise": "The probability that the true Sharpe exceeds the best Sharpe expected from N unskilled trials, adjusted for skew, kurtosis and sample length (Bailey and Lopez de Prado, 2014).",
+      "related": ["sharpe-ratio", "data-snooping"]
+    },
+    {
+      "id": "bootstrap",
+      "term": "Bootstrap",
+      "category": "Testing and statistics",
+      "simple": "Making many slightly jumbled copies of history to see how much a result could change by chance.",
+      "analogy": "Shuffling a deck of cards many times to see how often a good hand turns up.",
+      "precise": "Resampling the data with replacement. We use a moving block bootstrap (21-day blocks, 1,000 resamples) so calm and stormy stretches stay together.",
+      "related": ["confidence-interval"]
+    },
+    {
+      "id": "confidence-interval",
+      "term": "Confidence interval",
+      "category": "Testing and statistics",
+      "simple": "A range where the true answer probably is. A 95% range means we would expect the true value inside it 95 times out of 100.",
+      "analogy": "Saying the bus will come between 8:05 and 8:15 instead of exactly 8:10.",
+      "precise": "An interval estimate. The gauntlet asks whether the 95% bootstrap interval for the Sharpe ratio lies entirely above zero.",
+      "related": ["bootstrap", "p-value"]
+    },
+    {
+      "id": "placebo-test",
+      "term": "Placebo test",
+      "category": "Testing and statistics",
+      "simple": "Running a fake version of the strategy that cannot possibly know anything, to check the real one does better.",
+      "analogy": "In medicine, some people get a sugar pill. If they get better as often as people on the real pill, the pill does nothing.",
+      "precise": "We keep the strategy's positions but shift them to random dates 500 times, keeping size and trading but destroying timing. The real strategy should beat at least 95% of these.",
+      "related": ["p-value"]
+    },
+    {
+      "id": "p-value",
+      "term": "p-value",
+      "category": "Testing and statistics",
+      "simple": "The chance of seeing a result this good if the strategy was actually useless. Small is good. Below 0.05 is the usual bar.",
+      "analogy": "How surprised you should be. A friend guessing a coin flip once is not surprising. Ten times in a row is.",
+      "precise": "The probability, under a null hypothesis, of a statistic at least as extreme as the one observed. In the placebo test it is the share of random-date copies that do as well.",
+      "related": ["placebo-test", "t-statistic"]
+    },
+    {
+      "id": "t-statistic",
+      "term": "t-statistic",
+      "category": "Testing and statistics",
+      "simple": "How many times bigger a result is than the noise around it. Above 2 is the usual bar; finance researchers now ask for 3.",
+      "analogy": "Hearing a friend's voice across a noisy room. The louder their voice compared with the noise, the surer you are it is them.",
+      "precise": "An estimate divided by its standard error. Overlapping return windows make it look bigger than it really is.",
+      "related": ["p-value", "data-snooping"]
+    },
+    {
+      "id": "pbo",
+      "term": "Probability of backtest overfitting (PBO)",
+      "category": "Testing and statistics",
+      "simple": "An estimate of how likely it is that the best strategy in our tests will do worse than average on new data.",
+      "analogy": "How often the student who topped the practice test ends up below average on the real one.",
+      "precise": "From combinatorially symmetric cross-validation (Bailey, Borwein, Lopez de Prado and Zhu, 2016). On our roadmap.",
+      "related": ["overfitting", "deflated-sharpe-ratio"]
+    }
+  ]
+}

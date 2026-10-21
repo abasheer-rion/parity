@@ -12,6 +12,10 @@ related: [DEC-0004, INT-0001]
 
 # Keep a written record of decisions, experiments and sessions
 
+## In plain words
+
+We write everything down: what we decided, what we tried, what happened. Each kind of note goes in its own folder, like a filing cabinet with labelled drawers, so anyone can find it later.
+
 ## Context
 
 This is a long research project with three people working at different times. Research projects tend to lose track of why something was tried, which settings produced a number, and which ideas were already ruled out. If we ever write a paper, we will need that trail.

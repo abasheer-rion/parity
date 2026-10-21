@@ -12,6 +12,10 @@ related: [HYP-0001, RES-0001]
 
 # Dollar carry beats pair-by-pair carry
 
+## In plain words
+
+Instead of picking which currencies to buy, make one simple bet: are interest rates in other countries higher or lower than in the US on average? Buy all of them or sell all of them together. One bet is cheaper to make and might be safer.
+
 ## Claim
 
 Going long or short one equal-weight basket of G10 currencies against the dollar, depending on whether the average foreign rate is above or below the US rate, has a better Sharpe ratio, less negative skew and smaller drawdowns than classic carry ([HYP-0001](0001-carry-still-pays-after-costs.md)).

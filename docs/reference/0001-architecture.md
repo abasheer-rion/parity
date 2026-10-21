@@ -12,6 +12,10 @@ related: [DEC-0002, DEC-0003, REF-0003]
 
 # Architecture
 
+## In plain words
+
+A map of how the project fits together. Data comes in from free websites, gets saved, gets fed to each trading idea, the results get scored against the stock market, and the scores show up on the website.
+
 ## Summary
 
 Data flows one way: free sources, then a local cache, then strategies, then one shared backtester, then a JSON report, then Supabase, then the dashboard. Each step can be run and checked on its own.
@@ -32,13 +36,15 @@ dashboard <── Supabase <── report JSON <── metrics <── backteste
 | `engine/src/parity/strategies/` | One file per strategy. See [DEC-0003](../decisions/0003-strategies-are-plugins.md). |
 | `engine/src/parity/backtest/` | The single backtester all strategies share. |
 | `engine/src/parity/metrics/` | Performance, robustness and signal-quality numbers. Defined in [REF-0002](0002-kpis.md). |
-| `engine/src/parity/report.py` | Runs every strategy and writes one JSON document. |
+| `engine/src/parity/gauntlet.py` | The eleven fixed tests. See [REF-0006](0006-the-gauntlet.md). |
+| `engine/src/parity/report.py` | Runs every strategy and its gauntlet and writes one JSON document. |
 | `engine/src/parity/publish/` | Sends that document to Supabase. |
 | `engine/tests/` | Tests on synthetic data, so CI never needs the network. |
 | `web/` | The dashboard (Vite, React, TypeScript). |
 | `supabase/migrations/` | Database tables and access rules, applied in order. |
 | `docs/` | Everything written. Index at [docs/README.md](../README.md). |
-| `scripts/docs.py` | Checks and indexes the docs. See [DEC-0004](../decisions/0004-docs-are-checked-by-a-script.md). |
+| `scripts/docs.py` | Checks and indexes the docs, and builds the glossary. See [DEC-0004](../decisions/0004-docs-are-checked-by-a-script.md). |
+| `docs/_system/glossary.json` | Every term, three ways. Read by the docs and the dashboard's Learn tab. |
 | `.github/workflows/` | CI, deploys and the scheduled research run. |
 
 ## Backtest timing

@@ -45,6 +45,7 @@ export interface StrategyRun {
   drawdown: Point[];
   ic_decay: IcRow[];
   exposure: Record<string, number>;
+  gauntlet: Gauntlet | null;
 }
 
 export interface CoverageRow {
@@ -72,4 +73,33 @@ export interface BatchSummary {
   id: string;
   generated_at: string;
   git_sha: string | null;
+}
+
+export interface GauntletTest {
+  id: string;
+  group: "beat" | "real";
+  name: string;
+  plain: string;
+  passed: boolean | null;
+  value: string;
+  bar: string;
+}
+
+export interface Gauntlet {
+  verdict: string;
+  beats_sp500: boolean;
+  passed: number;
+  total: number;
+  tests: GauntletTest[];
+  trials_including_gauntlet: number;
+}
+
+export interface GlossaryTerm {
+  id: string;
+  term: string;
+  category: string;
+  simple: string;
+  analogy: string;
+  precise: string;
+  related?: string[];
 }

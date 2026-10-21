@@ -11,7 +11,9 @@ The S&P 500 bar and how we compare against it.
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
+- [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 
 ## carry
 
@@ -19,6 +21,7 @@ Interest rate differentials and carry trades.
 
 - [HYP-0001: Currency carry still pays after costs](hypotheses/0001-carry-still-pays-after-costs.md)
 - [HYP-0005: Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 
 ## commodities
@@ -28,6 +31,8 @@ Oil, gas, metals and their link to currencies.
 - [DEC-0005: Study news and commodity shocks at daily and intraday speed, not microseconds](decisions/0005-no-microsecond-trading-in-the-poc.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0004: Macro and energy surprises move currencies in a predictable direction](hypotheses/0004-macro-surprises-move-fx-predictably.md)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 
@@ -41,6 +46,7 @@ Crypto markets, used as a comparison.
 
 Sources, scrapers, caching and data quality.
 
+- [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 
@@ -72,6 +78,7 @@ Foreign exchange in general.
 - [HYP-0005: Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
@@ -103,22 +110,27 @@ Metrics that tell us if something works and where to look next.
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
+- [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 
 ## method
 
 How we avoid fooling ourselves: backtest design, overfitting, statistics.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
+- [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 
 ## momentum
 
 Trend and momentum signals.
 
 - [HYP-0002: Currency trends persist over months](hypotheses/0002-currency-trends-persist.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 
 ## news
 
@@ -155,6 +167,7 @@ A specific trading idea or its implementation.
 - [HYP-0001: Currency carry still pays after costs](hypotheses/0001-carry-still-pays-after-costs.md)
 - [HYP-0002: Currency trends persist over months](hypotheses/0002-currency-trends-persist.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](hypotheses/0003-commodity-currencies-catch-up.md)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 

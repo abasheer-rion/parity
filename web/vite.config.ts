@@ -26,5 +26,7 @@ function localResults(): Plugin {
 
 export default defineConfig({
   plugins: [react(), localResults()],
+  // The glossary is imported from ../docs, outside this folder.
+  server: { fs: { allow: [".."] } },
   build: { sourcemap: false },
 });

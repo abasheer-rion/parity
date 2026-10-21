@@ -167,3 +167,27 @@ button.quiet { color: var(--text-2); }
   main { padding: 16px; }
   .tile-value { font-size: 22px; }
 }
+
+/* Learn and gauntlet */
+.term-link { color: inherit; text-decoration: underline dotted var(--muted); text-underline-offset: 3px; }
+.term-link:hover { color: var(--link); }
+.learn-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.learn-bar input { flex: 1; min-width: 200px; }
+.learn-group { margin-bottom: 24px; }
+.learn-group h2 { margin-bottom: 10px; }
+.term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.term { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.term.focused { border-color: var(--series-1); box-shadow: 0 0 0 2px color-mix(in srgb, var(--series-1) 25%, transparent); }
+.term header { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.term h3 { font-size: 15px; margin: 0; }
+.term p { margin: 8px 0 0; }
+.term .related { font-size: 12px; color: var(--muted); }
+.tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.tabs button { border: 0; border-radius: 0; padding: 3px 10px; font-size: 12px; color: var(--text-2); background: transparent; }
+.tabs button + button { border-left: 1px solid var(--border); }
+.tabs button.on { background: var(--bg); color: var(--text); font-weight: 600; }
+.verdict { font-size: 15px; font-weight: 600; margin: 4px 0 12px; }
+.verdict.good { color: var(--good); }
+.gauntlet-group h3 { font-size: 13px; margin: 12px 0 4px; }
+table.gauntlet td.wrap { white-space: normal; text-align: left; min-width: 180px; }
+table.gauntlet th:not(:first-child) { text-align: left; }

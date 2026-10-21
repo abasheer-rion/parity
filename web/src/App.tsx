@@ -4,6 +4,7 @@ import { currentSession, listBatches, loadReport, sendSignInLink, source, supaba
 import { date, REPO_URL } from "./lib/format";
 import type { BatchSummary, Report } from "./lib/types";
 import { DataPage } from "./pages/DataPage";
+import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { Signals } from "./pages/Signals";
 import { StrategyPage } from "./pages/StrategyPage";
@@ -68,6 +69,7 @@ function Dashboard() {
     { href: "#/", label: "Overview", active: !route },
     { href: "#/signals", label: "Signals", active: route === "signals" },
     { href: "#/data", label: "Data", active: route === "data" },
+    { href: "#/learn", label: "Learn", active: route === "learn" },
   ];
 
   return (
@@ -90,9 +92,10 @@ function Dashboard() {
         </>
       }
     >
-      {error && <div className="error">{error}</div>}
-      {!report && !error && <p className="muted">Loading results</p>}
-      {report && (
+      {route === "learn" && <Learn focus={arg} />}
+      {route !== "learn" && error && <div className="error">{error}</div>}
+      {route !== "learn" && !report && !error && <p className="muted">Loading results</p>}
+      {route !== "learn" && report && (
         <>
           {route === "strategy" && arg ? <StrategyPage report={report} name={decodeURIComponent(arg)} /> :
             route === "signals" ? <Signals report={report} /> :

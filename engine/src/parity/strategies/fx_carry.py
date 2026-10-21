@@ -21,6 +21,7 @@ class FxCarry(Strategy):
     name = "fx_carry"
     summary = "Long the 3 highest-rate G10 currencies, short the 3 lowest, rebalance monthly."
     reference = "hypotheses/0001-carry-still-pays-after-costs.md"
+    param_grid = {"k": [2, 3, 4], "rebalance": ["W", "M"]}
 
     def __init__(self, k: int = 3, rebalance: str = "M"):
         self.k = k

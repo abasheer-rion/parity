@@ -12,6 +12,10 @@ related: [GDE-0002, GDE-0003, REF-0001]
 
 # Getting started
 
+## In plain words
+
+How to get the project running on your own computer, step by step. About ten minutes.
+
 ## Summary
 
 From a fresh clone to running every strategy and seeing the dashboard, in about ten minutes. You need Python 3.11 or newer, Node 22 or newer, git and curl.

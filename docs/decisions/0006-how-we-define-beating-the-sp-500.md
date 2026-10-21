@@ -12,6 +12,10 @@ related: [INT-0001, REF-0002]
 
 # What "beating the S&P 500" means for us
 
+## In plain words
+
+Beating the stock market is easy to fake: take bigger risks, or try a hundred ideas and show the lucky one. So we set strict rules before looking at results. A strategy only counts as better if it wins fairly, at the same risk, after costs, and not by luck.
+
 ## Context
 
 A currency portfolio and a stock index have very different risk. Raw returns are not a fair comparison: a currency book at 4% volatility will almost always earn less than stocks at 18%, and almost any strategy can be levered to show a higher return. We also need to protect ourselves from finding something that only looks good because we tried many variants.
@@ -42,6 +46,8 @@ Definitions of each number are in [REF-0002](../reference/0002-kpis.md).
 - [HYP-0001: Currency carry still pays after costs](../hypotheses/0001-carry-still-pays-after-costs.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](../hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [REF-0002: KPIs and how to read them](../reference/0002-kpis.md)
+- [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

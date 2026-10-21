@@ -12,6 +12,10 @@ related: [HYP-0004, INT-0001]
 
 # Study news and commodity shocks at daily and intraday speed, not microseconds
 
+## In plain words
+
+Some people try to trade in a millionth of a second when news comes out. Big firms with computers sitting next to the stock exchange win that race every time. We cannot, so we will look at whether news matters over minutes and days instead.
+
 ## Context
 
 One idea we discussed was reacting within microseconds to moves in gas prices or to news feeds. The academic evidence that macro announcements move currencies quickly is strong (Andersen, Bollerslev, Diebold and Vega, 2003). But the profit at the microsecond scale goes to firms with servers in the same data centre as the exchange and paid direct feeds. Over a home connection, the round trip to a broker alone is tens of milliseconds, and free news and price APIs update in seconds to minutes.
@@ -31,5 +35,6 @@ For the proof of concept we test event-driven ideas at the speeds free data supp
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](../hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0004: Macro and energy surprises move currencies in a predictable direction](../hypotheses/0004-macro-surprises-move-fx-predictably.md)
+- [RES-0003: What practitioners say in forums](../research/0003-forums-and-practitioners.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

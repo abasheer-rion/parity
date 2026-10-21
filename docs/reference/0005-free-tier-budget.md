@@ -12,6 +12,10 @@ related: [DEC-0002]
 
 # Free tier budget
 
+## In plain words
+
+What each free service lets us use for free, and how close we are to the limit. So far we use only a small part of each.
+
 ## Summary
 
 What each free service allows and roughly how much we use. Limits change, so check the provider's page before relying on a number here. Last checked 2026-10-20.

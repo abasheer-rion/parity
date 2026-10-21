@@ -12,6 +12,10 @@ related: [HYP-0001, HYP-0002, HYP-0003, RES-0004]
 
 # Reading list of papers, books and courses
 
+## In plain words
+
+This is our reading list: the research papers, books and free courses that matter for this project, with a sentence or two on each saying why. The most important lesson so far is that tricks that worked in old studies mostly stopped working once they were published.
+
 ## Summary
 
 The papers, books and courses we think matter most for this project, with one or two sentences on why. The first table is the foundation we started from. Everything after it was gathered on 2026-10-20 and each item was checked against a live publisher, DOI, SSRN, NBER, arXiv or RePEc page. Items we could not fully confirm are marked.
@@ -221,6 +225,7 @@ Kroencke, Schindler and Schrimpf (2014) and Barroso and Santa-Clara (2015) find 
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](../hypotheses/0006-short-the-dollar-on-fomc-days.md)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](../hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0002: Open-source projects and public results](0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](0003-forums-and-practitioners.md)
 - [RES-0004: Exchange rate theory primer](0004-exchange-rate-theory-primer.md)

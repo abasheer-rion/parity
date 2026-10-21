@@ -12,6 +12,10 @@ related: [DEC-0001, GDE-0003]
 
 # Docs follow strict rules that a script checks on every commit
 
+## In plain words
+
+A small program checks every document before it is saved: is it in the right folder, does it have its label, do its links work, is it written in plain words. If something is wrong, it says exactly what to fix. It also builds the table of contents for us.
+
 ## Context
 
 A documentation system with folders, IDs, tags and cross links is useful only while it stays consistent, and it usually stops being consistent within a few weeks. We would rather have a machine enforce the rules than rely on memory.
@@ -24,12 +28,13 @@ What it checks:
 
 1. **Placement decides category.** The folder a document sits in sets its type, ID prefix, filename pattern, allowed statuses and required sections. There is no way to file something in the wrong place and have it pass.
 2. **Metadata.** Every document starts with the same nine front matter keys in the same order: `id`, `title`, `type`, `status`, `created`, `updated`, `authors`, `tags`, `related`. IDs are unique and match the filename. Tags come from a fixed list. Related IDs must exist.
-3. **Structure.** Exactly one top heading, equal to the title. The sections required for that type are present.
+3. **Structure.** Exactly one top heading, equal to the title. The sections required for that type are present. Every type starts with **In plain words**, a short explanation a child could follow, and experiments must include **Threats to validity**.
 4. **Links.** Every relative link and every `#anchor` resolves. Links to this repo use relative paths, never GitHub URLs.
 5. **Plain writing.** No em dashes, en dashes, curly quotes, emojis or a short list of stock filler words. No trailing whitespace.
 6. **Layout.** Only known folders at the top of the repo.
 7. **History.** Log entries are append-only.
-8. **Indexes are generated.** `docs/README.md` (the index), `docs/TAGS.md` and the "Referenced by" block at the end of each document are rebuilt by the script, and CI fails if they are stale.
+8. **The glossary is generated.** `docs/_system/glossary.json` holds every term with a simple, an analogy and a precise explanation. The script checks it and builds [REF-0004](../reference/0004-glossary.md) from it; the dashboard reads the same file.
+9. **Indexes are generated.** `docs/README.md` (the index), `docs/TAGS.md` and the "Referenced by" block at the end of each document are rebuilt by the script, and CI fails if they are stale.
 
 `docs.py new` creates a correctly numbered, correctly filed document from a template, and `docs.py fix` repairs the mechanical problems.
 

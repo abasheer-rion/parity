@@ -2,6 +2,8 @@
 
 A research project by Ayan, Amanda and Abanish. We are testing whether a systematic currency strategy, possibly informed by commodity prices and macro news, can beat the S&P 500 once costs and risk are accounted for.
 
+**In plain words:** we are testing whether a computer program that trades money from different countries can do better than simply buying a slice of the 500 biggest US companies and waiting. So far, it cannot. Every term is explained simply in the [glossary](docs/reference/0004-glossary.md).
+
 This is a proof of concept, not a product. If the answer is no, we will have learned something and may write it up anyway. The full statement of what we set out to do is in [INT-0001](docs/intent/0001-initial-intent.md).
 
 ## Where things stand
@@ -9,8 +11,9 @@ This is a proof of concept, not a product. If the answer is no, we will have lea
 | | |
 | --- | --- |
 | Strategies tested | 3, plus the S&P 500 benchmark |
-| Beating the S&P 500 | None so far ([EXP-0001](docs/experiments/0001-baseline-backtests.md)) |
-| Most promising lead | The commodity gap signal looks more informative at slower horizons ([HYP-0003](docs/hypotheses/0003-commodity-currencies-catch-up.md)) |
+| Beating the S&P 500 | None. All three fail all six tests against it ([EXP-0002](docs/experiments/0002-baseline-gauntlet.md)) |
+| Anything real? | Carry looks like a small real effect, too small to beat stocks. Trend faded after 2009. The oil idea shows nothing as built |
+| Next lead | A slower version of the oil idea ([HYP-0008](docs/hypotheses/0008-monthly-commodity-gap.md)) and stocks plus trend ([HYP-0007](docs/hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md)) |
 | Open hypotheses | See the [docs index](docs/README.md#open-questions-right-now) |
 
 ## How it works
@@ -19,7 +22,8 @@ This is a proof of concept, not a product. If the answer is no, we will have lea
 2. **Strategies** are one file each and turn that data into target weights. Any of them can be removed at any time ([DEC-0003](docs/decisions/0003-strategies-are-plugins.md)).
 3. **One backtester** holds those weights, charges costs, credits interest carry and can scale everything to the same risk as the S&P 500.
 4. **Metrics** compare each strategy with the S&P 500 and measure how much information each signal has ([REF-0002](docs/reference/0002-kpis.md)).
-5. **A nightly job** runs everything and publishes results to a private dashboard.
+5. **The gauntlet** puts every strategy through eleven fixed tests: does it beat the S&P 500, and is it real or luck ([REF-0006](docs/reference/0006-the-gauntlet.md)).
+6. **A nightly job** runs everything and publishes results to a private dashboard.
 
 More detail in [REF-0001](docs/reference/0001-architecture.md).
 
@@ -43,7 +47,9 @@ Everything we decide, test and read is written down in [docs/](docs/README.md), 
 | --- | --- |
 | Why we are doing this | [INT-0001](docs/intent/0001-initial-intent.md) |
 | What "beat the S&P 500" means | [DEC-0006](docs/decisions/0006-how-we-define-beating-the-sp-500.md) |
+| Every term, explained simply | [REF-0004](docs/reference/0004-glossary.md) |
 | Background theory | [RES-0004](docs/research/0004-exchange-rate-theory-primer.md) |
+| The tests every idea must pass | [REF-0006](docs/reference/0006-the-gauntlet.md) |
 | What to read | [RES-0001](docs/research/0001-reading-list.md) |
 | How to add a strategy | [GDE-0002](docs/guides/0002-adding-a-strategy.md) |
 | How to write a doc | [GDE-0003](docs/guides/0003-writing-docs.md) |

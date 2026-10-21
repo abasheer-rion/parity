@@ -12,6 +12,10 @@ related: [EXP-0001, HYP-0001, HYP-0003, RES-0001, RES-0003]
 
 # Open-source projects and public results
 
+## In plain words
+
+Other people have tried things like this and posted their code and results online, for currencies and for crypto. This page collects what they did, what worked, what did not, and which projects we should copy and rerun ourselves. The common story: good-looking backtests usually do worse in real life.
+
 ## Summary
 
 Other people's code, live logs and post-mortems for strategies like ours, including the same ideas in crypto, and what worked and what did not. Gathered 2026-10-20. Repo numbers (stars, license, last commit) come from the GitHub API on that date. Every result has a link, and anything we could not open ourselves is marked unverified. We did not clone or run anything yet.
@@ -215,5 +219,7 @@ What we would skip for now:
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
+- [RES-0003: What practitioners say in forums](0003-forums-and-practitioners.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

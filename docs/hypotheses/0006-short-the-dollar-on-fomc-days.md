@@ -12,6 +12,10 @@ related: [HYP-0004, RES-0001]
 
 # The dollar weakens on scheduled Fed decision days
 
+## In plain words
+
+Eight times a year the US central bank announces its interest rate decision. Researchers found the US dollar tends to get weaker on those days. We want to check if that is still true now that people know about it.
+
 ## Claim
 
 Being short the dollar against high-rate currencies on the eight scheduled FOMC decision days each year earns a return that is large for the risk taken, and this was still true after the effect was published in 2017.

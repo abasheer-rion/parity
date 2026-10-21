@@ -8,11 +8,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 6 |
-| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 7 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 1 |
+| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 2 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 4 |
 | [guide](#guide) | How to do something in this repo, step by step. | 3 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 5 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 6 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 1 |
 
 ## Open questions right now
@@ -24,6 +24,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - [HYP-0005: Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md) (open)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) (open)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) (open)
+- [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) (open)
 
 ## Recently updated
 
@@ -31,10 +32,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-20 [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - 2026-10-20 [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - 2026-10-20 [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
+- 2026-10-20 [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
 - 2026-10-20 [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
 - 2026-10-20 [REF-0004: Glossary](reference/0004-glossary.md)
 - 2026-10-20 [REF-0003: Data sources](reference/0003-data-sources.md)
-- 2026-10-20 [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 
 ## intent
 
@@ -64,12 +65,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0005 | [Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md) | open | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
 | HYP-0006 | [The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) | open | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news) |
 | HYP-0007 | [The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) | open | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
+| HYP-0008 | [A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) | open | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## experiment
 
 | ID | Title | Status | Updated | Tags |
 | --- | --- | --- | --- | --- |
 | EXP-0001 | [Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
+| EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
 
 ## research
 
@@ -77,7 +80,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | RES-0001 | [Reading list of papers, books and courses](research/0001-reading-list.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0002 | [Open-source projects and public results](research/0002-open-source-and-public-results.md) | current | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [method](TAGS.md#method), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
-| RES-0003 | [What practitioners say in forums](research/0003-forums-and-practitioners.md) | draft | 2026-10-20 | [method](TAGS.md#method), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
+| RES-0003 | [What practitioners say in forums](research/0003-forums-and-practitioners.md) | current | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news), [open-source](TAGS.md#open-source) |
 | RES-0004 | [Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md) | current | 2026-10-20 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [economics](TAGS.md#economics), [fx](TAGS.md#fx) |
 
 ## guide
@@ -97,6 +100,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0004 | [Glossary](reference/0004-glossary.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
+| REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 
 ## log
 

@@ -12,6 +12,10 @@ related: [DEC-0005, RES-0001]
 
 # Macro and energy surprises move currencies in a predictable direction
 
+## In plain words
+
+When important news comes out, like how many people got jobs, money markets move. The idea: if the news is a big surprise, the price keeps moving the same way for a while, long enough for us to catch some of it.
+
 ## Claim
 
 When a scheduled release (US jobs, CPI, central bank decisions, the weekly EIA oil and gas inventory reports) comes in far from expectations, the affected currency keeps moving in the direction of the surprise for minutes to days, long enough for a strategy using free data to capture part of it.
@@ -40,6 +44,7 @@ None yet.
 
 - [DEC-0005: Study news and commodity shocks at daily and intraday speed, not microseconds](../decisions/0005-no-microsecond-trading-in-the-poc.md)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](0006-short-the-dollar-on-fomc-days.md)
+- [RES-0003: What practitioners say in forums](../research/0003-forums-and-practitioners.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->
