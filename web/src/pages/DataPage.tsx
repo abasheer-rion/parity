@@ -1,4 +1,5 @@
-import { Card } from "../components/ui";
+import { Title } from "../components/Shell";
+import { Card } from "../ui/layout";
 import { date } from "../lib/format";
 import type { Report } from "../lib/types";
 
@@ -20,7 +21,7 @@ export function DataPage({ report }: { report: Report }) {
   return (
     <>
       <div className="page-head">
-        <h1>Data</h1>
+        <Title>Data</Title>
         <p>
           Every series behind this run, fetched {date(fetched)}. A stale or broken series quietly ruins results, so
           check here before trusting a number. Run {report.git_sha ? <code>{report.git_sha}</code> : "from a local checkout"}.

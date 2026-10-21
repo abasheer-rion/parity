@@ -1395,6 +1395,7 @@ Related: [p-value](#p-value), [Data snooping (multiple testing)](#data-snooping-
 ## Referenced by
 
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](../decisions/0004-docs-are-checked-by-a-script.md)
+- [DEC-0011: Read the docs inside the dashboard, with stacked previews](../decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [REF-0006: The gauntlet](0006-the-gauntlet.md)

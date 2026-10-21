@@ -69,8 +69,10 @@ Two tables hold results: `research_batches` (one row per run of the report) and 
 
 - [DEC-0002: Use a free-tier stack of GitHub, Supabase and Cloudflare Pages](../decisions/0002-free-tier-stack.md)
 - [DEC-0003: Strategies are plug-ins that can be removed at any time](../decisions/0003-strategies-are-plugins.md)
+- [DEC-0011: Read the docs inside the dashboard, with stacked previews](../decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [GDE-0001: Getting started](../guides/0001-getting-started.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0008: Where results live and how they are tagged](0008-where-results-live.md)
+- [REF-0009: UI library](0009-ui-library.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

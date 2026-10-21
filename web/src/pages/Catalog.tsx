@@ -1,5 +1,6 @@
+import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { algorithms, bestReported, STAGES } from "../lib/catalog";
 import type { Algorithm } from "../lib/types";
 import { Term } from "./Learn";
@@ -39,7 +40,7 @@ export function Catalog() {
   return (
     <>
       <div className="page-head">
-        <h1>Algorithm catalog</h1>
+        <Title>Algorithm catalog</Title>
         <p>
           Every trading algorithm we know of, where it came from, how old it is, what its authors reported, and how far
           our own research has taken it. Reported numbers are the source's claims, not ours, until the stage says

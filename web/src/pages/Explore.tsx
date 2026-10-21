@@ -1,6 +1,7 @@
+import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
-import { LineChart } from "../components/charts";
-import { Card } from "../components/ui";
+import { LineChart } from "../ui/charts";
+import { Card } from "../ui/layout";
 import type { Point, Report } from "../lib/types";
 import { Term } from "./Learn";
 
@@ -65,7 +66,7 @@ export function Explore({ report }: { report: Report }) {
   return (
     <>
       <div className="page-head">
-        <h1>Explore the data</h1>
+        <Title>Explore the data</Title>
         <p>Look at the raw series behind every strategy. Pick up to six, choose a start date, and compare them indexed to
           100. Pick two to see how closely they move together over time, and whether one leads the other. Weekly data,
           so anything faster than a week is invisible here.</p>

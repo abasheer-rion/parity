@@ -1,5 +1,6 @@
+import { Title } from "../components/Shell";
 import { useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { algorithms, docPathFor, ledger, registrations, STAGES } from "../lib/catalog";
 import { docUrl, pct, REPO_URL } from "../lib/format";
 import { Term } from "./Learn";
@@ -22,7 +23,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
       <div className="report-head">
         <div>
           <div className="muted small">{a.id} · algorithm report · reviewed {a.last_reviewed}</div>
-          <h1>{a.name}</h1>
+          <Title>{a.name}</Title>
           <p className="lead">{a.how_it_works.simple}</p>
         </div>
         <div className="noprint">

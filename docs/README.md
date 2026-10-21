@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 1 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 10 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 11 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 8 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 9 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
@@ -30,13 +30,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
+- 2026-10-21 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 - 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
+- 2026-10-21 [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - 2026-10-21 [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - 2026-10-21 [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
-- 2026-10-20 [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
-- 2026-10-20 [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 
 ## intent
 
@@ -58,6 +58,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0008 | [Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md) | accepted | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
 | DEC-0009 | [Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md) | accepted | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [process](TAGS.md#process) |
 | DEC-0010 | [Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [method](TAGS.md#method) |
+| DEC-0011 | [Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -115,6 +116,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 
 ## log
 

@@ -1,6 +1,7 @@
+import { Title } from "../components/Shell";
 import { useState } from "react";
-import { LineChart } from "../components/charts";
-import { Card, StatTile } from "../components/ui";
+import { LineChart } from "../ui/charts";
+import { Card, StatTile } from "../ui/layout";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import type { Point, Report } from "../lib/types";
@@ -26,7 +27,7 @@ export function Lab({ report }: { report: Report }) {
   return (
     <>
       <div className="page-head">
-        <h1>Lab</h1>
+        <Title>Lab</Title>
         <p>Change a strategy's settings and see what happens. Each combination here was already run by the gauntlet's
           sensitivity test, so nothing is computed in your browser and nothing here is an official result. To try new
           settings or a new algorithm, run <code>parity run</code> on your own machine, and to make it count, register it

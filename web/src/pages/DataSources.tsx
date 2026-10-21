@@ -1,5 +1,6 @@
+import { Title } from "../components/Shell";
 import { useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { datasets } from "../lib/catalog";
 
 export function DataSources({ focus }: { focus?: string }) {
@@ -12,7 +13,7 @@ export function DataSources({ focus }: { focus?: string }) {
   return (
     <>
       <div className="page-head">
-        <h1>Data sources</h1>
+        <Title>Data sources</Title>
         <p>Every source of market data we have looked at: what it has, whether it is free, its limits and terms, and how
           trustworthy it is. "Point in time" means it keeps numbers as they were first published, which matters for honest
           backtests of economic data.</p>

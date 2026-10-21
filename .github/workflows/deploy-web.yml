@@ -8,9 +8,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
 
 permissions:
