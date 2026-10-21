@@ -1,0 +1,1653 @@
+{
+ "coverage": {
+  "fetched_at": "2026-10-21T04:17:00+00:00",
+  "series": [
+   {
+    "code": "DEXUSEU",
+    "first": "1999-01-04",
+    "key": "fx.EUR",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 6969,
+    "sha256": "931d584486588764e73432f1ef8b4062f905c6964896e4d883ab775466c1b19e",
+    "source": "fred"
+   },
+   {
+    "code": "DEXUSUK",
+    "first": "1971-01-04",
+    "key": "fx.GBP",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13990,
+    "sha256": "bb3912bd8c88bfc5d14ff55d2a1e54c1b11d125a98fb24437701188bd15c401b",
+    "source": "fred"
+   },
+   {
+    "code": "DEXJPUS",
+    "first": "1971-01-04",
+    "key": "fx.JPY",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13984,
+    "sha256": "47d782437d45035abdc84b46db824de8a7e02574bff11caf40b0b1c70e4d7724",
+    "source": "fred"
+   },
+   {
+    "code": "DEXSZUS",
+    "first": "1971-01-04",
+    "key": "fx.CHF",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13990,
+    "sha256": "8c0c815fca229f85a3c5de3e0c54ffa0f11d2729d830475383bb065faf6cc4b4",
+    "source": "fred"
+   },
+   {
+    "code": "DEXCAUS",
+    "first": "1971-01-04",
+    "key": "fx.CAD",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13996,
+    "sha256": "7506f81b20ac6a74acb8e551e8122dc860060adbbb31c649cf82be6dcf809c67",
+    "source": "fred"
+   },
+   {
+    "code": "DEXUSAL",
+    "first": "1971-01-04",
+    "key": "fx.AUD",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13983,
+    "sha256": "01ed0e435511c29acb30aff6d11b09e87006eff7b1348463888675c3f846f944",
+    "source": "fred"
+   },
+   {
+    "code": "DEXUSNZ",
+    "first": "1971-01-04",
+    "key": "fx.NZD",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13974,
+    "sha256": "a7be1fecf94c3f1f320ed86fa35675b3a642d1e76726c880995004626c70e07f",
+    "source": "fred"
+   },
+   {
+    "code": "DEXNOUS",
+    "first": "1971-01-04",
+    "key": "fx.NOK",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13989,
+    "sha256": "953fc60aab9bda1ce3f6d7e92a084f5f8126a04c0c31b1c473e8c8af443aa166",
+    "source": "fred"
+   },
+   {
+    "code": "DEXSDUS",
+    "first": "1971-01-04",
+    "key": "fx.SEK",
+    "last": "2026-10-16",
+    "ok": true,
+    "rows": 13989,
+    "sha256": "3ef4db3ec1b2d4749e12706e7cbc3e9bbe2de295a278f6f6ca5d35d3441304f4",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01USM156N",
+    "first": "1964-06-01",
+    "key": "rate.USD",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 747,
+    "sha256": "25970975d3a32b47beebcf7a8ac4e4cbaf12959582a155f036a61f1b8f6f04a2",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01EZM156N",
+    "first": "1994-01-01",
+    "key": "rate.EUR",
+    "last": "2026-01-01",
+    "ok": true,
+    "rows": 385,
+    "sha256": "8acda25ff6037afb7633abf4b755b53c5151c9604b597ba1c32fe66473cbe36b",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01GBM156N",
+    "first": "1957-01-01",
+    "key": "rate.GBP",
+    "last": "2026-01-01",
+    "ok": true,
+    "rows": 829,
+    "sha256": "65196ccb155c747972a2c1a4cbc15a63d49e8794f13eced8cd6486b3031a8851",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01JPM156N",
+    "first": "2002-04-01",
+    "key": "rate.JPY",
+    "last": "2026-08-01",
+    "ok": true,
+    "rows": 293,
+    "sha256": "cd81457b693aee8d6301b476f2a5102c7cb77bc83495e26178647af8f31f72cf",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01CHM156N",
+    "first": "1999-07-01",
+    "key": "rate.CHF",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 327,
+    "sha256": "485cc0a81f23da9830e871461f28e9581a3771cec58f2e9dcac900f0a43aa28b",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01CAM156N",
+    "first": "1956-01-01",
+    "key": "rate.CAD",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 849,
+    "sha256": "347fdc3439274ecc63d6a2f655f7bff96c6f1de96cb89eb7afe6c2b6b2b96624",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01AUM156N",
+    "first": "1968-01-01",
+    "key": "rate.AUD",
+    "last": "2026-08-01",
+    "ok": true,
+    "rows": 704,
+    "sha256": "9f858a589a96152746ba70ce8f1c0db8d6ba2882dc95176f0aeeb09b43d103c0",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01NZM156N",
+    "first": "1973-12-01",
+    "key": "rate.NZD",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 634,
+    "sha256": "03645bd3808517e8592c7961aba9f32accc376983b56c3a61b0c833c6b0f0560",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01NOM156N",
+    "first": "1979-01-01",
+    "key": "rate.NOK",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 573,
+    "sha256": "aa87dd83cc201b013a0c02881e3633dc3d60af0e39e6e1f7a4de0e618277e81a",
+    "source": "fred"
+   },
+   {
+    "code": "IR3TIB01SEM156N",
+    "first": "1982-01-01",
+    "key": "rate.SEK",
+    "last": "2026-09-01",
+    "ok": true,
+    "rows": 537,
+    "sha256": "c488b022f2aed1bcbb74c24183be871fdfc04397edc6e768522b5b69aa951d01",
+    "source": "fred"
+   },
+   {
+    "code": "DCOILWTICO",
+    "first": "1986-01-02",
+    "key": "cmd.WTI",
+    "last": "2026-10-14",
+    "ok": true,
+    "rows": 9523,
+    "sha256": "be39b8ac0004ba402f4357bed482a8deb3afd1c276fec9c656b443cfbbe74553",
+    "source": "fred"
+   },
+   {
+    "code": "DCOILBRENTEU",
+    "first": "1987-05-20",
+    "key": "cmd.BRENT",
+    "last": "2026-10-14",
+    "ok": true,
+    "rows": 9108,
+    "sha256": "c261b0a95ef02d3dcd7a747e447dd7364567f1e8424faa8f8eb433cf34592ce1",
+    "source": "fred"
+   },
+   {
+    "code": "DHHNGSP",
+    "first": "1997-01-07",
+    "key": "cmd.HH_GAS",
+    "last": "2026-10-14",
+    "ok": true,
+    "rows": 5708,
+    "sha256": "4e3e84080f31f41fda142dc74104749a8b027c6827c3a826f47943ee18fd4e7e",
+    "source": "fred"
+   },
+   {
+    "code": "PCOPPUSDM",
+    "first": "1992-01-01",
+    "key": "cmd.COPPER",
+    "last": "2026-07-01",
+    "ok": true,
+    "rows": 415,
+    "sha256": "2edf0dcd7655b9641e5ec71f977675edc4688004115a9a7e8497ed5847650e1c",
+    "source": "fred"
+   },
+   {
+    "code": "SPY",
+    "first": "1993-01-29",
+    "key": "eq.SPY",
+    "last": "2026-10-20",
+    "ok": true,
+    "rows": 8489,
+    "sha256": "27f9348df925ac9c04ee8734c609207750d49b8fd7329b082e0470fee8b090e5",
+    "source": "yahoo"
+   },
+   {
+    "code": "SP500",
+    "first": "2016-10-21",
+    "key": "eq.SPX",
+    "last": "2026-10-20",
+    "ok": true,
+    "rows": 2512,
+    "sha256": "b7da8fa01cdcbf5d06d072e4e16a8de7684fb98cb739c6b6f4d72ed40526478f",
+    "source": "fred"
+   },
+   {
+    "code": "VIXCLS",
+    "first": "1990-01-02",
+    "key": "risk.VIX",
+    "last": "2026-10-19",
+    "ok": true,
+    "rows": 9298,
+    "sha256": "edada9ba57ad61bab3ec60f76deec1e1aec2663a7ab3b8e25463f6bdbe8554ed",
+    "source": "fred"
+   }
+  ],
+  "snapshot": "87741fa9da7aaf04cf09f570694c1fd16e615466ba8730e84fb4a18b307b233c"
+ },
+ "record": {
+  "data_fetched_at": "2026-10-21T04:17:00+00:00",
+  "data_snapshot": "87741fa9da7aaf04cf09f570694c1fd16e615466ba8730e84fb4a18b307b233c",
+  "git_sha": "d2d7569d93db5a5e21b1428a7ee5ce8fda02c616",
+  "kind": "official",
+  "registration": "REG-0001",
+  "registration_sha256": "b3d3f6da815527ef7337fc1e919f19ba63e7dcd54c3f44a29e7c7a6ea83c8f05",
+  "results": {
+   "fx_carry": {
+    "cagr": 0.014431390263832,
+    "deflated_sharpe": 0.44422415214943234,
+    "gauntlet": "3/11",
+    "max_drawdown": -0.16090512002859592,
+    "meets_registered_criteria": false,
+    "params": {
+     "k": 3,
+     "rebalance": "M"
+    },
+    "sharpe": 0.3868939027413049,
+    "tests": {
+     "A1": false,
+     "A2": false,
+     "A3": false,
+     "A4": false,
+     "A5": false,
+     "A6": false,
+     "B1": true,
+     "B2": false,
+     "B3": true,
+     "B4": true,
+     "B5": false
+    },
+    "trials": 9,
+    "verdict": "Some signs of a real effect, not enough to rely on."
+   },
+   "fx_commodity_gap": {
+    "cagr": 0.001537383228662037,
+    "deflated_sharpe": 0.029872331586121282,
+    "gauntlet": "1/11",
+    "max_drawdown": -0.16148899517981563,
+    "meets_registered_criteria": false,
+    "params": {
+     "beta_window": 250,
+     "gap_window": 20,
+     "mapping": {
+      "fx.CAD": "cmd.WTI",
+      "fx.NOK": "cmd.BRENT"
+     },
+     "rebalance": "W",
+     "z_window": 250
+    },
+    "sharpe": 0.05769144900544697,
+    "tests": {
+     "A1": false,
+     "A2": false,
+     "A3": false,
+     "A4": false,
+     "A5": false,
+     "A6": false,
+     "B1": false,
+     "B2": false,
+     "B3": true,
+     "B4": false,
+     "B5": false
+    },
+    "trials": 9,
+    "verdict": "No evidence of a real effect. Most likely noise."
+   },
+   "fx_tsmom": {
+    "cagr": 0.008857457345821107,
+    "deflated_sharpe": 0.09950331920779748,
+    "gauntlet": "3/11",
+    "max_drawdown": -0.298082636674025,
+    "meets_registered_criteria": false,
+    "params": {
+     "lookback": 252,
+     "rebalance": "M",
+     "vol_window": 60
+    },
+    "sharpe": 0.16954350230671097,
+    "tests": {
+     "A1": false,
+     "A2": false,
+     "A3": false,
+     "A4": false,
+     "A5": false,
+     "A6": false,
+     "B1": false,
+     "B2": false,
+     "B3": true,
+     "B4": true,
+     "B5": true
+    },
+    "trials": 9,
+    "verdict": "Some signs of a real effect, not enough to rely on."
+   }
+  },
+  "trials_counted": 39
+ },
+ "registration": {
+  "already_seen": "Yes. These settings and their exploratory results were seen in EXP-0001 and EXP-0002. This run makes the record official; it is not a fresh test.",
+  "authors": [
+   "ayan"
+  ],
+  "backtest": {
+   "cost_bps": 1.0,
+   "end": null,
+   "include_carry": true,
+   "max_leverage": 4.0,
+   "start": "2000-01-01",
+   "target_vol": null,
+   "vol_lookback": 60
+  },
+  "created": "2026-10-20",
+  "experiment": "EXP-0002",
+  "hypotheses": [
+   "HYP-0001",
+   "HYP-0002",
+   "HYP-0003"
+  ],
+  "id": "REG-0001",
+  "pass_criteria": {
+   "beats_sp500": true
+  },
+  "prior_trials": 36,
+  "prior_trials_note": "EXP-0001 and EXP-0002 already ran each strategy 12 times (3 strategies, 36 evaluations).",
+  "question": "Do the three starting strategies, at their original default settings, beat the S&P 500 under the gauntlet, and is any effect real? This repeats EXP-0002 as an official ledger run so its numbers can be cited.",
+  "strategies": [
+   {
+    "name": "fx_carry",
+    "params": {
+     "k": 3,
+     "rebalance": "M"
+    }
+   },
+   {
+    "name": "fx_tsmom",
+    "params": {
+     "lookback": 252,
+     "rebalance": "M",
+     "vol_window": 60
+    }
+   },
+   {
+    "name": "fx_commodity_gap",
+    "params": {
+     "beta_window": 250,
+     "gap_window": 20,
+     "mapping": {
+      "fx.CAD": "cmd.WTI",
+      "fx.NOK": "cmd.BRENT"
+     },
+     "rebalance": "W",
+     "z_window": 250
+    }
+   }
+  ],
+  "title": "Official rerun of the baseline gauntlet for carry, trend and the commodity gap",
+  "what_would_change_our_mind": "Any strategy passing all six A tests would contradict EXP-0002 and the literature, and would be checked for a bug before being believed."
+ },
+ "report": {
+  "config": {
+   "cost_bps": 1.0,
+   "end": null,
+   "include_carry": true,
+   "max_leverage": 4.0,
+   "start": "2000-01-01",
+   "target_vol": null,
+   "vol_lookback": 60
+  },
+  "coverage": {
+   "fetched_at": "2026-10-21T04:17:00+00:00",
+   "series": [
+    {
+     "code": "DEXUSEU",
+     "first": "1999-01-04",
+     "key": "fx.EUR",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 6969,
+     "sha256": "931d584486588764e73432f1ef8b4062f905c6964896e4d883ab775466c1b19e",
+     "source": "fred"
+    },
+    {
+     "code": "DEXUSUK",
+     "first": "1971-01-04",
+     "key": "fx.GBP",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13990,
+     "sha256": "bb3912bd8c88bfc5d14ff55d2a1e54c1b11d125a98fb24437701188bd15c401b",
+     "source": "fred"
+    },
+    {
+     "code": "DEXJPUS",
+     "first": "1971-01-04",
+     "key": "fx.JPY",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13984,
+     "sha256": "47d782437d45035abdc84b46db824de8a7e02574bff11caf40b0b1c70e4d7724",
+     "source": "fred"
+    },
+    {
+     "code": "DEXSZUS",
+     "first": "1971-01-04",
+     "key": "fx.CHF",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13990,
+     "sha256": "8c0c815fca229f85a3c5de3e0c54ffa0f11d2729d830475383bb065faf6cc4b4",
+     "source": "fred"
+    },
+    {
+     "code": "DEXCAUS",
+     "first": "1971-01-04",
+     "key": "fx.CAD",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13996,
+     "sha256": "7506f81b20ac6a74acb8e551e8122dc860060adbbb31c649cf82be6dcf809c67",
+     "source": "fred"
+    },
+    {
+     "code": "DEXUSAL",
+     "first": "1971-01-04",
+     "key": "fx.AUD",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13983,
+     "sha256": "01ed0e435511c29acb30aff6d11b09e87006eff7b1348463888675c3f846f944",
+     "source": "fred"
+    },
+    {
+     "code": "DEXUSNZ",
+     "first": "1971-01-04",
+     "key": "fx.NZD",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13974,
+     "sha256": "a7be1fecf94c3f1f320ed86fa35675b3a642d1e76726c880995004626c70e07f",
+     "source": "fred"
+    },
+    {
+     "code": "DEXNOUS",
+     "first": "1971-01-04",
+     "key": "fx.NOK",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13989,
+     "sha256": "953fc60aab9bda1ce3f6d7e92a084f5f8126a04c0c31b1c473e8c8af443aa166",
+     "source": "fred"
+    },
+    {
+     "code": "DEXSDUS",
+     "first": "1971-01-04",
+     "key": "fx.SEK",
+     "last": "2026-10-16",
+     "ok": true,
+     "rows": 13989,
+     "sha256": "3ef4db3ec1b2d4749e12706e7cbc3e9bbe2de295a278f6f6ca5d35d3441304f4",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01USM156N",
+     "first": "1964-06-01",
+     "key": "rate.USD",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 747,
+     "sha256": "25970975d3a32b47beebcf7a8ac4e4cbaf12959582a155f036a61f1b8f6f04a2",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01EZM156N",
+     "first": "1994-01-01",
+     "key": "rate.EUR",
+     "last": "2026-01-01",
+     "ok": true,
+     "rows": 385,
+     "sha256": "8acda25ff6037afb7633abf4b755b53c5151c9604b597ba1c32fe66473cbe36b",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01GBM156N",
+     "first": "1957-01-01",
+     "key": "rate.GBP",
+     "last": "2026-01-01",
+     "ok": true,
+     "rows": 829,
+     "sha256": "65196ccb155c747972a2c1a4cbc15a63d49e8794f13eced8cd6486b3031a8851",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01JPM156N",
+     "first": "2002-04-01",
+     "key": "rate.JPY",
+     "last": "2026-08-01",
+     "ok": true,
+     "rows": 293,
+     "sha256": "cd81457b693aee8d6301b476f2a5102c7cb77bc83495e26178647af8f31f72cf",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01CHM156N",
+     "first": "1999-07-01",
+     "key": "rate.CHF",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 327,
+     "sha256": "485cc0a81f23da9830e871461f28e9581a3771cec58f2e9dcac900f0a43aa28b",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01CAM156N",
+     "first": "1956-01-01",
+     "key": "rate.CAD",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 849,
+     "sha256": "347fdc3439274ecc63d6a2f655f7bff96c6f1de96cb89eb7afe6c2b6b2b96624",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01AUM156N",
+     "first": "1968-01-01",
+     "key": "rate.AUD",
+     "last": "2026-08-01",
+     "ok": true,
+     "rows": 704,
+     "sha256": "9f858a589a96152746ba70ce8f1c0db8d6ba2882dc95176f0aeeb09b43d103c0",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01NZM156N",
+     "first": "1973-12-01",
+     "key": "rate.NZD",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 634,
+     "sha256": "03645bd3808517e8592c7961aba9f32accc376983b56c3a61b0c833c6b0f0560",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01NOM156N",
+     "first": "1979-01-01",
+     "key": "rate.NOK",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 573,
+     "sha256": "aa87dd83cc201b013a0c02881e3633dc3d60af0e39e6e1f7a4de0e618277e81a",
+     "source": "fred"
+    },
+    {
+     "code": "IR3TIB01SEM156N",
+     "first": "1982-01-01",
+     "key": "rate.SEK",
+     "last": "2026-09-01",
+     "ok": true,
+     "rows": 537,
+     "sha256": "c488b022f2aed1bcbb74c24183be871fdfc04397edc6e768522b5b69aa951d01",
+     "source": "fred"
+    },
+    {
+     "code": "DCOILWTICO",
+     "first": "1986-01-02",
+     "key": "cmd.WTI",
+     "last": "2026-10-14",
+     "ok": true,
+     "rows": 9523,
+     "sha256": "be39b8ac0004ba402f4357bed482a8deb3afd1c276fec9c656b443cfbbe74553",
+     "source": "fred"
+    },
+    {
+     "code": "DCOILBRENTEU",
+     "first": "1987-05-20",
+     "key": "cmd.BRENT",
+     "last": "2026-10-14",
+     "ok": true,
+     "rows": 9108,
+     "sha256": "c261b0a95ef02d3dcd7a747e447dd7364567f1e8424faa8f8eb433cf34592ce1",
+     "source": "fred"
+    },
+    {
+     "code": "DHHNGSP",
+     "first": "1997-01-07",
+     "key": "cmd.HH_GAS",
+     "last": "2026-10-14",
+     "ok": true,
+     "rows": 5708,
+     "sha256": "4e3e84080f31f41fda142dc74104749a8b027c6827c3a826f47943ee18fd4e7e",
+     "source": "fred"
+    },
+    {
+     "code": "PCOPPUSDM",
+     "first": "1992-01-01",
+     "key": "cmd.COPPER",
+     "last": "2026-07-01",
+     "ok": true,
+     "rows": 415,
+     "sha256": "2edf0dcd7655b9641e5ec71f977675edc4688004115a9a7e8497ed5847650e1c",
+     "source": "fred"
+    },
+    {
+     "code": "SPY",
+     "first": "1993-01-29",
+     "key": "eq.SPY",
+     "last": "2026-10-20",
+     "ok": true,
+     "rows": 8489,
+     "sha256": "27f9348df925ac9c04ee8734c609207750d49b8fd7329b082e0470fee8b090e5",
+     "source": "yahoo"
+    },
+    {
+     "code": "SP500",
+     "first": "2016-10-21",
+     "key": "eq.SPX",
+     "last": "2026-10-20",
+     "ok": true,
+     "rows": 2512,
+     "sha256": "b7da8fa01cdcbf5d06d072e4e16a8de7684fb98cb739c6b6f4d72ed40526478f",
+     "source": "fred"
+    },
+    {
+     "code": "VIXCLS",
+     "first": "1990-01-02",
+     "key": "risk.VIX",
+     "last": "2026-10-19",
+     "ok": true,
+     "rows": 9298,
+     "sha256": "edada9ba57ad61bab3ec60f76deec1e1aec2663a7ab3b8e25463f6bdbe8554ed",
+     "source": "fred"
+    }
+   ],
+   "snapshot": "87741fa9da7aaf04cf09f570694c1fd16e615466ba8730e84fb4a18b307b233c"
+  },
+  "generated_at": "2026-10-21T04:17:03+00:00",
+  "git_sha": "d2d7569",
+  "kind": "official",
+  "n_trials": 39,
+  "runs": [
+   {
+    "config": {
+     "cost_bps": 0.0,
+     "end": null,
+     "include_carry": true,
+     "max_leverage": 4.0,
+     "start": "2000-01-01",
+     "target_vol": null,
+     "vol_lookback": 60
+    },
+    "exposure": {
+     "eq.SPY": 1.0
+    },
+    "gauntlet": null,
+    "ic_decay": [],
+    "is_benchmark": true,
+    "metrics": {
+     "ann_vol": 0.18881068208122753,
+     "cagr": 0.07961548732652446,
+     "calmar": 0.14425852832023198,
+     "deflated_sharpe": 0.9957522025048807,
+     "end": "2026-10-20",
+     "hit_rate": 0.5457657389492484,
+     "max_drawdown": -0.5518944928496026,
+     "sharpe": 0.500207424339265,
+     "sortino": 0.7086597093801703,
+     "start": "2000-01-03",
+     "years": 27.75
+    },
+    "params": {},
+    "reference": "reference/0002-kpis.md#the-benchmark",
+    "strategy": "spy_buy_hold",
+    "summary": "Hold the S&P 500 (SPY, dividends reinvested) and never trade.",
+    "yearly": {
+     "2000": -0.0974153371157781,
+     "2001": -0.11758548351871423,
+     "2002": -0.21584580372141093,
+     "2003": 0.2818155616758875,
+     "2004": 0.10697959578570115,
+     "2005": 0.04828223046246727,
+     "2006": 0.15845283261584142,
+     "2007": 0.051461618635116446,
+     "2008": -0.3679499073309995,
+     "2009": 0.263518078930546,
+     "2010": 0.15056135777918556,
+     "2011": 0.01894974860514953,
+     "2012": 0.15990377995335736,
+     "2013": 0.32307723312524517,
+     "2014": 0.13463778048387542,
+     "2015": 0.012343033919827384,
+     "2016": 0.1199787291797405,
+     "2017": 0.21705413728410572,
+     "2018": -0.045689825834823394,
+     "2019": 0.3122385964240104,
+     "2020": 0.18331639678551315,
+     "2021": 0.28728742216351444,
+     "2022": -0.1817536890966267,
+     "2023": 0.2617580925621501,
+     "2024": 0.24886467926331424,
+     "2025": 0.17719051276439846,
+     "2026": 0.13658024886911213
+    }
+   },
+   {
+    "config": {
+     "cost_bps": 1.0,
+     "end": null,
+     "include_carry": true,
+     "max_leverage": 4.0,
+     "start": "2000-01-01",
+     "target_vol": null,
+     "vol_lookback": 60
+    },
+    "exposure": {
+     "fx.AUD": 0.1667,
+     "fx.CAD": 0.0,
+     "fx.CHF": -0.1667,
+     "fx.EUR": 0.0,
+     "fx.GBP": 0.1667,
+     "fx.JPY": -0.1667,
+     "fx.NOK": 0.1667,
+     "fx.NZD": 0.0,
+     "fx.SEK": -0.1667
+    },
+    "gauntlet": {
+     "beats_sp500": false,
+     "bootstrap": {
+      "prob_beats_benchmark": 0.238,
+      "prob_sharpe_above_zero": 0.976,
+      "sharpe_ci": [
+       0.0007603651459807627,
+       0.7527772401086398
+      ]
+     },
+     "passed": 3,
+     "placebo": {
+      "actual": 0.3868939027413049,
+      "null_median": 0.25294886954382695,
+      "null_p95": 0.4100600754457746,
+      "p_value": 0.064
+     },
+     "sensitivity": {
+      "max": 0.39609469384988033,
+      "min": 0.24796404674735814,
+      "share_positive": 1.0,
+      "tried": 6,
+      "variants": [
+       {
+        "params": {
+         "k": 2,
+         "rebalance": "W"
+        },
+        "sharpe": 0.39609469384988033
+       },
+       {
+        "params": {
+         "k": 2,
+         "rebalance": "M"
+        },
+        "sharpe": 0.37732791349549805
+       },
+       {
+        "params": {
+         "k": 3,
+         "rebalance": "W"
+        },
+        "sharpe": 0.3955546954187444
+       },
+       {
+        "params": {
+         "k": 3,
+         "rebalance": "M"
+        },
+        "sharpe": 0.3868939027413049
+       },
+       {
+        "params": {
+         "k": 4,
+         "rebalance": "W"
+        },
+        "sharpe": 0.2862013905408339
+       },
+       {
+        "params": {
+         "k": 4,
+         "rebalance": "M"
+        },
+        "sharpe": 0.24796404674735814
+       }
+      ]
+     },
+     "settings": {
+      "block_days": 21,
+      "bootstrap": 1000,
+      "holdout_years": 5,
+      "placebo": 500,
+      "seed": 20261020,
+      "target_vol": 0.15
+     },
+     "tests": [
+      {
+       "bar": "Sharpe above the S&P 500's",
+       "group": "beat",
+       "id": "A1",
+       "name": "Better return for the risk",
+       "passed": false,
+       "plain": "Does it earn more per unit of bumpiness than just holding the S&P 500?",
+       "value": "0.39 vs 0.50"
+      },
+      {
+       "bar": "Yearly return above the S&P 500 at 15% volatility",
+       "group": "beat",
+       "id": "A2",
+       "name": "More money at the same risk",
+       "passed": false,
+       "plain": "If we turn it up until it is as bumpy as stocks, does it make more money?",
+       "value": "4.9% vs 8.0% a year"
+      },
+      {
+       "bar": "Deflated Sharpe of 0.95 or more",
+       "group": "beat",
+       "id": "A3",
+       "name": "Not just the best of many tries",
+       "passed": false,
+       "plain": "We tried 39 ideas. Is this one good even after allowing for the fact that one of them was bound to look good by luck?",
+       "value": "0.44"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's at 2x costs",
+       "group": "beat",
+       "id": "A4",
+       "name": "Survives double trading costs",
+       "passed": false,
+       "plain": "If trading costs twice what we guessed, does it still beat the S&P 500?",
+       "value": "0.39 vs 0.50"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's in every period",
+       "group": "beat",
+       "id": "A5",
+       "name": "Wins in every era",
+       "passed": false,
+       "plain": "Does it beat the S&P 500 in each of three very different periods, not just on average?",
+       "value": "2000 to 2008: 0.34 vs -0.06; 2009 to 2019: 0.41 vs 0.91; 2020 on: 0.45 vs 0.80"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's since 2021-10-20",
+       "group": "beat",
+       "id": "A6",
+       "name": "Wins on the most recent years",
+       "passed": false,
+       "plain": "Markets change. Does it beat the S&P 500 over the last 5 years alone?",
+       "value": "0.62 vs 0.78"
+      },
+      {
+       "bar": "The whole 95% range of Sharpe is above zero",
+       "group": "real",
+       "id": "B1",
+       "name": "Clearly above zero",
+       "passed": true,
+       "plain": "If history had been shuffled a little, would it still have made money? We replay 1,000 jumbled versions of the past and look at the range.",
+       "value": "95% range 0.00 to 0.75"
+      },
+      {
+       "bar": "Beaten by fewer than 5% of random-date copies",
+       "group": "real",
+       "id": "B2",
+       "name": "Timing matters",
+       "passed": false,
+       "plain": "If we keep the same bets but place them on random dates, does it do much worse? If not, the signal is not telling us anything.",
+       "value": "beaten by 6% of 500 random-date copies"
+      },
+      {
+       "bar": "At least 75% of nearby settings have a positive Sharpe",
+       "group": "real",
+       "id": "B3",
+       "name": "Not one lucky setting",
+       "passed": true,
+       "plain": "If we nudge its settings a bit, does it still make money? A real effect should not depend on picking exactly the right number.",
+       "value": "100% of 6 variants positive (Sharpe 0.25 to 0.40)"
+      },
+      {
+       "bar": "Sharpe above zero without the best year",
+       "group": "real",
+       "id": "B4",
+       "name": "Not one lucky year",
+       "passed": true,
+       "plain": "If we delete its single best year, is it still positive?",
+       "value": "0.33 without 2009"
+      },
+      {
+       "bar": "Zero or positive on average in the S&P 500's worst months",
+       "group": "real",
+       "id": "B5",
+       "name": "Does not crash with stocks",
+       "passed": false,
+       "plain": "In the worst months for the stock market, does it lose money too?",
+       "value": "-1.2% average in the S&P 500's worst 5% of months"
+      }
+     ],
+     "total": 11,
+     "trials_including_gauntlet": 48,
+     "verdict": "Some signs of a real effect, not enough to rely on."
+    },
+    "ic_decay": [
+     {
+      "horizon_days": 1,
+      "ic_tstat": 7.9256505994645625,
+      "mean_ic": 0.033188389698466526,
+      "observations": 13991
+     },
+     {
+      "horizon_days": 5,
+      "ic_tstat": 11.350348473437217,
+      "mean_ic": 0.04701023451921506,
+      "observations": 14552
+     },
+     {
+      "horizon_days": 21,
+      "ic_tstat": 13.347318710430846,
+      "mean_ic": 0.05455039376027845,
+      "observations": 14535
+     },
+     {
+      "horizon_days": 63,
+      "ic_tstat": 11.970137722536629,
+      "mean_ic": 0.048507782425079485,
+      "observations": 14494
+     }
+    ],
+    "is_benchmark": false,
+    "metrics": {
+     "ann_vol": 0.039003776421974584,
+     "benchmark_cagr": 0.07961548732652446,
+     "benchmark_sharpe": 0.500207424339265,
+     "beta": 0.057888959954459064,
+     "breakeven_cost_bps": 274.0629927137083,
+     "cagr": 0.014431390263832,
+     "calmar": 0.08968881948111575,
+     "correlation": 0.2802306601218319,
+     "deflated_sharpe": 0.44422415214943234,
+     "end": "2026-10-20",
+     "excess_cagr": -0.06518409706269246,
+     "hit_rate": 0.5550629290617849,
+     "information_ratio": -0.4365437816886021,
+     "max_drawdown": -0.16090512002859592,
+     "sharpe": 0.3868939027413049,
+     "sortino": 0.5244493749429853,
+     "start": "2000-01-03",
+     "turnover_per_year": 0.5526315789473684,
+     "years": 27.75
+    },
+    "params": {
+     "k": 3,
+     "rebalance": "M"
+    },
+    "reference": "hypotheses/0001-carry-still-pays-after-costs.md",
+    "strategy": "fx_carry",
+    "summary": "Long the 3 highest-rate G10 currencies, short the 3 lowest, rebalance monthly.",
+    "yearly": {
+     "2000": -0.015279729666567543,
+     "2001": 0.02544903536340626,
+     "2002": 0.07461402846347687,
+     "2003": 0.04479360819769007,
+     "2004": 0.005642071574944119,
+     "2005": 0.06355668707727546,
+     "2006": 0.02716949280937464,
+     "2007": 0.023151722003188713,
+     "2008": -0.10661445364884514,
+     "2009": 0.08958119257820019,
+     "2010": 0.006943599808791001,
+     "2011": 0.002806951164789906,
+     "2012": 0.05347245386834221,
+     "2013": -0.008522591312929761,
+     "2014": 0.014609497399667548,
+     "2015": -0.024739977036868477,
+     "2016": 0.039020220334292643,
+     "2017": -0.006146717714967331,
+     "2018": -0.005852619581949159,
+     "2019": 0.024420726897027567,
+     "2020": -0.03278359188688584,
+     "2021": 0.029880082236048988,
+     "2022": -0.009806975290395759,
+     "2023": 0.021148329078168437,
+     "2024": 0.0284410187885753,
+     "2025": 0.005502950077764135,
+     "2026": 0.04943357370301449
+    }
+   },
+   {
+    "config": {
+     "cost_bps": 1.0,
+     "end": null,
+     "include_carry": true,
+     "max_leverage": 4.0,
+     "start": "2000-01-01",
+     "target_vol": null,
+     "vol_lookback": 60
+    },
+    "exposure": {
+     "fx.AUD": 0.1124,
+     "fx.CAD": -0.1572,
+     "fx.CHF": -0.0982,
+     "fx.EUR": -0.1568,
+     "fx.GBP": -0.1349,
+     "fx.JPY": -0.0695,
+     "fx.NOK": 0.0965,
+     "fx.NZD": -0.085,
+     "fx.SEK": -0.0896
+    },
+    "gauntlet": {
+     "beats_sp500": false,
+     "bootstrap": {
+      "prob_beats_benchmark": 0.112,
+      "prob_sharpe_above_zero": 0.834,
+      "sharpe_ci": [
+       -0.16447171293026117,
+       0.5459562265168278
+      ]
+     },
+     "passed": 3,
+     "placebo": {
+      "actual": 0.16954350230671097,
+      "null_median": -0.03186117274511159,
+      "null_p95": 0.20772446912904086,
+      "p_value": 0.078
+     },
+     "sensitivity": {
+      "max": 0.2123089419443114,
+      "min": 0.021998191329678604,
+      "share_positive": 1.0,
+      "tried": 6,
+      "variants": [
+       {
+        "params": {
+         "lookback": 126,
+         "rebalance": "W"
+        },
+        "sharpe": 0.2123089419443114
+       },
+       {
+        "params": {
+         "lookback": 126,
+         "rebalance": "M"
+        },
+        "sharpe": 0.04929657540507507
+       },
+       {
+        "params": {
+         "lookback": 252,
+         "rebalance": "W"
+        },
+        "sharpe": 0.12235895313497179
+       },
+       {
+        "params": {
+         "lookback": 252,
+         "rebalance": "M"
+        },
+        "sharpe": 0.16954350230671097
+       },
+       {
+        "params": {
+         "lookback": 504,
+         "rebalance": "W"
+        },
+        "sharpe": 0.08720668973709793
+       },
+       {
+        "params": {
+         "lookback": 504,
+         "rebalance": "M"
+        },
+        "sharpe": 0.021998191329678604
+       }
+      ]
+     },
+     "settings": {
+      "block_days": 21,
+      "bootstrap": 1000,
+      "holdout_years": 5,
+      "placebo": 500,
+      "seed": 20261020,
+      "target_vol": 0.15
+     },
+     "tests": [
+      {
+       "bar": "Sharpe above the S&P 500's",
+       "group": "beat",
+       "id": "A1",
+       "name": "Better return for the risk",
+       "passed": false,
+       "plain": "Does it earn more per unit of bumpiness than just holding the S&P 500?",
+       "value": "0.17 vs 0.50"
+      },
+      {
+       "bar": "Yearly return above the S&P 500 at 15% volatility",
+       "group": "beat",
+       "id": "A2",
+       "name": "More money at the same risk",
+       "passed": false,
+       "plain": "If we turn it up until it is as bumpy as stocks, does it make more money?",
+       "value": "2.9% vs 8.0% a year"
+      },
+      {
+       "bar": "Deflated Sharpe of 0.95 or more",
+       "group": "beat",
+       "id": "A3",
+       "name": "Not just the best of many tries",
+       "passed": false,
+       "plain": "We tried 39 ideas. Is this one good even after allowing for the fact that one of them was bound to look good by luck?",
+       "value": "0.10"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's at 2x costs",
+       "group": "beat",
+       "id": "A4",
+       "name": "Survives double trading costs",
+       "passed": false,
+       "plain": "If trading costs twice what we guessed, does it still beat the S&P 500?",
+       "value": "0.16 vs 0.50"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's in every period",
+       "group": "beat",
+       "id": "A5",
+       "name": "Wins in every era",
+       "passed": false,
+       "plain": "Does it beat the S&P 500 in each of three very different periods, not just on average?",
+       "value": "2000 to 2008: 0.67 vs -0.06; 2009 to 2019: -0.26 vs 0.91; 2020 on: 0.07 vs 0.80"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's since 2021-10-20",
+       "group": "beat",
+       "id": "A6",
+       "name": "Wins on the most recent years",
+       "passed": false,
+       "plain": "Markets change. Does it beat the S&P 500 over the last 5 years alone?",
+       "value": "-0.01 vs 0.78"
+      },
+      {
+       "bar": "The whole 95% range of Sharpe is above zero",
+       "group": "real",
+       "id": "B1",
+       "name": "Clearly above zero",
+       "passed": false,
+       "plain": "If history had been shuffled a little, would it still have made money? We replay 1,000 jumbled versions of the past and look at the range.",
+       "value": "95% range -0.16 to 0.55"
+      },
+      {
+       "bar": "Beaten by fewer than 5% of random-date copies",
+       "group": "real",
+       "id": "B2",
+       "name": "Timing matters",
+       "passed": false,
+       "plain": "If we keep the same bets but place them on random dates, does it do much worse? If not, the signal is not telling us anything.",
+       "value": "beaten by 8% of 500 random-date copies"
+      },
+      {
+       "bar": "At least 75% of nearby settings have a positive Sharpe",
+       "group": "real",
+       "id": "B3",
+       "name": "Not one lucky setting",
+       "passed": true,
+       "plain": "If we nudge its settings a bit, does it still make money? A real effect should not depend on picking exactly the right number.",
+       "value": "100% of 6 variants positive (Sharpe 0.02 to 0.21)"
+      },
+      {
+       "bar": "Sharpe above zero without the best year",
+       "group": "real",
+       "id": "B4",
+       "name": "Not one lucky year",
+       "passed": true,
+       "plain": "If we delete its single best year, is it still positive?",
+       "value": "0.07 without 2003"
+      },
+      {
+       "bar": "Zero or positive on average in the S&P 500's worst months",
+       "group": "real",
+       "id": "B5",
+       "name": "Does not crash with stocks",
+       "passed": true,
+       "plain": "In the worst months for the stock market, does it lose money too?",
+       "value": "1.3% average in the S&P 500's worst 5% of months"
+      }
+     ],
+     "total": 11,
+     "trials_including_gauntlet": 48,
+     "verdict": "Some signs of a real effect, not enough to rely on."
+    },
+    "ic_decay": [
+     {
+      "horizon_days": 1,
+      "ic_tstat": 4.030475747045344,
+      "mean_ic": 0.015219177265944793,
+      "observations": 13749
+     },
+     {
+      "horizon_days": 5,
+      "ic_tstat": 7.118697572969743,
+      "mean_ic": 0.027072106531605685,
+      "observations": 14300
+     },
+     {
+      "horizon_days": 21,
+      "ic_tstat": 9.746763380523118,
+      "mean_ic": 0.03710292994368441,
+      "observations": 14283
+     },
+     {
+      "horizon_days": 63,
+      "ic_tstat": 9.277456844574521,
+      "mean_ic": 0.033854190387510294,
+      "observations": 14242
+     }
+    ],
+    "is_benchmark": false,
+    "metrics": {
+     "ann_vol": 0.06416311080168163,
+     "benchmark_cagr": 0.07961548732652446,
+     "benchmark_sharpe": 0.500207424339265,
+     "beta": -0.039764167407888865,
+     "breakeven_cost_bps": 30.773086258641843,
+     "cagr": 0.008857457345821107,
+     "calmar": 0.029714771194497246,
+     "correlation": -0.11701271146097302,
+     "deflated_sharpe": 0.09950331920779748,
+     "end": "2026-10-20",
+     "excess_cagr": -0.07075802998070335,
+     "hit_rate": 0.5158752860411899,
+     "information_ratio": -0.4048716836451524,
+     "max_drawdown": -0.298082636674025,
+     "sharpe": 0.16954350230671097,
+     "sortino": 0.23597177258782057,
+     "start": "2000-01-03",
+     "turnover_per_year": 3.653782624249481,
+     "years": 27.75
+    },
+    "params": {
+     "lookback": 252,
+     "rebalance": "M",
+     "vol_window": 60
+    },
+    "reference": "hypotheses/0002-currency-trends-persist.md",
+    "strategy": "fx_tsmom",
+    "summary": "Long G10 currencies that rose over the past 12 months, short those that fell.",
+    "yearly": {
+     "2000": 0.057831085357151535,
+     "2001": 0.024491753491374224,
+     "2002": 0.09589237955709451,
+     "2003": 0.19234307509328508,
+     "2004": 0.07075337603946186,
+     "2005": -0.06602773993190725,
+     "2006": -0.04534819608448315,
+     "2007": 0.05748246184392736,
+     "2008": 0.07677457336869242,
+     "2009": -0.12105039857747124,
+     "2010": -0.036007676563771684,
+     "2011": -0.061713831139473596,
+     "2012": -0.01803601764681495,
+     "2013": -0.005802801592423634,
+     "2014": 0.03433258403861039,
+     "2015": 0.07948054807180993,
+     "2016": -0.020945720729988127,
+     "2017": -0.025399900434627365,
+     "2018": -0.01082882756583381,
+     "2019": -0.00044305327567972785,
+     "2020": 0.02954905087013704,
+     "2021": -0.03281105997976319,
+     "2022": 0.06444574290755689,
+     "2023": -0.029913599777511624,
+     "2024": -0.009776195235757346,
+     "2025": -0.006443747090822738,
+     "2026": 0.003125646443463026
+    }
+   },
+   {
+    "config": {
+     "cost_bps": 1.0,
+     "end": null,
+     "include_carry": true,
+     "max_leverage": 4.0,
+     "start": "2000-01-01",
+     "target_vol": null,
+     "vol_lookback": 60
+    },
+    "exposure": {
+     "fx.CAD": 0.1528,
+     "fx.NOK": 0.0438
+    },
+    "gauntlet": {
+     "beats_sp500": false,
+     "bootstrap": {
+      "prob_beats_benchmark": 0.008,
+      "prob_sharpe_above_zero": 0.61,
+      "sharpe_ci": [
+       -0.2997046618317442,
+       0.3945494102913558
+      ]
+     },
+     "passed": 1,
+     "placebo": {
+      "actual": 0.05769144900544697,
+      "null_median": -0.02601426642725328,
+      "null_p95": 0.2944087960039732,
+      "p_value": 0.334
+     },
+     "sensitivity": {
+      "max": 0.28489990025361783,
+      "min": 0.027648790261860484,
+      "share_positive": 1.0,
+      "tried": 6,
+      "variants": [
+       {
+        "params": {
+         "gap_window": 10,
+         "rebalance": "W"
+        },
+        "sharpe": 0.12035042596132822
+       },
+       {
+        "params": {
+         "gap_window": 10,
+         "rebalance": "M"
+        },
+        "sharpe": 0.19553224931810054
+       },
+       {
+        "params": {
+         "gap_window": 20,
+         "rebalance": "W"
+        },
+        "sharpe": 0.05769144900544697
+       },
+       {
+        "params": {
+         "gap_window": 20,
+         "rebalance": "M"
+        },
+        "sharpe": 0.2643806425674372
+       },
+       {
+        "params": {
+         "gap_window": 40,
+         "rebalance": "W"
+        },
+        "sharpe": 0.027648790261860484
+       },
+       {
+        "params": {
+         "gap_window": 40,
+         "rebalance": "M"
+        },
+        "sharpe": 0.28489990025361783
+       }
+      ]
+     },
+     "settings": {
+      "block_days": 21,
+      "bootstrap": 1000,
+      "holdout_years": 5,
+      "placebo": 500,
+      "seed": 20261020,
+      "target_vol": 0.15
+     },
+     "tests": [
+      {
+       "bar": "Sharpe above the S&P 500's",
+       "group": "beat",
+       "id": "A1",
+       "name": "Better return for the risk",
+       "passed": false,
+       "plain": "Does it earn more per unit of bumpiness than just holding the S&P 500?",
+       "value": "0.06 vs 0.57"
+      },
+      {
+       "bar": "Yearly return above the S&P 500 at 15% volatility",
+       "group": "beat",
+       "id": "A2",
+       "name": "More money at the same risk",
+       "passed": false,
+       "plain": "If we turn it up until it is as bumpy as stocks, does it make more money?",
+       "value": "-1.4% vs 9.3% a year"
+      },
+      {
+       "bar": "Deflated Sharpe of 0.95 or more",
+       "group": "beat",
+       "id": "A3",
+       "name": "Not just the best of many tries",
+       "passed": false,
+       "plain": "We tried 39 ideas. Is this one good even after allowing for the fact that one of them was bound to look good by luck?",
+       "value": "0.03"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's at 2x costs",
+       "group": "beat",
+       "id": "A4",
+       "name": "Survives double trading costs",
+       "passed": false,
+       "plain": "If trading costs twice what we guessed, does it still beat the S&P 500?",
+       "value": "0.03 vs 0.57"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's in every period",
+       "group": "beat",
+       "id": "A5",
+       "name": "Wins in every era",
+       "passed": false,
+       "plain": "Does it beat the S&P 500 in each of three very different periods, not just on average?",
+       "value": "2000 to 2008: 0.00 vs 0.05; 2009 to 2019: 0.15 vs 0.91; 2020 on: -0.02 vs 0.80"
+      },
+      {
+       "bar": "Sharpe above the S&P 500's since 2021-10-20",
+       "group": "beat",
+       "id": "A6",
+       "name": "Wins on the most recent years",
+       "passed": false,
+       "plain": "Markets change. Does it beat the S&P 500 over the last 5 years alone?",
+       "value": "-0.25 vs 0.78"
+      },
+      {
+       "bar": "The whole 95% range of Sharpe is above zero",
+       "group": "real",
+       "id": "B1",
+       "name": "Clearly above zero",
+       "passed": false,
+       "plain": "If history had been shuffled a little, would it still have made money? We replay 1,000 jumbled versions of the past and look at the range.",
+       "value": "95% range -0.30 to 0.39"
+      },
+      {
+       "bar": "Beaten by fewer than 5% of random-date copies",
+       "group": "real",
+       "id": "B2",
+       "name": "Timing matters",
+       "passed": false,
+       "plain": "If we keep the same bets but place them on random dates, does it do much worse? If not, the signal is not telling us anything.",
+       "value": "beaten by 33% of 500 random-date copies"
+      },
+      {
+       "bar": "At least 75% of nearby settings have a positive Sharpe",
+       "group": "real",
+       "id": "B3",
+       "name": "Not one lucky setting",
+       "passed": true,
+       "plain": "If we nudge its settings a bit, does it still make money? A real effect should not depend on picking exactly the right number.",
+       "value": "100% of 6 variants positive (Sharpe 0.03 to 0.28)"
+      },
+      {
+       "bar": "Sharpe above zero without the best year",
+       "group": "real",
+       "id": "B4",
+       "name": "Not one lucky year",
+       "passed": false,
+       "plain": "If we delete its single best year, is it still positive?",
+       "value": "-0.01 without 2013"
+      },
+      {
+       "bar": "Zero or positive on average in the S&P 500's worst months",
+       "group": "real",
+       "id": "B5",
+       "name": "Does not crash with stocks",
+       "passed": false,
+       "plain": "In the worst months for the stock market, does it lose money too?",
+       "value": "-0.3% average in the S&P 500's worst 5% of months"
+      }
+     ],
+     "total": 11,
+     "trials_including_gauntlet": 48,
+     "verdict": "No evidence of a real effect. Most likely noise."
+    },
+    "ic_decay": [
+     {
+      "horizon_days": 1,
+      "ic_tstat": 2.21030882268244,
+      "mean_ic": 0.018867996247517997,
+      "observations": 39
+     },
+     {
+      "horizon_days": 5,
+      "ic_tstat": 2.007617201450064,
+      "mean_ic": 0.03326881263511273,
+      "observations": 39
+     },
+     {
+      "horizon_days": 21,
+      "ic_tstat": 2.4142252173259036,
+      "mean_ic": 0.06878714713261819,
+      "observations": 39
+     },
+     {
+      "horizon_days": 63,
+      "ic_tstat": 3.977163444349167,
+      "mean_ic": 0.12479659807873694,
+      "observations": 39
+     }
+    ],
+    "is_benchmark": false,
+    "metrics": {
+     "ann_vol": 0.04168899881379212,
+     "benchmark_cagr": 0.09329262102590152,
+     "benchmark_sharpe": 0.5723369739639551,
+     "beta": 0.011747068770189257,
+     "breakeven_cost_bps": 2.9054217392206394,
+     "cagr": 0.001537383228662037,
+     "calmar": 0.009520049505232126,
+     "correlation": 0.05245320608927361,
+     "deflated_sharpe": 0.029872331586121282,
+     "end": "2026-10-20",
+     "excess_cagr": -0.09175523779723949,
+     "hit_rate": 0.48860911270983215,
+     "information_ratio": -0.5521053698225549,
+     "max_drawdown": -0.16148899517981563,
+     "sharpe": 0.05769144900544697,
+     "sortino": 0.08208780107086203,
+     "start": "2001-03-26",
+     "turnover_per_year": 12.622395869891593,
+     "years": 26.48
+    },
+    "params": {
+     "beta_window": 250,
+     "gap_window": 20,
+     "mapping": {
+      "fx.CAD": "cmd.WTI",
+      "fx.NOK": "cmd.BRENT"
+     },
+     "rebalance": "W",
+     "z_window": 250
+    },
+    "reference": "hypotheses/0003-commodity-currencies-catch-up.md",
+    "strategy": "fx_commodity_gap",
+    "summary": "Buy CAD or NOK when oil has moved more than the currency, and the reverse.",
+    "yearly": {
+     "2001": 0.007781758639483716,
+     "2002": 0.010699763157780318,
+     "2003": -0.01934634525625034,
+     "2004": -0.0024915522224739917,
+     "2005": -0.0011079227810385506,
+     "2006": 0.00588289975339551,
+     "2007": -0.036566101068709056,
+     "2008": 0.031391529122101636,
+     "2009": 0.017967324683710872,
+     "2010": 0.023095600926382964,
+     "2011": 0.04373981959378748,
+     "2012": 0.010521454293471955,
+     "2013": 0.07430522608777501,
+     "2014": -0.031511993125593385,
+     "2015": 0.020669445449085222,
+     "2016": -0.021175443933556748,
+     "2017": -0.05046000723372046,
+     "2018": -0.01972937775259187,
+     "2019": -0.002419721073148806,
+     "2020": 0.05261553792554752,
+     "2021": -0.019892973252244484,
+     "2022": 0.009453667473329208,
+     "2023": -0.040448547048547834,
+     "2024": -0.005267152818052012,
+     "2025": -0.002934519734938301,
+     "2026": -0.0036849960848009955
+    }
+   }
+  ],
+  "schema_version": 1
+ },
+ "run_id": "RUN-000001",
+ "verdicts": {
+  "fx_carry": {
+   "checks": {
+    "beats_sp500": false
+   },
+   "passed": false
+  },
+  "fx_commodity_gap": {
+   "checks": {
+    "beats_sp500": false
+   },
+   "passed": false
+  },
+  "fx_tsmom": {
+   "checks": {
+    "beats_sp500": false
+   },
+   "passed": false
+  }
+ }
+}
