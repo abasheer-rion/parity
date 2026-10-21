@@ -1,85 +1,58 @@
 // Every strategy in one list, Robinhood watchlist style (name, a small chart, the
-// move over the chosen range) in Mercury's table layout.
-import { useState } from "react";
-import { RANGES, Sparkline, sliceRange, type RangeKey } from "../components/charts";
+// move over the chosen range) in Mercury's table, with filters for the family.
+import { useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { colorMap } from "../lib/colors";
-import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
+import { Badge, DataTable, FilterBar, FilterChip, RANGES, SearchInput, Sparkline, Tabs, fmt, sliceRange, useFilters, type Column, type RangeKey } from "../ui";
 import { Term } from "./Learn";
-
-type SortKey = "move" | "cagr" | "sharpe" | "dd" | "dsr" | "gauntlet" | "name";
 
 function move(r: StrategyRun, range: RangeKey): number | null {
   const p = sliceRange(r.equity, range);
   return p.length > 1 ? p[p.length - 1][1] / p[0][1] - 1 : null;
 }
 
+const FAMILY = (r: StrategyRun) => (r.is_benchmark ? "benchmark" : r.strategy.startsWith("fx_") ? "fx" : r.strategy.startsWith("stocks_") ? "stocks" : "other");
+
 export function Strategies({ report }: { report: Report }) {
   const prefs = usePrefs();
   const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
-  const [sort, setSort] = useState<SortKey>("sharpe");
   const colors = colorMap(report.runs);
-  const val = (r: StrategyRun): number | string => ({
-    move: move(r, range) ?? -9, cagr: r.metrics.cagr ?? -9, sharpe: r.metrics.sharpe ?? -9, dd: r.metrics.max_drawdown ?? -9,
-    dsr: r.metrics.deflated_sharpe ?? -9, gauntlet: r.gauntlet?.passed ?? -1, name: r.strategy,
-  })[sort];
-  const rows = [...report.runs].sort((a, b) => {
-    if (a.is_benchmark !== b.is_benchmark) return a.is_benchmark ? -1 : 1;
-    const x = val(a), y = val(b);
-    return typeof x === "string" ? x.localeCompare(y as string) : (y as number) - x;
-  });
-  const th = (k: SortKey, label: React.ReactNode, cls = "") => (
-    <th className={`${cls} sortable ${sort === k ? "sorted" : ""}`} onClick={() => setSort(k)} aria-sort={sort === k ? "descending" : "none"}>{label}</th>
-  );
+  const defs = useMemo(() => [
+    { id: "fx", label: "Currencies", test: (r: StrategyRun) => r.is_benchmark || FAMILY(r) === "fx" },
+    { id: "stocks", label: "Stocks", test: (r: StrategyRun) => r.is_benchmark || FAMILY(r) === "stocks" },
+    { id: "positive", label: "Positive Sharpe", test: (r: StrategyRun) => r.is_benchmark || (r.metrics.sharpe ?? 0) > 0 },
+  ], []);
+  const f = useFilters(report.runs, defs, (r) => r.strategy);
+
+  const columns: Column<StrategyRun>[] = [
+    {
+      key: "name", header: "Strategy", align: "left", sort: (r) => r.strategy,
+      render: (r) => <><span className="acct-dot" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`}>{r.strategy}</a>{r.is_benchmark && <> <Badge>benchmark</Badge></>}</>,
+    },
+    { key: "spark", header: range, align: "left", render: (r) => <Sparkline points={sliceRange(r.equity, range)} /> },
+    { key: "move", header: "Move", sort: (r) => move(r, range), tone: (r) => move(r, range), render: (r) => fmt.signedPct(move(r, range)) },
+    { key: "cagr", header: <Term id="cagr">CAGR</Term>, sort: (r) => r.metrics.cagr, render: (r) => fmt.pct(r.metrics.cagr) },
+    { key: "sharpe", header: <Term id="sharpe-ratio">Sharpe</Term>, sort: (r) => r.metrics.sharpe, render: (r) => fmt.num(r.metrics.sharpe) },
+    { key: "dd", header: <Term id="drawdown">Max drawdown</Term>, sort: (r) => r.metrics.max_drawdown, render: (r) => fmt.pct(r.metrics.max_drawdown) },
+    { key: "dsr", header: <Term id="deflated-sharpe-ratio">Deflated</Term>, sort: (r) => r.metrics.deflated_sharpe, render: (r) => fmt.num(r.metrics.deflated_sharpe) },
+    { key: "gauntlet", header: "Gauntlet", sort: (r) => r.gauntlet?.passed, render: (r) => (r.gauntlet ? `${r.gauntlet.passed} of ${r.gauntlet.total}` : "") },
+  ];
 
   return (
     <>
       <Title>Strategies</Title>
+      <FilterBar count={f.count} onReset={f.reset} right={<SearchInput value={f.query} onChange={f.setQuery} placeholder="Search strategies" />}>
+        <FilterChip icon="filter" label={`Filters${f.active.length ? ` (${f.active.length})` : ""}`} />
+        {defs.map((d) => <FilterChip key={d.id} label={d.label} active={f.active.includes(d.id)} onClick={() => f.toggle(d.id)} onRemove={() => f.toggle(d.id)} />)}
+      </FilterBar>
       <div className="toolbar">
-        <div className="range-tabs inline" role="tablist" aria-label="Time range">
-          {RANGES.map((r) => <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => setRange(r)}>{r}</button>)}
-        </div>
-        <span className="muted small">{report.runs.length - 1} strategies against the US stock market, {report.n_trials} trials counted</span>
+        <Tabs label="Time range" value={range} onChange={setRange} tabs={RANGES} />
+        <span className="muted small">{f.filtered.filter((r) => !r.is_benchmark).length} of {report.runs.length - 1} strategies, {report.n_trials} trials counted</span>
       </div>
-      <div className="table-wrap">
-        <table className="mtable">
-          <thead>
-            <tr>
-              {th("name", "Strategy", "left")}
-              <th className="left">{range}</th>
-              {th("move", "Move")}
-              {th("cagr", <Term id="cagr">CAGR</Term>)}
-              {th("sharpe", <Term id="sharpe-ratio">Sharpe</Term>)}
-              {th("dd", <Term id="drawdown">Max drawdown</Term>)}
-              {th("dsr", <Term id="deflated-sharpe-ratio">Deflated</Term>)}
-              {th("gauntlet", "Gauntlet")}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => {
-              const mv = move(r, range);
-              return (
-                <tr key={r.strategy} className="row-link" onClick={() => { window.location.hash = `#/strategy/${r.strategy}`; }}>
-                  <td className="left">
-                    <span className="acct-dot" style={{ background: colors[r.strategy] }} />
-                    <a href={`#/strategy/${r.strategy}`} onClick={(e) => e.stopPropagation()}>{r.strategy}</a>
-                    {r.is_benchmark && <span className="chip-badge">benchmark</span>}
-                  </td>
-                  <td className="left"><Sparkline points={sliceRange(r.equity, range)} /></td>
-                  <td className={mv == null ? "" : mv >= 0 ? "good" : "bad"}>{mv == null ? "n/a" : `${mv >= 0 ? "+" : "−"}${pct(Math.abs(mv))}`}</td>
-                  <td>{pct(r.metrics.cagr)}</td>
-                  <td>{num(r.metrics.sharpe)}</td>
-                  <td>{pct(r.metrics.max_drawdown)}</td>
-                  <td>{num(r.metrics.deflated_sharpe)}</td>
-                  <td>{r.gauntlet ? `${r.gauntlet.passed} of ${r.gauntlet.total}` : ""}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <DataTable rows={f.filtered} columns={columns} rowKey={(r) => r.strategy} pin={(r) => r.is_benchmark}
+        initialSort={{ key: "sharpe", dir: "desc" }} href={(r) => `#/strategy/${r.strategy}`} empty="No strategy matches these filters." caption="Strategies" />
     </>
   );
 }

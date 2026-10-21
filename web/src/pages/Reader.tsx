@@ -1,13 +1,13 @@
 // The research reader: every doc in docs/, rendered at build time, with hover previews
 // (components/Popups.tsx), backlinks, tags and the terms each doc uses.
 import { useEffect, useMemo, useState } from "react";
-import { Html } from "../components/Html";
+import { Html } from "../ui/Html";
 import { Title } from "../components/Shell";
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, search, TYPE_LABELS, TYPE_ORDER, useDocs, type DocEntry, type DocsData } from "../lib/docs";
 import { REPO_URL } from "../lib/format";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
-import { Icon } from "../components/icons";
+import { Icon } from "../ui/icons";
 
 function byType(docs: DocEntry[]): [string, DocEntry[]][] {
   const groups: Record<string, DocEntry[]> = {};

@@ -1,6 +1,6 @@
 import { Term } from "../pages/Learn";
 import type { Gauntlet, GauntletTest } from "../lib/types";
-import { Card, Pass } from "./ui";
+import { Card, Pass } from "../ui/layout";
 
 const GROUPS: { key: GauntletTest["group"]; title: string; help: string }[] = [
   { key: "beat", title: "A. Does it beat the S&P 500?", help: "All six must pass." },

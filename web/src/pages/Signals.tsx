@@ -1,6 +1,6 @@
 import { Title } from "../components/Shell";
-import { BarChart } from "../components/charts";
-import { Card } from "../components/ui";
+import { BarChart } from "../ui/charts";
+import { Card } from "../ui/layout";
 import { colorMap } from "../lib/colors";
 import { num } from "../lib/format";
 import type { Report } from "../lib/types";

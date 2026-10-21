@@ -1,6 +1,6 @@
 import { Title } from "../components/Shell";
 import { useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { algorithms, docPathFor, ledger, registrations, STAGES } from "../lib/catalog";
 import { docUrl, pct, REPO_URL } from "../lib/format";
 import { Term } from "./Learn";

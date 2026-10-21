@@ -32,6 +32,17 @@ const paths: Record<string, ReactNode> = {
   team: <><circle cx="6" cy="6" r="2.2" /><circle cx="11.2" cy="6.5" r="1.7" /><path d="M2 13c.6-2 2.2-3.2 4-3.2s3.4 1.2 4 3.2M10.5 9.8c1.6 0 2.9 1 3.5 2.7" /></>,
   info: <><circle cx="8" cy="8" r="5.8" /><path d="M8 7.2v3.8M8 5h.01" /></>,
   eyeOff: <path d="M2 2l12 12M6.6 6.7A2 2 0 0 0 9.3 9.4M4.3 4.4C2.9 5.4 2 6.8 1.5 8c1 2.4 3.6 4.5 6.5 4.5 1.3 0 2.5-.4 3.5-1M7 3.6c.3 0 .7-.1 1-.1 2.9 0 5.5 2.1 6.5 4.5-.3.8-.8 1.6-1.4 2.3" />,
+  check: <path d="M3.5 8.5 6.5 11.5 12.5 4.5" />,
+  checkCircle: <><circle cx="8" cy="8" r="6" /><path d="M5.5 8.2 7.2 9.9 10.5 6.3" /></>,
+  filter: <path d="M2.5 4h11M4.5 8h7M6.5 12h3" />,
+  calendar: <path d="M2.5 4h11v9.5h-11zM2.5 7h11M5.5 2.5v3M10.5 2.5v3" />,
+  sort: <path d="M5 3v10M2.8 10.8 5 13l2.2-2.2M11 13V3M8.8 5.2 11 3l2.2 2.2" />,
+  plus: <path d="M8 3v10M3 8h10" />,
+  close: <path d="M4 4l8 8M12 4l-8 8" />,
+  download: <path d="M8 2.5v8M4.8 7.5 8 10.7l3.2-3.2M3 13.5h10" />,
+  dots: <path d="M3.5 8h.01M8 8h.01M12.5 8h.01" />,
+  sparkle: <path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z" />,
+  palette: <><circle cx="8" cy="8" r="5.8" /><path d="M5.2 7.2h.01M7.2 5h.01M10.2 5.6h.01M8.5 11c0-1 .8-1.7 1.8-1.7H13" /></>,
   external: <path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M11.5 9.5v4h-9v-9h4" />,
 };
 
@@ -43,3 +54,5 @@ export function Icon({ name, size = 16, className }: { name: keyof typeof paths 
     </svg>
   );
 }
+
+export const ICON_NAMES = Object.keys(paths);

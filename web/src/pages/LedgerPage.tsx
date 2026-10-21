@@ -1,5 +1,5 @@
 import { Title } from "../components/Shell";
-import { Card, Pass } from "../components/ui";
+import { Card, Pass } from "../ui/layout";
 import { ledger, registrations } from "../lib/catalog";
 import { num, pct, REPO_URL } from "../lib/format";
 

@@ -1,7 +1,7 @@
 import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
-import { LineChart } from "../components/charts";
-import { Card } from "../components/ui";
+import { LineChart } from "../ui/charts";
+import { Card } from "../ui/layout";
 import type { Point, Report } from "../lib/types";
 import { Term } from "./Learn";
 

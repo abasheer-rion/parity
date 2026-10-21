@@ -1,7 +1,7 @@
 import { Title } from "../components/Shell";
 import { useState } from "react";
-import { LineChart } from "../components/charts";
-import { Card, StatTile } from "../components/ui";
+import { LineChart } from "../ui/charts";
+import { Card, StatTile } from "../ui/layout";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import type { Point, Report } from "../lib/types";

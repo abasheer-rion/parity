@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Point } from "../lib/types";
+import { Money } from "./text";
+
+export { Money };
 
 // Small hand-rolled SVG charts. One y-axis per chart, thin marks, recessive grid,
 // a hover layer on every chart, and a legend whenever there are two or more series.
@@ -354,20 +357,6 @@ function thin(points: Point[], max: number): Point[] {
   for (let i = 0; i < max; i++) out.push(points[Math.floor(i * step)]);
   out.push(points[points.length - 1]);
   return out;
-}
-
-/** Money the way Mercury prints it: thousands separators, true minus, small raised cents. */
-export function Money({ value, cents = true, signed = false }: { value: number; cents?: boolean; signed?: boolean }) {
-  const neg = value < 0;
-  const abs = Math.abs(value);
-  const whole = Math.floor(abs).toLocaleString("en-US");
-  const c = Math.round((abs - Math.floor(abs)) * 100).toString().padStart(2, "0");
-  return (
-    <span className="money">
-      {neg ? "\u2212" : signed ? "+" : ""}${whole}
-      {cents && <span className="cents">.{c === "100" ? "99" : c}</span>}
-    </span>
-  );
 }
 
 const fmtDate = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });

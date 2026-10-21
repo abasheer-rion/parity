@@ -2,10 +2,11 @@
 // amount, a range-tabbed chart you can scrub, About, Key statistics, then detail.
 // The right column holds the verdict where Robinhood puts its order panel.
 import { useState } from "react";
-import { BarChart, HeroChart, LineChart, type RangeKey } from "../components/charts";
+import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
+import { Button } from "../ui";
 import { Title } from "../components/Shell";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { algorithms, STAGES } from "../lib/catalog";
 import { colorMap } from "../lib/colors";
 import { mentions, useDocs } from "../lib/docs";
@@ -169,10 +170,10 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
               {run.gauntlet && <p className="order-note">{run.gauntlet.verdict}</p>}
             </>
           )}
-          <a className="btn-primary" href="#/lab">Try other settings in the Lab</a>
+          <Button variant="primary" size="lg" full href="#/lab">Try other settings in the Lab</Button>
         </div>
-        <a className="btn-outline" href="#/compare">Compare with others</a>
-        {refDoc && <a className="btn-outline" href={`#/doc/${refDoc.id}`}>Read the write-up</a>}
+        <Button variant="outline" size="lg" full href="#/compare">Compare with others</Button>
+        {refDoc && <Button variant="outline" size="lg" full href={`#/doc/${refDoc.id}`}>Read the write-up</Button>}
       </aside>
     </div>
   );

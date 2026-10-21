@@ -1,6 +1,6 @@
 import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { algorithms, bestReported, STAGES } from "../lib/catalog";
 import type { Algorithm } from "../lib/types";
 import { Term } from "./Learn";

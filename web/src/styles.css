@@ -1,38 +1,6 @@
 /* Tokens. Series colours are the validated reference palette (see the dataviz notes in
    docs/reference/0001-architecture.md); dark values are stepped for the dark surface,
    not inverted. */
-:root {
-  /* One dark theme, Mercury-style: near-black canvas with a faint mesh, glass cards,
-     one blue accent ("Invicta blue"). Series colours are the validated dark steps of
-     the reference palette (see the dataviz notes in docs/reference/0001-architecture.md). */
-  color-scheme: dark;
-  --canvas: #0a0a0c;
-  --bg: #0f0f12;
-  --surface: rgb(255 255 255 / 0.035);
-  --surface-solid: #141418;
-  --border: rgb(255 255 255 / 0.08);
-  --grid: rgb(255 255 255 / 0.07);
-  --axis: rgb(255 255 255 / 0.22);
-  --text: rgb(255 255 255 / 0.96);
-  --text-2: rgb(255 255 255 / 0.66);
-  --muted: rgb(255 255 255 / 0.44);
-  --benchmark: #c3c2b7;
-  --accent: #2f6bff;
-  --accent-soft: rgb(47 107 255 / 0.16);
-  --series-1: #3987e5;
-  --series-2: #d95926;
-  --series-3: #199e70;
-  --series-4: #c98500;
-  --series-5: #d55181;
-  --series-6: #008300;
-  --series-7: #9085e9;
-  --series-8: #e66767;
-  --good: #4cc27a;
-  --bad: #f07d75;
-  --link: #7aa2ff;
-  --radius: 12px;
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
 
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--canvas); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
@@ -349,38 +317,6 @@ button[type="submit"] { background: var(--accent); border-color: var(--accent); 
 /* ============================================================
    Mercury frame: sidebar, top bar, cards. Robinhood charts.
    ============================================================ */
-:root[data-theme="light"] {
-  color-scheme: light;
-  --canvas: #ffffff;
-  --bg: #f4f5f8;
-  --surface: #ffffff;
-  --surface-solid: #ffffff;
-  --side-bg: #fbfcfd;
-  --border: #7073931a;
-  --border-2: #70739329;
-  --hover: #7073930f;
-  --grid: #e4e4ea;
-  --axis: #c3c3cc;
-  --text: #1e1e2a;
-  --text-2: #535461;
-  --muted: #70707d;
-  --benchmark: #9d9da8;
-  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
-  --series-5: #e87ba4; --series-6: #008300; --series-7: #4a3aa7; --series-8: #e34948;
-  --good: #0a7a3b;
-  --bad: #b3261e;
-  --link: #2456d6;
-  --accent: #2f6bff;
-  --accent-soft: rgb(47 107 255 / 0.1);
-  --dot: #c3c3cc;
-}
-:root {
-  --side-bg: rgb(255 255 255 / 0.02);
-  --border-2: rgb(255 255 255 / 0.12);
-  --hover: rgb(255 255 255 / 0.05);
-  --dot: rgb(255 255 255 / 0.13);
-  --side-w: 232px;
-}
 :root[data-theme="light"] body::before {
   background:
     radial-gradient(900px 520px at 12% -8%, rgb(47 107 255 / 0.07), transparent 70%),

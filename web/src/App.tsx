@@ -20,6 +20,8 @@ import { Learn } from "./pages/Learn";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Settings } from "./pages/Settings";
+import { UILibrary } from "./pages/UILibrary";
+import { Toaster } from "./ui";
 import { Signals } from "./pages/Signals";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
@@ -64,7 +66,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings"];
+const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui"];
 
 function Dashboard({ email }: { email: string | null }) {
   const hash = useHash();
@@ -111,6 +113,7 @@ function Dashboard({ email }: { email: string | null }) {
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
+      {route === "ui" && <UILibrary section={arg} />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
@@ -140,6 +143,7 @@ function Dashboard({ email }: { email: string | null }) {
       )}
       <Popups />
       <Palette />
+      <Toaster />
     </Shell>
   );
 }

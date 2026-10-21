@@ -147,6 +147,7 @@ How we write and organise these documents.
 - [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
+- [REF-0009: UI library](reference/0009-ui-library.md)
 
 ## economics
 
@@ -511,3 +512,4 @@ The dashboard.
 
 - [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
+- [REF-0009: UI library](reference/0009-ui-library.md)

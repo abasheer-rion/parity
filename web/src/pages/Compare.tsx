@@ -1,5 +1,5 @@
 import { Title } from "../components/Shell";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import type { Report } from "../lib/types";

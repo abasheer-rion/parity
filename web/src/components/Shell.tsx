@@ -2,7 +2,7 @@
 // segmented switch between areas, nav with nested children for the active item,
 // bookmarks), a slim top bar (search, run picker, settings, profile) and the page.
 import { useEffect, useState, type ReactNode } from "react";
-import { Icon } from "./icons";
+import { Icon } from "../ui/icons";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[] }
@@ -44,6 +44,7 @@ const RESEARCH: NavItem[] = [
   },
   { href: "#/learn", label: "Glossary", icon: "cap", routes: ["learn"] },
   { href: "#/refs", label: "Bibliography", icon: "quote", routes: ["refs"] },
+  { href: "#/ui", label: "UI library", icon: "palette", routes: ["ui"] },
 ];
 
 export const SETTINGS_SECTIONS = [

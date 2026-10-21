@@ -9,7 +9,7 @@ import { computePosition, flip, offset, shift } from "@floating-ui/dom";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, mentions, plainWords, sectionHtml, useDocs, type DocsData } from "../lib/docs";
-import { Html } from "./Html";
+import { Html } from "../ui/Html";
 import { getPrefs } from "../lib/prefs";
 
 type Kind = "term" | "doc" | "ref" | "find";

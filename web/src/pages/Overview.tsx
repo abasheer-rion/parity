@@ -2,19 +2,15 @@
 // The market card is the headline chart; the others summarise strategies, the
 // gauntlet, the research record and the best and worst strategies by year.
 import { useState } from "react";
-import { HeroChart, Sparkline, type RangeKey } from "../components/charts";
-import { Icon } from "../components/icons";
+import { HeroChart, Sparkline, type RangeKey } from "../ui/charts";
+import { Icon } from "../ui/icons";
+import { Button, ButtonGroup } from "../ui";
 import { colorMap } from "../lib/colors";
 import { useDocs } from "../lib/docs";
 import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
 import { ledger } from "../lib/catalog";
-
-const growth = (r: StrategyRun) => {
-  const e = r.equity;
-  return e.length > 1 ? e[e.length - 1][1] / e[0][1] - 1 : null;
-};
 
 export function Overview({ report, email }: { report: Report; email?: string | null }) {
   const prefs = usePrefs();
@@ -46,11 +42,13 @@ export function Overview({ report, email }: { report: Report; email?: string | n
     <div className="home">
       <h1 className="welcome">Welcome{name ? `, ${name[0].toUpperCase()}${name.slice(1)}` : ""}</h1>
       <div className="actions">
-        <a className="pill primary" href="#/strategies"><Icon name="chart" size={14} /> Strategies</a>
-        <a className="pill" href="#/compare"><Icon name="compare" size={14} /> Compare</a>
-        <a className="pill" href="#/lab"><Icon name="flask" size={14} /> Lab</a>
-        <a className="pill" href="#/docs"><Icon name="book" size={14} /> Read</a>
-        <button className="pill" onClick={() => window.dispatchEvent(new Event("parity:search"))}><Icon name="search" size={14} /> Search</button>
+        <ButtonGroup>
+          <Button variant="primary" icon="chart" href="#/strategies">Strategies</Button>
+          <Button icon="compare" href="#/compare">Compare</Button>
+          <Button icon="flask" href="#/lab">Lab</Button>
+          <Button icon="book" href="#/docs">Read</Button>
+          <Button icon="search" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search</Button>
+        </ButtonGroup>
       </div>
 
       <div className="home-grid">
@@ -190,4 +188,3 @@ function Movers({ title, icon, runs, year, market }: { title: string; icon: stri
   );
 }
 
-export { growth };

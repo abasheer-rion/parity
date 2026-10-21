@@ -1,6 +1,6 @@
 import { Title } from "../components/Shell";
 import { useState } from "react";
-import { Card } from "../components/ui";
+import { Card } from "../ui/layout";
 import { datasets } from "../lib/catalog";
 
 export function DataSources({ focus }: { focus?: string }) {
