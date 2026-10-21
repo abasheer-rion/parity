@@ -12,10 +12,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 8 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 9 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 10 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 4 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 72 |
-| [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 36 |
+| [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 41 |
 
 ## Open questions right now
 
@@ -30,13 +30,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
+- 2026-10-21 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-21 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-21 [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - 2026-10-21 [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 - 2026-10-21 [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - 2026-10-21 [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - 2026-10-21 [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
-- 2026-10-21 [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 
 ## intent
 
@@ -117,6 +117,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
 | REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 
 ## log
 
@@ -216,7 +217,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0006 | [BIS Data Portal (SDMX API)](datasets/0006-bis.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0007 | [BLS Public Data API](datasets/0007-bls.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0008 | [CoinGecko API](datasets/0008-coingecko.md) | candidate | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
-| DAT-0009 | [Dukascopy historical data](datasets/0009-dukascopy.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0009 | [Dukascopy historical data](datasets/0009-dukascopy.md) | candidate | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0010 | [ECB Data Portal (SDMX web service)](datasets/0010-ecb-data-portal.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0011 | [EIA Open Data API v2](datasets/0011-eia.md) | candidate | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
 | DAT-0012 | [Finnhub](datasets/0012-finnhub.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
@@ -224,7 +225,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0014 | [Frankfurter](datasets/0014-frankfurter.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0015 | [FRED and ALFRED (Federal Reserve Bank of St. Louis)](datasets/0015-fred.md) | in-use | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0016 | [GDELT Project](datasets/0016-gdelt.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
-| DAT-0017 | [HistData.com](datasets/0017-histdata.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0017 | [HistData.com](datasets/0017-histdata.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0018 | [IMF Data API (SDMX 2.1 and 3.0)](datasets/0018-imf.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0019 | [Interactive Brokers paper trading](datasets/0019-interactive-brokers-paper.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | DAT-0020 | [Macrosynergy JPMaQS sample (Kaggle)](datasets/0020-jpmaqs-kaggle.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
@@ -239,8 +240,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0029 | [Tiingo](datasets/0029-tiingo.md) | candidate | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
 | DAT-0030 | [Trading Economics API](datasets/0030-trading-economics.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
 | DAT-0031 | [US Treasury Fiscal Data API](datasets/0031-treasury-fiscal-data.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
-| DAT-0032 | [TrueFX historical downloads](datasets/0032-truefx.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0032 | [TrueFX historical downloads](datasets/0032-truefx.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0033 | [Twelve Data](datasets/0033-twelve-data.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0034 | [Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method) |
 | DAT-0035 | [World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md) | candidate | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
 | DAT-0036 | [Yahoo Finance chart endpoint](datasets/0036-yahoo-chart.md) | in-use | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
+| DAT-0037 | [ISO 4217 currency code lists](datasets/0037-iso-4217-six.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0038 | [BIS Triennial Survey FX turnover](datasets/0038-bis-triennial-fx.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0039 | [CFTC Commitments of Traders](datasets/0039-cftc-cot.md) | candidate | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0040 | [CLS FX volume data (CLSMarketData)](datasets/0040-cls-fx-volume.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0041 | [Databento CME FX futures (nanosecond)](datasets/0041-databento-cme-fx.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |

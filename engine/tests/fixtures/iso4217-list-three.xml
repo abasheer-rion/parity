@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ISO_4217 Pblshd="2026-01-01">
+	<HstrcCcyTbl>
+		<HstrcCcyNtry>
+			<CtryNm>GERMANY</CtryNm>
+			<CcyNm>Deutsche Mark</CcyNm>
+			<Ccy>DEM</Ccy>
+			<CcyNbr>276</CcyNbr>
+			<WthdrwlDt>2002-03</WthdrwlDt>
+		</HstrcCcyNtry>
+		<HstrcCcyNtry>
+			<CtryNm>VENEZUELA</CtryNm>
+			<CcyNm>Bolivar Fuerte</CcyNm>
+			<Ccy>VEF</Ccy>
+			<CcyNbr>937</CcyNbr>
+			<WthdrwlDt>2011-12</WthdrwlDt>
+		</HstrcCcyNtry>
+		<HstrcCcyNtry>
+			<CtryNm>VENEZUELA (BOLIVARIAN REPUBLIC OF)</CtryNm>
+			<CcyNm>Bolivar</CcyNm>
+			<Ccy>VEF</Ccy>
+			<CcyNbr>937</CcyNbr>
+			<WthdrwlDt>2016-02</WthdrwlDt>
+		</HstrcCcyNtry>
+		<HstrcCcyNtry>
+			<CtryNm>VENEZUELA (BOLIVARIAN REPUBLIC OF)</CtryNm>
+			<CcyNm>Bolívar</CcyNm>
+			<Ccy>VEF</Ccy>
+			<CcyNbr>937</CcyNbr>
+			<WthdrwlDt>2018-08</WthdrwlDt>
+		</HstrcCcyNtry>
+	</HstrcCcyTbl>
+</ISO_4217>

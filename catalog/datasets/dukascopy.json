@@ -18,7 +18,7 @@
   "what_it_has": "Tick by tick bid and ask prices with volumes for FX, commodities and indices, as hourly LZMA compressed files. The web export tool gives CSV from tick to monthly bars.",
   "simple": "A Swiss bank lets anyone download every tiny price change in currencies, which shows the real cost of trading.",
   "point_in_time": false,
-  "license_terms": "No data specific license found. Treat as personal research use only and do not redistribute.",
+  "license_terms": "Dukascopy Terms of Use: \"You shall not use or attempt to use any 'scraper,' 'robot,' 'bot,' 'spider,' 'data mining,' 'computer code,' or any other automate device... to access, acquire, copy, or monitor any portion of the WEBSITE\". Downloads are allowed only \"for your own personal, non-commercial use\". So we never automate it; a person may export files by hand for personal research. https://www.dukascopy.com/swiss/english/legal-pages/terms-of-use/",
   "quality_notes": "One dealer's quotes, not the whole market. Files need decoding (open source downloaders exist). Gaps can appear around weekends and outages. We downloaded one 2024 EURUSD hour with no key (tested).",
   "in_use_by_parity": false,
   "parity_keys": [],
@@ -31,5 +31,5 @@
     "https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5"
   ],
   "verified": false,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21"
 }

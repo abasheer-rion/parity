@@ -1,0 +1,32 @@
+{
+  "id": "DAT-0039",
+  "slug": "cftc-cot",
+  "name": "CFTC Commitments of Traders",
+  "provider": "US Commodity Futures Trading Commission",
+  "category": "fx-prices",
+  "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+  "api_docs_url": "https://publicreporting.cftc.gov/stories/s/COT-Help/p2fg-u73y/",
+  "access": "free-no-key",
+  "rate_limits": "The CFTC says it is \"not providing tokens to use the Public Reporting APIs\" and access works without one if use is reasonable.",
+  "history_start": "Unverified here; compressed history files on the CFTC site go back decades.",
+  "frequency": [
+    "weekly"
+  ],
+  "what_it_has": "Weekly open interest and long and short positions by trader type for US futures, including the CME currency futures (EUR, JPY, GBP and others). Socrata dataset r4w3-av2u, plus plain text files.",
+  "simple": "Every week the US futures regulator shows who is betting on each currency going up or down.",
+  "point_in_time": false,
+  "license_terms": "US federal government data. No terms of use were quoted on the COT page (checked 2026-10-21). The API needs no token \"as long as usage is reasonable\". Not yet used, so not yet checked further.",
+  "quality_notes": "Futures only, a small slice of the FX market. Positions as of Tuesday, released Friday.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Free weekly positioning data for currency futures, a possible sentiment signal."
+  },
+  "sources": [
+    "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+    "https://publicreporting.cftc.gov/"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-21"
+}

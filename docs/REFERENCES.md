@@ -3,18 +3,18 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-553 sources. 112 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+565 sources. 112 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
 | [Papers](#papers) | 108 |
 | [Preprints and working papers](#preprints-and-working-papers) | 32 |
 | [Books](#books) | 8 |
-| [Datasets](#datasets) | 48 |
+| [Datasets](#datasets) | 53 |
 | [Software](#software) | 61 |
-| [Web pages](#web-pages) | 232 |
+| [Web pages](#web-pages) | 238 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 9 |
+| [Regulators](#regulators) | 10 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -1093,6 +1093,12 @@ Yahoo Finance chart endpoint. (n.d.). *Yahoo*. <https://finance.yahoo.com>. Acce
 
 Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.json), [DAT-0036](datasets/0036-yahoo-chart.md).
 
+### url-4e46efdd
+
+CLS FX volume data (CLSMarketData). (n.d.). *CLS Group*. <https://www.cls-group.com/products/data/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cls-fx-volume.json](../catalog/datasets/cls-fx-volume.json), [DAT-0040](datasets/0040-cls-fx-volume.md).
+
 ### url-55a5dcdd
 
 IMF Data API (SDMX 2.1 and 3.0). (n.d.). *International Monetary Fund*. <https://data.imf.org>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1105,6 +1111,12 @@ Twelve Data. (n.d.). *Twelve Data Pte. Ltd*. <https://twelvedata.com>. Accessed 
 
 Cited in: [catalog/datasets/twelve-data.json](../catalog/datasets/twelve-data.json), [DAT-0033](datasets/0033-twelve-data.md).
 
+### url-5a3da122
+
+BIS Triennial Survey FX turnover. (n.d.). *Bank for International Settlements*. <https://data.bis.org/topics/DER>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [DAT-0038](datasets/0038-bis-triennial-fx.md).
+
 ### url-5ba14363
 
 Forex Factory weekly calendar export. (n.d.). *Fair Economy, Inc. (Forex Factory)*. <https://www.forexfactory.com/calendar>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1116,6 +1128,12 @@ Cited in: [catalog/datasets/forex-factory-calendar.json](../catalog/datasets/for
 TrueFX historical downloads. (n.d.). *TrueFX (Integral)*. <https://www.truefx.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/truefx.json](../catalog/datasets/truefx.json), [DAT-0032](datasets/0032-truefx.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-677865b8
+
+CFTC Commitments of Traders. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
 
 ### url-74fd42e4
 
@@ -1219,11 +1237,23 @@ Tiingo. (n.d.). *Tiingo Inc*. <https://www.tiingo.com>. Accessed 2026-10-21. Ver
 
 Cited in: [catalog/datasets/tiingo.json](../catalog/datasets/tiingo.json), [DAT-0029](datasets/0029-tiingo.md).
 
+### url-d2d4d776
+
+Databento CME FX futures (nanosecond). (n.d.). *Databento*. <https://databento.com/pricing>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/databento-cme-fx.json](../catalog/datasets/databento-cme-fx.json), [DAT-0041](datasets/0041-databento-cme-fx.md).
+
 ### url-d43c9583
 
 Nasdaq Data Link (formerly Quandl). (n.d.). *Nasdaq*. <https://data.nasdaq.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-d4c3e0f7
+
+ISO 4217 currency code lists. (n.d.). *SIX Group for ISO*. <https://www.six-group.com/en/products-services/financial-information/data-standards.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
 
 ### url-d5ca58db
 
@@ -1893,9 +1923,9 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
 ### url-1f316539
 
-BIS Data Portal (SDMX API): API documentation. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api-doc/v2/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+BIS Triennial Survey FX turnover: API documentation. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api-doc/v2/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md), [DAT-0038](datasets/0038-bis-triennial-fx.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
 ### url-1f6853fc
 
@@ -2035,6 +2065,12 @@ Marketaux: API documentation. (n.d.). *Marketaux (APILayer)*. <https://www.marke
 
 Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-3aeeae10
+
+Databento CME FX futures (nanosecond): API documentation. (n.d.). *Databento*. <https://databento.com/docs/standards-and-conventions/common-fields-enums-types>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/databento-cme-fx.json](../catalog/datasets/databento-cme-fx.json), [DAT-0041](datasets/0041-databento-cme-fx.md).
+
 ### url-3b3116de
 
 Simple Page. (n.d.). *academy.investopedia.com*. <https://academy.investopedia.com/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2056,6 +2092,12 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Frankfurter: API documentation. (n.d.). *Frankfurter (open source project)*. <https://frankfurter.dev/docs/>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.json), [DAT-0014](datasets/0014-frankfurter.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-3fdb8541
+
+No title recorded. (n.d.). *SIX Group for ISO*. <https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
 
 ### url-41498be4
 
@@ -2206,6 +2248,12 @@ Time Series Momentum: Factors, Monthly. (n.d.). *AQR Capital Management*. <https
 Note: Linked in this repo as: AQR TSMOM.
 
 Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [catalog/datasets/aqr-datasets.json](../catalog/datasets/aqr-datasets.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [DAT-0003](datasets/0003-aqr-datasets.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-539803c3
+
+CFTC Commitments of Traders: API documentation. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/stories/s/COT-Help/p2fg-u73y/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
 
 ### url-53fcc8e4
 
@@ -2369,6 +2417,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-69bf5130
+
+No title recorded. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api/v2/data/dataflow/BIS/WS_DER_OTC_TOV/1.0/A.U.*.B.5J.A.5J.A.*.TO1.A.A.3.C?format=csv>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [DAT-0038](datasets/0038-bis-triennial-fx.md).
+
 ### url-6a66c019
 
 Disclaimer & copyright. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/home/disclaimer/html/index.en.html>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -2444,6 +2498,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 ### url-75718e1a
 
 No title recorded. (n.d.). *Dukascopy Bank SA*. <https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5>. Accessed 2026-10-21. Verification: error (checked 2026-10-21).
+
+Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
+
+### url-777e59be
+
+No title recorded. (n.d.). *Dukascopy Bank SA*. <https://www.dukascopy.com/swiss/english/legal-pages/terms-of-use/>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
 
@@ -2772,6 +2832,12 @@ Zenbot Reviews in 2026. (n.d.). *sourceforge.net*. <https://sourceforge.net/soft
 Note: Linked in this repo as: search 1.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-a5101b4c
+
+No title recorded. (n.d.). *SIX Group for ISO*. <https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
 
 ### url-a595901b
 
@@ -3207,7 +3273,7 @@ Help | BIS Data Portal. (n.d.). *Bank for International Settlements*. <https://d
 
 Note: Linked in this repo as: None.
 
-Cited in: [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md).
+Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md), [DAT-0038](datasets/0038-bis-triennial-fx.md).
 
 ### url-ef3a550b
 
@@ -3702,6 +3768,12 @@ Frequent Intraday Trading: Understanding the Basics | FINRA.org. (n.d.). *finra.
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-2d16e385
+
+No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
 
 ### url-46fb23ac
 

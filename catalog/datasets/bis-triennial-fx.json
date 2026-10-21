@@ -1,0 +1,35 @@
+{
+  "id": "DAT-0038",
+  "slug": "bis-triennial-fx",
+  "name": "BIS Triennial Survey FX turnover",
+  "provider": "Bank for International Settlements",
+  "category": "fx-prices",
+  "url": "https://data.bis.org/topics/DER",
+  "api_docs_url": "https://stats.bis.org/api-doc/v2/",
+  "access": "free-no-key",
+  "rate_limits": "None published. The BIS may limit or suspend an IP address at any time. One call returns the whole table (about 0.7 MB).",
+  "history_start": "1989 for the total; most currency and instrument splits from 1995 or 1998. Latest survey April 2025.",
+  "frequency": [
+    "triennial"
+  ],
+  "what_it_has": "Average daily FX turnover in April of each survey year, by currency and by instrument (spot, outright forwards, NDFs, FX swaps, currency swaps, options), in USD millions, from dataflow WS_DER_OTC_TOV.",
+  "simple": "Every three years central banks count how much currency trading happens in a month. This is that count: about 9.5 trillion US dollars a day in April 2025.",
+  "point_in_time": false,
+  "license_terms": "BIS terms: \"if the statistics are reproduced, the BIS must be cited in your publication or product as the source\"; use \"must not be potentially misleading, for example by implying endorsement or affiliation with the BIS\"; in a commercial product their inclusion must \"not result in any additional charge\". The APIs are offered \"as-is\" and the BIS \"reserves the right to limit or suspend any User's IP address access to the APIs at any time\". https://data.bis.org/help/legal",
+  "quality_notes": "Net-net basis (each trade counted once). Shares add to 200% because each trade has two currencies. Survey years only, so nothing between surveys. Fetched with no key (tested 2026-10-21): total 7,468 billion USD a day for 2022 and 9,510 billion for 2025.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "parity market-size"
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "The standard measure of how big each currency's market is, which sets how much we could trade without moving prices."
+  },
+  "sources": [
+    "https://data.bis.org/help/legal",
+    "https://stats.bis.org/api-doc/v2/",
+    "https://stats.bis.org/api/v2/data/dataflow/BIS/WS_DER_OTC_TOV/1.0/A.U.*.B.5J.A.5J.A.*.TO1.A.A.3.C?format=csv"
+  ],
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

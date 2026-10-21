@@ -15,7 +15,7 @@
   "what_it_has": "Free top of book tick data with bid and offer in millisecond detail, sourced from Integral's network of institutions. Live data is a paid product from 4,950 USD a month.",
   "simple": "A company that gives away old second by second currency prices from big banks if you make a free account.",
   "point_in_time": false,
-  "license_terms": "Terms not readable without logging in. Treat as personal research use only.",
+  "license_terms": "The download page says \"Please log in or register for free access to the historical data downloads.\" The terms sit behind the login, so we do not automate it. A person may download files and import them with parity ticks --import.",
   "quality_notes": "Monthly CSV files per pair, so large downloads. Pair list and start date not confirmed on TrueFX's own pages.",
   "in_use_by_parity": false,
   "parity_keys": [],
@@ -28,5 +28,5 @@
     "https://www.truefx.com/"
   ],
   "verified": false,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21"
 }

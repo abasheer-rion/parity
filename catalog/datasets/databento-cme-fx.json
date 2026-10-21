@@ -1,0 +1,32 @@
+{
+  "id": "DAT-0041",
+  "slug": "databento-cme-fx",
+  "name": "Databento CME FX futures (nanosecond)",
+  "provider": "Databento",
+  "category": "fx-prices",
+  "url": "https://databento.com/pricing",
+  "api_docs_url": "https://databento.com/docs/standards-and-conventions/common-fields-enums-types",
+  "access": "paid",
+  "rate_limits": "Usage based, billed per GB of uncompressed data.",
+  "history_start": "Unverified here.",
+  "frequency": [
+    "tick"
+  ],
+  "what_it_has": "CME Globex market data (dataset GLBX.MDP3), including currency futures, at full order book depth (MBO) with nanosecond timestamps.",
+  "simple": "Paid data where every order on the futures exchange is stamped to the billionth of a second.",
+  "point_in_time": false,
+  "license_terms": "Paid licence. New users get \"$125 in free credits that can be used on historical market data\". Live data plans are \"$199 per month\" (Standard), \"$1,750 per month\" (Plus) and \"$4,500 per month\" (Unlimited). Timestamps are \"the number of nanoseconds since the UNIX epoch\". Exchange licence terms also apply.",
+  "quality_notes": "Futures, not spot FX. The only realistic route we found to nanosecond FX data at a research budget. Not yet used.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 3,
+    "reason": "The way to get true nanosecond currency data when the project needs it; the free credits cover a trial."
+  },
+  "sources": [
+    "https://databento.com/pricing",
+    "https://databento.com/docs/standards-and-conventions/common-fields-enums-types"
+  ],
+  "verified": false,
+  "last_checked": "2026-10-21"
+}
