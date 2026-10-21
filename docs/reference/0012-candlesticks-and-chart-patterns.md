@@ -118,4 +118,5 @@ The hammer and the hanging man are the same shape with opposite meanings, decide
 ## Referenced by
 
 - [RES-0009: Trading myths and what the evidence says](../research/0009-trading-myths-and-what-the-evidence-says.md)
+- [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

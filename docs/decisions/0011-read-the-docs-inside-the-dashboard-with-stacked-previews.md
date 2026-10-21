@@ -49,4 +49,5 @@ A separate docs site would mean a second login and could not show our own charts
 ## Referenced by
 
 - [REF-0009: UI library](../reference/0009-ui-library.md)
+- [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

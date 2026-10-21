@@ -455,6 +455,7 @@ How the team works together.
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
+- [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 
 ## strategy
 
@@ -561,3 +562,4 @@ The dashboard.
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
+- [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
