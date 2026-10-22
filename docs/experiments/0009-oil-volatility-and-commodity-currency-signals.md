@@ -51,5 +51,5 @@ Nothing yet.
 
 - [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
 - [HYP-0015: Commodity currencies lead energy futures](../hypotheses/0015-commodity-currencies-lead-energy-futures.md)
-- [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0009: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

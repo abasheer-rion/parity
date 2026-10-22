@@ -133,6 +133,7 @@ We checked on 2026-10-21 that the ECB, OECD and BIS endpoints answer scripted re
 - [HYP-0011: Emerging market momentum survives costs](../hypotheses/0011-emerging-market-momentum-survives-costs.md)
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
 - [RES-0013: Famous currency and commodity traders and what their records teach](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0014: Lesser-known strategies and what firms have published](0014-lesser-known-strategies-and-what-firms-have-published.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
-- [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0009: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

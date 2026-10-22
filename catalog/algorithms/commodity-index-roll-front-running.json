@@ -1,0 +1,80 @@
+{
+  "id": "ALG-0094",
+  "slug": "commodity-index-roll-front-running",
+  "name": "Front-running commodity index rolls (the Goldman roll)",
+  "family": "event-news",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "index-flows",
+    "roll",
+    "front-running"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2010,
+    "authors": "Mou",
+    "source_title": "Limits to Arbitrage and Commodity Index Investment: Front-Running the Goldman Roll (SSRN 1716841)",
+    "source_url": "https://papers.ssrn.com/abstract=1716841"
+  },
+  "how_it_works": {
+    "simple": "Big commodity index funds sell the expiring contract and buy the next one on known days each month. Trade ahead of them.",
+    "analogy": "Like buying concert tickets the day before a big group is known to buy them all.",
+    "precise": "The S&P GSCI rolls from the 5th to 9th business day each month. Mou reports strategies front-running it earned Sharpe ratios up to 4.39 over 2000 to March 2010. Dubois and Marechal find positive price pressure before 2004, reversed from 2004 to 2010, and no abnormal profit after transaction costs."
+  },
+  "rule": "Before the 5th business day: short the nearby, long the first deferred contract; close after the 9th.",
+  "data_needed": [
+    "Daily futures prices for index commodities"
+  ],
+  "economic_rationale": "Predictable, price-insensitive index flows push calendar spreads.",
+  "why_it_might_fail": "Widely known since about 2010; reversed after index money grew; small and costly to trade.",
+  "reported_results": [
+    {
+      "source": "Mou (2010), abstract via search summaries",
+      "source_url": "https://papers.ssrn.com/abstract=1716841",
+      "period": "2000-01 to 2010-03",
+      "market": "S&P GSCI commodities",
+      "sharpe": 4.39,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": false,
+      "notes": "We could not open the paper (SSRN and Columbia blocked our reader)."
+    },
+    {
+      "source": "Dubois and Marechal, poster",
+      "source_url": "https://business.ucdenver.edu/jpmorgancenter/content/poster-loic-marechal",
+      "period": "1999 to 2010",
+      "market": "S&P GSCI commodities",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Roll-period abnormal price changes of 115 bp (nearby) before 2004 and -60 bp from 2004 to 2010; \"A strategy that front-runs the roll does not generate abnormal profits after transaction costs.\""
+    }
+  ],
+  "post_publication_evidence": "Dubois and Marechal: the effect reversed after 2004 and is not profitable after costs.",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "A famous 'hidden' edge that disappeared once known; kept as a cautionary example."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0014 on 2026-10-22."
+  }
+}

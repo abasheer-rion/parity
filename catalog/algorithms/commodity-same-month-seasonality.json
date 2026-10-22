@@ -1,0 +1,65 @@
+{
+  "id": "ALG-0093",
+  "slug": "commodity-same-month-seasonality",
+  "name": "Commodity same-calendar-month seasonality",
+  "family": "seasonality-calendar",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "seasonality",
+    "calendar"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2016,
+    "authors": "Keloharju, Linnainmaa, Nyberg",
+    "source_title": "Return Seasonalities (Journal of Finance 71(4), 1557-1590)",
+    "source_url": "https://www.nber.org/papers/w20815"
+  },
+  "how_it_works": {
+    "simple": "Buy the commodities that have historically done best in the coming calendar month and sell those that have done worst.",
+    "analogy": "Like knowing that ice cream sells better in July every year.",
+    "precise": "Rank commodities on their average return in the same calendar month over past years (at least five); long the top, short the bottom. Commodities, 1970 to 2011: 0.93% a month, t-statistic 1.93; choosing on other months' returns earns -0.22%."
+  },
+  "rule": "Monthly: for each energy contract, average return in the same calendar month over the past 5 to 20 years; long the highest, short the lowest.",
+  "data_needed": [
+    "Futures returns with at least five years of history"
+  ],
+  "economic_rationale": "Recurring seasonal demand and supply (heating, driving, harvests) and seasonal risk.",
+  "why_it_might_fail": "The commodity result is only marginally significant; energy seasonality is well known to physical traders.",
+  "reported_results": [
+    {
+      "source": "Keloharju, Linnainmaa and Nyberg (2016), NBER w20815, Table 8 Panel C",
+      "source_url": "https://www.nber.org/papers/w20815.pdf",
+      "period": "1970-01 to 2011-07",
+      "market": "24 commodity futures",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Long-short on same-calendar-month returns: 0.93% a month (t = 1.93)."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Weak statistics; low priority."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0014 on 2026-10-22."
+  }
+}

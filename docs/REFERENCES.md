@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-975 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+995 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 270 |
-| [Preprints and working papers](#preprints-and-working-papers) | 46 |
+| [Papers](#papers) | 276 |
+| [Preprints and working papers](#preprints-and-working-papers) | 53 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
-| [Web pages](#web-pages) | 430 |
+| [Web pages](#web-pages) | 437 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 32 |
 | [News](#news) | 4 |
@@ -131,7 +131,7 @@ Asness, Clifford S.; Moskowitz, Tobias J.; Pedersen, Lasse Heje (2013). Value an
 
 Also at: <https://pages.stern.nyu.edu/~lpederse/papers/ValMomEverywhere.pdf>.
 
-Cited in: [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md).
 
 ### avellaneda2008
 
@@ -288,6 +288,14 @@ Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 Bessembinder, Hendrik (2018). Do stocks outperform Treasury bills? *Journal of Financial Economics 129(3), 440-457*. doi:10.1016/j.jfineco.2018.06.004 <https://doi.org/10.1016/j.jfineco.2018.06.004>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### boons2019
+
+Boons, Martijn; Prado, Melissa Porras (2019). Basis-Momentum. *Journal of Finance 74(1), 239-279*. <https://4nations.albertjmenkveld.com/papers/boonsprado17.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text, working paper version).
+
+Cited in: [catalog/algorithms/commodity-basis-momentum.json](../catalog/algorithms/commodity-basis-momentum.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### bortnikova2026
 
@@ -623,6 +631,14 @@ Faust, Jon; Rogers, John H.; Wang, Shing-Yi; Wright, Jonathan H. (2007). The Hig
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### fernandezperez2018
+
+Fernandez-Perez, Adrian; Frijns, Bart; Fuertes, Ana-Maria; Miffre, Joelle (2018). The skewness of commodity futures returns. *Journal of Banking and Finance 86, 143-158*. <https://openaccess.city.ac.uk/id/eprint/17843/1/SSRN-id2671165_July2017.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text, accepted manuscript).
+
+Cited in: [catalog/algorithms/commodity-skewness.json](../catalog/algorithms/commodity-skewness.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
 ### ferraro2011
 
 Ferraro, Domenico; Rogoff, Kenneth; Rossi, Barbara (2011). Can Oil Prices Forecast Exchange Rates? *NBER Working Paper w17998*. doi:10.3386/w17998 <https://doi.org/10.3386/w17998>. <https://crei.cat/wp-content/uploads/2016/07/COPF_pub.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -844,6 +860,14 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 Hutchinson, Mark C.; Kyziropoulos, Panagiotis E.; O'Brien, John; O'Reilly, Philip; Sharma, Tripti (2022). Are carry, momentum and value still there in currencies? *International Review of Financial Analysis 83, 102245*. doi:10.1016/j.irfa.2022.102245 <https://doi.org/10.1016/j.irfa.2022.102245>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-ml-smart-carry.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [ALG-0011](algorithms/0011-fx-ml-smart-carry.md), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### ilmanen2021
+
+Ilmanen, Antti; Israel, Ronen; Lee, Rachel; Moskowitz, Tobias J.; Thapar, Ashwin (2021). How Do Factor Premia Vary Over Time? A Century of Evidence. *Journal of Investment Management 19(4)*. <https://www.aqr.com/-/media/AQR/Documents/Journal-Articles/JOIM_How-Do-Factor-Premia-Vary-Over-Time.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text).
+
+Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### inoue2019
 
@@ -1287,7 +1311,7 @@ Menkhoff, Lukas; Sarno, Lucio; Schmeling, Maik; Schrimpf, Andreas (2017). Curren
 
 Also at: <https://openaccess.city.ac.uk/14851/>.
 
-Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [RES-0001](research/0001-reading-list.md), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### messmore1995
 
@@ -1809,6 +1833,18 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-662f4ca4
+
+No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/16863/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/fx-sovereign-credit-risk.json](../catalog/algorithms/fx-sovereign-credit-risk.json).
+
+### url-6e0e366c
+
+No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/17843/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-skewness.json](../catalog/algorithms/commodity-skewness.json).
+
 ### url-70789a51
 
 Is there momentum or reversal in weekly currency returns? (n.d.). <https://ideas.repec.org/a/eee/jimfin/v45y2014icp38-60.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1959,7 +1995,7 @@ No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/14851/13/FXV
 
 Note: Cited in this repo as: Menkhoff et al. 2017, Table 4 (CEPR working paper version).
 
-Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md).
+Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### url-e9eb922f
 
@@ -1998,6 +2034,12 @@ Informed trade in spot foreign exchange markets: an empirical investigation. (n.
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-f45eece0
+
+No title recorded. (n.d.). <https://doi.org/10.1111/jofi.12738>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-basis-momentum.json](../catalog/algorithms/commodity-basis-momentum.json).
 
 ### url-fa7fe46a
 
@@ -2135,6 +2177,14 @@ Note: Read for RES-0010 (full text).
 
 Cited in: [catalog/algorithms/fx-option-hedged-carry.json](../catalog/algorithms/fx-option-hedged-carry.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### calice2022
+
+Calice, Giovanni; Lin, Ming-Tsung (2022). Sovereign Momentum Currency Returns. *EFMA 2022 conference paper*. <https://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-99.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text).
+
+Cited in: [catalog/algorithms/fx-sovereign-credit-risk.json](../catalog/algorithms/fx-sovereign-credit-risk.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
 ### chen2025
 
 Chen, Kai-Yuan; Chen, Kai-Hsin; Jang, Jyh-Shing Roger (2025). Dynamic Grid Trading Strategy: From Zero Expectation to Market Outperformance. *arXiv preprint arXiv:2506.11921*. arXiv:2506.11921 <https://arxiv.org/abs/2506.11921>. <https://arxiv.org/abs/2506.11921>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2154,6 +2204,14 @@ Daniel, Kent D.; Hodrick, Robert J.; Lu, Zhongjin (2014). The Carry Trade: Risks
 Also at: <https://www.nber.org/papers/w20433>, <https://www.nber.org/system/files/working_papers/w20433/w20433.pdf>.
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md), [RES-0001](research/0001-reading-list.md).
+
+### dellacorte2013
+
+Della Corte, Pasquale; Sarno, Lucio; Schmeling, Maik; Wagner, Christian (2013). Exchange Rates and Sovereign Risk. *Working paper*. <https://openaccess.city.ac.uk/id/eprint/16863/1/Exchange%20Rates%20and%20Sovereign%20Risk.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text).
+
+Cited in: [catalog/algorithms/fx-sovereign-credit-risk.json](../catalog/algorithms/fx-sovereign-credit-risk.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### ding2024
 
@@ -2347,6 +2405,24 @@ Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Tra
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-05b82dea
+
+No title recorded. (n.d.). <https://www.nber.org/papers/w20815.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-same-month-seasonality.json](../catalog/algorithms/commodity-same-month-seasonality.json).
+
+### url-13f8a90c
+
+No title recorded. (n.d.). <https://www.nber.org/papers/w16712>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-open-interest-growth.json](../catalog/algorithms/commodity-open-interest-growth.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
+### url-49d098fe
+
+No title recorded. (n.d.). <https://www.nber.org/papers/w13249>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
 ### url-c8c51ac4
 
 No title recorded. (n.d.). <https://conference.nber.org/confer/2013/MEs13/Lucca_Moench.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2354,6 +2430,18 @@ No title recorded. (n.d.). <https://conference.nber.org/confer/2013/MEs13/Lucca_
 Note: Cited in this repo as: Lucca and Moench (2013 working paper version), pre-FOMC 2pm to 2pm window.
 
 Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+
+### url-e3dc7ec8
+
+No title recorded. (n.d.). <https://papers.ssrn.com/abstract=1716841>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-index-roll-front-running.json](../catalog/algorithms/commodity-index-roll-front-running.json).
+
+### url-ff6cf3f6
+
+No title recorded. (n.d.). <https://www.nber.org/papers/w20815>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-same-month-seasonality.json](../catalog/algorithms/commodity-same-month-seasonality.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### zhang2025
 
@@ -3257,6 +3345,22 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 ## Web pages
 
+### dubois-poster
+
+Dubois, Michel; Marechal, Loic (n.d.). The valuation effects of index investment in commodity futures (poster). <https://business.ucdenver.edu/jpmorgancenter/content/poster-loic-marechal>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (poster text).
+
+Cited in: [catalog/algorithms/commodity-index-roll-front-running.json](../catalog/algorithms/commodity-index-roll-front-running.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
+### twosigma2017
+
+Manzo, Gerardo; Saret, Jeffrey N. (2017). The Commodity Futures Roll Return 'Tax': Addressing a Recent Headwind (Two Sigma Street View). <https://www.twosigma.com/wp-content/uploads/SV_10_17.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0014 (full text).
+
+Cited in: [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
 ### url-0004e713
 
 No title recorded. (n.d.). *orats.com*. <https://orats.com/data-api>. Accessed 2026-10-22. Verification: not checked.
@@ -3438,6 +3542,12 @@ Polygon.io is Now Massive | Massive. (n.d.). *Massive.com (formerly Polygon.io)*
 Note: Linked in this repo as: Massive blog.
 
 Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DAT-0023](datasets/0023-massive.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-0ae284f2
+
+No title recorded. (n.d.). <https://macrosynergy.com/?p=43153>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### url-0aeb5ec9
 
@@ -3724,6 +3834,12 @@ Cited in: [catalog/events/boj-rate-hike-2024.json](../catalog/events/boj-rate-hi
 No title recorded. (n.d.). *youtube.com*. <https://www.youtube.com/@InnerCircleTrader>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-27feab2c
+
+No title recorded. (n.d.). <https://www.bis.org/publ/bisbull114.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### url-28169562
 
@@ -4406,6 +4522,12 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/api/v2/doc/doc?query=euro%20dollar&mode=artlist&maxrecords=2&format=json>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
+
+### url-66c9d4fb
+
+No title recorded. (n.d.). <https://www.cxoadvisory.com/commodity-futures/futures-market-open-interest-as-return-predictor>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-open-interest-growth.json](../catalog/algorithms/commodity-open-interest-growth.json).
 
 ### url-66d36f3c
 
@@ -5617,6 +5739,12 @@ Sunset write-up. (n.d.). *sunsethq.com*. <https://www.sunsethq.com/blog/why-did-
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-d1f2fd89
+
+No title recorded. (n.d.). <https://www.cxoadvisory.com/?p=27949>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-hedging-pressure.json](../catalog/algorithms/commodity-hedging-pressure.json).
+
 ### url-d29dda30
 
 Euro foreign exchange reference rates. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6054,6 +6182,12 @@ Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json),
 Databento live data. (n.d.). *databento.com*. <https://databento.com/docs/portal/live-data.md>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-fb863158
+
+No title recorded. (n.d.). <https://climateinstitute.edhec.edu/publications/capturing-risk-premium-commodity-futures-role-hedging-pressure>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [catalog/algorithms/commodity-hedging-pressure.json](../catalog/algorithms/commodity-hedging-pressure.json).
 
 ### url-fbd813ac
 

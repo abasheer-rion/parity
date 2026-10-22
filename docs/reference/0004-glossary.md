@@ -5582,4 +5582,12 @@ Related: [ETF](#etf), [Herding](#herding), [Recency bias](#recency-bias), [Expen
 - [ALG-0085: Emerging market currency momentum](../algorithms/0085-em-fx-momentum.md)
 - [ALG-0086: Selling commodity volatility (variance risk premium)](../algorithms/0086-commodity-variance-risk-premium.md)
 - [ALG-0087: Commodity currencies predict commodity prices](../algorithms/0087-commodity-currencies-predict-commodities.md)
+- [ALG-0088: Commodity basis-momentum](../algorithms/0088-commodity-basis-momentum.md)
+- [ALG-0089: Commodity value (5-year price reversal)](../algorithms/0089-commodity-value-reversal.md)
+- [ALG-0090: Commodity skewness factor](../algorithms/0090-commodity-skewness.md)
+- [ALG-0091: Commodity hedging pressure (CFTC positions)](../algorithms/0091-commodity-hedging-pressure.md)
+- [ALG-0092: Commodity open interest growth](../algorithms/0092-commodity-open-interest-growth.md)
+- [ALG-0093: Commodity same-calendar-month seasonality](../algorithms/0093-commodity-same-month-seasonality.md)
+- [ALG-0094: Front-running commodity index rolls (the Goldman roll)](../algorithms/0094-commodity-index-roll-front-running.md)
+- [ALG-0095: Currencies sorted on sovereign credit risk](../algorithms/0095-fx-sovereign-credit-risk.md)
 <!-- backlinks:end -->

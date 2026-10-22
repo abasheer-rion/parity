@@ -55,5 +55,5 @@ Nothing yet.
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - [HYP-0010: Emerging market basket kept paying after 2008](../hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md)
 - [HYP-0011: Emerging market momentum survives costs](../hypotheses/0011-emerging-market-momentum-survives-costs.md)
-- [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0009: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

@@ -47,5 +47,6 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 ## Referenced by
 
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
+- [RES-0014: Lesser-known strategies and what firms have published](../research/0014-lesser-known-strategies-and-what-firms-have-published.md)
 - [ALG-0083: Emerging market currency carry, cost aware](../algorithms/0083-em-fx-carry.md)
 <!-- backlinks:end -->

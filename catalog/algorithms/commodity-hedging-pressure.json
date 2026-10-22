@@ -1,0 +1,67 @@
+{
+  "id": "ALG-0091",
+  "slug": "commodity-hedging-pressure",
+  "name": "Commodity hedging pressure (CFTC positions)",
+  "family": "macro-fundamental",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "positioning",
+    "cftc",
+    "hedging-pressure"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Basu, Miffre",
+    "source_title": "Capturing the risk premium of commodity futures: the role of hedging pressure (Journal of Banking and Finance 37(7), 2013)",
+    "source_url": "https://climateinstitute.edhec.edu/publications/capturing-risk-premium-commodity-futures-role-hedging-pressure"
+  },
+  "how_it_works": {
+    "simple": "Use the weekly government report of who holds commodity futures. Buy where producers are hedging heavily (they pay others to take the risk), sell where consumers are.",
+    "analogy": "Like an insurer charging more when many people want cover at once.",
+    "precise": "Hedging pressure = hedgers' net short positions over their total positions (CFTC Commitments of Traders). Long the commodities with the most net-short hedgers, short those with the most net-long; single and double sorts with speculators' positions."
+  },
+  "rule": "Monthly: from CFTC legacy reports, hedging pressure = (commercial short - commercial long) / (commercial short + long), averaged over 52 weeks; long top third, short bottom third.",
+  "data_needed": [
+    "CFTC Commitments of Traders, weekly, free",
+    "Futures returns"
+  ],
+  "economic_rationale": "Keynesian normal backwardation: hedgers pay a premium to speculators who take the other side.",
+  "why_it_might_fail": "Gorton, Hayashi and Rouwenhorst (2013) reject hedging pressure as a determinant of premia; results vary across studies; the reported Sharpe ratio is gross.",
+  "reported_results": [
+    {
+      "source": "Miffre's literature review, as summarised by CXO Advisory",
+      "source_url": "https://www.cxoadvisory.com/?p=27949",
+      "period": "1992 to 2011",
+      "market": "Commodity futures",
+      "sharpe": 0.51,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "Average gross Sharpe ratio of hedging-pressure portfolios in the review; we did not read the review itself."
+    }
+  ],
+  "post_publication_evidence": "Mixed.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Free data, but mixed evidence; low priority."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0014 on 2026-10-22."
+  }
+}
