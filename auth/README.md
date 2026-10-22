@@ -2,11 +2,12 @@
 
 Everything about how people sign in to Parity and the emails they get. The reasons are in [DEC-0012](../docs/decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md).
 
-**Status:** anyone can sign up and goes straight into the app. Email confirmation is off until we connect an email provider. Owner steps are in [What the owner must do](#what-the-owner-must-do).
+**Status:** anyone can sign up. The code expects email confirmation on, with Resend as the sender. The hosted project still needs the owner to push those settings: follow [CHECKLIST.md](CHECKLIST.md), which also has the one-time end-to-end test.
 
 ## How it works
 
-- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages. The app lives at `/app/` and needs a session.
+- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`) and Sim World (`/sim/`, or `sim.endyland.com`) need a session, and all three use the same guard.
+- After signing in, people go back to where they started (`?next=`). Only addresses on this site or on `https://*.endyland.com` are followed; anything else goes to `/app/` (`web/src/auth/redirect.ts`, tested in `web/tests/redirect.test.ts`).
 - Supabase Auth holds the accounts. People log in with email and password, a 6-digit email code, Google or GitHub (when switched on), or a passkey (when switched on). Accounts can add an authenticator app for two-step sign-in.
 - The browser keeps the session in a cookie. A Cloudflare Pages function (`web/functions/_middleware.ts`) checks that cookie's token against Supabase's public keys before it serves anything under `/app/` or `/data/`. No secret is needed for that check. Without a valid session, `/app/` sends you to `/login/` and `/data/` answers 401.
 - The database lets any signed-in person read published research. The team list (`public.members`) now only gives a "Parity team" badge in Account settings.
@@ -26,6 +27,9 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 | `auth/preview.html` | Every email in light, dark and plain text, with sample values. Generated. |
 | `auth/push_templates.sh` | Sends the finished emails (and optionally the settings) to Supabase. |
 | `auth/PROVIDERS.md` | How to switch on Google, GitHub and passkeys. |
+| `auth/CHECKLIST.md` | The owner's steps to finish the hosted setup, and the end-to-end test. |
+| `web/tests/` | Tests for the sign-in flows against a fake Supabase client, the redirect rules, the consent API and the middleware. `npm test` in `web/`. |
+| `web/legal/`, `web/src/legal/` | The legal pages, the cookie notice and the consent API (`consent.ts`). |
 | `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in pages (entry `main.tsx`) and Account settings. |
 | `web/functions/_middleware.ts` | Lets only signed-in people fetch `/app/` and `/data/`. `web/public/_routes.json` limits it to those paths. |
 | `web/index.html` | The public front page: plain HTML and CSS, no script. |
@@ -55,14 +59,14 @@ The emails use these Supabase values ([Supabase email templates](https://supabas
 | `{{ .NewEmail }}` | The new address (email change only) |
 | `{{ .ConfirmationURL }}` | Supabase's own link. We do not use it; our links go to `/verify/` instead. |
 
-Every link has the form `{{ .SiteURL }}/verify/?type=<type>&token_hash={{ .TokenHash }}`. `build.py` fails if an email uses a value its template does not have.
+Every link has the form `{{ .SiteURL }}/verify/?type=<type>&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}`. `{{ .RedirectTo }}` is the address the person started from (for example `https://sim.endyland.com/`), passed by the browser as a plain address with no query. Supabase only keeps it when it is on the redirect allow-list, and otherwise uses the Site URL. `/verify/` checks it like every other `next`. `build.py` fails if an email uses a value its template does not have.
 
 ### Design rules
 
 - Tables for layout and inline styles, so Gmail, Outlook and Apple Mail all show the same thing.
 - Light by default. Apple Mail, iOS Mail and Outlook switch to our dark surfaces (`#10101a`, `#171721`) when the reader uses dark mode. Gmail applies its own dark mode, and every colour still reads after it does.
 - One blue button (`#2f6bff`) per email, drawn twice: once for Outlook on Windows, once for everyone else.
-- The logo is a PNG at `https://parity-research.pages.dev/brand/2026-10-21-starburst/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder is public.
+- The logo is a PNG at `https://parity.endyland.com/brand/2026-10-21-starburst/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder is public.
 - Each email stays under 100 kB (Gmail cuts off longer ones). `build.py` checks.
 
 ## Changing an email
@@ -80,7 +84,7 @@ Supabase sends only the HTML version today. The plain-text files are kept so the
 
 ## Flows
 
-- **Sign up:** email and password (at least 10 characters, letters and numbers), or Google or GitHub. While confirmation is off, the person goes straight to `/app/`. When it is on, they see "Check your email" and confirm by link or code first.
+- **Sign up:** email and password (at least 10 characters, letters and numbers, shown as a checklist while typing, with Show and Hide), agreement to the terms, or Google or GitHub. With confirmation on, they see "Check your email" and confirm by link or code, then land where they started. With it off, they go straight in.
 - **Log in:** password, an emailed code (`magic_link`, existing accounts only), a provider or a passkey. Then `/app/`, or the page they were trying to open.
 - **Two-step sign-in (Settings, Account):** scan a QR code with an authenticator app and type its code. From then on, logging in asks for a code from the app too. Remove it from the same place.
 - **Passkeys (Settings, Account):** add or remove passkeys once they are switched on (`auth/PROVIDERS.md`).
@@ -90,25 +94,7 @@ Supabase sends only the HTML version today. The plain-text files are kept so the
 
 ## What the owner must do
 
-1. **Merge the pull request.** The deploy publishes the new site and the middleware. The migrations workflow applies `supabase/migrations/20261021120000_open_sign_up.sql` (any signed-in person reads results; the team list becomes private; delete requests).
-
-2. **Push the sign-in settings and emails.** This needs a Supabase personal access token (Supabase dashboard, Account, Access Tokens) stored in the Keychain, with a row in `~/.claude/CREDENTIALS.md`:
-
-   ```sh
-   security add-generic-password -s vault:supabase-access-token -a "$USER" -w
-   auth/push_templates.sh                     # dry run: shows what would be sent
-   auth/push_templates.sh --apply --settings  # emails, site URL, redirects, sign-up open, confirmation off, authenticator apps on
-   ```
-
-   Until this runs, the hosted project keeps its old settings (for example, it may still ask new accounts to confirm their email, which only team addresses can receive).
-
-3. **Switch off Cloudflare Access** for `parity-research.pages.dev` once the new site is live. The middleware takes over.
-
-4. **Optional:** Google, GitHub and passkeys, in [PROVIDERS.md](PROVIDERS.md).
-
-### Email confirmation
-
-Off for now so people get straight in: Supabase's own sender only reaches members of the Supabase organisation, 2 emails an hour. To turn it back on: connect an email provider (next section), set `mailer_autoconfirm` to `False` in `push_templates.sh` and `enable_confirmations = true` in `supabase/config.toml`, then run `auth/push_templates.sh --apply --settings`. The confirmation email and the "Check your email" screen are already built.
+Everything is in [CHECKLIST.md](CHECKLIST.md): make a Supabase access token, run `auth/push_templates.sh --apply --smtp --settings` (Resend as the sender, confirmation on, site URL `https://parity.endyland.com`, the redirect allow-list and the emails), test once end to end, then switch off Cloudflare Access. Google, GitHub and passkeys are optional, in [PROVIDERS.md](PROVIDERS.md).
 
 ## Email providers
 

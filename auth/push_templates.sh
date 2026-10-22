@@ -119,6 +119,22 @@ token = keychain("vault:supabase-access-token")
 if smtp:
     body["smtp_pass"] = keychain("resend-api-key")
 
+# Save the current settings first, so any change can be undone (mode 600, outside the
+# repo, with the SMTP password left out).
+try:
+    with urllib.request.urlopen(urllib.request.Request(api, headers={"Authorization": f"Bearer {token}"}), timeout=30) as res:
+        before = json.loads(res.read())
+    before.pop("smtp_pass", None)
+    backups = Path.home() / ".config" / "parity" / "supabase-auth-backups"
+    backups.mkdir(parents=True, exist_ok=True)
+    import datetime, stat
+    path = backups / f"auth-config-{datetime.datetime.now():%Y%m%d-%H%M%S}.json"
+    path.write_text(json.dumps(before, indent=2))
+    path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+    print(f"Saved the current settings to {path}")
+except (urllib.error.URLError, ValueError) as e:
+    sys.exit(f"Could not read the current settings ({e}), so nothing was sent.")
+
 req = urllib.request.Request(api, method="PATCH", data=json.dumps(body).encode(),
                              headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
 try:
