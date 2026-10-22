@@ -10,7 +10,19 @@ function toLogin(extra = "") {
   window.location.replace(`${ROUTES.login}?next=${encodeURIComponent(next)}${extra}`);
 }
 
-export function AppGuard({ children }: { children: (user: { email: string | null; id: string | null; signOut: () => void }) => ReactNode }) {
+type GuardUser = { email: string | null; id: string | null; signOut: () => void };
+
+// Local preview only: `VITE_AUTH_BYPASS=1 npm run dev` skips sign-in so pages can be
+// checked without a Supabase session. import.meta.env.DEV is false in every build, so
+// this branch is removed from what we deploy.
+const BYPASS = import.meta.env.DEV && import.meta.env.VITE_AUTH_BYPASS === "1";
+
+export function AppGuard({ children }: { children: (user: GuardUser) => ReactNode }) {
+  if (BYPASS) return <>{children({ email: "preview@localhost", id: null, signOut: () => {} })}</>;
+  return <SessionGuard>{children}</SessionGuard>;
+}
+
+function SessionGuard({ children }: { children: (user: GuardUser) => ReactNode }) {
   const { loading, session } = useSession();
   const [checked, setChecked] = useState(false);
 

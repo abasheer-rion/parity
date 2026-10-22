@@ -3,23 +3,29 @@
 // bookmarks), a slim top bar (search, run picker, settings, profile) and the page.
 import { useEffect, useState, type ReactNode } from "react";
 import { Icon } from "../ui/icons";
+import { pageByHref } from "../lib/pages";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[] }
 
+// Plain names: say what the page does, not what we call it internally. Each item's
+// hover text comes from lib/pages.ts, the same words search and Start here use.
+const START: NavItem = { href: "#/start", label: "Start here", icon: "sparkle", routes: ["start"] };
+
 const MARKETS: NavItem[] = [
-  { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
+  START,
+  { href: "#/", label: "Sim World", icon: "home", routes: ["", "home"] },
   {
     href: "#/strategies", label: "Strategies", icon: "chart", routes: ["strategies", "strategy", "compare", "lab", "explore", "signals"],
     children: [
       { href: "#/strategies", label: "All strategies", routes: ["strategies", "strategy"] },
       { href: "#/compare", label: "Compare", routes: ["compare"] },
-      { href: "#/lab", label: "Lab", routes: ["lab"] },
-      { href: "#/explore", label: "Explore", routes: ["explore"] },
-      { href: "#/signals", label: "Signals", routes: ["signals"] },
+      { href: "#/lab", label: "Try settings", routes: ["lab"] },
+      { href: "#/signals", label: "Early signals", routes: ["signals"] },
+      { href: "#/explore", label: "Raw prices", routes: ["explore"] },
     ],
   },
-  { href: "#/scenarios", label: "Scenarios", icon: "compass", routes: ["scenarios"] },
+  { href: "#/scenarios", label: "Scenarios", icon: "pulse", routes: ["scenarios"] },
   {
     href: "#/news", label: "News", icon: "news", routes: ["news"],
     children: [
@@ -27,20 +33,21 @@ const MARKETS: NavItem[] = [
       { href: "#/news/history", label: "Biggest days", routes: [] },
     ],
   },
-  { href: "#/catalog", label: "Catalog", icon: "catalog", routes: ["catalog", "algo"] },
-  { href: "#/ledger", label: "Ledger", icon: "ledger", routes: ["ledger"] },
+  { href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo"] },
+  { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
     children: [
-      { href: "#/data", label: "Health", routes: ["data"] },
+      { href: "#/data", label: "Data health", routes: ["data"] },
       { href: "#/sources", label: "Sources", routes: ["sources"] },
     ],
   },
 ];
 
 const RESEARCH: NavItem[] = [
+  START,
   {
-    href: "#/docs", label: "Docs", icon: "book", routes: ["docs", "doc"],
+    href: "#/docs", label: "Research docs", icon: "book", routes: ["docs", "doc"],
     children: [
       { href: "#/docs", label: "All docs", routes: [] },
       { href: "#/docs/type/decision", label: "Decisions", routes: [] },
@@ -97,7 +104,7 @@ export function Shell({
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
-  const research = RESEARCH.some((n) => n.routes.includes(route));
+  const research = RESEARCH.some((n) => n !== START && n.routes.includes(route));
   const items = research ? RESEARCH : MARKETS;
   const settings = route === "settings";
 
@@ -143,7 +150,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
+                      <a href={n.href} title={pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
                       </a>
@@ -152,7 +159,7 @@ export function Shell({
                           <div>
                             {n.children.map((c) => {
                               const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
-                              return <a key={c.href} href={c.href} className={on ? "on" : ""} tabIndex={active ? 0 : -1}>{c.label}</a>;
+                              return <a key={c.href} href={c.href} title={pageByHref[c.href]?.what} className={on ? "on" : ""} tabIndex={active ? 0 : -1}>{c.label}</a>;
                             })}
                           </div>
                         </div>
@@ -197,7 +204,7 @@ export function Shell({
         <header className={`topbar ${scrolled ? "scrolled" : ""}`}>
           <button className="icon-btn menu-btn" aria-label="Menu" onClick={() => setOpen(true)}><Icon name="menu" /></button>
           <button className="search-trigger" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
-            <Icon name="search" size={13} /> <span>Search for anything</span>
+            <Icon name="search" size={13} /> <span>Search pages, strategies, words or ask a question</span>
           </button>
           <div className="topbar-right">
             {top}

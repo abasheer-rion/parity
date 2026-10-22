@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 12 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 13 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
@@ -61,6 +61,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0010 | [Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [method](TAGS.md#method) |
 | DEC-0011 | [Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | DEC-0012 | [Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md) | accepted | 2026-10-21 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0013 | [Dashboard clarity, plain names, verdicts and search that answers](decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md) | accepted | 2026-10-21 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 

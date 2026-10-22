@@ -4,6 +4,8 @@ import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import type { Report } from "../lib/types";
 import { Term } from "./Learn";
+import { nameOf, verdictOf } from "../lib/strategyMeta";
+import { Badge } from "../ui";
 
 const heat = (v: number) => {
   const a = Math.min(Math.abs(v), 1);
@@ -15,6 +17,7 @@ export function Compare({ report }: { report: Report }) {
   const colors = colorMap(report.runs);
   const ranked = [...report.runs].sort((a, b) => (b.gauntlet?.passed ?? 99) - (a.gauntlet?.passed ?? 99) || (b.metrics.sharpe ?? 0) - (a.metrics.sharpe ?? 0));
   const cmp = report.comparison;
+  const byId = Object.fromEntries(report.runs.map((r) => [r.strategy, r]));
   return (
     <>
       <div className="page-head">
@@ -30,8 +33,8 @@ export function Compare({ report }: { report: Report }) {
             <tbody>
               {ranked.map((r) => (
                 <tr key={r.strategy}>
-                  <td><span className="swatch" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`}>{r.strategy}</a></td>
-                  <td>{r.gauntlet ? `${r.gauntlet.passed}/${r.gauntlet.total}` : "benchmark"}</td>
+                  <td><span className="swatch" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a></td>
+                  <td><Badge tone={verdictOf(r).tone}>{verdictOf(r).label}</Badge>{r.gauntlet && <span className="muted small"> {r.gauntlet.passed}/{r.gauntlet.total}</span>}</td>
                   <td>{num(r.metrics.sharpe)}</td><td>{num(r.metrics.deflated_sharpe)}</td><td>{pct(r.metrics.cagr)}</td>
                   <td>{pct(r.metrics.ann_vol)}</td><td>{pct(r.metrics.max_drawdown)}</td>
                   <td>{r.is_benchmark ? "1.00" : num(r.metrics.correlation)}</td>
@@ -49,7 +52,7 @@ export function Compare({ report }: { report: Report }) {
               <thead><tr><th>Strategy</th>{cmp.crises.map((c) => <th key={c.name} title={`${c.start} to ${c.end}`}>{c.name}</th>)}</tr></thead>
               <tbody>
                 {cmp.names.map((n) => (
-                  <tr key={n}><td>{n}</td>{cmp.crises.map((c) => {
+                  <tr key={n}><td>{byId[n] ? nameOf(byId[n]) : n}</td>{cmp.crises.map((c) => {
                     const v = c.returns[n];
                     return <td key={c.name} style={{ color: v >= 0 ? "var(--good)" : "var(--bad)" }}>{pct(v)}</td>;
                   })}</tr>

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Html } from "../ui/Html";
 import { Title } from "../components/Shell";
 import { termById, terms } from "../lib/glossary";
-import { citeLabel, search, TYPE_LABELS, TYPE_ORDER, useDocs, type DocEntry, type DocsData } from "../lib/docs";
+import { citeLabel, search, TYPE_HELP, TYPE_LABELS, TYPE_ORDER, useDocs, type DocEntry, type DocsData } from "../lib/docs";
 import { REPO_URL } from "../lib/format";
 import { scrollToEl, scrollToTop } from "../lib/scroll";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
@@ -36,8 +36,8 @@ export function DocsHome({ tag, type: initialType, query }: { tag?: string; type
       <div className="page-head">
         <Title label={tag ? `Docs tagged ${tag}` : "Research docs"}>{tag ? <>Docs tagged <span className="tag big">{tag}</span></> : "Research docs"}</Title>
         <p>
-          Every decision, experiment, paper note and log in the project. Hover any underlined word, doc link or source
-          for a preview. Select any word or phrase to see everywhere it appears. Press <kbd>/</kbd> to search from anywhere.
+          Every decision, experiment, paper note and log in the project. Each doc opens with a short "In plain
+          words" summary. Hover any underlined word, doc link or source for a preview. Select any word or phrase to see everywhere it appears. Press <kbd>/</kbd> to search from anywhere.
         </p>
       </div>
       <div className="learn-bar">
@@ -52,12 +52,13 @@ export function DocsHome({ tag, type: initialType, query }: { tag?: string; type
             <div className="chips">
               <button className={`chip ${type === "" ? "on" : ""}`} onClick={() => setType("")}>All {data.docs.length}</button>
               {byType(data.docs).map(([t, list]) => (
-                <button key={t} className={`chip ${type === t ? "on" : ""}`} onClick={() => setType(t)}>{TYPE_LABELS[t] ?? t} {list.length}</button>
+                <button key={t} title={TYPE_HELP[t]} className={`chip ${type === t ? "on" : ""}`} onClick={() => setType(t)}>{TYPE_LABELS[t] ?? t} {list.length}</button>
               ))}
             </div>
             {byType(shown).map(([t, list]) => (
               <section key={t} className="doc-group">
                 <h2>{TYPE_LABELS[t] ?? t}</h2>
+                {TYPE_HELP[t] && <p className="muted small doc-type-help">{TYPE_HELP[t]}</p>}
                 <ul className="doc-list">
                   {list.map((d) => (
                     <li key={d.id}>
@@ -135,7 +136,7 @@ export function DocPage({ id, anchor }: { id: string; anchor?: string }) {
       <article className="doc">
         <div className="doc-meta">
           <span className="doc-id">{doc.id}</span>
-          <span>{TYPE_LABELS[doc.type] ?? doc.type}</span>
+          <span title={TYPE_HELP[doc.type]} className="doc-type">{TYPE_LABELS[doc.type] ?? doc.type}</span>
           <span className={`status s-${doc.status}`}>{doc.status}</span>
           {doc.updated && <span className="muted">updated {doc.updated}</span>}
         </div>

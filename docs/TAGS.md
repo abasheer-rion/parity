@@ -579,6 +579,7 @@ The dashboard.
 
 - [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [DEC-0012: Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md)
+- [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

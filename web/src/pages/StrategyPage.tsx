@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
-import { Button } from "../ui";
+import { Badge, Button } from "../ui";
 import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
 import { algorithms, STAGES } from "../lib/catalog";
@@ -12,7 +12,8 @@ import { colorMap } from "../lib/colors";
 import { mentions, useDocs } from "../lib/docs";
 import { num, pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
-import type { Report } from "../lib/types";
+import { nameOf, verdictOf } from "../lib/strategyMeta";
+import type { Report, StrategyRun } from "../lib/types";
 import { Term } from "./Learn";
 
 export function StrategyPage({ report, name }: { report: Report; name: string }) {
@@ -56,11 +57,12 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
   return (
     <div className="rh">
       <div className="rh-main">
-        <div className="crumbs"><a href="#/strategies">Strategies</a> <span className="muted">/</span> {run.strategy}</div>
-        <Title>{run.strategy}</Title>
+        <div className="crumbs"><a href="#/strategies">Strategies</a> <span className="muted">/</span> {nameOf(run)}</div>
+        <Title label={nameOf(run)} actions={<Badge tone={verdictOf(run).tone}>{verdictOf(run).label}</Badge>}>{nameOf(run)}</Title>
+        <p className="verdict-line">{storyOf(run, bench, prefs.startingAmount)}</p>
         <HeroChart
           title={`Growth of $${prefs.startingAmount.toLocaleString()}`}
-          main={{ name: run.strategy, points: run.equity }}
+          main={{ name: nameOf(run), points: run.equity }}
           compare={bench && !run.is_benchmark ? { name: "US stock market", points: bench.equity } : undefined}
           amount={prefs.startingAmount}
           range={range}
@@ -186,4 +188,20 @@ function Row({ label, value, good }: { label: string; value: string; good?: bool
       <strong className={good == null ? "" : good ? "good" : "bad"}>{value}</strong>
     </div>
   );
+}
+
+/** One plain sentence: what a starting amount became, against the market, and the verdict. */
+function storyOf(run: StrategyRun, bench: StrategyRun | undefined, amount: number): string {
+  const grow = (r?: StrategyRun) => {
+    const e = r?.equity;
+    return e && e.length > 1 && e[0][1] ? amount * (e[e.length - 1][1] / e[0][1]) : null;
+  };
+  const money = (v: number) => `$${Math.round(v).toLocaleString()}`;
+  const mine = grow(run);
+  const start = run.metrics.start ? ` from ${run.metrics.start.slice(0, 4)}` : "";
+  if (mine == null) return verdictOf(run).plain;
+  if (run.is_benchmark) return `${money(amount)} put in the US stock market${start} became ${money(mine)}. Every strategy has to beat this.`;
+  const theirs = grow(bench);
+  const vs = theirs != null ? `, against ${money(theirs)} in the US stock market` : "";
+  return `${money(amount)} put in${start} became ${money(mine)}${vs}, after costs. ${verdictOf(run).plain}`;
 }
