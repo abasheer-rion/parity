@@ -106,20 +106,21 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
   if (away) return null;
 
-  const runPicker = (
+  // The run picker lives in the sidebar footer, and only on pages that read a run.
+  const runPicker = standalone || (batches.length === 0 && source !== "local") ? undefined : (
     <>
+      <span className="side-run-label">Results from{source === "local" && <span className="chip-badge">local run</span>}</span>
       {batches.length > 0 && (
         <select className="run-picker" aria-label="Research run" value={batchId ?? ""} onChange={(e) => setBatchId(e.target.value || undefined)}>
           <option value="">Latest run</option>
           {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
         </select>
       )}
-      {source === "local" && <span className="chip-badge">local run</span>}
     </>
   );
 
   return (
-    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"}>
+    <Shell route={route} arg={arg} hash={hash} run={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}

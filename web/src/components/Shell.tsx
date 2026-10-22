@@ -1,6 +1,7 @@
-// The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, a
-// segmented switch between areas, nav with nested children for the active item,
-// bookmarks), a slim top bar (search, run picker, settings, profile) and the page.
+// The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, search,
+// a segmented switch between areas, nav with nested children for the active item,
+// bookmarks, the run picker and the account menu) and the page. There is no top bar:
+// on phones a small floating button opens the sidebar (DEC-0020).
 import { useEffect, useState, type ReactNode } from "react";
 import { Icon } from "../ui/icons";
 import { pageByHref } from "../lib/pages";
@@ -94,18 +95,21 @@ const RESEARCH: NavItem[] = [
 // Settings are kept bare on purpose: a section exists only when there is a reason to
 // change something. The older sections (reading, shortcuts, runs, team, about) are kept
 // in pages/SettingsHidden.tsx and can come back by adding them here.
+// Parity is dark only (DEC-0020), so there is no Appearance section any more.
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
-    { id: "appearance", label: "Appearance" },
   ] },
 ];
+
+const MAC = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+const SEARCH_KEY = MAC ? "\u2318K" : "Ctrl K";
 
 export function Shell({
   route,
   arg,
   hash,
-  top,
+  run,
   email,
   onSignOut,
   wide,
@@ -115,7 +119,8 @@ export function Shell({
   route: string;
   arg?: string;
   hash: string;
-  top?: ReactNode;
+  /** The research run picker, shown in the sidebar footer on pages that read a run. */
+  run?: ReactNode;
   email?: string | null;
   onSignOut?: () => void;
   wide?: boolean;
@@ -126,20 +131,21 @@ export function Shell({
   const prefs = usePrefs();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   useEffect(() => { setOpen(false); setMenu(false); }, [hash]);
+  // Escape closes the phone sidebar and the account menu.
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 4);
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
+    const on = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); setMenu(false); } };
+    window.addEventListener("keydown", on);
+    return () => window.removeEventListener("keydown", on);
   }, []);
+  const openSearch = () => { setOpen(false); setMenu(false); window.dispatchEvent(new Event("parity:search")); };
   const research = SPACE === "research";
   const items = research ? RESEARCH : PRODUCT;
   const settings = route === "settings";
 
   return (
     <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
-      <aside className="side" data-lenis-prevent>
+      <aside className="side" id="side" data-lenis-prevent>
         <div className="org">
           <a className="org-button" href="#/">
             <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>
@@ -156,6 +162,11 @@ export function Shell({
             </button>
           )}
         </div>
+        <button className="side-search" onClick={openSearch} aria-label="Search pages, strategies and words, or ask a question" aria-keyshortcuts="/ Meta+K">
+          <Icon name="search" size={14} />
+          <span className="lbl">Search or ask</span>
+          <kbd aria-hidden>{SEARCH_KEY}</kbd>
+        </button>
         {settings ? (
           <nav className="side-nav settings-nav" aria-label="Settings">
             <a className="side-back" href="#/"><span className="ico"><Icon name="chevronLeft" size={13} /></span> Settings</a>
@@ -216,6 +227,7 @@ export function Shell({
             </div>
           </>
         )}
+        {run && !settings && <div className="side-run">{run}</div>}
         <div className="account">
           <button className="account-row" onClick={() => setMenu((m) => !m)} aria-expanded={menu}>
             <span className="avatar" aria-hidden>{initials(email)}</span>
@@ -225,8 +237,8 @@ export function Shell({
           {menu && (
             <div className="menu up" role="menu">
               <div className="menu-head">{email ?? "Signed in"}</div>
-              <a role="menuitem" href="#/settings/account"><Icon name="user" size={13} /> Account</a>
-              <a role="menuitem" href="#/settings/appearance"><Icon name="gear" size={13} /> Settings</a>
+              <a role="menuitem" href="#/settings/account"><Icon name="gear" size={13} /> Account and settings</a>
+              <button role="menuitem" onClick={openSearch}><Icon name="search" size={13} /> Search <kbd className="menu-kbd" aria-hidden>{SEARCH_KEY}</kbd></button>
               {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" size={13} /> Sign out</button>}
             </div>
           )}
@@ -234,16 +246,7 @@ export function Shell({
       </aside>
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
-        <header className={`topbar ${scrolled ? "scrolled" : ""}`}>
-          <button className="icon-btn menu-btn" aria-label="Menu" onClick={() => setOpen(true)}><Icon name="menu" /></button>
-          <button className="search-trigger" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
-            <Icon name="search" size={13} /> <span>Search pages, strategies, words or ask a question</span>
-          </button>
-          <div className="topbar-right">
-            {top}
-            <a className="icon-btn" href="#/settings/appearance" aria-label="Settings" title="Settings"><Icon name="gear" size={15} /></a>
-          </div>
-        </header>
+        <button className="menu-fab" aria-label="Open menu" aria-controls="side" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" size={18} /></button>
         <main className={full ? "full" : wide ? "wide" : ""}>{children}</main>
       </div>
     </div>

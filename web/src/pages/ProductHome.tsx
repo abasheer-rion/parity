@@ -11,6 +11,9 @@ import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import { nameOf, tagsOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
+import { productInsights } from "../lib/insights";
+import { date } from "../lib/format";
+import { Insights } from "../components/Insights";
 
 const THEMES: { label: string; q: string; icon: string; what: string }[] = [
   { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value in the world's money" },
@@ -50,7 +53,7 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
       <section className="phome-hero">
         <HeroGlow />
         <div>
-          <h1>{first ? `Hi ${first[0].toUpperCase()}${first.slice(1)}` : "Welcome"}</h1>
+          <h1 className="display">{first ? `Hi ${first[0].toUpperCase()}${first.slice(1)}` : "Welcome"}</h1>
           <p className="muted">{tested.length} strategies tested the same honest way. {beating === 0 ? "None beats simply holding the US market yet." : `${beating} beat simply holding the US market.`}</p>
         </div>
         <button className="ask" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
@@ -58,6 +61,8 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
           <span>Ask anything: "what is carry", "best strategy", "does anything beat the market"</span>
         </button>
       </section>
+
+      <Insights items={productInsights(report)} source={`the ${report.kind === "official" ? "official" : "nightly"} research run of ${date(report.generated_at)}`} />
 
       {picks.length > 0 && (
         <div className="feat-row" aria-label="Top of the evidence">
