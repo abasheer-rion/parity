@@ -3,6 +3,7 @@
 // bookmarks, the run picker and the account menu) and the page. There is no top bar:
 // on phones a small floating button opens the sidebar (DEC-0021).
 import { useEffect, useState, type ReactNode } from "react";
+import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { pageByHref } from "../lib/pages";
 import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
@@ -145,6 +146,7 @@ export function Shell({
 
   return (
     <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
+      <SkipLink />
       <aside className="side" id="side" data-lenis-prevent>
         <div className="org">
           <a className="org-button" href="#/">
@@ -240,6 +242,8 @@ export function Shell({
               <a role="menuitem" href="#/settings/account"><Icon name="gear" size={13} /> Account and settings</a>
               <button role="menuitem" onClick={openSearch}><Icon name="search" size={13} /> Search <kbd className="menu-kbd" aria-hidden>{SEARCH_KEY}</kbd></button>
               {onSignOut && <button role="menuitem" onClick={onSignOut}><Icon name="external" size={13} /> Sign out</button>}
+              <a role="menuitem" href="/legal/"><Icon name="book" size={13} /> Privacy and legal</a>
+              <button role="menuitem" data-cookie-prefs><Icon name="gear" size={13} /> Cookie settings</button>
             </div>
           )}
         </div>
@@ -247,7 +251,7 @@ export function Shell({
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
         <button className="menu-fab" aria-label="Open menu" aria-controls="side" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" size={18} /></button>
-        <main className={full ? "full" : wide ? "wide" : ""}>{children}</main>
+        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}>{children}</main>
       </div>
     </div>
   );

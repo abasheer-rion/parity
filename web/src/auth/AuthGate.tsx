@@ -5,6 +5,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { ROUTES } from "./config";
 import { Splash } from "./form";
+import { go } from "./nav";
 import { withNext } from "./redirect";
 import { needsSecondStep, signOut, useSession } from "./session";
 
@@ -15,7 +16,7 @@ export function loginUrl(loc: Pick<Location, "pathname" | "search" | "hash"> = w
 }
 
 function toLogin(mfa = false) {
-  window.location.replace(loginUrl(window.location, mfa));
+  go(loginUrl(window.location, mfa));
 }
 
 export type GuardUser = { email: string | null; id: string | null; signOut: () => void };

@@ -2,6 +2,7 @@
 // right autocomplete hints for password managers, a password field with show and hide,
 // messages that screen readers announce, and a small async-submit helper.
 import { useId, useState, type FormEvent, type ReactNode } from "react";
+import { SkipLink } from "../components/SkipLink";
 import { LegalLinks } from "../legal/LegalLinks";
 import { passwordRules } from "./rules";
 import "./auth.css";
@@ -9,6 +10,7 @@ import "./auth.css";
 export function AuthCard({ title, lead, children, foot }: { title: string; lead?: ReactNode; children: ReactNode; foot?: ReactNode }) {
   return (
     <div className="auth-page">
+      <SkipLink />
       <main className="auth-card anim-rise" id="main" aria-labelledby="auth-title">
         <a className="auth-brand" href="/">
           <img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height={44} alt="Parity home" />
@@ -169,7 +171,4 @@ export function params(): URLSearchParams {
   return new URLSearchParams(window.location.search);
 }
 
-/** Go to another page. replace() keeps one-time links out of the back button. */
-export function go(path: string) {
-  window.location.replace(path);
-}
+export { go } from "./nav";

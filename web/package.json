@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc --noEmit && tsc --noEmit -p functions && vite build --mode site && vite build",
     "typecheck": "tsc --noEmit && tsc --noEmit -p functions",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "a11y": "node scripts/a11y.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
     "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/d3-geo": "^3.1.1",
     "@types/geojson": "^7946.0.16",

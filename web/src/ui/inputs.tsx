@@ -33,9 +33,20 @@ export function Select<T extends string>({ value, onChange, options, label }: { 
 export function Segmented<T extends string>({ value, onChange, options, label, size = "md" }:
   { value: T; onChange: (v: T) => void; options: [T, ReactNode][]; label?: string; size?: "sm" | "md" }) {
   return (
-    <div className={`ui-seg ui-seg-${size}`} role="radiogroup" aria-label={label}>
+    <div className={`ui-seg ui-seg-${size}`} role="radiogroup" aria-label={label}
+      onKeyDown={(e) => {
+        // Arrow keys move between options, as in a native radio group.
+        const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        const i = options.findIndex(([v]) => v === value);
+        const nextValue = options[(i + step + options.length) % options.length][0];
+        onChange(nextValue);
+        const buttons = (e.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button");
+        buttons[(i + step + options.length) % options.length]?.focus();
+      }}>
       {options.map(([v, l]) => (
-        <button key={v} role="radio" aria-checked={v === value} className={v === value ? "on" : ""} onClick={() => onChange(v)}>{l}</button>
+        <button key={v} type="button" role="radio" aria-checked={v === value} tabIndex={v === value ? 0 : -1} className={v === value ? "on" : ""} onClick={() => onChange(v)}>{l}</button>
       ))}
     </div>
   );

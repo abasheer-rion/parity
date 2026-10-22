@@ -3,6 +3,7 @@ import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { supabase } from "./client";
 import { ROUTES } from "./config";
+import { goPush } from "./nav";
 import { withNext } from "./redirect";
 
 export interface SessionState { loading: boolean; session: Session | null }
@@ -66,5 +67,5 @@ export async function signOut() {
   } catch {
     await supabase.auth.signOut({ scope: "local" }).catch(() => {});
   }
-  window.location.assign(ROUTES.login);
+  goPush(ROUTES.login);
 }

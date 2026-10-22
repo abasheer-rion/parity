@@ -575,9 +575,19 @@
     </main>
     <footer>
       <div class="wrap">
-        <span>Research, not investment advice. Results are backtests after costs; the past does not promise the future.</span>
+        <span>Research and education only. Not investment advice. Results are backtests after costs; the past does not promise the future.</span>
         <span>&copy; 2026 Parity</span>
+        <nav class="site-legal" aria-label="Legal">
+          <a href="/legal/privacy/">Privacy</a>
+          <a href="/legal/terms/">Terms</a>
+          <a href="/legal/cookies/">Cookies</a>
+          <a href="/legal/accessibility/">Accessibility</a>
+          <a href="/legal/risk/">Risk</a>
+          <button type="button" data-cookie-prefs>Cookie settings</button>
+        </nav>
       </div>
+      <!-- The cookie notice and the footer link styles (src/legal/). -->
+      <script type="module" src="/src/legal/site-footer.ts"></script>
     </footer>
   </body>
 </html>
