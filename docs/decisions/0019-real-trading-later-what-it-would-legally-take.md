@@ -44,5 +44,6 @@ Proposed, for the owner to accept or reject later. Nothing below is built.
 
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
+- [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 <!-- backlinks:end -->
