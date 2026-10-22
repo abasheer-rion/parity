@@ -1,4 +1,4 @@
-// Sim World on its own site (DEC-0017): sim.endyland.com, or /sim/ on previews. Only the
+// Sim World on its own site (DEC-0020): sim.endyland.com, or /sim/ on previews. Only the
 // simulator and one Back button: no sidebar, no top bar. It signs in and loads data like
 // the dashboard, and tabs live in the hash (#/map, #/crises, ...).
 import { useEffect, useRef, useState } from "react";

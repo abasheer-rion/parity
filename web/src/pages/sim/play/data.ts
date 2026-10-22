@@ -1,5 +1,5 @@
 // Windows of time, past crises and series lined up on the weekly dates, shared by the
-// replay tabs (DEC-0017). Everything here reads the world file; nothing is invented.
+// replay tabs (DEC-0020). Everything here reads the world file; nothing is invented.
 import type { WorldData } from "../../../lib/world";
 import { indexAtOrBefore } from "../../../lib/world";
 import type { Band } from "./Stage";

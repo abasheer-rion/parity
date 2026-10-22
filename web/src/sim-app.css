@@ -1,4 +1,4 @@
-/* Sim World on its own site (DEC-0017): full screen, one Back button. */
+/* Sim World on its own site (DEC-0020): full screen, one Back button. */
 .simapp { min-height: 100vh; background: var(--bg, var(--surface)); color: var(--text); }
 .simapp-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; padding: 10px 20px; background: color-mix(in srgb, var(--bg, var(--surface)) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
 .simapp-back { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px 0 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }

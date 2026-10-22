@@ -5,7 +5,7 @@ Two jobs, both honest about being history rather than forecasts:
 * ``export`` writes the static file the world map reads: every currency we hold as its
   value in US dollars (daily for recent years, weekly back to 1986), the 3-month
   interest rates behind carry, the oil, gas and copper prices, and how each currency
-  moved after each catalog event. For the replay tabs (DEC-0017) it also carries the
+  moved after each catalog event. For the replay tabs (DEC-0020) it also carries the
   12 US industries, the research factors, the Treasury curve and the VIX, weekly, with
   yields and the VIX marked as levels, not prices. The event reactions reuse the
   scenario simulator's own event study (``scenarios.event_reaction``), so the map and
@@ -82,7 +82,7 @@ PATH_EXTRAS = [("stocks", "US stocks", "eq.US_TOTAL"),
                ("bonds10", "US 10-year Treasuries", "bond.TR10"),
                ("bonds2", "US 2-year Treasuries", "bond.TR2")]
 
-# Series the replay tabs add (DEC-0017): US industries and research factors (Kenneth
+# Series the replay tabs add (DEC-0020): US industries and research factors (Kenneth
 # French, total return or long-short indexes), the Treasury curve and the VIX. Yields and
 # the VIX are levels, not prices, so the page never turns them into returns.
 INDUSTRY_NAMES = {"NoDur": "Consumer staples", "Durbl": "Consumer durables",
@@ -182,8 +182,11 @@ def weekly_grid(levels: dict[str, pd.Series], keys: list[str], start: str = WEEK
         return {"dates": [], "series": {}}
     frame = pd.concat({k: levels[k].resample("W-FRI").last() for k in present}, axis=1)
     frame = frame[frame.index >= pd.Timestamp(start)]
+    # The week still in progress is labelled with its last real close, not a Friday that
+    # has not happened yet.
+    last = max(levels[k].index.max() for k in present)
     # A week with no close at all (a series that paused) stays empty, never copied.
-    return {"dates": [d.date().isoformat() for d in frame.index],
+    return {"dates": [min(d, last).date().isoformat() for d in frame.index],
             "series": {k: [_sig(v, digits) for v in frame[k].to_numpy(float)] for k in present}}
 
 

@@ -84,6 +84,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0019: Real trading later, what it would legally take](0019-real-trading-later-what-it-would-legally-take.md)
+- [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->

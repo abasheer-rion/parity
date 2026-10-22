@@ -1,5 +1,5 @@
 // #/sim on the research side: Sim World now runs full screen on its own site and opens in a
-// new tab (DEC-0017). This card keeps old links working.
+// new tab (DEC-0020). This card keeps old links working.
 import { Title } from "../components/Shell";
 import { Button } from "../ui";
 import { simUrl } from "../lib/space";

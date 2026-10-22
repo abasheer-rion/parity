@@ -1,4 +1,4 @@
-// The stage every Sim World tab plays on (DEC-0017), in the strategy race's shape: a big
+// The stage every Sim World tab plays on (DEC-0020), in the strategy race's shape: a big
 // date, a "leading:" line, Play and the speed, the visual beside a leaderboard that
 // re-ranks as time moves, and a timeline with event bands to click and replay.
 import { useMemo, useRef, type CSSProperties, type ReactNode } from "react";

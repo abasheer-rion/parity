@@ -1,4 +1,4 @@
-// One clock for every Sim World tab (DEC-0017): a position along a list of frames that
+// One clock for every Sim World tab (DEC-0020): a position along a list of frames that
 // plays at 1x, 4x or 16x, steps with the arrow keys, and jumps to the end at once when
 // the person prefers reduced motion. The strategy race set the pattern; this is it,
 // shared.

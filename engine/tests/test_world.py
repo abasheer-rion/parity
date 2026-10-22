@@ -53,6 +53,9 @@ def test_weekly_grid_uses_friday_close(levels):
     d = grid["dates"][0]
     assert pd.Timestamp(d).day_of_week == 4
     assert grid["series"]["EUR"][0] == pytest.approx(levels["EUR"][:d].iloc[-1], rel=1e-5)
+    # 2021-12-31 is a Friday; cut the data on a Wednesday and the last week keeps that date
+    cut = {"EUR": levels["EUR"][:"2021-12-29"]}
+    assert world.weekly_grid(cut, ["EUR"], start="2021-12-01")["dates"][-1] == "2021-12-29"
 
 
 def test_event_reactions_match_the_scenario_study(levels):

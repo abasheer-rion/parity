@@ -58,7 +58,7 @@ export function SeriesRace({ data, items, a, b, mode, valueFmt, eyebrow, honest,
     const yAgo = ago >= 0 ? at(raw[it.key], ago) : null;
     const total = now == null || first == null ? null : mode === "growth" ? now - 100 : now - first;
     const year = v == null || yAgo == null ? null : mode === "growth" ? (yAgo > 0 ? (v / yAgo - 1) * 100 : null) : v - yAgo;
-    const pts = (x: number | null) => (x == null ? "n/a" : `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toFixed(unitLabel === " bp" ? 0 : 2)}${unitLabel ?? ""}`);
+    const pts = (x: number | null) => (x == null ? "n/a" : `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toFixed(unitLabel === " bp" ? 0 : 2)}`);
     return {
       key: it.key, label: it.label, color: it.color, bench: it.bench, title: it.note ?? it.label,
       sort: mode === "growth" ? now : v,
@@ -93,7 +93,7 @@ export function SeriesRace({ data, items, a, b, mode, valueFmt, eyebrow, honest,
       }
       board={<Board rows={rows} name={name} picked={focus} onPick={(key) => setFocus(focus === key ? null : key)} playing={pb.playing}
         headers={["Value", "Since start", "1 yr"]}
-        caption={mode === "growth" ? "Since start: change from the first week of the window. Click a row to follow it." : "Since start and 1 yr are changes in the level. Click a row to follow it."} />}
+        caption={mode === "growth" ? "Since start: change from the first week of the window. Click a row to follow it." : `Since start and 1 yr are changes in the level${unitLabel === " pts" ? ", in percentage points" : unitLabel === " bp" ? ", in basis points" : ""}. Click a row to follow it.`} />}
       below={below?.(k, focus)}
     />
   );

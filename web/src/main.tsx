@@ -11,7 +11,7 @@ import "./ui/ui.css";
 startSmoothScroll();
 
 // /sim/ (sim.endyland.com) is Sim World alone, full screen; /app/ and /research/ are the
-// two sides of the dashboard (DEC-0015, DEC-0017).
+// two sides of the dashboard (DEC-0015, DEC-0020).
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     {IS_SIM ? <SimApp /> : <App />}

@@ -10,7 +10,7 @@ export type Horizon = "1d" | "1w" | "1m" | "3m";
 export interface WorldAsset {
   key: string; label: string; first: string; rate: boolean;
   group: "currencies" | "commodities" | "stocks" | "bonds" | "industries" | "factors" | "yields" | "risk";
-  /** price: a change is a return someone could have had; level: a yield or the VIX (DEC-0017). Older files leave it out. */
+  /** price: a change is a return someone could have had; level: a yield or the VIX (DEC-0020). Older files leave it out. */
   kind?: "price" | "level";
 }
 

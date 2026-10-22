@@ -23,7 +23,7 @@ export function otherSide(route: string): Space | null {
 
 export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "/research/" };
 
-// ---------- Sim World, its own full-screen site (DEC-0017) ----------
+// ---------- Sim World, its own full-screen site (DEC-0020) ----------
 // sim.endyland.com serves web/sim/index.html, marked <html data-space="sim">. It shows only
 // Sim World and one Back button; it still signs in and loads data like the other sides.
 

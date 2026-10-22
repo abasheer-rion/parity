@@ -111,7 +111,7 @@ export default defineConfig(({ command, mode }) => ({
         assetsDir: "app/assets",
         copyPublicDir: false,
         // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research,
-        // and /sim/ is Sim World on its own, full screen (DEC-0017).
+        // and /sim/ is Sim World on its own, full screen (DEC-0020).
         rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html"), sim: here("sim/index.html") } },
       },
 }));

@@ -80,7 +80,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World runs full screen on its own site (DEC-0017): any link to #/sim or #/sim/<tab>
+  // Sim World runs full screen on its own site (DEC-0020): any link to #/sim or #/sim/<tab>
   // opens it in a new tab. Typing #/sim still lands on a small card that links there.
   useEffect(() => {
     const on = (e: MouseEvent) => {

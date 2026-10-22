@@ -76,7 +76,7 @@ const RESEARCH: NavItem[] = [
       { href: "#/explore", label: "Raw prices", routes: ["explore"] },
     ],
   },
-  // Sim World is its own full-screen site and opens in a new tab (DEC-0017).
+  // Sim World is its own full-screen site and opens in a new tab (DEC-0020).
   { href: simUrl(), label: "Sim World", icon: "compass", routes: ["sim"], external: true },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],

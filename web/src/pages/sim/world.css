@@ -149,7 +149,7 @@
   .sw2-time { padding: 10px 12px 8px; }
 }
 
-/* ---------- the shared playback stage (DEC-0017) ---------- */
+/* ---------- the shared playback stage (DEC-0020) ---------- */
 .pb-stage { min-width: 0; }
 .pb-body { grid-template-columns: minmax(0, 1fr) 400px; }
 .pb-visual { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
