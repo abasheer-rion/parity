@@ -13,6 +13,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
 import { arcPoints, FAMILIES, makeGlobe, rotate, START_POSE, starRays, type Vec3 } from "../src/site/nodes";
+import { bands, finalRanks, RAMP, SCENARIOS, simulate, WEEKS, Y_MAX, Y_MIN } from "../src/site/simModel";
 
 const root = (p: string) => resolve(import.meta.dirname, "../..", p);
 
@@ -62,6 +63,30 @@ export function heroPoster(): string {
     + `<g fill="none" stroke="#7fa6ff" stroke-width=".5">${arcPaths}</g>${dots}<g>${rays}<circle r="4.2" fill="#5cc2f5"/></g></svg>`;
 }
 
+// The large scale sim's still picture: 90 of the same illustrative paths and their
+// middle line, shown before the canvas starts and when there is no script.
+export function simPoster(): string {
+  const W = 1600, H = 620, ox = (W - 1120) / 2 + 20 + 430 + 56, right = 104, top = 64, bottom = 40;
+  const X = (w: number) => ox + ((W - ox - right) * w) / WEEKS;
+  const Y = (v: number) => top + ((Y_MAX - v) / (Y_MAX - Y_MIN)) * (H - top - bottom);
+  const count = 90;
+  const paths = simulate(count, SCENARIOS[0], 1000);
+  const ranks = finalRanks(paths, count);
+  const n = WEEKS + 1;
+  const lines: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const pts: string[] = [];
+    for (let w = 0; w <= WEEKS; w += 4) pts.push(`${Math.round(X(w))},${Math.round(Y(paths[i * n + w]))}`);
+    lines.push(`<polyline points="${pts.join(" ")}" stroke="${RAMP[Math.min(RAMP.length - 1, Math.floor(ranks[i] * RAMP.length))]}"/>`);
+  }
+  const mid = bands(paths, count)[1];
+  const midPts = Array.from({ length: n }, (_, w) => w).filter((w) => w % 4 === 0).map((w) => `${Math.round(X(w))},${Math.round(Y(mid[w]))}`).join(" ");
+  return `<svg class="sim-poster" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true" focusable="false">`
+    + `<g fill="none" stroke-width="1" opacity=".38" vector-effect="non-scaling-stroke">${lines.join("")}</g>`
+    + `<polyline points="${midPts}" fill="none" stroke="#f4f5fa" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`
+    + `<line x1="${ox}" y1="${top - 18}" x2="${ox}" y2="${H - bottom + 8}" stroke="#a9b6ff" stroke-opacity=".22" vector-effect="non-scaling-stroke"/></svg>`;
+}
+
 function liveStats(): Record<string, number | string> | null {
   const latest = root("engine/output/latest.json");
   const search = root("engine/output/search.json");
@@ -84,6 +109,7 @@ export function paritySite(): Plugin {
         if (ctx.path !== "/index.html") return html;
         return html
           .replace("<!--hero-poster-->", heroPoster())
+          .replace("<!--sim-poster-->", simPoster())
           .replace(/<!--stat:algorithms-->/g, String(countAlgorithms()))
           .replace(/<!--stat:official-->/g, String(countOfficial()));
       },

@@ -171,7 +171,7 @@ function Colors() {
   const vals = useVars(names);
   return (
     <>
-      <PageHeader title="Colour" description="Read live from the site, so switching the theme in Settings changes what you see here. Contrast is measured against the page background." />
+      <PageHeader title="Colour" description="Read live from the site. Parity is dark only, so these are the values every page uses. Contrast is measured against the page background." />
       {COLOR_GROUPS.map(([group, list]) => (
         <Item key={group} title={group}>
           <div className="swatches">
@@ -689,7 +689,7 @@ function Pages() {
         ))}
       </Grid>
       <Section title="Settings row">
-        <SettingsRow label="Theme" help="Dark is the default."><Segmented value="dark" onChange={() => undefined} options={[["dark", "Dark"], ["light", "Light"]]} /></SettingsRow>
+        <SettingsRow label="Starting amount" help="Used for the money figures on strategy pages."><Segmented value="10k" onChange={() => undefined} options={[["10k", "$10,000"], ["100k", "$100,000"]]} /></SettingsRow>
       </Section>
     </>
   );

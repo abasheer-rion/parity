@@ -597,6 +597,7 @@ The dashboard.
 - [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
+- [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

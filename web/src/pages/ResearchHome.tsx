@@ -10,6 +10,8 @@ import { date, num } from "../lib/format";
 import { loadSearch, type SearchDoc } from "../lib/data";
 import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report } from "../lib/types";
+import { researchInsights } from "../lib/insights";
+import { Insights } from "../components/Insights";
 
 export function ResearchHome({ report }: { report: Report }) {
   const docs = useDocs();
@@ -45,6 +47,8 @@ export function ResearchHome({ report }: { report: Report }) {
           ) : null)}
         </div>
       </section>
+
+      <Insights items={researchInsights(report, search)} source={`the ${report.kind === "official" ? "official" : "nightly"} run of ${date(report.generated_at)}${search ? " and the strategy search" : ""}`} />
 
       <div className="rgrid">
         <Reveal as="section" delay={0} className={`pcard ${LIFT}`}>

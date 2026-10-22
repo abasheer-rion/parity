@@ -61,11 +61,10 @@ export function usePrefs(): Prefs {
   return useSyncExternalStore((l) => { listeners.add(l); return () => listeners.delete(l); }, () => current);
 }
 
+/** Parity is dark only (DEC-0021). A saved "light" or "system" choice from before is
+ *  ignored; the light tokens stay in the stylesheets but nothing turns them on. */
 export function applyTheme() {
-  const t = current.theme === "system"
-    ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
-    : current.theme;
-  document.documentElement.dataset.theme = t;
+  document.documentElement.dataset.theme = "dark";
 }
 
 export function toggleBookmark(href: string, label: string) {

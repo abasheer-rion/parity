@@ -69,4 +69,5 @@ INT-0002 asks for a world simulator where people and AI models play out events, 
 ## Referenced by
 
 - [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
+- [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 <!-- backlinks:end -->
