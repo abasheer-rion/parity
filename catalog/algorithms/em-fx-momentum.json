@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0085",
+  "slug": "em-fx-momentum",
+  "name": "Emerging market currency momentum",
+  "family": "momentum-trend",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "momentum",
+    "emerging-markets",
+    "cross-sectional",
+    "limits-to-arbitrage"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2012,
+    "authors": "Menkhoff, Sarno, Schmeling, Schrimpf",
+    "source_title": "Currency momentum strategies (Journal of Financial Economics 106(3), 660-684)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2012.06.009"
+  },
+  "how_it_works": {
+    "simple": "Among emerging market currencies, buy the ones that rose most over the past few months and sell the ones that fell most.",
+    "analogy": "Like backing the players on a hot streak in a league where few scouts are watching.",
+    "precise": "Rank currencies by past excess return over a formation window (1 to 12 months), long winners, short losers, hold one month. Menkhoff et al. find spreads up to about 10% a year before costs across up to 48 currencies, falling to about 4% after full spreads for the best version, and basically nothing among developed currencies after costs."
+  },
+  "rule": "Monthly: rank EM currencies by past 3-month return, long the top third, short the bottom third, equal weights, hold one month.",
+  "data_needed": [
+    "Daily EM spot rates (ECB reference rates)",
+    "EM short-term interest rates for carry credit"
+  ],
+  "economic_rationale": "Limits to arbitrage: high costs and country risk in minor currencies keep slow-moving trends from being traded away.",
+  "why_it_might_fail": "The return lives where costs are highest, so a realistic spread may consume it; the developed-market version already failed in our tests (EXP-0004).",
+  "reported_results": [
+    {
+      "source": "Menkhoff, Sarno, Schmeling and Schrimpf (2012), JFE, best strategy after full spreads",
+      "source_url": "https://faculty.washington.edu/ss1110/IF/Sarno%20Currency%20Momentum%20JFE%20%281%29.pdf",
+      "period": "1976-01 to 2010-01",
+      "market": "Up to 48 currencies",
+      "sharpe": null,
+      "annual_return": 0.04,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"returns for the best strategy (with f, h=1) drop from nearly 10% to about 4% p.a.\" after full spreads. Developed only: \"basically non-existent after transaction costs\"."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Tests directly why our G10 momentum failed; costs are the main risk."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+  }
+}

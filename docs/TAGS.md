@@ -32,6 +32,7 @@ Interest rate differentials and carry trades.
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0011: Emerging market currencies](research/0011-emerging-market-currencies.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
 - [ALG-0002: Carry with volatility targeting and crash protection](algorithms/0002-fx-carry-volatility-timing.md)
 - [ALG-0006: Dollar carry trade](algorithms/0006-fx-dollar-carry.md)
@@ -42,6 +43,8 @@ Interest rate differentials and carry trades.
 - [ALG-0073: Static carry: hold the currencies that usually pay high interest](algorithms/0073-fx-static-carry.md)
 - [ALG-0077: Good carry: G10 carry without the worst currencies](algorithms/0077-fx-good-carry-g10.md)
 - [ALG-0078: Option-hedged carry trade](algorithms/0078-fx-option-hedged-carry.md)
+- [ALG-0083: Emerging market currency carry, cost aware](algorithms/0083-em-fx-carry.md)
+- [ALG-0084: Passive emerging market currency basket](algorithms/0084-em-fx-passive-basket.md)
 
 ## commodities
 
@@ -54,6 +57,8 @@ Oil, gas, metals and their link to currencies.
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
+- [RES-0012: Commodity futures, carry, trend and volatility](research/0012-commodity-futures-carry-trend-and-volatility.md)
+- [RES-0013: Famous currency and commodity traders and what their records teach](research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [ALG-0004: Commodity prices and terms of trade as a currency signal](algorithms/0004-fx-commodity-terms-of-trade.md)
@@ -67,6 +72,8 @@ Oil, gas, metals and their link to currencies.
 - [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
 - [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0086: Selling commodity volatility (variance risk premium)](algorithms/0086-commodity-variance-risk-premium.md)
+- [ALG-0087: Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md)
 - [DAT-0011: EIA Open Data API v2](datasets/0011-eia.md)
 - [DAT-0024: Nasdaq Data Link (formerly Quandl)](datasets/0024-nasdaq-data-link.md)
 - [DAT-0035: World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md)
@@ -210,6 +217,8 @@ Foreign exchange in general.
 - [RES-0004: Exchange rate theory primer](research/0004-exchange-rate-theory-primer.md)
 - [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0011: Emerging market currencies](research/0011-emerging-market-currencies.md)
+- [RES-0013: Famous currency and commodity traders and what their records teach](research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -269,6 +278,10 @@ Foreign exchange in general.
 - [ALG-0079: Currencies weaken in their own trading hours](algorithms/0079-fx-local-hours-time-of-day.md)
 - [ALG-0080: Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md)
 - [ALG-0081: Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md)
+- [ALG-0083: Emerging market currency carry, cost aware](algorithms/0083-em-fx-carry.md)
+- [ALG-0084: Passive emerging market currency basket](algorithms/0084-em-fx-passive-basket.md)
+- [ALG-0085: Emerging market currency momentum](algorithms/0085-em-fx-momentum.md)
+- [ALG-0087: Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)
 - [DAT-0009: Dukascopy historical data](datasets/0009-dukascopy.md)
 - [DAT-0014: Frankfurter](datasets/0014-frankfurter.md)
@@ -310,6 +323,7 @@ Metrics that tell us if something works and where to look next.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
+- [RES-0012: Commodity futures, carry, trend and volatility](research/0012-commodity-futures-carry-trend-and-volatility.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -334,6 +348,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0013: Famous currency and commodity traders and what their records teach](research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -355,6 +370,8 @@ Trend and momentum signals.
 - [HYP-0002: Currency trends persist over months](hypotheses/0002-currency-trends-persist.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0011: Emerging market currencies](research/0011-emerging-market-currencies.md)
+- [RES-0012: Commodity futures, carry, trend and volatility](research/0012-commodity-futures-carry-trend-and-volatility.md)
 - [ALG-0003: Rob Carver trend plus carry futures system (pysystemtrade)](algorithms/0003-fx-carver-trend-carry.md)
 - [ALG-0005: FX cross-sectional momentum](algorithms/0005-fx-cross-sectional-momentum.md)
 - [ALG-0015: FX time-series momentum (trend)](algorithms/0015-fx-time-series-momentum.md)
@@ -365,6 +382,7 @@ Trend and momentum signals.
 - [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
 - [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0085: Emerging market currency momentum](algorithms/0085-em-fx-momentum.md)
 
 ## news
 
@@ -589,6 +607,11 @@ A specific trading idea or its implementation.
 - [ALG-0080: Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md)
 - [ALG-0081: Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md)
 - [ALG-0082: Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md)
+- [ALG-0083: Emerging market currency carry, cost aware](algorithms/0083-em-fx-carry.md)
+- [ALG-0084: Passive emerging market currency basket](algorithms/0084-em-fx-passive-basket.md)
+- [ALG-0085: Emerging market currency momentum](algorithms/0085-em-fx-momentum.md)
+- [ALG-0086: Selling commodity volatility (variance risk premium)](algorithms/0086-commodity-variance-risk-premium.md)
+- [ALG-0087: Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md)
 
 ## ui
 

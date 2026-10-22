@@ -61,5 +61,6 @@ Official run [RUN-000002](../../ledger/runs/RUN-000002.json) of `REG-0002`, reco
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](0003-commodity-currencies-catch-up.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
+- [RES-0012: Commodity futures, carry, trend and volatility](../research/0012-commodity-futures-carry-trend-and-volatility.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

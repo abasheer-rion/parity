@@ -1,0 +1,69 @@
+{
+  "id": "ALG-0084",
+  "slug": "em-fx-passive-basket",
+  "name": "Passive emerging market currency basket",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "emerging-markets",
+    "long-only",
+    "out-of-sample"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2008,
+    "authors": "Gilmore, Hayashi",
+    "source_title": "Emerging Market Currency Excess Returns (NBER WP 14528, 2008; AEJ: Macroeconomics 3(4), 2011)",
+    "source_url": "https://www.nber.org/papers/w14528"
+  },
+  "how_it_works": {
+    "simple": "Own a little of the money of about 20 emerging countries, equally, against the US dollar, and collect their higher interest.",
+    "analogy": "Like an index fund, but for the currencies of fast-growing countries.",
+    "precise": "Equal-weighted long position in one-month forwards (or spot plus interest gap) on about 20 EM currencies against USD, rebalanced monthly and rolled with FX swaps. Gilmore and Hayashi report a Sharpe ratio of 1.34 over January 1999 to September 2008 and estimate rolling costs of about 30 basis points a year."
+  },
+  "rule": "Monthly: equal weight long every EM currency with a price and a rate, funded in USD; total gross exposure 1.",
+  "data_needed": [
+    "Daily EM spot rates (ECB reference rates)",
+    "EM short-term interest rates",
+    "US 3-month rate"
+  ],
+  "economic_rationale": "EM currencies paid a large interest premium and, in the authors' sample, did not depreciate enough to offset it; diversification across regions kept volatility low.",
+  "why_it_might_fail": "The sample (1999 to 2008) was an EM boom with a falling dollar and ends a month before the 2008 crash; the authors worked for or consulted for Banque AIG and used proprietary data.",
+  "reported_results": [
+    {
+      "source": "Gilmore and Hayashi (2008 NBER version), Table 3, EM20 long-only in USD",
+      "source_url": "https://www.nber.org/system/files/working_papers/w14528/w14528.pdf",
+      "period": "1999-01 to 2008-09",
+      "market": "20 EM currencies",
+      "sharpe": 1.34,
+      "annual_return": 0.066,
+      "volatility": 0.049,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Mid rates. Same table: G9 majors 2.8% a year, volatility 7.3%, Sharpe 0.38. The authors estimate rolling costs of about 30 bp a year for EM, doubled in autumn 2008."
+    }
+  ],
+  "post_publication_evidence": "None found by us. Everything after September 2008 is outside the authors' sample.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Simple to rebuild with free data, and the whole post-2008 period is an untouched out-of-sample test of a well-known result."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-21",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+  }
+}

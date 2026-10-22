@@ -177,6 +177,7 @@ Gaps: we did not read a Winton write-up or Lopez de Prado's "10 reasons most ML 
 
 - [RES-0007: Comparing every algorithm we know of](0007-comparing-every-algorithm.md)
 - [RES-0009: Trading myths and what the evidence says](0009-trading-myths-and-what-the-evidence-says.md)
+- [RES-0013: Famous currency and commodity traders and what their records teach](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

@@ -43,5 +43,6 @@ None yet.
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [RES-0011: Emerging market currencies](../research/0011-emerging-market-currencies.md)
 - [ALG-0006: Dollar carry trade](../algorithms/0006-fx-dollar-carry.md)
 <!-- backlinks:end -->
