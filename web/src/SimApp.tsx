@@ -17,9 +17,18 @@ export function SimApp() {
   return <AppGuard>{() => <SimShell />}</AppGuard>;
 }
 
+// Parity opens Sim World in a new tab with rel="noopener", so window.opener is usually
+// empty; a tab that started with this page as its only history entry was opened that way.
+const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+
 function goBack() {
-  // Opened from Parity in a new tab: close it, and the person is back where they were.
-  if (window.opener && !window.opener.closed) { window.close(); return; }
+  // Opened from Parity in a new tab: close it, and the person is back where they were. If
+  // the browser refuses to close it, go to the research home instead.
+  if (OPENED_AS_TAB) {
+    window.close();
+    window.setTimeout(() => { window.location.href = researchUrl(); }, 250);
+    return;
+  }
   window.location.href = researchUrl();
 }
 
