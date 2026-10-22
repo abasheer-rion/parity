@@ -117,7 +117,7 @@ def keychain(name: str) -> str:
 
 token = keychain("vault:supabase-access-token")
 if smtp:
-    body["smtp_pass"] = keychain("resend-api-key")
+    body["smtp_pass"] = keychain("vault:resend-api-key")
 
 # Save the current settings first, so any change can be undone (mode 600, outside the
 # repo, with the SMTP password left out).
