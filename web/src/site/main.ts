@@ -6,6 +6,7 @@
 //   - the app preview loops only while it is on screen
 //   - cards lean toward the pointer
 //   - the 3D hero loads after first paint, never for people who ask for reduced motion
+//   - the large scale sim loads when its section comes near the screen
 // The rules are in the motion decision (DEC-0017).
 // Lenis is imported directly (not through lib/scroll) so no stylesheet is linked;
 // its few rules are inlined in index.html.
@@ -73,6 +74,9 @@ fetch("/stats.json", { cache: "no-cache" })
   .then((r) => (r.ok ? r.json() : null))
   .then((s: Record<string, number> | null) => {
     if (!s) return;
+    // Each tested strategy is rerun on 1,000 reshuffled histories and 500 with its
+    // timing scrambled (N_BOOTSTRAP and N_PLACEBO in engine/src/parity/gauntlet.py).
+    if (typeof s.strategies_tested === "number") s.histories_per_run = s.strategies_tested * 1500;
     for (const el of counters) {
       const key = el.dataset.stat;
       const n = key ? s[key] : undefined;
@@ -124,6 +128,31 @@ if (finePointer && !reduce) {
   }
 }
 
+// After the page has loaded and the browser is idle.
+const idle = (f: () => void) => (window.requestIdleCallback ? window.requestIdleCallback(f, { timeout: 2000 }) : setTimeout(f, 200));
+const afterLoad = (f: () => void) => {
+  if (document.readyState === "complete") idle(f);
+  else window.addEventListener("load", () => idle(f), { once: true });
+};
+
+// The large scale sim, loaded only when its section comes near the screen. With
+// reduced motion it draws one still picture. Rules: DEC-0020.
+const simStage = document.getElementById("sim-stage");
+const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+if (simStage && !saveData && "IntersectionObserver" in window) {
+  const drawn = document.getElementById("sim-drawn");
+  const scn = document.getElementById("sim-scn");
+  const load = () => import("./paths").then(({ startSim }) => startSim(simStage, {
+    reduce,
+    onScenario: (label) => { if (scn) scn.textContent = `Illustrative paths: ${label.toLowerCase()}`; },
+    onDrawn: (n) => { if (drawn) drawn.textContent = fmt(n); },
+  })).catch(() => undefined);
+  const near = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { near.disconnect(); afterLoad(load); }
+  }, { rootMargin: "400px 0px" });
+  near.observe(simStage);
+}
+
 // The 3D hero, after first paint and only where it can run well.
 function webgl(): boolean {
   try {
@@ -132,13 +161,9 @@ function webgl(): boolean {
   } catch { return false; }
 }
 const art = document.getElementById("hero-art");
-const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
 if (art && !reduce && !saveData) {
-  const go = () => {
+  afterLoad(() => {
     if (!webgl()) return;
     import("./hero3d").then(({ startHero }) => startHero(art, document.querySelector<HTMLElement>(".hero") ?? art)).catch(() => undefined);
-  };
-  const idle = (f: () => void) => (window.requestIdleCallback ? window.requestIdleCallback(f, { timeout: 2000 }) : setTimeout(f, 200));
-  if (document.readyState === "complete") idle(go);
-  else window.addEventListener("load", () => idle(go), { once: true });
+  });
 }
