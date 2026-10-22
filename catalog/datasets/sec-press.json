@@ -1,0 +1,47 @@
+{
+  "id": "DAT-0046",
+  "slug": "sec-press",
+  "name": "SEC press releases",
+  "provider": "US Securities and Exchange Commission",
+  "category": "news-sentiment",
+  "url": "https://www.sec.gov/newsroom/press-releases",
+  "api_docs_url": "https://www.sec.gov/about/rss-feeds",
+  "access": "free-no-key",
+  "rate_limits": "At most 10 requests a second, and automated callers must declare who they are in the user agent. https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+  "history_start": "The feed holds the latest 25 releases.",
+  "frequency": [
+    "as released"
+  ],
+  "what_it_has": "SEC press releases: enforcement actions, rules and statements.",
+  "simple": "The US stock market regulator's announcements.",
+  "point_in_time": true,
+  "license_terms": "Public domain US government work. Callers must send a user agent with a name and contact email. https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+  "quality_notes": "Runs only when PARITY_CONTACT is set, because the SEC asks callers to identify themselves.",
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.sec"
+  ],
+  "relevance": {
+    "score": 2,
+    "reason": "Rarely moves currencies; useful context for stocks."
+  },
+  "sources": [
+    "https://www.sec.gov/news/pressreleases.rss",
+    "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data"
+  ],
+  "news_use": {
+    "parity_source_ids": [
+      "sec"
+    ],
+    "feed_url": "https://www.sec.gov/news/pressreleases.rss",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "None required",
+    "limits": "10 requests a second; declared user agent",
+    "terms_quote": "Sample Company Name AdminContact@<sample company domain>.com",
+    "terms_url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+    "checked": "2026-10-21"
+  },
+  "verified": true,
+  "last_checked": "2026-10-21"
+}

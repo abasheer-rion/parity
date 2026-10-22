@@ -1,0 +1,5 @@
+{"articles": [
+ {"url": "https://example.com/markets/oil-flat", "url_mobile": "", "title": "Oil Flat on Mideast Developments", "seendate": "20261021T181500Z", "socialimage": "", "domain": "example.com", "language": "English", "sourcecountry": "Canada"},
+ {"url": "https://example.org/local/fair", "url_mobile": "", "title": "County fair opens this weekend", "seendate": "20261021T170000Z", "socialimage": "", "domain": "example.org", "language": "English", "sourcecountry": "United States"},
+ {"url": "", "title": "No link, dropped", "seendate": "20261021T170000Z", "domain": "example.net"}
+]}

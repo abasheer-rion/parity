@@ -3,18 +3,18 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-783 sources. 117 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+868 sources. 126 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 226 |
-| [Preprints and working papers](#preprints-and-working-papers) | 34 |
+| [Papers](#papers) | 263 |
+| [Preprints and working papers](#preprints-and-working-papers) | 41 |
 | [Books](#books) | 20 |
-| [Datasets](#datasets) | 53 |
+| [Datasets](#datasets) | 59 |
 | [Software](#software) | 61 |
-| [Web pages](#web-pages) | 318 |
+| [Web pages](#web-pages) | 349 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 16 |
+| [Regulators](#regulators) | 20 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -248,6 +248,12 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Beckmann, Joscha; Czudaj, Robert L.; Arora, Vipin (2020). The relationship between oil prices and exchange rates: Revisiting theory and evidence. *Energy Economics 88, 104772*. doi:10.1016/j.eneco.2020.104772 <https://doi.org/10.1016/j.eneco.2020.104772>. <https://ideas.repec.org/a/eee/eneeco/v88y2020ics0140988320301122.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### bekaert2019
+
+Bekaert, Geert; Panayotov, George (2019). Good Carry, Bad Carry. *Journal of Financial and Quantitative Analysis 55(4), 1063-1094*. doi:10.1017/s0022109019000887 <https://doi.org/10.1017/s0022109019000887>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### bekaert2020
 
@@ -722,6 +728,12 @@ Hasbrouck, Joel; Levich, Richard M. (2021). Network structure and pricing in the
 Also at: <https://doi.org/10.1016/j.jfineco.2021.04.013>.
 
 Note: Read for RES-0010 (abstract page).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### hassan2018
+
+Hassan, Tarek A; Mano, Rui C (2018). Forward and Spot Exchange Rates in a Multi-Currency World\*. *The Quarterly Journal of Economics 134(1), 397-450*. doi:10.1093/qje/qjy026 <https://doi.org/10.1093/qje/qjy026>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
@@ -1657,6 +1669,30 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md).
 
+### url-0822d5d4
+
+Foreign exchange market structure, players and evolution. (n.d.). <https://ideas.repec.org/p/bno/worpap/2011_10.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-1155e02b
+
+Variance risk premiums and the forward premium puzzle. (n.d.). <https://ideas.repec.org/a/eee/jfinec/v124y2017i2p415-440.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-13c7bdea
+
+Foreign Exchange Fixings and Returns around the Clock. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v79y2024i1p541-578.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### url-23fdb219
 
 The disappearing pre-FOMC announcement drift. (n.d.). <https://ideas.repec.org/a/eee/finlet/v40y2021ics1544612320315956.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1664,6 +1700,110 @@ The disappearing pre-FOMC announcement drift. (n.d.). <https://ideas.repec.org/a
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+
+### url-26392eda
+
+Last look. (n.d.). <https://ideas.repec.org/a/taf/quantf/v17y2017i7p1057-1070.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-33d8e304
+
+Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v54y1999i5p1647-1691.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-4e1dcf1c
+
+If You're So Smart: John Maynard Keynes and Currency Speculation in the Interwar Years. (n.d.). <https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EDE2AA44C9394C69B54283D052B96B1E/S0022050716000589a.pdf/div-class-title-if-you-re-so-smart-john-maynard-keynes-and-currency-speculation-in-the-interwar-years-div.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-4e5ef3df
+
+Discriminatory Pricing of Over-the-Counter Derivatives. (n.d.). <https://ideas.repec.org/a/inm/ormnsc/v67y2021i11p6660-6677.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-535d07e5
+
+Statistical learning and exchange rate forecasting. (n.d.). <https://ideas.repec.org/a/eee/intfor/v36y2020i4p1260-1289.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-56692a57
+
+Empirical evidence on the currency carry trade, 1900-2012. (n.d.). <https://ideas.repec.org/a/eee/jimfin/v51y2015icp370-389.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-6111919c
+
+Crash-neutral currency carry trades. (n.d.). <https://ideas.repec.org/a/eee/jfinec/v113y2014i3p325-347.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-6358291c
+
+The effects of conventional and unconventional monetary policy on exchange rates. (n.d.). <https://ideas.repec.org/a/eee/inecon/v118y2019icp419-447.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-70789a51
+
+Is there momentum or reversal in weekly currency returns? (n.d.). <https://ideas.repec.org/a/eee/jimfin/v45y2014icp38-60.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-709df757
+
+The forward premium puzzle: different tales from developed and emerging economies. (n.d.). <https://ideas.repec.org/a/eee/inecon/v51y2000i1p115-144.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-7279961e
+
+What determines transaction costs in foreign exchange markets? (n.d.). <https://ideas.repec.org/a/ijf/ijfiec/v13y2008i1p14-25.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-75a7f4f3
+
+Puzzles in the Tokyo fixing in the forex market: Order imbalances and Bank pricing. (n.d.). <https://ideas.repec.org/a/eee/inecon/v109y2017icp214-234.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-762770cc
+
+Stepwise Multiple Testing as Formalized Data Snooping. (n.d.). <https://ideas.repec.org/a/ecm/emetrp/v73y2005i4p1237-1282.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-7a9375e5
 
@@ -1673,6 +1813,102 @@ Note: Cited in this repo as: BIS WP 1087.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-7e913234
+
+Currency Orders and Exchange Rate Dynamics: An Explanation for the Predictive Success of Technical Analysis. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v58y2003i5p1791-1819.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-7ebfee87
+
+Predictability of currency carry trades and asset pricing implications. (n.d.). <https://ideas.repec.org/a/eee/jfinec/v110y2013i1p139-163.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-8931a56c
+
+Exchange Rate Reconnect. (n.d.). <https://ideas.repec.org/a/tpr/restat/v104y2022i4p845-855.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-8b46e4f0
+
+Do Momentum-Based Strategies Still Work in Foreign Currency Markets? (n.d.). <https://ideas.repec.org/a/cup/jfinqa/v38y2003i02p425-447_00.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-aa3cef37
+
+When Carry Goes Bad: The Magnitude, Causes, and Duration of Currency Carry Unwinds. (n.d.). <https://ideas.repec.org/a/taf/ufajxx/v73y2017i1p121-144.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-bbbf02a9
+
+Have capital market anomalies attenuated in the recent era of high liquidity and trading activity? (n.d.). <https://ideas.repec.org/a/eee/jaecon/v58y2014i1p41-58.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-c243508f
+
+Global Political Risk and Currency Momentum. (n.d.). <https://ideas.repec.org/a/cup/jfinqa/v53y2018i05p2227-2259_00.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-c495cf55
+
+Rise of the Machines: Algorithmic Trading in the Foreign Exchange Market. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v69y2014i5p2045-2084.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-cd4e8812
+
+The reaction of asset markets to Swiss National Bank communication. (n.d.). <https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-d3339792
+
+Global currency hedging with common risk factors. (n.d.). <https://ideas.repec.org/a/eee/jfinec/v136y2020i3p780-805.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-e1149e00
+
+Exchange rate forecasting, order flow and macroeconomic information. (n.d.). <https://ideas.repec.org/a/eee/inecon/v80y2010i1p72-88.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-e541b450
+
+Global Currency Hedging. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v65y2010i1p87-121.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### url-e9eb1f61
 
 No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/14851/13/FXVALUE_Rev3_cepr.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1680,6 +1916,62 @@ No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/14851/13/FXV
 Note: Cited in this repo as: Menkhoff et al. 2017, Table 4 (CEPR working paper version).
 
 Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md).
+
+### url-e9eb922f
+
+Liquidity in the Foreign Exchange Market: Measurement, Commonality, and Risk Premiums. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v68y2013i5p1805-1841.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-ed9ca038
+
+Network structure and pricing in the FX market. (n.d.). <https://ideas.repec.org/a/eee/jfinec/v141y2021i2p705-729.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-ef9479cf
+
+Understanding FX Liquidity. (n.d.). <https://ideas.repec.org/a/oup/rfinst/v28y2015i11p3073-3108..html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-f339872c
+
+Informed trade in spot foreign exchange markets: an empirical investigation. (n.d.). <https://ideas.repec.org/a/eee/inecon/v61y2003i2p307-329.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-fa7fe46a
+
+Currency momentum, carry trade, and market illiquidity. (n.d.). <https://ideas.repec.org/a/eee/jbfina/v67y2016icp1-11.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-ff8e37f5
+
+Do Professional Currency Managers Beat the Benchmark? (n.d.). <https://ideas.repec.org/a/taf/ufajxx/v64y2008i5p18-32.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-ffbdbdf5
+
+Segmentation and time-of-day patterns in foreign exchange markets. (n.d.). <https://ideas.repec.org/a/eee/jbfina/v33y2009i12p2199-2206.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### vanguardresearch2023
 
@@ -1704,6 +1996,12 @@ Note: Read for RES-0010 (abstract page).
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ## Preprints and working papers
+
+### andersen1996
+
+Andersen, Torben; Bollerslev, Tim (1996). DM-Dollar Volatility: Intraday Activity Patterns, Macroeconomic Announcements, and Longer Run Dependencies. *NBER Working Paper w5783*. doi:10.3386/w5783 <https://doi.org/10.3386/w5783>. <https://www.nber.org/papers/w5783>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### andersen2002
 
@@ -1805,6 +2103,12 @@ Also at: <https://www.nber.org/system/files/working_papers/w7317/w7317.pdf>.
 
 Cited in: [catalog/algorithms/fx-order-flow.json](../catalog/algorithms/fx-order-flow.json), [ALG-0013](algorithms/0013-fx-order-flow.md).
 
+### farhi2008
+
+Farhi, Emmanuel; Gabaix, Xavier (2008). Rare Disasters and Exchange Rates. *NBER Working Paper w13805*. doi:10.3386/w13805 <https://doi.org/10.3386/w13805>. <https://www.nber.org/papers/w13805>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### filippou2020
 
 Filippou, Rapach, Taylor and Zhou (2020). Exchange Rate Prediction with Machine Learning and a Smart Carry Trade Portfolio. *SSRN working paper / CEPR DP15305*. doi:10.2139/ssrn.3696388 <https://doi.org/10.2139/ssrn.3696388>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3696388>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1859,17 +2163,35 @@ He, Songrun; Manela, Asaf; Ross, Omri; von Wachter, Victor (2022). Fundamentals 
 
 Cited in: [catalog/algorithms/crypto-perp-funding-carry.json](../catalog/algorithms/crypto-perp-funding-carry.json), [ALG-0026](algorithms/0026-crypto-perp-funding-carry.md).
 
+### kelly2024a
+
+Kelly, Bryan; Malamud, Semyon; Zhou, Kangying (2024). The Virtue of Complexity in Return Prediction. *NBER Working Paper w30217*. doi:10.3386/w30217 <https://doi.org/10.3386/w30217>. <https://www.nber.org/system/files/working_papers/w30217/w30217.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [catalog/algorithms/complex-ml-market-timing.json](../catalog/algorithms/complex-ml-market-timing.json), [ALG-0082](algorithms/0082-complex-ml-market-timing.md).
+
 ### koijen2013
 
 Koijen, Ralph S.J.; Moskowitz, Tobias; Pedersen, Lasse Heje; Vrugt, Evert (2013). Carry. *NBER Working Paper w19325*. doi:10.3386/w19325 <https://doi.org/10.3386/w19325>. <https://www.nber.org/system/files/working_papers/w19325/w19325.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md).
 
+### lettau2013
+
+Lettau, Martin; Maggiori, Matteo; Weber, Michael (2013). Conditional Risk Premia in Currency Markets and Other Asset Classes. *NBER Working Paper w18844*. doi:10.3386/w18844 <https://doi.org/10.3386/w18844>. <https://www.nber.org/papers/w18844>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### lim2016
 
 Lim, Yanyali and Savidge (2016). Ichimoku Kinko Hyo books, commonly dated to 1969. *date as usually cited, not verified*. doi:10.2139/ssrn.2628581 <https://doi.org/10.2139/ssrn.2628581>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2628581>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/ichimoku-cloud.json](../catalog/algorithms/ichimoku-cloud.json), [ALG-0062](algorithms/0062-ichimoku-cloud.md).
+
+### linnainmaa2016
+
+Linnainmaa, Juhani; Roberts, Michael (2016). The History of the Cross Section of Stock Returns. *NBER Working Paper w22894*. doi:10.3386/w22894 <https://doi.org/10.3386/w22894>. <https://www.nber.org/papers/w22894>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### liu2019
 
@@ -1901,6 +2223,12 @@ Lustig, Hanno; Roussanov, Nikolai; Verdelhan, Adrien (2008). Common Risk Factors
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md).
 
+### lustig2013
+
+Lustig, Hanno; Stathopoulos, Andreas; Verdelhan, Adrien (2013). The Term Structure of Currency Carry Trade Risk Premia. *NBER Working Paper w19623*. doi:10.3386/w19623 <https://doi.org/10.3386/w19623>. <https://www.nber.org/papers/w19623>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### mclean2012
 
 McLean, R. David; Pontiff, Jeffrey (2012). Does Academic Research Destroy Stock Return Predictability? *SSRN working paper*. doi:10.2139/ssrn.2156623 <https://doi.org/10.2139/ssrn.2156623>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1912,6 +2240,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 Moreira, Alan; Muir, Tyler (2016). Volatility Managed Portfolios. *NBER Working Paper w22208*. doi:10.3386/w22208 <https://doi.org/10.3386/w22208>. <https://www.nber.org/system/files/working_papers/w22208/w22208.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md).
+
+### novymarx2014
+
+Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Trading Costs. *NBER Working Paper w20721*. doi:10.3386/w20721 <https://doi.org/10.3386/w20721>. <https://www.nber.org/papers/w20721>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-c8c51ac4
 
@@ -2177,6 +2511,12 @@ CLS FX volume data (CLSMarketData). (n.d.). *CLS Group*. <https://www.cls-group.
 
 Cited in: [catalog/datasets/cls-fx-volume.json](../catalog/datasets/cls-fx-volume.json), [DAT-0040](datasets/0040-cls-fx-volume.md).
 
+### url-524f65ce
+
+CFTC press releases. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/PressRoom/PressReleases>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
+
 ### url-55a5dcdd
 
 IMF Data API (SDMX 2.1 and 3.0). (n.d.). *International Monetary Fund*. <https://data.imf.org>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2291,6 +2631,12 @@ BLS Public Data API. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.g
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
 
+### url-b8c1580d
+
+ECB press releases. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/press/pr/html/index.en.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/ecb-press.json](../catalog/datasets/ecb-press.json), [DAT-0043](datasets/0043-ecb-press.md).
+
 ### url-bbcbd739
 
 Our calculation from AQR Time Series Momentum factors dataset (TSMOM^CM). (n.d.). *aqr.com*. <https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Time-Series-Momentum-Factors-Monthly.xlsx>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2303,6 +2649,12 @@ Our calculation from Kenneth French data library, market excess return. (n.d.). 
 
 Cited in: [catalog/algorithms/sell-in-may-halloween.json](../catalog/algorithms/sell-in-may-halloween.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0047](algorithms/0047-sell-in-may-halloween.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md).
 
+### url-cb1951dd
+
+Bank of Japan what's new. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
+
 ### url-cbb6f303
 
 HistData.com. (n.d.). *HistData.com*. <https://www.histdata.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2314,6 +2666,12 @@ Cited in: [catalog/datasets/histdata.json](../catalog/datasets/histdata.json), [
 Tiingo. (n.d.). *Tiingo Inc*. <https://www.tiingo.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/tiingo.json](../catalog/datasets/tiingo.json), [DAT-0029](datasets/0029-tiingo.md).
+
+### url-cd86f8e3
+
+SEC press releases. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/newsroom/press-releases>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
 
 ### url-d2d4d776
 
@@ -2333,6 +2691,12 @@ ISO 4217 currency code lists. (n.d.). *SIX Group for ISO*. <https://www.six-grou
 
 Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
 
+### url-d4d51a0f
+
+Federal Reserve press releases. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/newsevents/pressreleases.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/federal-reserve-press.json), [DAT-0042](datasets/0042-federal-reserve-press.md).
+
 ### url-d5ca58db
 
 Dukascopy historical data. (n.d.). *Dukascopy Bank SA*. <https://www.dukascopy.com/swiss/english/marketwatch/historical/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2350,6 +2714,12 @@ Cited in: [catalog/algorithms/dual-momentum.json](../catalog/algorithms/dual-mom
 Alpaca paper trading. (n.d.). *Alpaca Markets*. <https://alpaca.markets>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpaca.json](../catalog/datasets/alpaca.json), [DAT-0001](datasets/0001-alpaca.md).
+
+### url-dee114f4
+
+Bank of England news. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/news>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md).
 
 ### url-df8416d6
 
@@ -2833,6 +3203,12 @@ API FAQ. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developer
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-04a2bcae
+
+No title recorded. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/rss/press.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/ecb-press.json](../catalog/datasets/ecb-press.json), [DAT-0043](datasets/0043-ecb-press.md).
+
 ### url-04a5fa97
 
 Financial, Economic and Alternative Data | Nasdaq Data Link. (n.d.). *Nasdaq*. <https://docs.data.nasdaq.com/docs/rate-limits-1>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
@@ -2868,6 +3244,14 @@ Cited in: [catalog/events/soleimani-strike-2020.json](../catalog/events/soleiman
 2002-2004 SARS outbreak. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2002%E2%80%932004_SARS_outbreak>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/sars-global-alert-2003.json](../catalog/events/sars-global-alert-2003.json).
+
+### url-089f8a86
+
+Can Machines 'Learn' Finance? (n.d.). *aqr.com*. <https://www.aqr.com/Insights/Research/Journal-Article/Can-Machines-Learn-Finance>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-08ba8307
 
@@ -2991,6 +3375,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-15cf55b7
+
+No title recorded. (n.d.). *Marketaux (APILayer)*. <https://api.marketaux.com/v1/news/all>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md).
+
 ### url-15f80803
 
 IMF Data API (SDMX 2.1 and 3.0): API documentation. (n.d.). *International Monetary Fund*. <https://data.imf.org/en/Resource-Pages/IMF-API>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -3008,6 +3398,12 @@ Cited in: [catalog/events/svb-collapse-2023.json](../catalog/events/svb-collapse
 GDELT Project: API documentation. (n.d.). *The GDELT Project*. <https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-17da50ef
+
+No title recorded. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/about/copyright.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
 
 ### url-18852863
 
@@ -3038,6 +3434,12 @@ Terms & Conditions | World Bank Group. (n.d.). *World Bank*. <https://www.worldb
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
+
+### url-1bb17f95
+
+Federal Reserve press releases: API documentation. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/feeds/feeds.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/federal-reserve-press.json), [DAT-0042](datasets/0042-federal-reserve-press.md).
 
 ### url-1bd4b1fd
 
@@ -3327,6 +3729,12 @@ Note: Intro course: pandas, backtesting, simple ML and RL.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### url-3d35d55d
+
+No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=NEWS_SENTIMENT>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
+
 ### url-3f7c16f4
 
 Frankfurter: API documentation. (n.d.). *Frankfurter (open source project)*. <https://frankfurter.dev/docs/>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -3409,6 +3817,12 @@ Macrosynergy JPMaQS sample (Kaggle): API documentation. (n.d.). *Macrosynergy an
 
 Cited in: [catalog/datasets/jpmaqs-kaggle.json](../catalog/datasets/jpmaqs-kaggle.json), [DAT-0020](datasets/0020-jpmaqs-kaggle.md).
 
+### url-497ae06b
+
+No title recorded. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/services/disclaimer/html/index.en.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/ecb-press.json](../catalog/datasets/ecb-press.json), [DAT-0043](datasets/0043-ecb-press.md).
+
 ### url-497cf0e6
 
 This Blog is Systematic: Simulating my futures system. (n.d.). *qoppac.blogspot.com*. <https://qoppac.blogspot.com/2015/03/simulating-my-futures-system.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3425,11 +3839,25 @@ Note: Linked in this repo as: None.
 
 Cited in: [REF-0003](reference/0003-data-sources.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-4b81c502
+
+No title recorded. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/rss/news>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md).
+
 ### url-4c5ba82d
 
 2011 Tohoku earthquake and tsunami. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/tohoku-earthquake-2011.json](../catalog/events/tohoku-earthquake-2011.json).
+
+### url-4cbe2e7e
+
+Backtesting. (n.d.). *people.duke.edu*. <https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-4dd21709
 
@@ -3446,6 +3874,14 @@ Are carry, momentum and value still there in currencies? | Zenodo. (n.d.). *zeno
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md).
+
+### url-501bccdc
+
+A Test for Superior Predictive Ability. (n.d.). *cdr.lib.unc.edu*. <https://cdr.lib.unc.edu/downloads/zp38wf793>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-506b21a4
 
@@ -3482,6 +3918,12 @@ Craftsmanship Alpha: An Application to Style Investing. (n.d.). *aqr.com*. <http
 Note: Linked in this repo as: Israel, Jiang and Ross, 2017.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-52da15bf
+
+SEC press releases: API documentation. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/about/rss-feeds>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
 
 ### url-535ac4fa
 
@@ -3528,6 +3970,12 @@ Yahoo Terms of Service | Yahoo. (n.d.). *Yahoo*. <https://legal.yahoo.com/us/en/
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.json), [DAT-0036](datasets/0036-yahoo-chart.md).
+
+### url-55bd9225
+
+ECB press releases: API documentation. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/home/html/rss.en.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/ecb-press.json](../catalog/datasets/ecb-press.json), [DAT-0043](datasets/0043-ecb-press.md).
 
 ### url-569967bd
 
@@ -3614,6 +4062,12 @@ JPMorgan Secures $500m Capacity in Numerai Following Breakthrough Year. (n.d.). 
 Note: Linked in this repo as: Numerai blog.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-5ffc60a9
+
+CFTC press releases: API documentation. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/RSS/index.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
 ### url-620766d4
 
@@ -3789,6 +4243,14 @@ Statement on Monetary Policy. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en
 
 Cited in: [catalog/events/boj-yield-curve-tweak-2022.json](../catalog/events/boj-yield-curve-tweak-2022.json).
 
+### url-73a57055
+
+Technical Trading-Rule Profitability, Data Snooping, and Reality Check: Evidence from the Foreign Exchange Market. (n.d.). *api.openalex.org*. <https://api.openalex.org/works/doi:10.1353/mcb.2007.0006>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### url-73f73992
 
 third party guide. (n.d.). *bluecapitaltrading.com*. <https://www.bluecapitaltrading.com/products/free-historical-data/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -3806,6 +4268,12 @@ Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json),
 Liberation Day tariffs. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Liberation_Day_tariffs>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/liberation-day-tariffs-2025.json](../catalog/events/liberation-day-tariffs-2025.json).
+
+### url-776bd24f
+
+No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/api/v2/doc/doc>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
 ### url-777e59be
 
@@ -4009,6 +4477,14 @@ No title recorded. (n.d.). *Frankfurter (open source project)*. <https://api.fra
 
 Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.json), [DAT-0014](datasets/0014-frankfurter.md).
 
+### url-88e3f122
+
+Retaining alpha: The effect of trade size and rebalancing frequency on FX strategy returns. (n.d.). *ifo.de*. <https://www.ifo.de/DocDL/cesifo1_wp8143.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### url-89416d3a
 
 API Documentation | Finnhub - Free APIs for realtime stock, forex, and cryptocurrency. Company fundamentals, economic data, and alternative data. (n.d.). *finnhub.io*. <https://finnhub.io/docs/api/market-news>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4028,6 +4504,14 @@ Cited in: [catalog/events/opec-no-cut-2014.json](../catalog/events/opec-no-cut-2
 2024 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2024_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/trump-election-2024.json](../catalog/events/trump-election-2024.json).
+
+### url-8aa710d6
+
+A Reality Check for Data Snooping. (n.d.). *econometricsociety.org*. <https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
 ### url-8bc5888a
 
@@ -4074,6 +4558,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Finnhub: API documentation. (n.d.). *Finnhub Stock API*. <https://finnhub.io/docs/api>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md).
+
+### url-90a20434
+
+Bank of Japan what's new: API documentation. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/rss/index.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
 
 ### url-91b0ceac
 
@@ -4169,6 +4659,12 @@ No title recorded. (n.d.). *Yahoo*. <https://query2.finance.yahoo.com/v8/finance
 
 Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.json), [DAT-0036](datasets/0036-yahoo-chart.md).
 
+### url-9d304e83
+
+Bank of England news: API documentation. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/rss>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md).
+
 ### url-9d8bddf7
 
 Chague, De-Losso and Giovannetti, 2020, SSRN 3423101. (n.d.). *ebicapital.nl*. <https://ebicapital.nl/wp-content/uploads/2022/05/day-trading.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4215,6 +4711,12 @@ Note: Linked in this repo as: Oct 2025 post.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-a435e7b6
+
+No title recorded. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/disclaimer.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/federal-reserve-press.json), [DAT-0042](datasets/0042-federal-reserve-press.md).
+
 ### url-a48ee52b
 
 Zenbot Reviews in 2026. (n.d.). *sourceforge.net*. <https://sourceforge.net/software/product/Zenbot/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4258,6 +4760,12 @@ How Quantopian's open-source investment dream died | The Business of Business. (
 Note: Linked in this repo as: Business of Business.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-a6b501e9
+
+No title recorded. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/feeds/press_all.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/federal-reserve-press.json), [DAT-0042](datasets/0042-federal-reserve-press.md).
 
 ### url-a6d17d96
 
@@ -4304,6 +4812,12 @@ Cited in: [catalog/events/brexit-vote-2016.json](../catalog/events/brexit-vote-2
 World Bank Indicators API and Pink Sheet: API documentation. (n.d.). *World Bank*. <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
+
+### url-aac9c306
+
+No title recorded. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/legal>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md).
 
 ### url-ab44c543
 
@@ -4415,6 +4929,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-b433e213
+
+Forex trading and the WMR Fix. (n.d.). *mpra.ub.uni-muenchen.de*. <https://mpra.ub.uni-muenchen.de/81583/1/MPRA_paper_81583.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+
+Note: Linked in this repo as: None.
+
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
 ### url-b4a0e52d
 
 About Alpaca. (n.d.). *Alpaca Markets*. <https://docs.alpaca.markets/us/docs/about-alpaca>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4503,6 +5025,18 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-c09ad418
+
+No title recorded. (n.d.). *US Bureau of Economic Analysis*. <https://apps.bea.gov/rss/rss.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md).
+
+### url-c0d8d955
+
+No title recorded. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/rss/whatsnew.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
+
 ### url-c16cd0db
 
 Numerai tournament documentation. (n.d.). *docs.numer.ai*. <https://docs.numer.ai/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4576,6 +5110,18 @@ Coursera (n.d.). Investment Management with Python and Machine Learning. *online
 Note: 4 courses on portfolio construction and ML in Python.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### url-ccf66f37
+
+No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/feed/bls_latest.rss>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
+
+### url-cf0d35a8
+
+No title recorded. (n.d.). *The GDELT Project*. <https://www.gdeltproject.org/about.html#termsofuse>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
 ### url-d125f474
 
@@ -4698,6 +5244,12 @@ Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json
 Capture of the Crimean Parliament. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/crimea-seizure-2014.json](../catalog/events/crimea-seizure-2014.json).
+
+### url-e1d72ae9
+
+No title recorded. (n.d.). *US Bureau of Economic Analysis*. <https://www.bea.gov/help/guidelines-for-citing-bea>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md).
 
 ### url-e319ebc8
 
@@ -4903,6 +5455,12 @@ Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](
 
 Cited in: [catalog/events/north-korea-missile-over-japan-2017.json](../catalog/events/north-korea-missile-over-japan-2017.json).
 
+### url-f8d5aa84
+
+No title recorded. (n.d.). *Marketaux (APILayer)*. <https://www.marketaux.com/tos>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md).
+
 ### url-f90289be
 
 ECB Data Portal (SDMX web service): API documentation. (n.d.). *European Central Bank*. <https://data.ecb.europa.eu/help/api/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4942,6 +5500,18 @@ Cited in: [catalog/algorithms/numerai-crowdsourced-ensemble.json](../catalog/alg
 Oil Shock of 1973-74. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/oil-shock-of-1973-74>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/arab-oil-embargo-1973.json](../catalog/events/arab-oil-embargo-1973.json).
+
+### url-fcc4668f
+
+No title recorded. (n.d.). *US Energy Information Administration*. <https://www.eia.gov/rss/todayinenergy.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/eia.json](../catalog/datasets/eia.json), [DAT-0011](datasets/0011-eia.md).
+
+### url-fccdcae6
+
+No title recorded. (n.d.). *Finnhub Stock API*. <https://finnhub.io/api/v1/news>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md).
 
 ### url-fe9b566b
 
@@ -5351,6 +5921,18 @@ CFTC: AI won't turn trading bots into money machines, Jan 2024. (n.d.). *cftc.go
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-0499b63c
+
+No title recorded. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/news/pressreleases.rss>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
+
+### url-051f779e
+
+No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/WebPolicy/index.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
+
 ### url-1de9cd7b
 
 complaint PDF. (n.d.). *ftc.gov*. <https://www.ftc.gov/system/files/ftc_gov/pdf/2023198WarriorTradingComplaint_0.pdf>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
@@ -5378,6 +5960,18 @@ ESMA agrees to prohibit binary options and restrict CFDs to protect retail inves
 Note: Linked in this repo as: ESMA product intervention press release, 27 March 2018.
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### url-4e8af84d
+
+No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/RSS/RSSGP/rssgp.xml>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
+
+### url-7a3d5497
+
+No title recorded. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
 
 ### url-89c953ef
 

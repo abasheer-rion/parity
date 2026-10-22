@@ -19731,6 +19731,1989 @@
         "source": "arxiv",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "andersen1996",
+      "type": "preprint",
+      "authors": [
+        "Andersen, Torben",
+        "Bollerslev, Tim"
+      ],
+      "year": 1996,
+      "title": "DM-Dollar Volatility: Intraday Activity Patterns, Macroeconomic Announcements, and Longer Run Dependencies",
+      "venue": "NBER Working Paper w5783",
+      "doi": "10.3386/w5783",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w5783",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "bekaert2019",
+      "type": "paper",
+      "authors": [
+        "Bekaert, Geert",
+        "Panayotov, George"
+      ],
+      "year": 2019,
+      "title": "Good Carry, Bad Carry",
+      "venue": "Journal of Financial and Quantitative Analysis 55(4), 1063-1094",
+      "doi": "10.1017/s0022109019000887",
+      "arxiv": null,
+      "url": "https://doi.org/10.1017/S0022109019000887",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "farhi2008",
+      "type": "preprint",
+      "authors": [
+        "Farhi, Emmanuel",
+        "Gabaix, Xavier"
+      ],
+      "year": 2008,
+      "title": "Rare Disasters and Exchange Rates",
+      "venue": "NBER Working Paper w13805",
+      "doi": "10.3386/w13805",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w13805",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "hassan2018",
+      "type": "paper",
+      "authors": [
+        "Hassan, Tarek A",
+        "Mano, Rui C"
+      ],
+      "year": 2018,
+      "title": "Forward and Spot Exchange Rates in a Multi-Currency World*",
+      "venue": "The Quarterly Journal of Economics 134(1), 397-450",
+      "doi": "10.1093/qje/qjy026",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/qje/qjy026",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kelly2024a",
+      "type": "preprint",
+      "authors": [
+        "Kelly, Bryan",
+        "Malamud, Semyon",
+        "Zhou, Kangying"
+      ],
+      "year": 2024,
+      "title": "The Virtue of Complexity in Return Prediction",
+      "venue": "NBER Working Paper w30217",
+      "doi": "10.3386/w30217",
+      "arxiv": null,
+      "url": "https://www.nber.org/system/files/working_papers/w30217/w30217.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "catalog/algorithms/complex-ml-market-timing.json",
+        "docs/algorithms/0082-complex-ml-market-timing.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "lettau2013",
+      "type": "preprint",
+      "authors": [
+        "Lettau, Martin",
+        "Maggiori, Matteo",
+        "Weber, Michael"
+      ],
+      "year": 2013,
+      "title": "Conditional Risk Premia in Currency Markets and Other Asset Classes",
+      "venue": "NBER Working Paper w18844",
+      "doi": "10.3386/w18844",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w18844",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "linnainmaa2016",
+      "type": "preprint",
+      "authors": [
+        "Linnainmaa, Juhani",
+        "Roberts, Michael"
+      ],
+      "year": 2016,
+      "title": "The History of the Cross Section of Stock Returns",
+      "venue": "NBER Working Paper w22894",
+      "doi": "10.3386/w22894",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w22894",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "lustig2013",
+      "type": "preprint",
+      "authors": [
+        "Lustig, Hanno",
+        "Stathopoulos, Andreas",
+        "Verdelhan, Adrien"
+      ],
+      "year": 2013,
+      "title": "The Term Structure of Currency Carry Trade Risk Premia",
+      "venue": "NBER Working Paper w19623",
+      "doi": "10.3386/w19623",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w19623",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "novymarx2014",
+      "type": "preprint",
+      "authors": [
+        "Novy-Marx, Robert",
+        "Velikov, Mihail"
+      ],
+      "year": 2014,
+      "title": "A Taxonomy of Anomalies and their Trading Costs",
+      "venue": "NBER Working Paper w20721",
+      "doi": "10.3386/w20721",
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w20721",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0499b63c",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/news/pressreleases.rss",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/sec-press.json",
+        "docs/datasets/0046-sec-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-04a2bcae",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "European Central Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/rss/press.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/ecb-press.json",
+        "docs/datasets/0043-ecb-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-051f779e",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/WebPolicy/index.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-press.json",
+        "docs/datasets/0047-cftc-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0822d5d4",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Foreign exchange market structure, players and evolution",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/p/bno/worpap/2011_10.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-089f8a86",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Can Machines 'Learn' Finance?",
+      "venue": "aqr.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.aqr.com/Insights/Research/Journal-Article/Can-Machines-Learn-Finance",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-1155e02b",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Variance risk premiums and the forward premium puzzle",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v124y2017i2p415-440.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-13c7bdea",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Foreign Exchange Fixings and Returns around the Clock",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v79y2024i1p541-578.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-15cf55b7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Marketaux (APILayer)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://api.marketaux.com/v1/news/all",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/marketaux.json",
+        "docs/datasets/0022-marketaux.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-17da50ef",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/about/copyright.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-japan-news.json",
+        "docs/datasets/0045-bank-of-japan-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1bb17f95",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Federal Reserve press releases: API documentation",
+      "venue": "Board of Governors of the Federal Reserve System",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/feeds/feeds.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/federal-reserve-press.json",
+        "docs/datasets/0042-federal-reserve-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-26392eda",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Last look",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/taf/quantf/v17y2017i7p1057-1070.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-33d8e304",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Data-Snooping, Technical Trading Rule Performance, and the Bootstrap",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v54y1999i5p1647-1691.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-3d35d55d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Alpha Vantage Inc.",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.alphavantage.co/query?function=NEWS_SENTIMENT",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/alpha-vantage.json",
+        "docs/datasets/0002-alpha-vantage.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-497ae06b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "European Central Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/ecb-press.json",
+        "docs/datasets/0043-ecb-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4b81c502",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Bank of England",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bankofengland.co.uk/rss/news",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-england-news.json",
+        "docs/datasets/0044-bank-of-england-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4cbe2e7e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Backtesting",
+      "venue": "people.duke.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-4e1dcf1c",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "If You're So Smart: John Maynard Keynes and Currency Speculation in the Interwar Years",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EDE2AA44C9394C69B54283D052B96B1E/S0022050716000589a.pdf/div-class-title-if-you-re-so-smart-john-maynard-keynes-and-currency-speculation-in-the-interwar-years-div.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-4e5ef3df",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Discriminatory Pricing of Over-the-Counter Derivatives",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/inm/ormnsc/v67y2021i11p6660-6677.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-4e8af84d",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/RSS/RSSGP/rssgp.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-press.json",
+        "docs/datasets/0047-cftc-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-501bccdc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "A Test for Superior Predictive Ability",
+      "venue": "cdr.lib.unc.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cdr.lib.unc.edu/downloads/zp38wf793",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-524f65ce",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "CFTC press releases",
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-press.json",
+        "docs/datasets/0047-cftc-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52da15bf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "SEC press releases: API documentation",
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/about/rss-feeds",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/sec-press.json",
+        "docs/datasets/0046-sec-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-535d07e5",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Statistical learning and exchange rate forecasting",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/intfor/v36y2020i4p1260-1289.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-55bd9225",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ECB press releases: API documentation",
+      "venue": "European Central Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/home/html/rss.en.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/ecb-press.json",
+        "docs/datasets/0043-ecb-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-56692a57",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Empirical evidence on the currency carry trade, 1900-2012",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v51y2015icp370-389.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-5ffc60a9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "CFTC press releases: API documentation",
+      "venue": "US Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/RSS/index.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/cftc-press.json",
+        "docs/datasets/0047-cftc-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6111919c",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Crash-neutral currency carry trades",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v113y2014i3p325-347.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-6358291c",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "The effects of conventional and unconventional monetary policy on exchange rates",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v118y2019icp419-447.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-70789a51",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Is there momentum or reversal in weekly currency returns?",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v45y2014icp38-60.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-709df757",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "The forward premium puzzle: different tales from developed and emerging economies",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v51y2000i1p115-144.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-7279961e",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "What determines transaction costs in foreign exchange markets?",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/ijf/ijfiec/v13y2008i1p14-25.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-73a57055",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Technical Trading-Rule Profitability, Data Snooping, and Reality Check: Evidence from the Foreign Exchange Market",
+      "venue": "api.openalex.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://api.openalex.org/works/doi:10.1353/mcb.2007.0006",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "blocked",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-75a7f4f3",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Puzzles in the Tokyo fixing in the forex market: Order imbalances and Bank pricing",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v109y2017icp214-234.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-762770cc",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Stepwise Multiple Testing as Formalized Data Snooping",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/ecm/emetrp/v73y2005i4p1237-1282.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-776bd24f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "The GDELT Project",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://api.gdeltproject.org/api/v2/doc/doc",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/gdelt.json",
+        "docs/datasets/0016-gdelt.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7a3d5497",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/sec-press.json",
+        "docs/datasets/0046-sec-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7e913234",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Currency Orders and Exchange Rate Dynamics: An Explanation for the Predictive Success of Technical Analysis",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v58y2003i5p1791-1819.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-7ebfee87",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Predictability of currency carry trades and asset pricing implications",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v110y2013i1p139-163.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-88e3f122",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Retaining alpha: The effect of trade size and rebalancing frequency on FX strategy returns",
+      "venue": "ifo.de",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ifo.de/DocDL/cesifo1_wp8143.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-8931a56c",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Exchange Rate Reconnect",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/tpr/restat/v104y2022i4p845-855.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-8aa710d6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "A Reality Check for Data Snooping",
+      "venue": "econometricsociety.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-8b46e4f0",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Do Momentum-Based Strategies Still Work in Foreign Currency Markets?",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/cup/jfinqa/v38y2003i02p425-447_00.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-90a20434",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bank of Japan what's new: API documentation",
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/rss/index.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-japan-news.json",
+        "docs/datasets/0045-bank-of-japan-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9d304e83",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bank of England news: API documentation",
+      "venue": "Bank of England",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bankofengland.co.uk/rss",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-england-news.json",
+        "docs/datasets/0044-bank-of-england-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a435e7b6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Board of Governors of the Federal Reserve System",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/disclaimer.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/federal-reserve-press.json",
+        "docs/datasets/0042-federal-reserve-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a6b501e9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Board of Governors of the Federal Reserve System",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/federal-reserve-press.json",
+        "docs/datasets/0042-federal-reserve-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aa3cef37",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "When Carry Goes Bad: The Magnitude, Causes, and Duration of Currency Carry Unwinds",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/taf/ufajxx/v73y2017i1p121-144.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-aac9c306",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Bank of England",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bankofengland.co.uk/legal",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-england-news.json",
+        "docs/datasets/0044-bank-of-england-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b433e213",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Forex trading and the WMR Fix",
+      "venue": "mpra.ub.uni-muenchen.de",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://mpra.ub.uni-muenchen.de/81583/1/MPRA_paper_81583.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-b8c1580d",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "ECB press releases",
+      "venue": "European Central Bank",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/press/pr/html/index.en.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/ecb-press.json",
+        "docs/datasets/0043-ecb-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bbbf02a9",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Have capital market anomalies attenuated in the recent era of high liquidity and trading activity?",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jaecon/v58y2014i1p41-58.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-c09ad418",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Bureau of Economic Analysis",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.bea.gov/rss/rss.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bea.json",
+        "docs/datasets/0004-bea.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c0d8d955",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-japan-news.json",
+        "docs/datasets/0045-bank-of-japan-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c243508f",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Global Political Risk and Currency Momentum",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/cup/jfinqa/v53y2018i05p2227-2259_00.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-c495cf55",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Rise of the Machines: Algorithmic Trading in the Foreign Exchange Market",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v69y2014i5p2045-2084.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-cb1951dd",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "Bank of Japan what's new",
+      "venue": "Bank of Japan",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-japan-news.json",
+        "docs/datasets/0045-bank-of-japan-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ccf66f37",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Bureau of Labor Statistics",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bls.gov/feed/bls_latest.rss",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bls.json",
+        "docs/datasets/0007-bls.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cd4e8812",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "The reaction of asset markets to Swiss National Bank communication",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-cd86f8e3",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "SEC press releases",
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/press-releases",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/sec-press.json",
+        "docs/datasets/0046-sec-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cf0d35a8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "The GDELT Project",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.gdeltproject.org/about.html#termsofuse",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/gdelt.json",
+        "docs/datasets/0016-gdelt.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d3339792",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Global currency hedging with common risk factors",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v136y2020i3p780-805.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-d4d51a0f",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "Federal Reserve press releases",
+      "venue": "Board of Governors of the Federal Reserve System",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/federal-reserve-press.json",
+        "docs/datasets/0042-federal-reserve-press.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dee114f4",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "Bank of England news",
+      "venue": "Bank of England",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bankofengland.co.uk/news",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bank-of-england-news.json",
+        "docs/datasets/0044-bank-of-england-news.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e1149e00",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Exchange rate forecasting, order flow and macroeconomic information",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v80y2010i1p72-88.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-e1d72ae9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Bureau of Economic Analysis",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bea.gov/help/guidelines-for-citing-bea",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/bea.json",
+        "docs/datasets/0004-bea.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e541b450",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Global Currency Hedging",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v65y2010i1p87-121.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-e9eb922f",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Liquidity in the Foreign Exchange Market: Measurement, Commonality, and Risk Premiums",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v68y2013i5p1805-1841.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-ed9ca038",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Network structure and pricing in the FX market",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jfinec/v141y2021i2p705-729.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-ef9479cf",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Understanding FX Liquidity",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/oup/rfinst/v28y2015i11p3073-3108..html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-f339872c",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Informed trade in spot foreign exchange markets: an empirical investigation",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/inecon/v61y2003i2p307-329.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "blocked",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-f8d5aa84",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Marketaux (APILayer)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.marketaux.com/tos",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/marketaux.json",
+        "docs/datasets/0022-marketaux.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fa7fe46a",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Currency momentum, carry trade, and market illiquidity",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jbfina/v67y2016icp1-11.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-fcc4668f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "US Energy Information Administration",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.eia.gov/rss/todayinenergy.xml",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/eia.json",
+        "docs/datasets/0011-eia.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fccdcae6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "Finnhub Stock API",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://finnhub.io/api/v1/news",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "catalog/datasets/finnhub.json",
+        "docs/datasets/0012-finnhub.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff8e37f5",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Do Professional Currency Managers Beat the Benchmark?",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/taf/ufajxx/v64y2008i5p18-32.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-ffbdbdf5",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Segmentation and time-of-day patterns in foreign exchange markets",
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/eee/jbfina/v33y2009i12p2199-2206.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "ok",
+      "verification_checked": "2026-10-21",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "note": "Linked in this repo as: None",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title found by verify_sources.py"
+      }
     }
   ]
 }

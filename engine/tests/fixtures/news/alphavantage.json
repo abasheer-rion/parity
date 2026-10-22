@@ -1,0 +1,141 @@
+{
+ "items": "50",
+ "sentiment_score_definition": "x <= -0.35: Bearish; -0.35 < x <= -0.15: Somewhat-Bearish; -0.15 < x < 0.15: Neutral; 0.15 <= x < 0.35: Somewhat_Bullish; x >= 0.35: Bullish",
+ "relevance_score_definition": "0 < x <= 1, with a higher score indicating higher relevance.",
+ "feed": [
+  {
+   "title": "Western Digital Corp Stock (WDC) Moved Up by 3.62% on Oct 21: A Full Analysis",
+   "url": "https://www.tradingkey.com/news/market-movers/262229474-market-movers-wdc-20261021",
+   "time_published": "20261021T161534",
+   "authors": [
+    "TradingKey"
+   ],
+   "summary": "Western Digital Corp (WDC) saw its stock price increase by 3.62% on October 21st, driven by an analyst upgrade from Bank of America and growing demand for AI storage infrastructure. Bank of America reaffirmed its Buy rating and raised the price target, citing strong demand for mass-capacity hard disk drives in hyperscale cloud environments. Despite some technical sell signals and competitive risks, the company's strategic positioning ahead of its fiscal first-quarter earnings and favorable storage pricing dynamics contributed to positive investor sentiment.",
+   "banner_image": "https://resource.tradingkey.com/ai/wkrepot/c48b9dd4-2919-4d0d-8485-2862f78882a6_1792599313.png",
+   "source": "TradingKey",
+   "category_within_source": "General",
+   "source_domain": "TradingKey",
+   "topics": [
+    {
+     "topic": "earnings",
+     "relevance_score": "0.937258"
+    },
+    {
+     "topic": "financial_markets",
+     "relevance_score": "0.944013"
+    },
+    {
+     "topic": "technology",
+     "relevance_score": "0.818816"
+    },
+    {
+     "topic": "economy_macro",
+     "relevance_score": "0.635703"
+    }
+   ],
+   "overall_sentiment_score": 0.165556,
+   "overall_sentiment_label": "Somewhat-Bullish",
+   "ticker_sentiment": [
+    {
+     "ticker": "WDC",
+     "relevance_score": "0.984700",
+     "ticker_sentiment_score": "0.277869",
+     "ticker_sentiment_label": "Somewhat-Bullish"
+    },
+    {
+     "ticker": "MU",
+     "relevance_score": "0.646675",
+     "ticker_sentiment_score": "0.101605",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "NVDA",
+     "relevance_score": "0.646715",
+     "ticker_sentiment_score": "0.138831",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "AAPL",
+     "relevance_score": "0.598262",
+     "ticker_sentiment_score": "0.083625",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "BAC",
+     "relevance_score": "0.586833",
+     "ticker_sentiment_score": "0.304102",
+     "ticker_sentiment_label": "Somewhat-Bullish"
+    }
+   ]
+  },
+  {
+   "title": "Texas Instruments Inc Stock (TXN) Moved Up by 3.13% on Oct 21: What Signal Does It Send?",
+   "url": "https://www.tradingkey.com/news/market-movers/262229475-market-movers-txn-20261021",
+   "time_published": "20261021T161509",
+   "authors": [
+    "TradingKey"
+   ],
+   "summary": "Texas Instruments (TXN) shares rose by 3.13% on October 21, driven by anticipation of its fiscal third-quarter earnings report and strong demand for AI data center infrastructure. Positive analyst previews and expectations of significant year-over-year revenue and EPS growth fueled investor optimism. Despite rich valuation multiples and some analyst concerns regarding execution hurdles, the stock benefited from broader semiconductor recovery and disciplined capital management.",
+   "banner_image": "https://resource.tradingkey.com/ai/wkrepot/4179b987-a78e-4730-b4e2-49e7f20e74ea_1792599313.png",
+   "source": "TradingKey",
+   "category_within_source": "General",
+   "source_domain": "TradingKey",
+   "topics": [
+    {
+     "topic": "earnings",
+     "relevance_score": "0.942743"
+    },
+    {
+     "topic": "financial_markets",
+     "relevance_score": "0.811163"
+    },
+    {
+     "topic": "technology",
+     "relevance_score": "0.830238"
+    },
+    {
+     "topic": "manufacturing",
+     "relevance_score": "0.622539"
+    },
+    {
+     "topic": "economy_macro",
+     "relevance_score": "0.613377"
+    }
+   ],
+   "overall_sentiment_score": 0.185318,
+   "overall_sentiment_label": "Somewhat-Bullish",
+   "ticker_sentiment": [
+    {
+     "ticker": "TXN",
+     "relevance_score": "0.952913",
+     "ticker_sentiment_score": "0.266383",
+     "ticker_sentiment_label": "Somewhat-Bullish"
+    },
+    {
+     "ticker": "MU",
+     "relevance_score": "0.627751",
+     "ticker_sentiment_score": "0.128849",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "NVDA",
+     "relevance_score": "0.601494",
+     "ticker_sentiment_score": "0.102523",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "AAPL",
+     "relevance_score": "0.582670",
+     "ticker_sentiment_score": "0.060416",
+     "ticker_sentiment_label": "Neutral"
+    },
+    {
+     "ticker": "SMCI",
+     "relevance_score": "0.590469",
+     "ticker_sentiment_score": "0.334342",
+     "ticker_sentiment_label": "Somewhat-Bullish"
+    }
+   ]
+  }
+ ]
+}

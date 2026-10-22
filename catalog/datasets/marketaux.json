@@ -28,5 +28,18 @@
     "https://www.marketaux.com/documentation"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "marketaux"
+    ],
+    "feed_url": "https://api.marketaux.com/v1/news/all",
+    "display_on_shared_site": "no",
+    "what_we_store": "headline and link only",
+    "attribution": "Marketaux",
+    "limits": "100 requests a day, 3 articles per request",
+    "terms_quote": "solely for your personal, non-commercial use",
+    "terms_url": "https://www.marketaux.com/tos",
+    "checked": "2026-10-21"
+  }
 }

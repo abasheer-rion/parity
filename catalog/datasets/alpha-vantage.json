@@ -31,5 +31,18 @@
     "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "alphavantage"
+    ],
+    "feed_url": "https://www.alphavantage.co/query?function=NEWS_SENTIMENT",
+    "display_on_shared_site": "no",
+    "what_we_store": "headline and link only",
+    "attribution": "Alpha Vantage",
+    "limits": "25 requests a day on the free key",
+    "terms_quote": "for personal, non-commercial use; information may not go to individuals other than the user",
+    "terms_url": "https://www.alphavantage.co/terms_of_service/",
+    "checked": "2026-10-21"
+  }
 }

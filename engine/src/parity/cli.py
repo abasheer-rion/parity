@@ -17,6 +17,12 @@
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
+
+    parity news fetch            fetch headlines from sources whose terms allow it
+    parity news list             show the newest stored headlines
+    parity news impact           how markets moved after each stored headline
+    parity news records          biggest market days since 1999 (--explain asks GDELT)
+    parity news export DIR       write the News page's JSON into DIR/news
 """
 
 from __future__ import annotations
@@ -285,6 +291,10 @@ def _analyse(args) -> int:
     for x in a["weaknesses"] or ["none found"]:
         print(f"  - {x}")
     return 0
+def _news(args) -> int:
+    from .news import cli as news_cli
+
+    return news_cli.run(args)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -399,6 +409,10 @@ def main(argv: list[str] | None = None) -> int:
                     help="trial count for deflated Sharpe; default is every strategy")
     an.add_argument("--out", default=str(DEFAULT_OUT / "analysis"))
     an.set_defaults(func=_analyse)
+
+    from .news import cli as news_cli
+
+    news_cli.add_parser(sub).set_defaults(func=_news)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:

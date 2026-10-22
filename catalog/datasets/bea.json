@@ -19,8 +19,10 @@
   "point_in_time": false,
   "license_terms": "Free key after giving a name and email and agreeing to the terms of service. US government data, generally public domain. https://apps.bea.gov/api/signup/",
   "quality_notes": "GDP is revised several times after the first estimate and the API gives the latest values only. Use ALFRED if first estimates matter.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.bea"
+  ],
   "relevance": {
     "score": 2,
     "reason": "Mostly duplicated on FRED, and quarterly data is slow for FX signals."
@@ -30,5 +32,18 @@
     "https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "bea"
+    ],
+    "feed_url": "https://apps.bea.gov/rss/rss.xml",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline, link and a summary of at most 280 characters",
+    "attribution": "Do not imply BEA endorses us",
+    "limits": "None published for RSS",
+    "terms_quote": "public domain; do not imply endorsement",
+    "terms_url": "https://www.bea.gov/help/guidelines-for-citing-bea",
+    "checked": "2026-10-21"
+  }
 }

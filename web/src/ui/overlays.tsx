@@ -112,3 +112,26 @@ export function Toaster() {
     </div>
   );
 }
+
+/** A panel that slides in from the right over a dimmed page. Escape or the scrim closes it. */
+export function Drawer({ open, onClose, title, children, width = 520 }:
+  { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; width?: number }) {
+  useEffect(() => {
+    if (!open) return;
+    const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", k);
+    return () => document.removeEventListener("keydown", k);
+  }, [open, onClose]);
+  if (!open) return null;
+  return (
+    <div className="ui-scrim ui-drawer-scrim anim-fade" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+      <aside className="ui-drawer" role="dialog" aria-modal aria-label={typeof title === "string" ? title : undefined} style={{ width: `min(${width}px, 100vw)` }} data-lenis-prevent>
+        <div className="ui-dialog-head">
+          <h2>{title}</h2>
+          <button className="icon-btn" aria-label="Close" onClick={onClose}>×</button>
+        </div>
+        <div className="ui-drawer-body">{children}</div>
+      </aside>
+    </div>
+  );
+}

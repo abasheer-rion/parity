@@ -1,0 +1,1 @@
+{"meta": {"found": 1, "returned": 1, "limit": 3, "page": 1}, "data": [{"uuid": "abc", "title": "Euro rises after ECB comments", "description": "The euro gained against the dollar.", "snippet": "", "url": "https://example.com/euro", "published_at": "2026-10-20T14:30:00.000000Z", "source": "example.com", "entities": [{"symbol": "EURUSD"}]}]}

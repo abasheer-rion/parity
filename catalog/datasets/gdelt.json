@@ -18,8 +18,10 @@
   "point_in_time": true,
   "license_terms": "The whole database is 100 percent free and open; citation of GDELT is expected. https://www.gdeltproject.org/data.html",
   "quality_notes": "Machine coded, so noisy, with duplicate stories and mis-tagged events. Tone is a simple word count measure. Coverage of sources grows over time, which can bias trends.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "news.gdelt"
+  ],
   "relevance": {
     "score": 4,
     "reason": "The only free news source with years of history and a ready made tone score."
@@ -30,5 +32,18 @@
     "https://api.gdeltproject.org/api/v2/doc/doc?query=euro%20dollar&mode=artlist&maxrecords=2&format=json"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-21",
+  "news_use": {
+    "parity_source_ids": [
+      "gdelt"
+    ],
+    "feed_url": "https://api.gdeltproject.org/api/v2/doc/doc",
+    "display_on_shared_site": "yes",
+    "what_we_store": "headline and link only (headlines belong to each outlet)",
+    "attribution": "Cite GDELT and link https://www.gdeltproject.org/",
+    "limits": "One request every 5 seconds; it answered HTTP 429 even at one call every 20 seconds on 2026-10-21",
+    "terms_quote": "free for any use, including commercial, with citation",
+    "terms_url": "https://www.gdeltproject.org/about.html#termsofuse",
+    "checked": "2026-10-21"
+  }
 }

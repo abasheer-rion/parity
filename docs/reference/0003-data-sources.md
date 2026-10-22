@@ -74,5 +74,6 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
+- [REF-0013: News sources and market impact](0013-news-sources-and-market-impact.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

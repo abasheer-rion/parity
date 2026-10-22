@@ -1,0 +1,1 @@
+Shapes follow each provider's documented response. fed, ecb, boj and alphavantage (demo key) are trimmed real responses saved on 2026-10-21; gdelt, finnhub and marketaux are hand written in the documented shape because those calls need a key or were rate limited.

@@ -20,6 +20,13 @@ const MARKETS: NavItem[] = [
     ],
   },
   { href: "#/scenarios", label: "Scenarios", icon: "compass", routes: ["scenarios"] },
+  {
+    href: "#/news", label: "News", icon: "news", routes: ["news"],
+    children: [
+      { href: "#/news", label: "Latest", routes: [] },
+      { href: "#/news/history", label: "Biggest days", routes: [] },
+    ],
+  },
   { href: "#/catalog", label: "Catalog", icon: "catalog", routes: ["catalog", "algo"] },
   { href: "#/ledger", label: "Ledger", icon: "ledger", routes: ["ledger"] },
   {
