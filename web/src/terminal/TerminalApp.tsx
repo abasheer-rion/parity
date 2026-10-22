@@ -23,6 +23,16 @@ import "./terminal.css";
 
 applyTheme();
 
+// Installable as an app (web/public/sim/manifest.webmanifest): the service worker keeps the
+// shell for a flaky network. Production builds only; a refusal never breaks the page.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    try {
+      navigator.serviceWorker.register("/sim/sw.js", { scope: "/sim/" }).catch(() => {});
+    } catch { /* blocked: the terminal works without it */ }
+  });
+}
+
 export function TerminalApp() {
   return <AppGuard>{() => <TermShell />}</AppGuard>;
 }
