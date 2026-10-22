@@ -525,6 +525,7 @@ export function FanChart({
   unit = "trading day",
   countLabel = "event",
   outerLabel = "Full range",
+  upTo,
 }: {
   bands: FanBand[];
   paths: { name: string; values: number[] }[];
@@ -543,9 +544,12 @@ export function FanChart({
   countLabel?: string;
   /** Name of the light outer band: "Full range", or "5 to 95 in 100" for simulations. */
   outerLabel?: string;
+  /** Draw only up to this day (the axes stay fixed), so a replay can fill the chart in. */
+  upTo?: number;
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
+  const clipId = useMemo(() => `fan-${Math.random().toString(36).slice(2, 8)}`, []);
   const pad = { top: 12, right: 16, bottom: 26, left: 58 };
   const w = width - pad.left - pad.right;
   const h = height - pad.top - pad.bottom;
@@ -587,13 +591,17 @@ export function FanChart({
             <text className="tick" x={x(m.day)} y={height - 6} textAnchor="middle">{m.label}</text>
           </g>
         ))}
-        <polygon points={area((b) => b.max, (b) => b.min)} fill={color} opacity={0.08} />
-        <polygon points={area((b) => b.q75, (b) => b.q25)} fill={color} opacity={0.22} />
-        {paths.map((p) => (
-          <polyline key={p.name} fill="none" stroke={color} strokeWidth={1} opacity={0.28} strokeLinejoin="round" points={line(p.values)} />
-        ))}
+        {upTo != null && <defs><clipPath id={clipId}><rect x={0} y={0} width={Math.max(0, x(Math.min(upTo, lastDay)) + 0.5)} height={height} /></clipPath></defs>}
         <line className="baseline" x1={pad.left} x2={pad.left + w} y1={y(0)} y2={y(0)} />
-        <polyline fill="none" stroke={color} strokeWidth={2.25} strokeLinejoin="round" points={bands.map((b) => `${x(b.day).toFixed(1)},${y(b.median).toFixed(1)}`).join(" ")} />
+        <g clipPath={upTo != null ? `url(#${clipId})` : undefined}>
+          <polygon points={area((b) => b.max, (b) => b.min)} fill={color} opacity={0.08} />
+          <polygon points={area((b) => b.q75, (b) => b.q25)} fill={color} opacity={0.22} />
+          {paths.map((p) => (
+            <polyline key={p.name} fill="none" stroke={color} strokeWidth={1} opacity={0.28} strokeLinejoin="round" points={line(p.values)} />
+          ))}
+          <polyline fill="none" stroke={color} strokeWidth={2.25} strokeLinejoin="round" points={bands.map((b) => `${x(b.day).toFixed(1)},${y(b.median).toFixed(1)}`).join(" ")} />
+        </g>
+        {upTo != null && upTo < lastDay && <line className="crosshair" x1={x(upTo)} x2={x(upTo)} y1={pad.top} y2={pad.top + h} />}
         {hb && (
           <g>
             <line className="crosshair" x1={x(hb.day)} x2={x(hb.day)} y1={pad.top} y2={pad.top + h} />

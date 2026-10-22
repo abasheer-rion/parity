@@ -22,3 +22,23 @@ export function otherSide(route: string): Space | null {
 }
 
 export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "/research/" };
+
+// ---------- Sim World, its own full-screen site (DEC-0017) ----------
+// sim.endyland.com serves web/sim/index.html, marked <html data-space="sim">. It shows only
+// Sim World and one Back button; it still signs in and loads data like the other sides.
+
+/** True on the full-screen Sim World site. */
+export const IS_SIM = document.documentElement.dataset.space === "sim";
+
+const onEndyland = () => /(^|\.)endyland\.com$/.test(window.location.hostname);
+
+/** Where Sim World opens: its own subdomain on endyland.com, /sim/ elsewhere (previews, localhost). */
+export function simUrl(tab?: string): string {
+  const hash = tab ? `#/${tab.replace(/^#?\/?/, "")}` : "";
+  return onEndyland() ? `https://sim.endyland.com/${hash}` : `/sim/${hash}`;
+}
+
+/** A research page by its hash, from anywhere (Sim World links back to docs and strategies). */
+export function researchUrl(hash = ""): string {
+  return onEndyland() ? `https://parity.endyland.com/research/${hash}` : `/research/${hash}`;
+}
