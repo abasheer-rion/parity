@@ -244,7 +244,7 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
     image = f"{SITE}/og/{section}.png"
     full_title = f"{title} | Parity" if path != "/" else title
     graph = {"@context": "https://schema.org", "@graph": [org_ld(), crumbs_ld(trail), *ld]}
-    cur = ' aria-current="page"'
+    cur = ' aria-current="page"' if path in ("/learn/", "/ideas/", "/notes/") else ' aria-current="true"'
     nav = "".join(f'<a href="{href}"{cur if section == key else ""}>{label}</a>'
                   for key, href, label in (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes")))
     crumb_html = " / ".join(f'<a href="{p}">{e(n)}</a>' for n, p in trail[:-1]) + (" / " if len(trail) > 1 else "")
