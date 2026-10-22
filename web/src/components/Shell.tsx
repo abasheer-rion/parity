@@ -164,7 +164,7 @@ export function Shell({
             </button>
           )}
         </div>
-        <button className="side-search" onClick={openSearch} aria-label="Search pages, strategies and words, or ask a question" aria-keyshortcuts="/ Meta+K">
+        <button className="side-search" onClick={openSearch} title="Search pages, strategies and words, or ask a question" aria-keyshortcuts="/ Meta+K">
           <Icon name="search" size={14} />
           <span className="lbl">Search or ask</span>
           <kbd aria-hidden>{SEARCH_KEY}</kbd>
