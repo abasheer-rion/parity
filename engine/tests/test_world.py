@@ -160,6 +160,28 @@ def test_risk_numbers():
     assert r["tail5"] == pytest.approx(-0.20)
 
 
+def test_monthly_lag_moves_to_when_it_could_be_read():
+    s = pd.Series([1.0, 2.0], index=pd.to_datetime(["2020-01-01", "2020-02-01"]))
+    pts = world.monthly_points(s, start="2019-01-01", lag=5)
+    # January's average is known 5 business days after 31 January 2020 (a Friday)
+    assert pts[0] == ["2020-02-07", 1.0]
+    assert world.monthly_points(s, start="2019-01-01")[0] == ["2020-01-01", 1.0]
+
+
+def test_export_marks_levels_and_replay_groups(levels, rates):
+    idx = levels["EUR"].index
+    lv = {**levels, "ind.Enrgy": levels["oil"] / 60, "factor.MOM": levels["stocks"] / 100,
+          "bond.UST10Y": pd.Series(4.0, index=idx), "risk.VIX": pd.Series(20.0, index=idx)}
+    doc = world.export(lv, rates, [])
+    assets = {a["key"]: a for a in doc["assets"]}
+    assert assets["ind.Enrgy"]["group"] == "industries" and assets["ind.Enrgy"]["kind"] == "price"
+    assert assets["factor.MOM"]["group"] == "factors"
+    assert assets["bond.UST10Y"]["kind"] == "level" and assets["risk.VIX"]["kind"] == "level"
+    assert assets["EUR"]["kind"] == "price"
+    assert "bond.UST10Y" in doc["weekly"]["series"]
+    assert "ind.Enrgy" not in doc["daily"]["series"]  # replay series are weekly only
+
+
 def test_paths_csv_layout():
     idx = pd.date_range("2000-01-07", periods=30, freq="W-FRI")
     r = pd.DataFrame({"EUR": 0.001, "oil": -0.002}, index=idx)
