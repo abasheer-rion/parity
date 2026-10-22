@@ -1,0 +1,12 @@
+<!--
+subject: Reset your Parity password
+preheader: Someone asked to reset the password for your Parity account.
+-->
+[[> heading text="Reset your password" ]]
+[[> paragraph text="We got a request to reset the password for {{ .Email }}. Choose a new one with the button below." ]]
+[[> button url="{{ .SiteURL }}/verify/?type=recovery&amp;token_hash={{ .TokenHash }}" label="Choose a new password" ]]
+[[> note text="Or type this code on the reset screen:" ]]
+[[> code ]]
+[[> rule ]]
+[[> link url="{{ .SiteURL }}/verify/?type=recovery&amp;token_hash={{ .TokenHash }}" ]]
+[[> note text="If you did not ask for this, ignore this email. Your password stays the same." ]]

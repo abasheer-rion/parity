@@ -1,0 +1,8 @@
+{
+  "confirmation": "Confirm your email for Parity",
+  "magic_link": "Your Parity sign-in code",
+  "recovery": "Reset your Parity password",
+  "email_change": "Confirm your new email for Parity",
+  "invite": "You are invited to Parity",
+  "reauthentication": "Your Parity confirmation code"
+}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { AppGuard } from "./auth";
 import { Palette } from "./components/Palette";
 import { Popups } from "./components/Popups";
 import { Shell } from "./components/Shell";
-import { listBatches, loadReport, signOut, source, useIdentity, type BatchInfo } from "./lib/data";
+import { listBatches, loadReport, source, type BatchInfo } from "./lib/data";
 import { loadDocs } from "./lib/docs";
 import { date, REPO_URL } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
@@ -41,14 +42,15 @@ function useHash(): string {
 }
 
 export function App() {
-  const email = useIdentity();
-  return <Dashboard email={email} />;
+  // Every page of the app needs a session (DEC-0012). The public pages (/, /login/,
+  // /signup/, /reset/, /verify/) are a separate entry: src/auth/main.tsx.
+  return <AppGuard>{(user) => <Dashboard email={user.email} onSignOut={user.signOut} />}</AppGuard>;
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
 const STANDALONE = ["learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
 
-function Dashboard({ email }: { email: string | null }) {
+function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
   const [batches, setBatches] = useState<BatchInfo[]>([]);
   const [batchId, setBatchId] = useState<string | undefined>();
@@ -88,7 +90,7 @@ function Dashboard({ email }: { email: string | null }) {
   );
 
   return (
-    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={source === "static" ? signOut : undefined} wide={route === "doc"} full={route === "" || route === "home"}>
+    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"} full={route === "" || route === "home"}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
@@ -100,7 +102,7 @@ function Dashboard({ email }: { email: string | null }) {
       {route === "ledger" && <LedgerPage />}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "settings" && (
-        <Settings section={arg} email={email} onSignOut={source === "static" ? signOut : undefined} report={report} batches={batches} batchId={batchId} setBatchId={setBatchId} />
+        <Settings section={arg} />
       )}
       {!standalone && error && <div className="error">{error}</div>}
       {!standalone && !report && !error && <p className="muted">Loading results</p>}

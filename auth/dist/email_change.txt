@@ -1,0 +1,13 @@
+Confirm your new email
+
+Someone asked to change the email on your Parity account from {{ .Email }} to {{ .NewEmail }}. Confirm to finish the change:
+{{ .SiteURL }}/verify/?type=email_change&token_hash={{ .TokenHash }}
+
+Or type this code in your account settings: {{ .Token }}
+
+Both the old and the new address get an email like this one, and both must confirm. If you did not ask for this, ignore it and change your password.
+
+--
+Sent by Parity to {{ .Email }}. Research only, not investment advice.
+You are getting this because someone used this address on Parity ({{ .SiteURL }}).
+If that was not you, you can ignore this email.

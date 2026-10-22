@@ -273,6 +273,7 @@ Foreign exchange in general.
 Hosting, CI/CD, database and costs.
 
 - [DEC-0002: Use a free-tier stack of GitHub, Supabase and Cloudflare Pages](decisions/0002-free-tier-stack.md)
+- [DEC-0012: Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0005: Free tier budget](reference/0005-free-tier-budget.md)
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
@@ -559,6 +560,7 @@ A specific trading idea or its implementation.
 The dashboard.
 
 - [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
+- [DEC-0012: Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

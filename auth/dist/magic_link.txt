@@ -1,0 +1,15 @@
+Your sign-in code
+
+Type this code on the Parity sign-in screen to finish signing in:
+
+    {{ .Token }}
+
+Or sign in with one click:
+{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}
+
+The code and link work once and expire in 60 minutes. Never share this code. Parity will never ask you for it.
+
+--
+Sent by Parity to {{ .Email }}. Research only, not investment advice.
+You are getting this because someone used this address on Parity ({{ .SiteURL }}).
+If that was not you, you can ignore this email.

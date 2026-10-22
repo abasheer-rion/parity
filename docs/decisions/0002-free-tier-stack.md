@@ -42,6 +42,7 @@ The dashboard is a static site. It holds no data itself. It reads results from S
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [DEC-0012: Open sign-up with Supabase Auth replaces the Cloudflare login](0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md)
 - [REF-0001: Architecture](../reference/0001-architecture.md)
 - [REF-0005: Free tier budget](../reference/0005-free-tier-budget.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)

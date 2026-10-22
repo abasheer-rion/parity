@@ -56,6 +56,8 @@ jobs:
           python-version: "3.12"
       - name: Docs structure, links and wording
         run: python3 scripts/docs.py check ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
+      - name: Auth emails match their sources
+        run: python3 auth/build.py --check
       - name: Ledger and registrations
         run: |
           pip install -q -e engine

@@ -1,0 +1,8 @@
+Reset your password
+
+We got a request to reset the password for {{ .Email }}. Choose a new one here:
+{{ .SiteURL }}/verify/?type=recovery&token_hash={{ .TokenHash }}
+
+Or type this code on the reset screen: {{ .Token }}
+
+If you did not ask for this, ignore this email. Your password stays the same.

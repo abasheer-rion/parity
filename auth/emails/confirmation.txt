@@ -1,0 +1,10 @@
+Confirm your email
+
+Thanks for signing up to Parity. Confirm that {{ .Email }} is your address.
+
+Confirm my email:
+{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}
+
+Or type this code on the sign-up screen: {{ .Token }}
+
+The link and code work once and expire in 60 minutes.

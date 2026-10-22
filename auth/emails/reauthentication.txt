@@ -1,0 +1,7 @@
+Confirm it is you
+
+You are changing something sensitive on your Parity account, such as your password. Type this code to confirm it is you:
+
+    {{ .Token }}
+
+The code works once and expires in 60 minutes. If you did not ask for it, change your password.

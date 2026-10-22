@@ -2,7 +2,8 @@
 # main -> production, pull requests -> a preview URL posted in the job summary.
 #
 # Also redeploys after every research or official run, so the site carries the newest results.
-# The site is behind Cloudflare Access; published runs are copied into it as files at deploy time.
+# Published runs are copied into the site as files at deploy time. web/functions/ (deployed
+# with the site because wrangler runs in web/) lets only signed-in people fetch /app/ and /data/.
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
@@ -42,6 +43,10 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run build
+        env:
+          # Which sign-in buttons to show (auth/PROVIDERS.md). Public values, not secrets.
+          VITE_AUTH_PROVIDERS: ${{ vars.AUTH_PROVIDERS }}
+          VITE_AUTH_PASSKEYS: ${{ vars.AUTH_PASSKEYS }}
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"

@@ -1,0 +1,12 @@
+<!--
+subject: Confirm your email for Parity
+preheader: One step left. Confirm this address to finish creating your Parity account.
+-->
+[[> heading text="Confirm your email" ]]
+[[> paragraph text="Thanks for signing up to Parity. Confirm that {{ .Email }} is your address." ]]
+[[> button url="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}" label="Confirm my email" ]]
+[[> note text="Or type this code on the sign-up screen:" ]]
+[[> code ]]
+[[> rule ]]
+[[> link url="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}" ]]
+[[> note text="The link and code work once and expire in 60 minutes." ]]

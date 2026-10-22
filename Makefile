@@ -1,7 +1,7 @@
 PY := engine/.venv/bin/python
 PARITY := engine/.venv/bin/parity
 
-.PHONY: setup fetch run test lint web web-build docs check
+.PHONY: setup fetch run test lint web web-build docs auth check
 
 setup:            ## create the Python env, install packages, turn on git hooks
 	python3 -m venv engine/.venv
@@ -33,6 +33,10 @@ docs:             ## tidy, re-index and check every markdown file
 	python3 scripts/docs.py fix
 	python3 scripts/docs.py check --suggest
 
+auth:             ## rebuild the auth emails into auth/dist and auth/preview.html
+	python3 auth/build.py
+
 check: lint test  ## everything CI runs
 	python3 scripts/docs.py check
+	python3 auth/build.py --check
 	cd web && npm run build
