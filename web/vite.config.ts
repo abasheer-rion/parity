@@ -78,16 +78,32 @@ function localScenarios(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(world));
       });
+      // Parity Terminal's files, written by `parity terminal export`: index.json and
+      // s/<key>.json only, so a request can never reach outside the folder.
+      server.middlewares.use("/local/terminal", (req, res) => {
+        const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        const path = resolve(import.meta.dirname, "../engine/output/terminal", name);
+        if (!/^(index|s\/[A-Za-z0-9_.+-]+)\.json$/.test(name) || name.includes("..") || !existsSync(path)) {
+          res.statusCode = 404;
+          res.end("Run `parity terminal export` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
     },
   };
 }
 
-// Two builds share this file (see package.json "build"):
+// Three builds share this file (see package.json "build"):
 //   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
 //                            /verify/ and the legal pages under /legal/, with their assets
 //                            in /assets/. Empties dist/.
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
+//   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
+//                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
+//                            must not load anything from /app/.
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "login/index", "signup/index", "reset/index", "verify/index",
@@ -108,6 +124,16 @@ export default defineConfig(({ command, mode }) => ({
         emptyOutDir: true,
         rollupOptions: { input: Object.fromEntries(SITE_PAGES.map((p) => [p.replace("/index", ""), here(`${p}.html`)])) },
       }
+    : command === "build" && mode === "sim"
+    ? {
+        sourcemap: false,
+        chunkSizeWarningLimit: 1800,
+        outDir: "dist",
+        emptyOutDir: false,
+        assetsDir: "sim/assets",
+        copyPublicDir: false,
+        rollupOptions: { input: { sim: here("sim/index.html") } as Record<string, string> },
+      }
     : {
         sourcemap: false,
         chunkSizeWarningLimit: 1800,
@@ -115,8 +141,8 @@ export default defineConfig(({ command, mode }) => ({
         emptyOutDir: false,
         assetsDir: "app/assets",
         copyPublicDir: false,
-        // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research,
-        // and /sim/ is Sim World on its own, full screen (DEC-0020).
-        rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html"), sim: here("sim/index.html") } },
+        // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research.
+        // /sim/ is built on its own (--mode sim, above).
+        rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") } },
       },
 }));
