@@ -5,9 +5,11 @@ Two jobs, both honest about being history rather than forecasts:
 * ``export`` writes the static file the world map reads: every currency we hold as its
   value in US dollars (daily for recent years, weekly back to 1986), the 3-month
   interest rates behind carry, the oil, gas and copper prices, and how each currency
-  moved after each catalog event. The event reactions reuse the scenario simulator's
-  own event study (``scenarios.event_reaction``), so the map and the Scenarios page
-  measure a reaction the same way.
+  moved after each catalog event. For the replay tabs (DEC-0020) it also carries the
+  12 US industries, the research factors, the Treasury curve and the VIX, weekly, with
+  yields and the VIX marked as levels, not prices. The event reactions reuse the
+  scenario simulator's own event study (``scenarios.event_reaction``), so the map and
+  the Scenarios page measure a reaction the same way.
 * ``bootstrap_paths`` draws simulated paths for a basket by stitching together blocks
   of real weekly returns, from all of history or only from the weeks after past events
   like a scenario. The paths show a range of outcomes and their risks under the
@@ -80,6 +82,29 @@ PATH_EXTRAS = [("stocks", "US stocks", "eq.US_TOTAL"),
                ("bonds10", "US 10-year Treasuries", "bond.TR10"),
                ("bonds2", "US 2-year Treasuries", "bond.TR2")]
 
+# Series the replay tabs add (DEC-0020): US industries and research factors (Kenneth
+# French, total return or long-short indexes), the Treasury curve and the VIX. Yields and
+# the VIX are levels, not prices, so the page never turns them into returns.
+INDUSTRY_NAMES = {"NoDur": "Consumer staples", "Durbl": "Consumer durables",
+                  "Manuf": "Manufacturing", "Enrgy": "Energy", "Chems": "Chemicals",
+                  "BusEq": "Business equipment (tech)", "Telcm": "Telecoms",
+                  "Utils": "Utilities", "Shops": "Retail", "Hlth": "Health care",
+                  "Money": "Finance", "Other": "Other industries"}
+FACTOR_NAMES = {"SMB": "Size (small minus big)", "HML": "Value (cheap minus dear)",
+                "MOM": "Momentum (winners minus losers)", "RMW": "Profitability",
+                "CMA": "Investment (careful minus aggressive)", "STREV": "Short-term reversal",
+                "LTREV": "Long-term reversal"}
+PLAY_EXTRAS = (
+    [(f"ind.{k}", v, f"ind.{k}", "industries", "price") for k, v in INDUSTRY_NAMES.items()]
+    + [(f"factor.{k}", v, f"factor.{k}", "factors", "price") for k, v in FACTOR_NAMES.items()]
+    + [("bond.UST2Y", "US 2-year yield", "bond.UST2Y", "yields", "level"),
+       ("bond.UST10Y", "US 10-year yield", "bond.UST10Y", "yields", "level"),
+       ("bond.UST30Y", "US 30-year yield", "bond.UST30Y", "yields", "level"),
+       ("rate.TBILL3M", "US 3-month bill", "rate.TBILL3M", "yields", "level"),
+       ("risk.VIX", "VIX (fear gauge)", "risk.VIX", "risk", "level")]
+)
+COPPER_LAG_DAYS = 5  # business days after the month ends, as the backtests read it
+
 
 def _sig(v: float, digits: int = 6) -> float | None:
     return None if v is None or not math.isfinite(v) else float(f"{v:.{digits}g}")
@@ -106,6 +131,11 @@ def load_levels(root: Path = store.DEFAULT_DIR) -> dict[str, pd.Series]:
         except FileNotFoundError:
             continue
     for short, _, key in COMMODITIES + MONTHLY + PATH_EXTRAS:
+        try:
+            out[short] = _dedup(store.load(key, root))
+        except FileNotFoundError:
+            continue
+    for short, _, key, _, _ in PLAY_EXTRAS:
         try:
             out[short] = _dedup(store.load(key, root))
         except FileNotFoundError:
@@ -144,19 +174,28 @@ def daily_grid(levels: dict[str, pd.Series], keys: list[str], start: str = DAILY
     return {"dates": [d.date().isoformat() for d in idx], "series": series}
 
 
-def weekly_grid(levels: dict[str, pd.Series], keys: list[str], start: str = WEEKLY_START) -> dict:
+def weekly_grid(levels: dict[str, pd.Series], keys: list[str], start: str = WEEKLY_START,
+                digits: int = 6) -> dict:
     """Friday closes (the last close of each week) from `start`, null before a series begins."""
     present = [k for k in keys if k in levels]
     if not present:
         return {"dates": [], "series": {}}
     frame = pd.concat({k: levels[k].resample("W-FRI").last() for k in present}, axis=1)
     frame = frame[frame.index >= pd.Timestamp(start)]
+    # The week still in progress is labelled with its last real close, not a Friday that
+    # has not happened yet.
+    last = max(levels[k].index.max() for k in present)
     # A week with no close at all (a series that paused) stays empty, never copied.
-    return {"dates": [d.date().isoformat() for d in frame.index],
-            "series": {k: [_sig(v) for v in frame[k].to_numpy(float)] for k in present}}
+    return {"dates": [min(d, last).date().isoformat() for d in frame.index],
+            "series": {k: [_sig(v, digits) for v in frame[k].to_numpy(float)] for k in present}}
 
 
-def monthly_points(s: pd.Series, start: str = WEEKLY_START) -> list[list]:
+def monthly_points(s: pd.Series, start: str = WEEKLY_START, lag: int | None = None) -> list[list]:
+    """[date, value] pairs. With `lag`, a monthly average dated the 1st moves to the day
+    it could first be read: the month's end plus `lag` business days."""
+    if lag is not None:
+        s = s.copy()
+        s.index = s.index + pd.offsets.MonthEnd(0) + pd.offsets.BDay(lag)
     s = s[s.index >= pd.Timestamp(start)]
     return [[d.date().isoformat(), _sig(v, 5)] for d, v in s.items()]
 
@@ -194,21 +233,26 @@ def export(levels: dict[str, pd.Series], rates: dict[str, pd.Series],
     commodity_keys = [k for k, _, _ in COMMODITIES]
     extras = [k for k, _, _ in PATH_EXTRAS]
     lasts = [s.index.max() for s in levels.values()]
+    play = [k for k, *_ in PLAY_EXTRAS if k in levels]
     labels = {**{c.code: c.name for c in CURRENCIES},
-              **{k: label for k, label, _ in COMMODITIES + MONTHLY + PATH_EXTRAS}}
+              **{k: label for k, label, _ in COMMODITIES + MONTHLY + PATH_EXTRAS},
+              **{k: label for k, label, *_ in PLAY_EXTRAS}}
     groups = {**{c.code: "currencies" for c in CURRENCIES},
               **{k: "commodities" for k, _, _ in COMMODITIES + MONTHLY},
-              "stocks": "stocks", "bonds10": "bonds", "bonds2": "bonds"}
+              "stocks": "stocks", "bonds10": "bonds", "bonds2": "bonds",
+              **{k: g for k, _, _, g, _ in PLAY_EXTRAS}}
+    kinds = {k: kind for k, _, _, _, kind in PLAY_EXTRAS}
     return {
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "data_through": max(lasts).date().isoformat() if lasts else None,
         "assets": [{"key": k, "label": labels[k], "group": groups[k],
                     "first": levels[k].index.min().date().isoformat(),
-                    "rate": k in rates} for k in [*codes, *commodity_keys, "copper", *extras]
-                   if k in levels],
+                    "rate": k in rates, "kind": kinds.get(k, "price")}
+                   for k in [*codes, *commodity_keys, "copper", *extras, *play] if k in levels],
         "daily": daily_grid(levels, [*codes, *commodity_keys]),
-        "weekly": weekly_grid(levels, [*codes, *commodity_keys, *extras]),
-        "monthly": {k: monthly_points(levels[k]) for k, _, _ in MONTHLY if k in levels},
+        "weekly": weekly_grid(levels, [*codes, *commodity_keys, *extras, *play], digits=5),
+        "monthly": {k: monthly_points(levels[k], lag=COPPER_LAG_DAYS) for k, _, _ in MONTHLY
+                    if k in levels},
         "rates": {code: monthly_points(s) for code, s in rates.items()},
         "event_path_step": EVENT_PATH_STEP,
         "analogue_weeks": ANALOGUE_WEEKS,

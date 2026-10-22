@@ -55,6 +55,7 @@ Parity started as a research project asking whether a currency strategy can beat
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](../decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0019: Real trading later, what it would legally take](../decisions/0019-real-trading-later-what-it-would-legally-take.md)
+- [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](../decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
 - [LOG-0006: Ayan work log, merges, domain, email and the two product plan](../log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->

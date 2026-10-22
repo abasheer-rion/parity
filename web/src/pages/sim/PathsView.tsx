@@ -4,18 +4,21 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { Button, DataTable, FanChart, FilterChip, Grid, Panel, Segmented, Stat, toast, type Column } from "../../ui";
 import type { Match, Spec } from "../../lib/scenarios";
-import { analogueMask, bands, bootstrap, risk, toCsv, valueOf, weeklyReturns } from "../../lib/paths";
+import { analogueMask, bands, bootstrap, risk, toCsv, valueOf, weeklyReturns, type Sim } from "../../lib/paths";
+import { Board, leaderOf, Stage, type BoardRow } from "./play/Stage";
+import { usePlayback } from "./play/usePlayback";
+import { tone } from "./play/data";
 import { signed, type WorldData } from "../../lib/world";
 
 type Pool = "all" | "analogues";
 const MAX_ASSETS = 6;
-const GROUP_LABEL: Record<string, string> = { currencies: "Currencies (value in US dollars)", commodities: "Commodities", stocks: "Stocks", bonds: "Bonds" };
+const GROUP_LABEL: Record<string, string> = { currencies: "Currencies (value in US dollars)", commodities: "Commodities", stocks: "Stocks", bonds: "Bonds", industries: "US industries", factors: "Research factors (long-short)" };
 
 export function PathsView({ data, basket, setBasket, spec, matches, hasScenario, onScenario }: {
   data: WorldData; basket: string[]; setBasket: (b: string[]) => void; spec: Spec; matches: Match[]; hasScenario: boolean; onScenario: () => void;
 }) {
   const weeklyKeys = new Set(Object.keys(data.weekly.series));
-  const assets = data.assets.filter((a) => weeklyKeys.has(a.key));
+  const assets = data.assets.filter((a) => weeklyKeys.has(a.key) && a.kind !== "level");
   const label = Object.fromEntries(assets.map((a) => [a.key, a.label]));
   const keys = basket.filter((k) => weeklyKeys.has(k));
   const [weeks, setWeeks] = useState("26");
@@ -48,9 +51,6 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
   }, [data, keysKey, weeks, n, block, seed, pool, matches]);
 
   const sim = result && "sim" in result ? result.sim : null;
-  const rows = sim ? [...sim.keys.map((k, a) => ({ key: k, name: label[k] ?? k, r: risk(sim, a, Number(lossAt)) })),
-    ...(sim.keys.length > 1 ? [{ key: "basket", name: "Equal mix of all", r: risk(sim, -1, Number(lossAt)) }] : [])] : [];
-
   const download = () => {
     if (!sim) return;
     const blob = new Blob([toCsv(sim)], { type: "text/csv" });
@@ -62,16 +62,6 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     toast(`Saved ${sim.n} paths of ${sim.weeks} weeks`);
   };
-
-  const cols: Column<(typeof rows)[number]>[] = [
-    { key: "name", header: "Asset", align: "left", render: (r) => r.key === "basket" ? <strong>{r.name}</strong> : r.name },
-    { key: "median", header: "Middle outcome", sort: (r) => r.r.median, tone: (r) => r.r.median, render: (r) => signed(r.r.median) },
-    { key: "mid", header: "Middle half", render: (r) => <span className="nowrap">{signed(r.r.q25)} to {signed(r.r.q75)}</span> },
-    { key: "worst5", header: "Worst 5%", sort: (r) => r.r.worst5, tone: (r) => r.r.worst5, render: (r) => signed(r.r.worst5) },
-    { key: "tail5", header: "Average of worst 5%", sort: (r) => r.r.tail5, render: (r) => signed(r.r.tail5) },
-    { key: "ploss", header: "Chance of a loss", sort: (r) => r.r.pLoss, render: (r) => pct(r.r.pLoss) },
-    { key: "pgt", header: `Chance of losing over ${lossAt}%`, sort: (r) => r.r.pLossGt, render: (r) => pct(r.r.pLossGt) },
-  ];
 
   const groups = [...new Set(assets.map((a) => a.group))];
 
@@ -140,29 +130,8 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
           {pool === "analogues" && sim.poolWeeks < 60 && (
             <p className="warning">Only {sim.poolWeeks} weeks to draw from, so the paths repeat the same few stretches of history. Treat the range as a handful of stories.</p>
           )}
-
-          <Panel title="Risk at the end" actions={<Button size="sm" icon="download" onClick={download}>Export paths as CSV</Button>}>
-            <DataTable rows={rows} rowKey={(r) => r.key} columns={cols} caption={`Risk after ${sim.weeks} weeks, ${sim.n} simulated paths`} initialSort={{ key: "name", dir: "asc" }} pin={(r) => r.key === "basket"} />
-            <p className="muted small" style={{ margin: "10px 0 0" }}>
-              Change from today's level after {sim.weeks} weeks. Worst 5% means 1 path in 20 did this badly or worse; the average of
-              the worst 5% is how bad those paths were on average. The CSV has one row per path and week, starting at 100, the
-              same layout as <code>parity world paths</code>.
-            </p>
-          </Panel>
-
-          <h2 className="sw2-h2">Range of simulated paths</h2>
-          <p className="muted small">The bold line is the middle path, the dark band the middle half, the light band holds 90 of every 100 paths, and faint lines are a few single paths.</p>
-          <Grid cols={2}>
-            {[...sim.keys.map((k, a) => ({ k, a, name: label[k] ?? k })), ...(sim.keys.length > 1 ? [{ k: "basket", a: -1, name: "Equal mix of all" }] : [])].map(({ k, a, name }, i) => (
-              <Panel key={k} title={name}>
-                <FanChart label={`${name}, simulated paths`} bands={bands(sim, a)} color={`var(--series-${(i % 8) + 1})`} unit="week" countLabel="simulated path" outerLabel="90 in 100 paths"
-                  markers={([[4, "1m"], [13, "3m"], [26, "6m"], [52, "1y"], [104, "2y"]] as [number, string][]).filter(([w]) => w <= sim.weeks).map(([day, label]) => ({ day, label }))}
-                  paths={Array.from({ length: Math.min(8, sim.n) }, (_, p) => ({ name: `path ${p + 1}`, values: Array.from({ length: sim.weeks + 1 }, (_, t) => valueOf(sim, p, t, a) - 100) }))}
-                  format={(v) => signed(v)} tickFormat={(v) => signed(v, 0)} height={210} />
-              </Panel>
-            ))}
-          </Grid>
-          {spec.title && pool === "analogues" && <p className="muted small">Scenario: {spec.title}</p>}
+          <PathsStage sim={sim} label={label} lossAt={Number(lossAt)} download={download} resetKey={`${keysKey}-${weeks}-${n}-${block}-${seed}-${pool}`}
+            eyebrow={`Simulated paths · ${sim.n.toLocaleString("en-US")} paths of ${sim.weeks} weeks${pool === "analogues" && spec.title ? ` · after events like "${spec.title}"` : ""}`} />
         </>
       )}
     </div>
@@ -170,6 +139,76 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
 }
 
 const pct = (v: number) => `${Math.round(v * 100)}%`;
+const MARKERS = ([[4, "1m"], [13, "3m"], [26, "6m"], [52, "1y"], [104, "2y"]] as [number, string][]);
+const RATES = { "1x": 4, "4x": 12, "16x": 48 };
+
+/** The paths drawing in week by week, like the race, with the risk table following along. */
+function PathsStage({ sim, label, lossAt, download, resetKey, eyebrow }: {
+  sim: Sim; label: Record<string, string>; lossAt: number; download: () => void; resetKey: string; eyebrow: string;
+}) {
+  const pb = usePlayback(sim.weeks + 1, RATES, resetKey);
+  const t = pb.i;
+  const lanes = [...sim.keys.map((k, a) => ({ key: k, a, name: label[k] ?? k })), ...(sim.keys.length > 1 ? [{ key: "basket", a: -1, name: "Equal mix of all" }] : [])];
+  const [focus, setFocus] = useState<string>(lanes.length > 1 ? "basket" : lanes[0].key);
+  const fanBands = useMemo(() => Object.fromEntries(lanes.map((l) => [l.key, bands(sim, l.a)])), [sim]); // eslint-disable-line react-hooks/exhaustive-deps
+  const samples = useMemo(() => Object.fromEntries(lanes.map((l) => [l.key, Array.from({ length: Math.min(8, sim.n) }, (_, p) => ({ name: `path ${p + 1}`, values: Array.from({ length: sim.weeks + 1 }, (_, w) => valueOf(sim, p, w, l.a) - 100) }))])), [sim]); // eslint-disable-line react-hooks/exhaustive-deps
+  const risks = lanes.map((l, i) => ({ ...l, color: l.a < 0 ? "var(--text)" : `var(--series-${(i % 8) + 1})`, r: risk(sim, l.a, lossAt, Math.max(1, t)) }));
+  const rows: BoardRow[] = risks.map((x) => ({
+    key: x.key, label: x.name, color: x.color, bench: x.a < 0, sort: t === 0 ? null : x.r.median,
+    cells: [<span className={tone(x.r.median)}>{t === 0 ? "0%" : signed(x.r.median)}</span>, <span className={tone(x.r.worst5)}>{t === 0 ? "0%" : signed(x.r.worst5, 0)}</span>, t === 0 ? "n/a" : pct(x.r.pLoss)],
+  }));
+  const markers = MARKERS.filter(([w]) => w <= sim.weeks).map(([day, l]) => ({ day, label: l }));
+  const cols: Column<(typeof risks)[number]>[] = [
+    { key: "name", header: "Asset", align: "left", render: (r) => r.a < 0 ? <strong>{r.name}</strong> : r.name },
+    { key: "median", header: "Middle outcome", sort: (r) => r.r.median, tone: (r) => r.r.median, render: (r) => signed(r.r.median) },
+    { key: "mid", header: "Middle half", render: (r) => <span className="nowrap">{signed(r.r.q25)} to {signed(r.r.q75)}</span> },
+    { key: "worst5", header: "Worst 5%", sort: (r) => r.r.worst5, tone: (r) => r.r.worst5, render: (r) => signed(r.r.worst5) },
+    { key: "tail5", header: "Average of worst 5%", sort: (r) => r.r.tail5, render: (r) => signed(r.r.tail5) },
+    { key: "ploss", header: "Chance of a loss", sort: (r) => r.r.pLoss, render: (r) => pct(r.r.pLoss) },
+    { key: "pgt", header: `Chance of losing over ${lossAt}%`, sort: (r) => r.r.pLossGt, render: (r) => pct(r.r.pLossGt) },
+  ];
+  const f = lanes.find((l) => l.key === focus) ?? lanes[0];
+  const fi = lanes.indexOf(f);
+  const weekWords = t === 0 ? "the start: every path at 100" : t < 9 ? `${t} week${t === 1 ? "" : "s"} ahead` : `about ${Math.round(t / 4.35)} months ahead`;
+
+  return (
+    <Stage pb={pb} label="Simulated paths replay" eyebrow={eyebrow} big={`Week ${t}`} sub={[weekWords]}
+      leading={leaderOf(rows)} bands={markers.map((m) => ({ label: m.label, a: m.day, b: m.day }))} startLabel="Week 0" endLabel={`Week ${sim.weeks}`}
+      valueText={(i) => `Week ${i}`}
+      controls={<Button size="sm" icon="download" onClick={download}>Export CSV</Button>}
+      honest={<>Simulated from history, not a forecast. The range shows what reshuffling the past can do; it cannot show anything that has not happened before.</>}
+      visual={
+        <div className="pb-fan">
+          <div className="pb-curve-head"><span>{f.name}: simulated range, week by week</span></div>
+          <FanChart label={`${f.name}, simulated paths`} bands={fanBands[f.key]} paths={samples[f.key]} color={f.a < 0 ? "var(--series-1)" : `var(--series-${(fi % 8) + 1})`}
+            unit="week" countLabel="simulated path" outerLabel="90 in 100 paths" markers={markers} upTo={t}
+            format={(v) => signed(v)} tickFormat={(v) => signed(v, 0)} height={300} />
+        </div>
+      }
+      board={<Board rows={rows} name="Asset" headers={["Median", "Worst 5%", "Loss"]} picked={focus} onPick={setFocus} playing={pb.playing}
+        caption="At the week shown: the middle path, the 1-in-20 bad case and the chance of being below the start. Click a row to chart it." />}
+      below={
+        <div className="pb-below">
+          <Panel title={`Risk at week ${Math.max(1, t)}`} actions={<Button size="sm" icon="download" onClick={download}>Export paths as CSV</Button>}>
+            <DataTable rows={risks} rowKey={(r) => r.key} columns={cols} caption={`Risk after ${Math.max(1, t)} weeks, ${sim.n} simulated paths`} initialSort={{ key: "name", dir: "asc" }} pin={(r) => r.a < 0} />
+            <p className="muted small" style={{ margin: "10px 0 0" }}>
+              Change from today's level. Worst 5% means 1 path in 20 did this badly or worse; the average of the worst 5% is how
+              bad those paths were on average. The CSV has one row per path and week, starting at 100, the same layout as <code>parity world paths</code>.
+            </p>
+          </Panel>
+          <Grid cols={2}>
+            {lanes.map((l, i) => (
+              <Panel key={l.key} title={l.name}>
+                <FanChart label={`${l.name}, simulated paths`} bands={fanBands[l.key]} paths={samples[l.key]} color={`var(--series-${(i % 8) + 1})`} unit="week"
+                  countLabel="simulated path" outerLabel="90 in 100 paths" markers={markers} upTo={t} format={(v) => signed(v)} tickFormat={(v) => signed(v, 0)} height={200} />
+              </Panel>
+            ))}
+          </Grid>
+        </div>
+      }
+    />
+  );
+}
 
 function Setting({ label, children }: { label: string; children: ReactNode }) {
   return (

@@ -53,6 +53,9 @@ def test_weekly_grid_uses_friday_close(levels):
     d = grid["dates"][0]
     assert pd.Timestamp(d).day_of_week == 4
     assert grid["series"]["EUR"][0] == pytest.approx(levels["EUR"][:d].iloc[-1], rel=1e-5)
+    # 2021-12-31 is a Friday; cut the data on a Wednesday and the last week keeps that date
+    cut = {"EUR": levels["EUR"][:"2021-12-29"]}
+    assert world.weekly_grid(cut, ["EUR"], start="2021-12-01")["dates"][-1] == "2021-12-29"
 
 
 def test_event_reactions_match_the_scenario_study(levels):
@@ -158,6 +161,28 @@ def test_risk_numbers():
     assert r["median"] == pytest.approx(0.20)
     assert r["worst5"] == pytest.approx(-0.20)
     assert r["tail5"] == pytest.approx(-0.20)
+
+
+def test_monthly_lag_moves_to_when_it_could_be_read():
+    s = pd.Series([1.0, 2.0], index=pd.to_datetime(["2020-01-01", "2020-02-01"]))
+    pts = world.monthly_points(s, start="2019-01-01", lag=5)
+    # January's average is known 5 business days after 31 January 2020 (a Friday)
+    assert pts[0] == ["2020-02-07", 1.0]
+    assert world.monthly_points(s, start="2019-01-01")[0] == ["2020-01-01", 1.0]
+
+
+def test_export_marks_levels_and_replay_groups(levels, rates):
+    idx = levels["EUR"].index
+    lv = {**levels, "ind.Enrgy": levels["oil"] / 60, "factor.MOM": levels["stocks"] / 100,
+          "bond.UST10Y": pd.Series(4.0, index=idx), "risk.VIX": pd.Series(20.0, index=idx)}
+    doc = world.export(lv, rates, [])
+    assets = {a["key"]: a for a in doc["assets"]}
+    assert assets["ind.Enrgy"]["group"] == "industries" and assets["ind.Enrgy"]["kind"] == "price"
+    assert assets["factor.MOM"]["group"] == "factors"
+    assert assets["bond.UST10Y"]["kind"] == "level" and assets["risk.VIX"]["kind"] == "level"
+    assert assets["EUR"]["kind"] == "price"
+    assert "bond.UST10Y" in doc["weekly"]["series"]
+    assert "ind.Enrgy" not in doc["daily"]["series"]  # replay series are weekly only
 
 
 def test_paths_csv_layout():

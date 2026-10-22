@@ -139,10 +139,10 @@ export function bands(sim: Sim, a: number): Band[] {
 
 export interface Risk { median: number; q25: number; q75: number; worst5: number; best5: number; tail5: number; pLoss: number; pLossGt: number; lossAt: number }
 
-/** Risk of the end values (percent returns): see world.risk in the engine. */
-export function risk(sim: Sim, a: number, lossAt: number): Risk {
+/** Risk of the values at week `t` (the end by default), as percent returns: see world.risk in the engine. */
+export function risk(sim: Sim, a: number, lossAt: number, t = sim.weeks): Risk {
   const r = new Float64Array(sim.n);
-  for (let p = 0; p < sim.n; p++) r[p] = valueOf(sim, p, sim.weeks, a) - 100;
+  for (let p = 0; p < sim.n; p++) r[p] = valueOf(sim, p, t, a) - 100;
   r.sort();
   const q5 = quantile(r, 0.05);
   let tail = 0, nt = 0, loss = 0, lossGt = 0;
