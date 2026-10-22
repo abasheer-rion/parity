@@ -745,18 +745,10 @@ make(_Reversal, "oil_reversal", "Oil snaps back",
      lookback=21, rebalance="W", grid={"lookback": [10, 21, 63]})
 
 
-class _GasWinter(MixBook):
-    def weights(self, panel):
-        m = (panel.index + pd.offsets.BDay(1)).month
-        on = pd.Series(np.isin(m, self.months).astype(float), index=panel.index)
-        return pd.DataFrame({"cmd.HH_GAS": on}, index=panel.index)
-
-
-make(_GasWinter, "gas_into_winter", "Natural gas into winter",
-     "Owns natural gas from September to November, when storage fills and heating demand "
-     "looms. Spot prices; real futures pay a roll cost this ignores.", "calendar",
-     "commodities", "seasonal", "monthly", "algorithms/0044-natural-gas-storage-report.md",
-     mix={"cmd.HH_GAS": 1.0}, months=(9, 10, 11), rebalance="D")
+# No natural gas recipe: the only gas price we have is Henry Hub spot, which jumps
+# 85% in a day in cold snaps (January 2024, January 2026). Futures, the thing people
+# actually trade, move far less. Holding spot gas faked a +2,600% "Natural gas into
+# winter" (removed 2026-10-22). Gas stays a signal only until we have futures data.
 
 # Copper is a monthly average, not a price anyone could trade at: averaging makes it look
 # trendier than it is. It is used only as a signal (fx_copper_aud, stocks_copper_up).
