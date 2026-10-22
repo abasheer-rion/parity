@@ -5,6 +5,6 @@ Type this code on the Parity sign-in screen to finish signing in:
     {{ .Token }}
 
 Or sign in with one click:
-{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}
+{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}
 
 The code and link work once and expire in 60 minutes. Never share this code. Parity will never ask you for it.
