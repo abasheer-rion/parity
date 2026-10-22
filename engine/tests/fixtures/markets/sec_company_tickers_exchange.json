@@ -1,0 +1,58 @@
+{
+ "fields": [
+  "cik",
+  "name",
+  "ticker",
+  "exchange"
+ ],
+ "data": [
+  [
+   320193,
+   "Apple Inc.",
+   "AAPL",
+   "Nasdaq"
+  ],
+  [
+   726728,
+   "REALTY INCOME CORP",
+   "O",
+   "NYSE"
+  ],
+  [
+   1477049,
+   "Sprott Physical Gold Trust",
+   "PHYS",
+   "NYSE"
+  ],
+  [
+   1610853,
+   "Solana Co",
+   "HSDT",
+   "Nasdaq"
+  ],
+  [
+   884394,
+   "SPDR S&P 500 ETF TRUST",
+   "SPY",
+   "NYSE"
+  ],
+  [
+   1222333,
+   "SPDR GOLD TRUST",
+   "GLD",
+   "NYSE"
+  ],
+  [
+   1852317,
+   "Fidelity Wise Origin Bitcoin Fund",
+   "FBTC",
+   "CBOE"
+  ],
+  [
+   1980994,
+   "iShares Bitcoin Trust ETF",
+   "IBIT",
+   "Nasdaq"
+  ]
+ ]
+}

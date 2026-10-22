@@ -26,6 +26,10 @@
     parity news impact           how markets moved after each stored headline
     parity news records          biggest market days since 1999 (--explain asks GDELT)
     parity news export DIR       write the News page's JSON into DIR/news
+
+    parity markets fetch         crypto, perps, ETFs and new fund filings (skips fresh ones)
+    parity markets status        when each markets source was last fetched
+    parity markets export DIR    write the Markets pages' JSON into DIR/markets
 """
 
 from __future__ import annotations
@@ -379,6 +383,12 @@ def _news(args) -> int:
     return news_cli.run(args)
 
 
+def _markets(args) -> int:
+    from .markets import cli as markets_cli
+
+    return markets_cli.run(args)
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="parity", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -523,6 +533,10 @@ def main(argv: list[str] | None = None) -> int:
     from .news import cli as news_cli
 
     news_cli.add_parser(sub).set_defaults(func=_news)
+
+    from .markets import cli as markets_cli
+
+    markets_cli.add_parser(sub).set_defaults(func=_markets)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:
