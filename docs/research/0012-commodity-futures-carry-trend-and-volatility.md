@@ -25,7 +25,7 @@ We read eleven papers in full and checked every number below against the text.
 3. **Trend following on futures has a long record but a weak recent decade.** AQR's backtest reports a net Sharpe of 0.77 from 1880 to 2013 and 0.62 from 2000 to 2013 [@hurst2014]. Trend managers struggled for much of the 2010s, then had a record year in 2022 (SG Trend Index +27.35%).
 4. **Selling commodity volatility earns a premium, with crash risk.** Shorting variance earned a Sharpe of 0.59 in crude oil and 0.35 in natural gas over 1996 to 2006, against 1.02 for the S&P 500 ([Trolle and Schwartz, 2010](https://infoscience.epfl.ch/record/148475)) [@trolle2010]. Buyers of variance lost money in 18 of 21 commodity markets ([Prokopczuk, Symeonidis and Wese Simen, 2017](https://ueaeprints.uea.ac.uk/63547/)) [@prokopczuk2017].
 5. **Commodity currencies predict commodity prices better than the reverse.** Chen, Rogoff and Rossi (2010) find the exchange rates of Australia, Canada, New Zealand, South Africa and Chile forecast commodity prices out of sample, while the reverse "is notably less robust" [@chen2010]. Ferraro, Rogoff and Rossi (2015) find oil moves the Canadian dollar on the same day, but lagged oil predicts little, and nothing at monthly or quarterly frequency [@ferraro2015]. That explains why our oil catch-up idea failed ([EXP-0003](../experiments/0003-monthly-commodity-gap.md)) and suggests turning it around.
-6. **Free futures data exists for energy.** The US Energy Information Administration publishes daily settlement prices for the first four NYMEX contracts of crude oil, natural gas, heating oil and gasoline. That is enough for proper rolled futures returns and the slope of each curve. It fixes the flaw in our `commodity_tsmom` test, which traded spot gas prices nobody could trade ([EXP-0004](../experiments/0004-all-strategies-1999.md#threats-to-validity)).
+6. **Free futures data exists for energy, up to April 2024.** The US Energy Information Administration published daily settlement prices for the first four NYMEX contracts of crude oil, natural gas, heating oil and gasoline until 5 April 2024, when it stopped. That is enough for proper rolled futures returns and the slope of each curve over about 20 to 40 years, but not for anything after April 2024. It fixes the flaw in our `commodity_tsmom` test, which traded spot gas prices nobody could trade ([EXP-0004](../experiments/0004-all-strategies-1999.md#threats-to-validity)).
 
 ## Does more volatility help us beat the S&P 500?
 
@@ -90,7 +90,7 @@ Option buyers pay for protection. On average the volatility they pay for is high
 
 The crashes are easy to name. Natural gas variance behaves like a call option (it explodes upward in cold snaps), per Trolle and Schwartz. Amaranth Advisors lost more than $6 billion in September 2006 on natural gas spreads, a different trade but the same market and the same lesson about short-tail exposure ([RES-0013](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)).
 
-**What we can test for free.** CBOE publishes OVX, a 30-day implied volatility index for crude oil, on FRED from 2007. Because OVX is built like the VIX, its square is close to the price of a 30-day variance swap. Realised variance can be measured from the EIA crude futures prices. That gives an approximate monthly payoff for selling crude oil variance. It leaves out the cost of trading variance swaps or option strips, which is large, so any result is an upper bound.
+**What we can test for free.** CBOE publishes OVX, a 30-day implied volatility index for crude oil, on FRED from 2007. Because OVX is built like the VIX, its square is close to the price of a 30-day variance swap. Realised variance can be measured from the EIA crude futures prices, which end in April 2024. That gives an approximate monthly payoff for selling crude oil variance. It leaves out the cost of trading variance swaps or option strips, which is large, so any result is an upper bound.
 
 ## Commodity currencies and commodity prices
 
@@ -105,7 +105,7 @@ So the testable version is: use last quarter's moves in commodity currencies to 
 
 | What | Source | Coverage | Notes |
 | --- | --- | --- | --- |
-| NYMEX futures, contracts 1 to 4 | [EIA](https://www.eia.gov/dnav/pet/pet_pri_fut_s1_d.htm) | Daily; WTI crude from 1983, heating oil from 1980s, natural gas from 1994, RBOB gasoline from 2005 | Public domain. Contract 1 rolls at each expiry, so returns must be stitched from the same contract on each day |
+| NYMEX futures, contracts 1 to 4 | [EIA](https://www.eia.gov/dnav/pet/pet_pri_fut_s1_d.htm) | Daily; WTI crude from 1983, heating oil from 1980 (contract 2 from 1994), natural gas from 1994, RBOB gasoline from October 2005. **All series stop on 5 April 2024**; the EIA tables say later prices are not available | Public domain. Contract 1 rolls at each expiry, so returns must be stitched from the same contract on each day. Backtests can run to April 2024 only, and nothing can be forward tested with this source |
 | Crude oil implied volatility (OVX) | FRED, series `OVXCLS` | Daily, May 2007 on | Index, not a tradable price |
 | Gold implied volatility (GVZ) | FRED, series `GVZCLS` | Daily, 2008 on | Same |
 | Metals and agricultural futures curves | Not free | | So our carry and trend tests are energy only |
