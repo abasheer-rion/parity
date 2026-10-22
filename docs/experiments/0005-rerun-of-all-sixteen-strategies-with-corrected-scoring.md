@@ -24,7 +24,7 @@ With Sharpe ratios measured on returns above the T-bill and borrowing paid for (
 
 - The sixteen strategies and settings of `REG-0003`, unchanged.
 - 1999-01-04 to the latest data, 1 bp costs, carry credited.
-- 204 trials counted (188 before, plus these 16).
+- 290 trials counted (188 before, 86 strategy factory recipes from [DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md), plus these 16).
 
 ## Results
 

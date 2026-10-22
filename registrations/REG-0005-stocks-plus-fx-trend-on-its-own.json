@@ -32,8 +32,8 @@
       "B5"
     ]
   },
-  "prior_trials": 204,
-  "prior_trials_note": "188 counted by RUN-000003 plus the 16 of REG-0004. If REG-0004 has not run first, the ledger floor applies.",
+  "prior_trials": 290,
+  "prior_trials_note": "188 counted by RUN-000003 plus the 16 of REG-0004. If REG-0004 has not run first, the ledger floor applies. Raised from 204 to 290 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count.",
   "what_would_change_our_mind": "Failing A1 or A2 means the overlay does not improve on stocks at equal risk. Failing B5 means its crisis cushion was a few lucky episodes.",
   "already_seen": "The overlay's results under the old scoring and without the M1 fix were seen in RUN-000003 (6 of 11 tests). Its crisis behaviour, which motivates this plan, was seen on the Compare page. Not seen under the corrected code."
 }

@@ -51,8 +51,8 @@
   "pass_criteria": {
     "min_real_tests": 4
   },
-  "prior_trials": 205,
-  "prior_trials_note": "205 = 188 (RUN-000003) + 16 (REG-0004) + 1 (REG-0005), counted across all families as the project has so far (the audit's H2 questions this; see RES-0008). No exploratory evaluation of these strategies was run.",
+  "prior_trials": 291,
+  "prior_trials_note": "205 = 188 (RUN-000003) + 16 (REG-0004) + 1 (REG-0005), counted across all families as the project has so far (the audit's H2 questions this; see RES-0008). No exploratory evaluation of these strategies was run. Raised from 205 to 291 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count.",
   "what_would_change_our_mind": "Passing 4 of 5 reality tests would make EM carry the first real effect in the project since 2010 and earn a forward test. Failing would mean the published EM results did not survive their own decade.",
   "already_seen": "No. Before registering, only data checks were run (coverage dates, missing values, size of daily price moves); no return, Sharpe ratio or other performance number was computed for these strategies."
 }

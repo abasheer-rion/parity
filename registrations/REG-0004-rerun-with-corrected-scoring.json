@@ -138,8 +138,8 @@
   "pass_criteria": {
     "beats_sp500": true
   },
-  "prior_trials": 188,
-  "prior_trials_note": "The 188 trials counted by RUN-000003. We found no record of exploratory runs after the DEC-0009 fix; if there were any, add them when running.",
+  "prior_trials": 274,
+  "prior_trials_note": "The 188 trials counted by RUN-000003. We found no record of exploratory runs after the DEC-0009 fix; if there were any, add them when running. Raised from 188 to 274 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count.",
   "what_would_change_our_mind": "A strategy passing all six A tests would be the first; it would get its own forward-test registration before we believe it.",
   "already_seen": "Results under the old scoring were seen (RUN-000003). Under the corrected scoring the registrant has computed no results. This makes official the numbers the audit said were wrong, so it is a correction, not a new test."
 }
