@@ -182,7 +182,7 @@ function TermShell() {
         return { ...s, tree: splitLeaf(s.tree, s.focus, dir, n), focus: n.id, max: s.max ? n.id : null };
       }
       const cur = findLeaf(s.tree, s.focus);
-      return { ...s, tree: updateLeaf(s.tree, s.focus, { fn, args, opts: cur?.fn === fn ? cur.opts : {} }) };
+      return { ...s, tree: updateLeaf(s.tree, s.focus, { fn, args, opts: cur?.fn === fn && !args.length ? cur.opts : {} }) };
     });
   }, [setWs]);
 

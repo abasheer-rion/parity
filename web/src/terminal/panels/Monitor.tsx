@@ -1,7 +1,7 @@
 // MON, HEAT and MOV: the market monitor, the heat map and the top movers, all read from
 // the index (no per-series file needed).
 import { useMemo } from "react";
-import { useAsOf, useOpt, useTerm } from "../context";
+import { useAsOf, useOpt, usePanel, useTerm } from "../context";
 import type { TermIndex, TermSeries, Win } from "../data";
 import { fmtChg, fmtLast, fmtNum, normMove, tone, WIN_LABEL } from "../fmt";
 import { PctBar, Seg, Spark, TTable, type TCol } from "../tui";
@@ -16,7 +16,13 @@ export function MonitorPanel() {
 function Monitor({ ix }: { ix: TermIndex }) {
   const t = useTerm();
   const pick = usePick();
-  const [filter, setFilter] = useOpt("group", "all");
+  // MON FX, MON COMMODITIES, MON fx_g10: a class or a group typed after the code.
+  const arg = usePanel().leaf.args.join(" ").toLowerCase();
+  const fromArg = !arg ? "all"
+    : ix.series.some((s) => s.class === arg) ? `class:${arg}`
+    : ix.groups.find((g) => g.id.toLowerCase() === arg || g.label.toLowerCase().includes(arg)) ? `group:${ix.groups.find((g) => g.id.toLowerCase() === arg || g.label.toLowerCase().includes(arg))!.id}`
+    : "all";
+  const [filter, setFilter] = useOpt("group", fromArg);
   useAsOf(ix.data_through);
   const rows = useMemo(() => applyFilter(ordered(ix), filter), [ix, filter]);
   const gl = useMemo(() => groupLabel(ix), [ix]);
