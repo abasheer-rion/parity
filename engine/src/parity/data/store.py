@@ -58,6 +58,9 @@ def build_derived(series: catalog.Series, root: Path) -> pd.Series:
     """eq.US_TOTAL: the Fama and French total return index, then S&P 500 price returns
     plus a daily dividend accrual for the days French has not published yet. The
     dividend accrual is the gap between the two over the last year they overlap."""
+    if series.key in catalog.BOND_DURATION:
+        return bond_total_return(load(series.code, root), catalog.BOND_DURATION[series.key]) \
+            .rename(series.key)
     if series.key != "eq.US_TOTAL":
         raise KeyError(f"No recipe for derived series {series.key}")
     mkt = load("eq.US_MKT", root)
@@ -73,6 +76,14 @@ def build_derived(series: catalog.Series, root: Path) -> pd.Series:
     after = spx.loc[spx.index[spx.index <= last].max():]
     ext = (1 + after.pct_change().dropna() + daily_div).cumprod() * mkt.iloc[-1]
     return pd.concat([mkt, ext]).rename(series.key)
+
+
+def bond_total_return(yield_pct: pd.Series, duration: float) -> pd.Series:
+    """Index from a daily constant-maturity yield: carry plus price change from the move."""
+    y = yield_pct.dropna() / 100
+    days = y.index.to_series().diff().dt.days.fillna(1)
+    ret = y.shift(1) * days / 365 - duration * y.diff()
+    return (1 + ret.fillna(0.0)).cumprod()
 
 
 def content_hash(data: pd.Series) -> str:
@@ -118,6 +129,10 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
     out = {}
     for key, s in frames.items():
         s = s[~s.index.duplicated(keep="last")].sort_index()
+        lag = catalog.get(key).published_after
+        if lag is not None:
+            s.index = s.index + pd.offsets.MonthEnd(0) + pd.offsets.BDay(lag)
+            s = s[~s.index.duplicated(keep="last")]
         aligned = s.reindex(index.union(s.index)).sort_index()
         limit = None if catalog.get(key).frequency == "M" else ffill_limit
         out[key] = aligned.ffill(limit=limit).reindex(index)

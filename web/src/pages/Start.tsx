@@ -9,7 +9,7 @@ import { Icon } from "../ui/icons";
 import { Term } from "./Learn";
 
 const JOBS: { title: string; icon: string; pages: string[] }[] = [
-  { title: "Find out what works", icon: "chart", pages: ["#/strategies", "#/compare", "#/"] },
+  { title: "Find out what works", icon: "chart", pages: ["#/strategies", "#/search", "#/compare", "#/"] },
   { title: "Ask \"what if\"", icon: "pulse", pages: ["#/scenarios", "#/news", "#/news/history"] },
   { title: "Understand a word or a result", icon: "book", pages: ["#/learn", "#/docs", "#/refs"] },
   { title: "Check a result holds up", icon: "checkCircle", pages: ["#/ledger", "#/lab", "#/signals", "#/data"] },

@@ -262,6 +262,32 @@ def _new_strategy(args) -> int:
     return 0
 
 
+def _search(args) -> int:
+    from . import search
+
+    if args.action == "run":
+        if args.forever:
+            search.run_forever(batch=args.batch, max_hours=args.hours)
+            return 0
+        out = search.run_batch(args.n, seed=args.seed)
+        print(f"tried {out['tried']}, failed {out['failed']}")
+    doc = search.export() if args.action in ("run", "export") else None
+    df = search.load()
+    good = df[df["error"].isna()].copy()
+    if not len(good):
+        print("nothing tried yet")
+        return 0
+    good["deflated"] = search.deflate(good)
+    print(f"{len(df)} variations tried, {len(good)} ran, "
+          f"{int(good['beats_market'].sum())} beat the market's Sharpe, "
+          f"{int((good['deflated'] >= 0.95).sum())} pass the luck check")
+    for _, r in good.sort_values("deflated", ascending=False).head(10).iterrows():
+        print(f"  {r['deflated']:.2f}  Sharpe {r['sharpe']:.2f}  {r['cagr']:6.1%}  {r['name']}")
+    if doc:
+        print(f"wrote {len(doc['rows'])} rows to engine/output/search.json")
+    return 0
+
+
 def _analyse(args) -> int:
     from .analysis import analyse_strategy, to_markdown
     from .data import store
@@ -409,6 +435,16 @@ def main(argv: list[str] | None = None) -> int:
                     help="trial count for deflated Sharpe; default is every strategy")
     an.add_argument("--out", default=str(DEFAULT_OUT / "analysis"))
     an.set_defaults(func=_analyse)
+
+    se = sub.add_parser("search", help="the always-on strategy search (DEC-0014)")
+    se.add_argument("action", choices=["run", "status", "export"])
+    se.add_argument("--n", type=int, default=200, help="variations to try (run)")
+    se.add_argument("--forever", action="store_true", help="keep going; for the service")
+    se.add_argument("--batch", type=int, default=50, help="variations per batch (forever)")
+    se.add_argument("--seed", type=int, default=None)
+    se.add_argument("--hours", type=float, default=None,
+                    help="with --forever, exit after this long so the service can restart")
+    se.set_defaults(func=_search)
 
     from .news import cli as news_cli
 
