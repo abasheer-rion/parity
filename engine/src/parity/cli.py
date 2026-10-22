@@ -1,6 +1,9 @@
 """Command line entry point.
 
     parity fetch                 download every series in the catalog
+    parity data sources          every data provider: on or off, key needed, licence
+    parity data series [--source S]
+                                 every catalog series, with its source and code
     parity list                  show registered strategies
     parity run [names...]        backtest and write output/latest.json
     parity publish               send output/latest.json to Supabase
@@ -51,9 +54,41 @@ def _fetch(args) -> int:
     width = max(len(r["key"]) for r in rows)
     for r in rows:
         status = f"{r['first']} to {r['last']} ({r['rows']} rows)" if r["ok"] else r["error"]
-        print(f"{r['key']:<{width}}  {'ok ' if r['ok'] else 'ERR'}  {status}")
-    failed = [r for r in rows if not r["ok"] and r.get("required", True)]
+        mark = "ok " if r["ok"] else "skip" if r.get("skipped") else "ERR"
+        print(f"{r['key']:<{width}}  {mark:<4} {status}")
+    failed = [r for r in rows if not r["ok"] and r.get("required", True)
+              and not r.get("skipped")]
     return 1 if failed and args.strict else 0
+
+
+def _data(args) -> int:
+    from .data import catalog, providers
+
+    if args.action == "sources":
+        rows = providers.rows()
+        if args.json:
+            print(json.dumps(rows, indent=1))
+            return 0
+        for r in rows:
+            print(f"{r['id']:<15} {r['status']:<13} {r['series']:>3} series  key: {r['key']}")
+            print(f"{'':<15} {r['name']}. {r['licence']}. Cost: {r['cost']}."
+                  + (f" {r['note'][:1].upper()}{r['note'][1:]}." if r["note"] else ""))
+        on = sum(r["status"] == "on" for r in rows)
+        print(f"\n{on} of {len(rows)} providers on. Keys are read from the environment and "
+              "never printed; see docs/reference (Bloomberg-style data map).")
+        return 0
+    chosen = [s for s in catalog.CATALOG.values() if not args.source or s.source == args.source]
+    if args.json:
+        print(json.dumps([{"key": s.key, "source": s.source, "code": s.code,
+                           "frequency": s.frequency, "required": s.required, "site": s.site,
+                           "description": s.description} for s in chosen], indent=1))
+        return 0
+    width = max((len(s.key) for s in chosen), default=10)
+    for s in chosen:
+        flags = ("required" if s.required else "optional") + ("" if s.site else ", not on site")
+        print(f"{s.key:<{width}}  {s.source:<9} {s.frequency}  {flags:<23} {s.description}")
+    print(f"\n{len(chosen)} series")
+    return 0
 
 
 def _list(_args) -> int:
@@ -398,6 +433,12 @@ def main(argv: list[str] | None = None) -> int:
     f.add_argument("keys", nargs="*", help="catalog keys; default is everything")
     f.add_argument("--strict", action="store_true", help="exit non-zero if any source fails")
     f.set_defaults(func=_fetch)
+
+    da = sub.add_parser("data", help="data providers and catalog series")
+    da.add_argument("action", choices=["sources", "series"])
+    da.add_argument("--source", default=None, help="series: only this provider id")
+    da.add_argument("--json", action="store_true")
+    da.set_defaults(func=_data)
 
     sub.add_parser("list", help="list strategies").set_defaults(func=_list)
 

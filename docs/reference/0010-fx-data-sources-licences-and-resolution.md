@@ -4,7 +4,7 @@ title: FX data sources, licences and resolution
 type: reference
 status: current
 created: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-22
 authors: [ayan]
 tags: [data, fx]
 related: [REF-0003]
@@ -43,7 +43,7 @@ Latest numbers (April 2025, net-net basis): about 9,510 billion USD a day in tot
 
 ### CFTC Commitments of Traders
 
-Weekly positions in US currency futures, from the US futures regulator ([DAT-0039](../datasets/0039-cftc-cot.md)). Free, and the API needs no token for reasonable use. Catalogued, not built yet.
+Weekly positions in US currency futures, from the US futures regulator ([DAT-0039](../datasets/0039-cftc-cot.md)). Free, and the API needs no token for reasonable use. Connected on 2026-10-22 as `cot.<NAME>` for 23 futures ([REF-0015](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)).
 
 ### CLS
 
@@ -99,5 +99,6 @@ Code: `engine/src/parity/data/currencies.py`, `market_size.py`, `ticks.py` and `
 ## Referenced by
 
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
+- [REF-0015: Getting close to Bloomberg data: sources, costs and licences](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

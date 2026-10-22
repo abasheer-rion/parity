@@ -23,7 +23,8 @@
   "in_use_by_parity": true,
   "parity_keys": [
     "news.eia",
-    "news.eia-press"
+    "news.eia-press",
+    "eia.<NAME> (8, needs EIA_API_KEY)"
   ],
   "relevance": {
     "score": 5,
@@ -35,7 +36,7 @@
     "https://api.eia.gov/v2/petroleum/pri/spt/data/?frequency=daily"
   ],
   "verified": true,
-  "last_checked": "2026-10-21",
+  "last_checked": "2026-10-22",
   "news_use": {
     "parity_source_ids": [
       "eia",

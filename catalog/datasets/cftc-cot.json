@@ -15,10 +15,16 @@
   "what_it_has": "Weekly open interest and long and short positions by trader type for US futures, including the CME currency futures (EUR, JPY, GBP and others). Socrata dataset r4w3-av2u, plus plain text files.",
   "simple": "Every week the US futures regulator shows who is betting on each currency going up or down.",
   "point_in_time": false,
-  "license_terms": "US federal government data. No terms of use were quoted on the COT page (checked 2026-10-21). The API needs no token \"as long as usage is reasonable\". Not yet used, so not yet checked further.",
+  "license_terms": "Legacy futures-only report (Socrata dataset 6dca-aqww), 1986 on, fetched by parity since 2026-10-22. US federal government data; the CFTC asks for acknowledgement (https://www.cftc.gov/WebPolicy/index.htm).",
   "quality_notes": "Futures only, a small slice of the FX market. Positions as of Tuesday, released Friday.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "cot.EUR",
+    "cot.EUR_PCT",
+    "cot.GOLD",
+    "cot.WTI",
+    "cot.<NAME> (23 futures)"
+  ],
   "relevance": {
     "score": 3,
     "reason": "Free weekly positioning data for currency futures, a possible sentiment signal."
@@ -28,5 +34,5 @@
     "https://publicreporting.cftc.gov/"
   ],
   "verified": false,
-  "last_checked": "2026-10-21"
+  "last_checked": "2026-10-22"
 }

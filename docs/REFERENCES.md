@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-896 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+941 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,9 +12,9 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
-| [Web pages](#web-pages) | 363 |
+| [Web pages](#web-pages) | 406 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 30 |
+| [Regulators](#regulators) | 32 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -3175,6 +3175,12 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 ## Web pages
 
+### url-0004e713
+
+No title recorded. (n.d.). *orats.com*. <https://orats.com/data-api>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-000a024d
 
 Ask Me Anything - Buy Side Systematic Quant | Wall Street Oasis. (n.d.). *web.archive.org*. <https://web.archive.org/web/20250819124954/https://www.wallstreetoasis.com/forum/hedge-fund/ask-me-anything-buy-side-systematic-quant>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3227,6 +3233,12 @@ Proof-of-stake rewards and penalties. (n.d.). *ethereum.org*. <https://ethereum.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-0340a1da
+
+Census limits. (n.d.). *census.gov*. <https://www.census.gov/data/developers/guidance/api-user-guide.Query_Limits.html>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-0364dd4c
 
 API FAQ. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developers/api_faqs.htm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -3254,6 +3266,12 @@ Integrations | NautilusTrader. (n.d.). *nautilustrader.io*. <https://nautilustra
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-0595d114
+
+Socrata tokens. (n.d.). *dev.socrata.com*. <https://dev.socrata.com/docs/app-tokens.html>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-06e2ac82
 
@@ -3385,11 +3403,23 @@ No title recorded. (n.d.). *investing.com*. <https://www.investing.com/economic-
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-13aedffa
+
+No title recorded. (n.d.). *intrinio.com*. <https://intrinio.com/pricing>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-143e4711
 
 No title recorded. (n.d.). *eia.gov*. <https://www.eia.gov/opendata/register.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-1512d048
+
+No title recorded. (n.d.). *ec.europa.eu*. <https://ec.europa.eu/eurostat/help/copyright-notice>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-1565a75d
 
@@ -3460,6 +3490,12 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 7 July 2005 London bombings. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/7_July_2005_London_bombings>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/london-bombings-2005.json](../catalog/events/london-bombings-2005.json).
+
+### url-1a677e6a
+
+EIA definitions. (n.d.). *eia.gov*. <https://www.eia.gov/dnav/pet/TblDefs/pet_pri_spt_tbldef2.asp>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-1a7022ea
 
@@ -3571,6 +3607,12 @@ April 2024 Iranian strikes on Israel. (n.d.). *Wikipedia*. <https://en.wikipedia
 
 Cited in: [catalog/events/iran-strikes-israel-2024-04.json](../catalog/events/iran-strikes-israel-2024-04.json).
 
+### url-26593661
+
+No title recorded. (n.d.). *api.quiverquant.com*. <https://api.quiverquant.com/pricing/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-26a5c474
 
 Change in the Guideline for Money Market Operations and Decision on the Plan for the Reduction of the Purchase Amount of Japanese Government Bonds. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240731a.pdf>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -3588,6 +3630,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 No title recorded. (n.d.). *Trading Economics*. <https://api.tradingeconomics.com/calendar?c=guest:guest>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-2933f765
+
+Wall Street Prep. (n.d.). *wallstreetprep.com*. <https://www.wallstreetprep.com/knowledge/bloomberg-vs-capital-iq-vs-factset-vs-thomson-reuters-eikon/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-29acd7cf
 
@@ -3709,6 +3757,12 @@ No title recorded. (n.d.). *site.financialmodelingprep.com*. <https://site.finan
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-38d30e02
+
+No title recorded. (n.d.). *federalreserve.gov*. <https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-392dbf51
 
 The FOMC Day Puzzle: Why Every G10 Currency Rallies Against the Dollar. (n.d.). *quantseeker.com*. <https://www.quantseeker.com/p/the-fomc-day-puzzle-why-every-g10>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3763,6 +3817,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-3bb78e58
+
+No title recorded. (n.d.). *boj.or.jp*. <https://www.boj.or.jp/en/copyright.htm>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-3c64e40b
 
 Russo-Georgian War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Russo-Georgian_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -3809,6 +3869,12 @@ Note: Linked in this repo as: home page.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-41abc0ae
+
+No title recorded. (n.d.). *cls-group.com*. <https://www.cls-group.com/products/data/clsmarketdata/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-42aacc68
 
 Micro Study: Yen Carry Trade - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/research/17843/micro-study-yen-carry-trade/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3839,6 +3905,12 @@ Note: Linked in this repo as: example guide.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-4693f329
+
+No title recorded. (n.d.). *rba.gov.au*. <https://www.rba.gov.au/copyright/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-473b2d95
 
 Backtesting Traps | Freqtrade Stuff. (n.d.). *brookmiles.github.io*. <https://brookmiles.github.io/freqtrade-stuff/2021/04/12/backtesting-traps/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3858,6 +3930,12 @@ Cited in: [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-m
 TradingBrokers review. (n.d.). *tradingbrokers.com*. <https://tradingbrokers.com/zentrader-review/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-488553e9
+
+No title recorded. (n.d.). *snb.ch*. <https://www.snb.ch/en/srv/disclaimer_copyright>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-4932c51b
 
@@ -3906,6 +3984,12 @@ Backtesting. (n.d.). *people.duke.edu*. <https://people.duke.edu/~charvey/Resear
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-4cfbb932
+
+EODHD pricing. (n.d.). *eodhd.com*. <https://eodhd.com/pricing>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-4dd21709
 
@@ -4025,6 +4109,12 @@ ECB press releases: API documentation. (n.d.). *European Central Bank*. <https:/
 
 Cited in: [catalog/datasets/ecb-press.json](../catalog/datasets/ecb-press.json), [DAT-0043](datasets/0043-ecb-press.md).
 
+### url-55d5d0b2
+
+No title recorded. (n.d.). *massive.com*. <https://massive.com/legal/individuals-terms-of-service>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-569967bd
 
 Lookahead analysis - Freqtrade. (n.d.). *freqtrade.io*. <https://www.freqtrade.io/en/stable/lookahead-analysis/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4135,6 +4225,12 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
 Cited in: [catalog/events/us-strike-syria-shayrat-2017.json](../catalog/events/us-strike-syria-shayrat-2017.json).
 
+### url-62695180
+
+Databento credits. (n.d.). *databento.com*. <https://databento.com/docs/faqs/usage-pricing-and-data-credits.md>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-640cd1cb
 
 Value and Momentum Everywhere: Factors, Monthly. (n.d.). *aqr.com*. <https://www.aqr.com/Insights/Datasets/Value-and-Momentum-Everywhere-Factors-Monthly>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4207,6 +4303,12 @@ No title recorded. (n.d.). *Bank for International Settlements*. <https://stats.
 
 Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [DAT-0038](datasets/0038-bis-triennial-fx.md).
 
+### url-6a3cde2c
+
+EODHD terms. (n.d.). *eodhd.com*. <https://eodhd.com/financial-apis/terms-conditions>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-6a66c019
 
 Disclaimer & copyright. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/home/disclaimer/html/index.en.html>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -4272,6 +4374,12 @@ Top USD/CAD Correlations Every Forex Trader Should Know - PriceActionNinja. (n.d
 Note: Linked in this repo as: search result.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-700c392f
+
+Riksbank FAQ. (n.d.). *riksbank.se*. <https://www.riksbank.se/en-gb/statistics/interest-rates-and-exchange-rates/retrieving-interest-rates-and-exchange-rates-via-api/faq--the-api-for-interest-rates-and-exchange-rates/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-712d62b8
 
@@ -4423,6 +4531,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-8009a763
+
+No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/BAMLH0A0HYM2>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-8009f8f1
 
 United States withdrawal from the Iran nuclear deal. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -4488,6 +4602,12 @@ Pilot - Stock Futures Forex Crypto - The Trading App and Platform Anyone Can Use
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-832ea546
+
+No title recorded. (n.d.). *home.treasury.gov*. <https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202610>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-849471fb
 
@@ -4572,6 +4692,12 @@ A Reality Check for Data Snooping. (n.d.). *econometricsociety.org*. <https://ww
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-8bc3e194
+
+Twelve Data business. (n.d.). *twelvedata.com*. <https://twelvedata.com/pricing-business>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-8bc5888a
 
@@ -4707,6 +4833,12 @@ Note: Linked in this repo as: Carver blog, Annual performance update year 12.
 
 Cited in: [catalog/algorithms/fx-carver-trend-carry.json](../catalog/algorithms/fx-carver-trend-carry.json), [ALG-0003](algorithms/0003-fx-carver-trend-carry.md), [RES-0002](research/0002-open-source-and-public-results.md), [RES-0003](research/0003-forums-and-practitioners.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-98e35c71
+
+OANDA licence. (n.d.). *legal.oanda.com*. <https://legal.oanda.com/oc/api_license_agreement_oc/en>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-99a00161
 
 Yahoo Finance / Decrypt, Aug 2025. (n.d.). *finance.yahoo.com*. <https://finance.yahoo.com/news/ai-trading-bots-booming-trust-150102860.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4748,6 +4880,12 @@ Cited in: [catalog/events/taiwan-strait-missile-crisis-1996.json](../catalog/eve
 Plaza Accord. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Plaza_Accord>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/plaza-accord-1985.json](../catalog/events/plaza-accord-1985.json).
+
+### url-9ef44f3e
+
+No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/SP500>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-9fa73178
 
@@ -4813,6 +4951,12 @@ Note: Linked in this repo as: FRED API: series/observations.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-a5f3f318
+
+No title recorded. (n.d.). *orats.com*. <https://orats.com/terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-a5fa1c1f
 
 best practices. (n.d.). *Organisation for Economic Co-operation and Development*. <https://www.oecd.org/en/data/insights/data-explainers/2024/11/Api-best-practices-and-recommendations.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4838,6 +4982,12 @@ Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/fede
 Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Controls. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/gold-convertibility-ends>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
+
+### url-a7396e54
+
+No title recorded. (n.d.). *bankofcanada.ca*. <https://www.bankofcanada.ca/terms/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-a8359cfb
 
@@ -4910,6 +5060,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https://docs.data.nasdaq.com/>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-ade52524
+
+Comtrade policy. (n.d.). *uncomtrade.org*. <https://uncomtrade.org/docs/policy-on-comtrade-data-use/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-aeacd993
 
@@ -5075,11 +5231,23 @@ Abqaiq-Khurais attack. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Abqai
 
 Cited in: [catalog/events/abqaiq-attack-2019.json](../catalog/events/abqaiq-attack-2019.json).
 
+### url-baf4f50a
+
+Databento dataset. (n.d.). *databento.com*. <https://databento.com/docs/datasets/glbx-mdp3.md>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-bb2fadee
 
 No title recorded. (n.d.). *International Monetary Fund*. <https://api.imf.org/external/sdmx/2.1/dataflow>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
+
+### url-bc8315ad
+
+No title recorded. (n.d.). *newyorkfed.org*. <https://www.newyorkfed.org/privacy/termsofuse>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-be532ea3
 
@@ -5100,6 +5268,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 Annexation of Crimea by the Russian Federation. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/crimea-seizure-2014.json](../catalog/events/crimea-seizure-2014.json).
+
+### url-bf256cc8
+
+No title recorded. (n.d.). *datashop.cboe.com*. <https://datashop.cboe.com/option-eod-summary>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-bf47509a
 
@@ -5141,6 +5315,12 @@ Libyan civil war (2011). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Lib
 
 Cited in: [catalog/events/libya-civil-war-2011.json](../catalog/events/libya-civil-war-2011.json).
 
+### url-c628b819
+
+FRED notice. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/GOLDAMGBD228NLBM>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-c6b329f0
 
 St. Louis Fed Web Services: API Key. (n.d.). *Federal Reserve Bank of St. Louis*. <https://fred.stlouisfed.org/docs/api/terms_of_use.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5148,6 +5328,12 @@ St. Louis Fed Web Services: API Key. (n.d.). *Federal Reserve Bank of St. Louis*
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015](datasets/0015-fred.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-c6d5b9ad
+
+ECB copyright. (n.d.). *ecb.europa.eu*. <https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-c7460e97
 
@@ -5315,6 +5501,12 @@ October 2024 Iranian strikes on Israel. (n.d.). *Wikipedia*. <https://en.wikiped
 
 Cited in: [catalog/events/iran-missile-attack-israel-2024-10.json](../catalog/events/iran-missile-attack-israel-2024-10.json).
 
+### url-dce49ef3
+
+IMF terms. (n.d.). *imf.org*. <https://www.imf.org/en/About/copyright-and-terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-de463277
 
 1,285 strategy sleeves, frozen before the test: the year-by-year table is the warning - DEV Community. (n.d.). *dev.to*. <https://dev.to/arhancanli/1285-strategy-sleeves-frozen-before-the-test-the-year-by-year-table-is-the-warning-2np4>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5341,6 +5533,12 @@ No title recorded. (n.d.). *World Bank*. <https://api.worldbank.org/v2/country/U
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
 
+### url-e196de4a
+
+ICE indices. (n.d.). *ice.com*. <https://www.ice.com/fixed-income-data-services/index-solutions>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-e1d2a002
 
 Capture of the Crimean Parliament. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5366,6 +5564,18 @@ Cited in: [catalog/events/syria-strikes-2018.json](../catalog/events/syria-strik
 Note: Linked in this repo as: Kaggle post.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-e4397e33
+
+No title recorded. (n.d.). *exchangerate.host*. <https://exchangerate.host/terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-e546f480
+
+No title recorded. (n.d.). *kpler.com*. <https://www.kpler.com/spireMT/product>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-e5984ac7
 
@@ -5429,6 +5639,12 @@ Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v
 
 Cited in: [catalog/events/israel-lebanon-war-2006.json](../catalog/events/israel-lebanon-war-2006.json).
 
+### url-e8e52c7e
+
+FMP pricing. (n.d.). *site.financialmodelingprep.com*. <https://site.financialmodelingprep.com/pricing-plans>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-e8e7bb24
 
 Avellaneda and Lee (June 2009 version), abstract. (n.d.). *math.nyu.edu*. <https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -5452,6 +5668,12 @@ Cited in: [catalog/events/us-election-2020.json](../catalog/events/us-election-2
 Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-ec434a38
+
+Bloomberg student guide. (n.d.). *assets.bbhub.io*. <https://assets.bbhub.io/professional/sites/10/Getting-Started-Guide-for-Students-English.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-ec56c25d
 
@@ -5551,6 +5773,12 @@ No title recorded. (n.d.). *semanticscholar.org*. <https://www.semanticscholar.o
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-f73fd673
+
+No title recorded. (n.d.). *aisstream.io*. <https://aisstream.io/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-f7ac3507
 
 BEA Data API: API documentation. (n.d.). *US Bureau of Economic Analysis*. <https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5575,6 +5803,12 @@ ECB Data Portal (SDMX web service): API documentation. (n.d.). *European Central
 
 Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-portal.json), [DAT-0010](datasets/0010-ecb-data-portal.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f932fdb1
+
+No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/docs/api/fred/releases_dates.html>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-f964381e
 
 About ZenPilot | ClickUp Consulting for Agencies. (n.d.). *zenpilot.com*. <https://www.zenpilot.com/about/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5588,6 +5822,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 No title recorded. (n.d.). *CoinGecko*. <https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md).
+
+### url-faad0124
+
+Databento live data. (n.d.). *databento.com*. <https://databento.com/docs/portal/live-data.md>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-fbd813ac
 
@@ -5621,6 +5861,18 @@ No title recorded. (n.d.). *Finnhub Stock API*. <https://finnhub.io/api/v1/news>
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md).
 
+### url-fce59775
+
+Massive pricing. (n.d.). *massive.com*. <https://massive.com/pricing>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-fe036392
+
+No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/DAAA>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-fe9b566b
 
 XTB - Investing, Savings & Trading Platform | XTB. (n.d.). *xtb.com*. <https://www.xtb.com/en>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5628,6 +5880,12 @@ XTB - Investing, Savings & Trading Platform | XTB. (n.d.). *xtb.com*. <https://w
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-fff47c57
+
+No title recorded. (n.d.). *alpaca.markets*. <https://alpaca.markets/data>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ## Forum posts
 
@@ -6041,6 +6299,12 @@ No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://w
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-147f0066
+
+developer rules. (n.d.). *sec.gov*. <https://www.sec.gov/about/developer-resources>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
 ### url-1de9cd7b
 
 complaint PDF. (n.d.). *ftc.gov*. <https://www.ftc.gov/system/files/ftc_gov/pdf/2023198WarriorTradingComplaint_0.pdf>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
@@ -6142,6 +6406,12 @@ Customer Advisory: AI Won't Turn Trading Bots into Money Machines | CFTC. (n.d.)
 Note: Linked in this repo as: CFTC advisory.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-c239c50f
+
+EDGAR APIs. (n.d.). *sec.gov*. <https://www.sec.gov/search-filings/edgar-application-programming-interfaces>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
 ### url-c78e278a
 

@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 14 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 7 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - 2026-10-22 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
+- 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - 2026-10-22 [DEC-0019: Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md)
 - 2026-10-22 [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
-- 2026-10-22 [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
-- 2026-10-22 [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
 
 ## intent
 
@@ -128,11 +128,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
 | REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-22 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
-| REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
+| REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 
 ## log
 
@@ -242,12 +243,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0003 | [AQR Data Sets](datasets/0003-aqr-datasets.md) | not-usable | 2026-10-20 | [data](TAGS.md#data), [method](TAGS.md#method) |
 | DAT-0004 | [BEA Data API](datasets/0004-bea.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0005 | [Binance public data (data.binance.vision)](datasets/0005-binance-public-data.md) | candidate | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
-| DAT-0006 | [BIS Data Portal (SDMX API)](datasets/0006-bis.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0006 | [BIS Data Portal (SDMX API)](datasets/0006-bis.md) | in-use | 2026-10-22 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0007 | [BLS Public Data API](datasets/0007-bls.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
 | DAT-0008 | [CoinGecko API](datasets/0008-coingecko.md) | candidate | 2026-10-20 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | DAT-0009 | [Dukascopy historical data](datasets/0009-dukascopy.md) | candidate | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
-| DAT-0010 | [ECB Data Portal (SDMX web service)](datasets/0010-ecb-data-portal.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
-| DAT-0011 | [EIA Open Data API v2](datasets/0011-eia.md) | in-use | 2026-10-21 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
+| DAT-0010 | [ECB Data Portal (SDMX web service)](datasets/0010-ecb-data-portal.md) | in-use | 2026-10-22 | [data](TAGS.md#data), [economics](TAGS.md#economics) |
+| DAT-0011 | [EIA Open Data API v2](datasets/0011-eia.md) | in-use | 2026-10-22 | [commodities](TAGS.md#commodities), [data](TAGS.md#data) |
 | DAT-0012 | [Finnhub](datasets/0012-finnhub.md) | candidate | 2026-10-21 | [data](TAGS.md#data), [news](TAGS.md#news) |
 | DAT-0013 | [Forex Factory weekly calendar export](datasets/0013-forex-factory-calendar.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [news](TAGS.md#news) |
 | DAT-0014 | [Frankfurter](datasets/0014-frankfurter.md) | candidate | 2026-10-20 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
@@ -275,7 +276,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0036 | [Yahoo Finance chart endpoint](datasets/0036-yahoo-chart.md) | in-use | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data) |
 | DAT-0037 | [ISO 4217 currency code lists](datasets/0037-iso-4217-six.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0038 | [BIS Triennial Survey FX turnover](datasets/0038-bis-triennial-fx.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
-| DAT-0039 | [CFTC Commitments of Traders](datasets/0039-cftc-cot.md) | candidate | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| DAT-0039 | [CFTC Commitments of Traders](datasets/0039-cftc-cot.md) | in-use | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0040 | [CLS FX volume data (CLSMarketData)](datasets/0040-cls-fx-volume.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0041 | [Databento CME FX futures (nanosecond)](datasets/0041-databento-cme-fx.md) | not-usable | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | DAT-0042 | [Federal Reserve press releases](datasets/0042-federal-reserve-press.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [news](TAGS.md#news) |

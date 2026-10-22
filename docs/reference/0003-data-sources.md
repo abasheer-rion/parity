@@ -7,18 +7,18 @@ created: 2026-10-20
 updated: 2026-10-22
 authors: [ayan]
 tags: [commodities, data, fx]
-related: [EXP-0001, REF-0001]
+related: [EXP-0001, REF-0001, REF-0015]
 ---
 
 # Data sources
 
 ## In plain words
 
-Where our data comes from. All of it is free: the US central bank's data website (FRED) for currencies, interest rates and oil, and Yahoo for the stock market.
+Where our data comes from. All of it is free: the US central bank's data website (FRED) for currencies, interest rates and oil, the European Central Bank, the US Treasury, the Bank for International Settlements and the US futures regulator. Yahoo is only a cross-check. [REF-0015](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) compares all this with what a Bloomberg terminal gives.
 
 ## Summary
 
-Everything the engine uses is free. The list of series is in `engine/src/parity/data/catalog.py`, and this page explains where each comes from and what to watch out for. `parity fetch` downloads all of them in about ten seconds.
+Everything the engine uses is free. The list of series is in `engine/src/parity/data/catalog.py`, and this page explains where each comes from and what to watch out for. `parity fetch` downloads all of them in about two minutes. `parity data sources` shows every provider, whether it is on and whether it needs a key; `parity data series` lists every series.
 
 ## In use
 
@@ -41,6 +41,17 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `bond.TR10`, `bond.TR2` | Built from the yields | | Daily | 1962, 1976 | Treasury total return approximated from the yield with a fixed duration (8 and 1.9). 2022 comes out at -15%, close to real 7 to 10 year funds. |
 | `factor.SMB`, `HML`, `MOM`, `RMW`, `CMA`, `STREV`, `LTREV` | Kenneth French data library | `<file>#<column>` | Daily | 1926 or 1963 | Optional. Paper long-short factor returns; the backtester charges an estimated yearly trading cost for holding each ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). |
 | `ind.<name>` (12 US industries) | Kenneth French data library | `12_Industry_Portfolios_daily#<name>` | Daily | 1926 | Optional. Value-weighted total return per industry. |
+| `ecb.<CCY>` (29 currencies) | ECB Data Portal | `EXR/D.<CCY>.EUR.SP00.A` | Daily | 1999 | Optional. Units of the currency per euro, ECB reference rate. Reuse with the ECB named. |
+| `curve.EA_AAA_3M` to `_30Y` (6) | ECB Data Portal | `YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_<T>` | Daily | 2004 | Optional. Euro area AAA government spot yields. |
+| `money.ESTR` | ECB Data Portal | `EST/B.EU000A2X2A25.WT` | Daily | 2019 | Optional. Euro overnight rate, used one business day late. |
+| `curve.UST_1M` to `_30Y` (13) | US Treasury par yield curve | column name, such as `10 Yr` | Daily | 1990 | Optional. One request per year. Public domain. |
+| `policy.<CCY>` (32 currencies) | BIS data portal | `WS_CBPOL/D.<area>` | Daily | 1946 to 2000 | Optional. Central bank policy rates. Reuse with the BIS named. |
+| `cot.<NAME>` and `cot.<NAME>_PCT` (23 futures) | CFTC Commitments of Traders | contract code, such as `099741` | Weekly | 1986 | Optional. Speculators' net position in contracts and as a percent of open interest. Dated Tuesday, used 3 business days later. |
+| `eia.<NAME>` (8) | EIA API v2 | old series ID, such as `PET.WCESTUS1.W` | Weekly | 1982 | Optional. Oil and gas stocks. Needs `EIA_API_KEY`; skipped without it. |
+| `spread.*`, `infl.*`, `bond.TIPS*`, `usd.*`, `money.EFFR`, `money.CP3M_*` | FRED (Treasury, Federal Reserve) | `T10Y2Y`, `T5YIE`, `DFII10`, `DTWEXBGS`, `DFF`, `DCPF3M`, and so on | Daily | 1954 to 2006 | Optional. Each is tagged public domain or citation required on FRED. |
+| `credit.HQM10Y` | FRED, Treasury HQM curve | `HQMCB10YR` | Monthly | 1984 | Optional. Licence-clean corporate yield, used a month late. |
+| `risk.NFCI`, `risk.STLFSI`, `macro.CLAIMS`, `macro.WEI` | FRED (Chicago Fed, St. Louis Fed, Labor Department, NY Fed) | `NFCI`, `STLFSI4`, `ICSA`, `WEI` | Weekly | 1967 to 2008 | Optional. Moved to their release day. |
+| `cmd.ALUMINIUM`, `NICKEL`, `IRON_ORE`, `WHEAT`, `CORN`, `SOYBEANS` | FRED, IMF | `PALUMUSDM` and so on | Monthly | 1992 | Optional. Used a week after the month ends, like copper. Not shown on the site, because the IMF asks for permission before commercial reuse. |
 
 ## FRED
 
@@ -55,13 +66,13 @@ The chart endpoint is unofficial and its terms forbid automated collection, so s
 | Source | Why not |
 | --- | --- |
 | Stooq | Now behind a browser check that blocks scripts. We do not work around it. |
+| ICE BofA spreads and Moody's yields on FRED | Their owners forbid redistribution ([REF-0015](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)). |
+| EIA refined product spot prices | EIA sources them from Refinitiv. |
 
 ## Candidates
 
 | Source | What it would add | Cost |
 | --- | --- | --- |
-| ECB SDMX API | Euro reference rates and euro area rates without the OECD delay. | Free, no key. |
-| EIA API | Weekly oil and gas inventories, for event studies. | Free key. |
 | Dukascopy and HistData | Tick and minute FX history, for intraday work. | Free downloads. Quality varies. |
 | GDELT | Global news events and tone, for news signals. | Free. |
 | OANDA practice API | Paper trading with real quotes. | Free practice account. |
@@ -87,5 +98,6 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0013: News sources and market impact](0013-news-sources-and-market-impact.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
+- [REF-0015: Getting close to Bloomberg data: sources, costs and licences](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

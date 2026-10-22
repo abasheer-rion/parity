@@ -33,6 +33,7 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
         series = catalog.get(key)
         entry = {"key": key, "source": series.source, "code": series.code}
         entry["required"] = series.required
+        entry["frequency"] = series.frequency
         try:
             data = build_derived(series, root) if series.source == "derived" else \
                 sources.fetch(series)
@@ -40,9 +41,15 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
             path.parent.mkdir(parents=True, exist_ok=True)
             data.to_frame().to_parquet(path)
             entry.update(_describe(data), ok=True, sha256=content_hash(data))
+        except sources.MissingKey as exc:  # a keyed source with no key: skipped, not broken
+            entry.update(ok=False, skipped=True, error=str(exc))
         except Exception as exc:  # keep going; one dead source should not stop the run
             entry.update(ok=False, error=str(exc))
         report.append(entry)
+    # Skipped series stay out of coverage.json, so the Data page and the snapshot only
+    # describe what this machine could fetch. The caller still sees them.
+    shown = report
+    report = [r for r in report if not r.get("skipped")]
     root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(UTC).isoformat(timespec="seconds")
     if len(report) < len(catalog.CATALOG):  # partial fetch: keep the other series' entries
@@ -51,7 +58,7 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
                            if r["key"] not in fresh and r["key"] in catalog.CATALOG]
     doc = {"fetched_at": stamp, "snapshot": snapshot_id(report), "series": report}
     (root / "coverage.json").write_text(json.dumps(doc, indent=2))
-    return report
+    return shown
 
 
 def build_derived(series: catalog.Series, root: Path) -> pd.Series:
@@ -129,12 +136,18 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
     out = {}
     for key, s in frames.items():
         s = s[~s.index.duplicated(keep="last")].sort_index()
-        lag = catalog.get(key).published_after
+        spec = catalog.get(key)
+        lag = spec.published_after
         if lag is not None:
             s.index = s.index + pd.offsets.MonthEnd(0) + pd.offsets.BDay(lag)
             s = s[~s.index.duplicated(keep="last")]
+        if spec.lag_days:  # known only some business days after its date (COT, EIA)
+            s.index = s.index + pd.offsets.BDay(spec.lag_days)
+            s = s[~s.index.duplicated(keep="last")]
         aligned = s.reindex(index.union(s.index)).sort_index()
-        limit = None if catalog.get(key).frequency == "M" else ffill_limit
+        # Monthly series fill without limit; weekly ones fill up to two weeks, so one
+        # late release does not leave a hole.
+        limit = {"M": None, "W": 2 * ffill_limit}.get(spec.frequency, ffill_limit)
         out[key] = aligned.ffill(limit=limit).reindex(index)
     return pd.DataFrame(out, index=index)
 

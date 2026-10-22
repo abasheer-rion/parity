@@ -19,8 +19,10 @@
   "point_in_time": false,
   "license_terms": "Free to reproduce if the BIS is cited as the source, the use is not misleading and does not imply BIS endorsement. Commercial products must not charge extra for the BIS data. https://data.bis.org/help/legal",
   "quality_notes": "Policy rates are step series that only change on decision days. Series definitions change over time (the US series switches from fed funds effective to target midpoint in 1985), noted in the series metadata.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "policy.<CCY> (32)"
+  ],
   "relevance": {
     "score": 5,
     "reason": "Policy rates for every currency we trade in one place, which is what a carry signal needs."
@@ -31,5 +33,5 @@
     "https://stats.bis.org/api/v2/data/dataflow/BIS/WS_CBPOL/1.0/D.US?lastNObservations=2&format=csv"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-22"
 }

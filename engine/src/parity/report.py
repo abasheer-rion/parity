@@ -123,6 +123,8 @@ def market_series(data_dir: Path = store.DEFAULT_DIR, start: str = "2000-01-01")
 
     out = {}
     for key, spec in catalog.CATALOG.items():
+        if not spec.site:  # bulk optional series stay off the site to keep the file small
+            continue
         try:
             s = store.load(key, data_dir)
         except FileNotFoundError:
