@@ -56,7 +56,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
+const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -111,6 +111,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "search" && <Search />}
       {route === "ui" && <UILibrary section={arg} />}
       {route === "scenarios" && <Scenarios />}
+      {route === "sim" && <SimWorld report={report} tab={arg} />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
@@ -132,7 +133,6 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
             route === "signals" ? <Signals report={report} /> :
             route === "data" ? <DataPage report={report} /> :
             route === "overview" ? <Overview report={report} email={email} /> :
-            route === "sim" ? <SimWorld report={report} /> :
             route === "watchlist" ? <Watchlist report={report} /> :
             SPACE === "research" ? <ResearchHome report={report} /> :
             <ProductHome report={report} email={email} />}

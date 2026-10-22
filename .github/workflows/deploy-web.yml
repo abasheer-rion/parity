@@ -12,9 +12,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -64,12 +64,13 @@ jobs:
           path: engine/data
           key: data-none
           restore-keys: data-
-      - name: Scenario analogues (event studies over public prices)
+      - name: Scenario analogues and Sim World map (event studies over public prices)
         continue-on-error: true  # the page explains itself when this file is missing
         run: |
           pip install -q -e ../engine
           parity fetch
           parity scenario export --out dist/data/scenarios.json
+          parity world export --out dist/data/world.json
       - name: Copy news and market moves into the site
         run: |
           pip install -q -e ../engine

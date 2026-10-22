@@ -14,6 +14,9 @@
     parity scenario --type military_strike --region middle_east --severity 4
                                  what markets did after past events like a scenario
     parity scenario export       write output/scenarios.json for the dashboard
+    parity world export          write output/world.json for Sim World's map
+    parity world paths --asset EUR --asset oil --weeks 26
+                                 simulated paths from blocks of real weekly returns (CSV)
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -192,6 +195,59 @@ def _ticks(args) -> int:
         return 1
     print(json.dumps(ticks.summary(day), indent=1))
     print(day.head(args.limit).to_string(index=False))
+    return 0
+
+
+def _world(args) -> int:
+    import pandas as pd
+
+    from . import scenarios as sc
+    from . import world
+
+    levels = world.load_levels()
+    if args.action == "export":
+        doc = world.export(levels, world.load_rates(), sc.load_events())
+        out = Path(args.out or DEFAULT_OUT / "world.json")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(doc, separators=(",", ":")))
+        print(f"Wrote {out}: {len(doc['assets'])} series, {len(doc['events'])} events, "
+              f"data through {doc['data_through']}")
+        return 0
+    assets = args.asset or ["EUR", "JPY", "oil", "stocks"]
+    missing = [a for a in assets if a not in levels]
+    if missing:
+        print(f"No data for {', '.join(missing)}. Known: {', '.join(sorted(levels))}",
+              file=sys.stderr)
+        return 1
+    weekly = pd.concat({a: levels[a].resample("W-FRI").last() for a in assets}, axis=1)
+    rets = world.weekly_returns(weekly)
+    pool = None
+    if args.pool == "analogues":
+        spec = sc.Spec(type=args.type, regions=args.region, actors=args.actor,
+                       severity=args.severity, commodities=args.commodity)
+        picked = sc.match(sc.load_events(), spec)
+        if not picked:
+            print("No past event is close enough to draw analogue weeks from.", file=sys.stderr)
+            return 1
+        pool = world.analogue_mask(rets.index, [ev["date"] for _, ev in picked])
+        print(f"Drawing from the {world.ANALOGUE_WEEKS} weeks after {len(picked)} past events",
+              file=sys.stderr)
+    sim = world.bootstrap_paths(rets, args.weeks, args.n, args.block, args.seed, pool)
+    text = world.paths_csv(sim, assets)
+    out = args.out or "paths.csv"
+    if out == "-":
+        sys.stdout.write(text)
+    else:
+        Path(out).write_text(text)
+        print(f"Wrote {out}: {args.n} paths of {args.weeks} weeks, blocks of "
+              f"{sim['block']} weeks from {sim['pool_weeks']} weeks of history", file=sys.stderr)
+    finals = [(a, sim["levels"][:, -1, i]) for i, a in enumerate(assets)]
+    for name, final in [*finals, ("basket", sim["basket"][:, -1])]:
+        r = world.risk(final, args.loss_at)
+        print(f"{name:<8} median {r['median']:+.1%}  worst 5% {r['worst5']:+.1%}  "
+              f"chance of losing more than {args.loss_at:g}% {r['p_loss_gt']:.0%}",
+              file=sys.stderr)
+    print("Simulated from history, not a forecast.", file=sys.stderr)
     return 0
 
 
@@ -410,6 +466,24 @@ def main(argv: list[str] | None = None) -> int:
     sc.add_argument("--limit", type=int, default=12)
     sc.add_argument("--out", default=str(DEFAULT_OUT / "scenarios.json"))
     sc.set_defaults(func=_scenario)
+
+    wd = sub.add_parser("world", help="Sim World's map file and simulated paths (DEC-0016)")
+    wd.add_argument("action", choices=["export", "paths"])
+    wd.add_argument("--out", default=None,
+                    help="export: default output/world.json; paths: a CSV file, or - for stdout")
+    wd.add_argument("--asset", action="append", default=[], help="EUR, oil, stocks, ...")
+    wd.add_argument("--weeks", type=int, default=26)
+    wd.add_argument("--n", type=int, default=1000, help="number of paths")
+    wd.add_argument("--block", type=int, default=4, help="weeks per block")
+    wd.add_argument("--seed", type=int, default=None)
+    wd.add_argument("--loss-at", type=float, default=10.0, help="percent loss to count")
+    wd.add_argument("--pool", choices=["all", "analogues"], default="all")
+    wd.add_argument("--type", help="analogues: kind of event")
+    wd.add_argument("--region", action="append", default=[])
+    wd.add_argument("--actor", action="append", default=[])
+    wd.add_argument("--severity", type=int, choices=range(1, 6))
+    wd.add_argument("--commodity", action="append", default=[])
+    wd.set_defaults(func=_world)
     from .strategies.base import ASSETS, FAMILIES
 
     ns = sub.add_parser("new-strategy", help="create the files for a new strategy")
