@@ -9,6 +9,19 @@ it comes from:
     eq.<NAME>    equity index or ETF level
     risk.<NAME>  risk gauges such as the VIX
 
+Wider official data (REF-0015), all optional:
+
+    ecb.<CCY>      units of the currency per euro, ECB reference rate
+    curve.<NAME>   government yield curve points, percent (US Treasury, euro area AAA)
+    policy.<CCY>   central bank policy rate, percent (BIS)
+    money.<NAME>   overnight and short money market rates, percent
+    spread.<NAME>  yield spreads, percentage points
+    infl.<NAME>    market inflation expectations (breakevens), percent
+    usd.<NAME>     trade-weighted dollar indexes (Federal Reserve)
+    cot.<NAME>     CFTC Commitments of Traders, speculators' net futures position
+    eia.<NAME>     EIA weekly petroleum and gas stocks (needs EIA_API_KEY)
+    macro.<NAME>   weekly economic gauges
+
 To add a series, add one line here and note it in docs/reference/0003-data-sources.md.
 """
 
@@ -20,7 +33,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Series:
     key: str
-    source: str  # "fred", "yahoo", "french" or "derived"
+    source: str  # a provider id in providers.py, such as "fred", "ecb" or "derived"
     code: str
     description: str
     invert: bool = False  # True when the source quotes foreign units per USD
@@ -30,6 +43,13 @@ class Series:
     #: panel moves each value to the month's end plus this many business days, the day it
     #: could first be read. None keeps the source's own dates.
     published_after: int | None = None
+    #: Business days after its stamped date that a value is first known. COT positions
+    #: are dated Tuesday and released Friday, so they use 3. The panel moves each value
+    #: forward by this much. 0 keeps the source's own dates.
+    lag_days: int = 0
+    #: May the shared site chart it. Every source here allows display with attribution;
+    #: False only keeps the dashboard file small for bulk optional series.
+    site: bool = True
 
 
 G10 = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD", "NOK", "SEK"]
@@ -142,8 +162,186 @@ _BOND_TR = [
 ]
 BOND_DURATION = {"bond.TR10": 8.0, "bond.TR2": 1.9}
 
+# ---------------------------------------------------------------------------------------
+# Wider official data (REF-0015). Free, no key unless noted, and licensed for reuse with
+# the source named. Every one is optional, so an official run never fails on them, and
+# nothing here feeds an existing strategy.
+
+# ECB euro reference rates, published about 16:00 CET each TARGET working day. The ECB
+# allows reuse with the source named. Quoted as units of the currency per euro.
+ECB_CCYS = ["USD", "JPY", "GBP", "CHF", "CAD", "AUD", "NZD", "NOK", "SEK", "DKK", "CZK",
+            "HUF", "PLN", "RON", "ISK", "TRY", "BRL", "CNY", "HKD", "IDR", "ILS", "INR",
+            "KRW", "MXN", "MYR", "PHP", "SGD", "THB", "ZAR"]
+_ECB_FX = [Series(f"ecb.{c}", "ecb", f"EXR/D.{c}.EUR.SP00.A",
+                  f"{c} per EUR, ECB euro reference rate", required=False,
+                  site=c in ("USD", "JPY", "GBP", "CHF"))
+           for c in ECB_CCYS]
+
+# Euro area AAA government bond yield curve (ECB, spot rates, business days, 2004 on).
+_EA_TENORS = ["3M", "1Y", "2Y", "5Y", "10Y", "30Y"]
+_EA_CURVE = [Series(f"curve.EA_AAA_{t}", "ecb", f"YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_{t}",
+                    f"Euro area AAA government {t} spot yield, percent (ECB)", required=False,
+                    site=t in ("2Y", "10Y"))
+             for t in _EA_TENORS]
+_ECB_MONEY = [
+    Series("money.ESTR", "ecb", "EST/B.EU000A2X2A25.WT", "Euro short-term rate (euro "
+           "overnight rate), percent, published the next morning (ECB)", required=False,
+           lag_days=1),
+]
+
+# US Treasury daily par yield curve, all tenors, 1990 on (fewer tenors early on). US
+# government work, public domain. The code is the column name in Treasury's CSV.
+UST_TENORS = {"1M": "1 Mo", "2M": "2 Mo", "3M": "3 Mo", "4M": "4 Mo", "6M": "6 Mo",
+              "1Y": "1 Yr", "2Y": "2 Yr", "3Y": "3 Yr", "5Y": "5 Yr", "7Y": "7 Yr",
+              "10Y": "10 Yr", "20Y": "20 Yr", "30Y": "30 Yr"}
+_UST_CURVE = [Series(f"curve.UST_{t}", "treasury", col,
+                     f"US Treasury {t} par yield, percent (Treasury daily par yield curve)",
+                     required=False, site=t in ("3M", "2Y", "10Y", "30Y"))
+              for t, col in UST_TENORS.items()]
+
+# Central bank policy rates from the BIS, daily, as far back as each bank's history goes.
+# BIS terms: reuse allowed with the BIS named, not misleading, no endorsement implied.
+POLICY_AREAS = {"USD": "US", "EUR": "XM", "GBP": "GB", "JPY": "JP", "CHF": "CH",
+                "CAD": "CA", "AUD": "AU", "NZD": "NZ", "NOK": "NO", "SEK": "SE",
+                "DKK": "DK", "CZK": "CZ", "HUF": "HU", "PLN": "PL", "RON": "RO",
+                "ISK": "IS", "TRY": "TR", "ILS": "IL", "ZAR": "ZA", "MXN": "MX",
+                "BRL": "BR", "CLP": "CL", "COP": "CO", "PEN": "PE", "CNY": "CN",
+                "HKD": "HK", "INR": "IN", "IDR": "ID", "KRW": "KR", "MYR": "MY",
+                "THB": "TH", "SAR": "SA"}
+_POLICY = [Series(f"policy.{c}", "bis", f"WS_CBPOL/D.{area}",
+                  f"{c} central bank policy rate, percent (BIS)", required=False,
+                  site=c in G10 or c == "USD")
+           for c, area in POLICY_AREAS.items()]
+
+# CFTC Commitments of Traders, legacy futures-only report. Positions are as of Tuesday
+# and released on Friday, so values move 3 business days forward in the panel. US
+# government work, public domain. The code is the CFTC contract market code; "#pct"
+# gives the net position as a percent of open interest instead of contracts.
+COT_CONTRACTS = {
+    "EUR": ("099741", "Euro FX (CME; the ECU before 1999)"),
+    "JPY": ("097741", "Japanese yen (CME)"), "GBP": ("096742", "British pound (CME)"),
+    "CHF": ("092741", "Swiss franc (CME)"), "CAD": ("090741", "Canadian dollar (CME)"),
+    "AUD": ("232741", "Australian dollar (CME)"), "NZD": ("112741", "New Zealand dollar (CME)"),
+    "MXN": ("095741", "Mexican peso (CME)"), "BRL": ("102741", "Brazilian real (CME)"),
+    "ZAR": ("122741", "South African rand (CME)"),
+    "USD_INDEX": ("098662", "US dollar index (ICE Futures US)"),
+    "GOLD": ("088691", "Gold (COMEX)"), "SILVER": ("084691", "Silver (COMEX)"),
+    "COPPER": ("085692", "Copper (COMEX)"), "PLATINUM": ("076651", "Platinum (NYMEX)"),
+    "WTI": ("067651", "WTI crude oil (NYMEX)"), "NATGAS": ("023651", "Natural gas (NYMEX)"),
+    "CORN": ("002602", "Corn (CBOT)"), "WHEAT": ("001602", "Wheat (CBOT)"),
+    "SOYBEANS": ("005602", "Soybeans (CBOT)"),
+    "SPX_EMINI": ("13874A", "E-mini S&P 500 (CME)"),
+    "UST10Y": ("043602", "10-year Treasury note (CBOT)"),
+    "UST_BOND": ("020601", "Treasury bond (CBOT)"),
+}
+_COT_SHOWN = {"EUR", "JPY", "GBP", "GOLD", "WTI"}
+_COT = [s for name, (code, what) in COT_CONTRACTS.items() for s in (
+    Series(f"cot.{name}", "cftc", code, f"{what}: speculators' (non-commercial) net "
+           "position, contracts (CFTC COT, weekly)", frequency="W", required=False,
+           lag_days=3, site=False),
+    Series(f"cot.{name}_PCT", "cftc", f"{code}#pct", f"{what}: speculators' net position, "
+           "percent of open interest (CFTC COT, weekly)", frequency="W", required=False,
+           lag_days=3, site=name in _COT_SHOWN),
+)]
+
+# EIA weekly petroleum and gas stocks. Needs a free key in EIA_API_KEY; without it these
+# are skipped. Weekly petroleum data cover the week to Friday and come out the next
+# Wednesday (3 business days); gas storage comes out on Thursday (4). Public domain.
+_EIA = [
+    Series("eia.CRUDE_STOCKS", "eia", "PET.WCESTUS1.W", "US commercial crude oil stocks "
+           "excluding the SPR, thousand barrels (EIA weekly)", frequency="W",
+           required=False, lag_days=3),
+    Series("eia.CUSHING", "eia", "PET.W_EPC0_SAX_YCUOK_MBBL.W", "Crude oil stocks at "
+           "Cushing, Oklahoma, thousand barrels (EIA weekly)", frequency="W",
+           required=False, lag_days=3, site=False),
+    Series("eia.GASOLINE_STOCKS", "eia", "PET.WGTSTUS1.W", "US total motor gasoline "
+           "stocks, thousand barrels (EIA weekly)", frequency="W", required=False,
+           lag_days=3, site=False),
+    Series("eia.DISTILLATE_STOCKS", "eia", "PET.WDISTUS1.W", "US distillate fuel oil "
+           "stocks, thousand barrels (EIA weekly)", frequency="W", required=False,
+           lag_days=3, site=False),
+    Series("eia.SPR", "eia", "PET.WCSSTUS1.W", "US Strategic Petroleum Reserve stocks, "
+           "thousand barrels (EIA weekly)", frequency="W", required=False, lag_days=3,
+           site=False),
+    Series("eia.REFINERY_UTIL", "eia", "PET.WPULEUS3.W", "US refinery utilisation, percent "
+           "of operable capacity (EIA weekly)", frequency="W", required=False, lag_days=3,
+           site=False),
+    Series("eia.CRUDE_OUTPUT", "eia", "PET.WCRFPUS2.W", "US field production of crude oil, "
+           "thousand barrels a day (EIA weekly)", frequency="W", required=False,
+           lag_days=3, site=False),
+    Series("eia.GAS_STORAGE", "eia", "NG.NW2_EPG0_SWO_R48_BCF.W", "US lower 48 working gas "
+           "in storage, billion cubic feet (EIA weekly)", frequency="W", required=False,
+           lag_days=4),
+]
+
+# More FRED series. FRED tags each series "public domain" or "citation required"; every
+# one here has one of those tags and no third-party copyright note. Series tagged
+# "pre-approval required", or whose note forbids redistribution (the ICE BofA credit
+# spreads, Moody's bond yields), are left out, and so are EIA spot prices for refined
+# products, which EIA sources from Refinitiv (REF-0015). The IMF commodity prices need
+# IMF permission for commercial reuse, so they stay off the site.
+_FRED_MORE = [
+    Series("spread.UST_2S10S", "fred", "T10Y2Y", "US 10-year minus 2-year Treasury yield, "
+           "percentage points", required=False),
+    Series("spread.UST_3M10Y", "fred", "T10Y3M", "US 10-year minus 3-month Treasury yield, "
+           "percentage points", required=False, site=False),
+    Series("infl.BE5Y", "fred", "T5YIE", "US 5-year breakeven inflation, percent (Treasury "
+           "minus TIPS yield)", required=False),
+    Series("infl.BE10Y", "fred", "T10YIE", "US 10-year breakeven inflation, percent",
+           required=False),
+    Series("infl.FWD5Y5Y", "fred", "T5YIFR", "US 5-year, 5-year forward inflation "
+           "expectation, percent", required=False, site=False),
+    Series("bond.TIPS5Y", "fred", "DFII5", "US 5-year TIPS real yield, percent",
+           required=False, site=False),
+    Series("bond.TIPS10Y", "fred", "DFII10", "US 10-year TIPS real yield, percent",
+           required=False),
+    Series("usd.BROAD", "fred", "DTWEXBGS", "Nominal broad US dollar index (Federal "
+           "Reserve), 2006 on", required=False),
+    Series("usd.AFE", "fred", "DTWEXAFEGS", "Nominal US dollar index against advanced "
+           "foreign economies (Federal Reserve)", required=False, site=False),
+    Series("usd.EME", "fred", "DTWEXEMEGS", "Nominal US dollar index against emerging "
+           "market economies (Federal Reserve)", required=False, site=False),
+    Series("money.EFFR", "fred", "DFF", "Effective federal funds rate, percent (Federal "
+           "Reserve, every calendar day)", required=False),
+    Series("money.CP3M_FIN", "fred", "DCPF3M", "3-month AA financial commercial paper "
+           "rate, percent (Federal Reserve)", required=False, site=False),
+    Series("money.CP3M_NONFIN", "fred", "DCPN3M", "3-month AA nonfinancial commercial "
+           "paper rate, percent (Federal Reserve)", required=False, site=False),
+    Series("credit.HQM10Y", "fred", "HQMCB10YR", "10-year high quality corporate bond "
+           "yield, percent (Treasury HQM curve, monthly average, used a month late)",
+           frequency="M", required=False, published_after=22),
+    Series("risk.NFCI", "fred", "NFCI", "Chicago Fed National Financial Conditions Index, "
+           "weekly to Friday, released the next Wednesday", frequency="W", required=False,
+           lag_days=3),
+    Series("risk.STLFSI", "fred", "STLFSI4", "St. Louis Fed Financial Stress Index, weekly "
+           "to Friday, released the next Thursday", frequency="W", required=False,
+           lag_days=4, site=False),
+    Series("macro.CLAIMS", "fred", "ICSA", "US initial jobless claims, weekly to "
+           "Saturday, released the next Thursday (Labor Department)", frequency="W",
+           required=False, lag_days=4),
+    Series("macro.WEI", "fred", "WEI", "New York Fed Weekly Economic Index, week to "
+           "Saturday, released the next Thursday", frequency="W", required=False,
+           lag_days=4, site=False),
+] + [
+    Series(f"cmd.{name}", "fred", code, f"{what} (IMF, monthly average, used from a week "
+           "after the month ends)", frequency="M", required=False, published_after=5,
+           site=False)
+    for name, code, what in [
+        ("ALUMINIUM", "PALUMUSDM", "Aluminium, USD per metric ton"),
+        ("NICKEL", "PNICKUSDM", "Nickel, USD per metric ton"),
+        ("IRON_ORE", "PIORECRUSDM", "Iron ore, USD per dry metric ton"),
+        ("WHEAT", "PWHEAMTUSDM", "Wheat, USD per metric ton"),
+        ("CORN", "PMAIZMTUSDM", "Maize (corn), USD per metric ton"),
+        ("SOYBEANS", "PSOYBUSDM", "Soybeans, USD per metric ton"),
+    ]
+]
+
+_WIDER = (_ECB_FX + _EA_CURVE + _ECB_MONEY + _UST_CURVE + _POLICY + _COT + _EIA
+          + _FRED_MORE)
+
 CATALOG: dict[str, Series] = {s.key: s for s in _FX + _RATES + _OTHER + _REER + _FX_WIDE
-                              + _YIELDS + _FACTORS + _INDUSTRIES + _BOND_TR}
+                              + _YIELDS + _FACTORS + _INDUSTRIES + _BOND_TR
+                              + _WIDER}
 
 
 def get(key: str) -> Series:

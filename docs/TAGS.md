@@ -112,6 +112,7 @@ Sources, scrapers, caching and data quality.
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
+- [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)

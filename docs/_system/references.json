@@ -22316,6 +22316,951 @@
         "source": "crossref",
         "doi_explicit": true
       }
+    },
+    {
+      "key": "url-0004e713",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "orats.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://orats.com/data-api",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0340a1da",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Census limits",
+      "venue": "census.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.census.gov/data/developers/guidance/api-user-guide.Query_Limits.html",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0595d114",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Socrata tokens",
+      "venue": "dev.socrata.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://dev.socrata.com/docs/app-tokens.html",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-13aedffa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "intrinio.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://intrinio.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-147f0066",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "developer rules",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/about/developer-resources",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1512d048",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "ec.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ec.europa.eu/eurostat/help/copyright-notice",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1a677e6a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "EIA definitions",
+      "venue": "eia.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.eia.gov/dnav/pet/TblDefs/pet_pri_spt_tbldef2.asp",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-26593661",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "api.quiverquant.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://api.quiverquant.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2933f765",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wall Street Prep",
+      "venue": "wallstreetprep.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.wallstreetprep.com/knowledge/bloomberg-vs-capital-iq-vs-factset-vs-thomson-reuters-eikon/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-38d30e02",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "federalreserve.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3bb78e58",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "boj.or.jp",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.boj.or.jp/en/copyright.htm",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-41abc0ae",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "cls-group.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cls-group.com/products/data/clsmarketdata/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4693f329",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "rba.gov.au",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.rba.gov.au/copyright/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-488553e9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "snb.ch",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.snb.ch/en/srv/disclaimer_copyright",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4cfbb932",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "EODHD pricing",
+      "venue": "eodhd.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eodhd.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-55d5d0b2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "massive.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://massive.com/legal/individuals-terms-of-service",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-62695180",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Databento credits",
+      "venue": "databento.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://databento.com/docs/faqs/usage-pricing-and-data-credits.md",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6a3cde2c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "EODHD terms",
+      "venue": "eodhd.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eodhd.com/financial-apis/terms-conditions",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-700c392f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Riksbank FAQ",
+      "venue": "riksbank.se",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.riksbank.se/en-gb/statistics/interest-rates-and-exchange-rates/retrieving-interest-rates-and-exchange-rates-via-api/faq--the-api-for-interest-rates-and-exchange-rates/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8009a763",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fred.stlouisfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-832ea546",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "home.treasury.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202610",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8bc3e194",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Twelve Data business",
+      "venue": "twelvedata.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://twelvedata.com/pricing-business",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-98e35c71",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA licence",
+      "venue": "legal.oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://legal.oanda.com/oc/api_license_agreement_oc/en",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9ef44f3e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fred.stlouisfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fred.stlouisfed.org/series/SP500",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a5f3f318",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "orats.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://orats.com/terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a7396e54",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "bankofcanada.ca",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bankofcanada.ca/terms/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ade52524",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Comtrade policy",
+      "venue": "uncomtrade.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://uncomtrade.org/docs/policy-on-comtrade-data-use/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-baf4f50a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Databento dataset",
+      "venue": "databento.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://databento.com/docs/datasets/glbx-mdp3.md",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bc8315ad",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "newyorkfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.newyorkfed.org/privacy/termsofuse",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bf256cc8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "datashop.cboe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://datashop.cboe.com/option-eod-summary",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c239c50f",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "EDGAR APIs",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c628b819",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FRED notice",
+      "venue": "fred.stlouisfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fred.stlouisfed.org/series/GOLDAMGBD228NLBM",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c6d5b9ad",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ECB copyright",
+      "venue": "ecb.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dce49ef3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IMF terms",
+      "venue": "imf.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.imf.org/en/About/copyright-and-terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e196de4a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ICE indices",
+      "venue": "ice.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ice.com/fixed-income-data-services/index-solutions",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e4397e33",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "exchangerate.host",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://exchangerate.host/terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e546f480",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "kpler.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kpler.com/spireMT/product",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e8e52c7e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FMP pricing",
+      "venue": "site.financialmodelingprep.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://site.financialmodelingprep.com/pricing-plans",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec434a38",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg student guide",
+      "venue": "assets.bbhub.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://assets.bbhub.io/professional/sites/10/Getting-Started-Guide-for-Students-English.pdf",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f73fd673",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "aisstream.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://aisstream.io/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f932fdb1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fred.stlouisfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fred.stlouisfed.org/docs/api/fred/releases_dates.html",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-faad0124",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Databento live data",
+      "venue": "databento.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://databento.com/docs/portal/live-data.md",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fce59775",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Massive pricing",
+      "venue": "massive.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://massive.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fe036392",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fred.stlouisfed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fred.stlouisfed.org/series/DAAA",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fff47c57",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://alpaca.markets/data",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

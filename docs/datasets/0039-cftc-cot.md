@@ -2,9 +2,9 @@
 id: DAT-0039
 title: CFTC Commitments of Traders
 type: dataset
-status: candidate
-created: 2026-10-21
-updated: 2026-10-21
+status: in-use
+created: 2026-10-22
+updated: 2026-10-22
 authors: [ayan]
 tags: [data, fx]
 related: []
@@ -31,15 +31,15 @@ Weekly open interest and long and short positions by trader type for US futures,
 | History from | Unverified here; compressed history files on the CFTC site go back decades. |
 | Frequency | weekly |
 | Keeps values as first published | no |
-| Used by parity today | no |
+| Used by parity today | yes: cot.EUR, cot.EUR_PCT, cot.GOLD, cot.WTI, cot.<NAME> (23 futures) |
 | Relevance to us | 3 of 5: Free weekly positioning data for currency futures, a possible sentiment signal. |
 | Everything checked on the source | no, some details unverified |
 
-Generated from `catalog/datasets/cftc-cot.json`, last checked 2026-10-21.
+Generated from `catalog/datasets/cftc-cot.json`, last checked 2026-10-22.
 
 ## Terms and quality
 
-**Terms:** US federal government data. No terms of use were quoted on the COT page (checked 2026-10-21). The API needs no token "as long as usage is reasonable". Not yet used, so not yet checked further.
+**Terms:** Legacy futures-only report (Socrata dataset 6dca-aqww), 1986 on, fetched by parity since 2026-10-22. US federal government data; the CFTC asks for acknowledgement (https://www.cftc.gov/WebPolicy/index.htm).
 
 **Quality:** Futures only, a small slice of the FX market. Positions as of Tuesday, released Friday.
 
@@ -52,4 +52,5 @@ Generated from `catalog/datasets/cftc-cot.json`, last checked 2026-10-21.
 ## Referenced by
 
 - [REF-0010: FX data sources, licences and resolution](../reference/0010-fx-data-sources-licences-and-resolution.md)
+- [REF-0015: Getting close to Bloomberg data: sources, costs and licences](../reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 <!-- backlinks:end -->

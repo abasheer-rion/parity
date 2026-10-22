@@ -19,8 +19,12 @@
   "point_in_time": false,
   "license_terms": "Free use of information from the site as long as it is reproduced accurately and the ECB is cited as the source. Extra notice rules apply if you sell it. The reference rates are for information only. https://www.ecb.europa.eu/home/disclaimer/html/index.en.html",
   "quality_notes": "Reference rates are set around 14:10 CET and published around 16:00 CET, so they do not line up with New York closes. No rates on TARGET holidays. The ECB discourages using them for transactions.",
-  "in_use_by_parity": false,
-  "parity_keys": [],
+  "in_use_by_parity": true,
+  "parity_keys": [
+    "ecb.<CCY> (29)",
+    "curve.EA_AAA_<T> (6)",
+    "money.ESTR"
+  ],
   "relevance": {
     "score": 4,
     "reason": "Official euro FX fixings and euro area rates straight from the source, without the OECD delay."
@@ -32,5 +36,5 @@
     "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?lastNObservations=2&format=csvdata"
   ],
   "verified": true,
-  "last_checked": "2026-10-20"
+  "last_checked": "2026-10-22"
 }

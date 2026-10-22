@@ -2,9 +2,9 @@
 id: DAT-0010
 title: ECB Data Portal (SDMX web service)
 type: dataset
-status: candidate
-created: 2026-10-20
-updated: 2026-10-20
+status: in-use
+created: 2026-10-22
+updated: 2026-10-22
 authors: [ayan]
 tags: [data, economics]
 related: []
@@ -31,11 +31,11 @@ All ECB statistics, including the daily euro reference exchange rates for about 
 | History from | Euro reference rates from 1999-01-04; other series vary. |
 | Frequency | daily, monthly, quarterly |
 | Keeps values as first published | no |
-| Used by parity today | no |
+| Used by parity today | yes: ecb.<CCY> (29), curve.EA_AAA_<T> (6), money.ESTR |
 | Relevance to us | 4 of 5: Official euro FX fixings and euro area rates straight from the source, without the OECD delay. |
 | Everything checked on the source | yes |
 
-Generated from `catalog/datasets/ecb-data-portal.json`, last checked 2026-10-20.
+Generated from `catalog/datasets/ecb-data-portal.json`, last checked 2026-10-22.
 
 ## Terms and quality
 
