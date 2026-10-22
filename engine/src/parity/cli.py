@@ -20,6 +20,8 @@
     parity world export          write output/world.json for Sim World's map
     parity world paths --asset EUR --asset oil --weeks 26
                                  simulated paths from blocks of real weekly returns (CSV)
+    parity terminal export       write output/terminal/ for Parity Terminal (every series
+                                 the site may show; --markets DIR adds crypto)
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -290,6 +292,19 @@ def _world(args) -> int:
     return 0
 
 
+def _terminal(args) -> int:
+    from . import terminal
+
+    out = Path(args.out) if args.out else DEFAULT_OUT
+    markets = Path(args.markets) if args.markets else None
+    summary = terminal.export(out, markets=markets)
+    missing = sum(d["reason"] == "no cached data" for d in summary["dropped"])
+    print(f"Wrote {summary['dir']}: {summary['series']} series in {summary['groups']} groups, "
+          f"data through {summary['data_through']}; {missing} allowed series had no cached "
+          f"data, {len(summary['dropped']) - missing} left out by their terms")
+    return 0
+
+
 def _serve(args) -> int:
     from . import api
 
@@ -535,6 +550,15 @@ def main(argv: list[str] | None = None) -> int:
     wd.add_argument("--severity", type=int, choices=range(1, 6))
     wd.add_argument("--commodity", action="append", default=[])
     wd.set_defaults(func=_world)
+
+    tm = sub.add_parser("terminal", help="Parity Terminal's files: every series the site "
+                        "may show, with its latest value and history")
+    tm.add_argument("action", choices=["export"])
+    tm.add_argument("--out", default=None, help="folder; files go in <out>/terminal "
+                    "(default output)")
+    tm.add_argument("--markets", default=None, help="folder holding markets/crypto.json "
+                    "from `parity markets export`; default: the local markets cache")
+    tm.set_defaults(func=_terminal)
     from .strategies.base import ASSETS, FAMILIES
 
     ns = sub.add_parser("new-strategy", help="create the files for a new strategy")
