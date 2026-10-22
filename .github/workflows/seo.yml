@@ -1,0 +1,47 @@
+# Weekly SEO report (DEC-0023). Rebuilds the public pages to count them, resubmits the
+# sitemap to Google Search Console and pulls clicks, impressions and top queries, then writes
+# a short markdown summary as an artifact and in the job summary.
+# Google is optional: without the secret, or before the property is verified and the service
+# account is added as a user, the Google part says so and the job still passes.
+# Secrets: GSC_SERVICE_ACCOUNT_JSON (service account key for Search Console).
+# Variables (optional): GSC_SITE_URLS, comma list of properties to try
+#   (default sc-domain:endyland.com,https://parity.endyland.com/).
+name: SEO report
+
+on:
+  schedule:
+    - cron: "17 7 * * 1"  # Mondays 07:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Build the public pages and sitemap
+        run: |
+          mkdir -p seo-site
+          python3 scripts/seo/build_public.py --out seo-site
+      - name: Search Console (submit sitemap, pull performance)
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URLS: ${{ vars.GSC_SITE_URLS }}
+        run: |
+          pip install -q "google-auth>=2.30" "requests>=2.32"
+          python3 scripts/seo/search_console.py --out seo-report/search_console.json
+      - name: Write the summary
+        run: |
+          python3 scripts/seo/seo_report.py --site-dir seo-site --gsc seo-report/search_console.json --out seo-report/summary.md
+          cat seo-report/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: seo-report
+          path: seo-report/
+          retention-days: 90
