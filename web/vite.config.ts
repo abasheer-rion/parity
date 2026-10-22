@@ -44,6 +44,8 @@ function localResults(): Plugin {
 // PARITY_SCENARIOS_FILE points it at another file (a test fixture, say).
 function localScenarios(): Plugin {
   const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(import.meta.dirname, "../engine/output/scenarios.json");
+  // Sim World's map file, written by `parity world export` (DEC-0016).
+  const world = process.env.PARITY_WORLD_FILE ?? resolve(import.meta.dirname, "../engine/output/world.json");
   return {
     name: "parity-local-scenarios",
     apply: "serve",
@@ -56,6 +58,15 @@ function localScenarios(): Plugin {
         }
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(file));
+      });
+      server.middlewares.use("/local/world.json", (_req, res) => {
+        if (!existsSync(world)) {
+          res.statusCode = 404;
+          res.end("Run `parity world export` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(world));
       });
     },
   };

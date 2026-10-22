@@ -519,6 +519,10 @@ export function FanChart({
   label,
   markers = [],
   height = 240,
+  step = 1,
+  unit = "trading day",
+  countLabel = "event",
+  outerLabel = "Full range",
 }: {
   bands: FanBand[];
   paths: { name: string; values: number[] }[];
@@ -529,6 +533,14 @@ export function FanChart({
   label: string;
   markers?: { day: number; label: string }[];
   height?: number;
+  /** Days between two values of a faint path (paths kept every 3rd day use 3). */
+  step?: number;
+  /** What one step on the x axis is, for the hover title: "trading day", "week". */
+  unit?: string;
+  /** What the count is a count of: "event", "simulated path". */
+  countLabel?: string;
+  /** Name of the light outer band: "Full range", or "5 to 95 in 100" for simulations. */
+  outerLabel?: string;
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
@@ -549,7 +561,7 @@ export function FanChart({
   const y = (v: number) => pad.top + h - ((v - lo) / (hi - lo || 1)) * h;
   const area = (top: (b: FanBand) => number, bottom: (b: FanBand) => number) =>
     `${bands.map((b) => `${x(b.day).toFixed(1)},${y(top(b)).toFixed(1)}`).join(" ")} ${[...bands].reverse().map((b) => `${x(b.day).toFixed(1)},${y(bottom(b)).toFixed(1)}`).join(" ")}`;
-  const line = (vals: (number | null)[]) => vals.map((v, d) => (v == null || Number.isNaN(v) ? null : `${x(d).toFixed(1)},${y(v).toFixed(1)}`)).filter(Boolean).join(" ");
+  const line = (vals: (number | null)[]) => vals.map((v, d) => (v == null || Number.isNaN(v) ? null : `${x(d * step).toFixed(1)},${y(v).toFixed(1)}`)).filter(Boolean).join(" ");
 
   const onMove = (e: React.PointerEvent<SVGRectElement>) => {
     const box = e.currentTarget.getBoundingClientRect();
@@ -590,10 +602,10 @@ export function FanChart({
       </svg>
       {hb && (
         <Tooltip x={x(hb.day)} width={width}>
-          <div className="tt-title">{hb.day} trading day{hb.day === 1 ? "" : "s"} after · {hb.count} event{hb.count === 1 ? "" : "s"}</div>
+          <div className="tt-title">{hb.day} {unit}{hb.day === 1 ? "" : "s"} after · {hb.count} {countLabel}{hb.count === 1 ? "" : "s"}</div>
           <div className="tt-row"><span className="swatch" style={{ background: color }} /><span>Middle outcome</span><strong>{format(hb.median)}</strong></div>
           <div className="tt-row"><span className="swatch" style={{ background: color, opacity: 0.4 }} /><span>Middle half</span><strong>{format(hb.q25)} to {format(hb.q75)}</strong></div>
-          <div className="tt-row"><span className="swatch" style={{ background: color, opacity: 0.15 }} /><span>Full range</span><strong>{format(hb.min)} to {format(hb.max)}</strong></div>
+          <div className="tt-row"><span className="swatch" style={{ background: color, opacity: 0.15 }} /><span>{outerLabel}</span><strong>{format(hb.min)} to {format(hb.max)}</strong></div>
         </Tooltip>
       )}
     </figure>
