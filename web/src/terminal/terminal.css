@@ -277,7 +277,9 @@
 .term-mov-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 10px; padding: 2px 6px; align-content: start; }
 .term-mov { margin: 0; padding: 0; list-style: none; }
 .term-mov button { width: 100%; display: grid; grid-template-columns: 62px minmax(0, 1fr) 72px 60px; gap: 6px; align-items: center; height: 20px; padding: 0 4px; border: 0; border-bottom: 1px solid #ffffff08; background: none; color: var(--t-text); font: inherit; font-size: 11.5px; cursor: pointer; text-align: left; }
-.term-mov button > span:nth-child(n+3) { text-align: right; }
+.term-mov button > span:nth-child(n+3) { text-align: right; white-space: nowrap; }
+.term-mov .term-name { max-width: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@container panel (max-width: 560px) { .term-mov button { grid-template-columns: 62px minmax(0, 1fr) 60px; } .term-mov .term-name { display: none; } }
 .term-mov button:hover { background: #ffffff0a; }
 .term-mov button.picked { background: #ffb00017; }
 
