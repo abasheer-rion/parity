@@ -50,6 +50,7 @@ A separate docs site would mean a second login and could not show our own charts
 
 - [DEC-0012: Open sign-up with Supabase Auth replaces the Cloudflare login](0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md)
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
+- [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

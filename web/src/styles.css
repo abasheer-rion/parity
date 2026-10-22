@@ -763,6 +763,44 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .how-flow li { display: grid; align-content: start; gap: 6px; border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
 .how-flow li > span { width: 24px; height: 24px; border-radius: 999px; display: grid; place-items: center; background: var(--ds-text-link, #2f6bff); color: #fff; font-size: 12px; }
 .how-flow p { margin: 2px 0 0; }
+
+/* Motion on the two homes and How Parity works (DEC-0017). */
+.phome-hero, .rq, .how-head { position: relative; overflow: hidden; isolation: isolate; }
+.phome-hero { border: 1px solid var(--border); border-radius: 20px; padding: 24px; background: var(--surface-solid); }
+.phome-hero h1 { font-size: 34px; }
+.how-head { border: 1px solid var(--border); border-radius: 20px; padding: 22px; background: var(--surface-solid); }
+.feat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; perspective: 1200px; }
+.feat-row > * { min-width: 0; }
+.feat { border: 1px solid var(--border); border-radius: 16px; background: var(--surface-solid); height: 100%; }
+.feat-in { display: grid; gap: 8px; padding: 16px 18px; color: var(--text); text-decoration: none; height: 100%; }
+.feat-in:hover { text-decoration: none; }
+.feat-top { display: flex; align-items: center; gap: 6px; }
+.feat-top .ui-badge { margin-left: auto; }
+.feat-top .acct-dot { margin-right: 0; }
+.feat-name { font-size: 16px; font-weight: 500; }
+.feat .spark { margin: 4px 0; }
+.feat-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border-top: 1px solid var(--border); padding-top: 10px; }
+.feat-stats > span { display: grid; }
+.feat-stats b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.verdict-bar span { transform-origin: left; animation: verdict-grow 700ms var(--ease-out) both; }
+.verdict-bar span[data-i="1"] { animation-delay: 80ms; }
+.verdict-bar span[data-i="2"] { animation-delay: 160ms; }
+.verdict-bar span[data-i="3"] { animation-delay: 240ms; }
+@keyframes verdict-grow { from { transform: scaleX(0); opacity: 0; } }
+.how-side.here { box-shadow: 0 0 0 1px var(--ds-text-link, #2f6bff) inset; }
+.how-flowline { position: relative; width: 44px; height: 2px; border-radius: 2px; background: var(--border-2); overflow: hidden; }
+.how-flowline i { position: absolute; top: 0; left: -8px; width: 8px; height: 2px; border-radius: 2px; background: var(--ds-text-link, #2f6bff); animation: how-flow 2.4s linear infinite; }
+.how-flowline i:nth-child(2) { animation-delay: .8s; }
+.how-flowline i:nth-child(3) { animation-delay: 1.6s; }
+@keyframes how-flow { to { transform: translateX(60px); } }
+.how-rules .ui-reveal { margin: 0; }
+@media (max-width: 900px) {
+  .feat-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: none; }
+  .feat-row > * { scroll-snap-align: start; }
+  .phome-hero { padding: 18px; }
+  .phome-hero h1 { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) { .how-flowline i { animation: none; left: 18px; } .how-flowline i + i { display: none; } }
 @media (max-width: 900px) {
   .phome-grid, .rgrid, .themes, .how-flow { grid-template-columns: minmax(0, 1fr); }
   .pcard.span2 { grid-column: auto; }

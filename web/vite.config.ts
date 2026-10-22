@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityDocs } from "./plugins/docs";
+import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
 // In local development the dashboard can read the engine's latest run straight
@@ -82,7 +83,7 @@ const SITE_PAGES = ["index", "login/index", "signup/index", "reset/index", "veri
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), parityDocs()],
+  plugins: [react(), localResults(), localScenarios(), parityDocs(), paritySite()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

@@ -2,7 +2,7 @@
 // and the rules that go with it. Chart demos use made-up sample data, labelled so.
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  Animate, Badge, BarChart, Button, ButtonGroup, Checkbox, CountUp, DataTable, Delta, Dialog, Divider, EmptyState, FilterBar, FilterChip,
+  Animate, Badge, BarChart, DrawIn, HeroGlow, LIFT, PageTransition, Reveal, Tilt, Button, ButtonGroup, Checkbox, CountUp, DataTable, Delta, Dialog, Divider, EmptyState, FilterBar, FilterChip,
   FanChart, Grid, Heading, HeroChart, Icon, ICON_NAMES, IconButton, Input, KeyValues, Kbd, Label, LineChart, Menu, Meter, Money, PageHeader, Panel,
   RollingNumber, SearchInput, Section, Segmented, Select, Separator, SettingsRow, ShareBar, Skeleton, Sparkline, Stat, Status, Tabs, Text,
   Toggle, Tooltip, fmt, toast, useFilters, type Column, type RangeKey,
@@ -83,6 +83,7 @@ function sample(seed: number, n = 1500, drift = 0.0003, vol = 0.011): Point[] {
 }
 const SAMPLE_A = sample(7);
 const SAMPLE_B = sample(11, 1500, 0.0002, 0.006);
+const SAMPLE_C = sample(23, 1500, 0.00025, 0.008);
 
 // ---------- Foundations ----------
 
@@ -106,7 +107,7 @@ const BLURB: Record<string, string> = {
   colors: "Surfaces, text, accent, gain and loss, and the eight chart colours, read live from the site.",
   type: "Seven sizes on one scale. Numbers always line up.",
   space: "A 4px grid, five radii, three shadows.",
-  motion: "Four durations, three curves, entrances and rolling numbers.",
+  motion: "Durations, curves, entrances, numbers, lift, tilt, draw-in, reveals, page transitions and the hero glow.",
   icons: "One 16px stroke set, drawn for this site.",
   text: "Headings, labels, money, percentages and signed changes.",
   buttons: "One primary per view; everything else stays quiet.",
@@ -239,7 +240,7 @@ function Motion() {
   const [n, setN] = useState(27970.51);
   return (
     <>
-      <PageHeader title="Motion" description="Short and quiet. Motion explains a change (something arriving, a number updating, a panel opening) and never loops for decoration. Everything stops for people whose system asks for reduced motion." />
+      <PageHeader title="Motion" description="Short and quiet. Motion explains a change (something arriving, a number updating, a panel opening) or shows that something can be touched. The only loop in the app is the hero glow, slow and faint. Nothing flashes. Everything stops for people whose system asks for reduced motion (DEC-0017)." />
       <Item title="Durations and curves" col>
         {[["--dur-1", "90ms", "hover, press"], ["--dur-2", "160ms", "menus, toggles, fades"], ["--dur-3", "240ms", "entrances, dialogs"], ["--dur-4", "400ms", "rolling numbers, bars filling"]].map(([v, ms, use]) => (
           <div key={v} className="scale-row"><code>{v}</code><span>{ms}</span><span className="muted small">{use}</span></div>
@@ -260,6 +261,51 @@ function Motion() {
       </Item>
       <Item title="Count up" intro="Once, for a single headline number. Never in tables." code={`<CountUp value={0.43} format={(v) => v.toFixed(2)} />`}>
         <span className="ui-fs-3xl" key={k}><CountUp value={109525.6} format={(v) => `$${Math.round(v).toLocaleString()}`} /></span>
+      </Item>
+      <Item title="Lift on hover" intro="A card rises 3px and gains a shadow, so it reads as something you can open." code={`<section className={\`pcard \${LIFT}\`}>…</section>`}
+        rules={["For cards that open something. Not for cards that only hold text.", "Never combine with Tilt on the same element."]}>
+        {["Watchlist", "Worth a look", "What if"].map((t) => <div key={t} className={`pcard ${LIFT}`} style={{ minWidth: 160 }}><strong>{t}</strong><p className="muted small" style={{ margin: "4px 0 0" }}>Hover me</p></div>)}
+      </Item>
+      <Item title="Tilt" intro="A strategy card leans a few degrees toward the pointer, with a soft light that follows it. Mouse and trackpad only." code={`<Tilt className="feat">…</Tilt>`}
+        rules={["At most 6 degrees. Text must stay readable while it leans.", "Use for strategy cards and the two sides, not for lists or tables.", "Touch screens and reduced motion get a still card."]}>
+        <div className="feat-row" style={{ width: "100%" }}>
+          {[{ name: "Sample trend", color: "var(--series-1)", points: SAMPLE_A }, { name: "Sample carry", color: "var(--series-2)", points: SAMPLE_B }, { name: "Sample value", color: "var(--series-3)", points: SAMPLE_C }].map((s) => (
+            <Tilt key={s.name} className="feat">
+              <div className="feat-in">
+                <div className="feat-top"><span className="acct-dot" style={{ background: s.color }} /><span className="muted small">Sample</span><Badge tone="accent">Promising</Badge></div>
+                <strong className="feat-name">{s.name}</strong>
+                <Sparkline points={s.points} width={240} height={48} fluid />
+              </div>
+            </Tilt>
+          ))}
+        </div>
+      </Item>
+      <Item title="Charts draw in" intro="Lines draw from left to right once, when the chart first appears. The library's charts and sparklines do this already; DrawIn does it for hand-made SVG." code={`<DrawIn><svg>…</svg></DrawIn>`}
+        rules={["Once, on arrival. Never again on hover or on a range change.", "Under a second. The numbers are readable before it ends."]}>
+        <div key={k} style={{ width: "100%" }}>
+          <DrawIn>
+            <svg viewBox="0 0 300 80" width="100%" height="80" preserveAspectRatio="none" aria-hidden>
+              <polyline fill="none" stroke="var(--benchmark)" strokeWidth={1.5} vectorEffect="non-scaling-stroke" points="0,72 30,66 60,74 90,62 120,66 150,52 180,58 210,40 240,44 270,28 300,22" />
+              <polyline fill="none" stroke="var(--series-1)" strokeWidth={2} vectorEffect="non-scaling-stroke" points="0,72 30,68 60,66 90,58 120,60 150,48 180,44 210,34 240,30 270,18 300,10" />
+            </svg>
+          </DrawIn>
+        </div>
+        <Button size="sm" onClick={() => setK((x) => x + 1)} icon="sparkle">Replay</Button>
+      </Item>
+      <Item title="Reveal on scroll" intro="Rises into place the first time it scrolls into view. Anything already on screen shows at once." code={`<Reveal as="section" delay={50} className="pcard">…</Reveal>`}
+        rules={["Stagger a row by 50 to 80ms per card, never more than about 300ms in total.", "Use below the fold. Above it, the page transition is enough."]}>
+        {[0, 1, 2].map((i) => <Reveal key={i} delay={i * 70}><div className="motion-box">card {i + 1}</div></Reveal>)}
+      </Item>
+      <Item title="Page transition" intro="A page eases up 8px and fades in when it opens. Wrap the page's outer element." code={`<PageTransition className="phome">…</PageTransition>`}>
+        <PageTransition key={k}><div className="motion-box">page</div></PageTransition>
+        <Button size="sm" onClick={() => setK((x) => x + 1)} icon="sparkle">Replay</Button>
+      </Item>
+      <Item title="Hero glow" intro="A slow wash of the brand blues behind a hero area. The only loop in the app: about a minute per drift, low contrast, still for reduced motion." code={`<section className="phome-hero">\n  <HeroGlow />\n  …\n</section>`}
+        rules={["Only behind a page's first block. One per page.", "Text on top keeps its normal contrast; the glow stays faint."]}>
+        <div className="phome-hero" style={{ width: "100%" }}>
+          <HeroGlow />
+          <div><h1 style={{ margin: 0 }}>Hi Sam</h1><p className="muted">102 strategies tested the same honest way.</p></div>
+        </div>
       </Item>
     </>
   );

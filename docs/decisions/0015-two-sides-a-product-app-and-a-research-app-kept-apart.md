@@ -81,5 +81,6 @@ A product built to attract people creates pressure to show winners. A research p
 ## Referenced by
 
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
+- [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->

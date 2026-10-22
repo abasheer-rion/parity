@@ -10,6 +10,10 @@ Writes, under the output folder:
   latest.json           a copy of the newest run
   search.json           the newest strategy search snapshot (DEC-0014)
 
+and, one folder up (the site root, public): stats.json, two counts for the front
+page's counters, strategies tested in the newest run and variations searched.
+Counts only, nothing else from the research.
+
 Usage: SITE_DATA_DB_URL=postgres://... python3 scripts/export_site_data.py web/dist/data
 Keeps every official run and the newest KEEP_EXPLORATORY exploratory runs.
 """
@@ -84,7 +88,17 @@ def main(out: Path) -> int:
                 (out / "search.json").write_text(json.dumps(snap["doc"], separators=(",", ":")))
         except psycopg.Error as exc:  # table not migrated yet: ship the site without it
             conn.rollback()
+            snap = None
             print(f"no search snapshot: {exc}", file=sys.stderr)
+    # The front page's live counters (DEC-0017). Public, so counts only.
+    stats: dict = {}
+    if index:
+        newest = json.loads((out / "latest.json").read_text())
+        stats["generated_at"] = newest["generated_at"]
+        stats["strategies_tested"] = sum(1 for r in newest["runs"] if not r.get("is_benchmark") and r.get("gauntlet"))
+    if snap and isinstance(snap["doc"].get("trials"), int):
+        stats["variations_searched"] = snap["doc"]["trials"]
+    (out.parent / "stats.json").write_text(json.dumps(stats))
     print(f"exported {len(index)} runs ({len(batches)} published) to {out}")
     return 0
 
