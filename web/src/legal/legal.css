@@ -4,7 +4,7 @@
   color-scheme: dark;
   --bg: #0b0c14; --card: #141523; --line: #24253a; --line-2: #32344d;
   --text: #eef0f8; --muted: #b4b7cc; --faint: #9a9db6;
-  --blue: #2f6bff; --link: #9db9ff; --warn: #f2c46d;
+  --blue: #2458e0; --link: #9db9ff; --warn: #f2c46d;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); }
@@ -27,7 +27,7 @@ img { max-width: 100%; height: auto; }
 .lg-nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 550; padding: 8px 12px; border-radius: 8px; }
 .lg-nav a:hover { background: #191a2b; color: var(--text); }
 .lg-nav .lg-cta { background: var(--blue); color: #fff; }
-.lg-nav .lg-cta:hover { background: #2559d6; color: #fff; }
+.lg-nav .lg-cta:hover { background: #1f4cc4; color: #fff; }
 
 main { flex: 1; padding: 48px 0 72px; }
 main:focus { outline: none; }
@@ -57,7 +57,7 @@ tr:last-child td { border-bottom: 0; }
 code { font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; background: #191a2b; border-radius: 4px; padding: 1px 5px; word-break: break-word; }
 
 .lg-btn { appearance: none; font: inherit; font-weight: 600; min-height: 40px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--blue); background: var(--blue); color: #fff; cursor: pointer; }
-.lg-btn:hover { background: #2559d6; }
+.lg-btn:hover { background: #1f4cc4; }
 
 .lg-cards { list-style: none; padding: 0; display: grid; gap: 12px; }
 .lg-cards li { margin: 0; }

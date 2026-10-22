@@ -5,7 +5,7 @@
   --cn-line: #2c2e45;
   --cn-text: #eef0f8;
   --cn-muted: #b4b7cc;
-  --cn-blue: #2f6bff;
+  --cn-blue: #2458e0;
   --cn-link: #9db9ff;
   font: 14px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--cn-text);
@@ -43,7 +43,7 @@
 }
 .cn-btn:hover { background: #24263a; }
 .cn-primary { background: var(--cn-blue); border-color: var(--cn-blue); color: #fff; }
-.cn-primary:hover { background: #2559d6; }
+.cn-primary:hover { background: #1f4cc4; }
 .cn-btn:focus-visible, .cn a:focus-visible, .cn-dialog a:focus-visible, .cn-switch input:focus-visible + span {
   outline: 2px solid var(--cn-link);
   outline-offset: 2px;

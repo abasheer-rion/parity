@@ -3,6 +3,7 @@
 // the dashboard, and tabs live in the hash (#/map, #/crises, ...).
 import { useEffect, useRef, useState } from "react";
 import { AppGuard } from "./auth";
+import { SkipLink } from "./components/SkipLink";
 import { loadReport } from "./lib/data";
 import { applyTheme } from "./lib/prefs";
 import { researchUrl } from "./lib/space";
@@ -61,14 +62,15 @@ function SimShell() {
 
   return (
     <div className="simapp">
+      <SkipLink />
       <header className="simapp-bar">
-        <button className="simapp-back" onClick={goBack} title="Back to Parity">
+        <button className="simapp-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
           <Icon name="chevronLeft" size={14} />
           <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={20} height={20} />
           <span>Back</span>
         </button>
       </header>
-      <main className="simapp-main">
+      <main id="main" tabIndex={-1} className="simapp-main">
         <SimWorld report={report} tab={route} base="#" />
       </main>
       <Toaster />

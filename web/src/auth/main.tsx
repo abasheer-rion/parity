@@ -7,6 +7,7 @@ import "../ui/tokens.css";
 import "../styles.css";
 import "../ui/ui.css";
 import "../legal/notice";
+import "../a11y.css";
 import { Reset } from "./pages/Reset";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";

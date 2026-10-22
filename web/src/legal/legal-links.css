@@ -1,5 +1,7 @@
 /* The row of legal links (LegalLinks.tsx). */
-.legal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font-size: 12px; line-height: 20px; }
+.legal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 14px; font-size: 12px; line-height: 20px; }
+/* At least 24 by 24 pixels to tap (WCAG 2.5.8). */
+.legal-links a, .legal-links button { display: inline-flex; align-items: center; min-height: 24px; }
 .legal-links a, .legal-links button {
   color: var(--text-2, #b4b7cc);
   background: none;

@@ -9,6 +9,7 @@ import "./styles.css";
 import "./ui/ui.css";
 import "./ui/dark.css";
 import "./legal/notice";
+import "./a11y.css";
 
 startSmoothScroll();
 
