@@ -1,12 +1,16 @@
-// Where every email link lands: /verify/?type=...&token_hash=...
+// Where every email link lands: /verify/?type=...&token_hash=...&next=...
 // It asks for one click before using the token, because some mail filters open every
 // link in an email to scan it, and that would use up a one-time link before you can.
+// `next` is the address the person started from (Supabase's {{ .RedirectTo }}); it is
+// checked by safeNext like every other next.
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { useState } from "react";
 import { Button } from "../../ui";
 import { explain, requireClient } from "../client";
 import { ROUTES } from "../config";
 import { AuthCard, go, Notice, params as pageParams, useSubmit } from "../form";
+import { nextFromQuery, withNext } from "../redirect";
+import { continueTo, secondStepUrl } from "../session";
 
 const COPY: Record<string, { title: string; lead: string; button: string }> = {
   email: { title: "Confirm your email", lead: "One click to confirm your address and sign in.", button: "Confirm and continue" },
@@ -21,6 +25,7 @@ export function Verify() {
   const params = pageParams();
   const type = params.get("type") ?? "";
   const tokenHash = params.get("token_hash") ?? "";
+  const next = nextFromQuery();
   const copy = COPY[type];
   const [done, setDone] = useState<string | null>(null);
   const { busy, error, run } = useSubmit();
@@ -28,8 +33,8 @@ export function Verify() {
   const confirm = run(async () => {
     const { data, error } = await requireClient().auth.verifyOtp({ type: type as EmailOtpType, token_hash: tokenHash });
     if (error) return explain(error);
-    if (type === "recovery") return go(ROUTES.reset);
-    if (type === "invite") return go(`${ROUTES.reset}?from=invite`);
+    if (type === "recovery") return go(withNext(ROUTES.reset, next));
+    if (type === "invite") return go(withNext(`${ROUTES.reset}?from=invite`, next));
     if (type === "email_change") {
       const pending = data.user?.new_email;
       setDone(pending
@@ -37,13 +42,13 @@ export function Verify() {
         : "Your email address is changed.");
       return;
     }
-    go(ROUTES.app);
+    if ((await continueTo(next, go)) === "second-step") go(secondStepUrl(next));
   });
 
   if (!copy || !tokenHash) {
     return (
       <AuthCard title="This link is not complete" lead="Copy the whole link from the email, or ask for a new one.">
-        <div className="auth-links"><a href={ROUTES.login}>Back to log in</a></div>
+        <div className="auth-links"><a href={ROUTES.login}>Back to log in</a><a href={ROUTES.reset}>Reset password</a></div>
       </AuthCard>
     );
   }
@@ -60,7 +65,7 @@ export function Verify() {
     <AuthCard title={copy.title} lead={copy.lead}>
       <Notice>{error}</Notice>
       <Button variant="primary" size="lg" full loading={busy} onClick={() => void confirm()}>{copy.button}</Button>
-      {error && <div className="auth-links"><a href={ROUTES.login}>Back to log in</a><a href={ROUTES.reset}>Reset password</a></div>}
+      {error && <div className="auth-links"><a href={withNext(ROUTES.login, next)}>Back to log in</a><a href={withNext(ROUTES.reset, next)}>Send a new reset email</a></div>}
     </AuthCard>
   );
 }

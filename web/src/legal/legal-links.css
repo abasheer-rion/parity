@@ -1,0 +1,16 @@
+/* The row of legal links (LegalLinks.tsx). */
+.legal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font-size: 12px; line-height: 20px; }
+.legal-links a, .legal-links button {
+  color: var(--text-2, #b4b7cc);
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 2px;
+}
+.legal-links a:hover, .legal-links button:hover { color: var(--text, #eef0f8); text-decoration-color: currentColor; }
+.legal-links a:focus-visible, .legal-links button:focus-visible { outline: 2px solid var(--link, #9db9ff); outline-offset: 2px; border-radius: 3px; }
+.legal-links.start { justify-content: flex-start; }

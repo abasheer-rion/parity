@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button, toast } from "../ui";
 import { explain, supabase } from "./client";
 import { Field, Notice, useSubmit } from "./form";
+import { codeProblem } from "./rules";
 
 interface Factor { id: string; friendly_name?: string; status: string; created_at: string }
 
@@ -10,6 +11,7 @@ export function TwoStep() {
   const [factors, setFactors] = useState<Factor[] | null>(null);
   const [enrolling, setEnrolling] = useState<{ id: string; qr: string; secret: string } | null>(null);
   const [code, setCode] = useState("");
+  const [confirmRemove, setConfirmRemove] = useState<string | null>(null);
   const { busy, error, setError, run } = useSubmit();
 
   const load = useCallback(async () => {
@@ -28,6 +30,8 @@ export function TwoStep() {
 
   const confirm = run(async () => {
     if (!enrolling) return;
+    const bad = codeProblem(code);
+    if (bad) return bad;
     const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: enrolling.id, code });
     if (error) return explain(error);
     setEnrolling(null);
@@ -38,6 +42,7 @@ export function TwoStep() {
 
   const remove = (id: string) => run(async () => {
     const { error } = await supabase.auth.mfa.unenroll({ factorId: id });
+    setConfirmRemove(null);
     if (error) return explain(error);
     toast("Authenticator removed");
     await load();
@@ -52,15 +57,22 @@ export function TwoStep() {
       {verified.map((f) => (
         <div key={f.id} className="account-actions" style={{ alignItems: "center" }}>
           <span>{f.friendly_name ?? "Authenticator app"}</span>
-          <Button size="sm" variant="danger" loading={busy} onClick={() => void remove(f.id)()}>Remove</Button>
+          {confirmRemove === f.id ? (
+            <>
+              <Button size="sm" variant="danger" loading={busy} onClick={() => void remove(f.id)()}>Yes, turn off two-step</Button>
+              <Button size="sm" onClick={() => setConfirmRemove(null)}>Keep it</Button>
+            </>
+          ) : (
+            <Button size="sm" variant="danger" onClick={() => setConfirmRemove(f.id)}>Remove</Button>
+          )}
         </div>
       ))}
       {!verified.length && !enrolling && <span className="muted">Off</span>}
       {enrolling ? (
-        <form className="auth-form" onSubmit={confirm}>
+        <form className="auth-form" onSubmit={confirm} noValidate>
           <span>Scan this with your authenticator app, then type the 6-digit code it shows.</span>
           <img className="mfa-qr" src={enrolling.qr} alt="QR code for your authenticator app" />
-          <span className="mfa-secret">Or enter this key by hand: {enrolling.secret}</span>
+          <span className="mfa-secret">Or enter this key by hand: <code>{enrolling.secret}</code></span>
           <Field label="Code" auto="one-time-code" value={code} onChange={setCode} autoFocus />
           <div className="account-actions">
             <Button type="submit" variant="primary" loading={busy}>Turn on</Button>
