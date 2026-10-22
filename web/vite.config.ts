@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityDocs } from "./plugins/docs";
+import { parityLegal } from "./plugins/legal";
 import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
@@ -83,15 +84,19 @@ function localScenarios(): Plugin {
 
 // Two builds share this file (see package.json "build"):
 //   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
-//                            /verify/, with their assets in /assets/. Empties dist/.
+//                            /verify/ and the legal pages under /legal/, with their assets
+//                            in /assets/. Empties dist/.
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
 // `vite` (dev) serves all of them from one server.
-const SITE_PAGES = ["index", "login/index", "signup/index", "reset/index", "verify/index"];
+const SITE_PAGES = [
+  "index", "login/index", "signup/index", "reset/index", "verify/index",
+  "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index",
+];
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), parityDocs(), paritySite()],
+  plugins: [react(), localResults(), localScenarios(), parityDocs(), paritySite(), parityLegal()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

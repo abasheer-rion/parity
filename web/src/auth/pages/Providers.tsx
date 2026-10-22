@@ -4,18 +4,20 @@ import { Button } from "../../ui";
 import { explain, supabase } from "../client";
 import { ENABLED_PROVIDERS, PASSKEYS_ENABLED, ROUTES, type ProviderId } from "../config";
 import { go, useSubmit } from "../form";
+import { withNext } from "../redirect";
+import { continueTo } from "../session";
 
-export function ProviderButtons({ onError }: { onError: (msg: string | null) => void }) {
+export function ProviderButtons({ onError, next }: { onError: (msg: string | null) => void; next: string }) {
   const { busy, run } = useSubmit();
   if (!ENABLED_PROVIDERS.length && !PASSKEYS_ENABLED) return null;
 
   const oauth = (provider: ProviderId) => run(async () => {
-    // Come back to /login/, which is public, so the browser can finish signing in
-    // before it asks for the protected app.
-    const next = new URLSearchParams(window.location.search).get("next") ?? ROUTES.app;
+    // Come back to /login/ on this host, which is public, so the browser can finish
+    // signing in (and ask for an authenticator code) before it opens the app. `next`
+    // is already checked by safeNext.
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}${ROUTES.login}?next=${encodeURIComponent(next)}` },
+      options: { redirectTo: `${window.location.origin}${withNext(ROUTES.login, next)}` },
     });
     onError(explain(error));
   });
@@ -23,7 +25,7 @@ export function ProviderButtons({ onError }: { onError: (msg: string | null) => 
   const passkey = run(async () => {
     const { error } = await supabase.auth.signInWithPasskey();
     if (error) { onError(explain(error)); return; }
-    go(ROUTES.app);
+    if ((await continueTo(next, go)) === "second-step") go(withNext(`${ROUTES.login}?mfa=1`, next));
   });
 
   return (
@@ -34,7 +36,7 @@ export function ProviderButtons({ onError }: { onError: (msg: string | null) => 
         ))}
         {PASSKEYS_ENABLED && <Button size="lg" full disabled={busy} icon="user" onClick={() => void passkey()}>Use a passkey</Button>}
       </div>
-      <div className="auth-or"><span>or</span></div>
+      <div className="auth-or" aria-hidden="true"><span>or</span></div>
     </>
   );
 }

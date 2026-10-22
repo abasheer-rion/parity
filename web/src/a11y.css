@@ -1,0 +1,21 @@
+/* Accessibility fixes from the axe audit (scripts/a11y.mjs, WCAG 2.2 AA). Kept apart from
+   the theme tokens so the app's look can change without losing them. */
+
+/* Links inside sentences need more than colour to stand out (WCAG 1.4.1). */
+.phome-foot a,
+main footer a,
+.prose p a,
+.prose li a { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+
+/* White text on the light link blue was 2.4:1. The darker brand blue is 5.9:1. */
+.btn-primary { background: #2458e0; }
+.btn-primary:hover { background: #1f4cc4; filter: none; }
+
+/* Brand blue text on its own soft tint was below 4.5:1 on dark surfaces. */
+.ui-badge-accent { color: var(--text); }
+
+/* Visible focus for every control, including ones that set outline: none. */
+:where(a, button, input, select, textarea, [role="tab"], [role="radio"], [role="menuitem"], [tabindex]):focus-visible {
+  outline: 2px solid var(--link, #7aa2ff);
+  outline-offset: 2px;
+}

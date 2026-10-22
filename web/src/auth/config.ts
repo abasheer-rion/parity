@@ -25,6 +25,9 @@ export const ROUTES = {
 /** Must match minimum_password_length in supabase/config.toml and push_templates.sh. */
 export const PASSWORD_MIN = 10;
 
+/** Supabase hashes at most 72 bytes of a password; longer ones are refused. */
+export const PASSWORD_MAX = 72;
+
 export type ProviderId = "google" | "github" | "apple" | "azure";
 
 /**
@@ -47,9 +50,3 @@ export const ENABLED_PROVIDERS = PROVIDERS.filter((p) => listed.includes(p.id));
 
 /** Passkeys (Face ID, Touch ID, Windows Hello). Experimental in Supabase; off unless "on". */
 export const PASSKEYS_ENABLED = import.meta.env.VITE_AUTH_PASSKEYS === "on";
-
-/** Where to go after signing in: the ?next= path if it points into the app, else /app/. */
-export function nextPath(): string {
-  const next = new URLSearchParams(window.location.search).get("next") ?? "";
-  return next.startsWith("/app/") && !next.startsWith("//") ? next : ROUTES.app;
-}

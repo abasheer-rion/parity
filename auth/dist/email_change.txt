@@ -1,7 +1,7 @@
 Confirm your new email
 
 Someone asked to change the email on your Parity account from {{ .Email }} to {{ .NewEmail }}. Confirm to finish the change:
-{{ .SiteURL }}/verify/?type=email_change&token_hash={{ .TokenHash }}
+{{ .SiteURL }}/verify/?type=email_change&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}
 
 Or type this code in your account settings: {{ .Token }}
 

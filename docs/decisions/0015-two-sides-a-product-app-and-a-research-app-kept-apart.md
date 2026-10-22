@@ -86,6 +86,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0019: Real trading later, what it would legally take](0019-real-trading-later-what-it-would-legally-take.md)
 - [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
+- [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->

@@ -3,7 +3,7 @@ Confirm your email
 Thanks for signing up to Parity. Confirm that {{ .Email }} is your address.
 
 Confirm my email:
-{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}
+{{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}
 
 Or type this code on the sign-up screen: {{ .Token }}
 

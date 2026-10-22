@@ -1,10 +1,13 @@
 // Settings > Account: email, password, two-step sign-in, passkeys, sign out, and a
 // request to delete the account.
 import { useEffect, useState } from "react";
+import { LegalLinks } from "../legal/LegalLinks";
 import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
 import { PASSKEYS_ENABLED, PASSWORD_MIN } from "./config";
-import { Field, Notice, useSubmit } from "./form";
+import { Field, Notice, PasswordField, useSubmit } from "./form";
+import { emailLanding } from "./redirect";
+import { codeProblem, emailProblem, passwordProblem } from "./rules";
 import { signOut, useSession, useTeamBadge } from "./session";
 import { Passkeys, TwoStep } from "./SecuritySettings";
 
@@ -35,6 +38,9 @@ export default function AccountSettings() {
       <SettingsRow label="Delete my account" help="Sends a request to the owner, who deletes the account and its sign-in. Research results are shared and are not deleted.">
         <DeleteRequest userId={session?.user.id} email={email} />
       </SettingsRow>
+      <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only, not investment advice.">
+        <LegalLinks className="start" />
+      </SettingsRow>
     </>
   );
 }
@@ -44,41 +50,61 @@ function ChangeEmail({ current, pending }: { current: string; pending?: string }
   const [next, setNext] = useState("");
   const [sentTo, setSentTo] = useState<string | null>(pending ?? null);
   const [code, setCode] = useState("");
-  const { busy, error, run } = useSubmit();
+  const [status, setStatus] = useState<string | null>(null);
+  const { busy, error, setError, run } = useSubmit();
+
+  // The session loads after the first render, so pick up a pending change when it arrives.
+  useEffect(() => { setSentTo(pending ?? null); }, [pending]);
 
   const request = run(async () => {
-    const { error } = await requireClient().auth.updateUser({ email: next.trim() }, { emailRedirectTo: `${window.location.origin}/` });
+    const bad = emailProblem(next);
+    if (bad) return bad;
+    if (next.trim().toLowerCase() === current.toLowerCase()) return "That is already your email.";
+    const { error } = await requireClient().auth.updateUser({ email: next.trim() }, { emailRedirectTo: emailLanding("/app/") });
     if (error) return explain(error);
     setSentTo(next.trim());
+    setStatus(null);
     setOpen(false);
   });
 
+  // Both addresses get a code. Try the new address first, then the current one.
   const verify = run(async () => {
     if (!sentTo) return;
-    const { error } = await requireClient().auth.verifyOtp({ email: sentTo, token: code, type: "email_change" });
-    if (error) return explain(error);
-    toast("Confirmed", { tone: "good" });
+    const bad = codeProblem(code);
+    if (bad) return bad;
+    const client = requireClient();
+    let res = await client.auth.verifyOtp({ email: sentTo, token: code, type: "email_change" });
+    if (res.error && current) res = await client.auth.verifyOtp({ email: current, token: code, type: "email_change" });
+    if (res.error) return explain(res.error);
     setCode("");
+    if (res.data.user?.new_email) {
+      setStatus("One address confirmed. Now type the code sent to the other address.");
+    } else {
+      setSentTo(null);
+      setStatus(null);
+      toast("Email changed", { tone: "good" });
+    }
   });
 
   return (
     <div className="account-stack">
       <span>{current}</span>
       <Notice>{error}</Notice>
+      <Notice tone="good">{status}</Notice>
       {sentTo && (
-        <form className="auth-form" onSubmit={verify}>
-          <Notice tone="info">Waiting for you to confirm <strong>{sentTo}</strong>. Click the link in both emails, or type a code here.</Notice>
+        <form className="auth-form" onSubmit={verify} noValidate>
+          <Notice tone="info">Waiting for you to confirm <strong>{sentTo}</strong>. We emailed both addresses. Click the link in each email, or type each code here.</Notice>
           <Field label="Code from the email" auto="one-time-code" value={code} onChange={setCode} />
           <div className="account-actions"><Button type="submit" loading={busy}>Confirm</Button></div>
         </form>
       )}
       {!sentTo && !open && <div className="account-actions"><Button onClick={() => setOpen(true)}>Change email</Button></div>}
       {open && (
-        <form className="auth-form" onSubmit={request}>
+        <form className="auth-form" onSubmit={request} noValidate>
           <Field label="New email" type="email" auto="email" value={next} onChange={setNext} autoFocus />
           <div className="account-actions">
             <Button type="submit" variant="primary" loading={busy}>Send confirmation</Button>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={() => { setOpen(false); setError(null); }}>Cancel</Button>
           </div>
         </form>
       )}
@@ -89,22 +115,25 @@ function ChangeEmail({ current, pending }: { current: string; pending?: string }
 function ChangePassword() {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [again, setAgain] = useState("");
   const [nonce, setNonce] = useState("");
   const [needCode, setNeedCode] = useState(false);
   const { busy, error, setError, run } = useSubmit();
 
-  const reset = () => { setOpen(false); setPassword(""); setNonce(""); setNeedCode(false); setError(null); };
+  const reset = () => { setOpen(false); setPassword(""); setAgain(""); setNonce(""); setNeedCode(false); setError(null); };
 
   const save = run(async () => {
-    if (password.length < PASSWORD_MIN) return `Use at least ${PASSWORD_MIN} characters.`;
-    if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) return "Use both letters and numbers.";
+    const bad = passwordProblem(password);
+    if (bad) return bad;
+    if (password !== again) return "The two passwords do not match.";
+    if (needCode) { const c = codeProblem(nonce); if (c) return c; }
     const client = requireClient();
     const { error } = await client.auth.updateUser(needCode ? { password, nonce } : { password });
     if (error?.code === "reauthentication_needed" || error?.code === "reauth_nonce_missing") {
       const sent = await client.auth.reauthenticate();
       if (sent.error) return explain(sent.error);
       setNeedCode(true);
-      return "For safety, type the code we just emailed you, then save again.";
+      return null;
     }
     if (error) return explain(error);
     toast("Password changed", { tone: "good" });
@@ -113,10 +142,13 @@ function ChangePassword() {
 
   if (!open) return <div className="account-actions"><Button onClick={() => setOpen(true)}>Change password</Button></div>;
   return (
-    <form className="auth-form account-stack" onSubmit={save}>
-      <Notice tone={needCode ? "info" : "bad"}>{error}</Notice>
-      <Field label="New password" type="password" auto="new-password" value={password} onChange={setPassword} minLength={PASSWORD_MIN} autoFocus />
-      {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} />}
+    <form className="auth-form account-stack" onSubmit={save} noValidate>
+      <Notice>{error}</Notice>
+      <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
+      <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules autoFocus />
+      <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain}
+        error={again && password !== again ? "Does not match yet." : null} />
+      {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus />}
       <div className="account-actions">
         <Button type="submit" variant="primary" loading={busy}>Save password</Button>
         <Button onClick={reset}>Cancel</Button>
@@ -142,7 +174,7 @@ function DeleteRequest({ userId, email }: { userId?: string; email: string }) {
     const { error } = await requireClient().from("account_deletion_requests").insert({ user_id: userId, email, reason: reason.trim() || null });
     if (error) {
       if (error.code === "23505") { setRequested(new Date().toISOString()); setOpen(false); return; }
-      if (error.code === "42P01" || error.code === "PGRST205") return "Deletion requests are not set up yet. Ask the owner directly.";
+      if (error.code === "42P01" || error.code === "PGRST205") return "Deletion requests are not set up yet. Email us instead (see the privacy policy).";
       return error.message;
     }
     setRequested(new Date().toISOString());
@@ -160,7 +192,7 @@ function DeleteRequest({ userId, email }: { userId?: string; email: string }) {
         <Notice>{error}</Notice>
         <label className="ui-field">
           <span className="ui-field-label">Anything we should know? (optional)</span>
-          <textarea className="ui-input" rows={3} maxLength={1000} value={reason} onChange={(e) => setReason(e.target.value)} style={{ height: "auto" }} />
+          <textarea className="ui-input" rows={3} name="reason" maxLength={1000} value={reason} onChange={(e) => setReason(e.target.value)} style={{ height: "auto" }} />
         </label>
       </Dialog>
     </>

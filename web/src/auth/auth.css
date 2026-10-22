@@ -60,7 +60,24 @@
 .auth-form { display: flex; flex-direction: column; gap: 14px; }
 .auth-form .ui-btn { margin-top: 6px; }
 .auth-field { gap: 6px; }
-.auth-hint { font-size: 12px; line-height: 16px; color: var(--muted); }
+.auth-hint { font-size: 12px; line-height: 16px; color: var(--text-2); }
+.auth-field-error { font-size: 12px; line-height: 16px; color: var(--bad); }
+.auth-field .ui-input[aria-invalid="true"] { border-color: var(--bad); }
+.auth-pw { position: relative; }
+.auth-pw .ui-input { width: 100%; padding-right: 64px; }
+.auth-pw-toggle { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); min-height: 28px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: var(--link, var(--accent)); font: inherit; font-size: 13px; font-weight: 550; cursor: pointer; }
+.auth-pw-toggle:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+.auth-pw-toggle:focus-visible, .auth-text-btn:focus-visible, .auth-links a:focus-visible, .auth-links button:focus-visible, .auth-check a:focus-visible, .auth-brand:focus-visible, .auth-splash-retry:focus-visible { outline: 2px solid var(--link, var(--accent)); outline-offset: 2px; border-radius: 4px; }
+.auth-rules { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12px; line-height: 18px; color: var(--text-2); }
+.auth-rules li.ok { color: var(--good); }
+.auth-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 19px; color: var(--text-2); }
+.auth-check input { margin: 3px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--accent); }
+.auth-check a { color: var(--link, var(--accent)); text-decoration: underline; text-underline-offset: 2px; }
+.auth-text-btn { align-self: center; background: none; border: 0; padding: 4px; font: inherit; font-size: 13px; color: var(--link, var(--accent)); cursor: pointer; }
+.auth-text-btn:hover { text-decoration: underline; }
+/* An empty live region stays in the page (so later messages are announced) but takes no room. */
+.auth-live:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+.auth-splash-retry { background: none; border: 0; padding: 0; font: inherit; color: var(--link, var(--accent)); text-decoration: underline; cursor: pointer; }
 .auth-code-input { font-family: var(--font-mono); font-size: 22px; letter-spacing: 6px; text-align: center; height: 48px; }
 .auth-seg { margin: 0 0 18px; }
 .auth-seg .ui-seg { width: 100%; }
@@ -68,7 +85,9 @@
 .auth-links { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; }
 .auth-links a, .auth-links button { color: var(--link, var(--accent)); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-decoration: none; }
 .auth-links a:hover, .auth-links button:hover { text-decoration: underline; }
-.auth-foot { margin-top: 18px; font-size: 12px; color: var(--muted); text-align: center; max-width: 400px; }
+.auth-links button:disabled { opacity: .6; cursor: default; }
+.auth-foot { margin-top: 18px; font-size: 12px; color: var(--text-2); text-align: center; max-width: 400px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.auth-disclaimer { margin: 0; color: var(--text-2); }
 .auth-notice { border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 19px; margin-bottom: 14px; border: 1px solid var(--border); }
 .auth-notice-bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 8%, transparent); }
 .auth-notice-good { color: var(--good); background: color-mix(in srgb, var(--good) 8%, transparent); }

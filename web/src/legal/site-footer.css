@@ -1,0 +1,14 @@
+/* The legal links in the front page footer (web/index.html). */
+.site-legal { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.site-legal a, .site-legal button {
+  color: #b4b7cc;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #4a4d68;
+  text-underline-offset: 2px;
+}
+.site-legal a:hover, .site-legal button:hover { color: #eef0f8; }

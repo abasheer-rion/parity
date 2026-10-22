@@ -5,6 +5,13 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 ## Unreleased
 
 - Site and both apps are dark only, with calmer blacks, fewer lines and Cinzel for a few big headings. The apps have no top bar: search, the run picker and settings are in the sidebar, and phones get a floating menu button. Home pages show short findings computed from the data. The front page has a large scale sim of illustrative paths with real counts and a link to Sim World ([DEC-0021](docs/decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)).
+- Sign-in: after logging in, signing up, resetting a password or clicking an email link, people return to where they started, including `/research/` and Sim World; other websites are refused. Password rules show as you type, passwords can be shown, errors are read out, and Account settings handle both email change codes ([DEC-0022](docs/decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)).
+- Auth emails link back with `next`; `auth/push_templates.sh --smtp` connects Resend and `--settings` turns email confirmation on for `parity.endyland.com`. Owner steps in [auth/CHECKLIST.md](auth/CHECKLIST.md).
+- Legal pages at `/legal/` (privacy, terms, cookies, accessibility, risk), drafts for lawyer review, linked from every footer and the app's account menu.
+- Cookie notice (essential only) and a consent API (`web/src/legal/consent.ts`) that keeps analytics off until opted in.
+- Accessibility: skip links, labelled fields, contrast and tap-target fixes; `npm run a11y` (axe-core) reports zero serious or critical issues on the public, sign-in and app pages.
+- Web unit tests with Vitest (`npm test`), run in CI.
+
 - Product Markets area (`/app/#/markets`): crypto prices and risks, perps with funding as a cost of holding and leverage risk, every US ETF by theme, new fund filings and trending coins with "what to check" lists, hype terms explained, and Practice positions with pretend money ([DEC-0018](docs/decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)). Real trading needs legal work first ([DEC-0019](docs/decisions/0019-real-trading-later-what-it-would-legally-take.md)).
 - Engine: `parity markets fetch|status|export` from CoinGecko, Hyperliquid and SEC EDGAR, no keys ([REF-0014](docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)).
 - Glossary: 21 "New products and hype terms" with a "what can go wrong" line.

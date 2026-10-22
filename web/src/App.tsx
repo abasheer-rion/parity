@@ -28,6 +28,7 @@ import { Settings } from "./pages/Settings";
 import { SimLanding } from "./pages/SimLanding";
 import { UILibrary } from "./pages/UILibrary";
 import { Toaster } from "./ui";
+import { LegalLinks } from "./legal/LegalLinks";
 import { Signals } from "./pages/Signals";
 import { Start } from "./pages/Start";
 import { HowItWorks } from "./pages/HowItWorks";
@@ -159,6 +160,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
             {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
             {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
             Research only, not investment advice.
+            <LegalLinks className="start app-legal" />
           </footer>
         </>
       )}
