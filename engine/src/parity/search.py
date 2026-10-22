@@ -427,7 +427,9 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
             except NotConfigured:
                 pass
             except Exception as exc:  # the site can wait; the search keeps going
-                print(f"publish failed: {exc}", flush=True)
+                # Only the error's type: database errors can quote the connection
+                # string, password included, and this goes to a log file.
+                print(f"publish failed: {type(exc).__name__}", flush=True)
         if time.time() - last_fetch > refresh_hours * 3600:
             try:
                 store.refresh()
