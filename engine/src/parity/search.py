@@ -47,7 +47,9 @@ UNIVERSES = {
     "g10": ("G10 currencies", FX), "fx21": ("21 currencies", WIDE),
     "ind": ("US industries", IND), "fac": ("Stock factors", FAC),
 }
-LOOKBACKS = [5, 10, 21, 42, 63, 126, 189, 252, 378, 504]
+# A wide grid of lookbacks keeps the search finding new variations for a long time.
+LOOKBACKS = [5, 8, 10, 15, 21, 30, 42, 52, 63, 84, 105, 126, 150, 189, 210, 252, 300, 378, 441, 504,
+             630, 756]
 
 
 def _months(days: int) -> str:
@@ -84,7 +86,7 @@ def _rank(r: random.Random) -> dict:
     n = len(UNIVERSES[u][1])
     return {"kind": "rank", "universe": u, "rank_on": sig, "lookback": lookback,
             "skip": 0 if lookback < 126 or sig != "momentum" else r.choice([0, 21]),
-            "k": r.choice([1, 2, 3, 4] if n >= 8 else [1, 2]),
+            "k": r.choice([1, 2, 3, 4, 5] if n >= 12 else [1, 2, 3, 4] if n >= 8 else [1, 2]),
             "long_short": u in ("g10", "fx21", "fac") or r.random() < 0.3,
             "rebalance": r.choice(["W", "M"])}
 
@@ -95,35 +97,37 @@ TIMING_RULES = ["above_average", "absolute_momentum", "vix_below_average", "vix_
 
 def _timing(r: random.Random) -> dict:
     rule = r.choice(TIMING_RULES)
-    p = {"above_average": r.choice([50, 100, 150, 200, 250]),
-         "absolute_momentum": r.choice([63, 126, 252]),
-         "vix_below_average": r.choice([21, 63, 126, 252]),
-         "vix_below": r.choice([20, 25, 30, 35, 40]),
-         "curve_positive": r.choice([-0.5, 0.0, 0.5, 1.0]),
-         "rates_falling": r.choice([63, 126, 252]),
-         "copper_up": r.choice([63, 126, 252]),
-         "oil_calm": r.choice([0.3, 0.5, 0.8])}[rule]
+    p = {"above_average": r.choice([30, 50, 75, 100, 125, 150, 175, 200, 225, 250, 300]),
+         "absolute_momentum": r.choice([21, 42, 63, 126, 189, 252, 378]),
+         "vix_below_average": r.choice([10, 21, 42, 63, 126, 252]),
+         "vix_below": r.choice([15, 18, 20, 22, 25, 28, 30, 35, 40, 45]),
+         "curve_positive": r.choice([-1.0, -0.5, -0.25, 0.0, 0.25, 0.5, 1.0, 1.5]),
+         "rates_falling": r.choice([21, 63, 126, 189, 252]),
+         "copper_up": r.choice([63, 126, 189, 252]),
+         "oil_calm": r.choice([0.2, 0.3, 0.4, 0.5, 0.65, 0.8])}[rule]
     return {"kind": "timing", "rule": rule, "param": p, "fallback": r.choice(["cash", "bond"]),
             "leverage": r.choice([1.0, 1.0, 1.0, 1.25, 1.5]),
             "rebalance": r.choice(["D", "W", "M"])}
 
 
 def _chart(r: random.Random) -> dict:
-    u = r.choice(["g10", "ind", "mkt"])
+    u = r.choice(["g10", "fx21", "ind", "fac", "mkt"])
     kind = r.choice(["macd", "bollinger", "ichimoku", "breakout"])
-    spec = {"kind": "chart", "indicator": kind, "universe": u, "long_only": u != "g10",
+    spec = {"kind": "chart", "indicator": kind, "universe": u, "long_only": u in ("ind", "mkt"),
             "rebalance": r.choice(["D", "W"])}
     if kind == "bollinger":
-        spec |= {"window": r.choice([10, 20, 50]), "band": r.choice([1.5, 2.0, 2.5])}
+        spec |= {"window": r.choice([10, 15, 20, 30, 50, 100]),
+                 "band": r.choice([1.0, 1.5, 2.0, 2.5, 3.0])}
     if kind == "breakout":
-        spec |= {"entry": r.choice([20, 55, 100]), "exit": r.choice([10, 20])}
+        spec |= {"entry": r.choice([10, 20, 40, 55, 100, 150]), "exit": r.choice([5, 10, 20, 40])}
     return spec
 
 
 def _pair(r: random.Random) -> dict:
-    a, b = r.sample(G10, 2)
-    return {"kind": "pair", "a": f"fx.{a}", "b": f"fx.{b}", "window": r.choice([60, 120, 250]),
-            "entry": r.choice([1.5, 2.0, 2.5]), "delay": r.choice([0, 1])}
+    pool = r.choice([WIDE, WIDE, IND])
+    a, b = r.sample(pool, 2)
+    return {"kind": "pair", "a": a, "b": b, "window": r.choice([20, 40, 60, 90, 120, 180, 250]),
+            "entry": r.choice([1.0, 1.5, 2.0, 2.5, 3.0]), "delay": r.choice([0, 1])}
 
 
 def _mix(r: random.Random) -> dict:
@@ -132,10 +136,10 @@ def _mix(r: random.Random) -> dict:
         assets = r.sample([B.MKT, "bond.TR10", "bond.TR2", "cmd.BRENT"],
                           r.choice([2, 3]))
     else:
-        assets = r.sample(UNIVERSES[pool][1], r.choice([2, 3, 4, 5]))
+        assets = r.sample(UNIVERSES[pool][1], r.choice([2, 3, 4, 5, 6]))
     return {"kind": "mix", "assets": sorted(assets), "scale": r.choice(["fixed", "inverse_vol"]),
             "trend": r.choice([False, True]), "lookback": r.choice([126, 252]),
-            "vol_target": r.choice([None, None, 0.08, 0.12])}
+            "vol_target": r.choice([None, None, 0.06, 0.08, 0.10, 0.12, 0.15])}
 
 
 SAMPLERS = [(_trend, 3), (_rank, 4), (_timing, 3), (_chart, 2), (_pair, 1), (_mix, 2)]
@@ -219,14 +223,15 @@ def describe(spec: dict) -> dict:
         line = f"Trades {_ulabel(spec['universe'])} on the {ind} chart signal."
         tags = ("value" if spec["indicator"] == "bollinger" else "trend", "chart indicator")
     elif k == "pair":
-        a, b = spec["a"][3:], spec["b"][3:]
+        a, b = (SHORT.get(x, x.split(".", 1)[1]) for x in (spec["a"], spec["b"]))
         late = " next day" if spec["delay"] else ""
         name = f"{a}/{b} pair {spec['window']}d at {spec['entry']}σ{late}"
         line = f"Bets the {a} to {b} ratio returns to its {spec['window']}-day average."
         tags = ("value", "pairs")
     else:
         short = [SHORT.get(x, x.split(".")[-1]) for x in spec["assets"]]
-        name = f"Mix: {', '.join(short)}"
+        name = f"Mix: {', '.join(short)}" if len(short) <= 4 else \
+            f"Mix of {len(short)}: {', '.join(short[:3])} and {len(short) - 3} more"
         weighting = " weighted by calm" if spec["scale"] == "inverse_vol" else " equally"
         trending = ", each only while trending" if spec["trend"] else ""
         target = f", scaled to {spec['vol_target']:.0%} risk" if spec["vol_target"] else ""
