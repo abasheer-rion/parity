@@ -57,6 +57,7 @@ These are bug fixes and integrity fixes, not changes of pass thresholds, so they
 ## Referenced by
 
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
+- [DEC-0014: A strategy factory and an always-on search](0014-a-strategy-factory-and-an-always-on-search.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [RES-0008: Independent audit of our methods and code](../research/0008-independent-audit.md)

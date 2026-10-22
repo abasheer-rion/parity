@@ -16,9 +16,10 @@ const MARKETS: NavItem[] = [
   START,
   { href: "#/", label: "Sim World", icon: "home", routes: ["", "home"] },
   {
-    href: "#/strategies", label: "Strategies", icon: "chart", routes: ["strategies", "strategy", "compare", "lab", "explore", "signals"],
+    href: "#/strategies", label: "Strategies", icon: "chart", routes: ["strategies", "strategy", "compare", "lab", "explore", "signals", "search"],
     children: [
       { href: "#/strategies", label: "All strategies", routes: ["strategies", "strategy"] },
+      { href: "#/search", label: "Strategy search", routes: ["search"] },
       { href: "#/compare", label: "Compare", routes: ["compare"] },
       { href: "#/lab", label: "Try settings", routes: ["lab"] },
       { href: "#/signals", label: "Early signals", routes: ["signals"] },

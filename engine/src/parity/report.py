@@ -88,8 +88,8 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
             "yearly": performance.yearly_returns(res.returns),
             "equity": _weekly(res.equity),
             "drawdown": _weekly(performance.drawdown(res.returns), 4),
-            "ic_decay": signal.ic_decay(sig, panel[strat.instruments()]) if sig is not None
-            else [],
+            "ic_decay": signal.ic_decay(sig, panel[[c for c in sig.columns if c in panel]])
+            if sig is not None else [],
             "exposure": {k: round(float(v), 4) for k, v in res.weights.iloc[-1].items()}
             if len(res.weights) else {},
             "gauntlet": run_gauntlet(strat, panel, bench, cfg, n_trials, bench_ex)

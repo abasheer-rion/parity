@@ -39,6 +39,7 @@ The step-by-step guide is [GDE-0002](../guides/0002-adding-a-strategy.md).
 ## Referenced by
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
+- [DEC-0014: A strategy factory and an always-on search](0014-a-strategy-factory-and-an-always-on-search.md)
 - [GDE-0002: Adding or removing a strategy](../guides/0002-adding-a-strategy.md)
 - [REF-0001: Architecture](../reference/0001-architecture.md)
 <!-- backlinks:end -->

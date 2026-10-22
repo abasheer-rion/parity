@@ -54,3 +54,17 @@ def publish(doc: dict) -> str:
         cur.executemany(f"insert into public.strategy_runs ({cols}) values ({marks})", rows)
         conn.commit()
     return batch_id
+
+
+def publish_search(doc: dict, top: int = 1000) -> None:
+    """Send a compact strategy search snapshot (DEC-0014): the totals and the best
+    `top` rows. The table keeps only the newest 20."""
+    url = os.environ.get("PARITY_WRITER_DB_URL")
+    if not url:
+        raise NotConfigured("PARITY_WRITER_DB_URL is not set")
+    import psycopg
+
+    small = {**doc, "rows": doc["rows"][:top]}
+    with psycopg.connect(url) as conn:
+        conn.execute("insert into public.search_snapshots (generated_at, trials, doc) "
+                     "values (%s, %s, %s)", (doc["generated_at"], doc["trials"], json.dumps(small)))

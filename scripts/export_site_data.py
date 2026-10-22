@@ -8,6 +8,7 @@ Writes, under the output folder:
   batches.json          newest first: id, generated_at, git_sha, kind, run_id
   batch/<id>.json       one report per run, in the shape web/src/lib/types.ts expects
   latest.json           a copy of the newest run
+  search.json           the newest strategy search snapshot (DEC-0014)
 
 Usage: SITE_DATA_DB_URL=postgres://... python3 scripts/export_site_data.py web/dist/data
 Keeps every official run and the newest KEEP_EXPLORATORY exploratory runs.
@@ -75,6 +76,15 @@ def main(out: Path) -> int:
             (out / "latest.json").write_text((out / "batch" / f"{index[0]['id']}.json").read_text())
         # The team list is no longer exported: since sign-up is open (DEC-0012), every
         # signed-in person can read /data, and team emails are private.
+        # The newest snapshot of the always-on strategy search (DEC-0014), if any.
+        try:
+            cur.execute("select doc from public.search_snapshots order by id desc limit 1")
+            snap = cur.fetchone()
+            if snap:
+                (out / "search.json").write_text(json.dumps(snap["doc"], separators=(",", ":")))
+        except psycopg.Error as exc:  # table not migrated yet: ship the site without it
+            conn.rollback()
+            print(f"no search snapshot: {exc}", file=sys.stderr)
     print(f"exported {len(index)} runs ({len(batches)} published) to {out}")
     return 0
 

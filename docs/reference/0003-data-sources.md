@@ -36,6 +36,11 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `bond.UST10Y`, `rate.TBILL3M` | FRED | `DGS10`, `DTB3` | Daily | 1962, 1954 | US Treasury yields. |
 | `eq.SPX` | FRED | `SP500` | Daily | Last 10 years only | Price only, no dividends. Kept as a cross-check. |
 | `risk.VIX` | FRED, CBOE | `VIXCLS` | Daily | 1990 | For splitting results by market stress. |
+| `fx.MXN` and 11 more (emerging and other currencies) | FRED, Federal Reserve H.10 | `DEXMXUS`, `DEXBZUS`, and so on | Daily | 1971 to 1995 | Optional. No matching interest rates, so no carry is booked on them ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). |
+| `bond.UST2Y`, `bond.UST30Y` | FRED | `DGS2`, `DGS30` | Daily | 1976, 1977 | Optional. The 30-year has a gap from 2002 to 2006. |
+| `bond.TR10`, `bond.TR2` | Built from the yields | | Daily | 1962, 1976 | Treasury total return approximated from the yield with a fixed duration (8 and 1.9). 2022 comes out at -15%, close to real 7 to 10 year funds. |
+| `factor.SMB`, `HML`, `MOM`, `RMW`, `CMA`, `STREV`, `LTREV` | Kenneth French data library | `<file>#<column>` | Daily | 1926 or 1963 | Optional. Paper long-short factor returns; the backtester charges an estimated yearly trading cost for holding each ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). |
+| `ind.<name>` (12 US industries) | Kenneth French data library | `12_Industry_Portfolios_daily#<name>` | Daily | 1926 | Optional. Value-weighted total return per industry. |
 
 ## FRED
 
@@ -69,6 +74,7 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](../decisions/0008-benchmark-data-without-yahoo.md)
+- [DEC-0014: A strategy factory and an always-on search](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)

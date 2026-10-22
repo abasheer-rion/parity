@@ -29,3 +29,24 @@ export async function listMembers(): Promise<{ email: string; added_at: string }
   if (source === "local") return [];
   return json("/data/members.json");
 }
+
+/** One variation tried by the always-on strategy search (DEC-0014). */
+export interface SearchRow {
+  id: string; name: string; line: string; family: string; style: string; asset: string;
+  start: string; years: number; cagr: number | null; vol: number | null; sharpe: number | null;
+  max_dd: number | null; turnover: number | null; breakeven_bps: number | null; corr: number | null;
+  beats_market: number | null; deflated: number | null; spec: Record<string, unknown>;
+}
+
+export interface SearchDoc {
+  generated_at: string; trials: number; failed: number; beat_market: number;
+  passed_luck_check: number; by_family: Record<string, number>; by_asset: Record<string, number>;
+  rows: SearchRow[];
+}
+
+export async function loadSearch(): Promise<SearchDoc> {
+  const url = source === "local" ? "/local/search.json" : "/data/search.json";
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(res.status === 404 ? "The strategy search has not sent any results yet." : `Could not load the search (${res.status}).`);
+  return (await res.json()) as SearchDoc;
+}

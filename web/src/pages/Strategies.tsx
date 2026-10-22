@@ -30,7 +30,15 @@ export function Strategies({ report }: { report: Report }) {
   const columns: Column<StrategyRun>[] = [
     {
       key: "name", header: "Strategy", align: "left", sort: (r) => nameOf(r),
-      render: (r) => <><span className="acct-dot" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a></>,
+      render: (r) => (
+        <div className="strat-cell">
+          <span className="acct-dot" style={{ background: colors[r.strategy] }} />
+          <div>
+            <a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a>
+            {(r.description || r.summary) && <div className="muted small strat-line">{r.description || r.summary}</div>}
+          </div>
+        </div>
+      ),
     },
     { key: "spark", header: range, align: "left", render: (r) => <Sparkline points={sliceRange(r.equity, range)} /> },
     { key: "move", header: "Move", sort: (r) => move(r, range), tone: (r) => move(r, range), render: (r) => fmt.signedPct(move(r, range)) },

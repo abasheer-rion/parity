@@ -102,14 +102,50 @@ def fetch_french(series: Series) -> pd.Series:
     """Kenneth French's data library: daily US market excess return plus the T-bill
     rate, turned into a total return index starting at 1. Free for research use,
     https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html"""
+    file, _, column = series.code.partition("#")
+    text = _french_file(file)
+    return parse_french_column(text, series, column) if column else parse_french_daily(text, series)
+
+
+_FRENCH_CACHE: dict[str, str] = {}
+
+
+def _french_file(file: str) -> str:
+    """Download one French zip once per process; several series share a file."""
     import zipfile
 
-    url = ("https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/"
-           f"{series.code}_CSV.zip")
-    resp = _get(url)
-    with zipfile.ZipFile(io.BytesIO(resp.content)) as z:
-        text = z.read(z.namelist()[0]).decode("latin-1")
-    return parse_french_daily(text, series)
+    if file not in _FRENCH_CACHE:
+        url = f"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/{file}_CSV.zip"
+        with zipfile.ZipFile(io.BytesIO(_get(url).content)) as z:
+            _FRENCH_CACHE[file] = z.read(z.namelist()[0]).decode("latin-1")
+    return _FRENCH_CACHE[file]
+
+
+def parse_french_column(text: str, series: Series, column: str) -> pd.Series:
+    """One column of a daily French file, as an index starting at 1.
+
+    French files hold several tables one after another (value-weighted first, then
+    equal-weighted and others). Only the first table under the first header that names
+    the column is read. Values are percent returns; -99.99 and -999 mean missing.
+    """
+    header: list[str] | None = None
+    rows = []
+    for line in text.splitlines():
+        parts = [p.strip() for p in line.split(",")]
+        if header is None:
+            if column in parts:
+                header = parts
+            continue
+        if len(parts) >= 2 and parts[0].isdigit() and len(parts[0]) == 8:
+            rows.append((parts[0], parts[header.index(column)]))
+        elif rows:
+            break  # end of the first table
+    if header is None:
+        raise ValueError(f"Column {column} not found")
+    dates = pd.to_datetime([r[0] for r in rows], format="%Y%m%d")
+    vals = pd.Series([float(r[1]) for r in rows], index=dates)
+    vals = vals.where(vals > -99, 0.0) / 100
+    return (1 + vals).cumprod().rename(series.key)
 
 
 def parse_french_daily(text: str, series: Series) -> pd.Series:

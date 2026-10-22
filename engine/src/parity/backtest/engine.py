@@ -21,6 +21,15 @@ from ..strategies.base import Strategy
 TRADING_DAYS = 252
 BORROW_SPREAD = 0.005  # 50 bp a year over the T-bill on borrowed money
 
+# Research factors are paper portfolios: their published returns ignore the cost of
+# trading the stocks inside them. Holding one is charged this much a year per unit
+# held. Rough figures in line with the size of costs in Novy-Marx and Velikov (2016),
+# "A Taxonomy of Anomalies and Their Trading Costs": low for slow factors, high for
+# momentum and very high for short-term reversal. An assumption, see DEC-0014.
+FACTOR_COST = {"factor.SMB": 0.005, "factor.HML": 0.007, "factor.RMW": 0.007,
+               "factor.CMA": 0.007, "factor.LTREV": 0.01, "factor.MOM": 0.03,
+               "factor.STREV": 0.10}
+
 
 @dataclass
 class BacktestConfig:
@@ -56,7 +65,11 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
     """Daily returns per instrument. `cash.USD` earns the US 3-month rate, so strategies
     that step out of the market are not penalised for holding cash."""
     priced = [c for c in instruments if c != "cash.USD"]
-    rets = panel[priced].pct_change(fill_method=None)
+    px = panel[priced]
+    rets = px.pct_change(fill_method=None)
+    # A percent change through zero means nothing: WTI spot closed at -$37 on 20 April
+    # 2020. Days where either price is at or below zero earn nothing instead.
+    rets = rets.where((px > 0) & (px.shift(1) > 0))
     if "cash.USD" in instruments:
         rets["cash.USD"] = panel["rate.USD"].shift(1) / 100 / TRADING_DAYS
         rets = rets[instruments]
@@ -96,11 +109,15 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     rf = risk_free(panel, held.index)
     # Funded strategies pay the T-bill plus a spread on anything borrowed (long funded
     # exposure above 100%). Self-financing currency books earn the T-bill on collateral.
-    funded_cols = [c for c in held.columns if not c.startswith("fx.")]
+    # Currency positions and research factors are zero-cost long-short books: they need
+    # margin, not borrowed money.
+    funded_cols = [c for c in held.columns if not c.startswith(("fx.", "factor."))]
     borrowed = (held[funded_cols].clip(lower=0).sum(axis=1) - 1).clip(lower=0) \
         if funded_cols else 0.0
     financing = borrowed * (rf + BORROW_SPREAD / TRADING_DAYS)
-    net = gross - turnover * config.cost_bps / 1e4 - financing
+    drag = [c for c in held.columns if c in FACTOR_COST]
+    inside = sum(held[c].abs() * FACTOR_COST[c] / TRADING_DAYS for c in drag) if drag else 0.0
+    net = gross - turnover * config.cost_bps / 1e4 - financing - inside
     if not getattr(strategy, "funded", False):
         net = net + rf
 
