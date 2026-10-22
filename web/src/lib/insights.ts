@@ -1,11 +1,11 @@
 // Short insight lines for the two home pages, each computed from the data on screen:
-// the selected research run, the strategy search's file and the official record.
+// the selected research run and the strategy search's file.
 // Nothing here is written by a model or guessed. If the data for a line is missing,
 // the line is left out rather than filled with a placeholder (DEC-0020).
 import type { SearchDoc } from "./data";
 import { pct, signedPct } from "./format";
 import { nameOf } from "./strategyMeta";
-import type { LedgerEntry, Report, StrategyRun } from "./types";
+import type { Report, StrategyRun } from "./types";
 
 export interface Insight {
   /** A few words that say what the line is about. */
@@ -50,7 +50,7 @@ export function productInsights(report: Report): Insight[] {
   return out;
 }
 
-export function researchInsights(report: Report, search: SearchDoc | null, ledger: LedgerEntry[]): Insight[] {
+export function researchInsights(report: Report, search: SearchDoc | null): Insight[] {
   const out: Insight[] = [];
   const runs = tested(report);
 
@@ -72,9 +72,6 @@ export function researchInsights(report: Report, search: SearchDoc | null, ledge
 
   const closest = [...runs].sort((a, b) => (b.gauntlet!.passed - a.gauntlet!.passed) || ((b.metrics.deflated_sharpe ?? 0) - (a.metrics.deflated_sharpe ?? 0)))[0];
   if (closest) out.push({ lead: "Closest to an answer", text: `${nameOf(closest)}, ${closest.gauntlet!.passed} of ${closest.gauntlet!.total} tests.`, href: `/app/#/strategy/${closest.strategy}` });
-
-  const newest = ledger[ledger.length - 1];
-  if (newest) out.push({ lead: "On the record", text: `${plural(ledger.length, "official run")} sealed. The newest, ${newest.run_id}, counted ${plural(newest.trials_counted, "trial")}.`, href: "#/ledger" });
 
   return out;
 }

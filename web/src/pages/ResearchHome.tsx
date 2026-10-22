@@ -48,7 +48,7 @@ export function ResearchHome({ report }: { report: Report }) {
         </div>
       </section>
 
-      <Insights items={researchInsights(report, search, ledger)} source={`the ${report.kind === "official" ? "official" : "nightly"} run of ${date(report.generated_at)}${search ? ", the strategy search" : ""} and the official record`} />
+      <Insights items={researchInsights(report, search)} source={`the ${report.kind === "official" ? "official" : "nightly"} run of ${date(report.generated_at)}${search ? " and the strategy search" : ""}`} />
 
       <div className="rgrid">
         <Reveal as="section" delay={0} className={`pcard ${LIFT}`}>
