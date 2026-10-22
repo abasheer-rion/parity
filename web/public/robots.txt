@@ -1,2 +1,14 @@
+# Parity. Public: the front page, /legal/, /learn/, /ideas/ and /notes/.
+# The product, research and sim apps and their data sit behind sign-in.
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /app/
+Disallow: /research/
+Disallow: /sim/
+Disallow: /data/
+Disallow: /login/
+Disallow: /signup/
+Disallow: /reset/
+Disallow: /verify/
+
+Sitemap: https://parity.endyland.com/sitemap.xml
