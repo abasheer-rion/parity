@@ -79,7 +79,7 @@ const RESEARCH: NavItem[] = [
     ],
   },
   // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
-  { href: simUrl(), label: "Sim World", icon: "compass", routes: ["sim"], external: true },
+  { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: true },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
     children: [
@@ -195,7 +195,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.external ? "Opens Sim World in a new tab" : pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                      <a href={n.href} title={n.external ? "Opens Parity Terminal in a new tab" : pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
                         {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>

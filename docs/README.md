@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 23 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 24 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
@@ -72,6 +72,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
 | DEC-0022 | [Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
 | DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0024 | [Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
