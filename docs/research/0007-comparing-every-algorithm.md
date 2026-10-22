@@ -123,6 +123,7 @@ Official run [RUN-000003](../../ledger/runs/RUN-000003.json) of `REG-0003`, reco
 ## Referenced by
 
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
+- [EXP-0005: Rerun of all sixteen strategies with corrected scoring](../experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](0008-independent-audit.md)
 - [RES-0010: Paper library: FX and market microstructure](0010-paper-library-fx-and-market-microstructure.md)

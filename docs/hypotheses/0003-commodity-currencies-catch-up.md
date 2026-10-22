@@ -56,6 +56,7 @@ Code: `engine/src/parity/strategies/fx_commodity_gap.py` (strategy id `fx_commod
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](0008-monthly-commodity-gap.md)
+- [HYP-0015: Commodity currencies lead energy futures](0015-commodity-currencies-lead-energy-futures.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)

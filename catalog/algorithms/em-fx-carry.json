@@ -70,14 +70,16 @@
     "reason": "Testable with free data on a period no published study covers (2009 on), and the clearest way to extend our G10 carry results."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-21",
+  "last_reviewed": "2026-10-22",
   "research": {
-    "stage": 2,
-    "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
+    "stage": 5,
+    "hypothesis": "HYP-0009",
+    "strategy": "em_fx_carry",
+    "registrations": [
+      "REG-0006"
+    ],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21. Registered on 2026-10-21 as REG-0006 (em_fx_carry), not yet run."
   }
 }

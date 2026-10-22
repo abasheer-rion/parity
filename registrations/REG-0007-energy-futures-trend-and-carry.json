@@ -1,0 +1,46 @@
+{
+  "id": "REG-0007",
+  "title": "Energy futures trend and carry on rolled NYMEX contracts, 1999 to April 2024",
+  "created": "2026-10-21",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0012",
+    "HYP-0013"
+  ],
+  "experiment": "EXP-0008",
+  "question": "On rolled NYMEX crude oil, heating oil, gasoline and natural gas futures, do 12-month trend and cross-sectional carry each have a positive Sharpe ratio that passes at least four of the five reality tests, after 3 bp per unit traded and 2 bp per roll?",
+  "strategies": [
+    {
+      "name": "energy_tsmom",
+      "params": {
+        "lookback": 252,
+        "rebalance": "M"
+      }
+    },
+    {
+      "name": "energy_carry",
+      "params": {
+        "smooth": 1,
+        "rebalance": "M"
+      }
+    }
+  ],
+  "backtest": {
+    "start": "1999-01-04",
+    "end": "2024-04-05",
+    "cost_bps": 3.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 208,
+  "prior_trials_note": "205 + 3 (REG-0006). Includes the commodity_tsmom trials on spot prices, the same idea on worse data. No exploratory evaluation of these strategies was run.",
+  "what_would_change_our_mind": "A pass for trend would show the spot-price failure in EXP-0004 was a data problem. A pass for carry with four contracts would be strong evidence, since the papers use 20 or more.",
+  "already_seen": "No. Before registering, only data checks were run on the futures indices (roll days found, size of the largest daily moves, coverage); no strategy return or performance number was computed."
+}

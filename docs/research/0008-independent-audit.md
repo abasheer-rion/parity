@@ -284,6 +284,7 @@ Fix the five wording issues above. More useful in general: for every reported re
 ## Referenced by
 
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
+- [EXP-0005: Rerun of all sixteen strategies with corrected scoring](../experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [RES-0010: Paper library: FX and market microstructure](0010-paper-library-fx-and-market-microstructure.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

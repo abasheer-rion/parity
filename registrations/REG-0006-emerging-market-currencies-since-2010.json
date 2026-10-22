@@ -1,0 +1,58 @@
+{
+  "id": "REG-0006",
+  "title": "Emerging market carry, basket and momentum since February 2010, at 10 bp costs",
+  "created": "2026-10-21",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0009",
+    "HYP-0010",
+    "HYP-0011"
+  ],
+  "experiment": "EXP-0007",
+  "question": "On data after every published study's sample ended, do emerging market carry, a passive EM basket and EM momentum each have a positive Sharpe ratio that passes at least four of the five reality tests, after 10 bp per unit traded?",
+  "strategies": [
+    {
+      "name": "em_fx_carry",
+      "params": {
+        "fraction": 0.3333333333333333,
+        "min_carry": 1.0,
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    },
+    {
+      "name": "em_fx_basket",
+      "params": {
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    },
+    {
+      "name": "em_fx_momentum",
+      "params": {
+        "lookback": 63,
+        "fraction": 0.3333333333333333,
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    }
+  ],
+  "backtest": {
+    "start": "2010-02-01",
+    "end": null,
+    "cost_bps": 10.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 205,
+  "prior_trials_note": "205 = 188 (RUN-000003) + 16 (REG-0004) + 1 (REG-0005), counted across all families as the project has so far (the audit's H2 questions this; see RES-0008). No exploratory evaluation of these strategies was run.",
+  "what_would_change_our_mind": "Passing 4 of 5 reality tests would make EM carry the first real effect in the project since 2010 and earn a forward test. Failing would mean the published EM results did not survive their own decade.",
+  "already_seen": "No. Before registering, only data checks were run (coverage dates, missing values, size of daily price moves); no return, Sharpe ratio or other performance number was computed for these strategies."
+}

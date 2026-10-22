@@ -59,6 +59,15 @@ PROVIDERS: list[Provider] = [
     Provider("eia", "EIA API v2", "US government work, public domain",
              "https://www.eia.gov/about/copyrights_reuse.php", key_env="EIA_API_KEY",
              key_required=True, note="free key from eia.gov/opendata"),
+    Provider("ecb_usd", "ECB Data Portal, crossed to USD", "Reuse allowed with the ECB named "
+             "as the source", "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+             note="USD per currency, from the euro reference rates (em_fx strategies)"),
+    Provider("oecd", "OECD Data Explorer", "Free reuse with the OECD named (CC BY 4.0)",
+             "https://www.oecd.org/en/about/terms-conditions.html",
+             note="3-month interbank rates for emerging markets"),
+    Provider("eia_web", "EIA history pages (no key)", "US government work, public domain",
+             "https://www.eia.gov/about/copyrights_reuse.php",
+             note="NYMEX energy futures contracts 1 to 3, published to 5 April 2024"),
     # Planned: keyed providers we may add. Prices and terms are in REF-0015.
     Provider("alphavantage", "Alpha Vantage", "Free plan for personal use; display needs a "
              "licence", "https://www.alphavantage.co/terms_of_service/",

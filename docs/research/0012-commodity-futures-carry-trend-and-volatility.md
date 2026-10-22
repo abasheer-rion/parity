@@ -142,5 +142,12 @@ So the testable version is: use last quarter's moves in commodity currencies to 
 
 ## Referenced by
 
+- [HYP-0012: Energy futures trend pays on tradable prices](../hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md)
+- [HYP-0013: Energy futures carry pays](../hypotheses/0013-energy-futures-carry-pays.md)
+- [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
+- [HYP-0015: Commodity currencies lead energy futures](../hypotheses/0015-commodity-currencies-lead-energy-futures.md)
+- [EXP-0008: Energy futures trend and carry](../experiments/0008-energy-futures-trend-and-carry.md)
+- [EXP-0009: Oil volatility and commodity currency signals](../experiments/0009-oil-volatility-and-commodity-currency-signals.md)
 - [RES-0013: Famous currency and commodity traders and what their records teach](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [LOG-0008: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

@@ -44,6 +44,7 @@ None yet.
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
+- [EXP-0006: Stocks plus currency trend on its own](../experiments/0006-stocks-plus-currency-trend-on-its-own.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [RES-0011: Emerging market currencies](../research/0011-emerging-market-currencies.md)

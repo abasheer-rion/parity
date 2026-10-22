@@ -56,14 +56,16 @@
     "reason": "Turns our failed oil-to-currency idea around in the direction the evidence supports; testable from 2008Q2, outside the paper's sample."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-21",
+  "last_reviewed": "2026-10-22",
   "research": {
-    "stage": 2,
-    "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
+    "stage": 5,
+    "hypothesis": "HYP-0015",
+    "strategy": "commodity_fx_leads_energy",
+    "registrations": [
+      "REG-0008"
+    ],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21. Registered on 2026-10-21 as REG-0008 (commodity_fx_leads_energy), not yet run."
   }
 }

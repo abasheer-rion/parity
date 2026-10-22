@@ -55,14 +55,16 @@
     "reason": "Tests directly why our G10 momentum failed; costs are the main risk."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-21",
+  "last_reviewed": "2026-10-22",
   "research": {
-    "stage": 2,
-    "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
+    "stage": 5,
+    "hypothesis": "HYP-0011",
+    "strategy": "em_fx_momentum",
+    "registrations": [
+      "REG-0006"
+    ],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21. Registered on 2026-10-21 as REG-0006 (em_fx_momentum), not yet run."
   }
 }
