@@ -1,36 +1,32 @@
-// #/sim on the research side: Sim World now runs full screen on its own site and opens in a
-// new tab (DEC-0020). This card keeps old links working.
+// #/sim on the research side: Parity Terminal (DEC-0023) runs full screen on its own site
+// and opens in a new tab. This card keeps old links working.
 import { Title } from "../components/Shell";
 import { Button } from "../ui";
 import { simUrl } from "../lib/space";
 
-const TABS = [
-  ["Map", "map", "Currencies on a world map, played through time"],
-  ["Crises", "crises", "Dot-com, 2008, the euro crisis, the taper tantrum, the oil crash, Covid and 2022, across every market"],
-  ["Commodities", "commodities", "Oil, gas and copper racing, with the big producers"],
-  ["Rates", "rates", "The US yield curve changing shape, and interest rate gaps by currency"],
-  ["Stocks", "stocks", "The 12 US industries and the research factors racing"],
-  ["Connections", "connections", "Which markets move together, and how that changes in a crisis"],
-  ["Scenario", "scenario", "What followed past events like the one you describe"],
-  ["Paths", "paths", "Simulated futures from reshuffled history, with their risks, as CSV"],
-  ["Stress test", "stress", "A mix of assets through every past crisis"],
-  ["Strategy race", "race", "Every strategy we test, replayed"],
+const PARTS = [
+  ["Market monitor", "overview", "Every series by group: last, daily to yearly changes, volatility, how unusual the move is, the year's range"],
+  ["Macro", "macro", "Macro, rates and inflation series, the yield curves and futures positioning"],
+  ["FX", "fx", "Currencies on an interactive world map, with detail and a side-by-side compare"],
+  ["Commodities", "commodities", "Oil, gas and metals with positioning and compare"],
+  ["Sim lab", "simlab", "Crises, scenarios, simulated paths, stress tests and the strategy race, replayed from history"],
 ] as const;
 
 export function SimLanding() {
   return (
     <>
       <div className="page-head">
-        <Title>Sim World</Title>
-        <p>Sim World has its own full-screen site, with nothing but the simulator and a Back button. Every tab replays or reshuffles history; none of it is a forecast.</p>
+        <Title>Parity Terminal</Title>
+        <p>A keyboard-first market terminal on its own full-screen site: a command bar, workspaces of linked panels, every market series and every strategy KPI, and the simulations. Everything in it is history, not a forecast.</p>
       </div>
       <div className="mcard sim-landing">
-        <Button variant="primary" icon="external" href={simUrl()} target="_blank">Open Sim World</Button>
+        <Button variant="primary" icon="external" href={simUrl()} target="_blank">Open Parity Terminal</Button>
         <ul className="sim-landing-list">
-          {TABS.map(([name, tab, what]) => (
-            <li key={tab}><a href={simUrl(tab)} target="_blank" rel="noopener"><strong>{name}</strong></a> <span className="muted">{what}</span></li>
+          {PARTS.map(([name, ws, what]) => (
+            <li key={ws}><a href={simUrl(ws)} target="_blank" rel="noopener"><strong>{name}</strong></a> <span className="muted">{what}</span></li>
           ))}
         </ul>
+        <p className="muted">Type a function code (MON, CMP EUR JPY, SCEN) or a series (EUR, BRENT) in the command bar; press F1 for every code and shortcut. It can be installed as an app from the browser.</p>
       </div>
     </>
   );

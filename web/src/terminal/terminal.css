@@ -143,7 +143,7 @@
 .term-wsact { margin-left: auto; display: flex; align-items: center; gap: 4px; }
 .term-wsact button, .term-mini { height: 20px; padding: 0 8px; border: 1px solid var(--t-line-2); background: var(--t-panel-2); color: var(--t-dim); font: inherit; font-size: 10.5px; letter-spacing: .05em; cursor: pointer; }
 .term-wsact button:hover, .term-mini:hover { color: var(--t-amber); border-color: var(--t-amber-dim); }
-.term-switcher select { height: 22px; margin: 3px 0; max-width: 46vw; background: #000; color: var(--t-amber); border: 1px solid var(--t-line-2); font: inherit; font-size: 11px; }
+.term-switcher select { height: 24px; line-height: 22px; padding: 0 4px; margin: 3px 0; max-width: 46vw; background: #000; color: var(--t-amber); border: 1px solid var(--t-line-2); font: inherit; font-size: 11px; }
 
 /* ---------- workspace and panels ---------- */
 .ptm .term-main { position: relative; min-height: 0; min-width: 0; max-width: none; margin: 0; padding: 2px; }
@@ -379,6 +379,10 @@
 .ptm .sw2 .ui-btn-primary { background: var(--t-amber); color: #000; }
 .ptm .sw2 .ui-seg button, .ptm .sw2 .ui-seg [role="radio"] { border-radius: 0; font-size: 11px; }
 .ptm .sw2 .ui-input, .ptm .sw2 select, .ptm .sw2 textarea { border-radius: 0; background: #000; font-family: var(--t-mono); }
+.ptm .sw2 .ui-chip { border-radius: 0; }
+.ptm .sw2 .ui-chip-main { font-size: 11.5px; min-height: 24px; height: auto; padding: 2px 9px; }
+.ptm .sw2 .ui-select select { font-size: 11.5px; height: 24px; border-radius: 0; font-family: var(--t-mono); }
+.ptm .sw2 .ui-field-label, .ptm .sw2 h2, .ptm .sw2 h3 { font-size: 11.5px; }
 .ptm .pb-row-btn { border-radius: 0; }
 .ptm .pb-board-head { font-size: 10px; }
 .ptm .pb-row { height: 24px; }

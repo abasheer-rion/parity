@@ -115,7 +115,7 @@ export function TTable<T>({ rows, cols, rowKey, initial, onPick, picked, caption
             {cols.map((c) => {
               const on = sort?.key === c.key;
               return (
-                <th key={c.key} className={`${c.align === "left" ? "l" : ""} ${on ? "on" : ""}`} style={c.width ? { width: c.width } : undefined} title={c.title}
+                <th key={c.key} className={`${c.align === "left" ? "l" : ""} ${on ? "on" : ""} ${c.className ?? ""}`} style={c.width ? { width: c.width } : undefined} title={c.title}
                   aria-sort={on ? (sort!.dir === "asc" ? "ascending" : "descending") : undefined}>
                   {c.sort ? <button type="button" onClick={() => toggle(c.key)}>{c.label}{on ? (sort!.dir === "asc" ? "▲" : "▼") : ""}</button> : c.label}
                 </th>
