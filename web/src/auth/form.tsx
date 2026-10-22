@@ -8,8 +8,7 @@ export function AuthCard({ title, lead, children, foot }: { title: string; lead?
     <div className="auth-page">
       <div className="auth-card anim-rise">
         <a className="auth-brand" href="/" aria-label="Parity">
-          <img src="/brand/2026-10-21-starburst/parity-icon-dark.svg" width={32} height={32} alt="" />
-          <span>Parity</span>
+          <img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height={44} alt="Parity, systematic research" />
         </a>
         <h1 className="auth-title">{title}</h1>
         {lead && <p className="auth-lead">{lead}</p>}
