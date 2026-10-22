@@ -130,7 +130,10 @@ export function Shell({
         <div className="org">
           <a className="org-button" href="#/">
             <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>
-            <span className="org-name">Parity</span>
+            <span className="org-name" aria-label="Parity">
+              <img className="on-dark" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" alt="" height={13} />
+              <img className="on-light" src="/brand/2026-10-22-wordmark/parity-letters-on-light.svg" alt="" height={13} />
+            </span>
             <span className={`org-badge ${SPACE}`}>{SPACE === "research" ? "Research" : "Beta"}</span>
           </a>
           {full && (

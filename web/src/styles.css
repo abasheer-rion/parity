@@ -771,3 +771,9 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
   .how-arrow { transform: rotate(90deg); }
 }
 .link-btn { border: 0; background: none; color: var(--ds-text-link, #2f6bff); cursor: pointer; font: inherit; font-size: 13px; padding: 0; }
+
+/* The 2026-10-22 wordmark: serif PARITY letters beside the starburst. */
+.org-name img { display: block; height: 13px; width: auto; }
+.org-name .on-light { display: none; }
+:root[data-theme="light"] .org-name .on-dark { display: none; }
+:root[data-theme="light"] .org-name .on-light { display: block; }
