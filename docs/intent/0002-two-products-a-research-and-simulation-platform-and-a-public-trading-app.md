@@ -53,6 +53,8 @@ Parity started as a research project asking whether a currency strategy can beat
 - [DEC-0014: A strategy factory and an always-on search](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - [DEC-0015: Two sides, a product app and a research app, kept apart](../decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](../decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
+- [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
+- [DEC-0019: Real trading later, what it would legally take](../decisions/0019-real-trading-later-what-it-would-legally-take.md)
 - [LOG-0006: Ayan work log, merges, domain, email and the two product plan](../log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->

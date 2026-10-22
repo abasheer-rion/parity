@@ -1,0 +1,76 @@
+{
+ "coins": [
+  {
+   "item": {
+    "id": "universal-high-income-2",
+    "coin_id": 102179637,
+    "name": "Universal High Income",
+    "symbol": "UHI",
+    "market_cap_rank": 746,
+    "slug": "universal-high-income-2",
+    "price_btc": 2.8531251495565467e-07,
+    "score": 0,
+    "data": {
+     "price": 0.02309749265051744,
+     "price_btc": "0.0000002853125149556546",
+     "price_change_percentage_24h": {
+      "btc": 4.632187498928371,
+      "usd": 0.22706627933759957
+     },
+     "market_cap": "$23,099,090",
+     "market_cap_btc": "285.3322831938733",
+     "total_volume": "$15,232,169",
+     "total_volume_btc": "188.1558262746143"
+    }
+   }
+  },
+  {
+   "item": {
+    "id": "onlyagent",
+    "coin_id": 102179691,
+    "name": "OnlyAgent",
+    "symbol": "OA",
+    "market_cap_rank": 902,
+    "slug": "onlyagent",
+    "price_btc": 2.2033752891342819e-07,
+    "score": 1,
+    "data": {
+     "price": 0.017880629957893572,
+     "price_btc": "0.0000002203375289134281",
+     "price_change_percentage_24h": {
+      "btc": 0,
+      "usd": 0
+     },
+     "market_cap": "$17,803,364",
+     "market_cap_btc": "219.3854320442246",
+     "total_volume": "$51,425,438",
+     "total_volume_btc": "633.6999323948611"
+    }
+   }
+  },
+  {
+   "item": {
+    "id": "bitcoin",
+    "coin_id": 1,
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "market_cap_rank": 1,
+    "slug": "bitcoin",
+    "price_btc": 0.9996999766831516,
+    "score": 2,
+    "data": {
+     "price": 81156.48265308602,
+     "price_btc": "0.9996999766831516",
+     "price_change_percentage_24h": {
+      "btc": -0.002501693381884614,
+      "usd": -4.212497797123735
+     },
+     "market_cap": "$1,631,351,620,499",
+     "market_cap_btc": "20095325.7310828",
+     "total_volume": "$35,527,347,293",
+     "total_volume_btc": "437632.0840143245"
+    }
+   }
+  }
+ ]
+}

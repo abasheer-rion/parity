@@ -18,7 +18,7 @@ Every word in this project that sounds like jargon, explained three ways. **Simp
 
 ## Summary
 
-271 terms in 13 groups. This page is generated from `docs/_system/glossary.json`; edit that file, not this one, then run `python3 scripts/docs.py index`.
+292 terms in 14 groups. This page is generated from `docs/_system/glossary.json`; edit that file, not this one, then run `python3 scripts/docs.py index`.
 
 | Group | Terms |
 | --- | --- |
@@ -35,6 +35,7 @@ Every word in this project that sounds like jargon, explained three ways. **Simp
 | [FX market structure](#fx-market-structure) | [Pip](#pip), [Pipette](#pipette), [Lot](#lot), [Base and quote currency](#base-and-quote-currency), [Bid and ask](#bid-and-ask), [Majors, crosses and exotics](#majors-crosses-and-exotics), [Spot settlement (T+2)](#spot-settlement-t2), [Value date](#value-date), [Rollover (swap)](#rollover-swap), [Forward points](#forward-points), [FX swap](#fx-swap), [Outright forward](#outright-forward), [Non-deliverable forward (NDF)](#non-deliverable-forward-ndf), [Fixing](#fixing), [London 4 pm fix](#london-4-pm-fix), [Over-the-counter market](#over-the-counter-market), [Interdealer market](#interdealer-market), [ECN](#ecn), [Market maker](#market-maker), [A-book and B-book](#a-book-and-b-book), [Last look](#last-look), [Liquidity](#liquidity), [Market depth](#market-depth), [Trading sessions](#trading-sessions), [London and New York overlap](#london-and-new-york-overlap), [Weekend gap](#weekend-gap), [BIS Triennial Survey](#bis-triennial-survey), [US dollar dominance](#us-dollar-dominance), [Contract for difference (CFD)](#contract-for-difference-cfd), [Notional exposure](#notional-exposure), [Safe-haven currency](#safe-haven-currency), [Funding currency](#funding-currency), [Central bank intervention](#central-bank-intervention), [Currency peg](#currency-peg), [Stop hunting](#stop-hunting) |
 | [Myths and false notions](#myths-and-false-notions) | [Myth: if you stick with it, you will eventually make money](#myth-if-you-stick-with-it-you-will-eventually-make-money), [Myth: candlestick patterns reliably predict the next move](#myth-candlestick-patterns-reliably-predict-the-next-move), [Myth: more leverage means more profit](#myth-more-leverage-means-more-profit), [Myth: a high win rate means a good strategy](#myth-a-high-win-rate-means-a-good-strategy), [Myth: it is not a loss until you sell](#myth-it-is-not-a-loss-until-you-sell), [Myth: after a losing streak, a win is due](#myth-after-a-losing-streak-a-win-is-due), [Myth: a great backtest proves a strategy works](#myth-a-great-backtest-proves-a-strategy-works), [Myth: once an edge is found, it keeps working](#myth-once-an-edge-is-found-it-keeps-working), [Myth: high-interest currencies fall by exactly the rate gap](#myth-high-interest-currencies-fall-by-exactly-the-rate-gap), [Myth: the carry trade is free money](#myth-the-carry-trade-is-free-money), [Myth: economic models predict short-term exchange rates](#myth-economic-models-predict-short-term-exchange-rates), [Myth: trading more often makes more money](#myth-trading-more-often-makes-more-money), [Myth: experts and gurus can forecast the market](#myth-experts-and-gurus-can-forecast-the-market), [Myth: a stop loss caps your loss exactly](#myth-a-stop-loss-caps-your-loss-exactly), [Myth: support and resistance are pure superstition](#myth-support-and-resistance-are-pure-superstition), [Myth: huge moves are too rare to worry about](#myth-huge-moves-are-too-rare-to-worry-about), [Myth: you can trade the news before the market reacts](#myth-you-can-trade-the-news-before-the-market-reacts), [Myth: trading many currency pairs spreads your risk](#myth-trading-many-currency-pairs-spreads-your-risk), [Myth: strong feelings give you conviction and help you trade](#myth-strong-feelings-give-you-conviction-and-help-you-trade), [Myth: the right indicator settings will make a strategy work](#myth-the-right-indicator-settings-will-make-a-strategy-work), [Myth: markets go up, so buying any single stock works out](#myth-markets-go-up-so-buying-any-single-stock-works-out), [Myth: last year's best fund or trader will be next year's best](#myth-last-years-best-fund-or-trader-will-be-next-years-best) |
 | [Conviction and decision making](#conviction-and-decision-making) | [Conviction](#conviction), [Conviction weighting](#conviction-weighting), [Calibration](#calibration), [Brier score](#brier-score), [Probabilistic forecast](#probabilistic-forecast), [Base rate](#base-rate), [Base rate neglect](#base-rate-neglect), [Outside view](#outside-view), [Expected value](#expected-value), [Edge](#edge), [Process and outcome](#process-and-outcome), [Decision journal](#decision-journal), [Pre-mortem](#pre-mortem), [Kill criteria](#kill-criteria), [Precommitment](#precommitment), [Trading plan](#trading-plan), [Checklist](#checklist), [Bayesian updating](#bayesian-updating), [Sample size](#sample-size), [Regret aversion](#regret-aversion), [Superforecasting](#superforecasting) |
+| [New products and hype terms](#new-products-and-hype-terms) | [Perpetual future (perp)](#perpetual-future-perp), [Funding rate](#funding-rate), [Open interest](#open-interest), [Liquidation](#liquidation), [Memecoin](#memecoin), [Airdrop](#airdrop), [Staking](#staking), [Restaking](#restaking), [Stablecoin](#stablecoin), [RWA tokenisation](#rwa-tokenisation), [Spot bitcoin ETF](#spot-bitcoin-etf), [Covered call ETF](#covered-call-etf), [0DTE options](#0dte-options), [Leveraged ETF decay](#leveraged-etf-decay), [Buffer ETF](#buffer-etf), [Prediction market](#prediction-market), [Thematic ETF](#thematic-etf), [Expense ratio](#expense-ratio), [Premium or discount to NAV](#premium-or-discount-to-nav), [Crypto carry](#crypto-carry), [Crypto volatility](#crypto-volatility) |
 
 ## Markets and trading
 
@@ -72,6 +73,8 @@ An exchange-traded fund. SPY is the oldest and largest S&P 500 ETF, trading sinc
 
 </details>
 
+**What can go wrong:** An ETF is only as good as what it holds and what it charges. Narrow, new or leveraged ETFs can behave very differently from a broad index fund.
+
 Related: [S&P 500](#sp-500)
 
 ### Leverage
@@ -89,6 +92,8 @@ Riding a bike downhill. You go faster, and falling hurts more.
 Gross exposure above 100% of capital. Volatility targeting in our backtester can lever a calm strategy up to 4 times to compare it with stocks at equal risk.
 
 </details>
+
+**What can go wrong:** Losses grow as fast as gains, and borrowed money must be repaid even if the trade fails. Past a point, more leverage lowers long-run growth and can end in a margin call or liquidation.
 
 Related: [Volatility targeting](#volatility-targeting), [Portfolio weight](#portfolio-weight)
 
@@ -4940,6 +4945,428 @@ A specification of universe, signals, sizing, exits and limits. Writing it down 
 
 Related: [Precommitment](#precommitment), [Checklist](#checklist), [Position sizing](#position-sizing)
 
+## New products and hype terms
+
+### 0DTE options
+
+**Simple:** Options that expire at the end of the same day they are traded, so a bet can double or vanish in hours.
+
+<details><summary>Analogy</summary>
+
+Like a lottery ticket for this afternoon's weather.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Zero days to expiry options expire at the close of the current trading day. Cboe reports that about 59% of S&P 500 index (SPX) option volume trades with zero days left [@url-d02d51d7].
+
+</details>
+
+**What can go wrong:** Prices swing wildly in the last hours, small moves decide everything, and buyers often lose the whole premium. Sellers can face losses far larger than the premium they collected.
+
+Related: [Covered call ETF](#covered-call-etf), [Leverage](#leverage)
+
+### Airdrop
+
+**Simple:** Free crypto tokens sent to people's wallets, often as a reward for using a new app early.
+
+<details><summary>Analogy</summary>
+
+Like free samples handed out at a shop opening. Nice to get, but meant to make you a customer.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A distribution of new tokens to many wallet addresses at once, usually to build a user base or reward early use. In the US the IRS treats tokens received in an airdrop after a hard fork as ordinary income once you control them (Revenue Ruling 2019-24) [@url-d70bc25d].
+
+</details>
+
+**What can go wrong:** Free tokens can be taxable when received even if their price later collapses. Fake airdrops are a common scam: a link asks you to connect your wallet and drains it.
+
+Related: [Memecoin](#memecoin), [Staking](#staking)
+
+### Buffer ETF
+
+**Simple:** A fund that promises to absorb the first part of a loss over a year, in exchange for capping how much you can gain.
+
+<details><summary>Analogy</summary>
+
+Like insurance with a deductible paid for by giving up any win above a set amount.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A defined outcome fund uses options to buffer the first 9%, 15% or 30% of losses on a reference index over an outcome period of about a year, up to a preset cap on gains. The issuer that pioneered them warns that investors who buy after the period starts may get very different results, and may not get the buffer at all [@url-872a8986].
+
+</details>
+
+**What can go wrong:** Buy mid-period and the buffer or the cap may already be used up. Returns exclude dividends of the index, fees are higher than plain index funds, and losses beyond the buffer are yours.
+
+Related: [ETF](#etf), [Covered call ETF](#covered-call-etf)
+
+### Covered call ETF
+
+**Simple:** A fund that owns stocks and sells other people the right to buy them at a higher price, collecting a fee that it pays out as a big income.
+
+<details><summary>Analogy</summary>
+
+Like renting out your house's upside. You get rent every month, but if prices soar, the gain goes to your tenant.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A fund that holds an index or stocks and writes call options on them, turning option premium into distributions. Israelov and Nielsen show a covered call is a mix of the stock, a short volatility position and a dynamic equity timing bet, and that the timing part adds risk without return [@israelov2015].
+
+</details>
+
+**What can go wrong:** A high payout is not the same as a high return. The fund gives up most of a strong rally, still takes most of a crash, and part of the payout can be your own money handed back.
+
+Related: [ETF](#etf), [Total return (dividends reinvested)](#total-return-dividends-reinvested), [0DTE options](#0dte-options)
+
+### Crypto carry
+
+**Simple:** Holding a coin and betting against it with a perp or future at the same time, to collect the fee that eager buyers pay.
+
+<details><summary>Analogy</summary>
+
+Like owning an umbrella and renting it out on rainy days. You earn the rent whether the umbrella price goes up or down.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Long spot and short futures or perps on the same coin earns the futures premium or funding. The BIS documents that crypto carry has been large and very volatile, rising when retail demand for leveraged long positions is high, and that sharp drops in carry come with crashes and liquidations [@franz2022].
+
+</details>
+
+**What can go wrong:** The trade can lose on fees, exchange failure, a frozen withdrawal, or funding turning negative. It looks safe until the exchange holding half of it fails.
+
+Related: [Funding rate](#funding-rate), [Perpetual future (perp)](#perpetual-future-perp), [Carry trade](#carry-trade)
+
+### Crypto volatility
+
+**Simple:** Crypto prices swing much more than stocks. A 10% day is normal, and falls of 70% or more have happened many times.
+
+<details><summary>Analogy</summary>
+
+Like sailing a small boat instead of a ferry. Same sea, much bigger waves.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Liu and Tsyvinski find bitcoin's daily returns far more volatile than stocks, with returns explained mostly by crypto-specific factors such as momentum and investor attention rather than stock market or macro factors [@liu2018].
+
+</details>
+
+**What can go wrong:** Big swings punish leverage and emotional selling. Diversifying across many coins helps little, because they tend to fall together.
+
+Related: [Volatility](#volatility), [Drawdown](#drawdown), [Fat tails](#fat-tails)
+
+### Expense ratio
+
+**Simple:** The yearly fee a fund takes, as a percentage of your money.
+
+<details><summary>Analogy</summary>
+
+Like a small slice taken from your pizza every year, whether the pizza grows or shrinks.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A fund's total annual operating expenses as a percentage of its average net assets [@url-160f511d]. It is taken out of the fund's value daily, so you never see a bill.
+
+</details>
+
+**What can go wrong:** Small differences compound. A 1% fee instead of 0.05% costs roughly a fifth of the ending value over 25 years at the same gross return.
+
+Related: [ETF](#etf), [Management fee](#management-fee), [Net and gross return](#net-and-gross-return)
+
+### Funding rate
+
+**Simple:** The fee that people betting one way on a perp pay to people betting the other way, every hour or every eight hours. When most people bet up, the up side pays.
+
+<details><summary>Analogy</summary>
+
+Like a toll on a busy one way bridge. The busier your direction, the higher the toll you pay to the people going the other way.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A periodic payment between longs and shorts proportional to position size, set from the gap between the perp's price and the spot index plus an interest component. On Hyperliquid it is paid every hour, includes a fixed interest part of 0.01% per eight hours and is capped at 4% an hour [@url-3a272a6d]. Multiply an hourly rate by 8,760 to see it as a yearly cost of holding. Funding is why perps track spot, and it is the return behind crypto carry trades [@he2022].
+
+</details>
+
+**What can go wrong:** A rate that looks tiny per hour can be tens of percent a year. It changes every hour, so today's rate says little about next month's cost.
+
+Related: [Perpetual future (perp)](#perpetual-future-perp), [Carry](#carry), [Crypto carry](#crypto-carry)
+
+### Leveraged ETF decay
+
+**Simple:** Funds that promise two or three times a day's move can lose money over months even when the market ends up flat.
+
+<details><summary>Analogy</summary>
+
+Like going up 10% and then down 10%: you do not end where you started, you end 1% lower. With triple leverage the gap grows much bigger.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Most leveraged and inverse ETFs reset their exposure daily, so over periods longer than a day their return can differ a lot from the multiple of the index return, especially when markets swing. FINRA warned firms in 2009 that these funds are unsuitable for most retail investors who plan to hold them for more than one trading session [@url-5ea2b559].
+
+</details>
+
+**What can go wrong:** In a choppy market the fund can lose money while the index goes nowhere. Holding for weeks or months is a different bet from the one on the label.
+
+Related: [Leverage](#leverage), [Volatility drag](#volatility-drag), [ETF](#etf)
+
+### Liquidation
+
+**Simple:** When a leveraged bet loses so much that the exchange closes it for you, and you lose the money you put up.
+
+<details><summary>Analogy</summary>
+
+Like a pawnshop selling the watch you left as a deposit the moment it stops covering your loan.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Forced closing of a leveraged position when account equity falls below the maintenance margin. On Hyperliquid maintenance margin is 1.25% to 16.7% of position value depending on the asset's maximum leverage; if the book cannot absorb the position, a backstop liquidation keeps the maintenance margin [@url-5d1b2a46].
+
+</details>
+
+**What can go wrong:** Prices can jump straight through your liquidation price, especially on weekends and in thin markets. With 20 times leverage a 5% move against you is enough to lose the whole deposit.
+
+Related: [Leverage](#leverage), [Margin call](#margin-call), [Stop-out](#stop-out), [Perpetual future (perp)](#perpetual-future-perp)
+
+### Memecoin
+
+**Simple:** A crypto coin made for fun or hype, often named after a joke, an animal or a celebrity. It usually does nothing except get traded.
+
+<details><summary>Analogy</summary>
+
+Like a trading card that is popular only because people are talking about it this week.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+The SEC staff describe a meme coin as a crypto asset inspired by internet memes, characters, current events or trends, whose promoter seeks an enthusiastic online community to buy and trade it. They note meme coins tend to have significant price volatility and little use beyond entertainment, and the staff view is that typical meme coins are not securities, so securities law protections do not apply [@url-9f635241].
+
+</details>
+
+**What can go wrong:** Prices are driven by attention, which fades. Insiders often hold a large share and can sell into the hype. Many memecoins fall close to zero, and there is usually no regulator to complain to.
+
+Related: [Herding](#herding), [Fear of missing out (FOMO)](#fear-of-missing-out-fomo), [Liquidity](#liquidity)
+
+### Open interest
+
+**Simple:** How many futures or perp contracts are still open right now. It counts bets that have not been closed, not how much was traded today.
+
+<details><summary>Analogy</summary>
+
+Like counting the people still inside a cinema, not how many tickets were sold today.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+The total number of futures or option contracts that have not yet been offset or fulfilled by delivery [@url-7f3d77da]. For perps it is usually shown in coins or in US dollars at the mark price.
+
+</details>
+
+**What can go wrong:** High open interest with high leverage means many positions can be liquidated at once, which can turn a small move into a cascade.
+
+Related: [Perpetual future (perp)](#perpetual-future-perp), [Liquidation](#liquidation)
+
+### Perpetual future (perp)
+
+**Simple:** A bet on a coin's price that never expires. You can bet it goes up or down, usually with borrowed money, and keep the bet open as long as you pay or receive a small fee every few hours.
+
+<details><summary>Analogy</summary>
+
+Like renting a seat on a roller coaster that never stops. You can stay on as long as you like, but you pay rent while you ride, and the ride can throw you off.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A futures contract with no expiry date. To keep its price close to the spot price, longs and shorts swap a periodic funding payment instead of the contract converging at expiry. The idea goes back to Shiller (1993) and was popularised by crypto exchanges from 2016 [@he2022].
+
+</details>
+
+**What can go wrong:** Most perps are traded with leverage, so a small price move can wipe out your margin and close the position for you (liquidation). Funding can also cost far more than you expect when everyone is betting the same way.
+
+Related: [Funding rate](#funding-rate), [Liquidation](#liquidation), [Leverage](#leverage), [Open interest](#open-interest)
+
+### Prediction market
+
+**Simple:** A market where people bet on whether something will happen, like an election or a rate cut. The price shows the crowd's odds.
+
+<details><summary>Analogy</summary>
+
+Like a betting shop where the odds on the board move with every bet.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+An exchange for contracts that pay out if an event happens. Prices can be read as probabilities and have often forecast well [@wolfers2004]. In the US, event contracts are regulated by the CFTC, which in 2024 proposed barring contracts on elections, awards and sports as contrary to the public interest [@url-2af24e32].
+
+</details>
+
+**What can go wrong:** Each contract pays all or nothing, so you can lose the whole stake. Small markets can be moved by one large trader, and rules differ by country and change quickly.
+
+Related: [Probabilistic forecast](#probabilistic-forecast), [Calibration](#calibration)
+
+### Premium or discount to NAV
+
+**Simple:** When a fund's share price on the market is higher or lower than the value of what it actually holds.
+
+<details><summary>Analogy</summary>
+
+Like paying more than face value for a gift card because everyone wants that shop.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+NAV, net asset value, is the value of a fund's assets minus its liabilities, per share [@url-b9f70980]. An ETF's market price can trade above (premium) or below (discount) its NAV, usually by little for large funds, and by more for thinly traded funds or in stressed markets.
+
+</details>
+
+**What can go wrong:** Buy at a premium and sell at a discount and you lose money even if the holdings did not move. New and small funds show the widest gaps.
+
+Related: [ETF](#etf), [Liquidity](#liquidity), [Spread (bid and ask)](#spread-bid-and-ask)
+
+### Restaking
+
+**Simple:** Using coins that are already staked to secure more services at the same time, to earn more rewards.
+
+<details><summary>Analogy</summary>
+
+Like using the same house as collateral for three loans. More income, but one problem can cost you the house.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+EigenLayer, the best known example, describes restaking as a way for services built on Ethereum to borrow staked ETH as security, with penalty and reward commitments such as slashing on the staked assets [@url-7a0fda7c].
+
+</details>
+
+**What can go wrong:** Each extra service adds another way to be slashed, so losses can stack. Liquid restaking tokens can trade below the value of what they hold when many people try to exit.
+
+Related: [Staking](#staking)
+
+### RWA tokenisation
+
+**Simple:** Turning ordinary assets like government bonds, funds or buildings into crypto tokens that can be traded on a blockchain.
+
+<details><summary>Analogy</summary>
+
+Like turning a paper share certificate into a digital ticket you can pass around instantly.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+RWA stands for real-world assets. Tokenisation records a claim on an off-chain asset as a token on a programmable ledger. The BIS sees promise in settling tokenised government bonds and money on one shared ledger, which could make payment and transfer of ownership happen in one step [@url-b1e6b3cc].
+
+</details>
+
+**What can go wrong:** The token is a promise. You rely on the issuer, the custodian and the legal wrapper to actually hand over the asset, and many tokens trade rarely.
+
+Related: [Stablecoin](#stablecoin)
+
+### Spot bitcoin ETF
+
+**Simple:** A fund on the stock market that holds real bitcoin, so you can own its price through a normal brokerage account.
+
+<details><summary>Analogy</summary>
+
+Like buying a share in a vault full of gold instead of keeping gold bars at home.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+An exchange-traded product that holds bitcoin directly rather than futures. The SEC approved the first US listings on 10 January 2024; the Chair's statement called bitcoin primarily a speculative, volatile asset and said the approval did not endorse it [@url-4c39b66e].
+
+</details>
+
+**What can go wrong:** The fund rises and falls with bitcoin, which has lost more than 70% several times. It adds a yearly fee, and it trades only in stock market hours while bitcoin trades all week.
+
+Related: [ETF](#etf), [Expense ratio](#expense-ratio)
+
+### Stablecoin
+
+**Simple:** A crypto coin built to stay worth one dollar, usually backed by cash and short-term government bonds.
+
+<details><summary>Analogy</summary>
+
+Like a casino chip worth one dollar. Fine while the casino can always swap it back for cash.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A token that aims to hold a fixed value, usually one US dollar, through reserves held by an issuer. The BIS argues stablecoins do poorly on three tests of sound money: they do not always trade at par (singleness), cannot expand on demand (elasticity) and are open to illicit use (integrity) [@url-b1e6b3cc].
+
+</details>
+
+**What can go wrong:** A stablecoin is only as good as its reserves and its issuer. Several have broken their peg, and some fell to near zero.
+
+Related: [RWA tokenisation](#rwa-tokenisation)
+
+### Staking
+
+**Simple:** Locking up coins to help run a crypto network, and getting paid new coins for it.
+
+<details><summary>Analogy</summary>
+
+Like putting down a deposit to work as a referee. You earn a fee for honest work and lose part of the deposit if you cheat.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+On proof-of-stake networks such as Ethereum, validators lock coins (32 ETH for a full validator) and earn rewards for proposing and attesting blocks. Misbehaving validators are slashed: part of the stake is burned, and in rare mass events the whole stake can be lost [@url-0225a9e2]. SEC staff said in May 2025 that protocol staking itself is not a securities offering [@url-894d16a5].
+
+</details>
+
+**What can go wrong:** Rewards are paid in the same coin, so a falling price can swamp the yield. Coins can be locked when you want to sell, and a staking provider can lose or misuse them.
+
+Related: [Restaking](#restaking), [Airdrop](#airdrop)
+
+### Thematic ETF
+
+**Simple:** A fund built around a hot story, like AI, robots, clean energy or cannabis.
+
+<details><summary>Analogy</summary>
+
+Like a restaurant that opens selling the food everyone is talking about this year.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A specialised ETF that holds companies linked to a theme. Ben-David, Franzoni, Kim and Moussawi find specialised ETFs tend to launch after their stocks have already risen and attracted attention, and then underperform: about 6% a year on average in the five years after launch [@bendavid2022].
+
+</details>
+
+**What can go wrong:** By the time a fund exists, the good news is often in the price. Themes are concentrated in a few stocks, fees are higher, and many such funds close.
+
+Related: [ETF](#etf), [Herding](#herding), [Recency bias](#recency-bias), [Expense ratio](#expense-ratio)
+
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
 
@@ -5034,6 +5461,28 @@ Related: [Precommitment](#precommitment), [Checklist](#checklist), [Position siz
 - [@kahneman1993](../REFERENCES.md#kahneman1993): Kahneman and Lovallo (1993), Timid Choices and Bold Forecasts: A Cognitive Perspective on Risk Taking
 - [@klein2007](../REFERENCES.md#klein2007): Klein (2007), Performing a Project Premortem
 - [@thaler1981](../REFERENCES.md#thaler1981): Thaler and Shefrin (1981), An Economic Theory of Self-Control
+- [@url-d02d51d7](../REFERENCES.md#url-d02d51d7): 0DTE options (n.d.)
+- [@url-d70bc25d](../REFERENCES.md#url-d70bc25d): Revenue Ruling 2019-24 (2019)
+- [@url-872a8986](../REFERENCES.md#url-872a8986): Defined Outcome ETFs (n.d.)
+- [@israelov2015](../REFERENCES.md#israelov2015): Israelov and Nielsen (2015), Covered Calls Uncovered
+- [@franz2022](../REFERENCES.md#franz2022): Franz and Schmeling (2022), Crypto Carry
+- [@liu2018](../REFERENCES.md#liu2018): Liu and Tsyvinski (2018), Risks and Returns of Cryptocurrency
+- [@url-160f511d](../REFERENCES.md#url-160f511d): Expense ratio (glossary) (n.d.)
+- [@url-3a272a6d](../REFERENCES.md#url-3a272a6d): Funding (n.d.)
+- [@he2022](../REFERENCES.md#he2022): He et al. (2022), Fundamentals of Perpetual Futures
+- [@url-5ea2b559](../REFERENCES.md#url-5ea2b559): Regulatory Notice 09-31: non-traditional ETFs (2009)
+- [@url-5d1b2a46](../REFERENCES.md#url-5d1b2a46): Liquidations (n.d.)
+- [@url-9f635241](../REFERENCES.md#url-9f635241): Staff statement on meme coins (2025)
+- [@url-7f3d77da](../REFERENCES.md#url-7f3d77da): CFTC glossary (n.d.)
+- [@wolfers2004](../REFERENCES.md#wolfers2004): Wolfers and Zitzewitz (2004), Prediction Markets
+- [@url-2af24e32](../REFERENCES.md#url-2af24e32): CFTC issues proposal on event contracts (2024)
+- [@url-b9f70980](../REFERENCES.md#url-b9f70980): Net asset value (glossary) (n.d.)
+- [@url-7a0fda7c](../REFERENCES.md#url-7a0fda7c): Layr-Labs/eigenlayer-contracts (n.d.)
+- [@url-b1e6b3cc](../REFERENCES.md#url-b1e6b3cc): The next-generation monetary and financial system (2025)
+- [@url-4c39b66e](../REFERENCES.md#url-4c39b66e): Statement on the approval of spot bitcoin exchange-traded products (2024)
+- [@url-0225a9e2](../REFERENCES.md#url-0225a9e2): Proof-of-stake rewards and penalties (n.d.)
+- [@url-894d16a5](../REFERENCES.md#url-894d16a5): Statement on certain protocol staking activities (2025)
+- [@bendavid2022](../REFERENCES.md#bendavid2022): Ben-David et al. (2022), Competition for Attention in the ETF Space
 
 ## Referenced by
 

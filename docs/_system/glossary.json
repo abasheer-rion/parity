@@ -1,6 +1,6 @@
 {
   "about": "Single source for every term we use. scripts/docs.py builds docs/reference/0004-glossary.md from this file, and the dashboard's Learn tab reads it directly. Each term has three views: simple (explain it to a ten year old), analogy (something from everyday life), and precise (what an economist or statistician would write).",
-  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics", "Candlesticks and chart patterns", "Biases and behaviour", "Risk and position sizing", "Capital and returns", "FX market structure", "Myths and false notions", "Conviction and decision making"],
+  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics", "Candlesticks and chart patterns", "Biases and behaviour", "Risk and position sizing", "Capital and returns", "FX market structure", "Myths and false notions", "Conviction and decision making", "New products and hype terms"],
   "terms": [
     {
       "id": "exchange-rate",
@@ -189,6 +189,7 @@
       "simple": "A fund you can buy like a single share, which holds lots of things inside it. SPY holds all the S&P 500 companies.",
       "analogy": "A lunchbox with a bit of everything. You buy the box instead of each item one by one.",
       "precise": "An exchange-traded fund. SPY is the oldest and largest S&P 500 ETF, trading since 1993.",
+      "risk": "An ETF is only as good as what it holds and what it charges. Narrow, new or leveraged ETFs can behave very differently from a broad index fund.",
       "related": ["sp-500"]
     },
     {
@@ -234,6 +235,7 @@
       "simple": "Using borrowed money to make your bets bigger. Wins get bigger, and so do losses.",
       "analogy": "Riding a bike downhill. You go faster, and falling hurts more.",
       "precise": "Gross exposure above 100% of capital. Volatility targeting in our backtester can lever a calm strategy up to 4 times to compare it with stocks at equal risk.",
+      "risk": "Losses grow as fast as gains, and borrowed money must be repaid even if the trade fails. Past a point, more leverage lowers long-run growth and can end in a margin call or liquidation.",
       "related": ["volatility-targeting", "portfolio-weight"]
     },
     {
@@ -2440,6 +2442,216 @@
       "analogy": "Like a quiz player who keeps a careful score of how often their guesses are right and adjusts.",
       "precise": "From a long forecasting tournament, Tetlock and Gardner (2015) report that the best forecasters broke problems into parts, started from base rates, updated in small steps and kept score [@tetlock2015].",
       "related": ["calibration", "outside-view", "bayesian-updating"]
+    },
+    {
+      "id": "perpetual-future",
+      "term": "Perpetual future (perp)",
+      "category": "New products and hype terms",
+      "simple": "A bet on a coin's price that never expires. You can bet it goes up or down, usually with borrowed money, and keep the bet open as long as you pay or receive a small fee every few hours.",
+      "analogy": "Like renting a seat on a roller coaster that never stops. You can stay on as long as you like, but you pay rent while you ride, and the ride can throw you off.",
+      "precise": "A futures contract with no expiry date. To keep its price close to the spot price, longs and shorts swap a periodic funding payment instead of the contract converging at expiry. The idea goes back to Shiller (1993) and was popularised by crypto exchanges from 2016 [@he2022].",
+      "risk": "Most perps are traded with leverage, so a small price move can wipe out your margin and close the position for you (liquidation). Funding can also cost far more than you expect when everyone is betting the same way.",
+      "related": ["funding-rate", "liquidation", "leverage", "open-interest"]
+    },
+    {
+      "id": "funding-rate",
+      "term": "Funding rate",
+      "category": "New products and hype terms",
+      "simple": "The fee that people betting one way on a perp pay to people betting the other way, every hour or every eight hours. When most people bet up, the up side pays.",
+      "analogy": "Like a toll on a busy one way bridge. The busier your direction, the higher the toll you pay to the people going the other way.",
+      "precise": "A periodic payment between longs and shorts proportional to position size, set from the gap between the perp's price and the spot index plus an interest component. On Hyperliquid it is paid every hour, includes a fixed interest part of 0.01% per eight hours and is capped at 4% an hour [@url-3a272a6d]. Multiply an hourly rate by 8,760 to see it as a yearly cost of holding. Funding is why perps track spot, and it is the return behind crypto carry trades [@he2022].",
+      "risk": "A rate that looks tiny per hour can be tens of percent a year. It changes every hour, so today's rate says little about next month's cost.",
+      "related": ["perpetual-future", "carry", "crypto-carry"]
+    },
+    {
+      "id": "open-interest",
+      "term": "Open interest",
+      "category": "New products and hype terms",
+      "simple": "How many futures or perp contracts are still open right now. It counts bets that have not been closed, not how much was traded today.",
+      "analogy": "Like counting the people still inside a cinema, not how many tickets were sold today.",
+      "precise": "The total number of futures or option contracts that have not yet been offset or fulfilled by delivery [@url-7f3d77da]. For perps it is usually shown in coins or in US dollars at the mark price.",
+      "risk": "High open interest with high leverage means many positions can be liquidated at once, which can turn a small move into a cascade.",
+      "related": ["perpetual-future", "liquidation"]
+    },
+    {
+      "id": "liquidation",
+      "term": "Liquidation",
+      "category": "New products and hype terms",
+      "simple": "When a leveraged bet loses so much that the exchange closes it for you, and you lose the money you put up.",
+      "analogy": "Like a pawnshop selling the watch you left as a deposit the moment it stops covering your loan.",
+      "precise": "Forced closing of a leveraged position when account equity falls below the maintenance margin. On Hyperliquid maintenance margin is 1.25% to 16.7% of position value depending on the asset's maximum leverage; if the book cannot absorb the position, a backstop liquidation keeps the maintenance margin [@url-5d1b2a46].",
+      "risk": "Prices can jump straight through your liquidation price, especially on weekends and in thin markets. With 20 times leverage a 5% move against you is enough to lose the whole deposit.",
+      "related": ["leverage", "margin-call", "stop-out", "perpetual-future"]
+    },
+    {
+      "id": "memecoin",
+      "term": "Memecoin",
+      "category": "New products and hype terms",
+      "simple": "A crypto coin made for fun or hype, often named after a joke, an animal or a celebrity. It usually does nothing except get traded.",
+      "analogy": "Like a trading card that is popular only because people are talking about it this week.",
+      "precise": "The SEC staff describe a meme coin as a crypto asset inspired by internet memes, characters, current events or trends, whose promoter seeks an enthusiastic online community to buy and trade it. They note meme coins tend to have significant price volatility and little use beyond entertainment, and the staff view is that typical meme coins are not securities, so securities law protections do not apply [@url-9f635241].",
+      "risk": "Prices are driven by attention, which fades. Insiders often hold a large share and can sell into the hype. Many memecoins fall close to zero, and there is usually no regulator to complain to.",
+      "related": ["herding", "fomo", "liquidity"]
+    },
+    {
+      "id": "airdrop",
+      "term": "Airdrop",
+      "category": "New products and hype terms",
+      "simple": "Free crypto tokens sent to people's wallets, often as a reward for using a new app early.",
+      "analogy": "Like free samples handed out at a shop opening. Nice to get, but meant to make you a customer.",
+      "precise": "A distribution of new tokens to many wallet addresses at once, usually to build a user base or reward early use. In the US the IRS treats tokens received in an airdrop after a hard fork as ordinary income once you control them (Revenue Ruling 2019-24) [@url-d70bc25d].",
+      "risk": "Free tokens can be taxable when received even if their price later collapses. Fake airdrops are a common scam: a link asks you to connect your wallet and drains it.",
+      "related": ["memecoin", "staking"]
+    },
+    {
+      "id": "staking",
+      "term": "Staking",
+      "category": "New products and hype terms",
+      "simple": "Locking up coins to help run a crypto network, and getting paid new coins for it.",
+      "analogy": "Like putting down a deposit to work as a referee. You earn a fee for honest work and lose part of the deposit if you cheat.",
+      "precise": "On proof-of-stake networks such as Ethereum, validators lock coins (32 ETH for a full validator) and earn rewards for proposing and attesting blocks. Misbehaving validators are slashed: part of the stake is burned, and in rare mass events the whole stake can be lost [@url-0225a9e2]. SEC staff said in May 2025 that protocol staking itself is not a securities offering [@url-894d16a5].",
+      "risk": "Rewards are paid in the same coin, so a falling price can swamp the yield. Coins can be locked when you want to sell, and a staking provider can lose or misuse them.",
+      "related": ["restaking", "airdrop"]
+    },
+    {
+      "id": "restaking",
+      "term": "Restaking",
+      "category": "New products and hype terms",
+      "simple": "Using coins that are already staked to secure more services at the same time, to earn more rewards.",
+      "analogy": "Like using the same house as collateral for three loans. More income, but one problem can cost you the house.",
+      "precise": "EigenLayer, the best known example, describes restaking as a way for services built on Ethereum to borrow staked ETH as security, with penalty and reward commitments such as slashing on the staked assets [@url-7a0fda7c].",
+      "risk": "Each extra service adds another way to be slashed, so losses can stack. Liquid restaking tokens can trade below the value of what they hold when many people try to exit.",
+      "related": ["staking"]
+    },
+    {
+      "id": "stablecoin",
+      "term": "Stablecoin",
+      "category": "New products and hype terms",
+      "simple": "A crypto coin built to stay worth one dollar, usually backed by cash and short-term government bonds.",
+      "analogy": "Like a casino chip worth one dollar. Fine while the casino can always swap it back for cash.",
+      "precise": "A token that aims to hold a fixed value, usually one US dollar, through reserves held by an issuer. The BIS argues stablecoins do poorly on three tests of sound money: they do not always trade at par (singleness), cannot expand on demand (elasticity) and are open to illicit use (integrity) [@url-b1e6b3cc].",
+      "risk": "A stablecoin is only as good as its reserves and its issuer. Several have broken their peg, and some fell to near zero.",
+      "related": ["rwa-tokenisation"]
+    },
+    {
+      "id": "rwa-tokenisation",
+      "term": "RWA tokenisation",
+      "category": "New products and hype terms",
+      "simple": "Turning ordinary assets like government bonds, funds or buildings into crypto tokens that can be traded on a blockchain.",
+      "analogy": "Like turning a paper share certificate into a digital ticket you can pass around instantly.",
+      "precise": "RWA stands for real-world assets. Tokenisation records a claim on an off-chain asset as a token on a programmable ledger. The BIS sees promise in settling tokenised government bonds and money on one shared ledger, which could make payment and transfer of ownership happen in one step [@url-b1e6b3cc].",
+      "risk": "The token is a promise. You rely on the issuer, the custodian and the legal wrapper to actually hand over the asset, and many tokens trade rarely.",
+      "related": ["stablecoin"]
+    },
+    {
+      "id": "spot-bitcoin-etf",
+      "term": "Spot bitcoin ETF",
+      "category": "New products and hype terms",
+      "simple": "A fund on the stock market that holds real bitcoin, so you can own its price through a normal brokerage account.",
+      "analogy": "Like buying a share in a vault full of gold instead of keeping gold bars at home.",
+      "precise": "An exchange-traded product that holds bitcoin directly rather than futures. The SEC approved the first US listings on 10 January 2024; the Chair's statement called bitcoin primarily a speculative, volatile asset and said the approval did not endorse it [@url-4c39b66e].",
+      "risk": "The fund rises and falls with bitcoin, which has lost more than 70% several times. It adds a yearly fee, and it trades only in stock market hours while bitcoin trades all week.",
+      "related": ["etf", "expense-ratio"]
+    },
+    {
+      "id": "covered-call-etf",
+      "term": "Covered call ETF",
+      "category": "New products and hype terms",
+      "simple": "A fund that owns stocks and sells other people the right to buy them at a higher price, collecting a fee that it pays out as a big income.",
+      "analogy": "Like renting out your house's upside. You get rent every month, but if prices soar, the gain goes to your tenant.",
+      "precise": "A fund that holds an index or stocks and writes call options on them, turning option premium into distributions. Israelov and Nielsen show a covered call is a mix of the stock, a short volatility position and a dynamic equity timing bet, and that the timing part adds risk without return [@israelov2015].",
+      "risk": "A high payout is not the same as a high return. The fund gives up most of a strong rally, still takes most of a crash, and part of the payout can be your own money handed back.",
+      "related": ["etf", "total-return", "zero-dte-options"]
+    },
+    {
+      "id": "zero-dte-options",
+      "term": "0DTE options",
+      "category": "New products and hype terms",
+      "simple": "Options that expire at the end of the same day they are traded, so a bet can double or vanish in hours.",
+      "analogy": "Like a lottery ticket for this afternoon's weather.",
+      "precise": "Zero days to expiry options expire at the close of the current trading day. Cboe reports that about 59% of S&P 500 index (SPX) option volume trades with zero days left [@url-d02d51d7].",
+      "risk": "Prices swing wildly in the last hours, small moves decide everything, and buyers often lose the whole premium. Sellers can face losses far larger than the premium they collected.",
+      "related": ["covered-call-etf", "leverage"]
+    },
+    {
+      "id": "leveraged-etf-decay",
+      "term": "Leveraged ETF decay",
+      "category": "New products and hype terms",
+      "simple": "Funds that promise two or three times a day's move can lose money over months even when the market ends up flat.",
+      "analogy": "Like going up 10% and then down 10%: you do not end where you started, you end 1% lower. With triple leverage the gap grows much bigger.",
+      "precise": "Most leveraged and inverse ETFs reset their exposure daily, so over periods longer than a day their return can differ a lot from the multiple of the index return, especially when markets swing. FINRA warned firms in 2009 that these funds are unsuitable for most retail investors who plan to hold them for more than one trading session [@url-5ea2b559].",
+      "risk": "In a choppy market the fund can lose money while the index goes nowhere. Holding for weeks or months is a different bet from the one on the label.",
+      "related": ["leverage", "volatility-drag", "etf"]
+    },
+    {
+      "id": "buffer-etf",
+      "term": "Buffer ETF",
+      "category": "New products and hype terms",
+      "simple": "A fund that promises to absorb the first part of a loss over a year, in exchange for capping how much you can gain.",
+      "analogy": "Like insurance with a deductible paid for by giving up any win above a set amount.",
+      "precise": "A defined outcome fund uses options to buffer the first 9%, 15% or 30% of losses on a reference index over an outcome period of about a year, up to a preset cap on gains. The issuer that pioneered them warns that investors who buy after the period starts may get very different results, and may not get the buffer at all [@url-872a8986].",
+      "risk": "Buy mid-period and the buffer or the cap may already be used up. Returns exclude dividends of the index, fees are higher than plain index funds, and losses beyond the buffer are yours.",
+      "related": ["etf", "covered-call-etf"]
+    },
+    {
+      "id": "prediction-market",
+      "term": "Prediction market",
+      "category": "New products and hype terms",
+      "simple": "A market where people bet on whether something will happen, like an election or a rate cut. The price shows the crowd's odds.",
+      "analogy": "Like a betting shop where the odds on the board move with every bet.",
+      "precise": "An exchange for contracts that pay out if an event happens. Prices can be read as probabilities and have often forecast well [@wolfers2004]. In the US, event contracts are regulated by the CFTC, which in 2024 proposed barring contracts on elections, awards and sports as contrary to the public interest [@url-2af24e32].",
+      "risk": "Each contract pays all or nothing, so you can lose the whole stake. Small markets can be moved by one large trader, and rules differ by country and change quickly.",
+      "related": ["probabilistic-forecast", "calibration"]
+    },
+    {
+      "id": "thematic-etf",
+      "term": "Thematic ETF",
+      "category": "New products and hype terms",
+      "simple": "A fund built around a hot story, like AI, robots, clean energy or cannabis.",
+      "analogy": "Like a restaurant that opens selling the food everyone is talking about this year.",
+      "precise": "A specialised ETF that holds companies linked to a theme. Ben-David, Franzoni, Kim and Moussawi find specialised ETFs tend to launch after their stocks have already risen and attracted attention, and then underperform: about 6% a year on average in the five years after launch [@bendavid2022].",
+      "risk": "By the time a fund exists, the good news is often in the price. Themes are concentrated in a few stocks, fees are higher, and many such funds close.",
+      "related": ["etf", "herding", "recency-bias", "expense-ratio"]
+    },
+    {
+      "id": "expense-ratio",
+      "term": "Expense ratio",
+      "category": "New products and hype terms",
+      "simple": "The yearly fee a fund takes, as a percentage of your money.",
+      "analogy": "Like a small slice taken from your pizza every year, whether the pizza grows or shrinks.",
+      "precise": "A fund's total annual operating expenses as a percentage of its average net assets [@url-160f511d]. It is taken out of the fund's value daily, so you never see a bill.",
+      "risk": "Small differences compound. A 1% fee instead of 0.05% costs roughly a fifth of the ending value over 25 years at the same gross return.",
+      "related": ["etf", "management-fee", "net-vs-gross-return"]
+    },
+    {
+      "id": "premium-discount-to-nav",
+      "term": "Premium or discount to NAV",
+      "category": "New products and hype terms",
+      "simple": "When a fund's share price on the market is higher or lower than the value of what it actually holds.",
+      "analogy": "Like paying more than face value for a gift card because everyone wants that shop.",
+      "precise": "NAV, net asset value, is the value of a fund's assets minus its liabilities, per share [@url-b9f70980]. An ETF's market price can trade above (premium) or below (discount) its NAV, usually by little for large funds, and by more for thinly traded funds or in stressed markets.",
+      "risk": "Buy at a premium and sell at a discount and you lose money even if the holdings did not move. New and small funds show the widest gaps.",
+      "related": ["etf", "liquidity", "spread"]
+    },
+    {
+      "id": "crypto-carry",
+      "term": "Crypto carry",
+      "category": "New products and hype terms",
+      "simple": "Holding a coin and betting against it with a perp or future at the same time, to collect the fee that eager buyers pay.",
+      "analogy": "Like owning an umbrella and renting it out on rainy days. You earn the rent whether the umbrella price goes up or down.",
+      "precise": "Long spot and short futures or perps on the same coin earns the futures premium or funding. The BIS documents that crypto carry has been large and very volatile, rising when retail demand for leveraged long positions is high, and that sharp drops in carry come with crashes and liquidations [@franz2022].",
+      "risk": "The trade can lose on fees, exchange failure, a frozen withdrawal, or funding turning negative. It looks safe until the exchange holding half of it fails.",
+      "related": ["funding-rate", "perpetual-future", "carry-trade"]
+    },
+    {
+      "id": "crypto-volatility",
+      "term": "Crypto volatility",
+      "category": "New products and hype terms",
+      "simple": "Crypto prices swing much more than stocks. A 10% day is normal, and falls of 70% or more have happened many times.",
+      "analogy": "Like sailing a small boat instead of a ferry. Same sea, much bigger waves.",
+      "precise": "Liu and Tsyvinski find bitcoin's daily returns far more volatile than stocks, with returns explained mostly by crypto-specific factors such as momentum and investor attention rather than stock market or macro factors [@liu2018].",
+      "risk": "Big swings punish leverage and emotional selling. Diversifying across many coins helps little, because they tend to fall together.",
+      "related": ["volatility", "drawdown", "fat-tails"]
     }
   ]
 }

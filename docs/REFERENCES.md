@@ -3,18 +3,18 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-868 sources. 126 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+896 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 263 |
+| [Papers](#papers) | 266 |
 | [Preprints and working papers](#preprints-and-working-papers) | 41 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
-| [Software](#software) | 61 |
-| [Web pages](#web-pages) | 349 |
+| [Software](#software) | 62 |
+| [Web pages](#web-pages) | 363 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 20 |
+| [Regulators](#regulators) | 30 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -270,6 +270,12 @@ Cited in: [catalog/algorithms/fx-good-carry-g10.json](../catalog/algorithms/fx-g
 Benartzi, Shlomo; Thaler, Richard H. (1995). Myopic Loss Aversion and the Equity Premium Puzzle. *Quarterly Journal of Economics 110(1), 73-92*. doi:10.2307/2118511 <https://doi.org/10.2307/2118511>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### bendavid2022
+
+Ben-David, Itzhak; Franzoni, Francesco; Kim, Byungwook; Moussawi, Rabih (2022). Competition for Attention in the ETF Space. *The Review of Financial Studies 36(3), 987-1042*. doi:10.1093/rfs/hhac048 <https://doi.org/10.1093/rfs/hhac048>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### berkman2011
 
@@ -649,7 +655,7 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Franz, Friedrich-Carl; Schmeling, Maik (2022). Crypto Carry. *SSRN working paper*. doi:10.2139/ssrn.3774118 <https://doi.org/10.2139/ssrn.3774118>. <https://www.bis.org/publ/work1087.htm>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algorithms/crypto-cash-and-carry-basis.json), [ALG-0022](algorithms/0022-crypto-cash-and-carry-basis.md).
+Cited in: [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algorithms/crypto-cash-and-carry-basis.json), [ALG-0022](algorithms/0022-crypto-cash-and-carry-basis.md), [REF-0004](reference/0004-glossary.md).
 
 ### frazzini2014
 
@@ -848,6 +854,12 @@ Also at: <https://www.aqr.com/-/media/AQR/Documents/Alternative-Thinking/AQR-Alt
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### israelov2015
+
+Israelov, Roni; Nielsen, Lars N. (2015). Covered Calls Uncovered. *Financial Analysts Journal 71(6), 44-57*. doi:10.2469/faj.v71.n6.1 <https://doi.org/10.2469/faj.v71.n6.1>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### ito2017
 
@@ -1059,7 +1071,7 @@ Liu, Yukun; Tsyvinski, Aleh (2018). Risks and Returns of Cryptocurrency. *NBER W
 
 Also at: <https://www.nber.org/system/files/working_papers/w24877/w24877.pdf>.
 
-Cited in: [catalog/algorithms/crypto-google-search-attention.json](../catalog/algorithms/crypto-google-search-attention.json), [catalog/algorithms/crypto-time-series-momentum.json](../catalog/algorithms/crypto-time-series-momentum.json), [ALG-0024](algorithms/0024-crypto-google-search-attention.md), [ALG-0027](algorithms/0027-crypto-time-series-momentum.md), [RES-0002](research/0002-open-source-and-public-results.md).
+Cited in: [catalog/algorithms/crypto-google-search-attention.json](../catalog/algorithms/crypto-google-search-attention.json), [catalog/algorithms/crypto-time-series-momentum.json](../catalog/algorithms/crypto-time-series-momentum.json), [ALG-0024](algorithms/0024-crypto-google-search-attention.md), [ALG-0027](algorithms/0027-crypto-time-series-momentum.md), [REF-0004](reference/0004-glossary.md), [RES-0002](research/0002-open-source-and-public-results.md).
 
 ### liu2022
 
@@ -1995,6 +2007,12 @@ Note: Read for RES-0010 (abstract page).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### wolfers2004
+
+Wolfers, Justin; Zitzewitz, Eric (2004). Prediction Markets. *Journal of Economic Perspectives 18(2), 107-126*. doi:10.1257/0895330041371321 <https://doi.org/10.1257/0895330041371321>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ## Preprints and working papers
 
 ### andersen1996
@@ -2161,7 +2179,7 @@ Cited in: [catalog/algorithms/ml-return-prediction-elastic-net.json](../catalog/
 
 He, Songrun; Manela, Asaf; Ross, Omri; von Wachter, Victor (2022). Fundamentals of Perpetual Futures. *arXiv preprint arXiv:2212.06888*. arXiv:2212.06888 <https://arxiv.org/abs/2212.06888>. <https://arxiv.org/abs/2212.06888>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/crypto-perp-funding-carry.json](../catalog/algorithms/crypto-perp-funding-carry.json), [ALG-0026](algorithms/0026-crypto-perp-funding-carry.md).
+Cited in: [catalog/algorithms/crypto-perp-funding-carry.json](../catalog/algorithms/crypto-perp-funding-carry.json), [ALG-0026](algorithms/0026-crypto-perp-funding-carry.md), [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### kelly2024a
 
@@ -2937,6 +2955,12 @@ api-evangelist/imf. (n.d.). *GitHub*. <https://github.com/api-evangelist/imf>. A
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-7a0fda7c
+
+Layr-Labs/eigenlayer-contracts. (n.d.). *GitHub*. <https://github.com/Layr-Labs/eigenlayer-contracts>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-7a49e2be
 
 DLR-RM/stable-baselines3. (n.d.). *GitHub*. <https://github.com/DLR-RM/stable-baselines3>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3197,6 +3221,12 @@ No title recorded. (n.d.). *European Central Bank*. <https://data-api.ecb.europa
 
 Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-portal.json), [DAT-0010](datasets/0010-ecb-data-portal.md).
 
+### url-0225a9e2
+
+Proof-of-stake rewards and penalties. (n.d.). *ethereum.org*. <https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-0364dd4c
 
 API FAQ. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developers/api_faqs.htm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -3303,6 +3333,12 @@ Note: Linked in this repo as: Massive blog.
 
 Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DAT-0023](datasets/0023-massive.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-0aeb5ec9
+
+Kraken global terms of service. (2026). *Kraken*. <https://www.kraken.com/legal/global-terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-0b1f9975
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3386,6 +3422,12 @@ Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json),
 IMF Data API (SDMX 2.1 and 3.0): API documentation. (n.d.). *International Monetary Fund*. <https://data.imf.org/en/Resource-Pages/IMF-API>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
+
+### url-160f511d
+
+Expense ratio (glossary). (n.d.). *Investor.gov, US SEC*. <https://www.investor.gov/introduction-investing/investing-basics/glossary/expense-ratio>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-16436119
 
@@ -3688,6 +3730,12 @@ Archival FRED | ALFRED | St. Louis Fed. (n.d.). *Federal Reserve Bank of St. Lou
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015](datasets/0015-fred.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-3a272a6d
+
+Funding. (n.d.). *Hyperliquid docs*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-3a5722ad
 
@@ -4040,6 +4088,12 @@ Trading Economics - API - Pricing. (n.d.). *Trading Economics*. <https://trading
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-5d1b2a46
+
+Liquidations. (n.d.). *Hyperliquid docs*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-5d48f0dc
 
@@ -4463,6 +4517,12 @@ Arab Spring. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Arab_Spring>. A
 
 Cited in: [catalog/events/egypt-revolution-2011.json](../catalog/events/egypt-revolution-2011.json).
 
+### url-872a8986
+
+Defined Outcome ETFs. (n.d.). *Innovator ETFs*. <https://www.innovatoretfs.com/define/>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-8876d5a7
 
 Nasdaq Data Link | Quandl API, Python & Ready-to-use datasets. (n.d.). *blog.quantinsti.com*. <https://blog.quantinsti.com/nasdaq-data-link/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4572,6 +4632,12 @@ TrueFX Downloads - TrueFX. (n.d.). *TrueFX (Integral)*. <https://www.truefx.com/
 Note: Linked in this repo as: TrueFX downloads.
 
 Cited in: [catalog/datasets/truefx.json](../catalog/datasets/truefx.json), [DAT-0032](datasets/0032-truefx.md), [RES-0003](research/0003-forums-and-practitioners.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-9260d794
+
+Hyperliquid public info API. (n.d.). *Hyperliquid*. <https://api.hyperliquid.xyz/info>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-92a7dec8
 
@@ -4737,7 +4803,7 @@ Challenge Verification | CoinGecko. (n.d.). *CoinGecko*. <https://www.coingecko.
 
 Note: Linked in this repo as: None.
 
-Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
 ### url-a5cbdf1e
 
@@ -4851,6 +4917,12 @@ Black Wednesday. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Black_Wedne
 
 Cited in: [catalog/events/black-wednesday-1992.json](../catalog/events/black-wednesday-1992.json).
 
+### url-aedff13b
+
+CoinGecko API terms of service. (2025). *CoinGecko*. <https://www.coingecko.com/en/api_terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-aeeff74a
 
 Introduction of Quantitative and Qualitative Monetary Easing with a Negative Interest Rate. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2016/k160129a.pdf>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -4884,6 +4956,12 @@ Cited in: [catalog/events/september-11-attacks-2001.json](../catalog/events/sept
 No title recorded. (n.d.). *Organisation for Economic Co-operation and Development*. <https://www.oecd.org/en/about/terms-conditions.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/oecd.json](../catalog/datasets/oecd.json), [DAT-0027](datasets/0027-oecd.md).
+
+### url-b1e6b3cc
+
+The next-generation monetary and financial system. (2025). *BIS Annual Economic Report 2025, chapter III*. <https://www.bis.org/publ/arpdf/ar2025e3.htm>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-b2570be7
 
@@ -4984,6 +5062,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 No title recorded. (n.d.). *teamblind.com*. <https://www.teamblind.com/post/algotrading-ocgevgm3>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-b9f70980
+
+Net asset value (glossary). (n.d.). *Investor.gov, US SEC*. <https://www.investor.gov/introduction-investing/investing-basics/glossary/net-asset-value>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-ba533bf9
 
@@ -5123,6 +5207,12 @@ No title recorded. (n.d.). *The GDELT Project*. <https://www.gdeltproject.org/ab
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
+### url-d02d51d7
+
+0DTE options. (n.d.). *Cboe*. <https://www.cboe.com/tradable-products/0dte>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-d125f474
 
 Oanda and QuantConnect for EU - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/forum/discussion/5847/oanda-and-quantconnect-for-eu/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5167,6 +5257,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-d4e80b34
+
+Hyperliquid terms of use. (2026). *Hyperliquid*. <https://app.hyperliquid.xyz/terms>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-d5f11dd9
 
 Nixon shock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nixon_shock>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5178,6 +5274,12 @@ Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1
 Tiingo: API documentation. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/documentation/general/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/tiingo.json](../catalog/datasets/tiingo.json), [DAT-0029](datasets/0029-tiingo.md).
+
+### url-d70bc25d
+
+Revenue Ruling 2019-24. (2019). *Internal Revenue Service*. <https://www.irs.gov/pub/irs-drop/rr-19-24.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-d887a4d4
 
@@ -5344,6 +5446,12 @@ Cited in: [catalog/events/iraq-invasion-2003.json](../catalog/events/iraq-invasi
 2020 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/us-election-2020.json](../catalog/events/us-election-2020.json).
+
+### url-eb6a0b68
+
+Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-ec56c25d
 
@@ -5947,6 +6055,18 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-2af24e32
+
+CFTC issues proposal on event contracts. (2024). *Commodity Futures Trading Commission, release 8907-24*. <https://www.cftc.gov/PressRoom/PressReleases/8907-24>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-2cab213b
+
+EDGAR full-text search API. (n.d.). *US SEC*. <https://efts.sec.gov/LATEST/search-index?forms=N-1A>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-2d16e385
 
 No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/>. Accessed 2026-10-21. Verification: not checked.
@@ -5961,23 +6081,59 @@ Note: Linked in this repo as: ESMA product intervention press release, 27 March 
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### url-4c39b66e
+
+Statement on the approval of spot bitcoin exchange-traded products. (2024). *US SEC, Chair Gary Gensler*. <https://www.sec.gov/newsroom/speeches-statements/gensler-statement-spot-bitcoin-011023>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-4e8af84d
 
 No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/RSS/RSSGP/rssgp.xml>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-5ea2b559
+
+Regulatory Notice 09-31: non-traditional ETFs. (2009). *FINRA*. <https://www.finra.org/rules-guidance/notices/09-31>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-7a3d5497
 
 No title recorded. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data>. Accessed 2026-10-21. Verification: not checked.
 
-Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
+Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-7f3d77da
+
+CFTC glossary. (n.d.). *Commodity Futures Trading Commission*. <https://www.cftc.gov/LearnAndProtect/EducationCenter/CFTCGlossary/index.htm>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-894d16a5
+
+Statement on certain protocol staking activities. (2025). *US SEC, Division of Corporation Finance*. <https://www.sec.gov/newsroom/speeches-statements/statement-certain-protocol-staking-activities-052925>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-89c953ef
 
 FTC case. (n.d.). *ftc.gov*. <https://www.ftc.gov/legal-library/browse/cases-proceedings/2023198-warrior-trading-inc-ftc-v>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-8bbde07f
+
+Company tickers and exchanges. (n.d.). *US SEC*. <https://www.sec.gov/files/company_tickers_exchange.json>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-9f635241
+
+Staff statement on meme coins. (2025). *US SEC, Division of Corporation Finance*. <https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-a1682719
 
@@ -5995,6 +6151,12 @@ Note: Linked in this repo as: press release.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-d21de22a
+
+No title recorded. (n.d.). *sec.gov*. <https://www.sec.gov/files/investment/data/other/investment-company-series-class-information/investment-company-series-class-2026.csv>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-f2a66230
 
 SEC.gov | Request Rate Threshold Exceeded. (n.d.). *sec.gov*. <https://www.sec.gov/about/reports-publications/investorpubsdaytipshtm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -6002,6 +6164,12 @@ SEC.gov | Request Rate Threshold Exceeded. (n.d.). *sec.gov*. <https://www.sec.g
 Note: Linked in this repo as: SEC, Day Trading: Your Dollars at Risk.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-ff98aae3
+
+Privacy and dissemination of information. (n.d.). *US SEC*. <https://www.sec.gov/privacy>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ## News
 

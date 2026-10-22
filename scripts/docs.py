@@ -431,6 +431,8 @@ def glossary_body(title: str) -> str:
                     "<details><summary>Analogy</summary>", "", t["analogy"], "", "</details>", "",
                     "<details><summary>Precise definition</summary>", "", t["precise"], "",
                     "</details>"]
+            if t.get("risk"):
+                out += ["", f"**What can go wrong:** {t['risk']}"]
             if t.get("related"):
                 links = ", ".join(f"[{by_id[x]['term']}](#{slugify(by_id[x]['term'])})"
                                   for x in t["related"] if x in by_id)

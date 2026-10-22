@@ -75,8 +75,11 @@ Oil, gas, metals and their link to currencies.
 
 Crypto markets, used as a comparison.
 
+- [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
+- [DEC-0019: Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
+- [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [ALG-0021: Avellaneda-Stoikov market making (Hummingbot)](algorithms/0021-avellaneda-stoikov-market-making.md)
 - [ALG-0022: Crypto cash-and-carry basis trade (dated futures)](algorithms/0022-crypto-cash-and-carry-basis.md)
 - [ALG-0023: Crypto cross-sectional size and momentum factors (C-3 model)](algorithms/0023-crypto-cross-sectional-factors.md)
@@ -101,12 +104,14 @@ Crypto markets, used as a comparison.
 Sources, scrapers, caching and data quality.
 
 - [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md)
+- [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0002: Alpha Vantage](datasets/0002-alpha-vantage.md)
@@ -466,6 +471,7 @@ How the team works together.
 - [DEC-0014: A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
+- [DEC-0019: Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
@@ -587,6 +593,7 @@ The dashboard.
 - [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
 - [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
+- [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

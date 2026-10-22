@@ -117,6 +117,8 @@ export interface GlossaryTerm {
   simple: string;
   analogy: string;
   precise: string;
+  /** What can go wrong, for terms about products people spend money on. */
+  risk?: string;
   related?: string[];
 }
 

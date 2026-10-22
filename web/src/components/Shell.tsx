@@ -29,6 +29,18 @@ const PRODUCT: NavItem[] = [
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
   {
+    href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],
+    children: [
+      { href: "#/markets", label: "Overview", routes: [] },
+      { href: "#/markets/new", label: "New and trending", routes: [] },
+      { href: "#/markets/crypto", label: "Crypto", routes: [] },
+      { href: "#/markets/perps", label: "Perps", routes: [] },
+      { href: "#/markets/etfs", label: "ETFs", routes: [] },
+      { href: "#/markets/terms", label: "Hype terms", routes: [] },
+      { href: "#/markets/practice", label: "Practice", routes: [] },
+    ],
+  },
+  {
     href: "#/news", label: "News", icon: "news", routes: ["news"],
     children: [
       { href: "#/news", label: "Latest", routes: [] },
