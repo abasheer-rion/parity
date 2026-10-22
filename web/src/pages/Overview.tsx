@@ -11,6 +11,7 @@ import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
 import { ledger } from "../lib/catalog";
+import { nameOf } from "../lib/strategyMeta";
 
 export function Overview({ report, email }: { report: Report; email?: string | null }) {
   const prefs = usePrefs();
@@ -80,7 +81,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
               <li key={r.strategy}>
                 <a href={`#/strategy/${r.strategy}`}>
                   <span className="acct-dot" style={{ background: colors[r.strategy] }} />
-                  <span className="acct-name">{r.strategy}</span>
+                  <span className="acct-name">{nameOf(r)}</span>
                   <Sparkline points={r.equity} width={56} height={22} />
                   <span className="acct-val">{num(r.metrics.sharpe)}</span>
                 </a>
@@ -99,7 +100,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
             <span><i className="k2" /> Market {num(bench?.metrics.sharpe)}</span>
           </div>
           <div className="mcard-foot">
-            <div><div className="muted small">Best so far</div><a href={`#/strategy/${best?.strategy}`}>{best?.strategy}</a></div>
+            <div><div className="muted small">Best so far</div><a href={`#/strategy/${best?.strategy}`}>{best ? nameOf(best) : ""}</a></div>
             <div><div className="muted small">Trials counted</div>{report.n_trials}</div>
           </div>
         </section>
@@ -178,7 +179,7 @@ function Movers({ title, icon, runs, year, market }: { title: string; icon: stri
       <ul>
         {runs.map((r) => (
           <li key={r.strategy}>
-            <a href={`#/strategy/${r.strategy}`}>{r.strategy}</a>
+            <a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a>
             <span className={r.yearly[year] >= 0 ? "good" : "bad"}>{r.yearly[year] >= 0 ? "+" : "−"}{pct(Math.abs(r.yearly[year]))}</span>
           </li>
         ))}

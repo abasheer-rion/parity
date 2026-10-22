@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { colorMap } from "../lib/colors";
 import { usePrefs } from "../lib/prefs";
+import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
 import { Badge, DataTable, FilterBar, FilterChip, RANGES, SearchInput, Sparkline, Tabs, fmt, sliceRange, useFilters, type Column, type RangeKey } from "../ui";
 import { Term } from "./Learn";
@@ -24,12 +25,12 @@ export function Strategies({ report }: { report: Report }) {
     { id: "stocks", label: "Stocks", test: (r: StrategyRun) => r.is_benchmark || FAMILY(r) === "stocks" },
     { id: "positive", label: "Positive Sharpe", test: (r: StrategyRun) => r.is_benchmark || (r.metrics.sharpe ?? 0) > 0 },
   ], []);
-  const f = useFilters(report.runs, defs, (r) => r.strategy);
+  const f = useFilters(report.runs, defs, (r) => `${nameOf(r)} ${r.strategy}`);
 
   const columns: Column<StrategyRun>[] = [
     {
-      key: "name", header: "Strategy", align: "left", sort: (r) => r.strategy,
-      render: (r) => <><span className="acct-dot" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`}>{r.strategy}</a>{r.is_benchmark && <> <Badge>benchmark</Badge></>}</>,
+      key: "name", header: "Strategy", align: "left", sort: (r) => nameOf(r),
+      render: (r) => <><span className="acct-dot" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a></>,
     },
     { key: "spark", header: range, align: "left", render: (r) => <Sparkline points={sliceRange(r.equity, range)} /> },
     { key: "move", header: "Move", sort: (r) => move(r, range), tone: (r) => move(r, range), render: (r) => fmt.signedPct(move(r, range)) },
@@ -37,12 +38,20 @@ export function Strategies({ report }: { report: Report }) {
     { key: "sharpe", header: <Term id="sharpe-ratio">Sharpe</Term>, sort: (r) => r.metrics.sharpe, render: (r) => fmt.num(r.metrics.sharpe) },
     { key: "dd", header: <Term id="drawdown">Max drawdown</Term>, sort: (r) => r.metrics.max_drawdown, render: (r) => fmt.pct(r.metrics.max_drawdown) },
     { key: "dsr", header: <Term id="deflated-sharpe-ratio">Deflated</Term>, sort: (r) => r.metrics.deflated_sharpe, render: (r) => fmt.num(r.metrics.deflated_sharpe) },
-    { key: "gauntlet", header: "Gauntlet", sort: (r) => r.gauntlet?.passed, render: (r) => (r.gauntlet ? `${r.gauntlet.passed} of ${r.gauntlet.total}` : "") },
+    {
+      key: "verdict", header: "Verdict", align: "left", sort: (r) => (r.gauntlet ? r.gauntlet.passed / (r.gauntlet.total || 1) : -1),
+      render: (r) => { const v = verdictOf(r); return <span title={v.plain}><Badge tone={v.tone}>{v.label}</Badge>{r.gauntlet && <span className="muted small"> {r.gauntlet.passed}/{r.gauntlet.total}</span>}</span>; },
+    },
   ];
 
   return (
     <>
       <Title>Strategies</Title>
+      <p className="page-purpose">
+        Every strategy we have tested, after trading costs, against simply holding the US stock market (pinned at the
+        top). Click a row for the full story. The verdict says whether it held up; <a href="#/start">Start here</a> explains
+        each number.
+      </p>
       <FilterBar count={f.count} onReset={f.reset} right={<SearchInput value={f.query} onChange={f.setQuery} placeholder="Search strategies" />}>
         <FilterChip icon="filter" label={`Filters${f.active.length ? ` (${f.active.length})` : ""}`} />
         {defs.map((d) => <FilterChip key={d.id} label={d.label} active={f.active.includes(d.id)} onClick={() => f.toggle(d.id)} onRemove={() => f.toggle(d.id)} />)}

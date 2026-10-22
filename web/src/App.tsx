@@ -27,6 +27,7 @@ import { SimWorld } from "./pages/SimWorld";
 import { UILibrary } from "./pages/UILibrary";
 import { Toaster } from "./ui";
 import { Signals } from "./pages/Signals";
+import { Start } from "./pages/Start";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 
@@ -49,7 +50,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
+const STANDALONE = ["start", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -95,6 +96,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
+      {route === "start" && <Start report={report} />}
       {route === "ui" && <UILibrary section={arg} />}
       {route === "scenarios" && <Scenarios />}
       {route === "learn" && <Learn focus={arg} />}
@@ -127,7 +129,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
         </>
       )}
       <Popups />
-      <Palette />
+      <Palette report={report} />
       <Toaster />
     </Shell>
   );

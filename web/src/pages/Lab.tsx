@@ -6,6 +6,7 @@ import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import type { Point, Report } from "../lib/types";
 import { Term } from "./Learn";
+import { nameOf } from "../lib/strategyMeta";
 
 interface Variant { params: Record<string, unknown>; sharpe: number; cagr: number | null; max_drawdown: number | null; equity?: Point[] }
 
@@ -36,7 +37,7 @@ export function Lab({ report }: { report: Report }) {
       <Card title="Settings">
         <div className="filters">
           <label>Strategy <select value={name} onChange={(e) => { setName(e.target.value); setChoice({}); }}>
-            {runs.map((r) => <option key={r.strategy} value={r.strategy}>{r.strategy}</option>)}</select></label>
+            {runs.map((r) => <option key={r.strategy} value={r.strategy}>{nameOf(r)}</option>)}</select></label>
           {keys.map((k) => {
             const values = [...new Set(variants.map((v) => String(v.params[k])))];
             return (

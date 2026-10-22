@@ -56,6 +56,21 @@ export const TYPE_LABELS: Record<string, string> = {
 };
 export const TYPE_ORDER = Object.keys(TYPE_LABELS);
 
+/** What each kind of doc is, in one line, for people who do not know the system. */
+export const TYPE_HELP: Record<string, string> = {
+  intent: "What the project is trying to do, and what it is not.",
+  decision: "A choice we made, the options we weighed and why.",
+  hypothesis: "An idea written down before testing, with what would prove it wrong.",
+  experiment: "A test we ran and what came out of it.",
+  research: "Reading notes: what papers and evidence say on a topic.",
+  algorithm: "How one trading strategy works and where it came from.",
+  dataset: "One data source: what is in it, how it is cleaned, its limits.",
+  guide: "How to do something step by step.",
+  reference: "Facts to look up: methods, sources, definitions.",
+  log: "A dated diary of what was asked and what happened.",
+  register: "A running list, such as open problems or results.",
+};
+
 let cache: DocsData | null = null;
 let pending: Promise<DocsData> | null = null;
 

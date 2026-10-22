@@ -4,6 +4,7 @@ import { Card } from "../ui/layout";
 import { colorMap } from "../lib/colors";
 import { num } from "../lib/format";
 import type { Report } from "../lib/types";
+import { nameOf } from "../lib/strategyMeta";
 
 export function Signals({ report }: { report: Report }) {
   const colors = colorMap(report.runs);
@@ -27,7 +28,7 @@ export function Signals({ report }: { report: Report }) {
           groups={horizons.map((h) => ({
             label: `${h} days`,
             values: withSignal.map((r) => ({
-              name: r.strategy,
+              name: nameOf(r),
               color: colors[r.strategy],
               value: r.ic_decay.find((x) => x.horizon_days === h)?.mean_ic ?? null,
             })),
@@ -44,7 +45,7 @@ export function Signals({ report }: { report: Report }) {
             <tbody>
               {withSignal.map((r) => (
                 <tr key={r.strategy}>
-                  <td><span className="swatch" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`}>{r.strategy}</a></td>
+                  <td><span className="swatch" style={{ background: colors[r.strategy] }} /><a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a></td>
                   {r.ic_decay.map((x) => <td key={x.horizon_days}>{num(x.mean_ic, 3)}</td>)}
                   {r.ic_decay.map((x) => <td key={`t${x.horizon_days}`}>{num(x.ic_tstat, 1)}</td>)}
                 </tr>
