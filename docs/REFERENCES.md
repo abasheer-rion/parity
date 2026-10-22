@@ -3,12 +3,12 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-995 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+998 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 276 |
-| [Preprints and working papers](#preprints-and-working-papers) | 53 |
+| [Papers](#papers) | 280 |
+| [Preprints and working papers](#preprints-and-working-papers) | 52 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
@@ -131,7 +131,7 @@ Asness, Clifford S.; Moskowitz, Tobias J.; Pedersen, Lasse Heje (2013). Value an
 
 Also at: <https://pages.stern.nyu.edu/~lpederse/papers/ValMomEverywhere.pdf>.
 
-Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### avellaneda2008
 
@@ -507,15 +507,17 @@ Della Corte, Ramadorai and Sarno (2016). <https://openaccess.city.ac.uk/id/eprin
 
 Note: Cited in this repo as: Della Corte, Ramadorai and Sarno (2016), Table 3, developed currencies.
 
-Cited in: [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md).
+Cited in: [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### dellacorte2016a
 
 Della Corte, Pasquale; Ramadorai, Tarun; Sarno, Lucio (2016). Volatility risk premia and exchange rate predictability. *Journal of Financial Economics 120(1), 21-40*. doi:10.1016/j.jfineco.2016.02.015 <https://doi.org/10.1016/j.jfineco.2016.02.015>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367>.
+Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367>, <https://openaccess.city.ac.uk/id/eprint/13156/1/VRP_Paper_18Feb2015%20%28with%20Figures%29.pdf>.
 
-Cited in: [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md).
+Note: Read for RES-0015 (full text).
+
+Cited in: [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### dellacorte2016b
 
@@ -639,6 +641,16 @@ Note: Read for RES-0014 (full text, accepted manuscript).
 
 Cited in: [catalog/algorithms/commodity-skewness.json](../catalog/algorithms/commodity-skewness.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
+### fernandezperez2019
+
+Fernandez-Perez, Adrian; Fuertes, Ana-Maria; Miffre, Joelle (2019). A \[...\] Appraisal of Style-Integration Methods. *Journal of Banking and Finance 105, 134-150*. doi:10.1016/j.jbankfin.2019.05.016 <https://doi.org/10.1016/j.jbankfin.2019.05.016>. <https://openaccess.city.ac.uk/id/eprint/22246/1/JBF_Integration%20for%20CRO.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Also at: <https://doi.org/10.1016/j.jbankfin.2019.05.016>.
+
+Note: Read for RES-0015 (full text, accepted version); one word of the title is elided because it is on this project's plain-language list.
+
+Cited in: [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+
 ### ferraro2011
 
 Ferraro, Domenico; Rogoff, Kenneth; Rossi, Barbara (2011). Can Oil Prices Forecast Exchange Rates? *NBER Working Paper w17998*. doi:10.3386/w17998 <https://doi.org/10.3386/w17998>. <https://crei.cat/wp-content/uploads/2016/07/COPF_pub.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -715,6 +727,16 @@ Gorton, Gary; Rouwenhorst, K. Geert (2006). Facts and Fantasies about Commodity 
 
 Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [RES-0012](research/0012-commodity-futures-carry-trend-and-volatility.md).
 
+### gorton2013
+
+Gorton, Gary B.; Hayashi, Fumio; Rouwenhorst, K. Geert (2013). The Fundamentals of Commodity Futures Returns. *NBER Working Paper 13249; published in Review of Finance 17(1), 35-105 (2013)*. <https://www.nber.org/papers/w13249>. Accessed 2026-10-22. Verification: not checked.
+
+Also at: <https://www.sba.hub.hit-u.ac.jp/assets/files/research/fs_wp/FS-2012-E-002.pdf>.
+
+Note: Read for RES-0015 (full text, January 2012 Hitotsubashi version).
+
+Cited in: [catalog/algorithms/commodity-inventory-level.json](../catalog/algorithms/commodity-inventory-level.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+
 ### greenwood2014
 
 Greenwood, Robin; Shleifer, Andrei (2014). Expectations of Returns and Expected Returns. *Review of Financial Studies 27(3), 714-746*. doi:10.1093/rfs/hht082 <https://doi.org/10.1093/rfs/hht082>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -752,6 +774,14 @@ Also at: <https://doi.org/10.3905/jpm.2015.42.1.013>.
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### harvey2018
+
+Harvey, Campbell R.; Hoyle, Edward; Korgaonkar, Russell; Rattray, Sandy; Sargaison, Matthew; Van Hemert, Otto (2018). The Impact of Volatility Targeting. *Journal of Portfolio Management 45(1), 14-33*. <https://people.duke.edu/~charvey/Research/Published_Papers/P135_The_impact_of.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0015 (full text); authors at Man Group.
+
+Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### hasbrouck2021
 
@@ -1033,7 +1063,11 @@ Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorit
 
 Kroencke, Tim A.; Schindler, Felix; Schrimpf, Andreas (2014). International Diversification Benefits with Foreign Exchange Investment Styles. *Review of Finance 18(5), 1847-1883*. doi:10.1093/rof/rft047 <https://doi.org/10.1093/rof/rft047>. <https://ideas.repec.org/a/oup/revfin/v18y2014i5p1847-1883..html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Also at: <https://repec.econ.au.dk/repec/creates/rp/11/rp11_10.pdf>.
+
+Note: Read for RES-0015 (full text).
+
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### krohn2024
 
@@ -1157,9 +1191,11 @@ Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glo
 
 Lustig, Hanno N.; Roussanov, Nikolai L.; Verdelhan, Adrien (2014). Countercyclical Currency Risk Premia. *Journal of Financial Economics 111(3), 527-553*. doi:10.2139/ssrn.1541230 <https://doi.org/10.2139/ssrn.1541230>. <https://ssrn.com/abstract=1541230>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Also at: <http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf>.
+Also at: <http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf>, <https://www.nber.org/system/files/working_papers/w16427/revisions/w16427.rev1.pdf>, <https://www.nber.org/papers/w16427>.
 
-Cited in: [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [RES-0001](research/0001-reading-list.md).
+Note: Read for RES-0015 (full text).
+
+Cited in: [catalog/algorithms/fx-developed-rate-gap-times-em-basket.json](../catalog/algorithms/fx-developed-rate-gap-times-em-basket.json), [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [RES-0001](research/0001-reading-list.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### lustig2019
 
@@ -1245,7 +1281,11 @@ Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-readi
 
 Melvin, Michael; Prins, John (2015). Equity hedging and exchange rates at the London 4p.m. fix. *Journal of Financial Markets 22, 50-72*. doi:10.1016/j.finmar.2014.11.001 <https://doi.org/10.1016/j.finmar.2014.11.001>. <https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md).
+Also at: <https://ecb.eu/events/pdf/conferences/131216/Third_FX_Workshop_MELVIN_PRINS_Equity%20hedging%20and%20exchange%20rates%20Nov%202013.pdf>.
+
+Note: Read for RES-0015 (full text).
+
+Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### melvin2017
 
@@ -1520,6 +1560,14 @@ Also at: <https://ueaeprints.uea.ac.uk/63547/1/Variance_risk_in_Commodity_Market
 Note: Read for RES-0012 (full text, accepted manuscript).
 
 Cited in: [catalog/algorithms/commodity-variance-risk-premium.json](../catalog/algorithms/commodity-variance-risk-premium.json), [RES-0012](research/0012-commodity-futures-carry-trend-and-volatility.md).
+
+### prokopczuk2021
+
+Prokopczuk, Marcel; Wese Simen, Chardin; Wichmann, Robert (2021). The Natural Gas Announcement Day Puzzle. *Energy Journal 42(2)*. <https://centaur.reading.ac.uk/90003/1/NG_paper_final_round.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0015 (full text, accepted version).
+
+Cited in: [catalog/algorithms/natural-gas-storage-report.json](../catalog/algorithms/natural-gas-storage-report.json), [RES-0015](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### qi2006
 
@@ -2416,12 +2464,6 @@ Cited in: [catalog/algorithms/commodity-same-month-seasonality.json](../catalog/
 No title recorded. (n.d.). <https://www.nber.org/papers/w16712>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [catalog/algorithms/commodity-open-interest-growth.json](../catalog/algorithms/commodity-open-interest-growth.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
-
-### url-49d098fe
-
-No title recorded. (n.d.). <https://www.nber.org/papers/w13249>. Accessed 2026-10-22. Verification: not checked.
-
-Cited in: [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### url-c8c51ac4
 

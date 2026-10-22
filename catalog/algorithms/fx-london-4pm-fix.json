@@ -62,6 +62,20 @@
       "costs_included": false,
       "verified_on_page": true,
       "notes": "Table 8: gross annualized returns 13.6, 11.2 and 12.9 percent for euro, pound and yen (only the pound is traded around the London fix). With full indicative bid-ask spreads most windows turn negative; with spreads cut by 50 percent returns are 6.6, 4.2 and 3.4 percent, with Sharpe ratios of about 0.5 to 0.7. annual_return shows the euro gross figure."
+    },
+    {
+      "source": "Melvin and Prins (2015), ECB workshop version (BlackRock authors)",
+      "source_url": "https://ecb.eu/events/pdf/conferences/131216/Third_FX_Workshop_MELVIN_PRINS_Equity%20hedging%20and%20exchange%20rates%20Nov%202013.pdf",
+      "period": "About 2004 to 2012-12 (8.66 years)",
+      "market": "G10 currencies, 15:00 to 16:00 London on the last day of the month",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Equity returns over the month predict currency depreciation before the month-end fix; the authors call the effect statistically significant but small, a few basis points. They cite Rizeanu and Zhang (2013), who find no such link for 23 emerging market currencies."
     }
   ],
   "post_publication_evidence": "Krohn, Mueller and Whelan (published Journal of Finance 2024) find the pre-fix dollar appreciation and post-fix reversal present in each of the twenty years of their 1999-2018 sample, after the Melvin and Prins (2015) and Evans (2018) papers, but say the swings are hard to exploit after costs.",
@@ -78,7 +92,7 @@
     "reason": "A real flow effect, but it is intraday and cost-sensitive, so it is a weak candidate for a daily or monthly strategy meant to beat the S&P 500."
   },
   "testable_with_free_data": false,
-  "last_reviewed": "2026-10-20",
+  "last_reviewed": "2026-10-22",
   "research": {
     "stage": 2,
     "hypothesis": null,
@@ -86,6 +100,6 @@
     "registrations": [],
     "runs": [],
     "verdict": null,
-    "notes": ""
+    "notes": "RES-0015: not useful for emerging markets, and needs intraday prices."
   }
 }

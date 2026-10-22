@@ -77,6 +77,20 @@
       "costs_included": false,
       "verified_on_page": false,
       "notes": "Computed by the catalog on 2026-10-20 from the data file at source_url; this exact figure is not printed by the source. Arithmetic mean of monthly returns times 12; volatility is monthly standard deviation times sqrt(12); Sharpe uses excess returns; max drawdown from monthly compounding. After the working paper. Unmanaged market over the same span: Sharpe 0.88, max drawdown -25.2%. c fitted within this window."
+    },
+    {
+      "source": "Harvey, Hoyle, Korgaonkar, Rattray, Sargaison and Van Hemert (2018), Man Group",
+      "source_url": "https://people.duke.edu/~charvey/Research/Published_Papers/P135_The_impact_of.pdf",
+      "period": "From as early as 1926 to 2017",
+      "market": "More than 60 assets",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Volatility targeting raises Sharpe ratios for equities and credit, has a negligible effect for bonds, currencies and commodities, and reduces extreme returns in all asset classes."
     }
   ],
   "post_publication_evidence": "Cederburg, O'Doherty, Wang and Yan (2020, https://doi.org/10.1016/j.jfineco.2020.04.015) find out-of-sample volatility-managed versions generally earn lower Sharpe ratios than the unmanaged portfolios (abstract read via Semantic Scholar). DeMiguel, Martin-Utrera and Uppal (2024, https://doi.org/10.1111/jofi.13395) note Barroso and Detzel find they do not survive costs, but propose a conditional multifactor version that works out of sample net of costs. In the catalog's computation the managed US market underperformed buy and hold from 2016 to 2026 (Sharpe 0.61 vs 0.88).",
@@ -86,7 +100,7 @@
     "reason": "A cheap overlay that Moreira and Muir show helps the currency carry trade, so it is a natural add-on for any parity FX strategy."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-20",
+  "last_reviewed": "2026-10-22",
   "research": {
     "stage": 2,
     "hypothesis": null,
@@ -98,6 +112,6 @@
       "RUN-000003"
     ],
     "verdict": null,
-    "notes": "Implemented as `stocks_vol_managed` and run officially in RUN-000003, but no hypothesis doc yet, so the stage stays at 2 until one is written."
+    "notes": "Implemented as `stocks_vol_managed` and run officially in RUN-000003, but no hypothesis doc yet, so the stage stays at 2 until one is written. RES-0015: use as a risk control for combined FX and energy books, not as a source of return."
   }
 }

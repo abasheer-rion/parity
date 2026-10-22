@@ -89,6 +89,8 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 - [DEC-0015: Two sides, a product app and a research app, kept apart](0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [EXP-0005: Rerun of all sixteen strategies with corrected scoring](../experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
+- [RES-0015: Combining many strategies, the evidence and the ingredient list](../research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- [LOG-0010: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

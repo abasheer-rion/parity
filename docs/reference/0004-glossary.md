@@ -5590,4 +5590,7 @@ Related: [ETF](#etf), [Herding](#herding), [Recency bias](#recency-bias), [Expen
 - [ALG-0093: Commodity same-calendar-month seasonality](../algorithms/0093-commodity-same-month-seasonality.md)
 - [ALG-0094: Front-running commodity index rolls (the Goldman roll)](../algorithms/0094-commodity-index-roll-front-running.md)
 - [ALG-0095: Currencies sorted on sovereign credit risk](../algorithms/0095-fx-sovereign-credit-risk.md)
+- [ALG-0096: Commodity inventory level](../algorithms/0096-commodity-inventory-level.md)
+- [ALG-0097: Developed-market rate gap times the EM currency basket](../algorithms/0097-fx-developed-rate-gap-times-em-basket.md)
+- [ALG-0098: Equal-weight combination of styles](../algorithms/0098-equal-weight-style-combination.md)
 <!-- backlinks:end -->

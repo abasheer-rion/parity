@@ -530,7 +530,9 @@
         "docs/algorithms/0005-fx-cross-sectional-momentum.md",
         "docs/algorithms/0017-fx-value-ppp.md",
         "docs/research/0001-reading-list.md",
-        "catalog/algorithms/commodity-value-reversal.json"
+        "catalog/algorithms/commodity-value-reversal.json",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/equal-weight-style-combination.json"
       ],
       "metadata": {
         "source": "crossref",
@@ -2521,7 +2523,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-volatility-risk-premium.json",
-        "docs/algorithms/0018-fx-volatility-risk-premium.md"
+        "docs/algorithms/0018-fx-volatility-risk-premium.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "note": "Cited in this repo as: Della Corte, Ramadorai and Sarno (2016), Table 3, developed currencies",
       "metadata": {
@@ -2544,7 +2547,8 @@
       "arxiv": null,
       "url": "https://doi.org/10.1016/j.jfineco.2016.02.015",
       "also_at": [
-        "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367"
+        "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2233367",
+        "https://openaccess.city.ac.uk/id/eprint/13156/1/VRP_Paper_18Feb2015%20%28with%20Figures%29.pdf"
       ],
       "accessed": "2026-10-21",
       "verification": "redirect-ok",
@@ -2552,12 +2556,14 @@
       "used_in": [
         "catalog/algorithms/fx-volatility-risk-premium.json",
         "docs/algorithms/0018-fx-volatility-risk-premium.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
-      }
+      },
+      "note": "Read for RES-0015 (full text)."
     },
     {
       "key": "dellacorte2016b",
@@ -3171,6 +3177,35 @@
         "catalog/algorithms/commodity-skewness.json"
       ],
       "note": "Read for RES-0014 (full text, accepted manuscript)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "fernandezperez2019",
+      "type": "paper",
+      "authors": [
+        "Fernandez-Perez, Adrian",
+        "Fuertes, Ana-Maria",
+        "Miffre, Joelle"
+      ],
+      "year": 2019,
+      "title": "A [...] Appraisal of Style-Integration Methods",
+      "venue": "Journal of Banking and Finance 105, 134-150",
+      "doi": "10.1016/j.jbankfin.2019.05.016",
+      "arxiv": null,
+      "url": "https://openaccess.city.ac.uk/id/eprint/22246/1/JBF_Integration%20for%20CRO.pdf",
+      "also_at": [
+        "https://doi.org/10.1016/j.jbankfin.2019.05.016"
+      ],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/equal-weight-style-combination.json"
+      ],
+      "note": "Read for RES-0015 (full text, accepted version); one word of the title is elided because it is on this project's plain-language list",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3794,6 +3829,36 @@
       }
     },
     {
+      "key": "gorton2013",
+      "type": "paper",
+      "authors": [
+        "Gorton, Gary B.",
+        "Hayashi, Fumio",
+        "Rouwenhorst, K. Geert"
+      ],
+      "year": 2013,
+      "title": "The Fundamentals of Commodity Futures Returns",
+      "venue": "NBER Working Paper 13249; published in Review of Finance 17(1), 35-105 (2013)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w13249",
+      "also_at": [
+        "https://www.sba.hub.hit-u.ac.jp/assets/files/research/fs_wp/FS-2012-E-002.pdf"
+      ],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/commodity-inventory-level.json"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      },
+      "note": "Read for RES-0015 (full text, January 2012 Hitotsubashi version)"
+    },
+    {
       "key": "greenwood2014",
       "type": "paper",
       "authors": [
@@ -3952,6 +4017,36 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "harvey2018",
+      "type": "paper",
+      "authors": [
+        "Harvey, Campbell R.",
+        "Hoyle, Edward",
+        "Korgaonkar, Russell",
+        "Rattray, Sandy",
+        "Sargaison, Matthew",
+        "Van Hemert, Otto"
+      ],
+      "year": 2018,
+      "title": "The Impact of Volatility Targeting",
+      "venue": "Journal of Portfolio Management 45(1), 14-33",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P135_The_impact_of.pdf",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/volatility-managed-portfolios.json"
+      ],
+      "note": "Read for RES-0015 (full text); authors at Man Group",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -5205,19 +5300,23 @@
       "doi": "10.1093/rof/rft047",
       "arxiv": null,
       "url": "https://ideas.repec.org/a/oup/revfin/v18y2014i5p1847-1883..html",
-      "also_at": [],
+      "also_at": [
+        "https://repec.econ.au.dk/repec/creates/rp/11/rp11_10.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0001-reading-list.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
-      }
+      },
+      "note": "Read for RES-0015 (full text)."
     },
     {
       "key": "krohn2024",
@@ -5975,7 +6074,9 @@
       "arxiv": null,
       "url": "https://ssrn.com/abstract=1541230",
       "also_at": [
-        "http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf"
+        "http://web.mit.edu/adrienv/www/LRV_JFE_2014.pdf",
+        "https://www.nber.org/system/files/working_papers/w16427/revisions/w16427.rev1.pdf",
+        "https://www.nber.org/papers/w16427"
       ],
       "accessed": "2026-10-21",
       "verification": "blocked",
@@ -5983,12 +6084,15 @@
       "used_in": [
         "catalog/algorithms/fx-dollar-carry.json",
         "docs/algorithms/0006-fx-dollar-carry.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/fx-developed-rate-gap-times-em-basket.json"
       ],
       "metadata": {
         "source": "crossref",
         "doi_explicit": false
-      }
+      },
+      "note": "Read for RES-0015 (full text)."
     },
     {
       "key": "lustig2019",
@@ -6421,19 +6525,23 @@
       "doi": "10.1016/j.finmar.2014.11.001",
       "arxiv": null,
       "url": "https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html",
-      "also_at": [],
+      "also_at": [
+        "https://ecb.eu/events/pdf/conferences/131216/Third_FX_Workshop_MELVIN_PRINS_Equity%20hedging%20and%20exchange%20rates%20Nov%202013.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-london-4pm-fix.json",
-        "docs/algorithms/0009-fx-london-4pm-fix.md"
+        "docs/algorithms/0009-fx-london-4pm-fix.md",
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
-      }
+      },
+      "note": "Read for RES-0015 (full text)."
     },
     {
       "key": "melvin2017",
@@ -7495,6 +7603,33 @@
         "catalog/algorithms/commodity-variance-risk-premium.json"
       ],
       "note": "Read for RES-0012 (full text, accepted manuscript)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "prokopczuk2021",
+      "type": "paper",
+      "authors": [
+        "Prokopczuk, Marcel",
+        "Wese Simen, Chardin",
+        "Wichmann, Robert"
+      ],
+      "year": 2021,
+      "title": "The Natural Gas Announcement Day Puzzle",
+      "venue": "Energy Journal 42(2)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://centaur.reading.ac.uk/90003/1/NG_paper_final_round.pdf",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "catalog/algorithms/natural-gas-storage-report.json"
+      ],
+      "note": "Read for RES-0015 (full text, accepted version)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -12812,27 +12947,6 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
-      }
-    },
-    {
-      "key": "url-49d098fe",
-      "type": "preprint",
-      "authors": [],
-      "year": null,
-      "title": null,
-      "venue": null,
-      "doi": null,
-      "arxiv": null,
-      "url": "https://www.nber.org/papers/w13249",
-      "also_at": [],
-      "accessed": "2026-10-22",
-      "verification": "not checked",
-      "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md"
-      ],
-      "metadata": {
-        "source": "manual",
-        "doi_explicit": false
       }
     },
     {

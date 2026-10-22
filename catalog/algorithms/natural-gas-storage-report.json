@@ -62,16 +62,30 @@
       "costs_included": false,
       "verified_on_page": true,
       "notes": "Storage announcements significantly affect natural gas futures returns; expected inventory surprises negatively affect far-month returns; volatility is higher on Thursdays. No Sharpe or return figures for a trading rule."
+    },
+    {
+      "source": "Prokopczuk, Wese Simen and Wichmann (2021), accepted version, Table 8",
+      "source_url": "https://centaur.reading.ac.uk/90003/1/NG_paper_final_round.pdf",
+      "period": "2003-03 to 2018-12",
+      "market": "Henry Hub natural gas futures, front contract",
+      "sharpe": 1.76,
+      "annual_return": 0.1201,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Short from 90 minutes before to 30 minutes after each EIA storage report, after bid-ask and funding costs. Settlement-price version 17.86% a year, Sharpe 2.57. Early sub-period 25% a year, Sharpe 3.26; recent sub-period about 3% and Sharpe 0.5, not enough to cover costs."
     }
   ],
-  "post_publication_evidence": "",
+  "post_publication_evidence": "Prokopczuk et al. (2021) find the announcement-day effect absent in 2014 to 2018 and conclude the anomaly has been arbitraged away.",
   "implementations": [],
   "relevance": {
     "score": 2,
     "reason": "A scheduled energy news event, but natural gas has little direct link to major currencies, so it is mainly a template for event handling."
   },
   "testable_with_free_data": false,
-  "last_reviewed": "2026-10-20",
+  "last_reviewed": "2026-10-22",
   "research": {
     "stage": 2,
     "hypothesis": null,
@@ -79,6 +93,6 @@
     "registrations": [],
     "runs": [],
     "verdict": null,
-    "notes": ""
+    "notes": "RES-0015: decayed, and the paper's version needs intraday prices."
   }
 }
