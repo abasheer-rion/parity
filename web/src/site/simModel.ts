@@ -7,7 +7,7 @@
 //     is two and a half times as wild);
 //   - calm and rough weeks cluster, as they do in real markets;
 //   - the "shock" scenario adds one sudden fall, of a different size on each path.
-// The page labels it as illustrative. Rules: DEC-0017 and DEC-0020.
+// The page labels it as illustrative. Rules: DEC-0017 and DEC-0021.
 
 export interface Scenario {
   id: string;

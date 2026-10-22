@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 20 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 21 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
@@ -35,8 +35,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- 2026-10-22 [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - 2026-10-22 [DEC-0020: Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md)
-- 2026-10-22 [DEC-0019: Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md)
 
 ## intent
 
@@ -69,6 +69,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0018 | [Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md) | accepted | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | DEC-0019 | [Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md) | proposed | 2026-10-22 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 | DEC-0020 | [Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 

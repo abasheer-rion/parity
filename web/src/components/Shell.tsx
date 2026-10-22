@@ -1,7 +1,7 @@
 // The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, search,
 // a segmented switch between areas, nav with nested children for the active item,
 // bookmarks, the run picker and the account menu) and the page. There is no top bar:
-// on phones a small floating button opens the sidebar (DEC-0020).
+// on phones a small floating button opens the sidebar (DEC-0021).
 import { useEffect, useState, type ReactNode } from "react";
 import { Icon } from "../ui/icons";
 import { pageByHref } from "../lib/pages";
@@ -77,7 +77,7 @@ const RESEARCH: NavItem[] = [
       { href: "#/explore", label: "Raw prices", routes: ["explore"] },
     ],
   },
-  // Sim World is its own full-screen site and opens in a new tab (DEC-0020).
+  // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
   { href: simUrl(), label: "Sim World", icon: "compass", routes: ["sim"], external: true },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
@@ -95,7 +95,7 @@ const RESEARCH: NavItem[] = [
 // Settings are kept bare on purpose: a section exists only when there is a reason to
 // change something. The older sections (reading, shortcuts, runs, team, about) are kept
 // in pages/SettingsHidden.tsx and can come back by adding them here.
-// Parity is dark only (DEC-0020), so there is no Appearance section any more.
+// Parity is dark only (DEC-0021), so there is no Appearance section any more.
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },

@@ -136,7 +136,7 @@ const afterLoad = (f: () => void) => {
 };
 
 // The large scale sim, loaded only when its section comes near the screen. With
-// reduced motion it draws one still picture. Rules: DEC-0020.
+// reduced motion it draws one still picture. Rules: DEC-0021.
 const simStage = document.getElementById("sim-stage");
 const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
 if (simStage && !saveData && "IntersectionObserver" in window) {

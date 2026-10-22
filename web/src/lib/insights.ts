@@ -1,7 +1,7 @@
 // Short insight lines for the two home pages, each computed from the data on screen:
 // the selected research run and the strategy search's file.
 // Nothing here is written by a model or guessed. If the data for a line is missing,
-// the line is left out rather than filled with a placeholder (DEC-0020).
+// the line is left out rather than filled with a placeholder (DEC-0021).
 import type { SearchDoc } from "./data";
 import { pct, signedPct } from "./format";
 import { nameOf } from "./strategyMeta";
