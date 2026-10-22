@@ -25,7 +25,7 @@ import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Scenarios } from "./pages/Scenarios";
 import { Search } from "./pages/Search";
 import { Settings } from "./pages/Settings";
-import { SimWorld } from "./pages/SimWorld";
+import { SimLanding } from "./pages/SimLanding";
 import { UILibrary } from "./pages/UILibrary";
 import { Toaster } from "./ui";
 import { Signals } from "./pages/Signals";
@@ -34,7 +34,7 @@ import { HowItWorks } from "./pages/HowItWorks";
 import { ProductHome } from "./pages/ProductHome";
 import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
-import { otherSide, SPACE, SPACE_ROOT } from "./lib/space";
+import { otherSide, simUrl, SPACE, SPACE_ROOT } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 
@@ -80,6 +80,22 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
+  // Sim World runs full screen on its own site (DEC-0017): any link to #/sim or #/sim/<tab>
+  // opens it in a new tab. Typing #/sim still lands on a small card that links there.
+  useEffect(() => {
+    const on = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as HTMLElement | null)?.closest?.("a");
+      const href = a?.getAttribute("href") ?? "";
+      const m = /^#\/sim(?:\/([a-z]+))?/.exec(href);
+      if (!m) return;
+      e.preventDefault();
+      window.open(simUrl(m[1]), "_blank", "noopener");
+    };
+    document.addEventListener("click", on);
+    return () => document.removeEventListener("click", on);
+  }, []);
+
   const [path, query = ""] = hash.split("?");
   const [, route = "", arg, extra] = path.split("/");
   const q = new URLSearchParams(query).get("q") ?? undefined;
@@ -103,7 +119,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   );
 
   return (
-    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"} full={route === "sim"}>
+    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
@@ -112,7 +128,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "search" && <Search />}
       {route === "ui" && <UILibrary section={arg} />}
       {route === "scenarios" && <Scenarios />}
-      {route === "sim" && <SimWorld report={report} tab={arg} />}
+      {route === "sim" && <SimLanding />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}

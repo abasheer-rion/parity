@@ -4,10 +4,10 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Icon } from "../ui/icons";
 import { pageByHref } from "../lib/pages";
-import { SPACE, SPACE_ROOT } from "../lib/space";
+import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 
-interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[] }
+interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: boolean }
 
 // Plain names: say what the page does, not what we call it internally. Each item's
 // hover text comes from lib/pages.ts, the same words search and Start here use.
@@ -76,7 +76,8 @@ const RESEARCH: NavItem[] = [
       { href: "#/explore", label: "Raw prices", routes: ["explore"] },
     ],
   },
-  { href: "#/sim", label: "Sim World", icon: "compass", routes: ["sim"] },
+  // Sim World is its own full-screen site and opens in a new tab (DEC-0017).
+  { href: simUrl(), label: "Sim World", icon: "compass", routes: ["sim"], external: true },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
     children: [
@@ -181,7 +182,8 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}>
+                      <a href={n.href} title={n.external ? "Opens Sim World in a new tab" : pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                        {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
                       </a>
