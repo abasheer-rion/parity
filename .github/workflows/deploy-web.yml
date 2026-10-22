@@ -5,16 +5,17 @@
 # Published runs are copied into the site as files at deploy time. web/functions/ (deployed
 # with the site because wrangler runs in web/) lets only signed-in people fetch /app/ and /data/.
 # News: after each hourly News run, the newest headlines and market moves are exported from the
-# shared data cache into dist/data/news (parity news export).
+# shared data cache into dist/data/news (parity news export). Markets data (DEC-0018) is fetched
+# by the same hourly job and exported into dist/data/markets (parity markets export).
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -75,6 +76,9 @@ jobs:
         run: |
           pip install -q -e ../engine
           parity news export dist/data
+      - name: Copy markets data into the site (crypto, perps, ETFs, new filings)
+        continue-on-error: true
+        run: parity markets export dist/data
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v4

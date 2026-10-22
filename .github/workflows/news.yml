@@ -49,6 +49,11 @@ jobs:
         env:
           PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
         run: parity news fetch
+      - name: Fetch markets data (crypto, perps, ETFs, new filings; skips fresh sources)
+        continue-on-error: true  # the Markets pages explain themselves when data is missing
+        env:
+          PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
+        run: parity markets fetch
       - name: Explain a few record days (GDELT, polite pace)
         run: parity news records --explain 3 --limit 25 > /dev/null || true
       - name: Summary

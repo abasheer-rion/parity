@@ -4,6 +4,9 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 ## Unreleased
 
+- Product Markets area (`/app/#/markets`): crypto prices and risks, perps with funding as a cost of holding and leverage risk, every US ETF by theme, new fund filings and trending coins with "what to check" lists, hype terms explained, and Practice positions with pretend money ([DEC-0018](docs/decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)). Real trading needs legal work first ([DEC-0019](docs/decisions/0019-real-trading-later-what-it-would-legally-take.md)).
+- Engine: `parity markets fetch|status|export` from CoinGecko, Hyperliquid and SEC EDGAR, no keys ([REF-0014](docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)).
+- Glossary: 21 "New products and hype terms" with a "what can go wrong" line.
 - Dashboard: Scenarios page (`#/scenarios`). Describe a made-up event and see what oil, currencies, stocks, the VIX and US rates did after similar past events; looks backwards only, does not predict.
 - Engine: `parity scenario` lists past events like a made-up one (76 sourced events in `catalog/events/`) with the median, middle half and hit rate of what followed; `parity scenario export` feeds the page. Method and limits in REF-0011.
 - News page (`#/news`): newest headlines from central banks, US statistics offices, regulators and GDELT, tagged by currency, commodity, region and kind, each with the market move after it as a signed change and a z-score; an article drawer with the price path; and the biggest market days since 1999 ([REF-0013](docs/reference/0013-news-sources-and-market-impact.md)).

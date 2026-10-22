@@ -1,6 +1,6 @@
 // Markets, on the product side: crypto, perps, ETFs, new and trending, the hype terms
 // explained, and practice positions. Everything shows data with its date and source,
-// ranks by size or date and never by gains, and never says "buy" (DEC-0015, DEC-0016).
+// ranks by size or date and never by gains, and never says "buy" (DEC-0015, DEC-0018).
 import { Title } from "../../components/Shell";
 import { Tabs } from "../../ui";
 import { Icon } from "../../ui/icons";

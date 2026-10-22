@@ -78,6 +78,7 @@ function TermCard({ term, initial, focused }: { term: GlossaryTerm; initial: Vie
         <Tabs value={view} onChange={setView} label={`Explain ${term.term} as`} />
       </header>
       <p>{term[view]}</p>
+      {term.risk && <p className="related"><strong>What can go wrong:</strong> {term.risk}</p>}
       {term.related && term.related.length > 0 && (
         <p className="related">
           Related:{" "}

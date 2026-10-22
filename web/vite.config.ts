@@ -21,6 +21,14 @@ function localResults(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
+      // `parity markets export ../engine/output` writes the Markets pages' files here.
+      server.middlewares.use("/local/markets", (req, res, next) => {
+        const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        const path = resolve(import.meta.dirname, "../engine/output/markets", name);
+        if (!/^[a-z]+\.json$/.test(name) || !existsSync(path)) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
       // `parity search export` writes the strategy search's results here (DEC-0014).
       server.middlewares.use("/local/search.json", (_req, res, next) => {
         const path = resolve(import.meta.dirname, "../engine/output/search.json");

@@ -3716,7 +3716,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/crypto-perp-funding-carry.json",
-        "docs/algorithms/0026-crypto-perp-funding-carry.md"
+        "docs/algorithms/0026-crypto-perp-funding-carry.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
         "source": "arxiv",
@@ -15761,6 +15762,7 @@
       "used_in": [
         "catalog/datasets/coingecko.json",
         "docs/datasets/0008-coingecko.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -20784,7 +20786,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/sec-press.json",
-        "docs/datasets/0046-sec-press.md"
+        "docs/datasets/0046-sec-press.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
         "source": "repo",
@@ -21713,6 +21716,605 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "bendavid2022",
+      "type": "paper",
+      "authors": [
+        "Ben-David, Itzhak",
+        "Franzoni, Francesco",
+        "Kim, Byungwook",
+        "Moussawi, Rabih"
+      ],
+      "year": 2022,
+      "title": "Competition for Attention in the ETF Space",
+      "venue": "The Review of Financial Studies 36(3), 987-1042",
+      "doi": "10.1093/rfs/hhac048",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhac048",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "israelov2015",
+      "type": "paper",
+      "authors": [
+        "Israelov, Roni",
+        "Nielsen, Lars N."
+      ],
+      "year": 2015,
+      "title": "Covered Calls Uncovered",
+      "venue": "Financial Analysts Journal 71(6), 44-57",
+      "doi": "10.2469/faj.v71.n6.1",
+      "arxiv": null,
+      "url": "https://doi.org/10.2469/faj.v71.n6.1",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "url-0225a9e2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Proof-of-stake rewards and penalties",
+      "venue": "ethereum.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0aeb5ec9",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken global terms of service",
+      "venue": "Kraken",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/legal/global-terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-160f511d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Expense ratio (glossary)",
+      "venue": "Investor.gov, US SEC",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/expense-ratio",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2af24e32",
+      "type": "regulator",
+      "authors": [],
+      "year": 2024,
+      "title": "CFTC issues proposal on event contracts",
+      "venue": "Commodity Futures Trading Commission, release 8907-24",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/8907-24",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2cab213b",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "EDGAR full-text search API",
+      "venue": "US SEC",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://efts.sec.gov/LATEST/search-index?forms=N-1A",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3a272a6d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Funding",
+      "venue": "Hyperliquid docs",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4c39b66e",
+      "type": "regulator",
+      "authors": [],
+      "year": 2024,
+      "title": "Statement on the approval of spot bitcoin exchange-traded products",
+      "venue": "US SEC, Chair Gary Gensler",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/speeches-statements/gensler-statement-spot-bitcoin-011023",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5d1b2a46",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Liquidations",
+      "venue": "Hyperliquid docs",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5ea2b559",
+      "type": "regulator",
+      "authors": [],
+      "year": 2009,
+      "title": "Regulatory Notice 09-31: non-traditional ETFs",
+      "venue": "FINRA",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/notices/09-31",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7a0fda7c",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Layr-Labs/eigenlayer-contracts",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/Layr-Labs/eigenlayer-contracts",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7f3d77da",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "CFTC glossary",
+      "venue": "Commodity Futures Trading Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/LearnAndProtect/EducationCenter/CFTCGlossary/index.htm",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-872a8986",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Defined Outcome ETFs",
+      "venue": "Innovator ETFs",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.innovatoretfs.com/define/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-894d16a5",
+      "type": "regulator",
+      "authors": [],
+      "year": 2025,
+      "title": "Statement on certain protocol staking activities",
+      "venue": "US SEC, Division of Corporation Finance",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/speeches-statements/statement-certain-protocol-staking-activities-052925",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8bbde07f",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Company tickers and exchanges",
+      "venue": "US SEC",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9260d794",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hyperliquid public info API",
+      "venue": "Hyperliquid",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://api.hyperliquid.xyz/info",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9f635241",
+      "type": "regulator",
+      "authors": [],
+      "year": 2025,
+      "title": "Staff statement on meme coins",
+      "venue": "US SEC, Division of Corporation Finance",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aedff13b",
+      "type": "web-page",
+      "authors": [],
+      "year": 2025,
+      "title": "CoinGecko API terms of service",
+      "venue": "CoinGecko",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.coingecko.com/en/api_terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b1e6b3cc",
+      "type": "web-page",
+      "authors": [],
+      "year": 2025,
+      "title": "The next-generation monetary and financial system",
+      "venue": "BIS Annual Economic Report 2025, chapter III",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bis.org/publ/arpdf/ar2025e3.htm",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b9f70980",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Net asset value (glossary)",
+      "venue": "Investor.gov, US SEC",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/net-asset-value",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d02d51d7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "0DTE options",
+      "venue": "Cboe",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cboe.com/tradable-products/0dte",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d21de22a",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/files/investment/data/other/investment-company-series-class-information/investment-company-series-class-2026.csv",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d4e80b34",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Hyperliquid terms of use",
+      "venue": "Hyperliquid",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://app.hyperliquid.xyz/terms",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d70bc25d",
+      "type": "web-page",
+      "authors": [],
+      "year": 2019,
+      "title": "Revenue Ruling 2019-24",
+      "venue": "Internal Revenue Service",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.irs.gov/pub/irs-drop/rr-19-24.pdf",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-eb6a0b68",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase market data terms",
+      "venue": "Coinbase",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.coinbase.com/legal/market_data",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff98aae3",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Privacy and dissemination of information",
+      "venue": "US SEC",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/privacy",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "wolfers2004",
+      "type": "paper",
+      "authors": [
+        "Wolfers, Justin",
+        "Zitzewitz, Eric"
+      ],
+      "year": 2004,
+      "title": "Prediction Markets",
+      "venue": "Journal of Economic Perspectives 18(2), 107-126",
+      "doi": "10.1257/0895330041371321",
+      "arxiv": null,
+      "url": "https://doi.org/10.1257/0895330041371321",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
       }
     }
   ]

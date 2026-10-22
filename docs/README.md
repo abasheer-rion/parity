@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 17 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 19 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 13 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 14 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 7 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-22 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- 2026-10-22 [DEC-0019: Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md)
+- 2026-10-22 [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - 2026-10-22 [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - 2026-10-22 [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
-- 2026-10-22 [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
-- 2026-10-22 [DEC-0014: A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md)
-- 2026-10-21 [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
-- 2026-10-21 [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 
 ## intent
 
@@ -66,6 +66,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0015 | [Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0016 | [Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0017 | [Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
+| DEC-0018 | [Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md) | accepted | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| DEC-0019 | [Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md) | proposed | 2026-10-22 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 
 ## hypothesis
 
@@ -119,7 +121,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | REF-0001 | [Architecture](reference/0001-architecture.md) | current | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0002 | [KPIs and how to read them](reference/0002-kpis.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
-| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-20 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0004 | [Glossary](reference/0004-glossary.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
@@ -130,6 +132,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
+| REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 
 ## log
 

@@ -81,24 +81,24 @@ SOURCES: list[Source] = [
            "https://app.hyperliquid.xyz/terms", "Public info API, no key; terms have no "
            "data clause; the app is not offered to US persons", "ask",
            "Perpetual futures data from Hyperliquid's public API", "https://hyperliquid.xyz",
-           max_age_hours=1, catalog="hyperliquid"),
+           max_age_hours=1),
     Source("hyperliquid-funding", "Hyperliquid funding history", "Hyperliquid",
            "Hourly funding rates for the major perps over the last 30 days",
            "https://app.hyperliquid.xyz/terms", "Public info API, no key", "ask",
            "Perpetual futures data from Hyperliquid's public API", "https://hyperliquid.xyz",
-           max_age_hours=6, catalog="hyperliquid"),
+           max_age_hours=6),
     Source("sec-funds", "SEC fund series and classes", "US Securities and Exchange Commission",
            "Every registered fund series and share class with a ticker, plus exchange-listed "
            "trusts such as spot bitcoin ETFs", "https://www.sec.gov/privacy#dissemination",
            "Public information; may be copied or distributed; cite the SEC", "yes",
            "Source: SEC EDGAR", "https://www.sec.gov/edgar", needs_contact=True,
-           max_age_hours=24, catalog="sec-edgar-funds"),
+           max_age_hours=24),
     Source("sec-filings", "SEC new fund filings", "US Securities and Exchange Commission",
            "New fund registrations (N-1A), new fund series (485APOS) and trust "
            "registrations such as spot crypto ETFs (S-1), last 60 days",
            "https://www.sec.gov/privacy#dissemination", "Public information; cite the SEC",
            "yes", "Source: SEC EDGAR", "https://www.sec.gov/edgar", needs_contact=True,
-           max_age_hours=6, catalog="sec-edgar-funds"),
+           max_age_hours=6),
 ]
 BY_ID = {s.id: s for s in SOURCES}
 

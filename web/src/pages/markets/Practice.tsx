@@ -1,6 +1,6 @@
 // Practice: follow a coin or an ETF with a pretend amount and watch what it would be
 // worth. No real money, no orders, nothing leaves this browser. Real trading is a
-// future decision for the owner (DEC-0016) and needs licensed partners first.
+// future decision for the owner (DEC-0018) and needs licensed partners first.
 import { useEffect, useState } from "react";
 import { Button } from "../../ui";
 import { Term } from "../Learn";
@@ -111,7 +111,7 @@ export function Practice() {
 
       <section className="mk-card" style={{ marginTop: 14 }}>
         <h2>Free to trade, later</h2>
-        <p className="small">We want Parity to be free to research now and, one day, free to trade. Real trading needs a licensed broker partner, identity checks and crypto licences first, and Parity must not give anyone personal advice. Until that work is done and the owner decides, practice is all there is. The plan is in the research docs (DEC-0016).</p>
+        <p className="small">We want Parity to be free to research now and, one day, free to trade. Real trading needs a licensed broker partner, identity checks and crypto licences first, and Parity must not give anyone personal advice. Until that work is done and the owner decides, practice is all there is. The plan is in the research docs (DEC-0018).</p>
       </section>
     </>
   );
