@@ -6,7 +6,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { algorithms } from "../lib/catalog";
 import { termById, terms } from "../lib/glossary";
 import { search, useDocs } from "../lib/docs";
-import { searchPages } from "../lib/pages";
+import { linkTo, searchPages } from "../lib/pages";
+import { SPACE } from "../lib/space";
 import { nameOf, verdictOf } from "../lib/strategyMeta";
 import { num, pct } from "../lib/format";
 import type { Report, StrategyRun } from "../lib/types";
@@ -111,7 +112,10 @@ export function Palette({ report = null }: { report?: Report | null }) {
   // For a question, search on its subject so "what is carry" also lists carry results.
   const subject = query.replace(/^(?:what is|what's|whats|what are|define|meaning of|explain)\s+(?:an?\s+|the\s+)?/, "");
   const items: Item[] = subject.length < 2 ? [] : [
-    ...searchPages(subject).map(({ page, score }) => ({ key: `p:${page.href}`, href: page.href, kind: "page", title: page.title, sub: page.what, score })),
+    ...searchPages(subject).map(({ page, score }) => ({
+      key: `p:${page.space}:${page.href}`, href: linkTo(page), kind: "page", title: page.title, score,
+      sub: page.space !== "both" && page.space !== SPACE ? `${page.space === "research" ? "Research" : "Product"} · ${page.what}` : page.what,
+    })),
     ...strategyItems(report, subject),
     ...ideaItems(subject),
     ...(data ? search(data, terms, subject, 12) : []).map((h) => ({
@@ -123,7 +127,8 @@ export function Palette({ report = null }: { report?: Report | null }) {
   const go = (i: number) => {
     const href = ans ? (i === 0 ? ans.href : items[i - 1]?.href) : items[i]?.href;
     if (!href) return;
-    window.location.hash = href;
+    if (href.startsWith("#")) window.location.hash = href;
+    else window.location.href = href;
     setOpen(false);
   };
   const total = items.length + (ans ? 1 : 0);

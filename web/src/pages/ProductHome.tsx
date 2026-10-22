@@ -1,0 +1,149 @@
+// Product home, in the spirit of Public's: your watchlist first, then strategies worth
+// a look, a plain-words box for asking, "what if", and how this year is going. Every
+// number shown here comes from the research side's gauntlet, with its verdict; the
+// product never shows search leads or ranks on return alone (DEC-0015).
+import { useMemo } from "react";
+import { Sparkline } from "../ui/charts";
+import { Icon } from "../ui/icons";
+import { Badge } from "../ui";
+import { colorMap } from "../lib/colors";
+import { pct, signedPct } from "../lib/format";
+import { usePrefs } from "../lib/prefs";
+import { nameOf, tagsOf, verdictOf } from "../lib/strategyMeta";
+import type { Report, StrategyRun } from "../lib/types";
+
+const THEMES: { label: string; q: string; icon: string; what: string }[] = [
+  { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value in the world's money" },
+  { label: "Stock timing", q: "stock", icon: "chart", what: "When to be in the market and when to step out" },
+  { label: "Industries", q: "industr", icon: "catalog", what: "Rotating between US industries" },
+  { label: "Factors", q: "factor", icon: "flask", what: "Value, momentum, quality and size" },
+  { label: "Stocks and bonds", q: "bond", icon: "ledger", what: "Balanced mixes like 60/40 and risk parity" },
+  { label: "Oil and gas", q: "oil", icon: "pulse", what: "Commodities, trends and seasons" },
+];
+
+const ORDER: Record<string, number> = { Passed: 3, Promising: 2, "Not proven": 1 };
+
+function ytd(r: StrategyRun): number | null {
+  const years = Object.keys(r.yearly).sort();
+  return years.length ? r.yearly[years[years.length - 1]] : null;
+}
+
+export function ProductHome({ report, email }: { report: Report; email?: string | null }) {
+  const prefs = usePrefs();
+  const colors = colorMap(report.runs);
+  const bench = report.runs.find((r) => r.is_benchmark);
+  const tested = report.runs.filter((r) => !r.is_benchmark && r.gauntlet);
+  const followed = useMemo(() => {
+    const ids = prefs.bookmarks.filter((b) => b.href.startsWith("#/strategy/")).map((b) => decodeURIComponent(b.href.slice(11)));
+    return report.runs.filter((r) => ids.includes(r.strategy));
+  }, [prefs.bookmarks, report.runs]);
+  // Worth a look: best verdict first, then the luck check, never raw return.
+  const picks = [...tested].sort((a, b) => (ORDER[verdictOf(b).label] ?? 0) - (ORDER[verdictOf(a).label] ?? 0)
+    || (b.metrics.deflated_sharpe ?? 0) - (a.metrics.deflated_sharpe ?? 0)).slice(0, 6);
+  const year = bench ? Object.keys(bench.yearly).sort().slice(-1)[0] : undefined;
+  const movers = [...tested].filter((r) => ytd(r) != null).sort((a, b) => (ytd(b) ?? 0) - (ytd(a) ?? 0));
+  const beating = tested.filter((r) => r.gauntlet?.beats_sp500).length;
+  const first = email ? email.split("@")[0].replace(/[._-].*$/, "") : "";
+
+  return (
+    <div className="phome">
+      <section className="phome-hero">
+        <div>
+          <h1>{first ? `Hi ${first[0].toUpperCase()}${first.slice(1)}` : "Welcome"}</h1>
+          <p className="muted">{tested.length} strategies tested the same honest way. {beating === 0 ? "None beats simply holding the US market yet." : `${beating} beat simply holding the US market.`}</p>
+        </div>
+        <button className="ask" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
+          <Icon name="sparkle" size={16} />
+          <span>Ask anything: "what is carry", "best strategy", "does anything beat the market"</span>
+        </button>
+      </section>
+
+      <div className="phome-grid">
+        <section className="pcard">
+          <div className="pcard-head"><h2>Watchlist</h2><a href="#/watchlist">See all</a></div>
+          {followed.length === 0 ? (
+            <p className="muted small">Follow a strategy with the bookmark button on its page and it shows up here.</p>
+          ) : (
+            <ul className="plist">{followed.slice(0, 6).map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} />)}</ul>
+          )}
+          {bench && (
+            <div className="bench-line">
+              <span>US stock market, {year}</span>
+              <strong className={(ytd(bench) ?? 0) >= 0 ? "good" : "bad"}>{signedPct(ytd(bench))}</strong>
+            </div>
+          )}
+        </section>
+
+        <section className="pcard">
+          <div className="pcard-head"><h2>Worth a look</h2><a href="#/strategies">Discover</a></div>
+          <p className="muted small">Ranked by how well they held up in testing, not by how much they made.</p>
+          <ul className="plist">{picks.map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} showVerdict />)}</ul>
+        </section>
+
+        <section className="pcard span2">
+          <div className="pcard-head"><h2>Explore by theme</h2></div>
+          <div className="themes">
+            {THEMES.map((t) => (
+              <a key={t.label} className="theme" href={`#/strategies?q=${encodeURIComponent(t.q)}`}>
+                <Icon name={t.icon} size={16} />
+                <strong>{t.label}</strong>
+                <span className="muted small">{t.what}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="pcard">
+          <div className="pcard-head"><h2>What if</h2><a href="#/scenarios">Try one</a></div>
+          <p className="small">Describe an event, like a war, a rate hike or an oil shock, and see what markets did after similar ones in the past.</p>
+          <div className="chips">
+            {["Oil supply shock", "Surprise rate hike", "War in a major economy", "Bank failure"].map((s) => (
+              <a key={s} className="chip" href="#/scenarios">{s}</a>
+            ))}
+          </div>
+        </section>
+
+        <section className="pcard">
+          <div className="pcard-head"><h2>{year ?? "This year"} so far</h2><a href="#/compare">Compare</a></div>
+          <ul className="plist">
+            {movers.slice(0, 3).map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} />)}
+          </ul>
+          <div className="muted small divider-label">Weakest</div>
+          <ul className="plist">
+            {movers.slice(-2).reverse().map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} />)}
+          </ul>
+        </section>
+
+        <section className="pcard span2 build">
+          <div>
+            <h2>Build a strategy by describing it <Badge tone="accent">Coming next</Badge></h2>
+            <p className="muted small">Type an idea in plain words, like "own the strongest currencies but step aside when fear is high", and Parity will turn it into a strategy, test it the same way as every other, and explain the result. Until then, try settings on an existing one.</p>
+          </div>
+          <a className="btn-primary" href="#/lab">Try settings</a>
+        </section>
+      </div>
+      <p className="muted small phome-foot">
+        Research, not investment advice. Results are backtests after trading costs; the past does not promise the future.
+        Results come from the <a href="/research/">research side</a>, kept separate on purpose: <a href="#/how">how Parity works</a>.
+      </p>
+    </div>
+  );
+}
+
+function Row({ r, color, showVerdict }: { r: StrategyRun; color: string; showVerdict?: boolean }) {
+  const v = verdictOf(r);
+  const y = ytd(r);
+  return (
+    <li>
+      <a href={`#/strategy/${r.strategy}`}>
+        <span className="acct-dot" style={{ background: color }} />
+        <span className="pname">
+          <span>{nameOf(r)}</span>
+          <span className="muted small">{showVerdict ? tagsOf(r).style || tagsOf(r).family : `${pct(r.metrics.cagr)} a year`}</span>
+        </span>
+        <Sparkline points={r.equity} width={64} height={24} />
+        {showVerdict ? <Badge tone={v.tone}>{v.label}</Badge> : <span className={`pval ${(y ?? 0) >= 0 ? "good" : "bad"}`}>{signedPct(y)}</span>}
+      </a>
+    </li>
+  );
+}

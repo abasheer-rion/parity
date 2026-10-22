@@ -51,5 +51,6 @@ Parity started as a research project asking whether a currency strategy can beat
 
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](../decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
 - [DEC-0014: A strategy factory and an always-on search](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)
+- [DEC-0015: Two sides, a product app and a research app, kept apart](../decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [LOG-0006: Ayan work log, merges, domain, email and the two product plan](../log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 <!-- backlinks:end -->

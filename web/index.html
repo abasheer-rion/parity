@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Parity tests currency trading strategies against the S&amp;P 500, honestly and in the open." />
+    <meta name="description" content="Discover and follow trading strategies, each tested honestly against the S&amp;P 500, with an open research side behind every result." />
     <meta name="theme-color" content="#10101a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>Parity: can a currency strategy beat the S&amp;P 500?</title>
+    <title>Parity: trading strategies, tested honestly</title>
     <!-- The public front page. Plain HTML and CSS, no script, so it loads instantly. -->
     <style>
       :root { color-scheme: dark; --bg: #10101a; --card: #171721; --line: #26263a; --text: #ececf4; --muted: #9b9db2; --blue: #2f6bff; }
@@ -37,6 +37,43 @@
       .points p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
       footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
       footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 28px; }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; padding: 72px 0 48px; }
+      .hero-grid .hero { padding: 0; }
+      .eyebrow { color: var(--blue); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+      .demo { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 30px 60px rgb(0 0 0 / 0.35); }
+      .demo .tag { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+      .demo h3 { margin: 6px 0 2px; font-size: 18px; }
+      .demo .row { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); padding: 8px 0; border-top: 1px solid var(--line); }
+      .demo .row strong { color: var(--text); font-weight: 500; }
+      .badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: rgb(47 107 255 / 0.18); color: #9bb8ff; }
+      .demo svg { width: 100%; height: 72px; margin: 10px 0 6px; }
+      .ask { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; color: var(--muted); font-size: 14px; }
+      .section { padding: 56px 0; border-top: 1px solid var(--line); }
+      .section > h2 { font-size: clamp(24px, 3.4vw, 34px); margin: 0 0 8px; letter-spacing: -0.01em; }
+      .section > p.sub { color: var(--muted); margin: 0 0 28px; max-width: 640px; }
+      .doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .door { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+      .door h3 { margin: 0; font-size: 22px; }
+      .door .who { color: var(--blue); font-size: 13px; font-weight: 600; }
+      .door p { margin: 0; color: var(--muted); }
+      .door ul { margin: 4px 0 8px; padding-left: 18px; color: var(--text); font-size: 15px; }
+      .door .btn { align-self: flex-start; margin-top: auto; }
+      .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
+      .wall li { border-left: 2px solid var(--blue); padding: 4px 0 4px 16px; }
+      .wall strong { display: block; margin-bottom: 4px; }
+      .wall span { color: var(--muted); font-size: 15px; }
+      .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; counter-reset: s; }
+      .steps li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; counter-increment: s; }
+      .steps li::before { content: counter(s); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 12px; margin-bottom: 10px; }
+      .steps strong { display: block; }
+      .steps span { color: var(--muted); font-size: 14px; }
+      .closing { text-align: center; padding: 64px 0 80px; }
+      .closing h2 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 12px; }
+      .closing .cta { justify-content: center; }
+      @media (max-width: 860px) {
+        .hero-grid, .doors, .wall, .steps { grid-template-columns: minmax(0, 1fr); }
+        .hero-grid { padding: 40px 0 24px; gap: 28px; }
+      }
       @media (max-width: 720px) {
         .hero { padding: 48px 0 32px; }
         .points { grid-template-columns: 1fr; padding-bottom: 48px; }
@@ -49,29 +86,96 @@
       <div class="wrap">
         <a class="brand" href="/"><img src="/brand/2026-10-21-starburst/parity-icon-dark.svg" width="32" height="32" alt="" />Parity</a>
         <nav>
+          <a class="btn" href="#sides">Product and research</a>
           <a class="btn" href="/login/">Log in</a>
           <a class="btn primary" href="/signup/">Sign up</a>
         </nav>
       </div>
     </header>
     <main class="wrap">
-      <section class="hero">
-        <h1>Can a currency strategy beat the S&amp;P&nbsp;500?</h1>
-        <p class="lead">Parity is an open research project that puts trading ideas to a fair, public test, and shows you every result, including the ones that fail.</p>
+      <div class="hero-grid">
+        <section class="hero">
+          <div class="eyebrow">Strategies, tested honestly</div>
+          <h1>See which trading ideas really work, in plain words.</h1>
+          <p class="lead">Discover and follow strategies across currencies, stocks, bonds and commodities. Every one is tested the same hard way, after costs, against simply holding the US stock market, and the failures are shown too.</p>
+          <div class="cta">
+            <a class="btn primary lg" href="/signup/">Sign up free</a>
+            <a class="btn lg" href="#how">How it works</a>
+          </div>
+        </section>
+        <aside class="demo" aria-label="An example strategy card">
+          <div class="tag">Example from the research</div>
+          <h3>Stock trend, 10-month</h3>
+          <span class="badge">Promising</span>
+          <svg viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#3fbf7f" stroke-width="2" points="0,64 30,60 60,58 90,52 120,54 150,44 180,40 210,30 240,26 270,14 300,8" /><polyline fill="none" stroke="#6b6d85" stroke-width="1.5" points="0,64 30,58 60,66 90,60 120,62 150,52 180,56 210,40 240,38 270,24 300,18" /></svg>
+          <div class="row"><span>Tests passed</span><strong>7 of 11</strong></div>
+          <div class="row"><span>Beats the market after costs</span><strong>Not yet</strong></div>
+          <div class="row"><span>Worst fall</span><strong>-22% vs -55% for the market</strong></div>
+          <div class="ask">Ask: "why does it miss the 0.95 luck check?"</div>
+        </aside>
+      </div>
+
+      <section class="section" id="sides">
+        <h2>Two sides, kept apart on purpose</h2>
+        <p class="sub">One side makes the results. The other shows them. Keeping them separate stops what is popular from shaping what we find.</p>
+        <div class="doors">
+          <div class="door">
+            <div class="who">For everyone</div>
+            <h3>The Parity app</h3>
+            <p>Find, follow and understand strategies, as easily as a modern investing app, with tools to test your own ideas.</p>
+            <ul>
+              <li>Discover strategies by theme, with a verdict on each</li>
+              <li>A watchlist, side-by-side comparisons and "what if" scenarios</li>
+              <li>Coming next: describe a strategy in plain words and have it tested</li>
+            </ul>
+            <a class="btn primary" href="/app/">Open the app</a>
+          </div>
+          <div class="door">
+            <div class="who">For the curious and the sceptical</div>
+            <h3>Parity Research</h3>
+            <p>Where every result is made, in the open: the reasoning, the tests, and a sealed record of what counts.</p>
+            <ul>
+              <li>Decisions, hypotheses and reading notes, with previews on every word</li>
+              <li>An always-on search trying thousands of variations a day</li>
+              <li>An official record that cannot be quietly edited</li>
+            </ul>
+            <a class="btn" href="/research/">Open research</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>The wall between them</h2>
+        <p class="sub">Three rules keep the results honest.</p>
+        <ul class="wall">
+          <li><strong>Research decides, the app presents.</strong><span>Every number in the app comes from research, with its verdict next to it.</span></li>
+          <li><strong>Popularity never counts.</strong><span>Sign-ups, watchlists and clicks never reach the research side or any test.</span></li>
+          <li><strong>Every try is counted.</strong><span>The more ideas tested, the higher the bar each must clear. Searching harder cannot make a winner.</span></li>
+        </ul>
+      </section>
+
+      <section class="section" id="how">
+        <h2>How an idea becomes a result</h2>
+        <p class="sub">The same path for every strategy, whoever thought of it.</p>
+        <ol class="steps">
+          <li><strong>An idea</strong><span>From a paper, a trader's practice, or the always-on search.</span></li>
+          <li><strong>Written down first</strong><span>What we expect, and what would prove it wrong, before any test.</span></li>
+          <li><strong>The gauntlet</strong><span>Costs, other periods, other settings, and a check for luck.</span></li>
+          <li><strong>Shown with its verdict</strong><span>In plain words, claiming no more than the research found.</span></li>
+        </ol>
+      </section>
+
+      <section class="closing">
+        <h2>Start with the truth about a strategy.</h2>
         <div class="cta">
           <a class="btn primary lg" href="/signup/">Sign up free</a>
           <a class="btn lg" href="/login/">Log in</a>
         </div>
       </section>
-      <ul class="points">
-        <li><h2>Tested the hard way</h2><p>Every strategy runs through the same checks, after trading costs, against simply holding the S&amp;P 500.</p></li>
-        <li><h2>Watch them race</h2><p>Sim World replays the strategies side by side over decades of real market data.</p></li>
-        <li><h2>Ask what if</h2><p>Describe an event and see how markets moved after similar moments in the past.</p></li>
-      </ul>
     </main>
     <footer>
       <div class="wrap">
-        <span>Research only, not investment advice.</span>
+        <span>Research, not investment advice. Results are backtests after costs; the past does not promise the future.</span>
         <span>&copy; 2026 Parity</span>
       </div>
     </footer>

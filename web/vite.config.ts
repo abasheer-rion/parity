@@ -90,6 +90,7 @@ export default defineConfig(({ command, mode }) => ({
         emptyOutDir: false,
         assetsDir: "app/assets",
         copyPublicDir: false,
-        rollupOptions: { input: { app: here("app/index.html") } },
+        // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research.
+        rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") } },
       },
 }));
