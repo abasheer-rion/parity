@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 13 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 5 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 6 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -135,6 +135,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0003 | [Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md) | final | 2026-10-20 | [benchmark](TAGS.md#benchmark), [data](TAGS.md#data), [method](TAGS.md#method) |
 | LOG-0004 | [Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md) | final | 2026-10-21 | [intent](TAGS.md#intent), [process](TAGS.md#process) |
 | LOG-0005 | [Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md) | final | 2026-10-21 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0006 | [Ayan work log, merges, domain, email and the two product plan](log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md) | final | 2026-10-21 | [process](TAGS.md#process) |
 
 ## algorithm
 

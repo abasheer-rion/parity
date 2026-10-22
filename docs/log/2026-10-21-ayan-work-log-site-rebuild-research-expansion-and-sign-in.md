@@ -66,4 +66,5 @@ What was merged into main, in order: the reader and UI library; the Mercury fram
 ## Referenced by
 
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
+- [LOG-0006: Ayan work log, merges, domain, email and the two product plan](2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 <!-- backlinks:end -->
