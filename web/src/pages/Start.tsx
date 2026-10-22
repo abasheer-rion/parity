@@ -3,17 +3,22 @@
 import { Title } from "../components/Shell";
 import { pct, num } from "../lib/format";
 import { pageByHref } from "../lib/pages";
+import { SPACE } from "../lib/space";
 import type { Report } from "../lib/types";
 import { Badge } from "../ui";
 import { Icon } from "../ui/icons";
 import { Term } from "./Learn";
 
-const JOBS: { title: string; icon: string; pages: string[] }[] = [
-  { title: "Find out what works", icon: "chart", pages: ["#/strategies", "#/search", "#/compare", "#/"] },
+// What each side is for, as jobs (DEC-0015). Only pages on this side are listed.
+const JOBS: { title: string; icon: string; pages: string[] }[] = SPACE === "research" ? [
+  { title: "See where the research stands", icon: "home", pages: ["#/", "#/ledger", "#/how"] },
+  { title: "Read the reasoning", icon: "book", pages: ["#/docs", "#/refs", "#/learn"] },
+  { title: "Look for new leads", icon: "search", pages: ["#/search", "#/catalog", "#/sim"] },
+  { title: "Check a result holds up", icon: "checkCircle", pages: ["#/signals", "#/explore", "#/data", "#/sources"] },
+] : [
+  { title: "Find strategies", icon: "chart", pages: ["#/strategies", "#/watchlist", "#/compare"] },
   { title: "Ask \"what if\"", icon: "pulse", pages: ["#/scenarios", "#/news", "#/news/history"] },
-  { title: "Understand a word or a result", icon: "book", pages: ["#/learn", "#/docs", "#/refs"] },
-  { title: "Check a result holds up", icon: "checkCircle", pages: ["#/ledger", "#/lab", "#/signals", "#/data"] },
-  { title: "Find the next idea", icon: "catalog", pages: ["#/catalog", "#/sources", "#/explore"] },
+  { title: "Understand", icon: "book", pages: ["#/learn", "#/how", "#/lab"] },
 ];
 
 type M = Report["runs"][number]["metrics"];

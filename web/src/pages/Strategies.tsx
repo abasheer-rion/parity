@@ -1,6 +1,6 @@
 // Every strategy in one list, Robinhood watchlist style (name, a small chart, the
 // move over the chosen range) in Mercury's table, with filters for the family.
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { colorMap } from "../lib/colors";
 import { usePrefs } from "../lib/prefs";
@@ -16,7 +16,7 @@ function move(r: StrategyRun, range: RangeKey): number | null {
 
 const FAMILY = (r: StrategyRun) => (r.is_benchmark ? "benchmark" : r.strategy.startsWith("fx_") ? "fx" : r.strategy.startsWith("stocks_") ? "stocks" : "other");
 
-export function Strategies({ report }: { report: Report }) {
+export function Strategies({ report, query }: { report: Report; query?: string }) {
   const prefs = usePrefs();
   const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
   const colors = colorMap(report.runs);
@@ -25,7 +25,9 @@ export function Strategies({ report }: { report: Report }) {
     { id: "stocks", label: "Stocks", test: (r: StrategyRun) => r.is_benchmark || FAMILY(r) === "stocks" },
     { id: "positive", label: "Positive Sharpe", test: (r: StrategyRun) => r.is_benchmark || (r.metrics.sharpe ?? 0) > 0 },
   ], []);
-  const f = useFilters(report.runs, defs, (r) => `${nameOf(r)} ${r.strategy}`);
+  const f = useFilters(report.runs, defs, (r) => `${nameOf(r)} ${r.strategy} ${r.description ?? ""} ${r.summary}`);
+  // Home's theme links open this page with a search already typed in.
+  useEffect(() => { if (query) f.setQuery(query); }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const columns: Column<StrategyRun>[] = [
     {
@@ -54,7 +56,7 @@ export function Strategies({ report }: { report: Report }) {
 
   return (
     <>
-      <Title>Strategies</Title>
+      <Title label="Discover">Discover strategies</Title>
       <p className="page-purpose">
         Every strategy we have tested, after trading costs, against simply holding the US stock market (pinned at the
         top). Click a row for the full story. The verdict says whether it held up; <a href="#/start">Start here</a> explains

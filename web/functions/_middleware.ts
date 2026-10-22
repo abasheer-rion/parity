@@ -19,7 +19,7 @@ interface Context {
   next: () => Promise<Response>;
 }
 
-const PROTECTED = [/^\/app(\/|$)/, /^\/data\//];
+const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/data\//];
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);

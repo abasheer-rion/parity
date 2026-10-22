@@ -29,6 +29,11 @@ import { UILibrary } from "./pages/UILibrary";
 import { Toaster } from "./ui";
 import { Signals } from "./pages/Signals";
 import { Start } from "./pages/Start";
+import { HowItWorks } from "./pages/HowItWorks";
+import { ProductHome } from "./pages/ProductHome";
+import { ResearchHome } from "./pages/ResearchHome";
+import { Watchlist } from "./pages/Watchlist";
+import { otherSide, SPACE, SPACE_ROOT } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 
@@ -51,7 +56,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["start", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
+const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -79,6 +84,10 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   const q = new URLSearchParams(query).get("q") ?? undefined;
   const standalone = STANDALONE.includes(route);
   const dec = (s?: string) => (s ? decodeURIComponent(s) : undefined);
+  // A page from the other side of Parity opens there instead (DEC-0015).
+  const away = otherSide(route);
+  useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
+  if (away) return null;
 
   const runPicker = (
     <>
@@ -93,11 +102,12 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   );
 
   return (
-    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"} full={route === "" || route === "home"}>
+    <Shell route={route} arg={arg} hash={hash} top={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"} full={route === "sim"}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
       {route === "start" && <Start report={report} />}
+      {route === "how" && <HowItWorks />}
       {route === "search" && <Search />}
       {route === "ui" && <UILibrary section={arg} />}
       {route === "scenarios" && <Scenarios />}
@@ -117,12 +127,15 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
           {route === "compare" ? <Compare report={report} /> :
             route === "lab" ? <Lab report={report} /> :
             route === "explore" ? <Explore report={report} /> :
-            route === "strategies" ? <Strategies report={report} /> :
+            route === "strategies" ? <Strategies report={report} query={q} /> :
             route === "strategy" && arg ? <StrategyPage report={report} name={dec(arg)!} /> :
             route === "signals" ? <Signals report={report} /> :
             route === "data" ? <DataPage report={report} /> :
             route === "overview" ? <Overview report={report} email={email} /> :
-            <SimWorld report={report} />}
+            route === "sim" ? <SimWorld report={report} /> :
+            route === "watchlist" ? <Watchlist report={report} /> :
+            SPACE === "research" ? <ResearchHome report={report} /> :
+            <ProductHome report={report} email={email} />}
           <footer className="muted small">
             {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
             {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
