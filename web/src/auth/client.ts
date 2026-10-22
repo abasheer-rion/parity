@@ -8,6 +8,10 @@ import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./config";
 export const supabase = createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   cookieOptions: {
     path: "/",
+    // On endyland.com the session is shared by parity.endyland.com and sim.endyland.com,
+    // so opening Sim World in its own tab needs no second sign-in. Elsewhere (pages.dev,
+    // localhost) the cookie stays on the one host.
+    ...(window.location.hostname.endsWith(".endyland.com") ? { domain: ".endyland.com" } : {}),
     sameSite: "lax",
     secure: window.location.protocol === "https:",
     maxAge: 60 * 60 * 24 * 30,
