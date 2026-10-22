@@ -15,7 +15,8 @@
 .mk-card h2, .mk-card h3 { font-size: 15px; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .mk-card p { margin: 4px 0; }
 .mk-card.span2 { grid-column: span 2; }
-.mk-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.mk-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.mk-card-head > h2 { flex: 1 1 200px; min-width: 0; }
 .mk-card-head a { font-size: 13px; white-space: nowrap; }
 .mk-door { display: grid; gap: 4px; text-decoration: none; color: var(--text); }
 .mk-door:hover { border-color: var(--link, var(--accent)); }

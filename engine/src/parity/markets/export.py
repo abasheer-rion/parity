@@ -46,6 +46,22 @@ def _clean(v):
     return round(v, 8) if isinstance(v, float) else v
 
 
+def _sanitize(v):
+    """Missing values from pandas (NaN, NaT, numpy numbers) as plain JSON values."""
+    if isinstance(v, dict):
+        return {k: _sanitize(x) for k, x in v.items()}
+    if isinstance(v, (list, tuple)):
+        return [_sanitize(x) for x in v]
+    if v is None or isinstance(v, (str, bool)):
+        return v
+    try:
+        if pd.isna(v):
+            return None
+    except (TypeError, ValueError):
+        return v
+    return _clean(v)
+
+
 def source_list(ids: list[str], root: Path) -> list[dict]:
     st = store.state(root)
     out = []
@@ -190,8 +206,9 @@ def build(out: Path, root: Path = DEFAULT_DIR, include_ask: bool = True) -> dict
     docs = {"crypto": crypto_doc(root), "perps": perps, "etfs": etfs,
             "discover": discover_doc(root, etfs)}
     for name, doc in docs.items():
-        (out / f"{name}.json").write_text(json.dumps({"generated_at": stamp, **doc},
-                                                     separators=(",", ":")))
+        body = _sanitize({"generated_at": stamp, **doc})
+        (out / f"{name}.json").write_text(json.dumps(body, separators=(",", ":"),
+                                                     allow_nan=False))
     return {"coins": len(docs["crypto"]["coins"]), "perps": len(docs["perps"]["perps"]),
             "etfs": docs["etfs"]["count"], "filings": len(docs["discover"]["filings"]),
             "trending": len(docs["discover"]["trending_coins"])}

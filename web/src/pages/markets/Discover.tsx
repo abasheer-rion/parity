@@ -63,7 +63,7 @@ export function Discover() {
                 <div className="mk-meta">
                   <span>{KIND_LABEL[f.kind]}</span>
                   <span>Form {f.form}</span>
-                  {f.description && <span>{f.description}</span>}
+                  {f.description && f.description !== f.form && f.description !== f.root_form && <span>{f.description}</span>}
                   {f.url && <a href={f.url} target="_blank" rel="noreferrer">Read the filing</a>}
                 </div>
                 <p className="small muted" style={{ margin: 0 }}>{KIND_WHAT[f.kind]}</p>
