@@ -488,6 +488,7 @@ How the team works together.
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0006: Ayan work log, merges, domain, email and the two product plan](log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 
 ## strategy
 

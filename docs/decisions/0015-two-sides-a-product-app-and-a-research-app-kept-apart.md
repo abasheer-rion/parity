@@ -89,4 +89,5 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 <!-- backlinks:end -->
