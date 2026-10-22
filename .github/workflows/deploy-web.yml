@@ -7,15 +7,17 @@
 # News: after each hourly News run, the newest headlines and market moves are exported from the
 # shared data cache into dist/data/news (parity news export). Markets data (DEC-0018) is fetched
 # by the same hourly job and exported into dist/data/markets (parity markets export).
+# SEO (DEC-0023): the build writes the public Learn, Ideas and Notes pages and sitemap.xml;
+# after a production deploy, IndexNow is told which public URLs changed.
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -50,6 +52,9 @@ jobs:
           # Which sign-in buttons to show (auth/PROVIDERS.md). Public values, not secrets.
           VITE_AUTH_PROVIDERS: ${{ vars.AUTH_PROVIDERS }}
           VITE_AUTH_PASSKEYS: ${{ vars.AUTH_PASSKEYS }}
+          # Search engine verification tokens (DEC-0023). Public values, empty until set.
+          GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION }}
+          BING_VERIFICATION: ${{ vars.BING_VERIFICATION }}
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -79,6 +84,9 @@ jobs:
       - name: Copy markets data into the site (crypto, perps, ETFs, new filings)
         continue-on-error: true
         run: parity markets export dist/data
+      - name: Save the live SEO manifest (so IndexNow hears only what changed)
+        if: github.event_name != 'pull_request'
+        run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v4
@@ -89,3 +97,7 @@ jobs:
           command: pages deploy dist --project-name=parity-research --branch=${{ github.head_ref || (github.event_name == 'workflow_run' && 'main') || github.ref_name }} --commit-hash=${{ github.sha }}
       - name: Summary
         run: echo "Deployed to ${{ steps.deploy.outputs.deployment-url }}" >> "$GITHUB_STEP_SUMMARY"
+      - name: Tell search engines what changed (IndexNow)
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        run: python3 ../scripts/seo/indexnow.py --manifest dist/seo-manifest.json --previous ../seo-manifest.prev.json

@@ -55,7 +55,9 @@ export function parityLegal(): Plugin {
       handler(html, ctx) {
         if (!ctx.path.startsWith("/legal/")) return html;
         return html
-          .replace("<!--legal:head-->", HEAD)
+          .replace("<!--legal:head-->", `${HEAD}
+    <link rel="canonical" href="https://parity.endyland.com${ctx.path.replace(/index\.html$/, "")}" />
+    <meta property="og:image" content="https://parity.endyland.com/og/default.png" />`)
           .replace("<!--legal:header-->", HEADER)
           .replace("<!--legal:footer-->", FOOTER);
       },

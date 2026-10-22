@@ -1,6 +1,33 @@
 /*
-  X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Search engines may index the public pages only (DEC-0023): the front page, /legal/,
+# /learn/, /ideas/ and /notes/. Everything behind sign-in, the sign-in pages, the sim
+# address and the preview addresses stay out of search.
+/app/*
+  X-Robots-Tag: noindex, nofollow
+/research/*
+  X-Robots-Tag: noindex, nofollow
+/sim/*
+  X-Robots-Tag: noindex, nofollow
+/data/*
+  X-Robots-Tag: noindex, nofollow
+/login/*
+  X-Robots-Tag: noindex, nofollow
+/signup/*
+  X-Robots-Tag: noindex, nofollow
+/reset/*
+  X-Robots-Tag: noindex, nofollow
+/verify/*
+  X-Robots-Tag: noindex, nofollow
+/seo-manifest.json
+  X-Robots-Tag: noindex
+https://sim.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://parity-research.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+https://:branch.parity-research.pages.dev/*
+  X-Robots-Tag: noindex, nofollow

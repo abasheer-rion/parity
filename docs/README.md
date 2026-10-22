@@ -7,11 +7,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 22 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 23 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
-| [guide](#guide) | How to do something in this repo, step by step. | 4 |
+| [guide](#guide) | How to do something in this repo, step by step. | 5 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 8 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -36,7 +36,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-22 [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
-- 2026-10-22 [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
+- 2026-10-22 [GDE-0005: Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md)
 
 ## intent
 
@@ -71,6 +71,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0020 | [Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
 | DEC-0022 | [Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
+| DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -117,6 +118,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-21 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
+| GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
 
 ## reference
 
