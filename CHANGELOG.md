@@ -4,6 +4,7 @@ Changes to code and infrastructure that someone else would notice. Reasoning and
 
 ## Unreleased
 
+- Site and both apps are dark only, with calmer blacks, fewer lines and Cinzel for a few big headings. The apps have no top bar: search, the run picker and settings are in the sidebar, and phones get a floating menu button. Home pages show short findings computed from the data. The front page has a large scale sim of illustrative paths with real counts and a link to Sim World ([DEC-0020](docs/decisions/0020-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)).
 - Product Markets area (`/app/#/markets`): crypto prices and risks, perps with funding as a cost of holding and leverage risk, every US ETF by theme, new fund filings and trending coins with "what to check" lists, hype terms explained, and Practice positions with pretend money ([DEC-0018](docs/decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)). Real trading needs legal work first ([DEC-0019](docs/decisions/0019-real-trading-later-what-it-would-legally-take.md)).
 - Engine: `parity markets fetch|status|export` from CoinGecko, Hyperliquid and SEC EDGAR, no keys ([REF-0014](docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)).
 - Glossary: 21 "New products and hype terms" with a "what can go wrong" line.
