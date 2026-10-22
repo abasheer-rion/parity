@@ -458,6 +458,7 @@ Other people's code, bots and published results.
 
 How the team works together.
 
+- [INT-0002: Two products, a research and simulation platform and a public trading app](intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
 - [DEC-0001: Keep a written record of decisions, experiments and sessions](decisions/0001-keep-a-decision-record.md)
 - [DEC-0004: Docs follow strict rules that a script checks on every commit](decisions/0004-docs-are-checked-by-a-script.md)
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
