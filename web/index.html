@@ -76,7 +76,7 @@
       .hero-art .hero-canvas { opacity: 0; }
       .hero-art.live .hero-canvas { opacity: 1; }
       .hero-art.live .hero-poster { opacity: 0; }
-      .tagchip { position: absolute; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgb(20 21 35 / .78); border: 1px solid var(--line-2); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: bob 7s ease-in-out infinite; white-space: nowrap; }
+      .tagchip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgb(20 21 35 / .78); border: 1px solid var(--line-2); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: bob 7s ease-in-out infinite; white-space: nowrap; }
       .tagchip i { width: 7px; height: 7px; border-radius: 50%; }
       .tagchip:nth-of-type(2) { animation-delay: -2s; } .tagchip:nth-of-type(3) { animation-delay: -4s; } .tagchip:nth-of-type(4) { animation-delay: -5.5s; }
       @keyframes bob { 50% { transform: translateY(-6px); } }
@@ -290,7 +290,7 @@
   <body>
     <header>
       <div class="wrap">
-        <a class="brand" href="/"><img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height="44" alt="Parity, systematic research" /></a>
+        <a class="brand" href="/"><img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" width="188" height="44" alt="Parity, systematic research" /></a>
         <nav>
           <a class="btn" href="#sides">Product and research</a>
           <a class="btn login" href="/login/">Log in</a>
