@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 7 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 8 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -34,9 +34,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
+- 2026-10-22 [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - 2026-10-22 [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
-- 2026-10-22 [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 
 ## intent
 
@@ -149,6 +149,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0005 | [Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md) | final | 2026-10-21 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0006 | [Ayan work log, merges, domain, email and the two product plan](log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md) | final | 2026-10-21 | [process](TAGS.md#process) |
 | LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
+| LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 
 ## algorithm
 
