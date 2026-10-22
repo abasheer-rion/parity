@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
 | [guide](#guide) | How to do something in this repo, step by step. | 4 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 13 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 6 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 7 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -29,6 +29,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - 2026-10-22 [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - 2026-10-22 [DEC-0014: A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - 2026-10-21 [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
@@ -36,7 +37,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - 2026-10-21 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - 2026-10-21 [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
-- 2026-10-21 [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 
 ## intent
 
@@ -139,6 +139,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0004 | [Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md) | final | 2026-10-21 | [intent](TAGS.md#intent), [process](TAGS.md#process) |
 | LOG-0005 | [Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md) | final | 2026-10-21 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0006 | [Ayan work log, merges, domain, email and the two product plan](log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md) | final | 2026-10-21 | [process](TAGS.md#process) |
+| LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 
 ## algorithm
 

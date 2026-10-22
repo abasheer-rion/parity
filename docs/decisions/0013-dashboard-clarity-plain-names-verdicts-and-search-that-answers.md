@@ -71,4 +71,5 @@ Before this change:
 ## Referenced by
 
 - [DEC-0015: Two sides, a product app and a research app, kept apart](0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
+- [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 <!-- backlinks:end -->
