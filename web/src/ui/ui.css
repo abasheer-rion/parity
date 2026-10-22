@@ -262,3 +262,39 @@
 .ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
 @keyframes ui-drawer-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .ui-drawer { animation: none; } }
+
+/* Motion, part two (DEC-0017): lift, tilt, draw-in, reveal, page transition, hero glow.
+   Transforms rest at none, so fixed-position popups inside a card still place correctly. */
+.ui-reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+.ui-reveal.in { opacity: 1; transform: none; }
+.ui-reveal:not(.done) { transition-delay: var(--reveal-delay, 0ms); }
+/* Lift and tilt come after reveal so their hover wins once a card has arrived. */
+.ui-reveal.done.ui-lift, .ui-reveal.done.ui-tilt { transition: opacity 600ms var(--ease-out), transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
+.ui-lift { transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
+.ui-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); border-color: var(--border-2); }
+.ui-tilt { position: relative; transition: transform var(--dur-4) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); }
+.ui-tilt:hover { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-2px); transition: transform 80ms linear, box-shadow var(--dur-3) var(--ease-out); box-shadow: var(--shadow-3); }
+.ui-tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--dur-3); background: radial-gradient(320px circle at var(--glare-x, 50%) var(--glare-y, 0%), color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%); }
+.ui-tilt:hover::after { opacity: 1; }
+.ui-draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: ui-draw 900ms var(--ease-out) both; }
+@keyframes ui-draw { from { stroke-dashoffset: 1; } }
+.ui-fill-in { animation: ui-fade 900ms var(--ease-out) 250ms both; }
+.ui-page { animation: ui-page var(--dur-4) var(--ease-out) both; }
+@keyframes ui-page { from { opacity: 0; transform: translateY(8px); } }
+.ui-glow { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 0; }
+.ui-glow ~ * { position: relative; z-index: 1; }
+.ui-glow i { position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; filter: blur(48px); opacity: .6; animation: ui-glow-drift 48s ease-in-out infinite alternate; }
+.ui-glow i:nth-child(1) { left: -12%; top: -50%; background: radial-gradient(circle, #cfe6fb, transparent 65%); }
+.ui-glow i:nth-child(2) { right: -14%; top: -30%; background: radial-gradient(circle, #a9bff7, transparent 65%); animation-duration: 60s; animation-direction: alternate-reverse; }
+.ui-glow i:nth-child(3) { left: 30%; bottom: -70%; background: radial-gradient(circle, #d6f5e9, transparent 65%); animation-duration: 54s; }
+.ui-glow-mint i:nth-child(2) { background: radial-gradient(circle, #d6f5e9, transparent 65%); }
+:root[data-theme="dark"] .ui-glow i { opacity: .18; }
+:root[data-theme="dark"] .ui-glow i:nth-child(1) { background: radial-gradient(circle, #2f6bff, transparent 65%); }
+:root[data-theme="dark"] .ui-glow i:nth-child(2) { background: radial-gradient(circle, #5cc2f5, transparent 65%); }
+:root[data-theme="dark"] .ui-glow i:nth-child(3) { background: radial-gradient(circle, #6fdcb4, transparent 65%); }
+@keyframes ui-glow-drift { to { transform: translate3d(12%, 18%, 0) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) {
+  .ui-reveal { opacity: 1; transform: none; }
+  .ui-tilt:hover, .ui-lift:hover { transform: none; }
+  .ui-glow i { animation: none; }
+}

@@ -8,7 +8,41 @@
   justify-content: center;
   padding: 32px 16px;
   background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
+/* A quiet backdrop (DEC-0017): the brand blues drifting slowly, and the starburst turning
+   once every few minutes behind the card. Still for people who ask for reduced motion. */
+.auth-page::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background:
+    radial-gradient(38% 32% at 22% 28%, rgb(47 107 255 / .22), transparent 70%),
+    radial-gradient(34% 30% at 78% 70%, rgb(111 220 180 / .12), transparent 70%),
+    radial-gradient(30% 28% at 70% 20%, rgb(169 191 247 / .14), transparent 70%);
+  filter: blur(10px);
+  animation: auth-drift 40s ease-in-out infinite alternate;
+}
+.auth-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(900px, 140vw);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  margin: calc(min(900px, 140vw) / -2) 0 0 calc(min(900px, 140vw) / -2);
+  background: url("/brand/2026-10-21-starburst/parity-mark.svg") center / contain no-repeat;
+  opacity: .05;
+  animation: auth-turn 240s linear infinite;
+}
+:root[data-theme="light"] .auth-page::after { opacity: .07; }
+@keyframes auth-drift { to { transform: translate3d(4%, -3%, 0) scale(1.06); } }
+@keyframes auth-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .auth-page::before, .auth-page::after { animation: none; } }
 .auth-card {
   width: 100%;
   max-width: 400px;

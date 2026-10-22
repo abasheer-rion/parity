@@ -586,6 +586,7 @@ The dashboard.
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
 - [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
+- [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

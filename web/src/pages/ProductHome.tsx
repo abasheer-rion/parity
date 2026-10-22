@@ -5,7 +5,7 @@
 import { useMemo } from "react";
 import { Sparkline } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Badge } from "../ui";
+import { Badge, HeroGlow, LIFT, PageTransition, Reveal, Tilt } from "../ui";
 import { colorMap } from "../lib/colors";
 import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
@@ -39,15 +39,16 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
   }, [prefs.bookmarks, report.runs]);
   // Worth a look: best verdict first, then the luck check, never raw return.
   const picks = [...tested].sort((a, b) => (ORDER[verdictOf(b).label] ?? 0) - (ORDER[verdictOf(a).label] ?? 0)
-    || (b.metrics.deflated_sharpe ?? 0) - (a.metrics.deflated_sharpe ?? 0)).slice(0, 6);
+    || (b.metrics.deflated_sharpe ?? 0) - (a.metrics.deflated_sharpe ?? 0)).slice(0, 9);
   const year = bench ? Object.keys(bench.yearly).sort().slice(-1)[0] : undefined;
   const movers = [...tested].filter((r) => ytd(r) != null).sort((a, b) => (ytd(b) ?? 0) - (ytd(a) ?? 0));
   const beating = tested.filter((r) => r.gauntlet?.beats_sp500).length;
   const first = email ? email.split("@")[0].replace(/[._-].*$/, "") : "";
 
   return (
-    <div className="phome">
+    <PageTransition className="phome">
       <section className="phome-hero">
+        <HeroGlow />
         <div>
           <h1>{first ? `Hi ${first[0].toUpperCase()}${first.slice(1)}` : "Welcome"}</h1>
           <p className="muted">{tested.length} strategies tested the same honest way. {beating === 0 ? "None beats simply holding the US market yet." : `${beating} beat simply holding the US market.`}</p>
@@ -58,8 +59,20 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
         </button>
       </section>
 
+      {picks.length > 0 && (
+        <div className="feat-row" aria-label="Top of the evidence">
+          {picks.slice(0, 3).map((r, i) => (
+            <Reveal key={r.strategy} delay={i * 70}>
+              <Tilt className="feat">
+                <Feature r={r} color={colors[r.strategy]} />
+              </Tilt>
+            </Reveal>
+          ))}
+        </div>
+      )}
+
       <div className="phome-grid">
-        <section className="pcard">
+        <Reveal as="section" className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Watchlist</h2><a href="#/watchlist">See all</a></div>
           {followed.length === 0 ? (
             <p className="muted small">Follow a strategy with the bookmark button on its page and it shows up here.</p>
@@ -72,28 +85,28 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
               <strong className={(ytd(bench) ?? 0) >= 0 ? "good" : "bad"}>{signedPct(ytd(bench))}</strong>
             </div>
           )}
-        </section>
+        </Reveal>
 
-        <section className="pcard">
-          <div className="pcard-head"><h2>Worth a look</h2><a href="#/strategies">Discover</a></div>
+        <Reveal as="section" delay={50} className={`pcard ${LIFT}`}>
+          <div className="pcard-head"><h2>More worth a look</h2><a href="#/strategies">Discover</a></div>
           <p className="muted small">Ranked by how well they held up in testing, not by how much they made.</p>
-          <ul className="plist">{picks.map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} showVerdict />)}</ul>
-        </section>
+          <ul className="plist">{picks.slice(3).map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} showVerdict />)}</ul>
+        </Reveal>
 
-        <section className="pcard span2">
+        <Reveal as="section" delay={100} className={`pcard span2 ${LIFT}`}>
           <div className="pcard-head"><h2>Explore by theme</h2></div>
           <div className="themes">
             {THEMES.map((t) => (
-              <a key={t.label} className="theme" href={`#/strategies?q=${encodeURIComponent(t.q)}`}>
+              <a key={t.label} className={`theme ${LIFT}`} href={`#/strategies?q=${encodeURIComponent(t.q)}`}>
                 <Icon name={t.icon} size={16} />
                 <strong>{t.label}</strong>
                 <span className="muted small">{t.what}</span>
               </a>
             ))}
           </div>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={150} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>What if</h2><a href="#/scenarios">Try one</a></div>
           <p className="small">Describe an event, like a war, a rate hike or an oil shock, and see what markets did after similar ones in the past.</p>
           <div className="chips">
@@ -101,9 +114,9 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
               <a key={s} className="chip" href="#/scenarios">{s}</a>
             ))}
           </div>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={200} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>{year ?? "This year"} so far</h2><a href="#/compare">Compare</a></div>
           <ul className="plist">
             {movers.slice(0, 3).map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} />)}
@@ -112,21 +125,43 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
           <ul className="plist">
             {movers.slice(-2).reverse().map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} />)}
           </ul>
-        </section>
+        </Reveal>
 
-        <section className="pcard span2 build">
+        <Reveal as="section" delay={250} className={`pcard span2 build ${LIFT}`}>
           <div>
             <h2>Build a strategy by describing it <Badge tone="accent">Coming next</Badge></h2>
             <p className="muted small">Type an idea in plain words, like "own the strongest currencies but step aside when fear is high", and Parity will turn it into a strategy, test it the same way as every other, and explain the result. Until then, try settings on an existing one.</p>
           </div>
           <a className="btn-primary" href="#/lab">Try settings</a>
-        </section>
+        </Reveal>
       </div>
       <p className="muted small phome-foot">
         Research, not investment advice. Results are backtests after trading costs; the past does not promise the future.
         Results come from the <a href="/research/">research side</a>, kept separate on purpose: <a href="#/how">how Parity works</a>.
       </p>
-    </div>
+    </PageTransition>
+  );
+}
+
+/** One of the three strongest by the evidence: a tilting card with its line drawing in. */
+function Feature({ r, color }: { r: StrategyRun; color: string }) {
+  const v = verdictOf(r);
+  const g = r.gauntlet;
+  return (
+    <a className="feat-in" href={`#/strategy/${r.strategy}`}>
+      <div className="feat-top">
+        <span className="acct-dot" style={{ background: color }} />
+        <span className="muted small">{tagsOf(r).style || tagsOf(r).family}</span>
+        <Badge tone={v.tone}>{v.label}</Badge>
+      </div>
+      <strong className="feat-name">{nameOf(r)}</strong>
+      <Sparkline points={r.equity} width={240} height={56} fluid />
+      <div className="feat-stats">
+        <span><b>{g ? `${g.passed} of ${g.total}` : "None"}</b><span className="muted small">tests passed</span></span>
+        <span><b>{pct(r.metrics.cagr)}</b><span className="muted small">a year</span></span>
+        <span><b>{pct(r.metrics.max_drawdown)}</b><span className="muted small">worst fall</span></span>
+      </div>
+    </a>
   );
 }
 

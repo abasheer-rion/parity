@@ -151,6 +151,8 @@ export function LineChart({
         {ordered.map((s) => (
           <polyline
             key={s.name}
+            className="ui-draw"
+            pathLength={1}
             fill="none"
             stroke={s.color}
             strokeWidth={s.emphasis ? 2 : 1.5}
@@ -451,9 +453,9 @@ export function HeroChart({
         </defs>
         <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         <line className="baseline" x1={pad.left} x2={pad.left + w} y1={yy(amount)} y2={yy(amount)} />
-        <polygon fill={`url(#${gid})`} points={`${tx(pts[0][0])},${pad.top + h} ${line(pts)} ${tx(last[0])},${pad.top + h}`} />
+        <polygon className="ui-fill-in" fill={`url(#${gid})`} points={`${tx(pts[0][0])},${pad.top + h} ${line(pts)} ${tx(last[0])},${pad.top + h}`} />
         {cmp.length > 1 && <polyline className="hero-cmp" fill="none" points={line(cmp)} />}
-        <polyline fill="none" stroke={tone} strokeWidth={2} strokeLinejoin="round" points={line(pts)} />
+        <polyline className="ui-draw" pathLength={1} fill="none" stroke={tone} strokeWidth={2} strokeLinejoin="round" points={line(pts)} />
         {hx != null && (
           <g>
             <line className="crosshair" x1={hx} x2={hx} y1={pad.top} y2={pad.top + h} />
@@ -487,8 +489,8 @@ export function HeroChart({
   );
 }
 
-/** A small line for lists, coloured by whether it ended above where it started. */
-export function Sparkline({ points, width = 84, height = 28 }: { points: Point[]; width?: number; height?: number }) {
+/** A small line for lists, coloured by whether it ended above where it started. `fluid` fills its box's width. */
+export function Sparkline({ points, width = 84, height = 28, fluid }: { points: Point[]; width?: number; height?: number; fluid?: boolean }) {
   const pts = thin(points, 60);
   if (pts.length < 2) return <svg width={width} height={height} />;
   const vals = pts.map((p) => p[1]);
@@ -497,8 +499,8 @@ export function Sparkline({ points, width = 84, height = 28 }: { points: Point[]
   const up = vals[vals.length - 1] >= vals[0];
   const d = pts.map((p, i) => `${((i / (pts.length - 1)) * (width - 2) + 1).toFixed(1)},${(height - 2 - ((p[1] - lo) / (hi - lo || 1)) * (height - 4)).toFixed(1)}`).join(" ");
   return (
-    <svg width={width} height={height} aria-hidden className="spark">
-      <polyline fill="none" stroke={up ? "var(--good)" : "var(--bad)"} strokeWidth={1.5} strokeLinejoin="round" points={d} />
+    <svg width={fluid ? "100%" : width} height={height} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio={fluid ? "none" : undefined} aria-hidden className="spark">
+      <polyline className="ui-draw" pathLength={1} vectorEffect={fluid ? "non-scaling-stroke" : undefined} fill="none" stroke={up ? "var(--good)" : "var(--bad)"} strokeWidth={1.5} strokeLinejoin="round" points={d} />
     </svg>
   );
 }

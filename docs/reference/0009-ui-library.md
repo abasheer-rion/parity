@@ -4,10 +4,10 @@ title: UI library
 type: reference
 status: current
 created: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-22
 authors: [ayan]
 tags: [docs, ui]
-related: [DEC-0011, REF-0001]
+related: [DEC-0011, DEC-0017, REF-0001]
 ---
 
 # UI library
@@ -37,7 +37,7 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 | Tables | `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links), `ShareBar` |
 | Layout | `PageHeader`, `Panel`, `Grid`, `Stat`, `KeyValues`, `Section`, `Badge`, `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState`, `Skeleton` |
 | Overlays | `Tooltip`, `Menu`, `Dialog`, `toast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
-| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`; durations `--dur-1` to `--dur-4` |
+| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `HeroGlow`; durations `--dur-1` to `--dur-4`. Charts and sparklines draw in by themselves. Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
 | Charts | `HeroChart`, `LineChart`, `BarChart`, `FanChart` (spread of outcomes after past events: single paths, middle-half and full-range bands, median), `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |
 | Icons | `Icon` with 47 names, 16px stroke icons drawn for this site |
 
@@ -49,7 +49,7 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 4. **Series colours follow the strategy by name** in the fixed order; the market is always the neutral benchmark line.
 5. **One y axis per chart.** Two measures on different scales get two charts.
 6. **Status shows the word.** The dot only helps.
-7. **Motion explains a change** (arriving, updating, opening), stays under 400ms, never loops for decoration, and switches off for people who ask for reduced motion.
+7. **Motion explains a change or invites a touch** (arriving, updating, opening, hovering). Entrances stay under 400ms and line draws under a second. The only loop in a view is the faint hero glow. Nothing flashes, and everything holds still for people who ask for reduced motion ([DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)).
 8. **Numbers use tabular figures** so columns line up.
 
 ## How charts work
@@ -79,5 +79,6 @@ Text contrast against the dark background, measured in the gallery: primary 18.2
 ## Referenced by
 
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](../decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
+- [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

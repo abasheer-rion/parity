@@ -3,7 +3,7 @@
 // whether the data is healthy. Nothing about product use appears on this side
 // (DEC-0015): research is judged on evidence, not on what people click.
 import { useEffect, useState } from "react";
-import { Badge } from "../ui";
+import { Badge, CountUp, HeroGlow, LIFT, PageTransition, Reveal } from "../ui";
 import { ledger } from "../lib/catalog";
 import { useDocs } from "../lib/docs";
 import { date, num } from "../lib/format";
@@ -29,8 +29,9 @@ export function ResearchHome({ report }: { report: Report }) {
   const stale = (report.coverage?.series ?? []).filter((s) => !s.ok).length;
 
   return (
-    <div className="rhome">
+    <PageTransition className="rhome">
       <section className="rq">
+        <HeroGlow />
         <div className="eyebrow">The question</div>
         <h1>Can a trading strategy beat simply holding the US stock market, after costs and after counting every idea we tried?</h1>
         <p className="answer">
@@ -39,14 +40,14 @@ export function ResearchHome({ report }: { report: Report }) {
           {search ? `, and ${search.trials.toLocaleString()} variations tried by the search` : ""}.
         </p>
         <div className="verdict-bar" aria-label="Verdicts">
-          {["Passed", "Promising", "Not proven", "Not tested"].map((l) => counts[l] ? (
-            <span key={l} className={`seg-${l.replace(" ", "-").toLowerCase()}`} style={{ flex: counts[l] }} title={`${l}: ${counts[l]}`}>{l} {counts[l]}</span>
+          {["Passed", "Promising", "Not proven", "Not tested"].map((l, i) => counts[l] ? (
+            <span key={l} data-i={i} className={`seg-${l.replace(" ", "-").toLowerCase()}`} style={{ flex: counts[l] }} title={`${l}: ${counts[l]}`}>{l} {counts[l]}</span>
           ) : null)}
         </div>
       </section>
 
       <div className="rgrid">
-        <section className="pcard">
+        <Reveal as="section" delay={0} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Closest to an answer</h2><a href="/app/#/strategies">All strategies</a></div>
           <ul className="rlist">
             {closest.map((r) => (
@@ -56,9 +57,9 @@ export function ResearchHome({ report }: { report: Report }) {
               </li>
             ))}
           </ul>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={50} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Official record</h2><a href="#/ledger">Open</a></div>
           <p className="muted small">Only these runs count as results. Each was written down before it ran.</p>
           <ul className="rlist">
@@ -70,41 +71,41 @@ export function ResearchHome({ report }: { report: Report }) {
             ))}
             {!official.length && <li className="muted small">No official runs yet.</li>}
           </ul>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={100} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Strategy search</h2><a href="#/search">Open</a></div>
           {search ? (
             <>
-              <div className="big-num">{search.trials.toLocaleString()} <span className="muted small">tried</span></div>
+              <div className="big-num"><CountUp value={search.trials} format={(v) => Math.round(v).toLocaleString()} /> <span className="muted small">tried</span></div>
               <p className="muted small">{search.passed_luck_check} pass the luck check, {search.beat_market} beat the market's Sharpe. Leads only, until registered and run officially.</p>
               <ul className="rlist">{search.rows.slice(0, 3).map((r) => <li key={r.id}><span>{r.name}</span><span className="muted small">luck check {num(r.deflated)}</span></li>)}</ul>
             </>
           ) : <p className="muted small">The search has not sent results yet.</p>}
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={150} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Open hypotheses</h2><a href="#/docs/type/hypothesis">All</a></div>
           <ul className="rlist">
             {open.slice(0, 5).map((d) => <li key={d.id}><a href={`#/doc/${d.id}`} data-doc={d.id}>{d.title}</a><Badge>{d.status}</Badge></li>)}
             {docs && !open.length && <li className="muted small">None open.</li>}
           </ul>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={200} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Recent decisions and findings</h2><a href="#/docs">Docs</a></div>
           <ul className="rlist">
             {recent.map((d) => <li key={d.id}><a href={`#/doc/${d.id}`} data-doc={d.id}>{d.title}</a><span className="muted small">{d.id} · {d.updated}</span></li>)}
           </ul>
-        </section>
+        </Reveal>
 
-        <section className="pcard">
+        <Reveal as="section" delay={250} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Data</h2><a href="#/data">Health</a></div>
           <div className="big-num">{stale === 0 ? "Healthy" : `${stale} problem${stale > 1 ? "s" : ""}`}</div>
           <p className="muted small">{report.coverage?.series?.length ?? 0} series behind this run, fetched {date(report.coverage?.fetched_at ?? null)}.</p>
-        </section>
+        </Reveal>
       </div>
       <p className="muted small phome-foot">This side makes the results. The product side only shows them, with their verdicts. <a href="#/how">How Parity works</a>.</p>
-    </div>
+    </PageTransition>
   );
 }

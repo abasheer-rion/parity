@@ -4,82 +4,288 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Discover and follow trading strategies, each tested honestly against the S&amp;P 500, with an open research side behind every result." />
-    <meta name="theme-color" content="#10101a" />
+    <meta name="theme-color" content="#0b0c14" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>Parity: trading strategies, tested honestly</title>
-    <!-- The public front page. Plain HTML and CSS, no script, so it loads instantly. -->
+    <!--
+      The public front page. Plain HTML and inline CSS, so it paints at once.
+      One small module script (src/site/main.ts) adds motion on top: reveals, counters,
+      the scroll story, the looping app preview, and the 3D hero, which loads after first
+      paint. Everything here reads and works without the script. Rules: DEC-0017.
+    -->
     <style>
-      :root { color-scheme: dark; --bg: #10101a; --card: #171721; --line: #26263a; --text: #ececf4; --muted: #9b9db2; --blue: #2f6bff; }
+      :root {
+        color-scheme: dark;
+        --bg: #0b0c14; --bg-2: #10111c; --card: #141523; --card-2: #191a2b; --line: #24253a; --line-2: #32344d;
+        --text: #eef0f8; --muted: #a6a9c0; --faint: #8285a0;
+        --blue: #2f6bff; --blue-text: #85a8ff; --cyan: #5cc2f5; --mint: #6fdcb4; --lav: #a9bff7;
+        --good: #4cc98a; --bad: #f07a7a;
+        --ease: cubic-bezier(.2, .8, .2, 1);
+        --wrap: 1120px;
+      }
       * { box-sizing: border-box; }
       html, body { margin: 0; background: var(--bg); color: var(--text); }
-      body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+      html { overflow-x: clip; }
+      body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased; }
       a { color: inherit; }
-      .wrap { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 20px; }
-      header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+      img, svg { max-width: 100%; }
+      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+      .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      :focus-visible { outline: 2px solid var(--blue-text); outline-offset: 2px; border-radius: 6px; }
+
+      /* Lenis smooth scroll (its stylesheet, inlined) */
+      html.lenis, html.lenis body { height: auto; }
+      .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+      .lenis.lenis-smooth iframe { pointer-events: none; }
+
+      /* Header */
+      header { position: sticky; top: 0; z-index: 20; transition: background-color .3s, border-color .3s, backdrop-filter .3s; border-bottom: 1px solid transparent; }
+      header.scrolled { background: rgb(11 12 20 / .72); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom-color: var(--line); }
+      header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 12px; }
       .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; text-decoration: none; }
       .brand img { border-radius: 8px; display: block; }
       nav { display: flex; gap: 8px; }
-      .btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--line); }
-      .btn:hover { border-color: #3a3a52; }
-      .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-      .btn.primary:hover { background: #2559d9; }
-      .btn.lg { height: 48px; padding: 0 24px; font-size: 16px; }
-      main { flex: 1; }
-      .hero { padding: 88px 0 56px; max-width: 720px; }
-      h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 20px; font-weight: 600; }
-      .lead { font-size: 19px; color: var(--muted); margin: 0 0 32px; max-width: 600px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--line-2); white-space: nowrap; transition: background-color .2s, border-color .2s, transform .2s var(--ease), box-shadow .2s; }
+      .btn:hover { border-color: #4a4d6b; background: rgb(255 255 255 / .03); }
+      .btn:active { transform: scale(.98); }
+      .btn.primary { background: #2862f0; border-color: #2862f0; color: #fff; box-shadow: 0 6px 24px rgb(47 107 255 / .28); }
+      .btn.primary:hover { background: #2257d6; box-shadow: 0 8px 30px rgb(47 107 255 / .38); }
+      .btn.lg { height: 50px; padding: 0 26px; font-size: 16px; }
+      .btn .arr { transition: transform .2s var(--ease); }
+      .btn:hover .arr { transform: translateX(3px); }
+
+      /* Hero */
+      .hero { position: relative; isolation: isolate; }
+      .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(70px); pointer-events: none; }
+      .hero::before { width: 560px; height: 560px; right: -120px; top: -140px; background: radial-gradient(circle, rgb(47 107 255 / .32), transparent 65%); animation: drift 26s ease-in-out infinite alternate; }
+      .hero::after { width: 420px; height: 420px; left: -160px; top: 160px; background: radial-gradient(circle, rgb(111 220 180 / .14), transparent 65%); animation: drift 32s ease-in-out infinite alternate-reverse; }
+      @keyframes drift { to { transform: translate3d(-60px, 50px, 0) scale(1.08); } }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 32px; align-items: center; padding-top: 56px; padding-bottom: 40px; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-text); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+      .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 0 rgb(111 220 180 / .5); animation: ping 2.8s ease-out infinite; }
+      @keyframes ping { 70%, 100% { box-shadow: 0 0 0 8px rgb(111 220 180 / 0); } }
+      h1 { font-size: clamp(36px, 6.2vw, 64px); line-height: 1.04; letter-spacing: -0.03em; margin: 0 0 22px; font-weight: 650; }
+      h1 .grad { background: linear-gradient(100deg, #cfe6fb 0%, #a9bff7 45%, #6fdcb4 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .lead { font-size: 19px; color: var(--muted); margin: 0 0 32px; max-width: 580px; }
       .cta { display: flex; gap: 12px; flex-wrap: wrap; }
-      .points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 24px 0 88px; list-style: none; margin: 0; }
-      .points li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-      .points h2 { font-size: 16px; margin: 0 0 6px; font-weight: 600; }
-      .points p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
-      footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-      footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 28px; }
-      .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; padding: 72px 0 48px; }
-      .hero-grid .hero { padding: 0; }
-      .eyebrow { color: var(--blue); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
-      .demo { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 30px 60px rgb(0 0 0 / 0.35); }
-      .demo .tag { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-      .demo h3 { margin: 6px 0 2px; font-size: 18px; }
-      .demo .row { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); padding: 8px 0; border-top: 1px solid var(--line); }
-      .demo .row strong { color: var(--text); font-weight: 500; }
-      .badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: rgb(47 107 255 / 0.18); color: #9bb8ff; }
-      .demo svg { width: 100%; height: 72px; margin: 10px 0 6px; }
-      .ask { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; color: var(--muted); font-size: 14px; }
-      .section { padding: 56px 0; border-top: 1px solid var(--line); }
-      .section > h2 { font-size: clamp(24px, 3.4vw, 34px); margin: 0 0 8px; letter-spacing: -0.01em; }
-      .section > p.sub { color: var(--muted); margin: 0 0 28px; max-width: 640px; }
-      .doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-      .door { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px; }
-      .door h3 { margin: 0; font-size: 22px; }
-      .door .who { color: var(--blue); font-size: 13px; font-weight: 600; }
+      .fine { margin-top: 18px; color: var(--faint); font-size: 13px; }
+      .hero-art { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1 / 1; margin-left: auto; contain: layout paint; }
+      .hero-art .hero-poster, .hero-art .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity .9s var(--ease); }
+      .hero-art .hero-canvas { opacity: 0; }
+      .hero-art.live .hero-canvas { opacity: 1; }
+      .hero-art.live .hero-poster { opacity: 0; }
+      .tagchip { position: absolute; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgb(20 21 35 / .78); border: 1px solid var(--line-2); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: bob 7s ease-in-out infinite; white-space: nowrap; }
+      .tagchip i { width: 7px; height: 7px; border-radius: 50%; }
+      .tagchip:nth-of-type(2) { animation-delay: -2s; } .tagchip:nth-of-type(3) { animation-delay: -4s; } .tagchip:nth-of-type(4) { animation-delay: -5.5s; }
+      @keyframes bob { 50% { transform: translateY(-6px); } }
+
+      /* Counters */
+      .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg, rgb(255 255 255 / .025), transparent); margin: 8px 0 0; }
+      .stat { padding: 22px 22px 20px; border-left: 1px solid var(--line); }
+      .stat:first-child { border-left: 0; }
+      .stat .num { display: inline-block; font-size: clamp(30px, 4vw, 42px); font-weight: 650; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+      .stat .lbl { display: block; color: var(--muted); font-size: 14px; margin-top: 6px; }
+      .stat .src { display: block; color: var(--faint); font-size: 12px; margin-top: 2px; }
+      .stat .src .on { display: none; }
+      .stat.live .src .off { display: none; }
+      .stat.live .src .on { display: inline; }
+
+      /* Sections */
+      .section { padding: 96px 0; }
+      .kicker { color: var(--blue-text); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
+      h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.1; margin: 0 0 14px; letter-spacing: -0.02em; font-weight: 650; }
+      .sub { color: var(--muted); margin: 0 0 36px; max-width: 640px; font-size: 18px; }
+      .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
+      .ticks { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 12px; }
+      .ticks li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--text); }
+      .ticks li::before { content: ""; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; background: rgb(47 107 255 / .16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%2385a8ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
+      .ticks span { color: var(--muted); display: block; font-size: 15px; }
+
+      /* App preview: an HTML and CSS mock of the app home, looping while on screen. */
+      .device { position: relative; border-radius: 18px; border: 1px solid var(--line-2); background: #0e0f19; box-shadow: 0 40px 80px rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .02) inset; overflow: hidden; font-size: 12px; }
+      .device::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 60% at 80% -10%, rgb(47 107 255 / .14), transparent 60%); }
+      .d-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-bottom: 1px solid var(--line); background: #121321; }
+      .d-bar i { width: 9px; height: 9px; border-radius: 50%; background: #2c2e45; }
+      .d-url { margin-left: 12px; flex: 1; max-width: 260px; height: 20px; border-radius: 6px; background: #191a2b; color: var(--faint); font-size: 11px; display: flex; align-items: center; padding: 0 8px; }
+      .d-tag { margin-left: auto; font-size: 10px; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
+      .d-body { display: grid; grid-template-columns: 132px minmax(0, 1fr); min-height: 360px; }
+      .d-side { border-right: 1px solid var(--line); padding: 12px 10px; display: grid; align-content: start; gap: 4px; background: #0c0d16; }
+      .d-side .logo { display: flex; align-items: center; gap: 6px; font-weight: 600; margin-bottom: 10px; font-size: 12px; }
+      .d-side .logo img { width: 16px; height: 16px; }
+      .d-side span { display: block; padding: 5px 8px; border-radius: 6px; color: var(--faint); }
+      .d-side span.on { background: #1b1c2e; color: var(--text); }
+      .d-main { padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+      .d-hello { font-size: 18px; font-weight: 600; }
+      .d-hello small { display: block; font-size: 11px; color: var(--faint); font-weight: 400; }
+      .d-ask { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px; color: var(--text); background: #121321; overflow: hidden; white-space: nowrap; }
+      .d-ask svg { flex: none; color: var(--blue-text); }
+      .d-type { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; }
+      .d-caret { width: 1.5px; height: 14px; background: var(--blue-text); margin-left: -6px; }
+      .d-answer { border-radius: 10px; padding: 9px 12px; background: rgb(47 107 255 / .12); border: 1px solid rgb(47 107 255 / .3); color: #dfe7ff; }
+      .d-answer b { color: #fff; }
+      .d-cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 12px; }
+      .d-card { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: #121321; min-width: 0; }
+      .d-card h4 { margin: 0; font-size: 12px; font-weight: 600; }
+      .d-card .meta { color: var(--faint); font-size: 11px; }
+      .d-big { font-size: 20px; font-weight: 650; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
+      .d-big em { font-style: normal; color: var(--good); font-size: 12px; font-weight: 500; margin-left: 4px; }
+      .d-chart svg { display: block; width: 100%; height: 92px; margin-top: 8px; }
+      .d-row { display: grid; grid-template-columns: 8px minmax(0, 1fr) 40px auto; gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); }
+      .d-row:first-of-type { border-top: 0; }
+      .d-row .dot { width: 8px; height: 8px; border-radius: 50%; }
+      .d-row .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .d-row svg { width: 40px; height: 16px; }
+      .d-badge { font-size: 10px; padding: 1px 6px; border-radius: 5px; background: rgb(47 107 255 / .18); color: #a9c2ff; white-space: nowrap; }
+      .d-badge.n { background: #23243a; color: var(--muted); }
+      /* The loop: 12 seconds. Final state is the default, so with no motion everything shows. */
+      .device.playing .d-type { animation: type 12s steps(30, end) infinite; }
+      .device.playing .d-caret { animation: caret 12s linear infinite; }
+      .device.playing .d-answer { animation: answer 12s var(--ease) infinite; }
+      .device.playing .d-line { animation: draw 12s var(--ease) infinite; }
+      .device.playing .d-row { animation: row 12s var(--ease) infinite; }
+      .device.playing .d-row:nth-of-type(2) { animation-name: row2; }
+      .device.playing .d-row:nth-of-type(3) { animation-name: row3; }
+      .d-line { stroke-dasharray: 1; stroke-dashoffset: 0; }
+      @keyframes type { 0%, 4% { max-width: 0; } 30%, 92% { max-width: 100%; } 100% { max-width: 0; } }
+      @keyframes caret { 0%, 30% { opacity: 1; } 31%, 100% { opacity: 0; } }
+      @keyframes answer { 0%, 33% { opacity: 0; transform: translateY(6px); } 38%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      @keyframes draw { 0%, 8% { stroke-dashoffset: 1; } 50%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+      @keyframes row { 0%, 12% { opacity: 0; transform: translateX(10px); } 18%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      @keyframes row2 { 0%, 17% { opacity: 0; transform: translateX(10px); } 23%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      @keyframes row3 { 0%, 22% { opacity: 0; transform: translateX(10px); } 28%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+      /* Scroll story */
+      .story-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; align-items: start; }
+      .story-stage { position: sticky; top: 104px; height: min(520px, calc(100vh - 140px)); border-radius: 22px; border: 1px solid var(--line); background: radial-gradient(100% 80% at 50% 0%, #161935, #0e0f19 70%); overflow: hidden; }
+      .story-steps { list-style: none; padding: 0; margin: 0; }
+      .story-step { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0; }
+      .story-step h3, .story-step p { transition: color .5s var(--ease); }
+      .story-step:not(.on) h3 { color: var(--muted); }
+      .story-step:not(.on) p { color: var(--faint); }
+      .story-step:first-child { min-height: 46vh; justify-content: flex-start; padding-top: 40px; }
+      .story-step .n { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-2); color: var(--muted); font-size: 13px; margin-bottom: 14px; transition: background-color .4s, color .4s, border-color .4s; }
+      .story-step.on .n { background: #2862f0; border-color: #2862f0; color: #fff; }
+      .story-step h3 { margin: 0 0 8px; font-size: 26px; letter-spacing: -0.01em; }
+      .story-step p { margin: 0; color: var(--muted); font-size: 17px; max-width: 440px; }
+      .rail { position: absolute; left: 24px; right: 24px; top: 20px; display: flex; gap: 6px; z-index: 2; }
+      .rail i { flex: 1; height: 3px; border-radius: 3px; background: #262842; overflow: hidden; position: relative; }
+      .rail i::after { content: ""; position: absolute; inset: 0; background: var(--blue-text); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+      .story[data-step="0"] .rail i:nth-child(-n+1)::after, .story[data-step="1"] .rail i:nth-child(-n+2)::after,
+      .story[data-step="2"] .rail i:nth-child(-n+3)::after, .story[data-step="3"] .rail i:nth-child(-n+4)::after { transform: none; }
+      .scene { position: absolute; inset: 0; display: grid; place-items: center; padding: 56px 28px 28px; opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .55s var(--ease), transform .55s var(--ease); pointer-events: none; }
+      .story[data-step="0"] .scene:nth-child(2), .story[data-step="1"] .scene:nth-child(3), .story[data-step="2"] .scene:nth-child(4), .story[data-step="3"] .scene:nth-child(5) { opacity: 1; transform: none; }
+      .story:not([data-step]) .scene:nth-child(5) { opacity: 1; transform: none; }
+      .paper { width: min(360px, 100%); border-radius: 16px; background: var(--card-2); border: 1px solid var(--line-2); padding: 20px; box-shadow: 0 24px 48px rgb(0 0 0 / .35); }
+      .paper .tiny { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
+      .paper h4 { margin: 6px 0 10px; font-size: 18px; line-height: 1.3; }
+      .paper p { margin: 0; color: var(--muted); font-size: 14px; }
+      .from { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+      .from span { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
+      .from span.on { border-color: transparent; background: rgb(47 107 255 / .18); color: #b8ccff; }
+      .reg-line { display: grid; grid-template-columns: 76px 1fr; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
+      .reg-line b { color: var(--faint); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
+      .seal { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12px; color: var(--mint); border: 1px solid rgb(111 220 180 / .35); border-radius: 999px; padding: 3px 10px; transform: scale(.6); opacity: 0; transition: transform .5s .35s cubic-bezier(.2, 1.4, .3, 1), opacity .3s .35s; }
+      .story[data-step="1"] .seal { transform: none; opacity: 1; }
+      .checks { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px; font-size: 13px; }
+      .checks li { display: flex; align-items: center; gap: 7px; opacity: 0; transform: translateX(-6px); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+      .story[data-step="2"] .checks li { opacity: 1; transform: none; }
+      .checks li::before { content: "+"; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; font-size: 11px; font-weight: 700; background: rgb(76 201 138 / .18); color: var(--good); flex: none; }
+      .checks li.x::before { content: "\2212"; background: rgb(240 122 122 / .16); color: var(--bad); }
+      .checks li:nth-child(2) { transition-delay: .07s; } .checks li:nth-child(3) { transition-delay: .14s; } .checks li:nth-child(4) { transition-delay: .21s; }
+      .checks li:nth-child(5) { transition-delay: .28s; } .checks li:nth-child(6) { transition-delay: .35s; } .checks li:nth-child(7) { transition-delay: .42s; }
+      .checks li:nth-child(8) { transition-delay: .49s; } .checks li:nth-child(9) { transition-delay: .56s; } .checks li:nth-child(10) { transition-delay: .63s; } .checks li:nth-child(11) { transition-delay: .7s; }
+      .score { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+      .score h4 { margin-bottom: 0; }
+      .score strong { font-size: 26px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .bar { height: 6px; border-radius: 6px; background: #262842; margin-top: 8px; overflow: hidden; }
+      .bar i { display: block; height: 100%; width: 63.6%; border-radius: 6px; background: linear-gradient(90deg, var(--blue), var(--cyan)); transform-origin: left; transform: scaleX(0); transition: transform .9s .2s var(--ease); }
+      .story[data-step="2"] .bar i { transform: none; }
+      .verdict { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: rgb(47 107 255 / .18); color: #b8ccff; }
+      .paper svg { width: 100%; height: 80px; margin: 10px 0 4px; display: block; }
+      .v-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s .25s var(--ease); }
+      .story[data-step="3"] .v-line, .story:not([data-step]) .v-line { stroke-dashoffset: 0; }
+      .kv { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); padding: 7px 0; border-top: 1px solid var(--line); }
+      .kv strong { color: var(--text); font-weight: 500; }
+
+      /* Two doors */
+      .doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; perspective: 1200px; }
+      .door { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 10px; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease), border-color .3s, box-shadow .3s; transform-style: preserve-3d; overflow: hidden; }
+      .door::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(400px circle at var(--gx, 50%) var(--gy, 0%), rgb(133 168 255 / .1), transparent 60%); opacity: 0; transition: opacity .3s; }
+      .door:hover { border-color: var(--line-2); box-shadow: 0 30px 60px rgb(0 0 0 / .35); transition: transform .12s linear, border-color .3s, box-shadow .3s; }
+      .door:hover::before { opacity: 1; }
+      .door h3 { margin: 0; font-size: 24px; }
+      .door .who { color: var(--blue-text); font-size: 13px; font-weight: 600; }
       .door p { margin: 0; color: var(--muted); }
-      .door ul { margin: 4px 0 8px; padding-left: 18px; color: var(--text); font-size: 15px; }
+      .door ul { margin: 4px 0 10px; padding-left: 18px; color: var(--text); font-size: 15px; }
       .door .btn { align-self: flex-start; margin-top: auto; }
-      .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
-      .wall li { border-left: 2px solid var(--blue); padding: 4px 0 4px 16px; }
-      .wall strong { display: block; margin-bottom: 4px; }
-      .wall span { color: var(--muted); font-size: 15px; }
-      .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; counter-reset: s; }
-      .steps li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; counter-increment: s; }
-      .steps li::before { content: counter(s); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 12px; margin-bottom: 10px; }
-      .steps strong { display: block; }
-      .steps span { color: var(--muted); font-size: 14px; }
-      .closing { text-align: center; padding: 64px 0 80px; }
-      .closing h2 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 12px; }
+      .door-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgb(47 107 255 / .14); color: var(--blue-text); margin-bottom: 6px; }
+
+      /* The wall: the light blue gradient the team likes. Dark text, so contrast stays high. */
+      .lightband { position: relative; color: #0d1530; background: linear-gradient(120deg, #d6f5e9 0%, #cfe6fb 48%, #a9bff7 100%); overflow: hidden; isolation: isolate; }
+      .lightband::before { content: ""; position: absolute; z-index: -1; width: 700px; height: 700px; right: -200px; top: -260px; border-radius: 50%; background: radial-gradient(circle, rgb(255 255 255 / .55), transparent 60%); animation: drift 30s ease-in-out infinite alternate; }
+      .lightband .kicker { color: #2448b8; }
+      .lightband .sub { color: #34405e; }
+      .lightband .star { position: absolute; z-index: -1; right: 4%; bottom: -120px; width: 420px; height: 420px; opacity: .14; animation: turn 120s linear infinite; }
+      @keyframes turn { to { transform: rotate(360deg); } }
+      .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
+      .wall li { background: rgb(255 255 255 / .55); border: 1px solid rgb(255 255 255 / .8); border-radius: 18px; padding: 24px; box-shadow: 0 10px 30px rgb(36 72 184 / .08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .35s var(--ease), box-shadow .35s; }
+      .wall li:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgb(36 72 184 / .14); }
+      .wall .num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #2448b8; color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+      .wall strong { display: block; margin-bottom: 6px; font-size: 18px; }
+      .wall span { color: #34405e; font-size: 15px; }
+
+      /* Closing */
+      .closing { text-align: center; padding: 110px 0 120px; position: relative; isolation: isolate; }
+      .closing::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 640px; height: 340px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgb(47 107 255 / .22), transparent); filter: blur(20px); }
+      .closing h2 { font-size: clamp(30px, 5vw, 52px); margin: 0 0 14px; }
+      .closing p { color: var(--muted); margin: 0 auto 30px; max-width: 520px; }
       .closing .cta { justify-content: center; }
-      @media (max-width: 860px) {
-        .hero-grid, .doors, .wall, .steps { grid-template-columns: minmax(0, 1fr); }
-        .hero-grid { padding: 40px 0 24px; gap: 28px; }
+      footer { border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; }
+      footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 28px; }
+
+      /* Reveals: only once the script has run, and never for reduced motion. */
+      .motion .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+      .motion .rv.in { opacity: 1; transform: none; }
+
+      @media (max-width: 960px) {
+        .split, .story-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+        .story-stage { top: 80px; height: 400px; z-index: 1; }
+        .story-step { min-height: 52vh; }
+        .story-step:first-child { min-height: 30vh; padding-top: 16px; }
       }
-      @media (max-width: 720px) {
-        .hero { padding: 48px 0 32px; }
-        .points { grid-template-columns: 1fr; padding-bottom: 48px; }
-        nav .btn:not(.primary) { display: none; }
+      @media (max-width: 860px) {
+        .hero-grid, .doors, .wall { grid-template-columns: minmax(0, 1fr); }
+        .hero-grid { padding-top: 32px; padding-bottom: 24px; gap: 8px; }
+        .hero-art { max-width: 420px; margin: 0 auto; }
+        .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .stat:nth-child(3) { border-left: 0; }
+        .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+        .section { padding: 72px 0; }
+      }
+      @media (max-width: 640px) {
+        nav .btn:not(.primary):not(.login) { display: none; }
+        .d-body { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+        .d-side { display: none; }
+        .d-cards { grid-template-columns: minmax(0, 1fr); }
+        .stat { padding: 18px 16px; }
+        .lead { font-size: 17px; }
+        .door { padding: 24px; }
+        .scene { padding: 48px 16px 16px; }
+        .paper { padding: 16px; }
+        .checks { font-size: 12px; line-height: 1.3; gap: 6px 10px; }
+        .story-step { min-height: 46vh; }
+        .tagchip { font-size: 11px; }
+      }
+      @media (max-width: 400px) {
+        nav .btn.login { display: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation: none !important; transition: none !important; }
       }
     </style>
+    <script type="module" src="/src/site/main.ts"></script>
   </head>
   <body>
     <header>
@@ -87,89 +293,226 @@
         <a class="brand" href="/"><img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height="44" alt="Parity, systematic research" /></a>
         <nav>
           <a class="btn" href="#sides">Product and research</a>
-          <a class="btn" href="/login/">Log in</a>
+          <a class="btn login" href="/login/">Log in</a>
           <a class="btn primary" href="/signup/">Sign up</a>
         </nav>
       </div>
     </header>
-    <main class="wrap">
-      <div class="hero-grid">
-        <section class="hero">
-          <div class="eyebrow">Strategies, tested honestly</div>
-          <h1>See which trading ideas really work, in plain words.</h1>
-          <p class="lead">Discover and follow strategies across currencies, stocks, bonds and commodities. Every one is tested the same hard way, after costs, against simply holding the US stock market, and the failures are shown too.</p>
-          <div class="cta">
-            <a class="btn primary lg" href="/signup/">Sign up free</a>
-            <a class="btn lg" href="#how">How it works</a>
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <div class="eyebrow"><span class="pulse" aria-hidden="true"></span>Strategies, tested honestly</div>
+            <h1>See which trading ideas <span class="grad">really work</span>, in plain words.</h1>
+            <p class="lead">Discover and follow strategies across currencies, stocks, bonds and commodities. Every one is tested the same hard way, after costs, against simply holding the US stock market, and the failures are shown too.</p>
+            <div class="cta">
+              <a class="btn primary lg" href="/signup/">Sign up free <span class="arr" aria-hidden="true">&rarr;</span></a>
+              <a class="btn lg" href="#how">How it works</a>
+            </div>
+            <p class="fine">Research, not investment advice.</p>
           </div>
-        </section>
-        <aside class="demo" aria-label="An example strategy card">
-          <div class="tag">Example from the research</div>
-          <h3>Stock trend, 10-month</h3>
-          <span class="badge">Promising</span>
-          <svg viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#3fbf7f" stroke-width="2" points="0,64 30,60 60,58 90,52 120,54 150,44 180,40 210,30 240,26 270,14 300,8" /><polyline fill="none" stroke="#6b6d85" stroke-width="1.5" points="0,64 30,58 60,66 90,60 120,62 150,52 180,56 210,40 240,38 270,24 300,18" /></svg>
-          <div class="row"><span>Tests passed</span><strong>7 of 11</strong></div>
-          <div class="row"><span>Beats the market after costs</span><strong>Not yet</strong></div>
-          <div class="row"><span>Worst fall</span><strong>-22% vs -55% for the market</strong></div>
-          <div class="ask">Ask: "why does it miss the 0.95 luck check?"</div>
-        </aside>
-      </div>
-
-      <section class="section" id="sides">
-        <h2>Two sides, kept apart on purpose</h2>
-        <p class="sub">One side makes the results. The other shows them. Keeping them separate stops what is popular from shaping what we find.</p>
-        <div class="doors">
-          <div class="door">
-            <div class="who">For everyone</div>
-            <h3>The Parity app</h3>
-            <p>Find, follow and understand strategies, as easily as a modern investing app, with tools to test your own ideas.</p>
-            <ul>
-              <li>Discover strategies by theme, with a verdict on each</li>
-              <li>A watchlist, side-by-side comparisons and "what if" scenarios</li>
-              <li>Coming next: describe a strategy in plain words and have it tested</li>
-            </ul>
-            <a class="btn primary" href="/app/">Open the app</a>
+          <div class="hero-art" id="hero-art" role="img" aria-label="A globe of markets, grouped as currencies, stocks, bonds and commodities, around the Parity starburst">
+            <!--hero-poster-->
+            <span class="tagchip" style="left: 2%; top: 18%"><i style="background: #2f6bff"></i>Currencies</span>
+            <span class="tagchip" style="right: 0; top: 30%"><i style="background: #5cc2f5"></i>Stocks</span>
+            <span class="tagchip" style="left: 6%; bottom: 16%"><i style="background: #a9bff7"></i>Bonds</span>
+            <span class="tagchip" style="right: 6%; bottom: 8%"><i style="background: #6fdcb4"></i>Commodities</span>
           </div>
-          <div class="door">
-            <div class="who">For the curious and the sceptical</div>
-            <h3>Parity Research</h3>
-            <p>Where every result is made, in the open: the reasoning, the tests, and a sealed record of what counts.</p>
-            <ul>
-              <li>Decisions, hypotheses and reading notes, with previews on every word</li>
-              <li>An always-on search trying thousands of variations a day</li>
-              <li>An official record that cannot be quietly edited</li>
-            </ul>
-            <a class="btn" href="/research/">Open research</a>
+        </div>
+        <div class="wrap">
+          <div class="stats rv" aria-label="Parity in numbers">
+            <div class="stat">
+              <span class="num" data-count="" data-stat="strategies_tested">100+</span>
+              <span class="lbl">strategies tested the same way</span>
+              <span class="src"><span class="off">Rounded</span><span class="on">From the newest research run</span></span>
+            </div>
+            <div class="stat">
+              <span class="num" data-count="" data-stat="variations_searched">Thousands</span>
+              <span class="lbl">variations tried by the always-on search</span>
+              <span class="src"><span class="off">Rounded</span><span class="on">So far, counted against every result</span></span>
+            </div>
+            <div class="stat">
+              <span class="num" data-count="<!--stat:algorithms-->"><!--stat:algorithms--></span>
+              <span class="lbl">ideas in the algorithm library</span>
+              <span class="src">From papers and practice</span>
+            </div>
+            <div class="stat">
+              <span class="num" data-count="<!--stat:official-->"><!--stat:official--></span>
+              <span class="lbl">official runs sealed on the record</span>
+              <span class="src">Written down before they ran</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>The wall between them</h2>
-        <p class="sub">Three rules keep the results honest.</p>
-        <ul class="wall">
-          <li><strong>Research decides, the app presents.</strong><span>Every number in the app comes from research, with its verdict next to it.</span></li>
-          <li><strong>Popularity never counts.</strong><span>Sign-ups, watchlists and clicks never reach the research side or any test.</span></li>
-          <li><strong>Every try is counted.</strong><span>The more ideas tested, the higher the bar each must clear. Searching harder cannot make a winner.</span></li>
-        </ul>
+      <section class="section" aria-labelledby="preview-h">
+        <div class="wrap split">
+          <div class="rv">
+            <p class="kicker">The Parity app</p>
+            <h2 id="preview-h">Ask in plain words. See the verdict.</h2>
+            <p class="sub">A home screen like a modern investing app, with the research behind every number.</p>
+            <ul class="ticks">
+              <li><div>Ranked by evidence, not by return<span>Strategies are sorted by how well they held up in testing.</span></div></li>
+              <li><div>A watchlist and side-by-side comparisons<span>Follow the ideas you care about.</span></div></li>
+              <li><div>"What if" for real events<span>See what markets did after past shocks like this one.</span></div></li>
+            </ul>
+            <a class="btn primary" href="/app/">Open the app <span class="arr" aria-hidden="true">&rarr;</span></a>
+          </div>
+          <div class="device rv" style="--d: 1" role="img" aria-label="An animated preview of the Parity app home with example data: a question typed into the ask box, its answer, a strategy chart and a short list of strategies with their verdicts.">
+            <div class="d-bar" aria-hidden="true"><i></i><i></i><i></i><span class="d-url">parity / app</span><span class="d-tag">Example data</span></div>
+            <div class="d-body" aria-hidden="true">
+              <div class="d-side">
+                <div class="logo"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width="16" height="16" />Parity</div>
+                <span class="on">Home</span><span>Discover</span><span>Watchlist</span><span>Compare</span><span>What if</span><span>News</span>
+              </div>
+              <div class="d-main">
+                <div class="d-hello">Hi Sam<small>102 strategies tested the same honest way</small></div>
+                <div class="d-ask">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1.5v3M8 11.5v3M1.5 8h3M11.5 8h3M3.4 3.4l2 2M10.6 10.6l2 2M12.6 3.4l-2 2M5.4 10.6l-2 2" /></svg>
+                  <span class="d-type">does anything beat the market?</span><i class="d-caret"></i>
+                </div>
+                <div class="d-answer"><b>Not yet.</b> None of the strategies beats simply holding the US market after costs and the luck check.</div>
+                <div class="d-cards">
+                  <div class="d-card d-chart">
+                    <h4>Stock trend, 10-month</h4>
+                    <div class="d-big">+9.1%<em>a year</em></div>
+                    <div class="meta">vs the market, after costs</div>
+                    <svg viewBox="0 0 300 92" preserveAspectRatio="none">
+                      <polyline class="d-line" pathLength="1" fill="none" stroke="#6b6d85" stroke-width="1.5" vector-effect="non-scaling-stroke" points="0,84 25,78 50,86 75,74 100,80 125,66 150,72 175,52 200,58 225,40 250,46 275,28 300,24" />
+                      <polyline class="d-line" pathLength="1" fill="none" stroke="#4cc98a" stroke-width="2" vector-effect="non-scaling-stroke" points="0,84 25,80 50,78 75,70 100,72 125,60 150,56 175,46 200,48 225,34 250,30 275,18 300,12" />
+                    </svg>
+                  </div>
+                  <div class="d-card">
+                    <h4>Worth a look</h4>
+                    <div class="meta">Ranked by evidence</div>
+                    <div class="d-row"><i class="dot" style="background: #3987e5"></i><span class="nm">Oil spread</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#4cc98a" stroke-width="1.4" points="0,13 8,11 16,12 24,7 32,6 40,3" /></svg><span class="d-badge">Promising</span></div>
+                    <div class="d-row"><i class="dot" style="background: #d95926"></i><span class="nm">Buy the dip</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#4cc98a" stroke-width="1.4" points="0,12 8,13 16,9 24,10 32,6 40,4" /></svg><span class="d-badge">Promising</span></div>
+                    <div class="d-row"><i class="dot" style="background: #199e70"></i><span class="nm">Calm carry</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#f07a7a" stroke-width="1.4" points="0,5 8,7 16,6 24,9 32,8 40,11" /></svg><span class="d-badge n">Not proven</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section class="section" id="how">
-        <h2>How an idea becomes a result</h2>
-        <p class="sub">The same path for every strategy, whoever thought of it.</p>
-        <ol class="steps">
-          <li><strong>An idea</strong><span>From a paper, a trader's practice, or the always-on search.</span></li>
-          <li><strong>Written down first</strong><span>What we expect, and what would prove it wrong, before any test.</span></li>
-          <li><strong>The gauntlet</strong><span>Costs, other periods, other settings, and a check for luck.</span></li>
-          <li><strong>Shown with its verdict</strong><span>In plain words, claiming no more than the research found.</span></li>
-        </ol>
+      <section class="section story" id="how" aria-labelledby="how-h">
+        <div class="wrap">
+          <p class="kicker rv">How it works</p>
+          <h2 id="how-h" class="rv">How an idea becomes a result</h2>
+          <p class="sub rv">The same path for every strategy, whoever thought of it.</p>
+          <div class="story-grid">
+            <div class="story-stage" aria-hidden="true">
+              <div class="rail"><i></i><i></i><i></i><i></i></div>
+              <div class="scene">
+                <div class="paper">
+                  <div class="tiny">An idea</div>
+                  <h4>"Own last year's strongest currencies, and step aside when markets panic."</h4>
+                  <p>Noted with where it came from, before anyone looks at a result.</p>
+                  <div class="from"><span class="on">A paper</span><span>A trader's practice</span><span>The search</span></div>
+                </div>
+              </div>
+              <div class="scene">
+                <div class="paper">
+                  <div class="tiny">Written down first</div>
+                  <h4>Plan for currency momentum, calm only</h4>
+                  <div class="reg-line"><b>Expect</b><span>A higher return per unit of risk than holding stocks</span></div>
+                  <div class="reg-line"><b>Wrong if</b><span>It fails the luck check, or only works in one period</span></div>
+                  <div class="reg-line"><b>Settings</b><span>Fixed now. No tuning after the test.</span></div>
+                  <span class="seal">Sealed before the test</span>
+                </div>
+              </div>
+              <div class="scene">
+                <div class="paper">
+                  <div class="tiny">The gauntlet, the same 11 tests for all</div>
+                  <div class="score"><h4>Stock trend, 10-month</h4><strong>7 of 11</strong></div>
+                  <div class="bar"><i></i></div>
+                  <ul class="checks">
+                    <li>Better return for the risk</li><li>More at the same risk</li><li class="x">Not luck from many tries</li><li>Survives double costs</li>
+                    <li class="x">Wins in every era</li><li class="x">Wins in recent years</li><li>Clearly above zero</li><li>Timing matters</li>
+                    <li>Not one lucky setting</li><li>Not one lucky year</li><li class="x">Does not crash with stocks</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="scene">
+                <div class="paper">
+                  <div class="tiny">Shown with its verdict</div>
+                  <h4>Stock trend, 10-month <span class="verdict">Promising</span></h4>
+                  <svg viewBox="0 0 300 80" preserveAspectRatio="none">
+                    <polyline class="v-line" pathLength="1" fill="none" stroke="#6b6d85" stroke-width="1.5" vector-effect="non-scaling-stroke" points="0,72 30,66 60,74 90,62 120,66 150,52 180,58 210,40 240,44 270,28 300,22" />
+                    <polyline class="v-line" pathLength="1" fill="none" stroke="#4cc98a" stroke-width="2" vector-effect="non-scaling-stroke" points="0,72 30,68 60,66 90,58 120,60 150,48 180,44 210,34 240,30 270,18 300,10" />
+                  </svg>
+                  <div class="kv"><span>Tests passed</span><strong>7 of 11</strong></div>
+                  <div class="kv"><span>Beats the market after costs</span><strong>Not yet</strong></div>
+                </div>
+              </div>
+            </div>
+            <ol class="story-steps">
+              <li class="story-step"><span class="n">1</span><h3>An idea</h3><p>From a paper, a trader's practice, or the always-on search. Every idea goes in the library, with its source.</p></li>
+              <li class="story-step"><span class="n">2</span><h3>Written down first</h3><p>What we expect, and what would prove it wrong, before any test runs. The plan cannot change afterwards.</p></li>
+              <li class="story-step"><span class="n">3</span><h3>The gauntlet</h3><p>The same tests for everyone: costs, other periods, other settings, and a check for luck. Most ideas fail some of them.</p></li>
+              <li class="story-step"><span class="n">4</span><h3>Shown with its verdict</h3><p>In plain words, claiming no more than the research found. The failures stay on the page too.</p></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sides" aria-labelledby="sides-h">
+        <div class="wrap">
+          <p class="kicker rv">Two sides</p>
+          <h2 id="sides-h" class="rv">Kept apart on purpose</h2>
+          <p class="sub rv">One side makes the results. The other shows them. Keeping them separate stops what is popular from shaping what we find.</p>
+          <div class="doors">
+            <div class="door rv" data-tilt>
+              <div class="door-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12.5l3.5-4 3 2.5L14 4" /><path d="M10.5 4H14v3.5" /></svg></div>
+              <div class="who">For everyone</div>
+              <h3>The Parity app</h3>
+              <p>Find, follow and understand strategies, as easily as a modern investing app, with tools to test your own ideas.</p>
+              <ul>
+                <li>Discover strategies by theme, with a verdict on each</li>
+                <li>A watchlist, side-by-side comparisons and "what if" scenarios</li>
+                <li>Coming next: describe a strategy in plain words and have it tested</li>
+              </ul>
+              <a class="btn primary" href="/app/">Open the app <span class="arr" aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="door rv" data-tilt style="--d: 1">
+              <div class="door-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3h4a1.5 1.5 0 0 1 1.5 1.5V13a1.5 1.5 0 0 0-1.5-1.5h-4zM13.5 3h-4A1.5 1.5 0 0 0 8 4.5V13a1.5 1.5 0 0 1 1.5-1.5h4z" /></svg></div>
+              <div class="who">For the curious and the sceptical</div>
+              <h3>Parity Research</h3>
+              <p>Where every result is made, in the open: the reasoning, the tests, and a sealed record of what counts.</p>
+              <ul>
+                <li>Decisions, hypotheses and reading notes, with previews on every word</li>
+                <li>An always-on search trying thousands of variations a day</li>
+                <li>An official record that cannot be quietly edited</li>
+              </ul>
+              <a class="btn" href="/research/">Open research <span class="arr" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section lightband" aria-labelledby="wall-h">
+        <img class="star" src="/brand/2026-10-21-starburst/parity-mark-black.svg" alt="" width="420" height="420" loading="lazy" />
+        <div class="wrap">
+          <p class="kicker rv">The wall between them</p>
+          <h2 id="wall-h" class="rv">Three rules keep the results honest</h2>
+          <p class="sub rv">They are written into how Parity is built, not just promised.</p>
+          <ul class="wall">
+            <li class="rv"><span class="num">1</span><strong>Research decides, the app presents.</strong><span>Every number in the app comes from research, with its verdict next to it.</span></li>
+            <li class="rv" style="--d: 1"><span class="num">2</span><strong>Popularity never counts.</strong><span>Sign-ups, watchlists and clicks never reach the research side or any test.</span></li>
+            <li class="rv" style="--d: 2"><span class="num">3</span><strong>Every try is counted.</strong><span>The more ideas tested, the higher the bar each must clear. Searching harder cannot make a winner.</span></li>
+          </ul>
+        </div>
       </section>
 
       <section class="closing">
-        <h2>Start with the truth about a strategy.</h2>
-        <div class="cta">
-          <a class="btn primary lg" href="/signup/">Sign up free</a>
-          <a class="btn lg" href="/login/">Log in</a>
+        <div class="wrap">
+          <h2 class="rv">Start with the truth about a strategy.</h2>
+          <p class="rv">Free to join. Every result comes with the tests it passed and the ones it failed.</p>
+          <div class="cta rv">
+            <a class="btn primary lg" href="/signup/">Sign up free <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="btn lg" href="/login/">Log in</a>
+          </div>
         </div>
       </section>
     </main>

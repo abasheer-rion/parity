@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 16 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 17 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- 2026-10-22 [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - 2026-10-22 [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
 - 2026-10-22 [DEC-0015: Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - 2026-10-22 [DEC-0014: A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - 2026-10-21 [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - 2026-10-21 [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
-- 2026-10-21 [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
-- 2026-10-21 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 
 ## intent
 
@@ -65,6 +65,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0014 | [A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
 | DEC-0015 | [Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0016 | [Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0017 | [Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -124,7 +125,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-22 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
