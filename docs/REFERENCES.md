@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-998 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1000 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 280 |
+| [Papers](#papers) | 281 |
 | [Preprints and working papers](#preprints-and-working-papers) | 52 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
-| [Web pages](#web-pages) | 437 |
+| [Web pages](#web-pages) | 438 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 32 |
 | [News](#news) | 4 |
@@ -495,6 +495,16 @@ Also at: <https://doi.org/10.1016/j.jfineco.2019.09.002>.
 
 Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [RES-0001](research/0001-reading-list.md).
 
+### daniel2016
+
+Daniel, Kent; Moskowitz, Tobias J. (2016). Momentum Crashes. *Journal of Financial Economics 122(2), 221-247*. <https://www.nber.org/system/files/working_papers/w20439/w20439.pdf>. Accessed 2026-10-22. Verification: not checked.
+
+Also at: <https://www.nber.org/papers/w20439>.
+
+Note: Read for RES-0016 (NBER working paper 20439, first 12 pages).
+
+Cited in: [RES-0016](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+
 ### debondt1985
 
 De Bondt, Werner F. M.; Thaler, Richard (1985). Does the Stock Market Overreact? *Journal of Finance 40(3), 793-805*. doi:10.1111/j.1540-6261.1985.tb05004.x <https://doi.org/10.1111/j.1540-6261.1985.tb05004.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -881,9 +891,9 @@ Cited in: [catalog/algorithms/managed-futures-trend-following.json](../catalog/a
 
 Hurst, Brian; Ooi, Yao Hua; Pedersen, Lasse Heje (2017). A Century of Evidence on Trend-Following Investing. *The Journal of Portfolio Management 44(1), 15-29*. doi:10.3905/jpm.2017.44.1.015 <https://doi.org/10.3905/jpm.2017.44.1.015>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026>.
+Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026>, <https://fairmodel.econ.yale.edu/ec439/hurst.pdf>.
 
-Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0016](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### hutchinson2022
 
@@ -2197,7 +2207,7 @@ Brunnermeier, Markus; Nagel, Stefan; Pedersen, Lasse (2008). Carry Trades and Cu
 
 Also at: <https://www.nber.org/system/files/working_papers/w14473/w14473.pdf>.
 
-Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0016](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### burnside2007
 
@@ -3394,6 +3404,14 @@ Dubois, Michel; Marechal, Loic (n.d.). The valuation effects of index investment
 Note: Read for RES-0014 (poster text).
 
 Cited in: [catalog/algorithms/commodity-index-roll-front-running.json](../catalog/algorithms/commodity-index-roll-front-running.json), [RES-0014](research/0014-lesser-known-strategies-and-what-firms-have-published.md).
+
+### nechio2014
+
+Nechio, Fernanda (2014). Fed Tapering News and Emerging Markets. *FRBSF Economic Letter 2014-06*. <https://www.frbsf.org/research-and-insights/publications/economic-letter/2014/03/federal-reserve-tapering-emerging-markets/>. Accessed 2026-10-22. Verification: not checked.
+
+Note: Read for RES-0016 (full text).
+
+Cited in: [RES-0016](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### twosigma2017
 

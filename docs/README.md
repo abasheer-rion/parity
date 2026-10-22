@@ -10,10 +10,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 24 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 15 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 9 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 15 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 16 |
 | [guide](#guide) | How to do something in this repo, step by step. | 5 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 11 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 12 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -36,6 +36,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-22 [RES-0016: How the ingredients behave in crises, and what Sim World should show](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
 - 2026-10-22 [RES-0015: Combining many strategies, the evidence and the ingredient list](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - 2026-10-22 [RES-0014: Lesser-known strategies and what firms have published](research/0014-lesser-known-strategies-and-what-firms-have-published.md)
 - 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
@@ -43,7 +44,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
-- 2026-10-22 [LOG-0011: Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 
 ## intent
 
@@ -134,6 +134,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0013 | [Famous currency and commodity traders and what their records teach](research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0014 | [Lesser-known strategies and what firms have published](research/0014-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0015 | [Combining many strategies, the evidence and the ingredient list](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0016 | [How the ingredients behave in crises, and what Sim World should show](research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## guide
 
@@ -180,6 +181,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0009 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 | LOG-0010 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | LOG-0011 | [Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0011 | [Crisis behaviour, and a check of Sim World](log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## algorithm
 

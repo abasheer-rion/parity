@@ -1516,7 +1516,8 @@
       "used_in": [
         "catalog/algorithms/retail-swap-carry.json",
         "docs/algorithms/0069-retail-swap-carry.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -2448,6 +2449,33 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "daniel2016",
+      "type": "paper",
+      "authors": [
+        "Daniel, Kent",
+        "Moskowitz, Tobias J."
+      ],
+      "year": 2016,
+      "title": "Momentum Crashes",
+      "venue": "Journal of Financial Economics 122(2), 221-247",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/system/files/working_papers/w20439/w20439.pdf",
+      "also_at": [
+        "https://www.nber.org/papers/w20439"
+      ],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
+      ],
+      "note": "Read for RES-0016 (NBER working paper 20439, first 12 pages)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -4448,14 +4476,16 @@
       "arxiv": null,
       "url": "https://doi.org/10.3905/jpm.2017.44.1.015",
       "also_at": [
-        "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026"
+        "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026",
+        "https://fairmodel.econ.yale.edu/ec439/hurst.pdf"
       ],
       "accessed": "2026-10-21",
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0001-reading-list.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -7030,6 +7060,30 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "nechio2014",
+      "type": "web-page",
+      "authors": [
+        "Nechio, Fernanda"
+      ],
+      "year": 2014,
+      "title": "Fed Tapering News and Emerging Markets",
+      "venue": "FRBSF Economic Letter 2014-06",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.frbsf.org/research-and-insights/publications/economic-letter/2014/03/federal-reserve-tapering-emerging-markets/",
+      "also_at": [],
+      "accessed": "2026-10-22",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
+      ],
+      "note": "Read for RES-0016 (full text)",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
