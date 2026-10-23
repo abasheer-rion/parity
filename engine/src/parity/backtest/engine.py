@@ -22,7 +22,7 @@ TRADING_DAYS = 252
 BORROW_SPREAD = 0.005  # 50 bp a year over the T-bill on borrowed money
 # Instruments whose returns are already excess returns: holding them needs collateral,
 # not cash, so going above 100% is not borrowing.
-SELF_FINANCING = ("fx.", "fut.", "vrp.", "factor.")
+SELF_FINANCING = ("fx.", "xfx.", "fut.", "vrp.", "factor.")
 
 # Research factors are paper portfolios: their published returns ignore the cost of
 # trading the stocks inside them. Holding one is charged this much a year per unit
@@ -64,9 +64,12 @@ class BacktestResult:
         return (1 + self.returns).cumprod()
 
 
-def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bool) -> pd.DataFrame:
+def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bool,
+                  cash_rate: str = "rate.USD") -> pd.DataFrame:
     """Daily returns per instrument. `cash.USD` earns the US 3-month rate, so strategies
-    that step out of the market are not penalised for holding cash."""
+    that step out of the market are not penalised for holding cash. `cash_rate` picks
+    which rate: newer strategies use the T-bill, the same rate the excess return is
+    measured against, so a day in cash scores exactly zero (DEC-0027)."""
     priced = [c for c in instruments if c != "cash.USD"]
     px = panel[priced]
     rets = px.pct_change(fill_method=None)
@@ -74,7 +77,7 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
     # 2020. Days where either price is at or below zero earn nothing instead.
     rets = rets.where((px > 0) & (px.shift(1) > 0))
     if "cash.USD" in instruments:
-        rets["cash.USD"] = panel["rate.USD"].shift(1) / 100 / TRADING_DAYS
+        rets["cash.USD"] = panel[cash_rate].shift(1) / 100 / TRADING_DAYS
         rets = rets[instruments]
     if include_carry and "rate.USD" in panel:
         for col in instruments:
@@ -82,6 +85,16 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
                 rate_col = "rate." + col.split(".", 1)[1]
                 if rate_col in panel:
                     gap = (panel[rate_col] - panel["rate.USD"]) / 100 / TRADING_DAYS
+                    rets[col] = rets[col] + gap.fillna(0.0)
+    # Currencies priced from ECB reference rates (xfx.*) carry the central bank policy
+    # rate gap (BIS), the only rate we have for all of them. A proxy: forward points
+    # follow money market rates, which sit near but not at the policy rate (DEC-0027).
+    if include_carry and "policy.USD" in panel:
+        for col in instruments:
+            if col.startswith("xfx."):
+                rate_col = "policy." + col.split(".", 1)[1]
+                if rate_col in panel:
+                    gap = (panel[rate_col] - panel["policy.USD"]) / 100 / TRADING_DAYS
                     rets[col] = rets[col] + gap.fillna(0.0)
     return rets.fillna(0.0)
 
@@ -92,8 +105,11 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     instruments = strategy.instruments()
     target = strategy.weights(panel).reindex(columns=instruments).fillna(0.0)
 
-    rets = asset_returns(panel, instruments, config.include_carry)
+    rets = asset_returns(panel, instruments, config.include_carry,
+                         getattr(strategy, "cash_rate", "rate.USD"))
     held = target.shift(1).fillna(0.0)
+    # A strategy may set a higher cost floor than the run's, for wide or thin markets.
+    cost_bps = max(config.cost_bps, getattr(strategy, "min_cost_bps", 0.0))
 
     if config.target_vol:
         raw = (held * rets).sum(axis=1)
@@ -120,7 +136,7 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     financing = borrowed * (rf + BORROW_SPREAD / TRADING_DAYS)
     drag = [c for c in held.columns if c in FACTOR_COST]
     inside = sum(held[c].abs() * FACTOR_COST[c] / TRADING_DAYS for c in drag) if drag else 0.0
-    net = gross - turnover * config.cost_bps / 1e4 - financing - inside
+    net = gross - turnover * cost_bps / 1e4 - financing - inside
     if not getattr(strategy, "funded", False):
         net = net + rf
 

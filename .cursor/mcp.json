@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "parity": {
+      "command": "${workspaceFolder}/engine/.venv/bin/parity",
+      "args": ["mcp"]
+    }
+  }
+}

@@ -112,3 +112,73 @@ def tag(text: str, *, default_category: str | None = None, regions: list[str] | 
         "regions": sorted(reg),
         "category": category,
     }
+
+
+# ------------------------------------------------------------------ topics
+# Topics are what an item is about in market terms, for the event studies in study.py.
+# Same idea as the lists above: plain word lists anyone can read and fix. An item can
+# have several topics or none.
+
+TOPICS: dict[str, tuple[str, list[str]]] = {
+    "rate-hike": ("Rate hike", [r"\braise[sd]? (its |the )?(key |policy |interest )*rates?\b",
+                                r"\brate (hike|increase|rise)s?\b",
+                                r"\bhikes? (interest )?rates?\b",
+                                r"\bincrease[sd]? (the )?(policy |interest )*rates?\b",
+                                r"\btighten(s|ed|ing)? (monetary )?policy\b"]),
+    "rate-cut": ("Rate cut", [r"\bcuts? (its |the )?(key |policy |interest )*rates?\b",
+                              r"\brate cuts?\b",
+                              r"\blower(s|ed)? (the )?(policy |interest )*rates?\b",
+                              r"\bemergency cut\b", r"\bnegative (interest )?rates?\b"]),
+    "policy-decision": ("Central bank decision", [r"\bfomc statement\b",
+                                                  r"\bmonetary policy (decision|statement)s?\b",
+                                                  r"\bstatement on monetary policy\b",
+                                                  r"\bfederal open market committee\b",
+                                                  r"\bmonetary policy committee\b"]),
+    "qe": ("Bond buying (QE)", [r"\bquantitative (and qualitative )?(monetary )?easing\b",
+                                r"\basset purchases?\b", r"\bbond[- ]buying\b",
+                                r"\bbalance sheet (runoff|reduction)\b", r"\btapering\b",
+                                r"\byield curve control\b"]),
+    "inflation": ("Inflation", [r"\binflation\b", r"\bcpi\b", r"\bconsumer prices?\b",
+                                r"\bproducer prices?\b"]),
+    "jobs": ("Jobs", [r"\bpayrolls?\b", r"\bunemployment\b", r"\bjobs report\b",
+                      r"\bemployment situation\b", r"\bjobless\b"]),
+    "growth": ("Growth and recession", [r"\brecession\b", r"\bgdp\b", r"\beconomic growth\b",
+                                        r"\bslowdown\b", r"\bcontraction\b"]),
+    "opec": ("OPEC", [r"\bopec\b", r"\boil cartel\b"]),
+    "oil-supply": ("Oil supply", [r"\boil (supply|output|production|exports?)\b",
+                                  r"\bcrude (supply|output|production|exports?)\b",
+                                  r"\bproduction cuts?\b", r"\boil ?fields?\b",
+                                  r"\brefiner(y|ies)\b", r"\bpipeline\b", r"\bprice war\b",
+                                  r"\boil embargo\b"]),
+    "war": ("War and conflict", [r"\bwar\b(?! on)", r"\binvasion\b", r"\binvade[sd]?\b",
+                                 r"\bmilitary\b", r"\bmissiles?\b", r"\bair ?strikes?\b",
+                                 r"\bdrones?\b", r"\btroops\b", r"\bstrikes? on\b"]),
+    "sanctions": ("Sanctions", [r"\bsanctions?\b", r"\bembargo\b", r"\breserves? frozen\b",
+                                r"\bfreez\w* (of )?(assets|reserves)\b"]),
+    "trade": ("Tariffs and trade", [r"\btariffs?\b", r"\btrade war\b", r"\btrade deal\b",
+                                    r"\bimport (duties|duty)\b"]),
+    "bank-failure": ("Bank failure", [r"\bbank (failure|collapse|run)s?\b", r"\bfailed bank\b",
+                                      r"\breceivership\b", r"\bbail ?out\b", r"\brescue\b",
+                                      r"\bbankruptcy\b", r"\binsolven\w*\b",
+                                      r"\bbank\w* (fail|collaps)\w*\b"]),
+    "debt-crisis": ("Debt and default", [r"\bdefault(s|ed)?\b", r"\bdowngrade[sd]?\b",
+                                         r"\bdebt crisis\b", r"\bjunk\b", r"\bdebt ceiling\b"]),
+    "currency": ("Currency shocks", [r"\bcurrency intervention\b", r"\bdevalu\w*\b",
+                                     r"\bpeg\b", r"\bexchange rate floor\b",
+                                     r"\bcurrency crisis\b", r"\bintervene[sd]? in\b"]),
+    "election": ("Elections and votes", [r"\belection\b", r"\breferendum\b"]),
+    "pandemic": ("Pandemic", [r"\bpandemic\b", r"\bcovid\b", r"\bcoronavirus\b",
+                              r"\boutbreak\b", r"\bepidemic\b"]),
+    "disaster": ("Natural disaster", [r"\bhurricane\b", r"\bearthquake\b", r"\btsunami\b"]),
+    "terror": ("Terror attack", [r"\bterror\w*\b", r"\bbombings?\b"]),
+    "enforcement": ("Enforcement actions", [r"\benforcement actions?\b", r"\bcharges\b",
+                                            r"\bcivil money penalt(y|ies)\b"]),
+}
+
+TOPIC_LABEL = {k: v[0] for k, v in TOPICS.items()}
+_TOPIC = {k: re.compile("|".join(v[1]), re.IGNORECASE) for k, v in TOPICS.items()}
+
+
+def topics(text: str) -> list[str]:
+    """Every topic whose words appear in the text, in the order of TOPICS."""
+    return [k for k, p in _TOPIC.items() if p.search(text or "")]
