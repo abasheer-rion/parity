@@ -20,4 +20,4 @@ One-off, kept for the record:
 | `resolve_sources.py`, `resolve_catalog.py` | Resolved the rebase of PR #17 on main's wider data sources (#30). |
 | `renumber_logs.py` | Renumbered Amanda's 22 October logs to LOG-0009 to LOG-0012 after main took LOG-0008. |
 
-The screenshots of the public front page from that session are in `docs/screenshots/2026-10-22-front-page/`. They were taken locally with headless Chrome. The narrow one is 520 pixels wide, because headless Chrome would not go narrower.
+The screenshots of the public front page from that session are in `docs/assets/screenshots/2026-10-22-front-page/`. They were taken locally with headless Chrome. The narrow one is 520 pixels wide, because headless Chrome would not go narrower.
