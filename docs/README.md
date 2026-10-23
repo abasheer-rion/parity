@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 11 |
 | [guide](#guide) | How to do something in this repo, step by step. | 6 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 9 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 10 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -31,12 +31,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
 - 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - 2026-10-23 [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
-- 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 
 ## intent
 
@@ -159,6 +159,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0009 | [Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md) | final | 2026-10-23 | [process](TAGS.md#process) |
+| LOG-0010 | [Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md) | final | 2026-10-23 | [process](TAGS.md#process) |
 
 ## algorithm
 
