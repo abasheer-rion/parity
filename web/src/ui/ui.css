@@ -421,7 +421,8 @@
 .ui-skel-row { display: flex; align-items: center; gap: 12px; padding: 0 10px; border-bottom: 1px solid var(--border); }
 .ui-skel-row > span { display: flex; min-width: 0; }
 .ui-skel-card { padding: 20px 22px; border-radius: var(--radius); background: var(--card-sheen, none), var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
-.ui-skel-page { display: grid; gap: var(--space-6); }
+/* At least a screen tall, so whatever sits under it (the footer) starts below the fold and does not jump when the page arrives. */
+.ui-skel-page { display: grid; align-content: start; gap: var(--space-6); min-height: calc(100vh - 160px); }
 .ui-skel-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
 .ui-skel-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
 @media (max-width: 640px) { .ui-skel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

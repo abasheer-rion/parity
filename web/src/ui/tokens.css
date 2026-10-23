@@ -13,7 +13,7 @@
 /* Web fonts load after the first paint. These fallbacks are stretched to Inter's and
    Roboto Mono's measurements, so text keeps its width and line breaks when the real
    font arrives and nothing on the page moves (no layout shift from the font swap). */
-@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"); ascent-override: 90.44%; descent-override: 22.52%; line-gap-override: 0%; size-adjust: 107.12%; }
+@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"); ascent-override: 90.6%; descent-override: 22.6%; line-gap-override: 0%; size-adjust: 106.85%; }
 @font-face { font-family: "Roboto Mono Fallback"; src: local("Courier New"), local("Menlo"); ascent-override: 87.5%; descent-override: 22.9%; line-gap-override: 0%; size-adjust: 99.9%; }
 
 :root {
