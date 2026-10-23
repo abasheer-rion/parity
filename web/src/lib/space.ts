@@ -10,8 +10,8 @@ export const SPACE_LABEL: Record<Space, string> = { product: "Product", research
 /** Routes that belong to each side. A route from the other side redirects there. */
 export const ROUTES: Record<Space | "both", string[]> = {
   both: ["start", "how", "learn", "settings", "ui"],
-  product: ["", "home", "strategies", "strategy", "watchlist", "compare", "lab", "scenarios", "news", "markets"],
-  research: ["", "home", "docs", "doc", "refs", "search", "ledger", "catalog", "algo", "sim", "signals", "explore", "data", "sources", "edges"],
+  product: ["", "home", "strategies", "strategy", "watchlist", "compare", "lab", "scenarios", "news", "markets", "academy"],
+  research: ["", "home", "docs", "doc", "refs", "search", "ledger", "catalog", "algo", "sim", "signals", "explore", "data", "sources", "edges", "private"],
 };
 
 /** Where a route lives, or null if it is on this side (or both). */

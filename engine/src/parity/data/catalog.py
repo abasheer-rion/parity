@@ -4,7 +4,8 @@ Keys follow a simple pattern so strategies can ask for data without knowing wher
 it comes from:
 
     fx.<CCY>     USD value of one unit of the foreign currency (higher = foreign stronger)
-    rate.<CCY>   3-month interbank rate, percent per year (monthly, forward filled)
+    rate.<CCY>   3-month interbank rate, percent per year (monthly average, used from a
+                 week after the month ends, then forward filled)
     cmd.<NAME>   commodity price in USD
     eq.<NAME>    equity index or ETF level
     risk.<NAME>  risk gauges such as the VIX
@@ -26,6 +27,7 @@ Wider official data (REF-0015), all optional:
     xfx.<CCY>      USD value of one unit of a currency, crossed from ECB reference rates
     eia.<NAME>     EIA weekly petroleum and gas stocks (needs EIA_API_KEY)
     macro.<NAME>   weekly economic gauges
+    pm.<NAME>      private markets proxies: property prices, bank lending, loan standards
 
 To add a series, add one line here and note it in docs/reference/0003-data-sources.md.
 """
@@ -42,7 +44,7 @@ class Series:
     code: str
     description: str
     invert: bool = False  # True when the source quotes foreign units per USD
-    frequency: str = "D"  # "D" daily, "M" monthly
+    frequency: str = "D"  # "D" daily, "W" weekly, "M" monthly, "Q" quarterly
     required: bool = True  # official runs fail if a required series cannot be fetched
     #: Monthly averages dated the 1st are only known after the month ends. When set, the
     #: panel moves each value to the month's end plus this many business days, the day it
@@ -85,8 +87,9 @@ _RATE_CODES = {
 }
 
 _RATES = [
-    Series(f"rate.{ccy}", "fred", f"IR3TIB01{cc}M156N", f"{ccy} 3-month interbank rate (OECD)",
-           frequency="M")
+    Series(f"rate.{ccy}", "fred", f"IR3TIB01{cc}M156N", f"{ccy} 3-month interbank rate (OECD "
+           "monthly average, used from a week after the month ends)", frequency="M",
+           published_after=5)
     for ccy, cc in _RATE_CODES.items()
 ]
 
@@ -358,8 +361,46 @@ _BOND_TR5 = [Series("bond.TR5", "derived", "curve.UST_5Y", "US 5-year Treasury t
                     "of 4.5", required=False, site=False)]
 BOND_DURATION["bond.TR5"] = 4.5
 
+# Private markets proxies (DEC-0029). Free FRED series on property prices and bank lending
+# into commercial property and private credit. NCREIF, Cambridge Associates, Preqin and
+# Burgiss are paid and not on FRED. Quarterly values are dated the first day of the quarter
+# and come out weeks after it ends, so `published_after` counts business days after the
+# quarter's end (store.panel). No strategy reads these yet.
+_PRIVATE = [
+    Series("pm.CRE_PRICE", "fred", "BOGZ1FL075035503Q", "US commercial real estate price "
+           "index (Federal Reserve Financial Accounts, Z.1). Appraisal based before 1996, "
+           "then chained to the CoStar repeat-sale index, so kept off the site; used for "
+           "the unsmoothing study only", frequency="Q", required=False, published_after=50,
+           site=False),
+    Series("pm.CRE_PRICE_YOY", "fred", "COMREPUSQ159N", "US commercial real estate prices, "
+           "change on a year earlier, percent (BIS)", frequency="Q", required=False,
+           published_after=65),
+    Series("pm.HOUSE_FHFA", "fred", "USSTHPI", "US house prices, all transactions index "
+           "(FHFA). Mixes sale prices with refinance appraisals, so it is smoothed",
+           frequency="Q", required=False, published_after=43),
+    Series("pm.LOANS_CRE", "fred", "CREACBW027SBOG", "Commercial real estate loans at US "
+           "banks, billion USD, weekly to Wednesday, released the Friday of the next week "
+           "(Federal Reserve H.8)", frequency="W", required=False, lag_days=7),
+    Series("pm.LOANS_CI", "fred", "BUSLOANS", "Commercial and industrial loans at US banks, "
+           "billion USD, monthly (Federal Reserve H.8)", frequency="M", required=False,
+           published_after=10),
+    Series("pm.LOANS_NDFI", "fred", "LNFACBW027SBOG", "US bank loans to nondepository "
+           "financial institutions, which include private credit funds and BDCs, billion "
+           "USD, weekly (Federal Reserve H.8)", frequency="W", required=False, lag_days=7),
+    Series("pm.SLOOS_CI", "fred", "DRTSCILM", "Net percent of US banks tightening standards "
+           "on business loans to large and middle-market firms (Federal Reserve senior loan "
+           "officer survey)", frequency="Q", required=False, published_after=0),
+    Series("pm.SLOOS_CRE", "fred", "SUBLPDRCSN", "Net percent of US banks tightening "
+           "standards on commercial real estate loans for nonfarm nonresidential property "
+           "(Federal Reserve senior loan officer survey)", frequency="Q", required=False,
+           published_after=0),
+    Series("pm.DELINQ_CRE", "fred", "DRCRELEXFACBS", "Delinquency rate on commercial real "
+           "estate loans at US banks, percent (Federal Reserve)", frequency="Q",
+           required=False, published_after=45),
+]
+
 _WIDER = (_ECB_FX + _EA_CURVE + _ECB_MONEY + _UST_CURVE + _POLICY + _COT + _EIA
-          + _FRED_MORE + _XFX + _BOND_TR5)
+          + _FRED_MORE + _XFX + _BOND_TR5 + _PRIVATE)
 
 # Emerging market currencies that also have an interest rate series below, so carry can
 # be booked on them (em_fx strategies). Prices come from the Fed H.10 series above where
@@ -380,8 +421,9 @@ _EM_RATE_BIS = {"BRL": "BR", "IDR": "ID", "INR": "IN", "MYR": "MY", "PHP": "PH",
                 "TRY": "TR"}
 
 _EM_RATES = [
-    Series(f"rate.{ccy}", "oecd", cc, f"{ccy} 3-month interbank rate (OECD), dated at month end",
-           frequency="M", required=False) for ccy, cc in _EM_RATE_OECD.items()
+    Series(f"rate.{ccy}", "oecd", cc, f"{ccy} 3-month interbank rate (OECD monthly average, "
+           "used from a week after the month ends)", frequency="M", required=False,
+           published_after=5) for ccy, cc in _EM_RATE_OECD.items()
 ] + [
     # Step series: a policy rate holds until the next decision, so forward fill it like a
     # monthly series rather than letting it go stale after five days.

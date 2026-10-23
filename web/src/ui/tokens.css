@@ -10,6 +10,12 @@
    - accent is for the one primary action and the selected state, never for data. */
 @import "./mercury-tokens.css";
 
+/* Web fonts load after the first paint. These fallbacks are stretched to Inter's and
+   Roboto Mono's measurements, so text keeps its width and line breaks when the real
+   font arrives and nothing on the page moves (no layout shift from the font swap). */
+@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"); ascent-override: 90.44%; descent-override: 22.52%; line-gap-override: 0%; size-adjust: 107.12%; }
+@font-face { font-family: "Roboto Mono Fallback"; src: local("Courier New"), local("Menlo"); ascent-override: 87.5%; descent-override: 22.9%; line-gap-override: 0%; size-adjust: 99.9%; }
+
 :root {
   --canvas: var(--ds-background-default);
   --side-bg: var(--ds-background-sidebar);
@@ -40,9 +46,9 @@
   --series-5: #e87ba4; --series-6: #008300; --series-7: #4a3aa7; --series-8: #e34948;
 
   /* Mercury's type faces are licensed; Inter is the closest free match. */
-  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-text: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", "Roboto Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Mercury's type scale (size / line height / weight) */
   --fs-xs: 12px; --fs-sm: 13px; --fs-14: 14px; --fs-md: 15px; --fs-lg: 17px; --fs-xl: 19px; --fs-2xl: 28px; --fs-3xl: 34px;

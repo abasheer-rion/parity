@@ -7,13 +7,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 27 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 30 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 15 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 9 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 17 |
-| [guide](#guide) | How to do something in this repo, step by step. | 6 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 10 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
+| [guide](#guide) | How to do something in this repo, step by step. | 7 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 13 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 14 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -36,14 +36,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
+- 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md)
-- 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-23 [EXP-0008: Emerging market currencies since 2010](experiments/0008-emerging-market-currencies-since-2010.md)
-- 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
-- 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 
 ## intent
 
@@ -69,7 +69,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0011 | [Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | DEC-0012 | [Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md) | accepted | 2026-10-21 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0013 | [Dashboard clarity, plain names, verdicts and search that answers](decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md) | accepted | 2026-10-21 | [ui](TAGS.md#ui) |
-| DEC-0014 | [A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
+| DEC-0014 | [A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md) | accepted | 2026-10-23 | [process](TAGS.md#process) |
 | DEC-0015 | [Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0016 | [Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0017 | [Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
@@ -83,6 +83,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
 | DEC-0027 | [New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
+| DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -112,6 +115,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
 | EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| EXP-0005 | [Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md) | done | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | EXP-0006 | [Rerun of all sixteen strategies with corrected scoring](experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method) |
 | EXP-0007 | [Stocks plus currency trend on its own](experiments/0007-stocks-plus-currency-trend-on-its-own.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
 | EXP-0008 | [Emerging market currencies since 2010](experiments/0008-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
@@ -133,6 +137,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| RES-0012 | [Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [private-markets](TAGS.md#private-markets) |
 | RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
 | RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
@@ -150,6 +155,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
 
 ## reference
 
@@ -157,13 +163,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | REF-0001 | [Architecture](reference/0001-architecture.md) | current | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0002 | [KPIs and how to read them](reference/0002-kpis.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
-| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-23 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0004 | [Glossary](reference/0004-glossary.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-22 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-23 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
@@ -184,6 +190,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0009 | [Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md) | final | 2026-10-23 | [process](TAGS.md#process) |
+| LOG-0010 | [Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md) | final | 2026-10-23 | [process](TAGS.md#process) |
 | LOG-0011 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 | LOG-0012 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | LOG-0013 | [Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |

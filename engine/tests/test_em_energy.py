@@ -50,11 +50,13 @@ def test_ecb_rates_are_turned_into_usd_per_unit():
     assert pd.Timestamp("2024-01-04") not in s.index  # no USD rate that day
 
 
-def test_oecd_monthly_averages_are_dated_at_month_end():
+def test_oecd_monthly_averages_are_used_a_week_after_the_month_ends():
     text = "TIME_PERIOD,OBS_VALUE\n2024-01,11.2\n2024-02,11.1\n"
     s = sources.parse_oecd_csv(text, catalog.get("rate.MXN"))
-    assert list(s.index) == [pd.Timestamp("2024-01-31"), pd.Timestamp("2024-02-29")]
+    assert list(s.index) == [pd.Timestamp("2024-01-01"), pd.Timestamp("2024-02-01")]
     assert s.iloc[0] == 11.2
+    # Same delay as the G10 copies of this OECD data (EXP-0005 on main).
+    assert catalog.get("rate.MXN").published_after == catalog.get("rate.EUR").published_after == 5
 
 
 def test_em_policy_rates_reuse_the_bis_series_fetched_for_policy():
