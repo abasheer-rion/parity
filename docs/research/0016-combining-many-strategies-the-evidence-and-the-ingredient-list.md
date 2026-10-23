@@ -135,5 +135,5 @@ Combining gives a researcher many new choices: which ingredients, which weights,
 
 ## Referenced by
 
-- [LOG-0011: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
+- [LOG-0012: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 <!-- backlinks:end -->

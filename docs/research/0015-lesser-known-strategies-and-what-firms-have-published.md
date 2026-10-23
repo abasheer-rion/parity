@@ -119,5 +119,5 @@ Ranked by evidence after publication, then by whether we can test them with free
 ## Referenced by
 
 - [RES-0016: Combining many strategies, the evidence and the ingredient list](0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- [LOG-0010: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
+- [LOG-0011: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

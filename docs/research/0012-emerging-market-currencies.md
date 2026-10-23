@@ -136,5 +136,5 @@ We checked on 2026-10-21 that the ECB, OECD and BIS endpoints answer scripted re
 - [RES-0015: Lesser-known strategies and what firms have published](0015-lesser-known-strategies-and-what-firms-have-published.md)
 - [RES-0016: Combining many strategies, the evidence and the ingredient list](0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
-- [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0010: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->
