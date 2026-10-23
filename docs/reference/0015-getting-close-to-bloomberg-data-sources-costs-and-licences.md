@@ -181,5 +181,5 @@ The best single paid plan under 100 USD a month for our mix is either Massive Cu
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](../decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
-- [LOG-0008: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 <!-- backlinks:end -->

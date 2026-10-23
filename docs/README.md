@@ -41,8 +41,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
+- 2026-10-22 [LOG-0009: Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 - 2026-10-22 [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
-- 2026-10-22 [LOG-0008: Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 - 2026-10-22 [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 
 ## intent
@@ -175,7 +175,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0006 | [Ayan work log, merges, domain, email and the two product plan](log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md) | final | 2026-10-21 | [process](TAGS.md#process) |
 | LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
-| LOG-0008 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| LOG-0009 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 
 ## algorithm
 
