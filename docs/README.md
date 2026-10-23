@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 25 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 26 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 10 |
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
+- 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - 2026-10-23 [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - 2026-10-22 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
 - 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
-- 2026-10-22 [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 
 ## intent
 
@@ -74,6 +74,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0024 | [Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
+| DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
 
 ## hypothesis
 
@@ -139,7 +140,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
+| REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 

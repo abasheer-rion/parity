@@ -18,7 +18,7 @@ function localResults(): Plugin {
       server.middlewares.use("/local/news", (req, res, next) => {
         const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
         const path = resolve(import.meta.dirname, "../engine/output/news", name);
-        if (!/^[a-z]+\.json$/.test(name) || !existsSync(path)) return next();
+        if (!/^(archive\/)?[a-z0-9]+\.json$/.test(name) || !existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });

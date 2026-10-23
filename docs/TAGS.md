@@ -105,6 +105,7 @@ Sources, scrapers, caching and data quality.
 
 - [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](decisions/0008-benchmark-data-without-yahoo.md)
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
+- [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
@@ -323,6 +324,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
+- [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
@@ -372,6 +374,7 @@ Trend and momentum signals.
 News, macro releases and event-driven signals.
 
 - [DEC-0005: Study news and commodity shocks at daily and intraday speed, not microseconds](decisions/0005-no-microsecond-trading-in-the-poc.md)
+- [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [HYP-0004: Macro and energy surprises move currencies in a predictable direction](hypotheses/0004-macro-surprises-move-fx-predictably.md)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
