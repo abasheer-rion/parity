@@ -9,7 +9,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 28 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 4 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 11 |
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
@@ -31,12 +31,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-23 [DEC-0028: Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
-- 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
+- 2026-10-23 [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 
 ## intent
 
@@ -62,7 +62,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0011 | [Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md) | accepted | 2026-10-21 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | DEC-0012 | [Open sign-up with Supabase Auth replaces the Cloudflare login](decisions/0012-open-sign-up-with-supabase-auth-replaces-the-cloudflare-login.md) | accepted | 2026-10-21 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0013 | [Dashboard clarity, plain names, verdicts and search that answers](decisions/0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md) | accepted | 2026-10-21 | [ui](TAGS.md#ui) |
-| DEC-0014 | [A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
+| DEC-0014 | [A strategy factory and an always-on search](decisions/0014-a-strategy-factory-and-an-always-on-search.md) | accepted | 2026-10-23 | [process](TAGS.md#process) |
 | DEC-0015 | [Two sides, a product app and a research app, kept apart](decisions/0015-two-sides-a-product-app-and-a-research-app-kept-apart.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0016 | [Sim World 2, a world map, scenarios on it and simulated paths](decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0017 | [Motion on the site, 3D on the front page and quiet movement in the app](decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
@@ -99,6 +99,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
 | EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| EXP-0005 | [Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md) | done | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## research
 
@@ -134,7 +135,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | REF-0001 | [Architecture](reference/0001-architecture.md) | current | 2026-10-20 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0002 | [KPIs and how to read them](reference/0002-kpis.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
-| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
+| REF-0003 | [Data sources](reference/0003-data-sources.md) | current | 2026-10-23 | [commodities](TAGS.md#commodities), [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0004 | [Glossary](reference/0004-glossary.md) | current | 2026-10-20 | [economics](TAGS.md#economics), [fx](TAGS.md#fx), [kpis](TAGS.md#kpis) |
 | REF-0005 | [Free tier budget](reference/0005-free-tier-budget.md) | current | 2026-10-20 | [infra](TAGS.md#infra) |
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
