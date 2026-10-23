@@ -68,7 +68,7 @@ export interface CoverageRow {
   last?: string;
   rows?: number;
   error?: string;
-  frequency?: string; // "D", "W" or "M"; older runs leave it out
+  frequency?: string; // "D", "W", "M" or "Q"; older runs leave it out
 }
 
 export interface Report {

@@ -7,10 +7,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 28 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 29 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 11 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 12 |
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 10 |
@@ -29,6 +29,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
@@ -36,7 +37,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-23 [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 
 ## intent
 
@@ -77,6 +77,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
 | DEC-0027 | [New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -116,6 +117,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| RES-0012 | [Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [private-markets](TAGS.md#private-markets) |
 
 ## guide
 

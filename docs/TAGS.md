@@ -108,9 +108,11 @@ Sources, scrapers, caching and data quality.
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -343,6 +345,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -471,6 +474,13 @@ Other people's code, bots and published results.
 - [ALG-0070: RSI overbought / oversold reversal (30 / 70)](algorithms/0070-rsi-overbought-oversold.md)
 - [ALG-0071: Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+
+## private-markets
+
+Private equity, venture, private credit, real estate and infrastructure, and how individuals reach them.
+
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 
 ## process
 
@@ -626,6 +636,7 @@ The dashboard.
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0028: Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)

@@ -4,6 +4,8 @@
     markets/perps.json      every Hyperliquid perp: funding as a cost of holding, open interest
     markets/etfs.json       US-listed ETFs by theme, newest series first
     markets/discover.json   new fund filings and trending coins, newest first
+    markets/private.json    private markets: Form D counts, BDC NAVs, FRED proxies and the
+                            unsmoothing study (private_export.py, DEC-0029)
 
 Every file carries its sources, their terms and the attribution the page must show.
 Nothing here is ranked by return or by popularity: lists are ordered by market value,
@@ -19,7 +21,7 @@ from pathlib import Path
 import pandas as pd
 
 from ..data.store import DEFAULT_DIR
-from . import sources, stats, store, themes
+from . import private_export, sources, stats, store, themes
 
 SHOW_FILING_DAYS = 90
 FILING_KIND = {
@@ -204,11 +206,15 @@ def build(out: Path, root: Path = DEFAULT_DIR, include_ask: bool = True) -> dict
     if not include_ask:
         perps = {**perps, "perps": [], "withheld": True}
     docs = {"crypto": crypto_doc(root), "perps": perps, "etfs": etfs,
-            "discover": discover_doc(root, etfs)}
+            "discover": discover_doc(root, etfs),
+            "private": private_export.private_doc(root, source_list)}
     for name, doc in docs.items():
         body = _sanitize({"generated_at": stamp, **doc})
         (out / f"{name}.json").write_text(json.dumps(body, separators=(",", ":"),
                                                      allow_nan=False))
     return {"coins": len(docs["crypto"]["coins"]), "perps": len(docs["perps"]["perps"]),
             "etfs": docs["etfs"]["count"], "filings": len(docs["discover"]["filings"]),
-            "trending": len(docs["discover"]["trending_coins"])}
+            "trending": len(docs["discover"]["trending_coins"]),
+            "private_series": len(docs["private"]["series"]),
+            "formd_quarters": len((docs["private"]["formd"] or {}).get("quarters", [])),
+            "bdcs": len((docs["private"]["bdc"] or {}).get("funds", []))}
