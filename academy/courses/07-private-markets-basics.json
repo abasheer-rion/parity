@@ -1,0 +1,462 @@
+{
+ "id": "private-markets-basics",
+ "order": 7,
+ "level": "Markets",
+ "title": "Private markets basics",
+ "summary": "How private funds call and return money, what IRR, DPI and TVPI measure, and why reported values look calmer than they are.",
+ "docs": [],
+ "lessons": [
+  {
+   "id": "j-curve",
+   "title": "How a private fund works",
+   "minutes": 2,
+   "body": [
+    "A private fund does not take all your money on day one. It calls it in over a few years as it finds deals, then pays money back as it sells them. Those are capital calls and distributions.",
+    "Early on, money only goes out, so the running total dips below zero. Later, distributions bring it back up. Drawn over time, that running total looks like a J.",
+    "The picture uses made-up cash flows for a ten-year fund."
+   ],
+   "terms": [
+    "money-weighted-return",
+    "liquidity"
+   ],
+   "visual": {
+    "kind": "jcurve",
+    "alt": "Yearly bars for a made-up ten-year fund: red calls in the first five years, green distributions from year three. A yellow running total dips below zero, then climbs to plus 60.",
+    "params": {
+     "calls": [
+      30,
+      25,
+      20,
+      15,
+      10,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "dists": [
+      0,
+      0,
+      5,
+      10,
+      20,
+      30,
+      35,
+      30,
+      20,
+      10
+     ],
+     "nav": [
+      28,
+      55,
+      75,
+      85,
+      85,
+      70,
+      50,
+      30,
+      12,
+      0
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Years 1 and 2: money is called in, nothing comes back yet.",
+      "reveal": 0.2
+     },
+     {
+      "caption": "By year 5 distributions have started, but the running total is still below zero.",
+      "reveal": 0.5
+     },
+     {
+      "caption": "By year 10 more has come back than went in. The running total traced a J.",
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Money-weighted return in the glossary",
+     "href": "#/learn/money-weighted-return",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why does the running total of a private fund start below zero?",
+     "options": [
+      "Fees are paid upfront in full",
+      "Money is called in before any is paid back",
+      "The fund loses money at first"
+     ],
+     "answer": 1,
+     "why": "Calls come first and distributions later, which gives the J shape."
+    },
+    {
+     "q": "What is a distribution?",
+     "options": [
+      "Money investors put in",
+      "A fee",
+      "Money the fund pays back to investors"
+     ],
+     "answer": 2,
+     "why": "Calls go in; distributions come out."
+    }
+   ]
+  },
+  {
+   "id": "multiples",
+   "title": "DPI and TVPI",
+   "minutes": 2,
+   "body": [
+    "Two money multiples sum up a fund. **DPI** is cash paid back divided by cash paid in. It counts only real money returned.",
+    "**TVPI** adds what the fund still holds, at the fund's own valuation, called NAV. TVPI equals DPI plus that remaining value, divided by what was paid in.",
+    "Early in a fund's life, most of TVPI is NAV, an estimate. By the end it is all DPI, real cash. A high TVPI with a low DPI is a promise more than a result."
+   ],
+   "terms": [
+    "money-weighted-return"
+   ],
+   "visual": {
+    "kind": "jcurve",
+    "alt": "The same made-up fund at year 5: DPI is 0.35 times. Adding the value still held, shown as a dashed blue line, TVPI is 1.20 times. By year 10, DPI and TVPI both reach 1.60 times.",
+    "params": {
+     "calls": [
+      30,
+      25,
+      20,
+      15,
+      10,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "dists": [
+      0,
+      0,
+      5,
+      10,
+      20,
+      30,
+      35,
+      30,
+      20,
+      10
+     ],
+     "nav": [
+      28,
+      55,
+      75,
+      85,
+      85,
+      70,
+      50,
+      30,
+      12,
+      0
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Year 5: paid back 35 for every 100 paid in. DPI is 0.35x.",
+      "reveal": 0.5
+     },
+     {
+      "caption": "Add what the fund still holds at its own valuation. TVPI is 1.20x, mostly an estimate.",
+      "reveal": 0.5,
+      "nav": 1
+     },
+     {
+      "caption": "Year 10: everything is sold. DPI and TVPI are both 1.60x, all real cash.",
+      "reveal": 1,
+      "nav": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Time-weighted return in the glossary",
+     "href": "#/learn/time-weighted-return",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "A fund has paid in 100, paid back 40 and still holds 80. What is its TVPI?",
+     "options": [
+      "1.2x",
+      "0.4x",
+      "0.8x"
+     ],
+     "answer": 0,
+     "why": "TVPI is paid back plus still held, over paid in: 40 plus 80 over 100."
+    },
+    {
+     "q": "Which multiple counts only cash actually returned?",
+     "options": [
+      "TVPI",
+      "DPI",
+      "NAV"
+     ],
+     "answer": 1,
+     "why": "DPI is distributions over paid-in capital."
+    }
+   ]
+  },
+  {
+   "id": "irr",
+   "title": "IRR: timing matters",
+   "minutes": 2,
+   "body": [
+    "**IRR**, the internal rate of return, is a yearly return that takes into account when each dollar went in and came out. It is a money-weighted return.",
+    "Two funds can both double your money. If one does it in 4 years, its IRR is about 19% a year. If the other takes 10 years, it is about 7%.",
+    "IRR can be pushed up by returning money early or calling it late, without making more of it. That is why people read IRR next to the multiples, not alone."
+   ],
+   "terms": [
+    "money-weighted-return",
+    "time-weighted-return",
+    "cagr"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Two funds both return 2 times the money. Their IRRs differ: about 19 percent a year for 4 years against about 7 percent a year for 10 years.",
+    "params": {
+     "labels": [
+      "Fund A, 4 years",
+      "Fund B, 10 years"
+     ],
+     "colors": [
+      "good",
+      "blue"
+     ],
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "Fund A and fund B both turn 100 into 200.",
+      "values": [
+       2,
+       2
+      ],
+      "unit": "x",
+      "label": "Money multiple"
+     },
+     {
+      "caption": "A took 4 years and B took 10. As a yearly rate: about 19% against 7%.",
+      "values": [
+       18.9,
+       7.2
+      ],
+      "unit": "%",
+      "label": "IRR per year"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Money-weighted return in the glossary",
+     "href": "#/learn/money-weighted-return",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Two funds both double your money. Which has the higher IRR?",
+     "options": [
+      "They are equal",
+      "The one that took longer",
+      "The one that did it faster"
+     ],
+     "answer": 2,
+     "why": "IRR is a yearly rate, so the same gain over fewer years is a higher rate."
+    },
+    {
+     "q": "Why read IRR next to DPI and TVPI?",
+     "options": [
+      "IRR can be raised by timing alone",
+      "IRR includes fees twice",
+      "They are the same number"
+     ],
+     "answer": 0,
+     "why": "Calling money late or returning it early lifts IRR without adding money."
+    }
+   ]
+  },
+  {
+   "id": "smoothing",
+   "title": "Smoothing: why private looks calm",
+   "minutes": 3,
+   "body": [
+    "Private assets do not trade every day, so their value is an estimate, often made each quarter. Estimates tend to move only part of the way toward what the market would pay.",
+    "The picture shows a made-up market value and a reported value that moves a quarter of the way toward it each period. The reported line looks calmer and its falls look smaller and later.",
+    "This is **smoothing**. It can make private assets look less risky and less tied to stocks than they are. Comparing them with public markets on reported numbers alone can mislead."
+   ],
+   "terms": [
+    "volatility",
+    "correlation",
+    "drawdown"
+   ],
+   "visual": {
+    "kind": "lines",
+    "alt": "Over 60 quarters, a made-up market value swings sharply. A reported value line follows it a quarter of the way each period, looking much calmer, with shallower and later falls.",
+    "params": {
+     "series": [
+      {
+       "label": "Market value",
+       "color": "blue",
+       "walk": {
+        "drift": 0.015,
+        "vol": 0.09,
+        "seed": 12,
+        "n": 60
+       }
+      },
+      {
+       "label": "Reported value",
+       "color": "warn",
+       "smoothOf": 0,
+       "lag": 0.25
+      }
+     ],
+     "xLabels": [
+      "Quarter 1",
+      "Quarter 60"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A made-up market value, checked every quarter.",
+      "show": [
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "The reported value moves only part of the way toward it each time.",
+      "show": [
+       1,
+       1
+      ]
+     },
+     {
+      "caption": "Same asset, two pictures: the reported one looks calmer than the risk really was.",
+      "show": [
+       0.35,
+       1
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Compare strategies, risk and crashes",
+     "href": "#/compare",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why do reported private asset values look calm?",
+     "options": [
+      "Private assets have no risk",
+      "Values are estimates that move only part way toward market prices",
+      "They are measured daily"
+     ],
+     "answer": 1,
+     "why": "Appraisals lag and smooth the real moves."
+    },
+    {
+     "q": "What can smoothing make look smaller than it is?",
+     "options": [
+      "Capital calls",
+      "Fees",
+      "Volatility and drawdowns"
+     ],
+     "answer": 2,
+     "why": "Smoothed values hide part of the bumps and the falls."
+    }
+   ]
+  },
+  {
+   "id": "fees",
+   "title": "Fees and net returns",
+   "minutes": 2,
+   "body": [
+    "Private funds usually charge two fees. A **management fee** is a yearly percent of the money committed or managed, paid whether or not the fund does well. A **performance fee**, often 20% of profits above a hurdle, is paid when it does.",
+    "Returns before fees are gross; after fees they are net. Investors live on net. The gap is often large, and it is largest when results are good, because that is when the performance fee bites.",
+    "The picture uses made-up numbers to show the size of that gap."
+   ],
+   "terms": [
+    "management-fee",
+    "performance-fee",
+    "net-vs-gross-return",
+    "high-water-mark"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Made-up numbers: a fund's gross multiple of 2.0 times shrinks to about 1.7 times after management and performance fees.",
+    "params": {
+     "labels": [
+      "Before fees",
+      "After fees"
+     ],
+     "colors": [
+      "blue",
+      "warn"
+     ],
+     "min": 0,
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "Made-up example: before fees, the fund turned 100 into 200.",
+      "values": [
+       2.0,
+       0
+      ],
+      "unit": "x"
+     },
+     {
+      "caption": "After a yearly management fee and 20% of the profit, investors got about 170.",
+      "values": [
+       2.0,
+       1.7
+      ],
+      "unit": "x"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Performance fee in the glossary",
+     "href": "#/learn/performance-fee",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Which fee is charged even when the fund loses money?",
+     "options": [
+      "The management fee",
+      "The performance fee",
+      "Neither"
+     ],
+     "answer": 0,
+     "why": "It is a percent of the money managed, not of profits."
+    },
+    {
+     "q": "Which returns do investors actually receive?",
+     "options": [
+      "Gross",
+      "Net",
+      "Both equally"
+     ],
+     "answer": 1,
+     "why": "Net is after every fee."
+    }
+   ]
+  }
+ ]
+}

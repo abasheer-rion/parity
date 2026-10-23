@@ -1,0 +1,409 @@
+{
+ "id": "reading-a-backtest",
+ "order": 1,
+ "level": "Start here",
+ "title": "Reading a backtest",
+ "summary": "Return, bumpiness, the Sharpe ratio, the worst fall and trading costs: the five numbers on every strategy page, and how to read them together.",
+ "docs": [
+  "REF-0002"
+ ],
+ "lessons": [
+  {
+   "id": "return",
+   "title": "Return and compounding",
+   "minutes": 2,
+   "body": [
+    "A **backtest** replays a set of trading rules over past prices and records what the account would have been worth each day. The first number everyone looks at is the return.",
+    "Parity shows return per year as **CAGR**: the steady yearly growth rate that would turn the starting money into the final money. It is not the average of the yearly returns. Bad years cost more than good years earn, so the steady rate is lower than the simple average whenever returns jump around.",
+    "Small differences in yearly return grow into large differences over decades, because each year's gain also earns a return. That is compounding. It is why a return is only comparable with another return over the same dates and at similar risk."
+   ],
+   "terms": [
+    "backtest",
+    "cagr",
+    "compounding",
+    "return"
+   ],
+   "visual": {
+    "kind": "growth",
+    "alt": "Three lines show $100 growing for 30 years at 3%, 7% and 10% a year. They start together and end far apart: about $243, $761 and $1,745.",
+    "params": {
+     "years": 30,
+     "start": 100,
+     "series": [
+      {
+       "label": "3%",
+       "rate": 0.03
+      },
+      {
+       "label": "7%",
+       "rate": 0.07
+      },
+      {
+       "label": "10%",
+       "rate": 0.1
+      }
+     ]
+    },
+    "steps": [
+     {
+      "caption": "$100 put away at three steady rates: 3%, 7% and 10% a year.",
+      "reveal": 0.12
+     },
+     {
+      "caption": "After 15 years the gap is visible but modest.",
+      "reveal": 0.5
+     },
+     {
+      "caption": "After 30 years the 10% line is worth about seven times the 3% line. That is compounding.",
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "See every strategy's return per year",
+     "href": "#/strategies",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does CAGR measure?",
+     "options": [
+      "The steady yearly growth rate that gets from the start value to the end value",
+      "The average of the daily returns",
+      "The best single year"
+     ],
+     "answer": 0,
+     "why": "CAGR is the final value over the start value, to the power one over the years, minus one. It is a steady rate, not a best year or a simple average."
+    },
+    {
+     "q": "Why can two strategies with the same average yearly return end with different amounts?",
+     "options": [
+      "Because of rounding",
+      "Because bumpier returns compound to less",
+      "They cannot"
+     ],
+     "answer": 1,
+     "why": "Losses cost more than gains of the same size earn back. The bumpier path compounds to less, which is called volatility drag."
+    }
+   ]
+  },
+  {
+   "id": "volatility",
+   "title": "Bumpiness: volatility",
+   "minutes": 2,
+   "body": [
+    "Two strategies can end at the same place and feel completely different on the way. **Volatility** measures how bumpy the ride is: how far daily returns spread around their average, scaled to a year.",
+    "The S&P 500 has run at about 15 to 19% a year. A strategy with 30% volatility will often move twice as much as the stock market in a day, in both directions.",
+    "Bumpiness is not just discomfort. It drags on growth: a strategy with 10% average return and 30% volatility compounds at roughly 5.5% a year. And bumpy strategies are the ones people give up on at the worst moment."
+   ],
+   "terms": [
+    "volatility",
+    "volatility-drag",
+    "annualised-volatility"
+   ],
+   "visual": {
+    "kind": "paths",
+    "alt": "Two account paths over one year with the same expected drift. The calm one rises smoothly; the bumpy one swings far above and below it.",
+    "params": {
+     "days": 250,
+     "series": [
+      {
+       "label": "Calm",
+       "drift": 0.0004,
+       "vol": 0.004,
+       "seed": 5
+      },
+      {
+       "label": "Bumpy",
+       "drift": 0.0004,
+       "vol": 0.02,
+       "seed": 8
+      }
+     ],
+     "xLabels": [
+      "Day 1",
+      "Day 250"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Two strategies with the same expected gain per day.",
+      "reveal": 0.25
+     },
+     {
+      "caption": "The bumpy one swings much further from the start, both up and down.",
+      "reveal": 0.65
+     },
+     {
+      "caption": "Same expected gain, very different ride. Volatility is the size of those swings.",
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Compare how bumpy each strategy is",
+     "href": "#/compare",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does high volatility mean?",
+     "options": [
+      "The strategy trades a lot",
+      "The strategy makes more money",
+      "Returns swing a lot from day to day"
+     ],
+     "answer": 2,
+     "why": "Volatility is the spread of returns. It says nothing about the average return, only how far returns swing around it."
+    },
+    {
+     "q": "A strategy averages 10% a year with 30% volatility. Roughly what does it compound at?",
+     "options": [
+      "About 5.5%",
+      "About 15%",
+      "About 10%"
+     ],
+     "answer": 0,
+     "why": "Volatility drag is about half the variance: 10% minus half of 0.3 squared, or 4.5 points, leaves about 5.5%."
+    }
+   ]
+  },
+  {
+   "id": "sharpe",
+   "title": "The Sharpe ratio: return per bump",
+   "minutes": 2,
+   "body": [
+    "The **Sharpe ratio** divides return by volatility. It answers: how much did this earn for each unit of bumpiness? That makes strategies with different risk levels comparable.",
+    "A strategy earning 8% with 8% volatility has a Sharpe of 1. One earning 8% with 16% volatility has a Sharpe of 0.5: the same gain, twice the ride. Around 0.5 is what the stock market has done. Above 1 over many years is rare.",
+    "The Sharpe ratio hides some things. It treats a sudden crash the same as many small dips, so a strategy with lots of small wins and rare big losses can look better than it is. Read it next to the worst fall."
+   ],
+   "terms": [
+    "sharpe-ratio",
+    "negative-skew",
+    "sortino-ratio"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bar chart of two strategies. Both earn 8% a year. Strategy B is twice as bumpy, so its Sharpe ratio is half of A's: 1.0 against 0.5.",
+    "params": {
+     "labels": [
+      "Strategy A",
+      "Strategy B"
+     ],
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "Strategy A and B both earn 8% a year.",
+      "label": "Return per year (%)",
+      "values": [
+       8,
+       8
+      ],
+      "unit": "%"
+     },
+     {
+      "caption": "B swings twice as much: 16% volatility against 8%.",
+      "label": "Volatility per year (%)",
+      "values": [
+       8,
+       16
+      ],
+      "unit": "%"
+     },
+     {
+      "caption": "Return divided by volatility: A scores 1.0 and B scores 0.5.",
+      "label": "Sharpe ratio",
+      "values": [
+       1,
+       0.5
+      ],
+      "unit": ""
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "How to read the numbers on a strategy",
+     "href": "#/start",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Strategy X earns 6% with 6% volatility. Strategy Y earns 9% with 18% volatility. Which has the higher Sharpe ratio?",
+     "options": [
+      "They are equal",
+      "X, at 1.0",
+      "Y, at 0.5"
+     ],
+     "answer": 1,
+     "why": "6 divided by 6 is 1.0. 9 divided by 18 is 0.5. Y earns more but pays for it with much more bumpiness."
+    },
+    {
+     "q": "What can a high Sharpe ratio hide?",
+     "options": [
+      "The trading costs",
+      "Nothing, it covers every risk",
+      "Rare large losses after many small wins"
+     ],
+     "answer": 2,
+     "why": "Sharpe uses the spread of returns, so a long left tail of rare big losses can sit behind a good score."
+    }
+   ]
+  },
+  {
+   "id": "drawdown",
+   "title": "Drawdown: the worst fall",
+   "minutes": 3,
+   "body": [
+    "A **drawdown** is how far the account has fallen from its highest point so far. The max drawdown is the worst of those falls over the whole backtest: the loss you would have had to sit through.",
+    "Falls hurt more than they look, because the recovery has to be bigger than the fall. Losing 25% needs a 33% gain to get back. Losing 50% needs 100%. The S&P 500 fell about 55% from 2007 to 2009.",
+    "Ask two questions of any backtest: how deep was the worst fall, and how long did it take to climb back? A strategy can have a good return per year and still spend years below its old high."
+   ],
+   "terms": [
+    "drawdown",
+    "recovery-math",
+    "drawdown-duration"
+   ],
+   "visual": {
+    "kind": "drawdown",
+    "alt": "An account value line rises, falls sharply and slowly recovers. A dashed line tracks its highest point so far. Below, a red area fills to show the fall from that peak, reaching about minus 35 percent.",
+    "params": {
+     "days": 300,
+     "drift": 0.0008,
+     "vol": 0.008,
+     "seed": 11,
+     "crashAt": 0.38,
+     "crashDepth": 0.33,
+     "recover": 0.4
+    },
+    "steps": [
+     {
+      "caption": "An account grows for a while.",
+      "reveal": 0.36
+     },
+     {
+      "caption": "The dashed line marks the highest value reached so far.",
+      "reveal": 1,
+      "peak": 1
+     },
+     {
+      "caption": "The red area is the drawdown: how far below that peak the account is each day.",
+      "fill": 1
+     },
+     {
+      "caption": "The worst fall is the max drawdown. Getting back needs a bigger gain than the fall.",
+      "mark": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "See how strategies did in crashes",
+     "href": "#/compare",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "An account falls 50% from its peak. What gain does it need to get back?",
+     "options": [
+      "100%",
+      "50%",
+      "75%"
+     ],
+     "answer": 0,
+     "why": "Half of the money is gone, so what is left has to double. The gain needed is the loss divided by one minus the loss."
+    },
+    {
+     "q": "What is the max drawdown?",
+     "options": [
+      "The worst single day",
+      "The largest fall from a previous peak",
+      "The lowest price ever"
+     ],
+     "answer": 1,
+     "why": "It is measured from the highest point reached so far, not from the start or from one day."
+    }
+   ]
+  },
+  {
+   "id": "costs",
+   "title": "Costs: the quiet leak",
+   "minutes": 2,
+   "body": [
+    "Every trade costs something: the gap between the buy and sell price, fees, and moving the price against yourself. A **basis point** is one hundredth of a percent, and costs are usually counted in them.",
+    "Costs scale with how much a strategy trades. Parity charges 1 basis point per unit traded by default and tests every strategy again at double that. A strategy that turns its whole size over 50 times a year pays 50 times the cost per trade.",
+    "The **break-even cost** is the cost per trade at which the gain falls to zero. If it is only a few basis points, a small mistake in the cost guess wipes out the strategy."
+   ],
+   "terms": [
+    "transaction-costs",
+    "break-even-cost",
+    "turnover",
+    "basis-point"
+   ],
+   "visual": {
+    "kind": "costs",
+    "alt": "Two lines over ten years. The dashed one is the strategy before costs. The solid one is after costs; it sinks lower as the cost per trade rises from 0 to 1, 2 and then 16 basis points, where it makes nothing.",
+    "params": {
+     "years": 10,
+     "gross": 0.08,
+     "turnover": 50,
+     "seed": 5
+    },
+    "steps": [
+     {
+      "caption": "With free trading, the strategy earns 8% a year.",
+      "cost": 0
+     },
+     {
+      "caption": "At 1 basis point per trade, Parity's default guess, it keeps most of it.",
+      "cost": 1
+     },
+     {
+      "caption": "At 2 basis points, the gauntlet's double-cost test, it keeps less.",
+      "cost": 2
+     },
+     {
+      "caption": "At 16 basis points it earns nothing at all. That is its break-even cost.",
+      "cost": 16
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Break-even cost in the glossary",
+     "href": "#/learn/break-even-cost",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "A strategy trades its whole size 50 times a year and earns 8% before costs. At what cost per trade does it earn nothing?",
+     "options": [
+      "50 basis points",
+      "8 basis points",
+      "16 basis points"
+     ],
+     "answer": 2,
+     "why": "8% is 800 basis points. Spread over 50 trades, each trade can cost 16 basis points before the gain is gone."
+    },
+    {
+     "q": "Why does Parity test every strategy at double its cost guess?",
+     "options": [
+      "Because the cost guess could be wrong",
+      "Because costs always double",
+      "To make results look worse"
+     ],
+     "answer": 0,
+     "why": "Real costs are uncertain. A strategy that only works at the exact cost guess is fragile."
+    }
+   ]
+  }
+ ]
+}

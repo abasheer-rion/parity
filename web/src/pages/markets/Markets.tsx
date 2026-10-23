@@ -10,6 +10,7 @@ import { Discover } from "./Discover";
 import { Etfs } from "./Etfs";
 import { Perps } from "./Perps";
 import { Practice } from "./Practice";
+import { PrivateMarkets } from "./Private";
 import { Banner } from "./shared";
 import "./markets.css";
 
@@ -17,7 +18,7 @@ export const HYPE_CATEGORY = "New products and hype terms";
 
 const VIEWS = [
   ["", "Overview"], ["new", "New and trending"], ["crypto", "Crypto"], ["perps", "Perps"],
-  ["etfs", "ETFs"], ["terms", "Hype terms"], ["practice", "Practice"],
+  ["etfs", "ETFs"], ["private", "Private markets"], ["terms", "Hype terms"], ["practice", "Practice"],
 ] as const;
 type View = (typeof VIEWS)[number][0];
 
@@ -26,6 +27,7 @@ const DOORS: { view: View; title: string; icon: string; what: string }[] = [
   { view: "crypto", title: "Crypto", icon: "chart", what: "Prices for the 100 largest coins, a year of history for the majors, and how hard they fall." },
   { view: "perps", title: "Perps", icon: "pulse", what: "Perpetual futures: what they are, funding as a cost of holding, and how leverage wipes out deposits." },
   { view: "etfs", title: "ETFs", icon: "catalog", what: "Every US-listed ETF we can find, by theme: crypto, leveraged, option income, buffer, AI and more." },
+  { view: "private", title: "Private markets", icon: "book", what: "Private equity, venture, private credit, property and infrastructure: how they work, how to read their numbers, the ways in and what to check." },
   { view: "terms", title: "Hype terms explained", icon: "cap", what: "Staking, restaking, memecoins, 0DTE, buffer ETFs, prediction markets: plain words and what can go wrong." },
   { view: "practice", title: "Practice", icon: "bookmark", what: "Follow a coin or an ETF with pretend money and watch what it would be worth. No real money." },
 ];
@@ -45,6 +47,7 @@ export function Markets({ view: raw }: { view?: string }) {
       {view === "crypto" && <Crypto />}
       {view === "perps" && <Perps />}
       {view === "etfs" && <Etfs />}
+      {view === "private" && <PrivateMarkets />}
       {view === "terms" && <HypeTerms />}
       {view === "practice" && <Practice />}
     </div>

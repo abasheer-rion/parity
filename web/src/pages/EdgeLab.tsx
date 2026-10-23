@@ -56,6 +56,7 @@ export function EdgeLab({ focus }: { focus?: string }) {
           <a href="#/edges/examples" onClick={jump("edge-examples")}>Our own mistakes</a>
           <a href="#/edges/check" onClick={jump("edge-check")}>Check an idea</a>
           <a href="#/edges/reading" onClick={jump("edge-reading")}>Further reading</a>
+          <a href="/app/#/academy/luck-vs-skill">Course: luck vs skill</a>
         </nav>
       </div>
 

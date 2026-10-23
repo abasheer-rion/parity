@@ -1,6 +1,6 @@
 {
   "about": "Single source for every term we use. scripts/docs.py builds docs/reference/0004-glossary.md from this file, and the dashboard's Learn tab reads it directly. Each term has three views: simple (explain it to a ten year old), analogy (something from everyday life), and precise (what an economist or statistician would write).",
-  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics", "Candlesticks and chart patterns", "Biases and behaviour", "Risk and position sizing", "Capital and returns", "FX market structure", "Myths and false notions", "Conviction and decision making", "New products and hype terms"],
+  "categories": ["Markets and trading", "Currencies and interest rates", "Commodities", "Economic theory", "Measuring results", "Testing and statistics", "Candlesticks and chart patterns", "Biases and behaviour", "Risk and position sizing", "Capital and returns", "FX market structure", "Myths and false notions", "Conviction and decision making", "New products and hype terms", "Private markets"],
   "terms": [
     {
       "id": "exchange-rate",
@@ -2652,6 +2652,216 @@
       "precise": "Liu and Tsyvinski find bitcoin's daily returns far more volatile than stocks, with returns explained mostly by crypto-specific factors such as momentum and investor attention rather than stock market or macro factors [@liu2018].",
       "risk": "Big swings punish leverage and emotional selling. Diversifying across many coins helps little, because they tend to fall together.",
       "related": ["volatility", "drawdown", "fat-tails"]
+    },
+    {
+      "id": "private-equity",
+      "term": "Private equity",
+      "category": "Private markets",
+      "simple": "Money pooled in a fund that buys whole companies, or big stakes in them, that are not on a stock exchange, then tries to sell them for more a few years later.",
+      "analogy": "Like a group of friends buying a run-down house together, fixing it up and selling it, except the house is a company and they borrow a lot of the price.",
+      "precise": "Usually a closed-end limited partnership with a life of about ten years. Investors commit capital that the manager calls over the first years and returns as holdings are sold. Buyout funds use substantial debt at the company level. Performance is usually reported as IRR and multiples and, in research, as a public market equivalent [@kaplan2005].",
+      "risk": "Values between sales are the manager's estimates, money is locked up for years, and fees are high. Average results depend heavily on the data and the benchmark.",
+      "related": ["venture-capital", "irr", "pme", "j-curve"]
+    },
+    {
+      "id": "venture-capital",
+      "term": "Venture capital",
+      "category": "Private markets",
+      "simple": "Funds that put money into young companies, hoping a few of them grow very large. Most of the companies fail or return little.",
+      "analogy": "Like planting a hundred seeds knowing most will not sprout, hoping one becomes a huge tree.",
+      "precise": "Minority equity stakes in early-stage private companies, usually through closed-end funds. Returns are highly skewed: a few outcomes produce most of the gains, and interim values often come from the price of the latest funding round.",
+      "risk": "A last-round price can be far above what a buyer would pay, so paper gains can vanish. Skill is hard to tell from luck.",
+      "related": ["private-equity", "tvpi", "dpi"]
+    },
+    {
+      "id": "private-credit",
+      "term": "Private credit",
+      "category": "Private markets",
+      "simple": "Loans made straight to companies by funds rather than by banks or through the bond market.",
+      "analogy": "Like borrowing from a wealthy neighbour instead of the bank: quicker and more flexible, but at a higher rate.",
+      "precise": "Mostly senior, floating-rate direct loans to mid-sized companies, many owned by private equity funds, held in closed-end funds, BDCs and interval funds. Loans are carried at model-based fair values, not market prices.",
+      "risk": "Borrowers are often highly indebted, and losses can show up late because the loans are marked by models. Withdrawal limits bite when many investors want out at once.",
+      "related": ["bdc", "interval-fund", "appraisal-smoothing"]
+    },
+    {
+      "id": "irr",
+      "term": "IRR (internal rate of return)",
+      "category": "Private markets",
+      "simple": "The yearly return that makes all the money you put in and took out of an investment balance out, counting when each payment happened.",
+      "analogy": "Like working out the single interest rate a savings account would need to pay to match a messy history of deposits and withdrawals.",
+      "precise": "The discount rate at which the net present value of all cash flows, plus the current value still held, is zero. It is money-weighted, not time-weighted, so it is not comparable with an index's yearly return, and it can have no answer or several when cash flows change sign more than once [@sorensen2015].",
+      "risk": "Early distributions and borrowing before calling investors' money raise the IRR without raising the money made. Always read it next to TVPI and a PME.",
+      "related": ["tvpi", "pme", "dpi"]
+    },
+    {
+      "id": "tvpi",
+      "term": "TVPI (total value to paid-in)",
+      "category": "Private markets",
+      "simple": "How many dollars of value you have for every dollar you put in: cash already paid back plus the estimated value of what is left.",
+      "analogy": "Like counting both the change in your hand and the gift card balance you have not spent yet.",
+      "precise": "(Cumulative distributions + residual net asset value) / cumulative paid-in capital. TVPI = DPI + RVPI. It ignores timing.",
+      "risk": "Early in a fund's life it is mostly the manager's own estimate. The same TVPI over four years and over twelve is a very different result.",
+      "related": ["dpi", "rvpi", "irr"]
+    },
+    {
+      "id": "dpi",
+      "term": "DPI (distributions to paid-in)",
+      "category": "Private markets",
+      "simple": "Cash actually paid back to you for every dollar you put in.",
+      "analogy": "Like counting only the money that has actually landed in your bank account.",
+      "precise": "Cumulative distributions / cumulative paid-in capital. It is the realised part of TVPI and does not depend on the manager's valuations.",
+      "risk": "Low early in every fund's life, good or bad, so it says little until a fund is mature.",
+      "related": ["tvpi", "rvpi"]
+    },
+    {
+      "id": "rvpi",
+      "term": "RVPI (residual value to paid-in)",
+      "category": "Private markets",
+      "simple": "The estimated value of what a fund still holds, for every dollar you put in.",
+      "analogy": "Like the price tag you would put on the things in your attic: a guess until you sell them.",
+      "precise": "Residual net asset value / cumulative paid-in capital. TVPI minus DPI.",
+      "risk": "This is the part you cannot check until the assets are sold.",
+      "related": ["tvpi", "dpi", "nav"]
+    },
+    {
+      "id": "pme",
+      "term": "PME (public market equivalent)",
+      "category": "Private markets",
+      "simple": "A way to compare a private fund with a stock index, as if you had put the same money into the index on the same days.",
+      "analogy": "Like checking whether your house renovation beat simply leaving the money in an index fund over the same years.",
+      "precise": "The Kaplan and Schoar PME discounts each cash flow by the index's return and divides discounted distributions by discounted contributions; above 1 means the fund beat the index after fees [@kaplan2005]. It equals valuing the cash flows with a market-based discount rate [@sorensen2015]. Direct alpha turns the same idea into a yearly excess return [@gredil2023].",
+      "risk": "The answer depends on the index chosen, and unsold holdings still enter at the manager's estimate.",
+      "related": ["irr", "tvpi"]
+    },
+    {
+      "id": "j-curve",
+      "term": "J-curve",
+      "category": "Private markets",
+      "simple": "The way a private fund usually shows losses in its first years and gains later, so its return line dips and then rises like the letter J.",
+      "analogy": "Like a new shop that loses money while it is fitted out, then starts earning once customers come.",
+      "precise": "Early on, fees and setup costs are paid while investments are held near cost; gains are recognised later as holdings are revalued or sold.",
+      "risk": "A fund that is still at the bottom of the J tells you little about how it will end.",
+      "related": ["private-equity", "dpi"]
+    },
+    {
+      "id": "appraisal-smoothing",
+      "term": "Appraisal smoothing",
+      "category": "Private markets",
+      "simple": "Prices of buildings and private funds come from estimates that lean on the last estimate, so they move slowly and late, and look calmer than they really are.",
+      "analogy": "Like a friend who only updates their opinion a little each time, so they always lag the news.",
+      "precise": "When an appraisal mixes the current market value with the previous appraisal, reported returns are autocorrelated and their volatility and correlation with markets are understated [@geltner1993]. The same effect appears in hedge fund and private fund returns [@getmansky2004].",
+      "risk": "Low reported volatility can be a measuring effect, not safety. Comparing a smoothed series with a daily-priced one flatters the smoothed one.",
+      "related": ["unsmoothing", "volatility"]
+    },
+    {
+      "id": "unsmoothing",
+      "term": "Unsmoothing",
+      "category": "Private markets",
+      "simple": "Working backwards from smoothed reported returns to an estimate of how much the asset really moved.",
+      "analogy": "Like turning up the contrast on a blurry photo to see the real outline.",
+      "precise": "Geltner's method estimates the share of each reported return that repeats the previous one (the first-order autocorrelation) and removes it: r_true = (r_reported - a r_previous) / (1 - a) [@geltner1993]. Getmansky, Lo and Makarov fit a moving average of true returns instead [@getmansky2004].",
+      "risk": "It assumes true returns are not predictable. If prices really trend, unsmoothing overstates the risk.",
+      "related": ["appraisal-smoothing", "volatility"]
+    },
+    {
+      "id": "nav",
+      "term": "NAV (net asset value)",
+      "category": "Private markets",
+      "simple": "What a fund says its holdings are worth, minus what it owes, often given per share.",
+      "analogy": "Like adding up the value of everything in your house and subtracting the mortgage.",
+      "precise": "Total assets minus liabilities. For private funds and BDCs the assets are mostly valued by the manager under fair value rules, not by market prices.",
+      "risk": "For private holdings NAV is an estimate. A listed fund's share price can sit far above or below it.",
+      "related": ["premium-discount-to-nav", "rvpi", "bdc"]
+    },
+    {
+      "id": "bdc",
+      "term": "BDC (business development company)",
+      "category": "Private markets",
+      "simple": "A US fund, often listed on an exchange, that lends money to or invests in private companies.",
+      "analogy": "Like a shop that lets anyone buy a small slice of a lender to small and mid-sized firms.",
+      "precise": "A closed-end investment company under the Investment Company Act that must keep at least 70% of its assets in eligible investments, mostly private US companies [@url-52604426]. Its borrowing is capped by an asset coverage test.",
+      "risk": "High dividends can include returning your own capital, listed shares can fall far below NAV in a panic, and most BDCs borrow.",
+      "related": ["private-credit", "nav", "premium-discount-to-nav"]
+    },
+    {
+      "id": "interval-fund",
+      "term": "Interval fund",
+      "category": "Private markets",
+      "simple": "A fund holding hard-to-sell assets that promises to buy back part of its shares on a fixed schedule.",
+      "analogy": "Like a club that lets members leave only on set dates, and only a few at a time.",
+      "precise": "A registered closed-end fund that must make periodic repurchase offers for 5% to 25% of its shares every 3, 6 or 12 months [@url-a4070279]. If more shares are tendered than offered, each investor gets a pro rata share.",
+      "risk": "You may not get all your money out when you ask, and the price is the fund's own valuation.",
+      "related": ["tender-offer-fund", "evergreen-fund", "gate"]
+    },
+    {
+      "id": "tender-offer-fund",
+      "term": "Tender offer fund",
+      "category": "Private markets",
+      "simple": "A fund that buys back shares only when its board decides to make an offer.",
+      "analogy": "Like a shop that takes returns only on days the owner chooses.",
+      "precise": "A closed-end fund with no fixed repurchase schedule; the board decides whether, when and how much to repurchase.",
+      "risk": "The board can skip buybacks, so there may be no way out in a bad year.",
+      "related": ["interval-fund", "evergreen-fund"]
+    },
+    {
+      "id": "evergreen-fund",
+      "term": "Evergreen fund",
+      "category": "Private markets",
+      "simple": "A private markets fund with no end date that keeps taking new money and lets investors leave only in limited amounts.",
+      "analogy": "Like a never-ending potluck where people can join any time but can only leave through a narrow door.",
+      "precise": "An open-ended or periodically open vehicle, such as an interval fund, tender offer fund or non-traded REIT or BDC, priced at a manager-set NAV, with redemption limits.",
+      "risk": "Exits are limited exactly when many people want them, and the price is set by the manager.",
+      "related": ["interval-fund", "gate", "non-traded-reit"]
+    },
+    {
+      "id": "non-traded-reit",
+      "term": "Non-traded REIT",
+      "category": "Private markets",
+      "simple": "A property company you buy from and sell back to directly, instead of on a stock exchange.",
+      "analogy": "Like a members-only building club where the club decides what your share is worth and how many people can cash out each month.",
+      "precise": "A registered real estate investment trust whose shares are not listed. Repurchases are capped, often at about 2% of NAV a month and 5% a quarter; in November 2022 one large non-traded REIT received requests above those limits and paid out only up to them [@url-7414523f].",
+      "risk": "Withdrawals can be limited for long periods, and fees and sales charges can be high.",
+      "related": ["gate", "evergreen-fund", "appraisal-smoothing"]
+    },
+    {
+      "id": "gate",
+      "term": "Gate (withdrawal limit)",
+      "category": "Private markets",
+      "simple": "A rule that lets a fund pay out only part of what investors ask for when too many want to leave at once.",
+      "analogy": "Like a bank letting each customer take out only some of their savings on a busy day.",
+      "precise": "A cap on redemptions over a period, set in the fund's documents. Requests above the cap are cut back pro rata or carried forward.",
+      "risk": "A gate protects the investors who stay, but it can trap you exactly when you need the money.",
+      "related": ["interval-fund", "non-traded-reit"]
+    },
+    {
+      "id": "secondaries",
+      "term": "Secondaries",
+      "category": "Private markets",
+      "simple": "Buying an existing investor's stake in a private fund, or a set of companies a fund still owns, usually below the reported value.",
+      "analogy": "Like buying a season ticket halfway through the season from someone who needs the cash.",
+      "precise": "Transactions in existing private fund interests (LP-led) or in portfolios moved into a new vehicle by the manager (GP-led). Most sales happen at a discount to reported NAV.",
+      "risk": "A discount to a stale estimate may not be a bargain, and secondary funds add a second layer of fees.",
+      "related": ["nav", "private-equity"]
+    },
+    {
+      "id": "accredited-investor",
+      "term": "Accredited investor",
+      "category": "Private markets",
+      "simple": "A person the US allows to put money into most private offerings, based on income, wealth or certain licences.",
+      "analogy": "Like an age limit at a cinema, except the test is how much money you have.",
+      "precise": "Under SEC rules, for example income over 200,000 USD (300,000 USD with a spouse or partner) in each of the last two years, net worth over 1 million USD excluding the main home, or certain securities licences [@url-57a0d836].",
+      "risk": "Qualifying is not protection. Private offerings come with far less information than public ones.",
+      "related": ["form-d", "private-equity"]
+    },
+    {
+      "id": "form-d",
+      "term": "Form D",
+      "category": "Private markets",
+      "simple": "A short notice filed with the SEC by a company or fund that has started selling securities privately.",
+      "analogy": "Like telling the town hall you are holding a private sale, without them checking what you sell.",
+      "precise": "A notice of an exempt offering under Regulation D, due within 15 days of the first sale; it is not a registration and the SEC does not review the offering's merits [@url-98351ef7]. It records the issuer's industry, the exemption used and amounts offered and sold.",
+      "risk": "A Form D means an offering exists. It says nothing about whether it is any good.",
+      "related": ["accredited-investor"]
     }
   ]
 }

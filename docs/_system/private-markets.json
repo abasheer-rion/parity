@@ -1,0 +1,225 @@
+{
+  "about": "Plain-words content for the Private markets pages (DEC-0029). The product page (web/src/pages/markets/Private.tsx), the research page (web/src/pages/PrivateResearch.tsx) and the public page /learn/private-markets/ (scripts/seo/build_public.py) all read this file, so they never disagree. Never write 'buy' as advice. term = a glossary id. doc = a doc id.",
+  "intro": "Private markets are investments that do not trade on a stock exchange: stakes in private companies, loans made straight to companies, buildings, and roads or power lines. They are harder to see into and harder to sell than shares. Their reported returns usually look smoother than they really are, because nobody prices them every day. This guide explains each kind in plain words, how to read the numbers managers report, the ways individuals can get in, and what to check before you trust any of it.",
+  "classes": [
+    {
+      "id": "private-equity",
+      "name": "Private equity (buyouts)",
+      "simple": "A fund raises money, buys whole companies or big stakes in them, often with borrowed money, tries to make them more profitable, and sells them a few years later.",
+      "returns": "Paid back when companies are sold or listed. The debt used in the purchase makes gains and losses bigger.",
+      "liquidity": "Money is locked up for about ten years. The fund calls your money in stages and pays it back in stages.",
+      "fees": "Often a yearly management fee of about 1.5 to 2 percent of the money promised, plus about 20 percent of profits above a hurdle. Funds can also charge the companies they own.",
+      "risks": ["Borrowing magnifies losses when a company struggles.", "Values between sales are the manager's own estimates.", "Results vary hugely between the best and worst funds, and the best are hard to get into."],
+      "check": ["Is the return quoted as an IRR, a multiple, or against an index (PME)? Ask for all three.", "How much has actually been paid back in cash (DPI)?", "Are all fees and carried interest taken out of the numbers shown?", "Which year did the fund start? Compare only with funds of the same year."],
+      "terms": ["private-equity", "irr", "tvpi", "dpi", "pme", "j-curve"]
+    },
+    {
+      "id": "venture",
+      "name": "Venture capital",
+      "simple": "A fund puts money into young companies, hoping a few grow very large. Most of them fail or return little.",
+      "returns": "Almost all of a venture fund's profit usually comes from a handful of companies.",
+      "liquidity": "Ten years or more. A company may take a decade to be sold or listed, if ever.",
+      "fees": "Similar to private equity: about 2 percent a year and 20 to 30 percent of profits.",
+      "risks": ["Most companies lose money; one winner must pay for many losers.", "Values come from the last funding round, which can be far above what a buyer would pay today.", "Hard to judge skill: a few lucky outcomes dominate the record."],
+      "check": ["How much of the fund's value sits in its top one or two companies?", "Are values marked at the last round price, and how old is that round?", "How much cash has come back so far (DPI), not just paper gains?"],
+      "terms": ["venture-capital", "tvpi", "dpi"]
+    },
+    {
+      "id": "private-credit",
+      "name": "Private credit (direct lending)",
+      "simple": "A fund lends money straight to companies, usually mid-sized ones owned by private equity funds, instead of a bank doing it.",
+      "returns": "Interest payments, usually at a floating rate several points above short-term rates, plus fees. Losses come when borrowers cannot pay.",
+      "liquidity": "Loans run for a few years. Funds open to individuals often let you sell back only a small share each quarter.",
+      "fees": "Management fees around 1 to 1.5 percent a year plus a share of income are common; some funds also borrow to boost income.",
+      "risks": ["Borrowers are often highly indebted companies.", "Loans are valued by models, not market prices, so losses can show up late.", "In a recession, defaults and withdrawal requests can arrive together."],
+      "check": ["What share of loans are not being paid, or paid in more debt instead of cash?", "How is each loan valued, and by whom?", "How much does the fund itself borrow?", "What are the limits on taking money out?"],
+      "terms": ["private-credit", "bdc", "nav"]
+    },
+    {
+      "id": "real-estate",
+      "name": "Private real estate",
+      "simple": "Funds that own buildings such as offices, warehouses, flats and shops, and earn rent. Core funds hold steady buildings; value-add and opportunistic funds take on more risk and debt.",
+      "returns": "Rent, plus changes in what the buildings are worth.",
+      "liquidity": "Selling a building takes months. Open-ended funds limit withdrawals, especially when many people want out at once.",
+      "fees": "Often around 1 percent a year for core funds, more with performance fees for riskier ones.",
+      "risks": ["Building values come from appraisals that trail real prices, so falls appear slowly.", "Debt magnifies losses.", "Withdrawal limits can stop you getting money out when you need it."],
+      "check": ["How often are buildings appraised, and by whom?", "How much debt does the fund carry?", "Has the fund ever limited withdrawals?", "How do its returns compare with listed property shares (REITs) over the same years?"],
+      "terms": ["appraisal-smoothing", "non-traded-reit", "gate"]
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "simple": "Funds that own long-lived assets people need, such as toll roads, airports, pipelines, power plants and data centres.",
+      "returns": "Steady fees or regulated charges over many years, plus changes in value.",
+      "liquidity": "Very long holding periods. Some funds are open-ended with withdrawal limits.",
+      "fees": "Similar to private equity for closed funds, lower for core open-ended funds.",
+      "risks": ["Rules and price caps set by governments can change.", "Long contracts are sensitive to interest rates.", "Values are appraisals and trail markets."],
+      "check": ["How are returns protected from inflation and rate rises?", "How much debt is used?", "How are the assets valued, and how often?"],
+      "terms": ["appraisal-smoothing"]
+    },
+    {
+      "id": "secondaries",
+      "name": "Secondaries",
+      "simple": "Buying an existing investor's stake in a private fund, or a group of companies a fund still holds, usually at a discount to the reported value.",
+      "returns": "The discount, plus whatever the underlying companies eventually pay back. Cash tends to come back sooner than in a new fund.",
+      "liquidity": "Still long term, but shorter than starting a new fund from scratch.",
+      "fees": "A secondary fund charges its own fees on top of the fees inside the funds it buys into.",
+      "risks": ["A discount can be a fair warning, not a bargain.", "Two layers of fees.", "Values still rest on the original managers' estimates."],
+      "check": ["Discount to what: a reported value that may itself be stale?", "What are the total fees, both layers?", "How much of the gain is just marking a discounted purchase up to reported value?"],
+      "terms": ["secondaries", "nav"]
+    },
+    {
+      "id": "evergreen",
+      "name": "Evergreen, interval and tender offer funds",
+      "simple": "Funds that stay open, take new money often, and let you sell back some shares from time to time. They are the main way private markets are sold to individuals.",
+      "returns": "Whatever the private assets inside earn, minus fees, with cash held back to pay leavers.",
+      "liquidity": "Limited. An interval fund must offer to buy back 5 to 25 percent of its shares every 3, 6 or 12 months. A tender offer fund buys back only when its board decides to.",
+      "fees": "Often higher than for a stock fund: management fees, performance fees and sometimes sales charges.",
+      "risks": ["If many investors ask to leave at once, each gets only part of their money back.", "The price you buy and sell at is the fund's own estimate of value.", "Holding cash for withdrawals lowers returns."],
+      "check": ["How often can you sell back, and how much can the fund refuse?", "What are all the fees, including any charge for leaving early?", "How is the share price set, and how often?", "Has the fund ever limited withdrawals?"],
+      "terms": ["interval-fund", "tender-offer-fund", "evergreen-fund", "gate"]
+    }
+  ],
+  "measures": [
+    {
+      "id": "irr",
+      "name": "IRR (internal rate of return)",
+      "simple": "The yearly return that makes the money paid in and the money paid out balance, taking timing into account.",
+      "pitfall": "It rewards paying money back early, even small amounts. Borrowing to delay calling investors' money raises the IRR without making anyone richer. It can also be gamed by choosing when to sell.",
+      "term": "irr"
+    },
+    {
+      "id": "tvpi",
+      "name": "TVPI (total value to paid-in)",
+      "simple": "How many dollars of value you have for each dollar paid in: cash already returned plus the estimated value still held. 1.5x means 1.50 for each dollar.",
+      "pitfall": "Part of it is the manager's own estimate of what is left. It ignores time: 1.5x over 3 years and over 12 years look the same.",
+      "term": "tvpi"
+    },
+    {
+      "id": "dpi",
+      "name": "DPI (distributions to paid-in)",
+      "simple": "Cash actually returned for each dollar paid in. 0.8x means 80 cents back so far.",
+      "pitfall": "Low early in a fund's life for every fund, good or bad. It says nothing about what is still to come.",
+      "term": "dpi"
+    },
+    {
+      "id": "rvpi",
+      "name": "RVPI (residual value to paid-in)",
+      "simple": "The estimated value still held for each dollar paid in. TVPI is DPI plus RVPI.",
+      "pitfall": "This is the part you cannot check: it is the manager's mark until the assets are sold.",
+      "term": "rvpi"
+    },
+    {
+      "id": "pme",
+      "name": "PME (public market equivalent)",
+      "simple": "Compares the fund with putting the same cash, on the same dates, into a stock index. Above 1 means the fund did better than the index; below 1 means worse.",
+      "pitfall": "The answer depends on which index you pick. A small-company or leveraged index may be the fairer comparison for buyouts. It still uses the manager's estimate for anything not yet sold.",
+      "term": "pme"
+    }
+  ],
+  "smoothing": {
+    "title": "Why private returns look calm",
+    "text": "A share price changes every second. A private fund's value changes when someone estimates it, often once a quarter, and appraisers and managers tend to start from the last estimate. So the reported values move slowly and late. That makes the ups and downs look smaller than they are, and makes private assets look unrelated to the stock market when they are not. Researchers undo this with 'unsmoothing': they estimate how much each quarter's number leans on the last one and strip that out. The true risk is usually much higher than the reported one.",
+    "points": [
+      "Low reported volatility is partly a measuring effect, not safety.",
+      "A falling stock market often shows up in private values one or two quarters later.",
+      "Comparing a smoothed return series with a daily-priced one flatters the smoothed one."
+    ]
+  },
+  "routes": [
+    {
+      "id": "interval-fund",
+      "name": "Interval funds",
+      "what": "A registered fund, open to most investors, that holds private assets and must offer to buy back part of its shares on a fixed schedule.",
+      "liquidity": "5 to 25 percent of shares offered back every 3, 6 or 12 months. If more is asked for, everyone gets a pro rata share.",
+      "minimum": "Often a few thousand dollars, sometimes through an adviser only.",
+      "risks": ["You may not get all your money out when you ask.", "Fees can be high.", "The price is the fund's estimate of value."],
+      "check": ["Repurchase schedule and size.", "Total yearly cost, including any sales charge.", "How the assets are valued and how often."],
+      "term": "interval-fund"
+    },
+    {
+      "id": "tender-offer-fund",
+      "name": "Tender offer funds",
+      "what": "Like an interval fund, but buybacks happen only when the fund's board decides to make an offer.",
+      "liquidity": "Not guaranteed. Many aim for quarterly offers of about 5 percent of shares, but can skip them.",
+      "minimum": "Often for accredited or qualified investors only.",
+      "risks": ["The board can stop buybacks.", "Fees and valuation as for interval funds."],
+      "check": ["History of offers actually made.", "Who decides, and what happens if requests exceed the offer."],
+      "term": "tender-offer-fund"
+    },
+    {
+      "id": "listed-bdc",
+      "name": "Listed BDCs",
+      "what": "Business development companies are funds that lend to private companies. Listed ones trade on an exchange like a share.",
+      "liquidity": "Daily, at the market price, which can be well above or below the fund's own value per share (NAV).",
+      "minimum": "One share.",
+      "risks": ["The share price can fall far below NAV in a panic.", "High dividends can include giving back your own capital.", "Most use borrowed money."],
+      "check": ["Price against NAV per share.", "Share of loans not paying, and loans paying in more debt.", "Whether NAV per share has been falling over years.", "Fees and borrowing."],
+      "term": "bdc"
+    },
+    {
+      "id": "nontraded",
+      "name": "Non-traded BDCs and REITs",
+      "what": "BDCs and property trusts that are registered but not listed. You buy from the fund and sell back to it.",
+      "liquidity": "Limited buybacks, often capped at about 5 percent of shares a quarter. In late 2022 one of the largest non-traded property trusts began limiting withdrawals when requests passed its cap.",
+      "minimum": "Often a few thousand dollars, with income or wealth rules set by each US state.",
+      "risks": ["Withdrawals can be limited for long periods.", "Sales charges and fees can be high.", "The price is set by the fund, not a market."],
+      "check": ["Buyback limits and how often they have been hit.", "All fees, including upfront charges.", "How NAV is set and by whom."],
+      "term": "non-traded-reit"
+    },
+    {
+      "id": "listed-pe",
+      "name": "Listed private equity and managers",
+      "what": "Shares of investment companies that hold private equity funds, or of the firms that manage them.",
+      "liquidity": "Daily, on an exchange.",
+      "minimum": "One share.",
+      "risks": ["Moves with the stock market, often more so.", "Investment companies can trade at large discounts to NAV.", "A manager's shares track its fee income, not its funds' returns."],
+      "check": ["Discount or premium to NAV.", "Whether you own the funds or the manager.", "How it behaved in past market falls."],
+      "term": "private-equity"
+    },
+    {
+      "id": "tokenised",
+      "name": "Tokenised private credit",
+      "what": "Loans to companies offered as crypto tokens on a blockchain, often promising high yields.",
+      "liquidity": "Depends on the platform. Tokens may be hard to sell, and withdrawals can be paused.",
+      "minimum": "Often low.",
+      "risks": ["If the borrower stops paying, the token loses value, whatever yield was promised.", "Legal rights to the underlying loans can be unclear.", "Smart contract bugs, hacks and platform failure.", "May be offered outside US investor protections."],
+      "check": ["Who is the borrower, and what do you legally own?", "Who checks the loans and holds the documents?", "What happened in past defaults on this platform?", "Is it registered with any regulator?"],
+      "term": "private-credit"
+    },
+    {
+      "id": "accredited",
+      "name": "Private funds for accredited investors",
+      "what": "Funds sold privately under Regulation D. Most are open only to accredited investors: in the US, roughly income above 200,000 USD (300,000 USD with a spouse) for two years, or net worth above 1 million USD not counting your home, or certain licences.",
+      "liquidity": "Usually none for years.",
+      "minimum": "Often 100,000 USD or more, lower through feeder funds and platforms.",
+      "risks": ["Little public information: a Form D is a short notice, not a prospectus.", "Long lock-ups.", "Platforms and feeder funds add their own fees."],
+      "check": ["The full offering documents, not the marketing.", "Every layer of fees.", "The manager's full track record, including funds that did badly."],
+      "term": "accredited-investor"
+    }
+  ],
+  "checklist": [
+    "Ask for IRR, TVPI, DPI and a PME together. One number on its own can mislead.",
+    "Compare a fund only with funds that started in the same year.",
+    "Find out how values are estimated, by whom, and how often.",
+    "Add up every layer of fees, including performance fees and fees charged to the companies owned.",
+    "Read exactly when and how much you can take out, and what happens if many people ask at once.",
+    "Treat low reported volatility with suspicion: smoothing hides risk.",
+    "Check how much of the result rests on one or two holdings.",
+    "Look for the funds the manager does not mention."
+  ],
+  "providers": [
+    { "name": "Preqin (part of BlackRock)", "what": "Fund performance, cash flows and fundraising across private markets", "free": "no", "note": "Paid subscription. Some summary reports are free." },
+    { "name": "PitchBook (Morningstar)", "what": "Deals, valuations, fundraising and fund returns", "free": "no", "note": "Paid subscription. Publishes free summary reports and benchmarks." },
+    { "name": "MSCI Private Capital Solutions (formerly Burgiss)", "what": "Fund cash flows and values sourced from investors, widely used in research", "free": "no", "note": "Paid. Many academic studies use it through university licences." },
+    { "name": "Cambridge Associates", "what": "Private fund benchmarks by strategy and vintage year", "free": "partly", "note": "Publishes free quarterly benchmark summaries; full data is for clients." },
+    { "name": "NCREIF", "what": "US commercial property index from appraisals of institutional properties", "free": "partly", "note": "Summary returns are published; the detailed data is for members." },
+    { "name": "Cliffwater", "what": "Direct lending index built from BDC filings", "free": "partly", "note": "Index summaries are published; full data under licence." },
+    { "name": "SEC EDGAR", "what": "Form D notices, BDC and interval fund filings, private fund statistics", "free": "yes", "note": "Public information. Parity uses Form D counts and BDC net asset values." },
+    { "name": "FRED (St. Louis Fed)", "what": "Property prices, bank lending and loan officer surveys", "free": "yes", "note": "Free. Parity uses nine series as proxies." }
+  ],
+  "reading": [
+    { "doc": "DEC-0029", "label": "How Parity handles private markets data" },
+    { "doc": "RES-0012", "label": "Research note: private markets, how they are measured and how individuals get in" }
+  ]
+}

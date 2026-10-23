@@ -1,0 +1,571 @@
+{
+ "id": "how-markets-move",
+ "order": 3,
+ "level": "Core",
+ "title": "How markets move",
+ "summary": "Risk premia, carry, trend and value: the main reasons prices drift the way they do, and the catch that comes with each.",
+ "docs": [
+  "RES-0011"
+ ],
+ "lessons": [
+  {
+   "id": "risk-premia",
+   "title": "Risk premia: paid to hold risk",
+   "minutes": 2,
+   "body": [
+    "Some returns are a payment for carrying a risk other people do not want. That payment is a **risk premium**. Stocks have paid one over long periods because they can fall a lot at bad times.",
+    "A premium is an average, not a promise. The picture shows many possible paths of the same investment with a small positive drift. The middle of the band rises, but any single path can lose money for a long time.",
+    "That is why the same strategy can look brilliant or broken depending on the dates you pick."
+   ],
+   "terms": [
+    "risk-premium",
+    "efficient-market",
+    "benchmark"
+   ],
+   "visual": {
+    "kind": "paths",
+    "alt": "One path, then thirty paths, with the same small upward drift spread out over a year. A shaded band shows where most paths fall; its middle rises but its bottom is below the start.",
+    "params": {
+     "days": 250,
+     "n": 30,
+     "drift": 0.0004,
+     "vol": 0.01,
+     "seed": 40,
+     "xLabels": [
+      "Day 1",
+      "Day 250"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "One possible year for an investment with a small expected gain.",
+      "n": 1
+     },
+     {
+      "caption": "Thirty possible years for the same investment.",
+      "n": 30
+     },
+     {
+      "caption": "The band holds most of them. The middle rises, yet many paths end below the start.",
+      "n": 30,
+      "band": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Where market edges come from and which survive",
+     "href": "#/doc/RES-0011",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a risk premium?",
+     "options": [
+      "Extra return paid on average for carrying a risk others avoid",
+      "A fee charged by a broker",
+      "A guaranteed return"
+     ],
+     "answer": 0,
+     "why": "It is an average reward for risk, and the risk is real: it can be lost for years."
+    },
+    {
+     "q": "An investment has a positive expected return. Can a single year still lose money?",
+     "options": [
+      "No",
+      "Yes, often",
+      "Only if fees are high"
+     ],
+     "answer": 1,
+     "why": "The expected return is the middle of the spread. Individual years land all over it."
+    }
+   ]
+  },
+  {
+   "id": "carry",
+   "title": "Carry: earning the interest gap",
+   "minutes": 2,
+   "body": [
+    "Every currency has its own interest rate. **Carry** is the interest you earn on the currency you hold, minus the interest on the one you borrowed to buy it. If prices do not move, that gap is your return.",
+    "Theory says the high-rate currency should fall by about the extra interest, cancelling the gain. This is uncovered interest parity. In real data it mostly does not happen, which is why carry trades have paid on average.",
+    "Parity tests carry in its own strategies and in the hypothesis that it still pays after costs."
+   ],
+   "terms": [
+    "carry",
+    "carry-trade",
+    "uncovered-interest-parity",
+    "interest-rate"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bars show earning 5% on one currency, paying 1% on the borrowed one, and keeping a 4% carry if the exchange rate does not move.",
+    "params": {
+     "labels": [
+      "Rate you earn",
+      "Rate you pay",
+      "Carry"
+     ],
+     "colors": [
+      "good",
+      "bad",
+      "blue"
+     ],
+     "unit": "%"
+    },
+    "steps": [
+     {
+      "caption": "Hold a currency that pays 5% interest.",
+      "values": [
+       5,
+       0,
+       0
+      ]
+     },
+     {
+      "caption": "Pay for it by borrowing a currency at 1%.",
+      "values": [
+       5,
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "If the exchange rate stays put, you keep the 4% gap. That is carry.",
+      "values": [
+       5,
+       1,
+       4
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Hypothesis: currency carry still pays after costs",
+     "href": "#/doc/HYP-0001",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "You earn 4% on one currency and pay 1% on the other. What is the carry if prices do not move?",
+     "options": [
+      "4%",
+      "5%",
+      "3%"
+     ],
+     "answer": 2,
+     "why": "Carry is the rate earned minus the rate paid: 4 minus 1 is 3."
+    },
+    {
+     "q": "What does uncovered interest parity predict?",
+     "options": [
+      "High-rate currencies fall by about the extra interest",
+      "Rates do not affect currencies",
+      "High-rate currencies rise"
+     ],
+     "answer": 0,
+     "why": "If it held, carry would earn nothing on average. In real data it mostly does not hold."
+    }
+   ]
+  },
+  {
+   "id": "carry-catch",
+   "title": "Carry's catch: small gains, big falls",
+   "minutes": 2,
+   "body": [
+    "Carry tends to earn a little, often, and then lose a lot at once. When markets panic, people sell high-rate currencies and buy back the low-rate ones they borrowed, all at the same time.",
+    "That pattern is called **negative skew**: many small wins and a few large losses. The Sharpe ratio alone hides it, because it only looks at the spread of returns, not their shape.",
+    "This is one explanation of why carry pays at all: the reward is for holding a risk that shows up exactly when everything else is falling too."
+   ],
+   "terms": [
+    "negative-skew",
+    "carry-trade",
+    "tail-risk"
+   ],
+   "visual": {
+    "kind": "drawdown",
+    "alt": "An account climbs steadily, then falls about 30 percent in a short burst, and takes a long time to recover. The red area below shows the depth of the fall.",
+    "params": {
+     "days": 300,
+     "drift": 0.0012,
+     "vol": 0.004,
+     "seed": 17,
+     "crashAt": 0.5,
+     "crashDepth": 0.3,
+     "recover": 0.5
+    },
+    "steps": [
+     {
+      "caption": "Carry climbs slowly and steadily for a long time.",
+      "reveal": 0.5
+     },
+     {
+      "caption": "Then a panic: a large fall in a short time.",
+      "reveal": 1,
+      "peak": 1
+     },
+     {
+      "caption": "The drawdown shows how deep it went and how long it lasted.",
+      "fill": 1,
+      "mark": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Compare: how each strategy did in crashes",
+     "href": "#/compare",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does negative skew mean?",
+     "options": [
+      "Many small losses and a few large wins",
+      "Many small wins and a few large losses",
+      "Returns that never change"
+     ],
+     "answer": 1,
+     "why": "The long tail is on the losing side."
+    },
+    {
+     "q": "Why can the Sharpe ratio flatter a carry strategy?",
+     "options": [
+      "It only counts winning days",
+      "It ignores costs",
+      "It ignores the shape of returns, including rare large losses"
+     ],
+     "answer": 2,
+     "why": "Sharpe uses the spread, so a strategy that earns steadily until a rare crash can score well."
+    }
+   ]
+  },
+  {
+   "id": "trend",
+   "title": "Trend: things in motion",
+   "minutes": 2,
+   "body": [
+    "**Momentum** is the tendency for prices that have been rising to keep rising for a while, and falling ones to keep falling. A trend rule rides those moves instead of predicting turns.",
+    "A simple version compares the price with its average over recent days. Above the average, hold. Below, step aside or bet on a fall. It is late at every turn, and it loses in markets that chop sideways, but it can catch the long swings.",
+    "Parity tests currency trends that last months and trend following across futures."
+   ],
+   "terms": [
+    "momentum",
+    "moving-average",
+    "moving-average-crossover"
+   ],
+   "visual": {
+    "kind": "trend",
+    "alt": "A price moves in long swings. A yellow moving average follows it with a delay. Green shading marks days the price is above its average, red when below.",
+    "params": {
+     "days": 260,
+     "window": 40,
+     "seed": 4,
+     "drift": 0.0025,
+     "vol": 0.009
+    },
+    "steps": [
+     {
+      "caption": "A price that moves in long swings.",
+      "reveal": 1
+     },
+     {
+      "caption": "The yellow line is its average over the last 40 days. It follows with a delay.",
+      "ma": 1
+     },
+     {
+      "caption": "Green: price above the average, the rule holds. Red: below, it steps aside or bets on a fall.",
+      "ma": 1,
+      "shade": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Hypothesis: currency trends persist over months",
+     "href": "#/doc/HYP-0002",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "When does a simple trend rule tend to lose?",
+     "options": [
+      "When prices chop sideways",
+      "Never",
+      "In long steady trends"
+     ],
+     "answer": 0,
+     "why": "Sideways markets cross the average back and forth, so the rule buys high and sells low many times."
+    },
+    {
+     "q": "What is momentum?",
+     "options": [
+      "Prices always return to average",
+      "Recent winners tend to keep winning for a while",
+      "Prices move at random"
+     ],
+     "answer": 1,
+     "why": "Momentum is persistence of recent moves, the opposite of mean reversion over short horizons."
+    }
+   ]
+  },
+  {
+   "id": "value",
+   "title": "Value: pulled back toward fair",
+   "minutes": 2,
+   "body": [
+    "**Value** strategies buy what looks cheap against a fair level and sell what looks dear. For currencies, one fair level is **purchasing power parity**: the exchange rate at which the same basket of goods costs the same in both countries.",
+    "Exchange rates wander far from that level and come back only slowly. Deviations halve every three to five years. So value is a weak signal from month to month, but a real pull over many years.",
+    "Value and trend often disagree, which is one reason people combine them."
+   ],
+   "terms": [
+    "purchasing-power-parity",
+    "mean-reversion",
+    "real-exchange-rate"
+   ],
+   "visual": {
+    "kind": "lines",
+    "alt": "Over 20 years, an exchange rate swings far above and below a slowly rising fair value line, crossing it every few years.",
+    "params": {
+     "series": [
+      {
+       "label": "Fair value",
+       "color": "faint",
+       "points": [
+        1.1,
+        1.101,
+        1.101,
+        1.102,
+        1.102,
+        1.103,
+        1.104,
+        1.104,
+        1.105,
+        1.105,
+        1.106,
+        1.107,
+        1.107,
+        1.108,
+        1.108,
+        1.109,
+        1.11,
+        1.11,
+        1.111,
+        1.111,
+        1.112,
+        1.113,
+        1.113,
+        1.114,
+        1.114,
+        1.115,
+        1.116,
+        1.116,
+        1.117,
+        1.117,
+        1.118,
+        1.119,
+        1.119,
+        1.12,
+        1.12,
+        1.121,
+        1.122,
+        1.122,
+        1.123,
+        1.123,
+        1.124,
+        1.125,
+        1.125,
+        1.126,
+        1.126,
+        1.127,
+        1.128,
+        1.128,
+        1.129,
+        1.129,
+        1.13,
+        1.131,
+        1.131,
+        1.132,
+        1.132,
+        1.133,
+        1.134,
+        1.134,
+        1.135,
+        1.135,
+        1.136,
+        1.137,
+        1.137,
+        1.138,
+        1.138,
+        1.139,
+        1.14,
+        1.14,
+        1.141,
+        1.141,
+        1.142,
+        1.143,
+        1.143,
+        1.144,
+        1.144,
+        1.145,
+        1.146,
+        1.146,
+        1.147,
+        1.147
+       ]
+      },
+      {
+       "label": "Exchange rate",
+       "color": "blue",
+       "points": [
+        1.266,
+        1.272,
+        1.26,
+        1.246,
+        1.217,
+        1.208,
+        1.232,
+        1.237,
+        1.258,
+        1.259,
+        1.263,
+        1.261,
+        1.214,
+        1.231,
+        1.239,
+        1.247,
+        1.199,
+        1.152,
+        1.129,
+        1.117,
+        1.125,
+        1.124,
+        1.137,
+        1.121,
+        1.129,
+        1.138,
+        1.122,
+        1.165,
+        1.177,
+        1.205,
+        1.187,
+        1.166,
+        1.156,
+        1.152,
+        1.167,
+        1.172,
+        1.159,
+        1.134,
+        1.121,
+        1.153,
+        1.132,
+        1.138,
+        1.149,
+        1.111,
+        1.114,
+        1.147,
+        1.097,
+        1.091,
+        1.09,
+        1.072,
+        1.087,
+        1.088,
+        1.054,
+        1.079,
+        1.098,
+        1.124,
+        1.161,
+        1.169,
+        1.172,
+        1.138,
+        1.154,
+        1.139,
+        1.128,
+        1.097,
+        1.075,
+        1.065,
+        1.101,
+        1.053,
+        1.02,
+        1.032,
+        1.073,
+        1.091,
+        1.047,
+        0.988,
+        1.005,
+        0.993,
+        0.972,
+        1.004,
+        1.038,
+        1.047
+       ]
+      }
+     ],
+     "xLabels": [
+      "Year 0",
+      "Year 20"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A fair value line from purchasing power parity.",
+      "show": [
+       1,
+       0
+      ],
+      "reveal": 0.35
+     },
+     {
+      "caption": "The actual rate wanders far from it.",
+      "show": [
+       1,
+       1
+      ],
+      "reveal": 0.35
+     },
+     {
+      "caption": "Over many years it keeps being pulled back. Slowly.",
+      "show": [
+       1,
+       1
+      ],
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Purchasing power parity in the glossary",
+     "href": "#/learn/purchasing-power-parity",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "How fast do exchange rates close their gap to purchasing power parity?",
+     "options": [
+      "They never do",
+      "Within days",
+      "Half the gap closes in about three to five years"
+     ],
+     "answer": 2,
+     "why": "The pull is real but slow, so value is a weak short-run signal."
+    },
+    {
+     "q": "Why do people combine value with trend?",
+     "options": [
+      "They often disagree, so together they are less bumpy",
+      "Value has no risk",
+      "They always agree"
+     ],
+     "answer": 0,
+     "why": "Signals that disagree tend to lose at different times."
+    }
+   ]
+  }
+ ]
+}

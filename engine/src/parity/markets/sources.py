@@ -14,6 +14,9 @@ and the markets data reference doc have the quotes):
     sec           the US fund universe (series and class tickers) and new fund filings from
                   EDGAR full-text search. Public information; SEC asks for a contact in the
                   user agent and at most 10 requests a second.
+    sec-formd,    private markets (DEC-0029): Form D counts from the SEC's quarterly data
+    sec-bdc       sets, and net asset values of large BDCs from their XBRL filings. Same
+                  terms and contact rule as above. Parsers live in markets/private.py.
 
 Rejected because their terms forbid showing data to other people: Coinbase Exchange,
 Kraken, Deribit, OKX, Binance and Nasdaq's symbol directory. Bybit and Binance's live API
@@ -35,7 +38,7 @@ from datetime import UTC, date, datetime, timedelta
 import pandas as pd
 import requests
 
-from . import themes
+from . import private, themes
 
 USER_AGENT = "parity-research/0.1 (private research project)"
 TIMEOUT = 30
@@ -99,6 +102,20 @@ SOURCES: list[Source] = [
            "https://www.sec.gov/privacy#dissemination", "Public information; cite the SEC",
            "yes", "Source: SEC EDGAR", "https://www.sec.gov/edgar", needs_contact=True,
            max_age_hours=6),
+    Source("sec-formd", "SEC Form D data sets", "US Securities and Exchange Commission",
+           "Private offerings: new Form D notices each quarter, counted by kind of issuer, "
+           "size and exemption. Names and people in the filings are not stored",
+           "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+           "Public information; may be copied or distributed; cite the SEC", "yes",
+           "Source: SEC EDGAR, Form D data sets", "https://www.sec.gov/edgar",
+           needs_contact=True, max_age_hours=24 * 7),
+    Source("sec-bdc", "BDC net asset values", "US Securities and Exchange Commission",
+           "Net asset value per share of large business development companies (private "
+           "credit funds), from their 10-Q and 10-K XBRL facts",
+           "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+           "Public information; may be copied or distributed; cite the SEC", "yes",
+           "Source: SEC EDGAR XBRL", "https://www.sec.gov/edgar", needs_contact=True,
+           max_age_hours=24),
 ]
 BY_ID = {s.id: s for s in SOURCES}
 
@@ -460,6 +477,31 @@ def fetch_sec_filings(src: Source, days: int = FILINGS_DAYS, fund_ciks: set[str]
     return {"fund_filings": keep_fund_filings(df, fund_ciks or set())}
 
 
+def fetch_sec_formd(src: Source, have: set[str] | None = None,
+                    quarters: int = private.FORMD_QUARTERS) -> dict[str, pd.DataFrame]:
+    """New quarters of Form D counts. `have` lists quarters already stored."""
+    listed = private.parse_formd_page(_request(src, private.FORMD_PAGE, pause=SEC_PAUSE).text)
+    if not listed:
+        raise RuntimeError("no Form D data set links found on the SEC page")
+    frames = [private.parse_formd_zip(_request(src, url, pause=SEC_PAUSE).content, q)
+              for q, url in private.pick_quarters(listed, have or set(), quarters)]
+    return {"formd": pd.concat(frames, ignore_index=True)}
+
+
+def fetch_sec_bdc(src: Source) -> dict[str, pd.DataFrame]:
+    frames = []
+    for cik, name, ticker, listed in private.BDCS:
+        url = private.COMPANY_CONCEPT.format(cik=cik, tag="NetAssetValuePerShare")
+        try:
+            payload = _request(src, url, pause=SEC_PAUSE).json()
+        except RuntimeError:
+            continue  # one company without the tag should not stop the rest
+        frames.append(private.parse_nav_concept(payload, cik, name, ticker, listed, now()))
+    if not frames:
+        raise RuntimeError("no BDC returned a net asset value")
+    return {"bdc_nav": pd.concat(frames, ignore_index=True)}
+
+
 FETCHERS = {
     "coingecko-markets": fetch_coingecko_markets,
     "coingecko-history": fetch_coingecko_history,
@@ -468,6 +510,8 @@ FETCHERS = {
     "hyperliquid-funding": fetch_hyperliquid_funding,
     "sec-funds": fetch_sec_funds,
     "sec-filings": fetch_sec_filings,
+    "sec-formd": fetch_sec_formd,
+    "sec-bdc": fetch_sec_bdc,
 }
 
 

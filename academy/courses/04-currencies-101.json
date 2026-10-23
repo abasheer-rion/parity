@@ -1,0 +1,478 @@
+{
+ "id": "currencies-101",
+ "order": 4,
+ "level": "Start here",
+ "title": "Currencies 101",
+ "summary": "How exchange rates are quoted, what a pip is worth, what trading costs, why some currencies rise in a panic, and how leverage turns small moves into large losses.",
+ "docs": [
+  "RES-0004"
+ ],
+ "lessons": [
+  {
+   "id": "price",
+   "title": "An exchange rate is a price",
+   "minutes": 2,
+   "body": [
+    "An **exchange rate** is the price of one currency in another. In EUR/USD, the euro is the base, the thing being priced, and the dollar is the quote, the money used to price it.",
+    "A quote of 1.10 means one euro costs 1.10 dollars. If it rises to 1.20, the euro got stronger: it buys more dollars. If it falls, the dollar got stronger.",
+    "Parity stores every rate as US dollars per one unit of the other currency, so a rising number always means the other currency gained."
+   ],
+   "terms": [
+    "exchange-rate",
+    "base-and-quote-currency",
+    "currency-pair"
+   ],
+   "visual": {
+    "kind": "seesaw",
+    "alt": "A seesaw with EUR on one side and USD on the other. As the rate moves from 1.05 to 1.20, the euro side rises.",
+    "params": {
+     "base": "EUR",
+     "quote": "USD",
+     "mid": 1.12,
+     "span": 0.1
+    },
+    "steps": [
+     {
+      "caption": "1 euro costs 1.05 dollars.",
+      "rate": 1.05,
+      "label": "EUR/USD at 1.05"
+     },
+     {
+      "caption": "The rate rises to 1.12: each euro buys more dollars.",
+      "rate": 1.12,
+      "label": "The euro gains"
+     },
+     {
+      "caption": "At 1.20 the euro is stronger still. The dollar has weakened against it.",
+      "rate": 1.2,
+      "label": "Same move, seen from the dollar: it weakened"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Exchange rate in the glossary",
+     "href": "#/learn/exchange-rate",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "EUR/USD moves from 1.10 to 1.15. What happened?",
+     "options": [
+      "The dollar got stronger",
+      "The euro got stronger",
+      "Nothing"
+     ],
+     "answer": 1,
+     "why": "Each euro now buys more dollars, so the euro gained."
+    },
+    {
+     "q": "In EUR/USD, which is the base currency?",
+     "options": [
+      "The dollar",
+      "Neither",
+      "The euro"
+     ],
+     "answer": 2,
+     "why": "The base is the thing being priced, and it is written first."
+    }
+   ]
+  },
+  {
+   "id": "pips",
+   "title": "Pips and trade size",
+   "minutes": 2,
+   "body": [
+    "A **pip** is the usual smallest step a currency price moves by. For most pairs it is the fourth decimal place, 0.0001. For yen pairs it is the second, 0.01.",
+    "What a pip is worth in money depends on the trade size. Retail trades come in lots: a standard lot is 100,000 units of the base currency. On a standard lot of EUR/USD, one pip is 10 dollars.",
+    "So a move that looks tiny on the screen can be a large amount of money, which is why trade size matters more than the number of pips."
+   ],
+   "terms": [
+    "pip",
+    "lot",
+    "pipette"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bars show what moves of 1, 50 and 100 pips are worth on a standard lot of EUR/USD: 10, 500 and 1,000 dollars.",
+    "params": {
+     "labels": [
+      "1 pip",
+      "50 pips",
+      "100 pips"
+     ],
+     "unit": "$"
+    },
+    "steps": [
+     {
+      "caption": "On a standard lot of EUR/USD, 1 pip is 10 dollars.",
+      "values": [
+       10,
+       0,
+       0
+      ]
+     },
+     {
+      "caption": "50 pips, a common daily move, is 500 dollars.",
+      "values": [
+       10,
+       500,
+       0
+      ]
+     },
+     {
+      "caption": "100 pips is 1,000 dollars.",
+      "values": [
+       10,
+       500,
+       1000
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Pip in the glossary",
+     "href": "#/learn/pip",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "What is one pip on a standard lot of EUR/USD worth?",
+     "options": [
+      "10 dollars",
+      "100 dollars",
+      "1 dollar"
+     ],
+     "answer": 0,
+     "why": "100,000 euros times 0.0001 is 10 dollars."
+    },
+    {
+     "q": "For most currency pairs, a pip is:",
+     "options": [
+      "0.01",
+      "0.0001",
+      "0.1"
+     ],
+     "answer": 1,
+     "why": "The fourth decimal place. Yen pairs are the exception, at 0.01."
+    }
+   ]
+  },
+  {
+   "id": "spread",
+   "title": "Bid, ask and the spread",
+   "minutes": 2,
+   "body": [
+    "Every price has two sides. The **bid** is what you can sell at; the **ask** is what you can buy at. The gap between them is the **spread**, and you pay it every time you trade.",
+    "For major currency pairs it is around 0.5 to 2 basis points for institutions, and more for retail traders. That sounds tiny, but a strategy that trades every day pays it hundreds of times a year.",
+    "This is why Parity asks how much each strategy trades and at what cost its gain would vanish."
+   ],
+   "terms": [
+    "spread",
+    "bid-and-ask",
+    "transaction-costs"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bars show a spread of 0.5 and 2 basis points per trade, then what 2 basis points adds up to over 250 round trips: 1,000 basis points, or 10%.",
+    "params": {
+     "labels": [
+      "Tight",
+      "Wider",
+      "A year of daily round trips"
+     ],
+     "colors": [
+      "blue",
+      "warn",
+      "bad"
+     ],
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "A tight spread on a major pair: about 0.5 basis points.",
+      "values": [
+       0.5,
+       0,
+       0
+      ],
+      "unit": " bp"
+     },
+     {
+      "caption": "A wider one: about 2 basis points.",
+      "values": [
+       0.5,
+       2,
+       0
+      ],
+      "unit": " bp"
+     },
+     {
+      "caption": "Paid on the way in and out every day for a year, 2 basis points adds up to 1,000: 10%.",
+      "values": [
+       0.5,
+       2,
+       1000
+      ],
+      "unit": " bp"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Spread in the glossary",
+     "href": "#/learn/spread",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "You buy at the ask and immediately sell at the bid. What happens?",
+     "options": [
+      "You gain the spread",
+      "You break even",
+      "You lose the spread"
+     ],
+     "answer": 2,
+     "why": "The ask is above the bid, so a quick round trip loses the gap."
+    },
+    {
+     "q": "Why does a small spread matter for a strategy that trades daily?",
+     "options": [
+      "It is paid on every trade, so it adds up",
+      "Spreads only apply once a year",
+      "It does not"
+     ],
+     "answer": 0,
+     "why": "Hundreds of trades times a small cost becomes a large one."
+    }
+   ]
+  },
+  {
+   "id": "safe-havens",
+   "title": "Safe havens",
+   "minutes": 2,
+   "body": [
+    "Some currencies tend to gain when people are scared. Research found the Swiss franc and the Japanese yen gained against the US dollar when US stocks fell and market stress rose. These are called **safe haven currencies**.",
+    "The picture is an illustration of that pattern, not real data: stocks fall over a few weeks while a safe haven currency edges up.",
+    "It is a tendency, not a rule. It also works against carry trades, which often borrow in these same low-rate currencies."
+   ],
+   "terms": [
+    "safe-haven-currency",
+    "funding-currency",
+    "correlation"
+   ],
+   "visual": {
+    "kind": "lines",
+    "alt": "Illustration: over 30 days a stock index falls about 15 percent while a safe haven currency rises about 4 percent.",
+    "params": {
+     "series": [
+      {
+       "label": "Stocks",
+       "color": "bad",
+       "points": [
+        100.15,
+        100.96,
+        100.31,
+        99.06,
+        100.57,
+        98.82,
+        100.51,
+        99.89,
+        99.21,
+        100.33,
+        100.19,
+        98.2,
+        95.85,
+        95.0,
+        91.97,
+        91.5,
+        87.92,
+        86.79,
+        85.84,
+        85.76,
+        84.53,
+        85.68,
+        85.21,
+        85.09,
+        84.89,
+        85.34,
+        85.46,
+        86.21,
+        84.74,
+        84.99
+       ]
+      },
+      {
+       "label": "Safe haven currency",
+       "color": "good",
+       "points": [
+        100.11,
+        100.15,
+        100.14,
+        100.32,
+        100.13,
+        99.84,
+        99.55,
+        100.25,
+        100.4,
+        99.96,
+        100.16,
+        100.79,
+        100.9,
+        101.51,
+        102.24,
+        102.39,
+        102.97,
+        103.43,
+        103.74,
+        103.68,
+        104.16,
+        104.21,
+        104.04,
+        104.14,
+        104.07,
+        104.0,
+        104.14,
+        104.08,
+        103.91,
+        104.23
+       ]
+      }
+     ],
+     "xLabels": [
+      "Day 1",
+      "Day 30"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Illustration: a calm stretch for stocks.",
+      "reveal": 0.33,
+      "show": [
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "A sell-off: stocks fall about 15%.",
+      "reveal": 1,
+      "show": [
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "Meanwhile a safe haven currency edges up.",
+      "reveal": 1,
+      "show": [
+       1,
+       1
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Ask what markets did after past shocks",
+     "href": "#/scenarios",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Which currencies did research find tend to gain when US stocks fall?",
+     "options": [
+      "The Australian dollar and Norwegian krone",
+      "The Swiss franc and Japanese yen",
+      "All currencies equally"
+     ],
+     "answer": 1,
+     "why": "Ranaldo and Soderlind (2010) found this for the franc and the yen."
+    },
+    {
+     "q": "Why can a panic hurt a carry trade twice?",
+     "options": [
+      "Spreads disappear",
+      "Rates rise",
+      "Its high-rate currencies fall while the low-rate ones it borrowed often rise"
+     ],
+     "answer": 2,
+     "why": "Carry often borrows safe haven currencies, which tend to gain in a panic."
+    }
+   ]
+  },
+  {
+   "id": "leverage",
+   "title": "Leverage",
+   "minutes": 3,
+   "body": [
+    "**Leverage** means trading with borrowed money, so a position is bigger than the money behind it. Gains get bigger, and so do losses.",
+    "With 10 times leverage, a 10% fall in the price wipes out the money you put up. With 30 times, a fall of about 3.3% does. Currencies often move that much in a few weeks.",
+    "Brokers ask for a deposit called **margin** and close the position when it runs low, usually before it is all gone. EU rules for retail traders cap major currency pairs at 30 to 1."
+   ],
+   "terms": [
+    "leverage",
+    "margin",
+    "margin-call",
+    "stop-out"
+   ],
+   "visual": {
+    "kind": "leverage",
+    "alt": "A currency price wanders around its start. A red line shows the price at which the margin is gone. At 2 times leverage the line is far below; at 10 times it is closer; at 30 times the price crosses it and the position is closed.",
+    "params": {
+     "days": 120,
+     "drift": -0.0002,
+     "vol": 0.006,
+     "seed": 9
+    },
+    "steps": [
+     {
+      "caption": "2x leverage: the price would need to halve to wipe out the margin.",
+      "lev": 2
+     },
+     {
+      "caption": "10x: a 10% fall is enough.",
+      "lev": 10
+     },
+     {
+      "caption": "30x: a fall of about 3.3% wipes it out, and an ordinary dip gets there.",
+      "lev": 30
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Margin in the glossary",
+     "href": "#/learn/margin",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "With 20 times leverage, what price fall wipes out the margin, ignoring fees?",
+     "options": [
+      "5%",
+      "20%",
+      "2%"
+     ],
+     "answer": 0,
+     "why": "1 divided by 20 is 5%."
+    },
+    {
+     "q": "What happens to losses when leverage doubles?",
+     "options": [
+      "They stay the same",
+      "They double",
+      "They halve"
+     ],
+     "answer": 1,
+     "why": "Leverage scales gains and losses alike."
+    }
+   ]
+  }
+ ]
+}
