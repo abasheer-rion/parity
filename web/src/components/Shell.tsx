@@ -70,6 +70,7 @@ const RESEARCH: NavItem[] = [
   },
   { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
   { href: "#/search", label: "Strategy search", icon: "search", routes: ["search"] },
+  { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
     children: [

@@ -389,10 +389,12 @@
   },
   "layout": {
     "top_level": [
+      ".cursor",
       ".editorconfig",
       ".githooks",
       ".github",
       ".gitignore",
+      ".vscode",
       "CHANGELOG.md",
       "CONTRIBUTING.md",
       "Makefile",

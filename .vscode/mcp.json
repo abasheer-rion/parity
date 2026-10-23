@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "parity": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/engine/.venv/bin/parity",
+      "args": ["mcp"]
+    }
+  }
+}
