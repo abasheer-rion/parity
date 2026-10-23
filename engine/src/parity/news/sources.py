@@ -104,6 +104,15 @@ SOURCES: list[Source] = [
                             'sourcelang:english',
                    "mode": "artlist", "format": "json", "sort": "datedesc",
                    "maxrecords": "75", "timespan": "1d"}),
+    # Archive only: read by `parity news backfill` (backfill.py), never by the hourly fetch.
+    Source("events", "Parity market event catalog", "backfill",
+           "catalog/events", "https://github.com/abasheer-rion/parity",
+           "Our own descriptions, each linking to its source", True, "geopolitics"),
+    Source("sec8k", "SEC 8-K filings (EDGAR)", "backfill",
+           "https://data.sec.gov/submissions/",
+           "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+           "US government work, public domain", True, "earnings", ("US",), (),
+           needs_contact=True, catalog="sec-press"),
     Source("alphavantage", "Alpha Vantage news and sentiment", "alphavantage",
            "https://www.alphavantage.co/query", "https://www.alphavantage.co/terms_of_service/",
            "Alpha Vantage terms: personal, non-commercial use; free key 25 requests a day", False,
@@ -165,6 +174,8 @@ def fetch(src: Source) -> list[Article]:
     if src.needs_contact and not contact():
         raise Skipped("PARITY_CONTACT is not set (this source asks callers to identify)")
     params = dict(src.params)
+    if src.kind == "backfill":
+        raise Skipped("archive only, run `parity news backfill`")
     if src.kind == "rss":
         return parse_rss(_get(src.url, src).content, src)
     if src.kind == "gdelt":

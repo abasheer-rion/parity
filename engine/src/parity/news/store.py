@@ -47,6 +47,8 @@ def merge(articles: list[Article], root: Path = DEFAULT_DIR) -> tuple[pd.DataFra
     both = both.drop_duplicates("id", keep="first")  # the first time we saw it wins
     both = both.sort_values("published_at", ascending=False).reset_index(drop=True)
     save(both, root)
+    from . import archive  # every headline is also kept in the yearly archive, forever
+    archive.add(new, root)
     return both, added
 
 

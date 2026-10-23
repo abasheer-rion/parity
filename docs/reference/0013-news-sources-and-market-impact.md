@@ -4,10 +4,10 @@ title: News sources and market impact
 type: reference
 status: current
 created: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-23
 authors: [ayan]
 tags: [data, fx, method, news]
-related: [DAT-0016, DAT-0042, REF-0003]
+related: [DAT-0016, DAT-0042, REF-0003, DEC-0026]
 ---
 
 # News sources and market impact
@@ -97,6 +97,35 @@ WTI went below zero in April 2020. A percent change through a negative price mea
 - **Tags are keywords.** They miss things and sometimes tag wrongly. Fix the word lists in `tagging.py`.
 - **GDELT throttles.** It returned "too many requests" even at one call every 20 seconds on 2026-10-21. The hourly job makes one call; the record lookups stop at the first refusal and resume next time.
 
+## The archive
+
+Added on 2026-10-23 ([DEC-0026](../decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)). Every headline the hourly fetch stores also goes into `engine/data/news/archive/<year>.parquet` and stays there. Each row also has `topics` (21 word lists in `tagging.py`, such as OPEC, rate hike, war, inflation and bank failure) and `assets` (the catalog series it is about).
+
+Older years come from `parity news backfill` (`parity/news/backfill.py`). Terms checked on 2026-10-23:
+
+| Source | Archive | From | Terms | Smoke fetch on 2026-10-23 |
+| --- | --- | --- | --- | --- |
+| Federal Reserve | `federalreserve.gov/json/ne-press.json`, every press release | 2016 | Public domain | 4,160 items |
+| ECB | `press/pr/date/<year>/html/index_include.en.html` | 1997 to 2024 | Reuse allowed with the ECB named | 2,788 items; 2025 on returns 404, the RSS covers it |
+| Bank of Japan | `mopo/mpmdeci/state_<year>/index.htm`, monetary policy releases | 1998 | Reuse allowed with the Bank named | 404 items |
+| Our event catalog | `catalog/events/*.json` | 1971 | Our own text, each linking to its source | 76 items |
+| GDELT | DOC API by month and topic query | 2017 | Free with citation; headline and link only | 60 items, then "too many requests" |
+| SEC 8-K | `data.sec.gov/submissions/CIK*.json`, 13 large companies, titled by item number | about 2004 | Public domain | not run: needs `PARITY_CONTACT`, not set on this machine |
+
+Not used: OPEC's website returns HTTP 403 to automated requests and grants no reuse; the EIA press archive page also returns 403, so EIA history is only what its RSS still holds; the Bank of England stays out until it confirms headline reuse.
+
+Items with a date but no time (ECB, BoJ, events) are stamped at a fixed local time before the US close, so they count for that day.
+
+## The impact engine
+
+`parity/news/study.py`, for any series in the data catalog and any years:
+
+- **Biggest moves after news.** For each day with news about the asset, the move 1, 5 and 20 trading days later in normal moves (z). Days, not headlines, are ranked. The output says how many days were checked and how many would pass z 2 by chance, from the share of all days that do.
+- **Event study for a topic or keywords.** Each day with a matching headline is one event. Average and median path from 5 days before to 20 after, a 95% band, hit rate, N, the same numbers for random days from the same years, and a p-value from 300 to 500 random draws. Events within 20 trading days of another are marked and the averages are repeated without them.
+- **Rankings.** Assets by topic and topics by asset, sorted by q (Benjamini-Hochberg across every pair tried), never by move size.
+- **Rules.** No p-value under 5 events, a warning under 20, volatility only from before the event, and every result says it is not a prediction.
+- **Rate decisions.** "Rate hike" and "rate cut" also take a Fed, ECB or BoJ decision day when that bank's BIS policy rate moved that way on the day or the next.
+
 ## Commands and schedule
 
 | Command | What it does |
@@ -105,13 +134,17 @@ WTI went below zero in April 2020. A percent change through a negative price mea
 | `parity news list` | Newest headlines; `--currency EUR`, `--category energy` |
 | `parity news impact` | Write `impacts.parquet` and print the biggest next day moves |
 | `parity news records --explain 10` | Biggest days, looking up 10 more days on GDELT |
-| `parity news export web/dist/data` | Write `news/articles.json` and `news/records.json` for the site |
+| `parity news export web/dist/data` | Write `news/articles.json`, `news/records.json`, `news/archive/<year>.json` and `news/impact.json` for the site |
+| `parity news backfill` | Fill the archive from the sources above; `--backfill-source fed`, `--gdelt-limit 6` |
+| `parity news search --topic OPEC --from 2014 --to 2016` | Search the archive; also `--text`, `--asset`, `--source` |
+| `parity news impact --asset cmd.BRENT --topic "OPEC" --from 2010 --to 2024` | Event study; `--asset` alone lists the biggest moves after news; `--rank assets` or `--rank topics` ranks |
 
-The `News` workflow runs every hour: it restores the data cache, fetches prices if the cache is empty, fetches news from the free sources, looks up a few record days on GDELT and saves the cache. It commits nothing. The deploy workflow restores the same cache and runs `parity news export` before publishing the site.
+The `News` workflow runs every hour: it restores the data cache, fetches prices if the cache is empty, fetches news from the free sources, runs the archive backfill (older years once, then only the current year, plus one month of GDELT topic queries), looks up a few record days on GDELT and saves the cache. It commits nothing. The deploy workflow restores the same cache and runs `parity news export` before publishing the site.
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Referenced by
 
+- [DEC-0026: A news archive and an impact engine that ranks by evidence](../decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [REF-0015: Getting close to Bloomberg data: sources, costs and licences](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [LOG-0006: Ayan work log, merges, domain, email and the two product plan](../log/2026-10-21-ayan-work-log-merges-domain-email-and-the-two-product-plan.md)
 - [DAT-0002: Alpha Vantage](../datasets/0002-alpha-vantage.md)

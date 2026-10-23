@@ -4,7 +4,7 @@ title: Emerging market currencies since 2010
 type: experiment
 status: planned
 created: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-23
 authors: [amanda]
 tags: [carry, fx, momentum]
 related: [HYP-0009, HYP-0010, HYP-0011, RES-0012]
@@ -26,7 +26,7 @@ Do emerging market carry, a passive EM basket and EM momentum each pass at least
 - Interest rates: OECD 3-month interbank rates dated at month end for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB and ZAR; BIS central bank policy rates for BRL, IDR, INR, MYR, PHP, THB and TRY.
 - `em_fx_carry`: top third by rate gap to USD, gap at least 1 point, equal weight, monthly. `em_fx_basket`: all currencies equal weight. `em_fx_momentum`: top third minus bottom third by past 63-day excess return.
 - 10 bp per unit traded (about ten times our G10 cost); the A4 test doubles it.
-- No performance number was computed before registering; only data coverage and missing values were checked.
+- No performance number was computed before registering; only data coverage and missing values were checked. After registration, [DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md) ran a long-short policy-rate carry book on 27 currencies that holds 15 of these 17 (Sharpe 0.75 from 1999). `em_fx_carry` results should be read with that in mind; the basket and momentum rules are unaffected.
 
 ## Results
 

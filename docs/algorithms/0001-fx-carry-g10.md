@@ -183,4 +183,5 @@ Official run [RUN-000003](../../ledger/runs/RUN-000003.json) of `REG-0003`, reco
 ## Referenced by
 
 - [RES-0009: Trading myths and what the evidence says](../research/0009-trading-myths-and-what-the-evidence-says.md)
+- [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 <!-- backlinks:end -->

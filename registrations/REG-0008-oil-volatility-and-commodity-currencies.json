@@ -38,8 +38,8 @@
   "pass_criteria": {
     "min_real_tests": 4
   },
-  "prior_trials": 296,
-  "prior_trials_note": "208 + 2 (REG-0007). Includes the commodity gap trials (HYP-0003, HYP-0008) on the opposite direction of the commodity and currency link. No exploratory evaluation of these strategies was run. Raised from 210 to 296 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count.",
+  "prior_trials": 313,
+  "prior_trials_note": "208 + 2 (REG-0007). Includes the commodity gap trials (HYP-0003, HYP-0008) on the opposite direction of the commodity and currency link. No exploratory evaluation of these strategies was run. Raised from 210 to 296 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count. Raised by 17 on 2026-10-23 after merging main: PR #47 (DEC-0027) added 17 edge recipes, each evaluated in at least one full gauntlet run.",
   "what_would_change_our_mind": "Selling oil variance passing would still only be an upper bound, because swap costs are missing; failing would mean even the best case does not hold. A pass for the currency signal would turn our failed oil idea into a working one, pointing the other way.",
   "already_seen": "No. Before registering, only data checks were run (OVX coverage, the variance index never falling to zero, roll days); no strategy return or performance number was computed."
 }

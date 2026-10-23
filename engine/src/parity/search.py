@@ -30,11 +30,12 @@ import pandas as pd
 from scipy import stats
 
 from .backtest.engine import BacktestConfig, run
-from .data import store
+from .data import catalog, store
 from .data.catalog import EM, G10, INDUSTRIES
 from .metrics import performance
 from .metrics.performance import EULER_GAMMA
 from .strategies import _blocks as B
+from .strategies import _signals as S
 
 OUT = Path(__file__).resolve().parents[2] / "output"
 DB = OUT / "search.db"
@@ -93,6 +94,10 @@ def _rank(r: random.Random) -> dict:
 
 TIMING_RULES = ["above_average", "absolute_momentum", "vix_below_average", "vix_below",
                 "curve_positive", "rates_falling", "copper_up", "oil_calm"]
+# Rules on the wider data (DEC-0027). Their cash earns the T-bill, so cash scores zero.
+WIDER_RULES = ["stress_below", "conditions_easing", "claims_calm", "spx_not_crowded",
+               "fomc_week"]
+TIMING_RULES += WIDER_RULES
 
 
 def _timing(r: random.Random) -> dict:
@@ -104,7 +109,13 @@ def _timing(r: random.Random) -> dict:
          "curve_positive": r.choice([-1.0, -0.5, -0.25, 0.0, 0.25, 0.5, 1.0, 1.5]),
          "rates_falling": r.choice([21, 63, 126, 189, 252]),
          "copper_up": r.choice([63, 126, 189, 252]),
-         "oil_calm": r.choice([0.2, 0.3, 0.4, 0.5, 0.65, 0.8])}[rule]
+         "oil_calm": r.choice([0.2, 0.3, 0.4, 0.5, 0.65, 0.8]),
+         "stress_below": r.choice([-0.5, 0.0, 0.5, 1.0, 1.5]),
+         "conditions_easing": r.choice([21, 65, 130, 260]),
+         "claims_calm": r.choice([0.1, 0.15, 0.2, 0.3, 0.4]),
+         "spx_not_crowded": r.choice([0.5, 1.0, 1.5, 2.0]),
+         # 0 holds even weeks of the Fed cycle, 1 the odd weeks: a built-in placebo.
+         "fomc_week": r.choice([0, 1])}[rule]
     return {"kind": "timing", "rule": rule, "param": p, "fallback": r.choice(["cash", "bond"]),
             "leverage": r.choice([1.0, 1.0, 1.0, 1.25, 1.5]),
             "rebalance": r.choice(["D", "W", "M"])}
@@ -142,7 +153,31 @@ def _mix(r: random.Random) -> dict:
             "vol_target": r.choice([None, None, 0.06, 0.08, 0.10, 0.12, 0.15])}
 
 
-SAMPLERS = [(_trend, 3), (_rank, 4), (_timing, 3), (_chart, 2), (_pair, 1), (_mix, 2)]
+def _positioning(r: random.Random) -> dict:
+    """Currencies against (or with) speculators' futures positions, CFTC (DEC-0027)."""
+    mode = r.choice(["rank", "extremes"])
+    spec = {"kind": "cot", "mode": mode, "lookback": r.choice([130, 260, 520, 780, 1040]),
+            "rebalance": r.choice(["W", "M"]), "follow": r.random() < 0.25}
+    if mode == "rank":
+        spec["k"] = r.choice([1, 2, 3])
+    else:
+        spec["entry"] = r.choice([1.0, 1.5, 2.0, 2.5])
+    return spec
+
+
+def _policy(r: random.Random) -> dict:
+    """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0027)."""
+    u = r.choice(["xg10", "xwide"])
+    sig = r.choice(["policy_gap", "policy_gap", "policy_change"])
+    return {"kind": "policy", "universe": u, "rank_on": sig,
+            "lookback": r.choice([21, 63, 126, 252]) if sig == "policy_change" else 0,
+            "k": r.choice([1, 2, 3] if u == "xg10" else [2, 3, 5, 7]),
+            "stress_off": r.choice([None, None, 0.0, 1.0]),
+            "rebalance": r.choice(["W", "M"])}
+
+
+SAMPLERS = [(_trend, 3), (_rank, 4), (_timing, 3), (_chart, 2), (_pair, 1), (_mix, 2),
+            (_positioning, 1), (_policy, 2)]
 
 
 def sample(r: random.Random) -> dict:
@@ -169,7 +204,12 @@ RULE_LABEL = {"above_average": "above {p}d average",
               "absolute_momentum": "{p}-day gain beats cash",
               "vix_below_average": "VIX under its {p}d average", "vix_below": "VIX under {p}",
               "curve_positive": "curve above {p}", "rates_falling": "10y yield under {p}d average",
-              "copper_up": "copper up over {p}d", "oil_calm": "oil up less than {p:.0%} in 3m"}
+              "copper_up": "copper up over {p}d", "oil_calm": "oil up less than {p:.0%} in 3m",
+              "stress_below": "stress index under {p}",
+              "conditions_easing": "conditions easier than {p}d ago",
+              "claims_calm": "claims under {p:.0%} above 1y low",
+              "spx_not_crowded": "S&P futures not crowded ({p}σ)",
+              "fomc_week": "Fed cycle week is {p}"}
 SIGNAL_LABEL = {"momentum": "winners", "reversal": "losers bounce", "low_vol": "calmest",
                 "near_high": "near high", "carry": "carry", "carry_and_momentum": "carry and trend",
                 "rate_change": "rising rates", "same_month": "same month seasonality"}
@@ -207,14 +247,33 @@ def describe(spec: dict) -> dict:
         fam = {"carry": "carry", "carry_and_momentum": "mixed", "reversal": "value",
                "low_vol": "volatility", "same_month": "calendar"}.get(spec["rank_on"], "trend")
         tags = (fam, sig)
+    elif k == "cot":
+        side = "with" if spec["follow"] else "against"
+        how = f"top {spec['k']}" if spec["mode"] == "rank" else f"beyond {spec['entry']}σ"
+        name = f"Currencies {side} speculators {_months(spec['lookback'])} {how} {every}"
+        line = (f"Trades currencies {side} speculators' futures positions (CFTC), "
+                f"{'ranked' if spec['mode'] == 'rank' else 'only at extremes'}.")
+        tags = ("trend" if spec["follow"] else "value", "positioning")
+    elif k == "policy":
+        ul = "G10" if spec["universe"] == "xg10" else "27 currencies"
+        sig = "policy carry" if spec["rank_on"] == "policy_gap" else \
+            f"policy hikes {_months(spec['lookback'])}"
+        calm = f", off above stress {spec['stress_off']}" if spec["stress_off"] is not None \
+            else ""
+        name = f"{ul} {sig} top {spec['k']} L/S{calm} {every}"
+        line = f"Ranks {ul} on central bank {sig}, long the top {spec['k']}, short the bottom."
+        tags = ("carry" if spec["rank_on"] == "policy_gap" else "trend", "policy rates")
     elif k == "timing":
-        rule = RULE_LABEL[spec["rule"]].format(p=spec["param"])
+        p = {0: "even", 1: "odd"}[spec["param"]] if spec["rule"] == "fomc_week" \
+            else spec["param"]
+        rule = RULE_LABEL[spec["rule"]].format(p=p)
         lev = f" at {spec['leverage']}x" if spec["leverage"] > 1 else ""
         bonds = spec["fallback"] == "bond"
         name = f"Stocks{lev} if {rule}{' else bonds' if bonds else ''} {every}"
         line = f"Holds US stocks{lev} while {rule}, otherwise {'Treasuries' if bonds else 'cash'}."
         fam = "trend" if spec["rule"] in ("above_average", "absolute_momentum") else \
-            "volatility" if spec["rule"].startswith("vix") else "mixed"
+            "volatility" if spec["rule"].startswith(("vix", "stress", "conditions")) else \
+            "calendar" if spec["rule"] == "fomc_week" else "mixed"
         tags = (fam, "timing")
     elif k == "chart":
         ind = {"macd": "MACD", "bollinger": "Bollinger fade", "ichimoku": "Ichimoku",
@@ -243,7 +302,7 @@ def describe(spec: dict) -> dict:
 
 def _asset_class(spec: dict) -> str:
     u = spec.get("universe")
-    if spec["kind"] == "pair" or u in ("g10", "fx21"):
+    if spec["kind"] in ("pair", "cot", "policy") or u in ("g10", "fx21"):
         return "fx"
     if spec["kind"] == "timing" or u in ("ind", "fac", "mkt"):
         return "stocks"
@@ -269,6 +328,10 @@ def build(spec: dict) -> B.Block:
                    rebalance=spec["rebalance"])
     if k == "timing":
         return _timing_strategy(spec)
+    if k == "cot":
+        return _cot_strategy(spec)
+    if k == "policy":
+        return _policy_strategy(spec)
     if k == "chart":
         base = B.BreakoutBook if spec["indicator"] == "breakout" else B.OscillatorBook
         attrs = {"name": "search", "summary": "", "universe": _assets(spec["universe"]),
@@ -286,6 +349,29 @@ def build(spec: dict) -> B.Block:
                "scale": spec["scale"], "only_if_trending": spec["trend"],
                "funded": bool(paid), "max_gross": 2.0})
     return cls(lookback=spec["lookback"], vol_target=spec["vol_target"])
+
+
+COT_UNIVERSE = [f"fx.{c}" for c in S.COT_FX]
+
+
+def _cot_strategy(spec: dict) -> B.Block:
+    from .strategies import edges
+    base = edges._CotRank if spec["mode"] == "rank" else edges._CotExtremes
+    cls = type("SearchCot", (base,), {"name": "search", "summary": "",
+               "universe": COT_UNIVERSE, "follow": spec["follow"]})
+    size = {"k": spec["k"]} if spec["mode"] == "rank" else {"entry": spec["entry"]}
+    return cls(lookback=spec["lookback"], rebalance=spec["rebalance"], **size)
+
+
+def _policy_strategy(spec: dict) -> B.Block:
+    from .strategies import edges
+    gate_at = spec["stress_off"]
+    cls = type("SearchPolicy", (edges._PolicyRank,), {
+        "name": "search", "summary": "", "rank_on": spec["rank_on"], "gate_level": gate_at,
+        "universe": S.XG10 if spec["universe"] == "xg10" else S.XWIDE,
+        "min_cost_bps": edges.WIDE_COST if spec["universe"] == "xwide" else 0.0})
+    return cls(k=spec["k"], rebalance=spec["rebalance"], lookback=spec["lookback"],
+               level=0.0 if gate_at is None else gate_at)
 
 
 def _timing_strategy(spec: dict) -> B.TimingBook:
@@ -307,16 +393,34 @@ def _timing_strategy(spec: dict) -> B.TimingBook:
             return panel["bond.UST10Y"] < panel["bond.UST10Y"].rolling(p).mean()
         if rule == "copper_up":
             return B.past_return(panel["cmd.COPPER"], p) > 0
+        if rule == "stress_below":
+            return panel["risk.STLFSI"] < p
+        if rule == "conditions_easing":
+            return panel["risk.NFCI"] <= panel["risk.NFCI"].shift(p)
+        if rule == "claims_calm":
+            c = panel["macro.CLAIMS"]
+            avg, low = c.rolling(20, min_periods=15).mean(), c.rolling(260, min_periods=200).min()
+            return avg / low - 1 < p
+        if rule == "spx_not_crowded":
+            return ~(S.cot_z(panel, ["SPX_EMINI"], 780)["SPX_EMINI"] > p)
+        if rule == "fomc_week":
+            return S.fomc_week(panel.index) % 2 == p
         return B.past_return(panel["cmd.BRENT"], 63) < p
 
     extra = {"absolute_momentum": ["rate.TBILL3M"], "vix_below_average": ["risk.VIX"],
              "vix_below": ["risk.VIX"], "curve_positive": ["bond.UST10Y", "bond.UST2Y"],
              "rates_falling": ["bond.UST10Y"], "copper_up": ["cmd.COPPER"],
-             "oil_calm": ["cmd.BRENT"]}.get(rule, [])
+             "oil_calm": ["cmd.BRENT"], "stress_below": ["risk.STLFSI"],
+             "conditions_easing": ["risk.NFCI"], "claims_calm": ["macro.CLAIMS"],
+             "spx_not_crowded": ["cot.SPX_EMINI_PCT"]}.get(rule, [])
+    wider = rule in WIDER_RULES
+    if wider:
+        extra = extra + [S.TBILL]
     cls = type("SearchTiming", (B.TimingBook,), {
         "name": "search", "summary": "", "invested": invested, "extra": extra,
         "fallback": "bond.TR10" if spec["fallback"] == "bond" else B.CASH,
-        "leverage": spec["leverage"], "max_gross": spec["leverage"]})
+        "leverage": spec["leverage"], "max_gross": spec["leverage"],
+        "cash_rate": S.TBILL if wider else "rate.USD"})
     return cls(rebalance=spec["rebalance"])
 
 
@@ -365,6 +469,12 @@ def _panel() -> tuple[pd.DataFrame, str]:
     keys = sorted({*FX, *WIDE, *IND, *FAC, B.MKT, "bond.TR10", "bond.TR2", "bond.UST10Y",
                    "bond.UST2Y", "cmd.BRENT", "cmd.COPPER", "risk.VIX", "rate.USD",
                    "rate.TBILL3M", *[f"rate.{c}" for c in G10]})
+    # The wider data (DEC-0027) is optional: a series not yet fetched on this machine
+    # is left out, and the variations that need it are recorded as failed.
+    wider = sorted({*COT_UNIVERSE, *S.cot_keys([*S.COT_FX, "SPX_EMINI"]), *S.XWIDE,
+                    *S.policy_keys(S.XWIDE), "risk.STLFSI", "risk.NFCI", "macro.CLAIMS"})
+    root = store.DEFAULT_DIR
+    keys += [k for k in wider if k not in keys and store._path(catalog.get(k), root).exists()]
     snap = store.coverage().get("fetched_at") or "unknown"
     return store.panel(keys), snap
 
