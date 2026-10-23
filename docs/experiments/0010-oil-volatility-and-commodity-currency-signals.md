@@ -1,5 +1,5 @@
 ---
-id: EXP-0009
+id: EXP-0010
 title: Oil volatility and commodity currency signals
 type: experiment
 status: planned
@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, fx]
-related: [HYP-0014, HYP-0015, RES-0013, RES-0014]
+related: [HYP-0014, HYP-0015, RES-0014, RES-0015]
 ---
 
 # Oil volatility and commodity currency signals
@@ -51,5 +51,5 @@ Nothing yet.
 
 - [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
 - [HYP-0015: Commodity currencies lead energy futures](../hypotheses/0015-commodity-currencies-lead-energy-futures.md)
-- [LOG-0010: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->
