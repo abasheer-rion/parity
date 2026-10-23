@@ -25,6 +25,7 @@ function useWidth<T extends HTMLElement>(): [React.RefObject<T | null>, number] 
     if (!el) return;
     const w0 = el.getBoundingClientRect().width;
     if (w0) setWidth(Math.max(280, Math.floor(w0)));
+    if (typeof ResizeObserver === "undefined") return;
     let raf = 0;
     const ro = new ResizeObserver(([entry]) => {
       cancelAnimationFrame(raf);

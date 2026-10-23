@@ -84,7 +84,7 @@ function useIndicator<T extends HTMLElement>(index: number, deps: unknown[] = []
   useLayoutEffect(measure, [measure, ...deps]);
   useEffect(() => {
     const root = ref.current;
-    if (!root) return;
+    if (!root || typeof ResizeObserver === "undefined") return;
     const ro = new ResizeObserver(measure);
     ro.observe(root);
     // Web fonts can change the labels' widths after first paint.

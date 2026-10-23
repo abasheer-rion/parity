@@ -77,6 +77,7 @@ export function useVirtual({ count, estimate, overscan = 6, scrollRef, getKey }:
   const observer = useRef<ResizeObserver | null>(null);
   const nodes = useRef(new Map<Element, string | number>());
   useLayoutEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
     observer.current = new ResizeObserver((entries) => {
       let changed = false;
       for (const e of entries) {
