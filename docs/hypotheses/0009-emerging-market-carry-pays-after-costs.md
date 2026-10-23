@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [carry, fx]
-related: [EXP-0007, HYP-0001, RES-0011]
+related: [EXP-0007, HYP-0001, RES-0012]
 ---
 
 # Emerging market carry pays after costs
@@ -22,7 +22,7 @@ From February 2010, a long-only basket of the third of emerging market currencie
 
 ## Why it might be true
 
-- Adding EM currencies raised carry's Sharpe ratio from 0.56 to 0.74 after costs over 1983 to 2009 (Menkhoff et al., 2012), and a cost-aware rule earned 1.32 over 1997 to 2006 (Burnside et al., 2007); see [RES-0011](../research/0011-emerging-market-currencies.md).
+- Adding EM currencies raised carry's Sharpe ratio from 0.56 to 0.74 after costs over 1983 to 2009 (Menkhoff et al., 2012), and a cost-aware rule earned 1.32 over 1997 to 2006 (Burnside et al., 2007); see [RES-0012](../research/0012-emerging-market-currencies.md).
 - EM currencies move less together than G10 currencies, so a basket diversifies.
 - Our G10 carry was small but consistent ([EXP-0004](../experiments/0004-all-strategies-1999.md)).
 
@@ -47,7 +47,7 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 ## Referenced by
 
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
-- [RES-0014: Lesser-known strategies and what firms have published](../research/0014-lesser-known-strategies-and-what-firms-have-published.md)
-- [RES-0015: Combining many strategies, the evidence and the ingredient list](../research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0015: Lesser-known strategies and what firms have published](../research/0015-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0016: Combining many strategies, the evidence and the ingredient list](../research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - [ALG-0083: Emerging market currency carry, cost aware](../algorithms/0083-em-fx-carry.md)
 <!-- backlinks:end -->

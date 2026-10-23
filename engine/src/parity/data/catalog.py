@@ -356,7 +356,7 @@ _EM_FX = [Series(f"fx.{ccy}", "ecb_usd", ccy, f"USD per {ccy}, through the ECB e
 
 # 3-month interbank rates from the OECD where it has a full history, central bank policy
 # rates from the BIS otherwise. Policy rates are not what a forward pays, most of all under
-# capital controls (BRL, INR, TRY at times); see docs/research/0011-emerging-market-currencies.md.
+# capital controls (BRL, INR, TRY at times); see docs/research/0012-emerging-market-currencies.md.
 _EM_RATE_OECD = {"CNY": "CHN", "CZK": "CZE", "HUF": "HUN", "ILS": "ISR", "KRW": "KOR",
                  "MXN": "MEX", "PLN": "POL", "RON": "ROU", "RUB": "RUS", "ZAR": "ZAF"}
 _EM_RATE_BIS = {"BRL": "BR", "IDR": "ID", "INR": "IN", "MYR": "MY", "PHP": "PH", "THB": "TH",

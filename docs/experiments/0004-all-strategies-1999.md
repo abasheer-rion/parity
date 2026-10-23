@@ -106,9 +106,9 @@ Crisis behaviour and the correlations between strategies are on the dashboard's 
 - [EXP-0006: Stocks plus currency trend on its own](0006-stocks-plus-currency-trend-on-its-own.md)
 - [EXP-0008: Energy futures trend and carry](0008-energy-futures-trend-and-carry.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
-- [RES-0011: Emerging market currencies](../research/0011-emerging-market-currencies.md)
-- [RES-0012: Commodity futures, carry, trend and volatility](../research/0012-commodity-futures-carry-trend-and-volatility.md)
-- [RES-0014: Lesser-known strategies and what firms have published](../research/0014-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0012: Emerging market currencies](../research/0012-emerging-market-currencies.md)
+- [RES-0013: Commodity futures, carry, trend and volatility](../research/0013-commodity-futures-carry-trend-and-volatility.md)
+- [RES-0015: Lesser-known strategies and what firms have published](../research/0015-lesser-known-strategies-and-what-firms-have-published.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

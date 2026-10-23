@@ -36,8 +36,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-22 [RES-0015: Combining many strategies, the evidence and the ingredient list](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- 2026-10-22 [RES-0014: Lesser-known strategies and what firms have published](research/0014-lesser-known-strategies-and-what-firms-have-published.md)
+- 2026-10-22 [RES-0016: Combining many strategies, the evidence and the ingredient list](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- 2026-10-22 [RES-0015: Lesser-known strategies and what firms have published](research/0015-lesser-known-strategies-and-what-firms-have-published.md)
 - 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - 2026-10-22 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -129,11 +129,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0008 | [Independent audit of our methods and code](research/0008-independent-audit.md) | current | 2026-10-21 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
-| RES-0011 | [Emerging market currencies](research/0011-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
-| RES-0012 | [Commodity futures, carry, trend and volatility](research/0012-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
-| RES-0013 | [Famous currency and commodity traders and what their records teach](research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| RES-0014 | [Lesser-known strategies and what firms have published](research/0014-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| RES-0015 | [Combining many strategies, the evidence and the ingredient list](research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0012 | [Emerging market currencies](research/0012-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| RES-0013 | [Commodity futures, carry, trend and volatility](research/0013-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
+| RES-0014 | [Famous currency and commodity traders and what their records teach](research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0015 | [Lesser-known strategies and what firms have published](research/0015-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0016 | [Combining many strategies, the evidence and the ingredient list](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## guide
 

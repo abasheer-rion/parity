@@ -47,7 +47,7 @@ None yet.
 - [EXP-0006: Stocks plus currency trend on its own](../experiments/0006-stocks-plus-currency-trend-on-its-own.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
-- [RES-0011: Emerging market currencies](../research/0011-emerging-market-currencies.md)
+- [RES-0012: Emerging market currencies](../research/0012-emerging-market-currencies.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)

@@ -531,7 +531,7 @@
         "docs/algorithms/0017-fx-value-ppp.md",
         "docs/research/0001-reading-list.md",
         "catalog/algorithms/commodity-value-reversal.json",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/equal-weight-style-combination.json"
       ],
       "metadata": {
@@ -1290,10 +1290,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-basis-momentum.json"
       ],
-      "note": "Read for RES-0014 (full text, working paper version)",
+      "note": "Read for RES-0015 (full text, working paper version)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -1543,10 +1543,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md",
+        "docs/research/0012-emerging-market-currencies.md",
         "catalog/algorithms/em-fx-carry.json"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -1737,10 +1737,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/fx-sovereign-credit-risk.json"
       ],
-      "note": "Read for RES-0014 (full text)",
+      "note": "Read for RES-0015 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -2494,10 +2494,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/fx-sovereign-credit-risk.json"
       ],
-      "note": "Read for RES-0014 (full text)",
+      "note": "Read for RES-0015 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -2524,7 +2524,7 @@
       "used_in": [
         "catalog/algorithms/fx-volatility-risk-premium.json",
         "docs/algorithms/0018-fx-volatility-risk-premium.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "note": "Cited in this repo as: Della Corte, Ramadorai and Sarno (2016), Table 3, developed currencies",
       "metadata": {
@@ -2557,13 +2557,13 @@
         "catalog/algorithms/fx-volatility-risk-premium.json",
         "docs/algorithms/0018-fx-volatility-risk-premium.md",
         "docs/research/0001-reading-list.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
       },
-      "note": "Read for RES-0015 (full text)."
+      "note": "Read for RES-0016 (full text)."
     },
     {
       "key": "dellacorte2016b",
@@ -2642,9 +2642,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
-      "note": "Abstract only, for RES-0011",
+      "note": "Abstract only, for RES-0012",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -2803,10 +2803,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-index-roll-front-running.json"
       ],
-      "note": "Read for RES-0014 (poster text)",
+      "note": "Read for RES-0015 (poster text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3173,10 +3173,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-skewness.json"
       ],
-      "note": "Read for RES-0014 (full text, accepted manuscript)",
+      "note": "Read for RES-0015 (full text, accepted manuscript)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3202,10 +3202,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/equal-weight-style-combination.json"
       ],
-      "note": "Read for RES-0015 (full text, accepted version); one word of the title is elided because it is on this project's plain-language list",
+      "note": "Read for RES-0016 (full text, accepted version); one word of the title is elided because it is on this project's plain-language list",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3397,9 +3397,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3680,10 +3680,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md",
+        "docs/research/0012-emerging-market-currencies.md",
         "catalog/algorithms/em-fx-passive-basket.json"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3848,15 +3848,15 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/commodity-inventory-level.json"
       ],
       "metadata": {
         "source": "manual",
         "doi_explicit": false
       },
-      "note": "Read for RES-0015 (full text, January 2012 Hitotsubashi version)"
+      "note": "Read for RES-0016 (full text, January 2012 Hitotsubashi version)"
     },
     {
       "key": "greenwood2014",
@@ -4040,10 +4040,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/volatility-managed-portfolios.json"
       ],
-      "note": "Read for RES-0015 (full text); authors at Man Group",
+      "note": "Read for RES-0016 (full text); authors at Man Group",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -4557,10 +4557,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-value-reversal.json"
       ],
-      "note": "Read for RES-0014 (full text)",
+      "note": "Read for RES-0015 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -5309,14 +5309,14 @@
       "used_in": [
         "docs/research/0001-reading-list.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
       },
-      "note": "Read for RES-0015 (full text)."
+      "note": "Read for RES-0016 (full text)."
     },
     {
       "key": "krohn2024",
@@ -5500,9 +5500,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
-      "note": "Read for RES-0012 (full text)",
+      "note": "Read for RES-0013 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -6085,14 +6085,14 @@
         "catalog/algorithms/fx-dollar-carry.json",
         "docs/algorithms/0006-fx-dollar-carry.md",
         "docs/research/0001-reading-list.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/fx-developed-rate-gap-times-em-basket.json"
       ],
       "metadata": {
         "source": "crossref",
         "doi_explicit": false
       },
-      "note": "Read for RES-0015 (full text)."
+      "note": "Read for RES-0016 (full text)."
     },
     {
       "key": "lustig2019",
@@ -6194,9 +6194,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
-      "note": "Read for RES-0013 (full text)",
+      "note": "Read for RES-0014 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -6534,14 +6534,14 @@
       "used_in": [
         "catalog/algorithms/fx-london-4pm-fix.json",
         "docs/algorithms/0009-fx-london-4pm-fix.md",
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md"
       ],
       "metadata": {
         "source": "crossref-search",
         "doi_explicit": false,
         "searched": true
       },
-      "note": "Read for RES-0015 (full text)."
+      "note": "Read for RES-0016 (full text)."
     },
     {
       "key": "melvin2017",
@@ -7599,10 +7599,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md",
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md",
         "catalog/algorithms/commodity-variance-risk-premium.json"
       ],
-      "note": "Read for RES-0012 (full text, accepted manuscript)",
+      "note": "Read for RES-0013 (full text, accepted manuscript)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -7626,10 +7626,10 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
+        "docs/research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md",
         "catalog/algorithms/natural-gas-storage-report.json"
       ],
-      "note": "Read for RES-0015 (full text, accepted version)",
+      "note": "Read for RES-0016 (full text, accepted version)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -8321,10 +8321,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md",
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md",
         "catalog/algorithms/commodity-variance-risk-premium.json"
       ],
-      "note": "Read for RES-0012 (full text, November 2009 working version)",
+      "note": "Read for RES-0013 (full text, November 2009 working version)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -8424,9 +8424,9 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md"
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md"
       ],
-      "note": "Read for RES-0014 (full text)",
+      "note": "Read for RES-0015 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -8745,7 +8745,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9403,7 +9403,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md"
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9682,7 +9682,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9816,7 +9816,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-open-interest-growth.json"
       ],
       "metadata": {
@@ -10667,7 +10667,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10735,7 +10735,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10991,7 +10991,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md"
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md"
       ],
       "metadata": {
         "source": "manual",
@@ -11106,7 +11106,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -11215,7 +11215,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -11917,7 +11917,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12054,7 +12054,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12308,7 +12308,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12401,7 +12401,7 @@
       "used_in": [
         "catalog/datasets/ecb-data-portal.json",
         "docs/datasets/0010-ecb-data-portal.md",
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "repo",
@@ -12758,7 +12758,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12963,7 +12963,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -14306,7 +14306,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -14486,7 +14486,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -15807,7 +15807,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -15985,7 +15985,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -16851,7 +16851,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -18086,7 +18086,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19528,7 +19528,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/events/black-wednesday-1992.json",
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "repo",
@@ -19711,7 +19711,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19831,7 +19831,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19852,7 +19852,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -22207,7 +22207,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "manual",
@@ -22758,7 +22758,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -23033,7 +23033,7 @@
       "used_in": [
         "catalog/algorithms/fx-value-adjusted.json",
         "docs/algorithms/0016-fx-value-adjusted.md",
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md"
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md"
       ],
       "note": "Cited in this repo as: Menkhoff et al. 2017, Table 4 (CEPR working paper version)",
       "metadata": {
@@ -23431,7 +23431,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -23651,7 +23651,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -23924,7 +23924,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -23945,7 +23945,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -24364,7 +24364,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0014-lesser-known-strategies-and-what-firms-have-published.md",
+        "docs/research/0015-lesser-known-strategies-and-what-firms-have-published.md",
         "catalog/algorithms/commodity-same-month-seasonality.json"
       ],
       "metadata": {
