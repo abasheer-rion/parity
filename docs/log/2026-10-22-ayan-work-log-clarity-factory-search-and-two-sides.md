@@ -58,5 +58,5 @@ These are honesty fixes. Each one made a strategy look better than it really was
 ## Referenced by
 
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
-- [LOG-0009: Emerging markets, energy futures and the next official runs](2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0010: Emerging markets, energy futures and the next official runs](2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->
