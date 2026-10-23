@@ -48,5 +48,6 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 - [EXP-0009: Energy futures trend and carry](../experiments/0009-energy-futures-trend-and-carry.md)
 - [RES-0016: Lesser-known strategies and what firms have published](../research/0016-lesser-known-strategies-and-what-firms-have-published.md)
 - [RES-0017: Combining many strategies, the evidence and the ingredient list](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 - [ALG-0038: Commodity carry (roll yield / basis)](../algorithms/0038-commodity-carry-roll-yield.md)
 <!-- backlinks:end -->

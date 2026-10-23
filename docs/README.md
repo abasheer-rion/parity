@@ -10,7 +10,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 30 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 16 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 11 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 15 |
@@ -37,6 +37,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-23 [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 - 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
@@ -44,7 +45,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-23 [LOG-0015: Merging main into the stack and registering the energy book](log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 - 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
-- 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 
 ## intent
 
@@ -147,6 +147,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0016 | [Lesser-known strategies and what firms have published](research/0016-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0017 | [Combining many strategies, the evidence and the ingredient list](research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0018 | [How the ingredients behave in crises, and what Sim World should show](research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0019 | [Trading the energy strategies, costs, contracts and data after April 2024](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md) | draft | 2026-10-23 | [commodities](TAGS.md#commodities), [method](TAGS.md#method) |
 
 ## guide
 

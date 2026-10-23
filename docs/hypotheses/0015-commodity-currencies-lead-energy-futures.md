@@ -46,5 +46,6 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 ## Referenced by
 
 - [EXP-0010: Oil volatility and commodity currency signals](../experiments/0010-oil-volatility-and-commodity-currency-signals.md)
+- [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 - [ALG-0087: Commodity currencies predict commodity prices](../algorithms/0087-commodity-currencies-predict-commodities.md)
 <!-- backlinks:end -->

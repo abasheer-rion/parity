@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1081 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1086 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 344 |
+| [Papers](#papers) | 345 |
 | [Preprints and working papers](#preprints-and-working-papers) | 56 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
-| [Web pages](#web-pages) | 448 |
+| [Web pages](#web-pages) | 452 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 36 |
 | [News](#news) | 4 |
@@ -1760,6 +1760,16 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Miao, Hong; Ramchander, Sanjay; Wang, Tianyang; Yang, Jian (2017). The impact of crude oil inventory announcements on prices: Evidence from derivatives markets. *Journal of Futures Markets 38(1), 38-65*. doi:10.1002/fut.21850 <https://doi.org/10.1002/fut.21850>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/eia-oil-inventory-announcement.json](../catalog/algorithms/eia-oil-inventory-announcement.json), [ALG-0041](algorithms/0041-eia-oil-inventory-announcement.md).
+
+### miao2018
+
+Miao, Hong; Ramchander, Sanjay; Wang, Tianyang; Yang, Dongxiao (2018). The impact of crude oil inventory announcements on prices: Evidence from derivatives markets. *Journal of Futures Markets 38(1), 38-65*. doi:10.1002/fut.21850 <https://doi.org/10.1002/fut.21850>. Accessed 2026-10-23. Verification: not checked.
+
+Also at: <https://mountainscholar.org/items/98c4de7f-752b-454a-9fb3-3d809f418b89/full>, <https://www.eia.gov/finance/markets/reports_presentations/2017/yang.pdf>.
+
+Note: Read for RES-0019 from the abstract and a co-author's EIA workshop slides, not the full paper.
+
+Cited in: [RES-0019](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md).
 
 ### miller2018
 
@@ -3931,6 +3941,22 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 ## Web pages
 
+### cme-micro-wti
+
+Micro WTI Crude Oil futures overview. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/education/courses/basic-principles-of-micro-wti-crude-oil-futures/micro-wti-crude-oil-futures-overview.html>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Contract size and tick value, read via search summary for RES-0019.
+
+Cited in: [RES-0019](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md).
+
+### cme-settlements-faq
+
+Settlements FAQ (DataMine). (n.d.). *CME Group client site*. <https://cmegroupclientsite.atlassian.net/wiki/x/GavEAg>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Says free daily settlement files are top day only and history is sold; read via search summary for RES-0019.
+
+Cited in: [RES-0019](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md).
+
 ### dubois-poster
 
 Dubois, Michel; Marechal, Loic (n.d.). The valuation effects of index investment in commodity futures (poster). <https://business.ucdenver.edu/jpmorgancenter/content/poster-loic-marechal>. Accessed 2026-10-22. Verification: not checked.
@@ -3939,6 +3965,14 @@ Note: Read for RES-0016 (poster text).
 
 Cited in: [catalog/algorithms/commodity-index-roll-front-running.json](../catalog/algorithms/commodity-index-roll-front-running.json), [RES-0016](research/0016-lesser-known-strategies-and-what-firms-have-published.md).
 
+### iaee-crack-spread
+
+Crack spread option model (conference proceedings abstract). (n.d.). *IAEE*. <https://www.iaee.org/en/publications/proceedingsabstractpdf.aspx?id=16517>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Abstract only: heating oil crack spread mean-reverts, 2010 to 2011 options data.
+
+Cited in: [RES-0019](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md).
+
 ### nechio2014
 
 Nechio, Fernanda (2014). Fed Tapering News and Emerging Markets. *FRBSF Economic Letter 2014-06*. <https://www.frbsf.org/research-and-insights/publications/economic-letter/2014/03/federal-reserve-tapering-emerging-markets/>. Accessed 2026-10-22. Verification: not checked.
@@ -3946,6 +3980,14 @@ Nechio, Fernanda (2014). Fed Tapering News and Emerging Markets. *FRBSF Economic
 Note: Read for RES-0018 (full text).
 
 Cited in: [RES-0018](research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+
+### schwab-micro-crude
+
+Micro Crude Futures Offer Lower-Cost Oil Trading. (n.d.). *Charles Schwab*. <https://international.schwab.com/story/micro-crude-futures-offer-lower-cost-oil-trading>. Accessed 2026-10-23. Verification: not checked.
+
+Note: March 2025 margin examples, read via search summary for RES-0019; margins change often.
+
+Cited in: [RES-0019](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md).
 
 ### twosigma2017
 

@@ -114,4 +114,5 @@ RES-0017: decayed, and the paper's version needs intraday prices.
 
 - [RES-0015: Famous currency and commodity traders and what their records teach](../research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [RES-0017: Combining many strategies, the evidence and the ingredient list](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 <!-- backlinks:end -->

@@ -138,6 +138,7 @@ Combining gives a researcher many new choices: which ingredients, which weights,
 - [HYP-0016: An equal-weight energy book pays after 2014](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md)
 - [EXP-0011: Equal-weight energy book, March 2014 to April 2024](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md)
 - [RES-0018: How the ingredients behave in crises, and what Sim World should show](0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 - [LOG-0013: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 - [LOG-0015: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 <!-- backlinks:end -->

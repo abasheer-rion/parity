@@ -109,4 +109,5 @@ None found.
 ## Referenced by
 
 - [RES-0015: Famous currency and commodity traders and what their records teach](../research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 <!-- backlinks:end -->

@@ -2310,6 +2310,50 @@
       }
     },
     {
+      "key": "cme-micro-wti",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Micro WTI Crude Oil futures overview",
+      "venue": "cmegroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cmegroup.com/education/courses/basic-principles-of-micro-wti-crude-oil-futures/micro-wti-crude-oil-futures-overview.html",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md"
+      ],
+      "note": "Contract size and tick value, read via search summary for RES-0019",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "cme-settlements-faq",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Settlements FAQ (DataMine)",
+      "venue": "CME Group client site",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cmegroupclientsite.atlassian.net/wiki/x/GavEAg",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md"
+      ],
+      "note": "Says free daily settlement files are top day only and history is sold; read via search summary for RES-0019",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "colacito2020",
       "type": "paper",
       "authors": [
@@ -4524,6 +4568,28 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "iaee-crack-spread",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Crack spread option model (conference proceedings abstract)",
+      "venue": "IAEE",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.iaee.org/en/publications/proceedingsabstractpdf.aspx?id=16517",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md"
+      ],
+      "note": "Abstract only: heating oil crack spread mean-reverts, 2010 to 2011 options data",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -6861,6 +6927,36 @@
       }
     },
     {
+      "key": "miao2018",
+      "type": "paper",
+      "authors": [
+        "Miao, Hong",
+        "Ramchander, Sanjay",
+        "Wang, Tianyang",
+        "Yang, Dongxiao"
+      ],
+      "year": 2018,
+      "title": "The impact of crude oil inventory announcements on prices: Evidence from derivatives markets",
+      "venue": "Journal of Futures Markets 38(1), 38-65",
+      "doi": "10.1002/fut.21850",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/fut.21850",
+      "also_at": [
+        "https://mountainscholar.org/items/98c4de7f-752b-454a-9fb3-3d809f418b89/full",
+        "https://www.eia.gov/finance/markets/reports_presentations/2017/yang.pdf"
+      ],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md"
+      ],
+      "note": "Read for RES-0019 from the abstract and a co-author's EIA workshop slides, not the full paper",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "miller2018",
       "type": "paper",
       "authors": [
@@ -8043,6 +8139,28 @@
       "metadata": {
         "source": "manual",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "schwab-micro-crude",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Micro Crude Futures Offer Lower-Cost Oil Trading",
+      "venue": "Charles Schwab",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://international.schwab.com/story/micro-crude-futures-offer-lower-cost-oil-trading",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md"
+      ],
+      "note": "March 2025 margin examples, read via search summary for RES-0019; margins change often",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
