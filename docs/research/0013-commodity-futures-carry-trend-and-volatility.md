@@ -1,5 +1,5 @@
 ---
-id: RES-0012
+id: RES-0013
 title: Commodity futures, carry, trend and volatility
 type: research
 status: current
@@ -77,7 +77,7 @@ Moskowitz, Ooi and Pedersen (2012) find that a 12-month time series momentum rul
 | 1990 to 1999 | 13.2% | 8.5% | 0.98 |
 | 2000 to 2013 | 7.9% | 9.6% | 0.62 |
 
-These are the authors' own hypothetical backtests after assumed costs and 2-and-20 fees. Real trend funds had a weak decade after 2009, with industry assets in quantitative currency funds alone falling from about $35 billion in 2008 to about $6 billion in 2013 according to press reports citing BIS data ([RES-0013](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)). Then in 2022 the SG Trend Index gained 27.35% and the SG CTA Index 20.07%, which the trade press called a record year ([Hedgeweek](https://www.hedgeweek.com/flat-december-sees-ctas-complete-record-year-2022/)). This matches what we found for currency trend: weak returns in calm years, gains in crises.
+These are the authors' own hypothetical backtests after assumed costs and 2-and-20 fees. Real trend funds had a weak decade after 2009, with industry assets in quantitative currency funds alone falling from about $35 billion in 2008 to about $6 billion in 2013 according to press reports citing BIS data ([RES-0014](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)). Then in 2022 the SG Trend Index gained 27.35% and the SG CTA Index 20.07%, which the trade press called a record year ([Hedgeweek](https://www.hedgeweek.com/flat-december-sees-ctas-complete-record-year-2022/)). This matches what we found for currency trend: weak returns in calm years, gains in crises.
 
 ## Selling volatility
 
@@ -88,7 +88,7 @@ Option buyers pay for protection. On average the volatility they pay for is high
 | Trolle and Schwartz (2010) | NYMEX crude oil and natural gas options, Jan 1996 to Nov 2006 | Shorting variance: Sharpe 0.59 in crude, 0.35 in gas, 1.02 in the S&P 500 | Full text, WP |
 | Prokopczuk, Symeonidis and Wese Simen (2017) | 21 commodity markets | Variance buyers lost in 18 of 21; for example an average payoff of -8.985% in natural gas; payoffs more negative after 2000 | Full text, accepted manuscript |
 
-The crashes are easy to name. Natural gas variance behaves like a call option (it explodes upward in cold snaps), per Trolle and Schwartz. Amaranth Advisors lost more than $6 billion in September 2006 on natural gas spreads, a different trade but the same market and the same lesson about short-tail exposure ([RES-0013](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)).
+The crashes are easy to name. Natural gas variance behaves like a call option (it explodes upward in cold snaps), per Trolle and Schwartz. Amaranth Advisors lost more than $6 billion in September 2006 on natural gas spreads, a different trade but the same market and the same lesson about short-tail exposure ([RES-0014](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)).
 
 **What we can test for free.** CBOE publishes OVX, a 30-day implied volatility index for crude oil, on FRED from 2007. Because OVX is built like the VIX, its square is close to the price of a 30-day variance swap. Realised variance can be measured from the EIA crude futures prices, which end in April 2024. That gives an approximate monthly payoff for selling crude oil variance. It leaves out the cost of trading variance swaps or option strips, which is large, so any result is an upper bound.
 
@@ -148,6 +148,6 @@ So the testable version is: use last quarter's moves in commodity currencies to 
 - [HYP-0015: Commodity currencies lead energy futures](../hypotheses/0015-commodity-currencies-lead-energy-futures.md)
 - [EXP-0008: Energy futures trend and carry](../experiments/0008-energy-futures-trend-and-carry.md)
 - [EXP-0009: Oil volatility and commodity currency signals](../experiments/0009-oil-volatility-and-commodity-currency-signals.md)
-- [RES-0013: Famous currency and commodity traders and what their records teach](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0014: Famous currency and commodity traders and what their records teach](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

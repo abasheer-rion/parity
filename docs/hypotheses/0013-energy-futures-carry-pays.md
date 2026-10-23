@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [carry, commodities]
-related: [EXP-0008, RES-0012]
+related: [EXP-0008, RES-0013]
 ---
 
 # Energy futures carry pays

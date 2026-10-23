@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [fx, momentum]
-related: [EXP-0007, HYP-0002, RES-0011]
+related: [EXP-0007, HYP-0002, RES-0012]
 ---
 
 # Emerging market momentum survives costs

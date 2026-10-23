@@ -1439,10 +1439,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md",
+        "docs/research/0012-emerging-market-currencies.md",
         "catalog/algorithms/em-fx-carry.json"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -2480,9 +2480,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
-      "note": "Abstract only, for RES-0011",
+      "note": "Abstract only, for RES-0012",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3127,9 +3127,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -3410,10 +3410,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md",
+        "docs/research/0012-emerging-market-currencies.md",
         "catalog/algorithms/em-fx-passive-basket.json"
       ],
-      "note": "Read for RES-0011 (full text)",
+      "note": "Read for RES-0012 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -5036,9 +5036,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
-      "note": "Read for RES-0012 (full text)",
+      "note": "Read for RES-0013 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -5674,9 +5674,9 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
-      "note": "Read for RES-0013 (full text)",
+      "note": "Read for RES-0014 (full text)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -7050,10 +7050,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md",
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md",
         "catalog/algorithms/commodity-variance-risk-premium.json"
       ],
-      "note": "Read for RES-0012 (full text, accepted manuscript)",
+      "note": "Read for RES-0013 (full text, accepted manuscript)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -7745,10 +7745,10 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md",
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md",
         "catalog/algorithms/commodity-variance-risk-premium.json"
       ],
-      "note": "Read for RES-0012 (full text, November 2009 working version)",
+      "note": "Read for RES-0013 (full text, November 2009 working version)",
       "metadata": {
         "source": "manual",
         "doi_explicit": false
@@ -8123,7 +8123,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -8820,7 +8820,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9564,7 +9564,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9632,7 +9632,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -9916,7 +9916,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10004,7 +10004,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10661,7 +10661,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10756,7 +10756,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -10967,7 +10967,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -11060,7 +11060,7 @@
       "used_in": [
         "catalog/datasets/ecb-data-portal.json",
         "docs/datasets/0010-ecb-data-portal.md",
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "repo",
@@ -11375,7 +11375,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "manual",
@@ -11537,7 +11537,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12542,7 +12542,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -12655,7 +12655,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -13706,7 +13706,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -13838,7 +13838,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -14549,7 +14549,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -15561,7 +15561,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -16765,7 +16765,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/events/black-wednesday-1992.json",
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "repo",
@@ -16906,7 +16906,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -17026,7 +17026,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -17047,7 +17047,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -18787,7 +18787,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-emerging-market-currencies.md"
+        "docs/research/0012-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19184,7 +19184,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19721,7 +19721,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -19896,7 +19896,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",
@@ -20126,7 +20126,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-commodity-futures-carry-trend-and-volatility.md"
+        "docs/research/0013-commodity-futures-carry-trend-and-volatility.md"
       ],
       "metadata": {
         "source": "manual",
@@ -20147,7 +20147,7 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+        "docs/research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "manual",

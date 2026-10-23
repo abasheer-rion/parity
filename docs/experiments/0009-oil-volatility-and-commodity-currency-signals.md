@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, fx]
-related: [HYP-0014, HYP-0015, RES-0012, RES-0013]
+related: [HYP-0014, HYP-0015, RES-0013, RES-0014]
 ---
 
 # Oil volatility and commodity currency signals

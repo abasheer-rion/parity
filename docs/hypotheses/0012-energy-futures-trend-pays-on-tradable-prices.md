@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, momentum]
-related: [EXP-0004, EXP-0008, RES-0012]
+related: [EXP-0004, EXP-0008, RES-0013]
 ---
 
 # Energy futures trend pays on tradable prices
@@ -22,7 +22,7 @@ From 1999-01-04 to 2024-04-05 (when the free futures prices end), a 12-month tim
 
 ## Why it might be true
 
-- Moskowitz, Ooi and Pedersen (2012) find 12-month momentum positive in every one of 58 futures markets, 1985 to 2009; AQR's long backtest reports a net Sharpe ratio of 0.62 for 2000 to 2013 ([RES-0012](../research/0012-commodity-futures-carry-trend-and-volatility.md)).
+- Moskowitz, Ooi and Pedersen (2012) find 12-month momentum positive in every one of 58 futures markets, 1985 to 2009; AQR's long backtest reports a net Sharpe ratio of 0.62 for 2000 to 2013 ([RES-0013](../research/0013-commodity-futures-carry-trend-and-volatility.md)).
 - Trend's crisis gains (2008, 2022 in the industry indices) are what made our currency trend useful.
 
 ## Why it might be false
