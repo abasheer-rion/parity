@@ -1078,7 +1078,7 @@ def build_server(settings: Settings | None = None):
     settings = settings or Settings()
     tools = ParityTools(settings)
     limits = Limits(settings)
-    mcp = FastMCP("parity", instructions=INSTRUCTIONS)
+    mcp = FastMCP("parity", instructions=INSTRUCTIONS, log_level="WARNING")
     read_only = ToolAnnotations(readOnlyHint=True, openWorldHint=False)
     counted = ToolAnnotations(readOnlyHint=False, destructiveHint=False,
                               idempotentHint=True, openWorldHint=False)

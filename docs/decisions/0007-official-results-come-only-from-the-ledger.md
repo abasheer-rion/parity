@@ -54,6 +54,7 @@ The easiest way to fool yourself in this kind of research is to run many variati
 ## Referenced by
 
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](0009-excess-returns-financed-leverage-frozen-code.md)
+- [DEC-0025: AI assistants get Parity tools through a local MCP server](0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [RES-0008: Independent audit of our methods and code](../research/0008-independent-audit.md)
 - [GDE-0004: The research routine](../guides/0004-the-research-routine.md)
