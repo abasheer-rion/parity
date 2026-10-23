@@ -24,7 +24,8 @@ export function Animate({ type = "rise", delay = 0, children, as: Tag = "div", c
 /** Mercury's rolling digits: each digit slides to its new value when the number changes. */
 export function RollingNumber({ text }: { text: string }) {
   return (
-    <span className="ui-roll" aria-label={text}>
+    <span className="ui-roll">
+      <span className="sr-only">{text}</span>
       {[...text].map((ch, i) =>
         /\d/.test(ch)
           ? <span key={i} className="ui-roll-slot" aria-hidden><span className="ui-roll-strip" style={{ transform: `translateY(-${Number(ch) * 10}%)` }}>{"0123456789".split("").map((d) => <span key={d}>{d}</span>)}</span></span>

@@ -351,8 +351,10 @@
 .ui-disclosure-body { padding: 0 4px 16px 25px; color: var(--text-2); }
 
 /* Table rows that open in place */
-.mtable tr.row-link[aria-expanded] { cursor: pointer; }
-.ui-row-chev { margin-right: 6px; vertical-align: -1px; color: var(--muted); transition: transform var(--dur-3) var(--ease-spring); }
+.mtable tr.expandable { cursor: pointer; }
+.ui-row-toggle { display: inline-grid; place-items: center; width: 20px; height: 20px; margin: 0 4px 0 -4px; padding: 0; border: 0; border-radius: 6px; background: none; color: var(--muted); vertical-align: -4px; cursor: pointer; }
+.ui-row-toggle:hover { background: var(--hover); color: var(--text); }
+.ui-row-chev { color: inherit; transition: transform var(--dur-3) var(--ease-spring); }
 .mtable tr.open .ui-row-chev { transform: rotate(90deg); }
 .mtable tr.open td { border-bottom-color: transparent; }
 .mtable tr.ui-detail-row > td { padding: 0; height: auto; border-bottom: 0; white-space: normal; text-align: left; }

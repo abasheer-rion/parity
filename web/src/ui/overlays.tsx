@@ -5,7 +5,7 @@
 // eased, transforms only) and hold still for reduced motion. Positioning uses Floating
 // UI, the same library the doc previews use.
 import { autoUpdate, computePosition, flip, offset, shift, type Placement } from "@floating-ui/dom";
-import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
+import { cloneElement, isValidElement, useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactElement, type ReactNode } from "react";
 import { Icon } from "./icons";
 import { usePresence } from "./presence";
 
@@ -23,6 +23,11 @@ function useAnchored(open: boolean, anchor: React.RefObject<HTMLElement | null>,
       });
     return autoUpdate(a, el, update);
   }, [open, anchor, float, placement, gap]);
+}
+
+/** Puts the open state on the trigger itself (a button), where screen readers look for it. */
+function withAria(node: ReactNode, attrs: Record<string, string | boolean | undefined>): ReactNode {
+  return isValidElement(node) ? cloneElement(node as ReactElement<Record<string, unknown>>, attrs) : node;
 }
 
 /** Closes on Escape and on a press outside the given elements. */
@@ -89,8 +94,8 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
     (el?.querySelector<HTMLElement>("input, select, textarea, button, a[href], [tabindex]:not([tabindex='-1'])") ?? el)?.focus({ preventScroll: true });
   }, [p.state]);
   return (
-    <span className="ui-pop-anchor" ref={anchor} onClick={() => set(!open)} aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? id : undefined}>
-      {trigger(open)}
+    <span className="ui-pop-anchor" ref={anchor} onClick={() => set(!open)}>
+      {withAria(trigger(open), { "aria-haspopup": "dialog", "aria-expanded": open, "aria-controls": open ? id : undefined })}
       {p.mounted && (
         <div ref={float} id={id} className="ui-popover ui-float" data-state={p.state} role="dialog" aria-label={label} tabIndex={-1}
           style={width ? { width } : undefined} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
@@ -122,7 +127,7 @@ export function Menu({ trigger, items, placement = "bottom-end" }: { trigger: (o
   };
   return (
     <div className="ui-menu-anchor" ref={anchor}>
-      <span onClick={() => setOpen((o) => !o)} aria-haspopup="menu" aria-expanded={open}>{trigger(open)}</span>
+      <span onClick={() => setOpen((o) => !o)}>{withAria(trigger(open), { "aria-haspopup": "menu", "aria-expanded": open })}</span>
       {p.mounted && (
         <div ref={float} className="ui-menu ui-float" data-state={p.state} role="menu" onKeyDown={onKey}>
           {items.map((i) => (

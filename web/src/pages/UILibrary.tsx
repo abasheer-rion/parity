@@ -65,7 +65,7 @@ function Item({ title, children, code, rules, intro, col }: { title: string; chi
       <h2>{title}</h2>
       {intro && <p>{intro}</p>}
       <div className={`gal-demo ${col ? "col" : ""}`}>{children}</div>
-      {code && <pre className="gal-code">{code.trim()}</pre>}
+      {code && <pre className="gal-code" tabIndex={0}>{code.trim()}</pre>}
       {rules && <ul className="gal-rules">{rules.map((r) => <li key={r}>{r}</li>)}</ul>}
     </section>
   );
@@ -291,7 +291,7 @@ function Motion() {
       </Item>
       <Item title="Tilt" intro="A strategy card leans a few degrees toward the pointer, with a soft light that follows it. Mouse and trackpad only." code={`<Tilt className="feat">…</Tilt>`}
         rules={["At most 6 degrees. Text must stay readable while it leans.", "Use for strategy cards and the two sides, not for lists or tables.", "Touch screens and reduced motion get a still card."]}>
-        <div className="feat-row" style={{ width: "100%" }}>
+        <div className="feat-row" style={{ width: "100%" }} tabIndex={0} role="region" aria-label="Sample strategy cards">
           {[{ name: "Sample trend", color: "var(--series-1)", points: SAMPLE_A }, { name: "Sample carry", color: "var(--series-2)", points: SAMPLE_B }, { name: "Sample value", color: "var(--series-3)", points: SAMPLE_C }].map((s) => (
             <Tilt key={s.name} className="feat">
               <div className="feat-in">
@@ -516,7 +516,7 @@ function Lists() {
       <Item title="VirtualList" col intro="The same windowing for anything that is not a table: a list of cards, search results, log lines. It scrolls with the page, or inside a box you pass as scrollRef."
         code={`<VirtualList items={rows} rowHeight={44} getKey={(r) => r.id}\n  render={(r) => <Row {...r} />} />`}
         rules={["Rows of one usual height work best; rows that grow are measured.", "Keys must be stable (an id, not the index), or opened rows lose their place on a sort."]}>
-        <div className="gal-vbox" data-lenis-prevent ref={listBox}>
+        <div className="gal-vbox" data-lenis-prevent ref={listBox} tabIndex={0} role="region" aria-label="Sample variations, scrollable">
           <VirtualList items={rows} rowHeight={44} getKey={(r) => r.id} scrollRef={listBox} label="Sample variations"
             render={(r) => <div className="gal-vrow"><span>{r.name}</span><span className="ui-tab muted">{fmt.num(r.sharpe)}</span></div>} />
         </div>

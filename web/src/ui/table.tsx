@@ -69,16 +69,19 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
     const isOpen = open === k;
     return (
       <Fragment key={k}>
-        <tr data-flip={k} className={`${link || expand ? "row-link" : ""} ${pin?.(r) ? "pinned" : ""} ${isOpen ? "open" : ""}`}
-          onClick={link || expand ? onRow(k, link) : undefined}
-          aria-expanded={expand ? isOpen : undefined}
-          tabIndex={expand && !link ? 0 : undefined}
-          onKeyDown={expand && !link ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen((o) => (o === k ? null : k)); } } : undefined}>
+        <tr data-flip={k} className={`${link || expand ? "row-link" : ""} ${pin?.(r) ? "pinned" : ""} ${isOpen ? "open" : ""} ${expand ? "expandable" : ""}`}
+          onClick={link || expand ? onRow(k, link) : undefined}>
           {columns.map((c, i) => {
             const t = c.tone?.(r);
             return (
               <td key={c.key} className={`${cellClass(c)} ${t == null ? "" : t >= 0 ? "good" : "bad"}`}>
-                {expand && i === 0 && <Icon name="chevronRight" size={12} className="ui-row-chev" />}
+                {/* The keyboard and screen readers open a row with this button; a click anywhere on the row does the same. */}
+                {expand && i === 0 && (
+                  <button type="button" className="ui-row-toggle" aria-expanded={isOpen} aria-label={isOpen ? "Hide details" : "Show details"}
+                    onClick={() => setOpen((o) => (o === k ? null : k))}>
+                    <Icon name="chevronRight" size={12} className="ui-row-chev" />
+                  </button>
+                )}
                 {c.render(r)}
               </td>
             );
