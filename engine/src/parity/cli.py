@@ -35,6 +35,8 @@
     parity markets fetch         crypto, perps, ETFs and new fund filings (skips fresh ones)
     parity markets status        when each markets source was last fetched
     parity markets export DIR    write the Markets pages' JSON into DIR/markets
+
+    parity mcp                   Parity tools for AI assistants (MCP over stdio, DEC-0025)
 """
 
 from __future__ import annotations
@@ -439,6 +441,19 @@ def _markets(args) -> int:
     return markets_cli.run(args)
 
 
+def _mcp(_args) -> int:
+    try:
+        import mcp  # noqa: F401
+
+        from .mcp_server import main as serve_mcp
+    except ImportError:
+        print('The MCP server needs its extra: pip install -e "engine[mcp]"', file=sys.stderr)
+        return 1
+    # stdout carries the protocol from here on, so nothing else may print to it.
+    serve_mcp()
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="parity", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -594,6 +609,9 @@ def main(argv: list[str] | None = None) -> int:
     se.add_argument("--hours", type=float, default=None,
                     help="with --forever, exit after this long so the service can restart")
     se.set_defaults(func=_search)
+
+    sub.add_parser("mcp", help="Parity tools for AI assistants over MCP stdio (DEC-0025)"
+                   ).set_defaults(func=_mcp)
 
     from .news import cli as news_cli
 

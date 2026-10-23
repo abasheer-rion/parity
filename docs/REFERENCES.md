@@ -3,12 +3,12 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1000 sources. 129 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1026 sources. 153 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 281 |
-| [Preprints and working papers](#preprints-and-working-papers) | 52 |
+| [Papers](#papers) | 306 |
+| [Preprints and working papers](#preprints-and-working-papers) | 53 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
@@ -34,6 +34,14 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 Acerbi, Carlo; Tasche, Dirk (2002). On the coherence of expected shortfall. *Journal of Banking and Finance 26(7), 1487-1503*. doi:10.1016/S0378-4266(02)00283-2 <https://doi.org/10.1016/S0378-4266(02)00283-2>. arXiv:cond-mat/0104295 <https://arxiv.org/abs/cond-mat/0104295>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### adrian2013
+
+Adrian, Tobias; Crump, Richard K.; Moench, Emanuel (2013). Pricing the term structure with linear regressions. *Journal of Financial Economics 110(1), 110-138*. doi:10.1016/j.jfineco.2013.04.009 <https://doi.org/10.1016/j.jfineco.2013.04.009>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### alquist2020
 
@@ -71,7 +79,7 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 
 Andersen, Torben G.; Bollerslev, Tim; Diebold, Francis X.; Vega, Clara (2003). Micro Effects of Macro Announcements: Real-Time Price Discovery in Foreign Exchange. *American Economic Review 93(1), 38-62*. doi:10.1257/000282803321455151 <https://doi.org/10.1257/000282803321455151>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### anderson2003
 
@@ -85,11 +93,27 @@ Andrade, Sandro C.; Chhaochharia, Vidhi; Fuerst, Michael E. (2013). "Sell in May
 
 Cited in: [catalog/algorithms/sell-in-may-halloween.json](../catalog/algorithms/sell-in-may-halloween.json), [ALG-0047](algorithms/0047-sell-in-may-halloween.md).
 
+### ang2006
+
+Ang, Andrew; Hodrick, Robert J.; Xing, Yuhang; Zhang, Xiaoyan (2006). The Cross-Section of Volatility and Expected Returns. *The Journal of Finance 61(1), 259-299*. doi:10.1111/j.1540-6261.2006.00836.x <https://doi.org/10.1111/j.1540-6261.2006.00836.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### apesteguia2020
 
 Apesteguia, Jose; Oechssler, Jörg; Weidenholzer, Simon (2020). Copy Trading. *Management Science 66(12), 5608-5622*. doi:10.1287/mnsc.2019.3508 <https://doi.org/10.1287/mnsc.2019.3508>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/copy-trading-signal-services.json](../catalog/algorithms/copy-trading-signal-services.json), [ALG-0057](algorithms/0057-copy-trading-signal-services.md).
+
+### ariel1987
+
+Ariel, Robert A. (1987). A monthly effect in stock returns. *Journal of Financial Economics 18(1), 161-174*. doi:10.1016/0304-405x(87)90066-3 <https://doi.org/10.1016/0304-405x(87)90066-3>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### arkes1985
 
@@ -131,7 +155,7 @@ Asness, Clifford S.; Moskowitz, Tobias J.; Pedersen, Lasse Heje (2013). Value an
 
 Also at: <https://pages.stern.nyu.edu/~lpederse/papers/ValMomEverywhere.pdf>.
 
-Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### avellaneda2008
 
@@ -155,7 +179,7 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### bailey2016
 
@@ -221,7 +245,7 @@ Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/on
 
 Barber, Brad M.; Odean, Terrance (2008). All That Glitters: The Effect of Attention and News on the Buying Behavior of Individual and Institutional Investors. *Review of Financial Studies 21(2), 785-818*. doi:10.1093/rfs/hhm079 <https://doi.org/10.1093/rfs/hhm079>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### barberis2003
 
@@ -242,6 +266,14 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Barroso, Pedro; Santa-Clara, Pedro (2015). Beyond the Carry Trade: Optimal Currency Portfolios. *Journal of Financial and Quantitative Analysis 50(5), 1037-1056*. doi:10.2139/ssrn.2041460 <https://doi.org/10.2139/ssrn.2041460>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2041460>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### beber2015
+
+Beber, Alessandro; Brandt, Michael W.; Luisi, Maurizio (2015). Distilling the macroeconomic news flow. *Journal of Financial Economics 117(3), 489-507*. doi:10.1016/j.jfineco.2015.05.005 <https://doi.org/10.1016/j.jfineco.2015.05.005>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### beckmann2020
 
@@ -283,11 +315,35 @@ Berkman, Henk; Jacobsen, Ben; Lee, John B. (2011). Time-varying rare disaster ri
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 
+### bernard1989
+
+Bernard, Victor L.; Thomas, Jacob K. (1989). Post-Earnings-Announcement Drift: Delayed Price Response or Risk Premium? *Journal of Accounting Research 27, 1*. doi:10.2307/2491062 <https://doi.org/10.2307/2491062>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### bessembinder1992
+
+Bessembinder, Hendrik; Chan, Kalok (1992). Time-varying risk premia and forecastable returns in futures markets. *Journal of Financial Economics 32(2), 169-193*. doi:10.1016/0304-405x(92)90017-r <https://doi.org/10.1016/0304-405x(92)90017-r>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### bessembinder2018
 
 Bessembinder, Hendrik (2018). Do stocks outperform Treasury bills? *Journal of Financial Economics 129(3), 440-457*. doi:10.1016/j.jfineco.2018.06.004 <https://doi.org/10.1016/j.jfineco.2018.06.004>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### bollerslev2009
+
+Bollerslev, Tim; Tauchen, George; Zhou, Hao (2009). Expected Stock Returns and Variance Risk Premia. *Review of Financial Studies 22(11), 4463-4492*. doi:10.1093/rfs/hhp008 <https://doi.org/10.1093/rfs/hhp008>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### boons2019
 
@@ -381,6 +437,14 @@ Carhart, Mark M. (1997). On Persistence in Mutual Fund Performance. *Journal of 
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### carr2008
+
+Carr, Peter; Wu, Liuren (2008). Variance Risk Premiums. *Review of Financial Studies 22(3), 1311-1341*. doi:10.1093/rfs/hhn038 <https://doi.org/10.1093/rfs/hhn038>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### cartea2019
 
 Cartea, Alvaro; Jaimungal, Sebastian; Walton, Jamie (2019). Foreign exchange markets with Last Look. *Mathematics and Financial Economics 13(1), 1-30*. doi:10.1007/s11579-018-0218-3 <https://doi.org/10.1007/s11579-018-0218-3>. arXiv:1806.04460 <https://arxiv.org/abs/1806.04460>. <https://arxiv.org/abs/1806.04460>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -443,6 +507,14 @@ Also at: <https://www.nber.org/system/files/working_papers/w13901/w13901.pdf>.
 
 Cited in: [catalog/algorithms/commodity-currencies-predict-commodities.json](../catalog/algorithms/commodity-currencies-predict-commodities.json), [RES-0001](research/0001-reading-list.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
 
+### chen2022
+
+Chen, Andrew Y.; Zimmermann, Tom (2022). Open Source Cross-Sectional Asset Pricing. *Critical Finance Review 11(2), 207-264*. doi:10.1561/104.00000112 <https://doi.org/10.1561/104.00000112>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### chong2014
 
 Chong, Terence; Ng, Wing-Kam; Liew, Venus (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management 7(1), 1-12*. doi:10.3390/jrfm7010001 <https://doi.org/10.3390/jrfm7010001>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -458,6 +530,22 @@ Also at: <https://doi.org/10.1016/j.jacceco.2014.06.001>.
 Note: Read for RES-0010 (abstract page).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### cieslak2019
+
+Cieslak, Anna; Morse, Adair; Vissing-Jorgensen, Annette (2019). Stock Returns over the FOMC Cycle. *The Journal of Finance 74(5), 2201-2248*. doi:10.1111/jofi.12818 <https://doi.org/10.1111/jofi.12818>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### cochrane2005
+
+Cochrane, John H; Piazzesi, Monika (2005). Bond Risk Premia. *American Economic Review 95(1), 138-160*. doi:10.1257/0002828053828581 <https://doi.org/10.1257/0002828053828581>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### colacito2020
 
@@ -487,13 +575,21 @@ Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. JSTOR page b
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### da2011
+
+Da, Zhi; Engelberg, Joseph; Gao, Pengjie (2011). In Search of Attention. *The Journal of Finance 66(5), 1461-1499*. doi:10.1111/j.1540-6261.2011.01679.x <https://doi.org/10.1111/j.1540-6261.2011.01679.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### dahlquist2020
 
 Dahlquist, Magnus; Hasseltoft, Henrik (2020). Economic momentum and currency returns. *Journal of Financial Economics 136(1), 152-167*. doi:10.1016/j.jfineco.2019.09.002 <https://doi.org/10.1016/j.jfineco.2019.09.002>. <https://econpapers.repec.org/article/eeejfinec/v_3a136_3ay_3a2020_3ai_3a1_3ap_3a152-167.htm>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Also at: <https://doi.org/10.1016/j.jfineco.2019.09.002>.
 
-Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### daniel2016
 
@@ -503,7 +599,15 @@ Also at: <https://www.nber.org/papers/w20439>.
 
 Note: Read for RES-0017 (NBER working paper 20439, first 12 pages).
 
-Cited in: [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+
+### daniel2016
+
+Daniel, Kent; Moskowitz, Tobias J. (2016). Momentum crashes. *Journal of Financial Economics 122(2), 221-247*. doi:10.1016/j.jfineco.2015.12.002 <https://doi.org/10.1016/j.jfineco.2015.12.002>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### debondt1985
 
@@ -581,6 +685,14 @@ Engel, Charles; West, Kenneth D. (2005). Exchange Rates and Fundamentals. *Journ
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### etula2019
+
+Etula, Erkko; Rinne, Kalle; Suominen, Matti; Vaittinen, Lauri (2019). Dash for Cash: Monthly Market Impact of Institutional Liquidity Needs. *The Review of Financial Studies 33(1), 75-111*. doi:10.1093/rfs/hhz054 <https://doi.org/10.1093/rfs/hhz054>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### evans2002
 
 Evans, Martin D. D.; Lyons, Richard K. (2002). Order Flow and Exchange Rate Dynamics. *Journal of Political Economy 110(1), 170-180*. doi:10.1086/324391 <https://doi.org/10.1086/324391>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -601,7 +713,7 @@ Also at: <https://ideas.repec.org/a/eee/jbfina/v87y2018icp233-247.html>, <https:
 
 Note: Read for RES-0010 (full text).
 
-Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### falcesmarin2022
 
@@ -620,6 +732,14 @@ Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
 Fama, Eugene F. (1984). Forward and spot exchange rates. *Journal of Monetary Economics 14(3), 319-338*. doi:10.1016/0304-3932(84)90046-1 <https://doi.org/10.1016/0304-3932(84)90046-1>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### fama1987
+
+Fama, Eugene F.; Bliss, Robert R. (1987). The Information in Long-Maturity Forward Rates. *American Economic Review 77(4), 680-692*. <https://ideas.repec.org/a/aea/aecrev/v77y1987i4p680-92.html>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against RePEc (no DOI).
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### fama1992
 
@@ -709,7 +829,7 @@ Cited in: [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algor
 
 Frazzini, Andrea; Pedersen, Lasse Heje (2014). Betting against beta. *Journal of Financial Economics 111(1), 1-25*. doi:10.1016/j.jfineco.2013.10.005 <https://doi.org/10.1016/j.jfineco.2013.10.005>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
 
 ### french2008
 
@@ -722,6 +842,14 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Gatev, Evan; Goetzmann, William N.; Rouwenhorst, K. Geert (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. *Review of Financial Studies 19(3), 797-827*. doi:10.1093/rfs/hhj020 <https://doi.org/10.1093/rfs/hhj020>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+
+### giannone2008
+
+Giannone, Domenico; Reichlin, Lucrezia; Small, David (2008). Nowcasting: The real-time informational content of macroeconomic data. *Journal of Monetary Economics 55(4), 665-676*. doi:10.1016/j.jmoneco.2008.05.010 <https://doi.org/10.1016/j.jmoneco.2008.05.010>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### gilovich1985
 
@@ -769,11 +897,19 @@ Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### harris1986
+
+Harris, Lawrence; Gurel, Eitan (1986). Price and Volume Effects Associated with Changes in the S&P 500 List: New Evidence for the Existence of Price Pressures. *The Journal of Finance 41(4), 815-829*. doi:10.1111/j.1540-6261.1986.tb04550.x <https://doi.org/10.1111/j.1540-6261.1986.tb04550.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### harvey2015
 
 Harvey, Campbell R.; Liu, Yan; Zhu, Heqing (2015). ... and the Cross-Section of Expected Returns. *Review of Financial Studies 29(1), 5-68*. doi:10.1093/rfs/hhv059 <https://doi.org/10.1093/rfs/hhv059>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### harvey2015a
 
@@ -845,7 +981,7 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
 Hou, Kewei; Xue, Chen; Zhang, Lu (2018). Replicating Anomalies. *The Review of Financial Studies 33(5), 2019-2133*. doi:10.1093/rfs/hhy131 <https://doi.org/10.1093/rfs/hhy131>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### hsu2016
 
@@ -893,7 +1029,7 @@ Hurst, Brian; Ooi, Yao Hua; Pedersen, Lasse Heje (2017). A Century of Evidence o
 
 Also at: <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026>, <https://fairmodel.econ.yale.edu/ec439/hurst.pdf>.
 
-Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### hutchinson2022
 
@@ -949,7 +1085,7 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 
 Jegadeesh, Narasimhan; Titman, Sheridan (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *The Journal of Finance 48(1), 65-91*. doi:10.1111/j.1540-6261.1993.tb04702.x <https://doi.org/10.1111/j.1540-6261.1993.tb04702.x>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md).
+Cited in: [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### jegadeesh2001
 
@@ -1023,6 +1159,14 @@ Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### keim1983
+
+Keim, Donald B. (1983). Size-related anomalies and stock return seasonality. *Journal of Financial Economics 12(1), 13-32*. doi:10.1016/0304-405x(83)90025-9 <https://doi.org/10.1016/0304-405x(83)90025-9>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### kelly2024
 
 Kelly, Bryan; Malamud, Semyon; Zhou, Kangying (2024). The Virtue of Complexity in Return Prediction. *Journal of Finance 79(1), 459-503*. doi:10.1111/jofi.13298 <https://doi.org/10.1111/jofi.13298>. <https://ideas.repec.org/a/bla/jfinan/v79y2024i1p459-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1032,6 +1176,14 @@ Also at: <https://www.nber.org/papers/w30217>, <https://www.nber.org/system/file
 Note: Read for RES-0010 (full text).
 
 Cited in: [catalog/algorithms/complex-ml-market-timing.json](../catalog/algorithms/complex-ml-market-timing.json), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### khandani2011
+
+Khandani, Amir E.; Lo, Andrew W. (2011). What happened to the quants in August 2007? Evidence from factors and transactions data. *Journal of Financial Markets 14(1), 1-46*. doi:10.1016/j.finmar.2010.07.005 <https://doi.org/10.1016/j.finmar.2010.07.005>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### kilian2009
 
@@ -1067,7 +1219,7 @@ Cited in: [catalog/algorithms/fx-commodity-terms-of-trade.json](../catalog/algor
 
 Koijen, Ralph S.J.; Moskowitz, Tobias J.; Pedersen, Lasse Heje; Vrugt, Evert B. (2018). Carry. *Journal of Financial Economics 127(2), 197-225*. doi:10.1016/j.jfineco.2017.11.002 <https://doi.org/10.1016/j.jfineco.2017.11.002>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
+Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
 
 ### kroencke2014
 
@@ -1087,13 +1239,21 @@ Also at: <https://doi.org/10.1111/jofi.13306>.
 
 Note: Read for RES-0010 (abstract page).
 
-Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### kurov2021
+
+Kurov, Alexander; Wolfe, Marketa Halova; Gilbert, Thomas (2021). The disappearing pre-FOMC announcement drift. *Finance Research Letters 40, 101781*. doi:10.1016/j.frl.2020.101781 <https://doi.org/10.1016/j.frl.2020.101781>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### lakonishok1988
 
 Lakonishok, Josef; Smidt, Seymour (1988). Are Seasonal Anomalies Real? A Ninety-Year Perspective. *Review of Financial Studies 1(4), 403-425*. doi:10.1093/rfs/1.4.403 <https://doi.org/10.1093/rfs/1.4.403>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [ALG-0052](algorithms/0052-turn-of-the-month.md).
+Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [ALG-0052](algorithms/0052-turn-of-the-month.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### langer1975
 
@@ -1189,13 +1349,13 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-cand
 
 Lucca, David O.; Moench, Emanuel (2015). The Pre-FOMC Announcement Drift. *The Journal of Finance 70(1), 329-371*. doi:10.1111/jofi.12196 <https://doi.org/10.1111/jofi.12196>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### lustig2011
 
 Lustig, Hanno; Roussanov, Nikolai; Verdelhan, Adrien (2011). Common Risk Factors in Currency Markets. *Review of Financial Studies 24(11), 3731-3777*. doi:10.1093/rfs/hhr068 <https://doi.org/10.1093/rfs/hhr068>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [GDE-0003](guides/0003-writing-docs.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### lustig2014
 
@@ -1279,7 +1439,7 @@ Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn
 
 McLean, R. David; Pontiff, Jeffrey (2016). Does Academic Research Destroy Stock Return Predictability? *The Journal of Finance 71(1), 5-32*. doi:10.1111/jofi.12365 <https://doi.org/10.1111/jofi.12365>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### meese1983
 
@@ -1295,7 +1455,7 @@ Also at: <https://ecb.eu/events/pdf/conferences/131216/Third_FX_Workshop_MELVIN_
 
 Note: Read for RES-0016 (full text).
 
-Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### melvin2017
 
@@ -1345,7 +1505,7 @@ Menkhoff, Lukas; Sarno, Lucio; Schmeling, Maik; Schrimpf, Andreas (2012). Carry 
 
 Also at: <https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf>, <https://openaccess.city.ac.uk/id/eprint/3391/1/CTVOL_R3_v4_paper.pdf>.
 
-Cited in: [catalog/algorithms/em-fx-carry.json](../catalog/algorithms/em-fx-carry.json), [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [RES-0001](research/0001-reading-list.md), [RES-0012](research/0012-emerging-market-currencies.md).
+Cited in: [catalog/algorithms/em-fx-carry.json](../catalog/algorithms/em-fx-carry.json), [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0012](research/0012-emerging-market-currencies.md).
 
 ### menkhoff2016
 
@@ -1403,7 +1563,7 @@ Moskowitz, Tobias J.; Ooi, Yao Hua; Pedersen, Lasse Heje (2012). Time series mom
 
 Also at: <https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf>.
 
-Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
+Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0013](research/0013-commodity-futures-carry-trend-and-volatility.md).
 
 ### mueller2017
 
@@ -1419,7 +1579,7 @@ Mueller, Philippe; Tahbaz-Salehi, Alireza; Vedolin, Andrea (2017). Exchange Rate
 
 Also at: <https://researchonline.lse.ac.uk/id/eprint/77256/>.
 
-Cited in: [catalog/algorithms/fx-fomc-dollar-announcement.json](../catalog/algorithms/fx-fomc-dollar-announcement.json), [ALG-0008](algorithms/0008-fx-fomc-dollar-announcement.md), [RES-0001](research/0001-reading-list.md).
+Cited in: [catalog/algorithms/fx-fomc-dollar-announcement.json](../catalog/algorithms/fx-fomc-dollar-announcement.json), [ALG-0008](algorithms/0008-fx-fomc-dollar-announcement.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### neely2009
 
@@ -1459,7 +1619,7 @@ Also at: <https://www.nber.org/system/files/working_papers/w20721/w20721.pdf>, <
 
 Note: Read for RES-0010 (full text).
 
-Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### odean1998
 
@@ -1542,6 +1702,14 @@ Also at: <https://research-information.bris.ac.uk/en/publications/3e4c71e1-f08e-
 Note: Not read: Title, journal, volume and pages confirmed on IDEAS/RePEc and via Crossref, but IDEAS says 'No abstract is available for this item', ScienceDirect returned 403, Unpaywall and OpenAlex list no open copy, and the Bristol repository page showed no abstract. Web search budget was exhausted so no other host could be found. Nothing below is taken from the paper itself.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### petajisto2011
+
+Petajisto, Antti (2011). The index premium and its hidden cost for index funds. *Journal of Empirical Finance 18(2), 271-288*. doi:10.1016/j.jempfin.2010.10.002 <https://doi.org/10.1016/j.jempfin.2010.10.002>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### peters2019
 
@@ -1695,6 +1863,14 @@ Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abst
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### sanders2004
+
+Sanders, Dwight R.; Boris, Keith; Manfredo, Mark (2004). Hedgers, funds, and small speculators in the energy futures markets: an analysis of the CFTC's Commitments of Traders reports. *Energy Economics 26(3), 425-445*. doi:10.1016/j.eneco.2004.04.010 <https://doi.org/10.1016/j.eneco.2004.04.010>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### sharpe1991
 
 Sharpe, William F. (1991). The Arithmetic of Active Management. *Financial Analysts Journal 47(1), 7-9*. doi:10.2469/faj.v47.n1.7 <https://doi.org/10.2469/faj.v47.n1.7>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
@@ -1708,6 +1884,14 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Shefrin, Hersh; Statman, Meir (1985). The Disposition to Sell Winners Too Early and Ride Losers Too Long: Theory and Evidence. *Journal of Finance 40(3), 777-790*. doi:10.1111/j.1540-6261.1985.tb05002.x <https://doi.org/10.1111/j.1540-6261.1985.tb05002.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### shleifer1986
+
+Shleifer, Andrei (1986). Do Demand Curves for Stocks Slope Down? *The Journal of Finance 41(3), 579-590*. doi:10.1111/j.1540-6261.1986.tb04518.x <https://doi.org/10.1111/j.1540-6261.1986.tb04518.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
 ### staw1976
 
@@ -2135,6 +2319,22 @@ Verdelhan, Adrien (2017). The Share of Systematic Variation in Bilateral Exchang
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### wang2001
+
+Wang, Changyun (2001). Investor Sentiment and Return Predictability in Agricultural Futures Markets. *Journal of Futures Markets 21(10), 929-952*. doi:10.1002/fut.2003 <https://doi.org/10.1002/fut.2003>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### wang2002
+
+Wang, Changyun (2002). The behavior and performance of major types of futures traders. *Journal of Futures Markets 23(1), 1-31*. doi:10.1002/fut.10056 <https://doi.org/10.1002/fut.10056>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
 ### white2000
 
 White, Halbert (2000). A Reality Check for Data Snooping. *Econometrica 68(5), 1097-1126*. doi:10.1111/1468-0262.00152 <https://doi.org/10.1111/1468-0262.00152>. <https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2207,7 +2407,7 @@ Brunnermeier, Markus; Nagel, Stefan; Pedersen, Lasse (2008). Carry Trades and Cu
 
 Also at: <https://www.nber.org/system/files/working_papers/w14473/w14473.pdf>.
 
-Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
+Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 
 ### burnside2007
 
@@ -2474,6 +2674,12 @@ Cited in: [catalog/algorithms/commodity-same-month-seasonality.json](../catalog/
 No title recorded. (n.d.). <https://www.nber.org/papers/w16712>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [catalog/algorithms/commodity-open-interest-growth.json](../catalog/algorithms/commodity-open-interest-growth.json), [RES-0015](research/0015-lesser-known-strategies-and-what-firms-have-published.md).
+
+### url-49d098fe
+
+No title recorded. (n.d.). <https://www.nber.org/papers/w13249>. Accessed 2026-10-22. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### url-c8c51ac4
 

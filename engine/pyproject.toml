@@ -19,6 +19,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
 publish = ["psycopg[binary]>=3.2"]
+# The local MCP server for AI tools (DEC-0025). Pinned below 2: 2.x renames FastMCP.
+mcp = ["mcp>=1.12,<2"]
 
 [project.scripts]
 parity = "parity.cli:main"

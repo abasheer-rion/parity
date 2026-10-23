@@ -7,11 +7,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 24 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 27 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 15 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 9 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 16 |
-| [guide](#guide) | How to do something in this repo, step by step. | 5 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 17 |
+| [guide](#guide) | How to do something in this repo, step by step. | 6 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 12 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
@@ -36,14 +36,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-22 [RES-0017: How the ingredients behave in crises, and what Sim World should show](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
-- 2026-10-22 [RES-0016: Combining many strategies, the evidence and the ingredient list](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- 2026-10-22 [RES-0015: Lesser-known strategies and what firms have published](research/0015-lesser-known-strategies-and-what-firms-have-published.md)
-- 2026-10-22 [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
-- 2026-10-22 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
-- 2026-10-22 [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
-- 2026-10-22 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-22 [REF-0003: Data sources](reference/0003-data-sources.md)
+- 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md)
+- 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
+- 2026-10-23 [EXP-0007: Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md)
+- 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
+- 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
+- 2026-10-23 [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 
 ## intent
 
@@ -80,6 +80,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0022 | [Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
 | DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0024 | [Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
+| DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
+| DEC-0027 | [New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## hypothesis
 
@@ -93,7 +96,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0006 | [The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) | open | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news) |
 | HYP-0007 | [The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) | open | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
 | HYP-0008 | [A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) | rejected | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
-| HYP-0009 | [Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md) | testing | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
+| HYP-0009 | [Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md) | testing | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
 | HYP-0010 | [Emerging market basket kept paying after 2008](hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md) | testing | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
 | HYP-0011 | [Emerging market momentum survives costs](hypotheses/0011-emerging-market-momentum-survives-costs.md) | testing | 2026-10-21 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | HYP-0012 | [Energy futures trend pays on tradable prices](hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
@@ -111,7 +114,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | EXP-0005 | [Rerun of all sixteen strategies with corrected scoring](experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method) |
 | EXP-0006 | [Stocks plus currency trend on its own](experiments/0006-stocks-plus-currency-trend-on-its-own.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
-| EXP-0007 | [Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md) | planned | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| EXP-0007 | [Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | EXP-0008 | [Energy futures trend and carry](experiments/0008-energy-futures-trend-and-carry.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 | EXP-0009 | [Oil volatility and commodity currency signals](experiments/0009-oil-volatility-and-commodity-currency-signals.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 
@@ -129,6 +132,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0008 | [Independent audit of our methods and code](research/0008-independent-audit.md) | current | 2026-10-21 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
+| RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | RES-0012 | [Emerging market currencies](research/0012-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | RES-0013 | [Commodity futures, carry, trend and volatility](research/0013-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
 | RES-0014 | [Famous currency and commodity traders and what their records teach](research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
@@ -145,6 +149,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
+| GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-23 | [process](TAGS.md#process) |
 
 ## reference
 
@@ -162,7 +167,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-21 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
+| REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 

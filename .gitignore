@@ -26,4 +26,5 @@ supabase/.branches/
 # OS and editors
 .DS_Store
 .idea/
-.vscode/
+.vscode/*
+!.vscode/mcp.json

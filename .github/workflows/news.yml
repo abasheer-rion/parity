@@ -54,6 +54,14 @@ jobs:
         env:
           PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
         run: parity markets fetch
+      - name: Fill the news archive (older years once, then only the current year)
+        continue-on-error: true  # the archive grows over many runs; one bad run is fine
+        env:
+          PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
+        # Fed, ECB, BoJ year pages and our event catalog are re-read only for the current
+        # year. GDELT gets one month (6 topic queries, 8 s apart) per run, newest first,
+        # and stops at its first "too many requests". SEC 8-Ks run only with PARITY_CONTACT.
+        run: parity news backfill --gdelt-limit 6
       - name: Explain a few record days (GDELT, polite pace)
         run: parity news records --explain 3 --limit 25 > /dev/null || true
       - name: Summary

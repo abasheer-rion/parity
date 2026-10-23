@@ -84,7 +84,7 @@ The always-on search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-alw
 ## Sources cited
 
 - [@brunnermeier2008](../REFERENCES.md#brunnermeier2008): Brunnermeier et al. (2008), Carry Trades and Currency Crashes
-- [@daniel2016](../REFERENCES.md#daniel2016): Daniel and Moskowitz (2016), Momentum Crashes
+- [@daniel2016](../REFERENCES.md#daniel2016): Daniel and Moskowitz (2016), Momentum crashes
 - [@hurst2017](../REFERENCES.md#hurst2017): Hurst et al. (2017), A Century of Evidence on Trend-Following Investing
 - [@nechio2014](../REFERENCES.md#nechio2014): Nechio (2014), Fed Tapering News and Emerging Markets
 

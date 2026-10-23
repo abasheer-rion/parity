@@ -78,6 +78,12 @@ def build_derived(series: catalog.Series, root: Path) -> pd.Series:
     if series.key == "vrp.OIL":
         return futures.variance_swap_index(load("risk.OVX", root),
                                            load("fut.CL", root)).rename(series.key)
+    if series.key.startswith("xfx."):  # USD per unit, crossed through the euro
+        usd = load("ecb.USD", root)
+        if series.code == "ecb.USD":
+            return usd.rename(series.key)
+        other = load(series.code.split("/", 1)[1], root)
+        return (usd / other).dropna().rename(series.key)
     if series.key in catalog.BOND_DURATION:
         return bond_total_return(load(series.code, root), catalog.BOND_DURATION[series.key]) \
             .rename(series.key)
