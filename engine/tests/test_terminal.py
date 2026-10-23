@@ -119,6 +119,11 @@ def test_monthly_average_dated_when_first_readable():
     s = pd.Series([5.0], index=pd.to_datetime(["2026-01-01"]))
     out = tm.readable(s, e)
     assert out.index[0] == pd.Timestamp("2026-01-31") + pd.offsets.BDay(22)
+    # This month's average is not readable until next month: it is left out, never future-dated.
+    now = pd.Timestamp.now().normalize()
+    this_month = now.to_period("M").to_timestamp()
+    s2 = pd.Series([6.0], index=[this_month])
+    assert tm.readable(s2, e).empty
 
 
 def test_licence_filter_excludes_forbidden_sources():

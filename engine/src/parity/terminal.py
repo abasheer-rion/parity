@@ -339,7 +339,9 @@ def readable(s: pd.Series, e: Entry) -> pd.Series:
     if e.lag_days:
         s.index = s.index + pd.offsets.BDay(e.lag_days)
         s = s[~s.index.duplicated(keep="last")]
-    return s
+    # A value that cannot be read yet (its release day is after today) is not shown, so
+    # no panel carries an "as of" date in the future.
+    return s[s.index <= pd.Timestamp.now().normalize()]
 
 
 def load_crypto(root: Path = store.DEFAULT_DIR,
