@@ -123,11 +123,11 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
         <div className="ac-controls" role="group" aria-label="Picture steps. Arrow keys move between steps." onKeyDown={grid ? undefined : onKey}>
           {!grid && (
             <>
-              <button type="button" className="ac-btn" onClick={() => go(step - 1)} disabled={step === 0}>Back</button>
+              <button type="button" className="ac-btn" onClick={() => go(step - 1)} aria-disabled={step === 0}>Back</button>
               <span className="ac-dots" aria-hidden>
                 {visual.steps.map((_, i) => <span key={i} className={i === step ? "on" : i < step ? "past" : ""} />)}
               </span>
-              <button type="button" className="ac-btn ac-btn-main" onClick={() => go(step + 1)} disabled={step === last}>Next</button>
+              <button type="button" className="ac-btn ac-btn-main" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</button>
               {!reduced && (
                 <button type="button" className="ac-btn" onClick={togglePlay} aria-pressed={playing}>
                   {playing ? "Pause" : step >= last ? "Replay" : "Play"}

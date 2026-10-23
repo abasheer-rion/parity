@@ -74,11 +74,11 @@
     {
      "q": "Compared with stocks, how bumpy are crypto prices?",
      "options": [
-      "About the same",
       "Much bumpier",
-      "Calmer"
+      "Calmer",
+      "About the same"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Daily swings of 10% are normal for many coins."
     },
     {
@@ -277,21 +277,21 @@
     {
      "q": "What makes a perpetual future different from a normal future?",
      "options": [
-      "It has no expiry date",
       "It can only go up",
-      "It has no leverage"
+      "It has no leverage",
+      "It has no expiry date"
      ],
-     "answer": 0,
+     "answer": 2,
      "why": "It never expires, so it needs funding payments to stay close to the spot price."
     },
     {
      "q": "A perp lets you bet on:",
      "options": [
-      "Only a rise",
       "A rise or a fall",
-      "Only a fall"
+      "Only a fall",
+      "Only a rise"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "You can go long or short."
     }
    ]
@@ -556,11 +556,11 @@
     {
      "q": "0.01% every eight hours, held for a year, adds to roughly:",
      "options": [
+      "30%",
       "1%",
-      "11%",
-      "30%"
+      "11%"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Three payments a day for 365 days is about 1,095 basis points, or about 11%."
     }
    ]
@@ -618,21 +618,21 @@
     {
      "q": "At 10 times leverage, about what price fall wipes out the margin, ignoring fees?",
      "options": [
-      "1%",
       "10%",
-      "50%"
+      "50%",
+      "1%"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "1 divided by 10 is 10%. The exchange usually closes the position a little before that."
     },
     {
      "q": "Why does the exchange close positions before the margin is fully gone?",
      "options": [
+      "It never does",
       "To keep equity above the maintenance margin",
-      "To charge more fees",
-      "It never does"
+      "To charge more fees"
      ],
-     "answer": 0,
+     "answer": 1,
      "why": "Below the maintenance margin, the position is closed."
     }
    ]
@@ -706,21 +706,21 @@
     {
      "q": "What does the basis trade earn?",
      "options": [
+      "Nothing",
       "The coin's price rise",
-      "Mainly the funding paid by the other side",
-      "Nothing"
+      "Mainly the funding paid by the other side"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The long coin and short perp cancel on price, leaving funding."
     },
     {
      "q": "Is the basis trade risk free?",
      "options": [
-      "Yes",
       "No: funding can turn negative, exchanges can fail and the short can be liquidated",
-      "Only on weekends"
+      "Only on weekends",
+      "Yes"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Price risk mostly cancels, but other risks remain."
     }
    ]

@@ -70,11 +70,11 @@
     {
      "q": "In EUR/USD, which is the base currency?",
      "options": [
-      "The euro",
       "The dollar",
-      "Neither"
+      "Neither",
+      "The euro"
      ],
-     "answer": 0,
+     "answer": 2,
      "why": "The base is the thing being priced, and it is written first."
     }
    ]
@@ -142,11 +142,11 @@
     {
      "q": "What is one pip on a standard lot of EUR/USD worth?",
      "options": [
-      "1 dollar",
       "10 dollars",
-      "100 dollars"
+      "100 dollars",
+      "1 dollar"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "100,000 euros times 0.0001 is 10 dollars."
     },
     {
@@ -232,21 +232,21 @@
     {
      "q": "You buy at the ask and immediately sell at the bid. What happens?",
      "options": [
+      "You gain the spread",
       "You break even",
-      "You lose the spread",
-      "You gain the spread"
+      "You lose the spread"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The ask is above the bid, so a quick round trip loses the gap."
     },
     {
      "q": "Why does a small spread matter for a strategy that trades daily?",
      "options": [
-      "It does not",
       "It is paid on every trade, so it adds up",
-      "Spreads only apply once a year"
+      "Spreads only apply once a year",
+      "It does not"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Hundreds of trades times a small cost becomes a large one."
     }
    ]
@@ -396,11 +396,11 @@
     {
      "q": "Why can a panic hurt a carry trade twice?",
      "options": [
+      "Spreads disappear",
       "Rates rise",
-      "Its high-rate currencies fall while the low-rate ones it borrowed often rise",
-      "Spreads disappear"
+      "Its high-rate currencies fall while the low-rate ones it borrowed often rise"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Carry often borrows safe haven currencies, which tend to gain in a panic."
     }
    ]
@@ -455,21 +455,21 @@
     {
      "q": "With 20 times leverage, what price fall wipes out the margin, ignoring fees?",
      "options": [
-      "2%",
       "5%",
-      "20%"
+      "20%",
+      "2%"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "1 divided by 20 is 5%."
     },
     {
      "q": "What happens to losses when leverage doubles?",
      "options": [
-      "They halve",
       "They stay the same",
-      "They double"
+      "They double",
+      "They halve"
      ],
-     "answer": 2,
+     "answer": 1,
      "why": "Leverage scales gains and losses alike."
     }
    ]

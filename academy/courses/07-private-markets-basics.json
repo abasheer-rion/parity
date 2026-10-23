@@ -96,11 +96,11 @@
     {
      "q": "What is a distribution?",
      "options": [
-      "Money the fund pays back to investors",
       "Money investors put in",
-      "A fee"
+      "A fee",
+      "Money the fund pays back to investors"
      ],
-     "answer": 0,
+     "answer": 2,
      "why": "Calls go in; distributions come out."
     }
    ]
@@ -186,11 +186,11 @@
     {
      "q": "A fund has paid in 100, paid back 40 and still holds 80. What is its TVPI?",
      "options": [
+      "1.2x",
       "0.4x",
-      "0.8x",
-      "1.2x"
+      "0.8x"
      ],
-     "answer": 2,
+     "answer": 0,
      "why": "TVPI is paid back plus still held, over paid in: 40 plus 80 over 100."
     },
     {
@@ -265,11 +265,11 @@
     {
      "q": "Two funds both double your money. Which has the higher IRR?",
      "options": [
+      "They are equal",
       "The one that took longer",
-      "The one that did it faster",
-      "They are equal"
+      "The one that did it faster"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "IRR is a yearly rate, so the same gain over fewer years is a higher rate."
     },
     {
@@ -370,11 +370,11 @@
     {
      "q": "What can smoothing make look smaller than it is?",
      "options": [
+      "Capital calls",
       "Fees",
-      "Volatility and drawdowns",
-      "Capital calls"
+      "Volatility and drawdowns"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Smoothed values hide part of the bumps and the falls."
     }
    ]

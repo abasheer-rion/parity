@@ -55,21 +55,21 @@
     {
      "q": "A market rose after one OPEC headline. What does that show?",
      "options": [
+      "The market will rise next time",
       "OPEC news lifts the market",
-      "Very little: one example cannot separate news from everyday noise",
-      "The market will rise next time"
+      "Very little: one example cannot separate news from everyday noise"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Markets move every day. One event is an anecdote."
     },
     {
      "q": "What do you need to study a kind of news?",
      "options": [
-      "One dramatic example",
       "Many events of the same kind, lined up the same way",
-      "Only the latest headline"
+      "Only the latest headline",
+      "One dramatic example"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Many events let the noise average out."
     }
    ]
@@ -130,11 +130,11 @@
     {
      "q": "Why does Parity scale moves by each asset's normal daily move?",
      "options": [
-      "So calm and wild assets can be compared",
       "To make moves bigger",
-      "It does not"
+      "It does not",
+      "So calm and wild assets can be compared"
      ],
-     "answer": 0,
+     "answer": 2,
      "why": "A 1% move means more for a calm asset than for a wild one."
     }
    ]
@@ -188,11 +188,11 @@
     {
      "q": "Why compare news days with random days?",
      "options": [
-      "Random days are always flat",
       "Markets drift and have fat tails, so ordinary days are the fair baseline",
-      "To get more data"
+      "To get more data",
+      "Random days are always flat"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "The question is whether news days differ from ordinary ones."
     },
     {
@@ -273,11 +273,11 @@
     {
      "q": "Five headlines about the same rate decision on one day count as:",
      "options": [
+      "No events",
       "Five events",
-      "One event",
-      "No events"
+      "One event"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Days are counted, not headlines."
     },
     {
@@ -344,21 +344,21 @@
     {
      "q": "Why can't you rank topics by the biggest average move?",
      "options": [
+      "It is too slow",
       "It rewards topics with few events and lucky outliers",
-      "Big moves are always real",
-      "It is too slow"
+      "Big moves are always real"
      ],
-     "answer": 0,
+     "answer": 1,
      "why": "Thin topics with one dramatic event would top the list."
     },
     {
      "q": "What does a q-value correct for?",
      "options": [
+      "Currency conversion",
       "Trading costs",
-      "How many pairs were tried",
-      "Currency conversion"
+      "How many pairs were tried"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "It is the p-value adjusted for the number of tests."
     }
    ]

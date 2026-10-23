@@ -78,11 +78,11 @@
     {
      "q": "Roughly how many years does it take to tell a Sharpe of 0.5 apart from zero?",
      "options": [
+      "About 50",
       "About 2",
-      "About 16",
-      "About 50"
+      "About 16"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The t-statistic is about the Sharpe ratio times the square root of the years. 0.5 times the square root of 16 is 2."
     }
    ]
@@ -139,11 +139,11 @@
     {
      "q": "Why does trying more variations make the best backtest look better?",
      "options": [
-      "Later variations are smarter",
       "More tries give luck more chances to produce a high score",
-      "It does not"
+      "It does not",
+      "Later variations are smarter"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "The maximum of many random results grows with the number of tries."
     },
     {
@@ -208,21 +208,21 @@
     {
      "q": "What does a deflated Sharpe ratio of 0.95 mean?",
      "options": [
+      "95% of trades won",
       "The Sharpe ratio is 0.95",
-      "About a 95% chance the true Sharpe beats the best expected from that many unskilled tries",
-      "95% of trades won"
+      "About a 95% chance the true Sharpe beats the best expected from that many unskilled tries"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "It is a probability, adjusted for the number of tries, fat tails and the length of the history."
     },
     {
      "q": "You tested 1,000 variations. Compared with testing one, the bar to pass is:",
      "options": [
+      "Higher",
       "Lower",
-      "The same",
-      "Higher"
+      "The same"
      ],
-     "answer": 2,
+     "answer": 0,
      "why": "More tries mean luck reaches higher, so the bar rises."
     }
    ]
@@ -304,11 +304,11 @@
     {
      "q": "To pass, the real strategy must beat what share of the 500 random-date copies?",
      "options": [
+      "All of them",
       "At least 50%",
-      "At least 95%",
-      "All of them"
+      "At least 95%"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The bar is 95%, the usual level for a p-value of 0.05."
     }
    ]
@@ -421,11 +421,11 @@
     {
      "q": "A strategy fails some A tests but passes 4 of the 5 B tests. What is the verdict?",
      "options": [
-      "Beats the S&P 500",
       "A real effect, but too small to beat the S&P 500 on its own",
-      "Most likely noise"
+      "Most likely noise",
+      "Beats the S&P 500"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Group B says the effect looks real; group A says it does not beat stocks alone."
     },
     {
@@ -441,11 +441,11 @@
     {
      "q": "What does test B4 remove?",
      "options": [
+      "The last five years",
       "The worst year",
-      "The best calendar year",
-      "The last five years"
+      "The best calendar year"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "If the result disappears without its best year, it may come from one event."
     }
    ]

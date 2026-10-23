@@ -63,11 +63,11 @@
     {
      "q": "What is a risk premium?",
      "options": [
-      "A guaranteed return",
       "Extra return paid on average for carrying a risk others avoid",
-      "A fee charged by a broker"
+      "A fee charged by a broker",
+      "A guaranteed return"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "It is an average reward for risk, and the risk is real: it can be lost for years."
     },
     {
@@ -151,21 +151,21 @@
     {
      "q": "You earn 4% on one currency and pay 1% on the other. What is the carry if prices do not move?",
      "options": [
+      "4%",
       "5%",
-      "3%",
-      "4%"
+      "3%"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Carry is the rate earned minus the rate paid: 4 minus 1 is 3."
     },
     {
      "q": "What does uncovered interest parity predict?",
      "options": [
-      "High-rate currencies rise",
       "High-rate currencies fall by about the extra interest",
-      "Rates do not affect currencies"
+      "Rates do not affect currencies",
+      "High-rate currencies rise"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "If it held, carry would earn nothing on average. In real data it mostly does not hold."
     }
    ]
@@ -234,11 +234,11 @@
     {
      "q": "Why can the Sharpe ratio flatter a carry strategy?",
      "options": [
+      "It only counts winning days",
       "It ignores costs",
-      "It ignores the shape of returns, including rare large losses",
-      "It only counts winning days"
+      "It ignores the shape of returns, including rare large losses"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Sharpe uses the spread, so a strategy that earns steadily until a rare crash can score well."
     }
    ]
@@ -294,11 +294,11 @@
     {
      "q": "When does a simple trend rule tend to lose?",
      "options": [
-      "In long steady trends",
       "When prices chop sideways",
-      "Never"
+      "Never",
+      "In long steady trends"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Sideways markets cross the average back and forth, so the rule buys high and sells low many times."
     },
     {
@@ -548,21 +548,21 @@
     {
      "q": "How fast do exchange rates close their gap to purchasing power parity?",
      "options": [
+      "They never do",
       "Within days",
-      "Half the gap closes in about three to five years",
-      "They never do"
+      "Half the gap closes in about three to five years"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The pull is real but slow, so value is a weak short-run signal."
     },
     {
      "q": "Why do people combine value with trend?",
      "options": [
-      "They always agree",
       "They often disagree, so together they are less bumpy",
-      "Value has no risk"
+      "Value has no risk",
+      "They always agree"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Signals that disagree tend to lose at different times."
     }
    ]

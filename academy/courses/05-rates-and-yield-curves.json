@@ -66,21 +66,21 @@
     {
      "q": "Who sets the main short-term interest rate for a currency?",
      "options": [
+      "Commercial banks alone",
       "Stock exchanges",
-      "The central bank",
-      "Commercial banks alone"
+      "The central bank"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "The central bank sets the policy rate; other short-term rates follow it."
     },
     {
      "q": "How often does the US Federal Reserve's rate committee meet on schedule?",
      "options": [
-      "Every week",
       "Eight times a year",
-      "Once a year"
+      "Once a year",
+      "Every week"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "The FOMC has eight scheduled meetings a year."
     }
    ]
@@ -156,11 +156,11 @@
     {
      "q": "Which way does the curve usually slope?",
      "options": [
-      "Up: longer loans pay more",
       "Down",
-      "It is always flat"
+      "It is always flat",
+      "Up: longer loans pay more"
      ],
-     "answer": 0,
+     "answer": 2,
      "why": "Lenders usually want extra for lending longer."
     }
    ]
@@ -238,11 +238,11 @@
     {
      "q": "The gap between 10-year and 3-month yields widens. The curve is:",
      "options": [
-      "Flattening",
       "Steepening",
-      "Inverting"
+      "Inverting",
+      "Flattening"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "A wider gap between long and short is a steeper curve."
     },
     {
@@ -331,21 +331,21 @@
     {
      "q": "What is an inverted yield curve?",
      "options": [
+      "All yields at zero",
       "Long yields above short yields",
-      "Short yields above long yields",
-      "All yields at zero"
+      "Short yields above long yields"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Inverted means the usual slope is upside down at the short end."
     },
     {
      "q": "Is an inverted curve a reliable timing signal?",
      "options": [
-      "Yes, always within six months",
       "No, the time to whatever follows has varied a lot",
-      "It has never been followed by anything"
+      "It has never been followed by anything",
+      "Yes, always within six months"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "It is watched as a warning, but the timing has been very uneven."
     }
    ]
@@ -430,11 +430,11 @@
     {
      "q": "Which bond's price moves more when yields change?",
      "options": [
+      "They move the same",
       "A 2-year bond",
-      "A 30-year bond",
-      "They move the same"
+      "A 30-year bond"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "More of a long bond's payments are far away, so they are more sensitive to the rate used to value them."
     }
    ]

@@ -377,7 +377,7 @@ const curve: Render = (p, steps, s) => {
   const lo = Math.max(0, Math.floor(Math.min(...all) - 0.5)), hi = Math.ceil(Math.max(...all) + 0.5);
   const x = scale(0, labels.length - 1, PLOT.x0 + 10, PLOT.x1 - 10), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 14);
   let out = yAxis(lo, hi, y, "%") + labels.map((l, i) => text(x(i), PLOT.y1 + 20, l, { size: 12, anchor: "middle", fill: C.faint })).join("");
-  out += text(PLOT.x1, PLOT.y1 + 32, "How long the loan lasts", { size: 11, anchor: "end", fill: C.faint });
+  out += text(PLOT.x1, PLOT.y0 + 4, "Yield by how long the loan lasts", { size: 11, anchor: "end", fill: C.faint });
   if (at(steps, s, "ghost", 0) > 0.01) out += `<path d="${smooth(first.map((v, i) => [x(i), y(v)]))}" fill="none" stroke="${C.faint}" stroke-width="1.5" stroke-dasharray="4 4" opacity=".7"/>`;
   const slope = ys[ys.length - 1] - ys[0];
   const col = slope > 0.25 ? C.blue : slope < -0.25 ? C.bad : C.warn;
@@ -517,7 +517,7 @@ const leverage: Render = (p, steps, s) => {
     out += `<g stroke="${C.bad}" stroke-width="3"><line x1="${r1(x(hit) - 6)}" y1="${r1(y(price[hit]) - 6)}" x2="${r1(x(hit) + 6)}" y2="${r1(y(price[hit]) + 6)}"/><line x1="${r1(x(hit) - 6)}" y1="${r1(y(price[hit]) + 6)}" x2="${r1(x(hit) + 6)}" y2="${r1(y(price[hit]) - 6)}"/></g>`;
     out += text(x(hit) + 10, y(price[hit]) + 20, "Closed by the exchange", { fill: C.bad, size: 12 });
   }
-  out += text(PLOT.x0 + 4, PLOT.y0 + 4, `Leverage ${lev.toFixed(lev < 10 ? 1 : 0)}x: a ${(100 / lev).toFixed(lev > 10 && 100 % lev ? 1 : 0)}% fall wipes out the margin`, { fill: C.text, size: 13, weight: 600 });
+  out += text(PLOT.x0 + 4, PLOT.y0 + 4, `Leverage ${lev.toFixed(Math.abs(lev - Math.round(lev)) > 0.05 ? 1 : 0)}x: a ${(100 / lev).toFixed(lev > 10 && 100 % lev ? 1 : 0)}% fall wipes out the margin`, { fill: C.text, size: 13, weight: 600 });
   return out;
 };
 

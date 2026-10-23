@@ -70,11 +70,11 @@
     {
      "q": "What does CAGR measure?",
      "options": [
-      "The best single year",
       "The steady yearly growth rate that gets from the start value to the end value",
-      "The average of the daily returns"
+      "The average of the daily returns",
+      "The best single year"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "CAGR is the final value over the start value, to the power one over the years, minus one. It is a steady rate, not a best year or a simple average."
     },
     {
@@ -153,21 +153,21 @@
     {
      "q": "What does high volatility mean?",
      "options": [
+      "The strategy trades a lot",
       "The strategy makes more money",
-      "Returns swing a lot from day to day",
-      "The strategy trades a lot"
+      "Returns swing a lot from day to day"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Volatility is the spread of returns. It says nothing about the average return, only how far returns swing around it."
     },
     {
      "q": "A strategy averages 10% a year with 30% volatility. Roughly what does it compound at?",
      "options": [
-      "About 10%",
       "About 5.5%",
-      "About 15%"
+      "About 15%",
+      "About 10%"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Volatility drag is about half the variance: 10% minus half of 0.3 squared, or 4.5 points, leaves about 5.5%."
     }
    ]
@@ -237,21 +237,21 @@
     {
      "q": "Strategy X earns 6% with 6% volatility. Strategy Y earns 9% with 18% volatility. Which has the higher Sharpe ratio?",
      "options": [
+      "They are equal",
       "X, at 1.0",
-      "Y, at 0.5",
-      "They are equal"
+      "Y, at 0.5"
      ],
-     "answer": 0,
+     "answer": 1,
      "why": "6 divided by 6 is 1.0. 9 divided by 18 is 0.5. Y earns more but pays for it with much more bumpiness."
     },
     {
      "q": "What can a high Sharpe ratio hide?",
      "options": [
+      "The trading costs",
       "Nothing, it covers every risk",
-      "Rare large losses after many small wins",
-      "The trading costs"
+      "Rare large losses after many small wins"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "Sharpe uses the spread of returns, so a long left tail of rare big losses can sit behind a good score."
     }
    ]
@@ -313,11 +313,11 @@
     {
      "q": "An account falls 50% from its peak. What gain does it need to get back?",
      "options": [
+      "100%",
       "50%",
-      "75%",
-      "100%"
+      "75%"
      ],
-     "answer": 2,
+     "answer": 0,
      "why": "Half of the money is gone, so what is left has to double. The gain needed is the loss divided by one minus the loss."
     },
     {
@@ -386,21 +386,21 @@
     {
      "q": "A strategy trades its whole size 50 times a year and earns 8% before costs. At what cost per trade does it earn nothing?",
      "options": [
+      "50 basis points",
       "8 basis points",
-      "16 basis points",
-      "50 basis points"
+      "16 basis points"
      ],
-     "answer": 1,
+     "answer": 2,
      "why": "8% is 800 basis points. Spread over 50 trades, each trade can cost 16 basis points before the gain is gone."
     },
     {
      "q": "Why does Parity test every strategy at double its cost guess?",
      "options": [
-      "To make results look worse",
       "Because the cost guess could be wrong",
-      "Because costs always double"
+      "Because costs always double",
+      "To make results look worse"
      ],
-     "answer": 1,
+     "answer": 0,
      "why": "Real costs are uncertain. A strategy that only works at the exact cost guess is fragile."
     }
    ]
