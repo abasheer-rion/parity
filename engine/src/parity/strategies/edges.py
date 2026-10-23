@@ -106,7 +106,7 @@ _timing("cot_bonds_not_crowded", "Long bonds unless speculators crowd in",
 
 # --- the yield curve -------------------------------------------------------------------
 
-_timing("bonds_steep_curve", "Long bonds when the curve is steep",
+_timing("bonds_steep_curve", "Long bonds when the curve is steeper than usual",
         "Holds 10-year Treasuries while the gap between 10-year and 3-month yields is above "
         "its five-year median, otherwise 2-year notes. A steep curve has predicted higher "
         "bond returns (Fama and Bliss; Campbell and Shiller), but the effect is slow and "
