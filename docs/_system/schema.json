@@ -328,6 +328,16 @@
         "open-source"
       ]
     },
+    "private-markets": {
+      "about": "Private equity, venture, private credit, real estate and infrastructure, and how individuals reach them",
+      "keywords": [
+        "private equity",
+        "venture capital",
+        "private credit",
+        "interval fund",
+        "form d"
+      ]
+    },
     "process": {
       "about": "How the team works together",
       "keywords": [
@@ -399,6 +409,7 @@
       "CONTRIBUTING.md",
       "Makefile",
       "README.md",
+      "academy",
       "auth",
       "catalog",
       "docs",

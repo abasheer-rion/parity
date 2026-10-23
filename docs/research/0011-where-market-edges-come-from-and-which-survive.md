@@ -341,4 +341,5 @@ New entries in the bibliography, with the link we checked:
 ## Referenced by
 
 - [DEC-0027: New edge families from the wider data](../decisions/0027-new-edge-families-from-the-wider-data.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 <!-- backlinks:end -->

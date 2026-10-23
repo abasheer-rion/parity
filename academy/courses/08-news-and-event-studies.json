@@ -1,0 +1,367 @@
+{
+ "id": "news-and-event-studies",
+ "order": 8,
+ "level": "Core",
+ "title": "Reading news impact",
+ "summary": "How to tell whether a kind of news really moves a market: line events up, compare with random days, count days not headlines, and correct for trying many topics.",
+ "docs": [
+  "DEC-0026",
+  "REF-0013"
+ ],
+ "lessons": [
+  {
+   "id": "anecdote",
+   "title": "One headline is an anecdote",
+   "minutes": 2,
+   "body": [
+    "After a big headline, a market moves, and it is tempting to say the news caused it. But markets move every day. One example cannot tell you whether that kind of news usually matters.",
+    "The picture lines up the days around one news day, then a handful of them. Each path is noisy. Some go up after the news, some go down.",
+    "To learn anything, you need many events of the same kind, lined up the same way."
+   ],
+   "terms": [
+    "narrative-fallacy",
+    "law-of-small-numbers",
+    "sample-size"
+   ],
+   "visual": {
+    "kind": "event",
+    "alt": "Price paths around a news day, from 10 days before to 10 days after. First one path, then five, each noisy and going different ways.",
+    "params": {
+     "window": 10,
+     "events": 40,
+     "effect": 1.2,
+     "vol": 1,
+     "seed": 21
+    },
+    "steps": [
+     {
+      "caption": "What a market did around one news day.",
+      "n": 1
+     },
+     {
+      "caption": "Five news days of the same kind. They do not agree.",
+      "n": 5
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "The biggest market days and what was in the news",
+     "href": "#/news/history",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "A market rose after one OPEC headline. What does that show?",
+     "options": [
+      "The market will rise next time",
+      "OPEC news lifts the market",
+      "Very little: one example cannot separate news from everyday noise"
+     ],
+     "answer": 2,
+     "why": "Markets move every day. One event is an anecdote."
+    },
+    {
+     "q": "What do you need to study a kind of news?",
+     "options": [
+      "Many events of the same kind, lined up the same way",
+      "Only the latest headline",
+      "One dramatic example"
+     ],
+     "answer": 0,
+     "why": "Many events let the noise average out."
+    }
+   ]
+  },
+  {
+   "id": "event-study",
+   "title": "Line events up on day zero",
+   "minutes": 2,
+   "body": [
+    "An **event study** lines up many events so the news day is day zero, then averages what happened before and after. Noise in each path tends to cancel; a real effect tends to remain.",
+    "Parity measures each move against the asset's normal daily move over the year before, so a calm asset and a wild one can be compared.",
+    "The average is only as good as the number of events behind it. Parity shows that number next to every result."
+   ],
+   "terms": [
+    "sample-size",
+    "macro-surprise"
+   ],
+   "visual": {
+    "kind": "event",
+    "alt": "Forty faint price paths around a news day, with their green average line rising a little after day zero.",
+    "params": {
+     "window": 10,
+     "events": 40,
+     "effect": 1.2,
+     "vol": 1,
+     "seed": 21
+    },
+    "steps": [
+     {
+      "caption": "Forty events of the same kind, lined up on the news day.",
+      "n": 40
+     },
+     {
+      "caption": "Their average, in green. Noise mostly cancels; a drift after the news remains.",
+      "n": 40,
+      "avg": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "News impact search",
+     "href": "#/news/impact",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why average many events?",
+     "options": [
+      "To make the chart prettier",
+      "Noise tends to cancel while a real effect remains",
+      "To hide bad events"
+     ],
+     "answer": 1,
+     "why": "Averaging reduces random noise in proportion to the number of events."
+    },
+    {
+     "q": "Why does Parity scale moves by each asset's normal daily move?",
+     "options": [
+      "To make moves bigger",
+      "It does not",
+      "So calm and wild assets can be compared"
+     ],
+     "answer": 2,
+     "why": "A 1% move means more for a calm asset than for a wild one."
+    }
+   ]
+  },
+  {
+   "id": "random-days",
+   "title": "Compare with random days",
+   "minutes": 3,
+   "body": [
+    "An average after the news is not enough. Markets drift, and big days cluster. The fair question is: did news days do better than ordinary days?",
+    "Parity compares every event study with random days from the same years. The p-value comes from those random days, so fat tails and drift are already in the baseline.",
+    "The grey band shows where the average of the same number of random days usually lands. If the news line stays inside it, the pattern could be luck."
+   ],
+   "terms": [
+    "placebo-test",
+    "p-value",
+    "fat-tails"
+   ],
+   "visual": {
+    "kind": "event",
+    "alt": "The green average of forty news days rises after day zero and leaves a grey band that shows where averages of random days usually land.",
+    "params": {
+     "window": 10,
+     "events": 40,
+     "effect": 1.2,
+     "vol": 1,
+     "seed": 21
+    },
+    "steps": [
+     {
+      "caption": "The average after forty news days.",
+      "n": 40,
+      "avg": 1
+     },
+     {
+      "caption": "The grey band: where an average of forty random days usually lands.",
+      "n": 40,
+      "avg": 1,
+      "band": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "How the impact engine works",
+     "href": "#/doc/DEC-0026",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why compare news days with random days?",
+     "options": [
+      "Markets drift and have fat tails, so ordinary days are the fair baseline",
+      "To get more data",
+      "Random days are always flat"
+     ],
+     "answer": 0,
+     "why": "The question is whether news days differ from ordinary ones."
+    },
+    {
+     "q": "The news average stays inside the random-day band. What does that suggest?",
+     "options": [
+      "A strong effect",
+      "The pattern could be luck",
+      "The data is broken"
+     ],
+     "answer": 1,
+     "why": "Random days often do just as well."
+    }
+   ]
+  },
+  {
+   "id": "counting",
+   "title": "Count days, not headlines",
+   "minutes": 2,
+   "body": [
+    "Ten headlines about the same meeting are one event, not ten. Parity counts days, not items, so one busy news day does not look like a lot of evidence.",
+    "Events close together share the same market moves. Parity marks events within 20 trading days of another and repeats the averages using only the ones that do not overlap.",
+    "Under 5 events there is no p-value at all. Under 20 there is a warning."
+   ],
+   "terms": [
+    "sample-size",
+    "base-rate"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Made-up example: 120 headlines collapse to 45 event days, and to 28 events that do not overlap.",
+    "params": {
+     "labels": [
+      "Headlines",
+      "Event days",
+      "Not overlapping"
+     ],
+     "colors": [
+      "faint",
+      "blue",
+      "good"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Made-up example: 120 headlines on one topic.",
+      "values": [
+       120,
+       0,
+       0
+      ]
+     },
+     {
+      "caption": "Headlines on the same day count once: 45 event days.",
+      "values": [
+       120,
+       45,
+       0
+      ]
+     },
+     {
+      "caption": "Keep only events at least 20 trading days apart: 28.",
+      "values": [
+       120,
+       45,
+       28
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Search the news archive",
+     "href": "#/news/archive",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Five headlines about the same rate decision on one day count as:",
+     "options": [
+      "No events",
+      "Five events",
+      "One event"
+     ],
+     "answer": 2,
+     "why": "Days are counted, not headlines."
+    },
+    {
+     "q": "Below how many events does Parity give no p-value?",
+     "options": [
+      "5",
+      "20",
+      "100"
+     ],
+     "answer": 0,
+     "why": "Under 5 there is no p-value; under 20 there is a warning."
+    }
+   ]
+  },
+  {
+   "id": "many-topics",
+   "title": "Many topics, many false hits",
+   "minutes": 2,
+   "body": [
+    "Parity precomputes studies for 21 topics and 13 assets: 273 pairs. Even if no news mattered at all, some pairs would look strong by chance.",
+    "The picture shows that: scores for 273 pairs with no real effect, and the best one still looks impressive. It is the same trap as testing many strategies.",
+    "So rankings report a q-value, the p-value corrected for how many pairs were tried, and are sorted by it, never by the size of the move. Every result describes the past. None is a prediction."
+   ],
+   "terms": [
+    "data-snooping",
+    "p-value",
+    "deflated-sharpe-ratio"
+   ],
+   "visual": {
+    "kind": "maxof",
+    "alt": "A histogram of pattern strength for 273 topic and asset pairs with no real effect. The best one, marked in yellow, still reaches near 3; a red line shows about where luck alone reaches.",
+    "params": {
+     "sd": 1,
+     "range": 4,
+     "max": 273,
+     "seed": 8,
+     "xLabel": "Strength of the pattern (t-statistic)",
+     "note": "Every bar counts topic and asset pairs with no real effect"
+    },
+    "steps": [
+     {
+      "caption": "One topic and asset pair with no real effect.",
+      "n": 1
+     },
+     {
+      "caption": "All 273 pairs. The best looks strong by chance.",
+      "n": 273
+     },
+     {
+      "caption": "The red line: about where luck alone reaches with that many pairs.",
+      "n": 273,
+      "hurdle": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "News impact search, ranked by q-value",
+     "href": "#/news/impact",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why can't you rank topics by the biggest average move?",
+     "options": [
+      "It is too slow",
+      "It rewards topics with few events and lucky outliers",
+      "Big moves are always real"
+     ],
+     "answer": 1,
+     "why": "Thin topics with one dramatic event would top the list."
+    },
+    {
+     "q": "What does a q-value correct for?",
+     "options": [
+      "Currency conversion",
+      "Trading costs",
+      "How many pairs were tried"
+     ],
+     "answer": 2,
+     "why": "It is the p-value adjusted for the number of tests."
+    }
+   ]
+  }
+ ]
+}

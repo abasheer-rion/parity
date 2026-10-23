@@ -143,8 +143,11 @@ Sources, scrapers, caching and data quality.
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -390,6 +393,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md)
+- [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [EXP-0006: Rerun of all sixteen strategies with corrected scoring](experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [RES-0001: Reading list of papers, books and courses](research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
@@ -400,6 +404,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0009: Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [RES-0015: Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [RES-0016: Lesser-known strategies and what firms have published](research/0016-lesser-known-strategies-and-what-firms-have-published.md)
 - [RES-0017: Combining many strategies, the evidence and the ingredient list](research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
@@ -543,6 +548,13 @@ Other people's code, bots and published results.
 - [ALG-0071: Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
 
+## private-markets
+
+Private equity, venture, private credit, real estate and infrastructure, and how individuals reach them.
+
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+
 ## process
 
 How the team works together.
@@ -578,6 +590,7 @@ How the team works together.
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 - [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
+- [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 
 ## strategy
 
@@ -591,6 +604,7 @@ A specific trading idea or its implementation.
 - [HYP-0003: Commodity currencies catch up to their commodity](hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md)
+- [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
@@ -710,6 +724,10 @@ The dashboard.
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [DEC-0030: Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
+- [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
