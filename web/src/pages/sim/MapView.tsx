@@ -23,9 +23,11 @@ const STEP_WORD: Record<StepSize, string> = { day: "day", week: "week", month: "
 const STEP_DAYS: Record<StepSize, number> = { day: 1.4, week: 7, month: 30.4 };
 export const IMPACT_SCALE: Record<Horizon, number> = { "1d": 1.5, "1w": 3, "1m": 5, "3m": 8 };
 
-export function MapView({ data, win, setWin, onScenario, onPaths }: {
+export function MapView({ data, win, setWin, onScenario, onPaths, onPick }: {
   data: WorldData; win: string; setWin: (w: string) => void;
   onScenario: (patch: Partial<Spec>) => void; onPaths: (keys: string[]) => void;
+  /** Told the currency of a country or row the person picks (the terminal links it). */
+  onPick?: (code: string) => void;
 }) {
   const [step, setStep] = useState<StepSize>("week");
   const [measure, setMeasure] = useState<Measure>("since");
@@ -111,7 +113,7 @@ export function MapView({ data, win, setWin, onScenario, onPaths }: {
     );
   };
 
-  const pick = (code: string) => setPicked((p) => (p?.code === code && !p.id ? null : { code }));
+  const pick = (code: string) => { onPick?.(code); setPicked((p) => (p?.code === code && !p.id ? null : { code })); };
   const repId = picked?.id ?? (picked ? Object.keys(names).find((id) => currencyOf(id) === picked.code && (picked.code !== "USD" || id === "840")) : undefined);
   const bands = useMemo(() => crisisBands(dates), [dates]);
 
@@ -140,7 +142,7 @@ export function MapView({ data, win, setWin, onScenario, onPaths }: {
           <WorldMap label={`World map, ${fmt.date(date)}`} fill={(id) => divergingFill(valueOf(currencyOf(id)), scale)} card={card}
             selected={picked?.id} outlined={outlined} producers={layers}
             legend={<MapLegend title={measure === "since" ? "Change against the dollar since the start" : measure === "step" ? `Change against the dollar this ${STEP_WORD[step]}` : "Interest rate gap with the dollar"} low={signed(-scale, 0, unit)} high={signed(scale, 0, unit)} />}
-            onSelect={(id, name) => { const code = currencyOf(id); setPicked((p) => (p?.id === id ? null : code ? { code, id, name } : null)); }} />
+            onSelect={(id, name) => { const code = currencyOf(id); if (code) onPick?.(code); setPicked((p) => (p?.id === id ? null : code ? { code, id, name } : null)); }} />
         </div>
       }
       board={<Board rows={rows} name="Currency" headers={[measure === "carry" ? "Carry" : "Value", "Since start", "1 yr"]} picked={picked?.code} onPick={pick} playing={pb.playing}

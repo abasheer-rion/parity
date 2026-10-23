@@ -76,4 +76,5 @@ Everything still replays or reshuffles history. Nothing in it is a forecast. The
 ## Referenced by
 
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
+- [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 <!-- backlinks:end -->

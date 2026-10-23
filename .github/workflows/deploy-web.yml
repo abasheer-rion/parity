@@ -9,15 +9,16 @@
 # by the same hourly job and exported into dist/data/markets (parity markets export).
 # SEO (DEC-0023): the build writes the public Learn, Ideas and Notes pages and sitemap.xml;
 # after a production deploy, IndexNow is told which public URLs changed.
+# Parity Terminal's files go into dist/data/terminal (parity terminal export).
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -84,6 +85,10 @@ jobs:
       - name: Copy markets data into the site (crypto, perps, ETFs, new filings)
         continue-on-error: true
         run: parity markets export dist/data
+      - name: Parity Terminal data (every series the site may show, plus crypto)
+        continue-on-error: true  # the terminal explains itself when its files are missing
+        # After the markets step so CoinGecko crypto comes from dist/data/markets/crypto.json.
+        run: parity terminal export --out dist/data --markets dist/data
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
         run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
