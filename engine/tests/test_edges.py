@@ -92,7 +92,6 @@ def test_xfx_positions_earn_the_policy_rate_gap():
 
 def test_tbill_cash_scores_zero_excess_and_the_cost_floor_holds():
     strat = get("stocks_pre_fomc")
-    assert strat.cash_rate == "rate.TBILL3M"
     panel = _panel()
     res = run(strat, panel, BacktestConfig(start=None, cost_bps=0.0))
     ex = res.excess_returns

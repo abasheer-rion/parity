@@ -419,8 +419,7 @@ def _timing_strategy(spec: dict) -> B.TimingBook:
     cls = type("SearchTiming", (B.TimingBook,), {
         "name": "search", "summary": "", "invested": invested, "extra": extra,
         "fallback": "bond.TR10" if spec["fallback"] == "bond" else B.CASH,
-        "leverage": spec["leverage"], "max_gross": spec["leverage"],
-        "cash_rate": S.TBILL if wider else "rate.USD"})
+        "leverage": spec["leverage"], "max_gross": spec["leverage"]})
     return cls(rebalance=spec["rebalance"])
 
 

@@ -4,7 +4,7 @@ title: Data sources
 type: reference
 status: current
 created: 2026-10-20
-updated: 2026-10-22
+updated: 2026-10-23
 authors: [ayan]
 tags: [commodities, data, fx]
 related: [EXP-0001, REF-0001, REF-0015]
@@ -25,7 +25,7 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | Key | Source | Code | Frequency | Since | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `fx.EUR` to `fx.SEK` (9 G10 currencies) | FRED, Federal Reserve H.10 | `DEXUSEU`, `DEXJPUS`, and so on | Daily | 1971 (EUR 1999) | Noon New York buying rates. Stored as USD per unit of foreign currency. |
-| `rate.<CCY>` (10 currencies) | FRED, OECD | `IR3TIB01<CC>M156N` | Monthly | Varies | 3-month interbank rate. Euro area and UK stop at 2026-01 at the time of writing. |
+| `rate.<CCY>` (10 currencies) | FRED, OECD | `IR3TIB01<CC>M156N` | Monthly | Varies | 3-month interbank rate, monthly average. Signals see it 5 business days after the month ends; carry on positions accrues at the month's own rate ([EXP-0005](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)). Euro area and UK stop at 2026-01 at the time of writing. |
 | `cmd.WTI`, `cmd.BRENT` | FRED, EIA | `DCOILWTICO`, `DCOILBRENTEU` | Daily | 1986, 1987 | WTI was negative on 2020-04-20. |
 | `cmd.HH_GAS` | FRED, EIA | `DHHNGSP` | Daily | 1997 | Henry Hub natural gas. |
 | `cmd.COPPER` | FRED, IMF | `PCOPPUSDM` | Monthly | 1992 | Too slow for daily signals. |
@@ -56,12 +56,13 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `risk.NFCI`, `risk.STLFSI`, `macro.CLAIMS`, `macro.WEI` | FRED (Chicago Fed, St. Louis Fed, Labor Department, NY Fed) | `NFCI`, `STLFSI4`, `ICSA`, `WEI` | Weekly | 1967 to 2008 | Optional. Moved to their release day. |
 | `cmd.ALUMINIUM`, `NICKEL`, `IRON_ORE`, `WHEAT`, `CORN`, `SOYBEANS` | FRED, IMF | `PALUMUSDM` and so on | Monthly | 1992 | Optional. Used a week after the month ends, like copper. Not shown on the site, because the IMF asks for permission before commercial reuse. |
 | `fx.CZK`, `HUF`, `IDR`, `ILS`, `PHP`, `PLN`, `RON`, `RUB`, `TRY` (the EM currencies H.10 lacks) | ECB euro reference rates (provider `ecb_usd`) | `<CCY>` (fetches `EXR D.USD+<CCY>.EUR.SP00.A`) | Daily | 1999 or 2000 | Turned into USD per unit through EUR/USD. Fixed at 14:15 CET. RUB stops on 2022-03-01. BRL has two moves of about 15% in February 2000 that look like data errors (before any test window). ([RES-0013](../research/0013-emerging-market-currencies.md)) |
-| `rate.<CCY>` for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB, ZAR | OECD SDMX API | `IR3TIB` | Monthly | 1980s to 1997 | 3-month interbank rate. Dated at month end, unlike the G10 copies from FRED, so it is never used before the month is over. |
+| `rate.<CCY>` for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB, ZAR | OECD SDMX API | `IR3TIB` | Monthly | 1980s to 1997 | 3-month interbank rate, monthly average. Used from 5 business days after the month ends, like the G10 copies from FRED. |
 | `rate.<CCY>` for BRL, IDR, INR, MYR, PHP, THB, TRY | BIS SDMX API, the same series as `policy.<CCY>` | `WS_CBPOL/D.<area>` | Daily, held until changed | 1986 to 2005 | Central bank policy rates, used where the OECD has no full series. Not what a forward pays. |
 | `curve.<X><n>`: CL, HO, RB, NG, contracts 1 to 3 | EIA copies of NYMEX settlements (provider `eia_web`, no key) | `RCLC1`, `EER_EPD2F_PE1_Y35NY_DPG`, and so on | Daily | 1980 to 2005 | **End on 2024-04-05**: the EIA stopped publishing them. Holidays are blank, and single contracts have gaps (heating oil contract 1 misses weeks in 2003). |
 | `fut.<X>`, `carry.<X>` | Built from `curve.*` (`engine/src/parity/data/futures.py`) | | Daily | 1985 (CL), 1994 (HO), 2005 (RB), 1998 (NG) | Rolled excess return index holding contract 2, rolled the day after each expiry by the exchange rule; curve slope 12 * ln(C2 / C3). Gas starts in 1998 because older gas expiries do not follow today's rule. |
 | `risk.OVX` | FRED, CBOE | `OVXCLS` | Daily | 2007 | Crude oil implied volatility from options on USO. |
 | `vrp.OIL` | Built from `risk.OVX` and `fut.CL` | | Daily | 2007 to 2024-04 | Marked short 30-day variance swap, re-struck monthly. No swap costs. |
+| `pm.<NAME>` (9) | FRED (Federal Reserve Z.1 and H.8, BIS, FHFA, loan officer survey) | `BOGZ1FL075035503Q`, `COMREPUSQ159N`, `USSTHPI`, `CREACBW027SBOG`, `BUSLOANS`, `LNFACBW027SBOG`, `DRTSCILM`, `SUBLPDRCSN`, `DRCRELEXFACBS` | Quarterly, monthly, weekly | 1945 to 2015 | Optional. Private markets proxies: property prices, bank lending and loan standards ([DEC-0029](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)). Quarterly values wait for the quarter's end plus their release lag. The Fed's commercial property index is chained to CoStar data, so it is not shown on the site. |
 
 ## FRED
 
@@ -90,7 +91,7 @@ The chart endpoint is unofficial and its terms forbid automated collection, so s
 
 ## Markets data for the product
 
-Crypto prices, perpetual futures, US ETFs and new fund filings for the product's Markets pages are kept apart from the research panel above. They live under `engine/src/parity/markets/` and `parity markets fetch`. Sources are CoinGecko, Hyperliquid's public API and SEC EDGAR, all free and optional. Their terms, and the exchanges we turned down, are in [REF-0014](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) and [DEC-0018](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md).
+Crypto prices, perpetual futures, US ETFs and new fund filings for the product's Markets pages are kept apart from the research panel above. They live under `engine/src/parity/markets/` and `parity markets fetch`. Sources are CoinGecko, Hyperliquid's public API and SEC EDGAR, all free and optional. Private markets data from EDGAR (Form D counts and BDC net asset values) lives there too ([DEC-0029](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)). Their terms, and the exchanges we turned down, are in [REF-0014](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) and [DEC-0018](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md).
 
 Add a source by adding a line to the catalog, a downloader if needed, a test for its parser, and a row here.
 
@@ -104,6 +105,7 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 - [DEC-0027: New edge families from the wider data](../decisions/0027-new-edge-families-from-the-wider-data.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
+- [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0001: Architecture](0001-architecture.md)

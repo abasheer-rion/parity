@@ -88,6 +88,16 @@ export function ResearchHome({ report }: { report: Report }) {
           ) : <p className="muted small">The search has not sent results yet.</p>}
         </Reveal>
 
+        <Reveal as="section" delay={120} className={`pcard ${LIFT}`}>
+          <div className="pcard-head"><h2>Learn the methods</h2><a href="/app/#/academy">Academy</a></div>
+          <p className="muted small">Short courses with moving pictures, on the product side. Start with the ones behind this research:</p>
+          <ul className="rlist">
+            <li><a href="/app/#/academy/luck-vs-skill">Luck vs skill: multiple testing, deflated Sharpe, the gauntlet</a></li>
+            <li><a href="/app/#/academy/reading-a-backtest">Reading a backtest</a></li>
+            <li><a href="/app/#/academy/news-and-event-studies">Reading news impact and event studies</a></li>
+          </ul>
+        </Reveal>
+
         <Reveal as="section" delay={150} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Open hypotheses</h2><a href="#/docs/type/hypothesis">All</a></div>
           <ul className="rlist">

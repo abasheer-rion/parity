@@ -51,6 +51,8 @@ TERMS: dict[str, tuple[str, str, bool]] = {
     "fred.stlfed": ("FRED (St. Louis Fed)", "Free to reuse with the source named", True),
     "fred.nyfed": ("FRED (New York Fed)", "Free to reuse with the source named", True),
     "fred.labor": ("FRED (US Labor Department)", "Public domain, US government data", True),
+    "fred.fhfa": ("FRED (Federal Housing Finance Agency)", "Public domain, US government "
+                  "data", True),
     "fred.imf": ("FRED (IMF)", "The IMF asks permission before commercial reuse, so not "
                  "shown", False),
     "fred.sp": ("FRED (S&P Dow Jones Indices)", "The owner forbids redistribution, so not "
@@ -85,6 +87,7 @@ _FRED_AGENCY = {
     "credit": "fred.treasury", "usd": "fred.fed", "money": "fred.fed",
     "risk.NFCI": "fred.chicagofed", "risk.STLFSI": "fred.stlfed",
     "macro.CLAIMS": "fred.labor", "macro.WEI": "fred.nyfed",
+    "pm": "fred.fed", "pm.CRE_PRICE_YOY": "fred.bis", "pm.HOUSE_FHFA": "fred.fhfa",
 }
 
 #: Series left out even though their source is allowed, with the reason.
@@ -133,6 +136,7 @@ GROUPS = [
     ("perps", "Perpetual futures", "crypto"),
     ("positioning", "Positioning (CFTC)", "positioning"),
     ("macro", "Macro", "macro"),
+    ("private", "Private markets proxies", "macro"),
 ]
 _GROUP_CLASS = {g: c for g, _, c in GROUPS}
 
@@ -217,6 +221,23 @@ _FIXED = {
     "risk.STLFSI": ("St. Louis Fed financial stress", "STLFSI", "index", "level", "macro"),
     "macro.CLAIMS": ("US initial jobless claims", "CLAIMS", "claims", "level", "macro"),
     "macro.WEI": ("NY Fed weekly economic index", "WEI", "index", "level", "macro"),
+    "pm.CRE_PRICE": ("US commercial property prices (Fed Z.1)", "CREPX", "index", "price",
+                     "private"),
+    "pm.CRE_PRICE_YOY": ("US commercial property prices, change on a year (BIS)", "CREYOY",
+                         "%", "level", "private"),
+    "pm.HOUSE_FHFA": ("US house prices, all transactions (FHFA)", "FHFAHPI", "index",
+                      "price", "private"),
+    "pm.LOANS_CRE": ("US bank commercial property loans", "LOANCRE", "billion USD", "level",
+                     "private"),
+    "pm.LOANS_CI": ("US bank business loans", "LOANCI", "billion USD", "level", "private"),
+    "pm.LOANS_NDFI": ("US bank loans to nonbank lenders", "LOANNDFI", "billion USD",
+                      "level", "private"),
+    "pm.SLOOS_CI": ("Banks tightening business loan standards", "SLOOSCI", "net %", "level",
+                    "private"),
+    "pm.SLOOS_CRE": ("Banks tightening property loan standards", "SLOOSCRE", "net %",
+                     "level", "private"),
+    "pm.DELINQ_CRE": ("Commercial property loan delinquency", "DELQCRE", "%", "level",
+                      "private"),
     "eia.CRUDE_STOCKS": ("US crude oil stocks", "CRUDESTK", "thousand barrels", "level",
                          "commodities"),
     "eia.CUSHING": ("Crude stocks at Cushing", "CUSHING", "thousand barrels", "level",

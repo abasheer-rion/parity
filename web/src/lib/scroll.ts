@@ -18,6 +18,11 @@ export function startSmoothScroll() {
     respectReducedMotion: true,
     prevent: (node) => !!node.closest?.("[data-lenis-prevent], .pop, .palette, .table-wrap, .side, .doc-rail, .doc-nav"),
   });
+  // A dialog or drawer from the UI library holds the page still while it is open.
+  window.addEventListener("ui:scroll-lock", (e) => {
+    if ((e as CustomEvent<boolean>).detail) lenis?.stop();
+    else lenis?.start();
+  });
 }
 
 /** Jump without easing (route changes), or glide (in-page links). */
