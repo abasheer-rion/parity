@@ -88,20 +88,18 @@ button.quiet { color: var(--text-2); }
 .term-link { color: inherit; text-decoration: underline dotted var(--muted); text-underline-offset: 3px; }
 .term-link:hover { color: var(--link); }
 .learn-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
-.learn-bar input { flex: 1; min-width: 200px; }
+.learn-bar .ui-search { flex: 1; min-width: 200px; }
 .learn-group { margin-bottom: 24px; }
 .learn-group h2 { margin-bottom: 10px; }
 .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-.term { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+/* 432 cards: the browser skips drawing the ones far off screen (content-visibility),
+   keeping a remembered size for each so the scroll bar and the page never jump. */
+.term { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; content-visibility: auto; contain-intrinsic-size: auto 190px; }
 .term.focused { border-color: var(--series-1); box-shadow: 0 0 0 2px color-mix(in srgb, var(--series-1) 25%, transparent); }
 .term header { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
 .term h3 { font-size: 15px; margin: 0; }
 .term p { margin: 8px 0 0; }
 .term .related { font-size: 12px; color: var(--muted); }
-.tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-.tabs button { border: 0; border-radius: 0; padding: 3px 10px; font-size: 12px; color: var(--text-2); background: transparent; }
-.tabs button + button { border-left: 1px solid var(--border); }
-.tabs button.on { background: var(--bg); color: var(--text); font-weight: 600; }
 .verdict { font-size: 15px; font-weight: 600; margin: 4px 0 12px; }
 .verdict.good { color: var(--good); }
 .gauntlet-group h3 { font-size: 13px; margin: 12px 0 4px; }
@@ -283,7 +281,6 @@ select option { background: var(--surface-solid); color: var(--text-body); }
 :where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 1px; box-shadow: none; }
 input:focus, select:focus { outline: none; border-color: var(--ds-border-input-focused); }
 .chip.on, .tag.on { border-color: transparent; background: var(--accent-soft); color: var(--text); }
-.tabs button.on { background: var(--surface); }
 .doc-nav li a.active { background: var(--ds-background-secondary); box-shadow: inset 2px 0 0 var(--accent); }
 .palette li.on a { background: var(--ds-background-secondary); }
 .term.focused { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
@@ -301,7 +298,7 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 
 /* Sidebar */
 .side {
-  position: sticky; top: 0; height: 100vh; overflow-y: auto; overscroll-behavior: contain;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-gutter: stable;
   background: var(--side-bg); border-right: 1px solid var(--border);
   display: flex; flex-direction: column;
 }
@@ -317,8 +314,8 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .seg a { position: relative; flex: auto; min-width: 0; height: 28px; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 2px; border: 1px solid transparent; border-radius: var(--radius-md); font-size: var(--fs-sm); line-height: 20px; letter-spacing: .1px; color: var(--text-2); text-decoration: none; transition: background-color .16s ease-out, border-color .16s ease-out, box-shadow .16s ease-out, color .16s ease-out; }
 .seg a:hover { background: var(--hover); color: var(--text-body); text-decoration: none; }
 .seg a.on { background: var(--ds-background-default); border-color: var(--ds-border-input-emphasized); box-shadow: 0 1px 2px var(--ds-neutral-magic-600-alpha-3); color: var(--ds-text-title); }
-.seg a .icon { opacity: 0; width: 0; transition: opacity .16s ease-out, width .16s ease-out; }
-.seg a.on .icon { opacity: 1; width: 13px; }
+.seg a .icon { opacity: 0; width: 13px; transition: opacity .16s ease-out; }
+.seg a.on .icon { opacity: 1; }
 .seg a:not(.on) + a:not(.on)::before { content: ""; position: absolute; left: -2px; top: 50%; translate: 0 -50%; height: 12px; border-left: 1px solid var(--border-2); }
 
 .nav-wrap { display: flex; flex-direction: column; gap: 12px; padding: 8px 0 40px; }
@@ -337,9 +334,9 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .side-item.active:hover { background: var(--ds-background-secondary-hovered); }
 .side-item .count { font-size: var(--fs-xs); line-height: 20px; letter-spacing: .2px; font-weight: var(--fw-medium); color: var(--muted); }
 .side-item .new { height: 20px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 4px; background: var(--ds-background-highlight); color: var(--text-body); font-size: var(--fs-xs); }
-.side-children { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .35s var(--ease-spring), opacity .35s ease-out; }
-.side-children.open { grid-template-rows: 1fr; opacity: 1; }
-.side-children > div { min-height: 0; overflow: hidden; display: flex; flex-direction: column; padding-top: 2px; }
+/* Sidebar groups open with the library's Collapse (ui.css); only the inner layout is set here. */
+.side-children > .ui-collapse-inner { display: flex; flex-direction: column; }
+.side-children[data-open] > .ui-collapse-inner { padding-top: 2px; }
 .side-children a { position: relative; display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 4px 0 2px; color: var(--text-2); text-decoration: none; font-size: var(--fs-md); transition: color .2s ease-out; }
 .side-children a::before { content: ""; width: 24px; height: 34px; flex: none; background: linear-gradient(var(--border-2), var(--border-2)) center / 2px 100% no-repeat; }
 .side-children a.on::before { background: linear-gradient(var(--border-2), var(--border-2)) center / 2px 100% no-repeat, linear-gradient(var(--accent), var(--accent)) center / 2px 20px no-repeat; }

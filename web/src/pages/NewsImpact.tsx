@@ -3,7 +3,7 @@
 // Ranked by evidence (q-values against random days), never by the size of a move.
 import { useEffect, useMemo, useState } from "react";
 import "./NewsImpact.css";
-import { Badge, Card, DataTable, EmptyState, FilterBar, SearchInput, Segmented, Select, type Column } from "../ui";
+import { Badge, Card, DataTable, EmptyState, FilterBar, PageSkeleton, SearchInput, Segmented, Select, SkeletonTable, type Column } from "../ui";
 import { moveText, zText, zWord, type Unit } from "../lib/news";
 import {
   evidenceWord, loadArchiveIndex, loadArchiveYear, loadImpact,
@@ -64,7 +64,7 @@ export function Archive() {
   }, [items, q, topic, asset, src]);
 
   if (error) return <EmptyState title="No archive yet">{error}</EmptyState>;
-  if (!index) return <p className="muted">Loading the archive...</p>;
+  if (!index) return <PageSkeleton parts={["table"]} label="Loading the archive" />;
   const topicLabel = (id: string) => index.topics.find((t) => t.id === id)?.label ?? id;
   const srcName = (id: string) => index.sources.find((s) => s.id === id)?.name ?? id;
   const yearOpts: [string, string][] = [["", "Default"], ...years.map((y) => [String(y), String(y)] as [string, string])];
@@ -86,7 +86,7 @@ export function Archive() {
         <Select label="Asset" value={asset} onChange={setAsset} options={[["", "Any asset"], ...assets.map((a) => [a, a] as [string, string])]} />
         <Select label="Source" value={src} onChange={setSrc} options={[["", "Any source"], ...index.sources.filter((s) => s.display === "yes").map((s) => [s.id, s.name] as [string, string])]} />
       </FilterBar>
-      {loading ? <p className="muted">Loading years...</p> : (
+      {loading ? <SkeletonTable rows={8} label="Loading years" /> : (
         <>
           <DataTable rows={rows.slice(0, shown)} columns={cols} rowKey={(a) => a.id} dense empty="No headlines match. Widen the years or clear a filter." />
           {rows.length > shown ? <button className="ui-btn news-more" onClick={() => setShown(shown + PAGE)}>Show {Math.min(PAGE, rows.length - shown)} more of {rows.length - shown}</button> : null}
@@ -111,7 +111,7 @@ export function Impact() {
   const [h, setH] = useState<StudyHorizon>("1d");
   useEffect(() => { loadImpact().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
   if (error) return <EmptyState title="No impact data yet">{error}</EmptyState>;
-  if (!doc) return <p className="muted">Loading the impact engine's results...</p>;
+  if (!doc) return <PageSkeleton parts={["chart", "table"]} label="Loading the impact engine's results" />;
   if (!doc.assets.length) return <EmptyState title="No impact data yet">The archive or the prices are empty on this build.</EmptyState>;
   const a = doc.assets.find((x) => x.key === asset) ?? doc.assets[0];
   const assetOpts = doc.assets.map((x) => [x.key, x.label] as [string, string]);
