@@ -23,7 +23,7 @@ Do emerging market carry, a passive EM basket and EM momentum each pass at least
 ## Setup
 
 - 17 EM currencies: BRL, CNY, INR, KRW, MXN, MYR, THB and ZAR from the Fed H.10 series the strategy factory already loads ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)), the other nine from ECB reference rates turned into USD. All of them: BRL, CNY, CZK, HUF, IDR, ILS, INR, KRW, MXN, MYR, PHP, PLN, RON, RUB (to 1 March 2022), THB, TRY, ZAR.
-- Interest rates: OECD 3-month interbank rates dated at month end for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB and ZAR; BIS central bank policy rates for BRL, IDR, INR, MYR, PHP, THB and TRY.
+- Interest rates: OECD 3-month interbank rates (monthly averages, used from 5 business days after the month ends, as main does for the G10 since EXP-0005) for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB and ZAR; BIS central bank policy rates for BRL, IDR, INR, MYR, PHP, THB and TRY.
 - `em_fx_carry`: top third by rate gap to USD, gap at least 1 point, equal weight, monthly. `em_fx_basket`: all currencies equal weight. `em_fx_momentum`: top third minus bottom third by past 63-day excess return.
 - 10 bp per unit traded (about ten times our G10 cost); the A4 test doubles it.
 - No performance number was computed before registering; only data coverage and missing values were checked. After registration, [DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md) ran a long-short policy-rate carry book on 27 currencies that holds 15 of these 17 (Sharpe 0.75 from 1999). `em_fx_carry` results should be read with that in mind; the basket and momentum rules are unaffected.
@@ -38,7 +38,7 @@ Not run yet. After the registration is merged to `main`, start it from GitHub Ac
 - **Rates are not forward rates.** Policy and interbank rates differ from what forwards pay, most for currencies with capital controls (INR, KRW, BRL, CNY). Carry for those is approximate.
 - **Mixed fixing times.** ECB rates are fixed at 14:15 CET and H.10 rates at noon in New York, neither at the US close used for the benchmark. This adds noise to daily comparisons; the strategies trade monthly.
 - **Currency list chosen today.** We include currencies the ECB still quotes; a currency that stopped being quoted before 2010 is missing (survivorship).
-- **The OECD monthly rates for the G10 are dated at the first of the month** (audit finding M3). The new EM series are dated at month end to avoid that look-ahead, so EM and USD rates are dated differently.
+- **OECD rates are published after the month ends.** The G10 and EM copies of the OECD monthly averages are both used from 5 business days after the month ends, the delay main adopted in EXP-0005 (audit finding M3). Interest earned on a position uses the undelayed dates.
 
 ## What we learned
 

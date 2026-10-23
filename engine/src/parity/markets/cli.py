@@ -10,7 +10,8 @@ from . import export, sources, store
 
 
 def add_parser(sub):
-    m = sub.add_parser("markets", help="crypto, perps, ETFs and new fund filings (product side)")
+    m = sub.add_parser("markets", help="crypto, perps, ETFs, new fund filings and private "
+                       "markets (product side)")
     m.add_argument("action", choices=["fetch", "status", "export"])
     m.add_argument("out", nargs="?", help="export: output folder, e.g. web/dist/data")
     m.add_argument("--source", action="append", help="fetch: only these source ids")
@@ -36,6 +37,9 @@ def _fetch(args) -> int:
         if src.id == "sec-filings":
             etfs = store.load("etfs")
             kwargs["fund_ciks"] = set(etfs["cik"].astype(str)) if not etfs.empty else set()
+        if src.id == "sec-formd":
+            have = store.load("formd")
+            kwargs["have"] = set(have["quarter"]) if not have.empty else set()
         try:
             tables = sources.fetch(src, **kwargs)
             rows = {}

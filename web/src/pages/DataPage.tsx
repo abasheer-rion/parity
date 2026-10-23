@@ -7,6 +7,8 @@ import type { Report } from "../lib/types";
 const STALE_DAILY = 7;
 const STALE_WEEKLY = 16;
 const STALE_MONTHLY = 75;
+// Quarterly series (private markets proxies) come out two or three months after the quarter.
+const STALE_QUARTERLY = 200;
 
 export function DataPage({ report }: { report: Report }) {
   const fetched = report.coverage.fetched_at;
@@ -14,7 +16,7 @@ export function DataPage({ report }: { report: Report }) {
   const rows = report.coverage.series.map((s) => {
     const lag = s.last ? Math.floor((ref - new Date(s.last).getTime()) / 86_400_000) : null;
     const monthly = s.frequency === "M" || s.key.startsWith("rate.") || s.key.startsWith("reer.") || ["cmd.COPPER", "eq.US_MKT"].includes(s.key);
-    const limit = monthly ? STALE_MONTHLY : s.frequency === "W" ? STALE_WEEKLY : STALE_DAILY;
+    const limit = s.frequency === "Q" ? STALE_QUARTERLY : monthly ? STALE_MONTHLY : s.frequency === "W" ? STALE_WEEKLY : STALE_DAILY;
     const stale = !s.ok || lag == null || lag > limit;
     return { ...s, lag, stale };
   });

@@ -1,0 +1,443 @@
+{
+ "id": "rates-and-yield-curves",
+ "order": 5,
+ "level": "Core",
+ "title": "Rates and yield curves",
+ "summary": "What an interest rate is, how the yield curve shows rates for every loan length, what steepening, flattening and inversion mean, and why bond prices fall when yields rise.",
+ "docs": [
+  "DEC-0027"
+ ],
+ "lessons": [
+  {
+   "id": "price-of-money",
+   "title": "The price of money",
+   "minutes": 2,
+   "body": [
+    "An **interest rate** is the price of borrowing money for a time. A **central bank** sets the main short-term rate for its currency, like the Federal Reserve in the US, whose rate committee meets eight times a year.",
+    "Other rates follow it. Parity uses the 3-month rate banks charge each other for each currency, which tracks the central bank's rate closely.",
+    "Rates matter beyond savings: they set the carry on currencies, the cost of leverage, and how much future money is worth today."
+   ],
+   "terms": [
+    "interest-rate",
+    "central-bank",
+    "fomc",
+    "risk-free-rate"
+   ],
+   "visual": {
+    "kind": "growth",
+    "alt": "Two lines show $100 growing for 10 years at 2% and at 5% a year, ending at about $122 and $163.",
+    "params": {
+     "years": 10,
+     "start": 100,
+     "series": [
+      {
+       "label": "2%",
+       "rate": 0.02
+      },
+      {
+       "label": "5%",
+       "rate": 0.05
+      }
+     ]
+    },
+    "steps": [
+     {
+      "caption": "$100 saved at 2% and at 5% a year.",
+      "reveal": 0.2
+     },
+     {
+      "caption": "The gap widens every year.",
+      "reveal": 0.6
+     },
+     {
+      "caption": "After 10 years: about $122 against $163.",
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Interest rate in the glossary",
+     "href": "#/learn/interest-rate",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Who sets the main short-term interest rate for a currency?",
+     "options": [
+      "Commercial banks alone",
+      "Stock exchanges",
+      "The central bank"
+     ],
+     "answer": 2,
+     "why": "The central bank sets the policy rate; other short-term rates follow it."
+    },
+    {
+     "q": "How often does the US Federal Reserve's rate committee meet on schedule?",
+     "options": [
+      "Eight times a year",
+      "Once a year",
+      "Every week"
+     ],
+     "answer": 0,
+     "why": "The FOMC has eight scheduled meetings a year."
+    }
+   ]
+  },
+  {
+   "id": "the-curve",
+   "title": "The yield curve",
+   "minutes": 2,
+   "body": [
+    "Lenders usually want more for lending longer. The **yield curve** plots the yield on government bonds against how long each loan lasts: three months, two years, ten years, thirty years.",
+    "Most of the time it slopes up: long loans pay more than short ones, partly to make up for tying money up and for the risk that rates or inflation change. That extra is called the term premium.",
+    "The curve moves every day. Short yields mostly follow the central bank. Long yields reflect what markets expect over many years."
+   ],
+   "terms": [
+    "interest-rate",
+    "risk-premium"
+   ],
+   "visual": {
+    "kind": "curve",
+    "alt": "Five dots for loan lengths from 3 months to 30 years. First all yield 3 percent, a flat line. Then the line tilts up, from 3 percent at 3 months to 4.6 percent at 30 years.",
+    "params": {
+     "labels": [
+      "3m",
+      "2y",
+      "5y",
+      "10y",
+      "30y"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "If every loan length paid the same, the curve would be flat.",
+      "yields": [
+       3.0,
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "label": "Flat"
+     },
+     {
+      "caption": "Usually longer loans pay more. The curve slopes up.",
+      "yields": [
+       3.0,
+       3.4,
+       3.8,
+       4.2,
+       4.6
+      ],
+      "label": "Normal: slopes up"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "New strategies on the yield curve",
+     "href": "#/doc/DEC-0027",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does the yield curve plot?",
+     "options": [
+      "Stock prices over time",
+      "Bond yields against loan length",
+      "Inflation against growth"
+     ],
+     "answer": 1,
+     "why": "Each point is the yield for one maturity, from months to decades."
+    },
+    {
+     "q": "Which way does the curve usually slope?",
+     "options": [
+      "Down",
+      "It is always flat",
+      "Up: longer loans pay more"
+     ],
+     "answer": 2,
+     "why": "Lenders usually want extra for lending longer."
+    }
+   ]
+  },
+  {
+   "id": "twists",
+   "title": "Steepening and flattening",
+   "minutes": 2,
+   "body": [
+    "The curve changes shape, not just level. When the gap between long and short yields widens, it is **steepening**. When the gap narrows, it is **flattening**.",
+    "A common cause of steepening is a central bank cutting short rates while long rates stay put. Flattening often comes when the central bank raises short rates faster than long rates move.",
+    "Parity's strategies on the curve look at its slope compared with its usual level."
+   ],
+   "terms": [
+    "interest-rate",
+    "regime"
+   ],
+   "visual": {
+    "kind": "curve",
+    "alt": "A normal upward curve, shown dashed for reference, twists: first steeper as short yields fall, then flatter as short yields rise toward long ones.",
+    "params": {
+     "labels": [
+      "3m",
+      "2y",
+      "5y",
+      "10y",
+      "30y"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A normal curve. The dashed copy stays as a reference.",
+      "yields": [
+       3.0,
+       3.4,
+       3.8,
+       4.2,
+       4.6
+      ],
+      "ghost": 1,
+      "label": "Normal"
+     },
+     {
+      "caption": "Short yields fall while long ones hold: the curve steepens.",
+      "yields": [
+       1.5,
+       2.3,
+       3.2,
+       4.0,
+       4.6
+      ],
+      "label": "Steepening"
+     },
+     {
+      "caption": "Short yields rise toward long ones: the curve flattens.",
+      "yields": [
+       4.2,
+       4.3,
+       4.3,
+       4.4,
+       4.6
+      ],
+      "label": "Flattening"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Parity Terminal: yield curves and rates",
+     "href": "#/sim",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "The gap between 10-year and 3-month yields widens. The curve is:",
+     "options": [
+      "Steepening",
+      "Inverting",
+      "Flattening"
+     ],
+     "answer": 0,
+     "why": "A wider gap between long and short is a steeper curve."
+    },
+    {
+     "q": "A central bank raises short rates quickly while long yields barely move. What usually happens to the curve?",
+     "options": [
+      "It steepens",
+      "It flattens",
+      "Nothing"
+     ],
+     "answer": 1,
+     "why": "Short yields rise toward long ones, so the gap narrows."
+    }
+   ]
+  },
+  {
+   "id": "inversion",
+   "title": "Inversion",
+   "minutes": 2,
+   "body": [
+    "Sometimes short loans pay more than long ones. The curve slopes down at the short end and is called **inverted**.",
+    "It usually happens when the central bank has pushed short rates up and markets expect rates to come down later. Many people watch an inverted curve as a warning sign for the economy.",
+    "It is not a timing tool. The time between an inversion and whatever follows has varied a lot, and a sign that many people watch is easy to over-read."
+   ],
+   "terms": [
+    "interest-rate",
+    "central-bank",
+    "base-rate"
+   ],
+   "visual": {
+    "kind": "curve",
+    "alt": "A normal upward curve bends until 3-month yields are above 10-year yields: an inverted curve.",
+    "params": {
+     "labels": [
+      "3m",
+      "2y",
+      "5y",
+      "10y",
+      "30y"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A normal curve slopes up.",
+      "yields": [
+       3.0,
+       3.4,
+       3.8,
+       4.2,
+       4.6
+      ],
+      "ghost": 1,
+      "label": "Normal"
+     },
+     {
+      "caption": "Short rates rise as the central bank tightens.",
+      "yields": [
+       4.6,
+       4.5,
+       4.3,
+       4.3,
+       4.6
+      ],
+      "label": "Flat"
+     },
+     {
+      "caption": "Short loans now pay more than long ones: the curve is inverted.",
+      "yields": [
+       5.3,
+       4.9,
+       4.4,
+       4.3,
+       4.5
+      ],
+      "label": "Inverted"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "News impact: what followed rate hikes",
+     "href": "#/news/impact",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an inverted yield curve?",
+     "options": [
+      "All yields at zero",
+      "Long yields above short yields",
+      "Short yields above long yields"
+     ],
+     "answer": 2,
+     "why": "Inverted means the usual slope is upside down at the short end."
+    },
+    {
+     "q": "Is an inverted curve a reliable timing signal?",
+     "options": [
+      "No, the time to whatever follows has varied a lot",
+      "It has never been followed by anything",
+      "Yes, always within six months"
+     ],
+     "answer": 0,
+     "why": "It is watched as a warning, but the timing has been very uneven."
+    }
+   ]
+  },
+  {
+   "id": "bond-prices",
+   "title": "Bond prices move against yields",
+   "minutes": 3,
+   "body": [
+    "A bond pays fixed amounts. If new bonds start paying more, old ones paying less are worth less, so their price falls. Yields up, prices down. Yields down, prices up.",
+    "The picture uses a 10-year bond paying 4 dollars a year on 100. At a 4% yield it is worth 100. If yields rise to 5%, it is worth about 92. If they fall to 3%, about 109.",
+    "Longer bonds move more for the same change in yield, because more of their payments are far in the future. A **basis point**, one hundredth of a percent, is how these changes are usually counted."
+   ],
+   "terms": [
+    "basis-point",
+    "interest-rate"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bars show the price of a 10-year bond paying 4 percent a year: about 109 at a 3 percent yield, 100 at 4 percent and 92 at 5 percent.",
+    "params": {
+     "labels": [
+      "Yield 3%",
+      "Yield 4%",
+      "Yield 5%"
+     ],
+     "colors": [
+      "good",
+      "blue",
+      "bad"
+     ],
+     "unit": "$",
+     "min": 0,
+     "max": 115,
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "A 10-year bond paying 4 a year on 100 is worth 100 when yields are 4%.",
+      "values": [
+       0,
+       100,
+       0
+      ]
+     },
+     {
+      "caption": "Yields rise to 5%: its price falls to about 92.",
+      "values": [
+       0,
+       100,
+       92.3
+      ]
+     },
+     {
+      "caption": "Yields fall to 3%: its price rises to about 109.",
+      "values": [
+       108.5,
+       100,
+       92.3
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Basis point in the glossary",
+     "href": "#/learn/basis-point",
+     "space": "both"
+    }
+   ],
+   "check": [
+    {
+     "q": "Yields rise. What happens to the price of an existing bond?",
+     "options": [
+      "It rises",
+      "It falls",
+      "It stays the same"
+     ],
+     "answer": 1,
+     "why": "Its fixed payments are now worth less than what new bonds pay."
+    },
+    {
+     "q": "Which bond's price moves more when yields change?",
+     "options": [
+      "They move the same",
+      "A 2-year bond",
+      "A 30-year bond"
+     ],
+     "answer": 2,
+     "why": "More of a long bond's payments are far away, so they are more sensitive to the rate used to value them."
+    }
+   ]
+  }
+ ]
+}

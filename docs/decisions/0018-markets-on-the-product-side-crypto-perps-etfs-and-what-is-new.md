@@ -53,6 +53,7 @@ Most crypto exchanges forbid showing their data on someone else's site. We read 
 ## Referenced by
 
 - [DEC-0019: Real trading later, what it would legally take](0019-real-trading-later-what-it-would-legally-take.md)
+- [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 <!-- backlinks:end -->

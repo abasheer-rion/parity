@@ -44,7 +44,7 @@ assert set(FAC5) <= {f"factor.{k}" for k in FACTORS}
 # else a recipe passes becomes a parameter, shown in reports and open to the gauntlet.
 STRUCTURE = {"universe", "mix", "kind", "rank_on", "long_short", "long_only", "funded",
              "max_gross", "a", "b", "asset", "fallback", "leverage", "extra", "scale",
-             "only_if_trending", "driver", "summary", "min_cost_bps", "cash_rate",
+             "only_if_trending", "driver", "summary", "min_cost_bps",
              "gate_level", "follow"}
 
 

@@ -25322,6 +25322,1388 @@
         "source": "crossref",
         "doi_explicit": true
       }
+    },
+    {
+      "key": "albertus2026",
+      "type": "paper",
+      "authors": [
+        "Albertus, James F.",
+        "Denes, Matthew"
+      ],
+      "year": 2026,
+      "title": "Private Equity Fund Debt: Agency Costs and Cash Flow Management",
+      "venue": "Journal of Financial and Quantitative Analysis, 1-64",
+      "doi": "10.1017/s0022109026102890",
+      "arxiv": null,
+      "url": "https://doi.org/10.1017/s0022109026102890",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "andonov2021",
+      "type": "paper",
+      "authors": [
+        "Andonov, Aleksandar",
+        "Kräussl, Roman",
+        "Rauh, Joshua"
+      ],
+      "year": 2021,
+      "title": "Institutional Investors and Infrastructure Investing",
+      "venue": "The Review of Financial Studies 34(8), 3880-3934",
+      "doi": "10.1093/rfs/hhab048",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhab048",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "ang2013",
+      "type": "paper",
+      "authors": [
+        "Ang, Andrew",
+        "Nabar, Neil",
+        "Wald, Samuel J."
+      ],
+      "year": 2013,
+      "title": "Searching for a Common Factor in Public and Private Real Estate Returns",
+      "venue": "The Journal of Portfolio Management 39(5), 120-133",
+      "doi": "10.3905/jpm.2013.39.5.120",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jpm.2013.39.5.120",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "ang2018",
+      "type": "paper",
+      "authors": [
+        "Ang, Andrew",
+        "Chen, Bingxu",
+        "Goetzmann, William N.",
+        "Phalippou, Ludovic"
+      ],
+      "year": 2018,
+      "title": "Estimating Private Equity Returns from Limited Partner Cash Flows",
+      "venue": "The Journal of Finance 73(4), 1751-1783",
+      "doi": "10.1111/jofi.12688",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12688",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "asness2001",
+      "type": "paper",
+      "authors": [
+        "Asness, Clifford S",
+        "Krail, Robert J",
+        "Liew, John M"
+      ],
+      "year": 2001,
+      "title": "Do Hedge Funds Hedge?",
+      "venue": "The Journal of Portfolio Management 28(1), 6-19",
+      "doi": "10.3905/jpm.2001.319819",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jpm.2001.319819",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "barber2017",
+      "type": "paper",
+      "authors": [
+        "Barber, Brad M.",
+        "Yasuda, Ayako"
+      ],
+      "year": 2017,
+      "title": "Interim fund performance and fundraising in private equity",
+      "venue": "Journal of Financial Economics 124(1), 172-194",
+      "doi": "10.1016/j.jfineco.2017.01.001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2017.01.001",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "begenau2024",
+      "type": "paper",
+      "authors": [
+        "Begenau, Juliane",
+        "Siriwardane, Emil N."
+      ],
+      "year": 2024,
+      "title": "Fee Variation in Private Equity",
+      "venue": "The Journal of Finance 79(2), 1199-1247",
+      "doi": "10.1111/jofi.13319",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.13319",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "block2024",
+      "type": "paper",
+      "authors": [
+        "Block, Joern",
+        "Jang, Young Soo",
+        "Kaplan, Steven N",
+        "Schulze, Anna"
+      ],
+      "year": 2024,
+      "title": "A Survey of Private Debt Funds",
+      "venue": "The Review of Corporate Finance Studies 13(2), 335-383",
+      "doi": "10.1093/rcfs/cfae001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rcfs/cfae001",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "brown2022",
+      "type": "paper",
+      "authors": [
+        "Brown, Gregory W",
+        "Ghysels, Eric",
+        "Gredil, Oleg R"
+      ],
+      "year": 2022,
+      "title": "Nowcasting Net Asset Values: The Case of Private Equity",
+      "venue": "The Review of Financial Studies 36(3), 945-986",
+      "doi": "10.1093/rfs/hhac045",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhac045",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "chernenko2022",
+      "type": "paper",
+      "authors": [
+        "Chernenko, Sergey",
+        "Erel, Isil",
+        "Prilmeier, Robert"
+      ],
+      "year": 2022,
+      "title": "Why Do Firms Borrow Directly from Nonbanks?",
+      "venue": "The Review of Financial Studies 35(11), 4902-4947",
+      "doi": "10.1093/rfs/hhac016",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhac016",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "cochrane2005a",
+      "type": "paper",
+      "authors": [
+        "Cochrane, John H."
+      ],
+      "year": 2005,
+      "title": "The risk and return of venture capital",
+      "venue": "Journal of Financial Economics 75(1), 3-52",
+      "doi": "10.1016/j.jfineco.2004.03.006",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2004.03.006",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "couts2024",
+      "type": "paper",
+      "authors": [
+        "Couts, Spencer J",
+        "Gonçalves, Andrei S",
+        "Rossi, Andrea"
+      ],
+      "year": 2024,
+      "title": "Unsmoothing Returns of Illiquid Funds",
+      "venue": "The Review of Financial Studies 37(7), 2110-2155",
+      "doi": "10.1093/rfs/hhae006",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhae006",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "erel2024",
+      "type": "preprint",
+      "authors": [
+        "Erel, Isil",
+        "Flanagan, Thomas",
+        "Weisbach, Michael"
+      ],
+      "year": 2024,
+      "title": "Risk-Adjusting the Returns to Private Debt Funds",
+      "venue": "NBER Working Paper w32278",
+      "doi": "10.3386/w32278",
+      "arxiv": null,
+      "url": "https://doi.org/10.3386/w32278",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "fisher1994",
+      "type": "paper",
+      "authors": [
+        "Fisher, Jeffrey D.",
+        "Geltner, David M.",
+        "Webb, R. Brian"
+      ],
+      "year": 1994,
+      "title": "Value indices of commercial real estate: A comparison of index construction methods",
+      "venue": "The Journal of Real Estate Finance and Economics 9(2), 137-164",
+      "doi": "10.1007/bf01099972",
+      "arxiv": null,
+      "url": "https://doi.org/10.1007/bf01099972",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "franzoni2012",
+      "type": "paper",
+      "authors": [
+        "Franzoni, Francesco",
+        "Nowak, Eric",
+        "Phalippou, Ludovic"
+      ],
+      "year": 2012,
+      "title": "Private Equity Performance and Liquidity Risk",
+      "venue": "The Journal of Finance 67(6), 2341-2373",
+      "doi": "10.1111/j.1540-6261.2012.01788.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.2012.01788.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "geltner1991",
+      "type": "paper",
+      "authors": [
+        "Geltner, David Michael"
+      ],
+      "year": 1991,
+      "title": "Smoothing in appraisal-based returns",
+      "venue": "The Journal of Real Estate Finance and Economics 4(3), 327-345",
+      "doi": "10.1007/bf00161933",
+      "arxiv": null,
+      "url": "https://doi.org/10.1007/bf00161933",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "geltner1993",
+      "type": "paper",
+      "authors": [
+        "Geltner, David"
+      ],
+      "year": 1993,
+      "title": "Estimating Market Values from Appraised Values without Assuming an Efficient Market",
+      "venue": "Journal of Real Estate Research 8(3), 325-345",
+      "doi": "10.1080/10835547.1993.12090713",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/10835547.1993.12090713",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "getmansky2004",
+      "type": "paper",
+      "authors": [
+        "Getmansky, Mila",
+        "Lo, Andrew W.",
+        "Makarov, Igor"
+      ],
+      "year": 2004,
+      "title": "An econometric model of serial correlation and illiquidity in hedge fund returns",
+      "venue": "Journal of Financial Economics 74(3), 529-609",
+      "doi": "10.1016/j.jfineco.2004.04.001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2004.04.001",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "gredil2023",
+      "type": "paper",
+      "authors": [
+        "Gredil, Oleg R.",
+        "Griffiths, Barry",
+        "Stucke, Rüdiger"
+      ],
+      "year": 2023,
+      "title": "Benchmarking private equity: The direct alpha method",
+      "venue": "Journal of Corporate Finance 81, 102360",
+      "doi": "10.1016/j.jcorpfin.2023.102360",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jcorpfin.2023.102360",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "gupta2021",
+      "type": "paper",
+      "authors": [
+        "Gupta, Arpit",
+        "Van Nieuwerburgh, Stijn"
+      ],
+      "year": 2021,
+      "title": "Valuing Private Equity Investments Strip by Strip",
+      "venue": "The Journal of Finance 76(6), 3255-3307",
+      "doi": "10.1111/jofi.13073",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.13073",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "harris2014",
+      "type": "paper",
+      "authors": [
+        "Harris, Robert S.",
+        "Jenkinson, Tim",
+        "Kaplan, Steven N."
+      ],
+      "year": 2014,
+      "title": "Private Equity Performance: What Do We Know?",
+      "venue": "The Journal of Finance 69(5), 1851-1882",
+      "doi": "10.1111/jofi.12154",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12154",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "harris2017",
+      "type": "preprint",
+      "authors": [
+        "Harris, Robert S.",
+        "Jenkinson, Tim",
+        "Kaplan, Steven",
+        "Stucke, Ruediger"
+      ],
+      "year": 2017,
+      "title": "Financial Intermediation in Private Equity: How Well Do Funds of Funds Perform?",
+      "venue": "NBER Working Paper w23428",
+      "doi": "10.3386/w23428",
+      "arxiv": null,
+      "url": "https://doi.org/10.3386/w23428",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "harris2020",
+      "type": "preprint",
+      "authors": [
+        "Harris, Robert S.",
+        "Jenkinson, Tim",
+        "Kaplan, Steven",
+        "Stucke, Ruediger"
+      ],
+      "year": 2020,
+      "title": "Has Persistence Persisted in Private Equity? Evidence from Buyout and Venture Capital Funds",
+      "venue": "NBER Working Paper w28109",
+      "doi": "10.3386/w28109",
+      "arxiv": null,
+      "url": "https://doi.org/10.3386/w28109",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "ilmanen2019",
+      "type": "paper",
+      "authors": [
+        "Ilmanen, Antti",
+        "Chandra, Swati",
+        "McQuinn, Nicholas"
+      ],
+      "year": 2019,
+      "title": "Demystifying Illiquid Assets: Expected Returns for Private Equity",
+      "venue": "The Journal of Alternative Investments 22(3), 8-22",
+      "doi": "10.3905/jai.2019.1.086",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jai.2019.1.086",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "ilmanen2020",
+      "type": "paper",
+      "authors": [
+        "Ilmanen, Antti"
+      ],
+      "year": 2020,
+      "title": "The Impact of Smoothness on Private Equity Expected Returns",
+      "venue": "The Journal of Investing 30(1), 63-66",
+      "doi": "10.3905/joi.2020.1.151",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/joi.2020.1.151",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "jegadeesh2015",
+      "type": "paper",
+      "authors": [
+        "Jegadeesh, Narasimhan",
+        "Kräussl, Roman",
+        "Pollet, Joshua M."
+      ],
+      "year": 2015,
+      "title": "Risk and Expected Returns of Private Equity Investments: Evidence Based on Market Prices",
+      "venue": "Review of Financial Studies 28(12), 3269-3302",
+      "doi": "10.1093/rfs/hhv046",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhv046",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "kaplan2005",
+      "type": "paper",
+      "authors": [
+        "Kaplan, Steven N.",
+        "Schoar, Antoinette"
+      ],
+      "year": 2005,
+      "title": "Private Equity Performance: Returns, Persistence, and Capital Flows",
+      "venue": "The Journal of Finance 60(4), 1791-1823",
+      "doi": "10.1111/j.1540-6261.2005.00780.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.2005.00780.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "kaplan2015",
+      "type": "paper",
+      "authors": [
+        "Kaplan, Steven N.",
+        "Sensoy, Berk A."
+      ],
+      "year": 2015,
+      "title": "Private Equity Performance: A Survey",
+      "venue": "Annual Review of Financial Economics 7(1), 597-614",
+      "doi": "10.1146/annurev-financial-111914-041858",
+      "arxiv": null,
+      "url": "https://doi.org/10.1146/annurev-financial-111914-041858",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "korteweg2016",
+      "type": "paper",
+      "authors": [
+        "Korteweg, Arthur",
+        "Nagel, Stefan"
+      ],
+      "year": 2016,
+      "title": "Risk-Adjusting the Returns to Venture Capital",
+      "venue": "The Journal of Finance 71(3), 1437-1470",
+      "doi": "10.1111/jofi.12390",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12390",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "korteweg2017",
+      "type": "paper",
+      "authors": [
+        "Korteweg, Arthur",
+        "Sorensen, Morten"
+      ],
+      "year": 2017,
+      "title": "Skill and luck in private equity performance",
+      "venue": "Journal of Financial Economics 124(3), 535-562",
+      "doi": "10.1016/j.jfineco.2017.03.006",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2017.03.006",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "lerner2022",
+      "type": "paper",
+      "authors": [
+        "Lerner, Josh",
+        "Mao, Jason",
+        "Schoar, Antoinette",
+        "Zhang, Nan R."
+      ],
+      "year": 2022,
+      "title": "Investing outside the box: Evidence from alternative vehicles in private equity",
+      "venue": "Journal of Financial Economics 143(1), 359-380",
+      "doi": "10.1016/j.jfineco.2021.05.034",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2021.05.034",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "metrick2010",
+      "type": "paper",
+      "authors": [
+        "Metrick, Andrew",
+        "Yasuda, Ayako"
+      ],
+      "year": 2010,
+      "title": "The Economics of Private Equity Funds",
+      "venue": "Review of Financial Studies 23(6), 2303-2341",
+      "doi": "10.1093/rfs/hhq020",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhq020",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "munday2018",
+      "type": "paper",
+      "authors": [
+        "Munday, Shawn",
+        "Hu, Wendy",
+        "True, Tobias",
+        "Zhang, Jian"
+      ],
+      "year": 2018,
+      "title": "Performance of Private Credit Funds: A First Look",
+      "venue": "The Journal of Alternative Investments 21(2), 31-51",
+      "doi": "10.3905/jai.2018.21.2.031",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jai.2018.21.2.031",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "nadauld2019",
+      "type": "paper",
+      "authors": [
+        "Nadauld, Taylor D.",
+        "Sensoy, Berk A.",
+        "Vorkink, Keith",
+        "Weisbach, Michael S."
+      ],
+      "year": 2019,
+      "title": "The liquidity cost of private equity investments: Evidence from secondary market transactions",
+      "venue": "Journal of Financial Economics 132(3), 158-181",
+      "doi": "10.1016/j.jfineco.2018.11.007",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2018.11.007",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "pagliari2005",
+      "type": "paper",
+      "authors": [
+        "Pagliari, Joseph L.",
+        "Scherer, Kevin A.",
+        "Monopoli, Richard T."
+      ],
+      "year": 2005,
+      "title": "Public Versus Private Real Estate Equities: A More Refined, Long-Term Comparison",
+      "venue": "Real Estate Economics 33(1), 147-187",
+      "doi": "10.1111/j.1080-8620.2005.00115.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1080-8620.2005.00115.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "pastor2003",
+      "type": "paper",
+      "authors": [
+        "Pástor, Ľuboš",
+        "Stambaugh, Robert F."
+      ],
+      "year": 2003,
+      "title": "Liquidity Risk and Expected Stock Returns",
+      "venue": "Journal of Political Economy 111(3), 642-685",
+      "doi": "10.1086/374184",
+      "arxiv": null,
+      "url": "https://doi.org/10.1086/374184",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "phalippou2008",
+      "type": "paper",
+      "authors": [
+        "Phalippou, Ludovic",
+        "Gottschalg, Oliver"
+      ],
+      "year": 2008,
+      "title": "The Performance of Private Equity Funds",
+      "venue": "Review of Financial Studies 22(4), 1747-1776",
+      "doi": "10.1093/rfs/hhn014",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhn014",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "phalippou2020",
+      "type": "paper",
+      "authors": [
+        "Phalippou, Ludovic"
+      ],
+      "year": 2020,
+      "title": "An Inconvenient Fact: Private Equity Returns and the Billionaire Factory",
+      "venue": "The Journal of Investing 30(1), 11-39",
+      "doi": "10.3905/joi.2020.1.153",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/joi.2020.1.153",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "robinson2013",
+      "type": "paper",
+      "authors": [
+        "Robinson, David T.",
+        "Sensoy, Berk A."
+      ],
+      "year": 2013,
+      "title": "Do Private Equity Fund Managers Earn Their Fees? Compensation, Ownership, and Cash Flow Performance",
+      "venue": "Review of Financial Studies 26(11), 2760-2797",
+      "doi": "10.1093/rfs/hht055",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hht055",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "sorensen2014",
+      "type": "paper",
+      "authors": [
+        "Sorensen, Morten",
+        "Wang, Neng",
+        "Yang, Jinqiang"
+      ],
+      "year": 2014,
+      "title": "Valuing Private Equity",
+      "venue": "Review of Financial Studies 27(7), 1977-2021",
+      "doi": "10.1093/rfs/hhu013",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhu013",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "sorensen2015",
+      "type": "paper",
+      "authors": [
+        "Sorensen, Morten",
+        "Jagannathan, Ravi"
+      ],
+      "year": 2015,
+      "title": "The Public Market Equivalent and Private Equity Performance",
+      "venue": "Financial Analysts Journal 71(4), 43-50",
+      "doi": "10.2469/faj.v71.n4.4",
+      "arxiv": null,
+      "url": "https://doi.org/10.2469/faj.v71.n4.4",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "stafford2021",
+      "type": "paper",
+      "authors": [
+        "Stafford, Erik"
+      ],
+      "year": 2021,
+      "title": "Replicating Private Equity with Value Investing, Homemade Leverage, and Hold-to-Maturity Accounting",
+      "venue": "The Review of Financial Studies 35(1), 299-342",
+      "doi": "10.1093/rfs/hhab020",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhab020",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      },
+      "note": "Checked for RES-0012 on 2026-10-23 against Crossref"
+    },
+    {
+      "key": "url-1094f4ac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Private investment benchmarks",
+      "venue": "Cambridge Associates",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cambridgeassociates.com/private-investment-benchmarks/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-1b07e2c5",
+      "type": "web-page",
+      "authors": [],
+      "year": 2024,
+      "title": "The financial stability implications of tokenisation",
+      "venue": "Financial Stability Board",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fsb.org/2024/10/the-financial-stability-implications-of-tokenisation/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-52604426",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "15 U.S. Code 80a-54, Functions and activities of business development companies",
+      "venue": "Legal Information Institute, Cornell Law School",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80a-54",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-57a0d836",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Accredited investors",
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/accredited-investors",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-5e096a75",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Form D data sets",
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-6601c4f7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cliffwater Direct Lending Index",
+      "venue": "Cliffwater",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cliffwaterdirectlendingindex.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Could not be read for RES-0012 on 2026-10-23 (unverified)"
+    },
+    {
+      "key": "url-6ec5737a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "PitchBook",
+      "venue": "PitchBook",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pitchbook.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Could not be read for RES-0012 on 2026-10-23 (unverified)"
+    },
+    {
+      "key": "url-7414523f",
+      "type": "regulator",
+      "authors": [],
+      "year": 2022,
+      "title": "Blackstone Real Estate Income Trust, prospectus supplement, November 2022 NAV and share repurchases (424B3, filed 2022-12-15)",
+      "venue": "SEC EDGAR",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1662972/000166297222000143/breitnavnovember2022.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-7ac3dc51",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Preqin",
+      "venue": "Preqin, part of BlackRock",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.preqin.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-7be4cd1d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hamilton Lane",
+      "venue": "Hamilton Lane",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.hamiltonlane.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-8648340c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NCREIF index returns",
+      "venue": "NCREIF",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ncreif.org/indices/index-returns/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-98351ef7",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Filing a Form D notice",
+      "venue": "US Securities and Exchange Commission",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/resources-small-businesses/exempt-offerings/filing-form-d-notice",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-a4070279",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "17 CFR 270.23c-3, Repurchase of securities of closed-end companies (interval funds)",
+      "venue": "Legal Information Institute, Cornell Law School",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/270.23c-3",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "url-f388c471",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "15 U.S. Code 80a-60, Capital structure of business development companies",
+      "venue": "Legal Information Institute, Cornell Law School",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80a-60",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Opened for RES-0012 on 2026-10-23"
     }
   ]
 }

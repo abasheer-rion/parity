@@ -85,7 +85,7 @@ def _timing(name, display, description, family, asset_class, style, horizon, rul
     def invested(self, panel):
         return rule(self, panel)
     block = type(f"_{name}", (TimingBook,), {
-        "invested": invested, "extra": list(extra) + [S.TBILL], "cash_rate": S.TBILL,
+        "invested": invested, "extra": list(extra) + [S.TBILL],
         "__module__": __name__})
     return make(block, name, display, description, family, asset_class, style, horizon,
                 "research/0011-where-market-edges-come-from-and-which-survive.md", grid,
@@ -128,7 +128,6 @@ class _Butterfly(Block):
     when it sits unusually low; closed when curvature crosses back through its average.
     Cash balances the book so its net weight is zero."""
 
-    cash_rate = S.TBILL
     funded = False  # a self-financing book: its capital sits in T-bills
     defaults = {"window": 756, "entry": 1.5, "rebalance": "W"}
 

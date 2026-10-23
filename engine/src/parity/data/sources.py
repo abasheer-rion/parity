@@ -402,10 +402,11 @@ def fetch_oecd(series: Series) -> pd.Series:
 
 
 def parse_oecd_csv(text: str, series: Series) -> pd.Series:
-    """Dated at the last day of the month: a monthly average is only known once the
-    month is over (the G10 FRED copies are dated at the first day, see RES-0008 M3)."""
+    """Dated at the first day of the month, like the G10 FRED copies of the same OECD
+    data. The catalog delays them to a week after the month ends (`published_after`),
+    which is when signals may see them; interest earned uses the undelayed dates."""
     df = pd.read_csv(io.StringIO(text), usecols=["TIME_PERIOD", "OBS_VALUE"]).dropna()
-    idx = pd.PeriodIndex(df["TIME_PERIOD"], freq="M").to_timestamp(how="end").normalize()
+    idx = pd.PeriodIndex(df["TIME_PERIOD"], freq="M").to_timestamp(how="start")
     out = pd.Series(df["OBS_VALUE"].astype(float).values, index=idx, name=series.key)
     return out.sort_index()
 

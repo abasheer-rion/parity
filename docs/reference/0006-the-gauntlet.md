@@ -73,6 +73,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](../decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - [HYP-0010: Emerging market basket kept paying after 2008](../hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md)
