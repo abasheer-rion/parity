@@ -322,6 +322,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [DEC-0010: Every source we rely on is in one checked bibliography](decisions/0010-every-source-in-one-bibliography.md)
+- [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
@@ -477,6 +478,7 @@ How the team works together.
 - [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
+- [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
@@ -484,6 +486,7 @@ How the team works together.
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [GDE-0005: Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md)
+- [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
@@ -498,6 +501,7 @@ How the team works together.
 A specific trading idea or its implementation.
 
 - [DEC-0003: Strategies are plug-ins that can be removed at any time](decisions/0003-strategies-are-plugins.md)
+- [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [HYP-0001: Currency carry still pays after costs](hypotheses/0001-carry-still-pays-after-costs.md)
 - [HYP-0002: Currency trends persist over months](hypotheses/0002-currency-trends-persist.md)
 - [HYP-0003: Commodity currencies catch up to their commodity](hypotheses/0003-commodity-currencies-catch-up.md)

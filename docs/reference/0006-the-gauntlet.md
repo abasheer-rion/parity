@@ -72,6 +72,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
+- [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
