@@ -41,7 +41,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-23 [EXP-0007: Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md)
+- 2026-10-23 [EXP-0008: Emerging market currencies since 2010](experiments/0008-emerging-market-currencies-since-2010.md)
 - 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
 - 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 
@@ -112,11 +112,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0002 | [The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [method](TAGS.md#method), [momentum](TAGS.md#momentum) |
 | EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
-| EXP-0005 | [Rerun of all sixteen strategies with corrected scoring](experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method) |
-| EXP-0006 | [Stocks plus currency trend on its own](experiments/0006-stocks-plus-currency-trend-on-its-own.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
-| EXP-0007 | [Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
-| EXP-0008 | [Energy futures trend and carry](experiments/0008-energy-futures-trend-and-carry.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
-| EXP-0009 | [Oil volatility and commodity currency signals](experiments/0009-oil-volatility-and-commodity-currency-signals.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| EXP-0006 | [Rerun of all sixteen strategies with corrected scoring](experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method) |
+| EXP-0007 | [Stocks plus currency trend on its own](experiments/0007-stocks-plus-currency-trend-on-its-own.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
+| EXP-0008 | [Emerging market currencies since 2010](experiments/0008-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| EXP-0009 | [Energy futures trend and carry](experiments/0009-energy-futures-trend-and-carry.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
+| EXP-0010 | [Oil volatility and commodity currency signals](experiments/0010-oil-volatility-and-commodity-currency-signals.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 
 ## research
 
@@ -133,10 +133,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
-| RES-0012 | [Emerging market currencies](research/0012-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
-| RES-0013 | [Commodity futures, carry, trend and volatility](research/0013-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
-| RES-0014 | [Famous currency and commodity traders and what their records teach](research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| RES-0015 | [Lesser-known strategies and what firms have published](research/0015-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
+| RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0016 | [Lesser-known strategies and what firms have published](research/0016-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## guide
 
@@ -182,8 +182,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0007 | [Ayan work log, clarity, the strategy factory, the search and two sides](log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0009 | [Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md) | final | 2026-10-23 | [process](TAGS.md#process) |
-| LOG-0010 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
-| LOG-0011 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0011 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| LOG-0012 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## algorithm
 

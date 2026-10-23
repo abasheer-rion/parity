@@ -97,7 +97,7 @@ What this says:
 ## Referenced by
 
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
-- [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
+- [EXP-0008: Emerging market currencies since 2010](../experiments/0008-emerging-market-currencies-since-2010.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 <!-- backlinks:end -->
