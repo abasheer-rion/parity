@@ -63,7 +63,7 @@ Official run [RUN-000002](../../ledger/runs/RUN-000002.json) of `REG-0002`, reco
 ## Referenced by
 
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
-- [RES-0013: Commodity futures, carry, trend and volatility](../research/0013-commodity-futures-carry-trend-and-volatility.md)
+- [RES-0014: Commodity futures, carry, trend and volatility](../research/0014-commodity-futures-carry-trend-and-volatility.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0002: Catalog, ledger and lab](../log/2026-10-20-catalog-ledger-and-lab.md)
 <!-- backlinks:end -->

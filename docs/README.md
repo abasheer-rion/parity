@@ -114,9 +114,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0009 | [Trading myths and what the evidence says](research/0009-trading-myths-and-what-the-evidence-says.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
-| RES-0012 | [Emerging market currencies](research/0012-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
-| RES-0013 | [Commodity futures, carry, trend and volatility](research/0013-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
-| RES-0014 | [Famous currency and commodity traders and what their records teach](research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
+| RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## guide
 

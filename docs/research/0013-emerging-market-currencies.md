@@ -1,5 +1,5 @@
 ---
-id: RES-0012
+id: RES-0013
 title: Emerging market currencies
 type: research
 status: current
@@ -128,5 +128,5 @@ We checked on 2026-10-21 that the ECB, OECD and BIS endpoints answer scripted re
 
 ## Referenced by
 
-- [RES-0014: Famous currency and commodity traders and what their records teach](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0015: Famous currency and commodity traders and what their records teach](0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 <!-- backlinks:end -->
