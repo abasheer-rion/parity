@@ -8,7 +8,7 @@
   "hypotheses": [
     "HYP-0007"
   ],
-  "experiment": "EXP-0006",
+  "experiment": "EXP-0007",
   "question": "Does holding US stocks with a currency trend book (half the risk each, the idle half in T-bills since the M1 fix) earn a higher Sharpe ratio than the market, more money at the market's volatility, and hold up in the market's worst months?",
   "strategies": [
     {

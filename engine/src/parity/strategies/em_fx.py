@@ -1,4 +1,4 @@
-"""Emerging market currency strategies (docs/research/0012-emerging-market-currencies.md).
+"""Emerging market currency strategies (docs/research/0013-emerging-market-currencies.md).
 
 All three hold EM currencies against the US dollar, so the backtester credits each
 currency's interest rate gap to the dollar (the carry) as for G10. A currency with no

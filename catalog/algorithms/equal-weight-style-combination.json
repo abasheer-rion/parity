@@ -91,11 +91,11 @@
       "notes": "Value 0.26, momentum 0.53, correlation -0.39."
     }
   ],
-  "post_publication_evidence": "Fernandez-Perez et al. find equal weights unsurpassed in sub-periods and across asset classes; AQR's century study reports a commodity multi-style Sharpe of 0.77 after publication (RES-0015).",
+  "post_publication_evidence": "Fernandez-Perez et al. find equal weights unsurpassed in sub-periods and across asset classes; AQR's century study reports a commodity multi-style Sharpe of 0.77 after publication (RES-0016).",
   "implementations": [],
   "relevance": {
     "score": 5,
-    "reason": "The method behind both combined books proposed in RES-0016; no data of its own needed."
+    "reason": "The method behind both combined books proposed in RES-0017; no data of its own needed."
   },
   "testable_with_free_data": true,
   "last_reviewed": "2026-10-22",
@@ -106,6 +106,6 @@
     "registrations": [],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0016 on 2026-10-22."
+    "notes": "Added from RES-0017 on 2026-10-22."
   }
 }

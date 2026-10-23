@@ -12,7 +12,7 @@
     "HYP-0005",
     "HYP-0007"
   ],
-  "experiment": "EXP-0005",
+  "experiment": "EXP-0006",
   "question": "With the two critical audit findings fixed (Sharpe on returns above the T-bill, and borrowing paid for; DEC-0009), does any of the sixteen strategies of REG-0003, with the same settings, pass all six A tests of the gauntlet?",
   "strategies": [
     {

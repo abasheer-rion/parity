@@ -1,5 +1,5 @@
 ---
-id: RES-0016
+id: RES-0017
 title: Combining many strategies, the evidence and the ingredient list
 type: research
 status: current
@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [RES-0012, RES-0013, RES-0015, DEC-0014, HYP-0009, HYP-0013]
+related: [RES-0013, RES-0014, RES-0016, DEC-0014, HYP-0009, HYP-0013]
 ---
 
 # Combining many strategies, the evidence and the ingredient list
@@ -49,7 +49,7 @@ What it means for planning, with ideas of Sharpe 0.3:
 Three lessons:
 
 - **Correlation matters more than the count.** Six ideas at correlation 0.1 beat ten at 0.3. When the correlation is r, the ceiling as N grows is S / sqrt(r): 0.95 at r = 0.1, 0.55 at r = 0.3.
-- **The inputs must be post-publication Sharpe ratios, after costs.** AQR's century of data ([RES-0015](0015-lesser-known-strategies-and-what-firms-have-published.md)) shows some ideas keep most of their strength (currency value 0.72 to 0.69) and some lose all of it (currency carry 0.51 to -0.17). Planning with the original figures would promise too much.
+- **The inputs must be post-publication Sharpe ratios, after costs.** AQR's century of data ([RES-0016](0016-lesser-known-strategies-and-what-firms-have-published.md)) shows some ideas keep most of their strength (currency value 0.72 to 0.69) and some lose all of it (currency carry 0.51 to -0.17). Planning with the original figures would promise too much.
 - **Our energy universe is small and correlated.** Four energy contracts move together, so cross-commodity signals in our data have far less room to diversify than the 20 to 30 commodities in the papers. Combining several signals over the same four contracts is the way to get breadth.
 
 ## The ingredient list
@@ -77,7 +77,7 @@ Every idea below is already in the catalog. "Since publication" is the best evid
 | --- | --- | --- | --- | --- |
 | Carry (curve slope), [ALG-0038](../algorithms/0038-commodity-carry-roll-yield.md) | 0.76, 1959 to 2004; 1.04 out of sample to 2014 | Commodity carry 0.58 in AQR's data | Yes to April 2024, registered (REG-0007) | |
 | Time-series momentum, [ALG-0039](../algorithms/0039-commodity-time-series-momentum.md) | 1.01, 1985 to 2009 | 0.21, 2012 to 2026 (catalog calculation on AQR's factor) | Yes to April 2024, registered (REG-0007) | Clear decay |
-| Basis-momentum, [ALG-0088](../algorithms/0088-commodity-basis-momentum.md) | 0.92, 1960 to 2014 | Untested after February 2014 | Yes to April 2024 | Best candidate (RES-0015) |
+| Basis-momentum, [ALG-0088](../algorithms/0088-commodity-basis-momentum.md) | 0.92, 1960 to 2014 | Untested after February 2014 | Yes to April 2024 | Best candidate (RES-0016) |
 | Value (5-year reversal), [ALG-0089](../algorithms/0089-commodity-value-reversal.md) | 0.38, 1926 to 2020 | 0.44 after publication | Yes to April 2024 | Negatively correlated with momentum |
 | Skewness, [ALG-0090](../algorithms/0090-commodity-skewness.md) | 0.78, 1987 to 2014 | Untested | Weak with 4 contracts | |
 | Inventories (new, [ALG-0096](../algorithms/0096-commodity-inventory-level.md)) | Low minus high inventory, t-statistic 2.78, 1971 to 2010 | Untested | Yes: EIA weekly stocks from 1982 | Overlaps with carry and momentum |
@@ -135,5 +135,5 @@ Combining gives a researcher many new choices: which ingredients, which weights,
 
 ## Referenced by
 
-- [LOG-0012: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
+- [LOG-0013: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 <!-- backlinks:end -->

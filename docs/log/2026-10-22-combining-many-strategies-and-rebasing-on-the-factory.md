@@ -1,5 +1,5 @@
 ---
-id: LOG-0012
+id: LOG-0013
 title: Combining many strategies, and rebasing on the factory
 type: log
 status: final
@@ -7,21 +7,21 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0011, RES-0016, DEC-0014]
+related: [LOG-0012, RES-0017, DEC-0014]
 ---
 
 # Combining many strategies, and rebasing on the factory
 
 ## In plain words
 
-Amanda asked to keep researching with the best candidates in mind, and to gather many strategies that can be combined. We read eleven more papers on how combining works and wrote them up in RES-0016, with a list of every ingredient we could combine for emerging market currencies and for energy futures, and rules that stop combining from becoming a way to fool ourselves. We also rebased the three open pull requests on main after Ayan's strategy factory landed. No strategy was built or run.
+Amanda asked to keep researching with the best candidates in mind, and to gather many strategies that can be combined. We read eleven more papers on how combining works and wrote them up in RES-0017, with a list of every ingredient we could combine for emerging market currencies and for energy futures, and rules that stop combining from becoming a way to fool ourselves. We also rebased the three open pull requests on main after Ayan's strategy factory landed. No strategy was built or run.
 
 ## What happened
 
-- **Research ([RES-0016](../research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)).** Equal-weight combination (Fernandez-Perez, Fuertes and Miffre; AQR's Value and Momentum Everywhere), the currency volatility risk premium, inventories (Gorton, Hayashi and Rouwenhorst), volatility targeting (Man Group), the dollar risk premium (Lustig, Roussanov and Verdelhan), currency momentum, commodity exporters' currencies, the natural gas storage report, month-end hedging at the London fix (BlackRock authors) and currency styles in a stock and bond portfolio.
+- **Research ([RES-0017](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)).** Equal-weight combination (Fernandez-Perez, Fuertes and Miffre; AQR's Value and Momentum Everywhere), the currency volatility risk premium, inventories (Gorton, Hayashi and Rouwenhorst), volatility targeting (Man Group), the dollar risk premium (Lustig, Roussanov and Verdelhan), currency momentum, commodity exporters' currencies, the natural gas storage report, month-end hedging at the London fix (BlackRock authors) and currency styles in a stock and bond portfolio.
 - **Catalog.** Added ALG-0096 (commodity inventory level), ALG-0097 (developed-market rate gap times the EM basket) and ALG-0098 (equal-weight style combination). ALG-0009, ALG-0044 and ALG-0054 gained verified results.
 - **Data check.** EIA weekly crude and distillate stocks run from 1982 and gasoline from 1990, free; the current gas storage series starts in 2010.
-- **Rebase.** Main had gained the strategy factory and search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). The factory's 12 Fed H.10 currencies and the 17 ECB-based EM currencies overlapped on 8 keys; those now use H.10 prices, and the em_fx strategies read a separate `EM_RATED` list. Registrations REG-0004 to REG-0008 now count the factory's 86 recipes as prior trials. Logs were renumbered because Ayan's logs took LOG-0007 and LOG-0008; they are now LOG-0010 and LOG-0011.
+- **Rebase.** Main had gained the strategy factory and search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). The factory's 12 Fed H.10 currencies and the 17 ECB-based EM currencies overlapped on 8 keys; those now use H.10 prices, and the em_fx strategies read a separate `EM_RATED` list. Registrations REG-0004 to REG-0008 now count the factory's 86 recipes as prior trials. Logs were renumbered because Ayan's logs took LOG-0007 and LOG-0008; they are now LOG-0011 and LOG-0012.
 
 ## Decisions
 

@@ -1,4 +1,4 @@
-"""Energy futures strategies on rolled NYMEX contracts (docs/research/0013).
+"""Energy futures strategies on rolled NYMEX contracts (docs/research/0014).
 
 They trade fut.CL, fut.HO, fut.RB and fut.NG, excess return indices of holding the second
 contract (data/futures.py), and vrp.OIL, a marked short variance swap on crude oil. The EIA
