@@ -94,7 +94,7 @@ def _rank(r: random.Random) -> dict:
 
 TIMING_RULES = ["above_average", "absolute_momentum", "vix_below_average", "vix_below",
                 "curve_positive", "rates_falling", "copper_up", "oil_calm"]
-# Rules on the wider data (DEC-0025). Their cash earns the T-bill, so cash scores zero.
+# Rules on the wider data (DEC-0026). Their cash earns the T-bill, so cash scores zero.
 WIDER_RULES = ["stress_below", "conditions_easing", "claims_calm", "spx_not_crowded",
                "fomc_week"]
 TIMING_RULES += WIDER_RULES
@@ -154,7 +154,7 @@ def _mix(r: random.Random) -> dict:
 
 
 def _positioning(r: random.Random) -> dict:
-    """Currencies against (or with) speculators' futures positions, CFTC (DEC-0025)."""
+    """Currencies against (or with) speculators' futures positions, CFTC (DEC-0026)."""
     mode = r.choice(["rank", "extremes"])
     spec = {"kind": "cot", "mode": mode, "lookback": r.choice([130, 260, 520, 780, 1040]),
             "rebalance": r.choice(["W", "M"]), "follow": r.random() < 0.25}
@@ -166,7 +166,7 @@ def _positioning(r: random.Random) -> dict:
 
 
 def _policy(r: random.Random) -> dict:
-    """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0025)."""
+    """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0026)."""
     u = r.choice(["xg10", "xwide"])
     sig = r.choice(["policy_gap", "policy_gap", "policy_change"])
     return {"kind": "policy", "universe": u, "rank_on": sig,
@@ -355,52 +355,23 @@ COT_UNIVERSE = [f"fx.{c}" for c in S.COT_FX]
 
 
 def _cot_strategy(spec: dict) -> B.Block:
-    names, sign = S.COT_FX, (1.0 if spec["follow"] else -1.0)
-
-    def required(self):
-        return COT_UNIVERSE + S.cot_keys(names)
-
-    def signal(self, panel):
-        z = S.cot_z(panel, names, spec["lookback"])
-        z.columns = COT_UNIVERSE
-        return (sign * z).where(panel[COT_UNIVERSE].notna().values)
-
-    if spec["mode"] == "rank":
-        cls = type("SearchCot", (B.RankBook,), {"name": "search", "summary": "",
-                   "universe": COT_UNIVERSE, "required": required, "signal": signal})
-        return cls(k=spec["k"], rebalance=spec["rebalance"], lookback=spec["lookback"])
-
-    def weights(self, panel):
-        z = signal(self, panel)
-        side = pd.DataFrame(0.0, index=panel.index, columns=COT_UNIVERSE)
-        side = side.mask(z > spec["entry"], 1.0).mask(z < -spec["entry"], -1.0)
-        return B._finish(self, side, panel[COT_UNIVERSE])
-
-    cls = type("SearchCotExtremes", (B._PerAsset,), {"name": "search", "summary": "",
-               "universe": COT_UNIVERSE, "required": required, "weights": weights})
-    return cls(rebalance=spec["rebalance"])
+    from .strategies import edges
+    base = edges._CotRank if spec["mode"] == "rank" else edges._CotExtremes
+    cls = type("SearchCot", (base,), {"name": "search", "summary": "",
+               "universe": COT_UNIVERSE, "follow": spec["follow"]})
+    size = {"k": spec["k"]} if spec["mode"] == "rank" else {"entry": spec["entry"]}
+    return cls(lookback=spec["lookback"], rebalance=spec["rebalance"], **size)
 
 
 def _policy_strategy(spec: dict) -> B.Block:
-    uni = S.XG10 if spec["universe"] == "xg10" else S.XWIDE
+    from .strategies import edges
     gate_at = spec["stress_off"]
-
-    def required(self):
-        return uni + S.policy_keys(uni) + (["risk.STLFSI"] if gate_at is not None else [])
-
-    def signal(self, panel):
-        sig = S.policy_change(panel, uni, spec["lookback"]) \
-            if spec["rank_on"] == "policy_change" else S.policy_gap(panel, uni)
-        return sig.where(panel[uni].notna().values)
-
-    def gate(self, panel):
-        return None if gate_at is None else (panel["risk.STLFSI"] < gate_at).astype(float)
-
-    cls = type("SearchPolicy", (B.RankBook,), {
-        "name": "search", "summary": "", "universe": uni, "required": required,
-        "signal": signal, "gate": gate,
-        "min_cost_bps": 5.0 if spec["universe"] == "xwide" else 0.0})
-    return cls(k=spec["k"], rebalance=spec["rebalance"])
+    cls = type("SearchPolicy", (edges._PolicyRank,), {
+        "name": "search", "summary": "", "rank_on": spec["rank_on"], "gate_level": gate_at,
+        "universe": S.XG10 if spec["universe"] == "xg10" else S.XWIDE,
+        "min_cost_bps": edges.WIDE_COST if spec["universe"] == "xwide" else 0.0})
+    return cls(k=spec["k"], rebalance=spec["rebalance"], lookback=spec["lookback"],
+               level=0.0 if gate_at is None else gate_at)
 
 
 def _timing_strategy(spec: dict) -> B.TimingBook:
@@ -498,7 +469,7 @@ def _panel() -> tuple[pd.DataFrame, str]:
     keys = sorted({*FX, *WIDE, *IND, *FAC, B.MKT, "bond.TR10", "bond.TR2", "bond.UST10Y",
                    "bond.UST2Y", "cmd.BRENT", "cmd.COPPER", "risk.VIX", "rate.USD",
                    "rate.TBILL3M", *[f"rate.{c}" for c in G10]})
-    # The wider data (DEC-0025) is optional: a series not yet fetched on this machine
+    # The wider data (DEC-0026) is optional: a series not yet fetched on this machine
     # is left out, and the variations that need it are recorded as failed.
     wider = sorted({*COT_UNIVERSE, *S.cot_keys([*S.COT_FX, "SPX_EMINI"]), *S.XWIDE,
                     *S.policy_keys(S.XWIDE), "risk.STLFSI", "risk.NFCI", "macro.CLAIMS"})

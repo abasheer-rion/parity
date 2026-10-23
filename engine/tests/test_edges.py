@@ -1,4 +1,4 @@
-"""The edge families from the wider data (DEC-0025): publication lags, the FOMC
+"""The edge families from the wider data (DEC-0026): publication lags, the FOMC
 calendar, the cost floor, T-bill cash and policy-rate carry."""
 
 from __future__ import annotations

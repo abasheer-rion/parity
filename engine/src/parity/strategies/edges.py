@@ -1,4 +1,4 @@
-"""New edge families from the wider data (DEC-0025): positioning, the yield curve,
+"""New edge families from the wider data (DEC-0026): positioning, the yield curve,
 policy rates, stress regimes and the FOMC calendar.
 
 Each recipe tests one documented idea (RES-0011). Publication lags come from the
@@ -26,7 +26,9 @@ WIDE_COST = 5.0  # basis points a trade for emerging market currencies, a rough 
 
 class _CotRank(RankBook):
     """Rank currencies on how far speculators lean against them: long the most
-    crowded shorts, short the most crowded longs."""
+    crowded shorts, short the most crowded longs. follow=True takes the crowd's side."""
+
+    follow = False
 
     def required(self):
         return list(self.universe) + S.cot_keys([S.ccy(c) for c in self.universe])
@@ -34,7 +36,8 @@ class _CotRank(RankBook):
     def signal(self, panel):
         z = S.cot_z(panel, [S.ccy(c) for c in self.universe], self.lookback)
         z.columns = self.universe
-        return -z.where(panel[self.universe].notna().values)
+        sign = 1.0 if self.follow else -1.0
+        return sign * z.where(panel[self.universe].notna().values)
 
 
 make(_CotRank, "cot_fx_contrarian", "Currencies against the crowd",
@@ -49,8 +52,9 @@ make(_CotRank, "cot_fx_contrarian", "Currencies against the crowd",
 
 class _CotExtremes(_PerAsset):
     """Per currency: short when speculators are unusually long, long when unusually
-    short, flat otherwise."""
+    short, flat otherwise. follow=True takes the crowd's side."""
 
+    follow = False
     defaults = {"lookback": 780, "entry": 1.5, "rebalance": "W"}
 
     def required(self):
@@ -60,7 +64,8 @@ class _CotExtremes(_PerAsset):
         z = S.cot_z(panel, [S.ccy(c) for c in self.universe], self.lookback)
         z.columns = self.universe
         side = pd.DataFrame(0.0, index=panel.index, columns=self.universe)
-        return side.mask(z > self.entry, -1.0).mask(z < -self.entry, 1.0)
+        side = side.mask(z > self.entry, -1.0).mask(z < -self.entry, 1.0)
+        return -side if self.follow else side
 
     def weights(self, panel):
         return _finish(self, self.signal(panel), panel[self.universe])

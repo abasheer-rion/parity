@@ -194,6 +194,24 @@ SPEC_OPTIONS = {
                             "delay": "0 or 1 days before acting"},
                  "example": {"kind": "pair", "a": "fx.AUD", "b": "fx.NZD", "window": 120,
                              "entry": 2.0, "delay": 1}},
+        "cot": {"fields": {"mode": "rank or extremes",
+                           "lookback": "business days for the z-score, e.g. 780 (3 years)",
+                           "follow": "false bets against speculators, true with them",
+                           "k": "rank only: currencies on each side, 1 to 3",
+                           "entry": "extremes only: z-score, 1.0 to 2.5",
+                           "rebalance": "W or M"},
+                "example": {"kind": "cot", "mode": "rank", "lookback": 780, "follow": False,
+                            "k": 2, "rebalance": "W"}},
+        "policy": {"fields": {"universe": "xg10 (9 currencies) or xwide (27, 5bp cost)",
+                              "rank_on": "policy_gap (carry) or policy_change (hikes)",
+                              "lookback": "policy_change only, days; 0 for policy_gap",
+                              "k": "currencies on each side",
+                              "stress_off": "null, or the St. Louis Fed stress level above "
+                                            "which the book goes to cash",
+                              "rebalance": "W or M"},
+                   "example": {"kind": "policy", "universe": "xwide", "rank_on": "policy_gap",
+                               "lookback": 0, "k": 5, "stress_off": None,
+                               "rebalance": "M"}},
         "mix": {"fields": {"assets": "2 to 6 catalog keys from factors, industries, "
                                      "eq.US_TOTAL, bond.TR10, bond.TR2, cmd.BRENT",
                            "scale": "fixed or inverse_vol", "trend": "true/false",
@@ -210,8 +228,10 @@ _REQUIRED = {
     "chart": {"indicator", "universe", "long_only", "rebalance"},
     "pair": {"a", "b", "window", "entry", "delay"},
     "mix": {"assets", "scale", "trend", "lookback", "vol_target"},
+    "cot": {"mode", "lookback", "follow", "rebalance"},
+    "policy": {"universe", "rank_on", "lookback", "k", "stress_off", "rebalance"},
 }
-_OPTIONAL = {"chart": {"window", "band", "entry", "exit"}}
+_OPTIONAL = {"chart": {"window", "band", "entry", "exit"}, "cot": {"k", "entry"}}
 _INTS = {"lookback": (2, 2520), "skip": (0, 252), "k": (1, 10), "window": (2, 1000),
          "entry": (1, 1000), "exit": (1, 1000), "delay": (0, 5)}
 _PAIR_POOL = set(search.WIDE) | set(search.IND)
@@ -233,7 +253,8 @@ def validate_spec(spec: dict) -> dict:
                         "Call spec_options for fields and examples.")
     out = dict(spec)
     for key, (lo, hi) in _INTS.items():
-        if key in out and not (kind == "pair" and key == "entry"):
+        if key in out and not (kind in ("pair", "cot") and key == "entry") \
+                and not (kind == "policy" and key == "lookback" and out[key] == 0):
             if not isinstance(out[key], (int, float)) or int(out[key]) != out[key] \
                     or not lo <= out[key] <= hi:
                 raise ToolError(f"{key} must be a whole number from {lo} to {hi}")
@@ -267,6 +288,25 @@ def validate_spec(spec: dict) -> dict:
                             "(fx.EUR ...) or 12 industries (ind.Enrgy ...)")
         if not 0.25 <= float(out["entry"]) <= 5:
             raise ToolError("entry must be a z-score from 0.25 to 5")
+    if kind == "cot":
+        if out["mode"] not in ("rank", "extremes") or not isinstance(out["follow"], bool):
+            raise ToolError("mode must be rank or extremes, and follow true or false")
+        need = "k" if out["mode"] == "rank" else "entry"
+        if need not in out or ({"k", "entry"} - {need}) & set(out):
+            raise ToolError(f"a {out['mode']} cot spec needs {need} (and not the other)")
+        if need == "k" and not 1 <= out["k"] <= 4:
+            raise ToolError("k must be from 1 to 4 for the 10 currencies")
+        if need == "entry" and not 0.5 <= float(out["entry"]) <= 4:
+            raise ToolError("entry must be a z-score from 0.5 to 4")
+    if kind == "policy":
+        if out["universe"] not in ("xg10", "xwide"):
+            raise ToolError("universe for policy must be xg10 or xwide")
+        if out["rank_on"] not in ("policy_gap", "policy_change"):
+            raise ToolError("rank_on must be policy_gap or policy_change")
+        if out["k"] * 2 > (9 if out["universe"] == "xg10" else 27):
+            raise ToolError(f"k={out['k']} is too many for that universe")
+        if out["stress_off"] is not None and not -2 <= float(out["stress_off"]) <= 5:
+            raise ToolError("stress_off must be null or from -2 to 5")
     if kind == "mix":
         assets = out["assets"]
         if not isinstance(assets, list) or not 2 <= len(set(assets)) <= 6 \
@@ -902,7 +942,9 @@ class ParityTools:
 # The names a drafted recipe uses, all of which factory.py already has in scope.
 RECIPE_IMPORTS = ("from parity.strategies.factory import (BOND, CASH, MKT, BreakoutBook, "
                   "MixBook, OscillatorBook, PairBook, RankBook, TimingBook, TrendBook, make, "
-                  "past_return, tbill_over)")
+                  "past_return, tbill_over); from parity.strategies.edges import (_CotRank, "
+                  "_CotExtremes, _PolicyRank); from parity.strategies._signals import "
+                  "(COT_FX, XG10, XWIDE, cot_z, fomc_week)")
 
 PROMOTE = """1. Read the code and the idea. Is it a real, named idea, not a near-copy of one?
 2. Paste the make(...) call into engine/src/parity/strategies/factory.py and add a
@@ -955,6 +997,19 @@ def recipe_code(spec: dict, name: str, display: str, description: str) -> str:
         body = (f"mix={mix!r}, scale={spec['scale']!r}, only_if_trending={spec['trend']}, "
                 f"funded={paid}, max_gross=2.0, lookback={spec['lookback']}, "
                 f"vol_target={spec['vol_target']!r})")
+    elif k == "cot":
+        block = "_CotRank" if spec["mode"] == "rank" else "_CotExtremes"
+        size = f"k={spec['k']}" if spec["mode"] == "rank" else f"entry={spec['entry']!r}"
+        body = (f"universe=[f'fx.{{c}}' for c in COT_FX], follow={spec['follow']}, "
+                f"lookback={spec['lookback']}, {size}, rebalance={spec['rebalance']!r})")
+    elif k == "policy":
+        block = "_PolicyRank"
+        uni = "XG10" if spec["universe"] == "xg10" else "XWIDE"
+        cost = 5.0 if spec["universe"] == "xwide" else 0.0
+        gate = spec["stress_off"]
+        body = (f"universe={uni}, rank_on={spec['rank_on']!r}, lookback={spec['lookback']}, "
+                f"k={spec['k']}, min_cost_bps={cost}, gate_level={gate!r}, "
+                f"level={0.0 if gate is None else gate!r}, rebalance={spec['rebalance']!r})")
     else:
         block = f"_{''.join(w.title() for w in name.split('_'))}"
         rule, p = spec["rule"], spec["param"]
@@ -967,16 +1022,28 @@ def recipe_code(spec: dict, name: str, display: str, description: str) -> str:
             "rates_falling": f"panel['bond.UST10Y'] < panel['bond.UST10Y'].rolling({p}).mean()",
             "copper_up": f"past_return(panel['cmd.COPPER'], {p}) > 0",
             "oil_calm": f"past_return(panel['cmd.BRENT'], 63) < {p}",
+            "stress_below": f"panel['risk.STLFSI'] < {p}",
+            "conditions_easing": f"panel['risk.NFCI'] <= panel['risk.NFCI'].shift({p})",
+            "claims_calm": "panel['macro.CLAIMS'].rolling(20, min_periods=15).mean() / "
+                           "panel['macro.CLAIMS'].rolling(260, min_periods=200).min() - 1 < "
+                           f"{p}",
+            "spx_not_crowded": f"~(cot_z(panel, ['SPX_EMINI'], 780)['SPX_EMINI'] > {p})",
+            "fomc_week": f"fomc_week(panel.index) % 2 == {p}",
         }[rule]
         pre = (f"class {block}(TimingBook):\n    def invested(self, panel):\n"
                f"        px = panel[MKT]  # noqa: F841\n        return {expr}\n\n\n")
         extra = {"absolute_momentum": ["rate.TBILL3M"], "vix_below_average": ["risk.VIX"],
                  "vix_below": ["risk.VIX"], "curve_positive": ["bond.UST10Y", "bond.UST2Y"],
                  "rates_falling": ["bond.UST10Y"], "copper_up": ["cmd.COPPER"],
-                 "oil_calm": ["cmd.BRENT"]}.get(rule, [])
+                 "oil_calm": ["cmd.BRENT"], "stress_below": ["risk.STLFSI"],
+                 "conditions_easing": ["risk.NFCI"], "claims_calm": ["macro.CLAIMS"],
+                 "spx_not_crowded": ["cot.SPX_EMINI_PCT"]}.get(rule, [])
+        cash = ""
+        if rule in search.WIDER_RULES:  # cash earns the T-bill (DEC-0026)
+            extra, cash = extra + ["rate.TBILL3M"], "cash_rate='rate.TBILL3M', "
         fallback = "BOND" if spec["fallback"] == "bond" else "CASH"
         body = (f"extra={extra!r}, fallback={fallback}, leverage={spec['leverage']!r}, "
-                f"max_gross={spec['leverage']!r}, rebalance={spec['rebalance']!r})")
+                f"max_gross={spec['leverage']!r}, {cash}rebalance={spec['rebalance']!r})")
     return pre + head.format(block=block) + body + "\n"
 
 

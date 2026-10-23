@@ -27,6 +27,9 @@ def full_panel() -> pd.DataFrame:
             data[key] = monthly.reindex(idx, method="ffill").bfill().values
         elif kind == "bond" and key.startswith("bond.UST"):
             data[key] = 3 + np.cumsum(rng.normal(0, 0.05, n))
+        elif key in ("risk.STLFSI", "risk.NFCI"):
+            # Stress indexes sit around zero (zero is average stress).
+            data[key] = np.cumsum(rng.normal(0, 0.05, n)) * 0.3
         elif key == "risk.VIX":
             data[key] = 20 * np.exp(np.cumsum(rng.normal(0, 0.05, n)) * 0.2)
         elif kind == "factor":

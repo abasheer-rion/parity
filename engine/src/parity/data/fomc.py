@@ -1,4 +1,4 @@
-"""Scheduled FOMC announcement days, 1994 to 2027, for calendar strategies (DEC-0025).
+"""Scheduled FOMC announcement days, 1994 to 2027, for calendar strategies (DEC-0026).
 
 Each date is the day the Federal Open Market Committee's statement came out: the last
 day of each scheduled meeting. Unscheduled meetings, conference calls and notation votes

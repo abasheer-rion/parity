@@ -45,7 +45,7 @@ assert set(FAC5) <= {f"factor.{k}" for k in FACTORS}
 STRUCTURE = {"universe", "mix", "kind", "rank_on", "long_short", "long_only", "funded",
              "max_gross", "a", "b", "asset", "fallback", "leverage", "extra", "scale",
              "only_if_trending", "driver", "summary", "min_cost_bps", "cash_rate",
-             "gate_level"}
+             "gate_level", "follow"}
 
 
 def make(block, name, display_name, description, family, asset_class, style, horizon,

@@ -1,5 +1,5 @@
 ---
-id: DEC-0025
+id: DEC-0026
 title: New edge families from the wider data
 type: decision
 status: accepted
@@ -34,7 +34,7 @@ The honest result: none of the 17 beats the S&P 500 on every test. The best is c
    - **Policy rates (BIS).** G10 carry on policy rates, wide carry on 27 currencies, hiking central banks, and wide carry switched off in financial stress.
    - **Regimes.** Stocks while the St. Louis Fed stress index is low, while Chicago Fed financial conditions ease, and unless jobless claims climb.
    - **Calendar.** Stocks before Fed announcements (pre-FOMC drift), stocks in even weeks of the Fed cycle, and stocks over the turn of the year. Turn of the month already existed.
-2. **Two new search shapes and five new timing rules** in `engine/src/parity/search.py`: CFTC positioning (against or with the crowd, ranked or at extremes), and policy-rate ranking on 9 or 27 currencies. The new timing rules cover stress, financial conditions, claims, crowded S&P futures and the Fed cycle week, with odd weeks as a built-in placebo. The search skips any series this machine has not fetched yet, so the box keeps running until its daily refresh builds them.
+2. **Two new search shapes and five new timing rules** in `engine/src/parity/search.py`: CFTC positioning (against or with the crowd, ranked or at extremes), and policy-rate ranking on 9 or 27 currencies. The new timing rules cover stress, financial conditions, claims, crowded S&P futures and the Fed cycle week, with odd weeks as a built-in placebo. The search skips any series this machine has not fetched yet, so the box keeps running until its daily refresh builds them. The MCP tools (DEC-0025) know the new shapes and rules too, so an assistant can try them and draft recipes for them.
 3. **Release delays, checked by tests** (`engine/tests/test_edges.py`):
    - CFTC positions are dated Tuesday and released Friday at 15:30 New York time. The catalog moves them to Friday, and the signal acts on Monday, because our dollar prices are noon fixings.
    - The ECB publishes the euro yield curve at noon the next day, so it now carries a one-day delay in the catalog. No existing strategy read it, so no result changes.

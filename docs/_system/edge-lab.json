@@ -105,7 +105,7 @@
   ],
   "reading": [
     { "doc": "RES-0011", "label": "Where market edges come from and which survive" },
-    { "doc": "DEC-0025", "label": "New edge families" },
+    { "doc": "DEC-0026", "label": "New edge families" },
     { "doc": "DEC-0014", "label": "A strategy factory and an always-on search" },
     { "doc": "REF-0006", "label": "The gauntlet" }
   ]
