@@ -136,5 +136,5 @@ Combining gives a researcher many new choices: which ingredients, which weights,
 ## Referenced by
 
 - [RES-0017: How the ingredients behave in crises, and what Sim World should show](0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
-- [LOG-0011: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
+- [LOG-0012: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 <!-- backlinks:end -->
