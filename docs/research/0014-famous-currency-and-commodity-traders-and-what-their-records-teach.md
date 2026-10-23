@@ -1,5 +1,5 @@
 ---
-id: RES-0013
+id: RES-0014
 title: Famous currency and commodity traders and what their records teach
 type: research
 status: current
@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [RES-0006, RES-0009, RES-0011, RES-0012]
+related: [RES-0006, RES-0009, RES-0012, RES-0013]
 ---
 
 # Famous currency and commodity traders and what their records teach
@@ -71,7 +71,7 @@ Most famous-trader numbers are grade B or C. None of the private fund returns be
 
 ### 1. Pegs and policy breaks
 
-The two biggest single currency wins (1992 sterling, 1987 kiwi) and one of the biggest retail disasters (2015 franc) all came from a central bank defending a price. The winners were on the side the peg would break toward. The losers were on the side that collected small, steady gains while it held. The pattern repeats in the EM crisis list in [RES-0011](0011-emerging-market-currencies.md#what-happened-after-the-papers).
+The two biggest single currency wins (1992 sterling, 1987 kiwi) and one of the biggest retail disasters (2015 franc) all came from a central bank defending a price. The winners were on the side the peg would break toward. The losers were on the side that collected small, steady gains while it held. The pattern repeats in the EM crisis list in [RES-0012](0012-emerging-market-currencies.md#what-happened-after-the-papers).
 
 Testable? Barely. There are maybe 20 such breaks in our data period, too few for statistics. What we can do is make sure our strategies are not on the "steady small gains" side of a peg without knowing it. Carry trades into pegged currencies are exactly that.
 
@@ -79,7 +79,7 @@ Testable? Barely. There are maybe 20 such breaks in our data period, too few for
 
 Amaranth, Niederhoffer, the Hunts, Sumitomo and the franc shorts were all in positions that earned steadily or looked safe until the market moved further than they could absorb, at a size the market could not take back. Two things made each loss fatal: leverage and illiquidity.
 
-This is the warning label on two ideas in [RES-0012](0012-commodity-futures-carry-trend-and-volatility.md): selling commodity volatility and EM carry. Both earn a premium for taking this risk. Our tests must show the worst month, not only the average.
+This is the warning label on two ideas in [RES-0013](0013-commodity-futures-carry-trend-and-volatility.md): selling commodity volatility and EM carry. Both earn a premium for taking this risk. Our tests must show the worst month, not only the average.
 
 ### 3. Trend following with hard loss limits
 
@@ -103,7 +103,7 @@ Every winner above was chosen because they won. FX Concepts and Astenbeck were f
 2. **Charge realistic costs and cap position size for thin markets.** For EM currencies and natural gas, our flat 1 basis point is too generous.
 3. **Close positions at a penalty when a market stops trading** (RUB 2022) instead of freezing them at the last price.
 4. **Treat selling volatility and carry as insurance businesses.** Test them, but judge them on how they do in the stock market's worst months (test B5), not only on Sharpe.
-5. **Trend following with volatility-based position sizing is the one trader method with both a public rule set and decades of independent evidence.** We already test it on currencies; the energy futures version is next ([RES-0012](0012-commodity-futures-carry-trend-and-volatility.md#what-this-means-for-us)).
+5. **Trend following with volatility-based position sizing is the one trader method with both a public rule set and decades of independent evidence.** We already test it on currencies; the energy futures version is next ([RES-0013](0013-commodity-futures-carry-trend-and-volatility.md#what-this-means-for-us)).
 6. **Do not add "copy a legend" strategies to the catalog.** None of these records is a rule anyone could have followed in advance.
 
 ## What we could not verify
@@ -123,7 +123,7 @@ Every winner above was chosen because they won. FX Concepts and Astenbeck were f
 
 - [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
 - [EXP-0009: Oil volatility and commodity currency signals](../experiments/0009-oil-volatility-and-commodity-currency-signals.md)
-- [RES-0012: Commodity futures, carry, trend and volatility](0012-commodity-futures-carry-trend-and-volatility.md)
-- [RES-0014: Lesser-known strategies and what firms have published](0014-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0013: Commodity futures, carry, trend and volatility](0013-commodity-futures-carry-trend-and-volatility.md)
+- [RES-0015: Lesser-known strategies and what firms have published](0015-lesser-known-strategies-and-what-firms-have-published.md)
 - [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

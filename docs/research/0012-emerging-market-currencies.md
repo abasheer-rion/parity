@@ -1,5 +1,5 @@
 ---
-id: RES-0011
+id: RES-0012
 title: Emerging market currencies
 type: research
 status: current
@@ -132,10 +132,10 @@ We checked on 2026-10-21 that the ECB, OECD and BIS endpoints answer scripted re
 - [HYP-0010: Emerging market basket kept paying after 2008](../hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md)
 - [HYP-0011: Emerging market momentum survives costs](../hypotheses/0011-emerging-market-momentum-survives-costs.md)
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
-- [RES-0013: Famous currency and commodity traders and what their records teach](0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
-- [RES-0014: Lesser-known strategies and what firms have published](0014-lesser-known-strategies-and-what-firms-have-published.md)
-- [RES-0015: Combining many strategies, the evidence and the ingredient list](0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- [RES-0016: How the ingredients behave in crises, and what Sim World should show](0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [RES-0014: Famous currency and commodity traders and what their records teach](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0015: Lesser-known strategies and what firms have published](0015-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0016: Combining many strategies, the evidence and the ingredient list](0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0017: How the ingredients behave in crises, and what Sim World should show](0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [LOG-0009: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

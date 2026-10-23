@@ -1,5 +1,5 @@
 ---
-id: RES-0016
+id: RES-0017
 title: How the ingredients behave in crises, and what Sim World should show
 type: research
 status: current
@@ -7,14 +7,14 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [RES-0015, RES-0011, DEC-0020, DEC-0021]
+related: [RES-0016, RES-0012, DEC-0020, DEC-0021]
 ---
 
 # How the ingredients behave in crises, and what Sim World should show
 
 ## In plain words
 
-Before we build the two combined books from [RES-0015](0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md), we need to know how each ingredient tends to behave when markets break. The published evidence is clear on three of them. Carry trades lose suddenly when fear spikes. Momentum loses when a falling market snaps back. Trend following usually makes money in slow bear markets but not in fast crashes. Emerging market currencies with weak budgets and large trade deficits fell most when the Fed hinted at slowing its bond buying in 2013. We also checked the site Ayan built for viewing these scenarios. Its crisis dates match the published dates. It is missing some of the crises that matter most for emerging market currencies, and its "what if" page has no emerging market currency in it yet.
+Before we build the two combined books from [RES-0016](0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md), we need to know how each ingredient tends to behave when markets break. The published evidence is clear on three of them. Carry trades lose suddenly when fear spikes. Momentum loses when a falling market snaps back. Trend following usually makes money in slow bear markets but not in fast crashes. Emerging market currencies with weak budgets and large trade deficits fell most when the Fed hinted at slowing its bond buying in 2013. We also checked the site Ayan built for viewing these scenarios. Its crisis dates match the published dates. It is missing some of the crises that matter most for emerging market currencies, and its "what if" page has no emerging market currency in it yet.
 
 ## Summary
 

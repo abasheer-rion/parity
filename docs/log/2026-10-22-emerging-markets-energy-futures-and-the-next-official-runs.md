@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [carry, commodities, fx]
-related: [LOG-0005, LOG-0006, LOG-0007, RES-0011, RES-0012, RES-0013, EXP-0005, EXP-0007, EXP-0008, EXP-0009]
+related: [LOG-0005, LOG-0006, LOG-0007, RES-0012, RES-0013, RES-0014, EXP-0005, EXP-0007, EXP-0008, EXP-0009]
 ---
 
 # Emerging markets, energy futures and the next official runs
@@ -22,9 +22,9 @@ Amanda asked for the next steps from the last session plus much more research: e
 | --- | --- | --- |
 | 1 | Summarise the research in the repo | Read results, audit, paper library and logs; the main points went into the chat |
 | 2 | Do the next steps | Registered the rerun under corrected scoring (`REG-0004`, [EXP-0005](../experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)) and the overlay on its own (`REG-0005`, [EXP-0006](../experiments/0006-stocks-plus-currency-trend-on-its-own.md)). The forward test is not registered; see open questions |
-| 3 | Research emerging market currencies | [RES-0011](../research/0011-emerging-market-currencies.md), eight papers read in full; three strategies and [EXP-0007](../experiments/0007-emerging-market-currencies-since-2010.md) |
-| 4 | More volatile commodities to beat the S&P 500 | [RES-0012](../research/0012-commodity-futures-carry-trend-and-volatility.md): on our risk-matched tests more volatility does not help, a better Sharpe ratio does. Four strategies on rolled energy futures and oil volatility; [EXP-0008](../experiments/0008-energy-futures-trend-and-carry.md), [EXP-0009](../experiments/0009-oil-volatility-and-commodity-currency-signals.md) |
-| 5 | Study famous currency and commodity traders | [RES-0013](../research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md): 17 records graded by evidence quality, and the rules they suggest |
+| 3 | Research emerging market currencies | [RES-0012](../research/0012-emerging-market-currencies.md), eight papers read in full; three strategies and [EXP-0007](../experiments/0007-emerging-market-currencies-since-2010.md) |
+| 4 | More volatile commodities to beat the S&P 500 | [RES-0013](../research/0013-commodity-futures-carry-trend-and-volatility.md): on our risk-matched tests more volatility does not help, a better Sharpe ratio does. Four strategies on rolled energy futures and oil volatility; [EXP-0008](../experiments/0008-energy-futures-trend-and-carry.md), [EXP-0009](../experiments/0009-oil-volatility-and-commodity-currency-signals.md) |
+| 5 | Study famous currency and commodity traders | [RES-0014](../research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md): 17 records graded by evidence quality, and the rules they suggest |
 
 Engineering notes, in the order found:
 

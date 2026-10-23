@@ -94,6 +94,6 @@ No line is written by hand or by a model.
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
-- [RES-0016: How the ingredients behave in crises, and what Sim World should show](../research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [RES-0017: How the ingredients behave in crises, and what Sim World should show](../research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
 - [LOG-0012: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
 <!-- backlinks:end -->
