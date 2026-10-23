@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, fx]
-related: [EXP-0009, HYP-0003, HYP-0008, RES-0012]
+related: [EXP-0009, HYP-0003, HYP-0008, RES-0013]
 ---
 
 # Commodity currencies lead energy futures

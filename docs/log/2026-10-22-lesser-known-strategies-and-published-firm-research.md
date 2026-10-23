@@ -7,18 +7,18 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0009, RES-0014]
+related: [LOG-0009, RES-0015]
 ---
 
 # Lesser-known strategies and published firm research
 
 ## In plain words
 
-Amanda asked for more research behind the test plans: strategies in emerging market currencies or commodities that few people trade, and the numbers big firms have published or that have leaked. We used only published material and wrote it up in RES-0014 with eight new catalog entries. No strategy was built or run.
+Amanda asked for more research behind the test plans: strategies in emerging market currencies or commodities that few people trade, and the numbers big firms have published or that have leaked. We used only published material and wrote it up in RES-0015 with eight new catalog entries. No strategy was built or run.
 
 ## What happened
 
-- Read eleven papers and notes in full ([RES-0014](../research/0014-lesser-known-strategies-and-what-firms-have-published.md)): AQR's century of factor premia, basis-momentum, fundamentals-adjusted currency value, commodity skewness, sovereign risk and currencies, return seasonalities, open interest, inventories, carry crashes, Two Sigma on roll returns, and a study of the Goldman roll.
+- Read eleven papers and notes in full ([RES-0015](../research/0015-lesser-known-strategies-and-what-firms-have-published.md)): AQR's century of factor premia, basis-momentum, fundamentals-adjusted currency value, commodity skewness, sovereign risk and currencies, return seasonalities, open interest, inventories, carry crashes, Two Sigma on roll returns, and a study of the Goldman roll.
 - Added ALG-0088 to ALG-0095 at stage 2 and updated ALG-0016 with AQR's post-publication evidence.
 - Leaked or confidential firm material was ruled out: legal risk, and it could never be cited in a shared document.
 - AQR's data files were not downloaded or analysed, because its terms forbid reproducing site content without written consent; only numbers from its published papers are used.

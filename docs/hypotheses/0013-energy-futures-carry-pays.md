@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [carry, commodities]
-related: [EXP-0008, RES-0012]
+related: [EXP-0008, RES-0013]
 ---
 
 # Energy futures carry pays
@@ -45,6 +45,6 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 ## Referenced by
 
 - [EXP-0008: Energy futures trend and carry](../experiments/0008-energy-futures-trend-and-carry.md)
-- [RES-0014: Lesser-known strategies and what firms have published](../research/0014-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0015: Lesser-known strategies and what firms have published](../research/0015-lesser-known-strategies-and-what-firms-have-published.md)
 - [ALG-0038: Commodity carry (roll yield / basis)](../algorithms/0038-commodity-carry-roll-yield.md)
 <!-- backlinks:end -->

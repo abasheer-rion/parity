@@ -1,5 +1,5 @@
 ---
-id: RES-0014
+id: RES-0015
 title: Lesser-known strategies and what firms have published
 type: research
 status: current
@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [RES-0011, RES-0012, RES-0013, HYP-0009, HYP-0013]
+related: [RES-0012, RES-0013, RES-0014, HYP-0009, HYP-0013]
 ---
 
 # Lesser-known strategies and what firms have published
@@ -37,7 +37,7 @@ Several large firms put research and even return series online. Everything below
 | --- | --- | --- | --- |
 | AQR | Papers, plus monthly factor return files (Value and Momentum Everywhere, Century of Factor Premia, Time Series Momentum) | Which styles held up after publication, by asset class (table below) | Papers: yes, cited. Data files: AQR's terms forbid reproducing or distributing anything from the site without written consent ([DAT-0003](../datasets/0003-aqr-datasets.md)); we use the published numbers, not the files |
 | Two Sigma | Street View notes | Rolling futures cost the S&P GSCI about 10% a year from 2004 to 2017, while spot prices barely moved; the "roll tax" was the main drag on commodity indices ([Street View, October 2017](https://www.twosigma.com/wp-content/uploads/SV_10_17.pdf)) [@twosigma2017] | Yes, as context for carry |
-| Man Group (Man Institute) | Articles and summaries | Volatility targeting barely changes Sharpe ratios for currencies and commodities but cuts tail losses ([RES-0012](0012-commodity-futures-carry-trend-and-volatility.md)) | Summary only |
+| Man Group (Man Institute) | Articles and summaries | Volatility targeting barely changes Sharpe ratios for currencies and commodities but cuts tail losses ([RES-0013](0013-commodity-futures-carry-trend-and-volatility.md)) | Summary only |
 | Macrosynergy (J.P. Morgan JPMaQS) | Research posts and notebooks | Simple nominal FX carry across 28 currencies since 2002: Sharpe about 0.4 to 0.5 before costs; adjusting carry for inflation alone does not fix its problems | Posts only ([FX carry](https://macrosynergy.com/?p=43153)); their data is licensed |
 | BIS | Working papers and free data | A weaker dollar loosens financial conditions in EM through foreign investors' risk-taking; free real effective exchange rates and policy rates | Yes ([BIS Bulletin 114](https://www.bis.org/publ/bisbull114.pdf)); we already use BIS policy rates |
 

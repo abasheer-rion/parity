@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [carry, fx]
-related: [EXP-0007, RES-0011]
+related: [EXP-0007, RES-0012]
 ---
 
 # Emerging market basket kept paying after 2008
@@ -22,7 +22,7 @@ From February 2010, an equal-weighted long basket of every emerging market curre
 
 ## Why it might be true
 
-- Gilmore and Hayashi (2011) report 6.6% a year at 4.9% volatility (Sharpe 1.34) for 1999 to 2008 ([RES-0011](../research/0011-emerging-market-currencies.md)).
+- Gilmore and Hayashi (2011) report 6.6% a year at 4.9% volatility (Sharpe 1.34) for 1999 to 2008 ([RES-0012](../research/0012-emerging-market-currencies.md)).
 - The basket earns the average EM interest premium, which stayed large.
 
 ## Why it might be false

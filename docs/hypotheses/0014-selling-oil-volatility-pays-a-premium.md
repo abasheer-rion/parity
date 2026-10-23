@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, kpis]
-related: [EXP-0009, RES-0012, RES-0013]
+related: [EXP-0009, RES-0013, RES-0014]
 ---
 
 # Selling oil volatility pays a premium
@@ -34,7 +34,7 @@ From 2008-04-01 to 2024-04-05, selling a 30-day crude oil variance swap each mon
 ## How we test it
 
 1. Pre-registered in `REG-0008`. Starts 2008-04-01 with the commodity currency test; OVX starts in May 2007.
-2. Pass bar: at least 4 of 5 reality tests. Test B5 (does not crash with stocks) is expected to fail and matters most for [RES-0013](../research/0013-famous-currency-and-commodity-traders-and-what-their-records-teach.md)'s warning.
+2. Pass bar: at least 4 of 5 reality tests. Test B5 (does not crash with stocks) is expected to fail and matters most for [RES-0014](../research/0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)'s warning.
 3. Results in [EXP-0009](../experiments/0009-oil-volatility-and-commodity-currency-signals.md).
 
 ## Result so far

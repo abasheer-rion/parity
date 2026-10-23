@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, momentum]
-related: [EXP-0004, HYP-0012, HYP-0013, RES-0012]
+related: [EXP-0004, HYP-0012, HYP-0013, RES-0013]
 ---
 
 # Energy futures trend and carry
