@@ -1,0 +1,729 @@
+{
+ "id": "crypto-perps-leverage",
+ "order": 6,
+ "level": "Markets",
+ "title": "Crypto, perps, funding and leverage",
+ "summary": "Why coins swing so much, how perpetual futures work, what funding costs, how liquidation happens, and how the basis trade earns from all of it.",
+ "docs": [
+  "REF-0014"
+ ],
+ "lessons": [
+  {
+   "id": "swings",
+   "title": "Crypto swings a lot",
+   "minutes": 2,
+   "body": [
+    "Crypto prices move far more than stocks. A 10% day is normal for many coins, and falls of 70% or more have happened many times.",
+    "Research finds coin returns are explained mostly by crypto's own factors, such as momentum and attention, rather than by the stock market or the economy.",
+    "The picture shows two made-up paths with the same expected gain: one with stock-like bumpiness and one with coin-like bumpiness."
+   ],
+   "terms": [
+    "crypto-volatility",
+    "volatility",
+    "drawdown"
+   ],
+   "visual": {
+    "kind": "paths",
+    "alt": "Two made-up paths over a year with the same expected gain. The stock-like one moves gently; the coin-like one swings several times as far, up and down.",
+    "params": {
+     "days": 250,
+     "series": [
+      {
+       "label": "Stock-like",
+       "drift": 0.0003,
+       "vol": 0.011,
+       "seed": 31
+      },
+      {
+       "label": "Coin-like",
+       "drift": 0.0003,
+       "vol": 0.04,
+       "seed": 12
+      }
+     ],
+     "xLabels": [
+      "Day 1",
+      "Day 250"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A stock index-like path over a year.",
+      "show": [
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "A coin-like path with the same expected gain swings far more.",
+      "show": [
+       1,
+       1
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Crypto prices and how hard coins fall",
+     "href": "#/markets/crypto",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Compared with stocks, how bumpy are crypto prices?",
+     "options": [
+      "About the same",
+      "Much bumpier",
+      "Calmer"
+     ],
+     "answer": 1,
+     "why": "Daily swings of 10% are normal for many coins."
+    },
+    {
+     "q": "What mostly explains coin returns, according to the research Parity cites?",
+     "options": [
+      "The stock market",
+      "Crypto's own factors such as momentum and attention",
+      "Interest rates alone"
+     ],
+     "answer": 1,
+     "why": "Liu and Tsyvinski found crypto-specific factors matter most."
+    }
+   ]
+  },
+  {
+   "id": "perps",
+   "title": "Perpetual futures",
+   "minutes": 2,
+   "body": [
+    "A **perpetual future**, or perp, is a bet on a coin's price that never expires. You can bet it goes up or down, usually with borrowed money.",
+    "Normal futures expire, and their price meets the coin's price at the end. A perp has no end, so it uses a different trick to stay close: the funding payment, covered in the next lesson.",
+    "The picture shows a perp's price tracking the coin's spot price closely, with a small gap that changes over time."
+   ],
+   "terms": [
+    "perpetual-future",
+    "open-interest"
+   ],
+   "visual": {
+    "kind": "lines",
+    "alt": "Two lines over 60 days: a coin's spot price and its perp price, almost on top of each other, with the perp slightly above.",
+    "params": {
+     "series": [
+      {
+       "label": "Spot",
+       "color": "blue",
+       "points": [
+        99.09,
+        100.35,
+        106.14,
+        98.38,
+        95.21,
+        96.01,
+        97.26,
+        98.06,
+        96.89,
+        98.91,
+        99.85,
+        98.4,
+        105.95,
+        107.19,
+        105.53,
+        105.32,
+        104.71,
+        104.62,
+        96.5,
+        95.19,
+        98.21,
+        94.93,
+        94.83,
+        97.68,
+        100.32,
+        105.02,
+        99.89,
+        98.94,
+        98.03,
+        99.98,
+        103.41,
+        95.51,
+        98.78,
+        94.68,
+        96.73,
+        92.59,
+        93.17,
+        96.67,
+        96.33,
+        96.98,
+        99.43,
+        99.95,
+        99.79,
+        104.59,
+        108.04,
+        107.2,
+        116.52,
+        112.69,
+        115.94,
+        115.14,
+        115.71,
+        118.3,
+        119.21,
+        121.64,
+        116.31,
+        111.27,
+        113.45,
+        110.33,
+        107.09,
+        102.58
+       ]
+      },
+      {
+       "label": "Perp",
+       "color": "warn",
+       "points": [
+        99.29,
+        100.6,
+        106.46,
+        98.72,
+        95.58,
+        96.41,
+        97.7,
+        98.52,
+        97.37,
+        99.41,
+        100.35,
+        98.88,
+        106.45,
+        107.67,
+        105.97,
+        105.72,
+        105.07,
+        104.93,
+        96.73,
+        95.38,
+        98.36,
+        95.02,
+        94.88,
+        97.69,
+        100.3,
+        104.96,
+        99.81,
+        98.84,
+        97.93,
+        99.88,
+        103.32,
+        95.44,
+        98.73,
+        94.66,
+        96.76,
+        92.65,
+        93.28,
+        96.83,
+        96.54,
+        97.24,
+        99.74,
+        100.31,
+        100.18,
+        105.04,
+        108.54,
+        107.72,
+        117.09,
+        113.25,
+        116.52,
+        115.69,
+        116.25,
+        118.82,
+        119.7,
+        122.09,
+        116.68,
+        111.58,
+        113.71,
+        110.53,
+        107.23,
+        102.66
+       ]
+      }
+     ],
+     "xLabels": [
+      "Day 1",
+      "Day 60"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "A coin's spot price.",
+      "show": [
+       1,
+       0
+      ]
+     },
+     {
+      "caption": "The perp's price follows it closely, here a little above.",
+      "show": [
+       1,
+       1
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Perps: funding, open interest and leverage risk",
+     "href": "#/markets/perps",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What makes a perpetual future different from a normal future?",
+     "options": [
+      "It has no expiry date",
+      "It can only go up",
+      "It has no leverage"
+     ],
+     "answer": 0,
+     "why": "It never expires, so it needs funding payments to stay close to the spot price."
+    },
+    {
+     "q": "A perp lets you bet on:",
+     "options": [
+      "Only a rise",
+      "A rise or a fall",
+      "Only a fall"
+     ],
+     "answer": 1,
+     "why": "You can go long or short."
+    }
+   ]
+  },
+  {
+   "id": "funding",
+   "title": "Funding: the cost of holding",
+   "minutes": 3,
+   "body": [
+    "The **funding rate** is a payment between the people betting up and the people betting down, made every hour or every eight hours. When the perp trades above the spot price, usually because most people are betting up, the up side pays.",
+    "On Hyperliquid funding is paid every hour and includes a fixed interest part of 0.01% per eight hours. That alone adds to about 11% a year for a long position if nothing else changes.",
+    "When markets are excited, funding can be several times higher. Over weeks it adds up to a real cost of holding a bet."
+   ],
+   "terms": [
+    "funding-rate",
+    "perpetual-future",
+    "crypto-carry"
+   ],
+   "visual": {
+    "kind": "lines",
+    "alt": "Two lines show total funding paid over 90 days: about 2.7 percent at 0.01 percent per eight hours, and about 13.5 percent at 0.05 percent per eight hours.",
+    "params": {
+     "series": [
+      {
+       "label": "0.01% per 8 hours",
+       "color": "blue",
+       "points": [
+        0.0,
+        0.03,
+        0.06,
+        0.09,
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24,
+        0.27,
+        0.3,
+        0.33,
+        0.36,
+        0.39,
+        0.42,
+        0.45,
+        0.48,
+        0.51,
+        0.54,
+        0.57,
+        0.6,
+        0.63,
+        0.66,
+        0.69,
+        0.72,
+        0.75,
+        0.78,
+        0.81,
+        0.84,
+        0.87,
+        0.9,
+        0.93,
+        0.96,
+        0.99,
+        1.02,
+        1.05,
+        1.08,
+        1.11,
+        1.14,
+        1.17,
+        1.2,
+        1.23,
+        1.26,
+        1.29,
+        1.32,
+        1.35,
+        1.38,
+        1.41,
+        1.44,
+        1.47,
+        1.5,
+        1.53,
+        1.56,
+        1.59,
+        1.62,
+        1.65,
+        1.68,
+        1.71,
+        1.74,
+        1.77,
+        1.8,
+        1.83,
+        1.86,
+        1.89,
+        1.92,
+        1.95,
+        1.98,
+        2.01,
+        2.04,
+        2.07,
+        2.1,
+        2.13,
+        2.16,
+        2.19,
+        2.22,
+        2.25,
+        2.28,
+        2.31,
+        2.34,
+        2.37,
+        2.4,
+        2.43,
+        2.46,
+        2.49,
+        2.52,
+        2.55,
+        2.58,
+        2.61,
+        2.64,
+        2.67,
+        2.7
+       ]
+      },
+      {
+       "label": "0.05% per 8 hours",
+       "color": "bad",
+       "points": [
+        0.0,
+        0.15,
+        0.3,
+        0.45,
+        0.6,
+        0.75,
+        0.9,
+        1.05,
+        1.2,
+        1.35,
+        1.5,
+        1.65,
+        1.8,
+        1.95,
+        2.1,
+        2.25,
+        2.4,
+        2.55,
+        2.7,
+        2.85,
+        3.0,
+        3.15,
+        3.3,
+        3.45,
+        3.6,
+        3.75,
+        3.9,
+        4.05,
+        4.2,
+        4.35,
+        4.5,
+        4.65,
+        4.8,
+        4.95,
+        5.1,
+        5.25,
+        5.4,
+        5.55,
+        5.7,
+        5.85,
+        6.0,
+        6.15,
+        6.3,
+        6.45,
+        6.6,
+        6.75,
+        6.9,
+        7.05,
+        7.2,
+        7.35,
+        7.5,
+        7.65,
+        7.8,
+        7.95,
+        8.1,
+        8.25,
+        8.4,
+        8.55,
+        8.7,
+        8.85,
+        9.0,
+        9.15,
+        9.3,
+        9.45,
+        9.6,
+        9.75,
+        9.9,
+        10.05,
+        10.2,
+        10.35,
+        10.5,
+        10.65,
+        10.8,
+        10.95,
+        11.1,
+        11.25,
+        11.4,
+        11.55,
+        11.7,
+        11.85,
+        12.0,
+        12.15,
+        12.3,
+        12.45,
+        12.6,
+        12.75,
+        12.9,
+        13.05,
+        13.2,
+        13.35,
+        13.5
+       ]
+      }
+     ],
+     "unit": "%",
+     "xLabels": [
+      "Day 0",
+      "Day 90"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "At 0.01% every eight hours, funding adds up to about 2.7% over 90 days.",
+      "show": [
+       1,
+       0
+      ],
+      "reveal": 1
+     },
+     {
+      "caption": "In excited markets, 0.05% every eight hours adds up to about 13.5%.",
+      "show": [
+       1,
+       1
+      ],
+      "reveal": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Perps page: today's funding rates",
+     "href": "#/markets/perps",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "Most traders are betting the price goes up and the perp trades above spot. Who usually pays funding?",
+     "options": [
+      "The shorts",
+      "The longs",
+      "The exchange"
+     ],
+     "answer": 1,
+     "why": "The crowded side pays the other side."
+    },
+    {
+     "q": "0.01% every eight hours, held for a year, adds to roughly:",
+     "options": [
+      "1%",
+      "11%",
+      "30%"
+     ],
+     "answer": 1,
+     "why": "Three payments a day for 365 days is about 1,095 basis points, or about 11%."
+    }
+   ]
+  },
+  {
+   "id": "liquidation",
+   "title": "Leverage and liquidation",
+   "minutes": 3,
+   "body": [
+    "Perps usually come with leverage. **Liquidation** is when a leveraged bet loses so much that the exchange closes it for you, and the money you put up is gone.",
+    "Ignoring fees, a fall of 1 divided by the leverage wipes out the margin: 10% at 10 times, 5% at 20 times. Exchanges close positions earlier, when equity falls below the maintenance margin.",
+    "Coins can move 10% in a day, so high leverage on a coin is often closed by an ordinary move, not a crash."
+   ],
+   "terms": [
+    "liquidation",
+    "leverage",
+    "margin"
+   ],
+   "visual": {
+    "kind": "leverage",
+    "alt": "A coin price swings over 120 days. A red line marks where the margin is gone. At 2 times leverage it is far below and never reached. At 5, 10 and 20 times the line moves up, a dip crosses it sooner each time, and the position is closed.",
+    "params": {
+     "days": 120,
+     "drift": 0.0005,
+     "vol": 0.03,
+     "seed": 9
+    },
+    "steps": [
+     {
+      "caption": "2x leverage: the coin would need to halve.",
+      "lev": 2
+     },
+     {
+      "caption": "5x: a 20% fall is enough.",
+      "lev": 5
+     },
+     {
+      "caption": "10x: a 10% fall, which coins often do in a day.",
+      "lev": 10
+     },
+     {
+      "caption": "20x: a 5% dip closes the position.",
+      "lev": 20
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Practice with pretend money",
+     "href": "#/markets/practice",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "At 10 times leverage, about what price fall wipes out the margin, ignoring fees?",
+     "options": [
+      "1%",
+      "10%",
+      "50%"
+     ],
+     "answer": 1,
+     "why": "1 divided by 10 is 10%. The exchange usually closes the position a little before that."
+    },
+    {
+     "q": "Why does the exchange close positions before the margin is fully gone?",
+     "options": [
+      "To keep equity above the maintenance margin",
+      "To charge more fees",
+      "It never does"
+     ],
+     "answer": 0,
+     "why": "Below the maintenance margin, the position is closed."
+    }
+   ]
+  },
+  {
+   "id": "basis-trade",
+   "title": "The basis trade",
+   "minutes": 2,
+   "body": [
+    "**Crypto carry**, or the basis trade, holds a coin and bets against it with a perp at the same time. The two cancel out on price, so what is left is the funding the eager buyers pay.",
+    "It sounds risk free. It is not. The BIS documents that crypto carry has been large and very volatile, rising when demand for leveraged long bets is high. Funding can turn negative, the exchange can fail, and the short leg can be liquidated in a spike.",
+    "Parity tests this idea as a strategy in its library."
+   ],
+   "terms": [
+    "crypto-carry",
+    "funding-rate",
+    "stablecoin"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bars show a long coin position of 100, a short perp of minus 100, and a net price exposure of zero; what is left is the funding.",
+    "params": {
+     "labels": [
+      "Coin (long)",
+      "Perp (short)",
+      "Net"
+     ],
+     "colors": [
+      "good",
+      "bad",
+      "warn"
+     ],
+     "unit": "$"
+    },
+    "steps": [
+     {
+      "caption": "Hold 100 dollars of a coin.",
+      "values": [
+       100,
+       0,
+       0
+      ]
+     },
+     {
+      "caption": "Bet against the same coin with a 100 dollar short perp.",
+      "values": [
+       100,
+       -100,
+       0
+      ]
+     },
+     {
+      "caption": "Price moves cancel. What is left is funding, plus the risks that do not cancel.",
+      "values": [
+       100,
+       -100,
+       0
+      ],
+      "label": "Net price exposure: zero"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Hype terms explained, with what can go wrong",
+     "href": "#/markets/terms",
+     "space": "product"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does the basis trade earn?",
+     "options": [
+      "The coin's price rise",
+      "Mainly the funding paid by the other side",
+      "Nothing"
+     ],
+     "answer": 1,
+     "why": "The long coin and short perp cancel on price, leaving funding."
+    },
+    {
+     "q": "Is the basis trade risk free?",
+     "options": [
+      "Yes",
+      "No: funding can turn negative, exchanges can fail and the short can be liquidated",
+      "Only on weekends"
+     ],
+     "answer": 1,
+     "why": "Price risk mostly cancels, but other risks remain."
+    }
+   ]
+  }
+ ]
+}

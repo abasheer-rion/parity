@@ -1,0 +1,454 @@
+{
+ "id": "luck-vs-skill",
+ "order": 2,
+ "level": "Core",
+ "title": "Luck vs skill",
+ "summary": "Why the best of many backtests is usually luck, how the deflated Sharpe ratio and placebo tests catch it, and the eleven tests every Parity strategy faces.",
+ "docs": [
+  "REF-0006",
+  "REF-0007"
+ ],
+ "lessons": [
+  {
+   "id": "noise",
+   "title": "Paths that mean nothing",
+   "minutes": 2,
+   "body": [
+    "Imagine 40 strategies that know nothing. Each one flips a fair coin every day to decide whether to buy or sell. None has any skill.",
+    "Plot their accounts and some still go up for a whole year, and one of them looks excellent. Nothing about its chart says it was luck. That is the trap: a good-looking backtest is easy to get by chance when you try enough ideas.",
+    "Time does not fix this quickly. For a strategy with a Sharpe ratio of 0.5, telling it apart from zero takes roughly 16 years of data."
+   ],
+   "terms": [
+    "random-walk",
+    "sample-size",
+    "backtest"
+   ],
+   "visual": {
+    "kind": "paths",
+    "alt": "Forty random account paths over one year, all with zero expected gain, fan out from the same start. One that ended highest is picked out in yellow.",
+    "params": {
+     "days": 250,
+     "n": 40,
+     "drift": 0,
+     "vol": 0.012,
+     "seed": 7,
+     "xLabels": [
+      "Day 1",
+      "Day 250"
+     ]
+    },
+    "steps": [
+     {
+      "caption": "One strategy with no skill at all. Its path wanders by chance.",
+      "n": 1
+     },
+     {
+      "caption": "Ten of them. Some end up, some down.",
+      "n": 10
+     },
+     {
+      "caption": "Forty of them fan out from the same start.",
+      "n": 40
+     },
+     {
+      "caption": "The best one looks like a winner. It is pure luck.",
+      "n": 40,
+      "best": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Strategy search: thousands of variations, best first",
+     "href": "#/search",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "Forty strategies with no skill are run for a year. What do you expect?",
+     "options": [
+      "All end flat",
+      "Some end well up by luck alone",
+      "All lose money"
+     ],
+     "answer": 1,
+     "why": "Random paths spread out. With 40 of them, a few will end well up without any skill."
+    },
+    {
+     "q": "Roughly how many years does it take to tell a Sharpe of 0.5 apart from zero?",
+     "options": [
+      "About 2",
+      "About 16",
+      "About 50"
+     ],
+     "answer": 1,
+     "why": "The t-statistic is about the Sharpe ratio times the square root of the years. 0.5 times the square root of 16 is 2."
+    }
+   ]
+  },
+  {
+   "id": "multiple-testing",
+   "title": "The best of many tries",
+   "minutes": 3,
+   "body": [
+    "Trying many variations of an idea and keeping the best is called **multiple testing**, or data snooping. Every changed setting counts as a try, even the ones you forgot about.",
+    "The picture shows the Sharpe ratios of strategies with zero real skill, each over 10 years. With one try, the result is near zero. With 1,000 tries, the best one scores close to 1, which would look excellent on its own.",
+    "So the question is never only \"how good is this backtest?\". It is \"how good is it compared with the best I would expect from that many tries with no skill?\"."
+   ],
+   "terms": [
+    "data-snooping",
+    "overfitting",
+    "p-value"
+   ],
+   "visual": {
+    "kind": "maxof",
+    "alt": "A histogram of Sharpe ratios from strategies with no skill, centred on zero. As the number of tries grows from 1 to 1,000, the best one, marked in yellow, climbs toward 1.",
+    "params": {
+     "years": 10,
+     "max": 1000,
+     "seed": 3
+    },
+    "steps": [
+     {
+      "caption": "One strategy with no skill: its Sharpe ratio lands near zero.",
+      "n": 1
+     },
+     {
+      "caption": "Ten tries: the best is already noticeably above zero.",
+      "n": 10
+     },
+     {
+      "caption": "A hundred tries.",
+      "n": 100
+     },
+     {
+      "caption": "A thousand tries: the best looks excellent, with no skill at all.",
+      "n": 1000
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Edge Lab: the lesson on multiple testing",
+     "href": "#/edges/multiple-testing",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "Why does trying more variations make the best backtest look better?",
+     "options": [
+      "Later variations are smarter",
+      "More tries give luck more chances to produce a high score",
+      "It does not"
+     ],
+     "answer": 1,
+     "why": "The maximum of many random results grows with the number of tries."
+    },
+    {
+     "q": "Which of these counts as a separate try?",
+     "options": [
+      "Only the final strategy",
+      "Every setting you changed and tested",
+      "Only strategies you published"
+     ],
+     "answer": 1,
+     "why": "Each tested variation is a chance for luck. Counting only the final one makes it look rarer than it is."
+    }
+   ]
+  },
+  {
+   "id": "deflated-sharpe",
+   "title": "The deflated Sharpe ratio",
+   "minutes": 2,
+   "body": [
+    "The **deflated Sharpe ratio** raises the bar for every extra try. It gives the chance, from 0 to 1, that a strategy's true Sharpe is above the best you would expect from that many unskilled tries. It also allows for fat tails and a short history.",
+    "Parity wants at least 0.95 before a strategy counts as beating the market on that test. A strategy that would pass if it were the only idea tried can fail once the other 999 are counted.",
+    "The red line in the picture is a rough guide to what luck alone reaches. The real formula, from Bailey and Lopez de Prado (2014), is more careful, but the idea is the same: move the bar to where luck stops."
+   ],
+   "terms": [
+    "deflated-sharpe-ratio",
+    "data-snooping",
+    "fat-tails"
+   ],
+   "visual": {
+    "kind": "maxof",
+    "alt": "The same histogram of no-skill Sharpe ratios with a red dashed line showing about where luck alone reaches. The line moves right as the number of tries grows from 100 to 1,000.",
+    "params": {
+     "years": 10,
+     "max": 1000,
+     "seed": 3
+    },
+    "steps": [
+     {
+      "caption": "The best of 100 no-skill tries.",
+      "n": 100
+     },
+     {
+      "caption": "The red line: roughly what the best of 100 reaches by luck. A real edge has to clear it.",
+      "n": 100,
+      "hurdle": 1
+     },
+     {
+      "caption": "With 1,000 tries the bar moves further right.",
+      "n": 1000,
+      "hurdle": 1
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "The gauntlet's tests, including the deflated Sharpe",
+     "href": "#/doc/REF-0006",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a deflated Sharpe ratio of 0.95 mean?",
+     "options": [
+      "The Sharpe ratio is 0.95",
+      "About a 95% chance the true Sharpe beats the best expected from that many unskilled tries",
+      "95% of trades won"
+     ],
+     "answer": 1,
+     "why": "It is a probability, adjusted for the number of tries, fat tails and the length of the history."
+    },
+    {
+     "q": "You tested 1,000 variations. Compared with testing one, the bar to pass is:",
+     "options": [
+      "Lower",
+      "The same",
+      "Higher"
+     ],
+     "answer": 2,
+     "why": "More tries mean luck reaches higher, so the bar rises."
+    }
+   ]
+  },
+  {
+   "id": "placebo",
+   "title": "The placebo test",
+   "minutes": 2,
+   "body": [
+    "A **placebo test** runs a copy of the strategy that cannot know anything. Parity keeps the strategy's positions, size and trading, but slides them to random dates at least a year away. Timing is destroyed; everything else stays the same.",
+    "It does this 500 times. If the real strategy's timing matters, it should beat at least 95% of those copies. If it only does as well as the random-date copies, its result came from something other than timing, such as just being in the market.",
+    "The test is harsh on slow strategies. Carry holds similar positions for years, so a copy shifted by a year often still holds the right currencies."
+   ],
+   "terms": [
+    "placebo-test",
+    "p-value"
+   ],
+   "visual": {
+    "kind": "bars",
+    "alt": "Bar chart with example numbers. The real strategy has a Sharpe ratio of 0.6. A typical random-date copy scores 0.1. The top 5% of copies reach 0.45, so the real one clears the bar.",
+    "params": {
+     "labels": [
+      "Real timing",
+      "Typical copy",
+      "Top 5% of copies"
+     ],
+     "colors": [
+      "good",
+      "faint",
+      "warn"
+     ],
+     "axis": false
+    },
+    "steps": [
+     {
+      "caption": "Example: the real strategy's Sharpe ratio is 0.6.",
+      "values": [
+       0.6,
+       0,
+       0
+      ]
+     },
+     {
+      "caption": "A typical copy on random dates scores about 0.1.",
+      "values": [
+       0.6,
+       0.1,
+       0
+      ]
+     },
+     {
+      "caption": "The best 5% of 500 copies reach 0.45. The real one beats them, so timing seems to matter.",
+      "values": [
+       0.6,
+       0.1,
+       0.45
+      ]
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "The gauntlet's reality checks",
+     "href": "#/doc/REF-0006",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "What does Parity's placebo test change?",
+     "options": [
+      "The size of every position",
+      "Only the dates of the positions",
+      "The trading costs"
+     ],
+     "answer": 1,
+     "why": "Positions, size and trading stay the same. Only the timing is moved to random dates."
+    },
+    {
+     "q": "To pass, the real strategy must beat what share of the 500 random-date copies?",
+     "options": [
+      "At least 50%",
+      "At least 95%",
+      "All of them"
+     ],
+     "answer": 1,
+     "why": "The bar is 95%, the usual level for a p-value of 0.05."
+    }
+   ]
+  },
+  {
+   "id": "gauntlet",
+   "title": "The gauntlet: eleven tests",
+   "minutes": 3,
+   "body": [
+    "Every Parity strategy faces the same eleven tests, set before any results were seen. Six ask whether it beats the S&P 500: better return for the risk, more money at the same risk, the deflated Sharpe, double costs, every era and the last five years.",
+    "Five ask whether anything is real at all: a range of results clearly above zero, the placebo, nearby settings, removing the best year, and how it does in the stock market's worst months.",
+    "A strategy can fail the first group and pass the second. That means a real effect that is too small to beat stocks on its own, which can still be useful. The verdict on each strategy page comes from these two counts."
+   ],
+   "terms": [
+    "backtest",
+    "out-of-sample",
+    "bootstrap"
+   ],
+   "visual": {
+    "kind": "gauntlet",
+    "alt": "Eleven gates in two rows, A1 to A6 and B1 to B5, light up one by one as pass or fail. In this example five A tests fail and four B tests pass.",
+    "params": {
+     "tests": [
+      {
+       "id": "A1",
+       "label": "Sharpe",
+       "pass": false
+      },
+      {
+       "id": "A2",
+       "label": "Same risk",
+       "pass": false
+      },
+      {
+       "id": "A3",
+       "label": "Deflated",
+       "pass": false
+      },
+      {
+       "id": "A4",
+       "label": "2x costs",
+       "pass": false
+      },
+      {
+       "id": "A5",
+       "label": "Every era",
+       "pass": false
+      },
+      {
+       "id": "A6",
+       "label": "Last 5 yrs",
+       "pass": true
+      },
+      {
+       "id": "B1",
+       "label": "Above zero",
+       "pass": true
+      },
+      {
+       "id": "B2",
+       "label": "Timing",
+       "pass": false
+      },
+      {
+       "id": "B3",
+       "label": "Settings",
+       "pass": true
+      },
+      {
+       "id": "B4",
+       "label": "No best yr",
+       "pass": true
+      },
+      {
+       "id": "B5",
+       "label": "Crashes",
+       "pass": true
+      }
+     ]
+    },
+    "steps": [
+     {
+      "caption": "Eleven tests in two groups.",
+      "upto": 0
+     },
+     {
+      "caption": "Group A, does it beat the S&P 500? In this example five of six fail.",
+      "upto": 6
+     },
+     {
+      "caption": "Group B, is anything real? Four of five pass.",
+      "upto": 11,
+      "verdict": "Verdict: a real effect, too small to beat the S&P 500 on its own"
+     }
+    ]
+   },
+   "inParity": [
+    {
+     "label": "Official record: only pre-registered runs count",
+     "href": "#/ledger",
+     "space": "research"
+    },
+    {
+     "label": "The gauntlet in full",
+     "href": "#/doc/REF-0006",
+     "space": "research"
+    }
+   ],
+   "check": [
+    {
+     "q": "A strategy fails some A tests but passes 4 of the 5 B tests. What is the verdict?",
+     "options": [
+      "Beats the S&P 500",
+      "A real effect, but too small to beat the S&P 500 on its own",
+      "Most likely noise"
+     ],
+     "answer": 1,
+     "why": "Group B says the effect looks real; group A says it does not beat stocks alone."
+    },
+    {
+     "q": "When were the gauntlet's pass marks set?",
+     "options": [
+      "After seeing the results",
+      "Before seeing any results",
+      "They change every run"
+     ],
+     "answer": 1,
+     "why": "Fixing the bar first means it cannot be bent to fit a result. Changing one needs a decision written first."
+    },
+    {
+     "q": "What does test B4 remove?",
+     "options": [
+      "The worst year",
+      "The best calendar year",
+      "The last five years"
+     ],
+     "answer": 1,
+     "why": "If the result disappears without its best year, it may come from one event."
+    }
+   ]
+  }
+ ]
+}
