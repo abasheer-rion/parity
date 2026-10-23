@@ -3,11 +3,11 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1026 sources. 153 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1025 sources. 153 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 306 |
+| [Papers](#papers) | 305 |
 | [Preprints and working papers](#preprints-and-working-papers) | 53 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
@@ -593,19 +593,11 @@ Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/f
 
 ### daniel2016
 
-Daniel, Kent; Moskowitz, Tobias J. (2016). Momentum Crashes. *Journal of Financial Economics 122(2), 221-247*. <https://www.nber.org/system/files/working_papers/w20439/w20439.pdf>. Accessed 2026-10-22. Verification: not checked.
-
-Also at: <https://www.nber.org/papers/w20439>.
-
-Note: Read for RES-0017 (NBER working paper 20439, first 12 pages).
-
-Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
-
-### daniel2016
-
 Daniel, Kent; Moskowitz, Tobias J. (2016). Momentum crashes. *Journal of Financial Economics 122(2), 221-247*. doi:10.1016/j.jfineco.2015.12.002 <https://doi.org/10.1016/j.jfineco.2015.12.002>. Accessed 2026-10-23. Verification: not checked.
 
-Note: Checked for RES-0011 on 2026-10-23 against Crossref.
+Also at: <https://www.nber.org/system/files/working_papers/w20439/w20439.pdf>, <https://www.nber.org/papers/w20439>.
+
+Note: Checked for RES-0011 on 2026-10-23 against Crossref; read for RES-0017 in NBER working paper 20439, first 12 pages.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0017](research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md).
 

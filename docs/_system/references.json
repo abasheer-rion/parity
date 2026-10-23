@@ -2459,33 +2459,6 @@
       }
     },
     {
-      "key": "daniel2016",
-      "type": "paper",
-      "authors": [
-        "Daniel, Kent",
-        "Moskowitz, Tobias J."
-      ],
-      "year": 2016,
-      "title": "Momentum Crashes",
-      "venue": "Journal of Financial Economics 122(2), 221-247",
-      "doi": null,
-      "arxiv": null,
-      "url": "https://www.nber.org/system/files/working_papers/w20439/w20439.pdf",
-      "also_at": [
-        "https://www.nber.org/papers/w20439"
-      ],
-      "accessed": "2026-10-22",
-      "verification": "not checked",
-      "used_in": [
-        "docs/research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
-      ],
-      "note": "Read for RES-0017 (NBER working paper 20439, first 12 pages)",
-      "metadata": {
-        "source": "manual",
-        "doi_explicit": false
-      }
-    },
-    {
       "key": "debondt1985",
       "type": "paper",
       "authors": [
@@ -25034,13 +25007,17 @@
       "doi": "10.1016/j.jfineco.2015.12.002",
       "arxiv": null,
       "url": "https://doi.org/10.1016/j.jfineco.2015.12.002",
-      "also_at": [],
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w20439/w20439.pdf",
+        "https://www.nber.org/papers/w20439"
+      ],
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md",
+        "docs/research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md"
       ],
-      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref; read for RES-0017 in NBER working paper 20439, first 12 pages",
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
