@@ -19,6 +19,7 @@ Wider official data (REF-0015), all optional:
     infl.<NAME>    market inflation expectations (breakevens), percent
     usd.<NAME>     trade-weighted dollar indexes (Federal Reserve)
     cot.<NAME>     CFTC Commitments of Traders, speculators' net futures position
+    xfx.<CCY>      USD value of one unit of a currency, crossed from ECB reference rates
     eia.<NAME>     EIA weekly petroleum and gas stocks (needs EIA_API_KEY)
     macro.<NAME>   weekly economic gauges
 
@@ -179,9 +180,11 @@ _ECB_FX = [Series(f"ecb.{c}", "ecb", f"EXR/D.{c}.EUR.SP00.A",
 
 # Euro area AAA government bond yield curve (ECB, spot rates, business days, 2004 on).
 _EA_TENORS = ["3M", "1Y", "2Y", "5Y", "10Y", "30Y"]
+# The ECB publishes each day's curve at noon the next TARGET day, so it is used a
+# business day late (DEC-0025).
 _EA_CURVE = [Series(f"curve.EA_AAA_{t}", "ecb", f"YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_{t}",
-                    f"Euro area AAA government {t} spot yield, percent (ECB)", required=False,
-                    site=t in ("2Y", "10Y"))
+                    f"Euro area AAA government {t} spot yield, percent (ECB, published "
+                    "the next day)", required=False, site=t in ("2Y", "10Y"), lag_days=1)
              for t in _EA_TENORS]
 _ECB_MONEY = [
     Series("money.ESTR", "ecb", "EST/B.EU000A2X2A25.WT", "Euro short-term rate (euro "
@@ -336,8 +339,22 @@ _FRED_MORE = [
     ]
 ]
 
+# Currencies crossed to the dollar from ECB reference rates (USD per EUR divided by
+# currency per EUR), for strategies on the wider set (DEC-0025). Only those with a BIS
+# policy rate, so the backtester can book their carry. Built locally, no download.
+XFX = ["EUR"] + [c for c in ECB_CCYS if c != "USD" and c in POLICY_AREAS]
+_XFX = [Series(f"xfx.{c}", "derived", "ecb.USD" if c == "EUR" else f"ecb.USD/ecb.{c}",
+               f"USD per {c}, crossed from ECB euro reference rates (about 16:00 CET)",
+               required=False, site=False) for c in XFX]
+
+# A 5-year Treasury total return index from the daily par curve, for curve trades.
+_BOND_TR5 = [Series("bond.TR5", "derived", "curve.UST_5Y", "US 5-year Treasury total "
+                    "return index, approximated from the par yield with a modified duration "
+                    "of 4.5", required=False, site=False)]
+BOND_DURATION["bond.TR5"] = 4.5
+
 _WIDER = (_ECB_FX + _EA_CURVE + _ECB_MONEY + _UST_CURVE + _POLICY + _COT + _EIA
-          + _FRED_MORE)
+          + _FRED_MORE + _XFX + _BOND_TR5)
 
 CATALOG: dict[str, Series] = {s.key: s for s in _FX + _RATES + _OTHER + _REER + _FX_WIDE
                               + _YIELDS + _FACTORS + _INDUSTRIES + _BOND_TR

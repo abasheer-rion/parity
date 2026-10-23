@@ -182,7 +182,8 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       "the fact that one of them was bound to look good by luck?",
                       dsr >= 0.95, _fmt(dsr), "Deflated Sharpe of 0.95 or more"))
 
-    cost2 = BacktestConfig(**{**cfg.to_dict(), "cost_bps": cfg.cost_bps * 2})
+    cost = max(cfg.cost_bps, getattr(strategy, "min_cost_bps", 0.0))  # the cost floor
+    cost2 = BacktestConfig(**{**cfg.to_dict(), "cost_bps": cost * 2})
     s2 = _sharpe(run(strategy, panel, cost2).excess_returns.align(bench, join="inner")[0])
     tests.append(Test("A4", "beat", "Survives double trading costs",
                       "If trading costs twice what we guessed, does it still beat the S&P 500?",
@@ -220,7 +221,8 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       lo > 0, f"95% range {_fmt(lo)} to {_fmt(hi)}",
                       "The whole 95% range of Sharpe is above zero"))
 
-    pl = placebo(res, cfg.cost_bps, rng, funded=strategy.funded)
+    pl = placebo(res, max(cfg.cost_bps, getattr(strategy, "min_cost_bps", 0.0)), rng,
+                 funded=strategy.funded)
     tests.append(Test("B2", "real", "Timing matters",
                       "If we keep the same bets but place them on random dates, does it do "
                       "much worse? If not, the signal is not telling us anything.",

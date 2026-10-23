@@ -48,6 +48,12 @@ class Strategy(ABC):
     #: True if the strategy invests its capital (stocks, cash). False for self-financing
     #: long-short currency books, whose collateral earns the T-bill on top. See DEC-0009.
     funded: ClassVar[bool] = False
+    #: The rate `cash.USD` earns. Older strategies use the 3-month interbank rate; newer
+    #: ones use the T-bill ("rate.TBILL3M"), so cash scores no excess return (DEC-0025).
+    cash_rate: ClassVar[str] = "rate.USD"
+    #: Lowest one-way trading cost in basis points, whatever the run's setting. Raised
+    #: for wide or thin markets such as emerging market currencies.
+    min_cost_bps: ClassVar[float] = 0.0
 
     @abstractmethod
     def instruments(self) -> list[str]:
