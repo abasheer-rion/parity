@@ -130,7 +130,7 @@ Gathered 2026-10-21. This page builds on [RES-0006](0006-courses-and-trader-beli
 ## Referenced by
 
 - [RES-0011: Where market edges come from and which survive](0011-where-market-edges-come-from-and-which-survive.md)
-- [RES-0014: Famous currency and commodity traders and what their records teach](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0015: Famous currency and commodity traders and what their records teach](0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [REF-0012: Candlesticks and chart patterns](../reference/0012-candlesticks-and-chart-patterns.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

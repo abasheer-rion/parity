@@ -77,6 +77,6 @@ Everything still replays or reshuffles history. Nothing in it is a forecast. The
 
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
-- [RES-0017: How the ingredients behave in crises, and what Sim World should show](../research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
-- [LOG-0013: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
+- [RES-0018: How the ingredients behave in crises, and what Sim World should show](../research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [LOG-0014: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
 <!-- backlinks:end -->

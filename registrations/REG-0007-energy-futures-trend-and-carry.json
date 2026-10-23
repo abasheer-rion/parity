@@ -9,7 +9,7 @@
     "HYP-0012",
     "HYP-0013"
   ],
-  "experiment": "EXP-0008",
+  "experiment": "EXP-0009",
   "question": "On rolled NYMEX crude oil, heating oil, gasoline and natural gas futures, do 12-month trend and cross-sectional carry each have a positive Sharpe ratio that passes at least four of the five reality tests, after 3 bp per unit traded and 2 bp per roll?",
   "strategies": [
     {

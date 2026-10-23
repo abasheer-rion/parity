@@ -10,7 +10,7 @@
     "HYP-0010",
     "HYP-0011"
   ],
-  "experiment": "EXP-0007",
+  "experiment": "EXP-0008",
   "question": "On data after every published study's sample ended, do emerging market carry, a passive EM basket and EM momentum each have a positive Sharpe ratio that passes at least four of the five reality tests, after 10 bp per unit traded?",
   "strategies": [
     {

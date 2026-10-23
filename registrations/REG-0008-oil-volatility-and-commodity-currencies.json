@@ -9,7 +9,7 @@
     "HYP-0014",
     "HYP-0015"
   ],
-  "experiment": "EXP-0009",
+  "experiment": "EXP-0010",
   "question": "From after Chen, Rogoff and Rossi's sample to the end of the free futures data, do selling crude oil variance (before swap costs) and trading energy futures on commodity currencies' 3-month moves each pass at least four of the five reality tests?",
   "strategies": [
     {

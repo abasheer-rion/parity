@@ -107,5 +107,5 @@ None found.
 ## Referenced by
 
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
-- [RES-0016: Combining many strategies, the evidence and the ingredient list](../research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0017: Combining many strategies, the evidence and the ingredient list](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 <!-- backlinks:end -->

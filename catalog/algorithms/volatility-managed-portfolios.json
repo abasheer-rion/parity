@@ -112,6 +112,6 @@
       "RUN-000003"
     ],
     "verdict": null,
-    "notes": "Implemented as `stocks_vol_managed` and run officially in RUN-000003, but no hypothesis doc yet, so the stage stays at 2 until one is written. RES-0016: use as a risk control for combined FX and energy books, not as a source of return."
+    "notes": "Implemented as `stocks_vol_managed` and run officially in RUN-000003, but no hypothesis doc yet, so the stage stays at 2 until one is written. RES-0017: use as a risk control for combined FX and energy books, not as a source of return."
   }
 }
