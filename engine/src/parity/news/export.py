@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 from ..data.store import DEFAULT_DIR
-from . import history, impact, sources, store
+from . import archive, history, impact, sources, store, study, tagging
 
 MAX_ARTICLES = 400
 
@@ -54,6 +54,7 @@ def article_json(a: dict, panel: pd.DataFrame | None) -> dict:
         "summary": a.get("summary") or "", "currencies": list(a["currencies"]),
         "commodities": list(a["commodities"]), "regions": list(a["regions"]),
         "category": a["category"], "tickers": list(a.get("tickers") or []),
+        "topics": tagging.topics(f"{a['title']}. {a.get('summary') or ''}"),
         "primary": primary, "impacts": moves,
         "path": impact.path(panel, primary, ts) if panel is not None and primary else [],
     }
@@ -84,5 +85,103 @@ def build(out: Path, root: Path = DEFAULT_DIR, panel: pd.DataFrame | None = None
                               for k in history.RECORD_SERIES if k in panel]
         recs_doc["records"] = history.explain(recs, arts, history.load_explanations(root))
     (out / "records.json").write_text(json.dumps(recs_doc, separators=(",", ":")))
+    n_arch = build_archive(out, root, stamp)
+    n_imp = build_impact(out, root, stamp)
     return {"articles": len(doc["articles"]), "records": len(recs_doc["records"]),
-            "prices_through": last}
+            "prices_through": last, "archive": n_arch, "impact": n_imp}
+
+
+# ------------------------------------------------------------------ archive and impact
+
+ARCHIVE_FIELDS = ["id", "published_at", "source", "publisher", "title", "url", "category",
+                  "topics", "assets", "currencies", "commodities", "regions"]
+
+
+def _dump(path: Path, doc) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(doc, separators=(",", ":")))
+
+
+def build_archive(out: Path, root: Path = DEFAULT_DIR, stamp: str = "") -> int:
+    """news/archive/index.json plus one news/archive/<year>.json per year: every archived
+    headline the site may show, as rows of ARCHIVE_FIELDS."""
+    years, total = [], 0
+    for y in archive.years(root):
+        df = shown(archive.load(str(y), str(y), root))
+        if df.empty:
+            continue
+        rows = [[r["id"], pd.Timestamp(r["published_at"]).isoformat(), r["source"],
+                 r.get("publisher") or "", r["title"], r["url"], r["category"],
+                 list(r["topics"]), list(r["assets"]), list(r["currencies"]),
+                 list(r["commodities"]), list(r["regions"])] for r in df.to_dict("records")]
+        _dump(out / "archive" / f"{y}.json", {"year": y, "fields": ARCHIVE_FIELDS, "rows": rows})
+        years.append({"year": y, "count": len(rows)})
+        total += len(rows)
+    _dump(out / "archive" / "index.json", {
+        "generated_at": stamp, "years": years, "total": total, "fields": ARCHIVE_FIELDS,
+        "topics": [{"id": k, "label": v} for k, v in tagging.TOPIC_LABEL.items()],
+        "sources": source_list()})
+    return total
+
+
+def _compact_study(st: dict, n_events: int = 8) -> dict:
+    keep = ("n_headlines", "n_events", "n_overlapping", "n_non_overlapping", "first", "last",
+            "horizons", "path", "warnings")
+    return {**{k: st.get(k) for k in keep},
+            "events": [{**{k: e[k] for k in e if k != "items"},
+                        "items": [[i["title"], i["url"], i["source"]] for i in e["items"][:2]]}
+                       for e in st.get("events", [])[:n_events]]}
+
+
+def build_impact(out: Path, root: Path = DEFAULT_DIR, stamp: str = "",
+                 assets: list[str] | None = None, topics: list[str] | None = None,
+                 draws: int = 300, max_days: int = 300) -> int:
+    """news/impact.json: precomputed event studies (topic x asset), rankings both ways and,
+    per asset, the news days followed by the biggest unusual moves, for the Impact tab."""
+    items = shown(archive.load(root=root))
+    prepared = {}
+    for k in assets or study.DEFAULT_ASSETS:
+        try:
+            prepared[k] = study.prepare(k, root=root)
+        except (FileNotFoundError, KeyError):
+            continue
+    topics = topics or list(tagging.TOPICS)
+    doc = {"generated_at": stamp, "horizons": list(study.HORIZONS), "pre": study.PRE,
+           "post": study.POST, "min_events": study.MIN_EVENTS, "n_items": int(len(items)),
+           "assets": [{"key": k, "label": p.label, "unit": p.unit,
+                       "first": p.dates[0].date().isoformat(),
+                       "last": p.dates[-1].date().isoformat()} for k, p in prepared.items()],
+           "topics": [], "studies": {}, "by_topic": {}, "by_asset": {}, "moves": {}}
+    if items.empty or not prepared:
+        _dump(out / "impact.json", doc)
+        return 0
+    rows_by_asset: dict[str, list] = {k: [] for k in prepared}
+    for t in topics:
+        sub = study.matching(items, t)
+        doc["topics"].append({"id": t, "label": tagging.TOPIC_LABEL[t], "n_headlines": len(sub)})
+        doc["studies"][t] = {}
+        rows = []
+        for k, p in prepared.items():
+            st = study.event_study(k, sub, p=p, draws=draws, keep_events=8)
+            doc["studies"][t][k] = _compact_study(st)
+            row = study._rank_row(st, "5d", asset=k, label=p.label)
+            rows.append(row)
+            rows_by_asset[k].append({**row, "topic": t, "label": tagging.TOPIC_LABEL[t]})
+        doc["by_topic"][t] = study._ranked([dict(r) for r in rows], f"assets after {t}", "5d")
+    for k, rows in rows_by_asset.items():
+        doc["by_asset"][k] = study._ranked(rows, f"topics for {k}", "5d")
+    for k, p in prepared.items():
+        tm = study.top_moves(k, items, horizon="1d", n=max_days, p=p)
+        per_year: dict[str, int] = {}
+        rel = items[items["assets"].apply(lambda a, k=k: k in a)]
+        if not rel.empty:
+            days = study.headline_days(p, rel)
+            if not days.empty:
+                per_year = days["event_date"].dropna().str[:4].value_counts().sort_index().to_dict()
+        doc["moves"][k] = {"share_all_days_z2": tm.get("share_all_days_z2"),
+                           "days_per_year": {y: int(v) for y, v in per_year.items()},
+                           "days": [{**{c: d[c] for c in d if c != "items"},
+                                     "items": [[i["title"], i["url"], i["source"]]
+                                               for i in d["items"][:3]]} for d in tm["days"]]}
+    _dump(out / "impact.json", doc)
+    return len(doc["topics"]) * len(prepared)

@@ -369,7 +369,7 @@ def event_study(key: str, items: pd.DataFrame, start=None, end=None, p: Prepared
         centre = float(np.nanmean(rmeans))
         obs = float(np.nanmean(z)) if nh else float("nan")
         p_val = (1 + np.sum(np.abs(rmeans - centre) >= abs(obs - centre))) / (draws + 1) \
-            if nh else float("nan")
+            if nh >= 5 else float("nan")  # below 5 events a p-value means nothing
         rmv = rhz[h][0]
         zk = z[keep]
         lo_ci, hi_ci = _ci(z)
@@ -423,8 +423,50 @@ def _warnings(res: dict) -> list[str]:
 # ------------------------------------------------------------------ 3. rankings
 
 
-def matching(items: pd.DataFrame, query: str) -> pd.DataFrame:
-    return items[archive.matches(items, query)] if not items.empty else items
+POLICY_BANKS = {"USD": "fed", "EUR": "ecb", "JPY": "boj"}
+_POLICY_CACHE: dict = {}
+
+
+def policy_changes(root: Path = data_store.DEFAULT_DIR) -> dict[tuple[str, str], int]:
+    """(source, date) -> +1 or -1 for days a central bank's policy rate moved (BIS daily
+    policy rates). Lets "rate hike" find decision days whose headline only says
+    "FOMC statement" or "Monetary policy decisions"."""
+    key = str(root)
+    if key not in _POLICY_CACHE:
+        out = {}
+        for ccy, src in POLICY_BANKS.items():
+            try:
+                s = data_store.load(f"policy.{ccy}", root).dropna()
+            except (FileNotFoundError, KeyError):
+                continue
+            d = s[~s.index.duplicated(keep="last")].sort_index().diff()
+            for day, v in d[d != 0].dropna().items():
+                out[(src, day.date().isoformat())] = 1 if v > 0 else -1
+        _POLICY_CACHE[key] = out
+    return _POLICY_CACHE[key]
+
+
+def matching(items: pd.DataFrame, query: str,
+             root: Path | None = data_store.DEFAULT_DIR) -> pd.DataFrame:
+    """Items a topic or keyword query matches. For "rate hike" and "rate cut" this also
+    takes a central bank decision whose policy rate moved that way on the day or the
+    next day, so it does not depend on how the headline was worded."""
+    if items.empty:
+        return items
+    hit = archive.matches(items, query)
+    ids = archive.topic_ids(query)
+    sign = 1 if "rate-hike" in ids else -1 if "rate-cut" in ids else 0
+    if sign and root is not None and "topics" in items:
+        moves = policy_changes(root)
+        if moves:
+            dec = items["topics"].apply(lambda t: "policy-decision" in t)
+            day = pd.to_datetime(items["published_at"], utc=True).dt.tz_convert(
+                "America/New_York").dt.date
+            nxt = day + pd.Timedelta(days=1)
+            moved = [ok and sign in (moves.get((s, d0.isoformat())), moves.get((s, d1.isoformat())))
+                     for ok, s, d0, d1 in zip(dec, items["source"], day, nxt, strict=True)]
+            hit = hit | pd.Series(moved, index=items.index)
+    return items[hit]
 
 
 def rank_assets(query: str, items: pd.DataFrame, assets: list[str] | None = None,

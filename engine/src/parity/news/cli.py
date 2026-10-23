@@ -157,6 +157,10 @@ def _search(args) -> int:
     return 0
 
 
+def _num(v) -> str:
+    return "  n/a" if v is None else f"{v:.3f}"
+
+
 def _unit(u: str) -> str:
     return "%" if u == "pct" else " pp" if u == "pp" else " pt"
 
@@ -191,7 +195,7 @@ def _study(args) -> int:
             print(f"  {h:<8} {v['n']:>5}  {v['mean_z'] or 0:+6.2f}  {band:<15} "
                   f"{v['median_z'] or 0:+7.2f}  {v['mean_move'] or 0:+8.2f}{_unit(res['unit'])} "
                   f"{(v['hit_rate'] or 0):6.0%}   ({(v['random_hit_rate'] or 0):.0%})   "
-                  f"{v['p_random']:.3f}       {v['q']:.3f}")
+                  f"{_num(v['p_random'])}       {_num(v['q'])}")
         print("\nBiggest 5 day moves among the events:")
         for e in res["events"][:10]:
             mark = " (overlaps)" if e["overlaps"] else ""

@@ -295,7 +295,10 @@ def run(which: list[str], start: int, end: int, root: Path = DEFAULT_DIR, gdelt_
                     key = f"{sid}:{y}"
                     if done(key):
                         continue
-                    mark(key, archive.add(fetch(y), root))
+                    try:  # the ECB has no year page for 2025 on; its RSS covers those
+                        mark(key, archive.add(fetch(y), root))
+                    except RuntimeError as exc:
+                        log(f"{sid:<8} {y}  {str(exc)[:80]}")
                     time.sleep(pause)
             elif sid == "sec8k":
                 for cik in SEC_COMPANIES:
