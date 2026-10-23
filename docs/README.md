@@ -181,7 +181,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0009 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 | LOG-0010 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | LOG-0011 | [Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
-| LOG-0011 | [Crisis behaviour, and a check of Sim World](log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0012 | [Crisis behaviour, and a check of Sim World](log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 
 ## algorithm
 

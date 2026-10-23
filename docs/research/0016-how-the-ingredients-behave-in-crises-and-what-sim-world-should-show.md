@@ -90,5 +90,5 @@ The always-on search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-alw
 
 ## Referenced by
 
-- [LOG-0011: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
+- [LOG-0012: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
 <!-- backlinks:end -->

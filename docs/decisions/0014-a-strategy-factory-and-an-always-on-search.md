@@ -93,5 +93,5 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 - [RES-0016: How the ingredients behave in crises, and what Sim World should show](../research/0016-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
-- [LOG-0011: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
+- [LOG-0011: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 <!-- backlinks:end -->
