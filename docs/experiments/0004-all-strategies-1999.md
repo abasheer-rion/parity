@@ -100,8 +100,8 @@ Crisis behaviour and the correlations between strategies are on the dashboard's 
 ## Referenced by
 
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
-- [RES-0011: Emerging market currencies](../research/0011-emerging-market-currencies.md)
-- [RES-0012: Commodity futures, carry, trend and volatility](../research/0012-commodity-futures-carry-trend-and-volatility.md)
+- [RES-0012: Emerging market currencies](../research/0012-emerging-market-currencies.md)
+- [RES-0013: Commodity futures, carry, trend and volatility](../research/0013-commodity-futures-carry-trend-and-volatility.md)
 - [LOG-0003: Cleaner data and head to head comparison](../log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

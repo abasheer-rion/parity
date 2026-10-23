@@ -63,7 +63,7 @@
       "notes": "High minus low carry portfolio, skewness -1.03. Developed only (15 countries): 5.72% a year, Sharpe 0.56."
     }
   ],
-  "post_publication_evidence": "None found by us after 2010. Press reports (Bloomberg via BloombergQuint) put 2018 losses on dollar-funded carry at 22% (TRY) and 20% (ARS). See RES-0011.",
+  "post_publication_evidence": "None found by us after 2010. Press reports (Bloomberg via BloombergQuint) put 2018 losses on dollar-funded carry at 22% (TRY) and 20% (ARS). See RES-0012.",
   "implementations": [],
   "relevance": {
     "score": 4,
@@ -78,6 +78,6 @@
     "registrations": [],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0011 and RES-0012 on 2026-10-21."
+    "notes": "Added from RES-0012 and RES-0013 on 2026-10-21."
   }
 }
