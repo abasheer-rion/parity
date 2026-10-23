@@ -22,6 +22,7 @@ import { Markets } from "./pages/markets/Markets";
 import { Learn } from "./pages/Learn";
 import { EdgeLab } from "./pages/EdgeLab";
 import { Academy } from "./pages/Academy";
+import { PrivateResearch } from "./pages/PrivateResearch";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Scenarios } from "./pages/Scenarios";
@@ -60,7 +61,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy"];
+const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -137,6 +138,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "catalog" && <Catalog />}
       {route === "edges" && <EdgeLab focus={dec(arg)} />}
       {route === "academy" && <Academy course={dec(arg)} lesson={dec(extra)} />}
+      {route === "private" && <PrivateResearch />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
       {route === "news" && <News view={arg} />}

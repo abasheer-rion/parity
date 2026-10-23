@@ -157,7 +157,9 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
             out[REALISED + key] = s.reindex(index.union(s.index)).sort_index().ffill() \
                 .reindex(index)
         if lag is not None:
-            s.index = s.index + pd.offsets.MonthEnd(0) + pd.offsets.BDay(lag)
+            period_end = pd.offsets.QuarterEnd(0) if spec.frequency == "Q" else \
+                pd.offsets.MonthEnd(0)
+            s.index = s.index + period_end + pd.offsets.BDay(lag)
             s = s[~s.index.duplicated(keep="last")]
         if spec.lag_days:  # known only some business days after its date (COT, EIA)
             s.index = s.index + pd.offsets.BDay(spec.lag_days)
@@ -165,7 +167,7 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
         aligned = s.reindex(index.union(s.index)).sort_index()
         # Monthly series fill without limit; weekly ones fill up to two weeks, so one
         # late release does not leave a hole.
-        limit = {"M": None, "W": 2 * ffill_limit}.get(spec.frequency, ffill_limit)
+        limit = {"M": None, "Q": None, "W": 2 * ffill_limit}.get(spec.frequency, ffill_limit)
         out[key] = aligned.ffill(limit=limit).reindex(index)
     return pd.DataFrame(out, index=index)
 

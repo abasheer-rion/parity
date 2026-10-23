@@ -12,6 +12,7 @@ It writes static HTML (no script, inline CSS, so pages paint at once) for:
   /learn/edge-lab/              how to look for an edge without fooling yourself (docs/_system/edge-lab.json)
   /learn/academy/...            Parity Academy courses and lessons (academy/courses/*.json, DEC-0028), each
                                 lesson with a still frame of its picture drawn by web/scripts/academy-frames.ts
+  /learn/private-markets/       private markets in plain words (docs/_system/private-markets.json, DEC-0029)
 and then the files search engines read:
   sitemap.xml          every public URL (front page, legal pages and the pages above)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
@@ -114,6 +115,8 @@ def academy_frames() -> dict[str, list[str]]:
     except (OSError, subprocess.SubprocessError, json.JSONDecodeError) as err:
         print(f"build_public: no Academy pictures ({err.__class__.__name__}); pages keep their captions", file=sys.stderr)
         return {}
+def load_private_markets() -> dict:
+    return json.loads((ROOT / "docs/_system/private-markets.json").read_text())
 
 
 # ---------------------------------------------------------------- tiny markdown
@@ -369,7 +372,8 @@ def build_learn(terms: list[dict], refs: dict) -> dict[str, str]:
         "</ul>" for c, ts in sorted(cats.items()))
     body = f"""<h1>Learn the words of trading and research</h1>
 <p class="lede">{len(terms)} terms, each explained three ways: in simple words, with an everyday comparison, and precisely.</p>
-<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on backtests that lie, with real mistakes we caught in our own research.</small></a></li></ul>
+<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on backtests that lie, with real mistakes we caught in our own research.</small></a></li>
+<li><a href="/learn/private-markets/">Private markets, explained simply<small>Private equity, venture, private credit and property funds: how their returns are measured, why they look calm, and what to check.</small></a></li></ul>
 {groups}"""
     ld = {"@type": "DefinedTermSet", "@id": f"{SITE}/learn/#set", "name": "Parity glossary", "url": f"{SITE}/learn/",
           "hasDefinedTerm": [{"@id": f"{SITE}/learn/{t['id']}/#term"} for t in terms if slug_ok(t["id"])]}
@@ -660,6 +664,64 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
     return pages
 
 
+def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dict[str, str]:
+    """One public page: the Private markets guide, words only. No data from /data/ (DEC-0015)."""
+    note_ids = {n["id"] for n in notes}
+    term_names = {t["id"]: t["term"] for t in terms}
+
+    def words(ids: list[str]) -> str:
+        links = [f'<a href="/learn/{i}/">{e(term_names[i])}</a>' for i in ids if i in term_names]
+        return f"<p>Words: {', '.join(links)}</p>" if links else ""
+
+    def items(xs: list[str]) -> str:
+        return "<ul>" + "".join(f"<li>{e(x)}</li>" for x in xs) + "</ul>"
+
+    kinds = "".join(
+        f'<section class="card" id="{e(c["id"])}"><h3>{e(c["name"])}</h3><p>{e(c["simple"])}</p>'
+        f'<div class="prose"><p><strong>How it earns:</strong> {e(c["returns"])}</p>'
+        f'<p><strong>Getting money out:</strong> {e(c["liquidity"])}</p><p><strong>Fees:</strong> {e(c["fees"])}</p>'
+        f'<p><strong>What can go wrong:</strong></p>{items(c["risks"])}<p><strong>What to check:</strong></p>{items(c["check"])}</div>'
+        f'{words(c["terms"])}</section>' for c in pm["classes"])
+    measures = "".join(
+        f'<section class="card" id="{e(m["id"])}"><h3>{e(m["name"])}</h3><p>{e(m["simple"])}</p>'
+        f'<p><strong>Watch out:</strong> {e(m["pitfall"])}</p>{words([m["term"]])}</section>' for m in pm["measures"])
+    routes = "".join(
+        f'<section class="card" id="route-{e(r["id"])}"><h3>{e(r["name"])}</h3><p>{e(r["what"])}</p>'
+        f'<div class="prose"><p><strong>Getting money out:</strong> {e(r["liquidity"])}</p><p><strong>Minimum:</strong> {e(r["minimum"])}</p>'
+        f'<p><strong>What can go wrong:</strong></p>{items(r["risks"])}<p><strong>What to check:</strong></p>{items(r["check"])}</div>'
+        f'{words([r["term"]])}</section>' for r in pm["routes"])
+    free = {"yes": "free", "partly": "some free", "no": "paid"}
+    providers = "".join(f"<li><strong>{e(x['name'])}</strong> ({free[x['free']]}): {e(x['what'])}. {e(x['note'])}</li>"
+                        for x in pm["providers"])
+    reading = [f'<li><a href="/notes/{r["doc"].lower()}/">{e(r["label"])}</a></li>' for r in pm["reading"] if r["doc"] in note_ids]
+    reading_html = ('<h2>Further reading</h2><ul class="related">' + "".join(reading) + "</ul>") if reading else ""
+    sm = pm["smoothing"]
+    path = "/learn/private-markets/"
+    title = "Private markets, explained simply"
+    body = f"""<h1>{e(title)}</h1>
+<p class="lede">{e(pm["intro"])}</p>
+<h2>The kinds of private markets</h2>
+{kinds}
+<h2>How to read the numbers</h2>
+{measures}
+<section class="card"><h2>{e(sm["title"])}</h2><p>{e(sm["text"])}</p><div class="prose">{items(sm["points"])}</div></section>
+<h2>Ways in for individuals</h2>
+<p>None of these is a recommendation. Each trades something away: the ability to sell, low fees, or a price set by a market.</p>
+{routes}
+<h2>Before you trust any private markets number</h2>
+<div class="prose"><ol>{"".join(f"<li>{e(x)}</li>" for x in pm["checklist"])}</ol></div>
+<h2>Who has the data</h2>
+<div class="prose"><ul>{providers}</ul></div>
+<p class="lede" style="font-size:14px">Members get a calculator for IRR, TVPI, DPI and PME, counts of private offerings filed with the SEC, and a study of how much smoothing hides.</p>
+{reading_html}
+<p class="lede" style="font-size:14px;margin-top:24px">This page explains how private investments work. It is not a recommendation to buy, sell or hold anything.</p>"""
+    ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(pm["intro"]),
+          "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
+          "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
+    return {path: page(path=path, title=title, description=plain_text(pm["intro"]), body=body, section="learn",
+                       trail=[("Home", "/"), ("Learn", "/learn/"), ("Private markets", path)], ld=[ld])}
+
+
 # ---------------------------------------------------------------- output
 
 STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/"]
@@ -699,6 +761,8 @@ def main() -> int:
     academy = load_academy()
     if "academy" not in {t["id"] for t in terms}:  # same rule for /learn/academy/
         pages.update(build_academy(academy, terms, refs))
+    if "private-markets" not in {t["id"] for t in terms}:
+        pages.update(build_private_markets(load_private_markets(), notes, terms))
     for path, text in pages.items():
         dest = out / path.strip("/") / "index.html"
         dest.parent.mkdir(parents=True, exist_ok=True)

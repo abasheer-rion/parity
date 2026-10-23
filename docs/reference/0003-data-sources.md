@@ -55,6 +55,7 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `credit.HQM10Y` | FRED, Treasury HQM curve | `HQMCB10YR` | Monthly | 1984 | Optional. Licence-clean corporate yield, used a month late. |
 | `risk.NFCI`, `risk.STLFSI`, `macro.CLAIMS`, `macro.WEI` | FRED (Chicago Fed, St. Louis Fed, Labor Department, NY Fed) | `NFCI`, `STLFSI4`, `ICSA`, `WEI` | Weekly | 1967 to 2008 | Optional. Moved to their release day. |
 | `cmd.ALUMINIUM`, `NICKEL`, `IRON_ORE`, `WHEAT`, `CORN`, `SOYBEANS` | FRED, IMF | `PALUMUSDM` and so on | Monthly | 1992 | Optional. Used a week after the month ends, like copper. Not shown on the site, because the IMF asks for permission before commercial reuse. |
+| `pm.<NAME>` (9) | FRED (Federal Reserve Z.1 and H.8, BIS, FHFA, loan officer survey) | `BOGZ1FL075035503Q`, `COMREPUSQ159N`, `USSTHPI`, `CREACBW027SBOG`, `BUSLOANS`, `LNFACBW027SBOG`, `DRTSCILM`, `SUBLPDRCSN`, `DRCRELEXFACBS` | Quarterly, monthly, weekly | 1945 to 2015 | Optional. Private markets proxies: property prices, bank lending and loan standards ([DEC-0029](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)). Quarterly values wait for the quarter's end plus their release lag. The Fed's commercial property index is chained to CoStar data, so it is not shown on the site. |
 
 ## FRED
 
@@ -83,7 +84,7 @@ The chart endpoint is unofficial and its terms forbid automated collection, so s
 
 ## Markets data for the product
 
-Crypto prices, perpetual futures, US ETFs and new fund filings for the product's Markets pages are kept apart from the research panel above. They live under `engine/src/parity/markets/` and `parity markets fetch`. Sources are CoinGecko, Hyperliquid's public API and SEC EDGAR, all free and optional. Their terms, and the exchanges we turned down, are in [REF-0014](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) and [DEC-0018](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md).
+Crypto prices, perpetual futures, US ETFs and new fund filings for the product's Markets pages are kept apart from the research panel above. They live under `engine/src/parity/markets/` and `parity markets fetch`. Sources are CoinGecko, Hyperliquid's public API and SEC EDGAR, all free and optional. Private markets data from EDGAR (Form D counts and BDC net asset values) lives there too ([DEC-0029](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)). Their terms, and the exchanges we turned down, are in [REF-0014](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) and [DEC-0018](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md).
 
 Add a source by adding a line to the catalog, a downloader if needed, a test for its parser, and a row here.
 

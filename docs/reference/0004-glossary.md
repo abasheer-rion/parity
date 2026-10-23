@@ -18,7 +18,7 @@ Every word in this project that sounds like jargon, explained three ways. **Simp
 
 ## Summary
 
-292 terms in 14 groups. This page is generated from `docs/_system/glossary.json`; edit that file, not this one, then run `python3 scripts/docs.py index`.
+313 terms in 15 groups. This page is generated from `docs/_system/glossary.json`; edit that file, not this one, then run `python3 scripts/docs.py index`.
 
 | Group | Terms |
 | --- | --- |
@@ -36,6 +36,7 @@ Every word in this project that sounds like jargon, explained three ways. **Simp
 | [Myths and false notions](#myths-and-false-notions) | [Myth: if you stick with it, you will eventually make money](#myth-if-you-stick-with-it-you-will-eventually-make-money), [Myth: candlestick patterns reliably predict the next move](#myth-candlestick-patterns-reliably-predict-the-next-move), [Myth: more leverage means more profit](#myth-more-leverage-means-more-profit), [Myth: a high win rate means a good strategy](#myth-a-high-win-rate-means-a-good-strategy), [Myth: it is not a loss until you sell](#myth-it-is-not-a-loss-until-you-sell), [Myth: after a losing streak, a win is due](#myth-after-a-losing-streak-a-win-is-due), [Myth: a great backtest proves a strategy works](#myth-a-great-backtest-proves-a-strategy-works), [Myth: once an edge is found, it keeps working](#myth-once-an-edge-is-found-it-keeps-working), [Myth: high-interest currencies fall by exactly the rate gap](#myth-high-interest-currencies-fall-by-exactly-the-rate-gap), [Myth: the carry trade is free money](#myth-the-carry-trade-is-free-money), [Myth: economic models predict short-term exchange rates](#myth-economic-models-predict-short-term-exchange-rates), [Myth: trading more often makes more money](#myth-trading-more-often-makes-more-money), [Myth: experts and gurus can forecast the market](#myth-experts-and-gurus-can-forecast-the-market), [Myth: a stop loss caps your loss exactly](#myth-a-stop-loss-caps-your-loss-exactly), [Myth: support and resistance are pure superstition](#myth-support-and-resistance-are-pure-superstition), [Myth: huge moves are too rare to worry about](#myth-huge-moves-are-too-rare-to-worry-about), [Myth: you can trade the news before the market reacts](#myth-you-can-trade-the-news-before-the-market-reacts), [Myth: trading many currency pairs spreads your risk](#myth-trading-many-currency-pairs-spreads-your-risk), [Myth: strong feelings give you conviction and help you trade](#myth-strong-feelings-give-you-conviction-and-help-you-trade), [Myth: the right indicator settings will make a strategy work](#myth-the-right-indicator-settings-will-make-a-strategy-work), [Myth: markets go up, so buying any single stock works out](#myth-markets-go-up-so-buying-any-single-stock-works-out), [Myth: last year's best fund or trader will be next year's best](#myth-last-years-best-fund-or-trader-will-be-next-years-best) |
 | [Conviction and decision making](#conviction-and-decision-making) | [Conviction](#conviction), [Conviction weighting](#conviction-weighting), [Calibration](#calibration), [Brier score](#brier-score), [Probabilistic forecast](#probabilistic-forecast), [Base rate](#base-rate), [Base rate neglect](#base-rate-neglect), [Outside view](#outside-view), [Expected value](#expected-value), [Edge](#edge), [Process and outcome](#process-and-outcome), [Decision journal](#decision-journal), [Pre-mortem](#pre-mortem), [Kill criteria](#kill-criteria), [Precommitment](#precommitment), [Trading plan](#trading-plan), [Checklist](#checklist), [Bayesian updating](#bayesian-updating), [Sample size](#sample-size), [Regret aversion](#regret-aversion), [Superforecasting](#superforecasting) |
 | [New products and hype terms](#new-products-and-hype-terms) | [Perpetual future (perp)](#perpetual-future-perp), [Funding rate](#funding-rate), [Open interest](#open-interest), [Liquidation](#liquidation), [Memecoin](#memecoin), [Airdrop](#airdrop), [Staking](#staking), [Restaking](#restaking), [Stablecoin](#stablecoin), [RWA tokenisation](#rwa-tokenisation), [Spot bitcoin ETF](#spot-bitcoin-etf), [Covered call ETF](#covered-call-etf), [0DTE options](#0dte-options), [Leveraged ETF decay](#leveraged-etf-decay), [Buffer ETF](#buffer-etf), [Prediction market](#prediction-market), [Thematic ETF](#thematic-etf), [Expense ratio](#expense-ratio), [Premium or discount to NAV](#premium-or-discount-to-nav), [Crypto carry](#crypto-carry), [Crypto volatility](#crypto-volatility) |
+| [Private markets](#private-markets) | [Private equity](#private-equity), [Venture capital](#venture-capital), [Private credit](#private-credit), [IRR (internal rate of return)](#irr-internal-rate-of-return), [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in), [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in), [RVPI (residual value to paid-in)](#rvpi-residual-value-to-paid-in), [PME (public market equivalent)](#pme-public-market-equivalent), [J-curve](#j-curve), [Appraisal smoothing](#appraisal-smoothing), [Unsmoothing](#unsmoothing), [NAV (net asset value)](#nav-net-asset-value), [BDC (business development company)](#bdc-business-development-company), [Interval fund](#interval-fund), [Tender offer fund](#tender-offer-fund), [Evergreen fund](#evergreen-fund), [Non-traded REIT](#non-traded-reit), [Gate (withdrawal limit)](#gate-withdrawal-limit), [Secondaries](#secondaries), [Accredited investor](#accredited-investor), [Form D](#form-d) |
 
 ## Markets and trading
 
@@ -5367,6 +5368,428 @@ A specialised ETF that holds companies linked to a theme. Ben-David, Franzoni, K
 
 Related: [ETF](#etf), [Herding](#herding), [Recency bias](#recency-bias), [Expense ratio](#expense-ratio)
 
+## Private markets
+
+### Accredited investor
+
+**Simple:** A person the US allows to put money into most private offerings, based on income, wealth or certain licences.
+
+<details><summary>Analogy</summary>
+
+Like an age limit at a cinema, except the test is how much money you have.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Under SEC rules, for example income over 200,000 USD (300,000 USD with a spouse or partner) in each of the last two years, net worth over 1 million USD excluding the main home, or certain securities licences [@url-57a0d836].
+
+</details>
+
+**What can go wrong:** Qualifying is not protection. Private offerings come with far less information than public ones.
+
+Related: [Form D](#form-d), [Private equity](#private-equity)
+
+### Appraisal smoothing
+
+**Simple:** Prices of buildings and private funds come from estimates that lean on the last estimate, so they move slowly and late, and look calmer than they really are.
+
+<details><summary>Analogy</summary>
+
+Like a friend who only updates their opinion a little each time, so they always lag the news.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+When an appraisal mixes the current market value with the previous appraisal, reported returns are autocorrelated and their volatility and correlation with markets are understated [@geltner1993]. The same effect appears in hedge fund and private fund returns [@getmansky2004].
+
+</details>
+
+**What can go wrong:** Low reported volatility can be a measuring effect, not safety. Comparing a smoothed series with a daily-priced one flatters the smoothed one.
+
+Related: [Unsmoothing](#unsmoothing), [Volatility](#volatility)
+
+### BDC (business development company)
+
+**Simple:** A US fund, often listed on an exchange, that lends money to or invests in private companies.
+
+<details><summary>Analogy</summary>
+
+Like a shop that lets anyone buy a small slice of a lender to small and mid-sized firms.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A closed-end investment company under the Investment Company Act that must keep at least 70% of its assets in eligible investments, mostly private US companies [@url-52604426]. Its borrowing is capped by an asset coverage test.
+
+</details>
+
+**What can go wrong:** High dividends can include returning your own capital, listed shares can fall far below NAV in a panic, and most BDCs borrow.
+
+Related: [Private credit](#private-credit), [NAV (net asset value)](#nav-net-asset-value), [Premium or discount to NAV](#premium-or-discount-to-nav)
+
+### DPI (distributions to paid-in)
+
+**Simple:** Cash actually paid back to you for every dollar you put in.
+
+<details><summary>Analogy</summary>
+
+Like counting only the money that has actually landed in your bank account.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Cumulative distributions / cumulative paid-in capital. It is the realised part of TVPI and does not depend on the manager's valuations.
+
+</details>
+
+**What can go wrong:** Low early in every fund's life, good or bad, so it says little until a fund is mature.
+
+Related: [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in), [RVPI (residual value to paid-in)](#rvpi-residual-value-to-paid-in)
+
+### Evergreen fund
+
+**Simple:** A private markets fund with no end date that keeps taking new money and lets investors leave only in limited amounts.
+
+<details><summary>Analogy</summary>
+
+Like a never-ending potluck where people can join any time but can only leave through a narrow door.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+An open-ended or periodically open vehicle, such as an interval fund, tender offer fund or non-traded REIT or BDC, priced at a manager-set NAV, with redemption limits.
+
+</details>
+
+**What can go wrong:** Exits are limited exactly when many people want them, and the price is set by the manager.
+
+Related: [Interval fund](#interval-fund), [Gate (withdrawal limit)](#gate-withdrawal-limit), [Non-traded REIT](#non-traded-reit)
+
+### Form D
+
+**Simple:** A short notice filed with the SEC by a company or fund that has started selling securities privately.
+
+<details><summary>Analogy</summary>
+
+Like telling the town hall you are holding a private sale, without them checking what you sell.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A notice of an exempt offering under Regulation D, due within 15 days of the first sale; it is not a registration and the SEC does not review the offering's merits [@url-98351ef7]. It records the issuer's industry, the exemption used and amounts offered and sold.
+
+</details>
+
+**What can go wrong:** A Form D means an offering exists. It says nothing about whether it is any good.
+
+Related: [Accredited investor](#accredited-investor)
+
+### Gate (withdrawal limit)
+
+**Simple:** A rule that lets a fund pay out only part of what investors ask for when too many want to leave at once.
+
+<details><summary>Analogy</summary>
+
+Like a bank letting each customer take out only some of their savings on a busy day.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A cap on redemptions over a period, set in the fund's documents. Requests above the cap are cut back pro rata or carried forward.
+
+</details>
+
+**What can go wrong:** A gate protects the investors who stay, but it can trap you exactly when you need the money.
+
+Related: [Interval fund](#interval-fund), [Non-traded REIT](#non-traded-reit)
+
+### Interval fund
+
+**Simple:** A fund holding hard-to-sell assets that promises to buy back part of its shares on a fixed schedule.
+
+<details><summary>Analogy</summary>
+
+Like a club that lets members leave only on set dates, and only a few at a time.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A registered closed-end fund that must make periodic repurchase offers for 5% to 25% of its shares every 3, 6 or 12 months [@url-a4070279]. If more shares are tendered than offered, each investor gets a pro rata share.
+
+</details>
+
+**What can go wrong:** You may not get all your money out when you ask, and the price is the fund's own valuation.
+
+Related: [Tender offer fund](#tender-offer-fund), [Evergreen fund](#evergreen-fund), [Gate (withdrawal limit)](#gate-withdrawal-limit)
+
+### IRR (internal rate of return)
+
+**Simple:** The yearly return that makes all the money you put in and took out of an investment balance out, counting when each payment happened.
+
+<details><summary>Analogy</summary>
+
+Like working out the single interest rate a savings account would need to pay to match a messy history of deposits and withdrawals.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+The discount rate at which the net present value of all cash flows, plus the current value still held, is zero. It is money-weighted, not time-weighted, so it is not comparable with an index's yearly return, and it can have no answer or several when cash flows change sign more than once [@sorensen2015].
+
+</details>
+
+**What can go wrong:** Early distributions and borrowing before calling investors' money raise the IRR without raising the money made. Always read it next to TVPI and a PME.
+
+Related: [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in), [PME (public market equivalent)](#pme-public-market-equivalent), [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in)
+
+### J-curve
+
+**Simple:** The way a private fund usually shows losses in its first years and gains later, so its return line dips and then rises like the letter J.
+
+<details><summary>Analogy</summary>
+
+Like a new shop that loses money while it is fitted out, then starts earning once customers come.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Early on, fees and setup costs are paid while investments are held near cost; gains are recognised later as holdings are revalued or sold.
+
+</details>
+
+**What can go wrong:** A fund that is still at the bottom of the J tells you little about how it will end.
+
+Related: [Private equity](#private-equity), [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in)
+
+### NAV (net asset value)
+
+**Simple:** What a fund says its holdings are worth, minus what it owes, often given per share.
+
+<details><summary>Analogy</summary>
+
+Like adding up the value of everything in your house and subtracting the mortgage.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Total assets minus liabilities. For private funds and BDCs the assets are mostly valued by the manager under fair value rules, not by market prices.
+
+</details>
+
+**What can go wrong:** For private holdings NAV is an estimate. A listed fund's share price can sit far above or below it.
+
+Related: [Premium or discount to NAV](#premium-or-discount-to-nav), [RVPI (residual value to paid-in)](#rvpi-residual-value-to-paid-in), [BDC (business development company)](#bdc-business-development-company)
+
+### Non-traded REIT
+
+**Simple:** A property company you buy from and sell back to directly, instead of on a stock exchange.
+
+<details><summary>Analogy</summary>
+
+Like a members-only building club where the club decides what your share is worth and how many people can cash out each month.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A registered real estate investment trust whose shares are not listed. Repurchases are capped, often at about 2% of NAV a month and 5% a quarter; in November 2022 one large non-traded REIT received requests above those limits and paid out only up to them [@url-7414523f].
+
+</details>
+
+**What can go wrong:** Withdrawals can be limited for long periods, and fees and sales charges can be high.
+
+Related: [Gate (withdrawal limit)](#gate-withdrawal-limit), [Evergreen fund](#evergreen-fund), [Appraisal smoothing](#appraisal-smoothing)
+
+### PME (public market equivalent)
+
+**Simple:** A way to compare a private fund with a stock index, as if you had put the same money into the index on the same days.
+
+<details><summary>Analogy</summary>
+
+Like checking whether your house renovation beat simply leaving the money in an index fund over the same years.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+The Kaplan and Schoar PME discounts each cash flow by the index's return and divides discounted distributions by discounted contributions; above 1 means the fund beat the index after fees [@kaplan2005]. It equals valuing the cash flows with a market-based discount rate [@sorensen2015]. Direct alpha turns the same idea into a yearly excess return [@gredil2023].
+
+</details>
+
+**What can go wrong:** The answer depends on the index chosen, and unsold holdings still enter at the manager's estimate.
+
+Related: [IRR (internal rate of return)](#irr-internal-rate-of-return), [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in)
+
+### Private credit
+
+**Simple:** Loans made straight to companies by funds rather than by banks or through the bond market.
+
+<details><summary>Analogy</summary>
+
+Like borrowing from a wealthy neighbour instead of the bank: quicker and more flexible, but at a higher rate.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Mostly senior, floating-rate direct loans to mid-sized companies, many owned by private equity funds, held in closed-end funds, BDCs and interval funds. Loans are carried at model-based fair values, not market prices.
+
+</details>
+
+**What can go wrong:** Borrowers are often highly indebted, and losses can show up late because the loans are marked by models. Withdrawal limits bite when many investors want out at once.
+
+Related: [BDC (business development company)](#bdc-business-development-company), [Interval fund](#interval-fund), [Appraisal smoothing](#appraisal-smoothing)
+
+### Private equity
+
+**Simple:** Money pooled in a fund that buys whole companies, or big stakes in them, that are not on a stock exchange, then tries to sell them for more a few years later.
+
+<details><summary>Analogy</summary>
+
+Like a group of friends buying a run-down house together, fixing it up and selling it, except the house is a company and they borrow a lot of the price.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Usually a closed-end limited partnership with a life of about ten years. Investors commit capital that the manager calls over the first years and returns as holdings are sold. Buyout funds use substantial debt at the company level. Performance is usually reported as IRR and multiples and, in research, as a public market equivalent [@kaplan2005].
+
+</details>
+
+**What can go wrong:** Values between sales are the manager's estimates, money is locked up for years, and fees are high. Average results depend heavily on the data and the benchmark.
+
+Related: [Venture capital](#venture-capital), [IRR (internal rate of return)](#irr-internal-rate-of-return), [PME (public market equivalent)](#pme-public-market-equivalent), [J-curve](#j-curve)
+
+### RVPI (residual value to paid-in)
+
+**Simple:** The estimated value of what a fund still holds, for every dollar you put in.
+
+<details><summary>Analogy</summary>
+
+Like the price tag you would put on the things in your attic: a guess until you sell them.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Residual net asset value / cumulative paid-in capital. TVPI minus DPI.
+
+</details>
+
+**What can go wrong:** This is the part you cannot check until the assets are sold.
+
+Related: [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in), [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in), [NAV (net asset value)](#nav-net-asset-value)
+
+### Secondaries
+
+**Simple:** Buying an existing investor's stake in a private fund, or a set of companies a fund still owns, usually below the reported value.
+
+<details><summary>Analogy</summary>
+
+Like buying a season ticket halfway through the season from someone who needs the cash.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Transactions in existing private fund interests (LP-led) or in portfolios moved into a new vehicle by the manager (GP-led). Most sales happen at a discount to reported NAV.
+
+</details>
+
+**What can go wrong:** A discount to a stale estimate may not be a bargain, and secondary funds add a second layer of fees.
+
+Related: [NAV (net asset value)](#nav-net-asset-value), [Private equity](#private-equity)
+
+### Tender offer fund
+
+**Simple:** A fund that buys back shares only when its board decides to make an offer.
+
+<details><summary>Analogy</summary>
+
+Like a shop that takes returns only on days the owner chooses.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+A closed-end fund with no fixed repurchase schedule; the board decides whether, when and how much to repurchase.
+
+</details>
+
+**What can go wrong:** The board can skip buybacks, so there may be no way out in a bad year.
+
+Related: [Interval fund](#interval-fund), [Evergreen fund](#evergreen-fund)
+
+### TVPI (total value to paid-in)
+
+**Simple:** How many dollars of value you have for every dollar you put in: cash already paid back plus the estimated value of what is left.
+
+<details><summary>Analogy</summary>
+
+Like counting both the change in your hand and the gift card balance you have not spent yet.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+(Cumulative distributions + residual net asset value) / cumulative paid-in capital. TVPI = DPI + RVPI. It ignores timing.
+
+</details>
+
+**What can go wrong:** Early in a fund's life it is mostly the manager's own estimate. The same TVPI over four years and over twelve is a very different result.
+
+Related: [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in), [RVPI (residual value to paid-in)](#rvpi-residual-value-to-paid-in), [IRR (internal rate of return)](#irr-internal-rate-of-return)
+
+### Unsmoothing
+
+**Simple:** Working backwards from smoothed reported returns to an estimate of how much the asset really moved.
+
+<details><summary>Analogy</summary>
+
+Like turning up the contrast on a blurry photo to see the real outline.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Geltner's method estimates the share of each reported return that repeats the previous one (the first-order autocorrelation) and removes it: r_true = (r_reported - a r_previous) / (1 - a) [@geltner1993]. Getmansky, Lo and Makarov fit a moving average of true returns instead [@getmansky2004].
+
+</details>
+
+**What can go wrong:** It assumes true returns are not predictable. If prices really trend, unsmoothing overstates the risk.
+
+Related: [Appraisal smoothing](#appraisal-smoothing), [Volatility](#volatility)
+
+### Venture capital
+
+**Simple:** Funds that put money into young companies, hoping a few of them grow very large. Most of the companies fail or return little.
+
+<details><summary>Analogy</summary>
+
+Like planting a hundred seeds knowing most will not sprout, hoping one becomes a huge tree.
+
+</details>
+
+<details><summary>Precise definition</summary>
+
+Minority equity stakes in early-stage private companies, usually through closed-end funds. Returns are highly skewed: a few outcomes produce most of the gains, and interim values often come from the price of the latest funding round.
+
+</details>
+
+**What can go wrong:** A last-round price can be far above what a buyer would pay, so paper gains can vanish. Skill is hard to tell from luck.
+
+Related: [Private equity](#private-equity), [TVPI (total value to paid-in)](#tvpi-total-value-to-paid-in), [DPI (distributions to paid-in)](#dpi-distributions-to-paid-in)
+
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
 
@@ -5483,6 +5906,16 @@ Related: [ETF](#etf), [Herding](#herding), [Recency bias](#recency-bias), [Expen
 - [@url-0225a9e2](../REFERENCES.md#url-0225a9e2): Proof-of-stake rewards and penalties (n.d.)
 - [@url-894d16a5](../REFERENCES.md#url-894d16a5): Statement on certain protocol staking activities (2025)
 - [@bendavid2022](../REFERENCES.md#bendavid2022): Ben-David et al. (2022), Competition for Attention in the ETF Space
+- [@url-57a0d836](../REFERENCES.md#url-57a0d836): Accredited investors (n.d.)
+- [@geltner1993](../REFERENCES.md#geltner1993): Geltner (1993), Estimating Market Values from Appraised Values without Assuming an Efficient Market
+- [@getmansky2004](../REFERENCES.md#getmansky2004): Getmansky et al. (2004), An econometric model of serial correlation and illiquidity in hedge fund returns
+- [@url-52604426](../REFERENCES.md#url-52604426): 15 U.S. Code 80a-54, Functions and activities of business development companies (n.d.)
+- [@url-98351ef7](../REFERENCES.md#url-98351ef7): Filing a Form D notice (n.d.)
+- [@url-a4070279](../REFERENCES.md#url-a4070279): 17 CFR 270.23c-3, Repurchase of securities of closed-end companies (interval funds) (n.d.)
+- [@sorensen2015](../REFERENCES.md#sorensen2015): Sorensen and Jagannathan (2015), The Public Market Equivalent and Private Equity Performance
+- [@url-7414523f](../REFERENCES.md#url-7414523f): Blackstone Real Estate Income Trust, prospectus supplement, November 2022 NAV and share repurchases (424B3, filed 2022-12-15) (2022)
+- [@kaplan2005](../REFERENCES.md#kaplan2005): Kaplan and Schoar (2005), Private Equity Performance: Returns, Persistence, and Capital Flows
+- [@gredil2023](../REFERENCES.md#gredil2023): Gredil et al. (2023), Benchmarking private equity: The direct alpha method
 
 ## Referenced by
 

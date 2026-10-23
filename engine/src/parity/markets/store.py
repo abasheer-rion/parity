@@ -8,6 +8,7 @@ on what the source's terms allow:
     append    Hyperliquid snapshots and funding, SEC filings: new rows are added, the
               same row is never stored twice, and rows older than a year are dropped.
     etfs      replaced, except each ticker keeps the first date we saw it listed.
+    quarters  Form D counts: a fetched quarter replaces that quarter's rows; others stay.
 
 state.json records when each source was last fetched, so `parity markets fetch` can skip
 sources that are still fresh.
@@ -32,6 +33,9 @@ POLICY: dict[str, tuple[str, list[str], int | None]] = {
     "perps_funding": ("append", ["coin", "time"], 365),
     "etfs": ("etfs", ["ticker"], None),
     "fund_filings": ("append", ["adsh"], 365),
+    # Private markets (DEC-0029). Form D counts replace whole quarters; BDC NAVs replace all.
+    "formd": ("quarters", ["quarter"], None),
+    "bdc_nav": ("replace", [], None),
 }
 TIME_COL = {"perps_snapshots": "fetched_at", "perps_funding": "time", "fund_filings": "fetched_at"}
 LIST_COLS = ("tickers", "themes")
@@ -66,6 +70,9 @@ def merge(table: str, new: pd.DataFrame, root: Path = DEFAULT_DIR,
         out = new.copy()
         if policy == "etfs":
             out["first_seen"] = today.date().isoformat()
+    elif policy == "quarters":
+        out = pd.concat([old[~old["quarter"].isin(set(new["quarter"]))], new],
+                        ignore_index=True).sort_values(["quarter"], kind="stable")
     elif policy == "etfs":
         out = new.copy()
         seen = old.set_index("ticker")["first_seen"].to_dict() if "first_seen" in old else {}

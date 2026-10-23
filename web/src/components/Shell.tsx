@@ -38,6 +38,7 @@ const PRODUCT: NavItem[] = [
       { href: "#/markets/crypto", label: "Crypto", routes: [] },
       { href: "#/markets/perps", label: "Perps", routes: [] },
       { href: "#/markets/etfs", label: "ETFs", routes: [] },
+      { href: "#/markets/private", label: "Private markets", routes: [] },
       { href: "#/markets/terms", label: "Hype terms", routes: [] },
       { href: "#/markets/practice", label: "Practice", routes: [] },
     ],
@@ -74,6 +75,7 @@ const RESEARCH: NavItem[] = [
   { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
   // The Academy lives on the product side (DEC-0028); this opens it there.
   { href: "/app/#/academy", label: "Academy", icon: "play", routes: [] },
+  { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
     children: [
