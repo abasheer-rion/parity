@@ -6,6 +6,7 @@
 // Percent fields from the engine are already in percent (10.95 means 10.95%).
 import { useEffect, useState } from "react";
 import { source } from "./data";
+import { useResource } from "../ui/resource";
 import type { PrivateDoc } from "./privateMarkets";
 import type { Point } from "./types";
 
@@ -110,11 +111,15 @@ export const loadEtfs = () => get<EtfsFile>("etfs.json").then((f): EtfsDoc => ({
 }));
 
 /** Load one file; returns [data, error]. */
+// Each loader gets a key, so a page opened again draws its last copy at once and
+// refreshes it quietly (useResource, stale-while-revalidate).
+const marketKeys = new WeakMap<object, string>();
+let marketSeq = 0;
 export function useMarket<T>(load: () => Promise<T>): [T | null, string | null] {
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => { load().then(setData).catch((e: Error) => setError(e.message)); }, [load]);
-  return [data, error];
+  let key = marketKeys.get(load);
+  if (!key) marketKeys.set(load, (key = `market:${++marketSeq}`));
+  const r = useResource(key, load);
+  return [r.data ?? null, r.error ?? null];
 }
 
 // ------------------------------------------------------------------ formatting
