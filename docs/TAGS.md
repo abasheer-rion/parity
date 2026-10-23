@@ -622,6 +622,8 @@ The dashboard.
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)

@@ -90,6 +90,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)

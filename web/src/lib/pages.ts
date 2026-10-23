@@ -44,6 +44,8 @@ export const PAGES: PageInfo[] = [
   { href: "#/markets/terms", title: "Hype terms explained", space: "product", what: "Staking, memecoins, 0DTE, buffer ETFs and more, in plain words with what can go wrong.", when: "a new money word means nothing to you", keywords: ["hype", "terms", "staking", "restaking", "memecoin", "airdrop", "0dte", "prediction markets", "rwa"] },
   { href: "#/markets/practice", title: "Practice", space: "product", what: "Follow a coin or ETF with pretend money and watch what it would be worth. No real money.", when: "you want to try an idea without risking money", keywords: ["practice", "paper", "pretend", "simulate", "trade", "portfolio"] },
 
+  { href: "#/academy", title: "Academy", space: "product", what: "Short courses with moving pictures: reading a backtest, luck vs skill, how markets move, currencies, rates, crypto, private markets and news.", when: "you want to understand a topic in a few minutes", keywords: ["academy", "course", "courses", "lesson", "lessons", "learn", "tutorial", "teach", "explain", "beginner", "video", "yield curve", "event study", "irr", "tvpi"] },
+
   // Research
   { href: "#/", title: "Research home", space: "research", what: "Where the research stands: the question, the record, the search and what is open.", when: "you open the research side", keywords: ["home", "dashboard", "status", "overview"] },
   { href: "#/docs", title: "Research docs", space: "research", what: "Every decision, experiment, paper note and log, readable with previews.", when: "you want the reasoning behind a result", keywords: ["docs", "papers", "notes", "reports", "decisions", "experiments", "reading", "hypotheses"] },

@@ -49,6 +49,7 @@ const PRODUCT: NavItem[] = [
       { href: "#/news/history", label: "Biggest days", routes: [] },
     ],
   },
+  { href: "#/academy", label: "Academy", icon: "play", routes: ["academy"] },
   GLOSSARY,
   START,
   HOW,
@@ -71,6 +72,8 @@ const RESEARCH: NavItem[] = [
   { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
   { href: "#/search", label: "Strategy search", icon: "search", routes: ["search"] },
   { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
+  // The Academy lives on the product side (DEC-0028); this opens it there.
+  { href: "/app/#/academy", label: "Academy", icon: "play", routes: [] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
     children: [

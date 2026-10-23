@@ -399,6 +399,7 @@
       "CONTRIBUTING.md",
       "Makefile",
       "README.md",
+      "academy",
       "auth",
       "catalog",
       "docs",
