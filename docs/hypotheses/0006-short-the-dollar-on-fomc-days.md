@@ -41,6 +41,7 @@ None yet.
 
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [ALG-0008: Short the dollar on FOMC announcement days](../algorithms/0008-fx-fomc-dollar-announcement.md)
 <!-- backlinks:end -->

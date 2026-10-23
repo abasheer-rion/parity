@@ -230,7 +230,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/reference/0004-glossary.md",
-        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "manual",
@@ -504,7 +505,8 @@
         "catalog/algorithms/fx-value-ppp.json",
         "docs/algorithms/0005-fx-cross-sectional-momentum.md",
         "docs/algorithms/0017-fx-value-ppp.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -610,7 +612,8 @@
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -875,7 +878,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/reference/0004-glossary.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "manual",
@@ -1412,7 +1416,8 @@
       "used_in": [
         "catalog/algorithms/retail-swap-carry.json",
         "docs/algorithms/0069-retail-swap-carry.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -2279,7 +2284,8 @@
       "used_in": [
         "catalog/algorithms/fx-economic-momentum.json",
         "docs/algorithms/0007-fx-economic-momentum.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref-search",
@@ -2747,7 +2753,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "note": "Read for RES-0010 (full text)",
       "metadata": {
@@ -3181,7 +3188,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/betting-against-beta.json",
-        "docs/algorithms/0037-betting-against-beta.md"
+        "docs/algorithms/0037-betting-against-beta.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -3684,7 +3692,8 @@
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -3906,7 +3915,8 @@
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -4101,7 +4111,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0001-reading-list.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -4328,7 +4339,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/equity-cross-sectional-momentum.json",
-        "docs/algorithms/0042-equity-cross-sectional-momentum.md"
+        "docs/algorithms/0042-equity-cross-sectional-momentum.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -4845,7 +4857,8 @@
       "used_in": [
         "catalog/algorithms/trend-plus-carry-combined.json",
         "docs/algorithms/0051-trend-plus-carry-combined.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -4901,7 +4914,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "note": "Read for RES-0010 (abstract page)",
       "metadata": {
@@ -4928,7 +4942,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/turn-of-the-month.json",
-        "docs/algorithms/0052-turn-of-the-month.md"
+        "docs/algorithms/0052-turn-of-the-month.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -5483,7 +5498,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/pre-fomc-drift.json",
-        "docs/algorithms/0019-pre-fomc-drift.md"
+        "docs/algorithms/0019-pre-fomc-drift.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -5537,7 +5553,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/guides/0003-writing-docs.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -5960,7 +5977,8 @@
         "docs/algorithms/0052-turn-of-the-month.md",
         "docs/algorithms/0053-value-hml.md",
         "docs/research/0001-reading-list.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -6011,7 +6029,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-london-4pm-fix.json",
-        "docs/algorithms/0009-fx-london-4pm-fix.md"
+        "docs/algorithms/0009-fx-london-4pm-fix.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref-search",
@@ -6189,7 +6208,8 @@
         "catalog/algorithms/fx-carry-g10.json",
         "docs/algorithms/0001-fx-carry-g10.md",
         "docs/research/0001-reading-list.md",
-        "catalog/algorithms/em-fx-carry.json"
+        "catalog/algorithms/em-fx-carry.json",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -6444,7 +6464,8 @@
         "docs/algorithms/0015-fx-time-series-momentum.md",
         "docs/algorithms/0039-commodity-time-series-momentum.md",
         "docs/research/0001-reading-list.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -6502,7 +6523,8 @@
       "used_in": [
         "catalog/algorithms/fx-fomc-dollar-announcement.json",
         "docs/algorithms/0008-fx-fomc-dollar-announcement.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -6663,7 +6685,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md",
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "note": "Read for RES-0010 (full text)",
       "metadata": {
@@ -24034,6 +24057,637 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "adrian2013",
+      "type": "paper",
+      "authors": [
+        "Adrian, Tobias",
+        "Crump, Richard K.",
+        "Moench, Emanuel"
+      ],
+      "year": 2013,
+      "title": "Pricing the term structure with linear regressions",
+      "venue": "Journal of Financial Economics 110(1), 110-138",
+      "doi": "10.1016/j.jfineco.2013.04.009",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2013.04.009",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ang2006",
+      "type": "paper",
+      "authors": [
+        "Ang, Andrew",
+        "Hodrick, Robert J.",
+        "Xing, Yuhang",
+        "Zhang, Xiaoyan"
+      ],
+      "year": 2006,
+      "title": "The Cross-Section of Volatility and Expected Returns",
+      "venue": "The Journal of Finance 61(1), 259-299",
+      "doi": "10.1111/j.1540-6261.2006.00836.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.2006.00836.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "ariel1987",
+      "type": "paper",
+      "authors": [
+        "Ariel, Robert A."
+      ],
+      "year": 1987,
+      "title": "A monthly effect in stock returns",
+      "venue": "Journal of Financial Economics 18(1), 161-174",
+      "doi": "10.1016/0304-405x(87)90066-3",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0304-405X(87)90066-3",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "beber2015",
+      "type": "paper",
+      "authors": [
+        "Beber, Alessandro",
+        "Brandt, Michael W.",
+        "Luisi, Maurizio"
+      ],
+      "year": 2015,
+      "title": "Distilling the macroeconomic news flow",
+      "venue": "Journal of Financial Economics 117(3), 489-507",
+      "doi": "10.1016/j.jfineco.2015.05.005",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2015.05.005",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "bernard1989",
+      "type": "paper",
+      "authors": [
+        "Bernard, Victor L.",
+        "Thomas, Jacob K."
+      ],
+      "year": 1989,
+      "title": "Post-Earnings-Announcement Drift: Delayed Price Response or Risk Premium?",
+      "venue": "Journal of Accounting Research 27, 1",
+      "doi": "10.2307/2491062",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2491062",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "bessembinder1992",
+      "type": "paper",
+      "authors": [
+        "Bessembinder, Hendrik",
+        "Chan, Kalok"
+      ],
+      "year": 1992,
+      "title": "Time-varying risk premia and forecastable returns in futures markets",
+      "venue": "Journal of Financial Economics 32(2), 169-193",
+      "doi": "10.1016/0304-405x(92)90017-r",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0304-405X(92)90017-R",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "bollerslev2009",
+      "type": "paper",
+      "authors": [
+        "Bollerslev, Tim",
+        "Tauchen, George",
+        "Zhou, Hao"
+      ],
+      "year": 2009,
+      "title": "Expected Stock Returns and Variance Risk Premia",
+      "venue": "Review of Financial Studies 22(11), 4463-4492",
+      "doi": "10.1093/rfs/hhp008",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhp008",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "carr2008",
+      "type": "paper",
+      "authors": [
+        "Carr, Peter",
+        "Wu, Liuren"
+      ],
+      "year": 2008,
+      "title": "Variance Risk Premiums",
+      "venue": "Review of Financial Studies 22(3), 1311-1341",
+      "doi": "10.1093/rfs/hhn038",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhn038",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "chen2022",
+      "type": "paper",
+      "authors": [
+        "Chen, Andrew Y.",
+        "Zimmermann, Tom"
+      ],
+      "year": 2022,
+      "title": "Open Source Cross-Sectional Asset Pricing",
+      "venue": "Critical Finance Review 11(2), 207-264",
+      "doi": "10.1561/104.00000112",
+      "arxiv": null,
+      "url": "https://doi.org/10.1561/104.00000112",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "cieslak2019",
+      "type": "paper",
+      "authors": [
+        "Cieslak, Anna",
+        "Morse, Adair",
+        "Vissing-Jorgensen, Annette"
+      ],
+      "year": 2019,
+      "title": "Stock Returns over the FOMC Cycle",
+      "venue": "The Journal of Finance 74(5), 2201-2248",
+      "doi": "10.1111/jofi.12818",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12818",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "cochrane2005",
+      "type": "paper",
+      "authors": [
+        "Cochrane, John H",
+        "Piazzesi, Monika"
+      ],
+      "year": 2005,
+      "title": "Bond Risk Premia",
+      "venue": "American Economic Review 95(1), 138-160",
+      "doi": "10.1257/0002828053828581",
+      "arxiv": null,
+      "url": "https://doi.org/10.1257/0002828053828581",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "da2011",
+      "type": "paper",
+      "authors": [
+        "Da, Zhi",
+        "Engelberg, Joseph",
+        "Gao, Pengjie"
+      ],
+      "year": 2011,
+      "title": "In Search of Attention",
+      "venue": "The Journal of Finance 66(5), 1461-1499",
+      "doi": "10.1111/j.1540-6261.2011.01679.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.2011.01679.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "daniel2016",
+      "type": "paper",
+      "authors": [
+        "Daniel, Kent",
+        "Moskowitz, Tobias J."
+      ],
+      "year": 2016,
+      "title": "Momentum crashes",
+      "venue": "Journal of Financial Economics 122(2), 221-247",
+      "doi": "10.1016/j.jfineco.2015.12.002",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2015.12.002",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "etula2019",
+      "type": "paper",
+      "authors": [
+        "Etula, Erkko",
+        "Rinne, Kalle",
+        "Suominen, Matti",
+        "Vaittinen, Lauri"
+      ],
+      "year": 2019,
+      "title": "Dash for Cash: Monthly Market Impact of Institutional Liquidity Needs",
+      "venue": "The Review of Financial Studies 33(1), 75-111",
+      "doi": "10.1093/rfs/hhz054",
+      "arxiv": null,
+      "url": "https://doi.org/10.1093/rfs/hhz054",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "fama1987",
+      "type": "paper",
+      "authors": [
+        "Fama, Eugene F.",
+        "Bliss, Robert R."
+      ],
+      "year": 1987,
+      "title": "The Information in Long-Maturity Forward Rates",
+      "venue": "American Economic Review 77(4), 680-692",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/aea/aecrev/v77y1987i4p680-92.html",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against RePEc (no DOI)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "giannone2008",
+      "type": "paper",
+      "authors": [
+        "Giannone, Domenico",
+        "Reichlin, Lucrezia",
+        "Small, David"
+      ],
+      "year": 2008,
+      "title": "Nowcasting: The real-time informational content of macroeconomic data",
+      "venue": "Journal of Monetary Economics 55(4), 665-676",
+      "doi": "10.1016/j.jmoneco.2008.05.010",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jmoneco.2008.05.010",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "harris1986",
+      "type": "paper",
+      "authors": [
+        "Harris, Lawrence",
+        "Gurel, Eitan"
+      ],
+      "year": 1986,
+      "title": "Price and Volume Effects Associated with Changes in the S&P 500 List: New Evidence for the Existence of Price Pressures",
+      "venue": "The Journal of Finance 41(4), 815-829",
+      "doi": "10.1111/j.1540-6261.1986.tb04550.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1986.tb04550.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "keim1983",
+      "type": "paper",
+      "authors": [
+        "Keim, Donald B."
+      ],
+      "year": 1983,
+      "title": "Size-related anomalies and stock return seasonality",
+      "venue": "Journal of Financial Economics 12(1), 13-32",
+      "doi": "10.1016/0304-405x(83)90025-9",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/0304-405X(83)90025-9",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "khandani2011",
+      "type": "paper",
+      "authors": [
+        "Khandani, Amir E.",
+        "Lo, Andrew W."
+      ],
+      "year": 2011,
+      "title": "What happened to the quants in August 2007? Evidence from factors and transactions data",
+      "venue": "Journal of Financial Markets 14(1), 1-46",
+      "doi": "10.1016/j.finmar.2010.07.005",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.finmar.2010.07.005",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "kurov2021",
+      "type": "paper",
+      "authors": [
+        "Kurov, Alexander",
+        "Wolfe, Marketa Halova",
+        "Gilbert, Thomas"
+      ],
+      "year": 2021,
+      "title": "The disappearing pre-FOMC announcement drift",
+      "venue": "Finance Research Letters 40, 101781",
+      "doi": "10.1016/j.frl.2020.101781",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.frl.2020.101781",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "petajisto2011",
+      "type": "paper",
+      "authors": [
+        "Petajisto, Antti"
+      ],
+      "year": 2011,
+      "title": "The index premium and its hidden cost for index funds",
+      "venue": "Journal of Empirical Finance 18(2), 271-288",
+      "doi": "10.1016/j.jempfin.2010.10.002",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jempfin.2010.10.002",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "sanders2004",
+      "type": "paper",
+      "authors": [
+        "Sanders, Dwight R.",
+        "Boris, Keith",
+        "Manfredo, Mark"
+      ],
+      "year": 2004,
+      "title": "Hedgers, funds, and small speculators in the energy futures markets: an analysis of the CFTC's Commitments of Traders reports",
+      "venue": "Energy Economics 26(3), 425-445",
+      "doi": "10.1016/j.eneco.2004.04.010",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.eneco.2004.04.010",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "shleifer1986",
+      "type": "paper",
+      "authors": [
+        "Shleifer, Andrei"
+      ],
+      "year": 1986,
+      "title": "Do Demand Curves for Stocks Slope Down?",
+      "venue": "The Journal of Finance 41(3), 579-590",
+      "doi": "10.1111/j.1540-6261.1986.tb04518.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1986.tb04518.x",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "wang2001",
+      "type": "paper",
+      "authors": [
+        "Wang, Changyun"
+      ],
+      "year": 2001,
+      "title": "Investor Sentiment and Return Predictability in Agricultural Futures Markets",
+      "venue": "Journal of Futures Markets 21(10), 929-952",
+      "doi": "10.1002/fut.2003",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/fut.2003",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "wang2002",
+      "type": "paper",
+      "authors": [
+        "Wang, Changyun"
+      ],
+      "year": 2002,
+      "title": "The behavior and performance of major types of futures traders",
+      "venue": "Journal of Futures Markets 23(1), 1-31",
+      "doi": "10.1002/fut.10056",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/fut.10056",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+      ],
+      "note": "Checked for RES-0011 on 2026-10-23 against Crossref",
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
       }
     }
   ]

@@ -3,30 +3,35 @@
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, SearchInput, Segmented, Select, Tabs, type Column } from "../ui";
+import { Archive, Impact as ImpactSearch } from "./NewsImpact";
 import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay, type RecordsDoc } from "../lib/news";
 
-type View = "latest" | "history";
+type View = "latest" | "archive" | "impact" | "history";
 type SortKey = "newest" | "oldest" | "biggest";
+const VIEWS: View[] = ["latest", "archive", "impact", "history"];
 
 const CATEGORY_LABEL: Record<string, string> = {
   "central-bank": "Central banks", "macro-data": "Economic data", energy: "Energy", markets: "Markets",
   regulation: "Regulation", geopolitics: "Geopolitics", earnings: "Earnings",
 };
 
+const asView = (v?: string): View => (VIEWS.includes(v as View) ? (v as View) : "latest");
+
 export function News({ view: initial }: { view?: string }) {
-  const [view, setView] = useState<View>(initial === "history" ? "history" : "latest");
-  useEffect(() => { setView(initial === "history" ? "history" : "latest"); }, [initial]);
-  const go = (v: View) => { window.location.hash = v === "history" ? "#/news/history" : "#/news"; };
+  const [view, setView] = useState<View>(asView(initial));
+  useEffect(() => { setView(asView(initial)); }, [initial]);
+  const go = (v: View) => { window.location.hash = v === "latest" ? "#/news" : `#/news/${v}`; };
   return (
     <>
       <div className="page-head">
         <Title label="News">News and market moves</Title>
-        <p>The newest headlines from central banks, government statistics offices and an open news index, and how markets
-          moved afterwards compared with a normal day. A big move after a headline does not prove the headline caused it.</p>
+        <p>The newest headlines from central banks, government statistics offices and an open news index, how markets
+          moved afterwards compared with a normal day, an archive going back decades, and a tool to see which kinds of
+          news came before unusual moves. A big move after a headline does not prove the headline caused it.</p>
       </div>
-      <Tabs label="News view" value={view} onChange={go} tabs={[["latest", "Latest"], ["history", "Biggest days in history"]]} />
+      <Tabs label="News view" value={view} onChange={go} tabs={[["latest", "Latest"], ["archive", "Archive"], ["impact", "Impact search"], ["history", "Biggest days in history"]]} />
       <div style={{ height: 16 }} />
-      {view === "latest" ? <Latest /> : <History />}
+      {view === "latest" ? <Latest /> : view === "archive" ? <Archive /> : view === "impact" ? <ImpactSearch /> : <History />}
     </>
   );
 }

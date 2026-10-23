@@ -9,6 +9,7 @@ It writes static HTML (no script, inline CSS, so pages paint at once) for:
   /learn/  and /learn/<term>/   every glossary term (docs/_system/glossary.json)
   /ideas/  and /ideas/<slug>/   every trading idea in catalog/algorithms/*.json
   /notes/  and /notes/<id>/     the "In plain words" part of decisions, research and references
+  /learn/edge-lab/              how to look for an edge without fooling yourself (docs/_system/edge-lab.json)
 and then the files search engines read:
   sitemap.xml          every public URL (front page, legal pages and the pages above)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
@@ -88,6 +89,10 @@ def load_notes() -> list[dict]:
                           "file": p.name, "created": meta.get("created", ""), "updated": meta.get("updated", ""),
                           "status": meta.get("status", ""), "summary": summary})
     return sorted(notes, key=lambda n: n["id"])
+
+
+def load_edge_lab() -> dict:
+    return json.loads((ROOT / "docs/_system/edge-lab.json").read_text())
 
 
 # ---------------------------------------------------------------- tiny markdown
@@ -339,6 +344,7 @@ def build_learn(terms: list[dict], refs: dict) -> dict[str, str]:
         "</ul>" for c, ts in sorted(cats.items()))
     body = f"""<h1>Learn the words of trading and research</h1>
 <p class="lede">{len(terms)} terms, each explained three ways: in simple words, with an everyday comparison, and precisely.</p>
+<ul class="grid"><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on backtests that lie, with real mistakes we caught in our own research.</small></a></li></ul>
 {groups}"""
     ld = {"@type": "DefinedTermSet", "@id": f"{SITE}/learn/#set", "name": "Parity glossary", "url": f"{SITE}/learn/",
           "hasDefinedTerm": [{"@id": f"{SITE}/learn/{t['id']}/#term"} for t in terms if slug_ok(t["id"])]}
@@ -453,6 +459,85 @@ def build_notes(notes: list[dict], refs: dict) -> dict[str, str]:
     return pages
 
 
+EDGE_CHECKS = [
+    ("What data does the signal use, and when was each value really public?", "look-ahead"),
+    ("How many variations did you try before this one, counting every changed setting?", "multiple-testing"),
+    ("Could you really trade at the prices in the backtest, or are they averages, index levels or spot prices?", "too-good"),
+    ("Have you already looked at the test period, and is there data you have never seen?", "out-of-sample"),
+    ("How often does it trade, and at what cost per trade does the gain fall to zero?", "costs"),
+    ("Is the Sharpe ratio above 2, or is it in cash most of the time?", "too-good"),
+    ("Is it from a published paper, and how did it do after publication?", "capacity"),
+    ("Does it trade small or thinly traded markets where your own orders move the price?", "capacity"),
+    ("Did you write the rule and the pass mark down before running it?", "register"),
+]
+
+
+def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) -> dict[str, str]:
+    """One public page: the Edge Lab lessons and our real examples, with a static checklist."""
+    note_ids = {n["id"] for n in notes}
+    term_names = {t["id"]: t["term"] for t in terms}
+    lessons = {l["id"]: l for l in lab["lessons"]}
+
+    def doc_link(doc: str, label: str) -> str:
+        # Only docs with a public summary get a link; the rest keep their words.
+        return f'<a href="/notes/{doc.lower()}/">{e(label)}</a>' if doc in note_ids else e(label)
+
+    def ref_link(key: str) -> str:
+        r = refs.get(key)
+        if not r:
+            return ""
+        who = (r.get("authors") or [""])[0].split(",")[0]
+        label = f"{who} {r.get('year') or ''}".strip() or r["title"]
+        url = r.get("url") or (f"https://doi.org/{r['doi']}" if r.get("doi") else "")
+        return f'<a href="{e(url)}" rel="nofollow noopener">{e(label)}</a>' if url else e(label)
+
+    def anchor(href: str, label: str) -> str:
+        return f'<a href="{e(href)}">{e(label)}</a>'
+
+    blocks = []
+    for i, l in enumerate(lab["lessons"], 1):
+        ex = [anchor(f"#ex-{x['id']}", x["title"]) for x in lab["examples"] if l["id"] in x["lessons"]]
+        more = [doc_link(k["doc"], k["label"]) for k in l["links"] if k.get("doc")]
+        more += [x for x in (ref_link(r) for r in l["refs"]) if x]
+        words = [anchor(f"/learn/{t}/", term_names[t]) for t in l["terms"] if t in term_names]
+        parts = [f'<section class="card" id="{e(l["id"])}"><h2>Lesson {i}</h2><h3>{e(l["title"])}</h3>',
+                 f'<p>{e(l["text"])}</p><p><strong>What we do:</strong> {e(l["do"])}</p>']
+        if ex:
+            parts.append(f"<p>Our example: {', '.join(ex)}</p>")
+        if more:
+            parts.append(f"<p>Read more: {' &middot; '.join(more)}</p>")
+        if words:
+            parts.append(f"<p>Words: {', '.join(words)}</p>")
+        blocks.append("".join(parts) + "</section>")
+    examples = []
+    for x in lab["examples"]:
+        to = ", ".join(anchor(f"#{k}", lessons[k]["title"]) for k in x["lessons"] if k in lessons)
+        examples.append(f'<section class="card" id="ex-{e(x["id"])}"><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p>'
+                        f'<p>Lesson: {to} &middot; {doc_link(x["doc"], x["doc"])}</p></section>')
+    checks = "".join(f"<li>{e(q)} {anchor('#' + k, lessons[k]['title'])}</li>" for q, k in EDGE_CHECKS if k in lessons)
+    reading = [doc_link(r["doc"], r["label"]) for r in lab["reading"] if r.get("doc") in note_ids]
+    reading_html = ('<h2>Further reading</h2><ul class="related">' + "".join(f"<li>{x}</li>" for x in reading) + "</ul>") if reading else ""
+    path = "/learn/edge-lab/"
+    title = "How to look for a trading edge without fooling yourself"
+    body = f"""<h1>{e(title)}</h1>
+<p class="lede">{e(lab["intro"])}</p>
+<h2>Seven lessons</h2>
+{"".join(blocks)}
+<h2>Our own mistakes</h2>
+<p>Each of these looked like an edge in our backtests until we found the flaw.</p>
+{"".join(examples)}
+<h2>Questions to ask about any idea</h2>
+<div class="prose"><ol>{checks}</ol></div>
+<p class="lede" style="font-size:14px">Members get an interactive version of this checklist that ranks the pitfalls for a specific idea.</p>
+{reading_html}
+<p class="lede" style="font-size:14px;margin-top:24px">This page explains research methods. It is not a recommendation to buy, sell or hold anything.</p>"""
+    ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(lab["intro"]),
+          "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
+          "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
+    return {path: page(path=path, title=title, description=plain_text(lab["intro"]), body=body, section="learn",
+                       trail=[("Home", "/"), ("Learn", "/learn/"), ("Edge Lab", path)], ld=[ld])}
+
+
 # ---------------------------------------------------------------- output
 
 STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/"]
@@ -487,6 +572,8 @@ def main() -> int:
     refs = load_references()
     terms, ideas, notes = load_glossary(), load_ideas(), load_notes()
     pages = {**build_learn(terms, refs), **build_ideas(ideas, refs), **build_notes(notes, refs)}
+    if "edge-lab" not in {t["id"] for t in terms}:  # a glossary term of that name would own the address
+        pages.update(build_edge_lab(load_edge_lab(), notes, terms, refs))
     for path, text in pages.items():
         dest = out / path.strip("/") / "index.html"
         dest.parent.mkdir(parents=True, exist_ok=True)
