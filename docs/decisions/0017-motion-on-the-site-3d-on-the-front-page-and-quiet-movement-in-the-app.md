@@ -82,5 +82,6 @@ The front page was plain HTML with no script, and the app's motion was limited t
 ## Referenced by
 
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 <!-- backlinks:end -->

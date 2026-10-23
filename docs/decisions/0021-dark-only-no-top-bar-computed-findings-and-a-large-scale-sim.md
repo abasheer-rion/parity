@@ -94,4 +94,5 @@ No line is written by hand or by a model.
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
+- [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 <!-- backlinks:end -->
