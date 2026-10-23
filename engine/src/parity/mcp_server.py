@@ -877,6 +877,8 @@ class ParityTools:
                   f"drafting: {luck['deflated_sharpe']} over {luck['trials_counted']} "
                   f"trials.\n\nTo promote it, a human:\n{PROMOTE}\n"
                   f'"""\n\n# fmt: off\nSPEC = {json.dumps(spec, sort_keys=True)}\n\n'
+                  "# The recipe uses names factory.py already imports:\n"
+                  f"# {RECIPE_IMPORTS}\n\n"
                   "# --- paste below this line into engine/src/parity/strategies/factory.py\n")
         path.write_text(header + code)
         return {"path": str(path), "spec_id": sid, "code": code, "how_to_promote": PROMOTE,
@@ -896,6 +898,11 @@ class ParityTools:
         drafts.mkdir(parents=True, exist_ok=True)
         return path
 
+
+# The names a drafted recipe uses, all of which factory.py already has in scope.
+RECIPE_IMPORTS = ("from parity.strategies.factory import (BOND, CASH, MKT, BreakoutBook, "
+                  "MixBook, OscillatorBook, PairBook, RankBook, TimingBook, TrendBook, make, "
+                  "past_return, tbill_over)")
 
 PROMOTE = """1. Read the code and the idea. Is it a real, named idea, not a near-copy of one?
 2. Paste the make(...) call into engine/src/parity/strategies/factory.py and add a
