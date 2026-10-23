@@ -13,7 +13,7 @@ contract during its last month, so the negative WTI settlement of 20 April 2020 
 expiring May contract) never enters the index.
 
 `variance_swap_index` marks a short 30-day variance swap struck at the square of a VIX-style
-index, as an approximation of selling commodity volatility (docs/research/0012).
+index, as an approximation of selling commodity volatility (docs/research/0013).
 """
 
 from __future__ import annotations
