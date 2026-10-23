@@ -39,8 +39,8 @@
   "pass_criteria": {
     "min_real_tests": 4
   },
-  "prior_trials": 294,
-  "prior_trials_note": "205 + 3 (REG-0006). Includes the commodity_tsmom trials on spot prices, the same idea on worse data. No exploratory evaluation of these strategies was run. Raised from 208 to 294 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count.",
+  "prior_trials": 311,
+  "prior_trials_note": "205 + 3 (REG-0006). Includes the commodity_tsmom trials on spot prices, the same idea on worse data. No exploratory evaluation of these strategies was run. Raised from 208 to 294 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count. Raised by 17 on 2026-10-23 after merging main: PR #47 (DEC-0027) added 17 edge recipes, each evaluated in at least one full gauntlet run.",
   "what_would_change_our_mind": "A pass for trend would show the spot-price failure in EXP-0004 was a data problem. A pass for carry with four contracts would be strong evidence, since the papers use 20 or more.",
   "already_seen": "No. Before registering, only data checks were run on the futures indices (roll days found, size of the largest daily moves, coverage); no strategy return or performance number was computed."
 }
