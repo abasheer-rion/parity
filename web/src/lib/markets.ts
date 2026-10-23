@@ -6,6 +6,7 @@
 // Percent fields from the engine are already in percent (10.95 means 10.95%).
 import { useEffect, useState } from "react";
 import { source } from "./data";
+import type { PrivateDoc } from "./privateMarkets";
 import type { Point } from "./types";
 
 export interface MarketSource {
@@ -98,6 +99,8 @@ function get<T>(name: string): Promise<T> {
 export const loadCrypto = () => get<CryptoDoc>("crypto.json");
 export const loadPerps = () => get<PerpsDoc>("perps.json");
 export const loadDiscover = () => get<DiscoverDoc>("discover.json");
+/** Private markets (DEC-0029): Form D counts, BDC NAVs, FRED proxies and the unsmoothing study. */
+export const loadPrivate = () => get<PrivateDoc>("private.json");
 export const loadEtfs = () => get<EtfsFile>("etfs.json").then((f): EtfsDoc => ({
   ...f,
   etfs: f.etfs.map((r) => {

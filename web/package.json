@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p functions",
     "preview": "vite preview",
     "test": "vitest run",
-    "a11y": "node scripts/a11y.mjs"
+    "a11y": "node scripts/a11y.mjs",
+    "cls": "node scripts/cls.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",

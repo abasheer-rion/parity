@@ -18,7 +18,7 @@ const JOBS: { title: string; icon: string; pages: string[] }[] = SPACE === "rese
 ] : [
   { title: "Find strategies", icon: "chart", pages: ["#/strategies", "#/watchlist", "#/compare"] },
   { title: "Ask \"what if\"", icon: "pulse", pages: ["#/scenarios", "#/news", "#/news/history"] },
-  { title: "Understand", icon: "book", pages: ["#/learn", "#/how", "#/lab"] },
+  { title: "Understand", icon: "book", pages: ["#/academy", "#/learn", "#/how", "#/lab"] },
 ];
 
 type M = Report["runs"][number]["metrics"];
@@ -70,6 +70,11 @@ export function Start({ report }: { report: Report | null }) {
           </section>
         ))}
       </div>
+
+      <p className="start-note">
+        New to this? The <a href={SPACE === "product" ? "#/academy" : "/app/#/academy"}>Academy</a> has short courses with
+        moving pictures, starting with <a href={`${SPACE === "product" ? "" : "/app/"}#/academy/reading-a-backtest`}>how to read a backtest</a>.
+      </p>
 
       <h2 className="start-h">How to read a result</h2>
       <p className="muted start-note">Every result is shown after trading costs, over the full history of the run. Hover any underlined word for its meaning.</p>

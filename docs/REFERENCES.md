@@ -3,18 +3,18 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1000 sources. 153 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1056 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 295 |
-| [Preprints and working papers](#preprints-and-working-papers) | 46 |
+| [Papers](#papers) | 334 |
+| [Preprints and working papers](#preprints-and-working-papers) | 49 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 62 |
-| [Web pages](#web-pages) | 430 |
+| [Web pages](#web-pages) | 440 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 32 |
+| [Regulators](#regulators) | 36 |
 | [News](#news) | 4 |
 
 ## Papers
@@ -42,6 +42,14 @@ Adrian, Tobias; Crump, Richard K.; Moench, Emanuel (2013). Pricing the term stru
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### albertus2026
+
+Albertus, James F.; Denes, Matthew (2026). Private Equity Fund Debt: Agency Costs and Cash Flow Management. *Journal of Financial and Quantitative Analysis, 1-64*. doi:10.1017/s0022109026102890 <https://doi.org/10.1017/s0022109026102890>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### alquist2020
 
@@ -87,6 +95,14 @@ Anderson, Torben G; Bollerslev, Tim; Diebold, Francis X; Vega, Clara (2003). Mic
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### andonov2021
+
+Andonov, Aleksandar; Kräussl, Roman; Rauh, Joshua (2021). Institutional Investors and Infrastructure Investing. *The Review of Financial Studies 34(8), 3880-3934*. doi:10.1093/rfs/hhab048 <https://doi.org/10.1093/rfs/hhab048>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### andrade2013
 
 Andrade, Sandro C.; Chhaochharia, Vidhi; Fuerst, Michael E. (2013). "Sell in May and Go Away" Just Won't Go Away. *Financial Analysts Journal 69(4), 94-105*. doi:10.2469/faj.v69.n4.4 <https://doi.org/10.2469/faj.v69.n4.4>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -100,6 +116,22 @@ Ang, Andrew; Hodrick, Robert J.; Xing, Yuhang; Zhang, Xiaoyan (2006). The Cross-
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### ang2013
+
+Ang, Andrew; Nabar, Neil; Wald, Samuel J. (2013). Searching for a Common Factor in Public and Private Real Estate Returns. *The Journal of Portfolio Management 39(5), 120-133*. doi:10.3905/jpm.2013.39.5.120 <https://doi.org/10.3905/jpm.2013.39.5.120>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### ang2018
+
+Ang, Andrew; Chen, Bingxu; Goetzmann, William N.; Phalippou, Ludovic (2018). Estimating Private Equity Returns from Limited Partner Cash Flows. *The Journal of Finance 73(4), 1751-1783*. doi:10.1111/jofi.12688 <https://doi.org/10.1111/jofi.12688>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### apesteguia2020
 
@@ -134,6 +166,14 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Artzner, Philippe; Delbaen, Freddy; Eber, Jean-Marc; Heath, David (1999). Coherent Measures of Risk. *Mathematical Finance 9(3), 203-228*. doi:10.1111/1467-9965.00068 <https://doi.org/10.1111/1467-9965.00068>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### asness2001
+
+Asness, Clifford S; Krail, Robert J; Liew, John M (2001). Do Hedge Funds Hedge? *The Journal of Portfolio Management 28(1), 6-19*. doi:10.3905/jpm.2001.319819 <https://doi.org/10.3905/jpm.2001.319819>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### asness2012
 
@@ -247,6 +287,14 @@ Barber, Brad M.; Odean, Terrance (2008). All That Glitters: The Effect of Attent
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### barber2017
+
+Barber, Brad M.; Yasuda, Ayako (2017). Interim fund performance and fundraising in private equity. *Journal of Financial Economics 124(1), 172-194*. doi:10.1016/j.jfineco.2017.01.001 <https://doi.org/10.1016/j.jfineco.2017.01.001>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### barberis2003
 
 Barberis, Nicholas; Thaler, Richard (2003). A survey of behavioral finance. *Handbook of the Economics of Finance, vol. 1B, 1053-1128*. doi:10.1016/S1574-0102(03)01027-6 <https://doi.org/10.1016/S1574-0102(03)01027-6>. Accessed 2026-10-21. Verification: unchecked (checked 2026-10-21).
@@ -280,6 +328,14 @@ Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-surviv
 Beckmann, Joscha; Czudaj, Robert L.; Arora, Vipin (2020). The relationship between oil prices and exchange rates: Revisiting theory and evidence. *Energy Economics 88, 104772*. doi:10.1016/j.eneco.2020.104772 <https://doi.org/10.1016/j.eneco.2020.104772>. <https://ideas.repec.org/a/eee/eneeco/v88y2020ics0140988320301122.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### begenau2024
+
+Begenau, Juliane; Siriwardane, Emil N. (2024). Fee Variation in Private Equity. *The Journal of Finance 79(2), 1199-1247*. doi:10.1111/jofi.13319 <https://doi.org/10.1111/jofi.13319>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### bekaert2019
 
@@ -337,6 +393,14 @@ Bessembinder, Hendrik (2018). Do stocks outperform Treasury bills? *Journal of F
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### block2024
+
+Block, Joern; Jang, Young Soo; Kaplan, Steven N; Schulze, Anna (2024). A Survey of Private Debt Funds. *The Review of Corporate Finance Studies 13(2), 335-383*. doi:10.1093/rcfs/cfae001 <https://doi.org/10.1093/rcfs/cfae001>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### bollerslev2009
 
 Bollerslev, Tim; Tauchen, George; Zhou, Hao (2009). Expected Stock Returns and Variance Risk Premia. *Review of Financial Studies 22(11), 4463-4492*. doi:10.1093/rfs/hhp008 <https://doi.org/10.1093/rfs/hhp008>. Accessed 2026-10-23. Verification: not checked.
@@ -388,6 +452,14 @@ Cited in: [catalog/algorithms/golden-cross-50-200.json](../catalog/algorithms/go
 Brown, Stephen J.; Warner, Jerold B. (1985). Using daily stock returns. *Journal of Financial Economics 14(1), 3-31*. doi:10.1016/0304-405x(85)90042-x <https://doi.org/10.1016/0304-405x(85)90042-x>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
+### brown2022
+
+Brown, Gregory W; Ghysels, Eric; Gredil, Oleg R (2022). Nowcasting Net Asset Values: The Case of Private Equity. *The Review of Financial Studies 36(3), 945-986*. doi:10.1093/rfs/hhac045 <https://doi.org/10.1093/rfs/hhac045>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### burnside2011
 
@@ -507,6 +579,14 @@ Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### chernenko2022
+
+Chernenko, Sergey; Erel, Isil; Prilmeier, Robert (2022). Why Do Firms Borrow Directly from Nonbanks? *The Review of Financial Studies 35(11), 4902-4947*. doi:10.1093/rfs/hhac016 <https://doi.org/10.1093/rfs/hhac016>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### chong2014
 
 Chong, Terence; Ng, Wing-Kam; Liew, Venus (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management 7(1), 1-12*. doi:10.3390/jrfm7010001 <https://doi.org/10.3390/jrfm7010001>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -539,6 +619,14 @@ Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### cochrane2005a
+
+Cochrane, John H. (2005). The risk and return of venture capital. *Journal of Financial Economics 75(1), 3-52*. doi:10.1016/j.jfineco.2004.03.006 <https://doi.org/10.1016/j.jfineco.2004.03.006>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### colacito2020
 
 Colacito, Riccardo; Riddiough, Steven J.; Sarno, Lucio (2020). Business cycles and currency returns. *Journal of Financial Economics 137(3), 659-678*. doi:10.1016/j.jfineco.2020.04.005 <https://doi.org/10.1016/j.jfineco.2020.04.005>. <https://www.nber.org/papers/w26299>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -558,6 +646,14 @@ Also at: <https://doi.org/10.1016/j.ijforecast.2019.12.007>.
 Note: Read for RES-0010 (abstract page).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### couts2024
+
+Couts, Spencer J; Gonçalves, Andrei S; Rossi, Andrea (2024). Unsmoothing Returns of Illiquid Funds. *The Review of Financial Studies 37(7), 2110-2155*. doi:10.1093/rfs/hhae006 <https://doi.org/10.1093/rfs/hhae006>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### cowles1933
 
@@ -781,11 +877,27 @@ Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. No open abst
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### fisher1994
+
+Fisher, Jeffrey D.; Geltner, David M.; Webb, R. Brian (1994). Value indices of commercial real estate: A comparison of index construction methods. *The Journal of Real Estate Finance and Economics 9(2), 137-164*. doi:10.1007/bf01099972 <https://doi.org/10.1007/bf01099972>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### franz2022
 
 Franz, Friedrich-Carl; Schmeling, Maik (2022). Crypto Carry. *SSRN working paper*. doi:10.2139/ssrn.3774118 <https://doi.org/10.2139/ssrn.3774118>. <https://www.bis.org/publ/work1087.htm>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algorithms/crypto-cash-and-carry-basis.json), [ALG-0022](algorithms/0022-crypto-cash-and-carry-basis.md), [REF-0004](reference/0004-glossary.md).
+
+### franzoni2012
+
+Franzoni, Francesco; Nowak, Eric; Phalippou, Ludovic (2012). Private Equity Performance and Liquidity Risk. *The Journal of Finance 67(6), 2341-2373*. doi:10.1111/j.1540-6261.2012.01788.x <https://doi.org/10.1111/j.1540-6261.2012.01788.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### frazzini2014
 
@@ -804,6 +916,30 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Gatev, Evan; Goetzmann, William N.; Rouwenhorst, K. Geert (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. *Review of Financial Studies 19(3), 797-827*. doi:10.1093/rfs/hhj020 <https://doi.org/10.1093/rfs/hhj020>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+
+### geltner1991
+
+Geltner, David Michael (1991). Smoothing in appraisal-based returns. *The Journal of Real Estate Finance and Economics 4(3), 327-345*. doi:10.1007/bf00161933 <https://doi.org/10.1007/bf00161933>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### geltner1993
+
+Geltner, David (1993). Estimating Market Values from Appraised Values without Assuming an Efficient Market. *Journal of Real Estate Research 8(3), 325-345*. doi:10.1080/10835547.1993.12090713 <https://doi.org/10.1080/10835547.1993.12090713>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### getmansky2004
+
+Getmansky, Mila; Lo, Andrew W.; Makarov, Igor (2004). An econometric model of serial correlation and illiquidity in hedge fund returns. *Journal of Financial Economics 74(3), 529-609*. doi:10.1016/j.jfineco.2004.04.001 <https://doi.org/10.1016/j.jfineco.2004.04.001>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### giannone2008
 
@@ -827,6 +963,14 @@ Gorton, Gary; Rouwenhorst, K. Geert (2006). Facts and Fantasies about Commodity 
 
 Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
+### gredil2023
+
+Gredil, Oleg R.; Griffiths, Barry; Stucke, Rüdiger (2023). Benchmarking private equity: The direct alpha method. *Journal of Corporate Finance 81, 102360*. doi:10.1016/j.jcorpfin.2023.102360 <https://doi.org/10.1016/j.jcorpfin.2023.102360>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### greenwood2014
 
 Greenwood, Robin; Shleifer, Andrei (2014). Expectations of Returns and Expected Returns. *Review of Financial Studies 27(3), 714-746*. doi:10.1093/rfs/hht082 <https://doi.org/10.1093/rfs/hht082>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -838,6 +982,14 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Gu, Shihao; Kelly, Bryan; Xiu, Dacheng (2020). Empirical Asset Pricing via Machine Learning. *The Review of Financial Studies 33(5), 2223-2273*. doi:10.1093/rfs/hhaa009 <https://doi.org/10.1093/rfs/hhaa009>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### gupta2021
+
+Gupta, Arpit; Van Nieuwerburgh, Stijn (2021). Valuing Private Equity Investments Strip by Strip. *The Journal of Finance 76(6), 3255-3307*. doi:10.1111/jofi.13073 <https://doi.org/10.1111/jofi.13073>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### hansen2005
 
@@ -856,6 +1008,14 @@ Harris, Lawrence; Gurel, Eitan (1986). Price and Volume Effects Associated with 
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### harris2014
+
+Harris, Robert S.; Jenkinson, Tim; Kaplan, Steven N. (2014). Private Equity Performance: What Do We Know? *The Journal of Finance 69(5), 1851-1882*. doi:10.1111/jofi.12154 <https://doi.org/10.1111/jofi.12154>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### harvey2015
 
@@ -981,6 +1141,22 @@ Hutchinson, Mark C.; Kyziropoulos, Panagiotis E.; O'Brien, John; O'Reilly, Phili
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-dollar-carry.json](../catalog/algorithms/fx-dollar-carry.json), [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-ml-smart-carry.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [catalog/algorithms/fx-volatility-risk-premium.json](../catalog/algorithms/fx-volatility-risk-premium.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0006](algorithms/0006-fx-dollar-carry.md), [ALG-0007](algorithms/0007-fx-economic-momentum.md), [ALG-0011](algorithms/0011-fx-ml-smart-carry.md), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0016](algorithms/0016-fx-value-adjusted.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [ALG-0018](algorithms/0018-fx-volatility-risk-premium.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### ilmanen2019
+
+Ilmanen, Antti; Chandra, Swati; McQuinn, Nicholas (2019). Demystifying Illiquid Assets: Expected Returns for Private Equity. *The Journal of Alternative Investments 22(3), 8-22*. doi:10.3905/jai.2019.1.086 <https://doi.org/10.3905/jai.2019.1.086>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### ilmanen2020
+
+Ilmanen, Antti (2020). The Impact of Smoothness on Private Equity Expected Returns. *The Journal of Investing 30(1), 63-66*. doi:10.3905/joi.2020.1.151 <https://doi.org/10.3905/joi.2020.1.151>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### inoue2019
 
 Inoue, Atsushi; Rossi, Barbara (2019). The effects of conventional and unconventional monetary policy on exchange rates. *Journal of International Economics 118, 419-447*. doi:10.1016/j.jinteco.2019.01.015 <https://doi.org/10.1016/j.jinteco.2019.01.015>. <https://ideas.repec.org/a/eee/inecon/v118y2019icp419-447.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1029,6 +1205,14 @@ Jegadeesh, Narasimhan; Titman, Sheridan (2001). Profitability of Momentum Strate
 
 Cited in: [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md).
 
+### jegadeesh2015
+
+Jegadeesh, Narasimhan; Kräussl, Roman; Pollet, Joshua M. (2015). Risk and Expected Returns of Private Equity Investments: Evidence Based on Market Prices. *Review of Financial Studies 28(12), 3269-3302*. doi:10.1093/rfs/hhv046 <https://doi.org/10.1093/rfs/hhv046>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### jensen2023
 
 Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (2023). Is There a Replication Crisis in Finance? *The Journal of Finance 78(5), 2465-2518*. doi:10.1111/jofi.13249 <https://doi.org/10.1111/jofi.13249>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1074,6 +1258,22 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Kaminski, Kathryn M.; Lo, Andrew W. (2014). When do stop-loss rules stop losses? *Journal of Financial Markets 18, 234-254*. doi:10.1016/j.finmar.2013.07.001 <https://doi.org/10.1016/j.finmar.2013.07.001>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### kaplan2005
+
+Kaplan, Steven N.; Schoar, Antoinette (2005). Private Equity Performance: Returns, Persistence, and Capital Flows. *The Journal of Finance 60(4), 1791-1823*. doi:10.1111/j.1540-6261.2005.00780.x <https://doi.org/10.1111/j.1540-6261.2005.00780.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### kaplan2015
+
+Kaplan, Steven N.; Sensoy, Berk A. (2015). Private Equity Performance: A Survey. *Annual Review of Financial Economics 7(1), 597-614*. doi:10.1146/annurev-financial-111914-041858 <https://doi.org/10.1146/annurev-financial-111914-041858>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### karnaukh2015
 
@@ -1157,6 +1357,22 @@ Koijen, Ralph S.J.; Moskowitz, Tobias J.; Pedersen, Lasse Heje; Vrugt, Evert B. 
 
 Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
+### korteweg2016
+
+Korteweg, Arthur; Nagel, Stefan (2016). Risk-Adjusting the Returns to Venture Capital. *The Journal of Finance 71(3), 1437-1470*. doi:10.1111/jofi.12390 <https://doi.org/10.1111/jofi.12390>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### korteweg2017
+
+Korteweg, Arthur; Sorensen, Morten (2017). Skill and luck in private equity performance. *Journal of Financial Economics 124(3), 535-562*. doi:10.1016/j.jfineco.2017.03.006 <https://doi.org/10.1016/j.jfineco.2017.03.006>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### kroencke2014
 
 Kroencke, Tim A.; Schindler, Felix; Schrimpf, Andreas (2014). International Diversification Benefits with Foreign Exchange Investment Styles. *Review of Finance 18(5), 1847-1883*. doi:10.1093/rof/rft047 <https://doi.org/10.1093/rof/rft047>. <https://ideas.repec.org/a/oup/revfin/v18y2014i5p1847-1883..html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1198,6 +1414,14 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Lento, C.; Gradojevic, N.; Wright, C. S. (2007). Investment information content in Bollinger Bands? *Applied Financial Economics Letters 3(4), 263-267*. doi:10.1080/17446540701206576 <https://doi.org/10.1080/17446540701206576>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/bollinger-band-reversion-breakout.json](../catalog/algorithms/bollinger-band-reversion-breakout.json), [ALG-0055](algorithms/0055-bollinger-band-reversion-breakout.md).
+
+### lerner2022
+
+Lerner, Josh; Mao, Jason; Schoar, Antoinette; Zhang, Nan R. (2022). Investing outside the box: Evidence from alternative vehicles in private equity. *Journal of Financial Economics 143(1), 359-380*. doi:10.1016/j.jfineco.2021.05.034 <https://doi.org/10.1016/j.jfineco.2021.05.034>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### lettau2014
 
@@ -1457,6 +1681,14 @@ Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. DOI correcte
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### metrick2010
+
+Metrick, Andrew; Yasuda, Ayako (2010). The Economics of Private Equity Funds. *Review of Financial Studies 23(6), 2303-2341*. doi:10.1093/rfs/hhq020 <https://doi.org/10.1093/rfs/hhq020>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### miao2017
 
 Miao, Hong; Ramchander, Sanjay; Wang, Tianyang; Yang, Jian (2017). The impact of crude oil inventory announcements on prices: Evidence from derivatives markets. *Journal of Futures Markets 38(1), 38-65*. doi:10.1002/fut.21850 <https://doi.org/10.1002/fut.21850>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1506,6 +1738,22 @@ Mueller, Philippe; Tahbaz-Salehi, Alireza; Vedolin, Andrea (2017). Exchange Rate
 Also at: <https://researchonline.lse.ac.uk/id/eprint/77256/>.
 
 Cited in: [catalog/algorithms/fx-fomc-dollar-announcement.json](../catalog/algorithms/fx-fomc-dollar-announcement.json), [ALG-0008](algorithms/0008-fx-fomc-dollar-announcement.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### munday2018
+
+Munday, Shawn; Hu, Wendy; True, Tobias; Zhang, Jian (2018). Performance of Private Credit Funds: A First Look. *The Journal of Alternative Investments 21(2), 31-51*. doi:10.3905/jai.2018.21.2.031 <https://doi.org/10.3905/jai.2018.21.2.031>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### nadauld2019
+
+Nadauld, Taylor D.; Sensoy, Berk A.; Vorkink, Keith; Weisbach, Michael S. (2019). The liquidity cost of private equity investments: Evidence from secondary market transactions. *Journal of Financial Economics 132(3), 158-181*. doi:10.1016/j.jfineco.2018.11.007 <https://doi.org/10.1016/j.jfineco.2018.11.007>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### neely2009
 
@@ -1607,6 +1855,14 @@ Also at: <https://ideas.repec.org/a/bla/jfinan/v58y2003i5p1791-1819.html>, <http
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### pagliari2005
+
+Pagliari, Joseph L.; Scherer, Kevin A.; Monopoli, Richard T. (2005). Public Versus Private Real Estate Equities: A More Refined, Long-Term Comparison. *Real Estate Economics 33(1), 147-187*. doi:10.1111/j.1080-8620.2005.00115.x <https://doi.org/10.1111/j.1080-8620.2005.00115.x>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### parityteam2026
 
 Parity team (2026). HYP-0003 in this repository, building on Chen and Rogoff (2003) and Kohlscheen, Avalos and Schrimpf. *2017*. <docs/hypotheses/0003-commodity-currencies-catch-up.md>. Accessed 2026-10-21. Verification: ok.
@@ -1618,6 +1874,14 @@ Cited in: [catalog/algorithms/parity-commodity-gap.json](../catalog/algorithms/p
 Park, Cheol-Ho; Irwin, Scott H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys 21(4), 786-826*. doi:10.1111/j.1467-6419.2007.00519.x <https://doi.org/10.1111/j.1467-6419.2007.00519.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-candlesticks-and-chart-patterns.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### pastor2003
+
+Pástor, Ľuboš; Stambaugh, Robert F. (2003). Liquidity Risk and Expected Stock Returns. *Journal of Political Economy 111(3), 642-685*. doi:10.1086/374184 <https://doi.org/10.1086/374184>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### payne2003
 
@@ -1644,6 +1908,22 @@ Peters, Ole (2019). The ergodicity problem in economics. *Nature Physics 15, 121
 Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Publisher page needs a login.
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### phalippou2008
+
+Phalippou, Ludovic; Gottschalg, Oliver (2008). The Performance of Private Equity Funds. *Review of Financial Studies 22(4), 1747-1776*. doi:10.1093/rfs/hhn014 <https://doi.org/10.1093/rfs/hhn014>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### phalippou2020
+
+Phalippou, Ludovic (2020). An Inconvenient Fact: Private Equity Returns and the Billionaire Factory. *The Journal of Investing 30(1), 11-39*. doi:10.3905/joi.2020.1.153 <https://doi.org/10.3905/joi.2020.1.153>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### pojarliev2008
 
@@ -1757,6 +2037,14 @@ Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### robinson2013
+
+Robinson, David T.; Sensoy, Berk A. (2013). Do Private Equity Fund Managers Earn Their Fees? Compensation, Ownership, and Cash Flow Performance. *Review of Financial Studies 26(11), 2760-2797*. doi:10.1093/rfs/hht055 <https://doi.org/10.1093/rfs/hht055>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### romano2005
 
 Romano, Joseph P.; Wolf, Michael (2005). Stepwise Multiple Testing as Formalized Data Snooping. *Econometrica 73(4), 1237-1282*. doi:10.1111/j.1468-0262.2005.00615.x <https://doi.org/10.1111/j.1468-0262.2005.00615.x>. <https://ideas.repec.org/a/ecm/emetrp/v73y2005i4p1237-1282.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -1810,6 +2098,30 @@ Shleifer, Andrei (1986). Do Demand Curves for Stocks Slope Down? *The Journal of
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### sorensen2014
+
+Sorensen, Morten; Wang, Neng; Yang, Jinqiang (2014). Valuing Private Equity. *Review of Financial Studies 27(7), 1977-2021*. doi:10.1093/rfs/hhu013 <https://doi.org/10.1093/rfs/hhu013>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### sorensen2015
+
+Sorensen, Morten; Jagannathan, Ravi (2015). The Public Market Equivalent and Private Equity Performance. *Financial Analysts Journal 71(4), 43-50*. doi:10.2469/faj.v71.n4.4 <https://doi.org/10.2469/faj.v71.n4.4>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### stafford2021
+
+Stafford, Erik (2021). Replicating Private Equity with Value Investing, Homemade Leverage, and Hold-to-Maturity Accounting. *The Review of Financial Studies 35(1), 299-342*. doi:10.1093/rfs/hhab020 <https://doi.org/10.1093/rfs/hhab020>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### staw1976
 
@@ -2361,6 +2673,14 @@ Ding, Hongcheng; Zhao, Xuanze; Deng, Ruiting; Abdullah, Shamsul Nahar; Dewi, Des
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### erel2024
+
+Erel, Isil; Flanagan, Thomas; Weisbach, Michael (2024). Risk-Adjusting the Returns to Private Debt Funds. *NBER Working Paper w32278*. doi:10.3386/w32278 <https://doi.org/10.3386/w32278>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### evans1999
 
 Evans, Martin D.D.; Lyons, Richard (1999). Order Flow and Exchange Rate Dynamics. *NBER Working Paper w7317*. doi:10.3386/w7317 <https://doi.org/10.3386/w7317>. <https://www.nber.org/papers/w7317>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2440,6 +2760,22 @@ Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algori
 Gu, Shihao; Kelly, Bryan; Xiu, Dacheng (2018). Empirical Asset Pricing via Machine Learning. *NBER Working Paper w25398*. doi:10.3386/w25398 <https://doi.org/10.3386/w25398>. <https://www.nber.org/system/files/working_papers/w25398/w25398.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/ml-return-prediction-elastic-net.json](../catalog/algorithms/ml-return-prediction-elastic-net.json), [ALG-0034](algorithms/0034-ml-return-prediction-elastic-net.md).
+
+### harris2017
+
+Harris, Robert S.; Jenkinson, Tim; Kaplan, Steven; Stucke, Ruediger (2017). Financial Intermediation in Private Equity: How Well Do Funds of Funds Perform? *NBER Working Paper w23428*. doi:10.3386/w23428 <https://doi.org/10.3386/w23428>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### harris2020
+
+Harris, Robert S.; Jenkinson, Tim; Kaplan, Steven; Stucke, Ruediger (2020). Has Persistence Persisted in Private Equity? Evidence from Buyout and Venture Capital Funds. *NBER Working Paper w28109*. doi:10.3386/w28109 <https://doi.org/10.3386/w28109>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Checked for RES-0012 on 2026-10-23 against Crossref.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### he2022
 
@@ -3685,6 +4021,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/forex-factory-calendar.json](../catalog/datasets/forex-factory-calendar.json), [DAT-0013](datasets/0013-forex-factory-calendar.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-1094f4ac
+
+Private investment benchmarks. (n.d.). *Cambridge Associates*. <https://www.cambridgeassociates.com/private-investment-benchmarks/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-11046697
 
 No title recorded. (n.d.). <https://www.institutionalinvestor.com/article/2bsvvqs6ph9xpipkxoef4/portfolio/the-morning-brief-hall-reportedly-shutting-his-commodities-fund>. Accessed 2026-10-21. Verification: not checked.
@@ -3806,6 +4150,14 @@ Terms & Conditions | World Bank Group. (n.d.). *World Bank*. <https://www.worldb
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json), [DAT-0035](datasets/0035-world-bank.md).
+
+### url-1b07e2c5
+
+The financial stability implications of tokenisation. (2024). *Financial Stability Board*. <https://www.fsb.org/2024/10/the-financial-stability-implications-of-tokenisation/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-1bb17f95
 
@@ -4385,6 +4737,14 @@ Cited in: [catalog/datasets/aqr-datasets.json](../catalog/datasets/aqr-datasets.
 
 Cited in: [catalog/events/trump-election-2016.json](../catalog/events/trump-election-2016.json).
 
+### url-52604426
+
+15 U.S. Code 80a-54, Functions and activities of business development companies. (n.d.). *Legal Information Institute, Cornell Law School*. <https://www.law.cornell.edu/uscode/text/15/80a-54>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-52b8f71d
 
 Craftsmanship Alpha: An Application to Style Investing. (n.d.). *aqr.com*. <https://www.aqr.com/Insights/Research/Journal-Article/Craftsmanship-Alpha-An-Application-to-Style-Investing>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4601,6 +4961,14 @@ Note: Interactive tutorials on the open-source LEAN engine.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### url-6601c4f7
+
+Cliffwater Direct Lending Index. (n.d.). *Cliffwater*. <https://www.cliffwaterdirectlendingindex.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Could not be read for RES-0012 on 2026-10-23 (unverified).
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-660884a0
 
 No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/api/v2/doc/doc?query=euro%20dollar&mode=artlist&maxrecords=2&format=json>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4721,6 +5089,14 @@ CoinGecko API: API documentation. (n.d.). *CoinGecko*. <https://docs.coingecko.c
 
 Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md).
 
+### url-6ec5737a
+
+PitchBook. (n.d.). *PitchBook*. <https://pitchbook.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Could not be read for RES-0012 on 2026-10-23 (unverified).
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-7000c4fb
 
 Top USD/CAD Correlations Every Forex Trader Should Know - PriceActionNinja. (n.d.). *priceactionninja.com*. <https://priceactionninja.com/top-usd-cad-correlations-every-forex-trader-should-know/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4837,6 +5213,14 @@ eToro general risk disclosure page. (n.d.). *etoro.com*. <https://www.etoro.com/
 
 Cited in: [catalog/algorithms/copy-trading-signal-services.json](../catalog/algorithms/copy-trading-signal-services.json), [ALG-0057](algorithms/0057-copy-trading-signal-services.md).
 
+### url-7ac3dc51
+
+Preqin. (n.d.). *Preqin, part of BlackRock*. <https://www.preqin.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-7ae70a8d
 
 DataMine API. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/datamine/datamine-api.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4862,6 +5246,14 @@ Cited in: [catalog/events/uk-mini-budget-2022.json](../catalog/events/uk-mini-bu
 BLS Public Data API: API documentation. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developers/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
+
+### url-7be4cd1d
+
+Hamilton Lane. (n.d.). *Hamilton Lane*. <https://www.hamiltonlane.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-7c0fca52
 
@@ -4996,6 +5388,14 @@ FX Macro Economic Sentiment Algorithm - QuantConnect.com. (n.d.). *quantconnect.
 Note: Linked in this repo as: QuantConnect: FX macro economic sentiment algorithm.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-8648340c
+
+NCREIF index returns. (n.d.). *NCREIF*. <https://www.ncreif.org/indices/index-returns/>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-865db757
 
@@ -5292,6 +5692,14 @@ This Blog is Systematic: Is the degradation of trend following performance a coh
 Note: Linked in this repo as: Oct 2025 post.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-a4070279
+
+17 CFR 270.23c-3, Repurchase of securities of closed-end companies (interval funds). (n.d.). *Legal Information Institute, Cornell Law School*. <https://www.law.cornell.edu/cfr/text/17/270.23c-3>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-a435e7b6
 
@@ -6141,6 +6549,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/histdata.json](../catalog/datasets/histdata.json), [DAT-0017](datasets/0017-histdata.md).
 
+### url-f388c471
+
+15 U.S. Code 80a-60, Capital structure of business development companies. (n.d.). *Legal Information Institute, Cornell Law School*. <https://www.law.cornell.edu/uscode/text/15/80a-60>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-f39c6164
 
 Vercel Security Checkpoint. (n.d.). *quantvps.com*. <https://www.quantvps.com/blog/cme-historical-data-complete-guide>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -6783,11 +7199,35 @@ No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://w
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-57a0d836
+
+Accredited investors. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/accredited-investors>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### url-5e096a75
+
+Form D data sets. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
 ### url-5ea2b559
 
 Regulatory Notice 09-31: non-traditional ETFs. (2009). *FINRA*. <https://www.finra.org/rules-guidance/notices/09-31>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-7414523f
+
+Blackstone Real Estate Income Trust, prospectus supplement, November 2022 NAV and share repurchases (424B3, filed 2022-12-15). (2022). *SEC EDGAR*. <https://www.sec.gov/Archives/edgar/data/1662972/000166297222000143/breitnavnovember2022.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-7a3d5497
 
@@ -6818,6 +7258,14 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Company tickers and exchanges. (n.d.). *US SEC*. <https://www.sec.gov/files/company_tickers_exchange.json>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-98351ef7
+
+Filing a Form D notice. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/resources-small-businesses/exempt-offerings/filing-form-d-notice>. Accessed 2026-10-23. Verification: not checked.
+
+Note: Opened for RES-0012 on 2026-10-23.
+
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### url-9f635241
 

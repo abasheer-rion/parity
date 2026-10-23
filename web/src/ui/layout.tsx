@@ -128,10 +128,6 @@ export function EmptyState({ title, children, action, icon = "info" }: { title: 
   );
 }
 
-export function Skeleton({ width = "100%", height = 14, round }: { width?: number | string; height?: number; round?: boolean }) {
-  return <span className="ui-skel" style={{ width, height, borderRadius: round ? 999 : 6 }} aria-hidden />;
-}
-
 // Older names kept so existing pages keep working.
 
 export function StatTile({ label, value, note, tone, learn }: { label: string; value: string; note?: string; tone?: "good" | "bad"; learn?: string }) {

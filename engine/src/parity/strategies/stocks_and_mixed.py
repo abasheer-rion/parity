@@ -150,11 +150,12 @@ class StocksVolManaged(Strategy):
 class CommodityTrend(Strategy):
     name = "commodity_tsmom"
     display_name = "Commodity trend"
-    description = ("Owns oil and gas when they rose over the past year and bets against "
-                   "them when they fell.")
+    description = ("Owns oil when it rose over the past year and bets against it when it "
+                   "fell. Brent and WTI only since 2026-10-23: spot gas spikes cannot be "
+                   "traded.")
     tags = {"family": "trend", "asset": "commodities", "style": "momentum",
             "horizon": "monthly"}
-    summary = ("Long Brent oil and US natural gas when they rose over the past year, short "
+    summary = ("Long Brent and WTI crude oil when they rose over the past year, short "
                "when they fell (spot prices).")
     reference = "algorithms/0039-commodity-time-series-momentum.md"
     param_grid = {"lookback": [126, 252]}
@@ -163,15 +164,22 @@ class CommodityTrend(Strategy):
         self.lookback = lookback
 
     def instruments(self):
-        # WTI is left out: it settled below zero in April 2020, so its returns are undefined.
-        return ["cmd.BRENT", "cmd.HH_GAS"]
+        # Henry Hub spot gas was dropped on 2026-10-23: it jumps as much as 85% in a day,
+        # which no one can trade (DEC-0014). WTI settled below zero in April 2020; the
+        # backtester books no return on those days and the signal and volatility below
+        # are undefined there, so WTI simply sits out for a few months.
+        return ["cmd.BRENT", "cmd.WTI"]
+
+    def _prices(self, panel):
+        px = panel[self.instruments()]
+        return px.where(px > 0)  # a log of a negative price is undefined
 
     def signal(self, panel):
-        px = panel[self.instruments()]
+        px = self._prices(panel)
         return np.log(px / px.shift(self.lookback))
 
     def weights(self, panel):
-        px = panel[self.instruments()]
+        px = self._prices(panel)
         vol = np.log(px).diff().rolling(60).std()
         raw = np.sign(self.signal(panel)) / vol.replace(0, np.nan)
         return hold_between_rebalances(normalise_gross(raw.fillna(0.0)), "M")
