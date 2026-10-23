@@ -69,7 +69,7 @@ export function Search() {
         <span className="muted small search-count"><AnimatedNumber value={rows.length} format={(v) => Math.round(v).toLocaleString()} /> shown of the best {doc.rows.length.toLocaleString()}</span>
       </div>
 
-      <DataTable rows={rows} columns={columns} rowKey={(r) => r.id} maxHeight="min(72vh, 760px)" virtual
+      <DataTable rows={rows} columns={columns} rowKey={(r) => r.id} maxHeight="min(72vh, 760px)" virtual stickyFirst
         initialSort={{ key: "deflated", dir: "desc" }} caption="Strategy variations, best first" empty="No variation matches these filters."
         expand={(r) => (
           <>
