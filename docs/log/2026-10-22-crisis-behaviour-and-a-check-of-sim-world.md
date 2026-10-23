@@ -1,5 +1,5 @@
 ---
-id: LOG-0013
+id: LOG-0014
 title: Crisis behaviour, and a check of Sim World
 type: log
 status: final
@@ -7,18 +7,18 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0012, RES-0017, DEC-0020, DEC-0021]
+related: [LOG-0013, RES-0018, DEC-0020, DEC-0021]
 ---
 
 # Crisis behaviour, and a check of Sim World
 
 ## In plain words
 
-Amanda asked to keep researching nonstop, as Ayan's search does, and to see what the site looks like now, cross-checking what Ayan built for viewing scenarios. We read how carry, momentum and trend behaved in past crises, checked Sim World's crisis dates and the scenario list against published sources, and wrote both up in RES-0017. The open pull requests needed rebasing again because main gained new data fetchers. No strategy was built or run.
+Amanda asked to keep researching nonstop, as Ayan's search does, and to see what the site looks like now, cross-checking what Ayan built for viewing scenarios. We read how carry, momentum and trend behaved in past crises, checked Sim World's crisis dates and the scenario list against published sources, and wrote both up in RES-0018. The open pull requests needed rebasing again because main gained new data fetchers. No strategy was built or run.
 
 ## What happened
 
-- **Research ([RES-0017](../research/0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)).** Carry crashes (Brunnermeier, Nagel and Pedersen), momentum crashes (Daniel and Moskowitz), trend following in the largest 60/40 falls since 1880 (Hurst, Ooi and Pedersen) and the 2013 taper tantrum in emerging markets (Nechio, FRBSF).
+- **Research ([RES-0018](../research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)).** Carry crashes (Brunnermeier, Nagel and Pedersen), momentum crashes (Daniel and Moskowitz), trend following in the largest 60/40 falls since 1880 (Hurst, Ooi and Pedersen) and the 2013 taper tantrum in emerging markets (Nechio, FRBSF).
 - **Site check.** The public front page was viewed locally (headless Chrome, 1440 pixels wide). Sim World and the apps sit behind sign-in, so they were checked from their code and the exported scenario file, not on screen. The crisis windows match the published dates. Gaps: no 1998 window, the taper tantrum and single-country EM crises are missing from the event list, and the scenario assets have no EM currency.
 - **Not run.** The always-on search was not started here, and a local `parity run` was stopped before it wrote results, because both backtest EM currency strategies close to REG-0006, which has not run yet.
 - **Rebase.** Main's wider data sources ([REF-0015](../reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)) added `ecb`, `bis` and `eia` fetchers with the same names as ones in the EM and energy pull request. The EM policy rates now use main's BIS fetcher; the EM prices and NYMEX futures keep their own fetchers as providers `ecb_usd` and `eia_web`, and `oecd` got a provider row.

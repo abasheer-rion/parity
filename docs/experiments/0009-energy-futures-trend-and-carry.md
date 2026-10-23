@@ -1,5 +1,5 @@
 ---
-id: EXP-0008
+id: EXP-0009
 title: Energy futures trend and carry
 type: experiment
 status: planned
@@ -7,7 +7,7 @@ created: 2026-10-21
 updated: 2026-10-21
 authors: [amanda]
 tags: [commodities, momentum]
-related: [EXP-0004, HYP-0012, HYP-0013, RES-0013]
+related: [EXP-0004, HYP-0012, HYP-0013, RES-0014]
 ---
 
 # Energy futures trend and carry
@@ -52,7 +52,7 @@ Nothing yet.
 
 - [HYP-0012: Energy futures trend pays on tradable prices](../hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md)
 - [HYP-0013: Energy futures carry pays](../hypotheses/0013-energy-futures-carry-pays.md)
-- [EXP-0005: Rerun of all sixteen strategies with corrected scoring](0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
-- [EXP-0010: Equal-weight energy book, March 2014 to April 2024](0010-equal-weight-energy-book-march-2014-to-april-2024.md)
-- [LOG-0010: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [EXP-0006: Rerun of all sixteen strategies with corrected scoring](0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
+- [EXP-0011: Equal-weight energy book, March 2014 to April 2024](0011-equal-weight-energy-book-march-2014-to-april-2024.md)
+- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

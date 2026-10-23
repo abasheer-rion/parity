@@ -1,4 +1,4 @@
-"""Energy futures strategies on rolled NYMEX contracts (docs/research/0013).
+"""Energy futures strategies on rolled NYMEX contracts (docs/research/0014).
 
 They trade fut.CL, fut.HO, fut.RB and fut.NG, excess return indices of holding the second
 contract (data/futures.py), and vrp.OIL, a marked short variance swap on crude oil. The EIA
@@ -185,7 +185,7 @@ class EnergyBook(Strategy):
                "12 * ln(C2 / C3), of basis-momentum (12-month return of holding contract 2 "
                "minus holding contract 3) and of value (minus ln of C2 over its average 4.5 "
                "to 5.5 years ago), each mapped to -1..+1, and the sign of the 12-month return. "
-               "Inverse volatility weights; monthly (RES-0016, ALG-0098).")
+               "Inverse volatility weights; monthly (RES-0017, ALG-0098).")
     reference = "hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md"
     param_grid = {"lookback": [126, 504]}
 

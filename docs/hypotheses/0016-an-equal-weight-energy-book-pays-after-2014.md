@@ -7,7 +7,7 @@ created: 2026-10-23
 updated: 2026-10-23
 authors: [amanda]
 tags: [carry, commodities, momentum]
-related: [EXP-0010, HYP-0012, HYP-0013, RES-0015, RES-0016, ALG-0088, ALG-0089, ALG-0098]
+related: [EXP-0011, HYP-0012, HYP-0013, RES-0016, RES-0017, ALG-0088, ALG-0089, ALG-0098]
 ---
 
 # An equal-weight energy book pays after 2014
@@ -31,9 +31,9 @@ Ranks are mapped to -1 for the lowest and +1 for the highest. The four scores ar
 
 ## Why it might be true
 
-- Combining styles that disagree is where the published strength comes from. In commodities, value had a Sharpe ratio of 0.26 and momentum 0.53, with a correlation of -0.39, and the 50/50 mix had 0.71 over 1972 to 2011 [@asness2013] ([RES-0016](../research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)).
+- Combining styles that disagree is where the published strength comes from. In commodities, value had a Sharpe ratio of 0.26 and momentum 0.53, with a correlation of -0.39, and the 50/50 mix had 0.71 over 1972 to 2011 [@asness2013] ([RES-0017](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)).
 - Equal weights did as well as weights chosen from past data for five commodity signals over 1989 to 2017 [@fernandezperez2019].
-- Basis-momentum was the strongest commodity signal we found: Sharpe 0.92 over 1960 to February 2014 for 21 commodities [@boons2019] ([RES-0015](../research/0015-lesser-known-strategies-and-what-firms-have-published.md)). Our whole window comes after that sample.
+- Basis-momentum was the strongest commodity signal we found: Sharpe 0.92 over 1960 to February 2014 for 21 commodities [@boons2019] ([RES-0016](../research/0016-lesser-known-strategies-and-what-firms-have-published.md)). Our whole window comes after that sample.
 - Averaging scores before trading nets out signals that disagree, so the book trades less than four separate strategies would.
 
 ## Why it might be false
@@ -46,10 +46,10 @@ Ranks are mapped to -1 for the lowest and +1 for the highest. The four scores ar
 
 ## How we test it
 
-1. Pre-registered in `REG-0009`. Every setting is fixed in the registration. There is no choice of weights and no dropping of ingredients after a result is seen ([RES-0016](../research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md), rules 1 to 3).
+1. Pre-registered in `REG-0009`. Every setting is fixed in the registration. There is no choice of weights and no dropping of ingredients after a result is seen ([RES-0017](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md), rules 1 to 3).
 2. Pass bar: at least 4 of 5 reality tests.
 3. `prior_trials` counts every earlier registration, including `energy_tsmom` and `energy_carry` in REG-0007. Basis-momentum and value have never been run alone, so they add nothing beyond the book itself.
-4. Results in [EXP-0010](../experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md).
+4. Results in [EXP-0011](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md).
 
 ## Result so far
 
@@ -64,7 +64,7 @@ None yet. Registered on 2026-10-23; no performance number has been computed for 
 
 ## Referenced by
 
-- [EXP-0010: Equal-weight energy book, March 2014 to April 2024](../experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md)
-- [LOG-0014: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
+- [EXP-0011: Equal-weight energy book, March 2014 to April 2024](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md)
+- [LOG-0015: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 - [ALG-0098: Equal-weight combination of styles](../algorithms/0098-equal-weight-style-combination.md)
 <!-- backlinks:end -->

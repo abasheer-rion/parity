@@ -1,4 +1,4 @@
-"""The equal-weight energy book (RES-0016): each ingredient points the right way, the four
+"""The equal-weight energy book (RES-0017): each ingredient points the right way, the four
 scores are averaged with equal weights, and contracts missing an ingredient are not held."""
 
 from __future__ import annotations

@@ -1,5 +1,5 @@
 ---
-id: RES-0012
+id: RES-0013
 title: Emerging market currencies
 type: research
 status: current
@@ -131,11 +131,11 @@ We checked on 2026-10-21 that the ECB, OECD and BIS endpoints answer scripted re
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - [HYP-0010: Emerging market basket kept paying after 2008](../hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md)
 - [HYP-0011: Emerging market momentum survives costs](../hypotheses/0011-emerging-market-momentum-survives-costs.md)
-- [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
-- [RES-0014: Famous currency and commodity traders and what their records teach](0014-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
-- [RES-0015: Lesser-known strategies and what firms have published](0015-lesser-known-strategies-and-what-firms-have-published.md)
-- [RES-0016: Combining many strategies, the evidence and the ingredient list](0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- [RES-0017: How the ingredients behave in crises, and what Sim World should show](0017-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [EXP-0008: Emerging market currencies since 2010](../experiments/0008-emerging-market-currencies-since-2010.md)
+- [RES-0015: Famous currency and commodity traders and what their records teach](0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
+- [RES-0016: Lesser-known strategies and what firms have published](0016-lesser-known-strategies-and-what-firms-have-published.md)
+- [RES-0017: Combining many strategies, the evidence and the ingredient list](0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+- [RES-0018: How the ingredients behave in crises, and what Sim World should show](0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
-- [LOG-0010: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

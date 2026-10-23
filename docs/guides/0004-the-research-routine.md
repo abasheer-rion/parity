@@ -88,12 +88,12 @@ An algorithm can stop at any stage. Most should stop early: a stage 2 entry that
 ## Referenced by
 
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](../decisions/0007-official-results-come-only-from-the-ledger.md)
-- [EXP-0005: Rerun of all sixteen strategies with corrected scoring](../experiments/0005-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
-- [EXP-0006: Stocks plus currency trend on its own](../experiments/0006-stocks-plus-currency-trend-on-its-own.md)
-- [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
-- [EXP-0008: Energy futures trend and carry](../experiments/0008-energy-futures-trend-and-carry.md)
-- [EXP-0009: Oil volatility and commodity currency signals](../experiments/0009-oil-volatility-and-commodity-currency-signals.md)
-- [EXP-0010: Equal-weight energy book, March 2014 to April 2024](../experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md)
+- [EXP-0006: Rerun of all sixteen strategies with corrected scoring](../experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
+- [EXP-0007: Stocks plus currency trend on its own](../experiments/0007-stocks-plus-currency-trend-on-its-own.md)
+- [EXP-0008: Emerging market currencies since 2010](../experiments/0008-emerging-market-currencies-since-2010.md)
+- [EXP-0009: Energy futures trend and carry](../experiments/0009-energy-futures-trend-and-carry.md)
+- [EXP-0010: Oil volatility and commodity currency signals](../experiments/0010-oil-volatility-and-commodity-currency-signals.md)
+- [EXP-0011: Equal-weight energy book, March 2014 to April 2024](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [REF-0008: Where results live and how they are tagged](../reference/0008-where-results-live.md)
 - [LOG-0002: Catalog, ledger and lab](../log/2026-10-20-catalog-ledger-and-lab.md)

@@ -1,5 +1,5 @@
 ---
-id: LOG-0014
+id: LOG-0015
 title: Merging main into the stack and registering the energy book
 type: log
 status: final
@@ -7,22 +7,22 @@ created: 2026-10-23
 updated: 2026-10-23
 authors: [amanda]
 tags: [commodities, process]
-related: [HYP-0016, EXP-0010, DEC-0027, RES-0016]
+related: [HYP-0016, EXP-0011, DEC-0027, RES-0017]
 ---
 
 # Merging main into the stack and registering the energy book
 
 ## In plain words
 
-Ayan's edge research ([DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md)) landed overnight. It took the next research and log numbers, and it ran a currency carry strategy very close to one of ours. We merged main into the five open pull requests, renumbered our notes and logs, and said plainly in REG-0006 what has now been seen. Then we built and registered the energy book that RES-0016 proposed, without computing any result.
+Ayan's edge research ([DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md)) landed overnight. It took the next research and log numbers, and it ran a currency carry strategy very close to one of ours. We merged main into the five open pull requests, renumbered our notes and logs, and said plainly in REG-0006 what has now been seen. Then we built and registered the energy book that RES-0017 proposed, without computing any result.
 
 ## What happened
 
-- **Numbers.** Main took RES-0011 and LOG-0009. Our research notes are now RES-0012 to RES-0017 and our logs LOG-0010 to LOG-0013. Only IDs and links changed.
+- **Numbers.** Main took RES-0011 and LOG-0009. Our research notes are now RES-0013 to RES-0018 and our logs LOG-0011 to LOG-0014. Only IDs and links changed.
 - **Merge, not rebase.** Main was merged into each branch from the bottom of the stack up (#16, #17, #18, #27, #36), so nothing was force-pushed. The conflicts were generated lists, one engine line (`SELF_FINANCING` now includes Ayan's `xfx.` currencies) and one paper added on both sides (Daniel and Moskowitz 2016, now one record).
-- **REG-0006.** DEC-0027's wide carry on policy rates (Sharpe ratio 0.75, 9 of 11 tests, 1999 to 2026) holds 15 of `em_fx_carry`'s 17 currencies. `already_seen` now says EM carry was partly seen, with the numbers and how the two differ. HYP-0009 and EXP-0007 point to it. Basket and momentum are unaffected.
+- **REG-0006.** DEC-0027's wide carry on policy rates (Sharpe ratio 0.75, 9 of 11 tests, 1999 to 2026) holds 15 of `em_fx_carry`'s 17 currencies. `already_seen` now says EM carry was partly seen, with the numbers and how the two differ. HYP-0009 and EXP-0008 point to it. Basket and momentum are unaffected.
 - **Trials.** Every registration's `prior_trials` rose by 17 for DEC-0027's recipes.
-- **Energy book.** New strategy `energy_book` ([HYP-0016](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md), [EXP-0010](../experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md), REG-0009). For each of the four energy contracts, it averages carry, basis-momentum and 5-year value ranks with the 12-month trend sign, all with equal weights. Then inverse volatility weights, monthly, 2014-03-03 to 2024-04-05.
+- **Energy book.** New strategy `energy_book` ([HYP-0016](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md), [EXP-0011](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md), REG-0009). For each of the four energy contracts, it averages carry, basis-momentum and 5-year value ranks with the 12-month trend sign, all with equal weights. Then inverse volatility weights, monthly, 2014-03-03 to 2024-04-05.
 - **Tests.** 12 unit tests on made-up prices, plus the shared look-ahead test. A mutation check made 12 deliberate breaks in the strategy (flipped signs, a dropped ingredient, unequal weights, look-ahead, the wrong contract pair, no volatility weights and others), and the tests caught all 12. The first pass caught 8. The 4 that got through led to 4 new tests, and one redundant line was removed.
 
 ## Decisions
