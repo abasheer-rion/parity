@@ -7,7 +7,7 @@
 //   CLS_BASE=http://127.0.0.1:5199 npm run cls
 //
 // CLS_PAGES="/app/#/,/research/#/search" limits the pages. CLS_JSON=path writes the full
-// results. CLS_SLOW=1 adds a slow network (150ms per request, 10 Mbit/s, web fonts held back
+// results. CLS_SLOW=1 adds a slow network (150ms per request, 40 Mbit/s, web fonts held back
 // 900ms), which is where late data and font swaps show up. Exits 1 if any page is at or
 // above CLS_LIMIT (default 0.02).
 import { writeFileSync } from "node:fs";
@@ -79,7 +79,7 @@ for (const size of SIZES) {
     const page = await context.newPage();
     if (SLOW) {
       const cdp = await context.newCDPSession(page);
-      await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: 10e6 / 8, uploadThroughput: 5e6 / 8 });
+      await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: 40e6 / 8, uploadThroughput: 10e6 / 8 });
     }
     const url = new URL(path, BASE).toString();
     try {

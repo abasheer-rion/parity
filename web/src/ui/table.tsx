@@ -92,7 +92,7 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
   const style: CSSProperties | undefined = maxHeight != null ? { maxHeight } : undefined;
   return (
     <div ref={box} className={`table-wrap ${maxHeight != null ? "ui-table-box" : ""} ${stickyFirst ? "sticky-first" : ""}`} style={style} data-lenis-prevent={maxHeight != null || undefined}>
-      <table className={`mtable ${dense ? "dense" : ""} ${isVirtual ? "fixed" : ""}`}>
+      <table ref={isVirtual ? (v.listRef as RefObject<HTMLTableElement>) : undefined} className={`mtable ${dense ? "dense" : ""} ${isVirtual ? "fixed" : ""}`}>
         {caption && <caption className="sr-only">{caption}</caption>}
         {columns.some((c) => c.width) && <colgroup>{columns.map((c) => <col key={c.key} style={c.width ? { width: c.width } : undefined} />)}</colgroup>}
         <thead>

@@ -4,7 +4,7 @@ title: UI library
 type: reference
 status: current
 created: 2026-10-21
-updated: 2026-10-22
+updated: 2026-10-23
 authors: [ayan]
 tags: [docs, ui]
 related: [DEC-0011, DEC-0017, REF-0001]
@@ -32,12 +32,16 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 | --- | --- |
 | Text and numbers | `Heading`, `Text`, `Label`, `Kbd`, `Money`, `Delta`, `fmt` (pct, signedPct, num, compact, date) |
 | Buttons | `Button` (primary, secondary, tertiary, outline, danger; sm, md, lg; loading; as a link), `IconButton`, `ButtonGroup` |
-| Inputs | `Input`, `SearchInput`, `Select`, `Segmented`, `Toggle`, `Checkbox`, `Tabs` |
+| Inputs | `Input`, `SearchInput`, `Select`, `Segmented` (sliding thumb), `Toggle`, `Checkbox`, `Tabs` (sliding underline, arrow keys) |
 | Filters and sorting | `FilterBar`, `FilterChip`, `Separator`, `useFilters`, `useSort` |
-| Tables | `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links), `ShareBar` |
-| Layout | `PageHeader`, `Panel`, `Grid`, `Stat`, `KeyValues`, `Section`, `Badge`, `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState`, `Skeleton` |
-| Overlays | `Tooltip`, `Menu`, `Dialog`, `toast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
-| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `HeroGlow`; durations `--dur-1` to `--dur-4`. Charts and sparklines draw in by themselves. Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
+| Tables | `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links; `expand` rows that open in place; `maxHeight` for a sticky header in its own box; `virtual` for thousands of rows; rows glide on a sort), `ShareBar` |
+| Long lists | `VirtualList`, `useVirtual` (draw only the rows on screen, rows may grow) |
+| Expand | `Collapse`, `Disclosure`, `Accordion`, `useDisclosure` |
+| Layout | `PageHeader`, `Panel`, `Grid`, `Stat`, `KeyValues`, `Section`, `Badge`, `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState` |
+| Loading | `Skeleton`, `SkeletonText`, `SkeletonStat`, `SkeletonChart`, `SkeletonTable`, `SkeletonCard`, `PageSkeleton` |
+| Overlays | `Tooltip`, `Popover`, `Menu`, `Dialog`, `Drawer`, `toast` and `dismissToast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
+| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `AnimatedNumber`, `Stagger` (or the class `STAGGER`), `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `HeroGlow`; hooks `usePresence`, `useFlip`, `useReducedMotion`; durations `--dur-1` to `--dur-4`. Charts and sparklines draw in by themselves. Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
+| Data | `useResource` (show the last copy at once, refresh it quietly), `preload` |
 | Charts | `HeroChart`, `LineChart`, `BarChart`, `FanChart` (spread of outcomes after past events: single paths, middle-half and full-range bands, median), `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |
 | Icons | `Icon` with 47 names, 16px stroke icons drawn for this site |
 
@@ -51,6 +55,38 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 6. **Status shows the word.** The dot only helps.
 7. **Motion explains a change or invites a touch** (arriving, updating, opening, hovering). Entrances stay under 400ms and line draws under a second. The only loop in a view is the faint hero glow. Nothing flashes, and everything holds still for people who ask for reduced motion ([DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)).
 8. **Numbers use tabular figures** so columns line up.
+9. **Nothing jumps.** Every page stays under 0.02 cumulative layout shift (the browser's score for how much a page moves while it loads, while data arrives, on hover and on scroll). `npm run cls` measures every page at 1440 and 390 pixels wide. See "Keeping pages still" below.
+10. **Things open in place and float from where they were opened.** Rows, cards and sections grow from their own top edge; popovers, menus and dialogs come out of their trigger; drawers slide from an edge. All of them animate out as well as in.
+
+## Keeping pages still
+
+What causes a page to jump, and what the library does about each:
+
+| Cause | Fix |
+| --- | --- |
+| Content arrives and pushes things down | A skeleton the size of the content (`PageSkeleton`, `SkeletonTable` and the rest), never a line of "Loading" text |
+| Coming back to a page shows it empty first | `useResource` keeps the last copy and draws it at once |
+| Web font swap changes text width | Fallback faces (`Inter Fallback`, `Roboto Mono Fallback` in `tokens.css`) stretched to the web fonts' measurements |
+| Scroll bar appears or a dialog hides it | `scrollbar-gutter: stable` on the page, and a dialog's scroll lock keeps the gutter |
+| Charts draw at a guessed width then resize | Charts read their width before the first paint and have fixed heights |
+| A number or a sort arrow changes width | Tabular figures, `AnimatedNumber` holds its width, sort arrows keep their space |
+| Hover makes something bigger | Hover changes colour, shadow and transforms only |
+| Animating height or position | Transforms and opacity only; `Collapse` is the one height animation and grows from its own top edge |
+
+## Using the newer parts
+
+- **Collapse, Disclosure, Accordion.** `<Collapse open={open}>` animates its children open by height with no measuring. Closed content is `inert`. `Disclosure` adds the summary row and chevron; `Accordion single` keeps one open at a time.
+- **Popover.** `<Popover label="Range" trigger={(open) => ...}>{(close) => ...}</Popover>`. Anchored to the trigger, follows it on scroll, flips near screen edges, closes on Escape or a click outside, gives focus back.
+- **Drawer.** `<Drawer open onClose title side="right">`. Right, left or bottom; side drawers become bottom sheets on phones. Holds the page still and traps focus.
+- **Dialog.** Grows out of the button that opened it; focus stays inside; Escape closes.
+- **toast.** Returns an id; `dismissToast(id)` closes it early. At most three show at once.
+- **DataTable for long lists.** `maxHeight="min(70vh, 640px)" virtual` plus a `width` on each column. Header sticks; only visible rows are drawn; widths are fixed so nothing reflows. `expand={(row) => ...}` opens a row's details in place.
+- **VirtualList.** `<VirtualList items rowHeight render getKey />` for long lists that are not tables. Scrolls with the page or inside `scrollRef`.
+- **Skeletons.** Pick the variant that matches the final layout. `PageSkeleton parts={["stats", "chart", "table"]}` for a whole page.
+- **AnimatedNumber.** `<AnimatedNumber value={n} format={...} />` glides between values and holds its width.
+- **Stagger.** Wrap a grid's first paint, or add the `STAGGER` class to an existing list. Children rise in 30ms apart, all within 240ms.
+- **useResource.** `const { data, error, loading } = useResource("search", loadSearch)`. Show `PageSkeleton` only while `loading`.
+- **usePresence, useFlip.** For your own components: keep something mounted while it animates out (`data-state` is enter, open or exit), and glide reordered children (`data-flip` keys) with transforms.
 
 ## How charts work
 

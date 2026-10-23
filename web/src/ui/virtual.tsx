@@ -29,10 +29,21 @@ export function useVirtual({ count, estimate, overscan = 6, scrollRef, getKey }:
   const first = () => Math.min(count, Math.ceil((typeof window === "undefined" ? 800 : window.innerHeight) / estimate) + overscan);
   const [range, setRange] = useState<[number, number]>(() => [0, first()]);
 
+  // The box that scrolls: the one passed in, or (if its ref is not attached yet) the
+  // nearest scrolling ancestor, or the page.
+  const scroller = useCallback((): HTMLElement | null => {
+    if (!scrollRef) return null;
+    if (scrollRef.current) return scrollRef.current;
+    for (let el = listRef.current?.parentElement; el; el = el.parentElement) {
+      if (/(auto|scroll)/.test(getComputedStyle(el).overflowY)) return el;
+    }
+    return null;
+  }, [scrollRef]);
+
   const update = useCallback(() => {
     const list = listRef.current;
     if (!list) return;
-    const box = scrollRef?.current;
+    const box = scroller();
     const rect = list.getBoundingClientRect();
     let top: number, height: number;
     if (box) {
@@ -50,17 +61,17 @@ export function useVirtual({ count, estimate, overscan = 6, scrollRef, getKey }:
     while (end < count && offsets[end] < top + height) end++;
     const next: [number, number] = [Math.max(0, lo - overscan), Math.min(count, end + overscan)];
     setRange((r) => (r[0] === next[0] && r[1] === next[1] ? r : next));
-  }, [count, offsets, overscan, scrollRef]);
+  }, [count, offsets, overscan, scroller]);
 
   useLayoutEffect(() => {
     update();
-    const target: HTMLElement | Window = scrollRef?.current ?? window;
+    const target: HTMLElement | Window = scroller() ?? window;
     let raf = 0;
     const on = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
     target.addEventListener("scroll", on, { passive: true });
     window.addEventListener("resize", on);
     return () => { cancelAnimationFrame(raf); target.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
-  }, [update, scrollRef]);
+  }, [update, scroller]);
 
   // One observer for every drawn row: a row that grows or shrinks corrects the offsets.
   const observer = useRef<ResizeObserver | null>(null);

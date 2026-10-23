@@ -32,11 +32,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [REF-0009: UI library](reference/0009-ui-library.md)
 - 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
 - 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - 2026-10-23 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
-- 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 
 ## intent
 
@@ -143,7 +143,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-22 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-23 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
