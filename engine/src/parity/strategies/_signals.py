@@ -1,4 +1,4 @@
-"""Signals from the wider data (DEC-0026), shared by the factory recipes in edges.py and
+"""Signals from the wider data (DEC-0027), shared by the factory recipes in edges.py and
 the always-on search.
 
 Every function reads the panel up to each date only. Publication lags live in the

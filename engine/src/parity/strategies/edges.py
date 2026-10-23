@@ -1,4 +1,4 @@
-"""New edge families from the wider data (DEC-0026): positioning, the yield curve,
+"""New edge families from the wider data (DEC-0027): positioning, the yield curve,
 policy rates, stress regimes and the FOMC calendar.
 
 Each recipe tests one documented idea (RES-0011). Publication lags come from the

@@ -1,5 +1,5 @@
 ---
-id: DEC-0026
+id: DEC-0027
 title: New edge families from the wider data
 type: decision
 status: accepted

@@ -7,7 +7,7 @@ created: 2026-10-23
 updated: 2026-10-23
 authors: [ayan]
 tags: [carry, method, momentum, news, strategy]
-related: [DEC-0009, DEC-0014, DEC-0026, REF-0003, RES-0009, RES-0010]
+related: [DEC-0009, DEC-0014, DEC-0027, REF-0003, RES-0009, RES-0010]
 ---
 
 # Where market edges come from and which survive
@@ -26,7 +26,7 @@ What the evidence says, in short:
 - **Behavioural and flow edges are real but small and short.** Index changes, month-end cash needs, FX fixes and FOMC timing all left clear marks in prices. Most have shrunk since they were published, and several need intraday data or very cheap trading.
 - **Information edges mostly belong to the fastest.** Macro news moves prices within minutes. A daily model cannot trade the surprise itself. It can only use slower economic trends, such as "economic momentum".
 - **Publication costs about half.** Across 97 stock return predictors, returns were 26% lower out of sample and 58% lower after publication [@mclean2016]. Treat any paper's Sharpe ratio as an upper bound and plan for half.
-- **Our data can test about half of the list directly.** The best fits are carry on the wider currency set (BIS policy rates for 32 currencies), Treasury curve and term premium signals, COT positioning, financial stress regimes and the FOMC and month-end calendar. Those are the families planned in [DEC-0026](../decisions/0026-new-edge-families-from-the-wider-data.md).
+- **Our data can test about half of the list directly.** The best fits are carry on the wider currency set (BIS policy rates for 32 currencies), Treasury curve and term premium signals, COT positioning, financial stress regimes and the FOMC and month-end calendar. Those are the families planned in [DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md).
 
 ## How to read each edge
 
@@ -156,7 +156,7 @@ These edges come from someone who must trade at a set time or size, whatever the
 - **Decay.** Strong. Kurov, Wolfe and Gilbert (2021) find "the pre-FOMC drift essentially disappeared after 2015" [@kurov2021]. This is one of the clearest cases of an edge dying soon after publication.
 - **Capacity.** Large in index futures.
 - **Costs.** Low. About 8 trades a year.
-- **Our data: yes.** Daily stocks, FX and the effective fed funds rate, plus the Fed's published meeting calendar. DEC-0026 tests both the day-before rule and the even-weeks rule. See [ALG-0019](../algorithms/0019-pre-fomc-drift.md) and [HYP-0006](../hypotheses/0006-short-the-dollar-on-fomc-days.md).
+- **Our data: yes.** Daily stocks, FX and the effective fed funds rate, plus the Fed's published meeting calendar. DEC-0027 tests both the day-before rule and the even-weeks rule. See [ALG-0019](../algorithms/0019-pre-fomc-drift.md) and [HYP-0006](../hypotheses/0006-short-the-dollar-on-fomc-days.md).
 
 ### Positioning extremes in the Commitments of Traders report
 
@@ -204,7 +204,7 @@ Most published edges fail one of these four tests.
 
 ## Summary table
 
-"Survives costs" is for a slow, daily or slower version. "Family" is the factory family that tests it (DEC-0014 for the existing ones, DEC-0026 for the new ones).
+"Survives costs" is for a slow, daily or slower version. "Family" is the factory family that tests it (DEC-0014 for the existing ones, DEC-0027 for the new ones).
 
 | Edge | Mechanism | Survives costs? | Decayed? | Capacity | Our data can test it | Family |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -236,7 +236,7 @@ Most published edges fail one of these four tests.
 
 ## What this means for us
 
-- **What our first test found** ([DEC-0026](../decisions/0026-new-edge-families-from-the-wider-data.md)). Policy-rate carry on 27 currencies was the strongest new lead, at a Sharpe ratio of 0.75 after costs, passing 9 of 11 tests. It still fell with stocks, as carry does. Contrarian COT rules in currencies were noise. The pre-FOMC drift was small and failed the recent years.
+- **What our first test found** ([DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md)). Policy-rate carry on 27 currencies was the strongest new lead, at a Sharpe ratio of 0.75 after costs, passing 9 of 11 tests. It still fell with stocks, as carry does. Contrarian COT rules in currencies were noise. The pre-FOMC drift was small and failed the recent years.
 - **Start where the evidence is strong and our data fits.** Carry on the wider set, curve signals and stress switches are slow, cheap to trade and have long histories in our data.
 - **Treat calendar effects as tests of decay.** The pre-FOMC drift is the textbook case of an edge that died. If our test finds it after 2015, we should suspect a mistake before celebrating.
 - **Test COT in both directions.** The evidence says speculators are paid, which is the opposite of the popular contrarian rule. Both directions count as tries.
@@ -282,7 +282,7 @@ New entries in the bibliography, with the link we checked:
 
 ## Next
 
-- Build the new families in [DEC-0026](../decisions/0026-new-edge-families-from-the-wider-data.md) and run them through the gauntlet, counting every variation.
+- Build the new families in [DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md) and run them through the gauntlet, counting every variation.
 - Fix the open look-ahead question on monthly interbank rates before trusting any carry result.
 - Look for a futures data source so curve and commodity tests use tradable prices, not spot or rebuilt returns.
 
@@ -340,5 +340,5 @@ New entries in the bibliography, with the link we checked:
 
 ## Referenced by
 
-- [DEC-0026: New edge families from the wider data](../decisions/0026-new-edge-families-from-the-wider-data.md)
+- [DEC-0027: New edge families from the wider data](../decisions/0027-new-edge-families-from-the-wider-data.md)
 <!-- backlinks:end -->

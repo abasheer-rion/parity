@@ -49,7 +49,7 @@ class Strategy(ABC):
     #: long-short currency books, whose collateral earns the T-bill on top. See DEC-0009.
     funded: ClassVar[bool] = False
     #: The rate `cash.USD` earns. Older strategies use the 3-month interbank rate; newer
-    #: ones use the T-bill ("rate.TBILL3M"), so cash scores no excess return (DEC-0026).
+    #: ones use the T-bill ("rate.TBILL3M"), so cash scores no excess return (DEC-0027).
     cash_rate: ClassVar[str] = "rate.USD"
     #: Lowest one-way trading cost in basis points, whatever the run's setting. Raised
     #: for wide or thin markets such as emerging market currencies.

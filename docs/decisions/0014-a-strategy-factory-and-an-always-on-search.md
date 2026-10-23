@@ -88,7 +88,7 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 
 - [DEC-0015: Two sides, a product app and a research app, kept apart](0015-two-sides-a-product-app-and-a-research-app-kept-apart.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
-- [DEC-0026: New edge families from the wider data](0026-new-edge-families-from-the-wider-data.md)
+- [DEC-0027: New edge families from the wider data](0027-new-edge-families-from-the-wider-data.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)

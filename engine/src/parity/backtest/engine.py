@@ -66,7 +66,7 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
     """Daily returns per instrument. `cash.USD` earns the US 3-month rate, so strategies
     that step out of the market are not penalised for holding cash. `cash_rate` picks
     which rate: newer strategies use the T-bill, the same rate the excess return is
-    measured against, so a day in cash scores exactly zero (DEC-0026)."""
+    measured against, so a day in cash scores exactly zero (DEC-0027)."""
     priced = [c for c in instruments if c != "cash.USD"]
     px = panel[priced]
     rets = px.pct_change(fill_method=None)
@@ -85,7 +85,7 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
                     rets[col] = rets[col] + gap.fillna(0.0)
     # Currencies priced from ECB reference rates (xfx.*) carry the central bank policy
     # rate gap (BIS), the only rate we have for all of them. A proxy: forward points
-    # follow money market rates, which sit near but not at the policy rate (DEC-0026).
+    # follow money market rates, which sit near but not at the policy rate (DEC-0027).
     if include_carry and "policy.USD" in panel:
         for col in instruments:
             if col.startswith("xfx."):

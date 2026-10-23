@@ -181,7 +181,7 @@ _ECB_FX = [Series(f"ecb.{c}", "ecb", f"EXR/D.{c}.EUR.SP00.A",
 # Euro area AAA government bond yield curve (ECB, spot rates, business days, 2004 on).
 _EA_TENORS = ["3M", "1Y", "2Y", "5Y", "10Y", "30Y"]
 # The ECB publishes each day's curve at noon the next TARGET day, so it is used a
-# business day late (DEC-0026).
+# business day late (DEC-0027).
 _EA_CURVE = [Series(f"curve.EA_AAA_{t}", "ecb", f"YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_{t}",
                     f"Euro area AAA government {t} spot yield, percent (ECB, published "
                     "the next day)", required=False, site=t in ("2Y", "10Y"), lag_days=1)
@@ -340,7 +340,7 @@ _FRED_MORE = [
 ]
 
 # Currencies crossed to the dollar from ECB reference rates (USD per EUR divided by
-# currency per EUR), for strategies on the wider set (DEC-0026). Only those with a BIS
+# currency per EUR), for strategies on the wider set (DEC-0027). Only those with a BIS
 # policy rate, so the backtester can book their carry. Built locally, no download.
 XFX = ["EUR"] + [c for c in ECB_CCYS if c != "USD" and c in POLICY_AREAS]
 _XFX = [Series(f"xfx.{c}", "derived", "ecb.USD" if c == "EUR" else f"ecb.USD/ecb.{c}",

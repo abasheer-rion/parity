@@ -1039,7 +1039,7 @@ def recipe_code(spec: dict, name: str, display: str, description: str) -> str:
                  "conditions_easing": ["risk.NFCI"], "claims_calm": ["macro.CLAIMS"],
                  "spx_not_crowded": ["cot.SPX_EMINI_PCT"]}.get(rule, [])
         cash = ""
-        if rule in search.WIDER_RULES:  # cash earns the T-bill (DEC-0026)
+        if rule in search.WIDER_RULES:  # cash earns the T-bill (DEC-0027)
             extra, cash = extra + ["rate.TBILL3M"], "cash_rate='rate.TBILL3M', "
         fallback = "BOND" if spec["fallback"] == "bond" else "CASH"
         body = (f"extra={extra!r}, fallback={fallback}, leverage={spec['leverage']!r}, "

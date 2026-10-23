@@ -94,7 +94,7 @@ def _rank(r: random.Random) -> dict:
 
 TIMING_RULES = ["above_average", "absolute_momentum", "vix_below_average", "vix_below",
                 "curve_positive", "rates_falling", "copper_up", "oil_calm"]
-# Rules on the wider data (DEC-0026). Their cash earns the T-bill, so cash scores zero.
+# Rules on the wider data (DEC-0027). Their cash earns the T-bill, so cash scores zero.
 WIDER_RULES = ["stress_below", "conditions_easing", "claims_calm", "spx_not_crowded",
                "fomc_week"]
 TIMING_RULES += WIDER_RULES
@@ -154,7 +154,7 @@ def _mix(r: random.Random) -> dict:
 
 
 def _positioning(r: random.Random) -> dict:
-    """Currencies against (or with) speculators' futures positions, CFTC (DEC-0026)."""
+    """Currencies against (or with) speculators' futures positions, CFTC (DEC-0027)."""
     mode = r.choice(["rank", "extremes"])
     spec = {"kind": "cot", "mode": mode, "lookback": r.choice([130, 260, 520, 780, 1040]),
             "rebalance": r.choice(["W", "M"]), "follow": r.random() < 0.25}
@@ -166,7 +166,7 @@ def _positioning(r: random.Random) -> dict:
 
 
 def _policy(r: random.Random) -> dict:
-    """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0026)."""
+    """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0027)."""
     u = r.choice(["xg10", "xwide"])
     sig = r.choice(["policy_gap", "policy_gap", "policy_change"])
     return {"kind": "policy", "universe": u, "rank_on": sig,
@@ -469,7 +469,7 @@ def _panel() -> tuple[pd.DataFrame, str]:
     keys = sorted({*FX, *WIDE, *IND, *FAC, B.MKT, "bond.TR10", "bond.TR2", "bond.UST10Y",
                    "bond.UST2Y", "cmd.BRENT", "cmd.COPPER", "risk.VIX", "rate.USD",
                    "rate.TBILL3M", *[f"rate.{c}" for c in G10]})
-    # The wider data (DEC-0026) is optional: a series not yet fetched on this machine
+    # The wider data (DEC-0027) is optional: a series not yet fetched on this machine
     # is left out, and the variations that need it are recorded as failed.
     wider = sorted({*COT_UNIVERSE, *S.cot_keys([*S.COT_FX, "SPX_EMINI"]), *S.XWIDE,
                     *S.policy_keys(S.XWIDE), "risk.STLFSI", "risk.NFCI", "macro.CLAIMS"})
