@@ -8,12 +8,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 27 |
-| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 15 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 9 |
+| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 16 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 10 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 17 |
 | [guide](#guide) | How to do something in this repo, step by step. | 6 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 13 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 14 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -33,17 +33,18 @@ and the tag list is in [TAGS.md](TAGS.md).
 - [HYP-0013: Energy futures carry pays](hypotheses/0013-energy-futures-carry-pays.md) (testing)
 - [HYP-0014: Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) (testing)
 - [HYP-0015: Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) (testing)
+- [HYP-0016: An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) (testing)
 
 ## Recently updated
 
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- 2026-10-23 [LOG-0014: Merging main into the stack and registering the energy book](log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 - 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
+- 2026-10-23 [HYP-0016: An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md)
 - 2026-10-23 [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - 2026-10-23 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-23 [EXP-0007: Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md)
-- 2026-10-23 [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
-- 2026-10-23 [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
+- 2026-10-23 [EXP-0010: Equal-weight energy book, March 2014 to April 2024](experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md)
 
 ## intent
 
@@ -103,6 +104,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0013 | [Energy futures carry pays](hypotheses/0013-energy-futures-carry-pays.md) | testing | 2026-10-21 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities) |
 | HYP-0014 | [Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis) |
 | HYP-0015 | [Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| HYP-0016 | [An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) | testing | 2026-10-23 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 
 ## experiment
 
@@ -117,6 +119,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0007 | [Emerging market currencies since 2010](experiments/0007-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | EXP-0008 | [Energy futures trend and carry](experiments/0008-energy-futures-trend-and-carry.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 | EXP-0009 | [Oil volatility and commodity currency signals](experiments/0009-oil-volatility-and-commodity-currency-signals.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| EXP-0010 | [Equal-weight energy book, March 2014 to April 2024](experiments/0010-equal-weight-energy-book-march-2014-to-april-2024.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 
 ## research
 
@@ -188,6 +191,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0011 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | LOG-0012 | [Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | LOG-0013 | [Crisis behaviour, and a check of Sim World](log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0014 | [Merging main into the stack and registering the energy book](log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md) | final | 2026-10-23 | [commodities](TAGS.md#commodities), [process](TAGS.md#process) |
 
 ## algorithm
 
@@ -280,8 +284,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0085 | [Emerging market currency momentum](algorithms/0085-em-fx-momentum.md) | registered | 2026-10-22 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
 | ALG-0086 | [Selling commodity volatility (variance risk premium)](algorithms/0086-commodity-variance-risk-premium.md) | registered | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0087 | [Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md) | registered | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
-| ALG-0088 | [Commodity basis-momentum](algorithms/0088-commodity-basis-momentum.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
-| ALG-0089 | [Commodity value (5-year price reversal)](algorithms/0089-commodity-value-reversal.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0088 | [Commodity basis-momentum](algorithms/0088-commodity-basis-momentum.md) | sourced | 2026-10-23 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0089 | [Commodity value (5-year price reversal)](algorithms/0089-commodity-value-reversal.md) | sourced | 2026-10-23 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0090 | [Commodity skewness factor](algorithms/0090-commodity-skewness.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0091 | [Commodity hedging pressure (CFTC positions)](algorithms/0091-commodity-hedging-pressure.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0092 | [Commodity open interest growth](algorithms/0092-commodity-open-interest-growth.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
@@ -290,7 +294,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0095 | [Currencies sorted on sovereign credit risk](algorithms/0095-fx-sovereign-credit-risk.md) | sourced | 2026-10-22 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0096 | [Commodity inventory level](algorithms/0096-commodity-inventory-level.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0097 | [Developed-market rate gap times the EM currency basket](algorithms/0097-fx-developed-rate-gap-times-em-basket.md) | sourced | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
-| ALG-0098 | [Equal-weight combination of styles](algorithms/0098-equal-weight-style-combination.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0098 | [Equal-weight combination of styles](algorithms/0098-equal-weight-style-combination.md) | registered | 2026-10-23 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

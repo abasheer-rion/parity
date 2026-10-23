@@ -155,7 +155,7 @@ Asness, Clifford S.; Moskowitz, Tobias J.; Pedersen, Lasse Heje (2013). Value an
 
 Also at: <https://pages.stern.nyu.edu/~lpederse/papers/ValMomEverywhere.pdf>.
 
-Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+Cited in: [catalog/algorithms/commodity-value-reversal.json](../catalog/algorithms/commodity-value-reversal.json), [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [catalog/algorithms/fx-value-ppp.json](../catalog/algorithms/fx-value-ppp.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [ALG-0017](algorithms/0017-fx-value-ppp.md), [HYP-0016](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### avellaneda2008
 
@@ -351,7 +351,7 @@ Boons, Martijn; Prado, Melissa Porras (2019). Basis-Momentum. *Journal of Financ
 
 Note: Read for RES-0015 (full text, working paper version).
 
-Cited in: [catalog/algorithms/commodity-basis-momentum.json](../catalog/algorithms/commodity-basis-momentum.json), [RES-0015](research/0015-lesser-known-strategies-and-what-firms-have-published.md).
+Cited in: [catalog/algorithms/commodity-basis-momentum.json](../catalog/algorithms/commodity-basis-momentum.json), [HYP-0016](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md), [RES-0015](research/0015-lesser-known-strategies-and-what-firms-have-published.md).
 
 ### bortnikova2026
 
@@ -771,7 +771,7 @@ Also at: <https://doi.org/10.1016/j.jbankfin.2019.05.016>.
 
 Note: Read for RES-0016 (full text, accepted version); one word of the title is elided because it is on this project's plain-language list.
 
-Cited in: [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
+Cited in: [catalog/algorithms/equal-weight-style-combination.json](../catalog/algorithms/equal-weight-style-combination.json), [HYP-0016](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md), [RES-0016](research/0016-combining-many-strategies-the-evidence-and-the-ingredient-list.md).
 
 ### ferraro2011
 

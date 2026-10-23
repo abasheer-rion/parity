@@ -13,6 +13,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from ..data import futures
 from ..data.catalog import ENERGY
 from . import register
 from ._util import hold_between_rebalances, normalise_gross
@@ -162,4 +163,76 @@ class CommodityFxLeadsEnergy(Strategy):
 
     def weights(self, panel: pd.DataFrame) -> pd.DataFrame:
         raw = np.sign(self.signal(panel)) * _inverse_vol(panel, FUT)
+        return hold_between_rebalances(normalise_gross(raw.fillna(0.0)), self.rebalance)
+
+
+def _rank_score(sig: pd.DataFrame) -> pd.DataFrame:
+    """Cross-sectional rank mapped to -1 (lowest) .. +1 (highest); NaN where fewer than 2."""
+    n = sig.notna().sum(axis=1)
+    return (sig.rank(axis=1) - 1).div((n - 1).replace(0, np.nan), axis=0) * 2 - 1
+
+
+@register
+class EnergyBook(Strategy):
+    name = "energy_book"
+    display_name = "Energy book"
+    description = ("Scores oil, heating oil, gasoline and gas futures on four published "
+                   "signals (carry, basis-momentum, five-year value and trend), averages the "
+                   "scores with equal weights, and holds each contract in proportion.")
+    tags = {"family": "mixed", "asset": "commodities", "style": "multi-style",
+            "horizon": "monthly"}
+    summary = ("Per contract, the equal-weight average of four scores: ranks of carry "
+               "12 * ln(C2 / C3), of basis-momentum (12-month return of holding contract 2 "
+               "minus holding contract 3) and of value (minus ln of C2 over its average 4.5 "
+               "to 5.5 years ago), each mapped to -1..+1, and the sign of the 12-month return. "
+               "Inverse volatility weights; monthly (RES-0016, ALG-0098).")
+    reference = "hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md"
+    param_grid = {"lookback": [126, 504]}
+
+    def __init__(self, lookback: int = 252, rebalance: str = "M"):
+        self.lookback = lookback
+        self.rebalance = rebalance
+
+    def instruments(self) -> list[str]:
+        return FUT
+
+    def required(self) -> list[str]:
+        curves = [f"curve.{s}{n}" for s in ENERGY for n in (2, 3)]
+        return FUT + CARRY + curves
+
+    def _third(self, panel: pd.DataFrame, sym: str) -> pd.Series:
+        """Excess return index of holding contract 3, built like fut.<X> holds contract 2."""
+        start = futures.INDEX_START.get(sym)
+        c2, c3 = (panel[f"curve.{sym}{n}"].dropna().loc[start:] for n in (2, 3))
+        if min(len(c2), len(c3)) < 2:
+            return pd.Series(np.nan, index=panel.index)
+        idx = futures.rolled_index(c2, c3, futures.EXPIRY_RULES[sym], roll_cost_bps=0.0)
+        return idx.reindex(panel.index).ffill()
+
+    def scores(self, panel: pd.DataFrame) -> dict[str, pd.DataFrame]:
+        n = self.lookback
+        fut = panel[FUT]
+        carry = panel[CARRY].set_axis(FUT, axis=1)
+        third = pd.DataFrame({f"fut.{s}": self._third(panel, s) for s in ENERGY})
+        basis_mom = np.log(fut / fut.shift(n)) - np.log(third / third.shift(n))
+        c2 = panel[[f"curve.{s}2" for s in ENERGY]].set_axis(FUT, axis=1)
+        c2 = c2.where(c2 > 0)
+        past = c2.shift(1134).rolling(253).mean()  # 4.5 to 5.5 years ago
+        value = -np.log(c2 / past)
+        trend = np.sign(np.log(fut / fut.shift(n)))
+        sigs = {"carry": carry, "basis_momentum": basis_mom, "value": value, "trend": trend}
+        live = fut.notna()
+        for s in sigs.values():
+            live &= s.notna()
+        return {"carry": _rank_score(carry.where(live)),
+                "basis_momentum": _rank_score(basis_mom.where(live)),
+                "value": _rank_score(value.where(live)),
+                "trend": trend.where(live)}
+
+    def signal(self, panel: pd.DataFrame) -> pd.DataFrame:
+        s = self.scores(panel)
+        return (s["carry"] + s["basis_momentum"] + s["value"] + s["trend"]) / 4
+
+    def weights(self, panel: pd.DataFrame) -> pd.DataFrame:
+        raw = self.signal(panel) * _inverse_vol(panel, FUT)
         return hold_between_rebalances(normalise_gross(raw.fillna(0.0)), self.rebalance)

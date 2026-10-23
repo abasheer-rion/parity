@@ -100,4 +100,5 @@ What this says:
 - [EXP-0007: Emerging market currencies since 2010](../experiments/0007-emerging-market-currencies-since-2010.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
+- [LOG-0014: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 <!-- backlinks:end -->

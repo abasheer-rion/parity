@@ -98,14 +98,16 @@
     "reason": "The method behind both combined books proposed in RES-0016; no data of its own needed."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-22",
+  "last_reviewed": "2026-10-23",
   "research": {
-    "stage": 2,
-    "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
+    "stage": 5,
+    "hypothesis": "HYP-0016",
+    "strategy": "energy_book",
+    "registrations": [
+      "REG-0009"
+    ],
     "runs": [],
     "verdict": null,
-    "notes": "Added from RES-0016 on 2026-10-22."
+    "notes": "Added from RES-0016 on 2026-10-22. Implemented on 2026-10-23 as energy_book (carry, basis-momentum, 5-year value and trend on four energy futures), registered as REG-0009, not yet run."
   }
 }
