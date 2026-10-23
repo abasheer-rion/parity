@@ -849,5 +849,6 @@ Three lessons for how we test:
 ## Referenced by
 
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
+- [RES-0011: Where market edges come from and which survive](0011-where-market-edges-come-from-and-which-survive.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->
