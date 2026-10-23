@@ -99,7 +99,7 @@ ARCHIVE_FIELDS = ["id", "published_at", "source", "publisher", "title", "url", "
 
 def _dump(path: Path, doc) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(doc, separators=(",", ":")))
+    path.write_text(json.dumps(doc, separators=(",", ":"), allow_nan=False))  # NaN breaks JSON
 
 
 def build_archive(out: Path, root: Path = DEFAULT_DIR, stamp: str = "") -> int:

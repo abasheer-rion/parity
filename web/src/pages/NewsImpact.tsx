@@ -18,7 +18,7 @@ const day = (iso: string) => iso.slice(0, 10);
 function Headlines({ items }: { items: Headline[] }) {
   return (
     <ul className="news-headlines">
-      {items.map(([t, u, s]) => <li key={u}><a href={u} target="_blank" rel="noreferrer">{t}</a> <span className="muted">({s})</span></li>)}
+      {items.map(([t, u, s], i) => <li key={`${i}-${u}`}><a href={u} target="_blank" rel="noreferrer">{t}</a> <span className="muted">({s})</span></li>)}
     </ul>
   );
 }

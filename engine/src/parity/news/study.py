@@ -224,6 +224,11 @@ def _ci(x: np.ndarray) -> tuple[float | None, float | None]:
     return float(x.mean() - 1.96 * se), float(x.mean() + 1.96 * se)
 
 
+def _date(v) -> str | None:
+    """A date string, or None for the latest day whose next session has not happened."""
+    return v if isinstance(v, str) else None
+
+
 def _r(v, d: int = 3):
     return impact._r(v, d)
 
@@ -246,7 +251,8 @@ def headline_days(p: Prepared, items: pd.DataFrame) -> pd.DataFrame:
     agg = it.sort_values("published_at").groupby("_base")
     out = agg.agg(**{f"{c}_{h}": (f"{c}_{h}", "first") for h in HORIZONS for c in ("move", "z")},
                   n_headlines=("id", "size"))
-    out["items"] = agg.apply(lambda g: [_brief(r) for r in g.head(5).to_dict("records")],
+    out["items"] = agg.apply(lambda g: [_brief(r) for r in
+                                        g.drop_duplicates("title").head(5).to_dict("records")],
                              include_groups=False)
     out["base_date"] = [p.dates[b].date().isoformat() for b in out.index]
     out["event_date"] = [p.dates[b + 1].date().isoformat() if b + 1 < len(p.dates) else None
@@ -277,7 +283,7 @@ def top_moves(key: str, items: pd.DataFrame, start=None, end=None, horizon: str 
     for r in ranked.to_dict("records"):
         share = float((allz >= abs(r[col])).mean()) if len(allz) else None
         res["days"].append({
-            "base_date": r["base_date"], "event_date": r["event_date"],
+            "base_date": r["base_date"], "event_date": _date(r["event_date"]),
             "n_headlines": int(r["n_headlines"]), "share_of_days_as_big": _r(share, 4),
             **{f"z_{h}": _r(r[f"z_{h}"]) for h in HORIZONS},
             **{f"move_{h}": _r(r[f"move_{h}"], 4) for h in HORIZONS},
@@ -397,7 +403,7 @@ def event_study(key: str, items: pd.DataFrame, start=None, end=None, p: Prepared
         flag_of = dict(zip(bases.tolist(), flags.tolist(), strict=True))
         days = days.reindex(days["z_5d"].abs().sort_values(ascending=False).index)
         for r in days.head(keep_events).to_dict("records"):
-            res["events"].append({"base_date": r["base_date"], "event_date": r["event_date"],
+            res["events"].append({"base_date": r["base_date"], "event_date": _date(r["event_date"]),
                                   "overlaps": bool(flag_of.get(r["base"], False)),
                                   "n_headlines": int(r["n_headlines"]),
                                   **{f"z_{h}": _r(r[f"z_{h}"]) for h in HORIZONS},
@@ -516,7 +522,9 @@ def _ranked(rows: list[dict], what: str, horizon: str) -> dict:
     tried = sum(1 for r in rows if r["p_random"] is not None)
     return {"what": what, "horizon": horizon, "tried": tried, "rows": rows,
             "warnings": [f"{tried} comparisons were tried. q is the p-value corrected for "
-                         "that (Benjamini-Hochberg); treat q above 0.10 as noise.",
+                         "that (Benjamini-Hochberg); treat q above 0.10 as noise." if tried else
+                         "No pair has enough events to test yet (5 or more), so nothing here "
+                         "is evidence.",
                          "Ranked by strength of evidence, not by size of move. Not a "
                          "prediction."]}
 
