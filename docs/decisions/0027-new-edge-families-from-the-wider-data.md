@@ -42,8 +42,8 @@ The honest result: none of the 17 beats the S&P 500 on every test. The best is c
    - Policy rates need no delay: a central bank announces on or before the day a new rate takes effect.
    - The FOMC dates are a fixed schedule the Fed publishes a year ahead (`engine/src/parity/data/fomc.py`, 271 scheduled days from 1994 to 2027, read from the Fed's calendars). Unscheduled meetings and calls are left out, and so is the cancelled March 2020 meeting.
 4. **Currencies priced from ECB reference rates** (`xfx.<CCY>`, built locally from `ecb.*`). Each one is crossed to the dollar through the euro and earns the BIS policy-rate gap as its carry. Only currencies with both an ECB rate and a BIS policy rate are included.
-5. **Two backtester options. New strategies use them; existing ones do not:**
-   - **T-bill cash.** A strategy can say its cash earns the T-bill. Then a day in cash scores exactly zero excess return. All the new timing strategies use this.
+5. **Two backtester options, built for the new strategies:**
+   - **T-bill cash.** A day in cash scores exactly zero excess return. All the new timing strategies used this from the start, and since 2026-10-23 every strategy does (see Consequences).
    - **A cost floor.** A strategy can set a minimum trading cost. The wide currency books pay at least 5 basis points a trade, against 1 basis point for G10. The gauntlet doubles the floor in its double-cost test.
 6. **Small grids.** Every recipe has at most 4 combinations of settings.
 
@@ -74,7 +74,7 @@ The honest result: none of the 17 beats the S&P 500 on every test. The best is c
 What this says:
 
 - **Carry is the one edge that keeps showing up.** Policy-rate carry on 27 currencies held up across settings in the search too (Sharpe 0.70 to 0.77 for 3, 5 or 7 currencies a side). It is the classic crash-prone risk premium the literature describes, so failing "does not crash with stocks" is expected.
-- **G10 carry on policy rates (0.34) is a little weaker than the existing G10 carry on interbank rates (0.41).** The interbank rates are monthly averages still used from the first of the month (DEC-0014), so part of that gap may be the timing advantage. This is a hint, not a proof.
+- **G10 carry on policy rates (0.34) is a little weaker than the existing G10 carry on interbank rates (0.41).** The interbank rates are monthly averages still used from the first of the month (DEC-0014), so part of that gap may be the timing advantage. This is a hint, not a proof. Since 2026-10-23 the rates are delayed until published and G10 carry scores 0.40, so timing explains almost none of the gap.
 - **Contrarian positioning in currencies is noise.** That fits the hedging-pressure papers, where speculators earn a premium on average rather than lose one.
 - **The pre-FOMC drift is real but small.** It is invested only 8 days a year and fails "wins on the most recent years", in line with reports that it faded after publication.
 - Nothing here counts as a result. A lead becomes one only after it is registered and run officially ([DEC-0009](0009-excess-returns-financed-leverage-frozen-code.md)).
@@ -83,7 +83,7 @@ What this says:
 
 - **Trade the wider currencies on Fed H.10 rates with no carry.** Rejected. Carry is most of the return of a carry book, and leaving it out would make carry look like a loser.
 - **Use 3-month money market rates for carry on the wider set.** We have none for most of these currencies. Policy rates are a proxy. It is weakest where capital controls separate onshore and offshore rates (CNY, INR, BRL, KRW, IDR, MYR) and in Turkey's unorthodox years.
-- **Switch every existing strategy to T-bill cash now.** Rejected for this change, because it would move existing results. See the open question below.
+- **Switch every existing strategy to T-bill cash now.** Rejected for this change, because it would move existing results. The owner later approved it and it was done on 2026-10-23 (see Consequences).
 
 ## Consequences
 
@@ -91,12 +91,14 @@ What this says:
 - **Stress indexes are revised.** The St. Louis Fed and Chicago Fed indexes we download are today's estimates of the past, not what was known at the time. Their tests are kinder than real trading would have been. Fixing this needs vintage data (ALFRED). Jobless claims are revised too, but only slightly.
 - **Wide currency costs are a guess.** 5 basis points a trade is rough. Some of these currencies cost far more in a crisis, and some cannot be held offshore at all.
 - **The FOMC file needs a yearly update** when the Fed publishes the next schedule.
-- **Open question for the owner: existing strategies earn about 0.26% a year of free return on cash.** Older strategies' cash earns the 3-month interbank rate, but excess returns are measured against the T-bill. Since 1999 the interbank rate averaged 0.26 points above the T-bill, and 1.28 points in 2008. Strategies that sit in cash a lot look a little better than they are. Moving them to T-bill cash would lower some existing results, so we have not done it without the owner's say.
+- **Every strategy's cash earns the T-bill since 2026-10-23.** Older strategies' cash used to earn the 3-month interbank rate while being measured against the T-bill, about 0.26% a year of free return since 1999 (1.28 points in 2008). The owner approved the fix. Cash now earns the T-bill, with the interbank rate only on days the T-bill is missing, and the per-strategy cash setting is gone. Stock timing strategies lost 0.01 to 0.04 Sharpe. See [EXP-0005](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md).
+- **The carry comparison above is now settled.** With interbank rates delayed until published, G10 carry moved only from 0.41 to 0.40, so the timing advantage explains almost none of its lead over policy-rate carry ([EXP-0005](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)).
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
+- [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 <!-- backlinks:end -->

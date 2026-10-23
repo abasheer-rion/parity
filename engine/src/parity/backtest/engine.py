@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass, field
 import numpy as np
 import pandas as pd
 
+from ..data import store
 from ..strategies.base import Strategy
 
 TRADING_DAYS = 252
@@ -61,12 +62,36 @@ class BacktestResult:
         return (1 + self.returns).cumprod()
 
 
-def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bool,
-                  cash_rate: str = "rate.USD") -> pd.DataFrame:
-    """Daily returns per instrument. `cash.USD` earns the US 3-month rate, so strategies
-    that step out of the market are not penalised for holding cash. `cash_rate` picks
-    which rate: newer strategies use the T-bill, the same rate the excess return is
-    measured against, so a day in cash scores exactly zero (DEC-0027)."""
+def realised(panel: pd.DataFrame, key: str) -> pd.Series | None:
+    """The rate a position actually earned on each day.
+
+    Monthly rates are moved to the day they were published so signals cannot see
+    them early (`published_after` in the catalog). Money earned on a position is a
+    different question: a forward held in March earns March's rates, which the
+    market knew at the time even though the monthly average came out in April. The
+    data store keeps that undelayed copy under ``realised.<key>``; synthetic panels
+    without it fall back to the delayed column."""
+    col = store.REALISED + key
+    if col in panel:
+        return panel[col]
+    return panel[key] if key in panel else None
+
+
+def cash_yield(panel: pd.DataFrame) -> pd.Series | None:
+    """What cash earns each day, percent per year: the 3-month T-bill, the same rate
+    excess returns are measured against, so a day in cash scores exactly zero. The
+    US 3-month interbank rate fills only the days the T-bill is missing."""
+    tbill = panel["rate.TBILL3M"] if "rate.TBILL3M" in panel else None
+    usd = realised(panel, "rate.USD")
+    if tbill is None:
+        return usd
+    return tbill if usd is None else tbill.fillna(usd)
+
+
+def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bool
+                  ) -> pd.DataFrame:
+    """Daily returns per instrument. `cash.USD` earns the T-bill (see `cash_yield`), so
+    strategies that step out of the market are neither penalised nor flattered."""
     priced = [c for c in instruments if c != "cash.USD"]
     px = panel[priced]
     rets = px.pct_change(fill_method=None)
@@ -74,14 +99,17 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
     # 2020. Days where either price is at or below zero earn nothing instead.
     rets = rets.where((px > 0) & (px.shift(1) > 0))
     if "cash.USD" in instruments:
-        rets["cash.USD"] = panel[cash_rate].shift(1) / 100 / TRADING_DAYS
+        rets["cash.USD"] = _daily(cash_yield(panel), panel.index)
         rets = rets[instruments]
+    # Carry accrues at the rates of the days the position is held, not the delayed
+    # copies signals see (see `realised`).
     if include_carry and "rate.USD" in panel:
+        usd = realised(panel, "rate.USD")
         for col in instruments:
             if col.startswith("fx."):
                 rate_col = "rate." + col.split(".", 1)[1]
                 if rate_col in panel:
-                    gap = (panel[rate_col] - panel["rate.USD"]) / 100 / TRADING_DAYS
+                    gap = (realised(panel, rate_col) - usd) / 100 / TRADING_DAYS
                     rets[col] = rets[col] + gap.fillna(0.0)
     # Currencies priced from ECB reference rates (xfx.*) carry the central bank policy
     # rate gap (BIS), the only rate we have for all of them. A proxy: forward points
@@ -102,8 +130,7 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     instruments = strategy.instruments()
     target = strategy.weights(panel).reindex(columns=instruments).fillna(0.0)
 
-    rets = asset_returns(panel, instruments, config.include_carry,
-                         getattr(strategy, "cash_rate", "rate.USD"))
+    rets = asset_returns(panel, instruments, config.include_carry)
     held = target.shift(1).fillna(0.0)
     # A strategy may set a higher cost floor than the run's, for wide or thin markets.
     cost_bps = max(config.cost_bps, getattr(strategy, "min_cost_bps", 0.0))
@@ -148,9 +175,14 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
                           (net - rf).rename(strategy.name), gross, held, turnover, rets)
 
 
-def risk_free(panel: pd.DataFrame, index: pd.DatetimeIndex) -> pd.Series:
-    """Daily T-bill return, known at the start of each day."""
-    col = "rate.TBILL3M" if "rate.TBILL3M" in panel else "rate.USD"
-    if col not in panel:
+def _daily(rate: pd.Series | None, index: pd.DatetimeIndex) -> pd.Series:
+    """A percent-per-year rate as a daily return, known at the start of each day."""
+    if rate is None:
         return pd.Series(0.0, index=index)
-    return (panel[col].shift(1) / 100 / TRADING_DAYS).reindex(index).ffill().fillna(0.0)
+    return (rate.shift(1) / 100 / TRADING_DAYS).reindex(index).ffill().fillna(0.0)
+
+
+def risk_free(panel: pd.DataFrame, index: pd.DatetimeIndex) -> pd.Series:
+    """Daily T-bill return, known at the start of each day. Identical to what
+    `cash.USD` earns, so holding cash is worth exactly zero excess return."""
+    return _daily(cash_yield(panel), index)

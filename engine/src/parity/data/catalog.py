@@ -4,7 +4,8 @@ Keys follow a simple pattern so strategies can ask for data without knowing wher
 it comes from:
 
     fx.<CCY>     USD value of one unit of the foreign currency (higher = foreign stronger)
-    rate.<CCY>   3-month interbank rate, percent per year (monthly, forward filled)
+    rate.<CCY>   3-month interbank rate, percent per year (monthly average, used from a
+                 week after the month ends, then forward filled)
     cmd.<NAME>   commodity price in USD
     eq.<NAME>    equity index or ETF level
     risk.<NAME>  risk gauges such as the VIX
@@ -81,8 +82,9 @@ _RATE_CODES = {
 }
 
 _RATES = [
-    Series(f"rate.{ccy}", "fred", f"IR3TIB01{cc}M156N", f"{ccy} 3-month interbank rate (OECD)",
-           frequency="M")
+    Series(f"rate.{ccy}", "fred", f"IR3TIB01{cc}M156N", f"{ccy} 3-month interbank rate (OECD "
+           "monthly average, used from a week after the month ends)", frequency="M",
+           published_after=5)
     for ccy, cc in _RATE_CODES.items()
 ]
 
