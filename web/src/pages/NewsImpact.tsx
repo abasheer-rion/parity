@@ -3,11 +3,11 @@
 // Ranked by evidence (q-values against random days), never by the size of a move.
 import { useEffect, useMemo, useState } from "react";
 import "./NewsImpact.css";
-import { Badge, Card, DataTable, EmptyState, FilterBar, PageSkeleton, SearchInput, Segmented, Select, SkeletonTable, type Column } from "../ui";
+import { Badge, Card, DataTable, EmptyState, FilterBar, PageSkeleton, SearchInput, Segmented, Select, SkeletonTable, useResource, type Column } from "../ui";
 import { moveText, zText, zWord, type Unit } from "../lib/news";
 import {
   evidenceWord, loadArchiveIndex, loadArchiveYear, loadImpact,
-  type ArchiveIndex, type ArchiveItem, type Headline, type ImpactDoc, type RankRow, type Study, type StudyEvent, type StudyHorizon,
+  type ArchiveItem, type Headline, type ImpactDoc, type RankRow, type Study, type StudyEvent, type StudyHorizon,
 } from "../lib/newsImpact";
 
 const PAGE = 100;
@@ -31,7 +31,6 @@ function Warnings({ list }: { list: string[] }) {
 // ------------------------------------------------------------------ archive
 
 export function Archive() {
-  const [index, setIndex] = useState<ArchiveIndex | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [from, setFrom] = useState("");
@@ -43,7 +42,9 @@ export function Archive() {
   const [loading, setLoading] = useState(false);
   const [shown, setShown] = useState(PAGE);
 
-  useEffect(() => { loadArchiveIndex().then(setIndex).catch((e: Error) => setError(e.message)); }, []);
+  const archive = useResource("news-archive-index", loadArchiveIndex);
+  const index = archive.data ?? null;
+  const indexError = archive.error ?? null;
   const years = useMemo(() => (index?.years ?? []).map((y) => y.year), [index]);
   useEffect(() => {
     if (!years.length) return;
@@ -63,7 +64,7 @@ export function Archive() {
       .sort((a, b) => b.published_at.localeCompare(a.published_at));
   }, [items, q, topic, asset, src]);
 
-  if (error) return <EmptyState title="No archive yet">{error}</EmptyState>;
+  if (indexError ?? error) return <EmptyState title="No archive yet">{indexError ?? error}</EmptyState>;
   if (!index) return <PageSkeleton parts={["table"]} label="Loading the archive" />;
   const topicLabel = (id: string) => index.topics.find((t) => t.id === id)?.label ?? id;
   const srcName = (id: string) => index.sources.find((s) => s.id === id)?.name ?? id;
@@ -101,15 +102,15 @@ export function Archive() {
 type Mode = "asset" | "topic";
 
 export function Impact() {
-  const [doc, setDoc] = useState<ImpactDoc | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("topic");
   const [asset, setAsset] = useState("eq.US_TOTAL");
   const [topic, setTopic] = useState("opec");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [h, setH] = useState<StudyHorizon>("1d");
-  useEffect(() => { loadImpact().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
+  const impact = useResource("news-impact", loadImpact);
+  const doc = impact.data ?? null;
+  const error = impact.error ?? null;
   if (error) return <EmptyState title="No impact data yet">{error}</EmptyState>;
   if (!doc) return <PageSkeleton parts={["chart", "table"]} label="Loading the impact engine's results" />;
   if (!doc.assets.length) return <EmptyState title="No impact data yet">The archive or the prices are empty on this build.</EmptyState>;

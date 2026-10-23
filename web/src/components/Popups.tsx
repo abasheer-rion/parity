@@ -11,6 +11,7 @@ import { termById, terms } from "../lib/glossary";
 import { citeLabel, mentions, plainWords, sectionHtml, useDocs, type DocsData } from "../lib/docs";
 import { Html } from "../ui/Html";
 import { Segmented } from "../ui/inputs";
+import { SkeletonText } from "../ui/skeleton";
 import { getPrefs } from "../lib/prefs";
 
 type Kind = "term" | "doc" | "ref" | "find";
@@ -199,7 +200,7 @@ function TermCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const d = data.byId[id];
   if (!d) return <p className="muted">No doc {id}.</p>;
   const section = anchor ? sectionHtml(d, anchor) : null;
@@ -222,7 +223,7 @@ function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: Docs
 }
 
 function RefCard({ id, data }: { id: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const r = data.refs[id];
   if (!r) return <p className="muted">No source {id}.</p>;
   const used = data.refDocs[id] ?? [];
@@ -245,7 +246,7 @@ function RefCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function FindCard({ phrase, data }: { phrase: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const found = mentions(data, phrase);
   const q = phrase.toLowerCase();
   const term = terms.find((t) => {

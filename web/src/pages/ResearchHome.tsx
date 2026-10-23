@@ -2,12 +2,11 @@
 // official record, the always-on search, open hypotheses and recent decisions, and
 // whether the data is healthy. Nothing about product use appears on this side
 // (DEC-0015): research is judged on evidence, not on what people click.
-import { useEffect, useState } from "react";
-import { Badge, CountUp, HeroGlow, LIFT, PageTransition, Reveal } from "../ui";
+import { Badge, CountUp, HeroGlow, LIFT, PageTransition, Reveal, useResource } from "../ui";
 import { ledger } from "../lib/catalog";
 import { useDocs } from "../lib/docs";
 import { date, num } from "../lib/format";
-import { loadSearch, type SearchDoc } from "../lib/data";
+import { loadSearch } from "../lib/data";
 import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report } from "../lib/types";
 import { researchInsights } from "../lib/insights";
@@ -15,8 +14,8 @@ import { Insights } from "../components/Insights";
 
 export function ResearchHome({ report }: { report: Report }) {
   const docs = useDocs();
-  const [search, setSearch] = useState<SearchDoc | null>(null);
-  useEffect(() => { loadSearch().then(setSearch).catch(() => setSearch(null)); }, []);
+  // Shared with the Strategy search page: whichever opens first, the other draws at once.
+  const search = useResource("search", loadSearch).data ?? null;
 
   const tested = report.runs.filter((r) => !r.is_benchmark);
   const counts: Record<string, number> = {};
