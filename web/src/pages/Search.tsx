@@ -44,10 +44,10 @@ export function Search() {
     { key: "name", header: "Strategy", align: "left", width: "46%", sort: (r) => r.name, render: (r) => (
       <span className="search-cell"><span className="search-name">{r.name}</span><span className="muted small search-line">{r.line}</span></span>
     ) },
-    { key: "deflated", header: <Term id="deflated-sharpe-ratio">Luck check</Term>, width: "15%", sort: (r) => r.deflated ?? -Infinity, render: (r) => { const l = luck(r.deflated); return <Badge tone={l.tone}>{l.label}</Badge>; } },
-    { key: "sharpe", header: <Term id="sharpe-ratio">Sharpe</Term>, width: "10%", sort: (r) => r.sharpe ?? -Infinity, render: (r) => num(r.sharpe) },
-    { key: "cagr", header: <Term id="cagr">Per year</Term>, width: "10%", sort: (r) => r.cagr ?? -Infinity, render: (r) => pct(r.cagr) },
-    { key: "max_dd", header: <Term id="drawdown">Worst fall</Term>, width: "11%", sort: (r) => r.max_dd ?? -Infinity, render: (r) => pct(r.max_dd) },
+    { key: "deflated", header: "Luck check", width: "15%", sort: (r) => r.deflated ?? -Infinity, render: (r) => { const l = luck(r.deflated); return <Badge tone={l.tone}>{l.label}</Badge>; } },
+    { key: "sharpe", header: "Sharpe", width: "10%", sort: (r) => r.sharpe ?? -Infinity, render: (r) => num(r.sharpe) },
+    { key: "cagr", header: "Per year", width: "10%", sort: (r) => r.cagr ?? -Infinity, render: (r) => pct(r.cagr) },
+    { key: "max_dd", header: "Worst fall", width: "11%", sort: (r) => r.max_dd ?? -Infinity, render: (r) => pct(r.max_dd) },
     { key: "years", header: "Years", width: "8%", sort: (r) => r.years, render: (r) => num(r.years, 0) },
   ];
 
@@ -69,6 +69,11 @@ export function Search() {
         <span className="muted small search-count"><AnimatedNumber value={rows.length} format={(v) => Math.round(v).toLocaleString()} /> shown of the best {doc.rows.length.toLocaleString()}</span>
       </div>
 
+      {/* Glossary links sit here, not inside the sort buttons, so each header is one control. */}
+      <p className="muted small search-terms">
+        Columns: <Term id="deflated-sharpe-ratio">luck check</Term>, <Term id="sharpe-ratio">Sharpe</Term>,
+        {" "}<Term id="cagr">per year</Term> and <Term id="drawdown">worst fall</Term>. Click a row for its details.
+      </p>
       <DataTable rows={rows} columns={columns} rowKey={(r) => r.id} maxHeight="min(72vh, 760px)" virtual stickyFirst
         initialSort={{ key: "deflated", dir: "desc" }} caption="Strategy variations, best first" empty="No variation matches these filters."
         expand={(r) => (
