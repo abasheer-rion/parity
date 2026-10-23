@@ -2,9 +2,9 @@
 // afterwards, and the biggest market days since 1999 with the news for each.
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
-import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, SearchInput, Segmented, Select, Tabs, type Column } from "../ui";
+import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, PageSkeleton, SearchInput, Segmented, Select, Tabs, useResource, type Column } from "../ui";
 import { Archive, Impact as ImpactSearch } from "./NewsImpact";
-import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay, type RecordsDoc } from "../lib/news";
+import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay } from "../lib/news";
 
 type View = "latest" | "archive" | "impact" | "history";
 type SortKey = "newest" | "oldest" | "biggest";
@@ -39,8 +39,6 @@ export function News({ view: initial }: { view?: string }) {
 // ------------------------------------------------------------------ latest
 
 function Latest() {
-  const [doc, setDoc] = useState<NewsDoc | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [ccy, setCcy] = useState("");
   const [cmd, setCmd] = useState("");
@@ -51,7 +49,7 @@ function Latest() {
   const [horizon, setHorizon] = useState<Horizon>("1d");
   const [open, setOpen] = useState<Article | null>(null);
 
-  useEffect(() => { loadNews().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
+  const { data: doc, error } = useResource("news", loadNews);
 
   const arts = doc?.articles ?? [];
   const opts = (vals: string[], all: string, label = (v: string) => v): [string, string][] =>
@@ -70,7 +68,7 @@ function Latest() {
   }, [arts, q, ccy, cmd, region, src, cat, sort, horizon]);
 
   if (error) return <EmptyState title="No news yet">{error}</EmptyState>;
-  if (!doc) return <p className="muted">Loading news</p>;
+  if (!doc) return <PageSkeleton parts={["table"]} label="Loading news" />;
   const count = [ccy, cmd, region, src, cat, q].filter(Boolean).length;
   const reset = () => { setCcy(""); setCmd(""); setRegion(""); setSrc(""); setCat(""); setQ(""); };
 
@@ -206,12 +204,10 @@ function Sources({ doc }: { doc: NewsDoc }) {
 // ------------------------------------------------------------------ history
 
 function History() {
-  const [doc, setDoc] = useState<RecordsDoc | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { data: doc, error } = useResource("news-records", loadRecords);
   const [series, setSeries] = useState("eq.US_TOTAL");
-  useEffect(() => { loadRecords().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
   if (error) return <EmptyState title="No records yet">{error}</EmptyState>;
-  if (!doc) return <p className="muted">Loading records</p>;
+  if (!doc) return <PageSkeleton parts={["table"]} label="Loading records" />;
   const meta = doc.series.find((s) => s.key === series) ?? doc.series[0];
   const rows = doc.records.filter((r) => r.series === meta?.key);
   const columns: Column<RecordDay>[] = [

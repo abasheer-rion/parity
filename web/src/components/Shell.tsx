@@ -5,6 +5,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
+import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
 import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
@@ -207,14 +208,12 @@ export function Shell({
                         <span className="lbl">{n.label}</span>
                       </a>
                       {n.children && (
-                        <div className={`side-children ${active ? "open" : ""}`}>
-                          <div>
-                            {n.children.map((c) => {
-                              const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
-                              return <a key={c.href} href={c.href} title={pageByHref[c.href]?.what} className={on ? "on" : ""} tabIndex={active ? 0 : -1}>{c.label}</a>;
-                            })}
-                          </div>
-                        </div>
+                        <Collapse open={active} className="side-children">
+                          {n.children.map((c) => {
+                            const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
+                            return <a key={c.href} href={c.href} title={pageByHref[c.href]?.what} className={on ? "on" : ""}>{c.label}</a>;
+                          })}
+                        </Collapse>
                       )}
                     </div>
                   );

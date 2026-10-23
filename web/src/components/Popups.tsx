@@ -10,6 +10,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, mentions, plainWords, sectionHtml, useDocs, type DocsData } from "../lib/docs";
 import { Html } from "../ui/Html";
+import { Segmented } from "../ui/inputs";
+import { SkeletonText } from "../ui/skeleton";
 import { getPrefs } from "../lib/prefs";
 
 type Kind = "term" | "doc" | "ref" | "find";
@@ -185,13 +187,7 @@ function TermCard({ id, data }: { id: string; data: DocsData | null }) {
         <strong>{t.term}</strong>
         <a className="pop-open" href={`#/learn/${id}`}>Open</a>
       </div>
-      <div className="tabs small-tabs" role="tablist">
-        {(["simple", "analogy", "precise"] as View[]).map((v) => (
-          <button key={v} role="tab" aria-selected={view === v} className={view === v ? "on" : ""} onClick={() => setView(v)}>
-            {v[0].toUpperCase() + v.slice(1)}
-          </button>
-        ))}
-      </div>
+      <div className="small-tabs"><Segmented size="sm" label={`Explain ${t.term} as`} value={view} onChange={setView} options={[["simple", "Simple"], ["analogy", "Analogy"], ["precise", "Precise"]]} /></div>
       <p>{t[view]}</p>
       {t.related && t.related.length > 0 && (
         <p className="pop-meta">Related: {t.related.filter((r) => termById[r]).map((r, i) => (
@@ -204,7 +200,7 @@ function TermCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const d = data.byId[id];
   if (!d) return <p className="muted">No doc {id}.</p>;
   const section = anchor ? sectionHtml(d, anchor) : null;
@@ -227,7 +223,7 @@ function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: Docs
 }
 
 function RefCard({ id, data }: { id: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const r = data.refs[id];
   if (!r) return <p className="muted">No source {id}.</p>;
   const used = data.refDocs[id] ?? [];
@@ -250,7 +246,7 @@ function RefCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function FindCard({ phrase, data }: { phrase: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const found = mentions(data, phrase);
   const q = phrase.toLowerCase();
   const term = terms.find((t) => {

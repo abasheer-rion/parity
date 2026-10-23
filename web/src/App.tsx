@@ -30,7 +30,7 @@ import { Search } from "./pages/Search";
 import { Settings } from "./pages/Settings";
 import { SimLanding } from "./pages/SimLanding";
 import { UILibrary } from "./pages/UILibrary";
-import { Toaster } from "./ui";
+import { PageSkeleton, Toaster } from "./ui";
 import { LegalLinks } from "./legal/LegalLinks";
 import { Signals } from "./pages/Signals";
 import { Start } from "./pages/Start";
@@ -125,6 +125,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   return (
     <Shell route={route} arg={arg} hash={hash} run={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"}>
+      {/* Keyed by route: each page eases in when it opens (transform and opacity only). */}
+      <div key={route} className="ui-route">
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
@@ -148,7 +150,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
         <Settings section={arg} />
       )}
       {!standalone && error && <div className="error">{error}</div>}
-      {!standalone && !report && !error && <p className="muted">Loading results</p>}
+      {!standalone && !report && !error && <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />}
       {!standalone && report && (
         <>
           {route === "compare" ? <Compare report={report} /> :
@@ -170,6 +172,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
           </footer>
         </>
       )}
+      </div>
       <Popups />
       <Palette report={report} />
       <Toaster />

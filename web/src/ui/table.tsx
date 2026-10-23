@@ -76,13 +76,15 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
             return (
               <td key={c.key} className={`${cellClass(c)} ${t == null ? "" : t >= 0 ? "good" : "bad"}`}>
                 {/* The keyboard and screen readers open a row with this button; a click anywhere on the row does the same. */}
-                {expand && i === 0 && (
-                  <button type="button" className="ui-row-toggle" aria-expanded={isOpen} aria-label={isOpen ? "Hide details" : "Show details"}
-                    onClick={() => setOpen((o) => (o === k ? null : k))}>
-                    <Icon name="chevronRight" size={12} className="ui-row-chev" />
-                  </button>
-                )}
-                {c.render(r)}
+                {expand && i === 0 ? (
+                  <span className="ui-cell-toggle">
+                    <button type="button" className="ui-row-toggle" aria-expanded={isOpen} aria-label={isOpen ? "Hide details" : "Show details"}
+                      onClick={() => setOpen((o) => (o === k ? null : k))}>
+                      <Icon name="chevronRight" size={12} className="ui-row-chev" />
+                    </button>
+                    <span>{c.render(r)}</span>
+                  </span>
+                ) : c.render(r)}
               </td>
             );
           })}

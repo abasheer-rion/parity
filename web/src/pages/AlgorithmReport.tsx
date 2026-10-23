@@ -1,6 +1,7 @@
 import { Title } from "../components/Shell";
 import { useState } from "react";
 import { Card } from "../ui/layout";
+import { Segmented } from "../ui/inputs";
 import { algorithms, docPathFor, ledger, registrations, STAGES } from "../lib/catalog";
 import { docUrl, pct, REPO_URL } from "../lib/format";
 import { Term } from "./Learn";
@@ -44,11 +45,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
       </div>
 
       <Card title="How it works">
-        <div className="tabs" role="tablist">
-          {(["simple", "analogy", "precise"] as View[]).map((v) => (
-            <button key={v} role="tab" aria-selected={view === v} className={view === v ? "on" : ""} onClick={() => setView(v)}>{v[0].toUpperCase() + v.slice(1)}</button>
-          ))}
-        </div>
+        <Segmented size="sm" label="Explain it as" value={view} onChange={setView} options={[["simple", "Simple"], ["analogy", "Analogy"], ["precise", "Precise"]]} />
         <p className="big">{a.how_it_works[view]}</p>
         <h3>The rule</h3>
         <p>{a.rule}</p>

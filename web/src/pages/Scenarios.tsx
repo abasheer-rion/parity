@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Title } from "../components/Shell";
 import {
-  Badge, Button, ButtonGroup, DataTable, EmptyState, FanChart, FilterChip, Grid, Panel, Segmented, Select, Stat, fmt, toast,
+  Badge, Button, ButtonGroup, DataTable, EmptyState, FanChart, FilterChip, Grid, PageSkeleton, Panel, useResource, Segmented, Select, Stat, fmt, toast,
   type Column,
 } from "../ui";
 import { useDocs } from "../lib/docs";
@@ -14,8 +14,7 @@ import {
 } from "../lib/scenarios";
 
 export function Scenarios() {
-  const [loaded, setLoaded] = useState<Loaded | null>(null);
-  useEffect(() => { loadScenarios().then(setLoaded); }, []);
+  const loaded = useResource<Loaded | null>("scenarios", loadScenarios).data ?? null;
 
   return (
     <>
@@ -27,7 +26,7 @@ export function Scenarios() {
           and interest rates moved in the days and months after each.
         </p>
       </div>
-      {!loaded && <p className="muted">Loading past events</p>}
+      {!loaded && <PageSkeleton parts={["chart", "table"]} label="Loading past events" />}
       {loaded?.status === "missing" && (
         <EmptyState title="No scenario data yet" icon="database">
           The list of past events and market reactions has not been built. {loaded.message}
