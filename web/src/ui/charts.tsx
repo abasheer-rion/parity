@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Point } from "../lib/types";
 import { Money } from "./text";
 
@@ -14,14 +14,27 @@ export interface Series {
   emphasis?: boolean;
 }
 
+// The chart's width, read before the first paint (so it never draws at a guessed width
+// and then jumps) and followed on resize, at most once a frame and only when it changed
+// by a whole pixel. Heights are fixed by each chart, so a resize never moves the page.
 function useWidth<T extends HTMLElement>(): [React.RefObject<T | null>, number] {
   const ref = useRef<T>(null);
   const [width, setWidth] = useState(640);
-  useEffect(() => {
-    if (!ref.current) return;
-    const ro = new ResizeObserver(([entry]) => setWidth(Math.max(280, entry.contentRect.width)));
-    ro.observe(ref.current);
-    return () => ro.disconnect();
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const w0 = el.getBoundingClientRect().width;
+    if (w0) setWidth(Math.max(280, Math.floor(w0)));
+    let raf = 0;
+    const ro = new ResizeObserver(([entry]) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const w = Math.max(280, Math.floor(entry.contentRect.width));
+        setWidth((old) => (old === w ? old : w));
+      });
+    });
+    ro.observe(el);
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
   }, []);
   return [ref, width];
 }

@@ -84,13 +84,15 @@
 .ui-select { position: relative; display: inline-flex; align-items: center; }
 .ui-select select { appearance: none; height: 32px; padding: 0 30px 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border-2); background: var(--hover); color: var(--text); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .ui-select .icon { position: absolute; right: 10px; pointer-events: none; color: var(--muted); }
-.ui-seg { display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); padding: 0; gap: 0; background: var(--ds-background-input); height: 32px; }
-.ui-seg button { border: 0; border-radius: 7px; background: none; color: var(--text-2); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background var(--dur-1), color var(--dur-1); }
+.ui-seg { position: relative; display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); padding: 0; gap: 0; background: var(--ds-background-input); height: 32px; }
+.ui-seg button { position: relative; z-index: 1; border: 0; border-radius: 7px; height: 30px; background: none; color: var(--text-2); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color var(--dur-2) var(--ease-out); }
 .ui-seg-md button { padding: 5px 14px; font-size: var(--fs-sm); }
 .ui-seg-sm button { padding: 3px 10px; font-size: var(--fs-xs); }
 .ui-seg button:hover { color: var(--text); }
-.ui-seg button { border-radius: 7px; height: 30px; }
-.ui-seg button.on { background: var(--ds-background-default); color: var(--ds-text-emphasized); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--ds-neutral-magic-600-alpha-3); }
+.ui-seg button.on { color: var(--ds-text-emphasized); }
+/* The raised thumb behind the chosen option slides; the buttons themselves never change size. */
+.ui-seg-thumb { position: absolute; top: 0; left: 0; height: 30px; width: var(--ind-w, 0); transform: translateX(var(--ind-x, 0)); border-radius: 7px; background: var(--ds-background-default); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--ds-neutral-magic-600-alpha-3); pointer-events: none; }
+.ui-seg[data-ready] .ui-seg-thumb { transition: transform var(--dur-3) var(--ease-spring), width var(--dur-3) var(--ease-spring); }
 .ui-toggle { width: 40px; height: 24px; border-radius: 99px; border: 0; padding: 2px; background: var(--border-2); cursor: pointer; transition: background var(--dur-2); }
 .ui-toggle i { display: block; width: 20px; height: 20px; border-radius: 99px; background: #fff; box-shadow: var(--shadow-1); transition: transform var(--dur-2) var(--ease-spring); }
 .ui-toggle.on { background: var(--ds-background-input-checked); }
@@ -100,10 +102,14 @@
 .ui-check-box { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-2); background: var(--hover); color: transparent; transition: background var(--dur-1); }
 .ui-check input:checked + .ui-check-box { background: var(--accent); border-color: var(--accent); color: #fff; }
 .ui-check input:focus-visible + .ui-check-box { outline: 2px solid rgb(47 107 255 / 0.6); outline-offset: 2px; }
-.ui-tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--border); }
-.ui-tabs button { border: 0; border-radius: 0; background: none; padding: 8px 10px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; color: var(--text-2); border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; }
+/* Tabs: one row that scrolls sideways if it must, with one underline that slides to the chosen tab. */
+.ui-tabs { position: relative; display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; box-shadow: inset 0 -1px 0 var(--border); }
+.ui-tabs::-webkit-scrollbar { display: none; }
+.ui-tabs button { flex: none; border: 0; border-radius: 0; background: none; padding: 8px 10px 10px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; color: var(--text-2); cursor: pointer; transition: color var(--dur-2) var(--ease-out); }
 .ui-tabs button:hover { color: var(--text); }
-.ui-tabs button.on { color: var(--accent); border-bottom-color: var(--accent); }
+.ui-tabs button.on { color: var(--accent); }
+.ui-tabs-ind { position: absolute; left: 0; bottom: 0; width: 1px; height: 2px; background: var(--ind-color, var(--accent)); transform-origin: left center; transform: translateX(var(--ind-x, 0)) scaleX(var(--ind-s, 0)); pointer-events: none; }
+.ui-tabs[data-ready] .ui-tabs-ind { transition: transform var(--dur-3) var(--ease-spring); }
 
 /* Filters */
 .ui-filterbar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4); }
@@ -120,7 +126,10 @@
 
 /* Tables (Mercury) */
 .ui-th-btn { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
-.ui-sort-arrow { color: var(--text); }
+/* The arrow keeps its space on every sortable header, so a header never widens when it becomes the sorted one. */
+.ui-sort-arrow { display: inline-block; width: 1ch; color: var(--text); visibility: hidden; }
+.ui-sort-arrow[data-on] { visibility: visible; }
+.ui-th-btn:hover .ui-sort-arrow:not([data-on]) { visibility: visible; opacity: .35; }
 .mtable th.sorted::after { content: none; }
 .mtable th.center, .mtable td.center { text-align: center; }
 .mtable.dense td { height: 38px; font-size: var(--fs-sm); }
@@ -173,7 +182,7 @@
 .ui-empty-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 99px; background: var(--hover); color: var(--text-2); }
 .ui-empty-title { font-size: var(--fs-md); font-weight: var(--fw-medium); }
 .ui-empty-body { font-size: var(--fs-sm); color: var(--text-2); }
-.ui-skel { display: inline-block; background: linear-gradient(90deg, var(--hover), var(--border-2), var(--hover)); background-size: 200% 100%; animation: ui-shimmer 1.4s ease-in-out infinite; }
+.ui-skel { display: inline-block; vertical-align: middle; background: linear-gradient(90deg, var(--hover), var(--border-2), var(--hover)); background-size: 200% 100%; animation: ui-shimmer 1.6s ease-in-out infinite; }
 @keyframes ui-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
 
 /* Overlays */
@@ -184,14 +193,21 @@
 .ui-menu button { display: flex; width: 100%; align-items: center; gap: var(--space-2); padding: 8px 12px; border: 0; border-radius: 4px; background: none; color: var(--text-2); font: inherit; font-size: var(--fs-md); text-align: left; cursor: pointer; }
 .ui-menu button:hover { background: var(--hover); color: var(--text); }
 .ui-menu button.danger { color: var(--bad); }
-.ui-scrim { position: fixed; inset: 0; z-index: 80; background: rgb(0 0 0 / 0.55); display: grid; place-items: center; padding: var(--space-4); }
-.ui-dialog { background: var(--surface-solid); border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-3); max-height: calc(100vh - 32px); display: flex; flex-direction: column; }
+.ui-scrim { position: fixed; inset: 0; z-index: 80; background: rgb(0 0 0 / 0.55); display: grid; place-items: center; padding: var(--space-4); transition: opacity var(--dur-3) var(--ease-out); }
+.ui-scrim[data-state="enter"], .ui-scrim[data-state="exit"] { opacity: 0; }
+.ui-dialog { background: var(--surface-solid); border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-3); max-height: calc(100vh - 32px); display: flex; flex-direction: column; outline: none;
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-3) var(--ease-spring); }
+.ui-dialog[data-state="enter"], .ui-dialog[data-state="exit"] { opacity: 0; transform: scale(.94); }
+.ui-dialog[data-state="exit"] { transition-duration: var(--dur-2); }
 .ui-dialog-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-5) var(--space-6) var(--space-2); }
 .ui-dialog-head h2 { font-size: var(--fs-xl); }
 .ui-dialog-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
 .ui-dialog-foot { display: flex; justify-content: flex-end; gap: var(--space-2); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--border); }
-.ui-toaster { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 90; display: flex; flex-direction: column; gap: var(--space-2); align-items: center; }
-.ui-toast { display: flex; align-items: center; gap: var(--space-3); background: #1e1e2a; color: #fff; padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); }
+.ui-toaster { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 90; display: flex; flex-direction: column; gap: var(--space-2); align-items: center; width: max-content; max-width: calc(100vw - 32px); pointer-events: none; }
+.ui-toast { pointer-events: auto; display: flex; align-items: center; gap: var(--space-3); background: #1e1e2a; color: #fff; padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); animation: ui-toast-in var(--dur-3) var(--ease-spring) both; }
+.ui-toast[data-state="exit"] { animation: ui-toast-out 180ms var(--ease-out) both; }
+@keyframes ui-toast-in { from { opacity: 0; transform: translateY(10px) scale(.98); } }
+@keyframes ui-toast-out { to { opacity: 0; transform: translateY(6px) scale(.98); } }
 .ui-toast.good .icon { color: #4cc27a; }
 .ui-toast button { border: 0; background: none; color: #8fb0ff; font: inherit; font-weight: var(--fw-medium); cursor: pointer; padding: 0; }
 
@@ -256,12 +272,27 @@
 /* Grids fold on narrow screens so cards never squeeze below reading width. */
 @media (max-width: 900px) { .ui-grid-3, .ui-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .ui-grid-2, .ui-grid-3 { grid-template-columns: minmax(0, 1fr); } }
-/* Drawer: a right-hand sheet for details (the News article drawer). */
-.ui-drawer-scrim { place-items: stretch end; padding: 0; }
-.ui-drawer { height: 100%; background: var(--surface-solid); border-left: 1px solid var(--border-2); box-shadow: var(--shadow-3); display: flex; flex-direction: column; animation: ui-drawer-in var(--dur-3) var(--ease-out); }
-.ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
-@keyframes ui-drawer-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .ui-drawer { animation: none; } }
+/* Drawer: a sheet from an edge for details (the News article drawer). It slides all the
+   way in and back out; on phones a side drawer becomes a sheet from the bottom. */
+.ui-drawer-scrim { display: flex; padding: 0; justify-content: flex-end; align-items: stretch; }
+.ui-drawer-scrim.side-left { justify-content: flex-start; }
+.ui-drawer-scrim.side-bottom { align-items: flex-end; justify-content: center; }
+.ui-drawer { width: min(var(--drawer-w, 520px), 100vw); height: 100%; background: var(--surface-solid); box-shadow: var(--shadow-3); display: flex; flex-direction: column; outline: none;
+  transition: transform var(--dur-3) var(--ease-out); will-change: transform; }
+.ui-drawer.side-right { border-left: 1px solid var(--border-2); }
+.ui-drawer.side-left { border-right: 1px solid var(--border-2); }
+.ui-drawer.side-bottom { width: min(var(--drawer-w, 720px), 100vw); height: auto; max-height: 88vh; border-radius: 16px 16px 0 0; border-top: 1px solid var(--border-2); }
+.ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"] { transform: translateX(100%); }
+.ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateX(-100%); }
+.ui-drawer.side-bottom[data-state="enter"], .ui-drawer.side-bottom[data-state="exit"] { transform: translateY(100%); }
+.ui-drawer[data-state="exit"] { transition-duration: 200ms; transition-timing-function: cubic-bezier(.4, 0, 1, 1); }
+.ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; }
+@media (max-width: 640px) {
+  .ui-drawer-scrim.side-right, .ui-drawer-scrim.side-left { align-items: flex-end; justify-content: center; }
+  .ui-drawer.side-right, .ui-drawer.side-left { width: 100vw; height: auto; max-height: 88vh; border: 0; border-top: 1px solid var(--border-2); border-radius: 16px 16px 0 0; }
+  .ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"],
+  .ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateY(100%); }
+}
 
 /* Motion, part two (DEC-0017): lift, tilt, draw-in, reveal, page transition, hero glow.
    Transforms rest at none, so fixed-position popups inside a card still place correctly. */
@@ -297,4 +328,100 @@
   .ui-reveal { opacity: 1; transform: none; }
   .ui-tilt:hover, .ui-lift:hover { transform: none; }
   .ui-glow i { animation: none; }
+}
+
+/* ============================================================
+   Anchored and expanding (2026-10-23). Things open in place, float
+   against what opened them, and nothing on the page jumps.
+   ============================================================ */
+
+/* Collapse: a one-row grid whose row grows from 0fr to 1fr, so height animates without measuring. */
+.ui-collapse { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-3) var(--ease-spring), opacity var(--dur-2) var(--ease-out); }
+.ui-collapse[data-open] { grid-template-rows: 1fr; opacity: 1; transition: grid-template-rows var(--dur-4) var(--ease-spring), opacity var(--dur-3) var(--ease-out) 60ms; }
+.ui-collapse-inner { min-height: 0; overflow: hidden; overflow: clip; overflow-clip-margin: 4px; }
+.ui-disclosure { border-bottom: 1px solid var(--border); }
+.ui-disclosure-row { display: flex; align-items: center; gap: var(--space-2); width: 100%; min-height: 44px; padding: 8px 4px; border: 0; border-radius: 0; background: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; transition: color var(--dur-2) var(--ease-out); }
+.ui-disclosure-row:hover { color: var(--ds-text-title); }
+.ui-disclosure-chev { color: var(--muted); transition: transform var(--dur-3) var(--ease-spring); }
+.ui-disclosure[data-open] > .ui-disclosure-row .ui-disclosure-chev { transform: rotate(90deg); }
+.ui-disclosure-summary { flex: 1; min-width: 0; }
+.ui-disclosure-meta { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.ui-disclosure-body { padding: 0 4px 16px 25px; color: var(--text-2); }
+
+/* Table rows that open in place */
+.mtable tr.row-link[aria-expanded] { cursor: pointer; }
+.ui-row-chev { margin-right: 6px; vertical-align: -1px; color: var(--muted); transition: transform var(--dur-3) var(--ease-spring); }
+.mtable tr.open .ui-row-chev { transform: rotate(90deg); }
+.mtable tr.open td { border-bottom-color: transparent; }
+.mtable tr.ui-detail-row > td { padding: 0; height: auto; border-bottom: 0; white-space: normal; text-align: left; }
+.mtable tr.ui-detail-row[data-state="open"] > td { border-bottom: 1px solid var(--border); }
+.ui-detail-body { padding: 4px 16px 18px 32px; color: var(--text-2); font-size: var(--fs-sm); }
+
+/* Long tables in their own box: the header sticks, widths are fixed so nothing reflows. */
+.ui-table-box { overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; border-radius: var(--radius-md); }
+.ui-table-box thead th { position: sticky; top: 0; z-index: 2; background: var(--table-head-bg, #0a0b11); box-shadow: inset 0 -1px 0 var(--border); }
+.mtable.fixed { table-layout: fixed; }
+.mtable.fixed td { overflow: hidden; text-overflow: ellipsis; }
+.mtable tr.ui-spacer, .mtable tr.ui-spacer td { padding: 0; border: 0; height: auto; }
+.sticky-first th:first-child, .sticky-first td:first-child { position: sticky; left: 0; z-index: 1; background: var(--table-head-bg, #0a0b11); }
+.sticky-first thead th:first-child { z-index: 3; }
+
+/* Floating things: they grow out of the side they are attached to, and fade back into it. */
+.ui-float { transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-spring); transform-origin: top center; }
+.ui-float[data-side="top"] { transform-origin: bottom center; }
+.ui-float[data-side="left"] { transform-origin: right center; }
+.ui-float[data-side="right"] { transform-origin: left center; }
+.ui-float[data-state="enter"], .ui-float[data-state="exit"] { opacity: 0; transform: scale(.97) translateY(-3px); }
+.ui-float[data-side="top"][data-state="enter"], .ui-float[data-side="top"][data-state="exit"] { transform: scale(.97) translateY(3px); }
+.ui-float[data-state="exit"] { transition-duration: var(--dur-1); }
+.ui-pop-anchor { position: relative; display: inline-flex; }
+.ui-popover { position: fixed; left: 0; top: 0; visibility: hidden; z-index: 60; min-width: 220px; max-width: calc(100vw - 16px); max-height: min(480px, 70vh); overflow-y: auto; padding: var(--space-4); border-radius: 12px; background: var(--surface-solid); box-shadow: var(--shadow-3); color: var(--text-body); outline: none; }
+
+/* Stagger: a list's children come in one after another, all within 240ms. */
+.ui-stagger > * { animation: ui-rise var(--dur-3) var(--ease-out) both; }
+.ui-stagger > :nth-child(2) { animation-delay: 30ms; }
+.ui-stagger > :nth-child(3) { animation-delay: 60ms; }
+.ui-stagger > :nth-child(4) { animation-delay: 90ms; }
+.ui-stagger > :nth-child(5) { animation-delay: 120ms; }
+.ui-stagger > :nth-child(6) { animation-delay: 150ms; }
+.ui-stagger > :nth-child(7) { animation-delay: 180ms; }
+.ui-stagger > :nth-child(8) { animation-delay: 210ms; }
+.ui-stagger > :nth-child(n+9) { animation-delay: 240ms; }
+
+/* Numbers that change hold their width. */
+.ui-anum { display: inline-block; font-variant-numeric: tabular-nums; text-align: right; }
+
+/* A loading button keeps its label's width, with a spinner over it. */
+.ui-btn.is-loading > :not(.ui-spinner) { visibility: hidden; }
+.ui-btn.is-loading .ui-spinner { position: absolute; inset: 0; margin: auto; }
+.ui-btn.is-loading:disabled { opacity: 1; cursor: progress; }
+
+/* Skeletons, sized like what they stand in for */
+.ui-skel-block { display: block; }
+.ui-skel-text { display: grid; row-gap: calc(var(--lh, 24px) * .45); padding: calc(var(--lh, 24px) * .225) 0; }
+.ui-skel-text .ui-skel, .ui-skel-stat .ui-skel, .ui-skel-card .ui-skel { display: block; }
+.ui-skel-stat { padding: 2px 0; }
+.ui-skel-chart { position: relative; }
+.ui-skel-chart > .ui-skel { display: block; border-radius: var(--radius-md) !important; }
+.ui-skel-table { width: 100%; }
+.ui-skel-row { display: flex; align-items: center; gap: 12px; padding: 0 10px; border-bottom: 1px solid var(--border); }
+.ui-skel-row > span { display: flex; min-width: 0; }
+.ui-skel-card { padding: 20px 22px; border-radius: var(--radius); background: var(--card-sheen, none), var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.ui-skel-page { display: grid; gap: var(--space-6); }
+.ui-skel-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
+.ui-skel-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+@media (max-width: 640px) { .ui-skel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* A page that has just opened eases in; a skeleton's replacement fades in over it. */
+.ui-route { animation: ui-route var(--dur-3) var(--ease-out) both; }
+@keyframes ui-route { from { opacity: 0; transform: translateY(4px); } }
+.ui-arrive { animation: ui-fade var(--dur-3) var(--ease-out) both; }
+
+/* A modal holds the page still; the scroll bar's space is kept, so nothing moves sideways. */
+html.ui-locked { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-skel { animation: none; }
+  .ui-collapse, .ui-float, .ui-dialog, .ui-drawer, .ui-scrim, .ui-tabs-ind, .ui-seg-thumb { transition: none !important; }
+  .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
 }

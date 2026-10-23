@@ -34,6 +34,52 @@ export function RollingNumber({ text }: { text: string }) {
   );
 }
 
+/**
+ * A number that glides from its old value to its new one when it changes (a price, a
+ * total after a filter). Tabular figures and a width held at the longest of the two
+ * values, so the text around it never shifts. With reduced motion it simply changes.
+ */
+export function AnimatedNumber({ value, format, ms = 450, className = "" }:
+  { value: number; format: (v: number) => string; ms?: number; className?: string }) {
+  const [shown, setShown] = useState(value);
+  const from = useRef(value);
+  const [width, setWidth] = useState(() => format(value).length);
+  useEffect(() => {
+    const start = from.current;
+    if (start === value) return;
+    setWidth(Math.max(format(start).length, format(value).length));
+    if (reducedMotion()) { from.current = value; setShown(value); setWidth(format(value).length); return; }
+    const t0 = performance.now();
+    let raf = 0;
+    const step = (t: number) => {
+      const p = Math.min(1, (t - t0) / ms);
+      const v = start + (value - start) * (1 - Math.pow(1 - p, 3));
+      from.current = v;
+      setShown(v);
+      if (p < 1) raf = requestAnimationFrame(step);
+      else setWidth(format(value).length);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+    // format is usually an inline function; a new one each render must not restart the glide.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, ms]);
+  return <span className={`ui-anum ${className}`} style={{ minWidth: `${width}ch` }} aria-live="polite">{format(shown)}</span>;
+}
+
+/**
+ * Brings its children in one after another: each rises a few pixels and fades in, 30ms
+ * apart, capped so the last starts within 240ms (the motion rules keep entrances under
+ * 400ms). Use for the first paint of a list of cards, not for content that updates.
+ */
+export function Stagger({ children, as: Tag = "div", className = "" }:
+  { children: ReactNode; as?: "div" | "ul" | "ol" | "section"; className?: string }) {
+  return <Tag className={`${STAGGER} ${className}`}>{children}</Tag>;
+}
+
+/** The class behind Stagger, for a grid or list you already have: its direct children come in one by one. */
+export const STAGGER = "ui-stagger";
+
 /** Counts up from zero to `value` on first view. Use for one headline number, not for tables. */
 export function CountUp({ value, format, ms = 700 }: { value: number; format: (v: number) => string; ms?: number }) {
   const [v, setV] = useState(0);

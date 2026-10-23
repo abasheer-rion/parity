@@ -3,7 +3,9 @@
    not inverted. */
 
 * { box-sizing: border-box; }
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+/* scrollbar-gutter keeps the scroll bar's space even on short pages and while a dialog
+   holds the page still, so the layout never jumps sideways. */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; scrollbar-gutter: stable; }
 body { margin: 0; background: var(--canvas); color: var(--text-body); font-family: var(--font-text); font-size: var(--fs-md); line-height: 24px; font-weight: var(--fw-regular); min-height: 100vh; }
 a { color: var(--link); text-decoration: none; transition: color var(--dur-2) var(--ease-out); }
 a:hover { text-decoration: underline; }
