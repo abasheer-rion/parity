@@ -127,6 +127,8 @@ def build_archive(out: Path, root: Path = DEFAULT_DIR, stamp: str = "") -> int:
 def _compact_study(st: dict, n_events: int = 8) -> dict:
     keep = ("n_headlines", "n_events", "n_overlapping", "n_non_overlapping", "first", "last",
             "horizons", "path", "warnings")
+    if (st.get("n_events") or 0) < 5:  # nothing worth drawing; keep the counts only
+        return {k: st.get(k) for k in ("n_headlines", "n_events", "warnings")}
     return {**{k: st.get(k) for k in keep},
             "events": [{**{k: e[k] for k in e if k != "items"},
                         "items": [[i["title"], i["url"], i["source"]] for i in e["items"][:2]]}

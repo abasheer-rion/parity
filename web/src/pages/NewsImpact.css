@@ -1,0 +1,14 @@
+/* News archive and impact search. Colours come from the UI tokens only. */
+.news-study { display: grid; gap: 16px; }
+.news-headlines { margin: 0; padding-left: 16px; display: grid; gap: 2px; }
+.news-headlines li { line-height: 1.35; overflow-wrap: anywhere; }
+.news-warnings { margin: 12px 0 0; padding: 10px 12px 10px 28px; border: 1px solid var(--border); border-radius: 8px; font-size: var(--fs-sm); display: grid; gap: 4px; }
+.news-explainer { margin: 0 0 12px; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.news-explainer summary { cursor: pointer; font-weight: var(--fw-medium); }
+.news-explainer ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: var(--fs-sm); }
+.news-path { margin: 0 0 12px; }
+.news-path svg { width: 100%; height: auto; display: block; }
+.news-path figcaption { font-size: var(--fs-xs); margin-top: 4px; }
+.news-linkbtn { background: none; border: 0; padding: 0; color: var(--link); cursor: pointer; font: inherit; text-align: left; }
+.news-linkbtn:hover { text-decoration: underline; }
+.news-more { margin-top: 12px; }
