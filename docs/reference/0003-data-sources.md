@@ -47,6 +47,9 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `curve.UST_1M` to `_30Y` (13) | US Treasury par yield curve | column name, such as `10 Yr` | Daily | 1990 | Optional. One request per year. Public domain. |
 | `policy.<CCY>` (32 currencies) | BIS data portal | `WS_CBPOL/D.<area>` | Daily | 1946 to 2000 | Optional. Central bank policy rates. Reuse with the BIS named. |
 | `cot.<NAME>` and `cot.<NAME>_PCT` (23 futures) | CFTC Commitments of Traders | contract code, such as `099741` | Weekly | 1986 | Optional. Speculators' net position in contracts and as a percent of open interest. Dated Tuesday, used 3 business days later. |
+| `xfx.<CCY>` (27 currencies) | Built from ECB reference rates | `ecb.USD/ecb.<CCY>` | Daily | 1999 | Optional. USD per unit, crossed through the euro, for currencies that also have a BIS policy rate. Carry is the policy-rate gap ([DEC-0027](../decisions/0027-new-edge-families-from-the-wider-data.md)). |
+| `bond.TR5` | Built from the Treasury par curve | `curve.UST_5Y` | Daily | 1990 | Optional. 5-year Treasury total return index, modified duration 4.5. |
+| FOMC calendar | Federal Reserve meeting calendars | `engine/src/parity/data/fomc.py` | 8 a year | 1994 | Scheduled announcement days only, updated by hand each year. |
 | `eia.<NAME>` (8) | EIA API v2 | old series ID, such as `PET.WCESTUS1.W` | Weekly | 1982 | Optional. Oil and gas stocks. Needs `EIA_API_KEY`; skipped without it. |
 | `spread.*`, `infl.*`, `bond.TIPS*`, `usd.*`, `money.EFFR`, `money.CP3M_*` | FRED (Treasury, Federal Reserve) | `T10Y2Y`, `T5YIE`, `DFII10`, `DTWEXBGS`, `DFF`, `DCPF3M`, and so on | Daily | 1954 to 2006 | Optional. Each is tagged public domain or citation required on FRED. |
 | `credit.HQM10Y` | FRED, Treasury HQM curve | `HQMCB10YR` | Monthly | 1984 | Optional. Licence-clean corporate yield, used a month late. |
@@ -91,9 +94,11 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 - [DEC-0008: Measure the benchmark with Fama and French and FRED, not Yahoo](../decisions/0008-benchmark-data-without-yahoo.md)
 - [DEC-0014: A strategy factory and an always-on search](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
+- [DEC-0027: New edge families from the wider data](../decisions/0027-new-edge-families-from-the-wider-data.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](../research/0005-zen-apps-and-free-apis.md)
+- [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0013: News sources and market impact](0013-news-sources-and-market-impact.md)

@@ -59,9 +59,11 @@ These are bug fixes and integrity fixes, not changes of pass thresholds, so they
 - [DEC-0013: Dashboard clarity, plain names, verdicts and search that answers](0013-dashboard-clarity-plain-names-verdicts-and-search-that-answers.md)
 - [DEC-0014: A strategy factory and an always-on search](0014-a-strategy-factory-and-an-always-on-search.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
+- [DEC-0027: New edge families from the wider data](0027-new-edge-families-from-the-wider-data.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [RES-0008: Independent audit of our methods and code](../research/0008-independent-audit.md)
+- [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

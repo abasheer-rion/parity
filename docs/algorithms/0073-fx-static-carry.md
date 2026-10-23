@@ -109,4 +109,5 @@ Added from the paper library (RES-0010) on 2026-10-21.
 ## Referenced by
 
 - [RES-0010: Paper library: FX and market microstructure](../research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 <!-- backlinks:end -->

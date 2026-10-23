@@ -21,7 +21,7 @@ from .base import Strategy
 
 CASH = "cash.USD"
 MKT = "eq.US_TOTAL"
-ZERO_COST = ("fx.", "factor.")
+ZERO_COST = ("fx.", "xfx.", "factor.")
 
 
 def past_return(px: pd.DataFrame | pd.Series, lookback: int, skip: int = 0):
