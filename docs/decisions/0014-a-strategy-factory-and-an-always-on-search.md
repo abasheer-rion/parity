@@ -92,5 +92,5 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 - [RES-0015: Combining many strategies, the evidence and the ingredient list](../research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
-- [LOG-0010: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
+- [LOG-0011: Combining many strategies, and rebasing on the factory](../log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md)
 <!-- backlinks:end -->

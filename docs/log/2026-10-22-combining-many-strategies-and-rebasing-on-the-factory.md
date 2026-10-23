@@ -1,5 +1,5 @@
 ---
-id: LOG-0010
+id: LOG-0011
 title: Combining many strategies, and rebasing on the factory
 type: log
 status: final
@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0009, RES-0015, DEC-0014]
+related: [LOG-0010, RES-0015, DEC-0014]
 ---
 
 # Combining many strategies, and rebasing on the factory
@@ -21,7 +21,7 @@ Amanda asked to keep researching with the best candidates in mind, and to gather
 - **Research ([RES-0015](../research/0015-combining-many-strategies-the-evidence-and-the-ingredient-list.md)).** Equal-weight combination (Fernandez-Perez, Fuertes and Miffre; AQR's Value and Momentum Everywhere), the currency volatility risk premium, inventories (Gorton, Hayashi and Rouwenhorst), volatility targeting (Man Group), the dollar risk premium (Lustig, Roussanov and Verdelhan), currency momentum, commodity exporters' currencies, the natural gas storage report, month-end hedging at the London fix (BlackRock authors) and currency styles in a stock and bond portfolio.
 - **Catalog.** Added ALG-0096 (commodity inventory level), ALG-0097 (developed-market rate gap times the EM basket) and ALG-0098 (equal-weight style combination). ALG-0009, ALG-0044 and ALG-0054 gained verified results.
 - **Data check.** EIA weekly crude and distillate stocks run from 1982 and gasoline from 1990, free; the current gas storage series starts in 2010.
-- **Rebase.** Main had gained the strategy factory and search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). The factory's 12 Fed H.10 currencies and the 17 ECB-based EM currencies overlapped on 8 keys; those now use H.10 prices, and the em_fx strategies read a separate `EM_RATED` list. Registrations REG-0004 to REG-0008 now count the factory's 86 recipes as prior trials. Logs were renumbered to LOG-0008 and LOG-0009 because Ayan's log took LOG-0007.
+- **Rebase.** Main had gained the strategy factory and search ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). The factory's 12 Fed H.10 currencies and the 17 ECB-based EM currencies overlapped on 8 keys; those now use H.10 prices, and the em_fx strategies read a separate `EM_RATED` list. Registrations REG-0004 to REG-0008 now count the factory's 86 recipes as prior trials. Logs were renumbered because Ayan's logs took LOG-0007 and LOG-0008; they are now LOG-0009 and LOG-0010.
 
 ## Decisions
 
