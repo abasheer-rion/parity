@@ -22,6 +22,11 @@
                                  simulated paths from blocks of real weekly returns (CSV)
     parity terminal export       write output/terminal/ for Parity Terminal (every series
                                  the site may show; --markets DIR adds crypto)
+    parity bots run --market stocks --start 1990
+                                 Bot Battle: seven trading-bot archetypes on one market
+                                 (win rate is not profit, DEC-0035); --synthetic N runs
+                                 them on N made-up paths with crashes instead
+    parity bots export           write output/bots/ for the Bot Battle page and the clips
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -307,6 +312,63 @@ def _terminal(args) -> int:
     return 0
 
 
+def _bots(args) -> int:
+    from . import bots
+
+    if args.action == "export":
+        index, runs = bots.export(n_paths=args.paths, summary_paths=args.summary_paths,
+                                  years=args.years)
+        out = Path(args.out) if args.out else DEFAULT_OUT
+        folder = out / "bots"
+        folder.mkdir(parents=True, exist_ok=True)
+        for run in runs:
+            (folder / f"{run['id']}.json").write_text(json.dumps(run, separators=(",", ":")))
+        (folder / "index.json").write_text(json.dumps(index, separators=(",", ":")))
+        size = sum(f.stat().st_size for f in folder.glob("*.json")) / 1e6
+        print(f"Wrote {folder}: {len(runs)} replays ({size:.1f} MB), data through "
+              f"{index['data_through']}")
+        return 0
+    if args.synthetic:
+        summary = bots.synthetic_summary(args.synthetic, args.seed, args.years)
+        if args.json:
+            print(json.dumps(summary, indent=2))
+            return 0
+        print(f"{args.synthetic} made-up paths of {args.years} years, $10,000 start each")
+        print(f"{'Bot':<20} {'Median win rate':>15} {'Ahead':>7} {'Stopped':>8} "
+              f"{'Median final':>13} {'Median worst fall':>18}")
+        for cls in bots.BOTS:
+            r = summary[cls.id]
+            wr = "n/a" if r["median_win_rate"] is None else f"{r['median_win_rate']:.0%}"
+            print(f"{cls.name:<20} {wr:>15} {r['ahead']:>7} {r['blown']:>8} "
+                  f"{r['median_final']:>13,.0f} {r['median_max_drawdown']:>18.0%}")
+    else:
+        try:
+            s = bots.load_market(args.market, args.start, args.end)
+        except (KeyError, FileNotFoundError) as e:
+            print(e, file=sys.stderr)
+            return 1
+        results = bots.battle(s.to_numpy(), s.index, args.cost_bps)
+        if args.json:
+            print(json.dumps([x for _, x in results], indent=2))
+            return 0
+        print(f"{bots.MARKETS[args.market][0]}, {s.index[0].date()} to {s.index[-1].date()}, "
+              f"$10,000 start, {args.cost_bps:g} bp a side")
+        print(f"{'Bot':<20} {'Trades':>7} {'Win rate':>9} {'Avg win':>9} {'Avg loss':>9} "
+              f"{'PF':>6} {'Expect.':>8} {'Final':>14} {'Worst fall':>11} {'Recovered':>10}")
+        for (_r, x), cls in zip(results, bots.BOTS, strict=True):
+            wr = "n/a" if x["win_rate"] is None else f"{x['win_rate']:.1%}"
+            pf = "n/a" if x["profit_factor"] is None else f"{x['profit_factor']:.2f}"
+            ex = "n/a" if x["expectancy"] is None else f"{x['expectancy']:,.0f}"
+            rec = ("stopped" if x["blown"] else "never" if x["days_to_recover"] is None
+                   else f"{x['days_to_recover'] / 365.25:.1f} yrs")
+            print(f"{cls.name:<20} {x['trades']:>7} {wr:>9} {x['avg_win']:>9,.0f} "
+                  f"{x['avg_loss']:>9,.0f} {pf:>6} {ex:>8} {x['final']:>14,.0f} "
+                  f"{x['max_drawdown']:>11.0%} {rec:>10}")
+    print("Expectancy per trade = win rate x average win - loss rate x average loss.")
+    print(bots.DISCLAIMER)
+    return 0
+
+
 def _serve(args) -> int:
     from . import api
 
@@ -575,6 +637,25 @@ def main(argv: list[str] | None = None) -> int:
     tm.add_argument("--markets", default=None, help="folder holding markets/crypto.json "
                     "from `parity markets export`; default: the local markets cache")
     tm.set_defaults(func=_terminal)
+    bt = sub.add_parser("bots", help="Bot Battle: trading-bot archetypes, win rate vs profit "
+                        "(DEC-0035)")
+    bt.add_argument("action", choices=["run", "export"])
+    bt.add_argument("--market", default="stocks", choices=["stocks", "EUR", "oil"])
+    bt.add_argument("--start", default="1990-01-01")
+    bt.add_argument("--end", default=None)
+    bt.add_argument("--cost-bps", type=float, default=2.0, help="cost per buy or sell")
+    bt.add_argument("--synthetic", type=int, default=0, metavar="N",
+                    help="run: use N made-up paths with crashes instead of a real market")
+    bt.add_argument("--seed", type=int, default=1)
+    bt.add_argument("--years", type=int, default=10, help="length of each made-up path")
+    bt.add_argument("--json", action="store_true")
+    bt.add_argument("--paths", type=int, default=12, help="export: made-up paths to replay")
+    bt.add_argument("--summary-paths", type=int, default=100,
+                    help="export: made-up paths behind the summary")
+    bt.add_argument("--out", default=None, help="export: folder; files go in <out>/bots "
+                    "(default output)")
+    bt.set_defaults(func=_bots)
+
     from .strategies.base import ASSETS, FAMILIES
 
     ns = sub.add_parser("new-strategy", help="create the files for a new strategy")

@@ -83,4 +83,5 @@ The test fails if a glossary word, doc or page does not exist, if a picture cann
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](../decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [GDE-0008: Rendering shareable clips from the sims](0008-rendering-shareable-clips-from-the-sims.md)
 <!-- backlinks:end -->

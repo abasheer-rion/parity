@@ -7,11 +7,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 34 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 35 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
-| [guide](#guide) | How to do something in this repo, step by step. | 7 |
+| [guide](#guide) | How to do something in this repo, step by step. | 8 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 16 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 12 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -84,6 +84,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0032 | [Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md) | proposed | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [process](TAGS.md#process) |
 | DEC-0033 | [Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0034 | [Demo accounts, paper trading on delayed data](decisions/0034-demo-accounts-paper-trading-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0035 | [Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md) | accepted | 2026-10-23 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -137,6 +138,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-23 | [process](TAGS.md#process) |
 | GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
+| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-23 | [process](TAGS.md#process) |
 
 ## reference
 

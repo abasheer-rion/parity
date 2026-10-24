@@ -15,6 +15,7 @@ export const FUNCTIONS: Fn[] = [
   { code: "STRS", title: "Stress test", what: "A mix of assets through every past crisis", sim: true },
   { code: "CRIS", title: "Crises", what: "Replay a past crisis across every market", sim: true },
   { code: "RACE", title: "Strategy race", what: "Every strategy we test, replayed", sim: true },
+  { code: "BOTS", title: "Bot battle", what: "Seven trading-bot archetypes race: win rate is not profit (hypothetical)", sim: true },
   { code: "CRV", title: "Curves", what: "Treasury and euro yield curves now and a month and a year ago, plus the rates replay" },
   { code: "COT", title: "Positioning", what: "Net futures positioning (CFTC) by market" },
   { code: "ECO", title: "Macro", what: "Macro, rates, credit and inflation series" },
@@ -31,7 +32,7 @@ export const FN_BY_CODE: Record<string, Fn> = Object.fromEntries(FUNCTIONS.map((
 /** Old Sim World hashes (#/map, #/crises ...) and the panel each opens. */
 export const LEGACY_TABS: Record<string, string> = {
   map: "WMAP", crises: "CRIS", scenario: "SCEN", paths: "PATH", stress: "STRS", race: "RACE",
-  rates: "CRV", connections: "CORR", commodities: "CMDY", stocks: "EQTY",
+  rates: "CRV", connections: "CORR", commodities: "CMDY", stocks: "EQTY", bots: "BOTS",
 };
 
 export const HONEST = "History, not a forecast";

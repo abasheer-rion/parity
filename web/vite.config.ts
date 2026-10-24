@@ -78,6 +78,19 @@ function localScenarios(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(world));
       });
+      // Bot Battle's files, written by `parity bots export` (DEC-0031): index.json and
+      // one file per replay, named by its id only.
+      server.middlewares.use("/local/bots", (req, res) => {
+        const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        const path = resolve(import.meta.dirname, "../engine/output/bots", name);
+        if (!/^[A-Za-z0-9-]+\.json$/.test(name) || !existsSync(path)) {
+          res.statusCode = 404;
+          res.end("Run `parity bots export` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
       // Parity Terminal's files, written by `parity terminal export`: index.json and
       // s/<key>.json only, so a request can never reach outside the folder.
       server.middlewares.use("/local/terminal", (req, res) => {

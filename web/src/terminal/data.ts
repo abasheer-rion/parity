@@ -7,6 +7,8 @@ import { loadReport } from "../lib/data";
 import type { NewsDoc } from "../lib/news";
 import { loadScenarios, type Loaded as ScenLoaded } from "../lib/scenarios";
 import { loadWorld, type WorldLoaded } from "../lib/world";
+import { loadBotsIndex } from "../lib/bots";
+import type { BotsIndex } from "../lib/botStats";
 import type { Point, Report } from "../lib/types";
 
 export type SeriesClass = "fx" | "rates" | "commodities" | "equities" | "crypto" | "positioning" | "macro" | (string & {});
@@ -74,6 +76,7 @@ function once<T>(fn: () => Promise<Loadable<T>>): () => Promise<Loadable<T>> {
 const fromLoaded = <T,>(l: { status: "ok"; data: T } | { status: "missing"; message: string } | { status: "error"; message: string }): Loadable<T> => l;
 
 export const getWorld = once(() => loadWorld().then((w: WorldLoaded) => fromLoaded(w)));
+export const getBots = once<BotsIndex>(() => loadBotsIndex().then((b) => fromLoaded(b)));
 export const getScen = once(() => loadScenarios().then((s: ScenLoaded) => fromLoaded(s)));
 export const getReport = once<Report>(() => loadReport().then((data) => ({ status: "ok" as const, data }), (e: Error) => ({ status: /published/.test(e.message) ? "missing" as const : "error" as const, message: e.message })));
 // The same file lib/news.ts loadNews() reads, through getJson so a dev server without the

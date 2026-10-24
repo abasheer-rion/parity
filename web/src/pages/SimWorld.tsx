@@ -17,10 +17,11 @@ import { RatesView } from "./sim/RatesView";
 import { StocksView } from "./sim/StocksView";
 import { ConnectionsView } from "./sim/ConnectionsView";
 import { StressView } from "./sim/StressView";
+import { BotBattle } from "./sim/BotBattle";
 import "./SimWorld.css";
 import "./sim/world.css";
 
-export type Tab = "map" | "crises" | "commodities" | "rates" | "stocks" | "connections" | "scenario" | "paths" | "stress" | "race";
+export type Tab = "map" | "crises" | "commodities" | "rates" | "stocks" | "connections" | "scenario" | "paths" | "stress" | "race" | "bots";
 
 const GROUPS: { name: string; tabs: { id: Tab; label: string; icon: string; what: string }[] }[] = [
   { name: "Play", tabs: [
@@ -36,6 +37,7 @@ const GROUPS: { name: string; tabs: { id: Tab; label: string; icon: string; what
     { id: "paths", label: "Paths", icon: "graph", what: "Simulated ranges and risks" },
     { id: "stress", label: "Stress test", icon: "flask", what: "A mix of assets through every past crisis" },
     { id: "race", label: "Strategy race", icon: "chart", what: "Every strategy replayed" },
+    { id: "bots", label: "Bot battle", icon: "pulse", what: "Seven trading bots: win rate is not profit" },
   ] },
 ];
 
@@ -93,7 +95,7 @@ export function SimWorld({ report, tab: rawTab, base = "#/sim" }: { report: Repo
         ))}
       </nav>
 
-      {tab === "race" ? (
+      {tab === "bots" ? <BotBattle /> : tab === "race" ? (
         report ? <StrategyRace report={report} /> : <p className="muted">Loading results</p>
       ) : !world ? (
         <p className="muted">Loading the world</p>

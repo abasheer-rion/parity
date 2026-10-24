@@ -8,7 +8,7 @@ import { DetailPanel } from "./Detail";
 import { CotPanel, EcoPanel } from "./Groups";
 import { HelpPanel, KpiPanel, NewsPanel } from "./Info";
 import { HeatPanel, MonitorPanel, MoversPanel } from "./Monitor";
-import { SimPanel } from "./Sim";
+import { BotsPanel, SimPanel } from "./Sim";
 
 export function PanelBody({ leaf }: { leaf: Leaf }) {
   switch (leaf.fn) {
@@ -23,6 +23,7 @@ export function PanelBody({ leaf }: { leaf: Leaf }) {
     case "CRV": return <CurvePanel />;
     case "COT": return <CotPanel />;
     case "ECO": return <EcoPanel />;
+    case "BOTS": return <BotsPanel />;
     case "WMAP": case "CORR": case "SCEN": case "PATH": case "STRS": case "CRIS": case "RACE": case "CMDY": case "EQTY":
       return <SimPanel fn={leaf.fn} />;
     default: return <Empty title={`No function called ${leaf.fn}`}>Type HELP for the list.</Empty>;

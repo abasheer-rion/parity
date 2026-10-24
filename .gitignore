@@ -28,3 +28,6 @@ supabase/.branches/
 .idea/
 .vscode/*
 !.vscode/mcp.json
+
+# Rendered clips (npm run content, GDE-0008)
+content/out/

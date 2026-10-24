@@ -27,7 +27,7 @@ const DEFAULT_PAGES = [
   "/research/#/search", "/research/#/edges", "/research/#/catalog", "/research/#/signals", "/research/#/explore",
   "/research/#/data", "/research/#/sources", "/research/#/ui",
   // Parity Terminal
-  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab",
+  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
 ];
 const PAGES = (process.env.CLS_PAGES ? process.env.CLS_PAGES.split(",") : DEFAULT_PAGES).map((p) => p.trim()).filter(Boolean);
 const SIZES = [
