@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1067 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1086 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 63 |
-| [Web pages](#web-pages) | 448 |
+| [Web pages](#web-pages) | 467 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 47 |
 | [News](#news) | 3 |
@@ -4319,6 +4319,14 @@ Alpha Vantage: API documentation. (n.d.). *Alpha Vantage Inc*. <https://www.alph
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-31ea218d
+
+Bloomberg Launchpad guide. (n.d.). *lippincottlibrary.wordpress.com*. <https://lippincottlibrary.wordpress.com/2013/03/11/bloomberg-launchpad-part-one/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Bloomberg Launchpad guide.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-32b7b805
 
 FRED and ALFRED (Federal Reserve Bank of St. Louis): API documentation. (n.d.). *Federal Reserve Bank of St. Louis*. <https://fred.stlouisfed.org/docs/api/fred/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4374,6 +4382,14 @@ Cited in: [catalog/events/desert-storm-1991.json](../catalog/events/desert-storm
 No title recorded. (n.d.). *site.financialmodelingprep.com*. <https://site.financialmodelingprep.com/developer/docs/pricing>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-38bb2610
+
+TradingView account manager. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/trading_terminal/account-manager/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: TradingView account manager.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-38d30e02
 
@@ -4455,6 +4471,14 @@ Note: Intro course: pandas, backtesting, simple ML and RL.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### url-3ccea4bb
+
+thinkorswim left sidebar. (n.d.). *toslc.thinkorswim.com*. <https://toslc.thinkorswim.com/center/howToTos/thinkManual/Left-Sidebar>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: thinkorswim left sidebar.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-3d35d55d
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=NEWS_SENTIMENT>. Accessed 2026-10-21. Verification: not checked.
@@ -4498,6 +4522,14 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 No title recorded. (n.d.). *cls-group.com*. <https://www.cls-group.com/products/data/clsmarketdata/>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-41b7d97d
+
+Hyperliquid trade view (live app). (n.d.). *app.hyperliquid.xyz*. <https://app.hyperliquid.xyz/trade>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Hyperliquid trade view (live app).
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-42aacc68
 
@@ -4781,6 +4813,14 @@ Note: Linked in this repo as: learning page.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-58a8491f
+
+IBKR colour grouping. (n.d.). *ibkrguides.com*. <https://ibkrguides.com/traderworkstation/color-grouping-linked-panels.htm>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: IBKR colour grouping.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-59599351
 
 Cryptohopper pricing. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/pricing>. Accessed 2026-10-23. Verification: not checked.
@@ -4800,6 +4840,14 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 publisher page. (n.d.). *systematicmoney.org*. <https://www.systematicmoney.org/leveraged-trading>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-5c120d22
+
+Robinhood Legend trading. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/support/articles/trading-with-robinhood-legend/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Robinhood Legend trading.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-5c13f005
 
@@ -4862,6 +4910,14 @@ Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json
 example query. (n.d.). *data-api.ecb.europa.eu*. <https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?lastNObservations=1>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-625ceaed
+
+IBKR Mosaic layout. (n.d.). *ibkrguides.com*. <https://ibkrguides.com/traderworkstation/mosaic-layout.htm>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: IBKR Mosaic layout.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-6266193b
 
@@ -5097,6 +5153,14 @@ Liberation Day tariffs. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Libe
 
 Cited in: [catalog/events/liberation-day-tariffs-2025.json](../catalog/events/liberation-day-tariffs-2025.json).
 
+### url-775a351c
+
+Webull hotkeys. (n.d.). *webull.com*. <https://www.webull.com/learn/courseware/jMIB8w/How-to-Use-the-Hotkey-Function-on-Webull-Desktop-Platform>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Webull hotkeys.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-776bd24f
 
 No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/api/v2/doc/doc>. Accessed 2026-10-21. Verification: not checked.
@@ -5136,6 +5200,14 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 Mexican peso crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Mexican_peso_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/mexican-peso-crisis-1994.json](../catalog/events/mexican-peso-crisis-1994.json).
+
+### url-796b1b8c
+
+Binance advanced interface. (n.d.). *binance.com*. <https://www.binance.com/en/academy/articles/advanced-interface-guide>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Binance advanced interface.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-7a23b016
 
@@ -5204,6 +5276,14 @@ Development Guide. (n.d.). *developer.oanda.com*. <https://developer.oanda.com/r
 Note: Linked in this repo as: development guide.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7c8f7c35
+
+TradingView shortcuts. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/getting_started/Shortcuts/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: TradingView shortcuts.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-7cc77912
 
@@ -5432,6 +5512,14 @@ FAQ | FTMO.com. (n.d.). *ftmo.com*. <https://ftmo.com/en/faq/>. Accessed 2026-10
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-8c4be2f4
+
+thinkorswim flexible grid. (n.d.). *toslc.thinkorswim.com*. <https://toslc.thinkorswim.com/center/howToTos/thinkManual/charts/Flexible-Grid>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: thinkorswim flexible grid.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-8d30c180
 
@@ -5893,6 +5981,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-b270557f
+
+Binance futures interface. (n.d.). *binance.com*. <https://www.binance.com/en-BH/support/faq/how-to-customize-binance-futures-trading-interface-a784518335b0492a9ebfa4a72e1ca092>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Binance futures interface.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-b30b9827
 
 Forex Trading | Trade FX & CFD Online | OANDA. (n.d.). *oanda.com*. <https://www.oanda.com/uk-en/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6143,6 +6239,14 @@ Alternative data market size, share and trends report. (n.d.). *grandviewresearc
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-cb6d397b
+
+Webull layouts. (n.d.). *webull.com*. <https://www.webull.com/learn/2uYwVO/dwHBFK/What-is-a-layout>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Webull layouts.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-cb7eb048
 
 Coursera (n.d.). Investment Management with Python and Machine Learning. *online.edhec.edu*. <https://online.edhec.edu/en/online-programmes/data-science-and-machine-learning-for-asset-management/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6162,6 +6266,14 @@ Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](
 No title recorded. (n.d.). *The GDELT Project*. <https://www.gdeltproject.org/about.html#termsofuse>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
+
+### url-cf72f580
+
+Robinhood Legend layouts. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/support/articles/layouts-on-legend/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Robinhood Legend layouts.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-d02d51d7
 
@@ -6237,6 +6349,14 @@ Revenue Ruling 2019-24. (2019). *Internal Revenue Service*. <https://www.irs.gov
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-d71f6973
+
+TradingView trading terminal. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/trading_terminal/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: TradingView trading terminal.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-d887a4d4
 
 Data Access And Licensing - World Bank Data Catalog. (n.d.). *World Bank*. <https://datacatalog.worldbank.org/public-licenses>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6250,6 +6370,14 @@ Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json
 US-UK airstrikes on Yemen. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Operation_Poseidon_Archer>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/us-uk-strikes-houthis-2024.json](../catalog/events/us-uk-strikes-houthis-2024.json).
+
+### url-d999ca03
+
+Robinhood Legend widget linking. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/support/articles/widget-linking-on-legend/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: Robinhood Legend widget linking.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-d9c5e253
 
@@ -6445,6 +6573,14 @@ Avellaneda and Lee (June 2009 version), abstract. (n.d.). *math.nyu.edu*. <https
 
 Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
 
+### url-e92ba9ae
+
+TradingView hotkeys help. (n.d.). *tradingview.com*. <https://www.tradingview.com/support/solutions/43000629990-what-are-hotkeys-and-how-to-use-them/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: TradingView hotkeys help.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
 ### url-e95d4a55
 
 3Commas home page. (n.d.). *3commas.io*. <https://3commas.io/>. Accessed 2026-10-23. Verification: not checked.
@@ -6468,6 +6604,14 @@ Cited in: [catalog/events/us-election-2020.json](../catalog/events/us-election-2
 Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-ebc97b6b
+
+thinkorswim keyboard shortcuts. (n.d.). *toslc.thinkorswim.com*. <https://toslc.thinkorswim.com/center/howToTos/thinkManual/Getting-Started/Keyboard-Shortcuts>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: thinkorswim keyboard shortcuts.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-ec434a38
 
@@ -6510,6 +6654,14 @@ Best Practices. (n.d.). *OANDA Corporation*. <https://developer.oanda.com/rest-l
 Note: Linked in this repo as: best practices.
 
 Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-ef473588
+
+TradingView chart UI elements. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/ui_elements/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
+
+Note: Linked in this repo as: TradingView chart UI elements.
+
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
 ### url-efa4ec7e
 

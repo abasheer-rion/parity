@@ -6,7 +6,7 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 
 ## How it works
 
-- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`) and Sim World (`/sim/`, or `sim.endyland.com`) need a session, and all three use the same guard.
+- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`), Sim World (`/sim/`, or `sim.endyland.com`) and Parity Trade (`/trade/`, or `trade.endyland.com`) need a session, and all four use the same guard.
 - After signing in, people go back to where they started (`?next=`). Only addresses on this site or on `https://*.endyland.com` are followed; anything else goes to `/app/` (`web/src/auth/redirect.ts`, tested in `web/tests/redirect.test.ts`).
 - Supabase Auth holds the accounts. People log in with email and password, a 6-digit email code, Google or GitHub (when switched on), or a passkey (when switched on). Accounts can add an authenticator app for two-step sign-in.
 - The browser keeps the session in a cookie. A Cloudflare Pages function (`web/functions/_middleware.ts`) checks that cookie's token against Supabase's public keys before it serves anything under `/app/` or `/data/`. No secret is needed for that check. Without a valid session, `/app/` sends you to `/login/` and `/data/` answers 401.

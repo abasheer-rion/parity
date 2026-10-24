@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppGuard } from "./auth";
 import { Palette } from "./components/Palette";
 import { Popups } from "./components/Popups";
@@ -40,13 +40,10 @@ import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
 import { Verify } from "./pages/Verify";
 import { SharePanel } from "./pages/verify/Share";
-import { otherSide, simUrl, SPACE, SPACE_ROOT } from "./lib/space";
+import { otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
-
-// The Trade area carries the charting library, so it loads only when opened.
-const Trade = lazy(() => import("./pages/trade/Trade"));
 
 applyTheme();
 
@@ -90,13 +87,19 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World runs full screen on its own site (DEC-0020): any link to #/sim or #/sim/<tab>
-  // opens it in a new tab. Typing #/sim still lands on a small card that links there.
+  // Sim World (DEC-0020) and Parity Trade (DEC-0038) run full screen on their own sites:
+  // any link to #/sim or #/trade opens them in a new tab. Typing #/sim still lands on a
+  // small card that links there; typing #/trade goes straight to Parity Trade.
   useEffect(() => {
     const on = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = (e.target as HTMLElement | null)?.closest?.("a");
       const href = a?.getAttribute("href") ?? "";
+      if (/^#\/trade(\/|\?|$)/.test(href)) {
+        e.preventDefault();
+        window.open(tradeUrl(tradeHashFor(href)), "_blank", "noopener");
+        return;
+      }
       const m = /^#\/sim(?:\/([a-z]+))?/.exec(href);
       if (!m) return;
       e.preventDefault();
@@ -114,7 +117,9 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   // A page from the other side of Parity opens there instead (DEC-0015).
   const away = otherSide(route);
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
-  if (away) return null;
+  // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0038).
+  useEffect(() => { if (route === "trade") window.location.replace(tradeUrl(tradeHashFor(hash))); }, [route, hash]);
+  if (away || route === "trade") return null;
 
   // The run picker lives in the sidebar footer, and only on pages that read a run.
   const runPicker = standalone || (batches.length === 0 && source !== "local") ? undefined : (
@@ -152,7 +157,6 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "ledger" && <LedgerPage />}
       {route === "news" && <News view={arg} />}
       {route === "markets" && <Markets view={arg?.split("?")[0]} />}
-      {route === "trade" && <Suspense fallback={<PageSkeleton parts={["chart"]} label="Loading Trade" />}><Trade view={arg?.split("?")[0]} /></Suspense>}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "settings" && (
         <Settings section={arg} />

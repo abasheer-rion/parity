@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/data/*", "/badge/*", "/v/*"],
+  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/trade", "/trade/*", "/data/*", "/badge/*", "/v/*"],
   "exclude": ["/v/"]
 }

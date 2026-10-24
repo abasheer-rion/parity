@@ -42,3 +42,33 @@ export function simUrl(tab?: string): string {
 export function researchUrl(hash = ""): string {
   return onEndyland() ? `https://parity.endyland.com/research/${hash}` : `/research/${hash}`;
 }
+
+// ---------- Parity Trade, its own full-screen app (DEC-0038) ----------
+// /trade/ serves web/trade/index.html, marked <html data-space="trade">: a trading workspace
+// with its own rail, settings and keys. It signs in like the other sides.
+
+/** True on the full-screen Parity Trade app. */
+export const IS_TRADE = document.documentElement.dataset.space === "trade";
+
+/** trade.endyland.com is live (owner approved, 2026-10-24). Set false to fall back to /trade/. */
+export const TRADE_SUBDOMAIN = true;
+
+/** Where Parity Trade opens: its own subdomain on endyland.com, /trade/ elsewhere (previews, localhost). */
+export function tradeUrl(hash = ""): string {
+  const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
+  return TRADE_SUBDOMAIN && onEndyland() ? `https://trade.endyland.com/${h}` : `/trade/${h}`;
+}
+
+/** A product app page by its hash, from anywhere (Parity Trade's Back button). */
+export function productUrl(hash = ""): string {
+  return onEndyland() ? `https://parity.endyland.com/app/${hash}` : `/app/${hash}`;
+}
+
+/** Where an old #/trade link of the product app now lives inside Parity Trade. */
+export function tradeHashFor(oldHash: string): string {
+  const [path, query = ""] = oldHash.replace(/^#/, "").split("?");
+  const view = path.split("/")[2] ?? "";
+  const map: Record<string, string> = { "": "chart", watchlists: "watchlists", screener: "screener", demo: "portfolio" };
+  const s = new URLSearchParams(query).get("s");
+  return `${map[view] ?? "chart"}${s ? `?s=${encodeURIComponent(s)}` : ""}`;
+}

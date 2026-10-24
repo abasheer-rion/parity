@@ -32,6 +32,13 @@ describe("safeNext: allowed", () => {
     expect(safeNext("https://sim.endyland.com/", parity)).toBe("https://sim.endyland.com/");
   });
 
+  it("keeps / on the trade host too", () => {
+    const trade = { origin: "https://trade.endyland.com", hostname: "trade.endyland.com" };
+    expect(safeNext("/", trade)).toBe("/");
+    expect(safeNext("https://trade.endyland.com/", parity)).toBe("https://trade.endyland.com/");
+    expect(safeNext("/trade/#/portfolio", parity)).toBe("/trade/#/portfolio");
+  });
+
   it("allows the same origin in local development", () => {
     expect(safeNext("http://127.0.0.1:5173/research/", local)).toBe("/research/");
     expect(safeNext("/sim/", local)).toBe("/sim/");

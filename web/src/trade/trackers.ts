@@ -1,9 +1,9 @@
 // Watchlists and alerts (DEC-0033): the two saved tables, the default list a new person
 // starts with, and the check that runs alerts against the latest delayed daily bars.
-import { toast } from "../../ui";
-import { dayOf, describeAlert, evaluateAlert, type AlertKind } from "../../lib/alerts";
-import { digitsFor, loadBars, priceText, type Instrument } from "../../lib/tradeData";
-import { table, type Row } from "../../lib/userStore";
+import { toast } from "../ui";
+import { dayOf, describeAlert, evaluateAlert, type AlertKind } from "../lib/alerts";
+import { digitsFor, loadBars, priceText, type Instrument } from "../lib/tradeData";
+import { table, type Row } from "../lib/userStore";
 
 export interface WatchlistRow extends Row { name: string; items: string[]; position: number }
 export interface AlertRow extends Row {
@@ -63,7 +63,7 @@ export function checkAlerts(insts: Instrument[]): Promise<AlertRow[]> {
         const patch = { active: false, triggered_at: new Date().toISOString(), triggered_value: hit.value, triggered_bar: hit.bar };
         await alertsTable.update(a.id, patch);
         fired.push({ ...a, ...patch });
-        toast(`${inst.short || inst.label}: ${alertText(a)}. Close of ${hit.bar}: ${alertValueText(a, hit.value)}.`, { ms: 7000 });
+        toast(`${inst.short || inst.label}: ${alertText(a)} (${hit.bar}, ${alertValueText(a, hit.value)})`, { ms: 7000 });
       }
     }
     return fired;

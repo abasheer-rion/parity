@@ -139,6 +139,8 @@ function localScenarios(): Plugin {
 //   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
 //                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
 //                            must not load anything from /app/.
+//   vite build --mode trade  Parity Trade on its own (DEC-0038), /trade/, assets under
+//                            /trade/assets/, for the same reason (trade.endyland.com).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
@@ -169,6 +171,16 @@ export default defineConfig(({ command, mode }) => ({
         copyPublicDir: false,
         rollupOptions: { input: { sim: here("sim/index.html") } as Record<string, string> },
       }
+    : command === "build" && mode === "trade"
+    ? {
+        sourcemap: false,
+        chunkSizeWarningLimit: 1800,
+        outDir: "dist",
+        emptyOutDir: false,
+        assetsDir: "trade/assets",
+        copyPublicDir: false,
+        rollupOptions: { input: { trade: here("trade/index.html") } as Record<string, string> },
+      }
     : {
         sourcemap: false,
         chunkSizeWarningLimit: 1800,
@@ -177,7 +189,7 @@ export default defineConfig(({ command, mode }) => ({
         assetsDir: "app/assets",
         copyPublicDir: false,
         // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research.
-        // /sim/ is built on its own (--mode sim, above).
+        // /sim/ and /trade/ are built on their own (--mode sim and --mode trade, above).
         rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") } },
       },
 }));

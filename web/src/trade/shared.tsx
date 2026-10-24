@@ -1,7 +1,7 @@
 // Pieces the Trade views share: the instrument picker, stored preferences and the hash.
 import { useEffect, useState } from "react";
-import { Icon } from "../../ui/icons";
-import { CLASS_LABEL, CLASS_ORDER, loadInstruments, type Instrument, type Loadable } from "../../lib/tradeData";
+import { Icon } from "../ui/icons";
+import { CLASS_LABEL, CLASS_ORDER, loadInstruments, type Instrument, type Loadable } from "../lib/tradeData";
 
 export function useInstruments(): Loadable<Instrument[]> {
   const [state, setState] = useState<Loadable<Instrument[]>>({ status: "loading" });

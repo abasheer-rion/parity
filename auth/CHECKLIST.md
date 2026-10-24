@@ -47,7 +47,7 @@ Order matters. Connect the email sender **before** you turn email confirmation o
    | From | `Parity <no-reply@parity.endyland.com>` |
    | Email confirmation | **On** (`mailer_autoconfirm: false`) |
    | Site URL | `https://parity.endyland.com` |
-   | Redirect allow-list | `https://parity.endyland.com/**`, `https://sim.endyland.com/**`, `https://*.endyland.com/**`, the old `parity-research.pages.dev` addresses, and `http://127.0.0.1:5173/**`, `http://localhost:5173/**` |
+   | Redirect allow-list | `https://parity.endyland.com/**`, `https://sim.endyland.com/**`, `https://trade.endyland.com/**`, `https://*.endyland.com/**`, the old `parity-research.pages.dev` addresses, and `http://127.0.0.1:5173/**`, `http://localhost:5173/**` |
    | Emails | the six templates and subjects in `auth/dist/` |
    | Rules | passwords of 10 or more characters with letters and numbers, 6-digit codes that last 60 minutes, authenticator apps on, both addresses confirm an email change, a code before a password change on an old session |
    | Email rate limit | 100 an hour |

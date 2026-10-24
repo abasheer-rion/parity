@@ -49,6 +49,11 @@ export interface ProChartProps {
   /** Controls drawn above the chart, inside the fullscreen frame. */
   toolbar?: ReactNode;
   footer?: ReactNode;
+  /** Fill the parent's height instead of a fixed one (Parity Trade). `height` and
+   *  `paneHeight` then only set how the price pane and indicator panes share it. */
+  fill?: boolean;
+  /** No footer line (Parity Trade shows the chart credit in its Settings; the logo stays on the chart). */
+  bare?: boolean;
 }
 
 /** Height of the time axis under the panes; the panes share the rest by stretch factor. */
@@ -103,7 +108,7 @@ interface Built {
 
 export function ProChart({
   bars, label, type = "candles", indicators = [], compare = null, log = false, drawings = [], tool = "none", onDraw,
-  height = 420, paneHeight = 120, digits = 2, toolbar, footer,
+  height = 420, paneHeight = 120, digits = 2, toolbar, footer, fill = false, bare = false,
 }: ProChartProps) {
   const frame = useRef<HTMLDivElement>(null);
   const host = useRef<HTMLDivElement>(null);
@@ -118,6 +123,18 @@ export function ProChart({
 
   const paneCount = useMemo(() => new Set(indicators.filter((i) => indicatorDef(i.type).place === "pane").map((i) => i.id)).size, [indicators]);
   const totalHeight = height + paneCount * paneHeight;
+  // In fill mode the stage takes its parent's height; measure it for the pane legends.
+  const stage = useRef<HTMLDivElement>(null);
+  const [measured, setMeasured] = useState(0);
+  useLayoutEffect(() => {
+    if (!fill || !stage.current || typeof ResizeObserver === "undefined") return;
+    const el = stage.current;
+    setMeasured(el.clientHeight);
+    const ro = new ResizeObserver(() => setMeasured(el.clientHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [fill]);
+  const stagePx = fill ? measured : totalHeight;
 
   // Create the chart once.
   useLayoutEffect(() => {
@@ -296,9 +313,9 @@ export function ProChart({
   const chg = bar && prev ? (bar.close / prev.close - 1) * 100 : null;
 
   return (
-    <div ref={frame} className={`pc ${full ? "pc-full" : ""} ${tool !== "none" ? "pc-drawing" : ""}`}>
+    <div ref={frame} className={`pc ${full ? "pc-full" : ""} ${fill ? "pc-fill" : ""} ${tool !== "none" ? "pc-drawing" : ""}`}>
       {toolbar && <div className="pc-toolbar">{toolbar}<span className="pc-spacer" /><IconButton icon={full ? "close" : "external"} label={full ? "Leave fullscreen" : "Fullscreen"} onClick={toggleFull} /></div>}
-      <div className="pc-stage" style={{ height: full ? undefined : totalHeight }}>
+      <div ref={stage} className="pc-stage" style={{ height: full || fill ? undefined : totalHeight }}>
         <div ref={host} className="pc-host" />
         <div className="pc-legend" aria-live="off">
           <div className="pc-legend-row">
@@ -319,7 +336,7 @@ export function ProChart({
           ))}
         </div>
         {Array.from({ length: paneCount }, (_, k) => (
-          <div key={k} className="pc-legend pc-legend-pane" style={{ top: Math.round(((totalHeight - TIME_AXIS) * (height + k * paneHeight)) / totalHeight) + 6 }}>
+          <div key={k} className="pc-legend pc-legend-pane" style={{ top: Math.round(((stagePx - TIME_AXIS) * (height + k * paneHeight)) / totalHeight) + 6, visibility: stagePx ? undefined : "hidden" }}>
             <div className="pc-legend-row">
               {lines.filter((l) => l.pane === k + 1).map((l) => (
                 <span key={l.label}><i style={{ background: l.color }} />{l.label} <b>{fmt(l.values[i], l.digits)}</b></span>
@@ -329,10 +346,12 @@ export function ProChart({
         ))}
         {hint && <div className="pc-hint" role="status">{hint}</div>}
       </div>
-      <div className="pc-foot">
-        {footer}
-        <span className="pc-attr">Charts by <a href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView</a> Lightweight Charts.</span>
-      </div>
+      {!bare && (
+        <div className="pc-foot">
+          {footer}
+          <span className="pc-attr">Charts by <a href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView</a> Lightweight Charts.</span>
+        </div>
+      )}
     </div>
   );
 }

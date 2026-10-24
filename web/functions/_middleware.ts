@@ -1,5 +1,5 @@
-// Cloudflare Pages middleware: only signed-in people get the app (/app/*) and the
-// research data (/data/*). Everything else (the front page, /login/, /signup/,
+// Cloudflare Pages middleware: only signed-in people get the apps (/app/*, /research/*,
+// /sim/*, /trade/*) and the research data (/data/*). Everything else (the front page, /login/, /signup/,
 // /reset/, /verify/, /brand/, favicons) is public. public/_routes.json limits this
 // function to the protected paths, so public pages never run it.
 //
@@ -19,26 +19,31 @@ interface Context {
   next: (input?: Request) => Promise<Response>;
 }
 
-const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/data\//];
+const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trade(\/|$)/, /^\/data\//];
 
-// Sim World has its own address, sim.<domain> (DEC-0016 follow-up): its front page is
-// the sim app at /sim/, behind the same sign-in. Sign-in pages, brand files and built
-// assets stay reachable there so logging in works; the product and research apps
-// send people back to the main address.
-const SIM_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
+// Sim World and Parity Trade have their own addresses, sim.<domain> (DEC-0016 follow-up) and
+// trade.<domain> (DEC-0038): the front page of each is its app at /sim/ or /trade/, behind
+// the same sign-in. Sign-in pages, brand files and built assets stay reachable there so
+// logging in works; the other apps send people back to the main address.
+const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/" };
+const SUBSITE_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
 const MAIN_HOST = "parity.endyland.com";
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);
   let forward: Request | undefined;
-  if (url.hostname.startsWith("sim.")) {
-    if (/^\/(app|research)(\/|$)/.test(url.pathname)) {
+  const sub = url.hostname.split(".")[0];
+  const home = Object.hasOwn(SUBSITES, sub) && url.hostname.includes(".") ? SUBSITES[sub] : null;
+  if (home) {
+    const others = Object.values(SUBSITES).filter((p) => p !== home).map((p) => p.slice(1, -1));
+    const away = new RegExp(`^/(${["app", "research", ...others].join("|")})(/|$)`);
+    if (away.test(url.pathname)) {
       return Response.redirect(`https://${MAIN_HOST}${url.pathname}${url.search}`, 302);
     }
     if (url.pathname === "/" || url.pathname === "/index.html") {
-      forward = new Request(new URL(`/sim/${url.search}`, url).toString(), request);
-      url.pathname = "/sim/";
-    } else if (SIM_PUBLIC.test(url.pathname)) {
+      forward = new Request(new URL(`${home}${url.search}`, url).toString(), request);
+      url.pathname = home;
+    } else if (SUBSITE_PUBLIC.test(url.pathname)) {
       return next();
     }
   }
