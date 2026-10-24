@@ -204,14 +204,14 @@ export function DemoView() {
             <div className="pt-chart">
               {curve.length > 1
                 ? <LineChart label="Demo account equity" height={220} format={(v) => `$${Math.round(v).toLocaleString("en-US")}`} series={[{ name: "Equity", color: "var(--series-1)", points: curve, emphasis: true }]} />
-                : <div className="pt-chart-empty muted">{loaded ? "The curve starts with your first trade and grows by one point each day new delayed prices arrive." : "Loading"}</div>}
+                : <div className="pt-chart-empty muted">{!loaded ? "Loading" : fills.rows.length ? "One day so far. The curve grows by one point each day new delayed prices arrive." : "The curve starts with your first trade and grows by one point each day new delayed prices arrive."}</div>}
             </div>
             <dl className="pt-kv pt-kv-5">
               <div><dt>Total return</dt><dd className="tabular">{fmt.signedPct(stats.total_return, 2)}</dd></div>
               <div><dt>Win rate</dt><dd className="tabular">{stats.win_rate == null ? "n/a" : `${fmt.pct(stats.win_rate, 0)} of ${stats.closed_trades}`}</dd></div>
               <div><dt>Profit factor</dt><dd className="tabular">{fmt.num(stats.profit_factor)}</dd></div>
               <div><dt>Sharpe</dt><dd className="tabular">{fmt.num(stats.sharpe)}</dd></div>
-              <div><dt>Max drawdown</dt><dd className="tabular">{fmt.pct(stats.max_drawdown)}</dd></div>
+              <div><dt>Max drawdown</dt><dd className="tabular">{fmt.pct(stats.max_drawdown, 2)}</dd></div>
             </dl>
             <p className="muted small pt-note">Win rate and profit factor count closed trades (each sell) after fees. Sharpe and max drawdown use the engine's definitions on daily equity: zero risk-free rate, 252 days a year.</p>
           </section>

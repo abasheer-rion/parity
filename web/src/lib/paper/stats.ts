@@ -125,7 +125,9 @@ export function equityCurve(startingCash: number, fills: PaperFill[], bars: Reco
   const out: Point[] = [];
   for (const d of dates) {
     while (i < sorted.length && sorted[i].bar_date <= d) {
-      const r = applyFill(book, sorted[i++]);
+      // Sources publish on different days, so replaying by bar date can briefly run cash
+      // below zero; these fills already happened, so nothing is refused here.
+      const r = applyFill(book, sorted[i++], false);
       if ("book" in r) book = r.book;
     }
     let value = book.cash;

@@ -3,6 +3,7 @@ import { cagr, equityCurve, hitRate, maxDrawdown, periodsPerYear, profitFactor, 
 import type { Point } from "../src/lib/types";
 import type { Bar } from "../src/lib/indicators";
 import type { PaperFill } from "../src/lib/paper/matching";
+import { forwardView, parseDraftSpec } from "../src/lib/paper/forward";
 
 const day = (i: number) => new Date(Date.UTC(2026, 0, 1) + i * 86400000).toISOString().slice(0, 10);
 const curve = (vals: number[], step = 1): Point[] => vals.map((v, i) => [day(i * step), v]);
@@ -70,6 +71,17 @@ describe("equity curve", () => {
     const e = equityCurve(10_000, fills, bars, [0, 1, 2, 3].map(day));
     expect(e.map((p) => p[1])).toEqual([10_000 - 1001 + 1000, 10_000 - 1001 + 1100, 10_000 - 1001 + 900 - 1, 10_000 - 1001 + 900 - 1]);
   });
+  it("keeps every fill when sources publish on different days", () => {
+    // A sale of Y on day 3 pays for a buy of X recorded later but on X's older bar (day 1).
+    const lagged: PaperFill[] = [
+      { order_id: "a", symbol: "Y", side: "buy", qty: 1, price: 100, fee: 0, bar_date: day(0), realized_pnl: null },
+      { order_id: "b", symbol: "Y", side: "sell", qty: 1, price: 100, fee: 0, bar_date: day(3), realized_pnl: 0 },
+      { order_id: "c", symbol: "X", side: "buy", qty: 1, price: 100, fee: 0, bar_date: day(1), realized_pnl: null },
+    ];
+    const ybars: Bar[] = [0, 1, 2, 3].map((i) => ({ time: day(i), open: 100, high: 100, low: 100, close: 100 }));
+    const e = equityCurve(100, lagged, { ...bars, Y: ybars }, [0, 1, 2, 3].map(day));
+    expect(e[e.length - 1][1]).toBeCloseTo(100 + (120 - 100));
+  });
   it("is flat at the starting cash with no fills", () => {
     expect(equityCurve(5000, [], bars, [day(0), day(1)])).toEqual([[day(0), 5000], [day(1), 5000]]);
   });
@@ -86,6 +98,25 @@ describe("forward test scaling", () => {
   it("has nothing forward when the attach date is at or after the last point", () => {
     expect(scaleFrom(c, day(4), 10_000)).toEqual([]);
     expect(scaleFrom(c, day(9), 10_000)).toEqual([]);
+  });
+  it("reads a pasted draft spec, bare or inside a tool result", () => {
+    const bare = parseDraftSpec('{"kind": "trend", "universe": "g10", "lookback": 126, "skip": 0, "rebalance": "M", "long_only": false}');
+    expect("spec" in bare && bare.spec.kind).toBe("trend");
+    const wrapped = parseDraftSpec('{"name": "my_trend", "spec": {"kind": "rank", "universe": "g10"}}');
+    expect("spec" in wrapped && wrapped.name).toBe("my_trend");
+    expect("error" in parseDraftSpec("not json")).toBe(true);
+    expect("error" in parseDraftSpec('{"kind": "magic"}')).toBe(true);
+    expect("error" in parseDraftSpec("[1, 2]")).toBe(true);
+  });
+  it("splits a curve at the start date into the backtest promise and the forward part", () => {
+    const run = { equity: curve([1, 1.1, 1.21, 1.1, 1.32], 7) };
+    const v = forwardView(run, day(14), 50_000);
+    expect(v.periods_per_year).toBe(52);
+    expect(v.backtest[v.backtest.length - 1][1]).toBeCloseTo(50_000);
+    expect(v.forward[0][1]).toBeCloseTo(50_000);
+    expect(v.so_far.total_return).toBeCloseTo(1.32 / 1.21 - 1);
+    expect(v.promise.total_return).toBeCloseTo(0.21);
+    expect(forwardView(run, day(28), 50_000).forward).toEqual([]);
   });
   it("scales the backtest so it ends at the capital on the attach date", () => {
     const b = scaleBefore(c, day(2), 10_000);

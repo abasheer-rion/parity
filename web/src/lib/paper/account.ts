@@ -57,9 +57,12 @@ export function toFill(r: FillRow): PaperFill {
   return { order_id: r.order_id, symbol: r.symbol, side: r.side, qty: num(r.qty), price: num(r.price), fee: num(r.fee), bar_date: r.bar_date, realized_pnl: numOrNull(r.realized_pnl) };
 }
 
-/** Fills oldest first: by the bar they filled on, then by when they were recorded. */
+/** Fills in the order they happened: by when they were recorded, then by bar date (one
+ *  catch-up saves several fills at once, oldest bar first). Not by bar date alone: sources
+ *  publish on different days, so a later trade can sit on an older bar. */
 export function sortFills(rows: FillRow[]): FillRow[] {
-  return [...rows].sort((a, b) => (a.bar_date < b.bar_date ? -1 : a.bar_date > b.bar_date ? 1 : (a.created_at ?? "") < (b.created_at ?? "") ? -1 : 1));
+  const key = (f: FillRow) => `${f.created_at ?? ""}|${f.bar_date}`;
+  return rows.map((f, i) => [f, i] as const).sort(([a, i], [b, j]) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : i - j)).map(([f]) => f);
 }
 
 export function bookOf(account: AccountRow, fills: FillRow[]): Book {

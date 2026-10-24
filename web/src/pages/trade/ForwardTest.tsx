@@ -14,7 +14,8 @@ import { fmt } from "../../ui/text";
 import { Skeleton } from "../../ui/skeleton";
 
 const usd0 = (v: number) => `$${Math.round(v).toLocaleString("en-US")}`;
-const today = () => new Date().toISOString().slice(0, 10);
+/** Today in the viewer's own time zone, as YYYY-MM-DD. */
+const today = () => new Date().toLocaleDateString("en-CA");
 
 let reportP: Promise<Report> | null = null;
 function useReport(on: boolean): { report: Report | null; error: string | null } {
@@ -91,7 +92,7 @@ export function ForwardTest({ account }: { account: AccountRow }) {
                 <div>
                   <h3 className="tr-sub">What the backtest promised</h3>
                   <StatList s={view.promise} label="Backtest before the start date" />
-                  <p className="muted small">From {view.backtest[0]?.[0]} to the start date, scaled to end at your capital.</p>
+                  <p className="muted small">From {view.backtest[0]?.[0]} to the start date, scaled to end at your capital. The chart shows its last five years.</p>
                 </div>
                 <div>
                   <h3 className="tr-sub">Forward test so far</h3>
@@ -107,8 +108,8 @@ export function ForwardTest({ account }: { account: AccountRow }) {
               </div>
               <p className="muted small">
                 Out-of-sample forward testing: everything after the start date was unknown when the strategy was attached. The curve comes from the research
-                report, one point per {per}; Sharpe uses the engine's formula with {view.periods_per_year} {per}s a year. A short forward test says little; a
-                result needs months or years before it means much.
+                report, one point per {per}, so the first forward {per} can include a few days before the start. Sharpe uses the engine's formula with{" "}
+                {view.periods_per_year} {per}s a year. A short forward test says little; a result needs months or years before it means much.
               </p>
             </>
           )}
@@ -156,7 +157,7 @@ function AttachDialog({ open, onClose, account, runs, error }: { open: boolean; 
   return (
     <Dialog open={open} onClose={onClose} title="Attach a strategy" width={600}
       footer={<><Button variant="tertiary" onClick={onClose}>Cancel</Button><Button variant="primary" disabled={!!problem || busy} loading={busy} onClick={attach}>Attach</Button></>}>
-      <Segmented label="Where the strategy comes from" value={mode} onChange={setMode} options={[["report", "From the research report"], ["draft", "Paste an MCP draft spec"]]} />
+      <Segmented label="Where the strategy comes from" value={mode} onChange={setMode} options={[["report", "Research report"], ["draft", "MCP draft spec"]]} />
       <div className="pt-attach">
         {mode === "report" ? (
           error ? <p className="bad small">{error}</p> : (

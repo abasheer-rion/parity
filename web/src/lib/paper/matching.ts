@@ -110,19 +110,20 @@ export function emptyBook(cash: number): Book { return { cash, positions: {} }; 
 export function heldQty(book: Book, symbol: string): number { return book.positions[symbol]?.qty ?? 0; }
 
 /** The book after one fill, or an error saying why the fill cannot happen. Buy fees go
- *  into the cost basis, so a sell's realized P&L is net of both fees. */
-export function applyFill(book: Book, f: Omit<PaperFill, "realized_pnl">): { book: Book; realized: number | null } | { error: string } {
+ *  into the cost basis, so a sell's realized P&L is net of both fees. With `strict` off
+ *  (replaying fills that already happened) nothing is refused. */
+export function applyFill(book: Book, f: Omit<PaperFill, "realized_pnl">, strict = true): { book: Book; realized: number | null } | { error: string } {
   const notional = f.qty * f.price;
   const pos = book.positions[f.symbol];
   if (f.side === "buy") {
     const cost = notional + f.fee;
-    if (cost > book.cash + EPS) return { error: "Not enough cash" };
+    if (strict && cost > book.cash + EPS) return { error: "Not enough cash" };
     const qty = (pos?.qty ?? 0) + f.qty;
     const avg = ((pos?.qty ?? 0) * (pos?.avg_cost ?? 0) + cost) / qty;
     return { book: { cash: book.cash - cost, positions: { ...book.positions, [f.symbol]: { symbol: f.symbol, qty, avg_cost: avg, realized: pos?.realized ?? 0 } } }, realized: null };
   }
   const held = pos?.qty ?? 0;
-  if (f.qty > held + EPS) return { error: held > 0 ? "Not enough held to sell (no short selling)" : "Nothing held to sell (no short selling)" };
+  if (strict && f.qty > held + EPS) return { error: held > 0 ? "Not enough held to sell (no short selling)" : "Nothing held to sell (no short selling)" };
   const realized = f.qty * (f.price - (pos?.avg_cost ?? 0)) - f.fee;
   const left = held - f.qty;
   const positions = { ...book.positions };
@@ -131,12 +132,12 @@ export function applyFill(book: Book, f: Omit<PaperFill, "realized_pnl">): { boo
   return { book: { cash: book.cash + notional - f.fee, positions }, realized };
 }
 
-/** Rebuild cash and holdings from the fills, oldest first. The fills are the record;
- *  the stored cash and positions are a copy of this. */
+/** Rebuild cash and holdings from the fills, in the order they happened. The fills are
+ *  the record; the stored cash and positions are a copy of this. */
 export function bookFromFills(startingCash: number, fills: PaperFill[]): Book {
   let book = emptyBook(startingCash);
   for (const f of fills) {
-    const r = applyFill(book, f);
+    const r = applyFill(book, f, false);
     if ("book" in r) book = r.book;
   }
   return book;

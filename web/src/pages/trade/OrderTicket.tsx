@@ -51,7 +51,7 @@ function Field({ label, value, onChange, step = "any", suffix, help }: { label: 
 export function OrderTicket({ list, symbol, onSymbol, bar, book, orders, costs, refPrice, busy, onPlace }: TicketProps) {
   const [side, setSide] = useState<Side>("buy");
   const [type, setType] = useState<TicketType>("market");
-  const [qty, setQty] = useState("10");
+  const [qty, setQty] = useState("1");
   const [limit, setLimit] = useState("");
   const [stop, setStop] = useState("");
   const [trail, setTrail] = useState("5");
@@ -120,7 +120,7 @@ export function OrderTicket({ list, symbol, onSymbol, bar, book, orders, costs, 
         <dl className="pt-est">
           <div><dt>Estimated price</dt><dd className="tabular">{est ? priceText(est.price, digits) : "n/a"}</dd></div>
           <div><dt>Notional</dt><dd className="tabular">{est ? usd(est.notional) : "n/a"}</dd></div>
-          <div><dt>Fee ({costs.fee_bps} bp, min {usd(costs.fee_min)})</dt><dd className="tabular">{est ? usd(est.fee) : "n/a"}</dd></div>
+          <div><dt>Fee ({costs.fee_bps} bp, min ${costs.fee_min})</dt><dd className="tabular">{est ? usd(est.fee) : "n/a"}</dd></div>
           <div><dt>Slippage</dt><dd className="tabular">{costs.slippage_bps} bp on market and stop fills</dd></div>
           <div className="pt-est-total"><dt>{effSide === "buy" ? "Estimated cost" : "Estimated proceeds"}</dt><dd className="tabular">{est ? usd(est.total) : "n/a"}</dd></div>
           <div><dt>Cash</dt><dd className="tabular">{usd(book.cash)}</dd></div>
