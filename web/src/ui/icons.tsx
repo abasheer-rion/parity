@@ -24,6 +24,7 @@ const paths: Record<string, ReactNode> = {
   chevronRight: <path d="M6 3.5 10.5 8 6 12.5" />,
   sidebar: <><rect x="2.5" y="3" width="11" height="10" rx="1.5" /><path d="M6.5 3v10" /></>,
   chevronDown: <path d="M4 6l4 4 4-4" />,
+  chevronUp: <path d="M4 10l4-4 4 4" />,
   menu: <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" />,
   arrowUpRight: <path d="M5 11 11 5M6 5h5v5" />,
   arrowDownRight: <path d="M5 5l6 6M11 6v5H6" />,
