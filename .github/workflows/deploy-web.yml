@@ -16,9 +16,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -89,6 +89,9 @@ jobs:
         continue-on-error: true  # the terminal explains itself when its files are missing
         # After the markets step so CoinGecko crypto comes from dist/data/markets/crypto.json.
         run: parity terminal export --out dist/data --markets dist/data
+      - name: Front page market strip (recent closes into stats.json, DEC-0031)
+        continue-on-error: true  # the front page labels the strip as missing when this is absent
+        run: python3 ../scripts/export_front_strip.py dist
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
         run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"

@@ -4,11 +4,14 @@
 //                           reduced motion or whose browser has no WebGL.
 //   <!--stat:algorithms-->  ideas in the algorithm library (catalog/algorithms)
 //   <!--stat:official-->    official runs sealed in the ledger (ledger/runs.jsonl)
-// Both counts are read from files in the repo, so they are exact for the commit built.
+//   <!--stat:lessons-->     public Academy lessons (academy/courses/*.json)
+// These counts are read from files in the repo, so they are exact for the commit built.
 //
-// The two live counts (strategies tested, variations searched) come from /stats.json,
-// written at deploy by scripts/export_site_data.py. In development this serves the
-// same numbers from engine/output/.
+// The live counts (strategies tested, variations searched, terminal series) and the
+// market strip come from /stats.json, written at deploy by scripts/export_site_data.py
+// and scripts/export_front_strip.py (DEC-0031). In development this serves the same
+// numbers from engine/output/.
+import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
@@ -25,6 +28,13 @@ function countAlgorithms(): number {
 function countOfficial(): number {
   const file = root("ledger/runs.jsonl");
   return existsSync(file) ? readFileSync(file, "utf8").split("\n").filter((l) => l.trim()).length : 0;
+}
+
+function countLessons(): number {
+  const dir = root("academy/courses");
+  if (!existsSync(dir)) return 0;
+  return readdirSync(dir).filter((f) => f.endsWith(".json"))
+    .reduce((n, f) => n + ((JSON.parse(readFileSync(resolve(dir, f), "utf8")) as { lessons?: unknown[] }).lessons?.length ?? 0), 0);
 }
 
 // Same camera as the 3D scene: 36 degree field of view, 3.4 units away, square frame.
@@ -87,15 +97,21 @@ export function simPoster(): string {
     + `<line x1="${ox}" y1="${top - 18}" x2="${ox}" y2="${H - bottom + 8}" stroke="#a9b6ff" stroke-opacity=".22" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
-function liveStats(): Record<string, number | string> | null {
+function liveStats(): Record<string, unknown> | null {
   const latest = root("engine/output/latest.json");
   const search = root("engine/output/search.json");
-  if (!existsSync(latest)) return null;
+  const terminal = root("engine/output/terminal/index.json");
+  if (!existsSync(latest) && !existsSync(terminal)) return null;
+  const out: Record<string, unknown> = {};
+  if (existsSync(terminal)) {
+    try {
+      Object.assign(out, JSON.parse(execFileSync("python3", [root("scripts/export_front_strip.py"), "--index", terminal], { encoding: "utf8" })));
+    } catch { /* the page labels a missing strip */ }
+  }
+  if (!existsSync(latest)) return out;
   const report = JSON.parse(readFileSync(latest, "utf8")) as { generated_at: string; runs: { is_benchmark?: boolean; gauntlet?: unknown }[] };
-  const out: Record<string, number | string> = {
-    generated_at: report.generated_at,
-    strategies_tested: report.runs.filter((r) => !r.is_benchmark && r.gauntlet).length,
-  };
+  out.generated_at = report.generated_at;
+  out.strategies_tested = report.runs.filter((r) => !r.is_benchmark && r.gauntlet).length;
   if (existsSync(search)) out.variations_searched = (JSON.parse(readFileSync(search, "utf8")) as { trials: number }).trials;
   return out;
 }
@@ -111,7 +127,8 @@ export function paritySite(): Plugin {
           .replace("<!--hero-poster-->", heroPoster())
           .replace("<!--sim-poster-->", simPoster())
           .replace(/<!--stat:algorithms-->/g, String(countAlgorithms()))
-          .replace(/<!--stat:official-->/g, String(countOfficial()));
+          .replace(/<!--stat:official-->/g, String(countOfficial()))
+          .replace(/<!--stat:lessons-->/g, String(countLessons()));
       },
     },
     configureServer(server) {
