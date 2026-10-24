@@ -50,6 +50,7 @@ const paths: Record<string, ReactNode> = {
   play: <path d="M5 3.2v9.6a.4.4 0 0 0 .6.35l7.6-4.8a.4.4 0 0 0 0-.7L5.6 2.85a.4.4 0 0 0-.6.35z" />,
   pause: <path d="M5.5 3.5v9M10.5 3.5v9" />,
   restart: <path d="M3 3.5v3.5h3.5M3.4 7A5 5 0 1 1 4.6 11.3" />,
+  bell: <path d="M4 11.5V7a4 4 0 0 1 8 0v4.5l1 1H3zM6.8 14a1.3 1.3 0 0 0 2.4 0" />,
 };
 
 export function Icon({ name, size = 16, className }: { name: keyof typeof paths | string; size?: number; className?: string }) {
