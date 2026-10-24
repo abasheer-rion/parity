@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1067 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1069 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
 | [Software](#software) | 63 |
-| [Web pages](#web-pages) | 448 |
+| [Web pages](#web-pages) | 450 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 47 |
 | [News](#news) | 3 |
@@ -5471,6 +5471,12 @@ Bank of Japan what's new: API documentation. (n.d.). *Bank of Japan*. <https://w
 
 Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
 
+### url-90a7c7fc
+
+Trademark guidelines | Cloudflare. (n.d.). *cloudflare.com*. <https://www.cloudflare.com/trademark/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0039](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md).
+
 ### url-91b0ceac
 
 TrueFX Downloads - TrueFX. (n.d.). *TrueFX (Integral)*. <https://www.truefx.com/truefx-historical-downloads-2/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5508,6 +5514,12 @@ Free Trial | Interactive Brokers LLC. (n.d.). *Interactive Brokers*. <https://po
 Note: Linked in this repo as: free trial.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-94c34b0c
+
+NVIDIA Inception Program for Startups. (n.d.). *nvidia.com*. <https://www.nvidia.com/en-us/startups/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0039](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md).
 
 ### url-950b726b
 

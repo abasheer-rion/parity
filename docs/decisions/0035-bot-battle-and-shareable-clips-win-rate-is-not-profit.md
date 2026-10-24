@@ -77,5 +77,6 @@ Over 100 made-up paths of 10 years, Double down won about 99% of its trades on t
 
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0037: Everything runs by itself and the search widens itself](0037-everything-runs-by-itself-and-the-search-widens-itself.md)
+- [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [GDE-0008: Rendering shareable clips from the sims](../guides/0008-rendering-shareable-clips-from-the-sims.md)
 <!-- backlinks:end -->

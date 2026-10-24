@@ -665,6 +665,7 @@ The dashboard.
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
+- [DEC-0039: A front page for Verify, dark glass and scroll scenes](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)

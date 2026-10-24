@@ -8,6 +8,8 @@ script runs after `parity terminal export` and adds, from data/terminal/index.js
   data_through   the newest date in the terminal data
   strip          up to 14 series: ticker, name, last close, one-day change, its date,
                  a short sparkline and its source
+  series_by_group  how many series each terminal group holds (fx_g10, crypto, perps...),
+                 for the front page's coverage counts (DEC-0039)
 
 Only series the terminal already shows go in, so every licence rule in
 engine/src/parity/terminal.py (TERMS) still applies. Prices only: no results, no
@@ -59,8 +61,14 @@ def build(index: dict) -> dict:
             break
         if s not in picked and s.get("freq") == "D" and not s["key"].startswith("fx.JPY"):
             picked.append(s)
+    by_group: dict[str, int] = {}
+    for s in index.get("series", []):
+        g = s.get("group")
+        if g:
+            by_group[g] = by_group.get(g, 0) + 1
     return {
         "series_count": len(index.get("series", [])),
+        "series_by_group": by_group,
         "data_through": index.get("data_through"),
         "strip": [entry(s) for s in picked[:SIZE]],
     }

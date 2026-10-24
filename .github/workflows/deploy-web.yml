@@ -17,9 +17,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/bake_front_stats.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/bake_front_stats.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -97,6 +97,9 @@ jobs:
       - name: Front page market strip (recent closes into stats.json, DEC-0021)
         continue-on-error: true  # the front page labels the strip as missing when this is absent
         run: python3 ../scripts/export_front_strip.py dist
+      - name: Front page counts (stats.json written into index.html, DEC-0039)
+        continue-on-error: true  # the page fetches /stats.json itself when this is skipped
+        run: python3 ../scripts/bake_front_stats.py dist
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
         run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
