@@ -1,4 +1,4 @@
-// Parity Trade (DEC-0038): the trading workspace as its own full-screen app at /trade/
+// Parity Trade (DEC-0039): the trading workspace as its own full-screen app at /trade/
 // (trade.endyland.com). Its own rail, top bar, settings and keys; a chart grid with an
 // order ticket and watchlist beside it and the account dock under it. Everything acts on
 // the demo account with delayed data. One Back button returns to Parity.
@@ -64,6 +64,13 @@ function useMobile(): boolean {
 
 const clearDrawings = (symbol: string) => { drawingsTable.removeWhere({ symbol }).then(() => toast("Drawings cleared"), (e: Error) => toast(e.message, { tone: "bad" })); };
 
+/** The layout with the address's ?s= and ?tf= applied to the active chart. */
+function fromHash(l: Layout): Layout {
+  const s = hashParam("s"), tf = TIMEFRAMES.find((t) => t.id === hashParam("tf"))?.id;
+  if (!s && !tf) return l;
+  return { ...l, cells: l.cells.map((c, i) => (i === l.active ? { ...c, symbol: s || c.symbol, tf: tf ?? c.tf } : c)) };
+}
+
 const viewOf = (h: string): View => { const v = h.split("?")[0].split("/")[1] ?? ""; return (VIEW_IDS as string[]).includes(v) ? (v as View) : "chart"; };
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 type MTab = "chart" | "watch" | "ticket" | "dock" | "more";
@@ -72,7 +79,7 @@ function TradeShell() {
   const insts = useInstruments();
   const list = useMemo(() => (insts.status === "ok" ? insts.data : []), [insts]);
   const [settings, setSettingsState] = useState<Settings>(readSettings);
-  const [layout, setLayoutState] = useState<Layout>(() => readLayout(settings));
+  const [layout, setLayoutState] = useState<Layout>(() => fromHash(readLayout(settings)));
   const set = useCallback((f: (l: Layout) => Layout) => setLayoutState((old) => { const next = f(old); if (next !== old) writeLayout(next); return next; }), []);
   const setSettings = useCallback((p: Partial<Settings>) => setSettingsState((old) => { const next = { ...old, ...p }; writeSettings(next); return next; }), []);
   const [view, setView] = useState<View>(() => viewOf(window.location.hash));
@@ -89,21 +96,20 @@ function TradeShell() {
     if (go) setMtab("chart");
   }, [set]);
 
-  // The hash holds the view, and ?s=<key> loads a symbol into the active chart.
+  // The hash holds the view, and ?s=<key>&tf=<D|W|M> load into the active chart, so a link
+  // reopens the same chart (DEC-0038).
   useEffect(() => {
-    const on = () => {
-      setView(viewOf(window.location.hash));
-      const s = hashParam("s");
-      if (s) {
-        set((l) => ({ ...l, cells: l.cells.map((c, i) => (i === l.active ? { ...c, symbol: s } : c)) }));
-        window.history.replaceState(null, "", `${window.location.pathname}${window.location.hash.split("?")[0]}`);
-      }
-    };
-    on();
+    const on = () => { setView(viewOf(window.location.hash)); set(fromHash); };
     window.addEventListener("hashchange", on);
     return () => window.removeEventListener("hashchange", on);
   }, [set]);
   const go = useCallback((v: View) => { window.location.hash = `#/${v}`; }, []);
+  // On the Chart view the address follows the active chart, without a history entry.
+  useEffect(() => {
+    if (view !== "chart") return;
+    const want = `#/chart?s=${encodeURIComponent(symbol)}&tf=${cell.tf}`;
+    if (window.location.hash !== want) window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${want}`);
+  }, [view, symbol, cell.tf]);
 
   // A saved symbol the data no longer has (or a default it never had) becomes another price series.
   useEffect(() => {

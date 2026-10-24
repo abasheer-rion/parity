@@ -1,6 +1,6 @@
 // The legal pages (web/legal/**/index.html) are plain HTML. They share a head, a header
 // and a footer, filled in at build time from the markers below so each page stays short:
-//   <!--legal:head-->     fonts, icons, the stylesheet and the cookie notice script
+//   <!--legal:head-->     the stylesheet and the cookie notice script
 //   <!--legal:header-->   skip link, logo and the way back into Parity
 //   <!--legal:footer-->   legal links, cookie settings and the "not investment advice" line
 // The same footer markup is copied by hand into web/index.html (its footer only).
@@ -14,11 +14,8 @@ export const LEGAL_LINKS: [string, string][] = [
   ["/legal/risk/", "Risk"],
 ];
 
+// Titles, descriptions, icons and share tags come from src/lib/meta.ts (plugins/meta.ts).
 const HEAD = `
-    <meta name="theme-color" content="#0b0c14" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/src/legal/legal.css" />
     <script type="module" src="/src/legal/page.ts"></script>`;
 
@@ -55,9 +52,7 @@ export function parityLegal(): Plugin {
       handler(html, ctx) {
         if (!ctx.path.startsWith("/legal/")) return html;
         return html
-          .replace("<!--legal:head-->", `${HEAD}
-    <link rel="canonical" href="https://parity.endyland.com${ctx.path.replace(/index\.html$/, "")}" />
-    <meta property="og:image" content="https://parity.endyland.com/og/default.png" />`)
+          .replace("<!--legal:head-->", HEAD)
           .replace("<!--legal:header-->", HEADER)
           .replace("<!--legal:footer-->", FOOTER);
       },

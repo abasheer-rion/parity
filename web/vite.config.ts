@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
+import { parityMeta, parityOg } from "./plugins/meta";
 import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
@@ -139,7 +140,7 @@ function localScenarios(): Plugin {
 //   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
 //                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
 //                            must not load anything from /app/.
-//   vite build --mode trade  Parity Trade on its own (DEC-0038), /trade/, assets under
+//   vite build --mode trade  Parity Trade on its own (DEC-0039), /trade/, assets under
 //                            /trade/assets/, for the same reason (trade.endyland.com).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
@@ -149,7 +150,7 @@ const SITE_PAGES = [
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal()],
+  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

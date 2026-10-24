@@ -8,6 +8,7 @@
 // fetched from the JWKS address and cached by jose), its issuer, audience and expiry.
 // No secret is needed. See auth/README.md.
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { HOST } from "../src/lib/meta";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -22,12 +23,12 @@ interface Context {
 const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trade(\/|$)/, /^\/data\//];
 
 // Sim World and Parity Trade have their own addresses, sim.<domain> (DEC-0016 follow-up) and
-// trade.<domain> (DEC-0038): the front page of each is its app at /sim/ or /trade/, behind
+// trade.<domain> (DEC-0039): the front page of each is its app at /sim/ or /trade/, behind
 // the same sign-in. Sign-in pages, brand files and built assets stay reachable there so
 // logging in works; the other apps send people back to the main address.
 const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/" };
 const SUBSITE_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
-const MAIN_HOST = "parity.endyland.com";
+const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);

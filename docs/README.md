@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 38 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 39 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 14 |
@@ -36,7 +36,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-24 [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
-- 2026-10-24 [DEC-0038: Parity Trade, a full-screen trading app of its own](decisions/0038-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- 2026-10-24 [DEC-0039: Parity Trade, a full-screen trading app of its own](decisions/0039-parity-trade-a-full-screen-trading-app-of-its-own.md)
 
 ## intent
 
@@ -72,7 +72,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0020 | [Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
 | DEC-0022 | [Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
-| DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0024 | [Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
@@ -87,7 +87,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0035 | [Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md) | accepted | 2026-10-23 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0036 | [Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md) | accepted | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0037 | [Everything runs by itself and the search widens itself](decisions/0037-everything-runs-by-itself-and-the-search-widens-itself.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
-| DEC-0038 | [Parity Trade, a full-screen trading app of its own](decisions/0038-parity-trade-a-full-screen-trading-app-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0038 | [Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0039 | [Parity Trade, a full-screen trading app of its own](decisions/0039-parity-trade-a-full-screen-trading-app-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

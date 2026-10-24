@@ -1,15 +1,17 @@
 // Where to send someone after they sign in, and which addresses are safe to send them to.
 //
 // The ?next= value comes from the address bar, so anyone can write it. We only follow it
-// when it points at this site or at https://<something>.endyland.com (Parity and Sim
+// when it points at this site or at https://<something>.<site domain> (Parity and Sim
 // World share the sign-in there). Everything else falls back to the app. This file has no
 // browser globals at import time, so the tests can run it directly.
+
+import { SITE_DOMAIN } from "../lib/meta";
 
 /** Pages that must never be a "next" target, or signing in would loop back to them. */
 const AUTH_PAGES = /^\/(login|signup|reset|verify)(\/|$)/;
 
-/** The parent domain whose subdomains share the session cookie (src/auth/client.ts). */
-export const SITE_DOMAIN = "endyland.com";
+/** The parent domain whose subdomains share the session cookie (src/auth/client.ts), from src/lib/site.json. */
+export { SITE_DOMAIN };
 
 export const DEFAULT_NEXT = "/app/";
 
@@ -56,9 +58,21 @@ export function safeNext(raw: string | null | undefined, at: Here = here(), fall
   return url.origin === at.origin ? rest : `${url.origin}${rest}`;
 }
 
-/** The ?next= of the current page, made safe. */
-export function nextFromQuery(search: string = window.location.search, at: Here = here()): string {
-  return safeNext(new URLSearchParams(search).get("next"), at);
+/**
+ * The ?next= of the current page, made safe. The sign-in check on the server only sees
+ * the path and query, so it sends /app/#/strategy/x to /login/?next=/app/ and the browser
+ * carries the #/strategy/x over to /login/ by itself (DEC-0038). That hash is put back on
+ * the end of next here, so signing in lands on the exact page. Only in-app routes (#/...)
+ * are carried, never a hash a sign-in provider may leave behind.
+ */
+export function nextFromQuery(search: string = window.location.search, at: Here = here(), hash: string = window.location.hash): string {
+  return safeNext(withHash(new URLSearchParams(search).get("next"), hash), at);
+}
+
+/** Puts an in-app hash (#/...) on the end of a next path that has none. */
+export function withHash(next: string | null, hash: string): string | null {
+  if (!next || !hash.startsWith("#/") || next.includes("#")) return next;
+  return next + hash;
 }
 
 /** Adds ?next= to an internal link (sign-up, reset), unless it is the default. */

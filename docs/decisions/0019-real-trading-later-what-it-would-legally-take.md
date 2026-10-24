@@ -51,7 +51,7 @@ Proposed, for the owner to accept or reject later. Nothing below is built.
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
-- [DEC-0038: Parity Trade, a full-screen trading app of its own](0038-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [DEC-0039: Parity Trade, a full-screen trading app of its own](0039-parity-trade-a-full-screen-trading-app-of-its-own.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 <!-- backlinks:end -->

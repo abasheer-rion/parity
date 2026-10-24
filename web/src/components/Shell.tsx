@@ -9,6 +9,7 @@ import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
 import { simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
+import { CopyLink } from "./CopyLink";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
@@ -32,7 +33,7 @@ const PRODUCT: NavItem[] = [
   },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
-  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0038).
+  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0039).
   { href: tradeUrl(), label: "Trade", icon: "graph", routes: ["trade"], external: "Opens Parity Trade in a new tab" },
   {
     href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],
@@ -284,6 +285,7 @@ export function Title({ children, label, actions }: { children: ReactNode; label
         aria-label={marked ? "Remove from bookmarks" : "Add to bookmarks"} title={marked ? "Remove from bookmarks" : "Add to bookmarks"}>
         <Icon name="bookmark" size={13} />
       </button>
+      <CopyLink />
       {actions && <div className="title-actions">{actions}</div>}
     </div>
   );

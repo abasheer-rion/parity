@@ -1,4 +1,4 @@
--- Parity Trade layouts (DEC-0038): each person's named workspace layouts (chart grid,
+-- Parity Trade layouts (DEC-0039): each person's named workspace layouts (chart grid,
 -- symbols, timeframes, indicators, panel sizes) so they follow the person between
 -- devices. Each person reads and writes only their own rows. Additive only: one new
 -- table, nothing else changes.

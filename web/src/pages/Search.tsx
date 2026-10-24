@@ -1,6 +1,7 @@
 // The always-on strategy search (DEC-0014): every variation the box has tried, each
 // with a short name, one line and the numbers that matter. Click a row for more.
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useHashFlag, useHashState } from "../lib/deeplink";
 import { Title } from "../components/Shell";
 import { date, num, pct } from "../lib/format";
 import { loadSearch, type SearchRow } from "../lib/data";
@@ -19,10 +20,11 @@ function luck(v: number | null): { label: string; tone: "good" | "accent" | "neu
 
 export function Search() {
   const { data: doc, error } = useResource("search", loadSearch);
-  const [q, setQ] = useState("");
-  const [asset, setAsset] = useState("");
-  const [family, setFamily] = useState("");
-  const [beatsOnly, setBeatsOnly] = useState(false);
+  // Filters live in the address (#/search?asset=fx&q=carry), so a link reopens them (DEC-0038).
+  const [q, setQ] = useHashState("q");
+  const [asset, setAsset] = useHashState("asset");
+  const [family, setFamily] = useHashState("family");
+  const [beatsOnly, setBeatsOnly] = useHashFlag("beats");
 
   const rows = useMemo(() => {
     if (!doc) return [];

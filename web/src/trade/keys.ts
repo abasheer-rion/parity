@@ -1,4 +1,4 @@
-// Parity Trade's keyboard (DEC-0038), following the common platform keys: Shift+B and
+// Parity Trade's keyboard (DEC-0039), following the common platform keys: Shift+B and
 // Shift+S buy and sell (Robinhood Legend, TradingView), Alt+T, Alt+H and Alt+F for
 // drawings, Alt+Enter to maximise a chart, Ctrl+K for search, typing to find a symbol.
 

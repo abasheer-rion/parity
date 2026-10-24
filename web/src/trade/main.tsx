@@ -1,4 +1,4 @@
-// Parity Trade's entry (web/trade/index.html, DEC-0038). Its own bundle: it loads none of
+// Parity Trade's entry (web/trade/index.html, DEC-0039). Its own bundle: it loads none of
 // the product or research app, only the shared tokens, the UI library and the trade code.
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

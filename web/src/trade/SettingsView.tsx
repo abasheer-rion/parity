@@ -1,4 +1,4 @@
-// Parity Trade settings (DEC-0038): defaults for new charts, time zone, density, keys,
+// Parity Trade settings (DEC-0039): defaults for new charts, time zone, density, keys,
 // layouts and the demo account, and the legal links. Kept in this browser; saved layouts
 // and the demo account live in the person's account.
 import { useState, type ReactNode } from "react";

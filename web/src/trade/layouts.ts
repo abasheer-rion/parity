@@ -1,4 +1,4 @@
-// Named Parity Trade layouts saved to the person's account (DEC-0038): the chart grid,
+// Named Parity Trade layouts saved to the person's account (DEC-0039): the chart grid,
 // its symbols and timeframes, indicators and panel sizes. The table is
 // supabase/migrations/20261027000000_trade_layouts.sql; each person sees only their own
 // rows, and the local preview keeps them in this browser (lib/userStore.ts).

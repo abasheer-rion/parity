@@ -1,4 +1,4 @@
-// Parity Trade (DEC-0038): the layout read back from storage or the database is checked
+// Parity Trade (DEC-0039): the layout read back from storage or the database is checked
 // field by field, and old product app links land on the right view.
 import { describe, expect, it } from "vitest";
 import { cleanLayout, freshLayout, SIDE_MAX, timeIn } from "../src/trade/state";
@@ -42,6 +42,7 @@ describe("old #/trade links", () => {
     ["#/trade/screener", "screener"],
     ["#/trade/demo", "portfolio"],
     ["#/trade/demo?s=cmd.WTI", "portfolio?s=cmd.WTI"],
+    ["#/trade?s=fx.EUR&tf=W&x=1", "chart?s=fx.EUR&tf=W"],
     ["#/trade/unknown", "chart"],
   ])("%s opens %s", (from, to) => {
     expect(tradeHashFor(from)).toBe(to);

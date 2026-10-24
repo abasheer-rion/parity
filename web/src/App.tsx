@@ -44,6 +44,8 @@ import { otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
+import { useRouteMeta } from "./lib/deeplink";
+import { nameById, nameOf } from "./lib/strategyMeta";
 
 applyTheme();
 
@@ -87,7 +89,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World (DEC-0020) and Parity Trade (DEC-0038) run full screen on their own sites:
+  // Sim World (DEC-0020) and Parity Trade (DEC-0039) run full screen on their own sites:
   // any link to #/sim or #/trade opens them in a new tab. Typing #/sim still lands on a
   // small card that links there; typing #/trade goes straight to Parity Trade.
   useEffect(() => {
@@ -114,10 +116,13 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   const q = new URLSearchParams(query).get("q") ?? undefined;
   const standalone = STANDALONE.includes(route);
   const dec = (s?: string) => (s ? decodeURIComponent(s) : undefined);
+  // The tab title and share tags follow the page (DEC-0038).
+  const run = route === "strategy" && arg && report ? report.runs.find((r) => r.strategy === dec(arg)) : undefined;
+  useRouteMeta(SPACE, route, dec(arg), route === "strategy" && arg ? (run ? nameOf(run) : nameById(dec(arg)!)) : undefined);
   // A page from the other side of Parity opens there instead (DEC-0015).
   const away = otherSide(route);
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
-  // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0038).
+  // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0039).
   useEffect(() => { if (route === "trade") window.location.replace(tradeUrl(tradeHashFor(hash))); }, [route, hash]);
   if (away || route === "trade") return null;
 
