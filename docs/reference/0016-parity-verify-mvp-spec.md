@@ -2,12 +2,12 @@
 id: REF-0016
 title: Parity Verify MVP spec
 type: reference
-status: draft
+status: current
 created: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-24
 authors: [ayan]
 tags: [method, ui]
-related: [INT-0003, DEC-0032, RES-0020, DEC-0015, DEC-0025, REF-0006]
+related: [INT-0003, DEC-0032, DEC-0036, RES-0020, DEC-0015, DEC-0025, REF-0006]
 ---
 
 # Parity Verify MVP spec
@@ -16,7 +16,7 @@ related: [INT-0003, DEC-0032, RES-0020, DEC-0015, DEC-0025, REF-0006]
 
 Verify is a new page in the product app. You give it a trading record, a description of a bot, or the name of a strategy. It tells you, in plain words, whether the record holds up: does it actually make money per trade, how bad can a single loss get, could the result be luck given how many things were tried, and are there signs it was tuned to the past or peeked at the future. If you want, it makes a badge and a link you can share, which say exactly what was checked and what was not.
 
-This page is a spec. Another helper builds it. Why we build it is in [INT-0003](../intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md) and the business around it is in [DEC-0032](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md).
+This page is a spec. It was built in October 2026; the choices it left open, and one assumption that did not hold (we hold one price a day, not daily highs and lows), are in [DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md). Why we build it is in [INT-0003](../intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md) and the business around it is in [DEC-0032](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md).
 
 ## Summary
 
@@ -226,4 +226,5 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
+- [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
 <!-- backlinks:end -->

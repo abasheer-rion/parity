@@ -52,6 +52,21 @@ function localResults(): Plugin {
 
 // The scenario simulator's file, written by `parity scenario export`. Dev only too.
 // PARITY_SCENARIOS_FILE points it at another file (a test fixture, say).
+// The public Verify badge pages live at /v/<id> (REF-0016). In production
+// functions/v/[id].ts serves the built /v/ page for all of them; this does the same in dev.
+function badgePages(): Plugin {
+  return {
+    name: "parity-badge-pages",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        if (req.url && /^\/v\/[A-Za-z0-9]{12}\/?(\?.*)?$/.test(req.url)) req.url = "/v/index.html";
+        next();
+      });
+    },
+  };
+}
+
 function localScenarios(): Plugin {
   const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(import.meta.dirname, "../engine/output/scenarios.json");
   // Sim World's map file, written by `parity world export` (DEC-0016).
@@ -110,7 +125,7 @@ function localScenarios(): Plugin {
 
 // Three builds share this file (see package.json "build"):
 //   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
-//                            /verify/ and the legal pages under /legal/, with their assets
+//                            /verify/, the Verify badge pages (/v/<id>) and the legal pages under /legal/, with their assets
 //                            in /assets/. Empties dist/.
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
@@ -119,13 +134,13 @@ function localScenarios(): Plugin {
 //                            must not load anything from /app/.
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
-  "index", "login/index", "signup/index", "reset/index", "verify/index",
+  "index", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
   "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), parityDocs(), paritySite(), parityLegal()],
+  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

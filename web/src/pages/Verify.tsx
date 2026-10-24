@@ -103,7 +103,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
   const p = file?.parsed;
   const ready = !!p && !!(p.trades?.length || p.equity?.length);
   const needCash = !!p?.equity && p.mapping.cashflow == null;
-  const triesN = Math.max(1, Math.floor(Number(tries) || 1));
+  const triesN = Math.min(1_000_000_000, Math.max(1, Math.floor(Number(tries) || 1)));
 
   const run = async () => {
     if (!p || !file) return;

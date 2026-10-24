@@ -15,7 +15,7 @@
         <h1>Privacy policy</h1>
         <div class="lg-meta">
           <span class="lg-draft">Draft for lawyer review</span>
-          <span>Last updated <time datetime="2026-10-22">22 October 2026</time></span>
+          <span>Last updated <time datetime="2026-10-24">24 October 2026</time></span>
         </div>
         <p class="lg-lead">We collect as little as we can. We do not sell your data, we do not show ads, and we do not use analytics or tracking.</p>
         <div class="lg-note"><strong>Draft.</strong> This policy has not been reviewed by a lawyer. Parts marked <span class="todo">like this</span> need a decision by the owner.</div>
@@ -25,6 +25,7 @@
           <ol>
             <li><a href="#who">Who we are</a></li>
             <li><a href="#collect">What we collect</a></li>
+            <li><a href="#verify">Parity Verify</a></li>
             <li><a href="#why">Why we use it</a></li>
             <li><a href="#keep">How long we keep it</a></li>
             <li><a href="#processors">Who processes it for us</a></li>
@@ -67,7 +68,20 @@
           <li>No identity documents.</li>
         </ul>
 
-        <h2 id="why">3. Why we use it</h2>
+        <h2 id="verify">3. Parity Verify</h2>
+        <p>Parity Verify checks a trading record: a file of trades or account values, a bot described in words, or one of our strategies.</p>
+        <ul>
+          <li><strong>Your file stays in your browser.</strong> It is read and checked on your device. We never receive the file or any trade in it.</li>
+          <li><strong>Personal columns are removed first.</strong> Before anything else reads the file, the page removes columns that look personal: account number, name, email, broker server, login and IP address. They are never stored or sent.</li>
+          <li><strong>Nothing is stored unless you ask.</strong> If you check a record and leave, nothing about it remains with us.</li>
+          <li><strong>A badge, if you publish one.</strong> You must be signed in. We store the name you give the record, the verdict, the numbers on the five cards, the date range, the number of trades, the kind of record and the number of tries you stated, the method version, and a fingerprint of the file (its SHA-256 hash). We do not store the file or its trades. The badge is linked to your account so that you can withdraw it, but its public page never shows who you are. Anyone with the link can see the page. You can publish up to 20 badges a day.</li>
+          <li><strong>Withdrawing a badge.</strong> You can withdraw a badge at any time. We then delete its name and numbers, and its page says "This record was withdrawn by its owner on" and the date. We keep that notice, and the dates, so that withdrawn records do not vanish without a trace. If you delete your account, your badges are withdrawn the same way.</li>
+          <li><strong>The research dataset, only if you tick the box.</strong> A separate box, never ticked for you, adds a result to Parity's research dataset of tested strategies. We copy the summary numbers, the kind of record, its asset classes and the number of tries, with dates rounded to the month. The row holds no name, no file fingerprint, no trades and no link to your account. We use the dataset for research and may sell it to other companies in aggregate. Because nothing links a row back to you, we cannot find it later, so adding a result cannot be undone. <span class="todo">owner: have a lawyer review this wording and the sale of aggregate data before launch</span></li>
+          <li><strong>Prices we fetch.</strong> To check fills, the page downloads a file of daily market prices from our own site. The request carries nothing from your file.</li>
+          <li><strong>Verify results stay on the product side.</strong> They are never used in Parity's own research tests.</li>
+        </ul>
+
+        <h2 id="why">4. Why we use it</h2>
         <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Each use and the legal reason for it under the GDPR and UK GDPR">
           <table>
             <caption>Each use and the legal reason for it under the GDPR and UK GDPR</caption>
@@ -78,12 +92,14 @@
               <tr><td>Keep accounts and the site secure, and stop abuse</td><td>Sign-in records, server logs</td><td>Our legitimate interest in a safe service</td></tr>
               <tr><td>Handle deletion and privacy requests</td><td>Email, account ID, your note</td><td>Legal obligation</td></tr>
               <tr><td>Remember your settings</td><td>Browser storage on your device</td><td>Strictly necessary for the feature you use</td></tr>
+              <tr><td>Show a Verify badge you chose to publish</td><td>The badge's name, numbers, dates and file fingerprint, linked to your account</td><td>Contract (you asked us to publish it)</td></tr>
+              <tr><td>Add a Verify result to the research dataset, if you tick the box</td><td>Summary numbers with no name or account link</td><td>Your consent; once added, the row cannot be linked back to you</td></tr>
             </tbody>
           </table>
         </div>
         <p>We do not use your data for advertising, profiling or automated decisions about you. If we ever want to use analytics, we will ask first, and it will stay off unless you agree.</p>
 
-        <h2 id="keep">4. How long we keep it</h2>
+        <h2 id="keep">5. How long we keep it</h2>
         <ul>
           <li><strong>Account data:</strong> while your account exists. After you ask us to delete it, we delete it within 30 days. Copies in our providers' backups expire on their schedule. <span class="todo">owner: confirm the Supabase backup period for this plan</span></li>
           <li><strong>Sign-in records:</strong> as long as Supabase keeps auth logs for our plan, then they are deleted.</li>
@@ -91,9 +107,11 @@
           <li><strong>Emails:</strong> Resend keeps delivery records for a limited time under its own policy.</li>
           <li><strong>The sign-in cookie:</strong> up to 30 days, or until you sign out.</li>
           <li><strong>Browser storage:</strong> until you clear it in your browser.</li>
+          <li><strong>Verify badges:</strong> until you withdraw them. A withdrawn badge keeps only its link and the dates it was published and withdrawn, so its page can say it was withdrawn.</li>
+          <li><strong>Verify dataset rows:</strong> kept. They hold no name and no link to you.</li>
         </ul>
 
-        <h2 id="processors">5. Who processes it for us</h2>
+        <h2 id="processors">6. Who processes it for us</h2>
         <p>We use these providers ("subprocessors"). Each only gets what it needs to do its job.</p>
         <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Subprocessors">
           <table>
@@ -110,10 +128,10 @@
         </div>
         <p>We may also share data if the law requires it, or to protect people from harm. We never sell personal data.</p>
 
-        <h2 id="transfers">6. Where it is stored</h2>
+        <h2 id="transfers">7. Where it is stored</h2>
         <p>Our providers are based in the United States and may process data there and in other countries. Where the GDPR or UK GDPR applies, we rely on the safeguards in their data processing terms, such as the standard contractual clauses. <span class="todo">owner and lawyer: confirm the data processing agreements and the Supabase region</span></p>
 
-        <h2 id="rights">7. Your rights</h2>
+        <h2 id="rights">8. Your rights</h2>
         <p>If you are in the European Economic Area or the United Kingdom, you have the right to:</p>
         <ul>
           <li>get a copy of your personal data;</li>
@@ -126,7 +144,7 @@
         </ul>
         <p>You can change your email and password, and ask for deletion, in Settings, Account. For anything else, contact us (below). We answer within one month. We may need to confirm it is really you first.</p>
 
-        <h2 id="california">8. California residents</h2>
+        <h2 id="california">9. California residents</h2>
         <p>Under the California Consumer Privacy Act, as amended by the CPRA, you have the right to:</p>
         <ul>
           <li>know what personal information we collect, use and disclose (this policy lists it);</li>
@@ -138,16 +156,16 @@
         </ul>
         <p>In the last 12 months we collected these categories: identifiers (email, IP address), internet activity (server logs), and account login details. We collected them from you and your browser, for the purposes in section 3. You, or an agent you authorise, can make a request by contacting us. We answer within 45 days.</p>
 
-        <h2 id="security">9. Security</h2>
+        <h2 id="security">10. Security</h2>
         <p>The site uses HTTPS everywhere. Passwords are hashed by Supabase. You can turn on two-step sign-in with an authenticator app. The database only lets each person see what they are allowed to see. No system is perfectly secure, so please use a strong password that you do not use anywhere else. If we learn of a breach that affects you, we will tell you as the law requires.</p>
 
-        <h2 id="children">10. Children</h2>
+        <h2 id="children">11. Children</h2>
         <p>Parity is not for children. You must be 18 or older to make an account. If you think a child has given us personal data, contact us and we will delete it.</p>
 
-        <h2 id="changes">11. Changes</h2>
+        <h2 id="changes">12. Changes</h2>
         <p>We will update the date at the top when this policy changes. If a change matters, we will tell signed-in people by email or on the site before it takes effect.</p>
 
-        <h2 id="contact">12. Contact</h2>
+        <h2 id="contact">13. Contact</h2>
         <p>Email <a href="mailto:contact@paritytrading.ai">contact@paritytrading.ai</a> with any question or request about your data. You can also use "Delete my account" in Settings, Account.</p>
       </article>
     </main>
