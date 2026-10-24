@@ -709,7 +709,26 @@ def _series_label(key: str) -> str:
         return f"{tail} policy rate"
     if head == "curve":
         return f"{tail.replace('UST_', 'US ').replace('EA_AAA_', 'euro ')} yield"
-    return SHORT.get(key) or tail.replace("_", " ")
+    return SERIES_LABEL.get(key) or SHORT.get(key) or tail.replace("_", " ")
+
+
+SERIES_LABEL = {"infl.BE5Y": "5y breakeven", "infl.BE10Y": "10y breakeven",
+                "infl.FWD5Y5Y": "5y5y inflation", "usd.BROAD": "dollar index",
+                "usd.AFE": "dollar vs rich", "usd.EME": "dollar vs EM",
+                "macro.WEI": "economy index", "macro.CLAIMS": "jobless claims",
+                "risk.STLFSI": "stress index", "risk.NFCI": "financial conditions",
+                "money.EFFR": "fed funds", "money.ESTR": "euro overnight rate",
+                "money.CP3M_FIN": "finance paper rate", "money.CP3M_NONFIN": "company paper rate",
+                "bond.TIPS5Y": "5y real yield", "bond.TIPS10Y": "10y real yield",
+                "bond.UST10Y": "10y yield", "bond.UST2Y": "2y yield", "bond.UST30Y": "30y yield",
+                "credit.HQM10Y": "corporate yield", "spread.UST_2S10S": "2s10s curve",
+                "spread.UST_3M10Y": "3m10y curve", "rate.TBILL3M": "T-bill",
+                "rate.USD": "US 3m rate", "cmd.HH_GAS": "gas price",
+                "eq.SPX": "S&P 500", "pm.LOANS_NDFI": "bank loans to private credit",
+                "pm.LOANS_CRE": "property loans", "pm.LOANS_CI": "business loans",
+                "pm.SLOOS_CI": "loan tightening", "pm.SLOOS_CRE": "property loan tightening",
+                "pm.DELINQ_CRE": "property loan arrears", "pm.CRE_PRICE": "property prices",
+                "pm.CRE_PRICE_YOY": "property price growth", "pm.HOUSE_FHFA": "house prices"}
 
 
 def _gate_label(g: dict) -> tuple[str, str]:
