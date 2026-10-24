@@ -652,6 +652,7 @@ The dashboard.
 - [DEC-0030: Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0031: Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md)
+- [DEC-0034: Demo accounts, paper trading on delayed data](decisions/0034-demo-accounts-paper-trading-on-delayed-data.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
