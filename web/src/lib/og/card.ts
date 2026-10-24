@@ -91,7 +91,7 @@ export function cardSvg(card: OgCard, logoSvg: string, foot = HOST): string {
   const titleTop = top + 82;
   const subTop = titleTop + (title.length - 1) * 78 + 58;
   const body = [
-    `<text x="${PAD}" y="${top}" font-size="22" font-weight="600" letter-spacing="4" fill="#85a8ff">${esc(card.kicker.toUpperCase())}</text>`,
+    `<text x="${PAD}" y="${top}" font-size="24" font-weight="600" fill="#85a8ff">${esc(card.kicker)}</text>`,
     lines(title, PAD, titleTop, 78, `font-size="66" font-weight="600" letter-spacing="-1"`),
     lines(sub, PAD, subTop, 42, `font-size="30" fill="#a3a8b9"`),
   ].join("\n");
@@ -119,7 +119,7 @@ export function badgeCardSvg(b: BadgeCard, logoSvg: string): string {
   const detail = wrap(b.detail, 28, TEXT_W, 1);
   const note = b.note ? wrap(b.note, 22, TEXT_W, 2) : [];
   const body = [
-    `<text x="${PAD}" y="206" font-size="22" font-weight="600" letter-spacing="4" fill="#85a8ff">PARITY VERIFY</text>`,
+    `<text x="${PAD}" y="206" font-size="24" font-weight="600" fill="#85a8ff">Parity Verify</text>`,
     lines(verdict, PAD, 316, 0, `font-size="104" font-weight="600" letter-spacing="-2" fill="${b.color}"`),
     `<text x="${PAD}" y="382" font-size="44" font-weight="600">${esc(b.survives)}</text>`,
     lines(detail, PAD, 432, 0, `font-size="28" fill="#a3a8b9"`),

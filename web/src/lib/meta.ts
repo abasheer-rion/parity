@@ -47,18 +47,18 @@ export interface OgCard { kicker: string; title: string; sub: string }
 
 /** The words on each static share image. Keys are file names under /og/. */
 export const OG_CARDS: Record<string, OgCard> = {
-  default: { kicker: "Parity", title: "Trading strategies, tested honestly", sub: "Every idea tested against the S&P 500, failures included." },
-  learn: { kicker: "Parity Learn", title: "Learn the words of trading", sub: "Hundreds of terms, each explained simply, by analogy and precisely." },
+  default: { kicker: "Parity", title: "Check trading records and strategies", sub: "Trade logs checked for luck. Strategies backtested against the S&P 500, with every result shown." },
+  learn: { kicker: "Parity Learn", title: "Learn the words of trading", sub: "Over 300 trading terms, each with a simple explanation, an everyday comparison and a precise definition." },
   ideas: { kicker: "Parity Ideas", title: "Trading ideas, with the evidence", sub: "Where each idea came from, what the evidence says and why it might fail." },
-  notes: { kicker: "Parity Notes", title: "Research notes in plain words", sub: "How Parity decides, what the research found and how the numbers work." },
-  verify: { kicker: "Parity Verify", title: "Does this trading record hold up?", sub: "See if it makes money per trade, how bad one loss can get, and whether it could be luck." },
-  app: { kicker: "Parity", title: "Strategies you can follow, tested first", sub: "Discover strategies, compare them with the S&P 500 and see every result." },
-  research: { kicker: "Parity Research", title: "Where every result is made", sub: "The docs, the ledger of official runs, the strategy search and the data behind them." },
-  sim: { kicker: "Parity Terminal", title: "Markets, history and what-ifs", sub: "Macro, currencies, commodities, crisis replays and simulated paths. History, not a forecast." },
+  notes: { kicker: "Parity Notes", title: "Parity research notes", sub: "How Parity decides, what the research found and how the numbers work." },
+  verify: { kicker: "Parity Verify", title: "Check a trading record", sub: "Profit per trade, the worst loss and whether the result could be luck." },
+  app: { kicker: "Parity", title: "Trading strategies tested against the S&P 500", sub: "Discover strategies, compare them with the S&P 500 and see every result." },
+  research: { kicker: "Parity Research", title: "Research docs, official runs and data", sub: "The docs, the ledger of official runs, the strategy search and the data behind them." },
+  sim: { kicker: "Parity Terminal", title: "Market data, replays and simulations", sub: "Macro, currencies, commodities, crisis replays and simulated paths, all from past data." },
   trade: { kicker: "Parity Trade", title: "Charts, watchlists and paper trading", sub: "Charts on delayed data, a screener and demo accounts. No real money." },
   strategy: { kicker: "Parity strategy", title: "A strategy, tested against the S&P 500", sub: "How it did, where it fails and whether the result could be luck." },
-  login: { kicker: "Parity", title: "Log in to Parity", sub: "Trading strategies, tested honestly." },
-  legal: { kicker: "Parity legal", title: "The rules, in plain words", sub: "Privacy, terms, cookies, accessibility and risk." },
+  login: { kicker: "Parity", title: "Log in to Parity", sub: "Check trading records and follow tested strategies." },
+  legal: { kicker: "Parity legal", title: "Legal", sub: "Privacy, terms, cookies, accessibility and risk." },
   badge: { kicker: "Parity Verify", title: "A checked trading record", sub: "What Parity checked in the file, and what it could not." },
 };
 
@@ -108,12 +108,12 @@ export const PRIVATE = "noindex, nofollow";
 /** One entry per built HTML file, keyed by its path under web/. */
 export const PAGES: Record<string, PageMeta> = {
   "index.html": {
-    title: "Parity: trading strategies, tested honestly",
-    description: "Discover and follow trading strategies, each tested honestly against the S&P 500, with an open research side behind every result.",
+    title: "Parity: check trading records and strategies",
+    description: "Check a trade log for profit per trade, worst losses and luck, and see trading strategies backtested against the S&P 500 after costs.",
     path: "/", image: "default", type: "website", ld: [orgLd(), websiteLd(), verifyAppLd()],
   },
   "login/index.html": { title: "Log in · Parity", description: "Log in to Parity to follow strategies tested against the S&P 500.", path: "/login/", image: "login" },
-  "signup/index.html": { title: "Sign up · Parity", description: "Create a free Parity account: trading strategies, tested honestly against the S&P 500.", path: "/signup/", image: "login" },
+  "signup/index.html": { title: "Sign up · Parity", description: "Create a free Parity account to check trading records and follow strategies tested against the S&P 500.", path: "/signup/", image: "login" },
   "reset/index.html": { title: "Reset password · Parity", description: "Choose a new password for your Parity account.", path: "/reset/", image: "login" },
   "verify/index.html": { title: "Confirm · Parity", description: "Confirming your email address for Parity.", path: "/verify/", image: "login" },
   // Every /v/<id> serves this page; functions/v/[id].ts swaps in that badge's own tags.
@@ -207,7 +207,7 @@ const R = (title: string, description: string, image?: string): RouteMeta => ({ 
 /** Titles and descriptions for the hash routes of /app/ and /research/ (src/lib/space.ts). */
 export const ROUTES_META: Record<string, RouteMeta> = {
   start: R("Start here", "What Parity is, how to read a result and where to go first."),
-  how: R("How it works", "How Parity tests a trading idea, from the data to the eleven tests."),
+  how: R("How it works", "How Parity tests a trading idea, from the data to the 11 tests."),
   learn: R("Learn", OG_CARDS.learn.sub, "learn"),
   settings: R("Settings", "Your Parity account, preferences and security."),
   ui: R("UI library", "The parts every Parity page is built from."),
@@ -216,26 +216,26 @@ export const ROUTES_META: Record<string, RouteMeta> = {
   watchlist: R("Watchlist", "The strategies you follow."),
   compare: R("Compare", "Strategies side by side, against the S&P 500."),
   lab: R("Lab", "Try a strategy with your own settings."),
-  scenarios: R("Scenarios", "What happened to markets after events like this one. History, not a forecast."),
+  scenarios: R("Scenarios", "What markets did after past events like the one you describe."),
   news: R("News", "Market news, ranked by how much it moved prices."),
   markets: R("Markets", "Crypto, ETFs, perpetuals and new filings, on delayed data."),
   trade: R("Trade", OG_CARDS.trade.sub, "trade"),
-  academy: R("Academy", "Short courses with moving pictures: how trading results fool people."),
+  academy: R("Academy", "Short animated courses on reading backtests, luck, markets, rates, crypto and news."),
   verify: R("Verify", OG_CARDS.verify.sub, "verify"),
   docs: R("Docs", "Every decision, test and reading note behind Parity.", "research"),
   doc: R("Doc", "A Parity research document.", "notes"),
   refs: R("References", "Every paper, book and source Parity cites.", "research"),
-  search: R("Strategy search", "Every variation the always-on search has tried, with the numbers that matter.", "research"),
+  search: R("Strategy search", "Every variation the strategy search has tried, with its luck check, Sharpe ratio and worst fall.", "research"),
   ledger: R("Ledger", "Official runs, sealed before the results were known.", "research"),
   catalog: R("Catalog", "The library of trading ideas, each with a report.", "ideas"),
   algo: R("Idea", "A trading idea from the catalog, with the evidence.", "ideas"),
   sim: R("Sim World", OG_CARDS.sim.sub, "sim"),
   signals: R("Signals", "How much information each signal carries.", "research"),
-  explore: R("Explore", "Look through the latest research run.", "research"),
+  explore: R("Explore", "Chart the raw price series behind the strategies.", "research"),
   data: R("Data", "The data behind the latest run.", "research"),
   sources: R("Data sources", "Where every number comes from.", "research"),
-  edges: R("Edge Lab", "How to look for an edge without fooling yourself.", "research"),
-  private: R("Private markets", "Private markets in plain words, with free stand-ins.", "research"),
+  edges: R("Edge Lab", "Seven checks for a backtest, each with a mistake from our own research.", "research"),
+  private: R("Private markets", "Property index smoothing, Form D counts, BDC loan marks and credit data from free sources.", "research"),
 };
 
 /** Parity Terminal's workspaces and its old Sim World tabs (src/terminal/layout.ts, functions.ts). */
