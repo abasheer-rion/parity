@@ -518,6 +518,7 @@ How the team works together.
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 - [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
 - [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
+- [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
 
 ## strategy
 
