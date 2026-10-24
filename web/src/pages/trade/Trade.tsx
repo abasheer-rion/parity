@@ -3,9 +3,10 @@
 // future decision for the owner (DEC-0019).
 import { useEffect } from "react";
 import { Title } from "../../components/Shell";
-import { Tabs } from "../../ui";
+import { Badge, Tabs } from "../../ui";
 import { SkeletonTable } from "../../ui/skeleton";
 import { ChartView } from "./ChartView";
+import { DemoView } from "./DemoView";
 import { NotificationsBell } from "./Notifications";
 import { ScreenerView } from "./ScreenerView";
 import { WatchlistsView } from "./WatchlistsView";
@@ -14,7 +15,7 @@ import { checkAlerts } from "./trackers";
 import "../markets/markets.css";
 import "./trade.css";
 
-const VIEWS = [["", "Chart"], ["watchlists", "Watchlists"], ["screener", "Screener"]] as const;
+const VIEWS = [["", "Chart"], ["watchlists", "Watchlists"], ["screener", "Screener"], ["demo", "Demo account"]] as const;
 type View = (typeof VIEWS)[number][0];
 
 export function Trade({ view: raw }: { view?: string }) {
@@ -28,15 +29,16 @@ export function Trade({ view: raw }: { view?: string }) {
   return (
     <div className="tr">
       <div className="page-head tr-head">
-        <Title label="Trade">Trade</Title>
-        <p>Charts, watchlists, alerts and a screener on delayed, end-of-day prices. For learning and testing ideas, not live trading.</p>
+        <Title label="Trade" actions={<Badge tone="accent">Demo money only</Badge>}>Trade</Title>
+        <p>Charts, watchlists, alerts, a screener and a demo account on delayed, end-of-day prices. For learning and testing ideas, not live trading.</p>
       </div>
       <div className="mk-tabs tr-tabs">
         <Tabs label="Trade view" value={view} onChange={go} tabs={VIEWS.map(([v, l]) => [v, l] as [View, string])} />
         <NotificationsBell list={list} />
       </div>
       {view === "" && <ChartView />}
-      {view !== "" && (noData ?? (list.length === 0 ? <SkeletonTable rows={6} cols={6} label="Loading instruments" /> : view === "watchlists" ? <WatchlistsView list={list} /> : <ScreenerView list={list} />))}
+      {view !== "" && view !== "demo" && (noData ?? (list.length === 0 ? <SkeletonTable rows={6} cols={6} label="Loading instruments" /> : view === "watchlists" ? <WatchlistsView list={list} /> : <ScreenerView list={list} />))}
+      {view === "demo" && <DemoView />}
     </div>
   );
 }
