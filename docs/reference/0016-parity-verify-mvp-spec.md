@@ -224,5 +224,6 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 
 - [INT-0003: Parity Verify, the lie detector for trading strategies and bots](../intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md)
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
+- [DEC-0036: Verify runs its checks in the browser and holds daily prices only](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 <!-- backlinks:end -->

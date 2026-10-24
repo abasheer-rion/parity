@@ -17,9 +17,9 @@ name: Deploy dashboard
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/export_verify_prices.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -91,6 +91,9 @@ jobs:
         continue-on-error: true  # the terminal explains itself when its files are missing
         # After the markets step so CoinGecko crypto comes from dist/data/markets/crypto.json.
         run: parity terminal export --out dist/data --markets dist/data
+      - name: Verify's daily prices for its fill checks (REF-0016), from the terminal export
+        continue-on-error: true  # Verify says "cannot be checked" when this file is missing
+        run: python3 ../scripts/export_verify_prices.py dist
       - name: Front page market strip (recent closes into stats.json, DEC-0021)
         continue-on-error: true  # the front page labels the strip as missing when this is absent
         run: python3 ../scripts/export_front_strip.py dist

@@ -21,6 +21,7 @@ const GLOSSARY: NavItem = { href: "#/learn", label: "Glossary", icon: "cap", rou
 
 const PRODUCT: NavItem[] = [
   { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
+  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"] },
   {
     href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy", "compare", "lab"],
     children: [

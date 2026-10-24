@@ -48,6 +48,9 @@
 .ac-svg { display: block; width: 100%; height: auto; }
 .ac-visual figcaption { padding: 10px 14px 14px; }
 .ac-caption { margin: 0 0 10px; min-height: 3.2em; }
+.ac-captions { display: grid; }
+.ac-captions > .ac-caption { grid-area: 1 / 1; visibility: hidden; }
+.ac-captions > .ac-caption[data-on] { visibility: visible; }
 .ac-frame-n { display: inline-block; font-size: 12px; color: var(--text-2); border: 1px solid var(--border); border-radius: 999px; padding: 0 8px; margin-right: 6px; font-variant-numeric: tabular-nums; }
 .ac-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ac-btn { min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text); font: inherit; font-size: var(--fs-sm, 13px); cursor: pointer; }
@@ -55,6 +58,9 @@
 .ac-btn:disabled, .ac-btn[aria-disabled="true"] { opacity: .45; cursor: default; }
 .ac-btn-main { border-color: var(--accent); background: var(--accent-soft); }
 .ac-btn-quiet { margin-left: auto; color: var(--text-2); }
+.ac-btn-play { display: inline-grid; place-items: center; }
+.ac-btn-play > span { grid-area: 1 / 1; visibility: hidden; }
+.ac-btn-play > span[data-on] { visibility: visible; }
 .ac-btn:focus-visible, .ac-go:focus-visible, .ac-link-btn:focus-visible { outline: 2px solid var(--link, var(--accent)); outline-offset: 2px; }
 .ac-dots { display: inline-flex; gap: 5px; padding: 0 2px; }
 .ac-dots span { width: 7px; height: 7px; border-radius: 999px; background: var(--border); }
