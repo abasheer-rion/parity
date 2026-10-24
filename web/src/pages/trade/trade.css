@@ -32,7 +32,8 @@
 .tr-notes-list li > span { grid-column: 1; }
 .tr-notes-list li > .ui-btn { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
 
-/* Watchlists and screener. */
+/* Watchlists and screener. A positioned table box keeps hidden header labels inside its scroll area. */
+.tr .table-wrap { position: relative; }
 .tr-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
 .tr-bar .ui-select select { max-width: 260px; }
 .tr-bar .pc-spacer { flex: 1 1 auto; }
@@ -42,13 +43,15 @@
 .tr-row-act { display: inline-flex; gap: 4px; }
 .tr-status { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
 .tr-form { display: flex; flex-direction: column; gap: var(--space-3); }
-.tr-form .tr-pick, .tr-form .tr-pick select { width: 100%; }
+.tr-form .ui-select, .tr-form .ui-select select { width: 100%; }
 .tr-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-3); }
 .tr-now { min-height: 2.6em; margin: 0; }
 .tr-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-3); align-items: end; }
 .tr-range { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .tr-range legend { padding: 0; margin-bottom: 4px; }
 .tr-range .ui-input, .tr-filters .ui-input { width: 100%; min-width: 0; }
+.tr-filters .ui-select, .tr-filters .ui-select select { width: 100%; }
+.tr-filters .ui-select select { height: 40px; }
 .tr-progress { height: 1.4em; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-2); }
 @media (max-width: 640px) {
   .tr-bar .pc-spacer { display: none; }

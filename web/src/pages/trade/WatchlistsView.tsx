@@ -11,7 +11,7 @@ import { CLASS_LABEL, digitsFor, loadBars, priceText, type Instrument } from "..
 import { useRows } from "../../lib/userStore";
 import type { Point } from "../../lib/types";
 import { InstrumentSelect, readPref, writePref } from "./shared";
-import { alertsTable, alertText, alertValueText, byPosition, seedDefaultList, watchlistsTable, type AlertRow } from "./trackers";
+import { alertsTable, alertText, alertValueText, byPosition, checkAlerts, seedDefaultList, watchlistsTable, type AlertRow } from "./trackers";
 
 const dateText = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 const sparkPoints = (s: Instrument): Point[] => s.spark.flatMap((v, i) => (v == null || !Number.isFinite(v) ? [] : [[String(i), v] as Point]));
@@ -107,7 +107,7 @@ export function WatchlistsView({ list }: { list: Instrument[] }) {
 
       <Section title="Alerts" actions={<Button size="sm" icon="bell" onClick={() => setAlertFor(rows[0]?.key ?? list[0]?.key ?? "")} disabled={!list.length}>New alert</Button>}>
         <AlertsTable rows={alerts.rows} list={list} loading={alerts.loading} expect={pref.alerts} />
-        <p className="muted small">Alerts are checked against the latest delayed daily close when you open Trade or this tab. Each one fires once, shows a message and goes under the bell at the top. Nothing is emailed and nothing is bought or sold.</p>
+        <p className="muted small">Alerts are checked against the latest delayed daily close when you set one, open Trade or open this tab. Each one fires once, shows a message and goes under the bell at the top. Nothing is emailed and nothing is bought or sold.</p>
       </Section>
 
       <NameDialog open={naming != null} title={naming === "rename" ? "Rename list" : "New list"} initial={naming === "rename" ? active?.name ?? "" : ""}
@@ -183,7 +183,7 @@ function AlertDialog({ symbol, list, onClose }: { symbol: string | null; list: I
   const save = () => {
     if (problem || !inst) return;
     alertsTable.insert({ symbol: inst.key, kind, value: rule.value, param: rule.param, active: true, triggered_at: null, triggered_value: null, triggered_bar: null })
-      .then(() => { toast(`Alert set on ${inst.short || inst.label}.`, { tone: "good" }); onClose(); }, (e: Error) => toast(e.message, { tone: "bad" }));
+      .then(() => { toast(`Alert set on ${inst.short || inst.label}.`, { tone: "good" }); onClose(); void checkAlerts(list); }, (e: Error) => toast(e.message, { tone: "bad" }));
   };
   return (
     <Dialog open={symbol != null} onClose={onClose} title="New alert" width={480}
