@@ -17,3 +17,45 @@
 @media (max-width: 640px) {
   .tr-pick select { width: 200px; }
 }
+
+/* Tabs row with the notifications bell (DEC-0033). */
+.tr-tabs { display: flex; align-items: center; gap: var(--space-3); overflow: visible; }
+.tr-tabs .ui-tabs { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.tr-bell { position: relative; width: 32px; height: 32px; flex: none; }
+.tr-bell-dot { position: absolute; top: -3px; right: -3px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent); color: var(--on-accent, #fff); font-size: 10px; line-height: 16px; font-weight: var(--fw-medium); text-align: center; visibility: hidden; }
+.tr-bell-dot[data-on] { visibility: visible; }
+.tr-notes { display: flex; flex-direction: column; gap: var(--space-2); }
+.tr-notes-head { display: flex; flex-direction: column; gap: 2px; }
+.tr-notes-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-height: 360px; overflow-y: auto; }
+.tr-notes-list li { display: grid; grid-template-columns: 1fr auto; gap: 2px var(--space-2); padding: var(--space-2) 0; border-top: 1px solid var(--border); font-size: var(--fs-sm); }
+.tr-notes-list li > a { grid-column: 1; color: var(--text); }
+.tr-notes-list li > span { grid-column: 1; }
+.tr-notes-list li > .ui-btn { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+
+/* Watchlists and screener. A positioned table box keeps hidden header labels inside its scroll area. */
+.tr .table-wrap { position: relative; }
+.tr-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.tr-bar .ui-select select { max-width: 260px; }
+.tr-bar .pc-spacer { flex: 1 1 auto; }
+.tr-name { display: inline-flex; flex-direction: column; line-height: 1.25; color: var(--text); max-width: 240px; }
+.tr-name .small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-asof { display: inline-flex; flex-direction: column; line-height: 1.25; white-space: nowrap; }
+.tr-row-act { display: inline-flex; gap: 4px; }
+.tr-status { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.tr-form { display: flex; flex-direction: column; gap: var(--space-3); }
+.tr-form .ui-select, .tr-form .ui-select select { width: 100%; }
+.tr-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-3); }
+.tr-now { min-height: 2.6em; margin: 0; }
+.tr-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-3); align-items: end; }
+.tr-range { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.tr-range legend { padding: 0; margin-bottom: 4px; }
+.tr-range .ui-input, .tr-filters .ui-input { width: 100%; min-width: 0; }
+.tr-filters .ui-select, .tr-filters .ui-select select { width: 100%; }
+.tr-filters .ui-select select { height: 40px; }
+.tr-progress { height: 1.4em; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-2); }
+@media (max-width: 640px) {
+  .tr-bar .pc-spacer { display: none; }
+  .tr-bar .tr-pick select { width: 100%; }
+  .tr-name { max-width: 160px; }
+  .tr-filters { grid-template-columns: 1fr 1fr; }
+}

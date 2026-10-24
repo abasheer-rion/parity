@@ -24,6 +24,7 @@ const paths: Record<string, ReactNode> = {
   chevronRight: <path d="M6 3.5 10.5 8 6 12.5" />,
   sidebar: <><rect x="2.5" y="3" width="11" height="10" rx="1.5" /><path d="M6.5 3v10" /></>,
   chevronDown: <path d="M4 6l4 4 4-4" />,
+  chevronUp: <path d="M4 10l4-4 4 4" />,
   menu: <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" />,
   arrowUpRight: <path d="M5 11 11 5M6 5h5v5" />,
   arrowDownRight: <path d="M5 5l6 6M11 6v5H6" />,
@@ -50,6 +51,7 @@ const paths: Record<string, ReactNode> = {
   play: <path d="M5 3.2v9.6a.4.4 0 0 0 .6.35l7.6-4.8a.4.4 0 0 0 0-.7L5.6 2.85a.4.4 0 0 0-.6.35z" />,
   pause: <path d="M5.5 3.5v9M10.5 3.5v9" />,
   restart: <path d="M3 3.5v3.5h3.5M3.4 7A5 5 0 1 1 4.6 11.3" />,
+  bell: <path d="M4 11.5V7a4 4 0 0 1 8 0v4.5l1 1H3zM6.8 14a1.3 1.3 0 0 0 2.4 0" />,
 };
 
 export function Icon({ name, size = 16, className }: { name: keyof typeof paths | string; size?: number; className?: string }) {

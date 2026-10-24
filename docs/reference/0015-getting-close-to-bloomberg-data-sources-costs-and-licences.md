@@ -182,6 +182,7 @@ The best single paid plan under 100 USD a month for our mix is either Massive Cu
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](../decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0033: Trade trackers, watchlists, alerts and a screener](../decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)

@@ -51,4 +51,5 @@ Worst layout shift across 80 page views (40 pages at 1440 and 390 pixels), measu
 ## Referenced by
 
 - [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0033: Trade trackers, watchlists, alerts and a screener](0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 <!-- backlinks:end -->

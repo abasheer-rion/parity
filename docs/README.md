@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 32 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 33 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
@@ -82,6 +82,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0031 | [Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0032 | [Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md) | proposed | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [process](TAGS.md#process) |
+| DEC-0033 | [Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
