@@ -83,17 +83,18 @@ def _every(rebalance: str) -> str:
 # Each sampler returns a spec: a plain dict that fully describes one strategy. The same
 # spec always builds the same strategy, and its hash is its id.
 
-def _trend(r: random.Random) -> dict:
+def _trend(r: random.Random, ctx: Context | None = None) -> dict:
     # Copper is a monthly average, not tradable, so it is a signal only, never held.
     u = r.choice(list(UNIVERSES) + ["mkt", "bond", "oil"] + list(MORE_UNIVERSES))
-    lookback = r.choice(LOOKBACKS[2:])
-    return {"kind": "trend", "universe": u, "lookback": lookback,
+    lookback = r.choice(_lookbacks(ctx)[2:])
+    spec = {"kind": "trend", "universe": u, "lookback": lookback,
             "skip": r.choice([0, 0, 21]) if lookback >= 126 else 0,
             "rebalance": r.choice(["W", "M"]),
             "long_only": u in ("ind", "mkt", "bond", "bonds", "macro") or r.random() < 0.2}
+    return _subset(r, ctx, spec)
 
 
-def _rank(r: random.Random) -> dict:
+def _rank(r: random.Random, ctx: Context | None = None) -> dict:
     u = r.choice(list(ALL_UNIVERSES))
     signals = ["momentum", "reversal", "low_vol", "near_high"]
     if u == "g10":
@@ -101,15 +102,16 @@ def _rank(r: random.Random) -> dict:
     if u == "ind":
         signals += ["same_month"]
     sig = r.choice(signals)
-    lookback = r.choice([5, 8, 10, 12]) if sig == "same_month" else r.choice(LOOKBACKS)
+    lookback = r.choice([5, 8, 10, 12]) if sig == "same_month" else r.choice(_lookbacks(ctx))
     n = len(ALL_UNIVERSES[u][1])
     ks = [1, 2, 3, 4, 5] if n >= 12 else [1, 2, 3, 4] if n >= 8 else [1, 2] if n >= 4 else [1]
-    return {"kind": "rank", "universe": u, "rank_on": sig, "lookback": lookback,
+    spec = {"kind": "rank", "universe": u, "rank_on": sig, "lookback": lookback,
             "skip": 0 if lookback < 126 or sig != "momentum" else r.choice([0, 21]),
             "k": r.choice(ks),
             "long_short": u in ("g10", "fx21", "fac", "xg10", "xwide", "fac7")
             or r.random() < 0.3,
             "rebalance": r.choice(["W", "M"])}
+    return _subset(r, ctx, spec)
 
 
 TIMING_RULES = ["above_average", "absolute_momentum", "vix_below_average", "vix_below",
@@ -120,20 +122,27 @@ WIDER_RULES = ["stress_below", "conditions_easing", "claims_calm", "spx_not_crow
 TIMING_RULES += WIDER_RULES
 
 
-def _timing(r: random.Random) -> dict:
+def _timing(r: random.Random, ctx: Context | None = None) -> dict:
     rule = r.choice(TIMING_RULES)
-    p = {"above_average": r.choice([30, 50, 75, 100, 125, 150, 175, 200, 225, 250, 300]),
-         "absolute_momentum": r.choice([21, 42, 63, 126, 189, 252, 378]),
-         "vix_below_average": r.choice([10, 21, 42, 63, 126, 252]),
-         "vix_below": r.choice([15, 18, 20, 22, 25, 28, 30, 35, 40, 45]),
-         "curve_positive": r.choice([-1.0, -0.5, -0.25, 0.0, 0.25, 0.5, 1.0, 1.5]),
-         "rates_falling": r.choice([21, 63, 126, 189, 252]),
-         "copper_up": r.choice([63, 126, 189, 252]),
-         "oil_calm": r.choice([0.2, 0.3, 0.4, 0.5, 0.65, 0.8]),
-         "stress_below": r.choice([-0.5, 0.0, 0.5, 1.0, 1.5]),
-         "conditions_easing": r.choice([21, 65, 130, 260]),
-         "claims_calm": r.choice([0.1, 0.15, 0.2, 0.3, 0.4]),
-         "spx_not_crowded": r.choice([0.5, 1.0, 1.5, 2.0]),
+    g = _grid_for(ctx)
+    p = {"above_average": r.choice(g([30, 50, 75, 100, 125, 150, 175, 200, 225, 250, 300],
+                                     geo=True, lo=10, hi=756)),
+         "absolute_momentum": r.choice(g([21, 42, 63, 126, 189, 252, 378], geo=True, lo=5,
+                                         hi=756)),
+         "vix_below_average": r.choice(g([10, 21, 42, 63, 126, 252], geo=True, lo=5, hi=504)),
+         "vix_below": r.choice(g([15, 18, 20, 22, 25, 28, 30, 35, 40, 45], lo=10, hi=60)),
+         "curve_positive": r.choice(g([-1.0, -0.5, -0.25, 0.0, 0.25, 0.5, 1.0, 1.5],
+                                      integer=False, lo=-2.0, hi=3.0)),
+         "rates_falling": r.choice(g([21, 63, 126, 189, 252], geo=True, lo=5, hi=504)),
+         "copper_up": r.choice(g([63, 126, 189, 252], geo=True, lo=21, hi=504)),
+         "oil_calm": r.choice(g([0.2, 0.3, 0.4, 0.5, 0.65, 0.8], integer=False, lo=0.05,
+                                hi=1.2)),
+         "stress_below": r.choice(g([-0.5, 0.0, 0.5, 1.0, 1.5], integer=False, lo=-1.5,
+                                    hi=3.0)),
+         "conditions_easing": r.choice(g([21, 65, 130, 260], geo=True, lo=5, hi=520)),
+         "claims_calm": r.choice(g([0.1, 0.15, 0.2, 0.3, 0.4], integer=False, lo=0.02,
+                                   hi=0.8)),
+         "spx_not_crowded": r.choice(g([0.5, 1.0, 1.5, 2.0], integer=False, lo=0.1, hi=3.0)),
          # 0 holds even weeks of the Fed cycle, 1 the odd weeks: a built-in placebo.
          "fomc_week": r.choice([0, 1])}[rule]
     return {"kind": "timing", "rule": rule, "param": p, "fallback": r.choice(["cash", "bond"]),
@@ -141,28 +150,33 @@ def _timing(r: random.Random) -> dict:
             "rebalance": r.choice(["D", "W", "M"])}
 
 
-def _chart(r: random.Random) -> dict:
+def _chart(r: random.Random, ctx: Context | None = None) -> dict:
     u = r.choice(["g10", "fx21", "ind", "fac", "mkt"] + list(MORE_UNIVERSES))
     kind = r.choice(["macd", "bollinger", "ichimoku", "breakout"])
     spec = {"kind": "chart", "indicator": kind, "universe": u,
             "long_only": u in ("ind", "mkt", "bonds", "macro"),
             "rebalance": r.choice(["D", "W"])}
+    g = _grid_for(ctx)
     if kind == "bollinger":
-        spec |= {"window": r.choice([10, 15, 20, 30, 50, 100]),
-                 "band": r.choice([1.0, 1.5, 2.0, 2.5, 3.0])}
+        spec |= {"window": r.choice(g([10, 15, 20, 30, 50, 100], geo=True, lo=5, hi=252)),
+                 "band": r.choice(g([1.0, 1.5, 2.0, 2.5, 3.0], integer=False, lo=0.5, hi=4.0))}
     if kind == "breakout":
-        spec |= {"entry": r.choice([10, 20, 40, 55, 100, 150]), "exit": r.choice([5, 10, 20, 40])}
+        spec |= {"entry": r.choice(g([10, 20, 40, 55, 100, 150], geo=True, lo=5, hi=300)),
+                 "exit": r.choice(g([5, 10, 20, 40], geo=True, lo=2, hi=100))}
     return spec
 
 
-def _pair(r: random.Random) -> dict:
+def _pair(r: random.Random, ctx: Context | None = None) -> dict:
     pool = r.choice([WIDE, WIDE, IND])
     a, b = r.sample(pool, 2)
-    return {"kind": "pair", "a": a, "b": b, "window": r.choice([20, 40, 60, 90, 120, 180, 250]),
-            "entry": r.choice([1.0, 1.5, 2.0, 2.5, 3.0]), "delay": r.choice([0, 1])}
+    g = _grid_for(ctx)
+    return {"kind": "pair", "a": a, "b": b,
+            "window": r.choice(g([20, 40, 60, 90, 120, 180, 250], geo=True, lo=10, hi=504)),
+            "entry": r.choice(g([1.0, 1.5, 2.0, 2.5, 3.0], integer=False, lo=0.5, hi=4.0)),
+            "delay": r.choice([0, 1])}
 
 
-def _mix(r: random.Random) -> dict:
+def _mix(r: random.Random, ctx: Context | None = None) -> dict:
     pool = r.choice(["fac", "ind", "multi"])
     if pool == "multi":
         assets = r.sample([B.MKT, "bond.TR10", "bond.TR2", "cmd.BRENT"],
@@ -174,24 +188,27 @@ def _mix(r: random.Random) -> dict:
             "vol_target": r.choice([None, None, 0.06, 0.08, 0.10, 0.12, 0.15])}
 
 
-def _positioning(r: random.Random) -> dict:
+def _positioning(r: random.Random, ctx: Context | None = None) -> dict:
     """Currencies against (or with) speculators' futures positions, CFTC (DEC-0027)."""
     mode = r.choice(["rank", "extremes"])
-    spec = {"kind": "cot", "mode": mode, "lookback": r.choice([130, 260, 520, 780, 1040]),
+    g = _grid_for(ctx)
+    spec = {"kind": "cot", "mode": mode,
+            "lookback": r.choice(g([130, 260, 520, 780, 1040], geo=True, lo=65, hi=1300)),
             "rebalance": r.choice(["W", "M"]), "follow": r.random() < 0.25}
     if mode == "rank":
         spec["k"] = r.choice([1, 2, 3])
     else:
-        spec["entry"] = r.choice([1.0, 1.5, 2.0, 2.5])
+        spec["entry"] = r.choice(g([1.0, 1.5, 2.0, 2.5], integer=False, lo=0.5, hi=3.5))
     return spec
 
 
-def _policy(r: random.Random) -> dict:
+def _policy(r: random.Random, ctx: Context | None = None) -> dict:
     """Currencies priced from ECB rates, ranked on BIS policy rates (DEC-0027)."""
     u = r.choice(["xg10", "xwide"])
     sig = r.choice(["policy_gap", "policy_gap", "policy_change"])
+    looks = _grid_for(ctx)([21, 63, 126, 252], geo=True, lo=10, hi=504)
     return {"kind": "policy", "universe": u, "rank_on": sig,
-            "lookback": r.choice([21, 63, 126, 252]) if sig == "policy_change" else 0,
+            "lookback": r.choice(looks) if sig == "policy_change" else 0,
             "k": r.choice([1, 2, 3] if u == "xg10" else [2, 3, 5, 7]),
             "stress_off": r.choice([None, None, 0.0, 1.0]),
             "rebalance": r.choice(["W", "M"])}
@@ -233,11 +250,14 @@ MAX_DEPTH = 3
 
 class Context:
     """What the sampler may know: the series on disk on this machine (None means all of
-    them), and specs already tried, to wrap and blend."""
+    them), specs already tried, to wrap and blend, and how far the search has widened
+    (`level`, see "widening" below; 0 is the original space)."""
 
-    def __init__(self, have: set[str] | None = None, pool: list[dict] | None = None):
+    def __init__(self, have: set[str] | None = None, pool: list[dict] | None = None,
+                 level: int = 0):
         self.have = have
         self.pool = pool or []
+        self.level = level
 
     def series(self) -> list[str]:
         return [k for k in GATE_SERIES if self.have is None or k in self.have]
@@ -255,18 +275,19 @@ def _base(r: random.Random, ctx: Context | None, from_pool: float = 0.5) -> dict
     """A spec to wrap: some of the time one already tried, otherwise a fresh plain one."""
     if ctx and ctx.pool and r.random() < from_pool:
         spec = r.choice(ctx.pool)
-        if _depth(spec) < MAX_DEPTH:
+        if _depth(spec) < _max_depth(ctx):
             return spec
     fns, weights = zip(*BASE_SAMPLERS, strict=True)
-    return r.choices(fns, weights=weights)[0](r)
+    return r.choices(fns, weights=weights)[0](r, ctx)
 
 
 def _gate(r: random.Random, ctx: Context | None) -> dict:
     test = r.choice(GATE_TESTS)
+    grid = _grid_for(ctx)
     g = {"series": r.choice((ctx or Context()).series()), "test": test,
-         "window": r.choice(GATE_WINDOWS)}
+         "window": r.choice(grid(GATE_WINDOWS, geo=True, lo=5, hi=756))}
     if test.startswith("z_"):
-        g["level"] = r.choice(GATE_LEVELS)
+        g["level"] = r.choice(grid(GATE_LEVELS, integer=False, lo=-2.5, hi=2.5))
     return g
 
 
@@ -278,9 +299,12 @@ def _gated(r: random.Random, ctx: Context | None = None) -> dict:
 
 def _voltarget(r: random.Random, ctx: Context | None = None) -> dict:
     """Any strategy, scaled to a steady level of risk."""
+    g = _grid_for(ctx)
     return {"kind": "voltarget", "base": _base(r, ctx),
-            "target": r.choice([0.04, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20]),
-            "window": r.choice([21, 42, 63, 126, 252]), "cap": r.choice([1.0, 1.5, 2.0, 3.0]),
+            "target": r.choice(g([0.04, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20], integer=False,
+                                 lo=0.02, hi=0.30)),
+            "window": r.choice(g([21, 42, 63, 126, 252], geo=True, lo=10, hi=504)),
+            "cap": r.choice([1.0, 1.5, 2.0, 3.0]),
             "rebalance": r.choice(["D", "W", "M"])}
 
 
@@ -295,20 +319,20 @@ def _offset(r: random.Random, ctx: Context | None = None) -> dict:
         if base["kind"] in OFFSETTABLE and base.get("rebalance") in ("W", "M"):
             break
     else:
-        base = _trend(r) | {"rebalance": "M"}
+        base = _trend(r, ctx) | {"rebalance": "M"}
     days = r.choice([1, 2, 3, 4] if base["rebalance"] == "W" else [1, 2, 3, 5, 7, 10, 15])
     return {"kind": "offset", "base": base, "days": days}
 
 
 def _ensemble(r: random.Random, ctx: Context | None = None) -> dict:
     """An equal blend of two or three strategies, mostly ones already tried."""
-    n = r.choice([2, 2, 3])
+    n = r.choice([2, 2, 3] + list(range(4, _blend_max(ctx) + 1)))
     parts: dict[str, dict] = {}
     for _ in range(n * 5):
         if len(parts) == n:
             break
         p = _base(r, ctx, from_pool=0.9)
-        if _depth(p) < MAX_DEPTH:
+        if _depth(p) < _max_depth(ctx):
             parts[spec_id(p)] = p
     # Sorted by id, so the same blend in any order is the same spec.
     return {"kind": "ensemble", "parts": [parts[k] for k in sorted(parts)]}
@@ -326,7 +350,127 @@ def sample(r: random.Random, ctx: Context | None = None,
 
 
 def _draw(fn, r: random.Random, ctx: Context | None) -> dict:
-    return fn(r, ctx) if fn in WRAPPER_SAMPLERS else fn(r)
+    # Samplers swapped in by tests take only `r`.
+    return fn(r, ctx) if fn in TAKES_CTX else fn(r)
+
+
+TAKES_CTX = {fn for fn, _ in SAMPLERS}
+
+
+# --- widening (DEC-0037) -------------------------------------------------------------
+# When most draws are repeats, the space the sampler draws from has been worked through.
+# The search then opens new ground by itself, one level at a time, by fixed rules:
+#   level 1+  every number grid gets finer (a midpoint between each pair of neighbours,
+#             once per level) and reaches one step further at both ends, so lookbacks run
+#             shorter and longer; trend and ranking books may also trade a subset of their
+#             universe (combinations of assets the space never held on their own)
+#   level 2+  blends of up to 4 strategies and one more layer of wrapping
+#   level 3+  blends of up to 5 and another layer
+# Level 0 is the original space and draws exactly what it always drew, so the old ids
+# and the old sequence of draws stay the same. Every new variation is one more trial in
+# the same table, so the luck check counts it like any other.
+
+WIDEN_WINDOW = 20     # batches looked at
+WIDEN_AT = 0.5        # share of draws that were repeats, above which the search widens
+MAX_LEVEL = 6         # grids roughly double per level; past this they stop meaning much
+
+
+def _level(ctx: Context | None) -> int:
+    return ctx.level if ctx else 0
+
+
+def _max_depth(ctx: Context | None) -> int:
+    return MAX_DEPTH + min(max(_level(ctx) - 1, 0), 2)
+
+
+def _blend_max(ctx: Context | None) -> int:
+    return 3 + min(max(_level(ctx) - 1, 0), 2)
+
+
+def refine(values: list, level: int, *, geo: bool = False, integer: bool = True,
+           lo: float | None = None, hi: float | None = None) -> list:
+    """A grid made finer `level` times. Level 0 returns `values` untouched (same order,
+    same repeats) so the sampler draws what it always drew. Each level adds the midpoint
+    of every pair of neighbours (geometric for lookback-like grids) and one more step past
+    each end, held inside [lo, hi]."""
+    if level <= 0:
+        return values
+    vals = sorted(set(values))
+    for _ in range(level):
+        out = set(vals)
+        for a, b in zip(vals, vals[1:], strict=False):
+            out.add(math.sqrt(a * b) if geo and a > 0 else (a + b) / 2)
+        if len(vals) >= 2:
+            a, b, y, z = vals[0], vals[1], vals[-2], vals[-1]
+            out.add(a * a / b if geo and a > 0 else a - (b - a))
+            out.add(z * z / y if geo and y > 0 else z + (z - y))
+        kept = [min(max(v, lo if lo is not None else v), hi if hi is not None else v)
+                for v in out]
+        vals = sorted({int(round(v)) if integer else round(v, 4) for v in kept})
+    return vals
+
+
+def _grid_for(ctx: Context | None):
+    level = _level(ctx)
+    return lambda values, **kw: refine(values, level, **kw)
+
+
+def _lookbacks(ctx: Context | None) -> list[int]:
+    return refine(LOOKBACKS, _level(ctx), geo=True, lo=2, hi=1260)
+
+
+def _subset(r: random.Random, ctx: Context | None, spec: dict) -> dict:
+    """From level 1, some trend and ranking books trade only some of their universe:
+    a rule-drawn combination of its assets, every one of them already tradable."""
+    if _level(ctx) < 1 or spec["universe"] not in ALL_UNIVERSES:
+        return spec
+    pool = ALL_UNIVERSES[spec["universe"]][1]
+    if len(pool) < 4 or r.random() >= 0.3:
+        return spec
+    sub = sorted(r.sample(pool, r.randint(2 if spec["kind"] == "trend" else 3, len(pool) - 1)))
+    spec = {**spec, "subset": sub}
+    if spec["kind"] == "rank":
+        spec["k"] = max(1, min(spec["k"], len(sub) // 2 if spec["long_short"] else len(sub) - 1))
+    return spec
+
+
+WIDER_AT = {1: "finer settings, shorter and longer lookbacks, and subsets of each universe",
+            2: "blends of up to 4 strategies and one more layer of wrapping",
+            3: "blends of up to 5 strategies and another layer of wrapping"}
+
+
+def widen_level(con: sqlite3.Connection) -> int:
+    row = con.execute("SELECT MAX(level) FROM widenings").fetchone()
+    return int(row[0] or 0)
+
+
+def maybe_widen(con: sqlite3.Connection, window: int = WIDEN_WINDOW,
+                at: float = WIDEN_AT) -> str | None:
+    """Widen one level when, over the last `window` batches since the last widening,
+    more than `at` of all draws were repeats. Returns the plain line to log, or None."""
+    level = widen_level(con)
+    if level >= MAX_LEVEL:
+        return None
+    since = con.execute("SELECT COALESCE(MAX(batch), 0) FROM widenings").fetchone()[0]
+    rows = con.execute("SELECT rowid, tried, failed, repeats FROM batches WHERE rowid > ? "
+                       "ORDER BY rowid DESC LIMIT ?", (since, window)).fetchall()
+    if len(rows) < window:
+        return None
+    repeats = sum(r[3] for r in rows)
+    draws = repeats + sum(r[1] + r[2] for r in rows)
+    share = repeats / draws if draws else 0.0
+    if share <= at:
+        return None
+    new = level + 1
+    what = WIDER_AT.get(new, "finer settings again")
+    line = (f"widened the search to level {new}: {share:.0%} of draws in the last {window} "
+            f"batches were repeats, so it now also tries {what}")
+    con.execute("INSERT INTO widenings (level, at, repeat_share, batch, note) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (new, datetime.now(UTC).isoformat(timespec="seconds"), round(share, 4),
+                 rows[0][0], line))
+    con.commit()
+    return line
 
 
 def spec_id(spec: dict) -> str:
@@ -338,6 +482,25 @@ def spec_id(spec: dict) -> str:
 def _assets(u: str) -> list[str]:
     return {"mkt": [B.MKT], "bond": ["bond.TR10"], "oil": ["cmd.BRENT"]}.get(u) \
         or ALL_UNIVERSES[u][1]
+
+
+def _held(spec: dict) -> list[str]:
+    """What a trend or ranking book trades: its universe, or the subset a widened search
+    drew from it."""
+    return list(spec.get("subset") or _assets(spec["universe"]))
+
+
+def _sublabel(spec: dict) -> str:
+    sub = spec.get("subset")
+    return f" ({len(sub)} of {len(_assets(spec['universe']))})" if sub else ""
+
+
+def _subline(spec: dict) -> str:
+    sub = spec.get("subset")
+    if not sub:
+        return ""
+    names = [SHORT.get(a, a.split(".", 1)[1]) for a in sub]
+    return f" Trades only {', '.join(names)}."
 
 
 def _ulabel(u: str) -> str:
@@ -380,8 +543,8 @@ def describe(spec: dict) -> dict:
         lo = "long or cash" if spec["long_only"] else "long or short"
         span = _months(spec["lookback"])
         ls = "" if spec["long_only"] else " L/S"
-        name = f"{_ulabel(spec['universe'])} trend {span}{ls} {every}"
-        line = f"Follows each asset's {span} trend, {lo}, rebalanced {every}."
+        name = f"{_ulabel(spec['universe'])}{_sublabel(spec)} trend {span}{ls} {every}"
+        line = f"Follows each asset's {span} trend, {lo}, rebalanced {every}.{_subline(spec)}"
         tags = ("trend", "momentum")
     elif k == "rank":
         sig = SIGNAL_LABEL[spec["rank_on"]]
@@ -389,8 +552,10 @@ def describe(spec: dict) -> dict:
         vs = f" vs bottom {spec['k']}" if spec["long_short"] else ""
         span = f"{spec['lookback']}y" if spec["rank_on"] == "same_month" \
             else _months(spec["lookback"])
-        name = f"{_ulabel(spec['universe'])} {sig} {span} top {spec['k']}{ls} {every}"
-        line = f"Ranks {_ulabel(spec['universe'])} on {sig}, holds top {spec['k']}{vs}."
+        name = f"{_ulabel(spec['universe'])}{_sublabel(spec)} {sig} {span} top {spec['k']}{ls} " \
+            f"{every}"
+        line = f"Ranks {_ulabel(spec['universe'])} on {sig}, holds top {spec['k']}{vs}." \
+            f"{_subline(spec)}"
         fam = {"carry": "carry", "carry_and_momentum": "mixed", "reversal": "value",
                "low_vol": "volatility", "same_month": "calendar"}.get(spec["rank_on"], "trend")
         tags = (fam, sig)
@@ -469,12 +634,12 @@ def build(spec: dict) -> B.Block:
     floor = {"min_cost_bps": WIDE_COST} if spec.get("universe") == "xwide" else {}
     if k == "trend":
         cls = type("SearchTrend", (B.TrendBook,), {"name": "search", "summary": "",
-                   "universe": _assets(spec["universe"]), "long_only": spec["long_only"],
+                   "universe": _held(spec), "long_only": spec["long_only"],
                    "funded": spec["long_only"], **floor})
         return cls(lookback=spec["lookback"], skip=spec["skip"], rebalance=spec["rebalance"])
     if k == "rank":
         cls = type("SearchRank", (B.RankBook,), {"name": "search", "summary": "",
-                   "universe": _assets(spec["universe"]), "rank_on": spec["rank_on"],
+                   "universe": _held(spec), "rank_on": spec["rank_on"],
                    "long_short": spec["long_short"],
                    "funded": not spec["long_short"] and spec["universe"] in FUNDED_RANK,
                    **floor})
@@ -801,12 +966,23 @@ CREATE TABLE IF NOT EXISTS trials (
   tried_at TEXT NOT NULL)
 """
 
+# The search's own bookkeeping for widening (DEC-0037): one row per batch, one per level.
+BOOK_SCHEMA = """
+CREATE TABLE IF NOT EXISTS batches (
+  at TEXT NOT NULL, tried INTEGER NOT NULL, failed INTEGER NOT NULL,
+  repeats INTEGER NOT NULL, level INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS widenings (
+  level INTEGER PRIMARY KEY, at TEXT NOT NULL, repeat_share REAL NOT NULL,
+  batch INTEGER NOT NULL, note TEXT NOT NULL)
+"""
+
 
 def connect(path: Path = DB) -> sqlite3.Connection:
     path.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(path, timeout=30)
     con.execute("PRAGMA journal_mode=WAL")
     con.execute(SCHEMA)
+    con.executescript(BOOK_SCHEMA)
     return con
 
 
@@ -876,7 +1052,8 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
     cfg = BacktestConfig()
     bench_res = run(_benchmark(), panel, BacktestConfig(cost_bps=0.0))
     seen = {row[0] for row in con.execute("SELECT id FROM trials")}
-    ctx = Context(have=have, pool=_pool(con))
+    level = widen_level(con)
+    ctx = Context(have=have, pool=_pool(con), level=level)
     stats_ = novelty(r, seen, ctx)
     base_w = [w for _, w in SAMPLERS]
     done = failed = repeats = 0
@@ -909,7 +1086,11 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
         con.execute(f"INSERT OR REPLACE INTO trials ({cols}) VALUES ({', '.join('?' * len(row))})",
                     [_clean(v) for v in row.values()])
         con.commit()
-    return {"tried": done, "failed": failed, "repeats": repeats}
+    con.execute("INSERT INTO batches (at, tried, failed, repeats, level) VALUES (?, ?, ?, ?, ?)",
+                (datetime.now(UTC).isoformat(timespec="seconds"), done, failed, repeats, level))
+    con.commit()
+    return {"tried": done, "failed": failed, "repeats": repeats, "level": level,
+            "widened": maybe_widen(con)}
 
 
 def _clean(v):
@@ -922,12 +1103,14 @@ def _benchmark():
 
 
 def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0,
-                publish_hours: float = 6.0, max_hours: float | None = None) -> None:
+                publish_hours: float = 6.0, max_hours: float | None = None,
+                beat_minutes: float = 5.0) -> None:
     """The background service: batches forever, a data refresh once a day, an export
     after every batch, and a snapshot to the hosted site every few hours when
     PARITY_WRITER_DB_URL is set. Stop it with launchctl or Ctrl-C."""
     con = connect()
-    last_fetch = last_publish = 0.0
+    last_fetch = last_publish = last_beat = 0.0
+    beat_failed = False
     started = time.time()
     # With max_hours set it exits cleanly after that long; the service manager restarts
     # it, which is when it picks up new code.
@@ -951,21 +1134,54 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
                 print(f"data refresh failed: {exc}", flush=True)
             last_fetch = time.time()
         out = run_batch(batch, con=con)
+        if out["widened"]:
+            print(out["widened"], flush=True)
         export(con=con)
         total = con.execute("SELECT COUNT(*) FROM trials").fetchone()[0]
-        print(f"{datetime.now(UTC).isoformat(timespec='seconds')} +{out['tried']} "
+        now = datetime.now(UTC).isoformat(timespec="seconds")
+        print(f"{now} +{out['tried']} "
               f"({out['failed']} failed, {out['repeats']} repeats skipped), "
               f"{total} tried in all", flush=True)
+        if time.time() - last_beat > beat_minutes * 60:
+            last_beat = time.time()
+            beat_failed = _beat({"trials": int(total), "last_batch_at": now,
+                                 "level": widen_level(con), "repeat_share": repeat_share(con)},
+                                beat_failed)
         time.sleep(pause)
+
+
+def _beat(summary: dict, failed_before: bool) -> bool:
+    """Tell the site the search is alive (service_heartbeats). Returns whether it failed,
+    so a missing table or a network blip is logged once, not every few minutes."""
+    try:
+        from .publish.supabase import NotConfigured, heartbeat
+        heartbeat("search", summary)
+        return False
+    except NotConfigured:
+        return False
+    except Exception as exc:  # only the type: errors can quote the connection string
+        if not failed_before:
+            print(f"health report failed: {type(exc).__name__}", flush=True)
+        return True
+
+
+def repeat_share(con: sqlite3.Connection, window: int = WIDEN_WINDOW) -> float | None:
+    """Share of draws that were repeats over the last `window` batches."""
+    rows = con.execute("SELECT tried + failed, repeats FROM batches ORDER BY rowid DESC "
+                       "LIMIT ?", (window,)).fetchall()
+    draws = sum(a + b for a, b in rows)
+    return round(sum(b for _, b in rows) / draws, 4) if draws else None
 
 
 # --- reading the results honestly ------------------------------------------------
 
-def deflate(df: pd.DataFrame) -> pd.Series:
-    """Deflated Sharpe for every trial, using the total number of trials and the real
-    spread of daily Sharpe ratios across them (Bailey and Lopez de Prado, 2014)."""
+def deflate(df: pd.DataFrame, n: int | None = None) -> pd.Series:
+    """Deflated Sharpe for every trial, using the total number of trials (`n`, default
+    the rows given) and the real spread of daily Sharpe ratios across them (Bailey and
+    Lopez de Prado, 2014). `export` passes every variation ever backtested, the ones that
+    failed and the ones the widened search added included."""
     ok = df["sr_daily"].notna()
-    n = int(len(df))
+    n = max(int(n or 0), int(len(df)))
     if n < 2 or ok.sum() < 2:
         return pd.Series(np.nan, index=df.index)
     var = float(df.loc[ok, "sr_daily"].var())
@@ -986,10 +1202,11 @@ def export(path: Path | None = None, top: int = 3000, con: sqlite3.Connection | 
            ) -> dict:
     """Write a compact file for the dashboard: totals, and the best `top` trials by
     deflated Sharpe, each with its short name, one line and key numbers."""
+    con = con or connect()
     df = load(con)
     total = int(len(df))
     good = df[df["error"].isna()].copy()
-    good["deflated"] = deflate(good) if len(good) else []
+    good["deflated"] = deflate(good, total) if len(good) else []
     good = good.sort_values(["deflated", "sharpe"], ascending=False)
     cols = ["id", "name", "line", "family", "style", "asset", "start", "years", "cagr", "vol",
             "sharpe", "max_dd", "turnover", "breakeven_bps", "corr", "beats_market",
@@ -1007,6 +1224,7 @@ def export(path: Path | None = None, top: int = 3000, con: sqlite3.Connection | 
         "passed_luck_check": int((good["deflated"] >= 0.95).sum()),
         "by_family": good.groupby("family").size().to_dict(),
         "by_asset": good.groupby("asset").size().to_dict(),
+        "widen_level": widen_level(con),
         "rows": rows,
     }
     path = path or OUT / "search.json"

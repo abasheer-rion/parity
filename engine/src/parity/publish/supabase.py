@@ -68,3 +68,33 @@ def publish_search(doc: dict, top: int = 1000) -> None:
     with psycopg.connect(url) as conn:
         conn.execute("insert into public.search_snapshots (generated_at, trials, doc) "
                      "values (%s, %s, %s)", (doc["generated_at"], doc["trials"], json.dumps(small)))
+
+
+def _writer_url() -> str:
+    url = os.environ.get("PARITY_WRITER_DB_URL")
+    if not url:
+        raise NotConfigured("PARITY_WRITER_DB_URL is not set")
+    return url
+
+
+def publish_sims(doc: dict) -> None:
+    """Send the always-on sims' accumulated summary (DEC-0037). Counts and percentiles
+    only; the table keeps the newest 20 and the deploy job copies the newest to the site."""
+    url = _writer_url()
+    import psycopg
+
+    with psycopg.connect(url, connect_timeout=20) as conn:
+        conn.execute("insert into public.sim_snapshots (generated_at, cycles, doc) "
+                     "values (%s, %s, %s)", (doc["generated_at"], doc["cycles"], json.dumps(doc)))
+
+
+def heartbeat(service: str, summary: dict) -> None:
+    """Report that a background service is alive (DEC-0037). The database stamps the
+    time itself, so a wrong clock on this machine cannot make a dead service look alive.
+    `summary` is a few public counts, never paths or keys."""
+    url = _writer_url()
+    import psycopg
+
+    with psycopg.connect(url, connect_timeout=20) as conn:
+        conn.execute("select public.report_heartbeat(%s, %s::jsonb)",
+                     (service, json.dumps(summary)))

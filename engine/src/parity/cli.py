@@ -27,6 +27,8 @@
                                  (win rate is not profit, DEC-0035); --synthetic N runs
                                  them on N made-up paths with crashes instead
     parity bots export           write output/bots/ for the Bot Battle page and the clips
+    parity sims run --forever    the always-on sims service (DEC-0037); `sims status`
+                                 shows whether the search and the sims are alive
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -446,13 +448,19 @@ def _search(args) -> int:
         out = search.run_batch(args.n, seed=args.seed)
         print(f"tried {out['tried']}, failed {out['failed']}, "
               f"rejected {out['repeats']} repeats before backtesting")
+        if out["widened"]:
+            print(out["widened"])
     doc = search.export() if args.action in ("run", "export") else None
     df = search.load()
     good = df[df["error"].isna()].copy()
     if not len(good):
         print("nothing tried yet")
         return 0
-    good["deflated"] = search.deflate(good)
+    good["deflated"] = search.deflate(good, len(df))
+    con = search.connect()
+    level, share = search.widen_level(con), search.repeat_share(con)
+    print(f"widening level {level}" + ("" if share is None else
+          f", {share:.0%} of recent draws were repeats (widens above {search.WIDEN_AT:.0%})"))
     print(f"{len(df)} variations tried, {len(good)} ran, "
           f"{int(good['beats_market'].sum())} beat the market's Sharpe, "
           f"{int((good['deflated'] >= 0.95).sum())} pass the luck check")
@@ -460,6 +468,34 @@ def _search(args) -> int:
         print(f"  {r['deflated']:.2f}  Sharpe {r['sharpe']:.2f}  {r['cagr']:6.1%}  {r['name']}")
     if doc:
         print(f"wrote {len(doc['rows'])} rows to engine/output/search.json")
+    return 0
+
+
+def _sims(args) -> int:
+    from . import sims
+
+    if args.action == "run":
+        if args.forever:
+            sims.run_forever(paths=args.paths, world_n=args.world_paths,
+                             sleep_minutes=args.sleep_minutes, max_hours=args.hours)
+            return 0
+        out = sims.cycle(sims.connect(), args.paths, args.world_paths,
+                         exports=not args.no_exports)
+        for s in out["steps"]:
+            print(f"  {s['step']:<16} {'ok' if s['ok'] else 'FAILED'}  {s['seconds']:>6.1f}s"
+                  + (f"  {s['error']}" if not s["ok"] else ""))
+    if args.action in ("run", "export"):
+        doc = sims.export()
+        bots = doc["bots"]
+        print(f"wrote engine/output/sims.json: {bots['paths']:,} made-up paths per bot, "
+              f"{bots['crash_paths']:,} with a crash")
+        for b in bots["by_bot"].values():
+            share = b["blown_in_crash_share"]
+            print(f"  {b['name']:<20} stopped out on "
+                  f"{'n/a' if share is None else f'{share:.0%}'} of crash paths")
+        return 0
+    for line in sims.health():
+        print(line)
     return 0
 
 
@@ -691,6 +727,18 @@ def main(argv: list[str] | None = None) -> int:
     se.add_argument("--hours", type=float, default=None,
                     help="with --forever, exit after this long so the service can restart")
     se.set_defaults(func=_search)
+
+    sm = sub.add_parser("sims", help="the always-on sims: Bot Battle paths, Sim World paths "
+                        "and the site exports, on a loop (DEC-0037)")
+    sm.add_argument("action", choices=["run", "status", "export"])
+    sm.add_argument("--forever", action="store_true", help="keep going; for the service")
+    sm.add_argument("--paths", type=int, default=1000, help="made-up Bot Battle paths a cycle")
+    sm.add_argument("--world-paths", type=int, default=2000, help="Sim World paths a cycle")
+    sm.add_argument("--sleep-minutes", type=float, default=20.0, help="rest between cycles")
+    sm.add_argument("--hours", type=float, default=None,
+                    help="with --forever, exit after this long so the service can restart")
+    sm.add_argument("--no-exports", action="store_true", help="run: skip the site exports")
+    sm.set_defaults(func=_sims)
 
     sub.add_parser("mcp", help="Parity tools for AI assistants over MCP stdio (DEC-0025)"
                    ).set_defaults(func=_mcp)
