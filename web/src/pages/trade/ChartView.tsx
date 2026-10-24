@@ -39,6 +39,12 @@ export function ChartView() {
   const list = insts.status === "ok" ? insts.data : [];
   const [prefs, setPrefs] = useState<Prefs>(() => readPref("chart", DEFAULTS));
   const [symbol, setSymbol] = useState<string>(() => hashParam("s") ?? prefs.symbol);
+  useEffect(() => {
+    // A link to #/trade?s=<key> while the chart is open switches the instrument.
+    const on = () => { const s = hashParam("s"); if (s) setSymbol(s); };
+    window.addEventListener("hashchange", on);
+    return () => window.removeEventListener("hashchange", on);
+  }, []);
   const [compareKey, setCompareKey] = useState("");
   const [tool, setTool] = useState<DrawTool>("none");
   const [editing, setEditing] = useState(false);
@@ -70,15 +76,15 @@ export function ChartView() {
 
   const toolbar = (
     <>
-      {list.length > 0 && inst ? <InstrumentSelect list={list} value={inst.key} onChange={pick} /> : <Skeleton width={220} height={32} />}
+      <InstrumentSelect list={list} value={inst?.key ?? ""} onChange={pick} allowNone={inst ? undefined : "Loading instruments"} />
       <Segmented size="sm" label="Timeframe" value={prefs.tf} onChange={(tf) => update({ tf })} options={TIMEFRAMES.map((t) => [t.id, t.label])} />
       <Select label="Chart type" value={prefs.type} onChange={(type) => update({ type })} options={CHART_TYPES} />
       <Button size="sm" icon="graph" onClick={() => setEditing(true)}>Indicators{prefs.indicators.length ? ` (${prefs.indicators.length})` : ""}</Button>
       <Segmented size="sm" label="Drawing tool" value={tool} onChange={setTool}
         options={[["none", "Cursor"], ["hline", "Line"], ["trend", "Trend"], ["fib", "Fib"]]} />
-      {saved.length > 0 && <IconButton icon="restart" label="Clear drawings on this chart" onClick={() => inst && drawingsTable.removeWhere({ symbol: inst.key }).catch((e: Error) => toast(e.message, { tone: "bad" }))} />}
+      <IconButton icon="restart" label={saved.length ? "Clear drawings on this chart" : "No drawings to clear"} onClick={() => inst && saved.length && drawingsTable.removeWhere({ symbol: inst.key }).catch((e: Error) => toast(e.message, { tone: "bad" }))} />
       <label className="tr-inline"><Toggle on={prefs.log} onChange={(log) => update({ log })} label="Log scale" /> Log</label>
-      {list.length > 0 && <InstrumentSelect list={list.filter((s) => s.key !== inst?.key)} value={compareKey} onChange={setCompareKey} label="Compare with" allowNone="Compare with…" />}
+      <InstrumentSelect list={list.filter((s) => s.key !== inst?.key)} value={compareKey} onChange={setCompareKey} label="Compare with" allowNone="Compare with…" />
     </>
   );
 
@@ -101,7 +107,7 @@ export function ChartView() {
         <div className="mk-banner" role="note"><strong>Could not load this chart.</strong> {bars.message}</div>
       ) : (
         <div className="pc">
-          <div className="pc-toolbar">{toolbar}</div>
+          <div className="pc-toolbar">{toolbar}<span className="pc-spacer" /><IconButton icon="external" label="Fullscreen" /></div>
           <Skeleton height={height + paneCount * paneHeight} />
           <div className="pc-foot"><span>Loading prices</span></div>
         </div>

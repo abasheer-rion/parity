@@ -1,7 +1,7 @@
 /* Trade area (pages/trade). */
 .tr { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
 .tr-head p { max-width: 70ch; }
-.tr-pick select { max-width: 260px; }
+.tr-pick select { width: 260px; }
 .tr-inline { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--text-2); }
 .tr-sub { font-size: var(--fs-md); margin: var(--space-4) 0 var(--space-2); }
 .tr-ind-list { display: flex; flex-direction: column; gap: var(--space-3); }
@@ -15,5 +15,5 @@
 .tr-ind-btn:hover:not(:disabled) { border-color: var(--border-2); }
 .tr-ind-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 @media (max-width: 640px) {
-  .tr-pick select { max-width: 200px; }
+  .tr-pick select { width: 200px; }
 }

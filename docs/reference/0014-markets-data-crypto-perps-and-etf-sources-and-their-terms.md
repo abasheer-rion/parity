@@ -102,5 +102,6 @@ The "New products and hype terms" entries in the glossary cite these:
 
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](../decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
+- [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 <!-- backlinks:end -->

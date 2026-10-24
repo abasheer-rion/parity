@@ -51,7 +51,9 @@ export interface ProChartProps {
   footer?: ReactNode;
 }
 
-const PANE_COLORS = ["--series-1", "--series-3", "--series-5", "--series-2", "--series-4"];
+/** Height of the time axis under the panes; the panes share the rest by stretch factor. */
+const TIME_AXIS = 28;
+const PANE_COLORS =["--series-1", "--series-3", "--series-5", "--series-2", "--series-4"];
 
 function cssVar(name: string, fallback: string): string {
   if (typeof document === "undefined") return fallback;
@@ -215,8 +217,9 @@ export function ProChart({
       colorIdx += 2;
     }
     const panes = c.panes();
-    panes[0]?.setHeight(height);
-    for (let i = 1; i < panes.length; i++) panes[i].setHeight(paneHeight);
+    // Stretch factors are proportions, so the split holds when the chart resizes.
+    panes[0]?.setStretchFactor(height);
+    for (let i = 1; i < panes.length; i++) panes[i].setStretchFactor(paneHeight);
 
     c.priceScale("right").applyOptions({ mode: compare ? PriceScaleMode.IndexedTo100 : log ? PriceScaleMode.Logarithmic : PriceScaleMode.Normal });
     built.current = { main, lines, shown };
@@ -316,7 +319,7 @@ export function ProChart({
           ))}
         </div>
         {Array.from({ length: paneCount }, (_, k) => (
-          <div key={k} className="pc-legend pc-legend-pane" style={{ top: height + k * paneHeight + 4 }}>
+          <div key={k} className="pc-legend pc-legend-pane" style={{ top: Math.round(((totalHeight - TIME_AXIS) * (height + k * paneHeight)) / totalHeight) + 6 }}>
             <div className="pc-legend-row">
               {lines.filter((l) => l.pane === k + 1).map((l) => (
                 <span key={l.label}><i style={{ background: l.color }} />{l.label} <b>{fmt(l.values[i], l.digits)}</b></span>
