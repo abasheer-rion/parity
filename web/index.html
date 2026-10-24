@@ -28,7 +28,7 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://parity.endyland.com/#org","name":"Parity Trading, Inc.","alternateName":"Parity","url":"https://parity.endyland.com/","logo":"https://parity.endyland.com/icon-512.png","email":"contact@paritytrading.ai"},{"@type":"WebSite","@id":"https://parity.endyland.com/#site","name":"Parity","url":"https://parity.endyland.com/","publisher":{"@id":"https://parity.endyland.com/#org"},"inLanguage":"en"}]}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300..700&display=optional" rel="stylesheet" />
     <!--
       The public front page. Plain HTML and inline CSS, so it paints at once.
       One small module script (src/site/main.ts) adds motion on top: reveals, counters,
@@ -147,7 +147,7 @@
       .stat.live .src .on { display: inline; }
 
       /* Market tape: recent closes, scrolling. Fixed height, filled from /stats.json. */
-      .tape-wrap { padding: 28px 0 8px; }
+      .tape-wrap { padding-top: 28px; padding-bottom: 8px; }
       .tape { display: flex; height: 46px; border: 1px solid var(--line); border-radius: 12px; background: #090a10; font: 13px/1 var(--mono); overflow: hidden; }
       .tape-lbl { flex: none; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-right: 1px solid var(--line); color: var(--blue-text); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; min-width: 172px; }
       .tape-lbl i { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
@@ -408,6 +408,7 @@
         .tp-head, .tp-row { grid-template-columns: 50px minmax(0, 1fr) 66px 58px 40px; gap: 7px; padding: 0 10px; }
         .tape-lbl { min-width: 0; padding: 0 12px; }
         .tape-lbl .lg { display: none; }
+        .tp-foot span + span { display: none; }
       }
       @media (max-width: 400px) {
         nav .btn.login { display: none; }
