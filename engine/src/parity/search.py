@@ -36,6 +36,7 @@ from .metrics import performance
 from .metrics.performance import EULER_GAMMA
 from .strategies import _blocks as B
 from .strategies import _signals as S
+from .strategies._util import hold_between_rebalances, rebalance_dates, zscore
 
 OUT = Path(__file__).resolve().parents[2] / "output"
 DB = OUT / "search.db"
@@ -48,6 +49,22 @@ UNIVERSES = {
     "g10": ("G10 currencies", FX), "fx21": ("21 currencies", WIDE),
     "ind": ("US industries", IND), "fac": ("Stock factors", FAC),
 }
+# Wider universes from the full catalog. New names only: an existing name must keep its
+# assets, or old spec ids would point at different strategies. Every asset here is a
+# daily, tradable price; monthly averages, spot gas and copper are never held.
+MORE_UNIVERSES = {
+    "xg10": ("G10 via ECB rates", S.XG10), "xwide": ("27 currencies", S.XWIDE),
+    "bonds": ("Treasuries 2y 5y 10y", ["bond.TR2", "bond.TR5", "bond.TR10"]),
+    "energy": ("Brent and WTI oil", ["cmd.BRENT", "cmd.WTI"]),
+    "fac7": ("7 stock factors", FAC + ["factor.STREV"]),
+    "macro": ("Stocks, bonds and oil", [B.MKT, "bond.TR10", "bond.TR2", "cmd.BRENT"]),
+}
+ALL_UNIVERSES = UNIVERSES | MORE_UNIVERSES
+#: Universes of assets that cost money to hold: a long-only book on them is funded.
+PAID = ("ind", "mkt", "bond", "oil", "bonds", "energy", "macro")
+#: Everything a sampled spec may ever hold (DEC-0014): daily prices you can trade.
+TRADABLE = {*FX, *WIDE, *IND, *FAC, "factor.STREV", *S.XWIDE, B.MKT, "bond.TR2", "bond.TR5",
+            "bond.TR10", "cmd.BRENT", "cmd.WTI", B.CASH}
 # A wide grid of lookbacks keeps the search finding new variations for a long time.
 LOOKBACKS = [5, 8, 10, 15, 21, 30, 42, 52, 63, 84, 105, 126, 150, 189, 210, 252, 300, 378, 441, 504,
              630, 756]
@@ -67,16 +84,16 @@ def _every(rebalance: str) -> str:
 
 def _trend(r: random.Random) -> dict:
     # Copper is a monthly average, not tradable, so it is a signal only, never held.
-    u = r.choice(list(UNIVERSES) + ["mkt", "bond", "oil"])
+    u = r.choice(list(UNIVERSES) + ["mkt", "bond", "oil"] + list(MORE_UNIVERSES))
     lookback = r.choice(LOOKBACKS[2:])
     return {"kind": "trend", "universe": u, "lookback": lookback,
             "skip": r.choice([0, 0, 21]) if lookback >= 126 else 0,
             "rebalance": r.choice(["W", "M"]),
-            "long_only": u in ("ind", "mkt", "bond") or r.random() < 0.2}
+            "long_only": u in ("ind", "mkt", "bond", "bonds", "macro") or r.random() < 0.2}
 
 
 def _rank(r: random.Random) -> dict:
-    u = r.choice(list(UNIVERSES))
+    u = r.choice(list(ALL_UNIVERSES))
     signals = ["momentum", "reversal", "low_vol", "near_high"]
     if u == "g10":
         signals += ["carry", "carry", "carry_and_momentum", "rate_change"]
@@ -84,11 +101,13 @@ def _rank(r: random.Random) -> dict:
         signals += ["same_month"]
     sig = r.choice(signals)
     lookback = r.choice([5, 8, 10, 12]) if sig == "same_month" else r.choice(LOOKBACKS)
-    n = len(UNIVERSES[u][1])
+    n = len(ALL_UNIVERSES[u][1])
+    ks = [1, 2, 3, 4, 5] if n >= 12 else [1, 2, 3, 4] if n >= 8 else [1, 2] if n >= 4 else [1]
     return {"kind": "rank", "universe": u, "rank_on": sig, "lookback": lookback,
             "skip": 0 if lookback < 126 or sig != "momentum" else r.choice([0, 21]),
-            "k": r.choice([1, 2, 3, 4, 5] if n >= 12 else [1, 2, 3, 4] if n >= 8 else [1, 2]),
-            "long_short": u in ("g10", "fx21", "fac") or r.random() < 0.3,
+            "k": r.choice(ks),
+            "long_short": u in ("g10", "fx21", "fac", "xg10", "xwide", "fac7")
+            or r.random() < 0.3,
             "rebalance": r.choice(["W", "M"])}
 
 
@@ -122,9 +141,10 @@ def _timing(r: random.Random) -> dict:
 
 
 def _chart(r: random.Random) -> dict:
-    u = r.choice(["g10", "fx21", "ind", "fac", "mkt"])
+    u = r.choice(["g10", "fx21", "ind", "fac", "mkt"] + list(MORE_UNIVERSES))
     kind = r.choice(["macd", "bollinger", "ichimoku", "breakout"])
-    spec = {"kind": "chart", "indicator": kind, "universe": u, "long_only": u in ("ind", "mkt"),
+    spec = {"kind": "chart", "indicator": kind, "universe": u,
+            "long_only": u in ("ind", "mkt", "bonds", "macro"),
             "rebalance": r.choice(["D", "W"])}
     if kind == "bollinger":
         spec |= {"window": r.choice([10, 15, 20, 30, 50, 100]),
@@ -176,13 +196,136 @@ def _policy(r: random.Random) -> dict:
             "rebalance": r.choice(["W", "M"])}
 
 
-SAMPLERS = [(_trend, 3), (_rank, 4), (_timing, 3), (_chart, 2), (_pair, 1), (_mix, 2),
-            (_positioning, 1), (_policy, 2)]
+BASE_SAMPLERS = [(_trend, 3), (_rank, 4), (_timing, 3), (_chart, 2), (_pair, 1), (_mix, 2),
+                 (_positioning, 1), (_policy, 2)]
 
 
-def sample(r: random.Random) -> dict:
-    fns, weights = zip(*SAMPLERS, strict=True)
+# --- combinators (the wider search, DEC-0014) --------------------------------------
+# Four ways to make a new variation out of existing ones. Each wraps whole specs, so a
+# plain spec keeps its old id: a regime filter, a risk target, a shifted rebalance day,
+# or a blend of two or three.
+
+def _gate_series() -> list[str]:
+    """Series a regime filter may read: everything in the catalog the panel can time
+    correctly, with weekly, monthly and quarterly data moved to the day they come out.
+    Left out: real exchange rates (monthly averages with no publication lag set), the
+    Yahoo cross-check, the lagged French market file, raw ECB crosses (the same
+    information as xfx.*) and futures positions in contracts (the percent is kept)."""
+    skip = ("reer.", "ecb.", "xfx.", "eq.SPY", "eq.US_MKT")
+    keys = []
+    for key in catalog.CATALOG:
+        if key.startswith(skip) or (key.startswith("cot.") and not key.endswith("_PCT")):
+            continue
+        if key.startswith("rate.") and key not in ("rate.USD", "rate.TBILL3M"):
+            continue
+        keys.append(key)
+    return keys
+
+
+GATE_SERIES = _gate_series()
+GATE_TESTS = ["above_avg", "below_avg", "rising", "falling", "z_above", "z_below"]
+GATE_WINDOWS = [10, 21, 42, 63, 126, 252, 504]
+GATE_LEVELS = [-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5]
+WRAPPERS = ("gated", "voltarget", "offset", "ensemble")
+MAX_DEPTH = 3
+
+
+class Context:
+    """What the sampler may know: the series on disk on this machine (None means all of
+    them), and specs already tried, to wrap and blend."""
+
+    def __init__(self, have: set[str] | None = None, pool: list[dict] | None = None):
+        self.have = have
+        self.pool = pool or []
+
+    def series(self) -> list[str]:
+        return [k for k in GATE_SERIES if self.have is None or k in self.have]
+
+
+def _depth(spec: dict) -> int:
+    if spec["kind"] == "ensemble":
+        return 1 + max(_depth(p) for p in spec["parts"])
+    if spec["kind"] in WRAPPERS:
+        return 1 + _depth(spec["base"])
+    return 0
+
+
+def _base(r: random.Random, ctx: Context | None, from_pool: float = 0.5) -> dict:
+    """A spec to wrap: some of the time one already tried, otherwise a fresh plain one."""
+    if ctx and ctx.pool and r.random() < from_pool:
+        spec = r.choice(ctx.pool)
+        if _depth(spec) < MAX_DEPTH:
+            return spec
+    fns, weights = zip(*BASE_SAMPLERS, strict=True)
     return r.choices(fns, weights=weights)[0](r)
+
+
+def _gate(r: random.Random, ctx: Context | None) -> dict:
+    test = r.choice(GATE_TESTS)
+    g = {"series": r.choice((ctx or Context()).series()), "test": test,
+         "window": r.choice(GATE_WINDOWS)}
+    if test.startswith("z_"):
+        g["level"] = r.choice(GATE_LEVELS)
+    return g
+
+
+def _gated(r: random.Random, ctx: Context | None = None) -> dict:
+    """A strategy that trades only while a second signal says the regime is right."""
+    return {"kind": "gated", "base": _base(r, ctx), "gate": _gate(r, ctx),
+            "rebalance": r.choice(["D", "W", "M"])}
+
+
+def _voltarget(r: random.Random, ctx: Context | None = None) -> dict:
+    """Any strategy, scaled to a steady level of risk."""
+    return {"kind": "voltarget", "base": _base(r, ctx),
+            "target": r.choice([0.04, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20]),
+            "window": r.choice([21, 42, 63, 126, 252]), "cap": r.choice([1.0, 1.5, 2.0, 3.0]),
+            "rebalance": r.choice(["D", "W", "M"])}
+
+
+#: Plain spec kinds whose rebalance day can move.
+OFFSETTABLE = ("trend", "rank", "timing", "chart", "cot", "policy")
+
+
+def _offset(r: random.Random, ctx: Context | None = None) -> dict:
+    """The same strategy, rebalanced a few business days after its usual day."""
+    for _ in range(30):
+        base = _base(r, ctx)
+        if base["kind"] in OFFSETTABLE and base.get("rebalance") in ("W", "M"):
+            break
+    else:
+        base = _trend(r) | {"rebalance": "M"}
+    days = r.choice([1, 2, 3, 4] if base["rebalance"] == "W" else [1, 2, 3, 5, 7, 10, 15])
+    return {"kind": "offset", "base": base, "days": days}
+
+
+def _ensemble(r: random.Random, ctx: Context | None = None) -> dict:
+    """An equal blend of two or three strategies, mostly ones already tried."""
+    n = r.choice([2, 2, 3])
+    parts: dict[str, dict] = {}
+    for _ in range(n * 5):
+        if len(parts) == n:
+            break
+        p = _base(r, ctx, from_pool=0.9)
+        if _depth(p) < MAX_DEPTH:
+            parts[spec_id(p)] = p
+    # Sorted by id, so the same blend in any order is the same spec.
+    return {"kind": "ensemble", "parts": [parts[k] for k in sorted(parts)]}
+
+
+SAMPLERS = BASE_SAMPLERS + [(_gated, 6), (_voltarget, 3), (_offset, 2), (_ensemble, 3)]
+WRAPPER_SAMPLERS = (_gated, _voltarget, _offset, _ensemble)
+
+
+def sample(r: random.Random, ctx: Context | None = None,
+           weights: list[float] | None = None) -> dict:
+    """One spec. `weights` overrides the sampler weights (see `run_batch`)."""
+    fns, base_w = zip(*SAMPLERS, strict=True)
+    return _draw(r.choices(fns, weights=weights or base_w)[0], r, ctx)
+
+
+def _draw(fn, r: random.Random, ctx: Context | None) -> dict:
+    return fn(r, ctx) if fn in WRAPPER_SAMPLERS else fn(r)
 
 
 def spec_id(spec: dict) -> str:
@@ -193,11 +336,12 @@ def spec_id(spec: dict) -> str:
 
 def _assets(u: str) -> list[str]:
     return {"mkt": [B.MKT], "bond": ["bond.TR10"], "oil": ["cmd.BRENT"]}.get(u) \
-        or UNIVERSES[u][1]
+        or ALL_UNIVERSES[u][1]
 
 
 def _ulabel(u: str) -> str:
-    return {"mkt": "US stocks", "bond": "Treasuries", "oil": "Oil"}.get(u) or UNIVERSES[u][0]
+    return {"mkt": "US stocks", "bond": "Treasuries", "oil": "Oil"}.get(u) \
+        or ALL_UNIVERSES[u][0]
 
 
 RULE_LABEL = {"above_average": "above {p}d average",
@@ -228,6 +372,8 @@ SHORT = {B.MKT: "US stocks", "bond.TR10": "10y Treasuries", "bond.TR2": "2y Trea
 def describe(spec: dict) -> dict:
     """Short name, one-line description and tags for a spec."""
     k = spec["kind"]
+    if k in WRAPPERS:
+        return _describe_wrapper(spec)
     every = _every(spec.get("rebalance", "D"))
     if k == "trend":
         lo = "long or cash" if spec["long_only"] else "long or short"
@@ -302,11 +448,13 @@ def describe(spec: dict) -> dict:
 
 def _asset_class(spec: dict) -> str:
     u = spec.get("universe")
-    if spec["kind"] in ("pair", "cot", "policy") or u in ("g10", "fx21"):
+    if spec["kind"] in WRAPPERS:
+        return _wrapper_asset(spec)
+    if spec["kind"] in ("pair", "cot", "policy") or u in ("g10", "fx21", "xg10", "xwide"):
         return "fx"
-    if spec["kind"] == "timing" or u in ("ind", "fac", "mkt"):
+    if spec["kind"] == "timing" or u in ("ind", "fac", "mkt", "fac7"):
         return "stocks"
-    if u == "oil":
+    if u in ("oil", "energy"):
         return "commodities"
     return "mixed"
 
@@ -314,16 +462,22 @@ def _asset_class(spec: dict) -> str:
 def build(spec: dict) -> B.Block:
     """The strategy object for a spec."""
     k = spec["kind"]
+    if k in WRAPPERS:
+        return _build_wrapper(spec)
+    from .strategies.edges import WIDE_COST
+    floor = {"min_cost_bps": WIDE_COST} if spec.get("universe") == "xwide" else {}
     if k == "trend":
         cls = type("SearchTrend", (B.TrendBook,), {"name": "search", "summary": "",
                    "universe": _assets(spec["universe"]), "long_only": spec["long_only"],
-                   "funded": spec["long_only"]})
+                   "funded": spec["long_only"], **floor})
         return cls(lookback=spec["lookback"], skip=spec["skip"], rebalance=spec["rebalance"])
     if k == "rank":
         cls = type("SearchRank", (B.RankBook,), {"name": "search", "summary": "",
                    "universe": _assets(spec["universe"]), "rank_on": spec["rank_on"],
                    "long_short": spec["long_short"],
-                   "funded": not spec["long_short"] and spec["universe"] == "ind"})
+                   # Old universes keep their old rule, so old ids mean what they meant.
+                   "funded": not spec["long_short"] and spec["universe"] in
+                   ("ind", "bonds", "energy", "macro"), **floor})
         return cls(lookback=spec["lookback"], skip=spec["skip"], k=spec["k"],
                    rebalance=spec["rebalance"])
     if k == "timing":
@@ -336,7 +490,7 @@ def build(spec: dict) -> B.Block:
         base = B.BreakoutBook if spec["indicator"] == "breakout" else B.OscillatorBook
         attrs = {"name": "search", "summary": "", "universe": _assets(spec["universe"]),
                  "long_only": spec["long_only"], "funded": spec["long_only"],
-                 "kind": spec["indicator"]}
+                 "kind": spec["indicator"], **floor}
         params = {key: spec[key] for key in ("window", "band", "entry", "exit") if key in spec}
         return type("SearchChart", (base,), attrs)(rebalance=spec["rebalance"], **params)
     if k == "pair":
@@ -423,6 +577,200 @@ def _timing_strategy(spec: dict) -> B.TimingBook:
     return cls(rebalance=spec["rebalance"])
 
 
+# --- building and naming the combinators -------------------------------------------
+
+def gate_on(panel: pd.DataFrame, gate: dict) -> pd.Series:
+    """1 while the regime filter is on, else 0. It reads the series a business day
+    late: weekly and monthly data already sit on their release day in the panel, and
+    the extra day covers releases that land after the prices we trade at."""
+    x = panel[gate["series"]].shift(1)
+    n, test = gate["window"], gate["test"]
+    if test in ("above_avg", "below_avg"):
+        avg = x.rolling(n, min_periods=n // 2).mean()
+        on = x > avg if test == "above_avg" else x < avg
+    elif test in ("rising", "falling"):
+        on = x > x.shift(n) if test == "rising" else x < x.shift(n)
+    else:
+        z = zscore(x, n)
+        on = z > gate["level"] if test == "z_above" else z < gate["level"]
+    return on.astype(float)
+
+
+def _rescale(w: pd.DataFrame, factor: pd.Series, funded: bool) -> pd.DataFrame:
+    """Scale every position by `factor`. A funded book puts what is left in cash."""
+    risky = w.drop(columns=[B.CASH], errors="ignore").mul(factor.reindex(w.index), axis=0)
+    risky = risky.fillna(0.0)
+    if funded:
+        paid = [c for c in risky.columns if not c.startswith(B.ZERO_COST)]
+        held = risky[paid].clip(lower=0).sum(axis=1) if paid else 0.0
+        risky[B.CASH] = (1 - held).clip(lower=0.0)
+    return risky
+
+
+class _Combo(B.Block):
+    """A strategy built from other search strategies."""
+
+    name = "search"
+    summary = ""
+
+    def __init__(self, parts: list[B.Block], extra: list[str] | None = None):
+        self._parts = parts
+        self._extra = extra or []
+        self.funded = any(getattr(p, "funded", False) for p in parts)
+        self.min_cost_bps = max(getattr(p, "min_cost_bps", 0.0) for p in parts)
+        self.max_gross = max(p.max_gross for p in parts)
+
+    def instruments(self):
+        ins = [c for p in self._parts for c in p.instruments()]
+        return list(dict.fromkeys(ins + ([B.CASH] if self.funded else [])))
+
+    def required(self):
+        need = [c for p in self._parts for c in p.required()] + self._extra
+        return list(dict.fromkeys(need + (["rate.USD"] if self.funded else [])))
+
+    def _out(self, w: pd.DataFrame) -> pd.DataFrame:
+        return w.reindex(columns=self.instruments()).fillna(0.0)
+
+
+class _Gated(_Combo):
+    def __init__(self, spec: dict):
+        super().__init__([build(spec["base"])], [spec["gate"]["series"]])
+        self._gate, self.rebalance = spec["gate"], spec["rebalance"]
+
+    def weights(self, panel):
+        on = hold_between_rebalances(gate_on(panel, self._gate).to_frame("on"),
+                                     self.rebalance)["on"]
+        return self._out(_rescale(self._parts[0].weights(panel), on, self.funded))
+
+
+class _VolTarget(_Combo):
+    def __init__(self, spec: dict):
+        super().__init__([build(spec["base"])])
+        self.target, self.window, self.cap = spec["target"], spec["window"], spec["cap"]
+        self.rebalance = spec["rebalance"]
+        self.max_gross = self.max_gross * self.cap
+
+    def weights(self, panel):
+        w = self._parts[0].weights(panel)
+        risky = w.drop(columns=[B.CASH], errors="ignore")
+        px = panel[list(risky.columns)]
+        rets = px.pct_change(fill_method=None).where((px > 0) & (px.shift(1) > 0))
+        # The book's own returns up to today, from yesterday's positions.
+        port = (risky.shift(1) * rets.fillna(0.0)).sum(axis=1)
+        vol = port.rolling(self.window, min_periods=max(10, self.window // 2)).std() \
+            * np.sqrt(252)
+        scale = (self.target / vol.replace(0.0, np.nan)).clip(upper=self.cap).fillna(0.0)
+        scale = hold_between_rebalances(scale.to_frame("s"), self.rebalance)["s"]
+        return self._out(_rescale(w, scale, self.funded))
+
+
+class _Offset(_Combo):
+    def __init__(self, spec: dict):
+        base = spec["base"]
+        super().__init__([build(base | {"rebalance": "D"})])
+        self.freq, self.days = base["rebalance"], spec["days"]
+
+    def weights(self, panel):
+        w = self._parts[0].weights(panel)
+        # The usual rebalance day, moved `days` business days later. Whether a day ended
+        # its week or month is known the next day, so this never looks ahead.
+        mask = rebalance_dates(w.index, self.freq).shift(self.days, fill_value=False)
+        w = w.copy()
+        w.loc[~mask.to_numpy()] = np.nan
+        return self._out(w.ffill().fillna(0.0))
+
+
+class _Ensemble(_Combo):
+    def __init__(self, spec: dict):
+        super().__init__([build(p) for p in spec["parts"]])
+
+    def weights(self, panel):
+        n = len(self._parts)
+        total = pd.DataFrame(0.0, index=panel.index, columns=self.instruments())
+        for p in self._parts:
+            w = p.weights(panel).reindex(index=panel.index).fillna(0.0) / n
+            if self.funded and not getattr(p, "funded", False):
+                # A self-financing part earns the T-bill on its slice of capital.
+                w[B.CASH] = w.get(B.CASH, 0.0) + 1 / n
+            total = total.add(w, fill_value=0.0)
+        return self._out(total)
+
+
+def _build_wrapper(spec: dict) -> B.Block:
+    return {"gated": _Gated, "voltarget": _VolTarget, "offset": _Offset,
+            "ensemble": _Ensemble}[spec["kind"]](spec)
+
+
+def _series_label(key: str) -> str:
+    head, tail = key.split(".", 1)
+    if head == "cot":
+        return f"{tail.removesuffix('_PCT')} positioning"
+    if head == "policy":
+        return f"{tail} policy rate"
+    if head == "curve":
+        return f"{tail.replace('UST_', 'US ').replace('EA_AAA_', 'euro ')} yield"
+    return SHORT.get(key) or tail.replace("_", " ")
+
+
+def _gate_label(g: dict) -> tuple[str, str]:
+    """A short form for names and a plain sentence for the one-line description."""
+    s, n, t = _series_label(g["series"]), g["window"], g["test"]
+    lv = g.get("level")
+    short = {"above_avg": f"{s} over {n}d avg", "below_avg": f"{s} under {n}d avg",
+             "rising": f"{s} up {n}d", "falling": f"{s} down {n}d",
+             "z_above": f"{s} z>{lv} {n}d", "z_below": f"{s} z<{lv} {n}d"}[t]
+    long = {"above_avg": f"{s} is above its {n}-day average",
+            "below_avg": f"{s} is below its {n}-day average",
+            "rising": f"{s} is higher than {n} days ago",
+            "falling": f"{s} is lower than {n} days ago",
+            "z_above": f"{s} is over {lv} standard deviations from its {n}-day norm",
+            "z_below": f"{s} is under {lv} standard deviations from its {n}-day norm"}[t]
+    return short, long
+
+
+def _fit(head: str, tail: str, limit: int = 70) -> str:
+    if len(head) + len(tail) <= limit:
+        return head + tail
+    return head[:max(limit - len(tail) - 3, 8)].rstrip() + "..." + tail
+
+
+def _describe_wrapper(spec: dict) -> dict:
+    k = spec["kind"]
+    if k == "ensemble":
+        ds = [describe(p) for p in spec["parts"]]
+        names = " + ".join(d["name"] for d in ds)
+        fams = {d["family"] for d in ds}
+        return {"name": _fit(f"Blend: {names}", ""),
+                "line": f"An equal blend of {len(ds)}: " + "; ".join(
+                    d["line"].rstrip(".") for d in ds) + ".",
+                "family": fams.pop() if len(fams) == 1 else "mixed", "style": "blend",
+                "asset": _wrapper_asset(spec)}
+    d = describe(spec["base"])
+    line = d["line"].rstrip(".")
+    if k == "gated":
+        short, long = _gate_label(spec["gate"])
+        name, line = _fit(d["name"], f" if {short}"), f"{line}, only while {long}."
+        style = "regime filter"
+    elif k == "voltarget":
+        t = f"{spec['target']:.0%}"
+        name = _fit(d["name"], f" at {t} risk")
+        line = f"{line}, scaled to {t} yearly risk, at most {spec['cap']}x."
+        style = "risk target"
+    else:
+        name = _fit(d["name"], f" +{spec['days']}d")
+        line = f"{line}, rebalanced {spec['days']} business days after the usual day."
+        style = "shifted rebalance"
+    return {"name": name, "line": line, "family": d["family"], "style": style,
+            "asset": d["asset"]}
+
+
+def _wrapper_asset(spec: dict) -> str:
+    if spec["kind"] == "ensemble":
+        kinds = {_asset_class(p) for p in spec["parts"]}
+        return kinds.pop() if len(kinds) == 1 else "mixed"
+    return _asset_class(spec["base"])
+
+
 # --- storage --------------------------------------------------------------------
 
 SCHEMA = """
@@ -464,36 +812,69 @@ def evaluate(spec: dict, panel: pd.DataFrame, bench: pd.Series, bench_ex: pd.Ser
             "skew": float(stats.skew(ex)), "kurt": float(stats.kurtosis(ex, fisher=False))}
 
 
-def _panel() -> tuple[pd.DataFrame, str]:
+def _panel() -> tuple[pd.DataFrame, str, set[str]]:
     keys = sorted({*FX, *WIDE, *IND, *FAC, B.MKT, "bond.TR10", "bond.TR2", "bond.UST10Y",
                    "bond.UST2Y", "cmd.BRENT", "cmd.COPPER", "risk.VIX", "rate.USD",
                    "rate.TBILL3M", *[f"rate.{c}" for c in G10]})
-    # The wider data (DEC-0027) is optional: a series not yet fetched on this machine
-    # is left out, and the variations that need it are recorded as failed.
+    # The wider data (DEC-0027) and the rest of the catalog are optional: a series not
+    # yet fetched on this machine is left out, the sampler does not draw it as a filter,
+    # and variations that still need it are recorded as failed.
     wider = sorted({*COT_UNIVERSE, *S.cot_keys([*S.COT_FX, "SPX_EMINI"]), *S.XWIDE,
-                    *S.policy_keys(S.XWIDE), "risk.STLFSI", "risk.NFCI", "macro.CLAIMS"})
+                    *S.policy_keys(S.XWIDE), "risk.STLFSI", "risk.NFCI", "macro.CLAIMS",
+                    *TRADABLE - {B.CASH}, *GATE_SERIES})
     root = store.DEFAULT_DIR
     keys += [k for k in wider if k not in keys and store._path(catalog.get(k), root).exists()]
     snap = store.coverage().get("fetched_at") or "unknown"
-    return store.panel(keys), snap
+    return store.panel(keys), snap, set(keys)
+
+
+def _pool(con: sqlite3.Connection) -> list[dict]:
+    """Specs already tried that ran and made money, for wrapping and blending."""
+    rows = con.execute("SELECT spec FROM trials WHERE error IS NULL AND sharpe > 0")
+    return [json.loads(r[0]) for r in rows]
+
+
+def novelty(r: random.Random, seen: set[str], ctx: Context | None = None,
+            probes: int = 40) -> list[tuple[int, int]]:
+    """For each sampler, (new, drawn) over a few trial draws. A sampler whose draws are
+    mostly repeats has worked through its region, so it is drawn less (`run_batch`)."""
+    out = []
+    for fn, _ in SAMPLERS:
+        new = sum(spec_id(_draw(fn, r, ctx)) not in seen for _ in range(probes))
+        out.append((new, probes))
+    return out
 
 
 def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = None) -> dict:
-    """Try `n` new variations. Ones already tried are skipped, not re-counted."""
+    """Try `n` new variations. Repeats are rejected before any backtest and are never
+    counted as trials; every variation backtested is a trial, failed ones included.
+
+    Each sampler is drawn in proportion to its weight times the share of its recent
+    draws that were new, so saturated regions fade and fresh ones take over."""
     con = con or connect()
     r = random.Random(seed)
-    panel, snap = _panel()
+    panel, snap, have = _panel()
     cfg = BacktestConfig()
     bench_res = run(_benchmark(), panel, BacktestConfig(cost_bps=0.0))
     seen = {row[0] for row in con.execute("SELECT id FROM trials")}
-    done = failed = 0
-    for _ in range(n * 5):
+    ctx = Context(have=have, pool=_pool(con))
+    stats_ = novelty(r, seen, ctx)
+    base_w = [w for _, w in SAMPLERS]
+    done = failed = repeats = 0
+    for _ in range(n * 50):
         if done + failed >= n:
             break
-        spec = sample(r)
+        weights = [w * (new + 1) / (drawn + 2) for w, (new, drawn) in zip(base_w, stats_,
+                                                                           strict=True)]
+        i = r.choices(range(len(SAMPLERS)), weights=weights)[0]
+        spec = _draw(SAMPLERS[i][0], r, ctx)
         sid = spec_id(spec)
+        new, drawn = stats_[i]
         if sid in seen:
+            stats_[i] = (new, drawn + 1)
+            repeats += 1
             continue
+        stats_[i] = (new + 1, drawn + 1)
         seen.add(sid)
         d = describe(spec)
         row = {"id": sid, "spec": json.dumps(spec, sort_keys=True), **{k: d[k] for k in
@@ -509,7 +890,7 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
         con.execute(f"INSERT OR REPLACE INTO trials ({cols}) VALUES ({', '.join('?' * len(row))})",
                     [_clean(v) for v in row.values()])
         con.commit()
-    return {"tried": done, "failed": failed}
+    return {"tried": done, "failed": failed, "repeats": repeats}
 
 
 def _clean(v):
@@ -554,7 +935,8 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
         export(con=con)
         total = con.execute("SELECT COUNT(*) FROM trials").fetchone()[0]
         print(f"{datetime.now(UTC).isoformat(timespec='seconds')} +{out['tried']} "
-              f"({out['failed']} failed), {total} tried in all", flush=True)
+              f"({out['failed']} failed, {out['repeats']} repeats skipped), "
+              f"{total} tried in all", flush=True)
         time.sleep(pause)
 
 

@@ -382,7 +382,8 @@ def _search(args) -> int:
             search.run_forever(batch=args.batch, max_hours=args.hours)
             return 0
         out = search.run_batch(args.n, seed=args.seed)
-        print(f"tried {out['tried']}, failed {out['failed']}")
+        print(f"tried {out['tried']}, failed {out['failed']}, "
+              f"rejected {out['repeats']} repeats before backtesting")
     doc = search.export() if args.action in ("run", "export") else None
     df = search.load()
     good = df[df["error"].isna()].copy()
