@@ -98,6 +98,7 @@ If the 90-day numbers miss by more than half, we stop and rethink, as set out in
 
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
+- [DEC-0039: A front page for Verify, dark glass and scroll scenes](../decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 <!-- backlinks:end -->

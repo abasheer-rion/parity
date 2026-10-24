@@ -105,9 +105,14 @@ def main(out: Path) -> int:
     if index:
         newest = json.loads((out / "latest.json").read_text())
         stats["generated_at"] = newest["generated_at"]
-        stats["strategies_tested"] = sum(1 for r in newest["runs"] if not r.get("is_benchmark") and r.get("gauntlet"))
+        tested = [r for r in newest["runs"] if not r.get("is_benchmark") and r.get("gauntlet")]
+        stats["strategies_tested"] = len(tested)
+        # How many beat simply holding the market after costs and the luck check (DEC-0039).
+        stats["strategies_beat_market"] = sum(1 for r in tested if (r.get("gauntlet") or {}).get("beats_sp500") is True)
     if snap and isinstance(snap["doc"].get("trials"), int):
         stats["variations_searched"] = snap["doc"]["trials"]
+        if isinstance(snap["doc"].get("passed_luck_check"), int):
+            stats["search_passed_luck"] = snap["doc"]["passed_luck_check"]
     (out.parent / "stats.json").write_text(json.dumps(stats))
     print(f"exported {len(index)} runs ({len(batches)} published) to {out}")
     return 0

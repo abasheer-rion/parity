@@ -83,6 +83,8 @@ export function SignIn() {
       </div>
       <Notice>{error}</Notice>
 
+      {/* Keyed, so switching method replays the short fade between the two forms. */}
+      <div className="auth-swap" key={`${method}-${codeSent}`}>
       {method === "password" && (
         <form className="auth-form" onSubmit={withPassword} noValidate>
           <Field label="Email" type="email" auto="email" value={email} onChange={setEmail} autoFocus />
@@ -106,6 +108,7 @@ export function SignIn() {
           <button type="button" className="auth-text-btn" onClick={() => { setCodeSent(false); setCode(""); }}>Use a different email</button>
         </form>
       )}
+      </div>
 
       <div className="auth-links">
         <a href={withNext(ROUTES.reset, next)}>Forgot your password?</a>

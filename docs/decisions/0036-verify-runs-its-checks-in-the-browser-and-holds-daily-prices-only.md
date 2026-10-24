@@ -95,6 +95,7 @@ The opt-in box is never ticked for the person, says the data may be sold in aggr
 ## Referenced by
 
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
+- [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
 <!-- backlinks:end -->

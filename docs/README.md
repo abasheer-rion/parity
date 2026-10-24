@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 38 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 39 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
@@ -34,9 +34,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-24 [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
+- 2026-10-24 [DEC-0039: A front page for Verify, dark glass and scroll scenes](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - 2026-10-24 [DEC-0038: Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - 2026-10-24 [DEC-0037: Everything runs by itself and the search widens itself](decisions/0037-everything-runs-by-itself-and-the-search-widens-itself.md)
-- 2026-10-24 [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 
 ## intent
 
@@ -88,6 +88,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0036 | [Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md) | accepted | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0037 | [Everything runs by itself and the search widens itself](decisions/0037-everything-runs-by-itself-and-the-search-widens-itself.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
 | DEC-0038 | [Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0039 | [A front page for Verify, dark glass and scroll scenes](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
