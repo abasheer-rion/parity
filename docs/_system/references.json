@@ -613,7 +613,9 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/research/0001-reading-list.md",
-        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md",
+        "docs/reference/0016-parity-verify-mvp-spec.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -5814,7 +5816,8 @@
         "docs/algorithms/0053-value-hml.md",
         "docs/research/0001-reading-list.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
-        "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
+        "docs/research/0011-where-market-edges-come-from-and-which-survive.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -12052,7 +12055,7 @@
       "type": "web-page",
       "authors": [],
       "year": null,
-      "title": null,
+      "title": "IG UK home page, retail CFD loss disclosure",
       "venue": "ig.com",
       "doi": null,
       "arxiv": null,
@@ -12062,11 +12065,13 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
         "source": "repo",
-        "doi_explicit": false
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
       }
     },
     {
@@ -14080,7 +14085,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {
@@ -15596,7 +15602,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "note": "Linked in this repo as: CFTC advisory",
       "metadata": {
@@ -19538,7 +19545,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/numerai-crowdsourced-ensemble.json",
-        "docs/algorithms/0035-numerai-crowdsourced-ensemble.md"
+        "docs/algorithms/0035-numerai-crowdsourced-ensemble.md",
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "note": "Linked in this repo as: Numerai blog, Numerai Raises $30M Series C",
       "metadata": {
@@ -24369,7 +24377,8 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md",
+        "docs/reference/0016-parity-verify-mvp-spec.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -25297,6 +25306,997 @@
         "doi_explicit": false
       },
       "note": "Opened for RES-0012 on 2026-10-23"
+    },
+    {
+      "key": "bailey2012",
+      "type": "paper",
+      "authors": [
+        "Bailey, David",
+        "López de Prado, Marcos"
+      ],
+      "year": 2012,
+      "title": "The Sharpe ratio efficient frontier",
+      "venue": "The Journal of Risk 15(2), 3-44",
+      "doi": "10.21314/jor.2012.255",
+      "arxiv": null,
+      "url": "https://doi.org/10.21314/JOR.2012.255",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0016-parity-verify-mvp-spec.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "url-03099067",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "About Kaiko",
+      "venue": "kaiko.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kaiko.com/about-kaiko",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-03c3c09f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Tradervue home page",
+      "venue": "tradervue.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradervue.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-0521e581",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView plans and pricing",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-10a779e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Algorithmic trading market size and share analysis",
+      "venue": "mordorintelligence.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.mordorintelligence.com/industry-reports/algorithmic-trading-market",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-11e4faa9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "StrategyQuant X pricing",
+      "venue": "strategyquant.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://strategyquant.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-1b09894d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantPad home page",
+      "venue": "quantpad.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpad.ai/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-20151496",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 home page",
+      "venue": "trade.collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://trade.collective2.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-21b265d8",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "New FTC data show a big jump in reported losses to fraud to $12.5 billion in 2024",
+      "venue": "ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2025/03/new-ftc-data-show-big-jump-reported-losses-fraud-125-billion-2024",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-23cb3eee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex, become investable",
+      "venue": "darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinex.com/become-investable",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-2914af50",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Alternative data market size and share analysis",
+      "venue": "mordorintelligence.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.mordorintelligence.com/industry-reports/alternative-data-market",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-3d390ac6",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "eToro Group Ltd., Form F-1/A registration statement (2025)",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1493318/000121390025039451/ea0223534-11.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-40d7e26e",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "NFA Compliance Rule 2-29, communications with the public and promotional material",
+      "venue": "nfa.futures.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nfa.futures.org/rulebook/rules.aspx?RuleID=RULE%202-29&Section=4",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-41810c96",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Numerai tournament scoring",
+      "venue": "docs.numer.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.numer.ai/numerai-tournament/scoring",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-4eefbf30",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "ranaroussi/quantstats",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/ranaroussi/quantstats",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-51e0556a",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1381197/000138119726000147/ibkr-20260630.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-579f7291",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cryptohopper home page",
+      "venue": "cryptohopper.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cryptohopper.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-59599351",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cryptohopper pricing",
+      "venue": "cryptohopper.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cryptohopper.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-6c190e5d",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC charges two investment advisers with making false and misleading statements about their use of artificial intelligence",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/press-releases/2024-36",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-6d753ea2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FINRA Foundation, Investors in the United States: the changing landscape (2022)",
+      "venue": "finrafoundation.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finrafoundation.org/sites/finrafoundation/files/NFCS-Investor-Report-Changing-Landscape.pdf",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-780a43b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Pine Script user manual, repainting",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/pine-script-docs/concepts/repainting/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-7ae24f30",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FX Replay pricing",
+      "venue": "fxreplay.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxreplay.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-7b00d723",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect home page",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-8436b75b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Edgewonk pricing",
+      "venue": "edgewonk.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://edgewonk.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-854779e4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex for investors",
+      "venue": "darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinex.com/investors",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-950b726b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Build Alpha pricing and licensing",
+      "venue": "buildalpha.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.buildalpha.com/licensing/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-9a1baa9c",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "eToro Group Ltd., annual report on Form 20-F for 2025",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1493318/000121390026022034/ea0278371-20f_etoro.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-9d661003",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Composer pricing",
+      "venue": "composer.trade",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.composer.trade/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-a8c4abb3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance copy trading",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en/copy-trading",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-a99cdde2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "17 CFR 275.206(4)-1, investment adviser marketing",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/275.206(4)-1",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-be81eda4",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC charges five investment advisers for marketing rule violations",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/press-releases/2024-46",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-c4fa64dc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Myfxbook home page",
+      "venue": "myfxbook.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.myfxbook.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-c53f97a6",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC charges nine investment advisers in ongoing sweep into marketing rule violations",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/news/press-release/2023-173",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-c5c4f9e9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Pionex home page",
+      "venue": "pionex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pionex.com/en/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-c9da2bd1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Alternative data market size, share and trends report",
+      "venue": "grandviewresearch.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.grandviewresearch.com/industry-analysis/alternative-data-market",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-dd4f26d0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ZuluTrade home page",
+      "venue": "zulutrade.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.zulutrade.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-dd7a6dd5",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Markets, Form 10-Q for the quarter ended 30 June 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000114/hood-20260630.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e0285b3b",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Federal court orders South African company to pay over $1.7 billion in restitution for forex fraud",
+      "venue": "cftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/8772-23",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e0307c82",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "3Commas pricing",
+      "venue": "3commas.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://3commas.io/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e0a49b44",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Charles Schwab Corporation, Form 10-Q for the quarter ended 30 June 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/316709/000031670926000031/schw-20260630.htm",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e132b4e4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FX Blue home page",
+      "venue": "fxblue.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxblue.com/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e6e8d042",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro Pro Investor program",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/copytrader/popular-investor/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-e95d4a55",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "3Commas home page",
+      "venue": "3commas.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://3commas.io/",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-fa00b2c3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradeZella pricing",
+      "venue": "tradezella.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradezella.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
+    },
+    {
+      "key": "url-fac0e504",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Algorithmic trading market size, share and trends report",
+      "venue": "grandviewresearch.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.grandviewresearch.com/industry-analysis/algorithmic-trading-market-report",
+      "also_at": [],
+      "accessed": "2026-10-23",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand for RES-0020, page fetched 2026-10-23"
+      }
     }
   ]
 }

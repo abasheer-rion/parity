@@ -6,13 +6,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 | Type | What it holds | Count |
 | --- | --- | --- |
-| [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 31 |
+| [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 32 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 12 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 16 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 12 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
@@ -32,11 +32,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
 - 2026-10-24 [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
+- 2026-10-23 [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- 2026-10-23 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
-- 2026-10-23 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
 
 ## intent
 
@@ -44,6 +44,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | INT-0001 | [Initial intent](intent/0001-initial-intent.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx), [intent](TAGS.md#intent) |
 | INT-0002 | [Two products, a research and simulation platform and a public trading app](intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md) | current | 2026-10-21 | [process](TAGS.md#process) |
+| INT-0003 | [Parity Verify, the lie detector for trading strategies and bots](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md) | current | 2026-10-23 | [intent](TAGS.md#intent), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## decision
 
@@ -80,6 +81,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
 | DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0031 | [Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0032 | [Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md) | proposed | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [process](TAGS.md#process) |
 
 ## hypothesis
 
@@ -120,6 +122,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | RES-0012 | [Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [private-markets](TAGS.md#private-markets) |
+| RES-0020 | [Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## guide
 
@@ -152,6 +155,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
+| REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | draft | 2026-10-23 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## log
 

@@ -3,18 +3,18 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1022 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1067 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 330 |
+| [Papers](#papers) | 331 |
 | [Preprints and working papers](#preprints-and-working-papers) | 44 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
-| [Software](#software) | 62 |
-| [Web pages](#web-pages) | 416 |
+| [Software](#software) | 63 |
+| [Web pages](#web-pages) | 448 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 36 |
+| [Regulators](#regulators) | 47 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -209,6 +209,12 @@ Avellaneda, Marco; Lee, Jeong-Hyun (2010). Statistical arbitrage in the US equit
 
 Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
 
+### bailey2012
+
+Bailey, David; López de Prado, Marcos (2012). The Sharpe ratio efficient frontier. *The Journal of Risk 15(2), 3-44*. doi:10.21314/jor.2012.255 <https://doi.org/10.21314/jor.2012.255>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md).
+
 ### bailey2014
 
 Bailey, Borwein, Lopez de Prado and Zhu (2014). Pseudo-Mathematics and Financial Charlatanism: The Effects of Backtest Overfitting on Out-of-Sample Performance. *Notices of the AMS 61(5), 458*. <https://www.ams.org/notices/201405/rnoti-p458.pdf>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -219,7 +225,7 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### bailey2016
 
@@ -929,7 +935,7 @@ Getmansky, Mila; Lo, Andrew W.; Makarov, Igor (2004). An econometric model of se
 
 Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### giannone2008
 
@@ -1583,7 +1589,7 @@ Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn
 
 McLean, R. David; Pontiff, Jeffrey (2016). Does Academic Research Destroy Stock Return Predictability? *The Journal of Finance 71(1), 5-32*. doi:10.1111/jofi.12365 <https://doi.org/10.1111/jofi.12365>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### meese1983
 
@@ -3425,6 +3431,12 @@ colachenkc/Dynamic-Grid-Trading. (n.d.). *GitHub*. <https://github.com/colachenk
 
 Cited in: [catalog/algorithms/crypto-grid-trading-bot.json](../catalog/algorithms/crypto-grid-trading-bot.json), [ALG-0025](algorithms/0025-crypto-grid-trading-bot.md).
 
+### url-4eefbf30
+
+ranaroussi/quantstats. (n.d.). *GitHub*. <https://github.com/ranaroussi/quantstats>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-50b3d88f
 
 macrosynergy/macrosynergy. (n.d.). *GitHub*. <https://github.com/macrosynergy/macrosynergy>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3769,6 +3781,12 @@ Proof-of-stake rewards and penalties. (n.d.). *ethereum.org*. <https://ethereum.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-03099067
+
+About Kaiko. (n.d.). *kaiko.com*. <https://www.kaiko.com/about-kaiko>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-0340a1da
 
 Census limits. (n.d.). *census.gov*. <https://www.census.gov/data/developers/guidance/api-user-guide.Query_Limits.html>. Accessed 2026-10-22. Verification: not checked.
@@ -3780,6 +3798,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 API FAQ. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developers/api_faqs.htm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-03c3c09f
+
+Tradervue home page. (n.d.). *tradervue.com*. <https://www.tradervue.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-04a2bcae
 
@@ -3802,6 +3826,12 @@ Integrations | NautilusTrader. (n.d.). *nautilustrader.io*. <https://nautilustra
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-0521e581
+
+TradingView plans and pricing. (n.d.). *tradingview.com*. <https://www.tradingview.com/pricing/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-0595d114
 
@@ -3941,6 +3971,18 @@ Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### url-10a779e1
+
+Algorithmic trading market size and share analysis. (n.d.). *mordorintelligence.com*. <https://www.mordorintelligence.com/industry-reports/algorithmic-trading-market>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-11e4faa9
+
+StrategyQuant X pricing. (n.d.). *strategyquant.com*. <https://strategyquant.com/pricing/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-124df7c9
 
 No title recorded. (n.d.). *investing.com*. <https://www.investing.com/economic-calendar/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4065,6 +4107,12 @@ Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### url-1b09894d
+
+QuantPad home page. (n.d.). *quantpad.ai*. <https://quantpad.ai/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-1bb17f95
 
 Federal Reserve press releases: API documentation. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/feeds/feeds.htm>. Accessed 2026-10-21. Verification: not checked.
@@ -4135,11 +4183,23 @@ Barber, Lee, Liu, Odean and Zhang (2017 version), Do day traders rationally lear
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### url-20151496
+
+Collective2 home page. (n.d.). *trade.collective2.com*. <https://trade.collective2.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-2273dca0
 
 No title recorded. (n.d.). *International Monetary Fund*. <https://www.imf.org/en/about/copyright-and-terms>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
+
+### url-23cb3eee
+
+Darwinex, become investable. (n.d.). *darwinex.com*. <https://www.darwinex.com/become-investable>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-23db8942
 
@@ -4182,6 +4242,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 No title recorded. (n.d.). *Trading Economics*. <https://api.tradingeconomics.com/calendar?c=guest:guest>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-2914af50
+
+Alternative data market size and share analysis. (n.d.). *mordorintelligence.com*. <https://www.mordorintelligence.com/industry-reports/alternative-data-market>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-2933f765
 
@@ -4420,6 +4486,12 @@ ZenPilot | ClickUp's #1 Rated Solutions Partner. (n.d.). *zenpilot.com*. <https:
 Note: Linked in this repo as: home page.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-41810c96
+
+Numerai tournament scoring. (n.d.). *docs.numer.ai*. <https://docs.numer.ai/numerai-tournament/scoring>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-41abc0ae
 
@@ -4689,6 +4761,12 @@ The Forex Geek. (n.d.). *theforexgeek.com*. <https://theforexgeek.com/zennbot-re
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-579f7291
+
+Cryptohopper home page. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-588f99ff
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/terms_of_service/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4702,6 +4780,12 @@ Algorithmic Trading Platform - QuantConnect.com. (n.d.). *quantconnect.com*. <ht
 Note: Linked in this repo as: learning page.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-59599351
+
+Cryptohopper pricing. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-5a683f28
 
@@ -4747,9 +4831,9 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-mark
 
 ### url-5d48f0dc
 
-No title recorded. (n.d.). *ig.com*. <https://www.ig.com/uk>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
+IG UK home page, retail CFD loss disclosure. (n.d.). *ig.com*. <https://www.ig.com/uk>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-5dc0a72e
 
@@ -4929,6 +5013,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-6d753ea2
+
+FINRA Foundation, Investors in the United States: the changing landscape (2022). (n.d.). *finrafoundation.org*. <https://www.finrafoundation.org/sites/finrafoundation/files/NFCS-Investor-Report-Changing-Landscape.pdf>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-6e2dd1ec
 
 CoinGecko API: API documentation. (n.d.). *CoinGecko*. <https://docs.coingecko.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5019,6 +5109,12 @@ No title recorded. (n.d.). *Dukascopy Bank SA*. <https://www.dukascopy.com/swiss
 
 Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
 
+### url-780a43b3
+
+Pine Script user manual, repainting. (n.d.). *tradingview.com*. <https://www.tradingview.com/pine-script-docs/concepts/repainting/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-78cdfc5c
 
 Coursera (n.d.). Machine Learning for Trading. *coursera.org*. <https://coursera.org/specializations/machine-learning-trading>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -5055,6 +5151,12 @@ Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### url-7ae24f30
+
+FX Replay pricing. (n.d.). *fxreplay.com*. <https://www.fxreplay.com/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-7ae70a8d
 
 DataMine API. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/datamine/datamine-api.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5068,6 +5170,12 @@ Backtesting vs live or paper trading results - QuantConnect.com. (n.d.). *quantc
 Note: Linked in this repo as: QuantConnect: backtesting vs live.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-7b00d723
+
+QuantConnect home page. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-7b991bf4
 
@@ -5201,13 +5309,19 @@ No title recorded. (n.d.). *home.treasury.gov*. <https://home.treasury.gov/resou
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-8436b75b
+
+Edgewonk pricing. (n.d.). *edgewonk.com*. <https://edgewonk.com/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-849471fb
 
 The Modern Prop Trading Firm since 2015 | FTMO. (n.d.). *ftmo.com*. <https://ftmo.com/en/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Note: Linked in this repo as: None.
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-85310524
 
@@ -5216,6 +5330,12 @@ FX Macro Economic Sentiment Algorithm - QuantConnect.com. (n.d.). *quantconnect.
 Note: Linked in this repo as: QuantConnect: FX macro economic sentiment algorithm.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-854779e4
+
+Darwinex for investors. (n.d.). *darwinex.com*. <https://www.darwinex.com/investors>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-8648340c
 
@@ -5389,6 +5509,12 @@ Note: Linked in this repo as: free trial.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-950b726b
+
+Build Alpha pricing and licensing. (n.d.). *buildalpha.com*. <https://www.buildalpha.com/licensing/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-959feb3c
 
 International sanctions against Iran. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Sanctions_against_Iran>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5462,6 +5588,12 @@ Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.js
 Bank of England news: API documentation. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/rss>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md).
+
+### url-9d661003
+
+Composer pricing. (n.d.). *composer.trade*. <https://www.composer.trade/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-9d8bddf7
 
@@ -5609,6 +5741,12 @@ No title recorded. (n.d.). *socialcrawl.dev*. <https://www.socialcrawl.dev/blog/
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a8c4abb3
+
+Binance copy trading. (n.d.). *binance.com*. <https://www.binance.com/en/copy-trading>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-a8c9acd0
 
 Alpha Streams Refactoring 2.0 - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/forum/discussion/13441/alpha-streams-refactoring-2-0/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5624,6 +5762,12 @@ Reddit Data API Terms & Commercial Use (2026): Rate Limits, Pricing, Approval. (
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-a99cdde2
+
+17 CFR 275.206(4)-1, investment adviser marketing. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/275.206(4)-1>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-aa1fc24a
 
@@ -5923,6 +6067,18 @@ Libyan civil war (2011). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Lib
 
 Cited in: [catalog/events/libya-civil-war-2011.json](../catalog/events/libya-civil-war-2011.json).
 
+### url-c4fa64dc
+
+Myfxbook home page. (n.d.). *myfxbook.com*. <https://www.myfxbook.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-c5c4f9e9
+
+Pionex home page. (n.d.). *pionex.com*. <https://www.pionex.com/en/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-c628b819
 
 FRED notice. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/GOLDAMGBD228NLBM>. Accessed 2026-10-22. Verification: not checked.
@@ -5980,6 +6136,12 @@ Data: Querying, Analyzing and Downloading: The GDELT Project. (n.d.). *The GDELT
 Note: Linked in this repo as: raw data.
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-c9da2bd1
+
+Alternative data market size, share and trends report. (n.d.). *grandviewresearch.com*. <https://www.grandviewresearch.com/industry-analysis/alternative-data-market>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-cb7eb048
 
@@ -6115,6 +6277,12 @@ IMF terms. (n.d.). *imf.org*. <https://www.imf.org/en/About/copyright-and-terms>
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-dd4f26d0
+
+ZuluTrade home page. (n.d.). *zulutrade.com*. <https://www.zulutrade.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-de463277
 
 1,285 strategy sleeves, frozen before the test: the year-by-year table is the warning - DEV Community. (n.d.). *dev.to*. <https://dev.to/arhancanli/1285-strategy-sleeves-frozen-before-the-test-the-year-by-year-table-is-the-warning-2np4>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6122,6 +6290,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-e0307c82
+
+3Commas pricing. (n.d.). *3commas.io*. <https://3commas.io/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-e0c96eea
 
@@ -6134,6 +6308,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Hurricane Katrina. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Hurricane_Katrina>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/hurricane-katrina-2005.json](../catalog/events/hurricane-katrina-2005.json).
+
+### url-e132b4e4
+
+FX Blue home page. (n.d.). *fxblue.com*. <https://www.fxblue.com/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-e177aeb7
 
@@ -6205,6 +6385,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-e6e8d042
+
+eToro Pro Investor program. (n.d.). *etoro.com*. <https://www.etoro.com/copytrader/popular-investor/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-e719ee41
 
 Iranian Revolution. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iranian_Revolution>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -6258,6 +6444,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 Avellaneda and Lee (June 2009 version), abstract. (n.d.). *math.nyu.edu*. <https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
+
+### url-e95d4a55
+
+3Commas home page. (n.d.). *3commas.io*. <https://3commas.io/>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-e97a72dc
 
@@ -6439,11 +6631,23 @@ No title recorded. (n.d.). *CoinGecko*. <https://api.coingecko.com/api/v3/simple
 
 Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md).
 
+### url-fa00b2c3
+
+TradeZella pricing. (n.d.). *tradezella.com*. <https://www.tradezella.com/pricing>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-faad0124
 
 Databento live data. (n.d.). *databento.com*. <https://databento.com/docs/portal/live-data.md>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-fac0e504
+
+Algorithmic trading market size, share and trends report. (n.d.). *grandviewresearch.com*. <https://www.grandviewresearch.com/industry-analysis/algorithmic-trading-market-report>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-fbd813ac
 
@@ -6457,7 +6661,7 @@ Numerai Raises $30M Series C At $500M Valuation. (n.d.). *blog.numer.ai*. <https
 
 Note: Linked in this repo as: Numerai blog, Numerai Raises $30M Series C.
 
-Cited in: [catalog/algorithms/numerai-crowdsourced-ensemble.json](../catalog/algorithms/numerai-crowdsourced-ensemble.json), [ALG-0035](algorithms/0035-numerai-crowdsourced-ensemble.md).
+Cited in: [catalog/algorithms/numerai-crowdsourced-ensemble.json](../catalog/algorithms/numerai-crowdsourced-ensemble.json), [ALG-0035](algorithms/0035-numerai-crowdsourced-ensemble.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-fc8bf6e6
 
@@ -6927,6 +7131,12 @@ complaint PDF. (n.d.). *ftc.gov*. <https://www.ftc.gov/system/files/ftc_gov/pdf/
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-21b265d8
+
+New FTC data show a big jump in reported losses to fraud to $12.5 billion in 2024. (n.d.). *ftc.gov*. <https://www.ftc.gov/news-events/news/press-releases/2025/03/new-ftc-data-show-big-jump-reported-losses-fraud-125-billion-2024>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-25765ba0
 
 Frequent Intraday Trading: Understanding the Basics | FINRA.org. (n.d.). *finra.org*. <https://www.finra.org/investors/learn-to-invest/advanced-investing/day-trading-margin-requirements-know-rules>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -6953,6 +7163,18 @@ No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://p
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
 
+### url-3d390ac6
+
+eToro Group Ltd., Form F-1/A registration statement (2025). (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1493318/000121390025039451/ea0223534-11.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-40d7e26e
+
+NFA Compliance Rule 2-29, communications with the public and promotional material. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/rulebook/rules.aspx?RuleID=RULE%202-29&Section=4>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-46fb23ac
 
 ESMA agrees to prohibit binary options and restrict CFDs to protect retail investors. (n.d.). *esma.europa.eu*. <https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6972,6 +7194,12 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-mark
 No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/RSS/RSSGP/rssgp.xml>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
+
+### url-51e0556a
+
+Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1381197/000138119726000147/ibkr-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-57a0d836
 
@@ -6994,6 +7222,12 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Regulatory Notice 09-31: non-traditional ETFs. (2009). *FINRA*. <https://www.finra.org/rules-guidance/notices/09-31>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-6c190e5d
+
+SEC charges two investment advisers with making false and misleading statements about their use of artificial intelligence. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2024-36>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-7414523f
 
@@ -7041,6 +7275,12 @@ Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### url-9a1baa9c
+
+eToro Group Ltd., annual report on Form 20-F for 2025. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1493318/000121390026022034/ea0278371-20f_etoro.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
 ### url-9f635241
 
 Staff statement on meme coins. (2025). *US SEC, Division of Corporation Finance*. <https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins>. Accessed 2026-10-22. Verification: not checked.
@@ -7053,13 +7293,25 @@ Customer Advisory: AI Won't Turn Trading Bots into Money Machines | CFTC. (n.d.)
 
 Note: Linked in this repo as: CFTC advisory.
 
-Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-be81eda4
+
+SEC charges five investment advisers for marketing rule violations. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2024-46>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-c239c50f
 
 EDGAR APIs. (n.d.). *sec.gov*. <https://www.sec.gov/search-filings/edgar-application-programming-interfaces>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-c53f97a6
+
+SEC charges nine investment advisers in ongoing sweep into marketing rule violations. (n.d.). *sec.gov*. <https://www.sec.gov/news/press-release/2023-173>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-c78e278a
 
@@ -7074,6 +7326,24 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 No title recorded. (n.d.). *sec.gov*. <https://www.sec.gov/files/investment/data/other/investment-company-series-class-information/investment-company-series-class-2026.csv>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-dd7a6dd5
+
+Robinhood Markets, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1783879/000178387926000114/hood-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-e0285b3b
+
+Federal court orders South African company to pay over $1.7 billion in restitution for forex fraud. (n.d.). *cftc.gov*. <https://www.cftc.gov/PressRoom/PressReleases/8772-23>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-e0a49b44
+
+Charles Schwab Corporation, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/316709/000031670926000031/schw-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
+
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
 ### url-f2a66230
 

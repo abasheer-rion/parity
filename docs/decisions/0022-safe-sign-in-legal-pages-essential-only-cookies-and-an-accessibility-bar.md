@@ -55,4 +55,5 @@ Sign-in worked for the simple case, but had gaps:
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
+- [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 <!-- backlinks:end -->
