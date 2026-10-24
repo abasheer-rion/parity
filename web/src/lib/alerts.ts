@@ -1,4 +1,4 @@
-// Trade alerts (DEC-0032): a price level, an RSI level or a close crossing a moving
+// Trade alerts (DEC-0033): a price level, an RSI level or a close crossing a moving
 // average, checked in the browser against delayed daily bars. Pure functions here; the
 // Trade area loads the bars, calls evaluateAlert and saves the first hit so each alert
 // fires once. Nothing here sends a message outside the app or places an order.

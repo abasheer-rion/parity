@@ -18,7 +18,7 @@
   .tr-pick select { width: 200px; }
 }
 
-/* Tabs row with the notifications bell (DEC-0032). */
+/* Tabs row with the notifications bell (DEC-0033). */
 .tr-tabs { display: flex; align-items: center; gap: var(--space-3); overflow: visible; }
 .tr-tabs .ui-tabs { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .tr-bell { position: relative; width: 32px; height: 32px; flex: none; }

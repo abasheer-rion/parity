@@ -1,4 +1,4 @@
-// Watchlists (DEC-0032): named lists of instruments, each row with its last delayed
+// Watchlists (DEC-0033): named lists of instruments, each row with its last delayed
 // close, the day and week change, a one-year line and a link to the chart; and the
 // alerts set on them. Saved to the person's account (supabase trade_watchlists and
 // trade_alerts); the preview without sign-in keeps them in this browser.

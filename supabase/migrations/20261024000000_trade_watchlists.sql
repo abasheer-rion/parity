@@ -1,4 +1,4 @@
--- Trade trackers (DEC-0032): each person's named watchlists and their price and
+-- Trade trackers (DEC-0033): each person's named watchlists and their price and
 -- indicator alerts. Alerts are checked in the browser against delayed daily closes and
 -- show as in-app notifications; nothing here sends email or places an order. Each person
 -- reads and writes only their own rows. Additive only: two new tables, nothing else changes.

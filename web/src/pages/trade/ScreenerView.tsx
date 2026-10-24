@@ -1,4 +1,4 @@
-// Screener (DEC-0032): filter the instruments by asset class and a few indicator
+// Screener (DEC-0033): filter the instruments by asset class and a few indicator
 // conditions. Each series is loaded once, six at a time. The table is sorted by name;
 // it filters and never ranks markets by return.
 import { useEffect, useMemo, useState } from "react";

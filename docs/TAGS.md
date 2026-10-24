@@ -651,6 +651,7 @@ The dashboard.
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0031: Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0033: Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)

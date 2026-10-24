@@ -1,5 +1,5 @@
 // Trade: charts, trackers and a demo account on delayed, end-of-day data (DEC-0031,
-// DEC-0032). Nothing here places a real order or touches real money; real trading is a
+// DEC-0033). Nothing here places a real order or touches real money; real trading is a
 // future decision for the owner (DEC-0019).
 import { useEffect } from "react";
 import { Title } from "../../components/Shell";

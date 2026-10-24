@@ -1,4 +1,4 @@
-// The Trade screener (DEC-0032): a few plain measures per instrument from its bars, and
+// The Trade screener (DEC-0033): a few plain measures per instrument from its bars, and
 // filters over them. It filters; it never ranks markets by return or says what to buy.
 import { adx, rsi, smaOf, type Bar } from "./indicators";
 
