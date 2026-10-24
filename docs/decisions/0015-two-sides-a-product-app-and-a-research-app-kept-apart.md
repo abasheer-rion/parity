@@ -93,6 +93,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
+- [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)

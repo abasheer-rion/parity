@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { AppGuard } from "./auth";
 import { Palette } from "./components/Palette";
 import { Popups } from "./components/Popups";
@@ -41,6 +41,10 @@ import { Watchlist } from "./pages/Watchlist";
 import { otherSide, simUrl, SPACE, SPACE_ROOT } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
+import { setStoreUser } from "./lib/userStore";
+
+// The Trade area carries the charting library, so it loads only when opened.
+const Trade = lazy(() => import("./pages/trade/Trade"));
 
 applyTheme();
 
@@ -57,11 +61,11 @@ function useHash(): string {
 export function App() {
   // Every page of the app needs a session (DEC-0012). The public pages (/, /login/,
   // /signup/, /reset/, /verify/) are a separate entry: src/auth/main.tsx.
-  return <AppGuard>{(user) => <Dashboard email={user.email} onSignOut={user.signOut} />}</AppGuard>;
+  return <AppGuard>{(user) => { setStoreUser(user.id); return <Dashboard email={user.email} onSignOut={user.signOut} />; }}</AppGuard>;
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private"];
+const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -145,6 +149,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "ledger" && <LedgerPage />}
       {route === "news" && <News view={arg} />}
       {route === "markets" && <Markets view={arg?.split("?")[0]} />}
+      {route === "trade" && <Suspense fallback={<PageSkeleton parts={["chart"]} label="Loading Trade" />}><Trade view={arg?.split("?")[0]} /></Suspense>}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "settings" && (
         <Settings section={arg} />

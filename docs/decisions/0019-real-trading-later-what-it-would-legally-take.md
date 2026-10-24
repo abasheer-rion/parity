@@ -46,6 +46,7 @@ Proposed, for the owner to accept or reject later. Nothing below is built.
 - [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 <!-- backlinks:end -->
