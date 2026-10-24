@@ -79,4 +79,5 @@ Everything still replays or reshuffles history. Nothing in it is a forecast. The
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
+- [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 <!-- backlinks:end -->

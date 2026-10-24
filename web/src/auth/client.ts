@@ -11,8 +11,9 @@ export const supabase = createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_K
   cookieOptions: {
     path: "/",
     // On the site's domain (endyland.com, from src/lib/site.json) the session is shared by
-    // the main address and sim.<domain>, so opening Sim World in its own tab needs no
-    // second sign-in. Elsewhere (pages.dev, localhost) the cookie stays on the one host.
+    // the main address, sim.<domain> and trade.<domain>, so opening Sim World or Parity Trade
+    // in its own tab needs no second sign-in. Elsewhere (pages.dev, localhost) the cookie
+    // stays on the one host.
     ...(onSiteDomain() ? { domain: `.${SITE_DOMAIN}` } : {}),
     sameSite: "lax",
     secure: window.location.protocol === "https:",

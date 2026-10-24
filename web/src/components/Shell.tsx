@@ -7,11 +7,11 @@ import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
-import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
+import { simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 
-interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: boolean }
+interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
 // Plain names: say what the page does, not what we call it internally. Each item's
 // hover text comes from lib/pages.ts, the same words search and Start here use.
@@ -33,15 +33,8 @@ const PRODUCT: NavItem[] = [
   },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
-  {
-    href: "#/trade", label: "Trade", icon: "graph", routes: ["trade"],
-    children: [
-      { href: "#/trade", label: "Chart", routes: [] },
-      { href: "#/trade/watchlists", label: "Watchlists", routes: [] },
-      { href: "#/trade/screener", label: "Screener", routes: [] },
-      { href: "#/trade/demo", label: "Demo account", routes: [] },
-    ],
-  },
+  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0040).
+  { href: tradeUrl(), label: "Trade", icon: "graph", routes: ["trade"], external: "Opens Parity Trade in a new tab" },
   {
     href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],
     children: [
@@ -97,7 +90,7 @@ const RESEARCH: NavItem[] = [
     ],
   },
   // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
-  { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: true },
+  { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: "Opens Parity Terminal in a new tab" },
   {
     href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
     children: [
@@ -213,7 +206,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.external ? "Opens Parity Terminal in a new tab" : pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
                         {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>

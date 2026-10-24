@@ -52,8 +52,8 @@ export function safeNext(raw: string | null | undefined, at: Here = here(), fall
 
   if (AUTH_PAGES.test(url.pathname)) return fallback;
   // "/" on the main site is the public front page; after signing in, the app is wanted.
-  // On sim.<domain>, "/" is Sim World itself, so it stays.
-  const path = url.pathname === "/" && !url.hostname.startsWith("sim.") ? DEFAULT_NEXT : url.pathname;
+  // On sim.<domain> and trade.<domain>, "/" is that app itself, so it stays.
+  const path = url.pathname === "/" && !/^(sim|trade)\./.test(url.hostname) ? DEFAULT_NEXT : url.pathname;
   const rest = path + url.search + url.hash;
   return url.origin === at.origin ? rest : `${url.origin}${rest}`;
 }

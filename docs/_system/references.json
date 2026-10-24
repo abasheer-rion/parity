@@ -26339,6 +26339,462 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-ef473588",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView chart UI elements",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/ui_elements/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: TradingView chart UI elements",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-d71f6973",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView trading terminal",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/trading_terminal/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: TradingView trading terminal",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-38bb2610",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView account manager",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/trading_terminal/account-manager/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: TradingView account manager",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-7c8f7c35",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView shortcuts",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/getting_started/Shortcuts/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: TradingView shortcuts",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-e92ba9ae",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView hotkeys help",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/support/solutions/43000629990-what-are-hotkeys-and-how-to-use-them/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: TradingView hotkeys help",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-cf72f580",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Legend layouts",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/support/articles/layouts-on-legend/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Robinhood Legend layouts",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-d999ca03",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Legend widget linking",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/support/articles/widget-linking-on-legend/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Robinhood Legend widget linking",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-5c120d22",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Legend trading",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/support/articles/trading-with-robinhood-legend/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Robinhood Legend trading",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-cb6d397b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull layouts",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/learn/2uYwVO/dwHBFK/What-is-a-layout",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Webull layouts",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-775a351c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull hotkeys",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/learn/courseware/jMIB8w/How-to-Use-the-Hotkey-Function-on-Webull-Desktop-Platform",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Webull hotkeys",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-3ccea4bb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim left sidebar",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Left-Sidebar",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: thinkorswim left sidebar",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-8c4be2f4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim flexible grid",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/charts/Flexible-Grid",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: thinkorswim flexible grid",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-ebc97b6b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim keyboard shortcuts",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Getting-Started/Keyboard-Shortcuts",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: thinkorswim keyboard shortcuts",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-625ceaed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR Mosaic layout",
+      "venue": "ibkrguides.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ibkrguides.com/traderworkstation/mosaic-layout.htm",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: IBKR Mosaic layout",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-58a8491f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR colour grouping",
+      "venue": "ibkrguides.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ibkrguides.com/traderworkstation/color-grouping-linked-panels.htm",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: IBKR colour grouping",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-41b7d97d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hyperliquid trade view (live app)",
+      "venue": "app.hyperliquid.xyz",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://app.hyperliquid.xyz/trade",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Hyperliquid trade view (live app)",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-b270557f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance futures interface",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en-BH/support/faq/how-to-customize-binance-futures-trading-interface-a784518335b0492a9ebfa4a72e1ca092",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Binance futures interface",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-796b1b8c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance advanced interface",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en/academy/articles/advanced-interface-guide",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Binance advanced interface",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-31ea218d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg Launchpad guide",
+      "venue": "lippincottlibrary.wordpress.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lippincottlibrary.wordpress.com/2013/03/11/bloomberg-launchpad-part-one/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "ok",
+      "verification_checked": "2026-10-24",
+      "used_in": [
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+      ],
+      "note": "Linked in this repo as: Bloomberg Launchpad guide",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "link text"
+      }
     }
   ]
 }

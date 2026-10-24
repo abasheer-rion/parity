@@ -43,4 +43,6 @@ The owner asked for "an actual trading platform" that people and researchers can
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
+- [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
 <!-- backlinks:end -->

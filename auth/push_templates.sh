@@ -57,12 +57,13 @@ for key, subject in subjects.items():
 if settings:
     body.update({
         "site_url": SITE_URL,
-        # Where sign-in may send people back to: the site, Sim World, any endyland.com
+        # Where sign-in may send people back to: the site, Sim World, Parity Trade, any endyland.com
         # subdomain we add later, the old pages.dev address while it still works, and
         # local development. Supabase falls back to the site URL for anything else.
         "uri_allow_list": ",".join([
             "https://parity.endyland.com/**",
             "https://sim.endyland.com/**",
+            "https://trade.endyland.com/**",
             "https://*.endyland.com/**",
             "https://parity-research.pages.dev/**",
             "https://*.parity-research.pages.dev/**",

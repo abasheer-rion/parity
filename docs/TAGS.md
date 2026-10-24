@@ -516,6 +516,7 @@ How the team works together.
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
+- [DEC-0040: Parity Trade, a full-screen trading app of its own](decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
@@ -537,6 +538,7 @@ How the team works together.
 - [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
 - [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
 - [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
+- [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 
 ## strategy
 
@@ -666,6 +668,8 @@ The dashboard.
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
+- [DEC-0040: Parity Trade, a full-screen trading app of its own](decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
@@ -673,3 +677,4 @@ The dashboard.
 - [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
+- [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)

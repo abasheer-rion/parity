@@ -25,3 +25,7 @@
   .pc-legend-row > span:nth-child(n+6) { display: none; }
   .pc-hint { right: 8px; top: auto; bottom: 34px; }
 }
+
+/* Fill mode (Parity Trade): the chart takes its parent's height, no frame of its own. */
+.pc-fill { height: 100%; gap: 0; }
+.pc-fill .pc-stage { flex: 1 1 auto; min-height: 0; border: 0; border-radius: 0; }

@@ -1,0 +1,130 @@
+// Parity Trade's chart area: one, two or four charts, each with its own symbol and
+// timeframe, sharing the chart type and indicators. The active chart drives the order
+// ticket and takes drawings (saved to the account per symbol).
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Button, Dialog } from "../ui";
+import { ProChart, type ChartType, type Drawing, type DrawTool } from "../ui/proChart";
+import { TIMEFRAMES, type Timeframe } from "../lib/bars";
+import { defaultParams, INDICATORS, indicatorDef, instanceLabel, type Bar, type IndicatorInstance, type IndicatorType } from "../lib/indicators";
+import { digitsFor, loadBars, priceText, type Instrument, type Loadable } from "../lib/tradeData";
+import { newId, table, useRows, type Row } from "../lib/userStore";
+import { toast } from "../ui";
+import type { Cell, Layout } from "./state";
+
+interface DrawingRow extends Row { symbol: string; kind: Drawing["kind"]; points: Drawing["points"] }
+export const drawingsTable = table<DrawingRow>("trade_drawings");
+
+export function useBars(inst: Instrument | undefined, tf: Timeframe): Loadable<Bar[]> {
+  const [state, setState] = useState<Loadable<Bar[]>>({ status: "loading" });
+  useEffect(() => {
+    if (!inst) return;
+    let live = true;
+    setState({ status: "loading" });
+    void loadBars(inst, tf).then((r) => { if (live) setState(r); });
+    return () => { live = false; };
+  }, [inst, tf]);
+  return state;
+}
+
+export const findInst = (list: Instrument[], key: string) => list.find((s) => s.key === key) ?? list.find((s) => s.key === "eq.US_MKT") ?? list[0];
+
+function ChartCell({ cell, index, active, list, type, log, indicators, tool, onActivate, onDrawn, onTf, maximised, onMax, onUncompare }: {
+  cell: Cell; index: number; active: boolean; list: Instrument[]; type: ChartType; log: boolean; indicators: IndicatorInstance[];
+  tool: DrawTool; onActivate: () => void; onDrawn: () => void; onTf: (tf: Timeframe) => void; maximised: boolean; onMax: () => void; onUncompare: () => void;
+}) {
+  const inst = findInst(list, cell.symbol);
+  const bars = useBars(inst, cell.tf);
+  const cmpInst = cell.cmp ? list.find((s) => s.key === cell.cmp && s.key !== inst?.key) : undefined;
+  const cmpBars = useBars(cmpInst, cell.tf);
+  const compare = useMemo(() => (cmpInst && cmpBars.status === "ok" ? { label: cmpInst.short || cmpInst.label, bars: cmpBars.data } : null), [cmpInst, cmpBars]);
+  const drawings = useRows(drawingsTable, "trade_drawings", { symbol: inst?.key ?? "" });
+  const saved: Drawing[] = useMemo(() => drawings.rows.map((r) => ({ id: r.id, kind: r.kind, points: r.points })), [drawings.rows]);
+  const onDraw = useCallback((d: Omit<Drawing, "id">) => {
+    if (!inst) return;
+    drawingsTable.insert({ symbol: inst.key, kind: d.kind, points: d.points }).catch((e: Error) => toast(e.message, { tone: "bad" }));
+    onDrawn();
+  }, [inst, onDrawn]);
+  const ok = bars.status === "ok";
+  const hasVolume = ok && bars.data.some((b) => b.volume != null);
+  const shown = useMemo(() => indicators.filter((i) => !indicatorDef(i.type).needsVolume || hasVolume), [indicators, hasVolume]);
+  const last = ok ? bars.data[bars.data.length - 1] : null;
+  const prev = ok ? bars.data[bars.data.length - 2] : null;
+  const chg = last && prev ? (last.close / prev.close - 1) * 100 : null;
+
+  return (
+    <section className={`cg-cell ${active ? "on" : ""}`} aria-label={`Chart ${index + 1}: ${inst?.short ?? ""}`} onPointerDown={onActivate}>
+      <header className="cg-head" onDoubleClick={onMax}>
+        <button type="button" className="cg-sym" onClick={onActivate} aria-pressed={active}>{inst?.short || inst?.label || "n/a"}</button>
+        <span className="cg-name">{inst?.label}</span>
+        {cmpInst && <span className="cg-cmp">vs {cmpInst.short}<button type="button" onClick={onUncompare} aria-label={`Stop comparing with ${cmpInst.short}`}>×</button></span>}
+        <span className="cg-px tabular">{last ? priceText(last.close, digitsFor(last.close)) : ""}</span>
+        <span className={`cg-chg tabular ${chg == null ? "" : chg >= 0 ? "good" : "bad"}`}>{chg == null ? "" : `${chg >= 0 ? "+" : "−"}${Math.abs(chg).toFixed(2)}%`}</span>
+        <span className="cg-tfs" role="radiogroup" aria-label="Timeframe">
+          {TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => onTf(t.id)}>{t.label}</button>)}
+        </span>
+        <button type="button" className="cg-max" onClick={onMax} title={maximised ? "Restore (Alt+Enter)" : "Maximise (Alt+Enter)"} aria-label={maximised ? "Restore chart" : "Maximise chart"}>
+          <svg width="11" height="11" viewBox="0 0 11 11" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.2">{maximised ? <><rect x="2.6" y="0.6" width="7.8" height="7.8" /><path d="M0.6 2.6v7.8h7.8" /></> : <rect x="0.6" y="0.6" width="9.8" height="9.8" />}</svg>
+        </button>
+      </header>
+      <div className="cg-body">
+        {ok && inst ? (
+          <ProChart fill bare bars={bars.data} label={inst.short || inst.label} type={type} indicators={shown} log={log} compare={compare}
+            drawings={saved} tool={active ? tool : "none"} onDraw={onDraw} height={440} paneHeight={110} digits={digitsFor(inst.last)} />
+        ) : bars.status === "missing" || bars.status === "error" ? (
+          <div className="cg-msg">No data</div>
+        ) : (
+          <div className="cg-msg cg-loading" aria-label="Loading chart" />
+        )}
+      </div>
+    </section>
+  );
+}
+
+export function ChartGrid({ list, layout, set, tool, setTool }: {
+  list: Instrument[]; layout: Layout; set: (f: (l: Layout) => Layout) => void; tool: DrawTool; setTool: (t: DrawTool) => void;
+}) {
+  const n = layout.max != null ? 1 : layout.grid;
+  const idx = layout.max != null ? [layout.max] : Array.from({ length: layout.grid }, (_, i) => i);
+  const onDrawn = useCallback(() => setTool("none"), [setTool]);
+  return (
+    <div className={`cg cg-${n}`}>
+      {idx.map((i) => (
+        <ChartCell key={i} index={i} cell={layout.cells[i]} active={layout.active === i} list={list} type={layout.type} log={layout.log} indicators={layout.indicators}
+          tool={tool} onDrawn={onDrawn} maximised={layout.max === i}
+          onActivate={() => { if (layout.active !== i) set((l) => ({ ...l, active: i })); }}
+          onTf={(tf) => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { ...c, tf } : c)) }))}
+          onMax={() => set((l) => ({ ...l, active: i, max: l.max === i ? null : i }))}
+          onUncompare={() => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { symbol: c.symbol, tf: c.tf } : c)) }))} />
+      ))}
+    </div>
+  );
+}
+
+export function IndicatorDialog({ open, onClose, value, onChange }: { open: boolean; onClose: () => void; value: IndicatorInstance[]; onChange: (v: IndicatorInstance[]) => void }) {
+  const add = (type: IndicatorType) => onChange([...value, { id: newId(), type, params: defaultParams(type) }]);
+  const set = (id: string, key: string, v: number) => onChange(value.map((i) => (i.id === id ? { ...i, params: { ...i.params, [key]: v } } : i)));
+  return (
+    <Dialog open={open} onClose={onClose} title="Indicators" width={560} footer={<Button variant="primary" onClick={onClose}>Done</Button>}>
+      <div className="ind">
+        {value.map((i) => {
+          const def = indicatorDef(i.type);
+          return (
+            <div key={i.id} className="ind-row">
+              <strong>{instanceLabel(i)}</strong>
+              {def.params.map((p) => (
+                <label key={p.key} className="ind-param"><span>{p.label}</span>
+                  <input className="ot-input" type="number" min={p.min} max={p.max} step={p.step ?? 1} value={i.params[p.key] ?? p.value}
+                    onChange={(e) => { const x = Number(e.target.value); if (Number.isFinite(x) && x >= p.min && x <= p.max) set(i.id, p.key, x); }} />
+                </label>
+              ))}
+              <button type="button" className="ind-x" aria-label={`Remove ${instanceLabel(i)}`} onClick={() => onChange(value.filter((x) => x.id !== i.id))}>×</button>
+            </div>
+          );
+        })}
+        <div className="ind-add" role="group" aria-label="Add indicator">
+          {INDICATORS.map((d) => <button key={d.type} type="button" onClick={() => add(d.type)} title={d.what}>{d.label}</button>)}
+        </div>
+      </div>
+    </Dialog>
+  );
+}

@@ -21,13 +21,16 @@ const DEFAULT_PAGES = [
   "/app/#/", "/app/#/strategies", "/app/#/strategy/factor_cma", "/app/#/watchlist", "/app/#/compare", "/app/#/lab",
   "/app/#/scenarios", "/app/#/news", "/app/#/news/history", "/app/#/news/archive", "/app/#/news/impact",
   "/app/#/markets", "/app/#/markets/new", "/app/#/markets/crypto", "/app/#/markets/perps", "/app/#/markets/etfs",
-  "/app/#/markets/terms", "/app/#/markets/practice", "/app/#/trade", "/app/#/trade/watchlists", "/app/#/trade/screener", "/app/#/trade/demo", "/app/#/verify", "/app/#/learn", "/app/#/start", "/app/#/how", "/app/#/settings",
+  "/app/#/markets/terms", "/app/#/markets/practice", "/app/#/verify", "/app/#/learn", "/app/#/start", "/app/#/how", "/app/#/settings",
   // Research
   "/research/#/", "/research/#/docs", "/research/#/doc/DEC-0017", "/research/#/refs", "/research/#/ledger",
   "/research/#/search", "/research/#/edges", "/research/#/catalog", "/research/#/signals", "/research/#/explore",
   "/research/#/data", "/research/#/sources", "/research/#/ui",
   // Parity Terminal
   "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
+  // Parity Trade (DEC-0040)
+  "/trade/", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
+  "/trade/#/strategies", "/trade/#/settings",
 ];
 const PAGES = (process.env.CLS_PAGES ? process.env.CLS_PAGES.split(",") : DEFAULT_PAGES).map((p) => p.trim()).filter(Boolean);
 const SIZES = [
