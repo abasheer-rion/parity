@@ -82,6 +82,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](0007-ways-to-build-new-algorithms.md)
 - [REF-0012: Candlesticks and chart patterns](0012-candlesticks-and-chart-patterns.md)
+- [REF-0016: Parity Verify MVP spec](0016-parity-verify-mvp-spec.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

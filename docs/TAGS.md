@@ -109,10 +109,12 @@ Sources, scrapers, caching and data quality.
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [DEC-0032: Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+- [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -307,6 +309,7 @@ Hosting, CI/CD, database and costs.
 Why the project exists and what success means.
 
 - [INT-0001: Initial intent](intent/0001-initial-intent.md)
+- [INT-0003: Parity Verify, the lie detector for trading strategies and bots](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 
@@ -324,6 +327,7 @@ Metrics that tell us if something works and where to look next.
 
 How we avoid fooling ourselves: backtest design, overfitting, statistics.
 
+- [INT-0003: Parity Verify, the lie detector for trading strategies and bots](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md)
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [DEC-0007: Official results come only from pre-registered runs in a tamper-evident ledger](decisions/0007-official-results-come-only-from-the-ledger.md)
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](decisions/0009-excess-returns-financed-leverage-frozen-code.md)
@@ -331,6 +335,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0026: A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md)
 - [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
+- [DEC-0032: Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
@@ -346,6 +351,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+- [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -354,6 +360,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0012: Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
+- [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
@@ -500,6 +507,7 @@ How the team works together.
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
+- [DEC-0032: Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
@@ -525,6 +533,7 @@ How the team works together.
 
 A specific trading idea or its implementation.
 
+- [INT-0003: Parity Verify, the lie detector for trading strategies and bots](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md)
 - [DEC-0003: Strategies are plug-ins that can be removed at any time](decisions/0003-strategies-are-plugins.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0027: New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md)
@@ -537,6 +546,7 @@ A specific trading idea or its implementation.
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](algorithms/0001-fx-carry-g10.md)
@@ -645,4 +655,5 @@ The dashboard.
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
+- [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
