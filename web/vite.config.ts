@@ -37,6 +37,13 @@ function localResults(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
+      // `parity sims export` (or the sims service) writes the sims' summary here (DEC-0037).
+      server.middlewares.use("/local/sims.json", (_req, res, next) => {
+        const path = resolve(import.meta.dirname, "../engine/output/sims.json");
+        if (!existsSync(path)) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
       server.middlewares.use("/local/latest.json", (_req, res) => {
         if (!existsSync(file)) {
           res.statusCode = 404;

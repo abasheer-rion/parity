@@ -6,6 +6,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Button, EmptyState, FilterChip, Select } from "../../ui";
 import { loadBotRun, loadBotsIndex, type BotsLoaded } from "../../lib/bots";
+import { loadSims, type SimsDoc } from "../../lib/sims";
+import { ServiceHealth } from "../../components/ServiceHealth";
 import { expectancyLine, money, pctText, statsAt, weeksText, type BotRunFile, type BotsIndex, type LiveStats } from "../../lib/botStats";
 import { RaceLines, type Lane } from "./play/RaceLines";
 import { Board, leaderOf, Stage, type Band, type BoardRow } from "./play/Stage";
@@ -47,6 +49,12 @@ function Battle({ index }: { index: BotsIndex }) {
   const brief = index.runs.find((r) => r.id === id);
   const synthetic = brief?.kind === "synthetic";
   const run = useLoaded(() => loadBotRun(id), id);
+  const [sims, setSims] = useState<SimsDoc | null>(null);
+  useEffect(() => {
+    let live = true;
+    loadSims().then((d) => { if (live) setSims(d); });
+    return () => { live = false; };
+  }, []);
 
   return (
     <>
@@ -72,7 +80,64 @@ function Battle({ index }: { index: BotsIndex }) {
       {!run ? <div className="sw2-card bb-loading" aria-busy="true"><p className="muted">Loading the replay</p></div>
         : run.status !== "ok" ? <EmptyState title="This replay is missing" icon="database">{run.message}</EmptyState>
         : <Race key={id} index={index} run={run.data} />}
+      {sims && sims.bots.paths > 0 && <CrashOdds index={index} sims={sims} />}
     </>
+  );
+}
+
+// Where the account can end, on a log scale from $100 to about $316,000 (the sims' bins).
+const LOW = 2, HIGH = 5.5;
+const at = (dollars: number) => `${Math.min(100, Math.max(0, ((Math.log10(Math.max(dollars, 1)) - LOW) / (HIGH - LOW)) * 100))}%`;
+
+/** The always-on sims (DEC-0037): every bot on thousands of made-up paths with crashes. */
+function CrashOdds({ index, sims }: { index: BotsIndex; sims: SimsDoc }) {
+  const b = sims.bots;
+  const start = b.start_cash;
+  return (
+    <div className="sw2-card">
+      <h2>Out of {b.crash_paths.toLocaleString("en-US")} made-up crashes, how often each bot was wiped out</h2>
+      <p className="small muted">
+        A machine keeps running these seven rules on new made-up {b.years}-year paths around the clock: {b.paths.toLocaleString("en-US")} so far, {b.crash_paths.toLocaleString("en-US")} of them with at least one crash. One replay shows one future; this shows the spread.
+      </p>
+      <div className="ui-table-box bb-table">
+        <table className="mtable dense">
+          <thead><tr>
+            <th>Bot</th>
+            <th className="num" title="Share of made-up paths with a crash on which the account fell under 1% of its start and stopped">Wiped out in a crash</th>
+            <th className="num" title="Share of all made-up paths on which the bot ended with more than it started with">Ended ahead</th>
+            <th className="bb-range-head" title="Bar: where the account ended. Line: 5% to 95% of paths. Box: the middle half. Mark: the typical path. Dashed: the $10,000 start.">Where the account ended</th>
+          </tr></thead>
+          <tbody>
+            {index.bots.map((info) => {
+              const r = b.by_bot[info.id];
+              if (!r) return null;
+              const f = r.final;
+              const crashShare = r.blown_in_crash_share;
+              return (
+                <tr key={info.id}>
+                  <td><span className="sw-dot" style={{ background: BOT_COLORS[info.id] }} /> {info.name}</td>
+                  <td className={`num ${crashShare ? "down" : ""}`}>{crashShare == null ? "n/a" : `${pctText(crashShare, crashShare > 0 && crashShare < 0.01 ? 1 : 0)}`}</td>
+                  <td className="num">{pctText(r.paths ? r.ahead / r.paths : null)}</td>
+                  <td>
+                    {f ? (
+                      <span className="bb-range" role="img" aria-label={`Typical end ${money(f[2])}; middle half from ${money(f[1])} to ${money(f[3])}; 5% to 95% from ${money(f[0])} to ${money(f[4])}`}>
+                        <span className="bb-range-start" style={{ left: at(start) }} />
+                        <span className="bb-range-whisker" style={{ left: at(f[0]), right: `calc(100% - ${at(f[4])})` }} />
+                        <span className="bb-range-box" style={{ left: at(f[1]), right: `calc(100% - ${at(f[3])})`, background: BOT_COLORS[info.id] }} />
+                        <span className="bb-range-mid" style={{ left: at(f[2]) }} />
+                      </span>
+                    ) : "n/a"}
+                    {f && <span className="small muted bb-range-text">typically {money(f[2])}</span>}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="small muted">Simulated, not a forecast. Same rules, costs and $10,000 start as above; the bar runs from $100 to $316,000 on a log scale, and percentiles are read from rounded bins.</p>
+      <ServiceHealth />
+    </div>
   );
 }
 

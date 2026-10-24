@@ -7,6 +7,7 @@ import { loadSearch, type SearchRow } from "../lib/data";
 import { ASSET_LABEL, FAMILY_LABEL } from "../lib/strategyMeta";
 import { AnimatedNumber, Badge, Checkbox, DataTable, EmptyState, KeyValues, PageSkeleton, SearchInput, Select, useResource, type Column } from "../ui";
 import { Term } from "./Learn";
+import { ServiceHealth } from "../components/ServiceHealth";
 
 
 function luck(v: number | null): { label: string; tone: "good" | "accent" | "neutral" | "bad" } {
@@ -60,6 +61,7 @@ export function Search() {
         <div><strong>{doc.passed_luck_check.toLocaleString()}</strong><span>pass the luck check</span></div>
         <div><strong>{date(doc.generated_at)}</strong><span>last update</span></div>
       </div>
+      <ServiceHealth />
 
       <div className="search-filters">
         <SearchInput value={q} onChange={setQ} placeholder="Find a strategy, e.g. carry, VIX, energy" />

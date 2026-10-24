@@ -9,6 +9,7 @@ Writes, under the output folder:
   batch/<id>.json       one report per run, in the shape web/src/lib/types.ts expects
   latest.json           a copy of the newest run
   search.json           the newest strategy search snapshot (DEC-0014)
+  sims.json             the newest always-on sims summary (DEC-0037)
 
 and, one folder up (the site root, public): stats.json, two counts for the front
 page's counters, strategies tested in the newest run and variations searched.
@@ -90,6 +91,15 @@ def main(out: Path) -> int:
             conn.rollback()
             snap = None
             print(f"no search snapshot: {exc}", file=sys.stderr)
+        # The always-on sims' accumulated summary (DEC-0037), if any.
+        try:
+            cur.execute("select doc from public.sim_snapshots order by id desc limit 1")
+            sims = cur.fetchone()
+            if sims:
+                (out / "sims.json").write_text(json.dumps(sims["doc"], separators=(",", ":")))
+        except psycopg.Error as exc:  # table not migrated yet: ship the site without it
+            conn.rollback()
+            print(f"no sims snapshot: {exc}", file=sys.stderr)
     # The front page's live counters (DEC-0017). Public, so counts only.
     stats: dict = {}
     if index:
