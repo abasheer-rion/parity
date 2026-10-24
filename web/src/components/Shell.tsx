@@ -31,6 +31,7 @@ const PRODUCT: NavItem[] = [
   },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
+  { href: "#/trade", label: "Trade", icon: "graph", routes: ["trade"] },
   {
     href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],
     children: [
