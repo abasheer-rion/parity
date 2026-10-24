@@ -66,7 +66,7 @@
 .pt-banner svg { flex: none; margin-top: 2px; color: var(--accent); }
 .pt-banner strong { color: var(--accent); }
 .pt-bar { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; min-height: 32px; }
-.pt-bar-name { font-weight: var(--fw-medium); }
+.pt-bar-name { font-weight: var(--fw-medium); display: inline-flex; align-items: center; min-height: 32px; }
 .pt-spacer { flex: 1; }
 .pt-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-3); margin: 0; }
 .pt-stats > div { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-3); min-width: 0; }
@@ -85,7 +85,7 @@
 .pt-demo-strip strong { color: var(--accent); }
 .pt-ticket-body { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); }
 .pt-ticket .tr-pick, .pt-ticket .tr-pick select { width: 100%; }
-.pt-last { margin: 0; min-height: 18px; }
+.pt-last { margin: 0; min-height: 36px; }
 .pt-row { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
 .pt-help { margin: 0; min-height: 36px; }
 .pt-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
@@ -115,6 +115,8 @@
   .pt-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
+  .pt-bar-name { flex-basis: 100%; }
+  .pt-spacer { display: none; }
   .pt-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pt-kv, .pt-kv-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pt-forward-grid { grid-template-columns: minmax(0, 1fr); }

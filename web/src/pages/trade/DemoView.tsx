@@ -161,10 +161,11 @@ export function DemoView() {
       </div>
 
       <div className="pt-bar">
-        {accounts.rows.length > 1 && account && (
-          <Select label="Demo account" value={account.id} onChange={(id) => savePref({ account: id })} options={accounts.rows.map((a) => [a.id, a.name] as [string, string])} />
-        )}
-        <span className="pt-bar-name">{account ? account.name : "Opening your demo account"}</span>
+        <span className="pt-bar-name">
+          {accounts.rows.length > 1 && account
+            ? <Select label="Demo account" value={account.id} onChange={(id) => savePref({ account: id })} options={accounts.rows.map((a) => [a.id, a.name] as [string, string])} />
+            : account?.name ?? "Demo account"}
+        </span>
         <span className="pt-spacer" />
         <Button size="sm" icon="plus" disabled={!account} onClick={() => accountsTable.insert(newAccount(`Demo account ${accounts.rows.length + 1}`)).then((a) => savePref({ account: a.id }), (e: Error) => toast(e.message, { tone: "bad" }))}>New demo account</Button>
         <Button size="sm" icon="gear" disabled={!account} onClick={() => setSettingsOpen(true)}>Fees and slippage</Button>
