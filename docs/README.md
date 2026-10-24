@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 35 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 36 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
@@ -31,12 +31,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
+- 2026-10-24 [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - 2026-10-24 [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - 2026-10-23 [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - 2026-10-23 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
-- 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 
 ## intent
 
@@ -85,6 +85,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0033 | [Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0034 | [Demo accounts, paper trading on delayed data](decisions/0034-demo-accounts-paper-trading-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0035 | [Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md) | accepted | 2026-10-23 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0036 | [Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md) | accepted | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

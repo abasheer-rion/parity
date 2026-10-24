@@ -35,7 +35,8 @@
       },
       "inParity": [
         { "label": "Parity Terminal: Bot Battle (type BOTS)", "href": "#/sim", "space": "research" },
-        { "label": "Glossary: the high win rate myth", "href": "#/learn/myth-high-win-rate", "space": "both" }
+        { "label": "Glossary: the high win rate myth", "href": "#/learn/myth-high-win-rate", "space": "both" },
+        { "label": "Verify: check a bot's trade log for this trap", "href": "#/verify", "space": "product" }
       ],
       "check": [
         {
@@ -75,7 +76,8 @@
       },
       "inParity": [
         { "label": "Glossary: expectancy", "href": "#/learn/expectancy", "space": "both" },
-        { "label": "Parity Terminal: the expectancy card in Bot Battle", "href": "#/sim", "space": "research" }
+        { "label": "Parity Terminal: the expectancy card in Bot Battle", "href": "#/sim", "space": "research" },
+        { "label": "Verify: see the expectancy of your own record", "href": "#/verify", "space": "product" }
       ],
       "check": [
         {
@@ -120,7 +122,8 @@
       },
       "inParity": [
         { "label": "Parity Terminal: Bot Battle, US stocks from 1928", "href": "#/sim", "space": "research" },
-        { "label": "Glossary: martingale betting", "href": "#/learn/martingale-betting", "space": "both" }
+        { "label": "Glossary: martingale betting", "href": "#/learn/martingale-betting", "space": "both" },
+        { "label": "Verify: spot a martingale in a trade log", "href": "#/verify", "space": "product" }
       ],
       "check": [
         {

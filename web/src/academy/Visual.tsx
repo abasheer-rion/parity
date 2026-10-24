@@ -119,7 +119,19 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
         </div>
       )}
       <figcaption>
-        {!grid && <p id={capId} className="ac-caption" aria-live="polite"><span className="ac-frame-n">Step {step + 1} of {last + 1}</span> {visual.steps[step].caption}</p>}
+        {/* Every caption sits in the same grid cell, so the box is as tall as the longest
+            one and the controls below never move as the steps play (on a phone the
+            captions wrap to different heights). Only the current one is shown and read. */}
+        {!grid && (
+          <div className="ac-captions">
+            {visual.steps.map((st, i) => (
+              <p key={i} id={i === step ? capId : undefined} className="ac-caption" aria-live={i === step ? "polite" : undefined}
+                aria-hidden={i === step ? undefined : true} data-on={i === step || undefined}>
+                <span className="ac-frame-n">Step {i + 1} of {last + 1}</span> {st.caption}
+              </p>
+            ))}
+          </div>
+        )}
         <div className="ac-controls" role="group" aria-label="Picture steps. Arrow keys move between steps." onKeyDown={grid ? undefined : onKey}>
           {!grid && (
             <>
@@ -129,8 +141,13 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
               </span>
               <button type="button" className="ac-btn ac-btn-main" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</button>
               {!reduced && (
-                <button type="button" className="ac-btn" onClick={togglePlay} aria-pressed={playing}>
-                  {playing ? "Pause" : step >= last ? "Replay" : "Play"}
+                <button type="button" className="ac-btn ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
+                  {/* All three labels share one cell, so the button keeps the width of the
+                      longest and the row never re-wraps as the picture plays. */}
+                  {["Pause", "Replay", "Play"].map((l) => (
+                    <span key={l} aria-hidden={l !== (playing ? "Pause" : step >= last ? "Replay" : "Play") || undefined}
+                      data-on={l === (playing ? "Pause" : step >= last ? "Replay" : "Play") || undefined}>{l}</span>
+                  ))}
                 </button>
               )}
             </>
