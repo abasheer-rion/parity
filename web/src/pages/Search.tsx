@@ -104,10 +104,9 @@ function Head() {
     <div className="page-head">
       <Title>Strategy search</Title>
       <p className="page-purpose">
-        A machine tries new strategy variations around the clock: different ideas, assets and settings, each
-        backtested after costs since 1999. Every try is counted, so the more it searches the higher the bar for the
-        luck check. These are leads, not results; a lead becomes a result only when it is written up in advance and
-        run officially. <a href="#/start">How to read these numbers</a>.
+        A machine tries strategy variations around the clock, with different ideas, assets and settings. Each one is
+        backtested after costs since 1999. Every try is counted, so the luck check gets stricter the more it searches.
+        These are leads. A lead becomes a result only when it is written up in advance and run officially. <a href="#/start">How to read these numbers</a>.
       </p>
     </div>
   );

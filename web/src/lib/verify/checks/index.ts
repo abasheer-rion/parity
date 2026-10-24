@@ -140,7 +140,7 @@ export function checkFile({ parsed, answers, prices, triesDefaulted }: FileInput
     settingsCheck(null, null),
     claim,
   ];
-  if (parsed.backtestExport) notes.push("This is a TradingView backtest, not real trading. A backtest shows what rules would have done, not what anyone earned.");
+  if (parsed.backtestExport) notes.push("This is a TradingView backtest. It shows what the rules would have done on past prices. No real trades were made.");
   const money = card1?.basis === "trade" ? moneyText : (v: number) => pctText(v, 2);
   const dailyReturns = rs && rs.periodsPerYear >= 180 ? rs.returns.length : 0;
   return {
@@ -215,16 +215,16 @@ export function checkDescription(x: DescriptionInput): Result {
   const contra = claims.filter((c) => c.status === "fail" && c.id !== "uncapped");
   const uncapped = claims.find((c) => c.id === "uncapped");
   const v: Verdict = contra.length
-    ? { id: "does_not_hold_up", label: "Does not hold up", sentence: `${contra[0].text} This checks the description, not the bot.` }
+    ? { id: "does_not_hold_up", label: "Does not hold up", sentence: `${contra[0].text} Verify checked the description only.` }
     : uncapped || card5[3].status === "fail"
-    ? { id: "fragile", label: "Fragile", sentence: `${(uncapped ?? { text: card5[3].detail }).text} This checks the description, not the bot.` }
+    ? { id: "fragile", label: "Fragile", sentence: `${(uncapped ?? { text: card5[3].detail }).text} Verify checked the description only.` }
     : { id: "not_enough_data", label: "Not enough data", sentence: claims.length
-      ? `Nothing in the description fails on arithmetic, but ${claims[0].text.charAt(0).toLowerCase()}${claims[0].text.slice(1)} A description cannot show an edge: upload the bot's trade log to check it.`
-      : "Nothing in the description fails on arithmetic, and a description alone cannot show an edge. Upload the bot's trade log to check it." };
+      ? `Nothing in the description fails on arithmetic, but ${claims[0].text.charAt(0).toLowerCase()}${claims[0].text.slice(1)} A description cannot show an edge. Upload the bot's trade log to check it.`
+      : "Nothing in the description fails on arithmetic. A description cannot show an edge. Upload the bot's trade log to check it." };
   return {
     source: "description", kind: "backtest", tries: 1, triesDefaulted: true, methodVersion: METHOD_VERSION, what: "Bot description",
     dateFrom: null, dateTo: null, trades: x.trades, dailyReturns: 0, balance: null, assets: [],
-    card1: null, card2: null, card3: null, card4, card5, claims, verdict: v, notes: ["This is a check of the description, not of the bot. Running a real backtest of any description is planned for later."],
+    card1: null, card2: null, card3: null, card4, card5, claims, verdict: v, notes: ["This is a check of the description only, not of the bot. Backtesting a described bot is planned but not built yet."],
     description: { text: x.text, claim: x.claim, settings: x.settings },
   };
 }

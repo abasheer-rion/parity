@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 14 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 16 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 17 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 15 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
@@ -30,13 +30,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-10-24 [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
+- 2026-10-24 [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - 2026-10-24 [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 - 2026-10-24 [LOG-0014: Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
 - 2026-10-24 [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
-- 2026-10-24 [DEC-0040: Parity Trade, a full-screen trading app of its own](decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 
 ## intent
 
@@ -166,6 +166,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 | REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 
 ## log
 

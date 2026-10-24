@@ -34,7 +34,7 @@ function Monitor({ ix }: { ix: TermIndex }) {
     { key: "w1", label: "1W", sort: (s) => s.chg?.w1, render: chgCell("w1"), className: "c-w1" },
     { key: "m1", label: "1M", sort: (s) => s.chg?.m1, render: chgCell("m1"), className: "c-m1" },
     { key: "ytd", label: "YTD", sort: (s) => s.chg?.ytd, render: chgCell("ytd"), className: "c-ytd" },
-    { key: "vol", label: "Vol", sort: (s) => s.vol, render: (s) => (s.vol == null ? <span className="muted">—</span> : `${s.vol.toFixed(1)}`), title: "Yearly volatility, percent (prices only)", className: "c-vol" },
+    { key: "vol", label: "Vol", sort: (s) => s.vol, render: (s) => (s.vol == null ? <span className="muted">n/a</span> : `${s.vol.toFixed(1)}`), title: "Yearly volatility, percent (prices only)", className: "c-vol" },
     { key: "z", label: "Z", sort: (s) => (s.z == null ? null : Math.abs(s.z)), render: (s) => <span className={`term-z ${Math.abs(s.z ?? 0) >= 2 ? "hot" : ""} ${tone(s.z)}`}>{fmtNum(s.z, 1, true)}</span>, title: "This week's change in standard deviations of weekly changes (3 years)" },
     { key: "pct", label: "1Y %ile", sort: (s) => s.pct1y, render: (s) => <PctBar value={s.pct1y} />, title: "Where the last value sits in the past year's range", className: "c-pct" },
     { key: "spark", label: "1Y", render: (s) => <Spark values={s.spark} />, className: "c-spark" },

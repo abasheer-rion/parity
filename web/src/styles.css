@@ -732,7 +732,6 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .phome-foot { margin: 20px 0 8px; max-width: 760px; }
 .rhome { max-width: 1180px; }
 .rq { border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 14px; background: var(--surface-solid); }
-.rq .eyebrow { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 .rq h1 { font-size: 22px; line-height: 1.35; margin: 6px 0 10px; max-width: 820px; }
 .rq .answer { margin: 0 0 14px; color: var(--text-2); }
 .verdict-bar { display: flex; gap: 3px; border-radius: 8px; overflow: hidden; font-size: 12px; }

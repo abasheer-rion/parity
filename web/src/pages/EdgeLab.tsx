@@ -91,7 +91,7 @@ export function EdgeLab({ focus }: { focus?: string }) {
         <ul className="el-reading">
           {reading.map((r) => <li key={r.doc ?? r.page}><EdgeLinkView link={r} /> <span className="muted small">{r.doc}</span></li>)}
         </ul>
-        <p className="muted small">Research and education only, not investment advice. Backtests and simulations do not promise future returns.</p>
+        <p className="muted small">Research and education only. Not investment advice. Backtests and simulations do not predict future returns.</p>
       </section>
     </div>
   );

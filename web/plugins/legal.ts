@@ -39,7 +39,7 @@ const FOOTER = `
           ${LEGAL_LINKS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n          ")}
           <button type="button" data-cookie-prefs>Cookie settings</button>
         </nav>
-        <p>Research and education only. Not investment advice. Results are backtests and simulations, and the past does not promise the future.</p>
+        <p>Research and education only. Not investment advice. Results are backtests and simulations on past data.</p>
         <p>&copy; 2026 Parity</p>
       </div>
     </footer>`;

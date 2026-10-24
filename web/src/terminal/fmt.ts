@@ -6,7 +6,7 @@ export const MINUS = "−";
 const sign = (v: number) => (v > 0 ? "+" : v < 0 ? MINUS : "");
 
 export function fmtLast(v: number | null | undefined): string {
-  if (v == null || !Number.isFinite(v)) return "—";
+  if (v == null || !Number.isFinite(v)) return "n/a";
   const a = Math.abs(v);
   const s = a >= 10000 ? a.toLocaleString("en-US", { maximumFractionDigits: 0 })
     : a >= 1000 ? a.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 })
@@ -18,7 +18,7 @@ export function fmtLast(v: number | null | undefined): string {
 
 /** A change: percent for a price series, a difference for a level series. */
 export function fmtChg(v: number | null | undefined, kind: TermSeries["kind"], digits?: number): string {
-  if (v == null || !Number.isFinite(v)) return "—";
+  if (v == null || !Number.isFinite(v)) return "n/a";
   const a = Math.abs(v);
   const d = kind === "price" ? digits ?? 2 : digits ?? (a >= 1000 ? 0 : a >= 10 ? 1 : 2);
   const txt = a.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -28,14 +28,14 @@ export function fmtChg(v: number | null | undefined, kind: TermSeries["kind"], d
 }
 
 export function fmtNum(v: number | null | undefined, digits = 2, signed = false): string {
-  if (v == null || !Number.isFinite(v)) return "—";
+  if (v == null || !Number.isFinite(v)) return "n/a";
   const txt = Math.abs(v).toFixed(digits);
   if (Number(txt) === 0) return txt;
   return `${signed ? sign(v) : v < 0 ? MINUS : ""}${txt}`;
 }
 
 export const fmtPct = (v: number | null | undefined, digits = 1, signed = false) =>
-  v == null || !Number.isFinite(v) ? "—" : `${fmtNum(v * 100, digits, signed)}%`;
+  v == null || !Number.isFinite(v) ? "n/a" : `${fmtNum(v * 100, digits, signed)}%`;
 
 export const tone = (v: number | null | undefined) => (v == null || !Number.isFinite(v) || v === 0 ? "" : v > 0 ? "up" : "down");
 
@@ -66,4 +66,4 @@ export function normMove(s: TermSeries, win: Win): number | null {
 }
 
 export const shortDate = (iso: string | null | undefined) =>
-  iso ? new Date(Date.parse(iso.slice(0, 10))).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }) : "—";
+  iso ? new Date(Date.parse(iso.slice(0, 10))).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }) : "n/a";

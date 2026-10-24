@@ -39,10 +39,9 @@ export function ResearchHome({ report }: { report: Report }) {
     <PageTransition className="rhome">
       <section className="rq">
         <HeroGlow />
-        <div className="eyebrow">The question</div>
-        <h1>Can a trading strategy beat simply holding the US stock market, after costs and after counting every idea we tried?</h1>
+        <h1>Can a trading strategy beat holding the US stock market, after costs and after counting every idea we tried?</h1>
         <p className="answer">
-          <strong>{beating.length === 0 ? "Not yet." : `${beating.length} so far.`}</strong>{" "}
+          <strong>{beating.length === 0 ? "None so far." : `${beating.length} so far.`}</strong>{" "}
           {tested.length} strategies tested in the {report.kind === "official" ? "official" : "nightly exploratory"} run of {date(report.generated_at)}
           {search ? `, and ${search.trials.toLocaleString()} variations tried by the search` : ""}.
         </p>
@@ -57,7 +56,7 @@ export function ResearchHome({ report }: { report: Report }) {
 
       <div className="rgrid">
         <Reveal as="section" delay={0} className={`pcard ${LIFT}`}>
-          <div className="pcard-head"><h2>Closest to an answer</h2><a href="/app/#/strategies">All strategies</a></div>
+          <div className="pcard-head"><h2>Most tests passed</h2><a href="/app/#/strategies">All strategies</a></div>
           <ul className="rlist">
             {closest.map((r) => (
               <li key={r.strategy}>
@@ -87,7 +86,7 @@ export function ResearchHome({ report }: { report: Report }) {
           {search ? (
             <>
               <div className="big-num"><CountUp value={search.trials} format={(v) => Math.round(v).toLocaleString()} /> <span className="muted small">tried</span></div>
-              <p className="muted small">{search.passed_luck_check} pass the luck check, {search.beat_market} beat the market's Sharpe. Leads only, until registered and run officially.</p>
+              <p className="muted small">{search.passed_luck_check} pass the luck check, {search.beat_market} beat the market's Sharpe. These are leads until registered and run officially.</p>
               <ul className="rlist">{search.rows.slice(0, 3).map((r) => <li key={r.id}><span>{r.name}</span><span className="muted small">luck check {num(r.deflated)}</span></li>)}</ul>
             </>
           ) : <p className="muted small">The search has not sent results yet.</p>}
@@ -95,9 +94,9 @@ export function ResearchHome({ report }: { report: Report }) {
 
         <Reveal as="section" delay={120} className={`pcard ${LIFT}`}>
           <div className="pcard-head"><h2>Learn the methods</h2><a href="/app/#/academy">Academy</a></div>
-          <p className="muted small">Short courses with moving pictures, on the product side. Start with the ones behind this research:</p>
+          <p className="muted small">Short animated courses on the product side. These three cover the methods used here:</p>
           <ul className="rlist">
-            <li><a href="/app/#/academy/luck-vs-skill">Luck vs skill: multiple testing, deflated Sharpe, the gauntlet</a></li>
+            <li><a href="/app/#/academy/luck-vs-skill">Luck vs skill: multiple testing, deflated Sharpe and the 11 tests</a></li>
             <li><a href="/app/#/academy/reading-a-backtest">Reading a backtest</a></li>
             <li><a href="/app/#/academy/news-and-event-studies">Reading news impact and event studies</a></li>
           </ul>
@@ -124,7 +123,7 @@ export function ResearchHome({ report }: { report: Report }) {
           <p className="muted small">{report.coverage?.series?.length ?? 0} series behind this run, fetched {date(report.coverage?.fetched_at ?? null)}.</p>
         </Reveal>
       </div>
-      <p className="muted small phome-foot">This side makes the results. The product side only shows them, with their verdicts. <a href="#/how">How Parity works</a>.</p>
+      <p className="muted small phome-foot">Results are made on this side and shown on the product side with their verdicts. <a href="#/how">How Parity works</a>.</p>
     </PageTransition>
   );
 }

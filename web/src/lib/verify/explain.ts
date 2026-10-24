@@ -37,10 +37,10 @@ export const EXPLAIN: Record<string, string> = {
   balance: "The starting balance used to turn profits into returns.",
   method: "The version of the rules that judged this record. It changes whenever a check or a line changes.",
   chart: "Your record as a point: its win rate against its payoff ratio. Above the curve makes money, below it loses.",
-  // Matches and gauntlet
+  // Matches and our own tests
   matchLuck: "The strategy's luck check score in our own research, with all our tries counted.",
   matchSharpe: "The strategy's yearly Sharpe ratio in our own backtest, after costs.",
-  gauntlet: "How many of the gauntlet's tests the strategy passed in our research run.",
+  gauntlet: "How many of our research tests the strategy passed in its latest run.",
 };
 
 export function explain(id: string): string {

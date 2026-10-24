@@ -18,7 +18,7 @@ How to write a document in this project so it passes the checks: which folder, w
 
 ## Summary
 
-Use `scripts/docs.py new` to start any document, write in plain words, and run `make docs` before you commit. The pre-commit hook and CI will tell you exactly what to fix. Why the rules exist is in [DEC-0004](../decisions/0004-docs-are-checked-by-a-script.md); the rules themselves are in `docs/_system/schema.json`.
+Use `scripts/docs.py new` to start any document, write in plain words, and run `make docs` before you commit. The pre-commit hook and CI will tell you exactly what to fix. Why the rules exist is in [DEC-0004](../decisions/0004-docs-are-checked-by-a-script.md); the rules themselves are in `docs/_system/schema.json`. Words that appear on Parity's pages follow [REF-0017](../reference/0017-parity-copy-rules.md).
 
 ## Which kind of doc
 
@@ -121,4 +121,5 @@ Add a log entry at the end of each working session with what happened, what was 
 - [DEC-0010: Every source we rely on is in one checked bibliography](../decisions/0010-every-source-in-one-bibliography.md)
 - [GDE-0001: Getting started](0001-getting-started.md)
 - [GDE-0004: The research routine](0004-the-research-routine.md)
+- [REF-0017: Parity copy rules](../reference/0017-parity-copy-rules.md)
 <!-- backlinks:end -->

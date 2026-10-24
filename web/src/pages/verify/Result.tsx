@@ -46,13 +46,14 @@ const KIND_TEXT = { real: "Real money (as you told us)", demo: "Demo account (as
 
 export function ResultView({ r, children }: { r: Result; children?: ReactNode }) {
   const lesson = useLesson();
+  // The public badge page states the disclaimer once, in its footer.
+  const pub = useContext(PublicLinks);
   const tone = VERDICT_TONE[r.verdict.id];
   const per = r.card1?.basis === "trade" ? "trade" : "period";
   const fmtResult = per === "trade" ? money : (v: number | null | undefined) => pct(v, 2);
   return (
     <section className="vf-result" aria-labelledby="vf-verdict">
       <div className={`vf-verdict vf-tone-${tone}`}>
-        <p className="vf-eyebrow">Verdict</p>
         <h2 id="vf-verdict" className="vf-verdict-label">{r.verdict.label}</h2>
         <p className="vf-sentence" data-testid="verdict-sentence">{r.verdict.sentence}</p>
         <ul className="vf-meta">
@@ -64,9 +65,9 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
           <li><Num id="method">{`Method ${r.methodVersion}`}</Num></li>
         </ul>
         {r.triesDefaulted && r.source === "file" && <p className="vf-warn">You told us this was the only thing you tried. If other bots or settings came first, enter how many: the luck check depends on it.</p>}
-        {r.gauntlet && <p className="vf-note">Our gauntlet for this strategy: {r.gauntlet.verdict} It passed <Num id="gauntlet">{`${r.gauntlet.passed} of ${r.gauntlet.total}`}</Num> tests.</p>}
+        {r.gauntlet && <p className="vf-note">Our research verdict for this strategy: {r.gauntlet.verdict} It passed <Num id="gauntlet">{`${r.gauntlet.passed} of ${r.gauntlet.total}`}</Num> tests.</p>}
         {r.notes.map((n) => <p key={n} className="vf-note">{n}</p>)}
-        <p className="vf-disclaimer">Research only. Not investment advice. A verdict is about this record, not about the future.</p>
+        {!pub && <p className="vf-disclaimer">Research and education only. Not investment advice. The verdict describes this record and makes no forecast.</p>}
       </div>
 
       {children}
@@ -87,7 +88,7 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
                   ? <Num id="expectancyPct">{pct(r.card1.expectancyPct, 3)}</Num> : <Num id="n">{int(r.card1.n)}</Num>],
               ]} />
               <BreakEvenChart winRate={r.card1.winRate} payoff={r.card1.payoff} />
-              <p className="vf-small">A high win rate can still lose money: what matters is whether the point sits above the curve. <a href={lesson}>The 99% bot lesson</a> shows why.</p>
+              <p className="vf-small">A high win rate can still lose money. The record makes money only if its point sits above the curve. <a href={lesson}>The 99% bot lesson</a> shows why.</p>
             </>
           ) : r.description ? <ClaimOnly r={r} /> : <p className="vf-small">Cannot be checked from this input.</p>}
         </Panel>
@@ -125,7 +126,7 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
                 [r.card3.basis === "trade" ? "Trades used" : `${r.card3.basis[0].toUpperCase()}${r.card3.basis.slice(1)} returns used`, <Num id="observations">{int(r.card3.observations)}</Num>],
                 ["More months needed to pass", <Num id="monthsMore">{r.card3.monthsMore == null ? "n/a" : r.card3.monthsMore === 0 ? "0, it passes" : Number.isFinite(r.card3.monthsMore) && r.card3.monthsMore > 0 ? `${int(Math.ceil(r.card3.monthsMore))}` : "Never, at this Sharpe"}</Num>],
               ]} />
-              <p className="vf-small">How much spread there is between the tries is unknown for an upload, so we use the stand-in our own research uses for a single estimate. The line is 0.95, as in our gauntlet.</p>
+              <p className="vf-small">For an upload we do not know how much the tries differed, so we use the same single-estimate stand-in as our own research. The pass mark is 0.95, as in our own tests.</p>
             </>
           ) : <p className="vf-small">Cannot be checked from this input: a description has no returns. The closest strategies we tested, below, show their own luck checks.</p>}
         </Panel>
@@ -149,8 +150,8 @@ function ClaimOnly({ r }: { r: Result }) {
   const c = r.description!.claim;
   return (
     <p className="vf-small">
-      This checks the description, not the bot. {c.winRate != null ? <>Claimed win rate <Num id="winRate">{pct(c.winRate)}</Num>. </> : null}
-      The claim arithmetic below shows what the claimed numbers need to add up.
+      Verify checks the description only. {c.winRate != null ? <>Claimed win rate <Num id="winRate">{pct(c.winRate)}</Num>. </> : null}
+      The claim arithmetic below shows what the claimed numbers need in order to add up.
     </p>
   );
 }

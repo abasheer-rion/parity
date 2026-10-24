@@ -3,7 +3,7 @@
   "order": 10,
   "level": "Core",
   "title": "Win rate is not profit",
-  "summary": "Why a bot that wins 99 trades in 100 can still lose money, how expectancy settles it, and the hidden large losses behind averaging down and selling crash insurance.",
+  "summary": "Why a bot that wins 99 trades in 100 can still lose money, what expectancy measures, and the large losses behind averaging down and selling crash insurance.",
   "docs": ["DEC-0035", "REF-0002"],
   "lessons": [
     {
@@ -11,7 +11,7 @@
       "title": "The 99% bot and the 56% bot",
       "minutes": 2,
       "body": [
-        "Trading bots are often sold on their **win rate**: the share of trades that made money. A bot that wins 99 trades in 100 sounds safer than one that wins 56. It is not, on its own, a reason to think so.",
+        "Trading bots are often sold on their **win rate**: the share of trades that made money. A bot that wins 99 trades in 100 sounds safer than one that wins 56. Win rate alone does not show that.",
         "Win rate counts trades. It says nothing about how much each win made or how much each loss cost. A bot can take many tiny profits and then give them all back, and more, in one bad trade.",
         "The picture shows two made-up bots with $10,000 each. One wins almost every time. The other wins a little more than half the time. Watch what one large loss does."
       ],
@@ -36,7 +36,7 @@
       "inParity": [
         { "label": "Parity Terminal: Bot Battle (type BOTS)", "href": "#/sim", "space": "research" },
         { "label": "Glossary: the high win rate myth", "href": "#/learn/myth-high-win-rate", "space": "both" },
-        { "label": "Verify: check a bot's trade log for this trap", "href": "#/verify", "space": "product" }
+        { "label": "Verify: check a bot's trade log for this", "href": "#/verify", "space": "product" }
       ],
       "check": [
         {
@@ -55,7 +55,7 @@
     },
     {
       "id": "expectancy",
-      "title": "Expectancy: the number that settles it",
+      "title": "Expectancy: average profit per trade",
       "minutes": 3,
       "body": [
         "**Expectancy** is what a trade is worth on average. It is the win rate times the average win, minus the loss rate times the average loss. It is the same as adding up every trade and dividing by the number of trades.",
@@ -96,11 +96,11 @@
     },
     {
       "id": "doubling-down",
-      "title": "Doubling down: why averaging down looks perfect",
+      "title": "Doubling down and averaging down",
       "minutes": 3,
       "body": [
-        "A **martingale** bot doubles its bet after every loss. In trading the same idea is **averaging down**: buy more each time the price falls, then sell everything after a small bounce. Almost every cycle ends in a small win, so the win rate looks wonderful.",
-        "The catch is that each new buy is twice the last. A long fall without a bounce makes the position huge compared with the account. Then the money runs out, or the broker closes everything in a **margin call**, and years of small wins go in one trade.",
+        "A **martingale** bot doubles its bet after every loss. In trading the same idea is **averaging down**: buy more each time the price falls, then sell everything after a small bounce. Almost every cycle ends in a small win, so the win rate is very high.",
+        "Each new buy is twice the last. A long fall without a bounce makes the position huge compared with the account. Then the money runs out, or the broker closes everything in a **margin call**, and years of small wins are lost in one trade.",
         "In Parity's Bot Battle, a doubling bot on US stock prices since 1928 won 99% of its trades and still lost most of its money. That is a backtest of a simple rule with past prices, not a prediction."
       ],
       "terms": ["martingale-betting", "averaging-down", "margin-call", "risk-of-ruin"],
@@ -115,7 +115,7 @@
           ]
         },
         "steps": [
-          { "caption": "Made-up example: every cycle ends in a small win. The line looks like a staircase to riches.", "reveal": 0.5 },
+          { "caption": "Made-up example: every cycle ends in a small win. The line rises steadily.", "reveal": 0.5 },
           { "caption": "Still winning every time.", "reveal": 0.84 },
           { "caption": "Then one fall without a bounce. The doubling runs out of money and one loss takes almost everything.", "reveal": 1 }
         ]
@@ -142,12 +142,12 @@
     },
     {
       "id": "picking-up-pennies",
-      "title": "Picking up pennies in front of a steamroller",
+      "title": "Selling crash insurance",
       "minutes": 2,
       "body": [
-        "Some strategies earn a small, steady fee for taking on a rare large risk. Selling crash insurance is the classic one: you are paid a little every week, and you pay out only when prices fall hard. Traders call it picking up pennies in front of a steamroller.",
-        "Returns like this have **negative skew**: many small gains and a few very large losses. The calm years make the strategy look safe and its volatility look low, right up to the crash.",
-        "The buyer of that insurance has the opposite shape: many small losses and a rare large win. Its win rate looks terrible, and it can still be the one that ends ahead."
+        "Some strategies earn a small, steady fee for taking on a rare large risk. Selling crash insurance is the common example: you are paid a little every week, and you pay out only when prices fall hard. Traders call it picking up pennies in front of a steamroller.",
+        "Returns like this have **negative skew**: many small gains and a few very large losses. The calm years make the strategy look safe and its volatility look low, until the crash.",
+        "The buyer of that insurance has the opposite shape: many small losses and a rare large win. Its win rate is low, and it can still be the one that ends ahead."
       ],
       "terms": ["negative-skew", "tail-risk", "fat-tails"],
       "visual": {
@@ -193,7 +193,7 @@
       "body": [
         "Two more numbers sit next to win rate on Parity's Bot Battle board: the **worst fall** from a high, and how long the account stayed under that high.",
         "Falls and gains are not symmetric. After a 50% fall you need a 100% gain to get back to where you were. After a 90% fall you need 900%. That is why a single large loss matters so much more than many small wins.",
-        "Time matters too. An account that spends ten years under its old high has tied up money and nerves for a decade, even if it ends ahead. A bot that never recovers shows as \"never\"."
+        "Time matters too. An account that spends ten years under its old high has tied up money for a decade, even if it ends ahead. A bot that never recovers shows as \"never\"."
       ],
       "terms": ["drawdown", "recovery-math", "drawdown-duration"],
       "visual": {

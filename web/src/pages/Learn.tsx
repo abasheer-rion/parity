@@ -31,9 +31,9 @@ export function Learn({ focus }: { focus?: string }) {
       <div className="page-head">
         <Title>Learn</Title>
         <p>
-          Every term used in this project, explained three ways. <strong>Simple</strong> is how you would explain it to a
-          ten year old, <strong>Analogy</strong> compares it to everyday life, and <strong>Precise</strong> is what an
-          economist would write. Switch all cards at once here, or one card at a time.
+          {terms.length} terms used on Parity. Each card has three versions. <strong>Simple</strong> uses everyday words,
+          <strong>Analogy</strong> compares it to something familiar, and <strong>Precise</strong> gives the technical
+          definition. Switch every card here, or one card at a time.
         </p>
       </div>
       <div className="learn-bar">

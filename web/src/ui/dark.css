@@ -214,7 +214,6 @@ h1.display { font-size: 34px; line-height: 1.15; }
 .ask:hover { border-color: transparent; box-shadow: inset 0 0 0 1px #8fb0ff59, 0 0 0 4px #2f6bff14; color: var(--ds-text-default); }
 .ask svg { color: #8fb0ff; }
 .rq { padding: 32px; border-radius: 18px; margin-bottom: 16px; }
-.rq .eyebrow { font-family: var(--font-serif); font-size: 13px; letter-spacing: .14em; color: #a9bff7; }
 .rq h1 { font-size: 24px; line-height: 1.35; font-weight: 400; color: var(--ds-text-title); }
 .verdict-bar { border-radius: 8px; gap: 2px; }
 
@@ -229,7 +228,7 @@ h1.display { font-size: 34px; line-height: 1.15; }
 .insights li > a, .insights li > div { display: grid; align-content: start; gap: 6px; height: 100%; padding: 16px 18px; color: inherit; text-decoration: none; transition: background-color .2s ease-out; }
 .insights li > a:hover { background: #0e1019; text-decoration: none; }
 .insights li > a:hover .insight-text { color: var(--ds-text-title); }
-.insight-lead { font-size: 11px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; color: #a9bff7; }
+.insight-lead { font-size: 12px; line-height: 16px; font-weight: 500; color: #a9bff7; }
 .insight-text { font-size: var(--fs-14); line-height: 21px; color: var(--ds-text-default); transition: color .2s ease-out; }
 .insights-src { margin: 8px 2px 0; font-size: 12px; color: var(--ds-text-tertiary); }
 

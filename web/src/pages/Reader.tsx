@@ -38,7 +38,7 @@ export function DocsHome({ tag, type: initialType, query }: { tag?: string; type
         <Title label={tag ? `Docs tagged ${tag}` : "Research docs"}>{tag ? <>Docs tagged <span className="tag big">{tag}</span></> : "Research docs"}</Title>
         <p>
           Every decision, experiment, paper note and log in the project. Each doc opens with a short "In plain
-          words" summary. Hover any underlined word, doc link or source for a preview. Select any word or phrase to see everywhere it appears. Press <kbd>/</kbd> to search from anywhere.
+          words" summary. Hover an underlined word, doc link or source for a preview. Select a word or phrase to see every doc that uses it. Press <kbd>/</kbd> to search from anywhere.
         </p>
       </div>
       <div className="learn-bar">

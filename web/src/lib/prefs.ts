@@ -30,7 +30,7 @@ const DEFAULTS: Prefs = {
   simWidgets: ["risk.VIX", "fx.JPY", "cmd.WTI"],
   bookmarks: [
     { href: "#/doc/RES-0007", label: "Comparing every algorithm" },
-    { href: "#/doc/REF-0006", label: "The gauntlet" },
+    { href: "#/doc/REF-0006", label: "The 11 tests" },
   ],
 };
 

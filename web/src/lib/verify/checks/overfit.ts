@@ -40,7 +40,7 @@ export function concentrationCheck(trades: readonly Trade[]): CheckRow {
   const best = [...trades].map((t) => t.pnl).sort((a, b) => b - a).slice(0, 5).reduce((s, v) => s + v, 0);
   const share = best / total;
   return share > 0.5
-    ? { id: "conc", label, status: "fail", detail: `The best 5 trades made ${pp(share)} of all the profit. Take them away and little is left.` }
+    ? { id: "conc", label, status: "fail", detail: `The best 5 trades made ${pp(share)} of all the profit. Without them, less than half of the profit remains.` }
     : { id: "conc", label, status: "pass", detail: `The best 5 trades made ${pp(share)} of the profit (50% is the line).` };
 }
 
@@ -49,7 +49,7 @@ export function settingsCheck(settings: number | null, trades: number | null): C
   const label = "Many settings, few trades";
   if (settings == null || trades == null) return { id: "settings", label, status: "na", detail: `${NA}: it needs a description with its rules and a number of trades.` };
   return settings > trades / 20
-    ? { id: "settings", label, status: "fail", detail: `${settings} adjustable settings for ${trades} trades: more than one setting per 20 trades, so the rules can be bent to fit almost any past.` }
+    ? { id: "settings", label, status: "fail", detail: `${settings} adjustable settings for ${trades} trades: more than one setting per 20 trades, so the rules can be fitted to almost any past data.` }
     : { id: "settings", label, status: "pass", detail: `${settings} adjustable settings for ${trades} trades (one per 20 trades is the line).` };
 }
 

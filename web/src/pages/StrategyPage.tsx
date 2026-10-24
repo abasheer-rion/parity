@@ -164,7 +164,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
           ) : (
             <>
               <Row label="Beats the S&P 500" value={run.gauntlet ? (run.gauntlet.beats_sp500 ? "Yes" : "No") : "n/a"} good={run.gauntlet?.beats_sp500} />
-              <Row label="Gauntlet" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
+              <Row label="Tests passed" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
               <Row label="Sharpe vs market" value={`${num(m.sharpe)} vs ${num(bm?.sharpe)}`} good={better(m.sharpe, bm?.sharpe)} />
               <Row label="CAGR vs market" value={`${pct(m.cagr)} vs ${pct(bm?.cagr)}`} good={better(m.cagr, bm?.cagr)} />
               <Row label="Worst fall vs market" value={`${pct(m.max_drawdown)} vs ${pct(bm?.max_drawdown)}`} good={better(m.max_drawdown, bm?.max_drawdown)} />

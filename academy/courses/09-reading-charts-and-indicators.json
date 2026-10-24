@@ -1175,8 +1175,8 @@
    "minutes": 2,
    "body": [
     "Any chart shows indicator signals that would have worked, because you are looking back. Pick the right settings after the fact and almost any rule looks good.",
-    "The honest test has two parts: a backtest with costs on data the rule was not tuned on, and then **forward testing**: following the rule on new data, with pretend money, from a fixed start date.",
-    "Parity's demo account does the second part. Attach a rule, leave it alone, and compare what it does next with what the backtest promised."
+    "A fair test has two parts: a backtest with costs on data the rule was not tuned on, and then **forward testing**: following the rule on new data, with pretend money, from a fixed start date.",
+    "Parity's demo account does the second part. Attach a rule, leave it alone, and compare what it does next with what the backtest showed."
    ],
    "terms": [
     "technical-analysis",

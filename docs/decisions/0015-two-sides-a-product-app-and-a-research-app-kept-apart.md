@@ -19,7 +19,7 @@ Parity's site now has two separate sides:
 - **The product app, at `/app/`.** It is for anyone. Like Public, it is easy to find, follow and understand strategies. Like QuantPad, it has tools to test ideas.
 - **The research app, at `/research/`.** This is where results are made.
 
-Each side has its own dashboard, its own menu and its own pages. A page explains both sides and the wall between them. The public front page offers one door to each. The owner asked for this so that the product cannot bias the research ([INT-0002](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)).
+Each side has its own dashboard, its own menu and its own pages. A page explains both sides and the rules that keep them apart. The public front page offers one door to each. The owner asked for this so that the product cannot bias the research ([INT-0002](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)).
 
 ## Context
 
@@ -102,6 +102,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
+- [REF-0017: Parity copy rules](../reference/0017-parity-copy-rules.md)
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](../log/2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 <!-- backlinks:end -->

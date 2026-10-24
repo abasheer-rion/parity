@@ -368,7 +368,7 @@ function CloseUp({ lane, lanes, k, dates, start, rank, comparison, bench }: {
           <div className="sw-mini-title">Weaknesses</div>
           <ul>{weaknesses.length ? weaknesses.map((x) => <li key={x.text} title={x.detail}>{x.text}</li>) : <li className="muted">None found.</li>}</ul>
         </div>
-        {g && <p className="sw-verdict">Gauntlet: {g.passed} of {g.total} tests passed. {g.verdict}</p>}
+        {g && <p className="sw-verdict">Tests: {g.passed} of {g.total} passed. {g.verdict}</p>}
       </div>
     </section>
   );

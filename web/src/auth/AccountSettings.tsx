@@ -38,7 +38,7 @@ export default function AccountSettings() {
       <SettingsRow label="Delete my account" help="Sends a request to the owner, who deletes the account and its sign-in. Research results are shared and are not deleted.">
         <DeleteRequest userId={session?.user.id} email={email} />
       </SettingsRow>
-      <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only, not investment advice.">
+      <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only. Not investment advice.">
         <LegalLinks className="start" />
       </SettingsRow>
     </>

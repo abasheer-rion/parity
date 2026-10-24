@@ -112,7 +112,7 @@
    "body": [
     "Two money multiples sum up a fund. **DPI** is cash paid back divided by cash paid in. It counts only real money returned.",
     "**TVPI** adds what the fund still holds, at the fund's own valuation, called NAV. TVPI equals DPI plus that remaining value, divided by what was paid in.",
-    "Early in a fund's life, most of TVPI is NAV, an estimate. By the end it is all DPI, real cash. A high TVPI with a low DPI is a promise more than a result."
+    "Early in a fund's life, most of TVPI is NAV, an estimate. By the end it is all DPI, real cash. A high TVPI with a low DPI is mostly an estimate."
    ],
    "terms": [
     "money-weighted-return"
@@ -341,7 +341,7 @@
       ]
      },
      {
-      "caption": "Same asset, two pictures: the reported one looks calmer than the risk really was.",
+      "caption": "The reported value looks calmer than the market value was.",
       "show": [
        0.35,
        1
@@ -385,7 +385,7 @@
    "minutes": 2,
    "body": [
     "Private funds usually charge two fees. A **management fee** is a yearly percent of the money committed or managed, paid whether or not the fund does well. A **performance fee**, often 20% of profits above a hurdle, is paid when it does.",
-    "Returns before fees are gross; after fees they are net. Investors live on net. The gap is often large, and it is largest when results are good, because that is when the performance fee bites.",
+    "Returns before fees are gross; after fees they are net. Investors receive net. The gap is often large, and it is largest when results are good, because that is when the performance fee is paid.",
     "The picture uses made-up numbers to show the size of that gap."
    ],
    "terms": [

@@ -25,7 +25,7 @@ function Headlines({ items }: { items: Headline[] }) {
 
 function Warnings({ list }: { list: string[] }) {
   if (!list.length) return null;
-  return <ul className="news-warnings" aria-label="Read this before you trust the numbers">{list.map((w) => <li key={w}>{w}</li>)}</ul>;
+  return <ul className="news-warnings" aria-label="Warnings about these numbers">{list.map((w) => <li key={w}>{w}</li>)}</ul>;
 }
 
 // ------------------------------------------------------------------ archive
@@ -135,7 +135,7 @@ export function Impact() {
 function Explainer() {
   return (
     <details className="news-explainer">
-      <summary>How to read this, in plain words</summary>
+      <summary>How to read this</summary>
       <ul>
         <li><b>Normal move (z).</b> We divide each move by how much the asset usually moves in a day, using only the year before. z of 1 is an ordinary day, 2 is unusual, 3 or more is rare.</li>
         <li><b>Event study.</b> Every day with a matching headline is one event. We line them up on the day of the news and average what happened next, then do the same for random days. The gap between the two is what the news might add.</li>

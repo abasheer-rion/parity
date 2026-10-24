@@ -29,10 +29,10 @@ export function Lab({ report }: { report: Report }) {
     <>
       <div className="page-head">
         <Title>Lab</Title>
-        <p>Change a strategy's settings and see what happens. Each combination here was already run by the gauntlet's
-          sensitivity test, so nothing is computed in your browser and nothing here is an official result. To try new
-          settings or a new algorithm, run <code>parity run</code> on your own machine, and to make it count, register it
-          first (see the research routine guide).</p>
+        <p>Change a strategy's settings and see the result. Every combination here was already run by the settings
+          test, one of the 11 tests. Nothing is computed in your browser and nothing here is an official result. To try
+          other settings or a new algorithm, run <code>parity run</code> on your own machine. To make it official,
+          register it first (see the research routine guide).</p>
       </div>
       <Card title="Settings">
         <div className="filters">
@@ -46,7 +46,7 @@ export function Lab({ report }: { report: Report }) {
             );
           })}
         </div>
-        <p className="warning small">You are looking at 1 of {variants.length} versions. All {variants.length} count as <Term id="data-snooping">trials</Term>, whichever one you like best. Picking the best-looking one here and calling it a result is exactly the mistake the gauntlet exists to catch.</p>
+        <p className="warning small">You are looking at 1 of {variants.length} versions. All {variants.length} count as <Term id="data-snooping">trials</Term>, whichever one you like best. Picking the best-looking one and calling it a result is the mistake the luck check is there to catch.</p>
       </Card>
       {current && (
         <>

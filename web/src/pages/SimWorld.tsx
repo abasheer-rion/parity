@@ -37,7 +37,7 @@ const GROUPS: { name: string; tabs: { id: Tab; label: string; icon: string; what
     { id: "paths", label: "Paths", icon: "graph", what: "Simulated ranges and risks" },
     { id: "stress", label: "Stress test", icon: "flask", what: "A mix of assets through every past crisis" },
     { id: "race", label: "Strategy race", icon: "chart", what: "Every strategy replayed" },
-    { id: "bots", label: "Bot battle", icon: "pulse", what: "Seven trading bots: win rate is not profit" },
+    { id: "bots", label: "Bot battle", icon: "pulse", what: "Seven trading bots compared on win rate and profit" },
   ] },
 ];
 
@@ -79,7 +79,7 @@ export function SimWorld({ report, tab: rawTab, base = "#/sim" }: { report: Repo
       <header className="sw2-head">
         <div>
           <h1>Sim World</h1>
-          <p>Replay markets through history, play out events, and simulate paths to measure risk. Every tab replays or reshuffles the past; none of it is a forecast.</p>
+          <p>Each tab replays or reshuffles past prices. None of it is a forecast.</p>
         </div>
       </header>
       <nav className="sw2-tabs" aria-label="Sim World">
