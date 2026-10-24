@@ -5,7 +5,7 @@
 //   - the "how an idea becomes a result" story follows the scroll
 //   - the app preview and the terminal preview loop only while they are on screen
 //   - the terminal preview and the market tape fill in with real closes from
-//     /stats.json (DEC-0031); until then the preview says it shows example values
+//     /stats.json (DEC-0021); until then the preview says it shows example values
 //   - cards lean toward the pointer
 //   - the 3D globe loads when its section comes near, never for reduced motion
 //   - the large scale sim loads when its section comes near the screen

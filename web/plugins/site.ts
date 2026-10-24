@@ -9,7 +9,7 @@
 //
 // The live counts (strategies tested, variations searched, terminal series) and the
 // market strip come from /stats.json, written at deploy by scripts/export_site_data.py
-// and scripts/export_front_strip.py (DEC-0031). In development this serves the same
+// and scripts/export_front_strip.py (DEC-0021). In development this serves the same
 // numbers from engine/output/.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";

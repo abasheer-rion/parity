@@ -89,7 +89,7 @@ jobs:
         continue-on-error: true  # the terminal explains itself when its files are missing
         # After the markets step so CoinGecko crypto comes from dist/data/markets/crypto.json.
         run: parity terminal export --out dist/data --markets dist/data
-      - name: Front page market strip (recent closes into stats.json, DEC-0031)
+      - name: Front page market strip (recent closes into stats.json, DEC-0021)
         continue-on-error: true  # the front page labels the strip as missing when this is absent
         run: python3 ../scripts/export_front_strip.py dist
       - name: Save the live SEO manifest (so IndexNow hears only what changed)

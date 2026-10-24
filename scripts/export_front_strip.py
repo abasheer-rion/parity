@@ -1,4 +1,4 @@
-"""Add a small market strip to the front page's stats.json (DEC-0031).
+"""Add a small market strip to the front page's stats.json (DEC-0021).
 
 The front page shows a terminal preview and a ticker of recent closes. Both read
 /stats.json, which scripts/export_site_data.py writes with the research counts. This
