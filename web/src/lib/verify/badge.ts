@@ -8,7 +8,7 @@ export type VerdictKey = "holds_up" | "could_be_luck" | "fragile" | "does_not_ho
 export const VERDICT_WORDS: Record<VerdictKey, string> = {
   holds_up: "Holds up", could_be_luck: "Could be luck", fragile: "Fragile", does_not_hold_up: "Does not hold up", not_enough_data: "Not enough data",
 };
-const VERDICT_COLOR: Record<VerdictKey, string> = {
+export const VERDICT_COLOR: Record<VerdictKey, string> = {
   holds_up: "#3ccf91", could_be_luck: "#e8a33c", fragile: "#e8a33c", does_not_hold_up: "#f0605d", not_enough_data: "#a7adbd",
 };
 
@@ -16,7 +16,7 @@ const VERDICT_COLOR: Record<VerdictKey, string> = {
 export const TRUST_LINE = "Self-reported: Parity checked the numbers in the file, not where the file came from.";
 export const NOT_ADVICE = "Verification is not a recommendation.";
 
-const KIND_WORDS = { real: "Self-reported real money", demo: "Self-reported demo account", backtest: "Self-reported backtest" } as const;
+export const KIND_WORDS = { real: "Self-reported real money", demo: "Self-reported demo account", backtest: "Self-reported backtest" } as const;
 
 /** A badge as the public page and the image read it (the verify_badges_public view). */
 export interface PublicBadge {

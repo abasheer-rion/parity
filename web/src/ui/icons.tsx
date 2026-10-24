@@ -20,6 +20,7 @@ const paths: Record<string, ReactNode> = {
   gear: <><circle cx="8" cy="8" r="2" /><path d="M8 1.8v1.7M8 12.5v1.7M1.8 8h1.7M12.5 8h1.7M3.6 3.6l1.2 1.2M11.2 11.2l1.2 1.2M3.6 12.4l1.2-1.2M11.2 4.8l1.2-1.2" /></>,
   search: <><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3 3" /></>,
   bookmark: <path d="M4 2.5h8v11L8 10.5l-4 3z" />,
+  link: <path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-.9.9M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.9-.9" />,
   chevronLeft: <path d="M10 3.5 5.5 8l4.5 4.5" />,
   chevronRight: <path d="M6 3.5 10.5 8 6 12.5" />,
   sidebar: <><rect x="2.5" y="3" width="11" height="10" rx="1.5" /><path d="M6.5 3v10" /></>,

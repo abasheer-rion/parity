@@ -1,7 +1,8 @@
 // Parity Verify (REF-0016, INT-0003): give it a trading record, a bot described in words
 // or one of our strategies, and it says in plain words whether the record holds up. An
 // uploaded file is read and checked in this browser only; nothing about it is sent.
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { hashQuery, setHashQuery, useHashState } from "../lib/deeplink";
 import { Title } from "../components/Shell";
 import { loadReport, loadSearch } from "../lib/data";
 import { nameOf, tagsOf } from "../lib/strategyMeta";
@@ -21,9 +22,12 @@ const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
 export interface FileMeta { parsed: Parsed; sha256: string; name: string }
 
 export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) => ReactNode } = {}) {
-  const [mode, setMode] = useState<Mode>("file");
+  // The input kind, the example and the picked strategy are in the address, so a link
+  // reopens the same check: #/verify?mode=describe&example=1, #/verify?mode=strategy&strategy=fx_carry (DEC-0038).
+  const [rawMode, setRawMode] = useHashState("mode", "file");
+  const mode: Mode = rawMode === "describe" || rawMode === "strategy" ? rawMode : "file";
   const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
-  const change = (m: Mode) => { setMode(m); setResult(null); };
+  const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
   return (
     <>
       <div className="page-head">
@@ -206,15 +210,19 @@ async function candidates(): Promise<Candidate[]> {
 }
 
 function DescribeInput({ onResult }: { onResult: (r: Result, matches: Match[]) => void }) {
-  const [text, setText] = useState("");
+  const [text, setTextRaw] = useState(() => (hashQuery().get("example") === "1" ? EXAMPLE : ""));
+  const setText = (t: string) => { setTextRaw(t); setHashQuery({ example: t === EXAMPLE ? "1" : null }); };
   const [busy, setBusy] = useState(false);
-  const run = async () => {
-    const x = extract(text);
+  const run = async (input = text) => {
+    const x = extract(input);
     setBusy(true);
     const matches = closest(x, await candidates());
-    onResult(checkDescription({ text, claim: x.claim, settings: x.settings || null, trades: x.trades }), matches);
+    onResult(checkDescription({ text: input, claim: x.claim, settings: x.settings || null, trades: x.trades }), matches);
     setBusy(false);
   };
+  // A link to the example checks it straight away.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { if (hashQuery().get("example") === "1") void run(EXAMPLE); }, []);
   return (
     <div className="vf-panel">
       <label className="ui-field">
@@ -265,12 +273,15 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
   if (!report) return <div className="vf-panel"><SkeletonTable rows={6} cols={2} label="Loading our strategies" /></div>;
   const tries = (search?.trials ?? 0) + report.n_trials;
   const pick = (name: string) => {
-    const r = runs.find((x) => x.strategy === name)!;
+    const r = runs.find((x) => x.strategy === name);
+    if (!r) return;
+    setHashQuery({ strategy: name });
     onResult(checkStrategy({ name: nameOf(r), equity: r.equity, tries, asset: tagsOf(r).asset,
       gauntlet: r.gauntlet ? { verdict: r.gauntlet.verdict, passed: r.gauntlet.passed, total: r.gauntlet.total } : null }));
   };
   return (
     <div className="vf-panel">
+      <PickFromLink pick={pick} />
       <SearchInput value={q} onChange={setQ} placeholder={`Search ${runs.length} tested strategies`} />
       <p className="vf-help">The luck check uses every try our research and search have counted: {tries.toLocaleString("en-US")}.</p>
       <ul className="vf-pick">
@@ -286,4 +297,14 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
       </ul>
     </div>
   );
+}
+
+/** Picks the strategy a link names (#/verify?mode=strategy&strategy=<id>) once the list is loaded. */
+function PickFromLink({ pick }: { pick: (name: string) => void }) {
+  const done = useRef(false);
+  useEffect(() => {
+    const id = hashQuery().get("strategy");
+    if (id && !done.current) { done.current = true; pick(id); }
+  }, [pick]);
+  return null;
 }

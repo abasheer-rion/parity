@@ -9,6 +9,7 @@ import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
 import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
+import { CopyLink } from "./CopyLink";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: boolean }
 
@@ -291,6 +292,7 @@ export function Title({ children, label, actions }: { children: ReactNode; label
         aria-label={marked ? "Remove from bookmarks" : "Add to bookmarks"} title={marked ? "Remove from bookmarks" : "Add to bookmarks"}>
         <Icon name="bookmark" size={13} />
       </button>
+      <CopyLink />
       {actions && <div className="title-actions">{actions}</div>}
     </div>
   );

@@ -44,6 +44,8 @@ import { otherSide, simUrl, SPACE, SPACE_ROOT } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
+import { useRouteMeta } from "./lib/deeplink";
+import { nameById, nameOf } from "./lib/strategyMeta";
 
 // The Trade area carries the charting library, so it loads only when opened.
 const Trade = lazy(() => import("./pages/trade/Trade"));
@@ -111,6 +113,9 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   const q = new URLSearchParams(query).get("q") ?? undefined;
   const standalone = STANDALONE.includes(route);
   const dec = (s?: string) => (s ? decodeURIComponent(s) : undefined);
+  // The tab title and share tags follow the page (DEC-0038).
+  const run = route === "strategy" && arg && report ? report.runs.find((r) => r.strategy === dec(arg)) : undefined;
+  useRouteMeta(SPACE, route, dec(arg), route === "strategy" && arg ? (run ? nameOf(run) : nameById(dec(arg)!)) : undefined);
   // A page from the other side of Parity opens there instead (DEC-0015).
   const away = otherSide(route);
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);

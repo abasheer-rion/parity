@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
+import { parityMeta, parityOg } from "./plugins/meta";
 import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
@@ -147,7 +148,7 @@ const SITE_PAGES = [
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal()],
+  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

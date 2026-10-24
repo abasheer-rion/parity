@@ -34,9 +34,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SITE = os.environ.get("SITE_URL", "https://parity.endyland.com").rstrip("/")
-ORG = "Parity Trading, Inc."
-CONTACT = "contact@paritytrading.ai"
+# The site's address and names live in one file, shared with the web build (DEC-0038).
+SITE_JSON = json.loads((ROOT / "web/src/lib/site.json").read_text())
+SITE = os.environ.get("SITE_URL", SITE_JSON["origin"]).rstrip("/")
+ORG = SITE_JSON["legalName"]
+CONTACT = SITE_JSON["email"]
 LOGO = "/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg"
 STAGES = ["catalogued", "sourced", "hypothesis", "implemented", "registered", "official", "reproduced", "forward", "verdict"]
 NOTE_TYPES = {"decisions": "Decision", "research": "Research note", "reference": "Reference"}
@@ -290,10 +292,11 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#07080d">
+<meta name="theme-color" content="{SITE_JSON['themeColor']}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
 <meta property="og:site_name" content="Parity">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{e(title)}">
