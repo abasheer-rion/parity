@@ -60,8 +60,9 @@ MORE_UNIVERSES = {
     "macro": ("Stocks, bonds and oil", [B.MKT, "bond.TR10", "bond.TR2", "cmd.BRENT"]),
 }
 ALL_UNIVERSES = UNIVERSES | MORE_UNIVERSES
-#: Universes of assets that cost money to hold: a long-only book on them is funded.
-PAID = ("ind", "mkt", "bond", "oil", "bonds", "energy", "macro")
+#: Universes where a long-only rank book holds assets that cost money, so it is funded.
+#: The old universes keep their old rule, so an old id builds what it built.
+FUNDED_RANK = ("ind", "bonds", "energy", "macro")
 #: Everything a sampled spec may ever hold (DEC-0014): daily prices you can trade.
 TRADABLE = {*FX, *WIDE, *IND, *FAC, "factor.STREV", *S.XWIDE, B.MKT, "bond.TR2", "bond.TR5",
             "bond.TR10", "cmd.BRENT", "cmd.WTI", B.CASH}
@@ -475,9 +476,8 @@ def build(spec: dict) -> B.Block:
         cls = type("SearchRank", (B.RankBook,), {"name": "search", "summary": "",
                    "universe": _assets(spec["universe"]), "rank_on": spec["rank_on"],
                    "long_short": spec["long_short"],
-                   # Old universes keep their old rule, so old ids mean what they meant.
-                   "funded": not spec["long_short"] and spec["universe"] in
-                   ("ind", "bonds", "energy", "macro"), **floor})
+                   "funded": not spec["long_short"] and spec["universe"] in FUNDED_RANK,
+                   **floor})
         return cls(lookback=spec["lookback"], skip=spec["skip"], k=spec["k"],
                    rebalance=spec["rebalance"])
     if k == "timing":
