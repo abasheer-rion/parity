@@ -23,6 +23,11 @@
   X-Robots-Tag: noindex, nofollow
 /verify/*
   X-Robots-Tag: noindex, nofollow
+# Verify badge pages are shared by link only, not listed in search (REF-0016).
+/v/*
+  X-Robots-Tag: noindex, nofollow
+/badge/*
+  X-Robots-Tag: noindex, nofollow
 /seo-manifest.json
   X-Robots-Tag: noindex
 https://sim.endyland.com/*

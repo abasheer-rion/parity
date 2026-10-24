@@ -1,19 +1,26 @@
 // Verify's result: the verdict, the sentence that explains it, what the record was, and
 // the five cards. Every number carries a one-line explanation on hover or tap (REF-0016,
 // acceptance test 10).
-import type { ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { breakEvenAt, survivesText, VERDICT_TONE, type CheckRow, type Result } from "../../lib/verify/checks";
 import { explain } from "../../lib/verify/explain";
 import { shortDate } from "../../lib/verify/parse";
 import { Badge, KeyValues, MINUS, Panel, Tooltip } from "../../ui";
 import { termById } from "../../lib/glossary";
 
+/** On the public badge page (/v/<id>) links go to the public glossary and lessons, not into the app. */
+export const PublicLinks = createContext(false);
+
 /** A glossary link that previews on hover, like the Learn page's Term, without loading the docs bundle. */
 function Term({ id, children }: { id: string; children: ReactNode }) {
-  return termById[id] ? <a className="term-link" href={`#/learn/${id}`} data-term={id}>{children}</a> : <>{children}</>;
+  const pub = useContext(PublicLinks);
+  if (!termById[id]) return <>{children}</>;
+  return pub ? <a className="term-link" href={`/learn/${id}/`}>{children}</a> : <a className="term-link" href={`#/learn/${id}`} data-term={id}>{children}</a>;
 }
 
-const ACADEMY_LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
+function useLesson(): string {
+  return useContext(PublicLinks) ? "/learn/academy/win-rate-is-not-profit/the-99-percent-bot/" : "#/academy/win-rate-is-not-profit/the-99-percent-bot";
+}
 
 /** A number with its explanation: hover, focus or tap shows the line. */
 export function Num({ id, children }: { id: string; children: ReactNode }) {
@@ -38,6 +45,7 @@ const int = (v: number | null | undefined) => (v == null ? "n/a" : v.toLocaleStr
 const KIND_TEXT = { real: "Real money (as you told us)", demo: "Demo account (as you told us)", backtest: "Backtest (as you told us)" } as const;
 
 export function ResultView({ r, children }: { r: Result; children?: ReactNode }) {
+  const lesson = useLesson();
   const tone = VERDICT_TONE[r.verdict.id];
   const per = r.card1?.basis === "trade" ? "trade" : "period";
   const fmtResult = per === "trade" ? money : (v: number | null | undefined) => pct(v, 2);
@@ -79,7 +87,7 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
                   ? <Num id="expectancyPct">{pct(r.card1.expectancyPct, 3)}</Num> : <Num id="n">{int(r.card1.n)}</Num>],
               ]} />
               <BreakEvenChart winRate={r.card1.winRate} payoff={r.card1.payoff} />
-              <p className="vf-small">A high win rate can still lose money: what matters is whether the point sits above the curve. <a href={ACADEMY_LESSON}>The 99% bot lesson</a> shows why.</p>
+              <p className="vf-small">A high win rate can still lose money: what matters is whether the point sits above the curve. <a href={lesson}>The 99% bot lesson</a> shows why.</p>
             </>
           ) : r.description ? <ClaimOnly r={r} /> : <p className="vf-small">Cannot be checked from this input.</p>}
         </Panel>
@@ -115,7 +123,7 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
                 [<Term id="deflated-sharpe-ratio">{`Luck check at ${int(r.card3.tries)} ${r.card3.tries === 1 ? "try" : "tries"}`}</Term>, <Num id="dsr">{r.card3.dsr == null ? "n/a" : `${r.card3.dsr.toFixed(3)} (0.95 needed)`}</Num>],
                 [r.card3.basis === "trade" ? "Sharpe per trade" : "Sharpe per year", r.card3.basis === "trade" ? <Num id="sharpe">{dec(r.card3.sharpe, 3)}</Num> : <Num id="sharpeAnnual">{dec(r.card3.sharpeAnnual)}</Num>],
                 [r.card3.basis === "trade" ? "Trades used" : `${r.card3.basis[0].toUpperCase()}${r.card3.basis.slice(1)} returns used`, <Num id="observations">{int(r.card3.observations)}</Num>],
-                ["More months needed to pass", <Num id="monthsMore">{r.card3.monthsMore == null ? "n/a" : r.card3.monthsMore === 0 ? "0, it passes" : Number.isFinite(r.card3.monthsMore) ? `${int(Math.ceil(r.card3.monthsMore))}` : "Never, at this Sharpe"}</Num>],
+                ["More months needed to pass", <Num id="monthsMore">{r.card3.monthsMore == null ? "n/a" : r.card3.monthsMore === 0 ? "0, it passes" : Number.isFinite(r.card3.monthsMore) && r.card3.monthsMore > 0 ? `${int(Math.ceil(r.card3.monthsMore))}` : "Never, at this Sharpe"}</Num>],
               ]} />
               <p className="vf-small">How much spread there is between the tries is unknown for an upload, so we use the stand-in our own research uses for a single estimate. The line is 0.95, as in our gauntlet.</p>
             </>

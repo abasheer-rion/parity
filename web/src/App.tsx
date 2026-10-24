@@ -39,6 +39,7 @@ import { ProductHome } from "./pages/ProductHome";
 import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
 import { Verify } from "./pages/Verify";
+import { SharePanel } from "./pages/verify/Share";
 import { otherSide, simUrl, SPACE, SPACE_ROOT } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
@@ -146,7 +147,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "edges" && <EdgeLab focus={dec(arg)} />}
       {route === "academy" && <Academy course={dec(arg)} lesson={dec(extra)} />}
       {route === "private" && <PrivateResearch />}
-      {route === "verify" && <Verify />}
+      {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
       {route === "news" && <News view={arg} />}

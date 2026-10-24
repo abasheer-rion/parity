@@ -364,6 +364,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0003: Cleaner data and head to head comparison](log/2026-10-20-cleaner-data-and-head-to-head-comparison.md)
+- [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
 - [DAT-0021: Kenneth R. French Data Library](datasets/0021-kenneth-french.md)
 - [DAT-0034: Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md)
@@ -664,3 +665,4 @@ The dashboard.
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
+- [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)

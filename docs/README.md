@@ -13,7 +13,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 13 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 16 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 12 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 13 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -29,14 +29,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
+- 2026-10-24 [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - 2026-10-24 [LOG-0012: Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md)
 - 2026-10-24 [LOG-0011: Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md)
 - 2026-10-24 [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - 2026-10-24 [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - 2026-10-23 [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
-- 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
-- 2026-10-23 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 
 ## intent
 
@@ -160,7 +160,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
 | REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
-| REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | draft | 2026-10-23 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## log
 
@@ -178,6 +178,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0010 | [Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md) | final | 2026-10-23 | [process](TAGS.md#process) |
 | LOG-0011 | [Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md) | final | 2026-10-24 | [process](TAGS.md#process) |
 | LOG-0012 | [Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md) | final | 2026-10-24 | [process](TAGS.md#process) |
+| LOG-0013 | [Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md) | final | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## algorithm
 

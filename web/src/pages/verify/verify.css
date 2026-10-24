@@ -66,3 +66,38 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 .vf-curve { fill: none; stroke: var(--text); stroke-width: 1.5; }
 .vf-dot-good { fill: var(--good); stroke: var(--canvas); stroke-width: 2; }
 .vf-dot-bad { fill: var(--bad); stroke: var(--canvas); stroke-width: 2; }
+
+/* Sharing (in the app) */
+.vf-optin { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.vf-code { font-family: var(--font-mono); font-size: var(--fs-xs); }
+.vf-copy { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; overflow-wrap: anywhere; }
+.vf-badge-img { display: block; width: 320px; max-width: 100%; height: auto; aspect-ratio: 4 / 1; }
+.vf-mine { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
+.vf-mine h3 { margin: 0 0 10px; font-size: var(--fs-md); }
+.vf-checks li.vf-mine-row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+
+/* The public badge page, /v/<id> */
+.vb-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--canvas); color: var(--text); }
+.vb-header { display: flex; align-items: center; gap: 12px; padding: 16px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.vb-brand img { display: block; }
+.vb-tag { font-size: var(--fs-sm); color: var(--text-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
+.vb-main { flex: 1; min-height: 100vh; max-width: 1100px; width: 100%; margin: 0 auto; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+.vb-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.vb-title { margin: 4px 0 6px; font-size: var(--fs-2xl); overflow-wrap: anywhere; }
+.vb-badge { display: block; width: 320px; max-width: 100%; height: auto; aspect-ratio: 4 / 1; }
+.vb-trust { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
+.vb-trust p { margin: 0; }
+.vb-hash { font-family: var(--font-mono); font-size: var(--fs-xs); overflow-wrap: anywhere; word-break: break-all; }
+.vb-hashcheck { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: var(--fs-sm); color: var(--text-2); }
+.vb-hashcheck [role="status"] { min-width: 1ch; }
+.vb-ok { color: var(--good); }
+.vb-notice { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); max-width: 760px; }
+.vb-notice h1 { margin: 6px 0 10px; font-size: var(--fs-xl); }
+.vb-notice p { color: var(--text-2); }
+.vb-share { font-size: var(--fs-sm); }
+.vb-share summary { cursor: pointer; color: var(--text-2); margin-bottom: 8px; }
+.vb-share textarea { margin-top: 8px; }
+.vb-footer { max-width: 1100px; width: 100%; margin: 0 auto; padding: 16px; color: var(--muted); font-size: var(--fs-xs); border-top: 1px solid var(--border); }
+.vb-page .skip { position: absolute; left: 12px; top: -60px; z-index: 10; padding: 10px 14px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.vb-page .skip:focus { top: 12px; }
+.vb-notice img { max-width: 100%; height: auto; }
