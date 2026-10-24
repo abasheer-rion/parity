@@ -32,7 +32,7 @@ export function parentDomain(host: string): string {
 export const SITE_DOMAIN: string = parentDomain(HOST);
 /** Parity Terminal's own address (DEC-0020, DEC-0024). */
 export const SIM_ORIGIN = `https://sim.${SITE_DOMAIN}`;
-/** Parity Trade's own address (DEC-0039). */
+/** Parity Trade's own address (DEC-0040). */
 export const TRADE_ORIGIN = `https://trade.${SITE_DOMAIN}`;
 
 /** The logo drawn on every share card. */

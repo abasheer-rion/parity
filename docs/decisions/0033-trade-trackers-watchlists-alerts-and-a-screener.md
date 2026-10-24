@@ -47,5 +47,5 @@ All our prices are delayed daily closes from sources whose terms allow display (
 ## Referenced by
 
 - [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
-- [DEC-0039: Parity Trade, a full-screen trading app of its own](0039-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 <!-- backlinks:end -->

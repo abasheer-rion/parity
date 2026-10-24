@@ -23,7 +23,7 @@ interface Context {
 const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trade(\/|$)/, /^\/data\//];
 
 // Sim World and Parity Trade have their own addresses, sim.<domain> (DEC-0016 follow-up) and
-// trade.<domain> (DEC-0039): the front page of each is its app at /sim/ or /trade/, behind
+// trade.<domain> (DEC-0040): the front page of each is its app at /sim/ or /trade/, behind
 // the same sign-in. Sign-in pages, brand files and built assets stay reachable there so
 // logging in works; the other apps send people back to the main address.
 const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/" };

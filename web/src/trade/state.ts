@@ -1,4 +1,4 @@
-// Parity Trade's own state (DEC-0039): which view is open, the workspace layout (chart
+// Parity Trade's own state (DEC-0040): which view is open, the workspace layout (chart
 // grid, panels and their sizes) and the settings. The working layout and the settings are
 // kept in this browser; named layouts are saved to the account (layouts.ts).
 import { CHART_TYPES, type ChartType } from "../ui/proChart";

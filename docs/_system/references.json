@@ -26299,6 +26299,48 @@
       }
     },
     {
+      "key": "url-90a7c7fc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Trademark guidelines | Cloudflare",
+      "venue": "cloudflare.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cloudflare.com/trademark/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-94c34b0c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NVIDIA Inception Program for Startups",
+      "venue": "nvidia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nvidia.com/en-us/startups/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-ef473588",
       "type": "web-page",
       "authors": [],

@@ -89,7 +89,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World (DEC-0020) and Parity Trade (DEC-0039) run full screen on their own sites:
+  // Sim World (DEC-0020) and Parity Trade (DEC-0040) run full screen on their own sites:
   // any link to #/sim or #/trade opens them in a new tab. Typing #/sim still lands on a
   // small card that links there; typing #/trade goes straight to Parity Trade.
   useEffect(() => {
@@ -122,7 +122,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   // A page from the other side of Parity opens there instead (DEC-0015).
   const away = otherSide(route);
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
-  // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0039).
+  // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0040).
   useEffect(() => { if (route === "trade") window.location.replace(tradeUrl(tradeHashFor(hash))); }, [route, hash]);
   if (away || route === "trade") return null;
 

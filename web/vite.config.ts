@@ -140,7 +140,7 @@ function localScenarios(): Plugin {
 //   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
 //                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
 //                            must not load anything from /app/.
-//   vite build --mode trade  Parity Trade on its own (DEC-0039), /trade/, assets under
+//   vite build --mode trade  Parity Trade on its own (DEC-0040), /trade/, assets under
 //                            /trade/assets/, for the same reason (trade.endyland.com).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [

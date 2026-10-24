@@ -1,5 +1,5 @@
 ---
-id: DEC-0039
+id: DEC-0040
 title: Parity Trade, a full-screen trading app of its own
 type: decision
 status: accepted

@@ -28,7 +28,7 @@ const DEFAULT_PAGES = [
   "/research/#/data", "/research/#/sources", "/research/#/ui",
   // Parity Terminal
   "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
-  // Parity Trade (DEC-0039)
+  // Parity Trade (DEC-0040)
   "/trade/", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
   "/trade/#/strategies", "/trade/#/settings",
 ];

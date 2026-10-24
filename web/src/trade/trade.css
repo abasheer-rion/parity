@@ -1,4 +1,4 @@
-/* Parity Trade (DEC-0039): a full-viewport trading workspace. Dark only, the shared
+/* Parity Trade (DEC-0040): a full-viewport trading workspace. Dark only, the shared
    tokens, hairline panels, small tabular numbers. Every region has a fixed size before
    its data arrives, so nothing moves while it loads. Scoped to .ptr. */
 

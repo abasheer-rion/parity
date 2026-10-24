@@ -1,20 +1,24 @@
-// Building blocks shared by the sign-in pages: the centred card, labelled fields with the
+// Building blocks shared by the sign-in pages (restyled to match the front page in DEC-0039):
+// the logo in the corner, the centred card, labelled fields with the
 // right autocomplete hints for password managers, a password field with show and hide,
 // messages that screen readers announce, and a small async-submit helper.
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { SkipLink } from "../components/SkipLink";
 import { LegalLinks } from "../legal/LegalLinks";
-import { passwordRules } from "./rules";
+import { emailProblem, passwordRules } from "./rules";
 import "./auth.css";
 
 export function AuthCard({ title, lead, children, foot }: { title: string; lead?: ReactNode; children: ReactNode; foot?: ReactNode }) {
   return (
     <div className="auth-page">
+      <div className="auth-orbs" aria-hidden="true"><i /><i /><i /></div>
       <SkipLink />
-      <main className="auth-card anim-rise" id="main" aria-labelledby="auth-title">
-        <a className="auth-brand" href="/">
-          <img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height={44} alt="Parity home" />
-        </a>
+      {/* No top bar: the logo sits in the corner, as on the front page, and goes home. */}
+      <a className="auth-corner" href="/" aria-label="Parity home">
+        <img src="/brand/2026-10-21-starburst/parity-mark-white.svg" width={22} height={22} alt="" />
+        <img className="auth-letters" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width={70} height={15} alt="" />
+      </a>
+      <main className="auth-card" id="main" aria-labelledby="auth-title">
         <h1 className="auth-title" id="auth-title">{title}</h1>
         {lead && <p className="auth-lead">{lead}</p>}
         {children}
@@ -37,12 +41,18 @@ interface FieldProps {
   error?: string | null;
 }
 
-export function Field({ label, value, onChange, type = "text", auto, hint, autoFocus, minLength, maxLength, name, error }: FieldProps) {
+export function Field({ label, value, onChange, type = "text", auto, hint, autoFocus, minLength, maxLength, name, error: given }: FieldProps) {
   const id = useId();
   const code = auto === "one-time-code";
+  // Inline validation for email: checked once the person leaves the field, and again as
+  // they fix it. A tick shows when it looks right.
+  const [touched, setTouched] = useState(false);
+  const emailCheck = type === "email" && touched && value.trim() ? emailProblem(value) : null;
+  const error = given ?? emailCheck;
+  const valid = type === "email" && touched && !!value.trim() && !error;
   const described = [hint ? `${id}-hint` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
-    <div className="ui-field auth-field">
+    <div className="ui-field auth-field" data-valid={valid || undefined}>
       <label className="ui-field-label" htmlFor={id}>{label}</label>
       <input
         id={id}
@@ -61,8 +71,10 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
         autoCapitalize="none"
         aria-invalid={error ? true : undefined}
         aria-describedby={described}
+        onBlur={() => setTouched(true)}
         onChange={(e) => onChange(code ? e.target.value.replace(/\D/g, "") : e.target.value)}
       />
+      {valid && <svg className="auth-ok" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       {hint && <span className="auth-hint" id={`${id}-hint`}>{hint}</span>}
       {error && <span className="auth-field-error" id={`${id}-err`}>{error}</span>}
     </div>

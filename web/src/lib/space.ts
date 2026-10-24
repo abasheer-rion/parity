@@ -46,7 +46,7 @@ export function researchUrl(hash = ""): string {
   return onSiteDomain() ? `${ORIGIN}/research/${hash}` : `/research/${hash}`;
 }
 
-// ---------- Parity Trade, its own full-screen app (DEC-0039) ----------
+// ---------- Parity Trade, its own full-screen app (DEC-0040) ----------
 // /trade/ serves web/trade/index.html, marked <html data-space="trade">: a trading workspace
 // with its own rail, settings and keys. It signs in like the other sides.
 

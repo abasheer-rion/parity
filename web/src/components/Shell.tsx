@@ -33,7 +33,7 @@ const PRODUCT: NavItem[] = [
   },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
-  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0039).
+  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0040).
   { href: tradeUrl(), label: "Trade", icon: "graph", routes: ["trade"], external: "Opens Parity Trade in a new tab" },
   {
     href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],

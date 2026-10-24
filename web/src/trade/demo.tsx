@@ -1,4 +1,4 @@
-// The demo account behind every Parity Trade panel (DEC-0034, DEC-0039): one shared
+// The demo account behind every Parity Trade panel (DEC-0034, DEC-0040): one shared
 // state for the order ticket, the bottom dock, Portfolio, Orders and Strategies. Virtual
 // money, practice orders filled in this browser against delayed end-of-day prices. No
 // real money and no real orders, ever (DEC-0019).
