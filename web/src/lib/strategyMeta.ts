@@ -32,11 +32,17 @@ function guessTags(r: StrategyRun): StrategyTags {
 }
 
 export function nameOf(r: StrategyRun): string {
-  if (r.display_name) return r.display_name;
-  if (FALLBACK[r.strategy]) return FALLBACK[r.strategy].name;
-  const s = r.strategy.replace(/_/g, " ");
-  return s[0].toUpperCase() + s.slice(1);
+  return r.display_name || nameById(r.strategy);
 }
+
+/** A strategy's name from its id alone, for share links that have no run to read (DEC-0038). */
+export function nameById(id: string): string {
+  if (FALLBACK[id]) return FALLBACK[id].name;
+  const s = id.replace(/_/g, " ");
+  return s ? s[0].toUpperCase() + s.slice(1) : id;
+}
+
+export const tagsById = (id: string): StrategyTags | undefined => FALLBACK[id]?.tags;
 
 export function tagsOf(r: StrategyRun): StrategyTags {
   return r.tags ?? FALLBACK[r.strategy]?.tags ?? guessTags(r);

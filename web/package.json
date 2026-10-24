@@ -13,10 +13,12 @@
     "a11y": "node scripts/a11y.mjs",
     "cls": "node scripts/cls.mjs",
     "verify:network": "node scripts/verify-network.mjs",
-    "content": "node --experimental-strip-types scripts/content/render.ts"
+    "content": "node --experimental-strip-types scripts/content/render.ts",
+    "deeplinks": "node scripts/deeplinks.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
+    "@resvg/resvg-wasm": "^2.6.2",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.118.0",
     "d3-geo": "^3.1.1",

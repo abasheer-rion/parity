@@ -1,6 +1,8 @@
 // Which side of Parity this page is (DEC-0015). The product app lives at /app/ and the
 // research app at /research/; both load the same code, and each HTML file says which
 // side it is with <html data-space="...">.
+import { ORIGIN, SIM_ORIGIN, SITE_DOMAIN } from "./meta";
+
 export type Space = "product" | "research";
 
 export const SPACE: Space = document.documentElement.dataset.space === "research" ? "research" : "product";
@@ -30,15 +32,16 @@ export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "
 /** True on the full-screen Sim World site. */
 export const IS_SIM = document.documentElement.dataset.space === "sim";
 
-const onEndyland = () => /(^|\.)endyland\.com$/.test(window.location.hostname);
+// The addresses come from src/lib/site.json (DEC-0038), so a new domain is one edit there.
+const onSiteDomain = () => window.location.hostname === SITE_DOMAIN || window.location.hostname.endsWith(`.${SITE_DOMAIN}`);
 
-/** Where Sim World opens: its own subdomain on endyland.com, /sim/ elsewhere (previews, localhost). */
+/** Where Sim World opens: its own subdomain on the site's domain, /sim/ elsewhere (previews, localhost). */
 export function simUrl(tab?: string): string {
   const hash = tab ? `#/${tab.replace(/^#?\/?/, "")}` : "";
-  return onEndyland() ? `https://sim.endyland.com/${hash}` : `/sim/${hash}`;
+  return onSiteDomain() ? `${SIM_ORIGIN}/${hash}` : `/sim/${hash}`;
 }
 
 /** A research page by its hash, from anywhere (Sim World links back to docs and strategies). */
 export function researchUrl(hash = ""): string {
-  return onEndyland() ? `https://parity.endyland.com/research/${hash}` : `/research/${hash}`;
+  return onSiteDomain() ? `${ORIGIN}/research/${hash}` : `/research/${hash}`;
 }

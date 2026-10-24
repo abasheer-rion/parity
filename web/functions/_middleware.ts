@@ -8,6 +8,7 @@
 // fetched from the JWKS address and cached by jose), its issuer, audience and expiry.
 // No secret is needed. See auth/README.md.
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { HOST } from "../src/lib/meta";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -26,7 +27,7 @@ const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/data
 // assets stay reachable there so logging in works; the product and research apps
 // send people back to the main address.
 const SIM_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
-const MAIN_HOST = "parity.endyland.com";
+const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);

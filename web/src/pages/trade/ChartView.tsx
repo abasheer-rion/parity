@@ -37,7 +37,12 @@ export function ChartView() {
   const paneHeight = small ? 96 : 120;
   const insts = useInstruments();
   const list = insts.status === "ok" ? insts.data : [];
-  const [prefs, setPrefs] = useState<Prefs>(() => readPref("chart", DEFAULTS));
+  // The symbol (s) and timeframe (tf) are in the address too, so a link reopens the same chart (DEC-0038).
+  const [prefs, setPrefs] = useState<Prefs>(() => {
+    const saved = readPref("chart", DEFAULTS);
+    const tf = hashParam("tf");
+    return tf && TIMEFRAMES.some((t) => t.id === tf) ? { ...saved, tf: tf as Timeframe } : saved;
+  });
   const [symbol, setSymbol] = useState<string>(() => hashParam("s") ?? prefs.symbol);
   useEffect(() => {
     // A link to #/trade?s=<key> while the chart is open switches the instrument.
@@ -77,7 +82,7 @@ export function ChartView() {
   const toolbar = (
     <>
       <InstrumentSelect list={list} value={inst?.key ?? ""} onChange={pick} allowNone={inst ? undefined : "Loading instruments"} />
-      <Segmented size="sm" label="Timeframe" value={prefs.tf} onChange={(tf) => update({ tf })} options={TIMEFRAMES.map((t) => [t.id, t.label])} />
+      <Segmented size="sm" label="Timeframe" value={prefs.tf} onChange={(tf) => { update({ tf }); setHashParam("tf", tf); }} options={TIMEFRAMES.map((t) => [t.id, t.label])} />
       <Select label="Chart type" value={prefs.type} onChange={(type) => update({ type })} options={CHART_TYPES} />
       <Button size="sm" icon="graph" onClick={() => setEditing(true)}>Indicators{prefs.indicators.length ? ` (${prefs.indicators.length})` : ""}</Button>
       <Segmented size="sm" label="Drawing tool" value={tool} onChange={setTool}

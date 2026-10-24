@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppGuard } from "../auth";
 import { SkipLink } from "../components/SkipLink";
 import { applyTheme } from "../lib/prefs";
-import { EMPTY_SPEC, specFromQuery, type Spec } from "../lib/scenarios";
+import { EMPTY_SPEC, specFromQuery, specToQuery, type Spec } from "../lib/scenarios";
 import { researchUrl } from "../lib/space";
 import { nameOf } from "../lib/strategyMeta";
 import { Toaster, toast } from "../ui";
@@ -15,6 +15,7 @@ import { getReport, loadIndex, type TermSeries } from "./data";
 import { FN_BY_CODE, LEGACY_TABS } from "./functions";
 import { clearWs, findLeaf, freshWs, leaf as newLeaf, leaves, readWs, splitLeaf, updateLeaf, writeWs, WORKSPACES, WS_BY_ID, type WsState } from "./layout";
 import { Ticker } from "./Ticker";
+import { useRouteMeta } from "../lib/deeplink";
 import { Workspace } from "./Workspace";
 import { DEFAULT_BASKET } from "../pages/SimWorld";
 import "../pages/SimWorld.css";
@@ -102,6 +103,7 @@ function TermShell() {
     return { [initial.ws]: initial.legacy ? withPanel(s, initial.legacy) : s };
   });
   const ws = states[wsId] ?? readWs(wsId);
+  useRouteMeta("sim", wsId);
 
   const setWs = useCallback((f: (s: WsState) => WsState) => {
     setStates((all) => {
@@ -151,6 +153,15 @@ function TermShell() {
     window.addEventListener("hashchange", on);
     return () => window.removeEventListener("hashchange", on);
   }, [initial.ws]);
+
+  // On the Sim lab, a scenario stays in the address (#/scenario?type=...), so a link or a
+  // bookmark reopens it (DEC-0038). replaceState fires no hashchange.
+  useEffect(() => {
+    if (wsId !== "simlab") return;
+    const q = specToQuery(spec);
+    const next = q && specToQuery(EMPTY_SPEC) !== q ? `#/scenario?${q}` : "#/simlab";
+    if (window.location.hash !== next) window.history.replaceState(null, "", next);
+  }, [wsId, spec]);
 
   const switchWs = useCallback((id: string) => { if (WS_BY_ID[id]) window.location.hash = `#/${id}`; }, []);
 
