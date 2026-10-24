@@ -50,6 +50,7 @@ export function Practice() {
     <>
       <Banner icon="eyeOff">
         <strong>Practice only. No real money.</strong> These are pretend positions kept in this browser. Parity does not place orders, hold money or give advice to anyone. Clearing your browser data removes them.
+        {" "}Want real order types, fees and a record kept in your account? Try the <a href="#/trade/demo">demo account</a> in Trade.
       </Banner>
 
       <section className="mk-card">

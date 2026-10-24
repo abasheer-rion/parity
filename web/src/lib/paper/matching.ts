@@ -1,4 +1,4 @@
-// The demo account's matching engine (DEC-0033). A pure, deterministic function of the
+// The demo account's matching engine (DEC-0034). A pure, deterministic function of the
 // orders, the cash and holdings, and the delayed daily bars: the same inputs always give
 // the same fills. It runs in the browser; this is a practice account, not an exchange,
 // and no real money or real order is ever involved.

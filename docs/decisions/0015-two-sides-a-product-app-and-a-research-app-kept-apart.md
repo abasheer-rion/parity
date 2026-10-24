@@ -96,6 +96,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0030: Pages that hold still, open in place and come from one library](0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
+- [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)

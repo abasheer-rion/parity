@@ -1,4 +1,4 @@
-// Strategy forward testing on a demo account (DEC-0033): attach a strategy from the
+// Strategy forward testing on a demo account (DEC-0034): attach a strategy from the
 // latest research report (or paste an MCP draft spec), and watch its out-of-sample curve
 // from that day, next to what the backtest promised. The research nightly run reruns
 // every strategy on new data each night, so the forward part grows by itself.

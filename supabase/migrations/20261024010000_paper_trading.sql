@@ -1,4 +1,4 @@
--- Demo accounts for paper trading (DEC-0033): virtual money, delayed daily prices, no real
+-- Demo accounts for paper trading (DEC-0034): virtual money, delayed daily prices, no real
 -- orders. Four tables: the account (cash, fee and slippage settings, an attached strategy
 -- for forward testing), its orders, its fills and its positions. The matching runs in the
 -- browser (web/src/lib/paper/matching.ts); this is a practice account, not an exchange.

@@ -1,4 +1,4 @@
-// Performance numbers for the demo account and for strategy forward tests (DEC-0033).
+// Performance numbers for the demo account and for strategy forward tests (DEC-0034).
 // They use the engine's own definitions, so a number here means the same as on a
 // strategy page: engine/src/parity/metrics/performance.py and docs/reference/0002-kpis.md.
 //   Sharpe        mean of period returns / their sample standard deviation * sqrt(periods

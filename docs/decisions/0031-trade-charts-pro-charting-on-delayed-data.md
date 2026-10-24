@@ -41,4 +41,5 @@ The owner asked for "an actual trading platform" that people and researchers can
 ## Referenced by
 
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](0033-trade-trackers-watchlists-alerts-and-a-screener.md)
+- [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
 <!-- backlinks:end -->

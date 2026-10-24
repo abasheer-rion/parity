@@ -1,4 +1,4 @@
-// The demo account's records (DEC-0033) and the few steps that change them. The tables
+// The demo account's records (DEC-0034) and the few steps that change them. The tables
 // are in supabase/migrations/20261024010000_paper_trading.sql, each person sees only
 // their own rows; the local preview keeps them in this browser (lib/userStore.ts).
 //

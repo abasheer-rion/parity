@@ -1,4 +1,4 @@
-// The demo account (DEC-0033): virtual money, practice orders filled in this browser
+// The demo account (DEC-0034): virtual money, practice orders filled in this browser
 // against delayed end-of-day prices, positions, orders, fills, an equity curve with
 // performance numbers, and strategy forward testing. No real money and no real orders,
 // ever; real trading is a future decision for the owner (DEC-0019).
@@ -234,7 +234,7 @@ export function DemoView() {
       <p className="muted small">
         How fills work: a market order fills at the latest delayed close plus slippage. Other orders are checked against each new daily bar dated after the
         day you placed them; a daily bar opens at the previous close, so a gap through a stop fills at that open. Long only: no short selling, no margin.
-        Fees and slippage are set per account. Read the full rules in DEC-0033.
+        Fees and slippage are set per account. Read the full rules in DEC-0034.
       </p>
 
       {account && <ResetDialog open={resetOpen} onClose={() => setResetOpen(false)} account={account} />}

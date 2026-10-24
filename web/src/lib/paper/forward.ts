@@ -1,4 +1,4 @@
-// Strategy forward testing on a demo account (DEC-0033). The research nightly run
+// Strategy forward testing on a demo account (DEC-0034). The research nightly run
 // (.github/workflows/research.yml) reruns every strategy on the newest data each night
 // with its code frozen. So the honest forward test is the strategy's own equity curve
 // from the day it was attached onward: those days were not known when the strategy was
