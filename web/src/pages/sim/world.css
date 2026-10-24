@@ -246,3 +246,22 @@
 @media (prefers-reduced-motion: reduce) {
   .pb-row, .pb-heat rect, .wm-c { transition: none; }
 }
+
+/* Bot Battle (DEC-0035) */
+.bb-loading { min-height: 620px; justify-content: center; align-items: center; }
+.bb-grid { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(0, 2.4fr); gap: 14px; margin-top: 14px; }
+.bb-grid ~ .sw2-card { margin-top: 14px; }
+.bb-eq { font-size: 15px; line-height: 1.6; color: var(--text); margin: 0; }
+.bb-eq span { white-space: nowrap; font-weight: 500; }
+.bb-formula .small { line-height: 1.5; }
+.bb-table { max-width: 100%; }
+.bb-table td.num, .bb-table th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bb-table td .sw-dot { margin-right: 4px; }
+.bb-table th:first-child, .bb-table td:first-child { text-align: left; white-space: nowrap; }
+.bb-table tr { cursor: pointer; }
+.bb-table .up { color: var(--map-up); }
+.bb-table .down { color: var(--map-down); }
+.bb-foot { margin: 8px 0 0; }
+.bb-rules { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; font-size: var(--fs-sm, 13px); line-height: 1.5; }
+.bb-rules .sw-dot { margin-right: 2px; }
+@media (max-width: 900px) { .bb-grid { grid-template-columns: 1fr; } }

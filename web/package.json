@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "a11y": "node scripts/a11y.mjs",
-    "cls": "node scripts/cls.mjs"
+    "cls": "node scripts/cls.mjs",
+    "content": "node --experimental-strip-types scripts/content/render.ts"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",

@@ -9,16 +9,17 @@
 # by the same hourly job and exported into dist/data/markets (parity markets export).
 # SEO (DEC-0023): the build writes the public Learn, Ideas and Notes pages and sitemap.xml;
 # after a production deploy, IndexNow is told which public URLs changed.
-# Parity Terminal's files go into dist/data/terminal (parity terminal export).
+# Parity Terminal's files go into dist/data/terminal (parity terminal export), and Bot
+# Battle's into dist/data/bots (parity bots export, DEC-0035).
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -78,6 +79,7 @@ jobs:
           parity fetch
           parity scenario export --out dist/data/scenarios.json
           parity world export --out dist/data/world.json
+          parity bots export --out dist/data
       - name: Copy news and market moves into the site
         run: |
           pip install -q -e ../engine

@@ -81,4 +81,5 @@ It installs as an app. Every panel shows the date its data is from, and every si
 ## Referenced by
 
 - [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0035: Bot Battle and shareable clips: win rate is not profit](0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
 <!-- backlinks:end -->

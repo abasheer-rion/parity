@@ -14,8 +14,9 @@ import { ScenarioView } from "../../pages/sim/ScenarioView";
 import { StocksView } from "../../pages/sim/StocksView";
 import { StrategyRace } from "../../pages/sim/StrategyRace";
 import { StressView } from "../../pages/sim/StressView";
+import { BotBattle } from "../../pages/sim/BotBattle";
 import { useAsOf, useLoad, useTerm } from "../context";
-import { getScen, getWorld } from "../data";
+import { getBots, getScen, getWorld } from "../data";
 import { HONEST } from "../functions";
 import { Empty, Loading } from "../tui";
 
@@ -64,6 +65,17 @@ export function SimPanel({ fn }: { fn: string }) {
         }
       }}
     </WithWorld>
+  );
+}
+
+export function BotsPanel() {
+  const ix = useLoad(getBots);
+  useAsOf(ix.status === "ok" ? ix.data.data_through : null);
+  return (
+    <div className="term-scroll term-sim">
+      <div className="term-honest-strip">Hypothetical and educational. Not investment advice.</div>
+      <div className="sw2 term-sw"><BotBattle /></div>
+    </div>
   );
 }
 
