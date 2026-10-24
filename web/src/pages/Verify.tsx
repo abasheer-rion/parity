@@ -33,9 +33,9 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
       <div className="page-head">
         <Title>Verify</Title>
         <p className="page-purpose">
-          Check whether a trading record holds up. Give it a trade log, describe a bot, or pick one of our strategies, and it
-          tells you in plain words whether it makes money per trade, how bad one loss can get, whether the result could be luck
-          for the number of things tried, and whether there are signs it was tuned to the past or peeked at the future.
+          Upload a trade log, describe a bot, or pick one of our strategies. Verify reports the profit per trade, the worst
+          loss, whether the result could be luck given how many things were tried, and signs of tuning to past data or of
+          using prices that were not yet known.
         </p>
       </div>
       <Segmented<Mode> label="What to check" value={mode} onChange={change}
@@ -165,7 +165,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
           <div className="vf-questions">
             <div className="ui-field"><span className="ui-field-label">1. Is this real money, a demo account, or a backtest?</span>
               <Segmented<InputKind> label="Kind of record" value={kind} onChange={setKind} options={KINDS} size="sm" />
-              <span className="vf-help">Left as is, we treat it as a backtest, the least trusted.</span>
+              <span className="vf-help">If you leave this, we treat it as a backtest, which we trust least.</span>
             </div>
             <div className="ui-field">
               <Input label={p.trades ? "2. Starting balance" : "2. Starting value (read from the file)"} type="number" value={balance} onChange={setBalance} placeholder="For example 10000" />
@@ -173,7 +173,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
             </div>
             <div className="ui-field">
               <Input label="3. How many strategies, bots or settings did you try before this one?" type="number" value={tries} onChange={setTries} />
-              <span className="vf-help">The luck check needs it: try enough bots and one will look great by chance, as the <a href={LESSON}>bot battle</a> shows. Count every version you tested.</span>
+              <span className="vf-help">The luck check needs this number. If you try enough bots, one will look good by chance, as the <a href={LESSON}>bot battle</a> shows. Count every version you tested.</span>
             </div>
             <fieldset className="vf-claim">
               <legend className="ui-field-label">4. What was claimed? (optional, for example from a seller's page)</legend>
@@ -201,7 +201,7 @@ async function candidates(): Promise<Candidate[]> {
     if (r.is_benchmark) continue;
     const t = tagsOf(r);
     out.push({ id: r.strategy, name: nameOf(r), line: r.description ?? r.summary, family: t.family, asset: t.asset, style: t.style, from: "report",
-      verdict: r.gauntlet?.verdict ?? "Not yet through the gauntlet", deflated: r.metrics.deflated_sharpe, sharpe: r.metrics.sharpe });
+      verdict: r.gauntlet?.verdict ?? "Not yet run through our tests", deflated: r.metrics.deflated_sharpe, sharpe: r.metrics.sharpe });
   }
   for (const s of search?.rows ?? []) {
     out.push({ id: s.id, name: s.name, line: s.line, family: s.family, asset: s.asset, style: s.style, from: "search", verdict: searchVerdict(s.deflated), deflated: s.deflated, sharpe: s.sharpe });
@@ -229,7 +229,7 @@ function DescribeInput({ onResult }: { onResult: (r: Result, matches: Match[]) =
         <span className="ui-field-label">Describe the bot in your own words: what it trades, when it buys and sells, and what it claims</span>
         <textarea className="ui-input vf-textarea" value={text} onChange={(e) => setText(e.target.value)} placeholder={EXAMPLE} rows={4} maxLength={2000} />
       </label>
-      <p className="vf-help">This checks the description, not the bot: claims that fail on arithmetic, and the closest strategies we have already tested.</p>
+      <p className="vf-help">Verify checks the description only. It shows claims that fail on arithmetic and the closest strategies we have tested.</p>
       <div className="vf-row">
         <Button variant="primary" onClick={() => void run()} disabled={text.trim().length < 10} loading={busy}>Check this description</Button>
         <Button variant="tertiary" onClick={() => setText(EXAMPLE)}>Use the example</Button>
@@ -289,7 +289,7 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
           <li key={r.strategy}>
             <button type="button" onClick={() => pick(r.strategy)}>
               <strong>{nameOf(r)}</strong>
-              <span>{r.gauntlet?.verdict ?? "Not yet through the gauntlet"} Sharpe {r.metrics.sharpe == null ? "n/a" : r.metrics.sharpe.toFixed(2)}, worst fall {pct(r.metrics.max_drawdown == null ? null : -Math.abs(r.metrics.max_drawdown), 0)}.</span>
+              <span>{r.gauntlet?.verdict ?? "Not yet run through our tests."} Sharpe {r.metrics.sharpe == null ? "n/a" : r.metrics.sharpe.toFixed(2)}, worst fall {pct(r.metrics.max_drawdown == null ? null : -Math.abs(r.metrics.max_drawdown), 0)}.</span>
             </button>
           </li>
         ))}

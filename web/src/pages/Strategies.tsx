@@ -58,8 +58,8 @@ export function Strategies({ report, query }: { report: Report; query?: string }
     <>
       <Title label="Discover">Discover strategies</Title>
       <p className="page-purpose">
-        Every strategy we have tested, after trading costs, against simply holding the US stock market (pinned at the
-        top). Click a row for the full story. The verdict says whether it held up; <a href="#/start">Start here</a> explains
+        Every strategy we have tested, after trading costs, next to holding the US stock market (pinned at the top).
+        Click a row for the full report. The verdict sums up the test results. <a href="#/start">Start here</a> explains
         each number.
       </p>
       <FilterBar count={f.count} onReset={f.reset} right={<SearchInput value={f.query} onChange={f.setQuery} placeholder="Search strategies" />}>

@@ -72,10 +72,10 @@ export function insightsFor(r: StrategyRun, comparison?: Comparison, bench?: Str
   if (m.breakeven_cost_bps != null) {
     if (m.breakeven_cost_bps <= 0) add("weakness", "Loses money even before trading costs.");
     else if (m.breakeven_cost_bps < 5) add("weakness", `Trading costs above ${m.breakeven_cost_bps.toFixed(1)} bps a trade would wipe out the edge.`);
-    else if (m.breakeven_cost_bps > 30) add("strength", "Survives realistic trading costs easily.");
+    else if (m.breakeven_cost_bps > 30) add("strength", `Stays profitable with trading costs up to ${m.breakeven_cost_bps.toFixed(0)} bps a trade.`);
   }
   if (!r.is_benchmark && m.correlation != null && Math.abs(m.correlation) < 0.2) add("strength", "Moves mostly independently of the stock market.");
-  if (!r.is_benchmark && m.correlation != null && m.correlation > 0.7) add("weakness", "Mostly rides the stock market, so it adds little that holding the market does not.");
+  if (!r.is_benchmark && m.correlation != null && m.correlation > 0.7) add("weakness", "Moves mostly with the stock market, so it adds little to holding the market.");
 
   const bRet = (c: Comparison["crises"][number]) => (bench ? c.returns[bench.strategy] : undefined);
   for (const c of comparison?.crises ?? []) {
@@ -105,7 +105,7 @@ export interface Verdict { label: string; tone: "good" | "accent" | "neutral" | 
 export function verdictOf(r: StrategyRun): Verdict {
   if (r.is_benchmark) return { label: "Benchmark", tone: "neutral", plain: "The US stock market. Every strategy has to beat this." };
   const g = r.gauntlet;
-  if (!g) return { label: "Not tested", tone: "neutral", plain: "Has not been through the gauntlet of tests yet." };
+  if (!g) return { label: "Not tested", tone: "neutral", plain: "Has not been through the 11 tests yet." };
   const share = g.total ? g.passed / g.total : 0;
   const beats = g.beats_sp500 ? "beats the S&P 500 after costs" : "does not beat the S&P 500 after costs";
   const tests = `passed ${g.passed} of ${g.total} tests`;

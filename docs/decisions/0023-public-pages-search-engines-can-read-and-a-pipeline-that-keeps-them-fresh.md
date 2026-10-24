@@ -17,7 +17,7 @@ related: [DEC-0015, DEC-0019, DEC-0021, DEC-0022, GDE-0005]
 Until now search engines could see almost nothing: the whole site told them "do not index", and everything useful sits behind sign-in. Now there are three new public sections, built from what we already write:
 
 - **Learn** (`/learn/`): every glossary term, explained simply, with an analogy and precisely.
-- **Ideas** (`/ideas/`): every trading idea in the catalog, with where it came from, the evidence, why it might fail and an honest verdict. Most say "not yet judged by Parity".
+- **Ideas** (`/ideas/`): every trading idea in the catalog, with where it came from, the evidence, why it might fail and Parity's verdict where we have tested it. Most say "not yet judged by Parity".
 - **Notes** (`/notes/`): the "In plain words" summary of each decision, research note and reference.
 
 They are plain, fast pages made when the site is built, so a new term or doc shows up by itself. The product, the research side, Sim World and the data stay behind sign-in and out of search. After every deploy, search engines that support IndexNow are told which pages changed. Once a week a job asks Google how we are doing and writes a short report. The Google part waits for the owner to verify the site ([GDE-0005](../guides/0005-google-search-console-and-the-seo-pipeline.md)).

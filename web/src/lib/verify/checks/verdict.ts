@@ -67,10 +67,10 @@ export function verdict(x: VerdictInput): Verdict {
       const k = c1.avgLoss / c1.avgWin;
       return v("does_not_hold_up", `Wins ${x.pct(c1.winRate)} of ${unit}s, but the ${x.pct(c1.lossRate)} of losses are ${big(k)} times larger than the average win, so on average each ${unit} loses ${x.money(-c1.expectancy)}, about ${Math.round((-c1.expectancy / c1.avgWin) * 100)}% of a typical win. It would need to win ${x.pct(c1.breakEven!)} to break even.`);
     }
-    return v("does_not_hold_up", `On average each ${unit} loses ${x.money(-c1.expectancy)} after fees, with ${x.pct(c1.winRate)} winners. A record that loses on average does not hold up, whatever else it shows.`);
+    return v("does_not_hold_up", `On average each ${unit} loses ${x.money(-c1.expectancy)} after fees, with ${x.pct(c1.winRate)} winners. A record that loses money on average fails, whatever the other numbers show.`);
   }
   const gain = c1 ? `Makes ${x.money(c1.expectancy)} a ${unit} on average${perTrade ? ` over ${c1.n.toLocaleString("en-US")} trades` : ""}` : "Makes money on average";
-  if (x.card2?.red) return v("fragile", `${gain}, but ${x.card2.reasons.join(", and ")}. One bad stretch could undo it.`);
+  if (x.card2?.red) return v("fragile", `${gain}, but ${x.card2.reasons.join(", and ")}. One bad run of losses could erase the gains.`);
 
   const failed = [...x.card4, ...x.card5].filter((r) => r.status === "fail" && r.id !== "claim");
   const luckFails = !c3 || c3.dsr == null || c3.dsr < 0.95;

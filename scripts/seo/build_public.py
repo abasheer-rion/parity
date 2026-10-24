@@ -44,8 +44,8 @@ STAGES = ["catalogued", "sourced", "hypothesis", "implemented", "registered", "o
 NOTE_TYPES = {"decisions": "Decision", "research": "Research note", "reference": "Reference"}
 LEGAL = [("/legal/privacy/", "Privacy"), ("/legal/terms/", "Terms"), ("/legal/cookies/", "Cookies"),
          ("/legal/accessibility/", "Accessibility"), ("/legal/risk/", "Risk")]
-DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations, "
-              "and the past does not promise the future.")
+DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations "
+              "on past data.")
 
 e = html.escape
 
@@ -240,7 +240,7 @@ h2{font-size:20px;margin:36px 0 10px}h3{font-size:16px;margin:0 0 6px}
 .pill{font-size:13px;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:2px 10px}
 .pill.warn{color:var(--warn);border-color:#e8c06a55}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
-.card h2{margin-top:0;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.card h2{margin-top:0;font-size:15px;color:var(--faint)}
 .card p{margin:0}.card p+p{margin-top:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:0;list-style:none;margin:0}
 .grid li a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--text)}
@@ -322,8 +322,8 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <p class="crumbs">{crumb_html}<span aria-current="page">{e(trail[-1][0])}</span></p>
 {body}
 <aside class="cta" aria-label="Sign up">
-<strong>See the tests behind every idea</strong>
-<p>Parity tests trading ideas against the S&amp;P 500 and shows every result, including the failures. Free to join.</p>
+<strong>See Parity's test results</strong>
+<p>Parity tests trading ideas against the S&amp;P 500. Members see every result, including the ones that failed. Accounts are free.</p>
 <a class="btn primary" href="/signup/">Create a free account</a>
 </aside>
 </div></main>
@@ -374,9 +374,9 @@ def build_learn(terms: list[dict], refs: dict) -> dict[str, str]:
         "".join(f'<li><a href="/learn/{t["id"]}/">{e(t["term"])}<small>{e(plain_text(t["simple"], 90))}</small></a></li>' for t in ts) +
         "</ul>" for c, ts in sorted(cats.items()))
     body = f"""<h1>Learn the words of trading and research</h1>
-<p class="lede">{len(terms)} terms, each explained three ways: in simple words, with an everyday comparison, and precisely.</p>
-<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on backtests that lie, with real mistakes we caught in our own research.</small></a></li>
-<li><a href="/learn/private-markets/">Private markets, explained simply<small>Private equity, venture, private credit and property funds: how their returns are measured, why they look calm, and what to check.</small></a></li></ul>
+<p class="lede">{len(terms)} terms. Each has a simple explanation, an everyday comparison and a precise definition.</p>
+<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on how backtests mislead, each with a mistake we found in our own research.</small></a></li>
+<li><a href="/learn/private-markets/">Private markets, explained simply<small>Private equity, venture, private credit and property funds: how their returns are measured, why their reported prices move less than share prices, and what to check.</small></a></li></ul>
 {groups}"""
     ld = {"@type": "DefinedTermSet", "@id": f"{SITE}/learn/#set", "name": "Parity glossary", "url": f"{SITE}/learn/",
           "hasDefinedTerm": [{"@id": f"{SITE}/learn/{t['id']}/#term"} for t in terms if slug_ok(t["id"])]}
@@ -432,8 +432,7 @@ def build_ideas(ideas: list[dict], refs: dict) -> dict[str, str]:
 {after}
 <section class="card"><h2>Where it came from</h2><p>{origin}{'. ' if origin and src_html else ''}{src_html}</p></section>
 <section class="card"><h2>The precise version</h2><p>{inline(how.get('precise', ''), {}, refs)}</p></section>
-{evidence}
-<p class="lede" style="font-size:14px;margin-top:24px">This page describes an idea. It is not a recommendation to buy, sell or hold anything.</p>"""
+{evidence}"""
         ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": a["name"][:110],
               "description": plain_text(how.get("simple", "")), "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}",
               "author": {"@id": f"{SITE}/#org"}, "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/ideas.png",
@@ -445,13 +444,13 @@ def build_ideas(ideas: list[dict], refs: dict) -> dict[str, str]:
     items = "".join(f'<li><a href="/ideas/{a["slug"]}/">{e(a["name"])}<small>{e(plain_text(a["how_it_works"]["simple"], 90))}</small></a></li>'
                     for a in ideas if slug_ok(a["slug"]))
     body = f"""<h1>Trading ideas, with the evidence and the risks</h1>
-<p class="lede">{len(ideas)} published trading ideas: what each one is, where it came from, what the evidence says and why it might fail.
-Reported numbers are the sources' claims until Parity's own tests say otherwise.</p>
+<p class="lede">{len(ideas)} published trading ideas. Each page says what the idea is, where it came from, what the evidence says and why it might fail.
+Reported numbers are the sources' own claims. Parity's results are marked separately.</p>
 <ul class="grid">{items}</ul>"""
     ld = {"@type": "CollectionPage", "@id": f"{SITE}/ideas/#page", "name": "Trading ideas", "url": f"{SITE}/ideas/",
           "publisher": {"@id": f"{SITE}/#org"}}
     pages["/ideas/"] = page(path="/ideas/", title="Trading ideas, with the evidence and the risks",
-                            description=f"{len(ideas)} trading strategy ideas from research papers and practitioners, each with its evidence, its risks and an honest verdict.",
+                            description=f"{len(ideas)} trading strategy ideas from research papers and practitioners, each with its reported evidence, its risks and Parity's verdict where we have tested it.",
                             body=body, section="ideas", trail=[("Home", "/"), ("Ideas", "/ideas/")], ld=[ld], og_type="website")
     return pages
 
@@ -464,7 +463,7 @@ def build_notes(notes: list[dict], refs: dict) -> dict[str, str]:
         body = f"""<h1>{e(n['title'])}</h1>
 <ul class="meta"><li class="pill">{e(n['kind'])} {e(n['id'])}</li>{f'<li class="pill">Updated {e(n["updated"])}</li>' if n['updated'] else ''}</ul>
 <div class="prose">{markdown(n['summary'], links, refs)}</div>
-<p class="lede" style="font-size:14px;margin-top:24px">This is the plain-words summary. The full note, with its reasoning and sources, is in the research side for members.</p>"""
+<p class="lede" style="font-size:14px;margin-top:24px">This is the plain-words summary. The full note, with its reasoning and sources, is on the research side for members.</p>"""
         ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": n["title"][:110], "description": plain_text(n["summary"]),
               "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
               "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/notes.png", "articleSection": n["kind"]}
@@ -532,7 +531,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
         more = [doc_link(k["doc"], k["label"]) for k in l["links"] if k.get("doc")]
         more += [x for x in (ref_link(r) for r in l["refs"]) if x]
         words = [anchor(f"/learn/{t}/", term_names[t]) for t in l["terms"] if t in term_names]
-        parts = [f'<section class="card" id="{e(l["id"])}"><h2>Lesson {i}</h2><h3>{e(l["title"])}</h3>',
+        parts = [f'<section class="card" id="{e(l["id"])}"><h3>{i}. {e(l["title"])}</h3>',
                  f'<p>{e(l["text"])}</p><p><strong>What we do:</strong> {e(l["do"])}</p>']
         if ex:
             parts.append(f"<p>Our example: {', '.join(ex)}</p>")
@@ -553,7 +552,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
     title = "How to look for a trading edge without fooling yourself"
     body = f"""<h1>{e(title)}</h1>
 <p class="lede">{e(lab["intro"])}</p>
-<h2>Seven lessons</h2>
+<h2>{len(lab["lessons"])} lessons</h2>
 {"".join(blocks)}
 <h2>Our own mistakes</h2>
 <p>Each of these looked like an edge in our backtests until we found the flaw.</p>
@@ -561,8 +560,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 <h2>Questions to ask about any idea</h2>
 <div class="prose"><ol>{checks}</ol></div>
 <p class="lede" style="font-size:14px">Members get an interactive version of this checklist that ranks the pitfalls for a specific idea.</p>
-{reading_html}
-<p class="lede" style="font-size:14px;margin-top:24px">This page explains research methods. It is not a recommendation to buy, sell or hold anything.</p>"""
+{reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(lab["intro"]),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
@@ -572,8 +570,8 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 
 # ---------------------------------------------------------------- Parity Academy (DEC-0028)
 
-ACADEMY_NOTE = ("Education only, not investment advice. Pictures use made-up or example numbers unless they say otherwise. "
-                "Members get the moving version of each picture and a quick check that remembers their progress.")
+ACADEMY_NOTE = ("Pictures use made-up or example numbers unless they say otherwise. "
+                "Members get the moving version of each picture and a quick check that saves their progress.")
 
 
 def academy_link(k: dict, term_ids: set[str]) -> str:
@@ -652,8 +650,8 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
         pages[cpath] = page(path=cpath, title=f"{c['title']}: a short course", description=plain_text(c["summary"]), body=body,
                             section="learn", ld=[ld], trail=[("Home", "/"), ("Learn", "/learn/"), ("Academy", base), (c["title"], cpath)])
     cards = "".join(
-        f'<section class="card"><h2>{e(c["level"])} &middot; {len(c["lessons"])} lessons</h2><h3><a href="{base}{c["id"]}/">{e(c["title"])}</a></h3>'
-        f'<p>{e(c["summary"])}</p></section>' for c in courses if slug_ok(c["id"]))
+        f'<section class="card"><h3><a href="{base}{c["id"]}/">{e(c["title"])}</a></h3>'
+        f'<p>{e(c["summary"])}</p><p>{e(c["level"])}, {len(c["lessons"])} lessons</p></section>' for c in courses if slug_ok(c["id"]))
     total = sum(len(c["lessons"]) for c in courses)
     body = f"""<h1>Parity Academy</h1>
 <p class="lede">{len(courses)} short courses, {total} lessons of two or three minutes. Each lesson has a few plain paragraphs, a picture that explains the idea step by step, a link to the real page in Parity and a quick check.</p>
@@ -709,15 +707,14 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 {measures}
 <section class="card"><h2>{e(sm["title"])}</h2><p>{e(sm["text"])}</p><div class="prose">{items(sm["points"])}</div></section>
 <h2>Ways in for individuals</h2>
-<p>None of these is a recommendation. Each trades something away: the ability to sell, low fees, or a price set by a market.</p>
+<p>Each of these gives something up: easy selling, low fees or a price set by a market.</p>
 {routes}
 <h2>Before you trust any private markets number</h2>
 <div class="prose"><ol>{"".join(f"<li>{e(x)}</li>" for x in pm["checklist"])}</ol></div>
 <h2>Who has the data</h2>
 <div class="prose"><ul>{providers}</ul></div>
 <p class="lede" style="font-size:14px">Members get a calculator for IRR, TVPI, DPI and PME, counts of private offerings filed with the SEC, and a study of how much smoothing hides.</p>
-{reading_html}
-<p class="lede" style="font-size:14px;margin-top:24px">This page explains how private investments work. It is not a recommendation to buy, sell or hold anything.</p>"""
+{reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(pm["intro"]),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}

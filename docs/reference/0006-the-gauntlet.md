@@ -14,7 +14,7 @@ related: [DEC-0006, EXP-0002, REF-0002]
 
 ## In plain words
 
-The gauntlet is a set of eleven tough tests every trading idea has to face. Six ask whether it beats the stock market. Five ask whether it is real at all, or just luck. The rules were set before we saw any results, so we cannot bend them.
+The gauntlet is a set of 11 tests that every trading idea goes through. Six ask whether it beats the stock market. Five ask whether it is real at all, or just luck. The rules were set before we saw any results, so we cannot bend them.
 
 ## Summary
 

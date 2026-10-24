@@ -14,9 +14,9 @@ export function DataSources({ focus }: { focus?: string }) {
     <>
       <div className="page-head">
         <Title>Data sources</Title>
-        <p>Every source of market data we have looked at: what it has, whether it is free, its limits and terms, and how
-          trustworthy it is. "Point in time" means it keeps numbers as they were first published, which matters for honest
-          backtests of economic data.</p>
+        <p>Every source of market data we have looked at, with what it has, its cost, its limits and terms, and how
+          reliable it is. "Point in time" means it keeps numbers as they were first published. Backtests of economic data
+          need that to avoid using later revisions.</p>
       </div>
       {sel && (
         <Card title={sel.name} help={sel.simple}>

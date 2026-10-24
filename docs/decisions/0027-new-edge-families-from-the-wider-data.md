@@ -20,7 +20,7 @@ The owner asked us to look for edges in the market, and for ways to help others 
 - **17 new strategies and 2 new search shapes** that use the data added in PR #30: speculators' futures positions, the full yield curve, central bank policy rates for 27 currencies, stress indexes, jobless claims and the Fed's meeting calendar.
 - **An Edge Lab** on the research side (`/research/#/edges`) and a public page (`/learn/edge-lab/`). It holds plain lessons on how not to fool yourself, a checklist tool, and our own real mistakes as examples.
 
-The honest result: none of the 17 beats the S&P 500 on every test. The best is carry on central bank policy rates across 27 currencies. It passed 9 of 11 tests, including the "not just luck" test, but it fell with stocks and did not win in every era.
+The result: none of the 17 beats the S&P 500 on every test. The best is carry on central bank policy rates across 27 currencies. It passed 9 of 11 tests, including the "not just luck" test, but it fell with stocks and did not win in every era.
 
 ## Context
 

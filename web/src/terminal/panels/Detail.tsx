@@ -52,7 +52,7 @@ function DetailBody({ s }: { s: TermSeries }) {
     ["1M", <span className={tone(s.chg?.m1)}>{fmtChg(s.chg?.m1, s.kind)}</span>],
     ["YTD", <span className={tone(s.chg?.ytd)}>{fmtChg(s.chg?.ytd, s.kind)}</span>],
     [`${range}`, <span className={tone(rangeChg)}>{fmtChg(rangeChg, s.kind)}</span>],
-    ["Vol 1Y", s.vol == null ? "—" : `${s.vol.toFixed(1)}%`],
+    ["Vol 1Y", s.vol == null ? "n/a" : `${s.vol.toFixed(1)}%`],
     ["Z 1W", <span className={tone(s.z)}>{fmtNum(s.z, 2, true)}</span>],
     ["1Y %ile", <PctBar value={s.pct1y} />],
   ];

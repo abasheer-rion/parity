@@ -279,7 +279,7 @@ function Motion() {
         <span className="muted small">stays put</span>
         <Button size="sm" onClick={() => setN(Math.random() < 0.5 ? 900 + Math.random() * 90 : 10000 + Math.random() * 90000)}>Change value</Button>
       </Item>
-      <Item title="Stagger" intro="A list's first paint: each child rises in 30ms after the one before, all started within 240ms. One calm wave, not a parade."
+      <Item title="Stagger" intro="A list's first paint: each child rises in 30ms after the one before, all started within 240ms."
         code={`<Stagger className="ui-grid ui-grid-3">{cards}</Stagger>\n// or on an element you already have: className={STAGGER}`}
         rules={["Only on a list's first appearance. Never when it re-sorts or filters (that is FLIP's job, see Tables).", "Children animate with transforms only, so the layout is final from the first frame."]}>
         <Stagger key={k} className="ui-grid ui-grid-4">{[1, 2, 3, 4, 5, 6, 7, 8].map((i) => <div key={i} className="motion-box" style={{ width: "100%" }}>{i}</div>)}</Stagger>
@@ -327,7 +327,7 @@ function Motion() {
         rules={["Only behind a page's first block. One per page.", "Text on top keeps its normal contrast; the glow stays faint."]}>
         <div className="phome-hero" style={{ width: "100%" }}>
           <HeroGlow />
-          <div><h1 style={{ margin: 0 }}>Hi Sam</h1><p className="muted">102 strategies tested the same honest way.</p></div>
+          <div><h1 style={{ margin: 0 }}>Hi Sam</h1><p className="muted">102 strategies, each run through the same tests.</p></div>
         </div>
       </Item>
     </>
@@ -627,7 +627,7 @@ function Cards() {
             <Stat label="Strategies" value={<>0 <span className="muted">of 16</span></>} size="lg" />
             <Meter value={0.68} marker={0.5} label="Best Sharpe against the market" />
           </Panel>
-          <Panel title="Gauntlet" actions={<IconButton icon="info" label="About" />}>
+          <Panel title="Tests" actions={<IconButton icon="info" label="About" />}>
             <div className="stat-row"><Stat label="Passed" value={<span className="good">55</span>} /><Stat label="Failed" value={<span className="bad">118</span>} /></div>
           </Panel>
           <Panel title="Balance (sample)">

@@ -63,7 +63,7 @@ export function StrategyRace({ report }: { report: Report }) {
     <div className="sw">
       <header className="sw-hero-head">
         <h2>Strategy race</h2>
-        <p>Every strategy we test, replayed with play money from the first day of data to today. Press play and watch who pulls ahead.</p>
+        <p>Every strategy we test, replayed with play money from the first day of data to today.</p>
       </header>
 
       <Race runs={report.runs} colors={colors} start={start} comparison={report.comparison} series={report.series} />
@@ -222,15 +222,15 @@ function WorkingNow({ rows, colors }: { rows: Row[]; colors: Record<string, stri
       <div className="sw-now-grid">
         <ul className="sw-notes">
           {top && <li><strong>{nameOf(top.run)}</strong> did best over {span}, with <Delta value={ret(top)} /></li>}
-          {bRet != null && <li>Simply holding the US stock market made <Delta value={bRet} />. {ahead === 0 ? "Nothing here did better." : `${ahead} of ${field.length} did better.`}</li>}
+          {bRet != null && <li>Holding the US stock market made <Delta value={bRet} />. {ahead === 0 ? "Nothing here did better." : `${ahead} of ${field.length} did better.`}</li>}
           {fxAvg != null && stAvg != null && (
-            <li>On average, currency strategies made <Delta value={fxAvg} /> and stock strategies <Delta value={stAvg} />. Stock rules mostly ride the market, so they rise and fall with it.</li>
+            <li>On average, currency strategies made <Delta value={fxAvg} /> and stock strategies <Delta value={stAvg} />. Most stock strategies hold the market much of the time, so they rise and fall with it.</li>
           )}
           <li>
-            A good stretch is not proof. {passAll === 0
-              ? `None of the ${tested} strategies passes the full gauntlet: after trading costs and counting every idea we tried, none reliably beats holding the market.`
-              : `${passAll} of ${tested} strategies pass the full gauntlet. Treat that with care until it holds up on new data.`}
-            {" "}<a href="#/doc/REF-0006">How the gauntlet works</a>
+            A good recent return does not show a strategy is real. {passAll === 0
+              ? `None of the ${tested} strategies passes the tests against the S&P 500: after trading costs and counting every idea we tried, none beats holding the market.`
+              : `${passAll} of ${tested} strategies pass the tests against the S&P 500. They still need to pass on new data.`}
+            {" "}<a href="#/doc/REF-0006">How the 11 tests work</a>
           </li>
         </ul>
         <div className="sw-now-table">

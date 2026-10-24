@@ -180,6 +180,7 @@ How we write and organise these documents.
 - [DEC-0011: Read the docs inside the dashboard, with stacked previews](decisions/0011-read-the-docs-inside-the-dashboard-with-stacked-previews.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
+- [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 
 ## economics
 
@@ -675,6 +676,7 @@ The dashboard.
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
+- [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)

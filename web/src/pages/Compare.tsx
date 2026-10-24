@@ -22,14 +22,14 @@ export function Compare({ report }: { report: Report }) {
     <>
       <div className="page-head">
         <Title>Compare</Title>
-        <p>Every strategy we have built, side by side on the same data since 1999: how they score, how they move together,
-          and what each did in the five worst stock market episodes. All of this is exploratory unless the ledger says
-          otherwise.</p>
+        <p>Every strategy we have built, on the same data since 1999. The page shows their scores, how they move together
+          and what each did in the five worst stock market episodes. These are exploratory results unless the ledger lists
+          the run.</p>
       </div>
-      <Card title="League table" help={<>Sorted by gauntlet tests passed. A high <Term id="sharpe-ratio">Sharpe</Term> with a low <Term id="deflated-sharpe-ratio">deflated Sharpe</Term> means it may be luck.</>}>
+      <Card title="League table" help={<>Sorted by tests passed. A high <Term id="sharpe-ratio">Sharpe</Term> with a low <Term id="deflated-sharpe-ratio">deflated Sharpe</Term> means it may be luck.</>}>
         <div className="table-wrap">
           <table>
-            <thead><tr><th>Strategy</th><th>Gauntlet</th><th>Sharpe</th><th>Deflated Sharpe</th><th>CAGR</th><th>Volatility</th><th>Max drawdown</th><th>Corr. with stocks</th><th>Verdict</th></tr></thead>
+            <thead><tr><th>Strategy</th><th>Tests passed</th><th>Sharpe</th><th>Deflated Sharpe</th><th>CAGR</th><th>Volatility</th><th>Max drawdown</th><th>Corr. with stocks</th><th>Verdict</th></tr></thead>
             <tbody>
               {ranked.map((r) => (
                 <tr key={r.strategy}>
@@ -46,7 +46,7 @@ export function Compare({ report }: { report: Report }) {
         </div>
       </Card>
       {cmp && (
-        <Card title="What each did in a crisis" help="Total return over each episode, start to end. Green numbers in a crash are what a stock investor would want to add.">
+        <Card title="What each did in a crisis" help="Total return over each episode, start to end. A strategy that is green in a crash would have offset some of a stock investor's loss.">
           <div className="table-wrap">
             <table>
               <thead><tr><th>Strategy</th>{cmp.crises.map((c) => <th key={c.name} title={`${c.start} to ${c.end}`}>{c.name}</th>)}</tr></thead>
@@ -63,7 +63,7 @@ export function Compare({ report }: { report: Report }) {
         </Card>
       )}
       {cmp && (
-        <Card title="How they move together" help={<>Monthly <Term id="correlation">correlation</Term>. Blue means they rise and fall together; red means opposite. Strategies that are not blue against stocks are the ones that could <Term id="diversification">diversify</Term>.</>}>
+        <Card title="How they move together" help={<>Monthly <Term id="correlation">correlation</Term>. Blue means they rise and fall together. Red means they move in opposite directions. A strategy that is not blue against stocks could help <Term id="diversification">diversify</Term>.</>}>
           <div className="table-wrap">
             <table className="heat">
               <thead><tr><th></th>{cmp.names.map((n) => <th key={n} className="rot"><span>{n}</span></th>)}</tr></thead>

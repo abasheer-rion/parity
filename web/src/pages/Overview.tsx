@@ -106,7 +106,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         </section>
 
         <section className="mcard">
-          <div className="mcard-head"><h2>Gauntlet</h2><a className="round-btn" href="#/doc/REF-0006" data-doc="REF-0006" aria-label="About the gauntlet"><Icon name="info" size={14} /></a></div>
+          <div className="mcard-head"><h2>The 11 tests</h2><a className="round-btn" href="#/doc/REF-0006" data-doc="REF-0006" aria-label="About the 11 tests"><Icon name="info" size={14} /></a></div>
           <div className="stat-row">
             <div><div className="muted small">Tests passed</div><div className="mid-num good">{passed}</div></div>
             <div><div className="muted small">Tests failed</div><div className="mid-num bad">{failed}</div></div>

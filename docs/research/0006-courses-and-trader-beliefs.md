@@ -14,7 +14,7 @@ related: [RES-0003, RES-0007, REF-0007]
 
 ## In plain words
 
-We looked at what trading courses and experienced traders tell beginners, and checked it against real numbers. Most people who trade on their own lose money: brokers say about seven in ten retail accounts lose, and long studies of day traders find almost none make a living. No course we found publishes honest results for its students. A few sayings hold up ("most traders fail", "costs matter", "do not over-tune your rules"); many popular ones have no solid evidence either way.
+We looked at what trading courses and experienced traders tell beginners, and checked it against real numbers. Most people who trade on their own lose money: brokers say about seven in ten retail accounts lose, and long studies of day traders find almost none make a living. No course we found publishes checkable results for its students. A few sayings hold up ("most traders fail", "costs matter", "do not over-tune your rules"); many popular ones have no solid evidence either way.
 
 ## Summary
 

@@ -15,13 +15,13 @@ export const FUNCTIONS: Fn[] = [
   { code: "STRS", title: "Stress test", what: "A mix of assets through every past crisis", sim: true },
   { code: "CRIS", title: "Crises", what: "Replay a past crisis across every market", sim: true },
   { code: "RACE", title: "Strategy race", what: "Every strategy we test, replayed", sim: true },
-  { code: "BOTS", title: "Bot battle", what: "Seven trading-bot archetypes race: win rate is not profit (hypothetical)", sim: true },
+  { code: "BOTS", title: "Bot battle", what: "Seven hypothetical trading bots on the same prices: win rate, profit and worst fall", sim: true },
   { code: "CRV", title: "Curves", what: "Treasury and euro yield curves now and a month and a year ago, plus the rates replay" },
   { code: "COT", title: "Positioning", what: "Net futures positioning (CFTC) by market" },
   { code: "ECO", title: "Macro", what: "Macro, rates, credit and inflation series" },
   { code: "NEWS", title: "Headlines", what: "Latest headlines and the market move that followed" },
-  { code: "KPI", title: "Strategy KPIs", what: "Every strategy: Sharpe, growth, worst fall, luck check, gauntlet verdict" },
-  { code: "HELP", title: "Help", what: "Every code, every shortcut, and what this is not" },
+  { code: "KPI", title: "Strategy KPIs", what: "Every strategy: Sharpe, growth, worst fall, luck check and test results" },
+  { code: "HELP", title: "Help", what: "Every code and shortcut" },
   // Sim World tabs that are panels here too (old links open them).
   { code: "CMDY", title: "Commodities race", what: "Oil, gas and copper racing, with the producers", sim: true },
   { code: "EQTY", title: "Stocks race", what: "US industries and research factors racing", sim: true },
@@ -35,4 +35,4 @@ export const LEGACY_TABS: Record<string, string> = {
   rates: "CRV", connections: "CORR", commodities: "CMDY", stocks: "EQTY", bots: "BOTS",
 };
 
-export const HONEST = "History, not a forecast";
+export const HONEST = "Past data. Not a forecast";

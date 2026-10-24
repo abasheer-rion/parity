@@ -71,7 +71,7 @@ export function VerifyBadge({ load = fetchBadge, path = window.location.pathname
       </main>
       <footer className="vb-footer">
         <LegalLinks />
-        <p>Research only. Not investment advice. A verdict is about this record, not about the future.</p>
+        <p>Research and education only. Not investment advice. The verdict describes this record and makes no forecast.</p>
       </footer>
     </div>
   );
@@ -80,9 +80,8 @@ export function VerifyBadge({ load = fetchBadge, path = window.location.pathname
 function Withdrawn({ b }: { b: PublicBadge }) {
   return (
     <section className="vb-notice" data-testid="withdrawn">
-      <p className="vf-eyebrow">Parity Verify record</p>
       <h1>This record was withdrawn by its owner on {shortDate(b.withdrawn_at!.slice(0, 10))}</h1>
-      <p>It was published on {shortDate(b.created_at.slice(0, 10))}. When an owner withdraws a record its numbers are deleted, but its page stays and says so, so that losing records cannot disappear without a trace.</p>
+      <p>It was published on {shortDate(b.created_at.slice(0, 10))}. When an owner withdraws a record, we delete its numbers and keep this page with the date it was withdrawn.</p>
       <img src={badgeSrc(b)} width={320} height={80} alt="Parity Verify badge: withdrawn by its owner" />
     </section>
   );
@@ -97,7 +96,6 @@ function Live({ b }: { b: PublicBadge }) {
     <>
       <div className="vb-top">
         <div>
-          <p className="vf-eyebrow">Parity Verify record</p>
           <h1 className="vb-title">{b.name}</h1>
           <p className="vf-small">Checked on {shortDate(b.created_at.slice(0, 10))} with method {b.method_version}. {b.stated_tries?.toLocaleString("en-US")} {b.stated_tries === 1 ? "try" : "tries"} stated by the owner.</p>
         </div>

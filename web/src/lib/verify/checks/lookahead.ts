@@ -85,7 +85,7 @@ export function fillChecks(trades: readonly Trade[], prices: PriceBook | null): 
   if (entries >= 10) {
     const share = perfect / entries;
     timing = share > 0.3
-      ? { id: "timing", label: timingLabel, status: "fail", detail: `${pctText(share)} of ${entries} entries are within 0.05% of the day's best price (the low for buys, the high for sells). Real traders rarely do this; a backtest that trades at the price it used as a signal often does.` }
+      ? { id: "timing", label: timingLabel, status: "fail", detail: `${pctText(share)} of ${entries} entries are within 0.05% of the day's best price (the low for buys, the high for sells). Real traders rarely do this. A backtest that trades at the same price it used as its signal often does.` }
       : { id: "timing", label: timingLabel, status: "pass", detail: `${pctText(share)} of ${entries} entries are within 0.05% of the day's best price, at or under the 30% line.` };
   } else if (hlSyms.size) {
     timing = { id: "timing", label: timingLabel, status: "na", detail: `${NA}: fewer than 10 dated entries with a buy or sell side matched our daily highs and lows.` };

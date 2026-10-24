@@ -74,7 +74,7 @@ function Battle({ index }: { index: BotsIndex }) {
           </div>
         )}
         <p className="small" style={{ margin: 0 }}>
-          <strong>Win rate is not profit.</strong> Seven simple bots start with the same hypothetical $10,000 on the same prices. Some win almost every trade and still lose; one wins less than half its trades and comes out ahead. Press Play and watch the leaderboard.
+          <strong>A high win rate does not mean a bot makes money.</strong> Seven simple bots start with the same hypothetical $10,000 on the same prices. Some win almost every trade and still lose. One wins less than half its trades and ends ahead. Press Play to start the replay.
         </p>
       </div>
       {!run ? <div className="sw2-card bb-loading" aria-busy="true"><p className="muted">Loading the replay</p></div>
@@ -97,7 +97,7 @@ function CrashOdds({ index, sims }: { index: BotsIndex; sims: SimsDoc }) {
     <div className="sw2-card">
       <h2>Out of {b.crash_paths.toLocaleString("en-US")} made-up crashes, how often each bot was wiped out</h2>
       <p className="small muted">
-        A machine keeps running these seven rules on new made-up {b.years}-year paths around the clock: {b.paths.toLocaleString("en-US")} so far, {b.crash_paths.toLocaleString("en-US")} of them with at least one crash. One replay shows one future; this shows the spread.
+        A background job keeps running these seven rules on new made-up {b.years}-year paths: {b.paths.toLocaleString("en-US")} so far, {b.crash_paths.toLocaleString("en-US")} of them with at least one crash. The table sums all of them.
       </p>
       <div className="ui-table-box bb-table">
         <table className="mtable dense">
@@ -135,7 +135,7 @@ function CrashOdds({ index, sims }: { index: BotsIndex; sims: SimsDoc }) {
           </tbody>
         </table>
       </div>
-      <p className="small muted">Simulated, not a forecast. Same rules, costs and $10,000 start as above; the bar runs from $100 to $316,000 on a log scale, and percentiles are read from rounded bins.</p>
+      <p className="small muted">Same rules, costs and $10,000 start as above; the bar runs from $100 to $316,000 on a log scale, and percentiles are read from rounded bins.</p>
       <ServiceHealth />
     </div>
   );
@@ -187,7 +187,7 @@ function Race({ index, run }: { index: BotsIndex; run: BotRunFile }) {
         leading={leaderOf(rows)} bands={bands}
         startLabel={synthetic ? "Year 0" : monthYear(run.start)} endLabel={synthetic ? `Year ${run.end}` : monthYear(run.end)}
         valueText={(i) => (synthetic ? `Year ${Number(run.labels[i] ?? 0).toFixed(1)}` : dayMonthYear(run.labels[i] ?? ""))}
-        honest={<>Hypothetical and educational, not investment advice. {synthetic ? "Made-up daily prices with calm spells, stressed spells and sudden crashes." : `Past daily prices: ${run.source}, ${run.start} to ${run.end}.`} Each bot trades daily on a plain rule, shown weekly here; $10,000 start, costs of 2 bp a side, no interest, a margin call past 10 times the account, and trades still open on the last day closed at the last close.</>}
+        honest={<>{synthetic ? "Made-up daily prices with calm spells, stressed spells and sudden crashes." : `Past daily prices: ${run.source}, ${run.start} to ${run.end}.`} Each bot trades daily on a plain rule, shown weekly here; $10,000 start, costs of 2 bp a side, no interest, a margin call past 10 times the account, and trades still open on the last day closed at the last close.</>}
         visual={
           <div ref={ref}>
             <RaceLines lanes={lanes} pos={pb.pos} end={pb.end} focus={focus} log baseline={start} format={(v) => money(v)} xTicks={ticks} bands={bands}
@@ -273,7 +273,7 @@ function SyntheticSummary({ index }: { index: BotsIndex }) {
   return (
     <div className="sw2-card">
       <h2>Across {s.paths} made-up paths of {s.years} years</h2>
-      <p className="small muted">The same rules on {s.paths} different made-up futures, each starting at $10,000. A bot that looks safe on one path can fail on another.</p>
+      <p className="small muted">The same rules on {s.paths} different made-up futures, each starting at $10,000. A bot that does well on one path can fail on another.</p>
       <div className="ui-table-box bb-table">
         <table className="mtable dense">
           <thead><tr><th>Bot</th><th className="num">Typical win rate</th><th className="num">Ended ahead</th><th className="num">Stopped out</th><th className="num">Typical end</th><th className="num">Typical worst fall</th></tr></thead>
@@ -295,7 +295,7 @@ function SyntheticSummary({ index }: { index: BotsIndex }) {
           </tbody>
         </table>
       </div>
-      <p className="small muted">Typical means the median path. Simulated, not a forecast.</p>
+      <p className="small muted">Typical means the median path.</p>
     </div>
   );
 }

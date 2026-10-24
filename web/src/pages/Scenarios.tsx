@@ -21,9 +21,8 @@ export function Scenarios() {
       <div className="page-head">
         <Title>Scenarios</Title>
         <p>
-          This does not predict the future. It shows what markets did after past events that look like your scenario.
-          Describe an event, and the page finds similar ones from history and lines up how oil, currencies, stocks, fear
-          and interest rates moved in the days and months after each.
+          Describe an event. The page finds similar past events and shows how oil, currencies, stocks, the VIX and
+          interest rates moved in the days and months after each. It does not predict the future.
         </p>
       </div>
       {!loaded && <PageSkeleton parts={["chart", "table"]} label="Loading past events" />}
@@ -255,7 +254,7 @@ function Results({ data, spec, matches, assets }: { data: ScenarioData; spec: Sp
       </div>
 
       <div style={{ marginBottom: 20 }}><Grid cols={4}>
-        <Stat label="Past events that match" value={n} sub={n < 5 ? "Too few to lean on" : undefined} />
+        <Stat label="Past events that match" value={n} sub={n < 5 ? "Too few to rely on" : undefined} />
         <Stat label="Earliest" value={fmt.date(dates[0])} />
         <Stat label="Latest" value={fmt.date(dates[dates.length - 1])} />
         <Stat label="Market data up to" value={data.data_through ? fmt.date(data.data_through) : "n/a"} />
@@ -263,25 +262,24 @@ function Results({ data, spec, matches, assets }: { data: ScenarioData; spec: Sp
 
       {n < 5 && (
         <p className="warning" style={{ margin: "16px 0" }}>
-          Only {n} past event{n === 1 ? "" : "s"} matched. With so few, one unusual event can swing every number below. Treat
-          this as a few stories, not a pattern.
+          Only {n} past event{n === 1 ? "" : "s"} matched. With so few, one unusual event can swing every number below.
         </p>
       )}
 
       <div style={{ marginBottom: 20 }}><Grid cols={2}>
-        <Panel title="What history suggests">
+        <Panel title="What followed past events">
           <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 8 }}>
             {assets.map((a) => <li key={a.key}>{sentence(a, aggregate(matches, a.key, main), main)}</li>)}
           </ul>
         </Panel>
-        <Panel title="What it cannot tell you" footer={<a href={methodHref} data-doc={methodDoc?.id}>How the matching works</a>}>
+        <Panel title="Limits" footer={<a href={methodHref} data-doc={methodDoc?.id}>How the matching works</a>}>
           <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 6 }}>
-            <li><strong>Small samples.</strong> These numbers come from {n} event{n === 1 ? "" : "s"}. A different handful could tell a different story.</li>
+            <li><strong>Small samples.</strong> These numbers come from {n} event{n === 1 ? "" : "s"}. A different set of events could give different numbers.</li>
             <li><strong>Every event is different.</strong> Two strikes in the same region can have nothing else in common.</li>
             <li><strong>Markets often move first.</strong> When an event was expected, prices had already moved before the day we start counting from.</li>
             <li><strong>The world changes.</strong> Oil and the dollar behaved differently in 1990 than in 2024.</li>
             <li><strong>Only remembered events.</strong> The list holds events people wrote about. Scares that came to nothing are mostly missing.</li>
-            <li><strong>No cause and effect.</strong> Other news happened in the same weeks. This shows what followed, not what the event caused.</li>
+            <li><strong>No cause and effect.</strong> Other news happened in the same weeks. This shows what followed. It does not show what the event caused.</li>
           </ul>
         </Panel>
       </Grid></div>

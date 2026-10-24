@@ -11,7 +11,7 @@ import { termById } from "../lib/glossary";
 import { scrollToTop } from "../lib/scroll";
 import "./academy.css";
 
-const NOT_ADVICE = "Education only, not investment advice. Pictures use made-up or example numbers unless they say otherwise.";
+const NOT_ADVICE = "Research and education only. Not investment advice. Pictures use made-up or example numbers unless they say otherwise.";
 
 /** Plain text with **bold** parts. */
 function Rich({ text }: { text: string }) {
@@ -55,7 +55,7 @@ function Home() {
     <div className="ac">
       <div className="page-head">
         <Title label="Academy">Academy</Title>
-        <p>Short courses on how markets and research work. Each lesson takes two or three minutes: a few plain paragraphs, a picture that moves step by step, a link to the real page in Parity and a quick check.</p>
+        <p>Short courses on how markets and research work. Each lesson takes two or three minutes: a few paragraphs, a step-by-step picture, a link to the matching page in Parity and a short quiz.</p>
         <p className="ac-meta">{courses.length} courses · {totalLessons} lessons · {done > 0 ? `${done} done in this browser` : "Progress is saved in this browser only"}</p>
       </div>
       <ol className="ac-courses">

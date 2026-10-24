@@ -15,7 +15,8 @@ export function ServiceHealth({ className = "" }: { className?: string }) {
     return () => { live = false; window.clearInterval(t); };
   }, []);
   if (failed && !rows) return <p className={`small muted service-health ${className}`}>Service status is not available right now.</p>;
-  if (!rows) return null;
+  // Hold one line while the status loads, so the page below does not jump when it arrives.
+  if (!rows) return <p className={`small muted service-health ${className}`} aria-hidden="true">&nbsp;</p>;
   const parts = healthParts(rows, now);
   return (
     <p className={`small muted service-health ${className}`} aria-live="polite">

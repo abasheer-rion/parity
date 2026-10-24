@@ -37,7 +37,7 @@ function showBanner() {
   prefs.addEventListener("click", () => openPreferences());
   banner = h("section", { class: "cn", "aria-label": "Cookie notice" },
     h("p", { class: "cn-text" },
-      "We use only essential cookies, to keep you signed in and remember your settings. No analytics, no ads. ",
+      "We use only essential cookies, to keep you signed in and remember your settings. We do not use analytics or ads. ",
       h("a", { href: POLICY }, "Cookie policy")),
     h("div", { class: "cn-actions" }, prefs, ok));
   document.body.appendChild(banner);

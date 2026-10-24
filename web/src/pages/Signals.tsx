@@ -16,8 +16,8 @@ export function Signals({ report }: { report: Report }) {
       <div className="page-head">
         <Title>Signals</Title>
         <p>
-          Leading indicators: does each signal predict anything before portfolio rules and costs get in the way?
-          A signal with real information but a poor backtest usually means the trading rule, not the idea, needs work.
+          Does each signal predict returns before portfolio rules and costs are applied? If a signal predicts well but
+          its backtest is poor, the trading rule usually needs work.
         </p>
       </div>
 

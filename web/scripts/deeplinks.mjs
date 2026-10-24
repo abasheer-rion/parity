@@ -18,7 +18,7 @@ const check = (ok, what, detail = "") => {
 };
 
 // 1. The tags a link preview reads, straight from the HTML (no script runs for a crawler).
-for (const [path, title] of [["/", "Parity: trading strategies, tested honestly"], ["/legal/privacy/", "Privacy policy · Parity"], ["/login/", "Log in · Parity"]]) {
+for (const [path, title] of [["/", "Parity: check trading records and strategies"], ["/legal/privacy/", "Privacy policy · Parity"], ["/login/", "Log in · Parity"]]) {
   const html = await (await fetch(`${BASE}${path}`)).text();
   check(html.includes(`<title>${title}</title>`), `${path} title`);
   check(/<meta property="og:image" content="https:\/\/[^"]+\/og\/[a-z]+\.png"/.test(html), `${path} og:image`);

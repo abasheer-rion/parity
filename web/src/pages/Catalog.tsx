@@ -42,9 +42,9 @@ export function Catalog() {
       <div className="page-head">
         <Title>Algorithm catalog</Title>
         <p>
-          Every trading algorithm we know of, where it came from, how old it is, what its authors reported, and how far
-          our own research has taken it. Reported numbers are the source's claims, not ours, until the stage says
-          otherwise. Very high reported Sharpe ratios are usually a warning sign, not a target.
+          Every trading algorithm we know of, with where it came from, how old it is, what its authors reported and how
+          far we have tested it. Reported numbers are the source's claims until the stage shows we tested them. Very high
+          reported Sharpe ratios are usually a warning sign.
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export function Catalog() {
         <div className="tile"><div className="tile-label">Tested by us officially</div>
           <div className="tile-value">{algorithms.filter((a) => a.research.stage >= 6).length}</div>
           <div className="tile-note">stage 6 or later</div></div>
-        <div className="tile"><div className="tile-label">With live, not just backtest, evidence</div>
+        <div className="tile"><div className="tile-label">With live trading evidence</div>
           <div className="tile-value">{algorithms.filter((a) => a.reported_results.some((r) => r.evidence_type === "live")).length}</div></div>
         <div className="tile"><div className="tile-label">Testable with free data</div>
           <div className="tile-value">{algorithms.filter((a) => a.testable_with_free_data).length}</div></div>

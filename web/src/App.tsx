@@ -184,7 +184,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
           <footer className="muted small">
             {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
             {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
-            Research only, not investment advice.
+            Research and education only. Not investment advice.
             <LegalLinks className="start app-legal" />
           </footer>
         </>

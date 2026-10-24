@@ -25,9 +25,9 @@ export function News({ view: initial }: { view?: string }) {
     <>
       <div className="page-head">
         <Title label="News">News and market moves</Title>
-        <p>The newest headlines from central banks, government statistics offices and an open news index, how markets
-          moved afterwards compared with a normal day, an archive going back decades, and a tool to see which kinds of
-          news came before unusual moves. A big move after a headline does not prove the headline caused it.</p>
+        <p>The newest headlines from central banks, government statistics offices and an open news index, with how markets
+          moved afterwards compared with a normal day. The archive goes back to the 1970s. The impact tab shows which kinds
+          of news came before unusual moves. A big move after a headline does not prove the headline caused it.</p>
       </div>
       <Tabs label="News view" value={view} onChange={go} tabs={[["latest", "Latest"], ["archive", "Archive"], ["impact", "Impact search"], ["history", "Biggest days in history"]]} />
       <div style={{ height: 16 }} />
