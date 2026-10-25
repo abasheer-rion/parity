@@ -103,5 +103,5 @@ The logo (the starburst and PARITY, no subtitle) is fixed in the top left. Log i
 
 ## Referenced by
 
-Nothing links here yet.
+- [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->

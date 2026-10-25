@@ -57,4 +57,5 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 ## Referenced by
 
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
+- [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->

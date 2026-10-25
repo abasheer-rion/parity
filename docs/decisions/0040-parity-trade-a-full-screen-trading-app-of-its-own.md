@@ -66,4 +66,5 @@ The owner asked which other parts would benefit. Recommendations, not built:
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 - [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [LOG-0015: Parity Trade becomes its own app](../log/2026-10-24-parity-trade-becomes-its-own-app.md)
+- [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->
