@@ -11,6 +11,7 @@ import "../styles.css";
 import "../ui/ui.css";
 import "../ui/dark.css";
 import "../legal/notice";
+import "../lib/scrollRegions";
 import "../a11y.css";
 import { startRum } from "../lib/rum";
 import { isDesktop } from "../desktop/bridge";

@@ -13,6 +13,8 @@ const FILES: Record<string, string> = {
   "/data/search.json": web("tests/fixtures/smoke/search.json"),
 };
 const INLINE: Record<string, unknown> = {
+  // The front page's counters (scripts/export_site_data.py writes it at deploy).
+  "/stats.json": { generated_at: "2026-10-23T22:00:00Z", strategies_tested: 8, strategies_beat_market: 1, variations_searched: 1200, search_passed_luck: 3 },
   "/data/batches.json": [],
   "/data/members.json": [],
 };
@@ -44,6 +46,7 @@ export class DataStub {
     const path = url.pathname;
     if (path === "/rum" || path === "/e") return route.fulfill({ status: 204, body: "" });
     this.asked.push(path);
+    if (path === "/stats.json") return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(INLINE[path]) });
     const o = this.overrides.find((x) => path.startsWith(x.prefix))?.o;
     if (o?.hang) return; // never answered: the loading state stays up
     if (o?.delay) await new Promise((ok) => setTimeout(ok, o.delay));

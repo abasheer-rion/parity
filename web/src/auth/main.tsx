@@ -4,6 +4,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "../legal/notice";
+import "../site/viewTransitions";
 import { AuthFlow } from "./AuthFlow";
 import { carryFromQuery, viewFromPath } from "./views";
 import { startRum } from "../lib/rum";

@@ -404,7 +404,7 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .title-row { display: flex; align-items: center; gap: 8px; padding-bottom: 16px; min-height: 40px; }
 .title-row h1 { margin: 0; }
 .title-actions { margin-left: auto; display: flex; gap: 8px; }
-.round-btn { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 0; padding: 0; background: var(--ds-background-secondary); color: var(--ds-icon-default); cursor: pointer; transition: background-color var(--dur-2) ease-out, color var(--dur-2) ease-out; }
+.round-btn { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; border: 0; padding: 0; background: var(--ds-background-secondary); color: var(--ds-icon-default); cursor: pointer; transition: background-color var(--dur-2) ease-out, color var(--dur-2) ease-out; }
 .round-btn:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-icon-emphasized); text-decoration: none; }
 .round-btn.on { color: var(--ds-icon-default); }
 .round-btn.on .icon { fill: currentColor; }

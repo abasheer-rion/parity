@@ -13,9 +13,11 @@ import { DataStub } from "./data";
 import { FakeDb, sessionCookie, stubSupabase } from "./supabase";
 
 // Console messages that are not bugs. Keep this short and say why for each one.
+// Missing data files are handled separately: only the ones the stub left out on purpose pass.
 const ALLOW: RegExp[] = [
-  // Chrome prints this for every 401/404 a page asks for on purpose. Missing data files are
-  // checked separately below: only the ones the stub chose to leave out are let through.
+  // The suite turns service workers off (serviceWorkers: "block") so the stubs see every
+  // request; Playwright then logs this for each page that tries to register one.
+  /^Service Worker registration blocked by Playwright/,
 ];
 
 export interface Fixtures {
@@ -49,7 +51,7 @@ export const test = base.extend<Fixtures>({
       if (type === "font" || type === "image") return route.fulfill({ status: 204, body: "" });
       return route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
     });
-    await context.route((url) => url.origin === BASE && /^\/(data|live|rum|e)(\/|$)/.test(url.pathname), (route) => data.handle(route));
+    await context.route((url) => url.origin === BASE && /^\/(data|live|rum|e)(\/|$)|^\/stats\.json$/.test(url.pathname), (route) => data.handle(route));
     await context.routeWebSocket((url) => !url.href.includes("supabase.co"), (ws) => { ws.onMessage(() => {}); });
     await stubSupabase(context, db, () => live);
     const allowed = (m: string, url: string) =>

@@ -155,6 +155,7 @@ async function auth(route: Route, signedIn: () => boolean) {
     if (body.password === "wrong-password") return json(400, { code: 400, error_code: "invalid_credentials", msg: "Invalid login credentials" });
     return json(200, session());
   }
+  if (path === "/user/oauth/grants") return json(200, []);
   if (path === "/logout") return route.fulfill({ status: 204, body: "" });
   if (path === "/factors" || path.startsWith("/factors/")) return json(200, { id: "f1", type: "totp", totp: { qr_code: "data:image/svg+xml,", secret: "SECRET", uri: "otpauth://" } });
   if (path === "/signup") return json(200, { ...USER, identities: [{ id: "i1" }], confirmation_sent_at: "2026-01-01T00:00:00Z" });
