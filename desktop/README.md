@@ -27,7 +27,7 @@ After the first time it opens normally.
 - Sign in with your Parity email and password, or an email code. You stay signed in when you close the app.
 - The sidebar: Home, Verify, Strategies, Research, Terminal, Trade and Account. Cmd (Mac) or Ctrl (Windows) plus 1 to 6 opens each one, plus comma opens Account. Back is Cmd+[ on a Mac and Alt+Left on Windows.
 - Trade alerts show as desktop notifications. Clicking one opens that chart.
-- `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to parity.endyland.com, trade.endyland.com and sim.endyland.com inside the app stay in the app; other links open in your browser.
+- `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to parity.endyland.com, trade.endyland.com, academy.endyland.com and sim.endyland.com inside the app stay in the app; other links open in your browser.
 - The window remembers its size and place, and opens on the last page you had.
 - Updates: download the new version from Releases. Automatic updates are built in but off until the app is signed.
 

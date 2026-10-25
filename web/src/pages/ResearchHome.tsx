@@ -7,6 +7,7 @@ import { ledger } from "../lib/catalog";
 import { useDocs } from "../lib/docs";
 import { date, num } from "../lib/format";
 import { loadSearch } from "../lib/data";
+import { academyUrl } from "../lib/space";
 import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report } from "../lib/types";
 import { researchInsights } from "../lib/insights";
@@ -93,12 +94,12 @@ export function ResearchHome({ report }: { report: Report }) {
         </Reveal>
 
         <Reveal as="section" delay={120} className={`pcard ${LIFT}`}>
-          <div className="pcard-head"><h2>Learn the methods</h2><a href="/app/#/academy">Academy</a></div>
-          <p className="muted small">Short animated courses on the product side. These three cover the methods used here:</p>
+          <div className="pcard-head"><h2>Learn the methods</h2><a href={academyUrl()} target="_blank" rel="noopener">Academy</a></div>
+          <p className="muted small">Short animated courses in Parity Academy. These three cover the methods used here:</p>
           <ul className="rlist">
-            <li><a href="/app/#/academy/luck-vs-skill">Luck vs skill: multiple testing, deflated Sharpe and the 11 tests</a></li>
-            <li><a href="/app/#/academy/reading-a-backtest">Reading a backtest</a></li>
-            <li><a href="/app/#/academy/news-and-event-studies">Reading news impact and event studies</a></li>
+            <li><a href={academyUrl("luck-vs-skill")} target="_blank" rel="noopener">Luck vs skill: multiple testing, deflated Sharpe and the 11 tests</a></li>
+            <li><a href={academyUrl("reading-a-backtest")} target="_blank" rel="noopener">Reading a backtest</a></li>
+            <li><a href={academyUrl("news-and-event-studies")} target="_blank" rel="noopener">Reading news impact and event studies</a></li>
           </ul>
         </Reveal>
 

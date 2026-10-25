@@ -1,7 +1,7 @@
 // Which side of Parity this page is (DEC-0015). The product app lives at /app/ and the
 // research app at /research/; both load the same code, and each HTML file says which
 // side it is with <html data-space="...">.
-import { ORIGIN, SIM_ORIGIN, SITE_DOMAIN, TRADE_ORIGIN } from "./meta";
+import { ACADEMY_ORIGIN, ORIGIN, SIM_ORIGIN, SITE_DOMAIN, TRADE_ORIGIN } from "./meta";
 
 export type Space = "product" | "research";
 
@@ -77,4 +77,41 @@ export function tradeHashFor(oldHash: string): string {
   for (const k of ["s", "tf"]) { const v = q.get(k); if (v) keep.set(k, v); }
   const rest = keep.toString();
   return `${map[view] ?? "chart"}${rest ? `?${rest}` : ""}`;
+}
+
+// ---------- Parity Academy, its own full-screen course player (DEC-0042) ----------
+// /academy/ serves web/academy/index.html, marked <html data-space="academy">: the course
+// library, a lesson player and progress saved to the account. It signs in like the other sides.
+
+/** True on the full-screen Parity Academy app. */
+export const IS_ACADEMY = document.documentElement.dataset.space === "academy";
+
+/** academy.<domain> is live (owner approved and set up academy.endyland.com, 2026-10-24). Set false to fall back to /academy/. */
+export const ACADEMY_SUBDOMAIN = true;
+
+/** Where Parity Academy opens: its own subdomain on the site's domain, /academy/ elsewhere (previews, localhost). */
+export function academyUrl(hash = ""): string {
+  const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
+  return ACADEMY_SUBDOMAIN && onSiteDomain() ? `${ACADEMY_ORIGIN}/${h}` : `/academy/${h}`;
+}
+
+/** Where an old #/academy link of the product app now lives inside Parity Academy: #/academy/<course>/<lesson> becomes <course>/<lesson>. */
+export function academyHashFor(oldHash: string): string {
+  const path = oldHash.replace(/^#/, "").split("?")[0];
+  const parts = path.split("/").filter(Boolean);
+  if (parts[0] !== "academy") return "";
+  return parts.slice(1, 3).filter((p) => /^[a-z0-9][a-z0-9-]*$/.test(p)).join("/");
+}
+
+/**
+ * A page of any Parity app, from one of the full-screen apps: product and research pages
+ * by their hash, and the routes that moved to their own app (Trade, Terminal, Academy)
+ * straight to that app.
+ */
+export function appLink(space: Space | "both", hash: string): string {
+  const route = hash.replace(/^#\/?/, "").split(/[/?]/)[0];
+  if (route === "trade") return tradeUrl(tradeHashFor(hash));
+  if (route === "sim") return simUrl(hash.replace(/^#\/?/, "").split(/[/?]/)[1]);
+  if (route === "academy") return academyUrl(academyHashFor(hash));
+  return space === "research" ? researchUrl(hash) : productUrl(hash);
 }

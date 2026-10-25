@@ -16,7 +16,7 @@ const OFFLINE = "/offline.html";
 const PRECACHE = [OFFLINE, "/icon-192.png", "/favicon.svg"];
 
 const NEVER = /^\/(data|local|og|badge|s|cdn-cgi)\//;
-const ASSETS = /^\/((app|sim|trade)\/)?assets\//;
+const ASSETS = /^\/((app|sim|trade|academy)\/)?assets\//;
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));

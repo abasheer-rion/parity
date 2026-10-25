@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 
 describe("signed out", () => {
-  it.each(["/app/", "/research/", "/sim/", "/trade/"])("%s sends you to log in and back", async (path) => {
+  it.each(["/app/", "/research/", "/sim/", "/trade/", "/academy/"])("%s sends you to log in and back", async (path) => {
     const res = await run(`https://parity.endyland.com${path}`).promise;
     expect(res.status).toBe(302);
     expect(res.headers.get("Location")).toBe(`/login/?next=${encodeURIComponent(path)}`);
@@ -61,7 +61,7 @@ describe("signed out", () => {
 });
 
 describe("signed in", () => {
-  it.each(["/app/", "/research/", "/sim/", "/trade/", "/data/latest.json"])("%s is served privately", async (path) => {
+  it.each(["/app/", "/research/", "/sim/", "/trade/", "/academy/", "/data/latest.json"])("%s is served privately", async (path) => {
     const res = await run(`https://parity.endyland.com${path}`, session()).promise;
     expect(res.status).toBe(200);
     expect(res.headers.get("Cache-Control")).toBe("private, no-cache");
@@ -131,6 +131,50 @@ describe("the trade host", () => {
   it("the sim host sends /trade/ to the main address too", async () => {
     const res = await run("https://sim.endyland.com/trade/").promise;
     expect(res.headers.get("Location")).toBe("https://parity.endyland.com/trade/");
+  });
+});
+
+describe("the academy host", () => {
+  it("opens Parity Academy at / when signed in", async () => {
+    const res = await run("https://academy.endyland.com/", session()).promise;
+    expect(await res.text()).toBe("served /academy/");
+    expect(res.headers.get("Cache-Control")).toBe("private, no-cache");
+  });
+
+  it("sends signed-out visitors to its own log-in page, coming back to Parity Academy", async () => {
+    const res = await run("https://academy.endyland.com/").promise;
+    expect(res.status).toBe(302);
+    expect(res.headers.get("Location")).toBe("/login/?next=%2Facademy%2F");
+  });
+
+  it("keeps the sign-in pages and assets public", async () => {
+    for (const path of ["/login/", "/signup/", "/reset/", "/verify/", "/assets/x.js", "/brand/logo.svg"]) {
+      const res = await run(`https://academy.endyland.com${path}`).promise;
+      expect(res.status).toBe(200);
+    }
+  });
+
+  it("protects its own built files", async () => {
+    const res = await run("https://academy.endyland.com/academy/assets/x.js").promise;
+    expect(res.status).toBe(302);
+  });
+
+  it("sends the other apps to the main address", async () => {
+    for (const path of ["/app/", "/research/?x=1", "/sim/", "/trade/"]) {
+      const res = await run(`https://academy.endyland.com${path}`).promise;
+      expect(res.status).toBe(302);
+      expect(res.headers.get("Location")).toBe(`https://parity.endyland.com${path}`);
+    }
+  });
+
+  it("the trade host sends /academy/ to the main address too", async () => {
+    const res = await run("https://trade.endyland.com/academy/").promise;
+    expect(res.headers.get("Location")).toBe("https://parity.endyland.com/academy/");
+  });
+
+  it("leaves the public course pages public", async () => {
+    const res = await run("https://parity.endyland.com/learn/academy/reading-a-backtest/").promise;
+    expect(res.status).toBe(200);
   });
 });
 

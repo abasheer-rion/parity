@@ -34,6 +34,8 @@ export const SITE_DOMAIN: string = parentDomain(HOST);
 export const SIM_ORIGIN = `https://sim.${SITE_DOMAIN}`;
 /** Parity Trade's own address (DEC-0040). */
 export const TRADE_ORIGIN = `https://trade.${SITE_DOMAIN}`;
+/** Parity Academy's own address (DEC-0042). */
+export const ACADEMY_ORIGIN = `https://academy.${SITE_DOMAIN}`;
 
 /** The logo drawn on every share card. */
 export const LOGO_PATH = "/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg";
@@ -56,6 +58,7 @@ export const OG_CARDS: Record<string, OgCard> = {
   research: { kicker: "Parity Research", title: "Research docs, official runs and data", sub: "The docs, the ledger of official runs, the strategy search and the data behind them." },
   sim: { kicker: "Parity Terminal", title: "Market data, replays and simulations", sub: "Macro, currencies, commodities, crisis replays and simulated paths, all from past data." },
   trade: { kicker: "Parity Trade", title: "Charts, watchlists and paper trading", sub: "Charts on delayed data, a screener and demo accounts. No real money." },
+  academy: { kicker: "Parity Academy", title: "Short courses on markets and research", sub: "Lessons of two or three minutes, each with a step-by-step picture and a quick check. Progress is saved to your account." },
   strategy: { kicker: "Parity strategy", title: "A strategy, tested against the S&P 500", sub: "How it did, where it fails and whether the result could be luck." },
   login: { kicker: "Parity", title: "Log in to Parity", sub: "Check trading records and follow tested strategies." },
   legal: { kicker: "Parity legal", title: "Legal", sub: "Privacy, terms, cookies, accessibility and risk." },
@@ -133,6 +136,7 @@ export const PAGES: Record<string, PageMeta> = {
   "research/index.html": { title: "Parity Research", description: OG_CARDS.research.sub, path: "/research/", image: "research", robots: PRIVATE, manifest: "/manifest.webmanifest" },
   "sim/index.html": { title: "Parity Terminal", description: OG_CARDS.sim.sub, path: "/sim/", image: "sim", robots: PRIVATE, themeColor: "#000000", manifest: "/sim/manifest.webmanifest", manifestCredentials: true },
   "trade/index.html": { title: "Parity Trade", description: OG_CARDS.trade.sub, path: "/trade/", image: "trade", robots: PRIVATE, manifest: "/trade/manifest.webmanifest", manifestCredentials: true },
+  "academy/index.html": { title: "Parity Academy", description: OG_CARDS.academy.sub, path: "/academy/", image: "academy", robots: PRIVATE, manifest: "/academy/manifest.webmanifest", manifestCredentials: true },
 };
 
 export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

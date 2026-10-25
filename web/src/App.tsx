@@ -21,7 +21,6 @@ import { News } from "./pages/News";
 import { Markets } from "./pages/markets/Markets";
 import { Learn } from "./pages/Learn";
 import { EdgeLab } from "./pages/EdgeLab";
-import { Academy } from "./pages/Academy";
 import { PrivateResearch } from "./pages/PrivateResearch";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
@@ -40,7 +39,7 @@ import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
 import { Verify } from "./pages/Verify";
 import { SharePanel } from "./pages/verify/Share";
-import { otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
+import { academyHashFor, academyUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
@@ -89,9 +88,10 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World (DEC-0020) and Parity Trade (DEC-0040) run full screen on their own sites:
-  // any link to #/sim or #/trade opens them in a new tab. Typing #/sim still lands on a
-  // small card that links there; typing #/trade goes straight to Parity Trade.
+  // Sim World (DEC-0020), Parity Trade (DEC-0040) and Parity Academy (DEC-0042) run full
+  // screen on their own sites: any link to #/sim, #/trade or #/academy opens them in a new
+  // tab. Typing #/sim still lands on a small card that links there; typing #/trade or
+  // #/academy goes straight to that app.
   useEffect(() => {
     const on = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -100,6 +100,11 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       if (/^#\/trade(\/|\?|$)/.test(href)) {
         e.preventDefault();
         window.open(tradeUrl(tradeHashFor(href)), "_blank", "noopener");
+        return;
+      }
+      if (/^#\/academy(\/|\?|$)/.test(href)) {
+        e.preventDefault();
+        window.open(academyUrl(academyHashFor(href)), "_blank", "noopener");
         return;
       }
       const m = /^#\/sim(?:\/([a-z]+))?/.exec(href);
@@ -124,7 +129,9 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   useEffect(() => { if (away) window.location.replace(`${SPACE_ROOT[away]}${hash}`); }, [away, hash]);
   // Old #/trade links (bookmarks, history) open Parity Trade in place (DEC-0040).
   useEffect(() => { if (route === "trade") window.location.replace(tradeUrl(tradeHashFor(hash))); }, [route, hash]);
-  if (away || route === "trade") return null;
+  // Old #/academy links open Parity Academy in place, at the same course and lesson (DEC-0042).
+  useEffect(() => { if (route === "academy") window.location.replace(academyUrl(academyHashFor(hash))); }, [route, hash]);
+  if (away || route === "trade" || route === "academy") return null;
 
   // The run picker lives in the sidebar footer, and only on pages that read a run.
   const runPicker = standalone || (batches.length === 0 && source !== "local") ? undefined : (
@@ -155,7 +162,6 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
       {route === "edges" && <EdgeLab focus={dec(arg)} />}
-      {route === "academy" && <Academy course={dec(arg)} lesson={dec(extra)} />}
       {route === "private" && <PrivateResearch />}
       {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}

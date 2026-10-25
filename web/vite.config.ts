@@ -142,6 +142,8 @@ function localScenarios(): Plugin {
 //                            must not load anything from /app/.
 //   vite build --mode trade  Parity Trade on its own (DEC-0040), /trade/, assets under
 //                            /trade/assets/, for the same reason (trade.endyland.com).
+//   vite build --mode academy  Parity Academy on its own (DEC-0042), /academy/, assets
+//                            under /academy/assets/ (academy.endyland.com).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
@@ -172,15 +174,15 @@ export default defineConfig(({ command, mode }) => ({
         copyPublicDir: false,
         rollupOptions: { input: { sim: here("sim/index.html") } as Record<string, string> },
       }
-    : command === "build" && mode === "trade"
+    : command === "build" && (mode === "trade" || mode === "academy")
     ? {
         sourcemap: false,
         chunkSizeWarningLimit: 1800,
         outDir: "dist",
         emptyOutDir: false,
-        assetsDir: "trade/assets",
+        assetsDir: `${mode}/assets`,
         copyPublicDir: false,
-        rollupOptions: { input: { trade: here("trade/index.html") } as Record<string, string> },
+        rollupOptions: { input: { [mode]: here(`${mode}/index.html`) } as Record<string, string> },
       }
     : {
         sourcemap: false,
@@ -190,7 +192,7 @@ export default defineConfig(({ command, mode }) => ({
         assetsDir: "app/assets",
         copyPublicDir: false,
         // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research.
-        // /sim/ and /trade/ are built on their own (--mode sim and --mode trade, above).
+        // /sim/, /trade/ and /academy/ are built on their own (--mode sim, trade and academy, above).
         rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") } },
       },
 }));

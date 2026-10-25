@@ -21,6 +21,7 @@
   "shortcuts": [
     { "name": "Verify a trading record", "short_name": "Verify", "url": "/app/#/verify", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
     { "name": "Parity Trade", "short_name": "Trade", "url": "/trade/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Parity Academy", "short_name": "Academy", "url": "/academy/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
     { "name": "Parity Research", "short_name": "Research", "url": "/research/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
     { "name": "Parity Terminal", "short_name": "Terminal", "url": "/sim/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
   ]
