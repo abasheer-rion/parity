@@ -1,0 +1,119 @@
+# Builds Parity for Mac and Windows (DEC-0041) and attaches the installers to a draft
+# GitHub release. Run it from the Actions tab, or push a tag named desktop-v<version>.
+# The builds are not signed or notarized; desktop/README.md says how to open them.
+name: Desktop release
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["desktop-v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      # Copies the public site only: research data, dev files and maps are refused.
+      - run: node scripts/prepare-web.mjs
+        working-directory: desktop
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-web
+          path: desktop/build/web
+          retention-days: 3
+
+  mac:
+    needs: web
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - uses: actions/download-artifact@v7
+        with:
+          name: desktop-web
+          path: desktop/build/web
+      - run: npm ci
+        working-directory: desktop
+      - run: npm test
+        working-directory: desktop
+      - name: Build the Mac disk images (ad hoc signed, not notarized)
+        run: npm run build:mac
+        working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-mac
+          path: desktop/dist/*.dmg
+
+  windows:
+    needs: web
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - uses: actions/download-artifact@v7
+        with:
+          name: desktop-web
+          path: desktop/build/web
+      - run: npm ci
+        working-directory: desktop
+      - name: Build the Windows installer (unsigned)
+        run: npm run build:win
+        working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+      # Only the installer, not the unpacked app folder.
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-windows
+          path: desktop/dist/*.exe
+
+  release:
+    needs: [mac, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: desktop-*
+          path: out
+      - name: Attach the installers to a draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(node -p "require('./desktop/package.json').version")
+          tag="desktop-v${version}"
+          files=$(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.exe' \))
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" $files --clobber
+          else
+            gh release create "$tag" $files --draft --target "$GITHUB_SHA" --title "Parity desktop ${version}" --notes-file desktop/RELEASE_NOTES.md
+          fi

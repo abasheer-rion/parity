@@ -45,6 +45,25 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # The desktop app's copy of the site (DEC-0041): refuses research data and maps.
+      - run: node ../desktop/scripts/prepare-web.mjs
+
+  desktop:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+      - run: npm test
 
   docs:
     runs-on: ubuntu-latest
