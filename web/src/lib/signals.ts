@@ -1,4 +1,4 @@
-// Strategy signals on a chart (DEC-0049). The factory recipes that trade one price series
+// Strategy signals on a chart (DEC-0052). The factory recipes that trade one price series
 // on its own (engine/src/parity/strategies/factory.py: TrendBook, BreakoutBook and
 // OscillatorBook) are ported here rule for rule, so the chart can show where each would
 // have bought, sold or stepped aside on the symbol you are looking at.

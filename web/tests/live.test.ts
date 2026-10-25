@@ -1,4 +1,4 @@
-// Live data pieces (DEC-0049): conflation, candles from updates, the clock offset, hop
+// Live data pieces (DEC-0052): conflation, candles from updates, the clock offset, hop
 // times, freshness and the wire checks. No network.
 import { describe, expect, it } from "vitest";
 import { Conflator } from "../src/lib/live/conflate";

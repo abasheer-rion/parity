@@ -225,7 +225,7 @@ export async function loadHealthExtras(): Promise<{ fresh: FreshRow[]; steps: St
   return { fresh: [...(news.data ?? []), ...(prices.data ?? [])] as FreshRow[], steps: (queue.data ?? []) as StepRow[] };
 }
 
-// ------------------------------------------------------------------ live feeds (DEC-0049)
+// ------------------------------------------------------------------ live feeds (DEC-0052)
 
 /** The hops the live feeds report, in trip order. */
 export const LIVE_HOPS = ["feed", "edge", "net", "screen", "e2e"] as const;

@@ -1,4 +1,4 @@
-// The latency badge (DEC-0049): on every live chart and quote, a tiny line saying how
+// The latency badge (DEC-0052): on every live chart and quote, a tiny line saying how
 // fresh the price is. Feed type (real-time, delayed 15 min, end of day), source, the whole
 // trip from the exchange to this screen in ms, and the data's age; green, amber when late,
 // red when stale or the line is down. Click it for every hop: exchange time, our receive

@@ -1,4 +1,4 @@
-// Live symbols in Parity Trade (DEC-0049): the whole symbol universe for search, live
+// Live symbols in Parity Trade (DEC-0052): the whole symbol universe for search, live
 // candles that tick in place, and the strategy signals drawn on them.
 //
 // Keys: "L:<source>:<symbol>" is a streamed symbol (for example L:hyperliquid:BTC-PERP);

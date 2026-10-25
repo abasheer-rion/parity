@@ -24,7 +24,7 @@ export const VIEW_IDS = VIEWS.map((v) => v.id);
 
 export type DockTab = "positions" | "orders" | "fills" | "pnl";
 export type Grid = 1 | 2 | 4;
-export interface Cell { symbol: string; tf: Timeframe; /** A second symbol drawn over the chart, both indexed to 100. */ cmp?: string; /** Timeframe for a live symbol (DEC-0049). */ ltf?: LiveTf }
+export interface Cell { symbol: string; tf: Timeframe; /** A second symbol drawn over the chart, both indexed to 100. */ cmp?: string; /** Timeframe for a live symbol (DEC-0052). */ ltf?: LiveTf }
 
 export interface Layout {
   grid: Grid;
@@ -35,7 +35,7 @@ export interface Layout {
   type: ChartType;
   log: boolean;
   indicators: IndicatorInstance[];
-  /** Strategy rules drawn as buy, sell and exit markers (DEC-0049). */
+  /** Strategy rules drawn as buy, sell and exit markers (DEC-0052). */
   signals: string[];
   side: { open: boolean; width: number; dock: "right" | "left"; ticket: boolean; watch: boolean; split: number };
   bottom: { open: boolean; height: number; tab: DockTab };

@@ -1,4 +1,4 @@
-// LiveHub, the fan-out (DEC-0049, REF-0019 tier C): one Durable Object per source. It holds
+// LiveHub, the fan-out (DEC-0052, REF-0019 tier C): one Durable Object per source. It holds
 // ONE connection to that source's public feed, subscribed to the union of the symbols its
 // viewers want, and relays every trade to every viewer of that symbol, conflated to at most
 // four updates a second and stamped with our receive and send times. The upstream line

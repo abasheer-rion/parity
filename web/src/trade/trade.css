@@ -357,7 +357,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
   .cb-draw, .cb-log, .cb-select { display: none; }
 }
 
-/* Live data and strategy signals (DEC-0049). */
+/* Live data and strategy signals (DEC-0052). */
 .cg-attr { font-size: 10px; color: var(--text-2); white-space: nowrap; text-decoration: none; opacity: 0.85; flex: none; }
 .cg-attr:hover { color: var(--text); text-decoration: underline; }
 .cg-head .lvb { margin-left: 4px; }

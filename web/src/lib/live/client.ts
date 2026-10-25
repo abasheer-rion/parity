@@ -1,4 +1,4 @@
-// The browser side of live data (DEC-0049): one WebSocket per source to our edge
+// The browser side of live data (DEC-0052): one WebSocket per source to our edge
 // (/live/ws), shared by every chart and quote on the page. Updates are queued as they
 // arrive and handed to listeners once per animation frame, so a busy feed never makes
 // the page stutter. Every update carries the edge's times; this module adds the

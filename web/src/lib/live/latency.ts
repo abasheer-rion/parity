@@ -1,4 +1,4 @@
-// Latency for live feeds (DEC-0049, REF-0019): the browser's clock offset from our edge,
+// Latency for live feeds (DEC-0052, REF-0019): the browser's clock offset from our edge,
 // each hop of every update, and whether a feed is fresh, late or stale.
 //
 // Hops, in milliseconds, all in the edge's clock:

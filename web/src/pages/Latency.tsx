@@ -307,7 +307,7 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
   );
 }
 
-// ------------------------------------------------------------------ live feeds (DEC-0049)
+// ------------------------------------------------------------------ live feeds (DEC-0052)
 
 const HOP_NAME: Record<string, string> = { feed: "Exchange to our edge", edge: "At our edge", net: "Edge to browser", screen: "Browser to screen", e2e: "Exchange to screen" };
 

@@ -1,4 +1,4 @@
-/* The compact live board (DEC-0049). Fixed sizes, so ticking never moves anything. */
+/* The compact live board (DEC-0052). Fixed sizes, so ticking never moves anything. */
 .lmini { display: grid; grid-template-rows: auto 1fr; gap: 6px; min-height: 0; height: 100%; font-size: 12px; }
 .lmini-head { display: flex; align-items: center; gap: 8px; height: 20px; }
 .lmini-gap { flex: 1; }

@@ -1,4 +1,4 @@
-// The live data wire format (DEC-0049), shared by the fan-out worker (web/live/) and the
+// The live data wire format (DEC-0052), shared by the fan-out worker (web/live/) and the
 // browser. One small JSON shape for every source, so neither side sees a venue's format.
 //
 // Times are milliseconds since 1970 (UTC):

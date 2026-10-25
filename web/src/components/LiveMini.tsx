@@ -1,4 +1,4 @@
-// A compact live board (DEC-0049) for the Terminal (LIVE) and the Workbench: a few streamed
+// A compact live board (DEC-0052) for the Terminal (LIVE) and the Workbench: a few streamed
 // symbols with prices that tick in place, a small live chart of the one picked, and the
 // latency badge. Prices are written straight to the page on each frame, not through React.
 import { useEffect, useRef, useState } from "react";

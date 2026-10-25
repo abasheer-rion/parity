@@ -27,7 +27,9 @@ export interface WebSocketPairCtor { new (): { 0: WorkerSocket; 1: WorkerSocket 
 
 export interface Env {
   LIVE: DurableObjectNamespace;
-  /** Optional: a licensed vendor (DEC-0049). Unset means only the free sources run. */
+  /** Optional: a licensed vendor (DEC-0052). Unset means only the free sources run. */
   VENDOR?: string;
   VENDOR_KEY?: string;
+  /** Sources with unclear terms the owner switched on, comma separated (DEC-0052). */
+  LIVE_ALLOW?: string;
 }

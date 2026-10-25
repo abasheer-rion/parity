@@ -1,4 +1,4 @@
-// Strategy signals in Parity Trade (DEC-0049): a toggle per strategy, markers on the chart,
+// Strategy signals in Parity Trade (DEC-0052): a toggle per strategy, markers on the chart,
 // and a card for each marker with the rule that fired and that strategy's verdict from the
 // 11 tests (REF-0006) in the latest research report.
 import { useEffect, useMemo, useState } from "react";

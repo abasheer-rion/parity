@@ -1,4 +1,4 @@
-// Candles from live trades (DEC-0049). History arrives as finished bars from the source's
+// Candles from live trades (DEC-0052). History arrives as finished bars from the source's
 // own candle endpoint; live updates fold into the bar that is forming. A bar is finished
 // once a trade lands in a later period, and only finished bars feed the strategy signals,
 // so a signal never uses a price from after its bar's close.

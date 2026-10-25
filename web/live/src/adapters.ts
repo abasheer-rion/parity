@@ -1,4 +1,4 @@
-// Source adapters (DEC-0049): each turns one public feed into our trade shape and knows
+// Source adapters (DEC-0052): each turns one public feed into our trade shape and knows
 // how to fetch that source's own candle history. Only sources whose terms allow showing
 // their data on our site are enabled (src/lib/live/sources.ts holds the terms per source;
 // `parity data sources` lists them). A licensed vendor plugs in the same way: set VENDOR

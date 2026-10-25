@@ -1,4 +1,4 @@
-// Every live or near-live source we considered (DEC-0049), with what its terms let us do.
+// Every live or near-live source we considered (DEC-0052), with what its terms let us do.
 // Only "display" sources are switched on in the fan-out (web/live/src/adapters.ts). The
 // same list, with the daily sources, is printed by `parity data sources` (engine
 // providers.py) and explained in REF-0014. Terms were read on the date given.

@@ -1,4 +1,4 @@
-// /live/* (DEC-0049): live market data. Public, no sign-in, so a signed-out check can see it
+// /live/* (DEC-0052): live market data. Public, no sign-in, so a signed-out check can see it
 // working; nothing here is personal.
 //   /live/ws?src=<id>                 WebSocket to that source's fan-out (a Durable Object)
 //   /live/status                      every source's line state, viewers and feed lag (the log)
@@ -11,7 +11,7 @@ import { adapterFor, ADAPTERS, historyFor, universe } from "../../live/src/adapt
 import { SOURCES } from "../../src/lib/live/sources";
 import type { DurableObjectNamespace } from "../../live/src/types";
 
-interface Env { LIVE?: DurableObjectNamespace; VENDOR?: string; VENDOR_KEY?: string; PARITY_CONTACT?: string }
+interface Env { LIVE?: DurableObjectNamespace; VENDOR?: string; VENDOR_KEY?: string; PARITY_CONTACT?: string; LIVE_ALLOW?: string }
 interface Context { request: Request; env: Env; params: { path?: string[] }; waitUntil: (p: Promise<unknown>) => void }
 
 const json = (status: number, body: unknown, maxAge = 0) => new Response(JSON.stringify(body), {

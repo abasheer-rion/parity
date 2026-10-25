@@ -1,7 +1,7 @@
 """Write web/tests/fixtures/signals.json: the engine's own per-bar sides for every
 single-series rule that the Trade chart draws (web/src/lib/signals.ts), on fixed made-up
 prices. The web test compares its port against these, so the chart and the research
-engine cannot quietly disagree (DEC-0049).
+engine cannot quietly disagree (DEC-0052).
 
 Run from the repo root with the engine installed:
     engine/.venv/bin/python scripts/signals_fixture.py
@@ -14,7 +14,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-
 from parity.strategies import _blocks as B
 
 OUT = Path(__file__).resolve().parents[1] / "web" / "tests" / "fixtures" / "signals.json"
@@ -41,15 +40,16 @@ def per_bar(px: pd.Series) -> dict[str, list[int]]:
         universe = ["x"]
 
     for kind in ("macd", "ichimoku"):
-        b = Osc(); b.kind = kind
+        b = Osc()
+        b.kind = kind
         out[kind] = side(b.signal(panel))
-    b = Osc(); b.kind = "bollinger"; b.window = 20; b.band = 2.0
+    b = Osc(kind="bollinger", window=20, band=2.0)
     out["bollinger:20:2"] = side(b.signal(panel))
 
     class Brk(B.BreakoutBook):
         universe = ["x"]
 
-    b = Brk(); b.entry = 55; b.exit = 20
+    b = Brk(entry=55, exit=20)
     # weights() sizes by volatility; the sign is the Turtle state.
     out["breakout:55:20"] = side(b.weights(panel))
     return out

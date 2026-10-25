@@ -54,7 +54,7 @@ export interface ProChartProps {
   fill?: boolean;
   /** No footer line (Parity Trade shows the chart credit in its Settings; the logo stays on the chart). */
   bare?: boolean;
-  /** Live updates (DEC-0049): `bars` of the source are mutated in place; the chart updates the
+  /** Live updates (DEC-0052): `bars` of the source are mutated in place; the chart updates the
    *  forming bar on "last" and redraws once on "new" (a bar finished). No rebuild per tick. */
   live?: LiveBars | null;
   /** Strategy markers on the price series; clicking one calls onMarker with its id. */

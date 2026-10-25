@@ -1,4 +1,4 @@
-# parity-live (DEC-0049): the Durable Object that fans live market data out to browsers.
+# parity-live (DEC-0052): the Durable Object that fans live market data out to browsers.
 # The site's Pages Functions (web/functions/live/) reach it through the LIVE binding in
 # web/wrangler.toml; this worker has no route or domain of its own.
 # Deploy: cd web/live && npx wrangler deploy   (needs a token with Workers Scripts Edit)
