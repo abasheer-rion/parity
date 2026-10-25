@@ -7,7 +7,7 @@ import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
-import { academyUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
+import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 
@@ -23,16 +23,10 @@ const GLOSSARY: NavItem = { href: "#/learn", label: "Glossary", icon: "cap", rou
 const PRODUCT: NavItem[] = [
   { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
   { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"] },
-  {
-    href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy", "compare", "lab"],
-    children: [
-      { href: "#/strategies", label: "All strategies", routes: ["strategies", "strategy"] },
-      { href: "#/compare", label: "Compare", routes: ["compare"] },
-      { href: "#/lab", label: "Try settings", routes: ["lab"] },
-    ],
-  },
+  { href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy"] },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
-  { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
+  // Try settings, What if and Compare live in Parity Workbench, which opens in a new tab (DEC-0043).
+  { href: labUrl(), label: "Workbench", icon: "flask", routes: ["lab", "compare", "scenarios"], external: "Opens Parity Workbench in a new tab: Try settings, What if, Compare, Strategy search and Edge Lab" },
   // Parity Trade is its own full-screen app and opens in a new tab (DEC-0040).
   { href: tradeUrl(), label: "Trade", icon: "graph", routes: ["trade"], external: "Opens Parity Trade in a new tab" },
   {
@@ -77,8 +71,8 @@ const RESEARCH: NavItem[] = [
     ],
   },
   { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
-  { href: "#/search", label: "Strategy search", icon: "search", routes: ["search"] },
-  { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
+  // Strategy search and the Edge Lab live in Parity Workbench, which opens in a new tab (DEC-0043).
+  { href: labUrl("search"), label: "Workbench", icon: "flask", routes: ["search", "edges"], external: "Opens Parity Workbench in a new tab: Strategy search, Edge Lab, Try settings, What if and Compare" },
   // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
   { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },

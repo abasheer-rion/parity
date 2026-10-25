@@ -46,6 +46,13 @@ describe("safeNext: allowed", () => {
     expect(safeNext("/academy/#/progress", parity)).toBe("/academy/#/progress");
   });
 
+  it("keeps / on the lab host too", () => {
+    const lab = { origin: "https://lab.endyland.com", hostname: "lab.endyland.com" };
+    expect(safeNext("/", lab)).toBe("/");
+    expect(safeNext("https://lab.endyland.com/#/search?q=carry", parity)).toBe("https://lab.endyland.com/#/search?q=carry");
+    expect(safeNext("/lab/#/compare", parity)).toBe("/lab/#/compare");
+  });
+
   it("allows the same origin in local development", () => {
     expect(safeNext("http://127.0.0.1:5173/research/", local)).toBe("/research/");
     expect(safeNext("/sim/", local)).toBe("/sim/");

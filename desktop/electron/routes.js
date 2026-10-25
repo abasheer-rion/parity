@@ -2,7 +2,7 @@
 // so `npm test` can run them.
 //
 // The app serves the built site at app://parity/. The website's addresses (parity.endyland.com,
-// sim.endyland.com, trade.endyland.com, academy.endyland.com) and parity:// links all map
+// sim.endyland.com, trade.endyland.com, academy.endyland.com, lab.endyland.com) and parity:// links all map
 // onto paths there; anything else is an outside address and opens in the browser.
 const fs = require("node:fs");
 const path = require("node:path");
@@ -13,7 +13,7 @@ const APP_ORIGIN = "app://parity";
 function siteHosts(origin) {
   const host = new URL(origin).host;
   const domain = host.split(".").length > 2 ? host.split(".").slice(1).join(".") : host;
-  return { [host]: "/", [`sim.${domain}`]: "/sim/", [`trade.${domain}`]: "/trade/", [`academy.${domain}`]: "/academy/" };
+  return { [host]: "/", [`sim.${domain}`]: "/sim/", [`trade.${domain}`]: "/trade/", [`academy.${domain}`]: "/academy/", [`lab.${domain}`]: "/lab/" };
 }
 
 /** Short links the website's functions answer: /s/<strategy> and /sim/<workspace>. */

@@ -593,6 +593,12 @@ def academy_link(k: dict, term_ids: set[str]) -> str:
     m = re.match(r"#/academy/([a-z0-9-]+)(?:/([a-z0-9-]+))?$", href)
     if m:
         return f"/learn/academy/{m.group(1)}/" + (f"{m.group(2)}/" if m.group(2) else "")
+    # Try settings, What if, Compare and Strategy search live in Parity Workbench (DEC-0043).
+    m = re.match(r"#/(lab|scenarios|compare|search)(\?.*)?$", href)
+    if m:
+        view = {"lab": "try", "scenarios": "whatif", "compare": "compare", "search": "search"}[m.group(1)]
+        keep = (m.group(2) or "") if view in ("whatif", "search") else ""
+        return f"/lab/#/{view}{keep}"
     return ("/research/" if k["space"] == "research" else "/app/") + href
 
 

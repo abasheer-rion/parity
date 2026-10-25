@@ -11,21 +11,16 @@ import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
 import { AlgorithmReport } from "./pages/AlgorithmReport";
 import { Catalog } from "./pages/Catalog";
-import { Compare } from "./pages/Compare";
 import { DataPage } from "./pages/DataPage";
 import { DataSources } from "./pages/DataSources";
 import { Explore } from "./pages/Explore";
-import { Lab } from "./pages/Lab";
 import { LedgerPage } from "./pages/LedgerPage";
 import { News } from "./pages/News";
 import { Markets } from "./pages/markets/Markets";
 import { Learn } from "./pages/Learn";
-import { EdgeLab } from "./pages/EdgeLab";
 import { PrivateResearch } from "./pages/PrivateResearch";
 import { Overview } from "./pages/Overview";
 import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
-import { Scenarios } from "./pages/Scenarios";
-import { Search } from "./pages/Search";
 import { Settings } from "./pages/Settings";
 import { SimLanding } from "./pages/SimLanding";
 import { UILibrary } from "./pages/UILibrary";
@@ -39,7 +34,7 @@ import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
 import { Verify } from "./pages/Verify";
 import { SharePanel } from "./pages/verify/Share";
-import { academyHashFor, academyUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
+import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
@@ -88,10 +83,11 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => { scrollToTop(); }, [hash.split("/").slice(0, 3).join("/")]);
 
-  // Sim World (DEC-0020), Parity Trade (DEC-0040) and Parity Academy (DEC-0042) run full
-  // screen on their own sites: any link to #/sim, #/trade or #/academy opens them in a new
-  // tab. Typing #/sim still lands on a small card that links there; typing #/trade or
-  // #/academy goes straight to that app.
+  // Sim World (DEC-0020), Parity Trade (DEC-0040), Parity Academy (DEC-0042) and Parity
+  // Workbench (DEC-0043) run full screen on their own sites: any link to #/sim, #/trade,
+  // #/academy or a Workbench page (#/lab, #/compare, #/scenarios, #/search, #/edges) opens
+  // them in a new tab. Typing #/sim still lands on a small card that links there; typing
+  // one of the others goes straight to that app.
   useEffect(() => {
     const on = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -105,6 +101,11 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       if (/^#\/academy(\/|\?|$)/.test(href)) {
         e.preventDefault();
         window.open(academyUrl(academyHashFor(href)), "_blank", "noopener");
+        return;
+      }
+      if (LAB_ROUTES.includes(href.replace(/^#\/?/, "").split(/[/?]/)[0]) && href.startsWith("#/")) {
+        e.preventDefault();
+        window.open(labUrl(labHashFor(href)), "_blank", "noopener");
         return;
       }
       const m = /^#\/sim(?:\/([a-z]+))?/.exec(href);
@@ -131,7 +132,11 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   useEffect(() => { if (route === "trade") window.location.replace(tradeUrl(tradeHashFor(hash))); }, [route, hash]);
   // Old #/academy links open Parity Academy in place, at the same course and lesson (DEC-0042).
   useEffect(() => { if (route === "academy") window.location.replace(academyUrl(academyHashFor(hash))); }, [route, hash]);
-  if (away || route === "trade" || route === "academy") return null;
+  // Old Try settings, What if, Compare, Strategy search and Edge Lab links open Parity
+  // Workbench in place, with the same strategy filters, scenario or lesson (DEC-0043).
+  const toLab = LAB_ROUTES.includes(route);
+  useEffect(() => { if (toLab) window.location.replace(labUrl(labHashFor(hash))); }, [toLab, hash]);
+  if (away || route === "trade" || route === "academy" || toLab) return null;
 
   // The run picker lives in the sidebar footer, and only on pages that read a run.
   const runPicker = standalone || (batches.length === 0 && source !== "local") ? undefined : (
@@ -155,13 +160,10 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "refs" && <RefsPage focus={dec(arg)} />}
       {route === "start" && <Start report={report} />}
       {route === "how" && <HowItWorks />}
-      {route === "search" && <Search />}
       {route === "ui" && <UILibrary section={arg} />}
-      {route === "scenarios" && <Scenarios />}
       {route === "sim" && <SimLanding />}
       {route === "learn" && <Learn focus={arg} />}
       {route === "catalog" && <Catalog />}
-      {route === "edges" && <EdgeLab focus={dec(arg)} />}
       {route === "private" && <PrivateResearch />}
       {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
@@ -176,9 +178,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {!standalone && !report && !error && <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />}
       {!standalone && report && (
         <>
-          {route === "compare" ? <Compare report={report} /> :
-            route === "lab" ? <Lab report={report} /> :
-            route === "explore" ? <Explore report={report} /> :
+          {route === "explore" ? <Explore report={report} /> :
             route === "strategies" ? <Strategies report={report} query={q} /> :
             route === "strategy" && arg ? <StrategyPage report={report} name={dec(arg)!} /> :
             route === "signals" ? <Signals report={report} /> :

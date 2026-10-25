@@ -30,6 +30,7 @@ test("the website's three addresses stay in the app", () => {
   assert.equal(toAppPath("https://sim.endyland.com/#/fx", O), "/sim/#/fx");
   assert.equal(toAppPath("https://trade.endyland.com/#/alerts", O), "/trade/#/alerts");
   assert.equal(toAppPath("https://academy.endyland.com/#/luck-vs-skill/noise", O), "/academy/#/luck-vs-skill/noise");
+  assert.equal(toAppPath("https://lab.endyland.com/#/search?q=carry", O), "/lab/#/search?q=carry");
   assert.equal(toAppPath("https://trade.endyland.com/login/?next=x", O), "/login/?next=x");
 });
 

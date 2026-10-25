@@ -1,7 +1,7 @@
 // Which side of Parity this page is (DEC-0015). The product app lives at /app/ and the
 // research app at /research/; both load the same code, and each HTML file says which
 // side it is with <html data-space="...">.
-import { ACADEMY_ORIGIN, ORIGIN, SIM_ORIGIN, SITE_DOMAIN, TRADE_ORIGIN } from "./meta";
+import { ACADEMY_ORIGIN, LAB_ORIGIN, ORIGIN, SIM_ORIGIN, SITE_DOMAIN, TRADE_ORIGIN } from "./meta";
 
 export type Space = "product" | "research";
 
@@ -105,13 +105,50 @@ export function academyHashFor(oldHash: string): string {
 
 /**
  * A page of any Parity app, from one of the full-screen apps: product and research pages
- * by their hash, and the routes that moved to their own app (Trade, Terminal, Academy)
- * straight to that app.
+ * by their hash, and the routes that moved to their own app (Trade, Terminal, Academy,
+ * Workbench) straight to that app.
  */
 export function appLink(space: Space | "both", hash: string): string {
   const route = hash.replace(/^#\/?/, "").split(/[/?]/)[0];
   if (route === "trade") return tradeUrl(tradeHashFor(hash));
   if (route === "sim") return simUrl(hash.replace(/^#\/?/, "").split(/[/?]/)[1]);
   if (route === "academy") return academyUrl(academyHashFor(hash));
+  if (LAB_ROUTES.includes(route)) return labUrl(labHashFor(hash));
   return space === "research" ? researchUrl(hash) : productUrl(hash);
+}
+
+// ---------- Parity Workbench, its own full-screen strategy workbench (DEC-0043) ----------
+// /lab/ serves web/lab/index.html, marked <html data-space="lab">: Try settings, What if,
+// Compare, Strategy search and the Edge Lab in one tool. Research numbers are shown read
+// only; nothing done here is written to the research side (DEC-0015).
+
+/** True on the full-screen Parity Workbench app. */
+export const IS_LAB = document.documentElement.dataset.space === "lab";
+
+/** lab.<domain> is live (owner approved and set up lab.endyland.com, 2026-10-24). Set false to fall back to /lab/. */
+export const LAB_SUBDOMAIN = true;
+
+/** Where Parity Workbench opens: its own subdomain on the site's domain, /lab/ elsewhere (previews, localhost). */
+export function labUrl(hash = ""): string {
+  const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
+  return LAB_SUBDOMAIN && onSiteDomain() ? `${LAB_ORIGIN}/${h}` : `/lab/${h}`;
+}
+
+/** The product and research routes that now live in Parity Workbench, and the view each opens. */
+export const LAB_VIEWS: Record<string, string> = { lab: "try", scenarios: "whatif", compare: "compare", search: "search", edges: "edges" };
+export const LAB_ROUTES = Object.keys(LAB_VIEWS);
+
+/**
+ * Where an old product or research link now lives inside Parity Workbench: #/lab opens Try
+ * settings, #/scenarios?... What if with the same scenario, #/compare Compare, #/search?...
+ * the search with the same filters and #/edges/<lesson> that Edge Lab lesson.
+ */
+export function labHashFor(oldHash: string): string {
+  const [path, query = ""] = oldHash.replace(/^#/, "").split("?");
+  const parts = path.split("/").filter(Boolean);
+  const view = LAB_VIEWS[parts[0] ?? ""];
+  if (!view) return "";
+  const lesson = view === "edges" && parts[1] && /^[a-z0-9-]+$/.test(parts[1]) ? `/${parts[1]}` : "";
+  const keep = view === "whatif" || view === "search" ? query : "";
+  return `${view}${lesson}${keep ? `?${keep}` : ""}`;
 }

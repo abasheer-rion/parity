@@ -46,7 +46,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         <ButtonGroup>
           <Button variant="primary" icon="chart" href="#/strategies">Strategies</Button>
           <Button icon="compare" href="#/compare">Compare</Button>
-          <Button icon="flask" href="#/lab">Lab</Button>
+          <Button icon="flask" href="#/lab">Workbench</Button>
           <Button icon="book" href="#/docs">Read</Button>
           <Button icon="search" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search</Button>
         </ButtonGroup>

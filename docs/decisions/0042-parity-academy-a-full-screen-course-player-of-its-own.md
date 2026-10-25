@@ -58,4 +58,5 @@ The courses, the pictures and the quick checks already existed ([DEC-0028](0028-
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 <!-- backlinks:end -->
