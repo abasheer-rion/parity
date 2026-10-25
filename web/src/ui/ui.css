@@ -38,6 +38,7 @@
 .ui-btn:active:not(:disabled) { transform: scale(.99); }
 .ui-btn:focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 1px; box-shadow: none; }
 .ui-btn:disabled, .ui-btn[aria-disabled="true"] { opacity: var(--ds-opacity-disabled, .4); cursor: default; pointer-events: none; }
+.ui-btn-xs { min-height: 22px; padding: 0 8px; gap: 4px; font-size: var(--type-xs); line-height: 18px; }
 .ui-btn-sm { min-height: 24px; padding: 0 10px; font-size: var(--fs-sm); line-height: 20px; }
 .ui-btn-md { min-height: 32px; padding: 4px 16px; }
 .ui-btn-md:has(> .icon:first-child) { padding-left: 12px; }
@@ -55,6 +56,7 @@
 .ui-btn-secondary:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-text-emphasized); }
 .ui-btn-secondary:hover .icon, .ui-btn-tertiary:hover .icon, .ui-btn-outline:hover .icon { color: var(--ds-icon-emphasized); }
 .ui-btn-tertiary { background: transparent; color: var(--ds-text-default); }
+.ui-btn.on:not(.ui-btn-primary) { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 40%, transparent); }
 .ui-btn-tertiary:hover { background: var(--ds-background-secondary); color: var(--ds-text-emphasized); }
 /* "outline" is Mercury's floating button: a raised surface with a soft shadow. */
 .ui-btn-outline { background: var(--ds-background-surface-floating); color: var(--ds-text-default); box-shadow: var(--shadow-2); }
@@ -69,9 +71,15 @@
 .ui-iconbtn-soft { background: var(--ds-background-secondary); }
 .ui-iconbtn-plain { background: transparent; width: 32px; height: 32px; font-size: var(--type-2xl); }
 .ui-iconbtn:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-icon-emphasized); text-decoration: none; }
-.ui-iconbtn.on { color: var(--ds-icon-primary); }
-.ui-linkbtn { border: 0; background: none; padding: 0 4px; color: var(--ds-text-link); font: inherit; font-size: var(--fs-md); cursor: pointer; }
-.ui-linkbtn:hover { color: var(--ds-text-link-hovered); text-decoration: underline; }
+.ui-iconbtn.on { color: var(--color-accent-text); }
+/* A chosen bookmark fills in. */
+.ui-iconbtn.on .icon-bookmark { fill: currentColor; }
+.ui-linkbtn { border: 0; background: none; padding: 0; color: var(--color-link); font: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--color-border-max); text-underline-offset: 3px; transition: text-decoration-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+.ui-linkbtn:hover { text-decoration-color: currentColor; }
+.ui-linkbtn-muted { color: var(--color-text-muted); }
+.ui-linkbtn-danger { color: var(--color-negative); }
+.ui-linkbtn:disabled { opacity: .4; cursor: default; }
+.ui-iconbtn:disabled { opacity: .35; cursor: default; pointer-events: none; }
 
 /* Inputs */
 .ui-input { height: 40px; width: 100%; padding: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--ds-border-input); background: var(--ds-background-input); color: var(--ds-text-default); font: inherit; font-size: var(--fs-md); transition: background-color var(--dur-2) ease-out, border-color var(--dur-2) ease-out; }

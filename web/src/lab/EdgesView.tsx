@@ -9,7 +9,7 @@ import { checkIdea, DATA_OPTIONS, DEFAULT_ANSWERS, QUESTIONS, summary, type Answ
 import { exampleById, examples, intro, lessonById, lessons, reading, type EdgeLink } from "../lib/edgeLab";
 import { termById } from "../lib/glossary";
 import { academyUrl, LAB_VIEWS, labHashFor, productUrl, researchUrl } from "../lib/space";
-import { Badge, Checkbox, Icon, Segmented, Tooltip } from "../ui";
+import { Badge, Checkbox, Segmented, Tooltip, Button, TextButton } from "../ui";
 
 export const EDGE_DRAFT = "parity.edgeLab.draft";
 const SEVERITY: Record<Severity, { label: string; tone: "bad" | "warning" | "neutral" }> = {
@@ -68,7 +68,7 @@ export function EdgesView({ focus }: { focus?: string }) {
       <div className="lb-bar">
         <Segmented size="sm" label="Section" value={tab} onChange={setTab} options={TABS} />
         <span className="lb-gap" />
-        <a className="lb-btn" href={academyUrl("luck-vs-skill")} {...ext}>Course: luck vs skill<Icon name="arrowUpRight" size={12} /></a>
+        <Button size="xs" href={academyUrl("luck-vs-skill")} {...ext} iconRight="arrowUpRight">Course: luck vs skill</Button>
       </div>
       {tab === "check" && <Checklist onLesson={(id) => { window.location.hash = `#/edges/${id}`; }} />}
       {tab === "lessons" && (
@@ -158,7 +158,7 @@ function Checklist({ onLesson }: { onLesson: (id: LessonId) => void }) {
             </div>
           </fieldset>
         ))}
-        <button type="button" className="lb-btn lb-reset" onClick={() => setDraft({ idea: "", answers: DEFAULT_ANSWERS })}>Start over</button>
+        <Button size="xs" className="lb-reset" onClick={() => setDraft({ idea: "", answers: DEFAULT_ANSWERS })}>Start over</Button>
       </form>
 
       <section className="lb-pane" aria-live="polite" aria-label="Pitfalls">
@@ -172,7 +172,7 @@ function Checklist({ onLesson }: { onLesson: (id: LessonId) => void }) {
               <div className="lb-pitfall-h"><Badge tone={SEVERITY[p.severity].tone}>{SEVERITY[p.severity].label}</Badge><strong>{p.title}</strong></div>
               <p>{p.why}</p>
               <p className="lb-dim">
-                Lesson: <button type="button" className="lb-linkbtn" onClick={() => onLesson(p.lesson)}>{lessonById[p.lesson].title}</button>
+                Lesson: <TextButton onClick={() => onLesson(p.lesson)}>{lessonById[p.lesson].title}</TextButton>
                 {p.example && exampleById[p.example] && <> · Our example: {exampleById[p.example].title}</>}
               </p>
             </li>

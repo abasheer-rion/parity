@@ -8,7 +8,7 @@ import { num, pct } from "../lib/format";
 import { productUrl } from "../lib/space";
 import { nameOf } from "../lib/strategyMeta";
 import type { Point, Report, StrategyRun } from "../lib/types";
-import { AnimatedNumber, Icon, LineChart, Tooltip } from "../ui";
+import { AnimatedNumber, Button, LineChart, Tooltip } from "../ui";
 
 // A stat that ticks to its new value as the settings change (REF-0023).
 const tick = (v: number | null | undefined, f: (x: number) => string) => (v == null || !Number.isFinite(v) ? f(NaN) : <AnimatedNumber value={v} format={f} ms={450} />);
@@ -111,7 +111,7 @@ export function TryView({ report }: { report: Report }) {
                   <span className="lb-tip" tabIndex={0}>trials</span>
                 </Tooltip>.
               </span>
-              <a className="lb-btn" href={productUrl(`#/strategy/${encodeURIComponent(run.strategy)}`)} target="_blank" rel="noopener">Strategy page<Icon name="arrowUpRight" size={12} /></a>
+              <Button size="xs" href={productUrl(`#/strategy/${encodeURIComponent(run.strategy)}`)} target="_blank" rel="noopener" iconRight="arrowUpRight">Strategy page</Button>
             </div>
             <dl className="lb-stats">
               <div><dt>Sharpe ratio</dt><dd className={benchSharpe != null ? (current.sharpe > benchSharpe ? "good" : "bad") : ""}>{tick(current.sharpe, (x) => num(x))}</dd><dd className="lb-dim">S&amp;P 500 {num(benchSharpe)}</dd></div>

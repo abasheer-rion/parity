@@ -319,7 +319,7 @@ function Library({ continueHref }: { continueHref: string }) {
           <h1 id="pac-continue" className="pac-hero-title">{target.lesson.title}</h1>
           <p className="pac-meta">{target.course.title} · Lesson {idx + 1} of {target.course.lessons.length} · {target.lesson.minutes} minutes</p>
           <div className="pac-hero-acts">
-            <a className="pac-btn pac-btn-main" href={continueHref}>{r ? "Continue" : "Start the first lesson"}</a>
+            <Button variant="primary" href={continueHref}>{r ? "Continue" : "Start the first lesson"}</Button>
             <span className="pac-kbd-hint"><kbd>C</kbd></span>
           </div>
         </div>
@@ -351,7 +351,7 @@ function Library({ continueHref }: { continueHref: string }) {
                 <Bar done={d} total={c.lessons.length} label={`${c.title} progress`} />
                 <p className="pac-card-foot">
                   <span className="pac-meta">{status(d, c.lessons.length)}</span>
-                  <a className="pac-btn pac-btn-sm" href={lessonHref(c, d === c.lessons.length ? c.lessons[0] : next)}>{action(d, c.lessons.length)}<span className="sr-only"> {c.title}</span></a>
+                  <Button size="sm" href={lessonHref(c, d === c.lessons.length ? c.lessons[0] : next)}>{action(d, c.lessons.length)}<span className="sr-only"> {c.title}</span></Button>
                 </p>
               </div>
             </li>
@@ -381,9 +381,9 @@ function CourseView({ course: c }: { course: Course }) {
           <p className="pac-meta">{c.lessons.length} lessons · {courseMinutes(c)} minutes · {status(d, c.lessons.length)}</p>
           <Bar done={d} total={c.lessons.length} label={`${c.title} progress`} />
           <div className="pac-hero-acts">
-            <a className="pac-btn pac-btn-main" href={lessonHref(c, d === c.lessons.length ? first : next)}>
+            <Button variant="primary" href={lessonHref(c, d === c.lessons.length ? first : next)}>
               {d === 0 ? "Start the course" : d === c.lessons.length ? "Review from the start" : `Continue: ${next.title}`}
-            </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -519,8 +519,8 @@ function QuickCheck({ course: c, lesson: l }: { course: Course; lesson: Lesson }
             onPick={(v) => { setChecked(false); setPicks((ps) => ps.map((x, k) => (k === i ? v : x))); }} />
         ))}
         <div className="pac-check-foot">
-          <button type="submit" className="pac-btn pac-btn-main" disabled={!all}>Check my answers</button>
-          {checked && <button type="button" className="pac-btn" onClick={() => { setChecked(false); setPicks(l.check.map(() => null)); }}>Try again</button>}
+          <Button type="submit" variant="primary" disabled={!all}>Check my answers</Button>
+          {checked && <Button onClick={() => { setChecked(false); setPicks(l.check.map(() => null)); }}>Try again</Button>}
           <p className="pac-score" aria-live="polite">{checked ? scoreLine(right, l.check.length) : all ? "" : "Answer every question to check."}</p>
         </div>
       </form>
@@ -599,7 +599,7 @@ function ProgressView() {
                 <td className="pac-col-bar l"><Bar done={done} total={c.lessons.length} label={`${c.title} progress`} /></td>
                 <td>{a ? `${r} of ${a}` : "n/a"}</td>
                 <td>{when(last) || "n/a"}</td>
-                <td><a className="pac-btn pac-btn-sm" href={lessonHref(c, done === c.lessons.length ? c.lessons[0] : p.nextIn(c))}>{action(done, c.lessons.length)}<span className="sr-only"> {c.title}</span></a></td>
+                <td><Button size="sm" href={lessonHref(c, done === c.lessons.length ? c.lessons[0] : p.nextIn(c))}>{action(done, c.lessons.length)}<span className="sr-only"> {c.title}</span></Button></td>
               </tr>
             ))}
           </tbody>

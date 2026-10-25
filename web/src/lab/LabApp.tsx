@@ -21,7 +21,7 @@ import { date } from "../lib/format";
 import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
-import { Dialog, ErrorBoundary, Icon, lazyPage, Toaster } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, Toaster } from "../ui";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { TryView } from "./TryView";
 import { KeyTable } from "./KeyTable";
@@ -188,10 +188,10 @@ function LabShell() {
         {!missing && current.research && <span className="lb-ro" title="Numbers from the research side. Nothing here changes them.">Research · read only</span>}
         <span className="lb-gap" />
         {runPicker}
-        <button type="button" className="lb-btn" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
-          <Icon name="link" size={13} /><span className="lb-btn-t">Copy link</span>
-        </button>
-        <button type="button" className="lb-icon" onClick={() => setKeysOpen(true)} title="Keys (?)" aria-label="Keys"><Icon name="keyboard" size={15} /></button>
+        <Button size="xs" icon="link" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
+          <span className="lb-btn-t">Copy link</span>
+        </Button>
+        <IconButton icon="keyboard" size="sm" variant="plain" onClick={() => setKeysOpen(true)} label="Keys (?)" />
       </header>
 
       <div className="lb-mid">

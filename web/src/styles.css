@@ -154,7 +154,6 @@ table.heat th.rot span { writing-mode: vertical-rl; transform: rotate(180deg); f
 main.wide { max-width: 1440px; }
 kbd { font: var(--type-2xs) ui-monospace, SFMono-Regular, Menlo, monospace; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; color: var(--text-2); background: var(--surface); }
 .search-btn { display: inline-flex; gap: 8px; align-items: center; }
-.linkish { border: 0; background: none; padding: 0; color: var(--link); font-size: var(--type-xs); }
 .good { color: var(--good); }
 
 .reader { display: grid; grid-template-columns: 230px minmax(0, 1fr) 250px; gap: 32px; align-items: start; }
@@ -816,7 +815,6 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
   .how-sides { grid-template-columns: minmax(0, 1fr); }
   .how-arrow { transform: rotate(90deg); }
 }
-.link-btn { border: 0; background: none; color: var(--ds-text-link); cursor: pointer; font: inherit; font-size: var(--type-sm); padding: 0; }
 
 /* The 2026-10-22 wordmark: serif PARITY letters beside the starburst. */
 .org-name img { display: block; height: 13px; width: auto; }
