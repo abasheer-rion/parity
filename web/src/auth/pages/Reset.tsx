@@ -60,7 +60,7 @@ export function Reset() {
       <form className="pa-form" onSubmit={save} noValidate>
         {/* Lets password managers save the new password against the right account. */}
         <input type="email" name="email" autoComplete="username" value={session.session.user.email ?? ""} readOnly hidden />
-        <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules autoFocus error={form.errorFor("password")} />
+        <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules email={session.session.user.email} autoFocus error={form.errorFor("password")} />
         <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain} error={againError} />
         <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
         {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus error={form.errorFor("nonce")} />}

@@ -77,6 +77,7 @@ Oil, gas, metals and their link to currencies.
 Other trading products, what their users think of them, and what Parity takes from them.
 
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md)
 - [CMP-0003: LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md)
@@ -114,6 +115,7 @@ Crypto markets, used as a comparison.
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - [CMP-0006: TradingView, browser charts and a social network for traders](competitors/0006-tradingview.md)
@@ -157,6 +159,7 @@ Sources, scrapers, caching and data quality.
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
+- [DEC-0054: The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
@@ -172,6 +175,7 @@ Sources, scrapers, caching and data quality.
 - [REF-0015: Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
+- [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md)
 - [CMP-0003: LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md)
 - [CMP-0007: Interactive Brokers, a global broker with four trading apps](competitors/0007-interactive-brokers.md)
@@ -375,6 +379,7 @@ Hosting, CI/CD, database and costs.
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 - [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
+- [DEC-0054: The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
@@ -383,6 +388,7 @@ Hosting, CI/CD, database and costs.
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
+- [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0014: Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
@@ -492,6 +498,7 @@ News, macro releases and event-driven signals.
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [ALG-0008: Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md)
@@ -587,6 +594,7 @@ Private equity, venture, private credit, real estate and infrastructure, and how
 
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 
 ## process
 
@@ -617,6 +625,7 @@ How the team works together.
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [GDE-0001: Getting started](guides/0001-getting-started.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [GDE-0003: Writing and filing docs](guides/0003-writing-docs.md)
@@ -625,6 +634,7 @@ How the team works together.
 - [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
+- [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
@@ -659,6 +669,7 @@ A specific trading idea or its implementation.
 - [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](competitors/0004-metatrader-4-and-5.md)

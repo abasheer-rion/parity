@@ -9,7 +9,7 @@ import { explain, requireClient } from "../client";
 import { LEAVING, Notice, params as pageParams, Submit, useSubmit } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
 import { go } from "../nav";
-import { continueTo } from "../session";
+import { continueTo, welcomeNew } from "../session";
 
 const COPY: Record<string, { title: string; lead: string; button: string }> = {
   email: { title: "Confirm your email", lead: "One click to confirm your address and sign in.", button: "Confirm and continue" },
@@ -42,6 +42,8 @@ export function Verify() {
         : "Your email address is changed.");
       return;
     }
+    // A new account gets the short welcome first; it ends at next.
+    if (type === "signup") { await welcomeNew(show); return LEAVING; }
     if ((await continueTo(next, go)) === "second-step") show("login", { mfa: true });
     return LEAVING;
   });

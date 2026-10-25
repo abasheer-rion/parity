@@ -72,6 +72,22 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run smoke
 
+  # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
+  # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
+  # apply to the hosted project by themselves on merge, so they are tried here first.
+  db:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Postgres 17
+        run: |
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -q postgresql-17
+      - name: Apply every migration and run the SQL tests
+        env:
+          PGBIN: /usr/lib/postgresql/17/bin
+        run: supabase/tests/local.sh
+
   desktop:
     runs-on: ubuntu-latest
     defaults:

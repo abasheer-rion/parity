@@ -82,6 +82,7 @@ export class LiveHub {
   private sparkDirty = new Set<string>();
   private boardFullDue = false;
   private vcache: Viewer[] | null = null;
+  private lastExpiry = 0;
   private stats = { started: Date.now(), viewersSeen: 0, upstreamOpens: 0, reconnects: 0, upstreamMsgs: 0, trades: 0, sent: 0, refused: 0, expired: 0, bookMsgs: 0, boardMsgs: 0, feedLagMs: [] as number[] };
 
   constructor(private state: DurableObjectState, private env: Env) {}
@@ -485,6 +486,8 @@ export class LiveHub {
   /** Every 250 ms: changed books and new trades lists to their subscribers. */
   private flush() {
     const now = Date.now();
+    // Team-only sources: cut off expired sign-ins even when nobody sends a message.
+    if (this.adapter?.internal && now - this.lastExpiry > 5_000) { this.lastExpiry = now; this.expireViewers(); }
     if (this.bookDirty.size) {
       const msgs = new Map<string, string>();
       for (const s of this.bookDirty) if (this.books.has(s)) msgs.set(`B:${s}`, JSON.stringify(this.bookMsg(s, now)));
@@ -576,7 +579,7 @@ export class LiveHub {
     const body = {
       ...this.stats,
       src: this.src, feed: this.adapter?.feed, internal: !!this.adapter?.internal, upstream: this.upState, why: this.why || null,
-      viewers: v.length, symbols: [...this.upTrades], books: [...this.upBooks], overviewRows: this.board.size, overviewOn: this.boardOn || !!this.boardPoller,
+      viewers: v.length, ...(this.adapter?.internal ? {} : { symbols: [...this.upTrades], books: [...this.upBooks] }), overviewRows: this.board.size, overviewOn: this.boardOn || !!this.boardPoller,
       lastUpstreamMsgAgoMs: this.lastUpMsg ? Date.now() - this.lastUpMsg : null,
       feedLagMs: { p50: q(0.5), p95: q(0.95), p99: q(0.99), n: lag.length },
       folded: this.conflator.folded, now: Date.now(),

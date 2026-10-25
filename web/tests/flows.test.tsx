@@ -280,13 +280,49 @@ describe("sign up and verify", () => {
     await alertSays("Too many emails were sent.");
   });
 
-  it("confirms with the 6-digit code, then lands in the app", async () => {
+  it("confirms with the 6-digit code, shows the welcome, then lands where you started", async () => {
     at("/signup/?check=amanda%40example.com&next=%2Fresearch%2F");
     page();
     type("Code from the email", "123456");
     click("Confirm email");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("/research/"));
+    await screen.findByRole("heading", { name: "Welcome to Parity" });
     expect(h.supabase.auth.verifyOtp).toHaveBeenCalledWith({ email: "amanda@example.com", token: "123456", type: "signup" });
+    expect(h.go).not.toHaveBeenCalled();
+    click("Skip for now");
+    expect(h.go).toHaveBeenCalledWith("/research/");
+  });
+
+  it("walks through the welcome: what Parity is, picks, then Verify or Trade", async () => {
+    at("/signup/?check=amanda%40example.com");
+    page();
+    type("Code from the email", "123456");
+    click("Confirm email");
+    await screen.findByRole("heading", { name: "Welcome to Parity" });
+    expect(screen.getByRole("img", { name: "Step 1 of 3" })).toBeTruthy();
+    click("Continue");
+    await screen.findByRole("heading", { name: "What do you want to do first?" });
+    const trade = screen.getByRole("button", { name: "Practise on a demo account" });
+    expect(trade).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(trade);
+    expect(trade).toHaveAttribute("aria-pressed", "true");
+    click("Continue");
+    await screen.findByRole("heading", { name: "Where to start" });
+    expect(JSON.parse(localStorage.getItem("parity.interests.v1") ?? "[]")).toEqual(["trade"]);
+    // Trade was picked and Verify was not, so Trade comes first.
+    const links = screen.getAllByRole("link").filter((a) => a.classList.contains("pa-choice"));
+    expect(links.map((a) => a.querySelector(".pa-choice-title")?.textContent)).toEqual(["Parity Trade", "Verify"]);
+    fireEvent.click(screen.getByRole("link", { name: /Verify/ }));
+    expect(h.go).toHaveBeenCalledWith("/app/#/verify");
+    expect(screen.getByRole("button", { name: "Go to the app" })).toBeTruthy();
+  });
+
+  it("asks for the authenticator code instead of the welcome when the new account has one", async () => {
+    at("/signup/?check=amanda%40example.com");
+    h.supabase.auth.mfa.getAuthenticatorAssuranceLevel.mockResolvedValue({ data: { currentLevel: "aal1", nextLevel: "aal2" }, error: null } as never);
+    page();
+    type("Code from the email", "123456");
+    click("Confirm email");
+    await screen.findByRole("heading", { name: "Two-step sign-in" });
   });
 
   it("resends the confirmation email", async () => {
@@ -305,7 +341,10 @@ describe("sign up and verify", () => {
     type("Choose a password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("/sim/"));
+    await screen.findByRole("heading", { name: "Welcome to Parity" });
+    click("Continue");
+    click("Skip for now");
+    expect(h.go).toHaveBeenCalledWith("/sim/");
   });
 
   it("verifies an email link after one click and follows its next", async () => {
@@ -315,6 +354,27 @@ describe("sign up and verify", () => {
     click("Confirm and continue");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.endyland.com/sim/"));
     expect(h.supabase.auth.verifyOtp).toHaveBeenCalledWith({ type: "email", token_hash: "abc" });
+  });
+
+  it("shows the welcome after a sign-up confirmation link", async () => {
+    at("/verify/?type=signup&token_hash=abc&next=%2Fresearch%2F");
+    page();
+    click("Confirm and continue");
+    await screen.findByRole("heading", { name: "Welcome to Parity" });
+    expect(path()).toBe("/verify/?type=signup&token_hash=abc&next=%2Fresearch%2F");
+    click("Skip for now");
+    expect(h.go).toHaveBeenCalledWith("/research/");
+  });
+
+  it("grades the new password with a bar and says the strength in words", async () => {
+    at("/signup/");
+    page();
+    await toNewPassword();
+    type("Choose a password", "abcdefgh12");
+    expect(screen.getByText("Password strength: Easy to guess")).toBeTruthy();
+    type("Choose a password", "correct horse 42");
+    expect(screen.getByText("Password strength: Strong")).toBeTruthy();
+    expect(screen.getByRole("list", { name: "Password rules" }).textContent).toContain("At least 10 characters, done");
   });
 
   it("falls back to the app when an email link's next is the bare site address", async () => {

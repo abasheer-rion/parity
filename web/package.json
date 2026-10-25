@@ -18,7 +18,8 @@
     "content": "node --experimental-strip-types scripts/content/render.ts",
     "deeplinks": "node scripts/deeplinks.mjs",
     "auth:panel": "node scripts/auth-panel.mjs",
-    "auth:shots": "node scripts/auth-shots.mjs"
+    "auth:shots": "node scripts/auth-shots.mjs",
+    "auth:motion": "node scripts/auth-motion.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",

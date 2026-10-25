@@ -3,7 +3,7 @@
 import { ROUTES } from "./config";
 import { withNext } from "./redirect";
 
-export type View = "login" | "signup" | "reset" | "verify";
+export type View = "login" | "signup" | "reset" | "verify" | "welcome";
 
 /** State a form hands to the next one: the address to confirm, an invite, a second step. */
 export interface Carry {
@@ -20,6 +20,7 @@ export const TITLES: Record<View, string> = {
   signup: "Sign up · Parity",
   reset: "Reset password · Parity",
   verify: "Confirm · Parity",
+  welcome: "Welcome · Parity",
 };
 
 /** Which form a sign-in page's path shows. */
@@ -44,5 +45,7 @@ export function authUrl(view: View, next: string, carry: Carry = {}): string {
     case "signup": return withNext(carry.check ? `${ROUTES.signup}?check=${encodeURIComponent(carry.check)}` : ROUTES.signup, next);
     case "reset": return withNext(carry.invite ? `${ROUTES.reset}?from=invite` : ROUTES.reset, next);
     case "verify": return ROUTES.verify;
+    // Only reached in place, after signing up; it has no page of its own.
+    case "welcome": return next;
   }
 }

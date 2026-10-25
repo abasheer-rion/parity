@@ -15667,7 +15667,8 @@
       "used_in": [
         "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "note": "Linked in this repo as: CFTC advisory",
       "metadata": {
@@ -22163,7 +22164,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0004-glossary.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -22228,7 +22230,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0004-glossary.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -25506,7 +25509,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/competitors/0006-tradingview.md",
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -25706,7 +25710,8 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -25838,7 +25843,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -25927,7 +25933,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/competitors/0023-quantconnect.md",
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -26039,7 +26046,8 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -28645,7 +28653,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29555,7 +29564,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29576,7 +29586,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29618,7 +29629,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29660,7 +29672,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29681,7 +29694,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29702,7 +29716,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29723,7 +29738,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29975,7 +29991,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0007-interactive-brokers.md"
+        "docs/competitors/0007-interactive-brokers.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -30500,7 +30517,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0009-robinhood.md"
+        "docs/competitors/0009-robinhood.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -31886,7 +31904,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0006-tradingview.md"
+        "docs/competitors/0006-tradingview.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -32560,7 +32579,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0008-thinkorswim.md"
+        "docs/competitors/0008-thinkorswim.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -33043,7 +33063,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0010-webull.md"
+        "docs/competitors/0010-webull.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -34388,7 +34409,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0007-interactive-brokers.md"
+        "docs/competitors/0007-interactive-brokers.md",
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
       ],
       "metadata": {
         "source": "repo",
@@ -35464,6 +35486,3477 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-021a44af",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "imarcgroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.imarcgroup.com/online-trading-platform-market-statistics",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-03ac1ba6",
+      "type": "news",
+      "authors": [],
+      "year": null,
+      "title": "The Block",
+      "venue": "theblock.co",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.theblock.co/post/390544",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-070688d5",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood 10-Q",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001783879/000178387926000114/hood-20260630.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0bf698b7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "yougov.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://yougov.com/en-us/articles/55145-diy-investors-are-americans-using-ai-tools-to-make-investment-decisions",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0f79d33f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Yahoo Finance",
+      "venue": "finance.yahoo.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://finance.yahoo.com/news/private-investment-platform-linqto-files-105229723.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0fb97542",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "StockBrokers.com Fidelity",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/fidelity",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-106f6a07",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "American Banker",
+      "venue": "americanbanker.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.americanbanker.com/news/sec-rule-would-let-investors-take-exam-to-qualify-as-accredited",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-151e2b4a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood FY2025",
+      "venue": "finviz.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://finviz.com/news/306445/robinhood-reports-fourth-quarter-and-full-year-2025-results",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-19a87eee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "thesaasnews.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.thesaasnews.com/news/catalyst-raises-30m-seed",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1a5b2e80",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NerdWallet Robinhood",
+      "venue": "nerdwallet.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nerdwallet.com/reviews/investing/brokers/robinhood",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1ea628d9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "The TRADE",
+      "venue": "thetradenews.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.thetradenews.com/the-trade-predictions-series-2026-retail-retail-retail/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-21e19296",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Global Trading",
+      "venue": "globaltrading.net",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.globaltrading.net/?p=39306",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-257ff13c",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC v. Robinhood",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/newsroom/press-releases/2025-5",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-29edb5d6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fintech.global",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fintech.global/2026/02/19/monark-secures-8-1m-to-expand-retail-private-access/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2f6eb5b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 outages",
+      "venue": "investmentnews.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investmentnews.com/fintech/investors-frustrated-as-failures-plague-brokerage-platforms/256046",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3090dcf7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hiive to Clarity",
+      "venue": "clarity.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.clarity.com/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-32d958e6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Schwab Portfolio Insights",
+      "venue": "pressroom.aboutschwab.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Launches-AI-Powered-Capability-That-Helps-Investors-Understand-Portfolio-Performance-and-Market-Activity/default.aspx",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-35030c6a",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Schwab Q3 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0000316709/000031670926000035/a3q26exhibit991.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-360956b0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "augment.market",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://augment.market/blog",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3644b717",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "placera.se",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.placera.se/pressmeddelanden/hsbc-the-trust-threshold-the-majority-of-u-s-investors-use-ai-to-explore-but-only-7-say-it-drove-their-last-major-decision-20260624",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3e0013dc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FINRA v. Webull",
+      "venue": "law360.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law360.com/articles/2338179",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3f0a70fe",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/en-us/news-and-analysis/latest-news/press-release/us-retail-investors-flock-to-ai-tools-with-usage-surging-75-in-one-year/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-45c15c1b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "London Business School",
+      "venue": "london.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.london.edu/news/amateur-investors-lost-big-during-pandemic-2034",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-48f4bfef",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Q2 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001679788/000167978826000087/q226earningsdeck_sec.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-514b74f5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FINRA v. Robinhood",
+      "venue": "wealthmanagement.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.wealthmanagement.com/regulation-compliance/robinhood-to-pay-finra-customers-29-75m-for-violations",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-56e61f0a",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Webull 20-F",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001866364/000121390026041653/ea0283691-20f_webull.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5979fcf4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Angel Investors Network",
+      "venue": "angelinvestorsnetwork.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://angelinvestorsnetwork.com/venture-capital/equityzen-vs-hiive-2026",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5d54f1f7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bullish Bears",
+      "venue": "bullishbears.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bullishbears.com/tipranks-review/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5ea25ed9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Fidelity Q2 2026",
+      "venue": "about.fidelity.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://about.fidelity.com/data-and-insights/q2-2026-business-update",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5eab4029",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro Q2 2026",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/en-us/news-and-analysis/latest-news/press-release/etoro-reports-second-quarter-2026-results/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5ee2b970",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Interactive Brokers",
+      "venue": "finviz.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://finviz.com/news/397937/interactive-brokers-group-reports-brokerage-metrics-and-other-financial-information-for-september-2026-includes-reg-nms-execution-statistics",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-62bb1e50",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Koyfin pricing",
+      "venue": "koyfin.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.koyfin.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7244c34d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg Opinion via WealthManagement",
+      "venue": "wealthmanagement.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.wealthmanagement.com/equities/there-are-stock-gems-mine-bots-take-over",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-753de2c6",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "FINRA Foundation",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/media-center/newsreleases/2025/new-finra-foundation-research-examines-shifting-investor-behaviors",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-805baeb2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Seward & Kissel",
+      "venue": "sewkis.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sewkis.com/publications/sec-withdraws-14-proposed-rules-impacting-investment-advisers-investment-companies-and-broker-dealers",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89fbee0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Fundrise Innovation Fund (VCX)",
+      "venue": "fundrise.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fundrise.com/innovation",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8a61dc52",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Investment Trends via Finance Magnates",
+      "venue": "financemagnates.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.financemagnates.com/forex/analysis/investors-ditch-brokers-over-bad-websites-and-apps-not-high-fees/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9e1420cb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "SEC accredited report",
+      "venue": "cooleypubco.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cooleypubco.com/2023/12/18/staff-report-definition-accredited-investor/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a33830e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NerdWallet Public",
+      "venue": "nerdwallet.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nerdwallet.com/reviews/investing/brokers/public",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a4298c2f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "costbench.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://costbench.com/software/financial-data-terminals/bloomberg-terminal/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a445258d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Harvard Law forum",
+      "venue": "corpgov.law.harvard.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://corpgov.law.harvard.edu/?p=173844",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a70b7ab9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg Law",
+      "venue": "news.bloomberglaw.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.bloomberglaw.com/esg/kalshi-pings-between-state-us-courts-as-cftc-grasps-for-control",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a940b923",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "fintech.global",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fintech.global/2025/12/03/1-in-5-investors-refuse-to-trust-ai-with-money/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ad566343",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "cbinsights.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cbinsights.com/company/autopilot-2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b16f3589",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "StockBrokers.com Seeking Alpha",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/tools/seeking-alpha",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b2798f6a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Seeking Alpha",
+      "venue": "about.seekingalpha.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://about.seekingalpha.com/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b9bbe1b6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "pluang.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pluang.com/en/news-feed/seperempat-perusahaan-tanpa-analisis-penutup",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bd25f99e",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "FINRA Foundation",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/media-center/newsreleases/2026/finra-foundation-research-examines-characteristics-behaviors-outcomes",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bf766f8c",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SoFi Invest",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001818874/000181887426000050/a2026q2earningsrelease.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c0640990",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Forge and Yahoo",
+      "venue": "silicon.co.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.silicon.co.uk/press-release/forge-global-and-yahoo-finance-launch-industrys-first-private-market-hub-expanding-access-to-private-market-investment-opportunities",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c1320121",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Webull Q2 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001866364/000121390026091702/ea030257601ex99-1.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c588004c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "de Silva, Smith, So",
+      "venue": "quantpedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpedia.com/how-retail-losses-money-in-option-trading/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c83ab633",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Ventures Fund I",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/newsroom/introducing-rvi",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ca888ab3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "SoFi J.D. Power",
+      "venue": "sofi.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sofi.com/press/sofi-ranks-1-in-jd-power-2026-u-s-investor-satisfaction-study-for-diy-investors/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ce41b2dc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "news.gallup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.gallup.com/poll/266807/percentage-americans-owns-stock.aspx",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d33c36b1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/EquityZen",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d4ea6435",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "claude.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.ai/artifact/NcBntdPGZJAMaycnJyBFHr",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d6f2c87d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NerdWallet eToro",
+      "venue": "nerdwallet.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nerdwallet.com/reviews/investing/brokers/etoro",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d98cc7cf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Trade Ideas",
+      "venue": "trade-ideas.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.trade-ideas.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dd2beb19",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "PDT rule removal",
+      "venue": "quantinsti.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantinsti.com/articles/finra-pdt-rule-removal-2026/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dfc157c6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "HBS Library",
+      "venue": "library.hbs.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.library.hbs.edu/databases-cases-and-more/datasets/factset-revere-supply-chain-relationships",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e43b5787",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NeuGroup on Bloomberg",
+      "venue": "connect.neugroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://connect.neugroup.com/public/blogs/bloomberg-terminals-how-much-more-youll-pay-next-year",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e7638112",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Q2 2026",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/0001783879/000178387926000113/q22026robinhoodexhibit991.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f3cf87b6",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC v. Linqto executives",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/enforcement-litigation/litigation-releases/lr-26672",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f83c73bb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "marketsmedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.marketsmedia.com/icapital-completes-capital-raise-over-820m/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fb00831d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Futu / Moomoo",
+      "venue": "quiverquant.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quiverquant.com/news/Futu+Holdings+Reports+Second+Quarter+2026+Financial+Results",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fe62906c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Forge Global",
+      "venue": "pressroom.aboutschwab.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Completes-Acquisition-of-Forge-Global/default.aspx",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-728f3a2d",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-2(a)(11)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8c501c52",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC Release IA-1092",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/rules/interp/1987/ia-1092.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-799233d2",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "Lowe v. SEC, 472 U.S. 181 (1985)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/supremecourt/text/472/181",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6bf1c7a2",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-3a",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-3a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9344221",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 275.203A-2(e)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/275.203A-2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-422993cc",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-18a(d)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-18a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-59e1e38c",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-6",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-6",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a96b27e5",
+      "type": "web-page",
+      "authors": [
+        "NASAA"
+      ],
+      "year": null,
+      "title": "NASAA, contact your state or provincial securities regulator",
+      "venue": "nasaa.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nasaa.org/contact-your-regulator/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f4d72904",
+      "type": "regulator",
+      "authors": [
+        "eCFR"
+      ],
+      "year": null,
+      "title": "17 CFR 275.206(4)-1, investment adviser marketing",
+      "venue": "ecfr.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecfr.gov/current/title-17/chapter-II/part-275/section-275.206(4)-1",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-207d0d70",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 77q",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/77q",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-90f193cf",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 78c(a)(4)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/78c",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-241a7d72",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 78o",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/78o",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-45543912",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "proposed exemptive order, Release 34-90112",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/files/rules/exorders/2020/34-90112.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-566dbe39",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2040",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2040",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b16de26a",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2210",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2210",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bbb7aab6",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2214",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2214",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-72320f80",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA BrokerCheck",
+      "venue": "brokercheck.finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://brokercheck.finra.org/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6084c5e4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 1a(12)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/1a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-573ac97e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 6m(1)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/6m",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0f361ed9",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 4.14(a)(9)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/4.14",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-565cba07",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 6o",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/6o",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d553dc5b",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 5.1(e)(1)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/5.1",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-001d4780",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 5.3(a)(3)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/5.3",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3408c5f4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 45",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/45",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-93f60550",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 255",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-255",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1b543154",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "FTC's Endorsement Guides: what people are asking",
+      "venue": "ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cd5097d5",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 465",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-465",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c8b549db",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 8403",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/8403",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-edae72e8",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Bus. and Prof. Code 17600 and following",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=3.&chapter=1.&article=9",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f7d3a3f4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. chapter 103",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/chapter-103",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4de61b5e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 316",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-316",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-10eeb643",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "CAN-SPAM Act: a compliance guide for business",
+      "venue": "ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c998e9d1",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. chapter 91",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/chapter-91",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-845b11ff",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 312",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-312",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ea064bc1",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "42 U.S.C. 12182",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/42/12182",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e87cb362",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "DOJ guidance on web accessibility and the ADA",
+      "venue": "ada.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ada.gov/resources/web-guidance/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ced4ac40",
+      "type": "web-page",
+      "authors": [
+        "W3C"
+      ],
+      "year": null,
+      "title": "WCAG 2.2",
+      "venue": "w3.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4535bffd",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Directive 2019/882",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-36df9ddb",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "File an ADA complaint",
+      "venue": "ada.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ada.gov/file-a-complaint/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d58c12ea",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 6809",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/6809",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0498644e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 314",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-314",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d3e5dc6a",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR 314.2",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/314.2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d6abc0ba",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "31 U.S.C. 5312",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/31/5312",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cfb3dd9b",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "31 CFR 1010.100",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/31/1010.100",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-32e3696e",
+      "type": "web-page",
+      "authors": [
+        "FinCEN"
+      ],
+      "year": null,
+      "title": "FinCEN 2019 guidance on crypto business models",
+      "venue": "fincen.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-certain-business-models",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-94417ffa",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Civ. Code 1798.100 and following",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?division=3.&part=4.&lawCode=CIV&title=1.81.5",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a1d8aeae",
+      "type": "web-page",
+      "authors": [
+        "California Privacy Protection Agency"
+      ],
+      "year": null,
+      "title": "CCPA monetary threshold CPI adjustment",
+      "venue": "cppa.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cppa.ca.gov/regulations/cpi_adjustment.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e1c841a6",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Civ. Code 1798.140, CCPA definitions",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.140",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89b5bf18",
+      "type": "web-page",
+      "authors": [
+        "Virginia General Assembly"
+      ],
+      "year": null,
+      "title": "Va. Code 59.1-575 and following",
+      "venue": "law.lis.virginia.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://law.lis.virginia.gov/vacodefull/title59.1/chapter53/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-42d669e4",
+      "type": "web-page",
+      "authors": [
+        "Colorado Attorney General"
+      ],
+      "year": null,
+      "title": "Colorado Privacy Act, Colorado Attorney General",
+      "venue": "coag.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://coag.gov/resources/colorado-privacy-act/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5c25e6cd",
+      "type": "web-page",
+      "authors": [
+        "Texas Legislature"
+      ],
+      "year": null,
+      "title": "Tex. Bus. and Com. Code ch. 541",
+      "venue": "statutes.capitol.texas.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/BC/htm/BC.541.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b4b6d1cb",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "6 Del. C. ch. 12D",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title6/c012d/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d0fec03f",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "6 Del. C. ch. 12C",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title6/c012c/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c120834a",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "8 Del. C. 132",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title8/c001/sc01/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-af44660b",
+      "type": "web-page",
+      "authors": [
+        "Delaware Division of Corporations"
+      ],
+      "year": null,
+      "title": "Delaware franchise taxes and annual reports",
+      "venue": "corp.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://corp.delaware.gov/paytaxes/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b0b2159",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation (EU) 2016/679",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5816f5ff",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "UK GDPR",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/eur/2016/679/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a96d54ca",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Data Protection Act 2018",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-16d92c90",
+      "type": "web-page",
+      "authors": [
+        "European Data Protection Board"
+      ],
+      "year": null,
+      "title": "EDPB members, the EU data protection authorities",
+      "venue": "edpb.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.edpb.europa.eu/about-edpb/about-edpb/members_en",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-366ccbbd",
+      "type": "web-page",
+      "authors": [
+        "UK Information Commissioner's Office"
+      ],
+      "year": null,
+      "title": "ICO, make a complaint",
+      "venue": "ico.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ico.org.uk/make-a-complaint/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3eab3b6f",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "ePrivacy Directive 2002/58/EC",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2002/58/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c28cae6b",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Privacy and Electronic Communications Regulations 2003, regulation 6",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2003/2426/regulation/6",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-49e6435f",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Directive 2014/65/EU",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2014/65/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5df74e1b",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Delegated Regulation 2017/565, Article 9",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/eur/2017/565/article/9",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-79878805",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 596/2014",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2014/596/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fe936d8d",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Delegated Regulation 2016/958",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg_del/2016/958/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-982ce5eb",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 2023/1114",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-92ba734e",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 2022/2065",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-93fa1a99",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "FSMA s21",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/ukpga/2000/8/section/21",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-429de9ef",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "SI 2005/1529",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2005/1529/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4fa3b8bc",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "RAO article 54",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2001/544/article/54",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fdf44536",
+      "type": "regulator",
+      "authors": [
+        "UK Financial Conduct Authority"
+      ],
+      "year": null,
+      "title": "FCA PERG 7",
+      "venue": "handbook.fca.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.handbook.fca.org.uk/handbook/PERG/7/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9addb8c1",
+      "type": "regulator",
+      "authors": [
+        "UK Financial Conduct Authority"
+      ],
+      "year": null,
+      "title": "FCA PERG 8",
+      "venue": "handbook.fca.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.handbook.fca.org.uk/handbook/PERG/8/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4b357e64",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC Crypto Task Force",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/about/crypto-task-force",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ef3848d4",
+      "type": "regulator",
+      "authors": [
+        "US Commodity Futures Trading Commission"
+      ],
+      "year": null,
+      "title": "CFTC press release 8680-23",
+      "venue": "cftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/8680-23",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4135bcba",
+      "type": "web-page",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "Investor.gov, SEC Office of Investor Education and Advocacy",
+      "venue": "investor.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.investor.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-273b596b",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC tips, complaints and referrals",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/tcr",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ce2acb3d",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC investor complaint form",
+      "venue": "help.sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.sec.gov/s/investor-complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fb240486",
+      "type": "regulator",
+      "authors": [
+        "US Commodity Futures Trading Commission"
+      ],
+      "year": null,
+      "title": "CFTC, submit a tip or complaint",
+      "venue": "cftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-11d39c8a",
+      "type": "regulator",
+      "authors": [
+        "National Futures Association"
+      ],
+      "year": null,
+      "title": "NFA BASIC, background affiliation status information center",
+      "venue": "nfa.futures.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nfa.futures.org/basicnet/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-54f5a239",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA, file a complaint",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/investors/have-problem/file-complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-730daf38",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "FTC ReportFraud",
+      "venue": "reportfraud.ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://reportfraud.ftc.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e7b7c34c",
+      "type": "web-page",
+      "authors": [
+        "NAAG"
+      ],
+      "year": null,
+      "title": "NAAG, find my attorney general",
+      "venue": "naag.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.naag.org/find-my-ag/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a565123",
+      "type": "web-page",
+      "authors": [
+        "California Attorney General"
+      ],
+      "year": null,
+      "title": "California Attorney General, CCPA",
+      "venue": "oag.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://oag.ca.gov/privacy/ccpa",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4cd601d5",
+      "type": "web-page",
+      "authors": [
+        "California Privacy Protection Agency"
+      ],
+      "year": null,
+      "title": "California Privacy Protection Agency, file a complaint",
+      "venue": "cppa.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cppa.ca.gov/webapplications/complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7f9ea358",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "US Department of Justice Civil Rights Division, report a violation",
+      "venue": "civilrights.justice.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.civilrights.justice.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     }

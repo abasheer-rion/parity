@@ -12,6 +12,7 @@ export const LEGAL_LINKS: [string, string][] = [
   ["/legal/cookies/", "Cookies"],
   ["/legal/accessibility/", "Accessibility"],
   ["/legal/risk/", "Risk"],
+  ["/legal/regulatory/", "Regulatory"],
 ];
 
 // Titles, descriptions, icons and share tags come from src/lib/meta.ts (plugins/meta.ts).

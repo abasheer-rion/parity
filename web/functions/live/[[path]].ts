@@ -15,6 +15,8 @@
 // requests so a browser cannot forge it.
 import { adapterFor, ADAPTERS, historyFor, universe } from "../../live/src/adapters";
 import { isInternal, SOURCES } from "../../src/lib/live/sources";
+import { validSymbol } from "../../src/lib/live/protocol";
+import { TF_MS } from "../../live/src/base";
 import { teamPass } from "../../src/lib/live/teamGate";
 import type { DurableObjectNamespace, WebSocketPairCtor, WorkerSocket } from "../../live/src/types";
 
@@ -26,8 +28,9 @@ interface Env {
 }
 interface Context { request: Request; env: Env; params: { path?: string[] }; waitUntil: (p: Promise<unknown>) => void }
 
-/** Pages that may call /live with a sign-in from another origin: the desktop app's bundled copy. */
-const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/([a-z0-9-]+\.)*endyland\.com|https:\/\/([a-z0-9-]+\.)*parity-research\.pages\.dev)$/;
+/** Pages that may call /live with a sign-in from another origin: Parity's own addresses, its
+ *  preview deploys and the desktop app's bundled copy. Exact hosts, not every subdomain. */
+const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/((www|trade|sim|academy|lab)\.)?parity\.endyland\.com|https:\/\/(trade|sim|academy|lab)\.endyland\.com|https:\/\/[a-z0-9-]+\.parity-research\.pages\.dev|https:\/\/parity-research\.pages\.dev)$/;
 
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("Origin") ?? "";
@@ -135,7 +138,10 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
     const rows = await Promise.all(ADAPTERS.filter((a) => a.enabled(env)).map(async (a) => {
       try {
         const r = await env.LIVE!.get(env.LIVE!.idFromName(a.id)).fetch(`https://hub/status?src=${a.id}`);
-        return await r.json();
+        const body = (await r.json()) as Record<string, unknown>;
+        // Public status: for team-only sources, not which symbols the team is watching.
+        if (isInternal(a.id)) { delete body.symbols; delete body.books; }
+        return body;
       } catch (e) { return { src: a.id, error: String(e) }; }
     }));
     return json(request, 200, { now: Date.now(), sources: rows });
@@ -145,10 +151,13 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
 
   if (route === "history") {
     const sym = url.searchParams.get("s") ?? "", tf = url.searchParams.get("tf") ?? "1m";
+    // Only known sources, timeframes and symbol shapes, so a crafted value can never point the
+    // cache key at another source's entry (no dots between slashes, no slashes at all).
+    if (!ADAPTERS.some((a) => a.id === src) || !TF_MS[tf] || !validSymbol(sym) || sym.includes(":") || sym.includes("..")) return json(request, 400, { error: "Unknown source, symbol or timeframe" });
     const priv = isInternal(src);
     if (priv && !(await teamPass(request))) return json(request, 403, { error: "Team only" }, 0, true);
     const ttl = tf === "1d" ? 1800 : tf === "1h" ? 300 : src === "coingecko" ? 60 : 20;
-    return cached(ctx, `h/${src}/${sym}/${tf}`, ttl, async () => {
+    return cached(ctx, `${priv ? "team" : "pub"}/h/${encodeURIComponent(src)}/${encodeURIComponent(sym)}/${tf}`, ttl, async () => {
       try {
         const bars = await historyFor(src, sym, tf, env);
         if (!bars) return json(request, 404, { error: "No history for that symbol here" });
@@ -164,11 +173,11 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
   if (route === "universe") {
     if (url.searchParams.get("team") === "1") {
       if (!(await teamPass(request))) return json(request, 403, { error: "Team only" }, 0, true);
-      return cached(ctx, "universe-team/v1", 3600, async () => {
+      return cached(ctx, "team/universe/v1", 3600, async () => {
         try { return json(request, 200, await universe(env, true), 3600); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
       }, true);
     }
-    return cached(ctx, "universe/v3", 86_400, async () => {
+    return cached(ctx, "pub/universe/v3", 86_400, async () => {
       try { return json(request, 200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
     });
   }

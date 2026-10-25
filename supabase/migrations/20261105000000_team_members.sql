@@ -1,7 +1,7 @@
 -- The team list (DEC-0056): which accounts are Parity's own team. Team members see the
--- team-only live feeds (real-time data whose terms allow internal use only), and other team
--- areas may use the same list (the Metrics area on feat/product-analytics shares this exact
--- definition; keep the two identical).
+-- team-only live feeds (real-time data whose terms allow internal use only). Other team-only
+-- areas should use this list too. The older public.members (by email) only gives a badge and
+-- is not proof of who someone is, so it grants nothing here.
 --
 -- Keyed by the account's id, not its email, so a row means one specific account. Nothing is
 -- seeded: the owner adds people by hand in the Supabase SQL editor (which runs as the owner):
@@ -30,13 +30,13 @@ grant select on public.team_members to authenticated;
 drop policy if exists "people see their own team row" on public.team_members;
 create policy "people see their own team row" on public.team_members
   for select to authenticated
-  using (user_id = (select auth.uid()) and (select auth.jwt() ->> 'client_id') is null);
+  using (user_id = (select auth.uid()) and ((select auth.jwt()) ->> 'client_id') is null);
 
 -- True when the caller is on the team list. The live data function (functions/live/) calls
 -- it with the person's own token; it reads only the caller's row.
 create or replace function public.is_team() returns boolean
 language sql stable security definer set search_path = '' as $$
-  select coalesce((select auth.jwt() ->> 'client_id') is null, false)
+  select coalesce(((select auth.jwt()) ->> 'client_id') is null, false)
      and exists (select 1 from public.team_members t where t.user_id = (select auth.uid()));
 $$;
 
