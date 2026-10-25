@@ -183,7 +183,7 @@ describe("log in", () => {
     await screen.findByRole("heading", { name: "Log in to Parity" });
     expect(screen.getByRole("link", { name: "Create an account" })).toHaveAttribute("href", "/signup/?next=%2Fsim%2F");
     await toPassword();
-    expect(screen.getByRole("link", { name: "Forgot your password?" })).toHaveAttribute("href", "/reset/?next=%2Fsim%2F");
+    expect(screen.getByRole("link", { name: "Forgot password?" })).toHaveAttribute("href", "/reset/?next=%2Fsim%2F");
   });
 
   it("switches to sign up in place, keeping the email and next in the address", async () => {
@@ -351,11 +351,35 @@ describe("forgot and reset password", () => {
     expect(h.supabase.auth.resetPasswordForEmail).toHaveBeenCalledWith("amanda@example.com", { redirectTo: "https://parity.endyland.com/research/" });
   });
 
+  it("says to check your email after sending the reset email", async () => {
+    at("/reset/");
+    page();
+    await screen.findByLabelText("Email");
+    type("Email", "amanda@example.com");
+    click("Send reset email");
+    await screen.findByRole("heading", { name: "Check your email" });
+    expect(screen.getByText("amanda@example.com")).toBeInTheDocument();
+  });
+
+  it("shows Forgot password on the first step and carries the typed email", async () => {
+    at("/login/?next=%2Fsim%2F");
+    page();
+    await screen.findByRole("heading", { name: "Log in to Parity" });
+    const link = screen.getByRole("link", { name: "Forgot password?" });
+    expect(link).toHaveAttribute("href", "/reset/?next=%2Fsim%2F");
+    type("Email", "amanda@example.com");
+    fireEvent.click(link);
+    await screen.findByRole("heading", { name: "Reset your password" });
+    expect((await screen.findByLabelText("Email") as HTMLInputElement).value).toBe("amanda@example.com");
+    expect(path()).toBe("/reset/?next=%2Fsim%2F");
+    expect(h.supabase.auth.resetPasswordForEmail).not.toHaveBeenCalled();
+  });
+
   it("carries the email from log in to reset", async () => {
     at("/login/");
     page();
     await toPassword();
-    fireEvent.click(screen.getByRole("link", { name: "Forgot your password?" }));
+    fireEvent.click(screen.getByRole("link", { name: "Forgot password?" }));
     await screen.findByRole("heading", { name: "Reset your password" });
     expect((await screen.findByLabelText("Email") as HTMLInputElement).value).toBe("amanda@example.com");
     expect(path()).toBe("/reset/");
