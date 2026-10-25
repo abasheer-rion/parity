@@ -22,6 +22,7 @@
 --                             database.
 --
 -- Writes: public.analytics_ingest(), called by the site's /e function (web/functions/e.ts).
+-- Deletes: public.analytics_forget_user(), called by public.delete_account_data().
 -- Reads: public.metrics_*(), which answer only people on analytics.viewers.
 -- Upkeep: analytics.maintain() makes next months' partitions and drops old ones;
 -- analytics.refresh() rebuilds the daily totals. pg_cron runs both when it is installed (it is
@@ -29,7 +30,7 @@
 --
 -- Rollback: nothing else depends on this file. To undo, unschedule the two cron jobs
 -- (select cron.unschedule('parity-analytics-refresh'); select cron.unschedule('parity-analytics-maintain');)
--- and drop the functions public.analytics_ingest, public.metrics_* and the schema analytics
+-- and drop the functions public.analytics_ingest, public.analytics_forget_user, public.metrics_* and the schema analytics
 -- (drop schema analytics cascade). That deletes the analytics data and nothing else.
 
 create schema if not exists analytics;
@@ -445,6 +446,15 @@ begin
 end
 $$;
 revoke all on function analytics.forget_user(uuid) from public, anon, authenticated;
+
+-- The name public.delete_account_data() (20261103000000_data_model.sql) looks for, so account
+-- deletion removes analytics too. Owner and service role only.
+create or replace function public.analytics_forget_user(p_user uuid)
+returns bigint
+language sql security definer set search_path = '' as $$
+  select analytics.forget_user(p_user)
+$$;
+revoke all on function public.analytics_forget_user(uuid) from public, anon, authenticated;
 
 -- ---------------------------------------------------------------- reading (team only)
 

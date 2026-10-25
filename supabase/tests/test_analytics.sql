@@ -1,4 +1,4 @@
--- Checks for 20261102000000_product_analytics.sql (DEC-0053). Run by supabase/tests/local.sh;
+-- Checks for 20261104000000_product_analytics.sql (DEC-0053). Run by supabase/tests/local.sh;
 -- any failed assert stops the run.
 \set ON_ERROR_STOP 1
 \echo == analytics: setup
@@ -121,6 +121,18 @@ begin
   gone := analytics.forget_user('a0000000-0000-0000-0000-000000000002');
   assert gone >= 7, format('forgot only %s', gone);
   assert not exists (select 1 from analytics.events where visitor_id = '20000000-0000-0000-0000-000000000001'), 'visitor kept';
+end $$;
+
+\echo == account deletion reaches analytics, and only the owner can call it
+do $$
+declare out jsonb;
+begin
+  assert not has_function_privilege('authenticated', 'public.analytics_forget_user(uuid)', 'execute'), 'authenticated can forget users';
+  perform public.analytics_ingest('{"app":"site","sid":"10000000-0000-0000-0000-000000000005","vid":"20000000-0000-0000-0000-000000000005","ev":[{"k":"pageview","r":"/"}]}'::jsonb);
+  update analytics.events set user_hash = analytics.user_hash('a0000000-0000-0000-0000-000000000001') where visitor_id = '20000000-0000-0000-0000-000000000005';
+  out := public.delete_account_data('a0000000-0000-0000-0000-000000000001', false);
+  assert out ? 'analytics', format('delete_account_data skipped analytics: %s', out);
+  assert not exists (select 1 from analytics.events where visitor_id = '20000000-0000-0000-0000-000000000005'), 'events kept after deletion';
 end $$;
 
 \echo == the per-minute cap holds
