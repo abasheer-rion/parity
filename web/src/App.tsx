@@ -39,6 +39,8 @@ import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
 import { useRouteMeta } from "./lib/deeplink";
+import { PAYMENTS_ENABLED } from "./lib/payments/flag";
+import { Pricing } from "./pages/Pricing";
 import { nameById, nameOf } from "./lib/strategyMeta";
 
 applyTheme();
@@ -60,7 +62,8 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-const STANDALONE = ["start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify"];
+// The pricing page exists only when the payments flag is on (DEC-0045).
+const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -171,6 +174,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "news" && <News view={arg} />}
       {route === "markets" && <Markets view={arg?.split("?")[0]} />}
       {route === "sources" && <DataSources focus={arg} />}
+      {route === "pricing" && PAYMENTS_ENABLED && <Pricing />}
       {route === "settings" && (
         <Settings section={arg} />
       )}
