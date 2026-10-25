@@ -3,8 +3,11 @@
 // so it keeps the same row in this browser instead. Every page that shows the checklist or a
 // tour shares this one store.
 import { useEffect, useSyncExternalStore } from "react";
+import { supabase } from "../auth/client";
 import { track } from "../lib/track";
+import { onTableChange } from "../lib/userStore";
 import { COLUMN, DOABLE, type ItemId, type Signals, type Stamps } from "./items";
+import { localSignals, remoteSignals } from "./signals";
 
 export interface OnboardingRow {
   checklist_hidden: boolean;
@@ -22,6 +25,8 @@ export interface OnboardingState {
   row: OnboardingRow;
   signals: Signals;
   mfaAvailable: boolean;
+  /** True once the live signals have been read, so the checklist draws once, without a jump. */
+  checked: boolean;
 }
 
 const EMPTY: OnboardingRow = {
@@ -31,7 +36,21 @@ const EMPTY: OnboardingRow = {
 const LOCAL_KEY = "parity.onboarding.v1";
 const AREA = /^[a-z][a-z0-9-]{0,39}$/;
 
-let state: OnboardingState = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true };
+// The last state this browser saw, so Home can draw the checklist in its final shape on the
+// first frame instead of making the page jump when the data arrives. Tours still wait for the
+// real row (`ready`); only the checklist reads the cached one.
+const CACHE_KEY = "parity.onboarding.cache.v1";
+
+function readCache(): Partial<OnboardingState> {
+  try {
+    const c = JSON.parse(window.localStorage.getItem(CACHE_KEY) ?? "null");
+    return c?.row ? { row: { ...EMPTY, ...c.row }, signals: c.signals ?? {}, mfaAvailable: c.mfaAvailable !== false, checked: true } : {};
+  } catch {
+    return {};
+  }
+}
+
+let state: OnboardingState = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, ...(typeof window !== "undefined" ? readCache() : {}) };
 let userId: string | null = null;
 const listeners = new Set<() => void>();
 let loading: Promise<void> | null = null;
@@ -39,11 +58,10 @@ let writes: Promise<unknown> = Promise.resolve();
 
 function set(next: Partial<OnboardingState>) {
   state = { ...state, ...next };
+  if (state.ready && state.checked) {
+    try { window.localStorage.setItem(CACHE_KEY, JSON.stringify({ row: state.row, signals: state.signals, mfaAvailable: state.mfaAvailable })); } catch { /* no cache */ }
+  }
   for (const f of listeners) f();
-}
-
-async function client() {
-  return (await import("../auth/client")).supabase;
 }
 
 function readLocal(): OnboardingRow {
@@ -63,7 +81,7 @@ function writeLocal(row: OnboardingRow) {
 export function ensureLoaded(): Promise<void> {
   loading ??= (async () => {
     try {
-      const sb = await client();
+      const sb = supabase;
       const { data } = await sb.auth.getSession();
       userId = data.session?.user.id ?? null;
       if (!userId) { set({ ready: true, local: true, row: readLocal() }); return; }
@@ -83,14 +101,15 @@ export function ensureLoaded(): Promise<void> {
 }
 
 /** Saves part of the row: at once on this page, then in Supabase (in order, one at a time). */
-function save(patch: Partial<OnboardingRow>) {
+async function save(patch: Partial<OnboardingRow>) {
+  set({ row: { ...state.row, ...patch } });
+  await ensureLoaded();
   const row = { ...state.row, ...patch };
   set({ row });
-  if (state.local) { writeLocal(row); return Promise.resolve(); }
+  if (state.local) { writeLocal(row); return; }
   const uid = userId;
   writes = writes.then(async () => {
-    const sb = await client();
-    const { error } = await sb.from("onboarding_state").upsert({ user_id: uid, ...patch }, { onConflict: "user_id" });
+    const { error } = await supabase.from("onboarding_state").upsert({ user_id: uid, ...patch }, { onConflict: "user_id" });
     if (error) throw error;
   }).catch(() => { /* the page already shows the change; the next save tries again */ });
   return writes;
@@ -111,9 +130,8 @@ let refreshing: Promise<void> | null = null;
 export function refreshSignals(): Promise<void> {
   refreshing ??= (async () => {
     try {
-      const { remoteSignals, localSignals } = await import("./signals");
-      const { mfaAvailable, ...signals } = state.local ? localSignals() : await remoteSignals(await client());
-      set({ signals, mfaAvailable });
+      const { mfaAvailable, ...signals } = state.local ? localSignals() : await remoteSignals(supabase);
+      set({ signals, mfaAvailable, checked: true });
       const now = new Date().toISOString();
       const patch: Partial<OnboardingRow> = {};
       for (const id of DOABLE) {
@@ -123,6 +141,7 @@ export function refreshSignals(): Promise<void> {
       if (Object.keys(patch).length) await save(patch);
     } finally {
       refreshing = null;
+      if (!state.checked) set({ checked: true });
     }
   })();
   return refreshing;
@@ -135,9 +154,9 @@ function startWatching() {
   let t = 0;
   const soon = () => { window.clearTimeout(t); t = window.setTimeout(() => void refreshSignals(), 800); };
   // A demo order, an alert, a watchlist, a finished lesson or a wallet saved on this page.
-  void import("../lib/userStore").then((m) => m.onTableChange((table) => {
+  onTableChange((table) => {
     if (["paper_orders", "trade_alerts", "trade_watchlists", "academy_progress", "crypto_wallets"].includes(table)) soon();
-  }));
+  });
   // Coming back to the tab after connecting an AI app or confirming the email elsewhere.
   let last = Date.now();
   window.addEventListener("focus", () => { if (Date.now() - last > 15_000) { last = Date.now(); soon(); } });
@@ -172,8 +191,7 @@ export async function markTourSeen(area: string) {
   // Another tab may have added an area since this page loaded: merge with the saved list.
   if (!state.local && userId) {
     try {
-      const sb = await client();
-      const { data } = await sb.from("onboarding_state").select("tours_seen").eq("user_id", userId).maybeSingle();
+      const { data } = await supabase.from("onboarding_state").select("tours_seen").eq("user_id", userId).maybeSingle();
       seen = [...new Set([...seen, ...((data?.tours_seen as string[] | undefined) ?? [])])];
     } catch { /* use what this page has */ }
   }
@@ -202,7 +220,7 @@ export function useOnboarding(): OnboardingState {
 
 /** Tests start from a clean store. */
 export function resetForTests(next?: Partial<OnboardingState>) {
-  state = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, ...next };
+  state = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, ...next };
   loading = next?.ready ? Promise.resolve() : null;
   userId = null;
 }

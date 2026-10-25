@@ -2,10 +2,10 @@
 // a look, a plain-words box for asking, "what if", and how this year is going. Every
 // number shown here comes from the research side's gauntlet, with its verdict; the
 // product never shows search leads or ranks on return alone (DEC-0015).
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Sparkline } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Badge, HeroGlow, LIFT, PageTransition, Reveal, Tilt } from "../ui";
+import { Badge, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, Tilt } from "../ui";
 import { colorMap } from "../lib/colors";
 import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
@@ -15,6 +15,7 @@ import { productInsights } from "../lib/insights";
 import { date } from "../lib/format";
 import { Insights } from "../components/Insights";
 import { Checklist } from "../onboarding/Checklist";
+import { useOnboarding } from "../onboarding/store";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { isDesktop } from "../desktop/bridge";
 
@@ -50,6 +51,12 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
   const movers = [...tested].filter((r) => ytd(r) != null).sort((a, b) => (ytd(b) ?? 0) - (ytd(a) ?? 0));
   const beating = tested.filter((r) => r.gauntlet?.beats_sp500).length;
   const first = email ? email.split("@")[0].replace(/[._-].*$/, "") : "";
+  // On a first visit, wait (at most 1.5 seconds) for the checklist's data, so it does not push
+  // the page down when it arrives. Later visits draw it at once from this browser's copy.
+  const ob = useOnboarding();
+  const [late, setLate] = useState(false);
+  useEffect(() => { const t = window.setTimeout(() => setLate(true), 1500); return () => window.clearTimeout(t); }, []);
+  if (!ob.checked && !late) return <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />;
 
   return (
     <PageTransition className="phome">

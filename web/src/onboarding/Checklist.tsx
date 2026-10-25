@@ -41,7 +41,7 @@ export function Checklist() {
   const [wallet, setWallet] = useState(false);
   // Read the live signals each time Home opens: an AI app may have signed in from elsewhere.
   useEffect(() => { if (s.ready) void refreshSignals(); }, [s.ready]);
-  if (!s.ready || s.row.checklist_hidden) return null;
+  if (!s.ready || !s.checked || s.row.checklist_hidden) return null;
   const all = p.done === p.total;
   return (
     <section className="onb" data-tour="checklist" aria-labelledby="onb-title">

@@ -76,6 +76,8 @@ jobs:
       # failed requests, blank pages, NaN in the text or sideways scroll (scripts/smoke.mjs).
       - run: npx playwright install --with-deps chromium
       - run: npm run smoke
+      # First-run tours and the getting started checklist in a real browser (DEC-0053).
+      - run: npm run onboarding
 
   # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
   # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
