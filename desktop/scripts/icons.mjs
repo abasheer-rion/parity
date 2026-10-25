@@ -2,6 +2,8 @@
 //   assets/icon.png   1024 square, the source electron-builder also understands
 //   assets/icon.icns  macOS, a rounded square inset like other Mac apps (made with iconutil, Mac only)
 //   assets/icon.ico   Windows, 16 to 256 pixels
+//   assets/trayTemplate.png, trayTemplate@2x.png   the Mac menu bar item (black, the system tints it)
+//   assets/tray.png   the Windows tray item
 // The results are committed, so the release builds do not need to run this.
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -59,4 +61,10 @@ sizes.forEach((s, i) => {
   offset += images[i].length;
 });
 writeFileSync(join(assets, "icon.ico"), Buffer.concat([head, ...images]));
-console.log("wrote assets/icon.png, icon.icns, icon.ico");
+// The menu bar and tray items (DEC-0049): the plain starburst mark, no tile behind it.
+const markSvg = (file) => readFileSync(resolve(here, `../web/public/brand/2026-10-21-starburst/${file}`), "utf8");
+const mark = (file, size) => Buffer.from(new Resvg(markSvg(file), { fitTo: { mode: "width", value: size } }).render().asPng());
+writeFileSync(join(assets, "trayTemplate.png"), mark("parity-mark-black.svg", 18));
+writeFileSync(join(assets, "trayTemplate@2x.png"), mark("parity-mark-black.svg", 36));
+writeFileSync(join(assets, "tray.png"), mark("parity-mark.svg", 32));
+console.log("wrote assets/icon.png, icon.icns, icon.ico, trayTemplate.png, tray.png");
