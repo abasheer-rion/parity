@@ -532,12 +532,12 @@ html.ui-locked { overflow: hidden; }
 .ui-crumbs [aria-current] { color: var(--color-text); }
 
 /* Pagination */
-.ui-pages { display: inline-flex; align-items: center; gap: var(--space-1); }
-.ui-page, .ui-page-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: tabular-nums; cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
-.ui-page:hover, .ui-page-step:hover:not(:disabled) { background: var(--color-hover); color: var(--color-text); }
-.ui-page.on { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
-.ui-page-step:disabled { opacity: .35; cursor: default; }
-.ui-page-gap { color: var(--color-text-faint); padding: 0 var(--space-1); }
+.ui-pager { display: inline-flex; align-items: center; gap: var(--space-1); }
+.ui-pager-num, .ui-pager-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: tabular-nums; cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+.ui-pager-num:hover, .ui-pager-step:hover:not(:disabled) { background: var(--color-hover); color: var(--color-text); }
+.ui-pager-num.on { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
+.ui-pager-step:disabled { opacity: .35; cursor: default; }
+.ui-pager-gap { color: var(--color-text-faint); padding: 0 var(--space-1); }
 
 /* Avatar */
 .ui-avatar { display: inline-grid; place-items: center; flex: none; border-radius: var(--radius-pill); overflow: hidden; background: color-mix(in srgb, var(--color-accent) 22%, var(--color-surface-overlay)); color: var(--color-text); font-weight: var(--weight-medium); }

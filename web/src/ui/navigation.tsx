@@ -35,12 +35,12 @@ export function pageWindow(page: number, pages: number): (number | "gap")[] {
 export function Pagination({ page, pages, onChange, label = "Pages" }: { page: number; pages: number; onChange: (p: number) => void; label?: string }) {
   if (pages <= 1) return null;
   return (
-    <nav className="ui-pages" aria-label={label}>
-      <button type="button" className="ui-page-step" onClick={() => onChange(page - 1)} disabled={page <= 1} aria-label="Previous page"><Icon name="chevronLeft" size={13} /></button>
+    <nav className="ui-pager" aria-label={label}>
+      <button type="button" className="ui-pager-step" onClick={() => onChange(page - 1)} disabled={page <= 1} aria-label="Previous page"><Icon name="chevronLeft" size={13} /></button>
       {pageWindow(page, pages).map((p, i) => p === "gap"
-        ? <span key={`g${i}`} className="ui-page-gap" aria-hidden>...</span>
-        : <button key={p} type="button" className={`ui-page ${p === page ? "on" : ""}`} aria-current={p === page ? "page" : undefined} onClick={() => onChange(p)}>{p}</button>)}
-      <button type="button" className="ui-page-step" onClick={() => onChange(page + 1)} disabled={page >= pages} aria-label="Next page"><Icon name="chevronRight" size={13} /></button>
+        ? <span key={`g${i}`} className="ui-pager-gap" aria-hidden>...</span>
+        : <button key={p} type="button" className={`ui-pager-num ${p === page ? "on" : ""}`} aria-current={p === page ? "page" : undefined} onClick={() => onChange(p)}>{p}</button>)}
+      <button type="button" className="ui-pager-step" onClick={() => onChange(page + 1)} disabled={page >= pages} aria-label="Next page"><Icon name="chevronRight" size={13} /></button>
     </nav>
   );
 }
