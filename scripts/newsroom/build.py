@@ -404,6 +404,9 @@ class Newsroom:
                         for s in ("blog", "news") for k, n, f in (("rss", "RSS", "feed.xml"), ("atom", "Atom", "atom.xml")))
         legal = "".join(f'<a href="{h}">{n}</a>' for h, n in bp.LEGAL)
         robots_tag = f'<meta name="robots" content="{robots}">\n' if robots else ""
+        # The same opt-in analytics boot file as every other public page (DEC-0053). The local
+        # preview has no site build to load it from, so it leaves it out.
+        analytics = "" if self.preview else '<!--parity-analytics--><script type="module" src="/a/boot.js"></script>\n'
         return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -432,7 +435,7 @@ class Newsroom:
 {head}
 {bp.jsonld(graph)}
 <style>{bp.CSS.strip()}{CSS.strip()}</style>
-</head>
+{analytics}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap wide">
