@@ -170,7 +170,7 @@ const SITE_PAGES = [
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 // Libraries that change rarely get their own files, so a deploy that only changes Parity's
-// code leaves them cached in the browser (REF-0020).
+// code leaves them cached in the browser (REF-0024).
 const VENDOR = {
   codeSplitting: {
     groups: [

@@ -1,4 +1,4 @@
-// The app's own log, kept on the computer so a problem can be traced afterwards (DEC-0056):
+// The app's own log, kept on the computer so a problem can be traced afterwards (DEC-0058):
 // pages loaded, pages that failed or crashed, errors a page printed, blank pages found and
 // repainted. One file, at most about 1 MB: when it fills, the older half is dropped. It never
 // holds cookies, tokens or anything typed into a page; page errors are cut to 300 characters

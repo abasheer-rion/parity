@@ -8,7 +8,7 @@ import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { Button, Dialog, ErrorBoundary, Icon, lazyPage, Popover, Toaster, toast } from "../ui";
 
-// Views other than the chart load when first opened (REF-0020).
+// Views other than the chart load when first opened (REF-0024).
 const PortfolioView = lazyPage(() => import("./PortfolioView").then((m) => ({ default: m.PortfolioView })));
 const ScreenerView = lazyPage(() => import("./ScreenerView").then((m) => ({ default: m.ScreenerView })));
 const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));

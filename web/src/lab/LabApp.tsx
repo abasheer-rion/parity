@@ -28,7 +28,7 @@ import { readSettings, VIEWS, writeSettings, type Settings, type View } from "./
 import "./lab.css";
 
 // Each view is its own file, loaded when opened; Try settings, the usual first view, is in
-// the main file (REF-0020).
+// the main file (REF-0024).
 const CompareView = lazyPage(() => import("./CompareView").then((m) => ({ default: m.CompareView })));
 const EdgesView = lazyPage(() => import("./EdgesView").then((m) => ({ default: m.EdgesView })));
 const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default: m.SearchView })));

@@ -10,7 +10,7 @@ Writes, under the output folder:
   latest.json           a copy of the newest run
   <run>.lite.json       the same run without each strategy's settings test, which is
                         about two thirds of the bytes and read only by Workbench
-  <run>.sensitivity.json  those settings tests, by strategy (REF-0020)
+  <run>.sensitivity.json  those settings tests, by strategy (REF-0024)
   search.json           the newest strategy search snapshot (DEC-0014)
   sims.json             the newest always-on sims summary (DEC-0037)
   profiles.json         the newest competitor feedback counts (DEC-0047)

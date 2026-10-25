@@ -1,4 +1,4 @@
-// The loading screen every Parity app shows before its code arrives (DEC-0056). It is plain
+// The loading screen every Parity app shows before its code arrives (DEC-0058). It is plain
 // HTML and CSS written into each app's index.html, so it paints with the first bytes of the
 // page: the dark background, the starburst mark drawing in and a thin progress line. When
 // the app puts its first real content on the page (a skeleton or the page itself) the screen
@@ -11,7 +11,7 @@
 //   - the app drew and then the page went empty (a crash the app did not catch): say so,
 //     with Try again
 // So a Parity page is never a black screen. The sign-in check's "Loading" line counts as
-// still loading. Reduced motion: no drawing or pulsing, the line holds still.
+// still loading (its Try again does not). Reduced motion: no drawing or pulsing, the line holds still.
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
@@ -65,7 +65,8 @@ export function bootWatch(): void {
   const real = () => {
     const c = root.firstElementChild;
     if (!c) return false;
-    return !(root.children.length === 1 && c.classList.contains("auth-splash"));
+    // The sign-in check's "Loading" counts as still loading; its "Try again" is real content.
+    return !(root.children.length === 1 && c.classList.contains("auth-splash") && !c.querySelector("button"));
   };
   const hide = () => {
     if (gone) return;

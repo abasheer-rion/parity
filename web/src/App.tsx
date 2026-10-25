@@ -16,7 +16,7 @@ import { PAYMENTS_ENABLED } from "./lib/payments/flag";
 import { nameById, nameOf } from "./lib/strategyMeta";
 
 // Every page is its own file, loaded when it is first opened, so the app starts with only
-// the frame and the page in front of you (REF-0020). The likely next pages load while idle.
+// the frame and the page in front of you (REF-0024). The likely next pages load while idle.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function page<M extends Record<K, ComponentType<any>>, K extends keyof M & string>(load: () => Promise<M>, name: K) {
   return lazyPage(() => load().then((m) => ({ default: m[name] })));

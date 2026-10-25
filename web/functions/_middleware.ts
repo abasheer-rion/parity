@@ -77,7 +77,7 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
   }
 
   // A code file asked for without a valid session (an expired one, say) gets a plain 401,
-  // never the log-in page in its place, so the app sees a failed file and can reload (REF-0020).
+  // never the log-in page in its place, so the app sees a failed file and can reload (REF-0024).
   if (url.pathname.startsWith("/data/") || HASHED.test(url.pathname)) {
     return new Response("Sign in to see this.", { status: 401, headers: { "Cache-Control": "no-store" } });
   }

@@ -1,5 +1,5 @@
 // Catches a crash in part of a page so the rest keeps working and the person sees what
-// happened with a way out, never an empty or black screen (DEC-0056). Each app wraps its
+// happened with a way out, never an empty or black screen (DEC-0058). Each app wraps its
 // whole tree in one (the last line of defence) and each page in another, keyed by the
 // route, so moving to another page clears the error.
 //

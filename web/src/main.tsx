@@ -1,6 +1,6 @@
 // The dashboard's entry: /app/ and /research/ are its two sides (DEC-0015, DEC-0020).
 // Parity Terminal (/sim/, sim.endyland.com) has its own entry, src/terminal/main.tsx, so
-// neither downloads the other's code (REF-0020). The loading screen in index.html shows
+// neither downloads the other's code (REF-0024). The loading screen in index.html shows
 // until the first page draws.
 import { setLiveApp } from "./lib/live/client";
 import { StrictMode } from "react";

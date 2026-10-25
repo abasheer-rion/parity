@@ -148,7 +148,7 @@ async function run(api) {
 
     if (scenario === "blank") {
       // A page that draws nothing at all (a broken deploy, say): the app reloads it once, then
-      // shows Could not open with Retry. Never a black window (DEC-0056).
+      // shows Could not open with Retry. Never a black window (DEC-0058).
       w.go("/__blank/");
       const shown = await until(() => w.active.wc.getURL().includes("ui-error.html") && !w.active.wc.isLoading(), 30000, 300);
       check("an empty page turns into Could not open", !!shown, w.active.wc.getURL());

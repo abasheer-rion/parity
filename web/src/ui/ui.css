@@ -449,7 +449,7 @@ html.ui-locked { overflow: hidden; }
   .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
 }
 
-/* A crashed part of a page (boundary.tsx, DEC-0056): plain words and a way out, never empty. */
+/* A crashed part of a page (boundary.tsx, DEC-0058): plain words and a way out, never empty. */
 .ui-crash { display: grid; place-items: center; min-height: 240px; padding: 32px 16px; }
 .ui-crash-app { position: fixed; inset: 0; z-index: 2147483000; min-height: 0; background: #050608; }
 .ui-crash-box { max-width: 440px; display: grid; gap: 10px; text-align: center; color: var(--text-2, #a4a8b6); }

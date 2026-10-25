@@ -152,7 +152,7 @@ class Page {
 
   stopWatchdog() { clearTimeout(this.watchdog); this.watchdog = null; }
 
-  /** Draws the page again: a fresh frame and a one-pixel nudge of its size (DEC-0056). */
+  /** Draws the page again: a fresh frame and a one-pixel nudge of its size (DEC-0058). */
   repaint(why = "") {
     if (!this.alive) return;
     this.wc.invalidate();
@@ -165,7 +165,7 @@ class Page {
   }
 
   /**
-   * Never a black page (DEC-0056). An empty page (the site drew nothing) reloads once, then
+   * Never a black page (DEC-0058). An empty page (the site drew nothing) reloads once, then
    * shows Could not open with Retry. A page whose content is there but did not reach the
    * screen is drawn again.
    */

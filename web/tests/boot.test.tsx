@@ -1,4 +1,4 @@
-// The loading screen and the crash guard (DEC-0056): a Parity page shows something within
+// The loading screen and the crash guard (DEC-0058): a Parity page shows something within
 // the first paint, and a failure says so with Try again, never a black screen.
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -73,6 +73,12 @@ describe("what the loading screen does", () => {
     root().innerHTML = "<div class='auth-splash'>Loading</div>";
     await new Promise((r) => setTimeout(r, 10));
     expect(boot().classList.contains("pboot-out")).toBe(false);
+  });
+
+  it("gets out of the way of the sign-in check's own Try again", async () => {
+    mount();
+    root().innerHTML = "<div class='auth-splash'>We could not check your sign-in. <button>Try again</button></div>";
+    await vi.waitFor(() => expect(boot().classList.contains("pboot-out")).toBe(true));
   });
 
   it("says so with Try again when the page goes empty after drawing", async () => {
