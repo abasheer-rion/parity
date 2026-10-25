@@ -1,4 +1,4 @@
-// Read-only crypto wallets (DEC-0053): checking a public address before it is saved, and
+// Read-only crypto wallets (DEC-0057): checking a public address before it is saved, and
 // refusing anything that looks like a secret. Parity stores only the public address, the
 // chain and when a signed message proved the wallet is the person's. It never asks for a seed
 // phrase or private key, and this file makes sure one pasted by mistake goes nowhere.

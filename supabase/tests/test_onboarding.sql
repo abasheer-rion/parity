@@ -1,9 +1,6 @@
--- Check of 20261104000000_onboarding.sql (DEC-0053): row rules for the checklist, tours and
--- crypto wallets. Not run by CI and never applied to the hosted project. Run it against a
--- throwaway local Postgres with the Supabase stand-ins (see ai_connect_rls.sql for the list,
--- or supabase/tests/standins.sql where it exists) and every migration applied:
---
---   psql -v ON_ERROR_STOP=1 -d <db> -f supabase/tests/onboarding_rls.sql
+-- Check of 20261105000000_onboarding.sql (DEC-0057): row rules for the checklist, tours and
+-- crypto wallets. Run it with supabase/tests/local.sh, which applies every migration to a
+-- throwaway local Postgres and runs every test_*.sql. Never applied to the hosted project.
 --
 -- Every check raises an error when it fails, so the script stops at the first broken rule and
 -- prints "onboarding rls: all checks passed" at the end.

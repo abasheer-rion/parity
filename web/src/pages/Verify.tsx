@@ -32,7 +32,7 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
   const mode: Mode = rawMode === "describe" || rawMode === "strategy" ? rawMode : "file";
   const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
-  // A result on screen is the checklist's "Run your first Verify check" (DEC-0053).
+  // A result on screen is the checklist's "Run your first Verify check" (DEC-0057).
   useEffect(() => { if (result) signalDone("verify"); }, [result]);
   return (
     <>

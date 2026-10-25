@@ -1,4 +1,4 @@
-// Add a crypto wallet, read only (DEC-0053). Two ways: sign a message in the wallet app
+// Add a crypto wallet, read only (DEC-0057). Two ways: sign a message in the wallet app
 // (Sign-In With Ethereum, EIP-4361, or the same message on Solana), which the server checks
 // before marking the wallet verified; or type the public address, saved as not verified.
 // Parity never asks for a seed phrase or private key, says so at the top, and refuses
@@ -6,7 +6,7 @@
 import { useState } from "react";
 import { Badge, Button, Dialog, Segmented, toast } from "../ui";
 import { table, useRows, type Row } from "../lib/userStore";
-import { track } from "../lib/track";
+import { track } from "../lib/analytics";
 import { CHAINS, checkAddress, looksSecret, shortAddress, toChecksumAddress, type Chain } from "../lib/wallet/address";
 import { buildMessage, newNonce } from "../lib/wallet/siwe";
 import { signalDone } from "./done";

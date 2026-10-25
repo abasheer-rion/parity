@@ -1,4 +1,4 @@
-// The getting started checklist (DEC-0053): what each item is, where it links, and the rule
+// The getting started checklist (DEC-0057): what each item is, where it links, and the rule
 // that decides whether it is done. No React and no network here, so the rule is unit tested
 // (tests/onboarding.test.ts).
 //
@@ -61,6 +61,21 @@ export function itemList(links: { connect: string; verify: string; trade: string
     { id: "wallet", title: "Add a crypto wallet, read only", body: "By its public address, or by signing a message in your wallet app. We never ask for your seed phrase or private key.", action: "Add wallet" },
     { id: "broker", title: "Link a brokerage account, coming later", body: "This will go through a regulated broker partner. Parity holds no money and never asks for bank or card details.", action: "Notify me" },
   ];
+}
+
+/** The welcome after sign-up (src/auth/pages/Welcome.tsx, DEC-0044) asks what the person
+ *  wants to do first and keeps the picks in this browser under this key. */
+export const INTERESTS_KEY = "parity.interests.v1";
+const FOR_INTEREST: Record<string, Exclude<ItemId, "broker">> = { verify: "verify", trade: "trade", strategies: "watch", learn: "lesson" };
+
+/** The items the person picked in the welcome come right after "Verify your email", in the
+ *  order they picked them. Everything else keeps its place. */
+export function orderByInterests(items: Item[], picks: string[]): Item[] {
+  const want = picks.map((p) => FOR_INTEREST[p]).filter(Boolean);
+  if (!want.length) return items;
+  const first = items.filter((i) => i.id === "email");
+  const picked = want.map((id) => items.find((i) => i.id === id)).filter((i): i is Item => !!i);
+  return [...first, ...picked, ...items.filter((i) => i.id !== "email" && !want.includes(i.id as Exclude<ItemId, "broker">))];
 }
 
 /** Works out which items are done. `mfaAvailable: false` drops two-step sign-in from the list. */

@@ -1,4 +1,4 @@
--- Getting started checklist, first-run tours and read-only crypto wallets (DEC-0053).
+-- Getting started checklist, first-run tours and read-only crypto wallets (DEC-0057).
 --
 -- This file adds two tables, each person reading and writing only their own rows:
 --   1. onboarding_state: one row per person. When each checklist item was first done, whether
@@ -183,7 +183,7 @@ create policy "people remove their own wallets" on public.crypto_wallets
 do $$
 declare
   t text;
-  rule text := '(select auth.jwt() ->> ''client_id'') is null';
+  rule text := '((select auth.jwt()) ->> ''client_id'') is null';
 begin
   foreach t in array array['onboarding_state', 'crypto_wallets'] loop
     execute format('drop policy if exists "connected apps cannot insert" on public.%I', t);

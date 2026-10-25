@@ -1,11 +1,11 @@
-// The getting started checklist, the tour component and read-only wallet proofs (DEC-0053).
+// The getting started checklist, the tour component and read-only wallet proofs (DEC-0057).
 // No network: the tour runs in jsdom, wallet signatures are made with throwaway keys.
 import { ed25519 } from "@noble/curves/ed25519.js";
 import { secp256k1 } from "@noble/curves/secp256k1.js";
 import { keccak_256 } from "@noble/hashes/sha3.js";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DOABLE, itemList, progress } from "../src/onboarding/items";
+import { DOABLE, itemList, orderByInterests, progress } from "../src/onboarding/items";
 import { Tour, availableSteps, type GuidedStep } from "../src/ui/guidedTour";
 import { base58Decode, base58Encode, checkAddress, looksSecret, toChecksumAddress } from "../src/lib/wallet/address";
 import { buildMessage, messageProblem, parseMessage, WINDOW_MS } from "../src/lib/wallet/siwe";
@@ -58,6 +58,11 @@ describe("checklist completion", () => {
     const p = progress(items, {}, all);
     expect(p.done).toBe(p.total);
     expect(p.next).toBeNull();
+  });
+
+  it("puts what the person picked in the welcome right after verifying the email", () => {
+    expect(orderByInterests(items, ["learn", "trade", "research"]).map((i) => i.id)).toEqual(["email", "lesson", "trade", "ai", "verify", "watch", "mfa", "wallet", "broker"]);
+    expect(orderByInterests(items, []).map((i) => i.id)).toEqual(items.map((i) => i.id));
   });
 
   it("asks for no bank, routing or card details anywhere in the copy", () => {

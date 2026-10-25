@@ -1,10 +1,10 @@
-// Each person's checklist and tour state (DEC-0053), kept in Supabase's onboarding_state (one
+// Each person's checklist and tour state (DEC-0057), kept in Supabase's onboarding_state (one
 // row per person, row level security: own row only). The local preview has no Supabase user,
 // so it keeps the same row in this browser instead. Every page that shows the checklist or a
 // tour shares this one store.
 import { useEffect, useSyncExternalStore } from "react";
 import { supabase } from "../auth/client";
-import { track } from "../lib/track";
+import { track } from "../lib/analytics";
 import { onTableChange } from "../lib/userStore";
 import { COLUMN, DOABLE, type ItemId, type Signals, type Stamps } from "./items";
 import { localSignals, remoteSignals } from "./signals";
@@ -201,7 +201,7 @@ export async function markTourSeen(area: string) {
 
 /** "Skip all tours": no first-run tour opens again until the person turns them back on. */
 export function skipAllTours(area?: string) {
-  track("tours_skipped_all", { area: area ?? null });
+  track("tours_skipped_all", { area: area ?? "none" });
   const seen = area && AREA.test(area) ? [...new Set([...state.row.tours_seen, area])].slice(-40) : state.row.tours_seen;
   return save({ tours_off: true, tours_seen: seen });
 }

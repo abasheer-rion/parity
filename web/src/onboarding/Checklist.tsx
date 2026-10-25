@@ -1,14 +1,23 @@
-// The getting started checklist (DEC-0053): a compact panel on the product home (also what the
+// The getting started checklist (DEC-0057): a compact panel on the product home (also what the
 // desktop app shows, since it loads the live site), with a progress ring. Each item ticks
 // itself when the action happens. Hide closes it; Account settings brings it back.
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Icon, Toggle } from "../ui";
 import { academyUrl, productUrl, tradeUrl } from "../lib/space";
-import { itemList, progress, type ItemState } from "./items";
+import { INTERESTS_KEY, itemList, orderByInterests, progress, type ItemState } from "./items";
 import { refreshSignals, setChecklistHidden, setNotifyBrokerage, stampsOf, useOnboarding } from "./store";
 import "./onboarding.css";
 
 const WalletDialog = lazy(() => import("./Wallet").then((m) => ({ default: m.WalletDialog })));
+
+function readPicks(): string[] {
+  try {
+    const v = JSON.parse(window.localStorage.getItem(INTERESTS_KEY) ?? "[]");
+    return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
+  } catch {
+    return [];
+  }
+}
 
 /** Links from the product app to where each action happens. */
 export function productLinks() {
@@ -18,7 +27,8 @@ export function productLinks() {
 
 export function useChecklist() {
   const s = useOnboarding();
-  const items = useMemo(() => itemList(productLinks()), []);
+  // What the person picked in the welcome after sign-up comes first.
+  const items = useMemo(() => orderByInterests(itemList(productLinks()), readPicks()), []);
   return { s, p: progress(items, stampsOf(s.row), s.signals, { mfaAvailable: s.mfaAvailable }) };
 }
 

@@ -1,4 +1,4 @@
-// Opens an area's first-run tour once per person (DEC-0053): the first time they open the
+// Opens an area's first-run tour once per person (DEC-0057): the first time they open the
 // area, unless they chose "Skip all tours". Finishing or skipping marks the area seen; "Skip
 // all tours" turns every tour off until "Show tours again" in Account settings.
 //
@@ -7,7 +7,7 @@
 // With more than one area, the first one not yet seen runs, then the next on a later visit
 // or right after it ends. `ready` waits for the page's content, so targets exist.
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { track } from "../lib/track";
+import { track } from "../lib/analytics";
 import { Tour, type GuidedStep, type TourEnd } from "../ui/guidedTour";
 import { markTourSeen, skipAllTours, tourDue, useOnboarding } from "./store";
 import { TOURS, type Area } from "./tours";
