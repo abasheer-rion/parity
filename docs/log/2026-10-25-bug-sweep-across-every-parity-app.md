@@ -62,13 +62,15 @@ The crawler is `web/scripts/crawl.mjs`. The CI check is `web/scripts/smoke.mjs` 
 
 ### Desktop app 0.1.2, handed over
 
-| Bug | How seen |
-| --- | --- |
-| A `parity://trade/#/alerts` link while signed out shows a fully black window, with no log in and no error | Seen by the owner |
-| The window cannot be dragged | Seen by the owner. The page fills the whole window under a hidden title bar, so only the 76 pixel sidebar can be a drag area |
-| Opening a `parity://` link while the window is closed (the app still running on a Mac) saves the link but opens no window | Code reading: the link waits for a window that is only made when the Dock icon is clicked |
-| Cmd+comma is given twice, to "Account settings" in the Parity menu and to "Account" in the Go menu | Code reading |
-| The Parity menu always says "Pages load live from parity.endyland.com", also when offline or pointed at another address | Code reading |
+The desktop shell was rebuilt while this sweep ran (pull request 89, merged, not yet released). The right column is from reading its code, not from running it.
+
+| Bug in 0.1.2 | How seen | On main after pull request 89 |
+| --- | --- | --- |
+| A `parity://trade/#/alerts` link while signed out shows a fully black window, with no log in and no error | Seen by the owner | A log-in wall was added; needs a check on a real build |
+| The window cannot be dragged | Seen by the owner. The page fills the window under a hidden title bar, so only the 76 pixel sidebar could be a drag area | A title bar with a drag area was added |
+| Opening a `parity://` link while the window is closed (the app still running on a Mac) saves the link but opens no window | Code reading | Looks fixed: a link with no window open makes one |
+| Cmd+comma is given twice, to "Account settings" and to "Account" in the Go menu | Code reading | Looks fixed: Cmd+comma opens Settings only |
+| The Parity menu always says "Pages load live from parity.endyland.com", also when offline or pointed at another address | Code reading | Looks fixed: the line is gone |
 
 ### Numbers
 
