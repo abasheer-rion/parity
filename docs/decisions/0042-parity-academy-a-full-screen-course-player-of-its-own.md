@@ -59,6 +59,7 @@ The courses, the pictures and the quick checks already existed ([DEC-0028](0028-
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
+- [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](../competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](../competitors/0002-bloomberg-terminal.md)
 - [CMP-0007: Interactive Brokers, a global broker with four trading apps](../competitors/0007-interactive-brokers.md)

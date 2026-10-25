@@ -1,4 +1,6 @@
-Parity for Mac and Windows. The whole Parity site in one window, with a sidebar. Research and education only. Not investment advice. Trade uses a demo account with delayed data and no real money.
+Parity for Mac and Windows. The whole Parity site in one window, with a sidebar.
+
+New in 0.1.2: the app loads the live site, so it always matches parity.endyland.com and new pages show up with no reinstall. Offline, it shows the copy it was built with and says so at the top. Research and education only. Not investment advice. Trade uses a demo account with delayed data and no real money.
 
 Which file to download:
 

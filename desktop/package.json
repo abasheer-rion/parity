@@ -1,7 +1,7 @@
 {
   "name": "parity-desktop",
   "productName": "Parity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Parity for Mac and Windows: the site, Verify, the product app, Research, Parity Terminal and Parity Trade in one window.",
   "author": "Parity Trading, Inc. <contact@paritytrading.ai>",

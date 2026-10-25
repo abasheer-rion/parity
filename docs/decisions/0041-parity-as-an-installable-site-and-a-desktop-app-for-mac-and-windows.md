@@ -7,7 +7,7 @@ created: 2026-10-24
 updated: 2026-10-24
 authors: [ayan]
 tags: [infra, process, ui]
-related: [DEC-0038, DEC-0040, DEC-0024, DEC-0020]
+related: [DEC-0038, DEC-0040, DEC-0024, DEC-0020, DEC-0048]
 ---
 
 # Parity as an installable site and a desktop app for Mac and Windows
@@ -27,7 +27,7 @@ The site is a Vite build of separate pages (`index`, `app`, `research`, `sim`, `
 1. **Reuse the web code.** No second UI. The installable site and the desktop app run the same built pages.
 2. **The installable site.** One manifest for the site and the product app (`/manifest.webmanifest`, start page `/app/`, shortcuts to Verify, Trade, Research and the Terminal, a maskable icon), one for Trade (`/trade/manifest.webmanifest`) and the Terminal's own. A service worker at `/sw.js` loads pages from the network first, falls back to the last good copy and then to `/offline.html`, and keeps hashed build files. It never stores `/data/`, `/local/`, share images, badges, sign-in redirects or errors. A small card offers to install once, on the front page and in the apps, fixed to the corner so the page never moves; on an iPhone it says how to add Parity to the home screen. "Not now" hides it for 30 days.
 3. **The desktop app: Electron and electron-builder,** in `desktop/`, with the same layout as the bulk email app: `electron/main.js`, a `build` block in `desktop/package.json`, `build:mac` and `build:win` scripts and a release workflow. Tauri was the first choice for size but the owner asked for the same tools as the earlier app.
-4. **Bundled pages, live data.** The app serves the built site from inside itself at `app://parity/` and asks parity.endyland.com only for what is not bundled (`/data/`, `/stats.json`, badges, share images). The build refuses to package a `data/` or `local/` folder, so no research data ships inside the app.
+4. **Bundled pages, live data.** Since version 0.1.2 the app loads the live site when online and uses the bundled pages only offline ([DEC-0048](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)). Before that, the app serves the built site from inside itself at `app://parity/` and asks parity.endyland.com only for what is not bundled (`/data/`, `/stats.json`, badges, share images). The build refuses to package a `data/` or `local/` folder, so no research data ships inside the app.
 5. **Sign-in.** The Pages middleware does not run for bundled pages, so the app relies on the same in-page sign-in check the web apps already have. The Supabase session is kept in the app's own storage, which survives restarts. The app passes the session's access token to the main process, which sends it as `Authorization: Bearer` when it fetches `/data/`. The middleware now accepts that header and checks it exactly like the cookie. Everything a person owns still comes from Supabase under row level security.
 6. **A sidebar and a menu.** A slim sidebar (Home, Verify, Strategies, Research, Terminal, Trade, Account) stays put while the pages change. Sections are one list in `desktop/electron/sections.js`; an entry with `needs` appears only when its page is in the build, which is how Academy and Workbench join when their apps land. The menu has Go shortcuts (Cmd or Ctrl plus a number for each section, plus comma for Account, Back and Forward), reload, zoom and full screen. The window's size and place are remembered.
 7. **Links.** `parity://` opens the app at a page: `parity://s/<strategy>`, `parity://v/<id>`, `parity://trade/#/chart?s=<symbol>`, `parity://sim/<workspace>`, or any parity.endyland.com, sim.endyland.com or trade.endyland.com address. Links to those three addresses inside the app stay in the app; every other address opens in the browser.
@@ -53,6 +53,7 @@ The site is a Vite build of separate pages (`index`, `app`, `research`, `sim`, `
 
 - [DEC-0042: Parity Academy, a full-screen course player of its own](0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
+- [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->

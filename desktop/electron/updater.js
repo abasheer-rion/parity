@@ -1,6 +1,8 @@
 // Auto-update, written but off (DEC-0041). An unsigned Mac app cannot update itself, and
 // a Windows installer that is not signed trips SmartScreen on every update, so until the
-// owner signs the builds a new version is a new download from the GitHub release.
+// owner signs the builds a new version is a new download from the GitHub release. Pages
+// load live (DEC-0048), so only changes to the app itself need one. There is no "new
+// version" check either: the repository is private, so its releases need a login to read.
 //
 // To turn it on later: sign both builds, then set ENABLED to true (or start the app with
 // PARITY_AUTO_UPDATE=on to try it). It reads the "publish" block in package.json, which

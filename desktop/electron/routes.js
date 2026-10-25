@@ -1,9 +1,11 @@
 // Where an address goes inside the desktop app (DEC-0041). Plain functions, no Electron,
 // so `npm test` can run them.
 //
-// The app serves the built site at app://parity/. The website's addresses (parity.endyland.com,
-// sim.endyland.com, trade.endyland.com, academy.endyland.com, lab.endyland.com) and parity:// links all map
-// onto paths there; anything else is an outside address and opens in the browser.
+// Every place in the app is named by an in-app path such as /trade/#/alerts. When online the
+// path opens on the live site (liveUrl: parity.endyland.com, or the front page of
+// sim., trade., academy. or lab.endyland.com); when offline it opens in the copy of the site
+// bundled at app://parity/. The website's addresses and parity:// links all map onto these
+// paths (toAppPath); anything else is an outside address and opens in the browser.
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -53,6 +55,35 @@ function toAppPath(input, origin) {
   if (front === undefined) return null;
   const p = url.pathname === "/" ? front : url.pathname;
   return expandShortLink(tail(p));
+}
+
+/** The origins the app trusts: the bundled copy and the website's addresses, nothing else. */
+function trustedOrigins(origin) {
+  return [APP_ORIGIN, ...Object.keys(siteHosts(origin)).map((h) => `https://${h}`)];
+}
+
+/** True when an address may load inside the app's page view (and get the page bridge). */
+function isTrusted(input, origin) {
+  let url;
+  try { url = new URL(input); } catch { return false; }
+  if (url.username || url.password) return false;
+  if (url.protocol === "app:") return url.host === "parity";
+  if (url.protocol !== "https:" || url.port) return false;
+  return Object.hasOwn(siteHosts(origin), url.hostname.toLowerCase());
+}
+
+/**
+ * The live address for an in-app path. The front pages of Sim World, Trade, Academy and
+ * Workbench open on their own addresses (sim.<domain> and so on), as on the web; every other
+ * path opens on the main address.
+ */
+function liveUrl(appPath, origin) {
+  const u = new URL(appPath || "/", "https://placeholder.invalid");
+  const tail = `${u.search}${u.hash}`;
+  for (const [host, front] of Object.entries(siteHosts(origin))) {
+    if (front !== "/" && (u.pathname === front || u.pathname === front.slice(0, -1))) return `https://${host}/${tail}`;
+  }
+  return `${origin.replace(/\/$/, "")}${u.pathname}${tail}`;
 }
 
 /** Which sidebar section an in-app address belongs to, or null to keep the current one. */
@@ -110,4 +141,4 @@ function resolveRequest(root, pathname) {
   return { missing: true };
 }
 
-module.exports = { APP_ORIGIN, siteHosts, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest };
+module.exports = { APP_ORIGIN, siteHosts, trustedOrigins, isTrusted, liveUrl, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest };
