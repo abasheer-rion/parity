@@ -6,6 +6,7 @@ import { Term } from "../Learn";
 import { addPractice, day, loadCrypto, pctText, usd, usdCompact, useMarket, type Coin, type CryptoDoc } from "../../lib/markets";
 import { Attribution, Checks, Loading, Risk, Sources, Stat, type Check } from "./shared";
 import { toast } from "../../ui";
+import { localDay } from "../../lib/format";
 
 export function coinChecks(c: Coin, doc: CryptoDoc): Check[] {
   const h = doc.history[c.id];
@@ -31,7 +32,7 @@ export function Crypto() {
 
   const follow = (c: Coin) => {
     if (c.price_usd == null) return;
-    addPractice({ kind: "coin", symbol: c.symbol, name: c.name, coinId: c.id, amount: 1000, entryPrice: c.price_usd, entryDate: new Date().toISOString().slice(0, 10) });
+    addPractice({ kind: "coin", symbol: c.symbol, name: c.name, coinId: c.id, amount: 1000, entryPrice: c.price_usd, entryDate: localDay() });
     toast(`Added a practice position of $1,000 in ${c.name}. No real money.`, { action: { label: "Open Practice", run: () => { window.location.hash = "#/markets/practice"; } } });
   };
 

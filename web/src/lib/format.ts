@@ -17,7 +17,14 @@ export const date = (iso: string | null | undefined) => {
   return Number.isNaN(t.getTime()) ? "n/a" : t.toISOString().slice(0, 10);
 };
 
-export const daysSince = (iso: string | null | undefined) => {
+/**
+ * Today's date where the reader is, as YYYY-MM-DD. `toISOString()` gives the UTC day, which
+ * in the Americas is already tomorrow every evening.
+ */
+export const localDay = (d: Date = new Date()) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+export const daysSince =(iso: string | null | undefined) => {
   const t = iso ? new Date(iso).getTime() : NaN;
   return Number.isNaN(t) ? null : Math.floor((Date.now() - t) / 86_400_000);
 };
