@@ -1,4 +1,4 @@
-// Buttons. One primary per view (white, DEC-0055); everything else is quiet and sits
+// Buttons. One primary per view (white, DEC-0058); everything else is quiet and sits
 // close to the surface tone. A button with `href` renders a link. Variants: primary,
 // secondary, ghost (no fill until hover), danger; "tertiary" is the older name for ghost
 // and "outline" a raised floating button.

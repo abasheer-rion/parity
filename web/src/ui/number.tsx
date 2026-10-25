@@ -1,4 +1,4 @@
-// Numbers that never overflow (DEC-0055). Every figure on the site that can grow (money,
+// Numbers that never overflow (DEC-0058). Every figure on the site that can grow (money,
 // counts, prices, percentages) goes through Num: tabular figures so columns line up, a
 // true minus, an optional sign colour, and a compact form (1.2M) chosen by itself when the
 // full number does not fit its box. The full value is always in the title and for
