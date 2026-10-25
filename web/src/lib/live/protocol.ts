@@ -44,6 +44,23 @@ export interface Tick {
   r?: 1;
 }
 
+/** One price level: [price, size]. */
+export type Level = [number, number];
+/** One trade in the recent trades panel: [exchange time, price, size, side] (side 1 buy, 2 sell, 0 unknown). */
+export type TradeRow = [number, number, number, 0 | 1 | 2];
+/** One market overview row: [symbol, last price, change over 24 h in %, 24 h volume in the
+ *  quote currency, exchange time]. A null keeps the value the browser already has. */
+export type BoardRow = [string, number, number | null, number | null, number];
+
+/**
+ * Subscription keys. A bare symbol ("BTC-USD") is the conflated price for charts and quotes;
+ * "B:BTC-USD" is the order book (top levels, four times a second at most); "X:BTC-USD" is
+ * the recent trades list; "*" is the market overview: every symbol the source lists.
+ */
+export const bookKey = (s: string) => `B:${s}`;
+export const tradesKey = (s: string) => `X:${s}`;
+export const BOARD = "*";
+
 /** Messages from the browser to the edge. */
 export type ClientMsg =
   | { op: "sub"; s: string[] }
@@ -53,12 +70,19 @@ export type ClientMsg =
 
 /** Messages from the edge to the browser. */
 export type ServerMsg =
-  | { op: "hello"; src: string; feed: FeedType; delay?: number; ts: number; max: number }
+  /** internal: a team-only feed (internal use, not shown to the public). */
+  | { op: "hello"; src: string; feed: FeedType; delay?: number; ts: number; max: number; internal?: boolean }
   | { op: "t"; d: Tick[] }
   | { op: "pong"; c: number; ts: number }
   /** Upstream state for this source: up, connecting, down (with a reason). */
   | { op: "state"; up: "up" | "connecting" | "down"; why?: string; ts: number }
-  | { op: "err"; why: string };
+  | { op: "err"; why: string }
+  /** Order book: the top levels each side, best first. */
+  | { op: "b"; s: string; b: Level[]; a: Level[]; te: number; tr: number; ts: number }
+  /** Recent trades since the last message, oldest first. */
+  | { op: "x"; s: string; d: TradeRow[]; ts: number }
+  /** Market overview rows; full=1 replaces the list, and sp holds each symbol's recent prices. */
+  | { op: "r"; d: BoardRow[]; ts: number; full?: 1; sp?: Record<string, number[]>; every?: number };
 
 /** Symbols a client may hold at once on one connection. */
 export const MAX_SUBS = 24;
@@ -66,8 +90,10 @@ export const MAX_SUBS = 24;
 export const MAX_PER_SECOND = 4;
 export const WINDOW_MS = 1000 / MAX_PER_SECOND;
 
-const SYMBOL = /^[A-Z0-9][A-Z0-9._:-]{0,23}$/;
-export const validSymbol = (s: unknown): s is string => typeof s === "string" && SYMBOL.test(s);
+const SYMBOL = /^(?:[BX]:)?[A-Z0-9][A-Z0-9._-]{0,23}$/;
+export const validSymbol = (s: unknown): s is string => typeof s === "string" && (s === BOARD || SYMBOL.test(s));
+/** The symbol inside a subscription key ("B:BTC-USD" gives "BTC-USD"). */
+export const baseOf = (key: string) => (key.length > 2 && key[1] === ":" ? key.slice(2) : key);
 
 /** A client message, checked, or null. Anything unexpected is dropped. */
 export function parseClient(text: string): ClientMsg | null {
@@ -97,7 +123,19 @@ export function parseServer(text: string): ServerMsg | null {
       if (!Array.isArray(o.d)) return null;
       return { op: "t", d: (o.d as Tick[]).filter((t) => t && validSymbol(t.s) && num(t.p) && num(t.o) && num(t.h) && num(t.l) && num(t.te) && num(t.tr) && num(t.ts) && num(t.q)) };
     case "pong": return num(o.c) && num(o.ts) ? { op: "pong", c: o.c, ts: o.ts } : null;
-    case "hello": return typeof o.src === "string" && (o.feed === "rt" || o.feed === "delayed" || o.feed === "eod") && num(o.ts) ? { op: "hello", src: o.src, feed: o.feed, delay: num(o.delay) ? o.delay : undefined, ts: o.ts, max: num(o.max) ? o.max : MAX_SUBS } : null;
+    case "hello": return typeof o.src === "string" && (o.feed === "rt" || o.feed === "delayed" || o.feed === "eod") && num(o.ts) ? { op: "hello", src: o.src, feed: o.feed, delay: num(o.delay) ? o.delay : undefined, ts: o.ts, max: num(o.max) ? o.max : MAX_SUBS, internal: o.internal === true || undefined } : null;
+    case "b": {
+      const lv = (x: unknown): Level[] => (Array.isArray(x) ? (x as Level[]).filter((l) => Array.isArray(l) && num(l[0]) && num(l[1])) : []);
+      return validSymbol(o.s) && num(o.te) && num(o.ts) ? { op: "b", s: o.s, b: lv(o.b), a: lv(o.a), te: o.te, tr: num(o.tr) ? o.tr : o.ts, ts: o.ts } : null;
+    }
+    case "x":
+      return validSymbol(o.s) && Array.isArray(o.d) && num(o.ts) ? { op: "x", s: o.s, ts: o.ts, d: (o.d as TradeRow[]).filter((r) => Array.isArray(r) && num(r[0]) && num(r[1]) && num(r[2])) } : null;
+    case "r": {
+      if (!Array.isArray(o.d) || !num(o.ts)) return null;
+      const d = (o.d as BoardRow[]).filter((r) => Array.isArray(r) && typeof r[0] === "string" && num(r[1]) && num(r[4]));
+      const sp = o.sp && typeof o.sp === "object" ? (o.sp as Record<string, number[]>) : undefined;
+      return { op: "r", d, ts: o.ts, ...(o.full === 1 ? { full: 1 as const } : {}), ...(sp ? { sp } : {}), ...(num(o.every) ? { every: o.every } : {}) };
+    }
     case "state": return o.up === "up" || o.up === "connecting" || o.up === "down" ? { op: "state", up: o.up, why: typeof o.why === "string" ? o.why : undefined, ts: num(o.ts) ? o.ts : 0 } : null;
     case "err": return { op: "err", why: String(o.why ?? "") };
     default: return null;

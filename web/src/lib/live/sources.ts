@@ -1,13 +1,16 @@
-// Every live or near-live source we considered (DEC-0052), with what its terms let us do.
-// Only "display" sources are switched on in the fan-out (web/live/src/adapters.ts). The
-// same list, with the daily sources, is printed by `parity data sources` (engine
-// providers.py) and explained in REF-0014. Terms were read on the date given.
+// Every live or near-live source we considered (DEC-0052, DEC-0053), with what its terms let
+// us do. "display" sources stream to everyone; "internal" sources stream only to team
+// members (the team_members list, checked by the server on every connection), because their
+// terms allow internal use but not showing the data to the public. The same list, with the
+// daily sources, is printed by `parity data sources` (engine providers.py) and explained in
+// REF-0014. Terms were read on the date given.
 import type { FeedType } from "./protocol";
 import type { LiveTf } from "./candles";
 
-/** display: terms allow showing the data on our site; ask: terms are silent or unclear,
- *  so it waits for the owner; no: terms forbid it or the source blocks us. */
-export type Licence = "display" | "ask" | "no";
+/** display: terms allow showing the data on our site; internal: terms allow internal use
+ *  only, so only team members see it; ask: terms are silent or unclear, so it waits for the
+ *  owner; no: terms forbid it or the source blocks us. */
+export type Licence = "display" | "internal" | "ask" | "no";
 
 export interface SourceMeta {
   id: string;
@@ -30,6 +33,18 @@ export interface SourceMeta {
   tfs?: LiveTf[];
   /** Bars are built from prices, not trades: each opens at the previous close. */
   fromCloses?: boolean;
+  /** Streams an order book and a recent trades list. */
+  book?: boolean;
+  /** Offers the market overview (every symbol it lists, with price, change and volume). */
+  board?: boolean;
+  /** Server settings (Pages and worker secrets) it needs; off until all are set. */
+  keys?: string[];
+  /** Upstream symbol limit of the plan, when lower than our own cap. */
+  limit?: number;
+  /** Covers US stocks and funds (any SEC-listed symbol), not a list of its own. */
+  stocks?: boolean;
+  /** Why internal use is allowed, in one line (internal sources only). */
+  basis?: string;
 }
 
 const READ = "2026-10-25";
@@ -37,28 +52,47 @@ const READ = "2026-10-25";
 export const SOURCES: SourceMeta[] = [
   // Streamed through the fan-out today.
   { id: "coingecko", name: "CoinGecko", short: "CoinGecko", feed: "delayed", delayMin: 1, covers: "The 100 largest coins, priced in US dollars, refreshed about once a minute", licence: "display",
-    terms: "https://www.coingecko.com/en/api_terms", read: "2026-10-22", streams: true, tfs: ["5m", "1h", "1d"], fromCloses: true,
+    terms: "https://www.coingecko.com/en/api_terms", read: "2026-10-22", streams: true, tfs: ["5m", "1h", "1d"], fromCloses: true, board: true,
     note: "Display allowed with \"Data provided by CoinGecko\" linked next to the data. Prices are CoinGecko's own blend across exchanges, about a minute behind." },
-  // Built and tested, switched off until the owner decides (terms silent or forbid).
-  { id: "hyperliquid", name: "Hyperliquid", short: "Hyperliquid", feed: "rt", covers: "Real-time trades for every Hyperliquid perpetual", licence: "ask",
-    terms: "https://app.hyperliquid.xyz/terms", read: READ, streams: true,
-    note: "Terms have no clause on data reuse and bar US persons from the app. Off until the owner decides; LIVE_ALLOW=hyperliquid turns it on." },
-  { id: "kraken", name: "Kraken", short: "Kraken", feed: "rt", covers: "Real-time spot trades", licence: "no",
-    terms: "https://www.kraken.com/legal/global-terms", read: READ, streams: true,
-    note: "Terms forbid making content available to third parties without consent (marketdata@kraken.com). Adapter kept for a written consent." },
+  // Team only (DEC-0053): terms allow internal use, so these stream only to people on the
+  // team list. Every pair each venue lists is offered.
+  { id: "hyperliquid", name: "Hyperliquid", short: "Hyperliquid", feed: "rt", covers: "Every Hyperliquid perpetual and spot pair, real-time trades and book", licence: "internal",
+    terms: "https://app.hyperliquid.xyz/terms", read: READ, streams: true, book: true, board: true,
+    basis: "Terms (15 June 2026) have no clause limiting data use; we only read the public feed for our own team and never show it to the public.",
+    note: "Team only. The app's terms bar US persons from trading; we do not trade, we read public prices. Owner decision 25 Oct 2026." },
+  { id: "kraken", name: "Kraken", short: "Kraken", feed: "rt", covers: "Every Kraken spot pair, including its fiat pairs (EUR/USD, GBP/USD, USD/JPY and others)", licence: "internal",
+    terms: "https://www.kraken.com/legal/global-terms", read: READ, streams: true, book: true, board: true,
+    basis: "Terms (19 Oct 2026) allow use for your own benefit and forbid making content available to third parties; team-only use keeps it inside Parity.",
+    note: "Team only. Public display would need written consent (marketdata@kraken.com)." },
+  { id: "coinbase", name: "Coinbase Exchange", short: "Coinbase", feed: "rt", covers: "Every Coinbase Exchange pair, real-time trades and book", licence: "internal",
+    terms: "https://www.coinbase.com/legal/market_data", read: READ, streams: true, book: true, board: true, tfs: ["1m", "5m", "15m", "1h", "1d"],
+    basis: "Market data terms (7 Aug 2026) forbid redistributing or displaying the data to third parties; our own team's use is not either.",
+    note: "Team only. The terms page refused automated reads on 25 Oct 2026, so the wording is from the earlier read." },
+  { id: "gemini", name: "Gemini", short: "Gemini", feed: "rt", covers: "Every Gemini pair, real-time trades and book", licence: "internal",
+    terms: "https://www.gemini.com/legal/market-data-agreement", read: READ, streams: true, book: true, board: true, tfs: ["1m", "5m", "15m", "1h", "1d"],
+    basis: "Market data agreement (12 Oct 2025) permits \"personal and/or internal use\"; redistribution needs its Redistribution Agreement.",
+    note: "Team only. Public display needs the Redistribution Agreement (bizdev@gemini.com)." },
+  { id: "binanceus", name: "Binance.US", short: "Binance.US", feed: "rt", covers: "Every Binance.US pair, real-time trades and book", licence: "internal",
+    terms: "https://www.binance.us/terms-of-use", read: READ, streams: true, book: true, board: true,
+    basis: "Terms (5 June 2026) present market data for informational purposes and forbid public display; internal viewing is neither.",
+    note: "Team only." },
+  { id: "alpaca", name: "Alpaca Market Data (IEX)", short: "Alpaca", feed: "rt", covers: "US stocks and ETFs: real-time IEX trades on the free plan, every exchange on Algo Trader Plus", licence: "internal",
+    terms: "https://alpaca.markets/disclosures", read: READ, streams: true, board: true, keys: ["ALPACA_KEY_ID", "ALPACA_SECRET_KEY"], limit: 30, stocks: true,
+    basis: "The account holder's own market data subscription, used by our team inside Parity and never shown to the public.",
+    note: "Team only, off until ALPACA_KEY_ID and ALPACA_SECRET_KEY are set. The free plan covers IEX trades only, a small share of US volume, and 30 symbols at once." },
+  { id: "finnhub", name: "Finnhub", short: "Finnhub", feed: "rt", covers: "US stock trades over its websocket", licence: "internal",
+    terms: "https://finnhub.io/terms-of-service", read: READ, streams: true, keys: ["FINNHUB_TOKEN"], limit: 50, stocks: true,
+    basis: "Only with a plan or written approval that allows business use; the free plan is personal use only, even internally.",
+    note: "Team only, off until FINNHUB_TOKEN is set. Finnhub's terms say a personal plan cannot be used by a business, even internally, without written approval." },
   // Turned down: terms forbid display, or a key or contract is needed.
-  { id: "coinbase", name: "Coinbase Exchange", short: "Coinbase", feed: "rt", covers: "Real-time spot trades", licence: "no", terms: "https://www.coinbase.com/legal/market_data", read: READ, streams: false,
-    note: "Market data terms (7 Aug 2026) forbid display to third parties and apps for end users." },
   { id: "bitstamp", name: "Bitstamp", short: "Bitstamp", feed: "rt", covers: "Real-time spot trades", licence: "no", terms: "https://www.bitstamp.net/terms-of-use/", read: READ, streams: false,
-    note: "Terms forbid republishing prices on any other website." },
-  { id: "gemini", name: "Gemini", short: "Gemini", feed: "rt", covers: "Real-time spot trades", licence: "no", terms: "https://www.gemini.com/legal/market-data-agreement", read: READ, streams: false,
-    note: "Personal and internal use only; a Redistribution Agreement (bizdev@gemini.com) would allow display." },
+    note: "Terms forbid republishing prices on any other website. Not built." },
   { id: "bitfinex", name: "Bitfinex", short: "Bitfinex", feed: "rt", covers: "Real-time spot trades", licence: "no", terms: "https://www.bitfinex.com/legal/general/market-data", read: READ, streams: false,
     note: "No redistribution without written consent." },
-  { id: "binance", name: "Binance and Binance.US", short: "Binance", feed: "rt", covers: "Real-time spot trades", licence: "no", terms: "https://www.binance.us/terms-of-use", read: READ, streams: false,
-    note: "Binance blocks US addresses; Binance.US forbids public display." },
+  { id: "binance", name: "Binance", short: "Binance", feed: "rt", covers: "Real-time spot and perps", licence: "no", terms: "https://www.binance.com/en/terms", read: READ, streams: false,
+    note: "Blocks US addresses (HTTP 451) and bars US persons, so not even internal use." },
   { id: "others-crypto", name: "Crypto.com, KuCoin, Gate, Bitget, MEXC, HTX, OKX, Bybit, Deribit", short: "Other exchanges", feed: "rt", covers: "Real-time spot and perps", licence: "no", terms: "https://www.kucoin.com/legal/terms-of-use", read: READ, streams: false,
-    note: "Each forbids display without consent, is personal use only, or bars the US." },
+    note: "Each forbids display without consent, is personal use only (Deribit, OKX), or bars the US (Bybit, OKX, Binance)." },
   { id: "dydx", name: "dYdX v4 indexer", short: "dYdX", feed: "rt", covers: "Real-time perps", licence: "no", terms: "https://dydx.trade/terms", read: READ, streams: false,
     note: "No data licence and not available to US persons." },
   { id: "pyth", name: "Pyth Network", short: "Pyth", feed: "rt", covers: "Real-time crypto, FX, metals, US stocks", licence: "no", terms: "https://www.pyth.network/pricing", read: READ, streams: false,
@@ -82,3 +116,7 @@ export const SOURCES: SourceMeta[] = [
 
 export const sourceById = (id: string): SourceMeta | undefined => SOURCES.find((s) => s.id === id);
 export const liveSources = () => SOURCES.filter((s) => s.streams && s.licence === "display");
+/** Team-only sources: terms allow internal use only (DEC-0053). */
+export const isInternal = (id: string) => sourceById(id)?.licence === "internal";
+/** The badge's words for a team-only feed. */
+export const INTERNAL_LABEL = "Internal use, real-time";

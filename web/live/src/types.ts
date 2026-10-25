@@ -11,6 +11,7 @@ export interface DurableObjectNamespace {
 export interface DurableObjectState {
   acceptWebSocket(ws: WebSocket, tags?: string[]): void;
   getWebSockets(tag?: string): WebSocket[];
+  getTags?(ws: WebSocket): string[];
   setWebSocketAutoResponse?(pair: unknown): void;
   storage: { setAlarm(at: number): Promise<void>; deleteAlarm(): Promise<void> };
   blockConcurrencyWhile<T>(fn: () => Promise<T>): Promise<T>;
@@ -32,4 +33,11 @@ export interface Env {
   VENDOR_KEY?: string;
   /** Sources with unclear terms the owner switched on, comma separated (DEC-0052). */
   LIVE_ALLOW?: string;
+  /** Sources switched off for now, comma separated (DEC-0053). */
+  LIVE_DENY?: string;
+  /** US stock feeds for the team (DEC-0053). Secrets, never sent to a browser. */
+  ALPACA_KEY_ID?: string;
+  ALPACA_SECRET_KEY?: string;
+  ALPACA_FEED?: string;
+  FINNHUB_TOKEN?: string;
 }
