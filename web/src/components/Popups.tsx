@@ -19,7 +19,7 @@ interface Pop { key: string; kind: Kind; arg: string; anchor?: string; rect: DOM
 
 const OPEN_DELAY = 180;
 const CLOSE_DELAY = 320;
-const TRIGGER = "a[data-term], a[data-doc], a[data-ref]";
+const TRIGGER = "a[data-term], span[data-term], a[data-doc], a[data-ref]";
 
 function levelOf(el: Element | null): number {
   const pop = el?.closest<HTMLElement>(".pop");

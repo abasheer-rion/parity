@@ -2,6 +2,7 @@ import { Title } from "../components/Shell";
 import { useMemo, useState } from "react";
 import { useDocs, type DocsData } from "../lib/docs";
 import { SearchInput, Segmented, SkeletonCard } from "../ui";
+import { usePlainTerms } from "../ui/plainTerms";
 import { categories, termById, terms } from "../lib/glossary";
 import type { GlossaryTerm } from "../lib/types";
 
@@ -97,6 +98,8 @@ function TermCard({ term, initial, focused, docs: all }: { term: GlossaryTerm; i
 /** Inline link from any page to a glossary entry, shown as a dotted underline. */
 export function Term({ id, children }: { id: string; children: React.ReactNode }) {
   const t = termById[id];
+  const plain = usePlainTerms();
   if (!t) return <>{children}</>;
+  if (plain) return <span className="term-link" data-term={id}>{children}</span>;
   return <a className="term-link" href={`#/learn/${id}`} data-term={id}>{children}</a>;
 }
