@@ -136,9 +136,11 @@ let cgTop: { at: number; rows: CgRow[] } | null = null;
 async function cgMarkets(maxAgeMs: number): Promise<CgRow[]> {
   if (cgTop && Date.now() - cgTop.at < maxAgeMs) return cgTop.rows;
   // Cached at the edge for 20 s, so every worker and object shares one answer.
-  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1`, { headers: { Accept: "application/json", "User-Agent": "parity-live" }, cf: { cacheTtl: 20, cacheEverything: true } } as RequestInit);
+  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1`, { headers: { Accept: "application/json", "User-Agent": "parity-live" }, cf: { cacheTtlByStatus: { "200-299": 20, "300-599": 0 }, cacheEverything: true } } as RequestInit);
   if (!res.ok) throw new Error(`coingecko ${res.status}`);
   const rows = (await res.json()) as CgRow[];
+  // A refusal can come back as an object instead of a list; never cache that.
+  if (!Array.isArray(rows) || !rows.length) throw new Error("coingecko 429");
   cgTop = { at: Date.now(), rows };
   return rows;
 }
@@ -275,6 +277,7 @@ export async function universe(env: AdapterEnv): Promise<UniverseDoc> {
   }
   if (coingecko.enabled(env)) {
     try { live.coingecko = [...cgSymbols(await cgMarkets(600_000)).keys()]; } catch { live.coingecko = CG_FALLBACK; }
+    if (!live.coingecko.length) live.coingecko = CG_FALLBACK;
   }
   if (kraken.enabled(env)) live.kraken = sourceById("kraken")?.symbols ?? [];
   return { at: Date.now(), stocks, live };
