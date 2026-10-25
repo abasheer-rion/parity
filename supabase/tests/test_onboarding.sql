@@ -1,4 +1,4 @@
--- Check of 20261105000000_onboarding.sql (DEC-0057): row rules for the checklist, tours and
+-- Check of 20261106000000_onboarding.sql (DEC-0057): row rules for the checklist, tours and
 -- crypto wallets. Run it with supabase/tests/local.sh, which applies every migration to a
 -- throwaway local Postgres and runs every test_*.sql. Never applied to the hosted project.
 --
