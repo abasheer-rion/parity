@@ -8,6 +8,7 @@ export const LEGAL_PAGES = [
   { href: "/legal/cookies/", label: "Cookies" },
   { href: "/legal/accessibility/", label: "Accessibility" },
   { href: "/legal/risk/", label: "Risk" },
+  { href: "/legal/regulatory/", label: "Regulatory" },
 ] as const;
 
 export function LegalLinks({ className = "", cookieSettings = true }: { className?: string; cookieSettings?: boolean }) {

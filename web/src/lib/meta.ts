@@ -132,12 +132,13 @@ export const PAGES: Record<string, PageMeta> = {
     title: "Verified record · Parity", description: "A Parity Verify record: what was checked in a trading record, and what was not.",
     image: "badge", robots: PRIVATE, ld: [verifyAppLd()],
   },
-  "legal/index.html": { title: "Legal · Parity", description: "Parity's privacy policy, terms, cookie policy, accessibility statement and risk notice.", path: "/legal/", image: "legal" },
+  "legal/index.html": { title: "Legal · Parity", description: "Parity's privacy policy, terms, cookie policy, accessibility statement, risk notice and regulatory status.", path: "/legal/", image: "legal" },
   "legal/privacy/index.html": { title: "Privacy policy · Parity", description: "What Parity collects, why, how long we keep it, who processes it, and your rights.", path: "/legal/privacy/", image: "legal" },
   "legal/terms/index.html": { title: "Terms of service · Parity", description: "The terms for using Parity, a research and education service. Not investment advice, not a broker.", path: "/legal/terms/", image: "legal" },
   "legal/cookies/index.html": { title: "Cookie policy · Parity", description: "Every cookie and browser storage item Parity uses. Today they are all essential.", path: "/legal/cookies/", image: "legal" },
   "legal/accessibility/index.html": { title: "Accessibility statement · Parity", description: "Parity's accessibility target, the known gaps, and how to report a barrier.", path: "/legal/accessibility/", image: "legal" },
   "legal/risk/index.html": { title: "Risk notice · Parity", description: "Why backtests and simulations can mislead, and the risks of crypto, perpetual futures, leverage and ETFs.", path: "/legal/risk/", image: "legal" },
+  "legal/regulatory/index.html": { title: "Regulatory status and your rights · Parity", description: "What Parity is and is not, the laws and exemptions it relies on, your rights, and where to complain.", path: "/legal/regulatory/", image: "legal" },
   // The signed-in apps. Their tags change with each page (ROUTES_META); these are what a
   // link preview shows, since the server answers a signed-out visitor with a redirect.
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },
