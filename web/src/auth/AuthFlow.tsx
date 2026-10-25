@@ -122,7 +122,7 @@ function SizeBox({ children }: { children: ReactNode }) {
       if (still()) return;
       for (const rec of records) {
         for (const node of rec.removedNodes) {
-          if (!(node instanceof HTMLElement) || !node.classList.contains("pa-screen") || typeof node.animate !== "function") continue;
+          if (!(node instanceof HTMLElement) || !node.classList.contains("pa-screen") || node.classList.contains("pa-ghost") || typeof node.animate !== "function") continue;
           ghost(i, node);
         }
       }

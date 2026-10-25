@@ -55,6 +55,21 @@ The owner asked whether these are options. All four are possible with Supabase A
 
 The Google, Apple and passkey buttons are already built and hidden behind those settings, so turning one on is a configuration change. The phone form is not built.
 
+## Update 2026-10-25: Linear-style motion, a strength bar and a welcome
+
+The owner, on 25 October 2026: "let's have Linear type of animations when onboarding or signing in, and also how it fades in, very modern and what we want, also with this animation for checking if the password meets our standards, use what we did on useargus.co page with the bar underneath."
+
+**What Linear does (observed on linear.app/login, 25 October 2026).** The logo stays still. Each step's content fades in from 10 px above over 300 ms after a 200 ms pause, on a soft ease-out curve. "Continue with email" swaps the buttons for the email field in place, with the same fade, and the field gets a soft coloured focus ring. Nothing else moves.
+
+1. **Entrances.** Each step's parts blur and rise in one after another: the heading, the line under it, each field, the button, then the links under the form, about 50 ms apart. Each part rises 10 px, clears a 5 px blur and fades in over 0.5 s on a short spring (`cubic-bezier(.16, 1, .3, 1)`). On the front page the parts wait until the page behind has faded.
+2. **Steps.** When a step is replaced (email to password, password to "Check your email", log in to reset), the old step slides up 8 px, blurs and fades out over 0.22 s while the new one rises in. The panel's height follows on the same spring, so nothing jumps. The leaving copy is hidden from screen readers and the keyboard.
+3. **Fields and buttons.** A focused field gets a soft white glow. Buttons shrink slightly while pressed.
+4. **Success.** After a good log in, code or new password, the pressed button's label turns into a check and the panel blurs and fades out, then the next page loads (0.42 s in all).
+5. **Strength bar.** Under a new password: four segments that fill from the left and turn red, amber, yellow-green, then green as the password gets stronger, with the word beside them (Too weak, Easy to guess, Fair, Good, Strong). The rules (at least 10 characters, a letter, a number) still decide what is allowed; each one ticks with a small pop when met. The strength counts length (14 and 20 characters each add a step) and kinds of character (3 or more adds a step), and marks common words, runs like abcdef or 123456, a few characters repeated, and the email's name as easy to guess. Screen readers hear "Password strength: Good" when it changes. It shows on sign up, reset password and Account, Change password. The pattern is ported from the owner's other site; the code, colours and words are Parity's.
+6. **Welcome.** A new account sees three short steps before the app: what Parity does, what they want to do first (any of five picks, kept in this browser only), then Verify or Parity Trade, ordered by the picks. "Skip for now" on every step, and the last step's "Go to the app", go to `next` as before. People with an authenticator app get that step instead.
+7. **Reduced motion.** No entrances, no sliding steps, no check animation, no delay before the next page.
+8. **Checks.** `npm run auth:motion` records each scene at 1440 by 900 and 390 by 844 with every Supabase request stubbed, and checks the stagger, the leaving step, the bar, the announcement, the welcome, the success fade and reduced motion. The layout shift audit stays at 0.000 on the front page and every sign-in page.
+
 ## Alternatives considered
 
 - **A cross-document fade to separate pages.** That is what DEC-0039 did. The page still reloaded and the background was drawn again.
