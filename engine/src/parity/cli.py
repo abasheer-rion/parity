@@ -764,6 +764,10 @@ def main(argv: list[str] | None = None) -> int:
 
     profiles_cli.add_parser(sub).set_defaults(func=_profiles)
 
+    from . import latency
+
+    latency.add_parser(sub).set_defaults(func=latency.run)
+
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:
         p.error("ticks needs --date YYYY-MM-DD (or --import FILE)")
