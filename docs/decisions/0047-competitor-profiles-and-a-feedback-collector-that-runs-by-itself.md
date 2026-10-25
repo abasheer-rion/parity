@@ -7,7 +7,7 @@ created: 2026-10-24
 updated: 2026-10-24
 authors: [ayan]
 tags: [competitors, data, infra, ui]
-related: [DEC-0037, CMP-0001, RES-0020, RES-0021]
+related: [DEC-0037, CMP-0001, RES-0020, RES-0021, RES-0022]
 ---
 
 # Competitor profiles and a feedback collector that runs by itself
@@ -19,7 +19,7 @@ The owner asked us to write down everything about the trading apps we are studyi
 ## Context
 
 - We build five apps (Trade, Terminal, Verify, Workbench, Academy) against products people already use. [RES-0021](../research/0021-how-trading-platforms-lay-out-a-workspace.md) covered workspace layout and [RES-0020](../research/0020-verifying-trading-claims-market-size-and-competitors.md) covered Verify's market. Neither said what users of each product think.
-- A separate piece of work covers how these platforms are built and how fast they are (branch `docs/trading-architecture`). This decision covers product, UX and user sentiment only.
+- How these platforms are built and how fast they are is in [RES-0022](../research/0022-how-trading-and-market-data-platforms-are-built.md) and [REF-0019](../reference/0019-latency-budget-and-target-architecture.md). This decision covers product, UX and user sentiment only.
 - The owner wants everything to run by itself ([DEC-0037](0037-everything-runs-by-itself-and-the-search-widens-itself.md)), and wants feedback read only where the source's terms allow automated access.
 
 ## Decision

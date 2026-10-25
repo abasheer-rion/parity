@@ -98,4 +98,5 @@ No Stripe account is created, no key is stored, and no account is opened anywher
 
 - [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
+- [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 <!-- backlinks:end -->

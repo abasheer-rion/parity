@@ -7,7 +7,7 @@ created: 2026-10-24
 updated: 2026-10-24
 authors: [ayan]
 tags: [competitors, ui]
-related: [DEC-0047, RES-0020, RES-0021, DEC-0024, DEC-0040, DEC-0042, DEC-0043]
+related: [DEC-0047, RES-0020, RES-0021, RES-0022, REF-0019, DEC-0024, DEC-0040, DEC-0042, DEC-0043]
 ---
 
 # What users praise most in trading platforms, and what Parity takes from it
@@ -18,7 +18,7 @@ We wrote a profile of 22 trading products, from the Bloomberg Terminal to Robinh
 
 ## Summary
 
-- 22 profiles, CMP-0002 to CMP-0023, each with the same sections. Prices and features were checked on 24 October 2026. How the platforms are built and how fast they are is covered by separate work on the `docs/trading-architecture` branch; this set covers product, UX and what users say.
+- 22 profiles, CMP-0002 to CMP-0023, each with the same sections. Prices and features were checked on 24 October 2026. How the platforms are built and how fast they are is in [RES-0022](../research/0022-how-trading-and-market-data-platforms-are-built.md) and [REF-0019](../reference/0019-latency-budget-and-target-architecture.md); this set covers product, UX and what users say.
 - The counts come from the feedback collector ([DEC-0047](../decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)), which runs once a day inside the sims service and only reads sources whose terms allow it. The table below is a snapshot; the research site's Competitors page shows the live counts.
 - The five themes users praise most, by count of public posts: see the table in [what users praise most](#what-users-praise-most). Across the profiles, the patterns named most often as worth copying are saved and linked layouts, a practice account one tap from the real screen, and one-click order entry on the chart.
 - Every Verify competitor checks that trades happened. None we found counts how many strategies or settings were tried before the one shown, so none can say how much of a record is luck. That is still Verify's opening ([RES-0020](../research/0020-verifying-trading-claims-market-size-and-competitors.md)), with one correction: QuantPad now shows a deflated Sharpe ratio, but it assumes a single try ([CMP-0018](0018-quantpad.md)).
