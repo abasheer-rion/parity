@@ -14,6 +14,7 @@ import { LiveMini } from "../components/LiveMini";
 import { useCallback, useEffect, useState } from "react";
 import { AppGuard } from "../auth";
 import { copyLink } from "../components/CopyLink";
+import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { listBatches, loadReport, source, type BatchInfo } from "../lib/data";
 import { date } from "../lib/format";
@@ -86,19 +87,21 @@ function LabShell() {
   const parts = hash.replace(/^#\/?/, "").split("?")[0].split("/");
   const asked = parts[0] as View;
   const view: View = IDS.includes(asked) ? asked : (IDS.includes(settings.last) && settings.start === "last" ? settings.last : "try");
+  // A view name the Workbench does not have shows its "not found" view (DEC-0053).
+  const missing = parts[0] !== "" && !IDS.includes(asked);
   const arg = parts[1] ? decodeURIComponent(parts[1]) : undefined;
   const mobile = useMobile();
   const [keysOpen, setKeysOpen] = useState(false);
 
   // An address without a view opens the start view, in place.
   useEffect(() => {
-    if (!IDS.includes(asked)) window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#/${view}`);
-  }, [asked, view]);
-  useEffect(() => { if (view !== "settings" && view !== settings.last) setSettings({ last: view }); }, [view, settings.last, setSettings]);
-  useEffect(() => { document.title = `${VIEWS.find((v) => v.id === view)?.label ?? ""} · Parity Workbench`; }, [view]);
+    if (parts[0] === "") window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#/${view}`);
+  }, [parts[0], view]);
+  useEffect(() => { if (!missing && view !== "settings" && view !== settings.last) setSettings({ last: view }); }, [missing, view, settings.last, setSettings]);
+  useEffect(() => { document.title = `${missing ? "Not found" : VIEWS.find((v) => v.id === view)?.label ?? ""} · Parity Workbench`; }, [missing, view]);
 
   // The run (Try settings and Compare read one). Loaded the first time a view needs it.
-  const needsRun = view === "try" || view === "compare";
+  const needsRun = !missing && (view === "try" || view === "compare");
   const [wanted, setWanted] = useState(needsRun);
   useEffect(() => { if (needsRun) setWanted(true); }, [needsRun]);
   const [batches, setBatches] = useState<BatchInfo[]>([]);
@@ -150,7 +153,8 @@ function LabShell() {
     </label>
   ) : null;
 
-  const body = view === "try" || view === "compare"
+  const body = missing ? <NotFound heading="h2" address={hash} home="#/" homeLabel="Workbench home" body="There is no Workbench view at this address. The link may be mistyped, or the page may have moved." />
+    : view === "try" || view === "compare"
     ? (runError ? <div className="lb-msg">{runError}</div>
       : !report ? <div className="lb-msg lb-loading" aria-busy="true">Loading the run</div>
       : view === "try" ? <TryView key={report.generated_at} report={report} /> : <CompareView report={report} />)
@@ -171,8 +175,8 @@ function LabShell() {
           <span className="lb-back-t">Back</span>
         </button>
         <span className="lb-brand" aria-hidden>PARITY <b>WORKBENCH</b></span>
-        <h1 className="lb-viewname">{current.label}</h1>
-        {current.research && <span className="lb-ro" title="Numbers from the research side. Nothing here changes them.">Research · read only</span>}
+        <h1 className="lb-viewname">{missing ? "Not found" : current.label}</h1>
+        {!missing && current.research && <span className="lb-ro" title="Numbers from the research side. Nothing here changes them.">Research · read only</span>}
         <span className="lb-gap" />
         {runPicker}
         <button type="button" className="lb-btn" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
@@ -185,7 +189,7 @@ function LabShell() {
         {!mobile && (
           <nav className="lb-rail" aria-label="Workbench">
             {VIEWS.map((v, i) => (
-              <a key={v.id} href={hrefOf(v.id)} className={`lb-rail-i ${view === v.id ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={view === v.id ? "page" : undefined}
+              <a key={v.id} href={hrefOf(v.id)} className={`lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
                 title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
@@ -203,7 +207,7 @@ function LabShell() {
       {mobile && (
         <nav className="lb-tabs" aria-label="Workbench">
           {VIEWS.map((v) => (
-            <a key={v.id} href={hrefOf(v.id)} className={view === v.id ? "on" : ""} aria-current={view === v.id ? "page" : undefined}><Icon name={v.icon} size={17} /><span>{v.short}</span></a>
+            <a key={v.id} href={hrefOf(v.id)} className={(!missing && view === v.id) ? "on" : ""} aria-current={(!missing && view === v.id) ? "page" : undefined}><Icon name={v.icon} size={17} /><span>{v.short}</span></a>
           ))}
         </nav>
       )}

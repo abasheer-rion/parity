@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AppGuard } from "./auth";
+import { NotFound } from "./components/NotFound";
 import { Palette } from "./components/Palette";
 import { Popups } from "./components/Popups";
 import { Shell } from "./components/Shell";
@@ -27,7 +28,7 @@ import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
 import { Settings } from "./pages/Settings";
 import { SimLanding } from "./pages/SimLanding";
 import { UILibrary } from "./pages/UILibrary";
-import { PageSkeleton, Toaster } from "./ui";
+import { Button, PageSkeleton, Toaster } from "./ui";
 import { LegalLinks } from "./legal/LegalLinks";
 import { Signals } from "./pages/Signals";
 import { Start } from "./pages/Start";
@@ -37,7 +38,7 @@ import { ResearchHome } from "./pages/ResearchHome";
 import { Watchlist } from "./pages/Watchlist";
 import { Verify } from "./pages/Verify";
 import { SharePanel } from "./pages/verify/Share";
-import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl } from "./lib/space";
+import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { Strategies } from "./pages/Strategies";
 import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
@@ -126,7 +127,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
   const [path, query = ""] = hash.split("?");
   const [, route = "", arg, extra] = path.split("/");
   const q = new URLSearchParams(query).get("q") ?? undefined;
-  const standalone = STANDALONE.includes(route);
+  const missing = unknownRoute(route, arg, PAYMENTS_ENABLED);
+  const standalone = STANDALONE.includes(route) || missing;
   const dec = (s?: string) => (s ? decodeURIComponent(s) : undefined);
   // The tab title and share tags follow the page (DEC-0038).
   const run = route === "strategy" && arg && report ? report.runs.find((r) => r.strategy === dec(arg)) : undefined;
@@ -161,6 +163,11 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
     <Shell route={route} arg={arg} hash={hash} run={runPicker} email={email} onSignOut={onSignOut} wide={route === "doc"}>
       {/* Keyed by route: each page eases in when it opens (transform and opacity only). */}
       <div key={route} className="ui-route">
+      {missing && (
+        <NotFound address={hash} home="#/" homeLabel={SPACE === "research" ? "Research home" : "Home"}>
+          <Button variant="secondary" icon="search" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search</Button>
+        </NotFound>
+      )}
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}

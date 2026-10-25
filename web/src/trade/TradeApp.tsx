@@ -4,6 +4,7 @@
 // the demo account with delayed data. One Back button returns to Parity.
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AppGuard } from "../auth";
+import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { Button, Dialog, Icon, Popover, Toaster, toast } from "../ui";
 import { CHART_TYPES, type DrawTool } from "../ui/proChart";
@@ -82,6 +83,8 @@ function fromHash(l: Layout): Layout {
   return { ...l, cells: l.cells.map((c, i) => (i === l.active ? { ...c, symbol: s || c.symbol, tf: tf ?? c.tf } : c)) };
 }
 
+/** The hash itself when it names no Trade view (the app then shows "not found", DEC-0053), else null. */
+const unknownView = (h: string): string | null => { const v = h.split("?")[0].split("/")[1] ?? ""; return v && !(VIEW_IDS as string[]).includes(v) ? h : null; };
 const viewOf = (h: string): View => { const v = h.split("?")[0].split("/")[1] ?? ""; return (VIEW_IDS as string[]).includes(v) ? (v as View) : "chart"; };
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 type MTab = "chart" | "watch" | "ticket" | "dock" | "more";
@@ -94,6 +97,7 @@ function TradeShell() {
   const set = useCallback((f: (l: Layout) => Layout) => setLayoutState((old) => { const next = f(old); if (next !== old) writeLayout(next); return next; }), []);
   const setSettings = useCallback((p: Partial<Settings>) => setSettingsState((old) => { const next = { ...old, ...p }; writeSettings(next); return next; }), []);
   const [view, setView] = useState<View>(() => viewOf(window.location.hash));
+  const [missing, setMissing] = useState<string | null>(() => unknownView(window.location.hash));
   const mobile = useMobile();
   const [mtab, setMtab] = useState<MTab>("chart");
 
@@ -114,17 +118,17 @@ function TradeShell() {
   // The hash holds the view, and ?s=<key>&tf=<D|W|M> load into the active chart, so a link
   // reopens the same chart (DEC-0038).
   useEffect(() => {
-    const on = () => { setView(viewOf(window.location.hash)); set(fromHash); };
+    const on = () => { setView(viewOf(window.location.hash)); setMissing(unknownView(window.location.hash)); set(fromHash); };
     window.addEventListener("hashchange", on);
     return () => window.removeEventListener("hashchange", on);
   }, [set]);
   const go = useCallback((v: View) => { window.location.hash = `#/${v}`; }, []);
   // On the Chart view the address follows the active chart, without a history entry.
   useEffect(() => {
-    if (view !== "chart") return;
+    if (view !== "chart" || missing) return;
     const want = `#/chart?s=${encodeURIComponent(symbol)}&tf=${cell.tf}`;
     if (window.location.hash !== want) window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${want}`);
-  }, [view, symbol, cell.tf]);
+  }, [view, missing, symbol, cell.tf]);
 
   // A saved symbol the data no longer has (or a default it never had) becomes another price series.
   useEffect(() => {
@@ -284,10 +288,10 @@ function TradeShell() {
             <span className="tb-back-t">Back</span>
           </button>
           <span className="tb-brand" aria-hidden>PARITY <b>TRADE</b></span>
-          {view === "chart" ? (
+          {view === "chart" && !missing ? (
             <ChartBar layout={layout} set={set} list={list} inst={activeInst} symbol={symbol} tool={tool} setTool={setTool} mobile={mobile}
               onSearch={() => setFinder({ open: true, mode: "symbols", initial: "" })} onIndicators={() => setIndOpen(true)} setTf={setTf} setGrid={setGrid} />
-          ) : <h1 className="tb-view">{viewLabel}</h1>}
+          ) : <h1 className="tb-view">{missing ? "Not found" : viewLabel}</h1>}
           <span className="tb-gap" />
           {!mobile && (
             <Popover label="Layouts" width={240} placement="bottom-end" trigger={() => (
@@ -323,7 +327,8 @@ function TradeShell() {
             </nav>
           )}
           <main id="main" tabIndex={-1} className="tr-main">
-            {noData ? <div className="vmsg">No market data</div>
+            {missing ? <NotFound heading="h2" address={missing} home="#/chart" homeLabel="Chart" body="There is no Parity Trade page at this address. The link may be mistyped, or the page may have moved." />
+              : noData ? <div className="vmsg">No market data</div>
               : view === "chart" ? (mobile
                 ? <MobileChart mtab={mtab} list={list} layout={layout} set={set} tool={tool} setTool={setTool} symbol={symbol} cue={cue} settings={settings} openSymbol={openSymbol} go={go} onConfirm={(text, run) => setConfirm({ text, go: run })} />
                 : <Workspace list={list} layout={layout} set={set} tool={tool} setTool={setTool} symbol={symbol} cue={cue} settings={settings} openSymbol={openSymbol} onConfirm={(text, run) => setConfirm({ text, go: run })} />)

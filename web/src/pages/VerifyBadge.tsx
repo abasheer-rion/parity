@@ -8,6 +8,7 @@ import type { Result } from "../lib/verify/checks";
 import { embedSnippet, isBadgeId, NOT_ADVICE, socialLine, TRUST_LINE, VERDICT_WORDS, type PublicBadge } from "../lib/verify/badge";
 import type { PublicCards } from "../lib/verify/publish";
 import { shortDate } from "../lib/verify/parse";
+import { NotFound } from "../components/NotFound";
 import { LegalLinks } from "../legal/LegalLinks";
 import { Skeleton } from "../ui";
 import { PublicLinks, ResultView } from "./verify/Result";
@@ -56,10 +57,7 @@ export function VerifyBadge({ load = fetchBadge, path = window.location.pathname
       <main id="main" tabIndex={-1} className="vb-main">
         {state.status === "loading" && <div aria-busy="true" aria-label="Loading the record"><Skeleton height={36} width="50%" /><Skeleton height={140} style={{ marginTop: 16 }} /><Skeleton height={420} style={{ marginTop: 16 }} /></div>}
         {state.status === "missing" && (
-          <section className="vb-notice">
-            <h1>No record at this address</h1>
-            <p>There is no Parity Verify badge with this link. Check that the address was copied in full: it ends in 12 letters and digits.</p>
-          </section>
+          <NotFound title="No record at this address" body="There is no Parity Verify badge with this link. Check that the address was copied in full: it ends in 12 letters and digits." home="/" homeLabel="Go to the front page" />
         )}
         {state.status === "error" && (
           <section className="vb-notice">

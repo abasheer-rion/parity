@@ -132,6 +132,8 @@ export const PAGES: Record<string, PageMeta> = {
     title: "Verified record · Parity", description: "A Parity Verify record: what was checked in a trading record, and what was not.",
     image: "badge", robots: PRIVATE, ld: [verifyAppLd()],
   },
+  // Served by Cloudflare Pages, with status 404, at any address that does not exist (DEC-0053).
+  "404.html": { title: "Page not found · Parity", description: "There is no Parity page at this address.", image: "default", robots: PRIVATE },
   "legal/index.html": { title: "Legal · Parity", description: "Parity's privacy policy, terms, cookie policy, accessibility statement, risk notice and regulatory status.", path: "/legal/", image: "legal" },
   "legal/privacy/index.html": { title: "Privacy policy · Parity", description: "What Parity collects, why, how long we keep it, who processes it, and your rights.", path: "/legal/privacy/", image: "legal" },
   "legal/terms/index.html": { title: "Terms of service · Parity", description: "The terms for using Parity, a research and education service. Not investment advice, not a broker.", path: "/legal/terms/", image: "legal" },

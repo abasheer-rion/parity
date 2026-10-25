@@ -11,6 +11,7 @@
 //   #/settings                settings
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AppGuard } from "../auth";
+import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { LEGAL_PAGES } from "../legal/LegalLinks";
 import { courseById, courseMinutes, courses, totalLessons, type AcademyLink, type Course, type Lesson, type Question } from "../lib/academy";
@@ -226,7 +227,7 @@ function AcademyShell() {
               : route.view === "course" ? <CourseView course={route.course} />
               : route.view === "progress" ? <ProgressView />
               : route.view === "settings" ? <SettingsView settings={settings} set={setSettings} />
-              : <div className="pac-page"><div className="pac-empty"><h1>That course or lesson does not exist.</h1><a className="pac-btn" href="#/">See every course</a></div></div>}
+              : <div className="pac-page"><NotFound title="That course or lesson does not exist" body="There is no Academy course or lesson at this address. The link may be mistyped, or the lesson may have moved." address={hash} home="#/" homeLabel="See every course" /></div>}
           </main>
         )}
       </div>
