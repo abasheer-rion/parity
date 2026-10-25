@@ -1,4 +1,4 @@
-// Hyperliquid (DEC-0053, team only): every perpetual ("BTC-PERP") and every spot pair
+// Hyperliquid (DEC-0056, team only): every perpetual ("BTC-PERP") and every spot pair
 // ("PURR-USDC") over its public WebSocket. Trades, the 20-level book (full snapshots) and
 // the overview (allMids for prices, the asset contexts every 30 s for the 24 h open and
 // volume). Spot pairs are named by their tokens; the feed itself calls them "PURR/USDC" or

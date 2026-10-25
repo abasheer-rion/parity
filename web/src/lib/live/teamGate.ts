@@ -1,4 +1,4 @@
-// Who may see team-only feeds (DEC-0053). Imported by the /live Pages Function, never by the
+// Who may see team-only feeds (DEC-0056). Imported by the /live Pages Function, never by the
 // browser. A person qualifies when their Supabase sign-in checks out (signature, issuer,
 // audience, expiry: the same public-key check as the site middleware) AND the database says
 // they are on the team list (public.team_members, through is_team(), which reads only the

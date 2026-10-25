@@ -1,4 +1,4 @@
-// Coinbase Exchange (DEC-0053, team only): every online product over the public feed.
+// Coinbase Exchange (DEC-0056, team only): every online product over the public feed.
 // Trades from "matches" (Coinbase names the maker's side, so the taker's is the other one),
 // the book from "level2_batch" (a full snapshot, then changes every 50 ms) and the overview
 // from "ticker_batch" (one update per product every 5 s at most, with the 24 h open).

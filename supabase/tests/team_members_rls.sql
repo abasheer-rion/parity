@@ -1,4 +1,4 @@
--- Manual check of 20261102000000_team_members.sql (DEC-0053): the team list. Not run by CI.
+-- Manual check of 20261102000000_team_members.sql (DEC-0056): the team list. Not run by CI.
 -- Load Supabase stand-ins, apply every migration, then: psql -f supabase/tests/team_members_rls.sql
 -- Each == heading says what to expect. ON_ERROR_STOP is off so refusals print and the run goes on.
 \set ON_ERROR_STOP 0

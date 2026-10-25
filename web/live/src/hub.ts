@@ -1,4 +1,4 @@
-// LiveHub, the fan-out (DEC-0052, DEC-0053, REF-0019 tier C): one Durable Object per source.
+// LiveHub, the fan-out (DEC-0052, DEC-0056, REF-0019 tier C): one Durable Object per source.
 // It holds ONE connection to that source's feed, subscribed to the union of what its viewers
 // want, and relays it to every viewer:
 //   "SYM"    trades, conflated to at most four updates a second per symbol (charts, quotes)
@@ -96,7 +96,7 @@ export class LiveHub {
     if (!this.adapter) return new Response("Unknown source", { status: 404 });
     if (url.pathname.endsWith("/status")) return this.status();
     if (req.headers.get("Upgrade")?.toLowerCase() !== "websocket") return new Response("WebSocket only", { status: 426 });
-    // A team-only source needs the site's word that this viewer is on the team (DEC-0053).
+    // A team-only source needs the site's word that this viewer is on the team (DEC-0056).
     const until = Number(req.headers.get("X-Parity-Team") ?? "0");
     if (this.adapter.internal && !(until > Date.now())) {
       this.stats.refused += 1;

@@ -1,4 +1,4 @@
-// What every source adapter shares (DEC-0052, DEC-0053): the shapes an adapter hands the
+// What every source adapter shares (DEC-0052, DEC-0056): the shapes an adapter hands the
 // fan-out (trades, book changes, overview rows), the adapter contract and a few helpers for
 // candle history. Venue code lives in venues/; the registry is adapters.ts.
 import type { Bar } from "../../src/lib/indicators";
@@ -16,7 +16,7 @@ export interface AdapterEnv {
   LIVE_ALLOW?: string;
   /** Sources the owner switched off for now, comma separated ids (an emergency off switch). */
   LIVE_DENY?: string;
-  /** US stock feeds (DEC-0053), off until set. Never sent to a browser. */
+  /** US stock feeds (DEC-0056), off until set. Never sent to a browser. */
   ALPACA_KEY_ID?: string;
   ALPACA_SECRET_KEY?: string;
   /** "iex" (free plan, the default) or "sip" (Algo Trader Plus, every exchange). */

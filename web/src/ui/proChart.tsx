@@ -65,7 +65,7 @@ export interface ProChartProps {
 }
 
 /** closed: finished bars; the rest (the last one) is still forming and drawn faded, so
- *  nobody reads a signal or a close off a bar that has not finished (DEC-0053). */
+ *  nobody reads a signal or a close off a bar that has not finished (DEC-0056). */
 export interface LiveBars { bars: Bar[]; on(fn: (c: "last" | "new") => void): () => void; readonly closed?: number }
 
 /** A forming bar's colours: the usual ones, faded. */

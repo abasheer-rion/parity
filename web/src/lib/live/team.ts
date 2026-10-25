@@ -1,4 +1,4 @@
-// Is the signed-in person on the team (DEC-0053)? The edge answers at /live/me after checking
+// Is the signed-in person on the team (DEC-0056)? The edge answers at /live/me after checking
 // the sign-in and the team list. The page uses it only to decide what to offer (the team-only
 // feeds in search, the Markets venues); the edge enforces it on every connection anyway.
 import { useEffect, useState } from "react";

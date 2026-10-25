@@ -1,4 +1,4 @@
-// Depth of book and recent trades for a live crypto symbol (DEC-0053), in Trade's side panel.
+// Depth of book and recent trades for a live crypto symbol (DEC-0056), in Trade's side panel.
 // Rows are drawn once at a fixed count and height; each update (at most once per animation
 // frame, batched by the live client) writes text and bar widths straight into them, so a busy
 // book never re-renders React or moves the layout.

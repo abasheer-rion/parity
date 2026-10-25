@@ -253,7 +253,7 @@ export const isLiveEndpoint = (e: string) => e.startsWith("trade:live/");
 
 const COUNT_EP = /^trade:live\/([a-z0-9-]+)\/(reconnect|lost)$/;
 
-/** Per live feed, the reconnects and lost updates browsers reported (metric "gap", DEC-0053). */
+/** Per live feed, the reconnects and lost updates browsers reported (metric "gap", DEC-0056). */
 export function liveCounts(rows: RumRow[]): Record<string, { reconnect: number; lost: number }> {
   const out: Record<string, { reconnect: number; lost: number }> = {};
   for (const r of rows) {

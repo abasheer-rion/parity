@@ -1,4 +1,4 @@
-// Kraken (DEC-0053, team only): every online spot pair over WebSocket v2, including its fiat
+// Kraken (DEC-0056, team only): every online spot pair over WebSocket v2, including its fiat
 // pairs (EUR/USD, GBP/USD, USD/JPY...), which the overview labels as FX from a crypto venue.
 // Trades, the 25-level book (snapshot then changes, cut to 25 levels as Kraken asks) and the
 // overview from the ticker channel. Kraken's REST list still says XBT and XDG; v2 says BTC

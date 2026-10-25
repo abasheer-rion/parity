@@ -64,5 +64,6 @@ The owner asked us to track how slow our data and refreshes are. Now every sourc
 ## Referenced by
 
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
+- [DEC-0056: Team members see real-time venue feeds the public does not](0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 <!-- backlinks:end -->

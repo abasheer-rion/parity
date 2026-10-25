@@ -314,7 +314,7 @@ const HOP_NAME: Record<string, string> = { feed: "Exchange to our edge", edge: "
 
 interface EdgeStatus { src: string; feed?: string; upstream?: string; why?: string | null; viewers?: number; feedLagMs?: { p50: number | null; p95: number | null; p99: number | null; n: number }; upstreamOpens?: number; reconnects?: number; error?: string }
 
-/** Every source the edge can stream: public ones and team-only ones (DEC-0053). */
+/** Every source the edge can stream: public ones and team-only ones (DEC-0056). */
 const STREAMED = SOURCES.filter((s) => s.streams && s.id !== "vendor" && (s.licence === "display" || s.licence === "internal"));
 
 function useEdgeStatus(): EdgeStatus[] | null | "error" {

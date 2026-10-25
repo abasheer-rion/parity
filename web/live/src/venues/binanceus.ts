@@ -1,4 +1,4 @@
-// Binance.US (DEC-0053, team only): every trading pair over its combined stream on port 443.
+// Binance.US (DEC-0056, team only): every trading pair over its combined stream on port 443.
 // Trades ("@trade"; m=true means the buyer was the maker, so the taker sold), the top 20
 // levels ten times a second ("@depth20@100ms", full snapshots) and the overview from the
 // all-market mini ticker, one message a second for every pair that changed.

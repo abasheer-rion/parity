@@ -36,7 +36,7 @@ class Provider:
     # Live data (DEC-0052): how fresh it reaches a screen, and whether it is switched on in the
     # site's fan-out (web/live/). "live" sources are not fetched by the engine at all.
     # feed: "real-time", "delayed about N min" or "end of day"; empty for research series.
-    # live: "on", "team" (terms allow internal use only: team members only, DEC-0053), "ask"
+    # live: "on", "team" (terms allow internal use only: team members only, DEC-0056), "ask"
     # (terms unclear, the owner decides) or "off" (forbidden or contract).
     feed: str = ""
     live: str = ""
@@ -118,7 +118,7 @@ PROVIDERS: list[Provider] = [
     Provider("sec-tickers", "SEC company tickers", "Public information; cite the SEC",
              "https://www.sec.gov/privacy", feed="end of day", live="on",
              note="every US-listed symbol for search, no prices"),
-    # Team only (DEC-0053): terms allow internal use, so these stream only to team members.
+    # Team only (DEC-0056): terms allow internal use, so these stream only to team members.
     Provider("hyperliquid-live", "Hyperliquid trades, books and overview, every perp and spot pair",
              "Terms have no data clause; read for the team only, never shown to the public",
              "https://app.hyperliquid.xyz/terms", feed="real-time", live="team",

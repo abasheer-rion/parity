@@ -1,4 +1,4 @@
--- The team list (DEC-0053): which accounts are Parity's own team. Team members see the
+-- The team list (DEC-0056): which accounts are Parity's own team. Team members see the
 -- team-only live feeds (real-time data whose terms allow internal use only), and other team
 -- areas may use the same list (the Metrics area on feat/product-analytics shares this exact
 -- definition; keep the two identical).

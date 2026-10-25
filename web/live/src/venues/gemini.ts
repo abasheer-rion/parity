@@ -1,4 +1,4 @@
-// Gemini (DEC-0053, team only; its market data agreement allows internal use). Every symbol
+// Gemini (DEC-0056, team only; its market data agreement allows internal use). Every symbol
 // over the v2 market data feed. Gemini sends trades and the book on one "l2" subscription,
 // so the adapter keeps one subscription per symbol for either. The overview polls its price
 // feed every 3 s (price and 24 h change, no volume).

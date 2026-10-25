@@ -1,4 +1,4 @@
-// /live/* (DEC-0052, DEC-0053): live market data.
+// /live/* (DEC-0052, DEC-0056): live market data.
 //   /live/ws?src=<id>                 WebSocket to that source's fan-out (a Durable Object)
 //   /live/status                      every source's line state, viewers and feed lag (the log)
 //   /live/sources                     which sources exist, how fresh, and their terms

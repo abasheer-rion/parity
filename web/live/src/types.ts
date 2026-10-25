@@ -33,9 +33,9 @@ export interface Env {
   VENDOR_KEY?: string;
   /** Sources with unclear terms the owner switched on, comma separated (DEC-0052). */
   LIVE_ALLOW?: string;
-  /** Sources switched off for now, comma separated (DEC-0053). */
+  /** Sources switched off for now, comma separated (DEC-0056). */
   LIVE_DENY?: string;
-  /** US stock feeds for the team (DEC-0053). Secrets, never sent to a browser. */
+  /** US stock feeds for the team (DEC-0056). Secrets, never sent to a browser. */
   ALPACA_KEY_ID?: string;
   ALPACA_SECRET_KEY?: string;
   ALPACA_FEED?: string;

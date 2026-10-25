@@ -1,4 +1,4 @@
-// Source adapters (DEC-0052, DEC-0053): each turns one feed into our shapes (base.ts) and
+// Source adapters (DEC-0052, DEC-0056): each turns one feed into our shapes (base.ts) and
 // knows how to fetch that source's own candle history. Sources whose terms allow display
 // stream to everyone; sources whose terms allow internal use only stream to team members
 // (the site checks the person's sign-in and the team list before it connects them, see

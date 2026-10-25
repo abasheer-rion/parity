@@ -375,7 +375,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .sgc-wide { grid-column: 1 / -1; }
 .sgc-note dd { color: var(--text-2); font-size: 12px; }
 
-/* Markets (DEC-0053): every live pair, windowed rows at a fixed height. */
+/* Markets (DEC-0056): every live pair, windowed rows at a fixed height. */
 .mk { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 .mk-bar { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding: 0 8px; height: 36px; flex: none; border-bottom: 1px solid var(--tr-line); }
 .mk-q { width: 180px; height: 24px; flex: none; }
@@ -405,7 +405,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
   .mk-q { width: 130px; }
 }
 
-/* Book and trades (DEC-0053): fixed rows, written in place on each frame. */
+/* Book and trades (DEC-0056): fixed rows, written in place on each frame. */
 .sd-swap { width: auto; padding: 0 8px; font-size: var(--tr-fs-s); }
 .bk { display: flex; flex-direction: column; min-height: 0; height: 100%; }
 .bk-tabs { display: flex; align-items: center; gap: 2px; height: 26px; flex: none; padding: 0 6px; border-bottom: 1px solid var(--tr-line); }

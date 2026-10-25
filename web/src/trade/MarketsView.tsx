@@ -1,4 +1,4 @@
-// Markets (DEC-0053): every pair each live source lists, with live price, 24 h change, 24 h
+// Markets (DEC-0056): every pair each live source lists, with live price, 24 h change, 24 h
 // volume and a sparkline, sortable and filtered. Team members see every team-only venue in
 // real time (and US stocks once a stock feed is keyed); everyone else sees CoinGecko's 100
 // largest coins, about a minute behind. Rows are windowed (only those on screen are drawn,

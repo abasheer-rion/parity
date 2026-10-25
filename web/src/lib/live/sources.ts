@@ -1,4 +1,4 @@
-// Every live or near-live source we considered (DEC-0052, DEC-0053), with what its terms let
+// Every live or near-live source we considered (DEC-0052, DEC-0056), with what its terms let
 // us do. "display" sources stream to everyone; "internal" sources stream only to team
 // members (the team_members list, checked by the server on every connection), because their
 // terms allow internal use but not showing the data to the public. The same list, with the
@@ -54,7 +54,7 @@ export const SOURCES: SourceMeta[] = [
   { id: "coingecko", name: "CoinGecko", short: "CoinGecko", feed: "delayed", delayMin: 1, covers: "The 100 largest coins, priced in US dollars, refreshed about once a minute", licence: "display",
     terms: "https://www.coingecko.com/en/api_terms", read: "2026-10-22", streams: true, tfs: ["5m", "1h", "1d"], fromCloses: true, board: true,
     note: "Display allowed with \"Data provided by CoinGecko\" linked next to the data. Prices are CoinGecko's own blend across exchanges, about a minute behind." },
-  // Team only (DEC-0053): terms allow internal use, so these stream only to people on the
+  // Team only (DEC-0056): terms allow internal use, so these stream only to people on the
   // team list. Every pair each venue lists is offered.
   { id: "hyperliquid", name: "Hyperliquid", short: "Hyperliquid", feed: "rt", covers: "Every Hyperliquid perpetual and spot pair, real-time trades and book", licence: "internal",
     terms: "https://app.hyperliquid.xyz/terms", read: READ, streams: true, book: true, board: true,
@@ -116,7 +116,7 @@ export const SOURCES: SourceMeta[] = [
 
 export const sourceById = (id: string): SourceMeta | undefined => SOURCES.find((s) => s.id === id);
 export const liveSources = () => SOURCES.filter((s) => s.streams && s.licence === "display");
-/** Team-only sources: terms allow internal use only (DEC-0053). */
+/** Team-only sources: terms allow internal use only (DEC-0056). */
 export const isInternal = (id: string) => sourceById(id)?.licence === "internal";
 /** The badge's words for a team-only feed. */
 export const INTERNAL_LABEL = "Internal use, real-time";

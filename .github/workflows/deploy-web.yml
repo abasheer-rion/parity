@@ -13,7 +13,7 @@
 # Battle's into dist/data/bots (parity bots export, DEC-0035).
 # Latency (DEC-0045): after a production deploy, every source's row in data_freshness gets
 # this deploy's time as its publish time, and the site files' own as-of times are recorded.
-# Live data (DEC-0052, DEC-0053): on main, the parity-live worker (web/live/, the fan-out the
+# Live data (DEC-0052, DEC-0056): on main, the parity-live worker (web/live/, the fan-out the
 # site's /live/* routes talk to) is deployed first, when CLOUDFLARE_WORKERS_TOKEN is set. Without
 # it the step is skipped and the worker keeps its last version (deploy it by hand, web/live/).
 # Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs),
@@ -114,7 +114,7 @@ jobs:
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
         run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
-      - name: Deploy the live fan-out worker (DEC-0053)
+      - name: Deploy the live fan-out worker (DEC-0056)
         if: github.event_name != 'pull_request' && env.HAS_WORKERS_TOKEN == 'true'
         uses: cloudflare/wrangler-action@v4
         with:

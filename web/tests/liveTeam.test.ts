@@ -1,4 +1,4 @@
-// Team-only live data (DEC-0053): the server's team check, which sources are team only, the
+// Team-only live data (DEC-0056): the server's team check, which sources are team only, the
 // new wire messages (book, trades list, overview) and each venue's message parsing, from
 // messages recorded off the real feeds on 25 Oct 2026. No network.
 import { afterEach, describe, expect, it } from "vitest";

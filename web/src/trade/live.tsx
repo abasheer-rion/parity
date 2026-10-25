@@ -18,7 +18,7 @@ const httpOrigin = () => liveOrigin()?.replace(/^ws/, "http") ?? null;
 
 let uniP: Promise<UniverseDoc | null> | null = null;
 /** The symbol universe, loaded once per page and cached by the edge. Team members get every
- *  team-only venue's pairs too (DEC-0053); everyone else gets the public list. */
+ *  team-only venue's pairs too (DEC-0056); everyone else gets the public list. */
 export function loadUniverse(): Promise<UniverseDoc | null> {
   const o = httpOrigin();
   if (!o) return Promise.resolve(null);
