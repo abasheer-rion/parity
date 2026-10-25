@@ -398,8 +398,9 @@ def retry_stale(root: Path = store.DEFAULT_DIR, pipeline: str = "retry",
         steps.append({"pipeline": pipeline, "run_key": t0.isoformat(timespec="seconds"),
                       "step": f"retry {group}", "started_at": iso(t0), "finished_at": iso(t1),
                       "seconds": round((t1 - t0).total_seconds(), 1), "ok": ok and bool(fixed),
-                      "detail": {"stale": keys[:20], "fixed": fixed[:20],
-                                 "backoff_s": backoff, **({"error": err} if err else {})}})
+                      "detail": {"stale": keys[:10], "n_stale": len(keys), "fixed": fixed[:10],
+                                 "n_fixed": len(fixed), "backoff_s": backoff,
+                                 **({"error": err[:120]} if err else {})}})
     return steps
 
 
@@ -575,8 +576,7 @@ def run_rows(run: dict, jobs: list[dict], pipeline: str, crons: list[str],
     created, started, ended = _t(run["created_at"]), _t(run.get("run_started_at")), \
         _t(run["updated_at"])
     started = started or created
-    detail = {"event": run.get("event"), "branch": run.get("head_branch"),
-              "conclusion": run.get("conclusion")}
+    detail = {"event": run.get("event"), "conclusion": run.get("conclusion")}
     out = [_span(pipeline, key, "_run", started, ended, ok, **detail)]
     if run.get("event") == "schedule" and crons:
         tick = last_tick(crons, created)

@@ -12,9 +12,9 @@
 --                 a count, a sum and a fixed log histogram per (hour, app, metric,
 --                 endpoint, region). There are no raw events, no ids, no addresses.
 --                 Anyone may read it. Written only through rum_ingest(), which the
---                 site's /rum function calls. Buckets older than 90 days are dropped.
+--                 site's /rum function calls. Buckets older than 30 days are dropped.
 -- rum_minute      a per-minute counter that caps how many beacons rum_ingest() takes.
--- rum_hour_rows   how many buckets each hour has; past 5,000 an hour only adds to
+-- rum_hour_rows   how many buckets each hour has; past 300 an hour only adds to
 --                 existing buckets, so a flood of made-up endpoints cannot grow the
 --                 table. Nobody reads either counter.
 
@@ -183,8 +183,11 @@ revoke all on public.rum_hour_rows from anon, authenticated;
 
 -- One beacon: an app name, a coarse region (a continent code from Cloudflare) and up to 40
 -- events {m: metric, e: endpoint, v: value, h: 1 for a cache hit}. Anything unexpected is
--- dropped, not stored. At most 1,200 beacons a minute are taken across the whole site, and
--- at most 5,000 buckets are created per hour.
+-- dropped, not stored. At most 600 beacons a minute are taken across the whole site, at
+-- most 300 buckets are created per hour and buckets live 30 days, so even a caller who
+-- skips /rum and floods this function directly can add at most about 216,000 rows
+-- (roughly 130 MB) before the oldest are dropped. Endpoints must be one of the known
+-- shapes and regions one of the seven continent codes.
 create or replace function public.rum_ingest(p_app text, p_region text, p_events jsonb)
 returns integer
 language plpgsql security definer set search_path = '' as $$
@@ -205,7 +208,7 @@ begin
   if p_app is null or p_app !~ '^(site|product|research|sim|trade|academy|lab|desktop|auth|verify)$' then
     return 0;
   end if;
-  if p_region is null or p_region !~ '^[A-Z]{2}$' then
+  if p_region is null or p_region !~ '^(AF|AN|AS|EU|NA|OC|SA)$' then
     p_region := 'XX';
   end if;
   if jsonb_typeof(p_events) <> 'array' or jsonb_array_length(p_events) > 40 then
@@ -218,9 +221,9 @@ begin
   if seen = 1 then  -- first beacon of a minute: tidy up old rows
     delete from public.rum_minute where minute < cur_minute - interval '1 hour';
     delete from public.rum_hour_rows where hour < hr - interval '1 day';
-    delete from public.rum_hourly where hour < hr - interval '90 days';
+    delete from public.rum_hourly where hour < hr - interval '30 days';
   end if;
-  if seen > 1200 then
+  if seen > 600 then
     return 0;
   end if;
   select r.n into buckets from public.rum_hour_rows r where r.hour = hr;
@@ -237,11 +240,12 @@ begin
     if m is null or m !~ '^(ttd|ttfb|fetch|bytes|age|lag|gap|lcp|inp|cls)$' then
       continue;
     end if;
-    if e !~ '^[a-z0-9:/._-]{0,80}$' or v < 0 or v > 1e9 or v <> v then
+    if e !~ '^(|/data/[a-z0-9:/._-]{1,74}|/stats\.json|db:[a-z0-9_/]{1,60}|(news|markets|terminal|trade|service)[a-z0-9:/._-]{0,60}|latest|search)$'
+       or v < 0 or v > 1e9 or v <> v then
       continue;
     end if;
     j := case when v < 1 then 1 else least(64, floor(8 * log(v))::integer + 2) end;
-    if buckets >= 5000 then  -- the hour is full: only add to buckets that exist
+    if buckets >= 300 then  -- the hour is full: only add to buckets that exist
       update public.rum_hourly t set
         n = t.n + 1, hits = t.hits + h, total = t.total + v,
         bins = t.bins[1:j - 1] || (t.bins[j] + 1) || t.bins[j + 1:64]

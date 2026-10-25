@@ -40,7 +40,7 @@ export function clean(text: string, continent?: string): Clean | null {
     events.push({ m, e, v, ...(h === 1 ? { h: 1 as const } : {}) });
   }
   if (!events.length) return null;
-  const region = typeof continent === "string" && /^[A-Z]{2}$/.test(continent) ? continent : "XX";
+  const region = typeof continent === "string" && /^(AF|AN|AS|EU|NA|OC|SA)$/.test(continent) ? continent : "XX";
   return { app: a, region, events };
 }
 
@@ -58,6 +58,25 @@ export function allow(key: string, now: number = Date.now()): boolean {
   return e.n <= PER_MINUTE;
 }
 
+/** The body as text, or "" once it passes MAX_BODY bytes, without reading the rest. */
+async function readCapped(request: Request): Promise<string> {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const parts: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_BODY) { await reader.cancel(); return ""; }
+    parts.push(value);
+  }
+  const all = new Uint8Array(size);
+  let at = 0;
+  for (const p of parts) { all.set(p, at); at += p.byteLength; }
+  return new TextDecoder().decode(all);
+}
+
 const done = () => new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 
 export const onRequest = async ({ request, waitUntil }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
@@ -68,7 +87,7 @@ export const onRequest = async ({ request, waitUntil }: Context, fetcher: typeof
   if (len > MAX_BODY) return done();
   const ip = request.headers.get("CF-Connecting-IP") ?? "";
   if (!allow(ip)) return done();
-  const beacon = clean(await request.text(), request.cf?.continent);
+  const beacon = clean(await readCapped(request), request.cf?.continent);
   if (!beacon) return done();
   waitUntil(fetcher(`${SUPABASE_URL}/rest/v1/rpc/rum_ingest`, {
     method: "POST",
