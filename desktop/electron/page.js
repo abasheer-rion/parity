@@ -79,7 +79,16 @@ class Page {
     wc.on("dom-ready", () => { if (ctx.isTrusted(wc.getURL())) wc.insertCSS(APP_CSS).catch(() => {}); });
     wc.on("page-title-updated", (_e, title) => { this.title = title || "Parity"; this.owner.pageChanged(this); });
     wc.on("before-input-event", (e, input) => this.owner.keys(e, input));
-    wc.on("render-process-gone", (_e, d) => { ctx.log(`page process gone (${d.reason})`); if (d.reason !== "clean-exit" && this.path) setTimeout(() => this.load(this.path), 500); });
+    // The page's process died: load it again, up to three times a minute, then say so with
+    // Retry rather than loop or leave a dead, black view.
+    wc.on("render-process-gone", (_e, d) => {
+      ctx.log(`page process gone (${d.reason}) on ${this.path}`);
+      if (d.reason === "clean-exit" || !this.path) return;
+      const now = Date.now();
+      this.crashes = (this.crashes || []).filter((t) => now - t < 60_000).concat(now);
+      if (this.crashes.length > 3) { setTimeout(() => this.showError(this.path || "/", "the page kept stopping"), 300); return; }
+      setTimeout(() => this.load(this.path), 500);
+    });
     wc.on("did-first-visually-non-empty-paint", () => this.owner.pagePainted?.(this));
     wc.on("did-finish-load", () => { clearTimeout(this.blankTimer); this.blankTimer = setTimeout(() => this.checkPainted("loaded"), 5000); });
     wc.on("unresponsive", () => ctx.log(`page not responding: ${this.path}`));
@@ -204,8 +213,8 @@ class Page {
     return { back: !!h?.canGoBack(), forward: !!h?.canGoForward() };
   }
 
-  back() { const h = this.wc.navigationHistory; if (h.canGoBack()) { h.goBack(); return true; } return false; }
-  forward() { const h = this.wc.navigationHistory; if (h.canGoForward()) { h.goForward(); return true; } return false; }
+  back() { if (!this.alive) return false; const h = this.wc.navigationHistory; if (h.canGoBack()) { h.goBack(); return true; } return false; }
+  forward() { if (!this.alive) return false; const h = this.wc.navigationHistory; if (h.canGoForward()) { h.goForward(); return true; } return false; }
 
   destroy() {
     this.stopWatchdog();

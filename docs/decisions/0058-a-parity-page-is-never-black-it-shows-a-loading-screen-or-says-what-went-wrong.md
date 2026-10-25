@@ -28,7 +28,8 @@ The owner opened an Academy lesson in the desktop app and saw a black window wit
 1. Each app's index.html carries a loading screen in plain HTML and CSS (web/plugins/boot.ts): the starburst mark drawing in, a thin progress line, no layout shift. A small inline watcher fades it out when the app draws, reloads once when one of Parity's code files fails, says "taking longer than usual" after 12 seconds, and shows Try again if the page goes empty after drawing.
 2. Every app root and every page sits inside a crash guard (web/src/ui/boundary.tsx) that shows what went wrong with Try again and Reload. A missing code file reloads once instead.
 3. The desktop app shows a window only once its page has drawn (or after 1.5 s), draws every page again after sleep, when the screen is opened again, after screen changes and a graphics restart, checks the page in front when a window comes back, reloads a page that stays empty once and then shows Could not open with Retry, and keeps a 1 MB log of page failures with secrets removed.
-4. The sign-in check answers a code file with a plain 401 instead of the log-in page, so a failed file is a failed file.
+4. In the desktop app's main process, an error nobody caught is written to the log and shown once in plain words with Reload pages; the app keeps running (desktop/electron/guard.js). 0.2.0 showed Electron's raw "A JavaScript error occurred in the main process" box and then quit while it was open (a crash report on the owner's Mac at 13:22 on 25 October). A page whose contents were lost is opened again in place, and a page whose process keeps stopping shows Could not open after three tries in a minute.
+5. The sign-in check answers a code file with a plain 401 instead of the log-in page, so a failed file is a failed file.
 
 ## Consequences
 

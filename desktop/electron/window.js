@@ -116,6 +116,7 @@ class ParityWindow {
   /** Makes every view draw again: the cure for a page that stopped drawing (main.js). */
   repaint(why = "") {
     if (!this.alive) return;
+    if (this.active && !this.active.alive) { this.revive(); return; }
     for (const v of [this.titlebar, this.overlay]) if (!v.webContents.isDestroyed()) v.webContents.invalidate();
     if (this.active) this.active.repaint(why);
   }
@@ -123,7 +124,11 @@ class ParityWindow {
   /** Checks the page in front still shows something, a moment after the window comes back. */
   checkSoon(why) {
     clearTimeout(this.checkTimer);
-    this.checkTimer = setTimeout(() => { if (this.alive && this.active) this.active.checkPainted(why); }, 400);
+    this.checkTimer = setTimeout(() => {
+      if (!this.alive || !this.active) return;
+      if (!this.active.alive) this.revive();
+      else this.active.checkPainted(why);
+    }, 400);
   }
 
   /**
@@ -265,6 +270,7 @@ class ParityWindow {
 
   reload(hard = false) {
     if (!this.active) return;
+    if (!this.active.alive) { this.revive(); return; }
     if (hard) { this.active.wc.reloadIgnoringCache(); return; }
     this.ctx.state.online = null; // checks the website again, so it can leave the saved copy
     this.active.load(this.active.path || this.lastGoodPath || "/");
@@ -322,8 +328,25 @@ class ParityWindow {
 
   focusContent() {
     if (!this.alive || !this.win.isFocused()) return;
-    if (this.overlayMode) this.overlay.webContents.focus();
-    else this.active?.wc.focus();
+    if (this.overlayMode) { if (!this.overlay.webContents.isDestroyed()) this.overlay.webContents.focus(); }
+    else if (this.active?.alive) this.active.wc.focus();
+  }
+
+  /**
+   * The page in front lost its contents (closed under it): a fresh page takes its place at
+   * the same address, instead of a black view that throws on every key (DEC-0058).
+   */
+  revive() {
+    const dead = this.active;
+    if (!this.alive || !dead || dead.alive) return;
+    this.ctx.log(`page in front was gone, opening ${dead.path || dead.wantPath || "/"} again`);
+    const p = dead.path || dead.wantPath || this.lastGoodPath || "/";
+    this.pages.delete(dead.key);
+    try { this.win.contentView.removeChildView(dead.view); } catch { /* already gone */ }
+    this.active = null;
+    const page = this.pageFor(dead.key);
+    this.show(page);
+    page.load(p);
   }
 
   // ------------------------------------------------------------ title bar and layer
@@ -426,7 +449,7 @@ class ParityWindow {
   }
 
   zoom(step) {
-    const wc = this.active?.wc;
+    const wc = this.active?.alive ? this.active.wc : null;
     if (!wc) return;
     wc.setZoomLevel(step === 0 ? 0 : wc.getZoomLevel() + step);
   }

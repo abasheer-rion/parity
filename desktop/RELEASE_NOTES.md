@@ -2,6 +2,7 @@ Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
 New in 0.2.1:
 
+- No more "A JavaScript error occurred" box followed by Parity quitting. An unexpected error is now noted in the log and shown once in plain words with Reload pages, and Parity keeps running. A page whose contents were lost is opened again in place.
 - Never a black window. A page that stops drawing (after sleep, a screen change, Stage Manager or a graphics restart) is drawn again, and a page that stays empty reloads once, then says it could not open, with Retry.
 - Windows open already drawn, with Parity's loading screen, instead of an empty dark frame.
 - Faster: the sections you use most open in the background, built files stay cached, and each app downloads much less code.

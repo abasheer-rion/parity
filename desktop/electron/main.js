@@ -20,7 +20,7 @@
 // the offline copy), PARITY_DEV_URL at a local dev server, and PARITY_LOG=1 prints each page
 // the app loads. PARITY_AUTH_BYPASS=1 treats the app as signed in, only with a loopback
 // PARITY_DEV_URL (for screenshots against `VITE_AUTH_BYPASS=1 npm run dev`).
-const { app, BrowserWindow, Menu, Notification, globalShortcut, ipcMain, nativeTheme, net, powerMonitor, protocol, screen, session, shell, systemPreferences } = require("electron");
+const { app, BrowserWindow, Menu, Notification, dialog, globalShortcut, ipcMain, nativeTheme, net, powerMonitor, protocol, screen, session, shell, systemPreferences } = require("electron");
 const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
@@ -35,6 +35,18 @@ const { ParityWindow } = require("./window");
 const { Page } = require("./page");
 const { ParityTray } = require("./tray");
 const logfile = require("./logfile");
+const guard = require("./guard");
+
+// Errors nobody caught: logged, and one plain message instead of Electron's raw box and a
+// quit (guard.js). Installed first, so it covers everything below.
+guard.install({
+  log: (m) => log(m),
+  ask: (opts) => {
+    const parent = [...windows].find((w) => w.alive && w.win.isVisible())?.win;
+    return parent ? dialog.showMessageBox(parent, opts) : dialog.showMessageBox(opts);
+  },
+  reload: () => { for (const w of windows) { try { w.reload(false); } catch (e) { log(`reload failed: ${e.message}`); } } },
+});
 
 const SCHEME = "parity";
 const PARTITION = "persist:parity";
@@ -485,12 +497,12 @@ function run(action, w) {
     case "zoom-in": w.zoom(0.5); break;
     case "zoom-out": w.zoom(-0.5); break;
     case "zoom-reset": w.zoom(0); break;
-    case "devtools": w.active?.wc.toggleDevTools(); break;
+    case "devtools": if (w.active?.alive) w.active.wc.toggleDevTools(); break;
     case "account": if (!w.wall) w.go("/app/#/settings/account"); break;
     case "dblclick": w.titleDoubleClick(process.platform === "darwin" ? systemPreferences.getUserDefault("AppleActionOnDoubleClick", "string") : null); break;
     case "page-search": {
       // The section's own search (Trade's command palette), which Cmd K now opens for the app.
-      const wc = w.active?.wc;
+      const wc = w.active?.alive ? w.active.wc : null;
       if (!wc) break;
       w.closeOverlay();
       w.passKeys = 2;
