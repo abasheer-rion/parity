@@ -13,7 +13,7 @@ export const SPACE_LABEL: Record<Space, string> = { product: "Product", research
 export const ROUTES: Record<Space | "both", string[]> = {
   both: ["start", "how", "learn", "settings", "ui"],
   product: ["", "home", "strategies", "strategy", "watchlist", "compare", "lab", "scenarios", "news", "markets", "trade", "academy", "verify", "pricing"],
-  research: ["", "home", "docs", "doc", "refs", "search", "ledger", "catalog", "algo", "sim", "signals", "explore", "data", "sources", "edges", "private", "competitors"],
+  research: ["", "home", "docs", "doc", "refs", "search", "ledger", "catalog", "algo", "sim", "signals", "explore", "data", "sources", "latency", "edges", "private", "competitors"],
 };
 
 /** Where a route lives, or null if it is on this side (or both). */

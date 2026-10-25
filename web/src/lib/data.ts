@@ -3,6 +3,7 @@
 // (web/functions/_middleware.ts). In local development the engine's own output is
 // served instead.
 import type { BatchSummary, Report } from "./types";
+import { rumAge } from "./rum";
 
 export type Source = "static" | "local";
 export const source: Source = import.meta.env.DEV ? "local" : "static";
@@ -22,7 +23,9 @@ export async function listBatches(): Promise<BatchInfo[]> {
 
 export async function loadReport(batchId?: string): Promise<Report> {
   if (source === "local") return json<Report>("/local/latest.json");
-  return json<Report>(batchId ? `/data/batch/${batchId}.json` : "/data/latest.json");
+  const report = await json<Report>(batchId ? `/data/batch/${batchId}.json` : "/data/latest.json");
+  if (!batchId) rumAge("latest", (report as { generated_at?: string }).generated_at);
+  return report;
 }
 
 export async function listMembers(): Promise<{ email: string; added_at: string }[]> {
@@ -48,5 +51,7 @@ export async function loadSearch(): Promise<SearchDoc> {
   const url = source === "local" ? "/local/search.json" : "/data/search.json";
   const res = await fetch(url, { cache: "no-cache" });
   if (!res.ok) throw new Error(res.status === 404 ? "The strategy search has not sent any results yet." : `Could not load the search (${res.status}).`);
-  return (await res.json()) as SearchDoc;
+  const doc = (await res.json()) as SearchDoc;
+  rumAge("search", doc.generated_at);
+  return doc;
 }

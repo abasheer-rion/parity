@@ -2,7 +2,12 @@
 # "biggest day" explanations on GDELT, and keep everything in the Actions data cache.
 # Commits nothing. The deploy workflow runs after this one and exports the News page JSON.
 #
-# No secrets. Optional repository variable (not a secret): PARITY_CONTACT, an email or URL
+# Latency (DEC-0045): after the fetches, sources that fell behind are fetched once more
+# after a pause, and every source's as-of time and fetch time go to the data_freshness
+# table. Both steps need PARITY_WRITER_DB_URL and are skipped quietly without it.
+#
+# Secrets: PARITY_WRITER_DB_URL (insert-only database login, latency rows only),
+# FRED_API_KEY (optional). Optional repository variable (not a secret): PARITY_CONTACT, an email or URL
 # added to our user agent so BLS and the SEC, which ask bots to name themselves, can run.
 # The keyed news APIs (Alpha Vantage, Finnhub, Marketaux) are personal use only on their
 # free plans, so this shared job never uses them. See docs/reference/0013-news-sources-and-market-impact.md
@@ -34,7 +39,7 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: engine/pyproject.toml
-      - run: pip install -e .
+      - run: pip install -e ".[publish]"
       - name: Restore data cache
         uses: actions/cache@v6
         with:
@@ -54,6 +59,18 @@ jobs:
         env:
           PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
         run: parity markets fetch
+      - name: Fetch stale sources once more, after a pause (DEC-0045)
+        continue-on-error: true  # a retry that fails is logged; the run goes on
+        env:
+          PARITY_CONTACT: ${{ vars.PARITY_CONTACT }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          PARITY_WRITER_DB_URL: ${{ secrets.PARITY_WRITER_DB_URL }}
+        run: parity latency retry --publish --pipeline gha:news --backoff 30
+      - name: Record how old each source is (DEC-0045)
+        continue-on-error: true
+        env:
+          PARITY_WRITER_DB_URL: ${{ secrets.PARITY_WRITER_DB_URL }}
+        run: parity latency freshness --publish >> "$GITHUB_STEP_SUMMARY"
       - name: Fill the news archive (older years once, then only the current year)
         continue-on-error: true  # the archive grows over many runs; one bad run is fine
         env:

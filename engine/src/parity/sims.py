@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sqlite3
 import time
 from datetime import UTC, datetime
@@ -221,7 +222,7 @@ def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
         steps += [(name, lambda a=argv: _cli(*a)) for name, argv in EXPORTS]
     if profiles:
         steps.append(("profiles", _profiles))
-    done = []
+    done, timings = [], []
     for name, fn in steps:
         t = time.time()
         try:
@@ -231,6 +232,7 @@ def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
         except Exception as exc:  # one broken step never stops the cycle
             done.append({"step": name, "ok": False, "seconds": round(time.time() - t, 1),
                          "error": f"{type(exc).__name__}: {str(exc)[:160]}"})
+        timings.append((name, t, time.time(), done[-1]["ok"]))
     finished = datetime.now(UTC).isoformat(timespec="seconds")
     with con:
         con.execute("INSERT INTO cycles (started_at, finished_at, steps) VALUES (?, ?, ?)",
@@ -238,7 +240,46 @@ def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
         con.execute("DELETE FROM cycles WHERE id <= (SELECT MAX(id) FROM cycles) - ?",
                     (KEEP_CYCLES,))
         _set_state(con, "cycles", _state(con, "cycles", 0) + 1)
-    return {"started_at": started, "finished_at": finished, "steps": done}
+    return {"started_at": started, "finished_at": finished, "steps": done, "timings": timings}
+
+
+def latency_steps(out: dict) -> list[dict]:
+    """The cycle's steps as rows for the latency page (DEC-0045), plus the whole cycle."""
+    from . import latency
+
+    rows = [latency.step_row("service:sims", out["started_at"], name, t0, t1, ok)
+            for name, t0, t1, ok in out.get("timings", [])]
+    if out.get("timings"):
+        first, last = out["timings"][0][1], out["timings"][-1][2]
+        rows.append(latency.step_row("service:sims", out["started_at"], "_run", first, last,
+                                     all(t[3] for t in out["timings"])))
+    return rows
+
+
+def watch(cycle_out: dict) -> list[dict]:
+    """What the sims service does for the latency page after each cycle (DEC-0045): its own
+    step timings, one retry of stale data on this machine, GitHub job timings, and a start
+    of the news refresh when GitHub has skipped it for hours. Never raises."""
+    from . import latency
+
+    rows = latency_steps(cycle_out)
+    for name, fn in (("retry", lambda: latency.retry_stale(include_news=False, backoff=30.0)),
+                     ("watchdog", latency.refresh_watchdog),
+                     ("actions", lambda: latency.actions_rows(
+                         "abasheer-rion/parity", latency.gh_token(), since_hours=2.0))):
+        t = time.time()
+        try:
+            got = fn()
+            rows += got
+            if name == "actions":
+                rows.append(latency.step_row("service:sims", cycle_out["started_at"],
+                                             "github timings", t, time.time(), True,
+                                             rows=len(got)))
+        except Exception as exc:  # the type only: a message could quote a token
+            rows.append(latency.step_row("service:sims", cycle_out["started_at"],
+                                         f"latency {name}", t, time.time(), False,
+                                         error=type(exc).__name__))
+    return rows
 
 
 # ------------------------------------------------------------------ reading it back
@@ -384,6 +425,9 @@ def run_forever(paths: int = 1000, world_n: int = 2000, sleep_minutes: float = 2
         out = cycle(con, paths, world_n, profiles=True)
         doc = export(con)
         failed = _publish(doc, failed)
+        if os.environ.get("PARITY_WRITER_DB_URL"):
+            from . import latency
+            latency.try_publish_steps(watch(out))
         ok = sum(s["ok"] for s in out["steps"])
         bad = [s["step"] for s in out["steps"] if not s["ok"]]
         secs = sum(s["seconds"] for s in out["steps"])

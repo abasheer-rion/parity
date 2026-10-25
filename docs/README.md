@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 46 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 47 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 15 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 18 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 19 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 17 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -34,10 +34,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-24 [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - 2026-10-24 [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - 2026-10-24 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
+- 2026-10-24 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-24 [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - 2026-10-24 [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
-- 2026-10-24 [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 
 ## intent
 
@@ -95,6 +95,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0042 | [Parity Academy, a full-screen course player of its own](decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
+| DEC-0045 | [We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md) | accepted | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
@@ -175,6 +176,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 | REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## competitor

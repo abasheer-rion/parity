@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import random
 import sqlite3
 import time
@@ -1112,31 +1113,46 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
     last_fetch = last_publish = last_beat = 0.0
     beat_failed = False
     started = time.time()
+    timings: list[dict] = []  # step rows for the latency page (DEC-0045), sent with the beat
+
+    def timed(step: str, t0: float, ok: bool = True, **detail) -> None:
+        from . import latency
+        timings.append(latency.step_row("service:search", datetime.fromtimestamp(
+            t0, UTC).isoformat(timespec="seconds"), step, t0, time.time(), ok, **detail))
     # With max_hours set it exits cleanly after that long; the service manager restarts
     # it, which is when it picks up new code.
     while max_hours is None or time.time() - started < max_hours * 3600:
         if time.time() - last_publish > publish_hours * 3600:
-            last_publish = time.time()
+            last_publish = t0 = time.time()
             try:
                 from .publish.supabase import NotConfigured, publish_search
                 publish_search(export(con=con))
                 print("published a snapshot to the site", flush=True)
+                timed("publish snapshot", t0)
             except NotConfigured:
                 pass
             except Exception as exc:  # the site can wait; the search keeps going
                 # Only the error's type: database errors can quote the connection
                 # string, password included, and this goes to a log file.
                 print(f"publish failed: {type(exc).__name__}", flush=True)
+                timed("publish snapshot", t0, False, error=type(exc).__name__)
         if time.time() - last_fetch > refresh_hours * 3600:
+            t0 = time.time()
             try:
                 store.refresh()
+                timed("data refresh", t0)
             except Exception as exc:  # keep searching on yesterday's data
                 print(f"data refresh failed: {exc}", flush=True)
+                timed("data refresh", t0, False, error=type(exc).__name__)
             last_fetch = time.time()
+        t0 = time.time()
         out = run_batch(batch, con=con)
+        timed("batch", t0, tried=out["tried"])
         if out["widened"]:
             print(out["widened"], flush=True)
+        t0 = time.time()
         export(con=con)
+        timed("export", t0)
         total = con.execute("SELECT COUNT(*) FROM trials").fetchone()[0]
         now = datetime.now(UTC).isoformat(timespec="seconds")
         print(f"{now} +{out['tried']} "
@@ -1147,6 +1163,12 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
             beat_failed = _beat({"trials": int(total), "last_batch_at": now,
                                  "level": widen_level(con), "repeat_share": repeat_share(con)},
                                 beat_failed)
+            if timings and os.environ.get("PARITY_WRITER_DB_URL"):
+                from . import latency
+                # Only the newest of each step since the last beat: a few rows, not hundreds.
+                newest = {r["step"]: r for r in timings}
+                latency.try_publish_steps(list(newest.values()))
+            timings.clear()
         time.sleep(pause)
 
 
