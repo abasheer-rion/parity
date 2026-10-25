@@ -5,6 +5,7 @@
 // The fills are the record. Cash and holdings are rebuilt from them every time
 // (bookFromFills), and the stored cash and positions are kept as a copy of that.
 import { newId, table, type Row } from "../userStore";
+import { track } from "../analytics";
 import type { Bar } from "../indicators";
 import {
   bookFromFills, cancelOrder, DEFAULT_COSTS, placeBracket, placeOrder, processBars, type Book, type BracketInput, type Costs,
@@ -143,12 +144,14 @@ const ctxFor = (s: Snapshot, bar: Bar) => ({ bar, costs: costsOf(s.account), now
 export async function submitOrder(s: Snapshot, input: OrderInput, bar: Bar): Promise<PaperOrder[]> {
   const placed = placeOrder(input, bookOf(s.account, s.fills), s.orders.map(toOrder), ctxFor(s, bar));
   await savePlaced(s, placed);
+  track("order_placed", { type: input.type, filled: placed.fills.length > 0 });
   return placed.orders;
 }
 
 export async function submitBracket(s: Snapshot, input: BracketInput, bar: Bar): Promise<PaperOrder[]> {
   const placed = placeBracket(input, bookOf(s.account, s.fills), s.orders.map(toOrder), ctxFor(s, bar));
   await savePlaced(s, placed);
+  track("order_placed", { type: "bracket", filled: placed.fills.length > 0 });
   return placed.orders;
 }
 

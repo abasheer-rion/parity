@@ -8,6 +8,7 @@
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { courseById, courses, type Course, type Lesson } from "../lib/academy";
 import { table, type Row } from "../lib/userStore";
+import { track } from "../lib/analytics";
 
 export interface ProgressRow extends Row {
   course: string;
@@ -141,6 +142,7 @@ export function ProgressProvider({ children, onError }: { children: ReactNode; o
 
   const finish = useCallback((course: string, lesson: string, score: number, total: number) => {
     if (!real({ course, lesson })) return;
+    track("lesson_done", { course, lesson, score, total });
     const have = rowsRef.current.find((r) => r.course === course && r.lesson === lesson);
     const best = have?.score != null && have.score >= score ? { score: have.score, total: have.total ?? total } : { score, total };
     save(course, lesson, { ...best, done_at: have?.done_at ?? new Date().toISOString() });

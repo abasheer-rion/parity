@@ -10,6 +10,7 @@ import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem } from "../rules";
 import { continueTo } from "../session";
 import { ProviderButtons } from "./Providers";
+import { track } from "../../lib/analytics";
 
 type Step = "email" | "password" | "code" | "second";
 
@@ -55,6 +56,7 @@ export function SignIn() {
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     if (error?.code === "email_not_confirmed") { show("signup", { check: email.trim() }); return LEAVING; }
     if (error) return { field: "password", message: explain(error) ?? "Something went wrong. Try again." };
+    track("log_in", { method: "password" });
     return finish();
   });
 

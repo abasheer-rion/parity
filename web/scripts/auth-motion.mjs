@@ -45,7 +45,7 @@ async function scene(size, name, run, { reducedMotion = "no-preference", signIn 
     if (url.includes("/user")) return ok(user);
     return ok({});
   });
-  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
+  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
   const page = await context.newPage();
   let n = 0;
   const frames = async (count, gap = 40) => {
