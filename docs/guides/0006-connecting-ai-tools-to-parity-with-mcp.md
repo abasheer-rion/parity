@@ -182,4 +182,5 @@ Set them in the `env` block of the tool's config if you need to. Every call is l
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](../decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](../research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

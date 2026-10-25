@@ -103,4 +103,5 @@ No Stripe account is created, no key is stored, and no account is opened anywher
 - [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

@@ -71,4 +71,5 @@ The owner asked us to track how slow our data and refreshes are. Now every sourc
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
 - [REF-0022: Product analytics events](../reference/0022-product-analytics-events.md)
 - [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

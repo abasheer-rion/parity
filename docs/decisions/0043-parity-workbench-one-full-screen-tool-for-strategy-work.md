@@ -67,4 +67,5 @@ The tools existed: Try settings and Compare read a research run, What if reads t
 - [CMP-0021: Darwinex, a regulated broker that turns traders into risk-scaled indexes](../competitors/0021-darwinex.md)
 - [CMP-0022: Collective2, a marketplace of live-tracked trading strategies](../competitors/0022-collective2.md)
 - [CMP-0023: QuantConnect, cloud backtesting and live trading on open-source LEAN](../competitors/0023-quantconnect.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

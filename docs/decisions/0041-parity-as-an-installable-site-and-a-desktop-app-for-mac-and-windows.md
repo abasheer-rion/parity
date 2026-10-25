@@ -62,4 +62,5 @@ Items 6 (the sidebar) and 9 (updates) are replaced by [DEC-0049](0049-the-deskto
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

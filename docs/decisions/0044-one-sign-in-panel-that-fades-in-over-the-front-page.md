@@ -85,4 +85,5 @@ The owner, on 25 October 2026: "let's have Linear type of animations when onboar
 ## Referenced by
 
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

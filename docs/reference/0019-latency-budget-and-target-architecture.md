@@ -176,4 +176,5 @@ Tier C's pipe is built and running ([DEC-0052](../decisions/0052-live-prices-str
 - [REF-0024: App speed, how we measure it and what we changed](0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](../competitors/0001-ux-patterns-users-praise-most.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

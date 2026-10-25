@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 18 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -248,6 +248,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0016 | [Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0017 | [Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md) | final | 2026-10-24 | [competitors](TAGS.md#competitors), [process](TAGS.md#process) |
 | LOG-0018 | [Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## algorithm
 

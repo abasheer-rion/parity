@@ -47,4 +47,5 @@ On 24 October 2026 Trade moved out of the product app into a full-screen app of 
 ## Referenced by
 
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
+- [LOG-0019: Work log for 24 and 25 October](2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

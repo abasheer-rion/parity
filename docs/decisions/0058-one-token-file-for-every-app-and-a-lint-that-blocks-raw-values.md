@@ -49,4 +49,5 @@ Every colour, text size, gap, corner, shadow, layer and animation speed on Parit
 ## Referenced by
 
 - [REF-0009: UI library](../reference/0009-ui-library.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
