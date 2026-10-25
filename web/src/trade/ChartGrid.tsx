@@ -87,7 +87,7 @@ function ChartCell({ cell, index, active, list, universe, signalsOn, type, log, 
   const last = !builder && data ? data[data.length - 1] : null;
   const prev = !builder && data ? data[data.length - 2] : null;
   const chg = last && prev ? (last.close / prev.close - 1) * 100 : null;
-  const missing = liveRef ? liveState.status === "error" || (builder && !builder.bars.length && false) : ext?.stock ? true : bars.status === "missing" || bars.status === "error";
+  const missing = liveRef ? liveState.status === "error" : ext?.stock ? true : bars.status === "missing" || bars.status === "error";
 
   return (
     <section className={`cg-cell ${active ? "on" : ""}`} aria-label={`Chart ${index + 1}: ${inst?.short ?? ""}`} onPointerDown={onActivate}>
