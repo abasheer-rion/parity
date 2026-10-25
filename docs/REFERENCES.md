@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1649 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1661 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 332 |
-| [Preprints and working papers](#preprints-and-working-papers) | 44 |
+| [Papers](#papers) | 333 |
+| [Preprints and working papers](#preprints-and-working-papers) | 45 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 917 |
+| [Web pages](#web-pages) | 927 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -2429,6 +2429,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-e6e93c9a
+
+Supply Chain Network Structure and Systematic Risk. (n.d.). *chicagobooth.edu*. <https://www.chicagobooth.edu/research/fama-miller/finance-research/funding/2013-14/supply-chain-network-structure-and-systematic-risk>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-e9eb1f61
 
 No title recorded. (n.d.). <https://openaccess.city.ac.uk/id/eprint/14851/13/FXVALUE_Rev3_cepr.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2812,6 +2818,12 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Trading Costs. *NBER Working Paper w20721*. doi:10.3386/w20721 <https://doi.org/10.3386/w20721>. <https://www.nber.org/papers/w20721>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-beed4701
+
+Stock Price Responses to Firm-Level News in Supply Chain Networks. (n.d.). *arxiv.org*. <https://arxiv.org/html/2409.06255v5>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-c8c51ac4
 
@@ -4106,6 +4118,12 @@ Palantir Blog. (n.d.). *blog.palantir.com*. <https://blog.palantir.com/>. Access
 Note: Studied for the newsroom layout in DEC-0057.
 
 Cited in: [DEC-0057](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md).
+
+### url-03a56a42
+
+WhyStockMove. (n.d.). *trustmrr.com*. <https://trustmrr.com/startup/whystockmove>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-03c3c09f
 
@@ -7043,6 +7061,12 @@ Note: Linked in this repo as: Papers With Backtest replication.
 
 Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md).
 
+### url-81e810cd
+
+Finviz groups and Why Is It Moving. (n.d.). *finviz.com*. <https://finviz.com/groups.ashx>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-82035c77
 
 No title recorded. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id519099516>. Accessed 2026-10-24. Verification: not checked.
@@ -7246,6 +7270,18 @@ API Documentation | Finnhub - Free APIs for realtime stock, forex, and cryptocur
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-895764ce
+
+Back Office Alpha (or How Other Companies Affect Your Equity Portfolio). (n.d.). *ai-cio.com*. <https://www.ai-cio.com/news/back-office-alpha-or-how-other-companies-affect-your-equity-portfolio/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-89a383a6
+
+Bigdata.com. (n.d.). *bigdata.com*. <https://bigdata.com>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-89b5bf18
 
@@ -8107,6 +8143,12 @@ cTrader Analyze help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctra
 
 Cited in: [CMP-0005](competitors/0005-ctrader.md).
 
+### url-ae9cde4b
+
+QuantConnect MCP Server. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-aeacd993
 
 Black Wednesday. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Black_Wednesday>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8387,6 +8429,12 @@ Abqaiq-Khurais attack. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Abqai
 
 Cited in: [catalog/events/abqaiq-attack-2019.json](../catalog/events/abqaiq-attack-2019.json).
 
+### url-ba630ed8
+
+Alpaca Launches Official MCP Server. (n.d.). *alpaca.markets*. <https://alpaca.markets/blog/introducing-official-mcp-server-enabling-multi-market-trading-with-ai-interfaces/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-baaa36ea
 
 fee schedule. (n.d.). *binance.com*. <https://www.binance.com/en/fee/schedule>. Accessed 2026-10-24. Verification: not checked.
@@ -8602,6 +8650,12 @@ Newsroom | Anduril. (n.d.). *www.anduril.com*. <https://www.anduril.com/news>. A
 Note: Studied for the newsroom layout in DEC-0057.
 
 Cited in: [DEC-0057](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md).
+
+### url-c7d64c0b
+
+Best MCP Servers for Stock Data in 2026. (n.d.). *barchart.com*. <https://www.barchart.com/story/news/3232892/best-mcp-servers-for-stock-data-in-2026>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-c80dbbf9
 
@@ -9571,6 +9625,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/histdata.json](../catalog/datasets/histdata.json), [DAT-0017](datasets/0017-histdata.md).
 
+### url-f37da1bd
+
+LobeHub MCP directory, Trading. (n.d.). *lobehub.com*. <https://lobehub.com/mcp?q=Trading>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-f388c471
 
 15 U.S. Code 80a-60, Capital structure of business development companies. (n.d.). *Legal Information Institute, Cornell Law School*. <https://www.law.cornell.edu/uscode/text/15/80a-60>. Accessed 2026-10-23. Verification: not checked.
@@ -9711,6 +9771,12 @@ No title recorded. (n.d.). *CoinGecko*. <https://api.coingecko.com/api/v3/simple
 
 Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md).
 
+### url-f9f115d6
+
+Toggle AI webinar, IBKR Campus. (n.d.). *ibkrcampus.com*. <https://ibkrcampus.com/wp-content/uploads/2024/01/2024-WB-0029-Toggle-AI-February-15-2024.pdf>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-fa00b2c3
 
 TradeZella pricing. (n.d.). *tradezella.com*. <https://www.tradezella.com/pricing>. Accessed 2026-10-23. Verification: not checked.
@@ -9722,6 +9788,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 Coinbase Advanced fees. (n.d.). *coinbase.com*. <https://www.coinbase.com/advanced-fees>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
+
+### url-fa6ceb8a
+
+RavenPack on NexusFi. (n.d.). *nexusfi.com*. <https://nexusfi.com/d/data-providers/ravenpack/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-fa9296bc
 

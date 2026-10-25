@@ -39031,6 +39031,258 @@
         "source": "manual",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-03a56a42",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "WhyStockMove",
+      "venue": "trustmrr.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://trustmrr.com/startup/whystockmove",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-81e810cd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Finviz groups and Why Is It Moving",
+      "venue": "finviz.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://finviz.com/groups.ashx",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f9f115d6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Toggle AI webinar, IBKR Campus",
+      "venue": "ibkrcampus.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ibkrcampus.com/wp-content/uploads/2024/01/2024-WB-0029-Toggle-AI-February-15-2024.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89a383a6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bigdata.com",
+      "venue": "bigdata.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bigdata.com",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fa6ceb8a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "RavenPack on NexusFi",
+      "venue": "nexusfi.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://nexusfi.com/d/data-providers/ravenpack/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-895764ce",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Back Office Alpha (or How Other Companies Affect Your Equity Portfolio)",
+      "venue": "ai-cio.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ai-cio.com/news/back-office-alpha-or-how-other-companies-affect-your-equity-portfolio/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ae9cde4b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect MCP Server",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/mcp",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ba630ed8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Alpaca Launches Official MCP Server",
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://alpaca.markets/blog/introducing-official-mcp-server-enabling-multi-market-trading-with-ai-interfaces/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f37da1bd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LobeHub MCP directory, Trading",
+      "venue": "lobehub.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lobehub.com/mcp?q=Trading",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c7d64c0b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Best MCP Servers for Stock Data in 2026",
+      "venue": "barchart.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.barchart.com/story/news/3232892/best-mcp-servers-for-stock-data-in-2026",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e6e93c9a",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": "Supply Chain Network Structure and Systematic Risk",
+      "venue": "chicagobooth.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.chicagobooth.edu/research/fama-miller/finance-research/funding/2013-14/supply-chain-network-structure-and-systematic-risk",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-beed4701",
+      "type": "preprint",
+      "authors": [],
+      "year": null,
+      "title": "Stock Price Responses to Firm-Level News in Supply Chain Networks",
+      "venue": "arxiv.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://arxiv.org/html/2409.06255v5",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }
