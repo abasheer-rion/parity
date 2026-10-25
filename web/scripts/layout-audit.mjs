@@ -34,7 +34,7 @@ for (const size of SIZES) {
     isMobile: size.phone, hasTouch: size.phone, deviceScaleFactor: 1,
   });
   await ctx.addInitScript(() => {
-    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
   });
   const queue = [...list];
   await Promise.all([0, 1, 2, 3].map(async () => {
