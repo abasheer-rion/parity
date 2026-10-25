@@ -5,7 +5,10 @@
 
 Run by `npm run build` in web/ after both vite builds. Standard library only.
 
-It writes static HTML (no script, inline CSS, so pages paint at once) for:
+It writes static HTML (inline CSS, so pages paint at once) for the pages below. The only
+script is the analytics boot file, /a/boot.js from the site build, loaded as a module so it
+never blocks painting and records nothing until the person switches analytics on (DEC-0053).
+The pages:
   /learn/  and /learn/<term>/   every glossary term (docs/_system/glossary.json)
   /ideas/  and /ideas/<slug>/   every trading idea in catalog/algorithms/*.json
   /notes/  and /notes/<id>/     the "In plain words" part of decisions, research and references
@@ -312,6 +315,7 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <meta name="twitter:image" content="{image}">
 {jsonld(graph)}
 <style>{CSS.strip()}</style>
+<!--parity-analytics--><script type="module" src="/a/boot.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
+import { parityAnalytics } from "./plugins/analytics";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
 import { parityMeta, parityOg } from "./plugins/meta";
@@ -166,7 +167,7 @@ const SITE_PAGES = [
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs
@@ -176,7 +177,15 @@ export default defineConfig(({ command, mode }) => ({
         sourcemap: false,
         outDir: "dist",
         emptyOutDir: true,
-        rollupOptions: { input: Object.fromEntries(SITE_PAGES.map((p) => [p.replace("/index", ""), here(`${p}.html`)])) },
+        rollupOptions: {
+          input: {
+            ...Object.fromEntries(SITE_PAGES.map((p) => [p.replace("/index", ""), here(`${p}.html`)])),
+            // The analytics boot script under a fixed name, for the static public pages that
+            // scripts/seo/build_public.py writes after this build (DEC-0053).
+            "analytics-boot": here("src/lib/analytics/boot.ts"),
+          },
+          output: { entryFileNames: (chunk) => (chunk.name === "analytics-boot" ? "a/boot.js" : "assets/[name]-[hash].js") },
+        },
       }
     : command === "build" && mode === "sim"
     ? {

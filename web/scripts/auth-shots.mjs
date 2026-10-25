@@ -33,7 +33,7 @@ for (const size of SIZES) {
   const context = await browser.newContext({ viewport: size.viewport, isMobile: size.isMobile, hasTouch: size.hasTouch, deviceScaleFactor: size.deviceScaleFactor ?? 1 });
   await stubSupabase(context);
   // The cookie notice is already answered, so it does not cover the panel in the pictures.
-  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
+  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
   const page = await context.newPage();
   const shot = (name) => page.screenshot({ path: `${OUT}/${size.name}-${name}.png` });
 
