@@ -92,7 +92,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
   }
 
   if (route === "universe") {
-    return cached(ctx, "universe/v1", 86_400, async () => {
+    return cached(ctx, "universe/v2", 86_400, async () => {
       try { return json(200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(502, { error: "Symbol list unavailable" }); }
     });
   }
