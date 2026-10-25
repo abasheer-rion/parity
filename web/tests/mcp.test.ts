@@ -349,7 +349,7 @@ describe("pieces", () => {
       expect(t.name).toMatch(/^[a-z_]{1,64}$/);
       expect(t.description.length).toBeGreaterThan(40);
       expect(t.inputSchema.type).toBe("object");
-      expect(t.description).not.toMatch(/—/);
+      expect(t.description).not.toMatch(/\u2014/);
     }
   });
 
