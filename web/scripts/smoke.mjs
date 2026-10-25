@@ -103,7 +103,10 @@ for (const size of SIZES) {
       try {
         await page.goto(BASE + path, { waitUntil: "load", timeout: 45000 });
         await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {});
-        await page.waitForTimeout(600);
+        // Pages that redirect into another app (Trade, Academy, Workbench) or load data late
+        // can take a few seconds on a busy runner, so wait for text instead of a fixed pause.
+        await page.waitForFunction(() => (document.body?.innerText ?? "").trim().length >= 40, null, { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(300);
         const info = await page.evaluate(() => {
           const text = document.body?.innerText ?? "";
           const bad = [...text.matchAll(/(^|[^A-Za-z])(NaN|undefined|Infinity|\[object Object\])(?![A-Za-z])/g)].map((m) => text.slice(Math.max(0, (m.index ?? 0) - 30), (m.index ?? 0) + 30).replace(/\s+/g, " "));
