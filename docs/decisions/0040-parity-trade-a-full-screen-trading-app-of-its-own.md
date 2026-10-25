@@ -68,6 +68,7 @@ The owner asked which other parts would benefit. Recommendations, not built:
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [DEC-0046: Payments through Stripe, and real trading only through a regulated broker](0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md)
 - [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
+- [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 - [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](../competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](../competitors/0004-metatrader-4-and-5.md)

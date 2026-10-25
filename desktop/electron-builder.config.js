@@ -37,7 +37,8 @@ module.exports = {
       : { identity: "-", hardenedRuntime: false, gatekeeperAssess: false, notarize: false }),
     darkModeSupport: true,
     minimumSystemVersion: "11.0",
-    // The zip is what the updater downloads; the disk image is for a first install.
+    // The zip (Parity-<version>-<arch>-mac.zip, electron-builder's default name) is what the
+    // updater downloads; the disk image is for a first install.
     target: [
       { target: "dmg", arch: ["arm64", "x64"] },
       { target: "zip", arch: ["arm64", "x64"] },
@@ -50,7 +51,6 @@ module.exports = {
     window: { width: 540, height: 380 },
     artifactName: "Parity-${version}-${arch}.dmg",
   },
-  zip: { artifactName: "Parity-${version}-${arch}-mac.zip" },
   win: {
     icon: "assets/icon.ico",
     target: [{ target: "nsis", arch: ["x64"] }],

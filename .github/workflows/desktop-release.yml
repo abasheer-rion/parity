@@ -1,6 +1,16 @@
-# Builds Parity for Mac and Windows (DEC-0041) and attaches the installers to a draft
-# GitHub release. Run it from the Actions tab, or push a tag named desktop-v<version>.
-# The builds are not signed or notarized; desktop/README.md says how to open them.
+# Builds Parity for Mac and Windows (DEC-0041, DEC-0049) and attaches the installers and the
+# update files to a draft GitHub release. Run it from the Actions tab, or push a tag named
+# desktop-v<version>. Publishing the release is what ships it: the public update feed at
+# https://parity.endyland.com/desktop/updates/ serves the newest published desktop release
+# (web/src/lib/desktopFeed.ts).
+#
+# Signing (desktop/electron-builder.config.js) happens only when these secrets exist; without
+# them the build is ad hoc signed and not notarized, as before:
+#   CSC_LINK           base64 of the Developer ID Application certificate and key (.p12)
+#   CSC_KEY_PASSWORD   that .p12 file's password
+#   APPLE_API_KEY      the App Store Connect API key file's contents (AuthKey_XXXX.p8)
+#   APPLE_API_KEY_ID   that key's ID
+#   APPLE_API_ISSUER   the issuer ID shown above the keys in App Store Connect
 name: Desktop release
 
 on:
@@ -59,15 +69,40 @@ jobs:
         working-directory: desktop
       - run: npm test
         working-directory: desktop
-      - name: Build the Mac disk images (ad hoc signed, not notarized)
+      # The API key arrives as text; electron-builder wants a path to the .p8 file.
+      - name: Signing credentials, when the secrets exist
+        id: sign
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY }}
+        run: |
+          if [ -n "$CSC_LINK" ]; then echo "sign=true" >> "$GITHUB_OUTPUT"; else echo "sign=false" >> "$GITHUB_OUTPUT"; echo "No CSC_LINK secret: building ad hoc signed, not notarized."; fi
+          if [ -n "$APPLE_API_KEY_P8" ]; then
+            mkdir -p "$RUNNER_TEMP/apple"
+            printf '%s' "$APPLE_API_KEY_P8" > "$RUNNER_TEMP/apple/AuthKey.p8"
+            echo "key_path=$RUNNER_TEMP/apple/AuthKey.p8" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Build the Mac disk images and update zips
         run: npm run build:mac
         working-directory: desktop
         env:
-          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+          CSC_IDENTITY_AUTO_DISCOVERY: ${{ steps.sign.outputs.sign }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_API_KEY: ${{ steps.sign.outputs.key_path }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+      - name: Remove the API key file
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/apple"
       - uses: actions/upload-artifact@v7
         with:
           name: desktop-mac
-          path: desktop/dist/*.dmg
+          path: |
+            desktop/dist/*.dmg
+            desktop/dist/*.zip
+            desktop/dist/*.blockmap
+            desktop/dist/latest-mac.yml
 
   windows:
     needs: web
@@ -85,16 +120,19 @@ jobs:
           path: desktop/build/web
       - run: npm ci
         working-directory: desktop
-      - name: Build the Windows installer (unsigned)
+      - name: Build the Windows installer (unsigned; electron-updater installs it as is)
         run: npm run build:win
         working-directory: desktop
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      # Only the installer, not the unpacked app folder.
+      # The installer and its update files, not the unpacked app folder.
       - uses: actions/upload-artifact@v7
         with:
           name: desktop-windows
-          path: desktop/dist/*.exe
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.blockmap
+            desktop/dist/latest.yml
 
   release:
     needs: [mac, windows]
@@ -105,15 +143,16 @@ jobs:
         with:
           pattern: desktop-*
           path: out
-      - name: Attach the installers to a draft release
+      - name: Attach the installers and update files to a draft release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           version=$(node -p "require('./desktop/package.json').version")
           tag="desktop-v${version}"
-          # The Windows installer's name has spaces ("Parity Setup 0.1.0.exe"), so keep each
-          # file as one array item.
-          mapfile -t files < <(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.exe' \))
+          # Every name must match latest-mac.yml and latest.yml exactly, so none has a space.
+          mapfile -t files < <(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.zip' -o -name '*.exe' -o -name '*.blockmap' -o -name 'latest*.yml' \))
+          for f in "${files[@]}"; do case "$f" in *" "*) echo "file name has a space: $f"; exit 1;; esac; done
+          for need in latest-mac.yml latest.yml; do printf '%s\n' "${files[@]}" | grep -q "/$need$" || { echo "missing $need"; exit 1; }; done
           printf 'attaching %s\n' "${files[@]}"
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release upload "$tag" "${files[@]}" --clobber

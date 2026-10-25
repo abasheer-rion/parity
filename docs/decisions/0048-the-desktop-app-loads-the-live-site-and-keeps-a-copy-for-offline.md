@@ -4,10 +4,10 @@ title: The desktop app loads the live site and keeps a copy for offline
 type: decision
 status: accepted
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-25
 authors: [ayan]
 tags: [infra, ui]
-related: [DEC-0041, DEC-0040, DEC-0042, DEC-0043]
+related: [DEC-0041, DEC-0040, DEC-0042, DEC-0043, DEC-0049]
 ---
 
 # The desktop app loads the live site and keeps a copy for offline
@@ -27,7 +27,7 @@ Version 0.1.1 of the app ([DEC-0041](0041-parity-as-an-installable-site-and-a-de
 3. **Sign-in.** Live pages keep the session in the website's own cookie on .endyland.com, stored in the app's private storage, so people stay signed in across launches. The website uses the app's own storage for the session only on the saved copy. Sign-in with Google or GitHub still opens in the browser and comes back through a `parity://` link.
 4. **Trust.** Only the saved copy and the website's five addresses can load inside the app. Only those pages get the small page bridge (notifications, opening links in the browser), may ask for permissions or may send messages to the app. Pages never get Node or file access. Every other address opens in the browser.
 5. **No service workers in the app.** The website's offline workers are not installed in the app, because the saved copy does that job and a worker could hide a dead connection.
-6. **No update check yet.** The repository is private, so its releases cannot be read without a login. The app does not check for new versions; a new version is still a download from the release page. Since pages are live, a new version is only needed when the app itself changes.
+6. **No update check yet.** (Replaced by [DEC-0049](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md): since 0.2.0 the app checks a public feed of published releases.) The repository is private, so its releases cannot be read without a login. The app does not check for new versions; a new version is still a download from the release page. Since pages are live, a new version is only needed when the app itself changes.
 
 ## Consequences
 
@@ -39,4 +39,5 @@ Version 0.1.1 of the app ([DEC-0041](0041-parity-as-an-installable-site-and-a-de
 ## Referenced by
 
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
+- [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 <!-- backlinks:end -->
