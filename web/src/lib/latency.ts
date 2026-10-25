@@ -250,3 +250,18 @@ export function liveFeeds(rows: RumRow[]): { src: string; hops: Partial<Record<L
 }
 
 export const isLiveEndpoint = (e: string) => e.startsWith("trade:live/");
+
+const COUNT_EP = /^trade:live\/([a-z0-9-]+)\/(reconnect|lost)$/;
+
+/** Per live feed, the reconnects and lost updates browsers reported (metric "gap", DEC-0056). */
+export function liveCounts(rows: RumRow[]): Record<string, { reconnect: number; lost: number }> {
+  const out: Record<string, { reconnect: number; lost: number }> = {};
+  for (const r of rows) {
+    if (r.metric !== "gap") continue;
+    const m = r.endpoint.match(COUNT_EP);
+    if (!m) continue;
+    const c = (out[m[1]] ??= { reconnect: 0, lost: 0 });
+    c[m[2] as "reconnect" | "lost"] += r.total;
+  }
+  return out;
+}

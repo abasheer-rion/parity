@@ -443,6 +443,7 @@
       "docs",
       "engine",
       "ledger",
+      "market-data",
       "registrations",
       "scripts",
       "supabase",

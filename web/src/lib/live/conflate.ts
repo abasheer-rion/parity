@@ -6,7 +6,7 @@
 import { WINDOW_MS, type Tick } from "./protocol";
 
 /** One trade as an adapter reports it. */
-export interface Trade { s: string; p: number; v: number; te: number }
+export interface Trade { s: string; p: number; v: number; te: number; /** 1 buy, 2 sell (the taker side), 0 or missing when unknown. */ side?: 0 | 1 | 2 }
 
 interface Slot { pending: Tick | null; lastSent: number; seq: number }
 

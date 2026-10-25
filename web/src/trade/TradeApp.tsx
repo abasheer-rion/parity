@@ -39,6 +39,8 @@ import { rumRefresh } from "../lib/rum";
 import { Assistant } from "../assistant/Mount";
 import { instrumentForKey, tfFor, tfsFor, universeInstruments, useUniverse } from "./live";
 import { SignalsMenu } from "./signalsUi";
+import { BookPanel, hasBook } from "./BookPanel";
+import { MarketsView } from "./MarketsView";
 import { setLiveApp } from "../lib/live/client";
 
 setLiveApp("trade");
@@ -234,7 +236,7 @@ function TradeShell() {
       if (e.key === "?") { e.preventDefault(); setKeysOpen(true); return; }
       if (e.key === "/") { e.preventDefault(); setIndOpen(true); return; }
       if (e.key === "Escape") { if (tool !== "none") setTool("none"); else if (layout.max != null) set((l) => ({ ...l, max: null })); return; }
-      if (e.shiftKey && !e.altKey && /^Digit[1-8]$/.test(code)) { e.preventDefault(); go(VIEWS[Number(code.slice(5)) - 1].id); return; }
+      if (e.shiftKey && !e.altKey && /^Digit[1-9]$/.test(code) && VIEWS[Number(code.slice(5)) - 1]) { e.preventDefault(); go(VIEWS[Number(code.slice(5)) - 1].id); return; }
       if (e.shiftKey && (code === "KeyB" || code === "KeyS")) { e.preventDefault(); order(code === "KeyB" ? "buy" : "sell", e.altKey ? "limit" : "market"); return; }
       if (e.altKey && !e.shiftKey) {
         const map: Record<string, () => void> = {
@@ -267,7 +269,8 @@ function TradeShell() {
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
   // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
-  const noData = (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
+  // Markets streams on its own, so it never waits for the daily export either.
+  const noData = view !== "markets" && (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>
@@ -324,6 +327,7 @@ function TradeShell() {
               : view === "chart" ? (mobile
                 ? <MobileChart mtab={mtab} list={list} layout={layout} set={set} tool={tool} setTool={setTool} symbol={symbol} cue={cue} settings={settings} openSymbol={openSymbol} go={go} onConfirm={(text, run) => setConfirm({ text, go: run })} />
                 : <Workspace list={list} layout={layout} set={set} tool={tool} setTool={setTool} symbol={symbol} cue={cue} settings={settings} openSymbol={openSymbol} onConfirm={(text, run) => setConfirm({ text, go: run })} />)
+              : view === "markets" ? <MarketsView onSymbol={openSymbol} />
               : view === "watchlists" ? <WatchlistsView list={list} onSymbol={openSymbol} onAlert={setAlertFor} />
               : view === "screener" ? <ScreenerView list={list} onSymbol={openSymbol} />
               : view === "portfolio" ? <PortfolioView onSymbol={openSymbol} />
@@ -472,6 +476,11 @@ function Workspace({ list, layout, set, tool, setTool, symbol, cue, settings, op
   };
   const end = () => { base.current = null; };
   const both = s.ticket && s.watch;
+  // A live crypto symbol has a book and a trades list; the lower section switches to them.
+  const liveRef = symbol.startsWith("L:") ? instrumentForKey(symbol, null)?.live : undefined;
+  const book = hasBook(liveRef?.src);
+  const [lower, setLower] = useState<"watch" | "book">("book");
+  const showBook = book && lower === "book";
   return (
     <div className={`ws ${s.dock === "left" ? "ws-left" : ""}`}>
       <div className="ws-center">
@@ -492,8 +501,9 @@ function Workspace({ list, layout, set, tool, setTool, symbol, cue, settings, op
           </section>
           {both && <Splitter axis="y" label="Resize order and watchlist" value={Math.round(s.split * 100)} min={20} max={85} onMove={dragSplit} onEnd={end} />}
           <section className={`sd ${s.watch ? "" : "sd-closed"}`} style={both ? { flex: `${1 - s.split} 1 0` } : s.watch ? { flex: "1 1 0" } : undefined} aria-label="Watchlist">
-            <SideHead label="Watchlist" open={s.watch} onToggle={() => set((l) => ({ ...l, side: { ...l.side, watch: !l.side.watch } }))} />
-            {s.watch && <div className="sd-body"><WatchMini list={list} current={symbol} onSymbol={(k) => openSymbol(k, false)} /></div>}
+            <SideHead label={showBook ? "Book" : "Watchlist"} open={s.watch} onToggle={() => set((l) => ({ ...l, side: { ...l.side, watch: !l.side.watch } }))}
+              extra={book ? <button type="button" className="sd-btn sd-swap" onClick={() => setLower(showBook ? "watch" : "book")} title={showBook ? "Show watchlist" : "Show book and trades"}>{showBook ? "Watchlist" : "Book"}</button> : undefined} />
+            {s.watch && <div className="sd-body">{showBook && liveRef ? <BookPanel src={liveRef.src} sym={liveRef.sym} /> : <WatchMini list={list} current={symbol} onSymbol={(k) => openSymbol(k, false)} />}</div>}
           </section>
         </aside>
       )}

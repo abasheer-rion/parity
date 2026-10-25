@@ -31,7 +31,7 @@ const DEFAULT_PAGES = [
   // Parity Terminal
   "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
   // Parity Trade (DEC-0040)
-  "/trade/", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
+  "/trade/", "/trade/#/markets", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
   "/trade/#/strategies", "/trade/#/settings",
   // Parity Academy (DEC-0042)
   "/academy/", "/academy/#/reading-a-backtest", "/academy/#/reading-a-backtest/return", "/academy/#/luck-vs-skill/multiple-testing",

@@ -36,7 +36,8 @@ class Provider:
     # Live data (DEC-0052): how fresh it reaches a screen, and whether it is switched on in the
     # site's fan-out (web/live/). "live" sources are not fetched by the engine at all.
     # feed: "real-time", "delayed about N min" or "end of day"; empty for research series.
-    # live: "on", "ask" (terms unclear, the owner decides) or "off" (forbidden or contract).
+    # live: "on", "team" (terms allow internal use only: team members only, DEC-0056), "ask"
+    # (terms unclear, the owner decides) or "off" (forbidden or contract).
     feed: str = ""
     live: str = ""
 
@@ -117,15 +118,37 @@ PROVIDERS: list[Provider] = [
     Provider("sec-tickers", "SEC company tickers", "Public information; cite the SEC",
              "https://www.sec.gov/privacy", feed="end of day", live="on",
              note="every US-listed symbol for search, no prices"),
-    Provider("hyperliquid-live", "Hyperliquid trades", "Terms have no data clause and bar US "
-             "persons from the app", "https://app.hyperliquid.xyz/terms", feed="real-time",
-             live="ask", note="built and tested; LIVE_ALLOW=hyperliquid turns it on"),
-    Provider("kraken-live", "Kraken trades", "Forbids making content available to third "
-             "parties without consent", "https://www.kraken.com/legal/global-terms",
-             feed="real-time", live="off", note="adapter kept for a written consent"),
-    Provider("exchanges-live", "Coinbase, Bitstamp, Gemini, Bitfinex, Binance.US and others",
-             "Each forbids display to third parties or needs a redistribution agreement",
-             "https://www.coinbase.com/legal/market_data", feed="real-time", live="off"),
+    # Team only (DEC-0056): terms allow internal use, so these stream only to team members.
+    Provider("hyperliquid-live", "Hyperliquid trades, books and overview, every perp and spot pair",
+             "Terms have no data clause; read for the team only, never shown to the public",
+             "https://app.hyperliquid.xyz/terms", feed="real-time", live="team",
+             note="team only; owner decision 25 Oct 2026"),
+    Provider("kraken-live", "Kraken trades, books and overview, every spot and fiat pair",
+             "Use for your own benefit; no making content available to third parties",
+             "https://www.kraken.com/legal/global-terms", feed="real-time", live="team",
+             note="team only; public display needs written consent"),
+    Provider("coinbase-live", "Coinbase Exchange trades, books and overview", "No redistribution "
+             "or display to third parties", "https://www.coinbase.com/legal/market_data",
+             feed="real-time", live="team", note="team only"),
+    Provider("gemini-live", "Gemini trades, books and overview", "Personal and internal use "
+             "allowed; redistribution needs an agreement",
+             "https://www.gemini.com/legal/market-data-agreement", feed="real-time", live="team",
+             note="team only"),
+    Provider("binanceus-live", "Binance.US trades, books and overview", "No public display",
+             "https://www.binance.us/terms-of-use", feed="real-time", live="team",
+             note="team only"),
+    Provider("alpaca-live", "Alpaca Market Data, US stocks and ETFs (IEX free, SIP paid)",
+             "The account holder's own subscription, team only", "https://alpaca.markets/data",
+             key_env="ALPACA_KEY_ID", key_required=True, feed="real-time", live="team",
+             cost="free (IEX, 30 symbols) or 99 USD a month (Algo Trader Plus, every exchange)",
+             note="also needs ALPACA_SECRET_KEY; set both as Pages and worker secrets"),
+    Provider("finnhub-live", "Finnhub US stock trades", "Free plan is personal use only; "
+             "business use needs a paid plan or written approval",
+             "https://finnhub.io/terms-of-service", key_env="FINNHUB_TOKEN", key_required=True,
+             feed="real-time", live="team", note="only with a plan that allows business use"),
+    Provider("exchanges-live", "Bitstamp, Bitfinex, Binance, OKX, Bybit, Deribit and others",
+             "Each forbids display, is personal use only, or bars the US",
+             "https://www.bitstamp.net/terms-of-use/", feed="real-time", live="off"),
     Provider("pyth", "Pyth Network", "Every request needs a key since 26 Aug 2026; display "
              "rights on paid plans", "https://www.pyth.network/pricing", key_env="PYTH_API_KEY",
              key_required=True, planned=True, feed="real-time", live="off",
@@ -156,7 +179,10 @@ def has_key(p: Provider) -> bool:
 
 def status(p: Provider) -> str:
     if p.live and not p.planned:
-        return {"on": "on (live)", "ask": "owner call", "off": "off (terms)"}.get(p.live, p.live)
+        if p.live == "team" and p.key_required and not has_key(p):
+            return "team, no key"
+        return {"on": "on (live)", "team": "on (team only)", "ask": "owner call",
+                "off": "off (terms)"}.get(p.live, p.live)
     if p.planned or p.id not in sources.FETCHERS and p.id != "derived":
         return "planned"
     if p.key_required and not has_key(p):

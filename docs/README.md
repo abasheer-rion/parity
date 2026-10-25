@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 53 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 54 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
@@ -104,6 +104,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0052 | [Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0053 | [Our own product analytics, opt-in, stored in Postgres](decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DEC-0056 | [Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

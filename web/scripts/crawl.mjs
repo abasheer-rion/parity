@@ -27,7 +27,7 @@ const SEEDS = [
   "/", "/login/", "/signup/", "/reset/", "/verify/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/",
   ...PRODUCT.map((r) => `/app/#/${r}`),
   ...RESEARCH.map((r) => `/research/#/${r}`),
-  ...["chart", "watchlists", "screener", "portfolio", "orders", "alerts", "strategies", "settings"].map((v) => `/trade/#/${v}`),
+  ...["chart", "markets", "watchlists", "screener", "portfolio", "orders", "alerts", "strategies", "settings"].map((v) => `/trade/#/${v}`),
   ...["try", "whatif", "compare", "search", "edges", "settings"].map((v) => `/lab/#/${v}`),
   ...["", "progress", "settings"].map((v) => `/academy/#/${v}`),
   ...["overview", "macro", "fx", "commodities", "simlab", "map", "crises", "bots"].map((v) => `/sim/#/${v}`),

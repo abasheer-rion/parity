@@ -171,6 +171,7 @@ Tier C's pipe is built and running ([DEC-0052](../decisions/0052-live-prices-str
 - [DEC-0046: Payments through Stripe, and real trading only through a regulated broker](../decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md)
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](../decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
+- [DEC-0056: Team members see real-time venue feeds the public does not](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](../competitors/0001-ux-patterns-users-praise-most.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
