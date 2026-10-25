@@ -58,6 +58,7 @@ LICENCES = {
     "Parity own work": (),
 }
 HERO_KINDS = ("chart", "stock", "own")
+BIO_STATUSES = ("pending author review", "approved by author")
 
 # Paths under /blog/ and /news/ that are not posts.
 RESERVED_SLUGS = {"page", "category", "feed", "feed.xml", "atom.xml", "index.json", "authors", "tags", "drafts"}
@@ -85,6 +86,8 @@ class Author:
     about: str = ""
     bio: str = ""
     photo: str = ""
+    role: str = ""
+    bio_status: str = ""  # "pending author review" or "approved by author"
 
 
 @dataclass
@@ -156,7 +159,8 @@ def load_authors(path: Path | None = None) -> dict[str, Author]:
     out = {}
     for key, a in raw.items():
         out[key] = Author(id=key, name=a.get("name", ""), kind=a.get("kind", ""), about=a.get("about", ""),
-                          bio=a.get("bio", ""), photo=a.get("photo", ""))
+                          bio=a.get("bio", ""), photo=a.get("photo", ""), role=a.get("role", ""),
+                          bio_status=a.get("bio_status", ""))
         out[key].supplied = bool(a.get("supplied_by_author"))  # type: ignore[attr-defined]
     return out
 
@@ -370,9 +374,11 @@ def validate_authors(authors: dict[str, Author]) -> list[str]:
             probs.append(f"{where}: a house byline cannot have a photo of a person")
         if a.kind == "house" and not a.name.startswith("Parity "):
             probs.append(f"{where}: a house byline is named for Parity, such as 'Parity Research'")
-        if a.kind == "team" and (a.bio or a.photo) and not getattr(a, "supplied", False):
-            probs.append(f"{where}: a team member's bio or photo is added only when they supply it "
-                         "(set supplied_by_author = true)")
+        if a.kind == "team" and a.photo and not getattr(a, "supplied", False):
+            probs.append(f"{where}: a team member's photo is added only when they supply it "
+                         "(set supplied_by_author = true); the page shows their initials until then")
+        if a.kind == "team" and a.bio and a.bio_status not in BIO_STATUSES:
+            probs.append(f"{where}: a team member's bio needs `bio_status`, one of {', '.join(BIO_STATUSES)}")
     return probs
 
 

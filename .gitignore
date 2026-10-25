@@ -19,6 +19,7 @@ __pycache__/
 node_modules/
 web/dist/
 web/.wrangler/
+web/.newsroom-preview/
 
 # Supabase local state
 supabase/.temp/

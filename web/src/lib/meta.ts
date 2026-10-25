@@ -55,6 +55,8 @@ export const OG_CARDS: Record<string, OgCard> = {
   learn: { kicker: "Parity Learn", title: "Learn the words of trading", sub: "Over 300 trading terms, each with a simple explanation, an everyday comparison and a precise definition." },
   ideas: { kicker: "Parity Ideas", title: "Trading ideas, with the evidence", sub: "Where each idea came from, what the evidence says and why it might fail." },
   notes: { kicker: "Parity Notes", title: "Parity research notes", sub: "How Parity decides, what the research found and how the numbers work." },
+  blog: { kicker: "Parity Blog", title: "Research, analysis and opinion", sub: "Write-ups from the Parity team. Every post is labelled as fact-based reporting, analysis or opinion." },
+  news: { kicker: "Parity News", title: "Company news and press releases", sub: "Updates from Parity. Market headlines and their impact are in the app." },
   verify: { kicker: "Parity Verify", title: "Check a trading record", sub: "Profit per trade, the worst loss and whether the result could be luck." },
   app: { kicker: "Parity", title: "Trading strategies tested against the S&P 500", sub: "Discover strategies, compare them with the S&P 500 and see every result." },
   research: { kicker: "Parity Research", title: "Research docs, official runs and data", sub: "The docs, the ledger of official runs, the strategy search and the data behind them." },

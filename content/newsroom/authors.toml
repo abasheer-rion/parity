@@ -1,7 +1,9 @@
 # Who can sign a newsroom post (DEC-0053).
 #
-# team:  a real person on the Parity team. Name only. A bio or photo is added only when that
-#        person supplies it, and then `supplied_by_author = true` must be set.
+# team:  a real person on the Parity team. Name, role and a short bio drawn only from their own
+#        work in this repository, with `bio_status` saying whether they have approved it. No photos
+#        (the page shows their initials) unless they supply one and `supplied_by_author = true`.
+#        Never add employers, schools, credentials or achievements they have not given us.
 # house: a desk byline for work the team did together. Always named "Parity ...", never given
 #        a face or a biography, and never presented as a person.
 #
@@ -12,12 +14,18 @@ name = "Ayan"
 kind = "team"
 
 [amanda]
-name = "Amanda"
+name = "Amanda Sourivong"
 kind = "team"
+role = "Co-founder, Parity"
+bio = "Works on Parity's strategy research: emerging markets, energy and commodity futures, lesser-known strategies, combining strategies and how they behave in crises."
+# Drafted from her pull requests in this repository (#16, #17, #18, #27, #36, #43, #54).
+bio_status = "pending author review"
 
 [abanish]
-name = "Abanish"
+name = "Abanish Khadka"
 kind = "team"
+role = "Co-founder, Parity"
+# No bio until Abanish supplies one.
 
 [parity-research]
 name = "Parity Research"

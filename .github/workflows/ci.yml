@@ -144,6 +144,12 @@ jobs:
         run: python3 scripts/docs.py check ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
       - name: Auth emails match their sources
         run: python3 auth/build.py --check
+      # Blog and News (DEC-0053): stance labels, sources, image licences and alt text, bylines,
+      # and that only published posts build. The site build runs the same check again.
+      - name: Newsroom posts and their rules
+        run: |
+          python3 scripts/newsroom/check.py
+          NEWSROOM_NO_MEDIA=1 python3 -m unittest discover -s scripts/newsroom/tests
       - name: Ledger and registrations
         run: |
           pip install -q -e engine

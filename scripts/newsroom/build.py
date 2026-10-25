@@ -24,6 +24,7 @@ import argparse
 import datetime as dt
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -115,6 +116,10 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:10px;paddi
 .share a,.share button{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:none;color:var(--text);font:inherit;font-size:14px;text-decoration:none;cursor:pointer}
 .share button{min-width:116px;justify-content:center}
 .nr-related{max-width:1040px;margin:56px auto 0}
+.nr-person{display:flex;gap:20px;align-items:center;margin:0 0 18px}.nr-person h1{margin:0 0 8px}.nr-person .meta{margin:0}
+.nr-avatar{display:inline-block;flex:none;border-radius:50%;background:var(--card-2);border:1px solid var(--line-2);padding:6px}
+.nr-avatar.initials{display:inline-flex;align-items:center;justify-content:center;padding:0;font-weight:600;color:var(--text);background:linear-gradient(135deg,#1b2a6b,#11131c)}
+.grid li a.nr-author{display:flex;gap:12px;align-items:center}
 @media (max-width:760px){.nr-feature{grid-template-columns:1fr;gap:14px}.nr-body{font-size:17px}.dek{font-size:18px}}
 @media (prefers-reduced-motion:reduce){.progress{display:none}}
 """
@@ -144,6 +149,10 @@ def stance_class(stance: str) -> str:
 
 def type_slug(t: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+def count(n: int, word: str) -> str:
+    return f"{n} {word}" + ("" if n == 1 else "s")
 
 
 def stamp(d: dt.date) -> str:
@@ -243,7 +252,7 @@ class Media:
     def run(self) -> None:
         job = {"og": self.og, "images": [{k: v for k, v in j.items() if not k.startswith("_")} for j in self.jobs.values()]}
         data: dict = {"images": {}, "og": []}
-        if job["og"] or job["images"]:
+        if (job["og"] or job["images"]) and not os.environ.get("NEWSROOM_NO_MEDIA"):  # the tests skip Node
             try:
                 res = subprocess.run(["node", str(ROOT / "web/scripts/newsroom-media.mjs")], input=json.dumps(job),
                                      capture_output=True, text=True, timeout=300, check=True)
@@ -357,6 +366,14 @@ class Newsroom:
         names = [f'<a href="/authors/{a}/">{e(self.authors[a].name)}</a>' if links else e(self.authors[a].name)
                  for a in p.authors]
         return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+
+    def avatar(self, a: model.Author, size: int) -> str:
+        """Initials for a person (no photo until they supply one), the Parity mark for a house byline."""
+        if a.kind == "house":
+            return f'<img class="nr-avatar" src="/favicon.svg" width="{size}" height="{size}" alt="">'
+        initials = "".join(w[0] for w in a.name.split()[:2]).upper()
+        return (f'<span class="nr-avatar initials" style="width:{size}px;height:{size}px;font-size:{round(size * .38)}px" '
+                f'aria-hidden="true">{e(initials)}</span>')
 
     def stance_pill(self, p: Post) -> str:
         return f'<span class="stance {stance_class(p.stance)}">{e(p.stance)}</span>'
@@ -622,20 +639,24 @@ class Newsroom:
         cards = []
         for a in self.authors.values():
             mine = [p for p in self.posts if a.id in p.authors]
-            kind = "Parity team" if a.kind == "team" else "House byline"
+            kind = a.role or ("Parity team" if a.kind == "team" else "House byline")
             path = f"/authors/{a.id}/"
             about = f'<p class="lede">{e(a.about)}</p>' if a.about else ""
-            bio = f"<p>{e(a.bio)}</p>" if a.bio else ""
-            posts = f'<ul class="nr-grid">{"".join(self.card(p) for p in mine)}</ul>' if mine else "<p>No posts yet.</p>"
-            body = (f'<h1>{e(a.name)}</h1><ul class="meta"><li class="pill">{kind}</li><li class="pill">{len(mine)} posts</li></ul>'
+            bio = f'<p class="lede">{e(a.bio)}</p>' if a.bio else ""
+            posts = (f'<h2>Posts</h2><ul class="nr-grid">{"".join(self.card(p) for p in mine)}</ul>' if mine
+                     else "<p>No posts yet.</p>")
+            body = (f'<div class="nr-person">{self.avatar(a, 88)}<div><h1>{e(a.name)}</h1>'
+                    f'<ul class="meta"><li class="pill">{e(kind)}</li><li class="pill">{count(len(mine), "post")}</li></ul></div></div>'
                     f"{about}{bio}{posts}")
-            who = ({"@type": "Person", "name": a.name, "url": f"{bp.SITE}{path}", "worksFor": {"@id": f"{bp.SITE}/#org"}}
+            who = ({"@type": "Person", "name": a.name, "url": f"{bp.SITE}{path}", "worksFor": {"@id": f"{bp.SITE}/#org"},
+                    **({"jobTitle": a.role.split(",")[0]} if a.role else {}), **({"description": a.bio} if a.bio else {})}
                    if a.kind == "team" else
                    {"@type": "Organization", "name": a.name, "url": f"{bp.SITE}{path}", "parentOrganization": {"@id": f"{bp.SITE}/#org"}})
             self.pages[path] = self.shell(path=path, title=a.name, description=a.about or f"Posts by {a.name} on the Parity blog and news pages.",
                                           body=body, section="blog", trail=[("Home", "/"), ("Authors", "/authors/"), (a.name, path)],
                                           ld=[{"@type": "ProfilePage", "mainEntity": who}], robots="" if mine else "noindex, follow")
-            cards.append(f'<li><a href="{path}">{e(a.name)}<small>{kind}. {len(mine)} posts.</small></a></li>')
+            cards.append(f'<li><a class="nr-author" href="{path}">{self.avatar(a, 44)}<span>{e(a.name)}'
+                         f'<small>{e(kind)}. {count(len(mine), "post")}.</small></span></a></li>')
         body = ('<h1>Authors</h1><p class="lede">Posts are written by people on the Parity team, or under a house byline '
                 "when the work is the team's together. House bylines are named for Parity and are never presented as a person.</p>"
                 f'<ul class="grid">{"".join(cards)}</ul>')

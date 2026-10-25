@@ -1,4 +1,4 @@
-# Parity. Public: the front page, /legal/, /learn/, /ideas/ and /notes/.
+# Parity. Public: the front page, /legal/, /learn/, /ideas/, /notes/, /blog/, /news/, /authors/ and /tags/.
 # The product, research and sim apps and their data sit behind sign-in.
 User-agent: *
 Allow: /
