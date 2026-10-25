@@ -106,5 +106,6 @@ Add a source by adding a line to the catalog, a downloader if needed, a test for
 - [REF-0013: News sources and market impact](0013-news-sources-and-market-impact.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0015: Getting close to Bloomberg data: sources, costs and licences](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
+- [REF-0019: Latency budget and target architecture](0019-latency-budget-and-target-architecture.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

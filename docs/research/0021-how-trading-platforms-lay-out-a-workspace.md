@@ -101,5 +101,6 @@ Parity Trade keeps Tab for moving between controls, which keyboard users need, a
 ## Referenced by
 
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](../decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [RES-0022: How trading and market data platforms are built](0022-how-trading-and-market-data-platforms-are-built.md)
 - [LOG-0015: Parity Trade becomes its own app](../log/2026-10-24-parity-trade-becomes-its-own-app.md)
 <!-- backlinks:end -->

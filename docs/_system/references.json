@@ -9932,6 +9932,7 @@
       "used_in": [
         "catalog/datasets/twelve-data.json",
         "docs/datasets/0033-twelve-data.md",
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -13632,7 +13633,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0005-zen-apps-and-free-apis.md"
+        "docs/research/0005-zen-apps-and-free-apis.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "note": "Linked in this repo as: development guide",
       "metadata": {
@@ -18685,7 +18687,9 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/oanda-v20-practice.json",
-        "docs/datasets/0026-oanda-v20-practice.md"
+        "docs/datasets/0026-oanda-v20-practice.md",
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
         "source": "repo",
@@ -21834,7 +21838,8 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
       ],
       "metadata": {
         "source": "repo",
@@ -23244,7 +23249,8 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
       ],
       "metadata": {
         "source": "repo",
@@ -26379,7 +26385,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
-        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
+        "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "note": "Linked in this repo as: TradingView trading terminal",
       "metadata": {
@@ -26794,6 +26801,2811 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "link text"
+      }
+    },
+    {
+      "key": "url-6874d944",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "BLPAPI Core Developer Guide",
+      "venue": "data.bloomberglp.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://data.bloomberglp.com/professional/sites/10/2017/03/BLPAPI-Core-Developer-Guide.pdf",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-53b8bf02",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wikipedia, Bloomberg Terminal",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bloomberg_Terminal",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-96023a96",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg, adopting TypeScript at scale",
+      "venue": "techatbloomberg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-40531124",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "bloomberg/chromium.bb",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/bloomberg/chromium.bb",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-34bbd980",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Scotti et al., Comdb2, VLDB 2016",
+      "venue": "vldb.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.vldb.org/pvldb/vol9/p1377-scotti.pdf",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-351162ac",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "bloomberg/comdb2",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/bloomberg/comdb2",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b3617053",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "bloomberg/blazingmq",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/bloomberg/blazingmq",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5e120bc1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "concepts",
+      "venue": "bloomberg.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bloomberg.github.io/blazingmq/docs/introduction/concepts/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8bb819c6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "clustering",
+      "venue": "bloomberg.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bloomberg.github.io/blazingmq/docs/architecture/clustering/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f6aa8c51",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "benchmarks",
+      "venue": "bloomberg.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bloomberg.github.io/blazingmq/docs/performance/benchmarks/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3179ec12",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Real-Time SDK",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/Refinitiv/Real-Time-SDK",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3308fdd9",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "ETA readme",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/Refinitiv/Real-Time-SDK/master/Cpp-C/Eta/README.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1e87083b",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "EMA readme",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/Refinitiv/Real-Time-SDK/master/Cpp-C/Ema/README.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3694dd2f",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "WebSocket API spec",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/Refinitiv/websocket-api/master/WebsocketAPI_ProtocolSpecification.pdf",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f2724a3c",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "websocket-api",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/Refinitiv/websocket-api",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0fd8a0ee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "RTDS",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/market-data/data-management/real-time-distribution-system",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-07fa9d8f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Real-Time Optimized",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/market-data/data-management/real-time-delayed-optimized-market-data",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-926ee1fd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Full Tick",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/market-data/data-feeds/real-time-full-tick-data",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d682e77d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Ultra Direct",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/market-data/data-feeds/real-time-ultra-direct",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-591c197c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wikipedia, Refinitiv",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Refinitiv",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ae5b1b37",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wikipedia, EBS",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Electronic_Broking_Services",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-252f130c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "EBS Market",
+      "venue": "cmegroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cmegroup.com/markets/ebs/ebs-market.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cd72861b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "EBS connectivity",
+      "venue": "cmegroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cmegroup.com/markets/ebs/ebs-connectivity.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a6abd8b8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "BIS, Monitoring of fast-paced electronic markets",
+      "venue": "bis.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bis.org/publications/monitoring-fast-paced-electronic-markets.pdf",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d38901b1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LSEG FX Matching",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/fx/venues/spot-matching-forwards-matching",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f87b4f93",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MetaTrader 4",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/MetaTrader_4",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-daceccf9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MT5 for brokers",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en/brokers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-615a67f6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MetaQuotes for brokers",
+      "venue": "metaquotes.net",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metaquotes.net/en/metatrader5/brokers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7569c6eb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MT5 settings",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en/terminal/help/startworking/settings",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d1595f37",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MQL5 VPS",
+      "venue": "mql5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.mql5.com/en/vps",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3931261a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "PrimeXM XCore",
+      "venue": "primexm.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://primexm.com/xcore",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a7291a75",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "oneZero Hub",
+      "venue": "onezero.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.onezero.com/hub-technology/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d95e689d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Gold-i MatrixNET",
+      "venue": "gold-i.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "http://www.gold-i.com/matrix-net",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d17c62bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader endpoints",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/open-api/proxies-endpoints/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c0a66cef",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader Open API",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/open-api/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-78f3cb2c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "framing",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/open-api/sending-receiving-protobuf/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-045a40e6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "connection",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/open-api/connection/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fca15cff",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "messages",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/open-api/messages/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-107654ad",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader FIX",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/fix/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a5489da4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA pricing stream",
+      "venue": "developer.oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developer.oanda.com/rest-live-v20/pricing-ep/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-624a0779",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TWS API connection",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/connection.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d79238af",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TWS API introduction",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/introduction.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-204e45ec",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "market data",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/market_data.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-48b7e156",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "market data requests",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/md_request.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c35afbd3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "historical limits",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/historical_limitations.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1527ab0f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "tick data",
+      "venue": "interactivebrokers.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://interactivebrokers.github.io/tws-api/tick_data.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0c178c83",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Fowler, The LMAX Architecture",
+      "venue": "martinfowler.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://martinfowler.com/articles/lmax.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f57ef087",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Disruptor technical paper",
+      "venue": "lmax-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lmax-exchange.github.io/disruptor/disruptor.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-60fe816c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Disruptor 1.0 paper",
+      "venue": "lmax-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7fa72e7b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Exchange",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/exchange",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6784481b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "HyperCore overview",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52f35240",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "order book",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/order-book",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c11baf7e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "clearinghouse",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/clearinghouse",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-30c04d55",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "API servers",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/api-servers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ad5f4cc4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "API",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fb6afad5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "WebSocket",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-49cbc758",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "rate limits",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ea2134c6",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Hyperliquid node",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/hyperliquid-dex/node",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d99b948d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase feed overview",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/exchange/websocket-feed/overview",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9de23715",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "channels",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/exchange/websocket-feed/channels",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-828393a9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FIX connectivity",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/exchange/fix-api/connectivity",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a76d45c9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "rate limits",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/exchange/introduction/rate-limits-overview",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0ae9d647",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Prime",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/prime/introduction/welcome",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-18916b68",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken API intro",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api/docs/guides/global-intro",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec44da5e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "book channel",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api/docs/websocket-v2/book",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-75268f36",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "WebSocket intro",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api/docs/guides/spot-ws-intro",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-084d1c40",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken FIX",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api/docs/guides/fix-intro",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7214a18b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Oxidizing Kraken",
+      "venue": "blog.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://blog.kraken.com/post/7964/oxidizing-kraken-improving-kraken-infrastructure-using-rust",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-da1237d5",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Binance streams",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/web-socket-streams.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8c87a06e",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "SBE streams",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/sbe-market-data-streams.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-206bf299",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "REST API",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/rest-api.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c0ba4d61",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "FIX API",
+      "venue": "raw.githubusercontent.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/fix-api.md",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-12fa1ece",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "lightweight-charts",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/tradingview/lightweight-charts",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-66b859fb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "charting products",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/getting_started/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6cc7aeae",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Datafeed API",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/connecting_data/Datafeed-API/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1c820f81",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "streaming tutorial",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/charting-library-docs/latest/tutorials/implement_datafeed_tutorial/Streaming-Implementation",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cb012510",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "data coverage",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/data-coverage/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-80a85f6e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView support",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/support/solutions/43000471705/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e8708b5b",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Faust",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/robinhood/faust",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e8a11f76",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood S-1",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1783879/000162828021013318/robinhoods-1.htm",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-95161720",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood 10-K 2025",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000023/hood-20251231.htm",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f18557a0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood legal",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/about/legal/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-edaf6f8e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Broker API",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/about-broker-api",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cc93720c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "use cases",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/use-cases",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-38aacaef",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "account opening",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/account-opening",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ed6647db",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "funding",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/funding-accounts",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-07001619",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "market data plans",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/about-market-data-api",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-de42a416",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "streaming",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/streaming-market-data",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8e45b085",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "real-time stocks",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/real-time-stock-pricing-data",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-003c44bb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "kdb+tick white paper",
+      "venue": "code.kx.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://code.kx.com/q/wp/rt-tick/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52f45fbb",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "kdb-tick scripts",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/KxSystems/kdb-tick",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e3f69288",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Aeron",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/real-logic/aeron",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-36c7def2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Aeron Cluster",
+      "venue": "aeron.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://aeron.io/docs/aeron-cluster/overview/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c69ac4a9",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Chronicle Queue",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/OpenHFT/Chronicle-Queue",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cc7a052f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FIX protocol",
+      "venue": "fixtrading.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fixtrading.org/standards/fix-protocol/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-581e2ed3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FIX standards",
+      "venue": "fixtrading.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fixtrading.org/standards/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a3d4a865",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "QuickFIX/J",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/quickfix-j/quickfixj",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1497ec93",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "QuickFIX/n",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/connamara/quickfixn",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-32a45ffa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MiFID II RTS 25",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/eur/2017/574/annex",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5064425d",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "FINRA Rule 6820",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/6820",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-36ddd47c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "AWS time sync",
+      "venue": "docs.aws.amazon.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5c9ba0b0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Pico Corvil",
+      "venue": "pico.net",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pico.net/corvil/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-88e70e1f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Massive business",
+      "venue": "massive.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://massive.com/business",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a99fc111",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TraderMade pricing",
+      "venue": "tradermade.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://tradermade.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-265c4164",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cboe One",
+      "venue": "cboe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cboe.com/market_data_services/us/equities/cboe_one/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-63ad7c68",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "CT Plan fees",
+      "venue": "consolidatedtape.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://consolidatedtape.com/fees",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b2e69d38",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Fly.io pricing",
+      "venue": "docs.fly.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.fly.io/about/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a1fc516b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Durable Objects pricing",
+      "venue": "developers.cloudflare.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b67616b1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Realtime limits",
+      "venue": "supabase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://supabase.com/docs/guides/realtime/limits",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-91078bba",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ClickHouse pricing",
+      "venue": "clickhouse.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://clickhouse.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a9828f3b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Tiger Data pricing",
+      "venue": "tigerdata.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tigerdata.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-14fdc6b1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Sentry pricing",
+      "venue": "sentry.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://sentry.io/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-37a94721",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Analytics Engine pricing",
+      "venue": "developers.cloudflare.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.cloudflare.com/analytics/analytics-engine/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6b14d231",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Grafana pricing",
+      "venue": "grafana.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://grafana.com/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b9edd654",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "k6 docs",
+      "venue": "grafana.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://grafana.com/docs/k6/latest/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-34bd526c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Queues pricing",
+      "venue": "developers.cloudflare.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.cloudflare.com/queues/platform/pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0019-latency-budget-and-target-architecture.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b0baa9b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stripe webhooks",
+      "venue": "docs.stripe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.stripe.com/webhooks",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b609ddee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stripe meter events",
+      "venue": "docs.stripe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.stripe.com/billing/subscriptions/usage-based/recording-usage-api",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7d6b4320",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stripe pricing",
+      "venue": "stripe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://stripe.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cb6f8626",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stripe Billing pricing",
+      "venue": "stripe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://stripe.com/billing/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4b0c751f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Alpaca Broker",
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://alpaca.markets/broker",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6e3dbcce",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "DriveWealth",
+      "venue": "drivewealth.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.drivewealth.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-506390a9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR broker accounts",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/en/accounts/broker.php",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9a02a683",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "SEC guide to broker-dealer registration",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/about/divisions-offices/division-trading-markets/division-trading-markets-compliance-guides/guide-broker-dealer-registration",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b30692e7",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "NFA introducing brokers",
+      "venue": "nfa.futures.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nfa.futures.org/registration-membership/who-has-to-register/ib.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-caa5140b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "17 CFR 1.17",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/1.17",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6564ba7a",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "NFA retail forex dealers",
+      "venue": "nfa.futures.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nfa.futures.org/registration-membership/who-has-to-register/rfed.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7b646538",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "17 CFR 5.7",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/5.7",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-713fa3ea",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FinCEN MSB definition",
+      "venue": "fincen.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fincen.gov/money-services-business-definition",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9e843b13",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "NYDFS virtual currency businesses",
+      "venue": "dfs.ny.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.dfs.ny.gov/virtual_currency_businesses",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f65c8a5b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "31 CFR 1023.220",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/31/1023.220",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-619570bb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "31 CFR 1010.230",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/31/1010.230",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-feadaaa3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Stripe API keys",
+      "venue": "docs.stripe.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.stripe.com/keys",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
       }
     }
   ]

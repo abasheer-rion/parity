@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1088 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1221 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,10 +11,10 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 44 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 59 |
-| [Software](#software) | 63 |
-| [Web pages](#web-pages) | 469 |
+| [Software](#software) | 83 |
+| [Web pages](#web-pages) | 576 |
 | [Forum posts](#forum-posts) | 52 |
-| [Regulators](#regulators) | 47 |
+| [Regulators](#regulators) | 53 |
 | [News](#news) | 3 |
 
 ## Papers
@@ -3361,6 +3361,18 @@ jesse-ai/jesse. (n.d.). *GitHub*. <https://github.com/jesse-ai/jesse>. Accessed 
 
 Cited in: [catalog/algorithms/technical-indicator-trading-bots.json](../catalog/algorithms/technical-indicator-trading-bots.json), [ALG-0036](algorithms/0036-technical-indicator-trading-bots.md), [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-12fa1ece
+
+lightweight-charts. (n.d.). *github.com*. <https://github.com/tradingview/lightweight-charts>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-1497ec93
+
+QuickFIX/n. (n.d.). *github.com*. <https://github.com/connamara/quickfixn>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-15151430
 
 freqtrade/freqtrade/issues/12894. (n.d.). *GitHub*. <https://github.com/freqtrade/freqtrade/issues/12894>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3372,6 +3384,18 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 giorgiagaleazzi/fx-order-flow-microstructure. (n.d.). *GitHub*. <https://github.com/giorgiagaleazzi/fx-order-flow-microstructure>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-order-flow.json](../catalog/algorithms/fx-order-flow.json), [ALG-0013](algorithms/0013-fx-order-flow.md).
+
+### url-1e87083b
+
+EMA readme. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/Refinitiv/Real-Time-SDK/master/Cpp-C/Ema/README.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-206bf299
+
+REST API. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/rest-api.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-2791b5fc
 
@@ -3393,11 +3417,29 @@ Note: Python code implementing the \*Systematic Trading\* framework.
 
 Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algorithms/fx-carry-volatility-timing.json), [catalog/algorithms/fx-carver-trend-carry.json](../catalog/algorithms/fx-carver-trend-carry.json), [catalog/algorithms/fx-technical-trading-rules.json](../catalog/algorithms/fx-technical-trading-rules.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0002](algorithms/0002-fx-carry-volatility-timing.md), [ALG-0003](algorithms/0003-fx-carver-trend-carry.md), [ALG-0014](algorithms/0014-fx-technical-trading-rules.md), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-3179ec12
+
+Real-Time SDK. (n.d.). *github.com*. <https://github.com/Refinitiv/Real-Time-SDK>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-3266e701
 
 pmorissette/bt. (n.d.). *GitHub*. <https://github.com/pmorissette/bt>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/sixty-forty-portfolio.json](../catalog/algorithms/sixty-forty-portfolio.json), [catalog/algorithms/sp500-buy-and-hold.json](../catalog/algorithms/sp500-buy-and-hold.json), [ALG-0048](algorithms/0048-sixty-forty-portfolio.md), [ALG-0049](algorithms/0049-sp500-buy-and-hold.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-3308fdd9
+
+ETA readme. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/Refinitiv/Real-Time-SDK/master/Cpp-C/Eta/README.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-351162ac
+
+bloomberg/comdb2. (n.d.). *github.com*. <https://github.com/bloomberg/comdb2>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-35d41a5c
 
@@ -3407,11 +3449,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/forex-factory-calendar.json](../catalog/datasets/forex-factory-calendar.json), [DAT-0013](datasets/0013-forex-factory-calendar.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-3694dd2f
+
+WebSocket API spec. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/Refinitiv/websocket-api/master/WebsocketAPI_ProtocolSpecification.pdf>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-3d455334
 
 GeneralMills/pytrends. (n.d.). *GitHub*. <https://github.com/GeneralMills/pytrends>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/crypto-google-search-attention.json](../catalog/algorithms/crypto-google-search-attention.json), [ALG-0024](algorithms/0024-crypto-google-search-attention.md).
+
+### url-40531124
+
+bloomberg/chromium.bb. (n.d.). *github.com*. <https://github.com/bloomberg/chromium.bb>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-45264d6d
 
@@ -3442,6 +3496,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 macrosynergy/macrosynergy. (n.d.). *GitHub*. <https://github.com/macrosynergy/macrosynergy>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-commodity-terms-of-trade.json](../catalog/algorithms/fx-commodity-terms-of-trade.json), [catalog/algorithms/fx-macro-news-surprise.json](../catalog/algorithms/fx-macro-news-surprise.json), [ALG-0004](algorithms/0004-fx-commodity-terms-of-trade.md), [ALG-0010](algorithms/0010-fx-macro-news-surprise.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-52f45fbb
+
+kdb-tick scripts. (n.d.). *github.com*. <https://github.com/KxSystems/kdb-tick>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-5443afb4
 
@@ -3539,6 +3599,12 @@ quantrocket-codeload/quant-finance-lectures. (n.d.). *GitHub*. <https://github.c
 
 Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-8c87a06e
+
+SBE streams. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/sbe-market-data-streams.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-8cc76df3
 
 angiekwang/pre-fomc-drift-replication. (n.d.). *GitHub*. <https://github.com/angiekwang/pre-fomc-drift-replication>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3617,6 +3683,18 @@ PacktPublishing/Python-for-Algorithmic-Trading-Cookbook/issues/5. (n.d.). *Nasda
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a3d4a865
+
+QuickFIX/J. (n.d.). *github.com*. <https://github.com/quickfix-j/quickfixj>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-b3617053
+
+bloomberg/blazingmq. (n.d.). *github.com*. <https://github.com/bloomberg/blazingmq>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-b6de3bde
 
 AI4Finance-Foundation/FinGPT. (n.d.). *GitHub*. <https://github.com/AI4Finance-Foundation/FinGPT>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3649,6 +3727,12 @@ nautechsystems/nautilus\_trader. (n.d.). *GitHub*. <https://github.com/nautechsy
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-c0ba4d61
+
+FIX API. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/fix-api.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-c50b43a7
 
 johnhz0229/pre-fomc-backtest. (n.d.). *GitHub*. <https://github.com/johnhz0229/pre-fomc-backtest>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3660,6 +3744,12 @@ Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fom
 microsoft/qlib. (n.d.). *GitHub*. <https://github.com/microsoft/qlib>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/gradient-boosting-engineered-features.json](../catalog/algorithms/gradient-boosting-engineered-features.json), [catalog/algorithms/lstm-sequence-models.json](../catalog/algorithms/lstm-sequence-models.json), [catalog/algorithms/ml-return-prediction-elastic-net.json](../catalog/algorithms/ml-return-prediction-elastic-net.json), [ALG-0031](algorithms/0031-gradient-boosting-engineered-features.md), [ALG-0033](algorithms/0033-lstm-sequence-models.md), [ALG-0034](algorithms/0034-ml-return-prediction-elastic-net.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-c69ac4a9
+
+Chronicle Queue. (n.d.). *github.com*. <https://github.com/OpenHFT/Chronicle-Queue>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-cede54c7
 
@@ -3673,6 +3763,12 @@ DeviaVir/zenbot/tree/unstable/extensions/strategies. (n.d.). *GitHub*. <https://
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-da1237d5
+
+Binance streams. (n.d.). *raw.githubusercontent.com*. <https://raw.githubusercontent.com/binance/binance-spot-api-docs/master/web-socket-streams.md>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-dd2ef5cb
 
 hootnot/oanda-api-v20. (n.d.). *GitHub*. <https://github.com/hootnot/oanda-api-v20>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3685,6 +3781,12 @@ No title recorded. (n.d.). *Binance*. <https://raw.githubusercontent.com/binance
 
 Cited in: [catalog/datasets/binance-public-data.json](../catalog/datasets/binance-public-data.json), [DAT-0005](datasets/0005-binance-public-data.md).
 
+### url-e3f69288
+
+Aeron. (n.d.). *github.com*. <https://github.com/real-logic/aeron>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-e5032cef
 
 Leo4815162342/dukascopy-node. (n.d.). *GitHub*. <https://github.com/Leo4815162342/dukascopy-node>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3696,6 +3798,24 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 ProsusAI/finBERT. (n.d.). *GitHub*. <https://github.com/ProsusAI/finBERT>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/finbert-gdelt-fx-sentiment.json](../catalog/algorithms/finbert-gdelt-fx-sentiment.json), [ALG-0030](algorithms/0030-finbert-gdelt-fx-sentiment.md).
+
+### url-e8708b5b
+
+Faust. (n.d.). *github.com*. <https://github.com/robinhood/faust>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-ea2134c6
+
+Hyperliquid node. (n.d.). *github.com*. <https://github.com/hyperliquid-dex/node>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-f2724a3c
+
+websocket-api. (n.d.). *github.com*. <https://github.com/Refinitiv/websocket-api>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-f33b12cf
 
@@ -3736,6 +3856,12 @@ Ask Me Anything - Buy Side Systematic Quant | Wall Street Oasis. (n.d.). *web.ar
 Note: Linked in this repo as: WSO quant AMA (archive).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-003c44bb
+
+kdb+tick white paper. (n.d.). *code.kx.com*. <https://code.kx.com/q/wp/rt-tick/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-0066e8c3
 
@@ -3805,6 +3931,12 @@ Tradervue home page. (n.d.). *tradervue.com*. <https://www.tradervue.com/>. Acce
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-045a40e6
+
+connection. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/connection/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-04a2bcae
 
 No title recorded. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/rss/press.html>. Accessed 2026-10-21. Verification: not checked.
@@ -3847,11 +3979,29 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-07001619
+
+market data plans. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/about-market-data-api>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-079e8667
 
 Assassination of Qasem Soleimani. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/soleimani-strike-2020.json](../catalog/events/soleimani-strike-2020.json).
+
+### url-07fa9d8f
+
+Real-Time Optimized. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-management/real-time-delayed-optimized-market-data>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-084d1c40
+
+Kraken FIX. (n.d.). *docs.kraken.com*. <https://docs.kraken.com/api/docs/guides/fix-intro>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-089e38b3
 
@@ -3917,17 +4067,29 @@ Note: Linked in this repo as: Massive blog.
 
 Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DAT-0023](datasets/0023-massive.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-0ae9d647
+
+Coinbase Prime. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/prime/introduction/welcome>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-0aeb5ec9
 
 Kraken global terms of service. (2026). *Kraken*. <https://www.kraken.com/legal/global-terms>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-0b1f9975
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
+
+### url-0c178c83
+
+Fowler, The LMAX Architecture. (n.d.). *martinfowler.com*. <https://martinfowler.com/articles/lmax.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-0c322c34
 
@@ -3962,6 +4124,18 @@ Cited in: [catalog/events/madrid-train-bombings-2004.json](../catalog/events/mad
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/forex-factory-calendar.json](../catalog/datasets/forex-factory-calendar.json), [DAT-0013](datasets/0013-forex-factory-calendar.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-0fd8a0ee
+
+RTDS. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-management/real-time-distribution-system>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-107654ad
+
+cTrader FIX. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/fix/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-1094f4ac
 
@@ -4001,11 +4175,23 @@ No title recorded. (n.d.). *eia.gov*. <https://www.eia.gov/opendata/register.php
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-14fdc6b1
+
+Sentry pricing. (n.d.). *sentry.io*. <https://sentry.io/pricing/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-1512d048
 
 No title recorded. (n.d.). *ec.europa.eu*. <https://ec.europa.eu/eurostat/help/copyright-notice>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-1527ab0f
+
+tick data. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/tick_data.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-1565a75d
 
@@ -4070,6 +4256,12 @@ Free Finance Data Sets for the Quants | Dean Markwick. (n.d.). *dm13450.github.i
 Note: Linked in this repo as: Free finance datasets for quants, 2023.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-18916b68
+
+Kraken API intro. (n.d.). *docs.kraken.com*. <https://docs.kraken.com/api/docs/guides/global-intro>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-197d2a85
 
@@ -4145,6 +4337,12 @@ Oil Shock of 1978-79. (n.d.). *Federal Reserve History*. <https://www.federalres
 
 Cited in: [catalog/events/iranian-revolution-1979.json](../catalog/events/iranian-revolution-1979.json).
 
+### url-1c820f81
+
+streaming tutorial. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/tutorials/implement_datafeed_tutorial/Streaming-Implementation>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-1de065fc
 
 No title recorded. (n.d.). *US Energy Information Administration*. <https://api.eia.gov/v2/petroleum/pri/spt/data/?frequency=daily>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4189,6 +4387,12 @@ Collective2 home page. (n.d.). *trade.collective2.com*. <https://trade.collectiv
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-204e45ec
+
+market data. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/market_data.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-2273dca0
 
 No title recorded. (n.d.). *International Monetary Fund*. <https://www.imf.org/en/about/copyright-and-terms>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4207,6 +4411,12 @@ US Treasury Fiscal Data API: API documentation. (n.d.). *US Department of the Tr
 
 Cited in: [catalog/datasets/treasury-fiscal-data.json](../catalog/datasets/treasury-fiscal-data.json), [DAT-0031](datasets/0031-treasury-fiscal-data.md).
 
+### url-252f130c
+
+EBS Market. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/markets/ebs/ebs-market.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-25cc3d35
 
 Binance public data (data.binance.vision): API documentation. (n.d.). *Binance*. <https://github.com/binance/binance-public-data>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4224,6 +4434,12 @@ Cited in: [catalog/events/iran-strikes-israel-2024-04.json](../catalog/events/ir
 No title recorded. (n.d.). *api.quiverquant.com*. <https://api.quiverquant.com/pricing/>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-265c4164
+
+Cboe One. (n.d.). *cboe.com*. <https://www.cboe.com/market_data_services/us/equities/cboe_one/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-26a5c474
 
@@ -4305,13 +4521,19 @@ Price of oil. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Price_of_oil>.
 
 Cited in: [catalog/events/wti-negative-2020.json](../catalog/events/wti-negative-2020.json).
 
+### url-30c04d55
+
+API servers. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/api-servers>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-31304d67
 
 Individual Pricing - Twelve Data. (n.d.). *Twelve Data Pte. Ltd*. <https://twelvedata.com/pricing>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Note: Linked in this repo as: None.
 
-Cited in: [catalog/datasets/twelve-data.json](../catalog/datasets/twelve-data.json), [DAT-0033](datasets/0033-twelve-data.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+Cited in: [catalog/datasets/twelve-data.json](../catalog/datasets/twelve-data.json), [DAT-0033](datasets/0033-twelve-data.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
 ### url-3153a346
 
@@ -4326,6 +4548,12 @@ Bloomberg Launchpad guide. (n.d.). *lippincottlibrary.wordpress.com*. <https://l
 Note: Linked in this repo as: Bloomberg Launchpad guide.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-32a45ffa
+
+MiFID II RTS 25. (n.d.). *legislation.gov.uk*. <https://www.legislation.gov.uk/eur/2017/574/annex>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-32b7b805
 
@@ -4371,17 +4599,53 @@ Hurricane Harvey. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Hurricane_
 
 Cited in: [catalog/events/hurricane-harvey-2017.json](../catalog/events/hurricane-harvey-2017.json).
 
+### url-34bbd980
+
+Scotti et al., Comdb2, VLDB 2016. (n.d.). *vldb.org*. <https://www.vldb.org/pvldb/vol9/p1377-scotti.pdf>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-34bd526c
+
+Queues pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudflare.com/queues/platform/pricing/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
+### url-36c7def2
+
+Aeron Cluster. (n.d.). *aeron.io*. <https://aeron.io/docs/aeron-cluster/overview/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-36ddd47c
+
+AWS time sync. (n.d.). *docs.aws.amazon.com*. <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-37211841
 
 Gulf War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Gulf_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/desert-storm-1991.json](../catalog/events/desert-storm-1991.json).
 
+### url-37a94721
+
+Analytics Engine pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudflare.com/analytics/analytics-engine/pricing/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-38591fba
 
 No title recorded. (n.d.). *site.financialmodelingprep.com*. <https://site.financialmodelingprep.com/developer/docs/pricing>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-38aacaef
+
+account opening. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/account-opening>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-38bb2610
 
@@ -4404,6 +4668,12 @@ The FOMC Day Puzzle: Why Every G10 Currency Rallies Against the Dollar. (n.d.). 
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-fomc-dollar-announcement.json](../catalog/algorithms/fx-fomc-dollar-announcement.json), [ALG-0008](algorithms/0008-fx-fomc-dollar-announcement.md).
+
+### url-3931261a
+
+PrimeXM XCore. (n.d.). *primexm.com*. <https://primexm.com/xcore>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-3947a0b5
 
@@ -4593,6 +4863,12 @@ No title recorded. (n.d.). *snb.ch*. <https://www.snb.ch/en/srv/disclaimer_copyr
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-48b7e156
+
+market data requests. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/md_request.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-4932c51b
 
 Macrosynergy JPMaQS sample (Kaggle): API documentation. (n.d.). *Macrosynergy and J.P. Morgan*. <https://www.kaggle.com/docs/api>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4620,6 +4896,18 @@ St. Louis Fed Web Services: API Key. (n.d.). *fred.stlouisfed.org*. <https://fre
 Note: Linked in this repo as: None.
 
 Cited in: [REF-0003](reference/0003-data-sources.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-49cbc758
+
+rate limits. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-4b0c751f
+
+Alpaca Broker. (n.d.). *alpaca.markets*. <https://alpaca.markets/broker>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-4b81c502
 
@@ -4671,6 +4959,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-506390a9
+
+IBKR broker accounts. (n.d.). *interactivebrokers.com*. <https://www.interactivebrokers.com/en/accounts/broker.php>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
 ### url-506b21a4
 
 Medium guide, 2026. (n.d.). *arbitrageghost.medium.com*. <https://arbitrageghost.medium.com/funding-rate-arbitrage-in-2026-the-complete-guide-with-real-calculations-40e6cf341e52>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4721,6 +5015,12 @@ SEC press releases: API documentation. (n.d.). *US Securities and Exchange Commi
 
 Cited in: [catalog/datasets/sec-press.json](../catalog/datasets/sec-press.json), [DAT-0046](datasets/0046-sec-press.md).
 
+### url-52f35240
+
+order book. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/order-book>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-535ac4fa
 
 Petroleum & Other Liquids Data - U.S. Energy Information Administration (EIA). (n.d.). *eia.gov*. <https://www.eia.gov/petroleum/data.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4750,6 +5050,12 @@ Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithm
 CFTC Commitments of Traders: API documentation. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/stories/s/COT-Help/p2fg-u73y/>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
+
+### url-53b8bf02
+
+Wikipedia, Bloomberg Terminal. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Bloomberg_Terminal>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-53fcc8e4
 
@@ -4799,6 +5105,12 @@ Cryptohopper home page. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.co
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-581e2ed3
+
+FIX standards. (n.d.). *fixtrading.org*. <https://www.fixtrading.org/standards/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-588f99ff
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/terms_of_service/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4820,6 +5132,12 @@ IBKR colour grouping. (n.d.). *ibkrguides.com*. <https://ibkrguides.com/traderwo
 Note: Linked in this repo as: IBKR colour grouping.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-591c197c
+
+Wikipedia, Refinitiv. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Refinitiv>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-59599351
 
@@ -4863,6 +5181,12 @@ Note: Linked in this repo as: OANDA help.
 
 Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-5c9ba0b0
+
+Pico Corvil. (n.d.). *pico.net*. <https://www.pico.net/corvil/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-5d1a1765
 
 Trading Economics - API - Pricing. (n.d.). *Trading Economics*. <https://tradingeconomics.com/api/pricing.aspx>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4891,6 +5215,12 @@ Note: Linked in this repo as: third party guide.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-5e120bc1
+
+concepts. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/docs/introduction/concepts/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-5f332cb0
 
 JPMorgan Secures $500m Capacity in Numerai Following Breakthrough Year. (n.d.). *blog.numer.ai*. <https://blog.numer.ai/jpmorgan-secures-500m-capacity/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4905,11 +5235,35 @@ CFTC press releases: API documentation. (n.d.). *US Commodity Futures Trading Co
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-60fe816c
+
+Disruptor 1.0 paper. (n.d.). *lmax-exchange.github.io*. <https://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-615a67f6
+
+MetaQuotes for brokers. (n.d.). *metaquotes.net*. <https://www.metaquotes.net/en/metatrader5/brokers>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-619570bb
+
+31 CFR 1010.230. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1010.230>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
 ### url-620766d4
 
 example query. (n.d.). *data-api.ecb.europa.eu*. <https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?lastNObservations=1>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-624a0779
+
+TWS API connection. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/connection.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-625ceaed
 
@@ -4930,6 +5284,12 @@ Cited in: [catalog/events/us-strike-syria-shayrat-2017.json](../catalog/events/u
 Databento credits. (n.d.). *databento.com*. <https://databento.com/docs/faqs/usage-pricing-and-data-credits.md>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-63ad7c68
+
+CT Plan fees. (n.d.). *consolidatedtape.com*. <https://consolidatedtape.com/fees>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-640cd1cb
 
@@ -4961,6 +5321,12 @@ No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/ap
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
+### url-66b859fb
+
+charting products. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/getting_started/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-66d36f3c
 
 Krohn, Mueller and Whelan (2020 working paper; JF 2024), EUR around London fix. (n.d.). *sites.insead.edu*. <https://sites.insead.edu/facultyresearch/research/file.cfm?fid=66802>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4972,6 +5338,12 @@ Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-l
 NATO bombing of Yugoslavia. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/NATO_bombing_of_Yugoslavia>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/nato-kosovo-bombing-1999.json](../catalog/events/nato-kosovo-bombing-1999.json).
+
+### url-6784481b
+
+HyperCore overview. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-681eac41
 
@@ -4988,6 +5360,12 @@ This Blog is Systematic: Are markets that are good for trend good just because t
 Note: Linked in this repo as: Jan 2026 post.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-6874d944
+
+BLPAPI Core Developer Guide. (n.d.). *data.bloomberglp.com*. <https://data.bloomberglp.com/professional/sites/10/2017/03/BLPAPI-Core-Developer-Guide.pdf>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-68cf1e4c
 
@@ -5031,6 +5409,12 @@ No title recorded. (n.d.). *Macrosynergy and J.P. Morgan*. <https://www.kaggle.c
 
 Cited in: [catalog/datasets/jpmaqs-kaggle.json](../catalog/datasets/jpmaqs-kaggle.json), [DAT-0020](datasets/0020-jpmaqs-kaggle.md).
 
+### url-6b14d231
+
+Grafana pricing. (n.d.). *grafana.com*. <https://grafana.com/pricing/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-6b8331cb
 
 Tracking US Crude Oil Inventories with Python and the EIA API - DEV Community. (n.d.). *dev.to*. <https://dev.to/chat13f/tracking-us-crude-oil-inventories-with-python-and-the-eia-api-1n8k>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5052,6 +5436,12 @@ Pricing | Massive. (n.d.). *Massive.com (formerly Polygon.io)*. <https://massive
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DAT-0023](datasets/0023-massive.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-6cc7aeae
+
+Datafeed API. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/connecting_data/Datafeed-API/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-6d3c3ba4
 
@@ -5081,6 +5471,12 @@ CoinGecko API: API documentation. (n.d.). *CoinGecko*. <https://docs.coingecko.c
 
 Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json), [DAT-0008](datasets/0008-coingecko.md).
 
+### url-6e3dbcce
+
+DriveWealth. (n.d.). *drivewealth.com*. <https://www.drivewealth.com/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
 ### url-6ec5737a
 
 PitchBook. (n.d.). *PitchBook*. <https://pitchbook.com/>. Accessed 2026-10-23. Verification: not checked.
@@ -5108,6 +5504,18 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 No title recorded. (n.d.). *Frankfurter (open source project)*. <https://api.frankfurter.dev/v1/1999-01-04?symbols=USD>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.json), [DAT-0014](datasets/0014-frankfurter.md).
+
+### url-713fa3ea
+
+FinCEN MSB definition. (n.d.). *fincen.gov*. <https://www.fincen.gov/money-services-business-definition>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-7214a18b
+
+Oxidizing Kraken. (n.d.). *blog.kraken.com*. <https://blog.kraken.com/post/7964/oxidizing-kraken-improving-kraken-infrastructure-using-rust>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-724ec5f1
 
@@ -5140,6 +5548,18 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 third party guide. (n.d.). *bluecapitaltrading.com*. <https://www.bluecapitaltrading.com/products/free-historical-data/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-75268f36
+
+WebSocket intro. (n.d.). *docs.kraken.com*. <https://docs.kraken.com/api/docs/guides/spot-ws-intro>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-7569c6eb
+
+MT5 settings. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/terminal/help/startworking/settings>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-75718e1a
 
@@ -5195,6 +5615,12 @@ Note: Linked in this repo as: WSO, May 2021 (archive).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-78f3cb2c
+
+framing. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/sending-receiving-protobuf/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-78fd770a
 
 Mexican peso crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Mexican_peso_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5249,6 +5675,12 @@ QuantConnect home page. (n.d.). *quantconnect.com*. <https://www.quantconnect.co
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-7b646538
+
+17 CFR 5.7. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/5.7>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
 ### url-7b991bf4
 
 September 2022 United Kingdom mini-budget. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5275,7 +5707,7 @@ Development Guide. (n.d.). *developer.oanda.com*. <https://developer.oanda.com/r
 
 Note: Linked in this repo as: development guide.
 
-Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-7c8f7c35
 
@@ -5297,6 +5729,12 @@ Odean, 1998, Journal of Finance. (n.d.). *faculty.haas.berkeley.edu*. <https://f
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-7d6b4320
+
+Stripe pricing. (n.d.). *stripe.com*. <https://stripe.com/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
 ### url-7db653ab
 
 Twelve Data: API documentation. (n.d.). *Twelve Data Pte. Ltd*. <https://twelvedata.com/docs>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5310,6 +5748,12 @@ Free Forex & Currency Exchange Rate API - ExchangeRate Host. (n.d.). *exchangera
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7fa72e7b
+
+LMAX Exchange. (n.d.). *lmax.com*. <https://www.lmax.com/exchange>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-8009a763
 
@@ -5330,6 +5774,12 @@ Crude Oil Prices: West Texas Intermediate (WTI) - Cushing, Oklahoma (DCOILWTICO)
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-80a85f6e
+
+TradingView support. (n.d.). *tradingview.com*. <https://www.tradingview.com/support/solutions/43000471705/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-80adea2c
 
@@ -5360,6 +5810,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://api.bls.gov/publicAPI/v2/timeseries/data/CUUR0000SA0>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
+
+### url-828393a9
+
+FIX connectivity. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/fix-api/connectivity>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-82c7c69d
 
@@ -5465,6 +5921,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-88e70e1f
+
+Massive business. (n.d.). *massive.com*. <https://massive.com/business>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-89416d3a
 
 API Documentation | Finnhub - Free APIs for realtime stock, forex, and cryptocurrency. Company fundamentals, economic data, and alternative data. (n.d.). *finnhub.io*. <https://finnhub.io/docs/api/market-news>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5492,6 +5954,12 @@ A Reality Check for Data Snooping. (n.d.). *econometricsociety.org*. <https://ww
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### url-8bb819c6
+
+clustering. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/docs/architecture/clustering/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-8bc3e194
 
@@ -5526,6 +5994,12 @@ Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 Trading Economics API: API documentation. (n.d.). *Trading Economics*. <https://docs.tradingeconomics.com/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-8e45b085
+
+real-time stocks. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/real-time-stock-pricing-data>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-8ee9d980
 
@@ -5565,6 +6039,12 @@ Trademark guidelines | Cloudflare. (n.d.). *cloudflare.com*. <https://www.cloudf
 
 Cited in: [DEC-0039](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md).
 
+### url-91078bba
+
+ClickHouse pricing. (n.d.). *clickhouse.com*. <https://clickhouse.com/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-91b0ceac
 
 TrueFX Downloads - TrueFX. (n.d.). *TrueFX (Integral)*. <https://www.truefx.com/truefx-historical-downloads-2/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5578,6 +6058,12 @@ Cited in: [catalog/datasets/truefx.json](../catalog/datasets/truefx.json), [DAT-
 Hyperliquid public info API. (n.d.). *Hyperliquid*. <https://api.hyperliquid.xyz/info>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-926ee1fd
+
+Full Tick. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-feeds/real-time-full-tick-data>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-92a7dec8
 
@@ -5620,6 +6106,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 International sanctions against Iran. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Sanctions_against_Iran>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/eu-iran-oil-embargo-2012.json](../catalog/events/eu-iran-oil-embargo-2012.json).
+
+### url-96023a96
+
+Bloomberg, adopting TypeScript at scale. (n.d.). *techatbloomberg.com*. <https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-96338c9e
 
@@ -5701,6 +6193,12 @@ Chague, De-Losso and Giovannetti, 2020, SSRN 3423101. (n.d.). *ebicapital.nl*. <
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### url-9de23715
+
+channels. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/websocket-feed/channels>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-9e21d9bd
 
 Third Taiwan Strait Crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Third_Taiwan_Strait_Crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -5712,6 +6210,12 @@ Cited in: [catalog/events/taiwan-strait-missile-crisis-1996.json](../catalog/eve
 Plaza Accord. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Plaza_Accord>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/plaza-accord-1985.json](../catalog/events/plaza-accord-1985.json).
+
+### url-9e843b13
+
+NYDFS virtual currency businesses. (n.d.). *dfs.ny.gov*. <https://www.dfs.ny.gov/virtual_currency_businesses>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-9ef44f3e
 
@@ -5738,6 +6242,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 1994 bond market crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1994_bond_market_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/fed-surprise-hike-1994.json](../catalog/events/fed-surprise-hike-1994.json).
+
+### url-a1fc516b
+
+Durable Objects pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudflare.com/durable-objects/platform/pricing/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-a36bd169
 
@@ -5775,6 +6285,12 @@ No title recorded. (n.d.). *SIX Group for ISO*. <https://www.six-group.com/dam/d
 
 Cited in: [catalog/datasets/iso-4217-six.json](../catalog/datasets/iso-4217-six.json), [DAT-0037](datasets/0037-iso-4217-six.md).
 
+### url-a5489da4
+
+OANDA pricing stream. (n.d.). *developer.oanda.com*. <https://developer.oanda.com/rest-live-v20/pricing-ep/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-a595901b
 
 Challenge Verification | CoinGecko. (n.d.). *CoinGecko*. <https://www.coingecko.com/en/api/pricing>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5811,6 +6327,12 @@ Note: Linked in this repo as: Business of Business.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-a6abd8b8
+
+BIS, Monitoring of fast-paced electronic markets. (n.d.). *bis.org*. <https://www.bis.org/publications/monitoring-fast-paced-electronic-markets.pdf>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-a6b501e9
 
 No title recorded. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/feeds/press_all.xml>. Accessed 2026-10-21. Verification: not checked.
@@ -5823,11 +6345,23 @@ Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Contr
 
 Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
 
+### url-a7291a75
+
+oneZero Hub. (n.d.). *onezero.com*. <https://www.onezero.com/hub-technology/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-a7396e54
 
 No title recorded. (n.d.). *bankofcanada.ca*. <https://www.bankofcanada.ca/terms/>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-a76d45c9
+
+rate limits. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/introduction/rate-limits-overview>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-a8359cfb
 
@@ -5863,11 +6397,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a9828f3b
+
+Tiger Data pricing. (n.d.). *tigerdata.com*. <https://www.tigerdata.com/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-a99cdde2
 
 17 CFR 275.206(4)-1, investment adviser marketing. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/275.206(4)-1>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-a99fc111
+
+TraderMade pricing. (n.d.). *tradermade.com*. <https://tradermade.com/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-aa1fc24a
 
@@ -5913,11 +6459,23 @@ Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https:
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
 
+### url-ad5f4cc4
+
+API. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-ade52524
 
 Comtrade policy. (n.d.). *uncomtrade.org*. <https://uncomtrade.org/docs/policy-on-comtrade-data-use/>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-ae5b1b37
+
+Wikipedia, EBS. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Electronic_Broking_Services>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-aeacd993
 
@@ -5952,6 +6510,12 @@ EPAT Admissions | Eligibility, Upcoming Batches, Fee Structure and Financial Aid
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-b0baa9b5
+
+Stripe webhooks. (n.d.). *docs.stripe.com*. <https://docs.stripe.com/webhooks>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-b0e2e26e
 
@@ -6000,6 +6564,12 @@ Binance futures interface. (n.d.). *binance.com*. <https://www.binance.com/en-BH
 Note: Linked in this repo as: Binance futures interface.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-b2e69d38
+
+Fly.io pricing. (n.d.). *docs.fly.io*. <https://docs.fly.io/about/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-b30b9827
 
@@ -6057,6 +6627,18 @@ No title recorded. (n.d.). *OANDA Corporation*. <https://api-fxpractice.oanda.co
 
 Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md).
 
+### url-b609ddee
+
+Stripe meter events. (n.d.). *docs.stripe.com*. <https://docs.stripe.com/billing/subscriptions/usage-based/recording-usage-api>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-b67616b1
+
+Realtime limits. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/realtime/limits>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
 ### url-b6cdb784
 
 Zennbot - Automated Trading App. (n.d.). *zennbot.com*. <https://zennbot.com/>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -6078,6 +6660,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 No title recorded. (n.d.). *teamblind.com*. <https://www.teamblind.com/post/algotrading-ocgevgm3>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-b9edd654
+
+k6 docs. (n.d.). *grafana.com*. <https://grafana.com/docs/k6/latest/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-b9f70980
 
@@ -6149,11 +6737,23 @@ No title recorded. (n.d.). *US Bureau of Economic Analysis*. <https://apps.bea.g
 
 Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md).
 
+### url-c0a66cef
+
+cTrader Open API. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-c0d8d955
 
 No title recorded. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/rss/whatsnew.xml>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
+
+### url-c11baf7e
+
+clearinghouse. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/clearinghouse>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-c16cd0db
 
@@ -6174,6 +6774,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Libyan civil war (2011). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Libyan_civil_war_(2011)>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/libya-civil-war-2011.json](../catalog/events/libya-civil-war-2011.json).
+
+### url-c35afbd3
+
+historical limits. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/historical_limitations.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-c4fa64dc
 
@@ -6251,6 +6857,18 @@ Alternative data market size, share and trends report. (n.d.). *grandviewresearc
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-caa5140b
+
+17 CFR 1.17. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/1.17>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-cb012510
+
+data coverage. (n.d.). *tradingview.com*. <https://www.tradingview.com/data-coverage/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-cb6d397b
 
 Webull layouts. (n.d.). *webull.com*. <https://www.webull.com/learn/2uYwVO/dwHBFK/What-is-a-layout>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
@@ -6258,6 +6876,12 @@ Webull layouts. (n.d.). *webull.com*. <https://www.webull.com/learn/2uYwVO/dwHBF
 Note: Linked in this repo as: Webull layouts.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-cb6f8626
+
+Stripe Billing pricing. (n.d.). *stripe.com*. <https://stripe.com/billing/pricing>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-cb7eb048
 
@@ -6267,11 +6891,29 @@ Note: 4 courses on portfolio construction and ML in Python.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### url-cc7a052f
+
+FIX protocol. (n.d.). *fixtrading.org*. <https://www.fixtrading.org/standards/fix-protocol/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-cc93720c
+
+use cases. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/use-cases>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-ccf66f37
 
 No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/feed/bls_latest.rss>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
+
+### url-cd72861b
+
+EBS connectivity. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/markets/ebs/ebs-connectivity.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-cf0d35a8
 
@@ -6301,6 +6943,18 @@ Note: Linked in this repo as: QuantConnect: Oanda for EU.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-d1595f37
+
+MQL5 VPS. (n.d.). *mql5.com*. <https://www.mql5.com/en/vps>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-d17c62bc
+
+cTrader endpoints. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/proxies-endpoints/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-d1c80fae
 
 Futures Trend Following and Carry in Different Risk Regimes - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/research/15989/futures-trend-following-and-carry-in-different-risk-regimes/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6329,6 +6983,12 @@ pricing page. (n.d.). *warriortrading.com*. <https://www.warriortrading.com/pric
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-d38901b1
+
+LSEG FX Matching. (n.d.). *lseg.com*. <https://www.lseg.com/en/fx/venues/spot-matching-forwards-matching>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-d39cbd5e
 
 Marketaux API Pricing | marketaux. (n.d.). *Marketaux (APILayer)*. <https://www.marketaux.com/pricing>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6349,6 +7009,12 @@ Nixon shock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nixon_shock>. A
 
 Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
 
+### url-d682e77d
+
+Ultra Direct. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-feeds/real-time-ultra-direct>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-d6e19278
 
 Tiingo: API documentation. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/documentation/general/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6367,7 +7033,13 @@ TradingView trading terminal. (n.d.). *tradingview.com*. <https://www.tradingvie
 
 Note: Linked in this repo as: TradingView trading terminal.
 
-Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-d79238af
+
+TWS API introduction. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/introduction.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-d887a4d4
 
@@ -6383,6 +7055,12 @@ US-UK airstrikes on Yemen. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/O
 
 Cited in: [catalog/events/us-uk-strikes-houthis-2024.json](../catalog/events/us-uk-strikes-houthis-2024.json).
 
+### url-d95e689d
+
+Gold-i MatrixNET. (n.d.). *gold-i.com*. <http://www.gold-i.com/matrix-net>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-d999ca03
 
 Robinhood Legend widget linking. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/support/articles/widget-linking-on-legend/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
@@ -6390,6 +7068,12 @@ Robinhood Legend widget linking. (n.d.). *robinhood.com*. <https://robinhood.com
 Note: Linked in this repo as: Robinhood Legend widget linking.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-d99b948d
+
+Coinbase feed overview. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/websocket-feed/overview>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-d9c5e253
 
@@ -6404,6 +7088,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Frazzini and Pedersen, Betting Against Beta (May 2013 draft), Table III. (n.d.). *pages.stern.nyu.edu*. <https://pages.stern.nyu.edu/~lpederse/papers/BettingAgainstBeta.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md).
+
+### url-daceccf9
+
+MT5 for brokers. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/brokers>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-dcceb73b
 
@@ -6422,6 +7112,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 ZuluTrade home page. (n.d.). *zulutrade.com*. <https://www.zulutrade.com/>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-de42a416
+
+streaming. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/streaming-market-data>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-de463277
 
@@ -6565,7 +7261,7 @@ Cited in: [catalog/events/afghanistan-invasion-2001.json](../catalog/events/afgh
 
 OANDA v20 REST API (practice account): API documentation. (n.d.). *OANDA Corporation*. <https://developer.oanda.com/rest-live-v20/introduction/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md).
+Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [DAT-0026](datasets/0026-oanda-v20-practice.md), [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-e88319e7
 
@@ -6631,6 +7327,12 @@ Bloomberg student guide. (n.d.). *assets.bbhub.io*. <https://assets.bbhub.io/pro
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-ec44da5e
+
+book channel. (n.d.). *docs.kraken.com*. <https://docs.kraken.com/api/docs/websocket-v2/book>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-ec56c25d
 
 Iraqi invasion of Kuwait. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -6644,6 +7346,18 @@ St. Louis Fed Web Services: FRED® API Errors. (n.d.). *Federal Reserve Bank of 
 Note: Linked in this repo as: errors page.
 
 Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015](datasets/0015-fred.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-ed6647db
+
+funding. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/funding-accounts>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-edaf6f8e
+
+Broker API. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/about-broker-api>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-ee2b25c6
 
@@ -6689,6 +7403,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/newsapi.json](../catalog/datasets/newsapi.json), [DAT-0025](datasets/0025-newsapi.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f18557a0
+
+Robinhood legal. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/about/legal/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-f2d215e7
 
 Download Free Forex Data - HistData.com. (n.d.). *HistData.com*. <https://www.histdata.com/download-free-forex-data/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6713,6 +7433,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f57ef087
+
+Disruptor technical paper. (n.d.). *lmax-exchange.github.io*. <https://lmax-exchange.github.io/disruptor/disruptor.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-f590403d
 
 This Blog is Systematic: Annual performance update returneth - year 11. (n.d.). *qoppac.blogspot.com*. <https://qoppac.blogspot.com/2025/04/annual-performance-update-returneth.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6726,6 +7452,18 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0003
 NewsAPI.org: API documentation. (n.d.). *NewsAPI.org*. <https://newsapi.org/docs>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/newsapi.json](../catalog/datasets/newsapi.json), [DAT-0025](datasets/0025-newsapi.md).
+
+### url-f65c8a5b
+
+31 CFR 1023.220. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1023.220>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-f6aa8c51
+
+benchmarks. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/docs/performance/benchmarks/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-f6f6c822
 
@@ -6762,6 +7500,12 @@ Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](
 2017 North Korean missile tests. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/north-korea-missile-over-japan-2017.json](../catalog/events/north-korea-missile-over-japan-2017.json).
+
+### url-f87b4f93
+
+MetaTrader 4. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/MetaTrader_4>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-f8d5aa84
 
@@ -6813,6 +7557,12 @@ Algorithmic trading market size, share and trends report. (n.d.). *grandviewrese
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-fb6afad5
+
+WebSocket. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-fbd813ac
 
 endpoint docs. (n.d.). *site.financialmodelingprep.com*. <https://site.financialmodelingprep.com/developer/docs/stable/economics-calendar>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -6833,6 +7583,12 @@ Oil Shock of 1973-74. (n.d.). *Federal Reserve History*. <https://www.federalres
 
 Cited in: [catalog/events/arab-oil-embargo-1973.json](../catalog/events/arab-oil-embargo-1973.json).
 
+### url-fca15cff
+
+messages. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/messages/>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-fcc4668f
 
 No title recorded. (n.d.). *US Energy Information Administration*. <https://www.eia.gov/rss/todayinenergy.xml>. Accessed 2026-10-21. Verification: not checked.
@@ -6849,7 +7605,7 @@ Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DA
 
 Massive pricing. (n.d.). *massive.com*. <https://massive.com/pricing>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-fe036392
 
@@ -6864,6 +7620,12 @@ XTB - Investing, Savings & Trading Platform | XTB. (n.d.). *xtb.com*. <https://w
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-feadaaa3
+
+Stripe API keys. (n.d.). *docs.stripe.com*. <https://docs.stripe.com/keys>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-fff47c57
 
@@ -7359,6 +8121,12 @@ No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://w
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-5064425d
+
+FINRA Rule 6820. (n.d.). *finra.org*. <https://www.finra.org/rules-guidance/rulebooks/finra-rules/6820>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-51e0556a
 
 Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1381197/000138119726000147/ibkr-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
@@ -7386,6 +8154,12 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Regulatory Notice 09-31: non-traditional ETFs. (2009). *FINRA*. <https://www.finra.org/rules-guidance/notices/09-31>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-6564ba7a
+
+NFA retail forex dealers. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/registration-membership/who-has-to-register/rfed.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-6c190e5d
 
@@ -7431,6 +8205,12 @@ Company tickers and exchanges. (n.d.). *US SEC*. <https://www.sec.gov/files/comp
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-95161720
+
+Robinhood 10-K 2025. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1783879/000178387926000023/hood-20251231.htm>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
 ### url-98351ef7
 
 Filing a Form D notice. (n.d.). *US Securities and Exchange Commission*. <https://www.sec.gov/resources-small-businesses/exempt-offerings/filing-form-d-notice>. Accessed 2026-10-23. Verification: not checked.
@@ -7438,6 +8218,12 @@ Filing a Form D notice. (n.d.). *US Securities and Exchange Commission*. <https:
 Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### url-9a02a683
+
+SEC guide to broker-dealer registration. (n.d.). *sec.gov*. <https://www.sec.gov/about/divisions-offices/division-trading-markets/division-trading-markets-compliance-guides/guide-broker-dealer-registration>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-9a1baa9c
 
@@ -7458,6 +8244,12 @@ Customer Advisory: AI Won't Turn Trading Bots into Money Machines | CFTC. (n.d.)
 Note: Linked in this repo as: CFTC advisory.
 
 Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-b30692e7
+
+NFA introducing brokers. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/registration-membership/who-has-to-register/ib.html>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
 ### url-be81eda4
 
@@ -7508,6 +8300,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 Charles Schwab Corporation, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/316709/000031670926000031/schw-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-e8a11f76
+
+Robinhood S-1. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1783879/000162828021013318/robinhoods-1.htm>. Accessed 2026-10-24. Verification: not checked.
+
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
 ### url-f2a66230
 
