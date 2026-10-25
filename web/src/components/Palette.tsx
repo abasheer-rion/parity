@@ -94,6 +94,14 @@ export function Palette({ report = null }: { report?: Report | null }) {
       }
     };
     const onOpen = () => setOpen(true);
+    // /app/?search (the 404 page's Search link, DEC-0055) opens search once, then drops the flag.
+    const q = new URLSearchParams(window.location.search);
+    if (q.has("search")) {
+      setOpen(true);
+      q.delete("search");
+      const rest = q.toString();
+      window.history.replaceState(window.history.state, "", `${window.location.pathname}${rest ? `?${rest}` : ""}${window.location.hash}`);
+    }
     document.addEventListener("keydown", onKey);
     window.addEventListener("parity:search", onOpen);
     return () => {

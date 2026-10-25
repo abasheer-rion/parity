@@ -5,6 +5,7 @@ import { parityAnalytics } from "./plugins/analytics";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
 import { parityMeta, parityOg } from "./plugins/meta";
+import { parityNotFound } from "./plugins/notFound";
 import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
@@ -80,7 +81,8 @@ function badgePages(): Plugin {
     apply: "serve",
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
-        if (req.url && /^\/v\/[A-Za-z0-9]{12}\/?(\?.*)?$/.test(req.url)) req.url = "/v/index.html";
+        // Any one-part address, as in production: the page itself says when there is no such badge.
+        if (req.url && /^\/v\/[^/?]+\/?(\?.*)?$/.test(req.url)) req.url = "/v/index.html";
         next();
       });
     },
@@ -145,7 +147,8 @@ function localScenarios(): Plugin {
 
 // Three builds share this file (see package.json "build"):
 //   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
-//                            /verify/, the Verify badge pages (/v/<id>) and the legal pages under /legal/, with their assets
+//                            /verify/, the Verify badge pages (/v/<id>), the legal pages under /legal/ and
+//                            404.html (served for any address that does not exist, DEC-0055), with their assets
 //                            in /assets/. Empties dist/.
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
@@ -160,14 +163,14 @@ function localScenarios(): Plugin {
 //                            /lab/assets/ (lab.endyland.com).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
-  "index", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
+  "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
   "connect/index", "oauth/consent/index", "oauth/openrouter/index",
   "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), localResults(), localScenarios(), badgePages(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), localResults(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

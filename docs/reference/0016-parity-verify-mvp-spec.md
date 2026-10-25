@@ -227,6 +227,7 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](../decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](../decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
+- [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](../decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
 <!-- backlinks:end -->

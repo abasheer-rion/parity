@@ -1,7 +1,8 @@
 // Cloudflare Pages middleware: only signed-in people get the apps (/app/*, /research/*,
 // /sim/*, /trade/*, /academy/*, /lab/*) and the research data (/data/*). Everything else (the front page, /login/, /signup/,
 // /reset/, /verify/, /brand/, favicons) is public. public/_routes.json limits this
-// function to the protected paths, so public pages never run it.
+// function to the protected paths, so public pages never run it. An address that does
+// not exist gets dist/404.html with status 404 from Pages itself (DEC-0055).
 //
 // The browser's Supabase client keeps the session in a cookie (src/auth/client.ts).
 // We check the access token's signature against the project's public keys (ES256,
@@ -11,6 +12,7 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { HOST } from "../src/lib/meta";
 import { wellKnown } from "../src/lib/mcp/wellknown";
+import { appHashRedirect } from "../src/lib/notFound";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -63,6 +65,11 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
   const token = bearerToken(request.headers.get("Authorization")) ?? accessToken(request.headers.get("Cookie") ?? "");
   if (token && (await valid(token))) {
     const res = await next(forward);
+    // Nothing at /<app>/<x>: the apps route by the hash, so open /<app>/#/<x>, where a real
+    // page shows and anything else gets that app's "not found" view (DEC-0055). Files and
+    // assets keep the 404, which Pages answers with dist/404.html.
+    const to = res.status === 404 && (request.method === "GET" || request.method === "HEAD") ? appHashRedirect(url.pathname, url.search) : null;
+    if (to) return new Response(null, { status: 302, headers: { Location: to, "Cache-Control": "private, no-store" } });
     const out = new Response(res.body, res);
     out.headers.set("Cache-Control", "private, no-cache");
     out.headers.append("Vary", "Cookie, Authorization");

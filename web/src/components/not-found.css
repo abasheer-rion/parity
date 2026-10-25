@@ -1,0 +1,10 @@
+/* The in-app "not found" view (src/components/NotFound.tsx, DEC-0055). Uses the shared UI
+   tokens, which every app loads, with fallbacks so it reads on any background. */
+.nf-view { box-sizing: border-box; width: 100%; max-width: 480px; margin: 48px auto; padding: 32px 24px; text-align: center; color: var(--text, #f4f5f8); }
+.nf-view-mark { display: block; margin: 0 auto 18px; }
+.nf-view-h { margin: 0 0 8px; font-size: 22px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; color: inherit; }
+.nf-view-p { margin: 0 0 14px; color: var(--text-2, #a4a8b6); font-size: 15px; line-height: 1.55; }
+.nf-view-addr { margin: 0 0 20px; }
+.nf-view-addr code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border, rgb(255 255 255 / .12)); color: var(--muted, #8b8f9d); font: 13px/1.5 var(--mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); }
+.nf-view-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 6px; }
+@media (max-width: 480px) { .nf-view { margin: 24px auto; padding: 24px 16px; } }

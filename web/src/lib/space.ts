@@ -23,6 +23,18 @@ export function otherSide(route: string): Space | null {
   return ROUTES[other].includes(route) ? other : null;
 }
 
+/**
+ * True when no page of the product or research app answers this hash route, so the app
+ * shows its "not found" view instead of the home page (DEC-0055). Pricing exists only
+ * with the payments flag on; a doc or algorithm page needs its id.
+ */
+export function unknownRoute(route: string, arg: string | undefined, payments: boolean): boolean {
+  if (route === "overview") return false;
+  if (![...ROUTES.both, ...ROUTES.product, ...ROUTES.research].includes(route)) return true;
+  if (route === "pricing" && !payments) return true;
+  return (route === "doc" || route === "algo") && !arg;
+}
+
 export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "/research/" };
 
 // ---------- Sim World, its own full-screen site (DEC-0020) ----------

@@ -3,10 +3,11 @@
 // tiled panels, a ticker tape along the bottom. Sim World's tabs live on as panels.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppGuard } from "../auth";
+import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { applyTheme } from "../lib/prefs";
 import { EMPTY_SPEC, specFromQuery, specToQuery, type Spec } from "../lib/scenarios";
-import { researchUrl } from "../lib/space";
+import { researchUrl, ROUTES } from "../lib/space";
 import { nameOf } from "../lib/strategyMeta";
 import { Toaster, toast } from "../ui";
 import { CommandBar, type CommandBarHandle } from "./CommandBar";
@@ -82,6 +83,16 @@ function parseHash(h: string): { ws: string; legacy?: string } | null {
   return null;
 }
 
+/**
+ * True for a hash no app answers: not a workspace, an old Sim World tab or a product or
+ * research page. The terminal shows its "not found" view for it (DEC-0055).
+ */
+function unknownTermHash(h: string): boolean {
+  if (parseHash(h)) return false;
+  const r = routeOf(h);
+  return ![...ROUTES.both, ...ROUTES.product, ...ROUTES.research].includes(r);
+}
+
 function withPanel(s: WsState, fn: string, args: string[] = []): WsState {
   const have = leaves(s.tree).find((l) => l.fn === fn);
   if (have) return { ...s, focus: have.id, max: null };
@@ -97,6 +108,7 @@ function TermShell() {
   const cmd = useRef<CommandBarHandle>(null);
 
   const initial = useMemo(() => parseHash(window.location.hash) ?? { ws: "overview" }, []);
+  const [missing, setMissing] = useState<string | null>(() => (unknownTermHash(window.location.hash) ? window.location.hash : null));
   const [wsId, setWsId] = useState(initial.ws);
   const [states, setStates] = useState<Record<string, WsState>>(() => {
     const s = readWs(initial.ws);
@@ -125,10 +137,15 @@ function TermShell() {
   // ---- Routing: the hash holds the workspace ----
   const lastHash = useRef(`#/${initial.ws}`);
   useEffect(() => {
-    if (window.location.hash !== `#/${initial.ws}`) window.history.replaceState(null, "", `#/${initial.ws}`);
+    if (window.location.hash !== `#/${initial.ws}` && !unknownTermHash(window.location.hash)) window.history.replaceState(null, "", `#/${initial.ws}`);
     const on = () => {
       const h = window.location.hash;
       const p = parseHash(h);
+      if (!p && unknownTermHash(h)) {
+        setMissing(h);
+        return;
+      }
+      setMissing(null);
       if (!p) {
         // A link to a research page (a doc, a strategy): open it on the research side in
         // a new tab and stay where we were.
@@ -348,7 +365,9 @@ function TermShell() {
           </div>
         </nav>
         <main id="main" tabIndex={-1} className="term-main">
-          <Workspace key={wsId} ws={ws} setWs={setWs} mobile={mobile} />
+          {missing !== null
+            ? <NotFound address={missing} home="#/overview" homeLabel="Overview" body="There is no Terminal workspace at this address. The link may be mistyped, or the page may have moved." />
+            : <Workspace key={wsId} ws={ws} setWs={setWs} mobile={mobile} />}
         </main>
         <Ticker />
         <Toaster />
