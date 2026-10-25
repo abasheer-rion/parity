@@ -107,10 +107,34 @@ function round8(v: number): number { return Math.round(v * 1e8) / 1e8; }
 
 export interface Snapshot { account: AccountRow; orders: OrderRow[]; fills: FillRow[]; positions: PositionRow[] }
 
+/**
+ * True when saving a fill failed because that order already has one. The database allows
+ * one fill per order (supabase/migrations/20261103000000_data_model.sql, DEC-0054), so a
+ * second open tab or a retried save that finds the order filled has nothing left to do.
+ */
+export function isDuplicateFill(e: unknown): boolean {
+  const msg = e instanceof Error ? e.message : String(e ?? "");
+  return /paper_fills_one_per_order|duplicate key value/.test(msg);
+}
+
+/** Saves fills, treating "this order already has its fill" as done rather than an error. */
+export async function saveFills(fills: PaperFill[], account: string, to: Pick<typeof fillsTable, "insert" | "insertMany"> = fillsTable): Promise<void> {
+  if (!fills.length) return;
+  try {
+    await to.insertMany(fills.map((f) => fillRow(f, account)));
+  } catch (e) {
+    if (!isDuplicateFill(e)) throw e;
+    // One save is one statement, so nothing was kept: save each fill on its own.
+    for (const f of fills) {
+      try { await to.insert(fillRow(f, account)); } catch (err) { if (!isDuplicateFill(err)) throw err; }
+    }
+  }
+}
+
 async function savePlaced(s: Snapshot, placed: Placed): Promise<void> {
   // Parents first, so a bracket's children can point at their entry.
   await ordersTable.insertMany(placed.orders.map((o) => orderRow(o, s.account.id)));
-  if (placed.fills.length) await fillsTable.insertMany(placed.fills.map((f) => fillRow(f, s.account.id)));
+  await saveFills(placed.fills, s.account.id);
   await syncBook(s.account, placed.book, s.positions);
 }
 
@@ -153,7 +177,7 @@ export async function catchUp(s: Snapshot, bars: Record<string, Bar[]>): Promise
   const r = processBars(before, bookOf(s.account, s.fills), bars, costsOf(s.account));
   if (!r.changed.length) return { filled: 0, changed: 0 };
   await saveOrderChanges(before, r.orders, r.changed);
-  if (r.fills.length) await fillsTable.insertMany(r.fills.map((f) => fillRow(f, s.account.id)));
+  await saveFills(r.fills, s.account.id);
   await syncBook(s.account, r.book, s.positions);
   return { filled: r.fills.length, changed: r.changed.length };
 }
