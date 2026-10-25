@@ -2,12 +2,13 @@ import { Suspense, useEffect, useState, type ComponentType, type ReactNode } fro
 import { AppGuard } from "./auth";
 import { NotFound } from "./components/NotFound";
 import { Shell } from "./components/Shell";
-import { listBatches, loadReport, source, type BatchInfo } from "./lib/data";
+import { listBatches, loadReport, loadSearch, source, type BatchInfo } from "./lib/data";
 import { date, REPO_URL } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
 import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
-import { Button, ErrorBoundary, lazyPage, PageSkeleton, Toaster } from "./ui";
+import { Button, ErrorBoundary, lazyPage, PageSkeleton, preload, Toaster } from "./ui";
+import { loadDocIndex } from "./lib/docs";
 import { LegalLinks } from "./legal/LegalLinks";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { setStoreUser } from "./lib/userStore";
@@ -117,6 +118,11 @@ function warmOnHover() {
 /** Starts loading pages before they are opened: the home page at once, the usual next ones when idle. */
 function warmPages(space: string) {
   void (space === "research" ? PAGE_FILES.ResearchHome() : PAGE_FILES.ProductHome());
+  // The research home also shows the strategy search and the newest docs: ask for both now.
+  if (space === "research" && !(window.location.hash || "#/").split("/")[1]) {
+    preload("search", loadSearch);
+    void loadDocIndex().catch(() => {});
+  }
   // After the first page and its data have had the network to themselves.
   const idle = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 200));
   window.setTimeout(() => idle(() => { for (const f of [PAGE_FILES.Strategies, PAGE_FILES.StrategyPage, PAGE_FILES.Learn, PAGE_FILES.Settings]) void f().catch(() => {}); }), 4000);

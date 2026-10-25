@@ -79,4 +79,5 @@ Age is how old the newest value is when fetched. Cadence is the age we expect at
 ## Referenced by
 
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
+- [REF-0024: App speed, how we measure it and what we changed](0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 <!-- backlinks:end -->

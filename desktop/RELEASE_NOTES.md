@@ -1,5 +1,12 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.1:
+
+- Never a black window. A page that stops drawing (after sleep, a screen change, Stage Manager or a graphics restart) is drawn again, and a page that stays empty reloads once, then says it could not open, with Retry.
+- Windows open already drawn, with Parity's loading screen, instead of an empty dark frame.
+- Faster: the sections you use most open in the background, built files stay cached, and each app downloads much less code.
+- The app keeps a small log of pages that failed, to help trace a problem: Mac `~/Library/Logs/Parity/parity.log`, Windows `%APPDATA%\Parity\logs\parity.log`. It holds no passwords or sign-in tokens.
+
 New in 0.2.0:
 
 - The app opens on the log-in page, with no sidebar and no cookie notice. After you log in it opens the last page you used.
