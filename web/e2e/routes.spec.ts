@@ -6,8 +6,9 @@ import type { Page, TestInfo } from "@playwright/test";
 import { ALL } from "./routes";
 import { axe, badValues, expect, open, settled, sideways, test } from "./fixtures";
 
-// axe takes 15 to 20 seconds on the biggest pages (the glossary has about 16,000 elements).
-test.describe.configure({ timeout: 120_000 });
+// axe takes 15 to 20 seconds on the biggest pages (the references page has about 16,000
+// elements), more on a busy runner, so those get three times the time (test.slow below).
+test.describe.configure({ timeout: 90_000 });
 
 async function check(page: Page, path: string, info: TestInfo, status = 200) {
   const res = await open(page, path);
@@ -16,6 +17,7 @@ async function check(page: Page, path: string, info: TestInfo, status = 200) {
   const text = (await page.locator("body").innerText()).trim();
   expect(text.length, "page has text").toBeGreaterThanOrEqual(40);
   expect(await badValues(page), "no NaN or undefined on screen").toEqual([]);
+  if ((await page.evaluate(() => document.getElementsByTagName("*").length)) > 5000) test.slow();
   expect(await axe(page), "no serious or critical accessibility problems").toEqual([]);
   if (info.project.name === "phone") expect(await sideways(page), "no sideways scroll").toBeLessThanOrEqual(1);
 }
