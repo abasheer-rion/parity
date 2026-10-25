@@ -1,5 +1,5 @@
 // The /.well-known/ addresses an AI app reads before it signs in to Parity's MCP server
-// (DEC-0049). Served by the site middleware (functions/_middleware.ts), which hands over any
+// (DEC-0051). Served by the site middleware (functions/_middleware.ts), which hands over any
 // path this answers. Imported by Pages Functions: no import.meta.env here.
 //
 //   /.well-known/oauth-protected-resource/mcp   Protected Resource Metadata (RFC 9728) for

@@ -1,4 +1,4 @@
-// The person's rows in Supabase for the hosted MCP server (DEC-0049): plain REST calls with
+// The person's rows in Supabase for the hosted MCP server (DEC-0051): plain REST calls with
 // the person's own access token, so the database's row rules decide what comes back. The
 // call log and limits (mcp_begin_call, mcp_end_call) run as the person too. Imported by
 // Pages Functions: no import.meta.env here.

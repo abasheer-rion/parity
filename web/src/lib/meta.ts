@@ -122,7 +122,7 @@ export const PAGES: Record<string, PageMeta> = {
   "signup/index.html": { title: "Sign up · Parity", description: "Create a free Parity account to check trading records and follow strategies tested against the S&P 500.", path: "/signup/", image: "login" },
   "reset/index.html": { title: "Reset password · Parity", description: "Choose a new password for your Parity account.", path: "/reset/", image: "login" },
   "verify/index.html": { title: "Confirm · Parity", description: "Confirming your email address for Parity.", path: "/verify/", image: "login" },
-  // AI apps connecting to Parity (DEC-0049): the how-to and connected apps, the consent page
+  // AI apps connecting to Parity (DEC-0051): the how-to and connected apps, the consent page
   // Supabase Auth's OAuth server sends people to, and the OpenRouter sign-in return page.
   "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "login", robots: PRIVATE },
   "oauth/consent/index.html": { title: "Allow an AI app · Parity", description: "Choose whether an AI app may use Parity as you.", path: "/oauth/consent/", image: "login", robots: PRIVATE },

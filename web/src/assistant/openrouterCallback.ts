@@ -1,5 +1,5 @@
 // /oauth/openrouter/: where OpenRouter sends the person back after they connect their account
-// (DEC-0049, openrouter.ts). Swaps the code for their key, keeps it in this browser, and
+// (DEC-0051, openrouter.ts). Swaps the code for their key, keeps it in this browser, and
 // returns them to the page they started from.
 import { finish } from "./openrouter";
 

@@ -1,4 +1,4 @@
-// Two pages for AI apps that connect to Parity (DEC-0049):
+// Two pages for AI apps that connect to Parity (DEC-0051):
 //   /connect/          how to add Parity to Claude, ChatGPT and others, and the apps you connected,
 //                      each with "may make changes" (off by default) and Disconnect.
 //   /oauth/consent/    where Supabase Auth's OAuth server sends you to approve an app. You see

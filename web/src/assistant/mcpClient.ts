@@ -1,4 +1,4 @@
-// The assistant panel's side of Parity's MCP server (DEC-0049): the same /mcp endpoint the
+// The assistant panel's side of Parity's MCP server (DEC-0051): the same /mcp endpoint the
 // outside AI apps use, called with the person's own Parity session token. That token has no
 // client_id, so the server and the database treat the panel as read only.
 import type { McpTool } from "./chat";

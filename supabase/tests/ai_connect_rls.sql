@@ -1,4 +1,4 @@
--- Manual check of 20261101090000_ai_connect.sql (DEC-0049): row rules for connected AI apps,
+-- Manual check of 20261101090000_ai_connect.sql (DEC-0051): row rules for connected AI apps,
 -- the write grant, the limits and the log. Not run by CI and never applied to the hosted
 -- project. Run it against a throwaway local Postgres:
 --

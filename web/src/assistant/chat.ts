@@ -1,4 +1,4 @@
-// The assistant's loop (DEC-0049): the person's own model, called straight from this browser
+// The assistant's loop (DEC-0051): the person's own model, called straight from this browser
 // with their key, and Parity's MCP tools (/mcp) called with their own Parity session. The
 // model asks for a tool, we run it on /mcp, hand back the result and repeat, at most a few
 // rounds per question. Parity's servers see the tool calls (and log their names), never the

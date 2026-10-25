@@ -1,4 +1,4 @@
-// The hosted MCP server (DEC-0049): sign-in challenge, both protocol eras, the tools, the
+// The hosted MCP server (DEC-0051): sign-in challenge, both protocol eras, the tools, the
 // limits and the write gate. Tokens, data files and the database are all faked: no test
 // talks to the network.
 // @vitest-environment node

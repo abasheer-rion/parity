@@ -1,4 +1,4 @@
-// Parity Academy's courses for the hosted MCP server (DEC-0049). Pages Functions cannot read
+// Parity Academy's courses for the hosted MCP server (DEC-0051). Pages Functions cannot read
 // academy/courses/ or use Vite's import.meta.glob, so the site build writes every course into
 // one file, /data/academy/courses.json (write_academy_data in scripts/seo/build_public.py).
 import type { Data } from "./tools";

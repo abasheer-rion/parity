@@ -1,4 +1,4 @@
--- AI apps connected to Parity (DEC-0049). People can add Parity to Claude, ChatGPT and other
+-- AI apps connected to Parity (DEC-0051). People can add Parity to Claude, ChatGPT and other
 -- AI apps through the hosted MCP server at /mcp (web/functions/mcp.ts). The app signs in
 -- through Supabase Auth's OAuth server, so it holds an ordinary access token for that person
 -- with one extra claim, client_id, naming the app. Every read goes through the same row
@@ -249,7 +249,7 @@ grant execute on function public.mcp_save_trade_layout(text, jsonb) to authentic
 -- Restrictive policies are ANDed with the existing ones, so they only ever take access away.
 -- They apply only to tokens that carry a client_id claim (issued by the OAuth server to an
 -- app). Tables that do not exist yet are skipped. A new table people write to should get
--- the same three policies (see DEC-0049).
+-- the same three policies (see DEC-0051).
 
 do $$
 declare

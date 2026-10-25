@@ -1,4 +1,4 @@
-// Bring your own model (DEC-0049): the OpenRouter sign-in, where keys live, the flag, and one
+// Bring your own model (DEC-0051): the OpenRouter sign-in, where keys live, the flag, and one
 // tool round with each provider's message format. Every provider and /mcp call is faked.
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ask, geminiSchema, MAX_RESULT_CHARS, ProviderError, type McpTool } from "../src/assistant/chat";

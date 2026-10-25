@@ -1,4 +1,4 @@
-// /mcp: Parity's hosted MCP server (DEC-0049), so people can add Parity to Claude, ChatGPT,
+// /mcp: Parity's hosted MCP server (DEC-0051), so people can add Parity to Claude, ChatGPT,
 // Gemini CLI, Cursor, VS Code and other AI apps that speak the Model Context Protocol. The
 // app signs the person in through Supabase Auth's OAuth server and calls our tools as that
 // person. The protocol and tools are in src/lib/mcp/; this file only wires in the Pages

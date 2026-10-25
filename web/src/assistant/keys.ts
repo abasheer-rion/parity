@@ -1,4 +1,4 @@
-// Bring your own model (DEC-0049): which AI provider the person chose, their model and their
+// Bring your own model (DEC-0051): which AI provider the person chose, their model and their
 // key. Everything here stays in this browser's local storage, on this one address. It is
 // never sent to Parity's servers, never logged and never put in a URL: the browser sends the
 // key straight to the provider. "Your key, your bill."

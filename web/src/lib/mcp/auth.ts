@@ -1,4 +1,4 @@
-// Who is calling the hosted MCP server (DEC-0049), and how an AI app finds out where to sign
+// Who is calling the hosted MCP server (DEC-0051), and how an AI app finds out where to sign
 // in. Parity does not run its own OAuth server: Supabase Auth's OAuth 2.1 server is the
 // authorization server, and its access tokens are ordinary Supabase user tokens with one extra
 // claim, client_id, naming the app. So the same public-key check as the site middleware

@@ -1,4 +1,4 @@
-// Entry for /connect/ and /oauth/consent/ (DEC-0049).
+// Entry for /connect/ and /oauth/consent/ (DEC-0051).
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "../legal/notice";

@@ -1,4 +1,4 @@
-// The tools the hosted MCP server offers AI apps (DEC-0049). Each reads the same files the
+// The tools the hosted MCP server offers AI apps (DEC-0051). Each reads the same files the
 // signed-in site reads (/data/..., published by the deploy job) or the person's own rows in
 // Supabase with their own token, so an app sees exactly what the person could see. The two
 // tools that change anything are marked write: they are off unless the server flag is on AND

@@ -1,4 +1,4 @@
-// The hosted MCP server's protocol layer (DEC-0049): Streamable HTTP at one endpoint, /mcp,
+// The hosted MCP server's protocol layer (DEC-0051): Streamable HTTP at one endpoint, /mcp,
 // answering every request with plain JSON and keeping no state between requests.
 //
 // It speaks both eras of the Model Context Protocol:

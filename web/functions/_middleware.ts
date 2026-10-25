@@ -35,7 +35,7 @@ const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);
-  // Sign-in metadata for the hosted MCP server at /mcp (DEC-0049): public, on every host.
+  // Sign-in metadata for the hosted MCP server at /mcp (DEC-0051): public, on every host.
   if (url.pathname.startsWith("/.well-known/")) {
     const res = await wellKnown(request);
     if (res) return res;

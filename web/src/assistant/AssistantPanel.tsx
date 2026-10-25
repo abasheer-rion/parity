@@ -1,4 +1,4 @@
-// A small assistant panel for Workbench, Verify and Trade (DEC-0049). Parity has no AI model
+// A small assistant panel for Workbench, Verify and Trade (DEC-0051). Parity has no AI model
 // of its own: the person connects their own (OpenRouter by sign-in, or a key for Anthropic,
 // OpenAI or Google), and the model reads Parity through its MCP tools. Off unless the owner
 // turns it on (VITE_AI_ASSISTANT=on) or this browser opted in with ?assistant=on.

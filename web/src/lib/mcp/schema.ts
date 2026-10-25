@@ -1,4 +1,4 @@
-// A small checker for the JSON Schema subset our MCP tools use (DEC-0049): object, string,
+// A small checker for the JSON Schema subset our MCP tools use (DEC-0051): object, string,
 // number, integer, boolean and array, with required, enum, min and max, lengths and item
 // counts. Arguments from an AI app are checked against the tool's own inputSchema before the
 // tool runs, so a tool never sees a value of the wrong type.

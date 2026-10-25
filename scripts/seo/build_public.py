@@ -766,7 +766,7 @@ def fill_verification(out: Path) -> None:
 
 
 def write_academy_data(courses: list[dict], out: Path) -> None:
-    """The courses as one JSON file for the hosted MCP server (DEC-0049), which cannot read
+    """The courses as one JSON file for the hosted MCP server (DEC-0051), which cannot read
     academy/courses/ itself. Under /data/, so only signed-in people and the server read it."""
     keep = ("id", "title", "minutes", "body", "terms", "check")
     doc = [{"id": c["id"], "order": c["order"], "level": c["level"], "title": c["title"], "summary": c["summary"],

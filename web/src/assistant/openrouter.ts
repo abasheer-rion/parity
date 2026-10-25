@@ -1,4 +1,4 @@
-// Connecting an OpenRouter account with OAuth and PKCE (DEC-0049), the one provider with a
+// Connecting an OpenRouter account with OAuth and PKCE (DEC-0051), the one provider with a
 // public sign-in that lets an app call models on the person's own bill without registering
 // the app first. Docs: https://openrouter.ai/docs/guides/overview/auth/oauth
 //

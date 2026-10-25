@@ -6,7 +6,7 @@ import type { BatchSummary, Report } from "./types";
 import { rumAge } from "./rum";
 
 export type Source = "static" | "local";
-// Optional chaining: Pages Functions import this file too (the hosted MCP server, DEC-0049),
+// Optional chaining: Pages Functions import this file too (the hosted MCP server, DEC-0051),
 // and there import.meta.env does not exist.
 export const source: Source = import.meta.env?.DEV ? "local" : "static";
 
