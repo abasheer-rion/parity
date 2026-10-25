@@ -111,9 +111,12 @@ jobs:
         run: |
           version=$(node -p "require('./desktop/package.json').version")
           tag="desktop-v${version}"
-          files=$(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.exe' \))
+          # The Windows installer's name has spaces ("Parity Setup 0.1.0.exe"), so keep each
+          # file as one array item.
+          mapfile -t files < <(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.exe' \))
+          printf 'attaching %s\n' "${files[@]}"
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" $files --clobber
+            gh release upload "$tag" "${files[@]}" --clobber
           else
-            gh release create "$tag" $files --draft --target "$GITHUB_SHA" --title "Parity desktop ${version}" --notes-file desktop/RELEASE_NOTES.md
+            gh release create "$tag" "${files[@]}" --draft --target "$GITHUB_SHA" --title "Parity desktop ${version}" --notes-file desktop/RELEASE_NOTES.md
           fi
