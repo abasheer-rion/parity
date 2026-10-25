@@ -8,10 +8,11 @@ import { readPref, writePref } from "./shared";
 import { LIVE_TFS, type LiveTf } from "../lib/live/candles";
 import { RULES } from "../lib/signals";
 
-export type View = "chart" | "watchlists" | "screener" | "portfolio" | "orders" | "alerts" | "strategies" | "settings";
+export type View = "chart" | "markets" | "watchlists" | "screener" | "portfolio" | "orders" | "alerts" | "strategies" | "settings";
 
 export const VIEWS: { id: View; label: string; icon: string }[] = [
   { id: "chart", label: "Chart", icon: "graph" },
+  { id: "markets", label: "Markets", icon: "pulse" },
   { id: "watchlists", label: "Watchlists", icon: "list" },
   { id: "screener", label: "Screener", icon: "filter" },
   { id: "portfolio", label: "Portfolio", icon: "chart" },

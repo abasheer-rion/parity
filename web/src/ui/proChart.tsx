@@ -64,7 +64,15 @@ export interface ProChartProps {
   viewKey?: string;
 }
 
-export interface LiveBars { bars: Bar[]; on(fn: (c: "last" | "new") => void): () => void }
+/** closed: finished bars; the rest (the last one) is still forming and drawn faded, so
+ *  nobody reads a signal or a close off a bar that has not finished (DEC-0053). */
+export interface LiveBars { bars: Bar[]; on(fn: (c: "last" | "new") => void): () => void; readonly closed?: number }
+
+/** A forming bar's colours: the usual ones, faded. */
+const formingColors = (b: { open: number; close: number }, up: string, down: string) => {
+  const c = withAlpha(b.close >= b.open ? up : down, 0.4);
+  return { color: c, borderColor: c, wickColor: c };
+};
 export interface ChartMarker { id: string; time: string; side: "buy" | "sell" | "exit"; text: string }
 
 /** Height of the time axis under the panes; the panes share the rest by stretch factor. */
@@ -207,6 +215,8 @@ export function ProChart({
     c.applyOptions({ timeScale: { timeVisible: (bars[0]?.time.length ?? 10) > 10, secondsVisible: false } });
     const shown = type === "heikin" ? heikinAshi(bars) : bars;
     const ohlc = shown.map((b) => ({ time: toTime(b.time), open: b.open, high: b.high, low: b.low, close: b.close }));
+    const forming = !!live && live.closed != null && live.closed < bars.length;
+    if (forming && ohlc.length && (type === "candles" || type === "heikin")) Object.assign(ohlc[ohlc.length - 1], formingColors(ohlc[ohlc.length - 1], up, down));
     const closes = shown.map((b) => ({ time: toTime(b.time), value: b.close }));
     const priceFormat = { type: "price" as const, precision: digits, minMove: 1 / 10 ** digits };
     let main: ISeriesApi<SeriesType>;
@@ -326,7 +336,8 @@ export function ProChart({
       }
       const b = sh[sh.length - 1] ?? last;
       const t = toTime(b.time);
-      if (type === "candles" || type === "heikin" || type === "bars") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close });
+      if (type === "candles" || type === "heikin") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close, ...formingColors(b, cssVar("--good", "#3fb37f"), cssVar("--bad", "#e5484d")) });
+      else if (type === "bars") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close });
       else main.update({ time: t, value: b.close });
       const now = performance.now();
       if (now - legendAt > 250) { legendAt = now; setVersion((v) => v + 1); }
@@ -399,6 +410,7 @@ export function ProChart({
             {bar ? (
               <>
                 <span className="pc-dim">{bar.time}</span>
+                {live && live.closed != null && i >= live.closed && <span className="pc-forming" title="This bar has not finished. Signals use finished bars only.">Forming</span>}
                 {type !== "line" && type !== "area" && type !== "baseline" && <>
                   <span>O <b>{fmt(bar.open, digits)}</b></span><span>H <b>{fmt(bar.high, digits)}</b></span><span>L <b>{fmt(bar.low, digits)}</b></span>
                 </>}

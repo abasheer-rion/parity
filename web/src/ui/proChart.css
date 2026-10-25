@@ -29,3 +29,4 @@
 /* Fill mode (Parity Trade): the chart takes its parent's height, no frame of its own. */
 .pc-fill { height: 100%; gap: 0; }
 .pc-fill .pc-stage { flex: 1 1 auto; min-height: 0; border: 0; border-radius: 0; }
+.pc-forming { padding: 0 4px; border: 1px dashed currentColor; border-radius: 3px; color: var(--muted, #8b8f98); font-size: 10px; line-height: 14px; }

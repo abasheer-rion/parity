@@ -25,7 +25,7 @@ export const HOTKEYS: [string, string][] = [
   ["Alt+B", "Bottom dock"],
   ["Alt+A", "New alert"],
   [`${MOD}+S`, "Save layout"],
-  ["Shift+1 to 8", "Chart, Watchlists, Screener, Portfolio, Orders, Alerts, Strategies, Settings"],
+  ["Shift+1 to 9", "Chart, Markets, Watchlists, Screener, Portfolio, Orders, Alerts, Strategies, Settings"],
 ];
 
 export const isTyping = (el: EventTarget | null) => {
