@@ -430,6 +430,9 @@
 /* A page that has just opened eases in; a skeleton's replacement fades in over it. */
 /* backwards, not both: once it has played no transform stays on the page, so fixed popups and dialogs inside it still cover the screen. */
 .ui-route { animation: ui-route var(--dur-3) var(--ease-out) backwards; }
+/* Long URLs and file paths in prose wrap instead of pushing the page sideways on a phone. */
+.ui-route :where(p, li, .help) { overflow-wrap: anywhere; }
+.ui-route :where(td, th) :where(p, li) { overflow-wrap: normal; }
 @keyframes ui-route { from { opacity: 0; transform: translateY(4px); } }
 .ui-arrive { animation: ui-fade var(--dur-3) var(--ease-out) both; }
 
