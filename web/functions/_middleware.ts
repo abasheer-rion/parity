@@ -1,5 +1,5 @@
 // Cloudflare Pages middleware: only signed-in people get the apps (/app/*, /research/*,
-// /sim/*, /trade/*, /academy/*) and the research data (/data/*). Everything else (the front page, /login/, /signup/,
+// /sim/*, /trade/*, /academy/*, /lab/*) and the research data (/data/*). Everything else (the front page, /login/, /signup/,
 // /reset/, /verify/, /brand/, favicons) is public. public/_routes.json limits this
 // function to the protected paths, so public pages never run it.
 //
@@ -21,13 +21,14 @@ interface Context {
   next: (input?: Request) => Promise<Response>;
 }
 
-const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trade(\/|$)/, /^\/academy(\/|$)/, /^\/data\//];
+const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trade(\/|$)/, /^\/academy(\/|$)/, /^\/lab(\/|$)/, /^\/data\//];
 
-// Sim World, Parity Trade and Parity Academy have their own addresses, sim.<domain> (DEC-0016
-// follow-up), trade.<domain> (DEC-0040) and academy.<domain> (DEC-0042): the front page of
-// each is its app at /sim/, /trade/ or /academy/, behind the same sign-in. Sign-in pages, brand files and built assets stay reachable there so
+// Sim World, Parity Trade, Parity Academy and Parity Workbench have their own addresses,
+// sim.<domain> (DEC-0016 follow-up), trade.<domain> (DEC-0040), academy.<domain> (DEC-0042)
+// and lab.<domain> (DEC-0043): the front page of each is its app at /sim/, /trade/,
+// /academy/ or /lab/, behind the same sign-in. Sign-in pages, brand files and built assets stay reachable there so
 // logging in works; the other apps send people back to the main address.
-const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/", academy: "/academy/" };
+const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/", academy: "/academy/", lab: "/lab/" };
 const SUBSITE_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
 const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
 

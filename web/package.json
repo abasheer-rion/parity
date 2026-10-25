@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && tsc --noEmit -p functions && vite build --mode site && vite build && vite build --mode sim && vite build --mode trade && vite build --mode academy && npm run seo",
+    "build": "tsc --noEmit && tsc --noEmit -p functions && vite build --mode site && vite build && vite build --mode sim && vite build --mode trade && vite build --mode academy && vite build --mode lab && npm run seo",
     "seo": "python3 ../scripts/seo/build_public.py --out dist",
     "typecheck": "tsc --noEmit && tsc --noEmit -p functions",
     "preview": "vite preview",

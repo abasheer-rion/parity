@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 42 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 43 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 14 |
@@ -92,6 +92,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0040 | [Parity Trade, a full-screen trading app of its own](decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0041 | [Parity as an installable site and a desktop app for Mac and Windows](decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0042 | [Parity Academy, a full-screen course player of its own](decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

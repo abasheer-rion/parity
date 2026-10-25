@@ -8,7 +8,7 @@ import { isIosSafari, showCard } from "../src/pwa/install";
 const pub = (p: string) => resolve(import.meta.dirname, "../public", p);
 
 describe("manifests", () => {
-  for (const file of ["manifest.webmanifest", "trade/manifest.webmanifest", "academy/manifest.webmanifest", "sim/manifest.webmanifest"]) {
+  for (const file of ["manifest.webmanifest", "trade/manifest.webmanifest", "academy/manifest.webmanifest", "lab/manifest.webmanifest", "sim/manifest.webmanifest"]) {
     it(`${file} is installable`, () => {
       const m = JSON.parse(readFileSync(pub(file), "utf8"));
       expect(m.name).toBeTruthy();
@@ -21,7 +21,7 @@ describe("manifests", () => {
   it("the main manifest has a maskable icon and a shortcut per app", () => {
     const m = JSON.parse(readFileSync(pub("manifest.webmanifest"), "utf8"));
     expect(m.icons.some((i: { purpose?: string }) => i.purpose === "maskable")).toBe(true);
-    expect(m.shortcuts.map((s: { url: string }) => s.url)).toEqual(["/app/#/verify", "/trade/", "/academy/", "/research/", "/sim/"]);
+    expect(m.shortcuts.map((s: { url: string }) => s.url)).toEqual(["/app/#/verify", "/trade/", "/academy/", "/lab/", "/research/", "/sim/"]);
   });
 });
 
@@ -34,7 +34,7 @@ describe("service worker", () => {
     for (const p of ["/app/", "/trade/", "/", "/offline.html"]) expect(never.test(p)).toBe(false);
   });
   it("treats only hashed build output as assets", () => {
-    for (const p of ["/assets/a-1.js", "/app/assets/b.css", "/sim/assets/c.js", "/trade/assets/d.js", "/academy/assets/e.js"]) expect(assets.test(p)).toBe(true);
+    for (const p of ["/assets/a-1.js", "/app/assets/b.css", "/sim/assets/c.js", "/trade/assets/d.js", "/academy/assets/e.js", "/lab/assets/f.js"]) expect(assets.test(p)).toBe(true);
     for (const p of ["/app/", "/data/assets/x.json", "/brand/x.svg"]) expect(assets.test(p)).toBe(false);
   });
   it("never keeps a redirect or an error", () => {

@@ -2,6 +2,7 @@
 // amount, a range-tabbed chart you can scrub, About, Key statistics, then detail.
 // The right column holds the verdict where Robinhood puts its order panel.
 import { useState } from "react";
+import { labUrl } from "../lib/space";
 import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
 import { Badge, Button } from "../ui";
@@ -172,7 +173,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
               {run.gauntlet && <p className="order-note">{run.gauntlet.verdict}</p>}
             </>
           )}
-          <Button variant="primary" size="lg" full href="#/lab">Try other settings in the Lab</Button>
+          <Button variant="primary" size="lg" full href={labUrl(`try?s=${encodeURIComponent(run.strategy)}`)} target="_blank">Try other settings in the Workbench</Button>
         </div>
         <Button variant="outline" size="lg" full href="#/compare">Compare with others</Button>
         {refDoc && <Button variant="outline" size="lg" full href={`#/doc/${refDoc.id}`}>Read the write-up</Button>}
