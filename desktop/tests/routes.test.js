@@ -1,0 +1,96 @@
+// Where addresses go inside the desktop app (DEC-0041). Run: npm test
+const { test } = require("node:test");
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+const { toAppPath, activeSection, visibleSections, resolveRequest } = require("../electron/routes");
+const sections = require("../electron/sections");
+
+const O = "https://parity.endyland.com";
+
+test("parity:// links open the matching page", () => {
+  assert.equal(toAppPath("parity://s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(toAppPath("parity://v/AbCdEfGhIjKl", O), "/v/AbCdEfGhIjKl");
+  assert.equal(toAppPath("parity://trade/#/chart?s=fx.EUR", O), "/trade/#/chart?s=fx.EUR");
+  assert.equal(toAppPath("parity://trade", O), "/trade/");
+  assert.equal(toAppPath("parity://sim/macro", O), "/sim/#/macro");
+  assert.equal(toAppPath("parity://sim/scenario?type=oil&r=2", O), "/sim/#/scenario?type=oil&r=2");
+  assert.equal(toAppPath("parity://app/#/verify", O), "/app/#/verify");
+  assert.equal(toAppPath("parity:///research/", O), "/research/");
+  assert.equal(toAppPath("parity://login/?code=abc&next=%2Ftrade%2F", O), "/login/?code=abc&next=%2Ftrade%2F");
+  assert.equal(toAppPath(`parity://open?url=${encodeURIComponent("https://trade.endyland.com/#/alerts")}`, O), "/trade/#/alerts");
+});
+
+test("the website's three addresses stay in the app", () => {
+  assert.equal(toAppPath("https://parity.endyland.com/", O), "/");
+  assert.equal(toAppPath("https://parity.endyland.com/app/#/strategies", O), "/app/#/strategies");
+  assert.equal(toAppPath("https://parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(toAppPath("https://sim.endyland.com/", O), "/sim/");
+  assert.equal(toAppPath("https://sim.endyland.com/#/fx", O), "/sim/#/fx");
+  assert.equal(toAppPath("https://trade.endyland.com/#/alerts", O), "/trade/#/alerts");
+  assert.equal(toAppPath("https://trade.endyland.com/login/?next=x", O), "/login/?next=x");
+});
+
+test("other addresses open in the browser", () => {
+  for (const u of ["https://evil.example/", "http://parity.endyland.com/", "https://parity.endyland.com:8443/", "https://user@parity.endyland.com/", "javascript:alert(1)", "file:///etc/passwd", "//evil.example/x", "", null]) {
+    assert.equal(toAppPath(u, O), null, String(u));
+  }
+});
+
+test("the sidebar follows the page", () => {
+  assert.equal(activeSection("app://parity/", sections), "home");
+  assert.equal(activeSection("app://parity/legal/risk/", sections), "home");
+  assert.equal(activeSection("app://parity/app/#/verify", sections), "verify");
+  assert.equal(activeSection("app://parity/v/AbCdEfGhIjKl", sections), "verify");
+  assert.equal(activeSection("app://parity/app/#/strategies", sections), "app");
+  assert.equal(activeSection("app://parity/app/#/settings/account", sections), "account");
+  assert.equal(activeSection("app://parity/research/#/docs", sections), "research");
+  assert.equal(activeSection("app://parity/sim/#/fx", sections), "sim");
+  assert.equal(activeSection("app://parity/trade/", sections), "trade");
+  assert.equal(activeSection("app://parity/login/?next=%2Ftrade%2F", sections), null);
+});
+
+function site() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "parity-site-"));
+  for (const f of ["index.html", "app/index.html", "trade/index.html", "v/index.html", "assets/a.js"]) {
+    fs.mkdirSync(path.dirname(path.join(root, f)), { recursive: true });
+    fs.writeFileSync(path.join(root, f), f);
+  }
+  return root;
+}
+
+test("sections that need a page show only when it is built", () => {
+  const root = site();
+  const ids = visibleSections(sections, root).map((s) => s.id);
+  assert.ok(!ids.includes("academy") && !ids.includes("lab"));
+  fs.mkdirSync(path.join(root, "academy"));
+  fs.writeFileSync(path.join(root, "academy/index.html"), "");
+  const vis = visibleSections(sections, root);
+  assert.ok(vis.some((s) => s.id === "academy"));
+  assert.deepEqual(vis.filter((s) => !s.bottom).map((s) => s.key), ["1", "2", "3", "4", "5", "6", "7"]);
+  assert.equal(vis.find((s) => s.id === "account").key, ",");
+});
+
+test("requests resolve to bundled files, short links, the website or nothing", () => {
+  const root = site();
+  assert.deepEqual(resolveRequest(root, "/"), { file: path.join(root, "index.html") });
+  assert.deepEqual(resolveRequest(root, "/trade/"), { file: path.join(root, "trade/index.html") });
+  assert.deepEqual(resolveRequest(root, "/trade"), { redirect: "/trade/" });
+  assert.deepEqual(resolveRequest(root, "/assets/a.js"), { file: path.join(root, "assets/a.js") });
+  assert.deepEqual(resolveRequest(root, "/v/AbCdEfGhIjKl"), { file: path.join(root, "v/index.html") });
+  assert.deepEqual(resolveRequest(root, "/s/fx_carry"), { redirect: "/app/#/strategy/fx_carry" });
+  assert.deepEqual(resolveRequest(root, "/data/latest.json"), { proxy: true });
+  assert.deepEqual(resolveRequest(root, "/stats.json"), { proxy: true });
+  assert.deepEqual(resolveRequest(root, "/badge/AbCdEfGhIjKl.svg"), { proxy: true });
+  assert.deepEqual(resolveRequest(root, "/nope"), { missing: true });
+});
+
+test("requests never leave the bundle", () => {
+  const root = site();
+  for (const p of ["/../../etc/passwd", "/%2e%2e/%2e%2e/etc/passwd", "/..%2f..%2fetc/passwd", "/%00", "/%E0%A4%A"]) {
+    const r = resolveRequest(root, p);
+    assert.ok(!r.file || r.file.startsWith(root + path.sep), p);
+    assert.ok(!r.proxy || path.extname(p), p);
+  }
+});
