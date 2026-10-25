@@ -77,6 +77,7 @@ Oil, gas, metals and their link to currencies.
 Other trading products, what their users think of them, and what Parity takes from them.
 
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md)
 - [CMP-0003: LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md)
@@ -489,6 +490,7 @@ News, macro releases and event-driven signals.
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [ALG-0008: Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md)
@@ -584,6 +586,7 @@ Private equity, venture, private credit, real estate and infrastructure, and how
 
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 
 ## process
 
@@ -656,6 +659,7 @@ A specific trading idea or its implementation.
 - [RES-0007: Comparing every algorithm we know of](research/0007-comparing-every-algorithm.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
+- [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](competitors/0004-metatrader-4-and-5.md)

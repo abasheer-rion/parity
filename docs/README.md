@@ -10,7 +10,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 51 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 16 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 17 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 19 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
@@ -30,6 +30,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
@@ -37,7 +38,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
 - 2026-10-25 [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - 2026-10-25 [GDE-0006: Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
-- 2026-10-25 [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 
 ## intent
 
@@ -146,6 +146,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0021 | [How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md) | current | 2026-10-24 | [ui](TAGS.md#ui) |
 | RES-0022 | [How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra) |
 | RES-0024 | [AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| RES-0025 | [Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md) | current | 2026-10-25 | [competitors](TAGS.md#competitors), [news](TAGS.md#news), [private-markets](TAGS.md#private-markets), [strategy](TAGS.md#strategy) |
 
 ## guide
 
