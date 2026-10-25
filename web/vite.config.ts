@@ -7,10 +7,14 @@ import { parityMeta, parityOg } from "./plugins/meta";
 import { paritySite } from "./plugins/site";
 import react from "@vitejs/plugin-react";
 
+// The engine's output folder. PARITY_OUTPUT_DIR points the dev server at another one, such
+// as the small fixture the CI smoke test uses (web/tests/fixtures/smoke).
+const OUTPUT = process.env.PARITY_OUTPUT_DIR ? resolve(process.env.PARITY_OUTPUT_DIR) : resolve(import.meta.dirname, "../engine/output");
+
 // In local development the dashboard can read the engine's latest run straight
 // from disk, so you can see results without Supabase. This never runs in a build.
 function localResults(): Plugin {
-  const file = resolve(import.meta.dirname, "../engine/output/latest.json");
+  const file = resolve(OUTPUT, "./latest.json");
   return {
     name: "parity-local-results",
     apply: "serve",
@@ -18,7 +22,7 @@ function localResults(): Plugin {
       // `parity news export ../engine/output` writes the News page's files here.
       server.middlewares.use("/local/news", (req, res, next) => {
         const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
-        const path = resolve(import.meta.dirname, "../engine/output/news", name);
+        const path = resolve(OUTPUT, "./news", name);
         if (!/^(archive\/)?[a-z0-9]+\.json$/.test(name) || !existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
@@ -26,28 +30,28 @@ function localResults(): Plugin {
       // `parity markets export ../engine/output` writes the Markets pages' files here.
       server.middlewares.use("/local/markets", (req, res, next) => {
         const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
-        const path = resolve(import.meta.dirname, "../engine/output/markets", name);
+        const path = resolve(OUTPUT, "./markets", name);
         if (!/^[a-z]+\.json$/.test(name) || !existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
       // `parity search export` writes the strategy search's results here (DEC-0014).
       server.middlewares.use("/local/search.json", (_req, res, next) => {
-        const path = resolve(import.meta.dirname, "../engine/output/search.json");
+        const path = resolve(OUTPUT, "./search.json");
         if (!existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
       // `parity sims export` (or the sims service) writes the sims' summary here (DEC-0037).
       server.middlewares.use("/local/sims.json", (_req, res, next) => {
-        const path = resolve(import.meta.dirname, "../engine/output/sims.json");
+        const path = resolve(OUTPUT, "./sims.json");
         if (!existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
       // `parity profiles export` (or the sims service) writes the competitor feedback counts here (DEC-0047).
       server.middlewares.use("/local/profiles.json", (_req, res, next) => {
-        const path = resolve(import.meta.dirname, "../engine/output/profiles.json");
+        const path = resolve(OUTPUT, "./profiles.json");
         if (!existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
@@ -83,9 +87,9 @@ function badgePages(): Plugin {
 }
 
 function localScenarios(): Plugin {
-  const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(import.meta.dirname, "../engine/output/scenarios.json");
+  const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(OUTPUT, "./scenarios.json");
   // Sim World's map file, written by `parity world export` (DEC-0016).
-  const world = process.env.PARITY_WORLD_FILE ?? resolve(import.meta.dirname, "../engine/output/world.json");
+  const world = process.env.PARITY_WORLD_FILE ?? resolve(OUTPUT, "./world.json");
   return {
     name: "parity-local-scenarios",
     apply: "serve",
@@ -112,7 +116,7 @@ function localScenarios(): Plugin {
       // one file per replay, named by its id only.
       server.middlewares.use("/local/bots", (req, res) => {
         const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
-        const path = resolve(import.meta.dirname, "../engine/output/bots", name);
+        const path = resolve(OUTPUT, "./bots", name);
         if (!/^[A-Za-z0-9-]+\.json$/.test(name) || !existsSync(path)) {
           res.statusCode = 404;
           res.end("Run `parity bots export` first.");
@@ -125,7 +129,7 @@ function localScenarios(): Plugin {
       // s/<key>.json only, so a request can never reach outside the folder.
       server.middlewares.use("/local/terminal", (req, res) => {
         const name = (req.url ?? "").replace(/^\//, "").split("?")[0];
-        const path = resolve(import.meta.dirname, "../engine/output/terminal", name);
+        const path = resolve(OUTPUT, "./terminal", name);
         if (!/^(index|s\/[A-Za-z0-9_.+-]+)\.json$/.test(name) || name.includes("..") || !existsSync(path)) {
           res.statusCode = 404;
           res.end("Run `parity terminal export` first.");

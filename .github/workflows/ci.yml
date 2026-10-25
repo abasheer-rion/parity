@@ -67,6 +67,10 @@ jobs:
           name: desktop-web-ci
           path: desktop/build/web
           retention-days: 1
+      # Every route of every app at desktop and phone size: no exceptions, console errors,
+      # failed requests, blank pages, NaN in the text or sideways scroll (scripts/smoke.mjs).
+      - run: npx playwright install --with-deps chromium
+      - run: npm run smoke
 
   desktop:
     runs-on: ubuntu-latest
