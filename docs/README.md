@@ -7,11 +7,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 55 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 56 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
-| [guide](#guide) | How to do something in this repo, step by step. | 8 |
+| [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 22 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 18 |
@@ -106,6 +106,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | DEC-0055 | [Addresses that do not exist get a real 404 and each app says not found](decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0056 | [Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0057 | [Blog and news pages with labelled posts and real bylines](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -165,6 +166,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
 | GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
 | GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0009 | [Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## reference
 

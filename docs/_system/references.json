@@ -8026,6 +8026,30 @@
       }
     },
     {
+      "key": "url-0378f656",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Palantir Blog",
+      "venue": "blog.palantir.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://blog.palantir.com/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "docs/decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md"
+      ],
+      "note": "Studied for the newsroom layout in DEC-0057",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title read in a browser"
+      }
+    },
+    {
       "key": "url-04042609",
       "type": "software",
       "authors": [],
@@ -8690,6 +8714,30 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-14d9d7fc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Newsroom | Palantir",
+      "venue": "www.palantir.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.palantir.com/newsroom/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "docs/decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md"
+      ],
+      "note": "Studied for the newsroom layout in DEC-0057",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title read in a browser"
       }
     },
     {
@@ -17353,6 +17401,30 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-c7af5b43",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Newsroom | Anduril",
+      "venue": "www.anduril.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.anduril.com/news",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "docs/decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md"
+      ],
+      "note": "Studied for the newsroom layout in DEC-0057",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page title read in a browser"
       }
     },
     {

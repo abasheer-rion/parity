@@ -62,7 +62,9 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](../decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
+- [DEC-0057: Blog and news pages with labelled posts and real bylines](../decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
+- [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)
 <!-- backlinks:end -->
