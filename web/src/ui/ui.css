@@ -43,7 +43,9 @@
 .ui-btn-md:has(> .icon:last-child) { padding-right: 12px; }
 .ui-btn-lg { min-height: 40px; padding: 8px 32px; }
 .ui-btn-lg:has(> .icon:first-child) { padding-left: 28px; }
-.ui-btn-full { width: 100%; }
+/* A full-width button in a narrow column wraps its label instead of running past its edges. */
+.ui-btn-full { width: 100%; white-space: normal; text-align: center; }
+.ui-btn-lg.ui-btn-full { padding-inline: 16px; }
 .ui-btn .icon { color: var(--ds-icon-default); }
 .ui-btn-primary { background: var(--ds-background-primary); color: var(--ds-text-on-primary); }
 .ui-btn-primary .icon { color: var(--ds-icon-on-primary); }
