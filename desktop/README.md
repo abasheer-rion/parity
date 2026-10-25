@@ -47,6 +47,7 @@ Until the app is signed, each computer asks you to confirm the first time.
 - **A key to show or hide Parity** from any app can be set in Settings. It is off until you set one.
 - **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to parity.endyland.com and its sim., trade., academy. and lab. addresses stay in the app; other links open in your browser.
 - **Offline,** the app shows the copy of the site it was built with, under a line that says "Offline, showing saved copy", and goes back to the live site when the connection returns.
+- **Never a black window.** A page that stops drawing is drawn again; one that stays empty reloads once, then shows Could not open with Retry. Problems are noted in a small log: `~/Library/Logs/Parity/parity.log` on a Mac, `%APPDATA%\Parity\logs\parity.log` on Windows, with no passwords or sign-in tokens ([DEC-0058](../docs/decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)).
 - **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://parity.endyland.com/legal/cookies/#desktop) has the details.
 
 ## Updates

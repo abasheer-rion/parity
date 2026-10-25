@@ -53,6 +53,12 @@ https://parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
 https://:branch.parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
+# Built files have a hash of their contents in the name, so a copy never goes stale: keep
+# them a year (REF-0024). The apps' own built files are private and get the same from the
+# middleware (functions/_middleware.ts).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # The installable site (DEC-0041): the service worker must always be checked for a new
 # version, and the offline page is not for search.
 /sw.js

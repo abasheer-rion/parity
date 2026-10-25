@@ -2,11 +2,17 @@
 // (trade.endyland.com). Its own rail, top bar, settings and keys; a chart grid with an
 // order ticket and watchlist beside it and the account dock under it. Everything acts on
 // the demo account with delayed data. One Back button returns to Parity.
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AppGuard } from "../auth";
 import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
-import { Button, Dialog, Icon, Popover, Toaster, toast } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, lazyPage, Popover, Toaster, toast } from "../ui";
+
+// Views other than the chart load when first opened (REF-0024).
+const PortfolioView = lazyPage(() => import("./PortfolioView").then((m) => ({ default: m.PortfolioView })));
+const ScreenerView = lazyPage(() => import("./ScreenerView").then((m) => ({ default: m.ScreenerView })));
+const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
+const StrategiesView = lazyPage(() => import("./StrategiesView").then((m) => ({ default: m.StrategiesView })));
 import { CHART_TYPES, type DrawTool } from "../ui/proChart";
 import { TIMEFRAMES, type Timeframe } from "../lib/bars";
 import { productUrl } from "../lib/space";
@@ -21,11 +27,7 @@ import { HOTKEYS, isTyping, MAC, startsSearch } from "./keys";
 import { layoutsTable, MAX_LAYOUTS } from "./layouts";
 import { NotificationsBell } from "./Notifications";
 import { OrderTicket, type Cue } from "./OrderTicket";
-import { PortfolioView } from "./PortfolioView";
-import { ScreenerView } from "./ScreenerView";
-import { SettingsView } from "./SettingsView";
 import { Splitter } from "./Splitter";
-import { StrategiesView } from "./StrategiesView";
 import { hashParam, useInstruments } from "./shared";
 import {
   BOTTOM_MAX, BOTTOM_MIN, cleanLayout, freshLayout, readLayout, readSettings, SIDE_MAX, SIDE_MIN, VIEW_IDS, VIEWS, writeLayout, writeSettings,
@@ -327,6 +329,8 @@ function TradeShell() {
             </nav>
           )}
           <main id="main" tabIndex={-1} className="tr-main">
+            <ErrorBoundary key={view} scope="page">
+            <Suspense fallback={<div className="vmsg" aria-busy="true">Loading</div>}>
             {missing ? <NotFound heading="h2" address={missing} home="#/chart" homeLabel="Chart" body="There is no Parity Trade page at this address. The link may be mistyped, or the page may have moved." />
               : noData ? <div className="vmsg">No market data</div>
               : view === "chart" ? (mobile
@@ -340,6 +344,8 @@ function TradeShell() {
               : view === "alerts" ? <AlertsView list={list} tz={settings.tz} onSymbol={openSymbol} onNew={() => setAlertFor(symbol)} />
               : view === "strategies" ? <StrategiesView />
               : <SettingsView list={list} settings={settings} set={setSettings} onResetLayout={resetLayout} onLoadLayout={loadLayout} />}
+            </Suspense>
+            </ErrorBoundary>
           </main>
         </div>
 

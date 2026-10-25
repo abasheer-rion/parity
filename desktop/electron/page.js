@@ -34,6 +34,8 @@ class Page {
       webPreferences: {
         contextIsolation: true, sandbox: true, nodeIntegration: false, spellcheck: true,
         partition: ctx.PARTITION,
+        // Draws while the window is still hidden, so it can be shown already drawn.
+        paintWhenInitiallyHidden: true,
         // The hidden Trade page (main.js) keeps its timers running for alerts.
         backgroundThrottling: !background,
         preload: path.join(__dirname, "preload.js"),
@@ -77,7 +79,25 @@ class Page {
     wc.on("dom-ready", () => { if (ctx.isTrusted(wc.getURL())) wc.insertCSS(APP_CSS).catch(() => {}); });
     wc.on("page-title-updated", (_e, title) => { this.title = title || "Parity"; this.owner.pageChanged(this); });
     wc.on("before-input-event", (e, input) => this.owner.keys(e, input));
-    wc.on("render-process-gone", (_e, d) => { ctx.log(`page process gone (${d.reason})`); if (d.reason !== "clean-exit" && this.path) setTimeout(() => this.load(this.path), 500); });
+    // The page's process died: load it again, up to three times a minute, then say so with
+    // Retry rather than loop or leave a dead, black view.
+    wc.on("render-process-gone", (_e, d) => {
+      ctx.log(`page process gone (${d.reason}) on ${this.path}`);
+      if (d.reason === "clean-exit" || !this.path) return;
+      const now = Date.now();
+      this.crashes = (this.crashes || []).filter((t) => now - t < 60_000).concat(now);
+      if (this.crashes.length > 3) { setTimeout(() => this.showError(this.path || "/", "the page kept stopping"), 300); return; }
+      setTimeout(() => this.load(this.path), 500);
+    });
+    wc.on("did-first-visually-non-empty-paint", () => this.owner.pagePainted?.(this));
+    wc.on("did-finish-load", () => { this.owner.pagePainted?.(this); clearTimeout(this.blankTimer); this.blankTimer = setTimeout(() => this.checkPainted("loaded"), 5000); });
+    wc.on("unresponsive", () => ctx.log(`page not responding: ${this.path}`));
+    wc.on("responsive", () => ctx.log(`page responding again: ${this.path}`));
+    // Errors a page prints go to the app's log (logfile.js), for tracing a problem later.
+    wc.on("console-message", (e, level, message) => {
+      const lv = typeof e?.level === "string" ? e.level : level === 3 ? "error" : "";
+      if (lv === "error") ctx.log(`page error on ${this.path}: ${String(e?.message ?? message).slice(0, 300)}`);
+    });
   }
 
   navigated(url) {
@@ -141,16 +161,64 @@ class Page {
 
   stopWatchdog() { clearTimeout(this.watchdog); this.watchdog = null; }
 
+  /** Draws the page again: a fresh frame and a one-pixel nudge of its size (DEC-0059). */
+  repaint(why = "") {
+    if (!this.alive) return;
+    this.wc.invalidate();
+    const b = this.view.getBounds();
+    if (b.width > 0 && b.height > 1) {
+      this.view.setBounds({ ...b, height: b.height - 1 });
+      setTimeout(() => { if (this.alive) this.view.setBounds(b); }, 16);
+    }
+    if (why) this.ctx.log(`repainted ${this.path} (${why})`);
+  }
+
+  /**
+   * Never a black page (DEC-0059). An empty page (the site drew nothing) reloads once, then
+   * shows Could not open with Retry. A page whose content is there but did not reach the
+   * screen is drawn again.
+   */
+  async checkPainted(why = "") {
+    if (!this.alive || this.wc.isLoading() || !this.path || !this.ctx.isTrusted(this.wc.getURL())) return;
+    let dom;
+    try {
+      dom = await this.wc.executeJavaScript("({ t: (document.body && document.body.innerText.trim().length) || 0, r: !!(document.getElementById('root') && document.getElementById('root').firstElementChild), b: !!document.getElementById('pboot') })", true);
+    } catch { return; }
+    if (!this.alive) return;
+    if (!dom.t && !dom.r && !dom.b) {
+      if (!this.blankRetried) {
+        this.blankRetried = true;
+        this.ctx.log(`blank page ${this.path} (${why}), reloading`);
+        this.load(this.path);
+      } else {
+        this.showError(this.path, "the page stayed empty");
+      }
+      return;
+    }
+    this.blankRetried = false;
+    if (Date.now() - (this.repaintedAt || 0) < 10_000) return;
+    const win = this.owner.win;
+    if (!win || win.isDestroyed() || !win.isVisible() || win.isMinimized() || (this.view.getVisible && !this.view.getVisible())) return;
+    try {
+      const img = (await this.wc.capturePage()).resize({ width: 320 });
+      const px = img.toBitmap();
+      let lit = 0, n = 0;
+      for (let i = 0; i < px.length; i += 4 * 3) { n++; if (px[i] + px[i + 1] + px[i + 2] > 90) lit++; }
+      if (n && lit / n < 0.002) { this.repaintedAt = Date.now(); this.repaint(`nothing on screen, ${why}`); }
+    } catch { /* the view is hidden or closing */ }
+  }
+
   history() {
     const h = this.alive ? this.wc.navigationHistory : null;
     return { back: !!h?.canGoBack(), forward: !!h?.canGoForward() };
   }
 
-  back() { const h = this.wc.navigationHistory; if (h.canGoBack()) { h.goBack(); return true; } return false; }
-  forward() { const h = this.wc.navigationHistory; if (h.canGoForward()) { h.goForward(); return true; } return false; }
+  back() { if (!this.alive) return false; const h = this.wc.navigationHistory; if (h.canGoBack()) { h.goBack(); return true; } return false; }
+  forward() { if (!this.alive) return false; const h = this.wc.navigationHistory; if (h.canGoForward()) { h.goForward(); return true; } return false; }
 
   destroy() {
     this.stopWatchdog();
+    clearTimeout(this.blankTimer);
     if (this.alive) this.wc.close();
   }
 }

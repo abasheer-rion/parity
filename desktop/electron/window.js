@@ -85,8 +85,70 @@ class ParityWindow {
     this.layout();
     if (saved.maximized) w.maximize();
     if (saved.fullscreen) w.setFullScreen(true);
-    if (show) w.show();
+    // Shown once its page has drawn something (the loading screen comes with the first
+    // bytes), so it never opens as an empty dark frame; at most 1.5 s later either way.
+    this.wantShow = show;
+    this.revealed = false;
+    this.focusOnReveal = false;
+    this.revealTimer = show ? setTimeout(() => this.reveal(), 1500) : null;
+    w.on("show", () => { this.revealed = true; this.checkSoon("shown"); });
+    w.on("restore", () => this.checkSoon("restored"));
+    w.on("focus", () => this.checkSoon("focused"));
     ctx.focused = this;
+  }
+
+  /** Shows the window the first time (window.js constructor). */
+  reveal() {
+    clearTimeout(this.revealTimer);
+    this.revealTimer = null;
+    if (!this.alive || this.revealed || !this.wantShow) return;
+    this.revealed = true;
+    this.win.show();
+    if (this.focusOnReveal) this.win.focus();
+    setTimeout(() => this.warmSections(), 6000);
+  }
+
+  /** A page drew its first content (page.js). */
+  pagePainted(page) {
+    if (page === this.active) this.reveal();
+  }
+
+  /** Makes every view draw again: the cure for a page that stopped drawing (main.js). */
+  repaint(why = "") {
+    if (!this.alive) return;
+    if (this.active && !this.active.alive) { this.revive(); return; }
+    for (const v of [this.titlebar, this.overlay]) if (!v.webContents.isDestroyed()) v.webContents.invalidate();
+    if (this.active) this.active.repaint(why);
+  }
+
+  /** Checks the page in front still shows something, a moment after the window comes back. */
+  checkSoon(why) {
+    clearTimeout(this.checkTimer);
+    this.checkTimer = setTimeout(() => {
+      if (!this.alive || !this.active) return;
+      if (!this.active.alive) this.revive();
+      else this.active.checkPainted(why);
+    }, 400);
+  }
+
+  /**
+   * Opens the sections used most recently in the background, so going to them later is
+   * instant (only with "Keep sections loaded" on, and never more than the window keeps).
+   */
+  warmSections() {
+    if (!this.alive || this.wall || this.maxPages < 2 || !this.ctx.state.online) return;
+    const want = [];
+    for (const p of this.ctx.recentPaths()) {
+      const key = this.sectionOf(p);
+      if (key && key !== "account" && !this.pages.has(key) && !want.some((w) => w.key === key)) want.push({ key, p });
+      if (want.length >= 2) break;
+    }
+    for (const { key, p } of want) {
+      if (this.pages.size >= this.maxPages) break;
+      this.ctx.log(`warming ${key}`);
+      const page = this.pageFor(key);
+      if (page !== this.active) page.load(p);
+    }
   }
 
   /** A view for one of the app's own pages (title bar, layer), with the shell bridge. */
@@ -208,6 +270,7 @@ class ParityWindow {
 
   reload(hard = false) {
     if (!this.active) return;
+    if (!this.active.alive) { this.revive(); return; }
     if (hard) { this.active.wc.reloadIgnoringCache(); return; }
     this.ctx.state.online = null; // checks the website again, so it can leave the saved copy
     this.active.load(this.active.path || this.lastGoodPath || "/");
@@ -265,8 +328,25 @@ class ParityWindow {
 
   focusContent() {
     if (!this.alive || !this.win.isFocused()) return;
-    if (this.overlayMode) this.overlay.webContents.focus();
-    else this.active?.wc.focus();
+    if (this.overlayMode) { if (!this.overlay.webContents.isDestroyed()) this.overlay.webContents.focus(); }
+    else if (this.active?.alive) this.active.wc.focus();
+  }
+
+  /**
+   * The page in front lost its contents (closed under it): a fresh page takes its place at
+   * the same address, instead of a black view that throws on every key (DEC-0059).
+   */
+  revive() {
+    const dead = this.active;
+    if (!this.alive || !dead || dead.alive) return;
+    this.ctx.log(`page in front was gone, opening ${dead.path || dead.wantPath || "/"} again`);
+    const p = dead.path || dead.wantPath || this.lastGoodPath || "/";
+    this.pages.delete(dead.key);
+    try { this.win.contentView.removeChildView(dead.view); } catch { /* already gone */ }
+    this.active = null;
+    const page = this.pageFor(dead.key);
+    this.show(page);
+    page.load(p);
   }
 
   // ------------------------------------------------------------ title bar and layer
@@ -369,7 +449,7 @@ class ParityWindow {
   }
 
   zoom(step) {
-    const wc = this.active?.wc;
+    const wc = this.active?.alive ? this.active.wc : null;
     if (!wc) return;
     wc.setZoomLevel(step === 0 ? 0 : wc.getZoomLevel() + step);
   }
@@ -414,12 +494,15 @@ class ParityWindow {
 
   focus() {
     if (!this.alive) return;
+    if (!this.revealed && this.wantShow) { this.focusOnReveal = true; return; }
     if (this.win.isMinimized()) this.win.restore();
     this.win.show();
     this.win.focus();
   }
 
   destroyed() {
+    clearTimeout(this.revealTimer);
+    clearTimeout(this.checkTimer);
     for (const p of this.pages.values()) p.destroy();
     this.pages.clear();
     for (const v of [this.titlebar, this.bar, this.overlay]) if (!v.webContents.isDestroyed()) v.webContents.close();

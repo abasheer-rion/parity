@@ -2,6 +2,7 @@
 //   wall      a parity:// deep link while signed out opens the log-in wall; the title bar drags
 //   offline   with the website unreachable, the saved copy's log-in page shows, and Retry
 //   signedin  against the bundled site served locally: the menu, a section, a second window
+//   blank     a page that draws nothing reloads once, then shows Could not open with Retry
 // offline and signedin need build/web (`npm run web`); they are skipped without it.
 // Run: npm run test:app
 import { spawn } from "node:child_process";
@@ -21,6 +22,8 @@ function serve() {
   return new Promise((ok) => {
     const server = createServer((req, res) => {
       const p = decodeURIComponent(new URL(req.url, "http://x").pathname);
+      // A page that draws nothing, for the blank scenario.
+      if (p === "/__blank/") { res.writeHead(200, { "Content-Type": "text/html" }).end("<!doctype html><title>Blank</title><body></body>"); return; }
       let file = normalize(join(web, p));
       if (!file.startsWith(web)) { res.writeHead(403).end(); return; }
       try { if (statSync(file).isDirectory()) file = join(file, "index.html"); } catch { /* 404 below */ }
@@ -50,6 +53,7 @@ if (haveWeb) {
   const server = await serve();
   const url = `http://127.0.0.1:${server.address().port}`;
   ok = (await run("signedin", { PARITY_DEV_URL: url, PARITY_AUTH_BYPASS: "1" })) && ok;
+  ok = (await run("blank", { PARITY_DEV_URL: url, PARITY_AUTH_BYPASS: "1" })) && ok;
   server.close();
 } else {
   console.log("skip offline and signedin: no build/web (run npm run web)");

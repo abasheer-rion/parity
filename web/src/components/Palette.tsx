@@ -82,7 +82,7 @@ export function Palette({ report = null }: { report?: Report | null }) {
   const [q, setQ] = useState("");
   const [sel, setSel] = useState(0);
   const input = useRef<HTMLInputElement>(null);
-  const data = useDocs();
+  const data = useDocs(open);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

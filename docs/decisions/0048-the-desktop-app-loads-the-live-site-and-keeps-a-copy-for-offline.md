@@ -40,4 +40,5 @@ Version 0.1.1 of the app ([DEC-0041](0041-parity-as-an-installable-site-and-a-de
 
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
+- [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
 <!-- backlinks:end -->

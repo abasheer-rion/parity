@@ -11,7 +11,7 @@
 //   #/edges        Edge Lab: the idea checklist and the lessons (research, read only)
 //   #/settings     Settings
 import { LiveMini } from "../components/LiveMini";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { AppGuard } from "../auth";
 import { copyLink } from "../components/CopyLink";
 import { NotFound } from "../components/NotFound";
@@ -21,16 +21,19 @@ import { date } from "../lib/format";
 import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
-import { Dialog, Icon, Toaster } from "../ui";
-import { CompareView } from "./CompareView";
-import { EdgesView } from "./EdgesView";
-import { SearchView } from "./SearchView";
-import { SettingsView } from "./SettingsView";
+import { Dialog, ErrorBoundary, Icon, lazyPage, Toaster } from "../ui";
 import { TryView } from "./TryView";
-import { WhatIfView } from "./WhatIfView";
 import { KeyTable } from "./KeyTable";
 import { readSettings, VIEWS, writeSettings, type Settings, type View } from "./state";
 import "./lab.css";
+
+// Each view is its own file, loaded when opened; Try settings, the usual first view, is in
+// the main file (REF-0024).
+const CompareView = lazyPage(() => import("./CompareView").then((m) => ({ default: m.CompareView })));
+const EdgesView = lazyPage(() => import("./EdgesView").then((m) => ({ default: m.EdgesView })));
+const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default: m.SearchView })));
+const WhatIfView = lazyPage(() => import("./WhatIfView").then((m) => ({ default: m.WhatIfView })));
+const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
 import { Assistant } from "../assistant/Mount";
 
 export function LabApp() {
@@ -109,11 +112,13 @@ function LabShell() {
   const [report, setReport] = useState<Report | null>(null);
   const [runError, setRunError] = useState<string | null>(null);
   useEffect(() => { if (wanted) listBatches().then(setBatches).catch(() => setBatches([])); }, [wanted]);
+  // Try settings also needs each strategy's settings test, a second file loaded only for it.
+  const withTests = view === "try";
   useEffect(() => {
     if (!wanted) return;
     setRunError(null);
-    loadReport(batchId).then(setReport).catch((e: Error) => setRunError(e.message));
-  }, [wanted, batchId]);
+    loadReport(batchId, { sensitivity: withTests }).then(setReport).catch((e: Error) => setRunError(e.message));
+  }, [wanted, batchId, withTests]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -196,7 +201,11 @@ function LabShell() {
             ))}
           </nav>
         )}
-        <main id="main" tabIndex={-1} className="lb-main">{body}</main>
+        <main id="main" tabIndex={-1} className="lb-main">
+          <ErrorBoundary key={view} scope="page">
+            <Suspense fallback={<div className="lb-msg lb-loading" aria-busy="true">Loading</div>}>{body}</Suspense>
+          </ErrorBoundary>
+        </main>
       </div>
 
       <footer className="lb-legal">

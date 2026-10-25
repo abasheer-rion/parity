@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 57 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 58 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 22 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 18 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -33,11 +33,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- 2026-10-25 [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
 - 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
-- 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 
 ## intent
 
@@ -108,6 +108,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0056 | [Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0057 | [Blog and news pages with labelled posts and real bylines](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0058 | [One token file for every app and a lint that blocks raw values](decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
+| DEC-0059 | [A Parity page is never black, it shows a loading screen or says what went wrong](decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -195,6 +196,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## competitor
 

@@ -71,18 +71,33 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
     const to = res.status === 404 && (request.method === "GET" || request.method === "HEAD") ? appHashRedirect(url.pathname, url.search) : null;
     if (to) return new Response(null, { status: 302, headers: { Location: to, "Cache-Control": "private, no-store" } });
     const out = new Response(res.body, res);
-    out.headers.set("Cache-Control", "private, no-cache");
+    out.headers.set("Cache-Control", cacheFor(url.pathname, res.status));
     out.headers.append("Vary", "Cookie, Authorization");
     return out;
   }
 
-  if (url.pathname.startsWith("/data/")) {
+  // A code file asked for without a valid session (an expired one, say) gets a plain 401,
+  // never the log-in page in its place, so the app sees a failed file and can reload (REF-0024).
+  if (url.pathname.startsWith("/data/") || HASHED.test(url.pathname)) {
     return new Response("Sign in to see this.", { status: 401, headers: { "Cache-Control": "no-store" } });
   }
   const login = new URL("/login/", url);
   login.searchParams.set("next", url.pathname + url.search);
   return new Response(null, { status: 302, headers: { Location: login.pathname + login.search, "Cache-Control": "no-store" } });
 };
+
+// Built files have a hash of their contents in the name (vite), so a copy never goes stale.
+const HASHED = /^\/(app|research|sim|trade|academy|lab)\/assets\/[^/]+-[A-Za-z0-9_-]{8}\.(js|css|woff2?|png|svg|webp|jpg)$/;
+
+/**
+ * How long the browser may keep a signed-in answer. Hashed code files: a year without asking
+ * again (they are still private, so no shared cache keeps them). Pages and data: ask each
+ * time, which costs a small "not changed" answer when nothing changed.
+ */
+export function cacheFor(pathname: string, status = 200): string {
+  if (status === 200 && HASHED.test(pathname)) return "private, max-age=31536000, immutable";
+  return "private, no-cache";
+}
 
 async function valid(token: string): Promise<boolean> {
   try {

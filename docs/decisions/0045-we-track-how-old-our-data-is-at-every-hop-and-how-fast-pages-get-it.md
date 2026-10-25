@@ -66,7 +66,9 @@ The owner asked us to track how slow our data and refreshes are. Now every sourc
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [DEC-0053: Our own product analytics, opt-in, stored in Postgres](0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
+- [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
 - [REF-0022: Product analytics events](../reference/0022-product-analytics-events.md)
+- [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 <!-- backlinks:end -->

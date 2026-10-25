@@ -4,7 +4,7 @@
 // (DEC-0015): research is judged on evidence, not on what people click.
 import { Badge, CountUp, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, useResource } from "../ui";
 import { ledger } from "../lib/catalog";
-import { useDocs } from "../lib/docs";
+import { useDocIndex } from "../lib/docs";
 import { date, num } from "../lib/format";
 import { loadSearch } from "../lib/data";
 import { academyUrl } from "../lib/space";
@@ -14,7 +14,7 @@ import { researchInsights } from "../lib/insights";
 import { Insights } from "../components/Insights";
 
 export function ResearchHome({ report }: { report: Report }) {
-  const docs = useDocs();
+  const docs = useDocIndex();
   // Shared with the Strategy search page: whichever opens first, the other draws at once.
   const searchRes = useResource("search", loadSearch);
   const search = searchRes.data ?? null;

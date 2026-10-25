@@ -2,6 +2,7 @@
 // of the product or research app, only the shared tokens, the UI library and the course code.
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ErrorBoundary } from "../ui/boundary";
 import { applyTheme } from "../lib/prefs";
 import { startPwa } from "../pwa/install";
 import { AcademyApp } from "./AcademyApp";
@@ -20,6 +21,8 @@ startRum("academy", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AcademyApp />
+    <ErrorBoundary scope="app">
+      <AcademyApp />
+    </ErrorBoundary>
   </StrictMode>,
 );
