@@ -12,6 +12,8 @@ import "./markets/markets.css";
 import "./Competitors.css";
 
 const COMPARISON = "CMP-0001";
+/** Below this many items a product is too thin to rank (the CMP docs use the same line). */
+const MIN_RANK = 20;
 
 export function Competitors({ focus }: { focus?: string }) {
   const [doc, setDoc] = useState<ProfilesDoc | null | undefined>(undefined);
@@ -49,19 +51,19 @@ export function Competitors({ focus }: { focus?: string }) {
         <div className="mk-table-scroll">
           <table className="mtable dense">
             <thead>
-              <tr><th scope="col">Product</th><th scope="col" className="num">Items</th><th scope="col" className="num">Praise share</th><th scope="col">Most praised</th><th scope="col">Most complained about</th><th scope="col">Last 12 months</th></tr>
+              <tr><th scope="col">Product</th><th scope="col" className="num">Items</th><th scope="col" className="num">Praise share</th><th scope="col">Most praised</th><th scope="col">Most complained about</th><th scope="col">12 months</th></tr>
             </thead>
             <tbody>
               {rows.map((p) => {
                 const s = doc?.products[p.id];
-                const share = s ? praiseShare(s) : null;
+                const share = s && s.feedback >= MIN_RANK ? praiseShare(s) : null;
                 return (
                   <tr key={p.id} className={selected?.id === p.id ? "on" : undefined}>
                     <th scope="row"><a href={`#/competitors/${p.id}`}>{p.name}</a> <span className="muted small">{GROUPS[p.group]}</span></th>
                     <td className="num">{s ? s.feedback.toLocaleString() : "n/a"}</td>
                     <td className="num">{share == null ? "n/a" : `${Math.round(share * 100)}%`}</td>
-                    <td>{s?.praised[0] ? `${s.praised[0].label} (${s.praised[0].count})` : "n/a"}</td>
-                    <td>{s?.complaints[0] ? `${s.complaints[0].label} (${s.complaints[0].count})` : "n/a"}</td>
+                    <td>{s && s.feedback >= MIN_RANK && s.praised[0] ? `${s.praised[0].label} (${s.praised[0].count})` : "n/a"}</td>
+                    <td>{s && s.feedback >= MIN_RANK && s.complaints[0] ? `${s.complaints[0].label} (${s.complaints[0].count})` : "n/a"}</td>
                     <td>{s ? <Spark trend={s.trend} /> : "n/a"}</td>
                   </tr>
                 );
