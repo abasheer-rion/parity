@@ -1,14 +1,14 @@
 // The news archive and the news impact engine on the site. The deploy job's
 // `parity news export` writes news/archive/*.json and news/impact.json; shapes match
 // engine/src/parity/news/export.py (build_archive, build_impact) and study.py.
-import { source } from "./data";
+import { isMissing, source } from "./data";
 import type { NewsSource, Unit } from "./news";
 
 const base = source === "local" ? "/local/news" : "/data/news";
 
 async function get<T>(name: string): Promise<T> {
   const res = await fetch(`${base}/${name}`, { cache: "no-cache" });
-  if (!res.ok) throw new Error(res.status === 404 ? "The news archive has not been exported yet. Run `parity news backfill` then `parity news export`." : `Could not load ${name} (${res.status}).`);
+  if (!res.ok || isMissing(res)) throw new Error(isMissing(res) ? (source === "local" ? "The news archive has not been exported yet. Run `parity news backfill` then `parity news export`." : "The news archive has not been published yet.") : `Could not load ${name} (${res.status}).`);
   return (await res.json()) as T;
 }
 

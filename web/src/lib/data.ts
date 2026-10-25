@@ -12,9 +12,19 @@ export const source: Source = import.meta.env?.DEV ? "local" : "static";
 
 export interface BatchInfo extends BatchSummary { kind?: string; run_id?: string | null }
 
+/**
+ * True when a data file is not there. The host answers a missing file with the app's HTML
+ * page and a 200 (single-page fallback), so a 404 alone is not enough: without this check
+ * the page shows "Unexpected token '<'" instead of saying the file is missing.
+ */
+export function isMissing(res: Response): boolean {
+  return res.status === 404 || (res.ok && (res.headers.get("content-type") ?? "").includes("text/html"));
+}
+
 async function json<T>(url: string): Promise<T> {
   const res = await fetch(url, { cache: "no-cache" });
-  if (!res.ok) throw new Error(res.status === 404 ? "No research runs have been published yet." : `Could not load ${url} (${res.status}).`);
+  if (isMissing(res)) throw new Error("No research runs have been published yet.");
+  if (!res.ok) throw new Error(`Could not load ${url} (${res.status}).`);
   return (await res.json()) as T;
 }
 
@@ -52,7 +62,8 @@ export interface SearchDoc {
 export async function loadSearch(): Promise<SearchDoc> {
   const url = source === "local" ? "/local/search.json" : "/data/search.json";
   const res = await fetch(url, { cache: "no-cache" });
-  if (!res.ok) throw new Error(res.status === 404 ? "The strategy search has not sent any results yet." : `Could not load the search (${res.status}).`);
+  if (isMissing(res)) throw new Error("The strategy search has not sent any results yet.");
+  if (!res.ok) throw new Error(`Could not load the search (${res.status}).`);
   const doc = (await res.json()) as SearchDoc;
   rumAge("search", doc.generated_at);
   return doc;

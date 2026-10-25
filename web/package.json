@@ -12,6 +12,8 @@
     "test": "vitest run",
     "a11y": "node scripts/a11y.mjs",
     "cls": "node scripts/cls.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "crawl": "node scripts/crawl.mjs",
     "verify:network": "node scripts/verify-network.mjs",
     "content": "node --experimental-strip-types scripts/content/render.ts",
     "deeplinks": "node scripts/deeplinks.mjs",

@@ -38,7 +38,8 @@ export function Screen({ id, title, lead, wait, children }: { id: string; title:
   return (
     <div className="pa-screen" key={id} data-wait={wait || undefined} aria-busy={wait || undefined}>
       <Heading className="pa-title" id={titleId}>{title}</Heading>
-      {lead && <p className="pa-lead">{lead}</p>}
+      {/* A div, not a p: the lead can hold the email row, and a p cannot contain a div. */}
+      {lead && <div className="pa-lead">{lead}</div>}
       {children}
     </div>
   );

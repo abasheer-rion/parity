@@ -5,7 +5,7 @@
 //
 // Percent fields from the engine are already in percent (10.95 means 10.95%).
 import { useEffect, useState } from "react";
-import { source } from "./data";
+import { isMissing, source } from "./data";
 import { useResource } from "../ui/resource";
 import type { PrivateDoc } from "./privateMarkets";
 import type { Point } from "./types";
@@ -88,9 +88,9 @@ const cache = new Map<string, Promise<unknown>>();
 function get<T>(name: string): Promise<T> {
   if (!cache.has(name)) {
     cache.set(name, fetch(`${base}/${name}`, { cache: "no-cache" }).then(async (res) => {
-      if (!res.ok) {
+      if (!res.ok || isMissing(res)) {
         cache.delete(name);
-        throw new Error(res.status === 404 ? "No markets data has been exported yet. Run `parity markets fetch` then `parity markets export`." : `Could not load markets data (${res.status}).`);
+        throw new Error(isMissing(res) ? (source === "local" ? "No markets data has been exported yet. Run `parity markets fetch` then `parity markets export`." : "Markets data has not been published yet.") : `Could not load markets data (${res.status}).`);
       }
       const doc = (await res.json()) as { fetched_at?: string; generated_at?: string };
       rumAge(`markets/${name}`, doc.fetched_at ?? doc.generated_at);

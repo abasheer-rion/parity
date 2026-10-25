@@ -43,7 +43,9 @@
 .ui-btn-md:has(> .icon:last-child) { padding-right: 12px; }
 .ui-btn-lg { min-height: 40px; padding: 8px 32px; }
 .ui-btn-lg:has(> .icon:first-child) { padding-left: 28px; }
-.ui-btn-full { width: 100%; }
+/* A full-width button in a narrow column wraps its label instead of running past its edges. */
+.ui-btn-full { width: 100%; white-space: normal; text-align: center; }
+.ui-btn-lg.ui-btn-full { padding-inline: 16px; }
 .ui-btn .icon { color: var(--ds-icon-default); }
 .ui-btn-primary { background: var(--ds-background-primary); color: var(--ds-text-on-primary); }
 .ui-btn-primary .icon { color: var(--ds-icon-on-primary); }
@@ -430,6 +432,9 @@
 /* A page that has just opened eases in; a skeleton's replacement fades in over it. */
 /* backwards, not both: once it has played no transform stays on the page, so fixed popups and dialogs inside it still cover the screen. */
 .ui-route { animation: ui-route var(--dur-3) var(--ease-out) backwards; }
+/* Long URLs and file paths in prose wrap instead of pushing the page sideways on a phone. */
+.ui-route :where(p, li, .help) { overflow-wrap: anywhere; }
+.ui-route :where(td, th) :where(p, li) { overflow-wrap: normal; }
 @keyframes ui-route { from { opacity: 0; transform: translateY(4px); } }
 .ui-arrive { animation: ui-fade var(--dur-3) var(--ease-out) both; }
 

@@ -6,6 +6,7 @@ import { Button } from "../../ui";
 import { Term } from "../Learn";
 import { addPractice, day, loadCrypto, pctText, positionValue, removePractice, updatePractice, usd, useMarket, usePractice, type Practice as Position } from "../../lib/markets";
 import { Attribution, Banner } from "./shared";
+import { localDay } from "../../lib/format";
 
 function addFromHash(): string {
   const q = window.location.hash.split("?")[1] ?? "";
@@ -32,7 +33,7 @@ export function Practice() {
   const add = () => {
     const amt = Number(amount);
     if (!(amt > 0)) return;
-    const today = new Date().toISOString().slice(0, 10);
+    const today = localDay();
     if (kind === "coin") {
       const c = coins.find((x) => x.id === coinId);
       if (!c?.price_usd) return;

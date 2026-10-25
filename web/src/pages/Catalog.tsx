@@ -1,5 +1,6 @@
 import { Title } from "../components/Shell";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useHashState } from "../lib/deeplink";
 import { Card } from "../ui/layout";
 import { algorithms, bestReported, STAGES } from "../lib/catalog";
 import type { Algorithm } from "../lib/types";
@@ -10,11 +11,15 @@ type SortKey = "id" | "year" | "sharpe" | "relevance" | "stage";
 const uniq = (xs: string[]) => [...new Set(xs)].sort();
 
 export function Catalog() {
-  const [q, setQ] = useState("");
-  const [family, setFamily] = useState("");
-  const [market, setMarket] = useState("");
-  const [stageMin, setStageMin] = useState(0);
-  const [sort, setSort] = useState<SortKey>("relevance");
+  // The filters live in the link, so Copy link and the back button reopen this view (DEC-0038).
+  const [q, setQ] = useHashState("q");
+  const [family, setFamily] = useHashState("family");
+  const [market, setMarket] = useHashState("market");
+  const [stageRaw, setStageRaw] = useHashState("stage", "0");
+  const stageMin = Number(stageRaw) || 0;
+  const setStageMin = (n: number) => setStageRaw(String(n));
+  const [sortRaw, setSort] = useHashState("sort", "relevance");
+  const sort: SortKey = (["id", "year", "sharpe", "relevance", "stage"] as const).includes(sortRaw as SortKey) ? (sortRaw as SortKey) : "relevance";
 
   const families = uniq(algorithms.map((a) => a.family));
   const markets = uniq(algorithms.flatMap((a) => a.markets));
