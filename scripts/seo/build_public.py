@@ -43,7 +43,8 @@ LOGO = "/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg"
 STAGES = ["catalogued", "sourced", "hypothesis", "implemented", "registered", "official", "reproduced", "forward", "verdict"]
 NOTE_TYPES = {"decisions": "Decision", "research": "Research note", "reference": "Reference"}
 LEGAL = [("/legal/privacy/", "Privacy"), ("/legal/terms/", "Terms"), ("/legal/cookies/", "Cookies"),
-         ("/legal/accessibility/", "Accessibility"), ("/legal/risk/", "Risk")]
+         ("/legal/accessibility/", "Accessibility"), ("/legal/risk/", "Risk"),
+         ("/legal/regulatory/", "Regulatory")]
 DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations "
               "on past data.")
 
@@ -744,7 +745,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/"]
+STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:

@@ -718,6 +718,7 @@ function buildMenu() {
         { label: "Risk notice", click: () => openPath("/legal/risk/") },
         { label: "Privacy policy", click: () => openPath("/legal/privacy/") },
         { label: "Terms of service", click: () => openPath("/legal/terms/") },
+        { label: "Regulatory status", click: () => openPath("/legal/regulatory/") },
         { type: "separator" },
         { label: "Open parity.endyland.com in the browser", click: () => shell.openExternal(ORIGIN) },
         { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },

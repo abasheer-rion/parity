@@ -15667,7 +15667,8 @@
       "used_in": [
         "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "note": "Linked in this repo as: CFTC advisory",
       "metadata": {
@@ -22163,7 +22164,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0004-glossary.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -22228,7 +22230,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0004-glossary.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -25707,7 +25710,8 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
+        "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29560,7 +29564,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29581,7 +29586,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29623,7 +29629,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29665,7 +29672,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29686,7 +29694,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29707,7 +29716,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -29728,7 +29738,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+        "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
       ],
       "metadata": {
         "source": "repo",
@@ -36882,6 +36893,2070 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-728f3a2d",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-2(a)(11)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8c501c52",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC Release IA-1092",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/rules/interp/1987/ia-1092.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-799233d2",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "Lowe v. SEC, 472 U.S. 181 (1985)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/supremecourt/text/472/181",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6bf1c7a2",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-3a",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-3a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9344221",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 275.203A-2(e)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/275.203A-2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-422993cc",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-18a(d)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-18a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-59e1e38c",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 80b-6",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/80b-6",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a96b27e5",
+      "type": "web-page",
+      "authors": [
+        "NASAA"
+      ],
+      "year": null,
+      "title": "NASAA, contact your state or provincial securities regulator",
+      "venue": "nasaa.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nasaa.org/contact-your-regulator/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f4d72904",
+      "type": "regulator",
+      "authors": [
+        "eCFR"
+      ],
+      "year": null,
+      "title": "17 CFR 275.206(4)-1, investment adviser marketing",
+      "venue": "ecfr.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ecfr.gov/current/title-17/chapter-II/part-275/section-275.206(4)-1",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-207d0d70",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 77q",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/77q",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-90f193cf",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 78c(a)(4)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/78c",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-241a7d72",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 78o",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/78o",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-45543912",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "proposed exemptive order, Release 34-90112",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/files/rules/exorders/2020/34-90112.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-566dbe39",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2040",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2040",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b16de26a",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2210",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2210",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bbb7aab6",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA Rule 2214",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2214",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-72320f80",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA BrokerCheck",
+      "venue": "brokercheck.finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://brokercheck.finra.org/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6084c5e4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 1a(12)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/1a",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-573ac97e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 6m(1)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/6m",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0f361ed9",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 4.14(a)(9)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/4.14",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-565cba07",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "7 U.S.C. 6o",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/7/6o",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d553dc5b",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 5.1(e)(1)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/5.1",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-001d4780",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "17 CFR 5.3(a)(3)",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/17/5.3",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3408c5f4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 45",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/45",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-93f60550",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 255",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-255",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1b543154",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "FTC's Endorsement Guides: what people are asking",
+      "venue": "ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cd5097d5",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 465",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-465",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c8b549db",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 8403",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/8403",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-edae72e8",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Bus. and Prof. Code 17600 and following",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=3.&chapter=1.&article=9",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f7d3a3f4",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. chapter 103",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/chapter-103",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4de61b5e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 316",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-316",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-10eeb643",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "CAN-SPAM Act: a compliance guide for business",
+      "venue": "ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c998e9d1",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. chapter 91",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/chapter-91",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-845b11ff",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 312",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-312",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ea064bc1",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "42 U.S.C. 12182",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/42/12182",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e87cb362",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "DOJ guidance on web accessibility and the ADA",
+      "venue": "ada.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ada.gov/resources/web-guidance/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ced4ac40",
+      "type": "web-page",
+      "authors": [
+        "W3C"
+      ],
+      "year": null,
+      "title": "WCAG 2.2",
+      "venue": "w3.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4535bffd",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Directive 2019/882",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2019/882/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-36df9ddb",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "File an ADA complaint",
+      "venue": "ada.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ada.gov/file-a-complaint/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d58c12ea",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "15 U.S.C. 6809",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/15/6809",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0498644e",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR Part 314",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/part-314",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d3e5dc6a",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "16 CFR 314.2",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/16/314.2",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d6abc0ba",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "31 U.S.C. 5312",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/uscode/text/31/5312",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cfb3dd9b",
+      "type": "web-page",
+      "authors": [
+        "Legal Information Institute"
+      ],
+      "year": null,
+      "title": "31 CFR 1010.100",
+      "venue": "law.cornell.edu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.law.cornell.edu/cfr/text/31/1010.100",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-32e3696e",
+      "type": "web-page",
+      "authors": [
+        "FinCEN"
+      ],
+      "year": null,
+      "title": "FinCEN 2019 guidance on crypto business models",
+      "venue": "fincen.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-certain-business-models",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-94417ffa",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Civ. Code 1798.100 and following",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?division=3.&part=4.&lawCode=CIV&title=1.81.5",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a1d8aeae",
+      "type": "web-page",
+      "authors": [
+        "California Privacy Protection Agency"
+      ],
+      "year": null,
+      "title": "CCPA monetary threshold CPI adjustment",
+      "venue": "cppa.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cppa.ca.gov/regulations/cpi_adjustment.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e1c841a6",
+      "type": "web-page",
+      "authors": [
+        "California Legislature"
+      ],
+      "year": null,
+      "title": "Cal. Civ. Code 1798.140, CCPA definitions",
+      "venue": "leginfo.legislature.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.140",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89b5bf18",
+      "type": "web-page",
+      "authors": [
+        "Virginia General Assembly"
+      ],
+      "year": null,
+      "title": "Va. Code 59.1-575 and following",
+      "venue": "law.lis.virginia.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://law.lis.virginia.gov/vacodefull/title59.1/chapter53/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-42d669e4",
+      "type": "web-page",
+      "authors": [
+        "Colorado Attorney General"
+      ],
+      "year": null,
+      "title": "Colorado Privacy Act, Colorado Attorney General",
+      "venue": "coag.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://coag.gov/resources/colorado-privacy-act/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5c25e6cd",
+      "type": "web-page",
+      "authors": [
+        "Texas Legislature"
+      ],
+      "year": null,
+      "title": "Tex. Bus. and Com. Code ch. 541",
+      "venue": "statutes.capitol.texas.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/BC/htm/BC.541.htm",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b4b6d1cb",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "6 Del. C. ch. 12D",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title6/c012d/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d0fec03f",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "6 Del. C. ch. 12C",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title6/c012c/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c120834a",
+      "type": "web-page",
+      "authors": [
+        "Delaware General Assembly"
+      ],
+      "year": null,
+      "title": "8 Del. C. 132",
+      "venue": "delcode.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://delcode.delaware.gov/title8/c001/sc01/index.html",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-af44660b",
+      "type": "web-page",
+      "authors": [
+        "Delaware Division of Corporations"
+      ],
+      "year": null,
+      "title": "Delaware franchise taxes and annual reports",
+      "venue": "corp.delaware.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://corp.delaware.gov/paytaxes/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b0b2159",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation (EU) 2016/679",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5816f5ff",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "UK GDPR",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/eur/2016/679/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a96d54ca",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Data Protection Act 2018",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-16d92c90",
+      "type": "web-page",
+      "authors": [
+        "European Data Protection Board"
+      ],
+      "year": null,
+      "title": "EDPB members, the EU data protection authorities",
+      "venue": "edpb.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.edpb.europa.eu/about-edpb/about-edpb/members_en",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-366ccbbd",
+      "type": "web-page",
+      "authors": [
+        "UK Information Commissioner's Office"
+      ],
+      "year": null,
+      "title": "ICO, make a complaint",
+      "venue": "ico.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ico.org.uk/make-a-complaint/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3eab3b6f",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "ePrivacy Directive 2002/58/EC",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2002/58/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c28cae6b",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Privacy and Electronic Communications Regulations 2003, regulation 6",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2003/2426/regulation/6",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-49e6435f",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Directive 2014/65/EU",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/dir/2014/65/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5df74e1b",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "Delegated Regulation 2017/565, Article 9",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/eur/2017/565/article/9",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-79878805",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 596/2014",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2014/596/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fe936d8d",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Delegated Regulation 2016/958",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg_del/2016/958/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-982ce5eb",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 2023/1114",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-92ba734e",
+      "type": "web-page",
+      "authors": [
+        "European Union"
+      ],
+      "year": null,
+      "title": "Regulation 2022/2065",
+      "venue": "eur-lex.europa.eu",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-93fa1a99",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "FSMA s21",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/ukpga/2000/8/section/21",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-429de9ef",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "SI 2005/1529",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2005/1529/contents",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4fa3b8bc",
+      "type": "web-page",
+      "authors": [
+        "UK legislation.gov.uk"
+      ],
+      "year": null,
+      "title": "RAO article 54",
+      "venue": "legislation.gov.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.legislation.gov.uk/uksi/2001/544/article/54",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fdf44536",
+      "type": "regulator",
+      "authors": [
+        "UK Financial Conduct Authority"
+      ],
+      "year": null,
+      "title": "FCA PERG 7",
+      "venue": "handbook.fca.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.handbook.fca.org.uk/handbook/PERG/7/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9addb8c1",
+      "type": "regulator",
+      "authors": [
+        "UK Financial Conduct Authority"
+      ],
+      "year": null,
+      "title": "FCA PERG 8",
+      "venue": "handbook.fca.org.uk",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.handbook.fca.org.uk/handbook/PERG/8/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4b357e64",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC Crypto Task Force",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/about/crypto-task-force",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ef3848d4",
+      "type": "regulator",
+      "authors": [
+        "US Commodity Futures Trading Commission"
+      ],
+      "year": null,
+      "title": "CFTC press release 8680-23",
+      "venue": "cftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/PressRoom/PressReleases/8680-23",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4135bcba",
+      "type": "web-page",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "Investor.gov, SEC Office of Investor Education and Advocacy",
+      "venue": "investor.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.investor.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-273b596b",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC tips, complaints and referrals",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/tcr",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ce2acb3d",
+      "type": "regulator",
+      "authors": [
+        "US Securities and Exchange Commission"
+      ],
+      "year": null,
+      "title": "SEC investor complaint form",
+      "venue": "help.sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.sec.gov/s/investor-complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fb240486",
+      "type": "regulator",
+      "authors": [
+        "US Commodity Futures Trading Commission"
+      ],
+      "year": null,
+      "title": "CFTC, submit a tip or complaint",
+      "venue": "cftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cftc.gov/complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-11d39c8a",
+      "type": "regulator",
+      "authors": [
+        "National Futures Association"
+      ],
+      "year": null,
+      "title": "NFA BASIC, background affiliation status information center",
+      "venue": "nfa.futures.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nfa.futures.org/basicnet/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-54f5a239",
+      "type": "regulator",
+      "authors": [
+        "FINRA"
+      ],
+      "year": null,
+      "title": "FINRA, file a complaint",
+      "venue": "finra.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.finra.org/investors/have-problem/file-complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-730daf38",
+      "type": "regulator",
+      "authors": [
+        "US Federal Trade Commission"
+      ],
+      "year": null,
+      "title": "FTC ReportFraud",
+      "venue": "reportfraud.ftc.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://reportfraud.ftc.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e7b7c34c",
+      "type": "web-page",
+      "authors": [
+        "NAAG"
+      ],
+      "year": null,
+      "title": "NAAG, find my attorney general",
+      "venue": "naag.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.naag.org/find-my-ag/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a565123",
+      "type": "web-page",
+      "authors": [
+        "California Attorney General"
+      ],
+      "year": null,
+      "title": "California Attorney General, CCPA",
+      "venue": "oag.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://oag.ca.gov/privacy/ccpa",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4cd601d5",
+      "type": "web-page",
+      "authors": [
+        "California Privacy Protection Agency"
+      ],
+      "year": null,
+      "title": "California Privacy Protection Agency, file a complaint",
+      "venue": "cppa.ca.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cppa.ca.gov/webapplications/complaint",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7f9ea358",
+      "type": "web-page",
+      "authors": [
+        "US Department of Justice"
+      ],
+      "year": null,
+      "title": "US Department of Justice Civil Rights Division, report a violation",
+      "venue": "civilrights.justice.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.civilrights.justice.gov/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     }
