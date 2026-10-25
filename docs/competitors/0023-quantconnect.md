@@ -48,6 +48,17 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **47 public items** that name QuantConnect (GitHub issues 32, Hacker News 14, Stack Exchange 1).
+
+| | Count |
+| --- | --- |
+| Praise | 9 |
+| Complaints | 15 |
+| Neither | 23 |
+| Praise share | 38% |
+
+- Most praised themes: API and automation (3), Market data and quotes (3), Community and copy trading (3).
+- Most complained-about themes: Placing orders (7), Crashes and bugs (7), Scanners, alerts and tools (6).
 <!-- collector:end -->
 
 From Hacker News and public comments on the Strategies pages. No QuantConnect app exists on the App Store.

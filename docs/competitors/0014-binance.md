@@ -48,6 +48,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **372 public items** that name Binance (Hacker News 288, GitHub issues 48, Stack Exchange 36).
+
+| | Count |
+| --- | --- |
+| Praise | 49 |
+| Complaints | 102 |
+| Neither | 221 |
+| Praise share | 32% |
+
+- Most praised themes: Market data and quotes (26), Fees and pricing (17), API and automation (11).
+- Most complained-about themes: Market data and quotes (37), API and automation (36), Crashes and bugs (34).
+- UK App Store, app 1436799971: 4.65 stars from 120,950 ratings.
 <!-- collector:end -->
 
 From the public App Store review feeds (Binance UK app 4.65 stars from 120,950 ratings; Binance.US 4.21 from 111,063; both checked 24 October 2026). Of the 100 most recent UK reviews, 63 were five stars and 25 one star.

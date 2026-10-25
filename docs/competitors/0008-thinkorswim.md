@@ -47,6 +47,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **29 public items** that name thinkorswim (Hacker News 25, Stack Exchange 4).
+
+| | Count |
+| --- | --- |
+| Praise | 8 |
+| Complaints | 6 |
+| Neither | 15 |
+| Praise share | 57% |
+
+- Most praised themes: Charts and indicators (3), Customisation and shortcuts (2), Fees and pricing (2).
+- Most complained-about themes: Mobile app (3), Outages and downtime (1), Community and copy trading (1).
+- US App Store, app 299366785: 4.74 stars from 325,316 ratings.
 <!-- collector:end -->
 
 From our own reading (App Store listing, Hacker News, stockbrokers.com):

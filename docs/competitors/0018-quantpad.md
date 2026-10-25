@@ -49,6 +49,9 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **0 public items** that name QuantPad.
+
+Too few to rank themes (under 20). The notes below rest on our own reading.
 <!-- collector:end -->
 
 We found no independent reviews. There is no App Store app, no Hacker News thread and no GitHub issue traffic beyond one small repo (6 stars). Themes below are **unverified** guesses from the product page only.

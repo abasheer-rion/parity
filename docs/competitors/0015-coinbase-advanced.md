@@ -46,6 +46,20 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **92 public items** that name Coinbase Advanced (GitHub issues 47, Hacker News 45).
+
+| | Count |
+| --- | --- |
+| Praise | 8 |
+| Complaints | 34 |
+| Neither | 50 |
+| Praise share | 19% |
+
+- Most praised themes: Deposits and withdrawals (1), Trust and safety (1), Fees and pricing (1).
+- Most complained-about themes: Crashes and bugs (20), API and automation (15), Market data and quotes (6).
+- US App Store, app 886427730: 4.68 stars from 1,797,988 ratings.
+- 25 status page incidents in the last 90 days.
+- 9 releases or changelog entries in the last 90 days.
 <!-- collector:end -->
 
 From the public App Store review feed for the main Coinbase app (4.68 stars from about 1.8 million US ratings, checked 24 October 2026). Advanced lives inside that app, so most reviews are about Coinbase in general. Of the 100 most recent US reviews, 54 were five stars and 39 one star.

@@ -48,6 +48,9 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **0 public items** that name FX Blue.
+
+Too few to rank themes (under 20). The notes below rest on our own reading.
 <!-- collector:end -->
 
 Little public feedback exists. The MyTrader iOS app has no ratings yet ([App Store](https://apps.apple.com/us/app/mytrader/id1489304242), updated 22 October 2026). We found no Hacker News threads. FX Blue runs a Discord, which we did not read. Themes below come from what the FAQ answers, so they are **unverified** as user opinion.

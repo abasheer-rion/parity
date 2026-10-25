@@ -47,6 +47,17 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **114 public items** that name Hyperliquid (Hacker News 77, GitHub issues 37).
+
+| | Count |
+| --- | --- |
+| Praise | 17 |
+| Complaints | 28 |
+| Neither | 69 |
+| Praise share | 38% |
+
+- Most praised themes: API and automation (9), Fees and pricing (7), Community and copy trading (5).
+- Most complained-about themes: API and automation (21), Crashes and bugs (12), Market data and quotes (10).
 <!-- collector:end -->
 
 Hyperliquid has no official App Store app, so there is no review feed. From Hacker News threads and the docs:

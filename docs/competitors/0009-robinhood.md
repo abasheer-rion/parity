@@ -47,6 +47,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **111 public items** that name Robinhood (Hacker News 111).
+
+| | Count |
+| --- | --- |
+| Praise | 27 |
+| Complaints | 22 |
+| Neither | 62 |
+| Praise share | 55% |
+
+- Most praised themes: Fees and pricing (6), Mobile app (4), Market data and quotes (3).
+- Most complained-about themes: Deposits and withdrawals (10), Trust and safety (6), Crashes and bugs (3).
+- US App Store, app 938003185: 4.30 stars from 4,892,125 ratings.
 <!-- collector:end -->
 
 From our own reading (App Store listing, Hacker News, stockbrokers.com):

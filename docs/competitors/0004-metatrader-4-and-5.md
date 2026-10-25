@@ -47,6 +47,19 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **47 public items** that name MetaTrader 4 and 5 (Hacker News 40, Stack Exchange 7).
+
+| | Count |
+| --- | --- |
+| Praise | 18 |
+| Complaints | 11 |
+| Neither | 18 |
+| Praise share | 62% |
+
+- Most praised themes: API and automation (12), Speed and lag (7), Market data and quotes (6).
+- Most complained-about themes: API and automation (8), Community and copy trading (4), Crashes and bugs (3).
+- US App Store, app 496212596: 4.79 stars from 81,652 ratings.
+- US App Store, app 413251709: 4.79 stars from 85,727 ratings.
 <!-- collector:end -->
 
 From the US App Store public review feeds and Hacker News:

@@ -45,6 +45,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **31 public items** that name Webull (Hacker News 24, Stack Exchange 7).
+
+| | Count |
+| --- | --- |
+| Praise | 13 |
+| Complaints | 3 |
+| Neither | 15 |
+| Praise share | 81% |
+
+- Most praised themes: Fees and pricing (4), Community and copy trading (3), Customer support (2).
+- Most complained-about themes: Crashes and bugs (1), Market data and quotes (1).
+- US App Store, app 1179213067: 4.70 stars from 342,722 ratings.
 <!-- collector:end -->
 
 From our own reading (App Store listing, Hacker News, stockbrokers.com):

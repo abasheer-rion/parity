@@ -47,6 +47,19 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **270 public items** that name TradingView (Hacker News 222, Stack Exchange 30, GitHub issues 18).
+
+| | Count |
+| --- | --- |
+| Praise | 59 |
+| Complaints | 50 |
+| Neither | 161 |
+| Praise share | 54% |
+
+- Most praised themes: Charts and indicators (31), Market data and quotes (22), API and automation (19).
+- Most complained-about themes: Charts and indicators (26), Market data and quotes (13), Crashes and bugs (13).
+- US App Store, app 1205990992: 4.84 stars from 420,687 ratings.
+- 2 releases or changelog entries in the last 90 days.
 <!-- collector:end -->
 
 From the US App Store public review feed and Hacker News:

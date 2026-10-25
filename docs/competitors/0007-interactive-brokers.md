@@ -49,6 +49,19 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **534 public items** that name Interactive Brokers (Hacker News 357, Stack Exchange 103, GitHub issues 74).
+
+| | Count |
+| --- | --- |
+| Praise | 127 |
+| Complaints | 129 |
+| Neither | 278 |
+| Praise share | 50% |
+
+- Most praised themes: API and automation (53), Look and layout (39), Speed and lag (33).
+- Most complained-about themes: API and automation (43), Crashes and bugs (42), Market data and quotes (34).
+- US App Store, app 454558592: 4.50 stars from 11,559 ratings.
+- US App Store, app 1604776354: 4.29 stars from 212 ratings.
 <!-- collector:end -->
 
 From the US App Store public review feed (IBKR Mobile 4.5 stars from 11,559 ratings; GlobalTrader 4.3 from 212, checked 24 October 2026) and Hacker News:

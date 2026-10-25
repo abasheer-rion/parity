@@ -46,6 +46,19 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **47 public items** that name eToro (Hacker News 36, Stack Exchange 11).
+
+| | Count |
+| --- | --- |
+| Praise | 11 |
+| Complaints | 7 |
+| Neither | 29 |
+| Praise share | 61% |
+
+- Most praised themes: Deposits and withdrawals (3), Trust and safety (2), Learning and paper trading (2).
+- Most complained-about themes: Customer support (2), Community and copy trading (2), Crashes and bugs (2).
+- US App Store, app 674984916: 4.39 stars from 9,966 ratings.
+- 9 status page incidents in the last 90 days.
 <!-- collector:end -->
 
 From the public App Store review feeds: eToro 4.24 stars from 18,286 UK ratings and 4.39 from 9,966 US ratings (checked 24 October 2026). Of the 100 most recent UK reviews, 24 were one star, most posted after the October 2026 update.

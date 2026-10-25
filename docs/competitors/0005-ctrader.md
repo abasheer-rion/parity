@@ -47,6 +47,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **25 public items** that name cTrader (GitHub issues 23, Hacker News 2).
+
+| | Count |
+| --- | --- |
+| Praise | 3 |
+| Complaints | 12 |
+| Neither | 10 |
+| Praise share | 20% |
+
+- Most praised themes: API and automation (2), Learning and paper trading (1), Customer support (1).
+- Most complained-about themes: Crashes and bugs (9), API and automation (9), Learning and paper trading (3).
+- US App Store, app 767428811: 4.76 stars from 1,807 ratings.
 <!-- collector:end -->
 
 From the US App Store public review feed (4.8 stars from 1,807 ratings, checked 24 October 2026) and Hacker News:

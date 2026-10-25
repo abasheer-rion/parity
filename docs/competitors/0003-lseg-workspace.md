@@ -46,6 +46,10 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **4 public items** that name LSEG Workspace (Hacker News 3, Stack Exchange 1).
+
+Too few to rank themes (under 20). The notes below rest on our own reading.
+- US App Store, app 1481442629: 4.46 stars from 68 ratings.
 <!-- collector:end -->
 
 From the US App Store listing (public review feed). We found almost no Hacker News discussion of Workspace or Eikon UX.

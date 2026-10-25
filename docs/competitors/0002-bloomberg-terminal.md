@@ -48,6 +48,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **331 public items** that name Bloomberg Terminal (Hacker News 295, Stack Exchange 36).
+
+| | Count |
+| --- | --- |
+| Praise | 63 |
+| Complaints | 55 |
+| Neither | 213 |
+| Praise share | 53% |
+
+- Most praised themes: Look and layout (25), Market data and quotes (21), Fees and pricing (17).
+- Most complained-about themes: Market data and quotes (20), Fees and pricing (18), Look and layout (14).
+- US App Store, app 407761767: 3.72 stars from 460 ratings.
 <!-- collector:end -->
 
 From the US App Store listing (public review feed) and Hacker News threads:

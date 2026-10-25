@@ -47,6 +47,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **20 public items** that name OANDA (Hacker News 11, GitHub issues 7, Stack Exchange 2).
+
+| | Count |
+| --- | --- |
+| Praise | 3 |
+| Complaints | 10 |
+| Neither | 7 |
+| Praise share | 23% |
+
+- Most praised themes: Fees and pricing (3), Speed and lag (1), Deposits and withdrawals (1).
+- Most complained-about themes: Fees and pricing (4), Market data and quotes (3), API and automation (3).
+- US App Store, app 370922777: 4.74 stars from 24,044 ratings.
 <!-- collector:end -->
 
 From our own reading (App Store listing, Hacker News, forexbrokers.com):

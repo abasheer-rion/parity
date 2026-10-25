@@ -49,6 +49,18 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **42 public items** that name Darwinex (GitHub issues 40, Hacker News 2).
+
+| | Count |
+| --- | --- |
+| Praise | 3 |
+| Complaints | 16 |
+| Neither | 23 |
+| Praise share | 16% |
+
+- Most praised themes: API and automation (2), Market data and quotes (2), Speed and lag (1).
+- Most complained-about themes: Crashes and bugs (14), API and automation (7), Market data and quotes (5).
+- US App Store, app 1448246447: 5.00 stars from 2 ratings.
 <!-- collector:end -->
 
 Public feedback we could read is thin. The investor iOS app has 2 ratings and no update since 2020. Hacker News has a few comments. The Darwinex Zero FAQ sits behind a login wall in practice: clicking through sent us to the login page.

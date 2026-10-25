@@ -14,13 +14,13 @@ related: [DEC-0047, RES-0020, RES-0021, RES-0022, REF-0019, DEC-0024, DEC-0040, 
 
 ## In plain words
 
-We wrote a profile of 22 trading products, from the Bloomberg Terminal to Robinhood to Myfxbook, and a small program counts what people say about them in public. This page adds it up. People praise low costs, good tools for automation, good market data, a clean layout and speed. They complain most about data problems, fees, getting money in and out, and whether they can trust the company. At the end is a list of what each Parity app should copy, avoid or do better.
+We wrote a profile of 22 trading products, from the Bloomberg Terminal to Robinhood to Myfxbook, and a small program counts what people say about them in public. This page adds it up. People praise good tools for automation, good market data, low costs, a clean layout and speed. They complain most about crashes and bugs, broken automation tools, data problems and fees. At the end is a list of what each Parity app should copy, avoid or do better.
 
 ## Summary
 
 - 22 profiles, CMP-0002 to CMP-0023, each with the same sections. Prices and features were checked on 24 October 2026. How the platforms are built and how fast they are is in [RES-0022](../research/0022-how-trading-and-market-data-platforms-are-built.md) and [REF-0019](../reference/0019-latency-budget-and-target-architecture.md); this set covers product, UX and what users say.
 - The counts come from the feedback collector ([DEC-0047](../decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)), which runs once a day inside the sims service and only reads sources whose terms allow it. The table below is a snapshot; the research site's Competitors page shows the live counts.
-- The five themes users praise most, by count of public posts: see the table in [what users praise most](#what-users-praise-most). Across the profiles, the patterns named most often as worth copying are saved and linked layouts, a practice account one tap from the real screen, and one-click order entry on the chart.
+- The five themes users praise most, by count of public posts: API and automation, market data and quotes, fees and pricing, look and layout, and speed ([table](#what-users-praise-most)). Look and layout has the best ratio, about 2 praise posts for every complaint. Across the profiles, the patterns named most often as worth copying are saved and linked layouts, a practice account one tap from the real screen, and one-click order entry on the chart.
 - Every Verify competitor checks that trades happened. None we found counts how many strategies or settings were tried before the one shown, so none can say how much of a record is luck. That is still Verify's opening ([RES-0020](../research/0020-verifying-trading-claims-market-size-and-competitors.md)), with one correction: QuantPad now shows a deflated Sharpe ratio, but it assumes a single try ([CMP-0018](0018-quantpad.md)).
 
 ## How we count
@@ -30,7 +30,7 @@ We wrote a profile of 22 trading products, from the Bloomberg Terminal to Robinh
 - **Matching.** A post counts for a product only if its own text contains one of the product's search phrases (listed in `docs/_system/competitors.json`).
 - **Praise or complaint.** A fixed word list we wrote, with a rule that flips a word after "not", "never" and similar. A star rating, when there is one, decides on its own.
 - **Themes.** 18 fixed keyword lists, such as "Charts and indicators" or "Deposits and withdrawals". One post can sit in several themes.
-- **Limits.** Hacker News and Stack Exchange lean technical, so retail apps (Robinhood, Webull, eToro) are under-counted until Reddit is keyed. "Market data and quotes" catches any mention of data and runs high. Four Verify competitors have under 20 posts each, too few to rank. These are counts of where people talk, not a survey.
+- **Limits.** Hacker News and Stack Exchange lean technical, so retail apps (Robinhood, Webull, eToro) are under-counted until Reddit is keyed. "Market data and quotes" catches any mention of data and runs high. GitHub issues are mostly bug reports, so they lift "Crashes and bugs" and "API and automation" complaints. Four Verify competitors have under 20 posts each, too few to rank. These are counts of where people talk, not a survey.
 - **Quotes in the profiles** were read once by hand during research, at most three per product and each under 15 words. Some come from App Store review pages; the collector itself does not read review text.
 
 ## What users say
@@ -38,11 +38,35 @@ We wrote a profile of 22 trading products, from the Bloomberg Terminal to Robinh
 ### What users praise most
 
 <!-- patterns:start -->
+From 2,188 public posts across the 22 products, pass of 2026-10-25. Praise and complaints are posts scored as such that mention the theme; one post can count for several themes.
+
+| Rank | Theme | Praise | Complaints | Products where it is a top-5 praise |
+| --- | --- | --- | --- | --- |
+| 1 | API and automation | 126 | 161 | 11 |
+| 2 | Market data and quotes | 116 | 142 | 11 |
+| 3 | Fees and pricing | 114 | 95 | 13 |
+| 4 | Look and layout | 93 | 41 | 3 |
+| 5 | Speed and lag | 78 | 38 | 9 |
+| 6 | Charts and indicators | 49 | 41 | 2 |
+| 7 | Learning and paper trading | 48 | 26 | 5 |
+| 8 | Community and copy trading | 43 | 26 | 5 |
+| 9 | Trust and safety | 43 | 66 | 4 |
+| 10 | Customer support | 38 | 39 | 3 |
 <!-- patterns:end -->
 
 ### What users complain about most
 
 <!-- complaints:start -->
+| Rank | Theme | Complaints | Praise | Products where it is a top-5 complaint |
+| --- | --- | --- | --- | --- |
+| 1 | Crashes and bugs | 176 | 14 | 14 |
+| 2 | API and automation | 161 | 126 | 11 |
+| 3 | Market data and quotes | 142 | 116 | 13 |
+| 4 | Fees and pricing | 95 | 114 | 11 |
+| 5 | Trust and safety | 66 | 43 | 3 |
+| 6 | Deposits and withdrawals | 55 | 34 | 5 |
+| 7 | Look and layout | 41 | 93 | 3 |
+| 8 | Charts and indicators | 41 | 49 | 2 |
 <!-- complaints:end -->
 
 ## UX notes

@@ -49,6 +49,10 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **2 public items** that name Collective2 (Hacker News 2).
+
+Too few to rank themes (under 20). The notes below rest on our own reading.
+- US App Store, app 519099516: 1.92 stars from 12 ratings.
 <!-- collector:end -->
 
 From the App Store review feed (4 US reviews in total) and Hacker News. We did not read the Collective2 forum or help centre.

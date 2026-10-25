@@ -46,6 +46,20 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **69 public items** that name Kraken Pro (Hacker News 47, GitHub issues 22).
+
+| | Count |
+| --- | --- |
+| Praise | 14 |
+| Complaints | 17 |
+| Neither | 38 |
+| Praise share | 45% |
+
+- Most praised themes: Deposits and withdrawals (6), Customer support (4), Trust and safety (3).
+- Most complained-about themes: Crashes and bugs (7), Deposits and withdrawals (5), API and automation (5).
+- US App Store, app 1473024338: 4.71 stars from 25,681 ratings.
+- 25 status page incidents in the last 90 days.
+- 12 releases or changelog entries in the last 90 days.
 <!-- collector:end -->
 
 From the public App Store review feed for Kraken Pro (4.71 stars from 25,681 US ratings, checked 24 October 2026). Of the 100 most recent US reviews, 58 were five stars and 28 one star; many one-star reviews since July 2026 are about app updates.

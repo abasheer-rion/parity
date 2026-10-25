@@ -47,6 +47,10 @@ Weaknesses:
 ## What users say
 
 <!-- collector:start -->
+Our feedback collector ([CMP-0001](0001-ux-patterns-users-praise-most.md#how-we-count)), pass of 2026-10-25: **0 public items** that name Myfxbook.
+
+Too few to rank themes (under 20). The notes below rest on our own reading.
+- US App Store, app 985947299: 4.41 stars from 6,479 ratings.
 <!-- collector:end -->
 
 From the public App Store review feed (50 most recent US reviews, checked 24 October 2026) and Hacker News. We did not read the site's own forum because it refused us.
