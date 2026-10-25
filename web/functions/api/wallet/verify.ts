@@ -8,6 +8,16 @@ import { callerFrom } from "../../../src/lib/payments/auth";
 import { DEFAULT_SUPABASE_URL, json } from "../../../src/lib/payments/guard";
 import { checkProof } from "../../../src/lib/wallet/verify";
 
+function appToken(request: Request): boolean {
+  try {
+    const part = (request.headers.get("Authorization") ?? "").split(".")[1] ?? "";
+    const claims = JSON.parse(atob(part.replace(/-/g, "+").replace(/_/g, "/"))) as { client_id?: unknown };
+    return typeof claims.client_id === "string" && claims.client_id !== "";
+  } catch {
+    return true;
+  }
+}
+
 interface Env { SUPABASE_URL?: string; SUPABASE_SERVICE_ROLE_KEY?: string }
 interface Context { request: Request; env: Env }
 
@@ -16,6 +26,9 @@ export const onRequest = async ({ request, env }: Context): Promise<Response> =>
   const supabaseUrl = env.SUPABASE_URL || DEFAULT_SUPABASE_URL;
   const caller = await callerFrom(request, supabaseUrl);
   if (!caller) return json(401, { error: "Sign in first" });
+  // A token issued to a connected AI app (it carries client_id) may read but never write
+  // (DEC-0051), so it cannot save a wallet here either. The token was verified just above.
+  if (appToken(request)) return json(403, { error: "Connected apps cannot add wallets" });
   if (!env.SUPABASE_SERVICE_ROLE_KEY) return json(503, { error: "Wallet verification is not switched on yet" });
   const raw = await request.text();
   if (raw.length > 8 * 1024) return json(413, { error: "Too large" });

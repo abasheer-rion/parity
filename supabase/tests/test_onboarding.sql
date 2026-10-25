@@ -98,6 +98,13 @@ select pg_temp.expect((select count(*) = 10 from public.crypto_wallets), 'B dele
 
 -- 7. The service role marks a wallet verified, and cannot move it ----------------------------
 set local role service_role;
+-- The server's save of an existing wallet works at the cap of 10 (insert on conflict).
+insert into public.crypto_wallets (user_id, chain, address, verified_at)
+values ('11111111-1111-1111-1111-111111111111', 'solana', '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM', now())
+on conflict (user_id, chain, address) do update set verified_at = excluded.verified_at;
+reset role;
+select pg_temp.expect((select verified_at is not null from public.crypto_wallets where chain = 'solana'), 'server verifies a wallet when the person is at 10');
+set local role service_role;
 update public.crypto_wallets set verified_at = now(), address = '0x00000000000000000000000000000000000000aa'
  where address = '0xabcdef0000000000000000000000000000000001';
 reset role;

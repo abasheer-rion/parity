@@ -133,15 +133,19 @@ begin
     new.address := old.address;
     new.created_at := old.created_at;
   end if;
-  -- People (signed in or not) never set the verification time themselves; only the service
-  -- role, after checking a signature, can.
-  if current_user in ('authenticated', 'anon') then
+  -- Only the service role (the server, after checking a signature) and the database owner set
+  -- the verification time. Everyone else, signed in or not, keeps whatever was there.
+  if current_user not in ('service_role', 'postgres', 'supabase_admin') then
     new.verified_at := case when tg_op = 'UPDATE' then old.verified_at else null end;
   end if;
   if new.verified_at is not null then
     new.verified_at := least(new.verified_at, now());
   end if;
-  if tg_op = 'INSERT' and (select count(*) from public.crypto_wallets w where w.user_id = new.user_id) >= 10 then
+  -- The cap counts new wallets only: the server's save of an existing one (insert on conflict)
+  -- also passes through here.
+  if tg_op = 'INSERT'
+     and not exists (select 1 from public.crypto_wallets w where w.user_id = new.user_id and w.chain = new.chain and w.address = new.address)
+     and (select count(*) from public.crypto_wallets w where w.user_id = new.user_id) >= 10 then
     raise exception 'crypto_wallets: at most 10 wallets per person';
   end if;
   return new;
