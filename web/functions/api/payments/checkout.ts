@@ -1,5 +1,5 @@
 // POST /api/payments/checkout {"lookupKey": "pro_monthly"}: starts a Stripe Checkout session
-// for the signed-in person (DEC-0045), test mode only. Answers 404 while PAYMENTS_ENABLED
+// for the signed-in person (DEC-0046), test mode only. Answers 404 while PAYMENTS_ENABLED
 // is not "on". Refuses any Stripe key that is not a test key. The secret key comes from the
 // Pages environment and is never committed or sent to the browser.
 import { callerFrom } from "../../../src/lib/payments/auth";

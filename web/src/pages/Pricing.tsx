@@ -1,4 +1,4 @@
-// Plans and test-mode checkout (DEC-0045). Only reachable when the build sets
+// Plans and test-mode checkout (DEC-0046). Only reachable when the build sets
 // VITE_PAYMENTS=on; with the flag off this page is never routed. The tiers and prices are
 // the starting points in DEC-0032. A button asks /api/payments/checkout for a Stripe
 // Checkout address in test mode and goes there; no card is ever charged.

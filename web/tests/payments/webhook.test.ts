@@ -1,4 +1,4 @@
-// The Stripe webhook (DEC-0045): signature first, live mode refused, each event handled
+// The Stripe webhook (DEC-0046): signature first, live mode refused, each event handled
 // once, entitlements rebuilt from subscriptions. Uses the in-memory store; no network.
 import { describe, expect, it, vi } from "vitest";
 import { onRequest as webhookFn } from "../../functions/api/payments/webhook";

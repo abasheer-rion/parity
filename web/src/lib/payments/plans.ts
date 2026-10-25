@@ -1,4 +1,4 @@
-// Plans and entitlements (DEC-0045). The tiers and prices are the starting points in
+// Plans and entitlements (DEC-0046). The tiers and prices are the starting points in
 // DEC-0032, section 2; Stripe holds the real prices, and each Stripe price carries one of
 // the lookup keys below so the code never hard-codes a price id. Pure functions only:
 // the webhook, the pricing page and the tests all use them.

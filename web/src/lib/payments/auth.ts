@@ -1,4 +1,4 @@
-// Who is calling a payments endpoint (DEC-0045). The same check as the site middleware:
+// Who is calling a payments endpoint (DEC-0046). The same check as the site middleware:
 // the Supabase access token's signature against the project's public keys, its issuer,
 // audience and expiry. No secret is needed. Imported by Pages Functions.
 import { createRemoteJWKSet, jwtVerify, type JWTVerifyGetKey } from "jose";

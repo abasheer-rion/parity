@@ -1,4 +1,4 @@
-// Starting a Stripe Checkout session for a self-serve plan (DEC-0045), test mode only.
+// Starting a Stripe Checkout session for a self-serve plan (DEC-0046), test mode only.
 // The browser never sees a Stripe secret: it asks /api/payments/checkout, which checks the
 // person's sign-in, finds the price by its lookup key and asks Stripe for a session. The
 // session carries the person's id as client_reference_id and in the subscription's

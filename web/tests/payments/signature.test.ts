@@ -1,4 +1,4 @@
-// The Stripe webhook signature check (DEC-0045). No network: signatures are made locally
+// The Stripe webhook signature check (DEC-0046). No network: signatures are made locally
 // with a made-up secret.
 import { describe, expect, it } from "vitest";
 import { hmacSha256Hex, parseSignatureHeader, signForTest, timingSafeEqualHex, verifyStripeSignature } from "../../src/lib/payments/stripeSignature";

@@ -1,4 +1,4 @@
-// Server-side guards for the payments endpoints (DEC-0045). Imported by Pages Functions,
+// Server-side guards for the payments endpoints (DEC-0046). Imported by Pages Functions,
 // so nothing here may read import.meta.env.
 
 export interface PaymentsEnv {

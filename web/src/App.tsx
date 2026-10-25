@@ -62,7 +62,7 @@ export function App() {
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
-// The pricing page exists only when the payments flag is on (DEC-0045).
+// The pricing page exists only when the payments flag is on (DEC-0046).
 const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {

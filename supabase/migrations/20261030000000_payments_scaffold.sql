@@ -1,4 +1,4 @@
--- Payments scaffold (DEC-0045): the records for Parity charging its own customers through
+-- Payments scaffold (DEC-0046): the records for Parity charging its own customers through
 -- Stripe, in TEST MODE ONLY. Nothing here moves money. Customers funding real trading is a
 -- separate flow that goes through a regulated broker and never touches these tables.
 --

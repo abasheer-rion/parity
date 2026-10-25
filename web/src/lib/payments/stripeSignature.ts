@@ -1,4 +1,4 @@
-// Stripe webhook signature check (DEC-0045), with Web Crypto so it runs in Pages Functions
+// Stripe webhook signature check (DEC-0046), with Web Crypto so it runs in Pages Functions
 // without the Stripe SDK. Stripe signs `${timestamp}.${raw body}` with HMAC-SHA256 using
 // the endpoint's signing secret, and sends `Stripe-Signature: t=<unix seconds>,v1=<hex>`,
 // possibly with several v1 values while a secret is being rolled

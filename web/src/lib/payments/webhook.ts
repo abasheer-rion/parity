@@ -1,4 +1,4 @@
-// The Stripe webhook's logic (DEC-0045), kept apart from the Pages Function so it can be
+// The Stripe webhook's logic (DEC-0046), kept apart from the Pages Function so it can be
 // tested without a network. In order:
 //   1. check the signature on the raw body, refuse anything unsigned or stale (400);
 //   2. refuse live-mode events (400): this scaffold is test mode only;

@@ -1,4 +1,4 @@
-// Usage metering for the API plans (DEC-0045, DEC-0032 section 2). Each scored record an
+// Usage metering for the API plans (DEC-0046, DEC-0032 section 2). Each scored record an
 // API customer asks for becomes one Stripe meter event; Stripe adds them up and bills the
 // records over the plan's included amount. Nothing calls Stripe from here: this builds
 // the event and works out the overage so the API can show it. The API itself is not

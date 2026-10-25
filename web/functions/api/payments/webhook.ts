@@ -1,4 +1,4 @@
-// POST /api/payments/webhook: Stripe's webhook endpoint (DEC-0045), test mode only.
+// POST /api/payments/webhook: Stripe's webhook endpoint (DEC-0046), test mode only.
 // Answers 404 while PAYMENTS_ENABLED is not "on", which is every environment today. The
 // signing secret and the service role key come from the Pages environment and are never
 // committed. The logic and its tests are in src/lib/payments/webhook.ts.

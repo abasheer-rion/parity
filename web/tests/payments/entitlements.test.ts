@@ -1,4 +1,4 @@
-// Plans, entitlements and metering (DEC-0045). Pure functions, no network.
+// Plans, entitlements and metering (DEC-0046). Pure functions, no network.
 import { describe, expect, it } from "vitest";
 import { isTestSecretKey, isWebhookSecret, serverFlag } from "../../src/lib/payments/guard";
 import { meterEvent, overage } from "../../src/lib/payments/metering";

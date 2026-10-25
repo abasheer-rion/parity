@@ -1,4 +1,4 @@
-// The Broker interface (DEC-0045): the demo account works through it, a real broker
+// The Broker interface (DEC-0046): the demo account works through it, a real broker
 // adapter refuses every call.
 import { beforeEach, describe, expect, it } from "vitest";
 import { BrokerNotEnabledError, brokerFor, liveBrokerStub, paperBroker } from "../../src/lib/broker";

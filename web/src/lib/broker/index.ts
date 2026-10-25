@@ -1,4 +1,4 @@
-// One interface for placing orders, whoever carries them out (DEC-0045). Today there is one
+// One interface for placing orders, whoever carries them out (DEC-0046). Today there is one
 // working implementation, the demo account (DEC-0034), which matches orders against
 // delayed daily bars in the browser with pretend money. A real broker adapter has the same
 // shape but every call throws: real trading needs the owner's decision, a lawyer and a
@@ -40,7 +40,7 @@ export interface Broker {
 
 export class BrokerNotEnabledError extends Error {
   constructor(broker: string) {
-    super(`Real trading is not enabled. ${broker} is a placeholder until the owner decides (DEC-0019, DEC-0045).`);
+    super(`Real trading is not enabled. ${broker} is a placeholder until the owner decides (DEC-0019, DEC-0046).`);
     this.name = "BrokerNotEnabledError";
   }
 }
@@ -88,7 +88,7 @@ export function paperBroker(latestBar: (symbol: string) => Promise<Bar | null>, 
 
 // ---------------------------------------------------------------- real brokers (off)
 
-/** The partners DEC-0045 compares. Each would carry the accounts, the money and the KYC. */
+/** The partners DEC-0046 compares. Each would carry the accounts, the money and the KYC. */
 export type LiveBrokerId = "alpaca" | "ibkr" | "oanda" | "coinbase";
 
 const LIVE_LABEL: Record<LiveBrokerId, string> = {
