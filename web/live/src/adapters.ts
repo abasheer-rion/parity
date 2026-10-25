@@ -128,12 +128,15 @@ const kraken: AdapterDef = {
  *  "Data provided by CoinGecko" linked next to the data (REF-0014). */
 const CG = "https://api.coingecko.com/api/v3";
 const CG_SYM = /^([A-Z0-9]{1,12})-USD$/;
+/** Symbols offered when CoinGecko's list cannot be read (its free API limits by address). */
+const CG_FALLBACK = ["BTC", "ETH", "USDT", "XRP", "BNB", "SOL", "USDC", "DOGE", "TRX", "ADA", "LINK", "AVAX", "XLM", "SUI", "BCH", "HBAR", "LTC", "DOT", "TON", "SHIB"].map((s) => `${s}-USD`);
 interface CgRow { id: string; symbol: string; current_price: number | null; last_updated: string | null; market_cap_rank: number | null }
 
 let cgTop: { at: number; rows: CgRow[] } | null = null;
 async function cgMarkets(maxAgeMs: number): Promise<CgRow[]> {
   if (cgTop && Date.now() - cgTop.at < maxAgeMs) return cgTop.rows;
-  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1`, { headers: { Accept: "application/json", "User-Agent": "parity-live" } });
+  // Cached at the edge for 20 s, so every worker and object shares one answer.
+  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1`, { headers: { Accept: "application/json", "User-Agent": "parity-live" }, cf: { cacheTtl: 20, cacheEverything: true } } as RequestInit);
   if (!res.ok) throw new Error(`coingecko ${res.status}`);
   const rows = (await res.json()) as CgRow[];
   cgTop = { at: Date.now(), rows };
@@ -271,7 +274,7 @@ export async function universe(env: AdapterEnv): Promise<UniverseDoc> {
     } catch { live.hyperliquid = []; }
   }
   if (coingecko.enabled(env)) {
-    try { live.coingecko = [...cgSymbols(await cgMarkets(600_000)).keys()]; } catch { live.coingecko = []; }
+    try { live.coingecko = [...cgSymbols(await cgMarkets(600_000)).keys()]; } catch { live.coingecko = CG_FALLBACK; }
   }
   if (kraken.enabled(env)) live.kraken = sourceById("kraken")?.symbols ?? [];
   return { at: Date.now(), stocks, live };

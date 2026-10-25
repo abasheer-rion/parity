@@ -165,6 +165,8 @@ export class LiveHub {
     } catch (e) {
       console.log(`[${this.src}] poll failed: ${String(e)}`);
       this.setState("down", "source did not answer");
+      // Try again soon rather than a whole period later; the edge cache keeps this cheap.
+      setTimeout(() => void this.pollOnce(), 5_000);
     } finally {
       this.polling = false;
     }
