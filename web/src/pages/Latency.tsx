@@ -4,6 +4,7 @@
 // on open; the tables have fixed shapes and reserved heights, so nothing jumps as it loads.
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
+import { liveSources } from "../lib/live/sources";
 import { Card } from "../ui/layout";
 import {
   bySource, bytes, dur, groupRum, isLiveEndpoint, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
@@ -50,10 +51,10 @@ export function Latency() {
         </p>
       </div>
       <Hops fresh={fresh} runs={runs} rum={rum} now={now} />
-      <LiveFeeds rum={rum} />
       <Sources fresh={fresh} now={now} />
       <Pipelines runs={runs} steps={steps} />
       <Client rum={rum} />
+      <LiveFeeds rum={rum} />
     </>
   );
 }
@@ -334,16 +335,20 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
         <table className="lat-table">
           <caption className="small muted">Our edge now</caption>
           <thead><tr><th>Source</th><th>Line</th><th className="num">Viewers</th><th className="num">Exchange to edge p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th></tr></thead>
-          <tbody>{edge === "error" ? <tr><td colSpan={7} className="muted small">Not available here.</td></tr>
-            : !edge ? <tr><td colSpan={7} className="muted small">Loading.</td></tr>
-            : edge.map((e) => (
-              <tr key={e.src}><td>{e.src}</td><td>{e.error ? "error" : `${e.upstream ?? "n/a"}${e.why ? ` (${e.why})` : ""}`}</td><td className="num">{e.viewers ?? 0}</td>
-                <td className="num">{ms(e.feedLagMs?.p50 ?? null)}</td><td className="num">{ms(e.feedLagMs?.p95 ?? null)}</td><td className="num">{ms(e.feedLagMs?.p99 ?? null)}</td><td className="num">{Math.max(0, (e.upstreamOpens ?? 0) - 1)}</td></tr>
-            ))}</tbody>
+          {/* One row per source from the start, filled in when the edge answers, so the table never changes height. */}
+          <tbody>{liveSources().filter((x) => x.id !== "vendor").map((m) => {
+            const e = Array.isArray(edge) ? edge.find((x) => x.src === m.id) : undefined;
+            const line = edge === "error" ? "not available here" : !edge ? "loading" : !e ? "off" : e.error ? "error" : `${e.upstream ?? "n/a"}${e.why ? ` (${e.why})` : ""}`;
+            return (
+              <tr key={m.id}><td>{m.name}</td><td>{line}</td><td className="num">{e?.viewers ?? 0}</td>
+                <td className="num">{ms(e?.feedLagMs?.p50 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p95 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p99 ?? null)}</td><td className="num">{Math.max(0, (e?.upstreamOpens ?? 0) - 1)}</td></tr>
+            );
+          })}</tbody>
         </table>
       </div>
-      <Pending v={rum} rows={6}>{(rows) => {
+      <div style={{ minHeight: 220 }}><Pending v={rum} rows={6}>{(rows) => {
         const feeds = liveFeeds(rows);
+        // Fixed height either way, so the section never moves the page when samples arrive.
         if (!feeds.length) return <p className="muted small">No live samples from browsers yet.</p>;
         return (
           <div className="table-wrap">
@@ -357,7 +362,7 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
             </table>
           </div>
         );
-      }}</Pending>
+      }}</Pending></div>
     </Card>
   );
 }
