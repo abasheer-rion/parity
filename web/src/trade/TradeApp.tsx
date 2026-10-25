@@ -269,7 +269,8 @@ function TradeShell() {
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
   // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
-  const noData = (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
+  // Markets streams on its own, so it never waits for the daily export either.
+  const noData = view !== "markets" && (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>

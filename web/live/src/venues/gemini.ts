@@ -1,7 +1,7 @@
 // Gemini (DEC-0053, team only; its market data agreement allows internal use). Every symbol
 // over the v2 market data feed. Gemini sends trades and the book on one "l2" subscription,
 // so the adapter keeps one subscription per symbol for either. The overview polls its price
-// feed every 5 s (price and 24 h change, no volume).
+// feed every 3 s (price and 24 h change, no volume).
 import { allowed, getJson, keyed, memo, num, PAIR, type AdapterDef, type BoardPatch, type BookUpdate, type Parsed, type Trade } from "../base";
 
 const REST = "https://api.gemini.com";
@@ -45,7 +45,7 @@ export const gemini: AdapterDef = {
       },
       board: {
         poll: {
-          every: 5_000,
+          every: 3_000,
           async run() {
             const d = await getJson<{ pair: string; price: string; percentChange24h: string }[]>(`${REST}/v1/pricefeed`);
             const now = Date.now();

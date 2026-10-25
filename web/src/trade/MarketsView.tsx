@@ -181,7 +181,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
         {!order.length && <div className="mk-empty">{team == null ? "Loading" : "No rows yet"}</div>}
       </div>
       </div>
-      <p className="mk-foot">{shown.includes("coingecko") ? <a href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a> : null} Volume is in each pair's quote currency. Trend is the last hour.</p>
+      <p className="mk-foot">{shown.includes("coingecko") ? <><a href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>. </> : null}Volume is in each pair's quote currency. Trend is the last hour (CoinGecko: the last day).</p>
     </div>
   );
 }

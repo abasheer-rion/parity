@@ -31,7 +31,7 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
   const internal = !!s?.internal || meta?.licence === "internal";
   const kind = internal ? INTERNAL_LABEL : feedLabel(feed, delay);
   const label = `${kind}, ${meta?.name ?? src}. ${s?.last ? `Exchange to screen ${msText(s.last.e2e)}.` : ""} Data age ${msText(age)}.${up ? "" : s?.refused ? " Team only." : " Line not connected."}`;
-  const state = s?.refused ? "team only" : s?.last ? msText(s.p50 ?? s.last.e2e) : up ? "waiting" : s?.line === "open" && s.upstream === "down" ? "source down" : s?.line === "connecting" || s?.upstream === "connecting" ? "connecting" : "offline";
+  const state = s?.refused ? "team only" : s?.last ? msText(s.p50 ?? s.last.e2e) : up && age != null ? `${msText(age)} old` : up ? "waiting" : s?.line === "open" && s.upstream === "down" ? "source down" : s?.line === "connecting" || s?.upstream === "connecting" ? "connecting" : "offline";
   return (
     <Popover label="Latency" width={300} placement="bottom-end" trigger={() => (
       <button type="button" className={`lvb lvb-${fresh}`} aria-label={label}>

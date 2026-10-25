@@ -378,7 +378,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 /* Markets (DEC-0053): every live pair, windowed rows at a fixed height. */
 .mk { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 .mk-bar { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding: 0 8px; height: 36px; flex: none; border-bottom: 1px solid var(--tr-line); }
-.mk-q { width: 180px; height: 24px; }
+.mk-q { width: 180px; height: 24px; flex: none; }
 .mk-n { color: var(--muted); font-size: var(--tr-fs-s); min-width: 6.5em; }
 .mk-badges { display: inline-flex; gap: 4px; margin-left: auto; flex: none; }
 .mk-note { margin: 0; padding: 0 10px; height: 22px; line-height: 22px; flex: none; color: var(--muted); font-size: var(--tr-fs-s); border-bottom: 1px solid var(--tr-line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

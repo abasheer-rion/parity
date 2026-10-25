@@ -4,10 +4,10 @@
 // on open; the tables have fixed shapes and reserved heights, so nothing jumps as it loads.
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
-import { liveSources } from "../lib/live/sources";
+import { SOURCES } from "../lib/live/sources";
 import { Card } from "../ui/layout";
 import {
-  bySource, bytes, dur, groupRum, isLiveEndpoint, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
+  bySource, bytes, dur, groupRum, isLiveEndpoint, liveCounts, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
   type FreshRow, type RumRow, type Status, type StepRow,
 } from "../lib/latency";
 
@@ -312,7 +312,10 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
 
 const HOP_NAME: Record<string, string> = { feed: "Exchange to our edge", edge: "At our edge", net: "Edge to browser", screen: "Browser to screen", e2e: "Exchange to screen" };
 
-interface EdgeStatus { src: string; feed?: string; upstream?: string; why?: string | null; viewers?: number; feedLagMs?: { p50: number | null; p95: number | null; p99: number | null; n: number }; upstreamOpens?: number; error?: string }
+interface EdgeStatus { src: string; feed?: string; upstream?: string; why?: string | null; viewers?: number; feedLagMs?: { p50: number | null; p95: number | null; p99: number | null; n: number }; upstreamOpens?: number; reconnects?: number; error?: string }
+
+/** Every source the edge can stream: public ones and team-only ones (DEC-0053). */
+const STREAMED = SOURCES.filter((s) => s.streams && s.id !== "vendor" && (s.licence === "display" || s.licence === "internal"));
 
 function useEdgeStatus(): EdgeStatus[] | null | "error" {
   const [v, setV] = useState<EdgeStatus[] | null | "error">(null);
@@ -336,28 +339,30 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
           <caption className="small muted">Our edge now</caption>
           <thead><tr><th>Source</th><th>Line</th><th className="num">Viewers</th><th className="num">Exchange to edge p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th></tr></thead>
           {/* One row per source from the start, filled in when the edge answers, so the table never changes height. */}
-          <tbody>{liveSources().filter((x) => x.id !== "vendor").map((m) => {
+          <tbody>{STREAMED.map((m) => {
             const e = Array.isArray(edge) ? edge.find((x) => x.src === m.id) : undefined;
             const line = edge === "error" ? "not available here" : !edge ? "loading" : !e ? "off" : e.error ? "error" : `${e.upstream ?? "n/a"}${e.why ? ` (${e.why})` : ""}`;
             return (
-              <tr key={m.id}><td>{m.name}</td><td>{line}</td><td className="num">{e?.viewers ?? 0}</td>
-                <td className="num">{ms(e?.feedLagMs?.p50 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p95 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p99 ?? null)}</td><td className="num">{Math.max(0, (e?.upstreamOpens ?? 0) - 1)}</td></tr>
+              <tr key={m.id}><td>{m.name}{m.licence === "internal" ? " (team only)" : ""}</td><td>{line}</td><td className="num">{e?.viewers ?? 0}</td>
+                <td className="num">{ms(e?.feedLagMs?.p50 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p95 ?? null)}</td><td className="num">{ms(e?.feedLagMs?.p99 ?? null)}</td><td className="num">{e?.reconnects ?? Math.max(0, (e?.upstreamOpens ?? 0) - 1)}</td></tr>
             );
           })}</tbody>
         </table>
       </div>
       <div style={{ minHeight: 220 }}><Pending v={rum} rows={6}>{(rows) => {
         const feeds = liveFeeds(rows);
+        const counts = liveCounts(rows);
         // Fixed height either way, so the section never moves the page when samples arrive.
         if (!feeds.length) return <p className="muted small">No live samples from browsers yet.</p>;
         return (
           <div className="table-wrap">
             <table className="lat-table">
               <caption className="small muted">Real browsers, per hop</caption>
-              <thead><tr><th>Source</th><th>Hop</th><th className="num">Samples</th><th className="num">p50</th><th className="num">p95</th><th className="num">p99</th></tr></thead>
-              <tbody>{feeds.flatMap((f) => LIVE_HOPS.filter((h) => f.hops[h]).map((h) => {
+              <thead><tr><th>Source</th><th>Hop</th><th className="num">Samples</th><th className="num">p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th><th className="num">Lost updates</th></tr></thead>
+              <tbody>{feeds.flatMap((f) => LIVE_HOPS.filter((h) => f.hops[h]).map((h, i) => {
                 const g = f.hops[h]!;
-                return <tr key={`${f.src}/${h}`}><td>{f.src}</td><td>{HOP_NAME[h]}</td><td className="num">{g.n}</td><td className="num">{ms(percentile(g.bins, 0.5))}</td><td className="num">{ms(percentile(g.bins, 0.95))}</td><td className="num">{ms(percentile(g.bins, 0.99))}</td></tr>;
+                const c = i === 0 ? counts[f.src] : undefined;
+                return <tr key={`${f.src}/${h}`}><td>{f.src}</td><td>{HOP_NAME[h]}</td><td className="num">{g.n}</td><td className="num">{ms(percentile(g.bins, 0.5))}</td><td className="num">{ms(percentile(g.bins, 0.95))}</td><td className="num">{ms(percentile(g.bins, 0.99))}</td><td className="num">{c ? c.reconnect : ""}</td><td className="num">{c ? c.lost : ""}</td></tr>;
               }))}</tbody>
             </table>
           </div>

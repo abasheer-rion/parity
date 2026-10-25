@@ -79,6 +79,8 @@ export class LiveHub {
   private spark = new Map<string, number[]>();
   /** Symbols whose source sends its own sparkline (CoinGecko); not sampled here. */
   private ownSpark = new Set<string>();
+  private sparkDirty = new Set<string>();
+  private boardFullDue = false;
   private vcache: Viewer[] | null = null;
   private stats = { started: Date.now(), viewersSeen: 0, upstreamOpens: 0, reconnects: 0, upstreamMsgs: 0, trades: 0, sent: 0, refused: 0, expired: 0, bookMsgs: 0, boardMsgs: 0, feedLagMs: [] as number[] };
 
@@ -500,6 +502,8 @@ export class LiveHub {
   // ------------------------------------------------------------------ the overview
 
   private applyBoard(rows: BoardPatch[]) {
+    // The first rows a source gives go out as a whole list, sparklines included.
+    if (!this.board.size && rows.length) this.boardFullDue = true;
     for (const r of rows) {
       if (!r.s) continue;
       const old = this.board.get(r.s);
@@ -510,7 +514,7 @@ export class LiveHub {
       if (old && old.p === next.p && old.o === next.o && old.c === next.c && old.v === next.v) continue;
       this.board.set(r.s, next);
       this.boardDirty.add(r.s);
-      if (r.spark?.length) { this.spark.set(r.s, r.spark.slice(-SPARK_N)); this.ownSpark.add(r.s); }
+      if (r.spark?.length) { this.spark.set(r.s, r.spark.slice(-SPARK_N)); this.ownSpark.add(r.s); this.sparkDirty.add(r.s); }
       else if (!this.spark.has(r.s)) this.spark.set(r.s, [p]);
     }
     this.ensureTimers();
@@ -530,10 +534,14 @@ export class LiveHub {
   private flushBoard() {
     if (!this.boardDirty.size) return;
     const watchers = this.viewers().filter((v) => v.subs.has(BOARD));
-    const d = this.boardRows([...this.boardDirty]);
+    const full = this.boardFullDue;
+    this.boardFullDue = false;
+    const d = this.boardRows(full ? [...this.board.keys()] : [...this.boardDirty]);
+    const sp = full ? Object.fromEntries(this.spark) : this.sparkDirty.size ? Object.fromEntries([...this.sparkDirty].map((s) => [s, this.spark.get(s) ?? []])) : null;
     this.boardDirty.clear();
+    this.sparkDirty.clear();
     if (!watchers.length || !d.length) return;
-    const m = JSON.stringify({ op: "r", d, ts: Date.now() } satisfies ServerMsg);
+    const m = JSON.stringify({ op: "r", d, ts: Date.now(), ...(full ? { full: 1 as const, every: SPARK_EVERY } : {}), ...(sp ? { sp } : {}) } satisfies ServerMsg);
     for (const v of watchers) { this.sendRaw(v.ws, m); this.stats.boardMsgs += 1; }
   }
 

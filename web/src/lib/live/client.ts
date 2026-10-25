@@ -295,12 +295,15 @@ class SourceLine {
   /** Books, trades lists and overview rows, once per frame: only the newest book per symbol. */
   private flushOther(items: { m: ServerMsg; recv: number }[]) {
     const books = new Map<string, BookSnap>();
+    let newest = 0;
     for (const { m, recv } of items) {
-      if (m.op === "b") books.set(m.s, { b: m.b, a: m.a, te: m.te, recv });
-      else if (m.op === "x") for (const fn of this.tradeFns.get(m.s) ?? []) fn(m.d);
-      else if (m.op === "r") for (const fn of this.boardFns) fn(m.d, !!m.full, m.sp);
+      if (m.op === "b") { books.set(m.s, { b: m.b, a: m.a, te: m.te, recv }); newest = Math.max(newest, m.te); }
+      else if (m.op === "x") { for (const fn of this.tradeFns.get(m.s) ?? []) fn(m.d); for (const r of m.d) newest = Math.max(newest, r[0]); }
+      else if (m.op === "r") { for (const fn of this.boardFns) fn(m.d, !!m.full, m.sp); for (const r of m.d) newest = Math.max(newest, r[4]); }
     }
     for (const [s, b] of books) for (const fn of this.bookFns.get(s) ?? []) fn(b);
+    // A page that only shows books or the overview still gets a data age on its badge.
+    if (newest > (this.status.lastTe ?? 0)) this.emit({ lastTe: newest });
   }
 
   /** Counters for the latency tables: reconnects and lost updates since the last report. */
