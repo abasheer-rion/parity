@@ -153,21 +153,29 @@ export class LiveHub {
   }
 
   private polling = false;
+  private pollFails = 0;
+  private nextPollAt = 0;
   private async pollOnce() {
-    if (this.polling || !this.upSubs.size) return;
+    if (this.polling || !this.upSubs.size || Date.now() < this.nextPollAt) return;
     this.polling = true;
     try {
       const trades = await this.adapter!.poll!.run([...this.upSubs]);
       this.stats.upstreamMsgs += 1;
       this.lastUpMsg = Date.now();
+      this.pollFails = 0;
+      this.nextPollAt = 0;
       if (this.upState !== "up") { this.stats.upstreamOpens += 1; this.setState("up"); }
       this.relay(trades.filter((t) => t.te > (this.lastTe.get(t.s) ?? 0)), false);
     } catch (e) {
       console.log(`[${this.src}] poll failed: ${String(e)}`);
       const code = String(e).match(/\b(\d{3})\b/)?.[1];
       this.setState("down", code ? `source answered ${code}` : "source did not answer");
-      // Try again soon rather than a whole period later; the edge cache keeps this cheap.
-      setTimeout(() => void this.pollOnce(), 5_000);
+      // Back off (5, 10, 20, 40, then 60 s) instead of a whole period, with one retry pending at
+      // most; a free API that limits by address (429) must not be hammered.
+      const wait = Math.min(60_000, 5_000 * 2 ** this.pollFails);
+      this.pollFails += 1;
+      this.nextPollAt = Date.now() + wait;
+      setTimeout(() => void this.pollOnce(), wait + 50);
     } finally {
       this.polling = false;
     }

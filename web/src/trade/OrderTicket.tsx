@@ -88,7 +88,7 @@ export function OrderTicket({ symbol, cue, confirm, onNeedConfirm }: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cue?.at]);
 
-  const name = inst ? inst.short || inst.label : symbol;
+  const name = inst ? inst.short || inst.label : symbol.startsWith("L:") ? symbol.split(":")[2] ?? symbol : symbol.startsWith("S:") ? symbol.slice(2) : symbol;
   const verb = type === "bracket" ? "Buy bracket" : effSide === "buy" ? "Buy" : "Sell";
   const summary = `${verb} ${Number.isFinite(input.qty) ? +input.qty : ""} ${name}${type === "market" || (type === "bracket" && entry === "market") ? " @ market" : ""}`;
   const submit = () => {

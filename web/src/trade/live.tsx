@@ -92,7 +92,16 @@ export function useLiveBars(ref: LiveRef | undefined, tf: LiveTf): Loadable<Cand
     let alive = true;
     let stop: (() => void) | null = null;
     setState({ status: "loading" });
-    fetch(`${httpOrigin()}/live/history?src=${encodeURIComponent(ref.src)}&s=${encodeURIComponent(ref.sym)}&tf=${tf}`)
+    // A free source can refuse for a while (rate limits by address); try three times, 8 s apart,
+    // then start from live updates alone.
+    const url = `${httpOrigin()}/live/history?src=${encodeURIComponent(ref.src)}&s=${encodeURIComponent(ref.sym)}&tf=${tf}`;
+    const get = async (left: number): Promise<Response> => {
+      const r = await fetch(url).catch(() => null);
+      if ((r && r.ok) || left <= 0 || !alive) return r ?? new Response(null, { status: 599 });
+      await new Promise((ok) => window.setTimeout(ok, 8_000));
+      return get(left - 1);
+    };
+    get(2)
       .then(async (r) => {
         if (!alive) return;
         const history: Bar[] = r.ok ? ((await r.json()) as { bars: Bar[] }).bars ?? [] : [];

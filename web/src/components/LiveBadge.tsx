@@ -34,7 +34,7 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
         <i className="lvb-dot" aria-hidden />
         <span>{feedShort(feed, delay)}</span>
         {!compact && <span className="lvb-src">{meta?.short ?? src}</span>}
-        <span className="tabular">{s?.last ? msText(s.last.e2e) : up ? "waiting" : s?.line === "connecting" || s?.upstream === "connecting" ? "connecting" : "offline"}</span>
+        <span className="tabular">{s?.last ? msText(s.last.e2e) : up ? "waiting" : s?.line === "open" && s.upstream === "down" ? "source down" : s?.line === "connecting" || s?.upstream === "connecting" ? "connecting" : "offline"}</span>
         {!compact && age != null && <span className="tabular lvb-age">{msText(age)} old</span>}
       </button>
     )}>
