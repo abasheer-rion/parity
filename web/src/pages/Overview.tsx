@@ -6,7 +6,7 @@ import { HeroChart, Sparkline, type RangeKey } from "../ui/charts";
 import { Icon } from "../ui/icons";
 import { Button, ButtonGroup } from "../ui";
 import { colorMap } from "../lib/colors";
-import { useDocs } from "../lib/docs";
+import { useDocIndex } from "../lib/docs";
 import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
@@ -17,7 +17,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
   const prefs = usePrefs();
   const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
   const [view, setView] = useState<"graph" | "table">("graph");
-  const docs = useDocs();
+  const docs = useDocIndex();
   const colors = colorMap(report.runs);
   const bench = report.runs.find((r) => r.is_benchmark);
   const candidates = report.runs.filter((r) => !r.is_benchmark);

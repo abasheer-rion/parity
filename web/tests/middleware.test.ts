@@ -9,7 +9,7 @@ vi.mock("jose", () => ({
   jwtVerify: (...args: unknown[]) => verify(...args),
 }));
 
-const { accessToken, bearerToken, onRequest } = await import("../functions/_middleware");
+const { accessToken, bearerToken, cacheFor, onRequest } = await import("../functions/_middleware");
 
 const COOKIE = "sb-ttqvpxvctnomfbeoqbbs-auth-token";
 const session = (token = "good.jwt.token") => `${COOKIE}=${encodeURIComponent(JSON.stringify({ access_token: token }))}`;
@@ -100,6 +100,27 @@ describe("a missing app path (DEC-0055)", () => {
   it("passes the 404 page through for public paths", async () => {
     const res = await missing("https://parity.endyland.com/no-such-page-xyz/");
     expect(res.status).toBe(404);
+  });
+});
+
+describe("built files (REF-0024)", () => {
+  it.each(["/app/assets/main-P7fw5Tdc.js", "/academy/assets/academy-Iv1O6b4D.js", "/sim/assets/sim-Dglsj3qO.css", "/app/assets/_virtual_parity-docs-BLjKN8uG.js"])("%s is kept a year when signed in", async (path) => {
+    const res = await run(`https://parity.endyland.com${path}`, session()).promise;
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Cache-Control")).toBe("private, max-age=31536000, immutable");
+  });
+
+  it("answers a plain 401 for a built file without a session, never the log-in page", async () => {
+    const res = await run("https://academy.endyland.com/academy/assets/academy-Iv1O6b4D.js", session("expired")).promise;
+    expect(res.status).toBe(401);
+    expect(res.headers.get("Location")).toBeNull();
+  });
+
+  it("asks again for pages, data and files without a hash", () => {
+    expect(cacheFor("/app/")).toBe("private, no-cache");
+    expect(cacheFor("/data/latest.lite.json")).toBe("private, no-cache");
+    expect(cacheFor("/trade/assets/x.js")).toBe("private, no-cache");
+    expect(cacheFor("/app/assets/main-P7fw5Tdc.js", 404)).toBe("private, no-cache");
   });
 });
 

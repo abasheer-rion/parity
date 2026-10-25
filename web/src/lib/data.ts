@@ -21,11 +21,54 @@ export function isMissing(res: Response): boolean {
   return res.status === 404 || (res.ok && (res.headers.get("content-type") ?? "").includes("text/html"));
 }
 
+/** A data file that is not there (yet): the deploy has not written it. */
+export class MissingFile extends Error {}
+
 async function json<T>(url: string): Promise<T> {
   const res = await fetch(url, { cache: "no-cache" });
-  if (isMissing(res)) throw new Error("No research runs have been published yet.");
+  if (isMissing(res)) throw new MissingFile("No research runs have been published yet.");
   if (!res.ok) throw new Error(`Could not load ${url} (${res.status}).`);
   return (await res.json()) as T;
+}
+
+// One copy of each report per page for a few minutes: the app, Trade's signals and Verify
+// all ask for the newest run, and it is the largest file they read.
+const KEEP_MS = 5 * 60_000;
+const kept = new Map<string, { at: number; p: Promise<unknown> }>();
+function once<T>(key: string, load: () => Promise<T>): Promise<T> {
+  const k = kept.get(key);
+  if (k && Date.now() - k.at < KEEP_MS) return k.p as Promise<T>;
+  const p = load();
+  kept.set(key, { at: Date.now(), p });
+  p.catch(() => { if (kept.get(key)?.p === p) kept.delete(key); });
+  return p;
+}
+
+type Sensitivity = Record<string, unknown>;
+
+/**
+ * A run in two files (scripts/export_site_data.py): `<name>.lite.json`, everything the pages
+ * show, and `<name>.sensitivity.json`, each strategy's settings test (about two thirds of the
+ * bytes), which only Workbench's Try settings reads. Before the deploy writes the split
+ * files, the whole `<name>.json` is read instead.
+ */
+async function readRun(base: string, sensitivity: boolean): Promise<Report> {
+  let report: Report;
+  try {
+    report = await once(`${base}.lite`, () => json<Report>(`${base}.lite.json`));
+  } catch (e) {
+    if (!(e instanceof MissingFile)) throw e;
+    return once(base, () => json<Report>(`${base}.json`));
+  }
+  if (!sensitivity) return report;
+  let extra: Record<string, Sensitivity>;
+  try {
+    extra = await once(`${base}.sensitivity`, () => json<Record<string, Sensitivity>>(`${base}.sensitivity.json`));
+  } catch (e) {
+    if (!(e instanceof MissingFile)) throw e;
+    return once(base, () => json<Report>(`${base}.json`));
+  }
+  return { ...report, runs: report.runs.map((r) => (r.gauntlet && extra[r.strategy] ? { ...r, gauntlet: { ...r.gauntlet, sensitivity: extra[r.strategy] } } : r)) };
 }
 
 export async function listBatches(): Promise<BatchInfo[]> {
@@ -33,9 +76,9 @@ export async function listBatches(): Promise<BatchInfo[]> {
   return json<BatchInfo[]>("/data/batches.json");
 }
 
-export async function loadReport(batchId?: string): Promise<Report> {
+export async function loadReport(batchId?: string, { sensitivity = false }: { sensitivity?: boolean } = {}): Promise<Report> {
   if (source === "local") return json<Report>("/local/latest.json");
-  const report = await json<Report>(batchId ? `/data/batch/${batchId}.json` : "/data/latest.json");
+  const report = await readRun(batchId ? `/data/batch/${batchId}` : "/data/latest", sensitivity);
   if (!batchId) rumAge("latest", (report as { generated_at?: string }).generated_at);
   return report;
 }

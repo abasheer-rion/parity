@@ -448,3 +448,17 @@ html.ui-locked { overflow: hidden; }
   .ui-collapse, .ui-float, .ui-dialog, .ui-drawer, .ui-scrim, .ui-tabs-ind, .ui-seg-thumb { transition: none !important; }
   .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
 }
+
+/* A crashed part of a page (boundary.tsx, DEC-0056): plain words and a way out, never empty. */
+.ui-crash { display: grid; place-items: center; min-height: 240px; padding: 32px 16px; }
+.ui-crash-app { position: fixed; inset: 0; z-index: 2147483000; min-height: 0; background: #050608; }
+.ui-crash-box { max-width: 440px; display: grid; gap: 10px; text-align: center; color: var(--text-2, #a4a8b6); }
+.ui-crash-t { margin: 0; font-size: 17px; font-weight: 600; color: var(--text, #f4f5f8); }
+.ui-crash-p { margin: 0; }
+.ui-crash-row { display: flex; gap: 8px; justify-content: center; margin-top: 6px; }
+.ui-crash-row button { font: inherit; color: #f4f5f8; background: #151720; border: 1px solid rgb(255 255 255 / .14); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
+.ui-crash-row .ui-crash-go { background: #1f78c8; border-color: #1f78c8; }
+.ui-crash-row button:focus-visible { outline: 2px solid #5cc2f5; outline-offset: 2px; }
+.ui-crash-d { margin-top: 8px; font-size: 12px; text-align: left; }
+.ui-crash-d code { display: block; margin-top: 6px; white-space: pre-wrap; word-break: break-word; color: var(--text-3, #7d8190); }
+.ui-crash-inline { margin-left: 8px; font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 6px; padding: 2px 10px; cursor: pointer; }

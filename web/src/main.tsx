@@ -1,10 +1,13 @@
+// The dashboard's entry: /app/ and /research/ are its two sides (DEC-0015, DEC-0020).
+// Parity Terminal (/sim/, sim.endyland.com) has its own entry, src/terminal/main.tsx, so
+// neither downloads the other's code (REF-0020). The loading screen in index.html shows
+// until the first page draws.
 import { setLiveApp } from "./lib/live/client";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { IS_SIM } from "./lib/space";
 import { startSmoothScroll } from "./lib/scroll";
-import { TerminalApp } from "./terminal/TerminalApp";
+import { ErrorBoundary } from "./ui/boundary";
 import { startPwa } from "./pwa/install";
 import "./ui/tokens.css";
 import "./styles.css";
@@ -17,13 +20,13 @@ import { isDesktop } from "./desktop/bridge";
 
 startSmoothScroll();
 startPwa();
-setLiveApp(IS_SIM ? "sim" : "product");
-startRum(IS_SIM ? "sim" : window.location.pathname.startsWith("/research") ? "research" : "product", { desktop: isDesktop() });
+setLiveApp("product");
+startRum(window.location.pathname.startsWith("/research") ? "research" : "product", { desktop: isDesktop() });
 
-// /sim/ (sim.endyland.com) is Parity Terminal, full screen (DEC-0023); /app/ and /research/ are the
-// two sides of the dashboard (DEC-0015, DEC-0020).
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    {IS_SIM ? <TerminalApp /> : <App />}
+    <ErrorBoundary scope="app">
+      <App />
+    </ErrorBoundary>
   </StrictMode>,
 );

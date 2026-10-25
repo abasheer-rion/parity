@@ -2,6 +2,7 @@
 // the product or research app, only the shared tokens, the UI library and the trade code.
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ErrorBoundary } from "../ui/boundary";
 import { applyTheme } from "../lib/prefs";
 import { TradeApp } from "./TradeApp";
 import { startPwa } from "../pwa/install";
@@ -20,6 +21,8 @@ startRum("trade", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <TradeApp />
+    <ErrorBoundary scope="app">
+      <TradeApp />
+    </ErrorBoundary>
   </StrictMode>,
 );

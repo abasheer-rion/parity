@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityAnalytics } from "./plugins/analytics";
+import { parityBoot } from "./plugins/boot";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
 import { parityMeta, parityOg } from "./plugins/meta";
@@ -168,9 +169,19 @@ const SITE_PAGES = [
   "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
+// Libraries that change rarely get their own files, so a deploy that only changes Parity's
+// code leaves them cached in the browser (REF-0020).
+const VENDOR = {
+  codeSplitting: {
+    groups: [
+      { name: "react", test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/, priority: 30 },
+      { name: "supabase", test: /node_modules[\\/]@supabase[\\/]/, priority: 20 },
+    ],
+  },
+};
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), localResults(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs
@@ -198,7 +209,7 @@ export default defineConfig(({ command, mode }) => ({
         emptyOutDir: false,
         assetsDir: "sim/assets",
         copyPublicDir: false,
-        rollupOptions: { input: { sim: here("sim/index.html") } as Record<string, string> },
+        rollupOptions: { input: { sim: here("sim/index.html") } as Record<string, string>, output: VENDOR },
       }
     : command === "build" && (mode === "trade" || mode === "academy" || mode === "lab")
     ? {
@@ -208,7 +219,7 @@ export default defineConfig(({ command, mode }) => ({
         emptyOutDir: false,
         assetsDir: `${mode}/assets`,
         copyPublicDir: false,
-        rollupOptions: { input: { [mode]: here(`${mode}/index.html`) } as Record<string, string> },
+        rollupOptions: { input: { [mode]: here(`${mode}/index.html`) } as Record<string, string>, output: VENDOR },
       }
     : {
         sourcemap: false,
@@ -219,6 +230,6 @@ export default defineConfig(({ command, mode }) => ({
         copyPublicDir: false,
         // Two sides, one code base (DEC-0015): /app/ is the product, /research/ the research.
         // /sim/, /trade/, /academy/ and /lab/ are built on their own (--mode sim, trade, academy, lab).
-        rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") } },
+        rollupOptions: { input: { app: here("app/index.html"), research: here("research/index.html") }, output: VENDOR },
       },
 }));

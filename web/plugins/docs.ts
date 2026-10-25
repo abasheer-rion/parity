@@ -13,6 +13,8 @@ import MarkdownIt, { type Token } from "markdown-it";
 import type { Plugin } from "vite";
 
 const VIRTUAL = "virtual:parity-docs";
+const VIRTUAL_INDEX = "virtual:parity-docs-index";
+const RESOLVED_INDEX = "\0virtual:parity-docs-index";
 const RESOLVED = "\0" + VIRTUAL;
 const REPO_BLOB = "https://github.com/abasheer-rion/parity/blob/main/";
 
@@ -298,8 +300,14 @@ export function parityDocs(): Plugin {
   const docsDir = join(root, "docs");
   return {
     name: "parity-docs",
-    resolveId(id) { return id === VIRTUAL ? RESOLVED : null; },
+    resolveId(id) { return id === VIRTUAL ? RESOLVED : id === VIRTUAL_INDEX ? RESOLVED_INDEX : null; },
     load(id) {
+      // The list of docs without their text, for pages that only show titles (a few kB).
+      if (id === RESOLVED_INDEX) {
+        for (const f of walk(docsDir)) this.addWatchFile(f);
+        const { docs } = buildDocs(root) as { docs: Record<string, unknown>[] };
+        return `export default ${JSON.stringify(docs.map(({ id, title, type, status, created, updated, tags }) => ({ id, title, type, status, created, updated, tags })))};`;
+      }
       if (id !== RESOLVED) return null;
       for (const f of walk(docsDir)) this.addWatchFile(f);
       this.addWatchFile(join(docsDir, "_system/glossary.json"));
@@ -308,8 +316,10 @@ export function parityDocs(): Plugin {
     },
     handleHotUpdate({ file, server }) {
       if (!file.startsWith(docsDir)) return;
-      const mod = server.moduleGraph.getModuleById(RESOLVED);
-      if (mod) server.moduleGraph.invalidateModule(mod);
+      for (const id of [RESOLVED, RESOLVED_INDEX]) {
+        const mod = server.moduleGraph.getModuleById(id);
+        if (mod) server.moduleGraph.invalidateModule(mod);
+      }
     },
   };
 }

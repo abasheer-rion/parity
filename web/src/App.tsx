@@ -1,53 +1,142 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { AppGuard } from "./auth";
 import { NotFound } from "./components/NotFound";
-import { Palette } from "./components/Palette";
-import { Popups } from "./components/Popups";
 import { Shell } from "./components/Shell";
 import { listBatches, loadReport, source, type BatchInfo } from "./lib/data";
-import { loadDocs } from "./lib/docs";
 import { date, REPO_URL } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
 import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
-import { AlgorithmReport } from "./pages/AlgorithmReport";
-import { Catalog } from "./pages/Catalog";
-import { Competitors } from "./pages/Competitors";
-import { DataPage } from "./pages/DataPage";
-import { DataSources } from "./pages/DataSources";
-import { Latency } from "./pages/Latency";
-import { Metrics } from "./pages/Metrics";
-import { Explore } from "./pages/Explore";
-import { LedgerPage } from "./pages/LedgerPage";
-import { News } from "./pages/News";
-import { Markets } from "./pages/markets/Markets";
-import { Learn } from "./pages/Learn";
-import { PrivateResearch } from "./pages/PrivateResearch";
-import { Overview } from "./pages/Overview";
-import { DocPage, DocsHome, RefsPage } from "./pages/Reader";
-import { Settings } from "./pages/Settings";
-import { SimLanding } from "./pages/SimLanding";
-import { UILibrary } from "./pages/UILibrary";
-import { Button, PageSkeleton, Toaster } from "./ui";
+import { Button, ErrorBoundary, lazyPage, PageSkeleton, Toaster } from "./ui";
 import { LegalLinks } from "./legal/LegalLinks";
-import { Signals } from "./pages/Signals";
-import { Start } from "./pages/Start";
-import { HowItWorks } from "./pages/HowItWorks";
-import { ProductHome } from "./pages/ProductHome";
-import { ResearchHome } from "./pages/ResearchHome";
-import { Watchlist } from "./pages/Watchlist";
-import { Verify } from "./pages/Verify";
-import { SharePanel } from "./pages/verify/Share";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
-import { Strategies } from "./pages/Strategies";
-import { StrategyPage } from "./pages/StrategyPage";
 import { setStoreUser } from "./lib/userStore";
 import { useRouteMeta } from "./lib/deeplink";
 import { PAYMENTS_ENABLED } from "./lib/payments/flag";
-import { Pricing } from "./pages/Pricing";
 import { nameById, nameOf } from "./lib/strategyMeta";
 
+// Every page is its own file, loaded when it is first opened, so the app starts with only
+// the frame and the page in front of you (REF-0020). The likely next pages load while idle.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function page<M extends Record<K, ComponentType<any>>, K extends keyof M & string>(load: () => Promise<M>, name: K) {
+  return lazyPage(() => load().then((m) => ({ default: m[name] })));
+}
+const PAGE_FILES = {
+  AlgorithmReport: () => import("./pages/AlgorithmReport"),
+  Catalog: () => import("./pages/Catalog"),
+  Competitors: () => import("./pages/Competitors"),
+  DataPage: () => import("./pages/DataPage"),
+  DataSources: () => import("./pages/DataSources"),
+  Latency: () => import("./pages/Latency"),
+  Metrics: () => import("./pages/Metrics"),
+  Explore: () => import("./pages/Explore"),
+  LedgerPage: () => import("./pages/LedgerPage"),
+  News: () => import("./pages/News"),
+  Markets: () => import("./pages/markets/Markets"),
+  Learn: () => import("./pages/Learn"),
+  PrivateResearch: () => import("./pages/PrivateResearch"),
+  Overview: () => import("./pages/Overview"),
+  Settings: () => import("./pages/Settings"),
+  SimLanding: () => import("./pages/SimLanding"),
+  UILibrary: () => import("./pages/UILibrary"),
+  Signals: () => import("./pages/Signals"),
+  Start: () => import("./pages/Start"),
+  HowItWorks: () => import("./pages/HowItWorks"),
+  ProductHome: () => import("./pages/ProductHome"),
+  ResearchHome: () => import("./pages/ResearchHome"),
+  Watchlist: () => import("./pages/Watchlist"),
+  Verify: () => import("./pages/Verify"),
+  Strategies: () => import("./pages/Strategies"),
+  StrategyPage: () => import("./pages/StrategyPage"),
+  Pricing: () => import("./pages/Pricing"),
+  Reader: () => import("./pages/Reader"),
+  Share: () => import("./pages/verify/Share"),
+};
+const AlgorithmReport = page(PAGE_FILES.AlgorithmReport, "AlgorithmReport");
+const Catalog = page(PAGE_FILES.Catalog, "Catalog");
+const Competitors = page(PAGE_FILES.Competitors, "Competitors");
+const DataPage = page(PAGE_FILES.DataPage, "DataPage");
+const DataSources = page(PAGE_FILES.DataSources, "DataSources");
+const Latency = page(PAGE_FILES.Latency, "Latency");
+const Metrics = page(PAGE_FILES.Metrics, "Metrics");
+const Explore = page(PAGE_FILES.Explore, "Explore");
+const LedgerPage = page(PAGE_FILES.LedgerPage, "LedgerPage");
+const News = page(PAGE_FILES.News, "News");
+const Markets = page(PAGE_FILES.Markets, "Markets");
+const Learn = page(PAGE_FILES.Learn, "Learn");
+const PrivateResearch = page(PAGE_FILES.PrivateResearch, "PrivateResearch");
+const Overview = page(PAGE_FILES.Overview, "Overview");
+const Settings = page(PAGE_FILES.Settings, "Settings");
+const SimLanding = page(PAGE_FILES.SimLanding, "SimLanding");
+const UILibrary = page(PAGE_FILES.UILibrary, "UILibrary");
+const Signals = page(PAGE_FILES.Signals, "Signals");
+const Start = page(PAGE_FILES.Start, "Start");
+const HowItWorks = page(PAGE_FILES.HowItWorks, "HowItWorks");
+const ProductHome = page(PAGE_FILES.ProductHome, "ProductHome");
+const ResearchHome = page(PAGE_FILES.ResearchHome, "ResearchHome");
+const Watchlist = page(PAGE_FILES.Watchlist, "Watchlist");
+const Verify = page(PAGE_FILES.Verify, "Verify");
+const Strategies = page(PAGE_FILES.Strategies, "Strategies");
+const StrategyPage = page(PAGE_FILES.StrategyPage, "StrategyPage");
+const Pricing = page(PAGE_FILES.Pricing, "Pricing");
+// The command palette and the hover cards carry the catalog and glossary (about 190 kB), so
+// they arrive once the first page has drawn.
+const Palette = page(() => import("./components/Palette"), "Palette");
+const Popups = page(() => import("./components/Popups"), "Popups");
+const DocPage = page(PAGE_FILES.Reader, "DocPage");
+const DocsHome = page(PAGE_FILES.Reader, "DocsHome");
+const RefsPage = page(PAGE_FILES.Reader, "RefsPage");
+const SharePanel = page(PAGE_FILES.Share, "SharePanel");
+
+// Which file draws each route, so a link can start loading its page on hover.
+const ROUTE_FILE: Record<string, () => Promise<unknown>> = {
+  "": PAGE_FILES.ProductHome, home: PAGE_FILES.ProductHome, strategies: PAGE_FILES.Strategies, strategy: PAGE_FILES.StrategyPage,
+  watchlist: PAGE_FILES.Watchlist, news: PAGE_FILES.News, markets: PAGE_FILES.Markets, learn: PAGE_FILES.Learn, verify: PAGE_FILES.Verify,
+  settings: PAGE_FILES.Settings, start: PAGE_FILES.Start, how: PAGE_FILES.HowItWorks, docs: PAGE_FILES.Reader, doc: PAGE_FILES.Reader,
+  refs: PAGE_FILES.Reader, catalog: PAGE_FILES.Catalog, algo: PAGE_FILES.AlgorithmReport, ledger: PAGE_FILES.LedgerPage,
+  sources: PAGE_FILES.DataSources, latency: PAGE_FILES.Latency, metrics: PAGE_FILES.Metrics, explore: PAGE_FILES.Explore, overview: PAGE_FILES.Overview,
+  signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors,
+  pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding,
+};
+
+/** Loads a route's page file when the pointer or focus reaches a link to it. */
+function warmOnHover() {
+  const seen = new Set<string>();
+  const on = (e: Event) => {
+    const href = (e.target as HTMLElement | null)?.closest?.("a")?.getAttribute("href") ?? "";
+    if (!href.startsWith("#/")) return;
+    const route = href.slice(2).split(/[/?]/)[0];
+    if (seen.has(route) || !ROUTE_FILE[route]) return;
+    seen.add(route);
+    void ROUTE_FILE[route]().catch(() => seen.delete(route));
+  };
+  document.addEventListener("pointerover", on, { passive: true });
+  document.addEventListener("focusin", on);
+}
+
+/** Starts loading pages before they are opened: the home page at once, the usual next ones when idle. */
+function warmPages(space: string) {
+  void (space === "research" ? PAGE_FILES.ResearchHome() : PAGE_FILES.ProductHome());
+  // After the first page and its data have had the network to themselves.
+  const idle = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 200));
+  window.setTimeout(() => idle(() => { for (const f of [PAGE_FILES.Strategies, PAGE_FILES.StrategyPage, PAGE_FILES.Learn, PAGE_FILES.Settings]) void f().catch(() => {}); }), 4000);
+}
+
 applyTheme();
+warmPages(SPACE);
+warmOnHover();
+
+
+/** Draws its children once the browser is idle after the first paint, never in the way of it. */
+function WhenIdle({ children }: { children: ReactNode }) {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const idle = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 200));
+    const id = idle(() => setReady(true), { timeout: 1500 } as IdleRequestOptions);
+    return () => { (window.cancelIdleCallback ?? window.clearTimeout)(id as number); };
+  }, []);
+  return ready ? <Suspense fallback={null}>{children}</Suspense> : null;
+}
 
 function useHash(): string {
   const [hash, setHash] = useState(window.location.hash || "#/");
@@ -69,6 +158,13 @@ export function App() {
 // The pricing page exists only when the payments flag is on (DEC-0046).
 const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors"];
 
+// The newest run is the largest file the dashboard reads: ask for it now, while the code and
+// the sign-in check are still arriving, unless the page opening does not read it.
+{
+  const first = (window.location.hash || "#/").split("?")[0].split("/")[1] ?? "";
+  if (!STANDALONE.includes(first)) void loadReport().catch(() => {});
+}
+
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
   const [batches, setBatches] = useState<BatchInfo[]>([]);
@@ -78,9 +174,6 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
 
   useEffect(() => {
     listBatches().then(setBatches).catch(() => setBatches([]));
-    // Fetch the docs once the page is idle, so previews and the reader open instantly.
-    const idle = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 300));
-    idle(() => void loadDocs());
   }, []);
 
   useEffect(() => {
@@ -168,6 +261,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
           <Button variant="secondary" icon="search" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search</Button>
         </NotFound>
       )}
+      <ErrorBoundary key={route} scope="page">
+      <Suspense fallback={<PageSkeleton parts={["stats", "table"]} label="Loading page" />}>
       {route === "docs" && <DocsHome tag={arg === "tag" ? dec(extra) : undefined} type={arg === "type" ? dec(extra) : undefined} query={q} />}
       {route === "doc" && arg && <DocPage id={dec(arg)!} anchor={dec(extra)} />}
       {route === "refs" && <RefsPage focus={dec(arg)} />}
@@ -191,7 +286,9 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "settings" && (
         <Settings section={arg} />
       )}
-      {!standalone && error && <div className="error">{error}</div>}
+      {!standalone && error && (
+        <div className="error" role="alert">{error} <button type="button" className="ui-crash-inline" onClick={() => { setError(null); loadReport(batchId).then(setReport).catch((e: Error) => setError(e.message)); }}>Try again</button></div>
+      )}
       {!standalone && !report && !error && <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />}
       {!standalone && report && (
         <>
@@ -212,9 +309,13 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
           </footer>
         </>
       )}
+      </Suspense>
+      </ErrorBoundary>
       </div>
-      <Popups />
-      <Palette report={report} />
+      <WhenIdle>
+        <Popups />
+        <Palette report={report} />
+      </WhenIdle>
       <Toaster />
     </Shell>
   );

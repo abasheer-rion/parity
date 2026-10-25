@@ -134,7 +134,7 @@ export function Popups() {
     };
   }, [open, scheduleClose]);
 
-  const data = useDocs();
+  const data = useDocs(stack.length > 0);
   if (!stack.length) return null;
   return (
     <>

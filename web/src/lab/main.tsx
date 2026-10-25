@@ -3,6 +3,7 @@
 import { setLiveApp } from "../lib/live/client";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ErrorBoundary } from "../ui/boundary";
 import { applyTheme } from "../lib/prefs";
 import { startPwa } from "../pwa/install";
 import { LabApp } from "./LabApp";
@@ -22,6 +23,8 @@ startRum("lab", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <LabApp />
+    <ErrorBoundary scope="app">
+      <LabApp />
+    </ErrorBoundary>
   </StrictMode>,
 );

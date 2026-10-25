@@ -13,6 +13,7 @@ export * from "./disclosure";
 export * from "./skeleton";
 export * from "./virtual";
 export * from "./resource";
+export * from "./boundary";
 export * from "./charts";
 export { Icon, ICON_NAMES } from "./icons";
 export { Html } from "./Html";
