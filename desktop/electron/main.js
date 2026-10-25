@@ -770,6 +770,7 @@ app.whenReady().then(async () => {
   tray.sync();
   syncBackground();
   ctx.updates.sync();
+  if (process.env.PARITY_SHOTS) require("./shots").run({ focused: focusedWindow, newWindow }).catch((e) => { console.error(e); app.quit(); });
 });
 
 app.on("activate", () => { if (ready) showAll(); });

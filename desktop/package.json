@@ -17,7 +17,7 @@
     "build:mac": "electron-builder --config electron-builder.config.js --mac --publish never",
     "build:win": "electron-builder --config electron-builder.config.js --win --publish never",
     "pack": "electron-builder --config electron-builder.config.js --dir --publish never",
-    "shots": "PARITY_SHOTS=1 electron ."
+    "shots": "PARITY_SHOTS=$HOME/Desktop/parity-app/shots PARITY_SHOTS_STEPS=wall,menu,palette,trade,window2 electron ."
   },
   "dependencies": {
     "electron-updater": "^6.8.11"

@@ -16,7 +16,7 @@ const routes = require("./routes");
 // The website's cookie notice: the app stores only what it needs to work, as the cookie
 // policy's desktop section says, so the notice never shows (DEC-0049). The site also skips it
 // in the app; this covers pages built before that change and the saved copy.
-const APP_CSS = ".cn{display:none!important}";
+const APP_CSS = ".cn,[data-cookie-prefs]{display:none!important}";
 
 class Page {
   constructor(ctx, owner, key, { background = false } = {}) {
