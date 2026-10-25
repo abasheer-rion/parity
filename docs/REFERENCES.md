@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1493 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1560 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,10 +12,10 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 792 |
+| [Web pages](#web-pages) | 847 |
 | [Forum posts](#forum-posts) | 81 |
-| [Regulators](#regulators) | 54 |
-| [News](#news) | 4 |
+| [Regulators](#regulators) | 65 |
+| [News](#news) | 5 |
 
 ## Papers
 
@@ -4063,6 +4063,12 @@ release notes. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/releas
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-021a44af
+
+No title recorded. (n.d.). *imarcgroup.com*. <https://www.imarcgroup.com/online-trading-platform-market-statistics>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-0225a9e2
 
 Proof-of-stake rewards and penalties. (n.d.). *ethereum.org*. <https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/>. Accessed 2026-10-22. Verification: not checked.
@@ -4125,7 +4131,7 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
 TradingView plans and pricing. (n.d.). *tradingview.com*. <https://www.tradingview.com/pricing/>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [CMP-0006](competitors/0006-tradingview.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [CMP-0006](competitors/0006-tradingview.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-0595d114
 
@@ -4265,6 +4271,12 @@ No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/que
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
 
+### url-0bf698b7
+
+No title recorded. (n.d.). *yougov.com*. <https://yougov.com/en-us/articles/55145-diy-investors-are-americans-using-ai-tools-to-make-investment-decisions>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-0c117288
 
 Copy help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-copy/>. Accessed 2026-10-24. Verification: not checked.
@@ -4341,11 +4353,29 @@ Google Play. (n.d.). *play.google.com*. <https://play.google.com/store/apps/deta
 
 Cited in: [CMP-0019](competitors/0019-myfxbook.md).
 
+### url-0f79d33f
+
+Yahoo Finance. (n.d.). *finance.yahoo.com*. <https://finance.yahoo.com/news/private-investment-platform-linqto-files-105229723.html>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-0fb97542
+
+StockBrokers.com Fidelity. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/fidelity>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-0fd8a0ee
 
 RTDS. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-management/real-time-distribution-system>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-106f6a07
+
+American Banker. (n.d.). *americanbanker.com*. <https://www.americanbanker.com/news/sec-rule-would-let-investors-take-exam-to-qualify-as-accredited>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-107654ad
 
@@ -4401,7 +4431,7 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
 Interactive Brokers review, StockBrokers.com. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/interactivebrokers>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
+Cited in: [CMP-0007](competitors/0007-interactive-brokers.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-13aedffa
 
@@ -4432,6 +4462,12 @@ Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 No title recorded. (n.d.). *ec.europa.eu*. <https://ec.europa.eu/eurostat/help/copyright-notice>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-151e2b4a
+
+Robinhood FY2025. (n.d.). *finviz.com*. <https://finviz.com/news/306445/robinhood-reports-fourth-quarter-and-full-year-2025-results>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-1527ab0f
 
@@ -4551,11 +4587,23 @@ Cited in: [CMP-0005](competitors/0005-ctrader.md).
 
 Cited in: [catalog/events/london-bombings-2005.json](../catalog/events/london-bombings-2005.json).
 
+### url-19a87eee
+
+No title recorded. (n.d.). *thesaasnews.com*. <https://www.thesaasnews.com/news/catalyst-raises-30m-seed>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-19a8ee73
 
 Binance.US app on the US App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id1492670702>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0014](competitors/0014-binance.md).
+
+### url-1a5b2e80
+
+NerdWallet Robinhood. (n.d.). *nerdwallet.com*. <https://www.nerdwallet.com/reviews/investing/brokers/robinhood>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-1a677e6a
 
@@ -4703,6 +4751,12 @@ FX Blue frequently asked questions. (n.d.). *fxblue.com*. <https://www.fxblue.co
 
 Cited in: [CMP-0020](competitors/0020-fx-blue.md).
 
+### url-1ea628d9
+
+The TRADE. (n.d.). *thetradenews.com*. <https://www.thetradenews.com/the-trade-predictions-series-2026-retail-retail-retail/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-1f316539
 
 BIS Triennial Survey FX turnover: API documentation. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api-doc/v2/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4740,6 +4794,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 misc UI. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/miscellaneous-ui>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-21e19296
+
+Global Trading. (n.d.). *globaltrading.net*. <https://www.globaltrading.net/?p=39306>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-221f1852
 
@@ -4847,7 +4907,7 @@ Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-you
 
 Robinhood review, stockbrokers.com. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/robinhood>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0009](competitors/0009-robinhood.md).
+Cited in: [CMP-0009](competitors/0009-robinhood.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-28eec2e7
 
@@ -4890,6 +4950,12 @@ Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
 No title recorded. (n.d.). *fulcrumasset.com*. <https://fulcrumasset.com/wp-content/uploads/2024/07/us-interest-rate-surprises-and-currency-returns.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-macro-news-surprise.json](../catalog/algorithms/fx-macro-news-surprise.json), [ALG-0010](algorithms/0010-fx-macro-news-surprise.md).
+
+### url-29edb5d6
+
+No title recorded. (n.d.). *fintech.global*. <https://fintech.global/2026/02/19/monark-secures-8-1m-to-expand-retail-private-access/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-2a7a814a
 
@@ -4965,11 +5031,23 @@ LMAX review, forexbrokers.com. (n.d.). *forexbrokers.com*. <https://www.forexbro
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-2f6eb5b5
+
+2024 outages. (n.d.). *investmentnews.com*. <https://investmentnews.com/fintech/investors-frustrated-as-failures-plague-brokerage-platforms/256046>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-2fcab9c5
 
 App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id370922777>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0011](competitors/0011-oanda.md).
+
+### url-3090dcf7
+
+Hiive to Clarity. (n.d.). *clarity.com*. <https://www.clarity.com/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-30c04d55
 
@@ -5016,6 +5094,12 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 United States federal government credit-rating downgrades. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_federal_government_credit-rating_downgrades>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/us-credit-downgrade-2011.json](../catalog/events/us-credit-downgrade-2011.json).
+
+### url-32d958e6
+
+Schwab Portfolio Insights. (n.d.). *pressroom.aboutschwab.com*. <https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Launches-AI-Powered-Capability-That-Helps-Investors-Understand-Portfolio-Performance-and-Market-Activity/default.aspx>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-3365363a
 
@@ -5084,6 +5168,18 @@ Cited in: [CMP-0022](competitors/0022-collective2.md).
 IBKR GlobalTrader, US App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/ibkr-globaltrader/id1604776354>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
+
+### url-360956b0
+
+No title recorded. (n.d.). *augment.market*. <https://augment.market/blog>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-3644b717
+
+No title recorded. (n.d.). *placera.se*. <https://www.placera.se/pressmeddelanden/hsbc-the-trust-threshold-the-majority-of-u-s-investors-use-ai-to-explore-but-only-7-say-it-drove-their-last-major-decision-20260624>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-36c7def2
 
@@ -5259,6 +5355,12 @@ No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/que
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
 
+### url-3e0013dc
+
+FINRA v. Webull. (n.d.). *law360.com*. <https://www.law360.com/articles/2338179>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-3e3dd1bf
 
 Coinbase Advanced product page. (n.d.). *coinbase.com*. <https://www.coinbase.com/advanced-trade>. Accessed 2026-10-24. Verification: not checked.
@@ -5270,6 +5372,12 @@ Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 Store help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-store/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0005](competitors/0005-ctrader.md).
+
+### url-3f0a70fe
+
+No title recorded. (n.d.). *etoro.com*. <https://www.etoro.com/en-us/news-and-analysis/latest-news/press-release/us-retail-investors-flock-to-ai-tools-with-usage-surging-75-in-one-year/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-3f7c16f4
 
@@ -5368,6 +5476,12 @@ Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DA
 Puter user-pays model. (n.d.). *docs.puter.com*. <https://docs.puter.com/user-pays-model/>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-45c15c1b
+
+London Business School. (n.d.). *london.edu*. <https://www.london.edu/news/amateur-investors-lost-big-during-pandemic-2034>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-465cdf44
 
@@ -5591,6 +5705,12 @@ Note: Linked in this repo as: Man Institute, 2015.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-514b74f5
+
+FINRA v. Robinhood. (n.d.). *wealthmanagement.com*. <https://www.wealthmanagement.com/regulation-compliance/robinhood-to-pay-finra-customers-29-75m-for-violations>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-519c5c2d
 
 Terms of Use. (n.d.). *AQR Capital Management*. <https://www.aqr.com/Terms-of-Use>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5793,6 +5913,12 @@ Cryptohopper pricing. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-5979fcf4
+
+Angel Investors Network. (n.d.). *angelinvestorsnetwork.com*. <https://angelinvestorsnetwork.com/venture-capital/equityzen-vs-hiive-2026>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-5a683f28
 
 Avellaneda Market Making - Hummingbot. (n.d.). *hummingbot.org*. <https://hummingbot.org/strategies/v1-strategies/avellaneda-market-making/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5867,6 +5993,12 @@ IG UK home page, retail CFD loss disclosure. (n.d.). *ig.com*. <https://www.ig.c
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-5d54f1f7
+
+Bullish Bears. (n.d.). *bullishbears.com*. <https://bullishbears.com/tipranks-review/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-5dc0a72e
 
 IMF API Guide, Part 3 | BD Economics. (n.d.). *bd-econ.com*. <https://bd-econ.com/imfapi3.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5881,6 +6013,18 @@ concepts. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-5ea25ed9
+
+Fidelity Q2 2026. (n.d.). *about.fidelity.com*. <https://about.fidelity.com/data-and-insights/q2-2026-business-update>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-5eab4029
+
+eToro Q2 2026. (n.d.). *etoro.com*. <https://www.etoro.com/en-us/news-and-analysis/latest-news/press-release/etoro-reports-second-quarter-2026-results/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-5eacfd5c
 
 Eikon, Wikipedia. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Eikon>. Accessed 2026-10-24. Verification: not checked.
@@ -5892,6 +6036,12 @@ Cited in: [CMP-0003](competitors/0003-lseg-workspace.md).
 LMAX pre-trade transparency. (n.d.). *lmax.com*. <https://www.lmax.com/exchange/pre-trade-transparency/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
+
+### url-5ee2b970
+
+Interactive Brokers. (n.d.). *finviz.com*. <https://finviz.com/news/397937/interactive-brokers-group-reports-brokerage-metrics-and-other-financial-information-for-september-2026-includes-reg-nms-execution-statistics>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-5f332cb0
 
@@ -5968,6 +6118,12 @@ Cited in: [catalog/events/us-strike-syria-shayrat-2017.json](../catalog/events/u
 Databento credits. (n.d.). *databento.com*. <https://databento.com/docs/faqs/usage-pricing-and-data-credits.md>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-62bb1e50
+
+Koyfin pricing. (n.d.). *koyfin.com*. <https://www.koyfin.com/pricing/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-6365ba3a
 
@@ -6207,7 +6363,7 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 
 TradingView about. (n.d.). *tradingview.com*. <https://www.tradingview.com/about/>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0006](competitors/0006-tradingview.md).
+Cited in: [CMP-0006](competitors/0006-tradingview.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-6e2dd1ec
 
@@ -6290,6 +6446,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 Oxidizing Kraken. (n.d.). *blog.kraken.com*. <https://blog.kraken.com/post/7964/oxidizing-kraken-improving-kraken-infrastructure-using-rust>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-7244c34d
+
+Bloomberg Opinion via WealthManagement. (n.d.). *wealthmanagement.com*. <https://www.wealthmanagement.com/equities/there-are-stock-gems-mine-bots-take-over>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-72492795
 
@@ -6489,7 +6651,7 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
 QuantConnect home page. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [CMP-0023](competitors/0023-quantconnect.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [CMP-0023](competitors/0023-quantconnect.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-7b3bd2be
 
@@ -6624,6 +6786,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 United States withdrawal from the Iran nuclear deal. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/iran-deal-withdrawal-2018.json](../catalog/events/iran-deal-withdrawal-2018.json).
+
+### url-805baeb2
+
+Seward & Kissel. (n.d.). *sewkis.com*. <https://www.sewkis.com/publications/sec-withdraws-14-proposed-rules-impacting-investment-advisers-investment-companies-and-broker-dealers>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-805e49fe
 
@@ -6859,11 +7027,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-89fbee0d
+
+Fundrise Innovation Fund (VCX). (n.d.). *fundrise.com*. <https://fundrise.com/innovation>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-8a601f0e
 
 OPEC. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/OPEC>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/opec-no-cut-2014.json](../catalog/events/opec-no-cut-2014.json).
+
+### url-8a61dc52
+
+Investment Trends via Finance Magnates. (n.d.). *financemagnates.com*. <https://www.financemagnates.com/forex/analysis/investors-ditch-brokers-over-bad-websites-and-apps-not-high-fees/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-8a764f51
 
@@ -7077,7 +7257,7 @@ Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-an
 
 Charles Schwab review, stockbrokers.com. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/charlesschwab>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0008](competitors/0008-thinkorswim.md).
+Cited in: [CMP-0008](competitors/0008-thinkorswim.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-94c34b0c
 
@@ -7217,7 +7397,7 @@ Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-
 
 Composer pricing. (n.d.). *composer.trade*. <https://www.composer.trade/pricing>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-9d8bddf7
 
@@ -7230,6 +7410,12 @@ Cited in: [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-cours
 channels. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/websocket-feed/channels>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-9e1420cb
+
+SEC accredited report. (n.d.). *cooleypubco.com*. <https://cooleypubco.com/2023/12/18/staff-report-definition-accredited-investor/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-9e21d9bd
 
@@ -7305,6 +7491,12 @@ Claude Code MCP. (n.d.). *code.claude.com*. <https://code.claude.com/docs/en/mcp
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
+### url-a33830e1
+
+NerdWallet Public. (n.d.). *nerdwallet.com*. <https://www.nerdwallet.com/reviews/investing/brokers/public>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-a36bd169
 
 This Blog is Systematic: Is the degradation of trend following performance a cohort effect, instrument decay, or an environmental problem? (n.d.). *qoppac.blogspot.com*. <https://qoppac.blogspot.com/2025/10/is-degradation-of-trend-following.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7327,11 +7519,23 @@ Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### url-a4298c2f
+
+No title recorded. (n.d.). *costbench.com*. <https://costbench.com/software/financial-data-terminals/bloomberg-terminal/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-a435e7b6
 
 No title recorded. (n.d.). *Board of Governors of the Federal Reserve System*. <https://www.federalreserve.gov/disclaimer.htm>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/federal-reserve-press.json](../catalog/datasets/federal-reserve-press.json), [DAT-0042](datasets/0042-federal-reserve-press.md).
+
+### url-a445258d
+
+Harvard Law forum. (n.d.). *corpgov.law.harvard.edu*. <https://corpgov.law.harvard.edu/?p=173844>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-a4647193
 
@@ -7431,6 +7635,12 @@ Nixon Ends Convertibility of U.S. Dollars to Gold and Announces Wage/Price Contr
 
 Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1971.json).
 
+### url-a70b7ab9
+
+Bloomberg Law. (n.d.). *news.bloomberglaw.com*. <https://news.bloomberglaw.com/esg/kalshi-pings-between-state-us-courts-as-cftc-grasps-for-control>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-a7291a75
 
 oneZero Hub. (n.d.). *onezero.com*. <https://www.onezero.com/hub-technology/>. Accessed 2026-10-24. Verification: not checked.
@@ -7474,6 +7684,12 @@ Alpha Streams Refactoring 2.0 - QuantConnect.com. (n.d.). *quantconnect.com*. <h
 Note: Linked in this repo as: forum announcement.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-a940b923
+
+No title recorded. (n.d.). *fintech.global*. <https://fintech.global/2025/12/03/1-in-5-investors-refuse-to-trust-ai-with-money/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-a952f0c5
 
@@ -7563,6 +7779,12 @@ Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https:
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
 
+### url-ad566343
+
+No title recorded. (n.d.). *cbinsights.com*. <https://www.cbinsights.com/company/autopilot-2>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-ad5f4cc4
 
 API. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api>. Accessed 2026-10-24. Verification: not checked.
@@ -7591,7 +7813,7 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 
 Webull review, stockbrokers.com. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/webull>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0010](competitors/0010-webull.md).
+Cited in: [CMP-0010](competitors/0010-webull.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-ae95c46d
 
@@ -7651,6 +7873,12 @@ September 11 attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Septem
 
 Cited in: [catalog/events/september-11-attacks-2001.json](../catalog/events/september-11-attacks-2001.json).
 
+### url-b16f3589
+
+StockBrokers.com Seeking Alpha. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/tools/seeking-alpha>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-b180e181
 
 No title recorded. (n.d.). *Organisation for Economic Co-operation and Development*. <https://www.oecd.org/en/about/terms-conditions.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -7692,6 +7920,12 @@ Binance futures interface. (n.d.). *binance.com*. <https://www.binance.com/en-BH
 Note: Linked in this repo as: Binance futures interface.
 
 Cited in: [CMP-0014](competitors/0014-binance.md), [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-b2798f6a
+
+Seeking Alpha. (n.d.). *about.seekingalpha.com*. <https://about.seekingalpha.com/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-b2e69d38
 
@@ -7825,6 +8059,12 @@ free trial. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/products
 
 Cited in: [CMP-0003](competitors/0003-lseg-workspace.md).
 
+### url-b9bbe1b6
+
+No title recorded. (n.d.). *pluang.com*. <https://pluang.com/en/news-feed/seperempat-perusahaan-tanpa-analisis-penutup>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-b9edd654
 
 k6 docs. (n.d.). *grafana.com*. <https://grafana.com/docs/k6/latest/>. Accessed 2026-10-24. Verification: not checked.
@@ -7925,6 +8165,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-c0640990
+
+Forge and Yahoo. (n.d.). *silicon.co.uk*. <https://www.silicon.co.uk/press-release/forge-global-and-yahoo-finance-launch-industrys-first-private-market-hub-expanding-access-to-private-market-investment-opportunities>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-c09ad418
 
 No title recorded. (n.d.). *US Bureau of Economic Analysis*. <https://apps.bea.gov/rss/rss.xml>. Accessed 2026-10-21. Verification: not checked.
@@ -7999,6 +8245,12 @@ Myfxbook home page. (n.d.). *myfxbook.com*. <https://www.myfxbook.com/>. Accesse
 
 Cited in: [CMP-0019](competitors/0019-myfxbook.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-c588004c
+
+de Silva, Smith, So. (n.d.). *quantpedia.com*. <https://quantpedia.com/how-retail-losses-money-in-option-trading/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-c5c4f9e9
 
 Pionex home page. (n.d.). *pionex.com*. <https://www.pionex.com/en/>. Accessed 2026-10-23. Verification: not checked.
@@ -8047,6 +8299,12 @@ eToro app on the US App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com
 
 Cited in: [CMP-0017](competitors/0017-etoro.md).
 
+### url-c83ab633
+
+Robinhood Ventures Fund I. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/newsroom/introducing-rvi>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-c884b731
 
 No title recorded. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id985947299>. Accessed 2026-10-24. Verification: not checked.
@@ -8092,6 +8350,12 @@ Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-00
 Alternative data market size, share and trends report. (n.d.). *grandviewresearch.com*. <https://www.grandviewresearch.com/industry-analysis/alternative-data-market>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-ca888ab3
+
+SoFi J.D. Power. (n.d.). *sofi.com*. <https://www.sofi.com/press/sofi-ranks-1-in-jd-power-2026-u-s-investor-satisfaction-study-for-diy-investors/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-ca90561a
 
@@ -8174,6 +8438,12 @@ Cited in: [CMP-0010](competitors/0010-webull.md).
 EBS connectivity. (n.d.). *cmegroup.com*. <https://www.cmegroup.com/markets/ebs/ebs-connectivity.html>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-ce41b2dc
+
+No title recorded. (n.d.). *news.gallup.com*. <https://news.gallup.com/poll/266807/percentage-americans-owns-stock.aspx>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-cea0dcd4
 
@@ -8273,6 +8543,12 @@ pricing page. (n.d.). *warriortrading.com*. <https://www.warriortrading.com/pric
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-d33c36b1
+
+No title recorded. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/EquityZen>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-d3409b5a
 
 MCP client registration. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration>. Accessed 2026-10-25. Verification: not checked.
@@ -8317,6 +8593,12 @@ Hyperliquid terms of use. (2026). *Hyperliquid*. <https://app.hyperliquid.xyz/te
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-d4ea6435
+
+No title recorded. (n.d.). *claude.ai*. <https://claude.ai/artifact/NcBntdPGZJAMaycnJyBFHr>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-d5f11dd9
 
 Nixon shock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nixon_shock>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8334,6 +8616,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Tiingo: API documentation. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/documentation/general/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/tiingo.json](../catalog/datasets/tiingo.json), [DAT-0029](datasets/0029-tiingo.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-d6f2c87d
+
+NerdWallet eToro. (n.d.). *nerdwallet.com*. <https://www.nerdwallet.com/reviews/investing/brokers/etoro>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-d70bc25d
 
@@ -8380,6 +8668,12 @@ Cited in: [catalog/events/us-uk-strikes-houthis-2024.json](../catalog/events/us-
 Gold-i MatrixNET. (n.d.). *gold-i.com*. <http://www.gold-i.com/matrix-net>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-d98cc7cf
+
+Trade Ideas. (n.d.). *trade-ideas.com*. <https://www.trade-ideas.com/pricing/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-d999ca03
 
@@ -8439,6 +8733,12 @@ IMF terms. (n.d.). *imf.org*. <https://www.imf.org/en/About/copyright-and-terms>
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-dd2beb19
+
+PDT rule removal. (n.d.). *quantinsti.com*. <https://www.quantinsti.com/articles/finra-pdt-rule-removal-2026/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-dd4f26d0
 
 ZuluTrade home page. (n.d.). *zulutrade.com*. <https://www.zulutrade.com/>. Accessed 2026-10-23. Verification: not checked.
@@ -8464,6 +8764,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 derivatives guide. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/guides/derivatives/overview>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
+
+### url-dfc157c6
+
+HBS Library. (n.d.). *library.hbs.edu*. <https://www.library.hbs.edu/databases-cases-and-more/datasets/factset-revere-supply-chain-relationships>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-e0307c82
 
@@ -8568,6 +8874,12 @@ Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-you
 No title recorded. (n.d.). *exchangerate.host*. <https://exchangerate.host/terms>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-e43b5787
+
+NeuGroup on Bloomberg. (n.d.). *connect.neugroup.com*. <https://connect.neugroup.com/public/blogs/bloomberg-terminals-how-much-more-youll-pay-next-year>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-e546f480
 
@@ -8835,7 +9147,7 @@ Cited in: [CMP-0003](competitors/0003-lseg-workspace.md).
 
 Interactive Brokers review 2026, NerdWallet. (n.d.). *nerdwallet.com*. <https://www.nerdwallet.com/reviews/investing/brokers/interactive-brokers>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
+Cited in: [CMP-0007](competitors/0007-interactive-brokers.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-f2d215e7
 
@@ -8929,6 +9241,12 @@ BEA Data API: API documentation. (n.d.). *US Bureau of Economic Analysis*. <http
 
 Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f83c73bb
+
+No title recorded. (n.d.). *marketsmedia.com*. <https://www.marketsmedia.com/icapital-completes-capital-raise-over-820m/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-f84c61b3
 
 2017 North Korean missile tests. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2017_North_Korean_missile_tests>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -9003,6 +9321,12 @@ Algorithmic trading market size, share and trends report. (n.d.). *grandviewrese
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-fb00831d
+
+Futu / Moomoo. (n.d.). *quiverquant.com*. <https://www.quiverquant.com/news/Futu+Holdings+Reports+Second+Quarter+2026+Financial+Results>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-fb6afad5
 
 WebSocket. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket>. Accessed 2026-10-24. Verification: not checked.
@@ -9058,6 +9382,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/DAAA>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-fe62906c
+
+Forge Global. (n.d.). *pressroom.aboutschwab.com*. <https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Completes-Acquisition-of-Forge-Global/default.aspx>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-fe9b566b
 
@@ -9665,6 +9995,12 @@ No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://w
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0039](datasets/0039-cftc-cot.md), [DAT-0047](datasets/0047-cftc-press.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-070688d5
+
+Robinhood 10-Q. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001783879/000178387926000114/hood-20260630.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-147f0066
 
 developer rules. (n.d.). *sec.gov*. <https://www.sec.gov/about/developer-resources>. Accessed 2026-10-22. Verification: not checked.
@@ -9691,6 +10027,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-257ff13c
+
+SEC v. Robinhood. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2025-5>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-2af24e32
 
 CFTC issues proposal on event contracts. (2024). *Commodity Futures Trading Commission, release 8907-24*. <https://www.cftc.gov/PressRoom/PressReleases/8907-24>. Accessed 2026-10-22. Verification: not checked.
@@ -9708,6 +10050,12 @@ Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-an
 No title recorded. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
+
+### url-35030c6a
+
+Schwab Q3 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0000316709/000031670926000035/a3q26exhibit991.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-3d390ac6
 
@@ -9728,6 +10076,12 @@ ESMA agrees to prohibit binary options and restrict CFDs to protect retail inves
 Note: Linked in this repo as: ESMA product intervention press release, 27 March 2018.
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### url-48f4bfef
+
+Coinbase Q2 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001679788/000167978826000087/q226earningsdeck_sec.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-4c39b66e
 
@@ -9752,6 +10106,12 @@ Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), 
 Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1381197/000138119726000147/ibkr-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-56e61f0a
+
+Webull 20-F. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001866364/000121390026041653/ea0283691-20f_webull.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-57a0d836
 
@@ -9785,7 +10145,7 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 
 SEC charges two investment advisers with making false and misleading statements about their use of artificial intelligence. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2024-36>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-7414523f
 
@@ -9794,6 +10154,12 @@ Blackstone Real Estate Income Trust, prospectus supplement, November 2022 NAV an
 Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### url-753de2c6
+
+FINRA Foundation. (n.d.). *finra.org*. <https://www.finra.org/media-center/newsreleases/2025/new-finra-foundation-research-examines-shifting-investor-behaviors>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-7a3d5497
 
@@ -9835,7 +10201,7 @@ Cited in: [CMP-0010](competitors/0010-webull.md).
 
 Robinhood 10-K 2025. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1783879/000178387926000023/hood-20251231.htm>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-98351ef7
 
@@ -9877,11 +10243,29 @@ NFA introducing brokers. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
 
+### url-bd25f99e
+
+FINRA Foundation. (n.d.). *finra.org*. <https://www.finra.org/media-center/newsreleases/2026/finra-foundation-research-examines-characteristics-behaviors-outcomes>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-be81eda4
 
 SEC charges five investment advisers for marketing rule violations. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2024-46>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-bf766f8c
+
+SoFi Invest. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001818874/000181887426000050/a2026q2earningsrelease.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-c1320121
+
+Webull Q2 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001866364/000121390026091702/ea030257601ex99-1.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-c239c50f
 
@@ -9927,6 +10311,12 @@ Charles Schwab Corporation, Form 10-Q for the quarter ended 30 June 2026. (n.d.)
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-e7638112
+
+Robinhood Q2 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001783879/000178387926000113/q22026robinhoodexhibit991.htm>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-e8a11f76
 
 Robinhood S-1. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1783879/000162828021013318/robinhoods-1.htm>. Accessed 2026-10-24. Verification: not checked.
@@ -9941,6 +10331,12 @@ Note: Linked in this repo as: SEC, Day Trading: Your Dollars at Risk.
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-f3cf87b6
+
+SEC v. Linqto executives. (n.d.). *sec.gov*. <https://www.sec.gov/enforcement-litigation/litigation-releases/lr-26672>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
 ### url-ff98aae3
 
 Privacy and dissemination of information. (n.d.). *US SEC*. <https://www.sec.gov/privacy>. Accessed 2026-10-22. Verification: not checked.
@@ -9948,6 +10344,12 @@ Privacy and dissemination of information. (n.d.). *US SEC*. <https://www.sec.gov
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ## News
+
+### url-03ac1ba6
+
+The Block. (n.d.). *theblock.co*. <https://www.theblock.co/post/390544>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
 ### url-2de6ba29
 
