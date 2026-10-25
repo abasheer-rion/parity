@@ -20,7 +20,7 @@
 // the offline copy), PARITY_DEV_URL at a local dev server, and PARITY_LOG=1 prints each page
 // the app loads. PARITY_AUTH_BYPASS=1 treats the app as signed in, only with a loopback
 // PARITY_DEV_URL (for screenshots against `VITE_AUTH_BYPASS=1 npm run dev`).
-const { app, BrowserWindow, Menu, Notification, globalShortcut, ipcMain, nativeTheme, net, protocol, screen, session, shell, systemPreferences } = require("electron");
+const { app, BrowserWindow, Menu, Notification, globalShortcut, ipcMain, nativeTheme, net, powerMonitor, protocol, screen, session, shell, systemPreferences } = require("electron");
 const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
@@ -34,6 +34,7 @@ const updater = require("./updater");
 const { ParityWindow } = require("./window");
 const { Page } = require("./page");
 const { ParityTray } = require("./tray");
+const logfile = require("./logfile");
 
 const SCHEME = "parity";
 const PARTITION = "persist:parity";
@@ -55,7 +56,15 @@ const numbered = sections.filter((s) => !s.bottom);
 function readJson(file) {
   try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return null; }
 }
-const log = (msg) => { if (!app.isPackaged || process.env.PARITY_LOG) console.log(`[parity] ${process.uptime().toFixed(1)}s ${msg}`); };
+// Printed when running from source (or with PARITY_LOG), and always kept in the log file
+// once the app is ready (logfile.js).
+let logOut = null;
+const early = [];
+const log = (msg) => {
+  if (!app.isPackaged || process.env.PARITY_LOG) console.log(`[parity] ${process.uptime().toFixed(1)}s ${msg}`);
+  if (logOut) logOut.write(msg);
+  else if (early.length < 200) early.push(msg);
+};
 
 const isDev = (url) => !!DEV_URL && (url === DEV_URL || url.startsWith(`${DEV_URL}/`));
 const isTrusted = (url) => isDev(url) || routes.isTrusted(url, ORIGIN);
@@ -94,6 +103,7 @@ const ctx = {
   isTrusted, isSaved, appPathOf, liveUrl, log,
   shellUrl: (file) => `${routes.APP_ORIGIN}/__desktop/${file}`,
   actionFor: (input) => shortcuts.actionFor(input, process.platform),
+  recentPaths: () => state.recent.map((r) => r.path),
   check, setOnline, run, addRecent, saveSoon, refreshSignedIn, signedInFrom, windowClosing, windowClosed, menuChanged, overlayData,
   openPath, newWindow, showAll, openSettings, quit: () => app.quit(),
   updates: null,
@@ -729,10 +739,34 @@ function buildMenu() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
+// ---------------------------------------------------------------- never a black window
+
+/**
+ * A page can stop drawing while its content is fine: after the Mac sleeps, a screen is
+ * plugged in or out, the graphics process restarts, or the window comes back from Stage
+ * Manager or the Dock. Each of those makes every window draw its pages again (DEC-0056).
+ */
+function watchForBlankViews() {
+  const all = (why) => { log(`repaint (${why})`); for (const w of windows) w.repaint(why); };
+  powerMonitor.on("resume", () => all("woke from sleep"));
+  powerMonitor.on("unlock-screen", () => all("screen unlocked"));
+  screen.on("display-added", () => all("screen added"));
+  screen.on("display-removed", () => all("screen removed"));
+  screen.on("display-metrics-changed", () => all("screen changed"));
+  app.on("child-process-gone", (_e, d) => {
+    log(`${d.type} process gone (${d.reason}${d.exitCode ? `, ${d.exitCode}` : ""})`);
+    if (d.type === "GPU") setTimeout(() => all("graphics restarted"), 600);
+  });
+}
+
 // ---------------------------------------------------------------- start
 
 app.whenReady().then(async () => {
+  logOut = logfile.create(app.getPath("logs"));
+  logOut.write(`Parity ${app.getVersion()} started (${process.platform} ${process.arch}, Electron ${process.versions.electron})`);
+  for (const m of early.splice(0)) logOut.write(m);
   nativeTheme.themeSource = "dark";
+  watchForBlankViews();
   if (process.platform === "win32") app.setAppUserModelId("ai.paritytrading.desktop");
   const userData = app.getPath("userData");
   ctx.settings = settingsStore.load(userData);

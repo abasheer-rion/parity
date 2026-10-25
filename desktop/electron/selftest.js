@@ -78,6 +78,83 @@ async function run(api) {
       check("a page that cannot open shows Retry", await until(() => js(w.active.wc, "!!document.getElementById('retry') && document.body.innerText.includes('Could not open')"), 5000));
     }
 
+    if (scenario === "sections") {
+      // Every section, opened from the menu and by a hash link inside it, must draw: never a
+      // black page. Prints TIME lines (first drawn, fully drawn). Run against the local stub
+      // (web/scripts/perf/desktop.mjs), whose made-up session is PARITY_STUB_COOKIE.
+      const { session } = require("electron");
+      const c = process.env.PARITY_STUB_COOKIE ? JSON.parse(process.env.PARITY_STUB_COOKIE) : null;
+      if (c) await session.fromPartition(w.ctx.PARTITION).cookies.set({ url: w.ctx.DEV_URL, name: c.name, value: c.value, path: "/" });
+      const lit = async (wc) => {
+        const img = await wc.capturePage();
+        const buf = img.toBitmap();
+        let on = 0, n = 0;
+        for (let i = 0; i < buf.length; i += 4 * 37) { n++; if (buf[i] + buf[i + 1] + buf[i + 2] > 3 * 40) on++; }
+        return n ? on / n : 0;
+      };
+      const timeline = async (label) => {
+        const t0 = Date.now();
+        let first = null;
+        for (;;) {
+          const text = await js(w.active.wc, "(document.body && document.body.innerText.trim().length) || 0").catch(() => 0);
+          const px = await lit(w.active.wc).catch(() => 0);
+          if (first === null && (text > 0 || px > 0.002)) first = Date.now() - t0;
+          if (text > 40 && px > 0.002) return { first, done: Date.now() - t0, px };
+          if (Date.now() - t0 > 15000) return { first, done: null, px, text };
+          await wait(50);
+        }
+      };
+      const list = (process.env.PARITY_STUB_SECTIONS || "home,app,research,sim,trade,academy,lab").split(",");
+      for (const id of list) {
+        w.openSection(id);
+        const r = await timeline(id);
+        check(`${id} draws`, r.done !== null, JSON.stringify(r));
+        console.log(`TIME ${id} first=${r.first} done=${r.done} px=${(r.px * 100).toFixed(1)}%`);
+      }
+      // Academy: the library, then a lesson by its link, as a person would.
+      w.openSection("academy");
+      await settled(w);
+      await js(w.active.wc, "location.hash = '#/reading-a-backtest/return'");
+      await wait(300);
+      const r = await timeline("lesson");
+      check("an Academy lesson draws", r.done !== null, JSON.stringify(r));
+      // Back to a section that stayed loaded: it must still be drawn.
+      w.openSection("trade");
+      await wait(300);
+      w.openSection("academy");
+      await wait(400);
+      const px = await lit(w.active.wc);
+      check("a kept section is still drawn when shown again", px > 0.004, `${(px * 100).toFixed(2)}%`);
+    }
+
+    if (scenario === "occlude") {
+      // Hide, minimise, switch sections and restart the graphics process, then bring the
+      // window back: it prints SHOT lines with the window's place so the caller can take a
+      // screen picture of each (web/scripts/perf/desktop.mjs). Needs the local stub.
+      const { session } = require("electron");
+      const c = process.env.PARITY_STUB_COOKIE ? JSON.parse(process.env.PARITY_STUB_COOKIE) : null;
+      if (c) await session.fromPartition(w.ctx.PARTITION).cookies.set({ url: w.ctx.DEV_URL, name: c.name, value: c.value, path: "/" });
+      w.go("/academy/#/reading-a-backtest/return");
+      await settled(w);
+      await wait(2500);
+      const shot = async (name) => { w.focus(); await wait(1500); const b = w.win.getBounds(); console.log(`SHOT ${name} ${b.x},${b.y},${b.width},${b.height}`); await wait(1500); };
+      await shot("start");
+      app.hide(); await wait(6000); app.show(); await shot("after-hide");
+      w.win.minimize(); await wait(6000); w.win.restore(); await shot("after-minimize");
+      w.openSection("trade"); await wait(3000); w.openSection("academy"); await shot("after-section-switch");
+      const gpu = app.getAppMetrics().find((m) => m.type === "GPU");
+      if (gpu) { process.kill(gpu.pid, "SIGKILL"); await wait(5000); await shot("after-graphics-restart"); }
+    }
+
+    if (scenario === "blank") {
+      // A page that draws nothing at all (a broken deploy, say): the app reloads it once, then
+      // shows Could not open with Retry. Never a black window (DEC-0056).
+      w.go("/__blank/");
+      const shown = await until(() => w.active.wc.getURL().includes("ui-error.html") && !w.active.wc.isLoading(), 30000, 300);
+      check("an empty page turns into Could not open", !!shown, w.active.wc.getURL());
+      check("it offers Retry", await until(() => js(w.active.wc, "!!document.getElementById('retry')"), 5000));
+    }
+
     if (scenario === "signedin") {
       check("signed in, not on the wall", w.wall === false);
       w.openOverlay("menu");
