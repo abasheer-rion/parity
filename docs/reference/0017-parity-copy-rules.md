@@ -64,6 +64,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0056: Team members see real-time venue feeds the public does not](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](../decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
+- [DEC-0060: A getting started checklist and first-run tours, and no bank details until a broker partner](../decisions/0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)

@@ -1,4 +1,4 @@
-// The getting started checklist (DEC-0057): a compact panel on the product home (also what the
+// The getting started checklist (DEC-0060): a compact panel on the product home (also what the
 // desktop app shows, since it loads the live site), with a progress ring. Each item ticks
 // itself when the action happens. Hide closes it; Account settings brings it back.
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";

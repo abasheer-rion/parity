@@ -1,4 +1,4 @@
-// End-to-end check of the first-run tours and the getting started checklist (DEC-0057), run
+// End-to-end check of the first-run tours and the getting started checklist (DEC-0060), run
 // in CI after the smoke test. It starts the dev server with sign-in skipped (so the store
 // keeps its row in the browser) and checks, in a real browser:
 //   1. Home's tour opens on a first visit, counts its steps, moves with the arrow keys and

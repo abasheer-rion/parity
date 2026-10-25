@@ -1,4 +1,4 @@
-// The getting started checklist (DEC-0057): what each item is, where it links, and the rule
+// The getting started checklist (DEC-0060): what each item is, where it links, and the rule
 // that decides whether it is done. No React and no network here, so the rule is unit tested
 // (tests/onboarding.test.ts).
 //

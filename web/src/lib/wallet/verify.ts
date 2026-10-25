@@ -1,4 +1,4 @@
-// Server side of wallet proofs (DEC-0057), used by functions/api/wallet/verify.ts and its tests.
+// Server side of wallet proofs (DEC-0060), used by functions/api/wallet/verify.ts and its tests.
 // Checks that a signature over a Parity wallet message came from the named wallet:
 //   Ethereum: personal_sign (EIP-191) over the EIP-4361 text, secp256k1, address recovered
 //             from the signature and compared.

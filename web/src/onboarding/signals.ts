@@ -1,4 +1,4 @@
-// Live signals for the getting started checklist (DEC-0057): has the person already done each
+// Live signals for the getting started checklist (DEC-0060): has the person already done each
 // thing? Every read goes through the person's own session and row rules, so it sees only
 // their rows. A read that fails counts as "not yet", never as done.
 import type { Signals } from "./items";

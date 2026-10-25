@@ -1,5 +1,5 @@
 // POST /api/wallet/verify {"chain", "address", "message", "signature"}: checks that a signed
-// message proves the signed-in person holds this wallet (DEC-0057), then saves the public
+// message proves the signed-in person holds this wallet (DEC-0060), then saves the public
 // address, the chain and the time. Nothing else is stored. The browser can save an address by
 // itself but can never set the verification time; only this endpoint can, with the service
 // role key from the Pages environment (never committed, never sent to the browser).

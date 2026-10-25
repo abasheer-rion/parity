@@ -1,4 +1,4 @@
--- Getting started checklist, first-run tours and read-only crypto wallets (DEC-0057).
+-- Getting started checklist, first-run tours and read-only crypto wallets (DEC-0060).
 --
 -- This file adds two tables, each person reading and writing only their own rows:
 --   1. onboarding_state: one row per person. When each checklist item was first done, whether

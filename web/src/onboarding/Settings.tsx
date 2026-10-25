@@ -1,4 +1,4 @@
-// Account settings rows for getting started (DEC-0057): bring back the checklist, show tours
+// Account settings rows for getting started (DEC-0060): bring back the checklist, show tours
 // again, the brokerage "Notify me" choice, and crypto wallets.
 import { lazy, Suspense, useState } from "react";
 import { Button, SettingsRow, Toggle, toast } from "../ui";

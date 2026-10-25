@@ -1,4 +1,4 @@
-// The getting started checklist, the tour component and read-only wallet proofs (DEC-0057).
+// The getting started checklist, the tour component and read-only wallet proofs (DEC-0060).
 // No network: the tour runs in jsdom, wallet signatures are made with throwaway keys.
 import { ed25519 } from "@noble/curves/ed25519.js";
 import { secp256k1 } from "@noble/curves/secp256k1.js";

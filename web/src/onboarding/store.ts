@@ -1,4 +1,4 @@
-// Each person's checklist and tour state (DEC-0057), kept in Supabase's onboarding_state (one
+// Each person's checklist and tour state (DEC-0060), kept in Supabase's onboarding_state (one
 // row per person, row level security: own row only). The local preview has no Supabase user,
 // so it keeps the same row in this browser instead. Every page that shows the checklist or a
 // tour shares this one store.

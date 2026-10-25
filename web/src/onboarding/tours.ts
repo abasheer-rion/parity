@@ -1,4 +1,4 @@
-// The first-run tours (DEC-0057): 3 to 6 steps for each area, shown once per person, the
+// The first-run tours (DEC-0060): 3 to 6 steps for each area, shown once per person, the
 // first time they open that area. A step whose target is not on screen (a phone layout, a
 // closed panel) is skipped by the tour itself, so phone and desktop steps can sit side by
 // side. Copy follows REF-0017: say what it is, short sentences. Trade stays terse.

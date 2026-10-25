@@ -1,4 +1,4 @@
-// Add a crypto wallet, read only (DEC-0057). Two ways: sign a message in the wallet app
+// Add a crypto wallet, read only (DEC-0060). Two ways: sign a message in the wallet app
 // (Sign-In With Ethereum, EIP-4361, or the same message on Solana), which the server checks
 // before marking the wallet verified; or type the public address, saved as not verified.
 // Parity never asks for a seed phrase or private key, says so at the top, and refuses

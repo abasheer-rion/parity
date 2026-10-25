@@ -1,4 +1,4 @@
-// Proving a wallet is yours by signing a message (DEC-0057). Ethereum uses Sign-In With
+// Proving a wallet is yours by signing a message (DEC-0060). Ethereum uses Sign-In With
 // Ethereum (EIP-4361); Solana uses the same text format, as Phantom and Solflare show it.
 // Signing a message moves no funds and gives no access to them.
 //
