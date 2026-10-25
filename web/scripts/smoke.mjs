@@ -120,6 +120,38 @@ for (const size of SIZES) {
   }));
   await ctx.close();
 }
+// ---------------------------------------------------------------- deep links keep their state
+
+const flows = [
+  ["a strategy search typed in goes into the link", async (page) => {
+    await page.goto(`${BASE}/app/#/strategies`, { waitUntil: "networkidle" });
+    await page.getByPlaceholder("Search strategies").fill("carry");
+    await page.getByRole("tablist", { name: "Time range" }).getByRole("tab", { name: "1Y" }).click();
+    const hash = decodeURIComponent(new URL(page.url()).hash);
+    return hash.includes("q=carry") && hash.includes("range=1Y") ? null : `link is ${hash}`;
+  }],
+  ["a strategies link reopens with its search and range", async (page) => {
+    await page.goto(`${BASE}/app/#/strategies?q=carry&range=5Y`, { waitUntil: "networkidle" });
+    const q = await page.getByPlaceholder("Search strategies").inputValue();
+    const on = await page.getByRole("tablist", { name: "Time range" }).getByRole("tab", { selected: true }).innerText();
+    return q === "carry" && /5Y/.test(on) ? null : `search "${q}", range "${on}"`;
+  }],
+  ["a catalog link reopens with its filters", async (page) => {
+    await page.goto(`${BASE}/research/#/catalog?q=carry&sort=year`, { waitUntil: "networkidle" });
+    const q = await page.getByPlaceholder("Search name, tags, authors").inputValue();
+    const sort = await page.getByLabel("Sort").inputValue();
+    return q === "carry" && sort === "year" ? null : `search "${q}", sort "${sort}"`;
+  }],
+];
+const fctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+for (const [name, fn] of flows) {
+  const page = await fctx.newPage();
+  const why = await fn(page).catch((e) => e.message.split("\n")[0]);
+  if (why) problems.push(`flow "${name}": ${why}`);
+  await page.close();
+}
+await fctx.close();
+
 await browser.close();
 await server?.close();
 

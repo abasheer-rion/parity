@@ -2,6 +2,7 @@
 // afterwards, and the biggest market days since 1999 with the news for each.
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
+import { useHashState } from "../lib/deeplink";
 import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, PageSkeleton, SearchInput, Segmented, Select, Tabs, useResource, type Column } from "../ui";
 import { Archive, Impact as ImpactSearch } from "./NewsImpact";
 import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay } from "../lib/news";
@@ -39,14 +40,17 @@ export function News({ view: initial }: { view?: string }) {
 // ------------------------------------------------------------------ latest
 
 function Latest() {
-  const [q, setQ] = useState("");
-  const [ccy, setCcy] = useState("");
-  const [cmd, setCmd] = useState("");
-  const [region, setRegion] = useState("");
-  const [src, setSrc] = useState("");
-  const [cat, setCat] = useState("");
-  const [sort, setSort] = useState<SortKey>("newest");
-  const [horizon, setHorizon] = useState<Horizon>("1d");
+  // The filters live in the link, so Copy link and the back button reopen this view (DEC-0038).
+  const [q, setQ] = useHashState("q");
+  const [ccy, setCcy] = useHashState("ccy");
+  const [cmd, setCmd] = useHashState("cmd");
+  const [region, setRegion] = useHashState("region");
+  const [src, setSrc] = useHashState("src");
+  const [cat, setCat] = useHashState("cat");
+  const [sortRaw, setSort] = useHashState("sort", "newest");
+  const sort: SortKey = (["newest", "oldest", "biggest"] as const).includes(sortRaw as SortKey) ? (sortRaw as SortKey) : "newest";
+  const [horizonRaw, setHorizon] = useHashState("h", "1d");
+  const horizon: Horizon = (["1h", "1d", "1w", "1m"] as const).includes(horizonRaw as Horizon) ? (horizonRaw as Horizon) : "1d";
   const [open, setOpen] = useState<Article | null>(null);
 
   const { data: doc, error } = useResource("news", loadNews);
