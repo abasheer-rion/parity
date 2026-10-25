@@ -172,3 +172,25 @@ describe("checkout", () => {
     expect(formEncode({ a: { b: [{ c: 1 }] }, skip: undefined })).toBe("a%5Bb%5D%5B0%5D%5Bc%5D=1");
   });
 });
+
+describe("Supabase store requests", () => {
+  it("claims events with an insert that ignores duplicates, then reads the earlier row", async () => {
+    const { supabaseStore } = await import("../../src/lib/payments/store");
+    const calls: { url: string; method: string; prefer: string | null; apikey: string | null; auth: string | null }[] = [];
+    let first = true;
+    const fetcher = (async (url: string, init: RequestInit) => {
+      const h = new Headers(init.headers);
+      calls.push({ url, method: init.method ?? "GET", prefer: h.get("Prefer"), apikey: h.get("apikey"), auth: h.get("Authorization") });
+      if (init.method === "POST") { const made = first ? "[{}]" : "[]"; first = false; return new Response(made); }
+      return new Response(JSON.stringify([{ processed_at: "2026-11-01T00:00:00Z", error: null }]));
+    }) as unknown as typeof fetch;
+    const store = supabaseStore("https://x.supabase.co/", "sb_secret_abc", fetcher);
+    expect(await store.claimEvent({ stripe_event_id: "evt_1", type: "t", object_id: null })).toBe("new");
+    expect(await store.claimEvent({ stripe_event_id: "evt_1", type: "t", object_id: null })).toBe("done");
+    expect(calls[0].url).toBe("https://x.supabase.co/rest/v1/payment_events?on_conflict=stripe_event_id");
+    expect(calls[0].prefer).toContain("ignore-duplicates");
+    expect(calls[0].apikey).toBe("sb_secret_abc");
+    expect(calls[0].auth).toBeNull();
+    expect(calls[2].url).toContain("stripe_event_id=eq.evt_1");
+  });
+});

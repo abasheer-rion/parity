@@ -78,7 +78,8 @@ export function supabaseStore(url: string, serviceKey: string, fetcher: Fetch = 
     },
     async replaceEntitlements(userId, rows) {
       await call("DELETE", `payment_entitlements?user_id=${eq(userId)}&subscription_id=not.is.null`, undefined, "return=minimal");
-      if (rows.length) await call("POST", "payment_entitlements", rows.map((r) => ({ user_id: userId, ...r })), "return=minimal");
+      // A hand-made grant (no subscription) for the same feature is kept: skip duplicates.
+      if (rows.length) await call("POST", "payment_entitlements?on_conflict=user_id,feature", rows.map((r) => ({ user_id: userId, ...r })), "resolution=ignore-duplicates,return=minimal");
     },
   };
 }
