@@ -9,6 +9,7 @@ import { source } from "./data";
 import { useResource } from "../ui/resource";
 import type { PrivateDoc } from "./privateMarkets";
 import type { Point } from "./types";
+import { rumAge } from "./rum";
 
 export interface MarketSource {
   id: string; name: string; provider: string; what: string; terms_url: string; licence: string;
@@ -91,7 +92,9 @@ function get<T>(name: string): Promise<T> {
         cache.delete(name);
         throw new Error(res.status === 404 ? "No markets data has been exported yet. Run `parity markets fetch` then `parity markets export`." : `Could not load markets data (${res.status}).`);
       }
-      return res.json();
+      const doc = (await res.json()) as { fetched_at?: string; generated_at?: string };
+      rumAge(`markets/${name}`, doc.fetched_at ?? doc.generated_at);
+      return doc;
     }));
   }
   return cache.get(name) as Promise<T>;

@@ -10,6 +10,7 @@ import { loadWorld, type WorldLoaded } from "../lib/world";
 import { loadBotsIndex } from "../lib/bots";
 import type { BotsIndex } from "../lib/botStats";
 import type { Point, Report } from "../lib/types";
+import { rumAge } from "../lib/rum";
 
 export type SeriesClass = "fx" | "rates" | "commodities" | "equities" | "crypto" | "positioning" | "macro" | (string & {});
 export type Win = "d1" | "w1" | "m1" | "ytd";
@@ -52,7 +53,11 @@ const MISSING_INDEX = source === "local"
 
 let indexP: Promise<Loadable<TermIndex>> | null = null;
 export function loadIndex(): Promise<Loadable<TermIndex>> {
-  if (!indexP) indexP = getJson<TermIndex>(`${TERM_BASE}/index.json`, MISSING_INDEX);
+  if (!indexP) {
+    indexP = getJson<TermIndex>(`${TERM_BASE}/index.json`, MISSING_INDEX);
+    // How old the newest price on screen is (DEC-0045); Trade and the Terminal share this.
+    void indexP.then((r) => { if (r.status === "ok") rumAge("terminal/index", r.data.data_through); });
+  }
   return indexP;
 }
 

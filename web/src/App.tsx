@@ -14,6 +14,7 @@ import { Catalog } from "./pages/Catalog";
 import { Competitors } from "./pages/Competitors";
 import { DataPage } from "./pages/DataPage";
 import { DataSources } from "./pages/DataSources";
+import { Latency } from "./pages/Latency";
 import { Explore } from "./pages/Explore";
 import { LedgerPage } from "./pages/LedgerPage";
 import { News } from "./pages/News";
@@ -64,7 +65,7 @@ export function App() {
 
 // Pages that read only what is bundled in the build, not the selected run.
 // The pricing page exists only when the payments flag is on (DEC-0046).
-const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors"];
+const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors"];
 
 function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () => void }) {
   const hash = useHash();
@@ -177,6 +178,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "markets" && <Markets view={arg?.split("?")[0]} />}
       {route === "sources" && <DataSources focus={arg} />}
       {route === "pricing" && PAYMENTS_ENABLED && <Pricing />}
+      {route === "latency" && <Latency />}
       {route === "settings" && (
         <Settings section={arg} />
       )}

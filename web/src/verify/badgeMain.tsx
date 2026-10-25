@@ -10,8 +10,10 @@ import "../styles.css";
 import "../ui/ui.css";
 import "../legal/notice";
 import "../a11y.css";
+import { startRum } from "../lib/rum";
 
 applyTheme();
+startRum("verify");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

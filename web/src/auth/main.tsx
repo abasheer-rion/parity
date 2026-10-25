@@ -6,9 +6,12 @@ import { createRoot } from "react-dom/client";
 import "../legal/notice";
 import { AuthFlow } from "./AuthFlow";
 import { carryFromQuery, viewFromPath } from "./views";
+import { startRum } from "../lib/rum";
+import { isDesktop } from "../desktop/bridge";
 
 // Coming back with the back button after the logo faded the page out shows it again.
 window.addEventListener("pageshow", () => document.body.classList.remove("leaving"));
+startRum("auth", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

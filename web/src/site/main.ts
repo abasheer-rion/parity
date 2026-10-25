@@ -11,8 +11,11 @@
 import Lenis from "lenis";
 import { botTrades, TRADES } from "./botPath";
 import { startPwa } from "../pwa/install";
+import { startRum } from "../lib/rum";
+import { isDesktop } from "../desktop/bridge";
 
 startPwa();
+startRum("site", { desktop: isDesktop() });
 
 const root = document.documentElement;
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

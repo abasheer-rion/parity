@@ -686,9 +686,18 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .search-stats span { color: var(--muted); font-size: 12px; }
 .service-health { margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 4px; }
 .service-health .down { color: var(--bad); }
+.service-health.service-extra { display: block; margin-top: -8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .service-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
 .service-dot.live { background: var(--good); }
 .service-dot.stale { background: var(--bad); }
+.service-dot.late { background: var(--ds-icon-warning); }
+.service-dot.unknown { background: var(--muted); }
+.lat-table td, .lat-table th { padding-top: 4px; padding-bottom: 4px; }
+.lat-table td.num, .lat-table th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lat-table caption { text-align: left; padding: 12px 0 4px; }
+.lat-bars { display: block; }
+.lat-bars rect.ok { fill: var(--ds-text-secondary, currentColor); opacity: 0.55; }
+.lat-bars rect.bad { fill: var(--bad); }
 .search-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
 .search-filters select { height: 32px; }
 .search-count { margin-left: auto; }

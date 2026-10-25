@@ -11,9 +11,12 @@ import "../ui/ui.css";
 import "../ui/dark.css";
 import "../legal/notice";
 import "../a11y.css";
+import { startRum } from "../lib/rum";
+import { isDesktop } from "../desktop/bridge";
 
 applyTheme();
 startPwa();
+startRum("trade", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -34,6 +34,7 @@ import { checkAlerts } from "./trackers";
 import { isDesktop } from "../desktop/bridge";
 import { NameDialog, WatchlistsView, WatchMini } from "./WatchlistsView";
 import "./trade.css";
+import { rumRefresh } from "../lib/rum";
 
 export function TradeApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <TradeShell />; }}</AppGuard>;
@@ -136,7 +137,10 @@ function TradeShell() {
   // The desktop app stays open for hours, so it checks again every 30 minutes (DEC-0041).
   useEffect(() => {
     if (!isDesktop() || !list.length) return;
-    const t = window.setInterval(() => void checkAlerts(list), 30 * 60_000);
+    // Each run notes how late it came and the gap since the last (DEC-0045).
+    const tick = rumRefresh("trade/alerts", 30 * 60_000, true);
+    tick();
+    const t = window.setInterval(() => { tick(); void checkAlerts(list); }, 30 * 60_000);
     return () => window.clearInterval(t);
   }, [list]);
 
