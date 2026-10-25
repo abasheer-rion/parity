@@ -28,13 +28,13 @@ Owner means the owner of Parity Trading, Inc. Lawyer means outside counsel (secu
 
 | Action | Who | Why |
 | --- | --- | --- |
-| Add a postal address to the privacy policy, terms and regulatory page | Owner | Marked TODO on the legal pages; CAN-SPAM needs it before any marketing email |
-| Have counsel review all six legal pages, including `/legal/regulatory/` | Owner, lawyer | Every page says "pending review by counsel" |
+| Add a postal address to the privacy policy, terms and regulatory page | Owner | The pages give only the email address for now (see [Legal pages open items](#legal-pages-open-items)); CAN-SPAM needs it before any marketing email |
+| Have counsel review all six legal pages, including `/legal/regulatory/` | Owner, lawyer | None has been reviewed. The public pages no longer say so (owner, 25 October), so this list is the only record |
 | Confirm the state the company operates from, and register there as a foreign corporation if needed | Owner, lawyer | Delaware is the state of incorporation only |
 | Keep the Delaware registered agent and file the annual franchise tax report by 1 March | Owner | 8 Del. C. 132; Delaware Division of Corporations |
 | Keep every page impersonal: no "buy", no advice for one person, no ranking by return | Team | Publisher exclusion and CFTC 4.14(a)(9) |
 | No affiliate or referral links to offshore perps venues for US users | Team | Could be acting as an unregistered introducing broker |
-| Confirm the Supabase region and data processing agreements | Owner, lawyer | Privacy policy TODO |
+| Confirm the Supabase region and data processing agreements | Owner, lawyer | Privacy policy section 7 relies on them |
 | Reply to complaints within the targets on the regulatory page, and log them | Team | Complaint handling we promise publicly |
 
 ## Before paid tiers (DEC-0032, DEC-0046)
@@ -99,6 +99,21 @@ Tailored advice is the clearest trigger for registration.
 | EU: personal investment advice needs MiFID II authorisation and crypto advice needs MiCA authorisation; do not offer either | Owner |
 | Digital Services Act: check whether badge hosting needs a point of contact and an EU legal representative | Lawyer |
 | European Accessibility Act: check whether Parity is in scope or exempt as a microenterprise | Lawyer |
+
+## Legal pages open items
+
+On 25 October the owner asked for the public legal pages to read like other companies' legal pages, with no draft labels. The items below were marked on the pages before then. They are still open; the pages now use neutral wording until each is decided.
+
+| Item | Page and section | Who | What the page says now |
+| --- | --- | --- | --- |
+| Lawyer review of all six legal pages and the legal index | All of `/legal/` | Owner, lawyer | No draft label. The regulatory page keeps "This page is general information, not legal advice." |
+| Postal address for Parity Trading, Inc. | Privacy 1, Regulatory 1 | Owner | Contact by email at contact@paritytrading.ai |
+| Supabase backup period for our plan | Privacy 5 | Owner | Backup copies "expire on their schedule" |
+| Data processing agreements with each provider, and the Supabase region | Privacy 7 | Owner, lawyer | Relies on the safeguards in the providers' data processing terms, such as the standard contractual clauses |
+| Lawyer review of the research dataset wording and the sale of aggregate data, before launch | Privacy 3 | Owner, lawyer | The current wording, unchanged |
+| Host the web fonts ourselves so Google no longer receives visitors' IP addresses | Privacy 2, Cookies 6 | Owner, team | Google Fonts is listed as a provider |
+
+When an item is decided, change the page, its "Last updated" date and this table.
 
 ## Open questions for counsel
 
