@@ -21,6 +21,12 @@ export const isMockStore = () => forceLocal || !currentUser;
 
 function emit(table: string) { for (const f of listeners) f(table); }
 
+/** Calls `f` with the table's name whenever this browser changes one of the person's tables. */
+export function onTableChange(f: (table: string) => void): () => void {
+  listeners.add(f);
+  return () => { listeners.delete(f); };
+}
+
 // ------------------------------------------------------------------ local mock
 
 const memory = new Map<string, unknown[]>();

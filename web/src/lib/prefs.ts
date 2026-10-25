@@ -69,5 +69,7 @@ export function applyTheme() {
 
 export function toggleBookmark(href: string, label: string) {
   const has = current.bookmarks.some((b) => b.href === href);
+  // Following a strategy counts as the checklist's "Add a watchlist or alert" (DEC-0060).
+  if (!has && href.startsWith("#/strategy/")) void import("../onboarding/done").then((m) => m.signalDone("watch"));
   setPrefs({ bookmarks: has ? current.bookmarks.filter((b) => b.href !== href) : [...current.bookmarks, { href, label }] });
 }

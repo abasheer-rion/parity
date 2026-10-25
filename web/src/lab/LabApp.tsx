@@ -22,6 +22,7 @@ import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
 import { Dialog, ErrorBoundary, Icon, lazyPage, Toaster } from "../ui";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { TryView } from "./TryView";
 import { KeyTable } from "./KeyTable";
 import { readSettings, VIEWS, writeSettings, type Settings, type View } from "./state";
@@ -226,6 +227,7 @@ function LabShell() {
       </Dialog>
       <Toaster />
       <Assistant place="workbench" />
+      <FirstRunTour areas={["lab"]} ready={view !== "settings"} />
     </div>
   );
 }

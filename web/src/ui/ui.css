@@ -573,7 +573,11 @@ html.ui-locked { overflow: hidden; }
 .ui-tour-count { font-size: var(--type-xs); color: var(--color-text-faint); }
 .ui-tour h3 { margin: 0 0 var(--space-1); font-size: var(--type-lg); font-weight: var(--weight-medium); color: var(--color-text); }
 .ui-tour-body { font-size: var(--type-sm); line-height: var(--leading-normal); }
-.ui-tour-foot { display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-3); }
+.ui-tour-foot { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+.ui-tour-gap { flex: 1; }
+.ui-tour-skipall { padding: 0; border: 0; background: none; font: inherit; font-size: var(--type-xs); color: var(--color-text-faint); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.ui-tour-skipall:hover { color: var(--color-text); }
+.ui-tour-skipall:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .ui-tour-ring { position: fixed; z-index: var(--z-modal); border-radius: var(--radius-md); box-shadow: 0 0 0 2px var(--color-accent), 0 0 0 9999px color-mix(in srgb, var(--palette-black) 45%, transparent); pointer-events: none; transition: opacity var(--dur-2) var(--ease-out); }
 .ui-tour-ring[data-state="enter"], .ui-tour-ring[data-state="exit"] { opacity: 0; }
 

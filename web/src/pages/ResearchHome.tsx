@@ -12,6 +12,7 @@ import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report } from "../lib/types";
 import { researchInsights } from "../lib/insights";
 import { Insights } from "../components/Insights";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 export function ResearchHome({ report }: { report: Report }) {
   const docs = useDocIndex();
@@ -124,6 +125,7 @@ export function ResearchHome({ report }: { report: Report }) {
           <p className="muted small">{report.coverage?.series?.length ?? 0} series behind this run, fetched {date(report.coverage?.fetched_at ?? null)}.</p>
         </Reveal>
       </div>
+      <FirstRunTour areas={["research"]} />
       <p className="muted small phome-foot">Results are made on this side and shown on the product side with their verdicts. <a href="#/how">How Parity works</a>.</p>
     </PageTransition>
   );

@@ -11,6 +11,7 @@ import { useRows } from "../lib/userStore";
 import { InstrumentSelect, readPref, writePref } from "./shared";
 import { alertsTable, byPosition, seedDefaultList, watchlistsTable, type WatchlistRow } from "./trackers";
 import { TTable } from "./TTable";
+import { signalDone } from "../onboarding/done";
 
 const sparkPoints = (s: Instrument): Point[] => s.spark.flatMap((v, i) => (v == null || !Number.isFinite(v) ? [] : [[String(i), v] as Point]));
 
@@ -50,7 +51,7 @@ export function WatchMini({ list, current, onSymbol }: { list: Instrument[]; cur
           {w.sorted.length ? w.sorted.map((l) => <option key={l.id} value={l.id}>{l.name}</option>) : <option value="">Loading</option>}
         </select>
         <InstrumentSelect list={list.filter((s) => !w.active?.items.includes(s.key))} value="" label="Add symbol" allowNone="+ Add"
-          onChange={(k) => { if (w.active && k) void watchlistsTable.update(w.active.id, { items: [...w.active.items, k] }).catch(fail); }} />
+          onChange={(k) => { if (w.active && k) void watchlistsTable.update(w.active.id, { items: [...w.active.items, k] }).then(() => signalDone("watch"), fail); }} />
         <StaticBadge feed="eod" source="Daily closes" asOf={oldest(w.rows)} compact />
       </div>
       <TTable<Instrument> label="Watchlist" rows={w.rows} rowKey={(s) => s.key} onRow={(s) => onSymbol(s.key)} active={(s) => s.key === current}
@@ -93,7 +94,7 @@ export function WatchlistsView({ list, onSymbol, onAlert }: { list: Instrument[]
         <Button size="sm" variant="tertiary" onClick={() => setDeleting(true)} disabled={!active || w.sorted.length < 2}>Delete</Button>
         <span className="vbar-gap" />
         <StaticBadge feed="eod" source="Daily closes" asOf={oldest(w.rows)} />
-        <InstrumentSelect list={list.filter((s) => !active?.items.includes(s.key))} value="" onChange={(k) => { if (active && k) void save([...active.items, k]); }} label="Add symbol" allowNone="+ Add symbol" />
+        <InstrumentSelect list={list.filter((s) => !active?.items.includes(s.key))} value="" onChange={(k) => { if (active && k) { void save([...active.items, k]); signalDone("watch"); } }} label="Add symbol" allowNone="+ Add symbol" />
       </div>
       <section className="vbox vbox-fill" aria-label={active?.name ?? "Watchlist"}>
         {w.lists.error ? <div className="vbox-empty">{w.lists.error}</div> : (
