@@ -75,7 +75,7 @@ Use an inbox you can read, for example `you+parity1@gmail.com`. Use a private wi
 ### Sign up and verify
 
 - [ ] Open <https://parity.endyland.com/>. A small cookie notice shows at the bottom left. Click **Preferences**: Essential is on and locked, Analytics is off and cannot be turned on. Click **Cancel**, then **OK**. The notice goes away and does not come back on reload.
-- [ ] Click **Sign up**. Type the email and a password like `short`. The rules under the password stay unticked, and Create account says "Use at least 10 characters."
+- [ ] Click **Sign up**. Type the email, click **Continue**, then type a password like `short`. The rules under the password stay unticked, and Create account says "Use at least 10 characters."
 - [ ] Use a real password, tick the agreement box, and click **Create account**. You see "Check your email".
 - [ ] The email arrives within a minute, from `no-reply@parity.endyland.com`, subject "Confirm your email for Parity", with the Parity logo.
 - [ ] Click **Confirm my email**. It opens `https://parity.endyland.com/verify/...`. Click **Confirm and continue**. You land in the app at `/app/`.
@@ -85,7 +85,7 @@ Use an inbox you can read, for example `you+parity1@gmail.com`. Use a private wi
 - [ ] Open the account menu (bottom of the sidebar) and choose **Sign out**. You are on the log-in page.
 - [ ] Log in with a wrong password. You see "That email and password do not match."
 - [ ] Log in with the right password. You land in the app.
-- [ ] Sign out. Choose **Email code**, ask for a code, and type the 6 digits from the email. You land in the app.
+- [ ] Sign out. Type your email, click **Continue**, then **Email me a code instead**, and type the 6 digits from the email. You land in the app.
 
 ### Verify by code, and resend
 
