@@ -59,6 +59,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0042: Parity Academy, a full-screen course player of its own](../decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](../decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [DEC-0044: One sign-in panel that fades in over the front page](../decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md)
+- [DEC-0045: We track how old our data is at every hop and how fast pages get it](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->
