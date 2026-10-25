@@ -10,6 +10,7 @@ Writes, under the output folder:
   latest.json           a copy of the newest run
   search.json           the newest strategy search snapshot (DEC-0014)
   sims.json             the newest always-on sims summary (DEC-0037)
+  profiles.json         the newest competitor feedback counts (DEC-0047)
 
 and, one folder up (the site root, public): stats.json, two counts for the front
 page's counters, strategies tested in the newest run and variations searched.
@@ -100,6 +101,15 @@ def main(out: Path) -> int:
         except psycopg.Error as exc:  # table not migrated yet: ship the site without it
             conn.rollback()
             print(f"no sims snapshot: {exc}", file=sys.stderr)
+        # The competitor feedback collector's counts (DEC-0047), if any.
+        try:
+            cur.execute("select doc from public.profile_snapshots order by id desc limit 1")
+            prof = cur.fetchone()
+            if prof:
+                (out / "profiles.json").write_text(json.dumps(prof["doc"], separators=(",", ":")))
+        except psycopg.Error as exc:  # table not migrated yet: ship the site without it
+            conn.rollback()
+            print(f"no profiles snapshot: {exc}", file=sys.stderr)
     # The front page's live counters (DEC-0017). Public, so counts only.
     stats: dict = {}
     if index:

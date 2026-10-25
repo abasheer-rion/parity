@@ -7,13 +7,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 45 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 46 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 15 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 18 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 16 |
+| [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 17 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -35,8 +36,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-24 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - 2026-10-24 [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
+- 2026-10-24 [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - 2026-10-24 [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
-- 2026-10-24 [LOG-0014: Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
 
 ## intent
 
@@ -95,6 +96,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
 | DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -175,6 +177,34 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
+## competitor
+
+| ID | Title | Status | Updated | Tags |
+| --- | --- | --- | --- | --- |
+| CMP-0001 | [What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [ui](TAGS.md#ui) |
+| CMP-0002 | [Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0003 | [LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0004 | [MetaTrader 4 and 5, the free broker platform most FX traders use](competitors/0004-metatrader-4-and-5.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0005 | [cTrader, a modern broker platform with copy, algos and a store](competitors/0005-ctrader.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0006 | [TradingView, browser charts and a social network for traders](competitors/0006-tradingview.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0007 | [Interactive Brokers, a global broker with four trading apps](competitors/0007-interactive-brokers.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0008 | [thinkorswim, Schwab's dense pro trading platform for options and futures traders](competitors/0008-thinkorswim.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0009 | [Robinhood, the simple trading app that added a pro desktop called Legend](competitors/0009-robinhood.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0010 | [Webull, a zero-commission broker with pro desktop tools and paper trading](competitors/0010-webull.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0011 | [OANDA, a long-running forex broker and currency data provider](competitors/0011-oanda.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [ui](TAGS.md#ui) |
+| CMP-0012 | [LMAX, an institutional FX exchange with a broker for professional traders](competitors/0012-lmax.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source) |
+| CMP-0013 | [Hyperliquid, an onchain exchange for crypto perpetuals and spot](competitors/0013-hyperliquid.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [ui](TAGS.md#ui) |
+| CMP-0014 | [Binance, the largest crypto exchange with futures and copy trading](competitors/0014-binance.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0015 | [Coinbase Advanced, the pro trading screen inside Coinbase](competitors/0015-coinbase-advanced.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0016 | [Kraken Pro, a customisable crypto trading app with a native desktop](competitors/0016-kraken-pro.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0017 | [eToro, a social investing broker built around copying other investors](competitors/0017-etoro.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0018 | [QuantPad, an AI quant workspace that grades strategies A to F](competitors/0018-quantpad.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0019 | [Myfxbook, the forex track record and analysis site traders cite](competitors/0019-myfxbook.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0020 | [FX Blue, free forex account analysis and MetaTrader add-ons](competitors/0020-fx-blue.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0021 | [Darwinex, a regulated broker that turns traders into risk-scaled indexes](competitors/0021-darwinex.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0022 | [Collective2, a marketplace of live-tracked trading strategies](competitors/0022-collective2.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0023 | [QuantConnect, cloud backtesting and live trading on open-source LEAN](competitors/0023-quantconnect.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+
 ## log
 
 | ID | Title | Status | Updated | Tags |
@@ -195,6 +225,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0014 | [Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md) | final | 2026-10-24 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
 | LOG-0015 | [Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md) | final | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0016 | [Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0017 | [Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md) | final | 2026-10-24 | [competitors](TAGS.md#competitors), [process](TAGS.md#process) |
 
 ## algorithm
 

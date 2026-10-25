@@ -98,3 +98,15 @@ def heartbeat(service: str, summary: dict) -> None:
     with psycopg.connect(url, connect_timeout=20) as conn:
         conn.execute("select public.report_heartbeat(%s, %s::jsonb)",
                      (service, json.dumps(summary)))
+
+
+def publish_profiles(doc: dict) -> None:
+    """Send the feedback collector's summary (competitor profiles): counts of praise and
+    complaints by theme, trends and ratings, never review text. The table keeps the
+    newest 20 and the deploy job copies the newest to the site."""
+    url = _writer_url()
+    import psycopg
+
+    with psycopg.connect(url, connect_timeout=20) as conn:
+        conn.execute("insert into public.profile_snapshots (generated_at, items, doc) "
+                     "values (%s, %s, %s)", (doc["generated_at"], doc["items"], json.dumps(doc)))

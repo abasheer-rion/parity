@@ -243,6 +243,7 @@ export const ROUTES_META: Record<string, RouteMeta> = {
   data: R("Data", "The data behind the latest run.", "research"),
   sources: R("Data sources", "Where every number comes from.", "research"),
   edges: R("Edge Lab", "Seven checks for a backtest, each with a mistake from our own research.", "research"),
+  competitors: R("Competitors", "What public posts praise and complain about in 22 trading products, counted by theme, and what Parity takes from each.", "research"),
   private: R("Private markets", "Property index smoothing, Form D counts, BDC loan marks and credit data from free sources.", "research"),
 };
 

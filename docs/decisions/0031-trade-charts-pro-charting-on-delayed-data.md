@@ -45,4 +45,9 @@ The owner asked for "an actual trading platform" that people and researchers can
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 - [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
+- [CMP-0006: TradingView, browser charts and a social network for traders](../competitors/0006-tradingview.md)
+- [CMP-0008: thinkorswim, Schwab's dense pro trading platform for options and futures traders](../competitors/0008-thinkorswim.md)
+- [CMP-0009: Robinhood, the simple trading app that added a pro desktop called Legend](../competitors/0009-robinhood.md)
+- [CMP-0011: OANDA, a long-running forex broker and currency data provider](../competitors/0011-oanda.md)
+- [CMP-0015: Coinbase Advanced, the pro trading screen inside Coinbase](../competitors/0015-coinbase-advanced.md)
 <!-- backlinks:end -->

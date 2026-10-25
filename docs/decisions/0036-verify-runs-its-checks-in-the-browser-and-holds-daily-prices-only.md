@@ -97,5 +97,11 @@ The opt-in box is never ticked for the person, says the data may be sold in aggr
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
+- [CMP-0018: QuantPad, an AI quant workspace that grades strategies A to F](../competitors/0018-quantpad.md)
+- [CMP-0019: Myfxbook, the forex track record and analysis site traders cite](../competitors/0019-myfxbook.md)
+- [CMP-0020: FX Blue, free forex account analysis and MetaTrader add-ons](../competitors/0020-fx-blue.md)
+- [CMP-0021: Darwinex, a regulated broker that turns traders into risk-scaled indexes](../competitors/0021-darwinex.md)
+- [CMP-0022: Collective2, a marketplace of live-tracked trading strategies](../competitors/0022-collective2.md)
+- [CMP-0023: QuantConnect, cloud backtesting and live trading on open-source LEAN](../competitors/0023-quantconnect.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
 <!-- backlinks:end -->

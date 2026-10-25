@@ -17,6 +17,8 @@ One cycle:
   3. The site files the deploy job also builds: `world export`, `scenario export`,
      `terminal export` and `bots export`, into engine/output, so a broken export shows
      up here within the hour instead of at the next deploy.
+  4. The competitor feedback collector (`parity profiles collect`), at most once a day:
+     public feedback from sources whose terms allow it, counted by theme (CMP docs).
 
 There is no command for forward paper-tests of strategies yet (paper trading lives in
 the signed-in site), so a cycle has none. After each cycle the summary goes to the site
@@ -200,14 +202,25 @@ EXPORTS = [("world export", ("world", "export")), ("scenario export", ("scenario
            ("terminal export", ("terminal", "export")), ("bots export", ("bots", "export"))]
 
 
+def _profiles() -> dict:
+    """The competitor feedback collector, at most once a day (it has its own clock)."""
+    from .profiles import collect
+
+    return collect.collect_if_due()
+
+
 def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
-          exports: bool = True) -> dict:
-    """One pass over every sim. A step that fails is recorded and the rest still run."""
+          exports: bool = True, profiles: bool = False) -> dict:
+    """One pass over every sim. A step that fails is recorded and the rest still run.
+    With `profiles`, the cycle ends with the feedback collector, which itself runs a
+    pass only when the last one is a day old (the service turns this on)."""
     started = datetime.now(UTC).isoformat(timespec="seconds")
     steps = [("bot paths", lambda: bot_paths(con, paths)),
              ("world paths", lambda: world_paths(con, world_n))]
     if exports:
         steps += [(name, lambda a=argv: _cli(*a)) for name, argv in EXPORTS]
+    if profiles:
+        steps.append(("profiles", _profiles))
     done = []
     for name, fn in steps:
         t = time.time()
@@ -323,7 +336,22 @@ def health(search_db: Path | None = None, sims_db: Path = DB) -> list[str]:
                      f"last cycle {_ago(doc['last_cycle_at'])}")
     else:
         lines.append("sims: not run on this machine yet")
+    from .profiles import collect
+
+    lines.append(collect.health())
     return lines
+
+
+def _profile_counts() -> dict:
+    """Two public counts from the feedback collector for the health line."""
+    from .profiles import store
+
+    if not store.DB.exists():
+        return {}
+    con = store.connect()
+    last = store.last_pass(con)
+    return {"profile_items": con.execute("SELECT COUNT(*) FROM items").fetchone()[0],
+            "profiles_last_pass_at": last[0] if last else None}
 
 
 def _publish(doc: dict, failed_before: bool) -> bool:
@@ -331,7 +359,7 @@ def _publish(doc: dict, failed_before: bool) -> bool:
         from .publish.supabase import NotConfigured, heartbeat, publish_sims
         publish_sims(doc)
         heartbeat("sims", {"cycles": doc["cycles"], "last_cycle_at": doc["last_cycle_at"],
-                           "bot_paths": doc["bots"]["paths"]})
+                           "bot_paths": doc["bots"]["paths"], **_profile_counts()})
         return False
     except NotConfigured:
         return False
@@ -353,7 +381,7 @@ def run_forever(paths: int = 1000, world_n: int = 2000, sleep_minutes: float = 2
         return max_hours is None or time.time() - started < max_hours * 3600
 
     while time_left():
-        out = cycle(con, paths, world_n)
+        out = cycle(con, paths, world_n, profiles=True)
         doc = export(con)
         failed = _publish(doc, failed)
         ok = sum(s["ok"] for s in out["steps"])

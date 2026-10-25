@@ -51,6 +51,7 @@ export const TYPE_LABELS: Record<string, string> = {
   dataset: "Datasets",
   guide: "Guides",
   reference: "Reference",
+  competitor: "Competitors",
   log: "Logs",
   register: "Registers",
 };
@@ -67,6 +68,7 @@ export const TYPE_HELP: Record<string, string> = {
   dataset: "One data source: what is in it, how it is cleaned, its limits.",
   guide: "How to do something step by step.",
   reference: "Facts to look up: methods, sources, definitions.",
+  competitor: "One trading product we study: what users praise and complain about, and what we take from it.",
   log: "A dated diary of what was asked and what happened.",
   register: "A running list, such as open problems or results.",
 };

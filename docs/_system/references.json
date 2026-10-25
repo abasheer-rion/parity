@@ -230,6 +230,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/reference/0004-glossary.md",
+        "docs/research/0001-reading-list.md",
         "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
@@ -642,7 +643,9 @@
       "verification": "redirect-ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0001-reading-list.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0001-reading-list.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -1066,6 +1069,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-good-carry-g10.json",
+        "docs/algorithms/0077-fx-good-carry-g10.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -1311,6 +1315,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-local-hours-time-of-day.json",
+        "docs/algorithms/0079-fx-local-hours-time-of-day.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -1364,7 +1369,9 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/golden-cross-50-200.json",
-        "docs/algorithms/0061-golden-cross-50-200.md"
+        "docs/algorithms/0061-golden-cross-50-200.md",
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -1418,7 +1425,9 @@
       "used_in": [
         "catalog/algorithms/retail-swap-carry.json",
         "docs/algorithms/0069-retail-swap-carry.md",
+        "docs/reference/0004-glossary.md",
         "docs/research/0001-reading-list.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
@@ -1502,6 +1511,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-option-hedged-carry.json",
+        "docs/algorithms/0078-fx-option-hedged-carry.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -1808,6 +1818,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-low-volume-reversal.json",
+        "docs/algorithms/0080-fx-low-volume-reversal.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -2170,6 +2181,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-output-gap-business-cycle.json",
+        "docs/algorithms/0074-fx-output-gap-business-cycle.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -2402,6 +2414,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-global-imbalances.json",
+        "docs/algorithms/0075-fx-global-imbalances.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -2777,7 +2790,9 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/guides/0003-writing-docs.md",
-        "docs/research/0001-reading-list.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0001-reading-list.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -3079,7 +3094,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/crypto-cash-and-carry-basis.json",
-        "docs/algorithms/0022-crypto-cash-and-carry-basis.md"
+        "docs/algorithms/0022-crypto-cash-and-carry-basis.md",
+        "docs/reference/0004-glossary.md"
       ],
       "metadata": {
         "source": "crossref-search",
@@ -3582,7 +3598,9 @@
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0001-reading-list.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
@@ -3668,6 +3686,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-static-carry.json",
+        "docs/algorithms/0073-fx-static-carry.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -3728,6 +3747,7 @@
       "used_in": [
         "catalog/algorithms/crypto-perp-funding-carry.json",
         "docs/algorithms/0026-crypto-perp-funding-carry.md",
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -4575,6 +4595,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/complex-ml-market-timing.json",
+        "docs/algorithms/0082-complex-ml-market-timing.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -5060,6 +5081,7 @@
         "catalog/algorithms/crypto-time-series-momentum.json",
         "docs/algorithms/0024-crypto-google-search-attention.md",
         "docs/algorithms/0027-crypto-time-series-momentum.md",
+        "docs/reference/0004-glossary.md",
         "docs/research/0002-open-source-and-public-results.md"
       ],
       "metadata": {
@@ -5225,7 +5247,9 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -5416,7 +5440,9 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/guides/0003-writing-docs.md",
+        "docs/reference/0004-glossary.md",
         "docs/research/0001-reading-list.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
@@ -5814,8 +5840,10 @@
         "docs/algorithms/0051-trend-plus-carry-combined.md",
         "docs/algorithms/0052-turn-of-the-month.md",
         "docs/algorithms/0053-value-hml.md",
+        "docs/reference/0004-glossary.md",
         "docs/research/0001-reading-list.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
@@ -5842,6 +5870,7 @@
       "verification": "redirect-ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0001-reading-list.md"
       ],
       "metadata": {
@@ -6235,7 +6264,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/volatility-managed-portfolios.json",
-        "docs/algorithms/0054-volatility-managed-portfolios.md"
+        "docs/algorithms/0054-volatility-managed-portfolios.md",
+        "docs/reference/0004-glossary.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -6385,7 +6415,10 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/turtle-donchian-breakout.json",
-        "docs/algorithms/0072-turtle-donchian-breakout.md"
+        "docs/algorithms/0072-turtle-donchian-breakout.md",
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "note": "Cited in this repo as: Neely, Weller and Ulrich (2009), abstract (working paper version)",
       "metadata": {
@@ -6687,7 +6720,10 @@
         "catalog/algorithms/fibonacci-retracements.json",
         "catalog/algorithms/support-resistance-supply-demand-zones.json",
         "docs/algorithms/0059-fibonacci-retracements.md",
-        "docs/algorithms/0071-support-resistance-supply-demand-zones.md"
+        "docs/algorithms/0071-support-resistance-supply-demand-zones.md",
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0012-candlesticks-and-chart-patterns.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "note": "Cited in this repo as: Technical Analysis of Stock Trends (1948); academic test by Osler (2000)",
       "metadata": {
@@ -6986,7 +7022,8 @@
       "accessed": "2026-10-21",
       "verification": "ok",
       "used_in": [
-        "docs/reference/0004-glossary.md"
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0011-scenario-simulator-method.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -7044,6 +7081,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-asymmetric-information-risk.json",
+        "docs/algorithms/0081-fx-asymmetric-information-risk.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -7104,6 +7142,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-commodity-trade-imx.json",
+        "docs/algorithms/0076-fx-commodity-trade-imx.md",
         "docs/research/0010-paper-library-fx-and-market-microstructure.md"
       ],
       "note": "Read for RES-0010 (full text)",
@@ -7312,6 +7351,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "catalog/events/snb-floor-removal-2015.json",
         "docs/reference/0004-glossary.md",
         "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
@@ -7977,6 +8017,7 @@
       "used_in": [
         "catalog/datasets/bls.json",
         "docs/datasets/0007-bls.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "metadata": {
@@ -8759,7 +8800,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/imf.json",
-        "docs/datasets/0018-imf.md"
+        "docs/datasets/0018-imf.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -9022,7 +9064,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/eia.json",
-        "docs/datasets/0011-eia.md"
+        "docs/datasets/0011-eia.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {
@@ -9301,7 +9344,9 @@
       "used_in": [
         "catalog/algorithms/one-minute-scalping.json",
         "docs/algorithms/0067-one-minute-scalping.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "metadata": {
         "source": "repo",
@@ -9371,7 +9416,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/treasury-fiscal-data.json",
-        "docs/datasets/0031-treasury-fiscal-data.md"
+        "docs/datasets/0031-treasury-fiscal-data.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -9633,6 +9679,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/competitors/0023-quantconnect.md",
         "docs/research/0002-open-source-and-public-results.md"
       ],
       "metadata": {
@@ -10387,6 +10434,7 @@
       "used_in": [
         "catalog/datasets/fred.json",
         "docs/datasets/0015-fred.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -10939,7 +10987,9 @@
       "used_in": [
         "catalog/algorithms/one-minute-scalping.json",
         "docs/algorithms/0067-one-minute-scalping.md",
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "note": "Linked in this repo as: ESMA product intervention press release, 27 March 2018",
       "metadata": {
@@ -11104,6 +11154,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "docs/reference/0003-data-sources.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -11225,6 +11276,7 @@
       "used_in": [
         "catalog/datasets/tiingo.json",
         "docs/datasets/0029-tiingo.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -12042,6 +12094,7 @@
       "used_in": [
         "catalog/datasets/trading-economics.json",
         "docs/datasets/0030-trading-economics.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -12421,7 +12474,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/cftc-cot.json",
-        "docs/datasets/0039-cftc-cot.md"
+        "docs/datasets/0039-cftc-cot.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -13325,7 +13379,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/dukascopy.json",
-        "docs/datasets/0009-dukascopy.md"
+        "docs/datasets/0009-dukascopy.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -13633,6 +13688,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
@@ -14087,6 +14143,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
@@ -15080,7 +15137,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/kenneth-french.json",
-        "docs/datasets/0021-kenneth-french.md"
+        "docs/datasets/0021-kenneth-french.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -15307,7 +15365,9 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0006-courses-and-trader-beliefs.md"
+        "docs/reference/0004-glossary.md",
+        "docs/research/0006-courses-and-trader-beliefs.md",
+        "docs/research/0009-trading-myths-and-what-the-evidence-says.md"
       ],
       "metadata": {
         "source": "repo",
@@ -15525,6 +15585,7 @@
       "used_in": [
         "catalog/datasets/frankfurter.json",
         "docs/datasets/0014-frankfurter.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "metadata": {
@@ -15604,6 +15665,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0006-courses-and-trader-beliefs.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
@@ -16332,7 +16394,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/oecd.json",
-        "docs/datasets/0027-oecd.md"
+        "docs/datasets/0027-oecd.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -16405,6 +16468,7 @@
       "used_in": [
         "catalog/datasets/finnhub.json",
         "docs/datasets/0012-finnhub.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -16429,6 +16493,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/competitors/0011-oanda.md",
         "docs/research/0006-courses-and-trader-beliefs.md"
       ],
       "note": "Linked in this repo as: None",
@@ -17231,6 +17296,7 @@
       "used_in": [
         "catalog/datasets/fred.json",
         "docs/datasets/0015-fred.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: None",
@@ -17662,7 +17728,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/ecb-data-portal.json",
-        "docs/datasets/0010-ecb-data-portal.md"
+        "docs/datasets/0010-ecb-data-portal.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {
@@ -17686,7 +17753,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/databento-cme-fx.json",
-        "docs/datasets/0041-databento-cme-fx.md"
+        "docs/datasets/0041-databento-cme-fx.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -17849,7 +17917,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/tiingo.json",
-        "docs/datasets/0029-tiingo.md"
+        "docs/datasets/0029-tiingo.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -17896,7 +17965,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/world-bank.json",
-        "docs/datasets/0035-world-bank.md"
+        "docs/datasets/0035-world-bank.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {
@@ -18687,6 +18757,7 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/oanda-v20-practice.json",
+        "docs/competitors/0011-oanda.md",
         "docs/datasets/0026-oanda-v20-practice.md",
         "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
@@ -18874,6 +18945,7 @@
       "used_in": [
         "catalog/datasets/fred.json",
         "docs/datasets/0015-fred.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "note": "Linked in this repo as: errors page",
@@ -18946,7 +19018,8 @@
         "catalog/datasets/bis-triennial-fx.json",
         "catalog/datasets/bis.json",
         "docs/datasets/0006-bis.md",
-        "docs/datasets/0038-bis-triennial-fx.md"
+        "docs/datasets/0038-bis-triennial-fx.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "note": "Linked in this repo as: None",
       "metadata": {
@@ -18996,6 +19069,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-21",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0006-courses-and-trader-beliefs.md"
       ],
       "metadata": {
@@ -19313,6 +19387,7 @@
       "used_in": [
         "catalog/datasets/bea.json",
         "docs/datasets/0004-bea.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md",
         "docs/research/0005-zen-apps-and-free-apis.md"
       ],
       "metadata": {
@@ -20054,8 +20129,11 @@
       "accessed": "2026-10-21",
       "verification": "not checked",
       "used_in": [
+        "catalog/datasets/cftc-cot.json",
         "catalog/datasets/cftc-press.json",
-        "docs/datasets/0047-cftc-press.md"
+        "docs/datasets/0039-cftc-cot.md",
+        "docs/datasets/0047-cftc-press.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -21100,7 +21178,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/bank-of-england-news.json",
-        "docs/datasets/0044-bank-of-england-news.md"
+        "docs/datasets/0044-bank-of-england-news.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -21374,7 +21453,8 @@
       "verification": "not checked",
       "used_in": [
         "catalog/datasets/gdelt.json",
-        "docs/datasets/0016-gdelt.md"
+        "docs/datasets/0016-gdelt.md",
+        "docs/reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md"
       ],
       "metadata": {
         "source": "repo",
@@ -21772,6 +21852,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21796,6 +21877,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21817,6 +21899,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21860,6 +21943,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21881,6 +21965,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21923,6 +22008,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21944,6 +22030,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21965,6 +22052,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -21986,6 +22074,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22007,6 +22096,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22028,6 +22118,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22049,6 +22140,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22070,6 +22162,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22112,6 +22205,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0013-hyperliquid.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22133,6 +22227,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22175,6 +22270,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22196,6 +22292,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22217,6 +22314,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22280,6 +22378,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -22346,6 +22445,7 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
       ],
       "metadata": {
@@ -24357,6 +24457,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -24383,8 +24484,9 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
-        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md",
-        "docs/reference/0016-parity-verify-mvp-spec.md"
+        "docs/reference/0004-glossary.md",
+        "docs/reference/0016-parity-verify-mvp-spec.md",
+        "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
         "source": "crossref",
@@ -24410,6 +24512,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -24616,6 +24719,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -24973,6 +25077,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25063,6 +25168,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25085,6 +25191,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25173,6 +25280,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25261,6 +25369,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25283,6 +25392,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/reference/0004-glossary.md",
         "docs/research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md"
       ],
       "metadata": {
@@ -25395,6 +25505,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0006-tradingview.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25461,6 +25572,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0018-quantpad.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25483,6 +25595,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0022-collective2.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25724,6 +25837,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25812,6 +25926,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0023-quantconnect.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25900,6 +26015,8 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0017-etoro.md",
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25944,6 +26061,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0014-binance.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -25988,6 +26106,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26010,6 +26129,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0019-myfxbook.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26032,6 +26152,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26120,6 +26241,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0009-robinhood.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26208,6 +26330,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0020-fx-blue.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26230,6 +26353,7 @@
       "accessed": "2026-10-23",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0017-etoro.md",
         "docs/research/0020-verifying-trading-claims-market-size-and-competitors.md"
       ],
       "metadata": {
@@ -26482,6 +26606,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0009-robinhood.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Robinhood Legend layouts",
@@ -26506,6 +26631,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0009-robinhood.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Robinhood Legend widget linking",
@@ -26530,6 +26656,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0009-robinhood.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Robinhood Legend trading",
@@ -26554,6 +26681,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0010-webull.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Webull layouts",
@@ -26578,6 +26706,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0010-webull.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Webull hotkeys",
@@ -26626,6 +26755,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0008-thinkorswim.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: thinkorswim flexible grid",
@@ -26650,6 +26780,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0008-thinkorswim.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: thinkorswim keyboard shortcuts",
@@ -26674,6 +26805,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0007-interactive-brokers.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: IBKR Mosaic layout",
@@ -26722,6 +26854,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0013-hyperliquid.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Hyperliquid trade view (live app)",
@@ -26746,6 +26879,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0014-binance.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Binance futures interface",
@@ -26770,6 +26904,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0014-binance.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Binance advanced interface",
@@ -26794,6 +26929,7 @@
       "verification": "ok",
       "verification_checked": "2026-10-24",
       "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md",
         "docs/research/0021-how-trading-platforms-lay-out-a-workspace.md"
       ],
       "note": "Linked in this repo as: Bloomberg Launchpad guide",
@@ -26838,6 +26974,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -27216,6 +27353,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0003-lseg-workspace.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -27342,6 +27480,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -27426,6 +27565,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -27785,6 +27925,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0012-lmax.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -27848,6 +27989,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0012-lmax.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -28334,6 +28476,7 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
+        "docs/competitors/0006-tradingview.md",
         "docs/research/0022-how-trading-and-market-data-platforms-are-built.md"
       ],
       "metadata": {
@@ -29602,6 +29745,4734 @@
       "verification": "not checked",
       "used_in": [
         "docs/decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00fa6a27",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "desktop app",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/trading-platforms/desktop-app",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-018a4057",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "coinbase/coinbase-advanced-py",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/coinbase/coinbase-advanced-py",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-01f5b969",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "release notes",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en/releasenotes",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0a1312c4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id1179213067",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0c117288",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Copy help",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/ctrader-copy/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0d6b2d28",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 36349070",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=36349070",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0ef7bd72",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MetaQuotes company page",
+      "venue": "metaquotes.net",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metaquotes.net/en/company",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0f2b54a4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Google Play",
+      "venue": "play.google.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://play.google.com/store/apps/details?id=com.myfxbook.forex&hl=en",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-10895b72",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FX Blue example results page",
+      "venue": "fxblue.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxblue.com/users/example",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0020-fx-blue.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1176a2b9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "optimisation docs",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/docs/v2/cloud-platform/optimization",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-139ab1d1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Interactive Brokers review, StockBrokers.com",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/interactivebrokers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-13e07f0e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Legend",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/legend/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-152d7e2a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "About AutoTrading",
+      "venue": "collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://collective2.com/about-autotrading",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-15bb5ed3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex Zero, why us",
+      "venue": "darwinexzero.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinexzero.com/why-us",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1661e6a8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id884042608",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1674b447",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "builder codes",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-18def178",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader, Wikipedia",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/CTrader",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-19a8ee73",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance.US app on the US App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id1492670702",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1ace7d9d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Workspace for Students",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace/workspace-for-students",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1af6636a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim Analyze tab",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Analyze",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1b64998c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance About",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en/about",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1c22926d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim Trade tab",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Trade",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1c45e950",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "public speech rules",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/speaking-about-your-darwin-in-public",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1cda9069",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Schwab thinkorswim page",
+      "venue": "schwab.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.schwab.com/trading/thinkorswim",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1e778dac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Protocol vaults",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1e9489a1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "FX Blue frequently asked questions",
+      "venue": "fxblue.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxblue.com/faq",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0020-fx-blue.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-20b0dca2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "misc UI",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/miscellaneous-ui",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-213f8dbe",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "HN, 2025",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=46057464",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-221f1852",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 iOS app, App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/collective2/id519099516",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-22fb7b3b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "HIP-3 builder-deployed perpetuals",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2339e4e2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim Tools tab",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Tools",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-23573826",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase app on the US App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id886427730",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-254be644",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 31175596",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=31175596",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-259ed6a8",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on testing with QuantConnect",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=47293170",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-283ea06a",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on cTrader and FIX",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=23209789",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-28d1c06c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood review, stockbrokers.com",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/robinhood",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-28eec2e7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken Pro",
+      "venue": "kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/pro",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2930b8db",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Global",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/global",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-293adbed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull paperTrade",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/paper-trading",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-29413b5e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hyperliquid docs home",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2a7a814a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store customer review feed, Myfxbook app",
+      "venue": "itunes.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://itunes.apple.com/us/rss/customerreviews/id=985947299/sortby=mostrecent/json",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2a90a5ce",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex Zero pricing",
+      "venue": "darwinexzero.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinexzero.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2b5c7556",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Exchange looks ahead after management buyout",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/press-centre/lmax-exchange-looks-ahead-after-management-buyout/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2b745b33",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood status page",
+      "venue": "status.robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.robinhood.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2f5cb827",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX review, forexbrokers.com",
+      "venue": "forexbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.forexbrokers.com/reviews/lmax",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2fcab9c5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id370922777",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-30a61b9f",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on trying QuantConnect",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=39149265",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-31ecdb03",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=41005434",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3267bf0e",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=31210462",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-336d3562",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro app on the UK App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/gb/app/id674984916",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-337ad82a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect pricing",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-35536a4f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 help centre",
+      "venue": "support.collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://support.collective2.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-35ccef7c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR GlobalTrader, US App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/ibkr-globaltrader/id1604776354",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-370316b0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Hyperliquid 101",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid/hyperliquid-101-for-non-crypto-audiences",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3836ad77",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/forex-calendar-market-news/id985947299",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3bbf1216",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro investor relations",
+      "venue": "investors.etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investors.etoro.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3be8a917",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Exchange status",
+      "venue": "status.exchange.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.exchange.coinbase.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3e3dd1bf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Advanced product page",
+      "venue": "coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.coinbase.com/advanced-trade",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3ecf72b9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Store help",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/ctrader-store/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3ffc8d99",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "H1 2026 results",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/press-centre/lmax-reports-h1-2026-financial-results/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-406974ab",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 robots.txt",
+      "venue": "collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.collective2.com/robots.txt",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4114be3f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Schwab pricing",
+      "venue": "schwab.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.schwab.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-41542cb0",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "HN, 2025",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=46158625",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-431a0bea",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "fee schedule",
+      "venue": "kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/features/fee-schedule",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4395748e",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "HN, 2017",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=13736009",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-465cdf44",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX status page",
+      "venue": "status.lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.lmax.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-46657692",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim Getting Started",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Getting-Started",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-46edc0f0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex for Investors, App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/darwinex-for-investors/id1448246447",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4763ad6c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MCP servers",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/ctrader-ai-agent-connect/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-476466d6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg Terminal inflation: 9% price hike on Jan. 1, 2023, NeuGroup",
+      "venue": "connect.neugroup.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://connect.neugroup.com/public/blogs/bloomberg-terminal-inflation-9-price-hike-on-jan-1-2023",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4778121c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro platforms",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/trading/platforms/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-480849d1",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "LSEG API Samples on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/LSEG-API-Samples",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4872911d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "technical specifications",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace/workspace-technical-specifications",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-49bff0d7",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=43928048",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4dfa4de3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Global mobile",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/global/mobile/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4e175d9d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "How to delete a DARWIN",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/how-to-delete-a-darwin",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4e8a6c26",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro AI app on the App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/gb/app/id6751894197",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-503062f4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex Zero, your investable track record",
+      "venue": "darwinexzero.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinexzero.com/your-darwin-index",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52ece9df",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "proof of reserves",
+      "venue": "kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/proof-of-reserves",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-555b5612",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Strategy Tester",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en/automated-trading/strategy-tester",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-55e876dd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance.US fees",
+      "venue": "binance.us",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.us/fees",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-581355e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "DARWIN versus its underlying strategy",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/darwin-vs-its-underlying-trading-strategy",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-587d126c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro Smart Portfolios page",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/smartportfolios/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5acf7db7",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "FX Blue robots.txt",
+      "venue": "fxblue.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxblue.com/robots.txt",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0020-fx-blue.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5bac6c16",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/ibkr-mobile-invest-worldwide/id454558592",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5c1cad00",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 API",
+      "venue": "trade.collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://trade.collective2.com/c2-api.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5eacfd5c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Eikon, Wikipedia",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Eikon",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5ec7c2e0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX pre-trade transparency",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/exchange/pre-trade-transparency/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6024339e",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on long-lived Collective2 systems",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=40969550",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-622734eb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/marketlog-portfolio-tracker/id6480523672",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-623e14e9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView page",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/us-en/trading/platforms/tradingview/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-62b254c1",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 42377954",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=42377954",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-635af8f7",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "krakenfx on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/krakenfx",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6433ccb5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "futures fee FAQ",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en/support/faq/binance-futures-fee-structure-fee-calculations-360033544231",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-647909e0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro fees",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/trading/fees/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-65a9514b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkScript reference",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/reference/thinkScript",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6690d4c9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA currency converter",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/currency-converter/en/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-682fa5f2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView features",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/features/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-68b69de0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6b171eef",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "HN, 2026",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=49909583",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6d821bdc",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 46156161",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=46156161",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6dc4929f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView about",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/about/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6f163117",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken Pro app on the US App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id1473024338",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md",
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6f92a084",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MetaTrader 4 home",
+      "venue": "metatrader4.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader4.com/en",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-71122844",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Risk Engine",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/risk-manager",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-72492795",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect Strategies and leaderboard",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/strategies/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-72c154c9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken status",
+      "venue": "status.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.kraken.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7531a709",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "trading platform",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en/trading-platform",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-762064ae",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA review, forexbrokers.com",
+      "venue": "forexbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.forexbrokers.com/reviews/oanda",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-775202e1",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect robots.txt",
+      "venue": "quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/robots.txt",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-77c4ae35",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood fee schedule",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/support/articles/robinhood-fee-schedule/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7acae2fe",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "What are Investable Attributes",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/what-are-investable-attributes",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7c06d1b8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 pricing",
+      "venue": "trade.collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://trade.collective2.com/pricing.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7de467a6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "thinkorswim Workspaces",
+      "venue": "toslc.thinkorswim.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://toslc.thinkorswim.com/center/howToTos/thinkManual/Getting-Started/Workspaces",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7ecfd989",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView status",
+      "venue": "status.tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.tradingview.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7efbfae0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView, US App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/tradingview-track-all-markets/id1205990992",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7fd4c118",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id938003185",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-81705ff1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA Trade web",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/us-en/trading/platforms/oanda-trade-web/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-82035c77",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id519099516",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-854499d3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull Premium",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/premium",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-85993aa8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id299366785",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8714e1a9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR investor relations",
+      "venue": "investors.interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investors.interactivebrokers.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-875c65b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/bloomberg-professional/id407761767",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-893d4964",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LSEG Workspace",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8a4f83ef",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": "10.1162/rest\\_a\\_00978",
+      "arxiv": null,
+      "url": "https://doi.org/10.1162/rest\\_a\\_00978",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0010-paper-library-fx-and-market-microstructure.md"
+      ],
+      "metadata": {
+        "source": "crossref-not-found",
+        "doi_explicit": true,
+        "crossref": "not found"
+      }
+    },
+    {
+      "key": "url-8aca2e20",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MQL5 Signals",
+      "venue": "mql5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.mql5.com/en/signals",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b7c86e9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Contract specifications",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/contract-specifications",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8d139f97",
+      "type": "dataset",
+      "authors": [],
+      "year": null,
+      "title": "cTrader Help Centre index for LLMs",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/llms.txt",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8e1b8217",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "US Department of Justice press release on Binance",
+      "venue": "justice.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.justice.gov/archives/opa/pr/binance-and-ceo-plead-guilty-federal-charges-4b-resolution",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8fe7fdea",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Performance (Pf) attribute",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/performance-attribute",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-90129ca1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "API changelog",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/coinbase-app/introduction/changelog",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-91bbfeb4",
+      "type": "regulator",
+      "authors": [],
+      "year": null,
+      "title": "Webull 6-K",
+      "venue": "sec.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1866364/000121390026091702/ea030257601ex99-1.htm",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-91e032e8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA US platforms",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/us-en/trading/platforms/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-94b3089a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Charles Schwab review, stockbrokers.com",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/charlesschwab",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-950a7b6d",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "InteractiveBrokers/tws-api-public",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/InteractiveBrokers/tws-api-public",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-962bafe8",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "etoro/etoro-mcp-plugin",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/etoro/etoro-mcp-plugin",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-96ec02b6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Digital Trading, App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id1375900638",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-96f55f8b",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=13736156",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-97bf6c0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "vault leaders",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/for-vault-leaders-legacy",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-989124f9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Performance fees for DARWIN providers",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/performance-fees-darwin-provider",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9aaa265c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Global trading",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/global/trading/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9e6910aa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken About",
+      "venue": "kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/about",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9ea6eaa4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Spotware home",
+      "venue": "spotware.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.spotware.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a2340872",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "binance on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/binance",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a24aa81b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase status",
+      "venue": "status.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.coinbase.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a3a5b6a3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Kraken desktop app",
+      "venue": "kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.kraken.com/desktop",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0016-kraken-pro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a4647193",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OANDA US pricing",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/us-en/trading/our-pricing/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a570f9e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MetaTrader 5",
+      "venue": "metatrader5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.metatrader5.com/en",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a59bde60",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Darwinex Zero",
+      "venue": "darwinexzero.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.darwinexzero.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a5c31f41",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "LMAX-Exchange on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/LMAX-Exchange",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a9663a79",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "order types",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/order-types",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aa21ca84",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on using Myfxbook as proof",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=11889795",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aabbad14",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro status",
+      "venue": "status.etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.etoro.com",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-abf30564",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "market data",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/global/market-data-access/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ad6e750e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "MQL5 Market",
+      "venue": "mql5.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.mql5.com/en/market",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ae4c61c8",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 47660815",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=47660815",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ae8f100f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull review, stockbrokers.com",
+      "venue": "stockbrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.stockbrokers.com/review/webull",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ae95c46d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader Analyze help",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/ctrader-analyze/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b0d200ac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/ctrader-cfd-trading-charts/id767428811",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b2737f4f",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 48080992",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=48080992",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b34771ea",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "historical data",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/historical-data",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b3841505",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "cTrader home and Store",
+      "venue": "ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.ctrader.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b401fff1",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 31239500",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=31239500",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0008-thinkorswim.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b58f33d8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradingView, Wikipedia",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/TradingView",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b5dafde9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "investor site",
+      "venue": "investor.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investor.coinbase.com/home/default.aspx",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b715cf13",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Group home",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b91d982f",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 46305831",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=46305831",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b92cb193",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "free trial",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace/free-trial",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-baaa36ea",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "fee schedule",
+      "venue": "binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.com/en/fee/schedule",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bc304cee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LSEG Data Library",
+      "venue": "developers.lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.lseg.com/en/api-catalog/lseg-data-platform/lseg-data-library-for-python",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bee7fef3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "how to start",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-bf42e4dd",
+      "type": "news",
+      "authors": [],
+      "year": null,
+      "title": "Bloomberg Terminal product page",
+      "venue": "bloomberg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bloomberg.com/professional/products/bloomberg-terminal/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c1e086f0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store customer review feed, Collective2 app",
+      "venue": "itunes.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://itunes.apple.com/us/rss/customerreviews/id=519099516/sortby=mostrecent/json",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c23b7529",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "About LMAX Group",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/about/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c4e1f49d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "AI capabilities",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace/workspace-ai-capabilities",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c836e92b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro app on the US App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id674984916",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c884b731",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/id985947299",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0019-myfxbook.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c890a981",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "margin page",
+      "venue": "oanda.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.oanda.com/us-en/trading/spreads-margin/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c952ccf5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Collective2 for strategy managers",
+      "venue": "trade.collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://trade.collective2.com/strategy-managers.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ca90561a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Connect mobile via QR code",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/connect-mobile-via-qr-code",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cad44701",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Spotware GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/spotware",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cc153ee7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Experience (Ex) attribute",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/experience-attribute",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cd64350d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull pricing",
+      "venue": "webull.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webull.com/pricing",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cea0dcd4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Binance app on the UK App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/gb/app/id1436799971",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0014-binance.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cf1b0ed2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LSEG Eikon page",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/eikon-trading-software",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cf1bde59",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Interactive Brokers, Wikipedia",
+      "venue": "en.wikipedia.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Interactive_Brokers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d2075040",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IBKR Desktop product page",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/en/trading/ibkr-desktop.php",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d271998c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "help centre",
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d378e3b1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantPad subscribe page (prices)",
+      "venue": "quantpad.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpad.ai/subscribe",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0018-quantpad.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d3ffa94a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect status page",
+      "venue": "status.quantconnect.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://status.quantconnect.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d400e502",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Workspace updates",
+      "venue": "lseg.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lseg.com/en/data-analytics/products/workspace/updates",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d49ab222",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on Darwinex leaderboards",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=34768768",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d5104b52",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=49915810",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0002-bloomberg-terminal.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d6490a84",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 35933887",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=35933887",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d77d1338",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "eToro CopyTrader",
+      "venue": "etoro.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.etoro.com/copytrader/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0017-etoro.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d84c2c8a",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment 30124430",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=30124430",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md",
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d98d4427",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "QuantPad/pine-runner",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/QuantPad/pine-runner",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0018-quantpad.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-da2411f2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/auto-deleveraging",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dab1be99",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on the TWS desktop client",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=47426110",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dd8cd83d",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "darwinex on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/darwinex",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-dec961b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "derivatives guide",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/guides/derivatives/overview",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e0ddeb22",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "webull-inc on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/webull-inc",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e1469f07",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/mytrader/id1489304242",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0020-fx-blue.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e149f16a",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/metatrader-5/id413251709",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e16ca6d5",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "LMAX-Exchange/disruptor",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/LMAX-Exchange/disruptor",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e2954668",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "LMAX Global FAQs",
+      "venue": "lmax.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.lmax.com/global/faqs/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0012-lmax.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e2d88183",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "portfolio graphs",
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/portfolio-graphs",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e367f6c3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Webull Corporation",
+      "venue": "webullcorp.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.webullcorp.com/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0010-webull.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e55c98c1",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on MetaTrader and change",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=25253035",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e5e96234",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/metatrader-4/id496212596",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0004-metatrader-4-and-5.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e72cd226",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "oanda on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/oanda",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0011-oanda.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e99469c3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Build with Collective2, for AI agents",
+      "venue": "collective2.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://collective2.com/build-with-c2.html",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0022-collective2.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ee22d42b",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "hyperliquid-dex on GitHub",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/hyperliquid-dex",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ee743b27",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "help.darwinex.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.darwinex.com/d-score",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0021-darwinex.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ef96a4f3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Derivatives changelog",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/derivatives/changes/changelog",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f0c9a34c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Market Replay",
+      "venue": "help.ctrader.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://help.ctrader.com/ctrader/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0005-ctrader.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f165c281",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Robinhood Gold",
+      "venue": "robinhood.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://robinhood.com/us/en/gold/",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0009-robinhood.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f203c657",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "HN, 2024",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=41004113",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0006-tradingview.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f231595e",
+      "type": "forum-post",
+      "authors": [],
+      "year": null,
+      "title": "Hacker News comment on MSFT perps",
+      "venue": "news.ycombinator.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.ycombinator.com/item?id=48330428",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f24fa5a2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "App Store listing",
+      "venue": "apps.apple.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://apps.apple.com/us/app/lseg-workspace/id1481442629",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0003-lseg-workspace.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f2d097ab",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Interactive Brokers review 2026, NerdWallet",
+      "venue": "nerdwallet.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nerdwallet.com/reviews/investing/brokers/interactive-brokers",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0007-interactive-brokers.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f3b17548",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "QuantConnect/mcp-server",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/QuantConnect/mcp-server",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0023-quantconnect.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f644fbdd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": "hyperliquid.gitbook.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0013-hyperliquid.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fa5013a2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Coinbase Advanced fees",
+      "venue": "coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.coinbase.com/advanced-fees",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fa9296bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "create order API",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/create-order",
+      "also_at": [],
+      "accessed": "2026-10-24",
+      "verification": "not checked",
+      "used_in": [
+        "docs/competitors/0015-coinbase-advanced.md"
       ],
       "metadata": {
         "source": "repo",
