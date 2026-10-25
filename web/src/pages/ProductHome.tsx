@@ -14,6 +14,9 @@ import type { Report, StrategyRun } from "../lib/types";
 import { productInsights } from "../lib/insights";
 import { date } from "../lib/format";
 import { Insights } from "../components/Insights";
+import { Checklist } from "../onboarding/Checklist";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
+import { isDesktop } from "../desktop/bridge";
 
 const THEMES: { label: string; q: string; icon: string; what: string }[] = [
   { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value strategies on currencies" },
@@ -61,6 +64,9 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
           <span>Ask anything: "what is carry", "best strategy", "does anything beat the market"</span>
         </button>
       </section>
+
+      <Checklist />
+      <FirstRunTour areas={isDesktop() ? ["home", "desktop"] : ["home"]} />
 
       <Insights items={productInsights(report)} source={`the ${report.kind === "official" ? "official" : "nightly"} research run of ${date(report.generated_at)}`} />
 

@@ -18,6 +18,7 @@ import { courseById, courseMinutes, courses, totalLessons, type AcademyLink, typ
 import { termById } from "../lib/glossary";
 import { appLink, productUrl } from "../lib/space";
 import { setStoreUser } from "../lib/userStore";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { Button, Dialog, Icon, Popover, Segmented, Toaster, Toggle, toast } from "../ui";
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
@@ -246,6 +247,8 @@ function AcademyShell() {
         <KeyTable />
       </Dialog>
       <Toaster />
+      {/* The tour points at the library, so it waits until the library is open and loaded. */}
+      <FirstRunTour areas={["academy"]} ready={route.view === "library" && !p.loading} />
     </div>
   );
 }

@@ -19,9 +19,11 @@ export interface TourStepProps {
   onBack?: () => void;
   onSkip: () => void;
   placement?: "top" | "bottom" | "left" | "right";
+  /** Optional "Skip all tours" link, for a person who wants no tours at all. */
+  onSkipAll?: () => void;
 }
 
-export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom" }: TourStepProps) {
+export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll }: TourStepProps) {
   const p = usePresence(open, 180);
   const card = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState<CSSProperties>({});
@@ -69,7 +71,9 @@ export function TourStep({ target, title, children, step, total, open, onNext, o
         <h3>{title}</h3>
         <div className="ui-tour-body">{children}</div>
         <div className="ui-tour-foot">
-          {onBack && step > 1 ? <Button size="sm" variant="ghost" onClick={onBack}>Back</Button> : <span />}
+          {onSkipAll ? <button type="button" className="ui-tour-skipall" onClick={onSkipAll}>Skip all tours</button> : null}
+          <span className="ui-tour-gap" />
+          {onBack && step > 1 ? <Button size="sm" variant="ghost" onClick={onBack}>Back</Button> : null}
           <Button size="sm" variant="primary" onClick={onNext}>{last ? "Done" : "Next"}</Button>
         </div>
       </div>

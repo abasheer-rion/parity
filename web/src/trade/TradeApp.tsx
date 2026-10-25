@@ -45,6 +45,7 @@ import { SignalsMenu } from "./signalsUi";
 import { BookPanel, hasBook } from "./BookPanel";
 import { MarketsView } from "./MarketsView";
 import { setLiveApp } from "../lib/live/client";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 setLiveApp("trade");
 
@@ -385,6 +386,8 @@ function TradeShell() {
           }} />
         <Toaster />
         <Assistant place="trade" />
+        {/* The tour points at the chart, ticket and dock, so it waits for the Chart view with data. */}
+        <FirstRunTour areas={["trade"]} ready={view === "chart" && mtab === "chart" && insts.status !== "loading" && !noData} />
       </div>
     </DemoProvider>
   );

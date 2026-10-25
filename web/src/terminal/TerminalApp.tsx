@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppGuard } from "../auth";
 import { NotFound } from "../components/NotFound";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { SkipLink } from "../components/SkipLink";
 import { applyTheme } from "../lib/prefs";
 import { EMPTY_SPEC, specFromQuery, specToQuery, type Spec } from "../lib/scenarios";
@@ -371,6 +372,7 @@ function TermShell() {
         </main>
         <Ticker />
         <Toaster />
+        <FirstRunTour areas={["terminal"]} ready={index.status !== "loading"} />
       </div>
     </TermContext.Provider>
   );

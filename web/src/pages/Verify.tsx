@@ -17,6 +17,8 @@ import { Num, ResultView, pct } from "./verify/Result";
 import "./verify/verify.css";
 import { Assistant } from "../assistant/Mount";
 import { track } from "../lib/analytics";
+import { signalDone } from "../onboarding/done";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 type Mode = "file" | "describe" | "strategy";
 const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
@@ -30,6 +32,8 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
   const mode: Mode = rawMode === "describe" || rawMode === "strategy" ? rawMode : "file";
   const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
+  // A result on screen is the checklist's "Run your first Verify check" (DEC-0053).
+  useEffect(() => { if (result) signalDone("verify"); }, [result]);
   return (
     <>
       <div className="page-head">
@@ -58,6 +62,7 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
         </EmptyState>
       )}
       <Assistant place="verify" />
+      <FirstRunTour areas={["verify"]} />
     </>
   );
 }

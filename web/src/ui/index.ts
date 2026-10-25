@@ -23,3 +23,4 @@ export * from "./tour";
 export * from "./tokens";
 export { Icon, ICON_NAMES } from "./icons";
 export { Html } from "./Html";
+export { Tour, availableSteps, isShown, type TourEnd, type GuidedStep, type TourTarget } from "./guidedTour";
