@@ -45,7 +45,7 @@ describe("the dev server answers like Cloudflare Pages", () => {
     for (const p of ["/", "/login/", "/login", "/legal/privacy/", "/app/", "/favicon.svg", "/brand/2026-10-21-starburst/parity-mark.svg"]) {
       expect(devPathAction(p, "", exists), p).toEqual({ kind: "pass" });
     }
-    for (const p of ["/v/AbCdEf123456", "/s/fx_carry", "/og/badge/x.png", "/badge/x.svg", "/local/latest.json", "/live/status", "/mcp", "/stats.json", "/.well-known/oauth-authorization-server"]) {
+    for (const p of ["/v/AbCdEf123456", "/s/fx_carry", "/og/badge/x.png", "/badge/x.svg", "/local/latest.json", "/live/status", "/mcp", "/e", "/stats.json", "/.well-known/oauth-authorization-server"]) {
       expect(devPathAction(p, "", exists), p).toEqual({ kind: "pass" });
       expect(FUNCTION_PATHS.test(p), p).toBe(true);
     }

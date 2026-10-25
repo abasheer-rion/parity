@@ -17,7 +17,7 @@ export const APP_DIRS = ["app", "research", "sim", "trade", "academy", "lab"] as
  * Paths served by Pages Functions (functions/) or by the dev server's own plugins. The dev
  * server leaves these alone, as production does.
  */
-export const FUNCTION_PATHS = /^\/(v|s|badge|og|live|data|api|desktop|local|\.well-known)(\/|$)|^\/(mcp|rum|stats\.json)$/;
+export const FUNCTION_PATHS = /^\/(v|s|badge|og|live|data|api|desktop|local|\.well-known)(\/|$)|^\/(mcp|rum|e|stats\.json)$/;
 
 /**
  * Where a missing path under an app folder should go: /<app>/#/<rest>, keeping the query.
