@@ -32,12 +32,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-25 [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
+- 2026-10-25 [DEC-0044: One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md)
 - 2026-10-24 [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - 2026-10-24 [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - 2026-10-24 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - 2026-10-24 [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
-- 2026-10-24 [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 
 ## intent
 
@@ -94,7 +94,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0041 | [Parity as an installable site and a desktop app for Mac and Windows](decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0042 | [Parity Academy, a full-screen course player of its own](decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
-| DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
+| DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
 | DEC-0045 | [We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md) | accepted | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
