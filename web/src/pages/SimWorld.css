@@ -293,5 +293,6 @@ a.sw-card-name:hover { text-decoration: underline; }
 .sw-ins-row.bad span { color: var(--bad); }
 
 @media (prefers-reduced-motion: reduce) {
-  .sw-row, .sw-card, .sw-tray { transition: none; animation: none; }
+  :root:not([data-motion="full"]) .sw-row, :root:not([data-motion="full"]) .sw-card, :root:not([data-motion="full"]) .sw-tray { transition: none; animation: none; }
 }
+:root[data-motion="reduced"] .sw-row, :root[data-motion="reduced"] .sw-card, :root[data-motion="reduced"] .sw-tray { transition: none; animation: none; }

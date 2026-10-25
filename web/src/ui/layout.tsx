@@ -30,7 +30,8 @@ export function Panel({ title, actions, footer, children, span = 1, padded = tru
 }
 
 export function Grid({ cols = 3, children }: { cols?: 1 | 2 | 3 | 4; children: ReactNode }) {
-  return <div className={`ui-grid ui-grid-${cols}`}>{children}</div>;
+  // Its cards and stats come in one after another when the page opens (ui-stagger, REF-0023).
+  return <div className={`ui-grid ui-grid-${cols} ui-stagger`}>{children}</div>;
 }
 
 /** A KPI: a small label, a large value, and an optional change or note below. */

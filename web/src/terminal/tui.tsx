@@ -108,7 +108,7 @@ export function TTable<T>({ rows, cols, rowKey, initial, onPick, picked, caption
   let lastGroup = "";
   return (
     <div className="term-table-wrap">
-      <table className="term-table">
+      <table className="term-table ui-stagger-rows">
         <caption className="sr-only">{caption}</caption>
         <thead>
           <tr>
@@ -264,9 +264,10 @@ export function TChart({ series, format, height, zero, label, area, log }: {
             return (
               <g key={s.name + i}>
                 {area && i === 0 && prepared.length === 1 && (
-                  <polygon className="term-area-fill" points={`${x(s.pts[0][0])},${pad.top + ih} ${d} ${x(s.pts[s.pts.length - 1][0])},${pad.top + ih}`} style={{ fill: s.color }} />
+                  <polygon className="term-area-fill ui-fill-in" points={`${x(s.pts[0][0])},${pad.top + ih} ${d} ${x(s.pts[s.pts.length - 1][0])},${pad.top + ih}`} style={{ fill: s.color }} />
                 )}
-                <polyline fill="none" stroke={s.color} strokeWidth={1.3} strokeDasharray={s.dashed ? "4 3" : undefined} strokeLinejoin="round" points={d} />
+                {/* Solid lines draw in from left to right the first time they show (REF-0023). */}
+                <polyline className={s.dashed ? undefined : "ui-draw"} pathLength={s.dashed ? undefined : 1} fill="none" stroke={s.color} strokeWidth={1.3} strokeDasharray={s.dashed ? "4 3" : undefined} strokeLinejoin="round" points={d} />
               </g>
             );
           })}

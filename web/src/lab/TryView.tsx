@@ -8,7 +8,10 @@ import { num, pct } from "../lib/format";
 import { productUrl } from "../lib/space";
 import { nameOf } from "../lib/strategyMeta";
 import type { Point, Report, StrategyRun } from "../lib/types";
-import { Icon, LineChart, Tooltip } from "../ui";
+import { AnimatedNumber, Icon, LineChart, Tooltip } from "../ui";
+
+// A stat that ticks to its new value as the settings change (REF-0023).
+const tick = (v: number | null | undefined, f: (x: number) => string) => (v == null || !Number.isFinite(v) ? f(NaN) : <AnimatedNumber value={v} format={f} ms={450} />);
 
 interface Variant { params: Record<string, unknown>; sharpe: number; cagr: number | null; max_drawdown: number | null; equity?: Point[] }
 
@@ -111,9 +114,9 @@ export function TryView({ report }: { report: Report }) {
               <a className="lb-btn" href={productUrl(`#/strategy/${encodeURIComponent(run.strategy)}`)} target="_blank" rel="noopener">Strategy page<Icon name="arrowUpRight" size={12} /></a>
             </div>
             <dl className="lb-stats">
-              <div><dt>Sharpe ratio</dt><dd className={benchSharpe != null ? (current.sharpe > benchSharpe ? "good" : "bad") : ""}>{num(current.sharpe)}</dd><dd className="lb-dim">S&amp;P 500 {num(benchSharpe)}</dd></div>
-              <div><dt>Per year</dt><dd>{pct(current.cagr)}</dd><dd className="lb-dim">default {pct(run.metrics.cagr)}</dd></div>
-              <div><dt>Worst fall</dt><dd>{pct(current.max_drawdown)}</dd><dd className="lb-dim">default {pct(run.metrics.max_drawdown)}</dd></div>
+              <div><dt>Sharpe ratio</dt><dd className={benchSharpe != null ? (current.sharpe > benchSharpe ? "good" : "bad") : ""}>{tick(current.sharpe, (x) => num(x))}</dd><dd className="lb-dim">S&amp;P 500 {num(benchSharpe)}</dd></div>
+              <div><dt>Per year</dt><dd>{tick(current.cagr, (x) => pct(x))}</dd><dd className="lb-dim">default {pct(run.metrics.cagr)}</dd></div>
+              <div><dt>Worst fall</dt><dd>{tick(current.max_drawdown, (x) => pct(x))}</dd><dd className="lb-dim">default {pct(run.metrics.max_drawdown)}</dd></div>
               <div><dt>Versions with positive Sharpe</dt><dd>{positive} of {variants.length}</dd><dd className="lb-dim">{pct(variants.length ? positive / variants.length : null, 0)}</dd></div>
             </dl>
             <div className="lb-box lb-chart">
@@ -129,7 +132,7 @@ export function TryView({ report }: { report: Report }) {
             <div className="lb-box lb-flush">
               <div className="lb-box-h"><span>All {variants.length} versions</span><span className="lb-dim">click a row to load it</span></div>
               <div className="lb-table-wrap">
-                <table className="lb-table">
+                <table className="lb-table ui-stagger-rows">
                   <thead><tr>{keys.map((k) => <th key={k} className="l mono">{k}</th>)}<th>Sharpe</th><th>Per year</th><th>Worst fall</th></tr></thead>
                   <tbody>
                     {variants.map((v, i) => (

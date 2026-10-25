@@ -1,3 +1,4 @@
+@import "./motion.css";
 /* Parity UI component styles. Values come from tokens.css only. */
 
 /* Text */
@@ -186,8 +187,10 @@
 .ui-empty-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 99px; background: var(--hover); color: var(--text-2); }
 .ui-empty-title { font-size: var(--fs-md); font-weight: var(--fw-medium); }
 .ui-empty-body { font-size: var(--fs-sm); color: var(--text-2); }
-.ui-skel { display: inline-block; vertical-align: middle; background: linear-gradient(90deg, var(--hover), var(--border-2), var(--hover)); background-size: 200% 100%; animation: ui-shimmer var(--dur-pulse) ease-in-out infinite; }
-@keyframes ui-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.ui-skel { position: relative; overflow: hidden; display: inline-block; vertical-align: middle; background: var(--hover); }
+/* The shimmer is a soft band sliding across on a transform (no repaint per frame). Reduced motion: it holds still. */
+.ui-skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--border-2) 70%, transparent), transparent); animation: ui-shimmer var(--dur-pulse) var(--ease-in-out) infinite; }
+@keyframes ui-shimmer { to { transform: translateX(100%); } }
 
 /* Overlays */
 .ui-tip-anchor { display: inline-flex; }
@@ -198,20 +201,21 @@
 .ui-menu button:hover { background: var(--hover); color: var(--text); }
 .ui-menu button.danger { color: var(--bad); }
 .ui-scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: color-mix(in srgb, var(--palette-black) 55%, transparent); display: grid; place-items: center; padding: var(--space-4); transition: opacity var(--dur-3) var(--ease-out); }
+.ui-scrim[data-state="exit"] { transition-duration: var(--dur-2); }
 .ui-scrim[data-state="enter"], .ui-scrim[data-state="exit"] { opacity: 0; }
 .ui-dialog { background: var(--surface-solid); border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-3); max-height: calc(100vh - 32px); display: flex; flex-direction: column; outline: none;
   transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-3) var(--ease-spring); }
-.ui-dialog[data-state="enter"], .ui-dialog[data-state="exit"] { opacity: 0; transform: scale(.94); }
+.ui-dialog[data-state="enter"], .ui-dialog[data-state="exit"] { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))) scale(calc(1 - .04 * var(--m))); }
 .ui-dialog[data-state="exit"] { transition-duration: var(--dur-2); }
 .ui-dialog-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-5) var(--space-6) var(--space-2); }
 .ui-dialog-head h2 { font-size: var(--fs-xl); }
 .ui-dialog-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
 .ui-dialog-foot { display: flex; justify-content: flex-end; gap: var(--space-2); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--border); }
 .ui-toaster { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: var(--z-toast); display: flex; flex-direction: column; gap: var(--space-2); align-items: center; width: max-content; max-width: calc(100vw - 32px); pointer-events: none; }
-.ui-toast { pointer-events: auto; display: flex; align-items: center; gap: var(--space-3); background: var(--color-surface-inverted); color: var(--palette-white); padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); animation: ui-toast-in var(--dur-3) var(--ease-spring) both; }
-.ui-toast[data-state="exit"] { animation: ui-toast-out var(--dur-2) var(--ease-out) both; }
-@keyframes ui-toast-in { from { opacity: 0; transform: translateY(10px) scale(.98); } }
-@keyframes ui-toast-out { to { opacity: 0; transform: translateY(6px) scale(.98); } }
+.ui-toast { pointer-events: auto; display: flex; align-items: center; gap: var(--space-3); background: var(--color-surface-inverted); color: var(--palette-white); padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); animation: ui-toast-in var(--dur-4) var(--ease-pop) both; }
+.ui-toast[data-state="exit"] { animation: ui-toast-out var(--dur-2) var(--ease-in) both; }
+@keyframes ui-toast-in { from { opacity: 0; transform: translateY(calc(14px * var(--m))) scale(calc(1 - .04 * var(--m))); } }
+@keyframes ui-toast-out { to { opacity: 0; transform: translateY(calc(8px * var(--m))) scale(calc(1 - .04 * var(--m))); } }
 .ui-toast.good .icon { color: var(--color-positive); }
 .ui-toast button { border: 0; background: none; color: var(--color-accent-text); font: inherit; font-weight: var(--fw-medium); cursor: pointer; padding: 0; }
 
@@ -221,16 +225,13 @@
 .anim-pop { animation: ui-pop var(--dur-2) var(--ease-spring) both; }
 .anim-slide { animation: ui-slide var(--dur-3) var(--ease-out) both; }
 @keyframes ui-fade { from { opacity: 0; } }
-@keyframes ui-rise { from { opacity: 0; transform: translateY(6px); } }
-@keyframes ui-pop { from { opacity: 0; transform: scale(.96); } }
-@keyframes ui-slide { from { opacity: 0; transform: translateX(-8px); } }
+@keyframes ui-rise { from { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))); } }
+@keyframes ui-pop { from { opacity: 0; transform: scale(calc(1 - .05 * var(--m))); } }
+@keyframes ui-slide { from { opacity: 0; transform: translateX(calc(-1 * var(--rise) * var(--m))); } }
 .ui-roll { display: inline-flex; font-variant-numeric: tabular-nums; }
 .ui-roll-slot { display: inline-block; height: 1.15em; overflow: hidden; line-height: 1.15em; }
 .ui-roll-strip { display: flex; flex-direction: column; transition: transform var(--dur-4) var(--ease-out); }
 .ui-roll-strip span { height: 1.15em; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: var(--dur-instant) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-instant) !important; }
-}
 
 /* Gallery (#/ui) */
 .gal { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--space-8); align-items: start; }
@@ -284,40 +285,44 @@
 .ui-drawer-scrim.side-left { justify-content: flex-start; }
 .ui-drawer-scrim.side-bottom { align-items: flex-end; justify-content: center; }
 .ui-drawer { width: min(var(--drawer-w, 520px), 100vw); height: 100%; background: var(--surface-solid); box-shadow: var(--shadow-3); display: flex; flex-direction: column; outline: none;
-  transition: transform var(--dur-3) var(--ease-out); will-change: transform; }
+  transition: transform var(--dur-4) var(--ease-glide), opacity var(--dur-3) var(--ease-out); will-change: transform; }
 .ui-drawer.side-right { border-left: 1px solid var(--border-2); }
 .ui-drawer.side-left { border-right: 1px solid var(--border-2); }
 .ui-drawer.side-bottom { width: min(var(--drawer-w, 720px), 100vw); height: auto; max-height: 88vh; border-radius: 16px 16px 0 0; border-top: 1px solid var(--border-2); }
-.ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"] { transform: translateX(100%); }
-.ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateX(-100%); }
-.ui-drawer.side-bottom[data-state="enter"], .ui-drawer.side-bottom[data-state="exit"] { transform: translateY(100%); }
+/* Off screen while entering and leaving. With reduced motion it stays put and fades instead:
+   the distance is multiplied by --m (0) and its opacity is --m (0), so only the fade plays. */
+.ui-drawer[data-state="enter"], .ui-drawer[data-state="exit"] { opacity: var(--m); }
+.ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"] { transform: translateX(calc(100% * var(--m))); }
+.ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateX(calc(-100% * var(--m))); }
+.ui-drawer.side-bottom[data-state="enter"], .ui-drawer.side-bottom[data-state="exit"] { transform: translateY(calc(100% * var(--m))); }
 .ui-drawer[data-state="exit"] { transition-duration: var(--dur-2); transition-timing-function: var(--ease-in); }
 .ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; }
 @media (max-width: 640px) {
   .ui-drawer-scrim.side-right, .ui-drawer-scrim.side-left { align-items: flex-end; justify-content: center; }
   .ui-drawer.side-right, .ui-drawer.side-left { width: 100vw; height: auto; max-height: 88vh; border: 0; border-top: 1px solid var(--border-2); border-radius: 16px 16px 0 0; }
   .ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"],
-  .ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateY(100%); }
+  .ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateY(calc(100% * var(--m))); }
 }
 
 /* Motion, part two (DEC-0017): lift, tilt, draw-in, reveal, page transition, hero glow.
    Transforms rest at none, so fixed-position popups inside a card still place correctly. */
-.ui-reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-5) var(--ease-out); }
+.ui-reveal { opacity: 0; transform: translateY(calc(var(--rise-lg) * var(--m))); transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-5) var(--ease-out); }
 .ui-reveal.in { opacity: 1; transform: none; }
 .ui-reveal:not(.done) { transition-delay: var(--reveal-delay, 0s); }
 /* Lift and tilt come after reveal so their hover wins once a card has arrived. */
 .ui-reveal.done.ui-lift, .ui-reveal.done.ui-tilt { transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
 .ui-lift { transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
-.ui-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); border-color: var(--border-2); }
+.ui-lift:hover { transform: translateY(calc(-1 * var(--lift) * var(--m))); box-shadow: var(--shadow-3); border-color: var(--border-2); }
+.ui-lift:active { transform: translateY(calc(-.5 * var(--lift) * var(--m))) scale(calc(1 - (1 - var(--press)) * var(--m))); transition-duration: var(--dur-1); }
 .ui-tilt { position: relative; transition: transform var(--dur-4) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); }
-.ui-tilt:hover { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-2px); transition: transform var(--dur-1) linear, box-shadow var(--dur-3) var(--ease-out); box-shadow: var(--shadow-3); }
+.ui-tilt:hover { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(calc(-1 * var(--lift) * var(--m))); transition: transform var(--dur-1) linear, box-shadow var(--dur-3) var(--ease-out); box-shadow: var(--shadow-3); }
 .ui-tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--dur-3); background: radial-gradient(320px circle at var(--glare-x, 50%) var(--glare-y, 0%), color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%); }
 .ui-tilt:hover::after { opacity: 1; }
 .ui-draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: ui-draw var(--dur-6) var(--ease-out) both; }
-@keyframes ui-draw { from { stroke-dashoffset: 1; } }
+@keyframes ui-draw { from { stroke-dashoffset: var(--m); opacity: var(--m); } }
 .ui-fill-in { animation: ui-fade var(--dur-6) var(--ease-out) var(--dur-3) both; }
 .ui-page { animation: ui-page var(--dur-4) var(--ease-out) backwards; }
-@keyframes ui-page { from { opacity: 0; transform: translateY(8px); } }
+@keyframes ui-page { from { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))); } }
 .ui-glow { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 0; }
 .ui-glow ~ * { position: relative; z-index: 1; }
 .ui-glow i { position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; filter: blur(48px); opacity: .6; animation: ui-glow-drift var(--dur-drift-1) ease-in-out infinite alternate; }
@@ -331,10 +336,9 @@
 :root[data-theme="dark"] .ui-glow i:nth-child(3) { background: radial-gradient(circle, var(--color-glow-deep), transparent 65%); }
 @keyframes ui-glow-drift { to { transform: translate3d(12%, 18%, 0) scale(1.15); } }
 @media (prefers-reduced-motion: reduce) {
-  .ui-reveal { opacity: 1; transform: none; }
-  .ui-tilt:hover, .ui-lift:hover { transform: none; }
-  .ui-glow i { animation: none; }
+  :root:not([data-motion="full"]) .ui-glow i { animation: none; }
 }
+:root[data-motion="reduced"] .ui-glow i { animation: none; }
 
 /* ============================================================
    Anchored and expanding (2026-10-23). Things open in place, float
@@ -389,22 +393,22 @@
 .ui-float[data-side="top"] { transform-origin: bottom center; }
 .ui-float[data-side="left"] { transform-origin: right center; }
 .ui-float[data-side="right"] { transform-origin: left center; }
-.ui-float[data-state="enter"], .ui-float[data-state="exit"] { opacity: 0; transform: scale(.97) translateY(-3px); }
-.ui-float[data-side="top"][data-state="enter"], .ui-float[data-side="top"][data-state="exit"] { transform: scale(.97) translateY(3px); }
+.ui-float[data-state="enter"], .ui-float[data-state="exit"] { opacity: 0; transform: scale(calc(1 - .03 * var(--m))) translateY(calc(-1 * var(--rise-sm) * var(--m))); }
+.ui-float[data-side="top"][data-state="enter"], .ui-float[data-side="top"][data-state="exit"] { transform: scale(calc(1 - .03 * var(--m))) translateY(calc(var(--rise-sm) * var(--m))); }
 .ui-float[data-state="exit"] { transition-duration: var(--dur-1); }
 .ui-pop-anchor { position: relative; display: inline-flex; }
 .ui-popover { position: fixed; left: 0; top: 0; visibility: hidden; z-index: var(--z-popover); min-width: 220px; max-width: calc(100vw - 16px); max-height: min(480px, 70vh); overflow-y: auto; padding: var(--space-4); border-radius: 12px; background: var(--surface-solid); box-shadow: var(--shadow-3); color: var(--text-body); outline: none; }
 
 /* Stagger: a list's children come in one after another, all within 240ms. */
 .ui-stagger > * { animation: ui-rise var(--dur-3) var(--ease-out) backwards; }
-.ui-stagger > :nth-child(2) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(3) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(4) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(5) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(6) { animation-delay: var(--dur-2); }
-.ui-stagger > :nth-child(7) { animation-delay: var(--dur-2); }
-.ui-stagger > :nth-child(8) { animation-delay: var(--dur-3); }
-.ui-stagger > :nth-child(n+9) { animation-delay: var(--dur-3); }
+.ui-stagger > :nth-child(2) { animation-delay: var(--stagger-step); }
+.ui-stagger > :nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+.ui-stagger > :nth-child(4) { animation-delay: calc(var(--stagger-step) * 3); }
+.ui-stagger > :nth-child(5) { animation-delay: calc(var(--stagger-step) * 4); }
+.ui-stagger > :nth-child(6) { animation-delay: calc(var(--stagger-step) * 5); }
+.ui-stagger > :nth-child(7) { animation-delay: calc(var(--stagger-step) * 6); }
+.ui-stagger > :nth-child(8) { animation-delay: calc(var(--stagger-step) * 7); }
+.ui-stagger > :nth-child(n+9) { animation-delay: min(var(--stagger-max), calc(var(--stagger-step) * 8)); }
 
 /* Numbers that change hold their width. */
 .ui-anum { display: inline-block; font-variant-numeric: tabular-nums; text-align: right; }
@@ -437,17 +441,12 @@
 /* Long URLs and file paths in prose wrap instead of pushing the page sideways on a phone. */
 .ui-route :where(p, li, .help) { overflow-wrap: anywhere; }
 .ui-route :where(td, th) :where(p, li) { overflow-wrap: normal; }
-@keyframes ui-route { from { opacity: 0; transform: translateY(4px); } }
+@keyframes ui-route { from { opacity: 0; transform: translateY(calc(var(--rise-sm) * var(--m))); } }
 .ui-arrive { animation: ui-fade var(--dur-3) var(--ease-out) both; }
 
 /* A modal holds the page still; the scroll bar's space is kept, so nothing moves sideways. */
 html.ui-locked { overflow: hidden; }
 
-@media (prefers-reduced-motion: reduce) {
-  .ui-skel { animation: none; }
-  .ui-collapse, .ui-float, .ui-dialog, .ui-drawer, .ui-scrim, .ui-tabs-ind, .ui-seg-thumb { transition: none !important; }
-  .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
-}
 
 /* A crashed part of a page (boundary.tsx, DEC-0059): plain words and a way out, never empty. */
 .ui-crash { display: grid; place-items: center; min-height: 240px; padding: 32px 16px; }

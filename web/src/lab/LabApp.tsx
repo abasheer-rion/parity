@@ -205,7 +205,7 @@ function LabShell() {
             ))}
           </nav>
         )}
-        <main id="main" tabIndex={-1} className="lb-main">
+        <main id="main" tabIndex={-1} className="lb-main ui-route-kids">
           <ErrorBoundary key={view} scope="page">
             <Suspense fallback={<div className="lb-msg lb-loading" aria-busy="true">Loading</div>}>{body}</Suspense>
           </ErrorBoundary>

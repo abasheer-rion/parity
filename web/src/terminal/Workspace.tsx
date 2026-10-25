@@ -141,7 +141,7 @@ function PanelFrame({ leaf: l, ws, setWs, only, mobile }: { leaf: Leaf; ws: WsSt
           {!only && <PhBtn label="Close panel" onClick={close} d={G.close} />}
         </span>
       </header>
-      <div className="term-pb">
+      <div className="term-pb ui-route-kids">
         <PanelContext.Provider value={ctx}>
           <PanelBody key={l.fn} leaf={l} />
         </PanelContext.Provider>

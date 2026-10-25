@@ -326,6 +326,7 @@
 /* HELP */
 .term-help { padding: 4px 10px 16px; }
 .term-help p { margin: 6px 0; line-height: 1.5; }
+.term-motion { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 6px 0; }
 .term-honest { color: var(--t-text); border-left: 2px solid var(--t-amber); padding: 4px 8px; background: color-mix(in srgb, var(--color-warning) 5%, transparent); }
 .term-keys { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px 16px; }
 .term-keys div { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 8px; padding: 2px 0; border-bottom: 1px solid color-mix(in srgb, var(--palette-white) 3%, transparent); }
@@ -343,10 +344,13 @@
 .term-tape-z { color: var(--t-faint); margin-left: 6px; }
 @keyframes term-tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
-  .term-tape { animation: none; }
-  .term-ticker { overflow-x: auto; scrollbar-width: none; }
-  .term-blink { animation: none; }
+  :root:not([data-motion="full"]) .term-tape { animation: none; }
+  :root:not([data-motion="full"]) .term-ticker { overflow-x: auto; scrollbar-width: none; }
+  :root:not([data-motion="full"]) .term-blink { animation: none; }
 }
+:root[data-motion="reduced"] .term-tape { animation: none; }
+:root[data-motion="reduced"] .term-ticker { overflow-x: auto; scrollbar-width: none; }
+:root[data-motion="reduced"] .term-blink { animation: none; }
 
 /* ---------- Sim World inside a panel ---------- */
 .term-sim { padding: 0 6px 10px; }

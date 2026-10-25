@@ -19,7 +19,7 @@ import { termById } from "../lib/glossary";
 import { appLink, productUrl } from "../lib/space";
 import { setStoreUser } from "../lib/userStore";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
-import { Button, Dialog, Icon, Popover, Segmented, Toaster, Toggle, toast } from "../ui";
+import { AnimatedNumber, Button, Dialog, Icon, LIFT, MotionControl, Popover, Segmented, STAGGER, Toaster, Toggle, toast, useMotionHelp } from "../ui";
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
 import "./academy.css";
@@ -208,7 +208,7 @@ function AcademyShell() {
           </button>
         )}
         <a className="pac-chip" href="#/progress" title="Lessons done across every course">
-          <span className="pac-chip-v">{p.loading ? "\u00a0" : p.doneCount}</span><span className="pac-chip-l">of {totalLessons}<span className="pac-chip-x"> lessons</span></span>
+          <span className="pac-chip-v">{p.loading ? "\u00a0" : <AnimatedNumber value={p.doneCount} format={(n) => String(Math.round(n))} />}</span><span className="pac-chip-l">of {totalLessons}<span className="pac-chip-x"> lessons</span></span>
         </a>
       </header>
 
@@ -226,12 +226,15 @@ function AcademyShell() {
         {route.view === "lesson" ? (
           <Player course={route.course} index={route.index} railOpen={railOpen} setRailOpen={setRailOpen} mobile={mobile} autoplay={settings.autoplay} mainRef={main} />
         ) : (
-          <main id="main" tabIndex={-1} ref={main} className="pac-main">
+          <main id="main" tabIndex={-1} ref={main} className="pac-main ui-route-kids">
+            {/* Keyed by the address: each page eases in when it opens (REF-0023). */}
+            <Fragment key={hash.split("?")[0]}>
             {route.view === "library" ? <Library continueHref={continueHref} />
               : route.view === "course" ? <CourseView course={route.course} />
               : route.view === "progress" ? <ProgressView />
               : route.view === "settings" ? <SettingsView settings={settings} set={setSettings} />
               : <div className="pac-page"><NotFound title="That course or lesson does not exist" body="There is no Academy course or lesson at this address. The link may be mistyped, or the lesson may have moved." address={hash} home="#/" homeLabel="See every course" /></div>}
+            </Fragment>
           </main>
         )}
       </div>
@@ -331,13 +334,13 @@ function Library({ continueHref }: { continueHref: string }) {
         <h2 className="pac-h2">Courses</h2>
         <Segmented label="Level" size="sm" value={level} onChange={setLevel} options={[["all", "All"], ...levels.map((l) => [l, l] as [string, string])]} />
       </div>
-      <ol className="pac-grid">
+      <ol className={`pac-grid ${STAGGER}`}>
         {shown.map((c) => {
           const d = p.courseDone(c);
           const next = p.nextIn(c);
           const last = c.lessons[c.lessons.length - 1];
           return (
-            <li key={c.id} className="pac-card pac-glass">
+            <li key={c.id} className={`pac-card pac-glass ${LIFT}`}>
               <a className="pac-card-pic" href={`#/${c.id}`} tabIndex={-1} aria-hidden>
                 <Frame visual={last.visual} s={last.visual.steps.length - 1} />
               </a>
@@ -625,12 +628,14 @@ function ClearDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
 function SettingsView({ settings, set }: { settings: Settings; set: (p: Partial<Settings>) => void }) {
   const p = useProgress();
   const [confirm, setConfirm] = useState(false);
+  const motionHelp = useMotionHelp();
   return (
     <div className="pac-page pac-settings">
       <h1 className="pac-h1">Settings</h1>
       <section className="pac-set pac-glass" aria-labelledby="set-lessons">
         <h2 id="set-lessons" className="pac-h3">Lessons</h2>
         <div className="pac-set-row"><span>Play each picture once when it comes into view</span><Toggle on={settings.autoplay} onChange={(autoplay) => set({ autoplay })} label="Play pictures on their own" /></div>
+        <div className="pac-set-row"><span>Motion<small className="pac-set-help">{motionHelp}</small></span><MotionControl /></div>
         <div className="pac-set-row"><span>Text size</span><Segmented label="Text size" size="sm" value={settings.text} onChange={(text) => set({ text })} options={[["standard", "Standard"], ["large", "Large"]]} /></div>
       </section>
       <section className="pac-set pac-glass" aria-labelledby="set-keys">

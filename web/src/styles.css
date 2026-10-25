@@ -534,6 +534,8 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 /* Settings (Mercury's settings page: label and help on the left, value on the right) */
 .settings { max-width: var(--content-w); }
 .settings-title { display: flex; align-items: center; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin: 8px 0 0; }
+.settings-motion { margin-top: 32px; }
+.settings-sub { margin: 0 0 4px; font-size: var(--fs-lg); font-weight: var(--fw-medium); color: var(--text); }
 .srow { display: grid; grid-template-columns: minmax(0, 376px) minmax(0, 1fr); gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); }
 .srow-label { font-size: var(--fs-md); line-height: 24px; color: var(--ds-text-title); }
 .srow-help { font-size: var(--fs-sm); line-height: 20px; letter-spacing: .1px; color: var(--text-2); margin-top: 2px; max-width: 320px; }
@@ -805,7 +807,8 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
   .phome-hero { padding: 18px; }
   .phome-hero h1 { font-size: var(--type-6xl); }
 }
-@media (prefers-reduced-motion: reduce) { .how-flowline i { animation: none; left: 18px; } .how-flowline i + i { display: none; } }
+@media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) .how-flowline i { animation: none; left: 18px; } :root:not([data-motion="full"]) .how-flowline i + i { display: none; } }
+:root[data-motion="reduced"] .how-flowline i { animation: none; left: 18px; } :root[data-motion="reduced"] .how-flowline i + i { display: none; }
 @media (max-width: 900px) {
   .phome-grid, .rgrid, .themes, .how-flow { grid-template-columns: minmax(0, 1fr); }
   .pcard.span2 { grid-column: auto; }

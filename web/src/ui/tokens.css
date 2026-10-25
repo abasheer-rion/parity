@@ -238,6 +238,8 @@
   --dur-4: 350ms;
   --dur-5: 600ms;
   --dur-6: 900ms;
+  /* A number counting to its new value (REF-0023). */
+  --dur-count: 700ms;
   --dur-spin: 800ms;
   --dur-pulse: 1600ms;
   --dur-pulse-slow: 2400ms;
@@ -251,13 +253,26 @@
   /* Holds a browser's autofill colour off for good (a known trick, not an animation). */
   --dur-hold: 9999s;
   --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
   --ease-in-out: cubic-bezier(.2, .4, .2, 1);
   --ease-spring: cubic-bezier(.2, .9, .25, 1);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
   --ease-fade: cubic-bezier(.35, 0, .5, 1);
   --ease-glide: cubic-bezier(.2, .8, .2, 1);
-  --ease-in: cubic-bezier(.4, 0, 1, 1);
   /* A fast start and a long settle, for panels and fields arriving (sign-in). */
   --ease-emphasized: cubic-bezier(.16, 1, .3, 1);
+  /* Lists come in one item after another, --stagger-step apart, the last by --stagger-max. */
+  --stagger-step: 40ms;
+  --stagger-max: 320ms;
+  /* How far things travel: a small rise, a page rise, a reveal on scroll, a hover lift. */
+  --rise-sm: 4px;
+  --rise: 8px;
+  --rise-lg: 16px;
+  --lift: 2px;
+  --press: .985;
+  /* 1 = full motion. 0 = reduced: every distance and scale is multiplied by it, so
+     things still fade but nothing moves. Set from the device or the Motion setting. */
+  --m: 1;
 
   /* ---------------------------------------------------------------- breakpoints */
   /* CSS cannot read these inside @media, so media queries use the same numbers and
@@ -368,12 +383,10 @@
   font-family: var(--font-text);
 }
 
-/* Reduced motion: every duration token collapses, so anything built on them holds still. */
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-1: 1ms; --dur-2: 1ms; --dur-3: 1ms; --dur-4: 1ms; --dur-5: 1ms; --dur-6: 1ms;
-  }
-}
+/* Reduced motion (REF-0023): the device asks for it (unless the person chose Full), or
+   the person chose Reduced. Fades and crossfades stay; movement goes. */
+@media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) { --m: 0; } }
+:root[data-motion="reduced"] { --m: 0; }
 
 /* ---------------------------------------------------------------- app themes */
 /* Parity Terminal (DEC-0023) keeps its market-terminal colours: amber for the main

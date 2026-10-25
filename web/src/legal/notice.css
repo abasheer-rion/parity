@@ -83,7 +83,9 @@
   .cn-actions .cn-btn { flex: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cn { animation: none; }
-  .cn-switch span, .cn-switch span::after { transition: none; }
+  :root:not([data-motion="full"]) .cn { animation: none; }
+  :root:not([data-motion="full"]) .cn-switch span, :root:not([data-motion="full"]) .cn-switch span::after { transition: none; }
 }
+:root[data-motion="reduced"] .cn { animation: none; }
+:root[data-motion="reduced"] .cn-switch span, :root[data-motion="reduced"] .cn-switch span::after { transition: none; }
 @media print { .cn { display: none; } }

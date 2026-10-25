@@ -6,22 +6,11 @@
 import DOMPurify from "dompurify";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { H, renderScene, W, type Visual } from "./scenes";
+// Reduced motion follows the device and the Motion setting (REF-0023).
+import { useReducedMotion } from "../ui/presence";
 
 const TWEEN_MS = 700;
 const STEP_MS = 3200;
-
-function useReducedMotion(): boolean {
-  const q = "(prefers-reduced-motion: reduce)";
-  const [reduced, setReduced] = useState(() => typeof window !== "undefined" && !!window.matchMedia?.(q).matches);
-  useEffect(() => {
-    const m = window.matchMedia?.(q);
-    if (!m) return;
-    const on = () => setReduced(m.matches);
-    m.addEventListener("change", on);
-    return () => m.removeEventListener("change", on);
-  }, []);
-  return reduced;
-}
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 

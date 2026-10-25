@@ -1,6 +1,8 @@
 // The demo account's tables (DEC-0034), shared by the bottom dock, Portfolio and Orders:
 // positions, orders, fills and the P&L numbers.
+import type { ReactNode } from "react";
 import { fmt } from "../ui/text";
+import { AnimatedNumber } from "../ui/motion";
 import { priceText } from "../lib/tradeData";
 import { isActive, ORDER_TYPE_LABEL, trailingStopLevel, type PaperOrder } from "../lib/paper/matching";
 import type { FillRow } from "../lib/paper/account";
@@ -86,12 +88,14 @@ export function PnlStrip({ wide }: { wide?: boolean }) {
   const d = useDemo();
   const s = d.stats;
   const v = (x: string) => (d.book ? x : "n/a");
-  const items: [string, string, number | null][] = [
-    ["Equity", v(usd(d.equity)), null],
-    ["Cash", v(usd(d.book?.cash ?? 0)), null],
+  // Money values tick to their new amount as prices move (a number ticker, REF-0023).
+  const tick = (x: number, f: (n: number) => string) => (d.book ? <AnimatedNumber value={x} format={f} /> : "n/a");
+  const items: [string, ReactNode, number | null][] = [
+    ["Equity", tick(d.equity, usd), null],
+    ["Cash", tick(d.book?.cash ?? 0, usd), null],
     ["Return", v(fmt.signedPct(d.equity / d.start - 1, 2)), d.equity - d.start],
-    ["Unrl P&L", v(signedUsd(d.upl)), d.upl],
-    ["Rlzd P&L", v(signedUsd(d.realized)), d.realized],
+    ["Unrl P&L", tick(d.upl, signedUsd), d.upl],
+    ["Rlzd P&L", tick(d.realized, signedUsd), d.realized],
     ["Win rate", s.win_rate == null ? "n/a" : `${fmt.pct(s.win_rate, 0)} (${s.closed_trades})`, null],
     ["Profit factor", fmt.num(s.profit_factor), null],
     ["Sharpe", fmt.num(s.sharpe), null],

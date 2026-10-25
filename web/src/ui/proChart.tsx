@@ -216,6 +216,11 @@ export function ProChart({
 
     const up = cssVar("color-positive", host.current), down = cssVar("color-negative", host.current), accent = cssVar("series-1", host.current);
     const bars = live?.bars ?? barsProp;
+    // The first time there is something to draw, the chart reveals left to right (motion.css).
+    if (bars.length && host.current && !host.current.dataset.shown) {
+      host.current.dataset.shown = "1";
+      host.current.classList.add("ui-chart-reveal");
+    }
     c.applyOptions({ timeScale: { timeVisible: (bars[0]?.time.length ?? 10) > 10, secondsVisible: false } });
     const shown = type === "heikin" ? heikinAshi(bars) : bars;
     const ohlc = shown.map((b) => ({ time: toTime(b.time), open: b.open, high: b.high, low: b.low, close: b.close }));
