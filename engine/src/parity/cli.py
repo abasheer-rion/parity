@@ -29,6 +29,9 @@
     parity bots export           write output/bots/ for the Bot Battle page and the clips
     parity sims run --forever    the always-on sims service (DEC-0037); `sims status`
                                  shows whether the search and the sims are alive
+    parity profiles collect      public feedback on the products we profile (CMP docs),
+                                 only from sources whose terms allow it; `profiles
+                                 sources` lists each source and its terms
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -540,6 +543,12 @@ def _markets(args) -> int:
     return markets_cli.run(args)
 
 
+def _profiles(args) -> int:
+    from .profiles import cli as profiles_cli
+
+    return profiles_cli.run(args)
+
+
 def _mcp(_args) -> int:
     try:
         import mcp  # noqa: F401
@@ -750,6 +759,10 @@ def main(argv: list[str] | None = None) -> int:
     from .markets import cli as markets_cli
 
     markets_cli.add_parser(sub).set_defaults(func=_markets)
+
+    from .profiles import cli as profiles_cli
+
+    profiles_cli.add_parser(sub).set_defaults(func=_profiles)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:

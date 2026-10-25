@@ -48,4 +48,9 @@ All our prices are delayed daily closes from sources whose terms allow display (
 
 - [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [CMP-0006: TradingView, browser charts and a social network for traders](../competitors/0006-tradingview.md)
+- [CMP-0008: thinkorswim, Schwab's dense pro trading platform for options and futures traders](../competitors/0008-thinkorswim.md)
+- [CMP-0010: Webull, a zero-commission broker with pro desktop tools and paper trading](../competitors/0010-webull.md)
+- [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
+- [CMP-0019: Myfxbook, the forex track record and analysis site traders cite](../competitors/0019-myfxbook.md)
 <!-- backlinks:end -->
