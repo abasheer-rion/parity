@@ -99,7 +99,7 @@ function pctSigned(v: number) {
   return `${v >= 0 ? "+" : "−"}${Math.abs(v * 100).toFixed(0)}%`;
 }
 
-export interface Verdict { label: string; tone: "good" | "accent" | "neutral" | "bad"; plain: string }
+export interface Verdict { label: string; tone: "good" | "warning" | "neutral" | "bad"; plain: string }
 
 /** One word and one sentence a newcomer can read: did this strategy hold up? */
 export function verdictOf(r: StrategyRun): Verdict {
@@ -110,6 +110,6 @@ export function verdictOf(r: StrategyRun): Verdict {
   const beats = g.beats_sp500 ? "beats the S&P 500 after costs" : "does not beat the S&P 500 after costs";
   const tests = `passed ${g.passed} of ${g.total} tests`;
   if (g.beats_sp500 && g.passed === g.total) return { label: "Passed", tone: "good", plain: `It ${tests} and ${beats}.` };
-  if (share >= 0.6) return { label: "Promising", tone: "accent", plain: g.beats_sp500 ? `It ${beats}, but only ${tests}.` : `It ${tests}, but ${beats}.` };
+  if (share >= 0.6) return { label: "Promising", tone: "warning", plain: g.beats_sp500 ? `It ${beats}, but only ${tests}.` : `It ${tests}, but ${beats}.` };
   return { label: "Not proven", tone: "bad", plain: `It ${tests} and ${beats}.` };
 }

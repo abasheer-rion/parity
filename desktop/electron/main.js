@@ -25,6 +25,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const routes = require("./routes");
+const TOKENS = require("./tokens");
 const SECTIONS = require("./sections");
 const settingsStore = require("./settings");
 const workspace = require("./workspace");
@@ -123,7 +124,7 @@ function openLink(link) {
 // ---------------------------------------------------------------- app://parity
 
 const notFound = () => new Response(
-  `<!doctype html><meta charset="utf-8"><title>Not found · Parity</title><body style="margin:0;display:grid;place-items:center;height:100vh;background:#050608;color:#a4a8b6;font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"><p>This page is not in the app. <a style="color:#5cc2f5" href="/">Go to the front page</a></p>`,
+  `<!doctype html><meta charset="utf-8"><title>Not found · Parity</title><body style="margin:0;display:grid;place-items:center;height:100vh;background:${TOKENS["color-canvas"]};color:${TOKENS["color-text-muted"]};font:${TOKENS["type-lg"]}/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"><p>This page is not in the app. <a style="color:${TOKENS["color-text"]}" href="/">Go to the front page</a></p>`,
   { status: 404, headers: { "Content-Type": "text/html; charset=utf-8" } },
 );
 
@@ -399,7 +400,7 @@ function openSettings() {
   settingsWin = new BrowserWindow({
     title: "Parity settings",
     width: 600, height: 720, minWidth: 480, minHeight: 480,
-    backgroundColor: "#050608",
+    backgroundColor: TOKENS["color-canvas"],
     show: false,
     ...(process.platform === "darwin" ? { titleBarStyle: "hiddenInset", trafficLightPosition: { x: 14, y: 12 } } : { autoHideMenuBar: true, icon: path.join(__dirname, "..", "assets", "icon.png") }),
     webPreferences: { ...ctx.basePrefs, preload: path.join(__dirname, "shell-preload.js") },

@@ -63,7 +63,7 @@ export function Section({ title, children, actions }: { title: ReactNode; childr
   );
 }
 
-export function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "accent" | "good" | "bad" | "dark" }) {
+export function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "accent" | "good" | "bad" | "warning" | "info" | "dark" }) {
   return <span className={`ui-badge ui-badge-${tone}`}>{children}</span>;
 }
 

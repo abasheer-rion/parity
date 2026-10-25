@@ -12,6 +12,7 @@
 const { WebContentsView } = require("electron");
 const path = require("node:path");
 const routes = require("./routes");
+const TOKENS = require("./tokens");
 
 // The website's cookie notice: the app stores only what it needs to work, as the cookie
 // policy's desktop section says, so the notice never shows (DEC-0049). The site also skips it
@@ -39,7 +40,7 @@ class Page {
         additionalArguments: [`--parity-version=${ctx.version}`, `--parity-origins=${ctx.TRUSTED.join(",")}`],
       },
     });
-    this.view.setBackgroundColor("#050608");
+    this.view.setBackgroundColor(TOKENS["color-canvas"]);
     this.wire();
   }
 

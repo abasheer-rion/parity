@@ -44,6 +44,7 @@ function countLessons(): number {
 }
 
 const KIT = resolve(import.meta.dirname, "../src/site/kit.css");
+const TOKENS = resolve(import.meta.dirname, "../src/ui/tokens.css");
 
 const r2 = (n: number) => Math.round(n * 1000) / 1000;
 
@@ -100,7 +101,8 @@ export function paritySite(): Plugin {
       order: "pre",
       handler(html, ctx) {
         // Every page that asks for it gets the shared look inline (src/site/kit.css, DEC-0044).
-        html = html.replace("<!--site-kit-->", () => `<style>${readFileSync(KIT, "utf8").trim()}</style>`);
+        // The design tokens come first (src/ui/tokens.css, DEC-0058): kit.css reads them.
+        html = html.replace("<!--site-kit-->", () => `<style>${readFileSync(TOKENS, "utf8").trim()}\n${readFileSync(KIT, "utf8").trim()}</style>`);
         if (ctx.path !== "/index.html") return html;
         return html
           .replace("<!--field-poster-->", fieldPoster())

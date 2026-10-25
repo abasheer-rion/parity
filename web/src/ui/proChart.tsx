@@ -18,6 +18,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode }
 import { compute, heikinAshi, indicatorDef, instanceLabel, type Bar, type IndicatorInstance, type Line } from "../lib/indicators";
 import { barAtOrBefore } from "../lib/bars";
 import { IconButton } from "./buttons";
+import { RAW, tokenValue, typePx, type TokenName } from "./tokens";
 import "./proChart.css";
 
 export type ChartType = "candles" | "bars" | "line" | "area" | "heikin" | "baseline";
@@ -77,22 +78,26 @@ export interface ChartMarker { id: string; time: string; side: "buy" | "sell" | 
 
 /** Height of the time axis under the panes; the panes share the rest by stretch factor. */
 const TIME_AXIS = 28;
-const PANE_COLORS =["--series-1", "--series-3", "--series-5", "--series-2", "--series-4"];
+const PANE_COLORS: TokenName[] = ["series-1", "series-3", "series-5", "series-2", "series-4"];
 
-function cssVar(name: string, fallback: string): string {
-  if (typeof document === "undefined") return fallback;
-  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  return v || fallback;
+/** A colour token as a plain colour the chart library can parse (it cannot read
+ *  color-mix or var), taken from the chart's own element so app themes apply. */
+function cssVar(name: TokenName, el?: Element | null): string {
+  return toCanvasColor(tokenValue(name, el), RAW[name]);
 }
 
 let probe: CanvasRenderingContext2D | null | undefined;
+/** Any CSS colour (hex, rgb, color-mix) as the canvas writes it back: #rrggbb or rgba(). */
+function toCanvasColor(color: string, fallback: string): string {
+  probe ??= typeof document !== "undefined" ? document.createElement("canvas").getContext("2d") : null;
+  if (!probe) return fallback;
+  probe.fillStyle = fallback;
+  probe.fillStyle = color;
+  return String(probe.fillStyle);
+}
 /** Any CSS colour with an alpha channel, as rgba(), so tokens in any format work. */
 function withAlpha(color: string, a: number): string {
-  probe ??= typeof document !== "undefined" ? document.createElement("canvas").getContext("2d") : null;
-  if (!probe) return color;
-  probe.fillStyle = "#000";
-  probe.fillStyle = color;
-  const v = String(probe.fillStyle);
+  const v = toCanvasColor(color, RAW["palette-black"]);
   const hex = /^#([0-9a-f]{6})$/i.exec(v);
   if (hex) {
     const n = parseInt(hex[1], 16);
@@ -124,9 +129,8 @@ function fmt(v: number | null | undefined, digits: number): string {
   return (v < 0 ? "−" : "") + s;
 }
 
-function toMarkers(list: ChartMarker[] | undefined, up: string, down: string): SeriesMarker<Time>[] {
+function toMarkers(list: ChartMarker[] | undefined, up: string, down: string, exit: string): SeriesMarker<Time>[] {
   if (!list?.length) return [];
-  const exit = cssVar("--text-2", "#9aa0a6");
   return [...list].sort((a, b) => a.time.localeCompare(b.time)).map((m) => ({
     id: m.id, time: toTime(m.time), text: m.text, size: 0.8,
     ...(m.side === "buy" ? { position: "belowBar" as const, shape: "arrowUp" as const, color: up }
@@ -181,10 +185,10 @@ export function ProChart({
   // Create the chart once.
   useLayoutEffect(() => {
     if (!host.current) return;
-    const text = cssVar("--text-2", "#9aa0a6"), grid = cssVar("--grid", "rgba(255,255,255,0.06)"), border = cssVar("--border", "rgba(255,255,255,0.12)");
+    const text = cssVar("color-text-muted", host.current), grid = cssVar("color-grid", host.current), border = cssVar("color-border-strong", host.current);
     const c = createChart(host.current, {
       autoSize: true,
-      layout: { background: { color: "transparent" }, textColor: text, fontFamily: cssVar("--font-text", "system-ui"), fontSize: 11, attributionLogo: true, panes: { separatorColor: border, separatorHoverColor: border } },
+      layout: { background: { color: "transparent" }, textColor: text, fontFamily: tokenValue("font-text", host.current), fontSize: typePx("type-2xs"), attributionLogo: true, panes: { separatorColor: border, separatorHoverColor: border } },
       grid: { vertLines: { color: grid }, horzLines: { color: grid } },
       rightPriceScale: { borderColor: border },
       timeScale: { borderColor: border, rightOffset: 4 },
@@ -210,7 +214,7 @@ export function ProChart({
     for (const pane of [...c.panes()].reverse()) for (const s of pane.getSeries()) c.removeSeries(s);
     while (c.panes().length > 1) c.removePane(c.panes().length - 1);
 
-    const up = cssVar("--good", "#3fb37f"), down = cssVar("--bad", "#e5484d"), accent = cssVar("--series-1", "#7aa2f7");
+    const up = cssVar("color-positive", host.current), down = cssVar("color-negative", host.current), accent = cssVar("series-1", host.current);
     const bars = live?.bars ?? barsProp;
     c.applyOptions({ timeScale: { timeVisible: (bars[0]?.time.length ?? 10) > 10, secondsVisible: false } });
     const shown = type === "heikin" ? heikinAshi(bars) : bars;
@@ -240,7 +244,7 @@ export function ProChart({
 
     const lines: Built["lines"] = [];
     if (compare && compare.bars.length) {
-      const color = cssVar("--series-4", "#e0af68");
+      const color = cssVar("series-4", host.current);
       const s = c.addSeries(LineSeries, { color, lineWidth: 2, priceLineVisible: false, lastValueVisible: true, title: compare.label });
       s.setData(compare.bars.map((b) => ({ time: toTime(b.time), value: b.close })));
       const byTime = new Map(compare.bars.map((b) => [b.time, b.close]));
@@ -253,13 +257,13 @@ export function ProChart({
       const out = compute(ind, bars);
       const onPane = def.place === "pane" ? ++pane : 0;
       const name = instanceLabel(ind);
-      const color = (k: number) => cssVar(PANE_COLORS[(colorIdx + k) % PANE_COLORS.length], accent);
+      const color = (k: number) => cssVar(PANE_COLORS[(colorIdx + k) % PANE_COLORS.length], host.current);
       const lw = { lineWidth: 1 as const, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false };
       const dg = ["rsi", "stochastic", "adx"].includes(ind.type) ? 1 : ind.type === "obv" || ind.type === "volume" ? 0 : digits;
       if (ind.type === "volume") {
         const s = c.addSeries(HistogramSeries, { priceFormat: { type: "volume" }, priceLineVisible: false, lastValueVisible: false }, onPane);
         s.setData(shown.flatMap((b, i) => (out.volume[i] == null ? [] : [{ time: toTime(b.time), value: out.volume[i] as number, color: b.close >= b.open ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
-        lines.push({ label: name, values: out.volume, color: cssVar("--text-2", "#999"), pane: onPane, digits: 0 });
+        lines.push({ label: name, values: out.volume, color: cssVar("color-text-muted", host.current), pane: onPane, digits: 0 });
       } else if (ind.type === "macd") {
         const h = c.addSeries(HistogramSeries, { priceLineVisible: false, lastValueVisible: false }, onPane);
         h.setData(bars.flatMap((b, i) => (out.hist[i] == null ? [] : [{ time: toTime(b.time), value: out.hist[i] as number, color: (out.hist[i] as number) >= 0 ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
@@ -272,7 +276,7 @@ export function ProChart({
           const s = c.addSeries(LineSeries, { ...lw, color: col, lineStyle: ind.type === "bollinger" && k !== "mid" ? LineStyle.Dashed : LineStyle.Solid }, onPane);
           s.setData(lineData(bars, values));
           if ((ind.type === "rsi" || ind.type === "stochastic") && j === 0) {
-            for (const lvl of ind.type === "rsi" ? [30, 70] : [20, 80]) s.createPriceLine({ price: lvl, color: cssVar("--axis", "#555"), lineStyle: LineStyle.Dotted, lineWidth: 1, axisLabelVisible: false, title: "" });
+            for (const lvl of ind.type === "rsi" ? [30, 70] : [20, 80]) s.createPriceLine({ price: lvl, color: cssVar("color-axis", host.current), lineStyle: LineStyle.Dotted, lineWidth: 1, axisLabelVisible: false, title: "" });
           }
           lines.push({ label: Object.keys(out).length > 1 ? `${name} ${k}` : name, values, color: col, pane: onPane, digits: dg });
         });
@@ -286,23 +290,23 @@ export function ProChart({
 
     c.priceScale("right").applyOptions({ mode: compare ? PriceScaleMode.IndexedTo100 : log ? PriceScaleMode.Logarithmic : PriceScaleMode.Normal });
     built.current = { main, lines, shown };
-    markerApi.current = createSeriesMarkers(main, toMarkers(markersRef.current, up, down), { autoScale: true });
+    markerApi.current = createSeriesMarkers(main, toMarkers(markersRef.current, up, down, cssVar("color-text-muted", host.current)), { autoScale: true });
     setVersion((v) => v + 1);
 
     // Drawings sit on the price pane; they are hidden while comparing, when prices are rescaled.
     if (!compare) {
       for (const d of drawings) {
         if (d.kind === "hline" && d.points[0]) {
-          drawn.current.lines.push(main.createPriceLine({ price: d.points[0].price, color: cssVar("--series-4", "#e0af68"), lineWidth: 1, lineStyle: LineStyle.Dashed, axisLabelVisible: true, title: "" }));
+          drawn.current.lines.push(main.createPriceLine({ price: d.points[0].price, color: cssVar("series-4", host.current), lineWidth: 1, lineStyle: LineStyle.Dashed, axisLabelVisible: true, title: "" }));
         } else if (d.kind === "fib" && d.points.length === 2) {
           const [a, b] = d.points;
           for (const lvl of FIB_LEVELS) {
-            drawn.current.lines.push(main.createPriceLine({ price: b.price + (a.price - b.price) * lvl, color: cssVar("--series-6", "#bb9af7"), lineWidth: 1, lineStyle: lvl === 0 || lvl === 1 ? LineStyle.Solid : LineStyle.Dotted, axisLabelVisible: false, title: `${(lvl * 100).toFixed(1)}%` }));
+            drawn.current.lines.push(main.createPriceLine({ price: b.price + (a.price - b.price) * lvl, color: cssVar("series-6", host.current), lineWidth: 1, lineStyle: lvl === 0 || lvl === 1 ? LineStyle.Solid : LineStyle.Dotted, axisLabelVisible: false, title: `${(lvl * 100).toFixed(1)}%` }));
           }
         } else if (d.kind === "trend" && d.points.length === 2) {
           const pts = [...d.points].map((p) => ({ ...p, time: shown[Math.max(0, barAtOrBefore(shown, p.time))]?.time ?? p.time })).sort((x, y) => x.time.localeCompare(y.time));
           if (pts[0].time === pts[1].time) continue;
-          const s = c.addSeries(LineSeries, { color: cssVar("--series-4", "#e0af68"), lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false, pointMarkersVisible: true }, 0);
+          const s = c.addSeries(LineSeries, { color: cssVar("series-4", host.current), lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false, pointMarkersVisible: true }, 0);
           s.setData(pts.map((p) => ({ time: toTime(p.time), value: p.price })));
           drawn.current.series.push(s);
         }
@@ -312,7 +316,7 @@ export function ProChart({
 
   // Markers change without a rebuild.
   useEffect(() => {
-    markerApi.current?.setMarkers(toMarkers(markers, cssVar("--good", "#3fb37f"), cssVar("--bad", "#e5484d")));
+    markerApi.current?.setMarkers(toMarkers(markers, cssVar("color-positive", host.current), cssVar("color-negative", host.current), cssVar("color-text-muted", host.current)));
   }, [markers]);
 
   // Live ticks: update the forming bar in place; a finished bar triggers one redraw. The
@@ -336,7 +340,7 @@ export function ProChart({
       }
       const b = sh[sh.length - 1] ?? last;
       const t = toTime(b.time);
-      if (type === "candles" || type === "heikin") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close, ...formingColors(b, cssVar("--good", "#3fb37f"), cssVar("--bad", "#e5484d")) });
+      if (type === "candles" || type === "heikin") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close, ...formingColors(b, cssVar("color-positive", host.current), cssVar("color-negative", host.current)) });
       else if (type === "bars") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close });
       else main.update({ time: t, value: b.close });
       const now = performance.now();

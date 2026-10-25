@@ -58,6 +58,9 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci
+      # Design tokens (DEC-0058): no raw colours, px font sizes, durations or curves outside
+      # src/ui/tokens.css, no undefined var(--x), and the generated token files up to date.
+      - run: npm run lint:styles
       - run: npm test
       - run: npm run build
       # Every built page loads the analytics boot script (DEC-0053, scripts/analytics-check.mjs).

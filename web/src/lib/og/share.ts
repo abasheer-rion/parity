@@ -5,12 +5,13 @@ import { abs, OG_CARDS, ogImage, PRIVATE, type PageMeta } from "../meta";
 import { ASSET_LABEL, FAMILY_LABEL, nameById, tagsById } from "../strategyMeta";
 import { KIND_WORDS, survivesWords, TRUST_LINE, VERDICT_COLOR, VERDICT_WORDS, type PublicBadge } from "../verify/badge";
 import type { BadgeCard } from "./card";
+import { RAW } from "../../ui/tokens.gen";
 
 export const isStrategyId = (s: string) => /^[a-z0-9_]{1,64}$/.test(s);
 
 /** The share card for a badge. A missing or withdrawn badge never shows an old verdict. */
 export function badgeCard(b: PublicBadge | null, id: string): BadgeCard {
-  const grey = "#a7adbd";
+  const grey = RAW["color-text-muted"];
   if (!b) return { id, verdict: "No such record", color: grey, survives: "Check the link", detail: "This Verify link does not match a record." };
   if (b.withdrawn_at || !b.verdict) {
     return { id, verdict: "Withdrawn", color: grey, survives: "Withdrawn by its owner", detail: `on ${b.withdrawn_at?.slice(0, 10) ?? "an earlier date"}` };

@@ -12,13 +12,16 @@
 // No browser globals at import time: the Vite plugin, the Cloudflare functions and the
 // tests all read this file.
 import site from "./site.json";
+import { RAW } from "../ui/tokens.gen";
 
 export const ORIGIN: string = site.origin.replace(/\/$/, "");
 export const HOST: string = new URL(ORIGIN).host;
 export const SITE_NAME: string = site.name;
 export const LEGAL_NAME: string = site.legalName;
 export const CONTACT: string = site.email;
-export const THEME_COLOR: string = site.themeColor;
+/** The browser bar colour: the page canvas token. site.json repeats it for the Python SEO
+ *  builder, and a test keeps the two equal. */
+export const THEME_COLOR: string = RAW["color-canvas"];
 
 /**
  * The domain whose subdomains share the sign-in cookie: parity.endyland.com gives
@@ -147,7 +150,7 @@ export const PAGES: Record<string, PageMeta> = {
   // link preview shows, since the server answers a signed-out visitor with a redirect.
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },
   "research/index.html": { title: "Parity Research", description: OG_CARDS.research.sub, path: "/research/", image: "research", robots: PRIVATE, manifest: "/manifest.webmanifest" },
-  "sim/index.html": { title: "Parity Terminal", description: OG_CARDS.sim.sub, path: "/sim/", image: "sim", robots: PRIVATE, themeColor: "#000000", manifest: "/sim/manifest.webmanifest", manifestCredentials: true },
+  "sim/index.html": { title: "Parity Terminal", description: OG_CARDS.sim.sub, path: "/sim/", image: "sim", robots: PRIVATE, themeColor: RAW["palette-black"], manifest: "/sim/manifest.webmanifest", manifestCredentials: true },
   "trade/index.html": { title: "Parity Trade", description: OG_CARDS.trade.sub, path: "/trade/", image: "trade", robots: PRIVATE, manifest: "/trade/manifest.webmanifest", manifestCredentials: true },
   "academy/index.html": { title: "Parity Academy", description: OG_CARDS.academy.sub, path: "/academy/", image: "academy", robots: PRIVATE, manifest: "/academy/manifest.webmanifest", manifestCredentials: true },
   "lab/index.html": { title: "Parity Workbench", description: OG_CARDS.lab.sub, path: "/lab/", image: "lab", robots: PRIVATE, manifest: "/lab/manifest.webmanifest", manifestCredentials: true },

@@ -3,6 +3,7 @@
 // app, which asks a signed-out visitor to log in and then lands on the strategy.
 import { esc, renderHead } from "../../src/lib/meta";
 import { isStrategyId, strategyCard, strategyMeta } from "../../src/lib/og/share";
+import { RAW } from "../../src/ui/tokens.gen";
 
 interface Context { params: { id?: string | string[] } }
 
@@ -17,8 +18,8 @@ export function sharePage(id: string): string {
     <meta http-equiv="refresh" content="0; url=${esc(to)}" />
     <script>location.replace(${JSON.stringify(to)});</script>
   </head>
-  <body style="background:#07080d;color:#f1f3f9;font:16px/1.6 Inter,system-ui,sans-serif;padding:40px">
-    <p><a style="color:#85a8ff" href="${esc(to)}">Open ${esc(strategyCard(id).title)} in Parity</a></p>
+  <body style="background:${RAW["color-canvas"]};color:${RAW["color-text"]};font:${RAW["type-xl"]}/1.6 Inter,system-ui,sans-serif;padding:40px">
+    <p><a style="color:${RAW["color-text"]}" href="${esc(to)}">Open ${esc(strategyCard(id).title)} in Parity</a></p>
   </body>
 </html>`;
 }

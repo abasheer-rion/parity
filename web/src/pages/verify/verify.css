@@ -60,8 +60,8 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 .vf-zone-good { fill: color-mix(in srgb, var(--good) 9%, transparent); }
 .vf-zone-bad { fill: color-mix(in srgb, var(--bad) 9%, transparent); }
 .vf-grid { stroke: var(--grid); stroke-width: 1; }
-.vf-axis { fill: var(--text-2); font-size: 9px; }
-.vf-zone-label { fill: var(--text-2); font-size: 10px; }
+.vf-axis { fill: var(--text-2); font-size: var(--type-3xs); }
+.vf-zone-label { fill: var(--text-2); font-size: var(--type-3xs); }
 .vf-curve { fill: none; stroke: var(--text); stroke-width: 1.5; }
 .vf-dot-good { fill: var(--good); stroke: var(--canvas); stroke-width: 2; }
 .vf-dot-bad { fill: var(--bad); stroke: var(--canvas); stroke-width: 2; }
@@ -97,6 +97,6 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 .vb-share summary { cursor: pointer; color: var(--text-2); margin-bottom: 8px; }
 .vb-share textarea { margin-top: 8px; }
 .vb-footer { max-width: 1100px; width: 100%; margin: 0 auto; padding: 16px; color: var(--muted); font-size: var(--fs-xs); border-top: 1px solid var(--border); }
-.vb-page .skip { position: absolute; left: 12px; top: -60px; z-index: 10; padding: 10px 14px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.vb-page .skip { position: absolute; left: 12px; top: -60px; z-index: var(--z-sticky); padding: 10px 14px; border-radius: 8px; background: var(--color-primary); color: var(--color-on-primary); font-weight: 600; text-decoration: none; }
 .vb-page .skip:focus { top: 12px; }
 .vb-notice img { max-width: 100%; height: auto; }

@@ -6,7 +6,6 @@
 //     (CI has no news, markets or terminal exports; pages must say so calmly)
 //   - a blank page, or NaN, undefined, Infinity or [object Object] in the text
 //   - sideways scroll on the phone size
-//   - a page without the analytics boot script, or one it cannot name (DEC-0053)
 //
 //   npm run smoke                      starts its own server
 //   SMOKE_BASE=http://127.0.0.1:5199 npm run smoke   uses a running one
@@ -14,41 +13,15 @@
 // The routes come from src/lib/pages.ts, src/lib/space.ts and each app's view list, so a
 // new page is covered without editing this file. SMOKE_ONLY=/app/ limits it to paths that
 // contain the text.
-import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
+import { routes } from "./lib/routes.mjs";
 
 const here = (p) => resolve(import.meta.dirname, "..", p);
-const read = (p) => readFileSync(here(p), "utf8");
 
 // ---------------------------------------------------------------- the routes
 
-function routes() {
-  const pages = read("src/lib/pages.ts");
-  const out = new Set(["/", "/login/", "/signup/", "/reset/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/"]);
-  // Each page's hash and side. Pages that moved to their own app redirect, which is tested too.
-  for (const m of pages.matchAll(/href: "(#\/[^"]*)", title: "[^"]*", space: "(product|research|both)"/g)) {
-    const [, hash, space] = m;
-    if (space !== "research") out.add(`/app/${hash}`);
-    if (space !== "product") out.add(`/research/${hash}`);
-  }
-  const viewIds = (file) => [...read(file).matchAll(/\{ id: "([a-z]+)", label:/g)].map((m) => m[1]);
-  for (const v of viewIds("src/trade/state.ts")) out.add(`/trade/#/${v}`);
-  for (const v of viewIds("src/lab/state.ts")) out.add(`/lab/#/${v}`);
-  for (const v of ["", "progress", "settings"]) out.add(`/academy/#/${v}`);
-  const courses = readFileSync(here("../academy/courses/01-reading-a-backtest.json"), "utf8");
-  const course = JSON.parse(courses);
-  out.add(`/academy/#/${course.id}`);
-  if (course.lessons?.[0]?.id) out.add(`/academy/#/${course.id}/${course.lessons[0].id}`);
-  for (const m of read("src/terminal/layout.ts").matchAll(/\{ id: "([a-z]+)", label:/g)) out.add(`/sim/#/${m[1]}`);
-  // A strategy page and an algorithm report, and the settings pages.
-  out.add("/app/#/strategy/fx_carry");
-  out.add("/research/#/algo/fx-carry-g10");
-  out.add("/app/#/settings");
-  // The team-only Metrics page is not in the page list; signed out it says so (DEC-0053).
-  out.add("/research/#/metrics");
-  return [...out].filter((p) => !process.env.SMOKE_ONLY || p.includes(process.env.SMOKE_ONLY));
-}
+const list = routes().filter((p) => !process.env.SMOKE_ONLY || p.includes(process.env.SMOKE_ONLY));
 
 // ---------------------------------------------------------------- the server
 
@@ -69,14 +42,13 @@ const SIZES = [{ name: "desktop", width: 1440, height: 900 }, { name: "phone", w
 const IGNORE = [/Download the React DevTools/, /^\[vite\]/];
 const missingData = (url) => new URL(url).pathname.startsWith("/local/");
 const problems = [];
-const list = routes();
 const browser = await chromium.launch();
 
 for (const size of SIZES) {
   const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, reducedMotion: "reduce" });
   // A decided cookie banner, so it does not cover the page.
   await ctx.addInitScript(() => {
-    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
   });
   const queue = [...list];
   await Promise.all([0, 1, 2, 3].map(async () => {
@@ -113,14 +85,11 @@ for (const size of SIZES) {
         const info = await page.evaluate(() => {
           const text = document.body?.innerText ?? "";
           const bad = [...text.matchAll(/(^|[^A-Za-z])(NaN|undefined|Infinity|\[object Object\])(?![A-Za-z])/g)].map((m) => text.slice(Math.max(0, (m.index ?? 0) - 30), (m.index ?? 0) + 30).replace(/\s+/g, " "));
-          const a = window.__parityAnalytics;
-          return { len: text.trim().length, bad, overflow: document.documentElement.scrollWidth - window.innerWidth, analytics: a?.booted === true && Boolean(a.app) };
+          return { len: text.trim().length, bad, overflow: document.documentElement.scrollWidth - window.innerWidth };
         });
         if (info.len < 40) add("blank page");
         for (const b of info.bad.slice(0, 3)) add(`bad value in text: "${b}"`);
         if (size.name === "phone" && info.overflow > 1) add(`scrolls sideways by ${info.overflow}px`);
-        // Every page must load the analytics boot script and know its app (DEC-0053).
-        if (!info.analytics) add("analytics is not wired (no boot script, or an app analytics cannot name)");
       } catch (e) {
         add(`did not load: ${e.message.split("\n")[0]}`);
       }

@@ -18,7 +18,7 @@
   --pa-title: 34px;
   --pa-body: 15px;
   --pa-small: 13px;
-  --pa-spring: cubic-bezier(.16, 1, .3, 1);
+  --pa-spring: var(--ease-emphasized);
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
@@ -28,7 +28,7 @@
   /* A fixed top, not centred: when the panel grows, nothing above it moves. */
   padding: clamp(96px, 18vh, 176px) 16px 24px;
   color: var(--text);
-  font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font: var(--type-xl)/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -36,21 +36,21 @@
 .pa-overlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--z-overlay);
   overflow-y: auto;
   overscroll-behavior: contain;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .24s var(--ease), visibility 0s linear .24s;
+  transition: opacity var(--dur-3) var(--ease), visibility 0s linear var(--dur-3);
 }
-.pa-overlay.on { visibility: visible; transition: opacity .24s var(--ease), visibility 0s; }
-.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity .3s var(--ease) .1s, visibility 0s; }
+.pa-overlay.on { visibility: visible; transition: opacity var(--dur-3) var(--ease), visibility 0s; }
+.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity var(--dur-3) var(--ease) var(--dur-1), visibility 0s; }
 /* The parts wait for the page to finish fading, then rise in. */
 .pa-overlay:not(.open) .pa-screen * { animation-play-state: paused; }
 
 /* The logo stays where the front page has it, so it does not move during the fade. */
 .pa-corner { z-index: 5; }
-.pa-corner a:hover { background: rgb(255 255 255 / .05); }
+.pa-corner a:hover { background: var(--color-hover); }
 
 /* The form's column: no border, background or shadow. */
 .pa-main { width: 100%; max-width: 360px; }
@@ -58,30 +58,30 @@
 
 /* The height follows the content (SizeBox). The margin and padding leave room for focus rings. */
 .pa-size { overflow: hidden; margin: -8px -10px; }
-.pa-size[data-ready] { transition: height .46s var(--pa-spring); }
+.pa-size[data-ready] { transition: height var(--dur-4) var(--pa-spring); }
 .pa-size-in { position: relative; padding: 8px 10px; }
 
 /* Entrances: blur and rise, staggered. Heading, line under it, then each field, then the
    button, then the links under the form. */
 @keyframes pa-rise { from { opacity: 0; transform: translateY(10px); filter: blur(5px); } }
-.pa-screen > *, .pa-form > * { animation: pa-rise .5s var(--pa-spring) both; animation-delay: .32s; }
-.pa-screen > .pa-title { animation-delay: .02s; }
-.pa-screen > .pa-lead { animation-delay: .07s; }
-.pa-screen > :is(.pa-steps, .pa-providers) { animation-delay: .12s; }
+.pa-screen > *, .pa-form > * { animation: pa-rise var(--dur-5) var(--pa-spring) both; animation-delay: var(--dur-4); }
+.pa-screen > .pa-title { animation-delay: var(--dur-1); }
+.pa-screen > .pa-lead { animation-delay: var(--dur-1); }
+.pa-screen > :is(.pa-steps, .pa-providers) { animation-delay: var(--dur-1); }
 .pa-screen > .pa-form { animation: none; }
-.pa-form > :nth-child(1) { animation-delay: .12s; }
-.pa-form > :nth-child(2) { animation-delay: .17s; }
-.pa-form > :nth-child(3) { animation-delay: .22s; }
-.pa-form > :nth-child(4) { animation-delay: .27s; }
-.pa-form > :nth-child(5) { animation-delay: .3s; }
-.pa-screen > :is(.pa-alt, .pa-switch) { animation-delay: .34s; }
+.pa-form > :nth-child(1) { animation-delay: var(--dur-1); }
+.pa-form > :nth-child(2) { animation-delay: var(--dur-2); }
+.pa-form > :nth-child(3) { animation-delay: var(--dur-3); }
+.pa-form > :nth-child(4) { animation-delay: var(--dur-3); }
+.pa-form > :nth-child(5) { animation-delay: var(--dur-3); }
+.pa-screen > :is(.pa-alt, .pa-switch) { animation-delay: var(--dur-4); }
 /* Something that appears later inside a form (an error, a code field) comes in at once. */
-.pa-form > .pa-error { animation: pa-fade .2s var(--ease) both; }
+.pa-form > .pa-error { animation: pa-fade var(--dur-2) var(--ease) both; }
 
 /* While the session is checked, the step is laid out but hidden; the parts rise in after. */
 .pa-screen[data-wait] > :not(.pa-title) { opacity: 0; pointer-events: none; }
 .pa-screen[data-wait] > :not(.pa-title), .pa-screen[data-wait] .pa-form > * { animation: none; }
-.pa-screen > :not(.pa-title) { transition: opacity .25s var(--ease); }
+.pa-screen > :not(.pa-title) { transition: opacity var(--dur-3) var(--ease); }
 
 /* The step being replaced, laid over the new one while it leaves (AuthFlow.tsx ghost()). */
 .pa-ghost { position: absolute; top: 8px; left: 10px; right: 10px; pointer-events: none; }
@@ -100,7 +100,7 @@
 .pa-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .pa-label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .pa-label { font-size: var(--pa-small); font-weight: 500; color: var(--muted); }
-.pa-aside { font-size: var(--pa-small); font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+.pa-aside { font-size: var(--pa-small); font-weight: 500; color: var(--muted); text-decoration: none; transition: color var(--dur-2); }
 .pa-aside:hover, .pa-aside:focus-visible { color: var(--text); }
 .pa-input {
   width: 100%;
@@ -108,25 +108,25 @@
   padding: 0 14px;
   border-radius: 10px;
   border: 1px solid var(--line-2);
-  background: rgb(5 6 8 / .55);
+  background: color-mix(in srgb, var(--color-canvas) 55%, transparent);
   color: var(--text);
   font: inherit;
   font-size: var(--pa-body);
-  transition: border-color .2s, box-shadow .3s var(--pa-spring), background-color .2s;
+  transition: border-color var(--dur-2), box-shadow var(--dur-3) var(--pa-spring), background-color var(--dur-2);
 }
 .pa-input::placeholder { color: var(--faint); }
 .pa-input:hover { border-color: var(--line-3); }
-.pa-input:focus, .pa-input:focus-visible { outline: none; border-color: rgb(255 255 255 / .46); box-shadow: 0 0 0 4px rgb(255 255 255 / .06), 0 0 22px -2px rgb(255 255 255 / .14); background: rgb(5 6 8 / .7); }
-.pa-input[aria-invalid="true"] { border-color: var(--bad); box-shadow: 0 0 0 4px rgb(255 107 98 / .1); }
+.pa-input:focus, .pa-input:focus-visible { outline: none; border-color: color-mix(in srgb, var(--palette-white) 46%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--palette-white) 6%, transparent), 0 0 22px -2px var(--color-border-strong); background: color-mix(in srgb, var(--color-canvas) 70%, transparent); }
+.pa-input[aria-invalid="true"] { border-color: var(--bad); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-negative) 10%, transparent); }
 .pa-input:-webkit-autofill, .pa-input:-webkit-autofill:hover, .pa-input:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--text);
   caret-color: var(--text);
-  box-shadow: 0 0 0 40px #0b0c11 inset;
-  transition: background-color 9999s;
+  box-shadow: 0 0 0 40px var(--color-bar) inset;
+  transition: background-color var(--dur-hold);
 }
-.pa-code { font-family: var(--mono); font-size: 20px; letter-spacing: .4em; text-align: center; padding-left: calc(14px + .4em); }
+.pa-code { font-family: var(--mono); font-size: var(--type-3xl); letter-spacing: .4em; text-align: center; padding-left: calc(14px + .4em); }
 .pa-hint { font-size: var(--pa-small); line-height: 1.45; color: var(--faint); }
-.pa-error { font-size: var(--pa-small); line-height: 1.45; color: var(--bad); animation: pa-fade .2s var(--ease) both; }
+.pa-error { font-size: var(--pa-small); line-height: 1.45; color: var(--bad); animation: pa-fade var(--dur-2) var(--ease) both; }
 @keyframes pa-fade { from { opacity: 0; } }
 
 .pa-pw { position: relative; }
@@ -135,9 +135,9 @@
   position: absolute; top: 50%; right: 6px; transform: translateY(-50%);
   min-height: 32px; padding: 0 12px; border: 0; border-radius: 7px;
   background: transparent; color: var(--muted); font: inherit; font-size: var(--pa-small); font-weight: 500;
-  cursor: pointer; transition: color .2s, background-color .2s;
+  cursor: pointer; transition: color var(--dur-2), background-color var(--dur-2);
 }
-.pa-pw-toggle:hover { color: var(--text); background: rgb(255 255 255 / .06); }
+.pa-pw-toggle:hover { color: var(--text); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
 .pa-field .pw-meter { font-size: var(--pa-small); }
 
 .pa-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--pa-small); line-height: 1.5; color: var(--muted); }
@@ -148,41 +148,41 @@
 .pa-who {
   display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
   margin-top: 4px; padding: 2px 4px 2px 12px; border: 1px solid var(--line-2); border-radius: 999px;
-  background: rgb(255 255 255 / .03);
+  background: color-mix(in srgb, var(--palette-white) 3%, transparent);
 }
 .pa-who-email { color: var(--text); font-size: var(--pa-small); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pa-who .pa-text { padding: 4px 10px; border-radius: 999px; }
-.pa-who .pa-text:hover { background: rgb(255 255 255 / .06); }
+.pa-who .pa-text:hover { background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
 
 /* The front page's button, full width, with a spinner while it works. */
 .pa-btn { width: 100%; position: relative; cursor: pointer; font-family: inherit; }
 .pa-btn:not(.primary):not(:hover) { background: transparent; }
-.pa-btn { transition: background-color .2s, border-color .2s, color .2s, transform .16s var(--pa-spring); }
+.pa-btn { transition: background-color var(--dur-2), border-color var(--dur-2), color var(--dur-2), transform var(--dur-2) var(--pa-spring); }
 .pa-btn:active { transform: scale(.97); }
 .pa-btn[data-busy] { cursor: progress; }
 .pa-btn[data-busy] .pa-btn-label { opacity: .75; }
-.pa-btn-label, .pa-spin { transition: opacity .16s, transform .2s var(--ease); }
+.pa-btn-label, .pa-spin { transition: opacity var(--dur-2), transform var(--dur-2) var(--ease); }
 
 /* Success: the pressed button's spinner and label give way to a check, then the panel
    blurs and fades as the next page loads (nav.ts adds html.pa-leaving). */
 .pa-done { position: absolute; left: 50%; top: 50%; margin: -9px 0 0 -9px; opacity: 0; transform: scale(.4); }
 .pa-leaving .pa-btn[data-busy] :is(.pa-spin, .pa-btn-label) { opacity: 0; transform: scale(.85); }
-.pa-leaving .pa-btn[data-busy] .pa-done { opacity: 1; transform: none; transition: opacity .18s, transform .45s cubic-bezier(.34, 1.56, .64, 1); }
-.pa-leaving .pa-shell :is(.pa-main, .pa-corner) { opacity: 0; filter: blur(6px); transform: translateY(-6px); transition: opacity .26s var(--ease) .16s, filter .26s var(--ease) .16s, transform .26s var(--ease) .16s; }
-.pa-spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: pa-spin .7s linear infinite; }
+.pa-leaving .pa-btn[data-busy] .pa-done { opacity: 1; transform: none; transition: opacity var(--dur-2), transform var(--dur-4) var(--ease-spring); }
+.pa-leaving .pa-shell :is(.pa-main, .pa-corner) { opacity: 0; filter: blur(6px); transform: translateY(-6px); transition: opacity var(--dur-3) var(--ease) var(--dur-2), filter var(--dur-3) var(--ease) var(--dur-2), transform var(--dur-3) var(--ease) var(--dur-2); }
+.pa-spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: pa-spin var(--dur-5) linear infinite; }
 @keyframes pa-spin { to { transform: rotate(360deg); } }
 
-.pa-text { background: none; border: 0; padding: 4px 2px; font: inherit; font-size: var(--pa-small); font-weight: 500; color: var(--muted); cursor: pointer; text-decoration: none; transition: color .2s, background-color .2s; }
+.pa-text { background: none; border: 0; padding: 4px 2px; font: inherit; font-size: var(--pa-small); font-weight: 500; color: var(--muted); cursor: pointer; text-decoration: none; transition: color var(--dur-2), background-color var(--dur-2); }
 .pa-text:hover, .pa-text:focus-visible { color: var(--text); }
 .pa-text:disabled { opacity: .6; cursor: default; }
 .pa-alt { display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 4px 20px; margin: 14px 0 0 -2px; }
 .pa-switch { margin: 28px 0 0; font-size: var(--pa-body); color: var(--muted); }
-.pa-switch a { color: var(--text); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-3); padding-bottom: 1px; transition: border-color .2s; }
+.pa-switch a { color: var(--text); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-3); padding-bottom: 1px; transition: border-color var(--dur-2); }
 .pa-switch a:hover { border-color: var(--text); }
 
 /* The welcome after signing up (pages/Welcome.tsx). */
 .pa-steps { display: flex; gap: 6px; margin-top: 20px; }
-.pa-steps span { width: 18px; height: 3px; border-radius: 99px; background: var(--line-2); transition: background-color .3s, width .46s var(--pa-spring); }
+.pa-steps span { width: 18px; height: 3px; border-radius: 99px; background: var(--line-2); transition: background-color var(--dur-3), width var(--dur-4) var(--pa-spring); }
 .pa-steps span.on { background: var(--text); }
 .pa-steps span.on:last-of-type { width: 28px; }
 .pa-screen > .pa-steps + .pa-form { margin-top: 24px; }
@@ -190,34 +190,34 @@
 .pa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .pa-chip {
   display: inline-flex; align-items: center; gap: 0; min-height: 38px; padding: 0 14px; border-radius: 999px;
-  border: 1px solid var(--line-2); background: rgb(255 255 255 / .02); color: var(--muted);
+  border: 1px solid var(--line-2); background: color-mix(in srgb, var(--palette-white) 2%, transparent); color: var(--muted);
   font: inherit; font-size: var(--pa-small); font-weight: 500; cursor: pointer;
-  transition: color .2s, background-color .2s, border-color .2s, gap .3s var(--pa-spring), transform .16s var(--pa-spring);
+  transition: color var(--dur-2), background-color var(--dur-2), border-color var(--dur-2), gap var(--dur-3) var(--pa-spring), transform var(--dur-2) var(--pa-spring);
 }
 .pa-chip:hover { color: var(--text); border-color: var(--line-3); }
 .pa-chip:active { transform: scale(.96); }
-.pa-chip-tick { width: 0; opacity: 0; transform: scale(.4); transition: width .3s var(--pa-spring), opacity .2s, transform .4s cubic-bezier(.34, 1.56, .64, 1); }
-.pa-chip[aria-pressed="true"] { gap: 6px; color: var(--text); border-color: rgb(255 255 255 / .42); background: rgb(255 255 255 / .07); }
+.pa-chip-tick { width: 0; opacity: 0; transform: scale(.4); transition: width var(--dur-3) var(--pa-spring), opacity var(--dur-2), transform var(--dur-4) var(--ease-spring); }
+.pa-chip[aria-pressed="true"] { gap: 6px; color: var(--text); border-color: color-mix(in srgb, var(--palette-white) 42%, transparent); background: var(--color-fill); }
 .pa-chip[aria-pressed="true"] .pa-chip-tick { width: 14px; opacity: 1; transform: none; }
 .pa-choice {
   position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 44px 14px 16px; border-radius: 12px;
-  border: 1px solid var(--line-2); background: rgb(255 255 255 / .02); text-decoration: none;
-  transition: border-color .2s, background-color .2s, transform .16s var(--pa-spring);
+  border: 1px solid var(--line-2); background: color-mix(in srgb, var(--palette-white) 2%, transparent); text-decoration: none;
+  transition: border-color var(--dur-2), background-color var(--dur-2), transform var(--dur-2) var(--pa-spring);
 }
-.pa-choice.first { border-color: var(--line-3); background: rgb(255 255 255 / .05); }
-.pa-choice:hover { border-color: rgb(255 255 255 / .42); background: rgb(255 255 255 / .06); }
+.pa-choice.first { border-color: var(--line-3); background: var(--color-hover); }
+.pa-choice:hover { border-color: color-mix(in srgb, var(--palette-white) 42%, transparent); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
 .pa-choice:active { transform: scale(.985); }
 .pa-choice-title { font-size: var(--pa-body); font-weight: 600; color: var(--text); }
 .pa-choice-text { font-size: var(--pa-small); line-height: 1.45; color: var(--muted); }
-.pa-choice-arr { position: absolute; right: 16px; top: 50%; margin-top: -8px; color: var(--muted); transition: transform .2s var(--ease), color .2s; }
+.pa-choice-arr { position: absolute; right: 16px; top: 50%; margin-top: -8px; color: var(--muted); transition: transform var(--dur-2) var(--ease), color var(--dur-2); }
 .pa-choice:hover .pa-choice-arr { transform: translateX(3px); color: var(--text); }
 
 /* Messages. An empty live region stays in the page (so later messages are announced) but takes no room. */
 .pa-live:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.pa-notice { border-radius: 10px; padding: 10px 12px; font-size: var(--pa-small); line-height: 1.5; border: 1px solid var(--line-2); animation: pa-fade .2s var(--ease) both; }
-.pa-notice-bad { color: var(--bad); background: rgb(255 107 98 / .07); border-color: rgb(255 107 98 / .25); }
-.pa-notice-good { color: var(--good); background: rgb(54 208 124 / .07); border-color: rgb(54 208 124 / .25); }
-.pa-notice-info { color: var(--muted); background: rgb(255 255 255 / .03); }
+.pa-notice { border-radius: 10px; padding: 10px 12px; font-size: var(--pa-small); line-height: 1.5; border: 1px solid var(--line-2); animation: pa-fade var(--dur-2) var(--ease) both; }
+.pa-notice-bad { color: var(--bad); background: color-mix(in srgb, var(--color-negative) 7%, transparent); border-color: color-mix(in srgb, var(--color-negative) 25%, transparent); }
+.pa-notice-good { color: var(--good); background: color-mix(in srgb, var(--color-positive) 7%, transparent); border-color: color-mix(in srgb, var(--color-positive) 25%, transparent); }
+.pa-notice-info { color: var(--muted); background: color-mix(in srgb, var(--palette-white) 3%, transparent); }
 
 .pa-providers { display: flex; flex-direction: column; gap: 10px; }
 .pa-or { display: flex; align-items: center; gap: 12px; color: var(--faint); font-size: var(--pa-small); margin: 20px 0 -8px; }
@@ -227,10 +227,10 @@
    margin pushes them down, so the form above never moves them. Underlined only on hover
    or focus. */
 .pa-foot { border: 0; margin-top: auto; padding-top: 48px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
-.pa-foot .legal-links { gap: 0 16px; font-size: 12px; }
-.pa-foot .legal-links a, .pa-foot .legal-links button { color: var(--faint); text-decoration: none; transition: color .2s; }
+.pa-foot .legal-links { gap: 0 16px; font-size: var(--type-xs); }
+.pa-foot .legal-links a, .pa-foot .legal-links button { color: var(--faint); text-decoration: none; transition: color var(--dur-2); }
 .pa-foot .legal-links a:is(:hover, :focus-visible), .pa-foot .legal-links button:is(:hover, :focus-visible) { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-.pa-disclaimer { margin: 0; font-size: 12px; color: var(--faint); }
+.pa-disclaimer { margin: 0; font-size: var(--type-xs); color: var(--faint); }
 
 .pa-shell :is(a, button, input):focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 8px; }
 .pa-shell .pa-input:focus-visible { outline: none; border-radius: 10px; }
@@ -246,5 +246,5 @@
   .pa-btn:active, .pa-chip:active, .pa-choice:active { transform: none; }
   .pa-leaving .pa-shell :is(.pa-main, .pa-corner) { filter: none; transform: none; }
   .pa-screen > *, .pa-form > *, .pa-error, .pa-notice { animation: none !important; }
-  .pa-spin { animation-duration: 2.4s; }
+  .pa-spin { animation-duration: var(--dur-pulse-slow); }
 }

@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 56 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 57 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
@@ -107,6 +107,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0055 | [Addresses that do not exist get a real 404 and each app says not found](decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0056 | [Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0057 | [Blog and news pages with labelled posts and real bylines](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0058 | [One token file for every app and a lint that blocks raw values](decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -180,7 +181,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-23 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |

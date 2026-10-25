@@ -59,7 +59,7 @@ function heatStyle(z: number | null): React.CSSProperties {
   const a = Math.min(1, Math.abs(z) / 3);
   const c = z >= 0 ? "var(--t-up)" : "var(--t-down)";
   // On the strongest tiles the colour is bright enough that light text fails contrast, so it turns dark.
-  return { background: `color-mix(in srgb, ${c} ${Math.round(14 + a * 66)}%, var(--t-panel))`, ...(a > 0.6 ? { color: "#0b0d10" } : {}) };
+  return { background: `color-mix(in srgb, ${c} ${Math.round(14 + a * 66)}%, var(--t-panel))`, ...(a > 0.6 ? { color: "var(--color-canvas)" } : {}) };
 }
 
 export function HeatPanel() {

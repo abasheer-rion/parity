@@ -31,9 +31,9 @@ const NUMBERS: { term: string; name: string; plain: string; good: (m?: M) => str
   { term: "break-even-cost", name: "Break-even cost", plain: "How much each trade could cost before the profit disappears.", good: () => "Higher is safer. Under 5 basis points (0.05%) is fragile." },
 ];
 
-const VERDICTS: { label: string; tone: "good" | "accent" | "bad" | "neutral"; plain: string }[] = [
+const VERDICTS: { label: string; tone: "good" | "warning" | "bad" | "neutral"; plain: string }[] = [
   { label: "Passed", tone: "good", plain: "Passed all 11 tests and beats the US market after costs." },
-  { label: "Promising", tone: "accent", plain: "Passed at least 60% of the tests, but not all of them, or does not beat the market." },
+  { label: "Promising", tone: "warning", plain: "Passed at least 60% of the tests, but not all of them, or does not beat the market." },
   { label: "Not proven", tone: "bad", plain: "Passed fewer than 60% of the tests." },
   { label: "Not tested", tone: "neutral", plain: "Built but not run through the tests yet." },
 ];

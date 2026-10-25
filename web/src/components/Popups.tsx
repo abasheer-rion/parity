@@ -163,7 +163,7 @@ function Card({ pop, data, onClose }: { pop: Pop; data: DocsData | null; onClose
   }, [pop.rect, pop.level, pop.kind, data]);
 
   return (
-    <div ref={ref} className={`pop ${pop.pinned ? "pinned" : ""}`} data-level={pop.level} role="dialog" style={{ zIndex: 50 + pop.level }}>
+    <div ref={ref} className={`pop ${pop.pinned ? "pinned" : ""}`} data-level={pop.level} role="dialog" style={{ zIndex: `calc(var(--z-overlay) + ${pop.level})` }}>
       {pop.pinned && <button className="pop-close" aria-label="Close" onClick={onClose}>×</button>}
       {pop.kind === "term" && <TermCard id={pop.arg} data={data} />}
       {pop.kind === "doc" && <DocCard id={pop.arg} anchor={pop.anchor} data={data} />}

@@ -17,6 +17,7 @@ const { BaseWindow, WebContentsView, clipboard, shell } = require("electron");
 const path = require("node:path");
 const routes = require("./routes");
 const { Page } = require("./page");
+const TOKENS = require("./tokens");
 
 const TITLE_H = 38;
 const OFFLINE_H = 28;
@@ -44,19 +45,19 @@ class ParityWindow {
       title: "Parity",
       x: saved.x, y: saved.y, width: saved.width, height: saved.height,
       minWidth: 720, minHeight: 480,
-      backgroundColor: "#050608",
+      backgroundColor: TOKENS["color-canvas"],
       show: false,
       ...(mac
         ? { titleBarStyle: "hiddenInset", trafficLightPosition: { x: 14, y: 12 } }
-        : { titleBarStyle: "hidden", titleBarOverlay: { color: "#050608", symbolColor: "#c9ccd6", height: TITLE_H }, icon: path.join(__dirname, "..", "assets", "icon.png") }),
+        : { titleBarStyle: "hidden", titleBarOverlay: { color: TOKENS["color-bar"], symbolColor: TOKENS["color-text-body"], height: TITLE_H }, icon: path.join(__dirname, "..", "assets", "icon.png") }),
     });
 
     this.titlebar = this.shellView("ui-titlebar.html");
     this.bar = new WebContentsView({ webPreferences: { ...ctx.basePrefs } });
-    this.bar.setBackgroundColor("#050608");
+    this.bar.setBackgroundColor(TOKENS["color-bar"]);
     this.bar.webContents.loadURL(ctx.shellUrl("offline.html"));
     this.overlay = this.shellView("ui-overlay.html");
-    this.overlay.setBackgroundColor("#00000000");
+    this.overlay.setBackgroundColor("#00000000"); // tokens-ignore: fully transparent, not a colour
     this.overlay.setVisible(false);
     for (const v of [this.titlebar, this.bar, this.overlay]) this.win.contentView.addChildView(v);
     for (const v of [this.bar]) {
@@ -91,7 +92,7 @@ class ParityWindow {
   /** A view for one of the app's own pages (title bar, layer), with the shell bridge. */
   shellView(file) {
     const v = new WebContentsView({ webPreferences: { ...this.ctx.basePrefs, preload: path.join(__dirname, "shell-preload.js") } });
-    v.setBackgroundColor("#050608");
+    v.setBackgroundColor(TOKENS["color-canvas"]);
     const wc = v.webContents;
     wc.on("will-navigate", (e) => e.preventDefault());
     wc.setWindowOpenHandler(() => ({ action: "deny" }));

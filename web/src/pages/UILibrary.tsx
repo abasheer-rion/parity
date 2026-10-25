@@ -11,6 +11,7 @@ import {
 } from "../ui";
 import { usePrefs } from "../lib/prefs";
 import type { Point } from "../lib/types";
+import { RAW } from "../ui/tokens";
 
 const SECTIONS: { group: string; items: [string, string][] }[] = [
   { group: "Foundations", items: [["overview", "Overview"], ["colors", "Colour"], ["type", "Type"], ["space", "Space, radius, depth"], ["motion", "Motion"], ["icons", "Icons"]] },
@@ -150,7 +151,7 @@ function useVars(names: string[]) {
 function toRgba(color: string): [number, number, number, number] | null {
   const c = document.createElement("canvas").getContext("2d");
   if (!c) return null;
-  c.fillStyle = "#000"; c.fillStyle = color;
+  c.fillStyle = RAW["palette-black"]; c.fillStyle = color;
   const v = c.fillStyle;
   if (v.startsWith("#")) return [parseInt(v.slice(1, 3), 16), parseInt(v.slice(3, 5), 16), parseInt(v.slice(5, 7), 16), 1];
   const m = v.match(/[\d.]+/g);
@@ -742,7 +743,7 @@ function HowCharts() {
         <Text>Every series is a list of <code>[date, value]</code> pairs, sorted by date (<code>Point[]</code>). Equity curves start at 1 and the headline chart rescales them to the starting amount you pick in Settings, so a value of 2.8 reads as $28,000 from $10,000.</Text>
       </Section>
       <Section title="The steps">
-        <ol className="gal-rules" style={{ fontSize: 15 }}>
+        <ol className="gal-rules" style={{ fontSize: "var(--type-lg)" }}>
           <li><b>Measure.</b> A ResizeObserver gives the width; the chart redraws when it changes.</li>
           <li><b>Slice.</b> The range tab (1M to ALL) keeps points from that far back from the last date.</li>
           <li><b>Thin.</b> Long series are cut to about 900 points so drawing and hovering stay instant.</li>
@@ -752,7 +753,7 @@ function HowCharts() {
         </ol>
       </Section>
       <Section title="Rules every chart keeps">
-        <ul className="gal-rules" style={{ fontSize: 15 }}>
+        <ul className="gal-rules" style={{ fontSize: "var(--type-lg)" }}>
           <li>One y axis. Two measures on different scales get two charts.</li>
           <li>Colour follows the strategy by name, in the fixed series order; the market is always the neutral line.</li>
           <li>Two or more series get a legend; the headline chart's legend doubles as a show or hide switch.</li>

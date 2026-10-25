@@ -4,9 +4,12 @@
 // to animate; the public pages draw the last frame as a still picture at build time
 // (web/scripts/academy-frames.ts, run by scripts/seo/build_public.py).
 //
-// No imports, and only type syntax Node can strip, so the build script can load this
-// file with `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box.
-// Colours are fixed hex values because both the app and the public pages are dark only.
+// One import (the generated token values, with its .ts extension) and only type syntax
+// Node can strip, so the build script can load this file with
+// `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box. Colours
+// are plain values from the tokens because the public pages draw these at build time.
+
+import { RAW } from "../ui/tokens.gen.ts";
 
 export interface Step { caption: string; [key: string]: unknown }
 export interface Visual { kind: string; alt: string; params?: Record<string, unknown>; steps: Step[] }
@@ -14,11 +17,13 @@ export interface Visual { kind: string; alt: string; params?: Record<string, unk
 export const W = 480;
 export const H = 270;
 
+// Plain colour values from the tokens: these pictures are SVG strings, drawn on the page and
+// rendered to frames at build time, so they cannot read CSS variables.
 const C = {
-  blue: "#85a8ff", deep: "#2a5ff0", good: "#4cc98a", bad: "#f07a7a", warn: "#e8c06a",
-  text: "#f1f3f9", muted: "#a3a8b9", faint: "#8a8fa2", grid: "#a9b6ff24", panel: "#11131c",
+  blue: RAW["palette-blue-300"], deep: RAW["palette-blue-500"], good: RAW["color-positive"], bad: RAW["color-negative"], warn: RAW["color-warning"],
+  text: RAW["color-text"], muted: RAW["color-text-muted"], faint: RAW["color-text-faint"], grid: RAW["color-border-strong"], panel: RAW["color-surface-raised"],
 };
-const PALETTE = [C.blue, C.good, C.warn, C.bad, "#c9a2ff", "#6fd3e0"];
+const PALETTE = [C.blue, C.good, C.warn, C.bad, RAW["palette-violet-400"], RAW["palette-cyan-400"]];
 
 // ------------------------------------------------------------------ small helpers
 
