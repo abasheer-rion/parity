@@ -184,7 +184,9 @@ The best single paid plan under 100 USD a month for our mix is either Massive Cu
 - [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](../decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
+- [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
+- [REF-0019: Latency budget and target architecture](0019-latency-budget-and-target-architecture.md)
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
 <!-- backlinks:end -->

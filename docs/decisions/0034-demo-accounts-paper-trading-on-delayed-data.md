@@ -60,6 +60,7 @@ None of this is built, and none should be until the owner decides and a lawyer h
 ## Referenced by
 
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [DEC-0046: Payments through Stripe, and real trading only through a regulated broker](0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md)
 - [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [LOG-0015: Parity Trade becomes its own app](../log/2026-10-24-parity-trade-becomes-its-own-app.md)
 <!-- backlinks:end -->

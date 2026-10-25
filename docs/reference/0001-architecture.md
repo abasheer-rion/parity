@@ -74,5 +74,6 @@ Two tables hold results: `research_batches` (one row per run of the report) and 
 - [REF-0003: Data sources](0003-data-sources.md)
 - [REF-0008: Where results live and how they are tagged](0008-where-results-live.md)
 - [REF-0009: UI library](0009-ui-library.md)
+- [REF-0019: Latency budget and target architecture](0019-latency-budget-and-target-architecture.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->
