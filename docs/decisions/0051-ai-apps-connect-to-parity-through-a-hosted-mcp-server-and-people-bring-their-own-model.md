@@ -55,6 +55,7 @@ The research behind this is [RES-0024](../research/0024-ai-apps-connecting-to-pa
 - Supabase's tokens carry the audience `authenticated`, not our server's address, so the audience check is the issuer and audience Supabase sets. The MCP spec asks for an audience tied to the server. An access token hook could add it later.
 - Supabase does not support custom scopes, so "may make changes" is our own per-app setting rather than an OAuth scope. Apps will not show it on their side.
 - A connected app can read everything the person can read through Supabase directly, including their demo accounts and payment rows. That is the same as signing in as them, and the consent page says it acts as you.
+- An app holds a real Supabase token, so it could call the two change functions straight from the database rather than through `/mcp`. They still need the person's per-app permission, and each change needs a call started with `mcp_begin_call`, which counts it against the limit of 30 a day. The `MCP_WRITE_ENABLED` switch only hides the tools on `/mcp`, so the database rule is the real gate. Orders are always dated today, so an app cannot backdate one against prices it has already seen.
 - The `/oauth/` pages and `/.well-known/` are never cached by the service worker.
 
 ## Owner steps
@@ -62,11 +63,12 @@ The research behind this is [RES-0024](../research/0024-ai-apps-connecting-to-pa
 Nothing below was done by us. Each is an exact step.
 
 1. Supabase dashboard, project `ttqvpxvctnomfbeoqbbs`: Authentication, then OAuth Server. Turn on the OAuth server. Turn on dynamic client registration. Set the authorization path to `/oauth/consent`. Check the Site URL is `https://parity.endyland.com`.
-2. Optional: to allow AI-made demo orders and layouts, set the Cloudflare Pages variable `MCP_WRITE_ENABLED=on` on the `parity-research` project. People still have to tick it per app.
-3. Optional: to show the assistant panel to everyone, set the GitHub repository variable `AI_ASSISTANT=on`, then redeploy.
-4. Optional: `MCP_ENABLED=off` on the Pages project switches `/mcp` off at once.
-5. Optional, for Hugging Face as a sign-in provider: register a Hugging Face OAuth app with the `inference-api` scope. Not built.
-6. No keys, OAuth apps or accounts were created at any provider, and no DNS was changed. A separate subdomain such as `mcp.endyland.com` is not needed; it remains an option.
+2. Before step 3 below, and before telling people about write access: with a token issued to a test app, check that Supabase Auth refuses password changes and new two-step factors (`PUT /auth/v1/user`, `POST /auth/v1/factors`). The repo's `supabase/config.toml` asks for a fresh sign-in before a password change, but we could not confirm the live project matches. If an app's token can do either, keep `MCP_WRITE_ENABLED` off and tell us.
+3. Optional: to allow AI-made demo orders and layouts, set the Cloudflare Pages variable `MCP_WRITE_ENABLED=on` on the `parity-research` project. People still have to tick it per app.
+4. Optional: to show the assistant panel to everyone, set the GitHub repository variable `AI_ASSISTANT=on`, then redeploy.
+5. Optional: `MCP_ENABLED=off` on the Pages project switches `/mcp` off at once.
+6. Optional, for Hugging Face as a sign-in provider: register a Hugging Face OAuth app with the `inference-api` scope. Not built.
+7. No keys, OAuth apps or accounts were created at any provider, and no DNS was changed. A separate subdomain such as `mcp.endyland.com` is not needed; it remains an option.
 
 ## Manual test plan
 

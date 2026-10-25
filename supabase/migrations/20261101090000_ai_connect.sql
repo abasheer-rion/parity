@@ -158,6 +158,33 @@ language sql stable security definer set search_path = '' as $$
   );
 $$;
 
+-- Uses up this person's open change call of this tool, started through this app in the last
+-- two minutes by mcp_begin_call (which counted it against the daily limit). Returns false when
+-- there is none. One started call allows one change, even when an app calls the database
+-- directly.
+create or replace function public.mcp_use_open_call(p_tool text)
+returns boolean
+language plpgsql security definer set search_path = '' as $$
+declare
+  call_id bigint;
+begin
+  select c.id into call_id
+    from public.mcp_calls c
+   where c.user_id = auth.uid()
+     and c.client_id = coalesce(nullif(auth.jwt() ->> 'client_id', ''), 'parity-web')
+     and c.tool = p_tool and c.write and c.ok is null
+     and c.created_at > now() - interval '2 minutes'
+   order by c.id
+   limit 1
+   for update;
+  if call_id is null then
+    return false;
+  end if;
+  update public.mcp_calls set ok = true, ms = 0 where id = call_id;
+  return true;
+end;
+$$;
+
 -- 4. The two changes an app may make --------------------------------------------------------
 
 -- A limit or stop order in one of the person's demo accounts (DEC-0034). It waits as
@@ -171,7 +198,9 @@ returns jsonb
 language plpgsql security definer set search_path = '' as $$
 declare
   uid uuid := auth.uid();
-  day date := least(greatest(coalesce(p_placed_on, current_date), current_date - 30), current_date);
+  -- Always today: an app must not backdate an order to fill it against prices it has seen.
+  -- p_placed_on is kept in the signature but ignored.
+  day date := current_date;
   new_id uuid;
 begin
   if uid is null then
@@ -179,6 +208,11 @@ begin
   end if;
   if not public.mcp_write_allowed() then
     raise exception 'this app may not make changes' using errcode = '42501';
+  end if;
+  -- Only inside a call started with mcp_begin_call, one change per started call, so the daily
+  -- limit on changes holds even when an app calls the database directly.
+  if not public.mcp_use_open_call('place_demo_order') then
+    raise exception 'start this change through Parity''s MCP server' using errcode = '42501';
   end if;
   if not exists (select 1 from public.paper_accounts a where a.id = p_account and a.user_id = uid) then
     raise exception 'no such demo account' using errcode = '22023';
@@ -192,7 +226,8 @@ begin
   if p_qty is null or p_qty <= 0 or p_qty > 1000000000 then
     raise exception 'quantity out of range' using errcode = '22023';
   end if;
-  if (p_type = 'limit' and coalesce(p_limit_price, 0) <= 0) or (p_type = 'stop' and coalesce(p_stop_price, 0) <= 0) then
+  if (p_type = 'limit' and not (coalesce(p_limit_price, 0) > 0 and p_limit_price < 1000000000000))
+     or (p_type = 'stop' and not (coalesce(p_stop_price, 0) > 0 and p_stop_price < 1000000000000)) then
     raise exception 'a limit order needs a limit price and a stop order a stop price' using errcode = '22023';
   end if;
   if (select count(*) from public.paper_orders o where o.user_id = uid and o.status in ('pending', 'held')) >= 200 then
@@ -223,6 +258,11 @@ begin
   if not public.mcp_write_allowed() then
     raise exception 'this app may not make changes' using errcode = '42501';
   end if;
+  -- Only inside a call started with mcp_begin_call, one change per started call, so the daily
+  -- limit on changes holds even when an app calls the database directly.
+  if not public.mcp_use_open_call('save_trade_layout') then
+    raise exception 'start this change through Parity''s MCP server' using errcode = '42501';
+  end if;
   if (select count(*) from public.trade_layouts l where l.user_id = uid) >= 20 then
     raise exception 'you already have 20 layouts' using errcode = '22023';
   end if;
@@ -237,6 +277,7 @@ $$;
 revoke all on function public.mcp_begin_call(text, boolean) from public, anon, authenticated;
 revoke all on function public.mcp_end_call(bigint, boolean, integer) from public, anon, authenticated;
 revoke all on function public.mcp_write_allowed() from public, anon, authenticated;
+revoke all on function public.mcp_use_open_call(text) from public, anon, authenticated;
 revoke all on function public.mcp_place_demo_order(uuid, text, text, text, numeric, numeric, numeric, date) from public, anon, authenticated;
 revoke all on function public.mcp_save_trade_layout(text, jsonb) from public, anon, authenticated;
 grant execute on function public.mcp_begin_call(text, boolean) to authenticated;

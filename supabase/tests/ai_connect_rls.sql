@@ -45,6 +45,17 @@ select public.mcp_write_allowed() as web_session_write_allowed;
 \echo == 7 c1 places limit order (expect ok), other user account (ERROR), market (ERROR)
 select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'c1');
 select public.mcp_write_allowed() as c1_allowed;
+\echo == 7a without a started call (expect ERROR start this change through the MCP server)
+select public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','limit',1,1.0,null,null);
+select public.mcp_begin_call('place_demo_order', true) ->> 'ok' as started;
+select public.mcp_begin_call('save_trade_layout', true) ->> 'ok' as started_layout;
+\echo == 7b NaN price (expect ERROR needs a limit price)
+select public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','limit',1,'NaN'::numeric,null,null);
+\echo == 7c backdated order is placed today (expect placed_on = today)
+select (public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','limit',1,1.0,null,current_date - 20) ->> 'placed_on')::date = current_date as placed_today;
+\echo == 7d the started call is used up (expect ERROR start this change), then a new one works; the next three refuse because each change needs its own started call
+select public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','limit',1,1.0,null,null);
+select public.mcp_begin_call('place_demo_order', true) ->> 'ok' as started_again;
 select public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','limit',1,1.0,null,null) ->> 'status' as placed;
 select public.mcp_place_demo_order('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb','fx.EUR','buy','limit',1,1.0,null,null);
 select public.mcp_place_demo_order('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa','fx.EUR','buy','market',1,null,null,null);
@@ -53,7 +64,7 @@ select public.mcp_save_trade_layout('Majors', '{"grid":2}'::jsonb) ->> 'name' as
 \echo == 8 another app c2 of same user not allowed (expect ERROR)
 select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'c2');
 select public.mcp_save_trade_layout('X', '{}'::jsonb);
-\echo == 9 limits: 31 calls, last refused
+\echo == 9 limits: 31 calls, last refused (3 calls already used above, so expect 27 ok and 4 refused)
 select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'c1');
 select count(*) filter (where (r->>'ok')::boolean) as ok_calls, count(*) filter (where not (r->>'ok')::boolean) as refused from (select public.mcp_begin_call('get_strategy', false) r from generate_series(1,31)) x;
 select client_id, count(*) from public.mcp_calls group by 1;

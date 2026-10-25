@@ -63,7 +63,8 @@ function ConnectedApps() {
   useEffect(() => { if (signed) void load(); }, [signed]);
 
   async function setWrite(g: Grant, on: boolean) {
-    const { error } = await supabase.from("ai_grants").upsert({ client_id: g.id, client_name: g.name.slice(0, 200), allow_write: on, updated_at: new Date().toISOString() });
+    const userId = (await supabase.auth.getSession()).data.session?.user.id;
+    const { error } = await supabase.from("ai_grants").upsert({ user_id: userId, client_id: g.id, client_name: g.name.slice(0, 200), allow_write: on, updated_at: new Date().toISOString() });
     if (error) { setProblem("Could not save that. Try again."); return; }
     setGrants((list) => list?.map((x) => (x.id === g.id ? { ...x, write: on } : x)) ?? null);
   }
@@ -171,7 +172,8 @@ function ConsentPage() {
   async function allow() {
     if (!details) return;
     setBusy(true);
-    const { error: grantError } = await supabase.from("ai_grants").upsert({ client_id: details.client.id, client_name: (details.client.name || "").slice(0, 200), allow_write: write, updated_at: new Date().toISOString() });
+    const userId = (await supabase.auth.getSession()).data.session?.user.id;
+    const { error: grantError } = await supabase.from("ai_grants").upsert({ user_id: userId, client_id: details.client.id, client_name: (details.client.name || "").slice(0, 200), allow_write: write, updated_at: new Date().toISOString() });
     if (grantError) { setBusy(false); setProblem("Could not save your choice. Try again."); return; }
     const { error } = await supabase.auth.oauth.approveAuthorization(details.authorization_id);
     if (error) { setBusy(false); setProblem("Could not finish connecting. Start again from your AI app."); }
