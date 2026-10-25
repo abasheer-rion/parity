@@ -9,7 +9,7 @@ vi.mock("jose", () => ({
   jwtVerify: (...args: unknown[]) => verify(...args),
 }));
 
-const { accessToken, onRequest } = await import("../functions/_middleware");
+const { accessToken, bearerToken, onRequest } = await import("../functions/_middleware");
 
 const COOKIE = "sb-ttqvpxvctnomfbeoqbbs-auth-token";
 const session = (token = "good.jwt.token") => `${COOKIE}=${encodeURIComponent(JSON.stringify({ access_token: token }))}`;
@@ -147,5 +147,35 @@ describe("accessToken", () => {
     expect(accessToken("")).toBeNull();
     expect(accessToken(`${COOKIE}=not-json`)).toBeNull();
     expect(accessToken(`${COOKIE}=${encodeURIComponent(JSON.stringify({ access_token: 5 }))}`)).toBeNull();
+  });
+});
+
+describe("bearer token (desktop app, DEC-0041)", () => {
+  const withBearer = (url: string, auth: string) => {
+    const request = new Request(url, { headers: { Authorization: auth } });
+    const next = vi.fn(async () => new Response("served", { status: 200 }));
+    return { promise: onRequest({ request, next }), next };
+  };
+
+  it("serves research data for a valid bearer token", async () => {
+    const { promise, next } = withBearer("https://parity.endyland.com/data/latest.json", "Bearer good.jwt.token");
+    const res = await promise;
+    expect(res.status).toBe(200);
+    expect(next).toHaveBeenCalled();
+    expect(res.headers.get("Cache-Control")).toBe("private, no-cache");
+    expect(res.headers.get("Vary")).toContain("Authorization");
+  });
+
+  it("refuses a forged bearer token", async () => {
+    const res = await withBearer("https://parity.endyland.com/data/latest.json", "Bearer forged").promise;
+    expect(res.status).toBe(401);
+  });
+
+  it("reads only a well formed header", () => {
+    expect(bearerToken("Bearer a.b.c")).toBe("a.b.c");
+    expect(bearerToken("  Bearer   a.b.c ")).toBe("a.b.c");
+    expect(bearerToken("Basic a.b.c")).toBeNull();
+    expect(bearerToken("Bearer a b")).toBeNull();
+    expect(bearerToken(null)).toBeNull();
   });
 });

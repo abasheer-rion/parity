@@ -2,12 +2,25 @@
 // in local storage) so the site's middleware (web/functions/_middleware.ts) can check
 // it before serving /app/ and /data/.
 import { createBrowserClient } from "@supabase/ssr";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { desktop } from "../desktop/bridge";
 import { SITE_DOMAIN } from "../lib/meta";
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./config";
 
 const onSiteDomain = () => window.location.hostname === SITE_DOMAIN || window.location.hostname.endsWith(`.${SITE_DOMAIN}`);
 
-export const supabase = createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+// The desktop app (DEC-0041) serves the pages from app://parity, where there is no
+// middleware to read a cookie. There the session lives in the app's own storage, which
+// survives restarts, and the access token goes to the main process for /data/ requests.
+function desktopClient(): SupabaseClient {
+  const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, storage: window.localStorage },
+  });
+  client.auth.onAuthStateChange((_event, session) => desktop?.setToken(session?.access_token ?? null));
+  return client;
+}
+
+export const supabase: SupabaseClient = desktop ? desktopClient() : createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   cookieOptions: {
     path: "/",
     // On the site's domain (endyland.com, from src/lib/site.json) the session is shared by
