@@ -20,6 +20,9 @@ node_modules/
 web/dist/
 web/.wrangler/
 web/.newsroom-preview/
+web/test-results/
+web/playwright-report/
+web/blob-report/
 
 # Supabase local state
 supabase/.temp/
