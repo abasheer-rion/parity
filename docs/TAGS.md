@@ -633,6 +633,7 @@ How the team works together.
 - [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
+- [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
 
 ## strategy
 
@@ -812,3 +813,4 @@ The dashboard.
 - [LOG-0013: Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md)
 - [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
+- [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
