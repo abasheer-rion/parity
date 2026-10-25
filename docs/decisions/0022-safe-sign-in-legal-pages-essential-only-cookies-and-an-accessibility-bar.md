@@ -59,5 +59,5 @@ Sign-in worked for the simple case, but had gaps:
 - [DEC-0053: Our own product analytics, opt-in, stored in Postgres](0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
-- [REF-0020: Product analytics events](../reference/0020-product-analytics-events.md)
+- [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 <!-- backlinks:end -->

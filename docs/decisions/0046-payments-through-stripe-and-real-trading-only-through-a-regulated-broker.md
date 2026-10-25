@@ -100,7 +100,7 @@ No Stripe account is created, no key is stored, and no account is opened anywher
 - [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
-- [REF-0020: Product analytics events](../reference/0020-product-analytics-events.md)
+- [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 <!-- backlinks:end -->

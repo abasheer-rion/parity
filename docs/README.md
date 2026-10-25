@@ -33,9 +33,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
 - 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
-- 2026-10-25 [REF-0020: Product analytics events](reference/0020-product-analytics-events.md)
 - 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 
@@ -188,8 +188,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
-| REF-0020 | [Product analytics events](reference/0020-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
 
 ## competitor
 

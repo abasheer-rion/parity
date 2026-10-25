@@ -1,5 +1,5 @@
 ---
-id: REF-0020
+id: REF-0022
 title: Product analytics events
 type: reference
 status: current
@@ -91,5 +91,4 @@ Routes keep a segment as written only when it is short lowercase words. Anything
 ## Referenced by
 
 - [DEC-0053: Our own product analytics, opt-in, stored in Postgres](../decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
-- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 <!-- backlinks:end -->
