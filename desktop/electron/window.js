@@ -334,7 +334,7 @@ class ParityWindow {
 
   /**
    * The page in front lost its contents (closed under it): a fresh page takes its place at
-   * the same address, instead of a black view that throws on every key (DEC-0058).
+   * the same address, instead of a black view that throws on every key (DEC-0059).
    */
   revive() {
     const dead = this.active;

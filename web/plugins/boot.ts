@@ -1,4 +1,4 @@
-// The loading screen every Parity app shows before its code arrives (DEC-0058). It is plain
+// The loading screen every Parity app shows before its code arrives (DEC-0059). It is plain
 // HTML and CSS written into each app's index.html, so it paints with the first bytes of the
 // page: the dark background, the starburst mark drawing in and a thin progress line. When
 // the app puts its first real content on the page (a skeleton or the page itself) the screen
@@ -15,6 +15,10 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
+import { RAW } from "../src/ui/tokens.gen";
+
+// Token values written in directly: this style runs before any stylesheet has loaded.
+const T = (name: keyof typeof RAW) => RAW[name];
 
 /** The app entries that get the screen (the site's own pages paint straight from HTML). */
 export const BOOT_PAGES = ["/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/"];
@@ -25,19 +29,19 @@ const MARK = readFileSync(resolve(import.meta.dirname, "../public/brand/2026-10-
   .replace(/width="64" height="64"/, 'width="56" height="56" class="pboot-mark"');
 
 const CSS = `
-#pboot{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;background:#050608;color:#a4a8b6;
-font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;transition:opacity .32s cubic-bezier(.2,.7,.2,1),visibility 0s linear .32s}
+#pboot{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;background:${T("color-canvas")};color:${T("color-text-muted")};
+font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;transition:opacity .32s ${T("ease-glide")},visibility 0s linear .32s}
 #pboot.pboot-out{opacity:0;visibility:hidden;pointer-events:none}
 #pboot[hidden]{display:none}
 #pboot .pboot-c{display:grid;justify-items:center;gap:18px;text-align:center;padding:24px;max-width:360px}
-#pboot .pboot-mark{transform-origin:50% 50%;animation:pboot-draw .9s cubic-bezier(.2,.7,.2,1) both,pboot-pulse 2.4s ease-in-out .9s infinite}
-#pboot .pboot-line{position:fixed;top:0;left:0;right:0;height:2px;overflow:hidden;background:rgb(92 194 245 / .08)}
-#pboot .pboot-line i{position:absolute;inset:0;background:linear-gradient(90deg,transparent,#5cc2f5,transparent);transform:translateX(-100%);animation:pboot-run 1.3s cubic-bezier(.4,0,.2,1) infinite}
-#pboot .pboot-msg{display:none;margin:0;color:#c9ccd6}
+#pboot .pboot-mark{transform-origin:50% 50%;animation:pboot-draw .9s ${T("ease-emphasized")} both,pboot-pulse 2.4s ease-in-out .9s infinite}
+#pboot .pboot-line{position:fixed;top:0;left:0;right:0;height:2px;overflow:hidden;background:${T("color-border")}}
+#pboot .pboot-line i{position:absolute;inset:0;background:linear-gradient(90deg,transparent,${T("color-info")},transparent);transform:translateX(-100%);animation:pboot-run 1.3s ${T("ease-in-out")} infinite}
+#pboot .pboot-msg{display:none;margin:0;color:${T("color-text-body")}}
 #pboot .pboot-row{display:none;gap:8px}
-#pboot button{font:inherit;color:#f4f5f8;background:#151720;border:1px solid rgb(255 255 255 / .14);border-radius:8px;padding:7px 14px;cursor:pointer}
-#pboot button.pboot-go{background:#1f78c8;border-color:#1f78c8}
-#pboot button:focus-visible{outline:2px solid #5cc2f5;outline-offset:2px}
+#pboot button{font:inherit;color:${T("color-text")};background:${T("color-surface-raised")};border:1px solid ${T("color-border-strong")};border-radius:8px;padding:7px 14px;cursor:pointer}
+#pboot button.pboot-go{background:${T("color-primary")};border-color:${T("color-primary")};color:${T("color-on-primary")}}
+#pboot button:focus-visible{outline:2px solid ${T("color-focus")};outline-offset:2px}
 #pboot.pboot-slow .pboot-msg,#pboot.pboot-fail .pboot-msg{display:block}
 #pboot.pboot-slow .pboot-row,#pboot.pboot-fail .pboot-row{display:flex}
 #pboot.pboot-fail .pboot-mark{animation:none;opacity:.5}

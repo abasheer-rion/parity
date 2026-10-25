@@ -449,16 +449,16 @@ html.ui-locked { overflow: hidden; }
   .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
 }
 
-/* A crashed part of a page (boundary.tsx, DEC-0058): plain words and a way out, never empty. */
+/* A crashed part of a page (boundary.tsx, DEC-0059): plain words and a way out, never empty. */
 .ui-crash { display: grid; place-items: center; min-height: 240px; padding: 32px 16px; }
-.ui-crash-app { position: fixed; inset: 0; z-index: 2147483000; min-height: 0; background: #050608; }
-.ui-crash-box { max-width: 440px; display: grid; gap: 10px; text-align: center; color: var(--text-2, #a4a8b6); }
-.ui-crash-t { margin: 0; font-size: 17px; font-weight: 600; color: var(--text, #f4f5f8); }
+.ui-crash-app { position: fixed; inset: 0; z-index: var(--z-top); min-height: 0; background: var(--color-canvas); }
+.ui-crash-box { max-width: 440px; display: grid; gap: 10px; text-align: center; color: var(--color-text-muted); }
+.ui-crash-t { margin: 0; font-size: var(--type-lg); font-weight: 600; color: var(--color-text); }
 .ui-crash-p { margin: 0; }
 .ui-crash-row { display: flex; gap: 8px; justify-content: center; margin-top: 6px; }
-.ui-crash-row button { font: inherit; color: #f4f5f8; background: #151720; border: 1px solid rgb(255 255 255 / .14); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
-.ui-crash-row .ui-crash-go { background: #1f78c8; border-color: #1f78c8; }
-.ui-crash-row button:focus-visible { outline: 2px solid #5cc2f5; outline-offset: 2px; }
-.ui-crash-d { margin-top: 8px; font-size: 12px; text-align: left; }
-.ui-crash-d code { display: block; margin-top: 6px; white-space: pre-wrap; word-break: break-word; color: var(--text-3, #7d8190); }
-.ui-crash-inline { margin-left: 8px; font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 6px; padding: 2px 10px; cursor: pointer; }
+.ui-crash-row button { font: inherit; color: var(--color-text); background: var(--color-surface-raised); border: 1px solid var(--color-border-strong); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
+.ui-crash-row .ui-crash-go { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
+.ui-crash-row button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.ui-crash-d { margin-top: 8px; font-size: var(--type-xs); text-align: left; }
+.ui-crash-d code { display: block; margin-top: 6px; white-space: pre-wrap; word-break: break-word; color: var(--color-text-faint); }
+.ui-crash-inline { margin-left: 8px; font: inherit; color: inherit; background: transparent; border: 1px solid currentcolor; border-radius: 6px; padding: 2px 10px; cursor: pointer; }

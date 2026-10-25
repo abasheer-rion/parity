@@ -1,4 +1,4 @@
-// The app's last line of defence (DEC-0058). Without it, an error nobody caught in the main
+// The app's last line of defence (DEC-0059). Without it, an error nobody caught in the main
 // process makes Electron show its raw "A JavaScript error occurred in the main process"
 // box, and 0.2.0 then quit on its own while that box was open. Here such an error is written
 // to the log (logfile.js), the app keeps running, and the person sees one plain message with

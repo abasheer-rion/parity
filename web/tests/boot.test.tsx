@@ -1,4 +1,4 @@
-// The loading screen and the crash guard (DEC-0058): a Parity page shows something within
+// The loading screen and the crash guard (DEC-0059): a Parity page shows something within
 // the first paint, and a failure says so with Try again, never a black screen.
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";

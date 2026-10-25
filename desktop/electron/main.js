@@ -756,7 +756,7 @@ function buildMenu() {
 /**
  * A page can stop drawing while its content is fine: after the Mac sleeps, a screen is
  * plugged in or out, the graphics process restarts, or the window comes back from Stage
- * Manager or the Dock. Each of those makes every window draw its pages again (DEC-0058).
+ * Manager or the Dock. Each of those makes every window draw its pages again (DEC-0059).
  */
 function watchForBlankViews() {
   const all = (why) => { log(`repaint (${why})`); for (const w of windows) w.repaint(why); };

@@ -1,4 +1,4 @@
-// The main process's last line of defence (electron/guard.js, DEC-0058): an error nobody
+// The main process's last line of defence (electron/guard.js, DEC-0059): an error nobody
 // caught is logged and shown once in plain words, never Electron's raw box and a quit.
 const test = require("node:test");
 const assert = require("node:assert");

@@ -1,5 +1,5 @@
 ---
-id: DEC-0058
+id: DEC-0059
 title: A Parity page is never black, it shows a loading screen or says what went wrong
 type: decision
 status: accepted
