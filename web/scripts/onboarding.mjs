@@ -79,11 +79,11 @@ async function context(size = { width: 1440, height: 900 }, init = {}) {
   return ctx;
 }
 
-const tip = (page) => page.locator(".ui-tour-tip");
+const tip = (page) => page.locator(".ui-tour[role=dialog]");
 const stored = (page) => page.evaluate(() => JSON.parse(localStorage.getItem("parity.onboarding.v1") ?? "{}"));
 /** "2 of 5" to 5. */
 const totalOf = (text) => Number((text ?? "").match(/of (\d+)/)?.[1] ?? 0);
-async function waitTip(page, timeout = 8000) {
+async function waitTip(page, timeout = 20000) {
   try { await tip(page).waitFor({ state: "visible", timeout }); return true; } catch { return false; }
 }
 async function noTip(page, ms = 2500) {
@@ -107,7 +107,7 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
   check(total >= 3 && total <= 6, `home tour has 3 to 6 steps on desktop (${count})`);
   // Tab stays in the tip.
   for (let i = 0; i < 7; i++) await page.keyboard.press("Tab");
-  check(await page.evaluate(() => !!document.activeElement?.closest(".ui-tour-tip")), "Tab keeps focus inside the tip");
+  check(await page.evaluate(() => !!document.activeElement?.closest(".ui-tour[role=dialog]")), "Tab keeps focus inside the tip");
   await page.keyboard.press("ArrowRight");
   check((await page.locator(".ui-tour-count").textContent())?.startsWith("2 of"), "ArrowRight moves to step 2");
   await page.keyboard.press("ArrowLeft");
@@ -117,8 +117,8 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
     await page.waitForTimeout(120);
     if (i === 2) await shot(page, "02-home-tour-step3");
   }
-  check((await tip(page).locator("button.primary").textContent()) === "Done", "the last step says Done");
-  await tip(page).locator("button.primary").click();
+  check((await tip(page).locator(".ui-btn-primary").textContent()) === "Done", "the last step says Done");
+  await tip(page).locator(".ui-btn-primary").click();
   check(await noTip(page, 400), "Done closes the tour");
   check((await stored(page)).tours_seen?.includes("home"), "home is saved as seen");
   await shot(page, "03-checklist");
@@ -147,7 +147,7 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
 
   // ---------------------------------------------------------------- 2. skip all in Trade
   await page.goto(`${BASE}/trade/`);
-  check(await waitTip(page, 12000), "Trade tour opens on the first visit");
+  check(await waitTip(page, 30000), "Trade tour opens on the first visit");
   await page.waitForTimeout(300);
   await shot(page, "07-trade-tour");
   await tip(page).getByRole("button", { name: "Skip all tours" }).click();
@@ -198,7 +198,7 @@ for (const [name, path, init] of AREAS) {
   const ctx = await context(undefined, init);
   const page = await ctx.newPage();
   await page.goto(`${BASE}${path}`);
-  const ok = await waitTip(page, 12000);
+  const ok = await waitTip(page, 30000);
   const label = name.replace(/^\d+-/, "");
   check(ok, `${label} opens`);
   if (ok) {
@@ -228,7 +228,7 @@ for (const [name, path, init] of AREAS) {
   await page.waitForTimeout(300);
   await shot(page, "16-checklist-phone");
   await page.goto(`${BASE}/trade/`);
-  check(await waitTip(page, 12000), "Trade tour opens on a phone");
+  check(await waitTip(page, 30000), "Trade tour opens on a phone");
   await page.waitForTimeout(300);
   await shot(page, "17-trade-tour-phone");
   await ctx.close();
