@@ -1,0 +1,20 @@
+# parity-live (DEC-0049): the Durable Object that fans live market data out to browsers.
+# The site's Pages Functions (web/functions/live/) reach it through the LIVE binding in
+# web/wrangler.toml; this worker has no route or domain of its own.
+# Deploy: cd web/live && npx wrangler deploy   (needs a token with Workers Scripts Edit)
+name = "parity-live"
+main = "src/index.ts"
+compatibility_date = "2026-10-21"
+workers_dev = false
+preview_urls = false
+
+[[durable_objects.bindings]]
+name = "LIVE"
+class_name = "LiveHub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["LiveHub"]
+
+[observability]
+enabled = true

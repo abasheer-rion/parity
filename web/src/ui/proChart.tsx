@@ -11,8 +11,8 @@
 // The chart's height is set from its props before the first paint, so loading data or
 // adding an indicator never moves the page (DEC-0030).
 import {
-  AreaSeries, BarSeries, BaselineSeries, CandlestickSeries, createChart, HistogramSeries, LineSeries, LineStyle, PriceScaleMode,
-  type IChartApi, type IPriceLine, type ISeriesApi, type MouseEventParams, type SeriesType, type Time,
+  AreaSeries, BarSeries, BaselineSeries, CandlestickSeries, createChart, createSeriesMarkers, HistogramSeries, LineSeries, LineStyle, PriceScaleMode,
+  type IChartApi, type IPriceLine, type ISeriesApi, type ISeriesMarkersPluginApi, type MouseEventParams, type SeriesMarker, type SeriesType, type Time, type UTCTimestamp,
 } from "lightweight-charts";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { compute, heikinAshi, indicatorDef, instanceLabel, type Bar, type IndicatorInstance, type Line } from "../lib/indicators";
@@ -54,7 +54,18 @@ export interface ProChartProps {
   fill?: boolean;
   /** No footer line (Parity Trade shows the chart credit in its Settings; the logo stays on the chart). */
   bare?: boolean;
+  /** Live updates (DEC-0049): `bars` of the source are mutated in place; the chart updates the
+   *  forming bar on "last" and redraws once on "new" (a bar finished). No rebuild per tick. */
+  live?: LiveBars | null;
+  /** Strategy markers on the price series; clicking one calls onMarker with its id. */
+  markers?: ChartMarker[];
+  onMarker?: (id: string) => void;
+  /** Reset the visible range only when this changes (a new symbol or timeframe), not on every update. */
+  viewKey?: string;
 }
+
+export interface LiveBars { bars: Bar[]; on(fn: (c: "last" | "new") => void): () => void }
+export interface ChartMarker { id: string; time: string; side: "buy" | "sell" | "exit"; text: string }
 
 /** Height of the time axis under the panes; the panes share the rest by stretch factor. */
 const TIME_AXIS = 28;
@@ -84,20 +95,36 @@ function withAlpha(color: string, a: number): string {
   return color;
 }
 
+/** Our bar keys to the chart's times: dates stay dates, intraday ISO times become seconds. */
+export function toTime(key: string): Time {
+  return (key.length <= 10 ? key : (Math.floor(Date.parse(key) / 1000) as UTCTimestamp)) as Time;
+}
+
 function timeKey(t: Time | undefined): string | null {
   if (t == null) return null;
   if (typeof t === "string") return t;
-  if (typeof t === "number") return new Date(t * 1000).toISOString().slice(0, 10);
+  if (typeof t === "number") return `${new Date(t * 1000).toISOString().slice(0, 19)}Z`;
   return `${t.year}-${String(t.month).padStart(2, "0")}-${String(t.day).padStart(2, "0")}`;
 }
 
-const lineData = (bars: Bar[], v: Line) => bars.flatMap((b, i) => (v[i] == null ? [] : [{ time: b.time as Time, value: v[i] as number }]));
+const lineData = (bars: Bar[], v: Line) => bars.flatMap((b, i) => (v[i] == null ? [] : [{ time: toTime(b.time), value: v[i] as number }]));
 
 function fmt(v: number | null | undefined, digits: number): string {
   if (v == null || !Number.isFinite(v)) return "n/a";
   const a = Math.abs(v);
   const s = a >= 1e9 ? `${(a / 1e9).toFixed(2)}B` : a >= 1e6 ? `${(a / 1e6).toFixed(2)}M` : a.toFixed(digits);
   return (v < 0 ? "−" : "") + s;
+}
+
+function toMarkers(list: ChartMarker[] | undefined, up: string, down: string): SeriesMarker<Time>[] {
+  if (!list?.length) return [];
+  const exit = cssVar("--text-2", "#9aa0a6");
+  return [...list].sort((a, b) => a.time.localeCompare(b.time)).map((m) => ({
+    id: m.id, time: toTime(m.time), text: m.text, size: 0.8,
+    ...(m.side === "buy" ? { position: "belowBar" as const, shape: "arrowUp" as const, color: up }
+      : m.side === "sell" ? { position: "aboveBar" as const, shape: "arrowDown" as const, color: down }
+      : { position: "aboveBar" as const, shape: "circle" as const, color: exit }),
+  }));
 }
 
 interface Built {
@@ -107,8 +134,8 @@ interface Built {
 }
 
 export function ProChart({
-  bars, label, type = "candles", indicators = [], compare = null, log = false, drawings = [], tool = "none", onDraw,
-  height = 420, paneHeight = 120, digits = 2, toolbar, footer, fill = false, bare = false,
+  bars: barsProp, label, type = "candles", indicators = [], compare = null, log = false, drawings = [], tool = "none", onDraw,
+  height = 420, paneHeight = 120, digits = 2, toolbar, footer, fill = false, bare = false, live = null, markers, onMarker, viewKey,
 }: ProChartProps) {
   const frame = useRef<HTMLDivElement>(null);
   const host = useRef<HTMLDivElement>(null);
@@ -120,6 +147,13 @@ export function ProChart({
   const [full, setFull] = useState(false);
   const [hint, setHint] = useState<string | null>(null);
   const [, setVersion] = useState(0);
+  const markerApi = useRef<ISeriesMarkersPluginApi<Time> | null>(null);
+  const markersRef = useRef<ChartMarker[] | undefined>(markers);
+  markersRef.current = markers;
+  const onMarkerRef = useRef(onMarker);
+  onMarkerRef.current = onMarker;
+  // A bar finishing redraws everything once; ticks inside a bar only touch the last bar.
+  const [liveVersion, setLiveVersion] = useState(0);
 
   const paneCount = useMemo(() => new Set(indicators.filter((i) => indicatorDef(i.type).place === "pane").map((i) => i.id)).size, [indicators]);
   const totalHeight = height + paneCount * paneHeight;
@@ -169,9 +203,11 @@ export function ProChart({
     while (c.panes().length > 1) c.removePane(c.panes().length - 1);
 
     const up = cssVar("--good", "#3fb37f"), down = cssVar("--bad", "#e5484d"), accent = cssVar("--series-1", "#7aa2f7");
+    const bars = live?.bars ?? barsProp;
+    c.applyOptions({ timeScale: { timeVisible: (bars[0]?.time.length ?? 10) > 10, secondsVisible: false } });
     const shown = type === "heikin" ? heikinAshi(bars) : bars;
-    const ohlc = shown.map((b) => ({ time: b.time as Time, open: b.open, high: b.high, low: b.low, close: b.close }));
-    const closes = shown.map((b) => ({ time: b.time as Time, value: b.close }));
+    const ohlc = shown.map((b) => ({ time: toTime(b.time), open: b.open, high: b.high, low: b.low, close: b.close }));
+    const closes = shown.map((b) => ({ time: toTime(b.time), value: b.close }));
     const priceFormat = { type: "price" as const, precision: digits, minMove: 1 / 10 ** digits };
     let main: ISeriesApi<SeriesType>;
     if (type === "candles" || type === "heikin") {
@@ -196,7 +232,7 @@ export function ProChart({
     if (compare && compare.bars.length) {
       const color = cssVar("--series-4", "#e0af68");
       const s = c.addSeries(LineSeries, { color, lineWidth: 2, priceLineVisible: false, lastValueVisible: true, title: compare.label });
-      s.setData(compare.bars.map((b) => ({ time: b.time as Time, value: b.close })));
+      s.setData(compare.bars.map((b) => ({ time: toTime(b.time), value: b.close })));
       const byTime = new Map(compare.bars.map((b) => [b.time, b.close]));
       lines.push({ label: compare.label, values: shown.map((b) => byTime.get(b.time) ?? null), color, pane: 0, digits });
     }
@@ -212,11 +248,11 @@ export function ProChart({
       const dg = ["rsi", "stochastic", "adx"].includes(ind.type) ? 1 : ind.type === "obv" || ind.type === "volume" ? 0 : digits;
       if (ind.type === "volume") {
         const s = c.addSeries(HistogramSeries, { priceFormat: { type: "volume" }, priceLineVisible: false, lastValueVisible: false }, onPane);
-        s.setData(shown.flatMap((b, i) => (out.volume[i] == null ? [] : [{ time: b.time as Time, value: out.volume[i] as number, color: b.close >= b.open ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
+        s.setData(shown.flatMap((b, i) => (out.volume[i] == null ? [] : [{ time: toTime(b.time), value: out.volume[i] as number, color: b.close >= b.open ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
         lines.push({ label: name, values: out.volume, color: cssVar("--text-2", "#999"), pane: onPane, digits: 0 });
       } else if (ind.type === "macd") {
         const h = c.addSeries(HistogramSeries, { priceLineVisible: false, lastValueVisible: false }, onPane);
-        h.setData(bars.flatMap((b, i) => (out.hist[i] == null ? [] : [{ time: b.time as Time, value: out.hist[i] as number, color: (out.hist[i] as number) >= 0 ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
+        h.setData(bars.flatMap((b, i) => (out.hist[i] == null ? [] : [{ time: toTime(b.time), value: out.hist[i] as number, color: (out.hist[i] as number) >= 0 ? withAlpha(up, 0.6) : withAlpha(down, 0.6) }])));
         const m = c.addSeries(LineSeries, { ...lw, color: color(0) }, onPane); m.setData(lineData(bars, out.macd));
         const s = c.addSeries(LineSeries, { ...lw, color: color(1) }, onPane); s.setData(lineData(bars, out.signal));
         lines.push({ label: "MACD", values: out.macd, color: color(0), pane: onPane, digits }, { label: "Signal", values: out.signal, color: color(1), pane: onPane, digits });
@@ -240,6 +276,7 @@ export function ProChart({
 
     c.priceScale("right").applyOptions({ mode: compare ? PriceScaleMode.IndexedTo100 : log ? PriceScaleMode.Logarithmic : PriceScaleMode.Normal });
     built.current = { main, lines, shown };
+    markerApi.current = createSeriesMarkers(main, toMarkers(markersRef.current, up, down), { autoScale: true });
     setVersion((v) => v + 1);
 
     // Drawings sit on the price pane; they are hidden while comparing, when prices are rescaled.
@@ -256,20 +293,54 @@ export function ProChart({
           const pts = [...d.points].map((p) => ({ ...p, time: shown[Math.max(0, barAtOrBefore(shown, p.time))]?.time ?? p.time })).sort((x, y) => x.time.localeCompare(y.time));
           if (pts[0].time === pts[1].time) continue;
           const s = c.addSeries(LineSeries, { color: cssVar("--series-4", "#e0af68"), lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false, pointMarkersVisible: true }, 0);
-          s.setData(pts.map((p) => ({ time: p.time as Time, value: p.price })));
+          s.setData(pts.map((p) => ({ time: toTime(p.time), value: p.price })));
           drawn.current.series.push(s);
         }
       }
     }
-  }, [bars, type, indicators, compare, log, drawings, digits, height, paneHeight]);
+  }, [barsProp, live, liveVersion, type, indicators, compare, log, drawings, digits, height, paneHeight]);
+
+  // Markers change without a rebuild.
+  useEffect(() => {
+    markerApi.current?.setMarkers(toMarkers(markers, cssVar("--good", "#3fb37f"), cssVar("--bad", "#e5484d")));
+  }, [markers]);
+
+  // Live ticks: update the forming bar in place; a finished bar triggers one redraw. The
+  // legend follows at most four times a second.
+  useEffect(() => {
+    if (!live) return;
+    let legendAt = 0;
+    return live.on((change) => {
+      const main = built.current.main;
+      const bars = live.bars;
+      const last = bars[bars.length - 1];
+      if (!main || !last) return;
+      if (change === "new") { setLiveVersion((v) => v + 1); return; }
+      const sh = built.current.shown;
+      if (sh !== bars && sh.length) {
+        // Heikin-Ashi: the forming bar from the previous Heikin-Ashi bar.
+        const prev = sh[sh.length - 2];
+        const close = (last.open + last.high + last.low + last.close) / 4;
+        const open = prev ? (prev.open + prev.close) / 2 : last.open;
+        sh[sh.length - 1] = { ...last, open, close, high: Math.max(last.high, open, close), low: Math.min(last.low, open, close) };
+      }
+      const b = sh[sh.length - 1] ?? last;
+      const t = toTime(b.time);
+      if (type === "candles" || type === "heikin" || type === "bars") main.update({ time: t, open: b.open, high: b.high, low: b.low, close: b.close });
+      else main.update({ time: t, value: b.close });
+      const now = performance.now();
+      if (now - legendAt > 250) { legendAt = now; setVersion((v) => v + 1); }
+    });
+  }, [live, type]);
 
   // Show the latest stretch of history when a new instrument or timeframe loads.
   useEffect(() => {
     const c = chart.current;
-    if (!c || !bars.length) return;
-    const n = bars.length;
+    const n = (live?.bars ?? barsProp).length;
+    if (!c || !n) return;
     c.timeScale().setVisibleLogicalRange({ from: Math.max(0, n - 200), to: n + 3 });
-  }, [bars]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewKey ?? barsProp]);
 
   // Clicks place drawings.
   useEffect(() => {
@@ -277,7 +348,12 @@ export function ProChart({
     if (!c) return;
     pending.current = null;
     setHint(tool === "none" ? null : tool === "hline" ? "Click a price to draw a horizontal line." : "Click the first point, then the second.");
-    if (tool === "none" || !onDraw) return;
+    if (tool === "none") {
+      const pick = (p: MouseEventParams) => { if (typeof p.hoveredObjectId === "string") onMarkerRef.current?.(p.hoveredObjectId); };
+      c.subscribeClick(pick);
+      return () => c.unsubscribeClick(pick);
+    }
+    if (!onDraw) return;
     const on = (p: MouseEventParams) => {
       const main = built.current.main;
       const time = timeKey(p.time);
