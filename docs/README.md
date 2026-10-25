@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 52 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 53 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
 | [guide](#guide) | How to do something in this repo, step by step. | 8 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 21 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 22 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 18 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -35,9 +35,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
+- 2026-10-25 [REF-0020: Product analytics events](reference/0020-product-analytics-events.md)
 - 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
-- 2026-10-25 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 
 ## intent
 
@@ -102,6 +102,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0049 | [The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0052 | [Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0053 | [Our own product analytics, opt-in, stored in Postgres](decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 
 ## hypothesis
@@ -187,6 +188,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
+| REF-0020 | [Product analytics events](reference/0020-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 
 ## competitor

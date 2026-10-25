@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { liveSources } from "../lib/live/sources";
 import { Card } from "../ui/layout";
+import { metricsAllowed } from "../lib/metrics";
 import {
   bySource, bytes, dur, groupRum, isLiveEndpoint, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
   type FreshRow, type RumRow, type Status, type StepRow,
@@ -49,6 +50,7 @@ export function Latency() {
           takes, and how fast pages get their data in real browsers. Late means past its cadence; stale means past twice
           its cadence. Nobody is paged: stale sources are fetched once more by themselves and the retry is listed here.
         </p>
+        <MetricsLink />
       </div>
       <Hops fresh={fresh} runs={runs} rum={rum} now={now} />
       <Sources fresh={fresh} now={now} />
@@ -365,4 +367,28 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
       }}</Pending></div>
     </Card>
   );
+}
+
+/**
+ * The speed panels on their own, for the Metrics page (DEC-0053): every hop and the browser
+ * page timings, next to the product analytics.
+ */
+export function SpeedPanels() {
+  const fresh = useLoad(loadFreshness);
+  const runs = useLoad(() => loadSteps(24 * 7, true));
+  const rum = useLoad(() => loadRum(24 * 7));
+  const [now] = useState(() => Date.now());
+  return (
+    <>
+      <Hops fresh={fresh} runs={runs} rum={rum} now={now} />
+      <Client rum={rum} />
+    </>
+  );
+}
+
+/** A link to the Metrics page, shown only to accounts on the team list (DEC-0053). */
+function MetricsLink() {
+  const [ok, setOk] = useState(false);
+  useEffect(() => { let live = true; metricsAllowed().then((v) => live && setOk(v)).catch(() => {}); return () => { live = false; }; }, []);
+  return ok ? <p className="small"><a href="#/metrics">Product metrics</a>: pages, clicks, funnel and retention, next to these speed panels.</p> : null;
 }
