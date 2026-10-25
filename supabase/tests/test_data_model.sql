@@ -141,6 +141,14 @@ select pg_temp.check(not exists (
         and (i.indkey::int2[])[0:array_length(c.conkey, 1) - 1] <@ c.conkey)),
   'every foreign key has an index');
 
+-- Every table has row level security on, and at least one rule, so none is open by mistake
+-- and none is closed without saying so (advisors 0013 and 0008).
+select pg_temp.check(not exists (
+  select 1 from pg_class c join pg_namespace n on n.oid = c.relnamespace
+  where n.nspname in ('public', 'parity_private') and c.relkind in ('r', 'p')
+    and (not c.relrowsecurity or not exists (select 1 from pg_policy p where p.polrelid = c.oid))),
+  'every table has row level security and a rule');
+
 select pg_temp.check(not has_function_privilege('anon', 'public.prune_old_series()', 'execute')
   and not has_function_privilege('authenticated', 'public.prune_old_series()', 'execute')
   and not has_function_privilege('anon', 'public.prune_search_snapshots()', 'execute')

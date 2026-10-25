@@ -4,7 +4,8 @@
 --
 -- Expand only. No column, table or row that holds user data is dropped or changed. The
 -- four indexes dropped (three in section 2, one in section 4) are each covered by a wider
--- new index that starts with the same column. Every statement can run twice (the migration runner can retry).
+-- new index that starts with the same column. Every statement can run twice (the migration
+-- runner can retry).
 --
 -- Sections
 --   1. Row rules that read the sign-in once per query, not once per row (advisor 0003),
@@ -95,6 +96,22 @@ revoke all on function public.prune_search_snapshots() from public, anon, authen
 -- is_member() only means something for a signed-in person.
 revoke all on function public.is_member() from public, anon;
 grant execute on function public.is_member() to authenticated;
+
+-- Counters nobody reads through the API had row level security on and no rule, which the
+-- advisor lists (0008) because it cannot tell "closed on purpose" from "forgot the rule".
+-- Say it in a rule. Access does not change: these tables have no API grants either.
+do $$
+declare
+  t text;
+begin
+  foreach t in array array['rum_minute', 'rum_hour_rows', 'verify_dataset_quota'] loop
+    if to_regclass('public.' || t) is not null then
+      execute format('drop policy if exists "closed to the api" on public.%I', t);
+      execute format('create policy "closed to the api" on public.%I for select to anon, authenticated using (false)', t);
+    end if;
+  end loop;
+end
+$$;
 
 -- ===================================================================== 2. indexes
 
@@ -251,6 +268,8 @@ create table if not exists public.trade_ledger_keys (
 
 alter table public.trade_ledger_keys enable row level security;
 revoke all on public.trade_ledger_keys from public, anon, authenticated;
+drop policy if exists "closed to the api" on public.trade_ledger_keys;
+create policy "closed to the api" on public.trade_ledger_keys for select to anon, authenticated using (false);
 
 -- Makes this month's partition and the next p_ahead months, plus a default partition that
 -- catches anything outside them (it should stay empty). Safe to run any time.
@@ -267,6 +286,7 @@ begin
     execute 'create table parity_private.trade_ledger_default partition of public.trade_ledger default';
     execute 'alter table parity_private.trade_ledger_default enable row level security';
     execute 'revoke all on parity_private.trade_ledger_default from public, anon, authenticated';
+    execute 'create policy "closed to the api" on parity_private.trade_ledger_default for select to anon, authenticated using (false)';
   end if;
   for i in 0 .. greatest(coalesce(p_ahead, 3), 0) loop
     part := format('trade_ledger_y%sm%s', to_char(m + make_interval(months => i), 'YYYY'), to_char(m + make_interval(months => i), 'MM'));
@@ -275,6 +295,7 @@ begin
         part, (m + make_interval(months => i))::timestamptz, (m + make_interval(months => i + 1))::timestamptz);
       execute format('alter table parity_private.%I enable row level security', part);
       execute format('revoke all on parity_private.%I from public, anon, authenticated', part);
+      execute format('create policy "closed to the api" on parity_private.%I for select to anon, authenticated using (false)', part);
       made := made + 1;
     end if;
   end loop;
@@ -405,6 +426,8 @@ create table if not exists public.account_deletion_log (
 
 alter table public.account_deletion_log enable row level security;
 revoke all on public.account_deletion_log from public, anon, authenticated;
+drop policy if exists "closed to the api" on public.account_deletion_log;
+create policy "closed to the api" on public.account_deletion_log for select to anon, authenticated using (false);
 
 -- Removes everything Parity stores about one person, for "delete my account" (privacy
 -- policy, DEC-0054). Run by the owner or the service role, usually for a row in
