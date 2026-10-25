@@ -81,7 +81,8 @@ function badgePages(): Plugin {
     apply: "serve",
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
-        if (req.url && /^\/v\/[A-Za-z0-9]{12}\/?(\?.*)?$/.test(req.url)) req.url = "/v/index.html";
+        // Any one-part address, as in production: the page itself says when there is no such badge.
+        if (req.url && /^\/v\/[^/?]+\/?(\?.*)?$/.test(req.url)) req.url = "/v/index.html";
         next();
       });
     },

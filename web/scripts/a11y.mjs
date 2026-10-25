@@ -18,6 +18,7 @@ const PAGES = (process.env.A11Y_PAGES ?? [
   "/", "/login/", "/signup/", "/reset/", "/verify/?type=email&token_hash=example",
   "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/",
   "/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/",
+  "/no-such-page-xyz/", "/app/#/no-such-page-xyz", "/trade/#/no-such-page-xyz",
 ].join(",")).split(",").map((p) => p.trim()).filter(Boolean);
 const SIZES = [
   { name: "desktop", width: 1280, height: 860 },

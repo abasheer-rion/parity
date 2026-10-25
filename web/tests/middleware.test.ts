@@ -69,6 +69,40 @@ describe("signed in", () => {
   });
 });
 
+describe("a missing app path (DEC-0053)", () => {
+  function missing(url: string, cookie?: string) {
+    const request = new Request(url, { headers: cookie ? { Cookie: cookie } : {} });
+    const next = vi.fn(async () => new Response("<title>Page not found</title>", { status: 404 }));
+    return onRequest({ request, next });
+  }
+
+  it("opens the app at the same hash route when signed in", async () => {
+    for (const [path, to] of [["/app/no-such-page-xyz", "/app/#/no-such-page-xyz"], ["/research/docs?x=1", "/research/#/docs?x=1"], ["/trade/junk/", "/trade/#/junk"]]) {
+      const res = await missing(`https://parity.endyland.com${path}`, session());
+      expect(res.status, path).toBe(302);
+      expect(res.headers.get("Location"), path).toBe(to);
+    }
+  });
+
+  it("keeps the 404 for a missing file or asset", async () => {
+    for (const path of ["/app/assets/gone-123.js", "/sim/missing.png", "/data/nothing.json"]) {
+      const res = await missing(`https://parity.endyland.com${path}`, session());
+      expect(res.status, path).toBe(404);
+    }
+  });
+
+  it("still asks a signed-out visitor to log in first", async () => {
+    const res = await missing("https://parity.endyland.com/app/no-such-page-xyz");
+    expect(res.status).toBe(302);
+    expect(res.headers.get("Location")).toBe(`/login/?next=${encodeURIComponent("/app/no-such-page-xyz")}`);
+  });
+
+  it("passes the 404 page through for public paths", async () => {
+    const res = await missing("https://parity.endyland.com/no-such-page-xyz/");
+    expect(res.status).toBe(404);
+  });
+});
+
 describe("the sim host", () => {
   it("opens Sim World at / when signed in", async () => {
     const res = await run("https://sim.endyland.com/", session()).promise;

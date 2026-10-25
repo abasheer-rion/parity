@@ -152,6 +152,49 @@ const flows = [
     return q === "carry" && sort === "year" ? null : `search "${q}", sort "${sort}"`;
   }],
 ];
+// ---------------------------------------------------------------- addresses that do not exist (DEC-0053)
+// The dev server answers like Cloudflare Pages (plugins/notFound.ts): an unknown path gets
+// the 404 page with status 404, a missing app path opens the app at that hash, and every
+// app shows its "not found" view for a hash route it does not know.
+const JUNK = "no-such-page-xyz";
+const notFound = [
+  ["an unknown path answers 404 with the 404 page", async (page) => {
+    const res = await page.goto(`${BASE}/${JUNK}/`, { waitUntil: "load" });
+    const text = await page.locator("body").innerText();
+    if (res?.status() !== 404) return `status ${res?.status()}`;
+    return /This page does not exist/.test(text) ? null : "no not-found text";
+  }],
+  ["a missing app path opens the app's not found view", async (page) => {
+    await page.goto(`${BASE}/app/${JUNK}`, { waitUntil: "load" });
+    await page.locator("[data-not-found]").waitFor({ timeout: 20000 });
+    return new URL(page.url()).hash === `#/${JUNK}` ? null : `ended at ${page.url()}`;
+  }],
+  ["an unknown badge address says there is no record", async (page) => {
+    await page.goto(`${BASE}/v/${JUNK}`, { waitUntil: "load" });
+    await page.getByRole("heading", { name: "No record at this address" }).waitFor({ timeout: 20000 });
+    return null;
+  }],
+  ...["app", "research", "sim", "trade", "academy", "lab"].map((app) => [`/${app}/ shows not found for an unknown hash`, async (page) => {
+    await page.goto(`${BASE}/${app}/#/${JUNK}`, { waitUntil: "load" });
+    await page.locator("[data-not-found]").waitFor({ timeout: 20000 });
+    const view = page.locator("[data-not-found]");
+    const acts = (await view.getByRole("button", { name: "Back" }).count()) + (await view.getByRole("link").count());
+    return acts >= 2 ? null : "no Back and Home actions";
+  }]),
+];
+const nctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+await nctx.addInitScript(() => {
+  try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+});
+for (const [name, fn] of notFound) {
+  const page = await nctx.newPage();
+  page.on("pageerror", (e) => problems.push(`not found "${name}": exception ${e.message.split("\n")[0]}`));
+  const why = await fn(page).catch((e) => e.message.split("\n")[0]);
+  if (why) problems.push(`not found "${name}": ${why}`);
+  await page.close();
+}
+await nctx.close();
+
 const fctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 for (const [name, fn] of flows) {
   const page = await fctx.newPage();
