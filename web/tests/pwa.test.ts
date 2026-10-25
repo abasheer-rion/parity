@@ -15,7 +15,7 @@ describe("manifests", () => {
       expect(m.display).toBe("standalone");
       expect(m.start_url.startsWith(m.scope)).toBe(true);
       expect(m.icons.some((i: { sizes: string }) => i.sizes === "512x512")).toBe(true);
-      expect(JSON.stringify(m)).not.toMatch(/[–—]/);
+      expect(JSON.stringify(m)).not.toMatch(/[\u2013\u2014]/);
     });
   }
   it("the main manifest has a maskable icon and a shortcut per app", () => {
