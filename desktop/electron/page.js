@@ -90,7 +90,7 @@ class Page {
       setTimeout(() => this.load(this.path), 500);
     });
     wc.on("did-first-visually-non-empty-paint", () => this.owner.pagePainted?.(this));
-    wc.on("did-finish-load", () => { clearTimeout(this.blankTimer); this.blankTimer = setTimeout(() => this.checkPainted("loaded"), 5000); });
+    wc.on("did-finish-load", () => { this.owner.pagePainted?.(this); clearTimeout(this.blankTimer); this.blankTimer = setTimeout(() => this.checkPainted("loaded"), 5000); });
     wc.on("unresponsive", () => ctx.log(`page not responding: ${this.path}`));
     wc.on("responsive", () => ctx.log(`page responding again: ${this.path}`));
     // Errors a page prints go to the app's log (logfile.js), for tracing a problem later.
