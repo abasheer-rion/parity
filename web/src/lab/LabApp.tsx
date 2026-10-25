@@ -10,6 +10,7 @@
 //   #/search       Strategy search (research, read only)
 //   #/edges        Edge Lab: the idea checklist and the lessons (research, read only)
 //   #/settings     Settings
+import { LiveMini } from "../components/LiveMini";
 import { useCallback, useEffect, useState } from "react";
 import { AppGuard } from "../auth";
 import { copyLink } from "../components/CopyLink";
@@ -156,6 +157,7 @@ function LabShell() {
     : view === "whatif" ? <WhatIfView />
     : view === "search" ? <SearchView />
     : view === "edges" ? <EdgesView key={arg ?? ""} focus={arg} />
+    : view === "live" ? <div className="lb-live"><LiveMini height={360} /></div>
     : <SettingsView settings={settings} set={setSettings} />;
 
   return (

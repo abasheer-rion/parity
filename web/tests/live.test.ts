@@ -119,3 +119,16 @@ describe("wire", () => {
     expect(liveOrigin({ protocol: "http:", host: "localhost:5173", hostname: "localhost" })).toBe("wss://trade.endyland.com");
   });
 });
+
+describe("latency page, live feeds", () => {
+  it("groups browser samples by feed and hop", async () => {
+    const { liveFeeds, percentile } = await import("../src/lib/latency");
+    const bins = (k: number) => { const b = new Array(64).fill(0); b[k] = 3; return b; };
+    const row = (endpoint: string, k: number, metric = "lag") => ({ hour: "", app: "trade", metric, endpoint, region: "NA", n: 3, hits: 0, total: 0, bins: bins(k) });
+    const out = liveFeeds([row("trade:live/coingecko/e2e", 30), row("trade:live/coingecko/e2e", 30), row("trade:live/coingecko/net", 12), row("trade/alerts", 5), row("trade:live/coingecko/e2e", 1, "age")]);
+    expect(out).toHaveLength(1);
+    expect(out[0].src).toBe("coingecko");
+    expect(out[0].hops.e2e?.n).toBe(6);
+    expect(percentile(out[0].hops.net!.bins, 0.5)).toBeCloseTo(10 ** (11.5 / 8));
+  });
+});

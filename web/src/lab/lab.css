@@ -288,3 +288,6 @@
 .plb .ui-seg { height: 28px; }
 .plb .ui-seg button { height: 26px; }
 .lb-refs { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Live prices view (DEC-0049). */
+.lb-live { height: 440px; max-width: 980px; padding: 4px 0; }

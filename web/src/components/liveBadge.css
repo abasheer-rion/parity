@@ -1,20 +1,20 @@
 /* The latency badge (DEC-0049): tiny, one line, fixed height so ticking never moves layout. */
-.lb {
+.lvb {
   display: inline-flex; align-items: center; gap: 5px; height: 18px; padding: 0 6px; flex: none;
   border: 1px solid var(--border, rgba(255, 255, 255, 0.12)); border-radius: 4px; background: transparent;
   color: var(--text-2, #9aa0a6); font: 500 10px/1 var(--font-text, system-ui); letter-spacing: 0.01em; white-space: nowrap; cursor: pointer;
 }
-.lb:hover, .lb:focus-visible { color: var(--text, #e8eaed); }
-.lb .tabular { font-variant-numeric: tabular-nums; min-width: 4.2em; text-align: right; }
-.lb .lb-age { min-width: 0; }
-.lb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good, #3fb37f); flex: none; }
-.lb-late .lb-dot { background: var(--warn, #e0af68); }
-.lb-late { border-color: color-mix(in srgb, var(--warn, #e0af68) 45%, transparent); }
-.lb-stale .lb-dot { background: var(--bad, #e5484d); }
-.lb-stale { border-color: color-mix(in srgb, var(--bad, #e5484d) 45%, transparent); }
-.lb-src { color: var(--text-2, #80868b); opacity: 0.8; }
-.lb-card { margin: 0; display: grid; gap: 4px; font-size: 12px; }
-.lb-card > div { display: flex; justify-content: space-between; gap: 12px; }
-.lb-card dt { color: var(--text-2, #9aa0a6); }
-.lb-card dd { margin: 0; text-align: right; }
-@media (prefers-reduced-motion: no-preference) { .lb-dot { transition: background-color 200ms; } }
+.lvb:hover, .lvb:focus-visible { color: var(--text, #e8eaed); }
+.lvb .tabular { font-variant-numeric: tabular-nums; min-width: 4.2em; text-align: right; }
+.lvb .lvb-age { min-width: 0; }
+.lvb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good, #3fb37f); flex: none; }
+.lvb-late .lvb-dot { background: var(--warn, #e0af68); }
+.lvb-late { border-color: color-mix(in srgb, var(--warn, #e0af68) 45%, transparent); }
+.lvb-stale .lvb-dot { background: var(--bad, #e5484d); }
+.lvb-stale { border-color: color-mix(in srgb, var(--bad, #e5484d) 45%, transparent); }
+.lvb-src { color: var(--text-2, #80868b); opacity: 0.8; }
+.lvb-card { margin: 0; display: grid; gap: 4px; font-size: 12px; }
+.lvb-card > div { display: flex; justify-content: space-between; gap: 12px; }
+.lvb-card dt { color: var(--text-2, #9aa0a6); }
+.lvb-card dd { margin: 0; text-align: right; }
+@media (prefers-reduced-motion: no-preference) { .lvb-dot { transition: background-color 200ms; } }

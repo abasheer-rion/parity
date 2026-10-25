@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
 import {
-  bySource, bytes, dur, groupRum, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
+  bySource, bytes, dur, groupRum, isLiveEndpoint, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
   type FreshRow, type RumRow, type Status, type StepRow,
 } from "../lib/latency";
 
@@ -50,6 +50,7 @@ export function Latency() {
         </p>
       </div>
       <Hops fresh={fresh} runs={runs} rum={rum} now={now} />
+      <LiveFeeds rum={rum} />
       <Sources fresh={fresh} now={now} />
       <Pipelines runs={runs} steps={steps} />
       <Client rum={rum} />
@@ -257,7 +258,7 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
         const regionFetch = by("fetch", (r) => r.region);
         const endpoints = groupRum(rows, "fetch", (r) => r.endpoint).map((g) => ({ ...g, p95: percentile(g.bins, 0.95) ?? 0 })).sort((a, b) => b.p95 - a.p95).slice(0, 10);
         const sizes = by("bytes", (r) => r.endpoint);
-        const lags = groupRum(rows, "lag", (r) => r.endpoint);
+        const lags = groupRum(rows.filter((r) => !isLiveEndpoint(r.endpoint)), "lag", (r) => r.endpoint);
         return (
           <>
             <div className="table-wrap">
@@ -300,6 +301,61 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
               <p className="small muted">Timed refreshes, how late they ran (p95): {lags.map((g) => `${g.key} ${ms(percentile(g.bins, 0.95))}`).join("; ")}.</p>
             )}
           </>
+        );
+      }}</Pending>
+    </Card>
+  );
+}
+
+// ------------------------------------------------------------------ live feeds (DEC-0049)
+
+const HOP_NAME: Record<string, string> = { feed: "Exchange to our edge", edge: "At our edge", net: "Edge to browser", screen: "Browser to screen", e2e: "Exchange to screen" };
+
+interface EdgeStatus { src: string; feed?: string; upstream?: string; why?: string | null; viewers?: number; feedLagMs?: { p50: number | null; p95: number | null; p99: number | null; n: number }; upstreamOpens?: number; error?: string }
+
+function useEdgeStatus(): EdgeStatus[] | null | "error" {
+  const [v, setV] = useState<EdgeStatus[] | null | "error">(null);
+  useEffect(() => {
+    let live = true;
+    const load = () => fetch("/live/status", { cache: "no-store" }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((d: { sources: EdgeStatus[] }) => { if (live) setV(d.sources); }).catch(() => { if (live) setV("error"); });
+    void load();
+    const t = window.setInterval(load, 15_000);
+    return () => { live = false; window.clearInterval(t); };
+  }, []);
+  return v;
+}
+
+function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
+  const edge = useEdgeStatus();
+  return (
+    <Card title="Live feeds, last 7 days" help="Each streamed price carries the exchange's time, our edge's receive and send times, and the browser's receive and draw times, corrected for the browser's clock. Browsers send a small random sample every 30 seconds. The edge's own line state refreshes every 15 seconds.">
+      <div className="table-wrap" style={{ minHeight: 70 }}>
+        <table className="lat-table">
+          <caption className="small muted">Our edge now</caption>
+          <thead><tr><th>Source</th><th>Line</th><th className="num">Viewers</th><th className="num">Exchange to edge p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th></tr></thead>
+          <tbody>{edge === "error" ? <tr><td colSpan={7} className="muted small">Not available here.</td></tr>
+            : !edge ? <tr><td colSpan={7} className="muted small">Loading.</td></tr>
+            : edge.map((e) => (
+              <tr key={e.src}><td>{e.src}</td><td>{e.error ? "error" : `${e.upstream ?? "n/a"}${e.why ? ` (${e.why})` : ""}`}</td><td className="num">{e.viewers ?? 0}</td>
+                <td className="num">{ms(e.feedLagMs?.p50 ?? null)}</td><td className="num">{ms(e.feedLagMs?.p95 ?? null)}</td><td className="num">{ms(e.feedLagMs?.p99 ?? null)}</td><td className="num">{Math.max(0, (e.upstreamOpens ?? 0) - 1)}</td></tr>
+            ))}</tbody>
+        </table>
+      </div>
+      <Pending v={rum} rows={6}>{(rows) => {
+        const feeds = liveFeeds(rows);
+        if (!feeds.length) return <p className="muted small">No live samples from browsers yet.</p>;
+        return (
+          <div className="table-wrap">
+            <table className="lat-table">
+              <caption className="small muted">Real browsers, per hop</caption>
+              <thead><tr><th>Source</th><th>Hop</th><th className="num">Samples</th><th className="num">p50</th><th className="num">p95</th><th className="num">p99</th></tr></thead>
+              <tbody>{feeds.flatMap((f) => LIVE_HOPS.filter((h) => f.hops[h]).map((h) => {
+                const g = f.hops[h]!;
+                return <tr key={`${f.src}/${h}`}><td>{f.src}</td><td>{HOP_NAME[h]}</td><td className="num">{g.n}</td><td className="num">{ms(percentile(g.bins, 0.5))}</td><td className="num">{ms(percentile(g.bins, 0.95))}</td><td className="num">{ms(percentile(g.bins, 0.99))}</td></tr>;
+              }))}</tbody>
+            </table>
+          </div>
         );
       }}</Pending>
     </Card>

@@ -360,7 +360,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 /* Live data and strategy signals (DEC-0049). */
 .cg-attr { font-size: 10px; color: var(--text-2); white-space: nowrap; text-decoration: none; opacity: 0.85; flex: none; }
 .cg-attr:hover { color: var(--text); text-decoration: underline; }
-.cg-head .lb { margin-left: 4px; }
+.cg-head .lvb { margin-left: 4px; }
 .sgm { display: grid; gap: 2px; font-size: 12px; }
 .sgm-row { display: grid; grid-template-columns: 16px 1fr auto 34px; align-items: center; gap: 8px; padding: 4px 2px; border-radius: 4px; cursor: pointer; }
 .sgm-row:hover { background: var(--accent-soft, rgba(255, 255, 255, 0.04)); }

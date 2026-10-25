@@ -30,15 +30,15 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
   const label = `${feedLabel(feed, delay)}, ${meta?.name ?? src}. ${s?.last ? `Exchange to screen ${msText(s.last.e2e)}.` : ""} Data age ${msText(age)}.${up ? "" : " Line not connected."}`;
   return (
     <Popover label="Latency" width={300} placement="bottom-end" trigger={() => (
-      <button type="button" className={`lb lb-${fresh}`} aria-label={label}>
-        <i className="lb-dot" aria-hidden />
+      <button type="button" className={`lvb lvb-${fresh}`} aria-label={label}>
+        <i className="lvb-dot" aria-hidden />
         <span>{feedShort(feed, delay)}</span>
-        {!compact && <span className="lb-src">{meta?.short ?? src}</span>}
+        {!compact && <span className="lvb-src">{meta?.short ?? src}</span>}
         <span className="tabular">{s?.last ? msText(s.last.e2e) : up ? "waiting" : s?.line === "connecting" || s?.upstream === "connecting" ? "connecting" : "offline"}</span>
-        {!compact && age != null && <span className="tabular lb-age">{msText(age)} old</span>}
+        {!compact && age != null && <span className="tabular lvb-age">{msText(age)} old</span>}
       </button>
     )}>
-      <dl className="lb-card">
+      <dl className="lvb-card">
         <div><dt>Feed</dt><dd>{feedLabel(feed, delay)}</dd></div>
         <div><dt>Source</dt><dd>{meta ? <a href={meta.terms} target="_blank" rel="noreferrer">{meta.name}</a> : src}</dd></div>
         <div><dt>Exchange time</dt><dd className="tabular">{time(s?.lastTe)}</dd></div>
@@ -64,14 +64,14 @@ export function StaticBadge({ feed, source, asOf, compact = false, terms, delayM
   const label = `${feedLabel(feed, delayMin)}, ${source}. Data age ${msText(age)}.`;
   return (
     <Popover label="Data age" width={260} placement="bottom-end" trigger={() => (
-      <button type="button" className={`lb lb-${fresh}`} aria-label={label}>
-        <i className="lb-dot" aria-hidden />
+      <button type="button" className={`lvb lvb-${fresh}`} aria-label={label}>
+        <i className="lvb-dot" aria-hidden />
         <span>{feedShort(feed, delayMin)}</span>
-        {!compact && <span className="lb-src">{source}</span>}
-        <span className="tabular lb-age">{msText(age)} old</span>
+        {!compact && <span className="lvb-src">{source}</span>}
+        <span className="tabular lvb-age">{msText(age)} old</span>
       </button>
     )}>
-      <dl className="lb-card">
+      <dl className="lvb-card">
         <div><dt>Feed</dt><dd>{feedLabel(feed, delayMin)}</dd></div>
         <div><dt>Source</dt><dd>{terms ? <a href={terms} target="_blank" rel="noreferrer">{source}</a> : source}</dd></div>
         <div><dt>Last value</dt><dd className="tabular">{Number.isFinite(t) ? new Date(t).toISOString().slice(0, 16).replace("T", " ") : "n/a"}</dd></div>

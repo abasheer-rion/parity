@@ -224,3 +224,29 @@ export async function loadHealthExtras(): Promise<{ fresh: FreshRow[]; steps: St
   for (const r of [news, prices, queue]) if (r.error) throw r.error;
   return { fresh: [...(news.data ?? []), ...(prices.data ?? [])] as FreshRow[], steps: (queue.data ?? []) as StepRow[] };
 }
+
+// ------------------------------------------------------------------ live feeds (DEC-0049)
+
+/** The hops the live feeds report, in trip order. */
+export const LIVE_HOPS = ["feed", "edge", "net", "screen", "e2e"] as const;
+export type LiveHop = (typeof LIVE_HOPS)[number];
+const LIVE_EP = /^trade:live\/([a-z0-9-]+)\/(feed|edge|net|screen|e2e)$/;
+
+/** Per live feed, each hop's summed histogram (browser samples, metric "lag", in ms). */
+export function liveFeeds(rows: RumRow[]): { src: string; hops: Partial<Record<LiveHop, RumGroup>> }[] {
+  const out = new Map<string, Partial<Record<LiveHop, RumGroup>>>();
+  for (const r of rows) {
+    if (r.metric !== "lag") continue;
+    const m = r.endpoint.match(LIVE_EP);
+    if (!m) continue;
+    const [, src, hop] = m as unknown as [string, string, LiveHop];
+    const f = out.get(src) ?? {};
+    const g = f[hop] ?? { key: hop, n: 0, hits: 0, bins: [] };
+    g.n += r.n; g.hits += r.hits; g.bins = addBins(g.bins, r.bins);
+    f[hop] = g;
+    out.set(src, f);
+  }
+  return [...out.entries()].map(([src, hops]) => ({ src, hops })).sort((a, b) => a.src.localeCompare(b.src));
+}
+
+export const isLiveEndpoint = (e: string) => e.startsWith("trade:live/");
