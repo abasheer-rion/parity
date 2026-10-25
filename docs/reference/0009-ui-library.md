@@ -48,16 +48,18 @@ Parity Terminal overrides colour and radius tokens on `.ptm` in the same file, s
 
 | Group | Parts |
 | --- | --- |
-| Text and numbers | `Heading`, `Text`, `Label`, `Kbd`, `Money`, `Delta`, `fmt` (pct, signedPct, num, compact, date) |
-| Buttons | `Button` (primary, secondary, tertiary, outline, danger; sm, md, lg; loading; as a link), `IconButton`, `ButtonGroup` |
-| Inputs | `Input`, `SearchInput`, `Select`, `Segmented` (sliding thumb), `Toggle`, `Checkbox`, `Tabs` (sliding underline, arrow keys) |
+| Text and numbers | `Heading`, `Text`, `Label`, `Kbd`, `Money`, `Delta`, `Num` (tabular figures, true minus, sign colour, switches to 1.2M by itself when the full number does not fit), `formatFull`, `formatCompact`, `fmt` (pct, signedPct, num, compact, date) |
+| Buttons | `Button` (primary, secondary, ghost, outline, danger; sm, md, lg; loading; icon; as a link; "tertiary" is the older name for ghost), `IconButton` (sm, md, lg; always labelled), `ButtonGroup` |
+| Inputs | `Input`, `SearchInput`, `Field` (label, help, error read out), `Select`, `Segmented` (sliding thumb), `RadioGroup`, `Slider`, `Toggle` (switch), `Checkbox`, `Tabs` (sliding underline, arrow keys) |
 | Filters and sorting | `FilterBar`, `FilterChip`, `Separator`, `useFilters`, `useSort` |
 | Tables | `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links; `expand` rows that open in place; `maxHeight` for a sticky header in its own box; `virtual` for thousands of rows; rows glide on a sort), `ShareBar` |
 | Long lists | `VirtualList`, `useVirtual` (draw only the rows on screen, rows may grow) |
 | Expand | `Collapse`, `Disclosure`, `Accordion`, `useDisclosure` |
-| Layout | `PageHeader`, `Panel`, `Grid`, `Stat`, `KeyValues`, `Section`, `Badge`, `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState` |
+| Layout | `PageHeader`, `Panel` (`glass` for a frosted card), `Grid`, `Stat`, `KeyValues`, `Section`, `Badge` (neutral, accent, good, warning, bad, info, dark), `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState` |
+| Navigation and identity | `Breadcrumb`, `Pagination`, `Avatar`, `Tag` (removable) |
+| Feedback | `ErrorState` (with Retry), `ProgressBar` (known or busy), `Spinner` |
 | Loading | `Skeleton`, `SkeletonText`, `SkeletonStat`, `SkeletonChart`, `SkeletonTable`, `SkeletonCard`, `PageSkeleton` |
-| Overlays | `Tooltip`, `Popover`, `Menu`, `Dialog`, `Drawer`, `toast` and `dismissToast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
+| Overlays | `Tooltip`, `Popover`, `Menu` (dropdown), `Dialog`, `Drawer`, `Sheet` (bottom drawer), `CommandPalette`, `TourStep` (one step of a product tour), `toast` and `dismissToast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
 | Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `AnimatedNumber`, `Stagger` (or the class `STAGGER`), `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `HeroGlow`; hooks `usePresence`, `useFlip`, `useReducedMotion`; durations `--dur-1` to `--dur-4`. Charts and sparklines draw in by themselves. Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
 | Data | `useResource` (show the last copy at once, refresh it quietly), `preload` |
 | Charts | `HeroChart`, `LineChart`, `BarChart`, `FanChart` (spread of outcomes after past events: single paths, middle-half and full-range bands, median), `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |

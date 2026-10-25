@@ -616,7 +616,7 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .news-main { min-width: 0; flex: 1; }
 .news-title { all: unset; cursor: pointer; color: var(--text); font-weight: var(--fw-medium); line-height: 1.35; }
 .news-title:hover { text-decoration: underline; }
-.news-title:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.news-title:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 2px; }
 .news-sub { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: 2px; }
 .news-sub > * + *::before { content: "·"; margin-right: var(--space-2); }
 .news-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }

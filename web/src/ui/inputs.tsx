@@ -122,3 +122,48 @@ export function Tabs<T extends string>({ value, onChange, tabs, label, tone }: {
     </div>
   );
 }
+
+/** A labelled field around any control, with help text and an error read out by screen readers. */
+export function Field({ label, help, error, children, id }: { label: ReactNode; help?: ReactNode; error?: ReactNode; children: ReactNode; id?: string }) {
+  const hid = id ? `${id}-help` : undefined;
+  return (
+    <label className={`ui-field ${error ? "has-error" : ""}`}>
+      <span className="ui-field-label">{label}</span>
+      {children}
+      {error ? <span className="ui-field-error" role="alert" id={hid}>{error}</span> : help ? <span className="ui-field-help" id={hid}>{help}</span> : null}
+    </label>
+  );
+}
+
+/** Choose exactly one from a short list, all visible. Arrow keys move, as in a native group. */
+export function RadioGroup<T extends string>({ value, onChange, options, label, name, inline }:
+  { value: T; onChange: (v: T) => void; options: [T, ReactNode][]; label: string; name: string; inline?: boolean }) {
+  return (
+    <fieldset className={`ui-radios ${inline ? "inline" : ""}`}>
+      <legend className="ui-field-label">{label}</legend>
+      {options.map(([v, l]) => (
+        <label key={v} className="ui-radio">
+          <input type="radio" name={name} value={v} checked={v === value} onChange={() => onChange(v)} />
+          <span className="ui-radio-dot" aria-hidden />
+          <span>{l}</span>
+        </label>
+      ))}
+    </fieldset>
+  );
+}
+
+/** A number picked by dragging, with the value printed beside it in tabular figures. */
+export function Slider({ value, onChange, min = 0, max = 100, step = 1, label, format = String }:
+  { value: number; onChange: (v: number) => void; min?: number; max?: number; step?: number; label: string; format?: (v: number) => string }) {
+  const pct = ((value - min) / (max - min || 1)) * 100;
+  return (
+    <label className="ui-slider">
+      <span className="ui-field-label">{label}</span>
+      <span className="ui-slider-row">
+        <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))}
+          style={{ "--fill": `${pct}%` } as CSSProperties} aria-valuetext={format(value)} />
+        <output className="ui-num">{format(value)}</output>
+      </span>
+    </label>
+  );
+}
