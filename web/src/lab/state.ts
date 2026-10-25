@@ -1,6 +1,6 @@
 // Parity Workbench's views, keys and settings (DEC-0043). Settings stay in this browser.
 
-export type View = "try" | "whatif" | "compare" | "search" | "edges" | "settings";
+export type View = "try" | "whatif" | "compare" | "search" | "edges" | "live" | "settings";
 
 export const VIEWS: { id: View; label: string; short: string; icon: string; research?: boolean }[] = [
   { id: "try", label: "Try settings", short: "Try", icon: "flask" },
@@ -8,6 +8,7 @@ export const VIEWS: { id: View; label: string; short: string; icon: string; rese
   { id: "compare", label: "Compare", short: "Compare", icon: "compare" },
   { id: "search", label: "Strategy search", short: "Search", icon: "search", research: true },
   { id: "edges", label: "Edge Lab", short: "Edge Lab", icon: "checkCircle", research: true },
+  { id: "live", label: "Live prices", short: "Live", icon: "pulse" },
   { id: "settings", label: "Settings", short: "Settings", icon: "gear" },
 ];
 

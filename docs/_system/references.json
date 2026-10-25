@@ -35319,6 +35319,153 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-744200f2",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bitstamp terms of use",
+      "venue": "Bitstamp",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bitstamp.net/terms-of-use/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9499b453",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Gemini market data agreement",
+      "venue": "Gemini",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.gemini.com/legal/market-data-agreement",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-90f4c1c5",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bitfinex market data terms",
+      "venue": "Bitfinex",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bitfinex.com/legal/general/market-data",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9c83f795",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance.US terms of use",
+      "venue": "Binance.US",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.binance.us/terms-of-use",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1139fcb8",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "dYdX terms of use",
+      "venue": "dYdX Operations Services",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://dydx.trade/terms",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ef118e1c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Pyth Network pricing",
+      "venue": "Pyth Network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pyth.network/pricing",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-da3193de",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "IEX Exchange market data",
+      "venue": "IEX",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://iextrading.com/trading/market-data/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

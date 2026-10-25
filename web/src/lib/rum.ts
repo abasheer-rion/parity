@@ -81,7 +81,7 @@ export function payload(name: string, events: RumEvent[]): string {
   return JSON.stringify({ a: name, ev: sorted });
 }
 
-function endpointUrl(): string {
+export function endpointUrl(): string {
   const http = location.protocol === "http:" || location.protocol === "https:";
   return http ? "/rum" : "https://parity.endyland.com/rum"; // the desktop app's pages are app://
 }

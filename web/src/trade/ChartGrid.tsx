@@ -1,7 +1,7 @@
 // Parity Trade's chart area: one, two or four charts, each with its own symbol and
 // timeframe, sharing the chart type and indicators. The active chart drives the order
 // ticket and takes drawings (saved to the account per symbol).
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button, Dialog } from "../ui";
 import { ProChart, type ChartType, type Drawing, type DrawTool } from "../ui/proChart";
 import { TIMEFRAMES, type Timeframe } from "../lib/bars";
@@ -10,6 +10,11 @@ import { digitsFor, loadBars, priceText, type Instrument, type Loadable } from "
 import { newId, table, useRows, type Row } from "../lib/userStore";
 import { toast } from "../ui";
 import type { Cell, Layout } from "./state";
+import { LiveBadge, StaticBadge } from "../components/LiveBadge";
+import type { CandleBuilder, LiveTf } from "../lib/live/candles";
+import type { Signal } from "../lib/signals";
+import { instrumentForKey, tfFor, tfsFor, useClosedCount, useLiveBars, useUniverse, type UniverseDoc } from "./live";
+import { SignalCard, toChartMarkers, useSignals } from "./signalsUi";
 
 interface DrawingRow extends Row { symbol: string; kind: Drawing["kind"]; points: Drawing["points"] }
 export const drawingsTable = table<DrawingRow>("trade_drawings");
@@ -28,13 +33,39 @@ export function useBars(inst: Instrument | undefined, tf: Timeframe): Loadable<B
 
 export const findInst = (list: Instrument[], key: string) => list.find((s) => s.key === key) ?? list.find((s) => s.key === "eq.US_MKT") ?? list[0];
 
-function ChartCell({ cell, index, active, list, type, log, indicators, tool, onActivate, onDrawn, onTf, maximised, onMax, onUncompare }: {
-  cell: Cell; index: number; active: boolean; list: Instrument[]; type: ChartType; log: boolean; indicators: IndicatorInstance[];
-  tool: DrawTool; onActivate: () => void; onDrawn: () => void; onTf: (tf: Timeframe) => void; maximised: boolean; onMax: () => void; onUncompare: () => void;
+/** The live price in a chart header, written straight to the page on each frame (no re-render per tick). */
+function LivePx({ b }: { b: CandleBuilder }) {
+  const px = useRef<HTMLSpanElement>(null);
+  const chg = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const draw = () => {
+      const last = b.bars[b.bars.length - 1], prev = b.bars[b.bars.length - 2];
+      if (!last) return;
+      if (px.current) px.current.textContent = priceText(last.close, digitsFor(last.close));
+      if (chg.current && prev) {
+        const c = (last.close / prev.close - 1) * 100;
+        chg.current.textContent = `${c >= 0 ? "+" : "−"}${Math.abs(c).toFixed(2)}%`;
+        chg.current.className = `cg-chg tabular ${c >= 0 ? "good" : "bad"}`;
+      }
+    };
+    draw();
+    return b.on(draw);
+  }, [b]);
+  return <><span ref={px} className="cg-px tabular" /><span ref={chg} className="cg-chg tabular" /></>;
+}
+
+function ChartCell({ cell, index, active, list, universe, signalsOn, type, log, indicators, tool, onActivate, onDrawn, onTf, onLtf, maximised, onMax, onUncompare }: {
+  cell: Cell; index: number; active: boolean; list: Instrument[]; universe: UniverseDoc | null; signalsOn: string[]; type: ChartType; log: boolean; indicators: IndicatorInstance[];
+  tool: DrawTool; onActivate: () => void; onDrawn: () => void; onTf: (tf: Timeframe) => void; onLtf: (tf: LiveTf) => void; maximised: boolean; onMax: () => void; onUncompare: () => void;
 }) {
-  const inst = findInst(list, cell.symbol);
-  const bars = useBars(inst, cell.tf);
-  const cmpInst = cell.cmp ? list.find((s) => s.key === cell.cmp && s.key !== inst?.key) : undefined;
+  const ext = useMemo(() => instrumentForKey(cell.symbol, universe), [cell.symbol, universe]);
+  const inst = ext ?? findInst(list, cell.symbol);
+  const liveRef = ext?.live;
+  const ltf: LiveTf = liveRef ? tfFor(liveRef.src, cell.ltf) : "1m";
+  const liveState = useLiveBars(liveRef, ltf);
+  const builder = liveState.status === "ok" ? liveState.data : null;
+  const bars = useBars(ext ? undefined : inst, cell.tf);
+  const cmpInst = cell.cmp && !ext ? list.find((s) => s.key === cell.cmp && s.key !== inst?.key) : undefined;
   const cmpBars = useBars(cmpInst, cell.tf);
   const compare = useMemo(() => (cmpInst && cmpBars.status === "ok" ? { label: cmpInst.short || cmpInst.label, bars: cmpBars.data } : null), [cmpInst, cmpBars]);
   const drawings = useRows(drawingsTable, "trade_drawings", { symbol: inst?.key ?? "" });
@@ -44,12 +75,19 @@ function ChartCell({ cell, index, active, list, type, log, indicators, tool, onA
     drawingsTable.insert({ symbol: inst.key, kind: d.kind, points: d.points }).catch((e: Error) => toast(e.message, { tone: "bad" }));
     onDrawn();
   }, [inst, onDrawn]);
-  const ok = bars.status === "ok";
-  const hasVolume = ok && bars.data.some((b) => b.volume != null);
+  const closed = useClosedCount(builder);
+  const data = builder ? builder.bars : bars.status === "ok" ? bars.data : null;
+  const sigs = useSignals(data, builder ? closed : data?.length ?? 0, signalsOn);
+  const markers = useMemo(() => toChartMarkers(sigs), [sigs]);
+  const [picked, setPicked] = useState<Signal | null>(null);
+  const onMarker = useCallback((id: string) => setPicked(sigs.find((s) => s.id === id) ?? null), [sigs]);
+  const ok = !!data && !!inst;
+  const hasVolume = ok && data.some((b) => b.volume != null);
   const shown = useMemo(() => indicators.filter((i) => !indicatorDef(i.type).needsVolume || hasVolume), [indicators, hasVolume]);
-  const last = ok ? bars.data[bars.data.length - 1] : null;
-  const prev = ok ? bars.data[bars.data.length - 2] : null;
+  const last = !builder && data ? data[data.length - 1] : null;
+  const prev = !builder && data ? data[data.length - 2] : null;
   const chg = last && prev ? (last.close / prev.close - 1) * 100 : null;
+  const missing = liveRef ? liveState.status === "error" || liveState.status === "missing" : ext?.stock ? true : bars.status === "missing" || bars.status === "error";
 
   return (
     <section className={`cg-cell ${active ? "on" : ""}`} aria-label={`Chart ${index + 1}: ${inst?.short ?? ""}`} onPointerDown={onActivate}>
@@ -57,25 +95,35 @@ function ChartCell({ cell, index, active, list, type, log, indicators, tool, onA
         <button type="button" className="cg-sym" onClick={onActivate} aria-pressed={active}>{inst?.short || inst?.label || "n/a"}</button>
         <span className="cg-name">{inst?.label}</span>
         {cmpInst && <span className="cg-cmp">vs {cmpInst.short}<button type="button" onClick={onUncompare} aria-label={`Stop comparing with ${cmpInst.short}`}>×</button></span>}
-        <span className="cg-px tabular">{last ? priceText(last.close, digitsFor(last.close)) : ""}</span>
-        <span className={`cg-chg tabular ${chg == null ? "" : chg >= 0 ? "good" : "bad"}`}>{chg == null ? "" : `${chg >= 0 ? "+" : "−"}${Math.abs(chg).toFixed(2)}%`}</span>
+        {builder ? <LivePx b={builder} /> : <>
+          <span className="cg-px tabular">{last ? priceText(last.close, digitsFor(last.close)) : ""}</span>
+          <span className={`cg-chg tabular ${chg == null ? "" : chg >= 0 ? "good" : "bad"}`}>{chg == null ? "" : `${chg >= 0 ? "+" : "−"}${Math.abs(chg).toFixed(2)}%`}</span>
+        </>}
         <span className="cg-tfs" role="radiogroup" aria-label="Timeframe">
-          {TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => onTf(t.id)}>{t.label}</button>)}
+          {liveRef
+            ? tfsFor(liveRef.src).map((t) => <button key={t.id} type="button" role="radio" aria-checked={ltf === t.id} className={ltf === t.id ? "on" : ""} onClick={() => onLtf(t.id)}>{t.label}</button>)
+            : TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => onTf(t.id)}>{t.label}</button>)}
         </span>
+        {liveRef?.src === "coingecko" && <a className="cg-attr" href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>}
+        {liveRef ? <LiveBadge src={liveRef.src} compact={!active} />
+          : ext?.stock ? <StaticBadge feed="eod" source="No licensed feed" asOf={null} compact={!active} />
+          : inst ? <StaticBadge feed="eod" source={inst.source} asOf={inst.asof || null} compact={!active} /> : null}
         <button type="button" className="cg-max" onClick={onMax} title={maximised ? "Restore (Alt+Enter)" : "Maximise (Alt+Enter)"} aria-label={maximised ? "Restore chart" : "Maximise chart"}>
           <svg width="11" height="11" viewBox="0 0 11 11" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.2">{maximised ? <><rect x="2.6" y="0.6" width="7.8" height="7.8" /><path d="M0.6 2.6v7.8h7.8" /></> : <rect x="0.6" y="0.6" width="9.8" height="9.8" />}</svg>
         </button>
       </header>
       <div className="cg-body">
         {ok && inst ? (
-          <ProChart fill bare bars={bars.data} label={inst.short || inst.label} type={type} indicators={shown} log={log} compare={compare}
-            drawings={saved} tool={active ? tool : "none"} onDraw={onDraw} height={440} paneHeight={110} digits={digitsFor(inst.last)} />
-        ) : bars.status === "missing" || bars.status === "error" ? (
-          <div className="cg-msg">No data</div>
+          <ProChart fill bare bars={data} live={builder} viewKey={`${inst.key}:${builder ? ltf : cell.tf}`} label={inst.short || inst.label} type={type} indicators={shown} log={log} compare={compare}
+            drawings={saved} tool={active ? tool : "none"} onDraw={onDraw} height={440} paneHeight={110} digits={digitsFor(data[data.length - 1]?.close ?? inst.last)}
+            markers={markers} onMarker={onMarker} />
+        ) : missing ? (
+          <div className="cg-msg">{ext?.stock ? "No licensed price feed for single stocks yet" : "No data"}</div>
         ) : (
           <div className="cg-msg cg-loading" aria-label="Loading chart" />
         )}
       </div>
+      <SignalCard signal={picked} symbol={inst?.short ?? ""} onClose={() => setPicked(null)} />
     </section>
   );
 }
@@ -83,18 +131,21 @@ function ChartCell({ cell, index, active, list, type, log, indicators, tool, onA
 export function ChartGrid({ list, layout, set, tool, setTool }: {
   list: Instrument[]; layout: Layout; set: (f: (l: Layout) => Layout) => void; tool: DrawTool; setTool: (t: DrawTool) => void;
 }) {
+  // The stock list (for names) loads only when a chart shows a stock.
+  const universe = useUniverse(layout.cells.some((c) => c.symbol.startsWith("S:")));
   const n = layout.max != null ? 1 : layout.grid;
   const idx = layout.max != null ? [layout.max] : Array.from({ length: layout.grid }, (_, i) => i);
   const onDrawn = useCallback(() => setTool("none"), [setTool]);
   return (
     <div className={`cg cg-${n}`}>
       {idx.map((i) => (
-        <ChartCell key={i} index={i} cell={layout.cells[i]} active={layout.active === i} list={list} type={layout.type} log={layout.log} indicators={layout.indicators}
+        <ChartCell key={i} index={i} cell={layout.cells[i]} active={layout.active === i} list={list} universe={universe} signalsOn={layout.signals} type={layout.type} log={layout.log} indicators={layout.indicators}
           tool={tool} onDrawn={onDrawn} maximised={layout.max === i}
           onActivate={() => { if (layout.active !== i) set((l) => ({ ...l, active: i })); }}
           onTf={(tf) => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { ...c, tf } : c)) }))}
+          onLtf={(ltf) => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { ...c, ltf } : c)) }))}
           onMax={() => set((l) => ({ ...l, active: i, max: l.max === i ? null : i }))}
-          onUncompare={() => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { symbol: c.symbol, tf: c.tf } : c)) }))} />
+          onUncompare={() => set((l) => ({ ...l, cells: l.cells.map((c, j) => (j === i ? { symbol: c.symbol, tf: c.tf, ...(c.ltf ? { ltf: c.ltf } : {}) } : c)) }))} />
       ))}
     </div>
   );

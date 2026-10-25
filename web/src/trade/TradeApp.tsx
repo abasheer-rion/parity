@@ -37,6 +37,11 @@ import { NameDialog, WatchlistsView, WatchMini } from "./WatchlistsView";
 import "./trade.css";
 import { rumRefresh } from "../lib/rum";
 import { Assistant } from "../assistant/Mount";
+import { instrumentForKey, tfFor, tfsFor, universeInstruments, useUniverse } from "./live";
+import { SignalsMenu } from "./signalsUi";
+import { setLiveApp } from "../lib/live/client";
+
+setLiveApp("trade");
 
 export function TradeApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <TradeShell />; }}</AppGuard>;
@@ -91,7 +96,11 @@ function TradeShell() {
   const [mtab, setMtab] = useState<MTab>("chart");
 
   const cell = layout.cells[layout.active];
-  const activeInst = findInst(list, cell.symbol);
+  // The whole symbol universe (SEC list and live symbols) loads once the search first opens.
+  const [wantUniverse, setWantUniverse] = useState(() => layout.cells.some((c) => c.symbol.startsWith("S:")));
+  const universe = useUniverse(wantUniverse);
+  const extra = useMemo(() => universeInstruments(universe), [universe]);
+  const activeInst = instrumentForKey(cell.symbol, universe) ?? findInst(list, cell.symbol);
   const symbol = activeInst?.key ?? cell.symbol;
 
   const openSymbol = useCallback((key: string, go = true) => {
@@ -123,7 +132,7 @@ function TradeShell() {
       const used = new Set(l.cells.map((c) => c.symbol).filter((k) => have.has(k)));
       let changed = false;
       const cells = l.cells.map((c) => {
-        if (have.has(c.symbol)) return c;
+        if (have.has(c.symbol) || c.symbol.startsWith("L:") || c.symbol.startsWith("S:")) return c;
         const alt = list.find((s) => s.kind === "price" && s.freq === "D" && !used.has(s.key));
         if (!alt) return c;
         used.add(alt.key); changed = true;
@@ -147,7 +156,8 @@ function TradeShell() {
   }, [list]);
 
   const [tool, setTool] = useState<DrawTool>("none");
-  const [finder, setFinder] = useState<{ open: boolean; mode: "symbols" | "all"; initial: string }>({ open: false, mode: "symbols", initial: "" });
+  const [finder, setFinderState] = useState<{ open: boolean; mode: "symbols" | "all"; initial: string }>({ open: false, mode: "symbols", initial: "" });
+  const setFinder = useCallback((f: typeof finder | ((x: typeof finder) => typeof finder)) => { setWantUniverse(true); setFinderState(f); }, []);
   const [indOpen, setIndOpen] = useState(false);
   const [keysOpen, setKeysOpen] = useState(false);
   const [alertFor, setAlertFor] = useState<string | null>(null);
@@ -256,7 +266,8 @@ function TradeShell() {
   const asof = useMemo(() => list.reduce((m, s) => (s.asof > m ? s.asof : m), ""), [list]);
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
-  const noData = insts.status === "missing" || insts.status === "error";
+  // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
+  const noData = (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>
@@ -271,7 +282,7 @@ function TradeShell() {
           </button>
           <span className="tb-brand" aria-hidden>PARITY <b>TRADE</b></span>
           {view === "chart" ? (
-            <ChartBar layout={layout} set={set} list={list} symbol={symbol} tool={tool} setTool={setTool} mobile={mobile}
+            <ChartBar layout={layout} set={set} list={list} inst={activeInst} symbol={symbol} tool={tool} setTool={setTool} mobile={mobile}
               onSearch={() => setFinder({ open: true, mode: "symbols", initial: "" })} onIndicators={() => setIndOpen(true)} setTf={setTf} setGrid={setGrid} />
           ) : <h1 className="tb-view">{viewLabel}</h1>}
           <span className="tb-gap" />
@@ -341,7 +352,7 @@ function TradeShell() {
           </nav>
         )}
 
-        <Finder open={finder.open} mode={finder.mode} initial={finder.initial} list={list} commands={commands} onPick={(k) => openSymbol(k)}
+        <Finder open={finder.open} mode={finder.mode} initial={finder.initial} list={list} extra={extra} commands={commands} onPick={(k) => openSymbol(k)}
           onClose={() => setFinder((f) => ({ ...f, open: false }))} />
         <IndicatorDialog open={indOpen} onClose={() => setIndOpen(false)} value={layout.indicators} onChange={(indicators) => set((l) => ({ ...l, indicators }))} />
         <AlertDialog symbol={alertFor} list={list} onClose={() => setAlertFor(null)} />
@@ -375,19 +386,22 @@ function EquityChip() {
   );
 }
 
-function ChartBar({ layout, set, list, symbol, tool, setTool, onSearch, onIndicators, setTf, setGrid, mobile }: {
-  layout: Layout; set: (f: (l: Layout) => Layout) => void; list: Instrument[]; symbol: string; tool: DrawTool; setTool: (t: DrawTool) => void;
+function ChartBar({ layout, set, list, inst, symbol, tool, setTool, onSearch, onIndicators, setTf, setGrid, mobile }: {
+  layout: Layout; set: (f: (l: Layout) => Layout) => void; list: Instrument[]; inst: (Instrument & { live?: { src: string } }) | undefined; symbol: string; tool: DrawTool; setTool: (t: DrawTool) => void;
   onSearch: () => void; onIndicators: () => void; setTf: (tf: Timeframe) => void; setGrid: (g: Grid) => void; mobile: boolean;
 }) {
-  const inst = list.find((s) => s.key === symbol);
   const cell = layout.cells[layout.active];
+  const live = inst?.live;
+  const ltf = live ? tfFor(live.src, cell.ltf) : null;
   return (
     <div className="cb" role="toolbar" aria-label="Chart">
       <button type="button" className="cb-sym" onClick={onSearch} title="Symbol search (type any letter)">
         <Icon name="search" size={12} /><strong>{inst?.short ?? "n/a"}</strong>
       </button>
       <span className="cb-group" role="radiogroup" aria-label="Timeframe">
-        {TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => setTf(t.id)} title={`${t.long} (Shift+${t.id})`}>{t.label}</button>)}
+        {live
+          ? tfsFor(live.src).map((t) => <button key={t.id} type="button" role="radio" aria-checked={ltf === t.id} className={ltf === t.id ? "on" : ""} onClick={() => set((l) => ({ ...l, cells: l.cells.map((c, i) => (i === l.active ? { ...c, ltf: t.id } : c)) }))}>{t.label}</button>)
+          : TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => setTf(t.id)} title={`${t.long} (Shift+${t.id})`}>{t.label}</button>)}
       </span>
       {!mobile && (
         <>
@@ -395,13 +409,16 @@ function ChartBar({ layout, set, list, symbol, tool, setTool, onSearch, onIndica
             {CHART_TYPES.map(([t, l]) => <option key={t} value={t}>{l}</option>)}
           </select>
           <button type="button" className="cb-btn" onClick={onIndicators} title="Indicators (/)">Indicators{layout.indicators.length ? ` ${layout.indicators.length}` : ""}</button>
+          <Popover label="Signals" width={340} trigger={() => <button type="button" className="cb-btn" title="Strategy signals on the chart">Signals{layout.signals.length ? ` ${layout.signals.length}` : ""}</button>}>
+            <SignalsMenu value={layout.signals} onChange={(signals) => set((l) => ({ ...l, signals }))} />
+          </Popover>
           <span className="cb-group cb-draw" role="radiogroup" aria-label="Drawing tool">
             {([["none", "Cursor", "Esc", "↖"], ["hline", "Horizontal line", "Alt+H", "─"], ["trend", "Trend line", "Alt+T", "╱"], ["fib", "Fibonacci", "Alt+F", "Fib"]] as [DrawTool, string, string, string][]).map(([t, l, k, g]) => (
               <button key={t} type="button" role="radio" aria-checked={tool === t} aria-label={l} className={tool === t ? "on" : ""} onClick={() => setTool(t)} title={`${l} (${k})`}>{g}</button>
             ))}
           </span>
           <select className="cb-select cb-cmp" aria-label="Compare with" value={cell.cmp ?? ""}
-            onChange={(e) => { const v = e.target.value; set((l) => ({ ...l, cells: l.cells.map((c, i) => (i === l.active ? (v ? { ...c, cmp: v } : { symbol: c.symbol, tf: c.tf }) : c)) })); }}>
+            onChange={(e) => { const v = e.target.value; set((l) => ({ ...l, cells: l.cells.map((c, i) => (i === l.active ? (v ? { ...c, cmp: v } : { symbol: c.symbol, tf: c.tf, ...(c.ltf ? { ltf: c.ltf } : {}) }) : c)) })); }}>
             <option value="">Compare</option>
             {list.filter((s) => s.key !== symbol).map((s) => <option key={s.key} value={s.key}>{s.short}  {s.label}</option>)}
           </select>

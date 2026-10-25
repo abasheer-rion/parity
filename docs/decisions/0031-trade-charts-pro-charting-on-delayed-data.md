@@ -44,6 +44,7 @@ The owner asked for "an actual trading platform" that people and researchers can
 - [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [RES-0021: How trading platforms lay out a workspace](../research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [CMP-0006: TradingView, browser charts and a social network for traders](../competitors/0006-tradingview.md)
 - [CMP-0008: thinkorswim, Schwab's dense pro trading platform for options and futures traders](../competitors/0008-thinkorswim.md)

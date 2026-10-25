@@ -2,6 +2,7 @@
 // week and year change and a one-year line. Saved to the person's account (trade_watchlists);
 // the preview without sign-in keeps them in this browser. Also the small watchlist panel
 // beside the chart.
+import { StaticBadge } from "../components/LiveBadge";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Dialog, Icon, Input, Sparkline, toast } from "../ui";
 import type { Point } from "../lib/types";
@@ -37,6 +38,9 @@ export function useWatchlists(list: Instrument[]) {
 const fail = (e: Error) => toast(e.message, { tone: "bad" });
 
 /** The small list beside the chart: symbol, last, day change. Click loads it into the active chart. */
+/** The oldest as-of date among the rows: the badge judges a list by its stalest price. */
+const oldest = (rows: Instrument[]) => rows.reduce<string | null>((m, s) => (s.asof && (!m || s.asof < m) ? s.asof : m), null);
+
 export function WatchMini({ list, current, onSymbol }: { list: Instrument[]; current: string; onSymbol: (k: string) => void }) {
   const w = useWatchlists(list);
   return (
@@ -47,6 +51,7 @@ export function WatchMini({ list, current, onSymbol }: { list: Instrument[]; cur
         </select>
         <InstrumentSelect list={list.filter((s) => !w.active?.items.includes(s.key))} value="" label="Add symbol" allowNone="+ Add"
           onChange={(k) => { if (w.active && k) void watchlistsTable.update(w.active.id, { items: [...w.active.items, k] }).catch(fail); }} />
+        <StaticBadge feed="eod" source="Daily closes" asOf={oldest(w.rows)} compact />
       </div>
       <TTable<Instrument> label="Watchlist" rows={w.rows} rowKey={(s) => s.key} onRow={(s) => onSymbol(s.key)} active={(s) => s.key === current}
         empty={w.lists.loading ? "Loading" : "Empty"}
@@ -87,6 +92,7 @@ export function WatchlistsView({ list, onSymbol, onAlert }: { list: Instrument[]
         <Button size="sm" onClick={() => setNaming("rename")} disabled={!active}>Rename</Button>
         <Button size="sm" variant="tertiary" onClick={() => setDeleting(true)} disabled={!active || w.sorted.length < 2}>Delete</Button>
         <span className="vbar-gap" />
+        <StaticBadge feed="eod" source="Daily closes" asOf={oldest(w.rows)} />
         <InstrumentSelect list={list.filter((s) => !active?.items.includes(s.key))} value="" onChange={(k) => { if (active && k) void save([...active.items, k]); }} label="Add symbol" allowNone="+ Add symbol" />
       </div>
       <section className="vbox vbox-fill" aria-label={active?.name ?? "Watchlist"}>

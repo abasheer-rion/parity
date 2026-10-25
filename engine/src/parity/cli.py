@@ -84,8 +84,9 @@ def _data(args) -> int:
             print(json.dumps(rows, indent=1))
             return 0
         for r in rows:
-            print(f"{r['id']:<15} {r['status']:<13} {r['series']:>3} series  key: {r['key']}")
-            print(f"{'':<15} {r['name']}. {r['licence']}. Cost: {r['cost']}."
+            print(f"{r['id']:<17} {r['status']:<13} {r['series']:>3} series  key: {r['key']}")
+            print(f"{'':<17} {r['name']}. {r['licence']}. Cost: {r['cost']}."
+                  + (f" Reaches a screen: {r['feed']}." if r.get("feed") else "")
                   + (f" {r['note'][:1].upper()}{r['note'][1:]}." if r["note"] else ""))
         on = sum(r["status"] == "on" for r in rows)
         print(f"\n{on} of {len(rows)} providers on. Keys are read from the environment and "

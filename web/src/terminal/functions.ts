@@ -8,6 +8,7 @@ export const FUNCTIONS: Fn[] = [
   { code: "CMP", title: "Compare", what: "Two series or strategies: rebased, spread and ratio, rolling correlation, beta, drawdowns", args: "<a> <b>" },
   { code: "HEAT", title: "Heat map", what: "Moves by group, coloured by how unusual they are" },
   { code: "MOV", title: "Top movers", what: "Biggest risers and fallers over a window" },
+  { code: "LIVE", title: "Live prices", what: "Streamed prices with a live chart and how old each price is" },
   { code: "WMAP", title: "World map", what: "Currencies on the world map through time; click a country to link its currency", sim: true },
   { code: "CORR", title: "Correlations", what: "Which markets move together, through time", sim: true },
   { code: "SCEN", title: "Scenario", what: "What followed past events like the one you describe", sim: true },

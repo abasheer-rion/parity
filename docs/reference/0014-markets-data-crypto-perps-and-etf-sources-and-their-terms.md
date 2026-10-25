@@ -4,10 +4,10 @@ title: Markets data, crypto, perps and ETF sources and their terms
 type: reference
 status: current
 created: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-25
 authors: [ayan]
 tags: [crypto, data]
-related: [DEC-0018, DEC-0019, REF-0003, DEC-0015]
+related: [DEC-0018, DEC-0019, REF-0003, DEC-0015, DEC-0052]
 ---
 
 # Markets data, crypto, perps and ETF sources and their terms
@@ -51,6 +51,31 @@ Commands: `parity markets fetch` (skips sources fetched recently), `parity marke
 - New filings come from EDGAR full-text search (`https://efts.sec.gov/LATEST/search-index?forms=N-1A`), for forms N-1A (a new fund company), 485APOS (a new fund or a big change at an existing company) and S-1 (a trust registering shares, the route for spot crypto ETFs). S-1 is also how companies go public, so S-1 filers named Inc, Corp or Co are dropped.
 - Rules: at most 10 requests a second and a user agent that names a contact (https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data). The engine adds `PARITY_CONTACT` to its user agent and skips SEC sources when it is not set. A generic project URL was refused with 403 in testing; an email address worked.
 - Information on sec.gov is public and may be copied or distributed; the SEC asks to be cited (https://www.sec.gov/privacy).
+
+## Live and streamed data (read 25 October 2026)
+
+For the live charts in Trade, the Terminal and the Workbench ([DEC-0052](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)) we read the market data terms of every source below again. A source that answers without a key is not a source we may show: only the terms decide.
+
+| Source | What | Display on our site | On in the fan-out |
+| --- | --- | --- | --- |
+| CoinGecko public API | 100 largest coins, polled every 30 s, about 1 minute behind | Yes, with "Data provided by CoinGecko" linked next to the data (https://www.coingecko.com/en/api_terms) | Yes |
+| SEC company tickers | Every US-listed symbol, for search only | Yes, public information, cite the SEC (https://www.sec.gov/privacy) | Yes |
+| Hyperliquid | Real-time perp trades | Unclear: no data clause, app closed to US persons (https://app.hyperliquid.xyz/terms, 15 June 2026) | Built, off; owner call |
+| Kraken | Real-time spot trades | No, unless Kraken consents (https://www.kraken.com/legal/global-terms, 19 October 2026) | Built, off |
+| Coinbase Exchange and Advanced Trade | Real-time spot | No: "may not redistribute, display, or disseminate the Market Data", terms of 7 August 2026 (https://www.coinbase.com/legal/market_data) | No |
+| Bitstamp | Real-time spot | No: prices may not be used "on any other website" (https://www.bitstamp.net/terms-of-use/, 30 May 2025) | No |
+| Gemini | Real-time spot | Personal and internal use only; a redistribution agreement would allow it (https://www.gemini.com/legal/market-data-agreement, 12 October 2025) | No |
+| Bitfinex | Real-time spot | No redistribution without written consent (https://www.bitfinex.com/legal/general/market-data) | No |
+| Binance.US | Real-time spot | No public display (https://www.binance.us/terms-of-use, 5 June 2026) | No |
+| Crypto.com, KuCoin, Gate, Bitget, MEXC, HTX | Real-time spot and perps | No: each forbids display without consent, is personal use only or bars the US | No |
+| dYdX v4 indexer | Real-time perps | No data licence; not available to US persons (https://dydx.trade/terms) | No |
+| Pyth Network | Real-time crypto, FX, metals, US stocks | Needs a key since 26 August 2026; display from 500 USD a month (https://www.pyth.network/pricing) | No |
+| CoinCap | Crypto prices | Needs a key | No |
+| ECB reference rates, Frankfurter | Daily FX | Yes, ECB cited (https://www.ecb.europa.eu/services/disclaimer/html/index.en.html) | Daily series already on the site |
+| IEX historical data | Next-day IEX trades only | Yes, with the IEX credit line (https://iextrading.com/trading/market-data/) | Not built: raw packet files, 8% of volume |
+| Cboe delayed quotes, FINRA, Tiingo, Alpha Vantage, Finnhub, Massive free | US stocks | No: personal or non-commercial use only | No |
+
+**No free source allows real-time crypto, real-time FX or any single-stock price on a public site.** The paid options with display rights, and their prices, are listed in DEC-0052 as owner decisions.
 
 ## Turned down
 
@@ -103,5 +128,6 @@ The "New products and hype terms" entries in the glossary cite these:
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](../decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 <!-- backlinks:end -->

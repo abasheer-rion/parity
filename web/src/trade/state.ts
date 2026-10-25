@@ -5,6 +5,8 @@ import { CHART_TYPES, type ChartType } from "../ui/proChart";
 import { TIMEFRAMES, type Timeframe } from "../lib/bars";
 import { INDICATORS, type IndicatorInstance } from "../lib/indicators";
 import { readPref, writePref } from "./shared";
+import { LIVE_TFS, type LiveTf } from "../lib/live/candles";
+import { RULES } from "../lib/signals";
 
 export type View = "chart" | "watchlists" | "screener" | "portfolio" | "orders" | "alerts" | "strategies" | "settings";
 
@@ -22,7 +24,7 @@ export const VIEW_IDS = VIEWS.map((v) => v.id);
 
 export type DockTab = "positions" | "orders" | "fills" | "pnl";
 export type Grid = 1 | 2 | 4;
-export interface Cell { symbol: string; tf: Timeframe; /** A second symbol drawn over the chart, both indexed to 100. */ cmp?: string }
+export interface Cell { symbol: string; tf: Timeframe; /** A second symbol drawn over the chart, both indexed to 100. */ cmp?: string; /** Timeframe for a live symbol (DEC-0052). */ ltf?: LiveTf }
 
 export interface Layout {
   grid: Grid;
@@ -33,6 +35,8 @@ export interface Layout {
   type: ChartType;
   log: boolean;
   indicators: IndicatorInstance[];
+  /** Strategy rules drawn as buy, sell and exit markers (DEC-0052). */
+  signals: string[];
   side: { open: boolean; width: number; dock: "right" | "left"; ticket: boolean; watch: boolean; split: number };
   bottom: { open: boolean; height: number; tab: DockTab };
 }
@@ -56,6 +60,9 @@ export const TIME_ZONES: [string, string][] = [
 ];
 
 export const DEFAULT_SYMBOLS = ["eq.US_MKT", "crypto.BTC", "fx.EUR", "cmd.WTI"];
+export const DEFAULT_SIGNALS = ["fx_trend_3m", "fx_macd", "fx_donchian"];
+const RULE_IDS = RULES.map((r) => r.id);
+const LTF_IDS = LIVE_TFS.map((t) => t.id);
 
 export const DEFAULT_SETTINGS: Settings = {
   symbol: "eq.US_MKT", type: "candles", tf: "D", tz: "local", density: "compact", typeToSearch: true, oneKey: false, confirm: false,
@@ -70,6 +77,7 @@ export function freshLayout(s: Settings = DEFAULT_SETTINGS): Layout {
     type: s.type,
     log: false,
     indicators: [{ id: "sma50", type: "sma", params: { n: 50 } }, { id: "rsi14", type: "rsi", params: { n: 14 } }],
+    signals: DEFAULT_SIGNALS,
     side: { open: true, width: 300, dock: "right", ticket: true, watch: true, split: 0.62 },
     bottom: { open: true, height: 220, tab: "positions" },
   };
@@ -98,6 +106,7 @@ export function cleanLayout(raw: unknown, s: Settings = DEFAULT_SETTINGS): Layou
       const x = (cells[i] ?? {}) as Record<string, unknown>;
       const cell: Cell = { symbol: typeof x.symbol === "string" && x.symbol.length < 80 ? x.symbol : c.symbol, tf: oneOf(x.tf, TF_IDS, c.tf) };
       if (typeof x.cmp === "string" && x.cmp.length > 0 && x.cmp.length < 80) cell.cmp = x.cmp;
+      if (LTF_IDS.includes(x.ltf as LiveTf)) cell.ltf = x.ltf as LiveTf;
       return cell;
     }),
     active: Math.round(clamp(r.active, 0, grid - 1, 0)),
@@ -111,6 +120,7 @@ export function cleanLayout(raw: unknown, s: Settings = DEFAULT_SETTINGS): Layou
       for (const [k, v] of Object.entries((i.params ?? {}) as Record<string, unknown>)) if (typeof v === "number" && Number.isFinite(v)) params[k] = v;
       return [{ id: i.id, type: i.type as IndicatorInstance["type"], params }];
     }),
+    signals: Array.isArray(r.signals) ? [...new Set(r.signals.filter((x): x is string => RULE_IDS.includes(x as string)))] : d.signals,
     side: {
       open: side.open !== false, width: clamp(side.width, SIDE_MIN, SIDE_MAX, d.side.width), dock: oneOf(side.dock, ["right", "left"] as const, "right"),
       ticket: side.ticket !== false, watch: side.watch !== false, split: clamp(side.split, 0.2, 0.85, d.side.split),

@@ -428,3 +428,6 @@
   .term-sugg li { grid-template-columns: 30px minmax(50px, auto) minmax(0, 1fr); }
   .term-sugg-right { display: none; }
 }
+
+/* LIVE: the compact live board (DEC-0052). */
+.term-live { height: 100%; min-height: 240px; padding: 6px 8px; box-sizing: border-box; }
