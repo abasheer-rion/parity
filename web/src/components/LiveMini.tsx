@@ -51,7 +51,7 @@ export function LiveMini({ src = "coingecko", symbols = LIVE_BOARD, height = 220
         <div className="lmini-chart" style={{ height }}>
           {b && b.bars.length ? (
             <ProChart fill bare bars={b.bars} live={b} viewKey={`${src}:${sym}:${tf}`} label={sym} type="candles" height={height} digits={digitsFor(b.bars[b.bars.length - 1].close)} />
-          ) : <div className="lmini-msg">{state.status === "error" ? "No data" : ""}</div>}
+          ) : <div className="lmini-msg">{state.status === "error" ? "No data" : state.status === "missing" ? state.message : ""}</div>}
         </div>
       </div>
     </div>

@@ -13,12 +13,14 @@ import type { Instrument, Loadable } from "../lib/tradeData";
 
 export interface UniverseDoc { at: number; stocks: [string, string, string][]; live: Record<string, string[]> }
 
-const httpOrigin = () => liveOrigin().replace(/^ws/, "http");
+const httpOrigin = () => liveOrigin()?.replace(/^ws/, "http") ?? null;
 
 let uniP: Promise<UniverseDoc | null> | null = null;
 /** The symbol universe, loaded once per page and cached by the edge for a day. */
 export function loadUniverse(): Promise<UniverseDoc | null> {
-  uniP ??= fetch(`${httpOrigin()}/live/universe`).then((r) => (r.ok ? (r.json() as Promise<UniverseDoc>) : null)).catch(() => null);
+  const o = httpOrigin();
+  if (!o) return Promise.resolve(null);
+  uniP ??= fetch(`${o}/live/universe`).then((r) => (r.ok ? (r.json() as Promise<UniverseDoc>) : null)).catch(() => null);
   return uniP;
 }
 
@@ -94,7 +96,9 @@ export function useLiveBars(ref: LiveRef | undefined, tf: LiveTf): Loadable<Cand
     setState({ status: "loading" });
     // A free source can refuse for a while (rate limits by address); try three times, 8 s apart,
     // then start from live updates alone.
-    const url = `${httpOrigin()}/live/history?src=${encodeURIComponent(ref.src)}&s=${encodeURIComponent(ref.sym)}&tf=${tf}`;
+    const origin = httpOrigin();
+    if (!origin) { setState({ status: "missing", message: "Live data runs on the deployed site" }); return; }
+    const url = `${origin}/live/history?src=${encodeURIComponent(ref.src)}&s=${encodeURIComponent(ref.sym)}&tf=${tf}`;
     const get = async (left: number): Promise<Response> => {
       const r = await fetch(url).catch(() => null);
       if ((r && r.ok) || left <= 0 || !alive) return r ?? new Response(null, { status: 599 });

@@ -113,10 +113,10 @@ describe("wire", () => {
     expect(parseServer("{")).toBeNull();
   });
 
-  it("connects to this site, or to the main address from the desktop app and local dev", () => {
+  it("connects to this site, the main address from the desktop app, and nothing from local dev", () => {
     expect(liveOrigin({ protocol: "https:", host: "trade.endyland.com", hostname: "trade.endyland.com" })).toBe("wss://trade.endyland.com");
     expect(liveOrigin({ protocol: "app:", host: "x", hostname: "x" })).toBe("wss://trade.endyland.com");
-    expect(liveOrigin({ protocol: "http:", host: "localhost:5173", hostname: "localhost" })).toBe("wss://trade.endyland.com");
+    expect(liveOrigin({ protocol: "http:", host: "localhost:5173", hostname: "localhost" })).toBeNull();
   });
 });
 

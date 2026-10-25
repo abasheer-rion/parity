@@ -34,13 +34,15 @@ export interface FeedStatus {
 
 type TickFn = (t: Tick, recv: number) => void;
 
-/** Where /live lives: this site, or the main address for the desktop app and local dev. */
-export function liveOrigin(loc: Pick<Location, "protocol" | "host" | "hostname"> = location): string {
+/** Where /live lives: this site, or the main address for the desktop app. Local dev has no
+ *  /live unless VITE_LIVE_ORIGIN points at a deploy; then it returns null and nothing connects. */
+export function liveOrigin(loc: Pick<Location, "protocol" | "host" | "hostname"> = location): string | null {
   const local = loc.hostname === "localhost" || loc.hostname === "127.0.0.1";
   if ((loc.protocol === "https:" || loc.protocol === "http:") && !local) return `${loc.protocol === "https:" ? "wss" : "ws"}://${loc.host}`;
   // Local dev can point at a preview deploy: VITE_LIVE_ORIGIN=wss://<id>.parity-research.pages.dev
   const dev = typeof import.meta !== "undefined" ? (import.meta.env?.VITE_LIVE_ORIGIN as string | undefined) : undefined;
-  return local && dev ? dev : "wss://trade.endyland.com";
+  if (local) return dev || null;
+  return "wss://trade.endyland.com";
 }
 
 class SourceLine {
@@ -98,9 +100,11 @@ class SourceLine {
   }
 
   private open() {
+    const origin = liveOrigin();
+    if (!origin) { this.emit({ line: "closed", upstream: "down", why: "live data runs on the deployed site" }); return; }
     this.emit({ line: "connecting" });
     let ws: WebSocket;
-    try { ws = new WebSocket(`${liveOrigin()}/live/ws?src=${encodeURIComponent(this.src)}`); } catch { this.later(); return; }
+    try { ws = new WebSocket(`${origin}/live/ws?src=${encodeURIComponent(this.src)}`); } catch { this.later(); return; }
     this.ws = ws;
     ws.onopen = () => {
       this.retry = 0;
