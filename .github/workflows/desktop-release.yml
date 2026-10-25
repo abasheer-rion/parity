@@ -72,29 +72,34 @@ jobs:
       # The running app: log-in wall on a deep link, title bar dragging, offline copy, menu.
       - run: npm run test:app
         working-directory: desktop
-      # The API key arrives as text; electron-builder wants a path to the .p8 file.
-      - name: Signing credentials, when the secrets exist
-        id: sign
-        env:
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY }}
-        run: |
-          if [ -n "$CSC_LINK" ]; then echo "sign=true" >> "$GITHUB_OUTPUT"; else echo "sign=false" >> "$GITHUB_OUTPUT"; echo "No CSC_LINK secret: building ad hoc signed, not notarized."; fi
-          if [ -n "$APPLE_API_KEY_P8" ]; then
-            mkdir -p "$RUNNER_TEMP/apple"
-            printf '%s' "$APPLE_API_KEY_P8" > "$RUNNER_TEMP/apple/AuthKey.p8"
-            echo "key_path=$RUNNER_TEMP/apple/AuthKey.p8" >> "$GITHUB_OUTPUT"
-          fi
+      # electron-builder reads an empty CSC_LINK as a path (the working folder) and fails, so
+      # each signing variable is set only when its secret exists. The API key arrives as
+      # text; electron-builder wants a path to the .p8 file.
       - name: Build the Mac disk images and update zips
-        run: npm run build:mac
         working-directory: desktop
         env:
-          CSC_IDENTITY_AUTO_DISCOVERY: ${{ steps.sign.outputs.sign }}
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-          APPLE_API_KEY: ${{ steps.sign.outputs.key_path }}
-          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          SECRET_CSC_LINK: ${{ secrets.CSC_LINK }}
+          SECRET_CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          SECRET_APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          SECRET_APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          SECRET_APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+        run: |
+          if [ -n "$SECRET_CSC_LINK" ]; then
+            export CSC_LINK="$SECRET_CSC_LINK" CSC_KEY_PASSWORD="$SECRET_CSC_KEY_PASSWORD"
+            echo "Signing with the Developer ID certificate."
+            if [ -n "$SECRET_APPLE_API_KEY" ] && [ -n "$SECRET_APPLE_API_KEY_ID" ] && [ -n "$SECRET_APPLE_API_ISSUER" ]; then
+              mkdir -p "$RUNNER_TEMP/apple"
+              printf '%s' "$SECRET_APPLE_API_KEY" > "$RUNNER_TEMP/apple/AuthKey.p8"
+              export APPLE_API_KEY="$RUNNER_TEMP/apple/AuthKey.p8" APPLE_API_KEY_ID="$SECRET_APPLE_API_KEY_ID" APPLE_API_ISSUER="$SECRET_APPLE_API_ISSUER"
+              echo "Notarizing with the App Store Connect API key."
+            else
+              echo "No App Store Connect API key secrets: signed but not notarized."
+            fi
+          else
+            export CSC_IDENTITY_AUTO_DISCOVERY=false
+            echo "No CSC_LINK secret: building ad hoc signed, not notarized."
+          fi
+          npm run build:mac
       - name: Remove the API key file
         if: always()
         run: rm -rf "$RUNNER_TEMP/apple"
@@ -137,8 +142,11 @@ jobs:
             desktop/dist/*.blockmap
             desktop/dist/latest.yml
 
+  # The Mac build alone is enough to release; a Windows build that failed or never started
+  # (for example a billing limit on Windows runners) is attached on a later run.
   release:
     needs: [mac, windows]
+    if: ${{ !cancelled() && needs.mac.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -153,9 +161,11 @@ jobs:
           version=$(node -p "require('./desktop/package.json').version")
           tag="desktop-v${version}"
           # Every name must match latest-mac.yml and latest.yml exactly, so none has a space.
-          mapfile -t files < <(find out/desktop-mac out/desktop-windows -type f \( -name '*.dmg' -o -name '*.zip' -o -name '*.exe' -o -name '*.blockmap' -o -name 'latest*.yml' \))
+          mapfile -t files < <(find out -type f \( -name '*.dmg' -o -name '*.zip' -o -name '*.exe' -o -name '*.blockmap' -o -name 'latest*.yml' \))
           for f in "${files[@]}"; do case "$f" in *" "*) echo "file name has a space: $f"; exit 1;; esac; done
-          for need in latest-mac.yml latest.yml; do printf '%s\n' "${files[@]}" | grep -q "/$need$" || { echo "missing $need"; exit 1; }; done
+          need=(latest-mac.yml)
+          if [ -d out/desktop-windows ]; then need+=(latest.yml); else echo "::warning::No Windows build in this run; the release has the Mac files only."; fi
+          for n in "${need[@]}"; do printf '%s\n' "${files[@]}" | grep -q "/$n$" || { echo "missing $n"; exit 1; }; done
           printf 'attaching %s\n' "${files[@]}"
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release upload "$tag" "${files[@]}" --clobber
