@@ -80,4 +80,5 @@ Everything still replays or reshuffles history. Nothing in it is a forecast. The
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
+- [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 <!-- backlinks:end -->

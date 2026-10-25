@@ -79,4 +79,5 @@ No sitemap submission and no indexing requests. Public pages get no `noindex`. T
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
+- [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 <!-- backlinks:end -->

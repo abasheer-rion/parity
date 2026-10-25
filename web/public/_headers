@@ -40,3 +40,9 @@ https://parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
 https://:branch.parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
+# The installable site (DEC-0041): the service worker must always be checked for a new
+# version, and the offline page is not for search.
+/sw.js
+  Cache-Control: no-cache
+/offline.html
+  X-Robots-Tag: noindex, nofollow

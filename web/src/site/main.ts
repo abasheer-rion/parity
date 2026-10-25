@@ -10,6 +10,9 @@
 //     transitions of its own
 import Lenis from "lenis";
 import { botTrades, TRADES } from "./botPath";
+import { startPwa } from "../pwa/install";
+
+startPwa();
 
 const root = document.documentElement;
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

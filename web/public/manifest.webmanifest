@@ -1,11 +1,27 @@
 {
-  "name": "Parity research",
+  "id": "/app/",
+  "name": "Parity",
   "short_name": "Parity",
+  "description": "Check trading records, see strategies backtested against the S&P 500, and practise on demo accounts. Research and education only.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/app/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#050608",
+  "theme_color": "#050608",
+  "categories": ["finance", "education"],
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
-  "background_color": "#10101a",
-  "theme_color": "#10101a",
-  "display": "standalone"
+  "shortcuts": [
+    { "name": "Verify a trading record", "short_name": "Verify", "url": "/app/#/verify", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Parity Trade", "short_name": "Trade", "url": "/trade/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Parity Research", "short_name": "Research", "url": "/research/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Parity Terminal", "short_name": "Terminal", "url": "/sim/", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
+  ]
 }
