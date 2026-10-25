@@ -7,6 +7,8 @@
 // With more than one area, the first one not yet seen runs, then the next on a later visit
 // or right after it ends. `ready` waits for the page's content, so targets exist.
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { isDesktop } from "../desktop/bridge";
+import { hasDecided, onConsentChange } from "../legal/consent";
 import { track } from "../lib/analytics";
 import { Tour, type GuidedStep, type TourEnd } from "../ui/guidedTour";
 import { markTourSeen, skipAllTours, tourDue, useOnboarding } from "./store";
@@ -17,8 +19,15 @@ export function replayTour(area: Area) {
   window.dispatchEvent(new CustomEvent("parity:tour", { detail: area }));
 }
 
+/** The cookie notice is up until the person chooses (the desktop app never shows one). */
+const noticeUp = () => !isDesktop() && !hasDecided();
+
 export function FirstRunTour({ areas, ready = true, delay = 700 }: { areas: Area[]; ready?: boolean; delay?: number }) {
   const s = useOnboarding();
+  // A first visit shows the cookie notice too: the tour waits for that choice, so the two never
+  // cover each other.
+  const [notice, setNotice] = useState(noticeUp);
+  useEffect(() => (notice ? onConsentChange(() => setNotice(noticeUp())) : undefined), [notice]);
   const [forced, setForced] = useState<Area | null>(null);
   const [open, setOpen] = useState(false);
   // Areas this page already ran, so a finished tour does not reopen before the save lands.
@@ -36,10 +45,10 @@ export function FirstRunTour({ areas, ready = true, delay = 700 }: { areas: Area
 
   // Wait for the page to settle (content loaded, entrance motion over) before opening.
   useEffect(() => {
-    if (!ready || !area || open) return;
+    if (!ready || notice || !area || open) return;
     const t = window.setTimeout(() => setOpen(true), delay);
     return () => window.clearTimeout(t);
-  }, [ready, area, open, delay]);
+  }, [ready, notice, area, open, delay]);
 
   useEffect(() => { if (open && area) track("tour_started", { area }); }, [open, area]);
 

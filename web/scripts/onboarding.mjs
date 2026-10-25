@@ -66,7 +66,7 @@ async function context(size = { width: 1440, height: 900 }, init = {}) {
   });
   await ctx.addInitScript((seed) => {
     try {
-      localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" }));
+      localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" }));
       if (seed.onboarding && !sessionStorage.getItem("seeded")) {
         localStorage.setItem("parity.onboarding.v1", JSON.stringify(seed.onboarding));
         sessionStorage.setItem("seeded", "1");
@@ -170,6 +170,18 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
   await page.keyboard.press("Escape");
   check(await noTip(page, 400), "Escape skips the tour");
   check((await stored(page)).tours_seen?.includes("account"), "a skipped tour is saved as seen");
+  await ctx.close();
+}
+
+// ---------------------------------------------------------------- the cookie notice comes first
+{
+  const ctx = await context();
+  const page = await ctx.newPage();
+  await page.addInitScript(() => { try { localStorage.removeItem("parity.consent.v1"); } catch { /* private mode */ } });
+  await page.goto(`${BASE}/app/#/verify`);
+  check(await noTip(page, 2500), "a tour waits while the cookie notice is up");
+  await page.getByRole("button", { name: "Essential only" }).click();
+  check(await waitTip(page), "the tour opens once the cookie choice is made");
   await ctx.close();
 }
 
