@@ -29,6 +29,10 @@
   X-Robots-Tag: noindex, nofollow
 /verify/*
   X-Robots-Tag: noindex, nofollow
+/connect/*
+  X-Robots-Tag: noindex, nofollow
+/oauth/*
+  X-Robots-Tag: noindex, nofollow
 # Verify badge pages are shared by link only, not listed in search (REF-0016).
 /v/*
   X-Robots-Tag: noindex, nofollow

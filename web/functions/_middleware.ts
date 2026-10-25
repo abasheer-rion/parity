@@ -10,6 +10,7 @@
 // No secret is needed. See auth/README.md.
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { HOST } from "../src/lib/meta";
+import { wellKnown } from "../src/lib/mcp/wellknown";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -34,6 +35,11 @@ const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);
+  // Sign-in metadata for the hosted MCP server at /mcp (DEC-0051): public, on every host.
+  if (url.pathname.startsWith("/.well-known/")) {
+    const res = await wellKnown(request);
+    if (res) return res;
+  }
   let forward: Request | undefined;
   const sub = url.hostname.split(".")[0];
   const home = Object.hasOwn(SUBSITES, sub) && url.hostname.includes(".") ? SUBSITES[sub] : null;

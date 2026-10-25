@@ -765,6 +765,17 @@ def fill_verification(out: Path) -> None:
     index.write_text(text.replace("<!--seo:verify-->", "\n    ".join(tags)))
 
 
+def write_academy_data(courses: list[dict], out: Path) -> None:
+    """The courses as one JSON file for the hosted MCP server (DEC-0051), which cannot read
+    academy/courses/ itself. Under /data/, so only signed-in people and the server read it."""
+    keep = ("id", "title", "minutes", "body", "terms", "check")
+    doc = [{"id": c["id"], "order": c["order"], "level": c["level"], "title": c["title"], "summary": c["summary"],
+            "lessons": [{k: lesson[k] for k in keep if k in lesson} for lesson in c["lessons"]]} for c in courses]
+    dest = out / "data" / "academy" / "courses.json"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(doc, ensure_ascii=False))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=str(ROOT / "web/dist"), help="the built site folder (default web/dist)")
@@ -779,6 +790,7 @@ def main() -> int:
     if "edge-lab" not in {t["id"] for t in terms}:  # a glossary term of that name would own the address
         pages.update(build_edge_lab(load_edge_lab(), notes, terms, refs))
     academy = load_academy()
+    write_academy_data(academy, out)
     if "academy" not in {t["id"] for t in terms}:  # same rule for /learn/academy/
         pages.update(build_academy(academy, terms, refs))
     if "private-markets" not in {t["id"] for t in terms}:

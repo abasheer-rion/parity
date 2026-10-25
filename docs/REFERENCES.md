@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1446 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1486 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,8 +11,8 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 44 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
-| [Software](#software) | 98 |
-| [Web pages](#web-pages) | 750 |
+| [Software](#software) | 103 |
+| [Web pages](#web-pages) | 785 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 54 |
 | [News](#news) | 4 |
@@ -3497,6 +3497,12 @@ GeneralMills/pytrends. (n.d.). *GitHub*. <https://github.com/GeneralMills/pytren
 
 Cited in: [catalog/algorithms/crypto-google-search-attention.json](../catalog/algorithms/crypto-google-search-attention.json), [ALG-0024](algorithms/0024-crypto-google-search-attention.md).
 
+### url-3e087c88
+
+Cloudflare workers-oauth-provider. (n.d.). *github.com*. <https://github.com/cloudflare/workers-oauth-provider>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-40531124
 
 bloomberg/chromium.bb. (n.d.). *github.com*. <https://github.com/bloomberg/chromium.bb>. Accessed 2026-10-24. Verification: not checked.
@@ -3551,6 +3557,12 @@ rkohli3/TSMOM. (n.d.). *GitHub*. <https://github.com/rkohli3/TSMOM>. Accessed 20
 
 Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md).
 
+### url-56a1d432
+
+GitHub Models. (n.d.). *docs.github.com*. <https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-5dc9e74c
 
 Drakkar-Software/OctoBot. (n.d.). *GitHub*. <https://github.com/Drakkar-Software/OctoBot>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3562,6 +3574,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 krakenfx on GitHub. (n.d.). *github.com*. <https://github.com/krakenfx>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0016](competitors/0016-kraken-pro.md).
+
+### url-6627875d
+
+Hugging Face OAuth. (n.d.). *huggingface.co*. <https://huggingface.co/docs/hub/oauth>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-6a4211ff
 
@@ -3841,6 +3859,12 @@ DeviaVir/zenbot/tree/unstable/extensions/strategies. (n.d.). *GitHub*. <https://
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-d8847df0
+
+Anthropic TypeScript SDK. (n.d.). *github.com*. <https://github.com/anthropics/anthropic-sdk-typescript>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-d98d4427
 
 QuantPad/pine-runner. (n.d.). *GitHub*. <https://github.com/QuantPad/pine-runner>. Accessed 2026-10-24. Verification: not checked.
@@ -3870,6 +3894,12 @@ Cited in: [CMP-0021](competitors/0021-darwinex.md).
 No title recorded. (n.d.). *Binance*. <https://raw.githubusercontent.com/binance/binance-public-data/master/TERMS_AND_CONDITIONS.md>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/binance-public-data.json](../catalog/datasets/binance-public-data.json), [DAT-0005](datasets/0005-binance-public-data.md).
+
+### url-df28bf95
+
+Hugging Face Inference Providers pricing. (n.d.). *huggingface.co*. <https://huggingface.co/docs/inference-providers/pricing>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-e0ddeb22
 
@@ -4103,6 +4133,18 @@ Socrata tokens. (n.d.). *dev.socrata.com*. <https://dev.socrata.com/docs/app-tok
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-05b4406a
+
+Supabase OAuth token security. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/token-security>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-065ee2bd
+
+Google Cloud quota project. (n.d.). *docs.cloud.google.com*. <https://docs.cloud.google.com/docs/quotas/quota-project>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-06e2ac82
 
 Arctic Shift. (n.d.). *arctic-shift.photon-reddit.com*. <https://arctic-shift.photon-reddit.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4241,6 +4283,12 @@ Kaggle walkthrough video. (n.d.). *youtube.com*. <https://www.youtube.com/watch?
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-0c6338c4
+
+Claude Code legal and compliance. (n.d.). *code.claude.com*. <https://code.claude.com/docs/en/legal-and-compliance>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-0cb50f6e
 
 Henry Hub Natural Gas Spot Price (DHHNGSP) | FRED | St. Louis Fed. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/DHHNGSP>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -4249,11 +4297,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-0cb85282
+
+MCP versioning. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-0cd33823
 
 No title recorded. (n.d.). *US Department of the Treasury, Bureau of the Fiscal Service*. <https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?page[size]=1&sort=record_date>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/treasury-fiscal-data.json](../catalog/datasets/treasury-fiscal-data.json).
+
+### url-0e04f482
+
+Supabase OAuth flows. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/oauth-flows>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-0e3aeacf
 
@@ -4441,6 +4501,12 @@ App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id884042608>
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-1667c749
+
+Codex MCP. (n.d.). *learn.chatgpt.com*. <https://learn.chatgpt.com/docs/extend/mcp?surface=cli>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-1674b447
 
 builder codes. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes>. Accessed 2026-10-24. Verification: not checked.
@@ -4538,6 +4604,12 @@ Cited in: [CMP-0018](competitors/0018-quantpad.md), [RES-0020](research/0020-ver
 Binance About. (n.d.). *binance.com*. <https://www.binance.com/en/about>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0014](competitors/0014-binance.md).
+
+### url-1b8799cb
+
+Copilot Studio MCP. (n.d.). *learn.microsoft.com*. <https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-1bb17f95
 
@@ -4747,11 +4819,23 @@ No title recorded. (n.d.). *youtube.com*. <https://www.youtube.com/@InnerCircleT
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-2770d533
+
+Claude connector authentication. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/authentication>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-28169562
 
 No title recorded. (n.d.). *Trading Economics*. <https://api.tradingeconomics.com/calendar?c=guest:guest>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-285bea97
+
+No title recorded. (n.d.). *openrouter.ai*. <https://openrouter.ai/auth>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-28d1c06c
 
@@ -5019,6 +5103,12 @@ Gulf War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Gulf_War>. Accesse
 
 Cited in: [catalog/events/desert-storm-1991.json](../catalog/events/desert-storm-1991.json).
 
+### url-376534bd
+
+MCP authorization server discovery. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-37a94721
 
 Analytics Engine pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudflare.com/analytics/analytics-engine/pricing/>. Accessed 2026-10-24. Verification: not checked.
@@ -5247,6 +5337,12 @@ fee schedule. (n.d.). *kraken.com*. <https://www.kraken.com/features/fee-schedul
 
 Cited in: [CMP-0016](competitors/0016-kraken-pro.md).
 
+### url-438985fc
+
+OpenRouter tool calling. (n.d.). *openrouter.ai*. <https://openrouter.ai/docs/guides/features/tool-calling>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-4394de4e
 
 Meese and Rogoff 1983. (n.d.). *scholar.harvard.edu*. <https://scholar.harvard.edu/files/rogoff/files/51_jie1983.pdf>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5260,6 +5356,12 @@ Finnhub Stock API - Terms of Service. (n.d.). *Finnhub Stock API*. <https://finn
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md).
+
+### url-4557008c
+
+Puter user-pays model. (n.d.). *docs.puter.com*. <https://docs.puter.com/user-pays-model/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-465cdf44
 
@@ -5621,6 +5723,12 @@ The Forex Geek. (n.d.). *theforexgeek.com*. <https://theforexgeek.com/zennbot-re
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-5797a6cb
+
+No title recorded. (n.d.). *claude.ai*. <https://claude.ai/api/mcp/auth_callback>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-579f7291
 
 Cryptohopper home page. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/>. Accessed 2026-10-23. Verification: not checked.
@@ -5855,6 +5963,12 @@ Databento credits. (n.d.). *databento.com*. <https://databento.com/docs/faqs/usa
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-6365ba3a
+
+ChatGPT apps MCP server. (n.d.). *developers.openai.com*. <https://developers.openai.com/apps-sdk/build/mcp-server>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-63ad7c68
 
 CT Plan fees. (n.d.). *consolidatedtape.com*. <https://consolidatedtape.com/fees>. Accessed 2026-10-24. Verification: not checked.
@@ -5909,6 +6023,12 @@ No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/ap
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
+### url-668d5b13
+
+MCP authorization, latest. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/latest/basic/authorization>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-6690d4c9
 
 OANDA currency converter. (n.d.). *oanda.com*. <https://www.oanda.com/currency-converter/en/>. Accessed 2026-10-24. Verification: not checked.
@@ -5926,6 +6046,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Krohn, Mueller and Whelan (2020 working paper; JF 2024), EUR around London fix. (n.d.). *sites.insead.edu*. <https://sites.insead.edu/facultyresearch/research/file.cfm?fid=66802>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-london-4pm-fix.json](../catalog/algorithms/fx-london-4pm-fix.json), [ALG-0009](algorithms/0009-fx-london-4pm-fix.md).
+
+### url-66ed2af0
+
+MCP security considerations. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-6755fa04
 
@@ -6123,11 +6249,23 @@ Riksbank FAQ. (n.d.). *riksbank.se*. <https://www.riksbank.se/en-gb/statistics/i
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-70be823c
+
+No title recorded. (n.d.). *parity.endyland.com*. <https://parity.endyland.com/mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md), [GDE-0006](guides/0006-connecting-ai-tools-to-parity-with-mcp.md).
+
 ### url-71122844
 
 Risk Engine. (n.d.). *help.darwinex.com*. <https://help.darwinex.com/risk-manager>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0021](competitors/0021-darwinex.md).
+
+### url-71259f84
+
+Cloudflare MCP transport. (n.d.). *developers.cloudflare.com*. <https://developers.cloudflare.com/agents/model-context-protocol/transport/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-712d62b8
 
@@ -6341,6 +6479,12 @@ QuantConnect home page. (n.d.). *quantconnect.com*. <https://www.quantconnect.co
 
 Cited in: [CMP-0023](competitors/0023-quantconnect.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-7b3bd2be
+
+Sign in with ChatGPT, token sharing for open-source apps. (n.d.). *developers.openai.com*. <https://developers.openai.com/siwc/token-sharing-open-source>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-7b646538
 
 17 CFR 5.7. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/5.7>. Accessed 2026-10-24. Verification: not checked.
@@ -6426,6 +6570,12 @@ Free Forex & Currency Exchange Rate API - ExchangeRate Host. (n.d.). *exchangera
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7eb600d1
+
+Cursor MCP. (n.d.). *cursor.com*. <https://cursor.com/docs/context/mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-7ecfd989
 
@@ -6553,6 +6703,12 @@ No title recorded. (n.d.). *home.treasury.gov*. <https://home.treasury.gov/resou
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-83845476
+
+No title recorded. (n.d.). *parity.endyland.com*. <https://parity.endyland.com>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
+
 ### url-8436b75b
 
 Edgewonk pricing. (n.d.). *edgewonk.com*. <https://edgewonk.com/pricing>. Accessed 2026-10-23. Verification: not checked.
@@ -6593,6 +6749,12 @@ App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id29
 
 Cited in: [CMP-0008](competitors/0008-thinkorswim.md).
 
+### url-859aca84
+
+Gemini API OAuth. (n.d.). *ai.google.dev*. <https://ai.google.dev/gemini-api/docs/oauth>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-8648340c
 
 NCREIF index returns. (n.d.). *NCREIF*. <https://www.ncreif.org/indices/index-returns/>. Accessed 2026-10-23. Verification: not checked.
@@ -6631,6 +6793,12 @@ App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/bloo
 
 Cited in: [CMP-0002](competitors/0002-bloomberg-terminal.md).
 
+### url-87bf5b00
+
+Sign in with ChatGPT, request a client id. (n.d.). *developers.openai.com*. <https://developers.openai.com/siwc/request-client-id>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-8876d5a7
 
 Nasdaq Data Link | Quandl API, Python & Ready-to-use datasets. (n.d.). *blog.quantinsti.com*. <https://blog.quantinsti.com/nasdaq-data-link/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6658,6 +6826,12 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 Massive business. (n.d.). *massive.com*. <https://massive.com/business>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
+### url-88f064d2
+
+VS Code MCP. (n.d.). *code.visualstudio.com*. <https://code.visualstudio.com/api/extension-guides/ai/mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-893d4964
 
@@ -6757,6 +6931,12 @@ real-time stocks. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/do
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-8e8b356a
+
+Supabase MCP authentication. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/mcp-authentication>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-8ee9d980
 
 No title recorded. (n.d.). *US Department of the Treasury, Bureau of the Fiscal Service*. <https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?page>. Accessed 2026-10-21. Verification: not checked.
@@ -6800,6 +6980,12 @@ Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 Bank of Japan what's new: API documentation. (n.d.). *Bank of Japan*. <https://www.boj.or.jp/en/rss/index.htm>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bank-of-japan-news.json](../catalog/datasets/bank-of-japan-news.json), [DAT-0045](datasets/0045-bank-of-japan-news.md).
+
+### url-90a420bd
+
+Supabase OAuth server, getting started. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/getting-started>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-90a7c7fc
 
@@ -6955,11 +7141,23 @@ OANDA licence. (n.d.). *legal.oanda.com*. <https://legal.oanda.com/oc/api_licens
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-99760305
+
+MCP Streamable HTTP. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-99a00161
 
 Yahoo Finance / Decrypt, Aug 2025. (n.d.). *finance.yahoo.com*. <https://finance.yahoo.com/news/ai-trading-bots-booming-trust-150102860.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-99afd660
+
+OpenRouter OAuth PKCE. (n.d.). *openrouter.ai*. <https://openrouter.ai/docs/guides/overview/auth/oauth>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-9aaa265c
 
@@ -7071,6 +7269,12 @@ Coinbase status. (n.d.). *status.coinbase.com*. <https://status.coinbase.com>. A
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 
+### url-a2503e99
+
+Claude Code MCP. (n.d.). *code.claude.com*. <https://code.claude.com/docs/en/mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-a36bd169
 
 This Blog is Systematic: Is the degradation of trend following performance a cohort effect, instrument decay, or an environmental problem? (n.d.). *qoppac.blogspot.com*. <https://qoppac.blogspot.com/2025/10/is-degradation-of-trend-following.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7172,6 +7376,12 @@ How Quantopian's open-source investment dream died | The Business of Business. (
 Note: Linked in this repo as: Business of Business.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-a685a103
+
+ChatGPT apps authentication. (n.d.). *developers.openai.com*. <https://developers.openai.com/apps-sdk/build/auth>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-a6abd8b8
 
@@ -7597,6 +7807,12 @@ Net asset value (glossary). (n.d.). *Investor.gov, US SEC*. <https://www.investo
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-ba3501b1
+
+Claude custom connectors. (n.d.). *support.claude.com*. <https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-ba533bf9
 
 Abqaiq-Khurais attack. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -7620,6 +7836,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 No title recorded. (n.d.). *International Monetary Fund*. <https://api.imf.org/external/sdmx/2.1/dataflow>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/imf.json](../catalog/datasets/imf.json), [DAT-0018](datasets/0018-imf.md).
+
+### url-bbf33623
+
+No title recorded. (n.d.). *ttqvpxvctnomfbeoqbbs.supabase.co*. <https://ttqvpxvctnomfbeoqbbs.supabase.co/auth/v1>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
 
 ### url-bc304cee
 
@@ -7859,6 +8081,12 @@ data coverage. (n.d.). *tradingview.com*. <https://www.tradingview.com/data-cove
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-cb21b5a4
+
+Gemini CLI MCP servers. (n.d.). *geminicli.com*. <https://geminicli.com/docs/tools/mcp-server/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
 ### url-cb6d397b
 
 Webull layouts. (n.d.). *webull.com*. <https://www.webull.com/learn/2uYwVO/dwHBFK/What-is-a-layout>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
@@ -8014,6 +8242,12 @@ Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-p
 pricing page. (n.d.). *warriortrading.com*. <https://www.warriortrading.com/pricing/>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-d3409b5a
+
+MCP client registration. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-d378e3b1
 
@@ -8286,6 +8520,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 Webull Corporation. (n.d.). *webullcorp.com*. <https://www.webullcorp.com/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0010](competitors/0010-webull.md).
+
+### url-e37cf03c
+
+MCP server/discover. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/server/discover>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
 ### url-e4397e33
 

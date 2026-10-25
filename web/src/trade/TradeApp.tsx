@@ -36,6 +36,7 @@ import { DesktopTicker } from "./DesktopTicker";
 import { NameDialog, WatchlistsView, WatchMini } from "./WatchlistsView";
 import "./trade.css";
 import { rumRefresh } from "../lib/rum";
+import { Assistant } from "../assistant/Mount";
 
 export function TradeApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <TradeShell />; }}</AppGuard>;
@@ -357,6 +358,7 @@ function TradeShell() {
             layoutsTable.insert({ name, state: layout, position: layouts.rows.length }).then((r) => { setLayoutId(r.id); toast(`Saved ${name}`); }, (e: Error) => toast(e.message, { tone: "bad" }));
           }} />
         <Toaster />
+        <Assistant place="trade" />
       </div>
     </DemoProvider>
   );

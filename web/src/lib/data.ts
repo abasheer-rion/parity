@@ -6,7 +6,9 @@ import type { BatchSummary, Report } from "./types";
 import { rumAge } from "./rum";
 
 export type Source = "static" | "local";
-export const source: Source = import.meta.env.DEV ? "local" : "static";
+// Optional chaining: Pages Functions import this file too (the hosted MCP server, DEC-0051),
+// and there import.meta.env does not exist.
+export const source: Source = import.meta.env?.DEV ? "local" : "static";
 
 export interface BatchInfo extends BatchSummary { kind?: string; run_id?: string | null }
 

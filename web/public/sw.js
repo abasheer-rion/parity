@@ -5,7 +5,8 @@
 //              there is no copy.
 //   Assets     built files have a hash in their name, so a cached copy is always right:
 //              cache first.
-//   Never      research data (/data/), dev files (/local/), share images, badges and
+//   Never      research data (/data/), dev files (/local/), share images, badges, the
+//              AI sign-in pages (/oauth/, /.well-known/, DEC-0051) and
 //              anything on another address. Sign-in redirects and errors are never kept.
 //
 // Parity Terminal keeps its own worker at /sim/sw.js (DEC-0023); the browser lets the
@@ -15,7 +16,7 @@ const CACHE = `parity-shell-${VERSION}`;
 const OFFLINE = "/offline.html";
 const PRECACHE = [OFFLINE, "/icon-192.png", "/favicon.svg"];
 
-const NEVER = /^\/(data|local|og|badge|s|cdn-cgi)\//;
+const NEVER = /^\/(data|local|og|badge|s|cdn-cgi|oauth|\.well-known)\//;
 const ASSETS = /^\/((app|sim|trade|academy|lab)\/)?assets\//;
 
 self.addEventListener("install", (event) => {

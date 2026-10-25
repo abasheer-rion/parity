@@ -15,6 +15,7 @@ import { FORMAT_LABEL, type Answers, type FormatId, type InputKind, type Parsed 
 import { Button, Checkbox, Disclosure, EmptyState, Input, SearchInput, Segmented, Select, SkeletonTable, useResource } from "../ui";
 import { Num, ResultView, pct } from "./verify/Result";
 import "./verify/verify.css";
+import { Assistant } from "../assistant/Mount";
 
 type Mode = "file" | "describe" | "strategy";
 const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
@@ -55,6 +56,7 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
           A bot that wins 99 trades in 100 can still lose money. <a href={LESSON}>See why in the Academy</a>, then check a record here.
         </EmptyState>
       )}
+      <Assistant place="verify" />
     </>
   );
 }

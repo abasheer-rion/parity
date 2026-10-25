@@ -96,6 +96,7 @@ The opt-in box is never ticked for the person, says the data may be sold in aggr
 
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
+- [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 - [CMP-0018: QuantPad, an AI quant workspace that grades strategies A to F](../competitors/0018-quantpad.md)
 - [CMP-0019: Myfxbook, the forex track record and analysis site traders cite](../competitors/0019-myfxbook.md)
