@@ -7,7 +7,7 @@ created: 2026-10-24
 updated: 2026-10-24
 authors: [ayan]
 tags: [data, infra]
-related: [DEC-0037, REF-0018, REF-0017]
+related: [DEC-0037, REF-0017, REF-0018, REF-0019]
 ---
 
 # We track how old our data is at every hop and how fast pages get it
@@ -19,7 +19,7 @@ The owner asked us to track how slow our data and refreshes are. Now every sourc
 ## Context
 
 - Data reaches the site in hops: the source publishes, the hourly News job fetches news, markets data and (once a night, with the research run) prices into the Actions cache, the deploy job exports files and publishes the site, and a browser loads them ([DEC-0037](0037-everything-runs-by-itself-and-the-search-widens-itself.md) covers the always-on search and sims).
-- Before this, only the search and sims reported a heartbeat. Nothing said how old a price on screen was or whether the hourly job ran hourly.
+- Before this, only the search and sims reported a heartbeat. Nothing said how old a price on screen was or whether the hourly job ran hourly. [REF-0019](../reference/0019-latency-budget-and-target-architecture.md) sets the targets; this decision builds the measurement it asks for.
 - The first measurement answered that: in the last 26 hours the "hourly" News job ran 7 times, 3.5 hours apart at the median, because GitHub skips scheduled runs when it is busy ([REF-0018](../reference/0018-parity-latency-baseline.md)).
 - The owner's rule is that no human is paged. Problems must be recorded, shown and retried by the machines.
 
