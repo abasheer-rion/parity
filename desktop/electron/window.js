@@ -333,6 +333,7 @@ class ParityWindow {
   // ------------------------------------------------------------ window actions
 
   keys(e, input) {
+    if (this.passKeys > 0 && input.type !== "char") { this.passKeys--; return; } // a key the app sent to the page itself
     const action = this.ctx.actionFor(input);
     if (!action) return;
     e.preventDefault();

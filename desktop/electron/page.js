@@ -19,7 +19,7 @@ const routes = require("./routes");
 const APP_CSS = ".cn{display:none!important}";
 
 class Page {
-  constructor(ctx, owner, key) {
+  constructor(ctx, owner, key, { background = false } = {}) {
     this.ctx = ctx;
     this.owner = owner;
     this.key = key; // the section this page belongs to
@@ -32,6 +32,8 @@ class Page {
       webPreferences: {
         contextIsolation: true, sandbox: true, nodeIntegration: false, spellcheck: true,
         partition: ctx.PARTITION,
+        // The hidden Trade page (main.js) keeps its timers running for alerts.
+        backgroundThrottling: !background,
         preload: path.join(__dirname, "preload.js"),
         additionalArguments: [`--parity-version=${ctx.version}`, `--parity-origins=${ctx.TRUSTED.join(",")}`],
       },
