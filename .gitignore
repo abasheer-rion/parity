@@ -39,3 +39,7 @@ content/out/
 # A .venv that is a symlink (worktrees share one environment) is a file, not a folder.
 .venv
 web/layout-shots/
+
+# Load testing (load/README.md): k6 is downloaded here by load/get-k6.sh, results are local
+tools/
+load/results/

@@ -444,6 +444,7 @@
       "docs",
       "engine",
       "ledger",
+      "load",
       "market-data",
       "registrations",
       "scripts",
