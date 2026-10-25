@@ -7,7 +7,7 @@ import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
-import { simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
+import { academyUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 
@@ -55,7 +55,8 @@ const PRODUCT: NavItem[] = [
       { href: "#/news/history", label: "Biggest days", routes: [] },
     ],
   },
-  { href: "#/academy", label: "Academy", icon: "play", routes: ["academy"] },
+  // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
+  { href: academyUrl(), label: "Academy", icon: "play", routes: ["academy"], external: "Opens Parity Academy in a new tab" },
   GLOSSARY,
   START,
   HOW,
@@ -78,8 +79,8 @@ const RESEARCH: NavItem[] = [
   { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
   { href: "#/search", label: "Strategy search", icon: "search", routes: ["search"] },
   { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
-  // The Academy lives on the product side (DEC-0028); this opens it there.
-  { href: "/app/#/academy", label: "Academy", icon: "play", routes: [] },
+  // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
+  { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],

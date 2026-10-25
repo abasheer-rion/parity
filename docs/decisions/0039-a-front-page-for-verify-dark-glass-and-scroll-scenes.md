@@ -103,5 +103,6 @@ The logo (the starburst and PARITY, no subtitle) is fixed in the top left. Log i
 
 ## Referenced by
 
+- [DEC-0042: Parity Academy, a full-screen course player of its own](0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->

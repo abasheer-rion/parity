@@ -1,7 +1,7 @@
 {
  "id": "reading-charts",
  "order": 9,
- "level": "Start",
+ "level": "Start here",
  "title": "Reading charts and indicators",
  "summary": "Candlesticks, RSI and MACD in plain words: what each one shows, how it is computed, and why none of them predicts the next move on its own.",
  "docs": [

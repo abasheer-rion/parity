@@ -3,7 +3,7 @@
 import { Title } from "../components/Shell";
 import { pct, num } from "../lib/format";
 import { pageByHref } from "../lib/pages";
-import { SPACE } from "../lib/space";
+import { academyUrl, SPACE } from "../lib/space";
 import type { Report } from "../lib/types";
 import { Badge } from "../ui";
 import { Icon } from "../ui/icons";
@@ -72,8 +72,8 @@ export function Start({ report }: { report: Report | null }) {
       </div>
 
       <p className="start-note">
-        New to this? The <a href={SPACE === "product" ? "#/academy" : "/app/#/academy"}>Academy</a> has short animated
-        courses, starting with <a href={`${SPACE === "product" ? "" : "/app/"}#/academy/reading-a-backtest`}>how to read a backtest</a>.
+        New to this? <a href={academyUrl()} target="_blank" rel="noopener">Parity Academy</a> has short animated
+        courses, starting with <a href={academyUrl("reading-a-backtest/return")} target="_blank" rel="noopener">how to read a backtest</a>.
       </p>
 
       <h2 className="start-h">How to read a result</h2>

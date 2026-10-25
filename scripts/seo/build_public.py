@@ -572,6 +572,14 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 
 ACADEMY_NOTE = ("Pictures use made-up or example numbers unless they say otherwise. "
                 "Members get the moving version of each picture and a quick check that saves their progress.")
+# Parity Academy, the signed-in course player (DEC-0042). The path works on every address
+# of the site; on endyland.com the app also answers at academy.endyland.com.
+ACADEMY_APP = "/academy/"
+
+
+def academy_app_link(path: str, label: str) -> str:
+    """A link from a public Academy page into the same place in Parity Academy (sign-in)."""
+    return f'<p><a class="btn" href="{ACADEMY_APP}#/{path}">{e(label)}</a></p>'
 
 
 def academy_link(k: dict, term_ids: set[str]) -> str:
@@ -582,6 +590,9 @@ def academy_link(k: dict, term_ids: set[str]) -> str:
         return f"/learn/{m.group(1)}/"
     if href.startswith("#/edges"):
         return "/learn/edge-lab/"
+    m = re.match(r"#/academy/([a-z0-9-]+)(?:/([a-z0-9-]+))?$", href)
+    if m:
+        return f"/learn/academy/{m.group(1)}/" + (f"{m.group(2)}/" if m.group(2) else "")
     return ("/research/" if k["space"] == "research" else "/app/") + href
 
 
@@ -629,6 +640,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
 {f'<p>Words: {", ".join(words)}</p>' if words else ''}
 <section class="card"><h2>Quick check</h2>{''.join(qs)}</section>
 {pager}
+{academy_app_link(f"{c['id']}/{l['id']}", "Open this lesson in Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
             ld = {"@type": "LearningResource", "@id": f"{SITE}{path}#lesson", "name": l["title"], "url": f"{SITE}{path}",
                   "description": plain_text(l["body"][0]), "learningResourceType": "Lesson", "timeRequired": f"PT{l['minutes']}M",
@@ -643,6 +655,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
 <p class="lede">{e(c['summary'])}</p>
 <ul class="meta"><li class="pill">{e(c['level'])}</li><li class="pill">{n} lessons</li><li class="pill">About {minutes} minutes</li></ul>
 <ul class="grid">{rows}</ul>
+{academy_app_link(c['id'], "Take this course in Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
         ld = {"@type": "Course", "@id": f"{SITE}{cpath}#course", "name": c["title"], "description": c["summary"], "url": f"{SITE}{cpath}",
               "provider": {"@id": f"{SITE}/#org"}, "inLanguage": "en", "isAccessibleForFree": True, "timeRequired": f"PT{minutes}M",
@@ -656,6 +669,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
     body = f"""<h1>Parity Academy</h1>
 <p class="lede">{len(courses)} short courses, {total} lessons of two or three minutes. Each lesson has a few plain paragraphs, a picture that explains the idea step by step, a link to the real page in Parity and a quick check.</p>
 {cards}
+{academy_app_link("", "Open Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
     ld = {"@type": "ItemList", "@id": f"{SITE}{base}#courses", "name": "Parity Academy courses",
           "itemListElement": [{"@type": "ListItem", "position": k + 1, "url": f"{SITE}{base}{c['id']}/"} for k, c in enumerate(courses)]}

@@ -73,7 +73,7 @@ The `params` each kind reads are at the top of its function in `web/src/academy/
 ```
 cd web
 npx vitest run academy                     # shape, links, words, pictures, writing rules
-VITE_AUTH_BYPASS=1 npx vite --port 5199    # open /app/#/academy/<course-id>
+VITE_AUTH_BYPASS=1 npx vite --port 5199    # open /academy/#/<course-id> (Parity Academy, DEC-0042)
 npm run build                              # also writes the public pages under dist/learn/academy/
 ```
 
@@ -83,5 +83,6 @@ The test fails if a glossary word, doc or page does not exist, if a picture cann
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](../decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0042: Parity Academy, a full-screen course player of its own](../decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [GDE-0008: Rendering shareable clips from the sims](0008-rendering-shareable-clips-from-the-sims.md)
 <!-- backlinks:end -->

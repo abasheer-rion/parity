@@ -9,6 +9,7 @@ import { citeLabel, useDocs } from "../lib/docs";
 import { termById } from "../lib/glossary";
 import { checkIdea, DATA_OPTIONS, DEFAULT_ANSWERS, QUESTIONS, summary, type Answers, type DataKind, type Severity } from "../lib/edgeChecklist";
 import { exampleById, examples, intro, lessonById, lessons, reading, type EdgeLink } from "../lib/edgeLab";
+import { academyUrl } from "../lib/space";
 import "./edgeLab.css";
 
 const STORE = "parity.edgeLab.draft";
@@ -56,7 +57,7 @@ export function EdgeLab({ focus }: { focus?: string }) {
           <a href="#/edges/examples" onClick={jump("edge-examples")}>Our own mistakes</a>
           <a href="#/edges/check" onClick={jump("edge-check")}>Check an idea</a>
           <a href="#/edges/reading" onClick={jump("edge-reading")}>Further reading</a>
-          <a href="/app/#/academy/luck-vs-skill">Course: luck vs skill</a>
+          <a href={academyUrl("luck-vs-skill")} target="_blank" rel="noopener">Course: luck vs skill</a>
         </nav>
       </div>
 

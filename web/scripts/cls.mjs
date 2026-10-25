@@ -31,6 +31,9 @@ const DEFAULT_PAGES = [
   // Parity Trade (DEC-0040)
   "/trade/", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
   "/trade/#/strategies", "/trade/#/settings",
+  // Parity Academy (DEC-0042)
+  "/academy/", "/academy/#/reading-a-backtest", "/academy/#/reading-a-backtest/return", "/academy/#/luck-vs-skill/multiple-testing",
+  "/academy/#/progress", "/academy/#/settings",
 ];
 const PAGES = (process.env.CLS_PAGES ? process.env.CLS_PAGES.split(",") : DEFAULT_PAGES).map((p) => p.trim()).filter(Boolean);
 const SIZES = [
