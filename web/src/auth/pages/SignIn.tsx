@@ -91,7 +91,7 @@ export function SignIn() {
           <input type="email" name="email" autoComplete="username" value={email.trim()} readOnly hidden />
           <PasswordField label="Password" auto="current-password" value={password} onChange={setPassword} autoFocus
             error={form.errorFor("password")}
-            aside={<SwitchLink className="pa-aside" to="reset">Forgot your password?</SwitchLink>} />
+            aside={<SwitchLink className="pa-aside" to="reset">Forgot password?</SwitchLink>} />
           <Notice>{form.general ?? mail.general}</Notice>
           <Submit busy={form.busy}>Log in</Submit>
         </form>
@@ -127,6 +127,10 @@ export function SignIn() {
         <Notice>{form.general}</Notice>
         <Submit busy={form.busy}>Continue</Submit>
       </form>
+      {/* The email typed so far goes with it, so the reset form is already filled in. */}
+      <div className="pa-alt">
+        <SwitchLink className="pa-text" to="reset">Forgot password?</SwitchLink>
+      </div>
       <p className="pa-switch">New to Parity? <SwitchLink to="signup">Create an account</SwitchLink></p>
     </Screen>
   );

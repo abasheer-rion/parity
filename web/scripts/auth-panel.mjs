@@ -59,7 +59,7 @@ const state = (page) => page.evaluate(() => ({
   const alert = await page.locator("[role=alert]").allTextContents();
   check(alert.join(" ").includes("That email and password do not match."), "a wrong password shows a plain message", alert.join("|"));
   check(calls.some((c) => c.url.includes("grant_type=password") && c.body.includes("amanda@example.com")), "the password goes to Supabase's sign-in (stubbed)");
-  await page.getByRole("link", { name: "Forgot your password?" }).click();
+  await page.getByRole("link", { name: "Forgot password?" }).click();
   await page.waitForTimeout(500);
   s = await state(page);
   check(s.hash === "#reset" && s.title === "Reset your password", "switching to reset happens in place", JSON.stringify(s));

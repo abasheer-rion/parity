@@ -4,7 +4,7 @@ title: One sign-in panel that fades in over the front page
 type: decision
 status: accepted
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-25
 authors: [ayan]
 tags: [ui]
 related: [DEC-0039, DEC-0038, REF-0017]
@@ -27,11 +27,33 @@ The owner, on 24 October 2026: "login and sign up is bad, get rid of the orbs, j
 1. **One element.** `web/src/auth/AuthFlow.tsx` holds log in, sign up, reset and verify. It runs in two places: the front page's panel (`src/auth/front.tsx`, loaded by `src/site/main.ts` on hover, focus or click of Log in and Sign up) and the stand-alone pages (`src/auth/main.tsx`).
 2. **The fade.** The front page adds `auth-open` to `<html>`. The page's content, footer and corner controls fade out in 0.22 s; the panel fades and rises in after it. The backdrop (its colour and grain) never moves. Its red glow fades out, so the sign-in view has no orbs. The stand-alone pages have the same backdrop without the glow. The hero field stops while the panel is open.
 3. **Addresses.** A click pushes `#login` or `#signup`, so Back closes the panel. Switching forms inside it replaces the entry. On the stand-alone pages a switch replaces the address with that form's page and keeps `?next=` ([DEC-0038](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)). The links keep real `/login/` and `/signup/` addresses, so they work with no script, in a new tab, or if the panel cannot load.
-4. **The steps.** Email, then password (with "Forgot your password?" beside its label and "Email me a code instead" under it) or a one-time code. Sign up: email, then a password with its rules and the terms, then "Check your email". The email typed carries between forms. A hidden username field keeps password managers matching the right account. No provider buttons show until one is switched on ([auth/PROVIDERS.md](../../auth/PROVIDERS.md)).
+4. **The steps.** Email, then password (with "Forgot password?" beside its label and "Email me a code instead" under it) or a one-time code. Sign up: email, then a password with its rules and the terms, then "Check your email". The email typed carries between forms. A hidden username field keeps password managers matching the right account. No provider buttons show until one is switched on ([auth/PROVIDERS.md](../../auth/PROVIDERS.md)).
 5. **One look.** `web/src/site/kit.css` holds the colours, backdrop, glass, corner logo and `.btn`. The build inlines it on the front page and on the four sign-in pages (`<!--site-kit-->`), so the panel's buttons are the hero's buttons and the first frame is already dark.
 6. **Accessibility.** On the front page the panel is a modal dialog: the page behind it is hidden from screen readers and the keyboard, focus moves to the first field on open and back to the link that opened it on close, and Escape closes it. Errors are announced and linked to their field. Reduced motion turns every fade, rise and height change off.
 7. **Behaviour unchanged.** Every Supabase call, the email confirmation, the code, the reset, the authenticator step, the cookie on `.endyland.com`, the error wording and the safe `next` stay as they were. Two hops now happen in place: an unconfirmed log-in opens "Check your email", and a reset or invite link opens the new-password form.
 8. **Checks.** `npm test` covers the flows; `npm run auth:panel` drives the panel in a browser with every Supabase request stubbed; `npm run auth:shots` writes screenshots; the layout shift audit now includes the front page, `/#login`, `/#signup` and the sign-in pages.
+
+## Update 2026-10-25: no box, links at the bottom, Forgot password
+
+The owner, on 25 October 2026: "move these hyperlinks to the very bottom and greyed out. Also i dont like the sign in page, i think i dont like the box, just keep it in the page, so its not bounded by anything and keep the text consistent, also we need a forgot password."
+
+1. **No box.** The form has no border, background or shadow. It sits on the backdrop in a 360 px column, left aligned like the front page's hero, with the hero's heading weight and tracking.
+2. **Three text sizes.** Heading, body (lead, fields, buttons, the switch line) and small (labels, links beside a field, hints, errors, messages), set once in `flow.css`. Colours are the front page's text, muted and faint.
+3. **Legal links at the bottom.** The legal links and "Research and education only. Not investment advice." sit at the very bottom of the screen, small and grey, underlined only on hover or focus. The form growing never moves them.
+4. **Forgot password.** "Forgot password?" now shows on the first step, under Continue, as well as beside the password field. It opens the reset form with the email already typed. After sending, the form says "Check your email"; the code from the email still works there.
+
+### Google, Apple, phone and passkeys
+
+The owner asked whether these are options. All four are possible with Supabase Auth. Owner steps for each are in [auth/PROVIDERS.md](../../auth/PROVIDERS.md). Nothing has been switched on or created.
+
+| Option | Possible | Cost | What the owner does |
+| --- | --- | --- | --- |
+| Continue with Google | Yes | Free | Make a Google Cloud web OAuth client with the Supabase callback, paste it into Supabase, add `google` to `AUTH_PROVIDERS` |
+| Sign in with Apple | Yes | $99 a year (Apple Developer Program) | Make a Services ID and a key, paste the secret into Supabase, renew the secret every 6 months, add `apple` to `AUTH_PROVIDERS` |
+| Phone number | Yes | About $0.012 to $0.013 per US text (Twilio) or about $0.058 per code (Twilio Verify), plus US texting registration | Open Twilio, enter it in Supabase, turn on CAPTCHA, then ask for the phone form to be built |
+| Passkeys, so Face ID and Touch ID | Yes, experimental in Supabase | Free | Turn on Passkeys in Supabase with the ID `parity.endyland.com`, set `AUTH_PASSKEYS=on` |
+
+The Google, Apple and passkey buttons are already built and hidden behind those settings, so turning one on is a configuration change. The phone form is not built.
 
 ## Alternatives considered
 
