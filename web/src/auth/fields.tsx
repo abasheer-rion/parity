@@ -59,7 +59,7 @@ interface FieldProps {
   type?: "text" | "email"; auto?: Auto; name?: string; autoFocus?: boolean;
   /** Small text under the field. */
   hint?: ReactNode;
-  /** A link or button on the right of the label, such as "Forgot your password?". */
+  /** A link or button on the right of the label, such as "Forgot password?". */
   aside?: ReactNode;
   /** An error from the last submit: shown under the field, announced, and marks it invalid. */
   error?: string | null;

@@ -36,7 +36,7 @@ export function Forgot({ onSignedIn, wait }: { onSignedIn: () => void; wait?: bo
 
   if (sent) {
     return (
-      <Screen id="reset-sent" title="Reset your password" lead={<>If an account exists for <strong>{email.trim()}</strong>, we sent it a link and a 6-digit code. Use either one.</>}>
+      <Screen id="reset-sent" title="Check your email" lead={<>If an account exists for <strong>{email.trim()}</strong>, we sent it a link to choose a new password. The email also has a 6-digit code you can type here.</>}>
         <form className="pa-form" onSubmit={verify} noValidate>
           <Field label="Code from the email" auto="one-time-code" value={code} onChange={setCode} autoFocus error={form.errorFor("code")} />
           <Notice>{form.general}</Notice>
@@ -51,7 +51,7 @@ export function Forgot({ onSignedIn, wait }: { onSignedIn: () => void; wait?: bo
   }
 
   return (
-    <Screen id="reset-email" wait={wait} title="Reset your password" lead="Enter your email and we will send you a link and a code to choose a new password.">
+    <Screen id="reset-email" wait={wait} title="Reset your password" lead="Type your email. We will send you a link to choose a new password.">
       <form className="pa-form" onSubmit={send} noValidate>
         <Field label="Email" type="email" auto="username" value={email} onChange={setEmail} autoFocus error={form.errorFor("email")} />
         <Notice>{form.general}</Notice>

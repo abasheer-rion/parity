@@ -1,6 +1,7 @@
 // The sign-in panel (DEC-0044): one element for log in, sign up, reset and verify, used in
 // the front page's panel (front.tsx) and on the stand-alone pages (main.tsx), always over
-// the front page's backdrop. Switching between forms happens in place: the step fades,
+// the front page's backdrop. No box: the form sits on the page, and the legal links sit
+// quietly at the bottom of the screen. Switching between forms happens in place: the step fades,
 // the panel's height follows the content and the address follows the form.
 import { useCallback, useId, useLayoutEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { SkipLink } from "../components/SkipLink";
@@ -64,7 +65,7 @@ export function AuthFlow({ initial, initialCarry, host, onView, onHome }: Props)
     window.setTimeout(() => { window.location.href = "/"; }, 220);
   };
 
-  const card = <SizeBox><Form key={`${view}-${round}`} /></SizeBox>;
+  const body = <SizeBox><Form key={`${view}-${round}`} /></SizeBox>;
   const frame = (
     <>
       <div className="corner corner-logo pa-corner">
@@ -74,8 +75,8 @@ export function AuthFlow({ initial, initialCarry, host, onView, onHome }: Props)
         </a>
       </div>
       {host === "page"
-        ? <main className="pa-card glass" id="main" aria-labelledby={titleId}>{card}</main>
-        : <div className="pa-card glass">{card}</div>}
+        ? <main className="pa-main" id="main" aria-labelledby={titleId}>{body}</main>
+        : <div className="pa-main">{body}</div>}
       <footer className="pa-foot">
         <LegalLinks className="pa-legal" />
         <p className="pa-disclaimer">Research and education only. Not investment advice.</p>
