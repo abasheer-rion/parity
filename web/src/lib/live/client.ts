@@ -38,7 +38,9 @@ type TickFn = (t: Tick, recv: number) => void;
 export function liveOrigin(loc: Pick<Location, "protocol" | "host" | "hostname"> = location): string {
   const local = loc.hostname === "localhost" || loc.hostname === "127.0.0.1";
   if ((loc.protocol === "https:" || loc.protocol === "http:") && !local) return `${loc.protocol === "https:" ? "wss" : "ws"}://${loc.host}`;
-  return "wss://trade.endyland.com";
+  // Local dev can point at a preview deploy: VITE_LIVE_ORIGIN=wss://<id>.parity-research.pages.dev
+  const dev = typeof import.meta !== "undefined" ? (import.meta.env?.VITE_LIVE_ORIGIN as string | undefined) : undefined;
+  return local && dev ? dev : "wss://trade.endyland.com";
 }
 
 class SourceLine {

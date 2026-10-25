@@ -164,7 +164,8 @@ export class LiveHub {
       this.relay(trades.filter((t) => t.te > (this.lastTe.get(t.s) ?? 0)), false);
     } catch (e) {
       console.log(`[${this.src}] poll failed: ${String(e)}`);
-      this.setState("down", "source did not answer");
+      const code = String(e).match(/\b(\d{3})\b/)?.[1];
+      this.setState("down", code ? `source answered ${code}` : "source did not answer");
       // Try again soon rather than a whole period later; the edge cache keeps this cheap.
       setTimeout(() => void this.pollOnce(), 5_000);
     } finally {

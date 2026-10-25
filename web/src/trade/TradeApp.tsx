@@ -266,7 +266,8 @@ function TradeShell() {
   const asof = useMemo(() => list.reduce((m, s) => (s.asof > m ? s.asof : m), ""), [list]);
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
-  const noData = insts.status === "missing" || insts.status === "error";
+  // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
+  const noData = (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>

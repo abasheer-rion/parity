@@ -21,18 +21,32 @@ const json = (status: number, body: unknown, maxAge = 0) => new Response(JSON.st
 
 const cache = () => (globalThis as unknown as { caches: { default: Cache } }).caches.default;
 
-/** Serve from the edge cache, or compute, store for `ttl` seconds and serve. */
+/**
+ * Serve from the edge cache, or compute, store for `ttl` seconds and serve. A second copy is
+ * kept for a day: when the source fails (free APIs limit by address, and Cloudflare's
+ * addresses are shared), the last good answer is served and marked stale.
+ */
 async function cached(ctx: Context, key: string, ttl: number, make: () => Promise<Response>): Promise<Response> {
   const req = new Request(`https://live.cache/${key}`);
+  const old = new Request(`https://live.cache/stale/${key}`);
   const hit = await cache().match(req);
   if (hit) return hit;
   const res = await make();
   if (res.ok) {
-    const copy = new Response(res.clone().body, res);
-    copy.headers.set("Cache-Control", `public, max-age=${ttl}`);
-    ctx.waitUntil(cache().put(req, copy));
+    const body = await res.clone().arrayBuffer();
+    const fresh = new Response(body, res);
+    fresh.headers.set("Cache-Control", `public, max-age=${ttl}`);
+    const keep = new Response(body, res);
+    keep.headers.set("Cache-Control", "public, max-age=86400");
+    ctx.waitUntil(Promise.all([cache().put(req, fresh), cache().put(old, keep)]));
+    return res;
   }
-  return res;
+  const last = await cache().match(old);
+  if (!last) return res;
+  const out = new Response(last.body, last);
+  out.headers.set("Cache-Control", "no-store");
+  out.headers.set("X-Parity-Stale", "1");
+  return out;
 }
 
 export const onRequest = async (ctx: Context): Promise<Response> => {
@@ -63,7 +77,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
 
   if (route === "history") {
     const sym = url.searchParams.get("s") ?? "", tf = url.searchParams.get("tf") ?? "1m";
-    const ttl = tf === "1d" ? 600 : 20;
+    const ttl = tf === "1d" ? 1800 : tf === "1h" ? 300 : src === "coingecko" ? 60 : 20;
     return cached(ctx, `h/${src}/${sym}/${tf}`, ttl, async () => {
       try {
         const bars = await historyFor(src, sym, tf, env);
@@ -71,7 +85,8 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
         return json(200, { src, s: sym, tf, bars, at: Date.now() }, ttl);
       } catch (e) {
         console.error("history", src, sym, tf, String(e));
-        return json(502, { error: "The source did not answer" });
+        const code = String(e).match(/\b(\d{3})\b/)?.[1];
+        return json(502, { error: code ? `The source answered ${code}` : "The source did not answer" });
       }
     });
   }
