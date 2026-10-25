@@ -104,6 +104,36 @@ function activeSection(appUrl, sections) {
   return hit ? hit.id : null;
 }
 
+/** The sign-in pages: /login/, /signup/, /reset/ and /verify/ (and their ?query). */
+function isAuthPath(appPath) {
+  if (typeof appPath !== "string") return false;
+  return /^\/(login|signup|reset|verify)(\/|$)/.test(appPath.split(/[?#]/)[0]);
+}
+
+/**
+ * The address to share for an in-app path (DEC-0049): the website's own short link where it
+ * has one (/s/<strategy>), otherwise the live address a browser opens.
+ */
+function shareUrl(appPath, origin) {
+  const m = typeof appPath === "string" && appPath.match(/^\/app\/#\/strategy\/([a-z0-9_]{1,64})\/?$/);
+  if (m) return `${origin.replace(/\/$/, "")}/s/${m[1]}`;
+  return liveUrl(appPath || "/", origin);
+}
+
+/**
+ * What someone typed or pasted into Open link (DEC-0049), as an in-app path, or null when it
+ * is not a Parity address. Accepts full addresses (https or http, with or without the
+ * scheme), short links such as /s/fx_carry or v/AbCdEfGhIjKl, in-app paths and parity:// links.
+ */
+function parseOpenInput(raw, origin) {
+  let v = String(raw ?? "").trim();
+  if (!v || v.length > 2048 || /\s/.test(v)) return null;
+  if (/^http:\/\//i.test(v)) v = `https://${v.slice(7)}`;
+  else if (!v.includes("://") && /^[a-z0-9-]+(\.[a-z0-9-]+)+(\/|$|#|\?)/i.test(v)) v = `https://${v}`;
+  else if (/^(s|v|app|research|sim|trade|academy|lab|legal|learn|ideas|notes)(\/|$)/.test(v)) v = `/${v}`;
+  return toAppPath(v, origin);
+}
+
 /** The sections whose pages are in this build, numbered for the Go menu. */
 function visibleSections(sections, root) {
   let n = 0;
@@ -141,4 +171,4 @@ function resolveRequest(root, pathname) {
   return { missing: true };
 }
 
-module.exports = { APP_ORIGIN, siteHosts, trustedOrigins, isTrusted, liveUrl, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest };
+module.exports = { APP_ORIGIN, siteHosts, trustedOrigins, isTrusted, liveUrl, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest, isAuthPath, shareUrl, parseOpenInput };
