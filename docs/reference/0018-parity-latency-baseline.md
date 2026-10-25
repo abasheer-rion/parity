@@ -4,7 +4,7 @@ title: Parity latency baseline
 type: reference
 status: current
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-25
 authors: [ayan]
 tags: [data, infra]
 related: [DEC-0045, DEC-0037]
@@ -27,10 +27,12 @@ The first measurement of how old our data is and how long each step takes, taken
 | Deploy job, start to end | 6.5 min | 7.3 min | 50 runs |
 | News job start to the end of the deploy it triggered | 9.2 min | 10.8 min | 6 |
 | Nightly research run, scheduled start to actual start | 2.4 h | 2.4 h | 1 run |
-| Time to first data in a browser | pending | pending | 0 |
-| One data request in a browser | pending | pending | 0 |
+| Our fetch to the site publishing it, live tables after the first deploy | 3 min | 8 min | 282 |
+| Time to first data in a browser, front page | 274 ms | 365 ms | 3 loads |
+| One data request in a browser (`/stats.json`) | 87 ms | 115 ms | 3 loads |
+| Largest paint in a browser, front page | 274 ms | 274 ms | 3 loads |
 
-Server numbers come from 26 hours of GitHub runs (2026-10-24 00:00 to 2026-10-25 02:00 UTC) and one full fetch of every source. Browser numbers are filled in once the first sampled page loads arrive after the deploy.
+Server numbers come from 26 hours of GitHub runs (2026-10-24 00:00 to 2026-10-25 02:00 UTC) and one full fetch of every source. The publish hop and the browser rows come from the live tables right after the first production deploy (2026-10-25 03:20 UTC). The three browser loads were our own test loads of the public front page from one machine in North America, so treat them as a smoke test; the signed-in apps had no beacons yet. Compare later numbers with the Latency page, not with these three.
 
 ## Data age by source
 
