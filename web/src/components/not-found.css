@@ -1,4 +1,4 @@
-/* The in-app "not found" view (src/components/NotFound.tsx, DEC-0053). Uses the shared UI
+/* The in-app "not found" view (src/components/NotFound.tsx, DEC-0055). Uses the shared UI
    tokens, which every app loads, with fallbacks so it reads on any background. */
 .nf-view { box-sizing: border-box; width: 100%; max-width: 480px; margin: 48px auto; padding: 32px 24px; text-align: center; color: var(--text, #f4f5f8); }
 .nf-view-mark { display: block; margin: 0 auto 18px; }

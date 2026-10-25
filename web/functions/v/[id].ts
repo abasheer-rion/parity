@@ -28,7 +28,7 @@ export const onRequestGet = async ({ request, env, params }: Context, fetcher: t
     } catch (e) {
       console.error("badge page tags failed", id, String(e));
     }
-    // No badge with this id: the same page (it says so), with status 404 (DEC-0053). A
+    // No badge with this id: the same page (it says so), with status 404 (DEC-0055). A
     // failed lookup is not a missing badge, so that keeps 200 and the page tries again.
     res = new Response(html, { status: found ? page.status : 404, statusText: found ? page.statusText : "Not Found", headers: page.headers });
     res.headers.delete("Content-Length");

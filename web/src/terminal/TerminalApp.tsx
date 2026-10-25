@@ -85,7 +85,7 @@ function parseHash(h: string): { ws: string; legacy?: string } | null {
 
 /**
  * True for a hash no app answers: not a workspace, an old Sim World tab or a product or
- * research page. The terminal shows its "not found" view for it (DEC-0053).
+ * research page. The terminal shows its "not found" view for it (DEC-0055).
  */
 function unknownTermHash(h: string): boolean {
   if (parseHash(h)) return false;

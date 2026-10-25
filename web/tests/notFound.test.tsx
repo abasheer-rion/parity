@@ -1,4 +1,4 @@
-// Addresses that do not exist (DEC-0053): which paths get the 404 page, which app paths
+// Addresses that do not exist (DEC-0055): which paths get the 404 page, which app paths
 // open the app at a hash, which hash routes each app does not know, the shared "not found"
 // view, the 404 page itself, and the Verify badge function's 404. No network.
 import { readFileSync } from "node:fs";

@@ -1,4 +1,4 @@
-// What happens at an address that does not exist (DEC-0053). Pure functions, no DOM, so
+// What happens at an address that does not exist (DEC-0055). Pure functions, no DOM, so
 // the Cloudflare middleware, the dev server plugin and the apps share one set of rules.
 //
 //   Public paths      Cloudflare Pages serves dist/404.html with status 404 for any path

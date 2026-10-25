@@ -1,4 +1,4 @@
-// The "not found" view every Parity app shows for an address it does not know (DEC-0053):
+// The "not found" view every Parity app shows for an address it does not know (DEC-0055):
 // an unknown hash route in the product, research, Terminal, Trade, Academy and Workbench
 // apps, and a Verify badge link with no badge. Plain words, a Back and a Home action, and
 // room for one more (such as Search). The static page for unknown paths is web/404.html.

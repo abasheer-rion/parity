@@ -83,7 +83,7 @@ function fromHash(l: Layout): Layout {
   return { ...l, cells: l.cells.map((c, i) => (i === l.active ? { ...c, symbol: s || c.symbol, tf: tf ?? c.tf } : c)) };
 }
 
-/** The hash itself when it names no Trade view (the app then shows "not found", DEC-0053), else null. */
+/** The hash itself when it names no Trade view (the app then shows "not found", DEC-0055), else null. */
 const unknownView = (h: string): string | null => { const v = h.split("?")[0].split("/")[1] ?? ""; return v && !(VIEW_IDS as string[]).includes(v) ? h : null; };
 const viewOf = (h: string): View => { const v = h.split("?")[0].split("/")[1] ?? ""; return (VIEW_IDS as string[]).includes(v) ? (v as View) : "chart"; };
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));

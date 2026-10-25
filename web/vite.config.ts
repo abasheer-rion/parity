@@ -148,7 +148,7 @@ function localScenarios(): Plugin {
 // Three builds share this file (see package.json "build"):
 //   vite build --mode site   the public pages: / (marketing), /login/, /signup/, /reset/,
 //                            /verify/, the Verify badge pages (/v/<id>), the legal pages under /legal/ and
-//                            404.html (served for any address that does not exist, DEC-0053), with their assets
+//                            404.html (served for any address that does not exist, DEC-0055), with their assets
 //                            in /assets/. Empties dist/.
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.

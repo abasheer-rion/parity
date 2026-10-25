@@ -69,7 +69,7 @@ describe("signed in", () => {
   });
 });
 
-describe("a missing app path (DEC-0053)", () => {
+describe("a missing app path (DEC-0055)", () => {
   function missing(url: string, cookie?: string) {
     const request = new Request(url, { headers: cookie ? { Cookie: cookie } : {} });
     const next = vi.fn(async () => new Response("<title>Page not found</title>", { status: 404 }));

@@ -94,7 +94,7 @@ export function Palette({ report = null }: { report?: Report | null }) {
       }
     };
     const onOpen = () => setOpen(true);
-    // /app/?search (the 404 page's Search link, DEC-0053) opens search once, then drops the flag.
+    // /app/?search (the 404 page's Search link, DEC-0055) opens search once, then drops the flag.
     const q = new URLSearchParams(window.location.search);
     if (q.has("search")) {
       setOpen(true);

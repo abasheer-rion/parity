@@ -25,7 +25,7 @@ export function otherSide(route: string): Space | null {
 
 /**
  * True when no page of the product or research app answers this hash route, so the app
- * shows its "not found" view instead of the home page (DEC-0053). Pricing exists only
+ * shows its "not found" view instead of the home page (DEC-0055). Pricing exists only
  * with the payments flag on; a doc or algorithm page needs its id.
  */
 export function unknownRoute(route: string, arg: string | undefined, payments: boolean): boolean {

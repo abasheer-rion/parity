@@ -1,4 +1,4 @@
-// The dev server answers a missing address the way Cloudflare Pages does (DEC-0053), so
+// The dev server answers a missing address the way Cloudflare Pages does (DEC-0055), so
 // `npm run dev` and the smoke test see the same thing as the live site:
 //   a page that does not exist      web/404.html, with status 404
 //   /<app>/<x> with nothing there   a redirect to /<app>/#/<x> (the apps route by the hash)

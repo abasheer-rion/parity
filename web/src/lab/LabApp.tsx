@@ -87,7 +87,7 @@ function LabShell() {
   const parts = hash.replace(/^#\/?/, "").split("?")[0].split("/");
   const asked = parts[0] as View;
   const view: View = IDS.includes(asked) ? asked : (IDS.includes(settings.last) && settings.start === "last" ? settings.last : "try");
-  // A view name the Workbench does not have shows its "not found" view (DEC-0053).
+  // A view name the Workbench does not have shows its "not found" view (DEC-0055).
   const missing = parts[0] !== "" && !IDS.includes(asked);
   const arg = parts[1] ? decodeURIComponent(parts[1]) : undefined;
   const mobile = useMobile();

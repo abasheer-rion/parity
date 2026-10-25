@@ -152,7 +152,7 @@ const flows = [
     return q === "carry" && sort === "year" ? null : `search "${q}", sort "${sort}"`;
   }],
 ];
-// ---------------------------------------------------------------- addresses that do not exist (DEC-0053)
+// ---------------------------------------------------------------- addresses that do not exist (DEC-0055)
 // The dev server answers like Cloudflare Pages (plugins/notFound.ts): an unknown path gets
 // the 404 page with status 404, a missing app path opens the app at that hash, and every
 // app shows its "not found" view for a hash route it does not know.
