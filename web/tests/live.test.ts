@@ -78,7 +78,8 @@ describe("latency", () => {
     expect(freshness("rt", 800, 1_500, true)).toBe("late");
     expect(freshness("rt", 120_000, 120, true)).toBe("stale");
     expect(freshness("rt", 800, 120, false)).toBe("stale");
-    expect(freshness("d15", 16 * 60_000, null, true)).toBe("ok");
+    expect(freshness("delayed", 16 * 60_000, null, true, 15)).toBe("ok");
+    expect(freshness("delayed", 4 * 60_000, null, true, 1)).toBe("late");
     expect(freshness("eod", 2 * 86_400_000, null, true)).toBe("ok");
   });
 

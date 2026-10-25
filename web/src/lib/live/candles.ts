@@ -47,7 +47,8 @@ export class CandleBuilder {
   /** The exchange time of the newest update folded in. */
   lastTe = 0;
 
-  constructor(history: Bar[], readonly tf: LiveTf) {
+  /** fromCloses: a new bar opens at the previous close (sources that give prices, not trades). */
+  constructor(history: Bar[], readonly tf: LiveTf, private fromCloses = false) {
     this.bars = history.map((b) => ({ ...b }));
   }
 
@@ -75,8 +76,8 @@ export class CandleBuilder {
       if (t.v) last.volume = (last.volume ?? 0) + t.v;
       change = "last";
     } else if (!last || key > last.time) {
-      const open = t.o;
-      this.bars.push({ time: key, open, high: t.h, low: t.l, close: t.p, volume: t.v || (last?.volume != null ? 0 : null) });
+      const open = this.fromCloses && last ? last.close : t.o;
+      this.bars.push({ time: key, open, high: Math.max(open, t.h), low: Math.min(open, t.l), close: t.p, volume: t.v || (last?.volume != null ? 0 : null) });
       change = "new";
     } else {
       return null;

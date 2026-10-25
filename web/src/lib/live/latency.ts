@@ -48,17 +48,18 @@ export function hops(t: Pick<Tick, "te" | "tr" | "ts">, recv: number, paint: num
 
 export type Freshness = "ok" | "late" | "stale";
 
-/** Limits per feed type: [late after, stale after] in ms of data age. */
-export const AGE_LIMITS: Record<FeedType, [number, number]> = {
-  rt: [5_000, 60_000],
-  d15: [20 * 60_000, 40 * 60_000],
-  eod: [4 * 86_400_000, 7 * 86_400_000],
-};
+/** [late after, stale after] in ms of data age. A delayed feed is late past twice its delay
+ *  plus a minute and stale past four times plus two; end of day allows a long weekend. */
+export function ageLimits(feed: FeedType, delayMin = 15): [number, number] {
+  if (feed === "rt") return [5_000, 60_000];
+  if (feed === "eod") return [4 * 86_400_000, 7 * 86_400_000];
+  return [(delayMin * 2 + 1) * 60_000, (delayMin * 4 + 2) * 60_000];
+}
 
 /** How fresh a feed looks: its age, its end-to-end time and whether the line is up. */
-export function freshness(feed: FeedType, ageMs: number | null, e2eMs: number | null, up: boolean): Freshness {
+export function freshness(feed: FeedType, ageMs: number | null, e2eMs: number | null, up: boolean, delayMin?: number): Freshness {
   if (!up || ageMs == null) return "stale";
-  const [late, stale] = AGE_LIMITS[feed];
+  const [late, stale] = ageLimits(feed, delayMin);
   if (ageMs > stale) return "stale";
   if (ageMs > late || (feed === "rt" && e2eMs != null && e2eMs > 1_000)) return "late";
   return "ok";

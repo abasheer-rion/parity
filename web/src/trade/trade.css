@@ -356,3 +356,21 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 @media (max-width: 1040px) {
   .cb-draw, .cb-log, .cb-select { display: none; }
 }
+
+/* Live data and strategy signals (DEC-0049). */
+.cg-attr { font-size: 10px; color: var(--text-2); white-space: nowrap; text-decoration: none; opacity: 0.85; flex: none; }
+.cg-attr:hover { color: var(--text); text-decoration: underline; }
+.cg-head .lb { margin-left: 4px; }
+.sgm { display: grid; gap: 2px; font-size: 12px; }
+.sgm-row { display: grid; grid-template-columns: 16px 1fr auto 34px; align-items: center; gap: 8px; padding: 4px 2px; border-radius: 4px; cursor: pointer; }
+.sgm-row:hover { background: var(--accent-soft, rgba(255, 255, 255, 0.04)); }
+.sgm-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sgm-tag { color: var(--text-2); font-size: 11px; }
+.sgm-v { color: var(--text-2); font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; }
+.sgm-note { margin: 6px 2px 0; color: var(--text-2); font-size: 11px; line-height: 1.4; }
+.sgc { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; font-size: 13px; }
+.sgc > div { display: grid; gap: 2px; }
+.sgc dt { color: var(--text-2); font-size: 11px; }
+.sgc dd { margin: 0; }
+.sgc-wide { grid-column: 1 / -1; }
+.sgc-note dd { color: var(--text-2); font-size: 12px; }

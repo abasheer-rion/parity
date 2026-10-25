@@ -15,6 +15,7 @@ export type LineState = "connecting" | "open" | "closed";
 export interface FeedStatus {
   src: string;
   feed: FeedType | null;
+  delay?: number;
   /** Our socket to the edge. */
   line: LineState;
   /** The edge's connection to the source. */
@@ -145,7 +146,7 @@ class SourceLine {
     } else if (m.op === "hello") {
       // A first guess at the offset until the first pong comes back.
       if (!Number.isFinite(this.clock.rtt)) this.clock.offset = m.ts - recvLocal;
-      this.emit({ feed: m.feed });
+      this.emit({ feed: m.feed, delay: m.delay });
     } else if (m.op === "state") {
       this.emit({ upstream: m.up, why: m.why });
     } else if (m.op === "t") {
@@ -153,7 +154,7 @@ class SourceLine {
       let gaps = 0;
       for (const t of m.d) {
         const prev = this.seq.get(t.s);
-        if (prev != null && t.q > prev + 1) gaps += t.q - prev - 1;
+        if (!t.r && prev != null && t.q > prev + 1) gaps += t.q - prev - 1;
         this.seq.set(t.s, t.q);
         this.queue.push({ t, recv });
       }
@@ -170,13 +171,16 @@ class SourceLine {
     if (!batch.length) return;
     for (const { t, recv } of batch) for (const fn of this.subs.get(t.s) ?? []) fn(t, recv);
     const paint = this.clock.now();
+    const timed = batch.filter((x) => !x.t.r);
     const newest = batch.reduce((a, b) => (b.t.te >= a.t.te ? b : a));
-    const h = hops(newest.t, newest.recv, paint);
-    if (this.reservoir) for (const x of batch) {
+    if (!timed.length) { this.emit({ lastTe: Math.max(newest.t.te, this.status.lastTe ?? 0), ticks: this.status.ticks + batch.length }); return; }
+    const nt = timed.reduce((a, b) => (b.t.te >= a.t.te ? b : a));
+    const h = hops(nt.t, nt.recv, paint);
+    if (this.reservoir) for (const x of timed) {
       const hx = hops(x.t, x.recv, paint);
       for (const k of Object.keys(hx) as (keyof HopTimes)[]) this.reservoir.add(`${this.src}/${k}`, hx[k]);
     }
-    this.emit({ last: h, lastTe: newest.t.te, ticks: this.status.ticks + batch.length });
+    this.emit({ last: h, lastTe: Math.max(newest.t.te, this.status.lastTe ?? 0), ticks: this.status.ticks + batch.length });
   }
 }
 

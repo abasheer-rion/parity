@@ -18,8 +18,11 @@ function scoreSymbol(s: Instrument, q: string): number {
   return 0;
 }
 
-export function Finder({ open, mode, initial, list, commands, onPick, onClose }: {
-  open: boolean; mode: "symbols" | "all"; initial: string; list: Instrument[]; commands: Command[];
+type Extra = Instrument & { live?: { src: string }; stock?: { exchange: string } };
+const extraClass = (s: Extra) => (s.live ? `Live, ${s.source}` : s.stock ? `US listed${s.stock.exchange ? `, ${s.stock.exchange}` : ""}` : CLASS_LABEL[s.class] ?? s.class);
+
+export function Finder({ open, mode, initial, list, extra = [], commands, onPick, onClose }: {
+  open: boolean; mode: "symbols" | "all"; initial: string; list: Instrument[]; extra?: Extra[]; commands: Command[];
   onPick: (key: string) => void; onClose: () => void;
 }) {
   const [q, setQ] = useState(initial);
@@ -39,11 +42,16 @@ export function Finder({ open, mode, initial, list, commands, onPick, onClose }:
         const sc = scoreSymbol(s, n);
         if (sc > 0) out.push({ id: `s:${s.key}`, label: s.short, sub: s.label, cls: CLASS_LABEL[s.class] ?? s.class, group: "Symbol", run: () => onPick(s.key), score: sc + 20 });
       }
+      // Live symbols rank just above stocks of the same match; the SEC list has about 10,000.
+      for (const s of extra) {
+        const sc = scoreSymbol(s, n);
+        if (sc > 0) out.push({ id: `s:${s.key}`, label: s.short, sub: s.label, cls: extraClass(s), group: s.live ? "Live" : "Stock", run: () => onPick(s.key), score: sc + (s.live ? 19 : 18) });
+      }
     } else if (mode === "symbols") {
       for (const s of list.slice(0, 40)) out.push({ id: `s:${s.key}`, label: s.short, sub: s.label, cls: CLASS_LABEL[s.class] ?? s.class, group: "Symbol", run: () => onPick(s.key), score: 1 });
     }
     return out.filter((h) => h.score > 0).sort((a, b) => b.score - a.score).slice(0, 60);
-  }, [q, list, commands, mode, onPick]);
+  }, [q, list, extra, commands, mode, onPick]);
 
   useEffect(() => { setSel(0); }, [q]);
   useEffect(() => { box.current?.querySelector<HTMLElement>(`[data-i="${sel}"]`)?.scrollIntoView({ block: "nearest" }); }, [sel]);

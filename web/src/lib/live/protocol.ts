@@ -9,9 +9,17 @@
 // measures with ping/pong, so every hop can be shown and logged.
 
 /** How fresh a feed is by licence and design. */
-export type FeedType = "rt" | "d15" | "eod";
+export type FeedType = "rt" | "delayed" | "eod";
 
-export const FEED_LABEL: Record<FeedType, string> = { rt: "Real-time", d15: "Delayed 15 min", eod: "End of day" };
+/** The feed in words: "Real-time", "Delayed 15 min", "End of day". */
+export function feedLabel(feed: FeedType, delayMin?: number): string {
+  return feed === "rt" ? "Real-time" : feed === "eod" ? "End of day" : `Delayed ${delayMin ?? 15} min`;
+}
+
+/** The feed in two or three letters for the badge: RT, 1m, 15m, EOD. */
+export function feedShort(feed: FeedType, delayMin?: number): string {
+  return feed === "rt" ? "RT" : feed === "eod" ? "EOD" : `${delayMin ?? 15}m`;
+}
 
 /** One conflated trade update for one symbol: everything that traded in the window. */
 export interface Tick {
@@ -32,6 +40,8 @@ export interface Tick {
   ts: number;
   /** Per-symbol sequence from our edge; a jump means updates were lost. */
   q: number;
+  /** 1 when replayed to a viewer who just subscribed: drawn, but not timed. */
+  r?: 1;
 }
 
 /** Messages from the browser to the edge. */
@@ -43,7 +53,7 @@ export type ClientMsg =
 
 /** Messages from the edge to the browser. */
 export type ServerMsg =
-  | { op: "hello"; src: string; feed: FeedType; ts: number; max: number }
+  | { op: "hello"; src: string; feed: FeedType; delay?: number; ts: number; max: number }
   | { op: "t"; d: Tick[] }
   | { op: "pong"; c: number; ts: number }
   /** Upstream state for this source: up, connecting, down (with a reason). */
@@ -87,7 +97,7 @@ export function parseServer(text: string): ServerMsg | null {
       if (!Array.isArray(o.d)) return null;
       return { op: "t", d: (o.d as Tick[]).filter((t) => t && validSymbol(t.s) && num(t.p) && num(t.o) && num(t.h) && num(t.l) && num(t.te) && num(t.tr) && num(t.ts) && num(t.q)) };
     case "pong": return num(o.c) && num(o.ts) ? { op: "pong", c: o.c, ts: o.ts } : null;
-    case "hello": return typeof o.src === "string" && (o.feed === "rt" || o.feed === "d15" || o.feed === "eod") && num(o.ts) ? { op: "hello", src: o.src, feed: o.feed, ts: o.ts, max: num(o.max) ? o.max : MAX_SUBS } : null;
+    case "hello": return typeof o.src === "string" && (o.feed === "rt" || o.feed === "delayed" || o.feed === "eod") && num(o.ts) ? { op: "hello", src: o.src, feed: o.feed, delay: num(o.delay) ? o.delay : undefined, ts: o.ts, max: num(o.max) ? o.max : MAX_SUBS } : null;
     case "state": return o.up === "up" || o.up === "connecting" || o.up === "down" ? { op: "state", up: o.up, why: typeof o.why === "string" ? o.why : undefined, ts: num(o.ts) ? o.ts : 0 } : null;
     case "err": return { op: "err", why: String(o.why ?? "") };
     default: return null;

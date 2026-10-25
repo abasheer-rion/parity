@@ -9,9 +9,10 @@
 // sockets cost nothing. Caps: MAX_VIEWERS sockets, MAX_SUBS symbols per socket and
 // MAX_UPSTREAM symbols per source, so no viewer can make us flood a venue. GET /status
 // returns counters and is the log; connects and upstream changes also go to the Workers log.
-import { Conflator } from "../../src/lib/live/conflate";
+import { Conflator, type Trade } from "../../src/lib/live/conflate";
 import { MAX_SUBS, parseClient, type ServerMsg, type Tick } from "../../src/lib/live/protocol";
 import { adapterFor, type Adapter } from "./adapters";
+import { sourceById } from "../../src/lib/live/sources";
 import type { DurableObjectState, Env, WebSocketPairCtor, WorkerSocket } from "./types";
 
 declare const WebSocketPair: WebSocketPairCtor;
@@ -20,6 +21,7 @@ const MAX_VIEWERS = 500;
 const MAX_UPSTREAM = 60;
 const IDLE_CLOSE_MS = 60_000;
 const STALL_MS = 45_000;
+const SNAPSHOT_MS = 3_000;
 
 interface Attachment { subs: string[]; at: number }
 
@@ -30,6 +32,14 @@ export class LiveHub {
   private upState: "up" | "connecting" | "down" = "down";
   private why = "";
   private upSubs = new Set<string>();
+  /** When each symbol was subscribed upstream: trades from before then are the source's
+   *  catch-up snapshot, not live, and are dropped. */
+  private subAt = new Map<string, number>();
+  /** Newest exchange time relayed per symbol; a polled source repeats prices, which are skipped. */
+  private lastTe = new Map<string, number>();
+  private poller: ReturnType<typeof setInterval> | null = null;
+  /** The newest update per symbol, sent at once to a viewer who subscribes later. */
+  private lastTick = new Map<string, Tick>();
   private conflator = new Conflator();
   private timer: ReturnType<typeof setInterval> | null = null;
   private pinger: ReturnType<typeof setInterval> | null = null;
@@ -59,7 +69,7 @@ export class LiveHub {
     this.state.acceptWebSocket(server, [src]);
     server.serializeAttachment({ subs: [], at: Date.now() } satisfies Attachment);
     this.stats.viewersSeen += 1;
-    this.send(server, { op: "hello", src, feed: this.adapter.feed, ts: Date.now(), max: MAX_SUBS });
+    this.send(server, { op: "hello", src, feed: this.adapter.feed, delay: this.adapter.delayMin ?? sourceById(src)?.delayMin, ts: Date.now(), max: MAX_SUBS });
     this.send(server, { op: "state", up: this.upState, why: this.why || undefined, ts: Date.now() });
     return new Response(null, { status: 101, webSocket: client } as ResponseInit & { webSocket: WebSocket });
   }
@@ -83,6 +93,10 @@ export class LiveHub {
       for (const s of m.s) mine.delete(s);
     }
     ws.serializeAttachment({ ...att, subs: [...mine] } satisfies Attachment);
+    if (m.op === "sub") {
+      const have = m.s.flatMap((s) => (mine.has(s) && this.lastTick.has(s) ? [{ ...this.lastTick.get(s)!, r: 1 as const }] : []));
+      if (have.length) this.send(ws, { op: "t", d: have });
+    }
     this.reconcile();
   }
 
@@ -113,16 +127,47 @@ export class LiveHub {
   private reconcile() {
     const want = this.wanted();
     if (!want.size) {
-      if (!this.idle && this.up) this.idle = setTimeout(() => this.closeUpstream("nobody watching"), IDLE_CLOSE_MS);
+      if (!this.idle && (this.up || this.poller)) this.idle = setTimeout(() => this.closeUpstream("nobody watching"), IDLE_CLOSE_MS);
       return;
     }
     if (this.idle) { clearTimeout(this.idle); this.idle = null; }
+    if (this.adapter!.poll) { this.reconcilePoll(want); return; }
     if (!this.up) { if (this.upState !== "connecting") void this.openUpstream(); return; }
     if (this.upState !== "up") return;
     const add = [...want].filter((s) => !this.upSubs.has(s));
     const drop = [...this.upSubs].filter((s) => !want.has(s));
-    if (add.length) { for (const m of this.adapter!.subscribe(add)) this.up.send(m); add.forEach((s) => this.upSubs.add(s)); }
+    if (add.length) { for (const m of this.adapter!.subscribe(add)) this.up.send(m); const at = Date.now(); add.forEach((s) => { this.upSubs.add(s); this.subAt.set(s, at); }); }
     if (drop.length) { for (const m of this.adapter!.unsubscribe(drop)) this.up.send(m); drop.forEach((s) => { this.upSubs.delete(s); this.conflator.drop(s); }); }
+  }
+
+  // ------------------------------------------------------------------ polled sources
+
+  /** A polled source: one request per period for every wanted symbol, while anyone watches. */
+  private reconcilePoll(want: Set<string>) {
+    for (const s of want) if (!this.upSubs.has(s)) { this.upSubs.add(s); this.lastTe.delete(s); }
+    for (const s of [...this.upSubs]) if (!want.has(s)) { this.upSubs.delete(s); this.conflator.drop(s); }
+    if (this.poller) { void this.pollOnce(); return; }
+    this.setState("connecting");
+    void this.pollOnce();
+    this.poller = setInterval(() => void this.pollOnce(), this.adapter!.poll!.every);
+  }
+
+  private polling = false;
+  private async pollOnce() {
+    if (this.polling || !this.upSubs.size) return;
+    this.polling = true;
+    try {
+      const trades = await this.adapter!.poll!.run([...this.upSubs]);
+      this.stats.upstreamMsgs += 1;
+      this.lastUpMsg = Date.now();
+      if (this.upState !== "up") { this.stats.upstreamOpens += 1; this.setState("up"); }
+      this.relay(trades.filter((t) => t.te > (this.lastTe.get(t.s) ?? 0)), false);
+    } catch (e) {
+      console.log(`[${this.src}] poll failed: ${String(e)}`);
+      this.setState("down", "source did not answer");
+    } finally {
+      this.polling = false;
+    }
   }
 
   // ------------------------------------------------------------------ upstream
@@ -139,7 +184,7 @@ export class LiveHub {
     this.setState("connecting");
     let ws: WorkerSocket | null = null;
     try {
-      const res = await fetch(a.url, { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.ai)" } });
+      const res = await fetch(a.url.replace(/^ws/, "http"), { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.ai)" } });
       ws = (res as Response & { webSocket?: WorkerSocket }).webSocket ?? null;
       if (!ws) throw new Error(`upstream answered ${res.status}`);
     } catch (e) {
@@ -181,6 +226,8 @@ export class LiveHub {
     if (this.wanted().size) return;
     console.log(`[${this.src}] upstream closed: ${why}`);
     this.dropUpstream();
+    if (this.poller) { clearInterval(this.poller); this.poller = null; }
+    this.upSubs.clear();
     this.upState = "down";
   }
 
@@ -202,11 +249,18 @@ export class LiveHub {
     const now = Date.now();
     this.lastUpMsg = now;
     this.stats.upstreamMsgs += 1;
-    const trades = this.adapter!.parse(data);
+    this.relay(this.adapter!.parse(data), true);
+  }
+
+  /** Conflate and send trades; `live` drops a source's catch-up snapshot after a subscribe. */
+  private relay(trades: Trade[], live: boolean) {
     if (!trades.length) return;
+    const now = Date.now();
     const out: Tick[] = [];
     for (const t of trades) {
-      if (!this.upSubs.has(t.s)) continue;
+      if (!this.upSubs.has(t.s) || !Number.isFinite(t.te)) continue;
+      if (live && t.te < (this.subAt.get(t.s) ?? 0) - SNAPSHOT_MS) continue;
+      this.lastTe.set(t.s, Math.max(t.te, this.lastTe.get(t.s) ?? 0));
       this.stats.trades += 1;
       const lag = now - t.te;
       if (this.stats.feedLagMs.length < 2000) this.stats.feedLagMs.push(lag);
@@ -224,6 +278,7 @@ export class LiveHub {
   }
 
   private broadcast(ticks: Tick[]) {
+    for (const t of ticks) this.lastTick.set(t.s, t);
     for (const v of this.viewers()) {
       if (!v.subs.length) continue;
       const d = ticks.filter((t) => v.subs.includes(t.s));

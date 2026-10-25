@@ -9,13 +9,22 @@ import type { Trade } from "../../src/lib/live/conflate";
 import type { FeedType } from "../../src/lib/live/protocol";
 import { sourceById } from "../../src/lib/live/sources";
 
-export interface AdapterEnv { VENDOR?: string; VENDOR_KEY?: string; PARITY_CONTACT?: string }
+export interface AdapterEnv {
+  VENDOR?: string;
+  VENDOR_KEY?: string;
+  PARITY_CONTACT?: string;
+  /** Sources whose terms are unclear ("ask"), switched on by the owner: comma separated ids. */
+  LIVE_ALLOW?: string;
+}
 
 export interface Adapter {
   id: string;
   feed: FeedType;
-  /** WebSocket address of the public feed. */
+  delayMin?: number;
+  /** WebSocket address of the public feed (empty for a polled source). */
   url: string;
+  /** A polled source: fetch every `every` ms while anyone watches, one request for all symbols. */
+  poll?: { every: number; run(symbols: string[]): Promise<Trade[]> };
   allows(symbol: string): boolean;
   subscribe(symbols: string[]): string[];
   unsubscribe(symbols: string[]): string[];
@@ -33,7 +42,11 @@ export interface AdapterDef {
 }
 
 const num = (x: unknown) => (typeof x === "number" ? x : typeof x === "string" ? Number(x) : Number.NaN);
-const allowedByTerms = (id: string) => sourceById(id)?.licence === "display";
+/** On when its terms allow display, or when its terms are unclear and the owner allowed it. */
+function allowed(id: string, env: AdapterEnv): boolean {
+  const lic = sourceById(id)?.licence;
+  return lic === "display" || (lic === "ask" && (env.LIVE_ALLOW ?? "").split(",").map((x) => x.trim()).includes(id));
+}
 
 /** Candles as our charts key them (ISO time intraday, date for daily), oldest first. */
 function keyed(rows: { t: number; o: number; h: number; l: number; c: number; v: number | null }[], tf: string): Bar[] {
@@ -57,7 +70,7 @@ const coinOf = (s: string) => s.match(HL_COIN)?.[1] ?? null;
 
 const hyperliquid: AdapterDef = {
   id: "hyperliquid",
-  enabled: () => allowedByTerms("hyperliquid"),
+  enabled: (env) => allowed("hyperliquid", env),
   make: () => ({
     id: "hyperliquid", feed: "rt", url: "wss://api.hyperliquid.xyz/ws",
     allows: (s) => HL_COIN.test(s),
@@ -86,40 +99,13 @@ const hyperliquid: AdapterDef = {
   },
 };
 
-// ------------------------------------------------------------------ Coinbase Exchange
-
 const PAIR = /^[A-Z0-9]{2,10}-[A-Z]{3,4}$/;
-
-const coinbase: AdapterDef = {
-  id: "coinbase",
-  enabled: () => allowedByTerms("coinbase"),
-  make: () => ({
-    id: "coinbase", feed: "rt", url: "wss://ws-feed.exchange.coinbase.com",
-    allows: (s) => PAIR.test(s),
-    subscribe: (ss) => [JSON.stringify({ type: "subscribe", product_ids: ss, channels: ["matches", "heartbeat"] })],
-    unsubscribe: (ss) => [JSON.stringify({ type: "unsubscribe", product_ids: ss, channels: ["matches", "heartbeat"] })],
-    parse(data) {
-      let m: { type?: string; product_id?: string; price?: string; size?: string; time?: string };
-      try { m = JSON.parse(data); } catch { return []; }
-      if (m.type !== "match" || !m.product_id) return [];
-      return [{ s: m.product_id, p: num(m.price), v: num(m.size), te: Date.parse(m.time ?? "") }];
-    },
-  }),
-  async history(symbol, tf) {
-    const g: Record<string, number> = { "1m": 60, "5m": 300, "15m": 900, "1h": 3600, "1d": 86400 };
-    if (!PAIR.test(symbol) || !g[tf]) return null;
-    const res = await fetch(`https://api.exchange.coinbase.com/products/${symbol}/candles?granularity=${g[tf]}`, { headers: { "User-Agent": "parity-live" } });
-    if (!res.ok) throw new Error(`coinbase ${res.status}`);
-    const rows = (await res.json()) as number[][]; // [time s, low, high, open, close, volume]
-    return keyed(rows.map((r) => ({ t: r[0] * 1000, l: r[1], h: r[2], o: r[3], c: r[4], v: r[5] })), tf);
-  },
-};
 
 // ------------------------------------------------------------------ Kraken (WebSocket v2)
 
 const kraken: AdapterDef = {
   id: "kraken",
-  enabled: () => allowedByTerms("kraken"),
+  enabled: (env) => allowed("kraken", env),
   make: () => ({
     id: "kraken", feed: "rt", url: "wss://ws.kraken.com/v2",
     allows: (s) => PAIR.test(s),
@@ -135,27 +121,85 @@ const kraken: AdapterDef = {
   }),
 };
 
-// ------------------------------------------------------------------ Bitstamp
+// ------------------------------------------------------------------ CoinGecko (polled)
 
-const bitstamp: AdapterDef = {
-  id: "bitstamp",
-  enabled: () => allowedByTerms("bitstamp"),
+/** CoinGecko's 100 largest coins, about a minute behind (its free API refreshes about once a
+ *  minute). One request a minute serves every viewer of every coin. Display is allowed with
+ *  "Data provided by CoinGecko" linked next to the data (REF-0014). */
+const CG = "https://api.coingecko.com/api/v3";
+const CG_SYM = /^([A-Z0-9]{1,12})-USD$/;
+interface CgRow { id: string; symbol: string; current_price: number | null; last_updated: string | null; market_cap_rank: number | null }
+
+let cgTop: { at: number; rows: CgRow[] } | null = null;
+async function cgMarkets(maxAgeMs: number): Promise<CgRow[]> {
+  if (cgTop && Date.now() - cgTop.at < maxAgeMs) return cgTop.rows;
+  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1`, { headers: { Accept: "application/json", "User-Agent": "parity-live" } });
+  if (!res.ok) throw new Error(`coingecko ${res.status}`);
+  const rows = (await res.json()) as CgRow[];
+  cgTop = { at: Date.now(), rows };
+  return rows;
+}
+/** Our symbol for a CoinGecko row; the larger coin keeps a ticker two coins share. */
+function cgSymbols(rows: CgRow[]): Map<string, CgRow> {
+  const out = new Map<string, CgRow>();
+  for (const r of rows) {
+    const s = `${r.symbol.toUpperCase()}-USD`;
+    if (CG_SYM.test(s) && !out.has(s)) out.set(s, r);
+  }
+  return out;
+}
+const coingecko: AdapterDef = {
+  id: "coingecko",
+  enabled: (env) => allowed("coingecko", env),
   make: () => ({
-    id: "bitstamp", feed: "rt", url: "wss://ws.bitstamp.net",
-    allows: (s) => PAIR.test(s),
-    subscribe: (ss) => ss.map((s) => JSON.stringify({ event: "bts:subscribe", data: { channel: `live_trades_${s.replace("-", "").toLowerCase()}` } })),
-    unsubscribe: (ss) => ss.map((s) => JSON.stringify({ event: "bts:unsubscribe", data: { channel: `live_trades_${s.replace("-", "").toLowerCase()}` } })),
-    parse(data) {
-      let m: { event?: string; channel?: string; data?: { price: number; amount: number; microtimestamp: string } };
-      try { m = JSON.parse(data); } catch { return []; }
-      if (m.event !== "trade" || !m.channel || !m.data) return [];
-      const pair = m.channel.replace("live_trades_", "").toUpperCase();
-      const s = `${pair.slice(0, -3)}-${pair.slice(-3)}`;
-      return [{ s, p: num(m.data.price), v: num(m.data.amount), te: Math.floor(num(m.data.microtimestamp) / 1000) }];
+    id: "coingecko", feed: "delayed", delayMin: 1, url: "",
+    allows: (s) => CG_SYM.test(s),
+    subscribe: () => [], unsubscribe: () => [], parse: () => [],
+    poll: {
+      every: 30_000,
+      async run(symbols) {
+        const bySym = cgSymbols(await cgMarkets(30_000));
+        const out: Trade[] = [];
+        for (const s of symbols) {
+          const r = bySym.get(s);
+          const te = r?.last_updated ? Date.parse(r.last_updated) : Number.NaN;
+          if (!r || r.current_price == null || !Number.isFinite(te)) continue;
+          out.push({ s, p: r.current_price, v: 0, te });
+        }
+        return out;
+      },
     },
-    ping: () => JSON.stringify({ event: "bts:heartbeat" }),
   }),
+  async history(symbol, tf) {
+    const days: Record<string, number> = { "5m": 1, "1h": 30, "1d": 365 };
+    if (!CG_SYM.test(symbol) || !days[tf]) return null;
+    const row = cgSymbols(await cgMarkets(3_600_000)).get(symbol);
+    if (!row) return null;
+    const res = await fetch(`${CG}/coins/${encodeURIComponent(row.id)}/market_chart?vs_currency=usd&days=${days[tf]}${tf === "1d" ? "&interval=daily" : ""}`, { headers: { Accept: "application/json", "User-Agent": "parity-live" } });
+    if (!res.ok) throw new Error(`coingecko ${res.status}`);
+    const doc = (await res.json()) as { prices: [number, number][] };
+    return fromPrices(doc.prices ?? [], tf);
+  },
 };
+
+/** Bars from price points: each bar holds the points in its period and opens at the previous
+ *  close, the same rule as the daily charts (DEC-0031). */
+export function fromPrices(points: [number, number][], tf: string): Bar[] {
+  const ms = TF_MS[tf];
+  const out: Bar[] = [];
+  for (const [t, p] of points) {
+    if (!Number.isFinite(t) || !Number.isFinite(p)) continue;
+    const start = Math.floor(t / ms) * ms;
+    const iso = new Date(start).toISOString();
+    const key = tf === "1d" ? iso.slice(0, 10) : `${iso.slice(0, 19)}Z`;
+    const last = out[out.length - 1];
+    if (last && last.time === key) { last.close = p; last.high = Math.max(last.high, p); last.low = Math.min(last.low, p); continue; }
+    if (last && key < last.time) continue;
+    const open = last ? last.close : p;
+    out.push({ time: key, open, high: Math.max(open, p), low: Math.min(open, p), close: p, volume: null });
+  }
+  return out;
+}
 
 // ------------------------------------------------------------------ licensed vendor
 
@@ -180,7 +224,7 @@ const vendor: AdapterDef = {
   }),
 };
 
-export const ADAPTERS: AdapterDef[] = [hyperliquid, coinbase, kraken, bitstamp, vendor];
+export const ADAPTERS: AdapterDef[] = [coingecko, hyperliquid, kraken, vendor];
 
 export function adapterFor(id: string, env: AdapterEnv): Adapter | null {
   const def = ADAPTERS.find((a) => a.id === id);
@@ -226,6 +270,9 @@ export async function universe(env: AdapterEnv): Promise<UniverseDoc> {
       live.hyperliquid = m.universe.filter((u) => !u.isDelisted && /^[A-Z0-9]{1,12}$/.test(u.name)).map((u) => `${u.name}-PERP`);
     } catch { live.hyperliquid = []; }
   }
-  for (const a of [coinbase, kraken, bitstamp]) if (a.enabled(env)) live[a.id] = sourceById(a.id)?.symbols ?? [];
+  if (coingecko.enabled(env)) {
+    try { live.coingecko = [...cgSymbols(await cgMarkets(600_000)).keys()]; } catch { live.coingecko = []; }
+  }
+  if (kraken.enabled(env)) live.kraken = sourceById("kraken")?.symbols ?? [];
   return { at: Date.now(), stocks, live };
 }
