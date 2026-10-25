@@ -3,7 +3,8 @@
 // front page's button with a loading state, messages screen readers announce, and a
 // submit helper that puts each error under the field it is about.
 import { useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
-import { emailProblem, passwordRules } from "./rules";
+import { PasswordMeter } from "./PasswordMeter";
+import { emailProblem } from "./rules";
 
 /** An error from a form. With `field`, it shows under that field; without, above the button. */
 export interface Problem { field?: string; message: string }
@@ -109,13 +110,12 @@ export function Field({ label, value, onChange, type = "text", auto, name, autoF
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
  * off each rule as you type (for new passwords).
  */
-export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error }: {
+export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error, email }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
-  name?: string; autoFocus?: boolean; rules?: boolean; aside?: ReactNode; error?: string | null;
+  name?: string; autoFocus?: boolean; rules?: boolean; email?: string; aside?: ReactNode; error?: string | null;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const list = rules ? passwordRules(value).filter((r) => r.id !== "max" || !r.ok) : [];
   const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="pa-field">
@@ -145,16 +145,7 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
           {shown ? "Hide" : "Show"}
         </button>
       </div>
-      {rules && (
-        <ul className="pa-rules" id={`${id}-rules`} aria-label="Password rules">
-          {list.map((r) => (
-            <li key={r.id} className={r.ok ? "ok" : ""}>
-              <span aria-hidden="true">{r.ok ? "✓" : "•"}</span> {r.label}
-              <span className="sr">{r.ok ? ", done" : ", not yet"}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
       {error && <span className="pa-error" id={`${id}-err`} role="alert">{error}</span>}
     </div>
   );
@@ -170,6 +161,12 @@ export function Submit({ busy, children, primary = true, type = "submit", onClic
       data-busy={busy || undefined} onClick={onClick} autoFocus={autoFocus}>
       {busy && <span className="pa-spin" aria-hidden="true" />}
       <span className="pa-btn-label">{children}</span>
+      {/* Shown in place of the label once sign-in succeeds and the page starts to leave (nav.ts). */}
+      {busy && (
+        <svg className="pa-done" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M4 9.4l3.3 3.3L14 5.8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
     </button>
   );
 }
