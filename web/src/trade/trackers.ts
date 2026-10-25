@@ -1,6 +1,7 @@
 // Watchlists and alerts (DEC-0033): the two saved tables, the default list a new person
 // starts with, and the check that runs alerts against the latest delayed daily bars.
 import { toast } from "../ui";
+import { desktopNotify } from "../desktop/bridge";
 import { dayOf, describeAlert, evaluateAlert, type AlertKind } from "../lib/alerts";
 import { digitsFor, loadBars, priceText, type Instrument } from "../lib/tradeData";
 import { table, type Row } from "../lib/userStore";
@@ -64,6 +65,8 @@ export function checkAlerts(insts: Instrument[]): Promise<AlertRow[]> {
         await alertsTable.update(a.id, patch);
         fired.push({ ...a, ...patch });
         toast(`${inst.short || inst.label}: ${alertText(a)} (${hit.bar}, ${alertValueText(a, hit.value)})`, { ms: 7000 });
+        // The desktop app also shows it as a system notification (DEC-0041).
+        desktopNotify(`${inst.short || inst.label}: ${alertText(a)}`, `${hit.bar}, ${alertValueText(a, hit.value)}`, `/trade/#/chart?s=${encodeURIComponent(symbol)}`);
       }
     }
     return fired;

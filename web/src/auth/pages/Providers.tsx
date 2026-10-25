@@ -1,6 +1,7 @@
 // "Continue with Google / GitHub / passkey" buttons. Only configured options show
 // (config.ts). Nothing renders when none are on.
 import { Button } from "../../ui";
+import { desktop, DESKTOP_SCHEME } from "../../desktop/bridge";
 import { explain, supabase } from "../client";
 import { ENABLED_PROVIDERS, PASSKEYS_ENABLED, ROUTES, type ProviderId } from "../config";
 import { go, useSubmit } from "../form";
@@ -15,6 +16,17 @@ export function ProviderButtons({ onError, next }: { onError: (msg: string | nul
     // Come back to /login/ on this host, which is public, so the browser can finish
     // signing in (and ask for an authenticator code) before it opens the app. `next`
     // is already checked by safeNext.
+    // In the desktop app (DEC-0041) the provider's page opens in the browser and comes
+    // back to parity://login/, which the app turns into its own /login/ page.
+    if (desktop) {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: `${DESKTOP_SCHEME}://${withNext(ROUTES.login, next).replace(/^\//, "")}`, skipBrowserRedirect: true },
+      });
+      if (data?.url) desktop.openExternal(data.url);
+      onError(explain(error));
+      return;
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo: `${window.location.origin}${withNext(ROUTES.login, next)}` },

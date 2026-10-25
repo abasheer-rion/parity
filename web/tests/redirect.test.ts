@@ -108,3 +108,18 @@ describe("emailLanding", () => {
     expect(emailLanding("https://evil.com/", parity)).toBe("https://parity.endyland.com/app/");
   });
 });
+
+describe("desktop app pages at app://parity (DEC-0041)", () => {
+  const app = { origin: "app://parity", hostname: "parity" };
+  it("keeps same-app paths", () => {
+    expect(safeNext("/trade/#/alerts", app)).toBe("/trade/#/alerts");
+    expect(safeNext("/research/", app)).toBe("/research/");
+  });
+  it("still refuses other sites", () => {
+    expect(safeNext("https://evil.example/", app)).toBe("/app/");
+    expect(safeNext("app://evil/", app)).toBe("/app/");
+  });
+  it("points emails at the website", () => {
+    expect(emailLanding("/trade/", app)).toBe("https://parity.endyland.com/trade/");
+  });
+});

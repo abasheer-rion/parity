@@ -31,6 +31,7 @@ import {
   type Grid, type Layout, type Settings, type View,
 } from "./state";
 import { checkAlerts } from "./trackers";
+import { isDesktop } from "../desktop/bridge";
 import { NameDialog, WatchlistsView, WatchMini } from "./WatchlistsView";
 import "./trade.css";
 
@@ -132,6 +133,12 @@ function TradeShell() {
   // Alerts are checked once the instruments load.
   const checked = useRef(false);
   useEffect(() => { if (list.length && !checked.current) { checked.current = true; void checkAlerts(list); } }, [list]);
+  // The desktop app stays open for hours, so it checks again every 30 minutes (DEC-0041).
+  useEffect(() => {
+    if (!isDesktop() || !list.length) return;
+    const t = window.setInterval(() => void checkAlerts(list), 30 * 60_000);
+    return () => window.clearInterval(t);
+  }, [list]);
 
   const [tool, setTool] = useState<DrawTool>("none");
   const [finder, setFinder] = useState<{ open: boolean; mode: "symbols" | "all"; initial: string }>({ open: false, mode: "symbols", initial: "" });

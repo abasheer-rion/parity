@@ -6,6 +6,7 @@
 // The browser's Supabase client keeps the session in a cookie (src/auth/client.ts).
 // We check the access token's signature against the project's public keys (ES256,
 // fetched from the JWKS address and cached by jose), its issuer, audience and expiry.
+// The desktop app sends the same token as "Authorization: Bearer" (DEC-0041).
 // No secret is needed. See auth/README.md.
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { HOST } from "../src/lib/meta";
@@ -50,12 +51,14 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
   }
   if (!PROTECTED.some((re) => re.test(url.pathname))) return next();
 
-  const token = accessToken(request.headers.get("Cookie") ?? "");
+  // The desktop app (DEC-0041) has no cookie for this address: its main process sends the
+  // same access token as a bearer header instead, checked the same way.
+  const token = bearerToken(request.headers.get("Authorization")) ?? accessToken(request.headers.get("Cookie") ?? "");
   if (token && (await valid(token))) {
     const res = await next(forward);
     const out = new Response(res.body, res);
     out.headers.set("Cache-Control", "private, no-cache");
-    out.headers.append("Vary", "Cookie");
+    out.headers.append("Vary", "Cookie, Authorization");
     return out;
   }
 
@@ -74,6 +77,12 @@ async function valid(token: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+/** The token from an "Authorization: Bearer <token>" header, or null. */
+export function bearerToken(header: string | null): string | null {
+  const m = /^Bearer\s+([A-Za-z0-9._~+/=-]+)$/.exec((header ?? "").trim());
+  return m ? m[1] : null;
 }
 
 /** Reads the session cookie written by @supabase/ssr (maybe split into .0, .1, ...). */

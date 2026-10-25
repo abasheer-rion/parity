@@ -5,7 +5,7 @@
 // World share the sign-in there). Everything else falls back to the app. This file has no
 // browser globals at import time, so the tests can run it directly.
 
-import { SITE_DOMAIN } from "../lib/meta";
+import { ORIGIN, SITE_DOMAIN } from "../lib/meta";
 
 /** Pages that must never be a "next" target, or signing in would loop back to them. */
 const AUTH_PAGES = /^\/(login|signup|reset|verify)(\/|$)/;
@@ -19,6 +19,14 @@ interface Here { origin: string; hostname: string }
 
 function here(): Here {
   return { origin: window.location.origin, hostname: window.location.hostname };
+}
+
+/**
+ * A URL's origin. The desktop app's pages live at app://parity (DEC-0041); a URL parser
+ * that does not know the scheme reports its origin as "null", so it is rebuilt here.
+ */
+function originOf(url: URL): string {
+  return url.origin !== "null" ? url.origin : `${url.protocol}//${url.host}`;
 }
 
 /** True for https://endyland.com and https://<anything>.endyland.com on the default port. */
@@ -43,11 +51,11 @@ export function safeNext(raw: string | null | undefined, at: Here = here(), fall
   if (value.startsWith("/")) {
     if (value.startsWith("//")) return fallback;
     try { url = new URL(value, at.origin); } catch { return fallback; }
-    if (url.origin !== at.origin) return fallback;
+    if (originOf(url) !== at.origin) return fallback;
   } else {
     try { url = new URL(value); } catch { return fallback; }
     if (url.username || url.password) return fallback;
-    if (url.origin !== at.origin && !isSiteHost(url)) return fallback;
+    if (originOf(url) !== at.origin && !isSiteHost(url)) return fallback;
   }
 
   if (AUTH_PAGES.test(url.pathname)) return fallback;
@@ -55,7 +63,7 @@ export function safeNext(raw: string | null | undefined, at: Here = here(), fall
   // On sim.<domain> and trade.<domain>, "/" is that app itself, so it stays.
   const path = url.pathname === "/" && !/^(sim|trade)\./.test(url.hostname) ? DEFAULT_NEXT : url.pathname;
   const rest = path + url.search + url.hash;
-  return url.origin === at.origin ? rest : `${url.origin}${rest}`;
+  return originOf(url) === at.origin ? rest : `${url.origin}${rest}`;
 }
 
 /**
@@ -90,6 +98,9 @@ export function withNext(path: string, next: string): string {
  */
 export function emailLanding(next: string, at: Here = here()): string {
   const safe = safeNext(next, at);
-  const url = new URL(safe, at.origin);
+  // The desktop app's pages live at app://parity (DEC-0041), which no email can link to:
+  // the email then lands on the website, where the same account signs in.
+  const base = /^https?:$/.test(new URL(at.origin).protocol) ? at.origin : ORIGIN;
+  const url = new URL(safe, base);
   return `${url.origin}${url.pathname}`;
 }
