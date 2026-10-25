@@ -55,6 +55,8 @@ Proposed, for the owner to accept or reject later. Nothing below is built.
 - [DEC-0046: Payments through Stripe, and real trading only through a regulated broker](0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
+- [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 <!-- backlinks:end -->

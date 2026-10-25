@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1560 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1646 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,9 +12,9 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 847 |
+| [Web pages](#web-pages) | 914 |
 | [Forum posts](#forum-posts) | 81 |
-| [Regulators](#regulators) | 65 |
+| [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
 
 ## Papers
@@ -4007,6 +4007,12 @@ Note: Linked in this repo as: WSO quant AMA (archive).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-001d4780
+
+Legal Information Institute (n.d.). 17 CFR 5.3(a)(3). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/5.3>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-003c44bb
 
 kdb+tick white paper. (n.d.). *code.kx.com*. <https://code.kx.com/q/wp/rt-tick/>. Accessed 2026-10-24. Verification: not checked.
@@ -4104,6 +4110,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 connection. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/connection/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-0498644e
+
+Legal Information Institute (n.d.). 16 CFR Part 314. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-314>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-04a2bcae
 
@@ -4353,6 +4365,12 @@ Google Play. (n.d.). *play.google.com*. <https://play.google.com/store/apps/deta
 
 Cited in: [CMP-0019](competitors/0019-myfxbook.md).
 
+### url-0f361ed9
+
+Legal Information Institute (n.d.). 17 CFR 4.14(a)(9). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/4.14>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-0f79d33f
 
 Yahoo Finance. (n.d.). *finance.yahoo.com*. <https://finance.yahoo.com/news/private-investment-platform-linqto-files-105229723.html>. Accessed 2026-10-25. Verification: not checked.
@@ -4554,6 +4572,12 @@ Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-you
 builder codes. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-16d92c90
+
+European Data Protection Board (n.d.). EDPB members, the EU data protection authorities. *edpb.europa.eu*. <https://www.edpb.europa.eu/about-edpb/about-edpb/members_en>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-17da50ef
 
@@ -4789,6 +4813,12 @@ market data. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-207d0d70
+
+Legal Information Institute (n.d.). 15 U.S.C. 77q. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/77q>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-20b0dca2
 
 misc UI. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/miscellaneous-ui>. Accessed 2026-10-24. Verification: not checked.
@@ -4842,6 +4872,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 US Treasury Fiscal Data API: API documentation. (n.d.). *US Department of the Treasury, Bureau of the Fiscal Service*. <https://fiscaldata.treasury.gov/api-documentation/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/treasury-fiscal-data.json](../catalog/datasets/treasury-fiscal-data.json), [DAT-0031](datasets/0031-treasury-fiscal-data.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-241a7d72
+
+Legal Information Institute (n.d.). 15 U.S.C. 78o. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/78o>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-252f130c
 
@@ -5101,6 +5137,12 @@ Schwab Portfolio Insights. (n.d.). *pressroom.aboutschwab.com*. <https://pressro
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-32e3696e
+
+FinCEN (n.d.). FinCEN 2019 guidance on crypto business models. *fincen.gov*. <https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-certain-business-models>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-3365363a
 
 No title recorded. (n.d.). *Stooq.com*. <https://stooq.com/q/d/l/?s=spy.us&i=d>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5138,6 +5180,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 2020-2022 world oil market chronology. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020%E2%80%932022_world_oil_market_chronology>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/opec-plus-cut-2022.json](../catalog/events/opec-plus-cut-2022.json), [catalog/events/wti-negative-2020.json](../catalog/events/wti-negative-2020.json).
+
+### url-3408c5f4
+
+Legal Information Institute (n.d.). 15 U.S.C. 45. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/45>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-348d1f64
 
@@ -5181,6 +5229,12 @@ No title recorded. (n.d.). *placera.se*. <https://www.placera.se/pressmeddelande
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-366ccbbd
+
+UK Information Commissioner's Office (n.d.). ICO, make a complaint. *ico.org.uk*. <https://ico.org.uk/make-a-complaint/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-36c7def2
 
 Aeron Cluster. (n.d.). *aeron.io*. <https://aeron.io/docs/aeron-cluster/overview/>. Accessed 2026-10-24. Verification: not checked.
@@ -5192,6 +5246,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 AWS time sync. (n.d.). *docs.aws.amazon.com*. <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-36df9ddb
+
+US Department of Justice (n.d.). File an ADA complaint. *ada.gov*. <https://www.ada.gov/file-a-complaint/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-370316b0
 
@@ -5367,6 +5427,12 @@ Coinbase Advanced product page. (n.d.). *coinbase.com*. <https://www.coinbase.co
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 
+### url-3eab3b6f
+
+European Union (n.d.). ePrivacy Directive 2002/58/EC. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/dir/2002/58/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-3ecf72b9
 
 Store help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-store/>. Accessed 2026-10-24. Verification: not checked.
@@ -5409,6 +5475,12 @@ Schwab pricing. (n.d.). *schwab.com*. <https://www.schwab.com/pricing>. Accessed
 
 Cited in: [CMP-0008](competitors/0008-thinkorswim.md).
 
+### url-4135bcba
+
+US Securities and Exchange Commission (n.d.). Investor.gov, SEC Office of Investor Education and Advocacy. *investor.gov*. <https://www.investor.gov/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-41498be4
 
 ZenPilot | ClickUp's #1 Rated Solutions Partner. (n.d.). *zenpilot.com*. <https://www.zenpilot.com/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5437,6 +5509,18 @@ Note: Linked in this repo as: Hyperliquid trade view (live app).
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md), [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
+### url-422993cc
+
+Legal Information Institute (n.d.). 15 U.S.C. 80b-18a(d). *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-18a>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-429de9ef
+
+UK legislation.gov.uk (n.d.). SI 2005/1529. *legislation.gov.uk*. <https://www.legislation.gov.uk/uksi/2005/1529/contents>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-42aacc68
 
 Micro Study: Yen Carry Trade - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/research/17843/micro-study-yen-carry-trade/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5444,6 +5528,12 @@ Micro Study: Yen Carry Trade - QuantConnect.com. (n.d.). *quantconnect.com*. <ht
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-42d669e4
+
+Colorado Attorney General (n.d.). Colorado Privacy Act, Colorado Attorney General. *coag.gov*. <https://coag.gov/resources/colorado-privacy-act/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-431a0bea
 
@@ -5470,6 +5560,12 @@ Finnhub Stock API - Terms of Service. (n.d.). *Finnhub Stock API*. <https://finn
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DAT-0012](datasets/0012-finnhub.md).
+
+### url-4535bffd
+
+European Union (n.d.). Directive 2019/882. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/dir/2019/882/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-4557008c
 
@@ -5605,6 +5701,12 @@ rate limits. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/h
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-49e6435f
+
+European Union (n.d.). Directive 2014/65/EU. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/dir/2014/65/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-4b0c751f
 
 Alpaca Broker. (n.d.). *alpaca.markets*. <https://alpaca.markets/broker>. Accessed 2026-10-24. Verification: not checked.
@@ -5631,6 +5733,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-4cd601d5
+
+California Privacy Protection Agency (n.d.). California Privacy Protection Agency, file a complaint. *cppa.ca.gov*. <https://cppa.ca.gov/webapplications/complaint>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-4cfbb932
 
 EODHD pricing. (n.d.). *eodhd.com*. <https://eodhd.com/pricing>. Accessed 2026-10-22. Verification: not checked.
@@ -5644,6 +5752,12 @@ Stock Market Tools | Tiingo. (n.d.). *Tiingo Inc*. <https://www.tiingo.com/about
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/tiingo.json](../catalog/datasets/tiingo.json), [DAT-0029](datasets/0029-tiingo.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-4de61b5e
+
+Legal Information Institute (n.d.). 16 CFR Part 316. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-316>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-4dfa4de3
 
@@ -5670,6 +5784,12 @@ Are carry, momentum and value still there in currencies? | Zenodo. (n.d.). *zeno
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md).
+
+### url-4fa3b8bc
+
+UK legislation.gov.uk (n.d.). RAO article 54. *legislation.gov.uk*. <https://www.legislation.gov.uk/uksi/2001/544/article/54>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-501bccdc
 
@@ -5835,6 +5955,12 @@ Binance.US fees. (n.d.). *binance.us*. <https://www.binance.us/fees>. Accessed 2
 
 Cited in: [CMP-0014](competitors/0014-binance.md).
 
+### url-565cba07
+
+Legal Information Institute (n.d.). 7 U.S.C. 6o. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/7/6o>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-569967bd
 
 Lookahead analysis - Freqtrade. (n.d.). *freqtrade.io*. <https://www.freqtrade.io/en/stable/lookahead-analysis/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5848,6 +5974,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 The Forex Geek. (n.d.). *theforexgeek.com*. <https://theforexgeek.com/zennbot-review/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-573ac97e
+
+Legal Information Institute (n.d.). 7 U.S.C. 6m(1). *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/7/6m>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-5797a6cb
 
@@ -5866,6 +5998,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 DARWIN versus its underlying strategy. (n.d.). *help.darwinex.com*. <https://help.darwinex.com/darwin-vs-its-underlying-trading-strategy>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0021](competitors/0021-darwinex.md).
+
+### url-5816f5ff
+
+UK legislation.gov.uk (n.d.). UK GDPR. *legislation.gov.uk*. <https://www.legislation.gov.uk/eur/2016/679/contents>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-581e2ed3
 
@@ -5919,6 +6057,18 @@ Angel Investors Network. (n.d.). *angelinvestorsnetwork.com*. <https://angelinve
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-59e1e38c
+
+Legal Information Institute (n.d.). 15 U.S.C. 80b-6. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-6>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-5a565123
+
+California Attorney General (n.d.). California Attorney General, CCPA. *oag.ca.gov*. <https://oag.ca.gov/privacy/ccpa>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-5a683f28
 
 Avellaneda Market Making - Hummingbot. (n.d.). *hummingbot.org*. <https://hummingbot.org/strategies/v1-strategies/avellaneda-market-making/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5967,6 +6117,12 @@ Collective2 API. (n.d.). *trade.collective2.com*. <https://trade.collective2.com
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
 
+### url-5c25e6cd
+
+Texas Legislature (n.d.). Tex. Bus. and Com. Code ch. 541. *statutes.capitol.texas.gov*. <https://statutes.capitol.texas.gov/Docs/BC/htm/BC.541.htm>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-5c9ba0b0
 
 Pico Corvil. (n.d.). *pico.net*. <https://www.pico.net/corvil/>. Accessed 2026-10-24. Verification: not checked.
@@ -6006,6 +6162,12 @@ IMF API Guide, Part 3 | BD Economics. (n.d.). *bd-econ.com*. <https://bd-econ.co
 Note: Linked in this repo as: third party guide.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-5df74e1b
+
+UK legislation.gov.uk (n.d.). Delegated Regulation 2017/565, Article 9. *legislation.gov.uk*. <https://www.legislation.gov.uk/eur/2017/565/article/9>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-5e120bc1
 
@@ -6057,6 +6219,12 @@ CFTC press releases: API documentation. (n.d.). *US Commodity Futures Trading Co
 
 Cited in: [catalog/datasets/cftc-press.json](../catalog/datasets/cftc-press.json), [DAT-0047](datasets/0047-cftc-press.md).
 
+### url-6084c5e4
+
+Legal Information Institute (n.d.). 7 U.S.C. 1a(12). *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/7/1a>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-60fe816c
 
 Disruptor 1.0 paper. (n.d.). *lmax-exchange.github.io*. <https://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf>. Accessed 2026-10-24. Verification: not checked.
@@ -6073,7 +6241,7 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 
 31 CFR 1010.230. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1010.230>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-620766d4
 
@@ -6323,6 +6491,12 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
 Cited in: [catalog/events/asian-financial-crisis-1997.json](../catalog/events/asian-financial-crisis-1997.json).
 
+### url-6bf1c7a2
+
+Legal Information Institute (n.d.). 15 U.S.C. 80b-3a. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-3a>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-6c55baa0
 
 Pricing | Massive. (n.d.). *Massive.com (formerly Polygon.io)*. <https://massive.com/pricing?product=currencies>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6439,7 +6613,7 @@ Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.js
 
 FinCEN MSB definition. (n.d.). *fincen.gov*. <https://www.fincen.gov/money-services-business-definition>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-7214a18b
 
@@ -6464,6 +6638,12 @@ Cited in: [CMP-0023](competitors/0023-quantconnect.md).
 2020 Russia-Saudi Arabia oil price war. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/saudi-russia-price-war-2020.json](../catalog/events/saudi-russia-price-war-2020.json).
+
+### url-728f3a2d
+
+Legal Information Institute (n.d.). 15 U.S.C. 80b-2(a)(11). *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-2>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-72c154c9
 
@@ -6606,6 +6786,18 @@ Binance advanced interface. (n.d.). *binance.com*. <https://www.binance.com/en/a
 Note: Linked in this repo as: Binance advanced interface.
 
 Cited in: [CMP-0014](competitors/0014-binance.md), [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-79878805
+
+European Union (n.d.). Regulation 596/2014. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg/2014/596/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-799233d2
+
+Legal Information Institute (n.d.). Lowe v. SEC, 472 U.S. 181 (1985). *law.cornell.edu*. <https://www.law.cornell.edu/supremecourt/text/472/181>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-7a23b016
 
@@ -6763,6 +6955,12 @@ TradingView, US App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple
 
 Cited in: [CMP-0006](competitors/0006-tradingview.md).
 
+### url-7f9ea358
+
+US Department of Justice (n.d.). US Department of Justice Civil Rights Division, report a violation. *civilrights.justice.gov*. <https://www.civilrights.justice.gov/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-7fa72e7b
 
 LMAX Exchange. (n.d.). *lmax.com*. <https://www.lmax.com/exchange>. Accessed 2026-10-24. Verification: not checked.
@@ -6894,6 +7092,12 @@ Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-m
 Edgewonk pricing. (n.d.). *edgewonk.com*. <https://edgewonk.com/pricing>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-845b11ff
+
+Legal Information Institute (n.d.). 16 CFR Part 312. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-312>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-849471fb
 
@@ -7027,6 +7231,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-89b5bf18
+
+Virginia General Assembly (n.d.). Va. Code 59.1-575 and following. *law.lis.virginia.gov*. <https://law.lis.virginia.gov/vacodefull/title59.1/chapter53/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-89fbee0d
 
 Fundrise Innovation Fund (VCX). (n.d.). *fundrise.com*. <https://fundrise.com/innovation>. Accessed 2026-10-25. Verification: not checked.
@@ -7064,6 +7274,12 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 MQL5 Signals. (n.d.). *mql5.com*. <https://www.mql5.com/en/signals>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
+
+### url-8b0b2159
+
+European Union (n.d.). Regulation (EU) 2016/679. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg/2016/679/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-8b7c86e9
 
@@ -7185,6 +7401,12 @@ Trademark guidelines | Cloudflare. (n.d.). *cloudflare.com*. <https://www.cloudf
 
 Cited in: [DEC-0039](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md).
 
+### url-90f193cf
+
+Legal Information Institute (n.d.). 15 U.S.C. 78c(a)(4). *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/78c>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-90f4c1c5
 
 Bitfinex market data terms. (2026). *Bitfinex*. <https://www.bitfinex.com/legal/general/market-data>. Accessed 2026-10-25. Verification: not checked.
@@ -7231,6 +7453,12 @@ Note: Math foundations with lectures from industry practitioners.
 
 Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-92ba734e
+
+European Union (n.d.). Regulation 2022/2065. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg/2022/2065/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-93363575
 
 Daily bar data in Forex do not match - QuantConnect.com. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/forum/discussion/18398/daily-bar-data-in-forex-do-not-match/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7239,6 +7467,18 @@ Note: Linked in this repo as: QuantConnect: daily bar data in Forex do not match
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-93f60550
+
+Legal Information Institute (n.d.). 16 CFR Part 255. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-255>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-93fa1a99
+
+UK legislation.gov.uk (n.d.). FSMA s21. *legislation.gov.uk*. <https://www.legislation.gov.uk/ukpga/2000/8/section/21>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-9406ddae
 
 Free Trial | Interactive Brokers LLC. (n.d.). *Interactive Brokers*. <https://portal.interactivebrokers.com/en/trading/free-trial.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7246,6 +7486,12 @@ Free Trial | Interactive Brokers LLC. (n.d.). *Interactive Brokers*. <https://po
 Note: Linked in this repo as: free trial.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-94417ffa
+
+California Legislature (n.d.). Cal. Civ. Code 1798.100 and following. *leginfo.legislature.ca.gov*. <https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?division=3.&part=4.&lawCode=CIV&title=1.81.5>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-9499b453
 
@@ -7332,6 +7578,12 @@ Cited in: [catalog/algorithms/fx-carver-trend-carry.json](../catalog/algorithms/
 vault leaders. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/for-vault-leaders-legacy>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-982ce5eb
+
+European Union (n.d.). Regulation 2023/1114. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg/2023/1114/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-989124f9
 
@@ -7439,7 +7691,7 @@ Cited in: [CMP-0016](competitors/0016-kraken-pro.md).
 
 NYDFS virtual currency businesses. (n.d.). *dfs.ny.gov*. <https://www.dfs.ny.gov/virtual_currency_businesses>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-9ea6eaa4
 
@@ -7472,6 +7724,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 1994 bond market crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1994_bond_market_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/fed-surprise-hike-1994.json](../catalog/events/fed-surprise-hike-1994.json).
+
+### url-a1d8aeae
+
+California Privacy Protection Agency (n.d.). CCPA monetary threshold CPI adjustment. *cppa.ca.gov*. <https://cppa.ca.gov/regulations/cpi_adjustment.html>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-a1fc516b
 
@@ -7705,6 +7963,18 @@ order types. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/h
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
 
+### url-a96b27e5
+
+NASAA (n.d.). NASAA, contact your state or provincial securities regulator. *nasaa.org*. <https://www.nasaa.org/contact-your-regulator/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-a96d54ca
+
+UK legislation.gov.uk (n.d.). Data Protection Act 2018. *legislation.gov.uk*. <https://www.legislation.gov.uk/ukpga/2018/12/contents>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-a9828f3b
 
 Tiger Data pricing. (n.d.). *tigerdata.com*. <https://www.tigerdata.com/pricing>. Accessed 2026-10-24. Verification: not checked.
@@ -7847,6 +8117,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-af44660b
+
+Delaware Division of Corporations (n.d.). Delaware franchise taxes and annual reports. *corp.delaware.gov*. <https://corp.delaware.gov/paytaxes/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-af4a1530
 
 EPAT Admissions | Eligibility, Upcoming Batches, Fee Structure and Financial Aid. (n.d.). *quantinsti.com*. <https://www.quantinsti.com/admissions>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7982,6 +8258,12 @@ About Alpaca. (n.d.). *Alpaca Markets*. <https://docs.alpaca.markets/us/docs/abo
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/alpaca.json](../catalog/datasets/alpaca.json), [DAT-0001](datasets/0001-alpaca.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-b4b6d1cb
+
+Delaware General Assembly (n.d.). 6 Del. C. ch. 12D. *delcode.delaware.gov*. <https://delcode.delaware.gov/title6/c012d/index.html>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-b533be34
 
@@ -8195,6 +8477,12 @@ clearinghouse. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-c120834a
+
+Delaware General Assembly (n.d.). 8 Del. C. 132. *delcode.delaware.gov*. <https://delcode.delaware.gov/title8/c001/sc01/index.html>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-c16cd0db
 
 Numerai tournament documentation. (n.d.). *docs.numer.ai*. <https://docs.numer.ai/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -8212,6 +8500,12 @@ Cited in: [CMP-0022](competitors/0022-collective2.md).
 About LMAX Group. (n.d.). *lmax.com*. <https://www.lmax.com/about/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
+
+### url-c28cae6b
+
+UK legislation.gov.uk (n.d.). Privacy and Electronic Communications Regulations 2003, regulation 6. *legislation.gov.uk*. <https://www.legislation.gov.uk/uksi/2003/2426/regulation/6>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-c2c82a98
 
@@ -8317,6 +8611,12 @@ margin page. (n.d.). *oanda.com*. <https://www.oanda.com/us-en/trading/spreads-m
 
 Cited in: [CMP-0011](competitors/0011-oanda.md).
 
+### url-c8b549db
+
+Legal Information Institute (n.d.). 15 U.S.C. 8403. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/8403>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-c952ccf5
 
 Collective2 for strategy managers. (n.d.). *trade.collective2.com*. <https://trade.collective2.com/strategy-managers.html>. Accessed 2026-10-24. Verification: not checked.
@@ -8336,6 +8636,12 @@ The G-Research Crypto Forecasting Competition | G-Research. (n.d.). *gresearch.c
 Note: Linked in this repo as: G-Research, Wrapping up the G-Research Crypto Forecasting competition.
 
 Cited in: [catalog/algorithms/gradient-boosting-engineered-features.json](../catalog/algorithms/gradient-boosting-engineered-features.json), [ALG-0031](algorithms/0031-gradient-boosting-engineered-features.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-c998e9d1
+
+Legal Information Institute (n.d.). 15 U.S.C. chapter 91. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/chapter-91>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-c9c00801
 
@@ -8427,6 +8733,12 @@ No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
 
+### url-cd5097d5
+
+Legal Information Institute (n.d.). 16 CFR Part 465. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-465>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-cd64350d
 
 Webull pricing. (n.d.). *webull.com*. <https://www.webull.com/pricing>. Accessed 2026-10-24. Verification: not checked.
@@ -8450,6 +8762,12 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 Binance app on the UK App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/gb/app/id1436799971>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0014](competitors/0014-binance.md).
+
+### url-ced4ac40
+
+W3C (n.d.). WCAG 2.2. *w3.org*. <https://www.w3.org/TR/WCAG22/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-cf0d35a8
 
@@ -8477,11 +8795,23 @@ Note: Linked in this repo as: Robinhood Legend layouts.
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md), [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
 
+### url-cfb3dd9b
+
+Legal Information Institute (n.d.). 31 CFR 1010.100. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1010.100>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-d02d51d7
 
 0DTE options. (n.d.). *Cboe*. <https://www.cboe.com/tradable-products/0dte>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-d0fec03f
+
+Delaware General Assembly (n.d.). 6 Del. C. ch. 12C. *delcode.delaware.gov*. <https://delcode.delaware.gov/title6/c012c/index.html>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-d125f474
 
@@ -8575,6 +8905,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-d3e5dc6a
+
+Legal Information Institute (n.d.). 16 CFR 314.2. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/314.2>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-d3ffa94a
 
 QuantConnect status page. (n.d.). *status.quantconnect.com*. <https://status.quantconnect.com/>. Accessed 2026-10-24. Verification: not checked.
@@ -8599,6 +8935,18 @@ No title recorded. (n.d.). *claude.ai*. <https://claude.ai/artifact/NcBntdPGZJAM
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-d553dc5b
+
+Legal Information Institute (n.d.). 17 CFR 5.1(e)(1). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/5.1>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-d58c12ea
+
+Legal Information Institute (n.d.). 15 U.S.C. 6809. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/6809>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-d5f11dd9
 
 Nixon shock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nixon_shock>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8610,6 +8958,12 @@ Cited in: [catalog/events/nixon-shock-1971.json](../catalog/events/nixon-shock-1
 Ultra Direct. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/market-data/data-feeds/real-time-ultra-direct>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-d6abc0ba
+
+Legal Information Institute (n.d.). 31 U.S.C. 5312. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/31/5312>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-d6e19278
 
@@ -8662,6 +9016,12 @@ Cited in: [catalog/datasets/world-bank.json](../catalog/datasets/world-bank.json
 US-UK airstrikes on Yemen. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Operation_Poseidon_Archer>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/us-uk-strikes-houthis-2024.json](../catalog/events/us-uk-strikes-houthis-2024.json).
+
+### url-d9344221
+
+Legal Information Institute (n.d.). 17 CFR 275.203A-2(e). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/17/275.203A-2>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-d95e689d
 
@@ -8819,6 +9179,12 @@ ICE indices. (n.d.). *ice.com*. <https://www.ice.com/fixed-income-data-services/
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-e1c841a6
+
+California Legislature (n.d.). Cal. Civ. Code 1798.140, CCPA definitions. *leginfo.legislature.ca.gov*. <https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.140>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-e1d2a002
 
 Capture of the Crimean Parliament. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Capture_of_the_Crimean_Parliament>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8943,6 +9309,12 @@ No title recorded. (n.d.). *wikifx.com*. <https://www.wikifx.com/en/dealer/21917
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-e7b7c34c
+
+NAAG (n.d.). NAAG, find my attorney general. *naag.org*. <https://www.naag.org/find-my-ag/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-e7f32334
 
 War in Afghanistan (2001-2021). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8954,6 +9326,12 @@ Cited in: [catalog/events/afghanistan-invasion-2001.json](../catalog/events/afgh
 OANDA v20 REST API (practice account): API documentation. (n.d.). *OANDA Corporation*. <https://developer.oanda.com/rest-live-v20/introduction/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/oanda-v20-practice.json](../catalog/datasets/oanda-v20-practice.json), [CMP-0011](competitors/0011-oanda.md), [DAT-0026](datasets/0026-oanda-v20-practice.md), [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-e87cb362
+
+US Department of Justice (n.d.). DOJ guidance on web accessibility and the ADA. *ada.gov*. <https://www.ada.gov/resources/web-guidance/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-e88319e7
 
@@ -8998,6 +9376,12 @@ Cited in: [catalog/events/iraq-invasion-2003.json](../catalog/events/iraq-invasi
 Build with Collective2, for AI agents. (n.d.). *collective2.com*. <https://collective2.com/build-with-c2.html>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
+
+### url-ea064bc1
+
+Legal Information Institute (n.d.). 42 U.S.C. 12182. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/42/12182>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-ea956ef7
 
@@ -9050,6 +9434,12 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 funding. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/funding-accounts>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-edae72e8
+
+California Legislature (n.d.). Cal. Bus. and Prof. Code 17600 and following. *leginfo.legislature.ca.gov*. <https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=3.&chapter=1.&article=9>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-edaf6f8e
 
@@ -9203,7 +9593,7 @@ Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
 
 31 CFR 1023.220. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1023.220>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-f6aa8c51
 
@@ -9240,6 +9630,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 BEA Data API: API documentation. (n.d.). *US Bureau of Economic Analysis*. <https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/bea.json](../catalog/datasets/bea.json), [DAT-0004](datasets/0004-bea.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-f7d3a3f4
+
+Legal Information Institute (n.d.). 15 U.S.C. chapter 103. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/chapter-103>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-f83c73bb
 
@@ -9388,6 +9784,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 Forge Global. (n.d.). *pressroom.aboutschwab.com*. <https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Completes-Acquisition-of-Forge-Global/default.aspx>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-fe936d8d
+
+European Union (n.d.). Delegated Regulation 2016/958. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg_del/2016/958/oj>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-fe9b566b
 
@@ -10001,11 +10403,29 @@ Robinhood 10-Q. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-10eeb643
+
+US Federal Trade Commission (n.d.). CAN-SPAM Act: a compliance guide for business. *ftc.gov*. <https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-11d39c8a
+
+National Futures Association (n.d.). NFA BASIC, background affiliation status information center. *nfa.futures.org*. <https://www.nfa.futures.org/basicnet/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-147f0066
 
 developer rules. (n.d.). *sec.gov*. <https://www.sec.gov/about/developer-resources>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-1b543154
+
+US Federal Trade Commission (n.d.). FTC's Endorsement Guides: what people are asking. *ftc.gov*. <https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-1de9cd7b
 
@@ -10032,6 +10452,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 SEC v. Robinhood. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2025-5>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-273b596b
+
+US Securities and Exchange Commission (n.d.). SEC tips, complaints and referrals. *sec.gov*. <https://www.sec.gov/tcr>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-2af24e32
 
@@ -10067,7 +10493,13 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 
 NFA Compliance Rule 2-29, communications with the public and promotional material. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/rulebook/rules.aspx?RuleID=RULE%202-29&Section=4>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-45543912
+
+US Securities and Exchange Commission (n.d.). proposed exemptive order, Release 34-90112. *sec.gov*. <https://www.sec.gov/files/rules/exorders/2020/34-90112.pdf>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-46fb23ac
 
@@ -10082,6 +10514,12 @@ Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/on
 Coinbase Q2 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/0001679788/000167978826000087/q226earningsdeck_sec.htm>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-4b357e64
+
+US Securities and Exchange Commission (n.d.). SEC Crypto Task Force. *sec.gov*. <https://www.sec.gov/about/crypto-task-force>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-4c39b66e
 
@@ -10106,6 +10544,18 @@ Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), 
 Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/1381197/000138119726000147/ibkr-20260630.htm>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-54f5a239
+
+FINRA (n.d.). FINRA, file a complaint. *finra.org*. <https://www.finra.org/investors/have-problem/file-complaint>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-566dbe39
+
+FINRA (n.d.). FINRA Rule 2040. *finra.org*. <https://www.finra.org/rules-guidance/rulebooks/finra-rules/2040>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-56e61f0a
 
@@ -10139,13 +10589,25 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-mark
 
 NFA retail forex dealers. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/registration-membership/who-has-to-register/rfed.html>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-6c190e5d
 
 SEC charges two investment advisers with making false and misleading statements about their use of artificial intelligence. (n.d.). *sec.gov*. <https://www.sec.gov/newsroom/press-releases/2024-36>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-72320f80
+
+FINRA (n.d.). FINRA BrokerCheck. *brokercheck.finra.org*. <https://brokercheck.finra.org/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-730daf38
+
+US Federal Trade Commission (n.d.). FTC ReportFraud. *reportfraud.ftc.gov*. <https://reportfraud.ftc.gov/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-7414523f
 
@@ -10177,7 +10639,7 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-mark
 
 Statement on certain protocol staking activities. (2025). *US SEC, Division of Corporation Finance*. <https://www.sec.gov/newsroom/speeches-statements/statement-certain-protocol-staking-activities-052925>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-89c953ef
 
@@ -10190,6 +10652,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Company tickers and exchanges. (n.d.). *US SEC*. <https://www.sec.gov/files/company_tickers_exchange.json>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-8c501c52
+
+US Securities and Exchange Commission (n.d.). SEC Release IA-1092. *sec.gov*. <https://www.sec.gov/rules/interp/1987/ia-1092.pdf>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-91bbfeb4
 
@@ -10215,7 +10683,7 @@ Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-priva
 
 SEC guide to broker-dealer registration. (n.d.). *sec.gov*. <https://www.sec.gov/about/divisions-offices/division-trading-markets/division-trading-markets-compliance-guides/guide-broker-dealer-registration>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-9a1baa9c
 
@@ -10223,11 +10691,17 @@ eToro Group Ltd., annual report on Form 20-F for 2025. (n.d.). *sec.gov*. <https
 
 Cited in: [CMP-0017](competitors/0017-etoro.md), [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-9addb8c1
+
+UK Financial Conduct Authority (n.d.). FCA PERG 8. *handbook.fca.org.uk*. <https://www.handbook.fca.org.uk/handbook/PERG/8/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-9f635241
 
 Staff statement on meme coins. (2025). *US SEC, Division of Corporation Finance*. <https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-a1682719
 
@@ -10235,13 +10709,25 @@ Customer Advisory: AI Won't Turn Trading Bots into Money Machines | CFTC. (n.d.)
 
 Note: Linked in this repo as: CFTC advisory.
 
-Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-b16de26a
+
+FINRA (n.d.). FINRA Rule 2210. *finra.org*. <https://www.finra.org/rules-guidance/rulebooks/finra-rules/2210>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-b30692e7
 
 NFA introducing brokers. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/registration-membership/who-has-to-register/ib.html>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-bbb7aab6
+
+FINRA (n.d.). FINRA Rule 2214. *finra.org*. <https://www.finra.org/rules-guidance/rulebooks/finra-rules/2214>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-bd25f99e
 
@@ -10287,6 +10773,12 @@ Note: Linked in this repo as: press release.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-ce2acb3d
+
+US Securities and Exchange Commission (n.d.). SEC investor complaint form. *help.sec.gov*. <https://help.sec.gov/s/investor-complaint>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-d21de22a
 
 No title recorded. (n.d.). *sec.gov*. <https://www.sec.gov/files/investment/data/other/investment-company-series-class-information/investment-company-series-class-2026.csv>. Accessed 2026-10-22. Verification: not checked.
@@ -10323,6 +10815,12 @@ Robinhood S-1. (n.d.). *sec.gov*. <https://www.sec.gov/Archives/edgar/data/17838
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-ef3848d4
+
+US Commodity Futures Trading Commission (n.d.). CFTC press release 8680-23. *cftc.gov*. <https://www.cftc.gov/PressRoom/PressReleases/8680-23>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
 ### url-f2a66230
 
 SEC.gov | Request Rate Threshold Exceeded. (n.d.). *sec.gov*. <https://www.sec.gov/about/reports-publications/investorpubsdaytipshtm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -10336,6 +10834,24 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 SEC v. Linqto executives. (n.d.). *sec.gov*. <https://www.sec.gov/enforcement-litigation/litigation-releases/lr-26672>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-f4d72904
+
+eCFR (n.d.). 17 CFR 275.206(4)-1, investment adviser marketing. *ecfr.gov*. <https://www.ecfr.gov/current/title-17/chapter-II/part-275/section-275.206(4)-1>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-fb240486
+
+US Commodity Futures Trading Commission (n.d.). CFTC, submit a tip or complaint. *cftc.gov*. <https://www.cftc.gov/complaint>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-fdf44536
+
+UK Financial Conduct Authority (n.d.). FCA PERG 7. *handbook.fca.org.uk*. <https://www.handbook.fca.org.uk/handbook/PERG/7/>. Accessed 2026-10-25. Verification: unchecked.
+
+Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
 ### url-ff98aae3
 
