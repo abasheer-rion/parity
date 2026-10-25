@@ -15,6 +15,7 @@ import { Welcome } from "./pages/Welcome";
 import { nextFromQuery } from "./redirect";
 import { authUrl, TITLES, type Carry, type View } from "./views";
 import "./flow.css";
+import { durationMs, tokenValue } from "../ui/tokens";
 
 const FORMS: Record<View, () => ReactNode> = { login: SignIn, signup: SignUp, reset: Reset, verify: Verify, welcome: Welcome };
 /** Forms with an address of their own. The others (verify, welcome) leave the address alone. */
@@ -147,7 +148,7 @@ function ghost(into: HTMLElement, node: HTMLElement) {
   into.append(node);
   const exit = node.animate(
     [{ opacity: 1, transform: "none", filter: "blur(0)" }, { opacity: 0, transform: "translateY(-8px)", filter: "blur(4px)" }],
-    { duration: 220, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" },
+    { duration: durationMs("dur-3"), easing: tokenValue("ease-in"), fill: "forwards" },
   );
   exit.finished.then(() => node.remove(), () => node.remove());
 }

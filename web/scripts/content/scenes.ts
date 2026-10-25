@@ -9,10 +9,12 @@
 //
 // Plain TypeScript with type-only syntax, so Node can run it with type stripping.
 import { statsAt, money, type BotRunFile, type BotsIndex } from "../../src/lib/botStats.ts";
+import { RAW } from "../../src/ui/tokens.gen.ts";
 
+// Plain values from the design tokens (src/ui/tokens.css), since ffmpeg frames have no CSS.
 export const C = {
-  bg: "#0b0d14", panel: "#141824", text: "#f1f3f9", muted: "#a3a8b9", faint: "#6f7486", grid: "#ffffff14",
-  blue: "#85a8ff", good: "#4cc98a", bad: "#f07a7a", warn: "#e8c06a", violet: "#c9a2ff", cyan: "#6fd3e0", pink: "#ff8fc7",
+  bg: RAW["color-surface"], panel: RAW["color-surface-overlay"], text: RAW["color-text"], muted: RAW["color-text-muted"], faint: RAW["color-text-disabled"], grid: RAW["color-border"],
+  blue: RAW["palette-blue-300"], good: RAW["color-positive"], bad: RAW["color-negative"], warn: RAW["color-warning"], violet: RAW["palette-violet-400"], cyan: RAW["palette-cyan-400"], pink: RAW["palette-term-pink"],
 };
 export const RISK = "Hypothetical, educational, not investment advice.";
 export const SITE = "parity.endyland.com";
@@ -319,7 +321,7 @@ export function crisisReplay(d: Data): Scene | null {
     ],
     social: {
       caption: "The 2008 financial crisis replayed: US stocks, banks, oil, the yen and Treasuries, each starting at 100 in July 2007. Past prices, not a forecast. Educational, not investment advice.",
-      hashtags: [...TAGS, "#2008", "#financialcrisis", "#markets", "#history"],
+      hashtags: [...TAGS, "#2008", "#financialcrisis", "#markets", "#history"], // tokens-ignore: hashtags, not colours
     },
     body: (t, box) => {
       const s = box.scale;
@@ -461,7 +463,7 @@ export function frame(scene: Scene, t: number, L: Layout, brand: Brand, endSecon
   // Burned-in caption.
   const cap = [...scene.captions].reverse().find(([at]) => tt >= at)?.[1] ?? "";
   const capY = h - footH + (vertical ? 50 : 26);
-  out += `<rect x="${pad - 12}" y="${capY - 44 * s}" width="${w - 2 * pad + 24}" height="${(vertical ? 150 : 96)}" rx="${16 * s}" fill="#000000" opacity="0.55"/>`;
+  out += `<rect x="${pad - 12}" y="${capY - 44 * s}" width="${w - 2 * pad + 24}" height="${(vertical ? 150 : 96)}" rx="${16 * s}" fill="${RAW["palette-black"]}" opacity="0.55"/>`;
   out += lines(w / 2, capY + 6 * s, cap, w - 2 * pad - 40, (vertical ? 40 : 30), { anchor: "middle", weight: 600 });
   // Period and the risk line, every frame.
   const fy = h - (vertical ? 120 : 72);

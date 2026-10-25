@@ -62,4 +62,5 @@ This replaces items 6 (the sidebar) and 9 (updates) of [DEC-0041](0041-parity-as
 
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 - [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
+- [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 <!-- backlinks:end -->

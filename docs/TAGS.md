@@ -814,6 +814,7 @@ The dashboard.
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
+- [DEC-0058: One token file for every app and a lint that blocks raw values](decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

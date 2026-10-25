@@ -2,6 +2,7 @@
 // row holds, the badge image, the embed snippet and the line for social posts. Pure
 // functions with no browser or React imports, so the Cloudflare function that serves
 // /badge/<id>.svg can use them too.
+import { RAW } from "../../ui/tokens.gen";
 
 export type VerdictKey = "holds_up" | "could_be_luck" | "fragile" | "does_not_hold_up" | "not_enough_data";
 
@@ -9,7 +10,7 @@ export const VERDICT_WORDS: Record<VerdictKey, string> = {
   holds_up: "Holds up", could_be_luck: "Could be luck", fragile: "Fragile", does_not_hold_up: "Does not hold up", not_enough_data: "Not enough data",
 };
 export const VERDICT_COLOR: Record<VerdictKey, string> = {
-  holds_up: "#3ccf91", could_be_luck: "#e8a33c", fragile: "#e8a33c", does_not_hold_up: "#f0605d", not_enough_data: "#a7adbd",
+  holds_up: RAW["color-positive"], could_be_luck: RAW["color-warning"], fragile: RAW["color-warning"], does_not_hold_up: RAW["color-negative"], not_enough_data: RAW["color-text-muted"],
 };
 
 /** The words every MVP badge carries about trust (REF-0016). */
@@ -77,21 +78,21 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 export function badgeSvg(b: PublicBadge | null): string {
   const live = !!b && !b.withdrawn_at && !!b.verdict;
   const verdict = !b ? "No such badge" : live ? VERDICT_WORDS[b.verdict!] : "Withdrawn by its owner";
-  const color = live ? VERDICT_COLOR[b!.verdict!] : "#a7adbd";
+  const color = live ? VERDICT_COLOR[b!.verdict!] : RAW["color-text-muted"];
   const line2 = !b ? "Check the link" : live
     ? `${survivesWords(b.survives_tries)}${b.trade_count != null ? ` · ${b.trade_count.toLocaleString("en-US")} trades` : ""}`
     : `on ${b.withdrawn_at!.slice(0, 10)}`;
   const label = `Parity Verify: ${verdict}. ${line2}. ${live ? TRUST_LINE : ""}`.trim();
   return `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="80" viewBox="0 0 320 80" role="img" aria-label="${esc(label)}">
-<rect width="320" height="80" rx="10" fill="#10121a"/>
-<rect x="0.5" y="0.5" width="319" height="79" rx="9.5" fill="none" stroke="#2a2e3d"/>
+<rect width="320" height="80" rx="10" fill="${RAW["color-surface-raised"]}"/>
+<rect x="0.5" y="0.5" width="319" height="79" rx="9.5" fill="none" stroke="${RAW["palette-line-2"]}"/>
 <rect x="0" y="10" width="4" height="60" rx="2" fill="${color}"/>
 <g font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
-<text x="16" y="17" font-size="8.5" letter-spacing="1.2" fill="#a7adbd">PARITY VERIFY</text>
+<text x="16" y="17" font-size="8.5" letter-spacing="1.2" fill="${RAW["color-text-muted"]}">PARITY VERIFY</text>
 <text x="16" y="36" font-size="16" font-weight="600" fill="${color}">${esc(verdict)}</text>
-<text x="16" y="51" font-size="10" fill="#e6e8ef">${esc(line2)}</text>
-${live ? `<text x="16" y="64" font-size="7.4" fill="#a7adbd">Self-reported: Parity checked the numbers in the file,</text>
-<text x="16" y="73" font-size="7.4" fill="#a7adbd">not where the file came from. Not a recommendation.</text>` : ""}
+<text x="16" y="51" font-size="10" fill="${RAW["color-text"]}">${esc(line2)}</text>
+${live ? `<text x="16" y="64" font-size="7.4" fill="${RAW["color-text-muted"]}">Self-reported: Parity checked the numbers in the file,</text>
+<text x="16" y="73" font-size="7.4" fill="${RAW["color-text-muted"]}">not where the file came from. Not a recommendation.</text>` : ""}
 </g>
 </svg>`;
 }

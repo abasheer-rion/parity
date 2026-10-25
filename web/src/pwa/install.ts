@@ -39,18 +39,18 @@ export function isIosSafari(ua: string = navigator.userAgent, touch = navigator.
 }
 
 const CSS = `
-.pwa-card { position: fixed; z-index: 2147483000; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
-  width: min(340px, calc(100vw - 32px)); box-sizing: border-box; padding: 14px 16px; border-radius: 14px;
-  background: #101118; color: #f4f5f8; border: 1px solid rgb(255 255 255 / .12); box-shadow: 0 12px 40px rgb(0 0 0 / .5);
-  font: 14px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  display: grid; grid-template-columns: 36px 1fr; gap: 4px 12px; animation: pwa-in .25s ease-out; }
+.pwa-card { position: fixed; z-index: var(--z-top); right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+  width: min(340px, calc(100vw - 32px)); box-sizing: border-box; padding: 14px 16px; border-radius: var(--radius-lg);
+  background: var(--color-surface-raised); color: var(--color-text); border: 1px solid var(--color-fill-strong); box-shadow: var(--shadow-3);
+  font: var(--type-md)/1.5 var(--font-text);
+  display: grid; grid-template-columns: 36px 1fr; gap: 4px 12px; animation: pwa-in var(--dur-3) var(--ease-out); }
 .pwa-card img { width: 36px; height: 36px; border-radius: 8px; grid-row: span 2; }
-.pwa-card strong { font-weight: 600; font-size: 15px; }
-.pwa-card p { margin: 0; color: #a4a8b6; }
+.pwa-card strong { font-weight: var(--weight-bold); font-size: var(--type-lg); }
+.pwa-card p { margin: 0; color: var(--color-text-muted); }
 .pwa-card .pwa-row { grid-column: 2; display: flex; gap: 8px; margin-top: 8px; }
-.pwa-card button { font: inherit; color: #f4f5f8; background: #151720; border: 1px solid rgb(255 255 255 / .12); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
-.pwa-card button.pwa-go { background: #1f78c8; border-color: #1f78c8; }
-.pwa-card button:focus-visible { outline: 2px solid #5cc2f5; outline-offset: 2px; }
+.pwa-card button { font: inherit; color: var(--color-text); background: var(--color-fill); border: 1px solid var(--color-fill-strong); border-radius: var(--radius-pill); padding: 6px 14px; cursor: pointer; }
+.pwa-card button.pwa-go { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
+.pwa-card button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 @keyframes pwa-in { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .pwa-card { animation: none; } }
 `;

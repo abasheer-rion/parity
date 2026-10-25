@@ -81,7 +81,7 @@ export function Crypto() {
       )}
 
       <section style={{ marginTop: 16 }}>
-        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: 16 }}>The 100 largest coins</h2><span className="muted small">by market value, from {day(doc.fetched_at)}</span></div>
+        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: "var(--type-xl)" }}>The 100 largest coins</h2><span className="muted small">by market value, from {day(doc.fetched_at)}</span></div>
         <p className="muted small">Ordered by size, not by gains. Market value is price times coins in circulation. Practice adds a pretend position you can watch; it is not a purchase.</p>
         <div className="mk-table-scroll">
           <DataTable rows={doc.coins} columns={cols} rowKey={(c) => c.id} initialSort={{ key: "rank", dir: "asc" }} dense caption="The 100 largest coins by market value" />

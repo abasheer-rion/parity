@@ -35,3 +35,4 @@ supabase/.branches/
 content/out/
 # A .venv that is a symlink (worktrees share one environment) is a file, not a folder.
 .venv
+web/layout-shots/

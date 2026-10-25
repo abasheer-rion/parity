@@ -12,8 +12,8 @@ import { academyUrl, LAB_VIEWS, labHashFor, productUrl, researchUrl } from "../l
 import { Badge, Checkbox, Icon, Segmented, Tooltip } from "../ui";
 
 export const EDGE_DRAFT = "parity.edgeLab.draft";
-const SEVERITY: Record<Severity, { label: string; tone: "bad" | "accent" | "neutral" }> = {
-  high: { label: "Check first", tone: "bad" }, medium: { label: "Check", tone: "accent" }, low: { label: "Good habit", tone: "neutral" },
+const SEVERITY: Record<Severity, { label: string; tone: "bad" | "warning" | "neutral" }> = {
+  high: { label: "Check first", tone: "bad" }, medium: { label: "Check", tone: "warning" }, low: { label: "Good habit", tone: "neutral" },
 };
 type Tab = "check" | "lessons" | "mistakes" | "reading";
 const TABS: [Tab, string][] = [["check", "Check an idea"], ["lessons", "Seven lessons"], ["mistakes", "Our mistakes"], ["reading", "Reading"]];

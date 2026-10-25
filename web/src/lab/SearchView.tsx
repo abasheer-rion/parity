@@ -9,10 +9,10 @@ import { date, num, pct } from "../lib/format";
 import { ASSET_LABEL, FAMILY_LABEL } from "../lib/strategyMeta";
 import { Badge, Checkbox, DataTable, KeyValues, Select, Tooltip, useResource, type Column } from "../ui";
 
-function luck(v: number | null): { label: string; tone: "good" | "accent" | "neutral" | "bad" } {
+function luck(v: number | null): { label: string; tone: "good" | "warning" | "neutral" | "bad" } {
   if (v == null) return { label: "n/a", tone: "neutral" };
   if (v >= 0.95) return { label: "Likely real", tone: "good" };
-  if (v >= 0.5) return { label: "Maybe", tone: "accent" };
+  if (v >= 0.5) return { label: "Maybe", tone: "warning" };
   return { label: "Could be luck", tone: "bad" };
 }
 

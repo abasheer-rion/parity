@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 import { chromium, type Page } from "playwright";
 import { allScenes, frame, RISK, SITE, type Data, type Layout, type Scene } from "./scenes.ts";
 import type { BotRunFile, BotsIndex } from "../../src/lib/botStats.ts";
+import { RAW } from "../../src/ui/tokens.gen.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(here, "../../..");
@@ -113,7 +114,7 @@ async function main() {
   const page = await browser.newPage({ deviceScaleFactor: 1 });
   // Inter from Google Fonts when online; the system sans-serif otherwise.
   await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=block">
-    <style>html,body{margin:0;background:#0b0d14;overflow:hidden}#r svg{display:block}</style></head><body><div id="r"></div></body></html>`, { waitUntil: "load", timeout: 15000 }).catch(() => {});
+    <style>html,body{margin:0;background:${RAW["color-surface"]};overflow:hidden}#r svg{display:block}</style></head><body><div id="r"></div></body></html>`, { waitUntil: "load", timeout: 15000 }).catch(() => {});
   await page.evaluate(async () => { await Promise.race([document.fonts.ready, new Promise((ok) => setTimeout(ok, 4000))]); }).catch(() => {});
 
   // --stills: a few PNG frames per scene and layout, to check a design without encoding.

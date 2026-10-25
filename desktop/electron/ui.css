@@ -1,15 +1,19 @@
-/* The app's own pages (DEC-0049): the same dark colours, type and quiet buttons as the site. */
+/* The app's own pages (DEC-0049): the same tokens as the site (tokens.css, generated from
+   web/src/ui/tokens.css, DEC-0058), so the title bar, menu and settings match every app.
+   Each page links tokens.css before this file. The short names below point at tokens. */
 :root {
   color-scheme: dark;
-  --bg: #050608; --bar: #08090c; --panel: #0d0f14; --panel-2: #12151c; --line: rgb(255 255 255 / .07); --line-2: rgb(255 255 255 / .12);
-  --text: #f4f5f8; --text-2: #c9ccd6; --muted: #8b8f9d; --accent: #3fb3f0; --accent-soft: rgb(63 179 240 / .14); --bad: #f07a6a;
-  --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bg: var(--color-canvas); --bar: var(--color-bar); --panel: var(--color-surface); --panel-2: var(--color-surface-raised);
+  --line: var(--color-border); --line-2: var(--color-fill-strong);
+  --text: var(--color-text); --text-2: var(--color-text-body); --muted: var(--color-text-faint);
+  --accent: var(--color-accent-text); --accent-soft: var(--color-accent-soft); --bad: var(--color-negative);
+  --font: var(--font-text);
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { font: 500 13px/1.4 var(--font); color: var(--text-2); -webkit-font-smoothing: antialiased; }
+body { font: 500 var(--type-sm)/1.4 var(--font); color: var(--text-2); -webkit-font-smoothing: antialiased; }
 svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 button { font: inherit; color: inherit; }
-kbd { font: 500 11px/1 var(--font); color: var(--muted); padding: 3px 5px; border: 1px solid var(--line-2); border-radius: 5px; white-space: nowrap; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+kbd { font: 500 var(--type-2xs)/1 var(--font); color: var(--muted); padding: 3px 5px; border: 1px solid var(--line-2); border-radius: 5px; white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

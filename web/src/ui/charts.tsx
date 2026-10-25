@@ -327,10 +327,10 @@ export function DotGrid({ x, y, width, height, gap = 14 }: { x: number; y: numbe
           <circle cx={1} cy={1} r={1} className="dotgrid" />
         </pattern>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0" />
-          <stop offset="0.15" stopColor="#fff" stopOpacity="1" />
-          <stop offset="0.85" stopColor="#fff" stopOpacity="1" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
+          <stop offset="0.15" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="0.85" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="1" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
         </linearGradient>
         <mask id={`${id}m`}><rect x={x} y={y} width={width} height={height} fill={`url(#${id}f)`} /></mask>
       </defs>

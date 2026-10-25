@@ -5,6 +5,7 @@
 // Inter, which the renderer is given as a font file (src/lib/og/fonts, SIL Open Font
 // License), so it looks the same wherever it is drawn.
 import { HOST, OG_CARDS, type OgCard } from "../meta";
+import { RAW } from "../../ui/tokens.gen";
 
 export const W = 1200;
 export const H = 630;
@@ -65,15 +66,15 @@ function frame(body: string, logoSvg: string, foot: string, accent?: string): st
   for (let x = 60; x < W; x += 60) grid.push(`M${x} 0V${H}`);
   for (let y = 60; y < H; y += 60) grid.push(`M0 ${y}H${W}`);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-<defs><radialGradient id="glow" cx="85%" cy="8%" r="75%"><stop offset="0" stop-color="#1b2a6b"/><stop offset=".62" stop-color="#07080d" stop-opacity="0"/></radialGradient></defs>
-<rect width="${W}" height="${H}" fill="#07080d"/>
+<defs><radialGradient id="glow" cx="85%" cy="8%" r="75%"><stop offset="0" stop-color="${RAW["color-glow-deep"]}"/><stop offset=".62" stop-color="${RAW["color-canvas"]}" stop-opacity="0"/></radialGradient></defs>
+<rect width="${W}" height="${H}" fill="${RAW["color-canvas"]}"/>
 <rect width="${W}" height="${H}" fill="url(#glow)"/>
-<path d="${grid.join("")}" stroke="#85a8ff" stroke-opacity=".05" stroke-width="1"/>
+<path d="${grid.join("")}" stroke="${RAW["palette-white"]}" stroke-opacity=".05" stroke-width="1"/>
 ${accent ? `<rect x="0" y="0" width="12" height="${H}" fill="${accent}"/>` : ""}
 ${logo(logoSvg, PAD, 64, 60)}
-<g font-family="Inter" fill="#f1f3f9">
+<g font-family="Inter" fill="${RAW["color-text"]}">
 ${body}
-<text x="${PAD}" y="${H - 64}" font-size="24" font-weight="600" fill="#85a8ff">${esc(foot)}</text>
+<text x="${PAD}" y="${H - 64}" font-size="24" font-weight="600" fill="${RAW["color-accent-text"]}">${esc(foot)}</text>
 </g>
 </svg>`;
 }
@@ -91,9 +92,9 @@ export function cardSvg(card: OgCard, logoSvg: string, foot = HOST): string {
   const titleTop = top + 82;
   const subTop = titleTop + (title.length - 1) * 78 + 58;
   const body = [
-    `<text x="${PAD}" y="${top}" font-size="24" font-weight="600" fill="#85a8ff">${esc(card.kicker)}</text>`,
+    `<text x="${PAD}" y="${top}" font-size="24" font-weight="600" fill="${RAW["color-accent-text"]}">${esc(card.kicker)}</text>`,
     lines(title, PAD, titleTop, 78, `font-size="66" font-weight="600" letter-spacing="-1"`),
-    lines(sub, PAD, subTop, 42, `font-size="30" fill="#a3a8b9"`),
+    lines(sub, PAD, subTop, 42, `font-size="30" fill="${RAW["color-text-muted"]}"`),
   ].join("\n");
   return frame(body, logoSvg, foot);
 }
@@ -119,11 +120,11 @@ export function badgeCardSvg(b: BadgeCard, logoSvg: string): string {
   const detail = wrap(b.detail, 28, TEXT_W, 1);
   const note = b.note ? wrap(b.note, 22, TEXT_W, 2) : [];
   const body = [
-    `<text x="${PAD}" y="206" font-size="24" font-weight="600" fill="#85a8ff">Parity Verify</text>`,
+    `<text x="${PAD}" y="206" font-size="24" font-weight="600" fill="${RAW["color-accent-text"]}">Parity Verify</text>`,
     lines(verdict, PAD, 316, 0, `font-size="104" font-weight="600" letter-spacing="-2" fill="${b.color}"`),
     `<text x="${PAD}" y="382" font-size="44" font-weight="600">${esc(b.survives)}</text>`,
-    lines(detail, PAD, 432, 0, `font-size="28" fill="#a3a8b9"`),
-    lines(note, PAD, 492, 30, `font-size="22" fill="#a3a8b9"`),
+    lines(detail, PAD, 432, 0, `font-size="28" fill="${RAW["color-text-muted"]}"`),
+    lines(note, PAD, 492, 30, `font-size="22" fill="${RAW["color-text-muted"]}"`),
   ].join("\n");
   return frame(body, logoSvg, `${HOST}/v/${b.id}`, b.color);
 }
