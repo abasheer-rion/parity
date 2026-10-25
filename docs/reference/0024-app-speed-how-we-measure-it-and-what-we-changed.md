@@ -68,4 +68,5 @@ Largest paint (LCP) in ms on the first and second visit, JS sent in KB (compress
 ## Referenced by
 
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](../decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

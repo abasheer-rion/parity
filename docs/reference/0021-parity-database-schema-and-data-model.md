@@ -202,4 +202,5 @@ The opt-in Verify dataset has no user id, so it stays. Database backups keep del
 ## Referenced by
 
 - [DEC-0054: The data model is strict, indexed and keeps an append-only trade ledger](../decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

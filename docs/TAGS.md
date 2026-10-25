@@ -398,6 +398,7 @@ Hosting, CI/CD, database and costs.
 - [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0014: Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
+- [LOG-0019: Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md)
 - [DAT-0001: Alpaca paper trading](datasets/0001-alpaca.md)
 - [DAT-0019: Interactive Brokers paper trading](datasets/0019-interactive-brokers-paper.md)
 - [DAT-0026: OANDA v20 REST API (practice account)](datasets/0026-oanda-v20-practice.md)
@@ -659,6 +660,7 @@ How the team works together.
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
+- [LOG-0019: Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md)
 
 ## strategy
 
@@ -849,3 +851,4 @@ The dashboard.
 - [LOG-0015: Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
+- [LOG-0019: Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md)

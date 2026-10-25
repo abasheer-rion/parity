@@ -136,4 +136,5 @@ How to write a post: [GDE-0009](../guides/0009-writing-a-blog-or-news-post.md).
 ## Referenced by
 
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

@@ -65,4 +65,5 @@ The courses, the pictures and the quick checks already existed ([DEC-0028](0028-
 - [CMP-0007: Interactive Brokers, a global broker with four trading apps](../competitors/0007-interactive-brokers.md)
 - [CMP-0009: Robinhood, the simple trading app that added a pro desktop called Legend](../competitors/0009-robinhood.md)
 - [CMP-0017: eToro, a social investing broker built around copying other investors](../competitors/0017-etoro.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

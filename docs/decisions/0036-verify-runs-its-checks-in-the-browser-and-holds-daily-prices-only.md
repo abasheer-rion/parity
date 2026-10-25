@@ -106,4 +106,5 @@ The opt-in box is never ticked for the person, says the data may be sold in aggr
 - [CMP-0022: Collective2, a marketplace of live-tracked trading strategies](../competitors/0022-collective2.md)
 - [CMP-0023: QuantConnect, cloud backtesting and live trading on open-source LEAN](../competitors/0023-quantconnect.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

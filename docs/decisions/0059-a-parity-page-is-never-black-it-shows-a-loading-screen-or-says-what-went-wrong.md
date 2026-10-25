@@ -41,4 +41,5 @@ The owner opened an Academy lesson in the desktop app and saw a black window wit
 ## Referenced by
 
 - [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

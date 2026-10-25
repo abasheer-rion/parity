@@ -80,4 +80,5 @@ The owner asked that everything should always run by itself, and keep running mo
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 - [LOG-0014: Everything runs by itself](../log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

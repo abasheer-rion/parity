@@ -56,4 +56,5 @@ The owner asked for a database that is organised, fast and safe for user informa
 ## Referenced by
 
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

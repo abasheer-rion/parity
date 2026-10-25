@@ -139,4 +139,5 @@ Text contrast against the dark background, measured in the gallery: primary 18.2
 - [DEC-0030: Pages that hold still, open in place and come from one library](../decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

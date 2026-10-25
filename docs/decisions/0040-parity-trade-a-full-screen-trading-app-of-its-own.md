@@ -88,4 +88,5 @@ The owner asked which other parts would benefit. Recommendations, not built:
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0015: Parity Trade becomes its own app](../log/2026-10-24-parity-trade-becomes-its-own-app.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

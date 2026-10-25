@@ -75,4 +75,5 @@ The owner asked to see what people do on Parity: which pages they open, how long
 ## Referenced by
 
 - [REF-0022: Product analytics events](../reference/0022-product-analytics-events.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

@@ -39,4 +39,5 @@ On 24 October 2026 the first version of Parity Verify was built from its spec, [
 ## Referenced by
 
 - [LOG-0014: Everything runs by itself](2026-10-24-ayan-work-log-everything-runs-by-itself.md)
+- [LOG-0019: Work log for 24 and 25 October](2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

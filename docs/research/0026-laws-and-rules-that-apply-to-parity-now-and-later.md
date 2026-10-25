@@ -252,4 +252,5 @@ Primary sources are linked where they are used above. Court cases without links:
 ## Referenced by
 
 - [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
