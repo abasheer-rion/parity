@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 47 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 48 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 15 |
@@ -98,6 +98,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0045 | [We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md) | accepted | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0048 | [The desktop app loads the live site and keeps a copy for offline](decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

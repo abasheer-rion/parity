@@ -1,14 +1,25 @@
-// Parity for Mac and Windows (DEC-0041). One window: a slim sidebar on the left and the
-// website's pages on the right, served from inside the app at app://parity/.
+// Parity for Mac and Windows (DEC-0041, DEC-0048). One window: a slim sidebar on the left
+// and the website's pages on the right.
 //
-//   Pages       the built site (web/dist, copied to build/web by scripts/prepare-web.mjs)
-//   Data        /data/, /stats.json, badges and share images come from the website. The
-//               signed-in person's access token is sent with /data/ as a bearer header,
-//               which the website's middleware checks like its cookie.
-//   Links       parity:// and the website's three addresses open inside the app; every
-//               other address opens in the browser.
-//   Sign-in     the pages keep the Supabase session in the app's own storage
-//               (persist:parity), so it survives restarts.
+//   Pages       online, the live site (parity.endyland.com and the sim., trade., academy. and
+//               lab. addresses), so the app always matches the website with no reinstall.
+//               Offline, the copy of the site bundled in the app at app://parity/, with a
+//               thin "Offline, showing saved copy" line above it.
+//   Offline     a quick check of the website before the first page (2.5 s at most), a failed
+//               page load, or a page that has not started arriving after 1.5 s and a second
+//               check that fails. While offline the app checks every 15 s and goes back to
+//               the live page when the website answers.
+//   Data        live pages fetch their own data. The bundled copy fetches /data/ and the rest
+//               from the website, with the access token as a bearer header.
+//   Links       parity:// and the website's addresses open inside the app; every other
+//               address opens in the browser.
+//   Sign-in     live pages keep the session in the website's cookie on .endyland.com, stored
+//               in the app's own partition (persist:parity), so it survives restarts.
+//   Trust       only the bundled copy and the website's addresses may load in the page view,
+//               get the page bridge, ask for permissions or send messages to this process.
+//
+// For testing: PARITY_LIVE_ORIGIN points the app at another address (an unreachable one
+// shows the offline copy), and PARITY_LOG=1 prints each page the app loads.
 const { app, BaseWindow, WebContentsView, Menu, Notification, ipcMain, nativeImage, nativeTheme, net, protocol, screen, session, shell } = require("electron");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -21,7 +32,8 @@ const updater = require("./updater");
 const SCHEME = "parity";
 const PARTITION = "persist:parity";
 const SIDEBAR_W = 76;
-const SHELL_FILES = new Set(["sidebar.html", "sidebar.js"]);
+const OFFLINE_BAR_H = 28;
+const SHELL_FILES = new Set(["sidebar.html", "sidebar.js", "offline.html"]);
 
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true, codeCache: true } },
@@ -29,11 +41,15 @@ protocol.registerSchemesAsPrivileged([
 
 const WEB_ROOT = app.isPackaged ? path.join(process.resourcesPath, "web") : path.join(__dirname, "..", "build", "web");
 const DEV_URL = (process.env.PARITY_DEV_URL || "").replace(/\/$/, "") || null;
-const BASE = DEV_URL || routes.APP_ORIGIN;
-const ORIGIN = (readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://parity.endyland.com").replace(/\/$/, "");
+const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://parity.endyland.com").replace(/\/$/, "");
+const TRUSTED = routes.trustedOrigins(ORIGIN).concat(DEV_URL ? [new URL(DEV_URL).origin] : []);
 const sections = routes.visibleSections(SECTIONS, WEB_ROOT);
 
-let win = null, sidebar = null, view = null;
+let win = null, sidebar = null, view = null, bar = null;
+let online = null; // null until the first check
+let offlineShown = false;
+let retry = null;
+let watchdog = null;
 let token = null;
 let pending = null;
 let active = "home";
@@ -43,7 +59,7 @@ const shown = new Set();
 function readJson(file) {
   try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return null; }
 }
-const log = (msg) => { if (!app.isPackaged) console.log(`[parity] ${msg}`); };
+const log = (msg) => { if (!app.isPackaged || process.env.PARITY_LOG) console.log(`[parity] ${process.uptime().toFixed(1)}s ${msg}`); };
 
 // ---------------------------------------------------------------- one copy, parity:// links
 
@@ -112,12 +128,84 @@ async function handle(req) {
 
 // ---------------------------------------------------------------- the window
 
-const isInternal = (url) => url === BASE || url.startsWith(`${BASE}/`);
-const appPathOf = (url) => (isInternal(url) ? url.slice(BASE.length) || "/" : null);
+const isDev = (url) => !!DEV_URL && (url === DEV_URL || url.startsWith(`${DEV_URL}/`));
+const isTrusted = (url) => isDev(url) || routes.isTrusted(url, ORIGIN);
+const isSaved = (url) => url.startsWith(`${routes.APP_ORIGIN}/`);
+/** The in-app path of an address loaded in the page view, or null. */
+const appPathOf = (url) => (isDev(url) ? url.slice(DEV_URL.length) || "/" : isTrusted(url) ? routes.toAppPath(url, ORIGIN) : null);
+const liveUrl = (p) => (DEV_URL ? `${DEV_URL}${p}` : routes.liveUrl(p, ORIGIN));
+// URL.origin is "null" for app://, so the origin is built by hand.
+const trustedUrl = (u) => {
+  try { const x = new URL(u || ""); return TRUSTED.includes(`${x.protocol}//${x.host}`); } catch { return false; }
+};
+const trustedSender = (e) => trustedUrl(e.senderFrame?.url);
 
-function go(p) {
+/** Does the website answer? A small public file, given `ms` to arrive. */
+async function check(ms) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms);
+  try {
+    const res = await session.fromPartition(PARTITION).fetch(`${DEV_URL || ORIGIN}/favicon.svg`, { method: "HEAD", cache: "no-store", signal: ctl.signal, bypassCustomProtocolHandlers: true });
+    return res.status < 500;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+function setOnline(value) {
+  online = value;
+  if (value) { clearInterval(retry); retry = null; return; }
+  if (retry) return;
+  retry = setInterval(async () => {
+    if (!(await check(2500))) return;
+    log("the website answers again, going back to the live page");
+    setOnline(true);
+    if (offlineShown) go(currentPath);
+  }, 15000);
+}
+
+/** Opens an in-app path: live when online, else the saved copy. */
+async function go(p) {
   if (!view) return;
-  view.webContents.loadURL(`${BASE}${p}`);
+  if (online === null) setOnline(await check(2000));
+  if (!view) return;
+  if (online) loadLive(p);
+  else loadSaved(p);
+}
+
+function loadLive(p) {
+  const url = liveUrl(p);
+  log(`loading ${url}`);
+  clearTimeout(watchdog);
+  // A page that has not started arriving after 1.5 s gets a second, short check.
+  watchdog = setTimeout(async () => {
+    watchdog = null;
+    if (!(await check(1200))) fallBack(p, "no answer");
+  }, 1500);
+  view.webContents.loadURL(url).catch(() => {});
+}
+
+function loadSaved(p) {
+  const url = `${routes.APP_ORIGIN}${p}`;
+  log(`loading saved copy ${url}`);
+  view.webContents.loadURL(url).catch(() => {});
+}
+
+function fallBack(p, why) {
+  if (!view) return;
+  log(`offline (${why}), showing the saved copy`);
+  clearTimeout(watchdog);
+  watchdog = null;
+  setOnline(false);
+  loadSaved(p);
+}
+
+function showOffline(on) {
+  if (on === offlineShown) return;
+  offlineShown = on;
+  layout();
 }
 
 /** An address a page tried to open: keep it in the app if it is ours, else the browser. */
@@ -131,6 +219,7 @@ function onNavigated(url) {
   const p = appPathOf(url);
   if (!p) return;
   currentPath = p;
+  showOffline(isSaved(url));
   const id = routes.activeSection(`${routes.APP_ORIGIN}${p}`, sections);
   if (id && id !== active) {
     active = id;
@@ -141,8 +230,12 @@ function onNavigated(url) {
 function layout() {
   if (!win || win.isDestroyed()) return;
   const { width, height } = win.getContentBounds();
+  const w = Math.max(0, width - SIDEBAR_W);
+  const top = offlineShown ? OFFLINE_BAR_H : 0;
   sidebar.setBounds({ x: 0, y: 0, width: SIDEBAR_W, height });
-  view.setBounds({ x: SIDEBAR_W, y: 0, width: Math.max(0, width - SIDEBAR_W), height });
+  bar.setBounds({ x: SIDEBAR_W, y: 0, width: w, height: top });
+  bar.setVisible(offlineShown);
+  view.setBounds({ x: SIDEBAR_W, y: top, width: w, height: Math.max(0, height - top) });
 }
 
 function createWindow() {
@@ -158,10 +251,11 @@ function createWindow() {
 
   const prefs = { contextIsolation: true, sandbox: true, nodeIntegration: false, partition: PARTITION, spellcheck: true };
   sidebar = new WebContentsView({ webPreferences: { ...prefs, preload: path.join(__dirname, "sidebar-preload.js") } });
-  view = new WebContentsView({ webPreferences: { ...prefs, preload: path.join(__dirname, "preload.js"), additionalArguments: [`--parity-version=${app.getVersion()}`] } });
-  sidebar.setBackgroundColor("#050608");
-  view.setBackgroundColor("#050608");
+  view = new WebContentsView({ webPreferences: { ...prefs, preload: path.join(__dirname, "preload.js"), additionalArguments: [`--parity-version=${app.getVersion()}`, `--parity-origins=${TRUSTED.join(",")}`] } });
+  bar = new WebContentsView({ webPreferences: { ...prefs } });
+  for (const v of [sidebar, view, bar]) v.setBackgroundColor("#050608");
   win.contentView.addChildView(sidebar);
+  win.contentView.addChildView(bar);
   win.contentView.addChildView(view);
   layout();
   win.on("resize", layout);
@@ -169,30 +263,40 @@ function createWindow() {
   if (state.fullscreen) win.setFullScreen(true);
 
   const wc = view.webContents;
-  wc.on("will-navigate", (e, url) => { if (!isInternal(url)) { e.preventDefault(); route(url); } });
-  wc.on("will-redirect", (e, url) => { if (!isInternal(url)) { e.preventDefault(); route(url); } });
+  wc.on("will-navigate", (e, url) => { if (!isTrusted(url)) { e.preventDefault(); route(url); } });
+  wc.on("will-redirect", (e, url) => { if (!isTrusted(url)) { e.preventDefault(); route(url); } });
   wc.setWindowOpenHandler(({ url }) => { route(url); return { action: "deny" }; });
-  wc.on("did-navigate", (_e, url) => onNavigated(url));
+  wc.on("did-navigate", (_e, url) => { clearTimeout(watchdog); watchdog = null; log(`loaded ${url}`); onNavigated(url); });
   wc.on("did-navigate-in-page", (_e, url) => onNavigated(url));
+  // A live page that cannot load (no connection, no answer) opens from the saved copy.
+  wc.on("did-fail-load", (_e, code, desc, url, isMainFrame) => {
+    if (!isMainFrame || code === -3 || isSaved(url)) return; // -3: replaced by another load
+    const p = appPathOf(url);
+    if (p) fallBack(p, desc || String(code));
+  });
   wc.on("page-title-updated", (_e, title) => win?.setTitle(title || "Parity"));
-  for (const c of [wc, sidebar.webContents]) {
+  for (const c of [wc, sidebar.webContents, bar.webContents]) {
     c.on("will-attach-webview", (e) => e.preventDefault());
   }
-  sidebar.webContents.on("will-navigate", (e) => e.preventDefault());
-  sidebar.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
+  for (const c of [sidebar.webContents, bar.webContents]) {
+    c.on("will-navigate", (e) => e.preventDefault());
+    c.setWindowOpenHandler(() => ({ action: "deny" }));
+  }
 
   sidebar.webContents.loadURL(`${routes.APP_ORIGIN}/__desktop/sidebar.html`);
+  bar.webContents.loadURL(`${routes.APP_ORIGIN}/__desktop/offline.html`);
   const start = pending || state.lastPath || "/";
   pending = null;
   go(start);
 
   win.on("close", () => windowState.save(app.getPath("userData"), win, currentPath));
-  win.on("closed", () => { win = null; view = null; sidebar = null; });
+  win.on("closed", () => { win = null; view = null; sidebar = null; bar = null; });
 }
 
 // ---------------------------------------------------------------- messages from the pages
 
-const fromView = (e) => view && e.sender === view.webContents;
+// Only the page view's top frame, showing a trusted address, may send these.
+const fromView = (e) => !!view && e.sender === view.webContents && e.senderFrame === view.webContents.mainFrame && trustedSender(e);
 
 ipcMain.on("parity:token", (e, t) => {
   if (!fromView(e)) return;
@@ -240,7 +344,7 @@ function buildMenu() {
       label: "Parity",
       submenu: [
         { role: "about" },
-        { label: "Updates: download new versions from the release page", enabled: false },
+        { label: "Pages load live from parity.endyland.com", enabled: false },
         { type: "separator" },
         { label: "Account settings", accelerator: "Cmd+,", click: () => go("/app/#/settings/account") },
         { type: "separator" },
@@ -255,7 +359,8 @@ function buildMenu() {
     {
       label: "View",
       submenu: [
-        { label: "Reload", accelerator: "CmdOrCtrl+R", click: () => wc()?.reload() },
+        // Reload checks the website again, so it can leave the saved copy.
+        { label: "Reload", accelerator: "CmdOrCtrl+R", click: () => { online = null; go(currentPath); } },
         { label: "Reload without cache", accelerator: "Shift+CmdOrCtrl+R", click: () => wc()?.reloadIgnoringCache() },
         { label: "Developer tools", accelerator: mac ? "Alt+Cmd+I" : "Ctrl+Shift+I", click: () => wc()?.toggleDevTools() },
         { type: "separator" },
@@ -295,7 +400,7 @@ function buildMenu() {
 
 async function capture() {
   const sf = screen.getPrimaryDisplay().scaleFactor || 1;
-  const [a, b] = await Promise.all([sidebar.webContents.capturePage(), view.webContents.capturePage()]);
+  const [a, b, c] = await Promise.all([sidebar.webContents.capturePage(), view.webContents.capturePage(), offlineShown ? bar.webContents.capturePage() : null]);
   const bits = (img) => {
     const { width, height } = img.getSize(sf);
     const buf = img.toBitmap({ scaleFactor: sf });
@@ -303,7 +408,15 @@ async function capture() {
     const h = buf.length / (w * 4);
     return { buf, w, h };
   };
-  const A = bits(a), B = bits(b);
+  const A = bits(a);
+  let B = bits(b);
+  if (c) { // the offline line sits above the page
+    const C = bits(c);
+    const buf = Buffer.alloc(B.w * (C.h + B.h) * 4);
+    for (let y = 0; y < C.h; y++) C.buf.copy(buf, y * B.w * 4, y * C.w * 4, y * C.w * 4 + Math.min(C.w, B.w) * 4);
+    B.buf.copy(buf, C.h * B.w * 4);
+    B = { buf, w: B.w, h: C.h + B.h };
+  }
   const w = A.w + B.w, h = Math.max(A.h, B.h);
   const out = Buffer.alloc(w * h * 4);
   for (let y = 0; y < h; y++) {
@@ -342,8 +455,13 @@ app.whenReady().then(() => {
   const ses = session.fromPartition(PARTITION);
   ses.protocol.handle("app", handle);
   const allowed = new Set(["notifications", "clipboard-sanitized-write", "fullscreen"]);
-  ses.setPermissionRequestHandler((_wc, permission, cb) => cb(allowed.has(permission)));
-  ses.setPermissionCheckHandler((_wc, permission) => allowed.has(permission));
+  ses.setPermissionRequestHandler((_wc, permission, cb, details) => cb(allowed.has(permission) && trustedUrl(details?.requestingUrl)));
+  ses.setPermissionCheckHandler((_wc, permission, origin) => allowed.has(permission) && trustedUrl(origin));
+  // The website's service workers keep their own offline copies. In the app the bundled copy
+  // does that job, and a worker answering for a dead connection would hide it, so they are
+  // not installed here.
+  ses.clearStorageData({ storages: ["serviceworkers"] }).catch(() => {});
+  ses.webRequest.onBeforeRequest({ urls: ["https://*/sw.js", "https://*/sim/sw.js"] }, (d, cb) => cb({ cancel: trustedUrl(d.url) }));
   const link = process.argv.find((a) => a.startsWith(`${SCHEME}://`));
   if (link) pending = routes.toAppPath(link, ORIGIN);
   if (process.env.PARITY_SHOTS) pending = "/";
@@ -354,4 +472,6 @@ app.whenReady().then(() => {
 });
 
 app.on("activate", () => { if (!win) createWindow(); });
+// Write the sign-in cookies to disk before quitting, so the next launch is still signed in.
+app.on("before-quit", () => { session.fromPartition(PARTITION).cookies.flushStore().catch(() => {}); });
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
