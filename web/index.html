@@ -265,8 +265,8 @@
          reverse it. The address says which form is open (/#login, /#signup, /#reset). */
       html { scrollbar-gutter: stable; }
       html.auth-open { overflow: hidden; }
-      main, footer, .skip { transition: opacity .42s var(--ease) .1s; }
-      html.auth-open :is(main, footer, .skip, .corner) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .26s var(--ease), visibility 0s linear .26s; }
+      body > :is(main, footer, .skip) { transition: opacity .42s var(--ease) .1s; }
+      html.auth-open body > :is(main, footer, .skip, .corner) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s var(--ease), visibility 0s linear .22s; }
 
       @media (max-width: 760px) {
         .wrap { padding: 0 16px; }

@@ -6,8 +6,11 @@ import { Screen, SwitchLink, useFlow } from "../flow";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem } from "../rules";
 
-/** `onSignedIn` runs once the code from the email has signed the person in. */
-export function Forgot({ onSignedIn }: { onSignedIn: () => void }) {
+/**
+ * `onSignedIn` runs once the code from the email has signed the person in. `wait` holds the
+ * form hidden while the session is still being read, so the panel keeps its size.
+ */
+export function Forgot({ onSignedIn, wait }: { onSignedIn: () => void; wait?: boolean }) {
   const { next, email, setEmail } = useFlow();
   const [code, setCode] = useState("");
   const [sent, setSent] = useState(false);
@@ -48,7 +51,7 @@ export function Forgot({ onSignedIn }: { onSignedIn: () => void }) {
   }
 
   return (
-    <Screen id="reset-email" title="Reset your password" lead="Enter your email and we will send you a link and a code to choose a new password.">
+    <Screen id="reset-email" wait={wait} title="Reset your password" lead="Enter your email and we will send you a link and a code to choose a new password.">
       <form className="pa-form" onSubmit={send} noValidate>
         <Field label="Email" type="email" auto="username" value={email} onChange={setEmail} autoFocus error={form.errorFor("email")} />
         <Notice>{form.general}</Notice>

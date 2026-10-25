@@ -29,8 +29,9 @@
   visibility: hidden;
   transition: opacity .24s var(--ease), visibility 0s linear .24s;
 }
-.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity .42s var(--ease) .14s, visibility 0s; }
-.pa-overlay .pa-card { transform: translateY(10px); transition: transform .5s var(--ease) .14s; }
+.pa-overlay.on { visibility: visible; transition: opacity .24s var(--ease), visibility 0s; }
+.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity .4s var(--ease) .12s, visibility 0s; }
+.pa-overlay .pa-card { transform: translateY(10px); transition: transform .5s var(--ease) .12s; }
 .pa-overlay.open .pa-card { transform: none; }
 
 /* The logo stays where the front page has it, so it does not move during the fade. */
@@ -56,7 +57,7 @@
 .pa-screen[data-wait] > :not(.pa-title) { opacity: 0; pointer-events: none; }
 .pa-screen > :not(.pa-title) { transition: opacity .25s var(--ease); }
 
-.pa-title { margin: 0; font-size: 26px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--text); }
+.pa-title { max-width: none; margin: 0; font-size: 26px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--text); }
 .pa-lead { margin: 8px 0 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 .pa-lead strong, .pa-notice strong { color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
 .pa-screen > .pa-form, .pa-screen > .pa-providers { margin-top: 24px; }
@@ -152,7 +153,7 @@
 .pa-or::before, .pa-or::after { content: ""; flex: 1; border-top: 1px solid var(--line-2); }
 
 /* Legal links: small and quiet, under the panel. */
-.pa-foot { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.pa-foot { border: 0; margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
 .pa-foot .legal-links { gap: 0 14px; font-size: 12px; }
 .pa-foot .legal-links a, .pa-foot .legal-links button { color: var(--faint); text-decoration: none; transition: color .2s; }
 .pa-foot .legal-links a:hover, .pa-foot .legal-links button:hover { color: var(--text); }
@@ -168,7 +169,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pa-overlay, .pa-overlay.open, .pa-overlay .pa-card, .pa-size[data-ready], .pa-screen > :not(.pa-title) { transition: none !important; }
+  .pa-overlay, .pa-overlay.on, .pa-overlay.open, .pa-overlay .pa-card, .pa-size[data-ready], .pa-screen > :not(.pa-title) { transition: none !important; }
   .pa-overlay .pa-card { transform: none; }
   .pa-screen, .pa-error, .pa-notice { animation: none !important; }
   .pa-spin { animation-duration: 2.4s; }

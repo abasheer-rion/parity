@@ -3,7 +3,7 @@
 // out (html.auth-open), the backdrop stays, and the same panel as /login/ fades in over it.
 // Focus moves into the panel and comes back to the link that opened it; Escape and the
 // logo close it.
-import { StrictMode, useEffect } from "react";
+import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { AuthFlow } from "./AuthFlow";
 import type { View } from "./views";
@@ -35,9 +35,17 @@ function Overlay({ open, view, round, hooks }: { open: boolean; view: View; roun
     return () => document.removeEventListener("keydown", onKey);
   }, [open, hooks]);
 
+  // The panel mounts visible but clear (so focus can move into it), then fades in a frame later.
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    if (!open) { setShown(false); return; }
+    let raf = requestAnimationFrame(() => { raf = requestAnimationFrame(() => setShown(true)); });
+    return () => cancelAnimationFrame(raf);
+  }, [open]);
+
   return (
     // inert while closed, so the fading panel can be neither focused nor read.
-    <div className={`pa-overlay${open ? " open" : ""}`} inert={!open} data-lenis-prevent="">
+    <div className={`pa-overlay${open ? " on" : ""}${open && shown ? " open" : ""}`} inert={!open} data-lenis-prevent="">
       {round > 0 && (
         <AuthFlow key={round} initial={view} host="front" onHome={hooks.onClose}
           onView={(v) => { hooks.current(v); hooks.onView(v); }} />

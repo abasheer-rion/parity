@@ -49,7 +49,7 @@ export function Reset() {
   });
 
   const title = carry.invite ? "Choose a password" : "Choose a new password";
-  if (session.loading) return <Screen id="reset-wait" title="Reset your password" wait />;
+  if (session.loading) return <Forgot wait onSignedIn={() => form.setProblem(null)} />;
   if (!session.session) return <Forgot onSignedIn={() => form.setProblem(null)} />;
   if (mfa === "unknown") return <Screen id="reset-wait" title={title} wait />;
   if (mfa === "needed") return <SecondStep title="Confirm it is you" onDone={() => setMfa("done")} />;
