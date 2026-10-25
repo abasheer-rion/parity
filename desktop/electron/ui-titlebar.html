@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+    <title>Parity title bar</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      html, body { height: 100%; overflow: hidden; background: var(--bar); user-select: none; -webkit-user-select: none; }
+      body { border-bottom: 1px solid var(--line); }
+      /* Windows moves the window natively from a drag region (with snapping). On a Mac a view
+         inside the window does not reliably get one, so ui-titlebar.js moves it there. */
+      body.win32, body.linux { -webkit-app-region: drag; }
+      .bar { position: relative; height: 100%; display: flex; align-items: center; gap: 2px; padding: 0 10px; }
+      body.darwin .bar { padding-left: 80px; }
+      body.darwin.fullscreen .bar { padding-left: 10px; }
+      body.win32 .bar, body.linux .bar { padding-right: 150px; }
+      .btn { -webkit-app-region: no-drag; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 26px; min-width: 28px; padding: 0 6px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: default; }
+      .btn:hover:not(:disabled) { color: var(--text); background: rgb(255 255 255 / .06); }
+      .btn[aria-pressed="true"], .btn[aria-expanded="true"] { color: var(--text); background: rgb(255 255 255 / .09); }
+      .btn:disabled { opacity: .35; }
+      .btn.pin[aria-pressed="true"] { color: var(--accent); }
+      .search { padding: 0 8px 0 9px; border: 1px solid var(--line-2); color: var(--muted); }
+      .search span { font-size: 12px; }
+      .gap { flex: 1; }
+      .title { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 46%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12.5px; color: var(--text-2); pointer-events: none; }
+      .flash { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 4px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--text); font-size: 12px; opacity: 0; transition: opacity .18s; pointer-events: none; white-space: nowrap; }
+      .flash.on { opacity: 1; }
+      .dot { width: 7px; height: 7px; border-radius: 50%; background: #e0a43a; margin: 0 6px; }
+      body.wall .nav-only, body.wall .menu, body.wall .search, body.wall .pin, body.wall .title { display: none; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div class="bar" id="bar">
+      <button type="button" class="btn menu" id="menu" title="Sections" aria-label="Sections" aria-expanded="false"></button>
+      <button type="button" class="btn" id="back" title="Back" aria-label="Back"></button>
+      <button type="button" class="btn" id="forward" title="Forward" aria-label="Forward"></button>
+      <span class="title" id="title"></span>
+      <span class="flash" id="flash" role="status" aria-live="polite"></span>
+      <span class="gap"></span>
+      <span class="dot" id="offline" title="Offline, showing saved copy" hidden></span>
+      <button type="button" class="btn pin" id="pin" title="Keep this window on top" aria-label="Keep this window on top" aria-pressed="false" hidden></button>
+      <button type="button" class="btn search" id="search" title="Search sections, pages and commands"></button>
+    </div>
+    <script src="icons.js"></script>
+    <script src="ui-titlebar.js"></script>
+  </body>
+</html>

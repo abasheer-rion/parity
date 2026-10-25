@@ -1,9 +1,9 @@
 {
   "name": "parity-desktop",
   "productName": "Parity",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": true,
-  "description": "Parity for Mac and Windows: the site, Verify, the product app, Research, Parity Terminal and Parity Trade in one window.",
+  "description": "Parity for Mac and Windows: the site, Verify, the product app, Research, Parity Terminal and Parity Trade, with windows, workspaces and a menu bar item.",
   "author": "Parity Trading, Inc. <contact@paritytrading.ai>",
   "license": "UNLICENSED",
   "main": "electron/main.js",
@@ -13,11 +13,12 @@
     "start": "electron .",
     "dev": "PARITY_DEV_URL=http://127.0.0.1:5199 electron .",
     "test": "node --test tests/*.test.js",
-    "build": "electron-builder",
-    "build:mac": "electron-builder --mac --publish never",
-    "build:win": "electron-builder --win --publish never",
-    "pack": "electron-builder --dir --publish never",
-    "shots": "PARITY_SHOTS=1 electron ."
+    "test:app": "node scripts/selftest.mjs",
+    "build": "electron-builder --config electron-builder.config.js",
+    "build:mac": "electron-builder --config electron-builder.config.js --mac --publish never",
+    "build:win": "electron-builder --config electron-builder.config.js --win --publish never",
+    "pack": "electron-builder --config electron-builder.config.js --dir --publish never",
+    "shots": "PARITY_SHOTS=$HOME/Desktop/parity-app/shots PARITY_SHOTS_STEPS=wall,menu,palette,trade,window2 electron ."
   },
   "dependencies": {
     "electron-updater": "^6.8.11"
@@ -25,108 +26,6 @@
   "devDependencies": {
     "electron": "^44.9.3",
     "electron-builder": "^26.18.0"
-  },
-  "build": {
-    "appId": "ai.paritytrading.desktop",
-    "productName": "Parity",
-    "copyright": "Copyright 2026 Parity Trading, Inc.",
-    "directories": {
-      "output": "dist",
-      "buildResources": "assets"
-    },
-    "files": [
-      "electron/**/*",
-      "assets/icon.png",
-      "package.json",
-      "!**/*.map"
-    ],
-    "extraResources": [
-      {
-        "from": "build/web",
-        "to": "web",
-        "filter": [
-          "**/*",
-          "!**/*.map"
-        ]
-      }
-    ],
-    "protocols": [
-      {
-        "name": "Parity link",
-        "schemes": [
-          "parity"
-        ]
-      }
-    ],
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "abasheer-rion",
-        "repo": "parity",
-        "releaseType": "draft"
-      }
-    ],
-    "mac": {
-      "category": "public.app-category.finance",
-      "icon": "assets/icon.icns",
-      "identity": "-",
-      "hardenedRuntime": false,
-      "gatekeeperAssess": false,
-      "darkModeSupport": true,
-      "minimumSystemVersion": "11.0",
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "arm64",
-            "x64"
-          ]
-        }
-      ]
-    },
-    "dmg": {
-      "title": "Parity ${version}",
-      "iconSize": 100,
-      "contents": [
-        {
-          "x": 130,
-          "y": 200
-        },
-        {
-          "x": 410,
-          "y": 200,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ],
-      "window": {
-        "width": 540,
-        "height": 380
-      },
-      "artifactName": "Parity-${version}-${arch}.dmg"
-    },
-    "win": {
-      "icon": "assets/icon.ico",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    },
-    "nsis": {
-      "artifactName": "Parity Setup ${version}.exe",
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "assets/icon.ico",
-      "uninstallerIcon": "assets/icon.ico",
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "Parity"
-    }
   },
   "allowScripts": {
     "electron": true

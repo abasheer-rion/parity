@@ -32,6 +32,7 @@ import {
 } from "./state";
 import { checkAlerts } from "./trackers";
 import { isDesktop } from "../desktop/bridge";
+import { DesktopTicker } from "./DesktopTicker";
 import { NameDialog, WatchlistsView, WatchMini } from "./WatchlistsView";
 import "./trade.css";
 import { rumRefresh } from "../lib/rum";
@@ -260,6 +261,7 @@ function TradeShell() {
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>
       <div className="ptr" data-density={settings.density} data-mobile={mobile || undefined}>
         <SkipLink />
+        {isDesktop() && list.length > 0 && <DesktopTicker list={list} />}
         <header className="tb">
           <button type="button" className="tb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden>‹</span>

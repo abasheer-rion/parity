@@ -4,10 +4,10 @@ title: Parity as an installable site and a desktop app for Mac and Windows
 type: decision
 status: accepted
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-25
 authors: [ayan]
 tags: [infra, process, ui]
-related: [DEC-0038, DEC-0040, DEC-0024, DEC-0020, DEC-0048]
+related: [DEC-0038, DEC-0040, DEC-0024, DEC-0020, DEC-0048, DEC-0049]
 ---
 
 # Parity as an installable site and a desktop app for Mac and Windows
@@ -23,6 +23,8 @@ The owner asked on 24 October 2026 for "an app asap, all of it, trading with res
 The site is a Vite build of separate pages (`index`, `app`, `research`, `sim`, `trade` and the sign-in pages). The Pages middleware ([DEC-0038](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)) refuses `/app/`, `/research/`, `/sim/`, `/trade/` and `/data/` without a session cookie. Parity Terminal already had its own manifest and service worker ([DEC-0024](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)).
 
 ## Decision
+
+Items 6 (the sidebar) and 9 (updates) are replaced by [DEC-0049](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md): since version 0.2.0 the app opens on the log-in page, has a menu button instead of the sidebar, and checks a public update feed.
 
 1. **Reuse the web code.** No second UI. The installable site and the desktop app run the same built pages.
 2. **The installable site.** One manifest for the site and the product app (`/manifest.webmanifest`, start page `/app/`, shortcuts to Verify, Trade, Research and the Terminal, a maskable icon), one for Trade (`/trade/manifest.webmanifest`) and the Terminal's own. A service worker at `/sw.js` loads pages from the network first, falls back to the last good copy and then to `/offline.html`, and keeps hashed build files. It never stores `/data/`, `/local/`, share images, badges, sign-in redirects or errors. A small card offers to install once, on the front page and in the apps, fixed to the corner so the page never moves; on an iPhone it says how to add Parity to the home screen. "Not now" hides it for 30 days.
@@ -54,6 +56,7 @@ The site is a Vite build of separate pages (`index`, `app`, `research`, `sim`, `
 - [DEC-0042: Parity Academy, a full-screen course player of its own](0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
+- [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 <!-- backlinks:end -->

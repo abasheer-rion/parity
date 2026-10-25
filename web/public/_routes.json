@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/trade", "/trade/*", "/academy", "/academy/*", "/lab", "/lab/*", "/data/*", "/badge/*", "/v/*", "/s/*", "/og/badge/*", "/og/strategy/*", "/api/payments/*", "/rum"],
+  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/trade", "/trade/*", "/academy", "/academy/*", "/lab", "/lab/*", "/data/*", "/badge/*", "/v/*", "/s/*", "/og/badge/*", "/og/strategy/*", "/api/payments/*", "/rum", "/desktop/updates/*"],
   "exclude": ["/v/"]
 }
