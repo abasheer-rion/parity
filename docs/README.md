@@ -30,11 +30,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-25 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-25 [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - 2026-10-24 [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - 2026-10-24 [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - 2026-10-24 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
-- 2026-10-24 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-24 [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - 2026-10-24 [REF-0016: Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md)
 - 2026-10-24 [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
@@ -176,7 +176,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 | REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
-| REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## competitor
