@@ -31,6 +31,33 @@ let overlay = null;
 document.addEventListener("mousedown", (e) => { if (overlay && !e.target.closest(".btn")) shell.send("close-overlay"); });
 document.addEventListener("dblclick", (e) => { if (!e.target.closest(".btn")) shell.send("dblclick"); });
 
+// Moving the window. On Windows the bar is a drag region and the system moves the window, so
+// this page never sees the press. On a Mac (and anywhere the region is ignored) the press
+// arrives here and the app moves the window by the pointer's travel on the screen.
+let drag = null;
+let queued = null;
+document.addEventListener("pointerdown", (e) => {
+  if (e.button !== 0 || e.target.closest(".btn") || e.detail > 1) return;
+  drag = e.pointerId;
+  try { document.body.setPointerCapture(e.pointerId); } catch { /* the move still works inside the bar */ }
+  shell.send("drag-start", { x: e.screenX, y: e.screenY });
+});
+document.addEventListener("pointermove", (e) => {
+  if (drag === null || e.pointerId !== drag) return;
+  const first = queued === null;
+  queued = { x: e.screenX, y: e.screenY };
+  if (first) requestAnimationFrame(() => { if (queued) shell.send("drag-move", queued); queued = null; });
+});
+const stop = (e) => {
+  if (drag === null || e.pointerId !== drag) return;
+  if (queued) shell.send("drag-move", queued);
+  queued = null;
+  drag = null;
+  shell.send("drag-end");
+};
+document.addEventListener("pointerup", stop);
+document.addEventListener("pointercancel", stop);
+
 function render(s) {
   overlay = s.overlay;
   document.body.classList.toggle("wall", s.wall);

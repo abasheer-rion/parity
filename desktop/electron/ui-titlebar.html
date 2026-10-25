@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="ui.css" />
     <style>
       html, body { height: 100%; overflow: hidden; background: var(--bar); user-select: none; -webkit-user-select: none; }
-      body { -webkit-app-region: drag; border-bottom: 1px solid var(--line); }
+      body { border-bottom: 1px solid var(--line); }
+      /* Windows moves the window natively from a drag region (with snapping). On a Mac a view
+         inside the window does not reliably get one, so ui-titlebar.js moves it there. */
+      body.win32, body.linux { -webkit-app-region: drag; }
       .bar { position: relative; height: 100%; display: flex; align-items: center; gap: 2px; padding: 0 10px; }
       body.darwin .bar { padding-left: 80px; }
       body.darwin.fullscreen .bar { padding-left: 10px; }

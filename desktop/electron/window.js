@@ -381,6 +381,31 @@ class ParityWindow {
     else this.win.maximize();
   }
 
+  /** Moves the window by the pointer's travel since the press on the title bar. */
+  dragStart(x, y) {
+    if (!this.alive || this.win.isFullScreen() || !Number.isFinite(x) || !Number.isFinite(y)) { this.dragFrom = null; return; }
+    if (this.win.isMaximized() && this.ctx.platform !== "darwin") {
+      // A maximised Windows window comes out at its normal size, under the pointer.
+      const b = this.win.getNormalBounds();
+      this.win.unmaximize();
+      this.win.setBounds({ ...b, x: Math.round(x - b.width / 2), y: Math.round(y - 12) });
+    }
+    const [wx, wy] = this.win.getPosition();
+    this.dragFrom = { x, y, wx, wy };
+  }
+
+  dragMove(x, y) {
+    const d = this.dragFrom;
+    if (!d || !this.alive || !Number.isFinite(x) || !Number.isFinite(y)) return;
+    this.win.setPosition(Math.round(d.wx + x - d.x), Math.round(d.wy + y - d.y));
+  }
+
+  dragEnd() {
+    if (!this.dragFrom) return;
+    this.dragFrom = null;
+    this.ctx.saveSoon();
+  }
+
   serialize() {
     const b = this.win.getNormalBounds();
     return { ...b, maximized: this.win.isMaximized(), fullscreen: this.win.isFullScreen() && !this.focusMode, onTop: this.win.isAlwaysOnTop(), path: this.lastGoodPath || "/" };

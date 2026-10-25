@@ -37,7 +37,7 @@ const { ParityTray } = require("./tray");
 const SCHEME = "parity";
 const PARTITION = "persist:parity";
 const AUTH_COOKIE = /^sb-[a-z0-9]+-auth-token(\.\d+)?$/;
-const SHELL_FILES = new Set(["offline.html", "ui.css", "icons.js", "ui-titlebar.html", "ui-titlebar.js", "ui-overlay.html", "ui-overlay.js", "ui-settings.html", "ui-settings.js"]);
+const SHELL_FILES = new Set(["offline.html", "ui.css", "icons.js", "ui-titlebar.html", "ui-titlebar.js", "ui-overlay.html", "ui-overlay.js", "ui-settings.html", "ui-settings.js", "ui-error.html"]);
 
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true, codeCache: true } },
@@ -571,6 +571,12 @@ ipcMain.on("shell:do", (e, action, arg) => {
     w.closeOverlay();
     if (arg.newWindow) newWindow(arg.path);
     else w.go(arg.path);
+  } else if (action === "drag-start" && arg) {
+    w.dragStart(Number(arg.x), Number(arg.y));
+  } else if (action === "drag-move" && arg) {
+    w.dragMove(Number(arg.x), Number(arg.y));
+  } else if (action === "drag-end") {
+    w.dragEnd();
   } else if (action === "open-workspace" && typeof arg === "string") {
     w.closeOverlay();
     openWorkspace(arg);
@@ -770,6 +776,7 @@ app.whenReady().then(async () => {
   tray.sync();
   syncBackground();
   ctx.updates.sync();
+  if (process.env.PARITY_SELFTEST) require("./selftest").run({ windows: () => [...windows].filter((w) => w.alive), openLink, newWindow }).catch((e) => { console.error(e); app.exit(1); });
   if (process.env.PARITY_SHOTS) require("./shots").run({ focused: focusedWindow, newWindow }).catch((e) => { console.error(e); app.quit(); });
 });
 

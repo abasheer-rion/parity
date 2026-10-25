@@ -69,6 +69,9 @@ jobs:
         working-directory: desktop
       - run: npm test
         working-directory: desktop
+      # The running app: log-in wall on a deep link, title bar dragging, offline copy, menu.
+      - run: npm run test:app
+        working-directory: desktop
       # The API key arrives as text; electron-builder wants a path to the .p8 file.
       - name: Signing credentials, when the secrets exist
         id: sign

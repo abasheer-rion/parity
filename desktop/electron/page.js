@@ -16,6 +16,7 @@ const routes = require("./routes");
 // The website's cookie notice: the app stores only what it needs to work, as the cookie
 // policy's desktop section says, so the notice never shows (DEC-0049). The site also skips it
 // in the app; this covers pages built before that change and the saved copy.
+const ERROR_URL = `${routes.APP_ORIGIN}/__desktop/ui-error.html`;
 const APP_CSS = ".cn,[data-cookie-prefs]{display:none!important}";
 
 class Page {
@@ -66,7 +67,9 @@ class Page {
     wc.on("did-navigate", (_e, url) => { this.stopWatchdog(); ctx.log(`loaded ${url}`); this.navigated(url); });
     wc.on("did-navigate-in-page", (_e, url, isMainFrame) => { if (isMainFrame) this.navigated(url); });
     wc.on("did-fail-load", (_e, code, desc, url, isMainFrame) => {
-      if (!isMainFrame || code === -3 || ctx.isSaved(url)) return; // -3: replaced by another load
+      if (!isMainFrame || code === -3 || url.startsWith(ERROR_URL)) return; // -3: replaced by another load
+      // The saved copy failed too: a page that says so, with Retry, never an empty window.
+      if (ctx.isSaved(url)) { this.showError(this.wantPath || "/", desc || String(code)); return; }
       const p = ctx.appPathOf(url);
       if (p) this.fallBack(p, desc || String(code));
     });
@@ -77,6 +80,10 @@ class Page {
   }
 
   navigated(url) {
+    if (url.startsWith(ERROR_URL)) {
+      if (url.endsWith("#retry")) { this.ctx.state.online = null; this.load(this.wantPath || "/"); }
+      return;
+    }
     const p = this.ctx.appPathOf(url);
     if (!p) return;
     this.path = p;
@@ -87,6 +94,7 @@ class Page {
   /** Opens an in-app path: live when online, else the saved copy. */
   async load(p) {
     const { ctx } = this;
+    this.wantPath = p;
     this.usedAt = Date.now();
     if (ctx.state.online === null) ctx.setOnline(await ctx.check(2000));
     if (!this.alive) return;
@@ -117,6 +125,17 @@ class Page {
     this.stopWatchdog();
     this.ctx.setOnline(false);
     this.loadSaved(p);
+  }
+
+  /** The page that says this path could not open, with a Retry button (ui-error.html). */
+  showError(p, why) {
+    if (!this.alive) return;
+    this.ctx.log(`could not open ${p} (${why})`);
+    this.stopWatchdog();
+    this.wantPath = p;
+    this.title = "Could not open this page";
+    this.wc.loadURL(ERROR_URL).catch(() => {});
+    this.owner.pageChanged(this);
   }
 
   stopWatchdog() { clearTimeout(this.watchdog); this.watchdog = null; }
