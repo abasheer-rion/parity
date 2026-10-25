@@ -6,14 +6,13 @@ import { useState } from "react";
 import { explain, requireClient } from "../client";
 import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
-import { go } from "../nav";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem, passwordProblem } from "../rules";
-import { continueTo } from "../session";
+import { welcomeNew } from "../session";
 import { ProviderButtons } from "./Providers";
 
 export function SignUp() {
-  const { next, email, setEmail, carry } = useFlow();
+  const { next, email, setEmail, carry, show } = useFlow();
   const [step, setStep] = useState<"email" | "password">("email");
   const [password, setPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
@@ -36,7 +35,7 @@ export function SignUp() {
       options: { emailRedirectTo: emailLanding(next) },
     });
     if (error) return explain(error);
-    if (data.session) { await continueTo(next, go); return LEAVING; }
+    if (data.session) { await welcomeNew(show); return LEAVING; }
     // No session: confirmation is on. Supabase answers the same way for an address that
     // already has an account, so nobody can use this form to find out who has one.
     setSentTo(email.trim());
@@ -50,7 +49,7 @@ export function SignUp() {
       <Screen id="signup-password" title="Create your account" lead={<Who email={email.trim()} onChange={() => { form.setProblem(null); setStep("email"); }} />}>
         <form className="pa-form" onSubmit={submit} noValidate>
           <input type="email" name="email" autoComplete="username" value={email.trim()} readOnly hidden />
-          <PasswordField label="Choose a password" auto="new-password" value={password} onChange={setPassword} rules autoFocus error={form.errorFor("password")} />
+          <PasswordField label="Choose a password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus error={form.errorFor("password")} />
           <label className="pa-check">
             <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required
               aria-invalid={termsError ? true : undefined} aria-describedby={termsError ? "pa-terms-err" : undefined} />
@@ -90,7 +89,7 @@ export function CheckEmail({ email }: { email: string }) {
     if (bad) return { field: "code", message: bad };
     const { error } = await requireClient().auth.verifyOtp({ email, token: code, type: "signup" });
     if (error) return { field: "code", message: explain(error) ?? "Something went wrong. Try again." };
-    if ((await continueTo(next, go)) === "second-step") { show("login", { mfa: true }); }
+    await welcomeNew(show);
     return LEAVING;
   });
 

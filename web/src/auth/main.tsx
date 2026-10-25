@@ -10,7 +10,7 @@ import { startRum } from "../lib/rum";
 import { isDesktop } from "../desktop/bridge";
 
 // Coming back with the back button after the logo faded the page out shows it again.
-window.addEventListener("pageshow", () => document.body.classList.remove("leaving"));
+window.addEventListener("pageshow", () => { document.body.classList.remove("leaving"); document.documentElement.classList.remove("pa-leaving"); });
 startRum("auth", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(

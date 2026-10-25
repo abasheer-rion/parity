@@ -3,7 +3,8 @@
 // messages that screen readers announce, and a small async-submit helper. The public
 // sign-in panel has its own, in the front page's style (fields.tsx, DEC-0044).
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { emailProblem, passwordRules } from "./rules";
+import { PasswordMeter } from "./PasswordMeter";
+import { emailProblem } from "./rules";
 import "./auth.css";
 
 type Auto = "email" | "username webauthn" | "current-password" | "new-password" | "one-time-code" | "off";
@@ -59,13 +60,12 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
  * off each rule as the person types (for new passwords).
  */
-export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error }: {
+export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error, email }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
-  autoFocus?: boolean; name?: string; rules?: boolean; error?: string | null;
+  autoFocus?: boolean; name?: string; rules?: boolean; email?: string; error?: string | null;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const list = rules ? passwordRules(value).filter((r) => r.id !== "max" || !r.ok) : [];
   const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="ui-field auth-field">
@@ -91,16 +91,7 @@ export function PasswordField({ label, value, onChange, auto, autoFocus, name, r
           {shown ? "Hide" : "Show"}
         </button>
       </div>
-      {rules && (
-        <ul className="auth-rules" id={`${id}-rules`} aria-label="Password rules">
-          {list.map((r) => (
-            <li key={r.id} className={r.ok ? "ok" : ""}>
-              <span aria-hidden="true">{r.ok ? "✓" : "•"}</span> {r.label}
-              <span className="sr-only">{r.ok ? ", done" : ", not yet"}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
       {error && <span className="auth-field-error" id={`${id}-err`}>{error}</span>}
     </div>
   );

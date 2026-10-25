@@ -1,0 +1,77 @@
+/* The password strength bar and rule checklist (PasswordMeter.tsx). It uses whatever
+   colours the page has: the sign-in panel's (src/site/kit.css) or the app's, in either
+   theme. The bar's room is always kept, so typing never moves anything below it. Motion
+   is width-free: segments change colour and scale, ticks pop in, and none of it runs for
+   people who ask for reduced motion. */
+.pw-meter {
+  --pw-1: var(--bad, #ff6b62);
+  --pw-2: var(--warn, #e8b04a);
+  --pw-3: color-mix(in srgb, var(--good, #36d07c) 55%, var(--warn, #e8b04a));
+  --pw-4: var(--good, #36d07c);
+  --pw-spring: cubic-bezier(.16, 1, .3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.pw-meter-row { display: flex; align-items: center; gap: 12px; }
+.pw-bar { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.pw-seg {
+  position: relative;
+  height: 4px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+/* Each segment fills from the left with the colour of the current score. */
+.pw-seg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--pw-c, transparent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .42s var(--pw-spring), background-color .3s ease;
+}
+.pw-seg.on::after { transform: scaleX(1); }
+.pw-seg:nth-child(2)::after { transition-delay: 40ms, 0s; }
+.pw-seg:nth-child(3)::after { transition-delay: 80ms, 0s; }
+.pw-seg:nth-child(4)::after { transition-delay: 120ms, 0s; }
+.pw-meter[data-score="1"] { --pw-c: var(--pw-1); }
+.pw-meter[data-score="2"] { --pw-c: var(--pw-2); }
+.pw-meter[data-score="3"] { --pw-c: var(--pw-3); }
+.pw-meter[data-score="4"] { --pw-c: var(--pw-4); }
+.pw-word {
+  min-width: 92px;
+  text-align: right;
+  font-weight: 550;
+  color: var(--pw-c, var(--faint, var(--muted, currentColor)));
+  transition: color .3s ease;
+}
+.pw-meter[data-score="0"] .pw-word::before { content: "\00a0"; }
+
+.pw-rules { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--faint, var(--muted, currentColor)); }
+.pw-rules li { display: inline-flex; align-items: center; gap: 7px; transition: color .25s ease; }
+.pw-rules li.ok { color: var(--good, #36d07c); }
+.pw-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent);
+  color: inherit;
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.pw-mark svg { width: 10px; height: 10px; opacity: 0; transform: scale(.4) rotate(-12deg); transition: opacity .18s ease, transform .4s cubic-bezier(.34, 1.56, .64, 1); }
+.pw-rules li.ok .pw-mark { background: var(--good, #36d07c); border-color: var(--good, #36d07c); }
+.pw-rules li.ok .pw-mark svg { opacity: 1; transform: none; color: #04130a; }
+
+.pw-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pw-seg::after, .pw-word, .pw-rules li, .pw-mark, .pw-mark svg { transition: none !important; }
+}

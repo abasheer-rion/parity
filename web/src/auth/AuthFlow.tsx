@@ -11,11 +11,14 @@ import { Reset } from "./pages/Reset";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Verify } from "./pages/Verify";
+import { Welcome } from "./pages/Welcome";
 import { nextFromQuery } from "./redirect";
 import { authUrl, TITLES, type Carry, type View } from "./views";
 import "./flow.css";
 
-const FORMS: Record<View, () => ReactNode> = { login: SignIn, signup: SignUp, reset: Reset, verify: Verify };
+const FORMS: Record<View, () => ReactNode> = { login: SignIn, signup: SignUp, reset: Reset, verify: Verify, welcome: Welcome };
+/** Forms with an address of their own. The others (verify, welcome) leave the address alone. */
+const ADDRESSED: View[] = ["login", "signup", "reset"];
 
 interface Props {
   /** The form to open with. */
@@ -44,9 +47,9 @@ export function AuthFlow({ initial, initialCarry, host, onView, onHome }: Props)
     setCarry(handed);
     setRound((r) => r + 1);
     if (host === "page") {
-      if (to !== "verify") window.history.replaceState(window.history.state, "", authUrl(to, next, handed));
+      if (ADDRESSED.includes(to)) window.history.replaceState(window.history.state, "", authUrl(to, next, handed));
       document.title = TITLES[to];
-    } else {
+    } else if (ADDRESSED.includes(to)) {
       onView?.(to);
     }
   }, [host, next, onView]);
@@ -98,6 +101,10 @@ export function AuthFlow({ initial, initialCarry, host, onView, onHome }: Props)
 /**
  * Holds the panel at its content's height and lets the height follow, smoothly, when a
  * step or a message changes it. Nothing below jumps, and with reduced motion it is instant.
+ *
+ * When a step is replaced, the old one stays on screen for a moment, laid over the new one,
+ * and slides up and fades out while the new one rises in (flow.css). It is a copy React no
+ * longer owns: hidden from screen readers, unfocusable and without ids.
  */
 function SizeBox({ children }: { children: ReactNode }) {
   const outer = useRef<HTMLDivElement>(null);
@@ -110,10 +117,37 @@ function SizeBox({ children }: { children: ReactNode }) {
     fit();
     // Only animate changes after the first measure.
     const raf = requestAnimationFrame(() => o.setAttribute("data-ready", ""));
-    if (typeof ResizeObserver === "undefined") return () => cancelAnimationFrame(raf);
+    const still = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const mo = typeof MutationObserver === "undefined" ? null : new MutationObserver((records) => {
+      if (still()) return;
+      for (const rec of records) {
+        for (const node of rec.removedNodes) {
+          if (!(node instanceof HTMLElement) || !node.classList.contains("pa-screen") || node.classList.contains("pa-ghost") || typeof node.animate !== "function") continue;
+          ghost(i, node);
+        }
+      }
+    });
+    mo?.observe(i, { childList: true });
+    if (typeof ResizeObserver === "undefined") return () => { cancelAnimationFrame(raf); mo?.disconnect(); };
     const ro = new ResizeObserver(fit);
     ro.observe(i);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); mo?.disconnect(); };
   }, []);
   return <div className="pa-size" ref={outer}><div className="pa-size-in" ref={inner}>{children}</div></div>;
+}
+
+/** Puts a step React just removed back for its exit: up 8 px, blurred and faded, then gone. */
+function ghost(into: HTMLElement, node: HTMLElement) {
+  for (const old of into.querySelectorAll(":scope > .pa-ghost")) old.remove();
+  node.classList.add("pa-ghost");
+  node.setAttribute("aria-hidden", "true");
+  node.setAttribute("inert", "");
+  node.removeAttribute("id");
+  for (const el of node.querySelectorAll("[id]")) el.removeAttribute("id");
+  into.append(node);
+  const exit = node.animate(
+    [{ opacity: 1, transform: "none", filter: "blur(0)" }, { opacity: 0, transform: "translateY(-8px)", filter: "blur(4px)" }],
+    { duration: 220, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" },
+  );
+  exit.finished.then(() => node.remove(), () => node.remove());
 }

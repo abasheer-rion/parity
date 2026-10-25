@@ -62,6 +62,8 @@ export function startFrontAuth(el: HTMLElement, hooks: FrontHooks): FrontAuth {
   let round = 0;
   let opener: HTMLElement | null = null;
   const withCurrent = { ...hooks, current: (v: View) => { view = v; } };
+  // Back from the app after signing in shows the page again, not the faded panel.
+  window.addEventListener("pageshow", () => html.classList.remove("pa-leaving"));
   const render = () => root.render(<StrictMode><Overlay open={open} view={view} round={round} hooks={withCurrent} /></StrictMode>);
 
   return {

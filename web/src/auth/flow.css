@@ -5,6 +5,11 @@
    own, without its glow. Motion is opacity, transform and height only, and none of it runs
    for people who ask for reduced motion.
 
+   Motion follows Linear's sign-in (DEC-0044, update 2026-10-25): each step's parts blur
+   and rise in one after another, about 50 ms apart, on a short spring; the step being
+   replaced slides up and fades out (AuthFlow.tsx); the height follows; the pressed button
+   turns into a check before the next page (nav.ts).
+
    Three text sizes and three colours, nothing else: the heading, body text (lead, fields,
    buttons, the switch line, messages) and small text (labels, links beside a field, hints,
    errors, the footer). */
@@ -13,6 +18,7 @@
   --pa-title: 34px;
   --pa-body: 15px;
   --pa-small: 13px;
+  --pa-spring: cubic-bezier(.16, 1, .3, 1);
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
@@ -38,9 +44,9 @@
   transition: opacity .24s var(--ease), visibility 0s linear .24s;
 }
 .pa-overlay.on { visibility: visible; transition: opacity .24s var(--ease), visibility 0s; }
-.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity .4s var(--ease) .12s, visibility 0s; }
-.pa-overlay .pa-main { transform: translateY(10px); transition: transform .5s var(--ease) .12s; }
-.pa-overlay.open .pa-main { transform: none; }
+.pa-overlay.open { opacity: 1; visibility: visible; transition: opacity .3s var(--ease) .1s, visibility 0s; }
+/* The parts wait for the page to finish fading, then rise in. */
+.pa-overlay:not(.open) .pa-screen * { animation-play-state: paused; }
 
 /* The logo stays where the front page has it, so it does not move during the fade. */
 .pa-corner { z-index: 5; }
@@ -52,13 +58,34 @@
 
 /* The height follows the content (SizeBox). The margin and padding leave room for focus rings. */
 .pa-size { overflow: hidden; margin: -8px -10px; }
-.pa-size[data-ready] { transition: height .34s var(--ease); }
-.pa-size-in { padding: 8px 10px; }
+.pa-size[data-ready] { transition: height .46s var(--pa-spring); }
+.pa-size-in { position: relative; padding: 8px 10px; }
 
-.pa-screen { animation: pa-step .34s var(--ease) both; }
-@keyframes pa-step { from { opacity: 0; transform: translateY(6px); } }
+/* Entrances: blur and rise, staggered. Heading, line under it, then each field, then the
+   button, then the links under the form. */
+@keyframes pa-rise { from { opacity: 0; transform: translateY(10px); filter: blur(5px); } }
+.pa-screen > *, .pa-form > * { animation: pa-rise .5s var(--pa-spring) both; animation-delay: .32s; }
+.pa-screen > .pa-title { animation-delay: .02s; }
+.pa-screen > .pa-lead { animation-delay: .07s; }
+.pa-screen > :is(.pa-steps, .pa-providers) { animation-delay: .12s; }
+.pa-screen > .pa-form { animation: none; }
+.pa-form > :nth-child(1) { animation-delay: .12s; }
+.pa-form > :nth-child(2) { animation-delay: .17s; }
+.pa-form > :nth-child(3) { animation-delay: .22s; }
+.pa-form > :nth-child(4) { animation-delay: .27s; }
+.pa-form > :nth-child(5) { animation-delay: .3s; }
+.pa-screen > :is(.pa-alt, .pa-switch) { animation-delay: .34s; }
+/* Something that appears later inside a form (an error, a code field) comes in at once. */
+.pa-form > .pa-error { animation: pa-fade .2s var(--ease) both; }
+
+/* While the session is checked, the step is laid out but hidden; the parts rise in after. */
 .pa-screen[data-wait] > :not(.pa-title) { opacity: 0; pointer-events: none; }
+.pa-screen[data-wait] > :not(.pa-title), .pa-screen[data-wait] .pa-form > * { animation: none; }
 .pa-screen > :not(.pa-title) { transition: opacity .25s var(--ease); }
+
+/* The step being replaced, laid over the new one while it leaves (AuthFlow.tsx ghost()). */
+.pa-ghost { position: absolute; top: 8px; left: 10px; right: 10px; pointer-events: none; }
+.pa-ghost, .pa-ghost * { animation: none !important; }
 
 /* The heading is the front page's heading (weight, tracking, colour) at the panel's size. */
 .pa-title { max-width: none; margin: 0; font-size: var(--pa-title); line-height: 1.1; font-weight: 600; letter-spacing: -0.04em; color: var(--text); }
@@ -85,11 +112,11 @@
   color: var(--text);
   font: inherit;
   font-size: var(--pa-body);
-  transition: border-color .2s, box-shadow .2s, background-color .2s;
+  transition: border-color .2s, box-shadow .3s var(--pa-spring), background-color .2s;
 }
 .pa-input::placeholder { color: var(--faint); }
 .pa-input:hover { border-color: var(--line-3); }
-.pa-input:focus, .pa-input:focus-visible { outline: none; border-color: rgb(255 255 255 / .42); box-shadow: 0 0 0 4px rgb(255 255 255 / .07); background: rgb(5 6 8 / .7); }
+.pa-input:focus, .pa-input:focus-visible { outline: none; border-color: rgb(255 255 255 / .46); box-shadow: 0 0 0 4px rgb(255 255 255 / .06), 0 0 22px -2px rgb(255 255 255 / .14); background: rgb(5 6 8 / .7); }
 .pa-input[aria-invalid="true"] { border-color: var(--bad); box-shadow: 0 0 0 4px rgb(255 107 98 / .1); }
 .pa-input:-webkit-autofill, .pa-input:-webkit-autofill:hover, .pa-input:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--text);
@@ -111,9 +138,7 @@
   cursor: pointer; transition: color .2s, background-color .2s;
 }
 .pa-pw-toggle:hover { color: var(--text); background: rgb(255 255 255 / .06); }
-.pa-rules { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: var(--pa-small); line-height: 1.5; color: var(--faint); }
-.pa-rules li { transition: color .2s; }
-.pa-rules li.ok { color: var(--good); }
+.pa-field .pw-meter { font-size: var(--pa-small); }
 
 .pa-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--pa-small); line-height: 1.5; color: var(--muted); }
 .pa-check input { margin: 3px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--text); }
@@ -132,8 +157,18 @@
 /* The front page's button, full width, with a spinner while it works. */
 .pa-btn { width: 100%; position: relative; cursor: pointer; font-family: inherit; }
 .pa-btn:not(.primary):not(:hover) { background: transparent; }
+.pa-btn { transition: background-color .2s, border-color .2s, color .2s, transform .16s var(--pa-spring); }
+.pa-btn:active { transform: scale(.97); }
 .pa-btn[data-busy] { cursor: progress; }
 .pa-btn[data-busy] .pa-btn-label { opacity: .75; }
+.pa-btn-label, .pa-spin { transition: opacity .16s, transform .2s var(--ease); }
+
+/* Success: the pressed button's spinner and label give way to a check, then the panel
+   blurs and fades as the next page loads (nav.ts adds html.pa-leaving). */
+.pa-done { position: absolute; left: 50%; top: 50%; margin: -9px 0 0 -9px; opacity: 0; transform: scale(.4); }
+.pa-leaving .pa-btn[data-busy] :is(.pa-spin, .pa-btn-label) { opacity: 0; transform: scale(.85); }
+.pa-leaving .pa-btn[data-busy] .pa-done { opacity: 1; transform: none; transition: opacity .18s, transform .45s cubic-bezier(.34, 1.56, .64, 1); }
+.pa-leaving .pa-shell :is(.pa-main, .pa-corner) { opacity: 0; filter: blur(6px); transform: translateY(-6px); transition: opacity .26s var(--ease) .16s, filter .26s var(--ease) .16s, transform .26s var(--ease) .16s; }
 .pa-spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: pa-spin .7s linear infinite; }
 @keyframes pa-spin { to { transform: rotate(360deg); } }
 
@@ -144,6 +179,38 @@
 .pa-switch { margin: 28px 0 0; font-size: var(--pa-body); color: var(--muted); }
 .pa-switch a { color: var(--text); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-3); padding-bottom: 1px; transition: border-color .2s; }
 .pa-switch a:hover { border-color: var(--text); }
+
+/* The welcome after signing up (pages/Welcome.tsx). */
+.pa-steps { display: flex; gap: 6px; margin-top: 20px; }
+.pa-steps span { width: 18px; height: 3px; border-radius: 99px; background: var(--line-2); transition: background-color .3s, width .46s var(--pa-spring); }
+.pa-steps span.on { background: var(--text); }
+.pa-steps span.on:last-of-type { width: 28px; }
+.pa-screen > .pa-steps + .pa-form { margin-top: 24px; }
+.pa-copy { margin: 0; font-size: var(--pa-body); line-height: 1.6; color: var(--muted); }
+.pa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pa-chip {
+  display: inline-flex; align-items: center; gap: 0; min-height: 38px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--line-2); background: rgb(255 255 255 / .02); color: var(--muted);
+  font: inherit; font-size: var(--pa-small); font-weight: 500; cursor: pointer;
+  transition: color .2s, background-color .2s, border-color .2s, gap .3s var(--pa-spring), transform .16s var(--pa-spring);
+}
+.pa-chip:hover { color: var(--text); border-color: var(--line-3); }
+.pa-chip:active { transform: scale(.96); }
+.pa-chip-tick { width: 0; opacity: 0; transform: scale(.4); transition: width .3s var(--pa-spring), opacity .2s, transform .4s cubic-bezier(.34, 1.56, .64, 1); }
+.pa-chip[aria-pressed="true"] { gap: 6px; color: var(--text); border-color: rgb(255 255 255 / .42); background: rgb(255 255 255 / .07); }
+.pa-chip[aria-pressed="true"] .pa-chip-tick { width: 14px; opacity: 1; transform: none; }
+.pa-choice {
+  position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 44px 14px 16px; border-radius: 12px;
+  border: 1px solid var(--line-2); background: rgb(255 255 255 / .02); text-decoration: none;
+  transition: border-color .2s, background-color .2s, transform .16s var(--pa-spring);
+}
+.pa-choice.first { border-color: var(--line-3); background: rgb(255 255 255 / .05); }
+.pa-choice:hover { border-color: rgb(255 255 255 / .42); background: rgb(255 255 255 / .06); }
+.pa-choice:active { transform: scale(.985); }
+.pa-choice-title { font-size: var(--pa-body); font-weight: 600; color: var(--text); }
+.pa-choice-text { font-size: var(--pa-small); line-height: 1.45; color: var(--muted); }
+.pa-choice-arr { position: absolute; right: 16px; top: 50%; margin-top: -8px; color: var(--muted); transition: transform .2s var(--ease), color .2s; }
+.pa-choice:hover .pa-choice-arr { transform: translateX(3px); color: var(--text); }
 
 /* Messages. An empty live region stays in the page (so later messages are announced) but takes no room. */
 .pa-live:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -173,8 +240,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pa-overlay, .pa-overlay.on, .pa-overlay.open, .pa-overlay .pa-main, .pa-size[data-ready], .pa-screen > :not(.pa-title) { transition: none !important; }
-  .pa-overlay .pa-main { transform: none; }
-  .pa-screen, .pa-error, .pa-notice { animation: none !important; }
+  .pa-overlay, .pa-overlay.on, .pa-overlay.open, .pa-size[data-ready], .pa-screen > :not(.pa-title),
+  .pa-btn, .pa-btn-label, .pa-spin, .pa-done, .pa-chip, .pa-chip-tick, .pa-choice, .pa-choice-arr, .pa-steps span, .pa-input,
+  .pa-leaving .pa-shell :is(.pa-main, .pa-corner) { transition: none !important; }
+  .pa-btn:active, .pa-chip:active, .pa-choice:active { transform: none; }
+  .pa-leaving .pa-shell :is(.pa-main, .pa-corner) { filter: none; transform: none; }
+  .pa-screen > *, .pa-form > *, .pa-error, .pa-notice { animation: none !important; }
   .pa-spin { animation-duration: 2.4s; }
 }
