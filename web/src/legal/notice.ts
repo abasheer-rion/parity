@@ -6,6 +6,7 @@
 // "Cookie settings" link works anywhere (footers, Settings).
 import { ANALYTICS_AVAILABLE, getConsent, hasDecided, setConsent } from "./consent";
 import "./notice.css";
+import { isDesktop } from "../desktop/bridge";
 
 const POLICY = "/legal/cookies/";
 let banner: HTMLElement | null = null;
@@ -30,7 +31,9 @@ function closeBanner() {
 }
 
 function showBanner() {
-  if (banner || hasDecided()) return;
+  // The desktop app stores only what it needs to work (the sign-in cookie and its own
+  // settings), as the cookie policy's desktop section says, so it shows no notice (DEC-0049).
+  if (banner || hasDecided() || isDesktop()) return;
   const ok = h("button", { type: "button", class: "cn-btn cn-primary" }, "OK");
   const prefs = h("button", { type: "button", class: "cn-btn" }, "Preferences");
   ok.addEventListener("click", () => { setConsent({ analytics: false }); closeBanner(); });
