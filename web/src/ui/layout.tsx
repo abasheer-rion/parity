@@ -18,10 +18,10 @@ export function PageHeader({ title, description, actions, eyebrow }: { title: Re
 }
 
 /** Mercury card: a title row with optional actions, the body, an optional footer. */
-export function Panel({ title, actions, footer, children, span = 1, padded = true }:
-  { title?: ReactNode; actions?: ReactNode; footer?: ReactNode; children: ReactNode; span?: 1 | 2 | 3; padded?: boolean }) {
+export function Panel({ title, actions, footer, children, span = 1, padded = true, glass }:
+  { title?: ReactNode; actions?: ReactNode; footer?: ReactNode; children: ReactNode; span?: 1 | 2 | 3; padded?: boolean; glass?: boolean }) {
   return (
-    <section className={`mcard ${span > 1 ? `span${span}` : ""} ${padded ? "" : "flush"}`}>
+    <section className={`mcard ${span > 1 ? `span${span}` : ""} ${padded ? "" : "flush"} ${glass ? "ui-glass" : ""}`}>
       {(title || actions) && <div className="mcard-head">{title && <h2>{title}</h2>}{actions}</div>}
       {children}
       {footer && <div className="mcard-foot">{footer}</div>}

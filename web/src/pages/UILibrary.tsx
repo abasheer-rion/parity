@@ -8,14 +8,15 @@ import {
   Toggle, Tooltip, fmt, toast, useFilters, type Column, type RangeKey,
   Accordion, AnimatedNumber, Collapse, Disclosure, Drawer, PageSkeleton, Popover, SkeletonCard, SkeletonChart, SkeletonStat, SkeletonTable,
   SkeletonText, Stagger, VirtualList,
+  Num, ProgressBar, Spinner, ErrorState, Breadcrumb, Pagination, Avatar, Tag, Field, RadioGroup, Slider, Sheet, CommandPalette, TourStep, type Command,
 } from "../ui";
 import { usePrefs } from "../lib/prefs";
 import type { Point } from "../lib/types";
-import { RAW } from "../ui/tokens";
+import { RAW, type TokenName } from "../ui/tokens";
 
 const SECTIONS: { group: string; items: [string, string][] }[] = [
   { group: "Foundations", items: [["overview", "Overview"], ["colors", "Colour"], ["type", "Type"], ["space", "Space, radius, depth"], ["motion", "Motion"], ["icons", "Icons"]] },
-  { group: "Components", items: [["text", "Text and numbers"], ["buttons", "Buttons"], ["inputs", "Inputs"], ["filters", "Filters and sorting"], ["tables", "Tables"], ["lists", "Long lists"], ["expand", "Expand and collapse"], ["cards", "Cards and stats"], ["overlays", "Overlays"], ["feedback", "Empty and loading"]] },
+  { group: "Components", items: [["text", "Text and numbers"], ["buttons", "Buttons"], ["inputs", "Inputs"], ["filters", "Filters and sorting"], ["tables", "Tables"], ["lists", "Long lists"], ["expand", "Expand and collapse"], ["cards", "Cards and stats"], ["navigation", "Navigation and identity"], ["overlays", "Overlays"], ["feedback", "Empty, loading and errors"]] },
   { group: "Charts", items: [["charts", "How charts work"], ["hero", "Headline chart"], ["line", "Line and bar"], ["chartcolor", "Chart colour"]] },
   { group: "Patterns", items: [["pages", "Page layouts"], ["steady", "Nothing jumps"], ["data", "Data that is ready"]] },
 ];
@@ -48,6 +49,7 @@ export function UILibrary({ section = "overview" }: { section?: string }) {
         {section === "steady" && <Steady />}
         {section === "data" && <DataReady />}
         {section === "cards" && <Cards />}
+        {section === "navigation" && <Navigation />}
         {section === "overlays" && <Overlays />}
         {section === "feedback" && <Feedback />}
         {section === "charts" && <HowCharts />}
@@ -171,23 +173,24 @@ function contrast(fg: string, bg: string): number | null {
 }
 
 const COLOR_GROUPS: [string, [string, string][]][] = [
-  ["Surfaces", [["--canvas", "Page background"], ["--bg", "Sunken areas, code"], ["--surface", "Cards"], ["--surface-solid", "Menus, dialogs"], ["--hover", "Hover and quiet fills"], ["--border", "Hairlines"], ["--border-2", "Control borders"]]],
-  ["Text", [["--text", "Primary text and values"], ["--text-2", "Labels"], ["--muted", "Meta and hints"], ["--link", "Links"]]],
-  ["Accent and state", [["--accent", "Primary action, selection"], ["--accent-soft", "Selected fills"], ["--good", "Gain, pass"], ["--bad", "Loss, fail"], ["--benchmark", "The market line"]]],
+  ["Surfaces", [["--color-canvas", "Page background"], ["--color-bar", "Sidebars and bars"], ["--color-surface", "Cards"], ["--color-surface-raised", "Dialogs"], ["--color-surface-overlay", "Menus, popovers"], ["--color-glass", "Frosted panels"], ["--color-hover", "Hover"], ["--color-border", "Hairlines"], ["--color-border-strong", "Control borders"]]],
+  ["Text", [["--color-text", "Primary text and values"], ["--color-text-body", "Body text"], ["--color-text-muted", "Labels"], ["--color-text-faint", "Meta and hints"], ["--color-link", "Links"]]],
+  ["Action and state", [["--color-primary", "The main button"], ["--color-accent", "Selected, active, glow"], ["--color-accent-text", "Accent as text"], ["--color-accent-soft", "Selected fills"], ["--color-focus", "Focus ring"]]],
+  ["Signals", [["--color-positive", "Gain, pass"], ["--color-negative", "Loss, fail"], ["--color-warning", "In between, caution"], ["--color-info", "Information"], ["--color-benchmark", "The market line"]]],
   ["Chart series (fixed order)", [1, 2, 3, 4, 5, 6, 7, 8].map((i) => [`--series-${i}`, `Series ${i}`] as [string, string])],
 ];
 
 function Colors() {
-  const names = COLOR_GROUPS.flatMap(([, list]) => list.map(([n]) => n));
+  const names = [...COLOR_GROUPS.flatMap(([, list]) => list.map(([n]) => n)), "--color-canvas"];
   const vals = useVars(names);
   return (
     <>
-      <PageHeader title="Colour" description="Read live from the site. Parity is dark only, so these are the values every page uses. Contrast is measured against the page background." />
+      <PageHeader title="Colour" description="Read live from the site. Every value is set once in web/src/ui/tokens.css; change it there and every app follows (DEC-0058). Contrast is measured against the page background." />
       {COLOR_GROUPS.map(([group, list]) => (
         <Item key={group} title={group}>
           <div className="swatches">
             {list.map(([n, label]) => {
-              const c = vals[n] && vals["--canvas"] ? contrast(vals[n], vals["--canvas"]) : null;
+              const c = vals[n] && vals["--color-canvas"] ? contrast(vals[n], vals["--color-canvas"]) : null;
               return (
                 <div key={n} className="swatch-card">
                   <i style={{ background: `var(${n})` }} />
@@ -199,7 +202,8 @@ function Colors() {
         </Item>
       ))}
       <ul className="gal-rules">
-        <li>Accent is for the one primary action on a view and for selected states. Never for data.</li>
+        <li>The main action is white (primary). Red (accent) marks what is selected or active, and the glow. Neither is used for data.</li>
+        <li>No raw colour outside the token file: <code>npm run lint:styles</code> fails on it.</li>
         <li>Gain and loss colours always come with a sign or an arrow (see Chart colour for why).</li>
         <li>Chart colours are given to strategies in a fixed order by name, so a strategy keeps its colour on every page.</li>
       </ul>
@@ -207,13 +211,14 @@ function Colors() {
   );
 }
 
+const TYPE_SCALE: TokenName[] = ["type-8xl", "type-7xl", "type-6xl", "type-5xl", "type-4xl", "type-3xl", "type-2xl", "type-xl", "type-lg", "type-md", "type-sm", "type-xs", "type-2xs", "type-3xs"];
+
 function Type() {
-  const sizes: [string, string][] = [["3xl", "36 / 42 headline values"], ["2xl", "28 / 36 page titles"], ["xl", "22 / 28 section titles"], ["lg", "16 / 26 lead text"], ["md", "15 / 24 body and tables"], ["sm", "13 / 20 labels"], ["xs", "12 / 18 meta, axis labels"]];
   return (
     <>
-      <PageHeader title="Type" description="The system font, one scale, two weights in practice (400 and 500, 600 for emphasis). Numbers use tabular figures everywhere so columns line up." />
-      <Item title="Scale" col>
-        {sizes.map(([s, note]) => <div key={s} className="scale-row"><code>--fs-{s}</code><span className={`ui-fs-${s}`}>Currency carry beats cash</span><span className="muted small">{note}</span></div>)}
+      <PageHeader title="Type" description="Inter, one scale of 14 sizes, and tabular figures for every number so columns line up. Sizes come from the --type-* tokens; a font size in px anywhere else fails the lint." />
+      <Item title="Scale" col code={`font-size: var(--type-md);`}>
+        {TYPE_SCALE.map((t) => <div key={t} className="scale-row"><code>--{t}</code><span style={{ fontSize: `var(--${t})`, lineHeight: 1.3 }}>Currency carry 1,234.56</span><span className="muted small">{RAW[t]}</span></div>)}
       </Item>
       <Item title="Headings" col code={`<Heading level={1}>Strategies</Heading>\n<Heading level={2}>Key statistics</Heading>`}>
         <Heading level={1}>Heading level 1</Heading>
@@ -229,18 +234,24 @@ function Type() {
   );
 }
 
+const Z_LAYERS: TokenName[] = ["z-sticky", "z-header", "z-nav", "z-nav-scrim", "z-panel", "z-overlay", "z-popover", "z-tooltip", "z-modal", "z-toast", "z-assistant", "z-fullscreen", "z-top"];
+
 function Space() {
   return (
     <>
-      <PageHeader title="Space, radius, depth" description="Everything sits on a 4px grid. Corners get rounder as things get bigger: chips 8, cards 14, buttons fully round." />
+      <PageHeader title="Space, radius, depth, layers" description="A 4px grid. Corners get rounder as things get bigger. Glass is a see-through panel with a blur. Layers say what sits above what." />
       <Item title="Space" col>
-        {[1, 2, 3, 4, 5, 6, 8, 10].map((n) => <div key={n} className="scale-row"><code>--space-{n}</code><span className="space-bar" style={{ width: `var(--space-${n})` }} /><span className="muted small">{n * 4}px</span></div>)}
+        {(["space-1", "space-2", "space-3", "space-4", "space-5", "space-6", "space-8", "space-10", "space-12", "space-16"] as TokenName[]).map((n) => <div key={n} className="scale-row"><code>--{n}</code><span className="space-bar" style={{ width: `var(--${n})` }} /><span className="muted small">{RAW[n]}</span></div>)}
       </Item>
       <Item title="Radius">
-        {["sm", "md", "lg", "xl", "pill"].map((r) => <div key={r} className="radius-box" style={{ borderRadius: `var(--radius-${r})` }}>{r}</div>)}
+        {["xs", "sm", "md", "lg", "xl", "pill"].map((r) => <div key={r} className="radius-box" style={{ borderRadius: `var(--radius-${r})` }}>{r}</div>)}
       </Item>
-      <Item title="Depth">
-        {[1, 2, 3].map((n) => <div key={n} className="radius-box" style={{ boxShadow: `var(--shadow-${n})`, background: "var(--surface-solid)" }}>shadow-{n}</div>)}
+      <Item title="Depth and glass" rules={["Glass (Panel glass) sits over the red glow: --color-glass with --glass-blur.", "Shadows deepen with height: 1 for controls, 2 for floating buttons, 3 for menus and dialogs."]}>
+        {[1, 2, 3].map((n) => <div key={n} className="radius-box" style={{ boxShadow: `var(--shadow-${n})`, background: "var(--color-surface)" }}>shadow-{n}</div>)}
+        <div className="radius-box ui-glass">glass</div>
+      </Item>
+      <Item title="Layers" col rules={["Small numbers (-9 to 9) order parts inside one component. Anything stacked against the page uses a --z-* token."]}>
+        {Z_LAYERS.map((n) => <div key={n} className="scale-row"><code>--{n}</code><span>{RAW[n]}</span></div>)}
       </Item>
     </>
   );
@@ -253,10 +264,10 @@ function Motion() {
     <>
       <PageHeader title="Motion" description="Short and quiet. Motion explains a change (something arriving, a number updating, a panel opening) or shows that something can be touched. The only loop in the app is the hero glow, slow and faint. Nothing flashes. Everything stops for people whose system asks for reduced motion (DEC-0017)." />
       <Item title="Durations and curves" col>
-        {[["--dur-1", "90ms", "hover, press"], ["--dur-2", "160ms", "menus, toggles, fades"], ["--dur-3", "240ms", "entrances, dialogs"], ["--dur-4", "400ms", "rolling numbers, bars filling"]].map(([v, ms, use]) => (
-          <div key={v} className="scale-row"><code>{v}</code><span>{ms}</span><span className="muted small">{use}</span></div>
+        {([["dur-1", "colour changes"], ["dur-2", "hover, press, menus, toggles"], ["dur-3", "opening: popovers, dialogs, entrances"], ["dur-4", "panels and pages arriving, numbers rolling"], ["dur-5", "lines drawing in"], ["dur-6", "long chart draws"]] as [TokenName, string][]).map(([v, use]) => (
+          <div key={v} className="scale-row"><code>--{v}</code><span>{RAW[v]}</span><span className="muted small">{use}</span></div>
         ))}
-        {[["--ease-out", "most things"], ["--ease-in-out", "things that move and stop"], ["--ease-spring", "small pops: switches, menus"]].map(([v, use]) => (
+        {[["--ease-out", "most things"], ["--ease-in-out", "things that move and stop"], ["--ease-spring", "small pops: switches, menus"], ["--ease-glide", "the public pages and glass panels"], ["--ease-emphasized", "sign-in steps arriving"]].map(([v, use]) => (
           <div key={v} className="scale-row"><code>{v}</code><span className="muted small">{use}</span></div>
         ))}
       </Item>
@@ -363,6 +374,15 @@ function TextNumbers() {
         <Delta value={17970.51} kind="money" label="All time" />
         <Delta value={-1234.5} kind="money" label="Past year" />
       </Item>
+      <Item title="Num: numbers that never overflow" intro="Tabular figures, a true minus, and the compact form (1.23M) by itself when the full number does not fit its box. The full value stays in the title and for screen readers. Drag the box narrower to see it switch."
+        code={`<Num value={1716746.99} kind="money" />\n<Num value={-0.0812} kind="percent" signed tone="sign" />\n<Num value={26317} />`}
+        rules={["Every growing figure (money, counts, prices) goes through Num or fmt, never a raw toFixed in a cell.", "A gain or loss always prints its sign; tone=\"sign\" adds the colour.", "Numbers are never cut with an ellipsis. The layout audit fails if one is."]}>
+        <div className="gal-num-box"><span className="muted small">Full width</span><div className="ui-fs-xl"><Num value={1716746.99} kind="money" /></div></div>
+        <div className="gal-num-box narrow"><span className="muted small">Narrow box</span><div className="ui-fs-xl"><Num value={1716746.99} kind="money" /></div></div>
+        <Num value={-0.0812} kind="percent" signed tone="sign" />
+        <Num value={0.1325} kind="percent" signed tone="sign" />
+        <Num value={26317} />
+      </Item>
       <Item title="Formatters" code={`fmt.pct(-0.546)   // ${fmt.pct(-0.546)}\nfmt.signedPct(0.1)  // ${fmt.signedPct(0.1)}\nfmt.num(0.4321)    // ${fmt.num(0.4321)}\nfmt.compact(1716746) // ${fmt.compact(1716746)}\nfmt.date("2026-10-21") // ${fmt.date("2026-10-21")}`}>
         <Label>Label</Label>
         <Label term="sharpe-ratio">Label linked to the glossary</Label>
@@ -376,12 +396,12 @@ function Buttons() {
   const [busy, setBusy] = useState(false);
   return (
     <>
-      <PageHeader title="Buttons" description="Pills. One primary per view in the accent colour; everything else sits near the surface tone, like Mercury, so the primary is obvious." />
-      <Item title="Variants" code={`<Button variant="primary">Run backtest</Button>\n<Button>Compare</Button>\n<Button variant="tertiary">Cancel</Button>\n<Button variant="outline">Read the write-up</Button>\n<Button variant="danger">Remove</Button>`}
-        rules={["Primary: the one thing the page is for. At most one per view.", "Secondary: the default. Tertiary: low-stakes actions next to others.", "Outline: a second call to action under a primary (Robinhood's pattern).", "Danger: only for removing something, and it asks first."]}>
+      <PageHeader title="Buttons" description="Pills. One primary per view, in white; everything else sits near the surface tone so the primary is obvious." />
+      <Item title="Variants" code={`<Button variant="primary">Run backtest</Button>\n<Button>Compare</Button>\n<Button variant="ghost">Cancel</Button>\n<Button variant="outline">Read the write-up</Button>\n<Button variant="danger">Remove</Button>`}
+        rules={["Primary: the one thing the page is for. At most one per view.", "Secondary: the default. Ghost (tertiary is the older name): low-stakes actions next to others.", "Outline: a second call to action under a primary (Robinhood's pattern).", "Danger: only for removing something, and it asks first."]}>
         <Button variant="primary" icon="flask">Run backtest</Button>
         <Button icon="compare">Compare</Button>
-        <Button variant="tertiary">Cancel</Button>
+        <Button variant="ghost">Cancel</Button>
         <Button variant="outline">Read the write-up</Button>
         <Button variant="danger">Remove</Button>
       </Item>
@@ -398,6 +418,8 @@ function Buttons() {
         <IconButton icon="bookmark" label="Remove from bookmarks" active />
         <IconButton icon="download" label="Export" />
         <IconButton icon="dots" label="More actions" variant="plain" />
+        <IconButton icon="plus" label="Add (small)" size="sm" />
+        <IconButton icon="plus" label="Add (large)" size="lg" />
       </Item>
       <Item title="Group">
         <ButtonGroup><Button variant="primary">Send</Button><Button>Transfer</Button><Button>Request</Button></ButtonGroup>
@@ -414,9 +436,12 @@ function Inputs() {
   const [on, setOn] = useState(true);
   const [chk, setChk] = useState(true);
   const [tab, setTab] = useState<RangeKey>("1Y");
+  const [amount, setAmount] = useState("1000");
+  const [side, setSide] = useState<"buy" | "sell" | "close">("buy");
+  const [risk, setRisk] = useState(1);
   return (
     <>
-      <PageHeader title="Inputs" description="32 to 34px tall, quiet fill, 1px border, accent focus ring." />
+      <PageHeader title="Inputs" description="32 to 40px tall, quiet fill, 1px border, a white focus ring. Arrow keys work in every group." />
       <Item title="Text and search" col code={`<Input label="Name" value={v} onChange={setV} />\n<SearchInput value={q} onChange={setQ} placeholder="Search strategies" />`}>
         <Input label="Registration title" value={t} onChange={setT} placeholder="All strategies, scored on excess returns" />
         <SearchInput value={q} onChange={setQ} placeholder="Search strategies" />
@@ -426,6 +451,14 @@ function Inputs() {
         <Segmented value={seg} onChange={setSeg} options={[["dark", "Dark"], ["light", "Light"], ["system", "System"]]} />
         <Toggle on={on} onChange={setOn} label="Find on select" />
         <Checkbox checked={chk} onChange={setChk} label="Include costs" />
+      </Item>
+      <Item title="Fields, radios and sliders" col code={`<Field label="Amount" help="In dollars" error={err}><input className="ui-input" /></Field>\n<RadioGroup name="side" label="Side" value={v} onChange={setV} options={[["buy","Buy"],["sell","Sell"]]} />\n<Slider label="Risk" value={n} onChange={setN} min={0} max={20} format={(v) => \`\${v}%\`} />`}
+        rules={["Every control has a visible label or an aria-label.", "Errors say what to do, in words, and are read out when they appear."]}>
+        <Field label="Pretend amount in dollars" help="Up to 1,000,000." error={amount && !/^\d+$/.test(amount) ? "Use whole dollars, digits only." : undefined}>
+          <input className="ui-input" value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="numeric" />
+        </Field>
+        <RadioGroup name="gal-side" label="Side" inline value={side} onChange={setSide} options={[["buy", "Buy"], ["sell", "Sell"], ["close", "Close"]]} />
+        <Slider label="Risk per trade" value={risk} onChange={setRisk} min={0} max={5} step={0.25} format={(v) => `${v.toFixed(2)}%`} />
       </Item>
       <Item title="Tabs" intro="Robinhood's range tabs: small, bold, letter-spaced. One underline slides to the chosen tab (and the Segmented thumb above slides the same way). Arrow keys move between tabs." code={`<Tabs label="Range" value={r} onChange={setR} tabs={RANGES} />`}
         rules={["The tabs never change size when chosen, so nothing beside them moves.", "Too many tabs for the width: the row scrolls sideways instead of wrapping onto two lines."]}>
@@ -631,7 +664,7 @@ function Cards() {
           <Panel title="Tests" actions={<IconButton icon="info" label="About" />}>
             <div className="stat-row"><Stat label="Passed" value={<span className="good">55</span>} /><Stat label="Failed" value={<span className="bad">118</span>} /></div>
           </Panel>
-          <Panel title="Balance (sample)">
+          <Panel title="Balance (sample)" glass>
             <Stat label="Growth of $10,000" value={<Money value={27970.51} />} sub={<Delta value={17970.51} kind="money" label="All time" />} />
           </Panel>
         </Grid>
@@ -640,7 +673,7 @@ function Cards() {
         <KeyValues items={[["CAGR", "3.6%"], ["Volatility", "3.9%"], ["Sharpe ratio", "0.41"], ["Max drawdown", fmt.pct(-0.145)], ["Calmar ratio", "0.25"], ["Hit rate", "52.4%"], ["Deflated Sharpe", "0.65"], ["Years", "27.8"]]} />
       </Item>
       <Item title="Badges and status" code={`<Badge tone="accent">new</Badge>\n<Status value="accepted" />`} rules={["Status always shows the word. The dot only helps."]}>
-        <Badge>benchmark</Badge><Badge tone="accent">new</Badge><Badge tone="good">pass</Badge><Badge tone="bad">fail</Badge><Badge tone="dark">POC</Badge>
+        <Badge>benchmark</Badge><Badge tone="accent">new</Badge><Badge tone="good">pass</Badge><Badge tone="warning">promising</Badge><Badge tone="bad">fail</Badge><Badge tone="info">info</Badge><Badge tone="dark">POC</Badge>
         <Divider vertical />
         <Status value="accepted" /><Status value="testing" /><Status value="rejected" /><Status value="draft" />
       </Item>
@@ -651,7 +684,42 @@ function Cards() {
   );
 }
 
+const GAL_COMMANDS: Command[] = [
+  { id: "verify", label: "Open Verify", group: "Go to", icon: "checkCircle", run: () => toast("Verify (demo)") },
+  { id: "trade", label: "Open Parity Trade", group: "Go to", icon: "chart", run: () => toast("Trade (demo)") },
+  { id: "strategies", label: "Strategies", group: "Go to", icon: "list", keywords: "discover", run: () => toast("Strategies (demo)") },
+  { id: "copy", label: "Copy link to this page", group: "Actions", icon: "link", run: () => toast("Link copied (demo)") },
+  { id: "export", label: "Export table as CSV", group: "Actions", icon: "download", run: () => toast("CSV ready (demo)") },
+];
+
+function Navigation() {
+  const [page, setPage] = useState(4);
+  const [tags, setTags] = useState(["EUR/USD", "BTC", "Gold"]);
+  return (
+    <>
+      <PageHeader title="Navigation and identity" description="Where a page sits, pages of a long list, people and removable labels." />
+      <Item title="Breadcrumb" code={`<Breadcrumb items={[{ label: "Research", href: "#/" }, { label: "Docs", href: "#/docs" }, { label: "DEC-0058" }]} />`}>
+        <Breadcrumb items={[{ label: "Research", href: "#/" }, { label: "Docs", href: "#/docs" }, { label: "DEC-0058" }]} />
+      </Item>
+      <Item title="Pagination" code={`<Pagination page={p} pages={12} onChange={setP} />`} rules={["Previous and Next keep their place, so the row never shifts.", "Page numbers use tabular figures."]}>
+        <Pagination page={page} pages={12} onChange={setPage} />
+      </Item>
+      <Item title="Avatar" code={`<Avatar name="Amanda Lee" />\n<Avatar name="Ayan" size="lg" />`}>
+        <Avatar name="Amanda Lee" size="sm" /><Avatar name="Ayan Basheer" /><Avatar name="Parity" size="lg" />
+      </Item>
+      <Item title="Tag" code={`<Tag onRemove={() => remove("BTC")}>BTC</Tag>`}>
+        {tags.map((t) => <Tag key={t} onRemove={() => setTags((x) => x.filter((y) => y !== t))}>{t}</Tag>)}
+        {tags.length < 3 && <Button size="sm" variant="ghost" onClick={() => setTags(["EUR/USD", "BTC", "Gold"])}>Reset</Button>}
+      </Item>
+      <Item title="Keys" code={`<Kbd>⌘K</Kbd>`}><Kbd>⌘</Kbd><Kbd>K</Kbd><Kbd>Esc</Kbd><Kbd>/</Kbd></Item>
+    </>
+  );
+}
+
 function Overlays() {
+  const [sheet, setSheet] = useState(false);
+  const [cmd, setCmd] = useState(false);
+  const [tour, setTour] = useState(0);
   const [open, setOpen] = useState(false);
   const [drawer, setDrawer] = useState<"right" | "left" | "bottom" | null>(null);
   const [range, setRange] = useState<"1y" | "5y" | "all">("5y");
@@ -699,6 +767,23 @@ function Overlays() {
           <Text tone="secondary">Once registered, the plan and the code it runs are frozen. Results count only from the official run.</Text>
         </Dialog>
       </Item>
+      <Item title="Sheet" intro="A panel from the bottom edge, the phone form of Drawer." code={`<Sheet open={open} onClose={close} title="Order">…</Sheet>`}>
+        <Button onClick={() => setSheet(true)}>Open sheet</Button>
+        <Sheet open={sheet} onClose={() => setSheet(false)} title="Order (sample)"><Text tone="secondary">Short choices on a phone belong here.</Text></Sheet>
+      </Item>
+      <Item title="Command palette" intro="Type to filter, arrow keys to move, Enter to run. The app shells open theirs with Cmd or Ctrl plus K." code={`<CommandPalette open={open} onClose={close} commands={[{ id: "verify", label: "Open Verify", group: "Go to", run }]} />`}>
+        <Button icon="search" onClick={() => setCmd(true)}>Open palette</Button>
+        <CommandPalette open={cmd} onClose={() => setCmd(false)} commands={GAL_COMMANDS} />
+      </Item>
+      <Item title="Tour step" intro="One step of a product tour: a glass card pointing at a part of the page, with the count, Back, Next and Skip. Escape skips, arrow keys step." code={`<TourStep target="#search" title="Search" step={1} total={3} open onNext={next} onBack={back} onSkip={skip}>…</TourStep>`}>
+        <Button onClick={() => setTour(1)}>Start a sample tour</Button>
+        <span id="gal-tour-a"><Badge tone="info">Step 1 points here</Badge></span>
+        <span id="gal-tour-b"><Badge tone="warning">Step 2 points here</Badge></span>
+        <TourStep open={tour > 0} target={tour === 1 ? "#gal-tour-a" : tour === 2 ? "#gal-tour-b" : null} step={tour} total={3}
+          title={tour === 3 ? "That is all" : `Step ${tour}`} onNext={() => setTour((t) => (t >= 3 ? 0 : t + 1))} onBack={() => setTour((t) => Math.max(1, t - 1))} onSkip={() => setTour(0)}>
+          {tour === 3 ? "A step with no target sits in the middle of the screen." : "The ring shows what this step is about."}
+        </TourStep>
+      </Item>
       <Item title="Toast" code={`toast("Bookmark removed", { action: { label: "Undo", run: undo } });`}>
         <Button onClick={() => toast("Bookmark removed", { tone: "good", action: { label: "Undo", run: () => toast("Bookmark restored") } })}>Show toast</Button>
       </Item>
@@ -711,9 +796,21 @@ function Overlays() {
 }
 
 function Feedback() {
+  const [retrying, setRetrying] = useState(false);
   return (
     <>
-      <PageHeader title="Empty and loading" description="Say what is missing and what to do next. Loading shows the shape of what is coming." />
+      <PageHeader title="Empty, loading and errors" description="Say what is missing and what to do next. Loading shows the shape of what is coming. A failure says what failed and offers Retry." />
+      <Item title="Error with Retry" col code={`<ErrorState title="Prices did not load" onRetry={reload}>The server did not answer. Your settings are kept.</ErrorState>`}
+        rules={["Takes the place of what failed, at the same size.", "Plain words: what failed, what is kept, what Retry does."]}>
+        <ErrorState title="Prices did not load" onRetry={() => { setRetrying(true); window.setTimeout(() => setRetrying(false), 1200); }} retrying={retrying}>The server did not answer in 10 seconds. Your settings are kept.</ErrorState>
+        <ErrorState compact title="This panel did not load" onRetry={() => toast("Retried (demo)")} />
+      </Item>
+      <Item title="Progress" col code={`<ProgressBar label="Checking trades" value={0.4} showValue />\n<ProgressBar label="Loading" />\n<Spinner />`}>
+        <ProgressBar label="Checking trades (sample)" value={0.42} showValue />
+        <ProgressBar label="Tests passed (sample)" value={7 / 11} tone="positive" showValue />
+        <ProgressBar label="Loading (sample)" />
+        <span><Spinner /> <span className="muted small">Spinner, for a small part only</span></span>
+      </Item>
       <Item title="Empty state" code={`<EmptyState title="No runs yet" action={<Button>Run one</Button>}>…</EmptyState>`}>
         <EmptyState title="No official runs yet" icon="ledger" action={<Button size="sm" href="#/doc/GDE-0004">How to register one</Button>}>Results only count once a registered plan has run on GitHub.</EmptyState>
       </Item>

@@ -16,6 +16,6 @@ main footer a,
 
 /* Visible focus for every control, including ones that set outline: none. */
 :where(a, button, input, select, textarea, [role="tab"], [role="radio"], [role="menuitem"], [tabindex]):focus-visible {
-  outline: 2px solid var(--link);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
