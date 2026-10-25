@@ -16,6 +16,7 @@ import { Button, Checkbox, Disclosure, EmptyState, Input, SearchInput, Segmented
 import { Num, ResultView, pct } from "./verify/Result";
 import "./verify/verify.css";
 import { Assistant } from "../assistant/Mount";
+import { track } from "../lib/analytics";
 
 type Mode = "file" | "describe" | "strategy";
 const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
@@ -42,9 +43,9 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
       <Segmented<Mode> label="What to check" value={mode} onChange={change}
         options={[["file", "Upload a file"], ["describe", "Describe a bot"], ["strategy", "Pick a strategy"]]} />
       <div className="vf-input">
-        {mode === "file" && <FileInput onResult={(r, file) => setResult({ r, file })} />}
-        {mode === "describe" && <DescribeInput onResult={(r, matches) => setResult({ r, file: null, matches })} />}
-        {mode === "strategy" && <StrategyInput onResult={(r) => setResult({ r, file: null })} />}
+        {mode === "file" && <FileInput onResult={(r, file) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file }); }} />}
+        {mode === "describe" && <DescribeInput onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}
+        {mode === "strategy" && <StrategyInput onResult={(r) => { track("verify_run", { mode }); setResult({ r, file: null }); }} />}
       </div>
       {result ? (
         <ResultView r={result.r}>

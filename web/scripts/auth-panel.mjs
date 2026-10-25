@@ -26,7 +26,7 @@ async function fresh(options = {}) {
     }
     return route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
   });
-  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
+  await context.addInitScript(() => { try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-10-24T00:00:00Z" })); } catch { /* none */ } });
   return { context, page: await context.newPage(), calls };
 }
 const state = (page) => page.evaluate(() => ({

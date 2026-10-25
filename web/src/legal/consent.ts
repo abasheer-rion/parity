@@ -1,15 +1,15 @@
 // Cookie and storage consent, the one place that decides what may run.
 //
-// Today Parity uses only what it needs to work: the sign-in cookie, and a few settings
-// kept in this browser (see /legal/cookies/). There is no analytics, advertising or
-// tracking. This API exists so that adding any later is safe by default:
+// Essential: the sign-in cookie and a few settings kept in this browser (see /legal/cookies/).
+// Analytics: Parity's own product analytics (DEC-0053, src/lib/analytics/), off until the
+// person switches it on, and never on in a browser that sends Do Not Track or Global Privacy
+// Control. There is no advertising and no third-party tracking.
 //
 //   import { whenAllowed } from "../legal/consent";
 //   whenAllowed("analytics", () => loadAnalytics());   // runs only after an opt-in
 //
-// Before analytics can run, three things must change together: set ANALYTICS_AVAILABLE to
-// true, name the tool in the cookie policy, and ask again (bump VERSION so everyone sees
-// the notice). Until then, allowed("analytics") is always false, whatever is stored.
+// Adding a category or a tool means three changes together: the code here, the cookie
+// policy, and a new VERSION so everyone is asked again.
 
 export type Category = "essential" | "analytics";
 
@@ -22,11 +22,29 @@ export interface Consent {
   decidedAt: string;
 }
 
-/** Bump when the categories or the tools in them change, so people are asked again. */
-export const VERSION = 1;
+/**
+ * Bump when the categories or the tools in them change, so people are asked again.
+ * 2: Parity's own analytics became available (DEC-0053).
+ */
+export const VERSION = 2;
 
-/** No analytics tool exists yet, so it cannot be switched on. */
-export const ANALYTICS_AVAILABLE = false;
+/** Parity's own analytics exists (DEC-0053). Set false to switch it off for everyone. */
+export const ANALYTICS_AVAILABLE = true;
+
+/**
+ * True when the browser asks sites not to track it: Do Not Track or Global Privacy Control.
+ * Analytics then stays off whatever is stored, and the preferences dialog says why.
+ */
+export function privacySignal(): boolean {
+  try {
+    if (typeof navigator === "undefined") return false;
+    const nav = navigator as Navigator & { globalPrivacyControl?: boolean; msDoNotTrack?: string };
+    const win = (typeof window !== "undefined" ? window : {}) as { doNotTrack?: string };
+    return nav.globalPrivacyControl === true || nav.doNotTrack === "1" || nav.doNotTrack === "yes" || win.doNotTrack === "1" || nav.msDoNotTrack === "1";
+  } catch {
+    return false;
+  }
+}
 
 export const STORAGE_KEY = "parity.consent.v1";
 
@@ -66,16 +84,16 @@ export function hasDecided(): boolean {
 /** Whether a category may run now. Essential always may; nothing else does without opt-in. */
 export function allowed(category: Category): boolean {
   if (category === "essential") return true;
-  if (category === "analytics") return ANALYTICS_AVAILABLE && getConsent()?.analytics === true;
+  if (category === "analytics") return ANALYTICS_AVAILABLE && !privacySignal() && getConsent()?.analytics === true;
   return false;
 }
 
-/** Records a choice. Analytics stays off while no analytics tool exists. */
+/** Records a choice. Analytics stays off when it is unavailable or the browser asks not to be tracked. */
 export function setConsent(choice: { analytics?: boolean } = {}): Consent {
   const consent: Consent = {
     version: VERSION,
     essential: true,
-    analytics: ANALYTICS_AVAILABLE && choice.analytics === true,
+    analytics: ANALYTICS_AVAILABLE && !privacySignal() && choice.analytics === true,
     decidedAt: new Date().toISOString(),
   };
   memory = consent;

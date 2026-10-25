@@ -9,6 +9,7 @@ import { Screen, SwitchLink, useFlow } from "../flow";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem, passwordProblem } from "../rules";
 import { welcomeNew } from "../session";
+import { track } from "../../lib/analytics";
 import { ProviderButtons } from "./Providers";
 
 export function SignUp() {
@@ -35,6 +36,7 @@ export function SignUp() {
       options: { emailRedirectTo: emailLanding(next) },
     });
     if (error) return explain(error);
+    track("sign_up", { method: "email" });
     if (data.session) { await welcomeNew(show); return LEAVING; }
     // No session: confirmation is on. Supabase answers the same way for an address that
     // already has an account, so nobody can use this form to find out who has one.

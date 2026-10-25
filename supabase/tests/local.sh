@@ -4,6 +4,7 @@
 #
 #   supabase/tests/local.sh            fresh cluster, stand-ins, all migrations, then the tests
 #   supabase/tests/local.sh --keep     same, and leave the server running (prints how to connect)
+#   PARITY_BENCH=1 supabase/tests/local.sh   also run the bench_*.sql timings on made-up data
 #   PGBIN=/path/to/pg17/bin supabase/tests/local.sh
 #
 # The cluster lives in a temporary folder and listens on a Unix socket only (no TCP port).
@@ -40,6 +41,14 @@ for t in "$here"/test_*.sql; do
   echo "test $(basename "$t")"
   psql -f "$t"
 done
+# Timings on made-up data at realistic volume (slow, so only when asked): PARITY_BENCH=1.
+if [ "${PARITY_BENCH:-0}" = "1" ]; then
+  for b in "$here"/bench_*.sql; do
+    [ -e "$b" ] || continue
+    echo "bench $(basename "$b")"
+    psql -f "$b"
+  done
+fi
 if [ "${1:-}" = "--keep" ]; then
   echo "running: PGHOST=$dir PGUSER=postgres psql   (stop: $PGBIN/pg_ctl -D $dir/data stop)"
 fi

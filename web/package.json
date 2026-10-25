@@ -19,7 +19,8 @@
     "deeplinks": "node scripts/deeplinks.mjs",
     "auth:panel": "node scripts/auth-panel.mjs",
     "auth:shots": "node scripts/auth-shots.mjs",
-    "auth:motion": "node scripts/auth-motion.mjs"
+    "auth:motion": "node scripts/auth-motion.mjs",
+    "analytics:check": "node scripts/analytics-check.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
