@@ -1,5 +1,5 @@
 +++
-# A newsroom post (DEC-0053, how-to in GDE-0006). Only status = "published" builds publicly.
+# A newsroom post (DEC-0057, how-to in GDE-0009). Only status = "published" builds publicly.
 title = "{title}"
 dek = "One or two sentences under the title that say what the post finds or announces."
 slug = "{slug}"

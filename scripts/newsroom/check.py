@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks every newsroom post and byline against the rules in model.py (DEC-0053).
+"""Checks every newsroom post and byline against the rules in model.py (DEC-0057).
 
     python3 scripts/newsroom/check.py        # or: npm run newsroom:check
 

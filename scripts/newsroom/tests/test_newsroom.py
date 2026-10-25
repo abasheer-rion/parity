@@ -1,4 +1,4 @@
-"""Tests for the newsroom rules and builder (DEC-0053).
+"""Tests for the newsroom rules and builder (DEC-0057).
 
     python3 -m unittest discover -s scripts/newsroom/tests
 

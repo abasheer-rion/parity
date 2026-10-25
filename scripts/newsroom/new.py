@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Starts a new newsroom post as a draft (DEC-0053).
+"""Starts a new newsroom post as a draft (DEC-0057).
 
     npm run newsroom:new -- --type Analysis --title "What carry paid in 2026" [--author parity-research]
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the Parity blog and news pages into the site build (DEC-0053).
+"""Builds the Parity blog and news pages into the site build (DEC-0057).
 
     python3 scripts/newsroom/build.py --out web/dist            # what the site build does
     python3 scripts/newsroom/build.py --out DIR --preview       # drafts too, for a local look

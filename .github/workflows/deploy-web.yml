@@ -9,7 +9,7 @@
 # by the same hourly job and exported into dist/data/markets (parity markets export).
 # SEO (DEC-0023): the build writes the public Learn, Ideas and Notes pages and sitemap.xml;
 # after a production deploy, IndexNow is told which public URLs changed. The Blog and News pages
-# (DEC-0053) are built from content/newsroom/ and listed in sitemap.xml only, never sent to IndexNow.
+# (DEC-0057) are built from content/newsroom/ and listed in sitemap.xml only, never sent to IndexNow.
 # Parity Terminal's files go into dist/data/terminal (parity terminal export), and Bot
 # Battle's into dist/data/bots (parity bots export, DEC-0035).
 # Latency (DEC-0045): after a production deploy, every source's row in data_freshness gets

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A local preview of the blog and news pages, drafts and posts in review included (DEC-0053).
+"""A local preview of the blog and news pages, drafts and posts in review included (DEC-0057).
 
     npm run newsroom:preview          # then open http://127.0.0.1:4410/blog/
 

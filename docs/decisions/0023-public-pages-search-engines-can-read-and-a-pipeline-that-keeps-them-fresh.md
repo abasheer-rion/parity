@@ -64,5 +64,6 @@ The wall between product and research ([DEC-0015](0015-two-sides-a-product-app-a
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
+- [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
 - [GDE-0005: Google Search Console and the SEO pipeline](../guides/0005-google-search-console-and-the-seo-pipeline.md)
 <!-- backlinks:end -->

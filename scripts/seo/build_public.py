@@ -16,7 +16,7 @@ The pages:
   /learn/academy/...            Parity Academy courses and lessons (academy/courses/*.json, DEC-0028), each
                                 lesson with a still frame of its picture drawn by web/scripts/academy-frames.ts
   /learn/private-markets/       private markets in plain words (docs/_system/private-markets.json, DEC-0029)
-  /blog/ and /news/             the newsroom, built by scripts/newsroom/build.py from content/newsroom/ (DEC-0053)
+  /blog/ and /news/             the newsroom, built by scripts/newsroom/build.py from content/newsroom/ (DEC-0057)
 and then the files search engines read:
   sitemap.xml          every public URL (front page, legal pages and the pages above)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
@@ -279,7 +279,7 @@ def crumbs_ld(trail: list[tuple[str, str]]) -> dict:
 
 
 # The public sections, in the order the header lists them. Blog and News are built by
-# scripts/newsroom/build.py (DEC-0053).
+# scripts/newsroom/build.py (DEC-0057).
 NAV = (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes"),
        ("blog", "/blog/", "Blog"), ("news", "/news/", "News"))
 
@@ -820,7 +820,7 @@ def main() -> int:
     lastmod.update({f"/notes/{n['id'].lower()}/": n["updated"] for n in notes})
     urls = [(p, "") for p in STATIC_PUBLIC] + [(p, lastmod.get(p, "")) for p in sorted(pages)]
 
-    # Blog and News (DEC-0053). They go in sitemap.xml but not in seo-manifest.json, so the
+    # Blog and News (DEC-0057). They go in sitemap.xml but not in seo-manifest.json, so the
     # deploy never pushes them to IndexNow while the site is on its temporary address.
     sys.path.insert(0, str(ROOT / "scripts/newsroom"))
     from build import build_into  # noqa: PLC0415

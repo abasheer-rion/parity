@@ -1,4 +1,4 @@
-// Image work for the newsroom pages (DEC-0053). scripts/newsroom/build.py runs this once per
+// Image work for the newsroom pages (DEC-0057). scripts/newsroom/build.py runs this once per
 // build and passes a JSON job on stdin:
 //
 //   { "og":     [{ "svg": "<svg ...>", "out": "/abs/dist/og/newsroom/<slug>.png" }],

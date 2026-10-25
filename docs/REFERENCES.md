@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1646 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1649 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 914 |
+| [Web pages](#web-pages) | 917 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -4099,6 +4099,14 @@ API FAQ. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/developer
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-0378f656
+
+Palantir Blog. (n.d.). *blog.palantir.com*. <https://blog.palantir.com/>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Studied for the newsroom layout in DEC-0057.
+
+Cited in: [DEC-0057](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md).
+
 ### url-03c3c09f
 
 Tradervue home page. (n.d.). *tradervue.com*. <https://www.tradervue.com/>. Accessed 2026-10-23. Verification: not checked.
@@ -4468,6 +4476,14 @@ Cited in: [CMP-0009](competitors/0009-robinhood.md).
 No title recorded. (n.d.). *eia.gov*. <https://www.eia.gov/opendata/register.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-14d9d7fc
+
+Newsroom | Palantir. (n.d.). *www.palantir.com*. <https://www.palantir.com/newsroom/>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Studied for the newsroom layout in DEC-0057.
+
+Cited in: [DEC-0057](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md).
 
 ### url-14fdc6b1
 
@@ -8578,6 +8594,14 @@ Natural Gas Data - U.S. Energy Information Administration (EIA). (n.d.). *eia.go
 Note: Linked in this repo as: EIA natural gas data.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-c7af5b43
+
+Newsroom | Anduril. (n.d.). *www.anduril.com*. <https://www.anduril.com/news>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Studied for the newsroom layout in DEC-0057.
+
+Cited in: [DEC-0057](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md).
 
 ### url-c80dbbf9
 

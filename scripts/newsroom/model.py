@@ -2,7 +2,7 @@
 
 Posts are Markdown files with TOML front matter between two `+++` lines, under
 content/newsroom/posts/ (ready or published) and content/newsroom/drafts/ (work in progress).
-Authors are in content/newsroom/authors.toml. See GDE-0006 for how to write one and DEC-0053
+Authors are in content/newsroom/authors.toml. See GDE-0009 for how to write one and DEC-0057
 for why the rules are what they are. Standard library only (tomllib needs Python 3.11+).
 """
 from __future__ import annotations
