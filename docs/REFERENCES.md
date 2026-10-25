@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1486 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1493 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 785 |
+| [Web pages](#web-pages) | 792 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 54 |
 | [News](#news) | 4 |
@@ -4373,6 +4373,12 @@ Algorithmic trading market size and share analysis. (n.d.). *mordorintelligence.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-1139fcb8
+
+dYdX terms of use. (2026). *dYdX Operations Services*. <https://dydx.trade/terms>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-1176a2b9
 
 optimisation docs. (n.d.). *quantconnect.com*. <https://www.quantconnect.com/docs/v2/cloud-platform/optimization>. Accessed 2026-10-24. Verification: not checked.
@@ -6329,6 +6335,12 @@ third party guide. (n.d.). *bluecapitaltrading.com*. <https://www.bluecapitaltra
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-744200f2
+
+Bitstamp terms of use. (2026). *Bitstamp*. <https://www.bitstamp.net/terms-of-use/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-75268f36
 
 WebSocket intro. (n.d.). *docs.kraken.com*. <https://docs.kraken.com/api/docs/guides/spot-ws-intro>. Accessed 2026-10-24. Verification: not checked.
@@ -6993,6 +7005,12 @@ Trademark guidelines | Cloudflare. (n.d.). *cloudflare.com*. <https://www.cloudf
 
 Cited in: [DEC-0039](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md).
 
+### url-90f4c1c5
+
+Bitfinex market data terms. (2026). *Bitfinex*. <https://www.bitfinex.com/legal/general/market-data>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-91078bba
 
 ClickHouse pricing. (n.d.). *clickhouse.com*. <https://clickhouse.com/pricing>. Accessed 2026-10-24. Verification: not checked.
@@ -7048,6 +7066,12 @@ Free Trial | Interactive Brokers LLC. (n.d.). *Interactive Brokers*. <https://po
 Note: Linked in this repo as: free trial.
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-9499b453
+
+Gemini market data agreement. (2026). *Gemini*. <https://www.gemini.com/legal/market-data-agreement>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-94b3089a
 
@@ -7170,6 +7194,12 @@ Cited in: [CMP-0012](competitors/0012-lmax.md).
 S&P 500 index. (n.d.). *historical annual returns compiled by Aswath Damodaran*. <https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/sixty-forty-portfolio.json](../catalog/algorithms/sixty-forty-portfolio.json), [catalog/algorithms/sp500-buy-and-hold.json](../catalog/algorithms/sp500-buy-and-hold.json), [ALG-0048](algorithms/0048-sixty-forty-portfolio.md), [ALG-0049](algorithms/0049-sp500-buy-and-hold.md).
+
+### url-9c83f795
+
+Binance.US terms of use. (2026). *Binance.US*. <https://www.binance.us/terms-of-use>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-9cf6ad59
 
@@ -8379,6 +8409,12 @@ No title recorded. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitboo
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
 
+### url-da3193de
+
+IEX Exchange market data. (2026). *IEX*. <https://iextrading.com/trading/market-data/>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
 ### url-da38ebb4
 
 Frazzini and Pedersen, Betting Against Beta (May 2013 draft), Table III. (n.d.). *pages.stern.nyu.edu*. <https://pages.stern.nyu.edu/~lpederse/papers/BettingAgainstBeta.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -8728,6 +8764,12 @@ Help | BIS Data Portal. (n.d.). *Bank for International Settlements*. <https://d
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md), [DAT-0038](datasets/0038-bis-triennial-fx.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-ef118e1c
+
+Pyth Network pricing. (2026). *Pyth Network*. <https://www.pyth.network/pricing>. Accessed 2026-10-25. Verification: not checked.
+
+Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-ef3a550b
 

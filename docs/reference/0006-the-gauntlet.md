@@ -74,6 +74,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0028: Parity Academy, short courses with moving pictures](../decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
