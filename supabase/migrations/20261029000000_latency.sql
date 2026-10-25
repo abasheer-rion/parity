@@ -1,6 +1,6 @@
 -- Latency tracking (DEC-0045): how old the data is at every hop, how long each scheduled
 -- job and service step takes, and how fast pages get their data in real browsers.
--- Additive only: four new tables and three functions. Nothing here holds personal data.
+-- Additive only: five new tables and three functions. Nothing here holds personal data.
 --
 -- data_freshness  one row per (source, series): the source's own as-of time, when we
 --                 fetched it, when the site published it, and the cadence we expect.
@@ -13,14 +13,16 @@
 --                 endpoint, region). There are no raw events, no ids, no addresses.
 --                 Anyone may read it. Written only through rum_ingest(), which the
 --                 site's /rum function calls. Buckets older than 90 days are dropped.
--- rum_minute      a per-minute counter that caps how many beacons rum_ingest() takes,
---                 so a flood cannot grow the table. Nobody reads it.
+-- rum_minute      a per-minute counter that caps how many beacons rum_ingest() takes.
+-- rum_hour_rows   how many buckets each hour has; past 5,000 an hour only adds to
+--                 existing buckets, so a flood of made-up endpoints cannot grow the
+--                 table. Nobody reads either counter.
 
 -- ---------------------------------------------------------------- data freshness
 
 create table if not exists public.data_freshness (
   source text not null check (source ~ '^[a-z0-9][a-z0-9._-]{0,39}$'),
-  series text not null check (series ~ '^[A-Za-z0-9][A-Za-z0-9._:/-]{0,79}$'),
+  series text not null check (series ~ '^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,79}$'),
   label text not null default '' check (length(label) <= 120),
   kind text not null check (kind in ('prices', 'markets', 'news', 'site', 'service')),
   -- Which time the cadence applies to: the source's own as-of time, our last fetch, or
@@ -171,9 +173,18 @@ create table if not exists public.rum_minute (
 alter table public.rum_minute enable row level security;
 revoke all on public.rum_minute from anon, authenticated;
 
+create table if not exists public.rum_hour_rows (
+  hour timestamptz primary key,
+  n integer not null default 0
+);
+
+alter table public.rum_hour_rows enable row level security;
+revoke all on public.rum_hour_rows from anon, authenticated;
+
 -- One beacon: an app name, a coarse region (a continent code from Cloudflare) and up to 40
 -- events {m: metric, e: endpoint, v: value, h: 1 for a cache hit}. Anything unexpected is
--- dropped, not stored. At most 3,000 beacons a minute are taken across the whole site.
+-- dropped, not stored. At most 1,200 beacons a minute are taken across the whole site, and
+-- at most 5,000 buckets are created per hour.
 create or replace function public.rum_ingest(p_app text, p_region text, p_events jsonb)
 returns integer
 language plpgsql security definer set search_path = '' as $$
@@ -187,6 +198,8 @@ declare
   hr timestamptz := date_trunc('hour', now());
   cur_minute timestamptz := date_trunc('minute', now());
   seen integer;
+  buckets integer;
+  inserted boolean;
   n integer := 0;
 begin
   if p_app is null or p_app !~ '^(site|product|research|sim|trade|academy|lab|desktop|auth|verify)$' then
@@ -204,11 +217,14 @@ begin
   returning r.n into seen;
   if seen = 1 then  -- first beacon of a minute: tidy up old rows
     delete from public.rum_minute where minute < cur_minute - interval '1 hour';
+    delete from public.rum_hour_rows where hour < hr - interval '1 day';
     delete from public.rum_hourly where hour < hr - interval '90 days';
   end if;
-  if seen > 3000 then
+  if seen > 1200 then
     return 0;
   end if;
+  select r.n into buckets from public.rum_hour_rows r where r.hour = hr;
+  buckets := coalesce(buckets, 0);
 
   for ev in select * from jsonb_array_elements(p_events) loop
     if jsonb_typeof(ev) <> 'object' or jsonb_typeof(ev->'v') <> 'number' then
@@ -225,6 +241,14 @@ begin
       continue;
     end if;
     j := case when v < 1 then 1 else least(64, floor(8 * log(v))::integer + 2) end;
+    if buckets >= 5000 then  -- the hour is full: only add to buckets that exist
+      update public.rum_hourly t set
+        n = t.n + 1, hits = t.hits + h, total = t.total + v,
+        bins = t.bins[1:j - 1] || (t.bins[j] + 1) || t.bins[j + 1:64]
+      where t.hour = hr and t.app = p_app and t.metric = m and t.endpoint = e and t.region = p_region;
+      if found then n := n + 1; end if;
+      continue;
+    end if;
     insert into public.rum_hourly as t (hour, app, metric, endpoint, region, n, hits, total, bins)
     values (hr, p_app, m, e, p_region, 1, h, v,
             array_fill(0, array[j - 1]) || 1 || array_fill(0, array[64 - j]))
@@ -232,7 +256,13 @@ begin
       n = t.n + 1,
       hits = t.hits + excluded.hits,
       total = t.total + excluded.total,
-      bins = t.bins[1:j - 1] || (t.bins[j] + 1) || t.bins[j + 1:64];
+      bins = t.bins[1:j - 1] || (t.bins[j] + 1) || t.bins[j + 1:64]
+    returning (xmax = 0) into inserted;
+    if inserted then
+      buckets := buckets + 1;
+      insert into public.rum_hour_rows as c (hour, n) values (hr, 1)
+      on conflict (hour) do update set n = c.n + 1;
+    end if;
     n := n + 1;
   end loop;
   return n;

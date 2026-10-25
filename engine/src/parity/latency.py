@@ -603,7 +603,8 @@ def run_rows(run: dict, jobs: list[dict], pipeline: str, crons: list[str],
             failed = st.get("conclusion") not in ("success", "skipped")
             if secs < 1 and not failed:
                 continue
-            out.append(_span(pipeline, key, st["name"][:80], s0, s1, not failed))
+            name = st["name"] if len(jobs) == 1 else f"{job['name']}: {st['name']}"
+            out.append(_span(pipeline, key, name[:80], s0, s1, not failed))
     return out
 
 
