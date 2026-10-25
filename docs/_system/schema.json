@@ -439,6 +439,7 @@
       "academy",
       "auth",
       "catalog",
+      "content",
       "desktop",
       "docs",
       "engine",
@@ -450,6 +451,9 @@
       "web"
     ],
     "unchecked_markdown": [],
+    "site_markdown": [
+      "content/newsroom/"
+    ],
     "generated": [
       "docs/README.md",
       "docs/TAGS.md",

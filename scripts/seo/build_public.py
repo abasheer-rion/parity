@@ -16,6 +16,7 @@ The pages:
   /learn/academy/...            Parity Academy courses and lessons (academy/courses/*.json, DEC-0028), each
                                 lesson with a still frame of its picture drawn by web/scripts/academy-frames.ts
   /learn/private-markets/       private markets in plain words (docs/_system/private-markets.json, DEC-0029)
+  /blog/ and /news/             the newsroom, built by scripts/newsroom/build.py from content/newsroom/ (DEC-0053)
 and then the files search engines read:
   sitemap.xml          every public URL (front page, legal pages and the pages above)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
@@ -277,15 +278,25 @@ def crumbs_ld(trail: list[tuple[str, str]]) -> dict:
         {"@type": "ListItem", "position": i + 1, "name": name, "item": f"{SITE}{path}"} for i, (name, path) in enumerate(trail)]}
 
 
+# The public sections, in the order the header lists them. Blog and News are built by
+# scripts/newsroom/build.py (DEC-0053).
+NAV = (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes"),
+       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"))
+
+
+def nav_html(section: str, path: str = "") -> str:
+    """The header links; the current section is marked, as the page itself on a section's front page."""
+    cur = ' aria-current="page"' if path in {h for _, h, _ in NAV} else ' aria-current="true"'
+    return "".join(f'<a href="{href}"{cur if section == key else ""}>{label}</a>' for key, href, label in NAV)
+
+
 def page(*, path: str, title: str, description: str, body: str, section: str, trail: list[tuple[str, str]],
          ld: list[dict], og_type: str = "article") -> str:
     url = f"{SITE}{path}"
     image = f"{SITE}/og/{section}.png"
     full_title = f"{title} | Parity" if path != "/" else title
     graph = {"@context": "https://schema.org", "@graph": [org_ld(), crumbs_ld(trail), *ld]}
-    cur = ' aria-current="page"' if path in ("/learn/", "/ideas/", "/notes/") else ' aria-current="true"'
-    nav = "".join(f'<a href="{href}"{cur if section == key else ""}>{label}</a>'
-                  for key, href, label in (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes")))
+    nav = nav_html(section, path)
     crumb_html = " / ".join(f'<a href="{p}">{e(n)}</a>' for n, p in trail[:-1]) + (" / " if len(trail) > 1 else "")
     legal = "".join(f'<a href="{h}">{n}</a>' for h, n in LEGAL)
     return f"""<!doctype html>
@@ -808,7 +819,20 @@ def main() -> int:
     lastmod = {f"/ideas/{a['slug']}/": a.get("last_reviewed", "") for a in ideas}
     lastmod.update({f"/notes/{n['id'].lower()}/": n["updated"] for n in notes})
     urls = [(p, "") for p in STATIC_PUBLIC] + [(p, lastmod.get(p, "")) for p in sorted(pages)]
-    (out / "sitemap.xml").write_text(sitemap(urls))
+
+    # Blog and News (DEC-0053). They go in sitemap.xml but not in seo-manifest.json, so the
+    # deploy never pushes them to IndexNow while the site is on its temporary address.
+    sys.path.insert(0, str(ROOT / "scripts/newsroom"))
+    from build import build_into  # noqa: PLC0415
+    from model import ValidationError  # noqa: PLC0415
+    try:
+        newsroom_urls = build_into(out)
+    except ValidationError as err:
+        print("build_public: the blog and news pages did not build. Fix these:", file=sys.stderr)
+        for p in err.problems:
+            print(f"  - {p}", file=sys.stderr)
+        return 1
+    (out / "sitemap.xml").write_text(sitemap(urls + newsroom_urls))
 
     manifest = {}
     for p, _ in urls:

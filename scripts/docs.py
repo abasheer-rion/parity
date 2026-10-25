@@ -280,6 +280,8 @@ def check_links(path: Path, text: str, r: Report, anchor_cache: dict):
                 if re.search(r"github\.com/[^/]+/parity/(blob|tree)/", target):
                     r.err(f"{where}:{i}", "link to this repo with a relative path, not a URL")
                 continue
+            if target.startswith("/") and where.startswith(tuple(SCHEMA["layout"].get("site_markdown", []))):
+                continue  # a page on the site (newsroom posts, DEC-0053), not a file in the repo
             file_part, _, anchor = target.partition("#")
             dest = path if not file_part else (path.parent / file_part).resolve()
             if not dest.exists():
