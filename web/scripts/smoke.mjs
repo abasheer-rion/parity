@@ -6,6 +6,7 @@
 //     (CI has no news, markets or terminal exports; pages must say so calmly)
 //   - a blank page, or NaN, undefined, Infinity or [object Object] in the text
 //   - sideways scroll on the phone size
+//   - a page without the analytics boot script, or one it cannot name (DEC-0053)
 //
 //   npm run smoke                      starts its own server
 //   SMOKE_BASE=http://127.0.0.1:5199 npm run smoke   uses a running one
@@ -73,7 +74,7 @@ for (const size of SIZES) {
   const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, reducedMotion: "reduce" });
   // A decided cookie banner, so it does not cover the page.
   await ctx.addInitScript(() => {
-    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
   });
   const queue = [...list];
   await Promise.all([0, 1, 2, 3].map(async () => {
@@ -110,11 +111,14 @@ for (const size of SIZES) {
         const info = await page.evaluate(() => {
           const text = document.body?.innerText ?? "";
           const bad = [...text.matchAll(/(^|[^A-Za-z])(NaN|undefined|Infinity|\[object Object\])(?![A-Za-z])/g)].map((m) => text.slice(Math.max(0, (m.index ?? 0) - 30), (m.index ?? 0) + 30).replace(/\s+/g, " "));
-          return { len: text.trim().length, bad, overflow: document.documentElement.scrollWidth - window.innerWidth };
+          const a = window.__parityAnalytics;
+          return { len: text.trim().length, bad, overflow: document.documentElement.scrollWidth - window.innerWidth, analytics: a?.booted === true && Boolean(a.app) };
         });
         if (info.len < 40) add("blank page");
         for (const b of info.bad.slice(0, 3)) add(`bad value in text: "${b}"`);
         if (size.name === "phone" && info.overflow > 1) add(`scrolls sideways by ${info.overflow}px`);
+        // Every page must load the analytics boot script and know its app (DEC-0053).
+        if (!info.analytics) add("analytics is not wired (no boot script, or an app analytics cannot name)");
       } catch (e) {
         add(`did not load: ${e.message.split("\n")[0]}`);
       }

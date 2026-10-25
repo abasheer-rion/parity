@@ -500,7 +500,9 @@ begin
   perform analytics.require_viewer();
   return query
   select d.app, d.route, sum(d.views)::bigint, sum(d.visitors)::bigint, sum(d.sessions)::bigint,
-         (sum(d.visible_ms) / nullif(sum(d.visible_n), 0))::bigint,
+         -- A page view can end in more than one "leave" (the tab hidden and shown again), so
+         -- average visible time is per page view, not per leave.
+         (sum(d.visible_ms) / nullif(sum(d.views), 0))::bigint,
          (sum(d.scroll_sum) / nullif(sum(d.scroll_n), 0))::integer
   from analytics.daily_routes d
   where d.day > (now() at time zone 'utc')::date - least(greatest(p_days, 1), 400)

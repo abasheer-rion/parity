@@ -60,6 +60,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # Every built page loads the analytics boot script (DEC-0053, scripts/analytics-check.mjs).
+      - run: npm run analytics:check
       # The desktop app's copy of the site (DEC-0041): refuses research data and maps.
       - run: node ../desktop/scripts/prepare-web.mjs
       - uses: actions/upload-artifact@v7
