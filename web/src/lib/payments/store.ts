@@ -1,7 +1,7 @@
 // Where the webhook writes (DEC-0046). The handler talks to this interface, so the tests
 // use an in-memory copy and production uses Supabase's REST API with the service role key
 // (the only role allowed to write these tables, see
-// supabase/migrations/20261030000000_payments_scaffold.sql).
+// supabase/migrations/20261028120000_payments_scaffold.sql).
 import type { EntitlementRow, PaidPlan, SubscriptionStatus } from "./plans";
 
 export interface StoredSubscription {
