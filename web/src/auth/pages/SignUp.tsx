@@ -1,76 +1,97 @@
-// Create an account. With email confirmation on (auth/CHECKLIST.md), sign-up ends on the
-// "check your email" screen, where the 6-digit code from the email can be typed, or the
-// link in the email clicked. With it off, sign-up signs the person straight in.
+// Create an account: email first, then a password and the terms. With email confirmation
+// on (auth/CHECKLIST.md), sign-up ends on "check your email", where the 6-digit code from
+// the email can be typed, or the link in the email clicked. With it off, sign-up signs the
+// person straight in.
 import { useState } from "react";
-import { Button } from "../../ui";
 import { explain, requireClient } from "../client";
-import { ROUTES } from "../config";
-import { AuthCard, Field, go, Notice, params, PasswordField, useSubmit } from "../form";
-import { emailLanding, nextFromQuery, withNext } from "../redirect";
+import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
+import { Screen, SwitchLink, useFlow } from "../flow";
+import { go } from "../nav";
+import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem, passwordProblem } from "../rules";
-import { continueTo, secondStepUrl } from "../session";
+import { continueTo } from "../session";
 import { ProviderButtons } from "./Providers";
 
 export function SignUp() {
-  const next = nextFromQuery();
-  const [email, setEmail] = useState("");
+  const { next, email, setEmail, carry } = useFlow();
+  const [step, setStep] = useState<"email" | "password">("email");
   const [password, setPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
-  const [sentTo, setSentTo] = useState<string | null>(() => params().get("check"));
-  const { busy, error, setError, run } = useSubmit();
+  const [sentTo, setSentTo] = useState<string | null>(carry.check ?? null);
+  const form = useSubmit();
 
-  const submit = run(async () => {
-    const bad = emailProblem(email) ?? passwordProblem(password);
-    if (bad) return bad;
-    if (!agreed) return "Please agree to the terms and the privacy policy to continue.";
+  const toPassword = form.run(async () => {
+    const bad = emailProblem(email);
+    if (bad) return { field: "email", message: bad };
+    setStep("password");
+  });
+
+  const submit = form.run(async () => {
+    const bad = passwordProblem(password);
+    if (bad) return { field: "password", message: bad };
+    if (!agreed) return { field: "terms", message: "Please agree to the terms and the privacy policy to continue." };
     const { data, error } = await requireClient().auth.signUp({
       email: email.trim(),
       password,
       options: { emailRedirectTo: emailLanding(next) },
     });
     if (error) return explain(error);
-    if (data.session) { await continueTo(next, go); return; }
+    if (data.session) { await continueTo(next, go); return LEAVING; }
     // No session: confirmation is on. Supabase answers the same way for an address that
     // already has an account, so nobody can use this form to find out who has one.
     setSentTo(email.trim());
   });
 
-  if (sentTo) return <CheckEmail email={sentTo} next={next} />;
+  if (sentTo) return <CheckEmail email={sentTo} />;
+
+  if (step === "password") {
+    const termsError = form.errorFor("terms");
+    return (
+      <Screen id="signup-password" title="Create your account" lead={<Who email={email.trim()} onChange={() => { form.setProblem(null); setStep("email"); }} />}>
+        <form className="pa-form" onSubmit={submit} noValidate>
+          <input type="email" name="email" autoComplete="username" value={email.trim()} readOnly hidden />
+          <PasswordField label="Choose a password" auto="new-password" value={password} onChange={setPassword} rules autoFocus error={form.errorFor("password")} />
+          <label className="pa-check">
+            <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required
+              aria-invalid={termsError ? true : undefined} aria-describedby={termsError ? "pa-terms-err" : undefined} />
+            <span>I agree to the <a href="/legal/terms/" target="_blank" rel="noopener">terms</a> and have read the <a href="/legal/privacy/" target="_blank" rel="noopener">privacy policy</a> and the <a href="/legal/risk/" target="_blank" rel="noopener">risk notice</a>. Each opens in a new tab.</span>
+          </label>
+          {termsError && <span className="pa-error" id="pa-terms-err" role="alert">{termsError}</span>}
+          <Notice>{form.general}</Notice>
+          <Submit busy={form.busy}>Create account</Submit>
+        </form>
+      </Screen>
+    );
+  }
 
   return (
-    <AuthCard title="Create your account" lead="Free. Research and education only, not investment advice.">
-      <ProviderButtons onError={setError} next={next} />
-      <Notice>{error}</Notice>
-      <form className="auth-form" onSubmit={submit} noValidate>
-        <Field label="Email" type="email" auto="email" value={email} onChange={setEmail} autoFocus />
-        <PasswordField label="Password" auto="new-password" value={password} onChange={setPassword} rules />
-        <label className="auth-check">
-          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required />
-          <span>I agree to the <a href="/legal/terms/" target="_blank" rel="noopener">terms</a> and have read the <a href="/legal/privacy/" target="_blank" rel="noopener">privacy policy</a> and the <a href="/legal/risk/" target="_blank" rel="noopener">risk notice</a>. (Each opens in a new tab.)</span>
-        </label>
-        <Button type="submit" variant="primary" size="lg" full loading={busy}>Create account</Button>
+    <Screen id="signup-email" title="Create your account" lead="Free. One account for Parity, Sim World and Parity Trade.">
+      <ProviderButtons onError={(m) => form.setProblem(m ? { message: m } : null)} />
+      <form className="pa-form" onSubmit={toPassword} noValidate>
+        <Field label="Email" type="email" auto="username" value={email} onChange={setEmail} autoFocus error={form.errorFor("email")} />
+        <Notice>{form.general}</Notice>
+        <Submit busy={form.busy}>Continue</Submit>
       </form>
-      <div className="auth-links">
-        <span className="muted">Already have an account?</span>
-        <a href={withNext(ROUTES.login, next)}>Log in</a>
-      </div>
-    </AuthCard>
+      <p className="pa-switch">Already have an account? <SwitchLink to="login">Log in</SwitchLink></p>
+    </Screen>
   );
 }
 
-/** The verification-required screen: confirm by link, or type the code here. */
-export function CheckEmail({ email, next }: { email: string; next: string }) {
+/** The verification-required step: confirm by link, or type the code here. */
+export function CheckEmail({ email }: { email: string }) {
+  const { next, show } = useFlow();
   const [code, setCode] = useState("");
   const [resent, setResent] = useState(false);
-  const { busy, error, run } = useSubmit();
+  const form = useSubmit();
   const resend = useSubmit();
 
-  const verify = run(async () => {
+  const verify = form.run(async () => {
     const bad = codeProblem(code);
-    if (bad) return bad;
+    if (bad) return { field: "code", message: bad };
     const { error } = await requireClient().auth.verifyOtp({ email, token: code, type: "signup" });
-    if (error) return explain(error);
-    if ((await continueTo(next, go)) === "second-step") go(secondStepUrl(next));
+    if (error) return { field: "code", message: explain(error) ?? "Something went wrong. Try again." };
+    if ((await continueTo(next, go)) === "second-step") { show("login", { mfa: true }); }
+    return LEAVING;
   });
 
   const again = resend.run(async () => {
@@ -81,18 +102,18 @@ export function CheckEmail({ email, next }: { email: string; next: string }) {
   });
 
   return (
-    <AuthCard title="Check your email" lead={<>We sent a link and a 6-digit code to <strong>{email}</strong>. Confirm your address to finish. You cannot log in until you do.</>}>
-      <Notice>{error ?? resend.error}</Notice>
-      <Notice tone="good">{resent ? "Sent again. The newest email is the one that works." : null}</Notice>
-      <form className="auth-form" onSubmit={verify} noValidate>
-        <Field label="Code from the email" auto="one-time-code" value={code} onChange={setCode} autoFocus
+    <Screen id="signup-check" title="Check your email" lead={<>We sent a link and a 6-digit code to <strong>{email}</strong>. Confirm your address to finish. You cannot log in until you do.</>}>
+      <form className="pa-form" onSubmit={verify} noValidate>
+        <Field label="Code from the email" auto="one-time-code" value={code} onChange={setCode} autoFocus error={form.errorFor("code")}
           hint="Not there after a minute? Check spam, or send it again." />
-        <Button type="submit" variant="primary" size="lg" full loading={busy}>Confirm email</Button>
+        <Notice>{form.general ?? resend.general}</Notice>
+        <Notice tone="good">{resent ? "Sent again. The newest email is the one that works." : null}</Notice>
+        <Submit busy={form.busy}>Confirm email</Submit>
       </form>
-      <div className="auth-links">
-        <button type="button" onClick={() => void again()} disabled={resend.busy}>{resend.busy ? "Sending" : "Send the email again"}</button>
-        <a href={withNext(ROUTES.login, next)}>Back to log in</a>
+      <div className="pa-alt">
+        <TextButton onClick={() => void again()} disabled={resend.busy}>{resend.busy ? "Sending" : "Send the email again"}</TextButton>
+        <SwitchLink className="pa-text" to="login">Back to log in</SwitchLink>
       </div>
-    </AuthCard>
+    </Screen>
   );
 }

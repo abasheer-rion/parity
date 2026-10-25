@@ -1,6 +1,8 @@
-// The sign-in flows end to end in the browser code, against a fake Supabase client:
-// sign up, verify (code and link), log in with and without an authenticator app, forgot
-// and reset password, resend, sign out, and the guard for /app/, /research/ and /sim/.
+// The sign-in flows end to end in the browser code, against a fake Supabase client: the
+// sign-in panel (DEC-0044) for sign up, verify (code and link), log in (email first, then
+// the password or a code, with and without an authenticator app), forgot and reset
+// password, resend, switching forms in place, sign out, and the guard for /app/,
+// /research/ and /sim/.
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { authError, fakeSession, makeSupabase } from "./mockSupabase";
@@ -13,10 +15,8 @@ vi.mock("../src/auth/client", async () => {
 });
 vi.mock("../src/auth/nav", () => ({ go: (p: string) => h.go(p), goPush: (p: string) => h.goPush(p) }));
 
-const { SignIn } = await import("../src/auth/pages/SignIn");
-const { SignUp } = await import("../src/auth/pages/SignUp");
-const { Reset } = await import("../src/auth/pages/Reset");
-const { Verify } = await import("../src/auth/pages/Verify");
+const { AuthFlow } = await import("../src/auth/AuthFlow");
+const { carryFromQuery, viewFromPath } = await import("../src/auth/views");
 const { AppGuard } = await import("../src/auth/AuthGate");
 const { signOut } = await import("../src/auth/session");
 
@@ -33,23 +33,45 @@ beforeEach(() => {
 });
 afterEach(() => cleanup());
 
+/** Renders the sign-in panel the way /login/, /signup/, /reset/ and /verify/ do. */
+const page = () => render(<AuthFlow host="page" initial={viewFromPath(window.location.pathname)} initialCarry={carryFromQuery(window.location.search)} />);
+const path = () => window.location.pathname + window.location.search;
+/** Some announced message (role="alert") says this. */
+const alertSays = (text: string) => waitFor(() => expect(screen.getAllByRole("alert").map((a) => a.textContent).join(" ")).toContain(text));
+
+/** Log in up to the password step. */
+async function toPassword(email = "amanda@example.com") {
+  await screen.findByRole("heading", { name: "Log in to Parity" });
+  type("Email", email);
+  click("Continue");
+  await screen.findByLabelText("Password");
+}
+
 describe("log in", () => {
-  it("goes to a safe next after the password is right", async () => {
+  it("asks for the email first, then the password, then goes to a safe next", async () => {
     at("/login/?next=%2Fresearch%2F%23%2Fdocs");
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
+    expect(screen.getByText("amanda@example.com")).toBeTruthy();
     type("Password", "correct horse 42");
     click("Log in");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/research/#/docs"));
     expect(h.supabase.auth.signInWithPassword).toHaveBeenCalledWith({ email: "amanda@example.com", password: "correct horse 42" });
   });
 
+  it("keeps the in-app address the sign-in check carried over (DEC-0038)", async () => {
+    at("/login/?next=%2Fapp%2F#/strategy/fx_carry");
+    page();
+    await toPassword();
+    type("Password", "correct horse 42");
+    click("Log in");
+    await waitFor(() => expect(h.go).toHaveBeenCalledWith("/app/#/strategy/fx_carry"));
+  });
+
   it("ignores a next that points at another site", async () => {
     at("/login/?next=https%3A%2F%2Fevil.com%2F");
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
     type("Password", "correct horse 42");
     click("Log in");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/app/"));
@@ -57,55 +79,63 @@ describe("log in", () => {
 
   it("returns to Sim World on its own host", async () => {
     at("/login/?next=https%3A%2F%2Fsim.endyland.com%2Fsim%2F");
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
     type("Password", "correct horse 42");
     click("Log in");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.endyland.com/sim/"));
   });
 
-  it("shows a plain message for a wrong password and does not navigate", async () => {
+  it("shows a plain message under the password for a wrong password and does not navigate", async () => {
     at("/login/");
     h.supabase.auth.signInWithPassword.mockResolvedValueOnce({ data: { session: null, user: null }, error: authError("invalid_credentials") } as never);
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
     type("Password", "wrong password 1");
     click("Log in");
-    expect(await screen.findByRole("alert")).toHaveTextContent("That email and password do not match.");
+    await alertSays("That email and password do not match.");
+    expect(screen.getByLabelText("Password")).toHaveAttribute("aria-invalid", "true");
     expect(h.go).not.toHaveBeenCalled();
   });
 
-  it("checks the email before calling Supabase", async () => {
+  it("checks the email before going on, and says what is wrong under it", async () => {
     at("/login/");
-    render(<SignIn />);
+    page();
     await screen.findByRole("heading", { name: "Log in to Parity" });
     type("Email", "amanda");
-    type("Password", "x");
-    click("Log in");
-    expect(await screen.findByRole("alert")).toHaveTextContent("Enter a full email address");
+    click("Continue");
+    await alertSays("Enter a full email address");
+    expect(screen.getByLabelText("Email")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.queryByLabelText("Password")).toBeNull();
     expect(h.supabase.auth.signInWithPassword).not.toHaveBeenCalled();
   });
 
-  it("sends unconfirmed accounts to the check-your-email screen, keeping next", async () => {
+  it("goes back to change the email, keeping what was typed", async () => {
+    at("/login/");
+    page();
+    await toPassword();
+    click(/Change email/);
+    expect((await screen.findByLabelText("Email") as HTMLInputElement).value).toBe("amanda@example.com");
+  });
+
+  it("sends unconfirmed accounts to check-your-email in place, keeping next", async () => {
     at("/login/?next=%2Fsim%2F");
     h.supabase.auth.signInWithPassword.mockResolvedValueOnce({ data: { session: null, user: null }, error: authError("email_not_confirmed") } as never);
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
     type("Password", "correct horse 42");
     click("Log in");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("/signup/?check=amanda%40example.com&next=%2Fsim%2F"));
+    await screen.findByRole("heading", { name: "Check your email" });
+    expect(path()).toBe("/signup/?check=amanda%40example.com&next=%2Fsim%2F");
+    expect(h.go).not.toHaveBeenCalled();
   });
 
   it("asks for the authenticator code when the account has one, then continues", async () => {
     at("/login/?next=%2Fresearch%2F");
     h.supabase.auth.mfa.getAuthenticatorAssuranceLevel.mockResolvedValue({ data: { currentLevel: "aal1", nextLevel: "aal2" }, error: null } as never);
     h.supabase.auth.mfa.listFactors.mockResolvedValue({ data: { all: [], totp: [{ id: "f1", status: "verified" }] }, error: null } as never);
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    type("Email", "amanda@example.com");
+    page();
+    await toPassword();
     type("Password", "correct horse 42");
     click("Log in");
     await screen.findByRole("heading", { name: "Two-step sign-in" });
@@ -120,20 +150,18 @@ describe("log in", () => {
     at("/login/?mfa=1");
     h.supabase.auth.mfa.listFactors.mockResolvedValue({ data: { all: [], totp: [{ id: "f1", status: "verified" }] }, error: null } as never);
     h.supabase.auth.mfa.challengeAndVerify.mockResolvedValueOnce({ data: null, error: authError("mfa_verification_failed") } as never);
-    render(<SignIn />);
+    page();
     type("Authenticator code", "000000");
     click("Continue");
-    expect(await screen.findByRole("alert")).toHaveTextContent("That code is wrong");
+    await alertSays("That code is wrong");
     expect(h.go).not.toHaveBeenCalled();
   });
 
-  it("logs in with an emailed code", async () => {
+  it("logs in with an emailed code instead of the password", async () => {
     at("/login/");
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
-    fireEvent.click(screen.getByRole("radio", { name: "Email code" }));
-    type("Email", "amanda@example.com");
-    click("Email me a code");
+    page();
+    await toPassword();
+    click("Email me a code instead");
     await screen.findByLabelText("Code");
     expect(h.supabase.auth.signInWithOtp).toHaveBeenCalledWith({ email: "amanda@example.com", options: { shouldCreateUser: false, emailRedirectTo: "https://parity.endyland.com/app/" } });
     type("Code", "654321");
@@ -145,57 +173,92 @@ describe("log in", () => {
   it("carries on at once when already signed in", async () => {
     at("/login/?next=%2Fsim%2F");
     h.supabase.setSession(fakeSession());
-    render(<SignIn />);
+    page();
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/sim/"));
   });
 
   it("keeps next on the links to sign up and reset", async () => {
     at("/login/?next=%2Fsim%2F");
-    render(<SignIn />);
+    page();
     await screen.findByRole("heading", { name: "Log in to Parity" });
     expect(screen.getByRole("link", { name: "Create an account" })).toHaveAttribute("href", "/signup/?next=%2Fsim%2F");
+    await toPassword();
     expect(screen.getByRole("link", { name: "Forgot your password?" })).toHaveAttribute("href", "/reset/?next=%2Fsim%2F");
+  });
+
+  it("switches to sign up in place, keeping the email and next in the address", async () => {
+    at("/login/?next=%2Fsim%2F");
+    page();
+    await screen.findByRole("heading", { name: "Log in to Parity" });
+    type("Email", "amanda@example.com");
+    fireEvent.click(screen.getByRole("link", { name: "Create an account" }));
+    await screen.findByRole("heading", { name: "Create your account" });
+    expect((screen.getByLabelText("Email") as HTMLInputElement).value).toBe("amanda@example.com");
+    expect(path()).toBe("/signup/?next=%2Fsim%2F");
+    expect(document.title).toBe("Sign up · Parity");
+    fireEvent.click(screen.getByRole("link", { name: "Log in" }));
+    await screen.findByRole("heading", { name: "Log in to Parity" });
+    expect(path()).toBe("/login/?next=%2Fsim%2F");
   });
 
   it("shows and hides the password", async () => {
     at("/login/");
-    render(<SignIn />);
-    await screen.findByRole("heading", { name: "Log in to Parity" });
+    page();
+    await toPassword();
     const input = screen.getByLabelText("Password") as HTMLInputElement;
     expect(input.type).toBe("password");
+    expect(input).toHaveAttribute("autocomplete", "current-password");
     click("Show password");
     expect(input.type).toBe("text");
     expect(screen.getByRole("button", { name: "Hide password" })).toHaveAttribute("aria-pressed", "true");
   });
+
+  it("gives password managers the email and the password", async () => {
+    at("/login/");
+    page();
+    await screen.findByRole("heading", { name: "Log in to Parity" });
+    expect(screen.getByLabelText("Email")).toHaveAttribute("autocomplete", "username");
+    await toPassword();
+    expect(document.querySelector('input[autocomplete="username"]')).toHaveValue("amanda@example.com");
+  });
 });
+
+/** Sign up up to the password step. */
+async function toNewPassword(email = "amanda@example.com") {
+  await screen.findByRole("heading", { name: "Create your account" });
+  type("Email", email);
+  click("Continue");
+  await screen.findByLabelText("Choose a password");
+}
 
 describe("sign up and verify", () => {
   it("refuses a weak password without calling Supabase", async () => {
     at("/signup/");
-    render(<SignUp />);
-    type("Email", "amanda@example.com");
-    type("Password", "short");
+    page();
+    await toNewPassword();
+    type("Choose a password", "short");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
-    expect(await screen.findByRole("alert")).toHaveTextContent("Use at least 10 characters.");
+    await alertSays("Use at least 10 characters.");
     expect(h.supabase.auth.signUp).not.toHaveBeenCalled();
   });
 
   it("asks for agreement to the terms", async () => {
     at("/signup/");
-    render(<SignUp />);
-    type("Email", "amanda@example.com");
-    type("Password", "correct horse 42");
+    page();
+    await toNewPassword();
+    type("Choose a password", "correct horse 42");
     click("Create account");
-    expect(await screen.findByRole("alert")).toHaveTextContent("agree to the terms");
+    await alertSays("agree to the terms");
+    expect(screen.getByRole("checkbox")).toHaveAttribute("aria-invalid", "true");
     expect(h.supabase.auth.signUp).not.toHaveBeenCalled();
   });
 
   it("ends on check-your-email, with the email link coming back to where you started", async () => {
     at("/signup/?next=%2Fresearch%2F");
-    render(<SignUp />);
-    type("Email", "amanda@example.com");
-    type("Password", "correct horse 42");
+    page();
+    await toNewPassword();
+    type("Choose a password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await screen.findByRole("heading", { name: "Check your email" });
@@ -206,9 +269,20 @@ describe("sign up and verify", () => {
     });
   });
 
+  it("explains a sign-up error from Supabase", async () => {
+    at("/signup/");
+    h.supabase.auth.signUp.mockResolvedValueOnce({ data: { session: null, user: null }, error: authError("over_email_send_rate_limit") } as never);
+    page();
+    await toNewPassword();
+    type("Choose a password", "correct horse 42");
+    fireEvent.click(screen.getByRole("checkbox"));
+    click("Create account");
+    await alertSays("Too many emails were sent.");
+  });
+
   it("confirms with the 6-digit code, then lands in the app", async () => {
     at("/signup/?check=amanda%40example.com&next=%2Fresearch%2F");
-    render(<SignUp />);
+    page();
     type("Code from the email", "123456");
     click("Confirm email");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/research/"));
@@ -217,7 +291,7 @@ describe("sign up and verify", () => {
 
   it("resends the confirmation email", async () => {
     at("/signup/?check=amanda%40example.com");
-    render(<SignUp />);
+    page();
     click("Send the email again");
     expect(await screen.findByText(/Sent again/)).toBeTruthy();
     expect(h.supabase.auth.resend).toHaveBeenCalledWith({ type: "signup", email: "amanda@example.com", options: { emailRedirectTo: "https://parity.endyland.com/app/" } });
@@ -226,9 +300,9 @@ describe("sign up and verify", () => {
   it("goes straight in when confirmation is off", async () => {
     at("/signup/?next=%2Fsim%2F");
     h.supabase.auth.signUp.mockResolvedValueOnce({ data: { session: fakeSession(), user: { id: "u1" } }, error: null } as never);
-    render(<SignUp />);
-    type("Email", "amanda@example.com");
-    type("Password", "correct horse 42");
+    page();
+    await toNewPassword();
+    type("Choose a password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/sim/"));
@@ -236,7 +310,7 @@ describe("sign up and verify", () => {
 
   it("verifies an email link after one click and follows its next", async () => {
     at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fsim.endyland.com%2Fsim%2F");
-    render(<Verify />);
+    page();
     expect(h.supabase.auth.verifyOtp).not.toHaveBeenCalled();
     click("Confirm and continue");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.endyland.com/sim/"));
@@ -245,7 +319,7 @@ describe("sign up and verify", () => {
 
   it("falls back to the app when an email link's next is the bare site address", async () => {
     at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fparity.endyland.com");
-    render(<Verify />);
+    page();
     click("Confirm and continue");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/app/"));
   });
@@ -253,15 +327,15 @@ describe("sign up and verify", () => {
   it("explains an expired link", async () => {
     at("/verify/?type=email&token_hash=abc");
     h.supabase.auth.verifyOtp.mockResolvedValueOnce({ data: { session: null, user: null }, error: authError("otp_expired") } as never);
-    render(<Verify />);
+    page();
     click("Confirm and continue");
-    expect(await screen.findByRole("alert")).toHaveTextContent("expired");
+    await alertSays("expired");
     expect(h.go).not.toHaveBeenCalled();
   });
 
   it("says when a link is incomplete", () => {
     at("/verify/?type=email");
-    render(<Verify />);
+    page();
     expect(screen.getByRole("heading", { name: "This link is not complete" })).toBeTruthy();
   });
 });
@@ -269,24 +343,39 @@ describe("sign up and verify", () => {
 describe("forgot and reset password", () => {
   it("emails a reset link and code, returning to next", async () => {
     at("/reset/?next=%2Fresearch%2F");
-    render(<Reset session={{ loading: false, session: null }} />);
+    page();
+    await screen.findByLabelText("Email");
     type("Email", "amanda@example.com");
     click("Send reset email");
     await screen.findByLabelText("Code from the email");
     expect(h.supabase.auth.resetPasswordForEmail).toHaveBeenCalledWith("amanda@example.com", { redirectTo: "https://parity.endyland.com/research/" });
   });
 
-  it("opens the reset page from a recovery link, keeping next", async () => {
+  it("carries the email from log in to reset", async () => {
+    at("/login/");
+    page();
+    await toPassword();
+    fireEvent.click(screen.getByRole("link", { name: "Forgot your password?" }));
+    await screen.findByRole("heading", { name: "Reset your password" });
+    expect((await screen.findByLabelText("Email") as HTMLInputElement).value).toBe("amanda@example.com");
+    expect(path()).toBe("/reset/");
+  });
+
+  it("opens the new-password form from a recovery link, keeping next", async () => {
     at("/verify/?type=recovery&token_hash=abc&next=https%3A%2F%2Fparity.endyland.com%2Fresearch%2F");
-    render(<Verify />);
+    h.supabase.auth.verifyOtp.mockImplementationOnce(async () => { h.supabase.setSession(fakeSession()); return { data: { session: null, user: null }, error: null }; });
+    page();
     click("Continue");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("/reset/?next=%2Fresearch%2F"));
+    await screen.findByRole("heading", { name: "Choose a new password" });
+    expect(path()).toBe("/reset/?next=%2Fresearch%2F");
+    expect(h.go).not.toHaveBeenCalled();
   });
 
   it("saves a new password and continues", async () => {
     at("/reset/?next=%2Fresearch%2F");
-    render(<Reset session={{ loading: false, session: fakeSession() as never }} />);
-    await screen.findByRole("heading", { name: "Choose a new password" });
+    h.supabase.setSession(fakeSession());
+    page();
+    await screen.findByLabelText("New password");
     type("New password", "new password 42");
     type("Type it again", "new password 42");
     click("Save password");
@@ -294,24 +383,33 @@ describe("forgot and reset password", () => {
     expect(h.supabase.auth.updateUser).toHaveBeenCalledWith({ password: "new password 42" });
   });
 
+  it("names an invite's first password", async () => {
+    at("/reset/?from=invite");
+    h.supabase.setSession(fakeSession());
+    page();
+    expect(await screen.findByRole("heading", { name: "Choose a password" })).toBeTruthy();
+  });
+
   it("catches two passwords that differ", async () => {
     at("/reset/");
-    render(<Reset session={{ loading: false, session: fakeSession() as never }} />);
-    await screen.findByRole("heading", { name: "Choose a new password" });
+    h.supabase.setSession(fakeSession());
+    page();
+    await screen.findByLabelText("New password");
     type("New password", "new password 42");
     type("Type it again", "new password 43");
     click("Save password");
-    expect(await screen.findByRole("alert")).toHaveTextContent("do not match");
+    await alertSays("do not match");
     expect(h.supabase.auth.updateUser).not.toHaveBeenCalled();
   });
 
   it("asks for an emailed code when Supabase wants proof", async () => {
     at("/reset/");
+    h.supabase.setSession(fakeSession());
     h.supabase.auth.updateUser
       .mockResolvedValueOnce({ data: { user: null }, error: authError("reauthentication_needed") } as never)
       .mockResolvedValueOnce({ data: { user: {} }, error: null } as never);
-    render(<Reset session={{ loading: false, session: fakeSession() as never }} />);
-    await screen.findByRole("heading", { name: "Choose a new password" });
+    page();
+    await screen.findByLabelText("New password");
     type("New password", "new password 42");
     type("Type it again", "new password 42");
     click("Save password");
@@ -325,8 +423,9 @@ describe("forgot and reset password", () => {
 
   it("asks for the authenticator code first when the account has one", async () => {
     at("/reset/");
+    h.supabase.setSession(fakeSession());
     h.supabase.auth.mfa.getAuthenticatorAssuranceLevel.mockResolvedValue({ data: { currentLevel: "aal1", nextLevel: "aal2" }, error: null } as never);
-    render(<Reset session={{ loading: false, session: fakeSession() as never }} />);
+    page();
     expect(await screen.findByRole("heading", { name: "Confirm it is you" })).toBeTruthy();
   });
 });

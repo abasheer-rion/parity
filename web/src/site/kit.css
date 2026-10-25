@@ -1,0 +1,87 @@
+/* Shared by the front page and the sign-in pages (DEC-0039, DEC-0044): the colours, the
+   backdrop, glass, the corner logo and the buttons. The build inlines this file wherever a
+   page has <!--site-kit--> (web/plugins/site.ts), so it paints with the first frame and the
+   sign-in panel uses the same buttons as the front page's hero. */
+@view-transition { navigation: auto; }
+:root {
+  color-scheme: dark;
+  --bg: #050608; --bg-2: #08090d; --panel: #0b0c11; --panel-2: #101118; --raise: #151720;
+  --line: rgb(255 255 255 / .07); --line-2: rgb(255 255 255 / .12); --line-3: rgb(255 255 255 / .2);
+  --text: #f4f5f8; --muted: #a4a8b6; --faint: #8b8f9d;
+  --accent: #e0303f; --orb: 178 24 38;
+  --good: #36d07c; --bad: #ff6b62; --warn: #e8b04a;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --wrap: 1200px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+html { overflow-x: clip; }
+body { font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased; }
+
+/* The backdrop: slow, blurred red orbs deep behind dark frosted glass (DEC-0039).
+   Fixed, so it never moves the layout; still for reduced motion. */
+.orbs { position: fixed; inset: 0; z-index: -10; pointer-events: none; overflow: hidden; background: var(--bg); }
+.orbs i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; will-change: transform; }
+.orbs i:nth-child(1) { width: 62vmax; height: 62vmax; left: 52%; top: -22vmax; background: radial-gradient(closest-side, rgb(var(--orb) / .55), rgb(var(--orb) / 0)); animation: orb1 46s ease-in-out infinite alternate; }
+.orbs i:nth-child(2) { width: 54vmax; height: 54vmax; left: -20vmax; top: 48%; background: radial-gradient(closest-side, rgb(120 14 28 / .5), rgb(120 14 28 / 0)); animation: orb2 58s ease-in-out infinite alternate; }
+.orbs i:nth-child(3) { width: 40vmax; height: 40vmax; left: 60%; top: 78%; background: radial-gradient(closest-side, rgb(160 30 40 / .35), rgb(160 30 40 / 0)); animation: orb3 52s ease-in-out infinite alternate; }
+.orbs::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: .035; }
+@keyframes orb1 { to { transform: translate3d(-14vmax, 10vmax, 0) scale(1.12); } }
+@keyframes orb2 { to { transform: translate3d(16vmax, -12vmax, 0) scale(.92); } }
+@keyframes orb3 { to { transform: translate3d(-18vmax, -16vmax, 0) scale(1.18); } }
+/* The sign-in view (DEC-0044) has no glow: the orbs fade out, the dark backdrop and its
+   grain stay where they are. The sign-in pages' backdrop has no orbs at all. */
+.orbs i { transition: opacity .5s var(--ease); }
+html.auth-open .orbs i { opacity: 0; }
+html, body { background: transparent; }
+html { background: var(--bg); }
+.glass { background: rgb(14 15 21 / .52); border: 1px solid rgb(255 255 255 / .09); backdrop-filter: blur(22px) saturate(1.25); -webkit-backdrop-filter: blur(22px) saturate(1.25); }
+a { color: inherit; }
+img, svg { max-width: 100%; }
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 8px; }
+main:focus { outline: none; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Lenis smooth scroll (its stylesheet, inlined) */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* Moving between the front page and another page fades one out and the next in (DEC-0039).
+   Browsers with cross-document view transitions do it themselves; elsewhere the page adds
+   .leaving to the body first. */
+::view-transition-old(root) { animation: vt-out .26s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in .42s var(--ease) .06s both; }
+@keyframes vt-out { to { opacity: 0; transform: scale(.985); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+body { transition: opacity .24s var(--ease); }
+body.leaving { opacity: 0; }
+
+.corner { position: fixed; z-index: 40; top: 16px; display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 12px; transition: background-color .3s, border-color .3s, transform .35s var(--ease), opacity .35s; border: 1px solid transparent; }
+.corner.solid { background: rgb(14 15 21 / .55); border-color: var(--line); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); }
+.corner-logo { left: 16px; view-transition-name: parity-logo; }
+.corner-logo a { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 8px; border-radius: 9px; text-decoration: none; }
+.corner-logo img { display: block; }
+.corner.away { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.corner:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 10px; font-size: 15px; font-weight: 550; text-decoration: none; border: 1px solid var(--line-2); color: var(--text); white-space: nowrap; transition: background-color .2s, border-color .2s, transform .2s var(--ease), color .2s; }
+.btn:hover { border-color: var(--line-3); background: rgb(255 255 255 / .04); }
+.btn:active { transform: scale(.985); }
+.btn.primary { background: var(--text); color: #050608; border-color: var(--text); }
+.btn.primary:hover { background: #fff; color: #000; }
+.btn .arr { transition: transform .2s var(--ease); }
+.btn:hover .arr { transform: translateX(3px); }
+
+@media (max-width: 760px) {
+  .btn { height: 44px; padding: 0 16px; font-size: 14.5px; }
+  .corner-logo .letters { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbs i { animation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

@@ -17,6 +17,8 @@ const BASE = process.env.CLS_BASE ?? "http://127.0.0.1:5199";
 const LIMIT = Number(process.env.CLS_LIMIT ?? 0.02);
 const SLOW = process.env.CLS_SLOW === "1";
 const DEFAULT_PAGES = [
+  // Front page and the sign-in panel (DEC-0044), on the front page and on its own pages
+  "/", "/#login", "/#signup", "/login/", "/signup/", "/reset/",
   // Product
   "/app/#/", "/app/#/strategies", "/app/#/strategy/factor_cma", "/app/#/watchlist",
   "/app/#/news", "/app/#/news/history", "/app/#/news/archive", "/app/#/news/impact",

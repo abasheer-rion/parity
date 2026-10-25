@@ -14,7 +14,9 @@
     "cls": "node scripts/cls.mjs",
     "verify:network": "node scripts/verify-network.mjs",
     "content": "node --experimental-strip-types scripts/content/render.ts",
-    "deeplinks": "node scripts/deeplinks.mjs"
+    "deeplinks": "node scripts/deeplinks.mjs",
+    "auth:panel": "node scripts/auth-panel.mjs",
+    "auth:shots": "node scripts/auth-shots.mjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
