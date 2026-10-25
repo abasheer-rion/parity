@@ -1,14 +1,16 @@
 // "Continue with Google / GitHub / passkey" buttons. Only configured options show
 // (config.ts). Nothing renders when none are on.
-import { Button } from "../../ui";
 import { desktop, DESKTOP_SCHEME } from "../../desktop/bridge";
 import { explain, supabase } from "../client";
 import { ENABLED_PROVIDERS, PASSKEYS_ENABLED, ROUTES, type ProviderId } from "../config";
-import { go, useSubmit } from "../form";
+import { Submit, useSubmit } from "../fields";
+import { useFlow } from "../flow";
+import { go } from "../nav";
 import { withNext } from "../redirect";
 import { continueTo } from "../session";
 
-export function ProviderButtons({ onError, next }: { onError: (msg: string | null) => void; next: string }) {
+export function ProviderButtons({ onError }: { onError: (msg: string | null) => void }) {
+  const { next } = useFlow();
   const { busy, run } = useSubmit();
   if (!ENABLED_PROVIDERS.length && !PASSKEYS_ENABLED) return null;
 
@@ -42,13 +44,13 @@ export function ProviderButtons({ onError, next }: { onError: (msg: string | nul
 
   return (
     <>
-      <div className="auth-providers">
+      <div className="pa-providers">
         {ENABLED_PROVIDERS.map((p) => (
-          <Button key={p.id} size="lg" full disabled={busy} onClick={() => void oauth(p.id)()}>Continue with {p.label}</Button>
+          <Submit key={p.id} type="button" primary={false} busy={busy} onClick={() => void oauth(p.id)()}>Continue with {p.label}</Submit>
         ))}
-        {PASSKEYS_ENABLED && <Button size="lg" full disabled={busy} icon="user" onClick={() => void passkey()}>Use a passkey</Button>}
+        {PASSKEYS_ENABLED && <Submit type="button" primary={false} busy={busy} onClick={() => void passkey()}>Use a passkey</Submit>}
       </div>
-      <div className="auth-or" aria-hidden="true"><span>or</span></div>
+      <div className="pa-or" aria-hidden="true"><span>or</span></div>
     </>
   );
 }

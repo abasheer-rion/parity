@@ -1,36 +1,10 @@
-// Building blocks shared by the sign-in pages (restyled to match the front page in DEC-0039):
-// the logo in the corner, the centred card, labelled fields with the
+// Building blocks for the signed-in Account and Security settings: labelled fields with the
 // right autocomplete hints for password managers, a password field with show and hide,
-// messages that screen readers announce, and a small async-submit helper.
+// messages that screen readers announce, and a small async-submit helper. The public
+// sign-in panel has its own, in the front page's style (fields.tsx, DEC-0042).
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { SkipLink } from "../components/SkipLink";
-import { LegalLinks } from "../legal/LegalLinks";
 import { emailProblem, passwordRules } from "./rules";
 import "./auth.css";
-
-export function AuthCard({ title, lead, children, foot }: { title: string; lead?: ReactNode; children: ReactNode; foot?: ReactNode }) {
-  return (
-    <div className="auth-page">
-      <div className="auth-orbs" aria-hidden="true"><i /><i /><i /></div>
-      <SkipLink />
-      {/* No top bar: the logo sits in the corner, as on the front page, and goes home. */}
-      <a className="auth-corner" href="/" aria-label="Parity home">
-        <img src="/brand/2026-10-21-starburst/parity-mark-white.svg" width={22} height={22} alt="" />
-        <img className="auth-letters" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width={70} height={15} alt="" />
-      </a>
-      <main className="auth-card" id="main" aria-labelledby="auth-title">
-        <h1 className="auth-title" id="auth-title">{title}</h1>
-        {lead && <p className="auth-lead">{lead}</p>}
-        {children}
-      </main>
-      <footer className="auth-foot">
-        {foot && <div>{foot}</div>}
-        <LegalLinks />
-        <p className="auth-disclaimer">Research and education only. Not investment advice.</p>
-      </footer>
-    </div>
-  );
-}
 
 type Auto = "email" | "username webauthn" | "current-password" | "new-password" | "one-time-code" | "off";
 
@@ -177,10 +151,3 @@ export function friendlyThrown(err: unknown): string {
   }
   return err instanceof Error && err.message ? err.message : "Something went wrong. Try again.";
 }
-
-/** The page's query string, e.g. /verify/?type=email&token_hash=... */
-export function params(): URLSearchParams {
-  return new URLSearchParams(window.location.search);
-}
-
-export { go } from "./nav";

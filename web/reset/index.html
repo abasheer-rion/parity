@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050608" />
-    <!-- Dark from the first frame, so the fade in from the front page never flashes (DEC-0039). -->
-    <style>html, body { background: #050608; color-scheme: dark; }</style>
+    <!-- The front page's colours, backdrop, logo and buttons, inline, so the page is dark from
+         the first frame and matches the front page exactly (src/site/kit.css, DEC-0042). -->
+    <!--site-kit-->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=optional" rel="stylesheet" />
     <title>Reset password · Parity</title>
   </head>
   <body>
+    <div class="orbs" aria-hidden="true"></div>
     <div id="root"></div>
     <script type="module" src="/src/auth/main.tsx"></script>
   </body>

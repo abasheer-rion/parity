@@ -6,8 +6,8 @@
 //   - three small framed demos that loop while on screen
 //   - counters and bars from /stats.json, sections that fade up, markets that light up
 //   - floating corner controls that step aside while you scroll down
-//   - a fade out when leaving for the sign-in pages, where the browser has no view
-//     transitions of its own
+//   - the sign-in panel (DEC-0042): Log in and Sign up fade the page out and the panel in,
+//     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
 import Lenis from "lenis";
 import { botTrades, TRADES } from "./botPath";
 import { startPwa } from "../pwa/install";
@@ -21,7 +21,7 @@ const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const fmt = (n: number) => Math.round(n).toLocaleString("en-US");
 const money = (n: number) => `$${fmt(n)}`;
 
-if (!reduce) new Lenis({ autoRaf: true, lerp: 0.1, smoothWheel: true });
+const lenis = reduce ? null : new Lenis({ autoRaf: true, lerp: 0.1, smoothWheel: true });
 if (!reduce) root.classList.add("motion");
 
 // The corner controls: glass once the page scrolls, out of the way while scrolling down,
@@ -39,21 +39,61 @@ const onCorner = () => {
 window.addEventListener("scroll", onCorner, { passive: true });
 onCorner();
 
-// Leaving for the sign-in pages fades the page out. Browsers with cross-document view
-// transitions do this themselves from the CSS (@view-transition).
-const hasVT = "CSSViewTransitionRule" in window;
-if (!hasVT && !reduce) {
-  for (const a of $$<HTMLAnchorElement>("a[data-fade]")) {
-    a.addEventListener("click", (e) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-      e.preventDefault();
-      document.body.classList.add("leaving");
-      window.setTimeout(() => { window.location.href = a.href; }, 220);
-    });
+// The sign-in panel (DEC-0042). Clicking Log in or Sign up adds #login or #signup to the
+// address, fades the page out (CSS: html.auth-open) and loads the panel (src/auth/front.tsx),
+// which fades in over the same backdrop. Back, Escape and the logo close it again. The
+// links keep their /login/ and /signup/ addresses, so they still work with no script, in a
+// new tab, or if the panel cannot load.
+type AuthView = "login" | "signup" | "reset";
+const AUTH_VIEWS: readonly string[] = ["login", "signup", "reset"];
+const authHash = (): AuthView | null => {
+  const v = window.location.hash.slice(1);
+  return AUTH_VIEWS.includes(v) ? (v as AuthView) : null;
+};
+let authApi: Promise<import("../auth/front").FrontAuth> | null = null;
+let opener: HTMLElement | null = null;
+let pushed = false;
+const loadAuth = () => (authApi ??= import("../auth/front").then(({ startFrontAuth }) => startFrontAuth(document.getElementById("auth-root")!, {
+  // Closing undoes the history entry the click added, so Back and close agree.
+  onClose: () => {
+    if (pushed) { window.history.back(); return; }
+    window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search);
+    syncAuth();
+  },
+  // Switching between log in, sign up and reset inside the panel replaces the entry.
+  onView: (view) => window.history.replaceState(window.history.state, "", `#${view}`),
+  stopScroll: () => lenis?.stop(),
+  startScroll: () => lenis?.start(),
+})));
+function syncAuth() {
+  const view = authHash();
+  if (view) {
+    root.classList.add("auth-open");
+    loadAuth().then((auth) => auth.open(view, opener)).catch(() => { window.location.href = `/${view}/`; });
+  } else {
+    pushed = false;
+    authApi?.then((auth) => auth.close()).catch(() => undefined);
+    if (!authApi) root.classList.remove("auth-open");
   }
-  // Coming back with the back button shows the page again.
-  window.addEventListener("pageshow", () => document.body.classList.remove("leaving"));
 }
+for (const a of $$<HTMLAnchorElement>("a[data-auth]")) {
+  // Start loading on hover or focus, so the panel is ready by the click.
+  a.addEventListener("pointerenter", () => void loadAuth().catch(() => undefined), { once: true });
+  a.addEventListener("focus", () => void loadAuth().catch(() => undefined), { once: true });
+  a.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    opener = a;
+    if (authHash() !== a.dataset.auth) {
+      window.history.pushState({ parityAuth: true }, "", `#${a.dataset.auth}`);
+      pushed = true;
+    }
+    syncAuth();
+  });
+}
+window.addEventListener("popstate", syncAuth);
+window.addEventListener("hashchange", syncAuth);
+if (authHash()) syncAuth();
 
 // Reveals. Anything already on screen shows at once, so nothing visible blinks.
 const seenOnce = (els: HTMLElement[], cls: string, margin = "0px 0px -10% 0px") => {

@@ -51,6 +51,8 @@ function shader(gl: WebGLRenderingContext, type: number, src: string) {
   return s;
 }
 
+const paused = () => document.documentElement.classList.contains("auth-open");
+
 export function startField(hero: HTMLElement, box: HTMLElement): void {
   const canvas = document.createElement("canvas");
   canvas.className = "field-canvas";
@@ -118,7 +120,7 @@ export function startField(hero: HTMLElement, box: HTMLElement): void {
   const t0 = performance.now() - 9000;
   const frame = (now: number) => {
     raf = 0;
-    if (!visible || document.hidden) return;
+    if (!visible || document.hidden || paused()) return;
     // Drop half the points, once or twice, if frames take too long.
     const dt = now - last; last = now;
     if (frames++ > 20 && frames < 400) { if (dt > 24) slow++; if (slow > 30 && drawn > count / 4) { drawn = Math.floor(drawn / 2); slow = 0; } }
@@ -130,8 +132,10 @@ export function startField(hero: HTMLElement, box: HTMLElement): void {
     if (frames === 2) hero.classList.add("field-live");
     raf = requestAnimationFrame(frame);
   };
-  const run = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  const run = () => { if (!raf && visible && !document.hidden && !paused()) { last = performance.now(); raf = requestAnimationFrame(frame); } };
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(); }).observe(hero);
   document.addEventListener("visibilitychange", run);
+  // The sign-in panel (DEC-0042) covers the hero: rest while it is open.
+  new MutationObserver(run).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
   run();
 }
