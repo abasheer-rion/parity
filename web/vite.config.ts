@@ -156,6 +156,7 @@ function localScenarios(): Plugin {
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
+  "connect/index", "oauth/consent/index", "oauth/openrouter/index",
   "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);

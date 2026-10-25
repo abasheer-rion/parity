@@ -57,6 +57,8 @@ jobs:
           # Which sign-in buttons to show (auth/PROVIDERS.md). Public values, not secrets.
           VITE_AUTH_PROVIDERS: ${{ vars.AUTH_PROVIDERS }}
           VITE_AUTH_PASSKEYS: ${{ vars.AUTH_PASSKEYS }}
+          # The bring-your-own-model assistant panel (DEC-0049). Off unless this is "on".
+          VITE_AI_ASSISTANT: ${{ vars.AI_ASSISTANT }}
           # Search engine verification tokens (DEC-0023). Public values, empty until set.
           GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION }}
           BING_VERIFICATION: ${{ vars.BING_VERIFICATION }}

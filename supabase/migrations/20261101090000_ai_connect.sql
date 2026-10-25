@@ -192,6 +192,9 @@ begin
   if p_qty is null or p_qty <= 0 or p_qty > 1000000000 then
     raise exception 'quantity out of range' using errcode = '22023';
   end if;
+  if (p_type = 'limit' and coalesce(p_limit_price, 0) <= 0) or (p_type = 'stop' and coalesce(p_stop_price, 0) <= 0) then
+    raise exception 'a limit order needs a limit price and a stop order a stop price' using errcode = '22023';
+  end if;
   if (select count(*) from public.paper_orders o where o.user_id = uid and o.status in ('pending', 'held')) >= 200 then
     raise exception 'too many open demo orders' using errcode = '22023';
   end if;

@@ -29,6 +29,7 @@ import { WhatIfView } from "./WhatIfView";
 import { KeyTable } from "./KeyTable";
 import { readSettings, VIEWS, writeSettings, type Settings, type View } from "./state";
 import "./lab.css";
+import { Assistant } from "../assistant/Mount";
 
 export function LabApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <LabShell />; }}</AppGuard>;
@@ -209,6 +210,7 @@ function LabShell() {
         <KeyTable />
       </Dialog>
       <Toaster />
+      <Assistant place="workbench" />
     </div>
   );
 }
