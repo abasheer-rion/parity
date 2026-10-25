@@ -69,6 +69,9 @@ for (const size of SIZES) {
   await page.getByRole("link", { name: "Forgot password?" }).click();
   await page.waitForTimeout(600);
   await shot("06-panel-reset");
+  await page.getByRole("button", { name: "Send reset email" }).click();
+  await page.waitForTimeout(700);
+  await shot("06b-panel-reset-sent");
   await page.keyboard.press("Escape");
   await page.waitForTimeout(800);
   await shot("07-closed");
