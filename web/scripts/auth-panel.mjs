@@ -1,4 +1,4 @@
-// End-to-end check of the sign-in panel (DEC-0042) in a real browser. Every Supabase
+// End-to-end check of the sign-in panel (DEC-0044) in a real browser. Every Supabase
 // request is answered by a stub here: it never signs in and never sends a real password.
 //
 //   npx vite --port 5199 --host 127.0.0.1   (or wrangler pages dev dist, in another terminal)

@@ -1,6 +1,6 @@
 // The public front page (web/index.html) at build time:
 //   <!--site-kit-->         the shared colours, backdrop, logo and buttons (src/site/kit.css),
-//                           inlined here and on the sign-in pages (DEC-0042)
+//                           inlined here and on the sign-in pages (DEC-0044)
 //   <!--field-poster-->     the hero field drawn as a still SVG (src/site/fieldModel.ts). It
 //                           shows before the moving field starts, and instead of it for
 //                           reduced motion, no WebGL or a low-power device.
@@ -99,7 +99,7 @@ export function paritySite(): Plugin {
     transformIndexHtml: {
       order: "pre",
       handler(html, ctx) {
-        // Every page that asks for it gets the shared look inline (src/site/kit.css, DEC-0042).
+        // Every page that asks for it gets the shared look inline (src/site/kit.css, DEC-0044).
         html = html.replace("<!--site-kit-->", () => `<style>${readFileSync(KIT, "utf8").trim()}</style>`);
         if (ctx.path !== "/index.html") return html;
         return html

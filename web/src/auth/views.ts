@@ -1,4 +1,4 @@
-// The sign-in panel's forms and their addresses (DEC-0042). No browser globals at import
+// The sign-in panel's forms and their addresses (DEC-0044). No browser globals at import
 // time, so the tests can run it directly.
 import { ROUTES } from "./config";
 import { withNext } from "./redirect";

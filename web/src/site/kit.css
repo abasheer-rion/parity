@@ -1,4 +1,4 @@
-/* Shared by the front page and the sign-in pages (DEC-0039, DEC-0042): the colours, the
+/* Shared by the front page and the sign-in pages (DEC-0039, DEC-0044): the colours, the
    backdrop, glass, the corner logo and the buttons. The build inlines this file wherever a
    page has <!--site-kit--> (web/plugins/site.ts), so it paints with the first frame and the
    sign-in panel uses the same buttons as the front page's hero. */
@@ -30,7 +30,7 @@ body { font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 @keyframes orb1 { to { transform: translate3d(-14vmax, 10vmax, 0) scale(1.12); } }
 @keyframes orb2 { to { transform: translate3d(16vmax, -12vmax, 0) scale(.92); } }
 @keyframes orb3 { to { transform: translate3d(-18vmax, -16vmax, 0) scale(1.18); } }
-/* The sign-in view (DEC-0042) has no glow: the orbs fade out, the dark backdrop and its
+/* The sign-in view (DEC-0044) has no glow: the orbs fade out, the dark backdrop and its
    grain stay where they are. The sign-in pages' backdrop has no orbs at all. */
 .orbs i { transition: opacity .5s var(--ease); }
 html.auth-open .orbs i { opacity: 0; }

@@ -1,4 +1,4 @@
-// Building blocks for the sign-in panel (AuthFlow.tsx, DEC-0042): fields with the right
+// Building blocks for the sign-in panel (AuthFlow.tsx, DEC-0044): fields with the right
 // autocomplete hints for password managers, a password field with show and hide, the
 // front page's button with a loading state, messages screen readers announce, and a
 // submit helper that puts each error under the field it is about.

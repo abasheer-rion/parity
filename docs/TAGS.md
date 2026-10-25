@@ -678,6 +678,7 @@ The dashboard.
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 - [DEC-0042: Parity Academy, a full-screen course player of its own](decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
+- [DEC-0044: One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md)
 - [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

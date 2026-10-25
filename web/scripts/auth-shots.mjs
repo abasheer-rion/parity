@@ -1,4 +1,4 @@
-// Screenshots of the sign-in panel (DEC-0042): the front page fading to the panel, then log
+// Screenshots of the sign-in panel (DEC-0044): the front page fading to the panel, then log
 // in, sign up and reset, on the panel and on the stand-alone pages, at desktop and phone
 // width. Every Supabase request is answered by a stub here: it never signs in and never
 // sends a real password.

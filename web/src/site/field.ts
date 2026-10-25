@@ -135,7 +135,7 @@ export function startField(hero: HTMLElement, box: HTMLElement): void {
   const run = () => { if (!raf && visible && !document.hidden && !paused()) { last = performance.now(); raf = requestAnimationFrame(frame); } };
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(); }).observe(hero);
   document.addEventListener("visibilitychange", run);
-  // The sign-in panel (DEC-0042) covers the hero: rest while it is open.
+  // The sign-in panel (DEC-0044) covers the hero: rest while it is open.
   new MutationObserver(run).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
   run();
 }

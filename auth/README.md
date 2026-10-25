@@ -30,7 +30,7 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 | `auth/CHECKLIST.md` | The owner's steps to finish the hosted setup, and the end-to-end test. |
 | `web/tests/` | Tests for the sign-in flows against a fake Supabase client, the redirect rules, the consent API and the middleware. `npm test` in `web/`. |
 | `web/legal/`, `web/src/legal/` | The legal pages, the cookie notice and the consent API (`consent.ts`). |
-| `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in panel (`AuthFlow.tsx`, shown on the front page by `front.tsx` and on the stand-alone pages by `main.tsx`, DEC-0042) and Account settings. |
+| `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in panel (`AuthFlow.tsx`, shown on the front page by `front.tsx` and on the stand-alone pages by `main.tsx`, DEC-0044) and Account settings. |
 | `web/functions/_middleware.ts` | Lets only signed-in people fetch `/app/` and `/data/`. `web/public/_routes.json` limits it to those paths. |
 | `web/index.html` | The public front page: plain HTML and CSS, no script. |
 | `supabase/config.toml` | The `[auth]` section: sign-in rules and where each template lives. Drives local Supabase only. |

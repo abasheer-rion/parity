@@ -1,4 +1,4 @@
-// The sign-in panel (DEC-0042): one element for log in, sign up, reset and verify, used in
+// The sign-in panel (DEC-0044): one element for log in, sign up, reset and verify, used in
 // the front page's panel (front.tsx) and on the stand-alone pages (main.tsx), always over
 // the front page's backdrop. Switching between forms happens in place: the step fades,
 // the panel's height follows the content and the address follows the form.

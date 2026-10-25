@@ -1,5 +1,5 @@
 // The sign-in flows end to end in the browser code, against a fake Supabase client: the
-// sign-in panel (DEC-0042) for sign up, verify (code and link), log in (email first, then
+// sign-in panel (DEC-0044) for sign up, verify (code and link), log in (email first, then
 // the password or a code, with and without an authenticator app), forgot and reset
 // password, resend, switching forms in place, sign out, and the guard for /app/,
 // /research/ and /sim/.

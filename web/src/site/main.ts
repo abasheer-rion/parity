@@ -6,7 +6,7 @@
 //   - three small framed demos that loop while on screen
 //   - counters and bars from /stats.json, sections that fade up, markets that light up
 //   - floating corner controls that step aside while you scroll down
-//   - the sign-in panel (DEC-0042): Log in and Sign up fade the page out and the panel in,
+//   - the sign-in panel (DEC-0044): Log in and Sign up fade the page out and the panel in,
 //     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
 import Lenis from "lenis";
 import { botTrades, TRADES } from "./botPath";
@@ -39,7 +39,7 @@ const onCorner = () => {
 window.addEventListener("scroll", onCorner, { passive: true });
 onCorner();
 
-// The sign-in panel (DEC-0042). Clicking Log in or Sign up adds #login or #signup to the
+// The sign-in panel (DEC-0044). Clicking Log in or Sign up adds #login or #signup to the
 // address, fades the page out (CSS: html.auth-open) and loads the panel (src/auth/front.tsx),
 // which fades in over the same backdrop. Back, Escape and the logo close it again. The
 // links keep their /login/ and /signup/ addresses, so they still work with no script, in a

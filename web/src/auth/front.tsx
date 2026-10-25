@@ -1,4 +1,4 @@
-// The front page's sign-in panel (DEC-0042). src/site/main.ts loads this when Log in or
+// The front page's sign-in panel (DEC-0044). src/site/main.ts loads this when Log in or
 // Sign up is clicked (or the address ends in #login, #signup or #reset). The page fades
 // out (html.auth-open), the backdrop stays, and the same panel as /login/ fades in over it.
 // Focus moves into the panel and comes back to the link that opened it; Escape and the

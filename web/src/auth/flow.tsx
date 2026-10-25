@@ -1,4 +1,4 @@
-// What every form in the sign-in panel shares (DEC-0042): where to go afterwards, the email
+// What every form in the sign-in panel shares (DEC-0044): where to go afterwards, the email
 // typed so far, how to switch to another form in place, and the heading each form shows.
 import { createContext, useContext, type MouseEvent, type ReactNode } from "react";
 import { authUrl, type Carry, type View } from "./views";

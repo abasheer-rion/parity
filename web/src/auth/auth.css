@@ -1,5 +1,5 @@
 /* Fields and messages for the signed-in Account and Security settings (form.tsx). The
-   public sign-in panel has its own styles, in the front page's look (flow.css, DEC-0042). */
+   public sign-in panel has its own styles, in the front page's look (flow.css, DEC-0044). */
 @keyframes auth-in { from { opacity: 0; transform: translateY(10px); } }
 .auth-field { gap: 7px; position: relative; }
 .auth-field .ui-input[aria-invalid="true"] { border-color: var(--a-bad); box-shadow: 0 0 0 4px rgb(255 122 112 / .1); }

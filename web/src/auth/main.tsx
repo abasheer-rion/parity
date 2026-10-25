@@ -1,5 +1,5 @@
 // Entry for the stand-alone sign-in pages: /login/, /signup/, /reset/, /verify/. They show
-// the same panel as the front page (DEC-0042) over the same backdrop, which the HTML
+// the same panel as the front page (DEC-0044) over the same backdrop, which the HTML
 // paints before any script runs (src/site/kit.css).
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

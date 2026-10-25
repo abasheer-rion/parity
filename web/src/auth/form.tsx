@@ -1,7 +1,7 @@
 // Building blocks for the signed-in Account and Security settings: labelled fields with the
 // right autocomplete hints for password managers, a password field with show and hide,
 // messages that screen readers announce, and a small async-submit helper. The public
-// sign-in panel has its own, in the front page's style (fields.tsx, DEC-0042).
+// sign-in panel has its own, in the front page's style (fields.tsx, DEC-0044).
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { emailProblem, passwordRules } from "./rules";
 import "./auth.css";

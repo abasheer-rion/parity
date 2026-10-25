@@ -1,4 +1,4 @@
-// The sign-in panel's addresses (DEC-0042): which form a path shows, what a query carries,
+// The sign-in panel's addresses (DEC-0044): which form a path shows, what a query carries,
 // and the stand-alone address each form switches to, keeping next.
 import { describe, expect, it } from "vitest";
 import { authUrl, carryFromQuery, viewFromPath } from "../src/auth/views";

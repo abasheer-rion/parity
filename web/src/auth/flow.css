@@ -1,4 +1,4 @@
-/* The sign-in panel (AuthFlow.tsx, DEC-0042). Colours, glass, the corner logo and the
+/* The sign-in panel (AuthFlow.tsx, DEC-0044). Colours, glass, the corner logo and the
    buttons come from the front page (src/site/kit.css); this file adds the panel's layout,
    fields and messages in the same language. No orbs: the backdrop is the front page's own,
    without its glow. Motion is opacity, transform and the panel's height only, and none of
