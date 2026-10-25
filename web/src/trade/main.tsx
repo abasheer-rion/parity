@@ -4,6 +4,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { applyTheme } from "../lib/prefs";
 import { TradeApp } from "./TradeApp";
+import { startPwa } from "../pwa/install";
 import "../ui/tokens.css";
 import "../styles.css";
 import "../ui/ui.css";
@@ -12,6 +13,7 @@ import "../legal/notice";
 import "../a11y.css";
 
 applyTheme();
+startPwa();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

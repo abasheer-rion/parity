@@ -110,7 +110,7 @@ export const PAGES: Record<string, PageMeta> = {
   "index.html": {
     title: "Parity: check trading records and strategies",
     description: "Check a trade log for profit per trade, worst losses and luck, and see trading strategies backtested against the S&P 500 after costs.",
-    path: "/", image: "default", type: "website", ld: [orgLd(), websiteLd(), verifyAppLd()],
+    path: "/", image: "default", type: "website", ld: [orgLd(), websiteLd(), verifyAppLd()], manifest: "/manifest.webmanifest",
   },
   "login/index.html": { title: "Log in · Parity", description: "Log in to Parity to follow strategies tested against the S&P 500.", path: "/login/", image: "login" },
   "signup/index.html": { title: "Sign up · Parity", description: "Create a free Parity account to check trading records and follow strategies tested against the S&P 500.", path: "/signup/", image: "login" },
@@ -132,7 +132,7 @@ export const PAGES: Record<string, PageMeta> = {
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },
   "research/index.html": { title: "Parity Research", description: OG_CARDS.research.sub, path: "/research/", image: "research", robots: PRIVATE, manifest: "/manifest.webmanifest" },
   "sim/index.html": { title: "Parity Terminal", description: OG_CARDS.sim.sub, path: "/sim/", image: "sim", robots: PRIVATE, themeColor: "#000000", manifest: "/sim/manifest.webmanifest", manifestCredentials: true },
-  "trade/index.html": { title: "Parity Trade", description: OG_CARDS.trade.sub, path: "/trade/", image: "trade", robots: PRIVATE, manifest: "/manifest.webmanifest" },
+  "trade/index.html": { title: "Parity Trade", description: OG_CARDS.trade.sub, path: "/trade/", image: "trade", robots: PRIVATE, manifest: "/trade/manifest.webmanifest", manifestCredentials: true },
 };
 
 export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

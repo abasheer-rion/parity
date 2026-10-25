@@ -4,6 +4,7 @@ import { App } from "./App";
 import { IS_SIM } from "./lib/space";
 import { startSmoothScroll } from "./lib/scroll";
 import { TerminalApp } from "./terminal/TerminalApp";
+import { startPwa } from "./pwa/install";
 import "./ui/tokens.css";
 import "./styles.css";
 import "./ui/ui.css";
@@ -12,6 +13,7 @@ import "./legal/notice";
 import "./a11y.css";
 
 startSmoothScroll();
+startPwa();
 
 // /sim/ (sim.endyland.com) is Parity Terminal, full screen (DEC-0023); /app/ and /research/ are the
 // two sides of the dashboard (DEC-0015, DEC-0020).
