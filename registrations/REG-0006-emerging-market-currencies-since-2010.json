@@ -1,0 +1,58 @@
+{
+  "id": "REG-0006",
+  "title": "Emerging market carry, basket and momentum since February 2010, at 10 bp costs",
+  "created": "2026-10-21",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0009",
+    "HYP-0010",
+    "HYP-0011"
+  ],
+  "experiment": "EXP-0008",
+  "question": "On data after every published study's sample ended, do emerging market carry, a passive EM basket and EM momentum each have a positive Sharpe ratio that passes at least four of the five reality tests, after 10 bp per unit traded?",
+  "strategies": [
+    {
+      "name": "em_fx_carry",
+      "params": {
+        "fraction": 0.3333333333333333,
+        "min_carry": 1.0,
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    },
+    {
+      "name": "em_fx_basket",
+      "params": {
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    },
+    {
+      "name": "em_fx_momentum",
+      "params": {
+        "lookback": 63,
+        "fraction": 0.3333333333333333,
+        "rebalance": "M",
+        "min_currencies": 6
+      }
+    }
+  ],
+  "backtest": {
+    "start": "2010-02-01",
+    "end": null,
+    "cost_bps": 10.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 308,
+  "prior_trials_note": "205 = 188 (RUN-000003) + 16 (REG-0004) + 1 (REG-0005), counted across all families as the project has so far (the audit's H2 questions this; see RES-0008). No exploratory evaluation of these strategies was run. Raised from 205 to 291 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count. Raised by 17 on 2026-10-23 after merging main: PR #47 (DEC-0027) added 17 edge recipes, each evaluated in at least one full gauntlet run.",
+  "what_would_change_our_mind": "Passing 4 of 5 reality tests would make EM carry the first real effect in the project since 2010 and earn a forward test. Failing would mean the published EM results did not survive their own decade.",
+  "already_seen": "Partly. Before registering, only data checks were run on these three strategies (coverage dates, missing values, size of daily price moves), and the registrant has still computed no performance number for them. But after registration, PR #47 (DEC-0027) ran a close sibling of em_fx_carry over 1999 to 2026, which includes this plan's window: xfx_policy_carry_wide, long the five highest and short the five lowest BIS policy rates among 27 currencies priced from ECB reference rates, at 5 bp a trade. It scored a Sharpe ratio of 0.75 with a deflated Sharpe of 0.98 and passed 9 of 11 tests; the search found 0.70 to 0.77 for 3, 5 or 7 currencies a side. Its universe holds 15 of em_fx_carry's 17 currencies (all but PHP and RUB). em_fx_carry differs: it holds only the top third of the EM set against the dollar with no short leg, needs a rate gap of at least 1 point, prices 8 currencies from Fed H.10 noon rates, and earns OECD 3-month interbank rates rather than policy rates for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB and ZAR. So a positive em_fx_carry result is now expected and is weak evidence on its own; read HYP-0009 as a check that the published effect survives 10 bp costs after 2010, not as an unseen test. Nothing close to em_fx_basket or em_fx_momentum has been run: #47's hiking central banks strategy ranks on policy rate changes, not on past price moves."
+}

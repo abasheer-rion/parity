@@ -8,14 +8,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 63 |
-| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
-| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
+| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 16 |
+| [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 11 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 25 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 26 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 24 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
 ## Open questions right now
@@ -27,6 +27,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 - [HYP-0005: Dollar carry beats pair-by-pair carry](hypotheses/0005-dollar-carry-beats-pair-carry.md) (open)
 - [HYP-0006: The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) (open)
 - [HYP-0007: The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) (open)
+- [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md) (testing)
+- [HYP-0010: Emerging market basket kept paying after 2008](hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md) (testing)
+- [HYP-0011: Emerging market momentum survives costs](hypotheses/0011-emerging-market-momentum-survives-costs.md) (testing)
+- [HYP-0012: Energy futures trend pays on tradable prices](hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md) (testing)
+- [HYP-0013: Energy futures carry pays](hypotheses/0013-energy-futures-carry-pays.md) (testing)
+- [HYP-0014: Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) (testing)
+- [HYP-0015: Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) (testing)
+- [HYP-0016: An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) (testing)
 
 ## Recently updated
 
@@ -127,6 +135,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0006 | [The dollar weakens on scheduled Fed decision days](hypotheses/0006-short-the-dollar-on-fomc-days.md) | open | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news) |
 | HYP-0007 | [The S&P 500 plus an FX strategy beats the S&P 500 alone](hypotheses/0007-sp-500-plus-fx-beats-sp-500-alone.md) | open | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
 | HYP-0008 | [A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md) | rejected | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| HYP-0009 | [Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md) | testing | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
+| HYP-0010 | [Emerging market basket kept paying after 2008](hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md) | testing | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx) |
+| HYP-0011 | [Emerging market momentum survives costs](hypotheses/0011-emerging-market-momentum-survives-costs.md) | testing | 2026-10-21 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| HYP-0012 | [Energy futures trend pays on tradable prices](hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
+| HYP-0013 | [Energy futures carry pays](hypotheses/0013-energy-futures-carry-pays.md) | testing | 2026-10-21 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities) |
+| HYP-0014 | [Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis) |
+| HYP-0015 | [Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| HYP-0016 | [An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) | testing | 2026-10-23 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 
 ## experiment
 
@@ -137,6 +153,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | EXP-0003 | [Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md) | done | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | EXP-0004 | [Sixteen strategies against the US stock market, 1999 to 2026](experiments/0004-all-strategies-1999.md) | done | 2026-10-20 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | EXP-0005 | [Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md) | done | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| EXP-0006 | [Rerun of all sixteen strategies with corrected scoring](experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [method](TAGS.md#method) |
+| EXP-0007 | [Stocks plus currency trend on its own](experiments/0007-stocks-plus-currency-trend-on-its-own.md) | planned | 2026-10-21 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx) |
+| EXP-0008 | [Emerging market currencies since 2010](experiments/0008-emerging-market-currencies-since-2010.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| EXP-0009 | [Energy futures trend and carry](experiments/0009-energy-futures-trend-and-carry.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
+| EXP-0010 | [Oil volatility and commodity currency signals](experiments/0010-oil-volatility-and-commodity-currency-signals.md) | planned | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| EXP-0011 | [Equal-weight energy book, March 2014 to April 2024](experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md) | planned | 2026-10-23 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
 
 ## research
 
@@ -154,6 +176,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | RES-0012 | [Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [private-markets](TAGS.md#private-markets) |
+| RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
+| RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0016 | [Lesser-known strategies and what firms have published](research/0016-lesser-known-strategies-and-what-firms-have-published.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0017 | [Combining many strategies, the evidence and the ingredient list](research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0018 | [How the ingredients behave in crises, and what Sim World should show](research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md) | current | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0019 | [Trading the energy strategies, costs, contracts and data after April 2024](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md) | draft | 2026-10-23 | [commodities](TAGS.md#commodities), [method](TAGS.md#method) |
 | RES-0020 | [Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | RES-0021 | [How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md) | current | 2026-10-24 | [ui](TAGS.md#ui) |
 | RES-0022 | [How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra) |
@@ -257,6 +286,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0017 | [Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md) | final | 2026-10-24 | [competitors](TAGS.md#competitors), [process](TAGS.md#process) |
 | LOG-0018 | [Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0020 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| LOG-0021 | [Lesser-known strategies and published firm research](log/2026-10-22-lesser-known-strategies-and-published-firm-research.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0022 | [Combining many strategies, and rebasing on the factory](log/2026-10-22-combining-many-strategies-and-rebasing-on-the-factory.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0023 | [Crisis behaviour, and a check of Sim World](log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md) | final | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| LOG-0024 | [Merging main into the stack and registering the energy book](log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md) | final | 2026-10-23 | [commodities](TAGS.md#commodities), [process](TAGS.md#process) |
 
 ## algorithm
 
@@ -270,14 +304,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0006 | [Dollar carry trade](algorithms/0006-fx-dollar-carry.md) | official | 2026-10-20 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0007 | [Economic momentum in currencies (Dahlquist and Hasseltoft 2020)](algorithms/0007-fx-economic-momentum.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0008 | [Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md) | hypothesis | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
-| ALG-0009 | [London 4pm fix flow and reversal effects](algorithms/0009-fx-london-4pm-fix.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0009 | [London 4pm fix flow and reversal effects](algorithms/0009-fx-london-4pm-fix.md) | sourced | 2026-10-22 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0010 | [Trading FX on US macro announcement surprises](algorithms/0010-fx-macro-news-surprise.md) | hypothesis | 2026-10-20 | [fx](TAGS.md#fx), [news](TAGS.md#news), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0011 | [Machine learning smart carry (Filippou, Rapach, Taylor, Zhou)](algorithms/0011-fx-ml-smart-carry.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0012 | [Oil price to Canadian dollar daily link (Ferraro, Rogoff, Rossi)](algorithms/0012-fx-oil-cad-daily.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0013 | [FX order flow signal](algorithms/0013-fx-order-flow.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0014 | [FX technical trading rules (moving averages, filters, breakouts)](algorithms/0014-fx-technical-trading-rules.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0015 | [FX time-series momentum (trend)](algorithms/0015-fx-time-series-momentum.md) | official | 2026-10-20 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
-| ALG-0016 | [Fundamentals-adjusted currency value (Menkhoff et al. 2017)](algorithms/0016-fx-value-adjusted.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0016 | [Fundamentals-adjusted currency value (Menkhoff et al. 2017)](algorithms/0016-fx-value-adjusted.md) | sourced | 2026-10-22 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0017 | [FX value (5-year real exchange rate reversal / PPP)](algorithms/0017-fx-value-ppp.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0018 | [FX volatility risk premium sort](algorithms/0018-fx-volatility-risk-premium.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0019 | [Pre-FOMC announcement drift](algorithms/0019-pre-fomc-drift.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
@@ -299,13 +333,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0035 | [Crowdsourced ML ensemble (Numerai meta model)](algorithms/0035-numerai-crowdsourced-ensemble.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0036 | [Technical indicator bots (freqtrade, Zenbot sample strategies)](algorithms/0036-technical-indicator-trading-bots.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0037 | [Betting against beta (low beta / low volatility)](algorithms/0037-betting-against-beta.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
-| ALG-0038 | [Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md) | sourced | 2026-10-20 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0038 | [Commodity carry (roll yield / basis)](algorithms/0038-commodity-carry-roll-yield.md) | registered | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0039 | [Commodity time-series momentum](algorithms/0039-commodity-time-series-momentum.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0040 | [Dual momentum (Antonacci global equities momentum)](algorithms/0040-dual-momentum.md) | sourced | 2026-10-20 | [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0041 | [EIA weekly crude inventory surprise trading](algorithms/0041-eia-oil-inventory-announcement.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | ALG-0042 | [Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md) | sourced | 2026-10-20 | [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0043 | [Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
-| ALG-0044 | [EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0044 | [EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | ALG-0045 | [Pairs trading (distance method)](algorithms/0045-pairs-trading-distance.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0046 | [Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0047 | [Sell in May (Halloween indicator)](algorithms/0047-sell-in-may-halloween.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
@@ -315,7 +349,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0051 | [Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md) | sourced | 2026-10-20 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0052 | [Turn-of-the-month effect](algorithms/0052-turn-of-the-month.md) | sourced | 2026-10-20 | [strategy](TAGS.md#strategy) |
 | ALG-0053 | [Value factor (Fama-French HML)](algorithms/0053-value-hml.md) | sourced | 2026-10-20 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
-| ALG-0054 | [Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0054 | [Volatility-managed portfolios (volatility targeting)](algorithms/0054-volatility-managed-portfolios.md) | sourced | 2026-10-22 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0055 | [Bollinger band reversion and squeeze breakout](algorithms/0055-bollinger-band-reversion-breakout.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0056 | [Candlestick price action (pin bars, engulfing, doji)](algorithms/0056-candlestick-price-action-patterns.md) | sourced | 2026-10-20 | [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 | ALG-0057 | [Copy trading and paid signal services](algorithms/0057-copy-trading-signal-services.md) | sourced | 2026-10-20 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
@@ -344,6 +378,22 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0080 | [Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0081 | [Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0082 | [Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md) | sourced | 2026-10-21 | [strategy](TAGS.md#strategy) |
+| ALG-0083 | [Emerging market currency carry, cost aware](algorithms/0083-em-fx-carry.md) | registered | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0084 | [Passive emerging market currency basket](algorithms/0084-em-fx-passive-basket.md) | registered | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0085 | [Emerging market currency momentum](algorithms/0085-em-fx-momentum.md) | registered | 2026-10-22 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0086 | [Selling commodity volatility (variance risk premium)](algorithms/0086-commodity-variance-risk-premium.md) | registered | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0087 | [Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md) | registered | 2026-10-22 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0088 | [Commodity basis-momentum](algorithms/0088-commodity-basis-momentum.md) | sourced | 2026-10-23 | [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0089 | [Commodity value (5-year price reversal)](algorithms/0089-commodity-value-reversal.md) | sourced | 2026-10-23 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0090 | [Commodity skewness factor](algorithms/0090-commodity-skewness.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0091 | [Commodity hedging pressure (CFTC positions)](algorithms/0091-commodity-hedging-pressure.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0092 | [Commodity open interest growth](algorithms/0092-commodity-open-interest-growth.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0093 | [Commodity same-calendar-month seasonality](algorithms/0093-commodity-same-month-seasonality.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0094 | [Front-running commodity index rolls (the Goldman roll)](algorithms/0094-commodity-index-roll-front-running.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0095 | [Currencies sorted on sovereign credit risk](algorithms/0095-fx-sovereign-credit-risk.md) | sourced | 2026-10-22 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0096 | [Commodity inventory level](algorithms/0096-commodity-inventory-level.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0097 | [Developed-market rate gap times the EM currency basket](algorithms/0097-fx-developed-rate-gap-times-em-basket.md) | sourced | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0098 | [Equal-weight combination of styles](algorithms/0098-equal-weight-style-combination.md) | registered | 2026-10-23 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

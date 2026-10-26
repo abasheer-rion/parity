@@ -14,7 +14,7 @@ related: [EXP-0001, REF-0001, REF-0015]
 
 ## In plain words
 
-Where our data comes from. All of it is free: the US central bank's data website (FRED) for currencies, interest rates and oil, the European Central Bank, the US Treasury, the Bank for International Settlements and the US futures regulator. Yahoo is only a cross-check. [REF-0015](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) compares all this with what a Bloomberg terminal gives.
+Where our data comes from. All of it is free: the US central bank's data website (FRED) for currencies, interest rates and oil, the European Central Bank (including emerging market currencies), the OECD and the Bank for International Settlements for interest rates, the US Treasury, the US futures regulator, and the US Energy Information Administration for oil and gas futures prices until April 2024. Yahoo is only a cross-check. [REF-0015](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) compares all this with what a Bloomberg terminal gives.
 
 ## Summary
 
@@ -36,7 +36,7 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `bond.UST10Y`, `rate.TBILL3M` | FRED | `DGS10`, `DTB3` | Daily | 1962, 1954 | US Treasury yields. |
 | `eq.SPX` | FRED | `SP500` | Daily | Last 10 years only | Price only, no dividends. Kept as a cross-check. |
 | `risk.VIX` | FRED, CBOE | `VIXCLS` | Daily | 1990 | For splitting results by market stress. |
-| `fx.MXN` and 11 more (emerging and other currencies) | FRED, Federal Reserve H.10 | `DEXMXUS`, `DEXBZUS`, and so on | Daily | 1971 to 1995 | Optional. No matching interest rates, so no carry is booked on them ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). |
+| `fx.MXN` and 11 more (emerging and other currencies) | FRED, Federal Reserve H.10 | `DEXMXUS`, `DEXBZUS`, and so on | Daily | 1971 to 1995 | Optional ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). Carry is booked on the eight that have a `rate.*` series below (BRL, CNY, INR, KRW, MXN, MYR, THB, ZAR); SGD, HKD, DKK and TWD earn none. |
 | `bond.UST2Y`, `bond.UST30Y` | FRED | `DGS2`, `DGS30` | Daily | 1976, 1977 | Optional. The 30-year has a gap from 2002 to 2006. |
 | `bond.TR10`, `bond.TR2` | Built from the yields | | Daily | 1962, 1976 | Treasury total return approximated from the yield with a fixed duration (8 and 1.9). 2022 comes out at -15%, close to real 7 to 10 year funds. |
 | `factor.SMB`, `HML`, `MOM`, `RMW`, `CMA`, `STREV`, `LTREV` | Kenneth French data library | `<file>#<column>` | Daily | 1926 or 1963 | Optional. Paper long-short factor returns; the backtester charges an estimated yearly trading cost for holding each ([DEC-0014](../decisions/0014-a-strategy-factory-and-an-always-on-search.md)). |
@@ -55,6 +55,13 @@ Everything the engine uses is free. The list of series is in `engine/src/parity/
 | `credit.HQM10Y` | FRED, Treasury HQM curve | `HQMCB10YR` | Monthly | 1984 | Optional. Licence-clean corporate yield, used a month late. |
 | `risk.NFCI`, `risk.STLFSI`, `macro.CLAIMS`, `macro.WEI` | FRED (Chicago Fed, St. Louis Fed, Labor Department, NY Fed) | `NFCI`, `STLFSI4`, `ICSA`, `WEI` | Weekly | 1967 to 2008 | Optional. Moved to their release day. |
 | `cmd.ALUMINIUM`, `NICKEL`, `IRON_ORE`, `WHEAT`, `CORN`, `SOYBEANS` | FRED, IMF | `PALUMUSDM` and so on | Monthly | 1992 | Optional. Used a week after the month ends, like copper. Not shown on the site, because the IMF asks for permission before commercial reuse. |
+| `fx.CZK`, `HUF`, `IDR`, `ILS`, `PHP`, `PLN`, `RON`, `RUB`, `TRY` (the EM currencies H.10 lacks) | ECB euro reference rates (provider `ecb_usd`) | `<CCY>` (fetches `EXR D.USD+<CCY>.EUR.SP00.A`) | Daily | 1999 or 2000 | Turned into USD per unit through EUR/USD. Fixed at 14:15 CET. RUB stops on 2022-03-01. BRL has two moves of about 15% in February 2000 that look like data errors (before any test window). ([RES-0013](../research/0013-emerging-market-currencies.md)) |
+| `rate.<CCY>` for CNY, CZK, HUF, ILS, KRW, MXN, PLN, RON, RUB, ZAR | OECD SDMX API | `IR3TIB` | Monthly | 1980s to 1997 | 3-month interbank rate, monthly average. Used from 5 business days after the month ends, like the G10 copies from FRED. |
+| `rate.<CCY>` for BRL, IDR, INR, MYR, PHP, THB, TRY | BIS SDMX API, the same series as `policy.<CCY>` | `WS_CBPOL/D.<area>` | Daily, held until changed | 1986 to 2005 | Central bank policy rates, used where the OECD has no full series. Not what a forward pays. |
+| `curve.<X><n>`: CL, HO, RB, NG, contracts 1 to 3 | EIA copies of NYMEX settlements (provider `eia_web`, no key) | `RCLC1`, `EER_EPD2F_PE1_Y35NY_DPG`, and so on | Daily | 1980 to 2005 | **End on 2024-04-05**: the EIA stopped publishing them. Holidays are blank, and single contracts have gaps (heating oil contract 1 misses weeks in 2003). |
+| `fut.<X>`, `carry.<X>` | Built from `curve.*` (`engine/src/parity/data/futures.py`) | | Daily | 1985 (CL), 1994 (HO), 2005 (RB), 1998 (NG) | Rolled excess return index holding contract 2, rolled the day after each expiry by the exchange rule; curve slope 12 * ln(C2 / C3). Gas starts in 1998 because older gas expiries do not follow today's rule. |
+| `risk.OVX` | FRED, CBOE | `OVXCLS` | Daily | 2007 | Crude oil implied volatility from options on USO. |
+| `vrp.OIL` | Built from `risk.OVX` and `fut.CL` | | Daily | 2007 to 2024-04 | Marked short 30-day variance swap, re-struck monthly. No swap costs. |
 | `pm.<NAME>` (9) | FRED (Federal Reserve Z.1 and H.8, BIS, FHFA, loan officer survey) | `BOGZ1FL075035503Q`, `COMREPUSQ159N`, `USSTHPI`, `CREACBW027SBOG`, `BUSLOANS`, `LNFACBW027SBOG`, `DRTSCILM`, `SUBLPDRCSN`, `DRCRELEXFACBS` | Quarterly, monthly, weekly | 1945 to 2015 | Optional. Private markets proxies: property prices, bank lending and loan standards ([DEC-0029](../decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)). Quarterly values wait for the quarter's end plus their release lag. The Fed's commercial property index is chained to CoStar data, so it is not shown on the site. |
 
 ## FRED

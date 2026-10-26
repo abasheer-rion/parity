@@ -1,0 +1,66 @@
+{
+  "id": "ALG-0089",
+  "slug": "commodity-value-reversal",
+  "name": "Commodity value (5-year price reversal)",
+  "family": "value-mean-reversion",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "value",
+    "reversal",
+    "futures"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Asness, Moskowitz, Pedersen",
+    "source_title": "Value and Momentum Everywhere (Journal of Finance 68(3), 2013)",
+    "source_url": "https://doi.org/10.1111/jofi.12021"
+  },
+  "how_it_works": {
+    "simple": "Buy the commodities whose prices have fallen most over the past five years and sell those that rose most, betting that extremes partly undo themselves.",
+    "analogy": "Like buying winter coats in summer: what is out of favour for long enough tends to come back.",
+    "precise": "Value signal: minus the log change in spot price over five years (average price 4.5 to 5.5 years ago over today). AQR's century study reports a Sharpe ratio of 0.38 for commodity value over 1926 to 2020, 0.50 in the original sample and 0.44 after publication."
+  },
+  "rule": "Monthly: rank energy contracts by -ln(P_t / average price 54 to 66 months ago); long the cheapest, short the dearest, inverse volatility weights.",
+  "data_needed": [
+    "Daily NYMEX contract 1 and 2 prices (EIA)"
+  ],
+  "economic_rationale": "Supply responds slowly to prices: high prices bring new supply and low prices close mines and wells, so extremes partly revert over several years.",
+  "why_it_might_fail": "Four energy contracts give a thin cross-section; the signal needs five years of history; commodity value has long dry spells.",
+  "reported_results": [
+    {
+      "source": "Ilmanen, Israel, Lee, Moskowitz and Thapar (2021), JOIM, Table 1",
+      "source_url": "https://www.aqr.com/-/media/AQR/Documents/Journal-Articles/JOIM_How-Do-Factor-Premia-Vary-Over-Time.pdf",
+      "period": "1926-07 to 2020-11",
+      "market": "Commodity futures",
+      "sharpe": 0.38,
+      "annual_return": 0.077,
+      "volatility": 0.2,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Table 2: Sharpe 0.22 before, 0.50 during and 0.44 after the original sample. AQR's own backtest."
+    }
+  ],
+  "post_publication_evidence": "AQR's post-publication Sharpe ratio of 0.44 (Ilmanen et al., 2021).",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Supported after publication; most useful as part of a combined carry, value and momentum commodity strategy."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-23",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0016 on 2026-10-22. Used since 2026-10-23 as one of four equal-weight ingredients of energy_book (REG-0009), on contracts 2 and 3; not run on its own."
+  }
+}

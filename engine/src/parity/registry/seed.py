@@ -33,7 +33,8 @@ SOURCE_RIGHTS = {
     "kraken-live": "internal", "coinbase-live": "internal", "gemini-live": "internal",
     "binanceus-live": "internal", "alpaca-live": "internal", "finnhub-live": "none",
     "exchanges-live": "none", "pyth": "none", "intrinio": "none", "massive-business": "none",
-    "cboe-one": "none", "iex-tops": "none",
+    "cboe-one": "none", "iex-tops": "none", "ecb_usd": "public", "oecd": "public",
+    "eia_web": "public",
 }
 
 ACCESS = {
@@ -43,12 +44,17 @@ ACCESS = {
     "bis": "SDMX REST API v2", "cftc": "Socrata API (CFTC Public Reporting)",
     "eia": "API v2 with a free key", "onchain": "log subscription to a public Base node",
     "coingecko-live": "REST, polled by our edge", "sec-tickers": "JSON file",
+    "ecb_usd": "SDMX REST API, crossed to USD here", "oecd": "SDMX REST API (Data Explorer)",
+    "eia_web": "XLS history pages, no key",
 }
 
 RATE_LIMITS = {
     "fred": "120 requests a minute with a key; we pause between requests",
     "ecb": "none published; we send one request per dataflow",
     "bis": "none published; we send one request per dataflow",
+    "ecb_usd": "none published; we send one request per currency",
+    "oecd": "none published; we send one request per dataflow",
+    "eia_web": "none published; one file per product",
     "treasury": "we send one request a second", "cftc": "throttled without a token; we pause "
     "0.5 s", "eia": "about 5,000 requests an hour per key", "french": "none published",
     "onchain": "PublicNode free tier, limited per address",

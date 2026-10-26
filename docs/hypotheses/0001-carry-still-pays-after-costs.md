@@ -53,10 +53,12 @@ See [the reading list](../research/0001-reading-list.md#foundations).
 
 - [HYP-0002: Currency trends persist over months](0002-currency-trends-persist.md)
 - [HYP-0005: Dollar carry beats pair-by-pair carry](0005-dollar-carry-beats-pair-carry.md)
+- [HYP-0009: Emerging market carry pays after costs](0009-emerging-market-carry-pays-after-costs.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](../experiments/0001-baseline-backtests.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0002: Open-source projects and public results](../research/0002-open-source-and-public-results.md)
 - [RES-0004: Exchange rate theory primer](../research/0004-exchange-rate-theory-primer.md)
+- [RES-0013: Emerging market currencies](../research/0013-emerging-market-currencies.md)
 - [ALG-0001: G10 currency carry (sorted on interest rates)](../algorithms/0001-fx-carry-g10.md)
 <!-- backlinks:end -->

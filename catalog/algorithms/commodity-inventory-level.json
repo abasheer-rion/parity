@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0096",
+  "slug": "commodity-inventory-level",
+  "name": "Commodity inventory level",
+  "family": "macro-fundamental",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "inventories",
+    "futures",
+    "fundamentals"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2007,
+    "authors": "Gorton, Hayashi, Rouwenhorst",
+    "source_title": "The Fundamentals of Commodity Futures Returns (Review of Finance 17(1), 35-105, 2013)",
+    "source_url": "https://www.nber.org/papers/w13249"
+  },
+  "how_it_works": {
+    "simple": "Buy the energy futures whose stockpiles are low compared with normal, and sell those whose stockpiles are high.",
+    "analogy": "Like umbrellas in a shop: when the shelves are nearly empty, sellers can charge more and buyers pay up to be sure of getting one.",
+    "precise": "Sort commodities each month on inventory relative to a slow-moving normal level (the paper uses a Hodrick-Prescott trend). The low-inventory half beat the high-inventory half; the long-short t-statistic is 2.78, 31 commodities, January 1971 to December 2010. Low-inventory commodities also had a basis 7.39 percentage points higher and prior 12-month futures returns 7.6 points higher, so the signal overlaps with carry and momentum."
+  },
+  "rule": "Monthly, per energy contract: inventory = latest EIA weekly stocks published before month end (crude, gasoline, distillate for heating oil, working gas for natural gas) divided by the average for the same calendar week over the previous five years. Long the rolled future when the ratio is below 1, short when above, inverse volatility weights. Use each weekly figure only from its release date (Wednesday for petroleum, Thursday for gas).",
+  "data_needed": [
+    "EIA weekly petroleum stocks (WCESTUS1 from 1982, WGTSTUS1 from 1990, WDISTUS1 from 1982)",
+    "EIA weekly working gas in storage (Lower 48 series from 2010; older series not checked)",
+    "Daily NYMEX contract 1 and 2 prices (EIA, to April 2024)"
+  ],
+  "economic_rationale": "The theory of storage: low inventories raise the risk of a shortage, so the futures price must offer a higher expected return to whoever carries the risk.",
+  "why_it_might_fail": "Overlaps with carry and momentum, so it adds little to a book that holds both. US stocks are only part of world inventories, and gasoline and gas stocks are strongly seasonal, so the normal level must be measured by calendar week.",
+  "reported_results": [
+    {
+      "source": "Gorton, Hayashi and Rouwenhorst (2012 working paper version), Table 5 Panel A",
+      "source_url": "https://www.sba.hub.hit-u.ac.jp/assets/files/research/fs_wp/FS-2012-E-002.pdf",
+      "period": "1971-01 to 2010-12",
+      "market": "31 commodity futures",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Long-short (high minus low inventory) t-statistic -2.78; the low-inventory portfolio beat the equal-weight index in 56% of months. Sharpe ratio not reported in the text we read."
+    }
+  ],
+  "post_publication_evidence": "We found no test after 2010.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Free weekly data from 1982 and a clear theory, but it overlaps with carry and momentum; useful as a check on them more than as a new ingredient."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0017 on 2026-10-22."
+  }
+}

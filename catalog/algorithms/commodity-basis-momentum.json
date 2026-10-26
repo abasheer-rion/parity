@@ -1,0 +1,81 @@
+{
+  "id": "ALG-0088",
+  "slug": "commodity-basis-momentum",
+  "name": "Commodity basis-momentum",
+  "family": "momentum-trend",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "term-structure",
+    "momentum",
+    "futures",
+    "spread"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2019,
+    "authors": "Boons, Prado",
+    "source_title": "Basis-Momentum (Journal of Finance 74(1), 239-279)",
+    "source_url": "https://doi.org/10.1111/jofi.12738"
+  },
+  "how_it_works": {
+    "simple": "Compare how much the nearest oil or gas contract has gained over the past year with the next contract out. If the near one has gained more, buy; if less, sell.",
+    "analogy": "Like noticing that this week's concert tickets are selling faster than next month's: the pressure is at the front, and it tends to keep pushing.",
+    "precise": "Basis-momentum is the 12-month cumulative return of a first-nearby futures position minus that of a second-nearby position. Sorting 21 commodities on it (top four minus bottom four) earned 18.38% a year, Sharpe 0.92, over 1960-08 to 2014-02; the calendar-spread version (nearby minus second-nearby returns) earned 4.08% a year, Sharpe 0.88, and 1.06 after 1986."
+  },
+  "rule": "Monthly, per energy contract: BM = prod(1 + r_C1 over 12 months) - prod(1 + r_C2 over 12 months). Time-series version: long the rolled future if BM > 0, short if BM < 0, inverse volatility weights. Spread version: long contract 1 and short contract 2 when BM > 0, the reverse when BM < 0.",
+  "data_needed": [
+    "Daily NYMEX contract 1 and 2 prices (EIA, to April 2024)"
+  ],
+  "economic_rationale": "Maturity-specific price pressure that builds when rising volatility limits speculators' capacity to take the other side of hedgers; distinct from storage, inventories and hedging pressure according to the authors.",
+  "why_it_might_fail": "Our version has four correlated energy contracts, not 21; the per-commodity time-series and spread versions are our adaptation; spread returns are small, so costs bite.",
+  "reported_results": [
+    {
+      "source": "Boons and Prado (2019), working paper, Table 1 Panel A, High4-minus-Low4 nearby returns",
+      "source_url": "https://4nations.albertjmenkveld.com/papers/boonsprado17.pdf",
+      "period": "1960-08 to 2014-02",
+      "market": "21 commodity futures",
+      "sharpe": 0.92,
+      "annual_return": 0.1838,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Sample from 1986-02 to 2014-02: 16.77% a year, Sharpe 0.80. Basis alone -10.61% (Sharpe -0.53), momentum alone 15.02% (Sharpe 0.63) over the full sample."
+    },
+    {
+      "source": "Boons and Prado (2019), working paper, Table 1 Panel B, High4-minus-Low4 spreading returns",
+      "source_url": "https://4nations.albertjmenkveld.com/papers/boonsprado17.pdf",
+      "period": "1986-02 to 2014-02",
+      "market": "21 commodity futures, nearby minus second-nearby",
+      "sharpe": 1.06,
+      "annual_return": 0.0517,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Full sample 1960-08 to 2014-02: 4.08% a year, Sharpe 0.88."
+    }
+  ],
+  "post_publication_evidence": "Kwon, Kang and Yun (2021, Finance Research Letters) split the ranking period and find its parts behave differently; we found no test on data after February 2014.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Strongest commodity signal we found, and our EIA data from 2014-03 to 2024-04 lies entirely after the paper's sample."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-23",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0016 on 2026-10-22. Used since 2026-10-23 as one of four equal-weight ingredients of energy_book (REG-0009), on contracts 2 and 3; not run on its own."
+  }
+}

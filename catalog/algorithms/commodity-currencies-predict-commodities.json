@@ -1,0 +1,71 @@
+{
+  "id": "ALG-0087",
+  "slug": "commodity-currencies-predict-commodities",
+  "name": "Commodity currencies predict commodity prices",
+  "family": "macro-fundamental",
+  "markets": [
+    "commodities",
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "commodity-currencies",
+    "predictability",
+    "lead-lag",
+    "out-of-sample"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2008,
+    "authors": "Chen, Rogoff, Rossi",
+    "source_title": "Can Exchange Rates Forecast Commodity Prices? (Quarterly Journal of Economics 125(3), 2010)",
+    "source_url": "https://doi.org/10.1162/qjec.2010.125.3.1145"
+  },
+  "how_it_works": {
+    "simple": "When the Australian, Canadian and New Zealand dollars rise, commodity prices tend to rise in the following months. So use those currencies as a signal to own or sell commodities.",
+    "analogy": "Like reading the odds to guess the result: the currency market prices in news about demand before commodity prices catch up.",
+    "precise": "Regress next-quarter changes in commodity price indices on this quarter's changes in commodity-currency exchange rates. Chen et al. find robust out-of-sample predictability over samples ending in 2008, and that the reverse direction (commodities predicting currencies) is notably less robust, consistent with exchange rates being forward looking."
+  },
+  "rule": "Monthly: average the past 3-month returns of AUD, CAD and NZD against USD; hold energy futures long when positive and short when negative, volatility-scaled.",
+  "data_needed": [
+    "Daily AUD, CAD, NZD spot (FRED H.10)",
+    "Energy futures contracts 1 and 2 (EIA)"
+  ],
+  "economic_rationale": "Exchange rates are asset prices that react to expected future commodity demand; spot commodity prices respond to current supply and demand imbalances.",
+  "why_it_might_fail": "The paper's gains are statistical (lower forecast error), not trading returns; the link may have changed after 2008; energy futures are only part of the commodity indices the paper forecasts.",
+  "reported_results": [
+    {
+      "source": "Chen, Rogoff and Rossi (2010), NBER w13901",
+      "source_url": "https://www.nber.org/system/files/working_papers/w13901/w13901.pdf",
+      "period": "Quarterly, start dates 1973 to 1989, ending 2008Q1",
+      "market": "AUD, CAD, NZD, ZAR, CLP and commodity price indices",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Abstract: commodity currency exchange rates \"have remarkably robust power in predicting global commodity prices, both in-sample and out-of-sample\"; the reverse is \"notably less robust\". No trading Sharpe ratio reported."
+    }
+  ],
+  "post_publication_evidence": "Ferraro, Rogoff and Rossi (2015) find the oil and Canadian dollar link is mostly same-day and absent at monthly and quarterly frequency, consistent with this entry's direction.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "Turns our failed oil-to-currency idea around in the direction the evidence supports; testable from 2008Q2, outside the paper's sample."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 5,
+    "hypothesis": "HYP-0015",
+    "strategy": "commodity_fx_leads_energy",
+    "registrations": [
+      "REG-0008"
+    ],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0013 and RES-0014 on 2026-10-21. Registered on 2026-10-21 as REG-0008 (commodity_fx_leads_energy), not yet run."
+  }
+}
