@@ -57,6 +57,8 @@ export interface StrategyRun {
   ic_decay: IcRow[];
   exposure: Record<string, number>;
   gauntlet: Gauntlet | null;
+  /** "How it holds up" numbers (engine/src/parity/metrics/holdup.py). Older runs leave it out; lib/holdup.ts rebuilds it from returns. */
+  holdup?: Holdup | null;
 }
 
 export interface CoverageRow {
@@ -109,6 +111,150 @@ export interface Gauntlet {
   total: number;
   tests: GauntletTest[];
   trials_including_gauntlet: number;
+  bootstrap?: GauntletBootstrap;
+  placebo?: GauntletPlacebo;
+}
+
+export interface GauntletBootstrap {
+  sharpe_ci: [number, number];
+  prob_sharpe_above_zero: number;
+  prob_beats_benchmark: number;
+}
+
+export interface GauntletPlacebo {
+  actual: number;
+  p_value: number;
+  null_median: number;
+  null_p95: number;
+}
+
+// ---------------------------------------------------------------- how it holds up
+// Same field names as engine/src/parity/metrics/holdup.py and web/src/lib/holdup.ts.
+
+export type Range = [number | null, number | null];
+
+export interface HoldupEstimate {
+  point: number | null;
+  median: number | null;
+  ci95: Range | null;
+  ci80: Range | null;
+}
+
+export interface HoldupRegimeItem {
+  key: string;
+  label: string;
+  start?: string;
+  end?: string;
+  days: number;
+  share: number | null;
+  strategy_total: number | null;
+  benchmark_total: number | null;
+  strategy_ann: number | null;
+  benchmark_ann: number | null;
+  strategy_hit: number | null;
+  benchmark_hit: number | null;
+  /** Strategy beat the benchmark over these days; null without a benchmark. */
+  wins: boolean | null;
+}
+
+export interface HoldupRegimeFamily {
+  family: "rates" | "volatility" | "crises" | "decades";
+  available: boolean;
+  /** Why the family is missing: no_rate_series, no_benchmark, too_short, no_overlap. */
+  reason: string | null;
+  items: HoldupRegimeItem[];
+  lookback_days?: number;
+  window_days?: number;
+  median_vol?: number | null;
+  source?: string | null;
+}
+
+export interface HoldupDrawdown {
+  start: string;
+  trough: string;
+  recovery: string | null;
+  depth: number | null;
+  days: number;
+  days_to_trough: number;
+}
+
+export type HoldupMustKey =
+  | "costs_below_breakeven"
+  | "correlation_to_stocks_persists"
+  | "correlation_to_bonds_persists"
+  | "not_reliant_on_crises"
+  | "not_one_lucky_year"
+  | "enough_history"
+  | "survives_trial_count";
+
+export interface HoldupMust {
+  key: HoldupMustKey;
+  /** Whether it holds on the data so far; null when it is a condition to watch, not a test. */
+  holds: boolean | null;
+  values: Record<string, number | null>;
+}
+
+export interface HoldupSource {
+  name: string | null;
+  available: boolean;
+  reason?: string;
+  start?: string;
+  end?: string;
+  n?: number;
+}
+
+export interface Holdup {
+  equity_vs_benchmark: { dates: string[]; strategy: (number | null)[]; benchmark: (number | null)[] | null };
+  luck: {
+    sharpe: number | null;
+    n_trials: number;
+    probability: number | null;
+    probability_one_try: number | null;
+    line: number;
+    verdict: "unlikely_luck" | "borderline" | "could_be_luck" | "not_enough_data";
+  };
+  bootstrap: {
+    n: number;
+    block_days: number;
+    seed: number;
+    days: number;
+    sharpe: HoldupEstimate;
+    cagr: HoldupEstimate;
+    prob_sharpe_above_zero: number | null;
+    histogram: { edges: (number | null)[]; counts: number[] };
+  } | null;
+  p_values: {
+    method: "psr_t";
+    t_stat: number | null;
+    raw: number | null;
+    n_trials: number;
+    bonferroni: number | null;
+    sidak: number | null;
+    holm: { name: string; raw: number | null; adjusted: number | null }[] | null;
+    significant: { raw: boolean | null; bonferroni: boolean | null; sidak: boolean | null };
+  };
+  rolling_correlation: {
+    window_days: number;
+    dates: string[];
+    series: { stocks?: (number | null)[]; bonds?: (number | null)[] };
+    full_period: { stocks?: number | null; bonds?: number | null };
+    latest: { stocks?: number | null; bonds?: number | null };
+  } | null;
+  regimes: HoldupRegimeFamily[];
+  worst_periods: {
+    drawdowns: HoldupDrawdown[];
+    worst_year: { year: number; return: number | null; benchmark: number | null } | null;
+    worst_12m: { start: string; end: string; return: number | null } | null;
+  };
+  must_be_true: HoldupMust[];
+  sources: {
+    strategy: HoldupSource;
+    benchmark: HoldupSource;
+    stocks: HoldupSource;
+    bonds: HoldupSource;
+    rates: HoldupSource;
+    crises: { name: "given" | "built_in"; n: number };
+  };
 }
 
 export interface GlossaryTerm {
