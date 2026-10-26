@@ -10,7 +10,7 @@
 import { RAW } from "../tokens.gen.ts";
 
 export type ThemeName = "dark" | "light";
-export type Tone = "pos" | "neg" | "accent" | "warn" | "text" | "muted" | "faint";
+export type Tone = "pos" | "neg" | "accent" | "warn" | "alt" | "text" | "muted" | "faint";
 
 export interface Theme {
   name: ThemeName;
@@ -34,6 +34,8 @@ export interface Theme {
   neg: string;
   accent: string;
   warn: string;
+  /** A second hue for two-sided scales (negative correlation). Not good or bad. */
+  alt: string;
   /** Text drawn on a filled pill of each tone. */
   onFill: string;
   font: string;
@@ -48,7 +50,7 @@ export const THEMES: Record<ThemeName, Theme> = {
     bg: RAW["color-canvas"], bgGlow: RAW["color-surface"], panel: RAW["color-surface-overlay"], halo: RAW["color-surface"],
     ink: RAW["color-text"], text: RAW["color-text-body"], muted: RAW["color-text-muted"], faint: RAW["color-text-faint"],
     grid: RAW["palette-white"], gridOpacity: 0.08, par: RAW["color-benchmark"],
-    pos: RAW["color-positive"], neg: RAW["color-negative"], accent: RAW["palette-cyan-400"], warn: RAW["color-warning"],
+    pos: RAW["color-positive"], neg: RAW["color-negative"], accent: RAW["palette-cyan-400"], warn: RAW["color-warning"], alt: RAW["palette-violet-400"],
     onFill: RAW["palette-ink-0"], font: font(RAW["font-text"]), mono: font(RAW["font-mono"]),
   },
   light: {
@@ -56,7 +58,7 @@ export const THEMES: Record<ThemeName, Theme> = {
     bg: RAW["palette-grey-100"], bgGlow: RAW["palette-white"], panel: RAW["palette-white"], halo: RAW["palette-grey-100"],
     ink: RAW["palette-ink-1"], text: RAW["palette-ink-5"], muted: RAW["palette-grey-500"], faint: RAW["palette-grey-500"],
     grid: RAW["palette-ink-0"], gridOpacity: 0.1, par: RAW["palette-grey-500"],
-    pos: RAW["series-6"], neg: RAW["palette-red-600"], accent: RAW["palette-blue-500"], warn: RAW["palette-amber-600"],
+    pos: RAW["series-6"], neg: RAW["palette-red-600"], accent: RAW["palette-blue-500"], warn: RAW["palette-amber-600"], alt: RAW["palette-violet-400"],
     onFill: RAW["palette-white"], font: font(RAW["font-text"]), mono: font(RAW["font-mono"]),
   },
 };
@@ -67,6 +69,7 @@ export function toneColor(th: Theme, t: Tone | undefined): string {
     case "neg": return th.neg;
     case "accent": return th.accent;
     case "warn": return th.warn;
+    case "alt": return th.alt;
     case "muted": return th.muted;
     case "faint": return th.faint;
     default: return th.text;
@@ -104,6 +107,8 @@ export interface Layout {
   right: number;
   /** Where burned-in captions go on clips (empty on lessons, where the page shows captions). */
   foot: Box;
+  /** A band of its own for the verdict card (9:16 clips only; elsewhere it shares the head or plot). */
+  verdict?: Box;
 }
 
 /** The boxes for a canvas. `pills` reserves room on the right for value pills. */
@@ -114,9 +119,10 @@ export function layout(vp: Viewport, o: { pills?: boolean; head?: boolean; xAxis
   const xAxis = o.xAxis === false ? 0 : 18 * u;
   if (h > w * 1.4) {
     // 9:16 clip: the number in the top quarter, the chart in the middle, captions below.
-    const head: Box = { x0: pad * 2, y0: h * 0.1, x1: w - pad * 2, y1: h * 0.27 };
-    const plot: Box = { x0: pad * 2, y0: h * 0.31, x1: w - pad * 2 - right, y1: h * 0.68 - xAxis };
-    return { head, plot, right, foot: { x0: pad * 2, y0: h * 0.74, x1: w - pad * 2, y1: h * 0.9 } };
+    const head: Box = { x0: pad * 2, y0: h * 0.09, x1: w - pad * 2, y1: h * 0.22 };
+    const plot: Box = { x0: pad * 2, y0: h * 0.25, x1: w - pad * 2 - right, y1: h * 0.63 - xAxis };
+    const verdict: Box = { x0: pad * 2, y0: h * 0.655, x1: w - pad * 2, y1: h * 0.76 };
+    return { head, plot, right, verdict, foot: { x0: pad * 2, y0: h * 0.79, x1: w - pad * 2, y1: h * 0.93 } };
   }
   if (h >= w * 0.8) {
     // Square clip or the phone box: a taller head band and a chart below it.

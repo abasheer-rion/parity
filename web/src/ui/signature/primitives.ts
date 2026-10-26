@@ -293,6 +293,20 @@ export function verdict(F: Frame, t: string, o: { tone?: Tone; opacity?: number;
   const u = F.u, { head, plot } = F.L;
   const size = 11.5 * u, lh = size * 1.32;
   const col = F.color(o.tone ?? "accent");
+  const vb = F.L.verdict;
+  if (vb) {
+    // 9:16 clips: the card has a band of its own between the chart and the caption, larger.
+    const vs = 14 * u, vlh = vs * 1.3;
+    const vw = vb.x1 - vb.x0;
+    const vl = wrap(t, vw - 30 * u, vs, 500).slice(0, 3);
+    const vh = vl.length * vlh + 18 * u;
+    const vy = vb.y0 + (1 - op) * 6 * u;
+    let g = rect(vb.x0, vy, vw, vh, { fill: F.th.panel, rx: 10 * u, opacity: 0.96 });
+    g += rect(vb.x0, vy, vw, vh, { rx: 10 * u, stroke: col, sw: 1 * u, opacity: 0.45 });
+    g += rect(vb.x0 + 8 * u, vy + 8 * u, 3.5 * u, vh - 16 * u, { fill: col, rx: 1.75 * u });
+    vl.forEach((l, i) => { g += text(F, vb.x0 + 22 * u, vy + 9 * u + vlh * (i + 0.8), l, { size: vs, weight: 500, fill: F.th.ink, halo: false }); });
+    return group(g, op);
+  }
   const headW = head.x1 - head.x0 - (o.reserve ?? 150 * u);
   let where = o.where ?? (head.y1 - head.y0 > 30 * u && headW > 170 * u ? "head" : "plot");
   let w = where === "head" ? Math.min(headW, 250 * u) : Math.min(plot.x1 - plot.x0 + F.L.right - 20 * u, 300 * u);
