@@ -8,7 +8,7 @@
 // of rows stay quick). Column widths are fixed in that mode, so nothing reflows while
 // you scroll or sort. Short tables glide their rows to their new places on a sort.
 import { PlainTerms } from "./plainTerms";
-import { Fragment, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { Fragment, useLayoutEffect, useRef, useState, type CSSProperties, type HTMLAttributes, type ReactNode, type Ref, type RefObject } from "react";
 import { useSort } from "./filters";
 import { Collapse } from "./disclosure";
 import { Icon } from "./icons";
@@ -25,6 +25,42 @@ export interface Column<T> {
   width?: number | string;
   /** Colour the cell by the sign of this value (adds .good or .bad). */
   tone?: (row: T) => number | null | undefined;
+}
+
+/**
+ * The box a wide or tall table scrolls in. When its table does not fit, the box joins the
+ * tab order as a named region, so keyboard users can scroll it with the arrow keys (WCAG
+ * 2.1.1). When the table fits it is a plain box and is skipped by Tab.
+ */
+export function TableScroll({ label = "Table", className = "", children, ref, ...rest }: HTMLAttributes<HTMLDivElement> & {
+  /** What the table shows, read out when the box takes focus. */
+  label?: string;
+  ref?: Ref<HTMLDivElement>;
+}) {
+  const own = useRef<HTMLDivElement>(null);
+  const [scrolls, setScrolls] = useState(false);
+  useLayoutEffect(() => {
+    const el = own.current;
+    if (!el) return;
+    const check = () => setScrolls(el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1);
+    check();
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+    return () => ro.disconnect();
+  }, []);
+  const setRef = (el: HTMLDivElement | null) => {
+    own.current = el;
+    if (typeof ref === "function") ref(el);
+    else if (ref) (ref as RefObject<HTMLDivElement | null>).current = el;
+  };
+  return (
+    <div ref={setRef} className={`table-wrap ${className}`.trim()} tabIndex={scrolls ? 0 : undefined}
+      role={scrolls ? "region" : undefined} aria-label={scrolls ? label : undefined} {...rest}>
+      {children}
+    </div>
+  );
 }
 
 export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, empty = "Nothing to show.", caption, dense, expand, maxHeight, virtual, stickyFirst, onSortChange }: {
@@ -97,8 +133,8 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
 
   const style: CSSProperties | undefined = maxHeight != null ? { maxHeight } : undefined;
   return (
-    <div ref={box} className={`table-wrap ${maxHeight != null ? "ui-table-box" : ""} ${stickyFirst ? "sticky-first" : ""}`} style={style} data-lenis-prevent={maxHeight != null || undefined}>
-      <table ref={isVirtual ? (v.listRef as RefObject<HTMLTableElement>) : undefined} className={`mtable ${dense ? "dense" : ""} ${isVirtual ? "fixed" : ""}`}>
+    <TableScroll ref={box} label={caption ?? "Table"} className={`${maxHeight != null ? "ui-table-box" : ""} ${stickyFirst ? "sticky-first" : ""}`} style={style} data-lenis-prevent={maxHeight != null || undefined}>
+      <table ref={isVirtual ? (v.listRef as RefObject<HTMLTableElement>) : undefined} className={`mtable ${dense ? "dense" : ""} ${isVirtual ? "fixed" : "ui-stagger-rows"}`}>
         {caption && <caption className="sr-only">{caption}</caption>}
         {columns.some((c) => c.width) && <colgroup>{columns.map((c) => <col key={c.key} style={c.width ? { width: c.width } : undefined} />)}</colgroup>}
         <thead>
@@ -130,13 +166,13 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
           <tbody ref={flipRef}>{sorted.map(renderRow)}</tbody>
         )}
       </table>
-    </div>
+    </TableScroll>
   );
 }
 
 /** The details under an opened row. Stays drawn while it closes, so it can animate shut. */
 function DetailRow({ open, cols, children }: { open: boolean; cols: number; children: ReactNode }) {
-  const p = usePresence(open, 260);
+  const p = usePresence(open, "dur-3");
   if (!p.mounted) return null;
   return (
     <tr className="ui-detail-row" data-state={p.state}>

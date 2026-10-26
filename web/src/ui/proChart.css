@@ -5,7 +5,7 @@
 .pc-stage { position: relative; width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; contain: layout paint; }
 .pc-host { position: absolute; inset: 0; }
 .pc-drawing .pc-host { cursor: crosshair; }
-.pc-legend { position: absolute; left: 8px; top: 6px; z-index: 3; display: flex; flex-direction: column; gap: 2px; pointer-events: none; font-size: var(--fs-xs); color: var(--text-2); font-variant-numeric: tabular-nums; max-width: calc(100% - 90px); }
+.pc-legend { position: absolute; left: 8px; top: 6px; z-index: 3; display: flex; flex-direction: column; gap: 2px; pointer-events: none; font-size: var(--fs-xs); color: var(--text-2); font-variant-numeric: var(--num-variant); max-width: calc(100% - 90px); }
 .pc-legend-row { display: flex; flex-wrap: nowrap; gap: 10px; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pc-legend-row > span { display: inline-flex; gap: 4px; align-items: center; }
 .pc-legend b { color: var(--text); font-weight: var(--fw-medium); }
@@ -23,6 +23,8 @@
 .pc-full .pc-stage, .pc:fullscreen .pc-stage { flex: 1 1 auto; height: auto; }
 @media (max-width: 640px) {
   .pc-legend-row > span:nth-child(n+6) { display: none; }
+  /* On a phone the prices wrap to a second line rather than being cut off at the edge. */
+  .pc-legend-row { flex-wrap: wrap; row-gap: 0; }
   .pc-hint { right: 8px; top: auto; bottom: 34px; }
 }
 

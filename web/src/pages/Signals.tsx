@@ -5,6 +5,7 @@ import { colorMap } from "../lib/colors";
 import { num } from "../lib/format";
 import type { Report } from "../lib/types";
 import { nameOf } from "../lib/strategyMeta";
+import { TableScroll } from "../ui";
 
 export function Signals({ report }: { report: Report }) {
   const colors = colorMap(report.runs);
@@ -37,7 +38,7 @@ export function Signals({ report }: { report: Report }) {
       </Card>
 
       <Card title="Table view" help="t-stats use overlapping returns for horizons above one day, so they overstate confidence.">
-        <div className="table-wrap">
+        <TableScroll>
           <table>
             <thead>
               <tr><th>Strategy</th>{horizons.map((h) => <th key={h}>IC {h}d</th>)}{horizons.map((h) => <th key={`t${h}`}>t-stat {h}d</th>)}</tr>
@@ -52,7 +53,7 @@ export function Signals({ report }: { report: Report }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );

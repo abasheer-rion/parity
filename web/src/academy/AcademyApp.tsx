@@ -19,10 +19,11 @@ import { termById } from "../lib/glossary";
 import { appLink, productUrl } from "../lib/space";
 import { setStoreUser } from "../lib/userStore";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
-import { Button, Dialog, Icon, Popover, Segmented, Toaster, Toggle, toast } from "../ui";
+import { AnimatedNumber, Button, Dialog, Icon, LIFT, MotionControl, Popover, Segmented, STAGGER, Toaster, Toggle, toast, useMotionHelp } from "../ui";
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
 import "./academy.css";
+import { isDesktop } from "../desktop/bridge";
 
 const LEGAL = "Research and education only. Not investment advice.";
 const LEGAL_MORE = " Pictures use example numbers unless they say otherwise.";
@@ -37,7 +38,9 @@ export function AcademyApp() {
 }
 
 // Parity opens the Academy in a new tab, so a tab whose only history entry is this page was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 function goBack() {
   if (OPENED_AS_TAB) {
     window.close();
@@ -205,7 +208,7 @@ function AcademyShell() {
           </button>
         )}
         <a className="pac-chip" href="#/progress" title="Lessons done across every course">
-          <span className="pac-chip-v">{p.loading ? "\u00a0" : p.doneCount}</span><span className="pac-chip-l">of {totalLessons}<span className="pac-chip-x"> lessons</span></span>
+          <span className="pac-chip-v">{p.loading ? "\u00a0" : <AnimatedNumber value={p.doneCount} format={(n) => String(Math.round(n))} />}</span><span className="pac-chip-l">of {totalLessons}<span className="pac-chip-x"> lessons</span></span>
         </a>
       </header>
 
@@ -223,12 +226,15 @@ function AcademyShell() {
         {route.view === "lesson" ? (
           <Player course={route.course} index={route.index} railOpen={railOpen} setRailOpen={setRailOpen} mobile={mobile} autoplay={settings.autoplay} mainRef={main} />
         ) : (
-          <main id="main" tabIndex={-1} ref={main} className="pac-main">
+          <main id="main" tabIndex={-1} ref={main} className="pac-main ui-route-kids">
+            {/* Keyed by the address: each page eases in when it opens (REF-0023). */}
+            <Fragment key={hash.split("?")[0]}>
             {route.view === "library" ? <Library continueHref={continueHref} />
               : route.view === "course" ? <CourseView course={route.course} />
               : route.view === "progress" ? <ProgressView />
               : route.view === "settings" ? <SettingsView settings={settings} set={setSettings} />
               : <div className="pac-page"><NotFound title="That course or lesson does not exist" body="There is no Academy course or lesson at this address. The link may be mistyped, or the lesson may have moved." address={hash} home="#/" homeLabel="See every course" /></div>}
+            </Fragment>
           </main>
         )}
       </div>
@@ -313,7 +319,7 @@ function Library({ continueHref }: { continueHref: string }) {
           <h1 id="pac-continue" className="pac-hero-title">{target.lesson.title}</h1>
           <p className="pac-meta">{target.course.title} · Lesson {idx + 1} of {target.course.lessons.length} · {target.lesson.minutes} minutes</p>
           <div className="pac-hero-acts">
-            <a className="pac-btn pac-btn-main" href={continueHref}>{r ? "Continue" : "Start the first lesson"}</a>
+            <Button variant="primary" href={continueHref}>{r ? "Continue" : "Start the first lesson"}</Button>
             <span className="pac-kbd-hint"><kbd>C</kbd></span>
           </div>
         </div>
@@ -328,13 +334,13 @@ function Library({ continueHref }: { continueHref: string }) {
         <h2 className="pac-h2">Courses</h2>
         <Segmented label="Level" size="sm" value={level} onChange={setLevel} options={[["all", "All"], ...levels.map((l) => [l, l] as [string, string])]} />
       </div>
-      <ol className="pac-grid">
+      <ol className={`pac-grid ${STAGGER}`}>
         {shown.map((c) => {
           const d = p.courseDone(c);
           const next = p.nextIn(c);
           const last = c.lessons[c.lessons.length - 1];
           return (
-            <li key={c.id} className="pac-card pac-glass">
+            <li key={c.id} className={`pac-card pac-glass ${LIFT}`}>
               <a className="pac-card-pic" href={`#/${c.id}`} tabIndex={-1} aria-hidden>
                 <Frame visual={last.visual} s={last.visual.steps.length - 1} />
               </a>
@@ -345,7 +351,7 @@ function Library({ continueHref }: { continueHref: string }) {
                 <Bar done={d} total={c.lessons.length} label={`${c.title} progress`} />
                 <p className="pac-card-foot">
                   <span className="pac-meta">{status(d, c.lessons.length)}</span>
-                  <a className="pac-btn pac-btn-sm" href={lessonHref(c, d === c.lessons.length ? c.lessons[0] : next)}>{action(d, c.lessons.length)}<span className="sr-only"> {c.title}</span></a>
+                  <Button size="sm" href={lessonHref(c, d === c.lessons.length ? c.lessons[0] : next)}>{action(d, c.lessons.length)}<span className="sr-only"> {c.title}</span></Button>
                 </p>
               </div>
             </li>
@@ -375,9 +381,9 @@ function CourseView({ course: c }: { course: Course }) {
           <p className="pac-meta">{c.lessons.length} lessons · {courseMinutes(c)} minutes · {status(d, c.lessons.length)}</p>
           <Bar done={d} total={c.lessons.length} label={`${c.title} progress`} />
           <div className="pac-hero-acts">
-            <a className="pac-btn pac-btn-main" href={lessonHref(c, d === c.lessons.length ? first : next)}>
+            <Button variant="primary" href={lessonHref(c, d === c.lessons.length ? first : next)}>
               {d === 0 ? "Start the course" : d === c.lessons.length ? "Review from the start" : `Continue: ${next.title}`}
-            </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -480,11 +486,12 @@ function Term({ id }: { id: string }) {
   const t = termById[id];
   return (
     <Popover label={t.term} width={320} placement="top-start" trigger={() => <button type="button" className="pac-term">{t.term}</button>}>
-      <div className="pac-term-pop">
+      {/* Spans, not a div and a p: the term sits inside a paragraph of the lesson. */}
+      <span className="pac-term-pop">
         <strong>{t.term}</strong>
-        <p>{t.simple}</p>
+        <span className="pac-term-def">{t.simple}</span>
         <a href={productUrl(`#/learn/${id}`)} target="_blank" rel="noopener">Full entry in the glossary<Icon name="arrowUpRight" size={12} /></a>
-      </div>
+      </span>
     </Popover>
   );
 }
@@ -513,8 +520,8 @@ function QuickCheck({ course: c, lesson: l }: { course: Course; lesson: Lesson }
             onPick={(v) => { setChecked(false); setPicks((ps) => ps.map((x, k) => (k === i ? v : x))); }} />
         ))}
         <div className="pac-check-foot">
-          <button type="submit" className="pac-btn pac-btn-main" disabled={!all}>Check my answers</button>
-          {checked && <button type="button" className="pac-btn" onClick={() => { setChecked(false); setPicks(l.check.map(() => null)); }}>Try again</button>}
+          <Button type="submit" variant="primary" disabled={!all}>Check my answers</Button>
+          {checked && <Button onClick={() => { setChecked(false); setPicks(l.check.map(() => null)); }}>Try again</Button>}
           <p className="pac-score" aria-live="polite">{checked ? scoreLine(right, l.check.length) : all ? "" : "Answer every question to check."}</p>
         </div>
       </form>
@@ -593,7 +600,7 @@ function ProgressView() {
                 <td className="pac-col-bar l"><Bar done={done} total={c.lessons.length} label={`${c.title} progress`} /></td>
                 <td>{a ? `${r} of ${a}` : "n/a"}</td>
                 <td>{when(last) || "n/a"}</td>
-                <td><a className="pac-btn pac-btn-sm" href={lessonHref(c, done === c.lessons.length ? c.lessons[0] : p.nextIn(c))}>{action(done, c.lessons.length)}<span className="sr-only"> {c.title}</span></a></td>
+                <td><Button size="sm" href={lessonHref(c, done === c.lessons.length ? c.lessons[0] : p.nextIn(c))}>{action(done, c.lessons.length)}<span className="sr-only"> {c.title}</span></Button></td>
               </tr>
             ))}
           </tbody>
@@ -622,12 +629,14 @@ function ClearDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
 function SettingsView({ settings, set }: { settings: Settings; set: (p: Partial<Settings>) => void }) {
   const p = useProgress();
   const [confirm, setConfirm] = useState(false);
+  const motionHelp = useMotionHelp();
   return (
     <div className="pac-page pac-settings">
       <h1 className="pac-h1">Settings</h1>
       <section className="pac-set pac-glass" aria-labelledby="set-lessons">
         <h2 id="set-lessons" className="pac-h3">Lessons</h2>
         <div className="pac-set-row"><span>Play each picture once when it comes into view</span><Toggle on={settings.autoplay} onChange={(autoplay) => set({ autoplay })} label="Play pictures on their own" /></div>
+        <div className="pac-set-row"><span>Motion<small className="pac-set-help">{motionHelp}</small></span><MotionControl /></div>
         <div className="pac-set-row"><span>Text size</span><Segmented label="Text size" size="sm" value={settings.text} onChange={(text) => set({ text })} options={[["standard", "Standard"], ["large", "Large"]]} /></div>
       </section>
       <section className="pac-set pac-glass" aria-labelledby="set-keys">

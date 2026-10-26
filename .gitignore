@@ -20,6 +20,9 @@ node_modules/
 web/dist/
 web/.wrangler/
 web/.newsroom-preview/
+web/test-results/
+web/playwright-report/
+web/blob-report/
 
 # Supabase local state
 supabase/.temp/
@@ -36,3 +39,7 @@ content/out/
 # A .venv that is a symlink (worktrees share one environment) is a file, not a folder.
 .venv
 web/layout-shots/
+
+# Load testing (REF-0025): k6 is downloaded here by load/get-k6.sh, results are local
+tools/
+load/results/

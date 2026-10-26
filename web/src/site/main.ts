@@ -9,23 +9,28 @@
 //   - the sign-in panel (DEC-0044): Log in and Sign up fade the page out and the panel in,
 //     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
 import Lenis from "lenis";
+import "./viewTransitions";
 import { botTrades, TRADES } from "./botPath";
 import { startPwa } from "../pwa/install";
 import { startRum } from "../lib/rum";
 import { isDesktop } from "../desktop/bridge";
+import { motionLevel } from "../ui/motionCore";
 
 startPwa();
 startRum("site", { desktop: isDesktop() });
 
 const root = document.documentElement;
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Reduced motion (the device asks, unless the Motion setting says Full; or the setting says
+// Reduced, REF-0023): sections still fade in as they arrive (html.motion-lite, kit.css), but
+// nothing rises, counts, pins or loops.
+const reduce = motionLevel() === "reduced";
 const $$ = <T extends HTMLElement = HTMLElement>(sel: string, el: ParentNode = document) => Array.from(el.querySelectorAll<T>(sel));
 const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const fmt = (n: number) => Math.round(n).toLocaleString("en-US");
 const money = (n: number) => `$${fmt(n)}`;
 
 const lenis = reduce ? null : new Lenis({ autoRaf: true, lerp: 0.1, smoothWheel: true });
-if (!reduce) root.classList.add("motion");
+root.classList.add(reduce ? "motion-lite" : "motion");
 
 // The corner controls: glass once the page scrolls, out of the way while scrolling down,
 // back on the way up. Focus always brings them back (CSS :focus-within).
@@ -100,7 +105,9 @@ if (authHash()) syncAuth();
 
 // Reveals. Anything already on screen shows at once, so nothing visible blinks.
 const seenOnce = (els: HTMLElement[], cls: string, margin = "0px 0px -10% 0px") => {
-  if (reduce || !("IntersectionObserver" in window)) { els.forEach((el) => el.classList.add(cls)); return; }
+  if (!("IntersectionObserver" in window)) { els.forEach((el) => el.classList.add(cls)); return; }
+  // Reduced motion: things are already visible, so fade them the moment they reach the edge.
+  if (reduce) margin = "0px";
   const vh = window.innerHeight;
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add(cls); io.unobserve(e.target); }

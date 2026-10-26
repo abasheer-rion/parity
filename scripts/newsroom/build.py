@@ -80,8 +80,8 @@ CSS = """
 .nr-thumb img{display:block;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center}
 .nr-thumb.blank{display:flex;align-items:flex-end;padding:14px;color:var(--faint);font-size:14px;background:linear-gradient(135deg,#101633,#0c0e15)}
 .nr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px 22px;list-style:none;padding:0;margin:0}
-.nr-card a{display:block;text-decoration:none;color:var(--text)}.nr-card h3{font-size:19px;line-height:1.3;margin:14px 0 6px}
-.nr-card a:hover h3{text-decoration:underline;text-underline-offset:3px}.nr-card p{margin:0 0 10px;color:var(--muted);font-size:15px}
+.nr-card a{display:block;text-decoration:none;color:var(--text)}.nr-card :is(h2,h3){font-size:19px;line-height:1.3;margin:14px 0 6px}
+.nr-card a:hover :is(h2,h3){text-decoration:underline;text-underline-offset:3px}.nr-card p{margin:0 0 10px;color:var(--muted);font-size:15px}
 .nr-meta{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:13px;color:var(--faint)}
 .stance{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;border:1px solid}
 .s-fact{color:var(--good);border-color:#4cc98a55}.s-analysis{color:var(--blue-text);border-color:#85a8ff55}.s-opinion{color:var(--warn);border-color:#e8c06a77;background:#e8c06a14}
@@ -135,7 +135,7 @@ q.addEventListener('input',async()=>{const v=q.value.trim().toLowerCase();if(!v)
 if(!all){try{all=await(await fetch(q.dataset.search)).json()}catch{all=[]}}
 const hits=all.filter(p=>(p.title+' '+p.dek+' '+p.type+' '+p.tags.join(' ')+' '+p.authors.join(' ')).toLowerCase().includes(v));
 out.replaceChildren();if(!hits.length){out.append(el('p','','No posts match that search.'))}else{const ul=el('ul','nr-grid');
-for(const p of hits){const li=el('li','nr-card'),l=el('a');l.href=p.url;l.append(el('h3','',p.title),el('p','',p.dek),el('span','nr-meta',p.type+', '+p.date));li.append(l);ul.append(li)}out.append(ul)}
+for(const p of hits){const li=el('li','nr-card'),l=el('a');l.href=p.url;l.append(el('h2','',p.title),el('p','',p.dek),el('span','nr-meta',p.type+', '+p.date));li.append(l);ul.append(li)}out.append(ul)}
 out.hidden=false;list.hidden=true})})();"""
 
 
@@ -386,9 +386,11 @@ class Newsroom:
         return (f'<span class="nr-meta">{self.stance_pill(p)}{kind}<span>{self.byline(p, links=False)}</span>'
                 f'<time datetime="{p.date.isoformat()}">{fmt_date(p.date)}</time><span>{p.read_minutes()} min read</span>{flags}</span>')
 
-    def card(self, p: Post) -> str:
+    def card(self, p: Post, level: int = 2) -> str:
+        # Level 2 on list pages, where the cards come straight after the h1; level 3 under a
+        # section heading such as "Related posts" (no skipped heading levels, WCAG 1.3.1).
         return (f'<li class="nr-card"><a href="{p.path}">{self.hero_html(p, "(max-width: 760px) 100vw, 360px", thumb=True)}'
-                f'<h3>{e(p.title)}</h3><p>{e(p.dek)}</p>{self.meta_line(p)}</a></li>')
+                f'<h{level}>{e(p.title)}</h{level}><p>{e(p.dek)}</p>{self.meta_line(p)}</a></li>')
 
     # ------------------------------------------------------------ the page shell
     def shell(self, *, path: str, title: str, description: str, body: str, section: str,
@@ -440,9 +442,10 @@ class Newsroom:
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap wide">
 <a class="brand" href="/"><img src="{bp.LOGO}" width="154" height="36" alt="Parity home"></a>
-<nav class="site" aria-label="Site">{bp.nav_html(section)}<a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
+<nav class="site" aria-label="Site">{bp.nav_html(section)}</nav>
+<nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
-<main id="main"><div class="wrap wide">
+<main id="main" tabindex="-1"><div class="wrap wide">
 <p class="crumbs">{crumbs}<span aria-current="page">{e(trail[-1][0])}</span></p>
 {body}
 </div></main>
@@ -517,7 +520,7 @@ class Newsroom:
                      f'<a href="/{p.section}/category/{type_slug(p.type)}/">More {e(PLURALS.get(p.type, p.type).lower())}</a>')
         related = self.related(p)
         rel_html = (f'<section class="nr-related" aria-labelledby="more"><h2 id="more">Related posts</h2>'
-                    f'<ul class="nr-grid">{"".join(self.card(x) for x in related)}</ul></section>') if related else ""
+                    f'<ul class="nr-grid">{"".join(self.card(x, 3) for x in related)}</ul></section>') if related else ""
         out = f"""<div class="progress" aria-hidden="true"></div>
 <article class="nr-article">
 {banners}
@@ -646,7 +649,7 @@ class Newsroom:
             path = f"/authors/{a.id}/"
             about = f'<p class="lede">{e(a.about)}</p>' if a.about else ""
             bio = f'<p class="lede">{e(a.bio)}</p>' if a.bio else ""
-            posts = (f'<h2>Posts</h2><ul class="nr-grid">{"".join(self.card(p) for p in mine)}</ul>' if mine
+            posts = (f'<h2>Posts</h2><ul class="nr-grid">{"".join(self.card(p, 3) for p in mine)}</ul>' if mine
                      else "<p>No posts yet.</p>")
             body = (f'<div class="nr-person">{self.avatar(a, 88)}<div><h1>{e(a.name)}</h1>'
                     f'<ul class="meta"><li class="pill">{e(kind)}</li><li class="pill">{count(len(mine), "post")}</li></ul></div></div>'

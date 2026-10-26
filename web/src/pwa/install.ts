@@ -52,7 +52,8 @@ const CSS = `
 .pwa-card button.pwa-go { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
 .pwa-card button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 @keyframes pwa-in { from { opacity: 0; transform: translateY(8px); } }
-@media (prefers-reduced-motion: reduce) { .pwa-card { animation: none; } }
+@media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) .pwa-card { animation: none; } }
+:root[data-motion="reduced"] .pwa-card { animation: none; }
 `;
 
 function make<K extends keyof HTMLElementTagNameMap>(tag: K, props: Partial<HTMLElementTagNameMap[K]> = {}): HTMLElementTagNameMap[K] {

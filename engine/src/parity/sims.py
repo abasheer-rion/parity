@@ -19,6 +19,8 @@ One cycle:
      up here within the hour instead of at the next deploy.
   4. The competitor feedback collector (`parity profiles collect`), at most once a day:
      public feedback from sources whose terms allow it, counted by theme (CMP docs).
+  5. The data registry (DEC-0064): sync with the catalog, discovery at most once a day,
+     the enrolment gate for a few candidates, and a send of every change to the site.
 
 There is no command for forward paper-tests of strategies yet (paper trading lives in
 the signed-in site), so a cycle has none. After each cycle the summary goes to the site
@@ -210,8 +212,19 @@ def _profiles() -> dict:
     return collect.collect_if_due()
 
 
+def _registry() -> dict:
+    """The data registry's cycle (DEC-0064). Returns one short line for the log."""
+    from .registry import cycle as rcycle
+
+    out = rcycle.run()
+    failed = [k for k, v in out["parts"].items() if not v["ok"]]
+    if failed:
+        raise RuntimeError(f"registry parts failed: {', '.join(failed)}; {rcycle.line(out)}")
+    return {"registry": rcycle.line(out)}
+
+
 def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
-          exports: bool = True, profiles: bool = False) -> dict:
+          exports: bool = True, profiles: bool = False, registry: bool = False) -> dict:
     """One pass over every sim. A step that fails is recorded and the rest still run.
     With `profiles`, the cycle ends with the feedback collector, which itself runs a
     pass only when the last one is a day old (the service turns this on)."""
@@ -222,6 +235,8 @@ def cycle(con: sqlite3.Connection, paths: int = 1000, world_n: int = 2000,
         steps += [(name, lambda a=argv: _cli(*a)) for name, argv in EXPORTS]
     if profiles:
         steps.append(("profiles", _profiles))
+    if registry:
+        steps.append(("data registry", _registry))
     done, timings = [], []
     for name, fn in steps:
         t = time.time()
@@ -383,6 +398,21 @@ def health(search_db: Path | None = None, sims_db: Path = DB) -> list[str]:
     return lines
 
 
+def _registry_counts() -> dict:
+    """Public counts from the data registry for the health line (DEC-0064)."""
+    from .registry import cycle as rcycle
+    from .registry import db as rdb
+
+    if not rdb.DB.exists():
+        return {}
+    try:
+        s = rcycle.summary(rdb.connect())
+    except Exception:  # the heartbeat goes out without it
+        return {}
+    return {"data": {k: s.get(k, 0) for k in ("series", "live", "enrolled", "candidate",
+                                               "degraded", "retired", "health_bad")}}
+
+
 def _profile_counts() -> dict:
     """Two public counts from the feedback collector for the health line."""
     from .profiles import store
@@ -400,7 +430,8 @@ def _publish(doc: dict, failed_before: bool) -> bool:
         from .publish.supabase import NotConfigured, heartbeat, publish_sims
         publish_sims(doc)
         heartbeat("sims", {"cycles": doc["cycles"], "last_cycle_at": doc["last_cycle_at"],
-                           "bot_paths": doc["bots"]["paths"], **_profile_counts()})
+                           "bot_paths": doc["bots"]["paths"], **_profile_counts(),
+                           **_registry_counts()})
         return False
     except NotConfigured:
         return False
@@ -422,7 +453,7 @@ def run_forever(paths: int = 1000, world_n: int = 2000, sleep_minutes: float = 2
         return max_hours is None or time.time() - started < max_hours * 3600
 
     while time_left():
-        out = cycle(con, paths, world_n, profiles=True)
+        out = cycle(con, paths, world_n, profiles=True, registry=True)
         doc = export(con)
         failed = _publish(doc, failed)
         if os.environ.get("PARITY_WRITER_DB_URL"):
@@ -434,6 +465,9 @@ def run_forever(paths: int = 1000, world_n: int = 2000, sleep_minutes: float = 2
         print(f"{out['finished_at']} cycle {doc['cycles']}: {ok}/{len(out['steps'])} steps ok "
               f"in {secs:.0f}s, {doc['bots']['paths']:,} bot paths in all"
               + (f"; failed: {', '.join(bad)}" if bad else ""), flush=True)
+        reg = next((s for s in out["steps"] if s["step"] == "data registry"), None)
+        if reg:
+            print(f"  {reg.get('registry') or reg.get('error')}", flush=True)
         wake = time.time() + sleep_minutes * 60
         while time.time() < wake and time_left():
             time.sleep(min(30.0, max(wake - time.time(), 0.0)))

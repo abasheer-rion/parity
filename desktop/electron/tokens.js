@@ -56,6 +56,7 @@ module.exports = {
   "color-border": "rgba(255, 255, 255, 0.08)",
   "color-border-strong": "rgba(255, 255, 255, 0.14)",
   "color-border-max": "rgba(255, 255, 255, 0.22)",
+  "color-border-control": "#6c7186",
   "color-hover": "rgba(255, 255, 255, 0.05)",
   "color-pressed": "rgba(255, 255, 255, 0.09)",
   "color-fill": "rgba(255, 255, 255, 0.07)",

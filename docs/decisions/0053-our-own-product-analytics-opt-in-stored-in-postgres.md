@@ -76,5 +76,6 @@ The owner asked to see what people do on Parity: which pages they open, how long
 
 - [DEC-0060: A getting started checklist and first-run tours, and no bank details until a broker partner](0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md)
 - [REF-0022: Product analytics events](../reference/0022-product-analytics-events.md)
+- [REF-0025: Parity capacity and load test results](../reference/0025-parity-capacity-and-load-test-results.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

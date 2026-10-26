@@ -1,0 +1,10 @@
+The fonts the site loads from Google Fonts, latin subset, kept here so the E2E suite lays
+pages out with the real fonts on any machine without reaching Google (e2e/fixtures.ts).
+Downloaded from fonts.gstatic.com on 2026-10-26. fonts.css is Google's CSS for them, with
+local addresses and font-display: block, so a test never sees the fallback font.
+
+Inter                 SIL Open Font License 1.1     https://github.com/rsms/inter
+Roboto Mono           Apache License 2.0            https://github.com/googlefonts/RobotoMono
+Instrument Serif      SIL Open Font License 1.1     https://github.com/Instrument/instrument-serif
+IBM Plex Mono         SIL Open Font License 1.1     https://github.com/IBM/plex
+Cinzel                SIL Open Font License 1.1     https://github.com/NDISCOVER/Cinzel

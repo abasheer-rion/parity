@@ -120,6 +120,10 @@ PROVIDERS: list[Provider] = [
              planned=True),
     # Live data for Trade, the Terminal and the Workbench (DEC-0052). Terms read 25 Oct 2026;
     # the site's copy of this list is web/src/lib/live/sources.ts.
+    Provider("onchain", "Parity on-chain feed, Base", "Public blockchain data, which has no "
+             "licence; read through PublicNode's free node", "https://www.publicnode.com/terms",
+             feed="real-time", live="on",
+             note="swaps in the deepest Uniswap v3 and Aerodrome pools on Base (DEC-0063)"),
     Provider("coingecko-live", "CoinGecko, streamed through our edge", "Display allowed with "
              "\"Data provided by CoinGecko\" linked next to the data",
              "https://www.coingecko.com/en/api_terms", feed="delayed about 1 min", live="on",

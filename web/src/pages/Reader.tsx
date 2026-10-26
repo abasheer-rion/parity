@@ -8,8 +8,8 @@ import { citeLabel, search, TYPE_HELP, TYPE_LABELS, TYPE_ORDER, useDocs, type Do
 import { REPO_URL } from "../lib/format";
 import { scrollToEl, scrollToTop } from "../lib/scroll";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
-import { Icon } from "../ui/icons";
 import { PageSkeleton } from "../ui/skeleton";
+import { IconButton } from "../ui";
 
 function byType(docs: DocEntry[]): [string, DocEntry[]][] {
   const groups: Record<string, DocEntry[]> = {};
@@ -154,10 +154,7 @@ function DocBookmark({ doc }: { doc: DocEntry }) {
   const href = `#/doc/${doc.id}`;
   const on = prefs.bookmarks.some((b) => b.href === href);
   return (
-    <button className={`round-btn doc-bm ${on ? "on" : ""}`} onClick={() => toggleBookmark(href, doc.title)}
-      aria-label={on ? "Remove from bookmarks" : "Add to bookmarks"} title={on ? "Remove from bookmarks" : "Add to bookmarks"}>
-      <Icon name="bookmark" size={13} />
-    </button>
+    <IconButton icon="bookmark" className="doc-bm" active={on} onClick={() => toggleBookmark(href, doc.title)} label={on ? "Remove from bookmarks" : "Add to bookmarks"} />
   );
 }
 

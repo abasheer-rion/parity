@@ -1,10 +1,14 @@
 // The ticker tape: the week's most unusual moves (largest |z|) scrolling along the
-// bottom. Hover pauses it; with reduced motion it stands still and scrolls by hand.
+// bottom. Hover, focus or the Pause button stops it (WCAG 2.2.2); with reduced motion it
+// stands still and scrolls by hand.
+import { PauseLive } from "../components/PauseLive";
+import { useLivePaused } from "../lib/live/pause";
 import { useTerm } from "./context";
 import { fmtChg, fmtLast, fmtNum, tone } from "./fmt";
 
 export function Ticker() {
   const t = useTerm();
+  const paused = useLivePaused();
   if (t.index.status !== "ok") {
     return <div className="term-ticker idle" aria-label="Ticker">{t.index.status === "loading" ? "Loading markets" : "No market data yet"}</div>;
   }
@@ -26,7 +30,9 @@ export function Ticker() {
     </ul>
   );
   return (
-    <div className="term-ticker" aria-label="Biggest moves this week">
+    // A tape that scrolls by design, cut at the screen's edge: the layout check skips it.
+    <div className={`term-ticker ${paused ? "paused" : ""}`} aria-label="Biggest moves this week" data-layout-ignore>
+      <PauseLive className="term-tape-pause" />
       <div className="term-tape" style={{ ["--tape-s" as string]: `${Math.max(40, items.length * 4)}s` }}>
         {row(false)}
         {row(true)}
