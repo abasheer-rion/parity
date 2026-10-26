@@ -322,6 +322,8 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .ptr[data-mobile] .tb-back { padding: 0 10px; }
 .ptr[data-mobile] .tb-back-t, .ptr[data-mobile] .tb-brand, .ptr[data-mobile] .cb-chg, .ptr[data-mobile] .cb-sep { display: none; }
 .ptr[data-mobile] .cb-sym { min-width: 70px; }
+/* The symbol's name is the button on a phone; the search icon would push 1M off the bar. */
+.ptr[data-mobile] .cb-sym svg { display: none; }
 /* The data badge keeps its feed and age on a phone; the source name is in its popover. */
 .ptr[data-mobile] .lvb-src { display: none; }
 .ptr[data-mobile] .cb-px { min-width: 0; }

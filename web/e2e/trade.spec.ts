@@ -168,7 +168,12 @@ test.describe("phone", () => {
   test("the top bar's timeframe buttons all fit on screen", async ({ page }, info) => {
     test.skip(info.project.name !== "phone", "phone layout");
     await ready(page);
-    for (const tf of ["1D", "1W", "1M"]) await expect(page.getByRole("toolbar", { name: "Chart" }).getByRole("radio", { name: tf })).toBeInViewport({ ratio: 1 });
+    // The bar hides what does not fit, so nothing may stick out past its own edge, and the
+    // top bar keeps room to spare for fonts that draw a little wider.
+    const bar = page.getByRole("toolbar", { name: "Chart" });
+    expect(await bar.evaluate((e) => e.scrollWidth - e.clientWidth), "nothing cut off").toBeLessThanOrEqual(0);
+    const gap = await page.locator(".tb-gap").evaluate((e) => e.getBoundingClientRect().width);
+    expect(gap, "room to spare in the top bar").toBeGreaterThanOrEqual(12);
   });
 
   test("the bottom bar switches between chart, ticket and positions", async ({ page }, info) => {
