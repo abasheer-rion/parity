@@ -389,6 +389,7 @@ Hosting, CI/CD, database and costs.
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
+- [DEC-0062: Desktop builds are signed with Argus Vision certificates](decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
