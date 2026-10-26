@@ -265,7 +265,7 @@ export const ROUTES_META: Record<string, RouteMeta> = {
 
 /** Parity Terminal's workspaces and its old Sim World tabs (src/terminal/layout.ts, functions.ts). */
 export const SIM_TABS: Record<string, string> = {
-  overview: "Overview", macro: "Macro", fx: "FX", commodities: "Commodities", simlab: "Sim lab",
+  overview: "Overview", macro: "Macro", fx: "FX", commodities: "Commodities", simlab: "Sim lab", world: "World",
   map: "World map", crises: "Crises", scenario: "Scenario", paths: "Paths", stress: "Stress test", race: "Race",
   rates: "Rates", connections: "Connections", stocks: "Stocks", bots: "Bot Battle",
 };

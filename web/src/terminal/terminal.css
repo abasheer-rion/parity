@@ -483,3 +483,34 @@
   .term-lib-kinds { border-right: 0; border-bottom: 1px solid var(--t-line); }
 }
 .term-lib-detail .term-table-wrap { flex: none; overflow-x: auto; overflow-y: visible; }
+
+/* MC, MIX and ECHO (DEC-0066). */
+.term-chip { height: 24px; padding: 0 8px; display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--t-line-2); background: transparent; color: var(--t-dim); font: inherit; font-size: var(--type-2xs); cursor: pointer; }
+.term-chip:hover { color: var(--t-text); }
+.term-chip.on { color: var(--t-text); border-color: var(--t-amber-dim); background: color-mix(in srgb, var(--color-warning) 8%, transparent); }
+.term-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+.term-faint { color: var(--t-faint); }
+.term-mc-body { padding: 6px 8px; display: flex; flex-direction: column; gap: 8px; }
+.term-mc-stage { border: 1px solid var(--t-line); padding: 6px 8px; }
+.term-mc-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.term-mc-big { font-family: var(--t-mono); font-size: var(--type-3xl); color: var(--t-amber); line-height: 1.1; }
+.term-mc-fan { position: relative; min-width: 0; }
+.term-mc-fan svg { display: block; }
+.term-mc-scrub { width: 100%; }
+.term-mc-table { width: auto; min-width: 100%; }
+.term-mc-table td, .term-mc-table th { height: 22px; }
+.term-mc-svc td { color: var(--t-dim); }
+.term-mc-custom { font-size: var(--type-2xs); color: var(--t-dim); }
+.term-mc-custom summary { cursor: pointer; min-height: 24px; display: inline-flex; align-items: center; }
+.term-mc-crow { display: inline-flex; gap: 4px; margin: 2px 8px 2px 0; align-items: center; }
+.term-mc-w { width: 64px; text-transform: none; }
+.term-mc-hist { min-width: 0; }
+.term-mix-shocks { gap: 6px 14px; }
+.term-mix-shock { display: inline-flex; align-items: center; gap: 5px; font-size: var(--type-2xs); color: var(--t-dim); }
+.term-mix-shock .term-input { width: 70px; text-transform: none; }
+.term-echo-alert { flex: none; padding: 4px 8px; border-bottom: 1px solid var(--t-line); background: color-mix(in srgb, var(--color-warning) 12%, var(--t-panel)); color: var(--t-amber); font-size: var(--type-2xs); }
+.term-echo-moves { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: var(--type-2xs); }
+.term-echo-map { max-width: 560px; }
+.term-live-tag { color: var(--palette-black); background: var(--t-up); padding: 0 4px; font-weight: 600; font-size: var(--type-3xs); letter-spacing: .05em; }
+@container panel (max-width: 620px) { .ptm .term-mix-up { display: none; } }
+.term-echo .term-name { max-width: 18ch; }

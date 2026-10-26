@@ -107,6 +107,16 @@ function localScenarios(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(file));
       });
+      server.middlewares.use("/local/stress.json", (_req, res) => {
+        const file = resolve(OUTPUT, "./stress.json");
+        if (!existsSync(file)) {
+          res.statusCode = 404;
+          res.end("Run `parity world stress` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(file));
+      });
       server.middlewares.use("/local/world.json", (_req, res) => {
         if (!existsSync(world)) {
           res.statusCode = 404;

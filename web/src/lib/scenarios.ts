@@ -34,6 +34,21 @@ export interface ScenarioData {
   events: ScenarioEvent[];
   /** What markets did after every kind of event (DEC-0066). Older files leave it out. */
   library?: Library;
+  /** Recent days whose moves looked like the first day after a past event (DEC-0066). */
+  echoes?: Echoes;
+}
+
+export interface DayMove { close: number; change: number; vol: number; z: number }
+export interface EchoDay { date: string; moves: Record<string, DayMove>; size: number; matches: { id: string; sim: number; shared: number }[] }
+export interface Echoes { min_sim: number; min_assets: number; alert: { min_size: number; min_sim: number }; days: EchoDay[] }
+
+/** Cosine similarity of two sets of z-moves over the markets both have (engine: scenarios.resemblance). */
+export function resemblance(a: Record<string, number>, b: Record<string, number | null | undefined>, minAssets: number): { sim: number; shared: number } | null {
+  const keys = Object.keys(a).filter((k) => b[k] != null && Number.isFinite(b[k] as number));
+  if (keys.length < minAssets) return null;
+  let ab = 0, aa = 0, bb = 0;
+  for (const k of keys) { const x = a[k], y = b[k] as number; ab += x * y; aa += x * x; bb += y * y; }
+  return aa && bb ? { sim: ab / Math.sqrt(aa * bb), shared: keys.length } : null;
 }
 
 /** One market at one horizon across every past event of a kind. */

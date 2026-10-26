@@ -93,7 +93,7 @@ const KEYS: [string, string][] = [
   ["Tab", "Complete the suggestion"],
   ["Esc", "Leave the command bar; restore a maximised panel"],
   ["F1", "This help"],
-  ["Ctrl+1 to 5  or  F2 to F6", "Switch workspace"],
+  ["Ctrl+1 to 6  or  F2 to F7", "Switch workspace"],
   ["Ctrl+Arrow", "Move between panels"],
   ["Arrow keys on a divider", "Resize panels (Shift for bigger steps); double-click resets"],
   ["Up / Down in a table", "Move between rows; Enter links the row"],
