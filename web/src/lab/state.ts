@@ -13,7 +13,7 @@ export const VIEWS: { id: View; label: string; short: string; icon: string; rese
 ];
 
 export const KEYS: [string, string][] = [
-  ["Shift+1 to 6", "Try settings, What if, Compare, Strategy search, Edge Lab, Settings"],
+  ["Shift+1 to 7", "Try settings, What if, Compare, Strategy search, Edge Lab, Live prices, Settings"],
   ["/", "Find (strategy, search box)"],
   ["L", "Copy a link to this view"],
   ["?", "Keys"],

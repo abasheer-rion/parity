@@ -1,3 +1,4 @@
+@import "./motion.css";
 /* Parity UI component styles. Values come from tokens.css only. */
 
 /* Text */
@@ -17,15 +18,15 @@
 .ui-tone-bad { color: var(--bad); }
 .ui-tone-accent { color: var(--accent); }
 .ui-mono { font-family: var(--font-mono); }
-.ui-tab { font-variant-numeric: tabular-nums; }
+.ui-tab { font-variant-numeric: var(--num-variant); }
 .ui-label { font-size: var(--fs-sm); color: var(--text-2); }
 .ui-label-term { font-size: var(--fs-sm); color: var(--text-2); text-decoration: underline dotted var(--muted); text-underline-offset: 3px; }
 .ui-kbd { font: var(--type-2xs) var(--font-mono); border: 1px solid var(--border-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; color: var(--text-2); background: var(--hover); }
-.ui-delta { display: inline-flex; align-items: center; gap: 3px; font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.ui-delta { display: inline-flex; align-items: center; gap: 3px; font-weight: var(--fw-bold); font-variant-numeric: var(--num-variant); }
 .ui-delta.good { color: var(--good); }
 .ui-delta.bad { color: var(--bad); }
 .ui-delta-label { color: var(--muted); font-weight: var(--fw-regular); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Buttons: Mercury's DS button, exactly (pill, flat fill, regular weight, 0.99 press) */
 .ui-btn {
@@ -37,6 +38,7 @@
 .ui-btn:active:not(:disabled) { transform: scale(.99); }
 .ui-btn:focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 1px; box-shadow: none; }
 .ui-btn:disabled, .ui-btn[aria-disabled="true"] { opacity: var(--ds-opacity-disabled, .4); cursor: default; pointer-events: none; }
+.ui-btn-xs { min-height: 24px; padding: 0 8px; gap: 4px; font-size: var(--type-xs); line-height: 18px; }
 .ui-btn-sm { min-height: 24px; padding: 0 10px; font-size: var(--fs-sm); line-height: 20px; }
 .ui-btn-md { min-height: 32px; padding: 4px 16px; }
 .ui-btn-md:has(> .icon:first-child) { padding-left: 12px; }
@@ -54,6 +56,7 @@
 .ui-btn-secondary:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-text-emphasized); }
 .ui-btn-secondary:hover .icon, .ui-btn-tertiary:hover .icon, .ui-btn-outline:hover .icon { color: var(--ds-icon-emphasized); }
 .ui-btn-tertiary { background: transparent; color: var(--ds-text-default); }
+.ui-btn.on:not(.ui-btn-primary) { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 40%, transparent); }
 .ui-btn-tertiary:hover { background: var(--ds-background-secondary); color: var(--ds-text-emphasized); }
 /* "outline" is Mercury's floating button: a raised surface with a soft shadow. */
 .ui-btn-outline { background: var(--ds-background-surface-floating); color: var(--ds-text-default); box-shadow: var(--shadow-2); }
@@ -64,13 +67,19 @@
 .ui-btn-group { display: inline-flex; flex-wrap: wrap; gap: 12px; }
 .ui-spinner { display: inline-block; vertical-align: middle; flex: none; width: 12px; height: 12px; border-radius: 99px; border: 2px solid currentColor; border-right-color: transparent; animation: ui-spin var(--dur-spin) linear infinite; }
 @keyframes ui-spin { to { transform: rotate(360deg); } }
-.ui-iconbtn { display: inline-grid; place-items: center; border: 0; padding: 0; border-radius: 50%; color: var(--ds-icon-default); cursor: pointer; text-decoration: none; transition: background-color var(--dur-2) ease-out, color var(--dur-2) ease-out; }
+.ui-iconbtn { display: inline-grid; place-items: center; flex: none; border: 0; padding: 0; border-radius: 50%; color: var(--ds-icon-default); cursor: pointer; text-decoration: none; transition: background-color var(--dur-2) ease-out, color var(--dur-2) ease-out; }
 .ui-iconbtn-soft { background: var(--ds-background-secondary); }
 .ui-iconbtn-plain { background: transparent; width: 32px; height: 32px; font-size: var(--type-2xl); }
 .ui-iconbtn:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-icon-emphasized); text-decoration: none; }
-.ui-iconbtn.on { color: var(--ds-icon-primary); }
-.ui-linkbtn { border: 0; background: none; padding: 0 4px; color: var(--ds-text-link); font: inherit; font-size: var(--fs-md); cursor: pointer; }
-.ui-linkbtn:hover { color: var(--ds-text-link-hovered); text-decoration: underline; }
+.ui-iconbtn.on { color: var(--color-accent-text); }
+/* A chosen bookmark fills in. */
+.ui-iconbtn.on .icon-bookmark { fill: currentColor; }
+.ui-linkbtn { border: 0; background: none; padding: 0; color: var(--color-link); font: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--color-border-max); text-underline-offset: 3px; transition: text-decoration-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+.ui-linkbtn:hover { text-decoration-color: currentColor; }
+.ui-linkbtn-muted { color: var(--color-text-muted); }
+.ui-linkbtn-danger { color: var(--color-negative); }
+.ui-linkbtn:disabled { opacity: .4; cursor: default; }
+.ui-iconbtn:disabled { opacity: .35; cursor: default; pointer-events: none; }
 
 /* Inputs */
 .ui-input { height: 40px; width: 100%; padding: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--ds-border-input); background: var(--ds-background-input); color: var(--ds-text-default); font: inherit; font-size: var(--fs-md); transition: background-color var(--dur-2) ease-out, border-color var(--dur-2) ease-out; }
@@ -84,7 +93,7 @@
 .ui-search input { flex: 1; border: 0; background: none; padding: 0; height: 100%; outline: none; color: var(--text); font: inherit; min-width: 0; }
 .ui-search-clear { border: 0; background: none; color: var(--muted); font-size: var(--type-xl); padding: 0 2px; cursor: pointer; }
 .ui-select { position: relative; display: inline-flex; align-items: center; }
-.ui-select select { appearance: none; height: 32px; padding: 0 30px 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border-2); background: var(--hover); color: var(--text); font: inherit; font-size: var(--fs-md); cursor: pointer; }
+.ui-select select { appearance: none; height: 32px; padding: 0 30px 0 12px; border-radius: var(--radius-md); border: 1px solid var(--ds-border-input); background: var(--hover); color: var(--text); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .ui-select .icon { position: absolute; right: 10px; pointer-events: none; color: var(--muted); }
 .ui-seg { position: relative; display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); padding: 0; gap: 0; background: var(--ds-background-input); height: 32px; }
 .ui-seg button { position: relative; z-index: 1; border: 0; border-radius: 7px; height: 30px; background: none; color: var(--text-2); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color var(--dur-2) var(--ease-out); }
@@ -95,13 +104,13 @@
 /* The raised thumb behind the chosen option slides; the buttons themselves never change size. */
 .ui-seg-thumb { position: absolute; top: 0; left: 0; height: 30px; width: var(--ind-w, 0); transform: translateX(var(--ind-x, 0)); border-radius: 7px; background: var(--ds-background-default); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--color-border); pointer-events: none; }
 .ui-seg[data-ready] .ui-seg-thumb { transition: transform var(--dur-3) var(--ease-spring), width var(--dur-3) var(--ease-spring); }
-.ui-toggle { width: 40px; height: 24px; border-radius: 99px; border: 0; padding: 2px; background: var(--border-2); cursor: pointer; transition: background var(--dur-2); }
+.ui-toggle { width: 40px; height: 24px; border-radius: 99px; border: 0; padding: 2px; background: var(--color-border-control); cursor: pointer; transition: background var(--dur-2); }
 .ui-toggle i { display: block; width: 20px; height: 20px; border-radius: 99px; background: var(--palette-white); box-shadow: var(--shadow-1); transition: transform var(--dur-2) var(--ease-spring); }
 .ui-toggle.on { background: var(--ds-background-input-checked); }
 .ui-toggle.on i { transform: translateX(16px); }
 .ui-check { display: inline-flex; align-items: center; gap: var(--space-2); cursor: pointer; font-size: var(--fs-md); }
 .ui-check input { position: absolute; opacity: 0; pointer-events: none; }
-.ui-check-box { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-2); background: var(--hover); color: transparent; transition: background var(--dur-1); }
+.ui-check-box { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--ds-border-input); background: var(--hover); color: transparent; transition: background var(--dur-1); }
 .ui-check input:checked + .ui-check-box { background: var(--accent); border-color: var(--accent); color: var(--palette-white); }
 .ui-check input:focus-visible + .ui-check-box { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 /* Tabs: one row that scrolls sideways if it must, with one underline that slides to the chosen tab. */
@@ -153,7 +162,7 @@
 .mcard.flush { padding: 0; overflow: hidden; }
 .ui-stat-label { font-size: var(--fs-sm); color: var(--text-2); margin-bottom: 4px; }
 .ui-stat-label .term-link { color: var(--text-2); }
-.ui-stat-value { font-weight: var(--fw-medium); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.ui-stat-value { font-weight: var(--fw-medium); letter-spacing: -0.02em; font-variant-numeric: var(--num-variant); }
 .ui-stat-sm .ui-stat-value { font-size: var(--type-2xl); }
 .ui-stat-md .ui-stat-value { font-size: var(--type-5xl); }
 .ui-stat-lg .ui-stat-value { font-size: var(--type-7xl); line-height: 1.15; }
@@ -178,7 +187,7 @@
 .ui-status-warn i { background: var(--series-4); }
 .ui-divider { border: 0; border-top: 1px solid var(--border); margin: var(--space-4) 0; }
 .ui-share { display: inline-flex; align-items: center; gap: var(--space-2); width: 100%; min-width: 160px; }
-.ui-share-pct { width: 48px; font-variant-numeric: tabular-nums; text-align: left; }
+.ui-share-pct { width: 48px; font-variant-numeric: var(--num-variant); text-align: left; }
 .ui-share-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--border-2); }
 .ui-share-track i { position: absolute; top: 0; height: 4px; border-radius: 2px; background: var(--accent); transform-origin: left; animation: ui-grow var(--dur-4) var(--ease-out) var(--dur-1) both; }
 @keyframes ui-grow { from { transform: scaleX(0); } }
@@ -186,8 +195,10 @@
 .ui-empty-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 99px; background: var(--hover); color: var(--text-2); }
 .ui-empty-title { font-size: var(--fs-md); font-weight: var(--fw-medium); }
 .ui-empty-body { font-size: var(--fs-sm); color: var(--text-2); }
-.ui-skel { display: inline-block; vertical-align: middle; background: linear-gradient(90deg, var(--hover), var(--border-2), var(--hover)); background-size: 200% 100%; animation: ui-shimmer var(--dur-pulse) ease-in-out infinite; }
-@keyframes ui-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.ui-skel { position: relative; overflow: hidden; display: inline-block; vertical-align: middle; background: var(--hover); }
+/* The shimmer is a soft band sliding across on a transform (no repaint per frame). Reduced motion: it holds still. */
+.ui-skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--border-2) 70%, transparent), transparent); animation: ui-shimmer var(--dur-pulse) var(--ease-in-out) infinite; }
+@keyframes ui-shimmer { to { transform: translateX(100%); } }
 
 /* Overlays */
 .ui-tip-anchor { display: inline-flex; }
@@ -198,20 +209,21 @@
 .ui-menu button:hover { background: var(--hover); color: var(--text); }
 .ui-menu button.danger { color: var(--bad); }
 .ui-scrim { position: fixed; inset: 0; z-index: var(--z-modal); background: color-mix(in srgb, var(--palette-black) 55%, transparent); display: grid; place-items: center; padding: var(--space-4); transition: opacity var(--dur-3) var(--ease-out); }
+.ui-scrim[data-state="exit"] { transition-duration: var(--dur-2); }
 .ui-scrim[data-state="enter"], .ui-scrim[data-state="exit"] { opacity: 0; }
 .ui-dialog { background: var(--surface-solid); border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-3); max-height: calc(100vh - 32px); display: flex; flex-direction: column; outline: none;
   transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-3) var(--ease-spring); }
-.ui-dialog[data-state="enter"], .ui-dialog[data-state="exit"] { opacity: 0; transform: scale(.94); }
+.ui-dialog[data-state="enter"], .ui-dialog[data-state="exit"] { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))) scale(calc(1 - .04 * var(--m))); }
 .ui-dialog[data-state="exit"] { transition-duration: var(--dur-2); }
 .ui-dialog-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-5) var(--space-6) var(--space-2); }
 .ui-dialog-head h2 { font-size: var(--fs-xl); }
 .ui-dialog-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
 .ui-dialog-foot { display: flex; justify-content: flex-end; gap: var(--space-2); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--border); }
 .ui-toaster { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: var(--z-toast); display: flex; flex-direction: column; gap: var(--space-2); align-items: center; width: max-content; max-width: calc(100vw - 32px); pointer-events: none; }
-.ui-toast { pointer-events: auto; display: flex; align-items: center; gap: var(--space-3); background: var(--color-surface-inverted); color: var(--palette-white); padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); animation: ui-toast-in var(--dur-3) var(--ease-spring) both; }
-.ui-toast[data-state="exit"] { animation: ui-toast-out var(--dur-2) var(--ease-out) both; }
-@keyframes ui-toast-in { from { opacity: 0; transform: translateY(10px) scale(.98); } }
-@keyframes ui-toast-out { to { opacity: 0; transform: translateY(6px) scale(.98); } }
+.ui-toast { pointer-events: auto; display: flex; align-items: center; gap: var(--space-3); background: var(--color-surface-inverted); color: var(--palette-white); padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-3); font-size: var(--fs-md); animation: ui-toast-in var(--dur-4) var(--ease-pop) both; }
+.ui-toast[data-state="exit"] { animation: ui-toast-out var(--dur-2) var(--ease-in) both; }
+@keyframes ui-toast-in { from { opacity: 0; transform: translateY(calc(14px * var(--m))) scale(calc(1 - .04 * var(--m))); } }
+@keyframes ui-toast-out { to { opacity: 0; transform: translateY(calc(8px * var(--m))) scale(calc(1 - .04 * var(--m))); } }
 .ui-toast.good .icon { color: var(--color-positive); }
 .ui-toast button { border: 0; background: none; color: var(--color-accent-text); font: inherit; font-weight: var(--fw-medium); cursor: pointer; padding: 0; }
 
@@ -221,20 +233,18 @@
 .anim-pop { animation: ui-pop var(--dur-2) var(--ease-spring) both; }
 .anim-slide { animation: ui-slide var(--dur-3) var(--ease-out) both; }
 @keyframes ui-fade { from { opacity: 0; } }
-@keyframes ui-rise { from { opacity: 0; transform: translateY(6px); } }
-@keyframes ui-pop { from { opacity: 0; transform: scale(.96); } }
-@keyframes ui-slide { from { opacity: 0; transform: translateX(-8px); } }
-.ui-roll { display: inline-flex; font-variant-numeric: tabular-nums; }
+@keyframes ui-rise { from { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))); } }
+@keyframes ui-pop { from { opacity: 0; transform: scale(calc(1 - .05 * var(--m))); } }
+@keyframes ui-slide { from { opacity: 0; transform: translateX(calc(-1 * var(--rise) * var(--m))); } }
+.ui-roll { display: inline-flex; font-variant-numeric: var(--num-variant); }
 .ui-roll-slot { display: inline-block; height: 1.15em; overflow: hidden; line-height: 1.15em; }
 .ui-roll-strip { display: flex; flex-direction: column; transition: transform var(--dur-4) var(--ease-out); }
 .ui-roll-strip span { height: 1.15em; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: var(--dur-instant) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-instant) !important; }
-}
 
 /* Gallery (#/ui) */
 .gal { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--space-8); align-items: start; }
-.gal-nav { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1px; font-size: var(--fs-sm); }
+/* Scrolls on its own when taller than the window, so a focused link is never off screen. */
+.gal-nav { position: sticky; top: 80px; max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 1px; font-size: var(--fs-sm); }
 .gal-nav .side-label { padding-left: 10px; }
 .gal-nav > div { display: flex; flex-direction: column; gap: 1px; margin-bottom: 8px; }
 .gal-nav a { display: block; padding: 5px 10px; border-radius: 6px; color: var(--text-2); text-decoration: none; }
@@ -284,40 +294,44 @@
 .ui-drawer-scrim.side-left { justify-content: flex-start; }
 .ui-drawer-scrim.side-bottom { align-items: flex-end; justify-content: center; }
 .ui-drawer { width: min(var(--drawer-w, 520px), 100vw); height: 100%; background: var(--surface-solid); box-shadow: var(--shadow-3); display: flex; flex-direction: column; outline: none;
-  transition: transform var(--dur-3) var(--ease-out); will-change: transform; }
+  transition: transform var(--dur-4) var(--ease-glide), opacity var(--dur-3) var(--ease-out); will-change: transform; }
 .ui-drawer.side-right { border-left: 1px solid var(--border-2); }
 .ui-drawer.side-left { border-right: 1px solid var(--border-2); }
 .ui-drawer.side-bottom { width: min(var(--drawer-w, 720px), 100vw); height: auto; max-height: 88vh; border-radius: 16px 16px 0 0; border-top: 1px solid var(--border-2); }
-.ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"] { transform: translateX(100%); }
-.ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateX(-100%); }
-.ui-drawer.side-bottom[data-state="enter"], .ui-drawer.side-bottom[data-state="exit"] { transform: translateY(100%); }
+/* Off screen while entering and leaving. With reduced motion it stays put and fades instead:
+   the distance is multiplied by --m (0) and its opacity is --m (0), so only the fade plays. */
+.ui-drawer[data-state="enter"], .ui-drawer[data-state="exit"] { opacity: var(--m); }
+.ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"] { transform: translateX(calc(100% * var(--m))); }
+.ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateX(calc(-100% * var(--m))); }
+.ui-drawer.side-bottom[data-state="enter"], .ui-drawer.side-bottom[data-state="exit"] { transform: translateY(calc(100% * var(--m))); }
 .ui-drawer[data-state="exit"] { transition-duration: var(--dur-2); transition-timing-function: var(--ease-in); }
 .ui-drawer-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; }
 @media (max-width: 640px) {
   .ui-drawer-scrim.side-right, .ui-drawer-scrim.side-left { align-items: flex-end; justify-content: center; }
   .ui-drawer.side-right, .ui-drawer.side-left { width: 100vw; height: auto; max-height: 88vh; border: 0; border-top: 1px solid var(--border-2); border-radius: 16px 16px 0 0; }
   .ui-drawer.side-right[data-state="enter"], .ui-drawer.side-right[data-state="exit"],
-  .ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateY(100%); }
+  .ui-drawer.side-left[data-state="enter"], .ui-drawer.side-left[data-state="exit"] { transform: translateY(calc(100% * var(--m))); }
 }
 
 /* Motion, part two (DEC-0017): lift, tilt, draw-in, reveal, page transition, hero glow.
    Transforms rest at none, so fixed-position popups inside a card still place correctly. */
-.ui-reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-5) var(--ease-out); }
+.ui-reveal { opacity: 0; transform: translateY(calc(var(--rise-lg) * var(--m))); transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-5) var(--ease-out); }
 .ui-reveal.in { opacity: 1; transform: none; }
 .ui-reveal:not(.done) { transition-delay: var(--reveal-delay, 0s); }
 /* Lift and tilt come after reveal so their hover wins once a card has arrived. */
 .ui-reveal.done.ui-lift, .ui-reveal.done.ui-tilt { transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
 .ui-lift { transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
-.ui-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); border-color: var(--border-2); }
+.ui-lift:hover { transform: translateY(calc(-1 * var(--lift) * var(--m))); box-shadow: var(--shadow-3); border-color: var(--border-2); }
+.ui-lift:active { transform: translateY(calc(-.5 * var(--lift) * var(--m))) scale(calc(1 - (1 - var(--press)) * var(--m))); transition-duration: var(--dur-1); }
 .ui-tilt { position: relative; transition: transform var(--dur-4) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); }
-.ui-tilt:hover { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-2px); transition: transform var(--dur-1) linear, box-shadow var(--dur-3) var(--ease-out); box-shadow: var(--shadow-3); }
+.ui-tilt:hover { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(calc(-1 * var(--lift) * var(--m))); transition: transform var(--dur-1) linear, box-shadow var(--dur-3) var(--ease-out); box-shadow: var(--shadow-3); }
 .ui-tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--dur-3); background: radial-gradient(320px circle at var(--glare-x, 50%) var(--glare-y, 0%), color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%); }
 .ui-tilt:hover::after { opacity: 1; }
 .ui-draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: ui-draw var(--dur-6) var(--ease-out) both; }
-@keyframes ui-draw { from { stroke-dashoffset: 1; } }
+@keyframes ui-draw { from { stroke-dashoffset: var(--m); opacity: var(--m); } }
 .ui-fill-in { animation: ui-fade var(--dur-6) var(--ease-out) var(--dur-3) both; }
 .ui-page { animation: ui-page var(--dur-4) var(--ease-out) backwards; }
-@keyframes ui-page { from { opacity: 0; transform: translateY(8px); } }
+@keyframes ui-page { from { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))); } }
 .ui-glow { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 0; }
 .ui-glow ~ * { position: relative; z-index: 1; }
 .ui-glow i { position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; filter: blur(48px); opacity: .6; animation: ui-glow-drift var(--dur-drift-1) ease-in-out infinite alternate; }
@@ -331,10 +345,9 @@
 :root[data-theme="dark"] .ui-glow i:nth-child(3) { background: radial-gradient(circle, var(--color-glow-deep), transparent 65%); }
 @keyframes ui-glow-drift { to { transform: translate3d(12%, 18%, 0) scale(1.15); } }
 @media (prefers-reduced-motion: reduce) {
-  .ui-reveal { opacity: 1; transform: none; }
-  .ui-tilt:hover, .ui-lift:hover { transform: none; }
-  .ui-glow i { animation: none; }
+  :root:not([data-motion="full"]) .ui-glow i { animation: none; }
 }
+:root[data-motion="reduced"] .ui-glow i { animation: none; }
 
 /* ============================================================
    Anchored and expanding (2026-10-23). Things open in place, float
@@ -351,7 +364,7 @@
 .ui-disclosure-chev { color: var(--muted); transition: transform var(--dur-3) var(--ease-spring); }
 .ui-disclosure[data-open] > .ui-disclosure-row .ui-disclosure-chev { transform: rotate(90deg); }
 .ui-disclosure-summary { flex: 1; min-width: 0; }
-.ui-disclosure-meta { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.ui-disclosure-meta { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: var(--num-variant); }
 .ui-disclosure-body { padding: 0 4px 16px 25px; color: var(--text-2); }
 
 /* Table rows that open in place */
@@ -377,7 +390,7 @@
 .mtable.fixed tr.row-link:hover td { background: none; }
 /* A row that opens: the toggle sits beside the first cell's content, top-aligned. */
 .ui-cell-toggle { display: flex; align-items: flex-start; gap: 2px; min-width: 0; }
-.ui-cell-toggle > .ui-row-toggle { flex: none; margin-top: 2px; vertical-align: baseline; }
+.ui-cell-toggle > .ui-row-toggle { flex: none; margin: 2px 4px 0 0; vertical-align: baseline; }
 .ui-cell-toggle > :last-child { min-width: 0; }
 .mtable tr.ui-spacer, .mtable tr.ui-spacer td { padding: 0; border: 0; height: auto; }
 .sticky-first th:first-child, .sticky-first td:first-child { position: sticky; left: 0; z-index: 1; background: var(--table-head-bg, var(--color-bar)); }
@@ -389,25 +402,25 @@
 .ui-float[data-side="top"] { transform-origin: bottom center; }
 .ui-float[data-side="left"] { transform-origin: right center; }
 .ui-float[data-side="right"] { transform-origin: left center; }
-.ui-float[data-state="enter"], .ui-float[data-state="exit"] { opacity: 0; transform: scale(.97) translateY(-3px); }
-.ui-float[data-side="top"][data-state="enter"], .ui-float[data-side="top"][data-state="exit"] { transform: scale(.97) translateY(3px); }
+.ui-float[data-state="enter"], .ui-float[data-state="exit"] { opacity: 0; transform: scale(calc(1 - .03 * var(--m))) translateY(calc(-1 * var(--rise-sm) * var(--m))); }
+.ui-float[data-side="top"][data-state="enter"], .ui-float[data-side="top"][data-state="exit"] { transform: scale(calc(1 - .03 * var(--m))) translateY(calc(var(--rise-sm) * var(--m))); }
 .ui-float[data-state="exit"] { transition-duration: var(--dur-1); }
 .ui-pop-anchor { position: relative; display: inline-flex; }
 .ui-popover { position: fixed; left: 0; top: 0; visibility: hidden; z-index: var(--z-popover); min-width: 220px; max-width: calc(100vw - 16px); max-height: min(480px, 70vh); overflow-y: auto; padding: var(--space-4); border-radius: 12px; background: var(--surface-solid); box-shadow: var(--shadow-3); color: var(--text-body); outline: none; }
 
 /* Stagger: a list's children come in one after another, all within 240ms. */
 .ui-stagger > * { animation: ui-rise var(--dur-3) var(--ease-out) backwards; }
-.ui-stagger > :nth-child(2) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(3) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(4) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(5) { animation-delay: var(--dur-1); }
-.ui-stagger > :nth-child(6) { animation-delay: var(--dur-2); }
-.ui-stagger > :nth-child(7) { animation-delay: var(--dur-2); }
-.ui-stagger > :nth-child(8) { animation-delay: var(--dur-3); }
-.ui-stagger > :nth-child(n+9) { animation-delay: var(--dur-3); }
+.ui-stagger > :nth-child(2) { animation-delay: var(--stagger-step); }
+.ui-stagger > :nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+.ui-stagger > :nth-child(4) { animation-delay: calc(var(--stagger-step) * 3); }
+.ui-stagger > :nth-child(5) { animation-delay: calc(var(--stagger-step) * 4); }
+.ui-stagger > :nth-child(6) { animation-delay: calc(var(--stagger-step) * 5); }
+.ui-stagger > :nth-child(7) { animation-delay: calc(var(--stagger-step) * 6); }
+.ui-stagger > :nth-child(8) { animation-delay: calc(var(--stagger-step) * 7); }
+.ui-stagger > :nth-child(n+9) { animation-delay: min(var(--stagger-max), calc(var(--stagger-step) * 8)); }
 
 /* Numbers that change hold their width. */
-.ui-anum { display: inline-block; font-variant-numeric: tabular-nums; text-align: right; }
+.ui-anum { display: inline-block; font-variant-numeric: var(--num-variant); text-align: right; }
 
 /* A loading button keeps its label's width, with a spinner over it. */
 .ui-btn.is-loading > :not(.ui-spinner) { visibility: hidden; }
@@ -437,17 +450,12 @@
 /* Long URLs and file paths in prose wrap instead of pushing the page sideways on a phone. */
 .ui-route :where(p, li, .help) { overflow-wrap: anywhere; }
 .ui-route :where(td, th) :where(p, li) { overflow-wrap: normal; }
-@keyframes ui-route { from { opacity: 0; transform: translateY(4px); } }
+@keyframes ui-route { from { opacity: 0; transform: translateY(calc(var(--rise-sm) * var(--m))); } }
 .ui-arrive { animation: ui-fade var(--dur-3) var(--ease-out) both; }
 
 /* A modal holds the page still; the scroll bar's space is kept, so nothing moves sideways. */
 html.ui-locked { overflow: hidden; }
 
-@media (prefers-reduced-motion: reduce) {
-  .ui-skel { animation: none; }
-  .ui-collapse, .ui-float, .ui-dialog, .ui-drawer, .ui-scrim, .ui-tabs-ind, .ui-seg-thumb { transition: none !important; }
-  .ui-stagger > *, .ui-route, .ui-arrive, .ui-toast { animation: none !important; }
-}
 
 /* A crashed part of a page (boundary.tsx, DEC-0059): plain words and a way out, never empty. */
 .ui-crash { display: grid; place-items: center; min-height: 240px; padding: 32px 16px; }
@@ -466,7 +474,7 @@ html.ui-locked { overflow: hidden; }
 /* ---------- Added with the token system (DEC-0058) ---------- */
 
 /* Numbers: tabular figures, never wrap, never spill out of their box. */
-.ui-num { position: relative; display: inline-block; max-width: 100%; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: var(--num-features); vertical-align: baseline; }
+.ui-num { position: relative; display: inline-block; max-width: 100%; white-space: nowrap; font-variant-numeric: var(--num-variant); font-feature-settings: var(--num-features); vertical-align: baseline; }
 /* Both forms are in the page; data-short picks one. The full form stays readable to screen
    readers either way (it is only hidden visually when the compact form shows). */
 .ui-num[data-short="0"] .ui-num-short { display: none; }
@@ -489,7 +497,7 @@ html.ui-locked { overflow: hidden; }
 .ui-radios legend { padding: 0; margin-bottom: var(--space-1); }
 .ui-radio { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); cursor: pointer; font-size: var(--type-md); color: var(--color-text-body); }
 .ui-radio input { position: absolute; opacity: 0; pointer-events: none; }
-.ui-radio-dot { width: 16px; height: 16px; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-border-max); background: var(--color-hover); transition: box-shadow var(--dur-1) var(--ease-out); }
+.ui-radio-dot { width: 16px; height: 16px; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--color-border-control); background: var(--color-hover); transition: box-shadow var(--dur-1) var(--ease-out); }
 .ui-radio input:checked + .ui-radio-dot { box-shadow: inset 0 0 0 5px var(--color-accent); }
 .ui-radio input:focus-visible + .ui-radio-dot { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 
@@ -497,8 +505,8 @@ html.ui-locked { overflow: hidden; }
 .ui-slider { display: grid; gap: var(--space-1h); }
 .ui-slider-row { display: flex; align-items: center; gap: var(--space-3); }
 .ui-slider input[type="range"] { flex: 1; min-width: 0; height: 20px; margin: 0; appearance: none; background: transparent; cursor: pointer; }
-.ui-slider input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--color-accent) var(--fill, 0%), var(--color-fill-strong) var(--fill, 0%)); }
-.ui-slider input[type="range"]::-moz-range-track { height: 4px; border-radius: var(--radius-pill); background: var(--color-fill-strong); }
+.ui-slider input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--color-accent) var(--fill, 0%), var(--color-border-control) var(--fill, 0%)); }
+.ui-slider input[type="range"]::-moz-range-track { height: 4px; border-radius: var(--radius-pill); background: var(--color-border-control); }
 .ui-slider input[type="range"]::-moz-range-progress { height: 4px; border-radius: var(--radius-pill); background: var(--color-accent); }
 .ui-slider input[type="range"]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; margin-top: -6px; border-radius: var(--radius-pill); background: var(--color-primary); box-shadow: var(--shadow-1); }
 .ui-slider input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: var(--radius-pill); background: var(--color-primary); }
@@ -533,7 +541,7 @@ html.ui-locked { overflow: hidden; }
 
 /* Pagination */
 .ui-pager { display: inline-flex; align-items: center; gap: var(--space-1); }
-.ui-pager-num, .ui-pager-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: tabular-nums; cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+.ui-pager-num, .ui-pager-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: var(--num-variant); cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
 .ui-pager-num:hover, .ui-pager-step:hover:not(:disabled) { background: var(--color-hover); color: var(--color-text); }
 .ui-pager-num.on { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
 .ui-pager-step:disabled { opacity: .35; cursor: default; }

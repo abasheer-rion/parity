@@ -10,7 +10,7 @@ import {
   type Agg, type HorizonKey, type Loaded, type Match, type Saved, type ScenarioAsset, type ScenarioData, type Spec,
 } from "../lib/scenarios";
 import { researchUrl } from "../lib/space";
-import { Badge, DataTable, FanChart, FilterChip, Icon, Popover, Segmented, Select, Tooltip, fmt, toast, useResource, type Column } from "../ui";
+import { Badge, DataTable, FanChart, FilterChip, Icon, Popover, Segmented, Select, Tooltip, fmt, toast, useResource, type Column, Button } from "../ui";
 
 export function WhatIfView() {
   const loaded = useResource<Loaded | null>("scenarios", loadScenarios).data ?? null;
@@ -93,8 +93,8 @@ function Builder({ data, spec, set, setSpec }: { data: ScenarioData; spec: Spec;
   return (
     <aside className="lb-side lb-form" aria-label="Scenario">
       <div className="lb-row">
-        <button type="button" className="lb-btn" onClick={save}><Icon name="bookmark" size={12} />Save</button>
-        <button type="button" className="lb-btn" onClick={() => setSpec({ ...EMPTY_SPEC, assets: spec.assets })}>Clear</button>
+        <Button size="xs" icon="bookmark" onClick={save}>Save</Button>
+        <Button size="xs" variant="ghost" onClick={() => setSpec({ ...EMPTY_SPEC, assets: spec.assets })}>Clear</Button>
       </div>
       <Group label="Examples">
         {PRESETS.map((p) => <FilterChip key={p.label} label={p.label} onClick={() => setSpec(clean({ ...EMPTY_SPEC, assets: spec.assets, ...p.spec }, data))} />)}
@@ -121,7 +121,7 @@ function Builder({ data, spec, set, setSpec }: { data: ScenarioData; spec: Spec;
           <input className="lb-input" list="lab-actors" value={actorDraft} placeholder="Add a country or group" aria-label="Add a country or group"
             onChange={(e) => setActorDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addActor(); } }} />
           <datalist id="lab-actors">{v.actors.filter((a) => !spec.actors.includes(a)).map((a) => <option key={a} value={a}>{humanize(a)}</option>)}</datalist>
-          <button type="button" className="lb-btn" onClick={addActor} disabled={!actorDraft.trim()}>Add</button>
+          <Button size="xs" onClick={addActor} disabled={!actorDraft.trim()}>Add</Button>
         </span>
       </Group>
       <Group label="Commodities at risk">
@@ -183,7 +183,7 @@ function Results({ data, spec, matches, assets }: { data: ScenarioData; spec: Sp
         <strong className="lb-title">{spec.title.trim() || "Your scenario"}</strong>
         <span className="lb-dim">{what}</span>
         <span className="lb-gap" />
-        <Popover label="Limits" width={360} placement="bottom-end" trigger={() => <button type="button" className="lb-btn"><Icon name="info" size={12} />Limits</button>}>
+        <Popover label="Limits" width={360} placement="bottom-end" trigger={() => <Button size="xs" icon="info">Limits</Button>}>
           <div className="lb-pop">
             <ul>{LIMITS.map(([a, b]) => <li key={a}><strong>{a}</strong> {b}</li>)}</ul>
             {methodDoc && <a href={researchUrl(`#/doc/${methodDoc.id}`)} target="_blank" rel="noopener">How the matching works<Icon name="arrowUpRight" size={12} /></a>}

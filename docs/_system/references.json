@@ -39815,6 +39815,216 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "pyth-hermes-api-key",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Pyth price feeds: Hermes API reference and API key requirement",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/price-feeds/core/api-reference",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-plans",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Pyth plans: Free, Starter, Pro",
+      "venue": "app.pyth.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://app.pyth.com/products",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "douro-subscription-terms",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Douro Labs Data-as-a-Service Agreement (Pyth subscription terms)",
+      "venue": "dourolabs.xyz",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.dourolabs.xyz/Subscription-Terms.pdf",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "okx-api-agreement",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "OKX API Agreement",
+      "venue": "okx.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.okx.com/help/okx-api-agreement",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "alpaca-terms",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca Terms and Conditions",
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://files.alpaca.markets/disclosures/library/TermsAndConditions.pdf",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "publicnode",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "PublicNode free blockchain nodes",
+      "venue": "publicnode.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.publicnode.com",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "publicnode-terms",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "PublicNode terms of service",
+      "venue": "publicnode.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.publicnode.com/terms",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "base-run-a-node",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Base docs: run a node (public RPC rate limits)",
+      "venue": "docs.base.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.base.org/specifications/node-operators/run-a-node",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public low-latency feed terms).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "tenderly-node-rpc",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Tenderly Node RPC overview: public endpoint limits",
+      "venue": "docs.tenderly.co",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.tenderly.co/node-rpc/overview",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public node failover).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

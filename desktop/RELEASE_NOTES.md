@@ -1,5 +1,10 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.2:
+
+- Signed. The Mac app is signed with Argus Vision's Apple Developer ID and checked by Apple, so it opens like any other app. The Windows installer is signed by Argus Vision, Inc.
+- Fixed the cause of the black page and the "A JavaScript error occurred" box. Back to Parity in the Academy, Trade, the Workbench and the Terminal tried to close the page, which emptied the window and made it fail when it closed. Now the button goes back to Parity, and a page that closes itself takes you back to the section before it.
+
 New in 0.2.1:
 
 - No more "A JavaScript error occurred" box followed by Parity quitting. An unexpected error is now noted in the log and shown once in plain words with Reload pages, and Parity keeps running. A page whose contents were lost is opened again in place.
@@ -28,7 +33,6 @@ Which file to download:
 
 The `.zip`, `.blockmap` and `latest*.yml` files are for automatic updates.
 
-The app is not registered with Apple or Microsoft yet, so each computer asks you to confirm the first time:
+The Mac app and disk images are signed by Argus Vision, Inc. and notarized by Apple: drag Parity into Applications and open it.
 
-- Mac: drag Parity into Applications, then right-click it and choose Open, then Open again. If the Mac only offers to move it to the Bin, open System Settings, then Privacy & Security, and click Open Anyway.
-- Windows: if "Windows protected your PC" appears, click More info, then Run anyway.
+The Windows installer is signed by Argus Vision, Inc. While the signature is new, Windows may still show "Windows protected your PC" for a while; click More info, then Run anyway. The warning fades as more people install it.

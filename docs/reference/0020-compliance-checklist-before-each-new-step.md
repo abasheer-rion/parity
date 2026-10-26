@@ -18,7 +18,7 @@ Parity is free and trades nothing, so few licences apply today. Each new step, s
 
 ## Summary
 
-- **Do now:** add the postal address, get a lawyer to review the legal pages and the new regulatory page, and decide which state the company operates from.
+- **Do now:** decide which state the company operates from. The postal address was added and the owner reported the lawyer review as passed, both on 25 October.
 - **Every step after that needs a lawyer first.** The biggest open question is whether the Verify Score, the Seller tier and the AI connector keep Parity outside the investment adviser and CTA definitions.
 - The public page that users are pointed to is `/legal/regulatory/`. Update it, and its last-reviewed date, whenever a step below is taken.
 
@@ -28,8 +28,8 @@ Owner means the owner of Parity Trading, Inc. Lawyer means outside counsel (secu
 
 | Action | Who | Why |
 | --- | --- | --- |
-| Add a postal address to the privacy policy, terms and regulatory page | Owner | The pages give only the email address for now (see [Legal pages open items](#legal-pages-open-items)); CAN-SPAM needs it before any marketing email |
-| Have counsel review all six legal pages, including `/legal/regulatory/` | Owner, lawyer | None has been reviewed. The public pages no longer say so (owner, 25 October), so this list is the only record |
+| Add a postal address to the privacy policy, terms and regulatory page | Owner | Done 25 October: 7213 Continental Drive, Newark, Delaware, on the privacy, terms, cookies, accessibility and regulatory pages. No ZIP code was given; add it when known |
+| Have counsel review all six legal pages, including `/legal/regulatory/` | Owner, lawyer | The owner reported on 25 October that the lawyer reviewed and passed them. Keep the reviewer's name and date with the company records |
 | Confirm the state the company operates from, and register there as a foreign corporation if needed | Owner, lawyer | Delaware is the state of incorporation only |
 | Keep the Delaware registered agent and file the annual franchise tax report by 1 March | Owner | 8 Del. C. 132; Delaware Division of Corporations |
 | Keep every page impersonal: no "buy", no advice for one person, no ranking by return | Team | Publisher exclusion and CFTC 4.14(a)(9) |

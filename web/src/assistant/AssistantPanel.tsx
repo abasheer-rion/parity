@@ -9,6 +9,7 @@ import { forgetAll, PROVIDERS, providerById, readKey, readModel, readProvider, w
 import { callTool, listTools } from "./mcpClient";
 import { startUrl } from "./openrouter";
 import "./assistant.css";
+import { Button, TextButton } from "../ui";
 
 interface Line { who: "you" | "ai" | "note"; text: string; steps?: Step[] }
 
@@ -87,11 +88,11 @@ export default function AssistantPanel({ place }: { place: "workbench" | "verify
             <label className="ai-grow">Model
               <input value={model} onChange={(e) => { setModel(e.target.value); writeModel(provider, e.target.value); }} spellCheck={false} />
             </label>
-            <button type="button" className="ai-link" onClick={disconnect}>Disconnect</button>
+            <TextButton tone="muted" onClick={disconnect}>Disconnect</TextButton>
           </div>
         ) : info.connect === "oauth" ? (
           <div className="ai-row">
-            <button type="button" className="ai-btn" onClick={connectOpenRouter}>Connect OpenRouter</button>
+            <Button size="sm" onClick={connectOpenRouter}>Connect OpenRouter</Button>
             <span className="ai-small">or paste a key below</span>
           </div>
         ) : null}
@@ -100,7 +101,7 @@ export default function AssistantPanel({ place }: { place: "workbench" | "verify
             <label className="ai-grow">{info.name.split(" (")[0]} key
               <input type="password" autoComplete="off" value={draftKey} placeholder={info.keyHint} onChange={(e) => setDraftKey(e.target.value)} />
             </label>
-            <button type="submit" className="ai-btn" disabled={!draftKey.trim()}>Save</button>
+            <Button size="sm" type="submit" disabled={!draftKey.trim()}>Save</Button>
           </form>
         )}
         <p className="ai-small">Your key, your bill. The key stays in this browser and goes straight to {info.name.split(" (")[0]}; Parity never sees it. <a href={info.keysUrl} target="_blank" rel="noreferrer">Get a key</a> · <button type="button" className="ai-link" onClick={() => { forgetAll(); choose("openrouter"); }}>Forget all keys</button></p>
@@ -117,7 +118,7 @@ export default function AssistantPanel({ place }: { place: "workbench" | "verify
       </div>
       <form className="ai-ask" onSubmit={send}>
         <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={key ? "Ask a question" : "Connect a model first"} disabled={!key || busy} aria-label="Question" />
-        <button type="submit" className="ai-btn" disabled={!key || busy || !question.trim()}>Ask</button>
+        <Button size="sm" variant="primary" type="submit" disabled={!key || busy || !question.trim()} loading={busy}>Ask</Button>
       </form>
     </section>
   );

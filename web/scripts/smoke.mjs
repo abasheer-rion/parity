@@ -1,11 +1,14 @@
 // Smoke test for every route of every Parity app, run in CI (.github/workflows/ci.yml).
 // It starts the dev server with sign-in skipped and the small results fixture in
-// tests/fixtures/smoke, opens each route at 1440x900 and 390x844, and fails on:
+// tests/fixtures/smoke, opens each route at 1280x800, 1440x900, 1920x1080 and 390x844, and fails on:
 //   - an uncaught exception or a console error or warning
 //   - a failed request or an HTTP error, except a missing data file under /local/
 //     (CI has no news, markets or terminal exports; pages must say so calmly)
 //   - a blank page, or NaN, undefined, Infinity or [object Object] in the text
 //   - sideways scroll on the phone size
+//   - text that collides with other text, is cut off, or a number shortened with "...",
+//     and controls cut off by a box too narrow for them (scripts/lib/layout-check.mjs;
+//     `npm run layout` runs the same check at four sizes with screenshots)
 //
 //   npm run smoke                      starts its own server
 //   SMOKE_BASE=http://127.0.0.1:5199 npm run smoke   uses a running one
@@ -15,6 +18,7 @@
 // contain the text.
 import { resolve } from "node:path";
 import { chromium } from "playwright";
+import { layoutCheck } from "./lib/layout-check.mjs";
 import { routes } from "./lib/routes.mjs";
 
 const here = (p) => resolve(import.meta.dirname, "..", p);
@@ -38,7 +42,14 @@ if (!BASE) {
 
 // ---------------------------------------------------------------- the checks
 
-const SIZES = [{ name: "desktop", width: 1440, height: 900 }, { name: "phone", width: 390, height: 844 }];
+// The four window sizes the layout check must pass at (REF-0009): small laptop, laptop,
+// desktop and phone. SMOKE_SIZES=desktop,phone runs a subset.
+const SIZES = [
+  { name: "laptop", width: 1280, height: 800 },
+  { name: "desktop", width: 1440, height: 900 },
+  { name: "wide", width: 1920, height: 1080 },
+  { name: "phone", width: 390, height: 844 },
+].filter((s) => !process.env.SMOKE_SIZES || process.env.SMOKE_SIZES.split(",").includes(s.name));
 const IGNORE = [/Download the React DevTools/, /^\[vite\]/];
 const missingData = (url) => new URL(url).pathname.startsWith("/local/");
 const problems = [];
@@ -48,7 +59,7 @@ for (const size of SIZES) {
   const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, reducedMotion: "reduce" });
   // A decided cookie banner, so it does not cover the page.
   await ctx.addInitScript(() => {
-    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
   });
   const queue = [...list];
   await Promise.all([0, 1, 2, 3].map(async () => {
@@ -90,6 +101,10 @@ for (const size of SIZES) {
         if (info.len < 40) add("blank page");
         for (const b of info.bad.slice(0, 3)) add(`bad value in text: "${b}"`);
         if (size.name === "phone" && info.overflow > 1) add(`scrolls sideways by ${info.overflow}px`);
+        await page.evaluate(() => document.fonts?.ready);
+        for (const f of (await page.evaluate(layoutCheck)).filter((x) => x.kind !== "hscroll").slice(0, 5)) {
+          add(`layout ${f.kind}: "${f.text}"${f.other ? ` x "${f.other}"` : ""} at ${f.where}`);
+        }
       } catch (e) {
         add(`did not load: ${e.message.split("\n")[0]}`);
       }

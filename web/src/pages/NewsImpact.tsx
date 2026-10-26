@@ -3,7 +3,7 @@
 // Ranked by evidence (q-values against random days), never by the size of a move.
 import { useEffect, useMemo, useState } from "react";
 import "./NewsImpact.css";
-import { Badge, Card, DataTable, EmptyState, FilterBar, PageSkeleton, SearchInput, Segmented, Select, SkeletonTable, useResource, type Column } from "../ui";
+import { Badge, Card, DataTable, EmptyState, FilterBar, PageSkeleton, SearchInput, Segmented, Select, SkeletonTable, useResource, type Column, TextButton } from "../ui";
 import { moveText, zText, zWord, type Unit } from "../lib/news";
 import {
   evidenceWord, loadArchiveIndex, loadArchiveYear, loadImpact,
@@ -151,7 +151,7 @@ function Explainer() {
 
 function rankCols(kind: "asset" | "topic", onPick: (id: string) => void): Column<RankRow>[] {
   return [
-    { key: "l", header: kind === "asset" ? "Asset" : "Topic", render: (r) => <button className="news-linkbtn"onClick={() => onPick((kind === "asset" ? r.asset : r.topic) ?? "")}>{r.label}</button> },
+    { key: "l", header: kind === "asset" ? "Asset" : "Topic", render: (r) => <TextButton onClick={() => onPick((kind === "asset" ? r.asset : r.topic) ?? "")}>{r.label}</TextButton> },
     { key: "e", header: "Evidence", sort: (r) => r.q ?? 9, render: (r) => evidenceWord(r.q, r.n_events) },
     { key: "n", header: "N", align: "right", sort: (r) => r.n_events, render: (r) => r.n_events },
     { key: "z", header: "Avg z, 5 days", align: "right", sort: (r) => r.mean_z ?? 0, tone: (r) => r.mean_z, render: (r) => num(r.mean_z) },

@@ -11,11 +11,26 @@
 //   none of them                        an ad hoc signed, unnotarized build, as before. It
 //                                       cannot update itself on a Mac (updater.js says why).
 //
-// Windows builds are unsigned unless WIN_CSC_LINK is set; electron-updater installs unsigned
+//   PARITY_WIN_SIGN=1                   the Windows app, its uninstaller and the installer are
+//                                       signed with Azure Artifact Signing (account
+//                                       argus-signing, profile argus-public, publisher
+//                                       "Argus Vision, Inc."). The release workflow logs in to
+//                                       Azure first (OIDC, no secret); the signing module
+//                                       picks that login up through the Azure CLI.
+//
+// Without PARITY_WIN_SIGN the Windows build is unsigned; electron-updater installs unsigned
 // NSIS updates. A signed and notarized Mac build gets "parity": { "signed": true } in its
-// package.json, which the updater reads.
+// package.json, which the updater reads. The disk images are signed here and notarized by
+// scripts/notarize-dmg.mjs after the build.
 const signMac = !!process.env.CSC_LINK;
 const notarize = signMac && !!(process.env.APPLE_API_KEY && process.env.APPLE_API_KEY_ID && process.env.APPLE_API_ISSUER);
+const signWin = process.env.PARITY_WIN_SIGN === "1";
+const azureSignOptions = {
+  publisherName: "Argus Vision, Inc.",
+  endpoint: "https://eus.codesigning.azure.net/",
+  certificateProfileName: "argus-public",
+  codeSigningAccountName: "argus-signing",
+};
 
 module.exports = {
   appId: "ai.paritytrading.desktop",
@@ -50,10 +65,12 @@ module.exports = {
     contents: [{ x: 130, y: 200 }, { x: 410, y: 200, type: "link", path: "/Applications" }],
     window: { width: 540, height: 380 },
     artifactName: "Parity-${version}-${arch}.dmg",
+    sign: signMac,
   },
   win: {
     icon: "assets/icon.ico",
     target: [{ target: "nsis", arch: ["x64"] }],
+    ...(signWin ? { azureSignOptions } : {}),
   },
   nsis: {
     // No spaces: the name must match latest.yml and the release asset exactly.

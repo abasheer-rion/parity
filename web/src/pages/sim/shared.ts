@@ -1,6 +1,7 @@
 // Small helpers shared by the Sim World pieces.
 import { useEffect, useRef, useState } from "react";
 import type { Point } from "../../lib/types";
+import { useReducedMotion } from "../../ui/presence";
 
 export const DAY = 86_400_000;
 export const t = (iso: string) => Date.parse(iso.slice(0, 10) + "T00:00:00Z");
@@ -46,16 +47,9 @@ export function windowStats(eq: Point[], years: number): { ret: number | null; s
   return { ret: pts[pts.length - 1][1] / pts[0][1] - 1, sharpe: sd > 0 ? (mean / sd) * Math.sqrt(perYear) : null };
 }
 
+/** Reduced motion: the device asks for it, or the Motion setting says so (REF-0023). */
 export function usePrefersReducedMotion(): boolean {
-  const [reduce, setReduce] = useState(() => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false);
-  useEffect(() => {
-    const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (!mq) return;
-    const on = () => setReduce(mq.matches);
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, []);
-  return reduce;
+  return useReducedMotion();
 }
 
 export function useWidth<T extends HTMLElement>(min = 200): [React.RefObject<T | null>, number] {

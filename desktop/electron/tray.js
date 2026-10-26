@@ -23,7 +23,7 @@ class ParityTray {
 
   /** Shows or removes the item to match Settings. */
   sync() {
-    const want = this.ctx.settings.tray;
+    const want = this.ctx.settings.tray && !this.ctx.hidden;
     if (want && !this.tray) this.create();
     else if (!want && this.tray) this.remove();
     if (this.tray) this.render();

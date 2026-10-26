@@ -4,10 +4,10 @@ title: Parity latency baseline
 type: reference
 status: current
 created: 2026-10-24
-updated: 2026-10-25
+updated: 2026-10-26
 authors: [ayan]
 tags: [data, infra]
-related: [DEC-0045, DEC-0037]
+related: [DEC-0045, DEC-0037, DEC-0063]
 ---
 
 # Parity latency baseline
@@ -58,6 +58,19 @@ Age is how old the newest value is when fetched. Cadence is the age we expect at
 - The three stale FRED series are the OECD interbank rates for the euro and the pound (newest value January 2026) and commercial real estate prices. A fetch cannot fix these; the source has not published.
 - The search and sims services report every 5 and about 22 minutes; their health line was live at the time.
 
+## Live public feed, on-chain (26 October 2026)
+
+Measured on the live site after [DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md) shipped: one client in North America (DFW edge) subscribed to all 14 on-chain symbols through `/live/ws?src=onchain` for 10 minutes, 07:20 to 07:30 UTC, a quiet Monday morning. Its clock was set against our edge with ping and pong (best round trip 10 ms). The start is the Base block's timestamp, so a swap's wait for its block (up to 2 s) is not in these numbers.
+
+| Hop | p50 | p95 | n |
+| --- | --- | --- | --- |
+| Base block to our edge | 99 ms | 167 ms | 424 |
+| Held at our edge (the 250 ms conflation window) | 0 ms | 250 ms | 424 |
+| Our edge to the client | 5 ms | 73 ms | 424 |
+| Base block to the client | 127 ms | 419 ms | 424 |
+
+A first 5 minute run right after deploy gave 140 ms and 478 ms block to client (340 updates). A browser adds one frame to draw it. Chart history for this feed is often partial: the free node limits Cloudflare's shared addresses (DEC-0063). Browsers send their own hop samples to the latency tables ([DEC-0045](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)) whenever someone watches; the Latency page lists them per source.
+
 ## Slowest steps
 
 | Job | Step | p50 | p95 |
@@ -79,6 +92,7 @@ Age is how old the newest value is when fetched. Cadence is the age we expect at
 ## Referenced by
 
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
+- [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [REF-0024: App speed, how we measure it and what we changed](0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

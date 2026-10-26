@@ -61,7 +61,8 @@
         background: linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 94%, transparent) 0%, color-mix(in srgb, var(--color-canvas) 80%, transparent) 34%, color-mix(in srgb, var(--color-canvas) 35%, transparent) 50%, transparent 64%), linear-gradient(180deg, transparent 72%, color-mix(in srgb, var(--color-canvas) 70%, transparent)); }
       .hero-in { padding-top: 40px; }
       h1 { font-size: clamp(var(--type-8xl), 5.3vw, var(--type-8xl)); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; margin: 0 0 24px; max-width: 15ch; }
-      h1 span { color: var(--faint); }
+      /* A step lighter than --faint: the red glow sits behind it (contrast over the glow, WCAG 1.4.3). */
+      h1 span { color: var(--muted); }
       .lead { font-size: clamp(var(--type-2xl), 1.4vw, var(--type-3xl)); color: var(--muted); margin: 0 0 32px; max-width: 540px; }
       .cta { display: flex; gap: 12px; flex-wrap: wrap; }
       .fine { margin: 18px 0 0; color: var(--faint); font-size: var(--type-sm); }
@@ -115,7 +116,7 @@
       .bot-grid line { stroke: color-mix(in srgb, var(--palette-white) 6%, transparent); vector-effect: non-scaling-stroke; }
       .bot-start { stroke: color-mix(in srgb, var(--palette-white) 28%, transparent); stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
       .bot-line { fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-      .bot-start-lbl { position: absolute; left: 0; top: calc(18px + (1 - 10000 / 16000) * (100% - 32px) - 22px); color: var(--faint); font: var(--type-2xs)/1 var(--mono); }
+      .bot-start-lbl { position: absolute; left: 0; top: calc(18px + (1 - 10000 / 16000) * (100% - 32px) - 22px); color: var(--faint); font: var(--type-2xs)/1 var(--mono); padding: 2px 4px; margin-left: -4px; background: var(--color-canvas); border-radius: 3px; }
       .bot-tape { display: block; width: calc(100% - 36px); height: 22px; margin: 14px 18px 0; }
       .bot-tape .w { fill: var(--good); opacity: .55; }
       .bot-tape .l { fill: var(--bad); }
@@ -301,10 +302,12 @@
       @media (max-width: 380px) {
         .corner-nav a.li { display: none; }
       }
+      /* Reduced motion, unless the Motion setting says Full (REF-0023); kit.css keeps short fades. */
       @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation: none !important; transition: none !important; }
-        ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        :root:not([data-motion="full"]) *, :root:not([data-motion="full"]) *::before, :root:not([data-motion="full"]) *::after { animation: none !important; transition: none !important; }
+        :root:not([data-motion="full"])::view-transition-group(*), :root:not([data-motion="full"])::view-transition-old(*), :root:not([data-motion="full"])::view-transition-new(*) { animation: none !important; }
       }
+      :root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after { animation: none !important; transition: none !important; }
     </style>
     <script type="module" src="/src/site/main.ts"></script>
   </head>

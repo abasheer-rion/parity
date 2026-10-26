@@ -4,7 +4,7 @@
 // win rate and worst fall; the table under it shows every number behind them, and the
 // formula card works out expectancy for the bot you follow. Everything is hypothetical.
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Button, EmptyState, FilterChip, Select } from "../../ui";
+import { Button, EmptyState, FilterChip, Select, TableScroll } from "../../ui";
 import { loadBotRun, loadBotsIndex, type BotsLoaded } from "../../lib/bots";
 import { loadSims, type SimsDoc } from "../../lib/sims";
 import { ServiceHealth } from "../../components/ServiceHealth";
@@ -99,7 +99,7 @@ function CrashOdds({ index, sims }: { index: BotsIndex; sims: SimsDoc }) {
       <p className="small muted">
         A background job keeps running these seven rules on new made-up {b.years}-year paths: {b.paths.toLocaleString("en-US")} so far, {b.crash_paths.toLocaleString("en-US")} of them with at least one crash. The table sums all of them.
       </p>
-      <div className="ui-table-box bb-table">
+      <TableScroll className="ui-table-box bb-table" label="Bots wiped out in made-up crashes">
         <table className="mtable dense">
           <thead><tr>
             <th>Bot</th>
@@ -134,7 +134,7 @@ function CrashOdds({ index, sims }: { index: BotsIndex; sims: SimsDoc }) {
             })}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
       <p className="small muted">Same rules, costs and $10,000 start as above; the bar runs from $100 to $316,000 on a log scale, and percentiles are read from rounded bins.</p>
       <ServiceHealth />
     </div>
@@ -240,7 +240,7 @@ function StatsTable({ bots, stats, focus, onPick }: { bots: BotsIndex["bots"]; s
   const head: [string, string][] = [["Bot", ""], ["Trades", "Closed trades so far"], ["Win rate", "Share of closed trades that made money"], ["Avg win", "Average profit of a winning trade"], ["Avg loss", "Average loss of a losing trade"], ["Profit factor", "All wins divided by all losses; under 1 loses money"], ["Expectancy", "Average profit per trade"], ["Profit", "Account now minus the $10,000 start"], ["Worst fall", "Biggest drop from a high so far"], ["Under water", "Longest time below a previous high so far"]];
   const cell = (v: ReactNode, cls = "") => <td className={`num ${cls}`}>{v}</td>;
   return (
-    <div className="ui-table-box bb-table">
+    <TableScroll className="ui-table-box bb-table" label="Every bot on this replay">
       <table className="mtable dense">
         <thead><tr>{head.map(([h, t]) => <th key={h} title={t || undefined} className={h === "Bot" ? "" : "num"}>{h}</th>)}</tr></thead>
         <tbody>
@@ -264,7 +264,7 @@ function StatsTable({ bots, stats, focus, onPick }: { bots: BotsIndex["bots"]; s
         </tbody>
       </table>
       <p className="small muted bb-foot">* still below its high. Trades still open on the last day count only on the last frame. Figures are hypothetical.</p>
-    </div>
+    </TableScroll>
   );
 }
 
@@ -274,7 +274,7 @@ function SyntheticSummary({ index }: { index: BotsIndex }) {
     <div className="sw2-card">
       <h2>Across {s.paths} made-up paths of {s.years} years</h2>
       <p className="small muted">The same rules on {s.paths} different made-up futures, each starting at $10,000. A bot that does well on one path can fail on another.</p>
-      <div className="ui-table-box bb-table">
+      <TableScroll className="ui-table-box bb-table" label="Every bot across the made-up paths">
         <table className="mtable dense">
           <thead><tr><th>Bot</th><th className="num">Typical win rate</th><th className="num">Ended ahead</th><th className="num">Stopped out</th><th className="num">Typical end</th><th className="num">Typical worst fall</th></tr></thead>
           <tbody>
@@ -294,7 +294,7 @@ function SyntheticSummary({ index }: { index: BotsIndex }) {
             })}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
       <p className="small muted">Typical means the median path.</p>
     </div>
   );

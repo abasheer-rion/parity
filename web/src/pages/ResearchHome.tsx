@@ -49,7 +49,7 @@ export function ResearchHome({ report }: { report: Report }) {
         </p>
         <div className="verdict-bar" aria-label="Verdicts">
           {["Passed", "Promising", "Not proven", "Not tested"].map((l, i) => counts[l] ? (
-            <span key={l} data-i={i} className={`seg-${l.replace(" ", "-").toLowerCase()}`} style={{ flex: counts[l] }} title={`${l}: ${counts[l]}`}>{l} {counts[l]}</span>
+            <span key={l} data-i={i} className={`seg-${l.replace(" ", "-").toLowerCase()}`} style={{ flexGrow: counts[l] }} title={`${l}: ${counts[l]}`}>{l} {counts[l]}</span>
           ) : null)}
         </div>
       </section>

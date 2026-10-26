@@ -108,7 +108,7 @@ export function TTable<T>({ rows, cols, rowKey, initial, onPick, picked, caption
   let lastGroup = "";
   return (
     <div className="term-table-wrap">
-      <table className="term-table">
+      <table className="term-table ui-stagger-rows">
         <caption className="sr-only">{caption}</caption>
         <thead>
           <tr>
@@ -202,6 +202,22 @@ function thin(p: Point[], n: number): Point[] {
   return out;
 }
 
+/** Positions at least `gap` apart, each as close to its wish as it can be, inside [lo, hi]. */
+export function dodge(wish: number[], gap: number, lo: number, hi: number): number[] {
+  const order = wish.map((v, i) => [v, i] as const).sort((a, b) => a[0] - b[0]);
+  const out = new Array<number>(wish.length);
+  let prev = -Infinity;
+  for (const [v, i] of order) { out[i] = Math.max(v, prev + gap); prev = out[i]; }
+  // Pushed past the bottom: walk back up from the end.
+  let next = Infinity;
+  for (let k = order.length - 1; k >= 0; k--) {
+    const i = order[k][1];
+    out[i] = Math.min(out[i], hi, next - gap);
+    next = out[i];
+  }
+  return out.map((v) => Math.max(lo - 6, v));
+}
+
 export function TChart({ series, format, height, zero, label, area, log }: {
   series: TSeries[]; format: (v: number) => string; height?: number; zero?: boolean; label: string; area?: boolean; log?: boolean;
 }) {
@@ -241,6 +257,8 @@ export function TChart({ series, format, height, zero, label, area, log }: {
   };
   const read = prepared.map((s) => ({ s, p: ht != null ? valAt(s.pts, ht) : s.pts[s.pts.length - 1] }));
   const readDate = ht != null ? read.find((r) => r.p)?.p?.[0] : t1;
+  // Last-value tags are pushed apart so two lines ending close together keep both numbers readable.
+  const tagYs = dodge(prepared.map((s) => y(s.pts[s.pts.length - 1][1])), 15, pad.top, pad.top + ih);
 
   return (
     <div className="term-chart" ref={ref} style={height ? { height } : undefined}>
@@ -249,7 +267,8 @@ export function TChart({ series, format, height, zero, label, area, log }: {
           {yTicks.map((v) => (
             <g key={v}>
               <line className="term-gl" x1={pad.left} x2={pad.left + iw} y1={y(v)} y2={y(v)} />
-              <text className="term-tick" x={pad.left + iw + 6} y={y(v)} dy="0.32em">{format(v)}</text>
+              {/* A tick label under a last-value tag would be drawn over it: leave it out. */}
+              {!tagYs.some((ty) => Math.abs(ty - y(v)) < 14) && <text className="term-tick" x={pad.left + iw + 6} y={y(v)} dy="0.32em">{format(v)}</text>}
             </g>
           ))}
           {zero && lo < 0 && hi > 0 && <line className="term-zero" x1={pad.left} x2={pad.left + iw} y1={y(0)} y2={y(0)} />}
@@ -264,9 +283,10 @@ export function TChart({ series, format, height, zero, label, area, log }: {
             return (
               <g key={s.name + i}>
                 {area && i === 0 && prepared.length === 1 && (
-                  <polygon className="term-area-fill" points={`${x(s.pts[0][0])},${pad.top + ih} ${d} ${x(s.pts[s.pts.length - 1][0])},${pad.top + ih}`} style={{ fill: s.color }} />
+                  <polygon className="term-area-fill ui-fill-in" points={`${x(s.pts[0][0])},${pad.top + ih} ${d} ${x(s.pts[s.pts.length - 1][0])},${pad.top + ih}`} style={{ fill: s.color }} />
                 )}
-                <polyline fill="none" stroke={s.color} strokeWidth={1.3} strokeDasharray={s.dashed ? "4 3" : undefined} strokeLinejoin="round" points={d} />
+                {/* Solid lines draw in from left to right the first time they show (REF-0023). */}
+                <polyline className={s.dashed ? undefined : "ui-draw"} pathLength={s.dashed ? undefined : 1} fill="none" stroke={s.color} strokeWidth={1.3} strokeDasharray={s.dashed ? "4 3" : undefined} strokeLinejoin="round" points={d} />
               </g>
             );
           })}
@@ -274,8 +294,8 @@ export function TChart({ series, format, height, zero, label, area, log }: {
             const last = s.pts[s.pts.length - 1];
             return (
               <g key={`l${i}`} className="term-lastlab">
-                <rect x={pad.left + iw + 2} y={y(last[1]) - 7} width={pad.right - 4} height={14} style={{ fill: s.color }} />
-                <text x={pad.left + iw + 6} y={y(last[1])} dy="0.32em">{format(last[1])}</text>
+                <rect x={pad.left + iw + 2} y={tagYs[i] - 7} width={pad.right - 4} height={14} style={{ fill: s.color }} />
+                <text x={pad.left + iw + 6} y={tagYs[i]} dy="0.32em">{format(last[1])}</text>
               </g>
             );
           })}

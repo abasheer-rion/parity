@@ -1,8 +1,8 @@
 // Layout audit: opens every route of every app at four window sizes, saves a screenshot
 // of each, and lists text that collides, gets cut off, numbers shortened with "...", and
-// pages that scroll sideways (scripts/lib/layout-check.mjs). The smoke test runs the same
-// check on every route in CI; this script adds the extra sizes and the screenshots so a
-// person can look at them too.
+// pages that scroll sideways (scripts/lib/layout-check.mjs). The E2E suite runs the same
+// check on every route in CI (e2e/routes.spec.ts); this script adds the extra sizes and the
+// screenshots so a person can look at them too.
 //
 //   VITE_AUTH_BYPASS=1 npx vite --port 5199 --host 127.0.0.1   (in another terminal)
 //   LAYOUT_BASE=http://127.0.0.1:5199 npm run layout
@@ -26,21 +26,23 @@ const list = routes().filter((p) => !process.env.LAYOUT_ONLY || p.includes(proce
 const findings = [];
 mkdirSync(SHOTS, { recursive: true });
 
-const browser = await chromium.launch();
 for (const size of SIZES) {
+  // A fresh browser per size: a long run in one browser can run out of memory.
+  const browser = await chromium.launch();
   const ctx = await browser.newContext({
     viewport: { width: size.width, height: size.height },
     reducedMotion: "reduce",
     isMobile: size.phone, hasTouch: size.phone, deviceScaleFactor: 1,
   });
   await ctx.addInitScript(() => {
-    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 1, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
+    try { localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" })); } catch { /* private mode */ }
   });
   const queue = [...list];
-  await Promise.all([0, 1, 2, 3].map(async () => {
+  await Promise.all([0, 1, 2].map(async () => {
     while (queue.length) {
       const path = queue.shift();
-      const page = await ctx.newPage();
+      let page;
+      try { page = await ctx.newPage(); } catch (e) { findings.push({ size: size.name, path, kind: "load", text: e.message.split("\n")[0] }); continue; }
       try {
         await page.goto(BASE + path, { waitUntil: "load", timeout: 45000 });
         await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {});
@@ -58,8 +60,8 @@ for (const size of SIZES) {
     }
   }));
   await ctx.close();
+  await browser.close();
 }
-await browser.close();
 
 if (process.env.LAYOUT_JSON) writeFileSync(process.env.LAYOUT_JSON, JSON.stringify(findings, null, 2));
 const byKind = {};
