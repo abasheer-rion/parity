@@ -1,5 +1,10 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.3:
+
+- Parity moved to paritytrading.app. The app opens the new address and checks it for updates. Links to the old endyland.com addresses still open inside the app.
+- You sign in once more after the update, because a sign-in never carries over between two domains.
+
 New in 0.2.2:
 
 - Signed. The Mac app is signed with Argus Vision's Apple Developer ID and checked by Apple, so it opens like any other app. The Windows installer is signed by Argus Vision, Inc.
