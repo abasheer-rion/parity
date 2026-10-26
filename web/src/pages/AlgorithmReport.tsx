@@ -1,9 +1,11 @@
 import { Title } from "../components/Shell";
 import { useState } from "react";
 import { Card } from "../ui/layout";
+import { Segmented } from "../ui/inputs";
 import { algorithms, docPathFor, ledger, registrations, STAGES } from "../lib/catalog";
 import { docUrl, pct, REPO_URL } from "../lib/format";
 import { Term } from "./Learn";
+import { TableScroll } from "../ui";
 
 type View = "simple" | "analogy" | "precise";
 
@@ -26,8 +28,8 @@ export function AlgorithmReport({ slug }: { slug: string }) {
           <Title>{a.name}</Title>
           <p className="lead">{a.how_it_works.simple}</p>
         </div>
-        <div className="noprint">
-          <button className="quiet" onClick={() => window.print()}>Print or save as PDF</button>{" "}
+        <div className="noprint report-actions">
+          <button className="quiet" onClick={() => window.print()}>Print or save as PDF</button>
           <a className="small" href={docUrl(docPathFor(a.id) ?? "README.md")} target="_blank" rel="noreferrer">Markdown version</a>
         </div>
       </div>
@@ -44,11 +46,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
       </div>
 
       <Card title="How it works">
-        <div className="tabs" role="tablist">
-          {(["simple", "analogy", "precise"] as View[]).map((v) => (
-            <button key={v} role="tab" aria-selected={view === v} className={view === v ? "on" : ""} onClick={() => setView(v)}>{v[0].toUpperCase() + v.slice(1)}</button>
-          ))}
-        </div>
+        <Segmented size="sm" label="Explain it as" value={view} onChange={setView} options={[["simple", "Simple"], ["analogy", "Analogy"], ["precise", "Precise"]]} />
         <p className="big">{a.how_it_works[view]}</p>
         <h3>The rule</h3>
         <p>{a.rule}</p>
@@ -63,7 +61,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
 
       <Card title="What others reported" help={<>These are the sources' own numbers. "Checked" means we read the number on the source page. Compare <Term id="backtest">backtest</Term> and live evidence separately, and treat very high <Term id="sharpe-ratio">Sharpe ratios</Term> with suspicion.</>}>
         {a.reported_results.length ? (
-          <div className="table-wrap">
+          <TableScroll label="Why it might fail">
             <table className="gauntlet">
               <thead><tr><th>Source</th><th>Period</th><th>Market</th><th>Sharpe</th><th>Return a year</th><th>Volatility</th><th>Max drawdown</th><th>Evidence</th><th>Costs</th><th>Checked</th></tr></thead>
               <tbody>
@@ -83,7 +81,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         ) : <p className="muted">No source reports trading results.</p>}
         <h3>After it became known</h3>
         <p>{a.post_publication_evidence || "We found no evidence on how it did after publication."}</p>

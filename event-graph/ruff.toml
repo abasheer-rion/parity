@@ -1,0 +1,9 @@
+# Same rules as engine/pyproject.toml; the funnel's own modules count as first-party for import order.
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[lint.isort]
+known-first-party = ["facts", "funnel"]

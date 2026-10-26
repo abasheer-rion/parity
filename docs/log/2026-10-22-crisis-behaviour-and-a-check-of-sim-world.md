@@ -1,5 +1,5 @@
 ---
-id: LOG-0014
+id: LOG-0023
 title: Crisis behaviour, and a check of Sim World
 type: log
 status: final
@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0013, RES-0018, DEC-0020, DEC-0021]
+related: [LOG-0022, RES-0018, DEC-0020, DEC-0021]
 ---
 
 # Crisis behaviour, and a check of Sim World

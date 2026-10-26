@@ -6,22 +6,12 @@
 import DOMPurify from "dompurify";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { H, renderScene, W, type Visual } from "./scenes";
+// Reduced motion follows the device and the Motion setting (REF-0023).
+import { useReducedMotion } from "../ui/presence";
+import { Button } from "../ui";
 
 const TWEEN_MS = 700;
 const STEP_MS = 3200;
-
-function useReducedMotion(): boolean {
-  const q = "(prefers-reduced-motion: reduce)";
-  const [reduced, setReduced] = useState(() => typeof window !== "undefined" && !!window.matchMedia?.(q).matches);
-  useEffect(() => {
-    const m = window.matchMedia?.(q);
-    if (!m) return;
-    const on = () => setReduced(m.matches);
-    m.addEventListener("change", on);
-    return () => m.removeEventListener("change", on);
-  }, []);
-  return reduced;
-}
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
@@ -119,25 +109,42 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
         </div>
       )}
       <figcaption>
-        {!grid && <p id={capId} className="ac-caption" aria-live="polite"><span className="ac-frame-n">Step {step + 1} of {last + 1}</span> {visual.steps[step].caption}</p>}
+        {/* Every caption sits in the same grid cell, so the box is as tall as the longest
+            one and the controls below never move as the steps play (on a phone the
+            captions wrap to different heights). Only the current one is shown and read. */}
+        {!grid && (
+          <div className="ac-captions">
+            {visual.steps.map((st, i) => (
+              <p key={i} id={i === step ? capId : undefined} className="ac-caption" aria-live={i === step ? "polite" : undefined}
+                aria-hidden={i === step ? undefined : true} data-on={i === step || undefined}>
+                <span className="ac-frame-n">Step {i + 1} of {last + 1}</span> {st.caption}
+              </p>
+            ))}
+          </div>
+        )}
         <div className="ac-controls" role="group" aria-label="Picture steps. Arrow keys move between steps." onKeyDown={grid ? undefined : onKey}>
           {!grid && (
             <>
-              <button type="button" className="ac-btn" onClick={() => go(step - 1)} aria-disabled={step === 0}>Back</button>
+              <Button size="sm" onClick={() => go(step - 1)} aria-disabled={step === 0}>Back</Button>
               <span className="ac-dots" aria-hidden>
                 {visual.steps.map((_, i) => <span key={i} className={i === step ? "on" : i < step ? "past" : ""} />)}
               </span>
-              <button type="button" className="ac-btn ac-btn-main" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</button>
+              <Button size="sm" variant="primary" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</Button>
               {!reduced && (
-                <button type="button" className="ac-btn" onClick={togglePlay} aria-pressed={playing}>
-                  {playing ? "Pause" : step >= last ? "Replay" : "Play"}
+                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
+                  {/* All three labels share one cell, so the button keeps the width of the
+                      longest and the row never re-wraps as the picture plays. */}
+                  {["Pause", "Replay", "Play"].map((l) => (
+                    <span key={l} aria-hidden={l !== (playing ? "Pause" : step >= last ? "Replay" : "Play") || undefined}
+                      data-on={l === (playing ? "Pause" : step >= last ? "Replay" : "Play") || undefined}>{l}</span>
+                  ))}
                 </button>
               )}
             </>
           )}
-          <button type="button" className="ac-btn ac-btn-quiet" onClick={() => setGrid((g) => !g)} aria-pressed={grid}>
+          <Button size="sm" variant="ghost" className="ac-btn-quiet" onClick={() => setGrid((g) => !g)} aria-pressed={grid}>
             {grid ? "One step at a time" : "All steps"}
-          </button>
+          </Button>
         </div>
         {!grid && reduced && <p className="ac-note">Motion is off because your device asks for less of it. Each step is a still frame.</p>}
       </figcaption>

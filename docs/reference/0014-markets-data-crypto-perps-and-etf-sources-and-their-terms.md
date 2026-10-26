@@ -4,10 +4,10 @@ title: Markets data, crypto, perps and ETF sources and their terms
 type: reference
 status: current
 created: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, data]
-related: [DEC-0018, DEC-0019, REF-0003, DEC-0015]
+related: [DEC-0018, DEC-0019, REF-0003, DEC-0015, DEC-0052, DEC-0063]
 ---
 
 # Markets data, crypto, perps and ETF sources and their terms
@@ -52,6 +52,47 @@ Commands: `parity markets fetch` (skips sources fetched recently), `parity marke
 - Rules: at most 10 requests a second and a user agent that names a contact (https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data). The engine adds `PARITY_CONTACT` to its user agent and skips SEC sources when it is not set. A generic project URL was refused with 403 in testing; an email address worked.
 - Information on sec.gov is public and may be copied or distributed; the SEC asks to be cited (https://www.sec.gov/privacy).
 
+## Live and streamed data (read 25 October 2026)
+
+For the live charts in Trade, the Terminal and the Workbench ([DEC-0052](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)) we read the market data terms of every source below again. A source that answers without a key is not a source we may show: only the terms decide.
+
+| Source | What | Display on our site | On in the fan-out |
+| --- | --- | --- | --- |
+| CoinGecko public API | 100 largest coins, polled every 30 s, about 1 minute behind | Yes, with "Data provided by CoinGecko" linked next to the data (https://www.coingecko.com/en/api_terms) | Yes |
+| SEC company tickers | Every US-listed symbol, for search only | Yes, public information, cite the SEC (https://www.sec.gov/privacy) | Yes |
+| Hyperliquid | Real-time perp trades | Unclear: no data clause, app closed to US persons (https://app.hyperliquid.xyz/terms, 15 June 2026) | Team only (DEC-0056) |
+| Kraken | Real-time spot trades | No, unless Kraken consents (https://www.kraken.com/legal/global-terms, 19 October 2026) | Team only (DEC-0056) |
+| Coinbase Exchange and Advanced Trade | Real-time spot | No: "may not redistribute, display, or disseminate the Market Data", terms of 7 August 2026 (https://www.coinbase.com/legal/market_data) | No |
+| Bitstamp | Real-time spot | No: prices may not be used "on any other website" (https://www.bitstamp.net/terms-of-use/, 30 May 2025) | No |
+| Gemini | Real-time spot | Personal and internal use only; a redistribution agreement would allow it (https://www.gemini.com/legal/market-data-agreement, 12 October 2025) | No |
+| Bitfinex | Real-time spot | No redistribution without written consent (https://www.bitfinex.com/legal/general/market-data) | No |
+| Binance.US | Real-time spot | No public display (https://www.binance.us/terms-of-use, 5 June 2026) | No |
+| Crypto.com, KuCoin, Gate, Bitget, MEXC, HTX | Real-time spot and perps | No: each forbids display without consent, is personal use only or bars the US | No |
+| dYdX v4 indexer | Real-time perps | No data licence; not available to US persons (https://dydx.trade/terms) | No |
+| Pyth Network | Real-time crypto, FX, metals, US stocks | Every Hermes request needs a paid key since 26 August 2026 (401 without one). Display rights: Starter 500 USD a month, crypto only; Pro from 2,500 USD a month for stocks, FX and metals; the Pyth logo must show next to the data (https://app.pyth.com/products, https://www.dourolabs.xyz/Subscription-Terms.pdf, read 26 October 2026, [DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)) | No |
+| Parity on-chain (Base) | Live prices for 14 tokens from Uniswap v3 and Aerodrome swaps on Base | Yes: public blockchain data has no licence; read through PublicNode's free node, whose terms cover its service, not chain data (https://www.publicnode.com/terms) | Yes, to everyone ([DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)) |
+| CoinCap | Crypto prices | Needs a key | No |
+| ECB reference rates, Frankfurter | Daily FX | Yes, ECB cited (https://www.ecb.europa.eu/services/disclaimer/html/index.en.html) | Daily series already on the site |
+| IEX historical data | Next-day IEX trades only | Yes, with the IEX credit line (https://iextrading.com/trading/market-data/) | Not built: raw packet files, 8% of volume |
+| Cboe delayed quotes, FINRA, Tiingo, Alpha Vantage, Finnhub, Massive free | US stocks | No: personal or non-commercial use only | No |
+
+**No free source allows real-time crypto, real-time FX or any single-stock price on a public site.** The paid options with display rights, and their prices, are listed in DEC-0052 as owner decisions.
+
+### Internal use, team only (read 25 October 2026)
+
+Showing data to the public and using it inside Parity are different rights. [DEC-0056](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) streams these to people on the team list only, checked on the server; the public never sees them.
+
+| Source | Internal use | Team feed |
+| --- | --- | --- |
+| Hyperliquid | Terms have no data clause; owner decision | On: every perp and spot pair, trades, book, overview |
+| Kraken | Use "for your own benefit"; no making content available to third parties | On: every spot pair including fiat pairs |
+| Coinbase Exchange | No redistribution or display to third parties; the page refused automated reads on 25 October, so the wording is from the earlier read | On: every product |
+| Gemini | "Personal and/or internal use" allowed | On: every symbol |
+| Binance.US | No public display | On: every pair |
+| Alpaca Market Data | The account holder's own subscription (https://alpaca.markets/data) | Built, on once ALPACA_KEY_ID and ALPACA_SECRET_KEY are set |
+| Finnhub | "Personal plan can't be used by any business even internally without a written approval" (https://finnhub.io/terms-of-service) | Built, set FINNHUB_TOKEN only with a business plan or approval |
+| Binance, Bybit, OKX, Deribit, Bitstamp | Block or bar the US, personal use only, or no use on other websites | Off |
+
 ## Turned down
 
 | Source | Why |
@@ -70,7 +111,7 @@ None are needed today. We did not sign up for anything.
 
 | Key | Plan | Cost | What it adds |
 | --- | --- | --- | --- |
-| CoinGecko Demo key | Free Demo plan | Free | A stable 100 calls a minute and 10,000 a month instead of the shared keyless limit. Same one year of history. |
+| CoinGecko Demo key | Free Demo plan | Free | A stable 100 calls a minute and 10,000 a month instead of the shared keyless limit. Same one year of history. Set it as the `COINGECKO_API_KEY` secret on the site and the fan-out worker ([DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)). |
 | CoinGecko paid plan | Any paid plan | Monthly fee, see the pricing page | Longer history, new listings, commercial terms in writing. |
 | An ETF price feed | To be chosen | Unknown | ETF prices for practice positions. Today the user types the price because no free feed we checked allows display. |
 
@@ -102,5 +143,10 @@ The "New products and hype terms" entries in the glossary cite these:
 
 - [DEC-0018: Markets on the product side, crypto, perps, ETFs and what is new](../decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](../decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
+- [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
+- [DEC-0056: Team members see real-time venue feeds the public does not](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
+- [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 <!-- backlinks:end -->

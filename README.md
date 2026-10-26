@@ -58,6 +58,7 @@ Everything we decide, test and read is written down in [docs/](docs/README.md), 
 | How to invent new algorithms | [REF-0007](docs/reference/0007-ways-to-build-new-algorithms.md) |
 | How to add a strategy | [GDE-0002](docs/guides/0002-adding-a-strategy.md) |
 | How to write a doc | [GDE-0003](docs/guides/0003-writing-docs.md) |
+| How to write page copy | [REF-0017](docs/reference/0017-parity-copy-rules.md) |
 | Session history | [docs/log/](docs/README.md#log) |
 
 ## Working together

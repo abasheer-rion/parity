@@ -63,5 +63,6 @@ Asking that question is easy to do badly. Sorting hundreds of headlines by the s
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0013: News sources and market impact](../reference/0013-news-sources-and-market-impact.md)
 <!-- backlinks:end -->

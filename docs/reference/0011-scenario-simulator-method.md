@@ -18,7 +18,7 @@ You can type a made-up event, like "Iran bombs a Chinese port", and the Scenario
 
 ## Summary
 
-The simulator is a classic event study [@fama1969; @brown1985] run over a hand built list of past shocks in `catalog/events/`, one JSON file per event with its date, kind, regions, countries involved, a severity from 1 to 5 and the pages we checked it against. For a scenario, a matcher picks the most similar past events and the page shows the spread of what followed. The code is `engine/src/parity/scenarios.py`, the command is `parity scenario`, and the page is `#/scenarios`.
+The simulator is a classic event study [@fama1969; @brown1985] run over a hand built list of past shocks in `catalog/events/`, one JSON file per event with its date, kind, regions, countries involved, a severity from 1 to 5 and the pages we checked it against. For a scenario, a matcher picks the most similar past events and the page shows the spread of what followed. The code is `engine/src/parity/scenarios.py`, the command is `parity scenario`, and the page is What if in Parity Workbench (`/lab/#/whatif`, DEC-0043).
 
 ## What it measures
 
@@ -92,5 +92,6 @@ Add a file to `catalog/events/` with the same keys as the others, using only the
 
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](../decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
+- [DEC-0043: Parity Workbench, one full-screen tool for strategy work](../decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

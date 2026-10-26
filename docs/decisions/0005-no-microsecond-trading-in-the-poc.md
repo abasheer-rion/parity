@@ -36,5 +36,7 @@ For the proof of concept we test event-driven ideas at the speeds free data supp
 - [HYP-0003: Commodity currencies catch up to their commodity](../hypotheses/0003-commodity-currencies-catch-up.md)
 - [HYP-0004: Macro and energy surprises move currencies in a predictable direction](../hypotheses/0004-macro-surprises-move-fx-predictably.md)
 - [RES-0003: What practitioners say in forums](../research/0003-forums-and-practitioners.md)
+- [RES-0022: How trading and market data platforms are built](../research/0022-how-trading-and-market-data-platforms-are-built.md)
+- [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 <!-- backlinks:end -->

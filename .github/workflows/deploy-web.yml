@@ -8,17 +8,26 @@
 # shared data cache into dist/data/news (parity news export). Markets data (DEC-0018) is fetched
 # by the same hourly job and exported into dist/data/markets (parity markets export).
 # SEO (DEC-0023): the build writes the public Learn, Ideas and Notes pages and sitemap.xml;
-# after a production deploy, IndexNow is told which public URLs changed.
-# Parity Terminal's files go into dist/data/terminal (parity terminal export).
-# Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs)
+# after a production deploy, IndexNow is told which public URLs changed. The Blog and News pages
+# (DEC-0057) are built from content/newsroom/ and listed in sitemap.xml only, never sent to IndexNow.
+# Parity Terminal's files go into dist/data/terminal (parity terminal export), and Bot
+# Battle's into dist/data/bots (parity bots export, DEC-0035).
+# Latency (DEC-0045): after a production deploy, every source's row in data_freshness gets
+# this deploy's time as its publish time, and the site files' own as-of times are recorded.
+# Live data (DEC-0052, DEC-0056): on main, the parity-live worker (web/live/, the fan-out the
+# site's /live/* routes talk to) is deployed first, when CLOUDFLARE_WORKERS_TOKEN is set. Without
+# it the step is skipped and the worker keeps its last version (deploy it by hand, web/live/).
+# Secrets: CLOUDFLARE_API_TOKEN (Pages edit only), CLOUDFLARE_ACCOUNT_ID, SUPABASE_DB_URL (read published runs),
+# PARITY_WRITER_DB_URL (insert-only login, latency rows only), CLOUDFLARE_WORKERS_TOKEN (optional:
+# Account, Workers Scripts Edit, for the parity-live worker)
 name: Deploy dashboard
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/bake_front_stats.py", "scripts/export_verify_prices.py", "scripts/seo/**", "scripts/newsroom/**", "content/newsroom/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", "engine/src/parity/latency.py", ".github/workflows/deploy-web.yml"]
   pull_request:
-    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "scripts/export_site_data.py", "scripts/seo/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", ".github/workflows/deploy-web.yml"]
+    paths: ["web/**", "docs/**", "catalog/events/**", "engine/src/parity/scenarios.py", "engine/src/parity/world.py", "engine/src/parity/terminal.py", "engine/src/parity/bots.py", "scripts/export_site_data.py", "scripts/export_front_strip.py", "scripts/bake_front_stats.py", "scripts/export_verify_prices.py", "scripts/seo/**", "scripts/newsroom/**", "content/newsroom/**", "catalog/algorithms/**", "engine/src/parity/news/**", "engine/src/parity/markets/**", "engine/src/parity/latency.py", ".github/workflows/deploy-web.yml"]
   workflow_dispatch:
   workflow_run:
     workflows: ["Research run", "Official run", "News"]
@@ -37,6 +46,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    env:
+      HAS_WORKERS_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN != '' }}
     defaults:
       run:
         working-directory: web
@@ -53,6 +64,8 @@ jobs:
           # Which sign-in buttons to show (auth/PROVIDERS.md). Public values, not secrets.
           VITE_AUTH_PROVIDERS: ${{ vars.AUTH_PROVIDERS }}
           VITE_AUTH_PASSKEYS: ${{ vars.AUTH_PASSKEYS }}
+          # The bring-your-own-model assistant panel (DEC-0051). Off unless this is "on".
+          VITE_AI_ASSISTANT: ${{ vars.AI_ASSISTANT }}
           # Search engine verification tokens (DEC-0023). Public values, empty until set.
           GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION }}
           BING_VERIFICATION: ${{ vars.BING_VERIFICATION }}
@@ -78,6 +91,7 @@ jobs:
           parity fetch
           parity scenario export --out dist/data/scenarios.json
           parity world export --out dist/data/world.json
+          parity bots export --out dist/data
       - name: Copy news and market moves into the site
         run: |
           pip install -q -e ../engine
@@ -89,9 +103,26 @@ jobs:
         continue-on-error: true  # the terminal explains itself when its files are missing
         # After the markets step so CoinGecko crypto comes from dist/data/markets/crypto.json.
         run: parity terminal export --out dist/data --markets dist/data
+      - name: Verify's daily prices for its fill checks (REF-0016), from the terminal export
+        continue-on-error: true  # Verify says "cannot be checked" when this file is missing
+        run: python3 ../scripts/export_verify_prices.py dist
+      - name: Front page market strip (recent closes into stats.json, DEC-0021)
+        continue-on-error: true  # the front page labels the strip as missing when this is absent
+        run: python3 ../scripts/export_front_strip.py dist
+      - name: Front page counts (stats.json written into index.html, DEC-0039)
+        continue-on-error: true  # the page fetches /stats.json itself when this is skipped
+        run: python3 ../scripts/bake_front_stats.py dist
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
         run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
+      - name: Deploy the live fan-out worker (DEC-0056)
+        if: github.event_name != 'pull_request' && env.HAS_WORKERS_TOKEN == 'true'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: web/live
+          command: deploy
       - name: Deploy
         id: deploy
         uses: cloudflare/wrangler-action@v4
@@ -102,6 +133,12 @@ jobs:
           command: pages deploy dist --project-name=parity-research --branch=${{ github.head_ref || (github.event_name == 'workflow_run' && 'main') || github.ref_name }} --commit-hash=${{ github.sha }}
       - name: Summary
         run: echo "Deployed to ${{ steps.deploy.outputs.deployment-url }}" >> "$GITHUB_STEP_SUMMARY"
+      - name: Record when the site published each source (DEC-0045)
+        if: github.event_name != 'pull_request'
+        continue-on-error: true  # the latency page shows the gap; the deploy itself is done
+        env:
+          PARITY_WRITER_DB_URL: ${{ secrets.PARITY_WRITER_DB_URL }}
+        run: parity latency freshness --dist dist --stage published --publish
       - name: Tell search engines what changed (IndexNow)
         if: github.event_name != 'pull_request'
         continue-on-error: true

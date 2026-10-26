@@ -1,103 +1,33 @@
-/* Sign-in screens. Uses the app's tokens only, so light and dark both work. */
-.auth-page {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 16px;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-/* A quiet backdrop (DEC-0017): the brand blues drifting slowly, and the starburst turning
-   once every few minutes behind the card. Still for people who ask for reduced motion. */
-.auth-page::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  z-index: -1;
-  background:
-    radial-gradient(38% 32% at 22% 28%, rgb(47 107 255 / .22), transparent 70%),
-    radial-gradient(34% 30% at 78% 70%, rgb(111 220 180 / .12), transparent 70%),
-    radial-gradient(30% 28% at 70% 20%, rgb(169 191 247 / .14), transparent 70%);
-  filter: blur(10px);
-  animation: auth-drift 40s ease-in-out infinite alternate;
-}
-.auth-page::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: min(900px, 140vw);
-  aspect-ratio: 1;
-  left: 50%;
-  top: 50%;
-  margin: calc(min(900px, 140vw) / -2) 0 0 calc(min(900px, 140vw) / -2);
-  background: url("/brand/2026-10-21-starburst/parity-mark.svg") center / contain no-repeat;
-  opacity: .05;
-  animation: auth-turn 240s linear infinite;
-}
-:root[data-theme="light"] .auth-page::after { opacity: .07; }
-@keyframes auth-drift { to { transform: translate3d(4%, -3%, 0) scale(1.06); } }
-@keyframes auth-turn { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .auth-page::before, .auth-page::after { animation: none; } }
-.auth-card {
-  width: 100%;
-  max-width: 400px;
-  background: var(--surface-solid, var(--surface));
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 32px 28px 28px;
-  box-shadow: var(--shadow-2);
-}
-.auth-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 16px; margin-bottom: 24px; }
-.auth-brand img { border-radius: 8px; display: block; }
-.auth-title { font-size: 22px; line-height: 30px; font-weight: 600; margin: 0 0 6px; color: var(--text); }
-.auth-lead { margin: 0 0 20px; color: var(--text-2); font-size: var(--fs-sm, 14px); line-height: 20px; }
-.auth-lead strong { color: var(--text); font-weight: 600; }
-.auth-form { display: flex; flex-direction: column; gap: 14px; }
-.auth-form .ui-btn { margin-top: 6px; }
-.auth-field { gap: 6px; }
-.auth-hint { font-size: 12px; line-height: 16px; color: var(--text-2); }
-.auth-field-error { font-size: 12px; line-height: 16px; color: var(--bad); }
-.auth-field .ui-input[aria-invalid="true"] { border-color: var(--bad); }
+/* Fields and messages for the signed-in Account and Security settings (form.tsx). The
+   public sign-in panel has its own styles, in the front page's look (flow.css, DEC-0044). */
+@keyframes auth-in { from { opacity: 0; transform: translateY(10px); } }
+.auth-field { gap: 7px; position: relative; }
+.auth-field .ui-input[aria-invalid="true"] { border-color: var(--a-bad); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-negative) 10%, transparent); }
+.auth-field[data-valid] .ui-input { border-color: color-mix(in srgb, var(--color-positive) 50%, transparent); padding-right: 40px; }
+.auth-ok { position: absolute; right: 14px; top: 40px; color: var(--a-good); animation: auth-in var(--dur-3) var(--a-ease) both; }
+.auth-hint { font-size: var(--type-xs); line-height: 16px; color: var(--a-faint); }
+.auth-field-error { font-size: var(--type-sm); line-height: 17px; color: var(--a-bad); animation: auth-in var(--dur-3) var(--a-ease) both; }
 .auth-pw { position: relative; }
-.auth-pw .ui-input { width: 100%; padding-right: 64px; }
-.auth-pw-toggle { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); min-height: 28px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: var(--link, var(--accent)); font: inherit; font-size: 13px; font-weight: 550; cursor: pointer; }
-.auth-pw-toggle:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
-.auth-pw-toggle:focus-visible, .auth-text-btn:focus-visible, .auth-links a:focus-visible, .auth-links button:focus-visible, .auth-check a:focus-visible, .auth-brand:focus-visible, .auth-splash-retry:focus-visible { outline: 2px solid var(--link, var(--accent)); outline-offset: 2px; border-radius: 4px; }
-.auth-rules { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12px; line-height: 18px; color: var(--text-2); }
-.auth-rules li.ok { color: var(--good); }
-.auth-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 19px; color: var(--text-2); }
-.auth-check input { margin: 3px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--accent); }
-.auth-check a { color: var(--link, var(--accent)); text-decoration: underline; text-underline-offset: 2px; }
-.auth-text-btn { align-self: center; background: none; border: 0; padding: 4px; font: inherit; font-size: 13px; color: var(--link, var(--accent)); cursor: pointer; }
-.auth-text-btn:hover { text-decoration: underline; }
-/* An empty live region stays in the page (so later messages are announced) but takes no room. */
+.auth-pw .ui-input { width: 100%; padding-right: 68px; }
+.auth-pw-toggle { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); min-height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: transparent; color: var(--a-muted); font: inherit; font-size: var(--type-sm); font-weight: 550; cursor: pointer; transition: color var(--dur-2), background-color var(--dur-2); }
+.auth-pw-toggle:hover { color: var(--a-text); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
+.auth-pw-toggle:focus-visible { outline: 2px solid var(--a-text); outline-offset: 2px; border-radius: 6px; }
+.auth-field .pw-meter { margin-top: 2px; font-size: var(--type-xs); }
+.auth-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--type-sm); line-height: 19px; color: var(--a-muted); }
+.auth-check input { margin: 3px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--color-text); }
+.auth-check a { color: var(--a-text); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--palette-white) 30%, transparent); text-underline-offset: 2px; }
+.auth-code-input { font-family: var(--font-mono, ui-monospace, Menlo, monospace); font-size: var(--type-4xl) !important; letter-spacing: 6px; text-align: center; height: 52px !important; }
 .auth-live:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; }
-.auth-splash-retry { background: none; border: 0; padding: 0; font: inherit; color: var(--link, var(--accent)); text-decoration: underline; cursor: pointer; }
-.auth-code-input { font-family: var(--font-mono); font-size: 22px; letter-spacing: 6px; text-align: center; height: 48px; }
-.auth-seg { margin: 0 0 18px; }
-.auth-seg .ui-seg { width: 100%; }
-.auth-seg .ui-seg button { flex: 1; }
-.auth-links { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; }
-.auth-links a, .auth-links button { color: var(--link, var(--accent)); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-decoration: none; }
-.auth-links a:hover, .auth-links button:hover { text-decoration: underline; }
-.auth-links button:disabled { opacity: .6; cursor: default; }
-.auth-foot { margin-top: 18px; font-size: 12px; color: var(--text-2); text-align: center; max-width: 400px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
-.auth-disclaimer { margin: 0; color: var(--text-2); }
-.auth-notice { border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 19px; margin-bottom: 14px; border: 1px solid var(--border); }
-.auth-notice-bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 8%, transparent); }
-.auth-notice-good { color: var(--good); background: color-mix(in srgb, var(--good) 8%, transparent); }
-.auth-notice-info { color: var(--text-2); background: color-mix(in srgb, var(--accent) 6%, transparent); }
-.auth-splash { min-height: 100vh; display: grid; place-items: center; color: var(--muted); background: var(--bg); }
+.auth-notice { border-radius: 10px; padding: 10px 12px; font-size: var(--type-sm); line-height: 19px; margin-bottom: 14px; border: 1px solid var(--a-line); animation: auth-in var(--dur-3) var(--a-ease) both; }
+.auth-notice-bad { color: var(--a-bad); background: color-mix(in srgb, var(--color-negative) 8%, transparent); border-color: color-mix(in srgb, var(--color-negative) 25%, transparent); }
+.auth-notice-good { color: var(--a-good); background: color-mix(in srgb, var(--color-positive) 8%, transparent); border-color: color-mix(in srgb, var(--color-positive) 25%, transparent); }
+.auth-notice-info { color: var(--a-muted); background: color-mix(in srgb, var(--palette-white) 4%, transparent); }
+.auth-splash { min-height: 100vh; display: grid; place-items: center; color: var(--color-text-faint); background: var(--color-canvas); }
 .account-stack { display: flex; flex-direction: column; gap: 10px; max-width: 360px; }
 .account-stack .auth-notice { margin: 0; }
 .account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.auth-providers { display: flex; flex-direction: column; gap: 10px; }
-.auth-or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; margin: 18px 0; }
-.auth-or::before, .auth-or::after { content: ""; flex: 1; border-top: 1px solid var(--border); }
-.mfa-qr { background: #fff; border-radius: 10px; padding: 8px; width: 176px; height: 176px; }
-.mfa-secret { font-family: var(--font-mono); font-size: 12px; word-break: break-all; color: var(--text-2); }
+.mfa-qr { background: var(--palette-white); border-radius: 10px; padding: 8px; width: 176px; height: 176px; }
+.mfa-secret { font-family: var(--font-mono); font-size: var(--type-xs); word-break: break-all; color: var(--text-2); }
+@media (prefers-reduced-motion: reduce) {
+  .auth-ok, .auth-notice, .auth-field-error { animation: none !important; }
+}

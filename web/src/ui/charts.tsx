@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useId, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Point } from "../lib/types";
 import { Money } from "./text";
 
@@ -12,6 +12,25 @@ export interface Series {
   color: string;
   points: Point[];
   emphasis?: boolean;
+}
+
+// Every chart has a written version for screen readers (WCAG 1.1.1): the span it covers and,
+// for each line, where it starts and ends and its low and high. The svg points at it with
+// aria-describedby, so the name stays short and the numbers are there for whoever wants them.
+export function seriesSummary(series: { name: string; points: Point[] }[], format: (v: number) => string): string {
+  const withData = series.filter((s) => s.points.length);
+  if (!withData.length) return "No data.";
+  const dates = withData.flatMap((s) => s.points.map((p) => p[0])).sort();
+  const lines = withData.slice(0, 8).map((s) => {
+    const v = s.points.map((p) => p[1]);
+    return `${s.name}: starts at ${format(v[0])}, ends at ${format(v[v.length - 1])}, low ${format(Math.min(...v))}, high ${format(Math.max(...v))}.`;
+  });
+  const more = withData.length > 8 ? ` And ${withData.length - 8} more lines.` : "";
+  return `From ${dates[0]} to ${dates[dates.length - 1]}. ${lines.join(" ")}${more}`;
+}
+
+function ChartSummary({ id, text }: { id: string; text: string }) {
+  return <p id={id} className="sr-only">{text}</p>;
 }
 
 // The chart's width, read before the first paint (so it never draws at a guessed width
@@ -100,6 +119,7 @@ export function LineChart({
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
+  const sumId = useId();
   const pad = { top: 12, right: 16, bottom: 26, left: 52 };
   const w = width - pad.left - pad.right;
   const h = height - pad.top - pad.bottom;
@@ -148,7 +168,8 @@ export function LineChart({
   return (
     <figure className="chart" ref={ref}>
       <Legend items={series} />
-      <svg width={width} height={height} role="img" aria-label={label}>
+      <ChartSummary id={sumId} text={seriesSummary(series, format)} />
+      <svg width={width} height={height} role="img" aria-label={label} aria-describedby={sumId}>
         <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         {yTicks.map((v) => (
           <g key={v}>
@@ -215,7 +236,9 @@ function Tooltip({ x, width, children }: { x: number; width: number; children: R
   const left = x > width * 0.6 ? undefined : x + 12;
   const right = x > width * 0.6 ? width - x + 12 : undefined;
   return (
-    <div className="tooltip" style={{ left, right }} role="status">
+    // Follows the mouse; the same numbers are in the chart's written summary, so screen
+    // readers are not told every move.
+    <div className="tooltip" style={{ left, right }} aria-hidden="true">
       {children}
     </div>
   );
@@ -239,6 +262,7 @@ export function BarChart({
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
+  const sumId = useId();
   const pad = { top: 12, right: 12, bottom: 26, left: 52 };
   const w = width - pad.left - pad.right;
   const h = height - pad.top - pad.bottom;
@@ -261,7 +285,8 @@ export function BarChart({
   return (
     <figure className="chart" ref={ref}>
       <Legend items={legend} />
-      <svg width={width} height={height} role="img" aria-label={label}>
+      <ChartSummary id={sumId} text={groups.slice(0, 40).map((g) => `${g.label}: ${g.values.map((v) => `${v.name} ${v.value == null ? "no value" : format(v.value)}`).join(", ")}.`).join(" ") + (groups.length > 40 ? ` And ${groups.length - 40} more.` : "")} />
+      <svg width={width} height={height} role="img" aria-label={label} aria-describedby={sumId}>
         <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         {ticks.map((v) => (
           <g key={v}>
@@ -327,10 +352,10 @@ export function DotGrid({ x, y, width, height, gap = 14 }: { x: number; y: numbe
           <circle cx={1} cy={1} r={1} className="dotgrid" />
         </pattern>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0" />
-          <stop offset="0.15" stopColor="#fff" stopOpacity="1" />
-          <stop offset="0.85" stopColor="#fff" stopOpacity="1" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
+          <stop offset="0.15" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="0.85" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="1" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
         </linearGradient>
         <mask id={`${id}m`}><rect x={x} y={y} width={width} height={height} fill={`url(#${id}f)`} /></mask>
       </defs>
@@ -404,6 +429,7 @@ export function HeroChart({
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
   const [gid] = useState(() => `hc${++gridSeq}`);
+  const sumId = useId();
   const [showCmp, setShowCmp] = useState(true);
   const pts = useMemo(() => thin(rebase(sliceRange(main.points, range), amount), 900), [main.points, range, amount]);
   const cmp = useMemo(() => (compare && showCmp ? thin(rebase(sliceRange(compare.points, range), amount), 900) : []), [compare, range, amount, showCmp]);
@@ -437,7 +463,9 @@ export function HeroChart({
     setHover(lo2);
   };
 
-  const xLabels = [0.1, 0.3, 0.5, 0.7, 0.9].map((f) => pts[Math.floor(f * (pts.length - 1))][0]);
+  // A short range of weekly points has fewer points than labels: drop repeats, or two labels
+  // sit on top of each other (and share a React key).
+  const xLabels = [...new Set([0.1, 0.3, 0.5, 0.7, 0.9].map((f) => pts[Math.floor(f * (pts.length - 1))][0]))];
   const hx = hover != null ? tx(pts[hover][0]) : null;
 
   return (
@@ -458,7 +486,8 @@ export function HeroChart({
         </div>
         {aside}
       </div>
-      <svg width={width} height={height} role="img" aria-label={`Growth of $${amount.toLocaleString()} in ${main.name}`}>
+      <ChartSummary id={sumId} text={seriesSummary([{ name: main.name, points: pts }, ...(compare && cmp.length ? [{ name: compare.name, points: cmp }] : [])], (v) => `$${Math.round(v).toLocaleString("en-US")}`)} />
+      <svg width={width} height={height} role="img" aria-label={`Growth of $${amount.toLocaleString()} in ${main.name}`} aria-describedby={sumId}>
         <defs>
           <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stopColor={tone} stopOpacity="0.28" />
@@ -485,11 +514,14 @@ export function HeroChart({
         ))}
         <rect x={pad.left} y={0} width={w} height={height} fill="transparent" onPointerMove={onMove} onPointerLeave={() => setHover(null)} />
       </svg>
-      <div className="range-tabs" role="tablist" aria-label="Time range">
-        {RANGES.map((r) => (
-          <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => onRange(r)}
-            style={r === range ? { color: tone, borderColor: tone } : undefined}>{r}</button>
-        ))}
+      <div className="range-tabs">
+        {/* Only the range buttons are tabs; the comparison key beside them is not. */}
+        <div className="range-tabs-list" role="tablist" aria-label="Time range">
+          {RANGES.map((r) => (
+            <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => onRange(r)}
+              style={r === range ? { color: tone, borderColor: tone } : undefined}>{r}</button>
+          ))}
+        </div>
         {compare && (
           <span className="range-key">
             <i style={{ background: tone }} />{main.name}
@@ -520,6 +552,12 @@ export function Sparkline({ points, width = 84, height = 28, fluid }: { points: 
 }
 
 export interface FanBand { day: number; median: number; q25: number; q75: number; min: number; max: number; count: number }
+
+// The fan chart in words: the first, middle and last day, each with its median, middle half and range.
+function fanSummary(bands: FanBand[], format: (v: number) => string, unit: string, countLabel: string): string {
+  const pick = [bands[0], bands[Math.floor(bands.length / 2)], bands[bands.length - 1]].filter((b, i, a) => b && a.indexOf(b) === i);
+  return pick.map((b) => `After ${b.day} ${unit}${b.day === 1 ? "" : "s"}: median ${format(b.median)}, middle half ${format(b.q25)} to ${format(b.q75)}, full range ${format(b.min)} to ${format(b.max)}, ${b.count} ${countLabel}${b.count === 1 ? "" : "s"}.`).join(" ");
+}
 
 /**
  * What happened after a set of past events, day by day: a faint line per event, the
@@ -564,6 +602,7 @@ export function FanChart({
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
   const clipId = useMemo(() => `fan-${Math.random().toString(36).slice(2, 8)}`, []);
+  const sumId = useId();
   const pad = { top: 12, right: 16, bottom: 26, left: 58 };
   const w = width - pad.left - pad.right;
   const h = height - pad.top - pad.bottom;
@@ -594,7 +633,8 @@ export function FanChart({
 
   return (
     <figure className="chart" ref={ref}>
-      <svg width={width} height={height} role="img" aria-label={label}>
+      <ChartSummary id={sumId} text={fanSummary(bands, format, unit, countLabel)} />
+      <svg width={width} height={height} role="img" aria-label={label} aria-describedby={sumId}>
         <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
         {ticks.map((v) => (
           <text key={v} className="tick" x={pad.left - 8} y={y(v)} dy="0.32em" textAnchor="end">{(tickFormat ?? format)(v)}</text>

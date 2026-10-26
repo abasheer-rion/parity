@@ -99,6 +99,7 @@ Code: `engine/src/parity/data/currencies.py`, `market_size.py`, `ticks.py` and `
 ## Referenced by
 
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0015: Getting close to Bloomberg data: sources, costs and licences](0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

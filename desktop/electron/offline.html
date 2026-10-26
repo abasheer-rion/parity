@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'" />
+    <title>Offline</title>
+    <link rel="stylesheet" href="tokens.css" />
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; overflow: hidden; user-select: none; -webkit-user-select: none; }
+      body { display: flex; align-items: center; gap: 8px; padding: 0 14px; background: var(--color-surface-raised); color: var(--color-text-body); border-bottom: 1px solid var(--color-fill); font: 500 var(--type-xs)/1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-app-region: drag; }
+      i { width: 7px; height: 7px; border-radius: 50%; background: var(--color-warning); flex: none; }
+      span { color: var(--color-text-faint); }
+    </style>
+  </head>
+  <body>
+    <i aria-hidden="true"></i>
+    <b>Offline, showing saved copy</b>
+    <span>The live site comes back by itself when the connection does.</span>
+  </body>
+</html>
