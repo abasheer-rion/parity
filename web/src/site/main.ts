@@ -9,6 +9,7 @@
 //   - the sign-in panel (DEC-0044): Log in and Sign up fade the page out and the panel in,
 //     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
 import Lenis from "lenis";
+import "./viewTransitions";
 import { botTrades, TRADES } from "./botPath";
 import { startPwa } from "../pwa/install";
 import { startRum } from "../lib/rum";

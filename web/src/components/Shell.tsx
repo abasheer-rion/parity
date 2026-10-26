@@ -148,6 +148,13 @@ export function Shell({
     window.addEventListener("keydown", on);
     return () => window.removeEventListener("keydown", on);
   }, []);
+  // A click anywhere outside the account menu closes it, like any menu.
+  useEffect(() => {
+    if (!menu) return;
+    const on = (e: PointerEvent) => { if (!(e.target as Element | null)?.closest?.(".account")) setMenu(false); };
+    document.addEventListener("pointerdown", on);
+    return () => document.removeEventListener("pointerdown", on);
+  }, [menu]);
   const openSearch = () => { setOpen(false); setMenu(false); window.dispatchEvent(new Event("parity:search")); };
   const research = SPACE === "research";
   const items = research ? RESEARCH : PRODUCT;

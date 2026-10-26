@@ -1,8 +1,8 @@
 // Layout audit: opens every route of every app at four window sizes, saves a screenshot
 // of each, and lists text that collides, gets cut off, numbers shortened with "...", and
-// pages that scroll sideways (scripts/lib/layout-check.mjs). The smoke test runs the same
-// check on every route in CI; this script adds the extra sizes and the screenshots so a
-// person can look at them too.
+// pages that scroll sideways (scripts/lib/layout-check.mjs). The E2E suite runs the same
+// check on every route in CI (e2e/routes.spec.ts); this script adds the extra sizes and the
+// screenshots so a person can look at them too.
 //
 //   VITE_AUTH_BYPASS=1 npx vite --port 5199 --host 127.0.0.1   (in another terminal)
 //   LAYOUT_BASE=http://127.0.0.1:5199 npm run layout

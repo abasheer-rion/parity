@@ -6,6 +6,8 @@
 .mk-banner { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface-solid); margin: 0 0 16px; font-size: var(--fs-sm, var(--type-sm)); color: var(--text-2); }
 .mk-banner svg { flex: none; margin-top: 2px; color: var(--muted); }
 .mk-banner strong { color: var(--text); }
+/* Links in a sentence need more than colour to stand out (WCAG 1.4.1). */
+.mk-banner a { text-decoration: underline; text-underline-offset: 2px; }
 .mk-tabs { margin-bottom: 18px; overflow-x: auto; scrollbar-width: none; }
 .mk-tabs::-webkit-scrollbar { display: none; }
 
@@ -72,6 +74,8 @@
 .mk-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-items: end; }
 .mk-form label { display: grid; gap: 4px; font-size: var(--fs-xs, var(--type-xs)); color: var(--text-2); min-width: 0; }
 .mk-form input, .mk-form select { min-width: 0; width: 100%; height: 34px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-solid); color: var(--text); font: inherit; font-size: var(--type-md); }
+.mk-form-problem { margin: 8px 0 0; color: var(--bad); font-size: var(--type-sm); }
+.mk-form-problem:empty { display: none; }
 .mk-practice-badge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px; border: 1px dashed var(--border-2, var(--border)); font-size: var(--type-xs); color: var(--text-2); }
 .mk-pos { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto; gap: 10px; align-items: center; }
 .mk-pos input { width: 100%; min-width: 0; height: 30px; padding: 0 8px; border: 1px solid var(--border); border-radius: 6px; background: transparent; color: var(--text); font: inherit; }

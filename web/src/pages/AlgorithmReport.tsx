@@ -28,8 +28,8 @@ export function AlgorithmReport({ slug }: { slug: string }) {
           <Title>{a.name}</Title>
           <p className="lead">{a.how_it_works.simple}</p>
         </div>
-        <div className="noprint">
-          <button className="quiet" onClick={() => window.print()}>Print or save as PDF</button>{" "}
+        <div className="noprint report-actions">
+          <button className="quiet" onClick={() => window.print()}>Print or save as PDF</button>
           <a className="small" href={docUrl(docPathFor(a.id) ?? "README.md")} target="_blank" rel="noreferrer">Markdown version</a>
         </div>
       </div>

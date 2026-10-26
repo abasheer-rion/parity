@@ -22,6 +22,8 @@ export function Practice() {
   const [ticker, setTicker] = useState(addFromHash());
   const [etfPrice, setEtfPrice] = useState("");
   const [amount, setAmount] = useState("1000");
+  // Why the last Add did nothing, in plain words, instead of a button that seems broken.
+  const [problem, setProblem] = useState<string | null>(null);
   useEffect(() => { const t = addFromHash(); if (t) { setKind("etf"); setTicker(t); } }, []);
 
   const priceOf = (p: Position) => p.kind === "coin" ? coins.find((c) => c.id === p.coinId)?.price_usd ?? null : p.manualPrice ?? null;
@@ -31,20 +33,22 @@ export function Practice() {
   }, { cost: 0, value: 0 });
 
   const add = () => {
-    const amt = Number(amount);
-    if (!(amt > 0)) return;
+    const amt = Number(amount.replace(/[$,\s]/g, ""));
+    if (!(amt > 0)) { setProblem("Enter a pretend amount above zero, like 1000."); return; }
     const today = localDay();
     if (kind === "coin") {
       const c = coins.find((x) => x.id === coinId);
-      if (!c?.price_usd) return;
+      if (!c?.price_usd) { setProblem(coins.length ? "This coin has no price yet. Pick another one." : "Coin prices have not loaded, so a coin cannot be added now. Try again later, or follow an ETF."); return; }
       addPractice({ kind: "coin", symbol: c.symbol, name: c.name, coinId: c.id, amount: amt, entryPrice: c.price_usd, entryDate: today });
     } else {
       const px = Number(etfPrice.replace(/[$,\s]/g, ""));
       const t = ticker.trim().toUpperCase();
-      if (!t || !(px > 0)) return;
+      if (!t) { setProblem("Enter the ETF's ticker, like SPY."); return; }
+      if (!(px > 0)) { setProblem("Enter today's price from your broker, like 512.40."); return; }
       addPractice({ kind: "etf", symbol: t, name: t, amount: amt, entryPrice: px, entryDate: today, manualPrice: px });
       setEtfPrice("");
     }
+    setProblem(null);
   };
 
   return (
@@ -78,6 +82,7 @@ export function Practice() {
           <label>Pretend amount in dollars<input inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} /></label>
           <Button variant="primary" onClick={add}>Add practice position</Button>
         </div>
+        <p className="mk-form-problem" role="alert">{problem}</p>
         {kind === "etf" && <p className="muted small">We do not have a licensed ETF price feed yet, so you type the price, and update it later to see the change.</p>}
       </section>
 

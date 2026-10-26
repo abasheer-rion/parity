@@ -241,6 +241,7 @@ export function TChart({ series, format, height, zero, label, area, log }: {
   };
   const read = prepared.map((s) => ({ s, p: ht != null ? valAt(s.pts, ht) : s.pts[s.pts.length - 1] }));
   const readDate = ht != null ? read.find((r) => r.p)?.p?.[0] : t1;
+  const tagYs = prepared.filter((s) => s.pts.length).map((s) => y(s.pts[s.pts.length - 1][1]));
 
   return (
     <div className="term-chart" ref={ref} style={height ? { height } : undefined}>
@@ -249,7 +250,8 @@ export function TChart({ series, format, height, zero, label, area, log }: {
           {yTicks.map((v) => (
             <g key={v}>
               <line className="term-gl" x1={pad.left} x2={pad.left + iw} y1={y(v)} y2={y(v)} />
-              <text className="term-tick" x={pad.left + iw + 6} y={y(v)} dy="0.32em">{format(v)}</text>
+              {/* A tick label under a last-value tag would be drawn over it: leave it out. */}
+              {!tagYs.some((ty) => Math.abs(ty - y(v)) < 14) && <text className="term-tick" x={pad.left + iw + 6} y={y(v)} dy="0.32em">{format(v)}</text>}
             </g>
           ))}
           {zero && lo < 0 && hi > 0 && <line className="term-zero" x1={pad.left} x2={pad.left + iw} y1={y(0)} y2={y(0)} />}

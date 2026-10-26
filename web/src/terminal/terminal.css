@@ -179,11 +179,11 @@
 .term-bar-note { color: var(--t-faint); font-size: var(--type-2xs); }
 .term-bar-note b { font-weight: 500; }
 .term-bar-fill { flex: 1; }
-.term-select select, .term-input { height: 20px; background: var(--palette-black); color: var(--t-text); border: 1px solid var(--t-line-2); font: inherit; font-size: var(--type-2xs); padding: 0 4px; max-width: 200px; }
+.term-select select, .term-input { height: 24px; background: var(--palette-black); color: var(--t-text); border: 1px solid var(--t-line-2); font: inherit; font-size: var(--type-2xs); padding: 0 4px; max-width: 200px; }
 .term-input { width: 110px; color: var(--t-amber); text-transform: uppercase; }
 .term-input:focus { border-color: var(--t-amber); outline: none; }
 .term-seg { display: inline-flex; border: 1px solid var(--t-line-2); }
-.term-seg button { height: 18px; padding: 0 7px; border: 0; border-right: 1px solid var(--t-line); background: transparent; color: var(--t-dim); font: inherit; font-size: var(--type-2xs); cursor: pointer; }
+.term-seg button { height: 24px; min-width: 24px; padding: 0 7px; border: 0; border-right: 1px solid var(--t-line); background: transparent; color: var(--t-dim); font: inherit; font-size: var(--type-2xs); cursor: pointer; }
 .term-seg button:last-child { border-right: 0; }
 .term-seg button.on { background: var(--t-amber); color: var(--palette-black); font-weight: 600; }
 .term-seg button:not(.on):hover { color: var(--t-text); background: var(--color-hover); }
@@ -279,7 +279,7 @@
 /* MOV */
 .term-mov-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 10px; padding: 2px 6px; align-content: start; }
 .term-mov { margin: 0; padding: 0; list-style: none; }
-.term-mov button { width: 100%; display: grid; grid-template-columns: 62px minmax(0, 1fr) 72px 60px; gap: 6px; align-items: center; height: 20px; padding: 0 4px; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--palette-white) 3%, transparent); background: none; color: var(--t-text); font: inherit; font-size: var(--type-xs); cursor: pointer; text-align: left; }
+.term-mov button { width: 100%; display: grid; grid-template-columns: 62px minmax(0, 1fr) 72px 60px; gap: 6px; align-items: center; height: 24px; padding: 0 4px; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--palette-white) 3%, transparent); background: none; color: var(--t-text); font: inherit; font-size: var(--type-xs); cursor: pointer; text-align: left; }
 .term-mov button > span:nth-child(n+3) { text-align: right; white-space: nowrap; }
 .term-mov .term-name { max-width: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @container panel (max-width: 560px) { .term-mov button { grid-template-columns: 62px minmax(0, 1fr) 60px; } .term-mov .term-name { display: none; } }

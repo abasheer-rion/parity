@@ -26,7 +26,8 @@ export function Ticker() {
     </ul>
   );
   return (
-    <div className="term-ticker" aria-label="Biggest moves this week">
+    // A tape that scrolls by design, cut at the screen's edge: the layout check skips it.
+    <div className="term-ticker" aria-label="Biggest moves this week" data-layout-ignore>
       <div className="term-tape" style={{ ["--tape-s" as string]: `${Math.max(40, items.length * 4)}s` }}>
         {row(false)}
         {row(true)}
