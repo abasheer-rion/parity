@@ -1,7 +1,7 @@
 // Our on-chain feed (DEC-0063): swap decoding, the volume-weighted composite, the symbol list
 // shared with the browser, and the badge's plain words. No network.
 import { describe, expect, it } from "vitest";
-import { composite, decodeSwap, ONCHAIN_SYMBOLS, onchain, POOLS, poolPrice } from "../live/src/venues/onchain";
+import { composite, decodeSwap, NODES, ONCHAIN_SYMBOLS, onchain, POOLS, poolPrice } from "../live/src/venues/onchain";
 import { ONCHAIN_SYMBOLS as BROWSER_SYMBOLS } from "../src/lib/live/onchainSymbols";
 import { sourceById } from "../src/lib/live/sources";
 import { badgeText, secText } from "../src/components/LiveBadge";
@@ -34,6 +34,36 @@ describe("on-chain feed", () => {
     expect(p.r?.[0].s).toBe("ETH-USDC");
     expect(a.parse(JSON.stringify({ jsonrpc: "2.0", method: "eth_subscription", params: { result: { address: "0xd0b53d9277642d899df5c87a3966a349a798f224", data: DATA, removed: true } } }))).toEqual({});
     expect(a.parse(JSON.stringify({ jsonrpc: "2.0", id: 1, error: { message: "limit" } })).fail).toContain("limit");
+    expect(a.parse(JSON.stringify({ jsonrpc: "2.0", id: 2, error: { message: "limit" } }))).toEqual({});
+  });
+
+  it("reads a newly wanted symbol's price over the line, so a viewer sees one at once", () => {
+    const a = onchain.make({});
+    const msgs = a.subscribe(["ETH-USDC"]);
+    expect(msgs).toHaveLength(1);
+    const call = JSON.parse(msgs[0]) as { id: number; method: string };
+    expect(call.method).toBe("eth_call");
+    const slot0 = "0x00000000000000000000000000000000000000000003280e254cb6023fc3e2ee" + "0".repeat(64 * 6);
+    const p = a.parse(JSON.stringify({ jsonrpc: "2.0", id: call.id, result: slot0 }));
+    expect(p.t?.find((t) => t.s === "ETH-USDC")?.p).toBeCloseTo(2319.756, 2);
+  });
+
+  it("drops a line whose subscription the node refused, and tries the next node", async () => {
+    const a = onchain.make({});
+    await a.prepare!();
+    const firstUrl = a.url;
+    const p = a.parse(JSON.stringify({ jsonrpc: "2.0", id: 1, error: { code: -32005, message: "Rate limit exceeded" } }));
+    expect(p.drop).toBe(true);
+    await a.prepare!();
+    expect(a.url).not.toBe(firstUrl);
+    expect(NODES).toContain(a.url);
+  });
+
+  it("takes a swap's time from the block when the log leaves it out", () => {
+    const a = onchain.make({});
+    a.parse(JSON.stringify({ jsonrpc: "2.0", method: "eth_subscription", params: { result: { number: "0x10", timestamp: "0x6adee62d" } } }));
+    const p = a.parse(JSON.stringify({ jsonrpc: "2.0", method: "eth_subscription", params: { result: { address: "0xd0b53d9277642d899df5c87a3966a349a798f224", data: DATA, blockNumber: "0x10" } } }));
+    expect(p.t?.[0].te).toBe(0x6adee62d * 1000);
   });
 
   it("weights pools by recent volume, and by depth before any trades", () => {

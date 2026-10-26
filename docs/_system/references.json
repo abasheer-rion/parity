@@ -39470,6 +39470,29 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "tenderly-node-rpc",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Tenderly Node RPC overview: public endpoint limits",
+      "venue": "docs.tenderly.co",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.tenderly.co/node-rpc/overview",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+      ],
+      "note": "Read for DEC-0063 (public node failover).",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

@@ -11,8 +11,9 @@
 // partial or missing; the chart then fills in from live swaps (DEC-0063).
 import { allowed, BARS, fromPrices, memo, TF_MS, type AdapterDef, type BoardPatch, type Parsed, type Trade } from "../base";
 
-/** A free public Base node (PublicNode). No key, no account. */
-const WSS = "wss://base-rpc.publicnode.com";
+/** Free public Base nodes, no key and no account. The line uses the first and moves to the
+ *  next when one refuses (they limit by address, and Cloudflare's addresses are shared). */
+export const NODES = ["wss://base-rpc.publicnode.com", "wss://base.gateway.tenderly.co", "wss://base.drpc.org"];
 const RPC = "https://base-rpc.publicnode.com";
 const SWAP = "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67";
 const SLOT0 = "0x3850c7bd";
@@ -190,8 +191,6 @@ async function midsAt(pools: Pool[], block: string): Promise<Map<string, number>
   return out;
 }
 
-/** Starting prices, shared for a minute by every caller in this isolate. */
-const startMids = memo(60_000, () => midsAt([...makePools().values()], "latest"));
 /** Prices 24 hours ago, for the overview's change column; kept ten minutes. */
 const dayAgoMids = memo(600_000, async () => {
   const head = await headBlock();
@@ -221,23 +220,43 @@ export const onchain: AdapterDef = {
     const priceOf = (sym: string, now: number) => composite(bySym.get(sym) ?? [], sym === ETH ? 1 : composite(bySym.get(ETH) ?? [], 1, now), now);
     let dayAgo = new Map<string, number>();
     const openOf = (sym: string): number => composite((bySym.get(sym) ?? []).map((p) => ({ ...p, mid: dayAgo.get(p.addr) ?? Number.NaN, vol: 0 })), sym === ETH ? 1 : openOf(ETH), 0);
+    // Which node the line uses, and whether the current line has carried anything yet.
+    let node = 0, opened = 0, alive = false;
+    // Block times by number, for nodes whose logs leave the time out.
+    const blockAt = new Map<number, number>();
+    // Pool prices read over the line when a symbol is first wanted: id -> pool.
+    const asked = new Map<number, Pool>();
+    let nextId = 100;
+    // Only the deepest pool per symbol (and ETH's, to convert), one call per message: some
+    // free nodes refuse batches.
+    const seedFor = (ss: string[]): string[] => {
+      const want = new Set<Pool>();
+      for (const s of ss) { const p = bySym.get(s)?.[0]; if (!p) continue; want.add(p); if (p.quote === "WETH") want.add(bySym.get(ETH)![0]); }
+      return [...want].map((p) => { const id = nextId++; asked.set(id, p); return JSON.stringify({ jsonrpc: "2.0", id, method: "eth_call", params: [{ to: p.addr, data: SLOT0 }, "latest"] }); });
+    };
     return {
-      id: "onchain", feed: "rt", internal: false, url: WSS, maxUpstream: 60, stallMs: 60_000,
+      id: "onchain", feed: "rt", internal: false, maxUpstream: 60, stallMs: 60_000,
+      get url() { return NODES[node]; },
       async prepare() {
-        // Starting prices are a head start only: without them, prices fill in from the swaps.
-        try {
-          const mids = await startMids();
-          for (const p of pools.values()) { const m = mids.get(p.addr); if (m != null && Number.isFinite(m)) p.mid = m; }
-        } catch (e) { console.log(`[onchain] starting prices failed: ${String(e)}`); }
-        try { dayAgo = await dayAgoMids(); } catch (e) { console.log(`[onchain] day-ago prices failed: ${String(e)}`); }
+        // A line that opened and carried nothing (refused, or silent): try the next node.
+        if (opened++ && !alive) node = (node + 1) % NODES.length;
+        alive = false;
+        asked.clear();
+        // The 24 hour change is a nice-to-have: fetched beside the line, never in its way.
+        void dayAgoMids().then((d) => { dayAgo = d; }).catch((e) => console.log(`[onchain] day-ago prices failed: ${String(e)}`));
       },
-      // One subscription for every pool's swaps; the fan-out keeps only what viewers want.
-      hello: () => [JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_subscribe", params: ["logs", { address: [...pools.keys()], topics: [SWAP] }] })],
+      // One subscription for every pool's swaps, and one for block times; the fan-out keeps
+      // only what viewers want.
+      hello: () => [
+        JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_subscribe", params: ["logs", { address: [...pools.keys()], topics: [SWAP] }] }),
+        JSON.stringify({ jsonrpc: "2.0", id: 3, method: "eth_subscribe", params: ["newHeads"] }),
+      ],
       allows: (s) => bySym.has(s),
-      subscribe: () => [],
+      // A newly wanted symbol: read its pools' prices now, so a viewer sees a price at once.
+      subscribe: (ss) => seedFor(ss),
       unsubscribe: () => [],
       board: {
-        subscribe: () => [],
+        subscribe: () => seedFor([...bySym.keys()]),
         poll: {
           every: 60_000,
           async run() {
@@ -250,17 +269,41 @@ export const onchain: AdapterDef = {
         },
       },
       parse(data): Parsed {
-        let m: { id?: number; error?: { message?: string }; method?: string; params?: { result?: { address?: string; data?: string; blockTimestamp?: string; removed?: boolean } } };
+        type Msg = { id?: number; result?: unknown; error?: { message?: string }; method?: string; params?: { result?: { address?: string; data?: string; blockTimestamp?: string; blockNumber?: string; removed?: boolean; number?: string; timestamp?: string } } };
+        let m: Msg | Msg[];
         try { m = JSON.parse(data); } catch { return {}; }
-        if (m.error) return { fail: `Base node: ${m.error.message ?? "error"}` };
-        const log = m.method === "eth_subscription" ? m.params?.result : undefined;
-        if (!log?.address || !log.data || log.removed) return {};
+        const now = Date.now();
+        if (Array.isArray(m)) return {};
+        // A price read for a new symbol: it becomes a price update stamped with now.
+        const seeded = m.id != null ? asked.get(m.id) : undefined;
+        if (seeded) {
+          asked.delete(m.id!);
+          if (typeof m.result !== "string" || m.result.length < 66) return {};
+          const px = poolPrice(word(m.result, 0), seeded.baseIs0, seeded.scale);
+          if (!Number.isFinite(px) || px <= 0) return {};
+          seeded.mid = px;
+          const t: Trade[] = [];
+          for (const s of seeded.sym === ETH ? bySym.keys() : [seeded.sym]) { const q = priceOf(s, now); if (Number.isFinite(q)) t.push({ s, p: q, v: 0, te: now }); }
+          return { t, r: t.map((x) => ({ s: x.s, p: x.p, te: now })) };
+        }
+        // A refused subscription leaves a silent line: drop it, and the next try uses the next node.
+        if (m.error) return (m.id === 1 || m.id === 3) ? { fail: `Base node refused (${NODES[node]}): ${m.error.message ?? "error"}`, drop: true } : {};
+        const res = m.method === "eth_subscription" ? m.params?.result : undefined;
+        if (!res) return {};
+        if (res.timestamp && res.number) {
+          alive = true;
+          blockAt.set(Number(BigInt(res.number)), Number(BigInt(res.timestamp)) * 1000);
+          if (blockAt.size > 64) blockAt.delete(blockAt.keys().next().value!);
+          return {};
+        }
+        const log = res;
+        if (!log.address || !log.data || log.removed) return {};
         const pool = pools.get(log.address.toLowerCase());
         if (!pool) return {};
         const sw = decodeSwap(log.data, pool.baseIs0, pool.scale, pool.baseDec);
         if (!sw) return {};
-        const now = Date.now();
-        const te = log.blockTimestamp ? Number(BigInt(log.blockTimestamp)) * 1000 : now;
+        alive = true;
+        const te = log.blockTimestamp ? Number(BigInt(log.blockTimestamp)) * 1000 : (log.blockNumber ? blockAt.get(Number(BigInt(log.blockNumber))) : undefined) ?? now;
         pool.mid = sw.price;
         const ethUsd = pool.sym === ETH ? 1 : composite(bySym.get(ETH) ?? [], 1, now);
         const usd = Math.abs(sw.base) * (pool.quote === "WETH" ? sw.price * ethUsd : sw.price);

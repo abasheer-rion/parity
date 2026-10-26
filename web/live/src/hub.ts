@@ -405,6 +405,7 @@ export class LiveHub {
     let p: Parsed;
     try { p = this.adapter!.parse(data); } catch (e) { console.log(`[${this.src}] parse failed: ${String(e)}`); return; }
     if (p.fail) { console.log(`[${this.src}] source said: ${p.fail}`); this.why = p.fail; }
+    if (p.drop) { this.lost(p.fail ?? "source refused"); return; }
     if (p.ready && !this.ready) { this.ready = true; this.setState("up"); this.reconcile(); }
     if (p.t?.length) this.relay(p.t, true);
     if (p.b?.length) this.applyBooks(p.b);
