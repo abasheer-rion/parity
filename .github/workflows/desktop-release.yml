@@ -69,9 +69,12 @@ jobs:
         working-directory: desktop
       - run: npm test
         working-directory: desktop
-      # The running app: log-in wall on a deep link, title bar dragging, offline copy, menu.
+      # The running app: log-in wall on a deep link, title bar dragging, offline copy, menu,
+      # a page that closes itself. A CI runner may show windows; a working Mac never does.
       - run: npm run test:app
         working-directory: desktop
+        env:
+          PARITY_VISIBLE: "1"
       # electron-builder reads an empty CSC_LINK as a path (the working folder) and fails, so
       # each signing variable is set only when its secret exists. The API key arrives as
       # text; electron-builder wants a path to the .p8 file.
