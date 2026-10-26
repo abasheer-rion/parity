@@ -23,6 +23,7 @@ import { DEFAULT_BASKET } from "../pages/SimWorld";
 import "../pages/SimWorld.css";
 import "../pages/sim/world.css";
 import "./terminal.css";
+import { isDesktop } from "../desktop/bridge";
 
 applyTheme();
 
@@ -42,7 +43,9 @@ export function TerminalApp() {
 
 // Parity opens the terminal in a new tab with rel="noopener", so window.opener is usually
 // empty; a tab that started with this page as its only history entry was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 
 function goBack() {
   // Opened from Parity in a new tab: close it, and the person is back where they were. If

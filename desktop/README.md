@@ -89,7 +89,7 @@ cd web && npm ci && cd ../desktop && npm ci
 npm run web          # builds the site and copies it to build/web (no research data is copied)
 npm start            # runs the app from source
 npm test             # routing, shortcuts, settings, saved windows, links and signing config
-npm run test:app     # the running app: log-in wall on a deep link, dragging, offline copy, Retry, menu
+npm run test:app     # the running app, windows hidden: log-in wall on a deep link, dragging, offline copy, Retry, menu, a page that closes itself
 npm run build:mac    # dist/Parity-<version>-arm64.dmg, -x64.dmg, the update zips and latest-mac.yml
 npm run build:win    # dist/Parity-Setup-<version>.exe and latest.yml, on Windows
 ```

@@ -1,5 +1,9 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.2:
+
+- Fixed the cause of the black page and the "A JavaScript error occurred" box. Back to Parity in the Academy, Trade, the Workbench and the Terminal tried to close the page, which emptied the window and made it fail when it closed. Now the button goes back to Parity, and a page that closes itself takes you back to the section before it.
+
 New in 0.2.1:
 
 - No more "A JavaScript error occurred" box followed by Parity quitting. An unexpected error is now noted in the log and shown once in plain words with Reload pages, and Parity keeps running. A page whose contents were lost is opened again in place.

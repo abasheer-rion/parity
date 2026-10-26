@@ -20,6 +20,8 @@ const { Page } = require("./page");
 const TOKENS = require("./tokens");
 
 const TITLE_H = 38;
+/** A view's contents, or null once they are closed (they read undefined then, see page.js). */
+const live = (v) => { const wc = v?.webContents; return wc && !wc.isDestroyed() ? wc : null; };
 const OFFLINE_H = 28;
 let seq = 0;
 
@@ -83,8 +85,8 @@ class ParityWindow {
 
     if (saved.onTop) w.setAlwaysOnTop(true, "floating");
     this.layout();
-    if (saved.maximized) w.maximize();
-    if (saved.fullscreen) w.setFullScreen(true);
+    if (saved.maximized && !ctx.hidden) w.maximize();
+    if (saved.fullscreen && !ctx.hidden) w.setFullScreen(true);
     // Shown once its page has drawn something (the loading screen comes with the first
     // bytes), so it never opens as an empty dark frame; at most 1.5 s later either way.
     this.wantShow = show;
@@ -103,8 +105,10 @@ class ParityWindow {
     this.revealTimer = null;
     if (!this.alive || this.revealed || !this.wantShow) return;
     this.revealed = true;
-    this.win.show();
-    if (this.focusOnReveal) this.win.focus();
+    if (!this.ctx.hidden) {
+      this.win.show();
+      if (this.focusOnReveal) this.win.focus();
+    }
     setTimeout(() => this.warmSections(), 6000);
   }
 
@@ -117,7 +121,7 @@ class ParityWindow {
   repaint(why = "") {
     if (!this.alive) return;
     if (this.active && !this.active.alive) { this.revive(); return; }
-    for (const v of [this.titlebar, this.overlay]) if (!v.webContents.isDestroyed()) v.webContents.invalidate();
+    for (const v of [this.titlebar, this.overlay]) live(v)?.invalidate();
     if (this.active) this.active.repaint(why);
   }
 
@@ -168,8 +172,8 @@ class ParityWindow {
   get alive() { return !this.win.isDestroyed(); }
   get wall() { return !this.ctx.state.signedIn || !!(this.active?.path && routes.isAuthPath(this.active.path)); }
   get maxPages() { return this.ctx.settings.instantSections ? 4 : 1; }
-  owns(wc) { return [this.titlebar, this.overlay].some((v) => v.webContents === wc); }
-  ownsPage(wc) { return [...this.pages.values()].some((p) => p.wc === wc); }
+  owns(wc) { return !!wc && [this.titlebar, this.overlay].some((v) => v.webContents === wc); }
+  ownsPage(wc) { return !!wc && [...this.pages.values()].some((p) => p.wc === wc); }
 
   layout() {
     if (!this.alive) return;
@@ -328,7 +332,7 @@ class ParityWindow {
 
   focusContent() {
     if (!this.alive || !this.win.isFocused()) return;
-    if (this.overlayMode) { if (!this.overlay.webContents.isDestroyed()) this.overlay.webContents.focus(); }
+    if (this.overlayMode) live(this.overlay)?.focus();
     else if (this.active?.alive) this.active.wc.focus();
   }
 
@@ -347,6 +351,24 @@ class ParityWindow {
     const page = this.pageFor(dead.key);
     this.show(page);
     page.load(p);
+  }
+
+  /**
+   * A page closed itself (page.js): it leaves the window, and if it was in front the window
+   * goes back to the section before it, or Home. Never a black view (DEC-0059).
+   */
+  pageClosed(page) {
+    if (!this.alive || this.pages.get(page.key) !== page) return;
+    this.pages.delete(page.key);
+    this.trail = this.trail.filter((k) => k !== page.key);
+    try { this.win.contentView.removeChildView(page.view); } catch { /* already gone */ }
+    if (this.active !== page) return;
+    this.active = null;
+    while (this.trail.length) {
+      const prev = this.pages.get(this.trail.pop());
+      if (prev?.alive) { this.show(prev); return; }
+    }
+    this.go("/");
   }
 
   // ------------------------------------------------------------ title bar and layer
@@ -371,14 +393,13 @@ class ParityWindow {
 
   push() {
     if (!this.alive) return;
-    const wc = this.titlebar.webContents;
-    if (!wc.isDestroyed() && !wc.isLoading()) wc.send("shell:state", this.state());
+    const wc = live(this.titlebar);
+    if (wc && !wc.isLoading()) wc.send("shell:state", this.state());
     this.ctx.menuChanged();
   }
 
   flash(text) {
-    const wc = this.titlebar.webContents;
-    if (!wc.isDestroyed()) wc.send("shell:flash", String(text));
+    live(this.titlebar)?.send("shell:flash", String(text));
   }
 
   openOverlay(mode) {
@@ -388,7 +409,7 @@ class ParityWindow {
     this.overlay.setVisible(true);
     this.win.contentView.addChildView(this.overlay);
     this.sendOverlay();
-    this.overlay.webContents.focus();
+    live(this.overlay)?.focus();
     this.push();
   }
 
@@ -398,8 +419,8 @@ class ParityWindow {
   }
 
   sendOverlay() {
-    const wc = this.overlay.webContents;
-    if (wc.isDestroyed() || wc.isLoading()) return;
+    const wc = live(this.overlay);
+    if (!wc || wc.isLoading()) return;
     wc.send("shell:overlay", { mode: this.overlayMode, ...this.ctx.overlayData(this) });
   }
 
@@ -493,7 +514,7 @@ class ParityWindow {
   }
 
   focus() {
-    if (!this.alive) return;
+    if (!this.alive || this.ctx.hidden) return;
     if (!this.revealed && this.wantShow) { this.focusOnReveal = true; return; }
     if (this.win.isMinimized()) this.win.restore();
     this.win.show();
@@ -505,7 +526,7 @@ class ParityWindow {
     clearTimeout(this.checkTimer);
     for (const p of this.pages.values()) p.destroy();
     this.pages.clear();
-    for (const v of [this.titlebar, this.bar, this.overlay]) if (!v.webContents.isDestroyed()) v.webContents.close();
+    for (const v of [this.titlebar, this.bar, this.overlay]) live(v)?.close();
     this.ctx.windowClosed(this);
   }
 }

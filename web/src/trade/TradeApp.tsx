@@ -55,7 +55,9 @@ export function TradeApp() {
 
 // Parity opens Trade in a new tab, so window.opener is usually empty (noopener); a tab that
 // started with this page as its only history entry was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 function goBack() {
   if (OPENED_AS_TAB) {
     window.close();
