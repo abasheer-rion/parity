@@ -15,7 +15,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 90 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 96 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
 ## Open questions right now
@@ -345,6 +345,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0104 | [Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md) | sourced | 2026-10-25 | [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
 | ALG-0105 | [Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
 | ALG-0106 | [Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0107 | [Gold real price mean reversion (the golden dilemma)](algorithms/0107-gold-real-price-mean-reversion.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0108 | [Industrial metal prices time the stock market](algorithms/0108-industrial-metals-time-stocks.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0109 | [Gold autumn effect (September and November)](algorithms/0109-gold-autumn-effect.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0110 | [Gold as a short-lived safe haven after stock crashes](algorithms/0110-gold-safe-haven-after-crashes.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0111 | [Trading the London gold fixing leak](algorithms/0111-london-gold-fix-leak.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| ALG-0112 | [Gold-silver ratio reversion](algorithms/0112-gold-silver-ratio-reversion.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

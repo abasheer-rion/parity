@@ -3,11 +3,11 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1673 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1680 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 339 |
+| [Papers](#papers) | 346 |
 | [Preprints and working papers](#preprints-and-working-papers) | 46 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 65 |
@@ -321,6 +321,26 @@ Barroso, Pedro; Santa-Clara, Pedro (2015). Beyond the Carry Trade: Optimal Curre
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### baur2010
+
+Baur, Dirk G.; Lucey, Brian M. (2010). Is Gold a Hedge or a Safe Haven? An Analysis of Stocks, Bonds and Gold. *Financial Review 45(2), 217-229*. doi:10.1111/j.1540-6288.2010.00244.x <https://doi.org/10.1111/j.1540-6288.2010.00244.x>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://www.tcd.ie/triss/assets/PDFs/iiis/iiisdp198.pdf>.
+
+Note: Working paper version (IIIS DP 198) read.
+
+Cited in: [catalog/algorithms/gold-safe-haven-after-crashes.json](../catalog/algorithms/gold-safe-haven-after-crashes.json), [ALG-0110](algorithms/0110-gold-safe-haven-after-crashes.md).
+
+### baur2013
+
+Baur, Dirk G. (2013). The autumn effect of gold. *Research in International Business and Finance 27(1), 1-11*. doi:10.1016/j.ribaf.2012.05.001 <https://doi.org/10.1016/j.ribaf.2012.05.001>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://ideas.repec.org/a/eee/riibaf/v27y2013i1p1-11.html>.
+
+Note: Abstract read on RePEc; paywalled.
+
+Cited in: [catalog/algorithms/gold-autumn-effect.json](../catalog/algorithms/gold-autumn-effect.json), [ALG-0109](algorithms/0109-gold-autumn-effect.md).
+
 ### beber2015
 
 Beber, Alessandro; Brandt, Michael W.; Luisi, Maurizio (2015). Distilling the macroeconomic news flow. *Journal of Financial Economics 117(3), 489-507*. doi:10.1016/j.jfineco.2015.05.005 <https://doi.org/10.1016/j.jfineco.2015.05.005>. Accessed 2026-10-23. Verification: not checked.
@@ -490,6 +510,16 @@ Cited in: [REF-0004](reference/0004-glossary.md), [REF-0012](reference/0012-cand
 Caldara, Dario; Iacoviello, Matteo (2022). Measuring Geopolitical Risk. *American Economic Review 112(4), 1194-1225*. doi:10.1257/aer.20191823 <https://doi.org/10.1257/aer.20191823>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [REF-0011](reference/0011-scenario-simulator-method.md).
+
+### caminschi2014
+
+Caminschi, Andrew; Heaney, Richard (2014). Fixing a Leaky Fixing: Short-Term Market Reactions to the London PM Gold Price Fixing. *Journal of Futures Markets 34(11), 1003-1039*. doi:10.1002/fut.21636 <https://doi.org/10.1002/fut.21636>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://api.research-repository.uwa.edu.au/ws/files/4725264/A0205_use_this.pdf>.
+
+Note: Author repository version read.
+
+Cited in: [catalog/algorithms/london-gold-fix-leak.json](../catalog/algorithms/london-gold-fix-leak.json), [ALG-0111](algorithms/0111-london-gold-fix-leak.md).
 
 ### campbell2010
 
@@ -756,6 +786,24 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 Engel, Charles; West, Kenneth D. (2005). Exchange Rates and Fundamentals. *Journal of Political Economy 113(3), 485-517*. doi:10.1086/429137 <https://doi.org/10.1086/429137>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### erb2013
+
+Erb, Claude B.; Harvey, Campbell R. (2013). The Golden Dilemma. *Financial Analysts Journal 69(4), 10-42*. doi:10.2469/faj.v69.n4.1 <https://doi.org/10.2469/faj.v69.n4.1>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://people.duke.edu/~charvey/Research/Published_Papers/P113_The_golden_dilemma.pdf>.
+
+Note: Published version read in full (author PDF).
+
+Cited in: [catalog/algorithms/gold-real-price-mean-reversion.json](../catalog/algorithms/gold-real-price-mean-reversion.json), [ALG-0107](algorithms/0107-gold-real-price-mean-reversion.md).
+
+### escribano1998
+
+Escribano, Alvaro; Granger, Clive W. J. (1998). Investigating the relationship between gold and silver prices. *Journal of Forecasting 17(2), 81-107*. doi:10.1002/(SICI)1099-131X(199803)17:2\<81::AID-FOR680\>3.0.CO;2-B <https://doi.org/10.1002/(SICI)1099-131X(199803)17:2<81::AID-FOR680>3.0.CO;2-B>. <https://e-archivo.uc3m.es/bitstream/10016/2558/2/investigating_escribano_JF_1998_ps.pdf>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Author repository version read (abstract).
+
+Cited in: [catalog/algorithms/gold-silver-ratio-reversion.json](../catalog/algorithms/gold-silver-ratio-reversion.json), [ALG-0112](algorithms/0112-gold-silver-ratio-reversion.md).
 
 ### etula2019
 
@@ -1188,6 +1236,16 @@ Also at: <https://www.nber.org/papers/w22820>, <https://www.nber.org/system/file
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### jacobsen2019
+
+Jacobsen, Ben; Marshall, Ben R.; Visaltanachoti, Nuttawat (2019). Stock Market Predictability and Industrial Metal Returns. *Management Science 65(7), 3026-3042*. doi:10.1287/mnsc.2017.2933 <https://doi.org/10.1287/mnsc.2017.2933>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2009-Milan/papers/383.pdf>.
+
+Note: 2008 working paper (Return Predictability Revisited) read; published version not read.
+
+Cited in: [catalog/algorithms/industrial-metals-time-stocks.json](../catalog/algorithms/industrial-metals-time-stocks.json), [ALG-0108](algorithms/0108-industrial-metals-time-stocks.md).
 
 ### jegadeesh1990
 
@@ -1968,6 +2026,16 @@ Also at: <https://www.nber.org/system/files/working_papers/w13714/w13714.pdf>, <
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### potrykus2024
+
+Potrykus, Marcin; Augustynowicz, Wiktoria (2024). The autumn effect in the gold market: does it contradict the Adaptive Market Hypothesis? *International Journal of Management and Economics 60(3), 157-172*. doi:10.2478/ijme-2024-0011 <https://doi.org/10.2478/ijme-2024-0011>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://reference-global.com/download/article/10.2478/ijme-2024-0011.pdf>.
+
+Note: Open access PDF read (abstract and data section).
+
+Cited in: [catalog/algorithms/gold-autumn-effect.json](../catalog/algorithms/gold-autumn-effect.json), [ALG-0109](algorithms/0109-gold-autumn-effect.md).
 
 ### qi2006
 

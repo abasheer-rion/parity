@@ -968,6 +968,63 @@
       }
     },
     {
+      "key": "baur2010",
+      "type": "paper",
+      "authors": [
+        "Baur, Dirk G.",
+        "Lucey, Brian M."
+      ],
+      "year": 2010,
+      "title": "Is Gold a Hedge or a Safe Haven? An Analysis of Stocks, Bonds and Gold",
+      "venue": "Financial Review 45(2), 217-229",
+      "doi": "10.1111/j.1540-6288.2010.00244.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6288.2010.00244.x",
+      "also_at": [
+        "https://www.tcd.ie/triss/assets/PDFs/iiis/iiisdp198.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gold-safe-haven-after-crashes.json",
+        "docs/algorithms/0110-gold-safe-haven-after-crashes.md"
+      ],
+      "note": "Working paper version (IIIS DP 198) read.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "baur2013",
+      "type": "paper",
+      "authors": [
+        "Baur, Dirk G."
+      ],
+      "year": 2013,
+      "title": "The autumn effect of gold",
+      "venue": "Research in International Business and Finance 27(1), 1-11",
+      "doi": "10.1016/j.ribaf.2012.05.001",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.ribaf.2012.05.001",
+      "also_at": [
+        "https://ideas.repec.org/a/eee/riibaf/v27y2013i1p1-11.html"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gold-autumn-effect.json",
+        "docs/algorithms/0109-gold-autumn-effect.md"
+      ],
+      "note": "Abstract read on RePEc; paywalled.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "baz2015",
       "type": "preprint",
       "authors": [
@@ -1654,6 +1711,35 @@
       "metadata": {
         "source": "manual",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "caminschi2014",
+      "type": "paper",
+      "authors": [
+        "Caminschi, Andrew",
+        "Heaney, Richard"
+      ],
+      "year": 2014,
+      "title": "Fixing a Leaky Fixing: Short-Term Market Reactions to the London PM Gold Price Fixing",
+      "venue": "Journal of Futures Markets 34(11), 1003-1039",
+      "doi": "10.1002/fut.21636",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/fut.21636",
+      "also_at": [
+        "https://api.research-repository.uwa.edu.au/ws/files/4725264/A0205_use_this.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/london-gold-fix-leak.json",
+        "docs/algorithms/0111-london-gold-fix-leak.md"
+      ],
+      "note": "Author repository version read.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -2712,6 +2798,62 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "erb2013",
+      "type": "paper",
+      "authors": [
+        "Erb, Claude B.",
+        "Harvey, Campbell R."
+      ],
+      "year": 2013,
+      "title": "The Golden Dilemma",
+      "venue": "Financial Analysts Journal 69(4), 10-42",
+      "doi": "10.2469/faj.v69.n4.1",
+      "arxiv": null,
+      "url": "https://doi.org/10.2469/faj.v69.n4.1",
+      "also_at": [
+        "https://people.duke.edu/~charvey/Research/Published_Papers/P113_The_golden_dilemma.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gold-real-price-mean-reversion.json",
+        "docs/algorithms/0107-gold-real-price-mean-reversion.md"
+      ],
+      "note": "Published version read in full (author PDF).",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "escribano1998",
+      "type": "paper",
+      "authors": [
+        "Escribano, Alvaro",
+        "Granger, Clive W. J."
+      ],
+      "year": 1998,
+      "title": "Investigating the relationship between gold and silver prices",
+      "venue": "Journal of Forecasting 17(2), 81-107",
+      "doi": "10.1002/(SICI)1099-131X(199803)17:2<81::AID-FOR680>3.0.CO;2-B",
+      "arxiv": null,
+      "url": "https://e-archivo.uc3m.es/bitstream/10016/2558/2/investigating_escribano_JF_1998_ps.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gold-silver-ratio-reversion.json",
+        "docs/algorithms/0112-gold-silver-ratio-reversion.md"
+      ],
+      "note": "Author repository version read (abstract).",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -4294,6 +4436,36 @@
       "note": "Read for RES-0010 (full text)",
       "metadata": {
         "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "jacobsen2019",
+      "type": "paper",
+      "authors": [
+        "Jacobsen, Ben",
+        "Marshall, Ben R.",
+        "Visaltanachoti, Nuttawat"
+      ],
+      "year": 2019,
+      "title": "Stock Market Predictability and Industrial Metal Returns",
+      "venue": "Management Science 65(7), 3026-3042",
+      "doi": "10.1287/mnsc.2017.2933",
+      "arxiv": null,
+      "url": "https://doi.org/10.1287/mnsc.2017.2933",
+      "also_at": [
+        "https://efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2009-Milan/papers/383.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/industrial-metals-time-stocks.json",
+        "docs/algorithms/0108-industrial-metals-time-stocks.md"
+      ],
+      "note": "2008 working paper (Return Predictability Revisited) read; published version not read.",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -7140,6 +7312,35 @@
       "note": "Read for RES-0010 (full text)",
       "metadata": {
         "source": "repo",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "potrykus2024",
+      "type": "paper",
+      "authors": [
+        "Potrykus, Marcin",
+        "Augustynowicz, Wiktoria"
+      ],
+      "year": 2024,
+      "title": "The autumn effect in the gold market: does it contradict the Adaptive Market Hypothesis?",
+      "venue": "International Journal of Management and Economics 60(3), 157-172",
+      "doi": "10.2478/ijme-2024-0011",
+      "arxiv": null,
+      "url": "https://doi.org/10.2478/ijme-2024-0011",
+      "also_at": [
+        "https://reference-global.com/download/article/10.2478/ijme-2024-0011.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gold-autumn-effect.json",
+        "docs/algorithms/0109-gold-autumn-effect.md"
+      ],
+      "note": "Open access PDF read (abstract and data section).",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },

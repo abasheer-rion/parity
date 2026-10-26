@@ -1,0 +1,72 @@
+{
+  "id": "ALG-0112",
+  "slug": "gold-silver-ratio-reversion",
+  "name": "Gold-silver ratio reversion",
+  "family": "statistical-arbitrage",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "gold",
+    "silver",
+    "metals",
+    "pairs",
+    "cointegration",
+    "spread"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1998,
+    "authors": "Escribano, Granger",
+    "source_title": "Investigating the relationship between gold and silver prices (Journal of Forecasting 17(2), 81-107)",
+    "source_url": "https://e-archivo.uc3m.es/bitstream/10016/2558/2/investigating_escribano_JF_1998_ps.pdf"
+  },
+  "how_it_works": {
+    "simple": "Count how many ounces of silver buy one ounce of gold. When it takes far more than usual, swap gold for silver; when it takes far fewer, swap back.",
+    "analogy": "Like two siblings who usually walk together: when one runs far ahead, bet that the gap closes.",
+    "precise": "If log gold and log silver prices are cointegrated, deviations of the ratio from its long-run level should shrink. Escribano and Granger test this on 1971 to 1990 monthly data with error correction models; cointegration holds only in some periods and needs shifts in the long-run level, and the forecasting gain does not survive out of sample for silver."
+  },
+  "rule": "Our simple version, for testing: each month, compute log(gold / silver) and its z-score against the past 5 years; above +2 hold silver and short gold, below -2 the reverse, close at the mean. This rule is ours.",
+  "data_needed": [
+    "World Bank Pink Sheet monthly gold, silver and platinum prices (free, DAT-0035)"
+  ],
+  "economic_rationale": "Both are precious metals priced by many of the same investors, and some industrial and jewellery demand can switch between them, so their prices should not drift apart forever.",
+  "why_it_might_fail": "The source paper finds the relation unstable: cointegration needs breaks in the long-run level, and out of sample the silver forecasts lose to a random walk. The ratio's long-run level has shifted, so 'normal' may not exist. Silver is far more industrial than gold.",
+  "reported_results": [
+    {
+      "source": "Escribano and Granger (1998), Journal of Forecasting, abstract (author repository)",
+      "source_url": "https://e-archivo.uc3m.es/bitstream/10016/2558/2/investigating_escribano_JF_1998_ps.pdf",
+      "period": "1971 to 1990 (out of sample after June 1990)",
+      "market": "Gold and silver (monthly)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Abstract: cointegration could have occurred during some periods, especially during and after the 1979 to 1980 bubble, but intercept dummies are needed over the full sample. Non-linear error correction models beat the random walk for gold in and out of sample; for silver they beat it in sample but lose that out of sample. A forecasting study with no trading returns or costs."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet. We found no peer-reviewed out-of-sample trading test of the ratio net of costs.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "The gold-silver ratio is one of the most popular retail metals trades and is often sold as a sure thing; free monthly data covers both metals."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Testable on World Bank monthly gold and silver; short selling a metal needs futures, so a test would use the ratio as a proxy. Added in Amanda's metals batch on 2026-10-25."
+  },
+  "authors": [
+    "amanda"
+  ],
+  "last_reviewed": "2026-10-25"
+}

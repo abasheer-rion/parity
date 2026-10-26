@@ -6018,4 +6018,10 @@ Related: [Private equity](#private-equity), [TVPI (total value to paid-in)](#tvp
 - [ALG-0104: Overnight versus intraday momentum (tug of war)](../algorithms/0104-overnight-intraday-momentum.md)
 - [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](../algorithms/0105-equity-short-term-reversal.md)
 - [ALG-0106: Gross profitability (quality) premium in stocks](../algorithms/0106-gross-profitability.md)
+- [ALG-0107: Gold real price mean reversion (the golden dilemma)](../algorithms/0107-gold-real-price-mean-reversion.md)
+- [ALG-0108: Industrial metal prices time the stock market](../algorithms/0108-industrial-metals-time-stocks.md)
+- [ALG-0109: Gold autumn effect (September and November)](../algorithms/0109-gold-autumn-effect.md)
+- [ALG-0110: Gold as a short-lived safe haven after stock crashes](../algorithms/0110-gold-safe-haven-after-crashes.md)
+- [ALG-0111: Trading the London gold fixing leak](../algorithms/0111-london-gold-fix-leak.md)
+- [ALG-0112: Gold-silver ratio reversion](../algorithms/0112-gold-silver-ratio-reversion.md)
 <!-- backlinks:end -->
