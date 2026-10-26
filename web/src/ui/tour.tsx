@@ -24,7 +24,7 @@ export interface TourStepProps {
 }
 
 export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll }: TourStepProps) {
-  const p = usePresence(open, 180);
+  const p = usePresence(open, "dur-3");
   const card = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState<CSSProperties>({});
   const [ring, setRing] = useState<CSSProperties | null>(null);

@@ -1,7 +1,7 @@
 // Hooks behind the library's motion: keep something on screen while it animates out,
 // follow the reduced-motion setting, and glide items to new places when a list reorders.
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { durationMs, tokenValue } from "./tokens";
+import { durationMs, tokenValue, type TokenName } from "./tokens";
 import { motionLevel, useMotionLevel } from "./motionPref";
 
 /**
@@ -20,9 +20,12 @@ export type PresenceState = "enter" | "open" | "exit";
 /**
  * Keeps an element mounted while it animates out. `state` is "enter" for the first
  * frame (so CSS can transition from it), "open" while shown and "exit" while leaving.
- * Style the three with [data-state] and the element fades and moves both ways.
+ * Style the three with [data-state] and the element fades and moves both ways. `exit` is
+ * the duration token of the CSS exit transition, never a number (the motion lint checks).
  */
-export function usePresence(open: boolean, exitMs = 160): { mounted: boolean; state: PresenceState } {
+export function usePresence(open: boolean, exit: Extract<TokenName, `dur-${string}`> = "dur-2"): { mounted: boolean; state: PresenceState } {
+  // The exit lasts as long as the duration token its CSS uses, plus a frame of slack.
+  const exitMs = durationMs(exit) + 20;
   const [mounted, setMounted] = useState(open);
   const [state, setState] = useState<PresenceState>(open ? "open" : "exit");
   useEffect(() => {

@@ -160,7 +160,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
         {head("sym", "Symbol", "l")}{head("src", "Venue", "l")}{head("p", "Last")}{head("chg", "24h")}{head("vol", "Vol 24h")}<span role="columnheader" className="mk-h">Trend</span>
       </div></div>
       <div ref={box} className="mk-body" role="rowgroup">
-        <div style={{ height: order.length * ROW, position: "relative" }}>
+        <div role="presentation" style={{ height: order.length * ROW, position: "relative" }}>
           {slice.map((k, i) => {
             const r = rows.current.get(k);
             if (!r) return null;
@@ -178,7 +178,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
             );
           })}
         </div>
-        {!order.length && <div className="mk-empty">{team == null ? "Loading" : "No rows yet"}</div>}
+        {!order.length && <div className="mk-empty" role="row"><span role="cell">{team == null ? "Loading" : "No rows yet"}</span></div>}
       </div>
       </div>
       <p className="mk-foot">{shown.includes("coingecko") ? <><a href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>. </> : null}Volume is in each pair's quote currency. Trend is the last hour (CoinGecko: the last day).</p>

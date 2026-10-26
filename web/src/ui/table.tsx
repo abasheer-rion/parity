@@ -172,7 +172,7 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
 
 /** The details under an opened row. Stays drawn while it closes, so it can animate shut. */
 function DetailRow({ open, cols, children }: { open: boolean; cols: number; children: ReactNode }) {
-  const p = usePresence(open, 260);
+  const p = usePresence(open, "dur-3");
   if (!p.mounted) return null;
   return (
     <tr className="ui-detail-row" data-state={p.state}>

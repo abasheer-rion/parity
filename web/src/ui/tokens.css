@@ -349,9 +349,9 @@
   --ds-background-highlight: var(--color-info-soft);
   --ds-border-default: var(--color-border);
   --ds-border-emphasized: var(--color-border-strong);
-  --ds-border-input: var(--color-border-strong);
-  --ds-border-input-emphasized: var(--color-border-max);
-  --ds-border-input-focused: var(--color-border-max);
+  --ds-border-input: var(--color-border-control);
+  --ds-border-input-emphasized: var(--color-text-faint);
+  --ds-border-input-focused: var(--color-focus);
   --ds-border-input-focused-underline: var(--color-focus);
   --ds-border-focus-ring: var(--color-focus);
   --ds-text-title: var(--color-text);

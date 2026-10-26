@@ -5,7 +5,8 @@
 .phome-foot a,
 main footer a,
 .prose p a,
-.prose li a { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.prose li a,
+:is(p, dd, figcaption, th, td, blockquote) a:not([class]) { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 
 /* White text on the light link blue was 2.4:1. The darker brand blue is 5.9:1. */
 .btn-primary { background: var(--color-primary); color: var(--color-on-primary); }
@@ -15,7 +16,12 @@ main footer a,
 .ui-badge-accent { color: var(--text); }
 
 /* Visible focus for every control, including ones that set outline: none. */
-:where(a, button, input, select, textarea, [role="tab"], [role="radio"], [role="menuitem"], [tabindex]):focus-visible {
-  outline: 2px solid var(--color-focus);
+/* Visible focus for every control, including ones that set outline: none. It wins over any
+   component rule (WCAG 2.4.7), so a keyboard user always sees where they are. Things focused
+   by code only (tabindex="-1", such as <main> after a route change) are left alone. */
+:is(a[href], button, input, select, textarea, summary, [role="tab"], [role="radio"], [role="menuitem"], [role="option"], [role="switch"], [role="checkbox"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--color-focus) !important;
   outline-offset: 2px;
 }
+/* A checkbox or radio drawn by the library hides the real input; its box shows the ring. */
+.ui-check input:focus-visible, .ui-radio input:focus-visible { outline: none !important; }
