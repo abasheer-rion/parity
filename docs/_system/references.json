@@ -41152,6 +41152,72 @@
         "doi_explicit": false,
         "title_from": "page summary read through the Wikipedia REST API"
       }
+    },
+    {
+      "key": "url-6c14c160",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0067-parity-moves-to-paritytrading-app.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0067"
+    },
+    {
+      "key": "url-8e76d327",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity MCP server",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/mcp",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/guides/0006-connecting-ai-tools-to-parity-with-mcp.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0067"
+    },
+    {
+      "key": "url-99d6ebbc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity OAuth consent page",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/oauth/consent",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0067-parity-moves-to-paritytrading-app.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0067"
     }
   ]
 }

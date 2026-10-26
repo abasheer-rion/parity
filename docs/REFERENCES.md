@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1743 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1746 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 1009 |
+| [Web pages](#web-pages) | 1012 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -6829,6 +6829,14 @@ Legal Information Institute (n.d.). 15 U.S.C. 80b-3a. *law.cornell.edu*. <https:
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-6c14c160
+
+Parity. (n.d.). *paritytrading.app*. <https://paritytrading.app>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0067.
+
+Cited in: [DEC-0067](decisions/0067-parity-moves-to-paritytrading-app.md).
+
 ### url-6c55baa0
 
 Pricing | Massive. (n.d.). *Massive.com (formerly Polygon.io)*. <https://massive.com/pricing?product=currencies>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7755,6 +7763,14 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 
 Cited in: [catalog/events/cyprus-deposit-levy-2013.json](../catalog/events/cyprus-deposit-levy-2013.json).
 
+### url-8e76d327
+
+Parity MCP server. (n.d.). *paritytrading.app*. <https://paritytrading.app/mcp>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0067.
+
+Cited in: [GDE-0006](guides/0006-connecting-ai-tools-to-parity-with-mcp.md).
+
 ### url-8e8b356a
 
 Supabase MCP authentication. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/mcp-authentication>. Accessed 2026-10-25. Verification: not checked.
@@ -8036,6 +8052,14 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 OpenRouter OAuth PKCE. (n.d.). *openrouter.ai*. <https://openrouter.ai/docs/guides/overview/auth/oauth>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-99d6ebbc
+
+Parity OAuth consent page. (n.d.). *paritytrading.app*. <https://paritytrading.app/oauth/consent>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0067.
+
+Cited in: [DEC-0067](decisions/0067-parity-moves-to-paritytrading-app.md).
 
 ### url-9aaa265c
 
