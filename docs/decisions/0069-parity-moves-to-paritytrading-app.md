@@ -62,5 +62,5 @@ Each step undoes on its own, newest first. The records from before the move are 
 ## Referenced by
 
 - [GDE-0005: Google Search Console and the SEO pipeline](../guides/0005-google-search-console-and-the-seo-pipeline.md)
-- [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](../reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
+- [REF-0027: Going live with real trading](../reference/0027-going-live-with-real-trading.md)
 <!-- backlinks:end -->

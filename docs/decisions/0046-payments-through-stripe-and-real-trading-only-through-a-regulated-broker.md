@@ -2,19 +2,19 @@
 id: DEC-0046
 title: Payments through Stripe, and real trading only through a regulated broker
 type: decision
-status: proposed
+status: accepted
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, fx, infra, process]
-related: [DEC-0019, DEC-0032, DEC-0034, DEC-0040, REF-0019, RES-0022]
+related: [DEC-0019, DEC-0032, DEC-0034, DEC-0040, REF-0019, RES-0022, REF-0020, REF-0027]
 ---
 
 # Payments through Stripe, and real trading only through a regulated broker
 
 ## In plain words
 
-There are two kinds of money and we keep them apart. The first is customers paying Parity for a plan, such as Verify Pro. Stripe takes the card, and we only store what plan each person has. The second is customers putting money in to trade for real. Parity should never hold that money. A licensed broker would open the account, check who the customer is, hold the cash and carry out the trades, and Parity would be the screen in front of it. This page proposes both designs. The first comes with test-mode code that is switched off; the second stays on paper until the owner, a lawyer and a broker partner say yes.
+There are two kinds of money and we keep them apart. The first is customers paying Parity for a plan, such as Verify Pro. Stripe takes the card, and we only store what plan each person has. The second is customers putting money in to trade for real. Parity should never hold that money. A licensed broker would open the account, check who the customer is, hold the cash and carry out the trades, and Parity would be the screen in front of it. This page proposes both designs. The first comes with test-mode code that is switched off; the second stays on paper until the owner, a lawyer and a broker partner say yes. On 26 October 2026 the owner accepted it for pretend-money trading through Alpaca: demo and sandbox work now, and real money stays refused until the registration steps are done.
 
 ## Context
 
@@ -26,7 +26,7 @@ There are two kinds of money and we keep them apart. The first is customers payi
 
 ## Decision
 
-Proposed. Nothing charges anyone and nothing trades real money until the owner accepts this and the gates below are passed.
+Accepted on 26 October 2026 for demo and sandbox trading only (section 4). Nothing charges anyone and nothing trades real money until the gates below are passed.
 
 ### 1. Parity charging its own customers
 
@@ -79,6 +79,18 @@ A second pull request adds:
 
 No Stripe account is created, no key is stored, and no account is opened anywhere.
 
+### 4. Accepted for demo and sandbox trading (26 October 2026)
+
+The owner accepted this decision for pretend money only: build buying and selling through Alpaca, all of it fake until the owner flips a production switch, and real trading only after registration. What that means:
+
+- **Three modes, set by `TRADING_MODE`.** `demo` is the default: pretend money in Alpaca's paper trading account, or in the browser when the server has no paper keys. `sandbox` gives each person their own account in Alpaca's Broker API sandbox, also pretend money, and stays off until the sandbox keys exist. `live` is real money.
+- **Live is refused unless four things are all true:** a live broker key is set, a trading admin has switched it on in the database, the deploy sets `TRADING_LIVE_DEPLOY=on`, and the registration checklist in the repo is marked complete with evidence for every item. The database also refuses live order rows until a later migration allows them. Every order path checks this on the server.
+- **Every ticket, position list and confirmation carries a badge** that says "Demo money" or "Sandbox". It cannot be closed.
+- **No real identity or bank details are collected** while trading is not live. Sandbox accounts use Alpaca's published test values.
+- Orders pass server-side risk checks (size, price collars, no short selling, a pattern day trader warning), carry an idempotency key, are rate limited and land in an append-only audit log that each person can read for their own rows only. Broker failures go to a warnings table the team reads.
+
+The steps to turn on the sandbox and, later, to go live are in [REF-0027](../reference/0027-going-live-with-real-trading.md). Payments (section 1) and real trading (section 2) stay where they were: no charges, no real money.
+
 ## Alternatives considered
 
 - **Hold customer money in a Parity bank account and pass it to a broker.** Rejected. That is money transmission and likely broker activity, with licences in most states.
@@ -104,6 +116,7 @@ No Stripe account is created, no key is stored, and no account is opened anywher
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
 - [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
+- [REF-0027: Going live with real trading](../reference/0027-going-live-with-real-trading.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
