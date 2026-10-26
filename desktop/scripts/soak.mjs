@@ -407,10 +407,12 @@ if (PARTS.has("idle")) {
   const feed = { sockets: live.opened - before.opened, messages: live.sent - before.sent, pings: live.pings - before.pings };
   const want = Math.floor(IDLE_S / every);
   if (rows.length < want) bad.push(`only ${rows.length} of ${want} samples`);
-  // The page should hold one socket and keep pinging (every 15 s): a page that stopped
-  // listening, or reconnects over and over, is a problem even if memory looks fine.
+  // The page should hold one socket and keep pinging: a page that stopped listening, or
+  // reconnects over and over, is a problem even if memory looks fine. The window is hidden,
+  // so like a minimised one Chromium runs its timers about once a minute: a ping every 15 s
+  // arrives about once a minute here.
   if (feed.messages < IDLE_S * 0.5) bad.push(`the page got only ${feed.messages} live messages`);
-  if (feed.pings < IDLE_S / 30) bad.push(`the page pinged only ${feed.pings} times (it stopped listening?)`);
+  if (feed.pings < IDLE_S / 90) bad.push(`the page pinged only ${feed.pings} times (it stopped listening?)`);
   if (feed.sockets > 3) bad.push(`the page opened ${feed.sockets} sockets (reconnecting)`);
   if (bad.length) problems.push(`idle: ${bad.join(" | ")}`);
   // The first few minutes are the page settling in (caches, the chart history); judge the rest.
