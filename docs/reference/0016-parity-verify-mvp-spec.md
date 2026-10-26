@@ -229,5 +229,6 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](../decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](../decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
+- [REF-0025: Parity capacity and load test results](0025-parity-capacity-and-load-test-results.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)
 <!-- backlinks:end -->

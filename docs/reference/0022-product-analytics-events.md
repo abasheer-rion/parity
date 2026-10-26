@@ -91,5 +91,6 @@ Routes keep a segment as written only when it is short lowercase words. Anything
 ## Referenced by
 
 - [DEC-0053: Our own product analytics, opt-in, stored in Postgres](../decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
+- [REF-0025: Parity capacity and load test results](0025-parity-capacity-and-load-test-results.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

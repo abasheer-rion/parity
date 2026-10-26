@@ -60,6 +60,7 @@ Items 6 (the sidebar) and 9 (updates) are replaced by [DEC-0049](0049-the-deskto
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
 - [DEC-0062: Desktop builds are signed with Argus Vision certificates](0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- [REF-0025: Parity capacity and load test results](../reference/0025-parity-capacity-and-load-test-results.md)
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)

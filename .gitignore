@@ -40,6 +40,6 @@ content/out/
 .venv
 web/layout-shots/
 
-# Load testing (load/README.md): k6 is downloaded here by load/get-k6.sh, results are local
+# Load testing (REF-0025): k6 is downloaded here by load/get-k6.sh, results are local
 tools/
 load/results/

@@ -44,7 +44,7 @@ check: lint test  ## everything CI runs
 # Load tests (REF-0025). k6 is downloaded into tools/k6 (git-ignored) and checked against the
 # release checksums; nothing is installed globally. Every target needs BASE (a preview address).
 K6 := tools/k6/k6
-.PHONY: k6 load-static load-entry load-functions load-ws load-rest
+.PHONY: k6 load-static load-entry load-functions load-ws
 k6:               ## download and check k6 into tools/k6
 	load/get-k6.sh
 load-static: k6   ## BASE=<preview> STEPS=25,50,100 STEP_S=30
@@ -55,5 +55,3 @@ load-functions: k6 ## BASE=<preview> live status, beacons, badges, MCP discovery
 	$(K6) run load/functions.js
 load-ws: k6       ## BASE=<preview> live fan-out viewers on one public feed
 	$(K6) run load/ws.js
-load-rest: k6     ## SUPABASE_URL=<local stack> signed-in reads through Supabase REST
-	$(K6) run load/rest.js
