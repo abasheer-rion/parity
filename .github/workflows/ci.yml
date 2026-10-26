@@ -134,7 +134,10 @@ jobs:
           name: desktop-web-ci
           path: desktop/build/web
       - run: npm ci
+      # A CI runner may show windows (a working Mac never does: the self-test hides them).
       - run: npm run test:app
+        env:
+          PARITY_VISIBLE: "1"
 
   docs:
     runs-on: ubuntu-latest

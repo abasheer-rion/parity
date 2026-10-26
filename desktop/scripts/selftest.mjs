@@ -5,6 +5,7 @@
 //   blank     a page that draws nothing reloads once, then shows Could not open with Retry
 //   selfclose a page that calls window.close() leaves its window, no black view, no error
 // Every window stays hidden (PARITY_HIDDEN is on under PARITY_SELFTEST): nothing appears on screen.
+// Only CI (a macOS runner) may show them, with PARITY_VISIBLE=1, so the title bar gets real input.
 // offline and signedin need build/web (`npm run web`); they are skipped without it.
 // Run: npm run test:app
 import { spawn } from "node:child_process";
@@ -15,6 +16,11 @@ import { tmpdir } from "node:os";
 import { extname, join, normalize, resolve } from "node:path";
 
 const here = resolve(import.meta.dirname, "..");
+const visible = process.env.PARITY_VISIBLE === "1";
+if (visible && !process.env.CI) {
+  console.log("PARITY_VISIBLE=1 shows windows on the screen, so it runs only in CI. Run without it.");
+  process.exit(1);
+}
 const electron = createRequire(import.meta.url)("electron");
 const web = join(here, "build", "web");
 const haveWeb = existsSync(join(web, "index.html"));
@@ -39,7 +45,7 @@ function serve() {
 function run(scenario, env, args = []) {
   return new Promise((ok) => {
     const profile = mkdtempSync(join(tmpdir(), `parity-selftest-${scenario}-`));
-    const child = spawn(electron, [".", `--user-data-dir=${profile}`, ...args], { cwd: here, env: { ...process.env, PARITY_SELFTEST: scenario, PARITY_HIDDEN: "1", ELECTRON_ENABLE_LOGGING: "1", ...env } });
+    const child = spawn(electron, [".", `--user-data-dir=${profile}`, ...args], { cwd: here, env: { ...process.env, PARITY_SELFTEST: scenario, PARITY_HIDDEN: visible ? "0" : "1", ELECTRON_ENABLE_LOGGING: "1", ...env } });
     let out = "";
     const take = (d) => { out += d; for (const line of String(d).split("\n")) if (/^(PASS|FAIL)/.test(line)) console.log(line); };
     child.stdout.on("data", take);
