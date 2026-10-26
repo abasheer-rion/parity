@@ -9,6 +9,11 @@
 //   /badge/<id>.svg                     the badge image, not-found id (one lookup each)
 //   /.well-known/oauth-protected-resource and oauth-authorization-server   MCP discovery
 //   /mcp without a sign-in               refused, no database
+//   /v/<id> hot                         the same few well-formed ids again and again, like one
+//                                       badge shared widely (a cache can answer these)
+// Database trouble stops the run: a badge lookup that fails answers 503 ("Badge unavailable"),
+// counted in db_unavailable, and the run stops if more than 1% of lookups do. That, and the
+// p95 of the lookups, is how a saturated Supabase shows up from outside.
 // The sign-in server's metadata answers 502 while Supabase's OAuth server is switched off
 // (REF-0025), so a 502 there is expected and not counted as an error.
 // About a fifth of requests reach Supabase (the badge lookups and the sign-in server's
@@ -16,6 +21,7 @@
 //   BASE=https://<preview>.parity-research.pages.dev STEPS=10,25,50 STEP_S=30 make load-functions
 import http from "k6/http";
 import { check } from "k6";
+import { Rate } from "k6/metrics";
 import { base, byName, stepRates, stepped, summarize } from "./lib.js";
 
 const B = base();
@@ -34,9 +40,13 @@ const MIX = [
   [4, "wk-as", () => http.get(`${B}/.well-known/oauth-authorization-server`, { tags: { name: "mcp-as-meta" }, responseCallback: http.expectedStatuses(200, 502) }), (r) => r.status === 200 || r.status === 502],
   [2, "mcp", () => http.post(`${B}/mcp`, JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }), { headers: { "Content-Type": "application/json" }, tags: { name: "mcp-signed-out" }, responseCallback: http.expectedStatuses(401) }), (r) => r.status === 401],
 ];
+const dbDown = new Rate("db_unavailable");
+const HOT = ["hotbadge2345", "hotbadge6789", "hotbadgeabcd"];
+MIX.push([10, "v-hot", () => http.get(`${B}/v/${HOT[Math.floor(Math.random() * HOT.length)]}`, { tags: { name: "badge-page-hot" }, responseCallback: http.expectedStatuses(404) }), (r) => r.status === 404]);
+const LOOKUPS = new Set(["v-missing", "v-hot", "badge-svg"]);
 const TOTAL = MIX.reduce((s, m) => s + m[0], 0);
 
-export const options = stepped({ fn: "call", rates: stepRates("10,25,50"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1, extraThresholds: byName(["live-status", "live-universe", "beacon-e", "beacon-rum", "badge-page-missing", "badge-page-malformed", "badge-svg-missing", "mcp-resource-meta", "mcp-as-meta", "mcp-signed-out"]) });
+export const options = stepped({ fn: "call", rates: stepRates("10,25,50"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1, extraThresholds: { ...byName(["live-status", "live-universe", "beacon-e", "beacon-rum", "badge-page-missing", "badge-page-malformed", "badge-svg-missing", "mcp-resource-meta", "mcp-as-meta", "mcp-signed-out", "badge-page-hot"]), db_unavailable: [{ threshold: "rate<0.01", abortOnFail: true, delayAbortEval: "10s" }] } });
 
 export function call() {
   let x = Math.random() * TOTAL;
@@ -45,6 +55,7 @@ export function call() {
     if (x > 0) continue;
     const r = run();
     check(r, { [name]: ok });
+    if (LOOKUPS.has(name)) dbDown.add(r.status === 503);
     return;
   }
 }
