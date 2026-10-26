@@ -831,6 +831,7 @@ The dashboard.
 - [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
 - [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 - [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
+- [REF-0023: Motion system](reference/0023-motion-system.md)
 - [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md)

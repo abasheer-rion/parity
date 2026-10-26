@@ -1,24 +1,19 @@
 // Hooks behind the library's motion: keep something on screen while it animates out,
 // follow the reduced-motion setting, and glide items to new places when a list reorders.
-import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { durationMs, tokenValue } from "./tokens";
+import { motionLevel, useMotionLevel } from "./motionPref";
 
-const REDUCE = "(prefers-reduced-motion: reduce)";
-
-/** True when the person asked their system for less motion. Updates if they change it. */
+/**
+ * True when motion is reduced: the device asks for it and the Motion setting follows the
+ * device, or the setting says Reduced. Reduced means fades only, so use this to drop
+ * movement (counting, sliding, tilting), not to drop fades. Updates live.
+ */
 export function useReducedMotion(): boolean {
-  return useSyncExternalStore(
-    (on) => {
-      const mq = window.matchMedia(REDUCE);
-      mq.addEventListener("change", on);
-      return () => mq.removeEventListener("change", on);
-    },
-    () => window.matchMedia(REDUCE).matches,
-    () => false,
-  );
+  return useMotionLevel() === "reduced";
 }
 
-export const prefersReducedMotion = () => typeof window !== "undefined" && window.matchMedia(REDUCE).matches;
+export const prefersReducedMotion = () => typeof window !== "undefined" && motionLevel() === "reduced";
 
 export type PresenceState = "enter" | "open" | "exit";
 
@@ -40,7 +35,8 @@ export function usePresence(open: boolean, exitMs = 160): { mounted: boolean; st
       return () => { cancelAnimationFrame(r1); cancelAnimationFrame(r2); };
     }
     setState("exit");
-    const t = window.setTimeout(() => setMounted(false), prefersReducedMotion() ? 0 : exitMs);
+    // Reduced motion still fades out, so the exit keeps its time either way.
+    const t = window.setTimeout(() => setMounted(false), exitMs);
     return () => window.clearTimeout(t);
   }, [open, exitMs]);
   return { mounted, state };

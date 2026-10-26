@@ -331,7 +331,7 @@ function TradeShell() {
               ))}
             </nav>
           )}
-          <main id="main" tabIndex={-1} className="tr-main">
+          <main id="main" tabIndex={-1} className="tr-main ui-route-kids">
             <ErrorBoundary key={view} scope="page">
             <Suspense fallback={<div className="vmsg" aria-busy="true">Loading</div>}>
             {missing ? <NotFound heading="h2" address={missing} home="#/chart" homeLabel="Chart" body="There is no Parity Trade page at this address. The link may be mistyped, or the page may have moved." />

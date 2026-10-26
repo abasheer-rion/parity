@@ -60,7 +60,7 @@ Parity Terminal overrides colour and radius tokens on `.ptm` in the same file, s
 | Feedback | `ErrorState` (with Retry), `ProgressBar` (known or busy), `Spinner` |
 | Loading | `Skeleton`, `SkeletonText`, `SkeletonStat`, `SkeletonChart`, `SkeletonTable`, `SkeletonCard`, `PageSkeleton` |
 | Overlays | `Tooltip`, `Popover`, `Menu` (dropdown), `Dialog`, `Drawer`, `Sheet` (bottom drawer), `CommandPalette`, `TourStep` (one step of a product tour), `toast` and `dismissToast` with `Toaster`; doc previews come from any link carrying `data-term`, `data-doc` or `data-ref` |
-| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `AnimatedNumber`, `Stagger` (or the class `STAGGER`), `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `HeroGlow`; hooks `usePresence`, `useFlip`, `useReducedMotion`; durations `--dur-1` to `--dur-4`. Charts and sparklines draw in by themselves. Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
+| Motion | `Animate` (fade, rise, pop, slide), `RollingNumber`, `CountUp`, `AnimatedNumber`, `Stagger` (or the class `STAGGER`), `LIFT` (lift on hover), `Tilt`, `DrawIn`, `Reveal`, `PageTransition`, `RouteTransition`, `Loaded`, `HeroGlow`, `CHART_REVEAL`, `STAGGER_ROWS`, `MotionControl`; hooks `usePresence`, `useFlip`, `useReducedMotion`, `useMotionLevel`; durations `--dur-1` to `--dur-5`. Charts and sparklines draw in by themselves. Tokens and the Motion setting in [REF-0023](0023-motion-system.md). Rules in [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) |
 | Data | `useResource` (show the last copy at once, refresh it quietly), `preload` |
 | Charts | `HeroChart`, `LineChart`, `BarChart`, `FanChart` (spread of outcomes after past events: single paths, middle-half and full-range bands, median), `Sparkline`, `DotGrid`, `sliceRange`, `RANGES` |
 | Icons | `Icon` with 47 names, 16px stroke icons drawn for this site |
@@ -73,7 +73,7 @@ Parity Terminal overrides colour and radius tokens on `.ptm` in the same file, s
 4. **Series colours follow the strategy by name** in the fixed order; the market is always the neutral benchmark line.
 5. **One y axis per chart.** Two measures on different scales get two charts.
 6. **Status shows the word.** The dot only helps.
-7. **Motion explains a change or invites a touch** (arriving, updating, opening, hovering). Entrances stay under 400ms and line draws under a second. The only loop in a view is the faint hero glow. Nothing flashes, and everything holds still for people who ask for reduced motion ([DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)).
+7. **Motion explains a change or invites a touch** (arriving, updating, opening, hovering). Entrances stay under 400ms and line draws under a second. The only loop in a view is the faint hero glow. Nothing flashes. Reduced motion keeps short fades and drops all movement, and each app has a Motion setting ([REF-0023](0023-motion-system.md), [DEC-0017](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)).
 8. **Numbers use tabular figures** so columns line up.
 9. **Nothing jumps.** Every page stays under 0.02 cumulative layout shift (the browser's score for how much a page moves while it loads, while data arrives, on hover and on scroll). `npm run cls` measures every page at 1440 and 390 pixels wide. See "Keeping pages still" below.
 10. **Things open in place and float from where they were opened.** Rows, cards and sections grow from their own top edge; popovers, menus and dialogs come out of their trigger; drawers slide from an edge. All of them animate out as well as in.
@@ -138,6 +138,7 @@ Text contrast against the dark background, measured in the gallery: primary 18.2
 - [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](../decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
+- [REF-0023: Motion system](0023-motion-system.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

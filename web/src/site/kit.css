@@ -82,6 +82,16 @@ body.leaving { opacity: 0; }
   .corner-logo .letters { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .orbs i { animation: none; }
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  :root:not([data-motion="full"]) .orbs i { animation: none; }
+  :root:not([data-motion="full"])::view-transition-group(*), :root:not([data-motion="full"])::view-transition-old(*), :root:not([data-motion="full"])::view-transition-new(*) { animation: none !important; }
 }
+:root[data-motion="reduced"] .orbs i { animation: none; }
+:root[data-motion="reduced"]::view-transition-group(*), :root[data-motion="reduced"]::view-transition-old(*), :root[data-motion="reduced"]::view-transition-new(*) { animation: none !important; }
+
+/* Reduced motion (REF-0023): sections still fade in as they arrive, but nothing rises.
+   Nothing waits hidden: a section is fully there until it scrolls in, then fades up from
+   clear as it enters (so screen readers and contrast checks always see it at full
+   strength). !important so this wins over the page's own rule that turns animation off. */
+.motion-lite .rv.in, .motion-lite .cv li.in .cv-w { animation: lite-in var(--dur-5) var(--ease) backwards !important; }
+.motion-lite .rv.in { animation-delay: calc(var(--d, 0) * var(--stagger-step)) !important; }
+@keyframes lite-in { from { opacity: 0; } }

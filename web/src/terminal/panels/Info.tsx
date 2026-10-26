@@ -9,6 +9,7 @@ import { fmtNum, fmtPct, tone } from "../fmt";
 import { FUNCTIONS, HONEST } from "../functions";
 import { WORKSPACES } from "../layout";
 import { Empty, Loading, TTable, type TCol } from "../tui";
+import { MotionControl, MotionHelp } from "../../ui/motionSetting";
 
 // ---------- NEWS ----------
 
@@ -127,6 +128,8 @@ export function HelpPanel() {
       <p className="muted">{WORKSPACES.map((w, i) => `F${i + 2} ${w.label}`).join(" · ")}. Changes are saved in this browser per workspace; RESET puts the preset back.</p>
       <h3>Linking</h3>
       <p className="muted">Clicking a row, a tile or a country selects it everywhere: detail and compare panels follow the linked series unless their link button is off.</p>
+      <h3>Motion</h3>
+      <div className="term-motion"><MotionControl /><MotionHelp className="muted" /></div>
     </div>
   );
 }

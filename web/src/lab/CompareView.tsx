@@ -58,7 +58,7 @@ export function CompareView({ report }: { report: Report }) {
       {tab === "league" && (
         <div className="lb-box lb-flush lb-grow">
           <div className="lb-table-wrap">
-            <table className="lb-table">
+            <table className="lb-table ui-stagger-rows">
               <thead>
                 <tr>
                   <th className="l">Strategy</th>
@@ -93,7 +93,7 @@ export function CompareView({ report }: { report: Report }) {
         <div className="lb-box lb-flush lb-grow">
           <div className="lb-box-h"><span>Total return over each episode, start to end</span><span className="lb-dim">green in a crash offsets a stock investor's loss</span></div>
           <div className="lb-table-wrap">
-            <table className="lb-table">
+            <table className="lb-table ui-stagger-rows">
               <thead><tr><th className="l">Strategy</th>{cmp.crises.map((c) => <th key={c.name} title={`${c.start} to ${c.end}`}>{c.name}</th>)}</tr></thead>
               <tbody>
                 {cmp.names.map((n) => (
@@ -112,7 +112,7 @@ export function CompareView({ report }: { report: Report }) {
         <div className="lb-box lb-flush lb-grow">
           <div className="lb-box-h"><span>Monthly correlation</span><span className="lb-dim">blue: move together · red: move opposite</span></div>
           <div className="lb-table-wrap">
-            <table className="lb-table lb-heat">
+            <table className="lb-table lb-heat ui-stagger-rows">
               <thead><tr><th className="l" />{cmp.names.map((n) => <th key={n} className="lb-rot" title={label(n)}><span>{n}</span></th>)}</tr></thead>
               <tbody>
                 {cmp.names.map((row, i) => (

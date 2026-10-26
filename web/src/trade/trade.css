@@ -130,7 +130,8 @@ body.sp-dragging * { pointer-events: none; }
 .cg-msg { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); }
 .cg-loading { background: linear-gradient(90deg, transparent, var(--tr-hover), transparent) 0 0 / 200% 100%; animation: tr-shimmer var(--dur-pulse) linear infinite; }
 @keyframes tr-shimmer { to { background-position: -200% 0; } }
-@media (prefers-reduced-motion: reduce) { .cg-loading { animation: none; } }
+@media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) .cg-loading { animation: none; } }
+:root[data-motion="reduced"] .cg-loading { animation: none; }
 .ptr .pc-legend { font-size: var(--tr-fs-s); }
 
 /* Dock */
@@ -268,6 +269,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .st-links { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 4px 0; }
 .st-links a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
 .st-links a:hover { color: var(--text); }
+.st-help { margin: 2px 0 4px; color: var(--muted); font-size: var(--tr-fs-s); }
 
 /* Layout menu */
 .lm { display: flex; flex-direction: column; padding: 4px; }
@@ -426,3 +428,9 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .bk-t > span:first-child { color: var(--muted); }
 .bk-mid { height: 22px; display: flex; align-items: center; padding: 0 8px; color: var(--text-2); border-top: 1px solid var(--tr-line); border-bottom: 1px solid var(--tr-line); white-space: nowrap; overflow: hidden; }
 .bk-trades > .bk-mid { position: absolute; top: 19px; left: 0; right: 0; border: 0; color: var(--muted); }
+
+/* Motion (REF-0023): a view's boxes come in one after another when it opens. */
+.tr-main > .view > * { animation: ui-rise var(--dur-3) var(--ease-out) backwards; }
+.tr-main > .view > :nth-child(2) { animation-delay: var(--stagger-step); }
+.tr-main > .view > :nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+.tr-main > .view > :nth-child(n+4) { animation-delay: calc(var(--stagger-step) * 3); }

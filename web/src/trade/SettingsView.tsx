@@ -2,7 +2,7 @@
 // layouts and the demo account, and the legal links. Kept in this browser; saved layouts
 // and the demo account live in the person's account.
 import { useState, type ReactNode } from "react";
-import { Button, Select, Toggle, toast } from "../ui";
+import { Button, MotionControl, Select, Toggle, toast, useMotionHelp } from "../ui";
 import { CHART_TYPES } from "../ui/proChart";
 import { TIMEFRAMES } from "../lib/bars";
 import { LEGAL_PAGES } from "../legal/LegalLinks";
@@ -27,6 +27,7 @@ export function SettingsView({ list, settings, set, onResetLayout, onLoadLayout 
   const layouts = useRows(layoutsTable, "trade_layouts");
   const [reset, setReset] = useState(false);
   const [costs, setCosts] = useState(false);
+  const help = useMotionHelp();
   return (
     <div className="view view-scroll">
       <div className="st">
@@ -37,6 +38,12 @@ export function SettingsView({ list, settings, set, onResetLayout, onLoadLayout 
           <Row label="Timeframe"><Select label="Timeframe" value={settings.tf} onChange={(tf) => set({ tf })} options={TIMEFRAMES.map((t) => [t.id, t.label])} /></Row>
           <Row label="Time zone"><Select label="Time zone" value={settings.tz} onChange={(tz) => set({ tz })} options={TIME_ZONES} /></Row>
           <Row label="Density"><Select label="Density" value={settings.density} onChange={(density) => set({ density })} options={[["compact", "Compact"], ["comfortable", "Comfortable"]]} /></Row>
+        </section>
+
+        <section className="st-sec" aria-labelledby="st-motion">
+          <h2 id="st-motion" className="vh">Motion</h2>
+          <Row label="Motion"><MotionControl /></Row>
+          <p className="st-help">{help}</p>
         </section>
 
         <section className="st-sec" aria-labelledby="st-layout">

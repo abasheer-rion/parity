@@ -114,6 +114,9 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Progress bar */
 .pac-bar { height: 5px; border-radius: 999px; background: var(--color-border); overflow: hidden; }
 .pac-bar > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-glow), var(--a-accent) 60%, var(--color-accent-text)); transform-origin: left; transition: transform var(--dur-4) var(--a-ease); }
+/* A progress bar grows to its value when it first shows (REF-0023). */
+.pac-bar > span { animation: pac-bar-in var(--dur-5) var(--a-ease) var(--dur-2) backwards; }
+@keyframes pac-bar-in { from { transform: scaleX(0); } }
 
 /* ---------- Library ---------- */
 .pac-hero { position: relative; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 0 28px; border-radius: 22px; padding: 18px; overflow: hidden; }
@@ -135,7 +138,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-dd-text { font-size: var(--type-lg) !important; font-weight: 500 !important; }
 
 .pac-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.pac-card { display: grid; grid-template-rows: auto 1fr; border-radius: 18px; overflow: hidden; min-width: 0; transition: border-color var(--dur-2); }
+.pac-card { display: grid; grid-template-rows: auto 1fr; border-radius: 18px; overflow: hidden; min-width: 0; transition: border-color var(--dur-2), transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); }
 .pac-card:hover { border-color: var(--a-line-2); }
 .pac-card-pic { display: block; aspect-ratio: 16 / 9; background: var(--color-bar); border-bottom: 1px solid var(--a-line); overflow: hidden; }
 .pac-card-body { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 16px; min-width: 0; }
@@ -275,6 +278,8 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-set { border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; }
 .pac-set-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; border-top: 1px solid var(--a-line); }
 .pac-set .pac-h3 + .pac-set-row { border-top: 0; }
+.pac-set-help { display: block; margin-top: 2px; color: var(--a-muted); font-size: var(--type-sm); line-height: 1.4; }
+.pac-set-row > span:first-child { padding: 8px 0; }
 .pac-keys { width: 100%; border-collapse: collapse; font-size: var(--type-sm); }
 .pac-keys td { padding: 6px 0; border-top: 1px solid var(--a-line); vertical-align: middle; }
 .pac-keys tr:first-child td { border-top: 0; }
@@ -331,6 +336,8 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
   .pac-brand { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pac-orbs i, .pac-lesson { animation: none; }
-  .pac-bar > span { transition: none; }
+  :root:not([data-motion="full"]) .pac-orbs i, :root:not([data-motion="full"]) .pac-lesson { animation: none; }
+  :root:not([data-motion="full"]) .pac-bar > span { transition: none; }
 }
+:root[data-motion="reduced"] .pac-orbs i, :root[data-motion="reduced"] .pac-lesson { animation: none; }
+:root[data-motion="reduced"] .pac-bar > span { transition: none; }

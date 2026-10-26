@@ -244,8 +244,9 @@
   .pb-weight-name { max-width: 120px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pb-row, .pb-heat rect, .wm-c { transition: none; }
+  :root:not([data-motion="full"]) .pb-row, :root:not([data-motion="full"]) .pb-heat rect, :root:not([data-motion="full"]) .wm-c { transition: none; }
 }
+:root[data-motion="reduced"] .pb-row, :root[data-motion="reduced"] .pb-heat rect, :root[data-motion="reduced"] .wm-c { transition: none; }
 
 /* Bot Battle (DEC-0035) */
 .bb-loading { min-height: 620px; justify-content: center; align-items: center; }

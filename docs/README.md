@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 24 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -34,10 +34,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - 2026-10-25 [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- 2026-10-25 [REF-0023: Motion system](reference/0023-motion-system.md)
 - 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
 - 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
 - 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
-- 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 
 ## intent
 
@@ -197,6 +197,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| REF-0023 | [Motion system](reference/0023-motion-system.md) | current | 2026-10-25 | [ui](TAGS.md#ui) |
 | REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## competitor
