@@ -181,7 +181,12 @@ language plpgsql security definer set search_path = '' as $$
 declare
   me uuid := (select auth.uid());
 begin
-  if me is null or not exists (select 1 from public.trading_admins a where a.user_id = me) then
+  -- A person's own sign-in only: not a token issued to a connected AI app, and only after a
+  -- second factor (multi-factor sign-in level aal2).
+  if me is null
+     or (select auth.jwt()) ->> 'client_id' is not null
+     or coalesce((select auth.jwt()) ->> 'aal', '') <> 'aal2'
+     or not exists (select 1 from public.trading_admins a where a.user_id = me) then
     raise exception 'only a trading admin can change the live switch' using errcode = '42501';
   end if;
   update public.trading_switch
@@ -206,6 +211,8 @@ alter table public.trading_switch enable row level security;
 revoke all on public.broker_accounts, public.broker_onboarding, public.broker_orders,
   public.broker_order_audit, public.ops_warnings, public.trading_admins, public.trading_switch
   from anon, authenticated;
+
+revoke all on sequence public.broker_order_audit_id_seq, public.ops_warnings_id_seq from anon, authenticated;
 
 grant select on public.broker_accounts, public.broker_onboarding, public.broker_orders,
   public.broker_order_audit to authenticated;

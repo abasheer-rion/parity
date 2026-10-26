@@ -84,7 +84,8 @@ export function checkOrder(req: OrderRequest, ctx: RiskContext): RiskResult {
 
   const last = ctx.lastPrice;
   if (last === null || !pos(last)) {
-    if (req.type === "market") errors.push("No recent price for this symbol");
+    // Demo may check a limit order without a price; real-account modes refuse instead.
+    if (req.type === "market" || ctx.mode !== "demo") errors.push("No recent price for this symbol");
     else warnings.push("No recent price to check against");
   } else {
     const collar = (p: number | undefined, what: string) => {

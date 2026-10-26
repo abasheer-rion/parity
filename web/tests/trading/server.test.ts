@@ -163,6 +163,16 @@ describe("trading service", () => {
     expect(store.audits.map((x) => x.event)).toEqual(["requested", "sent", "duplicate"]);
     expect(store.orders[0].mode).toBe("demo");
   });
+  it("prefixes the key sent to the shared paper account per person", async () => {
+    const { g } = mockBroker();
+    const s = createTradingService({ decision: DEMO, store: memoryStore(), gateway: g });
+    await s.place(U, buy(), "key-pref-0001");
+    expect(g.calls[0]).toBe("place 111111111111-key-pref-0001");
+  });
+  it("refuses outside demo when price or buying power is unknown", () => {
+    expect(checkOrder(buy({ type: "limit", limitPrice: 100 }), ctx({ mode: "sandbox", lastPrice: null })).errors.join()).toMatch(/No recent price/);
+    expect(checkOrder(buy({ type: "limit", limitPrice: 100 }), ctx({ lastPrice: null })).ok).toBe(true);
+  });
   it("refuses a missing or bad idempotency key", async () => {
     const s = createTradingService({ decision: DEMO, store: memoryStore(), gateway: mockBroker().g });
     await expect(s.place(U, buy(), null)).rejects.toMatchObject({ status: 400 });

@@ -65,7 +65,7 @@ Live needs all of these. Each is checked by the code; leaving out any one keeps 
 2. **The checklist file.** Mark each item done with written evidence (who, what and when) in `web/src/lib/trading/live-checklist.json`, set `"complete": true`, and merge it through a pull request. A checklist marked complete without evidence for every item does not count.
 3. **The database.** A reviewed migration that allows `mode = 'live'` on the broker tables. Until then the database refuses every live order even if the other gates pass.
 4. **Live keys.** Alpaca issues production Broker API keys after its review. Store them in the Keychain and set them on Pages as `ALPACA_LIVE_BROKER_KEY_ID` and `ALPACA_LIVE_BROKER_SECRET`.
-5. **The admin switch.** The database owner adds the admin's user id to `trading_admins` in the Supabase SQL editor (no app or server role can). That admin then calls `set_trading_live(true)` while signed in. A trigger refuses the switch from anyone else.
+5. **The admin switch.** The database owner adds the admin's user id to `trading_admins` in the Supabase SQL editor (no app or server role can). That admin then calls `set_trading_live(true)` while signed in with a second factor (multi-factor sign-in); a token given to a connected AI app is refused. A trigger refuses the switch from anyone else.
 6. **The deploy setting.** Set `TRADING_LIVE_DEPLOY=on` and `TRADING_MODE=live` on Pages and redeploy.
 7. **Before launch.** Replace the sandbox onboarding with Alpaca's real KYC flow, which collects identity details through the partner, and check the real-money badge and disclosures with the lawyer.
 

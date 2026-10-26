@@ -84,7 +84,12 @@ select pg_temp.bk_check((select count(*) from public.broker_order_audit) = 1, 's
 -- An admin added by the owner can flip the switch, and the row names them.
 select pg_temp.bk_owner();
 insert into public.trading_admins (user_id, note) values ('43333333-3333-3333-3333-333333333333', 'test');
+-- Without a second factor, or through an AI app token, even an admin is refused.
 select pg_temp.bk_as('43333333-3333-3333-3333-333333333333');
+select pg_temp.bk_check(pg_temp.bk_fails('select public.set_trading_live(true)'), 'an admin without a second factor cannot flip the switch');
+select set_config('request.jwt.claims', json_build_object('sub', '43333333-3333-3333-3333-333333333333', 'role', 'authenticated', 'aal', 'aal2', 'client_id', 'some-app')::text, true);
+select pg_temp.bk_check(pg_temp.bk_fails('select public.set_trading_live(true)'), 'an AI app token of an admin cannot flip the switch');
+select set_config('request.jwt.claims', json_build_object('sub', '43333333-3333-3333-3333-333333333333', 'role', 'authenticated', 'aal', 'aal2')::text, true);
 select public.set_trading_live(true, 'test');
 select pg_temp.bk_owner();
 select pg_temp.bk_check((select live_enabled and set_by = '43333333-3333-3333-3333-333333333333' from public.trading_switch where id = 1), 'an admin turns the switch on as themselves');

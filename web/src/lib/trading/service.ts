@@ -95,6 +95,10 @@ export function createTradingService(deps: ServiceDeps) {
   const provider: Provider = decision.engine === "alpaca_paper" ? "alpaca_paper" : "alpaca_broker";
   const shared = decision.engine === "alpaca_paper";
 
+  /** In the shared paper account every person's keys go to one Alpaca account, so the key
+   *  sent to Alpaca carries a per-person prefix; a lookup can never find someone else's. */
+  const brokerCid = (userId: string, key: string) => (shared ? `${userId.replace(/-/g, "").slice(0, 12)}-${key}` : key);
+
   function live(): Gateway & Partial<BrokerAccounts> {
     if (!gateway) throw new TradeError(409, "Orders stay in this browser while the server has no broker keys");
     return gateway;
@@ -149,7 +153,7 @@ export function createTradingService(deps: ServiceDeps) {
     if (!gateway || !OPEN_STATUSES.has(o.status)) return o;
     let a: AlpacaOrder | null;
     try {
-      a = await gateway.orderByClientId(shared ? null : await accountId(userId), o.client_order_id);
+      a = await gateway.orderByClientId(shared ? null : await accountId(userId), brokerCid(userId, o.client_order_id));
     } catch (e) {
       if (e instanceof BrokerError && !e.isUserError) await store.warn("broker.alpaca", "warn", `Order status check failed: ${e.message}`, { status: e.status });
       return o;
@@ -162,7 +166,7 @@ export function createTradingService(deps: ServiceDeps) {
   }
 
   async function fills(userId: string): Promise<TradeFill[]> {
-    const rows = await store.listAudit(userId, ["fill"], 2000);
+    const rows = (await store.listAudit(userId, ["fill"], 2000)).filter((r) => r.mode === mode);
     return rows
       .map((r) => {
         const d = (r.detail ?? {}) as { symbol?: string; side?: string; qty?: number; price?: number };
@@ -176,7 +180,7 @@ export function createTradingService(deps: ServiceDeps) {
 
   async function riskContext(userId: string, symbol: string, assetClass: "us_equity" | "crypto"): Promise<RiskContext> {
     const g = live();
-    const [f, open] = await Promise.all([fills(userId), store.listOrders(userId, { openOnly: true })]);
+    const [f, open] = await Promise.all([fills(userId), store.listOrders(userId, { openOnly: true }).then((os) => os.filter((o) => o.mode === mode))]);
     const bk = book(f);
     const pendingSellQty = open.filter((o) => o.symbol === symbol && o.side === "sell").reduce((s, o) => s + (Number(o.qty) || 0) - (Number(o.filled_qty) || 0), 0);
     const lastPrice = await g.lastPrice(symbol, assetClass);
@@ -189,7 +193,10 @@ export function createTradingService(deps: ServiceDeps) {
     }
     const acct = await g.account(await accountId(userId)).catch(() => null);
     const held = await g.positions(await accountId(userId)).then((ps) => num(ps.find((p) => p.symbol === symbol.replace("/", ""))?.qty ?? ps.find((p) => p.symbol === symbol)?.qty) ?? 0).catch(() => bk.positions.get(symbol)?.qty ?? 0);
-    return { mode: decision.mode, lastPrice, heldQty: held, pendingSellQty, buyingPower: num(acct?.buying_power), equity: num(acct?.equity), dayTrades: acct?.daytrade_count ?? countDayTrades(f, now()), limits };
+    const buyingPower = num(acct?.buying_power);
+    // Outside demo, refuse rather than guess when the broker cannot tell us the buying power.
+    if (buyingPower === null) throw new TradeError(503, "Could not read your buying power. Try again shortly");
+    return { mode: decision.mode, lastPrice, heldQty: held, pendingSellQty, buyingPower, equity: num(acct?.equity), dayTrades: acct?.daytrade_count ?? countDayTrades(f, now()), limits };
   }
 
   // ------------------------------------------------------------ the API
@@ -201,7 +208,7 @@ export function createTradingService(deps: ServiceDeps) {
         const a = await store.account(userId).catch(() => null);
         account = a ? { status: a.status, funded: !!a.funded_at } : null;
       }
-      return { mode: decision.mode, engine: decision.engine, badge: decision.badge, notes: decision.notes, account, limits };
+      return { mode: decision.mode, engine: decision.engine, badge: decision.badge, notes: userId ? decision.notes : [], account, limits };
     },
 
     async preview(userId: string, req: OrderRequest): Promise<Preview> {
@@ -245,10 +252,10 @@ export function createTradingService(deps: ServiceDeps) {
       await store.audit({ user_id: userId, mode, provider, event: "requested", client_order_id: idemKey, detail: { symbol: n.symbol, side: n.side, type: n.type, qty: n.qty ?? null, notional: n.notional ?? null, limit: n.limitPrice ?? null, stop: n.stopPrice ?? null, tif: n.timeInForce, class: n.orderClass } });
       let a: AlpacaOrder;
       try {
-        a = await g.placeOrder(acct, n, idemKey);
+        a = await g.placeOrder(acct, n, brokerCid(userId, idemKey));
       } catch (e) {
         // A timeout may still have reached the broker. Ask by our key before calling it lost.
-        const found = e instanceof BrokerError && e.code === "network" ? await g.orderByClientId(acct, idemKey).catch(() => null) : null;
+        const found = e instanceof BrokerError && e.code === "network" ? await g.orderByClientId(acct, brokerCid(userId, idemKey)).catch(() => null) : null;
         if (!found) {
           const be = e instanceof BrokerError ? e : null;
           await store.updateOrder(row.id, { status: be?.isUserError ? "rejected" : "error", reason: (be?.message ?? "Broker error").slice(0, 300) });
@@ -311,7 +318,7 @@ export function createTradingService(deps: ServiceDeps) {
       }
       let a: AlpacaOrder;
       try {
-        a = await g.replaceOrder(await accountId(userId), o.broker_order_id, patch, idemKey);
+        a = await g.replaceOrder(await accountId(userId), o.broker_order_id, patch, brokerCid(userId, idemKey));
       } catch (e) {
         return brokerFailed(userId, "Change order", e, o.client_order_id);
       }
@@ -327,7 +334,7 @@ export function createTradingService(deps: ServiceDeps) {
     },
 
     async orders(userId: string, openOnly: boolean): Promise<TradeOrder[]> {
-      const rows = await store.listOrders(userId, { openOnly, limit: 200 });
+      const rows = (await store.listOrders(userId, { openOnly, limit: 200 })).filter((o) => o.mode === mode);
       const synced = await Promise.all(rows.map((o) => (OPEN_STATUSES.has(o.status) ? sync(userId, o) : o)));
       return synced.filter((o) => !openOnly || OPEN_STATUSES.has(o.status)).map(toTradeOrder);
     },
@@ -384,7 +391,7 @@ export function createTradingService(deps: ServiceDeps) {
         return /[",\n]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
       };
       const rows: unknown[][] = [["record", "mode", "time", "symbol", "side", "type", "qty", "notional", "limit", "stop", "tif", "status", "filled_qty", "price", "client_order_id"]];
-      for (const o of await store.listOrders(userId, { limit: 500 })) rows.push(["order", o.mode, o.created_at, o.symbol, o.side, o.type, o.qty, o.notional, o.limit_price, o.stop_price, o.time_in_force, o.status, o.filled_qty, o.filled_avg_price, o.client_order_id]);
+      for (const o of (await store.listOrders(userId, { limit: 500 })).filter((x) => x.mode === mode)) rows.push(["order", o.mode, o.created_at, o.symbol, o.side, o.type, o.qty, o.notional, o.limit_price, o.stop_price, o.time_in_force, o.status, o.filled_qty, o.filled_avg_price, o.client_order_id]);
       for (const f of await fills(userId)) rows.push(["fill", decision.mode, f.at, f.symbol, f.side, "", f.qty, "", "", "", "", "filled", f.qty, f.price, f.clientOrderId]);
       return rows.map((r) => r.map(esc).join(",")).join("\n") + "\n";
     },

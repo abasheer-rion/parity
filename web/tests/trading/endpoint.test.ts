@@ -19,7 +19,8 @@ describe("/api/trade", () => {
     const res = await call("status", env);
     const text = await res.text();
     expect(JSON.parse(text).mode).toBe("demo");
-    expect(text).toMatch(/Live trading is refused/);
+    // Signed out, the reasons (which keys or gates are missing) are not shown.
+    expect(JSON.parse(text).notes).toEqual([]);
     expect(text).not.toMatch(/lk-value|ls-value/);
   });
   it("needs a sign-in to place, list or export orders", async () => {
