@@ -95,25 +95,25 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
 
         <Card title="Drawdown" help="How far below its previous peak the strategy was at each point.">
           <LineChart
-            label={`Drawdown of ${run.strategy}`}
+            label={`Drawdown of ${nameOf(run)}`}
             format={(v) => pct(v, 0)}
             height={200}
             series={[
-              { name: run.strategy, color, points: run.drawdown, emphasis: true },
-              ...(bench && !run.is_benchmark ? [{ name: bench.strategy, color: colors[bench.strategy], points: bench.drawdown }] : []),
+              { name: nameOf(run), color, points: run.drawdown, emphasis: true },
+              ...(bench && !run.is_benchmark ? [{ name: nameOf(bench), color: colors[bench.strategy], points: bench.drawdown }] : []),
             ]}
           />
         </Card>
 
         <Card title="Return by calendar year" help="Shows whether the result depends on a few years.">
           <BarChart
-            label={`Yearly returns of ${run.strategy}`}
+            label={`Yearly returns of ${nameOf(run)}`}
             format={(v) => pct(v, 0)}
             groups={years.map((y) => ({
               label: years.length > 14 ? `'${y.slice(2)}` : y,
               values: [
-                { name: run.strategy, color, value: run.yearly[y] },
-                ...(bench && !run.is_benchmark ? [{ name: bench.strategy, color: colors[bench.strategy], value: bench.yearly[y] ?? null }] : []),
+                { name: nameOf(run), color, value: run.yearly[y] },
+                ...(bench && !run.is_benchmark ? [{ name: nameOf(bench), color: colors[bench.strategy], value: bench.yearly[y] ?? null }] : []),
               ],
             }))}
           />
@@ -122,9 +122,9 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
         {run.ic_decay.length > 0 && (
           <Card title="Signal information by horizon" help="The information coefficient: mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">
             <BarChart
-              label={`Information coefficient by horizon for ${run.strategy}`}
+              label={`Information coefficient by horizon for ${nameOf(run)}`}
               format={(v) => v.toFixed(2)}
-              groups={run.ic_decay.map((r) => ({ label: `${r.horizon_days}d`, values: [{ name: run.strategy, color, value: r.mean_ic }] }))}
+              groups={run.ic_decay.map((r) => ({ label: `${r.horizon_days}d`, values: [{ name: nameOf(run), color, value: r.mean_ic }] }))}
             />
           </Card>
         )}
