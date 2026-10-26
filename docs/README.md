@@ -10,12 +10,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 63 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 21 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 26 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 87 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
 ## Open questions right now
@@ -154,6 +154,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0010 | [Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news) |
 | RES-0011 | [Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md) | current | 2026-10-23 | [carry](TAGS.md#carry), [method](TAGS.md#method), [momentum](TAGS.md#momentum), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
 | RES-0012 | [Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [private-markets](TAGS.md#private-markets) |
+| RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
+| RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
+| RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | RES-0020 | [Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | RES-0021 | [How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md) | current | 2026-10-24 | [ui](TAGS.md#ui) |
 | RES-0022 | [How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra) |
@@ -344,6 +347,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0080 | [Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0081 | [Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0082 | [Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md) | sourced | 2026-10-21 | [strategy](TAGS.md#strategy) |
+| ALG-0083 | [Emerging market currency carry, cost aware](algorithms/0083-em-fx-carry.md) | sourced | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0084 | [Passive emerging market currency basket](algorithms/0084-em-fx-passive-basket.md) | sourced | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0085 | [Emerging market currency momentum](algorithms/0085-em-fx-momentum.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0086 | [Selling commodity volatility (variance risk premium)](algorithms/0086-commodity-variance-risk-premium.md) | sourced | 2026-10-21 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0087 | [Commodity currencies predict commodity prices](algorithms/0087-commodity-currencies-predict-commodities.md) | sourced | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 
 ## dataset
 

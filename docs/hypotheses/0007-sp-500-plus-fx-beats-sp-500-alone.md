@@ -47,6 +47,7 @@ None yet.
 - [RES-0001: Reading list of papers, books and courses](../research/0001-reading-list.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
+- [RES-0013: Emerging market currencies](../research/0013-emerging-market-currencies.md)
 - [REF-0006: The gauntlet](../reference/0006-the-gauntlet.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](../reference/0007-ways-to-build-new-algorithms.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)

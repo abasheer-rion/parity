@@ -6010,4 +6010,9 @@ Related: [Private equity](#private-equity), [TVPI (total value to paid-in)](#tvp
 - [ALG-0080: Low-volume reversal in currency pairs](../algorithms/0080-fx-low-volume-reversal.md)
 - [ALG-0081: Asymmetric information risk (price impact) currency strategy](../algorithms/0081-fx-asymmetric-information-risk.md)
 - [ALG-0082: Complex ridge market timing (virtue of complexity)](../algorithms/0082-complex-ml-market-timing.md)
+- [ALG-0083: Emerging market currency carry, cost aware](../algorithms/0083-em-fx-carry.md)
+- [ALG-0084: Passive emerging market currency basket](../algorithms/0084-em-fx-passive-basket.md)
+- [ALG-0085: Emerging market currency momentum](../algorithms/0085-em-fx-momentum.md)
+- [ALG-0086: Selling commodity volatility (variance risk premium)](../algorithms/0086-commodity-variance-risk-premium.md)
+- [ALG-0087: Commodity currencies predict commodity prices](../algorithms/0087-commodity-currencies-predict-commodities.md)
 <!-- backlinks:end -->
