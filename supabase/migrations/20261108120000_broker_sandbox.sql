@@ -6,7 +6,7 @@
 --   broker_onboarding    one row per person: when they sent the sandbox identity form,
 --                        accepted the disclosures and the account agreement. No identity
 --                        details are stored here, only the times and the agreement version
---   broker_orders        one row per order sent to the partner. (user_id, client_order_id)
+--   broker_orders        one row per order sent to the partner (demo or sandbox). (user_id, client_order_id)
 --                        is unique: the idempotency key, so an order is never sent twice
 --   broker_order_audit   append-only log of every order event (requested, refused, sent,
 --                        filled, cancelled, replaced, errors). Nobody can change or delete it
@@ -51,8 +51,11 @@ create table if not exists public.broker_onboarding (
 create table if not exists public.broker_orders (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null,
-  mode text not null default 'sandbox' check (mode = 'sandbox'),
+  -- demo: the shared Alpaca paper account. sandbox: the person's own Broker API sandbox
+  -- account. Never live: going live needs a later migration that changes this on purpose.
+  mode text not null default 'demo' check (mode in ('demo', 'sandbox')),
   provider text not null check (provider in ('alpaca_broker', 'alpaca_paper')),
+  asset_class text not null default 'us_equity' check (asset_class in ('us_equity', 'crypto')),
   client_order_id text not null check (client_order_id ~ '^[A-Za-z0-9_-]{8,48}$'),
   broker_order_id text check (broker_order_id is null or length(broker_order_id) <= 64),
   symbol text not null check (symbol ~ '^[A-Z0-9./]{1,20}$'),
