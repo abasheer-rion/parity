@@ -188,10 +188,10 @@ function LabShell() {
         {!missing && current.research && <span className="lb-ro" title="Numbers from the research side. Nothing here changes them.">Research · read only</span>}
         <span className="lb-gap" />
         {runPicker}
-        <Button size="xs" icon="link" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
+        <Button size="xs" icon="link" className="lb-copy" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
           <span className="lb-btn-t">Copy link</span>
         </Button>
-        <IconButton icon="keyboard" size="sm" variant="plain" onClick={() => setKeysOpen(true)} label="Keys (?)" />
+        <IconButton icon="keyboard" size="sm" variant="plain" className="lb-keys" onClick={() => setKeysOpen(true)} label="Keys (?)" />
       </header>
 
       <div className="lb-mid">

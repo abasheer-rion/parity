@@ -68,8 +68,8 @@ export const TOURS: Record<Area, { label: string; steps: GuidedStep[] }> = {
       { id: "tools", target: ".lb-rail", title: "Tools", body: "Try settings, What if, Compare, Strategy search, Edge Lab and live prices. Shift and a number switches between them.", placement: "right" },
       { id: "tools-m", target: ".lb-tabs", title: "Tools", body: "Try settings, What if, Compare, Strategy search, Edge Lab and live prices.", placement: "top" },
       { id: "main", target: ".lb-main", title: "Your workspace", body: "Change a strategy's settings and see the result after trading costs. Nothing here changes the research results.", placement: "left" },
-      { id: "link", target: ".lb-btn", title: "Copy link", body: "Saves this view as it is now in a link you can share. Press L." },
-      { id: "keys", target: ".lb-icon", title: "Keys", body: "Press ? for every shortcut." },
+      { id: "link", target: ".lb-copy", title: "Copy link", body: "Saves this view as it is now in a link you can share. Press L." },
+      { id: "keys", target: ".lb-keys", title: "Keys", body: "Press ? for every shortcut." },
     ],
   },
   research: {
