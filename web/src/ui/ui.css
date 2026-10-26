@@ -243,7 +243,8 @@
 
 /* Gallery (#/ui) */
 .gal { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--space-8); align-items: start; }
-.gal-nav { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1px; font-size: var(--fs-sm); }
+/* Scrolls on its own when taller than the window, so a focused link is never off screen. */
+.gal-nav { position: sticky; top: 80px; max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 1px; font-size: var(--fs-sm); }
 .gal-nav .side-label { padding-left: 10px; }
 .gal-nav > div { display: flex; flex-direction: column; gap: 1px; margin-bottom: 8px; }
 .gal-nav a { display: block; padding: 5px 10px; border-radius: 6px; color: var(--text-2); text-decoration: none; }

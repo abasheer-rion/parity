@@ -6,7 +6,7 @@
 main footer a,
 .prose p a,
 .prose li a,
-:is(p, dd, figcaption, th, td, blockquote) a:not([class]) { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+:is(p, dd, figcaption, th, td, blockquote, [role="note"], [role="alert"], [role="status"]) a:not([class]) { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 
 /* White text on the light link blue was 2.4:1. The darker brand blue is 5.9:1. */
 .btn-primary { background: var(--color-primary); color: var(--color-on-primary); }

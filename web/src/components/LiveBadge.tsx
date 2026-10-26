@@ -37,10 +37,11 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
       // The spoken name starts with the words on the badge, so voice control can find it (WCAG 2.5.3).
       <button type="button" className={`lvb lvb-${fresh}`} aria-label={[internal ? "INT" : feedShort(feed, delay), compact ? null : meta?.short ?? src, state, !compact && age != null ? `${msText(age)} old` : null].filter(Boolean).join(" ") + `. ${label}`}>
         <i className="lvb-dot" aria-hidden />
-        <span>{internal ? "INT" : feedShort(feed, delay)}</span>
-        {!compact && <span className="lvb-src">{meta?.short ?? src}</span>}
+        {/* Spaces between the parts, so the words read apart (a flex box does not draw them). */}
+        <span>{internal ? "INT" : feedShort(feed, delay)}</span>{" "}
+        {!compact && <><span className="lvb-src">{meta?.short ?? src}</span>{" "}</>}
         <span className="tabular">{state}</span>
-        {!compact && age != null && <span className="tabular lvb-age">{msText(age)} old</span>}
+        {!compact && age != null && <>{" "}<span className="tabular lvb-age">{msText(age)} old</span></>}
       </button>
     )}>
       <dl className="lvb-card">
@@ -74,8 +75,8 @@ export function StaticBadge({ feed, source, asOf, compact = false, terms, delayM
     <Popover label="Data age" width={260} placement="bottom-end" trigger={() => (
       <button type="button" className={`lvb lvb-${fresh}`} aria-label={[feedShort(feed, delayMin), compact ? null : source, `${msText(age)} old`].filter(Boolean).join(" ") + `. ${label}`}>
         <i className="lvb-dot" aria-hidden />
-        <span>{feedShort(feed, delayMin)}</span>
-        {!compact && <span className="lvb-src">{source}</span>}
+        <span>{feedShort(feed, delayMin)}</span>{" "}
+        {!compact && <><span className="lvb-src">{source}</span>{" "}</>}
         <span className="tabular lvb-age">{msText(age)} old</span>
       </button>
     )}>

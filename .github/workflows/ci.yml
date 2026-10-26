@@ -72,12 +72,17 @@ jobs:
           name: desktop-web-ci
           path: desktop/build/web
           retention-days: 1
-      # Every route of every app at desktop and phone size: no exceptions, console errors,
-      # failed requests, blank pages, NaN in the text or sideways scroll (scripts/smoke.mjs).
+      # Every route of every app at 1280, 1440, 1920 and 390 wide: no exceptions, console
+      # errors, failed requests, blank pages, NaN in the text, sideways scroll, and no text
+      # that overlaps or is cut off, no number shortened with "..." (scripts/smoke.mjs).
       - run: npx playwright install --with-deps chromium
       - run: npm run smoke
       # First-run tours and the getting started checklist in a real browser (DEC-0060).
       - run: npm run onboarding
+      # WCAG 2.2 AA (DEC-0061): axe on every route at two sizes, a keyboard walk through
+      # the UI library with a visible focus ring on every stop, and reduced motion holding
+      # still (scripts/a11y.mjs).
+      - run: npm run a11y
 
   # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
   # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
