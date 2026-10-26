@@ -190,8 +190,11 @@ export function ProChart({
       autoSize: true,
       layout: { background: { color: "transparent" }, textColor: text, fontFamily: tokenValue("font-text", host.current), fontSize: typePx("type-2xs"), attributionLogo: true, panes: { separatorColor: border, separatorHoverColor: border } },
       grid: { vertLines: { color: grid }, horzLines: { color: grid } },
-      rightPriceScale: { borderColor: border },
-      timeScale: { borderColor: border, rightOffset: 4 },
+      // A fixed minimum width keeps every pane's price axis lined up and stops the plot
+      // jumping when the symbol changes; only whole labels are drawn, so none is cut at an edge.
+      rightPriceScale: { borderColor: border, minimumWidth: 64, entireTextOnly: true },
+      // Time labels need about 8 characters of room each; the library thins them to fit.
+      timeScale: { borderColor: border, rightOffset: 4, minBarSpacing: 2, tickMarkMaxCharacterLength: 8 },
       crosshair: { mode: 0 },
     });
     chart.current = c;

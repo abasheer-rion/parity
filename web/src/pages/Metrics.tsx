@@ -9,7 +9,7 @@ import {
   loadClicks, loadDaily, loadErrors, loadEvents, loadFunnel, loadLive, loadPages, loadRetention, metricsAllowed, share, visibleTime,
   type ClickRow, type DayRow, type Days, type EventRow, type ErrorRow, type FunnelRow, type Live, type PageRow, type RetentionRow,
 } from "../lib/metrics";
-import { Card, EmptyState, Segmented, StatTile } from "../ui";
+import { Card, EmptyState, Segmented, StatTile, TableScroll } from "../ui";
 import { SpeedPanels } from "./Latency";
 import "./metrics.css";
 
@@ -110,12 +110,12 @@ function LiveNow({ live, daily, pages, days }: { live: Load<Live>; daily: Load<D
       </div>
       {live.state === "ok" && live.data.pages.length > 0 && (
         <Card title="Pages open now">
-          <div className="table-wrap">
+          <TableScroll label="Speed">
             <table className="lat-table">
               <thead><tr><th>Page</th><th>App</th><th className="num">People</th></tr></thead>
               <tbody>{live.data.pages.map((p) => <tr key={`${p.app}${p.route}`}><td><code>{p.route}</code></td><td>{p.app}</td><td className="num">{n(p.visitors)}</td></tr>)}</tbody>
             </table>
-          </div>
+          </TableScroll>
         </Card>
       )}
     </>
@@ -150,7 +150,7 @@ function Pages({ pages }: { pages: Load<PageRow[]> }) {
   return (
     <Card title="Top pages" help="Page views and distinct visitors per page. Time is how long the page was in front, averaged per view. Scroll is the deepest point reached, as a share of the page.">
       <Pending v={pages} rows={12}>{(rows) => rows.length === 0 ? <p className="muted small">No page views yet.</p> : (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="lat-table">
             <thead><tr><th>Page</th><th>App</th><th className="num">Views</th><th className="num">Visitors</th><th className="num">Time</th><th className="num">Scroll</th></tr></thead>
             <tbody>{rows.slice(0, 40).map((r) => (
@@ -160,7 +160,7 @@ function Pages({ pages }: { pages: Load<PageRow[]> }) {
               </tr>
             ))}</tbody>
           </table>
-        </div>
+        </TableScroll>
       )}</Pending>
     </Card>
   );
@@ -184,7 +184,7 @@ function ClickMap({ pages, days }: { pages: Load<PageRow[]>; days: Days }) {
         if (!rows.length) return <p className="muted small">No clicks recorded for this page yet.</p>;
         const max = Math.max(...rows.filter((r) => r.kind === "click").map((r) => r.clicks), 1);
         return (
-          <div className="table-wrap">
+          <TableScroll>
             <table className="lat-table">
               <thead><tr><th>Control</th>{!chosen && <th>Page</th>}<th className="num">Clicks</th><th className="num">Visitors</th><th aria-hidden="true" /></tr></thead>
               <tbody>{rows.slice(0, 30).map((r) => (
@@ -196,7 +196,7 @@ function ClickMap({ pages, days }: { pages: Load<PageRow[]>; days: Days }) {
                 </tr>
               ))}</tbody>
             </table>
-          </div>
+          </TableScroll>
         );
       }}</Pending>
     </Card>
@@ -228,12 +228,12 @@ function Events({ events }: { events: Load<EventRow[]> }) {
   return (
     <Card title="Named actions" help="Actions pages report by name, such as verify_run, sign_up, order_placed and lesson_done.">
       <Pending v={events} rows={6}>{(rows) => rows.length === 0 ? <p className="muted small">None recorded yet.</p> : (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="lat-table">
             <thead><tr><th>Action</th><th>App</th><th className="num">Times</th><th className="num">Visitors</th></tr></thead>
             <tbody>{rows.map((r) => <tr key={`${r.app}${r.name}`}><td><code>{r.name}</code></td><td>{r.app}</td><td className="num">{n(r.events)}</td><td className="num">{n(r.visitors)}</td></tr>)}</tbody>
           </table>
-        </div>
+        </TableScroll>
       )}</Pending>
     </Card>
   );
@@ -243,7 +243,7 @@ function Retention({ retention }: { retention: Load<RetentionRow[]> }) {
   return (
     <Card title="Weekly retention" help="Visitors grouped by the week they were first seen. Each column is the share who came back that many weeks later. Week 0 is always 100%.">
       <Pending v={retention} rows={8}>{(rows) => rows.length === 0 ? <p className="muted small">Not enough visits yet.</p> : (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="lat-table mx-retention">
             <thead><tr><th>First week</th><th className="num">Visitors</th>{rows[0].weeks.map((_, i) => <th key={i} className="num">W{i}</th>)}</tr></thead>
             <tbody>{rows.map((r) => (
@@ -256,7 +256,7 @@ function Retention({ retention }: { retention: Load<RetentionRow[]> }) {
               </tr>
             ))}</tbody>
           </table>
-        </div>
+        </TableScroll>
       )}</Pending>
     </Card>
   );
@@ -266,12 +266,12 @@ function Errors({ errors }: { errors: Load<ErrorRow[]> }) {
   return (
     <Card title="Errors people hit" help="Uncaught errors in the browser, the message only, with addresses and numbers masked.">
       <Pending v={errors} rows={6}>{(rows) => rows.length === 0 ? <p className="muted small">No errors recorded.</p> : (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="lat-table">
             <thead><tr><th>Message</th><th>Page</th><th className="num">Times</th></tr></thead>
             <tbody>{rows.map((r) => <tr key={`${r.app}${r.route}${r.message}`}><td className="wrap">{r.message}</td><td><code>{page(r)}</code></td><td className="num">{n(r.errors)}</td></tr>)}</tbody>
           </table>
-        </div>
+        </TableScroll>
       )}</Pending>
     </Card>
   );

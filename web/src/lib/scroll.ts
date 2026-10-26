@@ -5,6 +5,7 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { motionLevel } from "../ui/motionCore";
+import { durationMs } from "../ui/tokens";
 
 let lenis: Lenis | null = null;
 
@@ -35,6 +36,7 @@ export function scrollToTop() {
 }
 
 export function scrollToEl(el: HTMLElement, offset = -64) {
-  if (lenis) lenis.scrollTo(el, { offset, duration: 0.9 });
+  // Lenis takes seconds; the glide lasts as long as the longest motion token.
+  if (lenis) lenis.scrollTo(el, { offset, duration: durationMs("dur-6") / 1000 });
   else el.scrollIntoView({ block: "start" });
 }

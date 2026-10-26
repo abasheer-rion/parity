@@ -10,6 +10,7 @@ import { pageByHref } from "../lib/pages";
 import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
+import { IconButton } from "../ui";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
@@ -278,10 +279,7 @@ export function Title({ children, label, actions }: { children: ReactNode; label
   return (
     <div className="title-row">
       <h1>{children}</h1>
-      <button className={`round-btn ${marked ? "on" : ""}`} onClick={() => toggleBookmark(href, text)}
-        aria-label={marked ? "Remove from bookmarks" : "Add to bookmarks"} title={marked ? "Remove from bookmarks" : "Add to bookmarks"}>
-        <Icon name="bookmark" size={13} />
-      </button>
+      <IconButton icon="bookmark" active={marked} onClick={() => toggleBookmark(href, text)} label={marked ? "Remove from bookmarks" : "Add to bookmarks"} />
       <CopyLink />
       {actions && <div className="title-actions">{actions}</div>}
     </div>

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
 import { useHashState } from "../lib/deeplink";
-import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, PageSkeleton, SearchInput, Segmented, Select, Tabs, useResource, type Column } from "../ui";
+import { Badge, Card, type Column, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, PageSkeleton, SearchInput, Segmented, Select, TableScroll, Tabs, useResource } from "../ui";
 import { Archive, Impact as ImpactSearch } from "./NewsImpact";
 import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay } from "../lib/news";
 
@@ -163,7 +163,7 @@ function ArticleDetail({ a, doc }: { a: Article; doc: NewsDoc }) {
         </>
       ) : <p className="muted">No price path for this item yet.</p>}
       {rows.length > 0 && (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="mtable dense">
             <thead><tr><th className="left">Series</th><th>1 hour</th><th>1 day</th><th>1 week</th><th>1 month</th></tr></thead>
             <tbody>
@@ -178,7 +178,7 @@ function ArticleDetail({ a, doc }: { a: Article; doc: NewsDoc }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       )}
       <p className="muted small">One hour moves need intraday prices, which we do not have yet. z is the move divided by the normal move
         over the same length of time in the year before, so 1 is ordinary and 3 is rare. Other news on the same day may explain the move.</p>

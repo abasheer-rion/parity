@@ -1,6 +1,7 @@
 import { Term } from "../pages/Learn";
 import type { Gauntlet, GauntletTest } from "../lib/types";
 import { Card, Pass } from "../ui/layout";
+import { TableScroll } from "../ui";
 
 const GROUPS: { key: GauntletTest["group"]; title: string; help: string }[] = [
   { key: "beat", title: "A. Does it beat the S&P 500?", help: "All six must pass." },
@@ -17,7 +18,7 @@ export function GauntletCard({ gauntlet }: { gauntlet: Gauntlet }) {
       {GROUPS.map((g) => (
         <div key={g.key} className="gauntlet-group">
           <h3>{g.title} <span className="muted small">{g.help}</span></h3>
-          <div className="table-wrap">
+          <TableScroll>
             <table className="gauntlet">
               <thead>
                 <tr><th>Test</th><th>What it asks</th><th>Result</th><th>Bar</th><th></th></tr>
@@ -34,7 +35,7 @@ export function GauntletCard({ gauntlet }: { gauntlet: Gauntlet }) {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         </div>
       ))}
       <p className="muted small">

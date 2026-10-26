@@ -91,6 +91,9 @@
   --color-border: color-mix(in srgb, var(--palette-white) 8%, transparent);
   --color-border-strong: color-mix(in srgb, var(--palette-white) 14%, transparent);
   --color-border-max: color-mix(in srgb, var(--palette-white) 22%, transparent);
+  /* The edge of a field, checkbox, radio, switch or slider track: 3:1 on every surface,
+     including glass over the glow, so a control can be found without its label (WCAG 1.4.11). */
+  --color-border-control: var(--palette-grey-500);
   --color-hover: color-mix(in srgb, var(--palette-white) 5%, transparent);
   --color-pressed: color-mix(in srgb, var(--palette-white) 9%, transparent);
   --color-fill: color-mix(in srgb, var(--palette-white) 7%, transparent);
@@ -175,7 +178,9 @@
   --leading-normal: 1.5;
   --leading-loose: 1.7;
 
-  /* Numbers: tabular figures so columns line up and values do not change width. */
+  /* Numbers: tabular figures so columns line up and values do not change width. Every
+     number on the site uses --num-variant (font-variant-numeric); the lint blocks writing it out. */
+  --num-variant: tabular-nums lining-nums;
   --num-features: "tnum" 1, "lnum" 1;
 
   /* ---------------------------------------------------------------- space */
@@ -346,9 +351,9 @@
   --ds-background-highlight: var(--color-info-soft);
   --ds-border-default: var(--color-border);
   --ds-border-emphasized: var(--color-border-strong);
-  --ds-border-input: var(--color-border-strong);
-  --ds-border-input-emphasized: var(--color-border-max);
-  --ds-border-input-focused: var(--color-border-max);
+  --ds-border-input: var(--color-border-control);
+  --ds-border-input-emphasized: var(--color-text-faint);
+  --ds-border-input-focused: var(--color-focus);
   --ds-border-input-focused-underline: var(--color-focus);
   --ds-border-focus-ring: var(--color-focus);
   --ds-text-title: var(--color-text);

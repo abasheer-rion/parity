@@ -57,7 +57,7 @@ const paths: Record<string, ReactNode> = {
 
 export function Icon({ name, size = 16, className }: { name: keyof typeof paths | string; size?: number; className?: string }) {
   return (
-    <svg className={`icon ${className ?? ""}`} width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor"
+    <svg className={`icon icon-${name} ${className ?? ""}`} width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor"
       strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       {paths[name] ?? null}
     </svg>

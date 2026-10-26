@@ -35,7 +35,7 @@ export function AlertsView({ list, tz, onSymbol, onNew }: { list: Instrument[]; 
             { key: "v", head: "Value", cell: (a) => (a.triggered_at ? alertValueText(a, a.triggered_value) : "") },
             { wide: true, key: "t", head: "Set", align: "left", sort: (a) => a.created_at ?? "", cell: (a) => timeIn(a.created_at, tz) },
             { key: "x", head: <span className="sr-only">Remove</span>, width: 72, cell: (a) => (
-              <button type="button" className="tt-btn" onClick={(e) => { e.stopPropagation(); alertsTable.remove(a.id).catch((er: Error) => toast(er.message, { tone: "bad" })); }}>Remove</button>
+              <Button size="xs" variant="ghost" onClick={(e) => { e.stopPropagation(); alertsTable.remove(a.id).catch((er: Error) => toast(er.message, { tone: "bad" })); }}>Remove</Button>
             ) },
           ]} />
       </section>

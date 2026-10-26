@@ -25,12 +25,12 @@
   position: fixed; inset: 0;
   display: grid; grid-template-rows: var(--tr-top) minmax(0, 1fr) var(--tr-legal);
   background: var(--canvas); color: var(--text-body);
-  font-size: var(--tr-fs); font-variant-numeric: tabular-nums;
+  font-size: var(--tr-fs); font-variant-numeric: var(--num-variant);
   overflow: hidden;
 }
 .ptr[data-density="comfortable"] { --tr-row: 30px; --tr-fs: var(--type-sm); --tr-fs-s: var(--type-xs); --tr-top: 44px; }
 .ptr[data-mobile] { grid-template-rows: var(--tr-top) minmax(0, 1fr) var(--tr-legal) 52px; }
-.ptr a { color: inherit; }
+.ptr a:not(.ui-btn, .ui-iconbtn) { color: inherit; }
 .ptr :focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .ptr .good { color: var(--good); }
 .ptr .bad { color: var(--bad); }
@@ -46,8 +46,6 @@ body.sp-dragging * { pointer-events: none; }
 .tb-brand b { color: var(--text); font-weight: 600; }
 .ptr h1.tb-view { margin: 0 0 0 8px; font: 500 var(--type-sm)/1 var(--font-text); letter-spacing: 0; color: var(--text); white-space: nowrap; }
 .tb-gap { flex: 1 1 auto; min-width: 4px; }
-.tb-btn { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 8px; border: 1px solid var(--tr-line); border-radius: 4px; background: transparent; color: var(--text-2); font: inherit; cursor: pointer; white-space: nowrap; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
-.tb-btn:hover { color: var(--text); border-color: var(--tr-line-2); }
 .tb-search span { min-width: 60px; text-align: left; }
 .tb-icon { display: inline-grid; place-items: center; width: 28px; height: 26px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--text-2); cursor: pointer; position: relative; flex: none; }
 .tb-icon:hover, .tb-icon.on { color: var(--text); background: var(--tr-hover); }
@@ -63,11 +61,10 @@ body.sp-dragging * { pointer-events: none; }
 .cb-chg { min-width: 54px; }
 .cb-sep { width: 1px; height: 18px; background: var(--tr-line); flex: none; }
 .cb-group { display: inline-flex; border: 1px solid var(--tr-line); border-radius: 4px; overflow: hidden; flex: none; }
-.cb-group button, .cb-btn { height: 24px; min-width: 28px; padding: 0 7px; border: 0; background: transparent; color: var(--text-2); font: inherit; cursor: pointer; }
+.cb-group button { height: 24px; min-width: 28px; padding: 0 7px; border: 0; background: transparent; color: var(--text-2); font: inherit; cursor: pointer; }
 .cb-group button + button { border-left: 1px solid var(--tr-line); }
-.cb-group button:hover, .cb-btn:hover { color: var(--text); background: var(--tr-hover); }
-.cb-group button.on, .cb-btn.on { color: var(--text); background: var(--accent-soft); }
-.cb-btn { border: 1px solid var(--tr-line); border-radius: 4px; height: 26px; flex: none; }
+.cb-group button:hover { color: var(--text); background: var(--tr-hover); }
+.cb-group button.on { color: var(--text); background: var(--accent-soft); }
 .cb-grid { display: inline-grid; place-items: center; }
 .cb-select { height: 26px; padding: 0 6px; border: 1px solid var(--tr-line); border-radius: 4px; background: var(--canvas); color: var(--text-2); font: inherit; flex: none; }
 
@@ -155,8 +152,6 @@ body.sp-dragging * { pointer-events: none; }
 .sd-closed .sd-head { border-bottom: 0; }
 .sd-title { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px; border: 0; background: transparent; color: var(--text-2); font: 500 var(--tr-fs-s)/var(--type-5xl) var(--font-text); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
 .sd-title:hover { color: var(--text); }
-.sd-btn { display: inline-grid; place-items: center; margin-left: auto; width: 24px; height: 22px; border: 0; border-radius: 3px; background: transparent; color: var(--muted); cursor: pointer; }
-.sd-btn:hover { color: var(--text); background: var(--tr-hover); }
 .sd-body { flex: 1 1 auto; min-height: 0; overflow: auto; }
 
 /* Order ticket */
@@ -171,7 +166,7 @@ body.sp-dragging * { pointer-events: none; }
 .ot-side.sell.on { background: color-mix(in srgb, var(--bad) 22%, transparent); border-color: var(--bad); color: var(--text); }
 .ot-field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .ot-field > span { font-size: var(--tr-fs-s); color: var(--muted); }
-.ot-input { height: 28px; width: 100%; min-width: 0; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--canvas); color: var(--text); font: inherit; font-variant-numeric: tabular-nums; }
+.ot-input { height: 28px; width: 100%; min-width: 0; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--canvas); color: var(--text); font: inherit; font-variant-numeric: var(--num-variant); }
 .ot-input:focus { outline: none; border-color: var(--accent); }
 textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(--font-mono); }
 .ot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
@@ -210,9 +205,6 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .tt-empty { padding: 10px; color: var(--muted); }
 .tt-dim { color: var(--muted); }
 .tt-acts { display: inline-flex; gap: 2px; }
-.tt-btn { height: 20px; min-width: 22px; padding: 0 6px; border: 1px solid var(--tr-line); border-radius: 3px; background: transparent; color: var(--text-2); font: inherit; font-size: var(--tr-fs-s); cursor: pointer; display: inline-grid; place-items: center; }
-.tt-btn:hover { color: var(--text); border-color: var(--tr-line-2); }
-.tt-btn.on { color: var(--text); border-color: var(--accent); }
 .st-keys td { height: 26px; }
 
 /* P&L strip */
@@ -368,7 +360,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .sgm-row:hover { background: var(--accent-soft); }
 .sgm-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sgm-tag { color: var(--text-2); font-size: var(--type-2xs); }
-.sgm-v { color: var(--text-2); font-size: var(--type-2xs); text-align: right; font-variant-numeric: tabular-nums; }
+.sgm-v { color: var(--text-2); font-size: var(--type-2xs); text-align: right; font-variant-numeric: var(--num-variant); }
 .sgm-note { margin: 6px 2px 0; color: var(--text-2); font-size: var(--type-2xs); line-height: 1.4; }
 .sgc { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; font-size: var(--type-sm); }
 .sgc > div { display: grid; gap: 2px; }

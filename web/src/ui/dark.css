@@ -168,7 +168,7 @@ h1.display { font-size: var(--type-7xl); line-height: 1.15; }
 
 /* The accent blue is a fill colour. As text on these blacks it is too dark to read
    (under 4.5:1), so text that uses it gets the lighter link blue instead. */
-.ui-tone-accent, .ui-tabs button.on, .range-tabs button.on, .ui-badge-accent, .btn-outline { color: var(--color-accent-text); }
+.ui-tone-accent, .ui-tabs button.on, .range-tabs button.on, .ui-badge-accent { color: var(--color-accent-text); }
 .range-tabs button.on { border-bottom-color: var(--color-accent-text); }
 .ui-tabs-ind { background: var(--ind-color, var(--color-accent-text)); }
 .ui-popover { background: var(--color-surface-overlay); }

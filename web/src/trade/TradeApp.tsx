@@ -6,7 +6,7 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type React
 import { AppGuard } from "../auth";
 import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
-import { Button, Dialog, ErrorBoundary, Icon, lazyPage, Popover, Toaster, toast } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, Popover, Toaster, toast } from "../ui";
 
 // Views other than the chart load when first opened (REF-0024).
 const PortfolioView = lazyPage(() => import("./PortfolioView").then((m) => ({ default: m.PortfolioView })));
@@ -300,7 +300,7 @@ function TradeShell() {
           <span className="tb-gap" />
           {!mobile && (
             <Popover label="Layouts" width={240} placement="bottom-end" trigger={() => (
-              <button type="button" className="tb-btn" title="Layouts">{layoutName ?? "Layout"} <Icon name="chevronDown" size={12} /></button>
+              <Button size="xs" variant="ghost" title="Layouts" iconRight="chevronDown">{layoutName ?? "Layout"}</Button>
             )}>
               {(close) => (
                 <div className="lm">
@@ -313,10 +313,10 @@ function TradeShell() {
               )}
             </Popover>
           )}
-          {!mobile && <button type="button" className="tb-btn tb-search" onClick={() => setFinder({ open: true, mode: "all", initial: "" })} title="Command palette">
-            <Icon name="search" size={13} /><span>Search</span><kbd>{MAC ? "⌘K" : "Ctrl K"}</kbd></button>}
+          {!mobile && <Button size="xs" variant="ghost" className="tb-search" icon="search" onClick={() => setFinder({ open: true, mode: "all", initial: "" })} title="Command palette">
+            Search <kbd>{MAC ? "⌘K" : "Ctrl K"}</kbd></Button>}
           <NotificationsBell list={list} />
-          {!mobile && view === "chart" && <button type="button" className={`tb-icon ${layout.side.open ? "on" : ""}`} onClick={toggleSide} title="Side panel (Alt+R)" aria-label="Side panel" aria-pressed={layout.side.open}><Icon name="sidebar" size={15} /></button>}
+          {!mobile && view === "chart" && <IconButton icon="sidebar" size="sm" variant="plain" active={layout.side.open} onClick={toggleSide} label="Side panel (Alt+R)" />}
           <EquityChip />
         </header>
 
@@ -428,8 +428,8 @@ function ChartBar({ layout, set, list, inst, symbol, tool, setTool, onSearch, on
           <select className="cb-select" aria-label="Chart type" value={layout.type} onChange={(e) => set((l) => ({ ...l, type: e.target.value as Layout["type"] }))}>
             {CHART_TYPES.map(([t, l]) => <option key={t} value={t}>{l}</option>)}
           </select>
-          <button type="button" className="cb-btn" onClick={onIndicators} title="Indicators (/)">Indicators{layout.indicators.length ? ` ${layout.indicators.length}` : ""}</button>
-          <Popover label="Signals" width={340} trigger={() => <button type="button" className="cb-btn" title="Strategy signals on the chart">Signals{layout.signals.length ? ` ${layout.signals.length}` : ""}</button>}>
+          <Button size="xs" variant="ghost" onClick={onIndicators} title="Indicators (/)">Indicators{layout.indicators.length ? ` ${layout.indicators.length}` : ""}</Button>
+          <Popover label="Signals" width={340} trigger={() => <Button size="xs" variant="ghost" title="Strategy signals on the chart">Signals{layout.signals.length ? ` ${layout.signals.length}` : ""}</Button>}>
             <SignalsMenu value={layout.signals} onChange={(signals) => set((l) => ({ ...l, signals }))} />
           </Popover>
           <span className="cb-group cb-draw" role="radiogroup" aria-label="Drawing tool">
@@ -442,8 +442,8 @@ function ChartBar({ layout, set, list, inst, symbol, tool, setTool, onSearch, on
             <option value="">Compare</option>
             {list.filter((s) => s.key !== symbol).map((s) => <option key={s.key} value={s.key}>{s.short}  {s.label}</option>)}
           </select>
-          <button type="button" className="cb-btn cb-clear" onClick={() => clearDrawings(symbol)} title="Clear drawings on this symbol" aria-label="Clear drawings">Clear</button>
-          <button type="button" className={`cb-btn cb-log ${layout.log ? "on" : ""}`} aria-pressed={layout.log} onClick={() => set((l) => ({ ...l, log: !l.log }))} title="Log scale (Shift+L)">Log</button>
+          <Button size="xs" variant="ghost" className="cb-clear" onClick={() => clearDrawings(symbol)} title="Clear drawings on this symbol" aria-label="Clear drawings">Clear</Button>
+          <Button size="xs" variant="ghost" className="cb-log" pressed={layout.log} onClick={() => set((l) => ({ ...l, log: !l.log }))} title="Log scale (Shift+L)">Log</Button>
           <span className="cb-group" role="radiogroup" aria-label="Charts">
             {([1, 2, 4] as Grid[]).map((g) => (
               <button key={g} type="button" role="radio" aria-checked={layout.grid === g} aria-label={`${g} chart${g > 1 ? "s" : ""}`} className={`cb-grid ${layout.grid === g ? "on" : ""}`} onClick={() => setGrid(g)} title={`${g} chart${g > 1 ? "s" : ""} (Alt+${g})`}>
@@ -512,13 +512,13 @@ function Workspace({ list, layout, set, tool, setTool, symbol, cue, settings, op
         <aside ref={side} className="ws-side" style={{ width: s.width }} aria-label="Side panel">
           <section className={`sd ${s.ticket ? "" : "sd-closed"}`} style={both ? { flex: `${s.split} 1 0` } : s.ticket ? { flex: "1 1 0" } : undefined} aria-label="Order ticket">
             <SideHead label="Order" open={s.ticket} onToggle={() => set((l) => ({ ...l, side: { ...l.side, ticket: !l.side.ticket } }))}
-              extra={<button type="button" className="sd-btn" onClick={() => set((l) => ({ ...l, side: { ...l.side, dock: l.side.dock === "right" ? "left" : "right" } }))} title={s.dock === "right" ? "Dock left" : "Dock right"} aria-label={s.dock === "right" ? "Dock panel left" : "Dock panel right"}><Icon name={s.dock === "right" ? "chevronLeft" : "chevronRight"} size={12} /></button>} />
+              extra={<IconButton icon={s.dock === "right" ? "chevronLeft" : "chevronRight"} size="xs" variant="plain" className="sd-dock" onClick={() => set((l) => ({ ...l, side: { ...l.side, dock: l.side.dock === "right" ? "left" : "right" } }))} label={s.dock === "right" ? "Dock panel left" : "Dock panel right"} />} />
             {s.ticket && <div className="sd-body"><OrderTicket symbol={symbol} cue={cue} confirm={settings.confirm} onNeedConfirm={onConfirm} /></div>}
           </section>
           {both && <Splitter axis="y" label="Resize order and watchlist" value={Math.round(s.split * 100)} min={20} max={85} onMove={dragSplit} onEnd={end} />}
           <section className={`sd ${s.watch ? "" : "sd-closed"}`} style={both ? { flex: `${1 - s.split} 1 0` } : s.watch ? { flex: "1 1 0" } : undefined} aria-label="Watchlist">
             <SideHead label={showBook ? "Book" : "Watchlist"} open={s.watch} onToggle={() => set((l) => ({ ...l, side: { ...l.side, watch: !l.side.watch } }))}
-              extra={book ? <button type="button" className="sd-btn sd-swap" onClick={() => setLower(showBook ? "watch" : "book")} title={showBook ? "Show watchlist" : "Show book and trades"}>{showBook ? "Watchlist" : "Book"}</button> : undefined} />
+              extra={book ? <Button size="xs" variant="ghost" className="sd-swap" onClick={() => setLower(showBook ? "watch" : "book")} title={showBook ? "Show watchlist" : "Show book and trades"}>{showBook ? "Watchlist" : "Book"}</Button> : undefined} />
             {s.watch && <div className="sd-body">{showBook && liveRef ? <BookPanel src={liveRef.src} sym={liveRef.sym} /> : <WatchMini list={list} current={symbol} onSymbol={(k) => openSymbol(k, false)} />}</div>}
           </section>
         </aside>

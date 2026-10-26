@@ -13,6 +13,7 @@ import { Html } from "../ui/Html";
 import { Segmented } from "../ui/inputs";
 import { SkeletonText } from "../ui/skeleton";
 import { getPrefs } from "../lib/prefs";
+import { TextButton } from "../ui";
 
 type Kind = "term" | "doc" | "ref" | "find";
 interface Pop { key: string; kind: Kind; arg: string; anchor?: string; rect: DOMRect; level: number; pinned: boolean }
@@ -286,7 +287,7 @@ function DocList({ title, ids, data }: { title: string; ids: string[]; data: Doc
           <li key={d}><a href={`#/doc/${d}`} data-doc={d}>{data?.byId[d]?.title ?? d}</a> <span className="muted">{d}</span></li>
         ))}
       </ul>
-      {ids.length > shown.length && <button className="linkish" onClick={() => setAll(true)}>Show all {ids.length}</button>}
+      {ids.length > shown.length && <TextButton onClick={() => setAll(true)}>Show all {ids.length}</TextButton>}
     </div>
   );
 }

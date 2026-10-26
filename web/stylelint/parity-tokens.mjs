@@ -6,6 +6,7 @@
 //   - a cubic-bezier() curve (use --ease-*)
 //   - a page-level z-index, 10 or more either way (use --z-*); -9 to 9 orders the parts
 //     inside one component and is allowed
+//   - number figures written out (font-variant-numeric: tabular-nums): use --num-variant
 // tokens.css itself is ignored in the config, since it is where the values live.
 import stylelint from "stylelint";
 
@@ -16,6 +17,7 @@ const messages = ruleMessages(ruleName, {
   duration: (v) => `Duration "${v}": use a --dur-* token`,
   curve: () => `cubic-bezier(): use an --ease-* token`,
   zIndex: (v) => `z-index ${v}: use a --z-* token`,
+  figures: (v) => `font-variant-numeric "${v}": use var(--num-variant)`,
 });
 
 // Strips var(...) and url(...) so values inside them are not read as raw.
@@ -54,6 +56,7 @@ const rule = (enabled) => (root, result) => {
       }
     }
     if (/cubic-bezier\(/.test(value)) flag(messages.curve(), "cubic-bezier");
+    if (prop === "font-variant-numeric" && !/^\s*(var\(--num-variant\)|normal|inherit)\s*$/.test(decl.value)) flag(messages.figures(decl.value), decl.value);
     if (prop === "z-index") {
       const m = value.trim().match(/^-?\d+$/);
       if (m && Math.abs(Number(m[0])) > 9) flag(messages.zIndex(m[0]), m[0]);

@@ -9,6 +9,7 @@ import type { FillRow } from "../lib/paper/account";
 import { signedUsd, tone, usd, useDemo, type Holding } from "./demo";
 import { timeIn } from "./state";
 import { TTable } from "./TTable";
+import { Button } from "../ui";
 
 const q = (v: number) => String(+v.toFixed(6));
 
@@ -60,7 +61,7 @@ export function OrdersTable({ rows, tz, onCancel }: { rows: PaperOrder[]; tz: st
         { key: "q", head: "Qty", sort: (o) => o.qty, cell: (o) => q(o.qty) },
         { key: "p", head: "Price", align: "left", cell: prices },
         { key: "st", head: "Status", align: "left", cell: (o) => <span title={o.reason ?? undefined}>{status(o)}</span> },
-        ...(onCancel ? [{ key: "x", head: <span className="sr-only">Cancel</span>, width: 64, cell: (o: PaperOrder) => <button type="button" className="tt-btn" onClick={(e) => { e.stopPropagation(); onCancel(o.id); }}>Cancel</button> }] : []),
+        ...(onCancel ? [{ key: "x", head: <span className="sr-only">Cancel</span>, width: 64, cell: (o: PaperOrder) => <Button size="xs" variant="ghost" onClick={(e) => { e.stopPropagation(); onCancel(o.id); }}>Cancel</Button> }] : []),
       ]} />
   );
 }

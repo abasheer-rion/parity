@@ -2,7 +2,7 @@
 // the settings menu and nothing links here. To bring one back, add its id to
 // SETTINGS_SECTIONS in components/Shell.tsx and render it from pages/Settings.tsx.
 import { useEffect, useState } from "react";
-import { Kbd, Segmented, SettingsRow, Toggle } from "../ui";
+import { Kbd, Segmented, SettingsRow, Toggle, TextButton } from "../ui";
 import { listMembers, source, type BatchInfo } from "../lib/data";
 import { date, REPO_URL } from "../lib/format";
 import { setPrefs, usePrefs, type Range } from "../lib/prefs";
@@ -46,7 +46,7 @@ export function HiddenSettings({ section, report, batches, batchId, setBatchId }
             {prefs.bookmarks.length ? (
               <ul className="plain-list">
                 {prefs.bookmarks.map((b) => (
-                  <li key={b.href}><a href={b.href}>{b.label}</a> <button className="linkish" onClick={() => setPrefs({ bookmarks: prefs.bookmarks.filter((x) => x.href !== b.href) })}>Remove</button></li>
+                  <li key={b.href}><a href={b.href}>{b.label}</a> <TextButton tone="muted" onClick={() => setPrefs({ bookmarks: prefs.bookmarks.filter((x) => x.href !== b.href) })}>Remove</TextButton></li>
                 ))}
               </ul>
             ) : "None yet"}
