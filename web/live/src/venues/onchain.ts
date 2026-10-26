@@ -153,6 +153,8 @@ async function rpcBatch(calls: Call[]): Promise<(string | null)[]> {
     const part = calls.slice(i, i + 100).map((c, j) => ({ jsonrpc: "2.0", id: i + j, ...c }));
     let body: RpcReply[];
     try { body = await wsBatch(part); } catch (e) { console.log(`[onchain] socket batch failed, trying HTTP: ${String(e)}`); body = await httpBatch(part); }
+    const bad = body.find((r) => r.error || r.result == null);
+    if (bad) console.log(`[onchain] node refused part of a batch: ${JSON.stringify(bad).slice(0, 300)}`);
     const byId = new Map(body.map((r) => [r.id, r.result ?? null]));
     for (const c of part) out.push(byId.get(c.id) ?? null);
   }
