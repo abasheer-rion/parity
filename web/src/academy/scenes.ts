@@ -123,6 +123,17 @@ function fmt(v: number, unit = ""): string {
   return unit === "$" ? `${sign}$${s}` : `${sign}${s}${unit}`;
 }
 
+/** Moves labels apart vertically so each is at least `gap` from the next, keeping their order
+ *  and staying between `top` and `bottom`. Used for line-end labels that start bunched. */
+export function spreadLabels<T extends { y: number }>(items: T[], gap: number, top: number, bottom: number): T[] {
+  const out = items.map((it) => ({ ...it })).sort((a, b) => a.y - b.y);
+  for (let i = 0; i < out.length; i++) out[i].y = Math.max(out[i].y, i ? out[i - 1].y + gap : top);
+  // If the stack ran past the bottom, push it back up as a block.
+  const over = out.length ? out[out.length - 1].y - bottom : 0;
+  if (over > 0) for (let i = out.length - 1; i >= 0; i--) out[i].y = Math.max(top + i * gap, Math.min(out[i].y - over, i < out.length - 1 ? out[i + 1].y - gap : bottom));
+  return out;
+}
+
 /** Horizontal grid lines with labels on the left, and a baseline. */
 function yAxis(lo: number, hi: number, y: (v: number) => number, unit = "", box = PLOT): string {
   return niceTicks(lo, hi).map((v) =>
@@ -171,14 +182,20 @@ const growth: Render = (p, steps, s) => {
   const x = scale(0, n - 1, PLOT.x0, PLOT.x1), y = scale(0, hi, PLOT.y1, PLOT.y0);
   const m = revealed(n, reveal);
   let out = yAxis(0, hi, y, "$") + xLabels(["Year 0", `Year ${Math.round(years / 2)}`, `Year ${years}`]);
+  const ends: { k: number; x: number; y: number; col: string }[] = [];
   curves.forEach((c, k) => {
     const col = PALETTE[k % PALETTE.length];
     const pts = c.slice(0, m).map((v, i) => [x(i), y(v)] as [number, number]);
     out += poly(pts, col, { width: 2.5 });
     const last = pts[pts.length - 1];
     out += dot(last[0], last[1], col);
-    out += text(Math.min(last[0], PLOT.x1 - 4) - 6, last[1] - 8, `${series[k].label}: ${fmt(c[m - 1], "$")}`, { anchor: "end", fill: col, size: 12, weight: 600 });
+    ends.push({ k, x: Math.min(last[0], PLOT.x1 - 4) - 6, y: last[1] - 8, col });
   });
+  // End labels never sit on top of each other: early on the lines start together, so the
+  // labels are spread to at least one line of text apart, top to bottom.
+  for (const e of spreadLabels(ends, 15, PLOT.y0 + 12, PLOT.y1 - 4)) {
+    out += text(e.x, e.y, `${series[e.k].label}: ${fmt(curves[e.k][m - 1], "$")}`, { anchor: "end", fill: e.col, size: 12, weight: 600 });
+  }
   return out;
 };
 

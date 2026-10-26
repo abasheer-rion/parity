@@ -114,6 +114,9 @@ table.gauntlet th:not(:first-child) { text-align: left; }
 .filters input[type="search"] { flex: 1; min-width: 220px; }
 table.catalog td { vertical-align: top; }
 table.catalog td.wrap, table td.wrap { white-space: normal; min-width: 200px; text-align: left; }
+/* Long identifiers without spaces (data source codes) break anywhere rather than widen the table. */
+table td.code-cell { min-width: 14ch; overflow-wrap: anywhere; }
+table td.wrap.code-cell { min-width: 14ch; }
 tr.selected td { background: color-mix(in srgb, var(--series-1) 8%, transparent); }
 .badge.warn { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, var(--border)); }
 .badge.ev-live { color: var(--good); }

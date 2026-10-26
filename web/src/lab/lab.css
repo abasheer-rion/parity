@@ -45,7 +45,7 @@
 }
 .plb[data-density="comfortable"] { --l-row: 32px; --l-fs: var(--type-sm); --l-fs-s: var(--type-xs); --l-top: 46px; }
 .plb[data-mobile] { grid-template-rows: var(--l-top) minmax(0, 1fr) var(--l-legal) 54px; --l-side: 100%; }
-.plb a { color: inherit; }
+.plb a:not(.ui-btn, .ui-iconbtn) { color: inherit; }
 .plb :focus-visible { outline: 2px solid var(--l-text); outline-offset: -2px; }
 .plb .good { color: var(--good); }
 .plb .bad { color: var(--bad); }
@@ -130,6 +130,8 @@
 .lb-bar { display: flex; align-items: center; gap: 8px; min-height: 30px; flex: none; min-width: 0; }
 .lb-bar-wrap { flex-wrap: wrap; }
 .lb-bar > .lb-dim { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+/* A note beside the controls wraps under them on a narrow screen instead of being cut. */
+.lb-bar-wrap > .lb-dim { white-space: normal; overflow: visible; text-overflow: clip; flex: 1 1 240px; }
 .lb-title { color: var(--l-text); font-size: var(--type-sm); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .lb-note { color: var(--l-muted); white-space: nowrap; }
 .lb-count { white-space: nowrap; }

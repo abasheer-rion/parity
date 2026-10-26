@@ -93,6 +93,21 @@ What causes a page to jump, and what the library does about each:
 | Hover makes something bigger | Hover changes colour, shadow and transforms only |
 | Animating height or position | Transforms and opacity only; `Collapse` is the one height animation and grows from its own top edge |
 
+## Nothing overlaps or gets cut off
+
+`npm run layout` opens every route of every app at 1280x800, 1440x900, 1920x1080 and 390x844, saves a screenshot of each to `web/layout-shots/` and lists text that collides with other text, text cut off by a box, numbers shortened with "...", controls cut off by a box too narrow for them, and pages that scroll sideways (`web/scripts/lib/layout-check.mjs`). The smoke test in CI runs the same check on every route at 1440 and 390, so a regression fails the build. Text marked `data-layout-ignore` is skipped.
+
+How each kind of problem is fixed:
+
+| Problem | Fix |
+| --- | --- |
+| A number grows past its cell or tile | `Num` (switches to 1.2M by itself), or `fmt.compact` |
+| A table is wider than its card at desktop width | Let long identifiers wrap (`td.wrap.code-cell`), hide low-priority columns in narrow panels (container queries in the Terminal: `c-label`, `c-vol`, `c-m1`, `c-n2`, `c-n3`) |
+| A note beside controls is cut on a phone | Let the row wrap (`lb-bar-wrap`) instead of an ellipsis |
+| Line-end labels on a chart stack on top of each other | `spreadLabels` in the Academy pictures spaces them a line apart |
+| Lightweight Charts axis labels | A 64px minimum price axis width, whole labels only, time labels thinned to fit |
+| A negative zero or a hyphen minus | `pct`, `num` and `fmt` print a true minus and never "-0.0%" |
+
 ## Using the newer parts
 
 - **Collapse, Disclosure, Accordion.** `<Collapse open={open}>` animates its children open by height with no measuring. Closed content is `inert`. `Disclosure` adds the summary row and chevron; `Accordion single` keeps one open at a time.

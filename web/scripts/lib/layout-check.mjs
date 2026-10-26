@@ -106,7 +106,7 @@ export function layoutCheck() {
     const rects = [...range.getClientRects()].filter((r) => r.width > 1 && r.height > 1);
     if (!rects.length) continue;
     const box = rects.reduce((a, r) => ({ left: Math.min(a.left, r.left), top: Math.min(a.top, r.top), right: Math.max(a.right, r.right), bottom: Math.max(a.bottom, r.bottom) }), { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity });
-    const c = clipRect(el.parentElement);
+    const c = clipRect(el);
     const seen = rects.map((r) => cut(r, c)).filter((r) => r.right - r.left > 1 && r.bottom - r.top > 1).map((r) => ({ ...r, width: r.right - r.left, height: r.bottom - r.top }));
     items.push({ node: n, el, rects, seen, box, text: n.nodeValue.trim().slice(0, 40), layer: layerOf(el) });
   }

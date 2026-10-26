@@ -56,7 +56,7 @@ export function LedgerPage() {
                   <td><strong>{r.id}</strong></td>
                   <td className="wrap">{r.title}<div className="muted small">{r.question}</div></td>
                   <td>{r.created}</td>
-                  <td>{r.hypotheses.join(", ")}</td>
+                  <td className="wrap code-cell">{r.hypotheses.join(", ")}</td>
                   <td>{r.prior_trials}</td>
                   <td>{runFor(r.id).join(", ") || <span className="muted">not run</span>}</td>
                 </tr>

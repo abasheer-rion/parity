@@ -2,6 +2,7 @@ import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
 import { date } from "../lib/format";
 import type { Report } from "../lib/types";
+import { Num } from "../ui";
 
 // A daily series more than this many days behind the fetch date is flagged.
 const STALE_DAILY = 7;
@@ -52,11 +53,11 @@ export function DataPage({ report }: { report: Report }) {
                 <tr key={r.key}>
                   <td><code>{r.key}</code></td>
                   <td>{r.source}</td>
-                  <td>{r.code}</td>
+                  <td className="wrap code-cell">{r.code}</td>
                   <td>{r.first ?? ""}</td>
                   <td>{r.last ?? ""}</td>
-                  <td>{r.lag ?? ""}</td>
-                  <td>{r.rows ?? ""}</td>
+                  <td>{r.lag == null ? "" : <Num value={r.lag} digits={0} mode="full" />}</td>
+                  <td>{r.rows == null ? "" : <Num value={r.rows} digits={0} />}</td>
                   <td>
                     <span className={`pass ${r.stale ? "no" : "yes"}`}>
                       <span aria-hidden>{r.stale ? "✕" : "✓"}</span> {r.ok ? (r.stale ? "Stale" : "Current") : "Failed"}

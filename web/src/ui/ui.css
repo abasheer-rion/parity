@@ -389,7 +389,7 @@
 .mtable.fixed tr.row-link:hover td { background: none; }
 /* A row that opens: the toggle sits beside the first cell's content, top-aligned. */
 .ui-cell-toggle { display: flex; align-items: flex-start; gap: 2px; min-width: 0; }
-.ui-cell-toggle > .ui-row-toggle { flex: none; margin-top: 2px; vertical-align: baseline; }
+.ui-cell-toggle > .ui-row-toggle { flex: none; margin: 2px 4px 0 0; vertical-align: baseline; }
 .ui-cell-toggle > :last-child { min-width: 0; }
 .mtable tr.ui-spacer, .mtable tr.ui-spacer td { padding: 0; border: 0; height: auto; }
 .sticky-first th:first-child, .sticky-first td:first-child { position: sticky; left: 0; z-index: 1; background: var(--table-head-bg, var(--color-bar)); }

@@ -30,7 +30,7 @@
 }
 .ptr[data-density="comfortable"] { --tr-row: 30px; --tr-fs: var(--type-sm); --tr-fs-s: var(--type-xs); --tr-top: 44px; }
 .ptr[data-mobile] { grid-template-rows: var(--tr-top) minmax(0, 1fr) var(--tr-legal) 52px; }
-.ptr a { color: inherit; }
+.ptr a:not(.ui-btn, .ui-iconbtn) { color: inherit; }
 .ptr :focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .ptr .good { color: var(--good); }
 .ptr .bad { color: var(--bad); }

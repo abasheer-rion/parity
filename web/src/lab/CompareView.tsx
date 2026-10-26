@@ -48,7 +48,7 @@ export function CompareView({ report }: { report: Report }) {
 
   return (
     <div className="lb-view lb-scroll">
-      <div className="lb-bar">
+      <div className="lb-bar lb-bar-wrap">
         <Segmented size="sm" label="Table" value={tab} onChange={setTab}
           options={[["league", "League table"], ["crisis", "Crises"], ["corr", "Correlation"]] as [Tab, string][]} />
         <span className="lb-gap" />

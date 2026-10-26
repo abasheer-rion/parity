@@ -6,6 +6,9 @@
 //     (CI has no news, markets or terminal exports; pages must say so calmly)
 //   - a blank page, or NaN, undefined, Infinity or [object Object] in the text
 //   - sideways scroll on the phone size
+//   - text that collides with other text, is cut off, or a number shortened with "...",
+//     and controls cut off by a box too narrow for them (scripts/lib/layout-check.mjs;
+//     `npm run layout` runs the same check at four sizes with screenshots)
 //
 //   npm run smoke                      starts its own server
 //   SMOKE_BASE=http://127.0.0.1:5199 npm run smoke   uses a running one
@@ -15,6 +18,7 @@
 // contain the text.
 import { resolve } from "node:path";
 import { chromium } from "playwright";
+import { layoutCheck } from "./lib/layout-check.mjs";
 import { routes } from "./lib/routes.mjs";
 
 const here = (p) => resolve(import.meta.dirname, "..", p);
@@ -90,6 +94,10 @@ for (const size of SIZES) {
         if (info.len < 40) add("blank page");
         for (const b of info.bad.slice(0, 3)) add(`bad value in text: "${b}"`);
         if (size.name === "phone" && info.overflow > 1) add(`scrolls sideways by ${info.overflow}px`);
+        await page.evaluate(() => document.fonts?.ready);
+        for (const f of (await page.evaluate(layoutCheck)).filter((x) => x.kind !== "hscroll").slice(0, 5)) {
+          add(`layout ${f.kind}: "${f.text}"${f.other ? ` x "${f.other}"` : ""} at ${f.where}`);
+        }
       } catch (e) {
         add(`did not load: ${e.message.split("\n")[0]}`);
       }
