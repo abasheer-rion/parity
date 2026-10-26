@@ -39,3 +39,23 @@ test.describe("missing page", () => {
     test(`route ${path}`, async ({ page }, info) => { await check(page, path, info, 404); });
   }
 });
+
+// Pages whose main content is a chart: the chart must draw at a real size with real lines,
+// not an empty box (a chart that measured its box before layout drew at 0 by 0).
+// The terminal shows one panel at a time on a phone (the monitor first), so it is checked
+// at desktop size only.
+const CHARTS = ["/trade/#/chart", "/app/#/strategy/fx_carry", "/sim/#/overview", "/sim/#/fx", "/lab/#/try"];
+test.describe("charts draw", () => {
+  for (const path of CHARTS) {
+    test(`chart on ${path}`, async ({ page }, info) => {
+      test.skip(path.startsWith("/sim/") && info.project.name === "phone", "one panel at a time on a phone");
+      await open(page, path);
+      await settled(page);
+      await expect.poll(() => page.evaluate(() => {
+        const canvases = [...document.querySelectorAll("canvas")].filter((c) => c.width > 100 && c.height > 50 && c.getBoundingClientRect().width > 100);
+        const svgs = [...document.querySelectorAll("svg")].filter((s) => s.getBoundingClientRect().width > 150 && s.getBoundingClientRect().height > 60 && s.querySelector("path[d*='L'], path[d*='C'], polyline[points]"));
+        return canvases.length + svgs.length;
+      }), { message: "a chart with lines at a real size" }).toBeGreaterThan(0);
+    });
+  }
+});

@@ -44,6 +44,15 @@ test.describe("algorithm report", () => {
     await page.getByRole("button", { name: "Print or save as PDF" }).click();
     await expect.poll(() => page.evaluate(() => (window as unknown as { printed: number }).printed)).toBe(1);
   });
+
+  test("Print and Markdown version sit on one line each, never split word by word", async ({ page }) => {
+    await ready(page, "/research/#/algo/fx-carry-g10");
+    const link = page.getByRole("link", { name: "Markdown version" });
+    const box = await link.boundingBox();
+    const lineHeight = await link.evaluate((e) => parseFloat(getComputedStyle(e).lineHeight) || 20);
+    expect(box!.height, "the link is on one line").toBeLessThan(lineHeight * 1.5);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  });
 });
 
 test.describe("bibliography", () => {
