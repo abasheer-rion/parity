@@ -1,0 +1,23 @@
+{
+  "id": "greece-capital-controls-2015",
+  "name": "Greece shuts its banks and misses an IMF payment",
+  "date": "2015-06-29",
+  "type": "sovereign_default",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "greece",
+    "eu"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Greece closed its banks, limited cash withdrawals and then missed a payment to the IMF after talks with its lenders broke down.",
+  "sources": [
+    {
+      "title": "Greek government-debt crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Greek_government-debt_crisis"
+    }
+  ]
+}

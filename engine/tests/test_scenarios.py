@@ -158,3 +158,43 @@ def test_catalog_events_are_valid():
     if not events:
         pytest.skip("no catalog events yet")
     assert sc.validate(events) == []
+
+
+def test_median_interval_order_statistics():
+    # Below 5 values no symmetric pair reaches 90% coverage.
+    assert sc.median_interval([1.0, 2.0, 3.0, 4.0]) is None
+    # 5 values: min to max covers 1 - 2/32 = 93.75%.
+    assert sc.median_interval([5.0, 1.0, 4.0, 2.0, 3.0]) == (1.0, 5.0)
+    # 12 values: the 3rd and 10th smallest (coverage 96%; the 4th and 9th give 85%).
+    assert sc.median_interval([float(i) for i in range(12)]) == (2.0, 9.0)
+
+
+def test_confidence_words():
+    assert [sc.confidence_word(n) for n in (2, 5, 12, 30)] == ["too few", "thin", "fair", "solid"]
+
+
+def test_library_groups_by_type_and_family(flat_then_jump):
+    prices = {"oil": flat_then_jump}
+    events = [_event(f"d{i}", f"2020-0{i + 2}-0{i + 1}", type_="sovereign_default")
+              for i in range(3)]
+    events.append(_event("b", "2020-03-02", type_="bank_run"))
+    doc = sc.export(events, prices)
+    lib = doc["library"]
+    assert lib["types"]["sovereign_default"]["count"] == 3
+    assert lib["types"]["bank_run"]["count"] == 1
+    assert "war" not in lib["types"]  # types with no events are left out
+    assert lib["families"]["financial"]["count"] == 4
+    cell = lib["types"]["bank_run"]["assets"]["oil"]["1d"]
+    assert cell["n"] == 1 and cell["confidence"] == "too few" and cell["ci"] is None
+    assert cell["held"] is None
+
+
+def test_library_direction_held_when_interval_clears_zero():
+    idx = pd.bdate_range("2018-01-01", "2020-12-31")
+    events, s = [], pd.Series(100.0, index=idx)
+    for i, d in enumerate(pd.bdate_range("2019-01-07", periods=6, freq="8W-MON")):
+        s[s.index >= d] *= 1.02  # every event: a 2% jump
+        events.append(_event(f"e{i}", d.date().isoformat(), type_="crypto_crash"))
+    lib = sc.library(sc.event_study(events, {"oil": s}))
+    cell = lib["types"]["crypto_crash"]["assets"]["oil"]["1d"]
+    assert cell["n"] == 6 and cell["held"] == "up" and cell["confidence"] == "thin"

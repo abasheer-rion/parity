@@ -1,0 +1,25 @@
+{
+  "id": "venezuela-oil-sanctions-2019",
+  "name": "US sanctions Venezuela's oil company",
+  "date": "2019-01-28",
+  "type": "sanctions",
+  "regions": [
+    "latin_america"
+  ],
+  "actors": [
+    "venezuela",
+    "usa"
+  ],
+  "severity": 1,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The US sanctioned the state oil company PDVSA, cutting Venezuela's main source of dollars.",
+  "sources": [
+    {
+      "title": "International sanctions during the Venezuelan crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis"
+    }
+  ]
+}

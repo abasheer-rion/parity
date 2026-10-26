@@ -1,0 +1,23 @@
+{
+  "id": "dubai-world-standstill-2009",
+  "name": "Dubai World asks to delay its debts",
+  "date": "2009-11-26",
+  "type": "sovereign_default",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "uae"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The Dubai government's holding company asked creditors to delay repayment of about 26 billion dollars, a shock to markets that had assumed state backing.",
+  "sources": [
+    {
+      "title": "Dubai World",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Dubai_World"
+    }
+  ]
+}

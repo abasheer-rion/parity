@@ -1,0 +1,25 @@
+{
+  "id": "ruble-crisis-2014",
+  "name": "Russia's ruble crashes despite a rate rise to 17%",
+  "date": "2014-12-16",
+  "type": "currency_crisis",
+  "regions": [
+    "russia_cis",
+    "europe"
+  ],
+  "actors": [
+    "russia"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Russia's central bank raised its rate from 10.5% to 17% overnight; the ruble still fell sharply that day as oil slid and sanctions bit.",
+  "sources": [
+    {
+      "title": "Russian financial crisis (2014-2017)",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Russian_financial_crisis_(2014%E2%80%932017)"
+    }
+  ]
+}

@@ -8800,7 +8800,8 @@
       "verification": "verified",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "catalog/events/greece-junk-downgrade-2010.json"
+        "catalog/events/greece-junk-downgrade-2010.json",
+        "catalog/events/italy-yields-7-percent-2011.json"
       ],
       "metadata": {
         "source": "repo",
@@ -39723,6 +39724,1433 @@
       "metadata": {
         "source": "repo",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4750faec",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1998-2002 Argentine great depression",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/argentina-default-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-06b34613",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2023 Argentine general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2023_Argentine_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/argentina-election-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6f2f9fee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019 Balakot airstrike",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019_Balakot_airstrike",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/balakot-airstrike-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-eaf8709f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bear Stearns",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bear_Stearns",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/bear-stearns-rescue-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-c5a6293e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2007-2008 financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/bnp-paribas-funds-frozen-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-f9924197",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Samba effect",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Samba_effect",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/brazil-devaluation-1999.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a791dfa4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2002 Brazilian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2002_Brazilian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/brazil-election-2002.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6e9b1942",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Celsius Network",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Celsius_Network",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/celsius-freeze-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-bae37343",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Chinese stock bubble of 2007",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Chinese_stock_bubble_of_2007",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/china-stock-drop-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-5c40fff5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Continental Illinois",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Continental_Illinois",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/continental-illinois-1984.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-71ff86b6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2018 cryptocurrency crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2018_cryptocurrency_crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/crypto-crash-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6b756381",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cryptocurrency bubble",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Cryptocurrency_bubble",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/crypto-crash-may-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-8e488740",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2012-2013 Cypriot financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2012%E2%80%932013_Cypriot_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/cyprus-deposit-levy-2013.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-83bb6c6d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Dubai World",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Dubai_World",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/dubai-world-standstill-2009.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-18fadaa6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Western African Ebola virus epidemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Western_African_Ebola_virus_epidemic",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ebola-emergency-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a21a688d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Evergrande liquidity crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Evergrande_liquidity_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/evergrande-crisis-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-db7bf9f5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2010 flash crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2010_flash_crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/flash-crash-2010.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-84dc4669",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 French legislative election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_French_legislative_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/france-snap-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-190b96e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2017 French presidential election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2017_French_presidential_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/french-election-2017.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-f15a36ec",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bankruptcy of FTX",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ftx-collapse-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-feb140e4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2014 Gaza War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2014_Gaza_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/gaza-war-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-558969f4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Greek government-debt crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Greek_government-debt_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/greece-capital-controls-2015.json",
+        "catalog/events/greece-debt-swap-2012.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3fa7caaa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "January 2015 Greek legislative election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/January_2015_Greek_legislative_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/greek-election-2015.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a5c194f6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "October 27, 1997, mini-crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/October_27,_1997,_mini-crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/hong-kong-crash-1997.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e3036b25",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2008-2011 Icelandic financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2008%E2%80%932011_Icelandic_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/iceland-banks-collapse-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-de92d636",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 Indian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_Indian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/india-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-4f387a1e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Post-2008 Irish economic downturn",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Post-2008_Irish_economic_downturn",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ireland-bailout-2010.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-82d67e60",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2018 Italian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2018_Italian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/italy-election-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-934838c2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Japanese yen",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Japanese_yen",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/japan-yen-intervention-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3e1e9fc0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Latin American debt crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Latin_American_debt_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mexico-debt-crisis-1982.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-dcc06cb1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 Mexican general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_Mexican_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mexico-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-147edad7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2022-2023 mpox outbreak",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2022%E2%80%932023_mpox_outbreak",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mpox-emergency-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-b14a352b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Mt. Gox",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Mt._Gox",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mt-gox-collapse-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ecada088",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Second Nagorno-Karabakh War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/nagorno-karabakh-war-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-75e61a74",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nord Stream",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Nord_Stream",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/nord-stream-shut-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-23443d3d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nationalisation of Northern Rock",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Nationalisation_of_Northern_Rock",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/northern-rock-run-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-2cd7e6d7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "SARS-CoV-2 Omicron variant",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/omicron-variant-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e36983c4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2010s oil glut",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2010s_oil_glut",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/opec-cut-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-2da45d8d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OPEC+",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/OPEC%2B",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/opec-plus-surprise-cut-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-278bf524",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Operation Sindoor",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Operation_Sindoor",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/operation-sindoor-2025.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3c848282",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Red Sea crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Red_Sea_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/red-sea-shipping-attacks-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-c8e506ed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Russian financial crisis (2014-2017)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Russian_financial_crisis_(2014%E2%80%932017)",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ruble-crisis-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e2cebb0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Rusal",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Rusal",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/rusal-sanctions-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-81c06e48",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions during the Russo-Ukrainian War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russo-Ukrainian_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/russia-sectoral-sanctions-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-1379c449",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2022 Shanghai COVID-19 outbreak",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2022_Shanghai_COVID-19_outbreak",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/shanghai-lockdown-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-0d3a2754",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019-present Sri Lankan economic crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019%E2%80%93present_Sri_Lankan_economic_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/sri-lanka-default-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-7d1b4e1f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1976 sterling crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1976_sterling_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/sterling-crisis-1976.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-fc78e2d9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021 Suez Canal obstruction",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021_Suez_Canal_obstruction",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/suez-canal-blocked-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-fa52c890",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Taper tantrum",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Taper_tantrum",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/taper-tantrum-2013.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-cf4b8d16",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Terra (blockchain)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Terra_(blockchain)",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/terra-luna-collapse-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-d74ca887",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021 Texas power crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021_Texas_power_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/texas-freeze-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3a93f530",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2016 Turkish coup attempt",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2016_Turkish_coup_attempt",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-coup-attempt-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-b7a514ed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2001 Turkish economic crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2001_Turkish_economic_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-crisis-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-595f0d4f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Turkish currency and debt crisis, 2018",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Turkish_currency_and_debt_crisis,_2018",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-lira-crisis-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e01ef720",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019 United Kingdom general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019_United_Kingdom_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/uk-election-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-37b440bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "United States New Export Controls on Advanced Computing and Semiconductors to China",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/United_States_New_Export_Controls_on_Advanced_Computing_and_Semiconductors_to_China",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/us-chip-export-controls-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ccce2123",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021-2023 inflation surge",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/us-inflation-shock-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-bafdce0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions during the Venezuelan crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/venezuela-oil-sanctions-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3a3f2c19",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Venezuelan general strike of 2002-2003",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Venezuelan_general_strike_of_2002%E2%80%932003",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/venezuela-oil-strike-2002.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ecb2161d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wagner Group rebellion",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Wagner_Group_rebellion",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/wagner-rebellion-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-0c08671d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "COVID-19 pandemic in mainland China",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic_in_mainland_China",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/wuhan-lockdown-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-7c7d7898",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2015-2016 Zika virus epidemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2015%E2%80%932016_Zika_virus_epidemic",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/zika-emergency-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
       }
     }
   ]

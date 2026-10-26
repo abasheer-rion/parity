@@ -2,7 +2,7 @@
   "id": "svb-collapse-2023",
   "name": "Silicon Valley Bank collapses",
   "date": "2023-03-10",
-  "type": "financial_crisis",
+  "type": "bank_run",
   "regions": [
     "north_america",
     "europe"

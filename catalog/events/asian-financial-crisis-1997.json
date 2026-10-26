@@ -2,7 +2,7 @@
   "id": "asian-financial-crisis-1997",
   "name": "Thailand floats the baht",
   "date": "1997-07-02",
-  "type": "financial_crisis",
+  "type": "currency_crisis",
   "regions": [
     "east_asia",
     "global"

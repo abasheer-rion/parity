@@ -463,3 +463,23 @@
 
 /* LIVE: the compact live board (DEC-0052). */
 .term-live { height: 100%; min-height: 240px; padding: 6px 8px; box-sizing: border-box; }
+
+/* LIB: the scenario library (DEC-0066). */
+.term-lib-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: minmax(260px, 38%) minmax(0, 1fr); }
+.term-lib-kinds { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--t-line); }
+.term-lib-detail { padding: 6px 8px; display: flex; flex-direction: column; gap: 6px; }
+.term-lib-head { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+.term-lib-note { margin: 0; color: var(--t-faint); font-size: var(--type-2xs); line-height: 1.5; }
+.term-lib-events { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.term-lib-events li { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 2px 10px; padding: 4px 0; border-top: 1px solid var(--t-line); font-size: var(--type-2xs); }
+.term-lib-date { color: var(--t-faint); }
+.term-lib-name { color: var(--t-text); }
+.term-lib-desc { grid-column: 2 / 4; color: var(--t-dim); line-height: 1.45; }
+.term-lib-src { grid-row: 1; grid-column: 3; color: var(--t-cyan); }
+.term-conf.thin, .term-conf.too-few { color: var(--t-faint); }
+.term-conf.solid { color: var(--t-text); }
+@container panel (max-width: 760px) {
+  .term-lib-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(140px, 34%) minmax(0, 1fr); }
+  .term-lib-kinds { border-right: 0; border-bottom: 1px solid var(--t-line); }
+}
+.term-lib-detail .term-table-wrap { flex: none; overflow-x: auto; overflow-y: visible; }

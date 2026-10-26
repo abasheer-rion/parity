@@ -40,13 +40,17 @@ Each catalog event gets a similarity score between 0 and 1 against the scenario:
 
 | Part | Points | Rule |
 | --- | --- | --- |
-| Kind | 3 | Same kind of event; 1.5 for the same family (war, strike and terror attack are one family; oil shock, sanctions and trade war another) |
+| Kind | 3 | Same kind of event; 1.5 for the same family (war, strike and terror attack are one family; oil shock, sanctions, trade war and supply chain shock another; financial crisis, sovereign default, currency crisis, bank run, rate shock and central bank surprise a third; crypto crash its own) |
 | Region | 2 | Any shared region; 0.5 if either side is "global" |
 | Countries | up to 2 | 1 per shared country |
 | Severity | 1 | Falls by a quarter per step of difference |
 | Commodities | 1 | Any shared exposure, such as oil |
 
 Only parts the scenario fills in count, and the score is points over the maximum possible. Events from another family are left out entirely. By default the page keeps events scoring 0.35 or more, at most 12, closest first. For each market and horizon it then reports the median, the middle half (25th to 75th percentile), the full range, the share of events where the market rose, the median size against normal, and the count. The weights are a judgement call, not fitted, and they live in the exported JSON so the page and the command line agree.
+
+## The library
+
+`parity scenario export` also writes a `library` block ([DEC-0066](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)): for every kind of event, and every family, each market and horizon gets the count, median, middle half, share up and a 90% range for the median. The range is distribution free: with n moves sorted, the median lies between the j-th and k-th smallest with at least 90% probability, where j and k are the narrowest symmetric pair the binomial (n, 1/2) allows. Below 5 events no pair reaches 90%, and the page says "too few". The direction "held" only when the whole range sits on one side of zero. Counts get a word: solid from 20 events, fair from 10, thin from 5. The Terminal shows it as `LIB`.
 
 ## The economics behind it
 
@@ -93,5 +97,6 @@ Add a file to `catalog/events/` with the same keys as the others, using only the
 - [INT-0002: Two products, a research and simulation platform and a public trading app](../intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md)
 - [DEC-0016: Sim World 2, a world map, scenarios on it and simulated paths](../decisions/0016-sim-world-2-a-world-map-scenarios-on-it-and-simulated-paths.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](../decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 <!-- backlinks:end -->

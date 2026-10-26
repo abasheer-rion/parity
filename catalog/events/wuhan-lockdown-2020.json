@@ -1,0 +1,26 @@
+{
+  "id": "wuhan-lockdown-2020",
+  "name": "China locks down Wuhan",
+  "date": "2020-01-23",
+  "type": "pandemic",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil",
+    "metals"
+  ],
+  "description": "China closed off Wuhan, a city of 11 million, to contain a new coronavirus; the first big lockdown of the Covid pandemic.",
+  "sources": [
+    {
+      "title": "COVID-19 pandemic in mainland China",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic_in_mainland_China"
+    }
+  ]
+}

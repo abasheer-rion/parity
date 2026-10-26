@@ -36,8 +36,9 @@ ROOT = Path(__file__).resolve().parents[3]
 EVENTS_DIR = ROOT / "catalog" / "events"
 
 TYPES = ["war", "military_strike", "terrorist_attack", "oil_supply_shock", "sanctions",
-         "trade_war", "pandemic", "financial_crisis", "central_bank_surprise", "election",
-         "political_crisis", "natural_disaster"]
+         "trade_war", "supply_chain_shock", "pandemic", "financial_crisis", "sovereign_default",
+         "currency_crisis", "bank_run", "rate_shock", "central_bank_surprise", "crypto_crash",
+         "election", "political_crisis", "natural_disaster"]
 REGIONS = ["middle_east", "europe", "russia_cis", "east_asia", "south_asia", "north_america",
            "latin_america", "africa", "oceania", "global"]
 COMMODITIES = ["oil", "gas", "metals", "grains"]
@@ -46,8 +47,11 @@ COMMODITIES = ["oil", "gas", "metals", "grains"]
 FAMILIES = {
     "war": "conflict", "military_strike": "conflict", "terrorist_attack": "conflict",
     "oil_supply_shock": "supply", "sanctions": "supply", "trade_war": "supply",
+    "supply_chain_shock": "supply",
     "pandemic": "pandemic", "natural_disaster": "disaster",
     "financial_crisis": "financial", "central_bank_surprise": "financial",
+    "sovereign_default": "financial", "currency_crisis": "financial", "bank_run": "financial",
+    "rate_shock": "financial", "crypto_crash": "crypto",
     "election": "political", "political_crisis": "political",
 }
 WEIGHTS = {"type": 3.0, "family": 1.5, "region": 2.0, "global_region": 0.5,
@@ -287,6 +291,89 @@ def aggregate(analogues: list[dict], assets: list[str] | None = None) -> dict:
     return out
 
 
+# ---------------------------------------------------------------- library
+
+# How many past events a summary rests on, in words. The thresholds are a plain reading
+# aid, not a statistical test; the page always shows the count itself.
+CONFIDENCE = [(20, "solid"), (10, "fair"), (5, "thin"), (0, "too few")]
+CI_LEVEL = 0.90
+
+
+def median_interval(values: list[float], level: float = CI_LEVEL) -> tuple[float, float] | None:
+    """A distribution-free interval for the median (order statistics, binomial).
+
+    With n sorted values, the median lies between the j-th and k-th of them with at least
+    `level` probability, where j and k are the narrowest symmetric pair the binomial
+    (n, 1/2) allows. Returns None when n is too small for any pair to reach the level
+    (fewer than 5 values at 90%), which the page shows as "too few to say".
+    """
+    v = sorted(x for x in values if x is not None and math.isfinite(x))
+    n = len(v)
+    if n < 2:
+        return None
+    pmf = [math.comb(n, i) / 2 ** n for i in range(n + 1)]
+    for j in range(n // 2, -1, -1):  # widen until the coverage is reached
+        k = n - 1 - j
+        cover = sum(pmf[j + 1:k + 1])
+        if j < k and cover >= level:
+            return v[j], v[k]
+    return None
+
+
+def confidence_word(n: int) -> str:
+    return next(word for floor, word in CONFIDENCE if n >= floor)
+
+
+def library(studied: list[dict]) -> dict:
+    """What markets did after every kind of event, from the event study.
+
+    For each type, and for each type's family, every asset and horizon gets the count,
+    median, middle half, share up, a 90% interval for the median and a word for how many
+    events it rests on. The direction "held" when the whole interval is on one side of
+    zero; otherwise past cases were mixed.
+    """
+    def block(evs: list[dict]) -> dict:
+        out: dict[str, dict] = {}
+        for a in ASSETS:
+            per = {}
+            for h, _, _ in HORIZONS:
+                vals = [ev["reactions"][a.key][h]["change"] for ev in evs
+                        if h in ev.get("reactions", {}).get(a.key, {})]
+                s = summarise(vals)
+                if not s:
+                    continue
+                ci = median_interval(vals)
+                held = None if ci is None else ("up" if ci[0] > 0 else "down" if ci[1] < 0
+                                                else "mixed")
+                per[h] = {"n": s["n"], "median": round(s["median"], 3),
+                          "q25": round(s["q25"], 3), "q75": round(s["q75"], 3),
+                          "up": round(s["up"], 3),
+                          "ci": None if ci is None else [round(ci[0], 3), round(ci[1], 3)],
+                          "held": held, "confidence": confidence_word(s["n"])}
+            if per:
+                out[a.key] = per
+        return out
+
+    def entry(evs: list[dict]) -> dict:
+        regions: dict[str, int] = {}
+        for ev in evs:
+            for r in ev["regions"]:
+                regions[r] = regions.get(r, 0) + 1
+        dates = sorted(ev["date"] for ev in evs)
+        return {"count": len(evs), "first": dates[0] if dates else None,
+                "last": dates[-1] if dates else None, "regions": regions,
+                "events": [ev["id"] for ev in sorted(evs, key=lambda e: e["date"])],
+                "assets": block(evs)}
+
+    by_type = {t: entry([ev for ev in studied if ev["type"] == t]) for t in TYPES}
+    families = sorted(set(FAMILIES.values()))
+    by_family = {f: entry([ev for ev in studied if FAMILIES.get(ev["type"]) == f])
+                 for f in families}
+    return {"level": CI_LEVEL, "confidence": [{"min": m, "word": w} for m, w in CONFIDENCE],
+            "types": {t: e for t, e in by_type.items() if e["count"]},
+            "families": {f: e for f, e in by_family.items() if e["count"]}}
+
+
 # ---------------------------------------------------------------- export
 
 def export(events: list[dict], prices: dict[str, pd.Series]) -> dict:
@@ -307,6 +394,7 @@ def export(events: list[dict], prices: dict[str, pd.Series]) -> dict:
         "matcher": {"weights": WEIGHTS, "families": FAMILIES, "require_family": True,
                     "min_score": MIN_SCORE, "max_analogues": MAX_ANALOGUES},
         "events": studied,
+        "library": library(studied),
     }
 
 

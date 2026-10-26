@@ -1,0 +1,23 @@
+{
+  "id": "turkey-crisis-2001",
+  "name": "Turkey's banking and currency crisis",
+  "date": "2001-02-21",
+  "type": "currency_crisis",
+  "regions": [
+    "europe",
+    "middle_east"
+  ],
+  "actors": [
+    "turkey"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "A row between Turkey's president and prime minister set off a run on the lira; overnight rates jumped into the thousands of percent and the lira was floated the next day.",
+  "sources": [
+    {
+      "title": "2001 Turkish economic crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2001_Turkish_economic_crisis"
+    }
+  ]
+}

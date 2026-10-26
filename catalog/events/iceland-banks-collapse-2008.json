@@ -1,0 +1,23 @@
+{
+  "id": "iceland-banks-collapse-2008",
+  "name": "Iceland's banks collapse",
+  "date": "2008-10-06",
+  "type": "bank_run",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "iceland",
+    "uk"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Iceland passed an emergency law to take over its three big banks, whose debts were many times the size of the economy; the krona collapsed.",
+  "sources": [
+    {
+      "title": "2008-2011 Icelandic financial crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2008%E2%80%932011_Icelandic_financial_crisis"
+    }
+  ]
+}

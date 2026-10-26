@@ -1,0 +1,22 @@
+{
+  "id": "brazil-election-2002",
+  "name": "Lula wins Brazil's presidency",
+  "date": "2002-10-28",
+  "type": "election",
+  "regions": [
+    "latin_america"
+  ],
+  "actors": [
+    "brazil"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Lula da Silva won the run off on 27 October after a year in which fears of his policies drove the real to record lows.",
+  "sources": [
+    {
+      "title": "2002 Brazilian general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2002_Brazilian_general_election"
+    }
+  ]
+}

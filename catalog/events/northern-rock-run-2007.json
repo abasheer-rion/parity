@@ -1,0 +1,22 @@
+{
+  "id": "northern-rock-run-2007",
+  "name": "Run on Northern Rock",
+  "date": "2007-09-14",
+  "type": "bank_run",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Savers queued outside Northern Rock branches after it asked the Bank of England for emergency support, the first run on a British bank in over a century.",
+  "sources": [
+    {
+      "title": "Nationalisation of Northern Rock",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Nationalisation_of_Northern_Rock"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import { HelpPanel, KpiPanel, NewsPanel } from "./Info";
 import { HeatPanel, MonitorPanel, MoversPanel } from "./Monitor";
 import { BotsPanel, SimPanel } from "./Sim";
 import { LiveMini } from "../../components/LiveMini";
+import { LibraryPanel } from "./Library";
 
 export function PanelBody({ leaf }: { leaf: Leaf }) {
   switch (leaf.fn) {
@@ -25,6 +26,7 @@ export function PanelBody({ leaf }: { leaf: Leaf }) {
     case "COT": return <CotPanel />;
     case "ECO": return <EcoPanel />;
     case "BOTS": return <BotsPanel />;
+    case "LIB": return <LibraryPanel />;
     case "LIVE": return <div className="term-live"><LiveMini height={200} /></div>;
     case "WMAP": case "CORR": case "SCEN": case "PATH": case "STRS": case "CRIS": case "RACE": case "CMDY": case "EQTY":
       return <SimPanel fn={leaf.fn} />;
