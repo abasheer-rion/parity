@@ -2,6 +2,7 @@ import { Title } from "../components/Shell";
 import { Card, Pass } from "../ui/layout";
 import { ledger, registrations } from "../lib/catalog";
 import { num, pct, REPO_URL } from "../lib/format";
+import { TableScroll } from "../ui";
 
 export function LedgerPage() {
   const linked = ledger.map((e, i) => ({ e, chained: i === 0 ? e.prev === "0".repeat(64) : e.prev === ledger[i - 1].hash }));
@@ -27,7 +28,7 @@ export function LedgerPage() {
               <a className="small" href={`${REPO_URL}/releases/tag/${e.run_id}`} target="_blank" rel="noreferrer">release</a>
             </div>
             <div className="mono small muted">hash {e.hash} · prev {e.prev.slice(0, 16)}...</div>
-            <div className="table-wrap">
+            <TableScroll>
               <table>
                 <thead><tr><th>Strategy</th><th>Sharpe</th><th>CAGR</th><th>Max drawdown</th><th>Deflated Sharpe</th><th>Tests</th><th>Meets plan</th></tr></thead>
                 <tbody>
@@ -40,14 +41,14 @@ export function LedgerPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </TableScroll>
           </div>
         ))}
         {!ledger.length && <p className="muted">No official runs yet.</p>}
       </Card>
 
       <Card title={`${registrations.length} registered plans`} help="Frozen before running. A changed plan becomes a new registration; the old one stays.">
-        <div className="table-wrap">
+        <TableScroll>
           <table>
             <thead><tr><th>Plan</th><th>Title</th><th>Registered</th><th>Hypotheses</th><th>Prior trials</th><th>Runs</th></tr></thead>
             <tbody>
@@ -63,7 +64,7 @@ export function LedgerPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );

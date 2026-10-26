@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { HeroChart, Sparkline, type RangeKey } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Button, ButtonGroup, IconButton } from "../ui";
+import { Button, ButtonGroup, IconButton, TableScroll } from "../ui";
 import { colorMap } from "../lib/colors";
 import { useDocIndex } from "../lib/docs";
 import { num, pct } from "../lib/format";
@@ -163,12 +163,12 @@ function GraphTable({ view, setView }: { view: "graph" | "table"; setView: (v: "
 function YearTable({ run }: { run: StrategyRun }) {
   const ys = Object.keys(run.yearly).sort().reverse();
   return (
-    <div className="table-wrap tall">
+    <TableScroll className="tall">
       <table className="mtable">
         <thead><tr><th>Year</th><th>Return</th></tr></thead>
         <tbody>{ys.map((y) => <tr key={y}><td>{y}</td><td className={run.yearly[y] >= 0 ? "good" : "bad"}>{pct(run.yearly[y])}</td></tr>)}</tbody>
       </table>
-    </div>
+    </TableScroll>
   );
 }
 

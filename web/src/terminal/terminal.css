@@ -230,7 +230,7 @@
 @container panel (max-width: 580px) { .ptm .c-vol, .ptm .c-ytd, .ptm .c-pct { display: none; } }
 @container panel (max-width: 440px) { .ptm .c-m1 { display: none; } }
 /* Very narrow panels keep the name and the first numbers whole rather than cut the last column. */
-@container panel (max-width: 380px) { .ptm .c-n2 { display: none; } }
+@container panel (max-width: 380px) { .ptm .c-n2 { display: none; } .ptm .term-name, .ptm .term-name.strong { max-width: 16ch; } }
 @container panel (max-width: 300px) { .ptm .c-n3 { display: none; } }
 
 /* chart */

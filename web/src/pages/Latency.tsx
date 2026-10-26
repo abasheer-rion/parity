@@ -11,6 +11,7 @@ import {
   bySource, bytes, dur, groupRum, isLiveEndpoint, liveCounts, liveFeeds, LIVE_HOPS, loadFreshness, loadRum, loadSteps, ms, pct, percentile, status, stepStats, ageHours,
   type FreshRow, type RumRow, type Status, type StepRow,
 } from "../lib/latency";
+import { TableScroll } from "../ui";
 
 type Load<T> = { state: "loading" } | { state: "ok"; data: T } | { state: "error"; message: string };
 
@@ -104,14 +105,14 @@ function Hops({ fresh, runs, rum, now }: { fresh: Load<FreshRow[]>; runs: Load<S
   }, [fresh, runs, rum, now]);
   return (
     <Card title="Every hop, p50 and p95" help="Server hops over the last 7 days of jobs and the current state of every source; browser hops over the last 7 days of sampled page loads.">
-      <div className="table-wrap" style={{ minHeight: 11 * 30 }}>
+      <TableScroll style={{ minHeight: 11 * 30 }}>
         <table className="lat-table">
           <thead><tr><th>Hop</th><th>What it measures</th><th className="num">p50</th><th className="num">p95</th><th className="num">n</th></tr></thead>
           <tbody>{rows.map((r) => (
             <tr key={r.hop}><td>{r.hop}</td><td className="muted wrap">{r.what}</td><td className="num">{r.p50}</td><td className="num">{r.p95}</td><td className="num">{r.n.toLocaleString("en-US")}</td></tr>
           ))}</tbody>
         </table>
-      </div>
+      </TableScroll>
     </Card>
   );
 }
@@ -127,7 +128,7 @@ function Sources({ fresh, now }: { fresh: Load<FreshRow[]>; now: number }) {
           .sort((x, y) => (y.a ?? 0) / y.r.cadence_hours - (x.a ?? 0) / x.r.cadence_hours).slice(0, 25);
         return (
           <>
-            <div className="table-wrap">
+            <TableScroll>
               <table className="lat-table">
                 <thead><tr><th>Source</th><th className="num">Series</th><th className="num">Late</th><th className="num">Stale</th><th>Worst</th><th className="num">Its age</th><th className="num">Cadence</th><th>Last fetch</th><th>Last publish</th></tr></thead>
                 <tbody>{groups.map((g) => (
@@ -144,9 +145,9 @@ function Sources({ fresh, now }: { fresh: Load<FreshRow[]>; now: number }) {
                   </tr>
                 ))}</tbody>
               </table>
-            </div>
+            </TableScroll>
             {bad.length > 0 && (
-              <div className="table-wrap">
+              <TableScroll>
                 <table className="lat-table">
                   <caption className="small muted">Late and stale series, worst first ({bad.length} shown)</caption>
                   <thead><tr><th>Series</th><th>What</th><th className="num">Age</th><th className="num">Cadence</th><th>Measured from</th></tr></thead>
@@ -160,7 +161,7 @@ function Sources({ fresh, now }: { fresh: Load<FreshRow[]>; now: number }) {
                     </tr>
                   ))}</tbody>
                 </table>
-              </div>
+              </TableScroll>
             )}
           </>
         );
@@ -197,7 +198,7 @@ function Pipelines({ runs, steps }: { runs: Load<StepRow[]>; steps: Load<StepRow
           for (const r of rows) if (r.step === "_run") byPipe.set(r.pipeline, [...(byPipe.get(r.pipeline) ?? []), r]);
           const list = [...byPipe.entries()].sort((a, b) => a[0].localeCompare(b[0]));
           return (
-            <div className="table-wrap">
+            <TableScroll>
               <table className="lat-table">
                 <thead><tr><th>Job</th><th className="num">Runs</th><th className="num">p50</th><th className="num">p95</th><th className="num">Failed</th><th>Each run</th></tr></thead>
                 <tbody>{list.map(([p, rs]) => {
@@ -213,7 +214,7 @@ function Pipelines({ runs, steps }: { runs: Load<StepRow[]>; steps: Load<StepRow
                   );
                 })}</tbody>
               </table>
-            </div>
+            </TableScroll>
           );
         }}</Pending>
       </Card>
@@ -223,14 +224,14 @@ function Pipelines({ runs, steps }: { runs: Load<StepRow[]>; steps: Load<StepRow
           const retries = rows.filter((r) => r.pipeline === "retry" || r.step.startsWith("retry ") || r.step === "start news refresh").slice(0, 10);
           return (
             <>
-              <div className="table-wrap">
+              <TableScroll>
                 <table className="lat-table">
                   <thead><tr><th>Job</th><th>Step</th><th className="num">Runs</th><th className="num">p50</th><th className="num">p95</th><th className="num">Failed</th></tr></thead>
                   <tbody>{stats.map((s) => (
                     <tr key={`${s.pipeline}/${s.step}`}><td>{NAMES[s.pipeline] ?? s.pipeline}</td><td className="wrap">{s.step}</td><td className="num">{s.n}</td><td className="num">{dur(s.p50)}</td><td className="num">{dur(s.p95)}</td><td className="num">{s.failed || ""}</td></tr>
                   ))}</tbody>
                 </table>
-              </div>
+              </TableScroll>
               <p className="small muted">
                 {retries.length
                   ? `Retries in the last 48 hours: ${retries.map((r) => `${r.step} ${r.ok ? "fixed it" : "did not fix it"} (${dur(r.seconds)})`).join("; ")}.`
@@ -264,7 +265,7 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
         const lags = groupRum(rows.filter((r) => !isLiveEndpoint(r.endpoint)), "lag", (r) => r.endpoint);
         return (
           <>
-            <div className="table-wrap">
+            <TableScroll>
               <table className="lat-table">
                 <thead><tr><th>App</th><th className="num">Loads</th><th className="num">To data p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Request p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Cached</th><th className="num">LCP p75</th><th className="num">INP p75</th><th className="num">CLS p75</th></tr></thead>
                 <tbody>{apps.map((a) => {
@@ -281,8 +282,8 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
                   );
                 })}</tbody>
               </table>
-            </div>
-            <div className="table-wrap">
+            </TableScroll>
+            <TableScroll label="By region (continent)">
               <table className="lat-table">
                 <caption className="small muted">By region (continent)</caption>
                 <thead><tr><th>Region</th><th className="num">Loads</th><th className="num">To data p50</th><th className="num">p95</th><th className="num">Request p50</th><th className="num">p95</th></tr></thead>
@@ -290,8 +291,8 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
                   <tr key={g.key}><td>{g.key === "XX" ? "unknown" : g.key}</td><td className="num">{g.n}</td><td className="num">{p(g.bins, 0.5)}</td><td className="num">{p(g.bins, 0.95)}</td><td className="num">{p(regionFetch.get(g.key)?.bins, 0.5)}</td><td className="num">{p(regionFetch.get(g.key)?.bins, 0.95)}</td></tr>
                 ))}</tbody>
               </table>
-            </div>
-            <div className="table-wrap">
+            </TableScroll>
+            <TableScroll label="Slowest data requests, by p95">
               <table className="lat-table">
                 <caption className="small muted">Slowest data requests, by p95</caption>
                 <thead><tr><th>Request</th><th className="num">n</th><th className="num">p50</th><th className="num">p95</th><th className="num">Size p50</th><th className="num">Cached</th></tr></thead>
@@ -299,7 +300,7 @@ function Client({ rum }: { rum: Load<RumRow[]> }) {
                   <tr key={g.key}><td><code>{g.key}</code></td><td className="num">{g.n}</td><td className="num">{p(g.bins, 0.5)}</td><td className="num">{ms(g.p95)}</td><td className="num">{p(sizes.get(g.key)?.bins, 0.5, bytes)}</td><td className="num">{g.n ? `${Math.round((100 * g.hits) / g.n)}%` : ""}</td></tr>
                 ))}</tbody>
               </table>
-            </div>
+            </TableScroll>
             {lags.length > 0 && (
               <p className="small muted">Timed refreshes, how late they ran (p95): {lags.map((g) => `${g.key} ${ms(percentile(g.bins, 0.95))}`).join("; ")}.</p>
             )}
@@ -336,7 +337,7 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
   const edge = useEdgeStatus();
   return (
     <Card title="Live feeds, last 7 days" help="Each streamed price carries the exchange's time, our edge's receive and send times, and the browser's receive and draw times, corrected for the browser's clock. Browsers send a small random sample every 30 seconds. The edge's own line state refreshes every 15 seconds.">
-      <div className="table-wrap" style={{ minHeight: 70 }}>
+      <TableScroll style={{ minHeight: 70 }} label="Our edge now">
         <table className="lat-table">
           <caption className="small muted">Our edge now</caption>
           <thead><tr><th>Source</th><th>Line</th><th className="num">Viewers</th><th className="num">Exchange to edge p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th></tr></thead>
@@ -350,14 +351,14 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
             );
           })}</tbody>
         </table>
-      </div>
+      </TableScroll>
       <div style={{ minHeight: 220 }}><Pending v={rum} rows={6}>{(rows) => {
         const feeds = liveFeeds(rows);
         const counts = liveCounts(rows);
         // Fixed height either way, so the section never moves the page when samples arrive.
         if (!feeds.length) return <p className="muted small">No live samples from browsers yet.</p>;
         return (
-          <div className="table-wrap">
+          <TableScroll label="Real browsers, per hop">
             <table className="lat-table">
               <caption className="small muted">Real browsers, per hop</caption>
               <thead><tr><th>Source</th><th>Hop</th><th className="num">Samples</th><th className="num">p50</th><th className="num">p95</th><th className="num">p99</th><th className="num">Reconnects</th><th className="num">Lost updates</th></tr></thead>
@@ -367,7 +368,7 @@ function LiveFeeds({ rum }: { rum: Load<RumRow[]> }) {
                 return <tr key={`${f.src}/${h}`}><td>{f.src}</td><td>{HOP_NAME[h]}</td><td className="num">{g.n}</td><td className="num">{ms(percentile(g.bins, 0.5))}</td><td className="num">{ms(percentile(g.bins, 0.95))}</td><td className="num">{ms(percentile(g.bins, 0.99))}</td><td className="num">{c ? c.reconnect : ""}</td><td className="num">{c ? c.lost : ""}</td></tr>;
               }))}</tbody>
             </table>
-          </div>
+          </TableScroll>
         );
       }}</Pending></div>
     </Card>

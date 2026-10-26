@@ -748,7 +748,9 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .rq h1 { font-size: var(--type-4xl); line-height: 1.35; margin: 6px 0 10px; max-width: 820px; }
 .rq .answer { margin: 0 0 14px; color: var(--text-2); }
 .verdict-bar { display: flex; gap: 3px; border-radius: 8px; overflow: hidden; font-size: var(--type-xs); }
-.verdict-bar span { padding: 6px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+/* Each part is at least as wide as its label and count, so a small count is never cut; the bar wraps on a phone. */
+.verdict-bar { flex-wrap: wrap; }
+.verdict-bar span { flex: 0 0 auto; padding: 6px 8px; white-space: nowrap; }
 .seg-passed { background: color-mix(in srgb, var(--good) 30%, transparent); }
 .seg-promising { background: color-mix(in srgb, var(--color-warning) 26%, transparent); }
 .seg-not-proven { background: color-mix(in srgb, var(--bad) 24%, transparent); }

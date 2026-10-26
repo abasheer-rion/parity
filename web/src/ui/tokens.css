@@ -91,6 +91,9 @@
   --color-border: color-mix(in srgb, var(--palette-white) 8%, transparent);
   --color-border-strong: color-mix(in srgb, var(--palette-white) 14%, transparent);
   --color-border-max: color-mix(in srgb, var(--palette-white) 22%, transparent);
+  /* The edge of a field, checkbox, radio, switch or slider track: 3:1 on every surface,
+     including glass over the glow, so a control can be found without its label (WCAG 1.4.11). */
+  --color-border-control: var(--palette-grey-500);
   --color-hover: color-mix(in srgb, var(--palette-white) 5%, transparent);
   --color-pressed: color-mix(in srgb, var(--palette-white) 9%, transparent);
   --color-fill: color-mix(in srgb, var(--palette-white) 7%, transparent);

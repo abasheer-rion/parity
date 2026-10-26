@@ -164,7 +164,7 @@
 .lb-table tr.click { cursor: pointer; }
 .lb-table tr.on td { background: var(--color-selected); }
 .lb-table td.lb-wrap { white-space: normal; min-width: 240px; max-width: 420px; padding-top: 4px; padding-bottom: 4px; line-height: 1.35; }
-.lb-rowbtn { border: 0; background: transparent; color: inherit; font: inherit; padding: 0; cursor: pointer; }
+.lb-rowbtn { border: 0; background: transparent; color: inherit; font: inherit; padding: 0 4px; min-width: 24px; min-height: 24px; cursor: pointer; }
 .lb-heat td { font-size: var(--l-fs-s); color: var(--l-text); text-align: center; min-width: 34px; }
 .lb-heat th.lb-rot { height: 120px; vertical-align: bottom; padding: 0 0 6px; }
 .lb-heat th.lb-rot > span { display: inline-block; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; font-weight: 500; }

@@ -1,6 +1,6 @@
 // Smoke test for every route of every Parity app, run in CI (.github/workflows/ci.yml).
 // It starts the dev server with sign-in skipped and the small results fixture in
-// tests/fixtures/smoke, opens each route at 1440x900 and 390x844, and fails on:
+// tests/fixtures/smoke, opens each route at 1280x800, 1440x900, 1920x1080 and 390x844, and fails on:
 //   - an uncaught exception or a console error or warning
 //   - a failed request or an HTTP error, except a missing data file under /local/
 //     (CI has no news, markets or terminal exports; pages must say so calmly)
@@ -42,7 +42,14 @@ if (!BASE) {
 
 // ---------------------------------------------------------------- the checks
 
-const SIZES = [{ name: "desktop", width: 1440, height: 900 }, { name: "phone", width: 390, height: 844 }];
+// The four window sizes the layout check must pass at (REF-0009): small laptop, laptop,
+// desktop and phone. SMOKE_SIZES=desktop,phone runs a subset.
+const SIZES = [
+  { name: "laptop", width: 1280, height: 800 },
+  { name: "desktop", width: 1440, height: 900 },
+  { name: "wide", width: 1920, height: 1080 },
+  { name: "phone", width: 390, height: 844 },
+].filter((s) => !process.env.SMOKE_SIZES || process.env.SMOKE_SIZES.split(",").includes(s.name));
 const IGNORE = [/Download the React DevTools/, /^\[vite\]/];
 const missingData = (url) => new URL(url).pathname.startsWith("/local/");
 const problems = [];

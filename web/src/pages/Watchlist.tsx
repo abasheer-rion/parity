@@ -1,7 +1,7 @@
 // The strategies you follow: anything bookmarked from a strategy page.
 import { Title } from "../components/Shell";
 import { Sparkline } from "../ui/charts";
-import { Badge, EmptyState, TextButton } from "../ui";
+import { Badge, EmptyState, TableScroll, TextButton } from "../ui";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
@@ -24,7 +24,7 @@ export function Watchlist({ report }: { report: Report }) {
           Open any strategy and press the bookmark button beside its name.
         </EmptyState>
       ) : (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="mtable">
             <thead><tr><th className="left">Strategy</th><th className="left">Since 1999</th><th>Per year</th><th>Sharpe</th><th>Worst fall</th><th className="left">Verdict</th><th /></tr></thead>
             <tbody>
@@ -44,7 +44,7 @@ export function Watchlist({ report }: { report: Report }) {
               })}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       )}
     </>
   );

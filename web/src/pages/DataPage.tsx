@@ -2,7 +2,7 @@ import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
 import { date } from "../lib/format";
 import type { Report } from "../lib/types";
-import { Num } from "../ui";
+import { Num, TableScroll } from "../ui";
 
 // A daily series more than this many days behind the fetch date is flagged.
 const STALE_DAILY = 7;
@@ -34,16 +34,16 @@ export function DataPage({ report }: { report: Report }) {
       </div>
       {report.source_checks && report.source_checks.length > 0 && (
         <Card title="Sources checked against each other" help="Pairs of series that should agree. A drop in correlation or a jump in the gap means one source has changed or broken.">
-          <div className="table-wrap"><table>
+          <TableScroll><table>
             <thead><tr><th>Check</th><th>Series</th><th>Since</th><th>Daily correlation</th><th>Gap in yearly return</th></tr></thead>
             <tbody>{report.source_checks.map((c) => (
               <tr key={c.a + c.b}><td className="wrap">{c.label}</td><td><code>{c.a}</code> vs <code>{c.b}</code></td><td>{c.from}</td><td>{c.daily_correlation.toFixed(3)}</td><td>{(c.annual_return_gap * 100).toFixed(2)}%</td></tr>
             ))}</tbody>
-          </table></div>
+          </table></TableScroll>
         </Card>
       )}
       <Card title={problems.length ? `${problems.length} series need attention` : "All series are current"}>
-        <div className="table-wrap">
+        <TableScroll>
           <table>
             <thead>
               <tr><th>Key</th><th>Source</th><th>Code</th><th>First</th><th>Last</th><th>Days behind</th><th>Rows</th><th>Status</th></tr>
@@ -68,7 +68,7 @@ export function DataPage({ report }: { report: Report }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );
