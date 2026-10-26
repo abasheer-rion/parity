@@ -25,6 +25,7 @@ declare const WebSocketPair: WebSocketPairCtor;
 interface Env {
   LIVE?: DurableObjectNamespace; VENDOR?: string; VENDOR_KEY?: string; PARITY_CONTACT?: string; LIVE_ALLOW?: string; LIVE_DENY?: string;
   ALPACA_KEY_ID?: string; ALPACA_SECRET_KEY?: string; ALPACA_FEED?: string; FINNHUB_TOKEN?: string;
+  COINGECKO_API_KEY?: string; COINGECKO_PRO?: string;
 }
 interface Context { request: Request; env: Env; params: { path?: string[] }; waitUntil: (p: Promise<unknown>) => void }
 
@@ -177,7 +178,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
         try { return json(request, 200, await universe(env, true), 3600); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
       }, true);
     }
-    return cached(ctx, "pub/universe/v3", 86_400, async () => {
+    return cached(ctx, "pub/universe/v4", 86_400, async () => {
       try { return json(request, 200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
     });
   }

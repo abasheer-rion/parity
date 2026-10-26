@@ -21,8 +21,8 @@ interface Prefs { venue: string; kind: "all" | Kind; sort: SortKey; dir: 1 | -1 
 
 const ROW = 26;
 const OVERSCAN = 8;
-const PUBLIC = ["coingecko"];
-const TEAM_ORDER = ["hyperliquid", "kraken", "coinbase", "gemini", "binanceus", "alpaca", "coingecko"];
+const PUBLIC = ["onchain", "coingecko"];
+const TEAM_ORDER = ["onchain", "hyperliquid", "kraken", "coinbase", "gemini", "binanceus", "alpaca", "coingecko"];
 
 const compact = (v: number | null) => {
   if (v == null || !Number.isFinite(v)) return "";
@@ -42,7 +42,7 @@ function Spark({ pts }: { pts: number[] }) {
 
 export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
   const team = useTeam();
-  const sources = useMemo(() => (team?.team ? TEAM_ORDER.filter((s) => s === "coingecko" || team.sources.includes(s)) : PUBLIC), [team]);
+  const sources = useMemo(() => (team?.team ? TEAM_ORDER.filter((s) => PUBLIC.includes(s) || team.sources.includes(s)) : PUBLIC), [team]);
   const [prefs, setPrefsState] = useState<Prefs>(() => readPref("markets", { venue: "all", kind: "all", sort: "vol", dir: -1 } as Prefs));
   const setPrefs = useCallback((p: Partial<Prefs>) => setPrefsState((o) => { const n = { ...o, ...p }; writePref("markets", n); return n; }), []);
   const [q, setQ] = useState("");

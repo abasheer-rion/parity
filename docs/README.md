@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 60 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 61 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - 2026-10-26 [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - 2026-10-25 [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
-- 2026-10-25 [REF-0023: Motion system](reference/0023-motion-system.md)
-- 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
 
 ## intent
 
@@ -111,6 +111,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0059 | [A Parity page is never black, it shows a loading screen or says what went wrong](decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0060 | [A getting started checklist and first-run tours, and no bank details until a broker partner](decisions/0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0061 | [Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md) | accepted | 2026-10-26 | [ui](TAGS.md#ui) |
+| DEC-0063 | [The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -189,7 +190,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
-| REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
+| REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
 | REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
