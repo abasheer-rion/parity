@@ -72,17 +72,85 @@ jobs:
           name: desktop-web-ci
           path: desktop/build/web
           retention-days: 1
-      # Every route of every app at 1280, 1440, 1920 and 390 wide: no exceptions, console
-      # errors, failed requests, blank pages, NaN in the text, sideways scroll, and no text
-      # that overlaps or is cut off, no number shortened with "..." (scripts/smoke.mjs).
+      # Every route of every app at 1280 and 1920 wide, on the dev server: no exceptions,
+      # console errors, failed requests, blank pages, NaN, sideways scroll, and no text that
+      # overlaps or is cut off (scripts/smoke.mjs). The e2e job below runs the same checks at
+      # 1440 and 390 wide against the built site, so smoke skips those two sizes.
       - run: npx playwright install --with-deps chromium
       - run: npm run smoke
+        env:
+          SMOKE_SIZES: laptop,wide
       # First-run tours and the getting started checklist in a real browser (DEC-0060).
       - run: npm run onboarding
       # WCAG 2.2 AA (DEC-0061): axe on every route at two sizes, a keyboard walk through
       # the UI library with a visible focus ring on every stop, and reduced motion holding
       # still (scripts/a11y.mjs).
       - run: npm run a11y
+
+  # The built site, once, for the e2e shards.
+  e2e-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: e2e-dist
+          path: web/dist
+          retention-days: 1
+
+  # The Playwright suite (web/e2e/README.md) against the built site, split four ways: every
+  # route of every app at desktop and phone size (console errors, failed requests, NaN,
+  # sideways scroll, colliding text), the main flows of each app, and the screenshot
+  # baselines. Supabase and every outside address are stubbed in the browser.
+  e2e:
+    needs: e2e-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - uses: actions/download-artifact@v7
+        with:
+          name: e2e-dist
+          path: web/dist
+      - id: pw
+        run: echo "version=$(node -p 'require("@playwright/test/package.json").version')" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --shard=${{ matrix.shard }}/4
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-report-${{ matrix.shard }}
+          path: |
+            web/playwright-report
+            web/test-results
+          retention-days: 7
 
   # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
   # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations

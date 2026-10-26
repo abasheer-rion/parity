@@ -6,6 +6,8 @@
 //   npm run build && npm run e2e                 everything
 //   npm run e2e -- --project=desktop e2e/trade   one size, one file
 //   npm run e2e:visual:update                    new screenshot baselines (Linux only, see e2e/README.md)
+//
+// Headless only: never --headed, --ui or --debug, and never show-report (it opens a browser).
 import { defineConfig, devices } from "@playwright/test";
 import { BASE } from "./e2e/config";
 
@@ -17,7 +19,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: CI,
   retries: CI ? 1 : 0,
-  workers: CI ? 3 : undefined,
+  workers: CI ? 4 : undefined,
   timeout: 45_000,
   expect: { timeout: 10_000, toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: "disabled", caret: "hide" } },
   reporter: CI ? [["list"], ["github"], ["html", { open: "never", outputFolder: "playwright-report" }]] : [["list"]],
