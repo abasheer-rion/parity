@@ -1,0 +1,63 @@
+# Desktop soak test (REF-0025, desktop/scripts/soak.mjs): 50 launches, 50 window open and
+# close cycles, 50 reloads and 30 minutes on a page with live prices, looking for crashes,
+# processes left behind and memory that keeps growing. On a Mac runner so nothing ever shows
+# on anyone's own screen; the app also runs hidden there (no window shown, no Dock icon).
+# The live prices come from a stand-in feed inside the test, never from an outside source.
+# Runs weekly, by hand, and on pull requests that change the soak test itself.
+name: Desktop soak
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      idle:
+        description: "Seconds on the live page"
+        default: "1800"
+      cycles:
+        description: "Window open and close cycles"
+        default: "50"
+  pull_request:
+    paths: ["desktop/scripts/soak.mjs", "desktop/electron/soak.js", ".github/workflows/soak.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: soak-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  soak:
+    runs-on: macos-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            web/package-lock.json
+            desktop/package-lock.json
+      - name: Build the site with the live feed pointed at the test's stand-in
+        working-directory: web
+        env:
+          VITE_LIVE_ORIGIN: ws://127.0.0.1:4317
+        run: |
+          npm ci
+          npm run build
+          node ../desktop/scripts/prepare-web.mjs
+      - name: Soak
+        working-directory: desktop
+        env:
+          SOAK_PORT: "4317"
+        run: |
+          npm ci
+          npm run soak -- --runs=50 --cycles=${{ inputs.cycles || '50' }} --reloads=50 --idle=${{ inputs.idle || '1800' }}
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: soak-results
+          path: desktop/build/soak
+          retention-days: 30

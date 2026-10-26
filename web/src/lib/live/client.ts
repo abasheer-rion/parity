@@ -83,7 +83,7 @@ export function liveOrigin(loc: Pick<Location, "protocol" | "host" | "hostname">
   return "wss://trade.endyland.com";
 }
 
-class SourceLine {
+export class SourceLine {
   status: FeedStatus;
   private ws: WebSocket | null = null;
   private subs = new Map<string, Set<TickFn>>();
@@ -96,6 +96,7 @@ class SourceLine {
   private statusFns = new Set<(s: FeedStatus) => void>();
   private queue: { t: Tick; recv: number }[] = [];
   private frame = 0;
+  private frameIsTimer = false;
   private clock = new ClockOffset();
   private seq = new Map<string, number>();
   private retry = 0;
@@ -104,6 +105,7 @@ class SourceLine {
   private idle = 0;
 
   constructor(readonly src: string, private reservoir: Reservoir | null) {
+    if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => this.onHidden());
     this.status = { src, feed: null, line: "closed", upstream: "connecting", last: null, lastTe: null, offset: 0, rtt: Infinity, gaps: 0, ticks: 0, internal: isInternal(src), p50: null, p95: null, reconnects: 0 };
   }
 
@@ -251,7 +253,7 @@ class SourceLine {
       this.emit({ feed: m.feed, delay: m.delay, internal: !!m.internal || isInternal(this.src) });
     } else if (m.op === "b" || m.op === "x" || m.op === "r") {
       this.other.push({ m, recv: this.clock.now(recvLocal) });
-      if (!this.frame) this.frame = window.requestAnimationFrame(() => this.flush());
+      this.schedule();
     } else if (m.op === "state") {
       this.emit({ upstream: m.up, why: m.why });
     } else if (m.op === "t") {
@@ -264,8 +266,32 @@ class SourceLine {
         this.queue.push({ t, recv });
       }
       if (gaps) this.status.gaps += gaps;
-      if (!this.frame) this.frame = window.requestAnimationFrame(() => this.flush());
+      this.schedule();
     }
+  }
+
+  /**
+   * Hands queued updates over once per frame. A hidden page (a background tab, a minimised or
+   * hidden desktop window) draws no frames, so there it uses a timer instead; before, the
+   * queue grew with every message until the page was looked at again (REF-0025).
+   */
+  private schedule() {
+    if (this.frame) return;
+    if (typeof document !== "undefined" && document.visibilityState === "hidden") {
+      this.frameIsTimer = true;
+      this.frame = window.setTimeout(() => this.flush(), 250);
+    } else {
+      this.frameIsTimer = false;
+      this.frame = window.requestAnimationFrame(() => this.flush());
+    }
+  }
+
+  /** A frame asked for just before the page was hidden would never come: use the timer. */
+  private onHidden() {
+    if (document.visibilityState !== "hidden" || !this.frame || this.frameIsTimer) return;
+    window.cancelAnimationFrame(this.frame);
+    this.frame = 0;
+    this.schedule();
   }
 
   /** Once per frame: hand queued updates to listeners, then note how long the trip took. */

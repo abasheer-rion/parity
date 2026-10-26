@@ -819,7 +819,7 @@ app.whenReady().then(async () => {
   const link = process.argv.find((a) => a.startsWith(`${SCHEME}://`));
   if (link) pending = routes.toAppPath(link, ORIGIN);
 
-  ctx.updates = updater.create({ log, enabled: () => ctx.settings.autoUpdate, parentWindow: () => focusedWindow()?.win || null });
+  ctx.updates = updater.create({ log, enabled: () => !HIDDEN && ctx.settings.autoUpdate, parentWindow: () => focusedWindow()?.win || null });
   tray = new ParityTray(ctx);
   buildMenu();
 

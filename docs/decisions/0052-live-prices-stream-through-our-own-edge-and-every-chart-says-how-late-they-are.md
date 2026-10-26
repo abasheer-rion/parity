@@ -84,5 +84,6 @@ Our own part of the trip, from the edge to the browser, was 4 to 6 ms at the med
 - [DEC-0063: The public sees live prices from our own on-chain feed](0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
+- [REF-0025: Parity capacity and load test results](../reference/0025-parity-capacity-and-load-test-results.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

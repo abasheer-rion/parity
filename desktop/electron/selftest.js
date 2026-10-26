@@ -30,6 +30,8 @@ async function until(fn, ms = 20000, step = 200) {
 
 async function run(api) {
   const scenario = process.env.PARITY_SELFTEST;
+  // The startup soak (scripts/soak.mjs) has its own probe, which quits the normal way.
+  if (/^soak/.test(scenario)) return require("./soak").run(api);
   let failed = 0;
   // Errors nobody caught in the main process (guard.js logs them; here they fail the run).
   const uncaught = [];
