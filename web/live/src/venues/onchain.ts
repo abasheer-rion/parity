@@ -119,14 +119,41 @@ function makePools(): Map<string, Pool> {
 }
 
 interface RpcReply { id: number; result?: string; error?: { message?: string } }
-async function rpcBatch(calls: { method: string; params: unknown[] }[]): Promise<(string | null)[]> {
+type Call = { method: string; params: unknown[] };
+const UA = "parity-live (contact@paritytrading.ai)";
+
+/** One batch over a short-lived WebSocket. The node limits plain HTTP from Cloudflare's shared
+ *  addresses (429) far sooner than it limits sockets, so sockets go first. */
+async function wsBatch(part: (Call & { jsonrpc: string; id: number })[]): Promise<RpcReply[]> {
+  const res = await fetch(RPC, { headers: { Upgrade: "websocket", "User-Agent": UA } });
+  const ws = (res as Response & { webSocket?: WebSocket & { accept(): void } }).webSocket;
+  if (!ws) throw new Error(`base node ${res.status}`);
+  ws.accept();
+  return new Promise<RpcReply[]>((ok, fail) => {
+    const done = (f: () => void) => { clearTimeout(t); try { ws.close(1000); } catch { /* gone */ } f(); };
+    const t = setTimeout(() => done(() => fail(new Error("base node timed out"))), 15_000);
+    ws.addEventListener("message", (e: MessageEvent) => {
+      try { const body = JSON.parse(String(e.data)) as RpcReply[] | RpcReply; done(() => ok(Array.isArray(body) ? body : [body])); } catch (err) { done(() => fail(err as Error)); }
+    });
+    ws.addEventListener("close", () => done(() => fail(new Error("base node closed the line"))));
+    ws.send(JSON.stringify(part));
+  });
+}
+
+async function httpBatch(part: (Call & { jsonrpc: string; id: number })[]): Promise<RpcReply[]> {
+  const res = await fetch(RPC, { method: "POST", headers: { "Content-Type": "application/json", "User-Agent": UA }, body: JSON.stringify(part) });
+  if (!res.ok) throw new Error(`base node ${res.status}`);
+  const body = (await res.json()) as RpcReply[] | RpcReply;
+  return Array.isArray(body) ? body : [body];
+}
+
+async function rpcBatch(calls: Call[]): Promise<(string | null)[]> {
   const out: (string | null)[] = [];
   for (let i = 0; i < calls.length; i += 100) {
     const part = calls.slice(i, i + 100).map((c, j) => ({ jsonrpc: "2.0", id: i + j, ...c }));
-    const res = await fetch(RPC, { method: "POST", headers: { "Content-Type": "application/json", "User-Agent": "parity-live (contact@paritytrading.ai)" }, body: JSON.stringify(part) });
-    if (!res.ok) throw new Error(`base node ${res.status}`);
-    const body = (await res.json()) as RpcReply[] | RpcReply;
-    const byId = new Map((Array.isArray(body) ? body : [body]).map((r) => [r.id, r.result ?? null]));
+    let body: RpcReply[];
+    try { body = await wsBatch(part); } catch (e) { console.log(`[onchain] socket batch failed, trying HTTP: ${String(e)}`); body = await httpBatch(part); }
+    const byId = new Map(body.map((r) => [r.id, r.result ?? null]));
     for (const c of part) out.push(byId.get(c.id) ?? null);
   }
   return out;
@@ -178,8 +205,11 @@ export const onchain: AdapterDef = {
     return {
       id: "onchain", feed: "rt", internal: false, url: WSS, maxUpstream: 60, stallMs: 60_000,
       async prepare() {
-        const mids = await startMids();
-        for (const p of pools.values()) { const m = mids.get(p.addr); if (m != null && Number.isFinite(m)) p.mid = m; }
+        // Starting prices are a head start only: without them, prices fill in from the swaps.
+        try {
+          const mids = await startMids();
+          for (const p of pools.values()) { const m = mids.get(p.addr); if (m != null && Number.isFinite(m)) p.mid = m; }
+        } catch (e) { console.log(`[onchain] starting prices failed: ${String(e)}`); }
         try { dayAgo = await dayAgoMids(); } catch (e) { console.log(`[onchain] day-ago prices failed: ${String(e)}`); }
       },
       // One subscription for every pool's swaps; the fan-out keeps only what viewers want.
