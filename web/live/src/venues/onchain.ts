@@ -6,8 +6,9 @@
 //
 // Times: a swap's exchange time is its block's timestamp. Base seals a block every 2 s, so a
 // swap can wait up to 2 s before it is final; the badge counts from the block.
-// History: the deepest pool's price read at past blocks (one batched request), so bars are
-// built from closes, like CoinGecko's.
+// History: the deepest pool's price read at past blocks, so bars are built from closes, like
+// CoinGecko's. The free node limits Cloudflare's shared addresses, so history is often
+// partial or missing; the chart then fills in from live swaps (DEC-0063).
 import { allowed, BARS, fromPrices, memo, TF_MS, type AdapterDef, type BoardPatch, type Parsed, type Trade } from "../base";
 
 /** A free public Base node (PublicNode). No key, no account. */
@@ -148,13 +149,14 @@ async function httpBatch(part: (Call & { jsonrpc: string; id: number })[]): Prom
 }
 
 /** Calls in batches of 10. Cloudflare's addresses are shared, so the free node often refuses
- *  part of a batch (rate limit); refused calls are retried after a pause, for up to 20 s.
- *  A call still refused then reads as null, and history simply has fewer points. */
-async function rpcBatch(calls: Call[]): Promise<(string | null)[]> {
+ *  part of a batch (rate limit); refused calls are retried after a pause, a few rounds at
+ *  most (a Pages Function may make 50 requests). A call still refused reads as null, and
+ *  history simply has fewer points: the chart fills in from live swaps. */
+async function rpcBatch(calls: Call[], rounds = 3, budgetMs = 12_000): Promise<(string | null)[]> {
   const out: (string | null)[] = calls.map(() => null);
   let todo = calls.map((_, i) => i);
-  const until = Date.now() + 20_000;
-  for (let round = 0; todo.length && Date.now() < until; round += 1) {
+  const until = Date.now() + budgetMs;
+  for (let round = 0; round < rounds && todo.length && Date.now() < until; round += 1) {
     if (round) await new Promise((ok) => setTimeout(ok, 600 * round));
     const left: number[] = [];
     for (let i = 0; i < todo.length; i += 10) {
@@ -162,7 +164,10 @@ async function rpcBatch(calls: Call[]): Promise<(string | null)[]> {
       const part = ids.map((k) => ({ jsonrpc: "2.0", id: k, ...calls[k] }));
       let body: RpcReply[] = [];
       try { body = await wsBatch(part); } catch (e) {
-        try { body = await httpBatch(part); } catch (e2) { console.log(`[onchain] node did not answer: ${String(e)}; ${String(e2)}`); }
+        console.log(`[onchain] node did not answer: ${String(e)}`);
+        // No socket at all (not a refusal): one try over HTTP, then stop this round.
+        if (round === 0 && i === 0) try { body = await httpBatch(part); } catch { /* counted below */ }
+        else { left.push(...todo.slice(i)); break; }
       }
       const byId = new Map(body.map((r) => [r.id, r.result ?? null]));
       for (const k of ids) { const r = byId.get(k); if (r != null) out[k] = r; else left.push(k); }
@@ -277,7 +282,7 @@ export const onchain: AdapterDef = {
     if (!ms || !all.length) return null;
     // The deepest pool, sampled once per bar; the archive reaches back about 30 days.
     const pool = all[0];
-    const n = Math.min(tf === "1d" ? 30 : tf === "4h" ? 90 : tf === "1h" ? 168 : 120, BARS);
+    const n = Math.min(tf === "1d" ? 30 : 60, BARS);
     const head = await headBlock();
     const times = Array.from({ length: n }, (_, i) => Math.floor(head.at / ms) * ms - (n - 1 - i) * ms).concat(head.at);
     const blocks = times.map((t) => Math.max(1, head.n - Math.round((head.at - t) / BLOCK_MS)));
