@@ -10,7 +10,7 @@ def add_parser(sub):
     p = sub.add_parser("registry", help="the data registry: every source and series, its "
                        "rights, status and health (DEC-0064)")
     p.add_argument("action", choices=["sync", "status", "sources", "series", "publish",
-                                      "discover", "enrol", "candidates", "cycle"])
+                                      "discover", "enrol", "candidates", "cycle", "backtest"])
     p.add_argument("--only", nargs="*", default=None, help="discover: only these discoverers")
     p.add_argument("--limit", type=int, default=5, help="enrol: candidates to try")
     p.add_argument("--status", default=None, help="series: only this status")
@@ -48,6 +48,13 @@ def run(args) -> int:
         for r in enrol.run(con, args.limit):
             print(f"{r['id']:<32} {'enrolled' if r['enrolled'] else 'waits'}"
                   f"  {r.get('reason') or ''}")
+        return 0
+    if args.action == "backtest":
+        from . import battery
+
+        for r in battery.run_due(con, args.limit):
+            print(f"{r['id']:<32} " + (f"{r['tests']} tests, {r['new_trials']} new trials"
+                                       if "tests" in r else r["error"]))
         return 0
     if args.action == "cycle":
         from . import cycle
