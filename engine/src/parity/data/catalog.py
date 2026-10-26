@@ -9,6 +9,10 @@ it comes from:
     cmd.<NAME>   commodity price in USD
     eq.<NAME>    equity index or ETF level
     risk.<NAME>  risk gauges such as the VIX
+    curve.<X><n> NYMEX futures contract n settlement price
+    fut.<X>      rolled futures excess return index (self-financing, like fx.)
+    carry.<X>    futures curve slope, a signal rather than a price
+    vrp.<NAME>   excess return index of a volatility selling position (self-financing)
 
 Wider official data (REF-0015), all optional:
 
@@ -119,7 +123,8 @@ _REER = [
 ]
 
 # More currencies from the Fed's H.10 release, for strategies that need a wider
-# universe. No matching interbank rates, so the backtester books no carry on them.
+# universe. The backtester books carry on those with a rate series below (EM_RATED); SGD,
+# HKD, DKK and TWD have none, so they earn no carry.
 # Optional: an official run does not fail if one is missing.
 EM = ["MXN", "BRL", "KRW", "INR", "ZAR", "SGD", "CNY", "HKD", "DKK", "THB", "TWD", "MYR"]
 _EM_CODES = {"MXN": "DEXMXUS", "BRL": "DEXBZUS", "KRW": "DEXKOUS", "INR": "DEXINUS",
@@ -399,9 +404,76 @@ _PRIVATE = [
 _WIDER = (_ECB_FX + _EA_CURVE + _ECB_MONEY + _UST_CURVE + _POLICY + _COT + _EIA
           + _FRED_MORE + _XFX + _BOND_TR5 + _PRIVATE)
 
-CATALOG: dict[str, Series] = {s.key: s for s in _FX + _RATES + _OTHER + _REER + _FX_WIDE
-                              + _YIELDS + _FACTORS + _INDUSTRIES + _BOND_TR
-                              + _WIDER}
+# Emerging market currencies that also have an interest rate series below, so carry can
+# be booked on them (em_fx strategies). Prices come from the Fed H.10 series above where
+# the factory already loads them, and from the ECB euro reference rate for the rest.
+# RUB stops on 1 March 2022.
+EM_RATED = ["BRL", "CNY", "CZK", "HUF", "IDR", "ILS", "INR", "KRW", "MXN", "MYR", "PHP",
+            "PLN", "RON", "RUB", "THB", "TRY", "ZAR"]
+
+_EM_FX = [Series(f"fx.{ccy}", "ecb_usd", ccy, f"USD per {ccy}, through the ECB euro reference rate",
+                 required=False) for ccy in EM_RATED if ccy not in EM]
+
+# 3-month interbank rates from the OECD where it has a full history, central bank policy
+# rates from the BIS otherwise. Policy rates are not what a forward pays, most of all under
+# capital controls (BRL, INR, TRY at times); see docs/research/0013-emerging-market-currencies.md.
+_EM_RATE_OECD = {"CNY": "CHN", "CZK": "CZE", "HUF": "HUN", "ILS": "ISR", "KRW": "KOR",
+                 "MXN": "MEX", "PLN": "POL", "RON": "ROU", "RUB": "RUS", "ZAR": "ZAF"}
+_EM_RATE_BIS = {"BRL": "BR", "IDR": "ID", "INR": "IN", "MYR": "MY", "PHP": "PH", "THB": "TH",
+                "TRY": "TR"}
+
+_EM_RATES = [
+    Series(f"rate.{ccy}", "oecd", cc, f"{ccy} 3-month interbank rate (OECD monthly average, "
+           "used from a week after the month ends)", frequency="M", required=False,
+           published_after=5) for ccy, cc in _EM_RATE_OECD.items()
+] + [
+    # Step series: a policy rate holds until the next decision, so forward fill it like a
+    # monthly series rather than letting it go stale after five days.
+    # The same BIS series as policy.<CCY> above, fetched once.
+    Series(f"rate.{ccy}", "bis", f"WS_CBPOL/D.{cc}", f"{ccy} central bank policy rate (BIS)",
+           frequency="M", required=False) for ccy, cc in _EM_RATE_BIS.items()
+]
+
+# NYMEX energy futures as published by the EIA, contracts 1 to 3, to 5 April 2024 only.
+# fut.<X> is the excess return index of holding contract 2 and rolling when it becomes the
+# front contract (data/futures.py); carry.<X> is 12 * ln(C2 / C3), positive in backwardation.
+ENERGY = {"CL": ("pet", "RCLC{n}", "WTI crude oil, USD per barrel"),
+          "HO": ("pet", "EER_EPD2F_PE{n}_Y35NY_DPG", "No. 2 heating oil, USD per gallon"),
+          "RB": ("pet", "EER_EPMRR_PE{n}_Y35NY_DPG", "RBOB gasoline, USD per gallon"),
+          "NG": ("ng", "RNGC{n}", "Henry Hub natural gas, USD per MMBtu")}
+
+_CURVES = [
+    Series(f"curve.{sym}{n}", "eia_web", f"{folder}/{pattern.format(n=n)}",
+           f"{desc}, NYMEX contract {n} (EIA, ends 5 April 2024)", required=False)
+    for sym, (folder, pattern, desc) in ENERGY.items() for n in (1, 2, 3)
+]
+_FUTURES = [
+    Series(f"fut.{sym}", "derived", f"curve.{sym}1+curve.{sym}2",
+           f"{desc}: excess return index of holding contract 2, rolled when it becomes the "
+           "front contract", required=False) for sym, (_, _, desc) in ENERGY.items()
+] + [
+    Series(f"carry.{sym}", "derived", f"curve.{sym}2+curve.{sym}3",
+           f"{desc}: annualised slope 12 * ln(C2 / C3), positive in backwardation",
+           required=False) for sym, (_, _, desc) in ENERGY.items()
+]
+
+_VOL = [
+    Series("risk.OVX", "fred", "OVXCLS", "CBOE crude oil volatility index (options on USO), "
+           "May 2007 on", required=False),
+    Series("vrp.OIL", "derived", "risk.OVX+fut.CL",
+           "Excess return index of selling a 30-day crude oil variance swap each month, struck "
+           "at OVX squared and marked daily (data/futures.py)", required=False),
+]
+
+CATALOG: dict[str, Series] = {
+    s.key: s for s in _FX + _RATES + _OTHER + _REER + _FX_WIDE + _YIELDS + _FACTORS
+    + _INDUSTRIES + _BOND_TR + _WIDER + _EM_FX + _EM_RATES + _CURVES + _FUTURES + _VOL
+}
+
+#: Series added for registrations REG-0004 to REG-0010 (emerging market currencies and
+#: rates, energy futures, oil volatility). The always-on search leaves them alone, so the
+#: registrations' "not seen" stays true and old search draws keep their ids.
+REGISTERED_ONLY = frozenset(s.key for s in _EM_FX + _EM_RATES + _CURVES + _FUTURES + _VOL)
 
 
 def get(key: str) -> Series:

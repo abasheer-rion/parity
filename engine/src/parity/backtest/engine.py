@@ -21,6 +21,9 @@ from ..strategies.base import Strategy
 
 TRADING_DAYS = 252
 BORROW_SPREAD = 0.005  # 50 bp a year over the T-bill on borrowed money
+# Instruments whose returns are already excess returns: holding them needs collateral,
+# not cash, so going above 100% is not borrowing.
+SELF_FINANCING = ("fx.", "xfx.", "fut.", "vrp.", "factor.")
 
 # Research factors are paper portfolios: their published returns ignore the cost of
 # trading the stocks inside them. Holding one is charged this much a year per unit
@@ -151,10 +154,10 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     gross = (held * rets).sum(axis=1)
     rf = risk_free(panel, held.index)
     # Funded strategies pay the T-bill plus a spread on anything borrowed (long funded
-    # exposure above 100%). Self-financing currency books earn the T-bill on collateral.
-    # Currency positions and research factors are zero-cost long-short books: they need
-    # margin, not borrowed money.
-    funded_cols = [c for c in held.columns if not c.startswith(("fx.", "xfx.", "factor."))]
+    # exposure above 100%). Self-financing books (currencies, futures, variance swaps)
+    # earn the T-bill on collateral. Research factors are zero-cost long-short books too:
+    # they need margin, not borrowed money.
+    funded_cols = [c for c in held.columns if not c.startswith(SELF_FINANCING)]
     borrowed = (held[funded_cols].clip(lower=0).sum(axis=1) - 1).clip(lower=0) \
         if funded_cols else 0.0
     financing = borrowed * (rf + BORROW_SPREAD / TRADING_DAYS)

@@ -377,9 +377,75 @@ def fetch_eia(series: Series) -> pd.Series:
     return parse_eia_json(resp.json(), series)
 
 
+def fetch_ecb_usd(series: Series) -> pd.Series:
+    """ECB euro reference rates, turned into USD per unit of the currency through the
+    euro: (USD per EUR) / (currency per EUR). Fixed at 14:15 CET, not New York close.
+    Free for reuse with attribution, https://data.ecb.europa.eu/"""
+    url = (f"https://data-api.ecb.europa.eu/service/data/EXR/D.USD+{series.code}.EUR.SP00.A")
+    return parse_ecb_csv(_get(url, {"format": "csvdata"}).text, series)
+
+
+def parse_ecb_csv(text: str, series: Series) -> pd.Series:
+    df = pd.read_csv(io.StringIO(text), usecols=["CURRENCY", "TIME_PERIOD", "OBS_VALUE"])
+    wide = df.pivot_table(index="TIME_PERIOD", columns="CURRENCY", values="OBS_VALUE")
+    wide.index = pd.to_datetime(wide.index)
+    out = (wide["USD"] / wide[series.code]).dropna()
+    return out.sort_index().rename(series.key)
+
+
+def fetch_oecd(series: Series) -> pd.Series:
+    """OECD short-term interest rates (3-month interbank, percent a year, monthly
+    averages), by ISO 3166 alpha-3 country code. https://data-explorer.oecd.org/"""
+    url = ("https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_FINMARK,4.0/"
+           f"{series.code}.M.IR3TIB.PA.....")
+    return parse_oecd_csv(_get(url, {"format": "csvfilewithlabels"}).text, series)
+
+
+def parse_oecd_csv(text: str, series: Series) -> pd.Series:
+    """Dated at the first day of the month, like the G10 FRED copies of the same OECD
+    data. The catalog delays them to a week after the month ends (`published_after`),
+    which is when signals may see them; interest earned uses the undelayed dates."""
+    df = pd.read_csv(io.StringIO(text), usecols=["TIME_PERIOD", "OBS_VALUE"]).dropna()
+    idx = pd.PeriodIndex(df["TIME_PERIOD"], freq="M").to_timestamp(how="start")
+    out = pd.Series(df["OBS_VALUE"].astype(float).values, index=idx, name=series.key)
+    return out.sort_index()
+
+
+def fetch_eia_web(series: Series) -> pd.Series:
+    """NYMEX futures settlement prices as published by the EIA, contract 1 to 4.
+    `code` is "<folder>/<series id>", e.g. "pet/RCLC1". The EIA stopped publishing these
+    after 5 April 2024, so every series ends there. Public domain."""
+    folder, sid = series.code.split("/", 1)
+    url = f"https://www.eia.gov/dnav/{folder}/hist/{sid}D.htm"
+    return parse_eia_html(_get(url).text, series)
+
+
+_EIA_ROW = re.compile(r"<td class='B6'>(?:&nbsp;)*\s*(\d{4}) (\w{3})-\s*(\d{1,2}) to [^<]*</td>"
+                      r"((?:\s*<td class='B3'>[^<]*</td>){5})")
+_EIA_CELL = re.compile(r"<td class='B3'>([^<]*)</td>")
+
+
+def parse_eia_html(text: str, series: Series) -> pd.Series:
+    """Each table row is one week: the Monday's date, then Monday to Friday values,
+    blank on holidays."""
+    dates, values = [], []
+    for year, mon, day, cells in _EIA_ROW.findall(text):
+        monday = pd.Timestamp(f"{year}-{mon}-{day}")
+        for i, cell in enumerate(_EIA_CELL.findall(cells)):
+            cell = cell.strip().replace(",", "")
+            if cell:
+                dates.append(monday + pd.Timedelta(days=i))
+                values.append(float(cell))
+    if not dates:
+        raise ValueError(f"No prices found on the EIA page for {series.code}")
+    out = pd.Series(values, index=pd.DatetimeIndex(dates), name=series.key)
+    return out[~out.index.duplicated(keep="last")].sort_index()
+
+
 FETCHERS = {"fred": fetch_fred, "yahoo": fetch_yahoo, "french": fetch_french,
             "ecb": fetch_ecb, "bis": fetch_bis, "treasury": fetch_treasury,
-            "cftc": fetch_cftc, "eia": fetch_eia}
+            "cftc": fetch_cftc, "eia": fetch_eia, "ecb_usd": fetch_ecb_usd,
+            "oecd": fetch_oecd, "eia_web": fetch_eia_web}
 
 
 def fetch(series: Series) -> pd.Series:

@@ -1,0 +1,85 @@
+{
+  "id": "ALG-0083",
+  "slug": "em-fx-carry",
+  "name": "Emerging market currency carry, cost aware",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "carry",
+    "emerging-markets",
+    "cross-sectional",
+    "transaction-costs"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2007,
+    "authors": "Burnside, Eichenbaum, Rebelo",
+    "source_title": "The Returns to Currency Speculation in Emerging Markets (NBER WP 12916, 2007)",
+    "source_url": "https://www.nber.org/papers/w12916"
+  },
+  "how_it_works": {
+    "simple": "Countries like Brazil, Mexico and South Africa pay much higher interest than the US. Hold their money to collect that interest, spread over many countries, and only when the extra interest is bigger than the cost of trading.",
+    "analogy": "Like lending to many small shops at a high rate: any one may go bust, but across many of them the interest usually more than covers the losses.",
+    "precise": "Each month rank emerging market currencies by their interest rate gap to USD (or forward discount). Hold the high-carry group long, funded in USD, equal weight, and skip currencies whose gap does not exceed the bid and ask cost. Burnside et al. show that ignoring spreads turns the Sharpe ratio negative; a cost-aware rule earns a high Sharpe ratio before crises are added."
+  },
+  "rule": "Monthly: for each EM currency with data, carry = local short-term rate minus US 3-month rate. Long the top third by carry against USD, equal weights; drop any currency whose carry is below an assumed cost; close at a penalty if the currency stops being quoted.",
+  "data_needed": [
+    "Daily EM spot rates (ECB reference rates)",
+    "EM short-term interest rates (OECD IR3TIB or BIS policy rates)",
+    "US 3-month rate"
+  ],
+  "economic_rationale": "High-rate EM currencies have not depreciated by enough to offset their interest gap on average (forward premium puzzle), and many EM currencies move independently, so a basket diversifies.",
+  "why_it_might_fail": "Spreads are two to four times wider than in G10; devaluations of 20% to 56% in a week (Russia 1998, Argentina 2002); capital controls and sanctions can stop exit (RUB 2022); every published sample ends by 2010, before a weak decade for EM currencies.",
+  "reported_results": [
+    {
+      "source": "Burnside, Eichenbaum and Rebelo (2007), Table 1, transaction-cost-based carry, 63 currencies",
+      "source_url": "https://www.nber.org/system/files/working_papers/w12916/w12916.pdf",
+      "period": "1997-10 to 2006-11",
+      "market": "63 developed and EM currencies, weekly",
+      "sharpe": 1.32,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Quote: \"the Sharpe ratio for this strategy is very high: 0.18 on a weekly basis and 1.32 on an annualized basis\". The naive rule with spreads charged is \"actually negative (-0.05)\". Adding five crises by hand cuts the weekly Sharpe from 0.183 to 0.097."
+    },
+    {
+      "source": "Menkhoff, Sarno, Schmeling and Schrimpf (2012), Table I, all countries with bid-ask",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/3391/1/CTVOL_R3_v4_paper.pdf",
+      "period": "1983-12 to 2009-08",
+      "market": "48 developed and EM currencies",
+      "sharpe": 0.74,
+      "annual_return": 0.0723,
+      "volatility": 0.0981,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "High minus low carry portfolio, skewness -1.03. Developed only (15 countries): 5.72% a year, Sharpe 0.56."
+    }
+  ],
+  "post_publication_evidence": "None found by us after 2010. Press reports (Bloomberg via BloombergQuint) put 2018 losses on dollar-funded carry at 22% (TRY) and 20% (ARS). See RES-0013.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Testable with free data on a period no published study covers (2009 on), and the clearest way to extend our G10 carry results."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 5,
+    "hypothesis": "HYP-0009",
+    "strategy": "em_fx_carry",
+    "registrations": [
+      "REG-0006"
+    ],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0013 and RES-0014 on 2026-10-21. Registered on 2026-10-21 as REG-0006 (em_fx_carry), not yet run."
+  }
+}
