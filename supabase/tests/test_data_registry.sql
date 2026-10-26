@@ -20,7 +20,7 @@ create function pg_temp.dr_refused(stmt text) returns boolean language plpgsql a
 begin
   execute stmt;
   return false;
-exception when insufficient_privilege or raise_exception then
+exception when insufficient_privilege or raise_exception or check_violation then
   return true;
 end $$;
 create function pg_temp.dr_as(sub text, client text default null) returns void language sql as $$
@@ -53,6 +53,8 @@ select pg_temp.dr_check((public.report_registry($j${
 }$j$::jsonb) ->> 'series')::int = 3, 'the writer sends a registry document');
 select pg_temp.dr_check(pg_temp.dr_refused($$select public.report_registry('{"previews": [{"series_id": "cmd.NICKEL", "points": []}]}'::jsonb)$$), 'no preview for research-only data');
 select pg_temp.dr_check(pg_temp.dr_refused($$insert into public.data_series (id, source_id, name, frequency, status, display_rights) values ('x', 'fred', 'x', 'D', 'live', 'public')$$), 'the writer has no direct table rights');
+select pg_temp.dr_check(pg_temp.dr_refused($$select public.report_registry('{"series": [{"id": "kraken.ETHUSD", "source_id": "kraken", "name": "Ether", "frequency": "D", "status": "enrolled", "display_rights": "public"}]}'::jsonb)$$), 'a series cannot have wider rights than its source');
+select pg_temp.dr_check(pg_temp.dr_refused($$select public.report_registry(jsonb_build_object('previews', jsonb_build_array(jsonb_build_object('series_id', 'fx.EUR', 'points', jsonb_build_array(repeat('x', 30000))))))$$), 'an oversized preview is refused');
 -- Lineage sent again replaces the list.
 select public.report_registry('{"lineage": [{"series_id": "fx.EUR", "kind": "strategy", "consumer": "fx_trend"}]}'::jsonb);
 reset role;
@@ -87,6 +89,7 @@ reset role;
 select set_config('request.jwt.claims', '', true);
 select pg_temp.dr_check(pg_temp.dr_refused($$update public.data_events set kind = 'status'$$), 'events cannot be changed');
 select pg_temp.dr_check(pg_temp.dr_refused($$delete from public.data_events$$), 'events cannot be removed');
+select pg_temp.dr_check(pg_temp.dr_refused($$truncate public.data_events$$), 'events cannot be truncated');
 
 -- Narrowing a series' rights removes its preview on the next send.
 set local role parity_writer;

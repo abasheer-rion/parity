@@ -80,6 +80,25 @@ def set_state(con: sqlite3.Connection, key: str, value) -> None:
 
 # ------------------------------------------------------------------ events
 
+def clip(value, depth: int = 0):
+    """A copy small enough for the public detail columns: strings cut to 200 characters with
+    key values blanked, lists to 10 items, objects to 16 keys, three levels deep. Cuts values,
+    never the JSON text, so the result always parses."""
+    from ..data.sources import redact
+
+    if isinstance(value, str):
+        return redact(value)[:200]
+    if isinstance(value, dict):
+        if depth >= 3:
+            return {}
+        return {str(k)[:40]: clip(v, depth + 1) for k, v in list(value.items())[:16]}
+    if isinstance(value, (list, tuple)):
+        return [clip(v, depth + 1) for v in list(value)[:10]] if depth < 3 else []
+    if isinstance(value, float):
+        return round(value, 6)
+    return value if value is None or isinstance(value, (bool, int)) else str(value)[:200]
+
+
 def add_event(con: sqlite3.Connection, kind: str, series_id: str | None = None,
               source_id: str | None = None, from_state: str | None = None,
               to_state: str | None = None, detail: dict | None = None) -> str:
@@ -88,7 +107,7 @@ def add_event(con: sqlite3.Connection, kind: str, series_id: str | None = None,
     con.execute("INSERT INTO events (event_key, at, series_id, source_id, kind, from_state, "
                 "to_state, detail) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 (key, now(), series_id, source_id, kind, from_state, to_state,
-                 json.dumps(detail or {}, default=str)[:1400]))
+                 json.dumps(clip(detail or {}))))
     return key
 
 
@@ -151,6 +170,8 @@ def all_series(con: sqlite3.Connection, status: str | tuple[str, ...] | None = N
 def put(con: sqlite3.Connection, rec: dict | Record) -> bool:
     """Insert or update a series record (all fields). Returns True when anything changed."""
     row = rec.row() if isinstance(rec, Record) else dict(rec)
+    row["health_detail"] = clip(row.get("health_detail") or {})
+    row["labels"] = clip(row.get("labels") or {})
     check_record(Record(**row))
     old = con.execute("SELECT row FROM series WHERE id = ?", (row["id"],)).fetchone()
     if old and json.loads(old[0]) == row:

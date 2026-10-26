@@ -160,3 +160,16 @@ def test_the_site_export_never_shows_what_the_registry_keeps_private():
     for s in catalog.CATALOG.values():
         if terminal.allowed(s)[0]:
             assert rights.catalog_rights(s) == "public", s.key
+
+
+def test_event_detail_is_clipped_by_value_and_never_quotes_a_key(tmp_path):
+    import json
+
+    con = db.connect(tmp_path / "r.db")
+    db.add_event(con, "health", series_id="x", detail={
+        "error": "Failed to fetch https://api.example.com/x?api_key=SECRET123&a=1 " + "y" * 900,
+        "many": list(range(50)), "deep": {"a": {"b": {"c": {"d": 1}}}}})
+    raw = con.execute("SELECT detail FROM events").fetchone()[0]
+    d = json.loads(raw)
+    assert "SECRET123" not in raw and len(d["error"]) <= 200 and len(d["many"]) == 10
+    assert len(raw.encode()) < 1500

@@ -5,7 +5,7 @@
 -- report_registry(). The research app reads these tables for the Data catalog, Candidates
 -- and Data health pages.
 --
--- Additive only: seven new tables, two functions and one trigger. Nothing existing changes.
+-- Additive only: seven new tables, two functions and two triggers. Nothing existing changes.
 -- Nothing here holds personal data. Every statement can run twice (the runner can retry).
 --
 -- data_sources        one row per provider: access method, licence, display rights, terms
@@ -18,7 +18,7 @@
 --                     health. Anyone may read it. Metadata only, never values.
 -- data_lineage        which strategies, pages, feeds and searches use each series.
 -- data_events         append-only log of every state change. Rows can be added, never
---                     changed or removed (a trigger refuses update and delete).
+--                     changed or removed (triggers refuse update, delete and truncate).
 -- data_uptime         daily health counters per source and per series, for uptime history.
 --                     Rows older than 400 days are dropped.
 -- data_series_preview a short chart of a series (at most 400 points). Display rights decide
@@ -88,8 +88,10 @@ create table if not exists public.data_series (
   health text not null default 'unknown'
     check (health in ('ok', 'late', 'stale', 'dead', 'idle', 'unknown')),
   health_checked_at timestamptz,
+  -- Counts and short reasons only. The engine never writes raw error text here: it can quote
+  -- a URL with a key in it (anyone may read this column).
   health_detail jsonb not null default '{}'::jsonb
-    check (jsonb_typeof(health_detail) = 'object' and pg_column_size(health_detail) <= 1000),
+    check (jsonb_typeof(health_detail) = 'object' and pg_column_size(health_detail) <= 2000),
   last_obs date,
   backup_id text check (backup_id is null or length(backup_id) <= 100),
   updated_at timestamptz not null default now()
@@ -118,8 +120,9 @@ create table if not exists public.data_events (
     'health', 'retry', 'failover', 'retired', 'backtest', 'licence', 'schema')),
   from_state text check (from_state is null or length(from_state) <= 40),
   to_state text check (to_state is null or length(to_state) <= 40),
+  -- Counts and short reasons only, never raw error text (anyone may read this column).
   detail jsonb not null default '{}'::jsonb
-    check (jsonb_typeof(detail) = 'object' and pg_column_size(detail) <= 1500),
+    check (jsonb_typeof(detail) = 'object' and pg_column_size(detail) <= 4000),
   -- The engine's own id for the event, so a retried send never adds it twice.
   event_key text not null unique check (length(event_key) between 1 and 80)
 );
@@ -139,6 +142,9 @@ revoke all on function public.data_events_append_only() from public, anon, authe
 drop trigger if exists data_events_append_only on public.data_events;
 create trigger data_events_append_only before update or delete on public.data_events
   for each row execute function public.data_events_append_only();
+drop trigger if exists data_events_no_truncate on public.data_events;
+create trigger data_events_no_truncate before truncate on public.data_events
+  for each statement execute function public.data_events_append_only();
 
 -- ---------------------------------------------------------------- uptime
 
@@ -160,7 +166,8 @@ create index if not exists data_uptime_day on public.data_uptime (day desc);
 
 create table if not exists public.data_series_preview (
   series_id text primary key references public.data_series (id) on delete cascade,
-  points jsonb not null check (jsonb_typeof(points) = 'array' and jsonb_array_length(points) <= 400),
+  points jsonb not null check (case when jsonb_typeof(points) = 'array'
+    then jsonb_array_length(points) <= 400 and pg_column_size(points) <= 20000 else false end),
   updated_at timestamptz not null default now()
 );
 
@@ -183,6 +190,7 @@ alter table public.data_backtests enable row level security;
 
 revoke all on public.data_sources, public.data_series, public.data_lineage, public.data_events,
   public.data_uptime, public.data_series_preview, public.data_backtests from public, anon, authenticated;
+revoke all on sequence public.data_events_id_seq from public, anon, authenticated;
 
 -- Every column of data_sources except key_name.
 grant select (id, name, provider, access_method, licence, display_rights, terms_url, terms_read_on,
@@ -208,17 +216,21 @@ drop policy if exists "anyone reads data uptime" on public.data_uptime;
 create policy "anyone reads data uptime" on public.data_uptime
   for select to anon, authenticated using (true);
 
--- Values follow the series' display rights. Public: anyone. Internal: team members only, never
--- a connected AI app (is_team() refuses tokens with a client_id). Anything else: nobody.
+-- Values follow the display rights of the series and of its source, whichever is narrower.
+-- Public: anyone. Internal: team members only, never a connected AI app (is_team() refuses
+-- tokens with a client_id). Anything else: nobody.
 drop policy if exists "previews follow display rights" on public.data_series_preview;
 create policy "previews follow display rights" on public.data_series_preview
   for select to anon, authenticated using (
-    exists (select 1 from public.data_series s where s.id = series_id and s.display_rights = 'public'));
+    exists (select 1 from public.data_series s join public.data_sources o on o.id = s.source_id
+            where s.id = series_id and s.display_rights = 'public' and o.display_rights = 'public'));
 drop policy if exists "team reads internal previews" on public.data_series_preview;
 create policy "team reads internal previews" on public.data_series_preview
   for select to authenticated using (
     (select public.is_team())
-    and exists (select 1 from public.data_series s where s.id = series_id and s.display_rights = 'internal'));
+    and exists (select 1 from public.data_series s join public.data_sources o on o.id = s.source_id
+                where s.id = series_id and s.display_rights in ('public', 'internal')
+                  and o.display_rights in ('public', 'internal')));
 
 drop policy if exists "signed in reads backtests" on public.data_backtests;
 create policy "signed in reads backtests" on public.data_backtests
@@ -227,17 +239,19 @@ create policy "signed in reads backtests" on public.data_backtests
 -- ---------------------------------------------------------------- the only way in
 
 -- One JSON document with any of: sources, series, lineage, events, uptime, previews,
--- backtests (arrays of objects, at most 500 rows each). Rows are upserted by their key;
+-- backtests (arrays of objects, at most 500 rows each). Returns the rows processed per kind.
+-- A series whose display rights are wider than its source's is refused. Rows are upserted by their key;
 -- lineage replaces the list for each series it names; events are added once each (by
 -- event_key); uptime counters are set to the values sent. Previews are refused for series
 -- whose display rights are not public or internal. Security definer, so the writer needs no
 -- table rights.
 create or replace function public.report_registry(p jsonb)
 returns jsonb
-language plpgsql security definer set search_path = '' as $$
+language plpgsql strict security definer set search_path = '' as $$
 declare
   r jsonb;
   k text;
+  rank_of constant jsonb := '{"none": 0, "research": 1, "internal": 2, "public": 3}';
   n_sources integer := 0;
   n_series integer := 0;
   n_lineage integer := 0;
@@ -250,7 +264,7 @@ begin
     raise exception 'report_registry takes one JSON object';
   end if;
   foreach k in array array['sources', 'series', 'lineage', 'events', 'uptime', 'previews', 'backtests'] loop
-    if p ? k and (jsonb_typeof(p -> k) <> 'array' or jsonb_array_length(p -> k) > 500) then
+    if p ? k and (case when jsonb_typeof(p -> k) = 'array' then jsonb_array_length(p -> k) > 500 else true end) then
       raise exception 'report_registry: % must be an array of at most 500 rows', k;
     end if;
   end loop;
@@ -271,6 +285,10 @@ begin
   end loop;
 
   for r in select * from jsonb_array_elements(coalesce(p -> 'series', '[]'::jsonb)) loop
+    if coalesce((rank_of ->> (r ->> 'display_rights'))::int, 9) > coalesce((select (rank_of ->> o.display_rights)::int
+        from public.data_sources o where o.id = r ->> 'source_id'), -1) then
+      raise exception 'report_registry: % has wider display rights than its source', r ->> 'id';
+    end if;
     insert into public.data_series as d (id, source_id, code, name, symbol, asset_class, region, frequency,
       units, start_date, end_date, published_after, lag_days, tags, labels, quality, status,
       display_rights, origin, intended_use, required, reason, discovered_by, discovered_at,
