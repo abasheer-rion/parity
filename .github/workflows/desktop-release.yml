@@ -11,6 +11,14 @@
 #   APPLE_API_KEY      the App Store Connect API key file's contents (AuthKey_XXXX.p8)
 #   APPLE_API_KEY_ID   that key's ID
 #   APPLE_API_ISSUER   the issuer ID shown above the keys in App Store Connect
+# A notarized build also has its disk images notarized and stapled (scripts/notarize-dmg.mjs),
+# and the release stops if codesign, spctl or stapler does not accept the app and the images.
+#
+# Windows is signed with Azure Artifact Signing (account argus-signing, profile argus-public,
+# publisher "Argus Vision, Inc.") when the repository variable AZURE_CLIENT_ID is set. The job
+# logs in with GitHub OIDC through the desktop-release environment; there is no client secret.
+# The variables: AZURE_CLIENT_ID (the parity-desktop-signing app), AZURE_TENANT_ID,
+# AZURE_SUBSCRIPTION_ID. Without AZURE_CLIENT_ID the installer is built unsigned.
 name: Desktop release
 
 on:
@@ -79,6 +87,7 @@ jobs:
       # each signing variable is set only when its secret exists. The API key arrives as
       # text; electron-builder wants a path to the .p8 file.
       - name: Build the Mac disk images and update zips
+        id: build
         working-directory: desktop
         env:
           SECRET_CSC_LINK: ${{ secrets.CSC_LINK }}
@@ -103,9 +112,45 @@ jobs:
             echo "No CSC_LINK secret: building ad hoc signed, not notarized."
           fi
           npm run build:mac
+          if [ -n "$APPLE_API_KEY" ]; then
+            node scripts/notarize-dmg.mjs dist
+            echo "notarized=true" >> "$GITHUB_OUTPUT"
+          fi
+          [ -n "$SECRET_CSC_LINK" ] && echo "signed=true" >> "$GITHUB_OUTPUT"
+          true
       - name: Remove the API key file
         if: always()
         run: rm -rf "$RUNNER_TEMP/apple"
+      # A signed build must pass Apple's own checks before anything is attached to a release.
+      - name: Verify the Mac signature and notarization
+        if: steps.build.outputs.signed == 'true'
+        working-directory: desktop
+        env:
+          NOTARIZED: ${{ steps.build.outputs.notarized }}
+        run: |
+          set -euo pipefail
+          apps=$(find dist -maxdepth 2 -name '*.app' -type d)
+          [ -n "$apps" ] || { echo "no app in dist"; exit 1; }
+          for app in $apps; do
+            echo "== $app"
+            codesign --verify --deep --strict --verbose=2 "$app"
+            info=$(codesign -dv --verbose=2 "$app" 2>&1)
+            printf '%s\n' "$info" | grep -E '^(Authority|TeamIdentifier|Identifier|CodeDirectory)'
+            case "$info" in *"Authority=Developer ID Application: Argus Vision, Inc. (NK9MBSZRUF)"*) ;; *) echo "not signed by the Argus Vision Developer ID"; exit 1;; esac
+            case "$info" in *"(runtime)"*) ;; *) echo "hardened runtime is off"; exit 1;; esac
+            if [ "$NOTARIZED" = "true" ]; then
+              spctl -a -t exec -vv "$app"
+              xcrun stapler validate "$app"
+            fi
+          done
+          for dmg in dist/*.dmg; do
+            echo "== $dmg"
+            codesign --verify --strict --verbose=2 "$dmg"
+            if [ "$NOTARIZED" = "true" ]; then
+              spctl -a -t open --context context:primary-signature -vv "$dmg"
+              xcrun stapler validate "$dmg"
+            fi
+          done
       - uses: actions/upload-artifact@v7
         with:
           name: desktop-mac
@@ -118,6 +163,14 @@ jobs:
   windows:
     needs: web
     runs-on: windows-latest
+    # The environment is what the Azure federated credential trusts
+    # (repo:abasheer-rion/parity:environment:desktop-release).
+    environment: desktop-release
+    permissions:
+      id-token: write
+      contents: write
+    env:
+      WIN_SIGN: ${{ vars.AZURE_CLIENT_ID != '' && '1' || '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -131,11 +184,42 @@ jobs:
           path: desktop/build/web
       - run: npm ci
         working-directory: desktop
-      - name: Build the Windows installer (unsigned; electron-updater installs it as is)
+      - name: Log in to Azure for signing (OIDC, no secret)
+        if: env.WIN_SIGN == '1'
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      # The OIDC login can only mint new tokens for a few minutes, and the first file is signed
+      # several minutes into the build. Fetch the signing token now; the Azure CLI keeps it
+      # for about an hour, and the signing module reads it through the CLI.
+      - name: Fetch the Artifact Signing token
+        if: env.WIN_SIGN == '1'
+        run: az account get-access-token --resource https://codesigning.azure.net --output none
+      - name: Build the Windows installer (signed when Azure signing is set up)
         run: npm run build:win
         working-directory: desktop
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
+          PARITY_WIN_SIGN: ${{ env.WIN_SIGN }}
+      - name: Verify the Windows signatures
+        if: env.WIN_SIGN == '1'
+        working-directory: desktop
+        shell: pwsh
+        run: |
+          $files = @(Get-ChildItem dist\*.exe) + @(Get-Item dist\win-unpacked\Parity.exe)
+          $bad = 0
+          foreach ($f in $files) {
+            $sig = Get-AuthenticodeSignature -FilePath $f.FullName
+            Write-Host "$($f.Name): $($sig.Status) | $($sig.SignerCertificate.Subject) | timestamp: $($null -ne $sig.TimeStamperCertificate)"
+            if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'CN="?Argus Vision, Inc\.' -or $null -eq $sig.TimeStamperCertificate) { $bad++ }
+          }
+          $signtool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\signtool.exe" -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1
+          if ($signtool) {
+            foreach ($f in $files) { & $signtool.FullName verify /pa /v $f.FullName; if ($LASTEXITCODE -ne 0) { $bad++ } }
+          } else { Write-Host "signtool not found; Get-AuthenticodeSignature checked above." }
+          if ($bad -gt 0) { Write-Error "$bad signature check(s) failed"; exit 1 }
       # The installer and its update files, not the unpacked app folder.
       - uses: actions/upload-artifact@v7
         with:
@@ -145,11 +229,11 @@ jobs:
             desktop/dist/*.blockmap
             desktop/dist/latest.yml
 
-  # The Mac build alone is enough to release; a Windows build that failed or never started
-  # (for example a billing limit on Windows runners) is attached on a later run.
+  # A Mac build that passed its checks is required. A Windows build that failed (including a
+  # failed signature check) stops the release; one that was skipped is attached on a later run.
   release:
     needs: [mac, windows]
-    if: ${{ !cancelled() && needs.mac.result == 'success' }}
+    if: ${{ !cancelled() && needs.mac.result == 'success' && needs.windows.result != 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
