@@ -5,7 +5,7 @@ import { allowed, privacySignal, resetConsent, setConsent } from "../src/legal/c
 import { track } from "../src/lib/analytics";
 import { appOf, deviceOf, referrerHost, routeOf } from "../src/lib/analytics/route";
 import { cleanBatch, cleanEvent, scrub } from "../src/lib/analytics/schema";
-import { ids, labelOf, startTracker } from "../src/lib/analytics/tracker";
+import { FLUSH_EVERY, ids, labelOf, startTracker } from "../src/lib/analytics/tracker";
 import { allow, ignore, liveToken, onRequest, PER_MINUTE, truncateIp } from "../functions/e";
 
 const SID = "10000000-0000-4000-8000-000000000001";
@@ -122,6 +122,22 @@ describe("the tracker", () => {
   };
   const flush = () => { visibility("hidden"); visibility("visible"); };
   const events = () => sent.flatMap((s) => s.body.ev as Record<string, unknown>[]);
+
+  it("sends at most one batch every 30 s while the page stays open (REF-0025)", () => {
+    vi.useFakeTimers();
+    try {
+      start();
+      page(`<button data-track="Go">Go</button>`);
+      for (let i = 0; i < 5; i++) { (document.querySelector("button") as HTMLElement).click(); vi.advanceTimersByTime(5_000); }
+      expect(FLUSH_EVERY).toBe(30_000);
+      expect(sent.length).toBe(0);
+      vi.advanceTimersByTime(FLUSH_EVERY - 25_000);
+      expect(sent.length).toBe(1);
+      expect(events().filter((e) => e.k === "click").length).toBe(5);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 
   it("records a page view, queued calls, clicks with labels and never field values", () => {
     start();

@@ -20,7 +20,10 @@ import { deviceOf, referrerHost, routeOf } from "./route";
 import { cleanEvent, scrub, type App, type Batch, type Ev, type Kind, type PropValue } from "./schema";
 
 const SESSION_GAP = 30 * 60_000;
-const FLUSH_EVERY = 10_000;
+// At most one batch every 30 s while someone is active (REF-0025): each batch is one function
+// call and one database call, and both have limits. Leaving or hiding the page still sends
+// at once, and 20 events send early, so nothing is held back that would be lost.
+export const FLUSH_EVERY = 30_000;
 const FLUSH_AT = 20;
 const MAX_ERRORS = 5;
 const RAGE_CLICKS = 3;

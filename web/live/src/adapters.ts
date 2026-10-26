@@ -12,6 +12,7 @@ import { coinbase } from "./venues/coinbase";
 import { gemini } from "./venues/gemini";
 import { hyperliquid } from "./venues/hyperliquid";
 import { kraken } from "./venues/kraken";
+import { onchain } from "./venues/onchain";
 import { alpaca, finnhub } from "./venues/stocks";
 
 export type { Adapter, AdapterDef, AdapterEnv };
@@ -28,11 +29,22 @@ const CG_SYM = /^([A-Z0-9]{1,12})-USD$/;
 const CG_FALLBACK = ["BTC", "ETH", "USDT", "XRP", "BNB", "SOL", "USDC", "DOGE", "TRX", "ADA", "LINK", "AVAX", "XLM", "SUI", "BCH", "HBAR", "LTC", "DOT", "TON", "SHIB"].map((s) => `${s}-USD`);
 interface CgRow { id: string; symbol: string; current_price: number | null; last_updated: string | null; market_cap_rank: number | null; price_change_percentage_24h?: number | null; total_volume?: number | null; sparkline_in_7d?: { price?: number[] } }
 
+/** CoinGecko's address and headers: with COINGECKO_API_KEY set (a secret, never sent to a
+ *  browser) requests carry the key, so Cloudflare's shared addresses stop hitting the free
+ *  limit. COINGECKO_PRO=1 means a paid key (pro-api address); otherwise a free demo key. */
+function cg(env: AdapterEnv): { base: string; headers: Record<string, string> } {
+  const headers: Record<string, string> = { Accept: "application/json", "User-Agent": "parity-live" };
+  if (!env.COINGECKO_API_KEY) return { base: CG, headers };
+  if (env.COINGECKO_PRO === "1") return { base: "https://pro-api.coingecko.com/api/v3", headers: { ...headers, "x-cg-pro-api-key": env.COINGECKO_API_KEY } };
+  return { base: CG, headers: { ...headers, "x-cg-demo-api-key": env.COINGECKO_API_KEY } };
+}
+
 let cgTop: { at: number; rows: CgRow[] } | null = null;
-async function cgMarkets(maxAgeMs: number): Promise<CgRow[]> {
+async function cgMarkets(maxAgeMs: number, env: AdapterEnv): Promise<CgRow[]> {
   if (cgTop && Date.now() - cgTop.at < maxAgeMs) return cgTop.rows;
+  const { base, headers } = cg(env);
   // Cached at the edge for 20 s, so every worker and object shares one answer.
-  const res = await fetch(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`, { headers: { Accept: "application/json", "User-Agent": "parity-live" }, cf: { cacheTtlByStatus: { "200-299": 20, "300-599": 0 }, cacheEverything: true } } as RequestInit);
+  const res = await fetch(`${base}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`, { headers, cf: { cacheTtlByStatus: { "200-299": 20, "300-599": 0 }, cacheEverything: true } } as RequestInit);
   if (!res.ok) throw new Error(`coingecko ${res.status}`);
   const rows = (await res.json()) as CgRow[];
   // A refusal can come back as an object instead of a list; never cache that.
@@ -52,7 +64,7 @@ function cgSymbols(rows: CgRow[]): Map<string, CgRow> {
 const coingecko: AdapterDef = {
   id: "coingecko",
   enabled: (env) => allowed("coingecko", env),
-  make: () => ({
+  make: (env) => ({
     id: "coingecko", feed: "delayed", delayMin: 1, url: "", internal: false, maxUpstream: 100,
     allows: (s) => CG_SYM.test(s),
     subscribe: () => [], unsubscribe: () => [], parse: () => ({}),
@@ -61,7 +73,7 @@ const coingecko: AdapterDef = {
         every: 30_000,
         async run() {
           const out: BoardPatch[] = [];
-          for (const [s, r] of cgSymbols(await cgMarkets(30_000))) {
+          for (const [s, r] of cgSymbols(await cgMarkets(30_000, env))) {
             const te = r.last_updated ? Date.parse(r.last_updated) : Number.NaN;
             if (r.current_price == null || !Number.isFinite(te)) continue;
             // CoinGecko's own 7-day line, about one point an hour; the last 24 points are the last day.
@@ -75,7 +87,7 @@ const coingecko: AdapterDef = {
     poll: {
       every: 30_000,
       async run(symbols) {
-        const bySym = cgSymbols(await cgMarkets(30_000));
+        const bySym = cgSymbols(await cgMarkets(30_000, env));
         const out: Trade[] = [];
         for (const s of symbols) {
           const r = bySym.get(s);
@@ -87,12 +99,13 @@ const coingecko: AdapterDef = {
       },
     },
   }),
-  async history(symbol, tf) {
+  async history(symbol, tf, env) {
     const days: Record<string, number> = { "5m": 1, "1h": 30, "1d": 365 };
     if (!CG_SYM.test(symbol) || !days[tf]) return null;
-    const row = cgSymbols(await cgMarkets(3_600_000)).get(symbol);
+    const row = cgSymbols(await cgMarkets(3_600_000, env)).get(symbol);
     if (!row) return null;
-    const res = await fetch(`${CG}/coins/${encodeURIComponent(row.id)}/market_chart?vs_currency=usd&days=${days[tf]}${tf === "1d" ? "&interval=daily" : ""}`, { headers: { Accept: "application/json", "User-Agent": "parity-live" } });
+    const { base, headers } = cg(env);
+    const res = await fetch(`${base}/coins/${encodeURIComponent(row.id)}/market_chart?vs_currency=usd&days=${days[tf]}${tf === "1d" ? "&interval=daily" : ""}`, { headers });
     if (!res.ok) throw new Error(`coingecko ${res.status}`);
     const doc = (await res.json()) as { prices: [number, number][] };
     return fromPrices(doc.prices ?? [], tf);
@@ -122,7 +135,7 @@ const vendor: AdapterDef = {
   }),
 };
 
-export const ADAPTERS: AdapterDef[] = [coingecko, hyperliquid, kraken, coinbase, gemini, binanceus, alpaca, finnhub, vendor];
+export const ADAPTERS: AdapterDef[] = [onchain, coingecko, hyperliquid, kraken, coinbase, gemini, binanceus, alpaca, finnhub, vendor];
 
 export function adapterFor(id: string, env: AdapterEnv): Adapter | null {
   const def = ADAPTERS.find((a) => a.id === id);
@@ -171,9 +184,11 @@ export async function universe(env: AdapterEnv, team = false): Promise<UniverseD
   const stocks = await secList(env);
   const live: Record<string, string[]> = {};
   if (coingecko.enabled(env)) {
-    try { live.coingecko = [...cgSymbols(await cgMarkets(600_000)).keys()]; } catch { live.coingecko = CG_FALLBACK; }
+    try { live.coingecko = [...cgSymbols(await cgMarkets(600_000, env)).keys()]; } catch { live.coingecko = CG_FALLBACK; }
     if (!live.coingecko.length) live.coingecko = CG_FALLBACK;
   }
+  // Our own feeds and other sources anyone may see, each with its fixed list.
+  if (onchain.enabled(env)) live.onchain = await onchain.symbols!(env);
   let liveStocks: string | undefined;
   if (team) {
     await Promise.all(ADAPTERS.filter((a) => a.symbols && a.enabled(env) && sourceById(a.id)?.licence === "internal").map(async (a) => {

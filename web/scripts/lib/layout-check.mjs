@@ -4,8 +4,9 @@
 //
 // It reports four kinds of problem, each as { kind, text, other?, where }:
 //   overlap    two pieces of visible text whose boxes cross by more than 2px both ways
-//   clipped    text cut off by a box with hidden overflow, or a number cut in half by
-//              the edge of a scroll box (from tablet width up)
+//   clipped    text cut off by a box with hidden overflow, a number cut in half by the
+//              edge of a scroll box (from tablet width up), or a control (button, link,
+//              field) partly hidden by a box too narrow for it
 //   ellipsis   a number shortened with "..." (a number must never be cut; words may be)
 //   hscroll    the page itself scrolls sideways
 //
@@ -105,7 +106,7 @@ export function layoutCheck() {
     const rects = [...range.getClientRects()].filter((r) => r.width > 1 && r.height > 1);
     if (!rects.length) continue;
     const box = rects.reduce((a, r) => ({ left: Math.min(a.left, r.left), top: Math.min(a.top, r.top), right: Math.max(a.right, r.right), bottom: Math.max(a.bottom, r.bottom) }), { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity });
-    const c = clipRect(el.parentElement);
+    const c = clipRect(el);
     const seen = rects.map((r) => cut(r, c)).filter((r) => r.right - r.left > 1 && r.bottom - r.top > 1).map((r) => ({ ...r, width: r.right - r.left, height: r.bottom - r.top }));
     items.push({ node: n, el, rects, seen, box, text: n.nodeValue.trim().slice(0, 40), layer: layerOf(el) });
   }
@@ -145,6 +146,23 @@ export function layoutCheck() {
         const visible = it.box.right > r.left && it.box.left < r.right && it.box.bottom > r.top && it.box.top < r.bottom;
         if (visible) out.push({ kind: "clipped", text: it.text, where: describe(it.el) });
       }
+      break;
+    }
+  }
+
+  // Controls cut off: a button, link or field whose box is partly hidden by a box with
+  // hidden overflow (a toolbar too narrow for its buttons). Scroll boxes are fine.
+  for (const el of document.querySelectorAll("button, a[href], input, select, [role=button], [role=tab]")) {
+    if (hidden(el)) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 4 || r.height < 4) continue;
+    for (let e = el.parentElement; e && e !== document.body; e = e.parentElement) {
+      const es = cs(e);
+      if (/(auto|scroll)/.test(es.overflowX + es.overflowY)) break;
+      if (es.overflowX !== "hidden" && es.overflowX !== "clip") { if (es.position === "fixed") break; continue; }
+      const c = e.getBoundingClientRect();
+      const partly = (r.left < c.left - 1 && r.right > c.left + 1) || (r.right > c.right + 1 && r.left < c.right - 1);
+      if (partly) out.push({ kind: "clipped", text: (el.getAttribute("aria-label") || el.textContent || el.tagName).trim().slice(0, 40), where: describe(el) + " (control)" });
       break;
     }
   }

@@ -59,7 +59,7 @@ export function Competitors({ focus }: { focus?: string }) {
                 const share = s && s.feedback >= MIN_RANK ? praiseShare(s) : null;
                 return (
                   <tr key={p.id} className={selected?.id === p.id ? "on" : undefined}>
-                    <th scope="row"><a href={`#/competitors/${p.id}`}>{p.name}</a> <span className="muted small">{GROUPS[p.group]}</span></th>
+                    <th scope="row"><a className="comp-name" href={`#/competitors/${p.id}`}>{p.name}</a> <span className="muted small">{GROUPS[p.group]}</span></th>
                     <td className="num">{s ? s.feedback.toLocaleString() : "n/a"}</td>
                     <td className="num">{share == null ? "n/a" : `${Math.round(share * 100)}%`}</td>
                     <td>{s && s.feedback >= MIN_RANK && s.praised[0] ? `${s.praised[0].label} (${s.praised[0].count})` : "n/a"}</td>

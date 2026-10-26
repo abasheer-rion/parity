@@ -5,6 +5,7 @@ import { Card } from "../ui/layout";
 import { algorithms, bestReported, STAGES } from "../lib/catalog";
 import type { Algorithm } from "../lib/types";
 import { Term } from "./Learn";
+import { TableScroll } from "../ui";
 
 type SortKey = "id" | "year" | "sharpe" | "relevance" | "stage";
 
@@ -91,7 +92,7 @@ export function Catalog() {
       </Card>
 
       <Card title={`${rows.length} algorithms`} help={<>Click a row for the full report. <Term id="sharpe-ratio">Sharpe</Term> is the best any source reported, with its evidence type.</>}>
-        <div className="table-wrap">
+        <TableScroll>
           <table className="catalog">
             <thead>
               <tr><th>Algorithm</th><th>Family</th><th>Markets</th><th>Horizon</th><th>Since</th><th>Origin</th>
@@ -117,7 +118,7 @@ export function Catalog() {
               })}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );

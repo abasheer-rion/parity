@@ -10,6 +10,7 @@ import { pageByHref } from "../lib/pages";
 import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
+import { IconButton } from "../ui";
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
@@ -147,6 +148,13 @@ export function Shell({
     window.addEventListener("keydown", on);
     return () => window.removeEventListener("keydown", on);
   }, []);
+  // A click anywhere outside the account menu closes it, like any menu.
+  useEffect(() => {
+    if (!menu) return;
+    const on = (e: PointerEvent) => { if (!(e.target as Element | null)?.closest?.(".account")) setMenu(false); };
+    document.addEventListener("pointerdown", on);
+    return () => document.removeEventListener("pointerdown", on);
+  }, [menu]);
   const openSearch = () => { setOpen(false); setMenu(false); window.dispatchEvent(new Event("parity:search")); };
   const research = SPACE === "research";
   const items = research ? RESEARCH : PRODUCT;
@@ -278,10 +286,7 @@ export function Title({ children, label, actions }: { children: ReactNode; label
   return (
     <div className="title-row">
       <h1>{children}</h1>
-      <button className={`round-btn ${marked ? "on" : ""}`} onClick={() => toggleBookmark(href, text)}
-        aria-label={marked ? "Remove from bookmarks" : "Add to bookmarks"} title={marked ? "Remove from bookmarks" : "Add to bookmarks"}>
-        <Icon name="bookmark" size={13} />
-      </button>
+      <IconButton icon="bookmark" active={marked} onClick={() => toggleBookmark(href, text)} label={marked ? "Remove from bookmarks" : "Add to bookmarks"} />
       <CopyLink />
       {actions && <div className="title-actions">{actions}</div>}
     </div>

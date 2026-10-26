@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1673 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1682 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 65 |
 | [Software](#software) | 104 |
-| [Web pages](#web-pages) | 929 |
+| [Web pages](#web-pages) | 938 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -4097,6 +4097,22 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 ## Web pages
 
+### alpaca-terms
+
+Alpaca Terms and Conditions. (2026). *alpaca.markets*. <https://files.alpaca.markets/disclosures/library/TermsAndConditions.pdf>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+
+### base-run-a-node
+
+Base docs: run a node (public RPC rate limits). (2026). *docs.base.org*. <https://docs.base.org/specifications/node-operators/run-a-node>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+
 ### bondarenko2019
 
 Bondarenko, Oleg (2019). White Paper Shows Volatility Risk Premium Facilitated Higher Risk-Adjusted Returns for PUT Index. *Cboe Insights*. <https://www.cboe.com/insights/posts/white-paper-shows-volatility-risk-premium-facilitated-higher-risk-adjusted-returns-for-put-index/>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
@@ -4112,6 +4128,62 @@ Callan Associates (2006). An Historical Evaluation of the CBOE S&P 500 BuyWrite 
 Note: Read in full, Exhibit 8 summary statistics.
 
 Cited in: [catalog/algorithms/covered-call-buy-write.json](../catalog/algorithms/covered-call-buy-write.json), [ALG-0100](algorithms/0100-covered-call-buy-write.md).
+
+### douro-subscription-terms
+
+Douro Labs Data-as-a-Service Agreement (Pyth subscription terms). (2026). *dourolabs.xyz*. <https://www.dourolabs.xyz/Subscription-Terms.pdf>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### okx-api-agreement
+
+OKX API Agreement. (2026). *okx.com*. <https://www.okx.com/help/okx-api-agreement>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+
+### publicnode
+
+PublicNode free blockchain nodes. (2026). *publicnode.com*. <https://www.publicnode.com>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+
+### publicnode-terms
+
+PublicNode terms of service. (2026). *publicnode.com*. <https://www.publicnode.com/terms>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### pyth-hermes-api-key
+
+Pyth price feeds: Hermes API reference and API key requirement. (2026). *docs.pyth.network*. <https://docs.pyth.network/price-feeds/core/api-reference>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+
+### pyth-plans
+
+Pyth plans: Free, Starter, Pro. (2026). *app.pyth.com*. <https://app.pyth.com/products>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public low-latency feed terms).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### tenderly-node-rpc
+
+Tenderly Node RPC overview: public endpoint limits. (2026). *docs.tenderly.co*. <https://docs.tenderly.co/node-rpc/overview>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for DEC-0063 (public node failover).
+
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
 
 ### url-0004e713
 

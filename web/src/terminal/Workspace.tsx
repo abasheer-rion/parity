@@ -128,7 +128,8 @@ function PanelFrame({ leaf: l, ws, setWs, only, mobile }: { leaf: Leaf; ws: WsSt
       onFocusCapture={() => { if (!focused) setWs((s) => ({ ...s, focus: l.id })); }}>
       <header className="term-ph">
         <span className="term-ph-code">{l.fn}</span>
-        {title && <span className="term-ph-title">{title}</span>}
+        {/* The panel's heading, so a screen reader can move from panel to panel. */}
+        {title ? <h2 className="term-ph-title">{title}</h2> : <h2 className="sr-only">{fn?.title ?? l.fn}</h2>}
         <span className="term-ph-asof" title="Data as of">{shown ? `as of ${shortDate(shown)}` : ""}</span>
         <span className="term-ph-tools">
           {follows && (
@@ -141,7 +142,7 @@ function PanelFrame({ leaf: l, ws, setWs, only, mobile }: { leaf: Leaf; ws: WsSt
           {!only && <PhBtn label="Close panel" onClick={close} d={G.close} />}
         </span>
       </header>
-      <div className="term-pb">
+      <div className="term-pb ui-route-kids">
         <PanelContext.Provider value={ctx}>
           <PanelBody key={l.fn} leaf={l} />
         </PanelContext.Provider>

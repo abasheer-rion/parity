@@ -4,6 +4,7 @@
 //   - a font size as a number or px value in an inline style
 //   - a duration or a cubic-bezier() curve written into an inline style or a style block
 //   - a page-level zIndex (10 or more either way) in an inline style
+//   - a duration, delay or easing written into scripted motion (element.animate, scroll)
 //   - var(--name) for a custom property that is defined nowhere (a typo, or a token that
 //     was renamed), unless it carries a fallback
 // A line may opt out with a comment "tokens-ignore: <reason>" when the match is not a
@@ -94,6 +95,15 @@ for (const file of files) {
     if (/(?<![\w.-])\d*\.?\d+m?s\b/.test(bare) && !/(?<![\w.-])0m?s\b/.test(bare.match(/(?<![\w.-])\d*\.?\d+m?s\b/)[0])) add(file, text, m.index, "duration in an inline style: use var(--dur-*)");
   }
   for (const m of text.matchAll(/zIndex:\s*(-?\d{2,})/g)) add(file, text, m.index, `zIndex ${m[1]}: use var(--z-*)`);
+  // Scripted motion (element.animate, smooth scroll, motion helpers) takes its timing from
+  // the tokens too: durationMs("dur-3") and tokenValue("ease-out"), never a number or a curve.
+  // Only the app and the desktop shell draw motion; tests and server code use these words for data.
+  if (rel.startsWith("src/") || rel.startsWith("../desktop/")) {
+    for (const m of text.matchAll(/\b(duration|delay):\s*(\d*\.?\d+)(?![\w.])/g)) {
+      if (parseFloat(m[2]) !== 0) add(file, text, m.index, `${m[1]} ${m[2]} in scripted motion: use durationMs("dur-*")`);
+    }
+    for (const m of text.matchAll(/\beasing:\s*["'`]/g)) add(file, text, m.index, `easing written as text in scripted motion: use tokenValue("ease-*")`);
+  }
 }
 
 for (const [file, text, i, name] of used) {

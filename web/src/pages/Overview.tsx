@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { HeroChart, Sparkline, type RangeKey } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Button, ButtonGroup } from "../ui";
+import { Button, ButtonGroup, IconButton, TableScroll } from "../ui";
 import { colorMap } from "../lib/colors";
 import { useDocIndex } from "../lib/docs";
 import { num, pct } from "../lib/format";
@@ -75,7 +75,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         )}
 
         <section className="mcard">
-          <div className="mcard-head"><h2>Strategies</h2><a className="round-btn" href="#/strategies" aria-label="All strategies"><Icon name="list" size={14} /></a></div>
+          <div className="mcard-head"><h2>Strategies</h2><IconButton icon="list" href="#/strategies" label="All strategies" /></div>
           <ul className="acct-list">
             {bySharpe.slice(0, 6).map((r) => (
               <li key={r.strategy}>
@@ -106,7 +106,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         </section>
 
         <section className="mcard">
-          <div className="mcard-head"><h2>The 11 tests</h2><a className="round-btn" href="#/doc/REF-0006" data-doc="REF-0006" aria-label="About the 11 tests"><Icon name="info" size={14} /></a></div>
+          <div className="mcard-head"><h2>The 11 tests</h2><IconButton icon="info" href="#/doc/REF-0006" data-doc="REF-0006" label="About the 11 tests" /></div>
           <div className="stat-row">
             <div><div className="muted small">Tests passed</div><div className="mid-num good">{passed}</div></div>
             <div><div className="muted small">Tests failed</div><div className="mid-num bad">{failed}</div></div>
@@ -119,7 +119,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         </section>
 
         <section className="mcard">
-          <div className="mcard-head"><h2>Research</h2><a className="round-btn" href="#/docs" aria-label="All docs"><Icon name="book" size={14} /></a></div>
+          <div className="mcard-head"><h2>Research</h2><IconButton icon="book" href="#/docs" label="All docs" /></div>
           <div className="stat-row">
             {(["testing", "supported", "rejected"] as const).map((s) => (
               <div key={s}><div className="muted small">{s[0].toUpperCase() + s.slice(1)}</div><div className="mid-num">{hyps.filter((h) => h.status === s).length}</div></div>
@@ -135,9 +135,9 @@ export function Overview({ report, email }: { report: Report; email?: string | n
             <div className="mcard-head">
               <h2>Year in review</h2>
               <div className="stepper">
-                <button className="round-btn" disabled={yearIdx <= 0} onClick={() => setYearIdx((i) => i - 1)} aria-label="Previous year"><Icon name="chevronLeft" size={14} /></button>
+                <IconButton icon="chevronLeft" disabled={yearIdx <= 0} onClick={() => setYearIdx((i) => i - 1)} label="Previous year" />
                 <span>{year}</span>
-                <button className="round-btn flip" disabled={yearIdx >= years.length - 1} onClick={() => setYearIdx((i) => i + 1)} aria-label="Next year"><Icon name="chevronLeft" size={14} /></button>
+                <IconButton icon="chevronRight" disabled={yearIdx >= years.length - 1} onClick={() => setYearIdx((i) => i + 1)} label="Next year" />
               </div>
             </div>
             <div className="review">
@@ -163,12 +163,12 @@ function GraphTable({ view, setView }: { view: "graph" | "table"; setView: (v: "
 function YearTable({ run }: { run: StrategyRun }) {
   const ys = Object.keys(run.yearly).sort().reverse();
   return (
-    <div className="table-wrap tall">
+    <TableScroll className="tall">
       <table className="mtable">
         <thead><tr><th>Year</th><th>Return</th></tr></thead>
         <tbody>{ys.map((y) => <tr key={y}><td>{y}</td><td className={run.yearly[y] >= 0 ? "good" : "bad"}>{pct(run.yearly[y])}</td></tr>)}</tbody>
       </table>
-    </div>
+    </TableScroll>
   );
 }
 

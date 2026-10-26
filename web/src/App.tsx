@@ -297,7 +297,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       )}
       {!standalone && !report && !error && <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />}
       {!standalone && report && (
-        <>
+        // Fades in over the space the skeleton held (REF-0023).
+        <div className="ui-fade-in">
           {route === "explore" ? <Explore report={report} /> :
             route === "strategies" ? <Strategies report={report} query={q} /> :
             route === "strategy" && arg ? <StrategyPage report={report} name={dec(arg)!} /> :
@@ -313,7 +314,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
             Research and education only. Not investment advice.
             <LegalLinks className="start app-legal" />
           </footer>
-        </>
+        </div>
       )}
       </Suspense>
       </ErrorBoundary>

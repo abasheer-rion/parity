@@ -26,6 +26,8 @@ Wider official data (REF-0015), all optional:
     pm.<NAME>      private markets proxies: property prices, bank lending, loan standards
 
 To add a series, add one line here and note it in docs/reference/0003-data-sources.md.
+The data registry (DEC-0064) copies every series here on each sync; series it finds and
+enrols by itself are read through `get` without being listed here.
 """
 
 from __future__ import annotations
@@ -403,7 +405,14 @@ CATALOG: dict[str, Series] = {s.key: s for s in _FX + _RATES + _OTHER + _REER + 
 
 
 def get(key: str) -> Series:
+    """A curated series, or one the data registry enrolled (DEC-0064). Curated series always
+    win, so an official run reads exactly what this file says."""
     try:
         return CATALOG[key]
     except KeyError as exc:
+        from ..registry.db import extra_series
+
+        found = extra_series().get(key)
+        if found is not None:
+            return found
         raise KeyError(f"Unknown series '{key}'. Add it to parity/data/catalog.py.") from exc

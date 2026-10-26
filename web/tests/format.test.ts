@@ -21,3 +21,14 @@ describe("format", () => {
     expect(daysSince(null)).toBeNull();
   });
 });
+
+describe("signs and zero", () => {
+  it("prints a true minus and never a negative zero", async () => {
+    const { pct, num, signedPct } = await import("../src/lib/format");
+    expect(pct(-0.0004)).toBe("0.0%");
+    expect(pct(-0.152)).toBe("−15.2%");
+    expect(num(-0.001)).toBe("0.00");
+    expect(signedPct(0.0001)).toBe("0.0%");
+    expect(signedPct(0.05)).toBe("+5.0%");
+  });
+});

@@ -20,6 +20,8 @@
 // the offline copy), PARITY_DEV_URL at a local dev server, and PARITY_LOG=1 prints each page
 // the app loads. PARITY_AUTH_BYPASS=1 treats the app as signed in, only with a loopback
 // PARITY_DEV_URL (for screenshots against `VITE_AUTH_BYPASS=1 npm run dev`).
+// PARITY_HIDDEN=1 (on by default under PARITY_SELFTEST) keeps every window off the screen:
+// no window is shown or focused, no Dock icon, no menu bar item, no notification, no message.
 const { app, BrowserWindow, Menu, Notification, dialog, globalShortcut, ipcMain, nativeTheme, net, powerMonitor, protocol, screen, session, shell, systemPreferences } = require("electron");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -42,6 +44,7 @@ const guard = require("./guard");
 guard.install({
   log: (m) => log(m),
   ask: (opts) => {
+    if (HIDDEN) return Promise.resolve({ response: 1 });
     const parent = [...windows].find((w) => w.alive && w.win.isVisible())?.win;
     return parent ? dialog.showMessageBox(parent, opts) : dialog.showMessageBox(opts);
   },
@@ -61,6 +64,8 @@ const WEB_ROOT = app.isPackaged ? path.join(process.resourcesPath, "web") : path
 const DEV_URL = (process.env.PARITY_DEV_URL || "").replace(/\/$/, "") || null;
 const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://parity.endyland.com").replace(/\/$/, "");
 const TRUSTED = routes.trustedOrigins(ORIGIN).concat(DEV_URL ? [new URL(DEV_URL).origin] : []);
+const HIDDEN = process.env.PARITY_HIDDEN === "1" || (!!process.env.PARITY_SELFTEST && process.env.PARITY_VISIBLE !== "1");
+if (HIDDEN && process.platform === "darwin") { try { app.setActivationPolicy("prohibited"); } catch { /* older macOS */ } }
 const AUTH_BYPASS = process.env.PARITY_AUTH_BYPASS === "1" && !!DEV_URL && /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(DEV_URL);
 const sections = routes.visibleSections(SECTIONS, WEB_ROOT);
 const numbered = sections.filter((s) => !s.bottom);
@@ -107,6 +112,7 @@ const notified = new Map();
 const ctx = {
   platform: process.platform,
   version: app.getVersion(),
+  hidden: HIDDEN,
   ORIGIN, DEV_URL, TRUSTED, PARTITION, sections,
   basePrefs: { contextIsolation: true, sandbox: true, nodeIntegration: false, partition: PARTITION, spellcheck: false },
   state: { online: null, signedIn: false, token: null },
@@ -282,10 +288,10 @@ function newWindow(p) {
 }
 
 function showAll() {
-  if (process.platform === "darwin") app.show();
+  if (process.platform === "darwin" && !HIDDEN) app.show();
   const list = [...windows].filter((w) => w.alive);
   if (!list.length) { createWindow({ ...(state.windows[0] || {}), path: state.lastPath || "/" }).focus(); return; }
-  for (const w of list) if (!w.win.isVisible()) w.win.show();
+  if (!HIDDEN) for (const w of list) if (!w.win.isVisible()) w.win.show();
   (focusedWindow() || list[0]).focus();
 }
 
@@ -371,7 +377,16 @@ function deleteWorkspace(name) {
 
 // ---------------------------------------------------------------- the hidden Trade page
 
-const backgroundOwner = { route() {}, leaveWall() {}, pageChanged() {}, keys() {} };
+const backgroundOwner = {
+  route() {}, leaveWall() {}, pageChanged() {}, keys() {},
+  // The hidden Trade page closed itself (page.js): a fresh one takes its place.
+  pageClosed(p) {
+    if (background !== p) return;
+    clearInterval(backgroundTimer);
+    background = null;
+    setTimeout(syncBackground, 1000);
+  },
+};
 
 /** Keeps a hidden Trade page while the ticker or "keep running" needs one and the person is signed in. */
 function syncBackground() {
@@ -418,7 +433,7 @@ function registerShortcut(acc) {
 }
 
 function openSettings() {
-  if (settingsWin && !settingsWin.isDestroyed()) { settingsWin.show(); settingsWin.focus(); return; }
+  if (settingsWin && !settingsWin.isDestroyed()) { if (!HIDDEN) { settingsWin.show(); settingsWin.focus(); } return; }
   settingsWin = new BrowserWindow({
     title: "Parity settings",
     width: 600, height: 720, minWidth: 480, minHeight: 480,
@@ -433,7 +448,7 @@ function openSettings() {
   wc.on("before-input-event", (e, input) => {
     if (input.type === "keyDown" && (input.key === "Escape" || ((input.meta || input.control) && input.code === "KeyW"))) { e.preventDefault(); settingsWin?.close(); }
   });
-  settingsWin.once("ready-to-show", () => settingsWin.show());
+  settingsWin.once("ready-to-show", () => { if (!HIDDEN) settingsWin?.show(); });
   settingsWin.on("closed", () => { settingsWin = null; if (!windows.size && process.platform !== "darwin" && !ctx.settings.keepRunning) app.quit(); });
   settingsWin.loadURL(ctx.shellUrl("ui-settings.html"));
 }
@@ -547,7 +562,7 @@ ipcMain.on("parity:token", (e, t) => {
 });
 
 ipcMain.on("parity:notify", (e, msg) => {
-  if (!fromPage(e) || !ctx.settings.notifications || !Notification.isSupported() || !msg) return;
+  if (HIDDEN || !fromPage(e) || !ctx.settings.notifications || !Notification.isSupported() || !msg) return;
   const title = String(msg.title).slice(0, 120), body = String(msg.body).slice(0, 240);
   // The same alert from two Trade pages (a window and the hidden one) shows once.
   const key = `${title}\n${body}`;
@@ -804,7 +819,7 @@ app.whenReady().then(async () => {
   const link = process.argv.find((a) => a.startsWith(`${SCHEME}://`));
   if (link) pending = routes.toAppPath(link, ORIGIN);
 
-  ctx.updates = updater.create({ log, enabled: () => ctx.settings.autoUpdate, parentWindow: () => focusedWindow()?.win || null });
+  ctx.updates = updater.create({ log, enabled: () => !HIDDEN && ctx.settings.autoUpdate, parentWindow: () => focusedWindow()?.win || null });
   tray = new ParityTray(ctx);
   buildMenu();
 
@@ -820,7 +835,8 @@ app.whenReady().then(async () => {
   }
   ready = true;
 
-  if (ctx.settings.globalShortcut && !registerShortcut(ctx.settings.globalShortcut)) log(`could not register ${ctx.settings.globalShortcut}`);
+  if (HIDDEN) app.dock?.hide();
+  if (!HIDDEN && ctx.settings.globalShortcut && !registerShortcut(ctx.settings.globalShortcut)) log(`could not register ${ctx.settings.globalShortcut}`);
   tray.sync();
   syncBackground();
   ctx.updates.sync();

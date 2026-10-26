@@ -88,3 +88,17 @@ describe("feedback and inputs", () => {
     expect(screen.getByRole("slider", { name: /Risk/ })).toBeInTheDocument();
   });
 });
+
+describe("Popover inside a paragraph", () => {
+  it("opens without breaking the paragraph's structure (no nesting warning)", async () => {
+    const { Popover } = await import("../src/ui/overlays");
+    const err = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      render(<p>A word <Popover label="Term" open trigger={() => <button type="button">term</button>}><span className="pac-term-pop"><strong>Term</strong><span>Plain meaning.</span></span></Popover> in a sentence.</p>);
+      expect(screen.getByRole("dialog", { name: "Term" }).tagName).toBe("SPAN");
+      expect(err.mock.calls.map((c) => String(c[0])).filter((m) => /cannot contain|cannot be a descendant/.test(m))).toEqual([]);
+    } finally {
+      err.mockRestore();
+    }
+  });
+});

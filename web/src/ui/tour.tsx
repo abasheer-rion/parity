@@ -2,7 +2,7 @@
 // at a part of the page, with the step count, Back, Next and Skip. It anchors to the
 // target the way Popover does and holds still for reduced motion. The tour itself (which
 // steps, when to show, remembering it was seen) lives with the feature, not here.
-import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Button } from "./buttons";
 import { Icon } from "./icons";
 import { usePresence } from "./presence";
@@ -21,11 +21,15 @@ export interface TourStepProps {
   placement?: "top" | "bottom" | "left" | "right";
   /** Optional "Skip all tours" link, for a person who wants no tours at all. */
   onSkipAll?: () => void;
+  /** True when the card keeps focus inside it (the guided tour), so screen readers stay in it too. */
+  modal?: boolean;
 }
 
-export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll }: TourStepProps) {
-  const p = usePresence(open, 180);
+export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll, modal = false }: TourStepProps) {
+  const p = usePresence(open, "dur-3");
   const card = useRef<HTMLDivElement>(null);
+  // Screen readers hear the step count and the text when the card takes focus, not just its title.
+  const id = useId();
   const [pos, setPos] = useState<CSSProperties>({});
   const [ring, setRing] = useState<CSSProperties | null>(null);
 
@@ -62,14 +66,14 @@ export function TourStep({ target, title, children, step, total, open, onNext, o
   return (
     <>
       {ring && <div className="ui-tour-ring" style={ring} aria-hidden data-state={p.state} />}
-      <div ref={card} className="ui-tour" style={pos} data-state={p.state} role="dialog" aria-label={title} tabIndex={-1}
+      <div ref={card} className="ui-tour" style={pos} data-state={p.state} role="dialog" aria-labelledby={`${id}-t`} aria-describedby={`${id}-n ${id}-b`} aria-modal={modal || undefined} tabIndex={-1}
         onKeyDown={(e) => { if (e.key === "Escape") onSkip(); if (e.key === "ArrowRight") onNext(); if (e.key === "ArrowLeft") onBack?.(); }}>
         <div className="ui-tour-head">
-          <span className="ui-tour-count ui-num">{step} of {total}</span>
+          <span id={`${id}-n`} className="ui-tour-count ui-num">{step} of {total}</span>
           <button type="button" className="ui-iconbtn ui-iconbtn-plain" aria-label="Skip the tour" onClick={onSkip}><Icon name="close" size={13} /></button>
         </div>
-        <h3>{title}</h3>
-        <div className="ui-tour-body">{children}</div>
+        <h3 id={`${id}-t`}>{title}</h3>
+        <div id={`${id}-b`} className="ui-tour-body">{children}</div>
         <div className="ui-tour-foot">
           {onSkipAll ? <button type="button" className="ui-tour-skipall" onClick={onSkipAll}>Skip all tours</button> : null}
           <span className="ui-tour-gap" />

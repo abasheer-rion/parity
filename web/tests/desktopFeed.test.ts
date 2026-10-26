@@ -49,9 +49,12 @@ describe("serveFeed", () => {
   const env = { DESKTOP_RELEASES_TOKEN: "test-token" };
   const list = [release("desktop-v0.2.0", "2026-10-25T00:00:00Z")];
 
-  it("answers 503 until the token is set", async () => {
-    const res = await serveFeed("latest-mac.yml", "GET", {}, github(list));
-    expect(res.status).toBe(503);
+  it("works without a token, since the repository is public", async () => {
+    const f = github(list);
+    const res = await serveFeed("latest-mac.yml", "GET", {}, f);
+    expect(res.status).toBe(200);
+    const apiCall = f.mock.calls.find(([u]) => String(u).startsWith("https://api.github.com/"));
+    expect((apiCall?.[1] as RequestInit | undefined)?.headers).not.toHaveProperty("Authorization");
   });
 
   it("passes the .yml file through as text", async () => {

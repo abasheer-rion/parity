@@ -40,7 +40,7 @@ export function TTable<T>({ rows, cols, rowKey, empty, onRow, initial, label, ac
   };
   return (
     <div className="tt-wrap">
-      <table className="tt" aria-label={label}>
+      <table className="tt ui-stagger-rows" aria-label={label}>
         <colgroup>{cols.map((c) => <col key={c.key} className={c.wide ? "nph" : undefined} style={c.width != null ? { width: c.width } : undefined} />)}</colgroup>
         <thead>
           <tr>
