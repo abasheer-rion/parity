@@ -76,7 +76,7 @@ The hosted project is much smaller than this machine, but both caps (3,000 analy
 
 ## Desktop soak test
 
-Run hidden on a Mac runner in CI (`.github/workflows/soak.yml`, `desktop/scripts/soak.mjs`): the app starts with `PARITY_HIDDEN=1`, which only works together with the test switch, so no window is shown or focused, there is no Dock or menu bar icon, no notification, no global key and no update check. It uses its own profile folder. A stand-in for Supabase and a stand-in live price feed (one update a second for 20 coins) run inside the test, so nothing reaches a real account or an outside data source. The script refuses to run on a person's own Mac unless `PARITY_SOAK_LOCAL=1`.
+Run hidden on a Mac runner in CI (`.github/workflows/soak.yml`, `desktop/scripts/soak.mjs`): the app starts hidden (`PARITY_HIDDEN=1`, also on by default for every test run, #121), so no window is shown or focused, there is no Dock or menu bar icon, no notification, no global key and no update check. It uses its own profile folder. A stand-in for Supabase and a stand-in live price feed (one update a second for 20 coins) run inside the test, so nothing reaches a real account or an outside data source. The script refuses to run on a person's own Mac unless `PARITY_SOAK_LOCAL=1`.
 
 Results (Mac runner, 26 October; numbers in MB of memory unless marked):
 
