@@ -23,6 +23,7 @@ import { Button, Dialog, Icon, Popover, Segmented, Toaster, Toggle, toast } from
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
 import "./academy.css";
+import { isDesktop } from "../desktop/bridge";
 
 const LEGAL = "Research and education only. Not investment advice.";
 const LEGAL_MORE = " Pictures use example numbers unless they say otherwise.";
@@ -37,7 +38,9 @@ export function AcademyApp() {
 }
 
 // Parity opens the Academy in a new tab, so a tab whose only history entry is this page was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 function goBack() {
   if (OPENED_AS_TAB) {
     window.close();

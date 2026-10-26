@@ -36,13 +36,16 @@ const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default:
 const WhatIfView = lazyPage(() => import("./WhatIfView").then((m) => ({ default: m.WhatIfView })));
 const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
 import { Assistant } from "../assistant/Mount";
+import { isDesktop } from "../desktop/bridge";
 
 export function LabApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <LabShell />; }}</AppGuard>;
 }
 
 // Parity opens the Workbench in a new tab, so a tab whose only history entry is this page was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 function goBack() {
   if (OPENED_AS_TAB) {
     window.close();

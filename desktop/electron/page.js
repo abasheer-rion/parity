@@ -47,7 +47,10 @@ class Page {
   }
 
   get wc() { return this.view.webContents; }
-  get alive() { return !this.wc.isDestroyed(); }
+  // Once its contents close, Electron leaves the view with no contents at all (webContents
+  // reads undefined, not a closed object). 0.2.0 read it anyway and threw: a page that called
+  // window.close() turned black, and closing its window raised "A JavaScript error occurred".
+  get alive() { const wc = this.view.webContents; return !!wc && !wc.isDestroyed(); }
 
   wire() {
     const { ctx } = this;
@@ -67,6 +70,16 @@ class Page {
     wc.on("will-redirect", (e, url) => { if (!ctx.isTrusted(url)) { e.preventDefault(); this.owner.route(url); } });
     wc.setWindowOpenHandler(({ url }) => { this.owner.route(url); return { action: "deny" }; });
     wc.on("will-attach-webview", (e) => e.preventDefault());
+    // The page closed itself (window.close() in its code, as Academy's Back to Parity does in
+    // a browser tab). The window takes it away and goes back, never a black view (DEC-0059).
+    wc.once("destroyed", () => {
+      if (this.closing) return;
+      this.closing = true;
+      this.stopWatchdog();
+      clearTimeout(this.blankTimer);
+      ctx.log(`page closed itself: ${this.path}`);
+      setImmediate(() => this.owner.pageClosed?.(this));
+    });
     wc.on("did-navigate", (_e, url) => { this.stopWatchdog(); ctx.log(`loaded ${url}`); this.navigated(url); });
     wc.on("did-navigate-in-page", (_e, url, isMainFrame) => { if (isMainFrame) this.navigated(url); });
     wc.on("did-fail-load", (_e, code, desc, url, isMainFrame) => {
@@ -217,6 +230,7 @@ class Page {
   forward() { if (!this.alive) return false; const h = this.wc.navigationHistory; if (h.canGoForward()) { h.goForward(); return true; } return false; }
 
   destroy() {
+    this.closing = true;
     this.stopWatchdog();
     clearTimeout(this.blankTimer);
     if (this.alive) this.wc.close();

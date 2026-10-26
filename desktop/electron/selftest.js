@@ -8,6 +8,11 @@
 //             offline line, and a page that cannot open at all shows Retry.
 //   signedin  (PARITY_AUTH_BYPASS with a local server) the menu opens with every section, a
 //             section opens, and a section opens in a second window.
+//   selfclose a page that calls window.close() (Academy's Back to Parity did) leaves its
+//             window, which goes back to the section before it, or Home; closing the windows
+//             afterwards raises no error. 0.2.0 turned black and then threw (DEC-0059).
+//
+// Windows stay hidden throughout (PARITY_HIDDEN, main.js): nothing appears on the screen.
 const { app } = require("electron");
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -26,6 +31,9 @@ async function until(fn, ms = 20000, step = 200) {
 async function run(api) {
   const scenario = process.env.PARITY_SELFTEST;
   let failed = 0;
+  // Errors nobody caught in the main process (guard.js logs them; here they fail the run).
+  const uncaught = [];
+  process.on("uncaughtException", (e) => uncaught.push(e));
   const check = (name, ok, detail = "") => {
     if (!ok) failed++;
     console.log(`${ok ? "PASS" : "FAIL"} ${scenario}: ${name}${!ok && detail ? ` (${detail})` : ""}`);
@@ -41,7 +49,7 @@ async function run(api) {
     await settled(w);
 
     if (scenario === "wall" || scenario === "offline") {
-      check("the window is visible", w.win.isVisible());
+      check("the window is ready to show", w.ctx.hidden ? w.revealed : w.win.isVisible());
       check("exactly one window", api.windows().length === 1, `${api.windows().length}`);
       check("the deep link opened the log-in page", /^\/login\//.test(w.active.path || ""), w.active.path);
       check("the window is on the log-in wall", w.wall === true);
@@ -127,7 +135,11 @@ async function run(api) {
       check("a kept section is still drawn when shown again", px > 0.004, `${(px * 100).toFixed(2)}%`);
     }
 
-    if (scenario === "occlude") {
+    if (scenario === "occlude" && w.ctx.hidden) {
+      console.log("SKIP occlude: it needs windows on the screen, so it runs only with PARITY_VISIBLE=1 on a CI machine");
+    }
+
+    if (scenario === "occlude" && !w.ctx.hidden) {
       // Hide, minimise, switch sections and restart the graphics process, then bring the
       // window back: it prints SHOT lines with the window's place so the caller can take a
       // screen picture of each (web/scripts/perf/desktop.mjs). Needs the local stub.
@@ -155,6 +167,25 @@ async function run(api) {
       check("it offers Retry", await until(() => js(w.active.wc, "!!document.getElementById('retry')"), 5000));
     }
 
+    if (scenario === "selfclose") {
+      const gone = (x, key) => until(() => x.active && x.active.key !== key && x.active.alive, 10000);
+      w.openSection("academy");
+      await settled(w);
+      check("Academy opens", w.active.key === "academy", w.active.key);
+      js(w.active.wc, "window.close()").catch(() => {});
+      check("a page that closes itself leaves its window", !!(await gone(w, "academy")), `${w.active?.key}`);
+      check("the window goes back to the section before", w.active.key === "home" && !w.pages.has("academy"), `${w.active.key} ${[...w.pages.keys()]}`);
+      const w2 = api.newWindow("/academy/");
+      await settled(w2);
+      js(w2.active.wc, "window.close()").catch(() => {});
+      check("a window whose only page closes goes Home", !!(await gone(w2, "academy")) && w2.active.key === "home", `${w2.active?.key}`);
+      w2.win.close();
+      await wait(800);
+      w.win.close();
+      await wait(800);
+      check("closing the windows afterwards raises no error", uncaught.length === 0, uncaught.map((e) => e.message).join("; "));
+    }
+
     if (scenario === "signedin") {
       check("signed in, not on the wall", w.wall === false);
       w.openOverlay("menu");
@@ -177,6 +208,7 @@ async function run(api) {
   } catch (e) {
     check("ran to the end", false, e.message);
   }
+  check("no error went uncaught in the main process", uncaught.length === 0, uncaught.map((e) => e.stack || e.message).join("\n"));
   app.exit(failed ? 1 : 0);
 }
 
