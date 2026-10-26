@@ -9,6 +9,7 @@ import { fmtNum, fmtPct, tone } from "../fmt";
 import { FUNCTIONS, HONEST } from "../functions";
 import { WORKSPACES } from "../layout";
 import { Empty, Loading, TTable, type TCol } from "../tui";
+import { MotionControl, MotionHelp } from "../../ui/motionSetting";
 
 // ---------- NEWS ----------
 
@@ -67,11 +68,11 @@ export function KpiPanel() {
   const cols: TCol<StrategyRun>[] = [
     { key: "name", label: "Strategy", align: "left", sort: (r) => nameOf(r), render: (r) => <span className="term-name strong" title={r.summary}>{nameOf(r)}{r.is_benchmark ? <span className="term-tag">BENCH</span> : null}</span> },
     { key: "sharpe", label: "Sharpe", sort: (r) => m(r).sharpe, render: (r) => fmtNum(m(r).sharpe, 2), title: "Return per unit of risk, per year" },
-    { key: "cagr", label: "CAGR", sort: (r) => m(r).cagr, render: (r) => <span className={tone(m(r).cagr)}>{fmtPct(m(r).cagr, 1, true)}</span>, title: "Growth per year" },
-    { key: "dd", label: "Worst fall", sort: (r) => m(r).max_drawdown, render: (r) => <span className="down">{fmtPct(m(r).max_drawdown, 1)}</span>, title: "Largest fall from a peak" },
+    { key: "cagr", label: "CAGR", sort: (r) => m(r).cagr, render: (r) => <span className={tone(m(r).cagr)}>{fmtPct(m(r).cagr, 1, true)}</span>, title: "Growth per year", className: "c-n3" },
+    { key: "dd", label: "Worst fall", sort: (r) => m(r).max_drawdown, render: (r) => <span className="down">{fmtPct(m(r).max_drawdown, 1)}</span>, title: "Largest fall from a peak", className: "c-n2" },
     { key: "dsr", label: "Luck check", sort: (r) => m(r).deflated_sharpe, render: (r) => fmtPct(m(r).deflated_sharpe, 0), title: "Deflated Sharpe: the chance the Sharpe is not luck, after counting every trial", className: "c-vol" },
     { key: "verdict", label: "Verdict", align: "left", sort: (r) => r.gauntlet?.verdict ?? null, render: (r) => <span className={`term-verdict ${r.gauntlet?.passed === r.gauntlet?.total && r.gauntlet ? "up" : ""}`}>{r.gauntlet?.verdict ?? "n/a"}</span>, className: "c-label" },
-    { key: "tests", label: "Tests", sort: (r) => (r.gauntlet ? r.gauntlet.passed / Math.max(1, r.gauntlet.total) : null), render: (r) => (r.gauntlet ? `${r.gauntlet.passed}/${r.gauntlet.total}` : "n/a") },
+    { key: "tests", label: "Tests", sort: (r) => (r.gauntlet ? r.gauntlet.passed / Math.max(1, r.gauntlet.total) : null), render: (r) => (r.gauntlet ? `${r.gauntlet.passed}/${r.gauntlet.total}` : "n/a"), className: "c-m1" },
   ];
   return (
     <div className="term-col">
@@ -127,6 +128,8 @@ export function HelpPanel() {
       <p className="muted">{WORKSPACES.map((w, i) => `F${i + 2} ${w.label}`).join(" · ")}. Changes are saved in this browser per workspace; RESET puts the preset back.</p>
       <h3>Linking</h3>
       <p className="muted">Clicking a row, a tile or a country selects it everywhere: detail and compare panels follow the linked series unless their link button is off.</p>
+      <h3>Motion</h3>
+      <div className="term-motion"><MotionControl /><MotionHelp className="muted" /></div>
     </div>
   );
 }

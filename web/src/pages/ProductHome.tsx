@@ -5,7 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Sparkline } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Badge, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, Tilt } from "../ui";
+import { Badge, Button, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, Tilt } from "../ui";
 import { colorMap } from "../lib/colors";
 import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
@@ -150,7 +150,7 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
             <h2>Build a strategy by describing it <Badge tone="accent">Coming next</Badge></h2>
             <p className="muted small">Planned: type an idea, like "own the strongest currencies but step aside when fear is high", and Parity turns it into a strategy and runs the same tests. For now, you can change the settings of an existing strategy.</p>
           </div>
-          <a className="btn-primary" href="#/lab">Try settings</a>
+          <Button variant="primary" href="#/lab">Try settings</Button>
         </Reveal>
       </div>
       <p className="muted small phome-foot">

@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 import { LEGAL_PAGES } from "../legal/LegalLinks";
 import { readSaved, writeSaved } from "../lib/scenarios";
 import { productUrl, researchUrl } from "../lib/space";
-import { Button, Segmented, toast } from "../ui";
+import { Button, MotionControl, Segmented, toast, useMotionHelp } from "../ui";
 import { EDGE_DRAFT } from "./EdgesView";
 import { KeyTable } from "./KeyTable";
 import type { Settings } from "./state";
@@ -15,6 +15,7 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 
 export function SettingsView({ settings, set }: { settings: Settings; set: (p: Partial<Settings>) => void }) {
   const [saved, setSaved] = useState(() => readSaved().length);
+  const motionHelp = useMotionHelp();
   return (
     <div className="lb-view lb-scroll">
       <div className="lb-settings">
@@ -22,6 +23,8 @@ export function SettingsView({ settings, set }: { settings: Settings; set: (p: P
           <h2 id="ls-view" className="lb-sub">View</h2>
           <Row label="Density"><Segmented size="sm" label="Density" value={settings.density} onChange={(density) => set({ density })} options={[["compact", "Compact"], ["comfortable", "Comfortable"]]} /></Row>
           <Row label="Open on"><Segmented size="sm" label="Open on" value={settings.start} onChange={(start) => set({ start })} options={[["last", "The last view"], ["try", "Try settings"]]} /></Row>
+          <Row label="Motion"><MotionControl /></Row>
+          <p className="lb-dim lb-pad0">{motionHelp}</p>
         </section>
         <section className="lb-box" aria-labelledby="ls-data">
           <h2 id="ls-data" className="lb-sub">Kept in this browser</h2>

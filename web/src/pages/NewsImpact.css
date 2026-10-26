@@ -11,6 +11,4 @@
 .news-path { margin: 0 0 12px; }
 .news-path svg { width: 100%; max-width: 720px; height: auto; display: block; }
 .news-path figcaption { font-size: var(--fs-xs); margin-top: 4px; }
-.news-linkbtn { background: none; border: 0; padding: 0; color: var(--link); cursor: pointer; font: inherit; text-align: left; }
-.news-linkbtn:hover { text-decoration: underline; }
 .news-more { margin-top: 12px; }

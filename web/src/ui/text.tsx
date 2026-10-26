@@ -33,10 +33,16 @@ export function Kbd({ children }: { children: ReactNode }) {
   return <kbd className="ui-kbd">{children}</kbd>;
 }
 
+/** Fixed digits with a true minus, never a negative zero (-0.0004 prints 0.0). */
+function signed(v: number, d: number, plus: boolean): string {
+  const s = Math.abs(v).toFixed(d);
+  return `${Number(s) === 0 ? "" : v < 0 ? MINUS : plus ? "+" : ""}${s}`;
+}
+
 export const fmt = {
-  pct: (v: number | null | undefined, d = 1) => (v == null ? "n/a" : `${v < 0 ? MINUS : ""}${Math.abs(v * 100).toFixed(d)}%`),
-  signedPct: (v: number | null | undefined, d = 1) => (v == null ? "n/a" : `${v > 0 ? "+" : v < 0 ? MINUS : ""}${Math.abs(v * 100).toFixed(d)}%`),
-  num: (v: number | null | undefined, d = 2) => (v == null ? "n/a" : `${v < 0 ? MINUS : ""}${Math.abs(v).toFixed(d)}`),
+  pct: (v: number | null | undefined, d = 1) => (v == null || !Number.isFinite(v) ? "n/a" : `${signed(v * 100, d, false)}%`),
+  signedPct: (v: number | null | undefined, d = 1) => (v == null || !Number.isFinite(v) ? "n/a" : `${signed(v * 100, d, true)}%`),
+  num: (v: number | null | undefined, d = 2) => (v == null || !Number.isFinite(v) ? "n/a" : signed(v, d, false)),
   compact: (v: number) => {
     const a = Math.abs(v);
     const s = a >= 1e9 ? `${+(a / 1e9).toPrecision(3)}B` : a >= 1e6 ? `${+(a / 1e6).toPrecision(3)}M` : a >= 1e3 ? `${+(a / 1e3).toPrecision(3)}K` : `${+a.toPrecision(3)}`;

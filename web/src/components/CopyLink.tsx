@@ -1,8 +1,7 @@
 // "Copy link" beside each page title (DEC-0038): copies the shortest link that reopens
 // this view as it is now, filters and all (src/lib/deeplink.ts).
 import { shareUrl } from "../lib/deeplink";
-import { toast } from "../ui";
-import { Icon } from "../ui/icons";
+import { toast, IconButton } from "../ui";
 
 export async function copyLink(href: string = window.location.href): Promise<boolean> {
   const url = shareUrl(href);
@@ -18,8 +17,6 @@ export async function copyLink(href: string = window.location.href): Promise<boo
 
 export function CopyLink() {
   return (
-    <button type="button" className="round-btn" onClick={() => void copyLink()} aria-label="Copy link to this view" title="Copy link to this view">
-      <Icon name="link" size={13} />
-    </button>
+    <IconButton icon="link" onClick={() => void copyLink()} label="Copy link to this view" />
   );
 }

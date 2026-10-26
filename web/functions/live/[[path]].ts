@@ -25,6 +25,7 @@ declare const WebSocketPair: WebSocketPairCtor;
 interface Env {
   LIVE?: DurableObjectNamespace; VENDOR?: string; VENDOR_KEY?: string; PARITY_CONTACT?: string; LIVE_ALLOW?: string; LIVE_DENY?: string;
   ALPACA_KEY_ID?: string; ALPACA_SECRET_KEY?: string; ALPACA_FEED?: string; FINNHUB_TOKEN?: string;
+  COINGECKO_API_KEY?: string; COINGECKO_PRO?: string;
 }
 interface Context { request: Request; env: Env; params: { path?: string[] }; waitUntil: (p: Promise<unknown>) => void }
 
@@ -135,16 +136,20 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
 
   if (route === "status") {
     if (!env.LIVE) return json(request, 503, { error: "Live fan-out is not bound here" });
-    const rows = await Promise.all(ADAPTERS.filter((a) => a.enabled(env)).map(async (a) => {
-      try {
-        const r = await env.LIVE!.get(env.LIVE!.idFromName(a.id)).fetch(`https://hub/status?src=${a.id}`);
-        const body = (await r.json()) as Record<string, unknown>;
-        // Public status: for team-only sources, not which symbols the team is watching.
-        if (isInternal(a.id)) { delete body.symbols; delete body.books; }
-        return body;
-      } catch (e) { return { src: a.id, error: String(e) }; }
-    }));
-    return json(request, 200, { now: Date.now(), sources: rows });
+    // One answer per data centre every 2 seconds (REF-0025): each call asks every source's
+    // fan-out object, so many open Latency pages would otherwise multiply those calls.
+    return cached(ctx, "pub/status/v1", 2, async () => {
+      const rows = await Promise.all(ADAPTERS.filter((a) => a.enabled(env)).map(async (a) => {
+        try {
+          const r = await env.LIVE!.get(env.LIVE!.idFromName(a.id)).fetch(`https://hub/status?src=${a.id}`);
+          const body = (await r.json()) as Record<string, unknown>;
+          // Public status: for team-only sources, not which symbols the team is watching.
+          if (isInternal(a.id)) { delete body.symbols; delete body.books; }
+          return body;
+        } catch (e) { return { src: a.id, error: String(e) }; }
+      }));
+      return json(request, 200, { now: Date.now(), sources: rows });
+    });
   }
 
   if (route === "sources") return json(request, 200, SOURCES, 300);
@@ -177,7 +182,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
         try { return json(request, 200, await universe(env, true), 3600); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
       }, true);
     }
-    return cached(ctx, "pub/universe/v3", 86_400, async () => {
+    return cached(ctx, "pub/universe/v4", 86_400, async () => {
       try { return json(request, 200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
     });
   }

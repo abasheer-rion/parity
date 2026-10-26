@@ -21,7 +21,7 @@ import { date } from "../lib/format";
 import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
-import { Dialog, ErrorBoundary, Icon, lazyPage, Toaster } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, Toaster } from "../ui";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { TryView } from "./TryView";
 import { KeyTable } from "./KeyTable";
@@ -36,13 +36,16 @@ const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default:
 const WhatIfView = lazyPage(() => import("./WhatIfView").then((m) => ({ default: m.WhatIfView })));
 const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
 import { Assistant } from "../assistant/Mount";
+import { isDesktop } from "../desktop/bridge";
 
 export function LabApp() {
   return <AppGuard>{(user) => { setStoreUser(user.id); return <LabShell />; }}</AppGuard>;
 }
 
 // Parity opens the Workbench in a new tab, so a tab whose only history entry is this page was opened that way.
-const OPENED_AS_TAB = !!window.opener || window.history.length <= 1;
+// Never in the desktop app: there the page is part of a window, and closing it left a black
+// view and then an error when the window closed (desktop 0.2.0, DEC-0059).
+const OPENED_AS_TAB = !isDesktop() && (!!window.opener || window.history.length <= 1);
 function goBack() {
   if (OPENED_AS_TAB) {
     window.close();
@@ -126,7 +129,7 @@ function LabShell() {
       if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || isTyping(e.target)) return;
       if (document.querySelector(".ui-dialog-backdrop, [aria-modal='true']")) return;
       if (e.key === "?") { e.preventDefault(); setKeysOpen(true); return; }
-      if (e.shiftKey && /^Digit[1-6]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
+      if (e.shiftKey && /^Digit[1-7]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
       if (e.shiftKey) return;
       if (e.key === "/") {
         const box = document.querySelector<HTMLInputElement>("[data-lab-find] input, input[data-lab-find]");
@@ -185,10 +188,10 @@ function LabShell() {
         {!missing && current.research && <span className="lb-ro" title="Numbers from the research side. Nothing here changes them.">Research · read only</span>}
         <span className="lb-gap" />
         {runPicker}
-        <button type="button" className="lb-btn" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
-          <Icon name="link" size={13} /><span className="lb-btn-t">Copy link</span>
-        </button>
-        <button type="button" className="lb-icon" onClick={() => setKeysOpen(true)} title="Keys (?)" aria-label="Keys"><Icon name="keyboard" size={15} /></button>
+        <Button size="xs" icon="link" className="lb-copy" onClick={() => void copyLink()} title="Copy a link to this view as it is now (L)">
+          <span className="lb-btn-t">Copy link</span>
+        </Button>
+        <IconButton icon="keyboard" size="sm" variant="plain" className="lb-keys" onClick={() => setKeysOpen(true)} label="Keys (?)" />
       </header>
 
       <div className="lb-mid">
@@ -202,7 +205,7 @@ function LabShell() {
             ))}
           </nav>
         )}
-        <main id="main" tabIndex={-1} className="lb-main">
+        <main id="main" tabIndex={-1} className="lb-main ui-route-kids">
           <ErrorBoundary key={view} scope="page">
             <Suspense fallback={<div className="lb-msg lb-loading" aria-busy="true">Loading</div>}>{body}</Suspense>
           </ErrorBoundary>

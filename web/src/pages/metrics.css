@@ -17,7 +17,7 @@
 .mx-funnel { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .mx-funnel li { display: grid; gap: 4px; }
 .mx-funnel-row { display: flex; justify-content: space-between; gap: 12px; font-size: var(--type-sm); }
-.mx-funnel-row .num { font-variant-numeric: tabular-nums; }
+.mx-funnel-row .num { font-variant-numeric: var(--num-variant); }
 .mx-retention .mx-cell { background: color-mix(in srgb, var(--ds-text-secondary) calc(var(--p, 0) * 45%), transparent); }
 @media (max-width: 640px) {
   .mx-barcell { display: none; }

@@ -255,13 +255,19 @@ class Context:
     (`level`, see "widening" below; 0 is the original space)."""
 
     def __init__(self, have: set[str] | None = None, pool: list[dict] | None = None,
-                 level: int = 0):
+                 level: int = 0, arrivals: list[str] | None = None,
+                 arrival_assets: list[str] | None = None):
         self.have = have
         self.pool = pool or []
         self.level = level
+        # Series the data registry enrolled (DEC-0064): new signals, and the daily prices
+        # among them that can be held. Empty unless the registry has enrolled something.
+        self.arrivals = arrivals or []
+        self.arrival_assets = arrival_assets or []
 
     def series(self) -> list[str]:
-        return [k for k in GATE_SERIES if self.have is None or k in self.have]
+        return [k for k in GATE_SERIES if self.have is None or k in self.have] + \
+            [k for k in self.arrivals if k not in GATE_SERIES]
 
 
 def _depth(spec: dict) -> int:
@@ -339,6 +345,30 @@ def _ensemble(r: random.Random, ctx: Context | None = None) -> dict:
     return {"kind": "ensemble", "parts": [parts[k] for k in sorted(parts)]}
 
 
+def _arrival(r: random.Random, ctx: Context | None = None) -> dict:
+    """A variation built on a series the data registry enrolled (DEC-0064): a trend on it
+    when it is a daily price that can be held, otherwise US stocks switched by it."""
+    ctx = ctx or Context()
+    if ctx.arrival_assets and (not ctx.arrivals or r.random() < 0.5):
+        return {"kind": "trend", "universe": "one", "asset": r.choice(ctx.arrival_assets),
+                "lookback": r.choice(_lookbacks(ctx)[4:]), "skip": 0,
+                "rebalance": r.choice(["W", "M"]), "long_only": r.random() < 0.5}
+    if not ctx.arrivals:
+        return _trend(r, ctx)
+    test = r.choice(GATE_TESTS)
+    gate = {"series": r.choice(ctx.arrivals), "test": test,
+            "window": r.choice(_grid_for(ctx)(GATE_WINDOWS, geo=True, lo=5, hi=756))}
+    if test.startswith("z_"):
+        gate["level"] = r.choice(_grid_for(ctx)(GATE_LEVELS, integer=False, lo=-2.5, hi=2.5))
+    return {"kind": "gated", "base": HOLD_STOCKS, "gate": gate,
+            "rebalance": r.choice(["W", "M"])}
+
+
+#: US stocks held all the time: the base the arrival battery and sampler switch on and off.
+HOLD_STOCKS = {"kind": "mix", "assets": [B.MKT], "scale": "fixed", "trend": False,
+               "lookback": 252, "vol_target": None}
+
+
 SAMPLERS = BASE_SAMPLERS + [(_gated, 6), (_voltarget, 3), (_offset, 2), (_ensemble, 3)]
 WRAPPER_SAMPLERS = (_gated, _voltarget, _offset, _ensemble)
 
@@ -355,7 +385,9 @@ def _draw(fn, r: random.Random, ctx: Context | None) -> dict:
     return fn(r, ctx) if fn in TAKES_CTX else fn(r)
 
 
-TAKES_CTX = {fn for fn, _ in SAMPLERS}
+TAKES_CTX = {fn for fn, _ in SAMPLERS} | {_arrival}
+#: The arrival sampler's weight, used only while the registry has enrolled series.
+ARRIVAL_WEIGHT = 2
 
 
 # --- widening (DEC-0037) -------------------------------------------------------------
@@ -487,7 +519,9 @@ def _assets(u: str) -> list[str]:
 
 def _held(spec: dict) -> list[str]:
     """What a trend or ranking book trades: its universe, or the subset a widened search
-    drew from it."""
+    drew from it, or the one asset of an arrival spec (DEC-0064)."""
+    if spec.get("universe") == "one":
+        return [spec["asset"]]
     return list(spec.get("subset") or _assets(spec["universe"]))
 
 
@@ -544,7 +578,9 @@ def describe(spec: dict) -> dict:
         lo = "long or cash" if spec["long_only"] else "long or short"
         span = _months(spec["lookback"])
         ls = "" if spec["long_only"] else " L/S"
-        name = f"{_ulabel(spec['universe'])}{_sublabel(spec)} trend {span}{ls} {every}"
+        who = _series_label(spec["asset"]) if spec["universe"] == "one" else \
+            f"{_ulabel(spec['universe'])}{_sublabel(spec)}"
+        name = f"{who} trend {span}{ls} {every}"
         line = f"Follows each asset's {span} trend, {lo}, rebalanced {every}.{_subline(spec)}"
         tags = ("trend", "momentum")
     elif k == "rank":
@@ -617,6 +653,11 @@ def _asset_class(spec: dict) -> str:
     u = spec.get("universe")
     if spec["kind"] in WRAPPERS:
         return _wrapper_asset(spec)
+    if u == "one":
+        head = spec["asset"].split(".", 1)[0]
+        return "fx" if head in ("fx", "xfx", "ecb") else "commodities" if head in (
+            "cmd", "eia") else "crypto" if head in ("kraken", "coinbase", "gemini",
+                                                    "binanceus", "hyperliquid") else "mixed"
     if spec["kind"] in ("pair", "cot", "policy") or u in ("g10", "fx21", "xg10", "xwide"):
         return "fx"
     if spec["kind"] == "timing" or u in ("ind", "fac", "mkt", "fac7"):
@@ -756,6 +797,8 @@ def gate_on(panel: pd.DataFrame, gate: dict) -> pd.Series:
         on = x > avg if test == "above_avg" else x < avg
     elif test in ("rising", "falling"):
         on = x > x.shift(n) if test == "rising" else x < x.shift(n)
+    elif test == "above_other":  # carry: this rate above another, by more than `level`
+        on = (x - panel[gate["other"]].shift(1)) > gate.get("level", 0.0)
     else:
         z = zscore(x, n)
         on = z > gate["level"] if test == "z_above" else z < gate["level"]
@@ -800,7 +843,8 @@ class _Combo(B.Block):
 
 class _Gated(_Combo):
     def __init__(self, spec: dict):
-        super().__init__([build(spec["base"])], [spec["gate"]["series"]])
+        super().__init__([build(spec["base"])], [spec["gate"]["series"]]
+                         + ([spec["gate"]["other"]] if "other" in spec["gate"] else []))
         self._gate, self.rebalance = spec["gate"], spec["rebalance"]
 
     def weights(self, panel):
@@ -901,6 +945,9 @@ def _gate_label(g: dict) -> tuple[str, str]:
     """A short form for names and a plain sentence for the one-line description."""
     s, n, t = _series_label(g["series"]), g["window"], g["test"]
     lv = g.get("level")
+    if t == "above_other":
+        o = _series_label(g["other"])
+        return f"{s} over {o}", f"{s} is above {o}"
     short = {"above_avg": f"{s} over {n}d avg", "below_avg": f"{s} under {n}d avg",
              "rising": f"{s} up {n}d", "falling": f"{s} down {n}d",
              "z_above": f"{s} z>{lv} {n}d", "z_below": f"{s} z<{lv} {n}d"}[t]
@@ -1020,8 +1067,42 @@ def _panel() -> tuple[pd.DataFrame, str, set[str]]:
                     *TRADABLE - {B.CASH}, *GATE_SERIES})
     root = store.DEFAULT_DIR
     keys += [k for k in wider if k not in keys and store._path(catalog.get(k), root).exists()]
+    # Series the data registry enrolled (DEC-0064), when their history is on this machine.
+    keys += [k for k, s in _registry_series().items()
+             if k not in keys and store._path(s, root).exists()]
     snap = store.coverage().get("fetched_at") or "unknown"
     return store.panel(keys), snap, set(keys)
+
+
+def _registry_series() -> dict:
+    """Enrolled registry series the engine may read (DEC-0064). Empty when there is none."""
+    try:
+        from .registry.db import extra_series
+        return extra_series()
+    except Exception:  # the search never stops for the registry
+        return {}
+
+
+def arrivals(have: set[str] | None) -> tuple[list[str], list[str]]:
+    """Registry series on this machine: every one as a signal, the daily prices that can be
+    held as assets. Rights none or feed-only series never reach here (extra_series)."""
+    try:
+        from .registry.db import lookup
+    except Exception:
+        return [], []
+    signals, assets = [], []
+    for key in sorted(_registry_series()):
+        if have is not None and key not in have:
+            continue
+        rec = lookup(key) or {}
+        # The search needs three years of returns; a shorter history only adds failed tries.
+        start, end = rec.get("start_date"), rec.get("end_date")
+        if not start or not end or (pd.Timestamp(end) - pd.Timestamp(start)).days < 365 * 3.2:
+            continue
+        signals.append(key)
+        if rec.get("frequency") == "D" and "tradable" in (rec.get("tags") or []):
+            assets.append(key)
+    return signals, assets
 
 
 def _pool(con: sqlite3.Connection) -> list[dict]:
@@ -1031,11 +1112,11 @@ def _pool(con: sqlite3.Connection) -> list[dict]:
 
 
 def novelty(r: random.Random, seen: set[str], ctx: Context | None = None,
-            probes: int = 40) -> list[tuple[int, int]]:
+            samplers: list | None = None, probes: int = 40) -> list[tuple[int, int]]:
     """For each sampler, (new, drawn) over a few trial draws. A sampler whose draws are
     mostly repeats has worked through its region, so it is drawn less (`run_batch`)."""
     out = []
-    for fn, _ in SAMPLERS:
+    for fn, _ in samplers or SAMPLERS:
         new = sum(spec_id(_draw(fn, r, ctx)) not in seen for _ in range(probes))
         out.append((new, probes))
     return out
@@ -1054,17 +1135,20 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
     bench_res = run(_benchmark(), panel, BacktestConfig(cost_bps=0.0))
     seen = {row[0] for row in con.execute("SELECT id FROM trials")}
     level = widen_level(con)
-    ctx = Context(have=have, pool=_pool(con), level=level)
-    stats_ = novelty(r, seen, ctx)
-    base_w = [w for _, w in SAMPLERS]
+    signals, assets = arrivals(have)
+    ctx = Context(have=have, pool=_pool(con), level=level, arrivals=signals,
+                  arrival_assets=assets)
+    samplers = SAMPLERS + ([(_arrival, ARRIVAL_WEIGHT)] if signals or assets else [])
+    stats_ = novelty(r, seen, ctx, samplers)
+    base_w = [w for _, w in samplers]
     done = failed = repeats = 0
     for _ in range(n * 50):
         if done + failed >= n:
             break
         weights = [w * (new + 1) / (drawn + 2) for w, (new, drawn) in zip(base_w, stats_,
                                                                            strict=True)]
-        i = r.choices(range(len(SAMPLERS)), weights=weights)[0]
-        spec = _draw(SAMPLERS[i][0], r, ctx)
+        i = r.choices(range(len(samplers)), weights=weights)[0]
+        spec = _draw(samplers[i][0], r, ctx)
         sid = spec_id(spec)
         new, drawn = stats_[i]
         if sid in seen:

@@ -13,6 +13,8 @@ import { useTeam } from "../lib/live/team";
 import { digitsFor, priceText } from "../lib/tradeData";
 import { isFxPair } from "./live";
 import { readPref, writePref } from "./shared";
+import { PauseLive } from "../components/PauseLive";
+import { livePaused } from "../lib/live/pause";
 
 interface MRow { key: string; src: string; sym: string; p: number; chg: number | null; vol: number | null; te: number; spark: number[]; kind: Kind }
 type Kind = "crypto" | "fx" | "stock";
@@ -21,8 +23,8 @@ interface Prefs { venue: string; kind: "all" | Kind; sort: SortKey; dir: 1 | -1 
 
 const ROW = 26;
 const OVERSCAN = 8;
-const PUBLIC = ["coingecko"];
-const TEAM_ORDER = ["hyperliquid", "kraken", "coinbase", "gemini", "binanceus", "alpaca", "coingecko"];
+const PUBLIC = ["onchain", "coingecko"];
+const TEAM_ORDER = ["onchain", "hyperliquid", "kraken", "coinbase", "gemini", "binanceus", "alpaca", "coingecko"];
 
 const compact = (v: number | null) => {
   if (v == null || !Number.isFinite(v)) return "";
@@ -42,7 +44,7 @@ function Spark({ pts }: { pts: number[] }) {
 
 export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
   const team = useTeam();
-  const sources = useMemo(() => (team?.team ? TEAM_ORDER.filter((s) => s === "coingecko" || team.sources.includes(s)) : PUBLIC), [team]);
+  const sources = useMemo(() => (team?.team ? TEAM_ORDER.filter((s) => PUBLIC.includes(s) || team.sources.includes(s)) : PUBLIC), [team]);
   const [prefs, setPrefsState] = useState<Prefs>(() => readPref("markets", { venue: "all", kind: "all", sort: "vol", dir: -1 } as Prefs));
   const setPrefs = useCallback((p: Partial<Prefs>) => setPrefsState((o) => { const n = { ...o, ...p }; writePref("markets", n); return n; }), []);
   const [q, setQ] = useState("");
@@ -78,6 +80,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
     });
     // One sparkline point a minute per row, so lines keep moving between snapshots.
     const t = window.setInterval(() => {
+      if (livePaused()) return; // Pause live updates stops the sparklines too (WCAG 2.2.2).
       for (const r of rows.current.values()) if (r.src !== "coingecko") { r.spark = [...r.spark.slice(-59), r.p]; }
       kick();
     }, 60_000);
@@ -150,7 +153,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
           ))}
         </span>
         <span className="mk-n tabular">{order.length.toLocaleString("en-US")} rows</span>
-        <span className="mk-badges">{shown.map((s) => <LiveBadge key={s} src={s} compact />)}</span>
+        <span className="mk-badges"><PauseLive />{shown.map((s) => <LiveBadge key={s} src={s} compact />)}</span>
       </div>
       <p className="mk-note">{prefs.kind === "fx" ? "FX here is the fiat pairs that crypto venues trade, not the interbank rate."
         : team == null ? "" : team.team ? "Real-time venue feeds for the team only, not shown to the public."
@@ -160,7 +163,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
         {head("sym", "Symbol", "l")}{head("src", "Venue", "l")}{head("p", "Last")}{head("chg", "24h")}{head("vol", "Vol 24h")}<span role="columnheader" className="mk-h">Trend</span>
       </div></div>
       <div ref={box} className="mk-body" role="rowgroup">
-        <div style={{ height: order.length * ROW, position: "relative" }}>
+        <div role="presentation" style={{ height: order.length * ROW, position: "relative" }}>
           {slice.map((k, i) => {
             const r = rows.current.get(k);
             if (!r) return null;
@@ -178,7 +181,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
             );
           })}
         </div>
-        {!order.length && <div className="mk-empty">{team == null ? "Loading" : "No rows yet"}</div>}
+        {!order.length && <div className="mk-empty" role="row"><span role="cell">{team == null ? "Loading" : "No rows yet"}</span></div>}
       </div>
       </div>
       <p className="mk-foot">{shown.includes("coingecko") ? <><a href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>. </> : null}Volume is in each pair's quote currency. Trend is the last hour (CoinGecko: the last day).</p>

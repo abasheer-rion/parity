@@ -24,7 +24,7 @@ const SECTIONS: { group: string; items: [string, string][] }[] = [
 export function UILibrary({ section = "overview" }: { section?: string }) {
   return (
     <div className="gal">
-      <nav className="gal-nav" aria-label="UI library">
+      <nav className="gal-nav" aria-label="UI library" data-lenis-prevent>
         {SECTIONS.map((g) => (
           <div key={g.group}>
             <div className="side-label">{g.group}</div>

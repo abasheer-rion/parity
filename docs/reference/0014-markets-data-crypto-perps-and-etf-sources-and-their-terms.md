@@ -4,10 +4,10 @@ title: Markets data, crypto, perps and ETF sources and their terms
 type: reference
 status: current
 created: 2026-10-22
-updated: 2026-10-25
+updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, data]
-related: [DEC-0018, DEC-0019, REF-0003, DEC-0015, DEC-0052]
+related: [DEC-0018, DEC-0019, REF-0003, DEC-0015, DEC-0052, DEC-0063]
 ---
 
 # Markets data, crypto, perps and ETF sources and their terms
@@ -69,7 +69,8 @@ For the live charts in Trade, the Terminal and the Workbench ([DEC-0052](../deci
 | Binance.US | Real-time spot | No public display (https://www.binance.us/terms-of-use, 5 June 2026) | No |
 | Crypto.com, KuCoin, Gate, Bitget, MEXC, HTX | Real-time spot and perps | No: each forbids display without consent, is personal use only or bars the US | No |
 | dYdX v4 indexer | Real-time perps | No data licence; not available to US persons (https://dydx.trade/terms) | No |
-| Pyth Network | Real-time crypto, FX, metals, US stocks | Needs a key since 26 August 2026; display from 500 USD a month (https://www.pyth.network/pricing) | No |
+| Pyth Network | Real-time crypto, FX, metals, US stocks | Every Hermes request needs a paid key since 26 August 2026 (401 without one). Display rights: Starter 500 USD a month, crypto only; Pro from 2,500 USD a month for stocks, FX and metals; the Pyth logo must show next to the data (https://app.pyth.com/products, https://www.dourolabs.xyz/Subscription-Terms.pdf, read 26 October 2026, [DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)) | No |
+| Parity on-chain (Base) | Live prices for 14 tokens from Uniswap v3 and Aerodrome swaps on Base | Yes: public blockchain data has no licence; read through PublicNode's free node, whose terms cover its service, not chain data (https://www.publicnode.com/terms) | Yes, to everyone ([DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)) |
 | CoinCap | Crypto prices | Needs a key | No |
 | ECB reference rates, Frankfurter | Daily FX | Yes, ECB cited (https://www.ecb.europa.eu/services/disclaimer/html/index.en.html) | Daily series already on the site |
 | IEX historical data | Next-day IEX trades only | Yes, with the IEX credit line (https://iextrading.com/trading/market-data/) | Not built: raw packet files, 8% of volume |
@@ -110,7 +111,7 @@ None are needed today. We did not sign up for anything.
 
 | Key | Plan | Cost | What it adds |
 | --- | --- | --- | --- |
-| CoinGecko Demo key | Free Demo plan | Free | A stable 100 calls a minute and 10,000 a month instead of the shared keyless limit. Same one year of history. |
+| CoinGecko Demo key | Free Demo plan | Free | A stable 100 calls a minute and 10,000 a month instead of the shared keyless limit. Same one year of history. Set it as the `COINGECKO_API_KEY` secret on the site and the fan-out worker ([DEC-0063](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)). |
 | CoinGecko paid plan | Any paid plan | Monthly fee, see the pricing page | Longer history, new listings, commercial terms in writing. |
 | An ETF price feed | To be chosen | Unknown | ETF prices for practice positions. Today the user types the price because no free feed we checked allows display. |
 
@@ -145,6 +146,7 @@ The "New products and hype terms" entries in the glossary cite these:
 - [DEC-0031: Trade charts, pro charting on delayed data](../decisions/0031-trade-charts-pro-charting-on-delayed-data.md)
 - [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [DEC-0056: Team members see real-time venue feeds the public does not](../decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md)
+- [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0003: Data sources](0003-data-sources.md)
 <!-- backlinks:end -->

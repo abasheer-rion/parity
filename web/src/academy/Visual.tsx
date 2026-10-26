@@ -6,22 +6,12 @@
 import DOMPurify from "dompurify";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { H, renderScene, W, type Visual } from "./scenes";
+// Reduced motion follows the device and the Motion setting (REF-0023).
+import { useReducedMotion } from "../ui/presence";
+import { Button } from "../ui";
 
 const TWEEN_MS = 700;
 const STEP_MS = 3200;
-
-function useReducedMotion(): boolean {
-  const q = "(prefers-reduced-motion: reduce)";
-  const [reduced, setReduced] = useState(() => typeof window !== "undefined" && !!window.matchMedia?.(q).matches);
-  useEffect(() => {
-    const m = window.matchMedia?.(q);
-    if (!m) return;
-    const on = () => setReduced(m.matches);
-    m.addEventListener("change", on);
-    return () => m.removeEventListener("change", on);
-  }, []);
-  return reduced;
-}
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
@@ -135,13 +125,13 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
         <div className="ac-controls" role="group" aria-label="Picture steps. Arrow keys move between steps." onKeyDown={grid ? undefined : onKey}>
           {!grid && (
             <>
-              <button type="button" className="ac-btn" onClick={() => go(step - 1)} aria-disabled={step === 0}>Back</button>
+              <Button size="sm" onClick={() => go(step - 1)} aria-disabled={step === 0}>Back</Button>
               <span className="ac-dots" aria-hidden>
                 {visual.steps.map((_, i) => <span key={i} className={i === step ? "on" : i < step ? "past" : ""} />)}
               </span>
-              <button type="button" className="ac-btn ac-btn-main" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</button>
+              <Button size="sm" variant="primary" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</Button>
               {!reduced && (
-                <button type="button" className="ac-btn ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
+                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
                   {/* All three labels share one cell, so the button keeps the width of the
                       longest and the row never re-wraps as the picture plays. */}
                   {["Pause", "Replay", "Play"].map((l) => (
@@ -152,9 +142,9 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
               )}
             </>
           )}
-          <button type="button" className="ac-btn ac-btn-quiet" onClick={() => setGrid((g) => !g)} aria-pressed={grid}>
+          <Button size="sm" variant="ghost" className="ac-btn-quiet" onClick={() => setGrid((g) => !g)} aria-pressed={grid}>
             {grid ? "One step at a time" : "All steps"}
-          </button>
+          </Button>
         </div>
         {!grid && reduced && <p className="ac-note">Motion is off because your device asks for less of it. Each step is a still frame.</p>}
       </figcaption>

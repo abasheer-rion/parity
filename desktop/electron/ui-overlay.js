@@ -24,11 +24,15 @@ function el(tag, attrs = {}, ...kids) {
 }
 
 /** One row: icon, name, shortcut, and a button that opens it in a new window when it can. */
-function row({ ic, name, key, current, run, runNew }) {
-  const r = el("button", { type: "button", class: "row", role: "option", "aria-current": current ? "page" : false },
+let rowSeq = 0;
+function row({ ic, name, key, current, run, runNew }, option = false) {
+  // In the palette the rows are options of a list the arrow keys move through; in the menu
+  // they are plain buttons.
+  const r = el("button", { type: "button", class: "row", role: option ? "option" : false, id: option ? `opt-${++rowSeq}` : false, "aria-selected": option ? "false" : false, "aria-current": current ? "page" : false },
     icon(ic, 17), el("span", { class: "name" }, name), key ? el("kbd", {}, key) : null);
   if (runNew) {
-    const nw = el("span", { class: "nw", role: "button", title: "Open in a new window", "aria-label": `Open ${name} in a new window` }, icon("newwin", 14));
+    // For the mouse only: from the keyboard, Cmd or Ctrl Enter (Alt Enter in the menu) does the same.
+    const nw = el("span", { class: "nw", title: "Open in a new window", "aria-hidden": "true" }, icon("newwin", 14));
     nw.addEventListener("click", (e) => { e.stopPropagation(); runNew(); });
     r.append(nw);
   }
@@ -42,8 +46,9 @@ function row({ ic, name, key, current, run, runNew }) {
 function select(i) {
   if (!items.length) return;
   sel = (i + items.length) % items.length;
-  items.forEach((r, j) => r.classList.toggle("sel", j === sel));
+  items.forEach((r, j) => { r.classList.toggle("sel", j === sel); if (r.getAttribute("role") === "option") r.setAttribute("aria-selected", String(j === sel)); });
   items[sel].scrollIntoView({ block: "nearest" });
+  if (items[sel].id) $("q").setAttribute("aria-activedescendant", items[sel].id);
 }
 
 const openSection = (id, newWindow = false) => shell.send("open-section", { id, newWindow });
@@ -96,7 +101,7 @@ function renderPalette() {
   if (!groups.length) out.append(el("p", { class: "empty" }, "Nothing matches. Paste a Parity link to open it."));
   for (const [name, rows] of groups) {
     out.append(el("p", { class: "group" }, name));
-    for (const r of rows) { const b = row(r); b.tabIndex = -1; out.append(b); items.push(b); }
+    for (const r of rows) { const b = row(r, true); b.tabIndex = -1; out.append(b); items.push(b); }
   }
   select(0);
 }
@@ -110,6 +115,7 @@ function showError(text) {
   const out = $("results");
   out.replaceChildren(el("p", { class: "error", role: "alert" }, text));
   items = [];
+  $("q").removeAttribute("aria-activedescendant");
 }
 
 function showCard(mode) {
@@ -117,6 +123,8 @@ function showCard(mode) {
   $("card").hidden = false;
   const q = $("q");
   q.value = "";
+  q.removeAttribute("aria-activedescendant");
+  q.setAttribute("aria-label", mode === "link" ? "Link to open" : mode === "name" ? "Workspace name" : "Search sections, pages and commands");
   $("qIcon").replaceChildren(icon(mode === "link" ? "link" : mode === "name" ? "layers" : "search", 17));
   const tips = $("tips");
   tips.replaceChildren();

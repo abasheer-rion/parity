@@ -40,4 +40,6 @@ export interface Env {
   ALPACA_SECRET_KEY?: string;
   ALPACA_FEED?: string;
   FINNHUB_TOKEN?: string;
+  COINGECKO_API_KEY?: string;
+  COINGECKO_PRO?: string;
 }

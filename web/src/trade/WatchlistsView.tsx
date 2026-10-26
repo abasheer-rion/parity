@@ -4,7 +4,7 @@
 // beside the chart.
 import { StaticBadge } from "../components/LiveBadge";
 import { useEffect, useMemo, useState } from "react";
-import { Button, Dialog, Icon, Input, Sparkline, toast } from "../ui";
+import { Button, Dialog, Input, Sparkline, toast, IconButton } from "../ui";
 import type { Point } from "../lib/types";
 import { priceText, type Instrument } from "../lib/tradeData";
 import { useRows } from "../lib/userStore";
@@ -111,10 +111,10 @@ export function WatchlistsView({ list, onSymbol, onAlert }: { list: Instrument[]
               { wide: true, key: "a", head: "As of", sort: (s) => s.asof, cell: (s) => <span className="tt-dim">{s.asof}</span> },
               { key: "x", head: <span className="sr-only">Actions</span>, width: 128, cell: (s) => (
                 <span className="tt-acts" onClick={(e) => e.stopPropagation()}>
-                  <button type="button" className={`tt-btn ${alertCount(s.key) ? "on" : ""}`} aria-label={`Alert on ${s.short}`} title="Alert" onClick={() => onAlert(s.key)}><Icon name="bell" size={12} /></button>
-                  <button type="button" className="tt-btn" aria-label={`Move ${s.short} up`} title="Up" onClick={() => move(s.key, -1)}>↑</button>
-                  <button type="button" className="tt-btn" aria-label={`Move ${s.short} down`} title="Down" onClick={() => move(s.key, 1)}>↓</button>
-                  <button type="button" className="tt-btn" aria-label={`Remove ${s.short}`} title="Remove" onClick={() => active && void save(active.items.filter((k) => k !== s.key))}>×</button>
+                  <IconButton icon="bell" size="xs" variant="plain" active={!!alertCount(s.key)} label={`Alert on ${s.short}`} onClick={() => onAlert(s.key)} />
+                  <IconButton icon="chevronUp" size="xs" variant="plain" label={`Move ${s.short} up`} onClick={() => move(s.key, -1)} />
+                  <IconButton icon="chevronDown" size="xs" variant="plain" label={`Move ${s.short} down`} onClick={() => move(s.key, 1)} />
+                  <IconButton icon="close" size="xs" variant="plain" label={`Remove ${s.short}`} onClick={() => active && void save(active.items.filter((k) => k !== s.key))} />
                 </span>
               ) },
             ]} />

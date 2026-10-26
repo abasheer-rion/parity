@@ -47,6 +47,9 @@
     parity markets export DIR    write the Markets pages' JSON into DIR/markets
 
     parity mcp                   Parity tools for AI assistants (MCP over stdio, DEC-0025)
+
+    parity registry status       the data registry (DEC-0064): sources, series, rights,
+                                 status and health; `registry sync` copies the catalog in
 """
 
 from __future__ import annotations
@@ -768,6 +771,10 @@ def main(argv: list[str] | None = None) -> int:
     from . import latency
 
     latency.add_parser(sub).set_defaults(func=latency.run)
+
+    from .registry import cli as registry_cli
+
+    registry_cli.add_parser(sub).set_defaults(func=registry_cli.run)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:

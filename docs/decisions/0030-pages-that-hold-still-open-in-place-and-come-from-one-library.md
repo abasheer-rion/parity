@@ -53,4 +53,5 @@ Worst layout shift across 80 page views (40 pages at 1440 and 390 pixels), measu
 - [DEC-0031: Trade charts, pro charting on delayed data](0031-trade-charts-pro-charting-on-delayed-data.md)
 - [DEC-0033: Trade trackers, watchlists, alerts and a screener](0033-trade-trackers-watchlists-alerts-and-a-screener.md)
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
+- [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 <!-- backlinks:end -->
