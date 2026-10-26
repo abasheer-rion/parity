@@ -6,6 +6,7 @@
 // REF-0014. Terms were read on the date given.
 import type { FeedType } from "./protocol";
 import type { LiveTf } from "./candles";
+import { ONCHAIN_SYMBOLS } from "./onchainSymbols";
 
 /** display: terms allow showing the data on our site; internal: terms allow internal use
  *  only, so only team members see it; ask: terms are silent or unclear, so it waits for the
@@ -50,7 +51,10 @@ export interface SourceMeta {
 const READ = "2026-10-25";
 
 export const SOURCES: SourceMeta[] = [
-  // Streamed through the fan-out today.
+  // Streamed through the fan-out today, to everyone.
+  { id: "onchain", name: "Parity on-chain (Base)", short: "On-chain", feed: "rt", covers: "14 tokens traded on Base (ETH, cbBTC, EURC, AERO, VIRTUAL and others), priced in USDC from every swap in the deepest Uniswap v3 and Aerodrome pools", licence: "display",
+    terms: "https://www.publicnode.com/terms", read: "2026-10-26", streams: true, board: true, fromCloses: true, symbols: ONCHAIN_SYMBOLS,
+    note: "Our own feed from public blockchain data, which has no licence. Each symbol is the volume-weighted price of its pools. A swap counts once its Base block is sealed, every 2 s." },
   { id: "coingecko", name: "CoinGecko", short: "CoinGecko", feed: "delayed", delayMin: 1, covers: "The 100 largest coins, priced in US dollars, refreshed about once a minute", licence: "display",
     terms: "https://www.coingecko.com/en/api_terms", read: "2026-10-22", streams: true, tfs: ["5m", "1h", "1d"], fromCloses: true, board: true,
     note: "Display allowed with \"Data provided by CoinGecko\" linked next to the data. Prices are CoinGecko's own blend across exchanges, about a minute behind." },
@@ -95,8 +99,8 @@ export const SOURCES: SourceMeta[] = [
     note: "Each forbids display without consent, is personal use only (Deribit, OKX), or bars the US (Bybit, OKX, Binance)." },
   { id: "dydx", name: "dYdX v4 indexer", short: "dYdX", feed: "rt", covers: "Real-time perps", licence: "no", terms: "https://dydx.trade/terms", read: READ, streams: false,
     note: "No data licence and not available to US persons." },
-  { id: "pyth", name: "Pyth Network", short: "Pyth", feed: "rt", covers: "Real-time crypto, FX, metals, US stocks", licence: "no", terms: "https://www.pyth.network/pricing", read: READ, streams: false,
-    note: "Every request needs a key since 26 Aug 2026. Display rights from 500 USD a month (crypto) or 2,500 USD (all assets)." },
+  { id: "pyth", name: "Pyth Network", short: "Pyth", feed: "rt", covers: "Real-time crypto, FX, metals, US stocks", licence: "no", terms: "https://www.dourolabs.xyz/Subscription-Terms.pdf", read: "2026-10-26", streams: false,
+    note: "Every Hermes request needs a paid key since 26 Aug 2026 (it answers 401 without one). Display rights: Starter 500 USD a month (crypto only, up to 1 s), Pro from 2,500 USD (stocks, FX, metals, up to 50 ms). The Pyth logo must show next to the data. DEC-0063." },
   { id: "coincap", name: "CoinCap", short: "CoinCap", feed: "rt", covers: "Crypto prices", licence: "no", terms: "https://coincap.io", read: READ, streams: false, note: "Needs a key since 2025." },
   // Daily and reference sources used beside the live ones.
   { id: "sec", name: "SEC company tickers", short: "SEC", feed: "eod", covers: "Every US-listed company and fund symbol (search only, no prices)", licence: "display", terms: "https://www.sec.gov/privacy", read: READ, streams: false,

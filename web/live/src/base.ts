@@ -22,6 +22,9 @@ export interface AdapterEnv {
   /** "iex" (free plan, the default) or "sip" (Algo Trader Plus, every exchange). */
   ALPACA_FEED?: string;
   FINNHUB_TOKEN?: string;
+  /** CoinGecko key (DEC-0063), optional: a free demo key, or a paid one with COINGECKO_PRO=1. */
+  COINGECKO_API_KEY?: string;
+  COINGECKO_PRO?: string;
 }
 
 /** A change to one symbol's order book. snap: replace the whole book; otherwise a size of 0
