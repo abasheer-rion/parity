@@ -14,6 +14,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Mac runners cost ten times the minutes, so the running-app test only runs when the
+  # desktop app changed.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      desktop: ${{ steps.diff.outputs.desktop }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: diff
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then base="${{ github.event.pull_request.base.sha }}"; else base="${{ github.event.before }}"; fi
+          if git diff --name-only "$base" HEAD 2>/dev/null | grep -qE '^desktop/'; then echo "desktop=true" >> "$GITHUB_OUTPUT"; else echo "desktop=false" >> "$GITHUB_OUTPUT"; fi
+
   engine:
     runs-on: ubuntu-latest
     defaults:
@@ -43,8 +58,174 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci
+      # Design tokens (DEC-0058): no raw colours, px font sizes, durations or curves outside
+      # src/ui/tokens.css, no undefined var(--x), and the generated token files up to date.
+      - run: npm run lint:styles
       - run: npm test
       - run: npm run build
+      # Every built page loads the analytics boot script (DEC-0053, scripts/analytics-check.mjs).
+      - run: npm run analytics:check
+      # The desktop app's copy of the site (DEC-0041): refuses research data and maps.
+      - run: node ../desktop/scripts/prepare-web.mjs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-web-ci
+          path: desktop/build/web
+          retention-days: 1
+      # Every route of every app at 1280 and 1920 wide, on the dev server: no exceptions,
+      # console errors, failed requests, blank pages, NaN, sideways scroll, and no text that
+      # overlaps or is cut off (scripts/smoke.mjs). The e2e job below runs the same checks at
+      # 1440 and 390 wide against the built site, so smoke skips those two sizes.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run smoke
+        env:
+          SMOKE_SIZES: laptop,wide
+      # First-run tours and the getting started checklist in a real browser (DEC-0060).
+      - run: npm run onboarding
+      # WCAG 2.2 AA (DEC-0061, REF-0026): axe on every route of every app, the static pages
+      # and the desktop app's own pages, at desktop and phone size, signed out and in, and
+      # reduced motion holding still. Fails on any serious or critical problem (scripts/a11y.mjs).
+      - run: npm run a11y
+      # Keyboard walk on every page (skip link, focus order, visible focus, dialogs and
+      # Escape) and the UI library's 2px focus rings, headings, names, target size, reflow,
+      # animation loops, Pause controls, live regions, contrast over glass and form errors
+      # (scripts/a11y-checks.mjs).
+      - run: npm run a11y:checks
+        env:
+          A11Y_DEBUG: ${{ runner.temp }}/a11y-contrast
+      # On a failure, the pictures behind each low contrast reading, to see what the text sat on.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: a11y-contrast
+          path: ${{ runner.temp }}/a11y-contrast
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # The built site, once, for the e2e shards.
+  e2e-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: e2e-dist
+          path: web/dist
+          retention-days: 1
+
+  # The Playwright suite (web/e2e/README.md) against the built site, split four ways: every
+  # route of every app at desktop and phone size (console errors, failed requests, NaN,
+  # sideways scroll, colliding text), the main flows of each app, and the screenshot
+  # baselines. Supabase and every outside address are stubbed in the browser.
+  e2e:
+    needs: e2e-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - uses: actions/download-artifact@v7
+        with:
+          name: e2e-dist
+          path: web/dist
+      - id: pw
+        run: echo "version=$(node -p 'require("@playwright/test/package.json").version')" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --shard=${{ matrix.shard }}/4
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-report-${{ matrix.shard }}
+          path: |
+            web/playwright-report
+            web/test-results
+          retention-days: 7
+
+  # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
+  # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
+  # apply to the hosted project by themselves on merge, so they are tried here first.
+  db:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Postgres 17
+        run: |
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -q postgresql-17
+      - name: Apply every migration and run the SQL tests
+        env:
+          PGBIN: /usr/lib/postgresql/17/bin
+        run: supabase/tests/local.sh
+
+  desktop:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+      - run: npm test
+
+  # The running app (DEC-0049): a deep link while signed out opens the log-in wall, the title
+  # bar moves the window, the offline copy and Retry show when the website is unreachable,
+  # and the menu opens. On a Mac runner, against the site built by the web job.
+  desktop-app:
+    needs: [web, changes]
+    if: needs.changes.outputs.desktop == 'true'
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - uses: actions/download-artifact@v7
+        with:
+          name: desktop-web-ci
+          path: desktop/build/web
+      - run: npm ci
+      # A CI runner may show windows (a working Mac never does: the self-test hides them).
+      - run: npm run test:app
+        env:
+          PARITY_VISIBLE: "1"
 
   docs:
     runs-on: ubuntu-latest
@@ -59,6 +240,12 @@ jobs:
         run: python3 scripts/docs.py check ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
       - name: Auth emails match their sources
         run: python3 auth/build.py --check
+      # Blog and News (DEC-0057): stance labels, sources, image licences and alt text, bylines,
+      # and that only published posts build. The site build runs the same check again.
+      - name: Newsroom posts and their rules
+        run: |
+          python3 scripts/newsroom/check.py
+          NEWSROOM_NO_MEDIA=1 python3 -m unittest discover -s scripts/newsroom/tests
       - name: Ledger and registrations
         run: |
           pip install -q -e engine

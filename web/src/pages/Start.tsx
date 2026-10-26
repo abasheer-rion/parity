@@ -3,7 +3,7 @@
 import { Title } from "../components/Shell";
 import { pct, num } from "../lib/format";
 import { pageByHref } from "../lib/pages";
-import { SPACE } from "../lib/space";
+import { academyUrl, SPACE } from "../lib/space";
 import type { Report } from "../lib/types";
 import { Badge } from "../ui";
 import { Icon } from "../ui/icons";
@@ -31,11 +31,11 @@ const NUMBERS: { term: string; name: string; plain: string; good: (m?: M) => str
   { term: "break-even-cost", name: "Break-even cost", plain: "How much each trade could cost before the profit disappears.", good: () => "Higher is safer. Under 5 basis points (0.05%) is fragile." },
 ];
 
-const VERDICTS: { label: string; tone: "good" | "accent" | "bad" | "neutral"; plain: string }[] = [
-  { label: "Passed", tone: "good", plain: "Passed every test in the gauntlet and beats the US market after costs." },
-  { label: "Promising", tone: "accent", plain: "Passed most tests, but not all, or does not beat the market yet." },
-  { label: "Not proven", tone: "bad", plain: "Failed too many tests to trust. It may still teach us something." },
-  { label: "Not tested", tone: "neutral", plain: "Built but not yet run through the gauntlet." },
+const VERDICTS: { label: string; tone: "good" | "warning" | "bad" | "neutral"; plain: string }[] = [
+  { label: "Passed", tone: "good", plain: "Passed all 11 tests and beats the US market after costs." },
+  { label: "Promising", tone: "warning", plain: "Passed at least 60% of the tests, but not all of them, or does not beat the market." },
+  { label: "Not proven", tone: "bad", plain: "Passed fewer than 60% of the tests." },
+  { label: "Not tested", tone: "neutral", plain: "Built but not run through the tests yet." },
 ];
 
 export function Start({ report }: { report: Report | null }) {
@@ -45,9 +45,9 @@ export function Start({ report }: { report: Report | null }) {
       <div className="page-head">
         <Title>Start here</Title>
         <p className="start-lead">
-          Parity asks one question: can a trading strategy, mostly in currencies, beat simply holding the US stock
-          market? We test each idea the same honest way and show what we find, including the failures.
-          Everything here is research, not investment advice.
+          Parity tests whether a trading strategy, mostly in currencies, can beat holding the US stock market. Every
+          idea goes through the same tests and every result is shown, including the failures. Research and education
+          only. Not investment advice.
         </p>
       </div>
 
@@ -72,8 +72,8 @@ export function Start({ report }: { report: Report | null }) {
       </div>
 
       <p className="start-note">
-        New to this? The <a href={SPACE === "product" ? "#/academy" : "/app/#/academy"}>Academy</a> has short courses with
-        moving pictures, starting with <a href={`${SPACE === "product" ? "" : "/app/"}#/academy/reading-a-backtest`}>how to read a backtest</a>.
+        New to this? <a href={academyUrl()} target="_blank" rel="noopener">Parity Academy</a> has short animated
+        courses, starting with <a href={academyUrl("reading-a-backtest/return")} target="_blank" rel="noopener">how to read a backtest</a>.
       </p>
 
       <h2 className="start-h">How to read a result</h2>
@@ -91,8 +91,8 @@ export function Start({ report }: { report: Report | null }) {
 
       <h2 className="start-h">What the verdicts mean</h2>
       <p className="muted start-note">
-        The gauntlet is the same set of tests every strategy goes through: does it beat the market, does it survive
-        costs, does it work in different periods and with different settings.
+        Every strategy goes through the same 11 tests. Six compare it with the S&P 500, including at double trading
+        costs and in every era. Five check that the result is not luck, such as one lucky setting or one lucky year.
       </p>
       <ul className="start-verdicts">
         {VERDICTS.map((v) => <li key={v.label}><Badge tone={v.tone}>{v.label}</Badge> <span>{v.plain}</span></li>)}
@@ -100,7 +100,7 @@ export function Start({ report }: { report: Report | null }) {
 
       <h2 className="start-h">Exploratory or official?</h2>
       <p className="start-note">
-        Most numbers come from the nightly <strong>exploratory</strong> run: useful for learning, not proof. A result
+        Most numbers come from the nightly <strong>exploratory</strong> run. It is for learning and does not count as proof. A result
         is <strong>official</strong> only when its test was written down before it ran and the run is sealed in the{" "}
         <a href="#/ledger">official record</a>. The run picker at the top right shows which one you are looking at.
       </p>

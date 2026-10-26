@@ -53,7 +53,7 @@ export function Tooltip({ text, children, placement = "top" }: { text: string; c
   const anchor = useRef<HTMLSpanElement>(null);
   const float = useRef<HTMLDivElement>(null);
   const timer = useRef(0);
-  const p = usePresence(open, 100);
+  const p = usePresence(open, "dur-1");
   useAnchored(p.mounted, anchor, float, placement);
   const show = () => { window.clearTimeout(timer.current); timer.current = window.setTimeout(() => setOpen(true), Date.now() - lastTipClose < 400 ? 0 : 350); };
   const hide = () => { window.clearTimeout(timer.current); if (open) lastTipClose = Date.now(); setOpen(false); };
@@ -78,9 +78,9 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
   const open = controlled ?? own;
   const set = useCallback((v: boolean) => { if (controlled == null) setOwn(v); onOpenChange?.(v); }, [controlled, onOpenChange]);
   const anchor = useRef<HTMLSpanElement>(null);
-  const float = useRef<HTMLDivElement>(null);
+  const float = useRef<HTMLSpanElement>(null);
   const id = useId();
-  const p = usePresence(open, 140);
+  const p = usePresence(open, "dur-1");
   useAnchored(p.mounted, anchor, float, placement, 8);
   const close = useCallback(() => {
     set(false);
@@ -97,10 +97,12 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
     <span className="ui-pop-anchor" ref={anchor} onClick={() => set(!open)}>
       {withAria(trigger(open), { "aria-haspopup": "dialog", "aria-expanded": open, "aria-controls": open ? id : undefined })}
       {p.mounted && (
-        <div ref={float} id={id} className="ui-popover ui-float" data-state={p.state} role="dialog" aria-label={label} tabIndex={-1}
+        // A span (shown as a block by its fixed position), so a popover can sit inside a line
+        // of text, a <p>, without breaking the page's structure.
+        <span ref={float} id={id} className="ui-popover ui-float" data-state={p.state} role="dialog" aria-label={label} tabIndex={-1}
           style={width ? { width } : undefined} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
           {typeof children === "function" ? children(close) : children}
-        </div>
+        </span>
       )}
     </span>
   );
@@ -113,7 +115,7 @@ export function Menu({ trigger, items, placement = "bottom-end" }: { trigger: (o
   const [open, setOpen] = useState(false);
   const anchor = useRef<HTMLDivElement>(null);
   const float = useRef<HTMLDivElement>(null);
-  const p = usePresence(open, 120);
+  const p = usePresence(open, "dur-1");
   useAnchored(p.mounted, anchor, float, placement);
   const close = useCallback(() => setOpen(false), []);
   useDismiss(open, close, [anchor, float]);
@@ -169,7 +171,9 @@ function useFocusTrap(on: boolean, box: React.RefObject<HTMLElement | null>) {
     if (!on) return;
     const opener = document.activeElement as HTMLElement | null;
     const el = box.current;
-    const first = el?.querySelector<HTMLElement>(`.ui-modal-body ${FOCUSABLE}`) ?? el;
+    // The first control in the body (not the close button in the header); FOCUSABLE is a
+    // list of selectors, so it is searched inside the body rather than prefixed.
+    const first = el?.querySelector(".ui-modal-body")?.querySelector<HTMLElement>(FOCUSABLE) ?? el;
     first?.focus({ preventScroll: true });
     const key = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !el) return;
@@ -199,7 +203,7 @@ function useEscape(on: boolean, onClose: () => void) {
  */
 export function Dialog({ open, onClose, title, children, footer, width = 560 }:
   { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; footer?: ReactNode; width?: number }) {
-  const p = usePresence(open, 180);
+  const p = usePresence(open, "dur-2");
   const box = useRef<HTMLDivElement>(null);
   const [origin, setOrigin] = useState<string | undefined>();
   // Where the opener sits, relative to the dialog's centre, becomes the transform origin.
@@ -237,7 +241,7 @@ export function Dialog({ open, onClose, title, children, footer, width = 560 }:
  */
 export function Drawer({ open, onClose, title, children, width = 520, side = "right", footer }:
   { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; width?: number; side?: "right" | "left" | "bottom"; footer?: ReactNode }) {
-  const p = usePresence(open, 220);
+  const p = usePresence(open, "dur-2");
   const box = useRef<HTMLElement>(null);
   useEscape(open, onClose);
   useScrollLock(p.mounted);
@@ -256,6 +260,11 @@ export function Drawer({ open, onClose, title, children, width = 520, side = "ri
       </aside>
     </div>
   );
+}
+
+/** A panel from the bottom edge: the phone-friendly form of Drawer. */
+export function Sheet(props: { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; footer?: ReactNode }) {
+  return <Drawer {...props} side="bottom" />;
 }
 
 // ---------- Toasts ----------

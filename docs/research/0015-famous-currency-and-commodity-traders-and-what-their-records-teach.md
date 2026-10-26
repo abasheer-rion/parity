@@ -125,5 +125,5 @@ Every winner above was chosen because they won. FX Concepts and Astenbeck were f
 - [EXP-0010: Oil volatility and commodity currency signals](../experiments/0010-oil-volatility-and-commodity-currency-signals.md)
 - [RES-0014: Commodity futures, carry, trend and volatility](0014-commodity-futures-carry-trend-and-volatility.md)
 - [RES-0016: Lesser-known strategies and what firms have published](0016-lesser-known-strategies-and-what-firms-have-published.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

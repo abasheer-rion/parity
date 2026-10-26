@@ -1,20 +1,26 @@
 import { Title } from "../components/Shell";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useHashState } from "../lib/deeplink";
 import { Card } from "../ui/layout";
 import { algorithms, bestReported, STAGES } from "../lib/catalog";
 import type { Algorithm } from "../lib/types";
 import { Term } from "./Learn";
+import { TableScroll } from "../ui";
 
 type SortKey = "id" | "year" | "sharpe" | "relevance" | "stage";
 
 const uniq = (xs: string[]) => [...new Set(xs)].sort();
 
 export function Catalog() {
-  const [q, setQ] = useState("");
-  const [family, setFamily] = useState("");
-  const [market, setMarket] = useState("");
-  const [stageMin, setStageMin] = useState(0);
-  const [sort, setSort] = useState<SortKey>("relevance");
+  // The filters live in the link, so Copy link and the back button reopen this view (DEC-0038).
+  const [q, setQ] = useHashState("q");
+  const [family, setFamily] = useHashState("family");
+  const [market, setMarket] = useHashState("market");
+  const [stageRaw, setStageRaw] = useHashState("stage", "0");
+  const stageMin = Number(stageRaw) || 0;
+  const setStageMin = (n: number) => setStageRaw(String(n));
+  const [sortRaw, setSort] = useHashState("sort", "relevance");
+  const sort: SortKey = (["id", "year", "sharpe", "relevance", "stage"] as const).includes(sortRaw as SortKey) ? (sortRaw as SortKey) : "relevance";
 
   const families = uniq(algorithms.map((a) => a.family));
   const markets = uniq(algorithms.flatMap((a) => a.markets));
@@ -42,9 +48,9 @@ export function Catalog() {
       <div className="page-head">
         <Title>Algorithm catalog</Title>
         <p>
-          Every trading algorithm we know of, where it came from, how old it is, what its authors reported, and how far
-          our own research has taken it. Reported numbers are the source's claims, not ours, until the stage says
-          otherwise. Very high reported Sharpe ratios are usually a warning sign, not a target.
+          Every trading algorithm we know of, with where it came from, how old it is, what its authors reported and how
+          far we have tested it. Reported numbers are the source's claims until the stage shows we tested them. Very high
+          reported Sharpe ratios are usually a warning sign.
         </p>
       </div>
 
@@ -54,7 +60,7 @@ export function Catalog() {
         <div className="tile"><div className="tile-label">Tested by us officially</div>
           <div className="tile-value">{algorithms.filter((a) => a.research.stage >= 6).length}</div>
           <div className="tile-note">stage 6 or later</div></div>
-        <div className="tile"><div className="tile-label">With live, not just backtest, evidence</div>
+        <div className="tile"><div className="tile-label">With live trading evidence</div>
           <div className="tile-value">{algorithms.filter((a) => a.reported_results.some((r) => r.evidence_type === "live")).length}</div></div>
         <div className="tile"><div className="tile-label">Testable with free data</div>
           <div className="tile-value">{algorithms.filter((a) => a.testable_with_free_data).length}</div></div>
@@ -86,7 +92,7 @@ export function Catalog() {
       </Card>
 
       <Card title={`${rows.length} algorithms`} help={<>Click a row for the full report. <Term id="sharpe-ratio">Sharpe</Term> is the best any source reported, with its evidence type.</>}>
-        <div className="table-wrap">
+        <TableScroll>
           <table className="catalog">
             <thead>
               <tr><th>Algorithm</th><th>Family</th><th>Markets</th><th>Horizon</th><th>Since</th><th>Origin</th>
@@ -112,7 +118,7 @@ export function Catalog() {
               })}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );

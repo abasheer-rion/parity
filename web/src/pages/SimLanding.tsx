@@ -17,7 +17,7 @@ export function SimLanding() {
     <>
       <div className="page-head">
         <Title>Parity Terminal</Title>
-        <p>A keyboard-first market terminal on its own full-screen site: a command bar, workspaces of linked panels, every market series and every strategy KPI, and the simulations. Everything in it is history, not a forecast.</p>
+        <p>A keyboard-first market terminal on its own full-screen site: a command bar, workspaces of linked panels, every market series and every strategy KPI, and the simulations. Everything in it is past data. None of it is a forecast.</p>
       </div>
       <div className="mcard sim-landing">
         <Button variant="primary" icon="external" href={simUrl()} target="_blank">Open Parity Terminal</Button>

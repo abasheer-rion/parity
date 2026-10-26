@@ -7,13 +7,13 @@ import type { SeriesBlock } from "../../lib/types";
 import { DAY, indexAtOrBefore, monthYear, t, thin } from "./shared";
 
 const GROUPS: [string, string][] = [
-  ["risk", "Fear gauge"], ["fx", "Currencies"], ["cmd", "Commodities"], ["rate", "Interest rates"],
+  ["risk", "Volatility (VIX)"], ["fx", "Currencies"], ["cmd", "Commodities"], ["rate", "Interest rates"],
   ["bond", "Bonds"], ["eq", "Stocks"], ["reer", "Real exchange rates"],
 ];
 
 export function seriesLabel(key: string, s?: SeriesBlock): string {
   const [g, code] = key.split(".");
-  if (g === "risk" && code === "VIX") return "VIX, the fear gauge";
+  if (g === "risk" && code === "VIX") return "VIX, expected US stock volatility";
   if (g === "fx") return `${code} against the dollar`;
   if (g === "rate") return code === "TBILL3M" ? "US 3-month T-bill" : `${code} 3-month rate`;
   if (g === "reer") return `${code} real exchange rate`;

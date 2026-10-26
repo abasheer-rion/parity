@@ -3,7 +3,7 @@
  "order": 3,
  "level": "Core",
  "title": "How markets move",
- "summary": "Risk premia, carry, trend and value: the main reasons prices drift the way they do, and the catch that comes with each.",
+ "summary": "Risk premia, carry, trend and value: the main reasons prices drift the way they do, and the main risk of each.",
  "docs": [
   "RES-0011"
  ],
@@ -14,8 +14,8 @@
    "minutes": 2,
    "body": [
     "Some returns are a payment for carrying a risk other people do not want. That payment is a **risk premium**. Stocks have paid one over long periods because they can fall a lot at bad times.",
-    "A premium is an average, not a promise. The picture shows many possible paths of the same investment with a small positive drift. The middle of the band rises, but any single path can lose money for a long time.",
-    "That is why the same strategy can look brilliant or broken depending on the dates you pick."
+    "A premium is an average. The picture shows many possible paths of the same investment with a small positive drift. The middle of the band rises, but any single path can lose money for a long time.",
+    "So the same strategy can look good or bad depending on the dates you pick."
    ],
    "terms": [
     "risk-premium",
@@ -54,7 +54,7 @@
    },
    "inParity": [
     {
-     "label": "Where market edges come from and which survive",
+     "label": "Where market edges come from and which still work",
      "href": "#/doc/RES-0011",
      "space": "research"
     }
@@ -172,7 +172,7 @@
   },
   {
    "id": "carry-catch",
-   "title": "Carry's catch: small gains, big falls",
+   "title": "Carry: small gains, big falls",
    "minutes": 2,
    "body": [
     "Carry tends to earn a little, often, and then lose a lot at once. When markets panic, people sell high-rate currencies and buy back the low-rate ones they borrowed, all at the same time.",
@@ -245,7 +245,7 @@
   },
   {
    "id": "trend",
-   "title": "Trend: things in motion",
+   "title": "Trend: momentum",
    "minutes": 2,
    "body": [
     "**Momentum** is the tendency for prices that have been rising to keep rising for a while, and falling ones to keep falling. A trend rule rides those moves instead of predicting turns.",
@@ -315,7 +315,7 @@
   },
   {
    "id": "value",
-   "title": "Value: pulled back toward fair",
+   "title": "Value: back toward fair value",
    "minutes": 2,
    "body": [
     "**Value** strategies buy what looks cheap against a fair level and sell what looks dear. For currencies, one fair level is **purchasing power parity**: the exchange rate at which the same basket of goods costs the same in both countries.",
@@ -528,7 +528,7 @@
       "reveal": 0.35
      },
      {
-      "caption": "Over many years it keeps being pulled back. Slowly.",
+      "caption": "Over many years it moves back toward the line, slowly.",
       "show": [
        1,
        1

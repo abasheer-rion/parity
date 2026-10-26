@@ -5,6 +5,7 @@ import { supabase } from "./client";
 import { ROUTES } from "./config";
 import { goPush } from "./nav";
 import { withNext } from "./redirect";
+import type { Carry, View } from "./views";
 
 export interface SessionState { loading: boolean; session: Session | null }
 
@@ -68,4 +69,13 @@ export async function signOut() {
     await supabase.auth.signOut({ scope: "local" }).catch(() => {});
   }
   goPush(ROUTES.login);
+}
+
+/**
+ * After a new account is confirmed and signed in: the authenticator step if the account
+ * already has one, otherwise the short welcome (pages/Welcome.tsx), which ends at next.
+ */
+export async function welcomeNew(show: (view: View, carry?: Carry) => void): Promise<void> {
+  if (await needsSecondStep()) show("login", { mfa: true });
+  else show("welcome");
 }

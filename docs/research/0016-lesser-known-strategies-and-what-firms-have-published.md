@@ -120,5 +120,5 @@ Ranked by evidence after publication, then by whether we can test them with free
 
 - [HYP-0016: An equal-weight energy book pays after 2014](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md)
 - [RES-0017: Combining many strategies, the evidence and the ingredient list](0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
-- [LOG-0012: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
+- [LOG-0021: Lesser-known strategies and published firm research](../log/2026-10-22-lesser-known-strategies-and-published-firm-research.md)
 <!-- backlinks:end -->

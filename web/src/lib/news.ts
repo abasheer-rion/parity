@@ -2,7 +2,8 @@
 // /data/news/; in local development the engine's own export (engine/output/news) is
 // served at /local/news/ instead. Shapes match engine/src/parity/news/export.py.
 import type { Point } from "./types";
-import { source } from "./data";
+import { isMissing, source } from "./data";
+import { rumAge } from "./rum";
 
 export type Unit = "pct" | "pp" | "pt";
 export interface Move { move: number | null; z: number | null; end_date?: string }
@@ -33,8 +34,10 @@ const base = source === "local" ? "/local/news" : "/data/news";
 
 async function get<T>(name: string): Promise<T> {
   const res = await fetch(`${base}/${name}`, { cache: "no-cache" });
-  if (!res.ok) throw new Error(res.status === 404 ? "No news has been exported yet. Run `parity news fetch` then `parity news export`." : `Could not load news (${res.status}).`);
-  return (await res.json()) as T;
+  if (!res.ok || isMissing(res)) throw new Error(isMissing(res) ? (source === "local" ? "No news has been exported yet. Run `parity news fetch` then `parity news export`." : "News has not been published yet.") : `Could not load news (${res.status}).`);
+  const doc = (await res.json()) as T & { generated_at?: string };
+  rumAge(`news/${name}`, doc.generated_at);
+  return doc;
 }
 
 export const loadNews = () => get<NewsDoc>("articles.json");

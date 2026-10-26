@@ -54,5 +54,5 @@ Nothing yet.
 - [HYP-0013: Energy futures carry pays](../hypotheses/0013-energy-futures-carry-pays.md)
 - [EXP-0006: Rerun of all sixteen strategies with corrected scoring](0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [EXP-0011: Equal-weight energy book, March 2014 to April 2024](0011-equal-weight-energy-book-march-2014-to-april-2024.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

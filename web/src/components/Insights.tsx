@@ -19,7 +19,7 @@ export function Insights({ items, source }: { items: Insight[]; source: string }
           </Reveal>
         ))}
       </ul>
-      <p className="insights-src">Computed from {source}. Nothing here is written by hand or by a model.</p>
+      <p className="insights-src">Computed automatically from {source}.</p>
     </section>
   );
 }

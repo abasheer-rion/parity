@@ -1,32 +1,11 @@
-// Building blocks shared by the sign-in pages: the centred card, labelled fields with the
+// Building blocks for the signed-in Account and Security settings: labelled fields with the
 // right autocomplete hints for password managers, a password field with show and hide,
-// messages that screen readers announce, and a small async-submit helper.
+// messages that screen readers announce, and a small async-submit helper. The public
+// sign-in panel has its own, in the front page's style (fields.tsx, DEC-0044).
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { SkipLink } from "../components/SkipLink";
-import { LegalLinks } from "../legal/LegalLinks";
-import { passwordRules } from "./rules";
+import { PasswordMeter } from "./PasswordMeter";
+import { emailProblem } from "./rules";
 import "./auth.css";
-
-export function AuthCard({ title, lead, children, foot }: { title: string; lead?: ReactNode; children: ReactNode; foot?: ReactNode }) {
-  return (
-    <div className="auth-page">
-      <SkipLink />
-      <main className="auth-card anim-rise" id="main" aria-labelledby="auth-title">
-        <a className="auth-brand" href="/">
-          <img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" height={44} alt="Parity home" />
-        </a>
-        <h1 className="auth-title" id="auth-title">{title}</h1>
-        {lead && <p className="auth-lead">{lead}</p>}
-        {children}
-      </main>
-      <footer className="auth-foot">
-        {foot && <div>{foot}</div>}
-        <LegalLinks />
-        <p className="auth-disclaimer">Research and education only. Not investment advice.</p>
-      </footer>
-    </div>
-  );
-}
 
 type Auto = "email" | "username webauthn" | "current-password" | "new-password" | "one-time-code" | "off";
 
@@ -37,12 +16,18 @@ interface FieldProps {
   error?: string | null;
 }
 
-export function Field({ label, value, onChange, type = "text", auto, hint, autoFocus, minLength, maxLength, name, error }: FieldProps) {
+export function Field({ label, value, onChange, type = "text", auto, hint, autoFocus, minLength, maxLength, name, error: given }: FieldProps) {
   const id = useId();
   const code = auto === "one-time-code";
+  // Inline validation for email: checked once the person leaves the field, and again as
+  // they fix it. A tick shows when it looks right.
+  const [touched, setTouched] = useState(false);
+  const emailCheck = type === "email" && touched && value.trim() ? emailProblem(value) : null;
+  const error = given ?? emailCheck;
+  const valid = type === "email" && touched && !!value.trim() && !error;
   const described = [hint ? `${id}-hint` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
-    <div className="ui-field auth-field">
+    <div className="ui-field auth-field" data-valid={valid || undefined}>
       <label className="ui-field-label" htmlFor={id}>{label}</label>
       <input
         id={id}
@@ -61,8 +46,10 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
         autoCapitalize="none"
         aria-invalid={error ? true : undefined}
         aria-describedby={described}
+        onBlur={() => setTouched(true)}
         onChange={(e) => onChange(code ? e.target.value.replace(/\D/g, "") : e.target.value)}
       />
+      {valid && <svg className="auth-ok" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       {hint && <span className="auth-hint" id={`${id}-hint`}>{hint}</span>}
       {error && <span className="auth-field-error" id={`${id}-err`}>{error}</span>}
     </div>
@@ -73,13 +60,12 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
  * off each rule as the person types (for new passwords).
  */
-export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error }: {
+export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error, email }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
-  autoFocus?: boolean; name?: string; rules?: boolean; error?: string | null;
+  autoFocus?: boolean; name?: string; rules?: boolean; email?: string; error?: string | null;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const list = rules ? passwordRules(value).filter((r) => r.id !== "max" || !r.ok) : [];
   const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="ui-field auth-field">
@@ -105,16 +91,7 @@ export function PasswordField({ label, value, onChange, auto, autoFocus, name, r
           {shown ? "Hide" : "Show"}
         </button>
       </div>
-      {rules && (
-        <ul className="auth-rules" id={`${id}-rules`} aria-label="Password rules">
-          {list.map((r) => (
-            <li key={r.id} className={r.ok ? "ok" : ""}>
-              <span aria-hidden="true">{r.ok ? "✓" : "•"}</span> {r.label}
-              <span className="sr-only">{r.ok ? ", done" : ", not yet"}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
       {error && <span className="auth-field-error" id={`${id}-err`}>{error}</span>}
     </div>
   );
@@ -165,10 +142,3 @@ export function friendlyThrown(err: unknown): string {
   }
   return err instanceof Error && err.message ? err.message : "Something went wrong. Try again.";
 }
-
-/** The page's query string, e.g. /verify/?type=email&token_hash=... */
-export function params(): URLSearchParams {
-  return new URLSearchParams(window.location.search);
-}
-
-export { go } from "./nav";

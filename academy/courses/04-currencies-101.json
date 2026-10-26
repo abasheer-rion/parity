@@ -167,7 +167,7 @@
    "minutes": 2,
    "body": [
     "Every price has two sides. The **bid** is what you can sell at; the **ask** is what you can buy at. The gap between them is the **spread**, and you pay it every time you trade.",
-    "For major currency pairs it is around 0.5 to 2 basis points for institutions, and more for retail traders. That sounds tiny, but a strategy that trades every day pays it hundreds of times a year.",
+    "For major currency pairs it is around 0.5 to 2 basis points for institutions, and more for retail traders. A strategy that trades every day pays it about 250 times a year.",
     "This is why Parity asks how much each strategy trades and at what cost its gain would vanish."
    ],
    "terms": [
@@ -258,7 +258,7 @@
    "body": [
     "Some currencies tend to gain when people are scared. Research found the Swiss franc and the Japanese yen gained against the US dollar when US stocks fell and market stress rose. These are called **safe haven currencies**.",
     "The picture is an illustration of that pattern, not real data: stocks fall over a few weeks while a safe haven currency edges up.",
-    "It is a tendency, not a rule. It also works against carry trades, which often borrow in these same low-rate currencies."
+    "It does not always happen. It also works against carry trades, which often borrow in these same low-rate currencies."
    ],
    "terms": [
     "safe-haven-currency",

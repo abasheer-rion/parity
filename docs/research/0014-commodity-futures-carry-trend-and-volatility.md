@@ -152,5 +152,5 @@ So the testable version is: use last quarter's moves in commodity currencies to 
 - [RES-0016: Lesser-known strategies and what firms have published](0016-lesser-known-strategies-and-what-firms-have-published.md)
 - [RES-0017: Combining many strategies, the evidence and the ingredient list](0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 - [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

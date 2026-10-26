@@ -14,7 +14,7 @@ related: [DEC-0006, EXP-0002, REF-0002]
 
 ## In plain words
 
-The gauntlet is a set of eleven tough tests every trading idea has to face. Six ask whether it beats the stock market. Five ask whether it is real at all, or just luck. The rules were set before we saw any results, so we cannot bend them.
+The gauntlet is a set of 11 tests that every trading idea goes through. Six ask whether it beats the stock market. Five ask whether it is real at all, or just luck. The rules were set before we saw any results, so we cannot bend them.
 
 ## Summary
 
@@ -74,6 +74,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [DEC-0009: Score on returns above the T-bill, charge for borrowing, and freeze code with each plan](../decisions/0009-excess-returns-financed-leverage-frozen-code.md)
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0028: Parity Academy, short courses with moving pictures](../decisions/0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](../decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](../hypotheses/0008-monthly-commodity-gap.md)
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - [HYP-0010: Emerging market basket kept paying after 2008](../hypotheses/0010-emerging-market-basket-kept-paying-after-2008.md)
@@ -91,6 +92,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [REF-0001: Architecture](0001-architecture.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](0007-ways-to-build-new-algorithms.md)
 - [REF-0012: Candlesticks and chart patterns](0012-candlesticks-and-chart-patterns.md)
+- [REF-0016: Parity Verify MVP spec](0016-parity-verify-mvp-spec.md)
 - [LOG-0001: Project start](../log/2026-10-20-project-start.md)
 - [LOG-0004: Ayan work log, requests and outcomes](../log/2026-10-21-ayan-work-log-requests-and-outcomes.md)
 <!-- backlinks:end -->

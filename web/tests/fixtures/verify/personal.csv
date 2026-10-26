@@ -1,0 +1,4 @@
+Account,Name,Email,Server,close_time,symbol,pnl
+88001234,Test Person,someone@example.com,Demo-Server01,2024-02-01 10:00:00,EURUSD,120.50
+88001234,Test Person,someone@example.com,Demo-Server01,2024-02-02 10:00:00,EURUSD,-80.25
+88001234,Test Person,someone@example.com,Demo-Server01,2024-02-05 10:00:00,GBPUSD,64.00

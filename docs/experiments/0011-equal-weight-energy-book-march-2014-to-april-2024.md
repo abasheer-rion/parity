@@ -53,5 +53,5 @@ Nothing yet.
 ## Referenced by
 
 - [HYP-0016: An equal-weight energy book pays after 2014](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md)
-- [LOG-0015: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
+- [LOG-0024: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
 <!-- backlinks:end -->

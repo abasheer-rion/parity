@@ -5,9 +5,11 @@
 //
 // Percent fields from the engine are already in percent (10.95 means 10.95%).
 import { useEffect, useState } from "react";
-import { source } from "./data";
+import { isMissing, source } from "./data";
+import { useResource } from "../ui/resource";
 import type { PrivateDoc } from "./privateMarkets";
 import type { Point } from "./types";
+import { rumAge } from "./rum";
 
 export interface MarketSource {
   id: string; name: string; provider: string; what: string; terms_url: string; licence: string;
@@ -86,11 +88,13 @@ const cache = new Map<string, Promise<unknown>>();
 function get<T>(name: string): Promise<T> {
   if (!cache.has(name)) {
     cache.set(name, fetch(`${base}/${name}`, { cache: "no-cache" }).then(async (res) => {
-      if (!res.ok) {
+      if (!res.ok || isMissing(res)) {
         cache.delete(name);
-        throw new Error(res.status === 404 ? "No markets data has been exported yet. Run `parity markets fetch` then `parity markets export`." : `Could not load markets data (${res.status}).`);
+        throw new Error(isMissing(res) ? (source === "local" ? "No markets data has been exported yet. Run `parity markets fetch` then `parity markets export`." : "Markets data has not been published yet.") : `Could not load markets data (${res.status}).`);
       }
-      return res.json();
+      const doc = (await res.json()) as { fetched_at?: string; generated_at?: string };
+      rumAge(`markets/${name}`, doc.fetched_at ?? doc.generated_at);
+      return doc;
     }));
   }
   return cache.get(name) as Promise<T>;
@@ -110,11 +114,15 @@ export const loadEtfs = () => get<EtfsFile>("etfs.json").then((f): EtfsDoc => ({
 }));
 
 /** Load one file; returns [data, error]. */
+// Each loader gets a key, so a page opened again draws its last copy at once and
+// refreshes it quietly (useResource, stale-while-revalidate).
+const marketKeys = new WeakMap<object, string>();
+let marketSeq = 0;
 export function useMarket<T>(load: () => Promise<T>): [T | null, string | null] {
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => { load().then(setData).catch((e: Error) => setError(e.message)); }, [load]);
-  return [data, error];
+  let key = marketKeys.get(load);
+  if (!key) marketKeys.set(load, (key = `market:${++marketSeq}`));
+  const r = useResource(key, load);
+  return [r.data ?? null, r.error ?? null];
 }
 
 // ------------------------------------------------------------------ formatting

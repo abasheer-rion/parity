@@ -4,9 +4,12 @@
 // to animate; the public pages draw the last frame as a still picture at build time
 // (web/scripts/academy-frames.ts, run by scripts/seo/build_public.py).
 //
-// No imports, and only type syntax Node can strip, so the build script can load this
-// file with `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box.
-// Colours are fixed hex values because both the app and the public pages are dark only.
+// One import (the generated token values, with its .ts extension) and only type syntax
+// Node can strip, so the build script can load this file with
+// `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box. Colours
+// are plain values from the tokens because the public pages draw these at build time.
+
+import { RAW } from "../ui/tokens.gen.ts";
 
 export interface Step { caption: string; [key: string]: unknown }
 export interface Visual { kind: string; alt: string; params?: Record<string, unknown>; steps: Step[] }
@@ -14,11 +17,13 @@ export interface Visual { kind: string; alt: string; params?: Record<string, unk
 export const W = 480;
 export const H = 270;
 
+// Plain colour values from the tokens: these pictures are SVG strings, drawn on the page and
+// rendered to frames at build time, so they cannot read CSS variables.
 const C = {
-  blue: "#85a8ff", deep: "#2a5ff0", good: "#4cc98a", bad: "#f07a7a", warn: "#e8c06a",
-  text: "#f1f3f9", muted: "#a3a8b9", faint: "#8a8fa2", grid: "#a9b6ff24", panel: "#11131c",
+  blue: RAW["palette-blue-300"], deep: RAW["palette-blue-500"], good: RAW["color-positive"], bad: RAW["color-negative"], warn: RAW["color-warning"],
+  text: RAW["color-text"], muted: RAW["color-text-muted"], faint: RAW["color-text-faint"], grid: RAW["color-border-strong"], panel: RAW["color-surface-raised"],
 };
-const PALETTE = [C.blue, C.good, C.warn, C.bad, "#c9a2ff", "#6fd3e0"];
+const PALETTE = [C.blue, C.good, C.warn, C.bad, RAW["palette-violet-400"], RAW["palette-cyan-400"]];
 
 // ------------------------------------------------------------------ small helpers
 
@@ -98,7 +103,8 @@ function line(pts: [number, number][]): string {
 
 function text(x: number, y: number, t: string, o: { size?: number; fill?: string; anchor?: string; weight?: number; opacity?: number } = {}): string {
   const op = o.opacity != null ? ` opacity="${r1(clamp(o.opacity) * 100) / 100}"` : "";
-  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
+  // A dark halo behind each label keeps it readable where a line or band passes under it (WCAG 1.4.3).
+  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} stroke="${C.panel}" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
 }
 
 function niceTicks(lo: number, hi: number, count = 4): number[] {
@@ -118,17 +124,28 @@ function fmt(v: number, unit = ""): string {
   return unit === "$" ? `${sign}$${s}` : `${sign}${s}${unit}`;
 }
 
+/** Moves labels apart vertically so each is at least `gap` from the next, keeping their order
+ *  and staying between `top` and `bottom`. Used for line-end labels that start bunched. */
+export function spreadLabels<T extends { y: number }>(items: T[], gap: number, top: number, bottom: number): T[] {
+  const out = items.map((it) => ({ ...it })).sort((a, b) => a.y - b.y);
+  for (let i = 0; i < out.length; i++) out[i].y = Math.max(out[i].y, i ? out[i - 1].y + gap : top);
+  // If the stack ran past the bottom, push it back up as a block.
+  const over = out.length ? out[out.length - 1].y - bottom : 0;
+  if (over > 0) for (let i = out.length - 1; i >= 0; i--) out[i].y = Math.max(top + i * gap, Math.min(out[i].y - over, i < out.length - 1 ? out[i + 1].y - gap : bottom));
+  return out;
+}
+
 /** Horizontal grid lines with labels on the left, and a baseline. */
 function yAxis(lo: number, hi: number, y: (v: number) => number, unit = "", box = PLOT): string {
   return niceTicks(lo, hi).map((v) =>
     `<line x1="${box.x0}" x2="${box.x1}" y1="${r1(y(v))}" y2="${r1(y(v))}" stroke="${C.grid}"/>` +
-    text(box.x0 - 8, y(v) + 4, fmt(v, unit), { size: 11, anchor: "end", fill: C.faint })).join("");
+    text(box.x0 - 8, y(v) + 4, fmt(v, unit), { size: 11, anchor: "end", fill: C.muted })).join("");
 }
 
 function xLabels(labels: string[], box = PLOT): string {
   if (!labels.length) return "";
   const x = scale(0, labels.length - 1, box.x0, box.x1);
-  return labels.map((l, i) => text(x(i), box.y1 + 20, l, { size: 11, fill: C.faint, anchor: i === 0 ? "start" : i === labels.length - 1 ? "end" : "middle" })).join("");
+  return labels.map((l, i) => text(x(i), box.y1 + 20, l, { size: 11, fill: C.muted, anchor: i === 0 ? "start" : i === labels.length - 1 ? "end" : "middle" })).join("");
 }
 
 function dot(x: number, y: number, fill: string, r = 4): string {
@@ -166,14 +183,24 @@ const growth: Render = (p, steps, s) => {
   const x = scale(0, n - 1, PLOT.x0, PLOT.x1), y = scale(0, hi, PLOT.y1, PLOT.y0);
   const m = revealed(n, reveal);
   let out = yAxis(0, hi, y, "$") + xLabels(["Year 0", `Year ${Math.round(years / 2)}`, `Year ${years}`]);
+  const ends: { k: number; x: number; y: number; col: string }[] = [];
   curves.forEach((c, k) => {
     const col = PALETTE[k % PALETTE.length];
     const pts = c.slice(0, m).map((v, i) => [x(i), y(v)] as [number, number]);
     out += poly(pts, col, { width: 2.5 });
     const last = pts[pts.length - 1];
     out += dot(last[0], last[1], col);
-    out += text(Math.min(last[0], PLOT.x1 - 4) - 6, last[1] - 8, `${series[k].label}: ${fmt(c[m - 1], "$")}`, { anchor: "end", fill: col, size: 12, weight: 600 });
+    ends.push({ k, x: Math.min(last[0], PLOT.x1 - 4) - 6, y: last[1] - 8, col });
   });
+  // End labels never sit on top of each other: early on the lines start together, so the
+  // labels are spread to at least one line of text apart, top to bottom.
+  for (const e of spreadLabels(ends, 15, PLOT.y0 + 12, PLOT.y1 - 4)) {
+    const label = `${series[e.k].label}: ${fmt(curves[e.k][m - 1], "$")}`;
+    // Early on the lines are short: a label ending at the line would run into the axis
+    // labels on the left, so it goes to the right of the line's end instead.
+    const left = e.x - label.length * 7.2 < PLOT.x0 + 4;
+    out += text(left ? e.x + 14 : e.x, e.y, label, { anchor: left ? "start" : "end", fill: e.col, size: 12, weight: 600 });
+  }
   return out;
 };
 
@@ -245,10 +272,10 @@ const drawdown: Render = (p, steps, s) => {
   const minDD = Math.min(...dd);
   const yd = scale(Math.min(-0.05, minDD * 1.1), 0, bot.y1, bot.y0);
   let out = yAxis(lo, hi, y, "$", top);
-  out += text(top.x0, top.y0 - 4, "Account value", { size: 11, fill: C.faint });
-  out += `<line x1="${bot.x0}" x2="${bot.x1}" y1="${bot.y0}" y2="${bot.y0}" stroke="${C.faint}" opacity=".5"/>` + text(bot.x0 - 8, bot.y0 + 4, "0%", { size: 11, anchor: "end", fill: C.faint });
-  out += text(bot.x0 - 8, yd(minDD) + 4, `${Math.round(minDD * 100)}%`, { size: 11, anchor: "end", fill: C.faint });
-  out += text(bot.x0, bot.y1 + 22, "Fall from the highest point so far", { size: 11, fill: C.faint });
+  out += text(top.x0, top.y0 - 4, "Account value", { size: 11, fill: C.muted });
+  out += `<line x1="${bot.x0}" x2="${bot.x1}" y1="${bot.y0}" y2="${bot.y0}" stroke="${C.faint}" opacity=".5"/>` + text(bot.x0 - 8, bot.y0 + 4, "0%", { size: 11, anchor: "end", fill: C.muted });
+  out += text(bot.x0 - 8, yd(minDD) + 4, `${Math.round(minDD * 100)}%`, { size: 11, anchor: "end", fill: C.muted });
+  out += text(bot.x0, bot.y1 + 22, "Fall from the highest point so far", { size: 11, fill: C.muted });
   if (showPeak > 0.01) out += poly(peak.slice(0, m).map((v, i) => [x(i), y(v)]), C.good, { width: 1.4, opacity: showPeak, dash: "4 4" });
   out += poly(eq.slice(0, m).map((v, i) => [x(i), y(v)]), C.blue, { width: 2.2 });
   if (fill > 0.01) {
@@ -286,7 +313,7 @@ const costs: Render = (p, steps, s) => {
   out += poly(b.map((v, i) => [x(i), y(v)]), col, { width: 2.5 });
   out += text(PLOT.x1 - 4, y(b[n - 1]) + 18, `After costs: ${fmt(b[n - 1], "$")}`, { anchor: "end", fill: col, size: 12, weight: 600 });
   out += text(PLOT.x0 + 6, PLOT.y0 + 6, `Cost per trade: ${cost.toFixed(1)} basis points`, { fill: C.text, size: 12, weight: 600 });
-  out += text(PLOT.x0 + 6, PLOT.y0 + 24, `Trades its whole size ${turnover} times a year`, { fill: C.faint, size: 11 });
+  out += text(PLOT.x0 + 6, PLOT.y0 + 24, `Trades its whole size ${turnover} times a year`, { fill: C.muted, size: 11 });
   return out;
 };
 
@@ -309,8 +336,8 @@ const maxof: Render = (p, steps, s) => {
   const top = Math.max(4, ...counts);
   const x = scale(lo, hi, PLOT.x0, PLOT.x1), y = scale(0, top * 1.15, PLOT.y1, PLOT.y0 + 20);
   let out = `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${PLOT.y1}" y2="${PLOT.y1}" stroke="${C.faint}" opacity=".6"/>`;
-  [-1, -0.5, 0, 0.5, 1].forEach((f) => { const v = f * range * (2 / 3); out += text(x(v), PLOT.y1 + 18, v.toFixed(1), { size: 11, anchor: "middle", fill: C.faint }); });
-  out += text(PLOT.x1, PLOT.y1 + 32, (p.xLabel as string) ?? "Sharpe ratio", { size: 11, anchor: "end", fill: C.faint });
+  [-1, -0.5, 0, 0.5, 1].forEach((f) => { const v = f * range * (2 / 3); out += text(x(v), PLOT.y1 + 18, v.toFixed(1), { size: 11, anchor: "middle", fill: C.muted }); });
+  out += text(PLOT.x1, PLOT.y1 + 32, (p.xLabel as string) ?? "Sharpe ratio", { size: 11, anchor: "end", fill: C.muted });
   counts.forEach((c, i) => {
     if (!c) return;
     out += `<rect x="${r1(x(lo + i * bw) + 1)}" y="${r1(y(c))}" width="${r1(x(lo + bw) - x(lo) - 2)}" height="${r1(PLOT.y1 - y(c))}" rx="2" fill="${C.blue}" opacity=".55"/>`;
@@ -324,7 +351,7 @@ const maxof: Render = (p, steps, s) => {
     out += `<line x1="${r1(x(h))}" x2="${r1(x(h))}" y1="${PLOT.y0 + 40}" y2="${PLOT.y1}" stroke="${C.bad}" stroke-width="2" stroke-dasharray="5 4" opacity="${r1(hurdle * 100) / 100}"/>`;
     out += text(x(h) - 6, PLOT.y0 + 52, `Luck alone reaches about ${h.toFixed(2)}`, { anchor: "end", fill: C.bad, size: 12 });
   }
-  out += text(PLOT.x0, PLOT.y0 + 4, (p.note as string) ?? `Every bar counts strategies with zero real skill, ${years} years each`, { size: 11, fill: C.faint });
+  out += text(PLOT.x0, PLOT.y0 + 4, (p.note as string) ?? `Every bar counts strategies with zero real skill, ${years} years each`, { size: 11, fill: C.muted });
   return out;
 };
 
@@ -347,7 +374,7 @@ const gauntlet: Render = (p, steps, s) => {
       out += `<rect x="${r1(x0)}" y="${y0 + 12}" width="${r1(w)}" height="64" rx="10" fill="${C.panel}" stroke="${col}" stroke-width="${shown > 0.5 ? 2 : 1}" opacity="${r1((0.45 + 0.55 * shown) * 100) / 100}"/>`;
       out += text(x0 + w / 2, y0 + 34, t.id, { anchor: "middle", fill: shown > 0.5 ? col : C.faint, size: 13, weight: 700 });
       out += text(x0 + w / 2, y0 + 52, shown > 0.5 ? (t.pass ? "pass" : "fail") : "...", { anchor: "middle", fill: shown > 0.5 ? col : C.faint, size: 12 });
-      out += text(x0 + w / 2, y0 + 68, t.label, { anchor: "middle", fill: C.faint, size: 10 });
+      out += text(x0 + w / 2, y0 + 68, t.label, { anchor: "middle", fill: C.muted, size: 10 });
       k++;
     });
   });
@@ -376,8 +403,8 @@ const curve: Render = (p, steps, s) => {
   const all = steps.flatMap((st) => arr(st.yields) ?? []);
   const lo = Math.max(0, Math.floor(Math.min(...all) - 0.5)), hi = Math.ceil(Math.max(...all) + 0.5);
   const x = scale(0, labels.length - 1, PLOT.x0 + 10, PLOT.x1 - 10), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 14);
-  let out = yAxis(lo, hi, y, "%") + labels.map((l, i) => text(x(i), PLOT.y1 + 20, l, { size: 12, anchor: "middle", fill: C.faint })).join("");
-  out += text(PLOT.x1, PLOT.y0 + 4, "Yield by how long the loan lasts", { size: 11, anchor: "end", fill: C.faint });
+  let out = yAxis(lo, hi, y, "%") + labels.map((l, i) => text(x(i), PLOT.y1 + 20, l, { size: 12, anchor: "middle", fill: C.muted })).join("");
+  out += text(PLOT.x1, PLOT.y0 + 4, "Yield by how long the loan lasts", { size: 11, anchor: "end", fill: C.muted });
   if (at(steps, s, "ghost", 0) > 0.01) out += `<path d="${smooth(first.map((v, i) => [x(i), y(v)]))}" fill="none" stroke="${C.faint}" stroke-width="1.5" stroke-dasharray="4 4" opacity=".7"/>`;
   const slope = ys[ys.length - 1] - ys[0];
   const col = slope > 0.25 ? C.blue : slope < -0.25 ? C.bad : C.warn;
@@ -407,7 +434,7 @@ const bars: Render = (p, steps, s) => {
     const top = Math.min(y(v), y(0)), h = Math.abs(y(v) - y(0));
     out += `<rect x="${r1(x0)}" y="${r1(top)}" width="${r1(bw)}" height="${r1(Math.max(h, 0.5))}" rx="4" fill="${col}" opacity=".85"/>`;
     if (Math.abs(v) > (hi - lo) * 0.004) out += text(x0 + bw / 2, v >= 0 ? top - 6 : top + h + 15, unit === "$" ? fmt(v, "$") : `${v.toFixed(Math.abs(v) < 10 ? 1 : 0)}${unit}`, { anchor: "middle", fill: C.text, size: 12, weight: 600 });
-    out += text(x0 + bw / 2, PLOT.y1 + 20, labels[i], { anchor: "middle", fill: C.faint, size: 11 });
+    out += text(x0 + bw / 2, PLOT.y1 + 20, labels[i], { anchor: "middle", fill: C.muted, size: 11 });
   });
   const label = str(steps, s, "label");
   if (label) out += text(PLOT.x0 + 4, PLOT.y0 + 2, label, { fill: C.text, size: 13, weight: 600 });
@@ -477,8 +504,8 @@ const event: Render = (p, steps, s) => {
   const x = scale(-win, win, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 14);
   let out = yAxis(lo, hi, y, "") + `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(0))}" y2="${r1(y(0))}" stroke="${C.faint}" opacity=".6"/>`;
   out += `<line x1="${r1(x(0))}" x2="${r1(x(0))}" y1="${PLOT.y0 + 10}" y2="${PLOT.y1}" stroke="${C.warn}" stroke-dasharray="3 3"/>` + text(x(0) + 6, PLOT.y0 + 20, "News day", { fill: C.warn, size: 12 });
-  out += text(PLOT.x0, PLOT.y1 + 20, `${win} days before`, { size: 11, fill: C.faint }) + text(PLOT.x1, PLOT.y1 + 20, `${win} days after`, { size: 11, fill: C.faint, anchor: "end" });
-  out += text(PLOT.x0 - 8, PLOT.y0 + 8, "moves", { size: 10, fill: C.faint, anchor: "end" });
+  out += text(PLOT.x0, PLOT.y1 + 20, `${win} days before`, { size: 11, fill: C.muted }) + text(PLOT.x1, PLOT.y1 + 20, `${win} days after`, { size: 11, fill: C.muted, anchor: "end" });
+  out += text(PLOT.x0 - 8, PLOT.y0 + 8, "moves", { size: 10, fill: C.muted, anchor: "end" });
   if (band > 0.01) {
     // Random days: no effect, so their average stays near zero within a band that narrows with more events.
     const w = (1.96 * vol * 0.35) / Math.sqrt(n);
@@ -504,7 +531,7 @@ const leverage: Render = (p, steps, s) => {
   const lo = Math.min(...price, 60) * 0.95, hi = Math.max(...price) * 1.04;
   const x = scale(0, days - 1, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 16);
   let out = yAxis(lo, hi, y, "$") + xLabels(["Day 1", `Day ${days}`]);
-  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(100))}" y2="${r1(y(100))}" stroke="${C.faint}" stroke-dasharray="3 4"/>` + text(PLOT.x0 + 4, y(100) - 6, "Bought at $100", { size: 11, fill: C.faint });
+  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(100))}" y2="${r1(y(100))}" stroke="${C.faint}" stroke-dasharray="3 4"/>` + text(PLOT.x0 + 4, y(100) - 6, "Bought at $100", { size: 11, fill: C.muted });
   const hit = liq > lo ? price.findIndex((v) => v <= liq) : -1;
   const end = hit >= 0 ? hit + 1 : days;
   out += poly(price.slice(0, end).map((v, i) => [x(i), y(v)]), C.blue, { width: 2.2 });
@@ -540,7 +567,7 @@ const jcurve: Render = (p, steps, s) => {
     if (grow <= 0) continue;
     if (calls[i]) out += `<rect x="${r1(cx(i) - bw / 2)}" y="${r1(y(0))}" width="${r1(bw)}" height="${r1(y(-calls[i] * grow) - y(0))}" rx="3" fill="${C.bad}" opacity=".75"/>`;
     if (dists[i]) out += `<rect x="${r1(cx(i) - bw / 2)}" y="${r1(y(dists[i] * grow))}" width="${r1(bw)}" height="${r1(y(0) - y(dists[i] * grow))}" rx="3" fill="${C.good}" opacity=".75"/>`;
-    out += text(cx(i), PLOT.y1 + 20, `Y${i + 1}`, { anchor: "middle", size: 11, fill: C.faint });
+    out += text(cx(i), PLOT.y1 + 20, `Y${i + 1}`, { anchor: "middle", size: 11, fill: C.muted });
   }
   const k = Math.max(1, Math.floor(m));
   out += poly(cum.slice(0, k).map((v, i) => [cx(i), y(v)]), C.warn, { width: 2.5 });
@@ -573,7 +600,7 @@ const seesaw: Render = (p, steps, s) => {
   out += text(cx, 40, `1 ${base} = ${rate.toFixed(2)} ${quote}`, { anchor: "middle", fill: C.text, size: 20, weight: 700 });
   const label = str(steps, s, "label");
   if (label) out += text(cx, 66, label, { anchor: "middle", fill: C.muted, size: 13 });
-  out += text(cx, 250, `Higher number: the ${base} buys more ${quote}`, { anchor: "middle", fill: C.faint, size: 11 });
+  out += text(cx, 250, `Higher number: the ${base} buys more ${quote}`, { anchor: "middle", fill: C.muted, size: 11 });
   return out;
 };
 
@@ -605,7 +632,53 @@ const trend: Render = (p, steps, s) => {
   return out;
 };
 
-export const KINDS: Record<string, Render> = { growth, paths, drawdown, costs, maxof, gauntlet, curve, bars, lines, event, leverage, jcurve, seesaw, trend };
+
+/**
+ * Win rate against profit (DEC-0035): accounts that each make a run of trades with a
+ * chance of winning, a size of win and a size of loss, plus at most one rare large loss
+ * at a set point. Every line is labelled with its win rate and its profit so far, so the
+ * picture states its own numbers. Made-up trades, drawn the same way every time.
+ */
+const winrate: Render = (p, steps, s) => {
+  const n = num(p.trades, 200), start = num(p.start, 10000);
+  const series = (p.series as { label: string; p: number; win: number; loss: number; tailAt?: number; tail?: number; seed?: number }[]) ?? [];
+  const reveal = at(steps, s, "reveal", 1);
+  const runs = series.map((c, k) => {
+    const g = rng(num(c.seed, k + 5));
+    const eq = [start];
+    const won: boolean[] = [false];
+    const tailAt = c.tailAt != null ? Math.round(c.tailAt * (n - 1)) : -1;
+    for (let i = 1; i < n; i++) {
+      const prev = eq[i - 1];
+      const d = prev <= 0 ? 0 : i === tailAt ? -num(c.tail, 0) : g.next() < c.p ? c.win : -c.loss;
+      won.push(d > 0);
+      eq.push(Math.max(0, prev + d));
+    }
+    return { eq, won };
+  });
+  const m = revealed(n, reveal);
+  const flat = runs.flatMap((r) => r.eq);
+  const lo = Math.min(0, ...flat), hi = Math.max(...flat, start) * 1.08;
+  const x = scale(0, n - 1, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 30);
+  let out = yAxis(lo, hi, y, "$") + xLabels(["Trade 1", `Trade ${n}`]);
+  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(start))}" y2="${r1(y(start))}" stroke="${C.faint}" stroke-dasharray="3 4"/>`;
+  runs.forEach((r, k) => {
+    const col = PALETTE[k % PALETTE.length];
+    const pts = r.eq.slice(0, m).map((v, i) => [x(i), y(v)] as [number, number]);
+    out += poly(pts, col, { width: 2.5 });
+    const last = pts[pts.length - 1];
+    out += dot(last[0], last[1], col);
+    // Win rate and profit over the trades shown so far (an empty account trades no more).
+    let wins = 0, count = 0;
+    for (let i = 1; i < m && r.eq[i - 1] > 0; i++) { count++; if (r.won[i]) wins++; }
+    const profit = r.eq[m - 1] - start;
+    const line = `${series[k].label}: wins ${count ? Math.round((wins / count) * 100) : 0}%, ${profit >= 0 ? "+" : "-"}${fmt(Math.abs(profit), "$")}`;
+    out += text(PLOT.x0 + 4, PLOT.y0 + 2 + k * 16, line, { fill: col, size: 12, weight: 600 });
+  });
+  return out;
+};
+
+export const KINDS: Record<string, Render> = { growth, paths, drawdown, costs, maxof, gauntlet, curve, bars, lines, event, leverage, jcurve, seesaw, trend, winrate };
 
 /** The inside of the picture at position s (0 to steps - 1), as SVG markup. */
 export function renderScene(v: Visual, s: number): string {
