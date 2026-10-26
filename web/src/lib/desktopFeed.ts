@@ -3,15 +3,15 @@
 //
 // The release workflow (.github/workflows/desktop-release.yml) attaches every update file to
 // a GitHub release: latest-mac.yml, latest.yml, the Mac zips and disk images, the Windows
-// installer and their .blockmap files. The repository is private, so the app cannot read
-// those releases itself. This feed reads them with a read-only token kept in the Pages
-// environment (DESKTOP_RELEASES_TOKEN) and answers without any sign-in:
+// installer and their .blockmap files. This feed reads them (with the optional read-only
+// token DESKTOP_RELEASES_TOKEN from the Pages environment, which only raises GitHub's rate
+// limit) and answers without any sign-in:
 //
 //   latest-mac.yml, latest.yml   the newest PUBLISHED desktop-v* release's file, as text
 //   any other listed file        a redirect to GitHub's short-lived download address
 //
 // Draft and pre-release releases are never served, so publishing a release is what ships
-// it. Without the token every request answers 503 and the app keeps running as it is.
+// it. If GitHub cannot be reached the feed answers an error and the app keeps running as it is.
 // No browser globals here, so the tests run it directly with a fake fetch.
 
 export const RELEASES_REPO = "abasheer-rion/parity";
@@ -45,12 +45,14 @@ const text = (status: number, body: string, cache = "no-store") =>
 /** Answers one request to /desktop/updates/<file>. */
 export async function serveFeed(file: string, method: string, env: FeedEnv, fetcher: Fetch = fetch): Promise<Response> {
   if (method !== "GET" && method !== "HEAD") return text(405, "GET only");
+  // The repository is public now, so the releases can be read without a token.
+  // A token, if set, only raises GitHub's rate limit.
   const token = env.DESKTOP_RELEASES_TOKEN;
-  if (!token) return text(503, "The update feed is not set up yet.");
   const name = cleanFileName(file);
   if (!name) return text(404, "Not found");
 
-  const headers = { Authorization: `Bearer ${token}`, "User-Agent": "parity-desktop-feed", "X-GitHub-Api-Version": "2022-11-28" };
+  const headers: Record<string, string> = { "User-Agent": "parity-desktop-feed", "X-GitHub-Api-Version": "2022-11-28" };
+  if (token) headers.Authorization = `Bearer ${token}`;
   let releases: Release[];
   try {
     const res = await fetcher(`${API}/repos/${RELEASES_REPO}/releases?per_page=30`, { headers: { ...headers, Accept: "application/vnd.github+json" } });
