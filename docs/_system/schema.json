@@ -443,6 +443,7 @@
       "desktop",
       "docs",
       "engine",
+    "event-graph",
       "ledger",
       "load",
       "market-data",
