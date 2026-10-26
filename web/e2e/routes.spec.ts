@@ -1,16 +1,16 @@
 // Every route of every app, at desktop and phone size (one test per route per project):
-// it loads, shows real text, has no NaN or undefined on screen, no console error or
-// exception (the fixture), no serious or critical accessibility problem (axe, WCAG 2.2 AA),
-// and nothing scrolls sideways on the phone.
+// it loads, shows real text, has no NaN or undefined on screen, no console error,
+// exception or failed request (the fixture), no text that collides or is cut off, and
+// nothing scrolls sideways on the phone. Accessibility (axe on every route) is checked by
+// scripts/a11y.mjs in CI, so it is not repeated here.
 import type { Page, TestInfo } from "@playwright/test";
 import { ALL } from "./routes";
 // @ts-expect-error a plain .mjs module without types
 import { layoutCheck } from "../scripts/lib/layout-check.mjs";
-import { axe, badValues, expect, open, settled, sideways, test } from "./fixtures";
+import { badValues, expect, open, settled, sideways, test } from "./fixtures";
 
-// axe takes 15 to 20 seconds on the biggest pages (the references page has about 16,000
-// elements), more on a busy runner, so those get three times the time (test.slow below).
-test.describe.configure({ timeout: 90_000 });
+// The biggest pages (the references page has about 16,000 elements) take a while to settle.
+test.describe.configure({ timeout: 60_000 });
 
 async function check(page: Page, path: string, info: TestInfo, status = 200) {
   const res = await open(page, path);
@@ -19,8 +19,6 @@ async function check(page: Page, path: string, info: TestInfo, status = 200) {
   const text = (await page.locator("body").innerText()).trim();
   expect(text.length, "page has text").toBeGreaterThanOrEqual(40);
   expect(await badValues(page), "no NaN or undefined on screen").toEqual([]);
-  if ((await page.evaluate(() => document.getElementsByTagName("*").length)) > 5000) test.slow();
-  expect(await axe(page), "no serious or critical accessibility problems").toEqual([]);
   // Text that collides, is cut off, or a number shortened with "..." (scripts/lib/layout-check.mjs).
   const layout = (await page.evaluate(layoutCheck) as { kind: string; text: string; other?: string; where: string }[])
     .map((f) => `${f.kind}: "${f.text}"${f.other ? ` and "${f.other}"` : ""} at ${f.where}`);

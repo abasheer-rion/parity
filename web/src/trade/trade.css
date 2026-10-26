@@ -326,7 +326,9 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .ptr[data-mobile] .lvb-src { display: none; }
 .ptr[data-mobile] .cb-px { min-width: 0; }
 .ptr[data-mobile] .tb-eq { min-width: 74px; }
-.ptr[data-mobile] .cg-name, .ptr[data-mobile] .cg-max { display: none; }
+/* On a phone the chart's own timeframe buttons repeat the ones in the top bar; dropping
+   them leaves room for the data badge, which was cut off at the edge. */
+.ptr[data-mobile] .cg-name, .ptr[data-mobile] .cg-max, .ptr[data-mobile] .cg-tfs { display: none; }
 .ptr[data-mobile] .view { padding: 6px; }
 .ptr[data-mobile] .vcols { grid-template-columns: minmax(0, 1fr); }
 .ptr[data-mobile] .st-row { flex-wrap: wrap; padding: 6px 0; }

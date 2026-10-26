@@ -31,7 +31,7 @@ read `test-results/<test>/error-context.md` and the screenshot next to it.
 
 | File | What it checks |
 |---|---|
-| `routes.spec.ts` | Every route of every app: loads, real text, no NaN, axe, no sideways scroll, no text that collides or is cut off, charts draw |
+| `routes.spec.ts` | Every route of every app: loads, real text, no NaN, no sideways scroll, no text that collides or is cut off, charts draw (axe runs in `scripts/a11y.mjs`) |
 | `auth.spec.ts` | Log in, sign up, reset, the email link page, log out, the sign-in wall |
 | `nav.spec.ts` | Menus, deep links, Copy link, the back button, not found pages |
 | `site.spec.ts` | Front page, cookie notice, legal pages, blog, news, glossary, ideas, notes |

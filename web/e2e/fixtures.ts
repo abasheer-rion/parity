@@ -10,7 +10,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { test as base, expect, type ConsoleMessage, type Page } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
 import { BASE, SUPABASE } from "./config";
 import { DataStub } from "./data";
 import { FakeDb, USER, sessionCookie, stubSupabase } from "./supabase";
@@ -139,16 +138,6 @@ export async function badValues(page: Page): Promise<string[]> {
     return [...text.matchAll(/(^|[^A-Za-z])(NaN|undefined|Infinity|\[object Object\])(?![A-Za-z])/g)]
       .map((m) => text.slice(Math.max(0, (m.index ?? 0) - 30), (m.index ?? 0) + 30).replace(/\s+/g, " "));
   });
-}
-
-/** Serious and critical axe violations (WCAG 2.2 A and AA), one line each. */
-export async function axe(page: Page, exclude: string[] = []): Promise<string[]> {
-  let b = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]);
-  for (const e of exclude) b = b.exclude(e);
-  const r = await b.analyze();
-  return r.violations
-    .filter((v) => v.impact === "serious" || v.impact === "critical")
-    .map((v) => `${v.impact} ${v.id}: ${v.help} at ${v.nodes.slice(0, 3).map((n) => n.target.join(" ")).join(" | ")}`);
 }
 
 /** How far the page scrolls sideways, in pixels. */
