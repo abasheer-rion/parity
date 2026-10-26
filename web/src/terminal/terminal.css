@@ -205,7 +205,7 @@
 .term-table th { position: sticky; top: 0; z-index: 1; background: var(--t-head); color: var(--t-faint); font-weight: 500; font-size: var(--type-3xs); letter-spacing: .05em; text-transform: uppercase; text-align: right; padding: 0 6px; height: 24px; border-bottom: 1px solid var(--t-line-2); white-space: nowrap; }
 .term-table th.l, .term-table td.l { text-align: left; }
 .term-table th.on { color: var(--t-amber); }
-.term-table th button { all: unset; cursor: pointer; display: inline-block; min-height: 24px; line-height: 24px; }
+.term-table th button { all: unset; cursor: pointer; display: inline-block; min-width: 24px; min-height: 24px; line-height: 24px; text-align: inherit; }
 .term-table th button:focus-visible { outline: 1px solid var(--t-amber); }
 .term-table td { text-align: right; padding: 0 6px; height: 19px; border-bottom: 1px solid color-mix(in srgb, var(--palette-white) 3%, transparent); white-space: nowrap; color: var(--t-text); }
 .term-table tr.pick { cursor: pointer; }
@@ -233,8 +233,10 @@
 .term-attr { color: var(--t-cyan); font-size: var(--type-2xs); }
 
 /* narrow panels drop the less important columns */
-@container panel (max-width: 760px) { .ptm .c-label, .ptm .c-spark { display: none; } }
-@container panel (max-width: 580px) { .ptm .c-vol, .ptm .c-ytd, .ptm .c-pct { display: none; } }
+/* Measured on the full monitor: every column fits from 980px, the rest at each step below. */
+@container panel (max-width: 980px) { .ptm .c-spark { display: none; } }
+@container panel (max-width: 900px) { .ptm .c-label { display: none; } }
+@container panel (max-width: 740px) { .ptm .c-vol, .ptm .c-ytd, .ptm .c-pct { display: none; } }
 @container panel (max-width: 440px) { .ptm .c-m1 { display: none; } }
 /* Very narrow panels keep the name and the first numbers whole rather than cut the last column. */
 @container panel (max-width: 380px) { .ptm .c-n2 { display: none; } .ptm .term-name, .ptm .term-name.strong { max-width: 16ch; } }
@@ -391,13 +393,27 @@
 .ptm .sw-race-body { gap: 10px; }
 .ptm .pb-honest { font-size: var(--type-2xs); border-left-color: var(--t-amber); margin-top: 8px; }
 .ptm .sw2-card, .ptm .sw-closeup, .ptm .sw-card, .ptm .sw-tray { border-radius: 0; box-shadow: none; padding: 8px 10px; background: var(--t-panel); border-color: var(--t-line); }
+/* Cards from the shared library (Panel) take the terminal's square, dense frame too. */
+.ptm .sw2 .mcard { border-radius: 0; padding: 8px 10px; background: var(--t-panel); border-color: var(--t-line); }
+.ptm .sw2 .mcard-head { margin-bottom: 8px; }
+.ptm .sw2 .mcard-head h2 { font-size: var(--type-xs); letter-spacing: .04em; text-transform: uppercase; color: var(--t-dim); }
+.ptm .sw2 .ui-grid { gap: 8px; }
+.ptm .sw2-honest-bar { border-radius: 0; font-size: var(--type-xs); border-left-color: var(--t-amber); background: color-mix(in srgb, var(--color-warning) 6%, var(--t-panel)); }
+.ptm .sw2-paths, .ptm .sw2-groups, .ptm .sw2-settings { gap: 8px; }
 .ptm .sw-hero-head h2, .ptm .sw-hero-head h1 { font-family: var(--t-mono); font-size: var(--type-2xl); color: var(--t-text); }
 .ptm .sw2 .ui-btn, .ptm .sw2 .ui-chip-main, .ptm .sw2 .ui-seg { border-radius: 0; font-family: var(--t-mono); }
 .ptm .sw2 .ui-btn { height: 24px; font-size: var(--type-2xs); padding: 0 9px; }
 .ptm .sw2 .ui-btn-primary { background: var(--t-amber); color: var(--palette-black); }
 .ptm .sw2 .ui-seg button, .ptm .sw2 .ui-seg [role="radio"] { border-radius: 0; font-size: var(--type-2xs); }
+.ptm .sw2 .ui-seg { height: 26px; }
+.ptm .sw2 .ui-seg button { height: 24px; }
+.ptm .sw2 .ui-seg-thumb { height: 24px; border-radius: 0; background: color-mix(in srgb, var(--color-warning) 16%, var(--t-panel)); box-shadow: inset 0 0 0 1px var(--t-amber-dim); }
+.ptm .sw2 .ui-seg button.on { color: var(--t-amber); }
+.ptm .sw2-settings .ui-seg { justify-self: start; }
 .ptm .sw2 .ui-input, .ptm .sw2 select, .ptm .sw2 textarea { border-radius: 0; background: var(--palette-black); font-family: var(--t-mono); }
 .ptm .sw2 .ui-chip { border-radius: 0; }
+/* The remove cross keeps a 24px target inside the denser chips (WCAG 2.5.8). */
+.ptm .sw2 .ui-chip-x { min-width: 24px; min-height: 24px; display: inline-grid; place-items: center; padding: 0 4px; }
 .ptm .sw2 .ui-chip-main { font-size: var(--type-xs); min-height: 24px; height: auto; padding: 2px 9px; }
 .ptm .sw2 .ui-select select { font-size: var(--type-xs); height: 24px; border-radius: 0; font-family: var(--t-mono); }
 .ptm .sw2 .ui-field-label, .ptm .sw2 h2, .ptm .sw2 h3 { font-size: var(--type-xs); }

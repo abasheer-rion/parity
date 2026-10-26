@@ -120,6 +120,7 @@
 /* paths */
 .sw2-paths { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .sw2-settings { display: grid; gap: 12px; }
+.sw2-groups { display: grid; gap: 12px; }
 .sw2-settings .ui-seg { flex-wrap: wrap; }
 .sw2-seed { display: inline-flex; gap: 8px; align-items: center; }
 .sw2-seed .ui-input { width: 110px; }
