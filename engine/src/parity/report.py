@@ -16,8 +16,9 @@ import pandas as pd
 from . import strategies
 from .backtest import BacktestConfig, run
 from .compare import SOURCE_PAIRS, source_checks, strategy_comparison
-from .data import store
+from .data import catalog, store
 from .gauntlet import run_gauntlet
+from .metrics import holdup as holdup_mod
 from .metrics import performance, signal
 
 SCHEMA_VERSION = 1
@@ -35,6 +36,55 @@ def _weekly(series: pd.Series, digits: int = 5) -> list[list]:
     """Downsample to weekly points so the payload stays small."""
     s = series.resample("W-FRI").last().dropna()
     return [[d.date().isoformat(), round(float(v), digits)] for d, v in s.items()]
+
+
+def holdup_series(panel: pd.DataFrame, data_dir: Path) -> tuple[dict, dict, dict]:
+    """The comparison series for the "how it holds up" numbers: stocks (the benchmark's
+    total return index), bonds (the 10-year Treasury total return index, built from the
+    yield when no cached copy exists) and rates (the 10-year Treasury yield). Anything
+    missing is reported by name and reason, never filled in."""
+    series, names, reasons = {}, {}, {}
+    if "eq.US_TOTAL" in panel:
+        series["stocks"] = panel["eq.US_TOTAL"].pct_change(fill_method=None)
+        names["stocks"] = "eq.US_TOTAL"
+    else:
+        reasons["stocks"] = "eq.US_TOTAL not loaded"
+    try:
+        tr = store.load("bond.TR10", data_dir)
+        names["bonds"] = "bond.TR10"
+    except FileNotFoundError:
+        try:
+            tr = store.bond_total_return(store.load("bond.UST10Y", data_dir),
+                                         catalog.BOND_DURATION["bond.TR10"])
+            names["bonds"] = "bond.TR10 (built from bond.UST10Y)"
+        except FileNotFoundError:
+            tr = None
+            reasons["bonds"] = "no cached bond.TR10 or bond.UST10Y"
+    if tr is not None:
+        series["bonds"] = tr.pct_change(fill_method=None)
+    try:
+        series["rates"] = store.load("bond.UST10Y", data_dir)
+        names["rates"] = "bond.UST10Y"
+    except FileNotFoundError:
+        reasons["rates"] = "no cached bond.UST10Y"
+    return series, names, reasons
+
+
+def _holdup(res, bench: pd.Series | None, n_trials: int, extra: tuple[dict, dict, dict],
+            metrics: dict, cfg: BacktestConfig, gauntlet: dict | None, name: str) -> dict | None:
+    series, names, reasons = extra
+    tests = None
+    if gauntlet:
+        tests = {"placebo_timing": gauntlet.get("placebo", {}).get("p_value")}
+        prob = gauntlet.get("bootstrap", {}).get("prob_sharpe_above_zero")
+        if prob is not None:
+            tests["bootstrap_sharpe_above_zero"] = 1 - prob
+    return holdup_mod.holdup(
+        res.returns, bench, n_trials, stocks=series.get("stocks"), bonds=series.get("bonds"),
+        rates=series.get("rates"), excess=res.excess_returns, test_p_values=tests,
+        breakeven_bps=metrics.get("breakeven_cost_bps"), cost_bps=cfg.cost_bps,
+        names={**names, "strategy": name, "benchmark": "us_market_buy_hold"},
+        reasons={**reasons, "benchmark": "is_benchmark"} if bench is None else reasons)
 
 
 def run_all(names: list[str] | None = None, config: BacktestConfig | None = None,
@@ -64,6 +114,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
     if n_trials is None:
         n_trials = sum(1 for s in instances.values() if not s.is_benchmark)
 
+    extra = holdup_series(panel, data_dir)
     runs, all_returns = [], {}
     for name, strat in instances.items():
         cfg = bench_cfg if strat.is_benchmark else config
@@ -76,6 +127,8 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
                                       benchmark_excess=None if strat.is_benchmark else bench_ex)
         all_returns[name] = res.excess_returns
         sig = strat.signal(panel)
+        gaunt = run_gauntlet(strat, panel, bench, cfg, n_trials, bench_ex) \
+            if gauntlet and not strat.is_benchmark else None
         runs.append({
             "strategy": name,
             **type(strat).label(),
@@ -92,8 +145,10 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
             if sig is not None else [],
             "exposure": {k: round(float(v), 4) for k, v in res.weights.iloc[-1].items()}
             if len(res.weights) else {},
-            "gauntlet": run_gauntlet(strat, panel, bench, cfg, n_trials, bench_ex)
-            if gauntlet and not strat.is_benchmark else None,
+            "gauntlet": gaunt,
+            "holdup": _holdup(res, None if strat.is_benchmark else bench,
+                              1 if strat.is_benchmark else n_trials, extra, metrics, cfg,
+                              gaunt, name),
         })
 
     check_keys = sorted({k for a, b, _ in SOURCE_PAIRS

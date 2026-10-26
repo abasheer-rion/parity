@@ -33,6 +33,16 @@ JSON_FIELDS = {"params", "config", "metrics", "yearly", "equity", "drawdown", "i
                "exposure", "gauntlet"}
 
 
+def nest_holdup(run: dict) -> dict:
+    """strategy_runs has no holdup column, so the "how it holds up" numbers travel inside
+    the gauntlet blob and scripts/export_site_data.py lifts them back out. A run without a
+    gauntlet (the benchmark) leaves them out rather than invent a gauntlet."""
+    h, g = run.get("holdup"), run.get("gauntlet")
+    if h is None or not isinstance(g, dict):
+        return run
+    return {**run, "gauntlet": {**g, "holdup": h}}
+
+
 def publish(doc: dict) -> str:
     url = os.environ.get("PARITY_WRITER_DB_URL")
     if not url:
@@ -50,7 +60,7 @@ def publish(doc: dict) -> str:
         cols = ", ".join(("batch_id", *RUN_FIELDS))
         marks = ", ".join(["%s"] * (len(RUN_FIELDS) + 1))
         rows = [(batch_id, *[json.dumps(run.get(f)) if f in JSON_FIELDS else run[f]
-                             for f in RUN_FIELDS]) for run in doc["runs"]]
+                             for f in RUN_FIELDS]) for run in map(nest_holdup, doc["runs"])]
         cur.executemany(f"insert into public.strategy_runs ({cols}) values ({marks})", rows)
         conn.commit()
     return batch_id
