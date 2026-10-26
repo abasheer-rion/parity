@@ -76,6 +76,7 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
 
       <Grid cols={2}>
         <Panel title="Basket">
+          <div className="sw2-groups">
           {groups.map((g) => (
             <div className="ui-field" key={g}>
               <span className="ui-field-label">{GROUP_LABEL[g] ?? g}</span>
@@ -86,6 +87,7 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
               </div>
             </div>
           ))}
+          </div>
           <p className="muted small">Up to {MAX_ASSETS}. Currencies are their value in US dollars; USD is the dollar against nine others. Stocks and bonds are total return, so they include dividends and interest.</p>
         </Panel>
         <Panel title="Settings">
