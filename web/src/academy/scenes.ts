@@ -103,7 +103,8 @@ function line(pts: [number, number][]): string {
 
 function text(x: number, y: number, t: string, o: { size?: number; fill?: string; anchor?: string; weight?: number; opacity?: number } = {}): string {
   const op = o.opacity != null ? ` opacity="${r1(clamp(o.opacity) * 100) / 100}"` : "";
-  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
+  // A dark halo behind each label keeps it readable where a line or band passes under it (WCAG 1.4.3).
+  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} stroke="${C.panel}" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
 }
 
 function niceTicks(lo: number, hi: number, count = 4): number[] {

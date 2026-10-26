@@ -26,7 +26,7 @@
 .ui-delta.good { color: var(--good); }
 .ui-delta.bad { color: var(--bad); }
 .ui-delta-label { color: var(--muted); font-weight: var(--fw-regular); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Buttons: Mercury's DS button, exactly (pill, flat fill, regular weight, 0.99 press) */
 .ui-btn {

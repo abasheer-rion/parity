@@ -293,10 +293,11 @@ function TradeShell() {
             <span className="tb-back-t">Back</span>
           </button>
           <span className="tb-brand" aria-hidden>PARITY <b>TRADE</b></span>
-          {view === "chart" && !missing ? (
+          {view === "chart" && !missing ? (<>
+            <h1 className="sr-only">Chart, {activeInst?.label ?? symbol}</h1>
             <ChartBar layout={layout} set={set} list={list} inst={activeInst} symbol={symbol} tool={tool} setTool={setTool} mobile={mobile}
               onSearch={() => setFinder({ open: true, mode: "symbols", initial: "" })} onIndicators={() => setIndOpen(true)} setTf={setTf} setGrid={setGrid} />
-          ) : <h1 className="tb-view">{missing ? "Not found" : viewLabel}</h1>}
+          </>) : <h1 className="tb-view">{missing ? "Not found" : viewLabel}</h1>}
           <span className="tb-gap" />
           {!mobile && (
             <Popover label="Layouts" width={240} placement="bottom-end" trigger={() => (

@@ -21,9 +21,11 @@ export interface TourStepProps {
   placement?: "top" | "bottom" | "left" | "right";
   /** Optional "Skip all tours" link, for a person who wants no tours at all. */
   onSkipAll?: () => void;
+  /** True when the card keeps focus inside it (the guided tour), so screen readers stay in it too. */
+  modal?: boolean;
 }
 
-export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll }: TourStepProps) {
+export function TourStep({ target, title, children, step, total, open, onNext, onBack, onSkip, placement = "bottom", onSkipAll, modal = false }: TourStepProps) {
   const p = usePresence(open, "dur-3");
   const card = useRef<HTMLDivElement>(null);
   // Screen readers hear the step count and the text when the card takes focus, not just its title.
@@ -64,7 +66,7 @@ export function TourStep({ target, title, children, step, total, open, onNext, o
   return (
     <>
       {ring && <div className="ui-tour-ring" style={ring} aria-hidden data-state={p.state} />}
-      <div ref={card} className="ui-tour" style={pos} data-state={p.state} role="dialog" aria-labelledby={`${id}-t`} aria-describedby={`${id}-n ${id}-b`} tabIndex={-1}
+      <div ref={card} className="ui-tour" style={pos} data-state={p.state} role="dialog" aria-labelledby={`${id}-t`} aria-describedby={`${id}-n ${id}-b`} aria-modal={modal || undefined} tabIndex={-1}
         onKeyDown={(e) => { if (e.key === "Escape") onSkip(); if (e.key === "ArrowRight") onNext(); if (e.key === "ArrowLeft") onBack?.(); }}>
         <div className="ui-tour-head">
           <span id={`${id}-n`} className="ui-tour-count ui-num">{step} of {total}</span>

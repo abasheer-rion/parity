@@ -9,6 +9,7 @@ import { AuthFlow } from "./AuthFlow";
 import { carryFromQuery, viewFromPath } from "./views";
 import { startRum } from "../lib/rum";
 import { isDesktop } from "../desktop/bridge";
+import "../lib/a11y/scrollRegions";
 
 // Coming back with the back button after the logo faded the page out shows it again.
 window.addEventListener("pageshow", () => { document.body.classList.remove("leaving"); document.documentElement.classList.remove("pa-leaving"); });

@@ -34,7 +34,8 @@ export function ServiceHealth({ className = "" }: { className?: string }) {
   const parts = healthParts(rows, now);
   return (
     <>
-      <p className={`small muted service-health ${className}`} aria-live="polite">
+      {/* Not a live region: it refreshes every minute and would interrupt a screen reader each time. */}
+      <p className={`small muted service-health ${className}`}>
         <span className="sr-only">Background services: </span>
         {parts.map((p, i) => (
           <span key={p.service}>

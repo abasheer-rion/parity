@@ -79,6 +79,21 @@ export function Tour({ steps, open, label, onEnd, onStep }: {
     onEnd(reason, at);
   }, [onEnd]);
 
+  // When the tour ends, focus goes back where it was, or to the page's main area, never
+  // to nowhere (WCAG 2.4.3).
+  useEffect(() => {
+    if (!open) return;
+    const before = document.activeElement instanceof HTMLElement && document.activeElement !== document.body ? document.activeElement : null;
+    return () => {
+      window.requestAnimationFrame(() => {
+        if (document.activeElement && document.activeElement !== document.body) return;
+        const back = before?.isConnected ? before : document.querySelector<HTMLElement>("main, [role=main]");
+        if (back && !back.matches("a[href], button, input, select, textarea, [tabindex]")) back.setAttribute("tabindex", "-1");
+        back?.focus({ preventScroll: true });
+      });
+    };
+  }, [open]);
+
   // Start at the first step that can be shown, or end at once when there is none.
   useEffect(() => {
     if (!open) { setIndex(-1); ended.current = false; return; }
@@ -155,7 +170,7 @@ export function Tour({ steps, open, label, onEnd, onStep }: {
     <div className="ui-gtour" aria-label={label}>
       <div className="ui-gtour-veil" aria-hidden onPointerDown={(e) => e.preventDefault()} />
       {edgeStyle && <span ref={edge} className="ui-gtour-edge" style={edgeStyle} aria-hidden />}
-      <TourStep key={step.id} open target={target} title={step.title} step={pos + 1} total={avail.length}
+      <TourStep key={step.id} open modal target={target} title={step.title} step={pos + 1} total={avail.length}
         placement={step.placement ?? "bottom"} onNext={() => go(1)} onBack={() => go(-1)} onSkip={() => end("skip", index)} onSkipAll={() => end("skip-all", index)}>
         {step.body}
       </TourStep>

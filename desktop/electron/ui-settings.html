@@ -34,11 +34,13 @@
       .muted { color: var(--muted); font-size: var(--type-xs); }
       a { color: var(--accent); }
       [hidden] { display: none !important; }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     </style>
   </head>
   <body>
-    <div class="top">Settings</div>
+    <div class="top" aria-hidden="true">Settings</div>
     <main>
+      <h1 class="sr-only">Settings</h1>
       <h2>Windows</h2>
       <div class="box">
         <label class="opt"><span class="t"><b>Reopen windows at launch</b><small>Every window opens again with its page, size and place.</small></span><input type="checkbox" data-key="restoreWindows" /></label>

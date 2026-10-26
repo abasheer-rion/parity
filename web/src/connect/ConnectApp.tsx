@@ -5,6 +5,7 @@
 //                      which app is asking and what it can do, then allow or deny.
 import { useEffect, useState } from "react";
 import { supabase } from "../auth/client";
+import { SkipLink } from "../components/SkipLink";
 
 const MCP_URL = `${window.location.origin}/mcp`;
 
@@ -13,6 +14,7 @@ interface Grant { id: string; name: string; uri: string; granted: string; write:
 function Shell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <>
+      <SkipLink />
       <div className="corner corner-logo">
         <a href="/" aria-label="Parity home">
           <img src="/brand/2026-10-21-starburst/parity-mark-white.svg" width={22} height={22} alt="" />
@@ -41,6 +43,8 @@ function Copy({ text }: { text: string }) {
     <div className="cx-copy">
       <code>{text}</code>
       <button type="button" className="btn" onClick={() => { void navigator.clipboard?.writeText(text).then(() => { setDone(true); setTimeout(() => setDone(false), 1500); }); }}>{done ? "Copied" : "Copy"}</button>
+      {/* Says "Copied" to screen readers too (WCAG 4.1.3). */}
+      <span role="status" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" }}>{done ? "Copied" : ""}</span>
     </div>
   );
 }

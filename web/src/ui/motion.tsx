@@ -76,7 +76,8 @@ export function AnimatedNumber({ value, format, ms = 700, from, flash = false, c
     raf = requestAnimationFrame(step);
     return () => { cancelAnimationFrame(raf); };
   }, [value, ms, flash]);
-  return <span ref={ref} className={`ui-anum ${className}`}>{format(value)}</span>;
+  // The glide is for the eye only; screen readers read the final value (WCAG 4.1.3).
+  return <><span ref={ref} className={`ui-anum ${className}`} aria-hidden="true">{format(value)}</span><span className="sr-only">{format(value)}</span></>;
 }
 
 /**

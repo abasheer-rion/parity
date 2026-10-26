@@ -6,5 +6,6 @@ import "../lib/scrollRegions";
 import "../site/viewTransitions";
 import { ConnectApp } from "./ConnectApp";
 import "./connect.css";
+import "../lib/a11y/scrollRegions";
 
 createRoot(document.getElementById("root")!).render(<StrictMode><ConnectApp /></StrictMode>);
