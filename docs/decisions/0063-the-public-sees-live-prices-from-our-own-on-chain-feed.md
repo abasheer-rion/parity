@@ -7,7 +7,7 @@ created: 2026-10-26
 updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, data, infra, ui]
-related: [DEC-0052, DEC-0056, REF-0014, REF-0017, DEC-0045]
+related: [DEC-0052, DEC-0056, REF-0014, REF-0017, DEC-0045, REF-0018]
 ---
 
 # The public sees live prices from our own on-chain feed
@@ -74,7 +74,7 @@ So the composite index across exchanges is not built.
 
 ## What we measured
 
-Before deploying, from this Mac with its clock corrected (it runs 5.7 s slow): swaps reached us 30 to 60 ms after their block's time, and on a quiet Sunday morning the 34 pools carried about one swap every 2 seconds, most of them ETH. The live numbers from Cloudflare are recorded after deploy, and browsers send their hop samples to the latency tables ([DEC-0045](0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)) as soon as anyone watches.
+On the live site, one client subscribed to all 14 symbols for 10 minutes ([REF-0018](../reference/0018-parity-latency-baseline.md)): Base block to our edge 99 ms median, 167 ms at the 95th percentile; block to the client 127 ms median, 419 ms at the 95th percentile (424 updates). The wait for the block itself, up to 2 s, comes on top. Browsers send their hop samples to the latency tables ([DEC-0045](0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)) whenever someone watches.
 
 ## Alternatives considered
 
@@ -98,4 +98,5 @@ Before deploying, from this Mac with its clock corrected (it runs 5.7 s slow): s
 ## Referenced by
 
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
+- [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 <!-- backlinks:end -->
