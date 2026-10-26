@@ -137,12 +137,36 @@ if (!process.env.A11Y_PAGES) {
   await context.addInitScript(CONSENT);
   for (const path of ["/", "/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/", UI_PAGE]) {
     const page = await context.newPage();
+    // Every animation runs 20 times slower, so one that starts as the page opens is still
+    // playing when it is checked, however fast this machine is.
+    const cdp = await context.newCDPSession(page);
+    await cdp.send("Animation.enable");
+    await cdp.send("Animation.setPlaybackRate", { playbackRate: 0.05 });
     await open(page, path);
     await page.waitForTimeout(500);
-    const moving = await page.evaluate(() => document.getAnimations()
-      .filter((a) => a.playState === "running")
-      .filter((a) => { const t = a.effect?.getComputedTiming?.(); return t && (t.iterations === Infinity || (typeof t.duration === "number" && t.duration > 10)); })
-      .map((a) => { const el = a.effect?.target; return `${a.animationName ?? a.constructor.name} on ${el?.tagName?.toLowerCase() ?? "?"}.${typeof el?.className === "string" ? el.className.split(" ")[0] : ""}`; }));
+    // Reduced motion means less, not none (REF-0023): the motion system's own fades,
+    // crossfades and lines drawing in keep playing, with every distance and scale at zero.
+    // So an animation fails only if it never ends, or if something travels or changes size:
+    // the element's transform, position or size now differs from where the animation ends.
+    const moving = await page.evaluate(() => {
+      const PROPS = ["transform", "translate", "scale", "rotate", "left", "top", "width", "height"];
+      // A zero move computes as an identity matrix, and no transform as "none": the same place.
+      const still = (v) => (/^matrix\(1, 0, 0, 1, 0, 0\)$|^matrix3d\(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1\)$|^0px 0px( 0px)?$|^0px$/.test(v) ? "none" : v);
+      const snap = (el) => { const cs = getComputedStyle(el); return PROPS.map((p) => still(cs[p])).join("|"); };
+      const name = (a) => { const el = a.effect?.target; return `${a.animationName ?? a.constructor.name} on ${el?.tagName?.toLowerCase() ?? "?"}.${typeof el?.className === "string" ? el.className.split(" ")[0] : (el?.className?.baseVal ?? "")}`; };
+      const live = document.getAnimations()
+        .filter((a) => a.playState === "running")
+        .filter((a) => { const t = a.effect?.getComputedTiming?.(); return t && (t.iterations === Infinity || (typeof t.duration === "number" && t.duration > 10)); });
+      const out = [];
+      for (const a of live) {
+        const el = a.effect?.target;
+        if (a.effect.getComputedTiming().iterations === Infinity || !(el instanceof Element)) { out.push(name(a)); continue; }
+        const before = snap(el);
+        try { a.finish(); } catch { out.push(name(a)); continue; }
+        if (snap(el) !== before) out.push(name(a));
+      }
+      return out;
+    });
     for (const m of [...new Set(moving)].slice(0, 5)) failures.push(`reduced motion: ${path} still animates ${m}`);
     await page.close();
   }
