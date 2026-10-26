@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 15 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 98 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 106 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
 ## Open questions right now
@@ -37,14 +37,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-23 [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
-- 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
-- 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
-- 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
-- 2026-10-23 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
-- 2026-10-23 [LOG-0015: Merging main into the stack and registering the energy book](log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)
-- 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
+- 2026-10-25 [ALG-0106: Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md)
+- 2026-10-25 [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md)
+- 2026-10-25 [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
+- 2026-10-25 [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md)
+- 2026-10-25 [ALG-0102: VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md)
+- 2026-10-25 [ALG-0101: Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md)
+- 2026-10-25 [ALG-0100: Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md)
+- 2026-10-25 [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
 
 ## intent
 
@@ -303,6 +303,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0096 | [Commodity inventory level](algorithms/0096-commodity-inventory-level.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0097 | [Developed-market rate gap times the EM currency basket](algorithms/0097-fx-developed-rate-gap-times-em-basket.md) | sourced | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0098 | [Equal-weight combination of styles](algorithms/0098-equal-weight-style-combination.md) | registered | 2026-10-23 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
+| ALG-0099 | [Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0100 | [Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0101 | [Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0102 | [VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0103 | [Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md) | sourced | 2026-10-25 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0104 | [Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md) | sourced | 2026-10-25 | [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0105 | [Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0106 | [Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
 
 ## dataset
 

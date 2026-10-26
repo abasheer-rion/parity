@@ -1279,6 +1279,32 @@
       }
     },
     {
+      "key": "bondarenko2019",
+      "type": "web-page",
+      "authors": [
+        "Bondarenko, Oleg"
+      ],
+      "year": 2019,
+      "title": "White Paper Shows Volatility Risk Premium Facilitated Higher Risk-Adjusted Returns for PUT Index",
+      "venue": "Cboe Insights",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cboe.com/insights/posts/white-paper-shows-volatility-risk-premium-facilitated-higher-risk-adjusted-returns-for-put-index/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/cash-secured-put-writing.json",
+        "docs/algorithms/0101-cash-secured-put-writing.md"
+      ],
+      "note": "Cboe summary of the 2019 white paper read; the white paper itself not read.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "boons2019",
       "type": "paper",
       "authors": [
@@ -1754,6 +1780,32 @@
       }
     },
     {
+      "key": "callan2006",
+      "type": "web-page",
+      "authors": [
+        "Callan Associates"
+      ],
+      "year": 2006,
+      "title": "An Historical Evaluation of the CBOE S&P 500 BuyWrite Index Strategy",
+      "venue": "Callan Associates for Cboe",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cdn.cboe.com/resources/education/research_publications/Callan_CBOE.pdf",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/covered-call-buy-write.json",
+        "docs/algorithms/0100-covered-call-buy-write.md"
+      ],
+      "note": "Read in full, Exhibit 8 summary statistics.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "campbell2010",
       "type": "paper",
       "authors": [
@@ -1913,6 +1965,58 @@
         "source": "repo",
         "doi_explicit": false,
         "searched": true
+      }
+    },
+    {
+      "key": "cboe-bxm-history",
+      "type": "dataset",
+      "authors": [
+        "Cboe Global Markets"
+      ],
+      "year": 2026,
+      "title": "BXM index daily price history (CSV)",
+      "venue": "Cboe",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/BXM_History.csv",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/covered-call-buy-write.json",
+        "docs/algorithms/0100-covered-call-buy-write.md"
+      ],
+      "note": "File downloads (HTTP 200) on 2026-10-25; contents not used.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "cboe-put-history",
+      "type": "dataset",
+      "authors": [
+        "Cboe Global Markets"
+      ],
+      "year": 2026,
+      "title": "PUT index daily price history (CSV)",
+      "venue": "Cboe",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/PUT_History.csv",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/cash-secured-put-writing.json",
+        "docs/algorithms/0101-cash-secured-put-writing.md"
+      ],
+      "note": "File downloads (HTTP 200) on 2026-10-25; contents not used.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -4798,6 +4902,34 @@
       }
     },
     {
+      "key": "jegadeesh1990",
+      "type": "paper",
+      "authors": [
+        "Jegadeesh, Narasimhan"
+      ],
+      "year": 1990,
+      "title": "Evidence of Predictable Behavior of Security Returns",
+      "venue": "The Journal of Finance 45(3), 881-898",
+      "doi": "10.1111/j.1540-6261.1990.tb05110.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1540-6261.1990.tb05110.x",
+      "also_at": [
+        "https://ideas.repec.org/a/bla/jfinan/v45y1990i3p881-98.html"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/equity-short-term-reversal.json",
+        "docs/algorithms/0105-equity-short-term-reversal.md"
+      ],
+      "note": "Abstract read on RePEc.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "jegadeesh1993",
       "type": "paper",
       "authors": [
@@ -5076,6 +5208,36 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "karathanasopoulos2016",
+      "type": "paper",
+      "authors": [
+        "Karathanasopoulos, Andreas",
+        "Dunis, Christian",
+        "Khalil, Samer"
+      ],
+      "year": 2016,
+      "title": "Modelling, forecasting and trading with a new sliding window approach: the crack spread example",
+      "venue": "Quantitative Finance 16(12), 1875-1886",
+      "doi": "10.1080/14697688.2016.1211796",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/14697688.2016.1211796",
+      "also_at": [
+        "https://scholarworks.aub.edu.lb/server/api/core/bitstreams/45e0cec2-3f3c-48e8-aa0c-97b4cd958818/content"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/crack-spread-mean-reversion.json",
+        "docs/algorithms/0099-crack-spread-mean-reversion.md"
+      ],
+      "note": "Read in full (author repository PDF), Table 4.",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },
@@ -6008,6 +6170,36 @@
       "metadata": {
         "source": "arxiv",
         "doi_explicit": false
+      }
+    },
+    {
+      "key": "lou2019",
+      "type": "paper",
+      "authors": [
+        "Lou, Dong",
+        "Polk, Christopher",
+        "Skouras, Spyros"
+      ],
+      "year": 2019,
+      "title": "A tug of war: Overnight versus intraday expected returns",
+      "venue": "Journal of Financial Economics 134(1), 192-213",
+      "doi": "10.1016/j.jfineco.2019.03.011",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2019.03.011",
+      "also_at": [
+        "https://personal.lse.ac.uk/polk/research/TugOfWar.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/overnight-intraday-momentum.json",
+        "docs/algorithms/0104-overnight-intraday-momentum.md"
+      ],
+      "note": "Published version read (author PDF), introduction and sample section.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
       }
     },
     {
@@ -7314,6 +7506,34 @@
       }
     },
     {
+      "key": "novymarx2013",
+      "type": "paper",
+      "authors": [
+        "Novy-Marx, Robert"
+      ],
+      "year": 2013,
+      "title": "The other side of value: The gross profitability premium",
+      "venue": "Journal of Financial Economics 108(1), 1-28",
+      "doi": "10.1016/j.jfineco.2013.01.003",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/j.jfineco.2013.01.003",
+      "also_at": [
+        "https://ideas.repec.org/a/eee/jfinec/v108y2013i1p1-28.html"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/gross-profitability.json",
+        "docs/algorithms/0106-gross-profitability.md"
+      ],
+      "note": "Abstract read on RePEc.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "novymarx2014",
       "type": "preprint",
       "authors": [
@@ -7812,6 +8032,32 @@
       }
     },
     {
+      "key": "quantconnect-orb",
+      "type": "software",
+      "authors": [
+        "QuantConnect"
+      ],
+      "year": 2024,
+      "title": "Opening Range Breakout for Stocks in Play",
+      "venue": "QuantConnect Research",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.quantconnect.com/research/18444/opening-range-breakout-for-stocks-in-play/",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/opening-range-breakout-stocks-in-play.json",
+        "docs/algorithms/0103-opening-range-breakout-stocks-in-play.md"
+      ],
+      "note": "Page loads (HTTP 200); not read in detail.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "ramadorai2008",
       "type": "paper",
       "authors": [
@@ -8208,6 +8454,35 @@
       "used_in": [
         "docs/reference/0004-glossary.md"
       ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "simon2014",
+      "type": "paper",
+      "authors": [
+        "Simon, David P.",
+        "Campasano, Jim"
+      ],
+      "year": 2014,
+      "title": "The VIX Futures Basis: Evidence and Trading Strategies",
+      "venue": "The Journal of Derivatives 21(3), 54-69",
+      "doi": "10.3905/jod.2014.21.3.054",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jod.2014.21.3.054",
+      "also_at": [
+        "https://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2013-Reading/papers/EFMA2013_0164_fullpaper.pdf"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/vix-futures-basis-carry.json",
+        "docs/algorithms/0102-vix-futures-basis-carry.md"
+      ],
+      "note": "Working paper (August 2012, EFMA 2013) read in full; published version not read.",
       "metadata": {
         "source": "manual",
         "doi_explicit": true
@@ -24729,6 +25004,32 @@
       }
     },
     {
+      "key": "whaley2002",
+      "type": "paper",
+      "authors": [
+        "Whaley, Robert E."
+      ],
+      "year": 2002,
+      "title": "Return and Risk of CBOE Buy Write Monthly Index",
+      "venue": "The Journal of Derivatives 10(2), 35-42",
+      "doi": "10.3905/jod.2002.319194",
+      "arxiv": null,
+      "url": "https://doi.org/10.3905/jod.2002.319194",
+      "also_at": [],
+      "accessed": "2026-10-25",
+      "verification": "blocked",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/covered-call-buy-write.json",
+        "docs/algorithms/0100-covered-call-buy-write.md"
+      ],
+      "note": "Metadata checked on Crossref; paywalled, not read.",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": true
+      }
+    },
+    {
       "key": "white2000",
       "type": "paper",
       "authors": [
@@ -24777,6 +25078,36 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "zarattini2024",
+      "type": "preprint",
+      "authors": [
+        "Zarattini, Carlo",
+        "Barbon, Andrea",
+        "Aziz, Andrew"
+      ],
+      "year": 2024,
+      "title": "A Profitable Day Trading Strategy For The U.S. Equity Market",
+      "venue": "SSRN 4729284; Swiss Finance Institute Research Paper 24-98",
+      "doi": "10.2139/ssrn.4729284",
+      "arxiv": null,
+      "url": "https://doi.org/10.2139/ssrn.4729284",
+      "also_at": [
+        "https://ideas.repec.org/p/chf/rpseri/rp2498.html"
+      ],
+      "accessed": "2026-10-25",
+      "verification": "ok",
+      "verification_checked": "2026-10-25",
+      "used_in": [
+        "catalog/algorithms/opening-range-breakout-stocks-in-play.json",
+        "docs/algorithms/0103-opening-range-breakout-stocks-in-play.md"
+      ],
+      "note": "Abstract read on RePEc; full text not read.",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": true
       }
     },

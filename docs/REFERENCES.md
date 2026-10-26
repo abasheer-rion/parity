@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1086 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1098 sources. 195 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 345 |
-| [Preprints and working papers](#preprints-and-working-papers) | 56 |
+| [Papers](#papers) | 351 |
+| [Preprints and working papers](#preprints-and-working-papers) | 57 |
 | [Books](#books) | 20 |
-| [Datasets](#datasets) | 59 |
-| [Software](#software) | 62 |
-| [Web pages](#web-pages) | 452 |
+| [Datasets](#datasets) | 61 |
+| [Software](#software) | 63 |
+| [Web pages](#web-pages) | 454 |
 | [Forum posts](#forum-posts) | 52 |
 | [Regulators](#regulators) | 36 |
 | [News](#news) | 4 |
@@ -1249,6 +1249,16 @@ Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### jegadeesh1990
+
+Jegadeesh, Narasimhan (1990). Evidence of Predictable Behavior of Security Returns. *The Journal of Finance 45(3), 881-898*. doi:10.1111/j.1540-6261.1990.tb05110.x <https://doi.org/10.1111/j.1540-6261.1990.tb05110.x>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://ideas.repec.org/a/bla/jfinan/v45y1990i3p881-98.html>.
+
+Note: Abstract read on RePEc.
+
+Cited in: [catalog/algorithms/equity-short-term-reversal.json](../catalog/algorithms/equity-short-term-reversal.json), [ALG-0105](algorithms/0105-equity-short-term-reversal.md).
+
 ### jegadeesh1993
 
 Jegadeesh, Narasimhan; Titman, Sheridan (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *The Journal of Finance 48(1), 65-91*. doi:10.1111/j.1540-6261.1993.tb04702.x <https://doi.org/10.1111/j.1540-6261.1993.tb04702.x>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -1330,6 +1340,16 @@ Kaplan, Steven N.; Sensoy, Berk A. (2015). Private Equity Performance: A Survey.
 Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### karathanasopoulos2016
+
+Karathanasopoulos, Andreas; Dunis, Christian; Khalil, Samer (2016). Modelling, forecasting and trading with a new sliding window approach: the crack spread example. *Quantitative Finance 16(12), 1875-1886*. doi:10.1080/14697688.2016.1211796 <https://doi.org/10.1080/14697688.2016.1211796>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://scholarworks.aub.edu.lb/server/api/core/bitstreams/45e0cec2-3f3c-48e8-aa0c-97b4cd958818/content>.
+
+Note: Read in full (author repository PDF), Table 4.
+
+Cited in: [catalog/algorithms/crack-spread-mean-reversion.json](../catalog/algorithms/crack-spread-mean-reversion.json), [ALG-0099](algorithms/0099-crack-spread-mean-reversion.md).
 
 ### karnaukh2015
 
@@ -1554,6 +1574,16 @@ Also at: <https://www.federalreserve.gov/pubs/ifdp/2012/1068/ifdp1068.pdf>, <htt
 Note: Read for RES-0010 (abstract page).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### lou2019
+
+Lou, Dong; Polk, Christopher; Skouras, Spyros (2019). A tug of war: Overnight versus intraday expected returns. *Journal of Financial Economics 134(1), 192-213*. doi:10.1016/j.jfineco.2019.03.011 <https://doi.org/10.1016/j.jfineco.2019.03.011>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://personal.lse.ac.uk/polk/research/TugOfWar.pdf>.
+
+Note: Published version read (author PDF), introduction and sample section.
+
+Cited in: [catalog/algorithms/overnight-intraday-momentum.json](../catalog/algorithms/overnight-intraday-momentum.json), [ALG-0104](algorithms/0104-overnight-intraday-momentum.md).
 
 ### lu2012
 
@@ -1860,6 +1890,16 @@ Cited in: [catalog/algorithms/fx-technical-trading-rules.json](../catalog/algori
 Nickerson, Raymond S. (1998). Confirmation Bias: A Ubiquitous Phenomenon in Many Guises. *Review of General Psychology 2(2), 175-220*. doi:10.1037/1089-2680.2.2.175 <https://doi.org/10.1037/1089-2680.2.2.175>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### novymarx2013
+
+Novy-Marx, Robert (2013). The other side of value: The gross profitability premium. *Journal of Financial Economics 108(1), 1-28*. doi:10.1016/j.jfineco.2013.01.003 <https://doi.org/10.1016/j.jfineco.2013.01.003>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://ideas.repec.org/a/eee/jfinec/v108y2013i1p1-28.html>.
+
+Note: Abstract read on RePEc.
+
+Cited in: [catalog/algorithms/gross-profitability.json](../catalog/algorithms/gross-profitability.json), [ALG-0106](algorithms/0106-gross-profitability.md).
 
 ### novymarx2016
 
@@ -2182,6 +2222,16 @@ Shleifer, Andrei (1986). Do Demand Curves for Stocks Slope Down? *The Journal of
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### simon2014
+
+Simon, David P.; Campasano, Jim (2014). The VIX Futures Basis: Evidence and Trading Strategies. *The Journal of Derivatives 21(3), 54-69*. doi:10.3905/jod.2014.21.3.054 <https://doi.org/10.3905/jod.2014.21.3.054>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2013-Reading/papers/EFMA2013_0164_fullpaper.pdf>.
+
+Note: Working paper (August 2012, EFMA 2013) read in full; published version not read.
+
+Cited in: [catalog/algorithms/vix-futures-basis-carry.json](../catalog/algorithms/vix-futures-basis-carry.json), [ALG-0102](algorithms/0102-vix-futures-basis-carry.md).
 
 ### sorensen2014
 
@@ -2649,6 +2699,14 @@ Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### whaley2002
+
+Whaley, Robert E. (2002). Return and Risk of CBOE Buy Write Monthly Index. *The Journal of Derivatives 10(2), 35-42*. doi:10.3905/jod.2002.319194 <https://doi.org/10.3905/jod.2002.319194>. Accessed 2026-10-25. Verification: blocked (checked 2026-10-25).
+
+Note: Metadata checked on Crossref; paywalled, not read.
+
+Cited in: [catalog/algorithms/covered-call-buy-write.json](../catalog/algorithms/covered-call-buy-write.json), [ALG-0100](algorithms/0100-covered-call-buy-write.md).
+
 ### white2000
 
 White, Halbert (2000). A Reality Check for Data Snooping. *Econometrica 68(5), 1097-1126*. doi:10.1111/1468-0262.00152 <https://doi.org/10.1111/1468-0262.00152>. <https://www.econometricsociety.org/publications/econometrica/2000/09/01/reality-check-data-snooping>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3039,6 +3097,16 @@ No title recorded. (n.d.). <https://www.nber.org/papers/w20815>. Accessed 2026-1
 
 Cited in: [catalog/algorithms/commodity-same-month-seasonality.json](../catalog/algorithms/commodity-same-month-seasonality.json), [RES-0016](research/0016-lesser-known-strategies-and-what-firms-have-published.md).
 
+### zarattini2024
+
+Zarattini, Carlo; Barbon, Andrea; Aziz, Andrew (2024). A Profitable Day Trading Strategy For The U.S. Equity Market. *SSRN 4729284; Swiss Finance Institute Research Paper 24-98*. doi:10.2139/ssrn.4729284 <https://doi.org/10.2139/ssrn.4729284>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Also at: <https://ideas.repec.org/p/chf/rpseri/rp2498.html>.
+
+Note: Abstract read on RePEc; full text not read.
+
+Cited in: [catalog/algorithms/opening-range-breakout-stocks-in-play.json](../catalog/algorithms/opening-range-breakout-stocks-in-play.json), [ALG-0103](algorithms/0103-opening-range-breakout-stocks-in-play.md).
+
 ### zhang2025
 
 Zhang, Yuke (2025). Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study. *arXiv preprint arXiv:2505.16136*. arXiv:2505.16136 <https://arxiv.org/abs/2505.16136>. <https://arxiv.org/abs/2505.16136>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3204,6 +3272,22 @@ Note: Book; not read this session. Cited for a general idea, not a number.
 Cited in: [REF-0004](reference/0004-glossary.md).
 
 ## Datasets
+
+### cboe-bxm-history
+
+Cboe Global Markets (2026). BXM index daily price history (CSV). *Cboe*. <https://cdn.cboe.com/api/global/us_indices/daily_prices/BXM_History.csv>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: File downloads (HTTP 200) on 2026-10-25; contents not used.
+
+Cited in: [catalog/algorithms/covered-call-buy-write.json](../catalog/algorithms/covered-call-buy-write.json), [ALG-0100](algorithms/0100-covered-call-buy-write.md).
+
+### cboe-put-history
+
+Cboe Global Markets (2026). PUT index daily price history (CSV). *Cboe*. <https://cdn.cboe.com/api/global/us_indices/daily_prices/PUT_History.csv>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: File downloads (HTTP 200) on 2026-10-25; contents not used.
+
+Cited in: [catalog/algorithms/cash-secured-put-writing.json](../catalog/algorithms/cash-secured-put-writing.json), [ALG-0101](algorithms/0101-cash-secured-put-writing.md).
 
 ### url-0018ce5b
 
@@ -3560,6 +3644,14 @@ BIS Data Portal (SDMX API). (n.d.). *Bank for International Settlements*. <https
 Cited in: [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](datasets/0006-bis.md).
 
 ## Software
+
+### quantconnect-orb
+
+QuantConnect (2024). Opening Range Breakout for Stocks in Play. *QuantConnect Research*. <https://www.quantconnect.com/research/18444/opening-range-breakout-for-stocks-in-play/>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Page loads (HTTP 200); not read in detail.
+
+Cited in: [catalog/algorithms/opening-range-breakout-stocks-in-play.json](../catalog/algorithms/opening-range-breakout-stocks-in-play.json), [ALG-0103](algorithms/0103-opening-range-breakout-stocks-in-play.md).
 
 ### url-0348b06c
 
@@ -3940,6 +4032,22 @@ hummingbot/hummingbot. (n.d.). *GitHub*. <https://github.com/hummingbot/hummingb
 Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/algorithms/avellaneda-stoikov-market-making.json), [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algorithms/crypto-cash-and-carry-basis.json), [catalog/algorithms/crypto-grid-trading-bot.json](../catalog/algorithms/crypto-grid-trading-bot.json), [catalog/algorithms/crypto-perp-funding-carry.json](../catalog/algorithms/crypto-perp-funding-carry.json), [ALG-0021](algorithms/0021-avellaneda-stoikov-market-making.md), [ALG-0022](algorithms/0022-crypto-cash-and-carry-basis.md), [ALG-0025](algorithms/0025-crypto-grid-trading-bot.md), [ALG-0026](algorithms/0026-crypto-perp-funding-carry.md), [RES-0002](research/0002-open-source-and-public-results.md).
 
 ## Web pages
+
+### bondarenko2019
+
+Bondarenko, Oleg (2019). White Paper Shows Volatility Risk Premium Facilitated Higher Risk-Adjusted Returns for PUT Index. *Cboe Insights*. <https://www.cboe.com/insights/posts/white-paper-shows-volatility-risk-premium-facilitated-higher-risk-adjusted-returns-for-put-index/>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Cboe summary of the 2019 white paper read; the white paper itself not read.
+
+Cited in: [catalog/algorithms/cash-secured-put-writing.json](../catalog/algorithms/cash-secured-put-writing.json), [ALG-0101](algorithms/0101-cash-secured-put-writing.md).
+
+### callan2006
+
+Callan Associates (2006). An Historical Evaluation of the CBOE S&P 500 BuyWrite Index Strategy. *Callan Associates for Cboe*. <https://cdn.cboe.com/resources/education/research_publications/Callan_CBOE.pdf>. Accessed 2026-10-25. Verification: ok (checked 2026-10-25).
+
+Note: Read in full, Exhibit 8 summary statistics.
+
+Cited in: [catalog/algorithms/covered-call-buy-write.json](../catalog/algorithms/covered-call-buy-write.json), [ALG-0100](algorithms/0100-covered-call-buy-write.md).
 
 ### cme-micro-wti
 

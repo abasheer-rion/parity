@@ -6026,4 +6026,12 @@ Related: [Private equity](#private-equity), [TVPI (total value to paid-in)](#tvp
 - [ALG-0096: Commodity inventory level](../algorithms/0096-commodity-inventory-level.md)
 - [ALG-0097: Developed-market rate gap times the EM currency basket](../algorithms/0097-fx-developed-rate-gap-times-em-basket.md)
 - [ALG-0098: Equal-weight combination of styles](../algorithms/0098-equal-weight-style-combination.md)
+- [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](../algorithms/0099-crack-spread-mean-reversion.md)
+- [ALG-0100: Covered calls on the S&P 500 (buy-write, BXM)](../algorithms/0100-covered-call-buy-write.md)
+- [ALG-0101: Cash-secured put writing on the S&P 500 (PUT index, the wheel)](../algorithms/0101-cash-secured-put-writing.md)
+- [ALG-0102: VIX futures basis carry (short VIX in contango)](../algorithms/0102-vix-futures-basis-carry.md)
+- [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](../algorithms/0103-opening-range-breakout-stocks-in-play.md)
+- [ALG-0104: Overnight versus intraday momentum (tug of war)](../algorithms/0104-overnight-intraday-momentum.md)
+- [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](../algorithms/0105-equity-short-term-reversal.md)
+- [ALG-0106: Gross profitability (quality) premium in stocks](../algorithms/0106-gross-profitability.md)
 <!-- backlinks:end -->

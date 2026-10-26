@@ -1,0 +1,74 @@
+{
+  "id": "ALG-0101",
+  "slug": "cash-secured-put-writing",
+  "name": "Cash-secured put writing on the S&P 500 (PUT index, the wheel)",
+  "family": "volatility",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "options",
+    "put-writing",
+    "wheel",
+    "income",
+    "volatility-risk-premium",
+    "sp500"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2019,
+    "authors": "Bondarenko",
+    "source_title": "Historical Performance of Put-Writing Strategies (Cboe white paper, 2019)",
+    "source_url": "https://www.cboe.com/insights/posts/white-paper-shows-volatility-risk-premium-facilitated-higher-risk-adjusted-returns-for-put-index/"
+  },
+  "how_it_works": {
+    "simple": "Keep cash in Treasury bills and every month sell someone the right to sell you the S&P 500 at today's price. You keep the fee; if the market falls, you have to buy at the higher price.",
+    "analogy": "Like selling home insurance: small regular premiums, and occasionally a large claim.",
+    "precise": "Cboe's PUT index holds Treasury bills and sells a one-month at-the-money S&P 500 put each month, fully collateralised, held to expiry. The retail 'wheel' is a single-stock version that sells puts, takes the shares if assigned, then sells covered calls on them."
+  },
+  "rule": "On each monthly expiry, hold Treasury bills equal to the strike and sell one at-the-money one-month S&P 500 put; settle at expiry; repeat.",
+  "data_needed": [
+    "Cboe PUT index daily history (free CSV)",
+    "Treasury bill rates",
+    "S&P 500 total return for comparison"
+  ],
+  "economic_rationale": "Index put buyers pay above the expected payout for crash insurance. Bondarenko reports that from 1990 to 2018 the VIX averaged 19.3% while realised S&P 500 volatility averaged 15.1% (as summarised in the Cboe post).",
+  "why_it_might_fail": "Losses come in crashes, when they hurt most. Single-stock wheels add stock-specific risk and assignment. The index ignores costs and taxes, and part of the history was built backwards before the index was launched.",
+  "reported_results": [
+    {
+      "source": "Bondarenko (2019), Historical Performance of Put-Writing Strategies, as summarised by Cboe",
+      "source_url": "https://www.cboe.com/insights/posts/white-paper-shows-volatility-risk-premium-facilitated-higher-risk-adjusted-returns-for-put-index/",
+      "period": "1986-06-30 to 2018-12-31",
+      "market": "S&P 500 (PUT index)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": 0.0995,
+      "max_drawdown": null,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "The PUT index rose 1835% with annualised volatility of 9.95%, against 14.93% for the S&P 500; the post says PUT had higher Sharpe, Sortino and Stutzer ratios than the S&P 500 but gives no values. Gross index values. Cboe-published, so not independent; we read the Cboe summary, not the white paper."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The wheel is one of the most common retail options strategies and many bots sell it; Verify needs the index as a fair yardstick."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Cboe publishes PUT daily history free at https://cdn.cboe.com/api/global/us_indices/daily_prices/PUT_History.csv; we have not added a fetcher. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}
