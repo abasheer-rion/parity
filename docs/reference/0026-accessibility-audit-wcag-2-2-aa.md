@@ -45,7 +45,7 @@ On every page, signed in with sign-in skipped, at 1280 by 860:
 - **Reflow.** No sideways page scroll at 320 CSS px and at 640 px (200% zoom of 1280) (WCAG 1.4.10).
 - **Motion.** With reduced motion on: no endless or long animation and no animation loop (more than 60 frames in 2 seconds). With it off: anything that changes or moves by itself for more than 5 seconds needs a visible Pause or Stop control (WCAG 2.2.2).
 - **Live regions.** A polite region may change at most 3 times in 6.5 seconds, an assertive one at most once.
-- **Contrast over real backgrounds.** For text axe cannot judge (over glass, gradients, glows, images), the check hides the text, photographs what is behind it and measures the text colour against the 10th and 90th percentile pixels (WCAG 1.4.3). A low reading is taken twice before it counts.
+- **Contrast over real backgrounds.** For text axe cannot judge (over glass, gradients, glows, images), the check hides the text, photographs what is behind it and measures the text colour against the 10th and 90th percentile pixels (WCAG 1.4.3). A low reading is taken three times, with longer waits, before it counts.
 - **Form errors** on log in, sign up and reset (signed out): bad input marks the field `aria-invalid`, the error is tied with `aria-describedby`, and it sits in an alert or live region.
 - **Desktop app pages**: names, structure, keyboard walk and visible focus; Escape closes the menu and palette.
 

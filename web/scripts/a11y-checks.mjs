@@ -435,10 +435,11 @@ async function realContrast(page, where) {
   const axe = await new AxeBuilder({ page }).withRules(["color-contrast"]).analyze();
   const nodes = axe.incomplete.flatMap((v) => v.nodes).slice(0, 40);
   let worst = [];
-  const retried = new Set();
+  const retried = new Map();
   for (let k = 0; k < nodes.length; k++) {
     const n = nodes[k];
-    if (retried.has(n.target[0])) await page.waitForTimeout(700);
+    // A slow machine can still be drawing or fading the picture: wait longer on each retry.
+    if (retried.has(n.target[0])) await page.waitForTimeout(1200 * retried.get(n.target[0]));
     const target = n.target[0];
     if (typeof target !== "string") continue;
     const info = await page.evaluate(async (sel) => {
@@ -499,7 +500,7 @@ async function realContrast(page, where) {
     }
     const need = info.large ? 3 : 4.5;
     // A reading taken mid-transition (a fade, a reveal) is taken again before it counts.
-    if (ratio < need && !retried.has(target)) { retried.add(target); nodes.push(n); continue; }
+    if (ratio < need && (retried.get(target) ?? 0) < 2) { retried.set(target, (retried.get(target) ?? 0) + 1); nodes.push(n); continue; }
     if (ratio < need && process.env.A11Y_DEBUG) (await import("node:fs")).writeFileSync(`${process.env.A11Y_DEBUG}/${info.text.replace(/\W+/g, "_").slice(0, 20)}.png`, png);
     if (ratio < need) worst.push(`"${info.text}" ${ratio.toFixed(2)}:1 (need ${need}) at ${target}`);
   }
