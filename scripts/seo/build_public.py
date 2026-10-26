@@ -231,9 +231,11 @@ a{color:var(--blue-text);text-underline-offset:3px}a:hover{color:#fff}
 :focus-visible{outline:2px solid var(--blue-text);outline-offset:2px;border-radius:6px}
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
 .skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:8px 12px;border-radius:8px;z-index:9}.skip:focus{left:8px}
-header{border-bottom:1px solid var(--line)}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px;flex-wrap:wrap}
+header{border-bottom:1px solid var(--line)}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;min-height:68px;flex-wrap:wrap}
 .brand img{display:block;height:36px;width:auto}
-nav.site{display:flex;gap:4px 16px;flex-wrap:wrap;align-items:center;font-size:15px}nav.site a{color:var(--muted);text-decoration:none}nav.site a:hover,nav.site a[aria-current]{color:var(--text)}
+nav.site,nav.acct{display:flex;gap:4px 16px;align-items:center;font-size:15px}nav.site{margin-left:auto;flex-wrap:wrap}nav.site a,nav.acct a:not(.btn){color:var(--muted);text-decoration:none}nav.site a:hover,nav.acct a:not(.btn):hover,nav.site a[aria-current]{color:var(--text)}
+/* On a phone: the logo with Log in and Sign up on one row, the sections on the next. */
+@media (max-width:640px){header .wrap{row-gap:0;padding-top:10px}nav.acct{margin-left:auto}nav.site{order:3;width:100%;margin:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:10px 0;gap:18px}nav.acct .btn{height:34px;padding:0 14px}}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:999px;font-weight:500;text-decoration:none;border:1px solid var(--line-2);color:var(--text);white-space:nowrap}
 .btn.primary{background:#2a5ff0;border-color:#2a5ff0;color:#fff}.btn.primary:hover{background:#2257d6;color:#fff}
 main{padding:40px 0 64px}
@@ -332,7 +334,8 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap">
 <a class="brand" href="/"><img src="{LOGO}" width="154" height="36" alt="Parity home"></a>
-<nav class="site" aria-label="Site">{nav}<a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
+<nav class="site" aria-label="Site">{nav}</nav>
+<nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
 <main id="main"><div class="wrap">
 <p class="crumbs">{crumb_html}<span aria-current="page">{e(trail[-1][0])}</span></p>

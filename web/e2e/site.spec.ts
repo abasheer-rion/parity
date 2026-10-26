@@ -193,6 +193,15 @@ test.describe("glossary, ideas and notes", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
+  test("the header keeps Log in and Sign up beside the logo, sections on one row", async ({ page }) => {
+    await open(page, "/blog/");
+    const logo = await page.getByRole("banner").getByRole("link", { name: "Parity home" }).boundingBox();
+    const signUp = await page.getByRole("navigation", { name: "Account" }).getByRole("link", { name: "Sign up" }).boundingBox();
+    expect(Math.abs((signUp!.y + signUp!.height / 2) - (logo!.y + logo!.height / 2)), "Sign up is level with the logo").toBeLessThan(12);
+    const tops = await page.getByRole("navigation", { name: "Site" }).getByRole("link").evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+    expect(new Set(tops).size, "the section links sit on one row").toBe(1);
+  });
+
   test("the site menu moves between the public sections", async ({ page }, info) => {
     await open(page, "/learn/");
     const nav = page.getByRole("navigation", { name: "Site" });

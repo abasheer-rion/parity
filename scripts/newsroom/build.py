@@ -440,7 +440,8 @@ class Newsroom:
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap wide">
 <a class="brand" href="/"><img src="{bp.LOGO}" width="154" height="36" alt="Parity home"></a>
-<nav class="site" aria-label="Site">{bp.nav_html(section)}<a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
+<nav class="site" aria-label="Site">{bp.nav_html(section)}</nav>
+<nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
 <main id="main"><div class="wrap wide">
 <p class="crumbs">{crumbs}<span aria-current="page">{e(trail[-1][0])}</span></p>
