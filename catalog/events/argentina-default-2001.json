@@ -1,0 +1,22 @@
+{
+  "id": "argentina-default-2001",
+  "name": "Argentina defaults",
+  "date": "2001-12-23",
+  "type": "sovereign_default",
+  "regions": [
+    "latin_america"
+  ],
+  "actors": [
+    "argentina"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Argentina declared a default on about 100 billion dollars of public debt, the largest sovereign default until then, after riots and bank deposit limits.",
+  "sources": [
+    {
+      "title": "1998-2002 Argentine great depression",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression"
+    }
+  ]
+}

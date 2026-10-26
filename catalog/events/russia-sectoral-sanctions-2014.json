@@ -1,0 +1,29 @@
+{
+  "id": "russia-sectoral-sanctions-2014",
+  "name": "US sanctions Russian banks and energy firms",
+  "date": "2014-07-16",
+  "type": "sanctions",
+  "regions": [
+    "russia_cis",
+    "europe",
+    "north_america"
+  ],
+  "actors": [
+    "russia",
+    "usa",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "The US cut major Russian banks and energy companies off from long-term US financing; the EU followed after flight MH17 was shot down the next day.",
+  "sources": [
+    {
+      "title": "International sanctions during the Russo-Ukrainian War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russo-Ukrainian_War"
+    }
+  ]
+}

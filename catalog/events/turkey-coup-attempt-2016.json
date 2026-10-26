@@ -1,0 +1,23 @@
+{
+  "id": "turkey-coup-attempt-2016",
+  "name": "Coup attempt in Turkey",
+  "date": "2016-07-16",
+  "type": "political_crisis",
+  "regions": [
+    "europe",
+    "middle_east"
+  ],
+  "actors": [
+    "turkey"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Part of Turkey's army tried to seize power on the night of Friday 15 July; it failed by morning and a wide purge followed.",
+  "sources": [
+    {
+      "title": "2016 Turkish coup attempt",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2016_Turkish_coup_attempt"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ export const FUNCTIONS: Fn[] = [
   { code: "WMAP", title: "World map", what: "Currencies on the world map through time; click a country to link its currency", sim: true },
   { code: "CORR", title: "Correlations", what: "Which markets move together, through time", sim: true },
   { code: "SCEN", title: "Scenario", what: "What followed past events like the one you describe", sim: true },
+  { code: "LIB", title: "Scenario library", what: "Every kind of past event and what markets did after it, with how many events each rests on", sim: true },
   { code: "PATH", title: "Paths", what: "Simulated ranges and risks from reshuffled history", sim: true },
   { code: "STRS", title: "Stress test", what: "A mix of assets through every past crisis", sim: true },
   { code: "CRIS", title: "Crises", what: "Replay a past crisis across every market", sim: true },

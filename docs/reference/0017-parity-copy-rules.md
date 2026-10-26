@@ -68,6 +68,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](../decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](0026-accessibility-audit-wcag-2-2-aa.md)

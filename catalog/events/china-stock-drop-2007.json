@@ -1,0 +1,23 @@
+{
+  "id": "china-stock-drop-2007",
+  "name": "Shanghai shares fall 9% and markets follow",
+  "date": "2007-02-27",
+  "type": "financial_crisis",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Chinese shares fell almost 9% in a day on fears of a crackdown on speculation, and US shares had their worst day in four years.",
+  "sources": [
+    {
+      "title": "Chinese stock bubble of 2007",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Chinese_stock_bubble_of_2007"
+    }
+  ]
+}

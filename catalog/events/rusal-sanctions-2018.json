@@ -1,0 +1,26 @@
+{
+  "id": "rusal-sanctions-2018",
+  "name": "US sanctions Rusal",
+  "date": "2018-04-06",
+  "type": "sanctions",
+  "regions": [
+    "russia_cis",
+    "global"
+  ],
+  "actors": [
+    "russia",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "metals"
+  ],
+  "description": "The US sanctioned Russian tycoons and companies including Rusal, the largest aluminium maker outside China; aluminium prices jumped.",
+  "sources": [
+    {
+      "title": "Rusal",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Rusal"
+    }
+  ]
+}

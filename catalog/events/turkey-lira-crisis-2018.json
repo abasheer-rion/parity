@@ -1,0 +1,26 @@
+{
+  "id": "turkey-lira-crisis-2018",
+  "name": "Turkish lira plunges",
+  "date": "2018-08-10",
+  "type": "currency_crisis",
+  "regions": [
+    "europe",
+    "middle_east"
+  ],
+  "actors": [
+    "turkey",
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [
+    "metals"
+  ],
+  "description": "The lira fell about 14% in a day after the US doubled tariffs on Turkish steel and aluminium, and fears spread to European banks with Turkish loans.",
+  "sources": [
+    {
+      "title": "Turkish currency and debt crisis, 2018",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Turkish_currency_and_debt_crisis,_2018"
+    }
+  ]
+}

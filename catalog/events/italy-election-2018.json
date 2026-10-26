@@ -1,0 +1,23 @@
+{
+  "id": "italy-election-2018",
+  "name": "Populists win Italy's election",
+  "date": "2018-03-04",
+  "type": "election",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "italy",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The Five Star Movement and the League won most votes in Italy, and formed a government in May after a standoff that pushed Italian yields up.",
+  "sources": [
+    {
+      "title": "2018 Italian general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2018_Italian_general_election"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "continental-illinois-1984",
+  "name": "Run on Continental Illinois",
+  "date": "1984-05-09",
+  "type": "bank_run",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Depositors pulled billions from Continental Illinois, then the seventh largest US bank, until regulators rescued it; the origin of 'too big to fail'.",
+  "sources": [
+    {
+      "title": "Continental Illinois",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Continental_Illinois"
+    }
+  ]
+}

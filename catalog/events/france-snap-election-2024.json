@@ -1,0 +1,23 @@
+{
+  "id": "france-snap-election-2024",
+  "name": "Macron calls a snap election",
+  "date": "2024-06-10",
+  "type": "election",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "france",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Macron dissolved parliament on the evening of 9 June after his party lost the European vote; French bank shares and bonds fell on the next trading day.",
+  "sources": [
+    {
+      "title": "2024 French legislative election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2024_French_legislative_election"
+    }
+  ]
+}

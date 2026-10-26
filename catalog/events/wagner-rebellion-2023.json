@@ -1,0 +1,24 @@
+{
+  "id": "wagner-rebellion-2023",
+  "name": "Wagner rebellion in Russia",
+  "date": "2023-06-24",
+  "type": "political_crisis",
+  "regions": [
+    "russia_cis"
+  ],
+  "actors": [
+    "russia"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The Wagner mercenary group seized Rostov-on-Don and marched toward Moscow before standing down the same day.",
+  "sources": [
+    {
+      "title": "Wagner Group rebellion",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Wagner_Group_rebellion"
+    }
+  ]
+}

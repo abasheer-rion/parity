@@ -32,6 +32,34 @@ export interface ScenarioData {
     require_family: boolean; min_score: number; max_analogues: number;
   };
   events: ScenarioEvent[];
+  /** What markets did after every kind of event (DEC-0066). Older files leave it out. */
+  library?: Library;
+}
+
+/** One market at one horizon across every past event of a kind. */
+export interface LibraryCell {
+  n: number; median: number; q25: number; q75: number;
+  /** Share of events after which it was higher. */
+  up: number;
+  /** A 90% distribution-free interval for the median; null below 5 events. */
+  ci: [number, number] | null;
+  /** up or down: the whole interval is on one side of zero; mixed: it is not. */
+  held: "up" | "down" | "mixed" | null;
+  confidence: "solid" | "fair" | "thin" | "too few";
+}
+
+export interface LibraryEntry {
+  count: number; first: string | null; last: string | null;
+  regions: Record<string, number>;
+  events: string[];
+  assets: Record<string, Partial<Record<HorizonKey, LibraryCell>>>;
+}
+
+export interface Library {
+  level: number;
+  confidence: { min: number; word: string }[];
+  types: Record<string, LibraryEntry>;
+  families: Record<string, LibraryEntry>;
 }
 
 /** What the person typed: the scenario and how many matches to keep. */
@@ -212,10 +240,16 @@ export const EMPTY_SPEC: Spec = { title: "", type: "", regions: [], actors: [], 
 
 export const PRESETS: { label: string; spec: Partial<Spec> }[] = [
   { label: "Strike on Iran", spec: { title: "Strike on Iran", type: "military_strike", regions: ["middle_east"], actors: ["iran", "usa", "israel"], severity: 4, commodities: ["oil"] } },
-  { label: "Gulf oil supply shock", spec: { title: "Gulf oil supply shock", type: "supply_shock", regions: ["middle_east"], actors: ["saudi_arabia"], severity: 4, commodities: ["oil"] } },
+  { label: "Gulf oil supply shock", spec: { title: "Gulf oil supply shock", type: "oil_supply_shock", regions: ["middle_east"], actors: ["saudi_arabia"], severity: 4, commodities: ["oil"] } },
   { label: "War in Europe", spec: { title: "War in Europe", type: "war", regions: ["europe"], actors: ["russia"], severity: 5, commodities: ["gas", "oil"] } },
-  { label: "Terror attack in the US", spec: { title: "Terror attack in the US", type: "terror_attack", regions: ["north_america"], actors: ["usa"], severity: 4, commodities: [] } },
+  { label: "Terror attack in the US", spec: { title: "Terror attack in the US", type: "terrorist_attack", regions: ["north_america"], actors: ["usa"], severity: 4, commodities: [] } },
   { label: "Taiwan crisis", spec: { title: "Taiwan crisis", type: "military_strike", regions: ["east_asia"], actors: ["china", "taiwan", "usa"], severity: 5, commodities: [] } },
+  { label: "Euro country default", spec: { title: "A euro area country cannot pay its debts", type: "sovereign_default", regions: ["europe"], actors: ["italy", "eu"], severity: 4, commodities: [] } },
+  { label: "Emerging market currency crash", spec: { title: "An emerging market currency crashes", type: "currency_crisis", regions: ["latin_america"], actors: [], severity: 3, commodities: [] } },
+  { label: "US bank run", spec: { title: "Run on a large US bank", type: "bank_run", regions: ["north_america"], actors: ["usa", "fed"], severity: 3, commodities: [] } },
+  { label: "Bond yields spike", spec: { title: "US bond yields spike on inflation", type: "rate_shock", regions: ["north_america"], actors: ["usa", "fed"], severity: 3, commodities: [] } },
+  { label: "Crypto exchange collapse", spec: { title: "A big crypto exchange collapses", type: "crypto_crash", regions: ["global"], actors: [], severity: 3, commodities: [] } },
+  { label: "Shipping route blocked", spec: { title: "A major shipping route is blocked", type: "supply_chain_shock", regions: ["middle_east"], actors: [], severity: 2, commodities: ["oil"] } },
 ];
 
 const SAVED_KEY = "parity.scenarios.v1";

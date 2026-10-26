@@ -1,0 +1,23 @@
+{
+  "id": "ireland-bailout-2010",
+  "name": "Ireland asks for a bailout",
+  "date": "2010-11-21",
+  "type": "sovereign_default",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "ireland",
+    "eu"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Ireland asked the EU and the IMF for a rescue after its bank guarantee left the state unable to borrow at affordable rates.",
+  "sources": [
+    {
+      "title": "Post-2008 Irish economic downturn",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Post-2008_Irish_economic_downturn"
+    }
+  ]
+}

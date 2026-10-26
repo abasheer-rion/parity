@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 64 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 65 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
@@ -35,9 +35,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - 2026-10-26 [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 - 2026-10-26 [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
-- 2026-10-26 [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 
 ## intent
 
@@ -115,6 +115,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0063 | [The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0064 | [One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0065 | [The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0066 | [Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

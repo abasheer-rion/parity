@@ -1,0 +1,22 @@
+{
+  "id": "sterling-crisis-1976",
+  "name": "Britain turns to the IMF as sterling falls",
+  "date": "1976-09-28",
+  "type": "currency_crisis",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The pound fell to a record low and the Chancellor turned back from the airport to apply for an IMF loan, the largest it had made until then.",
+  "sources": [
+    {
+      "title": "1976 sterling crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1976_sterling_crisis"
+    }
+  ]
+}

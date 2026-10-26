@@ -1,0 +1,22 @@
+{
+  "id": "uk-election-2019",
+  "name": "Conservatives win a majority in the UK",
+  "date": "2019-12-13",
+  "type": "election",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "uk"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Results of the 12 December vote gave the Conservatives an 80-seat majority overnight, settling that Britain would leave the EU in January.",
+  "sources": [
+    {
+      "title": "2019 United Kingdom general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2019_United_Kingdom_general_election"
+    }
+  ]
+}

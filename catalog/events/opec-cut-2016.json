@@ -1,0 +1,27 @@
+{
+  "id": "opec-cut-2016",
+  "name": "OPEC agrees its first output cut since 2008",
+  "date": "2016-11-30",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "opec",
+    "saudi_arabia",
+    "russia"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "OPEC agreed to cut output by about 1.2 million barrels a day, later joined by Russia and other producers, ending two years of pumping at will.",
+  "sources": [
+    {
+      "title": "2010s oil glut",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2010s_oil_glut"
+    }
+  ]
+}

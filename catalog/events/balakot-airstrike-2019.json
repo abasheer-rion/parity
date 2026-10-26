@@ -1,0 +1,23 @@
+{
+  "id": "balakot-airstrike-2019",
+  "name": "India strikes Pakistan",
+  "date": "2019-02-26",
+  "type": "military_strike",
+  "regions": [
+    "south_asia"
+  ],
+  "actors": [
+    "india",
+    "pakistan"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Indian jets struck a target in Pakistan after a bombing in Kashmir; Pakistan shot down an Indian jet the next day.",
+  "sources": [
+    {
+      "title": "2019 Balakot airstrike",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2019_Balakot_airstrike"
+    }
+  ]
+}
