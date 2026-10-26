@@ -132,4 +132,22 @@ test("the build signs and notarizes only when the secrets exist", () => {
   assert.equal(full.extraMetadata.parity.signed, true);
   assert.equal(full.publish[0].url, "https://parity.endyland.com/desktop/updates/");
   assert.ok(!/\s/.test(full.nsis.artifactName), "the Windows installer name has no spaces");
+  assert.equal(plain.dmg.sign, false);
+  assert.equal(full.dmg.sign, true, "a signed build signs its disk images too");
+});
+
+test("the Windows build signs with Artifact Signing only when asked", () => {
+  const load = (env) => {
+    const keep = { ...process.env };
+    delete process.env.PARITY_WIN_SIGN;
+    Object.assign(process.env, env);
+    delete require.cache[require.resolve("../electron-builder.config.js")];
+    try { return require("../electron-builder.config.js"); } finally { process.env = keep; }
+  };
+  assert.equal(load({}).win.azureSignOptions, undefined);
+  const signed = load({ PARITY_WIN_SIGN: "1" }).win.azureSignOptions;
+  assert.equal(signed.publisherName, "Argus Vision, Inc.");
+  assert.equal(signed.endpoint, "https://eus.codesigning.azure.net/");
+  assert.equal(signed.codeSigningAccountName, "argus-signing");
+  assert.equal(signed.certificateProfileName, "argus-public");
 });

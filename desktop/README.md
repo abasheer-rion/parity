@@ -6,18 +6,17 @@ The whole Parity site, loaded live so it always matches parity.endyland.com: the
 
 Download from the repository's Releases page: `Parity-<version>-arm64.dmg` for a Mac with Apple silicon (M1 or later), `Parity-<version>-x64.dmg` for an Intel Mac, `Parity-Setup-<version>.exe` for Windows.
 
-Until the app is signed, each computer asks you to confirm the first time.
+From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)).
 
 **Mac**
 
 1. Open the `.dmg` and drag Parity into Applications.
-2. In Applications, right-click Parity and choose Open, then Open again.
-3. If the Mac only offers to move it to the Bin: open System Settings, then Privacy & Security, scroll down and click Open Anyway next to Parity.
+2. Open it. The Mac checks Apple's notarization and opens it like any other app.
 
 **Windows**
 
-1. Run `Parity-Setup-<version>.exe`.
-2. If Windows shows "Windows protected your PC", click More info, then Run anyway.
+1. Run `Parity-Setup-<version>.exe`. The publisher shows as Argus Vision, Inc.
+2. While the signature is new, Windows may still show "Windows protected your PC". Click More info, then Run anyway. The warning fades as more people install it.
 3. Choose where to install it. It adds a Start menu and a desktop shortcut.
 
 ## Using it
@@ -56,7 +55,7 @@ Pages are always current. For the app itself, Parity checks `https://parity.endy
 
 - Windows: the update downloads in the background and Parity asks to restart.
 - Mac, signed and notarized: the same.
-- Mac, not signed (every build until the Apple secrets below exist): Parity says a new version is available and opens its disk image in the browser.
+- Mac, not signed (0.2.1 and earlier): Parity says a new version is available and opens its disk image in the browser. One manual install of 0.2.2 or later moves a Mac onto self-updates.
 
 ## Owner steps
 
@@ -80,7 +79,9 @@ These need the owner's accounts. Nothing here is created by the build.
    - `APPLE_API_ISSUER`: the Issuer ID
 4. Run the release workflow. The Mac build is then signed with the hardened runtime and notarized, and marked so it installs its own updates. Copies installed before that still need one manual install of a signed version.
 
-Windows builds stay unsigned; Windows installs their updates as they are. A Windows code signing certificate (`WIN_CSC_LINK`, `WIN_CSC_KEY_PASSWORD`) would remove the "Windows protected your PC" prompt.
+These five secrets exist (Developer ID Application: Argus Vision, Inc. (NK9MBSZRUF)). The release also notarizes and staples the disk images (`scripts/notarize-dmg.mjs`) and stops if `codesign`, `spctl` or `stapler` rejects the app or an image.
+
+**3. Sign the Windows app (Azure Artifact Signing, no secret).** Set up: account `argus-signing`, certificate profile `argus-public` (public trust, subject Argus Vision, Inc., Irving, Texas), endpoint `https://eus.codesigning.azure.net/`. The Entra app `parity-desktop-signing` holds only the signer role on that profile and trusts GitHub OIDC from the `desktop-release` environment. The repository variables `AZURE_CLIENT_ID`, `AZURE_TENANT_ID` and `AZURE_SUBSCRIPTION_ID` turn it on; without `AZURE_CLIENT_ID` the installer is built unsigned. The release checks the installer and `Parity.exe` with `Get-AuthenticodeSignature` and `signtool verify /pa` and stops if either is not signed by Argus Vision, Inc. Once signed, the app only accepts Windows updates signed by that publisher.
 
 ## Building it
 

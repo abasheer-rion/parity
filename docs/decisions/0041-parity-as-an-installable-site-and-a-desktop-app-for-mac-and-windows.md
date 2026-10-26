@@ -35,7 +35,7 @@ Items 6 (the sidebar) and 9 (updates) are replaced by [DEC-0049](0049-the-deskto
 7. **Links.** `parity://` opens the app at a page: `parity://s/<strategy>`, `parity://v/<id>`, `parity://trade/#/chart?s=<symbol>`, `parity://sim/<workspace>`, or any parity.endyland.com, sim.endyland.com or trade.endyland.com address. Links to those three addresses inside the app stay in the app; every other address opens in the browser.
 8. **Notifications.** When a Trade alert fires, the app shows a desktop notification as well as the toast. Clicking it opens that symbol's chart.
 9. **Updates.** Auto-update is written but off until the app is signed; until then a new version is a new download from the release.
-10. **Not registered.** The Mac build is signed ad hoc and not notarized; the Windows installer is not signed. The install note in `desktop/README.md` says how to open each the first time.
+10. **Not registered.** The Mac build is signed ad hoc and not notarized; the Windows installer is not signed. The install note in `desktop/README.md` says how to open each the first time. From 0.2.2 both are signed by Argus Vision, Inc. ([DEC-0062](0062-desktop-builds-are-signed-with-argus-vision-certificates.md)).
 
 ## Alternatives considered
 
@@ -58,6 +58,7 @@ Items 6 (the sidebar) and 9 (updates) are replaced by [DEC-0049](0049-the-deskto
 - [DEC-0048: The desktop app loads the live site and keeps a copy for offline](0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md)
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
+- [DEC-0062: Desktop builds are signed with Argus Vision certificates](0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [CMP-0016: Kraken Pro, a customisable crypto trading app with a native desktop](../competitors/0016-kraken-pro.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
