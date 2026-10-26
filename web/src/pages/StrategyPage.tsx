@@ -1,8 +1,9 @@
 // One strategy, laid out like a Robinhood stock page: name, the value of a starting
 // amount, a range-tabbed chart you can scrub, About, Key statistics, then detail.
 // The right column holds the verdict where Robinhood puts its order panel.
-import { useState } from "react";
-import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
+import { useHashState } from "../lib/deeplink";
+import { labUrl } from "../lib/space";
+import { BarChart, HeroChart, LineChart, RANGES, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
 import { Badge, Button } from "../ui";
 import { Title } from "../components/Shell";
@@ -18,7 +19,9 @@ import { Term } from "./Learn";
 
 export function StrategyPage({ report, name }: { report: Report; name: string }) {
   const prefs = usePrefs();
-  const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
+  // The range lives in the link, so Copy link and reload reopen the same view (DEC-0038).
+  const [rangeRaw, setRange] = useHashState("range", prefs.defaultRange);
+  const range: RangeKey = (RANGES as readonly string[]).includes(rangeRaw) ? (rangeRaw as RangeKey) : prefs.defaultRange;
   const docs = useDocs();
   const run = report.runs.find((r) => r.strategy === name);
   const bench = report.runs.find((r) => r.is_benchmark);
@@ -94,25 +97,25 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
 
         <Card title="Drawdown" help="How far below its previous peak the strategy was at each point.">
           <LineChart
-            label={`Drawdown of ${run.strategy}`}
+            label={`Drawdown of ${nameOf(run)}`}
             format={(v) => pct(v, 0)}
             height={200}
             series={[
-              { name: run.strategy, color, points: run.drawdown, emphasis: true },
-              ...(bench && !run.is_benchmark ? [{ name: bench.strategy, color: colors[bench.strategy], points: bench.drawdown }] : []),
+              { name: nameOf(run), color, points: run.drawdown, emphasis: true },
+              ...(bench && !run.is_benchmark ? [{ name: nameOf(bench), color: colors[bench.strategy], points: bench.drawdown }] : []),
             ]}
           />
         </Card>
 
         <Card title="Return by calendar year" help="Shows whether the result depends on a few years.">
           <BarChart
-            label={`Yearly returns of ${run.strategy}`}
+            label={`Yearly returns of ${nameOf(run)}`}
             format={(v) => pct(v, 0)}
             groups={years.map((y) => ({
               label: years.length > 14 ? `'${y.slice(2)}` : y,
               values: [
-                { name: run.strategy, color, value: run.yearly[y] },
-                ...(bench && !run.is_benchmark ? [{ name: bench.strategy, color: colors[bench.strategy], value: bench.yearly[y] ?? null }] : []),
+                { name: nameOf(run), color, value: run.yearly[y] },
+                ...(bench && !run.is_benchmark ? [{ name: nameOf(bench), color: colors[bench.strategy], value: bench.yearly[y] ?? null }] : []),
               ],
             }))}
           />
@@ -121,9 +124,9 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
         {run.ic_decay.length > 0 && (
           <Card title="Signal information by horizon" help="The information coefficient: mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">
             <BarChart
-              label={`Information coefficient by horizon for ${run.strategy}`}
+              label={`Information coefficient by horizon for ${nameOf(run)}`}
               format={(v) => v.toFixed(2)}
-              groups={run.ic_decay.map((r) => ({ label: `${r.horizon_days}d`, values: [{ name: run.strategy, color, value: r.mean_ic }] }))}
+              groups={run.ic_decay.map((r) => ({ label: `${r.horizon_days}d`, values: [{ name: nameOf(run), color, value: r.mean_ic }] }))}
             />
           </Card>
         )}
@@ -164,7 +167,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
           ) : (
             <>
               <Row label="Beats the S&P 500" value={run.gauntlet ? (run.gauntlet.beats_sp500 ? "Yes" : "No") : "n/a"} good={run.gauntlet?.beats_sp500} />
-              <Row label="Gauntlet" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
+              <Row label="Tests passed" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
               <Row label="Sharpe vs market" value={`${num(m.sharpe)} vs ${num(bm?.sharpe)}`} good={better(m.sharpe, bm?.sharpe)} />
               <Row label="CAGR vs market" value={`${pct(m.cagr)} vs ${pct(bm?.cagr)}`} good={better(m.cagr, bm?.cagr)} />
               <Row label="Worst fall vs market" value={`${pct(m.max_drawdown)} vs ${pct(bm?.max_drawdown)}`} good={better(m.max_drawdown, bm?.max_drawdown)} />
@@ -172,7 +175,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
               {run.gauntlet && <p className="order-note">{run.gauntlet.verdict}</p>}
             </>
           )}
-          <Button variant="primary" size="lg" full href="#/lab">Try other settings in the Lab</Button>
+          <Button variant="primary" size="lg" full href={labUrl(`try?s=${encodeURIComponent(run.strategy)}`)} target="_blank">Try other settings in the Workbench</Button>
         </div>
         <Button variant="outline" size="lg" full href="#/compare">Compare with others</Button>
         {refDoc && <Button variant="outline" size="lg" full href={`#/doc/${refDoc.id}`}>Read the write-up</Button>}

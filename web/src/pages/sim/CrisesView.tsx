@@ -44,7 +44,7 @@ export function CrisesView({ data }: { data: WorldData }) {
         valueFmt={(_, __, r) => (r == null ? "n/a" : r.toFixed(1))}
         eyebrow={`${crisis.label} · every asset starts at 100`}
         controls={<Select<Group> label="Assets" value={group} onChange={setGroup} options={[["highlights", "Highlights"], ["currencies", "Currencies"], ["commodities", "Commodities"], ["stocks", "Stocks and industries"], ["bonds", "Bonds"], ["all", "Everything"]]} />}
-        honest={<>History replayed, not a forecast. Weekly closes from {crisis.from} to {crisis.to}; the shaded band is the stress itself. Currencies are their value in US dollars (up means it gained on the dollar), bonds are Treasury total return, gas is the spot price, and copper a monthly average.</>}
+        honest={<>Weekly closes from {crisis.from} to {crisis.to}; the shaded band is the stress itself. Currencies are their value in US dollars (up means it gained on the dollar), bonds are Treasury total return, gas is the spot price, and copper a monthly average.</>}
         above={(k) => {
           const j = k - a;
           return (

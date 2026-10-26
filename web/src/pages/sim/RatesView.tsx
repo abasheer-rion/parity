@@ -36,7 +36,7 @@ export function RatesView({ data, win, setWin }: { data: WorldData; win: string;
       valueFmt={(v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(2)}`}
       eyebrow="Rates · the Treasury curve, and each currency's rate gap with the dollar"
       controls={<WindowSelect value={win} onChange={setWin} />}
-      honest={<>History replayed, not a forecast. Rate gaps use 3-month interbank rates (OECD, monthly, carried forward), in percentage points; above zero, holding that currency earned more interest than holding dollars. Only nine currencies have a rate in our data. Treasury yields are daily (Fed), shown weekly; the 30-year was not issued from 2002 to 2006.</>}
+      honest={<>Rate gaps use 3-month interbank rates (OECD, monthly, carried forward), in percentage points; above zero, holding that currency earned more interest than holding dollars. Only nine currencies have a rate in our data. Treasury yields are daily (Fed), shown weekly; the 30-year was not issued from 2002 to 2006.</>}
       above={(k) => <Curve data={data} k={k} start={a} />}
     />
   );

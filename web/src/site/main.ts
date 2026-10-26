@@ -1,169 +1,307 @@
-// Motion for the public front page (web/index.html). The page is complete without
-// this script; it only adds movement on top:
-//   - sections fade up as they scroll into view
-//   - counters count up once, from /stats.json when it is there
-//   - the "how an idea becomes a result" story follows the scroll
-//   - the app preview loops only while it is on screen
-//   - cards lean toward the pointer
-//   - the 3D hero loads after first paint, never for people who ask for reduced motion
-//   - the large scale sim loads when its section comes near the screen
-// The rules are in the motion decision (DEC-0017).
-// Lenis is imported directly (not through lib/scroll) so no stylesheet is linked;
-// its few rules are inlined in index.html.
+// Motion for the public front page (web/index.html, DEC-0039). The page is complete
+// without this script: every picture's finished state is the default. On top it adds:
+//   - the hero field (field.ts), after first paint, where WebGL can run it well
+//   - two scroll-driven scenes: Bot Battle's trades ticking in and the balance collapsing,
+//     and a Verify check (file in, five checks, verdict, "survives up to N tries")
+//   - three small framed demos that loop while on screen
+//   - counters and bars from /stats.json, sections that fade up, markets that light up
+//   - floating corner controls that step aside while you scroll down
+//   - the sign-in panel (DEC-0044): Log in and Sign up fade the page out and the panel in,
+//     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
 import Lenis from "lenis";
+import "./viewTransitions";
+import { botTrades, TRADES } from "./botPath";
+import { startPwa } from "../pwa/install";
+import { startRum } from "../lib/rum";
+import { isDesktop } from "../desktop/bridge";
+import { motionLevel } from "../ui/motionCore";
+
+startPwa();
+startRum("site", { desktop: isDesktop() });
 
 const root = document.documentElement;
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-const $$ = <T extends Element = HTMLElement>(sel: string) => Array.from(document.querySelectorAll<T & Element>(sel)) as T[];
-
-if (!reduce) new Lenis({ autoRaf: true, lerp: 0.11, smoothWheel: true });
-
-// Header gains a backdrop once the page has scrolled.
-const header = document.querySelector("header");
-const onScroll = () => header?.classList.toggle("scrolled", window.scrollY > 8);
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll();
-
-// Reveals. Anything already on screen is shown at once, so nothing visible blinks.
-const reveals = $$(".rv");
-if (!reduce && "IntersectionObserver" in window) {
-  const vh = window.innerHeight;
-  for (const el of reveals) {
-    const r = el.getBoundingClientRect();
-    if (r.top < vh && r.bottom > 0) el.classList.add("in");
-  }
-  root.classList.add("motion");
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-  }, { rootMargin: "0px 0px -8% 0px" });
-  reveals.filter((el) => !el.classList.contains("in")).forEach((el) => io.observe(el));
-}
-
-// Counters. The HTML already holds a true value or a rounded, labelled one.
+// Reduced motion (the device asks, unless the Motion setting says Full; or the setting says
+// Reduced, REF-0023): sections still fade in as they arrive (html.motion-lite, kit.css), but
+// nothing rises, counts, pins or loops.
+const reduce = motionLevel() === "reduced";
+const $$ = <T extends HTMLElement = HTMLElement>(sel: string, el: ParentNode = document) => Array.from(el.querySelectorAll<T>(sel));
+const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const fmt = (n: number) => Math.round(n).toLocaleString("en-US");
+const money = (n: number) => `$${fmt(n)}`;
+
+const lenis = reduce ? null : new Lenis({ autoRaf: true, lerp: 0.1, smoothWheel: true });
+root.classList.add(reduce ? "motion-lite" : "motion");
+
+// The corner controls: glass once the page scrolls, out of the way while scrolling down,
+// back on the way up. Focus always brings them back (CSS :focus-within).
+const corners = $$(".corner");
+let lastY = window.scrollY;
+const onCorner = () => {
+  const y = window.scrollY;
+  corners.forEach((c) => {
+    c.classList.toggle("solid", y > 24);
+    if (!reduce) c.classList.toggle("away", y > window.innerHeight * 0.9 && y > lastY + 2);
+  });
+  if (Math.abs(y - lastY) > 2) lastY = y;
+};
+window.addEventListener("scroll", onCorner, { passive: true });
+onCorner();
+
+// The sign-in panel (DEC-0044). Clicking Log in or Sign up adds #login or #signup to the
+// address, fades the page out (CSS: html.auth-open) and loads the panel (src/auth/front.tsx),
+// which fades in over the same backdrop. Back, Escape and the logo close it again. The
+// links keep their /login/ and /signup/ addresses, so they still work with no script, in a
+// new tab, or if the panel cannot load.
+type AuthView = "login" | "signup" | "reset";
+const AUTH_VIEWS: readonly string[] = ["login", "signup", "reset"];
+const authHash = (): AuthView | null => {
+  const v = window.location.hash.slice(1);
+  return AUTH_VIEWS.includes(v) ? (v as AuthView) : null;
+};
+let authApi: Promise<import("../auth/front").FrontAuth> | null = null;
+let opener: HTMLElement | null = null;
+let pushed = false;
+const loadAuth = () => (authApi ??= import("../auth/front").then(({ startFrontAuth }) => startFrontAuth(document.getElementById("auth-root")!, {
+  // Closing undoes the history entry the click added, so Back and close agree.
+  onClose: () => {
+    if (pushed) { window.history.back(); return; }
+    window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search);
+    syncAuth();
+  },
+  // Switching between log in, sign up and reset inside the panel replaces the entry.
+  onView: (view) => window.history.replaceState(window.history.state, "", `#${view}`),
+  stopScroll: () => lenis?.stop(),
+  startScroll: () => lenis?.start(),
+})));
+function syncAuth() {
+  const view = authHash();
+  if (view) {
+    root.classList.add("auth-open");
+    loadAuth().then((auth) => auth.open(view, opener)).catch(() => { window.location.href = `/${view}/`; });
+  } else {
+    pushed = false;
+    authApi?.then((auth) => auth.close()).catch(() => undefined);
+    if (!authApi) root.classList.remove("auth-open");
+  }
+}
+for (const a of $$<HTMLAnchorElement>("a[data-auth]")) {
+  // Start loading on hover or focus, so the panel is ready by the click.
+  a.addEventListener("pointerenter", () => void loadAuth().catch(() => undefined), { once: true });
+  a.addEventListener("focus", () => void loadAuth().catch(() => undefined), { once: true });
+  a.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    opener = a;
+    if (authHash() !== a.dataset.auth) {
+      window.history.pushState({ parityAuth: true }, "", `#${a.dataset.auth}`);
+      pushed = true;
+    }
+    syncAuth();
+  });
+}
+window.addEventListener("popstate", syncAuth);
+window.addEventListener("hashchange", syncAuth);
+if (authHash()) syncAuth();
+
+// Reveals. Anything already on screen shows at once, so nothing visible blinks.
+const seenOnce = (els: HTMLElement[], cls: string, margin = "0px 0px -10% 0px") => {
+  if (!("IntersectionObserver" in window)) { els.forEach((el) => el.classList.add(cls)); return; }
+  // Reduced motion: things are already visible, so fade them the moment they reach the edge.
+  if (reduce) margin = "0px";
+  const vh = window.innerHeight;
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add(cls); io.unobserve(e.target); }
+  }, { rootMargin: margin });
+  for (const el of els) {
+    const r = el.getBoundingClientRect();
+    if (r.top < vh && r.bottom > 0) el.classList.add(cls);
+    else io.observe(el);
+  }
+};
+seenOnce($$(".rv"), "in");
+seenOnce($$(".cv li"), "in", "0px 0px -18% 0px");
+
+// Counters: the HTML holds a real number (written in at deploy) or a fallback word.
+type Stats = Record<string, unknown> & { series_by_group?: Record<string, number> };
+const counters = $$("[data-stat]");
+const targets = new Map<HTMLElement, number>();
+for (const el of counters) {
+  const n = Number((el.dataset.count ?? "").replace(/,/g, "") || el.textContent?.replace(/,/g, ""));
+  if (el.dataset.count != null && Number.isFinite(n) && n >= 0 && /^[\d,]+$/.test((el.textContent ?? "").trim())) targets.set(el, n);
+}
+for (const el of $$("[data-count]")) {
+  if (el.dataset.stat) continue;
+  const n = Number(el.dataset.count);
+  if (Number.isFinite(n) && n > 0) targets.set(el, n);
+}
 function countUp(el: HTMLElement, target: number) {
   const text = fmt(target);
   el.style.minWidth = `${text.length}ch`;
-  if (reduce) { el.textContent = text; return; }
+  el.style.display = el.style.display || "inline-block";
+  if (reduce || target === 0) { el.textContent = text; return; }
   const t0 = performance.now();
-  const ms = 1400;
   const step = (t: number) => {
-    const p = Math.min(1, (t - t0) / ms);
-    el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+    const p = Math.min(1, (t - t0) / 1600);
+    el.textContent = fmt(target * (1 - Math.pow(1 - p, 4)));
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
 }
-const counters = $$("[data-count]");
-const targets = new Map<HTMLElement, number>();
-for (const el of counters) {
-  const n = Number(el.dataset.count);
-  if (Number.isFinite(n) && n > 0) targets.set(el, n);
-}
-const seen = new Set<HTMLElement>();
+const counted = new Set<HTMLElement>();
+const visible = new Set<HTMLElement>();
 const tryCount = (el: HTMLElement) => {
   const n = targets.get(el);
-  if (n != null && seen.has(el) && !el.dataset.done) { el.dataset.done = "1"; countUp(el, n); }
+  if (n != null && visible.has(el) && !counted.has(el)) { counted.add(el); countUp(el, n); }
 };
 const cio = new IntersectionObserver((entries) => {
-  for (const e of entries) if (e.isIntersecting) { seen.add(e.target as HTMLElement); tryCount(e.target as HTMLElement); cio.unobserve(e.target); }
+  for (const e of entries) if (e.isIntersecting) { visible.add(e.target as HTMLElement); tryCount(e.target as HTMLElement); cio.unobserve(e.target); }
 }, { threshold: 0.6 });
-counters.forEach((el) => cio.observe(el));
+targets.forEach((_, el) => cio.observe(el));
+
+function setBars(s: Stats) {
+  const bars = $$("[data-bar]");
+  const vals = bars.map((b) => Number(s[b.dataset.bar ?? ""]));
+  const max = Math.max(...vals.filter((v) => Number.isFinite(v)), 1);
+  bars.forEach((b, i) => {
+    const v = vals[i];
+    if (Number.isFinite(v)) b.style.setProperty("--w", String(Math.max(0.004, Math.log10(v + 1) / Math.log10(max + 1))));
+  });
+}
+
 fetch("/stats.json", { cache: "no-cache" })
   .then((r) => (r.ok ? r.json() : null))
-  .then((s: Record<string, number> | null) => {
-    if (!s) return;
-    // Each tested strategy is rerun on 1,000 reshuffled histories and 500 with its
-    // timing scrambled (N_BOOTSTRAP and N_PLACEBO in engine/src/parity/gauntlet.py).
-    if (typeof s.strategies_tested === "number") s.histories_per_run = s.strategies_tested * 1500;
+  .then((st: Stats | null) => {
+    if (!st) return;
     for (const el of counters) {
-      const key = el.dataset.stat;
-      const n = key ? s[key] : undefined;
-      if (typeof n === "number" && n > 0) {
-        targets.set(el, n);
-        el.closest(".stat")?.classList.add("live");
-        if (!seen.has(el)) el.textContent = fmt(n);
-        tryCount(el);
+      const key = el.dataset.stat!;
+      const n = st[key];
+      if (typeof n !== "number" || n < 0) continue;
+      targets.set(el, n);
+      if (!counted.has(el)) {
+        el.textContent = fmt(n);
+        el.style.minWidth = `${fmt(n).length}ch`;
+        if (el.dataset.count != null) { cio.observe(el); tryCount(el); }
+      }
+    }
+    setBars(st);
+    const groups = st.series_by_group;
+    if (groups) {
+      for (const el of $$("[data-groups]")) {
+        const n = (el.dataset.groups ?? "").split(",").reduce((a, g) => a + (groups[g] ?? 0), 0);
+        if (n > 0) el.textContent = `${fmt(n)} series`;
       }
     }
   })
   .catch(() => undefined);
 
-// The scroll story: the step nearest the middle of the screen drives the picture.
-const story = document.querySelector<HTMLElement>(".story");
-if (story) {
-  const steps = $$(".story-step");
-  const setStep = (i: number) => {
-    story.dataset.step = String(i);
-    steps.forEach((s, k) => s.classList.toggle("on", k === i));
-  };
-  setStep(0);
-  const sio = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) setStep(steps.indexOf(e.target as HTMLElement));
-  // On narrow screens the picture sits on top, so the step below it is the one in view.
-  }, { rootMargin: window.matchMedia("(max-width: 960px)").matches ? "-62% 0px -30% 0px" : "-48% 0px -48% 0px" });
-  steps.forEach((s) => sio.observe(s));
+// Scroll-driven scenes. A scene gets 0 at the top of its pinned run and 1 at the end.
+type Scene = (p: number) => void;
+const scenes: [HTMLElement, Scene][] = [];
+function scrub(el: HTMLElement | null, scene: Scene) {
+  if (!el) return;
+  if (reduce) { scene(1); return; }
+  scenes.push([el, scene]);
 }
-
-// The app preview loops only while someone can see it.
-const device = document.querySelector(".device");
-if (device && !reduce) {
-  new IntersectionObserver(([e]) => device.classList.toggle("playing", e.isIntersecting), { threshold: 0.25 }).observe(device);
-}
-
-// Cards lean a few degrees toward the pointer.
-if (finePointer && !reduce) {
-  for (const el of $$("[data-tilt]")) {
-    el.addEventListener("pointermove", (e) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.setProperty("--rx", `${(-y * 6).toFixed(2)}deg`);
-      el.style.setProperty("--ry", `${(x * 8).toFixed(2)}deg`);
-      el.style.setProperty("--gx", `${((x + 0.5) * 100).toFixed(1)}%`);
-      el.style.setProperty("--gy", `${((y + 0.5) * 100).toFixed(1)}%`);
-    });
-    el.addEventListener("pointerleave", () => { el.style.setProperty("--rx", "0deg"); el.style.setProperty("--ry", "0deg"); });
+let ticking = false;
+const runScenes = () => {
+  ticking = false;
+  const vh = window.innerHeight;
+  for (const [el, scene] of scenes) {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < -vh || r.top > vh * 2) continue;
+    const span = Math.max(1, r.height - vh);
+    scene(clamp(-r.top / span));
   }
-}
-
-// After the page has loaded and the browser is idle.
-const idle = (f: () => void) => (window.requestIdleCallback ? window.requestIdleCallback(f, { timeout: 2000 }) : setTimeout(f, 200));
-const afterLoad = (f: () => void) => {
-  if (document.readyState === "complete") idle(f);
-  else window.addEventListener("load", () => idle(f), { once: true });
 };
+const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(runScenes); } };
+window.addEventListener("scroll", queue, { passive: true });
+window.addEventListener("resize", queue);
 
-// The large scale sim, loaded only when its section comes near the screen. With
-// reduced motion it draws one still picture. Rules: DEC-0021.
-const simStage = document.getElementById("sim-stage");
-const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-if (simStage && !saveData && "IntersectionObserver" in window) {
-  const drawn = document.getElementById("sim-drawn");
-  const scn = document.getElementById("sim-scn");
-  const load = () => import("./paths").then(({ startSim }) => startSim(simStage, {
-    reduce,
-    onScenario: (label) => { if (scn) scn.textContent = `Illustrative paths: ${label.toLowerCase()}`; },
-    onDrawn: (n) => { if (drawn) drawn.textContent = fmt(n); },
-  })).catch(() => undefined);
-  const near = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { near.disconnect(); afterLoad(load); }
-  }, { rootMargin: "400px 0px" });
-  near.observe(simStage);
-}
-
-// The 3D hero, after first paint and only where it can run well.
-function webgl(): boolean {
-  try {
-    const c = document.createElement("canvas");
-    return !!(c.getContext("webgl2") || c.getContext("webgl"));
-  } catch { return false; }
-}
-const art = document.getElementById("hero-art");
-if (art && !reduce && !saveData) {
-  afterLoad(() => {
-    if (!webgl()) return;
-    import("./hero3d").then(({ startHero }) => startHero(art, document.querySelector<HTMLElement>(".hero") ?? art)).catch(() => undefined);
+// Bot Battle: the trades tick in, the win rate climbs to 99%, and the balance collapses.
+const bot = document.getElementById("bots");
+const chart = document.getElementById("bot-chart");
+const wr = document.getElementById("bot-wr");
+const bal = document.getElementById("bot-bal");
+const meter = bot?.querySelector<HTMLElement>(".meter");
+if (bot && chart && wr && bal) {
+  const trades = botTrades();
+  const wins: number[] = [];
+  trades.reduce((w, t, i) => (wins[i] = w + (t.win ? 1 : 0)), 0);
+  const tape = bot.querySelector<SVGElement>(".bot-tape");
+  let lastN = -1;
+  scrub(bot, (p) => {
+    const f = clamp((p - 0.06) / 0.86);
+    const n = Math.round(f * TRADES);
+    chart.style.setProperty("--f", String(Math.max(0.002, n / TRADES)));
+    tape?.style.setProperty("clip-path", `inset(0 ${((1 - n / TRADES) * 100).toFixed(2)}% 0 0)`);
+    meter?.style.setProperty("--p", String(p));
+    if (n === lastN) return;
+    lastN = n;
+    if (n === 0) { wr.textContent = "0.0%"; bal.textContent = money(10_000); bal.classList.remove("hit"); return; }
+    wr.textContent = `${((wins[n - 1] / n) * 100).toFixed(1)}%`;
+    bal.textContent = money(trades[n - 1].balance);
+    bal.classList.toggle("hit", !trades[n - 1].win || n === TRADES || trades[n - 1].balance < 10_000);
   });
+}
+
+// Verify: the file drops in, the five checks light one by one, then the verdict and the
+// number of tries it survives.
+const verify = document.getElementById("verify");
+if (verify) {
+  const checks = $$("#vchecks li", verify);
+  const verdict = document.getElementById("vverdict");
+  const vn = document.getElementById("v-n");
+  const steps = $$("#vsteps li", verify);
+  document.getElementById("vsteps")?.classList.add("live");
+  scrub(verify, (p) => {
+    const s = p < 0.06 ? 0 : p < 0.24 ? 1 : p < 0.74 ? 2 : 3;
+    verify.dataset.s = String(s);
+    steps.forEach((li, i) => li.classList.toggle("on", i === Math.max(0, s - 1)));
+    checks.forEach((li, i) => li.classList.toggle("lit", p > 0.26 + i * 0.09));
+    verdict?.classList.toggle("lit", p > 0.76);
+    if (vn) vn.textContent = String(Math.round(6 * clamp((p - 0.78) / 0.14)));
+  });
+}
+runScenes();
+
+// The three small demos loop only while someone can see them.
+function loopWhileVisible(el: HTMLElement, tick?: (t: number) => void, period = 9000) {
+  if (reduce) return;
+  let raf = 0, t0 = 0;
+  const frame = (t: number) => { tick?.((t - t0) % period); raf = requestAnimationFrame(frame); };
+  new IntersectionObserver(([e]) => {
+    el.classList.toggle("looping", e.isIntersecting);
+    cancelAnimationFrame(raf); raf = 0;
+    if (e.isIntersecting && tick) { t0 = performance.now(); raf = requestAnimationFrame(frame); }
+  }, { threshold: 0.3 }).observe(el);
+}
+for (const d of $$("[data-demo]")) {
+  if (d.dataset.demo !== "gauntlet") { loopWhileVisible(d); continue; }
+  // The 11 tests tick on one by one; the score counts up with them, holds, then restarts.
+  const items = $$("#g-list li", d);
+  const out = document.getElementById("g-n");
+  const bar = document.getElementById("g-bar");
+  let last = -1;
+  loopWhileVisible(d, (t) => {
+    const k = t < 600 ? 0 : Math.min(items.length, Math.floor((t - 600) / 420) + 1);
+    if (k === last) return;
+    last = k;
+    items.forEach((li, i) => li.classList.toggle("on", i < k));
+    const passed = items.slice(0, k).filter((li) => !li.classList.contains("x")).length;
+    if (out) out.textContent = String(passed);
+    bar?.style.setProperty("--g", String(passed / items.length));
+  });
+}
+
+// The hero field, after the page has loaded, where it can run well. Reduced motion, data
+// saving, no WebGL or a low-power device keep the still picture.
+const hero = document.getElementById("top");
+const box = document.getElementById("field-box");
+const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
+const lowPower = !!nav.connection?.saveData || (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2;
+const idle = (f: () => void) => (window.requestIdleCallback ? window.requestIdleCallback(f, { timeout: 1500 }) : setTimeout(f, 120));
+if (hero && box && !reduce && !lowPower) {
+  const start = () => idle(() => { import("./field").then(({ startField }) => startField(hero, box)).catch(() => undefined); });
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start, { once: true });
 }

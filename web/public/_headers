@@ -5,13 +5,20 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 # Search engines may index the public pages only (DEC-0023): the front page, /legal/,
-# /learn/, /ideas/ and /notes/. Everything behind sign-in, the sign-in pages, the sim
-# address and the preview addresses stay out of search.
+# /learn/, /ideas/, /notes/ and the newsroom (/blog/, /news/, /authors/, /tags/, DEC-0057).
+# Sample and draft posts carry their own noindex tag. Everything behind sign-in, the sign-in pages, the sim, trade,
+# academy and lab addresses and the preview addresses stay out of search.
 /app/*
   X-Robots-Tag: noindex, nofollow
 /research/*
   X-Robots-Tag: noindex, nofollow
 /sim/*
+  X-Robots-Tag: noindex, nofollow
+/trade/*
+  X-Robots-Tag: noindex, nofollow
+/academy/*
+  X-Robots-Tag: noindex, nofollow
+/lab/*
   X-Robots-Tag: noindex, nofollow
 /data/*
   X-Robots-Tag: noindex, nofollow
@@ -23,11 +30,38 @@
   X-Robots-Tag: noindex, nofollow
 /verify/*
   X-Robots-Tag: noindex, nofollow
+/connect/*
+  X-Robots-Tag: noindex, nofollow
+/oauth/*
+  X-Robots-Tag: noindex, nofollow
+# Verify badge pages are shared by link only, not listed in search (REF-0016).
+/v/*
+  X-Robots-Tag: noindex, nofollow
+/badge/*
+  X-Robots-Tag: noindex, nofollow
 /seo-manifest.json
   X-Robots-Tag: noindex
 https://sim.endyland.com/*
   X-Robots-Tag: noindex, nofollow
+https://trade.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://academy.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://lab.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
 https://parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
 https://:branch.parity-research.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+# Built files have a hash of their contents in the name, so a copy never goes stale: keep
+# them a year (REF-0024). The apps' own built files are private and get the same from the
+# middleware (functions/_middleware.ts).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The installable site (DEC-0041): the service worker must always be checked for a new
+# version, and the offline page is not for search.
+/sw.js
+  Cache-Control: no-cache
+/offline.html
   X-Robots-Tag: noindex, nofollow

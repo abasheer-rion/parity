@@ -218,7 +218,7 @@ The delivery fee on every online order. One order is fine, a hundred small order
 
 <details><summary>Precise definition</summary>
 
-We charge a fixed cost per unit of notional traded (1 basis point by default) and test at double that in the gauntlet. Real costs also include financing markups and slippage.
+We charge a fixed cost per unit of notional traded (1 basis point by default) and test at double that in our 11 tests. Real costs also include financing markups and slippage.
 
 </details>
 
@@ -746,7 +746,7 @@ Seasons. What works in summer, like shorts, does not work in winter.
 
 <details><summary>Precise definition</summary>
 
-A stretch of time with distinct statistical behaviour. Strategies that only work in one regime are fragile. The gauntlet's era test checks three regimes separately.
+A stretch of time with distinct statistical behaviour. Strategies that only work in one regime are fragile. Our era test checks three regimes separately.
 
 </details>
 
@@ -1164,7 +1164,7 @@ Saying the bus will come between 8:05 and 8:15 instead of exactly 8:10.
 
 <details><summary>Precise definition</summary>
 
-An interval estimate. The gauntlet asks whether the 95% bootstrap interval for the Sharpe ratio lies entirely above zero.
+An interval estimate. One of our 11 tests asks whether the 95% bootstrap interval for the Sharpe ratio lies entirely above zero.
 
 </details>
 
@@ -1272,7 +1272,7 @@ A practice test the teacher keeps hidden until the end, so you cannot study the 
 
 <details><summary>Precise definition</summary>
 
-Observations excluded from model selection. Our gauntlet treats the last five years as the hardest test and checks three separate eras.
+Observations excluded from model selection. Our tests treat the last five years as the hardest test and check three separate eras.
 
 </details>
 

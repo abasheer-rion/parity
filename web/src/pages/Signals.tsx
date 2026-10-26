@@ -5,6 +5,7 @@ import { colorMap } from "../lib/colors";
 import { num } from "../lib/format";
 import type { Report } from "../lib/types";
 import { nameOf } from "../lib/strategyMeta";
+import { TableScroll } from "../ui";
 
 export function Signals({ report }: { report: Report }) {
   const colors = colorMap(report.runs);
@@ -16,8 +17,8 @@ export function Signals({ report }: { report: Report }) {
       <div className="page-head">
         <Title>Signals</Title>
         <p>
-          Leading indicators: does each signal predict anything before portfolio rules and costs get in the way?
-          A signal with real information but a poor backtest usually means the trading rule, not the idea, needs work.
+          Does each signal predict returns before portfolio rules and costs are applied? If a signal predicts well but
+          its backtest is poor, the trading rule usually needs work.
         </p>
       </div>
 
@@ -37,7 +38,7 @@ export function Signals({ report }: { report: Report }) {
       </Card>
 
       <Card title="Table view" help="t-stats use overlapping returns for horizons above one day, so they overstate confidence.">
-        <div className="table-wrap">
+        <TableScroll>
           <table>
             <thead>
               <tr><th>Strategy</th>{horizons.map((h) => <th key={h}>IC {h}d</th>)}{horizons.map((h) => <th key={`t${h}`}>t-stat {h}d</th>)}</tr>
@@ -52,7 +53,7 @@ export function Signals({ report }: { report: Report }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </Card>
     </>
   );

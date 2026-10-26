@@ -1,8 +1,11 @@
-// Motion. Short (90 to 400ms), eased out, and only where it explains a change:
+// Motion (REF-0023). Short (100 to 600ms), eased out, and only where it explains a change:
 // something appearing, a value updating, a panel opening. The one loop allowed in the
 // app is HeroGlow's slow drift behind a hero area (DEC-0017). Nothing flashes.
-// People who ask their system for reduced motion get none of it (see ui.css).
+// Reduced motion (the device asks, or the Motion setting says so) keeps the fades and
+// drops the movement: nothing slides, rises or counts (see motion.css and motionPref.ts).
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { motionLevel } from "./motionPref";
+import { progressAt, tickAt, tickerWidth } from "./ticker";
 
 export const MOTION = {
   fast: "var(--dur-1)",
@@ -36,36 +39,44 @@ export function RollingNumber({ text }: { text: string }) {
 }
 
 /**
- * A number that glides from its old value to its new one when it changes (a price, a
- * total after a filter). Tabular figures and a width held at the longest of the two
- * values, so the text around it never shifts. With reduced motion it simply changes.
+ * A number ticker: glides from its old value to its new one when it changes (a price, a
+ * total after a filter). Tabular figures and a width held at the longer of the two values,
+ * so the text around it never shifts. `from` makes it count up from that value the first
+ * time it shows. With reduced motion it simply changes. The text always ends on the exact
+ * formatted value, and frames are drawn straight into the text, so React does not
+ * re-render on every frame.
  */
-export function AnimatedNumber({ value, format, ms = 450, className = "" }:
-  { value: number; format: (v: number) => string; ms?: number; className?: string }) {
-  const [shown, setShown] = useState(value);
-  const from = useRef(value);
-  const [width, setWidth] = useState(() => format(value).length);
+export function AnimatedNumber({ value, format, ms = 700, from, flash = false, className = "" }:
+  { value: number; format: (v: number) => string; ms?: number; from?: number; flash?: boolean; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  // Where the number is now: the last value drawn, mid-glide or settled.
+  const shown = useRef(from ?? value);
+  const fmt = useRef(format);
+  fmt.current = format;
   useEffect(() => {
-    const start = from.current;
-    if (start === value) return;
-    setWidth(Math.max(format(start).length, format(value).length));
-    if (reducedMotion()) { from.current = value; setShown(value); setWidth(format(value).length); return; }
+    const el = ref.current;
+    const text = el?.firstChild;
+    const start = shown.current;
+    if (!el || !text || start === value) return;
+    const f = fmt.current;
+    const done = () => { shown.current = value; text.nodeValue = f(value); el.style.minWidth = ""; };
+    if (flash) { el.classList.remove("ui-tick-flash"); void el.offsetWidth; el.classList.add("ui-tick-flash"); }
+    if (motionLevel() === "reduced") { done(); return; }
+    el.style.minWidth = `${tickerWidth(f, start, value)}ch`;
     const t0 = performance.now();
     let raf = 0;
     const step = (t: number) => {
-      const p = Math.min(1, (t - t0) / ms);
-      const v = start + (value - start) * (1 - Math.pow(1 - p, 3));
-      from.current = v;
-      setShown(v);
-      if (p < 1) raf = requestAnimationFrame(step);
-      else setWidth(format(value).length);
+      const p = progressAt(t0, t, ms);
+      if (p >= 1) { done(); return; }
+      shown.current = tickAt(start, value, p);
+      text.nodeValue = f(shown.current);
+      raf = requestAnimationFrame(step);
     };
+    text.nodeValue = f(start);
     raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-    // format is usually an inline function; a new one each render must not restart the glide.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, ms]);
-  return <span className={`ui-anum ${className}`} style={{ minWidth: `${width}ch` }} aria-live="polite">{format(shown)}</span>;
+    return () => { cancelAnimationFrame(raf); };
+  }, [value, ms, flash]);
+  return <span ref={ref} className={`ui-anum ${className}`}>{format(value)}</span>;
 }
 
 /**
@@ -81,25 +92,9 @@ export function Stagger({ children, as: Tag = "div", className = "" }:
 /** The class behind Stagger, for a grid or list you already have: its direct children come in one by one. */
 export const STAGGER = "ui-stagger";
 
-/** Counts up from zero to `value` on first view. Use for one headline number, not for tables. */
+/** Counts up from zero to `value` the first time it shows. Use for one headline number, not for tables. */
 export function CountUp({ value, format, ms = 700 }: { value: number; format: (v: number) => string; ms?: number }) {
-  const [v, setV] = useState(0);
-  const started = useRef(false);
-  useEffect(() => {
-    if (started.current) { setV(value); return; }
-    started.current = true;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(value); return; }
-    const t0 = performance.now();
-    let raf = 0;
-    const step = (t: number) => {
-      const p = Math.min(1, (t - t0) / ms);
-      setV(value * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [value, ms]);
-  return <>{format(v)}</>;
+  return <AnimatedNumber value={value} format={format} ms={ms} from={0} />;
 }
 
 // ---------------------------------------------------------------------------------
@@ -107,7 +102,8 @@ export function CountUp({ value, format, ms = 700 }: { value: number; format: (v
 // quiet animated backdrop for hero areas. Same rules: short, eased, no flashing, and
 // nothing moves for people who ask for reduced motion.
 
-const reducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Movement off: reduced motion (fades still play; see motionPref.ts).
+const reducedMotion = () => typeof window !== "undefined" && motionLevel() === "reduced";
 
 /** Class for a card that rises a little and gains a shadow on hover. */
 export const LIFT = "ui-lift";
@@ -187,9 +183,10 @@ export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }:
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // Already on screen, or no observer, or reduced motion: show at once, nothing blinks.
+    // Already on screen, or no observer: show at once, nothing blinks. Reduced motion
+    // still reveals on scroll, as a fade with no rise (motion.css).
     const r = el.getBoundingClientRect();
-    if (reducedMotion() || !("IntersectionObserver" in window) || (r.top < window.innerHeight && r.bottom > 0)) {
+    if (!("IntersectionObserver" in window) || (r.top < window.innerHeight && r.bottom > 0)) {
       setState("here");
       return;
     }
@@ -209,6 +206,32 @@ export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }:
 export function PageTransition({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`ui-page ${className}`}>{children}</div>;
 }
+
+/**
+ * The route or view wrapper for an app: whenever `route` changes, the new view fades in
+ * and rises a few pixels (transform and opacity only, nothing moves once it has played).
+ * Reduced motion: a short fade.
+ */
+export function RouteTransition({ route, children, className = "", as: Tag = "div" }:
+  { route: string; children: ReactNode; className?: string; as?: "div" | "main" | "section" }) {
+  return <Tag key={route} className={`ui-route ${className}`}>{children}</Tag>;
+}
+
+/**
+ * A skeleton until `ready`, then the content fades in over the same space. Give the
+ * skeleton the content's size (the Skeleton* blocks do) and nothing moves.
+ */
+export function Loaded({ ready, skeleton, children, className = "" }:
+  { ready: boolean; skeleton: ReactNode; children: ReactNode; className?: string }) {
+  if (!ready) return <>{skeleton}</>;
+  return <div className={`ui-fade-in ${className}`}>{children}</div>;
+}
+
+/** Class for a canvas chart's box: it reveals left to right the first time it shows. */
+export const CHART_REVEAL = "ui-chart-reveal";
+
+/** Class for a table: its first dozen rows come in one after another. */
+export const STAGGER_ROWS = "ui-stagger-rows";
 
 /**
  * A quiet, slowly drifting wash of the brand blues behind a hero area. Put it first

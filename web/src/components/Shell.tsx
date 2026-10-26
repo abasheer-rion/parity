@@ -5,11 +5,14 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
+import { Collapse } from "../ui/disclosure";
 import { pageByHref } from "../lib/pages";
-import { simUrl, SPACE, SPACE_ROOT } from "../lib/space";
+import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/space";
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
+import { CopyLink } from "./CopyLink";
+import { IconButton } from "../ui";
 
-interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: boolean }
+interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
 // Plain names: say what the page does, not what we call it internally. Each item's
 // hover text comes from lib/pages.ts, the same words search and Start here use.
@@ -20,16 +23,13 @@ const GLOSSARY: NavItem = { href: "#/learn", label: "Glossary", icon: "cap", rou
 
 const PRODUCT: NavItem[] = [
   { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
-  {
-    href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy", "compare", "lab"],
-    children: [
-      { href: "#/strategies", label: "All strategies", routes: ["strategies", "strategy"] },
-      { href: "#/compare", label: "Compare", routes: ["compare"] },
-      { href: "#/lab", label: "Try settings", routes: ["lab"] },
-    ],
-  },
+  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"] },
+  { href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy"] },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
-  { href: "#/scenarios", label: "What if", icon: "pulse", routes: ["scenarios"] },
+  // Try settings, What if and Compare live in Parity Workbench, which opens in a new tab (DEC-0043).
+  { href: labUrl(), label: "Workbench", icon: "flask", routes: ["lab", "compare", "scenarios"], external: "Opens Parity Workbench in a new tab: Try settings, What if, Compare, Strategy search and Edge Lab" },
+  // Parity Trade is its own full-screen app and opens in a new tab (DEC-0040).
+  { href: tradeUrl(), label: "Trade", icon: "graph", routes: ["trade"], external: "Opens Parity Trade in a new tab" },
   {
     href: "#/markets", label: "Markets", icon: "pulse", routes: ["markets"],
     children: [
@@ -50,7 +50,8 @@ const PRODUCT: NavItem[] = [
       { href: "#/news/history", label: "Biggest days", routes: [] },
     ],
   },
-  { href: "#/academy", label: "Academy", icon: "play", routes: ["academy"] },
+  // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
+  { href: academyUrl(), label: "Academy", icon: "play", routes: ["academy"], external: "Opens Parity Academy in a new tab" },
   GLOSSARY,
   START,
   HOW,
@@ -71,11 +72,12 @@ const RESEARCH: NavItem[] = [
     ],
   },
   { href: "#/ledger", label: "Official record", icon: "ledger", routes: ["ledger"] },
-  { href: "#/search", label: "Strategy search", icon: "search", routes: ["search"] },
-  { href: "#/edges", label: "Edge Lab", icon: "flask", routes: ["edges"] },
-  // The Academy lives on the product side (DEC-0028); this opens it there.
-  { href: "/app/#/academy", label: "Academy", icon: "play", routes: [] },
+  // Strategy search and the Edge Lab live in Parity Workbench, which opens in a new tab (DEC-0043).
+  { href: labUrl("search"), label: "Workbench", icon: "flask", routes: ["search", "edges"], external: "Opens Parity Workbench in a new tab: Strategy search, Edge Lab, Try settings, What if and Compare" },
+  // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
+  { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
+  { href: "#/competitors", label: "Competitors", icon: "compare", routes: ["competitors"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
     children: [
@@ -85,11 +87,12 @@ const RESEARCH: NavItem[] = [
     ],
   },
   // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
-  { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: true },
+  { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: "Opens Parity Terminal in a new tab" },
   {
-    href: "#/data", label: "Data", icon: "database", routes: ["data", "sources"],
+    href: "#/data", label: "Data", icon: "database", routes: ["data", "sources", "latency"],
     children: [
       { href: "#/data", label: "Data health", routes: ["data"] },
+      { href: "#/latency", label: "Latency", routes: ["latency"] },
       { href: "#/sources", label: "Sources", routes: ["sources"] },
     ],
   },
@@ -145,6 +148,13 @@ export function Shell({
     window.addEventListener("keydown", on);
     return () => window.removeEventListener("keydown", on);
   }, []);
+  // A click anywhere outside the account menu closes it, like any menu.
+  useEffect(() => {
+    if (!menu) return;
+    const on = (e: PointerEvent) => { if (!(e.target as Element | null)?.closest?.(".account")) setMenu(false); };
+    document.addEventListener("pointerdown", on);
+    return () => document.removeEventListener("pointerdown", on);
+  }, [menu]);
   const openSearch = () => { setOpen(false); setMenu(false); window.dispatchEvent(new Event("parity:search")); };
   const research = SPACE === "research";
   const items = research ? RESEARCH : PRODUCT;
@@ -201,20 +211,18 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.external ? "Opens Parity Terminal in a new tab" : pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
                         {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
                       </a>
                       {n.children && (
-                        <div className={`side-children ${active ? "open" : ""}`}>
-                          <div>
-                            {n.children.map((c) => {
-                              const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
-                              return <a key={c.href} href={c.href} title={pageByHref[c.href]?.what} className={on ? "on" : ""} tabIndex={active ? 0 : -1}>{c.label}</a>;
-                            })}
-                          </div>
-                        </div>
+                        <Collapse open={active} className="side-children">
+                          {n.children.map((c) => {
+                            const on = c.routes.length ? c.routes.includes(route) : hash === c.href || (c.href === "#/docs" && hash.startsWith("#/doc/"));
+                            return <a key={c.href} href={c.href} title={pageByHref[c.href]?.what} className={on ? "on" : ""}>{c.label}</a>;
+                          })}
+                        </Collapse>
                       )}
                     </div>
                   );
@@ -278,10 +286,8 @@ export function Title({ children, label, actions }: { children: ReactNode; label
   return (
     <div className="title-row">
       <h1>{children}</h1>
-      <button className={`round-btn ${marked ? "on" : ""}`} onClick={() => toggleBookmark(href, text)}
-        aria-label={marked ? "Remove from bookmarks" : "Add to bookmarks"} title={marked ? "Remove from bookmarks" : "Add to bookmarks"}>
-        <Icon name="bookmark" size={13} />
-      </button>
+      <IconButton icon="bookmark" active={marked} onClick={() => toggleBookmark(href, text)} label={marked ? "Remove from bookmarks" : "Add to bookmarks"} />
+      <CopyLink />
       {actions && <div className="title-actions">{actions}</div>}
     </div>
   );

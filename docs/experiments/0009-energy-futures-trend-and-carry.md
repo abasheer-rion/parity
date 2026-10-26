@@ -53,5 +53,5 @@ Nothing yet.
 - [HYP-0012: Energy futures trend pays on tradable prices](../hypotheses/0012-energy-futures-trend-pays-on-tradable-prices.md)
 - [HYP-0013: Energy futures carry pays](../hypotheses/0013-energy-futures-carry-pays.md)
 - [EXP-0006: Rerun of all sixteen strategies with corrected scoring](0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

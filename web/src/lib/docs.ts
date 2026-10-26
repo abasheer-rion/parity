@@ -51,6 +51,7 @@ export const TYPE_LABELS: Record<string, string> = {
   dataset: "Datasets",
   guide: "Guides",
   reference: "Reference",
+  competitor: "Competitors",
   log: "Logs",
   register: "Registers",
 };
@@ -67,6 +68,7 @@ export const TYPE_HELP: Record<string, string> = {
   dataset: "One data source: what is in it, how it is cleaned, its limits.",
   guide: "How to do something step by step.",
   reference: "Facts to look up: methods, sources, definitions.",
+  competitor: "One trading product we study: what users praise and complain about, and what we take from it.",
   log: "A dated diary of what was asked and what happened.",
   register: "A running list, such as open problems or results.",
 };
@@ -92,11 +94,31 @@ function toPlain(html: string): string {
     .replace(/&[a-z#0-9]+;/g, " ").replace(/\s+/g, " ").trim();
 }
 
-export function useDocs(): DocsData | null {
+/** One doc without its text: what a list of titles needs. */
+export type DocMeta = Pick<DocEntry, "id" | "title" | "type" | "status" | "created" | "updated" | "tags">;
+
+let index: DocMeta[] | null = null;
+let indexPending: Promise<DocMeta[]> | null = null;
+export function loadDocIndex(): Promise<DocMeta[]> {
+  if (index) return Promise.resolve(index);
+  if (cache) return Promise.resolve(cache.docs);
+  indexPending ??= import("virtual:parity-docs-index").then((m) => (index = m.default as DocMeta[]));
+  return indexPending;
+}
+
+/** The list of docs (titles, types, dates) without loading their text. */
+export function useDocIndex(): { docs: DocMeta[] } | null {
+  const [data, setData] = useState<DocMeta[] | null>(index ?? cache?.docs ?? null);
+  useEffect(() => { if (!data) loadDocIndex().then(setData); }, [data]);
+  return data ? { docs: data } : null;
+}
+
+export function useDocs(enabled = true): DocsData | null {
   const [data, setData] = useState<DocsData | null>(cache);
   useEffect(() => {
-    if (!data) loadDocs().then(setData);
-  }, [data]);
+    // The docs are the largest file Parity has (about 0.9 MB), so they load only when shown.
+    if (!data && enabled) loadDocs().then(setData);
+  }, [data, enabled]);
   return data;
 }
 

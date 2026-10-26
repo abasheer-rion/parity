@@ -1,33 +1,22 @@
-// Entry for the public sign-in pages: /login/, /signup/, /reset/, /verify/.
+// Entry for the stand-alone sign-in pages: /login/, /signup/, /reset/, /verify/. They show
+// the same panel as the front page (DEC-0044) over the same backdrop, which the HTML
+// paints before any script runs (src/site/kit.css).
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { applyTheme } from "../lib/prefs";
-import { Toaster } from "../ui";
-import "../ui/tokens.css";
-import "../styles.css";
-import "../ui/ui.css";
 import "../legal/notice";
-import "../a11y.css";
-import { Reset } from "./pages/Reset";
-import { SignIn } from "./pages/SignIn";
-import { SignUp } from "./pages/SignUp";
-import { Verify } from "./pages/Verify";
-import { useSession } from "./session";
+import "../site/viewTransitions";
+import { AuthFlow } from "./AuthFlow";
+import { carryFromQuery, viewFromPath } from "./views";
+import { startRum } from "../lib/rum";
+import { isDesktop } from "../desktop/bridge";
+import "../lib/a11y/scrollRegions";
 
-applyTheme();
-
-function Page() {
-  const session = useSession();
-  const path = window.location.pathname.replace(/\/?$/, "/");
-  if (path === "/signup/") return <SignUp />;
-  if (path === "/reset/") return <Reset session={session} />;
-  if (path === "/verify/") return <Verify />;
-  return <SignIn />;
-}
+// Coming back with the back button after the logo faded the page out shows it again.
+window.addEventListener("pageshow", () => { document.body.classList.remove("leaving"); document.documentElement.classList.remove("pa-leaving"); });
+startRum("auth", { desktop: isDesktop() });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Page />
-    <Toaster />
+    <AuthFlow host="page" initial={viewFromPath(window.location.pathname)} initialCarry={carryFromQuery(window.location.search)} />
   </StrictMode>,
 );

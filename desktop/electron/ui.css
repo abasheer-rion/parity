@@ -1,0 +1,19 @@
+/* The app's own pages (DEC-0049): the same tokens as the site (tokens.css, generated from
+   web/src/ui/tokens.css, DEC-0058), so the title bar, menu and settings match every app.
+   Each page links tokens.css before this file. The short names below point at tokens. */
+:root {
+  color-scheme: dark;
+  --bg: var(--color-canvas); --bar: var(--color-bar); --panel: var(--color-surface); --panel-2: var(--color-surface-raised);
+  --line: var(--color-border); --line-2: var(--color-fill-strong);
+  --text: var(--color-text); --text-2: var(--color-text-body); --muted: var(--color-text-faint);
+  --accent: var(--color-accent-text); --accent-soft: var(--color-accent-soft); --bad: var(--color-negative);
+  --font: var(--font-text);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font: 500 var(--type-sm)/1.4 var(--font); color: var(--text-2); -webkit-font-smoothing: antialiased; }
+svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+button { font: inherit; color: inherit; }
+kbd { font: 500 var(--type-2xs)/1 var(--font); color: var(--muted); padding: 3px 5px; border: 1px solid var(--line-2); border-radius: 5px; white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

@@ -28,8 +28,8 @@ export function StocksView({ data, win, setWin }: { data: WorldData; win: string
         <WindowSelect value={win} onChange={setWin} />
       </>}
       honest={group === "industries"
-        ? <>History replayed, not a forecast. Value-weighted US industry indexes with dividends, from Kenneth French's data library, which is updated about two months late, so the race ends earlier than the currency tabs.</>
-        : <>History replayed, not a forecast. Each factor is a long-short portfolio that costs nothing to set up on paper, before trading costs and borrowing fees, from Kenneth French's data library (about two months late). Value is growth of 100 from the start of the window.</>}
+        ? <>Value-weighted US industry indexes with dividends, from Kenneth French's data library, which is updated about two months late, so the race ends earlier than the currency tabs.</>
+        : <>Each factor is a long-short portfolio that costs nothing to set up on paper, before trading costs and borrowing fees, from Kenneth French's data library (about two months late). Value is growth of 100 from the start of the window.</>}
     />
   );
 }

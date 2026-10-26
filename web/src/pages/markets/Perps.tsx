@@ -93,7 +93,7 @@ export function Perps() {
       </section>
 
       <section style={{ marginTop: 16 }}>
-        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: 16 }}>Every perp on {doc.venue}</h2><span className="muted small">largest open interest first, {day(doc.fetched_at)}</span></div>
+        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: "var(--type-xl)" }}>Every perp on {doc.venue}</h2><span className="muted small">largest open interest first, {day(doc.fetched_at)}</span></div>
         <p className="muted small">"Wiped out by" is the price move that liquidates a position opened at the maximum leverage the exchange allows.</p>
         <div className="mk-table-scroll">
           <DataTable rows={perps} columns={cols} rowKey={(r) => r.coin} initialSort={{ key: "oi", dir: "desc" }} dense caption={`Perpetual futures on ${doc.venue}`} />

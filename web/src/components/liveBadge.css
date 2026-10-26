@@ -1,0 +1,20 @@
+/* The latency badge (DEC-0052): tiny, one line, fixed height so ticking never moves layout. */
+.lvb {
+  display: inline-flex; align-items: center; gap: 5px; height: 18px; padding: 0 6px; flex: none;
+  border: 1px solid var(--border); border-radius: 4px; background: transparent;
+  color: var(--text-2); font: 500 var(--type-3xs)/1 var(--font-text, system-ui); letter-spacing: 0.01em; white-space: nowrap; cursor: pointer;
+}
+.lvb:hover, .lvb:focus-visible { color: var(--text); }
+.lvb .tabular { font-variant-numeric: var(--num-variant); min-width: 4.2em; text-align: right; }
+.lvb .lvb-age { min-width: 0; }
+.lvb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); flex: none; }
+.lvb-late .lvb-dot { background: var(--color-warning); }
+.lvb-late { border-color: color-mix(in srgb, var(--color-warning) 45%, transparent); }
+.lvb-stale .lvb-dot { background: var(--bad); }
+.lvb-stale { border-color: color-mix(in srgb, var(--bad) 45%, transparent); }
+.lvb-src { color: var(--text-2); opacity: 0.8; }
+.lvb-card { margin: 0; display: grid; gap: 4px; font-size: var(--type-xs); }
+.lvb-card > div { display: flex; justify-content: space-between; gap: 12px; }
+.lvb-card dt { color: var(--text-2); }
+.lvb-card dd { margin: 0; text-align: right; }
+@media (prefers-reduced-motion: no-preference) { .lvb-dot { transition: background-color var(--dur-2); } }

@@ -5,6 +5,9 @@
 // SettingsHidden.tsx.
 import { SETTINGS_SECTIONS } from "../components/Shell";
 import { AccountSettings } from "../auth";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
+import { OnboardingSettings } from "../onboarding/Settings";
+import { MotionControl, MotionHelp, SettingsRow } from "../ui";
 
 export function Settings({ section = "account" }: { section?: string }) {
   const known = SETTINGS_SECTIONS.flatMap((g) => g.items);
@@ -14,7 +17,13 @@ export function Settings({ section = "account" }: { section?: string }) {
   return (
     <div className="settings">
       <h1 className="settings-title">{title}</h1>
-      {current === "account" && <AccountSettings />}
+      {current === "account" && <><AccountSettings /><OnboardingSettings /><FirstRunTour areas={["account"]} /></>}
+      {current === "account" && (
+        <section className="settings-motion" aria-labelledby="set-motion">
+          <h2 id="set-motion" className="settings-sub">Motion</h2>
+          <SettingsRow label="Motion" help={<MotionHelp />}><MotionControl /></SettingsRow>
+        </section>
+      )}
     </div>
   );
 }

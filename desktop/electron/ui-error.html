@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'" />
+    <title>Could not open this page · Parity</title>
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      html, body { height: 100%; background: var(--bg); }
+      body { display: grid; place-items: center; }
+      .box { max-width: 420px; padding: 28px; text-align: center; }
+      h1 { margin: 0 0 8px; font-size: var(--type-2xl); font-weight: 600; color: var(--text); }
+      p { margin: 0 0 20px; color: var(--muted); line-height: 1.5; }
+      a { display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 8px; background: var(--color-text); color: var(--color-canvas); font-weight: 600; text-decoration: none; }
+      a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    </style>
+  </head>
+  <body>
+    <main class="box">
+      <h1>Could not open this page</h1>
+      <p>Parity could not reach the website and has no saved copy of this page. Check the connection, then try again.</p>
+      <a href="#retry" id="retry">Retry</a>
+    </main>
+  </body>
+</html>

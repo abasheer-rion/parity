@@ -1,90 +1,431 @@
-/* Parity UI tokens. Colours, type, space, radius and motion follow Mercury's design
-   system exactly (mercury-tokens.css, read from demo.mercury.com on 2026-10-21),
-   with Mercury's accent swapped for the Parity blue. The names below are the short
-   names the site uses; each points at a Mercury token, so light and dark both work.
+/* Parity design tokens: the one file where colours, type, space, radius, shadows, glass,
+   layers, motion and breakpoints are set (DEC-0058, REF-0009). Every app (the front
+   page, sign-in, product, research, Terminal, Trade, Academy, Workbench, Verify and
+   the desktop shell) reads these names, so changing a value here changes it everywhere.
+   Nothing outside this file may write a raw colour, a font size in px, a duration or a
+   curve: `npm run lint:styles` fails if it does.
 
-   Colour rules (checked with the dataviz palette validator, see REF-0009):
-   - series-1..8 are categorical and always assigned in this order, by name.
-   - good/bad mark gains and losses. They are NOT colour-blind safe as a pair,
-     so a gain or loss always carries a sign (+ or U+2212) or an arrow as well.
-   - accent is for the one primary action and the selected state, never for data. */
-@import "./mercury-tokens.css";
+   The look is dark glass: near-black canvas, frosted panels with hairline borders, a red
+   glow behind the glass, white for the main action and red for the active thing.
+
+   Layers, from raw to meaning:
+     1. palette  --palette-*   raw values. Only this file uses them.
+     2. semantic --color-*, --type-*, --space-*, --radius-*, --shadow-*, --glass-*,
+                 --z-*, --dur-*, --ease-*, --bp-*. Components use these.
+     3. older names (--surface, --text, --ds-*) kept as pointers to layer 2, so existing
+        rules keep working. New code uses layer 2.
+   web/src/ui/tokens.ts exports the same names to TypeScript, and scripts/tokens.mjs
+   copies the raw values to tokens.gen.ts and to the desktop shell. */
 
 /* Web fonts load after the first paint. These fallbacks are stretched to Inter's and
    Roboto Mono's measurements, so text keeps its width and line breaks when the real
    font arrives and nothing on the page moves (no layout shift from the font swap). */
-@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"); ascent-override: 90.44%; descent-override: 22.52%; line-gap-override: 0%; size-adjust: 107.12%; }
+@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"); ascent-override: 90.6%; descent-override: 22.6%; line-gap-override: 0%; size-adjust: 106.85%; }
 @font-face { font-family: "Roboto Mono Fallback"; src: local("Courier New"), local("Menlo"); ascent-override: 87.5%; descent-override: 22.9%; line-gap-override: 0%; size-adjust: 99.9%; }
 
-:root {
-  --canvas: var(--ds-background-default);
-  --side-bg: var(--ds-background-sidebar);
-  --bg: var(--ds-background-canvas);
-  --surface: var(--ds-background-default);
-  --surface-solid: var(--ds-background-surface-floating);
-  --hover: var(--ds-background-default-hovered);
-  --border: var(--ds-border-default);
-  --border-2: var(--ds-border-emphasized);
-  --grid: var(--ds-border-default);
-  --axis: var(--ds-neutral-base-300);
-  --dot: var(--ds-neutral-base-300);
-  --text: var(--ds-text-emphasized);
-  --text-body: var(--ds-text-default);
-  --text-2: var(--ds-text-secondary);
-  --muted: var(--ds-text-tertiary);
-  --link: var(--ds-text-link);
-  --accent: var(--ds-background-primary);
-  --accent-hover: var(--ds-background-primary-hovered);
-  --accent-soft: var(--ds-background-emphasized);
-  --good: var(--ds-text-money-in);
-  --bad: var(--ds-text-money-out);
-  --benchmark: var(--ds-neutral-base-400);
-  --radius: var(--ds-border-radius-large);
+:root, :root[data-theme="dark"] {
+  color-scheme: dark;
 
-  /* Validated chart palette, light steps */
-  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
-  --series-5: #e87ba4; --series-6: #008300; --series-7: #4a3aa7; --series-8: #e34948;
+  /* ---------------------------------------------------------------- 1. palette */
+  --palette-black: #000;
+  --palette-white: #fff;
+  /* Inks: the near-blacks, from the page up. */
+  --palette-ink-0: #050608;
+  --palette-ink-1: #08090d;
+  --palette-ink-2: #0d0e15;
+  --palette-ink-3: #11131b;
+  --palette-ink-4: #161925;
+  --palette-ink-5: #1e2130;
+  /* Solid hairlines for the dense Terminal grid, where glass would blur the numbers. */
+  --palette-line-1: #22252c;
+  --palette-line-2: #353a45;
+  /* Greys for text, light to faint. Contrast on ink-0: 18.6, 13.4, 8.1, 6.0, 4.0. */
+  --palette-grey-100: #f4f5f8;
+  --palette-grey-200: #d4d6de;
+  --palette-grey-300: #a4a8b6;
+  --palette-grey-400: #8b8f9d;
+  --palette-grey-500: #6c7186;
+  /* Red: the brand. 500 fills, 300 is the text-safe step, 700 and 900 glow. */
+  --palette-red-300: #ff8a93;
+  --palette-red-500: #e0303f;
+  --palette-red-600: #c42533;
+  --palette-red-700: #b21826;
+  --palette-red-800: #a01e28;
+  --palette-red-900: #780e1c;
+  /* Signal colours */
+  --palette-green-400: #36d07c;
+  --palette-coral-400: #ff6b62;
+  --palette-amber-400: #ffb000;
+  --palette-amber-300: #ffc233;
+  --palette-amber-600: #a87400;
+  --palette-cyan-400: #44d3e6;
+  --palette-violet-400: #b796ff;
+  --palette-blue-300: #8fb0ff;
+  --palette-blue-500: #2f6bff;
+  --palette-paper: #e8e6df;
+  /* Terminal panels and text, tuned for black. */
+  --palette-term-0: #08090b;
+  --palette-term-1: #101216;
+  --palette-term-2: #121418;
+  --palette-term-3: #2a2d34;
+  --palette-term-dim: #a7a9ad;
+  --palette-term-faint: #80838a;
+  --palette-term-down: #ff5b52;
+  --palette-term-pink: #ff7ab8;
+  --palette-term-lime: #9be15d;
+  --palette-term-orange: #ff8a3d;
+  --palette-term-blue: #7aa7ff;
 
-  /* Mercury's type faces are licensed; Inter is the closest free match. */
+  /* ---------------------------------------------------------------- 2. colour */
+  --color-canvas: var(--palette-ink-0);
+  --color-bar: var(--palette-ink-1);
+  --color-surface: var(--palette-ink-2);
+  --color-surface-raised: var(--palette-ink-3);
+  --color-surface-overlay: var(--palette-ink-4);
+  --color-surface-inverted: var(--palette-ink-5);
+  /* Glass: a see-through panel over the glow. Pair with --glass-blur. */
+  --color-glass: color-mix(in srgb, var(--palette-ink-2) 58%, transparent);
+  --color-glass-strong: color-mix(in srgb, var(--palette-ink-2) 80%, transparent);
+  --color-input: color-mix(in srgb, var(--palette-ink-0) 65%, transparent);
+
+  --color-border: color-mix(in srgb, var(--palette-white) 8%, transparent);
+  --color-border-strong: color-mix(in srgb, var(--palette-white) 14%, transparent);
+  --color-border-max: color-mix(in srgb, var(--palette-white) 22%, transparent);
+  /* The edge of a field, checkbox, radio, switch or slider track: 3:1 on every surface,
+     including glass over the glow, so a control can be found without its label (WCAG 1.4.11). */
+  --color-border-control: var(--palette-grey-500);
+  --color-hover: color-mix(in srgb, var(--palette-white) 5%, transparent);
+  --color-pressed: color-mix(in srgb, var(--palette-white) 9%, transparent);
+  --color-fill: color-mix(in srgb, var(--palette-white) 7%, transparent);
+  --color-fill-strong: color-mix(in srgb, var(--palette-white) 12%, transparent);
+
+  --color-text: var(--palette-grey-100);
+  --color-text-body: var(--palette-grey-200);
+  --color-text-muted: var(--palette-grey-300);
+  --color-text-faint: var(--palette-grey-400);
+  --color-text-disabled: var(--palette-grey-500);
+  --color-link: var(--palette-grey-100);
+
+  /* The main action is white; the active thing (tab, row, nav item) is red. */
+  --color-primary: var(--palette-grey-100);
+  --color-primary-hover: var(--palette-white);
+  --color-on-primary: var(--palette-ink-0);
+  --color-accent: var(--palette-red-500);
+  --color-accent-hover: var(--palette-red-600);
+  --color-accent-text: var(--palette-red-300);
+  --color-accent-soft: color-mix(in srgb, var(--palette-red-500) 16%, transparent);
+  --color-on-accent: var(--palette-white);
+  --color-selected: color-mix(in srgb, var(--palette-red-500) 12%, transparent);
+  --color-focus: var(--palette-grey-100);
+
+  /* Gains and losses always carry a sign or an arrow too (REF-0009 rule 3). */
+  --color-positive: var(--palette-green-400);
+  --color-positive-soft: color-mix(in srgb, var(--palette-green-400) 12%, transparent);
+  --color-negative: var(--palette-coral-400);
+  --color-negative-soft: color-mix(in srgb, var(--palette-coral-400) 12%, transparent);
+  --color-warning: var(--palette-amber-400);
+  --color-warning-soft: color-mix(in srgb, var(--palette-amber-400) 12%, transparent);
+  --color-info: var(--palette-blue-300);
+  --color-info-soft: color-mix(in srgb, var(--palette-blue-300) 12%, transparent);
+
+  --color-scrim: color-mix(in srgb, var(--palette-black) 60%, transparent);
+  --color-glow: var(--palette-red-700);
+  --color-glow-deep: var(--palette-red-900);
+  --color-glow-soft: var(--palette-red-800);
+
+  /* Chart series: categorical, always assigned in this order, by name (REF-0009). */
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+  --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+  --color-benchmark: var(--palette-grey-400);
+  --color-grid: var(--color-border);
+  --color-axis: color-mix(in srgb, var(--palette-white) 16%, transparent);
+
+  /* ---------------------------------------------------------------- type */
   --font-text: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Roboto Mono", "Roboto Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-terminal: "IBM Plex Mono", "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-serif: "Cinzel", "Trajan Pro", "Times New Roman", serif;
 
-  /* Mercury's type scale (size / line height / weight) */
-  --fs-xs: 12px; --fs-sm: 13px; --fs-14: 14px; --fs-md: 15px; --fs-lg: 17px; --fs-xl: 19px; --fs-2xl: 28px; --fs-3xl: 34px;
-  --fw-light: 360; --fw-regular: 400; --fw-display: 380; --fw-medium: 480; --fw-bold: 530;
+  /* Sizes, smallest to largest. Use the name, never a px value. */
+  --type-3xs: 10px;
+  --type-2xs: 11px;
+  --type-xs: 12px;
+  --type-sm: 13px;
+  --type-md: 14px;
+  --type-lg: 15px;
+  --type-xl: 16px;
+  --type-2xl: 18px;
+  --type-3xl: 20px;
+  --type-4xl: 22px;
+  --type-5xl: 24px;
+  --type-6xl: 28px;
+  --type-7xl: 34px;
+  --type-8xl: 44px;
+  /* Fluid display sizes for the public pages' headlines. */
+  --type-display-sm: clamp(28px, 4vw, 40px);
+  --type-display: clamp(34px, 6vw, 68px);
 
-  /* Space, radius */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
-  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 12px; --radius-pill: 9999px;
+  --weight-light: 360;
+  --weight-regular: 400;
+  --weight-display: 380;
+  --weight-medium: 500;
+  --weight-semibold: 530;
+  --weight-bold: 600;
 
-  /* Elevation: Mercury's own shadows */
-  --shadow-1: 0 1px 2px var(--ds-neutral-magic-600-alpha-3);
-  --shadow-2: 0 0 2px #afb2ce8f, 0 1px 4px #0404341a;
-  --shadow-3: 0 1px 4px #b7bbdb24, 0 0 1px #afb2cee6, 0 8px 12px #0e0e2d14, 0 14px 20px #04043405;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
 
-  /* Motion: Mercury's durations and curves */
-  --dur-1: 100ms; --dur-2: 160ms; --dur-3: 250ms; --dur-4: 350ms;
+  /* Numbers: tabular figures so columns line up and values do not change width. Every
+     number on the site uses --num-variant (font-variant-numeric); the lint blocks writing it out. */
+  --num-variant: tabular-nums lining-nums;
+  --num-features: "tnum" 1, "lnum" 1;
+
+  /* ---------------------------------------------------------------- space */
+  --space-0: 0; --space-px: 1px; --space-half: 2px;
+  --space-1: 4px; --space-1h: 6px; --space-2: 8px; --space-2h: 10px; --space-3: 12px; --space-3h: 14px;
+  --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-7: 28px; --space-8: 32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+  /* ---------------------------------------------------------------- radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 9999px;
+
+  /* ---------------------------------------------------------------- shadow, glass, glow */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / .4);
+  --shadow-2: 0 0 0 1px color-mix(in srgb, var(--palette-white) 6%, transparent), 0 6px 20px rgb(0 0 0 / .45);
+  --shadow-3: 0 0 0 1px color-mix(in srgb, var(--palette-white) 8%, transparent), 0 16px 40px rgb(0 0 0 / .62), 0 2px 8px rgb(0 0 0 / .4);
+  --shadow-ring: inset 0 0 0 1px var(--color-border);
+  --shadow-ring-strong: inset 0 0 0 1px var(--color-border-strong);
+  --shadow-focus: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-focus);
+  --glass-blur: blur(16px) saturate(1.3);
+  --glass-blur-strong: blur(24px) saturate(1.4);
+  --card-sheen: linear-gradient(180deg, rgb(255 255 255 / .02), rgb(255 255 255 / 0) 120px);
+  /* The red light behind the glass. */
+  --glow-accent: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow) 55%, transparent), transparent);
+  --glow-deep: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow-deep) 50%, transparent), transparent);
+  --glow-faint: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow) 20%, transparent), transparent);
+
+  /* ---------------------------------------------------------------- layers */
+  /* Page-level layers, lowest first. Small numbers (-9 to 9) may still order the parts
+     inside one component; anything that stacks against the page uses these. */
+  --z-backdrop: -10;
+  --z-below: -1;
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 10;
+  --z-header: 20;
+  --z-nav: 30;
+  --z-nav-scrim: 35;
+  --z-panel: 40;
+  --z-overlay: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+  --z-assistant: 900;
+  --z-fullscreen: 1000;
+  --z-top: 2147483000;
+
+  /* ---------------------------------------------------------------- motion */
+  /* Durations: 1 for a colour change, 2 for hover and press, 3 for opening, 4 for a
+     panel or page arriving, 5 and 6 for lines drawing in. Loops have their own names. */
+  --dur-instant: 1ms;
+  --dur-1: 100ms;
+  --dur-2: 160ms;
+  --dur-3: 250ms;
+  --dur-4: 350ms;
+  --dur-5: 600ms;
+  --dur-6: 900ms;
+  /* A number counting to its new value (REF-0023). */
+  --dur-count: 700ms;
+  --dur-spin: 800ms;
+  --dur-pulse: 1600ms;
+  --dur-pulse-slow: 2400ms;
+  --dur-drift-1: 46s;
+  --dur-drift-2: 52s;
+  --dur-drift-3: 58s;
+  --dur-marquee: 60s;
+  /* The front page's small demos replay on these loops. */
+  --dur-loop: 7s;
+  --dur-loop-slow: 9s;
+  /* Holds a browser's autofill colour off for good (a known trick, not an animation). */
+  --dur-hold: 9999s;
   --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
   --ease-in-out: cubic-bezier(.2, .4, .2, 1);
   --ease-spring: cubic-bezier(.2, .9, .25, 1);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
   --ease-fade: cubic-bezier(.35, 0, .5, 1);
+  --ease-glide: cubic-bezier(.2, .8, .2, 1);
+  /* A fast start and a long settle, for panels and fields arriving (sign-in). */
+  --ease-emphasized: cubic-bezier(.16, 1, .3, 1);
+  /* Lists come in one item after another, --stagger-step apart, the last by --stagger-max. */
+  --stagger-step: 40ms;
+  --stagger-max: 320ms;
+  /* How far things travel: a small rise, a page rise, a reveal on scroll, a hover lift. */
+  --rise-sm: 4px;
+  --rise: 8px;
+  --rise-lg: 16px;
+  --lift: 2px;
+  --press: .985;
+  /* 1 = full motion. 0 = reduced: every distance and scale is multiplied by it, so
+     things still fade but nothing moves. Set from the device or the Motion setting. */
+  --m: 1;
 
+  /* ---------------------------------------------------------------- breakpoints */
+  /* CSS cannot read these inside @media, so media queries use the same numbers and
+     tokens.ts exports them for scripts. phone < 600 <= tablet < 861 <= laptop < 1081
+     <= desktop < 1440 <= wide. */
+  --bp-phone: 600px;
+  --bp-tablet: 860px;
+  --bp-laptop: 1080px;
+  --bp-desktop: 1440px;
+
+  /* ---------------------------------------------------------------- layout */
   --side-w: 220px;
   --topbar-h: 48px;
   --content-w: 968px;
-  color-scheme: light;
+  --control-h-sm: 28px;
+  --control-h-md: 34px;
+  --control-h-lg: 40px;
+
+  /* ---------------------------------------------------------------- 3. older names */
+  --canvas: var(--color-canvas);
+  --side-bg: var(--color-bar);
+  --bg: var(--color-canvas);
+  --surface: var(--color-surface);
+  --surface-solid: var(--color-surface);
+  --hover: var(--color-hover);
+  --border: var(--color-border);
+  --border-2: var(--color-border-strong);
+  --grid: var(--color-grid);
+  --axis: var(--color-axis);
+  --dot: var(--color-border-strong);
+  --text: var(--color-text);
+  --text-body: var(--color-text-body);
+  --text-2: var(--color-text-muted);
+  --muted: var(--color-text-faint);
+  --link: var(--color-link);
+  --accent: var(--color-accent);
+  --accent-hover: var(--color-accent-hover);
+  --accent-soft: var(--color-accent-soft);
+  --good: var(--color-positive);
+  --bad: var(--color-negative);
+  --benchmark: var(--color-benchmark);
+  --radius: var(--radius-lg);
+  --fs-xs: var(--type-xs); --fs-sm: var(--type-sm); --fs-14: var(--type-md); --fs-md: var(--type-lg);
+  --fs-lg: var(--type-xl); --fs-xl: var(--type-2xl); --fs-2xl: var(--type-6xl); --fs-3xl: var(--type-7xl);
+  --fw-light: var(--weight-light); --fw-regular: var(--weight-regular); --fw-display: var(--weight-display);
+  --fw-medium: var(--weight-medium); --fw-bold: var(--weight-semibold);
+
+  --ds-background-canvas: var(--color-canvas);
+  --ds-background-sidebar: var(--color-bar);
+  --ds-background-default: var(--color-surface);
+  --ds-background-default-hovered: var(--color-hover);
+  --ds-background-surface-raised: var(--color-surface);
+  --ds-background-surface-dialog: var(--color-surface-raised);
+  --ds-background-surface-floating: var(--color-surface-overlay);
+  --ds-background-surface-frosted: var(--color-fill);
+  --ds-background-secondary: var(--color-fill);
+  --ds-background-secondary-hovered: var(--color-fill-strong);
+  --ds-background-secondary-high-contrast: var(--color-border-strong);
+  --ds-background-input: var(--color-input);
+  --ds-background-input-hovered: var(--color-hover);
+  --ds-background-input-focused: var(--color-hover);
+  --ds-background-input-checked: var(--color-accent);
+  --ds-background-emphasized: var(--color-accent-soft);
+  --ds-background-emphasized-hovered: color-mix(in srgb, var(--color-accent) 24%, transparent);
+  --ds-background-primary: var(--color-primary);
+  --ds-background-primary-hovered: var(--color-primary-hover);
+  --ds-background-inverted: var(--color-surface-inverted);
+  --ds-background-modal-scrim: var(--color-scrim);
+  --ds-background-destructive: var(--color-negative-soft);
+  --ds-background-destructive-hovered: color-mix(in srgb, var(--color-negative) 20%, transparent);
+  --ds-background-highlight: var(--color-info-soft);
+  --ds-border-default: var(--color-border);
+  --ds-border-emphasized: var(--color-border-strong);
+  --ds-border-input: var(--color-border-control);
+  --ds-border-input-emphasized: var(--color-text-faint);
+  --ds-border-input-focused: var(--color-focus);
+  --ds-border-input-focused-underline: var(--color-focus);
+  --ds-border-focus-ring: var(--color-focus);
+  --ds-text-title: var(--color-text);
+  --ds-text-emphasized: var(--color-text);
+  --ds-text-default: var(--color-text-body);
+  --ds-text-secondary: var(--color-text-muted);
+  --ds-text-tertiary: var(--color-text-faint);
+  --ds-text-placeholder: var(--color-text-faint);
+  /* Older code used the link colour for emphasis (icons, borders, highlights). */
+  --ds-text-link: var(--color-accent-text);
+  --ds-text-link-hovered: var(--palette-white);
+  --ds-text-focused: var(--color-focus);
+  --ds-text-on-primary: var(--color-on-primary);
+  --ds-text-on-inverted: var(--color-text);
+  --ds-text-destructive: var(--color-negative);
+  --ds-text-money-in: var(--color-positive);
+  --ds-text-money-out: var(--color-negative);
+  --ds-icon-default: var(--color-text-body);
+  --ds-icon-emphasized: var(--color-text);
+  --ds-icon-secondary: var(--color-text-faint);
+  --ds-icon-tertiary: var(--color-text-disabled);
+  --ds-icon-primary: var(--color-accent-text);
+  --ds-icon-on-primary: var(--color-on-primary);
+  --ds-icon-destructive: var(--color-negative);
+  --ds-icon-warning: var(--color-warning);
+  --ds-opacity-disabled: .4;
+  --ds-border-radius-large: var(--radius-lg);
+  --ds-border-radius-medium: var(--radius-md);
+  --ds-border-radius-small: var(--radius-sm);
+  --ds-border-radius-full: var(--radius-pill);
+
   font-family: var(--font-text);
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --surface: var(--ds-background-surface-raised);
-  --axis: var(--ds-neutral-base-600);
-  --dot: var(--ds-neutral-base-700);
-  --shadow-2: 0 0 0 1px #b4b7c81a, 0 2px 6px #00000059;
-  --shadow-3: 0 0 0 1px #b4b7c81f, 0 8px 24px #00000080, 0 2px 6px #00000059;
-  /* Validated chart palette, dark steps */
-  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
-  --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+/* Reduced motion (REF-0023): the device asks for it (unless the person chose Full), or
+   the person chose Reduced. Fades and crossfades stay; movement goes. */
+@media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) { --m: 0; } }
+:root[data-motion="reduced"] { --m: 0; }
+
+/* ---------------------------------------------------------------- app themes */
+/* Parity Terminal (DEC-0023) keeps its market-terminal colours: amber for the main
+   accent, cyan for the second, solid hairlines and square corners. It changes only
+   tokens, so every component it reuses follows. Contrast on its panels: text 15:1,
+   dim 7.8:1, faint 4.9:1, amber 10:1. */
+.ptm {
+  --color-canvas: var(--palette-black);
+  --color-bar: var(--palette-black);
+  --color-surface: var(--palette-term-0);
+  --color-surface-raised: var(--palette-term-1);
+  --color-surface-overlay: var(--palette-term-2);
+  --color-glass: var(--color-surface);
+  --color-glass-strong: var(--color-surface);
+  --color-border: var(--palette-line-1);
+  --color-border-strong: var(--palette-line-2);
+  --color-hover: color-mix(in srgb, var(--palette-white) 5%, transparent);
+  --color-text: var(--palette-paper);
+  --color-text-body: var(--palette-paper);
+  --color-text-muted: var(--palette-term-dim);
+  --color-text-faint: var(--palette-term-faint);
+  --color-accent: var(--palette-amber-400);
+  --color-accent-hover: var(--palette-amber-300);
+  --color-accent-text: var(--palette-amber-400);
+  --color-accent-soft: color-mix(in srgb, var(--palette-amber-400) 12%, transparent);
+  --color-selected: color-mix(in srgb, var(--palette-amber-400) 9%, transparent);
+  --color-link: var(--palette-cyan-400);
+  --color-focus: var(--palette-amber-400);
+  --color-primary: var(--palette-amber-400);
+  --color-primary-hover: var(--palette-amber-300);
+  --color-on-primary: var(--palette-black);
+  --color-negative: var(--palette-term-down);
+  --color-axis: var(--palette-line-2);
+  --color-benchmark: var(--palette-term-dim);
+  --radius-sm: var(--radius-xs); --radius-md: var(--radius-xs); --radius-lg: var(--radius-xs); --radius-xl: var(--radius-xs);
+  --dot: var(--palette-term-3);
 }

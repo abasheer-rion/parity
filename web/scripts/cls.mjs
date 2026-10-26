@@ -17,17 +17,28 @@ const BASE = process.env.CLS_BASE ?? "http://127.0.0.1:5199";
 const LIMIT = Number(process.env.CLS_LIMIT ?? 0.02);
 const SLOW = process.env.CLS_SLOW === "1";
 const DEFAULT_PAGES = [
+  // Front page and the sign-in panel (DEC-0044), on the front page and on its own pages
+  "/", "/#login", "/#signup", "/login/", "/signup/", "/reset/",
   // Product
-  "/app/#/", "/app/#/strategies", "/app/#/strategy/factor_cma", "/app/#/watchlist", "/app/#/compare", "/app/#/lab",
-  "/app/#/scenarios", "/app/#/news", "/app/#/news/history", "/app/#/news/archive", "/app/#/news/impact",
+  "/app/#/", "/app/#/strategies", "/app/#/strategy/factor_cma", "/app/#/watchlist",
+  "/app/#/news", "/app/#/news/history", "/app/#/news/archive", "/app/#/news/impact",
   "/app/#/markets", "/app/#/markets/new", "/app/#/markets/crypto", "/app/#/markets/perps", "/app/#/markets/etfs",
-  "/app/#/markets/terms", "/app/#/markets/practice", "/app/#/learn", "/app/#/start", "/app/#/how", "/app/#/settings",
+  "/app/#/markets/terms", "/app/#/markets/practice", "/app/#/verify", "/app/#/learn", "/app/#/start", "/app/#/how", "/app/#/settings",
   // Research
   "/research/#/", "/research/#/docs", "/research/#/doc/DEC-0017", "/research/#/refs", "/research/#/ledger",
-  "/research/#/search", "/research/#/edges", "/research/#/catalog", "/research/#/signals", "/research/#/explore",
+  "/research/#/catalog", "/research/#/signals", "/research/#/explore",
   "/research/#/data", "/research/#/sources", "/research/#/ui",
   // Parity Terminal
-  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab",
+  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
+  // Parity Trade (DEC-0040)
+  "/trade/", "/trade/#/markets", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
+  "/trade/#/strategies", "/trade/#/settings",
+  // Parity Academy (DEC-0042)
+  "/academy/", "/academy/#/reading-a-backtest", "/academy/#/reading-a-backtest/return", "/academy/#/luck-vs-skill/multiple-testing",
+  "/academy/#/progress", "/academy/#/settings",
+  // Parity Workbench (DEC-0043)
+  "/lab/", "/lab/#/try", "/lab/#/whatif", "/lab/#/whatif?type=war&r=middle_east", "/lab/#/compare", "/lab/#/compare?t=crisis",
+  "/lab/#/compare?t=corr", "/lab/#/search", "/lab/#/edges", "/lab/#/edges?t=lessons", "/lab/#/settings",
 ];
 const PAGES = (process.env.CLS_PAGES ? process.env.CLS_PAGES.split(",") : DEFAULT_PAGES).map((p) => p.trim()).filter(Boolean);
 const SIZES = [

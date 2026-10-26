@@ -89,7 +89,7 @@ export function ConnectionsView({ data, win, setWin }: { data: WorldData; win: s
         <WindowSelect value={win} onChange={setWin} />
       </>}
       bands={bands} startLabel={monthYear(dates[0] ?? "")} endLabel={monthYear(dates[dates.length - 1] ?? "")} valueText={(i) => dayMonthYear(dates[i] ?? "")}
-      honest={<>History replayed, not a forecast. Each square is the correlation of weekly returns over the past {span} weeks: +1 moved together, 0 unrelated, −1 opposite. Currencies are their value in US dollars, so the dollar index moves against them by design. A link that held for years can break.</>}
+      honest={<>Each square is the correlation of weekly returns over the past {span} weeks: +1 moved together, 0 unrelated, −1 opposite. Currencies are their value in US dollars, so the dollar index moves against them by design. A link that held for years can break.</>}
       visual={<Heat assets={assets} m={m} focus={focus} />}
       board={<Board rows={rows} name="Moves with US stocks" headers={["Now", "Since start", "1 yr"]} picked={focus} onPick={(k) => setFocus(focus === k ? null : k)} playing={pb.playing}
         caption="Ranked by correlation with US stocks. Click a row to light up its row and column." />}

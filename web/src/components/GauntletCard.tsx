@@ -1,23 +1,24 @@
 import { Term } from "../pages/Learn";
 import type { Gauntlet, GauntletTest } from "../lib/types";
 import { Card, Pass } from "../ui/layout";
+import { TableScroll } from "../ui";
 
 const GROUPS: { key: GauntletTest["group"]; title: string; help: string }[] = [
   { key: "beat", title: "A. Does it beat the S&P 500?", help: "All six must pass." },
-  { key: "real", title: "B. Is there anything real here, or is it luck?", help: "A strategy can fail A and still pass these." },
+  { key: "real", title: "B. Is the result real or luck?", help: "A strategy can fail A and still pass these." },
 ];
 
 export function GauntletCard({ gauntlet }: { gauntlet: Gauntlet }) {
   return (
     <Card
-      title={`The gauntlet: ${gauntlet.passed} of ${gauntlet.total} tests passed`}
-      help={<>Eleven tests fixed before we saw any results. <a href="#/learn/out-of-sample">Why these tests?</a></>}
+      title={`${gauntlet.passed} of ${gauntlet.total} tests passed`}
+      help={<>{gauntlet.total} tests, fixed before we saw any results. <a href="#/learn/out-of-sample">Why these tests?</a></>}
     >
       <p className={`verdict ${gauntlet.beats_sp500 ? "good" : ""}`}>{gauntlet.verdict}</p>
       {GROUPS.map((g) => (
         <div key={g.key} className="gauntlet-group">
           <h3>{g.title} <span className="muted small">{g.help}</span></h3>
-          <div className="table-wrap">
+          <TableScroll>
             <table className="gauntlet">
               <thead>
                 <tr><th>Test</th><th>What it asks</th><th>Result</th><th>Bar</th><th></th></tr>
@@ -34,11 +35,11 @@ export function GauntletCard({ gauntlet }: { gauntlet: Gauntlet }) {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         </div>
       ))}
       <p className="muted small">
-        Trials behind this result, counting the gauntlet's own variants: {gauntlet.trials_including_gauntlet}. More
+        Trials behind this result, including the variants the tests run: {gauntlet.trials_including_gauntlet}. More
         trials make luck more likely; see <Term id="data-snooping">data snooping</Term> and{" "}
         <Term id="deflated-sharpe-ratio">deflated Sharpe ratio</Term>.
       </p>

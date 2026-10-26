@@ -3,7 +3,7 @@
  "order": 8,
  "level": "Core",
  "title": "Reading news impact",
- "summary": "How to tell whether a kind of news really moves a market: line events up, compare with random days, count days not headlines, and correct for trying many topics.",
+ "summary": "How to tell whether a kind of news moves a market: line events up, compare with random days, count days not headlines, and correct for trying many topics.",
  "docs": [
   "DEC-0026",
   "REF-0013"
@@ -144,7 +144,7 @@
    "title": "Compare with random days",
    "minutes": 3,
    "body": [
-    "An average after the news is not enough. Markets drift, and big days cluster. The fair question is: did news days do better than ordinary days?",
+    "An average after the news needs a comparison. Markets drift, and big days cluster. The question is whether news days did better than ordinary days.",
     "Parity compares every event study with random days from the same years. The p-value comes from those random days, so fat tails and drift are already in the baseline.",
     "The grey band shows where the average of the same number of random days usually lands. If the news line stays inside it, the pattern could be luck."
    ],
@@ -212,7 +212,7 @@
    "title": "Count days, not headlines",
    "minutes": 2,
    "body": [
-    "Ten headlines about the same meeting are one event, not ten. Parity counts days, not items, so one busy news day does not look like a lot of evidence.",
+    "Ten headlines about the same meeting count as one event. Parity counts days, not items, so one busy news day does not look like a lot of evidence.",
     "Events close together share the same market moves. Parity marks events within 20 trading days of another and repeats the averages using only the ones that do not overlap.",
     "Under 5 events there is no p-value at all. Under 20 there is a warning."
    ],
@@ -298,7 +298,7 @@
    "minutes": 2,
    "body": [
     "Parity precomputes studies for 21 topics and 13 assets: 273 pairs. Even if no news mattered at all, some pairs would look strong by chance.",
-    "The picture shows that: scores for 273 pairs with no real effect, and the best one still looks impressive. It is the same trap as testing many strategies.",
+    "The picture shows that: scores for 273 pairs with no real effect, and the best one still looks impressive. It is the same problem as testing many strategies.",
     "So rankings report a q-value, the p-value corrected for how many pairs were tried, and are sorted by it, never by the size of the move. Every result describes the past. None is a prediction."
    ],
    "terms": [

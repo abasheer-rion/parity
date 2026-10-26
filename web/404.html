@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Cloudflare Pages serves this file, with status 404, for any address that is not a
+         file, a page or a function (DEC-0055). No script, so it works without JS. Title,
+         noindex and share tags: src/lib/meta.ts. The look: src/site/kit.css, inlined. -->
+    <!--site-kit-->
+    <style>
+      body { display: flex; flex-direction: column; min-height: 100vh; }
+      .skip { position: fixed; z-index: var(--z-popover); left: 16px; top: -60px; padding: 10px 14px; border-radius: 10px; background: var(--text); color: var(--palette-black); font-weight: 600; text-decoration: none; transition: top var(--dur-2) var(--ease); }
+      .skip:focus { top: 16px; }
+      main { flex: 1; display: grid; place-items: center; padding: 96px 16px 48px; }
+      .nf { width: 100%; max-width: 520px; padding: 36px 32px; border-radius: 18px; text-align: center; }
+      .nf-mark { display: block; margin: 0 auto 22px; }
+      .nf-code { margin: 0 0 6px; color: var(--faint); font: 500 var(--type-sm)/1.4 var(--mono); }
+      h1 { margin: 0 0 10px; font-size: clamp(var(--type-5xl), 5vw, var(--type-6xl)); font-weight: 600; letter-spacing: -.01em; line-height: 1.2; }
+      .nf p { margin: 0 0 24px; color: var(--muted); }
+      .nf-acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+      .nf .nf-more { margin: 22px 0 0; font-size: var(--type-md); color: var(--faint); }
+      .nf-more a { color: var(--text); }
+      footer { padding: 20px 16px 28px; text-align: center; font-size: var(--type-sm); color: var(--faint); }
+      footer a { color: var(--muted); }
+      @media (max-width: 480px) { .nf { padding: 28px 20px; } .nf-acts .btn { flex: 1 1 100%; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+    </style>
+  </head>
+  <body>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="corner corner-logo">
+      <a href="/" aria-label="Parity home">
+        <img src="/brand/2026-10-21-starburst/parity-mark-white.svg" width="22" height="22" alt="" />
+        <img class="letters" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width="70" height="15" alt="" />
+      </a>
+    </div>
+    <main id="main" tabindex="-1">
+      <section class="nf glass" aria-labelledby="nf-h">
+        <img class="nf-mark" src="/brand/2026-10-21-starburst/parity-mark.svg" width="48" height="48" alt="" />
+        <p class="nf-code">Error 404</p>
+        <h1 id="nf-h">This page does not exist</h1>
+        <p>There is nothing at this address. The link may be mistyped, or the page may have moved.</p>
+        <div class="nf-acts">
+          <a class="btn primary" href="/">Go to the front page</a>
+          <a class="btn" href="/app/?search">Search Parity</a>
+        </div>
+        <p class="nf-more">Search needs a free account. Without one, browse the <a href="/learn/">glossary</a> or the <a href="/ideas/">trading ideas</a>.</p>
+      </section>
+    </main>
+    <footer><a href="/legal/">Legal</a> · &copy; 2026 Parity</footer>
+  </body>
+</html>
