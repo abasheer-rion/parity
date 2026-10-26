@@ -381,22 +381,31 @@ if (PARTS.has("windows")) {
   const { r, bad, rows } = await longRun("windows", "soak-windows", { PARITY_SOAK_CYCLES: String(CYCLES) }, 60000 + CYCLES * 40000, "cycles");
   if (rows.length < CYCLES) bad.push(`only ${rows.length} of ${CYCLES} cycles finished`);
   if (bad.length) problems.push(`windows: ${bad.join(" | ")}`);
+  // The app opens its hidden Trade page (for the menu bar ticker, main.js syncBackground) 8 s
+  // after starting, during the first cycles. That is one step up, not growth, so memory is
+  // judged from the last time the number of page processes changed, and processes pile up
+  // only if that number still changes in the second half.
+  let from = rows.length;
+  while (from > 0 && rows[from - 1].rendererCount === rows.at(-1)?.rendererCount) from--;
+  const steady = rows.slice(from);
+  const half = rows.slice(Math.floor(rows.length / 2)).map((x) => x.rendererCount);
   const t = [
     trend("open, draw, close", rows.map((x) => x.ms), "ms"),
-    trend("main memory", rows.map((x) => x.main), "MB", MB),
-    trend("main JS heap", rows.map((x) => x.mainHeap), "MB", MB),
-    trend("all renderers", rows.map((x) => x.renderers), "MB", MB),
-    trend("all processes", rows.map((x) => x.total), "MB", MB),
+    trend("main memory", steady.map((x) => x.main), "MB", MB),
+    trend("main JS heap", steady.map((x) => x.mainHeap), "MB", MB),
+    trend("all renderers", steady.map((x) => x.renderers), "MB", MB),
+    trend("all processes", steady.map((x) => x.total), "MB", MB),
     trend("page processes", rows.map((x) => x.rendererCount), "count"),
   ];
+  if (from > 0) console.log(`  page processes went ${rows[0].rendererCount} -> ${rows.at(-1).rendererCount} by cycle ${from + 1} (the hidden Trade page); memory below is from there`);
   console.log(`windows: ${rows.length} cycles, ${bad.length ? bad.join(" | ") : "no crash, nothing left behind"}; pages held at the end ${rows.at(-1)?.contents ?? "-"}`);
   for (const x of t) console.log(`  ${show(x)}`);
   if (rows.length >= 10) {
     if (grows(t[0], 300)) problems.push(`window open time grows: ${f1(t[0].first5)} -> ${f1(t[0].last5)} ms`);
-    for (const x of t.slice(1, 5)) if (grows(x, 15)) problems.push(`${x.label} grows over window cycles: ${f1(x.first5)} -> ${f1(x.last5)} MB`);
-    if (t[5].last5 - t[5].first5 >= 1) problems.push(`page processes pile up: ${f1(t[5].first5)} -> ${f1(t[5].last5)}`);
+    for (const x of t.slice(1, 5)) if (x.n >= 10 && grows(x, 15)) problems.push(`${x.label} grows over window cycles: ${f1(x.first5)} -> ${f1(x.last5)} MB`);
+    if (Math.max(...half) > Math.min(...half)) problems.push(`page processes still pile up in the second half: ${Math.min(...half)} -> ${Math.max(...half)}`);
   }
-  report.windows = { trends: t, cycles: rows, bad, blocked: r.blocked };
+  report.windows = { trends: t, steadyFrom: from + 1, cycles: rows, bad, blocked: r.blocked };
 }
 
 if (PARTS.has("idle")) {
