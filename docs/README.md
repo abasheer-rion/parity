@@ -8,7 +8,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
 | [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 30 |
-| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 16 |
+| [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 17 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 11 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
 | [guide](#guide) | How to do something in this repo, step by step. | 7 |
@@ -34,9 +34,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - [HYP-0014: Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) (testing)
 - [HYP-0015: Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) (testing)
 - [HYP-0016: An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) (testing)
+- [HYP-0017: The crack spread mean-reverts after costs](hypotheses/0017-the-crack-spread-mean-reverts-after-costs.md) (testing)
 
 ## Recently updated
 
+- 2026-10-25 [HYP-0017: The crack spread mean-reverts after costs](hypotheses/0017-the-crack-spread-mean-reverts-after-costs.md)
 - 2026-10-25 [ALG-0106: Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md)
 - 2026-10-25 [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md)
 - 2026-10-25 [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
@@ -44,7 +46,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-25 [ALG-0102: VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md)
 - 2026-10-25 [ALG-0101: Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md)
 - 2026-10-25 [ALG-0100: Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md)
-- 2026-10-25 [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
 
 ## intent
 
@@ -108,6 +109,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | HYP-0014 | [Selling oil volatility pays a premium](hypotheses/0014-selling-oil-volatility-pays-a-premium.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis) |
 | HYP-0015 | [Commodity currencies lead energy futures](hypotheses/0015-commodity-currencies-lead-energy-futures.md) | testing | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 | HYP-0016 | [An equal-weight energy book pays after 2014](hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md) | testing | 2026-10-23 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [momentum](TAGS.md#momentum) |
+| HYP-0017 | [The crack spread mean-reverts after costs](hypotheses/0017-the-crack-spread-mean-reverts-after-costs.md) | testing | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 
 ## experiment
 
@@ -303,7 +305,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0096 | [Commodity inventory level](algorithms/0096-commodity-inventory-level.md) | sourced | 2026-10-22 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0097 | [Developed-market rate gap times the EM currency basket](algorithms/0097-fx-developed-rate-gap-times-em-basket.md) | sourced | 2026-10-22 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0098 | [Equal-weight combination of styles](algorithms/0098-equal-weight-style-combination.md) | registered | 2026-10-23 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
-| ALG-0099 | [Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0099 | [Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md) | registered | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
 | ALG-0100 | [Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
 | ALG-0101 | [Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
 | ALG-0102 | [VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |

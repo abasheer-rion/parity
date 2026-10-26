@@ -56,13 +56,15 @@
   },
   "testable_with_free_data": true,
   "research": {
-    "stage": 2,
-    "hypothesis": null,
-    "strategy": null,
-    "registrations": [],
+    "stage": 5,
+    "hypothesis": "HYP-0017",
+    "strategy": "crack_spread_reversion",
+    "registrations": [
+      "REG-0010"
+    ],
     "runs": [],
     "verdict": null,
-    "notes": "Free EIA data ends 2024-04-05 and RBOB history starts in October 2005, so a test would cover about 18 years. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+    "notes": "Implemented as `crack_spread_reversion` (our simple z-score rule, not the paper's neural networks) and registered in REG-0010, 2006-10-02 to 2024-04-05. Free EIA data ends 2024-04-05 and RBOB history starts in October 2005."
   },
   "last_reviewed": "2026-10-25",
   "authors": [

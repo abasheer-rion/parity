@@ -64,6 +64,7 @@ None yet. Registered on 2026-10-23; no performance number has been computed for 
 
 ## Referenced by
 
+- [HYP-0017: The crack spread mean-reverts after costs](0017-the-crack-spread-mean-reverts-after-costs.md)
 - [EXP-0011: Equal-weight energy book, March 2014 to April 2024](../experiments/0011-equal-weight-energy-book-march-2014-to-april-2024.md)
 - [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 - [LOG-0015: Merging main into the stack and registering the energy book](../log/2026-10-23-merging-main-into-the-stack-and-registering-the-energy-book.md)

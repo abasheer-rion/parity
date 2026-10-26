@@ -236,3 +236,76 @@ class EnergyBook(Strategy):
     def weights(self, panel: pd.DataFrame) -> pd.DataFrame:
         raw = self.signal(panel) * _inverse_vol(panel, FUT)
         return hold_between_rebalances(normalise_gross(raw.fillna(0.0)), self.rebalance)
+
+
+GALLONS_PER_BARREL = 42
+CRACK_LEGS = {"fut.RB": 2, "fut.HO": 1, "fut.CL": -3}  # barrels per 3:2:1 crack spread
+
+
+@register
+class CrackSpreadReversion(Strategy):
+    name = "crack_spread_reversion"
+    display_name = "Crack spread reversion"
+    description = ("Bets that the refining margin, what two barrels of gasoline and one of "
+                   "heating oil sell for minus three barrels of crude, returns to normal "
+                   "after it has been unusually wide or narrow.")
+    tags = {"family": "value", "asset": "commodities", "style": "spread mean reversion",
+            "horizon": "weekly"}
+    summary = ("3:2:1 crack spread per barrel from contract 2 prices; z-score against its "
+               "past `window` days. Below -entry buy the spread (long gasoline and heating "
+               "oil, short crude), above +entry sell it, and close when it crosses its mean. "
+               "Legs sized by dollar value per crack spread; weekly (ALG-0099).")
+    reference = "hypotheses/0017-the-crack-spread-mean-reverts-after-costs.md"
+    param_grid = {"window": [126, 504]}
+
+    def __init__(self, window: int = 252, entry: float = 2.0, rebalance: str = "W"):
+        self.window = window
+        self.entry = entry
+        self.rebalance = rebalance
+
+    def instruments(self) -> list[str]:
+        return list(CRACK_LEGS)
+
+    def required(self) -> list[str]:
+        return list(CRACK_LEGS) + [f"curve.{c[4:]}2" for c in CRACK_LEGS]
+
+    def _legs(self, panel: pd.DataFrame) -> pd.DataFrame:
+        """Dollars per barrel of crack spread held in each leg (signed), from contract 2."""
+        px = pd.DataFrame({c: panel[f"curve.{c[4:]}2"] for c in CRACK_LEGS})
+        px = px.where(px > 0)
+        px[["fut.RB", "fut.HO"]] *= GALLONS_PER_BARREL  # USD per gallon to per barrel
+        legs = px.mul(pd.Series(CRACK_LEGS)) / 3
+        return legs.where(legs.notna().all(axis=1))
+
+    def crack(self, panel: pd.DataFrame) -> pd.Series:
+        return self._legs(panel).sum(axis=1, min_count=len(CRACK_LEGS))
+
+    def zscore(self, panel: pd.DataFrame) -> pd.Series:
+        c = self.crack(panel)
+        past = c.rolling(self.window, min_periods=self.window)
+        return (c - past.mean()) / past.std().replace(0.0, np.nan)
+
+    def signal(self, panel: pd.DataFrame) -> pd.DataFrame:
+        """Minus the z-score, signed per leg: high when a leg is expected to rise."""
+        z = self.zscore(panel)
+        return pd.DataFrame({c: -z * np.sign(n) for c, n in CRACK_LEGS.items()})
+
+    def side(self, panel: pd.DataFrame) -> pd.Series:
+        """+1 holding the spread, -1 short it, 0 flat; enter beyond +-entry, exit at the mean."""
+        z = self.zscore(panel).to_numpy()
+        out = np.zeros(len(z))
+        pos = 0.0
+        for i, v in enumerate(z):
+            if np.isnan(v):
+                pos = 0.0
+            elif pos == 0.0:
+                pos = 1.0 if v < -self.entry else -1.0 if v > self.entry else 0.0
+            elif (pos > 0 and v >= 0) or (pos < 0 and v <= 0):
+                pos = 0.0
+            out[i] = pos
+        return pd.Series(out, index=panel.index)
+
+    def weights(self, panel: pd.DataFrame) -> pd.DataFrame:
+        live = panel[list(CRACK_LEGS)].notna().all(axis=1)
+        raw = self._legs(panel).mul(self.side(panel).where(live, 0.0), axis=0)
+        return hold_between_rebalances(normalise_gross(raw.fillna(0.0)), self.rebalance)

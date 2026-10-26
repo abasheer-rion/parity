@@ -1,0 +1,39 @@
+{
+  "id": "REG-0010",
+  "title": "Crack spread reversion: the 3:2:1 refining margin, October 2006 to April 2024",
+  "created": "2026-10-25",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0017"
+  ],
+  "experiment": null,
+  "question": "On rolled NYMEX WTI crude oil, RBOB gasoline and heating oil futures from 2006-10-02 to 2024-04-05, does trading the 3:2:1 crack spread back towards its one-year mean (enter beyond 2 standard deviations, exit at the mean, weekly) have a positive Sharpe ratio that passes at least four of the five reality tests, after 3 bp per unit traded and 2 bp per roll?",
+  "strategies": [
+    {
+      "name": "crack_spread_reversion",
+      "params": {
+        "window": 252,
+        "entry": 2.0,
+        "rebalance": "W"
+      }
+    }
+  ],
+  "backtest": {
+    "start": "2006-10-02",
+    "end": "2024-04-05",
+    "cost_bps": 3.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 316,
+  "prior_trials_note": "315 (REG-0009's floor) + 1 (REG-0009's energy_book), counted across all families as the project has so far. No version of this rule has been evaluated. This is a floor: it does not include the always-on search's variations (engine/output/search.db on the owner's machine), which have never included energy futures because fut.* is not on main yet.",
+  "what_would_change_our_mind": "A pass would give the project an energy strategy that does not depend on the oil price, worth a forward test once futures prices after April 2024 are available (RES-0019). A fail would say the spread's ties to refining are too slow or too seasonal for a one-year z-score rule, and a seasonal version would need its own registration counted as a further trial.",
+  "already_seen": "No. Before registering, only unit tests on made-up prices were run (spread arithmetic, trade direction, entry and exit thresholds, leg sizes, no look-ahead, and a mutation check). No return, Sharpe ratio or other performance number was computed for crack_spread_reversion, and the crack spread itself was not computed or plotted on real prices."
+}

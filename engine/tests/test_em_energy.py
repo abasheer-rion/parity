@@ -261,7 +261,8 @@ def test_commodity_fx_signal_points_energy_the_same_way(panel):
 
 
 NEW = ["em_fx_carry", "em_fx_basket", "em_fx_momentum", "energy_tsmom", "energy_carry",
-       "oil_variance_short", "commodity_fx_leads_energy", "energy_book"]
+       "oil_variance_short", "commodity_fx_leads_energy", "energy_book",
+       "crack_spread_reversion"]
 
 
 def _variants():

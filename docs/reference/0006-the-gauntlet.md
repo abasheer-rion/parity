@@ -83,6 +83,7 @@ Definitions of every term are in the [glossary](0004-glossary.md).
 - [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
 - [HYP-0015: Commodity currencies lead energy futures](../hypotheses/0015-commodity-currencies-lead-energy-futures.md)
 - [HYP-0016: An equal-weight energy book pays after 2014](../hypotheses/0016-an-equal-weight-energy-book-pays-after-2014.md)
+- [HYP-0017: The crack spread mean-reverts after costs](../hypotheses/0017-the-crack-spread-mean-reverts-after-costs.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](../experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](../experiments/0003-monthly-commodity-gap.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)

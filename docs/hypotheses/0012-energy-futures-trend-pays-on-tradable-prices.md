@@ -46,6 +46,7 @@ None yet. Registered on 2026-10-21; no performance number has been computed for 
 ## Referenced by
 
 - [HYP-0016: An equal-weight energy book pays after 2014](0016-an-equal-weight-energy-book-pays-after-2014.md)
+- [HYP-0017: The crack spread mean-reverts after costs](0017-the-crack-spread-mean-reverts-after-costs.md)
 - [EXP-0009: Energy futures trend and carry](../experiments/0009-energy-futures-trend-and-carry.md)
 - [RES-0019: Trading the energy strategies, costs, contracts and data after April 2024](../research/0019-trading-the-energy-strategies-costs-contracts-and-data-after-april-2024.md)
 <!-- backlinks:end -->
