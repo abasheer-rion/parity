@@ -182,7 +182,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
         try { return json(request, 200, await universe(env, true), 3600); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
       }, true);
     }
-    return cached(ctx, "pub/universe/v4", 86_400, async () => {
+    return cached(ctx, "pub/universe/v5", 86_400, async () => {
       try { return json(request, 200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
     });
   }

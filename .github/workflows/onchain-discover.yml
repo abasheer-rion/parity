@@ -1,0 +1,45 @@
+# Pool discovery for the Parity price (DEC-0065): weekly, rerun web/scripts/onchain-discover.ts
+# (CoinGecko's top 500 and public nodes, no keys) and propose the new pool list as a pull
+# request on the branch data/onchain-registry. Nothing goes live until that PR is merged and
+# the fan-out is deployed. COINGECKO_API_KEY (a secret, optional) avoids CoinGecko's 429s.
+# No outside text reaches a shell command: the PR body is the script's own JSON line.
+name: On-chain pool discovery
+
+on:
+  schedule:
+    - cron: "23 4 * * 0"  # Sundays 04:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+      - name: Find pools
+        working-directory: web
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+        run: node --experimental-strip-types scripts/onchain-discover.ts --top 500 | tee ../discovery.json
+      - name: Propose the new list
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo '### Discovery'; echo '```'; cat discovery.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if git diff --quiet -- web/live/src/venues/onchain-registry.json; then echo "No change." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          git config user.name "parity-discovery"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B data/onchain-registry
+          git add web/live/src/venues/onchain-registry.json
+          git commit -m "data(live): refresh the Parity price pool list"
+          git push -f origin data/onchain-registry
+          gh pr view data/onchain-registry >/dev/null 2>&1 || gh pr create --base main --head data/onchain-registry \
+            --title "data(live): refresh the Parity price pool list" --body-file discovery.json \
+            || echo "Could not open the PR; the branch data/onchain-registry holds the new list." >> "$GITHUB_STEP_SUMMARY"

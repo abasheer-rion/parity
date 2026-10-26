@@ -4,7 +4,7 @@ The front of Parity's news-impact engine. It reads news feeds, merges copies of 
 
 **In plain words:** many outlets report the same thing. The funnel collects the headlines and short summaries, groups the copies into one story, notes which companies it is about and pulls out the numbers that matter (how much, for how long, who, where). Then it passes only the stories that could move a price to the reasoning engine.
 
-The rest of the engine (the world graph, the mechanisms, the past cases) is not in this repository yet. The funnel only needs its company names, read from the engine's database `eg`, and it writes to that database's `event_candidate` table.
+The rest of the engine (the world graph, the mechanisms, the past cases) is in [event-graph/](../README.md). The funnel only needs its company names, read from the engine's database `eg`, and it writes to that database's `event_candidate` table.
 
 ## Run it
 

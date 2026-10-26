@@ -6,13 +6,13 @@ import { subscribeStatus, subscribeTicks } from "../lib/live/client";
 import { digitsFor, priceText } from "../lib/tradeData";
 import { ProChart } from "../ui/proChart";
 import { tfFor, useLiveBars } from "../trade/live";
-import { LiveBadge } from "./LiveBadge";
+import { ConfidenceTag, LiveBadge } from "./LiveBadge";
 import "./liveMini.css";
 import { PauseLive } from "./PauseLive";
 
 export const LIVE_BOARD = ["BTC-USD", "ETH-USD", "SOL-USD", "XRP-USD", "BNB-USD", "DOGE-USD", "ADA-USD", "LINK-USD"];
-/** Our on-chain feed's board (DEC-0063): live from Base swaps, shown to everyone. */
-export const ONCHAIN_BOARD = ["ETH-USDC", "CBBTC-USDC", "EURC-USDC", "AERO-USDC", "VIRTUAL-USDC", "MORPHO-USDC", "UNI-USDC", "LINK-USDC"];
+/** The Parity price board (DEC-0065): live from DEX swaps on six chains, shown to everyone. */
+export const ONCHAIN_BOARD = ["BTC-USD", "ETH-USD", "BNB-USD", "XRP-USD", "SOL-USD", "ADA-USD", "LINK-USD", "AAVE-USD"];
 
 /**
  * The public source to show: our on-chain feed, or CoinGecko (delayed) after the on-chain
@@ -70,6 +70,7 @@ export function LiveMini({ src: want, symbols: wantSyms, height = 220 }: { src?:
       <div className="lmini-head">
         <strong>{sym}</strong>
         {src === "coingecko" && <a className="lmini-attr" href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>}
+        {src === "onchain" && <ConfidenceTag src={src} sym={sym} />}
         <span className="lmini-gap" />
         <PauseLive />
         <LiveBadge src={src} />

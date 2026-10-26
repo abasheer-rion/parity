@@ -93,6 +93,7 @@ A first 5 minute run right after deploy gave 140 ms and 478 ms block to client (
 
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](../decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
 - [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
+- [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](../decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 - [REF-0024: App speed, how we measure it and what we changed](0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
