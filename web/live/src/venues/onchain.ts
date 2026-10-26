@@ -147,17 +147,29 @@ async function httpBatch(part: (Call & { jsonrpc: string; id: number })[]): Prom
   return Array.isArray(body) ? body : [body];
 }
 
+/** Calls in batches of 10. Cloudflare's addresses are shared, so the free node often refuses
+ *  part of a batch (rate limit); refused calls are retried after a pause, for up to 20 s.
+ *  A call still refused then reads as null, and history simply has fewer points. */
 async function rpcBatch(calls: Call[]): Promise<(string | null)[]> {
-  const out: (string | null)[] = [];
-  for (let i = 0; i < calls.length; i += 100) {
-    const part = calls.slice(i, i + 100).map((c, j) => ({ jsonrpc: "2.0", id: i + j, ...c }));
-    let body: RpcReply[];
-    try { body = await wsBatch(part); } catch (e) { console.log(`[onchain] socket batch failed, trying HTTP: ${String(e)}`); body = await httpBatch(part); }
-    const bad = body.find((r) => r.error || r.result == null);
-    if (bad) console.log(`[onchain] node refused part of a batch: ${JSON.stringify(bad).slice(0, 300)}`);
-    const byId = new Map(body.map((r) => [r.id, r.result ?? null]));
-    for (const c of part) out.push(byId.get(c.id) ?? null);
+  const out: (string | null)[] = calls.map(() => null);
+  let todo = calls.map((_, i) => i);
+  const until = Date.now() + 20_000;
+  for (let round = 0; todo.length && Date.now() < until; round += 1) {
+    if (round) await new Promise((ok) => setTimeout(ok, 600 * round));
+    const left: number[] = [];
+    for (let i = 0; i < todo.length; i += 10) {
+      const ids = todo.slice(i, i + 10);
+      const part = ids.map((k) => ({ jsonrpc: "2.0", id: k, ...calls[k] }));
+      let body: RpcReply[] = [];
+      try { body = await wsBatch(part); } catch (e) {
+        try { body = await httpBatch(part); } catch (e2) { console.log(`[onchain] node did not answer: ${String(e)}; ${String(e2)}`); }
+      }
+      const byId = new Map(body.map((r) => [r.id, r.result ?? null]));
+      for (const k of ids) { const r = byId.get(k); if (r != null) out[k] = r; else left.push(k); }
+    }
+    todo = left;
   }
+  if (todo.length) console.log(`[onchain] node refused ${todo.length} of ${calls.length} calls`);
   return out;
 }
 const headBlock = async () => {
@@ -265,7 +277,7 @@ export const onchain: AdapterDef = {
     if (!ms || !all.length) return null;
     // The deepest pool, sampled once per bar; the archive reaches back about 30 days.
     const pool = all[0];
-    const n = Math.min(tf === "1d" ? 30 : tf === "4h" ? 180 : 240, BARS);
+    const n = Math.min(tf === "1d" ? 30 : tf === "4h" ? 90 : tf === "1h" ? 168 : 120, BARS);
     const head = await headBlock();
     const times = Array.from({ length: n }, (_, i) => Math.floor(head.at / ms) * ms - (n - 1 - i) * ms).concat(head.at);
     const blocks = times.map((t) => Math.max(1, head.n - Math.round((head.at - t) / BLOCK_MS)));
@@ -284,6 +296,8 @@ export const onchain: AdapterDef = {
       if (pool.quote === "WETH") { const e = res[n + 1 + i]; p = e && e.length >= 66 ? p * poolPrice(word(e, 0), eth.baseIs0, eth.scale) : Number.NaN; }
       if (Number.isFinite(p) && p > 0) points.push([t, p]);
     });
+    // Nothing read: fail, so the edge serves its last good copy instead of an empty chart.
+    if (!points.length) throw new Error("base node 429");
     return fromPrices(points, tf);
   },
   symbols: async () => ONCHAIN_SYMBOLS,
