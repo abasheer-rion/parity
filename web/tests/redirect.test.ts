@@ -32,6 +32,27 @@ describe("safeNext: allowed", () => {
     expect(safeNext("https://sim.endyland.com/", parity)).toBe("https://sim.endyland.com/");
   });
 
+  it("keeps / on the trade host too", () => {
+    const trade = { origin: "https://trade.endyland.com", hostname: "trade.endyland.com" };
+    expect(safeNext("/", trade)).toBe("/");
+    expect(safeNext("https://trade.endyland.com/", parity)).toBe("https://trade.endyland.com/");
+    expect(safeNext("/trade/#/portfolio", parity)).toBe("/trade/#/portfolio");
+  });
+
+  it("keeps / on the academy host too", () => {
+    const academy = { origin: "https://academy.endyland.com", hostname: "academy.endyland.com" };
+    expect(safeNext("/", academy)).toBe("/");
+    expect(safeNext("https://academy.endyland.com/#/luck-vs-skill", parity)).toBe("https://academy.endyland.com/#/luck-vs-skill");
+    expect(safeNext("/academy/#/progress", parity)).toBe("/academy/#/progress");
+  });
+
+  it("keeps / on the lab host too", () => {
+    const lab = { origin: "https://lab.endyland.com", hostname: "lab.endyland.com" };
+    expect(safeNext("/", lab)).toBe("/");
+    expect(safeNext("https://lab.endyland.com/#/search?q=carry", parity)).toBe("https://lab.endyland.com/#/search?q=carry");
+    expect(safeNext("/lab/#/compare", parity)).toBe("/lab/#/compare");
+  });
+
   it("allows the same origin in local development", () => {
     expect(safeNext("http://127.0.0.1:5173/research/", local)).toBe("/research/");
     expect(safeNext("/sim/", local)).toBe("/sim/");
@@ -99,5 +120,20 @@ describe("emailLanding", () => {
   });
   it("never points off site", () => {
     expect(emailLanding("https://evil.com/", parity)).toBe("https://parity.endyland.com/app/");
+  });
+});
+
+describe("desktop app pages at app://parity (DEC-0041)", () => {
+  const app = { origin: "app://parity", hostname: "parity" };
+  it("keeps same-app paths", () => {
+    expect(safeNext("/trade/#/alerts", app)).toBe("/trade/#/alerts");
+    expect(safeNext("/research/", app)).toBe("/research/");
+  });
+  it("still refuses other sites", () => {
+    expect(safeNext("https://evil.example/", app)).toBe("/app/");
+    expect(safeNext("app://evil/", app)).toBe("/app/");
+  });
+  it("points emails at the website", () => {
+    expect(emailLanding("/trade/", app)).toBe("https://parity.endyland.com/trade/");
   });
 });

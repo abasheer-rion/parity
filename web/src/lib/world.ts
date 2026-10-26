@@ -2,7 +2,7 @@
 // file of currency values in US dollars, interest rates, commodity prices and how each
 // currency moved after past events; this file loads it, says which country uses which
 // currency, and turns the numbers into what the map shows. It looks backwards only.
-import { source } from "./data";
+import { isMissing, source } from "./data";
 
 export type Grid = { dates: string[]; series: Record<string, (number | null)[]> };
 export type Horizon = "1d" | "1w" | "1m" | "3m";
@@ -39,7 +39,7 @@ export function loadWorld(): Promise<WorldLoaded> {
   cache = (async (): Promise<WorldLoaded> => {
     try {
       const res = await fetch(url, { cache: "no-cache" });
-      if (res.status === 404) {
+      if (isMissing(res)) {
         cache = null;
         return { status: "missing", message: source === "local" ? "Run `parity world export` first." : "The world map file has not been published yet." };
       }

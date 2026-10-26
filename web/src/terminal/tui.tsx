@@ -49,7 +49,7 @@ export function Spark({ values, width = 64, height = 16 }: { values: (number | n
 
 /** Where the last value sits in its 1-year range, as a small bar with a tick. */
 export function PctBar({ value }: { value: number | null | undefined }) {
-  if (value == null) return <span className="muted">—</span>;
+  if (value == null) return <span className="muted">n/a</span>;
   const p = Math.max(0, Math.min(100, value));
   return (
     <span className="term-pctbar" title={`${p.toFixed(0)}th percentile of the past year`}>
@@ -293,7 +293,7 @@ export function TChart({ series, format, height, zero, label, area, log }: {
       <div className="term-chart-read" aria-live="off">
         {readDate != null && <span className="term-chart-date">{new Date(readDate).toISOString().slice(0, 10)}</span>}
         {read.map(({ s, p }, i) => (
-          <span key={i}><i style={{ background: s.color }} />{s.name} <b>{p ? format(p[1]) : "—"}</b></span>
+          <span key={i}><i style={{ background: s.color }} />{s.name} <b>{p ? format(p[1]) : "n/a"}</b></span>
         ))}
       </div>
     </div>

@@ -6,7 +6,7 @@ import { HeroChart, Sparkline, type RangeKey } from "../ui/charts";
 import { Icon } from "../ui/icons";
 import { Button, ButtonGroup } from "../ui";
 import { colorMap } from "../lib/colors";
-import { useDocs } from "../lib/docs";
+import { useDocIndex } from "../lib/docs";
 import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
@@ -17,7 +17,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
   const prefs = usePrefs();
   const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
   const [view, setView] = useState<"graph" | "table">("graph");
-  const docs = useDocs();
+  const docs = useDocIndex();
   const colors = colorMap(report.runs);
   const bench = report.runs.find((r) => r.is_benchmark);
   const candidates = report.runs.filter((r) => !r.is_benchmark);
@@ -46,7 +46,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         <ButtonGroup>
           <Button variant="primary" icon="chart" href="#/strategies">Strategies</Button>
           <Button icon="compare" href="#/compare">Compare</Button>
-          <Button icon="flask" href="#/lab">Lab</Button>
+          <Button icon="flask" href="#/lab">Workbench</Button>
           <Button icon="book" href="#/docs">Read</Button>
           <Button icon="search" onClick={() => window.dispatchEvent(new Event("parity:search"))}>Search</Button>
         </ButtonGroup>
@@ -106,7 +106,7 @@ export function Overview({ report, email }: { report: Report; email?: string | n
         </section>
 
         <section className="mcard">
-          <div className="mcard-head"><h2>Gauntlet</h2><a className="round-btn" href="#/doc/REF-0006" data-doc="REF-0006" aria-label="About the gauntlet"><Icon name="info" size={14} /></a></div>
+          <div className="mcard-head"><h2>The 11 tests</h2><a className="round-btn" href="#/doc/REF-0006" data-doc="REF-0006" aria-label="About the 11 tests"><Icon name="info" size={14} /></a></div>
           <div className="stat-row">
             <div><div className="muted small">Tests passed</div><div className="mid-num good">{passed}</div></div>
             <div><div className="muted small">Tests failed</div><div className="mid-num bad">{failed}</div></div>

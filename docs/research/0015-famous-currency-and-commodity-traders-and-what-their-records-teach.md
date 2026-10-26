@@ -124,5 +124,5 @@ Every winner above was chosen because they won. FX Concepts and Astenbeck were f
 - [HYP-0014: Selling oil volatility pays a premium](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
 - [EXP-0010: Oil volatility and commodity currency signals](../experiments/0010-oil-volatility-and-commodity-currency-signals.md)
 - [RES-0014: Commodity futures, carry, trend and volatility](0014-commodity-futures-carry-trend-and-volatility.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

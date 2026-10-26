@@ -177,9 +177,9 @@ export function ScenarioView({ data, scen, spec, setSpec, matches, onPaths }: {
         big={`Day ${d}`} sub={[dayWords(d)]}
         leading={n ? leaderOf(rows) : null}
         bands={MARKS} startLabel="Day 0" endLabel={`Day ${DAYS}`} valueText={(i) => `Day ${i}, ${dayWords(i)}`}
-        honest={<>History, not a forecast. {empty ? "Describe an event or click a country to begin."
+        honest={<>{empty ? "Describe an event or click a country to begin."
           : n === 0 ? "No past event in the catalog looks like this. Try fewer details or a broader region."
-          : <>These ranges come from {n} past event{n === 1 ? "" : "s"} that look like your scenario{n < 5 ? ", which is too few to lean on" : ""}. Another handful could tell a different story, and the events did not cause everything that followed.</>}</>}
+          : <>These ranges come from {n} past event{n === 1 ? "" : "s"} that look like your scenario{n < 5 ? ", which is too few to rely on" : ""}. Other events could give different ranges, and other news in the same weeks also moved prices.</>}</>}
         visual={
           <WorldMap label={`Middle outcome of each currency ${d} trading days after past events like the scenario`} outlined={outlined}
             fill={fill} card={card} onSelect={clickCountry}

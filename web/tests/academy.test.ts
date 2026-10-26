@@ -62,7 +62,7 @@ describe("academy courses", () => {
             const route = k.href.replace(/^#\//, "").split(/[/?]/)[0];
             const side = k.space === "both" ? ROUTES.both : ROUTES[k.space];
             expect(side, `${l.id}: ${k.href} on ${k.space}`).toContain(route);
-            expect(academyHref(k)).toMatch(/^(#\/|\/(app|research)\/#\/)/);
+            expect(academyHref(k)).toMatch(/^(https:\/\/parity\.endyland\.com\/(app|research)\/#\/|https:\/\/(trade|sim|academy|lab)\.endyland\.com\/(#\/|$)|\/(app|research|trade|sim|academy|lab)\/(#\/|$))/);
             const doc = k.href.match(/^#\/doc\/([A-Z]+-\d{4})/);
             if (doc) expect(DOCS, `${l.id}: ${doc[1]}`).toContain(doc[1]);
             const term = k.href.match(/^#\/learn\/([a-z0-9-]+)/);

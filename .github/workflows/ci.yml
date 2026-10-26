@@ -14,6 +14,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Mac runners cost ten times the minutes, so the running-app test only runs when the
+  # desktop app changed.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      desktop: ${{ steps.diff.outputs.desktop }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: diff
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then base="${{ github.event.pull_request.base.sha }}"; else base="${{ github.event.before }}"; fi
+          if git diff --name-only "$base" HEAD 2>/dev/null | grep -qE '^desktop/'; then echo "desktop=true" >> "$GITHUB_OUTPUT"; else echo "desktop=false" >> "$GITHUB_OUTPUT"; fi
+
   engine:
     runs-on: ubuntu-latest
     defaults:
@@ -43,8 +58,83 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci
+      # Design tokens (DEC-0058): no raw colours, px font sizes, durations or curves outside
+      # src/ui/tokens.css, no undefined var(--x), and the generated token files up to date.
+      - run: npm run lint:styles
       - run: npm test
       - run: npm run build
+      # Every built page loads the analytics boot script (DEC-0053, scripts/analytics-check.mjs).
+      - run: npm run analytics:check
+      # The desktop app's copy of the site (DEC-0041): refuses research data and maps.
+      - run: node ../desktop/scripts/prepare-web.mjs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-web-ci
+          path: desktop/build/web
+          retention-days: 1
+      # Every route of every app at desktop and phone size: no exceptions, console errors,
+      # failed requests, blank pages, NaN in the text or sideways scroll (scripts/smoke.mjs).
+      - run: npx playwright install --with-deps chromium
+      - run: npm run smoke
+      # First-run tours and the getting started checklist in a real browser (DEC-0060).
+      - run: npm run onboarding
+
+  # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
+  # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
+  # apply to the hosted project by themselves on merge, so they are tried here first.
+  db:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Postgres 17
+        run: |
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -y -q postgresql-17
+      - name: Apply every migration and run the SQL tests
+        env:
+          PGBIN: /usr/lib/postgresql/17/bin
+        run: supabase/tests/local.sh
+
+  desktop:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+      - run: npm test
+
+  # The running app (DEC-0049): a deep link while signed out opens the log-in wall, the title
+  # bar moves the window, the offline copy and Retry show when the website is unreachable,
+  # and the menu opens. On a Mac runner, against the site built by the web job.
+  desktop-app:
+    needs: [web, changes]
+    if: needs.changes.outputs.desktop == 'true'
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - uses: actions/download-artifact@v7
+        with:
+          name: desktop-web-ci
+          path: desktop/build/web
+      - run: npm ci
+      - run: npm run test:app
 
   docs:
     runs-on: ubuntu-latest
@@ -59,6 +149,12 @@ jobs:
         run: python3 scripts/docs.py check ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
       - name: Auth emails match their sources
         run: python3 auth/build.py --check
+      # Blog and News (DEC-0057): stance labels, sources, image licences and alt text, bylines,
+      # and that only published posts build. The site build runs the same check again.
+      - name: Newsroom posts and their rules
+        run: |
+          python3 scripts/newsroom/check.py
+          NEWSROOM_NO_MEDIA=1 python3 -m unittest discover -s scripts/newsroom/tests
       - name: Ledger and registrations
         run: |
           pip install -q -e engine

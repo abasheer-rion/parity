@@ -14,7 +14,7 @@ related: [DEC-0007, GDE-0004, REF-0006]
 
 ## In plain words
 
-New trading ideas usually come from a few honest places: borrowing an idea that worked somewhere else, mixing ideas that do not move together, only switching an idea on when conditions suit it, or starting from an economic reason. There are also a few dishonest places that look like progress but are really just trying things until something works by luck. This page lists both, so we can tell them apart.
+New trading ideas usually come from four sound sources: borrowing an idea that worked somewhere else, mixing ideas that do not move together, only switching an idea on when conditions suit it, or starting from an economic reason. Some other methods only try things until one works by luck. This page lists both, so we can tell them apart.
 
 ## Summary
 

@@ -170,7 +170,7 @@
    "title": "Steepening and flattening",
    "minutes": 2,
    "body": [
-    "The curve changes shape, not just level. When the gap between long and short yields widens, it is **steepening**. When the gap narrows, it is **flattening**.",
+    "The curve changes shape as well as level. When the gap between long and short yields widens, it is **steepening**. When the gap narrows, it is **flattening**.",
     "A common cause of steepening is a central bank cutting short rates while long rates stay put. Flattening often comes when the central bank raises short rates faster than long rates move.",
     "Parity's strategies on the curve look at its slope compared with its usual level."
    ],

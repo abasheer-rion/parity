@@ -7,6 +7,7 @@
 // stuck to the top, and with `virtual` only the rows on screen are drawn (thousands
 // of rows stay quick). Column widths are fixed in that mode, so nothing reflows while
 // you scroll or sort. Short tables glide their rows to their new places on a sort.
+import { PlainTerms } from "./plainTerms";
 import { Fragment, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { useSort } from "./filters";
 import { Collapse } from "./disclosure";
@@ -76,13 +77,15 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
             return (
               <td key={c.key} className={`${cellClass(c)} ${t == null ? "" : t >= 0 ? "good" : "bad"}`}>
                 {/* The keyboard and screen readers open a row with this button; a click anywhere on the row does the same. */}
-                {expand && i === 0 && (
-                  <button type="button" className="ui-row-toggle" aria-expanded={isOpen} aria-label={isOpen ? "Hide details" : "Show details"}
-                    onClick={() => setOpen((o) => (o === k ? null : k))}>
-                    <Icon name="chevronRight" size={12} className="ui-row-chev" />
-                  </button>
-                )}
-                {c.render(r)}
+                {expand && i === 0 ? (
+                  <span className="ui-cell-toggle">
+                    <button type="button" className="ui-row-toggle" aria-expanded={isOpen} aria-label={isOpen ? "Hide details" : "Show details"}
+                      onClick={() => setOpen((o) => (o === k ? null : k))}>
+                      <Icon name="chevronRight" size={12} className="ui-row-chev" />
+                    </button>
+                    <span>{c.render(r)}</span>
+                  </span>
+                ) : c.render(r)}
               </td>
             );
           })}
@@ -107,7 +110,7 @@ export function DataTable<T>({ rows, columns, rowKey, initialSort, pin, href, em
                   aria-sort={on ? (sort.dir === "asc" ? "ascending" : "descending") : undefined}>
                   {c.sort ? (
                     <button className="ui-th-btn" onClick={() => { toggle(c.key); onSortChange?.({ key: c.key, dir: on && sort.dir === "desc" ? "asc" : "desc" }); }}>
-                      {c.header}
+                      <PlainTerms.Provider value>{c.header}</PlainTerms.Provider>
                       {/* The arrow's space is always kept, so a header never shifts when it becomes the sorted one. */}
                       <span className="ui-sort-arrow" aria-hidden data-on={on || undefined}>{on && sort.dir === "asc" ? "↑" : "↓"}</span>
                     </button>

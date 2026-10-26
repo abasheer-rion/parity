@@ -80,11 +80,11 @@ export function checkIdea(a: Answers): Pitfall[] {
   else if (a.cash === "mostly") add({ id: "cash-few-trades", severity: "medium", lesson: "too-good", example: "cash-only", title: "It is in cash most of the time", why: "Count how many separate bets the result rests on. A few lucky trades can carry the whole backtest." });
 
   if (a.instrument === "average") add({ id: "untradable-average", severity: "high", lesson: "too-good", example: "copper", title: "It trades at an average price", why: "Nobody can buy at a monthly average, and the average is only known after the period ends. Use it as a delayed signal and trade something real." });
-  else if (a.instrument === "spot") add({ id: "untradable-spot", severity: "high", lesson: "too-good", example: "natural-gas", title: "It trades at a spot price nobody trades", why: "Spot prices can spike in ways futures do not. Our gas strategy led the race at +2,632% for exactly this reason." });
+  else if (a.instrument === "spot") add({ id: "untradable-spot", severity: "high", lesson: "too-good", example: "natural-gas", title: "It trades at a spot price nobody trades", why: "Spot prices can spike in ways futures do not. Our gas strategy led the race at +2,632% for this reason." });
   else if (a.instrument === "index") add({ id: "untradable-index", severity: "medium", lesson: "too-good", title: "It trades at an index level", why: "You cannot buy an index itself. Test it on a fund or future that tracks it, with that product's costs and tracking gap." });
   else if (a.instrument === "unsure") add({ id: "untradable-unsure", severity: "medium", lesson: "too-good", title: "Check what price the backtest really uses", why: "If you are not sure, find out. Averages, index levels and spot prices can all show gains nobody could earn." });
 
-  if (a.sharpe === "extreme") add({ id: "sharpe-extreme", severity: "high", lesson: "too-good", title: "A Sharpe ratio above 2 is a warning sign", why: "Very few real strategies hold a Sharpe above 2 after costs. Look for a bug, a peek at future data or an untradable price before celebrating." });
+  if (a.sharpe === "extreme") add({ id: "sharpe-extreme", severity: "high", lesson: "too-good", title: "A Sharpe ratio above 2 is a warning sign", why: "Very few real strategies hold a Sharpe above 2 after costs. Look for a bug, a peek at future data or an untradable price first." });
   else if (a.sharpe === "high") add({ id: "sharpe-high", severity: "medium", lesson: "too-good", title: "A Sharpe ratio above 1 deserves a second look", why: "It can be real, but check timing, costs and the number of tries first." });
 
   // Look-ahead: data used before it was public.
@@ -101,13 +101,13 @@ export function checkIdea(a: Answers): Pitfall[] {
   else add({ id: "register-first", severity: "low", lesson: "register", title: "Write it down before you run it", why: "You have not looked yet, which is the best time to fix the rule and the pass mark." });
 
   // Multiple testing.
-  if (a.trials === "hundreds" || a.trials === "unknown") add({ id: "many-trials", severity: "high", lesson: "multiple-testing", example: "cash-only", title: a.trials === "unknown" ? "Count your trials" : "Hundreds of tries will find a lucky winner", why: "The best of many random rules always looks good. Judge it with a deflated Sharpe ratio that uses the full count of tries." });
-  else if (a.trials === "dozens") add({ id: "some-trials", severity: "medium", lesson: "multiple-testing", title: "Dozens of tries raise the bar", why: "Every changed window, asset or start date is another trial. Report the count and deflate the Sharpe ratio for it." });
+  if (a.trials === "hundreds" || a.trials === "unknown") add({ id: "many-trials", severity: "high", lesson: "multiple-testing", example: "cash-only", title: a.trials === "unknown" ? "Count your trials" : "More than 100 tries will turn up a lucky winner", why: "The best of many random rules always looks good. Judge it with a deflated Sharpe ratio that uses the full count of tries." });
+  else if (a.trials === "dozens") add({ id: "some-trials", severity: "medium", lesson: "multiple-testing", title: "11 to 100 tries raise the bar", why: "Every changed window, asset or start date is another trial. Report the count and deflate the Sharpe ratio for it." });
   else if (a.trials === "few") add({ id: "few-trials", severity: "low", lesson: "multiple-testing", title: "Keep counting your tries", why: "A handful is fine if you report them all. Nudging settings until it works is how a few tries become many." });
 
   // Costs.
   if (a.frequency === "intraday") add({ id: "costs-intraday", severity: "high", lesson: "costs", title: "Costs will likely eat an intraday edge", why: "Several trades a day pay the spread and fees each time. Work out the breakeven cost per trade and compare it with what you would really pay." });
-  else if (a.frequency === "daily") add({ id: "costs-daily", severity: a.assets === "illiquid" ? "high" : "medium", lesson: "costs", title: "Check the breakeven cost", why: "Trading daily, small costs add up fast. Rerun it at double your cost guess and see if it survives." });
+  else if (a.frequency === "daily") add({ id: "costs-daily", severity: a.assets === "illiquid" ? "high" : "medium", lesson: "costs", title: "Check the breakeven cost", why: "Trading daily, small costs add up fast. Rerun it at double your cost guess and check it still makes money." });
   else if (a.assets === "illiquid") add({ id: "costs-illiquid", severity: "medium", lesson: "costs", title: "Thin markets cost more than they look", why: "Wide spreads and price impact can be far above a standard cost guess." });
 
   // Capacity and decay.
@@ -120,6 +120,6 @@ export function checkIdea(a: Answers): Pitfall[] {
 /** A one-line read of the list, for the top of the results. */
 export function summary(list: Pitfall[]): string {
   const high = list.filter((p) => p.severity === "high").length;
-  if (!high) return "No major red flags from these answers. That is not proof of an edge; register it and test it on new data.";
+  if (!high) return "No major red flags from these answers. They do not prove an edge. Register it and test it on new data.";
   return `${high} serious ${high === 1 ? "problem" : "problems"} to rule out before trusting the backtest.`;
 }

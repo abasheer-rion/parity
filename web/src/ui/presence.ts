@@ -1,6 +1,7 @@
 // Hooks behind the library's motion: keep something on screen while it animates out,
 // follow the reduced-motion setting, and glide items to new places when a list reorders.
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { durationMs, tokenValue } from "./tokens";
 
 const REDUCE = "(prefers-reduced-motion: reduce)";
 
@@ -50,7 +51,7 @@ export function usePresence(open: boolean, exitMs = 160): { mounted: boolean; st
  * `data-flip` glides from where it was to where it is now, using transforms only.
  * Pass something that changes when the order changes as `dep`. Skips long lists.
  */
-export function useFlip<T extends HTMLElement>(dep: unknown, { max = 80, ms = 260 }: { max?: number; ms?: number } = {}) {
+export function useFlip<T extends HTMLElement>(dep: unknown, { max = 80, ms = durationMs("dur-3") }: { max?: number; ms?: number } = {}) {
   const ref = useRef<T>(null);
   // Each item's top, measured from the top of the list (so scrolling does not matter), after the last change.
   const last = useRef(new Map<string, number>());
@@ -66,7 +67,7 @@ export function useFlip<T extends HTMLElement>(dep: unknown, { max = 80, ms = 26
         const before = last.current.get(el.dataset.flip!);
         const now = next.get(el.dataset.flip!)!;
         if (before == null || Math.abs(before - now) < 1) continue;
-        el.animate([{ transform: `translateY(${before - now}px)` }, { transform: "none" }], { duration: ms, easing: "cubic-bezier(.2, .9, .25, 1)" });
+        el.animate([{ transform: `translateY(${before - now}px)` }, { transform: "none" }], { duration: ms, easing: tokenValue("ease-spring") });
       }
     }
     last.current = next;

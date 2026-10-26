@@ -18,6 +18,8 @@ __pycache__/
 # Node
 node_modules/
 web/dist/
+web/.wrangler/
+web/.newsroom-preview/
 
 # Supabase local state
 supabase/.temp/
@@ -28,3 +30,9 @@ supabase/.branches/
 .idea/
 .vscode/*
 !.vscode/mcp.json
+
+# Rendered clips (npm run content, GDE-0008)
+content/out/
+# A .venv that is a symlink (worktrees share one environment) is a file, not a folder.
+.venv
+web/layout-shots/

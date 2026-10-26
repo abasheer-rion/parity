@@ -7,7 +7,10 @@ import { loadReport } from "../lib/data";
 import type { NewsDoc } from "../lib/news";
 import { loadScenarios, type Loaded as ScenLoaded } from "../lib/scenarios";
 import { loadWorld, type WorldLoaded } from "../lib/world";
+import { loadBotsIndex } from "../lib/bots";
+import type { BotsIndex } from "../lib/botStats";
 import type { Point, Report } from "../lib/types";
+import { rumAge } from "../lib/rum";
 
 export type SeriesClass = "fx" | "rates" | "commodities" | "equities" | "crypto" | "positioning" | "macro" | (string & {});
 export type Win = "d1" | "w1" | "m1" | "ytd";
@@ -50,7 +53,11 @@ const MISSING_INDEX = source === "local"
 
 let indexP: Promise<Loadable<TermIndex>> | null = null;
 export function loadIndex(): Promise<Loadable<TermIndex>> {
-  if (!indexP) indexP = getJson<TermIndex>(`${TERM_BASE}/index.json`, MISSING_INDEX);
+  if (!indexP) {
+    indexP = getJson<TermIndex>(`${TERM_BASE}/index.json`, MISSING_INDEX);
+    // How old the newest price on screen is (DEC-0045); Trade and the Terminal share this.
+    void indexP.then((r) => { if (r.status === "ok") rumAge("terminal/index", r.data.data_through); });
+  }
   return indexP;
 }
 
@@ -74,6 +81,7 @@ function once<T>(fn: () => Promise<Loadable<T>>): () => Promise<Loadable<T>> {
 const fromLoaded = <T,>(l: { status: "ok"; data: T } | { status: "missing"; message: string } | { status: "error"; message: string }): Loadable<T> => l;
 
 export const getWorld = once(() => loadWorld().then((w: WorldLoaded) => fromLoaded(w)));
+export const getBots = once<BotsIndex>(() => loadBotsIndex().then((b) => fromLoaded(b)));
 export const getScen = once(() => loadScenarios().then((s: ScenLoaded) => fromLoaded(s)));
 export const getReport = once<Report>(() => loadReport().then((data) => ({ status: "ok" as const, data }), (e: Error) => ({ status: /published/.test(e.message) ? "missing" as const : "error" as const, message: e.message })));
 // The same file lib/news.ts loadNews() reads, through getJson so a dev server without the

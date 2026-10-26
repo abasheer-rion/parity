@@ -10,6 +10,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { termById, terms } from "../lib/glossary";
 import { citeLabel, mentions, plainWords, sectionHtml, useDocs, type DocsData } from "../lib/docs";
 import { Html } from "../ui/Html";
+import { Segmented } from "../ui/inputs";
+import { SkeletonText } from "../ui/skeleton";
 import { getPrefs } from "../lib/prefs";
 
 type Kind = "term" | "doc" | "ref" | "find";
@@ -17,7 +19,7 @@ interface Pop { key: string; kind: Kind; arg: string; anchor?: string; rect: DOM
 
 const OPEN_DELAY = 180;
 const CLOSE_DELAY = 320;
-const TRIGGER = "a[data-term], a[data-doc], a[data-ref]";
+const TRIGGER = "a[data-term], span[data-term], a[data-doc], a[data-ref]";
 
 function levelOf(el: Element | null): number {
   const pop = el?.closest<HTMLElement>(".pop");
@@ -132,7 +134,7 @@ export function Popups() {
     };
   }, [open, scheduleClose]);
 
-  const data = useDocs();
+  const data = useDocs(stack.length > 0);
   if (!stack.length) return null;
   return (
     <>
@@ -161,7 +163,7 @@ function Card({ pop, data, onClose }: { pop: Pop; data: DocsData | null; onClose
   }, [pop.rect, pop.level, pop.kind, data]);
 
   return (
-    <div ref={ref} className={`pop ${pop.pinned ? "pinned" : ""}`} data-level={pop.level} role="dialog" style={{ zIndex: 50 + pop.level }}>
+    <div ref={ref} className={`pop ${pop.pinned ? "pinned" : ""}`} data-level={pop.level} role="dialog" style={{ zIndex: `calc(var(--z-overlay) + ${pop.level})` }}>
       {pop.pinned && <button className="pop-close" aria-label="Close" onClick={onClose}>×</button>}
       {pop.kind === "term" && <TermCard id={pop.arg} data={data} />}
       {pop.kind === "doc" && <DocCard id={pop.arg} anchor={pop.anchor} data={data} />}
@@ -185,13 +187,7 @@ function TermCard({ id, data }: { id: string; data: DocsData | null }) {
         <strong>{t.term}</strong>
         <a className="pop-open" href={`#/learn/${id}`}>Open</a>
       </div>
-      <div className="tabs small-tabs" role="tablist">
-        {(["simple", "analogy", "precise"] as View[]).map((v) => (
-          <button key={v} role="tab" aria-selected={view === v} className={view === v ? "on" : ""} onClick={() => setView(v)}>
-            {v[0].toUpperCase() + v.slice(1)}
-          </button>
-        ))}
-      </div>
+      <div className="small-tabs"><Segmented size="sm" label={`Explain ${t.term} as`} value={view} onChange={setView} options={[["simple", "Simple"], ["analogy", "Analogy"], ["precise", "Precise"]]} /></div>
       <p>{t[view]}</p>
       {t.related && t.related.length > 0 && (
         <p className="pop-meta">Related: {t.related.filter((r) => termById[r]).map((r, i) => (
@@ -204,7 +200,7 @@ function TermCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const d = data.byId[id];
   if (!d) return <p className="muted">No doc {id}.</p>;
   const section = anchor ? sectionHtml(d, anchor) : null;
@@ -227,7 +223,7 @@ function DocCard({ id, anchor, data }: { id: string; anchor?: string; data: Docs
 }
 
 function RefCard({ id, data }: { id: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const r = data.refs[id];
   if (!r) return <p className="muted">No source {id}.</p>;
   const used = data.refDocs[id] ?? [];
@@ -250,7 +246,7 @@ function RefCard({ id, data }: { id: string; data: DocsData | null }) {
 }
 
 function FindCard({ phrase, data }: { phrase: string; data: DocsData | null }) {
-  if (!data) return <p className="muted">Loading</p>;
+  if (!data) return <SkeletonText lines={3} lineHeight={22} />;
   const found = mentions(data, phrase);
   const q = phrase.toLowerCase();
   const term = terms.find((t) => {

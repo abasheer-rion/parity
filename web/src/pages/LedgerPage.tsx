@@ -11,10 +11,10 @@ export function LedgerPage() {
     <>
       <div className="page-head">
         <Title>Ledger</Title>
-        <p>The official record. Every result we cite comes from one of these runs. Each entry is sealed to the one before
-          it with a hash, so changing any old result breaks every seal after it. The full check runs in CI on every push
-          (<code>parity ledger verify</code>); this page shows the chain links you can see at a glance. Every run also has
-          a GitHub release with its outputs and the exact data it used.</p>
+        <p>The official record. Every result we cite comes from one of these runs. Each entry stores a hash of the entry
+          before it, so changing an old result breaks every hash after it. CI runs the full check on every push
+          (<code>parity ledger verify</code>). This page shows the links between entries. Every run also has a GitHub
+          release with its outputs and the exact data it used.</p>
       </div>
 
       <Card title={`${ledger.length} official runs`}>
@@ -29,7 +29,7 @@ export function LedgerPage() {
             <div className="mono small muted">hash {e.hash} · prev {e.prev.slice(0, 16)}...</div>
             <div className="table-wrap">
               <table>
-                <thead><tr><th>Strategy</th><th>Sharpe</th><th>CAGR</th><th>Max drawdown</th><th>Deflated Sharpe</th><th>Gauntlet</th><th>Meets plan</th></tr></thead>
+                <thead><tr><th>Strategy</th><th>Sharpe</th><th>CAGR</th><th>Max drawdown</th><th>Deflated Sharpe</th><th>Tests</th><th>Meets plan</th></tr></thead>
                 <tbody>
                   {Object.entries(e.results).map(([name, r]) => (
                     <tr key={name}>

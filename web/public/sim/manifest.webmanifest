@@ -1,7 +1,7 @@
 {
   "name": "Parity Terminal",
   "short_name": "Terminal",
-  "description": "Markets, simulations and every Parity number in one keyboard-first terminal. History, not a forecast.",
+  "description": "A keyboard-first terminal for Parity's market data, strategy results and simulations. Past data, not a forecast.",
   "start_url": "/sim/",
   "scope": "/sim/",
   "display": "standalone",

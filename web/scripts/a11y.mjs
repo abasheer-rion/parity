@@ -16,8 +16,9 @@ import { chromium } from "playwright";
 const BASE = process.env.A11Y_BASE ?? "http://127.0.0.1:5199";
 const PAGES = (process.env.A11Y_PAGES ?? [
   "/", "/login/", "/signup/", "/reset/", "/verify/?type=email&token_hash=example",
-  "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/",
-  "/app/", "/research/", "/sim/",
+  "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/",
+  "/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/",
+  "/no-such-page-xyz/", "/app/#/no-such-page-xyz", "/trade/#/no-such-page-xyz",
 ].join(",")).split(",").map((p) => p.trim()).filter(Boolean);
 const SIZES = [
   { name: "desktop", width: 1280, height: 860 },

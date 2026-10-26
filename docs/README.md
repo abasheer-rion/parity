@@ -6,14 +6,15 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 | Type | What it holds | Count |
 | --- | --- | --- |
-| [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 2 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 30 |
+| [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 59 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 15 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 10 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 15 |
-| [guide](#guide) | How to do something in this repo, step by step. | 7 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 15 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 11 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 21 |
+| [guide](#guide) | How to do something in this repo, step by step. | 9 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
+| [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 20 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 87 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -36,14 +37,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-23 [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
-- 2026-10-23 [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
-- 2026-10-23 [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
-- 2026-10-23 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-23 [REF-0003: Data sources](reference/0003-data-sources.md)
-- 2026-10-23 [LOG-0010: Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md)
-- 2026-10-23 [LOG-0009: Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md)
-- 2026-10-23 [HYP-0009: Emerging market carry pays after costs](hypotheses/0009-emerging-market-carry-pays-after-costs.md)
+- 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
+- 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
+- 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- 2026-10-25 [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
+- 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
+- 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
+- 2026-10-25 [REF-0019: Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md)
 
 ## intent
 
@@ -51,6 +52,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | --- | --- | --- | --- | --- |
 | INT-0001 | [Initial intent](intent/0001-initial-intent.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [fx](TAGS.md#fx), [intent](TAGS.md#intent) |
 | INT-0002 | [Two products, a research and simulation platform and a public trading app](intent/0002-two-products-a-research-and-simulation-platform-and-a-public-trading-app.md) | current | 2026-10-21 | [process](TAGS.md#process) |
+| INT-0003 | [Parity Verify, the lie detector for trading strategies and bots](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md) | current | 2026-10-23 | [intent](TAGS.md#intent), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## decision
 
@@ -76,9 +78,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0018 | [Markets on the product side, crypto, perps, ETFs and what is new](decisions/0018-markets-on-the-product-side-crypto-perps-etfs-and-what-is-new.md) | accepted | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | DEC-0019 | [Real trading later, what it would legally take](decisions/0019-real-trading-later-what-it-would-legally-take.md) | proposed | 2026-10-22 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 | DEC-0020 | [Sim World plays every tab like the race, on its own full-screen site](decisions/0020-sim-world-plays-every-tab-like-the-race-on-its-own-full-screen-site.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
-| DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-22 | [ui](TAGS.md#ui) |
+| DEC-0021 | [Dark only, no top bar, computed findings and a large scale sim](decisions/0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
 | DEC-0022 | [Safe sign-in, legal pages, essential-only cookies and an accessibility bar](decisions/0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md) | accepted | 2026-10-22 | [process](TAGS.md#process) |
-| DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0023 | [Public pages search engines can read, and a pipeline that keeps them fresh](decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0024 | [Parity Terminal, a market terminal of its own at the sim address](decisions/0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md) | accepted | 2026-10-22 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
@@ -86,6 +88,35 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
 | DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0031 | [Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0032 | [Parity Verify as a data and API business, with a free retail tier](decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md) | proposed | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [process](TAGS.md#process) |
+| DEC-0033 | [Trade trackers, watchlists, alerts and a screener](decisions/0033-trade-trackers-watchlists-alerts-and-a-screener.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0034 | [Demo accounts, paper trading on delayed data](decisions/0034-demo-accounts-paper-trading-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0035 | [Bot Battle and shareable clips: win rate is not profit](decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md) | accepted | 2026-10-23 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0036 | [Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md) | accepted | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0037 | [Everything runs by itself and the search widens itself](decisions/0037-everything-runs-by-itself-and-the-search-widens-itself.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
+| DEC-0038 | [Every page gets its tags from one table and every view has a link](decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md) | accepted | 2026-10-24 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0039 | [A front page for Verify, dark glass and scroll scenes](decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md) | accepted | 2026-10-24 | [ui](TAGS.md#ui) |
+| DEC-0040 | [Parity Trade, a full-screen trading app of its own](decisions/0040-parity-trade-a-full-screen-trading-app-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0041 | [Parity as an installable site and a desktop app for Mac and Windows](decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0042 | [Parity Academy, a full-screen course player of its own](decisions/0042-parity-academy-a-full-screen-course-player-of-its-own.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
+| DEC-0045 | [We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md) | accepted | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0048 | [The desktop app loads the live site and keeps a copy for offline](decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0049 | [The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0052 | [Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0053 | [Our own product analytics, opt-in, stored in Postgres](decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| DEC-0055 | [Addresses that do not exist get a real 404 and each app says not found](decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0056 | [Team members see real-time venue feeds the public does not](decisions/0056-team-members-see-real-time-venue-feeds-the-public-does-not.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0057 | [Blog and news pages with labelled posts and real bylines](decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0058 | [One token file for every app and a lint that blocks raw values](decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
+| DEC-0059 | [A Parity page is never black, it shows a loading screen or says what went wrong](decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0060 | [A getting started checklist and first-run tours, and no bank details until a broker partner](decisions/0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -141,6 +172,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0013 | [Emerging market currencies](research/0013-emerging-market-currencies.md) | current | 2026-10-21 | [carry](TAGS.md#carry), [fx](TAGS.md#fx), [momentum](TAGS.md#momentum) |
 | RES-0014 | [Commodity futures, carry, trend and volatility](research/0014-commodity-futures-carry-trend-and-volatility.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [kpis](TAGS.md#kpis), [momentum](TAGS.md#momentum) |
 | RES-0015 | [Famous currency and commodity traders and what their records teach](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method) |
+| RES-0020 | [Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md) | current | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| RES-0021 | [How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md) | current | 2026-10-24 | [ui](TAGS.md#ui) |
+| RES-0022 | [How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md) | current | 2026-10-24 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra) |
+| RES-0024 | [AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| RES-0025 | [Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md) | current | 2026-10-25 | [competitors](TAGS.md#competitors), [news](TAGS.md#news), [private-markets](TAGS.md#private-markets), [strategy](TAGS.md#strategy) |
+| RES-0026 | [Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 
 ## guide
 
@@ -151,8 +188,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
-| GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
 | GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
+| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0009 | [Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## reference
 
@@ -166,13 +205,49 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-23 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |
 | REF-0013 | [News sources and market impact](reference/0013-news-sources-and-market-impact.md) | current | 2026-10-23 | [data](TAGS.md#data), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news) |
-| REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-22 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
+| REF-0014 | [Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data) |
 | REF-0015 | [Getting close to Bloomberg data: sources, costs and licences](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md) | current | 2026-10-22 | [data](TAGS.md#data) |
+| REF-0016 | [Parity Verify MVP spec](reference/0016-parity-verify-mvp-spec.md) | current | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
+| REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+
+## competitor
+
+| ID | Title | Status | Updated | Tags |
+| --- | --- | --- | --- | --- |
+| CMP-0001 | [What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [ui](TAGS.md#ui) |
+| CMP-0002 | [Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0003 | [LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0004 | [MetaTrader 4 and 5, the free broker platform most FX traders use](competitors/0004-metatrader-4-and-5.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0005 | [cTrader, a modern broker platform with copy, algos and a store](competitors/0005-ctrader.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0006 | [TradingView, browser charts and a social network for traders](competitors/0006-tradingview.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0007 | [Interactive Brokers, a global broker with four trading apps](competitors/0007-interactive-brokers.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [ui](TAGS.md#ui) |
+| CMP-0008 | [thinkorswim, Schwab's dense pro trading platform for options and futures traders](competitors/0008-thinkorswim.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0009 | [Robinhood, the simple trading app that added a pro desktop called Legend](competitors/0009-robinhood.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0010 | [Webull, a zero-commission broker with pro desktop tools and paper trading](competitors/0010-webull.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0011 | [OANDA, a long-running forex broker and currency data provider](competitors/0011-oanda.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source), [ui](TAGS.md#ui) |
+| CMP-0012 | [LMAX, an institutional FX exchange with a broker for professional traders](competitors/0012-lmax.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [open-source](TAGS.md#open-source) |
+| CMP-0013 | [Hyperliquid, an onchain exchange for crypto perpetuals and spot](competitors/0013-hyperliquid.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [open-source](TAGS.md#open-source), [ui](TAGS.md#ui) |
+| CMP-0014 | [Binance, the largest crypto exchange with futures and copy trading](competitors/0014-binance.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0015 | [Coinbase Advanced, the pro trading screen inside Coinbase](competitors/0015-coinbase-advanced.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0016 | [Kraken Pro, a customisable crypto trading app with a native desktop](competitors/0016-kraken-pro.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [ui](TAGS.md#ui) |
+| CMP-0017 | [eToro, a social investing broker built around copying other investors](competitors/0017-etoro.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [crypto](TAGS.md#crypto), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| CMP-0018 | [QuantPad, an AI quant workspace that grades strategies A to F](competitors/0018-quantpad.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0019 | [Myfxbook, the forex track record and analysis site traders cite](competitors/0019-myfxbook.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0020 | [FX Blue, free forex account analysis and MetaTrader add-ons](competitors/0020-fx-blue.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0021 | [Darwinex, a regulated broker that turns traders into risk-scaled indexes](competitors/0021-darwinex.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [fx](TAGS.md#fx), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0022 | [Collective2, a marketplace of live-tracked trading strategies](competitors/0022-collective2.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| CMP-0023 | [QuantConnect, cloud backtesting and live trading on open-source LEAN](competitors/0023-quantconnect.md) | current | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
 
 ## log
 
@@ -188,7 +263,16 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0008 | [Ayan work log, wordmark, Sim World, markets, legal and the redesign](log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md) | final | 2026-10-22 | [process](TAGS.md#process) |
 | LOG-0009 | [Ayan work log, the terminal, SEO, AI tools, news and edges](log/2026-10-23-ayan-work-log-terminal-seo-mcp-news-and-edges.md) | final | 2026-10-23 | [process](TAGS.md#process) |
 | LOG-0010 | [Ayan work log, private markets, the Academy, scoring fixes and UI polish](log/2026-10-23-ayan-work-log-private-markets-academy-fixes-and-ui.md) | final | 2026-10-23 | [process](TAGS.md#process) |
-| LOG-0011 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
+| LOG-0011 | [Ayan work log, results, bot battle, search widening and the trading platform](log/2026-10-24-ayan-work-log-results-bots-search-and-the-trading-platform.md) | final | 2026-10-24 | [process](TAGS.md#process) |
+| LOG-0012 | [Ayan work log, the niche decision and the dark front page](log/2026-10-24-ayan-work-log-the-niche-and-the-dark-front-page.md) | final | 2026-10-24 | [process](TAGS.md#process) |
+| LOG-0013 | [Parity Verify built and shipped](log/2026-10-24-parity-verify-built-and-shipped.md) | final | 2026-10-24 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| LOG-0014 | [Everything runs by itself](log/2026-10-24-ayan-work-log-everything-runs-by-itself.md) | final | 2026-10-24 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
+| LOG-0015 | [Parity Trade becomes its own app](log/2026-10-24-parity-trade-becomes-its-own-app.md) | final | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0016 | [Ayan work log, front page, Trade, links, copy and apps](log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0017 | [Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md) | final | 2026-10-24 | [competitors](TAGS.md#competitors), [process](TAGS.md#process) |
+| LOG-0018 | [Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0020 | [Emerging markets, energy futures and the next official runs](log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md) | final | 2026-10-22 | [carry](TAGS.md#carry), [commodities](TAGS.md#commodities), [fx](TAGS.md#fx) |
 
 ## algorithm
 

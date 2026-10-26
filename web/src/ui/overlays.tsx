@@ -169,7 +169,9 @@ function useFocusTrap(on: boolean, box: React.RefObject<HTMLElement | null>) {
     if (!on) return;
     const opener = document.activeElement as HTMLElement | null;
     const el = box.current;
-    const first = el?.querySelector<HTMLElement>(`.ui-modal-body ${FOCUSABLE}`) ?? el;
+    // The first control in the body (not the close button in the header); FOCUSABLE is a
+    // list of selectors, so it is searched inside the body rather than prefixed.
+    const first = el?.querySelector(".ui-modal-body")?.querySelector<HTMLElement>(FOCUSABLE) ?? el;
     first?.focus({ preventScroll: true });
     const key = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !el) return;
@@ -256,6 +258,11 @@ export function Drawer({ open, onClose, title, children, width = 520, side = "ri
       </aside>
     </div>
   );
+}
+
+/** A panel from the bottom edge: the phone-friendly form of Drawer. */
+export function Sheet(props: { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; footer?: ReactNode }) {
+  return <Drawer {...props} side="bottom" />;
 }
 
 // ---------- Toasts ----------

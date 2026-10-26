@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Discover and follow trading strategies, each tested honestly against the S&amp;P 500, with an open research side behind every result." />
-    <meta name="theme-color" content="#07080d" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -28,564 +27,489 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://parity.endyland.com/#org","name":"Parity Trading, Inc.","alternateName":"Parity","url":"https://parity.endyland.com/","logo":"https://parity.endyland.com/icon-512.png","email":"contact@paritytrading.ai"},{"@type":"WebSite","@id":"https://parity.endyland.com/#site","name":"Parity","url":"https://parity.endyland.com/","publisher":{"@id":"https://parity.endyland.com/#org"},"inLanguage":"en"}]}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=optional" rel="stylesheet" />
     <!--
-      The public front page. Plain HTML and inline CSS, so it paints at once.
-      One small module script (src/site/main.ts) adds motion on top: reveals, counters,
-      the scroll story, the looping app preview, and the 3D hero, which loads after first
-      paint. Everything here reads and works without the script. Rules: DEC-0017.
+      The public front page (DEC-0039). Plain HTML and inline CSS, so it paints at once and
+      reads with no script. One module script (src/site/main.ts) adds the motion: the hero
+      field, scroll-driven scenes, counters and reveals. Every picture's finished state is
+      the default, so with no script or reduced motion everything is still there.
     -->
+    <!--site-kit-->
     <style>
-      :root {
-        color-scheme: dark;
-        --bg: #07080d; --bg-2: #0a0b11; --card: #0c0e15; --card-2: #11131c; --line: #a9b6ff14; --line-2: #a9b6ff24;
-        --text: #f1f3f9; --muted: #a3a8b9; --faint: #8a8fa2;
-        --serif: "Cinzel", "Trajan Pro", "Times New Roman", serif;
-        --blue: #2f6bff; --blue-text: #85a8ff; --cyan: #5cc2f5; --mint: #6fdcb4; --lav: #a9bff7;
-        --good: #4cc98a; --bad: #f07a7a;
-        --ease: cubic-bezier(.2, .8, .2, 1);
-        --wrap: 1120px;
-      }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; background: var(--bg); color: var(--text); }
-      html { overflow-x: clip; }
-      body { font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased; }
-      a { color: inherit; }
-      img, svg { max-width: 100%; }
-      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
-      .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-      :focus-visible { outline: 2px solid var(--blue-text); outline-offset: 2px; border-radius: 6px; }
+      /* No top bar: a skip link, the logo in the corner and two quiet floating controls. */
+      .skip { position: fixed; z-index: var(--z-popover); left: 16px; top: -60px; padding: 10px 14px; border-radius: 10px; background: var(--text); color: var(--palette-black); font-weight: 600; text-decoration: none; transition: top var(--dur-2) var(--ease); }
+      .skip:focus { top: 16px; }
+      .corner-nav { right: 16px; }
+      .corner-nav a { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 9px; font-size: var(--type-md); font-weight: 500; text-decoration: none; color: var(--muted); transition: color var(--dur-2), background-color var(--dur-2); }
+      .corner-nav a:hover { color: var(--text); background: var(--color-hover); }
+      .corner-nav a.su { color: var(--color-canvas); background: var(--text); }
+      .corner-nav a.su:hover { background: var(--palette-white); color: var(--palette-black); }
 
-      /* Lenis smooth scroll (its stylesheet, inlined) */
-      html.lenis, html.lenis body { height: auto; }
-      .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
-      .lenis.lenis-smooth iframe { pointer-events: none; }
+      .link { color: var(--text); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-3); padding-bottom: 2px; transition: border-color var(--dur-2); }
+      .link:hover { border-color: var(--text); }
 
-      /* Header */
-      header { position: sticky; top: 0; z-index: 20; transition: background-color .3s, border-color .3s, backdrop-filter .3s; border-bottom: 1px solid transparent; }
-      header.scrolled { background: rgb(7 8 13 / .72); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom-color: var(--line); }
-      header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 12px; }
-      .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; text-decoration: none; }
-      .brand img { border-radius: 8px; display: block; }
-      nav { display: flex; gap: 8px; }
-      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--line-2); white-space: nowrap; transition: background-color .2s, border-color .2s, transform .2s var(--ease), box-shadow .2s; }
-      .btn:hover { border-color: #4a4d6b; background: rgb(255 255 255 / .03); }
-      .btn:active { transform: scale(.98); }
-      .btn.primary { background: #2a5ff0; border-color: #2a5ff0; color: #fff; box-shadow: 0 6px 24px rgb(47 107 255 / .24); }
-      .btn.primary:hover { background: #2257d6; box-shadow: 0 8px 30px rgb(47 107 255 / .38); }
-      .btn.lg { height: 50px; padding: 0 26px; font-size: 16px; }
-      .btn .arr { transition: transform .2s var(--ease); }
-      .btn:hover .arr { transform: translateX(3px); }
-
-      /* Hero */
-      .hero { position: relative; isolation: isolate; }
-      .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(70px); pointer-events: none; }
-      .hero::before { width: 560px; height: 560px; right: -120px; top: -140px; background: radial-gradient(circle, rgb(47 107 255 / .32), transparent 65%); animation: drift 26s ease-in-out infinite alternate; }
-      .hero::after { width: 420px; height: 420px; left: -160px; top: 160px; background: radial-gradient(circle, rgb(111 220 180 / .14), transparent 65%); animation: drift 32s ease-in-out infinite alternate-reverse; }
-      @keyframes drift { to { transform: translate3d(-60px, 50px, 0) scale(1.08); } }
-      .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 32px; align-items: center; padding-top: 56px; padding-bottom: 40px; }
-      .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-text); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
-      .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 0 rgb(111 220 180 / .5); animation: ping 2.8s ease-out infinite; }
-      @keyframes ping { 70%, 100% { box-shadow: 0 0 0 8px rgb(111 220 180 / 0); } }
-      h1 { font-family: var(--serif); font-size: clamp(34px, 5.4vw, 60px); line-height: 1.08; letter-spacing: 0.01em; margin: 0 0 24px; font-weight: 500; }
-      h1 .grad { background: linear-gradient(100deg, #cfe6fb 0%, #a9bff7 45%, #6fdcb4 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .lead { font-size: 19px; color: var(--muted); margin: 0 0 32px; max-width: 580px; }
+      /* Hero: the field fills it; the copy sits on the left. */
+      .hero { position: relative; isolation: isolate; height: 100svh; min-height: 680px; max-height: 1080px; overflow: clip; display: flex; flex-direction: column; justify-content: center; }
+      .field-box { position: absolute; z-index: -2; left: max(44%, calc(50% - 40px)); right: -3%; top: 20%; height: 62%; pointer-events: none; }
+      .field-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity var(--dur-pulse) var(--ease); }
+      .field-poster polyline { vector-effect: non-scaling-stroke; }
+      .field-poster { -webkit-mask-image: linear-gradient(90deg, transparent, var(--palette-black) 12%); mask-image: linear-gradient(90deg, transparent, var(--palette-black) 12%); }
+      .field-canvas { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity var(--dur-pulse) var(--ease); pointer-events: none; }
+      .hero.field-live .field-canvas { opacity: 1; }
+      .hero.field-live .field-poster { opacity: 0; }
+      .hero-shade { position: absolute; z-index: -1; inset: 0; pointer-events: none;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 94%, transparent) 0%, color-mix(in srgb, var(--color-canvas) 80%, transparent) 34%, color-mix(in srgb, var(--color-canvas) 35%, transparent) 50%, transparent 64%), linear-gradient(180deg, transparent 72%, color-mix(in srgb, var(--color-canvas) 70%, transparent)); }
+      .hero-in { padding-top: 40px; }
+      h1 { font-size: clamp(var(--type-8xl), 5.3vw, var(--type-8xl)); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; margin: 0 0 24px; max-width: 15ch; }
+      h1 span { color: var(--faint); }
+      .lead { font-size: clamp(var(--type-2xl), 1.4vw, var(--type-3xl)); color: var(--muted); margin: 0 0 32px; max-width: 540px; }
       .cta { display: flex; gap: 12px; flex-wrap: wrap; }
-      .fine { margin-top: 18px; color: var(--faint); font-size: 13px; }
-      .hero-art { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1 / 1; margin-left: auto; contain: layout paint; }
-      .hero-art .hero-poster, .hero-art .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity .9s var(--ease); }
-      .hero-art .hero-canvas { opacity: 0; }
-      .hero-art.live .hero-canvas { opacity: 1; }
-      .hero-art.live .hero-poster { opacity: 0; }
-      .tagchip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgb(20 21 35 / .78); border: 1px solid var(--line-2); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: bob 7s ease-in-out infinite; white-space: nowrap; }
-      .tagchip i { width: 7px; height: 7px; border-radius: 50%; }
-      .tagchip:nth-of-type(2) { animation-delay: -2s; } .tagchip:nth-of-type(3) { animation-delay: -4s; } .tagchip:nth-of-type(4) { animation-delay: -5.5s; }
-      @keyframes bob { 50% { transform: translateY(-6px); } }
+      .fine { margin: 18px 0 0; color: var(--faint); font-size: var(--type-sm); }
+      .proof { position: absolute; left: 0; right: 0; bottom: 28px; }
+      .proof dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); }
+      .proof dl > div { padding: 18px 24px 0 0; display: flex; flex-direction: column; }
+      .proof dd { order: -1; margin: 0; font-size: clamp(var(--type-5xl), 2.4vw, var(--type-7xl)); font-weight: 560; letter-spacing: -0.03em; line-height: 1.15; }
+      .proof dt { color: var(--faint); font-size: var(--type-sm); line-height: 1.45; margin-top: 4px; max-width: 30ch; }
 
-      /* Counters */
-      .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg, rgb(255 255 255 / .025), transparent); margin: 8px 0 0; }
-      .stat { padding: 22px 22px 20px; border-left: 1px solid var(--line); }
-      .stat:first-child { border-left: 0; }
-      .stat .num { display: inline-block; font-size: clamp(30px, 4vw, 42px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
-      .stat .lbl { display: block; color: var(--muted); font-size: 14px; margin-top: 6px; }
-      .stat .src { display: block; color: var(--faint); font-size: 12px; margin-top: 2px; }
-      .stat .src .on { display: none; }
-      .stat.live .src .off { display: none; }
-      .stat.live .src .on { display: inline; }
+      /* Backers */
+      .backers { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--color-surface) 40%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+      .backers .wrap { display: flex; align-items: center; justify-content: center; gap: 14px 40px; flex-wrap: wrap; min-height: 84px; padding-top: 14px; padding-bottom: 14px; }
+      .backers-lbl { margin: 0; color: var(--faint); font: 500 var(--type-xs)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+      .backers-list { display: flex; gap: 14px 40px; flex-wrap: wrap; justify-content: center; list-style: none; margin: 0; padding: 0; }
+      .backers-list li { color: var(--color-text-body); font-size: var(--type-3xl); font-weight: 600; letter-spacing: -0.015em; }
 
       /* Sections */
-      .section { padding: 96px 0; }
-      .kicker { color: var(--blue-text); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
-      h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.025em; font-weight: 520; }
-      h2.serif { font-family: var(--serif); font-weight: 500; letter-spacing: 0.01em; }
-      .sub { color: var(--muted); margin: 0 0 36px; max-width: 640px; font-size: 18px; }
-      .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; }
-      .ticks { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 12px; }
-      .ticks li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--text); }
-      .ticks li::before { content: ""; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; background: rgb(47 107 255 / .16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%2385a8ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
-      .ticks span { color: var(--muted); display: block; font-size: 15px; }
+      .sec { padding: 200px 0; border-top: 1px solid var(--line); }
+      h2 { font-size: clamp(var(--type-7xl), 4.4vw, var(--type-8xl)); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 20px; max-width: 18ch; }
+      h2 .dim { color: var(--faint); }
+      .sub { color: var(--muted); margin: 0 0 28px; max-width: 560px; font-size: var(--type-2xl); }
 
-      /* App preview: an HTML and CSS mock of the app home, looping while on screen. */
-      .device { position: relative; border-radius: 18px; border: 1px solid var(--line-2); background: #0e0f19; box-shadow: 0 40px 80px rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .02) inset; overflow: hidden; font-size: 12px; }
-      .device::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 60% at 80% -10%, rgb(47 107 255 / .14), transparent 60%); }
-      .d-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-bottom: 1px solid var(--line); background: #121321; }
-      .d-bar i { width: 9px; height: 9px; border-radius: 50%; background: #2c2e45; }
-      .d-url { margin-left: 12px; flex: 1; max-width: 260px; height: 20px; border-radius: 6px; background: #191a2b; color: var(--faint); font-size: 11px; display: flex; align-items: center; padding: 0 8px; }
-      .d-tag { margin-left: auto; font-size: 10px; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
-      .d-body { display: grid; grid-template-columns: 132px minmax(0, 1fr); min-height: 360px; }
-      .d-side { border-right: 1px solid var(--line); padding: 12px 10px; display: grid; align-content: start; gap: 4px; background: #0c0d16; }
-      .d-side .logo { display: flex; align-items: center; gap: 6px; font-weight: 600; margin-bottom: 10px; font-size: 12px; }
-      .d-side .logo img { width: 16px; height: 16px; }
-      .d-side span { display: block; padding: 5px 8px; border-radius: 6px; color: var(--faint); }
-      .d-side span.on { background: #1b1c2e; color: var(--text); }
-      .d-main { padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-      .d-hello { font-size: 18px; font-weight: 600; }
-      .d-hello small { display: block; font-size: 11px; color: var(--faint); font-weight: 400; }
-      .d-ask { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px; color: var(--text); background: #121321; overflow: hidden; white-space: nowrap; }
-      .d-ask svg { flex: none; color: var(--blue-text); }
-      .d-type { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; }
-      .d-caret { width: 1.5px; height: 14px; background: var(--blue-text); margin-left: -6px; }
-      .d-answer { border-radius: 10px; padding: 9px 12px; background: rgb(47 107 255 / .12); border: 1px solid rgb(47 107 255 / .3); color: #dfe7ff; }
-      .d-answer b { color: #fff; }
-      .d-cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 12px; }
-      .d-card { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: #121321; min-width: 0; }
-      .d-card h4 { margin: 0; font-size: 12px; font-weight: 600; }
-      .d-card .meta { color: var(--faint); font-size: 11px; }
-      .d-big { font-size: 20px; font-weight: 650; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
-      .d-big em { font-style: normal; color: var(--good); font-size: 12px; font-weight: 500; margin-left: 4px; }
-      .d-chart svg { display: block; width: 100%; height: 92px; margin-top: 8px; }
-      .d-row { display: grid; grid-template-columns: 8px minmax(0, 1fr) 40px auto; gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); }
-      .d-row:first-of-type { border-top: 0; }
-      .d-row .dot { width: 8px; height: 8px; border-radius: 50%; }
-      .d-row .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .d-row svg { width: 40px; height: 16px; }
-      .d-badge { font-size: 10px; padding: 1px 6px; border-radius: 5px; background: rgb(47 107 255 / .18); color: #a9c2ff; white-space: nowrap; }
-      .d-badge.n { background: #23243a; color: var(--muted); }
-      /* The loop: 12 seconds. Final state is the default, so with no motion everything shows. */
-      .device.playing .d-type { animation: type 12s steps(30, end) infinite; }
-      .device.playing .d-caret { animation: caret 12s linear infinite; }
-      .device.playing .d-answer { animation: answer 12s var(--ease) infinite; }
-      .device.playing .d-line { animation: draw 12s var(--ease) infinite; }
-      .device.playing .d-row { animation: row 12s var(--ease) infinite; }
-      .device.playing .d-row:nth-of-type(2) { animation-name: row2; }
-      .device.playing .d-row:nth-of-type(3) { animation-name: row3; }
-      .d-line { stroke-dasharray: 1; stroke-dashoffset: 0; }
-      @keyframes type { 0%, 4% { max-width: 0; } 30%, 92% { max-width: 100%; } 100% { max-width: 0; } }
-      @keyframes caret { 0%, 30% { opacity: 1; } 31%, 100% { opacity: 0; } }
-      @keyframes answer { 0%, 33% { opacity: 0; transform: translateY(6px); } 38%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-      @keyframes draw { 0%, 8% { stroke-dashoffset: 1; } 50%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
-      @keyframes row { 0%, 12% { opacity: 0; transform: translateX(10px); } 18%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-      @keyframes row2 { 0%, 17% { opacity: 0; transform: translateX(10px); } 23%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-      @keyframes row3 { 0%, 22% { opacity: 0; transform: translateX(10px); } 28%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      /* Panels: every demo sits in one framed box, centred and sized to its content. */
+      .panel { position: relative; margin: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface-raised) 62%, transparent), color-mix(in srgb, var(--color-bar) 70%, transparent)); border: 1px solid color-mix(in srgb, var(--palette-white) 10%, transparent); border-radius: 18px; box-shadow: 0 1px 0 color-mix(in srgb, var(--palette-white) 6%, transparent) inset, 0 40px 80px -20px color-mix(in srgb, var(--palette-black) 70%, transparent); overflow: hidden; backdrop-filter: blur(22px) saturate(1.25); -webkit-backdrop-filter: blur(22px) saturate(1.25); }
+      .panel::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: .04; border-radius: inherit; }
+      .panel-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 42px; padding: 0 18px; border-bottom: 1px solid var(--line); color: var(--faint); font: 500 var(--type-2xs)/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+      .panel-bar span:last-child { overflow: hidden; text-overflow: ellipsis; }
+      .panel-note { margin: 0; padding: 12px 18px 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: var(--type-xs); line-height: 1.5; }
 
-      /* Scroll story */
-      .story-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; align-items: start; }
-      .story-stage { position: sticky; top: 104px; height: min(520px, calc(100vh - 140px)); border-radius: 22px; border: 1px solid var(--line); background: radial-gradient(100% 80% at 50% 0%, #161935, #0e0f19 70%); overflow: hidden; }
-      .story-steps { list-style: none; padding: 0; margin: 0; }
-      .story-step { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0; }
-      .story-step h3, .story-step p { transition: color .5s var(--ease); }
-      .story-step:not(.on) h3 { color: var(--muted); }
-      .story-step:not(.on) p { color: var(--faint); }
-      .story-step:first-child { min-height: 46vh; justify-content: flex-start; padding-top: 40px; }
-      .story-step .n { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-2); color: var(--muted); font-size: 13px; margin-bottom: 14px; transition: background-color .4s, color .4s, border-color .4s; }
-      .story-step.on .n { background: #2862f0; border-color: #2862f0; color: #fff; }
-      .story-step h3 { margin: 0 0 8px; font-size: 26px; letter-spacing: -0.01em; }
-      .story-step p { margin: 0; color: var(--muted); font-size: 17px; max-width: 440px; }
-      .rail { position: absolute; left: 24px; right: 24px; top: 20px; display: flex; gap: 6px; z-index: 2; }
-      .rail i { flex: 1; height: 3px; border-radius: 3px; background: #262842; overflow: hidden; position: relative; }
-      .rail i::after { content: ""; position: absolute; inset: 0; background: var(--blue-text); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
-      .story[data-step="0"] .rail i:nth-child(-n+1)::after, .story[data-step="1"] .rail i:nth-child(-n+2)::after,
-      .story[data-step="2"] .rail i:nth-child(-n+3)::after, .story[data-step="3"] .rail i:nth-child(-n+4)::after { transform: none; }
-      .scene { position: absolute; inset: 0; display: grid; place-items: center; padding: 56px 28px 28px; opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .55s var(--ease), transform .55s var(--ease); pointer-events: none; }
-      .story[data-step="0"] .scene:nth-child(2), .story[data-step="1"] .scene:nth-child(3), .story[data-step="2"] .scene:nth-child(4), .story[data-step="3"] .scene:nth-child(5) { opacity: 1; transform: none; }
-      .story:not([data-step]) .scene:nth-child(5) { opacity: 1; transform: none; }
-      .paper { width: min(360px, 100%); border-radius: 16px; background: var(--card-2); border: 1px solid var(--line-2); padding: 20px; box-shadow: 0 24px 48px rgb(0 0 0 / .35); }
-      .paper .tiny { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
-      .paper h4 { margin: 6px 0 10px; font-size: 18px; line-height: 1.3; }
-      .paper p { margin: 0; color: var(--muted); font-size: 14px; }
-      .from { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
-      .from span { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
-      .from span.on { border-color: transparent; background: rgb(47 107 255 / .18); color: #b8ccff; }
-      .reg-line { display: grid; grid-template-columns: 76px 1fr; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
-      .reg-line b { color: var(--faint); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
-      .seal { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12px; color: var(--mint); border: 1px solid rgb(111 220 180 / .35); border-radius: 999px; padding: 3px 10px; transform: scale(.6); opacity: 0; transition: transform .5s .35s cubic-bezier(.2, 1.4, .3, 1), opacity .3s .35s; }
-      .story[data-step="1"] .seal { transform: none; opacity: 1; }
-      .checks { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px; font-size: 13px; }
-      .checks li { display: flex; align-items: center; gap: 7px; opacity: 0; transform: translateX(-6px); transition: opacity .35s var(--ease), transform .35s var(--ease); }
-      .story[data-step="2"] .checks li { opacity: 1; transform: none; }
-      .checks li::before { content: "+"; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; font-size: 11px; font-weight: 700; background: rgb(76 201 138 / .18); color: var(--good); flex: none; }
-      .checks li.x::before { content: "\2212"; background: rgb(240 122 122 / .16); color: var(--bad); }
-      .checks li:nth-child(2) { transition-delay: .07s; } .checks li:nth-child(3) { transition-delay: .14s; } .checks li:nth-child(4) { transition-delay: .21s; }
-      .checks li:nth-child(5) { transition-delay: .28s; } .checks li:nth-child(6) { transition-delay: .35s; } .checks li:nth-child(7) { transition-delay: .42s; }
-      .checks li:nth-child(8) { transition-delay: .49s; } .checks li:nth-child(9) { transition-delay: .56s; } .checks li:nth-child(10) { transition-delay: .63s; } .checks li:nth-child(11) { transition-delay: .7s; }
-      .score { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-      .score h4 { margin-bottom: 0; }
-      .score strong { font-size: 26px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-      .bar { height: 6px; border-radius: 6px; background: #262842; margin-top: 8px; overflow: hidden; }
-      .bar i { display: block; height: 100%; width: 63.6%; border-radius: 6px; background: linear-gradient(90deg, var(--blue), var(--cyan)); transform-origin: left; transform: scaleX(0); transition: transform .9s .2s var(--ease); }
-      .story[data-step="2"] .bar i { transform: none; }
-      .verdict { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: rgb(47 107 255 / .18); color: #b8ccff; }
-      .paper svg { width: 100%; height: 80px; margin: 10px 0 4px; display: block; }
-      .v-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s .25s var(--ease); }
-      .story[data-step="3"] .v-line, .story:not([data-step]) .v-line { stroke-dashoffset: 0; }
-      .kv { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); padding: 7px 0; border-top: 1px solid var(--line); }
+      /* Pinned, scroll-driven sections. Pinned only once main.ts runs (.motion). */
+      .pin { position: relative; border-top: 1px solid var(--line); }
+      .pin-in { padding: 200px 0; }
+      .motion .pin.bot { height: 280vh; }
+      .motion .pin.verify { height: 320vh; }
+      .motion .pin .pin-in { position: sticky; top: 0; height: 100vh; height: 100svh; padding: 0; display: flex; align-items: center; }
+      .pin-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 64px; align-items: center; }
+      .pin-copy .sub { margin-bottom: 24px; }
+      .meter { height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: 32px; max-width: 240px; }
+      .meter i { display: block; height: 100%; background: var(--text); transform-origin: left; transform: scaleX(var(--p, 1)); }
+
+      /* Bot Battle */
+      .bot-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+      .bot-stats > div { padding: 16px 18px; }
+      .bot-stats > div + div { border-left: 1px solid var(--line); }
+      .bot-stats .k { display: block; color: var(--faint); font-size: var(--type-xs); }
+      .bot-stats b { display: block; font-size: clamp(var(--type-6xl), 3vw, var(--type-8xl)); font-weight: 560; letter-spacing: -0.03em; line-height: 1.15; transition: color var(--dur-3); }
+      #bot-wr { color: var(--good); }
+      #bot-bal.hit { color: var(--bad); }
+      .bot-chart { position: relative; height: clamp(220px, 32vh, 300px); margin: 18px 18px 0; }
+      .bot-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      .bot-grid line { stroke: color-mix(in srgb, var(--palette-white) 6%, transparent); vector-effect: non-scaling-stroke; }
+      .bot-start { stroke: color-mix(in srgb, var(--palette-white) 28%, transparent); stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+      .bot-line { fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+      .bot-start-lbl { position: absolute; left: 0; top: calc(18px + (1 - 10000 / 16000) * (100% - 32px) - 22px); color: var(--faint); font: var(--type-2xs)/1 var(--mono); }
+      .bot-tape { display: block; width: calc(100% - 36px); height: 22px; margin: 14px 18px 0; }
+      .bot-tape .w { fill: var(--good); opacity: .55; }
+      .bot-tape .l { fill: var(--bad); }
+      .bot-legend { display: flex; gap: 18px; padding: 10px 18px 0; color: var(--faint); font-size: var(--type-xs); }
+      .bot-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+      .bot-panel .panel-note { margin-top: 14px; }
+      .bot-clip { clip-path: inset(0 calc((1 - var(--f, 1)) * 100%) 0 0); }
+
+      /* Verify */
+      .vsteps { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 4px; counter-reset: s; max-width: 520px; }
+      .vsteps li { position: relative; padding: 12px 0 12px 44px; color: var(--faint); transition: color var(--dur-4) var(--ease); counter-increment: s; }
+      .vsteps li::before { content: counter(s); position: absolute; left: 0; top: 12px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; font: var(--type-xs)/1 var(--mono); color: var(--faint); transition: background-color var(--dur-4), color var(--dur-4), border-color var(--dur-4); }
+      .vsteps li b { display: block; color: inherit; font-weight: 560; }
+      .vsteps li.on, .vsteps:not(.live) li { color: var(--text); }
+      .vsteps li.on::before { background: var(--text); color: var(--color-canvas); border-color: var(--text); }
+      .vdrop { margin: 18px 18px 0; height: 76px; border: 1px dashed var(--line-3); border-radius: 12px; position: relative; display: flex; align-items: center; justify-content: center; color: var(--faint); font-size: var(--type-sm); overflow: hidden; }
+      .vfile { position: absolute; inset: 8px; display: flex; align-items: center; gap: 12px; padding: 0 14px; border-radius: 9px; background: var(--raise); border: 1px solid var(--line-2); transition: transform var(--dur-5) var(--ease), opacity var(--dur-4); }
+      .vfile svg { flex: none; color: var(--muted); }
+      .vfile b { display: block; font-size: var(--type-md); font-weight: 560; }
+      .vfile span { display: block; color: var(--faint); font-size: var(--type-xs); }
+      .vfile em { margin-left: auto; font: normal var(--type-2xs)/1 var(--mono); color: var(--good); }
+      .vchecks { list-style: none; margin: 14px 18px 0; padding: 0; }
+      .vchecks li { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); }
+      .vchecks li:first-child { border-top: 0; }
+      .vchecks i { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 700 var(--type-xs)/1 var(--mono); font-style: normal; }
+      .vchecks .ok i { background: color-mix(in srgb, var(--color-positive) 14%, transparent); color: var(--good); }
+      .vchecks .no i { background: color-mix(in srgb, var(--color-negative) 14%, transparent); color: var(--bad); }
+      .vchecks .fl i { background: color-mix(in srgb, var(--color-warning) 14%, transparent); color: var(--warn); }
+      .vchecks b { display: block; font-size: var(--type-md); font-weight: 560; }
+      .vchecks span { display: block; color: var(--faint); font-size: var(--type-sm); line-height: 1.45; }
+      .vchecks em { font: normal var(--type-2xs)/1 var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: .05em; }
+      .vverdict { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 6px 18px 0; padding: 16px 0 18px; border-top: 1px solid var(--line-2); transition: opacity var(--dur-5) var(--ease), transform var(--dur-5) var(--ease); }
+      .vv-tag { display: inline-flex; align-items: center; gap: 8px; font-size: var(--type-3xl); font-weight: 600; letter-spacing: -0.02em; }
+      .vv-tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--warn); }
+      .vv-n { color: var(--muted); font-size: var(--type-md); }
+      .vv-n b { color: var(--text); font-size: var(--type-4xl); font-weight: 600; display: inline-block; min-width: 1.2ch; text-align: right; }
+      .motion .verify .vfile { opacity: 0; transform: translateY(-64px); }
+      .motion .verify[data-s="1"] .vfile, .motion .verify[data-s="2"] .vfile, .motion .verify[data-s="3"] .vfile { opacity: 1; transform: none; }
+      .motion .verify .vchecks li:not(.lit) { opacity: .18; transform: translateX(-6px); }
+      .motion .verify .vverdict:not(.lit) { opacity: 0; transform: translateY(8px); }
+
+      /* Every try is counted */
+      .funnel { margin: 56px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+      .f-row { display: grid; grid-template-columns: minmax(200px, .5fr) minmax(0, 1fr); gap: 8px 40px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); }
+      .f-row dd { margin: 0; font-size: clamp(var(--type-8xl), 6.4vw, var(--type-8xl)); font-weight: 600; letter-spacing: -0.045em; line-height: 1; }
+      .f-row dt { color: var(--muted); font-size: var(--type-2xl); max-width: 36ch; }
+      .f-bar { grid-column: 1 / -1; height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+      .f-bar i { display: block; height: 100%; width: calc(var(--w, 1) * 100%); min-width: 3px; background: var(--text); border-radius: 3px; transform-origin: left; transition: transform var(--dur-pulse) var(--ease), width var(--dur-5) var(--ease); }
+      .f-row:last-child .f-bar i { background: var(--accent); box-shadow: 0 0 14px color-mix(in srgb, var(--color-accent) 60%, transparent); }
+      .motion .f-row:not(.in) .f-bar i { transform: scaleX(0); }
+      .f-note { margin: 16px 0 0; color: var(--faint); font-size: var(--type-sm); }
+
+      /* Coverage: the markets, very large. */
+      .cover { padding: 200px 0; border-top: 1px solid var(--line); }
+      .cv { list-style: none; margin: 0; padding: 0; }
+      .cv li { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 8px 40px; align-items: end; padding: 18px 0 22px; border-bottom: 1px solid var(--line); }
+      .cv li:first-child { border-top: 1px solid var(--line); }
+      .cv-w { font-size: clamp(var(--type-8xl), 10.5vw, var(--type-8xl)); font-weight: 600; letter-spacing: -0.055em; line-height: .92; }
+      .cv-m { padding-bottom: 10px; }
+      .cv-n { display: block; height: 22px; font: 500 var(--type-md)/22px var(--mono); color: var(--text); }
+      .cv-d { display: block; color: var(--faint); font-size: var(--type-md); line-height: 1.45; }
+      .cv-src { margin: 22px 0 0; color: var(--faint); font: var(--type-xs)/1.6 var(--mono); }
+      .motion .cv li .cv-w { transition: opacity var(--dur-6) var(--ease), transform var(--dur-6) var(--ease); }
+      .motion .cv li:not(.in) .cv-w { opacity: .08; transform: translateY(18px); }
+
+      /* How a strategy is tested: three framed, looping demos. */
+      .steps { display: grid; gap: 28px; margin-top: 56px; }
+      .step { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 56px; align-items: center; padding: 28px 0; }
+      .step h3 { margin: 0 0 10px; font-size: clamp(var(--type-4xl), 2.2vw, var(--type-6xl)); letter-spacing: -0.025em; font-weight: 600; line-height: 1.2; }
+      .step p { margin: 0; color: var(--muted); font-size: var(--type-xl); max-width: 440px; }
+      .step .n { display: block; color: var(--faint); font: 500 var(--type-xs)/1 var(--mono); margin-bottom: 14px; }
+      .demo { max-width: 560px; width: 100%; justify-self: center; }
+      .demo-body { padding: 22px; }
+      .plan-row { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: var(--type-md); }
+      .plan-row:first-of-type { border-top: 0; }
+      .plan-row b { color: var(--faint); font-weight: 500; font-size: var(--type-xs); text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
+      .plan-h { margin: 0 0 8px; font-size: var(--type-2xl); font-weight: 600; }
+      .seal { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line-3); border-radius: 999px; font: 500 var(--type-xs)/1 var(--mono); color: var(--text); }
+      .seal i { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+      .g-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+      .g-head b { font-size: var(--type-2xl); font-weight: 600; }
+      .g-head strong { font-size: var(--type-6xl); font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
+      .g-bar { height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; margin-bottom: 14px; }
+      .g-bar i { display: block; height: 100%; width: 100%; background: var(--text); transform-origin: left; transform: scaleX(var(--g, .636)); transition: transform var(--dur-4) var(--ease); }
+      .g-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; font-size: var(--type-sm); }
+      .g-list li { display: flex; align-items: center; gap: 8px; transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease); }
+      .g-list li::before { content: "+"; flex: none; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; font: 700 var(--type-2xs)/1 var(--mono); background: color-mix(in srgb, var(--color-positive) 14%, transparent); color: var(--good); }
+      .g-list li.x::before { content: "\2212"; background: color-mix(in srgb, var(--color-negative) 14%, transparent); color: var(--bad); }
+      .demo.looping .g-list li:not(.on) { opacity: .15; transform: translateX(-4px); }
+      .r-chart { position: relative; height: 150px; margin: 6px 0 12px; }
+      .r-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .r-line { fill: none; stroke-width: 1.8; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0; }
+      .demo.looping .r-line { animation: r-draw var(--dur-loop) var(--ease) infinite; }
+      @keyframes r-draw { 0%, 6% { stroke-dashoffset: 1; } 45%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+      .r-key { display: flex; gap: 16px; color: var(--faint); font-size: var(--type-xs); margin-bottom: 12px; }
+      .r-key i { display: inline-block; width: 14px; height: 2px; margin-right: 6px; vertical-align: 3px; }
+      .verdict { display: inline-block; font-size: var(--type-xs); padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--text); margin-left: 8px; vertical-align: 2px; font-weight: 500; }
+      .kv { display: flex; justify-content: space-between; font-size: var(--type-sm); color: var(--muted); padding: 9px 0; border-top: 1px solid var(--line); }
       .kv strong { color: var(--text); font-weight: 500; }
+      .demo.looping .typed { animation: typed var(--dur-loop-slow) steps(40, end) infinite; display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; }
+      @keyframes typed { 0%, 4% { max-width: 0; } 35%, 94% { max-width: 100%; } 100% { max-width: 0; } }
+      .demo.looping .seal { animation: seal var(--dur-loop-slow) var(--ease) infinite; }
+      @keyframes seal { 0%, 40% { opacity: 0; transform: scale(.8); } 46%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 
-      /* Two doors */
-      .doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; perspective: 1200px; }
-      .door { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 10px; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease), border-color .3s, box-shadow .3s; transform-style: preserve-3d; overflow: hidden; }
-      .door::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(400px circle at var(--gx, 50%) var(--gy, 0%), rgb(133 168 255 / .1), transparent 60%); opacity: 0; transition: opacity .3s; }
-      .door:hover { border-color: var(--line-2); box-shadow: 0 30px 60px rgb(0 0 0 / .35); transition: transform .12s linear, border-color .3s, box-shadow .3s; }
-      .door:hover::before { opacity: 1; }
-      .door h3 { margin: 0; font-size: 24px; }
-      .door .who { color: var(--blue-text); font-size: 13px; font-weight: 600; }
-      .door p { margin: 0; color: var(--muted); }
-      .door ul { margin: 4px 0 10px; padding-left: 18px; color: var(--text); font-size: 15px; }
-      .door .btn { align-self: flex-start; margin-top: auto; }
-      .door-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgb(47 107 255 / .14); color: var(--blue-text); margin-bottom: 6px; }
-
-      /* The wall: the light blue gradient the team likes. Dark text, so contrast stays high. */
-      .lightband { position: relative; color: #0d1530; background: linear-gradient(120deg, #d6f5e9 0%, #cfe6fb 48%, #a9bff7 100%); overflow: hidden; isolation: isolate; }
-      .lightband::before { content: ""; position: absolute; z-index: -1; width: 700px; height: 700px; right: -200px; top: -260px; border-radius: 50%; background: radial-gradient(circle, rgb(255 255 255 / .55), transparent 60%); animation: drift 30s ease-in-out infinite alternate; }
-      .lightband .kicker { color: #2448b8; }
-      .lightband .sub { color: #34405e; }
-      .lightband .star { position: absolute; z-index: -1; right: 4%; bottom: -120px; width: 420px; height: 420px; opacity: .14; animation: turn 120s linear infinite; }
-      @keyframes turn { to { transform: rotate(360deg); } }
-      .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
-      .wall li { background: rgb(255 255 255 / .55); border: 1px solid rgb(255 255 255 / .8); border-radius: 18px; padding: 24px; box-shadow: 0 10px 30px rgb(36 72 184 / .08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .35s var(--ease), box-shadow .35s; }
-      .wall li:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgb(36 72 184 / .14); }
-      .wall .num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #2448b8; color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 14px; }
-      .wall strong { display: block; margin-bottom: 6px; font-size: 18px; }
-      .wall span { color: #34405e; font-size: 15px; }
+      /* Also on Parity */
+      .more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--color-border); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; list-style: none; padding: 0; margin: 40px 0 0; }
+      .more li { position: relative; background: color-mix(in srgb, var(--color-surface) 78%, transparent); padding: 24px 22px; display: flex; flex-direction: column; gap: 6px; transition: background-color var(--dur-3); }
+      .more li:hover { background: color-mix(in srgb, var(--color-surface-overlay) 85%, transparent); }
+      .more h3 { margin: 0; font-size: var(--type-2xl); font-weight: 600; letter-spacing: -0.01em; }
+      .more p { margin: 0; color: var(--muted); font-size: var(--type-md); }
+      .more a { margin-top: auto; padding-top: 10px; color: var(--text); font-size: var(--type-md); font-weight: 500; text-decoration: none; }
+      .more a::after { content: ""; position: absolute; inset: 0; }
 
       /* Closing */
-      .closing { text-align: center; padding: 110px 0 120px; position: relative; isolation: isolate; }
-      .closing::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 640px; height: 340px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgb(47 107 255 / .22), transparent); filter: blur(20px); }
-      .closing h2 { font-size: clamp(30px, 5vw, 52px); margin: 0 0 14px; }
-      .closing p { color: var(--muted); margin: 0 auto 30px; max-width: 520px; }
+      .closing { text-align: center; padding: 240px 0; border-top: 1px solid var(--line); position: relative; isolation: isolate; overflow: clip; }
+            .closing h2 { margin: 0 auto 18px; }
+      .closing p { color: var(--muted); margin: 0 auto 32px; max-width: 480px; font-size: var(--type-2xl); }
       .closing .cta { justify-content: center; }
-      footer { border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; }
-      footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 28px; }
-
-      /* The large scale sim: a full-width canvas of illustrative paths (src/site/paths.ts). */
-      .sim { position: relative; isolation: isolate; padding: 40px 0 24px; }
-      .sim-stage { position: relative; width: 100%; height: clamp(440px, 46vw, 640px); overflow: hidden; contain: layout paint; }
-      .sim-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
-        background: linear-gradient(90deg, var(--bg) 0%, rgb(7 8 13 / .9) 22%, rgb(7 8 13 / 0) 44%), linear-gradient(180deg, var(--bg), transparent 12%, transparent 94%, var(--bg)); }
-      .sim-poster, .sim-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-      .sim-poster { transition: opacity .9s var(--ease); }
-      .sim-stage.live .sim-poster { opacity: 0; }
-      .sim-copy { position: absolute; z-index: 3; left: 0; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none; }
-      .sim-copy .wrap > div { max-width: 430px; pointer-events: auto; }
-      .sim-copy .sub { font-size: 17px; margin-bottom: 24px; }
-      .sim-scn { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--faint); letter-spacing: .04em; margin: 0 0 18px; min-height: 18px; }
-      .sim-scn i { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
-      .sim-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0 0 26px; padding: 0; border-top: 1px solid var(--line); }
-      .sim-stats div { padding: 14px 14px 0 0; }
-      .sim-stats dt { color: var(--faint); font-size: 12px; line-height: 1.4; margin-top: 4px; }
-      .sim-stats dd { margin: 0; font-size: 24px; font-weight: 520; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; order: -1; }
-      .sim-stats div { display: flex; flex-direction: column; }
-      .sim-note { margin: 18px 0 0; color: var(--faint); font-size: 12px; max-width: 400px; }
+      footer { border-top: 1px solid var(--line); color: var(--faint); font-size: var(--type-sm); }
+      footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 30px; }
 
       /* Reveals: only once the script has run, and never for reduced motion. */
-      .motion .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+      .motion .rv { opacity: 0; transform: translateY(20px); transition: opacity var(--dur-6) var(--ease), transform var(--dur-6) var(--ease); transition-delay: calc(var(--d, 0) * var(--dur-1)); }
       .motion .rv.in { opacity: 1; transform: none; }
 
-      @media (max-width: 899px) {
-        .sim { padding-top: 24px; }
-        .sim-stage { height: 380px; }
-        .sim-stage::after { background: linear-gradient(180deg, var(--bg), transparent 16%, transparent 80%, var(--bg)); }
-        .sim-copy { position: static; transform: none; margin-top: 8px; }
-        .sim-copy .wrap > div { max-width: 560px; }
+      @media (max-width: 1100px) {
+        .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 960px) {
-        .split, .story-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-        .story-stage { top: 80px; height: 400px; z-index: 1; }
-        .story-step { min-height: 52vh; }
-        .story-step:first-child { min-height: 30vh; padding-top: 16px; }
+        .pin-grid, .step { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+        .motion .pin .pin-in { align-items: flex-start; padding-top: 72px; }
+        .pin-copy .sub { font-size: var(--type-xl); margin-bottom: 0; }
+        .pin-copy .link, .pin-copy .meter, .verify .pin-copy .btn { display: none; }
+        .verify .vsteps { margin: 0; }
+        .verify .vsteps li { padding: 6px 0 6px 38px; font-size: var(--type-md); }
+        .verify .vsteps li::before { top: 6px; width: 24px; height: 24px; }
+        .verify .vsteps li b { display: inline; }
+        .verify .vsteps li span { display: none; }
+        .f-row { grid-template-columns: minmax(0, 1fr); }
+        .cv li { grid-template-columns: minmax(0, 1fr); }
+        .sec, .cover { padding: 140px 0; }
+        .pin-in { padding: 140px 0; }
       }
-      @media (max-width: 860px) {
-        .hero-grid, .doors, .wall { grid-template-columns: minmax(0, 1fr); }
-        .hero-grid { padding-top: 32px; padding-bottom: 24px; gap: 8px; }
-        .hero-art { max-width: 420px; margin: 0 auto; }
-        .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .stat:nth-child(3) { border-left: 0; }
-        .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
-        .section { padding: 72px 0; }
+      /* The sign-in panel (DEC-0044). Log in and Sign up fade the page out over the same
+         backdrop, and the panel (src/auth/front.tsx) fades in. Back, Escape or the logo
+         reverse it. The address says which form is open (/#login, /#signup, /#reset). */
+      html { scrollbar-gutter: stable; }
+      html.auth-open { overflow: hidden; }
+      body > :is(main, footer, .skip) { transition: opacity var(--dur-4) var(--ease) var(--dur-1); }
+      html.auth-open body > :is(main, footer, .skip, .corner) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--dur-3) var(--ease), visibility 0s linear var(--dur-3); }
+
+      @media (max-width: 760px) {
+        .wrap { padding: 0 16px; }
+        .hero { min-height: 640px; justify-content: flex-end; padding-bottom: 168px; }
+        .field-box { left: -4%; right: -4%; top: 9%; height: 30%; }
+        .hero-shade { background: linear-gradient(180deg, transparent 10%, color-mix(in srgb, var(--color-canvas) 60%, transparent) 40%, var(--bg) 62%); }
+        .hero-in { padding-top: 0; }
+        h1 { font-size: clamp(var(--type-7xl), 11vw, var(--type-8xl)); }
+        .lead { font-size: var(--type-xl); margin-bottom: 24px; }
+        .proof { bottom: 18px; }
+        .proof dl > div { padding: 14px 12px 0 0; }
+        .proof dd { font-size: var(--type-4xl); }
+        .proof dt { font-size: var(--type-xs); }
+        .backers-list li { font-size: var(--type-xl); }
+        .panel-bar { padding: 0 14px; }
+        .bot-stats > div { padding: 12px 14px; }
+        .bot-chart { height: 180px; margin: 14px 14px 0; }
+        .bot-tape { width: calc(100% - 28px); margin: 12px 14px 0; }
+        .bot-legend, .panel-note { padding-left: 14px; padding-right: 14px; }
+        .vdrop, .vchecks, .vverdict { margin-left: 14px; margin-right: 14px; }
+        .vdrop { height: 64px; }
+        .vchecks li { padding: 7px 0; gap: 10px; }
+        .vchecks span { display: none; }
+        .vv-tag { font-size: var(--type-2xl); }
+        .motion .pin.verify { height: 300vh; }
+        .demo-body { padding: 16px; }
+        .g-list { grid-template-columns: minmax(0, 1fr); font-size: var(--type-sm); }
+        .more { grid-template-columns: minmax(0, 1fr); }
+        .sec, .cover { padding: 112px 0; }
+        .pin-in { padding: 112px 0; }
+        .closing { padding: 140px 0; }
       }
-      @media (max-width: 640px) {
-        nav .btn:not(.primary):not(.login) { display: none; }
-        .d-body { grid-template-columns: minmax(0, 1fr); min-height: 0; }
-        .d-side { display: none; }
-        .d-cards { grid-template-columns: minmax(0, 1fr); }
-        .stat { padding: 18px 16px; }
-        .lead { font-size: 17px; }
-        .door { padding: 24px; }
-        .scene { padding: 48px 16px 16px; }
-        .paper { padding: 16px; }
-        .checks { font-size: 12px; line-height: 1.3; gap: 6px 10px; }
-        .story-step { min-height: 46vh; }
-        .tagchip { font-size: 11px; }
-        .sim-stats dd { font-size: 20px; }
-        .sim-stage { height: 320px; }
-      }
-      @media (max-width: 400px) {
-        nav .btn.login { display: none; }
+      @media (max-width: 380px) {
+        .corner-nav a.li { display: none; }
       }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation: none !important; transition: none !important; }
+        ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
       }
     </style>
     <script type="module" src="/src/site/main.ts"></script>
   </head>
   <body>
-    <header>
-      <div class="wrap">
-        <a class="brand" href="/"><img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" width="188" height="44" alt="Parity, systematic research" /></a>
-        <nav>
-          <a class="btn" href="#sides">Product and research</a>
-          <a class="btn login" href="/login/">Log in</a>
-          <a class="btn primary" href="/signup/">Sign up</a>
-        </nav>
-      </div>
-    </header>
-    <main>
-      <section class="hero">
-        <div class="wrap hero-grid">
-          <div>
-            <div class="eyebrow"><span class="pulse" aria-hidden="true"></span>Strategies, tested honestly</div>
-            <h1>See which trading ideas <span class="grad">really work</span>, in plain words.</h1>
-            <p class="lead">Discover and follow strategies across currencies, stocks, bonds and commodities. Every one is tested the same hard way, after costs, against simply holding the US stock market, and the failures are shown too.</p>
-            <div class="cta">
-              <a class="btn primary lg" href="/signup/">Sign up free <span class="arr" aria-hidden="true">&rarr;</span></a>
-              <a class="btn lg" href="#how">How it works</a>
-            </div>
-            <p class="fine">Research, not investment advice.</p>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="corner corner-logo">
+      <a href="/" aria-label="Parity home">
+        <img src="/brand/2026-10-21-starburst/parity-mark-white.svg" width="22" height="22" alt="" />
+        <img class="letters" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width="70" height="15" alt="" />
+      </a>
+    </div>
+    <nav class="corner corner-nav" aria-label="Account">
+      <a class="li" href="/login/" data-auth="login">Log in</a>
+      <a class="su" href="/signup/" data-auth="signup">Sign up</a>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section class="hero" id="top" aria-labelledby="hero-h">
+        <div class="field-box" id="field-box" aria-hidden="true"><!--field-poster--></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="wrap hero-in">
+          <h1 id="hero-h">The lie detector <span>for trading strategies and bots.</span></h1>
+          <p class="lead">Upload a trade log, describe a bot or pick a strategy. Parity runs five checks and says whether the record holds up, counting every setting that was tried to get it.</p>
+          <div class="cta">
+            <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="btn" href="#verify">How it works</a>
           </div>
-          <div class="hero-art" id="hero-art" role="img" aria-label="A globe of markets, grouped as currencies, stocks, bonds and commodities, around the Parity starburst">
-            <!--hero-poster-->
-            <span class="tagchip" style="left: 2%; top: 18%"><i style="background: #2f6bff"></i>Currencies</span>
-            <span class="tagchip" style="right: 0; top: 30%"><i style="background: #5cc2f5"></i>Stocks</span>
-            <span class="tagchip" style="left: 6%; bottom: 16%"><i style="background: #a9bff7"></i>Bonds</span>
-            <span class="tagchip" style="right: 6%; bottom: 8%"><i style="background: #6fdcb4"></i>Commodities</span>
-          </div>
+          <p class="fine">Free. Files are checked on your device and not uploaded. Not investment advice.</p>
         </div>
-        <div class="wrap">
-          <div class="stats rv" aria-label="Parity in numbers">
-            <div class="stat">
-              <span class="num" data-count="" data-stat="strategies_tested">100+</span>
-              <span class="lbl">strategies tested the same way</span>
-              <span class="src"><span class="off">Rounded</span><span class="on">From the newest research run</span></span>
-            </div>
-            <div class="stat">
-              <span class="num" data-count="" data-stat="variations_searched">Thousands</span>
-              <span class="lbl">variations tried by the always-on search</span>
-              <span class="src"><span class="off">Rounded</span><span class="on">So far, counted against every result</span></span>
-            </div>
-            <div class="stat">
-              <span class="num" data-count="<!--stat:algorithms-->"><!--stat:algorithms--></span>
-              <span class="lbl">ideas in the algorithm library</span>
-              <span class="src">From papers and practice</span>
-            </div>
-            <div class="stat">
-              <span class="num" data-count="<!--stat:official-->"><!--stat:official--></span>
-              <span class="lbl">official runs sealed on the record</span>
-              <span class="src">Written down before they ran</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="sim" id="sim" aria-labelledby="sim-h">
-        <div class="sim-stage" id="sim-stage" role="img" aria-label="An illustration of thousands of simulated price paths fanning out from today over the next two years, with the middle path and the best and worst 5 percent marked. Illustrative, not a forecast.">
-          <!--sim-poster-->
-        </div>
-        <div class="sim-copy">
+        <div class="proof">
           <div class="wrap">
-            <div>
-              <p class="kicker rv">At scale</p>
-              <h2 id="sim-h" class="serif rv">Thousands of futures, not one lucky past</h2>
-              <p class="sub rv">One history can flatter any idea. So every strategy is rerun on 1,000 reshuffled versions of its own past and 500 with its timing scrambled, and only what survives counts.</p>
-              <p class="sim-scn rv" aria-hidden="true"><i></i><span id="sim-scn">Illustrative paths</span></p>
-              <dl class="sim-stats rv">
-                <div><dt>paths drawn on this page</dt><dd id="sim-drawn">90</dd></div>
-                <div><dt>other histories in each research run</dt><dd data-count="" data-stat="histories_per_run">100,000+</dd></div>
-                <div><dt>variations searched so far</dt><dd data-count="" data-stat="variations_searched">Thousands</dd></div>
-              </dl>
-              <a class="btn rv" href="https://sim.endyland.com/">Open Sim World <span class="arr" aria-hidden="true">&rarr;</span></a>
-              <p class="sim-note rv">The moving paths are illustrative: a simple random model with occasional shocks, drawn in your browser. They are not a forecast and not Parity's research data. The counts beside them are real.</p>
-            </div>
+            <dl aria-label="Parity in numbers">
+              <div><dt>tries counted by our always-on strategy search</dt><dd class="num" data-count="" data-stat="variations_searched">Thousands</dd></div>
+              <div><dt>strategies put through the same 11 tests</dt><dd class="num" data-count="" data-stat="strategies_tested">100+</dd></div>
+              <div><dt>beat holding the US market after costs and the luck check</dt><dd class="num" data-count="" data-stat="strategies_beat_market" data-zero="0">Few</dd></div>
+            </dl>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="preview-h">
-        <div class="wrap split">
-          <div class="rv">
-            <p class="kicker">The Parity app</p>
-            <h2 id="preview-h">Ask in plain words. See the verdict.</h2>
-            <p class="sub">A home screen like a modern investing app, with the research behind every number.</p>
-            <ul class="ticks">
-              <li><div>Ranked by evidence, not by return<span>Strategies are sorted by how well they held up in testing.</span></div></li>
-              <li><div>A watchlist and side-by-side comparisons<span>Follow the ideas you care about.</span></div></li>
-              <li><div>"What if" for real events<span>See what markets did after past shocks like this one.</span></div></li>
-            </ul>
-            <a class="btn primary" href="/app/">Open the app <span class="arr" aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="device rv" style="--d: 1" role="img" aria-label="An animated preview of the Parity app home with example data: a question typed into the ask box, its answer, a strategy chart and a short list of strategies with their verdicts.">
-            <div class="d-bar" aria-hidden="true"><i></i><i></i><i></i><span class="d-url">parity / app</span><span class="d-tag">Example data</span></div>
-            <div class="d-body" aria-hidden="true">
-              <div class="d-side">
-                <div class="logo"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width="16" height="16" />Parity</div>
-                <span class="on">Home</span><span>Discover</span><span>Watchlist</span><span>Compare</span><span>What if</span><span>News</span>
-              </div>
-              <div class="d-main">
-                <div class="d-hello">Hi Sam<small>102 strategies tested the same honest way</small></div>
-                <div class="d-ask">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1.5v3M8 11.5v3M1.5 8h3M11.5 8h3M3.4 3.4l2 2M10.6 10.6l2 2M12.6 3.4l-2 2M5.4 10.6l-2 2" /></svg>
-                  <span class="d-type">does anything beat the market?</span><i class="d-caret"></i>
-                </div>
-                <div class="d-answer"><b>Not yet.</b> None of the strategies beats simply holding the US market after costs and the luck check.</div>
-                <div class="d-cards">
-                  <div class="d-card d-chart">
-                    <h4>Stock trend, 10-month</h4>
-                    <div class="d-big">+9.1%<em>a year</em></div>
-                    <div class="meta">vs the market, after costs</div>
-                    <svg viewBox="0 0 300 92" preserveAspectRatio="none">
-                      <polyline class="d-line" pathLength="1" fill="none" stroke="#6b6d85" stroke-width="1.5" vector-effect="non-scaling-stroke" points="0,84 25,78 50,86 75,74 100,80 125,66 150,72 175,52 200,58 225,40 250,46 275,28 300,24" />
-                      <polyline class="d-line" pathLength="1" fill="none" stroke="#4cc98a" stroke-width="2" vector-effect="non-scaling-stroke" points="0,84 25,80 50,78 75,70 100,72 125,60 150,56 175,46 200,48 225,34 250,30 275,18 300,12" />
-                    </svg>
-                  </div>
-                  <div class="d-card">
-                    <h4>Worth a look</h4>
-                    <div class="meta">Ranked by evidence</div>
-                    <div class="d-row"><i class="dot" style="background: #3987e5"></i><span class="nm">Oil spread</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#4cc98a" stroke-width="1.4" points="0,13 8,11 16,12 24,7 32,6 40,3" /></svg><span class="d-badge">Promising</span></div>
-                    <div class="d-row"><i class="dot" style="background: #d95926"></i><span class="nm">Buy the dip</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#4cc98a" stroke-width="1.4" points="0,12 8,13 16,9 24,10 32,6 40,4" /></svg><span class="d-badge">Promising</span></div>
-                    <div class="d-row"><i class="dot" style="background: #199e70"></i><span class="nm">Calm carry</span><svg viewBox="0 0 40 16"><polyline fill="none" stroke="#f07a7a" stroke-width="1.4" points="0,5 8,7 16,6 24,9 32,8 40,11" /></svg><span class="d-badge n">Not proven</span></div>
-                  </div>
-                </div>
-              </div>
+      <section class="backers" aria-label="Startup programs"><div class="wrap"><!--backers--></div></section>
+
+      <section class="pin bot" id="bots" aria-labelledby="bots-h" data-scrub="bot">
+        <div class="pin-in">
+          <div class="wrap pin-grid">
+            <div class="pin-copy">
+              <h2 id="bots-h">99.1% of trades won. <span class="dim">$10,000 became $992.</span></h2>
+              <p class="sub">Double down, one of the bots in Bot Battle, on US stocks from 1928. It takes many small wins and a few large losses. Holding the market over the same years turned $10,000 into $126 million. A win rate does not show this. Profit per trade does.</p>
+              <a class="link" href="/sim/#/bots">Open Bot Battle</a>
+              <div class="meter" aria-hidden="true"><i></i></div>
             </div>
+            <figure class="panel bot-panel" aria-labelledby="bots-h">
+              <div class="panel-bar"><span>Bot Battle: Double down</span><span>US stocks, 1928 on</span></div>
+              <div class="bot-stats">
+                <div><span class="k">Trades won</span><b class="num" id="bot-wr">99.1%</b></div>
+                <div><span class="k">Balance</span><b class="num hit" id="bot-bal">$992</b></div>
+              </div>
+              <div class="bot-chart bot-clip" id="bot-chart"><!--bot-chart--><span class="bot-start-lbl">$10,000 start</span></div>
+              <!--bot-tape-->
+              <div class="bot-legend" aria-hidden="true"><span><i style="background: var(--good)"></i>Win</span><span><i style="background: var(--bad)"></i>Loss</span></div>
+              <figcaption class="panel-note">Backtest, $10,000, data through 21 October 2026. End figures from Bot Battle; the path between is drawn for illustration. Hypothetical, not investment advice.</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section class="section story" id="how" aria-labelledby="how-h">
+      <section class="pin verify" id="verify" aria-labelledby="verify-h" data-scrub="verify">
+        <div class="pin-in">
+          <div class="wrap pin-grid">
+            <div class="pin-copy">
+              <h2 id="verify-h">Five checks on any trading record.</h2>
+              <ol class="vsteps" id="vsteps">
+                <li><b>Upload a record.</b> <span>A trade log from MetaTrader, TradingView or any CSV, a bot described in words, or one of our strategies.</span></li>
+                <li><b>Five checks run.</b> <span>Profit per trade, worst losses, luck, look-ahead and overfitting.</span></li>
+                <li><b>Get a verdict.</b> <span>One of five, with the number of tries the result survives. Share it as a badge if you want.</span></li>
+              </ol>
+              <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
+            </div>
+            <figure class="panel vpanel" aria-label="An example check of a made-up trade log: four checks pass or flag, the luck check fails, and the verdict is Could be luck, surviving up to 6 of the 40 settings tried.">
+              <div class="panel-bar"><span>Parity Verify</span><span>Example, made-up record</span></div>
+              <div class="vdrop">
+                Drop a trade log here
+                <div class="vfile">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 15.5h6" /></svg>
+                  <div><b>trades_2024_2026.csv</b><span>MetaTrader 5, 412 closed trades</span></div>
+                  <em>Read</em>
+                </div>
+              </div>
+              <ul class="vchecks" id="vchecks">
+                <li class="ok"><i aria-hidden="true">+</i><div><b>Profit per trade</b><span>Makes $38 on the average trade after costs</span></div><em>Pass</em></li>
+                <li class="ok"><i aria-hidden="true">+</i><div><b>Worst losses</b><span>The worst loss equals 9 average wins</span></div><em>Pass</em></li>
+                <li class="no"><i aria-hidden="true">&minus;</i><div><b>Luck check</b><span>40 settings tried. It holds up to 6.</span></div><em>Fail</em></li>
+                <li class="ok"><i aria-hidden="true">+</i><div><b>Look-ahead</b><span>No sign of trades using future prices</span></div><em>Pass</em></li>
+                <li class="fl"><i aria-hidden="true">!</i><div><b>Overfitting</b><span>The best setting sits on a narrow peak</span></div><em>Flag</em></li>
+              </ul>
+              <div class="vverdict" id="vverdict">
+                <span class="vv-tag"><i aria-hidden="true"></i>Could be luck</span>
+                <span class="vv-n">Survives up to <b class="num" id="v-n">6</b> of 40 tries</span>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="tries" aria-labelledby="tries-h">
         <div class="wrap">
-          <p class="kicker rv">How it works</p>
-          <h2 id="how-h" class="rv">How an idea becomes a result</h2>
-          <p class="sub rv">The same path for every strategy, whoever thought of it.</p>
-          <div class="story-grid">
-            <div class="story-stage" aria-hidden="true">
-              <div class="rail"><i></i><i></i><i></i><i></i></div>
-              <div class="scene">
-                <div class="paper">
-                  <div class="tiny">An idea</div>
-                  <h4>"Own last year's strongest currencies, and step aside when markets panic."</h4>
-                  <p>Noted with where it came from, before anyone looks at a result.</p>
-                  <div class="from"><span class="on">A paper</span><span>A trader's practice</span><span>The search</span></div>
+          <h2 id="tries-h" class="rv">Every try is counted.</h2>
+          <p class="sub rv">Test enough settings and one will look good by chance. Parity counts every try behind a result, and the bar a result must clear rises with the count.</p>
+          <dl class="funnel">
+            <div class="f-row rv"><dd class="num" data-count="" data-stat="variations_searched">Thousands</dd><dt>tries in our always-on strategy search</dt><div class="f-bar" aria-hidden="true"><i data-bar="variations_searched"></i></div></div>
+            <div class="f-row rv"><dd class="num" data-count="" data-stat="strategies_tested">100+</dd><dt>strategies put through the same 11 tests</dt><div class="f-bar" aria-hidden="true"><i data-bar="strategies_tested" style="--w: .4"></i></div></div>
+            <div class="f-row rv"><dd class="num" data-count="" data-stat="strategies_beat_market" data-zero="0">Few</dd><dt>beat holding the US market after costs and the luck check</dt><div class="f-bar" aria-hidden="true"><i data-bar="strategies_beat_market" style="--w: .02"></i></div></div>
+          </dl>
+          <p class="f-note rv">Bars on a log scale. Counts from the newest research run, updated each deploy. Failures stay published.</p>
+        </div>
+      </section>
+
+      <section class="cover" id="markets" aria-labelledby="markets-h">
+        <div class="wrap">
+          <h2 id="markets-h" class="sr">Markets covered</h2>
+          <ul class="cv">
+            <li><span class="cv-w">Currencies.</span><span class="cv-m"><span class="cv-n" data-groups="fx_g10,fx_wider,ecb,fx_index"></span><span class="cv-d">G10 and emerging currencies, ECB reference rates, dollar indexes</span></span></li>
+            <li><span class="cv-w">Rates.</span><span class="cv-m"><span class="cv-n" data-groups="ust_curve,euro_curve,policy"></span><span class="cv-d">US Treasury and euro yield curves, policy rates</span></span></li>
+            <li><span class="cv-w">Stocks.</span><span class="cv-m"><span class="cv-n" data-groups="us_equities,industries,factors"></span><span class="cv-d">The US market, its industries and factors, and US funds</span></span></li>
+            <li><span class="cv-w">Commodities.</span><span class="cv-m"><span class="cv-n" data-groups="commodities,positioning"></span><span class="cv-d">Oil, gas and metals, with CFTC positioning</span></span></li>
+            <li><span class="cv-w">Crypto.</span><span class="cv-m"><span class="cv-n" data-groups="crypto,perps"></span><span class="cv-d">Major coins and perpetual futures</span></span></li>
+          </ul>
+          <p class="cv-src">Data: FRED, ECB, BIS, US Treasury, EIA, CFTC, SEC, Kenneth French data library, CoinGecko. Daily closes, not live prices.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="how" aria-labelledby="how-h">
+        <div class="wrap">
+          <h2 id="how-h" class="rv">How our strategies are tested.</h2>
+          <p class="sub rv">The research behind Verify. The same steps for every strategy.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="rv"><span class="n">01</span><h3>The plan is written down first.</h3><p>What we expect, what would prove it wrong, and the settings. Fixed before the test runs.</p></div>
+              <figure class="panel demo rv" data-demo="plan" aria-label="An example plan, sealed before the test.">
+                <div class="panel-bar"><span>Plan</span><span>Currency momentum</span></div>
+                <div class="demo-body">
+                  <p class="plan-h"><span class="typed">Own last year's strongest currencies</span></p>
+                  <div class="plan-row"><b>Expect</b><span>More return per unit of risk than holding stocks</span></div>
+                  <div class="plan-row"><b>Wrong if</b><span>It fails the luck check, or works in one period only</span></div>
+                  <div class="plan-row"><b>Settings</b><span>Fixed now. No tuning after the test.</span></div>
+                  <span class="seal"><i aria-hidden="true"></i>Sealed before the test</span>
                 </div>
-              </div>
-              <div class="scene">
-                <div class="paper">
-                  <div class="tiny">Written down first</div>
-                  <h4>Plan for currency momentum, calm only</h4>
-                  <div class="reg-line"><b>Expect</b><span>A higher return per unit of risk than holding stocks</span></div>
-                  <div class="reg-line"><b>Wrong if</b><span>It fails the luck check, or only works in one period</span></div>
-                  <div class="reg-line"><b>Settings</b><span>Fixed now. No tuning after the test.</span></div>
-                  <span class="seal">Sealed before the test</span>
-                </div>
-              </div>
-              <div class="scene">
-                <div class="paper">
-                  <div class="tiny">The gauntlet, the same 11 tests for all</div>
-                  <div class="score"><h4>Stock trend, 10-month</h4><strong>7 of 11</strong></div>
-                  <div class="bar"><i></i></div>
-                  <ul class="checks">
+              </figure>
+            </div>
+            <div class="step">
+              <div class="rv"><span class="n">02</span><h3>Every strategy faces the same 11 tests.</h3><p>Costs, other periods, other settings, and a luck check that counts every try. Most strategies fail some.</p></div>
+              <figure class="panel demo rv" data-demo="gauntlet" aria-label="An example result: 7 of 11 tests passed.">
+                <div class="panel-bar"><span>The 11 tests</span><span>Stock trend, 10-month</span></div>
+                <div class="demo-body">
+                  <div class="g-head"><b>Tests passed</b><strong class="num"><span id="g-n">7</span> of 11</strong></div>
+                  <div class="g-bar"><i id="g-bar"></i></div>
+                  <ul class="g-list" id="g-list">
                     <li>Better return for the risk</li><li>More at the same risk</li><li class="x">Not luck from many tries</li><li>Survives double costs</li>
                     <li class="x">Wins in every era</li><li class="x">Wins in recent years</li><li>Clearly above zero</li><li>Timing matters</li>
                     <li>Not one lucky setting</li><li>Not one lucky year</li><li class="x">Does not crash with stocks</li>
                   </ul>
                 </div>
-              </div>
-              <div class="scene">
-                <div class="paper">
-                  <div class="tiny">Shown with its verdict</div>
-                  <h4>Stock trend, 10-month <span class="verdict">Promising</span></h4>
-                  <svg viewBox="0 0 300 80" preserveAspectRatio="none">
-                    <polyline class="v-line" pathLength="1" fill="none" stroke="#6b6d85" stroke-width="1.5" vector-effect="non-scaling-stroke" points="0,72 30,66 60,74 90,62 120,66 150,52 180,58 210,40 240,44 270,28 300,22" />
-                    <polyline class="v-line" pathLength="1" fill="none" stroke="#4cc98a" stroke-width="2" vector-effect="non-scaling-stroke" points="0,72 30,68 60,66 90,58 120,60 150,48 180,44 210,34 240,30 270,18 300,10" />
-                  </svg>
+              </figure>
+            </div>
+            <div class="step">
+              <div class="rv"><span class="n">03</span><h3>Every result is published, failures too.</h3><p>With its verdict in plain words and every test it passed or failed.</p></div>
+              <figure class="panel demo rv" data-demo="result" aria-label="An example result: the strategy against the market, verdict Promising, 7 of 11 tests passed, does not beat the market after costs.">
+                <div class="panel-bar"><span>Result</span><span>Example</span></div>
+                <div class="demo-body">
+                  <p class="plan-h">Stock trend, 10-month <span class="verdict">Promising</span></p>
+                  <div class="r-chart">
+                    <svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
+                      <polyline class="r-line" pathLength="1" style="stroke: var(--color-text-disabled)" points="0,90 30,83 60,92 90,78 120,83 150,66 180,72 210,52 240,57 270,38 300,32" />
+                      <polyline class="r-line" pathLength="1" style="stroke: var(--color-text)" points="0,90 30,86 60,83 90,74 120,76 150,62 180,58 210,46 240,42 270,28 300,22" />
+                    </svg>
+                  </div>
+                  <div class="r-key" aria-hidden="true"><span><i style="background: var(--color-text)"></i>Strategy</span><span><i style="background: var(--color-text-disabled)"></i>US market</span></div>
                   <div class="kv"><span>Tests passed</span><strong>7 of 11</strong></div>
-                  <div class="kv"><span>Beats the market after costs</span><strong>Not yet</strong></div>
+                  <div class="kv"><span>Beats the market after costs</span><strong>No</strong></div>
                 </div>
-              </div>
-            </div>
-            <ol class="story-steps">
-              <li class="story-step"><span class="n">1</span><h3>An idea</h3><p>From a paper, a trader's practice, or the always-on search. Every idea goes in the library, with its source.</p></li>
-              <li class="story-step"><span class="n">2</span><h3>Written down first</h3><p>What we expect, and what would prove it wrong, before any test runs. The plan cannot change afterwards.</p></li>
-              <li class="story-step"><span class="n">3</span><h3>The gauntlet</h3><p>The same tests for everyone: costs, other periods, other settings, and a check for luck. Most ideas fail some of them.</p></li>
-              <li class="story-step"><span class="n">4</span><h3>Shown with its verdict</h3><p>In plain words, claiming no more than the research found. The failures stay on the page too.</p></li>
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="sides" aria-labelledby="sides-h">
-        <div class="wrap">
-          <p class="kicker rv">Two sides</p>
-          <h2 id="sides-h" class="rv">Kept apart on purpose</h2>
-          <p class="sub rv">One side makes the results. The other shows them. Keeping them separate stops what is popular from shaping what we find.</p>
-          <div class="doors">
-            <div class="door rv" data-tilt>
-              <div class="door-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12.5l3.5-4 3 2.5L14 4" /><path d="M10.5 4H14v3.5" /></svg></div>
-              <div class="who">For everyone</div>
-              <h3>The Parity app</h3>
-              <p>Find, follow and understand strategies, as easily as a modern investing app, with tools to test your own ideas.</p>
-              <ul>
-                <li>Discover strategies by theme, with a verdict on each</li>
-                <li>A watchlist, side-by-side comparisons and "what if" scenarios</li>
-                <li>Coming next: describe a strategy in plain words and have it tested</li>
-              </ul>
-              <a class="btn primary" href="/app/">Open the app <span class="arr" aria-hidden="true">&rarr;</span></a>
-            </div>
-            <div class="door rv" data-tilt style="--d: 1">
-              <div class="door-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3h4a1.5 1.5 0 0 1 1.5 1.5V13a1.5 1.5 0 0 0-1.5-1.5h-4zM13.5 3h-4A1.5 1.5 0 0 0 8 4.5V13a1.5 1.5 0 0 1 1.5-1.5h4z" /></svg></div>
-              <div class="who">For the curious and the sceptical</div>
-              <h3>Parity Research</h3>
-              <p>Where every result is made, in the open: the reasoning, the tests, and a sealed record of what counts.</p>
-              <ul>
-                <li>Decisions, hypotheses and reading notes, with previews on every word</li>
-                <li>An always-on search trying thousands of variations a day</li>
-                <li>An official record that cannot be quietly edited</li>
-              </ul>
-              <a class="btn" href="/research/">Open research <span class="arr" aria-hidden="true">&rarr;</span></a>
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section lightband" aria-labelledby="wall-h">
-        <img class="star" src="/brand/2026-10-21-starburst/parity-mark-black.svg" alt="" width="420" height="420" loading="lazy" />
+      <section class="sec" id="more" aria-labelledby="more-h">
         <div class="wrap">
-          <p class="kicker rv">The wall between them</p>
-          <h2 id="wall-h" class="rv">Three rules keep the results honest</h2>
-          <p class="sub rv">They are written into how Parity is built, not just promised.</p>
-          <ul class="wall">
-            <li class="rv"><span class="num">1</span><strong>Research decides, the app presents.</strong><span>Every number in the app comes from research, with its verdict next to it.</span></li>
-            <li class="rv" style="--d: 1"><span class="num">2</span><strong>Popularity never counts.</strong><span>Sign-ups, watchlists and clicks never reach the research side or any test.</span></li>
-            <li class="rv" style="--d: 2"><span class="num">3</span><strong>Every try is counted.</strong><span>The more ideas tested, the higher the bar each must clear. Searching harder cannot make a winner.</span></li>
+          <h2 id="more-h" class="rv">Also on Parity.</h2>
+          <ul class="more">
+            <li class="rv"><h3>Parity Research</h3><p>Every test, decision and result, in the open.</p><a href="/research/">Open research <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="rv" style="--d: 1"><h3>Parity Academy</h3><p><span data-count="<!--stat:lessons-->"><!--stat:lessons--></span> free lessons on backtests, luck and risk. No sign-up.</p><a href="/learn/academy/">Start learning <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="rv" style="--d: 2"><h3>Parity Terminal</h3><p><span data-stat="series_count">Over 100</span> daily market series, with sources named.</p><a href="/sim/">Open the terminal <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="rv" style="--d: 3"><h3>Sim World</h3><p>Past crises replayed across markets, and the range of paths a mix could take.</p><a href="https://sim.endyland.com/">Open Sim World <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </div>
       </section>
 
-      <section class="closing">
+      <section class="closing" aria-labelledby="close-h">
         <div class="wrap">
-          <h2 class="rv">Start with the truth about a strategy.</h2>
-          <p class="rv">Free to join. Every result comes with the tests it passed and the ones it failed.</p>
+          <h2 id="close-h" class="rv">Check a trading record before you trust it.</h2>
+          <p class="rv">Free. Five checks, one verdict, in under a minute.</p>
           <div class="cta rv">
-            <a class="btn primary lg" href="/signup/">Sign up free <span class="arr" aria-hidden="true">&rarr;</span></a>
-            <a class="btn lg" href="/login/">Log in</a>
+            <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="btn" href="/signup/" data-auth="signup">Create an account</a>
           </div>
         </div>
       </section>
@@ -598,6 +522,8 @@
           <a href="/learn/">Learn</a>
           <a href="/ideas/">Ideas</a>
           <a href="/notes/">Notes</a>
+          <a href="/blog/">Blog</a>
+          <a href="/news/">News</a>
         </nav>
         <nav class="site-legal" aria-label="Legal">
           <a href="/legal/privacy/">Privacy</a>
@@ -605,11 +531,14 @@
           <a href="/legal/cookies/">Cookies</a>
           <a href="/legal/accessibility/">Accessibility</a>
           <a href="/legal/risk/">Risk</a>
+          <a href="/legal/regulatory/">Regulatory</a>
           <button type="button" data-cookie-prefs>Cookie settings</button>
         </nav>
       </div>
       <!-- The cookie notice and the footer link styles (src/legal/). -->
       <script type="module" src="/src/legal/site-footer.ts"></script>
     </footer>
+    <!-- The sign-in panel mounts here when Log in or Sign up is clicked (DEC-0044). -->
+    <div id="auth-root"></div>
   </body>
 </html>

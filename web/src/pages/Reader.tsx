@@ -9,6 +9,7 @@ import { REPO_URL } from "../lib/format";
 import { scrollToEl, scrollToTop } from "../lib/scroll";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
 import { Icon } from "../ui/icons";
+import { PageSkeleton } from "../ui/skeleton";
 
 function byType(docs: DocEntry[]): [string, DocEntry[]][] {
   const groups: Record<string, DocEntry[]> = {};
@@ -23,7 +24,7 @@ export function DocsHome({ tag, type: initialType, query }: { tag?: string; type
   const [type, setType] = useState<string>(initialType ?? "");
   useEffect(() => setQ(query ?? ""), [query]);
   useEffect(() => setType(initialType ?? ""), [initialType]);
-  if (!data) return <p className="muted">Loading docs</p>;
+  if (!data) return <PageSkeleton parts={["text", "table"]} label="Loading docs" />;
 
   const tagCounts: Record<string, number> = {};
   for (const d of data.docs) for (const t of d.tags) tagCounts[t] = (tagCounts[t] ?? 0) + 1;
@@ -37,7 +38,7 @@ export function DocsHome({ tag, type: initialType, query }: { tag?: string; type
         <Title label={tag ? `Docs tagged ${tag}` : "Research docs"}>{tag ? <>Docs tagged <span className="tag big">{tag}</span></> : "Research docs"}</Title>
         <p>
           Every decision, experiment, paper note and log in the project. Each doc opens with a short "In plain
-          words" summary. Hover any underlined word, doc link or source for a preview. Select any word or phrase to see everywhere it appears. Press <kbd>/</kbd> to search from anywhere.
+          words" summary. Hover an underlined word, doc link or source for a preview. Select a word or phrase to see every doc that uses it. Press <kbd>/</kbd> to search from anywhere.
         </p>
       </div>
       <div className="learn-bar">
@@ -128,7 +129,7 @@ export function DocPage({ id, anchor }: { id: string; anchor?: string }) {
     else scrollToTop();
   }, [doc, anchor]);
 
-  if (!data) return <p className="muted">Loading docs</p>;
+  if (!data) return <PageSkeleton parts={["text", "table"]} label="Loading docs" />;
   if (!doc) return <p className="muted">No doc called {id}. <a href="#/docs">All docs</a></p>;
   return (
     <div className="reader">
@@ -250,7 +251,7 @@ export function RefsPage({ focus }: { focus?: string }) {
   useEffect(() => {
     if (focus) document.getElementById(`ref-${focus}`)?.scrollIntoView({ block: "center" });
   }, [focus, data]);
-  if (!data) return <p className="muted">Loading sources</p>;
+  if (!data) return <PageSkeleton parts={["text", "table"]} label="Loading sources" />;
   const f = q.trim().toLowerCase();
   const list = Object.values(data.refs)
     .filter((r) => !f || `${r.key} ${r.authors.join(" ")} ${r.year} ${r.title ?? ""} ${r.venue ?? ""}`.toLowerCase().includes(f))

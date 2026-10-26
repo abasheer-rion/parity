@@ -20,7 +20,7 @@ The owner asked us to look for edges in the market, and for ways to help others 
 - **17 new strategies and 2 new search shapes** that use the data added in PR #30: speculators' futures positions, the full yield curve, central bank policy rates for 27 currencies, stress indexes, jobless claims and the Fed's meeting calendar.
 - **An Edge Lab** on the research side (`/research/#/edges`) and a public page (`/learn/edge-lab/`). It holds plain lessons on how not to fool yourself, a checklist tool, and our own real mistakes as examples.
 
-The honest result: none of the 17 beats the S&P 500 on every test. The best is carry on central bank policy rates across 27 currencies. It passed 9 of 11 tests, including the "not just luck" test, but it fell with stocks and did not win in every era.
+The result: none of the 17 beats the S&P 500 on every test. The best is carry on central bank policy rates across 27 currencies. It passed 9 of 11 tests, including the "not just luck" test, but it fell with stocks and did not win in every era.
 
 ## Context
 
@@ -98,6 +98,7 @@ What this says:
 ## Referenced by
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
+- [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [HYP-0009: Emerging market carry pays after costs](../hypotheses/0009-emerging-market-carry-pays-after-costs.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [EXP-0008: Emerging market currencies since 2010](../experiments/0008-emerging-market-currencies-since-2010.md)
