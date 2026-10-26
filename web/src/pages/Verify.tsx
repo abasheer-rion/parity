@@ -285,7 +285,7 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
     if (!r) return;
     setHashQuery({ strategy: name });
     onResult(checkStrategy({ name: nameOf(r), equity: r.equity, tries, asset: tagsOf(r).asset,
-      gauntlet: r.gauntlet ? { verdict: r.gauntlet.verdict, passed: r.gauntlet.passed, total: r.gauntlet.total } : null }));
+      gauntlet: r.gauntlet ? { verdict: r.gauntlet.verdict, passed: r.gauntlet.passed, total: r.gauntlet.total } : null, holdup: r.holdup }));
   };
   return (
     <div className="vf-panel">
