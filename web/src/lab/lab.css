@@ -40,7 +40,7 @@
   position: fixed; inset: 0;
   display: grid; grid-template-rows: var(--l-top) minmax(0, 1fr) var(--l-legal);
   background: var(--l-bg); color: var(--l-body);
-  font-family: var(--font-text); font-size: var(--l-fs); font-variant-numeric: tabular-nums;
+  font-family: var(--font-text); font-size: var(--l-fs); font-variant-numeric: var(--num-variant);
   overflow: hidden; isolation: isolate;
 }
 .plb[data-density="comfortable"] { --l-row: 32px; --l-fs: var(--type-sm); --l-fs-s: var(--type-xs); --l-top: 46px; }
@@ -51,7 +51,7 @@
 .plb .bad { color: var(--bad); }
 .plb kbd { font: 500 var(--type-3xs)/16px var(--font-mono); padding: 0 5px; border-radius: 3px; border: 1px solid var(--l-line-2); color: var(--l-muted); background: transparent; white-space: nowrap; }
 .plb .mono { font-family: var(--font-mono); font-size: var(--l-fs-s); }
-.plb .tabular { font-variant-numeric: tabular-nums; }
+.plb .tabular { font-variant-numeric: var(--num-variant); }
 .plb .swatch { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
 .plb-glow { position: absolute; z-index: -1; pointer-events: none; width: 70vmax; height: 70vmax; right: -30vmax; top: -40vmax; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow) 20%, transparent), transparent); }
 .lb-dim { color: var(--l-faint); }

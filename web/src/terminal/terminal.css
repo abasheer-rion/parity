@@ -96,7 +96,7 @@
   font-family: var(--t-mono);
   font-size: var(--type-xs);
   line-height: 1.35;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: var(--num-variant);
   overflow: hidden;
 }
 .ptm *:focus-visible { outline: 1px solid var(--t-amber); outline-offset: -1px; }

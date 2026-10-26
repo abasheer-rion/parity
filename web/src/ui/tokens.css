@@ -178,7 +178,9 @@
   --leading-normal: 1.5;
   --leading-loose: 1.7;
 
-  /* Numbers: tabular figures so columns line up and values do not change width. */
+  /* Numbers: tabular figures so columns line up and values do not change width. Every
+     number on the site uses --num-variant (font-variant-numeric); the lint blocks writing it out. */
+  --num-variant: tabular-nums lining-nums;
   --num-features: "tnum" 1, "lnum" 1;
 
   /* ---------------------------------------------------------------- space */

@@ -132,6 +132,7 @@ export const RAW = {
   "leading-snug": "1.35",
   "leading-normal": "1.5",
   "leading-loose": "1.7",
+  "num-variant": "tabular-nums lining-nums",
   "num-features": "\"tnum\" 1, \"lnum\" 1",
   "space-0": "0",
   "space-px": "1px",

@@ -25,7 +25,7 @@
   position: fixed; inset: 0;
   display: grid; grid-template-rows: var(--tr-top) minmax(0, 1fr) var(--tr-legal);
   background: var(--canvas); color: var(--text-body);
-  font-size: var(--tr-fs); font-variant-numeric: tabular-nums;
+  font-size: var(--tr-fs); font-variant-numeric: var(--num-variant);
   overflow: hidden;
 }
 .ptr[data-density="comfortable"] { --tr-row: 30px; --tr-fs: var(--type-sm); --tr-fs-s: var(--type-xs); --tr-top: 44px; }
@@ -166,7 +166,7 @@ body.sp-dragging * { pointer-events: none; }
 .ot-side.sell.on { background: color-mix(in srgb, var(--bad) 22%, transparent); border-color: var(--bad); color: var(--text); }
 .ot-field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .ot-field > span { font-size: var(--tr-fs-s); color: var(--muted); }
-.ot-input { height: 28px; width: 100%; min-width: 0; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--canvas); color: var(--text); font: inherit; font-variant-numeric: tabular-nums; }
+.ot-input { height: 28px; width: 100%; min-width: 0; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--canvas); color: var(--text); font: inherit; font-variant-numeric: var(--num-variant); }
 .ot-input:focus { outline: none; border-color: var(--accent); }
 textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(--font-mono); }
 .ot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
@@ -360,7 +360,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .sgm-row:hover { background: var(--accent-soft); }
 .sgm-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sgm-tag { color: var(--text-2); font-size: var(--type-2xs); }
-.sgm-v { color: var(--text-2); font-size: var(--type-2xs); text-align: right; font-variant-numeric: tabular-nums; }
+.sgm-v { color: var(--text-2); font-size: var(--type-2xs); text-align: right; font-variant-numeric: var(--num-variant); }
 .sgm-note { margin: 6px 2px 0; color: var(--text-2); font-size: var(--type-2xs); line-height: 1.4; }
 .sgc { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; font-size: var(--type-sm); }
 .sgc > div { display: grid; gap: 2px; }

@@ -18,11 +18,11 @@
 .ui-tone-bad { color: var(--bad); }
 .ui-tone-accent { color: var(--accent); }
 .ui-mono { font-family: var(--font-mono); }
-.ui-tab { font-variant-numeric: tabular-nums; }
+.ui-tab { font-variant-numeric: var(--num-variant); }
 .ui-label { font-size: var(--fs-sm); color: var(--text-2); }
 .ui-label-term { font-size: var(--fs-sm); color: var(--text-2); text-decoration: underline dotted var(--muted); text-underline-offset: 3px; }
 .ui-kbd { font: var(--type-2xs) var(--font-mono); border: 1px solid var(--border-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; color: var(--text-2); background: var(--hover); }
-.ui-delta { display: inline-flex; align-items: center; gap: 3px; font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.ui-delta { display: inline-flex; align-items: center; gap: 3px; font-weight: var(--fw-bold); font-variant-numeric: var(--num-variant); }
 .ui-delta.good { color: var(--good); }
 .ui-delta.bad { color: var(--bad); }
 .ui-delta-label { color: var(--muted); font-weight: var(--fw-regular); }
@@ -162,7 +162,7 @@
 .mcard.flush { padding: 0; overflow: hidden; }
 .ui-stat-label { font-size: var(--fs-sm); color: var(--text-2); margin-bottom: 4px; }
 .ui-stat-label .term-link { color: var(--text-2); }
-.ui-stat-value { font-weight: var(--fw-medium); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.ui-stat-value { font-weight: var(--fw-medium); letter-spacing: -0.02em; font-variant-numeric: var(--num-variant); }
 .ui-stat-sm .ui-stat-value { font-size: var(--type-2xl); }
 .ui-stat-md .ui-stat-value { font-size: var(--type-5xl); }
 .ui-stat-lg .ui-stat-value { font-size: var(--type-7xl); line-height: 1.15; }
@@ -187,7 +187,7 @@
 .ui-status-warn i { background: var(--series-4); }
 .ui-divider { border: 0; border-top: 1px solid var(--border); margin: var(--space-4) 0; }
 .ui-share { display: inline-flex; align-items: center; gap: var(--space-2); width: 100%; min-width: 160px; }
-.ui-share-pct { width: 48px; font-variant-numeric: tabular-nums; text-align: left; }
+.ui-share-pct { width: 48px; font-variant-numeric: var(--num-variant); text-align: left; }
 .ui-share-track { position: relative; flex: 1; height: 4px; border-radius: 2px; background: var(--border-2); }
 .ui-share-track i { position: absolute; top: 0; height: 4px; border-radius: 2px; background: var(--accent); transform-origin: left; animation: ui-grow var(--dur-4) var(--ease-out) var(--dur-1) both; }
 @keyframes ui-grow { from { transform: scaleX(0); } }
@@ -236,7 +236,7 @@
 @keyframes ui-rise { from { opacity: 0; transform: translateY(calc(var(--rise) * var(--m))); } }
 @keyframes ui-pop { from { opacity: 0; transform: scale(calc(1 - .05 * var(--m))); } }
 @keyframes ui-slide { from { opacity: 0; transform: translateX(calc(-1 * var(--rise) * var(--m))); } }
-.ui-roll { display: inline-flex; font-variant-numeric: tabular-nums; }
+.ui-roll { display: inline-flex; font-variant-numeric: var(--num-variant); }
 .ui-roll-slot { display: inline-block; height: 1.15em; overflow: hidden; line-height: 1.15em; }
 .ui-roll-strip { display: flex; flex-direction: column; transition: transform var(--dur-4) var(--ease-out); }
 .ui-roll-strip span { height: 1.15em; }
@@ -364,7 +364,7 @@
 .ui-disclosure-chev { color: var(--muted); transition: transform var(--dur-3) var(--ease-spring); }
 .ui-disclosure[data-open] > .ui-disclosure-row .ui-disclosure-chev { transform: rotate(90deg); }
 .ui-disclosure-summary { flex: 1; min-width: 0; }
-.ui-disclosure-meta { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.ui-disclosure-meta { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: var(--num-variant); }
 .ui-disclosure-body { padding: 0 4px 16px 25px; color: var(--text-2); }
 
 /* Table rows that open in place */
@@ -420,7 +420,7 @@
 .ui-stagger > :nth-child(n+9) { animation-delay: min(var(--stagger-max), calc(var(--stagger-step) * 8)); }
 
 /* Numbers that change hold their width. */
-.ui-anum { display: inline-block; font-variant-numeric: tabular-nums; text-align: right; }
+.ui-anum { display: inline-block; font-variant-numeric: var(--num-variant); text-align: right; }
 
 /* A loading button keeps its label's width, with a spinner over it. */
 .ui-btn.is-loading > :not(.ui-spinner) { visibility: hidden; }
@@ -474,7 +474,7 @@ html.ui-locked { overflow: hidden; }
 /* ---------- Added with the token system (DEC-0058) ---------- */
 
 /* Numbers: tabular figures, never wrap, never spill out of their box. */
-.ui-num { position: relative; display: inline-block; max-width: 100%; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: var(--num-features); vertical-align: baseline; }
+.ui-num { position: relative; display: inline-block; max-width: 100%; white-space: nowrap; font-variant-numeric: var(--num-variant); font-feature-settings: var(--num-features); vertical-align: baseline; }
 /* Both forms are in the page; data-short picks one. The full form stays readable to screen
    readers either way (it is only hidden visually when the compact form shows). */
 .ui-num[data-short="0"] .ui-num-short { display: none; }
@@ -541,7 +541,7 @@ html.ui-locked { overflow: hidden; }
 
 /* Pagination */
 .ui-pager { display: inline-flex; align-items: center; gap: var(--space-1); }
-.ui-pager-num, .ui-pager-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: tabular-nums; cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+.ui-pager-num, .ui-pager-step { min-width: 32px; height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); font: inherit; font-size: var(--type-sm); font-variant-numeric: var(--num-variant); cursor: pointer; display: inline-grid; place-items: center; transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
 .ui-pager-num:hover, .ui-pager-step:hover:not(:disabled) { background: var(--color-hover); color: var(--color-text); }
 .ui-pager-num.on { background: var(--color-selected); color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
 .ui-pager-step:disabled { opacity: .35; cursor: default; }

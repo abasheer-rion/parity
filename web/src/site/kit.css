@@ -43,7 +43,7 @@ img, svg { max-width: 100%; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 8px; }
 main:focus { outline: none; }
-.num { font-variant-numeric: tabular-nums; }
+.num { font-variant-numeric: var(--num-variant); }
 
 /* Lenis smooth scroll (its stylesheet, inlined) */
 html.lenis, html.lenis body { height: auto; }
