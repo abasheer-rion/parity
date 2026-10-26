@@ -185,12 +185,12 @@ export function brokerGateway(keyId: string, secret: string, opts: { live?: bool
   const t = (a: string | null) => `/v1/trading/accounts/${need(a)}`;
   return {
     engine: opts.live ? "alpaca_broker_live" : "alpaca_broker_sandbox",
-    placeOrder: (a, req, id) => call<AlpacaOrder>("POST", `${t(a)}/orders`, orderBody(req, id)),
-    orderByClientId: (a, id) => call<AlpacaOrder | null>("GET", `${t(a)}/orders:by_client_order_id?client_order_id=${q(id)}`, undefined, true),
+    placeOrder: async (a, req, id) => call<AlpacaOrder>("POST", `${t(a)}/orders`, orderBody(req, id)),
+    orderByClientId: async (a, id) => call<AlpacaOrder | null>("GET", `${t(a)}/orders:by_client_order_id?client_order_id=${q(id)}`, undefined, true),
     cancelOrder: async (a, oid) => { await call<null>("DELETE", `${t(a)}/orders/${q(oid)}`); },
-    replaceOrder: (a, oid, p, id) => call<AlpacaOrder>("PATCH", `${t(a)}/orders/${q(oid)}`, patchBody(p, id)),
-    positions: (a) => call<AlpacaPosition[]>("GET", `${t(a)}/positions`),
-    account: (a) => call<AlpacaAccount>("GET", `${t(a)}/account`),
+    replaceOrder: async (a, oid, p, id) => call<AlpacaOrder>("PATCH", `${t(a)}/orders/${q(oid)}`, patchBody(p, id)),
+    positions: async (a) => call<AlpacaPosition[]>("GET", `${t(a)}/positions`),
+    account: async (a) => call<AlpacaAccount>("GET", `${t(a)}/account`),
     lastPrice: opts.priceHeaders ? lastPriceVia(opts.priceHeaders, fetcher) : async () => null,
     createAccount: (body) => call("POST", "/v1/accounts", body),
     getAccount: (id) => call("GET", `/v1/accounts/${q(id)}`),
