@@ -1,0 +1,38 @@
+{
+  "id": "REG-0009",
+  "title": "Equal-weight energy book: carry, basis-momentum, value and trend, March 2014 to April 2024",
+  "created": "2026-10-23",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0016"
+  ],
+  "experiment": "EXP-0011",
+  "question": "On rolled NYMEX crude oil, heating oil, gasoline and natural gas futures from 2014-03-03 to 2024-04-05, after the basis-momentum paper's sample, does the equal-weight average of carry, basis-momentum, 5-year value and 12-month trend scores have a positive Sharpe ratio that passes at least four of the five reality tests, after 3 bp per unit traded and 2 bp per roll?",
+  "strategies": [
+    {
+      "name": "energy_book",
+      "params": {
+        "lookback": 252,
+        "rebalance": "M"
+      }
+    }
+  ],
+  "backtest": {
+    "start": "2014-03-03",
+    "end": "2024-04-05",
+    "cost_bps": 3.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 315,
+  "prior_trials_note": "313 (REG-0008's floor) + 2 (REG-0008's own strategies), counted across all families as the project has so far. energy_tsmom and energy_carry, two of the four ingredients, are already counted through REG-0007. Basis-momentum and value were never evaluated alone, so per RES-0017 rule 4 they add no trials beyond this book, which counts as one. This is a floor: it does not include the always-on search's variations (engine/output/search.db on the owner's machine), which have never included energy futures because fut.* is not on main yet.",
+  "what_would_change_our_mind": "A pass would make the energy book the project's first combined strategy with a real effect after publication, worth a forward test once a source of futures prices after April 2024 is found. A fail with ingredients that pass on their own (REG-0007) would say that equal-weight combining does not help with only four contracts.",
+  "already_seen": "No. Before registering, only unit tests on made-up prices were run (each ingredient's direction, equal weights, no look-ahead, mutation checks). No return, Sharpe ratio or other performance number was computed for energy_book, for basis-momentum or for value on these contracts. Two ingredients, energy_tsmom and energy_carry, are registered in REG-0007 and have not been run either."
+}

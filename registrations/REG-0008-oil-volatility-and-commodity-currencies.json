@@ -1,0 +1,45 @@
+{
+  "id": "REG-0008",
+  "title": "Selling crude oil variance, and commodity currencies leading energy futures, April 2008 to April 2024",
+  "created": "2026-10-21",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0014",
+    "HYP-0015"
+  ],
+  "experiment": "EXP-0010",
+  "question": "From after Chen, Rogoff and Rossi's sample to the end of the free futures data, do selling crude oil variance (before swap costs) and trading energy futures on commodity currencies' 3-month moves each pass at least four of the five reality tests?",
+  "strategies": [
+    {
+      "name": "oil_variance_short",
+      "params": {
+        "max_ovx": null
+      }
+    },
+    {
+      "name": "commodity_fx_leads_energy",
+      "params": {
+        "lookback": 63,
+        "rebalance": "M"
+      }
+    }
+  ],
+  "backtest": {
+    "start": "2008-04-01",
+    "end": "2024-04-05",
+    "cost_bps": 3.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "min_real_tests": 4
+  },
+  "prior_trials": 313,
+  "prior_trials_note": "208 + 2 (REG-0007). Includes the commodity gap trials (HYP-0003, HYP-0008) on the opposite direction of the commodity and currency link. No exploratory evaluation of these strategies was run. Raised from 210 to 296 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count. Raised by 17 on 2026-10-23 after merging main: PR #47 (DEC-0027) added 17 edge recipes, each evaluated in at least one full gauntlet run.",
+  "what_would_change_our_mind": "Selling oil variance passing would still only be an upper bound, because swap costs are missing; failing would mean even the best case does not hold. A pass for the currency signal would turn our failed oil idea into a working one, pointing the other way.",
+  "already_seen": "No. Before registering, only data checks were run (OVX coverage, the variance index never falling to zero, roll days); no strategy return or performance number was computed."
+}

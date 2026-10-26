@@ -111,4 +111,6 @@ No line is written by hand or by a model.
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
+- [RES-0018: How the ingredients behave in crises, and what Sim World should show](../research/0018-how-the-ingredients-behave-in-crises-and-what-sim-world-should-show.md)
+- [LOG-0023: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
 <!-- backlinks:end -->

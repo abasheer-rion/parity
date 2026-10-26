@@ -1,0 +1,68 @@
+{
+  "id": "ALG-0097",
+  "slug": "fx-developed-rate-gap-times-em-basket",
+  "name": "Developed-market rate gap times the EM currency basket",
+  "family": "carry",
+  "markets": [
+    "fx"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "emerging-markets",
+    "carry",
+    "dollar",
+    "timing"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2010,
+    "authors": "Lustig, Roussanov, Verdelhan",
+    "source_title": "Countercyclical Currency Risk Premia (Journal of Financial Economics 111(3), 527-553, 2014)",
+    "source_url": "https://www.nber.org/papers/w16427"
+  },
+  "how_it_works": {
+    "simple": "Own a basket of emerging market currencies against the dollar when rich-country interest rates are well above US rates, and less of it, or none, when they are not.",
+    "analogy": "Like checking whether the whole neighbourhood pays more rent than you before deciding to move: the average across rich countries says more about the dollar than any one country does.",
+    "precise": "The average forward discount (average interest rate gap over the US) of developed currencies forecasts the excess return of an equal-weight basket of emerging market currencies: about 180 basis points a year more for each 100 basis point rise. The emerging basket's own average gap does not forecast its returns this way: its slope is small and indistinguishable from zero. Sample November 1983 to June 2010."
+  },
+  "rule": "Monthly: AFD = average of (rate.<G10> - rate.USD) over the nine G10 currencies. Hold the equal-weight basket of EM_RATED currencies against USD with weight AFD / (its 5-year average absolute value), capped at 1 and floored at 0 for a long-only version, or -1 for a long-short version.",
+  "data_needed": [
+    "G10 and US short-term interest rates (FRED, OECD)",
+    "EM spot rates (Fed H.10, ECB)"
+  ],
+  "economic_rationale": "The developed-market gap measures the price of US-specific risk, which is highest in US recessions; emerging currencies are exposed to the same dollar risk.",
+  "why_it_might_fail": "A regression slope is not a trading result; the effect may be smaller after costs. The G10 rates are monthly averages, which must be used only after the month ends.",
+  "reported_results": [
+    {
+      "source": "Lustig, Roussanov and Verdelhan (NBER w16427 revision), introduction and Table III",
+      "source_url": "https://www.nber.org/system/files/working_papers/w16427/revisions/w16427.rev1.pdf",
+      "period": "1983-11 to 2010-06",
+      "market": "Basket of emerging market currencies against USD",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": null,
+      "verified_on_page": true,
+      "notes": "Slope of about 180 basis points of excess return per 100 basis points of developed-market average forward discount. A regression, not a strategy."
+    }
+  ],
+  "post_publication_evidence": "Untested after 2010.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Uses only data we already have, is a timing rule for the EM basket we registered, and comes from a different signal than the basket itself."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0017 on 2026-10-22."
+  }
+}

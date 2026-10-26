@@ -1,0 +1,67 @@
+{
+  "id": "ALG-0092",
+  "slug": "commodity-open-interest-growth",
+  "name": "Commodity open interest growth",
+  "family": "macro-fundamental",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "open-interest",
+    "cftc",
+    "market-timing"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2012,
+    "authors": "Hong, Yogo",
+    "source_title": "What does futures market interest tell us about the macroeconomy and asset prices? (Journal of Financial Economics 105(3), 2012)",
+    "source_url": "https://www.nber.org/papers/w16712"
+  },
+  "how_it_works": {
+    "simple": "When the number of open commodity futures contracts grows fast, commodity prices tend to rise over the following months.",
+    "analogy": "Like a busy car park outside a shop: more people turning up is a sign of demand before it shows in the price.",
+    "precise": "Aggregate 12-month growth in commodity futures open interest predicts commodity returns, bond returns and the short rate, beyond other known predictors; open interest is pro-cyclical."
+  },
+  "rule": "Monthly: 12-month growth in total open interest across energy contracts; long energy futures when growth is above its 5-year median, otherwise flat.",
+  "data_needed": [
+    "Open interest by contract (CFTC Commitments of Traders, free)",
+    "Futures returns"
+  ],
+  "economic_rationale": "With hedging demand and limited risk-bearing capacity, quantities (open interest) carry information that prices do not.",
+  "why_it_might_fail": "A timing signal on one asset class gives few independent bets; the magnitude comes from a secondary summary.",
+  "reported_results": [
+    {
+      "source": "Hong and Yogo (2012), as summarised by CXO Advisory",
+      "source_url": "https://www.cxoadvisory.com/commodity-futures/futures-market-open-interest-as-return-predictor",
+      "period": "To 2008",
+      "market": "30 commodity futures",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": false,
+      "notes": "A one standard deviation increase in 12-month open interest growth raises expected monthly commodity returns by about 0.63% (summary figure, not checked in the paper's tables)."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Free data and a plausible story, but weak as a stand-alone strategy."
+  },
+  "testable_with_free_data": true,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0016 on 2026-10-22."
+  }
+}

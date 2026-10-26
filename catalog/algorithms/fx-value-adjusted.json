@@ -64,14 +64,14 @@
       "notes": "Adjusted value: rank portfolio on residual after regressing on panel-VAR expected fundamentals. Linear-weight version: Sharpe 0.91, mean 2.43%, vol 2.68%. Gain comes from lower volatility, not higher mean. Expected fundamentals are estimated recursively, but regressions use the cross-section at each date."
     }
   ],
-  "post_publication_evidence": "Hutchinson, Kyziropoulos, O'Brien, O'Reilly and Sharma (2022, https://doi.org/10.1016/j.irfa.2022.102245; abstract at https://zenodo.org/records/7326532) replicated published currency carry, momentum and value studies and found the average out-of-sample Sharpe ratio fell from +0.39 before publication to -0.32 after it, with currencies no longer responding to interest rate and real exchange rate differentials.",
+  "post_publication_evidence": "Hutchinson, Kyziropoulos, O'Brien, O'Reilly and Sharma (2022, https://doi.org/10.1016/j.irfa.2022.102245; abstract at https://zenodo.org/records/7326532) replicated published currency carry, momentum and value studies and found the average out-of-sample Sharpe ratio fell from +0.39 before publication to -0.32 after it, with currencies no longer responding to interest rate and real exchange rate differentials. AQR's century study (Ilmanen et al., 2021) reports a currency value Sharpe ratio of 0.69 after publication against 0.72 in the original sample, the best post-publication record of any currency style it tests (carry: -0.17). The BIS publishes free monthly real effective exchange rates for emerging markets, so a simplified EM version is testable (RES-0016).",
   "implementations": [],
   "relevance": {
     "score": 3,
     "reason": "A slow, low-turnover FX signal that diversifies carry and momentum, but it needs macro data that is hard to assemble point in time for free."
   },
   "testable_with_free_data": true,
-  "last_reviewed": "2026-10-20",
+  "last_reviewed": "2026-10-22",
   "research": {
     "stage": 2,
     "hypothesis": null,
@@ -79,6 +79,6 @@
     "registrations": [],
     "runs": [],
     "verdict": null,
-    "notes": ""
+    "notes": " RES-0016 ranks an EM version second among candidates."
   }
 }

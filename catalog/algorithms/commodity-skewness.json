@@ -1,0 +1,66 @@
+{
+  "id": "ALG-0090",
+  "slug": "commodity-skewness",
+  "name": "Commodity skewness factor",
+  "family": "volatility",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "skewness",
+    "lottery-preference",
+    "cross-sectional"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2018,
+    "authors": "Fernandez-Perez, Frijns, Fuertes, Miffre",
+    "source_title": "The skewness of commodity futures returns (Journal of Banking and Finance 86, 143-158)",
+    "source_url": "https://openaccess.city.ac.uk/id/eprint/17843/"
+  },
+  "how_it_works": {
+    "simple": "Buy the commodities whose past year had more sudden drops than jumps, and sell those with more sudden jumps, because people overpay for lottery-like jumps.",
+    "analogy": "Like selling lottery tickets: buyers pay extra for the small chance of a big win.",
+    "precise": "Each month, compute the skewness of the past 12 months of daily returns per commodity; long the fifth with the most negative skew, short the fifth with the most positive. 27 commodities, 1987 to 2014: 8.01% a year, Sharpe 0.78, alpha 6.21% after standard commodity factors."
+  },
+  "rule": "Monthly: skewness of 252 daily returns; long the lowest-skew fifth, short the highest-skew fifth, equal weights.",
+  "data_needed": [
+    "Daily futures returns for 20 or more commodities"
+  ],
+  "economic_rationale": "Investors with a taste for positive skew (cumulative prospect theory) overpay for right-skewed commodities; selective hedging adds to it.",
+  "why_it_might_fail": "Needs a broad cross-section we do not have for free; skewness estimates are noisy.",
+  "reported_results": [
+    {
+      "source": "Fernandez-Perez, Frijns, Fuertes and Miffre (2018), accepted manuscript, Table IV",
+      "source_url": "https://openaccess.city.ac.uk/id/eprint/17843/1/SSRN-id2671165_July2017.pdf",
+      "period": "1987-01 to 2014-11",
+      "market": "27 commodity futures",
+      "sharpe": 0.78,
+      "annual_return": 0.0801,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Quote: \"a mean excess return of 8.01% a year (Newey-West t-statistic of 3.83), a Sharpe ratio of 0.7848\"."
+    }
+  ],
+  "post_publication_evidence": "None found by us.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Good record, but not testable with four energy contracts."
+  },
+  "testable_with_free_data": false,
+  "last_reviewed": "2026-10-22",
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Added from RES-0016 on 2026-10-22."
+  }
+}

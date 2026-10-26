@@ -1,0 +1,73 @@
+{
+  "id": "ALG-0099",
+  "slug": "crack-spread-mean-reversion",
+  "name": "Crack spread mean reversion (3:2:1 refining margin)",
+  "family": "statistical-arbitrage",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "weekly",
+  "tags": [
+    "energy",
+    "spread",
+    "crack-spread",
+    "cointegration",
+    "futures"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2016,
+    "authors": "Karathanasopoulos, Dunis, Khalil",
+    "source_title": "Modelling, forecasting and trading with a new sliding window approach: the crack spread example (Quantitative Finance 16(12), 1875-1886)",
+    "source_url": "https://doi.org/10.1080/14697688.2016.1211796"
+  },
+  "how_it_works": {
+    "simple": "A refinery turns three barrels of crude into two of gasoline and one of heating oil. When the gap between what the products sell for and what the crude costs is unusually wide or narrow, bet that it goes back to normal.",
+    "analogy": "Like a bakery's margin between flour and bread: if bread gets very expensive while flour does not, bakers make more bread until the gap closes.",
+    "precise": "The 3:2:1 crack spread per barrel is (2 x gasoline + 1 x heating oil, both in dollars per barrel) minus 3 x crude, divided by 3. Refiners can change how much they run, so the three prices are tied together (cointegrated) and the spread tends to mean-revert. A simple version trades the spread when its z-score against a rolling window is large; the source paper instead forecasts it five days ahead with neural networks."
+  },
+  "rule": "Our simple version, for testing: each week, compute the 3:2:1 crack spread from contract 2 of CL, RB and HO (products times 42 to get dollars per barrel). If the spread is more than 2 standard deviations above its 1-year mean, sell the spread (short 2 RB and 1 HO, long 3 CL); below -2, buy it; close when it crosses its mean. This rule is ours, not the paper's.",
+  "data_needed": [
+    "Daily settlement prices of NYMEX WTI crude, RBOB gasoline and ULSD heating oil futures (EIA has contracts 1 to 4 up to 2024-04-05)"
+  ],
+  "economic_rationale": "Refiners and blenders can arbitrage a margin that is too wide or too narrow by changing how much crude they process, which pulls the three prices back together.",
+  "why_it_might_fail": "The spread has long seasonal and regime shifts (refinery outages, hurricanes, the 2022 diesel squeeze), so a mean that looked stable can move for months. The source paper picks its best model from many with 250 inputs, which is a lot of hidden trials. Gasoline changed grade (unleaded to RBOB in 2006), which breaks the history.",
+  "reported_results": [
+    {
+      "source": "Karathanasopoulos, Dunis and Khalil (2016), Quantitative Finance, Table 4",
+      "source_url": "https://scholarworks.aub.edu.lb/server/api/core/bitstreams/45e0cec2-3f3c-48e8-aa0c-97b4cd958818/content",
+      "period": "2005-05-09 to 2015-12-21",
+      "market": "NYMEX 3:2:1 crack spread",
+      "sharpe": null,
+      "annual_return": 0.4274,
+      "volatility": 0.2065,
+      "max_drawdown": -0.309,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Best of six model variants (PSO-RBF network, 300-day training window, forecasts 5 days ahead, 250 inputs). Table 4 reports gross annualised return 52.82%, annualised volatility 20.65%, maximum drawdown -30.90%, information ratio 2.06, about 99 trades a year, transaction costs of 10.08% a year and net annualised return 42.74%. The paper says the period is 2087 trading days, which is fewer than the dates imply (about 2,670). Return and volatility recorded here are the net figures."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet. Dunis, Laws and Evans (2006, Derivatives Use, Trading and Regulation) studied the gasoline crack spread earlier; we found only secondhand summaries of it.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "It is the one new energy idea that our existing EIA futures data can test (RES-0019 on the energy book branch), and it is a spread, so it is not another bet on the oil price."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 5,
+    "hypothesis": "HYP-0017",
+    "strategy": "crack_spread_reversion",
+    "registrations": [
+      "REG-0010"
+    ],
+    "runs": [],
+    "verdict": null,
+    "notes": "Implemented as `crack_spread_reversion` (our simple z-score rule, not the paper's neural networks) and registered in REG-0010, 2006-10-02 to 2024-04-05. Free EIA data ends 2024-04-05 and RBOB history starts in October 2005."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}
