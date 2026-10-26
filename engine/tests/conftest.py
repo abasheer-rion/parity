@@ -27,6 +27,16 @@ def panel() -> pd.DataFrame:
     data["cmd.HH_GAS"] = np.exp(np.cumsum(rng.normal(0, 0.03, n))) * 3
     for ccy in ["USD", *catalog.G10]:
         data[f"reer.{ccy}"] = 100 * np.exp(np.cumsum(rng.normal(0, 0.003, n)))
+    # Emerging market currencies: wider rate spread, and the ruble stops being quoted.
+    for i, ccy in enumerate(catalog.EM_RATED):
+        data[f"fx.{ccy}"] = np.exp(np.cumsum(rng.normal(0, 0.008, n)))
+        data[f"rate.{ccy}"] = np.full(n, 1.0 + i * 1.2)
+    data["fx.RUB"][idx >= "2015-03-02"] = np.nan
+    for sym in catalog.ENERGY:
+        data[f"fut.{sym}"] = np.exp(np.cumsum(rng.normal(0, 0.02, n)))
+        data[f"carry.{sym}"] = rng.normal(0, 0.1, n)
+    data["risk.OVX"] = 35 + 10 * np.abs(np.sin(np.arange(n) / 50))
+    data["vrp.OIL"] = np.exp(np.cumsum(rng.normal(0.0002, 0.006, n)))
     # Everything else in the catalog (factory data, DEC-0014): plain random walks, or
     # levels for yields and the VIX.
     for key in catalog.CATALOG:

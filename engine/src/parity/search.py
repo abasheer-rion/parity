@@ -229,11 +229,13 @@ def _gate_series() -> list[str]:
     correctly, with weekly, monthly and quarterly data moved to the day they come out.
     Left out: real exchange rates (monthly averages with no publication lag set), the
     Yahoo cross-check, the lagged French market file, raw ECB crosses (the same
-    information as xfx.*) and futures positions in contracts (the percent is kept)."""
+    information as xfx.*), futures positions in contracts (the percent is kept) and the
+    series held for registrations (catalog.REGISTERED_ONLY)."""
     skip = ("reer.", "ecb.", "xfx.", "eq.SPY", "eq.US_MKT")
     keys = []
     for key in catalog.CATALOG:
-        if key.startswith(skip) or (key.startswith("cot.") and not key.endswith("_PCT")):
+        if key.startswith(skip) or key in catalog.REGISTERED_ONLY \
+                or (key.startswith("cot.") and not key.endswith("_PCT")):
             continue
         if key.startswith("rate.") and key not in ("rate.USD", "rate.TBILL3M"):
             continue

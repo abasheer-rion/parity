@@ -190,4 +190,5 @@ The best single paid plan under 100 USD a month for our mix is either Massive Cu
 - [REF-0010: FX data sources, licences and resolution](0010-fx-data-sources-licences-and-resolution.md)
 - [REF-0019: Latency budget and target architecture](0019-latency-budget-and-target-architecture.md)
 - [LOG-0008: Ayan work log, wordmark, Sim World, markets, legal and the redesign](../log/2026-10-22-ayan-work-log-wordmark-sim-world-markets-legal-and-redesign.md)
+- [LOG-0023: Crisis behaviour, and a check of Sim World](../log/2026-10-22-crisis-behaviour-and-a-check-of-sim-world.md)
 <!-- backlinks:end -->

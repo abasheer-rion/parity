@@ -1,0 +1,115 @@
+---
+id: ALG-0086
+title: Selling commodity volatility (variance risk premium)
+type: algorithm
+status: registered
+created: 2026-10-22
+updated: 2026-10-22
+authors: [ayan]
+tags: [commodities, strategy]
+related: [HYP-0014]
+---
+
+# Selling commodity volatility (variance risk premium)
+
+## In plain words
+
+People who buy protection against big oil price swings usually pay more than the swings turn out to cost. Sell them that protection and keep the difference, as long as no huge swing comes.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | volatility |
+| Markets | commodities |
+| Horizon | monthly |
+| Tags | volatility, risk-premium, options, crash-risk |
+| Origin | academic: Trolle, Schwartz |
+| First published | 2010 (16 years ago) |
+| Primary source | [Variance Risk Premia in Energy Commodities (Journal of Derivatives, 2010)](https://infoscience.epfl.ch/record/148475) |
+| Research stage | 5 of 9: registered |
+| Relevance to us | 3 of 5: A direct test of the volatility idea with free data, but only as an upper bound because costs are missing. |
+| Testable with free data | yes |
+
+This page is generated from `catalog/algorithms/commodity-variance-risk-premium.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** People who buy protection against big oil price swings usually pay more than the swings turn out to cost. Sell them that protection and keep the difference, as long as no huge swing comes.
+
+<details><summary>Analogy</summary>
+
+Like selling storm insurance: most years you keep the premiums, and one bad storm can take years of them.
+
+</details>
+
+<details><summary>Precise</summary>
+
+Short a 30-day variance swap on crude oil each month: payoff = implied variance at entry minus realised variance over the month. Trolle and Schwartz find annualised Sharpe ratios of 0.59 (crude) and 0.35 (natural gas) for 1996 to 2006; Prokopczuk et al. find negative payoffs for variance buyers in 18 of 21 commodity markets. With free data, OVX squared approximates the variance swap rate and realised variance comes from WTI futures.
+
+</details>
+
+### The rule
+
+Monthly: short variance at (OVX/100)^2; realised variance from daily log returns of the rolled WTI future over the next month; size to a fixed notional; no trading costs available, so results are upper bounds.
+
+### Data needed
+
+- CBOE OVX (FRED OVXCLS), 2007 on
+- WTI futures contracts 1 and 2 (EIA)
+
+### Why it might work
+
+Investors pay to hedge price jumps; dealers who sell protection demand a premium.
+
+### Why it might fail
+
+Short-volatility positions lose most in crises (2008, March and April 2020); variance swap and option strip costs are large and not in free data; OVX is an index, not a tradable price.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Trolle and Schwartz (2010), working paper, short variance swaps](https://infosciences.epfl.ch/record/148475/files/TrolleSchwartz_Energy_Variance_Risk_Premia.pdf) | 1996-01 to 2006-11 | NYMEX crude oil | 0.59 | n/a | n/a | n/a | backtest | unclear | yes |
+| [Prokopczuk, Symeonidis and Wese Simen (2017), accepted manuscript, Table 1](https://ueaeprints.uea.ac.uk/63547/1/Variance_risk_in_Commodity_Markets.pdf) | Varies by market | 21 commodity markets | n/a | n/a | n/a | n/a | backtest | unclear | yes |
+
+Notes on these numbers:
+
+- **Trolle and Schwartz (2010), working paper, short variance swaps:** Natural gas 0.35, S&P 500 1.02 over the same period. Variance swap returns are positively skewed for the buyer, so negatively skewed for the seller.
+- **Prokopczuk, Symeonidis and Wese Simen (2017), accepted manuscript, Table 1:** Long variance swap payoff negative in 18 of 21 markets, for example -8.985% on average in natural gas; payoffs more negative after 2000.
+
+### After publication
+
+Prokopczuk et al. (2017) extend the evidence to 21 markets and find it holds, more strongly after 2000.
+
+### Implementations
+
+None found.
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | done |
+| 4. implemented | done |
+| 5. registered | done |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+- Hypothesis: [HYP-0014](../hypotheses/0014-selling-oil-volatility-pays-a-premium.md)
+- Strategy in the engine: `oil_variance_short`
+- Registration: [REG-0008](../../registrations/REG-0008-oil-volatility-and-commodity-currencies.json)
+
+Added from RES-0013 and RES-0014 on 2026-10-21. Registered on 2026-10-21 as REG-0008 (oil_variance_short), not yet run.
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+- [RES-0017: Combining many strategies, the evidence and the ingredient list](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
+<!-- backlinks:end -->

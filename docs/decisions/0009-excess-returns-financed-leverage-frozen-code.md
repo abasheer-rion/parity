@@ -62,6 +62,7 @@ These are bug fixes and integrity fixes, not changes of pass thresholds, so they
 - [DEC-0027: New edge families from the wider data](0027-new-edge-families-from-the-wider-data.md)
 - [EXP-0004: Sixteen strategies against the US stock market, 1999 to 2026](../experiments/0004-all-strategies-1999.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
+- [EXP-0006: Rerun of all sixteen strategies with corrected scoring](../experiments/0006-rerun-of-all-sixteen-strategies-with-corrected-scoring.md)
 - [RES-0007: Comparing every algorithm we know of](../research/0007-comparing-every-algorithm.md)
 - [RES-0008: Independent audit of our methods and code](../research/0008-independent-audit.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)

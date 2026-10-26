@@ -107,4 +107,5 @@ Added from the paper library (RES-0010) on 2026-10-21.
 ## Referenced by
 
 - [RES-0010: Paper library: FX and market microstructure](../research/0010-paper-library-fx-and-market-microstructure.md)
+- [RES-0017: Combining many strategies, the evidence and the ingredient list](../research/0017-combining-many-strategies-the-evidence-and-the-ingredient-list.md)
 <!-- backlinks:end -->
