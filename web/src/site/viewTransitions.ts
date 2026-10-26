@@ -1,11 +1,12 @@
-// The public pages fade into each other with cross-document view transitions (kit.css,
-// `@view-transition { navigation: auto }`). The apps (/app/, /trade/ and the rest) do not
-// opt in, so a transition started on the way into one is aborted by the browser, which
-// shows up as an uncaught "Transition was aborted because of invalid state" error after
-// signing in. Skip the transition before leaving for a page that will not take part.
+// The front page, the sign-in pages and /connect/ fade into each other with cross-document
+// view transitions (kit.css, `@view-transition { navigation: auto }`). No other page opts
+// in: not the apps (/app/, /trade/ and the rest), and not the legal pages, the blog, the
+// glossary, ideas or notes. A transition started on the way into one of those is aborted
+// by the browser, which shows up there as an uncaught "Transition was aborted because of
+// invalid state" error. So skip the transition unless the next page takes part.
 // Imported by the front page, the sign-in pages and /connect/.
 
-const NO_TRANSITION = /^\/(app|research|sim|trade|academy|lab|data)(\/|$)/;
+const TAKES_PART = /^\/((login|signup|reset|verify|connect)\/?)?$/;
 
 interface SwapEvent extends Event {
   viewTransition?: { skipTransition(): void; ready: Promise<void>; finished: Promise<void> } | null;
@@ -17,7 +18,7 @@ export function skipsTransition(url: string | undefined, here: string = location
   if (!url) return true;
   try {
     const to = new URL(url, here);
-    return to.origin !== new URL(here).origin || NO_TRANSITION.test(to.pathname);
+    return to.origin !== new URL(here).origin || !TAKES_PART.test(to.pathname);
   } catch {
     return true;
   }

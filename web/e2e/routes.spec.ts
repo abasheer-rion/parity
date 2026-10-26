@@ -28,7 +28,7 @@ for (const path of ALL.filter((p) => !p.startsWith("/no-such-page"))) {
 
 test.describe("missing page", () => {
   // The page's own address answers 404 on purpose, and Chrome logs that as a failed load.
-  test.use({ expectConsole: [/Failed to load resource: the server responded with a status of 404/] });
+  test.use({ expectConsole: [/Failed to load resource: the server responded with a status of 404/], allowHttp: [/^404 http:\/\/127\.0\.0\.1:\d+\/no-such-page/] });
   for (const path of ALL.filter((p) => p.startsWith("/no-such-page"))) {
     test(`route ${path}`, async ({ page }, info) => { await check(page, path, info, 404); });
   }

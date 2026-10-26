@@ -85,7 +85,7 @@ test.describe("copy link", () => {
 });
 
 test.describe("addresses that do not exist", () => {
-  test.use({ expectConsole: [/status of 404/] });
+  test.use({ expectConsole: [/status of 404/], allowHttp: [/^404 .*\/no-such-page-xyz\/$/] });
 
   test("an unknown public path answers 404 with the 404 page and a way home", async ({ page }) => {
     const res = await page.goto("/no-such-page-xyz/");

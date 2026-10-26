@@ -5,12 +5,13 @@
 //     reaches Google Fonts, an exchange or any other upstream
 //   - the cookie banner already decided, and the service worker off (it would hide requests
 //     from the stubs)
-//   - console errors and warnings, and uncaught exceptions, failing the test (see ALLOW)
+//   - console errors and warnings, uncaught exceptions, HTTP errors and failed requests
+//     failing the test, the same rules as scripts/smoke.mjs (see ALLOW and allowHttp)
 import { test as base, expect, type ConsoleMessage, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { BASE, SUPABASE } from "./config";
 import { DataStub } from "./data";
-import { FakeDb, sessionCookie, stubSupabase } from "./supabase";
+import { FakeDb, USER, sessionCookie, stubSupabase } from "./supabase";
 
 // Console messages that are not bugs. Keep this short and say why for each one.
 // Missing data files are handled separately: only the ones the stub left out on purpose pass.
@@ -18,12 +19,21 @@ const ALLOW: RegExp[] = [
   // The suite turns service workers off (serviceWorkers: "block") so the stubs see every
   // request; Playwright then logs this for each page that tries to register one.
   /^Service Worker registration blocked by Playwright/,
+  // Chrome's own GPU driver notes when the front page's WebGL scene draws in a headless
+  // browser (software GL). They come from the browser, not from page code.
+  /GL Driver Message \(OpenGL, Performance/,
 ];
 
 export interface Fixtures {
   signedIn: boolean;
+  /** First-run tours (DEC-0060). Off by default so they do not cover the page under test. */
+  tours: boolean;
+  /** The cookie choice already made. Off shows the cookie notice, as on a first visit. */
+  consent: boolean;
   /** Extra console text this test expects (an offline test, say). */
   expectConsole: RegExp[];
+  /** HTTP errors or failed requests this test expects, matched against "<status> <url>". */
+  allowHttp: RegExp[];
   db: FakeDb;
   data: DataStub;
   /** Problems seen so far in this test: console errors, warnings and exceptions. */
@@ -32,12 +42,16 @@ export interface Fixtures {
 
 export const test = base.extend<Fixtures>({
   signedIn: [true, { option: true }],
+  tours: [false, { option: true }],
+  consent: [true, { option: true }],
   expectConsole: [[], { option: true }],
+  allowHttp: [[], { option: true }],
   db: async ({}, use) => { await use(new FakeDb()); },
   data: async ({}, use) => { await use(new DataStub()); },
   problems: async ({}, use) => { await use([]); },
-  context: async ({ context, signedIn, db, data, problems, expectConsole }, use, testInfo) => {
-    await context.addInitScript(() => {
+  context: async ({ context, signedIn, tours, consent, db, data, problems, expectConsole, allowHttp }, use, testInfo) => {
+    if (!tours) db.seed("onboarding_state", [{ user_id: USER.id, tours_off: true, tours_seen: [], checklist_hidden: false }]);
+    if (consent) await context.addInitScript(() => {
       try {
         localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" }));
       } catch { /* private mode */ }
@@ -62,6 +76,21 @@ export const test = base.extend<Fixtures>({
         const text = m.text();
         if (allowed(text, m.location()?.url ?? "")) return;
         problems.push(`console ${m.type()}: ${text.slice(0, 400)} (${page.url()})`);
+      });
+      // A request that failed or answered 400 or more is a bug unless the data stub left that
+      // file out on purpose or the test said it expects it. A request the page itself
+      // cancelled (leaving a page, an aborted fetch) is fine.
+      page.on("response", (r) => {
+        if (r.status() < 400 || data.leftOut(r.url())) return;
+        const line = `${r.status()} ${r.url()}`;
+        if (allowHttp.some((re) => re.test(line))) return;
+        problems.push(`HTTP ${line} (${page.url()})`);
+      });
+      page.on("requestfailed", (r) => {
+        const why = r.failure()?.errorText ?? "";
+        if (/ERR_ABORTED/.test(why) || data.leftOut(r.url())) return;
+        if (allowHttp.some((re) => re.test(`failed ${r.url()}`))) return;
+        problems.push(`request failed: ${r.url()} ${why} (${page.url()})`);
       });
       page.on("pageerror", (e) => {
         if (expectConsole.some((re) => re.test(e.message))) return;

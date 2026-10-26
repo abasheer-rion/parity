@@ -58,7 +58,7 @@ export const TOURS: Record<Area, { label: string; steps: GuidedStep[] }> = {
       { id: "ticket-m", target: ".mtabs button:nth-child(3)", title: "Order ticket", body: "Demo account, virtual money.", placement: "top" },
       { id: "dock", target: ".ws-dock", title: "Positions", body: "Positions, orders and fills.", placement: "top" },
       { id: "dock-m", target: ".mtabs button:nth-child(4)", title: "Positions", body: "Positions, orders and fills.", placement: "top" },
-      { id: "keys", target: ".rail", title: "Views and keys", body: "Shift+1 to 8 switch views. Press ? for every key.", placement: "right" },
+      { id: "keys", target: ".rail", title: "Views and keys", body: "Shift+1 to 9 switch views. Press ? for every key.", placement: "right" },
       { id: "palette", target: ".tb-search", title: "Command palette", body: `${MOD} K: symbols, layouts and every command.` },
     ],
   },

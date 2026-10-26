@@ -1,9 +1,9 @@
 // One strategy, laid out like a Robinhood stock page: name, the value of a starting
 // amount, a range-tabbed chart you can scrub, About, Key statistics, then detail.
 // The right column holds the verdict where Robinhood puts its order panel.
-import { useState } from "react";
+import { useHashState } from "../lib/deeplink";
 import { labUrl } from "../lib/space";
-import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
+import { BarChart, HeroChart, LineChart, RANGES, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
 import { Badge, Button } from "../ui";
 import { Title } from "../components/Shell";
@@ -19,7 +19,9 @@ import { Term } from "./Learn";
 
 export function StrategyPage({ report, name }: { report: Report; name: string }) {
   const prefs = usePrefs();
-  const [range, setRange] = useState<RangeKey>(prefs.defaultRange);
+  // The range lives in the link, so Copy link and reload reopen the same view (DEC-0038).
+  const [rangeRaw, setRange] = useHashState("range", prefs.defaultRange);
+  const range: RangeKey = (RANGES as readonly string[]).includes(rangeRaw) ? (rangeRaw as RangeKey) : prefs.defaultRange;
   const docs = useDocs();
   const run = report.runs.find((r) => r.strategy === name);
   const bench = report.runs.find((r) => r.is_benchmark);

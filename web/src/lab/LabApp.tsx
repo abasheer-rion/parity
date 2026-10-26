@@ -129,7 +129,7 @@ function LabShell() {
       if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || isTyping(e.target)) return;
       if (document.querySelector(".ui-dialog-backdrop, [aria-modal='true']")) return;
       if (e.key === "?") { e.preventDefault(); setKeysOpen(true); return; }
-      if (e.shiftKey && /^Digit[1-6]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
+      if (e.shiftKey && /^Digit[1-7]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
       if (e.shiftKey) return;
       if (e.key === "/") {
         const box = document.querySelector<HTMLInputElement>("[data-lab-find] input, input[data-lab-find]");

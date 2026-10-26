@@ -33,7 +33,7 @@ test.describe("signed out", () => {
   });
 
   test.describe("wrong password", () => {
-    test.use({ expectConsole: [/status of 400/] });
+    test.use({ expectConsole: [/status of 400/], allowHttp: [/^400 .*\/auth\/v1\/token/] });
     test("says so in plain words and keeps the email", async ({ page }) => {
       await open(page, "/login/");
       await page.getByRole("textbox", { name: "Email" }).fill("e2e@example.com");
