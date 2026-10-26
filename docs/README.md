@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 59 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 60 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - 2026-10-25 [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - 2026-10-25 [REF-0024: App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
 - 2026-10-25 [REF-0023: Motion system](reference/0023-motion-system.md)
 - 2026-10-25 [REF-0022: Product analytics events](reference/0022-product-analytics-events.md)
-- 2026-10-25 [REF-0021: Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md)
-- 2026-10-25 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 
 ## intent
 
@@ -110,6 +110,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0058 | [One token file for every app and a lint that blocks raw values](decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
 | DEC-0059 | [A Parity page is never black, it shows a loading screen or says what went wrong](decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0060 | [A getting started checklist and first-run tours, and no bank details until a broker partner](decisions/0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md) | accepted | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0061 | [Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md) | accepted | 2026-10-26 | [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -183,7 +184,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0006 | [The gauntlet](reference/0006-the-gauntlet.md) | current | 2026-10-20 | [benchmark](TAGS.md#benchmark), [kpis](TAGS.md#kpis), [method](TAGS.md#method) |
 | REF-0007 | [Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md) | current | 2026-10-20 | [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | REF-0008 | [Where results live and how they are tagged](reference/0008-where-results-live.md) | current | 2026-10-21 | [infra](TAGS.md#infra), [method](TAGS.md#method), [process](TAGS.md#process) |
-| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
+| REF-0009 | [UI library](reference/0009-ui-library.md) | current | 2026-10-26 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0010 | [FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md) | current | 2026-10-22 | [data](TAGS.md#data), [fx](TAGS.md#fx) |
 | REF-0011 | [Scenario simulator method](reference/0011-scenario-simulator-method.md) | current | 2026-10-21 | [commodities](TAGS.md#commodities), [fx](TAGS.md#fx), [method](TAGS.md#method), [news](TAGS.md#news), [ui](TAGS.md#ui) |
 | REF-0012 | [Candlesticks and chart patterns](reference/0012-candlesticks-and-chart-patterns.md) | current | 2026-10-21 | [fx](TAGS.md#fx), [method](TAGS.md#method) |

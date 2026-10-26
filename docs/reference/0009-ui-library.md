@@ -4,10 +4,10 @@ title: UI library
 type: reference
 status: current
 created: 2026-10-21
-updated: 2026-10-25
+updated: 2026-10-26
 authors: [ayan]
 tags: [docs, ui]
-related: [DEC-0011, DEC-0017, DEC-0058, REF-0001]
+related: [DEC-0011, DEC-0017, DEC-0058, DEC-0061, REF-0001]
 ---
 
 # UI library
@@ -22,7 +22,8 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 | --- | --- | --- |
 | Tokens (colour, type, space, radius, shadow, glass, layers, motion, breakpoints) | `web/src/ui/tokens.css` | The only place values are set ([DEC-0058](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)). Dark only. |
 | Tokens in TypeScript | `web/src/ui/tokens.ts`, generated `tokens.gen.ts` | Typed names, live values for canvas charts, plain values for share images and the desktop app (`npm run tokens`). |
-| Token lint | `npm run lint:styles` | Fails on raw colours, px font sizes, durations, curves, page-level z-index and undefined `var(--x)` outside the token file. Runs in CI. |
+| Token lint | `npm run lint:styles` | Fails on raw colours, px font sizes, durations, curves, written-out number figures, page-level z-index and undefined `var(--x)` outside the token file, and on durations or easings typed into scripted motion. Runs in CI. |
+| Accessibility check | `npm run a11y` | WCAG 2.2 AA on every route, a keyboard walk through `#/ui` and reduced motion ([DEC-0061](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)). Runs in CI. |
 | Component styles | `web/src/ui/ui.css` | Reads tokens only. |
 | Components | `web/src/ui/*.tsx`, imported from `web/src/ui` | Pages import from `../ui`, never from a single file. |
 | Live gallery | `web/src/pages/UILibrary.tsx`, route `#/ui` | Every part, live, with usage and rules. Chart demos use sample data, labelled so. |
@@ -30,16 +31,16 @@ The dashboard is built from one box of parts: buttons, text, cards, tables, filt
 
 ## Changing a style site-wide
 
-Edit the value in `web/src/ui/tokens.css`, then run `npm run tokens` to refresh the generated copies. Every app, the legal pages and the desktop app follow.
+Edit the value in `web/src/ui/tokens.css`, then run `npm run tokens` to refresh the generated copies. Every app, the legal pages and the desktop app follow. Then run `npx vitest run tests/contrast.test.ts`: it fails if the new value drops any text below 4.5:1 or any control part below 3:1 on any surface.
 
 | Token group | Names | What it sets |
 | --- | --- | --- |
-| Colour | `--color-canvas`, `-surface`, `-surface-raised`, `-surface-overlay`, `-glass`, `-border`, `-border-strong`, `-text`, `-text-body`, `-text-muted`, `-text-faint`, `-primary`, `-on-primary`, `-accent`, `-accent-text`, `-accent-soft`, `-selected`, `-positive`, `-negative`, `-warning`, `-info`, `-focus`, `-glow` | Backgrounds, lines, text, the main button (white), the selected state (red), gains, losses, warnings, focus rings and the red glow |
-| Type | `--type-3xs` (10px) to `--type-8xl` (44px), `--type-display`, `--weight-*`, `--leading-*`, `--num-features` | Text sizes, weights, line heights, tabular figures |
+| Colour | `--color-canvas`, `-surface`, `-surface-raised`, `-surface-overlay`, `-glass`, `-border`, `-border-strong`, `-border-control` (edges of fields, checkboxes, switches, sliders), `-text`, `-text-body`, `-text-muted`, `-text-faint`, `-primary`, `-on-primary`, `-accent`, `-accent-text`, `-accent-soft`, `-selected`, `-positive`, `-negative`, `-warning`, `-info`, `-focus`, `-glow` | Backgrounds, lines, text, the main button (white), the selected state (red), gains, losses, warnings, focus rings and the red glow |
+| Type | `--type-3xs` (10px) to `--type-8xl` (44px), `--type-display`, `--weight-*`, `--leading-*`, `--num-variant`, `--num-features` | Text sizes, weights, line heights, tabular figures for every number |
 | Space and shape | `--space-*`, `--radius-xs` to `--radius-pill`, `--control-h-*` | Gaps, corners, control heights |
 | Depth | `--shadow-1` to `-3`, `--shadow-ring`, `--shadow-focus`, `--glass-blur`, `--glow-accent`, `--card-sheen` | Shadows, frosted glass, the glow |
 | Layers | `--z-backdrop` to `--z-top` | What sits above what: sticky, nav, panel, popover, tooltip, modal, toast |
-| Motion | `--dur-1` to `--dur-6`, loop durations, `--ease-out`, `-in-out`, `-spring`, `-glide`, `-emphasized` | Every transition and animation; all collapse under reduced motion |
+| Motion | `--dur-1` to `--dur-6`, loop durations, `--ease-out`, `-in-out`, `-spring`, `-glide`, `-emphasized` | Every transition and animation, in CSS and in scripts (`durationMs`, `tokenValue`, `usePresence(open, "dur-2")`); all collapse under reduced motion |
 | Breakpoints | `--bp-phone` 600, `--bp-tablet` 860, `--bp-laptop` 1080, `--bp-desktop` 1440 | Media queries use the same numbers; `tokens.ts` exports them |
 
 Parity Terminal overrides colour and radius tokens on `.ptm` in the same file, so it keeps amber and square corners.
@@ -52,7 +53,7 @@ Parity Terminal overrides colour and radius tokens on `.ptm` in the same file, s
 | Buttons | `Button` (primary, secondary, ghost, outline, danger; sm, md, lg; loading; icon; as a link; "tertiary" is the older name for ghost), `IconButton` (sm, md, lg; always labelled), `ButtonGroup` |
 | Inputs | `Input`, `SearchInput`, `Field` (label, help, error read out), `Select`, `Segmented` (sliding thumb), `RadioGroup`, `Slider`, `Toggle` (switch), `Checkbox`, `Tabs` (sliding underline, arrow keys) |
 | Filters and sorting | `FilterBar`, `FilterChip`, `Separator`, `useFilters`, `useSort` |
-| Tables | `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links; `expand` rows that open in place; `maxHeight` for a sticky header in its own box; `virtual` for thousands of rows; rows glide on a sort), `ShareBar` |
+| Tables | `TableScroll` (the box a wide table scrolls in; joins the tab order as a named region only when the table does not fit), `DataTable` (columns describe sort, alignment, tone and rendering; pinned rows; row links; `expand` rows that open in place; `maxHeight` for a sticky header in its own box; `virtual` for thousands of rows; rows glide on a sort), `ShareBar` |
 | Long lists | `VirtualList`, `useVirtual` (draw only the rows on screen, rows may grow) |
 | Expand | `Collapse`, `Disclosure`, `Accordion`, `useDisclosure` |
 | Layout | `PageHeader`, `Panel` (`glass` for a frosted card), `Grid`, `Stat`, `KeyValues`, `Section`, `Badge` (neutral, accent, good, warning, bad, info, dark), `Status`, `Divider`, `Meter`, `SettingsRow`, `EmptyState` |
@@ -95,7 +96,7 @@ What causes a page to jump, and what the library does about each:
 
 ## Nothing overlaps or gets cut off
 
-`npm run layout` opens every route of every app at 1280x800, 1440x900, 1920x1080 and 390x844, saves a screenshot of each to `web/layout-shots/` and lists text that collides with other text, text cut off by a box, numbers shortened with "...", controls cut off by a box too narrow for them, and pages that scroll sideways (`web/scripts/lib/layout-check.mjs`). The smoke test in CI runs the same check on every route at 1440 and 390, so a regression fails the build. Text marked `data-layout-ignore` is skipped.
+`npm run layout` opens every route of every app at 1280x800, 1440x900, 1920x1080 and 390x844, saves a screenshot of each to `web/layout-shots/` and lists text that collides with other text, text cut off by a box, numbers shortened with "...", controls cut off by a box too narrow for them, and pages that scroll sideways (`web/scripts/lib/layout-check.mjs`). The smoke test in CI runs the same check on every route at all four sizes, so a regression fails the build. Text marked `data-layout-ignore` is skipped. Run the audit against real engine output too (`PARITY_OUTPUT_DIR=../engine/output`): long strategy names and big numbers show problems the small CI fixture does not.
 
 How each kind of problem is fixed:
 
@@ -107,6 +108,8 @@ How each kind of problem is fixed:
 | Line-end labels on a chart stack on top of each other | `spreadLabels` in the Academy pictures spaces them a line apart |
 | Lightweight Charts axis labels | A 64px minimum price axis width, whole labels only, time labels thinned to fit |
 | A negative zero or a hyphen minus | `pct`, `num` and `fmt` print a true minus and never "-0.0%" |
+| A long name pushes the last number out of a narrow Terminal panel | Names shorten to 16 characters with "..." in panels under 380px; words may be cut, numbers never |
+| A small count in a proportional bar is cut ("Promising 3") | Each part is at least as wide as its label (`flex: 0 0 auto`, grows by its count) and the bar wraps on a phone |
 
 ## Using the newer parts
 
@@ -139,11 +142,33 @@ Run on 2026-10-21 with the dataviz palette validator (lightness band, saturation
 
 Text contrast against the dark background, measured in the gallery: primary 18.2:1, labels 8.7:1, meta 5.3:1 (raised from 4.3:1 so it passes the 4.5:1 minimum), links 7.9:1.
 
+## Accessibility (WCAG 2.2 AA)
+
+Every part meets WCAG 2.2 AA ([DEC-0061](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)). Three checks keep it that way, all in CI:
+
+| Check | What it proves | Where |
+| --- | --- | --- |
+| Contrast test | Every text colour is at least 4.5:1 and every control colour and the focus ring at least 3:1 on every surface, including frosted glass over the brightest point of the red glow, a selected row, the red badge and the Terminal's panels | `web/tests/contrast.test.ts` |
+| axe on every route | Names, roles and states, 24px targets, links told apart by more than colour, tables that scroll by keyboard, no sideways scroll, at 1280 and 390 wide | `npm run a11y` |
+| Keyboard walk and motion | Tab reaches every control on `#/ui` and each shows a ring at least 2px wide, none off screen; with reduced motion on, nothing keeps animating on the app homes | `npm run a11y` |
+
+What each part does:
+
+| Need | How the library meets it |
+| --- | --- |
+| Visible focus | `web/src/a11y.css` draws a 2px ring in `--color-focus` on every focused control, over any component rule. Library checkboxes and radios ring their drawn box. |
+| 24px targets | `Button` `xs` and `IconButton` `xs` are 24px, icon buttons never shrink in a row, row and list buttons are at least 24px tall |
+| Edges of controls | Fields, selects, checkboxes, radios, switches and slider tracks use `--color-border-control` (3:1 on every surface); hover lightens it, focus turns it white |
+| Names, roles, states | Icon buttons need a `label`; toggle buttons carry `aria-pressed`, switches `aria-checked`, tabs `aria-selected`, sortable headers `aria-sort`, rows that open `aria-expanded`. A button's spoken name starts with the words on it. |
+| Keyboard | Tabs and segmented controls move with the arrow keys, dialogs and drawers trap focus and close on Escape, popovers give focus back, a table that scrolls is focusable (`TableScroll`) |
+| Links in text | Underlined inside sentences, table cells and notes |
+| Reduced motion | Duration tokens collapse to 1ms, loops stop, `usePresence` and `useFlip` skip their animation |
+
 ## Adding a part
 
-1. Build it in `web/src/ui/`, reading only tokens. `npm run lint:styles` fails on anything else.
+1. Build it in `web/src/ui/`, reading only tokens. `npm run lint:styles` fails on anything else. Give it a visible focus state, a name, a 24px target and keyboard control.
 2. Export it from `web/src/ui/index.ts`.
-3. Add it to the gallery with a live demo, a usage snippet and its rules.
+3. Add it to the gallery with a live demo, a usage snippet and its rules. The keyboard walk in `npm run a11y` then checks it.
 4. Use it on a page instead of hand-written markup.
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
@@ -153,6 +178,7 @@ Text contrast against the dark background, measured in the gallery: primary 18.2
 - [DEC-0017: Motion on the site, 3D on the front page and quiet movement in the app](../decisions/0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](../decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
+- [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - [REF-0023: Motion system](0023-motion-system.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
