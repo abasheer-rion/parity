@@ -63,6 +63,60 @@ test.describe("signed out", () => {
     await expect(page.getByLabel(/password/i).first()).toBeVisible();
   });
 
+  test("sign up checks the password as you type and ends on check your email", async ({ page }) => {
+    await open(page, "/signup/");
+    await page.getByRole("textbox", { name: "Email" }).fill("new@example.com");
+    await page.getByRole("button", { name: "Continue" }).click();
+    const pw = page.getByLabel("Choose a password", { exact: true });
+    await pw.fill("short1");
+    await page.getByRole("button", { name: /create|sign up|continue/i }).last().click();
+    await expect(page.getByText("Use at least 10 characters.")).toBeVisible();
+    await expect(pw).toHaveAttribute("aria-invalid", "true");
+    await pw.fill("onlyletterslong");
+    await page.getByRole("button", { name: /create|sign up|continue/i }).last().click();
+    await expect(page.getByText("Use both letters and numbers.")).toBeVisible();
+    await pw.fill("letters-and-42-numbers");
+    await page.getByRole("button", { name: /create|sign up|continue/i }).last().click();
+    await expect(page.getByText("Please agree to the terms and the privacy policy to continue.")).toBeVisible();
+    await page.getByRole("checkbox").first().check();
+    await page.getByRole("button", { name: /create|sign up|continue/i }).last().click();
+    await expect(page.getByRole("heading", { name: "Check your email" })).toBeVisible();
+    await expect(page.getByText("new@example.com")).toBeVisible();
+  });
+
+  test("Show password shows it and Hide hides it again", async ({ page }) => {
+    await open(page, "/login/");
+    await page.getByRole("textbox", { name: "Email" }).fill("e2e@example.com");
+    await page.getByRole("button", { name: "Continue" }).click();
+    const pw = page.getByLabel("Password", { exact: true });
+    await pw.fill("secret-123456");
+    await expect(pw).toHaveAttribute("type", "password");
+    await page.getByRole("button", { name: "Show password" }).click();
+    await expect(pw).toHaveAttribute("type", "text");
+    await page.getByRole("button", { name: "Hide password" }).click();
+    await expect(pw).toHaveAttribute("type", "password");
+  });
+
+  test("Change on the password step goes back to the email and keeps it", async ({ page }) => {
+    await open(page, "/login/");
+    await page.getByRole("textbox", { name: "Email" }).fill("e2e@example.com");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.getByRole("button", { name: "Change email, now e2e@example.com" }).click();
+    await expect(page.getByRole("textbox", { name: "Email" })).toHaveValue("e2e@example.com");
+  });
+
+  test("reset with no email asks for one", async ({ page }) => {
+    await open(page, "/reset/");
+    await page.getByRole("button", { name: "Send reset email" }).click();
+    await expect(page.getByText("Enter your email.")).toBeVisible();
+  });
+
+  test("an email link with its code confirms the address", async ({ page }) => {
+    await open(page, "/verify/?type=email&token_hash=e2e-token");
+    await expect(page.getByRole("heading", { level: 1 })).not.toHaveText("This link is not complete");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  });
+
   test("reset sends the email and says so", async ({ page }) => {
     await open(page, "/reset/");
     await page.getByRole("textbox", { name: "Email" }).fill("e2e@example.com");

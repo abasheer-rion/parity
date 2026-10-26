@@ -6,7 +6,7 @@ test.describe("side menu", () => {
   test("Discover opens the strategies list and the address follows", async ({ page }, info) => {
     await open(page, "/app/#/");
     await settled(page);
-    if (info.project.name === "phone") await page.getByRole("button", { name: /menu/i }).first().click();
+    if (info.project.name === "phone") await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Discover" }).click();
     await expect(page).toHaveURL(/#\/strategies$/);
     await expect(page.getByRole("heading", { level: 1, name: "Discover strategies" })).toBeVisible();
@@ -22,7 +22,8 @@ test.describe("side menu", () => {
     await expect(page.getByRole("tablist", { name: "Side of Parity" }).getByRole("tab", { name: "Research" })).toHaveAttribute("aria-selected", "true");
   });
 
-  test("Trade's own menu moves between its views", async ({ page }) => {
+  test("Trade's own menu moves between its views", async ({ page }, info) => {
+    test.skip(info.project.name === "phone", "the phone uses the bottom bar, covered in trade.spec.ts");
     await open(page, "/trade/#/chart");
     await page.getByRole("navigation", { name: "Trade" }).getByRole("link", { name: "Portfolio" }).click();
     await expect(page).toHaveURL(/\/trade\/#\/portfolio$/);
@@ -78,7 +79,8 @@ test.describe("copy link", () => {
 
   test("Workbench's Copy link copies its address", async ({ page }) => {
     await open(page, "/lab/#/compare");
-    await page.getByRole("button", { name: "Copy link" }).click();
+    // On a phone the button shows only its icon; its name is then its title.
+    await page.getByRole("button", { name: /^Copy (a )?link/ }).click();
     const copied = await page.evaluate(() => navigator.clipboard.readText());
     expect(copied).toContain("/lab/#/compare");
   });
