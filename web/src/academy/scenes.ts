@@ -195,7 +195,11 @@ const growth: Render = (p, steps, s) => {
   // End labels never sit on top of each other: early on the lines start together, so the
   // labels are spread to at least one line of text apart, top to bottom.
   for (const e of spreadLabels(ends, 15, PLOT.y0 + 12, PLOT.y1 - 4)) {
-    out += text(e.x, e.y, `${series[e.k].label}: ${fmt(curves[e.k][m - 1], "$")}`, { anchor: "end", fill: e.col, size: 12, weight: 600 });
+    const label = `${series[e.k].label}: ${fmt(curves[e.k][m - 1], "$")}`;
+    // Early on the lines are short: a label ending at the line would run into the axis
+    // labels on the left, so it goes to the right of the line's end instead.
+    const left = e.x - label.length * 7.2 < PLOT.x0 + 4;
+    out += text(left ? e.x + 14 : e.x, e.y, label, { anchor: left ? "start" : "end", fill: e.col, size: 12, weight: 600 });
   }
   return out;
 };
