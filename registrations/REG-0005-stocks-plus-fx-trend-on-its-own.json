@@ -1,0 +1,39 @@
+{
+  "id": "REG-0005",
+  "title": "Stocks plus currency trend on its own, judged on HYP-0007's claim",
+  "created": "2026-10-21",
+  "authors": [
+    "amanda"
+  ],
+  "hypotheses": [
+    "HYP-0007"
+  ],
+  "experiment": "EXP-0007",
+  "question": "Does holding US stocks with a currency trend book (half the risk each, the idle half in T-bills since the M1 fix) earn a higher Sharpe ratio than the market, more money at the market's volatility, and hold up in the market's worst months?",
+  "strategies": [
+    {
+      "name": "stocks_plus_fx_trend",
+      "params": {}
+    }
+  ],
+  "backtest": {
+    "start": "1999-01-04",
+    "end": null,
+    "cost_bps": 1.0,
+    "include_carry": true,
+    "target_vol": null,
+    "vol_lookback": 60,
+    "max_leverage": 4.0
+  },
+  "pass_criteria": {
+    "required_tests": [
+      "A1",
+      "A2",
+      "B5"
+    ]
+  },
+  "prior_trials": 307,
+  "prior_trials_note": "188 counted by RUN-000003 plus the 16 of REG-0004. If REG-0004 has not run first, the ledger floor applies. Raised from 204 to 290 on 2026-10-22 after rebasing on main: the strategy factory added 86 recipes that were each evaluated in at least one full run (DEC-0014). This is a floor. It does not include the always-on search's variations, whose count lives in engine/output/search.db on the owner's machine; the owner should add it before merging if search tries are to count. Raised by 17 on 2026-10-23 after merging main: PR #47 (DEC-0027) added 17 edge recipes, each evaluated in at least one full gauntlet run.",
+  "what_would_change_our_mind": "Failing A1 or A2 means the overlay does not improve on stocks at equal risk. Failing B5 means its crisis cushion was a few lucky episodes.",
+  "already_seen": "The overlay's results under the old scoring and without the M1 fix were seen in RUN-000003 (6 of 11 tests). Its crisis behaviour, which motivates this plan, was seen on the Compare page. Not seen under the corrected code."
+}
