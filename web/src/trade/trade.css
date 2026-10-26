@@ -345,7 +345,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 /* The chart controls need about 880px: below 1520px the brand makes room for them, so the
    last buttons are never cut off or squeezed below a usable size. */
 @media (max-width: 1520px) {
-  .tb-brand { display: none; }
+  .tb-brand, .tb-search kbd { display: none; }
 }
 @media (max-width: 1400px) {
   .tb-search span { display: none; }
