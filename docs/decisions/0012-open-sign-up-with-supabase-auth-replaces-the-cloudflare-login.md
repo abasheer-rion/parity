@@ -51,4 +51,5 @@ Supabase Auth wins: we already use Supabase for the database, its row level secu
 ## Referenced by
 
 - [DEC-0022: Safe sign-in, legal pages, essential-only cookies and an accessibility bar](0022-safe-sign-in-legal-pages-essential-only-cookies-and-an-accessibility-bar.md)
+- [DEC-0053: Our own product analytics, opt-in, stored in Postgres](0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
 <!-- backlinks:end -->

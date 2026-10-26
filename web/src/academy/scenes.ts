@@ -4,9 +4,12 @@
 // to animate; the public pages draw the last frame as a still picture at build time
 // (web/scripts/academy-frames.ts, run by scripts/seo/build_public.py).
 //
-// No imports, and only type syntax Node can strip, so the build script can load this
-// file with `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box.
-// Colours are fixed hex values because both the app and the public pages are dark only.
+// One import (the generated token values, with its .ts extension) and only type syntax
+// Node can strip, so the build script can load this file with
+// `node --experimental-strip-types`. Output is SVG markup for a 480 x 270 box. Colours
+// are plain values from the tokens because the public pages draw these at build time.
+
+import { RAW } from "../ui/tokens.gen.ts";
 
 export interface Step { caption: string; [key: string]: unknown }
 export interface Visual { kind: string; alt: string; params?: Record<string, unknown>; steps: Step[] }
@@ -14,11 +17,13 @@ export interface Visual { kind: string; alt: string; params?: Record<string, unk
 export const W = 480;
 export const H = 270;
 
+// Plain colour values from the tokens: these pictures are SVG strings, drawn on the page and
+// rendered to frames at build time, so they cannot read CSS variables.
 const C = {
-  blue: "#85a8ff", deep: "#2a5ff0", good: "#4cc98a", bad: "#f07a7a", warn: "#e8c06a",
-  text: "#f1f3f9", muted: "#a3a8b9", faint: "#8a8fa2", grid: "#a9b6ff24", panel: "#11131c",
+  blue: RAW["palette-blue-300"], deep: RAW["palette-blue-500"], good: RAW["color-positive"], bad: RAW["color-negative"], warn: RAW["color-warning"],
+  text: RAW["color-text"], muted: RAW["color-text-muted"], faint: RAW["color-text-faint"], grid: RAW["color-border-strong"], panel: RAW["color-surface-raised"],
 };
-const PALETTE = [C.blue, C.good, C.warn, C.bad, "#c9a2ff", "#6fd3e0"];
+const PALETTE = [C.blue, C.good, C.warn, C.bad, RAW["palette-violet-400"], RAW["palette-cyan-400"]];
 
 // ------------------------------------------------------------------ small helpers
 
@@ -605,7 +610,53 @@ const trend: Render = (p, steps, s) => {
   return out;
 };
 
-export const KINDS: Record<string, Render> = { growth, paths, drawdown, costs, maxof, gauntlet, curve, bars, lines, event, leverage, jcurve, seesaw, trend };
+
+/**
+ * Win rate against profit (DEC-0035): accounts that each make a run of trades with a
+ * chance of winning, a size of win and a size of loss, plus at most one rare large loss
+ * at a set point. Every line is labelled with its win rate and its profit so far, so the
+ * picture states its own numbers. Made-up trades, drawn the same way every time.
+ */
+const winrate: Render = (p, steps, s) => {
+  const n = num(p.trades, 200), start = num(p.start, 10000);
+  const series = (p.series as { label: string; p: number; win: number; loss: number; tailAt?: number; tail?: number; seed?: number }[]) ?? [];
+  const reveal = at(steps, s, "reveal", 1);
+  const runs = series.map((c, k) => {
+    const g = rng(num(c.seed, k + 5));
+    const eq = [start];
+    const won: boolean[] = [false];
+    const tailAt = c.tailAt != null ? Math.round(c.tailAt * (n - 1)) : -1;
+    for (let i = 1; i < n; i++) {
+      const prev = eq[i - 1];
+      const d = prev <= 0 ? 0 : i === tailAt ? -num(c.tail, 0) : g.next() < c.p ? c.win : -c.loss;
+      won.push(d > 0);
+      eq.push(Math.max(0, prev + d));
+    }
+    return { eq, won };
+  });
+  const m = revealed(n, reveal);
+  const flat = runs.flatMap((r) => r.eq);
+  const lo = Math.min(0, ...flat), hi = Math.max(...flat, start) * 1.08;
+  const x = scale(0, n - 1, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 30);
+  let out = yAxis(lo, hi, y, "$") + xLabels(["Trade 1", `Trade ${n}`]);
+  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(start))}" y2="${r1(y(start))}" stroke="${C.faint}" stroke-dasharray="3 4"/>`;
+  runs.forEach((r, k) => {
+    const col = PALETTE[k % PALETTE.length];
+    const pts = r.eq.slice(0, m).map((v, i) => [x(i), y(v)] as [number, number]);
+    out += poly(pts, col, { width: 2.5 });
+    const last = pts[pts.length - 1];
+    out += dot(last[0], last[1], col);
+    // Win rate and profit over the trades shown so far (an empty account trades no more).
+    let wins = 0, count = 0;
+    for (let i = 1; i < m && r.eq[i - 1] > 0; i++) { count++; if (r.won[i]) wins++; }
+    const profit = r.eq[m - 1] - start;
+    const line = `${series[k].label}: wins ${count ? Math.round((wins / count) * 100) : 0}%, ${profit >= 0 ? "+" : "-"}${fmt(Math.abs(profit), "$")}`;
+    out += text(PLOT.x0 + 4, PLOT.y0 + 2 + k * 16, line, { fill: col, size: 12, weight: 600 });
+  });
+  return out;
+};
+
+export const KINDS: Record<string, Render> = { growth, paths, drawdown, costs, maxof, gauntlet, curve, bars, lines, event, leverage, jcurve, seesaw, trend, winrate };
 
 /** The inside of the picture at position s (0 to steps - 1), as SVG markup. */
 export function renderScene(v: Visual, s: number): string {

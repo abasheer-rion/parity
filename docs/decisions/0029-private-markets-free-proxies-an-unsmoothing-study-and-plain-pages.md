@@ -14,7 +14,7 @@ related: [DEC-0015, DEC-0018, DEC-0019, DEC-0023, REF-0015, RES-0012]
 
 ## In plain words
 
-The owner asked for private markets, with the research "fully decked out" and the result usable. Real private fund returns are sold by a few data firms under licences we cannot show, so we built around what is free and honest:
+The owner asked for private markets, with the research "fully decked out" and the result usable. Real private fund returns are sold by a few data firms under licences we cannot show, so we built on what is free to use and show:
 
 - **A sourced research note** on private equity, venture, private credit, property, infrastructure, secondaries and the funds sold to individuals ([RES-0012](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)).
 - **Free public data:** counts of private offerings filed with the SEC (Form D), the marks of seven large listed lenders to private companies (BDCs), and nine Federal Reserve series on property prices and bank lending.

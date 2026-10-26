@@ -14,7 +14,7 @@ related: [EXP-0004, REF-0007, RES-0006]
 
 ## In plain words
 
-We lined up all 54 trading ideas in our catalog, and the 16 we have built ourselves, and compared them fairly. The pattern is simple. The newer and more exciting an idea, the better its claimed results, and the weaker the proof behind them. The ideas with long, honest track records earn modest returns. When we tested 16 of them ourselves on 27 years of data, none beat simply holding the US stock market once we allowed for how many ideas we tried. A few came close, and they all have one thing in common: they hold the stock market most of the time and step aside when it gets rough.
+We lined up all 54 trading ideas in our catalog, and the 16 we have built ourselves, and compared them fairly. The pattern is simple. The newer and more exciting an idea, the better its claimed results, and the weaker the proof behind them. The ideas with long, verified track records earn modest returns. When we tested 16 of them ourselves on 27 years of data, none beat holding the US stock market once we allowed for how many ideas we tried. A few came close, and they all have one thing in common: they hold the stock market most of the time and step aside when it gets rough.
 
 ## Summary
 

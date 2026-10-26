@@ -1,0 +1,34 @@
+/* Competitor profiles (DEC-0047). Existing tokens only; layout borrows the markets cards. */
+.cmp { display: grid; gap: var(--space-4); }
+.cmp-chips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.cmp tr.on th, .cmp tr.on td { background: var(--hover); }
+.cmp-split { display: flex; height: 8px; min-width: 120px; gap: 2px; }
+.cmp-split .good, .cmp-bar.good, .cmp-bars i.good { background: var(--good); }
+.cmp-split .bad, .cmp-bar.bad, .cmp-bars i.bad { background: var(--bad); }
+.cmp-split span { display: block; height: 100%; border-radius: var(--radius-sm); }
+.cmp-spark { width: 72px; height: 20px; display: block; }
+.cmp-spark .good { fill: var(--good); }
+.cmp-spark .bad { fill: var(--bad); }
+.cmp-spark .flat { fill: var(--muted); }
+.cmp-detail h3, .cmp-trend h3 { font-size: var(--fs-sm); margin: var(--space-3) 0 var(--space-1); color: var(--text-2); font-weight: var(--fw-medium); }
+.cmp-plain p { margin: 4px 0 8px; max-width: 760px; }
+.cmp-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); }
+.cmp-themes { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cmp-themes li { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; font-size: var(--fs-sm); }
+.cmp-bar { grid-column: 1 / -1; height: 4px; border-radius: var(--radius-sm); }
+.cmp-bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 3px; height: 120px; max-width: 560px; }
+.cmp-col { display: grid; grid-template-rows: 1fr 1fr auto; min-width: 0; }
+.cmp-col .up, .cmp-col .down { display: flex; min-height: 0; }
+.cmp-col .up { align-items: flex-end; border-bottom: 1px solid var(--border); }
+.cmp-col .down { align-items: flex-start; }
+.cmp-col i { display: block; width: 100%; border-radius: 2px; }
+.cmp-col .lbl { font-size: var(--fs-xs); color: var(--muted); text-align: center; font-family: var(--font-mono); }
+.cmp-copy h3, .cmp-copy h2 { font-size: var(--type-lg); margin: var(--space-3) 0 var(--space-1); }
+.cmp-copy ul { margin: 4px 0; padding-left: 18px; }
+.cmp-copy li { margin: 3px 0; }
+.cmp-method { margin: 0; }
+@media (max-width: 640px) {
+  .cmp-bars { height: 90px; }
+}
+/* Links inside sentences are underlined, so they do not depend on colour alone (WCAG 1.4.1). */
+.cmp p a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); text-underline-offset: 2px; }

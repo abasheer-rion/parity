@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .. import latency
 from ..data.store import DEFAULT_DIR
 from . import archive, backfill, export, history, impact, sources, store, study
 
@@ -52,11 +53,13 @@ def _fetch(args) -> int:
         try:
             got = sources.fetch(src)
             collected += got
+            latency.record_news(src.id, True, len(got))
             print(f"{src.id:<13} ok    {len(got)} items")
         except sources.Skipped as exc:
             print(f"{src.id:<13} skip  {exc}")
         except Exception as exc:  # one dead feed should not stop the others
             failed += 1
+            latency.record_news(src.id, False, error=str(exc))
             print(f"{src.id:<13} ERR   {exc}")
     df, added = store.merge(collected)
     print(f"\n{added} new, {len(df)} stored in {store.articles_path()}")

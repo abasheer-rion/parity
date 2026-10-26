@@ -327,10 +327,10 @@ export function DotGrid({ x, y, width, height, gap = 14 }: { x: number; y: numbe
           <circle cx={1} cy={1} r={1} className="dotgrid" />
         </pattern>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0" />
-          <stop offset="0.15" stopColor="#fff" stopOpacity="1" />
-          <stop offset="0.85" stopColor="#fff" stopOpacity="1" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
+          <stop offset="0.15" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="0.85" style={{ stopColor: "var(--palette-white)" }} stopOpacity="1" />
+          <stop offset="1" style={{ stopColor: "var(--palette-white)" }} stopOpacity="0" />
         </linearGradient>
         <mask id={`${id}m`}><rect x={x} y={y} width={width} height={height} fill={`url(#${id}f)`} /></mask>
       </defs>
@@ -437,7 +437,9 @@ export function HeroChart({
     setHover(lo2);
   };
 
-  const xLabels = [0.1, 0.3, 0.5, 0.7, 0.9].map((f) => pts[Math.floor(f * (pts.length - 1))][0]);
+  // A short range of weekly points has fewer points than labels: drop repeats, or two labels
+  // sit on top of each other (and share a React key).
+  const xLabels = [...new Set([0.1, 0.3, 0.5, 0.7, 0.9].map((f) => pts[Math.floor(f * (pts.length - 1))][0]))];
   const hx = hover != null ? tx(pts[hover][0]) : null;
 
   return (
@@ -485,11 +487,14 @@ export function HeroChart({
         ))}
         <rect x={pad.left} y={0} width={w} height={height} fill="transparent" onPointerMove={onMove} onPointerLeave={() => setHover(null)} />
       </svg>
-      <div className="range-tabs" role="tablist" aria-label="Time range">
-        {RANGES.map((r) => (
-          <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => onRange(r)}
-            style={r === range ? { color: tone, borderColor: tone } : undefined}>{r}</button>
-        ))}
+      <div className="range-tabs">
+        {/* Only the range buttons are tabs; the comparison key beside them is not. */}
+        <div className="range-tabs-list" role="tablist" aria-label="Time range">
+          {RANGES.map((r) => (
+            <button key={r} role="tab" aria-selected={r === range} className={r === range ? "on" : ""} onClick={() => onRange(r)}
+              style={r === range ? { color: tone, borderColor: tone } : undefined}>{r}</button>
+          ))}
+        </div>
         {compare && (
           <span className="range-key">
             <i style={{ background: tone }} />{main.name}

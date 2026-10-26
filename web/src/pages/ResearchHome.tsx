@@ -2,21 +2,23 @@
 // official record, the always-on search, open hypotheses and recent decisions, and
 // whether the data is healthy. Nothing about product use appears on this side
 // (DEC-0015): research is judged on evidence, not on what people click.
-import { useEffect, useState } from "react";
-import { Badge, CountUp, HeroGlow, LIFT, PageTransition, Reveal } from "../ui";
+import { Badge, CountUp, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, useResource } from "../ui";
 import { ledger } from "../lib/catalog";
-import { useDocs } from "../lib/docs";
+import { useDocIndex } from "../lib/docs";
 import { date, num } from "../lib/format";
-import { loadSearch, type SearchDoc } from "../lib/data";
+import { loadSearch } from "../lib/data";
+import { academyUrl } from "../lib/space";
 import { nameOf, verdictOf } from "../lib/strategyMeta";
 import type { Report } from "../lib/types";
 import { researchInsights } from "../lib/insights";
 import { Insights } from "../components/Insights";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 export function ResearchHome({ report }: { report: Report }) {
-  const docs = useDocs();
-  const [search, setSearch] = useState<SearchDoc | null>(null);
-  useEffect(() => { loadSearch().then(setSearch).catch(() => setSearch(null)); }, []);
+  const docs = useDocIndex();
+  // Shared with the Strategy search page: whichever opens first, the other draws at once.
+  const searchRes = useResource("search", loadSearch);
+  const search = searchRes.data ?? null;
 
   const tested = report.runs.filter((r) => !r.is_benchmark);
   const counts: Record<string, number> = {};
@@ -30,14 +32,18 @@ export function ResearchHome({ report }: { report: Report }) {
     .sort((a, b) => b.updated.localeCompare(a.updated) || b.id.localeCompare(a.id)).slice(0, 5) : [];
   const stale = (report.coverage?.series ?? []).filter((s) => !s.ok).length;
 
+  // The hero sentence and the findings row both grow once the search arrives, so on a
+  // first visit the page waits for it (a fraction of a second) behind a skeleton rather
+  // than drawing and then jumping.
+  if (searchRes.loading) return <PageSkeleton parts={["text", "stats", "cards"]} label="Loading the research home" />;
+
   return (
     <PageTransition className="rhome">
       <section className="rq">
         <HeroGlow />
-        <div className="eyebrow">The question</div>
-        <h1>Can a trading strategy beat simply holding the US stock market, after costs and after counting every idea we tried?</h1>
+        <h1>Can a trading strategy beat holding the US stock market, after costs and after counting every idea we tried?</h1>
         <p className="answer">
-          <strong>{beating.length === 0 ? "Not yet." : `${beating.length} so far.`}</strong>{" "}
+          <strong>{beating.length === 0 ? "None so far." : `${beating.length} so far.`}</strong>{" "}
           {tested.length} strategies tested in the {report.kind === "official" ? "official" : "nightly exploratory"} run of {date(report.generated_at)}
           {search ? `, and ${search.trials.toLocaleString()} variations tried by the search` : ""}.
         </p>
@@ -52,7 +58,7 @@ export function ResearchHome({ report }: { report: Report }) {
 
       <div className="rgrid">
         <Reveal as="section" delay={0} className={`pcard ${LIFT}`}>
-          <div className="pcard-head"><h2>Closest to an answer</h2><a href="/app/#/strategies">All strategies</a></div>
+          <div className="pcard-head"><h2>Most tests passed</h2><a href="/app/#/strategies">All strategies</a></div>
           <ul className="rlist">
             {closest.map((r) => (
               <li key={r.strategy}>
@@ -82,19 +88,19 @@ export function ResearchHome({ report }: { report: Report }) {
           {search ? (
             <>
               <div className="big-num"><CountUp value={search.trials} format={(v) => Math.round(v).toLocaleString()} /> <span className="muted small">tried</span></div>
-              <p className="muted small">{search.passed_luck_check} pass the luck check, {search.beat_market} beat the market's Sharpe. Leads only, until registered and run officially.</p>
+              <p className="muted small">{search.passed_luck_check} pass the luck check, {search.beat_market} beat the market's Sharpe. These are leads until registered and run officially.</p>
               <ul className="rlist">{search.rows.slice(0, 3).map((r) => <li key={r.id}><span>{r.name}</span><span className="muted small">luck check {num(r.deflated)}</span></li>)}</ul>
             </>
           ) : <p className="muted small">The search has not sent results yet.</p>}
         </Reveal>
 
         <Reveal as="section" delay={120} className={`pcard ${LIFT}`}>
-          <div className="pcard-head"><h2>Learn the methods</h2><a href="/app/#/academy">Academy</a></div>
-          <p className="muted small">Short courses with moving pictures, on the product side. Start with the ones behind this research:</p>
+          <div className="pcard-head"><h2>Learn the methods</h2><a href={academyUrl()} target="_blank" rel="noopener">Academy</a></div>
+          <p className="muted small">Short animated courses in Parity Academy. These three cover the methods used here:</p>
           <ul className="rlist">
-            <li><a href="/app/#/academy/luck-vs-skill">Luck vs skill: multiple testing, deflated Sharpe, the gauntlet</a></li>
-            <li><a href="/app/#/academy/reading-a-backtest">Reading a backtest</a></li>
-            <li><a href="/app/#/academy/news-and-event-studies">Reading news impact and event studies</a></li>
+            <li><a href={academyUrl("luck-vs-skill")} target="_blank" rel="noopener">Luck vs skill: multiple testing, deflated Sharpe and the 11 tests</a></li>
+            <li><a href={academyUrl("reading-a-backtest")} target="_blank" rel="noopener">Reading a backtest</a></li>
+            <li><a href={academyUrl("news-and-event-studies")} target="_blank" rel="noopener">Reading news impact and event studies</a></li>
           </ul>
         </Reveal>
 
@@ -119,7 +125,8 @@ export function ResearchHome({ report }: { report: Report }) {
           <p className="muted small">{report.coverage?.series?.length ?? 0} series behind this run, fetched {date(report.coverage?.fetched_at ?? null)}.</p>
         </Reveal>
       </div>
-      <p className="muted small phome-foot">This side makes the results. The product side only shows them, with their verdicts. <a href="#/how">How Parity works</a>.</p>
+      <FirstRunTour areas={["research"]} />
+      <p className="muted small phome-foot">Results are made on this side and shown on the product side with their verdicts. <a href="#/how">How Parity works</a>.</p>
     </PageTransition>
   );
 }

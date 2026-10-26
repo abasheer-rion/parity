@@ -70,12 +70,12 @@ export function KpiPanel() {
     { key: "cagr", label: "CAGR", sort: (r) => m(r).cagr, render: (r) => <span className={tone(m(r).cagr)}>{fmtPct(m(r).cagr, 1, true)}</span>, title: "Growth per year" },
     { key: "dd", label: "Worst fall", sort: (r) => m(r).max_drawdown, render: (r) => <span className="down">{fmtPct(m(r).max_drawdown, 1)}</span>, title: "Largest fall from a peak" },
     { key: "dsr", label: "Luck check", sort: (r) => m(r).deflated_sharpe, render: (r) => fmtPct(m(r).deflated_sharpe, 0), title: "Deflated Sharpe: the chance the Sharpe is not luck, after counting every trial", className: "c-vol" },
-    { key: "verdict", label: "Gauntlet", align: "left", sort: (r) => r.gauntlet?.verdict ?? null, render: (r) => <span className={`term-verdict ${r.gauntlet?.passed === r.gauntlet?.total && r.gauntlet ? "up" : ""}`}>{r.gauntlet?.verdict ?? "—"}</span>, className: "c-label" },
-    { key: "tests", label: "Tests", sort: (r) => (r.gauntlet ? r.gauntlet.passed / Math.max(1, r.gauntlet.total) : null), render: (r) => (r.gauntlet ? `${r.gauntlet.passed}/${r.gauntlet.total}` : "—") },
+    { key: "verdict", label: "Verdict", align: "left", sort: (r) => r.gauntlet?.verdict ?? null, render: (r) => <span className={`term-verdict ${r.gauntlet?.passed === r.gauntlet?.total && r.gauntlet ? "up" : ""}`}>{r.gauntlet?.verdict ?? "n/a"}</span>, className: "c-label" },
+    { key: "tests", label: "Tests", sort: (r) => (r.gauntlet ? r.gauntlet.passed / Math.max(1, r.gauntlet.total) : null), render: (r) => (r.gauntlet ? `${r.gauntlet.passed}/${r.gauntlet.total}` : "n/a") },
   ];
   return (
     <div className="term-col">
-      <div className="term-bar"><span className="term-bar-note">{rep.data.runs.length} strategies · {rep.data.n_trials} trials counted · click to link · {HONEST.toLowerCase()}</span></div>
+      <div className="term-bar"><span className="term-bar-note">{rep.data.runs.length} strategies · {rep.data.n_trials} trials counted · click to link · past data</span></div>
       <TTable rows={rep.data.runs} cols={cols} rowKey={(r) => r.strategy} initial={{ key: "sharpe", dir: "desc" }}
         onPick={(r) => t.setLink({ strategy: r.strategy })} picked={t.link.strategy} caption="Strategy KPIs" />
     </div>
@@ -92,7 +92,7 @@ const KEYS: [string, string][] = [
   ["Tab", "Complete the suggestion"],
   ["Esc", "Leave the command bar; restore a maximised panel"],
   ["F1", "This help"],
-  ["Ctrl+1 … 5  or  F2 … F6", "Switch workspace"],
+  ["Ctrl+1 to 5  or  F2 to F6", "Switch workspace"],
   ["Ctrl+Arrow", "Move between panels"],
   ["Arrow keys on a divider", "Resize panels (Shift for bigger steps); double-click resets"],
   ["Up / Down in a table", "Move between rows; Enter links the row"],
@@ -103,7 +103,7 @@ export function HelpPanel() {
   useAsOf(t.index.status === "ok" ? t.index.data.data_through : null);
   return (
     <div className="term-scroll term-help">
-      <p className="term-honest"><b>{HONEST}.</b> Every chart and number here is past data. The simulations replay or reshuffle history; none of it predicts what markets will do, and none of it is advice.</p>
+      <p className="term-honest"><b>{HONEST}.</b> Every chart and number here comes from past prices. The simulations replay or reshuffle that history. Nothing here is investment advice.</p>
       <h3>Functions</h3>
       <table className="term-table">
         <caption className="sr-only">Function codes</caption>

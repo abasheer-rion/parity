@@ -33,6 +33,13 @@ class Provider:
     planned: bool = False  # no fetcher yet
     cost: str = "free"
     note: str = ""
+    # Live data (DEC-0052): how fresh it reaches a screen, and whether it is switched on in the
+    # site's fan-out (web/live/). "live" sources are not fetched by the engine at all.
+    # feed: "real-time", "delayed about N min" or "end of day"; empty for research series.
+    # live: "on", "team" (terms allow internal use only: team members only, DEC-0056), "ask"
+    # (terms unclear, the owner decides) or "off" (forbidden or contract).
+    feed: str = ""
+    live: str = ""
 
 
 PROVIDERS: list[Provider] = [
@@ -102,6 +109,64 @@ PROVIDERS: list[Provider] = [
     Provider("bea", "BEA API", "US government work, public domain",
              "https://apps.bea.gov/API/signup/", key_env="BEA_API_KEY", key_required=True,
              planned=True),
+    # Live data for Trade, the Terminal and the Workbench (DEC-0052). Terms read 25 Oct 2026;
+    # the site's copy of this list is web/src/lib/live/sources.ts.
+    Provider("coingecko-live", "CoinGecko, streamed through our edge", "Display allowed with "
+             "\"Data provided by CoinGecko\" linked next to the data",
+             "https://www.coingecko.com/en/api_terms", feed="delayed about 1 min", live="on",
+             note="the 100 largest coins, polled every 30 seconds while anyone watches"),
+    Provider("sec-tickers", "SEC company tickers", "Public information; cite the SEC",
+             "https://www.sec.gov/privacy", feed="end of day", live="on",
+             note="every US-listed symbol for search, no prices"),
+    # Team only (DEC-0056): terms allow internal use, so these stream only to team members.
+    Provider("hyperliquid-live", "Hyperliquid trades, books and overview, every perp and spot pair",
+             "Terms have no data clause; read for the team only, never shown to the public",
+             "https://app.hyperliquid.xyz/terms", feed="real-time", live="team",
+             note="team only; owner decision 25 Oct 2026"),
+    Provider("kraken-live", "Kraken trades, books and overview, every spot and fiat pair",
+             "Use for your own benefit; no making content available to third parties",
+             "https://www.kraken.com/legal/global-terms", feed="real-time", live="team",
+             note="team only; public display needs written consent"),
+    Provider("coinbase-live", "Coinbase Exchange trades, books and overview", "No redistribution "
+             "or display to third parties", "https://www.coinbase.com/legal/market_data",
+             feed="real-time", live="team", note="team only"),
+    Provider("gemini-live", "Gemini trades, books and overview", "Personal and internal use "
+             "allowed; redistribution needs an agreement",
+             "https://www.gemini.com/legal/market-data-agreement", feed="real-time", live="team",
+             note="team only"),
+    Provider("binanceus-live", "Binance.US trades, books and overview", "No public display",
+             "https://www.binance.us/terms-of-use", feed="real-time", live="team",
+             note="team only"),
+    Provider("alpaca-live", "Alpaca Market Data, US stocks and ETFs (IEX free, SIP paid)",
+             "The account holder's own subscription, team only", "https://alpaca.markets/data",
+             key_env="ALPACA_KEY_ID", key_required=True, feed="real-time", live="team",
+             cost="free (IEX, 30 symbols) or 99 USD a month (Algo Trader Plus, every exchange)",
+             note="also needs ALPACA_SECRET_KEY; set both as Pages and worker secrets"),
+    Provider("finnhub-live", "Finnhub US stock trades", "Free plan is personal use only; "
+             "business use needs a paid plan or written approval",
+             "https://finnhub.io/terms-of-service", key_env="FINNHUB_TOKEN", key_required=True,
+             feed="real-time", live="team", note="only with a plan that allows business use"),
+    Provider("exchanges-live", "Bitstamp, Bitfinex, Binance, OKX, Bybit, Deribit and others",
+             "Each forbids display, is personal use only, or bars the US",
+             "https://www.bitstamp.net/terms-of-use/", feed="real-time", live="off"),
+    Provider("pyth", "Pyth Network", "Every request needs a key since 26 Aug 2026; display "
+             "rights on paid plans", "https://www.pyth.network/pricing", key_env="PYTH_API_KEY",
+             key_required=True, planned=True, feed="real-time", live="off",
+             cost="500 USD a month (crypto) or 2,500 USD (all assets, limited redistribution)"),
+    Provider("intrinio", "Intrinio Startup (Cboe One, 15 min delayed)", "Display included, no "
+             "exchange paperwork", "https://intrinio.com/pricing", key_env="INTRINIO_API_KEY",
+             key_required=True, planned=True, feed="delayed 15 min", live="off",
+             cost="333 USD a month for 6 months, 666 for the next 6, then 999"),
+    Provider("massive-business", "Massive Stocks Business", "Business plan with display rights",
+             "https://massive.com/business", key_env="VENDOR_KEY", key_required=True,
+             planned=True, feed="real-time or delayed 15 min", live="off",
+             cost="2,499 USD a month plus 499 (delayed) or 1,999 (real-time)"),
+    Provider("cboe-one", "Cboe One direct", "External distribution licence",
+             "https://www.cboe.com/market_data_services/us/equities/cboe_one/", planned=True,
+             feed="real-time", live="off", cost="5,000 USD a month plus 0.25 per user"),
+    Provider("iex-tops", "IEX TOPS", "Delayed free through a vendor; real-time licensed",
+             "https://iextrading.com/trading/market-data/", planned=True,
+             feed="real-time (IEX trades only)", live="off", cost="1,000 USD a month real-time"),
 ]
 
 BY_ID = {p.id: p for p in PROVIDERS}
@@ -113,6 +178,11 @@ def has_key(p: Provider) -> bool:
 
 
 def status(p: Provider) -> str:
+    if p.live and not p.planned:
+        if p.live == "team" and p.key_required and not has_key(p):
+            return "team, no key"
+        return {"on": "on (live)", "team": "on (team only)", "ask": "owner call",
+                "off": "off (terms)"}.get(p.live, p.live)
     if p.planned or p.id not in sources.FETCHERS and p.id != "derived":
         return "planned"
     if p.key_required and not has_key(p):
@@ -131,5 +201,6 @@ def rows() -> list[dict]:
             f"{'' if p.key_required else ', optional'})")
         out.append({"id": p.id, "name": p.name, "status": status(p),
                     "series": counts.get(p.id, 0), "key": key, "cost": p.cost,
-                    "licence": p.licence, "terms_url": p.terms_url, "note": p.note})
+                    "licence": p.licence, "terms_url": p.terms_url, "note": p.note,
+                    "feed": p.feed, "live": p.live})
     return out

@@ -21,9 +21,12 @@ describe("consent", () => {
     expect(stored).toMatchObject({ version: VERSION, essential: true, analytics: false });
   });
 
-  it("keeps analytics off while no analytics tool exists, even if asked or tampered with", () => {
-    expect(setConsent({ analytics: true }).analytics).toBe(false);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: VERSION, essential: true, analytics: true, decidedAt: "2026-10-22" }));
+  it("allows analytics only after an opt-in on the current notice (DEC-0053)", () => {
+    expect(allowed("analytics")).toBe(false);
+    expect(setConsent({ analytics: true }).analytics).toBe(true);
+    expect(allowed("analytics")).toBe(true);
+    // An opt-in given on an older notice does not count.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: VERSION - 1, essential: true, analytics: true, decidedAt: "2026-10-22" }));
     expect(allowed("analytics")).toBe(false);
   });
 
@@ -47,8 +50,10 @@ describe("consent", () => {
   it("never runs non-essential code without consent", () => {
     const load = vi.fn();
     const stop = whenAllowed("analytics", load);
-    setConsent({ analytics: true });
+    setConsent({ analytics: false });
     expect(load).not.toHaveBeenCalled();
+    setConsent({ analytics: true });
+    expect(load).toHaveBeenCalledOnce();
     stop();
     const essential = vi.fn();
     whenAllowed("essential", essential);

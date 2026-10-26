@@ -2,6 +2,7 @@
 // "what to check" list, the risk note and the stat tile.
 import type { ReactNode } from "react";
 import { Icon } from "../../ui/icons";
+import { PageSkeleton } from "../../ui/skeleton";
 import { Term } from "../Learn";
 import { ago, type MarketSource } from "../../lib/markets";
 
@@ -69,5 +70,5 @@ export function Sources({ sources }: { sources: MarketSource[] }) {
 
 export function Loading({ error, what }: { error: string | null; what: string }) {
   if (error) return <Banner icon="info"><strong>No {what} data yet.</strong> {error}</Banner>;
-  return <p className="muted">Loading {what}</p>;
+  return <PageSkeleton parts={["stats", "table"]} label={`Loading ${what}`} />;
 }

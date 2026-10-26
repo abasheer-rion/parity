@@ -84,5 +84,7 @@ The front page was plain HTML with no script, and the app's motion was limited t
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0030: Pages that hold still, open in place and come from one library](0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md)
+- [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
+- [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 <!-- backlinks:end -->

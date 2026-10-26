@@ -2,6 +2,7 @@
 // amount, a range-tabbed chart you can scrub, About, Key statistics, then detail.
 // The right column holds the verdict where Robinhood puts its order panel.
 import { useState } from "react";
+import { labUrl } from "../lib/space";
 import { BarChart, HeroChart, LineChart, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
 import { Badge, Button } from "../ui";
@@ -164,7 +165,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
           ) : (
             <>
               <Row label="Beats the S&P 500" value={run.gauntlet ? (run.gauntlet.beats_sp500 ? "Yes" : "No") : "n/a"} good={run.gauntlet?.beats_sp500} />
-              <Row label="Gauntlet" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
+              <Row label="Tests passed" value={run.gauntlet ? `${run.gauntlet.passed} of ${run.gauntlet.total}` : "n/a"} />
               <Row label="Sharpe vs market" value={`${num(m.sharpe)} vs ${num(bm?.sharpe)}`} good={better(m.sharpe, bm?.sharpe)} />
               <Row label="CAGR vs market" value={`${pct(m.cagr)} vs ${pct(bm?.cagr)}`} good={better(m.cagr, bm?.cagr)} />
               <Row label="Worst fall vs market" value={`${pct(m.max_drawdown)} vs ${pct(bm?.max_drawdown)}`} good={better(m.max_drawdown, bm?.max_drawdown)} />
@@ -172,7 +173,7 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
               {run.gauntlet && <p className="order-note">{run.gauntlet.verdict}</p>}
             </>
           )}
-          <Button variant="primary" size="lg" full href="#/lab">Try other settings in the Lab</Button>
+          <Button variant="primary" size="lg" full href={labUrl(`try?s=${encodeURIComponent(run.strategy)}`)} target="_blank">Try other settings in the Workbench</Button>
         </div>
         <Button variant="outline" size="lg" full href="#/compare">Compare with others</Button>
         {refDoc && <Button variant="outline" size="lg" full href={`#/doc/${refDoc.id}`}>Read the write-up</Button>}
