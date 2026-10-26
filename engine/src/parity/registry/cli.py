@@ -1,0 +1,69 @@
+"""`parity registry ...` (DEC-0064)."""
+
+from __future__ import annotations
+
+import json
+from collections import Counter
+
+
+def add_parser(sub):
+    p = sub.add_parser("registry", help="the data registry: every source and series, its "
+                       "rights, status and health (DEC-0064)")
+    p.add_argument("action", choices=["sync", "status", "sources", "series", "publish"])
+    p.add_argument("--status", default=None, help="series: only this status")
+    p.add_argument("--source", default=None, help="series: only this source")
+    p.add_argument("--tag", default=None, help="series: only series with this tag")
+    p.add_argument("--json", action="store_true", help="print JSON")
+    return p
+
+
+def run(args) -> int:
+    from . import db, publish, sync
+
+    con = db.connect()
+    if args.action == "sync":
+        out = sync.sync(con)
+        print(f"{out['sources']} sources changed, {out['added']} series added, "
+              f"{out['updated']} updated, {out['retired']} retired"
+              + ("; lineage changed" if out["lineage"] else ""))
+        return 0
+    if args.action == "publish":
+        print(publish.try_publish(con))
+        return 0
+    if args.action == "sources":
+        rows = db.sources(con)
+        if args.json:
+            print(json.dumps(rows, indent=1))
+            return 0
+        for r in rows:
+            print(f"{r['id']:<17} {r['display_rights']:<9} {r['status']:<8} terms read "
+                  f"{r['terms_read_on'] or 'n/a':<10} {r['name']}")
+        print(f"\n{len(rows)} sources")
+        return 0
+    rows = db.all_series(con, status=args.status)
+    rows = [r for r in rows if (not args.source or r["source_id"] == args.source)
+            and (not args.tag or args.tag in r["tags"])]
+    if args.action == "series":
+        if args.json:
+            print(json.dumps(rows, indent=1))
+            return 0
+        width = max((len(r["id"]) for r in rows), default=10)
+        for r in rows:
+            q = "n/a" if r["quality"] is None else f"{r['quality']:.2f}"
+            print(f"{r['id']:<{width}}  {r['status']:<9} {r['health']:<7} {r['display_rights']:<8}"
+                  f" q {q:<4}  {r['name'][:70]}")
+        print(f"\n{len(rows)} series")
+        return 0
+    by_status = Counter(r["status"] for r in rows)
+    by_health = Counter(r["health"] for r in rows)
+    by_rights = Counter(r["display_rights"] for r in rows)
+    print(f"{len(db.sources(con))} sources, {len(rows)} series")
+    print("status: " + ", ".join(f"{k} {v}" for k, v in sorted(by_status.items())))
+    print("health: " + ", ".join(f"{k} {v}" for k, v in sorted(by_health.items())))
+    print("rights: " + ", ".join(f"{k} {v}" for k, v in sorted(by_rights.items())))
+    print("newest events:")
+    for e in db.events(con, limit=10):
+        who = e["series_id"] or e["source_id"] or ""
+        move = f"{e['from_state'] or ''} to {e['to_state']}" if e["to_state"] else ""
+        print(f"  {e['at']}  {e['kind']:<10} {who:<24} {move}")
+    return 0

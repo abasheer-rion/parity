@@ -102,6 +102,7 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0037: Everything runs by itself and the search widens itself](0037-everything-runs-by-itself-and-the-search-widens-itself.md)
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
+- [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
