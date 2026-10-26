@@ -52,9 +52,8 @@ function Queue({ rows }: { rows: DataSeries[] }) {
 
   const cols: Column<DataSeries>[] = [
     { key: "id", header: "Candidate", align: "left", sort: (r) => r.id,
-      render: (r) => <div className="wrap"><a href={`#/registry/s/${encodeURIComponent(r.id)}`}><strong>{r.id}</strong></a><div className="muted small">{r.name}</div></div> },
-    { key: "by", header: "Found by", align: "left", sort: (r) => r.discovered_by, render: (r) => r.discovered_by },
-    { key: "when", header: "Found", sort: (r) => r.discovered_at ?? "", render: (r) => date(r.discovered_at) },
+      render: (r) => <div className="wrap"><a href={`#/registry/s/${encodeURIComponent(r.id)}`}><strong>{r.id}</strong></a><div className="muted small">{r.name}</div>
+        <div className="muted small">found by {r.discovered_by} on {date(r.discovered_at)}</div></div> },
     { key: "rights", header: "Rights", align: "left", sort: (r) => r.display_rights, render: (r) => <RightsBadge r={r.display_rights} /> },
     { key: "why", header: "Why it waits", align: "left", sort: (r) => r.reason, render: (r) => <span className="wrap small">{r.reason || "not checked yet"}</span> },
   ];
@@ -74,7 +73,7 @@ function Queue({ rows }: { rows: DataSeries[] }) {
           <Select label="Found by" value={by} onChange={setBy} options={[["", "Any discoverer"], ...finders.map((f) => [f, f] as [string, string])]} />
           <Select label="Why it waits" value={kind} onChange={setKind} options={[["", "Any reason"], ...kinds.map((k) => [k, KIND_WORD[k] ?? k] as [string, string])]} />
         </div>
-        <DataTable rows={shown} columns={cols} rowKey={(r) => r.id} initialSort={{ key: "when", dir: "desc" }} href={(r) => `#/registry/s/${encodeURIComponent(r.id)}`}
+        <DataTable rows={shown} columns={cols} rowKey={(r) => r.id} initialSort={{ key: "id", dir: "asc" }} href={(r) => `#/registry/s/${encodeURIComponent(r.id)}`}
           dense maxHeight={720} empty="Nothing waits. Discovery runs once a day." caption="Candidates" />
       </Card>
       <Card title="Enrolled most recently">

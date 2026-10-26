@@ -62,7 +62,7 @@ function Catalog({ rows }: { rows: DataSeries[] }) {
     { key: "health", header: "Health", align: "left", sort: (r) => r.health, render: (r) => <HealthDot h={r.health} /> },
     { key: "rights", header: "Rights", align: "left", sort: (r) => r.display_rights, render: (r) => <RightsBadge r={r.display_rights} /> },
     { key: "quality", header: "Quality", sort: (r) => r.quality ?? -1, render: (r) => num(r.quality) },
-    { key: "last", header: "Newest value", sort: (r) => r.last_obs ?? "", render: (r) => date(r.last_obs) },
+    { key: "last", header: "Newest value", width: 120, sort: (r) => r.last_obs ?? "", render: (r) => date(r.last_obs) },
   ];
 
   return (
