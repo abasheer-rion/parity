@@ -55,6 +55,7 @@ body.sp-dragging * { pointer-events: none; }
 
 /* Chart controls in the top bar */
 .cb { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; }
+.cb > * { flex-shrink: 0; }
 .cb-sym { display: inline-flex; flex: none; white-space: nowrap; align-items: center; gap: 6px; height: 26px; min-width: 96px; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--tr-panel); color: var(--text-2); font: inherit; cursor: pointer; }
 .cb-sym strong { color: var(--text); font-weight: 600; }
 .cb-px { min-width: 72px; color: var(--text); text-align: right; }
@@ -341,8 +342,12 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 
 /* Narrower desktops: the top bar drops labels first, then the rarer chart controls (all
    still in the command palette). */
-@media (max-width: 1400px) {
+/* The chart controls need about 880px: below 1520px the brand makes room for them, so the
+   last buttons are never cut off or squeezed below a usable size. */
+@media (max-width: 1520px) {
   .tb-brand { display: none; }
+}
+@media (max-width: 1400px) {
   .tb-search span { display: none; }
 }
 @media (max-width: 1240px) {

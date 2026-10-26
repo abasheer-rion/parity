@@ -51,6 +51,14 @@ test.describe("order ticket", () => {
 });
 
 test.describe("chart", () => {
+  test("every chart control fits in the top bar, none cut off", async ({ page }, info) => {
+    desktopOnly(info.project.name);
+    await ready(page);
+    const fit = await page.getByRole("toolbar", { name: "Chart" }).evaluate((e) => e.scrollWidth - e.clientWidth);
+    expect(fit, "the chart controls fit their bar").toBeLessThanOrEqual(1);
+    await expect(page.getByRole("radio", { name: "4 charts" })).toBeInViewport({ ratio: 1 });
+  });
+
   test("timeframe, chart type and compare change the chart", async ({ page }, info) => {
     desktopOnly(info.project.name);
     await ready(page);
