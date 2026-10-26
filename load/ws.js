@@ -15,6 +15,7 @@
 // 500 per source (MAX_VIEWERS in web/live/src/hub.ts); stay well under it on the live object.
 //   BASE=https://<preview>.parity-research.pages.dev STEPS=50,100,200 STEP_S=90 make load-ws
 import { WebSocket } from "k6/websockets";
+import exec from "k6/execution";
 import { Counter, Rate, Trend } from "k6/metrics";
 import { base, stepRates } from "./lib.js";
 import { summarize } from "./lib.js";
@@ -32,6 +33,14 @@ const hold = Number(__ENV.STEP_S || 90);
 const stages = [];
 for (const n of rates) stages.push({ duration: "10s", target: n }, { duration: `${hold}s`, target: n });
 stages.push({ duration: "10s", target: 0 });
+// Which step (viewer count) a moment belongs to, so delivery is reported per step. The 10 s
+// ramp before each hold counts toward the step it ramps to.
+const stepAt = (ms) => {
+  let t = 0;
+  for (const n of rates) { t += (10 + hold) * 1000; if (ms < t) return n; }
+  return rates[rates.length - 1];
+};
+const perStep = Object.fromEntries(rates.flatMap((n) => [[`ws_delivery_ms{step:${n}}`, ["max>=0"]], [`ws_connect_ms{step:${n}}`, ["max>=0"]]]));
 if (Math.max(...rates) > 450) throw new Error("Over 450 viewers would crowd out real ones (the object stops at 500).");
 
 export const options = {
@@ -39,6 +48,7 @@ export const options = {
   thresholds: {
     ws_open_fail: [{ threshold: "rate<0.02", abortOnFail: true, delayAbortEval: "20s" }],
     ws_delivery_ms: [{ threshold: "p(95)<2000", abortOnFail: true, delayAbortEval: "60s" }],
+    ...perStep,
   },
   summaryTrendStats: ["avg", "med", "p(95)", "p(99)", "max"],
 };
@@ -56,7 +66,7 @@ export default function () {
   ws.onopen = () => {
     openedAt = Date.now();
     opened = true;
-    connect.add(Date.now() - t0);
+    connect.add(Date.now() - t0, { step: String(stepAt(Date.now() - exec.scenario.startTime)) });
     fail.add(false);
     ws.send(JSON.stringify({ op: "sub", s: ["*"] }));
     ping();
@@ -75,7 +85,7 @@ export default function () {
       return;
     }
     // Live updates only: the catch-up a viewer gets on subscribing comes within a moment of opening.
-    if ((m.op === "r" || m.op === "t") && typeof m.ts === "number" && offset !== null && now - openedAt > 2000) delivery.add(Math.max(0, now + offset - m.ts));
+    if ((m.op === "r" || m.op === "t") && typeof m.ts === "number" && offset !== null && now - openedAt > 2000) delivery.add(Math.max(0, now + offset - m.ts), { step: String(stepAt(now - exec.scenario.startTime)) });
   };
   ws.onerror = () => { if (!opened) fail.add(true); };
   ws.onclose = () => { if (pinger) clearInterval(pinger); if (!opened) fail.add(true); };
