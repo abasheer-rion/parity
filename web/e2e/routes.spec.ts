@@ -4,6 +4,8 @@
 // and nothing scrolls sideways on the phone.
 import type { Page, TestInfo } from "@playwright/test";
 import { ALL } from "./routes";
+// @ts-expect-error a plain .mjs module without types
+import { layoutCheck } from "../scripts/lib/layout-check.mjs";
 import { axe, badValues, expect, open, settled, sideways, test } from "./fixtures";
 
 // axe takes 15 to 20 seconds on the biggest pages (the references page has about 16,000
@@ -19,6 +21,10 @@ async function check(page: Page, path: string, info: TestInfo, status = 200) {
   expect(await badValues(page), "no NaN or undefined on screen").toEqual([]);
   if ((await page.evaluate(() => document.getElementsByTagName("*").length)) > 5000) test.slow();
   expect(await axe(page), "no serious or critical accessibility problems").toEqual([]);
+  // Text that collides, is cut off, or a number shortened with "..." (scripts/lib/layout-check.mjs).
+  const layout = (await page.evaluate(layoutCheck) as { kind: string; text: string; other?: string; where: string }[])
+    .map((f) => `${f.kind}: "${f.text}"${f.other ? ` and "${f.other}"` : ""} at ${f.where}`);
+  expect(layout, "no text that collides or is cut off").toEqual([]);
   if (info.project.name === "phone") expect(await sideways(page), "no sideways scroll").toBeLessThanOrEqual(1);
 }
 

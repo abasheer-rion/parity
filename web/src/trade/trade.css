@@ -55,7 +55,7 @@ body.sp-dragging * { pointer-events: none; }
 
 /* Chart controls in the top bar */
 .cb { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; }
-.cb-sym { display: inline-flex; align-items: center; gap: 6px; height: 26px; min-width: 96px; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--tr-panel); color: var(--text-2); font: inherit; cursor: pointer; }
+.cb-sym { display: inline-flex; flex: none; white-space: nowrap; align-items: center; gap: 6px; height: 26px; min-width: 96px; padding: 0 8px; border: 1px solid var(--tr-line-2); border-radius: 4px; background: var(--tr-panel); color: var(--text-2); font: inherit; cursor: pointer; }
 .cb-sym strong { color: var(--text); font-weight: 600; }
 .cb-px { min-width: 72px; color: var(--text); text-align: right; }
 .cb-chg { min-width: 54px; }
@@ -321,6 +321,8 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .ptr[data-mobile] .tb-back { padding: 0 10px; }
 .ptr[data-mobile] .tb-back-t, .ptr[data-mobile] .tb-brand, .ptr[data-mobile] .cb-chg, .ptr[data-mobile] .cb-sep { display: none; }
 .ptr[data-mobile] .cb-sym { min-width: 70px; }
+/* The data badge keeps its feed and age on a phone; the source name is in its popover. */
+.ptr[data-mobile] .lvb-src { display: none; }
 .ptr[data-mobile] .cb-px { min-width: 0; }
 .ptr[data-mobile] .tb-eq { min-width: 74px; }
 .ptr[data-mobile] .cg-name, .ptr[data-mobile] .cg-max { display: none; }

@@ -261,6 +261,7 @@
 .plb[data-mobile] .lb-view { overflow-y: auto; padding: 6px; }
 .plb[data-mobile] .lb-note { white-space: normal; }
 .plb[data-mobile] .lb-bar { flex-wrap: wrap; }
+.plb[data-mobile] .lb-bar > .lb-dim { white-space: normal; }
 .plb[data-mobile] .lb-run select { max-width: 120px; }
 .plb[data-mobile] .lb-grow { flex: none; }
 .plb[data-mobile] .lb-box.lb-grow { max-height: 70vh; }
