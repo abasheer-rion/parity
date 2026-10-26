@@ -9,7 +9,10 @@ from collections import Counter
 def add_parser(sub):
     p = sub.add_parser("registry", help="the data registry: every source and series, its "
                        "rights, status and health (DEC-0064)")
-    p.add_argument("action", choices=["sync", "status", "sources", "series", "publish"])
+    p.add_argument("action", choices=["sync", "status", "sources", "series", "publish",
+                                      "discover", "enrol", "candidates", "cycle"])
+    p.add_argument("--only", nargs="*", default=None, help="discover: only these discoverers")
+    p.add_argument("--limit", type=int, default=5, help="enrol: candidates to try")
     p.add_argument("--status", default=None, help="series: only this status")
     p.add_argument("--source", default=None, help="series: only this source")
     p.add_argument("--tag", default=None, help="series: only series with this tag")
@@ -29,6 +32,33 @@ def run(args) -> int:
         return 0
     if args.action == "publish":
         print(publish.try_publish(con))
+        return 0
+    if args.action == "discover":
+        from . import discover
+
+        report = discover.run(con, args.only)
+        for name, r in report.items():
+            what = (f"found {r['found']}, added {r['added']}" if "found" in r else
+                    r.get("skipped") or r.get("error"))
+            print(f"{name:<12} {what}")
+        return 0
+    if args.action == "enrol":
+        from . import enrol
+
+        for r in enrol.run(con, args.limit):
+            print(f"{r['id']:<32} {'enrolled' if r['enrolled'] else 'waits'}"
+                  f"  {r.get('reason') or ''}")
+        return 0
+    if args.action == "cycle":
+        from . import cycle
+
+        print(cycle.line(cycle.run(con)))
+        return 0
+    if args.action == "candidates":
+        rows = db.all_series(con, status="candidate")
+        for r in rows:
+            print(f"{r['id']:<32} {r['discovered_by']:<11} {r['reason'][:80]}")
+        print(f"\n{len(rows)} candidates")
         return 0
     if args.action == "sources":
         rows = db.sources(con)
