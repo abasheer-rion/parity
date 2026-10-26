@@ -95,3 +95,24 @@ INSERT INTO watch_term (term, label, note) VALUES
   ('buyback', 'buyback', NULL), ('dividend cut', 'dividend cut', NULL), ('delisting', 'delisting', NULL),
   ('rate cut', 'rate cut', NULL), ('rate hike', 'rate hike', NULL), ('blockade', 'blockade', NULL), ('ceasefire', 'ceasefire', NULL)
 ON CONFLICT (term) DO NOTHING;
+
+-- The landing zone: every entry every source gives us, uncut and before any rule looks at it, so new rules can
+-- re-read the past (funnel.py normalize --again). An entry the source edits later lands again as a new version.
+CREATE TABLE IF NOT EXISTS raw (
+  id            bigserial PRIMARY KEY,
+  feed_id       text NOT NULL REFERENCES feed(id),
+  ext_key       text NOT NULL,             -- the source's own id: guid, accession number, event id, or the link
+  version       text NOT NULL,             -- sha256 of body
+  url           text,
+  title         text,
+  published_at  timestamptz,               -- when the source says it happened or was posted
+  seen_at       timestamptz NOT NULL DEFAULT now(),  -- when we first had it: seen_at - published_at is our lag
+  backfill      boolean NOT NULL DEFAULT false,      -- came in on a feed's first poll: old news, not lag
+  body          jsonb NOT NULL,            -- the entry as the source gave it (XML as a dict, JSON as is)
+  normalized_at timestamptz,
+  UNIQUE (feed_id, ext_key, version)
+);
+CREATE INDEX IF NOT EXISTS raw_todo ON raw (id) WHERE normalized_at IS NULL;
+CREATE INDEX IF NOT EXISTS raw_seen ON raw (seen_at);
+ALTER TABLE item ADD COLUMN IF NOT EXISTS raw_id bigint REFERENCES raw(id);
+ALTER TABLE feed ADD COLUMN IF NOT EXISTS needs text;   -- env var(s) that must be set, else the feed is skipped
