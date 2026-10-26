@@ -48,4 +48,5 @@ The last part of 21 October 2026, after [LOG-0005](2026-10-21-ayan-work-log-site
 ## Referenced by
 
 - [LOG-0007: Ayan work log, clarity, the strategy factory, the search and two sides](2026-10-22-ayan-work-log-clarity-factory-search-and-two-sides.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

@@ -3,19 +3,19 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1670 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1704 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 333 |
-| [Preprints and working papers](#preprints-and-working-papers) | 45 |
+| [Papers](#papers) | 337 |
+| [Preprints and working papers](#preprints-and-working-papers) | 50 |
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 936 |
+| [Web pages](#web-pages) | 960 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
-| [News](#news) | 5 |
+| [News](#news) | 6 |
 
 ## Papers
 
@@ -265,7 +265,7 @@ Also at: <https://doi.org/10.1016/S0022-1996(99)00039-2>.
 
 Note: Read for RES-0010 (abstract page).
 
-Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### barber2000
 
@@ -573,7 +573,9 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 
 Chen, Yu-Chin; Rogoff, Kenneth S.; Rossi, Barbara (2010). Can Exchange Rates Forecast Commodity Prices? \*. *Quarterly Journal of Economics 125(3), 1145-1194*. doi:10.1162/qjec.2010.125.3.1145 <https://doi.org/10.1162/qjec.2010.125.3.1145>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Also at: <https://www.nber.org/system/files/working_papers/w13901/w13901.pdf>.
+
+Cited in: [catalog/algorithms/commodity-currencies-predict-commodities.json](../catalog/algorithms/commodity-currencies-predict-commodities.json), [RES-0001](research/0001-reading-list.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### chen2022
 
@@ -729,6 +731,14 @@ DeMIGUEL, VICTOR; Martín-Utrera, Alberto; Uppal, Raman (2024). A Multifactor Pe
 
 Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md).
 
+### dezwart2009
+
+de Zwart, Gerben; Markwat, Thijs; Swinkels, Laurens; van Dijk, Dick (2009). The economic value of fundamental and technical information in emerging currency markets. *Journal of International Money and Finance 28(4), 581-604*. <https://repub.eur.nl/pub/16035>. Accessed 2026-10-21. Verification: not checked.
+
+Note: Abstract only, for RES-0013.
+
+Cited in: [RES-0013](research/0013-emerging-market-currencies.md).
+
 ### do2010
 
 Do, Binh; Faff, Robert (2010). Does Simple Pairs Trading Still Work? *Financial Analysts Journal 66(4), 83-95*. doi:10.2469/faj.v66.n4.1 <https://doi.org/10.2469/faj.v66.n4.1>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -847,7 +857,7 @@ Cited in: [catalog/algorithms/fx-oil-cad-daily.json](../catalog/algorithms/fx-oi
 
 Ferraro, Domenico; Rogoff, Kenneth; Rossi, Barbara (2015). Can oil prices forecast exchange rates? An empirical analysis of the relationship between commodity prices and exchange rates. *Journal of International Money and Finance 54, 116-141*. doi:10.1016/j.jimonfin.2015.03.001 <https://doi.org/10.1016/j.jimonfin.2015.03.001>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### filippou2018
 
@@ -899,7 +909,7 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 
 Frazzini, Andrea; Pedersen, Lasse Heje (2014). Betting against beta. *Journal of Financial Economics 111(1), 1-25*. doi:10.1016/j.jfineco.2013.10.005 <https://doi.org/10.1016/j.jfineco.2013.10.005>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### french2008
 
@@ -957,7 +967,7 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Gorton, Gary; Rouwenhorst, K. Geert (2006). Facts and Fantasies about Commodity Futures. *Financial Analysts Journal 62(2), 47-68*. doi:10.2469/faj.v62.n2.4083 <https://doi.org/10.2469/faj.v62.n2.4083>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md).
+Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### gredil2023
 
@@ -1121,7 +1131,7 @@ Cited in: [catalog/algorithms/technical-indicator-trading-bots.json](../catalog/
 
 Hurst, Ooi and Pedersen (2014). A Century of Evidence on Trend-Following Investing. *AQR white paper 2014; Journal of Portfolio Management 2017*. <https://www.trendfollowing.com/whitepaper/Century_Evidence_Trend_Following.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/sixty-forty-portfolio.json](../catalog/algorithms/sixty-forty-portfolio.json), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0048](algorithms/0048-sixty-forty-portfolio.md).
+Cited in: [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/sixty-forty-portfolio.json](../catalog/algorithms/sixty-forty-portfolio.json), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0048](algorithms/0048-sixty-forty-portfolio.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### hurst2017
 
@@ -1351,7 +1361,7 @@ Cited in: [catalog/algorithms/fx-commodity-terms-of-trade.json](../catalog/algor
 
 Koijen, Ralph S.J.; Moskowitz, Tobias J.; Pedersen, Lasse Heje; Vrugt, Evert B. (2018). Carry. *Journal of Financial Economics 127(2), 197-225*. doi:10.1016/j.jfineco.2017.11.002 <https://doi.org/10.1016/j.jfineco.2017.11.002>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### korteweg2016
 
@@ -1641,15 +1651,17 @@ Cited in: [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algor
 
 Menkhoff, Lukas; Sarno, Lucio; Schmeling, Maik; Schrimpf, Andreas (2012). Currency momentum strategies. *Journal of Financial Economics 106(3), 660-684*. doi:10.1016/j.jfineco.2012.06.009 <https://doi.org/10.1016/j.jfineco.2012.06.009>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [RES-0001](research/0001-reading-list.md).
+Also at: <https://faculty.washington.edu/ss1110/IF/Sarno%20Currency%20Momentum%20JFE%20%281%29.pdf>.
+
+Cited in: [catalog/algorithms/em-fx-momentum.json](../catalog/algorithms/em-fx-momentum.json), [catalog/algorithms/fx-cross-sectional-momentum.json](../catalog/algorithms/fx-cross-sectional-momentum.json), [ALG-0005](algorithms/0005-fx-cross-sectional-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### menkhoff2012b
 
 Menkhoff, Lukas; Sarno, Lucio; Schmeling, Maik; Schrimpf, Andreas (2012). Carry Trades and Global Foreign Exchange Volatility. *The Journal of Finance 67(2), 681-718*. doi:10.1111/j.1540-6261.2012.01728.x <https://doi.org/10.1111/j.1540-6261.2012.01728.x>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Also at: <https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf>.
+Also at: <https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf>, <https://openaccess.city.ac.uk/id/eprint/3391/1/CTVOL_R3_v4_paper.pdf>.
 
-Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [catalog/algorithms/em-fx-carry.json](../catalog/algorithms/em-fx-carry.json), [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### menkhoff2016
 
@@ -1699,7 +1711,7 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Moreira, Alan; Muir, Tyler (2017). Volatility-Managed Portfolios. *The Journal of Finance 72(4), 1611-1644*. doi:10.1111/jofi.12513 <https://doi.org/10.1111/jofi.12513>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md), [REF-0004](reference/0004-glossary.md).
+Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/algorithms/volatility-managed-portfolios.json), [ALG-0054](algorithms/0054-volatility-managed-portfolios.md), [REF-0004](reference/0004-glossary.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### moskowitz2012
 
@@ -1715,7 +1727,7 @@ Moskowitz, Tobias J.; Ooi, Yao Hua; Pedersen, Lasse Heje (2012). Time series mom
 
 Also at: <https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf>.
 
-Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### mueller2017
 
@@ -1927,7 +1939,17 @@ Also at: <https://www.nber.org/system/files/working_papers/w13714/w13714.pdf>, <
 
 Note: Read for RES-0010 (full text).
 
-Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md), [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
+### prokopczuk2017
+
+Prokopczuk, Marcel; Symeonidis, Lazaros; Wese Simen, Chardin (2017). Variance Risk in Commodity Markets. *Journal of Banking and Finance 81, 136-149*. <https://ueaeprints.uea.ac.uk/63547/>. Accessed 2026-10-21. Verification: not checked.
+
+Also at: <https://ueaeprints.uea.ac.uk/63547/1/Variance_risk_in_Commodity_Markets.pdf>.
+
+Note: Read for RES-0014 (full text, accepted manuscript).
+
+Cited in: [catalog/algorithms/commodity-variance-risk-premium.json](../catalog/algorithms/commodity-variance-risk-premium.json), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### qi2006
 
@@ -2148,6 +2170,16 @@ Thorp, Edward O. (2008). The Kelly criterion in blackjack, sports betting and th
 Note: Details confirmed against Crossref or OpenAlex on 2026-10-21. Full text not reachable; the half Kelly figure in the glossary is our own arithmetic.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+
+### trolle2010
+
+Trolle, Anders B.; Schwartz, Eduardo S. (2010). Variance Risk Premia in Energy Commodities. *Journal of Derivatives*. <https://infoscience.epfl.ch/record/148475>. Accessed 2026-10-21. Verification: not checked.
+
+Also at: <https://infosciences.epfl.ch/record/148475/files/TrolleSchwartz_Energy_Variance_Risk_Premia.pdf>.
+
+Note: Read for RES-0014 (full text, November 2009 working version).
+
+Cited in: [catalog/algorithms/commodity-variance-risk-premium.json](../catalog/algorithms/commodity-variance-risk-premium.json), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### tversky1971
 
@@ -2467,6 +2499,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-f21e1112
+
+No title recorded. (n.d.). <https://ideas.repec.org/a/bla/jfinan/v69y2014i1p453-482.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
+
 ### url-f339872c
 
 Informed trade in spot foreign exchange markets: an empirical investigation. (n.d.). <https://ideas.repec.org/a/eee/inecon/v61y2003i2p307-329.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2583,7 +2621,7 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 
 Bhardwaj, Geetesh; Gorton, Gary; Rouwenhorst, Geert (2015). Facts and Fantasies about Commodity Futures Ten Years Later. *NBER Working Paper w21243*. doi:10.3386/w21243 <https://doi.org/10.3386/w21243>. <https://www.nber.org/system/files/working_papers/w21243/w21243.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md).
+Cited in: [catalog/algorithms/commodity-carry-roll-yield.json](../catalog/algorithms/commodity-carry-roll-yield.json), [ALG-0038](algorithms/0038-commodity-carry-roll-yield.md), [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### borri2025
 
@@ -2600,6 +2638,16 @@ Brunnermeier, Markus; Nagel, Stefan; Pedersen, Lasse (2008). Carry Trades and Cu
 Also at: <https://www.nber.org/system/files/working_papers/w14473/w14473.pdf>.
 
 Cited in: [catalog/algorithms/retail-swap-carry.json](../catalog/algorithms/retail-swap-carry.json), [ALG-0069](algorithms/0069-retail-swap-carry.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+
+### burnside2007
+
+Burnside, Craig; Eichenbaum, Martin; Rebelo, Sergio (2007). The Returns to Currency Speculation in Emerging Markets. *NBER Working Paper 12916*. <https://www.nber.org/papers/w12916>. Accessed 2026-10-21. Verification: not checked.
+
+Also at: <https://www.nber.org/system/files/working_papers/w12916/w12916.pdf>.
+
+Note: Read for RES-0013 (full text).
+
+Cited in: [catalog/algorithms/em-fx-carry.json](../catalog/algorithms/em-fx-carry.json), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### burnside2011a
 
@@ -2671,6 +2719,14 @@ Filippou, Rapach, Taylor and Zhou (2020). Exchange Rate Prediction with Machine 
 
 Cited in: [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-ml-smart-carry.json), [ALG-0011](algorithms/0011-fx-ml-smart-carry.md), [RES-0001](research/0001-reading-list.md).
 
+### frankel2006
+
+Frankel, Jeffrey; Poonawala, Jumana (2006). The Forward Market in Emerging Currencies: Less Biased Than in Major Currencies. *NBER Working Paper 12496; published in Journal of International Money and Finance 29(3) (2010)*. <https://www.nber.org/papers/w12496>. Accessed 2026-10-21. Verification: not checked.
+
+Note: Read for RES-0013 (full text).
+
+Cited in: [RES-0013](research/0013-emerging-market-currencies.md).
+
 ### gatev1999
 
 Gatev, Evan; Goetzmann, William; Rouwenhorst, K. Geert (1999). Pairs Trading: Performance of a Relative Value Arbitrage Rule. *NBER Working Paper w7032*. doi:10.3386/w7032 <https://doi.org/10.3386/w7032>. <https://www.nber.org/system/files/working_papers/w7032/w7032.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2688,6 +2744,16 @@ Cited in: [RES-0001](research/0001-reading-list.md).
 Gilbert, Thomas; Kurov, Alexander; Wolfe, Marketa (2021). The Disappearing Pre-FOMC Announcement Drift. *SSRN Electronic Journal*. doi:10.2139/ssrn.3134546 <https://doi.org/10.2139/ssrn.3134546>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3134546>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+
+### gilmore2008
+
+Gilmore, Stephen; Hayashi, Fumio (2008). Emerging Market Currency Excess Returns. *NBER Working Paper 14528; published in AEJ: Macroeconomics 3(4), 85-111 (2011)*. <https://www.nber.org/papers/w14528>. Accessed 2026-10-21. Verification: not checked.
+
+Also at: <https://www.nber.org/system/files/working_papers/w14528/w14528.pdf>.
+
+Note: Read for RES-0013 (full text).
+
+Cited in: [catalog/algorithms/em-fx-passive-basket.json](../catalog/algorithms/em-fx-passive-basket.json), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### glasserman2023
 
@@ -2753,6 +2819,14 @@ Lettau, Martin; Maggiori, Matteo; Weber, Michael (2013). Conditional Risk Premia
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### levine2016
+
+Levine, Ari; Ooi, Yao Hua; Richardson, Matthew; Sasseville, Caroline (2016). Commodities for the Long Run. *NBER Working Paper 22793; published in Financial Analysts Journal 74(2), 55-68 (2018)*. <https://www.nber.org/papers/w22793>. Accessed 2026-10-21. Verification: not checked.
+
+Note: Read for RES-0014 (full text).
+
+Cited in: [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
+
 ### lim2016
 
 Lim, Yanyali and Savidge (2016). Ichimoku Kinko Hyo books, commonly dated to 1969. *date as usually cited, not verified*. doi:10.2139/ssrn.2628581 <https://doi.org/10.2139/ssrn.2628581>. <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2628581>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2800,6 +2874,14 @@ Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-
 Lustig, Hanno; Stathopoulos, Andreas; Verdelhan, Adrien (2013). The Term Structure of Currency Carry Trade Risk Premia. *NBER Working Paper w19623*. doi:10.3386/w19623 <https://doi.org/10.3386/w19623>. <https://www.nber.org/papers/w19623>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### malkiel2004
+
+Malkiel, Burton G.; Saha, Atanu (2004). Hedge Funds: Risk and Return. *Princeton CEPS Working Paper 104*. <https://swh.princeton.edu/~ceps/workingpapers/104malkiel.pdf>. Accessed 2026-10-21. Verification: not checked.
+
+Note: Read for RES-0015 (full text).
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### mclean2012
 
@@ -3069,7 +3151,7 @@ Cited in: [CMP-0022](competitors/0022-collective2.md).
 
 ECB Data Portal (SDMX web service). (n.d.). *European Central Bank*. <https://data.ecb.europa.eu>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-portal.json), [DAT-0010](datasets/0010-ecb-data-portal.md).
+Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-portal.json), [DAT-0010](datasets/0010-ecb-data-portal.md), [RES-0013](research/0013-emerging-market-currencies.md).
 
 ### url-42ce1a33
 
@@ -4153,6 +4235,12 @@ release notes. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/releas
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-021157c1
+
+No title recorded. (n.d.). <https://en.wikipedia.org/wiki/Stanley_Druckenmiller>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-021a44af
 
 No title recorded. (n.d.). *imarcgroup.com*. <https://www.imarcgroup.com/online-trading-platform-market-statistics>. Accessed 2026-10-25. Verification: not checked.
@@ -4518,6 +4606,12 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Algorithmic trading market size and share analysis. (n.d.). *mordorintelligence.com*. <https://www.mordorintelligence.com/industry-reports/algorithmic-trading-market>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-11046697
+
+No title recorded. (n.d.). <https://www.institutionalinvestor.com/article/2bsvvqs6ph9xpipkxoef4/portfolio/the-morning-brief-hall-reportedly-shutting-his-commodities-fund>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-1139fcb8
 
@@ -4907,6 +5001,12 @@ Barber, Lee, Liu, Odean and Zhang (2017 version), Do day traders rationally lear
 
 Cited in: [catalog/algorithms/one-minute-scalping.json](../catalog/algorithms/one-minute-scalping.json), [ALG-0067](algorithms/0067-one-minute-scalping.md), [REF-0004](reference/0004-glossary.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
 
+### url-20143de8
+
+No title recorded. (n.d.). <https://www.turtletrader.com/winners-losers/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-20151496
 
 Collective2 home page. (n.d.). *trade.collective2.com*. <https://trade.collective2.com/>. Accessed 2026-10-23. Verification: not checked.
@@ -5093,6 +5193,12 @@ No title recorded. (n.d.). *fulcrumasset.com*. <https://fulcrumasset.com/wp-cont
 
 Cited in: [catalog/algorithms/fx-macro-news-surprise.json](../catalog/algorithms/fx-macro-news-surprise.json), [ALG-0010](algorithms/0010-fx-macro-news-surprise.md).
 
+### url-29d98887
+
+No title recorded. (n.d.). <https://www.everycrsreport.com/files/20150211_IN10230_fbd6178a37df59924423af5f8ec3545533730cb8.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-29edb5d6
 
 No title recorded. (n.d.). *fintech.global*. <https://fintech.global/2026/02/19/monark-secures-8-1m-to-expand-retail-private-access/>. Accessed 2026-10-25. Verification: not checked.
@@ -5134,6 +5240,12 @@ Cited in: [CMP-0012](competitors/0012-lmax.md).
 Robinhood status page. (n.d.). *status.robinhood.com*. <https://status.robinhood.com>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md).
+
+### url-2be71895
+
+No title recorded. (n.d.). <https://www.hedgeweek.com/andurands-riskiest-hedge-fund-up-20-after-record-loss-in-2023/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-2d46dac4
 
@@ -5395,6 +5507,12 @@ No title recorded. (n.d.). *site.financialmodelingprep.com*. <https://site.finan
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-38676585
+
+No title recorded. (n.d.). <https://www.turtletrader.com/bill-lipschultz>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-38aacaef
 
 account opening. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/account-opening>. Accessed 2026-10-24. Verification: not checked.
@@ -5448,6 +5566,12 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 Funding. (n.d.). *Hyperliquid docs*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### url-3a2df02e
+
+No title recorded. (n.d.). <https://www.benzinga.com/general/24/03/37833005/back-to-the-futures-how-bruce-kovner-used-currencies-and-commodities-to-build-his-hedge-fund>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-3a5722ad
 
@@ -5544,6 +5668,12 @@ Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-l
 Store help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-store/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0005](competitors/0005-ctrader.md).
+
+### url-3ef081cb
+
+No title recorded. (n.d.). <https://www.euromoney.com/?p=66955>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-3f0a70fe
 
@@ -5743,6 +5873,12 @@ eToro platforms. (n.d.). *etoro.com*. <https://www.etoro.com/trading/platforms/>
 
 Cited in: [CMP-0017](competitors/0017-etoro.md).
 
+### url-47ba2a12
+
+No title recorded. (n.d.). <https://www.fxstreet.com/news/carry-trade-war-driven-gains-question-durability-commerzbank-202604161838>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0013](research/0013-emerging-market-currencies.md).
+
 ### url-4863ed3a
 
 Filippou et al. July 2021 draft, Table 3 Panel A. (n.d.). *wu.ac.at*. <https://www.wu.ac.at/fileadmin/wu/d/ri/isk/VSFX_2021/Papers/Rapach_SmartCarry_07-02-2021.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -5812,6 +5948,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 European Union (n.d.). Directive 2014/65/EU. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/dir/2014/65/oj>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-4a9e8a89
+
+No title recorded. (n.d.). <https://learn.apmex.com/learning-guide/history/silver-thursday-the-hunt-brothers-scheme/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-4b0c751f
 
@@ -6269,6 +6411,12 @@ Note: Linked in this repo as: third party guide.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-5dc0b94e
+
+No title recorded. (n.d.). <https://en.wikipedia.org/wiki/Andrew_Hall_(hedge_fund_manager)>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-5df74e1b
 
 UK legislation.gov.uk (n.d.). Delegated Regulation 2017/565, Article 9. *legislation.gov.uk*. <https://www.legislation.gov.uk/eur/2017/565/article/9>. Accessed 2026-10-25. Verification: unchecked.
@@ -6348,6 +6496,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 31 CFR 1010.230. (n.d.). *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/31/1010.230>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-61b59e8b
+
+No title recorded. (n.d.). <https://www.eia.gov/dnav/pet/pet_pri_fut_s1_d.htm>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### url-620766d4
 
@@ -6819,6 +6973,12 @@ OANDA review, forexbrokers.com. (n.d.). *forexbrokers.com*. <https://www.forexbr
 
 Cited in: [CMP-0011](competitors/0011-oanda.md).
 
+### url-7625ba14
+
+No title recorded. (n.d.). <https://www.euromoney.com/article/b1320fcs67s11y/a-speculators-latest-lesson>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-7710a4ba
 
 Liberation Day tariffs. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Liberation_Day_tariffs>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -6850,6 +7010,12 @@ Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json),
 Robinhood fee schedule. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/support/articles/robinhood-fee-schedule/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md).
+
+### url-77fdcfbd
+
+No title recorded. (n.d.). <https://autumngold.com/Advisor/cta_profile.php?id=393>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-780a43b3
 
@@ -7198,6 +7364,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 No title recorded. (n.d.). *parity.endyland.com*. <https://parity.endyland.com>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
+
+### url-83df5a29
+
+No title recorded. (n.d.). <https://en.wikipedia.org/wiki/Amaranth_Advisors>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-8436b75b
 
@@ -7696,6 +7868,12 @@ This Blog is Systematic: Annual performance update- year 12. (n.d.). *qoppac.blo
 Note: Linked in this repo as: Carver blog, Annual performance update year 12.
 
 Cited in: [catalog/algorithms/fx-carver-trend-carry.json](../catalog/algorithms/fx-carver-trend-carry.json), [ALG-0003](algorithms/0003-fx-carver-trend-carry.md), [RES-0002](research/0002-open-source-and-public-results.md), [RES-0003](research/0003-forums-and-practitioners.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-9799492c
+
+No title recorded. (n.d.). <https://www.man.com/insights/the-impact-of-volatility-targeting>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
 
 ### url-97bf6c0d
 
@@ -8225,7 +8403,7 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 
 Black Wednesday. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Black_Wednesday>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
-Cited in: [catalog/events/black-wednesday-1992.json](../catalog/events/black-wednesday-1992.json).
+Cited in: [catalog/events/black-wednesday-1992.json](../catalog/events/black-wednesday-1992.json), [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-aedff13b
 
@@ -8297,6 +8475,12 @@ The next-generation monetary and financial system. (2025). *BIS Annual Economic 
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-b1eae3eb
+
+No title recorded. (n.d.). <https://www.britannica.com/print/article/2090145>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-b2570be7
 
 Near Failure of Long-Term Capital Management. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/ltcm-near-failure>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8347,11 +8531,23 @@ Note: Linked in this repo as: None.
 
 Cited in: [CMP-0011](competitors/0011-oanda.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
 
+### url-b32c703f
+
+No title recorded. (n.d.). <https://www.next-finance.net/John-Arnold-The-natural-gas-guru>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-b34771ea
 
 historical data. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/historical-data>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-b382fc04
+
+No title recorded. (n.d.). <https://en.wikipedia.org/wiki/Paul_Tudor_Jones>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-b3841505
 
@@ -9275,6 +9471,12 @@ derivatives guide. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.c
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 
+### url-df1d39ab
+
+No title recorded. (n.d.). <https://www.bloombergquint.com/amp/onweb/turkey-replaces-argentina-as-worst-market-for-bond-investors>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0013](research/0013-emerging-market-currencies.md).
+
 ### url-dfc157c6
 
 HBS Library. (n.d.). *library.hbs.edu*. <https://www.library.hbs.edu/databases-cases-and-more/datasets/factset-revere-supply-chain-relationships>. Accessed 2026-10-25. Verification: not checked.
@@ -9428,6 +9630,12 @@ OilPriceAPI as an EIA API Alternative - Real-Time Oil Prices | OilPriceAPI Docs.
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-e6a9d40f
+
+No title recorded. (n.d.). <https://qcintel.com/article/andurand-hedge-fund-slumps-55-in-2023-on-lower-oil-prices-20946.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-e6e8d042
 
@@ -9733,6 +9941,12 @@ Note: Linked in this repo as: year 11.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-f5f2f534
+
+No title recorded. (n.d.). <https://en.wikipedia.org/wiki/Sumitomo_copper_affair>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
+
 ### url-f639b32d
 
 NewsAPI.org: API documentation. (n.d.). *NewsAPI.org*. <https://newsapi.org/docs>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -9822,6 +10036,18 @@ Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json),
 ECB Data Portal (SDMX web service): API documentation. (n.d.). *European Central Bank*. <https://data.ecb.europa.eu/help/api/overview>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/ecb-data-portal.json](../catalog/datasets/ecb-data-portal.json), [DAT-0010](datasets/0010-ecb-data-portal.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-f93141de
+
+No title recorded. (n.d.). <https://www.hedgeweek.com/flat-december-sees-ctas-complete-record-year-2022/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0014](research/0014-commodity-futures-carry-trend-and-volatility.md).
+
+### url-f932b135
+
+No title recorded. (n.d.). <https://techround.co.uk/other/most-famous-currency-trades-all-time/>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-f932fdb1
 
@@ -11034,6 +11260,12 @@ Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-an
 The Block. (n.d.). *theblock.co*. <https://www.theblock.co/post/390544>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-23d55028
+
+No title recorded. (n.d.). <https://www.cnbc.com/2013/10/07/this-once-14b-hedge-funds-future-is-in-doubt.html>. Accessed 2026-10-21. Verification: not checked.
+
+Cited in: [RES-0015](research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md).
 
 ### url-2de6ba29
 

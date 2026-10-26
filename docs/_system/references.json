@@ -1436,6 +1436,35 @@
       }
     },
     {
+      "key": "burnside2007",
+      "type": "preprint",
+      "authors": [
+        "Burnside, Craig",
+        "Eichenbaum, Martin",
+        "Rebelo, Sergio"
+      ],
+      "year": 2007,
+      "title": "The Returns to Currency Speculation in Emerging Markets",
+      "venue": "NBER Working Paper 12916",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w12916",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w12916/w12916.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md",
+        "catalog/algorithms/em-fx-carry.json"
+      ],
+      "note": "Read for RES-0013 (full text)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "burnside2011",
       "type": "paper",
       "authors": [
@@ -2026,12 +2055,15 @@
       "doi": "10.1162/qjec.2010.125.3.1145",
       "arxiv": null,
       "url": "https://doi.org/10.1162/qjec.2010.125.3.1145",
-      "also_at": [],
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w13901/w13901.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "blocked",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "catalog/algorithms/commodity-currencies-predict-commodities.json"
       ],
       "metadata": {
         "source": "crossref",
@@ -2448,6 +2480,33 @@
       "metadata": {
         "source": "crossref",
         "doi_explicit": true
+      }
+    },
+    {
+      "key": "dezwart2009",
+      "type": "paper",
+      "authors": [
+        "de Zwart, Gerben",
+        "Markwat, Thijs",
+        "Swinkels, Laurens",
+        "van Dijk, Dick"
+      ],
+      "year": 2009,
+      "title": "The economic value of fundamental and technical information in emerging currency markets",
+      "venue": "Journal of International Money and Finance 28(4), 581-604",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://repub.eur.nl/pub/16035",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md"
+      ],
+      "note": "Abstract only, for RES-0013",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -3076,6 +3135,31 @@
       }
     },
     {
+      "key": "frankel2006",
+      "type": "preprint",
+      "authors": [
+        "Frankel, Jeffrey",
+        "Poonawala, Jumana"
+      ],
+      "year": 2006,
+      "title": "The Forward Market in Emerging Currencies: Less Biased Than in Major Currencies",
+      "venue": "NBER Working Paper 12496; published in Journal of International Money and Finance 29(3) (2010)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w12496",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md"
+      ],
+      "note": "Read for RES-0013 (full text)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "franz2022",
       "type": "paper",
       "authors": [
@@ -3330,6 +3414,34 @@
       ],
       "metadata": {
         "source": "crossref",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "gilmore2008",
+      "type": "preprint",
+      "authors": [
+        "Gilmore, Stephen",
+        "Hayashi, Fumio"
+      ],
+      "year": 2008,
+      "title": "Emerging Market Currency Excess Returns",
+      "venue": "NBER Working Paper 14528; published in AEJ: Macroeconomics 3(4), 85-111 (2011)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w14528",
+      "also_at": [
+        "https://www.nber.org/system/files/working_papers/w14528/w14528.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md",
+        "catalog/algorithms/em-fx-passive-basket.json"
+      ],
+      "note": "Read for RES-0013 (full text)",
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -4944,6 +5056,33 @@
       }
     },
     {
+      "key": "levine2016",
+      "type": "preprint",
+      "authors": [
+        "Levine, Ari",
+        "Ooi, Yao Hua",
+        "Richardson, Matthew",
+        "Sasseville, Caroline"
+      ],
+      "year": 2016,
+      "title": "Commodities for the Long Run",
+      "venue": "NBER Working Paper 22793; published in Financial Analysts Journal 74(2), 55-68 (2018)",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.nber.org/papers/w22793",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md"
+      ],
+      "note": "Read for RES-0014 (full text)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "lilley2022",
       "type": "paper",
       "authors": [
@@ -5564,6 +5703,31 @@
       }
     },
     {
+      "key": "malkiel2004",
+      "type": "preprint",
+      "authors": [
+        "Malkiel, Burton G.",
+        "Saha, Atanu"
+      ],
+      "year": 2004,
+      "title": "Hedge Funds: Risk and Return",
+      "venue": "Princeton CEPS Working Paper 104",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://swh.princeton.edu/~ceps/workingpapers/104malkiel.pdf",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "note": "Read for RES-0015 (full text)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "mancini2013",
       "type": "paper",
       "authors": [
@@ -6033,14 +6197,17 @@
       "doi": "10.1016/j.jfineco.2012.06.009",
       "arxiv": null,
       "url": "https://doi.org/10.1016/j.jfineco.2012.06.009",
-      "also_at": [],
+      "also_at": [
+        "https://faculty.washington.edu/ss1110/IF/Sarno%20Currency%20Momentum%20JFE%20%281%29.pdf"
+      ],
       "accessed": "2026-10-21",
       "verification": "redirect-ok",
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/algorithms/fx-cross-sectional-momentum.json",
         "docs/algorithms/0005-fx-cross-sectional-momentum.md",
-        "docs/research/0001-reading-list.md"
+        "docs/research/0001-reading-list.md",
+        "catalog/algorithms/em-fx-momentum.json"
       ],
       "metadata": {
         "source": "crossref",
@@ -6063,7 +6230,8 @@
       "arxiv": null,
       "url": "https://doi.org/10.1111/j.1540-6261.2012.01728.x",
       "also_at": [
-        "https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf"
+        "https://faculty.washington.edu/ss1110/IF/Sarno%20JF%20Carry%20Trade%20(1).pdf",
+        "https://openaccess.city.ac.uk/id/eprint/3391/1/CTVOL_R3_v4_paper.pdf"
       ],
       "accessed": "2026-10-21",
       "verification": "blocked",
@@ -6072,6 +6240,7 @@
         "catalog/algorithms/fx-carry-g10.json",
         "docs/algorithms/0001-fx-carry-g10.md",
         "docs/research/0001-reading-list.md",
+        "catalog/algorithms/em-fx-carry.json",
         "docs/research/0011-where-market-edges-come-from-and-which-survive.md"
       ],
       "metadata": {
@@ -6924,6 +7093,35 @@
       }
     },
     {
+      "key": "prokopczuk2017",
+      "type": "paper",
+      "authors": [
+        "Prokopczuk, Marcel",
+        "Symeonidis, Lazaros",
+        "Wese Simen, Chardin"
+      ],
+      "year": 2017,
+      "title": "Variance Risk in Commodity Markets",
+      "venue": "Journal of Banking and Finance 81, 136-149",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ueaeprints.uea.ac.uk/63547/",
+      "also_at": [
+        "https://ueaeprints.uea.ac.uk/63547/1/Variance_risk_in_Commodity_Markets.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md",
+        "catalog/algorithms/commodity-variance-risk-premium.json"
+      ],
+      "note": "Read for RES-0014 (full text, accepted manuscript)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "qi2006",
       "type": "paper",
       "authors": [
@@ -7595,6 +7793,34 @@
       }
     },
     {
+      "key": "trolle2010",
+      "type": "paper",
+      "authors": [
+        "Trolle, Anders B.",
+        "Schwartz, Eduardo S."
+      ],
+      "year": 2010,
+      "title": "Variance Risk Premia in Energy Commodities",
+      "venue": "Journal of Derivatives",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://infoscience.epfl.ch/record/148475",
+      "also_at": [
+        "https://infosciences.epfl.ch/record/148475/files/TrolleSchwartz_Energy_Variance_Risk_Premia.pdf"
+      ],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md",
+        "catalog/algorithms/commodity-variance-risk-premium.json"
+      ],
+      "note": "Read for RES-0014 (full text, November 2009 working version)",
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "tversky1971",
       "type": "paper",
       "authors": [
@@ -7946,6 +8172,27 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-021157c1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Stanley_Druckenmiller",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -8647,6 +8894,27 @@
       },
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-11046697",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.institutionalinvestor.com/article/2bsvvqs6ph9xpipkxoef4/portfolio/the-morning-brief-hall-reportedly-shutting-his-commodities-fund",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -9402,6 +9670,27 @@
       }
     },
     {
+      "key": "url-20143de8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.turtletrader.com/winners-losers/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-2273dca0",
       "type": "web-page",
       "authors": [],
@@ -9445,6 +9734,27 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-23d55028",
+      "type": "news",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2013/10/07/this-once-14b-hedge-funds-future-is-in-doubt.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -9713,6 +10023,27 @@
       }
     },
     {
+      "key": "url-29d98887",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.everycrsreport.com/files/20150211_IN10230_fbd6178a37df59924423af5f8ec3545533730cb8.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-2a48fd9f",
       "type": "software",
       "authors": [],
@@ -9778,6 +10109,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-2be71895",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.hedgeweek.com/andurands-riskiest-hedge-fund-up-20-after-record-loss-in-2023/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -10418,6 +10770,27 @@
       }
     },
     {
+      "key": "url-38676585",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.turtletrader.com/bill-lipschultz",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-392dbf51",
       "type": "web-page",
       "authors": [],
@@ -10490,6 +10863,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-3a2df02e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.benzinga.com/general/24/03/37833005/back-to-the-futures-how-bruce-kovner-used-currencies-and-commodities-to-build-his-hedge-fund",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -10683,6 +11077,27 @@
       }
     },
     {
+      "key": "url-3ef081cb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.euromoney.com/?p=66955",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-3f7c16f4",
       "type": "web-page",
       "authors": [],
@@ -10767,7 +11182,8 @@
       "verification_checked": "2026-10-21",
       "used_in": [
         "catalog/datasets/ecb-data-portal.json",
-        "docs/datasets/0010-ecb-data-portal.md"
+        "docs/datasets/0010-ecb-data-portal.md",
+        "docs/research/0013-emerging-market-currencies.md"
       ],
       "metadata": {
         "source": "repo",
@@ -11071,6 +11487,27 @@
       }
     },
     {
+      "key": "url-47ba2a12",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.fxstreet.com/news/carry-trade-war-driven-gains-question-durability-commerzbank-202604161838",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-4863ed3a",
       "type": "web-page",
       "authors": [],
@@ -11210,6 +11647,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-4a9e8a89",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://learn.apmex.com/learning-guide/history/silver-thursday-the-hunt-brothers-scheme/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -12201,6 +12659,27 @@
       }
     },
     {
+      "key": "url-5dc0b94e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Andrew_Hall_(hedge_fund_manager)",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-5dc9e74c",
       "type": "software",
       "authors": [],
@@ -12290,6 +12769,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-61b59e8b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.eia.gov/dnav/pet/pet_pri_fut_s1_d.htm",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -13324,6 +13824,27 @@
       }
     },
     {
+      "key": "url-7625ba14",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.euromoney.com/article/b1320fcs67s11y/a-speculators-latest-lesson",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-76c3c239",
       "type": "forum-post",
       "authors": [],
@@ -13432,6 +13953,27 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-77fdcfbd",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://autumngold.com/Advisor/cta_profile.php?id=393",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -14125,6 +14667,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-83df5a29",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Amaranth_Advisors",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -15117,6 +15680,27 @@
       },
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-9799492c",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.man.com/insights/the-impact-of-volatility-targeting",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },
@@ -16323,7 +16907,8 @@
       "verification": "verified",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "catalog/events/black-wednesday-1992.json"
+        "catalog/events/black-wednesday-1992.json",
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
       ],
       "metadata": {
         "source": "repo",
@@ -16452,6 +17037,27 @@
       }
     },
     {
+      "key": "url-b1eae3eb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.britannica.com/print/article/2090145",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-b2570be7",
       "type": "web-page",
       "authors": [],
@@ -16550,6 +17156,48 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-b32c703f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.next-finance.net/John-Arnold-The-natural-gas-guru",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b382fc04",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Paul_Tudor_Jones",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -18301,6 +18949,27 @@
       }
     },
     {
+      "key": "url-df1d39ab",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bloombergquint.com/amp/onweb/turkey-replaces-argentina-as-worst-market-for-bond-investors",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0013-emerging-market-currencies.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-df8416d6",
       "type": "dataset",
       "authors": [],
@@ -18674,6 +19343,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-e6a9d40f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://qcintel.com/article/andurand-hedge-fund-slumps-55-in-2023-on-lower-oil-prices-20946.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -19199,6 +19889,27 @@
       }
     },
     {
+      "key": "url-f21e1112",
+      "type": "paper",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://ideas.repec.org/a/bla/jfinan/v69y2014i1p453-482.html",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
       "key": "url-f2a66230",
       "type": "regulator",
       "authors": [],
@@ -19350,6 +20061,27 @@
         "source": "repo",
         "doi_explicit": false,
         "title_from": "page title found by verify_sources.py"
+      }
+    },
+    {
+      "key": "url-f5f2f534",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Sumitomo_copper_affair",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
       }
     },
     {
@@ -19559,6 +20291,48 @@
       ],
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f93141de",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.hedgeweek.com/flat-december-sees-ctas-complete-record-year-2022/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0014-commodity-futures-carry-trend-and-volatility.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f932b135",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": null,
+      "venue": null,
+      "doi": null,
+      "arxiv": null,
+      "url": "https://techround.co.uk/other/most-famous-currency-trades-all-time/",
+      "also_at": [],
+      "accessed": "2026-10-21",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     },

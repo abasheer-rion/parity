@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from . import catalog, sources
+from . import catalog, futures, sources
 
 DEFAULT_DIR = Path(os.environ.get("PARITY_DATA_DIR", Path(__file__).resolve().parents[3] / "data"))
 
@@ -28,7 +28,9 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
     """Download each series and overwrite its cache file. Returns a coverage report."""
     keys = keys or list(catalog.CATALOG)
     report = []
-    derived = [k for k in keys if catalog.get(k).source == "derived"]
+    # Derived series are built after the raw ones, and vrp.* after the fut.* it reads.
+    derived = sorted((k for k in keys if catalog.get(k).source == "derived"),
+                     key=lambda k: k.startswith("vrp."))
     for key in [k for k in keys if k not in derived] + derived:
         series = catalog.get(key)
         entry = {"key": key, "source": series.source, "code": series.code}
@@ -62,9 +64,20 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
 
 
 def build_derived(series: catalog.Series, root: Path) -> pd.Series:
-    """eq.US_TOTAL: the Fama and French total return index, then S&P 500 price returns
-    plus a daily dividend accrual for the days French has not published yet. The
-    dividend accrual is the gap between the two over the last year they overlap."""
+    """Series computed from other cached series. fut.<X>, carry.<X> and vrp.OIL are
+    described in data/futures.py; bond.TR* in bond_total_return; eq.US_TOTAL below."""
+    group, name = series.key.split(".", 1)
+    if group == "fut":
+        start = futures.INDEX_START.get(name)
+        c1, c2 = (load(f"curve.{name}{n}", root).loc[start:] for n in (1, 2))
+        return futures.rolled_index(c1, c2, futures.EXPIRY_RULES[name]).rename(series.key)
+    if group == "carry":
+        start = futures.INDEX_START.get(name)
+        return futures.curve_carry(load(f"curve.{name}2", root).loc[start:],
+                                   load(f"curve.{name}3", root).loc[start:]).rename(series.key)
+    if series.key == "vrp.OIL":
+        return futures.variance_swap_index(load("risk.OVX", root),
+                                           load("fut.CL", root)).rename(series.key)
     if series.key.startswith("xfx."):  # USD per unit, crossed through the euro
         usd = load("ecb.USD", root)
         if series.code == "ecb.USD":
@@ -76,6 +89,13 @@ def build_derived(series: catalog.Series, root: Path) -> pd.Series:
             .rename(series.key)
     if series.key != "eq.US_TOTAL":
         raise KeyError(f"No recipe for derived series {series.key}")
+    return _us_total(series, root)
+
+
+def _us_total(series: catalog.Series, root: Path) -> pd.Series:
+    """eq.US_TOTAL: the Fama and French total return index, then S&P 500 price returns
+    plus a daily dividend accrual for the days French has not published yet. The
+    dividend accrual is the gap between the two over the last year they overlap."""
     mkt = load("eq.US_MKT", root)
     spx = load("eq.SPX", root).dropna()
     last = mkt.index.max()
