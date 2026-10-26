@@ -9,12 +9,14 @@
 //   /badge/<id>.svg                     the badge image, not-found id (one lookup each)
 //   /.well-known/oauth-protected-resource and oauth-authorization-server   MCP discovery
 //   /mcp without a sign-in               refused, no database
+// The sign-in server's metadata answers 502 while Supabase's OAuth server is switched off
+// (REF-0025), so a 502 there is expected and not counted as an error.
 // About a fifth of requests reach Supabase (the badge lookups and the sign-in server's
 // metadata), so keep the steps small: the preview shares the production project.
 //   BASE=https://<preview>.parity-research.pages.dev STEPS=10,25,50 STEP_S=30 make load-functions
 import http from "k6/http";
 import { check } from "k6";
-import { base, stepRates, stepped, summarize } from "./lib.js";
+import { base, byName, stepRates, stepped, summarize } from "./lib.js";
 
 const B = base();
 const uuid = () => "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx".replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
@@ -29,12 +31,12 @@ const MIX = [
   [5, "v-malformed", () => http.get(`${B}/v/not-a-badge`, { tags: { name: "badge-page-malformed" }, responseCallback: http.expectedStatuses(404) }), (r) => r.status === 404],
   [5, "badge-svg", () => http.get(`${B}/badge/${id12()}.svg`, { tags: { name: "badge-svg-missing" }, responseCallback: http.expectedStatuses(404) }), (r) => r.status === 404],
   [4, "wk-resource", () => http.get(`${B}/.well-known/oauth-protected-resource`, { tags: { name: "mcp-resource-meta" } }), (r) => r.status === 200],
-  [4, "wk-as", () => http.get(`${B}/.well-known/oauth-authorization-server`, { tags: { name: "mcp-as-meta" } }), (r) => r.status === 200],
+  [4, "wk-as", () => http.get(`${B}/.well-known/oauth-authorization-server`, { tags: { name: "mcp-as-meta" }, responseCallback: http.expectedStatuses(200, 502) }), (r) => r.status === 200 || r.status === 502],
   [2, "mcp", () => http.post(`${B}/mcp`, JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }), { headers: { "Content-Type": "application/json" }, tags: { name: "mcp-signed-out" }, responseCallback: http.expectedStatuses(401) }), (r) => r.status === 401],
 ];
 const TOTAL = MIX.reduce((s, m) => s + m[0], 0);
 
-export const options = stepped({ fn: "call", rates: stepRates("10,25,50"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1 });
+export const options = stepped({ fn: "call", rates: stepRates("10,25,50"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1, extraThresholds: byName(["live-status", "live-universe", "beacon-e", "beacon-rum", "badge-page-missing", "badge-page-malformed", "badge-svg-missing", "mcp-resource-meta", "mcp-as-meta", "mcp-signed-out"]) });
 
 export function call() {
   let x = Math.random() * TOTAL;

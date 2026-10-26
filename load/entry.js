@@ -5,12 +5,12 @@
 //   BASE=https://<preview>.parity-research.pages.dev STEPS=10,25,50 STEP_S=30 make load-entry
 import http from "k6/http";
 import { check } from "k6";
-import { base, stepRates, stepped, summarize } from "./lib.js";
+import { base, byName, stepRates, stepped, summarize } from "./lib.js";
 
 const B = base();
 const APPS = ["/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/", "/trade/#/markets", "/app/strategies", "/academy/x/y"];
 
-export const options = stepped({ fn: "enter", rates: stepRates("10,25,50,100"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1 });
+export const options = stepped({ fn: "enter", rates: stepRates("10,25,50,100"), seconds: Number(__ENV.STEP_S || 30), fnShare: 1, extraThresholds: byName(["front", "app-signed-out"]) });
 
 export function enter() {
   if (Math.random() < 0.5) {

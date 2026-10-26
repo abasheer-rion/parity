@@ -5,8 +5,9 @@
 // Each viewer opens /live/ws?src=coingecko, subscribes to the market overview ("*"), pings
 // every 15 s like the site does, and measures:
 //   ws_connect_ms   time to an open socket
-//   ws_delivery_ms  our receive time minus the edge's send time (ts) on each update; includes
-//                   any clock difference between this machine and Cloudflare (a few ms)
+//   ws_delivery_ms  our receive time minus the edge's send time (ts) on each live update,
+//                   corrected by the clock offset each viewer measures with ping and pong
+//                   (this machine's clock can be seconds off Cloudflare's, as the site's is)
 //   ws_rtt_ms       ping to pong
 //   ws_msgs         messages received
 //   ws_open_fail    sockets that failed to open or were refused
@@ -49,20 +50,32 @@ export default function () {
   let pinger = null;
   let c = 0;
   const sent = new Map();
+  let offset = null; // edge clock minus ours, from the first pong
+  let openedAt = 0;
+  const ping = () => { c += 1; sent.set(c, Date.now()); ws.send(JSON.stringify({ op: "ping", c })); };
   ws.onopen = () => {
+    openedAt = Date.now();
     opened = true;
     connect.add(Date.now() - t0);
     fail.add(false);
     ws.send(JSON.stringify({ op: "sub", s: ["*"] }));
-    pinger = setInterval(() => { c += 1; sent.set(c, Date.now()); ws.send(JSON.stringify({ op: "ping", c })); }, 15000);
+    ping();
+    pinger = setInterval(ping, 15000);
   };
   ws.onmessage = (e) => {
     const now = Date.now();
     msgs.add(1);
     let m;
     try { m = JSON.parse(e.data); } catch { return; }
-    if (m.op === "pong" && sent.has(m.c)) { rtt.add(now - sent.get(m.c)); sent.delete(m.c); return; }
-    if ((m.op === "r" || m.op === "t") && typeof m.ts === "number" && !m.full) delivery.add(now - m.ts);
+    if (m.op === "pong" && sent.has(m.c)) {
+      const t = sent.get(m.c);
+      rtt.add(now - t);
+      if (offset === null) offset = m.ts - (t + now) / 2;
+      sent.delete(m.c);
+      return;
+    }
+    // Live updates only: the catch-up a viewer gets on subscribing comes within a moment of opening.
+    if ((m.op === "r" || m.op === "t") && typeof m.ts === "number" && offset !== null && now - openedAt > 2000) delivery.add(Math.max(0, now + offset - m.ts));
   };
   ws.onerror = () => { if (!opened) fail.add(true); };
   ws.onclose = () => { if (pinger) clearInterval(pinger); if (!opened) fail.add(true); };

@@ -56,6 +56,7 @@ export function stepped({ fn, rates, seconds, perIter = 1, fnShare = 0, extraThr
     };
     thresholds[`http_req_duration{step:${r}}`] = [{ threshold: "p(95)<2000", abortOnFail: true, delayAbortEval: "10s" }];
     thresholds[`http_req_failed{step:${r}}`] = [{ threshold: "rate<0.02", abortOnFail: true, delayAbortEval: "10s" }];
+    thresholds[`http_reqs{step:${r}}`] = ["count>=0"];
     start += seconds;
     planned += r * seconds * perIter;
   }
@@ -64,7 +65,7 @@ export function stepped({ fn, rates, seconds, perIter = 1, fnShare = 0, extraThr
   if (fnPlanned > budget) {
     throw new Error(`This run plans ${fnPlanned} function requests, over BUDGET=${budget}. Lower STEPS or STEP_S, or raise BUDGET knowingly.`);
   }
-  console.log(`plan: ${rates.length} steps of ${seconds}s (${rates.join(", ")} per second), about ${Math.round(planned)} requests, ${fnPlanned} of them run a function`);
+  if (__VU === 0) console.log(`plan: ${rates.length} steps of ${seconds}s (${rates.join(", ")} per second), about ${Math.round(planned)} requests, ${fnPlanned} of them run a function`);
   return { scenarios, thresholds, summaryTrendStats: ["avg", "med", "p(95)", "p(99)", "max"] };
 }
 
@@ -75,6 +76,11 @@ function stat(m, k) {
 
 const broke = (m) => !!(m && m.thresholds && Object.values(m.thresholds).some((t) => !t.ok));
 
+/** Per-endpoint numbers in the summary: a threshold that always passes makes k6 keep them. */
+export function byName(names) {
+  return Object.fromEntries(names.map((n) => [`http_req_duration{name:${n}}`, ["max>=0"]]));
+}
+
 /** A short table per step, written to load/results/<name>-<time>.json and printed. */
 export function summarize(name, data) {
   const steps = [];
@@ -84,13 +90,16 @@ export function summarize(name, data) {
     const r = m[1];
     const d = data.metrics[key];
     const f = data.metrics[`http_req_failed{step:${r}}`];
-    steps.push({ step: Number(r), requests: d.values.count ?? null, p50_ms: stat(d, "med"), p95_ms: stat(d, "p(95)"), p99_ms: stat(d, "p(99)"), max_ms: stat(d, "max"), error_rate: stat(f, "rate"), broke: broke(d) || broke(f) });
+    const c = data.metrics[`http_reqs{step:${r}}`];
+    steps.push({ step: Number(r), requests: c ? c.values.count : null, p50_ms: stat(d, "med"), p95_ms: stat(d, "p(95)"), p99_ms: stat(d, "p(99)"), max_ms: stat(d, "max"), error_rate: stat(f, "rate"), broke: broke(d) || broke(f) });
   }
   steps.sort((a, b) => a.step - b.step);
   const reqs = data.metrics.http_reqs;
   const out = { name, base: __ENV.BASE || "", at: new Date().toISOString(), total_requests: reqs ? reqs.values.count : 0, rps: reqs ? Math.round(reqs.values.rate * 10) / 10 : 0, steps, extra: {} };
   for (const k of Object.keys(data.metrics)) {
-    if (/^(ws_|db_|step_rps)/.test(k)) out.extra[k] = data.metrics[k].values;
+    if (/^(ws_|db_)/.test(k)) out.extra[k] = data.metrics[k].values;
+    const n = /^http_req_duration\{name:(.+)\}$/.exec(k);
+    if (n) out.extra[`endpoint ${n[1]}`] = { count: data.metrics[k].values.count, p50: stat(data.metrics[k], "med"), p95: stat(data.metrics[k], "p(95)"), p99: stat(data.metrics[k], "p(99)") };
   }
   let text = `\n${name}: ${out.total_requests} requests, ${out.rps}/s overall\nstep   reqs    p50     p95     p99     err%  broke\n`;
   for (const s of steps) text += `${String(s.step).padEnd(6)} ${String(s.requests).padEnd(7)} ${String(s.p50_ms).padEnd(7)} ${String(s.p95_ms).padEnd(7)} ${String(s.p99_ms).padEnd(7)} ${String(Math.round((s.error_rate ?? 0) * 10000) / 100).padEnd(5)} ${s.broke ? "YES" : ""}\n`;
