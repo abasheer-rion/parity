@@ -12,6 +12,7 @@ import { freshness, msText, type Freshness } from "../lib/live/latency";
 import { feedLabel, feedShort, type FeedType } from "../lib/live/protocol";
 import { INTERNAL_LABEL, sourceById } from "../lib/live/sources";
 import "./liveBadge.css";
+import { useLivePaused } from "../lib/live/pause";
 
 /** Seconds for the badge: 0.04 s, 0.4 s, 2.1 s, then minutes. */
 export function secText(ms: number | null | undefined): string {
@@ -41,7 +42,9 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
   const ref = useRef<FeedStatus | null>(null);
   const [, tick] = useState(0);
   useEffect(() => subscribeStatus(src, (s) => { ref.current = s; }), [src]);
-  useEffect(() => { const t = window.setInterval(() => tick((n) => n + 1), 500); return () => window.clearInterval(t); }, []);
+  // Redraws twice a second, except while live updates are paused (WCAG 2.2.2).
+  const paused = useLivePaused();
+  useEffect(() => { if (paused) return; const t = window.setInterval(() => tick((n) => n + 1), 500); return () => window.clearInterval(t); }, [paused]);
   const s = ref.current;
   const meta = sourceById(src);
   const feed: FeedType = s?.feed ?? meta?.feed ?? "rt";
@@ -95,10 +98,13 @@ export function StaticBadge({ feed, source, asOf, compact = false, terms, delayM
   const shown = feed === "eod" ? "End of day" : feed === "delayed" ? `Delayed ${delayMin ?? 15} min` : feedShort(feed, delayMin);
   return (
     <Popover label="Data age" width={260} placement="bottom-end" trigger={() => (
-      <button type="button" className={`lvb lvb-${fresh}`} aria-label={[shown, compact ? null : source, compact ? null : `${msText(age)} old`].filter(Boolean).join(" ") + `. ${label}`}>
+      // The name is the words on the badge, then the details: on a phone the source is hidden,
+      // so the name is built from what is shown, not written out (WCAG 2.5.3).
+      <button type="button" className={`lvb lvb-${fresh}`}>
         <i className="lvb-dot" aria-hidden />
         <span>{shown}</span>
         {!compact && <>{" "}<span className="lvb-src">{source}</span>{" "}<span className="tabular lvb-age">{msText(age)} old</span></>}
+        <span className="sr-only">. {label}</span>
       </button>
     )}>
       <dl className="lvb-card">

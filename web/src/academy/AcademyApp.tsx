@@ -486,11 +486,12 @@ function Term({ id }: { id: string }) {
   const t = termById[id];
   return (
     <Popover label={t.term} width={320} placement="top-start" trigger={() => <button type="button" className="pac-term">{t.term}</button>}>
-      <div className="pac-term-pop">
+      {/* Spans, not a div and a p: the term sits inside a paragraph of the lesson. */}
+      <span className="pac-term-pop">
         <strong>{t.term}</strong>
-        <p>{t.simple}</p>
+        <span className="pac-term-def">{t.simple}</span>
         <a href={productUrl(`#/learn/${id}`)} target="_blank" rel="noopener">Full entry in the glossary<Icon name="arrowUpRight" size={12} /></a>
-      </div>
+      </span>
     </Popover>
   );
 }

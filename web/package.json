@@ -16,6 +16,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "a11y": "node scripts/a11y.mjs",
+    "a11y:checks": "node scripts/a11y-checks.mjs",
     "cls": "node scripts/cls.mjs",
     "smoke": "node scripts/smoke.mjs",
     "e2e": "playwright test",

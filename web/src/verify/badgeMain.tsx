@@ -11,6 +11,7 @@ import "../ui/ui.css";
 import "../legal/notice";
 import "../a11y.css";
 import { startRum } from "../lib/rum";
+import "../lib/a11y/scrollRegions";
 
 applyTheme();
 startRum("verify");

@@ -13,6 +13,8 @@ import { useTeam } from "../lib/live/team";
 import { digitsFor, priceText } from "../lib/tradeData";
 import { isFxPair } from "./live";
 import { readPref, writePref } from "./shared";
+import { PauseLive } from "../components/PauseLive";
+import { livePaused } from "../lib/live/pause";
 
 interface MRow { key: string; src: string; sym: string; p: number; chg: number | null; vol: number | null; te: number; spark: number[]; kind: Kind }
 type Kind = "crypto" | "fx" | "stock";
@@ -78,6 +80,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
     });
     // One sparkline point a minute per row, so lines keep moving between snapshots.
     const t = window.setInterval(() => {
+      if (livePaused()) return; // Pause live updates stops the sparklines too (WCAG 2.2.2).
       for (const r of rows.current.values()) if (r.src !== "coingecko") { r.spark = [...r.spark.slice(-59), r.p]; }
       kick();
     }, 60_000);
@@ -150,7 +153,7 @@ export function MarketsView({ onSymbol }: { onSymbol: (key: string) => void }) {
           ))}
         </span>
         <span className="mk-n tabular">{order.length.toLocaleString("en-US")} rows</span>
-        <span className="mk-badges">{shown.map((s) => <LiveBadge key={s} src={s} compact />)}</span>
+        <span className="mk-badges"><PauseLive />{shown.map((s) => <LiveBadge key={s} src={s} compact />)}</span>
       </div>
       <p className="mk-note">{prefs.kind === "fx" ? "FX here is the fiat pairs that crypto venues trade, not the interbank rate."
         : team == null ? "" : team.team ? "Real-time venue feeds for the team only, not shown to the public."

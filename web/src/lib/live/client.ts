@@ -10,6 +10,7 @@ import { endpointUrl, optedOut } from "../rum";
 import { ClockOffset, hops, Reservoir, type HopTimes } from "./latency";
 import { BOARD, bookKey, parseServer, tradesKey, type BoardRow, type FeedType, type Level, type ServerMsg, type Tick, type TradeRow } from "./protocol";
 import { isInternal } from "./sources";
+import { holdable } from "./pause";
 
 export type LineState = "connecting" | "open" | "closed";
 
@@ -381,22 +382,30 @@ function line(src: string): SourceLine {
 
 /** Listen to one symbol of one source. Returns the function that stops listening. */
 export function subscribeTicks(src: string, symbol: string, fn: TickFn): () => void {
-  return line(src).subscribe(symbol, fn);
+  const h = holdable(fn, "all");
+  const off = line(src).subscribe(symbol, h.call);
+  return () => { h.release(); off(); };
 }
 
 /** The order book of one symbol (top levels, at most once per frame). */
 export function subscribeBook(src: string, symbol: string, fn: BookFn): () => void {
-  return line(src).subscribeBook(symbol, fn);
+  const h = holdable(fn, "last");
+  const off = line(src).subscribeBook(symbol, h.call);
+  return () => { h.release(); off(); };
 }
 
 /** The recent trades of one symbol, as they arrive (batched per frame). */
 export function subscribeTrades(src: string, symbol: string, fn: TradesFn): () => void {
-  return line(src).subscribeTrades(symbol, fn);
+  const h = holdable(fn, "all");
+  const off = line(src).subscribeTrades(symbol, h.call);
+  return () => { h.release(); off(); };
 }
 
 /** The market overview of one source: a full list first, then changed rows. */
 export function subscribeBoard(src: string, fn: BoardFn): () => void {
-  return line(src).subscribeBoard(fn);
+  const h = holdable(fn, "all");
+  const off = line(src).subscribeBoard(h.call);
+  return () => { h.release(); off(); };
 }
 
 /** Listen to a source's status (line, upstream, last hops). Called at once with the current one. */

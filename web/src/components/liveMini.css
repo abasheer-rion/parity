@@ -1,6 +1,6 @@
 /* The compact live board (DEC-0052). Fixed sizes, so ticking never moves anything. */
 .lmini { display: grid; grid-template-rows: auto 1fr; gap: 6px; min-height: 0; height: 100%; font-size: var(--type-xs); }
-.lmini-head { display: flex; align-items: center; gap: 8px; height: 20px; }
+.lmini-head { display: flex; align-items: center; gap: 8px; height: 24px; }
 .lmini-gap { flex: 1; }
 .lmini-attr { font-size: var(--type-3xs); color: var(--text-2); text-decoration: none; white-space: nowrap; }
 .lmini-attr:hover { color: var(--text); text-decoration: underline; }

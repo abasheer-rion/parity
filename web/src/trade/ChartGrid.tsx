@@ -15,6 +15,7 @@ import type { CandleBuilder, LiveTf } from "../lib/live/candles";
 import type { Signal } from "../lib/signals";
 import { instrumentForKey, tfFor, tfsFor, useClosedCount, useLiveBars, useUniverse, type UniverseDoc } from "./live";
 import { SignalCard, toChartMarkers, useSignals } from "./signalsUi";
+import { PauseLive } from "../components/PauseLive";
 
 interface DrawingRow extends Row { symbol: string; kind: Drawing["kind"]; points: Drawing["points"] }
 export const drawingsTable = table<DrawingRow>("trade_drawings");
@@ -105,6 +106,7 @@ function ChartCell({ cell, index, active, list, universe, signalsOn, type, log, 
             : TIMEFRAMES.map((t) => <button key={t.id} type="button" role="radio" aria-checked={cell.tf === t.id} className={cell.tf === t.id ? "on" : ""} onClick={() => onTf(t.id)}>{t.label}</button>)}
         </span>
         {liveRef?.src === "coingecko" && <a className="cg-attr" href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>}
+        {liveRef && active && <PauseLive />}
         {liveRef ? <LiveBadge src={liveRef.src} compact={!active} />
           : ext?.stock ? <StaticBadge feed="eod" source="No licensed feed" asOf={null} compact={!active} />
           : inst ? <StaticBadge feed="eod" source={inst.source} asOf={inst.asof || null} compact={!active} /> : null}

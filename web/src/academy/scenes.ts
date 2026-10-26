@@ -103,7 +103,8 @@ function line(pts: [number, number][]): string {
 
 function text(x: number, y: number, t: string, o: { size?: number; fill?: string; anchor?: string; weight?: number; opacity?: number } = {}): string {
   const op = o.opacity != null ? ` opacity="${r1(clamp(o.opacity) * 100) / 100}"` : "";
-  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
+  // A dark halo behind each label keeps it readable where a line or band passes under it (WCAG 1.4.3).
+  return `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size ?? 13}" fill="${o.fill ?? C.muted}" text-anchor="${o.anchor ?? "start"}"${o.weight ? ` font-weight="${o.weight}"` : ""}${op} stroke="${C.panel}" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-family="Inter,system-ui,sans-serif">${esc(t)}</text>`;
 }
 
 function niceTicks(lo: number, hi: number, count = 4): number[] {
@@ -138,13 +139,13 @@ export function spreadLabels<T extends { y: number }>(items: T[], gap: number, t
 function yAxis(lo: number, hi: number, y: (v: number) => number, unit = "", box = PLOT): string {
   return niceTicks(lo, hi).map((v) =>
     `<line x1="${box.x0}" x2="${box.x1}" y1="${r1(y(v))}" y2="${r1(y(v))}" stroke="${C.grid}"/>` +
-    text(box.x0 - 8, y(v) + 4, fmt(v, unit), { size: 11, anchor: "end", fill: C.faint })).join("");
+    text(box.x0 - 8, y(v) + 4, fmt(v, unit), { size: 11, anchor: "end", fill: C.muted })).join("");
 }
 
 function xLabels(labels: string[], box = PLOT): string {
   if (!labels.length) return "";
   const x = scale(0, labels.length - 1, box.x0, box.x1);
-  return labels.map((l, i) => text(x(i), box.y1 + 20, l, { size: 11, fill: C.faint, anchor: i === 0 ? "start" : i === labels.length - 1 ? "end" : "middle" })).join("");
+  return labels.map((l, i) => text(x(i), box.y1 + 20, l, { size: 11, fill: C.muted, anchor: i === 0 ? "start" : i === labels.length - 1 ? "end" : "middle" })).join("");
 }
 
 function dot(x: number, y: number, fill: string, r = 4): string {
@@ -267,10 +268,10 @@ const drawdown: Render = (p, steps, s) => {
   const minDD = Math.min(...dd);
   const yd = scale(Math.min(-0.05, minDD * 1.1), 0, bot.y1, bot.y0);
   let out = yAxis(lo, hi, y, "$", top);
-  out += text(top.x0, top.y0 - 4, "Account value", { size: 11, fill: C.faint });
-  out += `<line x1="${bot.x0}" x2="${bot.x1}" y1="${bot.y0}" y2="${bot.y0}" stroke="${C.faint}" opacity=".5"/>` + text(bot.x0 - 8, bot.y0 + 4, "0%", { size: 11, anchor: "end", fill: C.faint });
-  out += text(bot.x0 - 8, yd(minDD) + 4, `${Math.round(minDD * 100)}%`, { size: 11, anchor: "end", fill: C.faint });
-  out += text(bot.x0, bot.y1 + 22, "Fall from the highest point so far", { size: 11, fill: C.faint });
+  out += text(top.x0, top.y0 - 4, "Account value", { size: 11, fill: C.muted });
+  out += `<line x1="${bot.x0}" x2="${bot.x1}" y1="${bot.y0}" y2="${bot.y0}" stroke="${C.faint}" opacity=".5"/>` + text(bot.x0 - 8, bot.y0 + 4, "0%", { size: 11, anchor: "end", fill: C.muted });
+  out += text(bot.x0 - 8, yd(minDD) + 4, `${Math.round(minDD * 100)}%`, { size: 11, anchor: "end", fill: C.muted });
+  out += text(bot.x0, bot.y1 + 22, "Fall from the highest point so far", { size: 11, fill: C.muted });
   if (showPeak > 0.01) out += poly(peak.slice(0, m).map((v, i) => [x(i), y(v)]), C.good, { width: 1.4, opacity: showPeak, dash: "4 4" });
   out += poly(eq.slice(0, m).map((v, i) => [x(i), y(v)]), C.blue, { width: 2.2 });
   if (fill > 0.01) {
@@ -308,7 +309,7 @@ const costs: Render = (p, steps, s) => {
   out += poly(b.map((v, i) => [x(i), y(v)]), col, { width: 2.5 });
   out += text(PLOT.x1 - 4, y(b[n - 1]) + 18, `After costs: ${fmt(b[n - 1], "$")}`, { anchor: "end", fill: col, size: 12, weight: 600 });
   out += text(PLOT.x0 + 6, PLOT.y0 + 6, `Cost per trade: ${cost.toFixed(1)} basis points`, { fill: C.text, size: 12, weight: 600 });
-  out += text(PLOT.x0 + 6, PLOT.y0 + 24, `Trades its whole size ${turnover} times a year`, { fill: C.faint, size: 11 });
+  out += text(PLOT.x0 + 6, PLOT.y0 + 24, `Trades its whole size ${turnover} times a year`, { fill: C.muted, size: 11 });
   return out;
 };
 
@@ -331,8 +332,8 @@ const maxof: Render = (p, steps, s) => {
   const top = Math.max(4, ...counts);
   const x = scale(lo, hi, PLOT.x0, PLOT.x1), y = scale(0, top * 1.15, PLOT.y1, PLOT.y0 + 20);
   let out = `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${PLOT.y1}" y2="${PLOT.y1}" stroke="${C.faint}" opacity=".6"/>`;
-  [-1, -0.5, 0, 0.5, 1].forEach((f) => { const v = f * range * (2 / 3); out += text(x(v), PLOT.y1 + 18, v.toFixed(1), { size: 11, anchor: "middle", fill: C.faint }); });
-  out += text(PLOT.x1, PLOT.y1 + 32, (p.xLabel as string) ?? "Sharpe ratio", { size: 11, anchor: "end", fill: C.faint });
+  [-1, -0.5, 0, 0.5, 1].forEach((f) => { const v = f * range * (2 / 3); out += text(x(v), PLOT.y1 + 18, v.toFixed(1), { size: 11, anchor: "middle", fill: C.muted }); });
+  out += text(PLOT.x1, PLOT.y1 + 32, (p.xLabel as string) ?? "Sharpe ratio", { size: 11, anchor: "end", fill: C.muted });
   counts.forEach((c, i) => {
     if (!c) return;
     out += `<rect x="${r1(x(lo + i * bw) + 1)}" y="${r1(y(c))}" width="${r1(x(lo + bw) - x(lo) - 2)}" height="${r1(PLOT.y1 - y(c))}" rx="2" fill="${C.blue}" opacity=".55"/>`;
@@ -346,7 +347,7 @@ const maxof: Render = (p, steps, s) => {
     out += `<line x1="${r1(x(h))}" x2="${r1(x(h))}" y1="${PLOT.y0 + 40}" y2="${PLOT.y1}" stroke="${C.bad}" stroke-width="2" stroke-dasharray="5 4" opacity="${r1(hurdle * 100) / 100}"/>`;
     out += text(x(h) - 6, PLOT.y0 + 52, `Luck alone reaches about ${h.toFixed(2)}`, { anchor: "end", fill: C.bad, size: 12 });
   }
-  out += text(PLOT.x0, PLOT.y0 + 4, (p.note as string) ?? `Every bar counts strategies with zero real skill, ${years} years each`, { size: 11, fill: C.faint });
+  out += text(PLOT.x0, PLOT.y0 + 4, (p.note as string) ?? `Every bar counts strategies with zero real skill, ${years} years each`, { size: 11, fill: C.muted });
   return out;
 };
 
@@ -369,7 +370,7 @@ const gauntlet: Render = (p, steps, s) => {
       out += `<rect x="${r1(x0)}" y="${y0 + 12}" width="${r1(w)}" height="64" rx="10" fill="${C.panel}" stroke="${col}" stroke-width="${shown > 0.5 ? 2 : 1}" opacity="${r1((0.45 + 0.55 * shown) * 100) / 100}"/>`;
       out += text(x0 + w / 2, y0 + 34, t.id, { anchor: "middle", fill: shown > 0.5 ? col : C.faint, size: 13, weight: 700 });
       out += text(x0 + w / 2, y0 + 52, shown > 0.5 ? (t.pass ? "pass" : "fail") : "...", { anchor: "middle", fill: shown > 0.5 ? col : C.faint, size: 12 });
-      out += text(x0 + w / 2, y0 + 68, t.label, { anchor: "middle", fill: C.faint, size: 10 });
+      out += text(x0 + w / 2, y0 + 68, t.label, { anchor: "middle", fill: C.muted, size: 10 });
       k++;
     });
   });
@@ -398,8 +399,8 @@ const curve: Render = (p, steps, s) => {
   const all = steps.flatMap((st) => arr(st.yields) ?? []);
   const lo = Math.max(0, Math.floor(Math.min(...all) - 0.5)), hi = Math.ceil(Math.max(...all) + 0.5);
   const x = scale(0, labels.length - 1, PLOT.x0 + 10, PLOT.x1 - 10), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 14);
-  let out = yAxis(lo, hi, y, "%") + labels.map((l, i) => text(x(i), PLOT.y1 + 20, l, { size: 12, anchor: "middle", fill: C.faint })).join("");
-  out += text(PLOT.x1, PLOT.y0 + 4, "Yield by how long the loan lasts", { size: 11, anchor: "end", fill: C.faint });
+  let out = yAxis(lo, hi, y, "%") + labels.map((l, i) => text(x(i), PLOT.y1 + 20, l, { size: 12, anchor: "middle", fill: C.muted })).join("");
+  out += text(PLOT.x1, PLOT.y0 + 4, "Yield by how long the loan lasts", { size: 11, anchor: "end", fill: C.muted });
   if (at(steps, s, "ghost", 0) > 0.01) out += `<path d="${smooth(first.map((v, i) => [x(i), y(v)]))}" fill="none" stroke="${C.faint}" stroke-width="1.5" stroke-dasharray="4 4" opacity=".7"/>`;
   const slope = ys[ys.length - 1] - ys[0];
   const col = slope > 0.25 ? C.blue : slope < -0.25 ? C.bad : C.warn;
@@ -429,7 +430,7 @@ const bars: Render = (p, steps, s) => {
     const top = Math.min(y(v), y(0)), h = Math.abs(y(v) - y(0));
     out += `<rect x="${r1(x0)}" y="${r1(top)}" width="${r1(bw)}" height="${r1(Math.max(h, 0.5))}" rx="4" fill="${col}" opacity=".85"/>`;
     if (Math.abs(v) > (hi - lo) * 0.004) out += text(x0 + bw / 2, v >= 0 ? top - 6 : top + h + 15, unit === "$" ? fmt(v, "$") : `${v.toFixed(Math.abs(v) < 10 ? 1 : 0)}${unit}`, { anchor: "middle", fill: C.text, size: 12, weight: 600 });
-    out += text(x0 + bw / 2, PLOT.y1 + 20, labels[i], { anchor: "middle", fill: C.faint, size: 11 });
+    out += text(x0 + bw / 2, PLOT.y1 + 20, labels[i], { anchor: "middle", fill: C.muted, size: 11 });
   });
   const label = str(steps, s, "label");
   if (label) out += text(PLOT.x0 + 4, PLOT.y0 + 2, label, { fill: C.text, size: 13, weight: 600 });
@@ -499,8 +500,8 @@ const event: Render = (p, steps, s) => {
   const x = scale(-win, win, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 14);
   let out = yAxis(lo, hi, y, "") + `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(0))}" y2="${r1(y(0))}" stroke="${C.faint}" opacity=".6"/>`;
   out += `<line x1="${r1(x(0))}" x2="${r1(x(0))}" y1="${PLOT.y0 + 10}" y2="${PLOT.y1}" stroke="${C.warn}" stroke-dasharray="3 3"/>` + text(x(0) + 6, PLOT.y0 + 20, "News day", { fill: C.warn, size: 12 });
-  out += text(PLOT.x0, PLOT.y1 + 20, `${win} days before`, { size: 11, fill: C.faint }) + text(PLOT.x1, PLOT.y1 + 20, `${win} days after`, { size: 11, fill: C.faint, anchor: "end" });
-  out += text(PLOT.x0 - 8, PLOT.y0 + 8, "moves", { size: 10, fill: C.faint, anchor: "end" });
+  out += text(PLOT.x0, PLOT.y1 + 20, `${win} days before`, { size: 11, fill: C.muted }) + text(PLOT.x1, PLOT.y1 + 20, `${win} days after`, { size: 11, fill: C.muted, anchor: "end" });
+  out += text(PLOT.x0 - 8, PLOT.y0 + 8, "moves", { size: 10, fill: C.muted, anchor: "end" });
   if (band > 0.01) {
     // Random days: no effect, so their average stays near zero within a band that narrows with more events.
     const w = (1.96 * vol * 0.35) / Math.sqrt(n);
@@ -526,7 +527,7 @@ const leverage: Render = (p, steps, s) => {
   const lo = Math.min(...price, 60) * 0.95, hi = Math.max(...price) * 1.04;
   const x = scale(0, days - 1, PLOT.x0, PLOT.x1), y = scale(lo, hi, PLOT.y1, PLOT.y0 + 16);
   let out = yAxis(lo, hi, y, "$") + xLabels(["Day 1", `Day ${days}`]);
-  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(100))}" y2="${r1(y(100))}" stroke="${C.faint}" stroke-dasharray="3 4"/>` + text(PLOT.x0 + 4, y(100) - 6, "Bought at $100", { size: 11, fill: C.faint });
+  out += `<line x1="${PLOT.x0}" x2="${PLOT.x1}" y1="${r1(y(100))}" y2="${r1(y(100))}" stroke="${C.faint}" stroke-dasharray="3 4"/>` + text(PLOT.x0 + 4, y(100) - 6, "Bought at $100", { size: 11, fill: C.muted });
   const hit = liq > lo ? price.findIndex((v) => v <= liq) : -1;
   const end = hit >= 0 ? hit + 1 : days;
   out += poly(price.slice(0, end).map((v, i) => [x(i), y(v)]), C.blue, { width: 2.2 });
@@ -562,7 +563,7 @@ const jcurve: Render = (p, steps, s) => {
     if (grow <= 0) continue;
     if (calls[i]) out += `<rect x="${r1(cx(i) - bw / 2)}" y="${r1(y(0))}" width="${r1(bw)}" height="${r1(y(-calls[i] * grow) - y(0))}" rx="3" fill="${C.bad}" opacity=".75"/>`;
     if (dists[i]) out += `<rect x="${r1(cx(i) - bw / 2)}" y="${r1(y(dists[i] * grow))}" width="${r1(bw)}" height="${r1(y(0) - y(dists[i] * grow))}" rx="3" fill="${C.good}" opacity=".75"/>`;
-    out += text(cx(i), PLOT.y1 + 20, `Y${i + 1}`, { anchor: "middle", size: 11, fill: C.faint });
+    out += text(cx(i), PLOT.y1 + 20, `Y${i + 1}`, { anchor: "middle", size: 11, fill: C.muted });
   }
   const k = Math.max(1, Math.floor(m));
   out += poly(cum.slice(0, k).map((v, i) => [cx(i), y(v)]), C.warn, { width: 2.5 });
@@ -595,7 +596,7 @@ const seesaw: Render = (p, steps, s) => {
   out += text(cx, 40, `1 ${base} = ${rate.toFixed(2)} ${quote}`, { anchor: "middle", fill: C.text, size: 20, weight: 700 });
   const label = str(steps, s, "label");
   if (label) out += text(cx, 66, label, { anchor: "middle", fill: C.muted, size: 13 });
-  out += text(cx, 250, `Higher number: the ${base} buys more ${quote}`, { anchor: "middle", fill: C.faint, size: 11 });
+  out += text(cx, 250, `Higher number: the ${base} buys more ${quote}`, { anchor: "middle", fill: C.muted, size: 11 });
   return out;
 };
 

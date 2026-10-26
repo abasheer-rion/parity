@@ -18,6 +18,7 @@ import "./lib/scrollRegions";
 import "./a11y.css";
 import { startRum } from "./lib/rum";
 import { isDesktop } from "./desktop/bridge";
+import "./lib/a11y/scrollRegions";
 
 startSmoothScroll();
 startPwa();

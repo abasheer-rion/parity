@@ -78,7 +78,7 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
   const open = controlled ?? own;
   const set = useCallback((v: boolean) => { if (controlled == null) setOwn(v); onOpenChange?.(v); }, [controlled, onOpenChange]);
   const anchor = useRef<HTMLSpanElement>(null);
-  const float = useRef<HTMLDivElement>(null);
+  const float = useRef<HTMLSpanElement>(null);
   const id = useId();
   const p = usePresence(open, "dur-1");
   useAnchored(p.mounted, anchor, float, placement, 8);
@@ -97,10 +97,12 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
     <span className="ui-pop-anchor" ref={anchor} onClick={() => set(!open)}>
       {withAria(trigger(open), { "aria-haspopup": "dialog", "aria-expanded": open, "aria-controls": open ? id : undefined })}
       {p.mounted && (
-        <div ref={float} id={id} className="ui-popover ui-float" data-state={p.state} role="dialog" aria-label={label} tabIndex={-1}
+        // A span (shown as a block by its fixed position), so a popover can sit inside a line
+        // of text, a <p>, without breaking the page's structure.
+        <span ref={float} id={id} className="ui-popover ui-float" data-state={p.state} role="dialog" aria-label={label} tabIndex={-1}
           style={width ? { width } : undefined} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
           {typeof children === "function" ? children(close) : children}
-        </div>
+        </span>
       )}
     </span>
   );

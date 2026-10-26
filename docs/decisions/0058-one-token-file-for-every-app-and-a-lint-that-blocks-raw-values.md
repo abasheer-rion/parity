@@ -50,5 +50,6 @@ Every colour, text size, gap, corner, shadow, layer and animation speed on Parit
 
 - [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
+- [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

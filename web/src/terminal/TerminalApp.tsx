@@ -369,6 +369,7 @@ function TermShell() {
           </div>
         </nav>
         <main id="main" tabIndex={-1} className="term-main">
+          {missing === null && <h1 className="sr-only">Parity Terminal, {WS_BY_ID[wsId]?.label ?? wsId} workspace</h1>}
           {missing !== null
             ? <NotFound address={missing} home="#/overview" homeLabel="Overview" body="There is no Terminal workspace at this address. The link may be mistyped, or the page may have moved." />
             : <Workspace key={wsId} ws={ws} setWs={setWs} mobile={mobile} />}

@@ -56,4 +56,5 @@ Every button, field, table and panel on Parity now meets the WCAG 2.2 AA accessi
 ## Referenced by
 
 - [REF-0009: UI library](../reference/0009-ui-library.md)
+- [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
 <!-- backlinks:end -->

@@ -205,7 +205,12 @@ export function ProChart({
       const i = barAtOrBefore(shown, key);
       setHover(i >= 0 ? i : null);
     });
-    return () => { c.remove(); chart.current = null; built.current = { main: null, lines: [], shown: [] }; drawn.current = { lines: [], series: [] }; };
+    // The TradingView credit is a named link with a logo inside; the logo itself is hidden
+    // from screen readers so it is not read as an unnamed picture (WCAG 1.1.1).
+    const hostEl = host.current;
+    const credit = new MutationObserver(() => hostEl.querySelectorAll("#tv-attr-logo svg:not([aria-hidden])").forEach((n) => n.setAttribute("aria-hidden", "true")));
+    credit.observe(hostEl, { childList: true, subtree: true });
+    return () => { credit.disconnect(); c.remove(); chart.current = null; built.current = { main: null, lines: [], shown: [] }; drawn.current = { lines: [], series: [] }; };
   }, []);
 
   // Build every series whenever the data or the settings change.
@@ -410,12 +415,17 @@ export function ProChart({
   const bar = shown[i];
   const prev = shown[i - 1];
   const chg = bar && prev ? (bar.close / prev.close - 1) * 100 : null;
+  // The chart in words for screen readers (WCAG 1.1.1): its span, last close, high and low.
+  const summary = shown.length
+    ? `${label}, ${shown.length} bars from ${shown[0].time} to ${shown[shown.length - 1].time}. Last close ${fmt(shown[shown.length - 1].close, digits)}. High ${fmt(Math.max(...shown.map((b) => b.high)), digits)}, low ${fmt(Math.min(...shown.map((b) => b.low)), digits)}.`
+    : `${label}, no data yet.`;
 
   return (
     <div ref={frame} className={`pc ${full ? "pc-full" : ""} ${fill ? "pc-fill" : ""} ${tool !== "none" ? "pc-drawing" : ""}`}>
       {toolbar && <div className="pc-toolbar">{toolbar}<span className="pc-spacer" /><IconButton icon={full ? "close" : "external"} label={full ? "Leave fullscreen" : "Fullscreen"} onClick={toggleFull} /></div>}
       <div ref={stage} className="pc-stage" style={{ height: full || fill ? undefined : totalHeight }}>
         <div ref={host} className="pc-host" />
+        <p className="sr-only">{summary}</p>
         <div className="pc-legend" aria-live="off">
           <div className="pc-legend-row">
             <strong>{label}</strong>

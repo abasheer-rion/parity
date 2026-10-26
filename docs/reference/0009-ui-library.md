@@ -180,6 +180,7 @@ What each part does:
 - [DEC-0058: One token file for every app and a lint that blocks raw values](../decisions/0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - [REF-0023: Motion system](0023-motion-system.md)
+- [REF-0026: Accessibility audit, WCAG 2.2 AA](0026-accessibility-audit-wcag-2-2-aa.md)
 - [LOG-0005: Ayan work log, site rebuild, research expansion and sign-in](../log/2026-10-21-ayan-work-log-site-rebuild-research-expansion-and-sign-in.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
