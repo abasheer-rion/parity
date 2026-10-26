@@ -10,7 +10,7 @@ const settings = require("../electron/settings");
 const workspace = require("../electron/workspace");
 const { parseOpenInput, shareUrl, isAuthPath } = require("../electron/routes");
 
-const O = "https://parity.endyland.com";
+const O = "https://paritytrading.app";
 const key = (code, mods = {}) => ({ type: "keyDown", code, meta: false, control: false, alt: false, shift: false, ...mods });
 
 test("shortcuts use Cmd on a Mac and Ctrl on Windows", () => {
@@ -87,22 +87,22 @@ test("state reads the 0.1.x window file once and keeps workspaces", () => {
 });
 
 test("Open link accepts Parity addresses in every form and nothing else", () => {
-  assert.equal(parseOpenInput("https://parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
-  assert.equal(parseOpenInput("parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
-  assert.equal(parseOpenInput("http://trade.endyland.com/#/alerts", O), "/trade/#/alerts");
+  assert.equal(parseOpenInput("https://paritytrading.app/s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(parseOpenInput("paritytrading.app/s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(parseOpenInput("http://trade.paritytrading.app/#/alerts", O), "/trade/#/alerts");
   assert.equal(parseOpenInput("/s/fx_carry", O), "/app/#/strategy/fx_carry");
   assert.equal(parseOpenInput("v/AbCdEfGhIjKl", O), "/v/AbCdEfGhIjKl");
   assert.equal(parseOpenInput("parity://trade/#/chart?s=fx.EUR", O), "/trade/#/chart?s=fx.EUR");
-  assert.equal(parseOpenInput("  https://sim.endyland.com/#/fx  ", O), "/sim/#/fx");
+  assert.equal(parseOpenInput("  https://sim.paritytrading.app/#/fx  ", O), "/sim/#/fx");
   for (const bad of ["evil.example/x", "https://evil.example/", "javascript:alert(1)", "hello world", "", null]) {
     assert.equal(parseOpenInput(bad, O), null, String(bad));
   }
 });
 
 test("Copy link gives the shareable address", () => {
-  assert.equal(shareUrl("/app/#/strategy/fx_carry", O), "https://parity.endyland.com/s/fx_carry");
-  assert.equal(shareUrl("/trade/#/chart?s=fx.EUR&tf=D", O), "https://trade.endyland.com/#/chart?s=fx.EUR&tf=D");
-  assert.equal(shareUrl("/research/#/docs", O), "https://parity.endyland.com/research/#/docs");
+  assert.equal(shareUrl("/app/#/strategy/fx_carry", O), "https://paritytrading.app/s/fx_carry");
+  assert.equal(shareUrl("/trade/#/chart?s=fx.EUR&tf=D", O), "https://trade.paritytrading.app/#/chart?s=fx.EUR&tf=D");
+  assert.equal(shareUrl("/research/#/docs", O), "https://paritytrading.app/research/#/docs");
 });
 
 test("the sign-in pages are recognised for the log-in wall", () => {
@@ -130,7 +130,7 @@ test("the build signs and notarizes only when the secrets exist", () => {
   assert.equal(full.mac.notarize, true);
   assert.equal(full.mac.identity, undefined);
   assert.equal(full.extraMetadata.parity.signed, true);
-  assert.equal(full.publish[0].url, "https://parity.endyland.com/desktop/updates/");
+  assert.equal(full.publish[0].url, "https://paritytrading.app/desktop/updates/");
   assert.ok(!/\s/.test(full.nsis.artifactName), "the Windows installer name has no spaces");
   assert.equal(plain.dmg.sign, false);
   assert.equal(full.dmg.sign, true, "a signed build signs its disk images too");

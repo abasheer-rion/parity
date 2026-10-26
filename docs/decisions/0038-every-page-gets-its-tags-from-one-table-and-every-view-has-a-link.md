@@ -86,6 +86,7 @@ No sitemap submission and no indexing requests. Public pages get no `noindex`. T
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
+- [DEC-0067: Parity moves to paritytrading.app](0067-parity-moves-to-paritytrading-app.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)

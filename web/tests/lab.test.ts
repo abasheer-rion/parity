@@ -1,5 +1,5 @@
 // Parity Workbench (DEC-0043): old product and research links land on the same view with
-// the same filters, the address helpers point at lab.endyland.com, and Try settings reads
+// the same filters, the address helpers point at lab.paritytrading.app, and Try settings reads
 // and writes its strategy and settings in the address.
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { createElement } from "react";
@@ -39,10 +39,10 @@ describe("old links", () => {
     expect([...LAB_ROUTES].sort()).toEqual(["compare", "edges", "lab", "scenarios", "search"]);
   });
 
-  it("opens lab.endyland.com on endyland.com and /lab/ elsewhere", () => {
-    const onSite = /(^|\.)endyland\.com$/.test(window.location.hostname);
-    expect(labUrl()).toBe(onSite ? "https://lab.endyland.com/" : "/lab/");
-    expect(labUrl("search?q=carry")).toBe(onSite ? "https://lab.endyland.com/#/search?q=carry" : "/lab/#/search?q=carry");
+  it("opens lab.paritytrading.app on paritytrading.app and /lab/ elsewhere", () => {
+    const onSite = /(^|\.)paritytrading\.app$/.test(window.location.hostname);
+    expect(labUrl()).toBe(onSite ? "https://lab.paritytrading.app/" : "/lab/");
+    expect(labUrl("search?q=carry")).toBe(onSite ? "https://lab.paritytrading.app/#/search?q=carry" : "/lab/#/search?q=carry");
     expect(appLink("research", "#/edges/multiple-testing")).toBe(labUrl("edges/multiple-testing"));
     expect(appLink("product", "#/scenarios")).toBe(labUrl("whatif"));
   });

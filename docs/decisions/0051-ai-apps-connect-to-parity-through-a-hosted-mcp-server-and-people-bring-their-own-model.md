@@ -105,6 +105,7 @@ Run after owner step 1, on a test account.
 
 - [DEC-0054: The data model is strict, indexed and keeps an append-only trade ledger](0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md)
 - [DEC-0060: A getting started checklist and first-run tours, and no bank details until a broker partner](0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md)
+- [DEC-0067: Parity moves to paritytrading.app](0067-parity-moves-to-paritytrading-app.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](../research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)

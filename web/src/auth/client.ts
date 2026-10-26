@@ -4,10 +4,11 @@
 import { createBrowserClient } from "@supabase/ssr";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { desktop } from "../desktop/bridge";
-import { SITE_DOMAIN } from "../lib/meta";
+import { siteDomainOf } from "../lib/meta";
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./config";
 
-const onSiteDomain = () => window.location.hostname === SITE_DOMAIN || window.location.hostname.endsWith(`.${SITE_DOMAIN}`);
+// The Parity domain this page is on: paritytrading.app, or endyland.com while it redirects (DEC-0067).
+const cookieDomain = () => siteDomainOf(window.location.hostname);
 
 // The desktop app (DEC-0041) loads the live site when online (DEC-0048), and there the
 // session is the site's cookie like in any browser. Offline it shows its bundled copy from
@@ -27,11 +28,11 @@ function desktopClient(): SupabaseClient {
 export const supabase: SupabaseClient = bundledInDesktop() ? desktopClient() : createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   cookieOptions: {
     path: "/",
-    // On the site's domain (endyland.com, from src/lib/site.json) the session is shared by
-    // the main address, sim.<domain> and trade.<domain>, so opening Sim World or Parity Trade
-    // in its own tab needs no second sign-in. Elsewhere (pages.dev, localhost) the cookie
-    // stays on the one host.
-    ...(onSiteDomain() ? { domain: `.${SITE_DOMAIN}` } : {}),
+    // On the site's domain (paritytrading.app, from src/lib/site.json) the session is shared
+    // by the main address and every app's subdomain, so opening one in its own tab needs no
+    // second sign-in. An old domain (endyland.com) keeps its own shared cookie until its
+    // addresses redirect. Elsewhere (pages.dev, localhost) the cookie stays on the one host.
+    ...(cookieDomain() ? { domain: `.${cookieDomain()}` } : {}),
     sameSite: "lax",
     secure: window.location.protocol === "https:",
     maxAge: 60 * 60 * 24 * 30,

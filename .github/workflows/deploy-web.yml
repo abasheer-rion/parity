@@ -115,7 +115,7 @@ jobs:
         run: python3 ../scripts/bake_front_stats.py dist
       - name: Save the live SEO manifest (so IndexNow hears only what changed)
         if: github.event_name != 'pull_request'
-        run: curl -fsS --max-time 20 https://parity.endyland.com/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
+        run: curl -fsS --max-time 20 https://paritytrading.app/seo-manifest.json -o ../seo-manifest.prev.json || echo "no live manifest yet"
       - name: Deploy the live fan-out worker (DEC-0056)
         if: github.event_name != 'pull_request' && env.HAS_WORKERS_TOKEN == 'true'
         uses: cloudflare/wrangler-action@v4

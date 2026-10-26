@@ -1,4 +1,4 @@
-// Parity Terminal (DEC-0023): the full-screen site at /sim/ (sim.endyland.com), now a
+// Parity Terminal (DEC-0023): the full-screen site at /sim/ (sim.paritytrading.app), now a
 // dense, keyboard-first market terminal of its own. A command bar on top, workspaces of
 // tiled panels, a ticker tape along the bottom. Sim World's tabs live on as panels.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";

@@ -1,7 +1,7 @@
 # Builds Parity for Mac and Windows (DEC-0041, DEC-0049) and attaches the installers and the
 # update files to a draft GitHub release. Run it from the Actions tab, or push a tag named
 # desktop-v<version>. Publishing the release is what ships it: the public update feed at
-# https://parity.endyland.com/desktop/updates/ serves the newest published desktop release
+# https://paritytrading.app/desktop/updates/ serves the newest published desktop release
 # (web/src/lib/desktopFeed.ts).
 #
 # Signing (desktop/electron-builder.config.js) happens only when these secrets exist; without

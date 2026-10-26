@@ -5,7 +5,7 @@
 # account is added as a user, the Google part says so and the job still passes.
 # Secrets: GSC_SERVICE_ACCOUNT_JSON (service account key for Search Console).
 # Variables (optional): GSC_SITE_URLS, comma list of properties to try
-#   (default sc-domain:endyland.com,https://parity.endyland.com/).
+#   (default sc-domain:paritytrading.app,https://paritytrading.app/).
 name: SEO report
 
 on:

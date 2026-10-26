@@ -1,5 +1,5 @@
 // Parity Trade (DEC-0040): the trading workspace as its own full-screen app at /trade/
-// (trade.endyland.com). Its own rail, top bar, settings and keys; a chart grid with an
+// (trade.paritytrading.app). Its own rail, top bar, settings and keys; a chart grid with an
 // order ticket and watchlist beside it and the account dock under it. Everything acts on
 // the demo account with delayed data. One Back button returns to Parity.
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";

@@ -12,7 +12,7 @@
 //     the run stops unless the plan fits BUDGET (default 8000).
 import k6run from "k6/execution";
 
-export const PROD = /(^|\.)endyland\.com$/;
+export const PROD = /(^|\.)(endyland\.com|paritytrading\.app)$/;
 
 export function base() {
   const b = (__ENV.BASE || "").replace(/\/$/, "");

@@ -1,5 +1,5 @@
 // Parity Workbench (DEC-0043): Try settings, What if, Compare, Strategy search and the Edge
-// Lab as one full-screen tool at /lab/ (lab.endyland.com). Its own rail, top bar, settings
+// Lab as one full-screen tool at /lab/ (lab.paritytrading.app). Its own rail, top bar, settings
 // and keys. Each view keeps its state in the address, so Copy link reopens it as it is.
 // Research numbers are shown read only and nothing done here is written to the research
 // side (DEC-0015). One Back button returns to Parity.

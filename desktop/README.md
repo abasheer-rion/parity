@@ -1,6 +1,6 @@
 # Parity for Mac and Windows
 
-The whole Parity site, loaded live so it always matches parity.endyland.com: the front page and Verify, the product app (Strategies), Research, Parity Terminal, Parity Trade, Academy and Workbench. Every page uses the whole window, under a slim bar with a menu button. Built with Electron and electron-builder ([DEC-0041](../docs/decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md), [DEC-0048](../docs/decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md), [DEC-0049](../docs/decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)). Research and education only. Not investment advice. Trading in the app uses a demo account with delayed data and no real money.
+The whole Parity site, loaded live so it always matches paritytrading.app: the front page and Verify, the product app (Strategies), Research, Parity Terminal, Parity Trade, Academy and Workbench. Every page uses the whole window, under a slim bar with a menu button. Built with Electron and electron-builder ([DEC-0041](../docs/decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md), [DEC-0048](../docs/decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md), [DEC-0049](../docs/decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)). Research and education only. Not investment advice. Trading in the app uses a demo account with delayed data and no real money.
 
 ## Install
 
@@ -44,14 +44,14 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 - **The menu bar item** (the tray on Windows) has quick actions and your active Trade watchlist's prices.
 - **Trade alerts** show as notifications. Turn on "Keep running when windows close" in Settings to get them with every window closed.
 - **A key to show or hide Parity** from any app can be set in Settings. It is off until you set one.
-- **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to parity.endyland.com and its sim., trade., academy. and lab. addresses stay in the app; other links open in your browser.
+- **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to paritytrading.app and its sim., trade., academy. and lab. addresses stay in the app, and so do links to the old parity.endyland.com addresses; other links open in your browser.
 - **Offline,** the app shows the copy of the site it was built with, under a line that says "Offline, showing saved copy", and goes back to the live site when the connection returns.
 - **Never a black window.** A page that stops drawing is drawn again; one that stays empty reloads once, then shows Could not open with Retry. Problems are noted in a small log: `~/Library/Logs/Parity/parity.log` on a Mac, `%APPDATA%\Parity\logs\parity.log` on Windows, with no passwords or sign-in tokens ([DEC-0058](../docs/decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)).
-- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://parity.endyland.com/legal/cookies/#desktop) has the details.
+- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://paritytrading.appom/legal/cookies/#desktop) has the details.
 
 ## Updates
 
-Pages are always current. For the app itself, Parity checks `https://parity.endyland.com/desktop/updates/` 15 seconds after launch and every 6 hours (Settings can turn it off; Parity, Check for updates checks now). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
+Pages are always current. For the app itself, Parity checks `https://paritytrading.appom/desktop/updates/` 15 seconds after launch and every 6 hours (Settings can turn it off; Parity, Check for updates checks now). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
 
 - Windows: the update downloads in the background and Parity asks to restart.
 - Mac, signed and notarized: the same.
@@ -65,7 +65,7 @@ These need the owner's accounts. Nothing here is created by the build.
 
 1. On GitHub, Settings, Developer settings, Fine-grained tokens, Generate new token: resource owner `abasheer-rion`, only the repository `abasheer-rion/parity`, permission Contents: Read-only, an expiry you will remember.
 2. In Cloudflare, Workers & Pages, `parity-research`, Settings, Variables and Secrets, Production: add a secret named `DESKTOP_RELEASES_TOKEN` with that token.
-3. Redeploy the site (any merge to main does it). `https://parity.endyland.com/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
+3. Redeploy the site (any merge to main does it). `https://paritytrading.appom/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
 
 **2. Sign and notarize the Mac app (five secrets).** With the Apple Developer account (another company's account works; its name shows as the developer):
 

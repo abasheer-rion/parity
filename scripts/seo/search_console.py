@@ -8,9 +8,9 @@ docs/guides "Google Search Console and the SEO pipeline"). The key is read from 
 only and never printed or written anywhere. Needs `pip install google-auth requests`.
 
 Which Search Console property to use: GSC_SITE_URLS, a comma list tried in order. The default is
-the Domain property for endyland.com, then the URL-prefix property for the Parity address:
-    sc-domain:endyland.com,https://parity.endyland.com/
-For a Domain property the numbers are filtered to pages under https://parity.endyland.com/.
+the Domain property for paritytrading.app, then the URL-prefix property for the Parity address:
+    sc-domain:paritytrading.app,https://paritytrading.app/
+For a Domain property the numbers are filtered to pages under https://paritytrading.app/.
 
 It always exits 0 and always writes the report, with "status" saying what happened:
   ok           the sitemap was submitted and the numbers were pulled
@@ -29,10 +29,10 @@ import sys
 import urllib.parse
 from pathlib import Path
 
-SITE = os.environ.get("SITE_URL", "https://parity.endyland.com").rstrip("/")
+SITE = os.environ.get("SITE_URL", "https://paritytrading.app").rstrip("/")
 API = "https://www.googleapis.com/webmasters/v3"
 SCOPE = "https://www.googleapis.com/auth/webmasters"
-DEFAULT_PROPERTIES = f"sc-domain:endyland.com,{SITE}/"
+DEFAULT_PROPERTIES = f"sc-domain:paritytrading.app,{SITE}/"
 
 
 def write(out: Path, report: dict) -> int:

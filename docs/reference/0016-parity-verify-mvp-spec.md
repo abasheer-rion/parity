@@ -163,7 +163,7 @@ Only on request, after the result is shown. The person picks a name for the reco
 
 - a public page at `/v/<id>`, where `<id>` is a random 12-character string, not guessable or sequential;
 - an image (SVG, 320 by 80) and an embed snippet;
-- a plain-text line for social posts: "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. parity.endyland.com/v/<id>".
+- a plain-text line for social posts: "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. paritytrading.app/v/<id>".
 
 The public page shows the verdict, the five cards, the date it was checked, the method version and the SHA-256 hash of the uploaded file. Anyone with the same file can check that the hash matches.
 

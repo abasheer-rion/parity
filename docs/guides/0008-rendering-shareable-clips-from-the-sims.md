@@ -14,7 +14,7 @@ related: [DEC-0035, GDE-0007]
 
 ## In plain words
 
-One command turns the sims into short videos and GIFs for TikTok, Reels, Shorts and other feeds. Each clip has the Parity wordmark, burned-in captions, the data and its period on screen, the line "Hypothetical, educational, not investment advice." in every frame, and an end card with parity.endyland.com. Nothing is posted for you: download the files and post them yourself. The decision behind this is [DEC-0035](../decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md).
+One command turns the sims into short videos and GIFs for TikTok, Reels, Shorts and other feeds. Each clip has the Parity wordmark, burned-in captions, the data and its period on screen, the line "Hypothetical, educational, not investment advice." in every frame, and an end card with paritytrading.app. Nothing is posted for you: download the files and post them yourself. The decision behind this is [DEC-0035](../decisions/0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md).
 
 ## Summary
 

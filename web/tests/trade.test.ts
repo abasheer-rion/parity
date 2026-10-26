@@ -48,10 +48,10 @@ describe("old #/trade links", () => {
     expect(tradeHashFor(from)).toBe(to);
   });
 
-  it("opens trade.endyland.com on endyland.com and /trade/ elsewhere", () => {
-    const onSite = /(^|\.)endyland\.com$/.test(window.location.hostname);
-    expect(tradeUrl()).toBe(onSite ? "https://trade.endyland.com/" : "/trade/");
-    expect(tradeUrl("portfolio")).toBe(onSite ? "https://trade.endyland.com/#/portfolio" : "/trade/#/portfolio");
+  it("opens trade.paritytrading.app on paritytrading.app and /trade/ elsewhere", () => {
+    const onSite = /(^|\.)paritytrading\.app$/.test(window.location.hostname);
+    expect(tradeUrl()).toBe(onSite ? "https://trade.paritytrading.app/" : "/trade/");
+    expect(tradeUrl("portfolio")).toBe(onSite ? "https://trade.paritytrading.app/#/portfolio" : "/trade/#/portfolio");
   });
 });
 

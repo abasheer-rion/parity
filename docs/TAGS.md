@@ -399,6 +399,7 @@ Hosting, CI/CD, database and costs.
 - [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
+- [DEC-0067: Parity moves to paritytrading.app](decisions/0067-parity-moves-to-paritytrading-app.md)
 - [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)

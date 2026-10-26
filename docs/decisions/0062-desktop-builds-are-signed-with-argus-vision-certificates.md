@@ -39,4 +39,5 @@ From desktop 0.2.2 the Mac app is signed with Argus Vision's Apple Developer ID 
 
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
 - [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
+- [DEC-0067: Parity moves to paritytrading.app](0067-parity-moves-to-paritytrading-app.md)
 <!-- backlinks:end -->

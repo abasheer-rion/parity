@@ -70,7 +70,7 @@ export function challenge(origin: string, error?: "invalid_token"): string {
 
 /** Origins that may call /mcp from a browser. Server-side apps (Claude, ChatGPT) send no
  *  Origin at all. The spec requires refusing a present but unexpected Origin. */
-export function originAllowed(origin: string | null, siteDomain: string, extra: string[] = []): boolean {
+export function originAllowed(origin: string | null, siteDomain: string | string[], extra: string[] = []): boolean {
   if (!origin) return true;
   let u: URL;
   try { u = new URL(origin); } catch { return false; }
@@ -78,5 +78,6 @@ export function originAllowed(origin: string | null, siteDomain: string, extra: 
   const host = u.hostname;
   if (u.protocol === "http:" && (host === "localhost" || host === "127.0.0.1")) return true;
   if (u.protocol !== "https:") return false;
-  return host === siteDomain || host.endsWith(`.${siteDomain}`) || host === "parity-research.pages.dev" || host.endsWith(".parity-research.pages.dev");
+  const domains = Array.isArray(siteDomain) ? siteDomain : [siteDomain];
+  return domains.some((d) => host === d || host.endsWith(`.${d}`)) || host === "parity-research.pages.dev" || host.endsWith(".parity-research.pages.dev");
 }

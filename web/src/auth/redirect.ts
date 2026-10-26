@@ -5,7 +5,7 @@
 // World share the sign-in there). Everything else falls back to the app. This file has no
 // browser globals at import time, so the tests can run it directly.
 
-import { ORIGIN, SITE_DOMAIN } from "../lib/meta";
+import { ORIGIN, SITE_DOMAIN, siteDomainOf } from "../lib/meta";
 
 /** Pages that must never be a "next" target, or signing in would loop back to them. */
 const AUTH_PAGES = /^\/(login|signup|reset|verify)(\/|$)/;
@@ -29,16 +29,18 @@ function originOf(url: URL): string {
   return url.origin !== "null" ? url.origin : `${url.protocol}//${url.host}`;
 }
 
-/** True for https://endyland.com and https://<anything>.endyland.com on the default port. */
+/**
+ * True for the site's domain and any subdomain of it, over https on the default port, and
+ * the same on an old domain still being moved from (endyland.com, DEC-0067).
+ */
 export function isSiteHost(url: URL): boolean {
-  const host = url.hostname.toLowerCase();
-  return url.protocol === "https:" && url.port === "" && (host === SITE_DOMAIN || host.endsWith(`.${SITE_DOMAIN}`));
+  return url.protocol === "https:" && url.port === "" && siteDomainOf(url.hostname) !== null;
 }
 
 /**
  * The safe place to go after signing in. Accepts a same-site path ("/research/#/docs",
- * "/sim/") or an https://*.endyland.com address. Returns a path for this site, or a full
- * address for another endyland.com host. Anything else returns `fallback`.
+ * "/sim/") or an https address on a Parity domain. Returns a path for this site, or a full
+ * address for another Parity host. Anything else returns `fallback`.
  */
 export function safeNext(raw: string | null | undefined, at: Here = here(), fallback = DEFAULT_NEXT): string {
   if (!raw) return fallback;

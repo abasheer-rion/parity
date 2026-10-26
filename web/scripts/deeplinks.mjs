@@ -4,7 +4,7 @@
 //
 //   npm run build && npx wrangler pages dev dist --port 8788   (in another terminal)
 //   DEEPLINK_BASE=http://127.0.0.1:8788 npm run deeplinks
-//   DEEPLINK_BASE=https://parity.endyland.com npm run deeplinks   (the live site)
+//   DEEPLINK_BASE=https://paritytrading.app npm run deeplinks   (the live site)
 //
 // Prints one line per check and exits 1 if any fail.
 import { chromium } from "playwright";

@@ -6,8 +6,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../auth/client";
 import { SkipLink } from "../components/SkipLink";
+import { ORIGIN, siteDomainOf } from "../lib/meta";
 
-const MCP_URL = `${window.location.origin}/mcp`;
+// On any Parity host the address to paste is the main one (paritytrading.app/mcp, DEC-0067);
+// previews and local dev show their own.
+const MCP_URL = `${siteDomainOf(window.location.hostname) ? ORIGIN : window.location.origin}/mcp`;
 
 interface Grant { id: string; name: string; uri: string; granted: string; write: boolean }
 

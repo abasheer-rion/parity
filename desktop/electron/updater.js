@@ -1,7 +1,7 @@
 // New versions of the app itself (DEC-0049). Pages load live, so this is only for changes to
 // the app around them.
 //
-// The feed is public: https://parity.endyland.com/desktop/updates/, which serves the newest
+// The feed is public: https://paritytrading.app/desktop/updates/, which serves the newest
 // published desktop release (web/src/lib/desktopFeed.ts). The app checks 15 seconds after
 // launch and every 6 hours while Settings allows it, and from "Check for updates" at any time.
 //
@@ -11,7 +11,7 @@
 //   Mac, not signed  asks to download the new disk image in the browser instead.
 const { app, dialog, shell } = require("electron");
 
-const FEED = (process.env.PARITY_UPDATE_URL || "https://parity.endyland.com/desktop/updates/").replace(/\/?$/, "/");
+const FEED = (process.env.PARITY_UPDATE_URL || "https://paritytrading.app/desktop/updates/").replace(/\/?$/, "/");
 const EVERY = 6 * 60 * 60 * 1000;
 
 /** True when the release build signed and notarized this copy (electron-builder.config.js sets it). */

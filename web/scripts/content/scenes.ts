@@ -17,7 +17,7 @@ export const C = {
   blue: RAW["palette-blue-300"], good: RAW["color-positive"], bad: RAW["color-negative"], warn: RAW["color-warning"], violet: RAW["palette-violet-400"], cyan: RAW["palette-cyan-400"], pink: RAW["palette-term-pink"],
 };
 export const RISK = "Hypothetical, educational, not investment advice.";
-export const SITE = "parity.endyland.com";
+export const SITE = "paritytrading.app";
 
 export interface Layout { w: number; h: number; vertical: boolean }
 

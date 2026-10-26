@@ -2,8 +2,8 @@
 // so `npm test` can run them.
 //
 // Every place in the app is named by an in-app path such as /trade/#/alerts. When online the
-// path opens on the live site (liveUrl: parity.endyland.com, or the front page of
-// sim., trade., academy. or lab.endyland.com); when offline it opens in the copy of the site
+// path opens on the live site (liveUrl: paritytrading.app, or the front page of
+// sim., trade., academy. or lab.paritytrading.app); when offline it opens in the copy of the site
 // bundled at app://parity/. The website's addresses and parity:// links all map onto these
 // paths (toAppPath); anything else is an outside address and opens in the browser.
 const fs = require("node:fs");
@@ -11,11 +11,31 @@ const path = require("node:path");
 
 const APP_ORIGIN = "app://parity";
 
-/** The website's hosts and the path each one's front page is (src/lib/site.json gives the domain). */
-function siteHosts(origin) {
+/**
+ * Domains the website answered on before, kept while their addresses redirect (DEC-0067):
+ * links pasted from them still open inside the app. Mirrors "legacy" in src/lib/site.json
+ * (a test keeps the two equal).
+ */
+const LEGACY_DOMAINS = [{ domain: "endyland.com", main: "parity.endyland.com" }];
+
+/** The hosts of one domain and the path each one's front page is. */
+function hostsOn(main, domain) {
+  return { [main]: "/", [`sim.${domain}`]: "/sim/", [`trade.${domain}`]: "/trade/", [`academy.${domain}`]: "/academy/", [`lab.${domain}`]: "/lab/" };
+}
+
+/** The website's own hosts and the path each one's front page is (src/lib/site.json gives the domain). */
+function primaryHosts(origin) {
   const host = new URL(origin).host;
   const domain = host.split(".").length > 2 ? host.split(".").slice(1).join(".") : host;
-  return { [host]: "/", [`sim.${domain}`]: "/sim/", [`trade.${domain}`]: "/trade/", [`academy.${domain}`]: "/academy/", [`lab.${domain}`]: "/lab/" };
+  return hostsOn(host, domain);
+}
+
+/** Every host the app treats as the website: its own, www. on an apex, and the old domains. */
+function siteHosts(origin) {
+  const host = new URL(origin).host;
+  const www = host.split(".").length === 2 ? { [`www.${host}`]: "/" } : {};
+  const legacy = LEGACY_DOMAINS.filter((l) => l.main !== host).map((l) => hostsOn(l.main, l.domain));
+  return Object.assign({}, ...legacy, www, primaryHosts(origin));
 }
 
 /** Short links the website's functions answer: /s/<strategy> and /sim/<workspace>. */
@@ -80,7 +100,7 @@ function isTrusted(input, origin) {
 function liveUrl(appPath, origin) {
   const u = new URL(appPath || "/", "https://placeholder.invalid");
   const tail = `${u.search}${u.hash}`;
-  for (const [host, front] of Object.entries(siteHosts(origin))) {
+  for (const [host, front] of Object.entries(primaryHosts(origin))) {
     if (front !== "/" && (u.pathname === front || u.pathname === front.slice(0, -1))) return `https://${host}/${tail}`;
   }
   return `${origin.replace(/\/$/, "")}${u.pathname}${tail}`;
@@ -171,4 +191,4 @@ function resolveRequest(root, pathname) {
   return { missing: true };
 }
 
-module.exports = { APP_ORIGIN, siteHosts, trustedOrigins, isTrusted, liveUrl, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest, isAuthPath, shareUrl, parseOpenInput };
+module.exports = { APP_ORIGIN, LEGACY_DOMAINS, primaryHosts, siteHosts, trustedOrigins, isTrusted, liveUrl, expandShortLink, toAppPath, activeSection, visibleSections, resolveRequest, isAuthPath, shareUrl, parseOpenInput };

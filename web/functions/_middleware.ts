@@ -10,7 +10,7 @@
 // The desktop app sends the same token as "Authorization: Bearer" (DEC-0041).
 // No secret is needed. See auth/README.md.
 import { createRemoteJWKSet, jwtVerify } from "jose";
-import { HOST } from "../src/lib/meta";
+import { mainHostFor, siteDomainOf, SITE_DOMAIN } from "../src/lib/meta";
 import { wellKnown } from "../src/lib/mcp/wellknown";
 import { appHashRedirect } from "../src/lib/notFound";
 
@@ -33,7 +33,11 @@ const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trad
 // logging in works; the other apps send people back to the main address.
 const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/", academy: "/academy/", lab: "/lab/" };
 const SUBSITE_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
-const MAIN_HOST = HOST; // the site's address, from src/lib/site.json (DEC-0038)
+/** The main address on the request's own Parity domain: paritytrading.app (site.json,
+ *  DEC-0038), or parity.endyland.com for a request still on the old domain (DEC-0067). */
+export function mainHost(hostname: string): string {
+  return mainHostFor(siteDomainOf(hostname) ?? SITE_DOMAIN);
+}
 
 export const onRequest = async ({ request, next }: Context): Promise<Response> => {
   const url = new URL(request.url);
@@ -49,7 +53,7 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
     const others = Object.values(SUBSITES).filter((p) => p !== home).map((p) => p.slice(1, -1));
     const away = new RegExp(`^/(${["app", "research", ...others].join("|")})(/|$)`);
     if (away.test(url.pathname)) {
-      return Response.redirect(`https://${MAIN_HOST}${url.pathname}${url.search}`, 302);
+      return Response.redirect(`https://${mainHost(url.hostname)}${url.pathname}${url.search}`, 302);
     }
     if (url.pathname === "/" || url.pathname === "/index.html") {
       forward = new Request(new URL(`${home}${url.search}`, url).toString(), request);
