@@ -3,7 +3,7 @@
 // loads it, finds the past events that look like a made-up scenario, and summarises
 // what happened next. It looks backwards only: nothing here predicts anything.
 // The matcher mirrors the Python one exactly, so the page and the engine agree.
-import { source } from "./data";
+import { isMissing, source } from "./data";
 
 export type HorizonKey = "1d" | "1w" | "1m" | "3m";
 export type Measure = "pct" | "points" | "bp";
@@ -53,7 +53,7 @@ export async function loadScenarios(): Promise<Loaded> {
   const url = source === "local" ? "/local/scenarios.json" : "/data/scenarios.json";
   try {
     const res = await fetch(url, { cache: "no-cache" });
-    if (res.status === 404) {
+    if (isMissing(res)) {
       return { status: "missing", message: source === "local" ? "Run `parity scenario export` first." : "The scenario file has not been published yet." };
     }
     if (!res.ok) return { status: "error", message: `Could not load ${url} (${res.status}).` };

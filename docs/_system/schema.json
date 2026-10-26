@@ -134,6 +134,24 @@
       ],
       "about": "Facts to look up: definitions, data sources, architecture."
     },
+    "competitor": {
+      "folder": "competitors",
+      "prefix": "CMP",
+      "filename": "^\\d{4}-[a-z0-9]+(-[a-z0-9]+)*\\.md$",
+      "statuses": [
+        "draft",
+        "current",
+        "outdated"
+      ],
+      "sections": [
+        "In plain words",
+        "Summary",
+        "What users say",
+        "UX notes",
+        "What Parity should copy, avoid or beat"
+      ],
+      "about": "One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector."
+    },
     "log": {
       "folder": "log",
       "prefix": "LOG",
@@ -219,6 +237,15 @@
         "natural gas",
         "copper",
         "commodit"
+      ]
+    },
+    "competitors": {
+      "about": "Other trading products, what their users think of them, and what Parity takes from them",
+      "keywords": [
+        "competitor",
+        "competitors",
+        "user reviews",
+        "app store"
       ]
     },
     "crypto": {
@@ -412,15 +439,23 @@
       "academy",
       "auth",
       "catalog",
+      "content",
+      "desktop",
       "docs",
       "engine",
+    "event-graph",
       "ledger",
+      "load",
+      "market-data",
       "registrations",
       "scripts",
       "supabase",
       "web"
     ],
     "unchecked_markdown": [],
+    "site_markdown": [
+      "content/newsroom/"
+    ],
     "generated": [
       "docs/README.md",
       "docs/TAGS.md",

@@ -40,4 +40,5 @@ Write a decision before paying for anything. The usual fixes are to run heavy wo
 
 - [INT-0001: Initial intent](../intent/0001-initial-intent.md)
 - [DEC-0002: Use a free-tier stack of GitHub, Supabase and Cloudflare Pages](../decisions/0002-free-tier-stack.md)
+- [REF-0019: Latency budget and target architecture](0019-latency-budget-and-target-architecture.md)
 <!-- backlinks:end -->

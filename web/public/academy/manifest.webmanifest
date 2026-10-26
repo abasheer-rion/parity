@@ -1,0 +1,19 @@
+{
+  "id": "/academy/",
+  "name": "Parity Academy",
+  "short_name": "Academy",
+  "description": "Short courses on markets and research, each lesson with a step-by-step picture and a quick check. Research and education only.",
+  "lang": "en",
+  "start_url": "/academy/",
+  "scope": "/academy/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#050608",
+  "theme_color": "#050608",
+  "categories": ["education", "finance"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

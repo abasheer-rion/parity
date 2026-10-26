@@ -5,7 +5,7 @@
     {
       "id": "register",
       "title": "Write the idea down before you test it",
-      "text": "Say what the signal is, what it trades, how you will judge it and what counts as failure, before you see any result. Once you have seen a chart, every later choice bends toward it, even when you do not mean it to.",
+      "text": "Say what the signal is, what it trades, how you will judge it and what counts as failure, before you see any result. After you have seen a result, later choices tend to drift toward it.",
       "do": "Every official run is registered first: the plan is written down and the exact code is locked before the run. Only runs in the sealed record count as results.",
       "terms": ["data-snooping"],
       "refs": [],
@@ -15,25 +15,25 @@
       "id": "out-of-sample",
       "title": "Keep some data you have never looked at",
       "text": "A rule built on the past will always look good on that past. Build on one stretch of history, then test once on a stretch you never touched. If you peek at the holdout and change the rule, it is no longer a holdout. The best holdout is time: data that did not exist when you wrote the rule down.",
-      "do": "Our tests check every era and the last five years on their own. We also say plainly that none of this is truly out of sample: only data that arrives after 2026-10-20 is genuinely new, which is why registered strategies keep being tracked.",
+      "do": "Our tests check every era and the last five years on their own. None of this is fully out of sample. Only data that arrives after 2026-10-20 is new, which is why registered strategies keep being tracked.",
       "terms": ["out-of-sample", "overfitting"],
       "refs": ["harvey2015a"],
-      "links": [{ "doc": "REF-0006", "label": "The gauntlet" }]
+      "links": [{ "doc": "REF-0006", "label": "The 11 tests" }]
     },
     {
       "id": "costs",
       "title": "Count every trade's cost, then ask how much cost it can survive",
-      "text": "A rule that trades every day pays the spread and fees every day, and small costs add up to more than most edges earn. Work out the breakeven cost: the cost per trade at which the gain falls to zero. If it is close to what you would really pay, there is no edge.",
+      "text": "A rule that trades every day pays the spread and fees every day. Over a year these small costs add up to more than most edges earn. Work out the breakeven cost: the cost per trade at which the gain falls to zero. If it is close to what you would really pay, there is no edge.",
       "do": "Every backtest charges trading costs, and one of the eleven tests doubles them. Paper factor portfolios pay an estimated yearly cost: 0.5% to 1% for slow factors, 3% for momentum and 10% for short-term reversal.",
       "terms": ["transaction-costs", "break-even-cost", "turnover"],
       "refs": ["novymarx2016"],
-      "links": [{ "doc": "DEC-0014", "label": "Honest costs and timing" }]
+      "links": [{ "doc": "DEC-0014", "label": "Costs and timing fixes" }]
     },
     {
       "id": "multiple-testing",
       "title": "Every variation you try is a trial",
       "text": "Try enough rules and one will look great by luck alone. Changing a window from 20 days to 25 is another trial, and so is a new asset or a new start date. The deflated Sharpe ratio raises the bar for how many tries you made and how widely their results spread.",
-      "do": "Our always-on search tries about 20,000 variations an hour. It keeps every attempt, failed ones included, and recomputes the luck check with the total count. Its finds are leads, not results.",
+      "do": "Our always-on search tries about 20,000 variations an hour. It keeps every attempt, failed ones included, and recomputes the luck check with the total count. Its finds are leads until they are registered and run officially.",
       "terms": ["deflated-sharpe-ratio", "overfitting", "data-snooping"],
       "refs": ["bailey2014a", "harvey2015"],
       "links": [{ "doc": "DEC-0014", "label": "The always-on search" }, { "page": "#/search", "label": "Strategy search" }]
@@ -63,7 +63,7 @@
       "do": "The search rejects any variation that sits in cash 95% or more of the time. A percent change through a zero or negative price earns nothing. Spot gas is used only as a signal until we have futures data.",
       "terms": ["sharpe-ratio"],
       "refs": ["bailey2014"],
-      "links": [{ "doc": "DEC-0014", "label": "Honest costs and timing" }]
+      "links": [{ "doc": "DEC-0014", "label": "Costs and timing fixes" }]
     }
   ],
   "examples": [
@@ -92,7 +92,7 @@
       "id": "cash-only",
       "title": "Variations that hide in cash",
       "lessons": ["too-good", "multiple-testing"],
-      "text": "A variation that is in cash nearly all the time hardly moves. Dividing its small return by its tiny risk gives a huge Sharpe ratio that means nothing. Among thousands of random variations, these float to the top. The search rejects any variation in cash 95% or more of the time.",
+      "text": "A variation that is in cash nearly all the time hardly moves. Dividing its small return by its tiny risk gives a huge Sharpe ratio that means nothing. In a large random search, these end up at the top of the list. The search rejects any variation in cash 95% or more of the time.",
       "doc": "DEC-0014"
     },
     {
@@ -107,6 +107,6 @@
     { "doc": "RES-0011", "label": "Where market edges come from and which survive" },
     { "doc": "DEC-0027", "label": "New edge families" },
     { "doc": "DEC-0014", "label": "A strategy factory and an always-on search" },
-    { "doc": "REF-0006", "label": "The gauntlet" }
+    { "doc": "REF-0006", "label": "The 11 tests" }
   ]
 }

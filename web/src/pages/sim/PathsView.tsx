@@ -68,14 +68,15 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
   return (
     <div className="sw2-paths">
       <div className="sw2-honest-bar" role="note">
-        <strong>Simulated from history, not a forecast.</strong> Each path strings together random runs of {block} real
+        <strong>Simulated from past weeks. Not a forecast.</strong> Each path strings together random runs of {block} real
         weeks{pool === "analogues" ? ` from the ${data.analogue_weeks} weeks after ${matches.length} past events like your scenario` : " from all shared history"}.
-        Every asset moves on the same weeks, so their links survive. The range shows what reshuffling the past can do. It
-        cannot show anything that has not happened before.
+        Every asset moves on the same weeks, so the links between them are kept. The range
+        cannot include a move that has not happened before.
       </div>
 
       <Grid cols={2}>
         <Panel title="Basket">
+          <div className="sw2-groups">
           {groups.map((g) => (
             <div className="ui-field" key={g}>
               <span className="ui-field-label">{GROUP_LABEL[g] ?? g}</span>
@@ -86,6 +87,7 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
               </div>
             </div>
           ))}
+          </div>
           <p className="muted small">Up to {MAX_ASSETS}. Currencies are their value in US dollars; USD is the dollar against nine others. Stocks and bonds are total return, so they include dividends and interest.</p>
         </Panel>
         <Panel title="Settings">
@@ -128,7 +130,7 @@ export function PathsView({ data, basket, setBasket, spec, matches, hasScenario,
             <Stat label="Seed" value={seed} />
           </Grid></div>
           {pool === "analogues" && sim.poolWeeks < 60 && (
-            <p className="warning">Only {sim.poolWeeks} weeks to draw from, so the paths repeat the same few stretches of history. Treat the range as a handful of stories.</p>
+            <p className="warning">Only {sim.poolWeeks} weeks to draw from, so the paths repeat the same few stretches of history.</p>
           )}
           <PathsStage sim={sim} label={label} lossAt={Number(lossAt)} download={download} resetKey={`${keysKey}-${weeks}-${n}-${block}-${seed}-${pool}`}
             eyebrow={`Simulated paths · ${sim.n.toLocaleString("en-US")} paths of ${sim.weeks} weeks${pool === "analogues" && spec.title ? ` · after events like "${spec.title}"` : ""}`} />
@@ -176,7 +178,7 @@ function PathsStage({ sim, label, lossAt, download, resetKey, eyebrow }: {
       leading={leaderOf(rows)} bands={markers.map((m) => ({ label: m.label, a: m.day, b: m.day }))} startLabel="Week 0" endLabel={`Week ${sim.weeks}`}
       valueText={(i) => `Week ${i}`}
       controls={<Button size="sm" icon="download" onClick={download}>Export CSV</Button>}
-      honest={<>Simulated from history, not a forecast. The range shows what reshuffling the past can do; it cannot show anything that has not happened before.</>}
+      honest={<>Each path is real past weeks in a random order, so it cannot contain a move that never happened.</>}
       visual={
         <div className="pb-fan">
           <div className="pb-curve-head"><span>{f.name}: simulated range, week by week</span></div>

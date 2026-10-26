@@ -1,0 +1,4 @@
+/* Guided tour (guidedTour.tsx), around the library's TourStep card. The veil takes clicks so
+   the page cannot be used half way through; the card's ring does the dimming. Tokens only. */
+.ui-gtour-veil { position: fixed; inset: 0; z-index: var(--z-overlay); background: transparent; }
+.ui-gtour-edge { position: fixed; top: 0; width: 24px; height: 1px; z-index: var(--z-overlay); pointer-events: none; }

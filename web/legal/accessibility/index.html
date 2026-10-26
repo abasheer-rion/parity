@@ -3,53 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Parity's accessibility target, the known gaps, and how to report a barrier." />
-    <title>Accessibility statement · Parity</title>
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). -->
     <!--legal:head-->
   </head>
   <body>
     <!--legal:header-->
     <main id="main" tabindex="-1">
       <article class="lg-wrap">
-        <p class="lg-kicker">Legal</p>
         <h1>Accessibility statement</h1>
-        <div class="lg-meta">
-          <span class="lg-draft">Draft for lawyer review</span>
-          <span>Last updated <time datetime="2026-10-22">22 October 2026</time></span>
-        </div>
-        <p class="lg-lead">We want everyone to be able to use Parity, including people who use a keyboard, a screen reader, zoom or other assistive technology.</p>
+        <p class="lg-meta">Last updated: <time datetime="2026-10-25">25 October 2026</time></p>
+        <p>We want everyone to be able to use Parity, including people who use a keyboard, a screen reader, zoom, voice control or other assistive technology. This statement covers the website, the sign-in pages, the legal pages, the Blog and News, Learn, the product and Research apps, Parity Terminal, Parity Trade, Parity Academy, the Workbench and the desktop app.</p>
 
-        <h2 id="target">Our target</h2>
-        <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. We have not had an independent audit, and we do not claim full conformance yet. The known gaps are listed below.</p>
+        <h2 id="target">1. Our target</h2>
+        <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. This is also the standard most often used for the Americans with Disabilities Act and for accessibility law in the UK and the EU.</p>
+        <p>We believe Parity now meets most of WCAG 2.2 AA, with the gaps listed in section 4. We have not had an independent audit, so we do not claim full conformance.</p>
 
-        <h2 id="done">What we have done so far</h2>
+        <h2 id="done">2. What we have done</h2>
         <ul>
-          <li>The public pages, sign-in pages and apps can be used with a keyboard. They show a visible focus outline and have a "Skip to content" link.</li>
-          <li>Form fields have labels. Errors are written out in words and read aloud by screen readers.</li>
-          <li>Passwords can be shown while you type, and password rules are listed as you go.</li>
-          <li>Text and controls are checked automatically for colour contrast.</li>
-          <li>Pages use headings and landmarks, so you can jump between sections.</li>
-          <li>Motion stops when your device asks for reduced motion. The 3D picture on the front page becomes a still image.</li>
-          <li>We check pages on narrow phone screens for sideways scrolling. Wide data tables scroll inside their own box instead.</li>
+          <li><strong>Keyboard.</strong> Every page can be used with a keyboard alone. Each page starts with a "Skip to content" link. Focus moves in a sensible order and never gets stuck. Menus and dialogs open from the keyboard, keep focus inside while open, close with Escape and return focus to the button that opened them.</li>
+          <li><strong>Visible focus.</strong> Every link, button and field shows a clear outline or change when it has keyboard focus, and is not hidden under a sticky bar or notice.</li>
+          <li><strong>Structure.</strong> Each page has one main area and one main heading, and headings do not skip levels, so you can move around by heading or landmark.</li>
+          <li><strong>Names and labels.</strong> Buttons that show only an icon have a spoken name. Form fields have labels. When something you type is wrong, the field is marked as invalid, the error is written next to it in words, and screen readers read it out.</li>
+          <li><strong>Colour and contrast.</strong> Text meets the AA contrast ratio, including text over our dark glass panels and red glows, which we measure against the real colours behind it. Links inside sentences are underlined, so they do not rely on colour alone.</li>
+          <li><strong>Charts.</strong> Charts have a name and a written summary of their numbers for screen readers: the dates they cover and, for each line, where it starts and ends and its low and high. Pictures have alt text.</li>
+          <li><strong>Moving and updating content.</strong> Live prices, order books, the markets board and the Terminal's ticker tape have a Pause button that stops them until you press Resume. Screen readers are told about changes politely and not on every tick.</li>
+          <li><strong>Motion.</strong> When your device asks for reduced motion, animations stop, smooth scrolling is turned off and the 3D picture on the front page becomes a still image.</li>
+          <li><strong>Size and zoom.</strong> Buttons and links are at least 24 by 24 pixels, or have space around them. Pages work at 200% zoom and on screens 320 pixels wide without scrolling sideways. Wide data tables scroll inside their own box, which you can reach and scroll with the keyboard.</li>
+          <li><strong>Desktop app.</strong> The app's title bar, menu, command palette and Settings have spoken names, keyboard access and visible focus. Escape closes the menu and the palette.</li>
         </ul>
 
-        <h2 id="testing">How we test</h2>
-        <p>We run automated checks with axe-core on the public pages, the sign-in pages and both app home pages, and fix every serious and critical problem it finds. We also check pages by hand with a keyboard. Last checked on <time datetime="2026-10-22">22 October 2026</time>.</p>
-
-        <h2 id="known">Known gaps</h2>
+        <h2 id="testing">3. How we test</h2>
+        <p>Every change to Parity runs two sets of automated checks before it can go live:</p>
         <ul>
-          <li><strong>Charts.</strong> Many charts are pictures of data. The key numbers are usually written nearby, but not every chart has a text or table version yet.</li>
+          <li>axe-core, a widely used accessibility checker, tests every page of every app against the WCAG 2.0, 2.1 and 2.2 A and AA rules. It runs at desktop and phone size, both signed out and signed in, and on the desktop app's own pages. A serious or critical problem stops the change.</li>
+          <li>Our own checks press Tab through every page and test the skip link, focus order, visible focus, menus and dialogs, Escape, headings, names, target size, zoom and narrow screens, reduced motion, Pause controls, how often screen readers are told about changes, error messages on the sign-in forms, and text contrast over glass and glow.</li>
+        </ul>
+        <p>We also check pages by hand with a keyboard. These checks were last run in full on <time datetime="2026-10-25">25 October 2026</time>.</p>
+
+        <h2 id="known">4. Known gaps</h2>
+        <ul>
+          <li><strong>Charts you point at.</strong> The exact value under the pointer on a chart is shown only to mouse and touch users. Screen reader and keyboard users get the written summary instead, not every point. The drawing tools on Trade charts need a mouse or touch.</li>
           <li><strong>Sim World's map.</strong> The world map is visual and hard to use with a screen reader. A text alternative is planned.</li>
-          <li><strong>Dense tables.</strong> Some research tables are wide and need sideways scrolling on small screens.</li>
+          <li><strong>Colour in charts.</strong> Some charts use colour to tell lines apart. The legend and the written summary name each line, but the lines themselves have no patterns yet.</li>
+          <li><strong>Live data while paused.</strong> Pause stops what you see. When you press Resume, everything catches up at once.</li>
+          <li><strong>Automated checks have limits.</strong> Tools find many problems but not all. We have not yet tested with every screen reader and browser pair, and we have not had an independent audit.</li>
           <li><strong>Research papers and outside links.</strong> Papers and sites we link to are not ours, and some are not accessible.</li>
-          <li><strong>Colour in charts.</strong> Some charts use colour to tell lines apart. Adding labels and patterns is planned.</li>
         </ul>
 
-        <h2 id="report">Tell us about a barrier</h2>
-        <p>If something on Parity is hard or impossible for you to use, please tell us. Say which page, what you were trying to do, and what technology you use, if you are happy to share it.</p>
+        <h2 id="report">5. Reporting a barrier</h2>
+        <p>If something on Parity is hard or impossible for you to use, tell us. Say which page, what you were trying to do, and what technology you use, if you are happy to share it.</p>
         <p>Email <a href="mailto:contact@paritytrading.ai">contact@paritytrading.ai</a>. We aim to reply within 5 working days, and we can send you the information in another format.</p>
+        <p>Post: Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States.</p>
 
-        <h2 id="enforcement">If you are not happy with our reply</h2>
+        <h2 id="enforcement">6. Enforcement</h2>
         <p>In the United States, you can contact the Department of Justice about the Americans with Disabilities Act. In the UK, the Equality Advisory and Support Service can help. In the EU, contact the body that enforces accessibility law in your country.</p>
       </article>
     </main>

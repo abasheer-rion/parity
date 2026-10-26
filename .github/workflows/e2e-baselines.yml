@@ -1,0 +1,61 @@
+# Makes the E2E screenshot baselines (web/e2e/visual.spec.ts) on Linux, where CI compares
+# them, and uploads web/e2e/__screenshots__ as an artifact to commit. Fonts draw differently
+# on a Mac, so baselines are never made locally.
+#
+#   gh workflow run e2e-baselines.yml --ref <branch>         (once this file is on main)
+#   or push a commit to a branch with [update-baselines] in its message
+#   gh run download <run id> -n e2e-screenshots -D web/e2e/__screenshots__
+#
+# See web/e2e/README.md.
+name: E2E baselines
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  baselines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      # Runs only when asked: by hand, or by the marker in the newest commit's message (read
+      # with git as plain data, never pasted into a command).
+      - id: want
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ] || git log -1 --format=%B | grep -qF '[update-baselines]'; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.want.outputs.go == 'true'
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - if: steps.want.outputs.go == 'true'
+        run: npm ci
+      - if: steps.want.outputs.go == 'true'
+        run: npm run build
+      - if: steps.want.outputs.go == 'true'
+        run: npx playwright install --with-deps chromium
+      # Every baseline written fresh, then the same tests twice more against them, so a
+      # screen that does not draw the same way every time is caught here, not in every PR.
+      - if: steps.want.outputs.go == 'true'
+        run: npx playwright test e2e/visual.spec.ts --update-snapshots=all
+      - if: steps.want.outputs.go == 'true'
+        run: npx playwright test e2e/visual.spec.ts --repeat-each=2
+      - if: always() && steps.want.outputs.go == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-screenshots
+          path: web/e2e/__screenshots__
+          retention-days: 14

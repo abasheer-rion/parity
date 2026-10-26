@@ -6,7 +6,7 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 
 ## How it works
 
-- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`) and Sim World (`/sim/`, or `sim.endyland.com`) need a session, and all three use the same guard.
+- `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`), Sim World (`/sim/`, or `sim.endyland.com`), Parity Trade (`/trade/`, or `trade.endyland.com`), Parity Academy (`/academy/`, or `academy.endyland.com`) and Parity Workbench (`/lab/`, or `lab.endyland.com`) need a session, and all six use the same guard.
 - After signing in, people go back to where they started (`?next=`). Only addresses on this site or on `https://*.endyland.com` are followed; anything else goes to `/app/` (`web/src/auth/redirect.ts`, tested in `web/tests/redirect.test.ts`).
 - Supabase Auth holds the accounts. People log in with email and password, a 6-digit email code, Google or GitHub (when switched on), or a passkey (when switched on). Accounts can add an authenticator app for two-step sign-in.
 - The browser keeps the session in a cookie. A Cloudflare Pages function (`web/functions/_middleware.ts`) checks that cookie's token against Supabase's public keys before it serves anything under `/app/` or `/data/`. No secret is needed for that check. Without a valid session, `/app/` sends you to `/login/` and `/data/` answers 401.
@@ -30,7 +30,7 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 | `auth/CHECKLIST.md` | The owner's steps to finish the hosted setup, and the end-to-end test. |
 | `web/tests/` | Tests for the sign-in flows against a fake Supabase client, the redirect rules, the consent API and the middleware. `npm test` in `web/`. |
 | `web/legal/`, `web/src/legal/` | The legal pages, the cookie notice and the consent API (`consent.ts`). |
-| `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in pages (entry `main.tsx`) and Account settings. |
+| `web/src/auth/` | The browser side: Supabase client, session hooks, the app guard, the sign-in panel (`AuthFlow.tsx`, shown on the front page by `front.tsx` and on the stand-alone pages by `main.tsx`, DEC-0044) and Account settings. |
 | `web/functions/_middleware.ts` | Lets only signed-in people fetch `/app/` and `/data/`. `web/public/_routes.json` limits it to those paths. |
 | `web/index.html` | The public front page: plain HTML and CSS, no script. |
 | `supabase/config.toml` | The `[auth]` section: sign-in rules and where each template lives. Drives local Supabase only. |

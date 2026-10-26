@@ -1,5 +1,5 @@
 ---
-id: LOG-0015
+id: LOG-0024
 title: Merging main into the stack and registering the energy book
 type: log
 status: final
@@ -18,7 +18,7 @@ Ayan's edge research ([DEC-0027](../decisions/0027-new-edge-families-from-the-wi
 
 ## What happened
 
-- **Numbers.** Main took RES-0011 and LOG-0009. Our research notes are now RES-0013 to RES-0018 and our logs LOG-0011 to LOG-0014. Only IDs and links changed.
+- **Numbers.** Main took RES-0011 and LOG-0009. Our research notes are now RES-0013 to RES-0018 and our logs LOG-0020 to LOG-0023. Only IDs and links changed.
 - **Merge, not rebase.** Main was merged into each branch from the bottom of the stack up (#16, #17, #18, #27, #36), so nothing was force-pushed. The conflicts were generated lists, one engine line (`SELF_FINANCING` now includes Ayan's `xfx.` currencies) and one paper added on both sides (Daniel and Moskowitz 2016, now one record).
 - **REG-0006.** DEC-0027's wide carry on policy rates (Sharpe ratio 0.75, 9 of 11 tests, 1999 to 2026) holds 15 of `em_fx_carry`'s 17 currencies. `already_seen` now says EM carry was partly seen, with the numbers and how the two differ. HYP-0009 and EXP-0008 point to it. Basket and momentum are unaffected.
 - **Trials.** Every registration's `prior_trials` rose by 17 for DEC-0027's recipes.

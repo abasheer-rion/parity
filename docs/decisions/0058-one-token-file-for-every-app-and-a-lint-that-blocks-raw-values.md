@@ -1,0 +1,55 @@
+---
+id: DEC-0058
+title: One token file for every app and a lint that blocks raw values
+type: decision
+status: accepted
+created: 2026-10-25
+updated: 2026-10-25
+authors: [ayan]
+tags: [ui]
+related: [REF-0009, DEC-0039, DEC-0017, DEC-0023, DEC-0049, REF-0017]
+---
+
+# One token file for every app and a lint that blocks raw values
+
+## In plain words
+
+Every colour, text size, gap, corner, shadow, layer and animation speed on Parity now comes from one file, `web/src/ui/tokens.css`. Change a value there and the front page, sign-in, product, research, Terminal, Trade, Academy, Workbench, Verify, the legal pages and the desktop app all change with it. A check in CI fails any pull request that writes a raw colour, a font size in pixels, an animation time or a curve anywhere else. The look is the front page's: dark glass, a red glow behind it, white for the main button and red for the thing that is selected.
+
+## Context
+
+- The owner asked that the site look finished, that buttons, colours and motion stop varying, and that a style be easy to change for the whole site.
+- Before this change the site had 251 distinct raw colours across 26 stylesheets, 424 font sizes in pixels, 113 hand-written animation times and 10 curves. Each full-screen app (Academy, Workbench, Terminal, Trade) defined its own copies of the same colours, and the product and research apps used a blue accent while the front page, sign-in, Academy and Workbench used red and white.
+- Light mode was gone (DEC-0021), but the light half of a 339-line copy of another company's tokens was still loaded.
+- Canvas charts, share images, the Verify badge SVG, the desktop app's window colours and the offline page cannot read CSS variables, so each had its own hex values.
+
+## Decision
+
+1. **One source.** `web/src/ui/tokens.css` holds three layers: raw values (`--palette-*`), meanings (`--color-*`, `--type-*`, `--space-*`, `--radius-*`, `--shadow-*`, `--glass-*`, `--glow-*`, `--z-*`, `--dur-*`, `--ease-*`, `--bp-*`) and the older short names (`--surface`, `--text`, `--ds-*`) kept as pointers to the meanings so existing rules keep working.
+2. **Dark glass everywhere.** Primary actions are white with dark text. Red marks the selected tab, row or nav item and the glow. Gains are green and losses coral, always with a sign. The old blue is kept only as the `info` colour and series 1 in charts.
+3. **Parity Terminal keeps its look by tokens only.** Its amber accent, cyan links, solid hairlines and square corners are a block of token overrides on `.ptm` inside the token file (DEC-0023), so every shared component follows it.
+4. **A typed copy for TypeScript.** `tokens.ts` exports typed names (`v("color-text")`, `tokenValue()`, `durationMs()`, `typePx()`, `breakpoints`, `media`, `z`). `npm run tokens` writes every token resolved to a plain value into `tokens.gen.ts` (charts, share images, the badge, clip frames), `desktop/electron/tokens.css` and `tokens.js` (the desktop pages and window colours) and the offline page.
+5. **A lint that blocks raw values.** `npm run lint:styles` runs stylelint with a Parity rule on every stylesheet, a second check on TypeScript, TSX, HTML style blocks and the desktop app, and `npm run tokens -- --check`. It fails on hex, `rgb()` and named colours, font sizes in px or pt, durations other than 0, `cubic-bezier()`, page-level `z-index` (10 or more; -9 to 9 still orders parts inside one component), and any `var(--name)` that is defined nowhere. CI runs it before the tests.
+6. **Motion tokens.** Durations `--dur-1` to `--dur-6` plus named loops, and curves `--ease-*`. Under reduced motion the duration tokens collapse to 1ms, so anything built on them holds still. The shared motion work in progress builds on these names rather than a second set.
+
+## Alternatives considered
+
+- **Keep each app's own palette and only document it.** Rejected: that is how the drift happened, and a change to one colour meant editing five files.
+- **Generate CSS from a TypeScript token object.** Rejected for now: CSS is what every page and the desktop app read first, and generating the other way keeps the stylesheet readable. The generated copies are checked in CI so they cannot fall behind.
+- **Ban every pixel value.** Rejected: spacing and line heights in px are not where the drift was, and a ban would touch thousands of lines for no visible gain. The spacing scale exists for new code.
+
+## Consequences
+
+- The product and research apps change from blue to the red and white of the front page. Verdicts that meant "in between" (Promising, Maybe, Check) use the new `warning` badge tone so red never reads as a pass.
+- Font sizes were rounded to the nearest of 14 steps (10 to 44 px); half-pixel sizes moved by half a pixel.
+- New code cannot add a raw value without CI failing, so a new colour has to be added to the token file with a name.
+- REF-0009 lists the tokens and how to change a style site-wide.
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+- [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
+- [REF-0009: UI library](../reference/0009-ui-library.md)
+- [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
+- [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
+<!-- backlinks:end -->

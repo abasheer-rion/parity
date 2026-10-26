@@ -96,7 +96,7 @@
    "body": [
     "Two strategies can end at the same place and feel completely different on the way. **Volatility** measures how bumpy the ride is: how far daily returns spread around their average, scaled to a year.",
     "The S&P 500 has run at about 15 to 19% a year. A strategy with 30% volatility will often move twice as much as the stock market in a day, in both directions.",
-    "Bumpiness is not just discomfort. It drags on growth: a strategy with 10% average return and 30% volatility compounds at roughly 5.5% a year. And bumpy strategies are the ones people give up on at the worst moment."
+    "Bumpiness also drags on growth: a strategy with 10% average return and 30% volatility compounds at roughly 5.5% a year. And bumpy strategies are the ones people give up on at the worst moment."
    ],
    "terms": [
     "volatility",
@@ -334,7 +334,7 @@
   },
   {
    "id": "costs",
-   "title": "Costs: the quiet leak",
+   "title": "Trading costs",
    "minutes": 2,
    "body": [
     "Every trade costs something: the gap between the buy and sell price, fees, and moving the price against yourself. A **basis point** is one hundredth of a percent, and costs are usually counted in them.",
@@ -366,7 +366,7 @@
       "cost": 1
      },
      {
-      "caption": "At 2 basis points, the gauntlet's double-cost test, it keeps less.",
+      "caption": "At 2 basis points, the double-cost test, it keeps less.",
       "cost": 2
      },
      {

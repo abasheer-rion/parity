@@ -24,7 +24,7 @@ export function CommoditiesView({ data, win, setWin }: { data: WorldData; win: s
     <SeriesRace data={data} items={items} a={a} b={b} mode="growth" valueFmt={money} name="Commodity"
       eyebrow="Commodities race · each starts at 100"
       controls={<WindowSelect value={win} onChange={setWin} />}
-      honest={<>History replayed, not a forecast. Gas is the <strong>spot</strong> price, whose short spikes nobody could have traded; copper is a <strong>monthly average</strong>, carried forward between months. Prices in US dollars.</>}
+      honest={<>Gas is the <strong>spot</strong> price, whose short spikes nobody could have traded; copper is a <strong>monthly average</strong>, carried forward between months. Prices in US dollars.</>}
       above={(_, focus) => {
         const c: Commodity = ITEMS.find((it) => it.key === focus)?.commodity ?? "oil";
         const color = ITEMS.find((it) => it.commodity === c)?.color ?? colorAt(1);

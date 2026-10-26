@@ -1,0 +1,19 @@
+{
+  "id": "/trade/",
+  "name": "Parity Trade",
+  "short_name": "Trade",
+  "description": "Charts on delayed data, a screener and demo accounts. No real money. Research and education only.",
+  "lang": "en",
+  "start_url": "/trade/",
+  "scope": "/trade/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#050608",
+  "theme_color": "#050608",
+  "categories": ["finance", "education"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

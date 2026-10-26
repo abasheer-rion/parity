@@ -79,7 +79,7 @@ function HypeTerms() {
       <div className="mk-terms">
         {list.map((t) => (
           <article key={t.id} id={`hype-${t.id}`} className="mk-card mk-term">
-            <h3><a href={`#/learn/${t.id}`}>{t.term}</a></h3>
+            <h2><a href={`#/learn/${t.id}`}>{t.term}</a></h2>
             <dl>
               <dt>Simple</dt><dd>{t.simple}</dd>
               <dt>Like</dt><dd>{t.analogy}</dd>

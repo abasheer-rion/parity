@@ -127,7 +127,7 @@ export function MapView({ data, win, setWin, onScenario, onPaths, onPick }: {
         <WindowSelect value={win} onChange={setWin} />
       </>}
       bands={bands} startLabel={dayMonthYear(dates[0] ?? "")} endLabel={dayMonthYear(dates[dates.length - 1] ?? "")} valueText={(i) => dayMonthYear(dates[i] ?? "")}
-      honest={<>History replayed, not a forecast. Colours show what happened; a past link between a currency and oil can break. Countries in grey have no currency data in Parity.{step === "day" ? " Daily steps start in 2020, to keep the file small." : ""}</>}
+      honest={<>Colours show past moves. A past link between a currency and oil can break. Countries in grey have no currency data in Parity.{step === "day" ? " Daily steps start in 2020, to keep the file small." : ""}</>}
       visual={
         <div className="pb-mapwrap">
           <div className="sw2-bar">

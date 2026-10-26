@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from parity import strategies
+from parity import search, strategies
 from parity.backtest import BacktestConfig, run
 from parity.data import catalog, futures, sources
 from parity.strategies.base import Strategy
@@ -311,3 +311,12 @@ def test_futures_above_100_percent_are_not_charged_as_borrowing(panel):
         else panel["rate.USD"].shift(1) / 100 / 252
     expected = 2 * panel["fut.CL"].pct_change()[day] + rf[day]
     assert res.returns[day] == pytest.approx(expected)
+
+
+def test_the_search_leaves_the_registered_series_alone():
+    # REG-0004 to REG-0010 claim these series were never searched; the regime filter pool
+    # must not draw on them before the official runs.
+    held = {"fx.TRY", "rate.TRY", "curve.CL2", "fut.NG", "carry.HO", "risk.OVX", "vrp.OIL"}
+    assert held <= catalog.REGISTERED_ONLY
+    assert not catalog.REGISTERED_ONLY & set(search.GATE_SERIES)
+    assert "fx.MXN" not in catalog.REGISTERED_ONLY  # an older series stays searchable

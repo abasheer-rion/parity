@@ -271,7 +271,7 @@
       "category": "Markets and trading",
       "simple": "Everything it costs to make a trade: the spread, fees and moving the price against yourself.",
       "analogy": "The delivery fee on every online order. One order is fine, a hundred small orders add up.",
-      "precise": "We charge a fixed cost per unit of notional traded (1 basis point by default) and test at double that in the gauntlet. Real costs also include financing markups and slippage.",
+      "precise": "We charge a fixed cost per unit of notional traded (1 basis point by default) and test at double that in our 11 tests. Real costs also include financing markups and slippage.",
       "related": ["spread", "turnover", "break-even-cost"]
     },
     {
@@ -370,7 +370,7 @@
       "category": "Economic theory",
       "simple": "A period when markets behave in a particular way, like calm years, crisis years, or years of high interest rates.",
       "analogy": "Seasons. What works in summer, like shorts, does not work in winter.",
-      "precise": "A stretch of time with distinct statistical behaviour. Strategies that only work in one regime are fragile. The gauntlet's era test checks three regimes separately.",
+      "precise": "A stretch of time with distinct statistical behaviour. Strategies that only work in one regime are fragile. Our era test checks three regimes separately.",
       "related": ["out-of-sample"]
     },
     {
@@ -613,7 +613,7 @@
       "category": "Testing and statistics",
       "simple": "Data you did not look at while designing the strategy, kept aside to test it fairly.",
       "analogy": "A practice test the teacher keeps hidden until the end, so you cannot study the exact questions.",
-      "precise": "Observations excluded from model selection. Our gauntlet treats the last five years as the hardest test and checks three separate eras.",
+      "precise": "Observations excluded from model selection. Our tests treat the last five years as the hardest test and check three separate eras.",
       "related": ["overfitting", "regime"]
     },
     {
@@ -640,7 +640,7 @@
       "category": "Testing and statistics",
       "simple": "A range where the true answer probably is. A 95% range means we would expect the true value inside it 95 times out of 100.",
       "analogy": "Saying the bus will come between 8:05 and 8:15 instead of exactly 8:10.",
-      "precise": "An interval estimate. The gauntlet asks whether the 95% bootstrap interval for the Sharpe ratio lies entirely above zero.",
+      "precise": "An interval estimate. One of our 11 tests asks whether the 95% bootstrap interval for the Sharpe ratio lies entirely above zero.",
       "related": ["bootstrap", "p-value"]
     },
     {
