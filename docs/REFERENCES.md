@@ -4057,7 +4057,7 @@ Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-
 
 dev-forum.pyth.network/t/863. (2026). *dev-forum.pyth.network*. <https://dev-forum.pyth.network/t/863>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4065,7 +4065,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/llms.txt. (2026). *docs.pyth.network*. <https://docs.pyth.network/llms.txt>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4073,7 +4073,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/oracle-integrity-staking. (2026). *docs.pyth.network*. <https://docs.pyth.network/oracle-integrity-staking>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4081,7 +4081,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/pro/how-lazer-works. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/how-lazer-works>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4089,7 +4089,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/pro/on-chain-fees. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/on-chain-fees>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4097,7 +4097,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/pro/sponsored-feeds. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/sponsored-feeds>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4105,7 +4105,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/pro/understanding-price-data. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/understanding-price-data>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4113,7 +4113,7 @@ Cited in: nothing yet.
 
 docs.pyth.network/whitepaper. (2026). *docs.pyth.network*. <https://docs.pyth.network/whitepaper>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4137,7 +4137,7 @@ Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-
 
 pyth.network/whitepaper. (2026). *pyth.network*. <https://pyth.network/whitepaper>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4145,7 +4145,7 @@ Cited in: nothing yet.
 
 www.pyth.network/data-license. (2026). *www.pyth.network*. <https://www.pyth.network/data-license>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 
@@ -4153,7 +4153,7 @@ Cited in: nothing yet.
 
 www.pyth.network/legal/terms-conditions. (2026). *www.pyth.network*. <https://www.pyth.network/legal/terms-conditions>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
 
-Note: Read for RES-0027 and DEC-0064.
+Note: Read for RES-0027 and DEC-0065.
 
 Cited in: nothing yet.
 

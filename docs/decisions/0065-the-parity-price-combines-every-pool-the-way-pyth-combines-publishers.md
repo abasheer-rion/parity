@@ -7,7 +7,7 @@ created: 2026-10-26
 updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, data, infra, ui]
-related: [DEC-0063, RES-0027, DEC-0052, DEC-0045, REF-0014, REF-0018]
+related: [DEC-0063, DEC-0064, RES-0027, DEC-0052, DEC-0045, REF-0014, REF-0018]
 ---
 
 # The Parity price combines every pool the way Pyth combines publishers
@@ -31,7 +31,7 @@ The owner wants Pyth's coverage without paying for Pyth. Showing Pyth's own pric
    - a pool that did not trade counts a quarter;
    - Ethereum counts a fifth, because of its 12 s blocks.
 
-   The result is `onchain-registry.json`. `proposePools()` is the one way to add pools; the data registry's enrolment step can call it with its own proposals.
+   The result is `onchain-registry.json`. `proposePools()` is the one way to add pools. The data registry ([DEC-0064](0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)) is Python, so it calls it through `web/scripts/onchain-propose.ts`, passing its proposals as JSON.
 3. **The method, after Pyth** (`web/live/src/venues/parityPrice.ts`).
    - Each pool is a publisher. Its price is the pool's price after its last swap, in dollars. Pools priced in ETH, BNB or POL are converted with that coin's own Parity price.
    - A pool's confidence is half its fee as a share of the price. A pool priced in ETH, BNB or POL also adds that coin's confidence.
