@@ -91,6 +91,16 @@ jobs:
       # animation loops, Pause controls, live regions, contrast over glass and form errors
       # (scripts/a11y-checks.mjs).
       - run: npm run a11y:checks
+        env:
+          A11Y_DEBUG: ${{ runner.temp }}/a11y-contrast
+      # On a failure, the pictures behind each low contrast reading, to see what the text sat on.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: a11y-contrast
+          path: ${{ runner.temp }}/a11y-contrast
+          if-no-files-found: ignore
+          retention-days: 7
 
   # The built site, once, for the e2e shards.
   e2e-build:

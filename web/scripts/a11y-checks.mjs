@@ -501,7 +501,7 @@ async function realContrast(page, where) {
     const need = info.large ? 3 : 4.5;
     // A reading taken mid-transition (a fade, a reveal) is taken again before it counts.
     if (ratio < need && (retried.get(target) ?? 0) < 2) { retried.set(target, (retried.get(target) ?? 0) + 1); nodes.push(n); continue; }
-    if (ratio < need && process.env.A11Y_DEBUG) (await import("node:fs")).writeFileSync(`${process.env.A11Y_DEBUG}/${info.text.replace(/\W+/g, "_").slice(0, 20)}.png`, png);
+    if (ratio < need && process.env.A11Y_DEBUG) { const fs = await import("node:fs"); fs.mkdirSync(process.env.A11Y_DEBUG, { recursive: true }); fs.writeFileSync(`${process.env.A11Y_DEBUG}/${info.text.replace(/\W+/g, "_").slice(0, 20)}.png`, png); }
     if (ratio < need) worst.push(`"${info.text}" ${ratio.toFixed(2)}:1 (need ${need}) at ${target}`);
   }
   if (worst.length) add(where, `${worst.length} text items under AA contrast over their real background, e.g. ${worst.slice(0, 3).join("; ")}`);
