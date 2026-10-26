@@ -98,10 +98,13 @@ export function StaticBadge({ feed, source, asOf, compact = false, terms, delayM
   const shown = feed === "eod" ? "End of day" : feed === "delayed" ? `Delayed ${delayMin ?? 15} min` : feedShort(feed, delayMin);
   return (
     <Popover label="Data age" width={260} placement="bottom-end" trigger={() => (
-      <button type="button" className={`lvb lvb-${fresh}`} aria-label={[shown, compact ? null : source, compact ? null : `${msText(age)} old`].filter(Boolean).join(" ") + `. ${label}`}>
+      // The name is the words on the badge, then the details: on a phone the source is hidden,
+      // so the name is built from what is shown, not written out (WCAG 2.5.3).
+      <button type="button" className={`lvb lvb-${fresh}`}>
         <i className="lvb-dot" aria-hidden />
         <span>{shown}</span>
         {!compact && <>{" "}<span className="lvb-src">{source}</span>{" "}<span className="tabular lvb-age">{msText(age)} old</span></>}
+        <span className="sr-only">. {label}</span>
       </button>
     )}>
       <dl className="lvb-card">

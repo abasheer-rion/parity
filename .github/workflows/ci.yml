@@ -83,12 +83,12 @@ jobs:
       # First-run tours and the getting started checklist in a real browser (DEC-0060).
       - run: npm run onboarding
       # WCAG 2.2 AA (DEC-0061, REF-0026): axe on every route of every app, the static pages
-      # and the desktop app's own pages, at desktop and phone size, signed out and in.
-      # Fails on any serious or critical problem (scripts/a11y.mjs).
+      # and the desktop app's own pages, at desktop and phone size, signed out and in, and
+      # reduced motion holding still. Fails on any serious or critical problem (scripts/a11y.mjs).
       - run: npm run a11y
       # Keyboard walk on every page (skip link, focus order, visible focus, dialogs and
       # Escape) and the UI library's 2px focus rings, headings, names, target size, reflow,
-      # reduced motion, Pause controls, live regions, contrast over glass and form errors
+      # animation loops, Pause controls, live regions, contrast over glass and form errors
       # (scripts/a11y-checks.mjs).
       - run: npm run a11y:checks
 

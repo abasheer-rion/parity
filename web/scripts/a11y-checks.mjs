@@ -10,9 +10,9 @@
 //   targets      every control is at least 24 by 24 CSS px, or has room around it (2.5.8);
 //                links inside sentences are exempt
 //   reflow       no sideways page scroll at 320 CSS px and at 200% zoom (640 px) (1.4.10)
-//   motion       with reduced motion asked for, no endless or long CSS animation and no
-//                animation loop runs (2.3.3); without it, anything that moves or updates by
-//                itself for more than 5 seconds has a Pause or Stop control (2.2.2)
+//   motion       with reduced motion asked for, no script animation loop runs (CSS
+//                animations are checked by scripts/a11y.mjs); without it, anything that moves
+//                or updates by itself for more than 5 seconds has a Pause or Stop control (2.2.2)
 //   live regions polite ones change at most a few times in 6 seconds, assertive ones not at all
 //   contrast     text that axe could not judge (over glass, gradients and glows) is measured
 //                against the real pixels behind it (1.4.3)
