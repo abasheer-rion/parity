@@ -52,6 +52,9 @@ const PAGE_FILES = {
   Pricing: () => import("./pages/Pricing"),
   Reader: () => import("./pages/Reader"),
   Share: () => import("./pages/verify/Share"),
+  DataCatalog: () => import("./pages/registry/DataCatalog"),
+  Candidates: () => import("./pages/registry/Candidates"),
+  DataHealth: () => import("./pages/registry/DataHealth"),
 };
 const AlgorithmReport = page(PAGE_FILES.AlgorithmReport, "AlgorithmReport");
 const Catalog = page(PAGE_FILES.Catalog, "Catalog");
@@ -80,6 +83,10 @@ const Verify = page(PAGE_FILES.Verify, "Verify");
 const Strategies = page(PAGE_FILES.Strategies, "Strategies");
 const StrategyPage = page(PAGE_FILES.StrategyPage, "StrategyPage");
 const Pricing = page(PAGE_FILES.Pricing, "Pricing");
+const DataCatalog = page(PAGE_FILES.DataCatalog, "DataCatalog");
+const SeriesPage = page(PAGE_FILES.DataCatalog, "SeriesPage");
+const Candidates = page(PAGE_FILES.Candidates, "Candidates");
+const DataHealth = page(PAGE_FILES.DataHealth, "DataHealth");
 // The command palette and the hover cards carry the catalog and glossary (about 190 kB), so
 // they arrive once the first page has drawn.
 const Palette = page(() => import("./components/Palette"), "Palette");
@@ -97,7 +104,7 @@ const ROUTE_FILE: Record<string, () => Promise<unknown>> = {
   refs: PAGE_FILES.Reader, catalog: PAGE_FILES.Catalog, algo: PAGE_FILES.AlgorithmReport, ledger: PAGE_FILES.LedgerPage,
   sources: PAGE_FILES.DataSources, latency: PAGE_FILES.Latency, metrics: PAGE_FILES.Metrics, explore: PAGE_FILES.Explore, overview: PAGE_FILES.Overview,
   signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors,
-  pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding,
+  pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding, registry: PAGE_FILES.DataCatalog,
 };
 
 /** Loads a route's page file when the pointer or focus reaches a link to it. */
@@ -162,7 +169,7 @@ export function App() {
 
 // Pages that read only what is bundled in the build, not the selected run.
 // The pricing page exists only when the payments flag is on (DEC-0046).
-const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors"];
+const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors", "registry"];
 
 // The newest run is the largest file the dashboard reads: ask for it now, while the code and
 // the sign-in check are still arriving, unless the page opening does not read it.
@@ -288,6 +295,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "sources" && <DataSources focus={arg} />}
       {route === "pricing" && PAYMENTS_ENABLED && <Pricing />}
       {route === "latency" && <Latency />}
+      {route === "registry" && (arg === "candidates" ? <Candidates /> : arg === "health" ? <DataHealth /> :
+        arg === "s" && extra ? <SeriesPage id={dec(extra)!} /> : <DataCatalog key={hash} />)}
       {route === "metrics" && <Metrics />}
       {route === "settings" && (
         <Settings section={arg} />

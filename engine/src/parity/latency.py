@@ -104,6 +104,20 @@ def _row(source: str, series: str, label: str, kind: str, basis: str, cadence: f
 
 # ------------------------------------------------------------------ the rows
 
+def cadence_hours(source: str, frequency: str, code: str = "", published_after: int | None = None,
+                  lag_days: int = 0) -> float:
+    """How old a healthy series' newest point can be, in hours. The data registry's health
+    check (DEC-0064) uses the same rule."""
+    cadence = PRICE_CADENCE.get((source, frequency), FREQ_CADENCE.get(frequency, 4 * DAY))
+    if source == "fred" and str(code).startswith(H10_PREFIXES):
+        cadence = H10_CADENCE
+    if published_after:
+        cadence += published_after * DAY * 7 / 5
+    if lag_days:
+        cadence += lag_days * DAY * 7 / 5
+    return cadence
+
+
 def price_rows(root: Path = store.DEFAULT_DIR) -> list[dict]:
     """One row per catalog series from coverage.json, plus one for the fetch itself."""
     cov = store.coverage(root)
@@ -113,13 +127,9 @@ def price_rows(root: Path = store.DEFAULT_DIR) -> list[dict]:
         key = r["key"]
         spec = catalog.CATALOG.get(key)
         freq = r.get("frequency") or (spec.frequency if spec else "D")
-        cadence = PRICE_CADENCE.get((r["source"], freq), FREQ_CADENCE.get(freq, 4 * DAY))
-        if r["source"] == "fred" and str(r.get("code", "")).startswith(H10_PREFIXES):
-            cadence = H10_CADENCE
-        if spec is not None and spec.published_after:
-            cadence += spec.published_after * DAY * 7 / 5
-        if spec is not None and spec.lag_days:
-            cadence += spec.lag_days * DAY * 7 / 5
+        cadence = cadence_hours(r["source"], freq, str(r.get("code", "")),
+                                spec.published_after if spec else None,
+                                spec.lag_days if spec else 0)
         label = spec.description if spec else key
         rows.append(_row(r["source"], key, label, "prices", "source", cadence,
                          source_at=r.get("last"), fetched_at=fetched, ok=bool(r.get("ok"))))

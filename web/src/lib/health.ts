@@ -17,12 +17,31 @@ export function ago(iso: string, now: number): string {
   return `${Math.round(hours / 24)} days ago`;
 }
 
-export interface HealthPart { service: "search" | "sims"; text: string; stale: boolean }
+export interface HealthPart { service: "search" | "sims" | "data"; text: string; stale: boolean }
 
 const n = (v: unknown) => (typeof v === "number" ? v.toLocaleString("en-US") : null);
 
+/**
+ * The data registry's part (DEC-0064), from the counts the sims service sends with its
+ * heartbeat: "data: 320 live, 4 degraded". Null until the service sends them.
+ */
+export function dataPart(rows: Heartbeat[], now: number = Date.now()): HealthPart | null {
+  const row = rows.find((r) => r.service === "sims");
+  const d = row?.summary.data as Record<string, number> | undefined;
+  if (!row || !d || typeof d.series !== "number") return null;
+  const stale = now - Date.parse(row.reported_at) > STALE_AFTER_MS;
+  const bad = (d.degraded ?? 0);
+  const text = `data: ${n(d.live ?? 0)} live${bad ? `, ${n(bad)} degraded` : ""}${d.candidate ? `, ${n(d.candidate)} waiting` : ""}`;
+  return { service: "data", stale: stale || bad > 0, text };
+}
+
 /** One short part per service, in a fixed order, e.g. "search: 130,466 tries, last batch 2 min ago". */
 export function healthParts(rows: Heartbeat[], now: number = Date.now()): HealthPart[] {
+  const data = dataPart(rows, now);
+  return [...partsFor(rows, now), ...(data ? [data] : [])];
+}
+
+function partsFor(rows: Heartbeat[], now: number): HealthPart[] {
   return (["search", "sims"] as const).map((service) => {
     const row = rows.find((r) => r.service === service);
     if (!row) return { service, text: `${service}: no report yet`, stale: true };

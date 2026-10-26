@@ -61,6 +61,9 @@ def region_of(key: str, name: str = "") -> str:
     ccy = _ccy(key)
     if head in ("fx", "xfx", "rate", "reer", "policy") and ccy:
         return CCY_REGION.get(ccy, ccy[:2])
+    tail = key.split(".", 1)[1] if "." in key else ""
+    if head == "policy" and re.fullmatch(r"[A-Z]{2}", tail):  # a BIS area code
+        return "EU" if tail == "XM" else tail
     if head == "ecb":
         return CCY_REGION.get(ccy, ccy[:2]) if ccy else "EU"
     if head == "curve":

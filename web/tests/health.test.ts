@@ -40,3 +40,13 @@ describe("health line", () => {
     expect(healthParts(rows, NOW).map((p) => p.text).join(" ")).not.toMatch(/\u2014|\u2013/);
   });
 });
+
+describe("data registry part", () => {
+  it("adds the registry counts the sims service sends (DEC-0064)", () => {
+    const rows: Heartbeat[] = [{ service: "sims", reported_at: at(5), summary: { bot_paths: 10, data: { series: 366, live: 320, degraded: 4, candidate: 34 } } }];
+    const parts = healthParts(rows, NOW);
+    expect(parts.map((p) => p.text)[2]).toBe("data: 320 live, 4 degraded, 34 waiting");
+    expect(parts[2].stale).toBe(true);
+    expect(healthParts([{ service: "sims", reported_at: at(5), summary: {} }], NOW)).toHaveLength(2);
+  });
+});

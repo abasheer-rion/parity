@@ -89,9 +89,12 @@ const RESEARCH: NavItem[] = [
   // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
   { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: "Opens Parity Terminal in a new tab" },
   {
-    href: "#/data", label: "Data", icon: "database", routes: ["data", "sources", "latency"],
+    href: "#/registry", label: "Data", icon: "database", routes: ["data", "sources", "latency", "registry"],
     children: [
-      { href: "#/data", label: "Data health", routes: ["data"] },
+      { href: "#/registry", label: "Data catalog", routes: [] },
+      { href: "#/registry/candidates", label: "Candidates", routes: [] },
+      { href: "#/registry/health", label: "Data health", routes: [] },
+      { href: "#/data", label: "This run's data", routes: ["data"] },
       { href: "#/latency", label: "Latency", routes: ["latency"] },
       { href: "#/sources", label: "Sources", routes: ["sources"] },
     ],

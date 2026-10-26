@@ -81,7 +81,7 @@ export function HiddenSettings({ section, report, batches, batchId, setBatchId }
           <SettingsRow label="Generated">{report ? date(report.generated_at) : "n/a"}</SettingsRow>
           <SettingsRow label="Code version">{report?.git_sha ? <a href={`${REPO_URL}/commit/${report.git_sha}`} target="_blank" rel="noreferrer">{report.git_sha}</a> : "Local checkout"}</SettingsRow>
           <SettingsRow label="Trials counted" help="Used to deflate every Sharpe ratio.">{report?.n_trials ?? "n/a"}</SettingsRow>
-          <SettingsRow label="Data fetched">{report?.coverage.fetched_at ? date(report.coverage.fetched_at) : "n/a"} · <a href="#/data">Data health</a></SettingsRow>
+          <SettingsRow label="Data fetched">{report?.coverage.fetched_at ? date(report.coverage.fetched_at) : "n/a"} · <a href="#/data">This run's data</a></SettingsRow>
         </>
       )}
 
