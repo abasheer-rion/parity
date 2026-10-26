@@ -57,7 +57,7 @@ export interface StrategyRun {
   ic_decay: IcRow[];
   exposure: Record<string, number>;
   gauntlet: Gauntlet | null;
-  /** "How it holds up" numbers (engine/src/parity/metrics/holdup.py). Older runs leave it out. */
+  /** "How it holds up" numbers (engine/src/parity/metrics/holdup.py). Older runs leave it out; lib/holdup.ts rebuilds it from returns. */
   holdup?: Holdup | null;
 }
 
@@ -129,7 +129,7 @@ export interface GauntletPlacebo {
 }
 
 // ---------------------------------------------------------------- how it holds up
-// Same field names as engine/src/parity/metrics/holdup.py.
+// Same field names as engine/src/parity/metrics/holdup.py and web/src/lib/holdup.ts.
 
 export type Range = [number | null, number | null];
 
