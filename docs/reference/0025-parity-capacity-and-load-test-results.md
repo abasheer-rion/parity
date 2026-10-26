@@ -78,13 +78,13 @@ The hosted project is much smaller than this machine, but both caps (3,000 analy
 
 Run hidden on a Mac runner in CI (`.github/workflows/soak.yml`, `desktop/scripts/soak.mjs`): the app starts hidden (`PARITY_HIDDEN=1`, also on by default for every test run, #121), so no window is shown or focused, there is no Dock or menu bar icon, no notification, no global key and no update check. It uses its own profile folder. A stand-in for Supabase and a stand-in live price feed (one update a second for 20 coins) run inside the test, so nothing reaches a real account or an outside data source. The script refuses to run on a person's own Mac unless `PARITY_SOAK_LOCAL=1`.
 
-Results (Mac runner, 26 October; numbers in MB of memory unless marked):
+Results (Mac runner, 26 October, three runs; the last passed every check; numbers in MB of memory unless marked):
 
 | Part | Result | Memory, first 5 to last 5 | Verdict |
 | --- | --- | --- | --- |
 | 50 launches with one profile | no crash, no process left behind; ready in 0.4 to 1.9 s, getting faster as caches warm | all processes 669 to 670 | flat |
 | 50 reloads of one page | no crash | all processes 859 to 852 once the hidden Trade page had started | flat |
-| 50 window open and close cycles | no crash, no window or process left; open, draw and close 0.66 to 0.89 s | all processes 684 to 831 in the first cycles, then flat (0.1 MB a cycle in the second half) | flat after the step |
+| 50 window open and close cycles | no crash, no window or process left; open, draw and close 0.66 to 0.89 s on the first runs, 0.9 s typical and 3.5 s at worst on the last one (after main's desktop fixes in #116; worth watching) | all processes 684 to 831 in the first cycles, then flat (0.1 to 0.3 MB a cycle in the second half) | flat after the step |
 | 30 minutes on Trade's Markets page with live prices | one socket all along, 1,829 live messages, no crash | page JS heap 5.4 to 7.2, page process 124 to 126 | small, see below |
 
 The step in the window cycles is the app's hidden Trade page (it keeps one for the menu bar ticker) starting 8 seconds after launch, plus caches filling; it does not grow after that.
