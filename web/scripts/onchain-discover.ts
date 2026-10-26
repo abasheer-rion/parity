@@ -140,10 +140,10 @@ for (const c of CHAINS) {
   }
   const byCoin = new Map<string, Proposal>();
   for (const x of pools) {
-    const e: PoolEntry = { chain: c.chain, pool: x.pool!, base: x.w.address, decimals: x.decimals, quote: x.q.key, dex: label(x.f.dex, x.f.kind, x.p), fee: feeOf(x.f.kind, x.p), liq: Math.round(x.liq), swaps: swaps.has(x.pool!) ? swaps.get(x.pool!)! : null, topic: x.f.topic };
+    const e: PoolEntry = { chain: c.chain, pool: x.pool!, base: x.w.address, decimals: x.decimals, quote: x.q.key, dex: label(x.f.dex, x.f.kind, x.p), fee: feeOf(x.f.kind, x.p), liq: Math.round(x.liq), swaps: swaps.has(x.pool!) ? swaps.get(x.pool!)! : null, topic: x.f.topic, ...(x.w.via ? { via: x.w.via } : {}) };
     const prev = byCoin.get(x.w.coin.id);
     if (prev) prev.pools.push(e);
-    else byCoin.set(x.w.coin.id, { key: x.w.coin.id, sym: x.w.coin.symbol, name: x.w.coin.name, rank: x.w.coin.rank, ...(x.w.via ? { via: x.w.via } : {}), pools: [e] });
+    else byCoin.set(x.w.coin.id, { key: x.w.coin.id, sym: x.w.coin.symbol, name: x.w.coin.name, rank: x.w.coin.rank, pools: [e] });
   }
   proposals.push(...byCoin.values());
   console.error(`${c.chain}: ${cands.length} tokens, ${found.length} pools, ${pools.length} deep enough, ${byCoin.size} assets`);

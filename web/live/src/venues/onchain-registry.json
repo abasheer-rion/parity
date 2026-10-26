@@ -7,7 +7,6 @@
    "sym": "BTC-USD",
    "name": "Bitcoin",
    "rank": 1,
-   "via": "WBTC",
    "pools": [
     {
      "chain": "arbitrum",
@@ -19,7 +18,8 @@
      "fee": 0.0005,
      "liq": 21518407,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WBTC"
     },
     {
      "chain": "base",
@@ -31,7 +31,8 @@
      "fee": 0.0005,
      "liq": 14557208,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "cbBTC"
     },
     {
      "chain": "bnb",
@@ -43,7 +44,8 @@
      "fee": 0.0005,
      "liq": 10556514,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "BTCB"
     },
     {
      "chain": "base",
@@ -55,7 +57,8 @@
      "fee": 0.003,
      "liq": 7215314,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "cbBTC"
     },
     {
      "chain": "ethereum",
@@ -67,7 +70,8 @@
      "fee": 0.003,
      "liq": 34484484,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WBTC"
     },
     {
      "chain": "bnb",
@@ -79,7 +83,8 @@
      "fee": 0.0005,
      "liq": 6854891,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "BTCB"
     },
     {
      "chain": "ethereum",
@@ -91,7 +96,8 @@
      "fee": 0.0005,
      "liq": 29531989,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WBTC"
     },
     {
      "chain": "bnb",
@@ -103,16 +109,17 @@
      "fee": 0.0001,
      "liq": 5814406,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "BTCB"
     }
-   ]
+   ],
+   "via": "WBTC, cbBTC, BTCB"
   },
   {
    "key": "ethereum",
    "sym": "ETH-USD",
    "name": "Ethereum",
    "rank": 2,
-   "via": "WETH",
    "pools": [
     {
      "chain": "base",
@@ -124,7 +131,8 @@
      "fee": 0.003,
      "liq": 37693893,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "arbitrum",
@@ -136,7 +144,8 @@
      "fee": 0.0005,
      "liq": 12456395,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "ethereum",
@@ -148,7 +157,8 @@
      "fee": 0.0005,
      "liq": 58595359,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "ethereum",
@@ -160,7 +170,8 @@
      "fee": 0.003,
      "liq": 23520261,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "ethereum",
@@ -172,7 +183,8 @@
      "fee": 0.003,
      "liq": 17650229,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "arbitrum",
@@ -184,7 +196,8 @@
      "fee": 0.003,
      "liq": 2376585,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "base",
@@ -196,7 +209,8 @@
      "fee": 0.0005,
      "liq": 2134971,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     },
     {
      "chain": "optimism",
@@ -208,16 +222,17 @@
      "fee": 0.003,
      "liq": 1960826,
      "swaps": 69,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WETH"
     }
-   ]
+   ],
+   "via": "WETH"
   },
   {
    "key": "binancecoin",
    "sym": "BNB-USD",
    "name": "BNB",
    "rank": 4,
-   "via": "WBNB",
    "pools": [
     {
      "chain": "bnb",
@@ -229,7 +244,8 @@
      "fee": 0.0001,
      "liq": 9426082,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "WBNB"
     },
     {
      "chain": "bnb",
@@ -241,7 +257,8 @@
      "fee": 0.0005,
      "liq": 6880063,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "WBNB"
     },
     {
      "chain": "bnb",
@@ -253,16 +270,17 @@
      "fee": 0.0005,
      "liq": 2580950,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WBNB"
     }
-   ]
+   ],
+   "via": "WBNB"
   },
   {
    "key": "ripple",
    "sym": "XRP-USD",
    "name": "XRP",
    "rank": 5,
-   "via": "Binance-Peg XRP",
    "pools": [
     {
      "chain": "bnb",
@@ -274,7 +292,8 @@
      "fee": 0.0025,
      "liq": 289034,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg XRP"
     },
     {
      "chain": "bnb",
@@ -286,7 +305,8 @@
      "fee": 0.0025,
      "liq": 235744,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg XRP"
     },
     {
      "chain": "bnb",
@@ -298,16 +318,17 @@
      "fee": 0.003,
      "liq": 173375,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "Binance-Peg XRP"
     }
-   ]
+   ],
+   "via": "Binance-Peg XRP"
   },
   {
    "key": "solana",
    "sym": "SOL-USD",
    "name": "Solana",
    "rank": 7,
-   "via": "Binance-Peg SOL",
    "pools": [
     {
      "chain": "bnb",
@@ -319,7 +340,8 @@
      "fee": 0.0005,
      "liq": 574166,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg SOL"
     },
     {
      "chain": "bnb",
@@ -331,7 +353,8 @@
      "fee": 0.0025,
      "liq": 92226,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg SOL"
     },
     {
      "chain": "bnb",
@@ -343,16 +366,17 @@
      "fee": 0.003,
      "liq": 88246,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "Binance-Peg SOL"
     }
-   ]
+   ],
+   "via": "Binance-Peg SOL"
   },
   {
    "key": "tron",
    "sym": "TRX-USD",
    "name": "TRON",
    "rank": 8,
-   "via": "Binance-Peg TRX",
    "pools": [
     {
      "chain": "bnb",
@@ -364,9 +388,11 @@
      "fee": 0.0025,
      "liq": 110374,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg TRX"
     }
-   ]
+   ],
+   "via": "Binance-Peg TRX"
   },
   {
    "key": "chainlink",
@@ -477,7 +503,6 @@
    "sym": "ADA-USD",
    "name": "Cardano",
    "rank": 18,
-   "via": "Binance-Peg ADA",
    "pools": [
     {
      "chain": "bnb",
@@ -489,16 +514,17 @@
      "fee": 0.0025,
      "liq": 108238,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg ADA"
     }
-   ]
+   ],
+   "via": "Binance-Peg ADA"
   },
   {
    "key": "near",
    "sym": "NEAR-USD",
    "name": "NEAR Protocol",
    "rank": 20,
-   "via": "Binance-Peg NEAR",
    "pools": [
     {
      "chain": "bnb",
@@ -510,7 +536,8 @@
      "fee": 0.0025,
      "liq": 193843,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg NEAR"
     },
     {
      "chain": "bnb",
@@ -522,7 +549,8 @@
      "fee": 0.003,
      "liq": 140121,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "Binance-Peg NEAR"
     },
     {
      "chain": "bnb",
@@ -534,9 +562,11 @@
      "fee": 0.0025,
      "liq": 100198,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg NEAR"
     }
-   ]
+   ],
+   "via": "Binance-Peg NEAR"
   },
   {
    "key": "rain",
@@ -1171,7 +1201,6 @@
    "sym": "DOT-USD",
    "name": "Polkadot",
    "rank": 57,
-   "via": "Binance-Peg DOT",
    "pools": [
     {
      "chain": "bnb",
@@ -1183,9 +1212,11 @@
      "fee": 0.0025,
      "liq": 57430,
      "swaps": null,
-     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+     "via": "Binance-Peg DOT"
     }
-   ]
+   ],
+   "via": "Binance-Peg DOT"
   },
   {
    "key": "worldcoin-wld",
@@ -1428,7 +1459,6 @@
    "sym": "POL-USD",
    "name": "POL (ex-MATIC)",
    "rank": 76,
-   "via": "WPOL",
    "pools": [
     {
      "chain": "polygon",
@@ -1440,9 +1470,11 @@
      "fee": 0.0005,
      "liq": 165122,
      "swaps": null,
-     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+     "via": "WPOL"
     }
-   ]
+   ],
+   "via": "WPOL"
   },
   {
    "key": "render-token",
@@ -1735,7 +1767,7 @@
   {
    "key": "stable-2",
    "sym": "STABLE-USD",
-   "name": "​​Stable",
+   "name": "\u200b\u200bStable",
    "rank": 116,
    "pools": [
     {

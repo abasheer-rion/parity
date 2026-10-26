@@ -73,9 +73,9 @@ export const chainDef = (chain: string) => CHAINS.find((c) => c.chain === chain)
 /** One pool: chain, address, the base token's address and decimals on that chain, the quote
  *  token's key, venue, fee (a fraction), quote-side depth in USD, swaps seen in the discovery
  *  window (null when not measured) and the Swap event it emits. */
-export interface PoolEntry { chain: string; pool: string; base: string; decimals: number; quote: string; dex: string; fee: number; liq: number; swaps: number | null; topic: string }
-/** One asset. key: the CoinGecko id (or our own key). via: the wrapped or pegged form we price
- *  it by ("WBTC", "Binance-Peg XRP"). Its pools may sit on several chains. */
+export interface PoolEntry { chain: string; pool: string; base: string; decimals: number; quote: string; dex: string; fee: number; liq: number; swaps: number | null; topic: string; /** The wrapped or pegged form this pool trades ("cbBTC"), when not the asset itself. */ via?: string }
+/** One asset. key: the CoinGecko id (or our own key). via: the wrapped or pegged forms its
+ *  pools trade ("WBTC, cbBTC"), from the pools kept. Its pools may sit on several chains. */
 export interface TokenEntry { key: string; sym: string; name: string; rank: number | null; via?: string; pools: PoolEntry[] }
 export interface Registry { at: string; minLiqUsd: number; tokens: TokenEntry[] }
 
@@ -155,7 +155,10 @@ export function proposePools(reg: Registry | null, proposals: Proposal[], opts: 
     const sym = `${t.sym.toUpperCase().replace(/-USD$/, "").replace(/[^A-Z0-9]/g, "")}-USD`;
     if (!/^[A-Z0-9]{1,15}-USD$/.test(sym) || seen.has(sym)) continue;
     seen.add(sym);
-    tokens.push({ ...t, sym });
+    const via = [...new Set(t.pools.map((x) => x.via).filter((v): v is string => !!v))].join(", ");
+    const { via: _drop, ...rest } = t;
+    void _drop;
+    tokens.push({ ...rest, sym, ...(via ? { via } : {}) });
   }
   return { at: opts.now ?? new Date().toISOString(), minLiqUsd: minLiq, tokens };
 }
