@@ -470,6 +470,11 @@ CATALOG: dict[str, Series] = {
     + _INDUSTRIES + _BOND_TR + _WIDER + _EM_FX + _EM_RATES + _CURVES + _FUTURES + _VOL
 }
 
+#: Series added for registrations REG-0004 to REG-0010 (emerging market currencies and
+#: rates, energy futures, oil volatility). The always-on search leaves them alone, so the
+#: registrations' "not seen" stays true and old search draws keep their ids.
+REGISTERED_ONLY = frozenset(s.key for s in _EM_FX + _EM_RATES + _CURVES + _FUTURES + _VOL)
+
 
 def get(key: str) -> Series:
     """A curated series, or one the data registry enrolled (DEC-0064). Curated series always
