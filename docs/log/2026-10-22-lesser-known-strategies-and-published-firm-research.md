@@ -1,5 +1,5 @@
 ---
-id: LOG-0012
+id: LOG-0021
 title: Lesser-known strategies and published firm research
 type: log
 status: final
@@ -7,7 +7,7 @@ created: 2026-10-22
 updated: 2026-10-22
 authors: [amanda]
 tags: [commodities, fx, method]
-related: [LOG-0011, RES-0016]
+related: [LOG-0020, RES-0016]
 ---
 
 # Lesser-known strategies and published firm research

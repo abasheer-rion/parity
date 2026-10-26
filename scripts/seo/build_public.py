@@ -5,7 +5,10 @@
 
 Run by `npm run build` in web/ after both vite builds. Standard library only.
 
-It writes static HTML (no script, inline CSS, so pages paint at once) for:
+It writes static HTML (inline CSS, so pages paint at once) for the pages below. The only
+script is the analytics boot file, /a/boot.js from the site build, loaded as a module so it
+never blocks painting and records nothing until the person switches analytics on (DEC-0053).
+The pages:
   /learn/  and /learn/<term>/   every glossary term (docs/_system/glossary.json)
   /ideas/  and /ideas/<slug>/   every trading idea in catalog/algorithms/*.json
   /notes/  and /notes/<id>/     the "In plain words" part of decisions, research and references
@@ -13,6 +16,7 @@ It writes static HTML (no script, inline CSS, so pages paint at once) for:
   /learn/academy/...            Parity Academy courses and lessons (academy/courses/*.json, DEC-0028), each
                                 lesson with a still frame of its picture drawn by web/scripts/academy-frames.ts
   /learn/private-markets/       private markets in plain words (docs/_system/private-markets.json, DEC-0029)
+  /blog/ and /news/             the newsroom, built by scripts/newsroom/build.py from content/newsroom/ (DEC-0057)
 and then the files search engines read:
   sitemap.xml          every public URL (front page, legal pages and the pages above)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
@@ -34,16 +38,19 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SITE = os.environ.get("SITE_URL", "https://parity.endyland.com").rstrip("/")
-ORG = "Parity Trading, Inc."
-CONTACT = "contact@paritytrading.ai"
+# The site's address and names live in one file, shared with the web build (DEC-0038).
+SITE_JSON = json.loads((ROOT / "web/src/lib/site.json").read_text())
+SITE = os.environ.get("SITE_URL", SITE_JSON["origin"]).rstrip("/")
+ORG = SITE_JSON["legalName"]
+CONTACT = SITE_JSON["email"]
 LOGO = "/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg"
 STAGES = ["catalogued", "sourced", "hypothesis", "implemented", "registered", "official", "reproduced", "forward", "verdict"]
 NOTE_TYPES = {"decisions": "Decision", "research": "Research note", "reference": "Reference"}
 LEGAL = [("/legal/privacy/", "Privacy"), ("/legal/terms/", "Terms"), ("/legal/cookies/", "Cookies"),
-         ("/legal/accessibility/", "Accessibility"), ("/legal/risk/", "Risk")]
-DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations, "
-              "and the past does not promise the future.")
+         ("/legal/accessibility/", "Accessibility"), ("/legal/risk/", "Risk"),
+         ("/legal/regulatory/", "Regulatory")]
+DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations "
+              "on past data.")
 
 e = html.escape
 
@@ -224,21 +231,23 @@ a{color:var(--blue-text);text-underline-offset:3px}a:hover{color:#fff}
 :focus-visible{outline:2px solid var(--blue-text);outline-offset:2px;border-radius:6px}
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
 .skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:8px 12px;border-radius:8px;z-index:9}.skip:focus{left:8px}
-header{border-bottom:1px solid var(--line)}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px;flex-wrap:wrap}
+header{border-bottom:1px solid var(--line)}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;min-height:68px;flex-wrap:wrap}
 .brand img{display:block;height:36px;width:auto}
-nav.site{display:flex;gap:4px 16px;flex-wrap:wrap;align-items:center;font-size:15px}nav.site a{color:var(--muted);text-decoration:none}nav.site a:hover,nav.site a[aria-current]{color:var(--text)}
+nav.site,nav.acct{display:flex;gap:4px 16px;align-items:center;font-size:15px}nav.site{margin-left:auto;flex-wrap:wrap}nav.site a,nav.acct a:not(.btn){color:var(--muted);text-decoration:none}nav.site a:hover,nav.acct a:not(.btn):hover,nav.site a[aria-current]{color:var(--text)}
+/* On a phone: the logo with Log in and Sign up on one row, the sections on the next. */
+@media (max-width:640px){header .wrap{row-gap:0;padding-top:10px}nav.acct{margin-left:auto}nav.site{order:3;width:100%;margin:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:10px 0;gap:18px}nav.acct .btn{height:34px;padding:0 14px}}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 18px;border-radius:999px;font-weight:500;text-decoration:none;border:1px solid var(--line-2);color:var(--text);white-space:nowrap}
 .btn.primary{background:#2a5ff0;border-color:#2a5ff0;color:#fff}.btn.primary:hover{background:#2257d6;color:#fff}
-main{padding:40px 0 64px}
+main{padding:40px 0 64px}main:focus{outline:none}
 .crumbs{font-size:14px;color:var(--faint);margin:0 0 18px}.crumbs a{color:var(--muted)}
 h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.01em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-size:20px;margin:36px 0 10px}h3{font-size:16px;margin:0 0 6px}
+h2{font-size:20px;margin:36px 0 10px}h3,h2.card-title{font-size:16px;margin:0 0 6px}
 .lede{font-size:18px;color:var(--muted);margin:0 0 24px}
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
 .pill{font-size:13px;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:2px 10px}
 .pill.warn{color:var(--warn);border-color:#e8c06a55}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
-.card h2{margin-top:0;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.card h2{margin-top:0;font-size:15px;color:var(--faint)}
 .card p{margin:0}.card p+p{margin-top:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:0;list-style:none;margin:0}
 .grid li a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--text)}
@@ -271,15 +280,25 @@ def crumbs_ld(trail: list[tuple[str, str]]) -> dict:
         {"@type": "ListItem", "position": i + 1, "name": name, "item": f"{SITE}{path}"} for i, (name, path) in enumerate(trail)]}
 
 
+# The public sections, in the order the header lists them. Blog and News are built by
+# scripts/newsroom/build.py (DEC-0057).
+NAV = (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes"),
+       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"))
+
+
+def nav_html(section: str, path: str = "") -> str:
+    """The header links; the current section is marked, as the page itself on a section's front page."""
+    cur = ' aria-current="page"' if path in {h for _, h, _ in NAV} else ' aria-current="true"'
+    return "".join(f'<a href="{href}"{cur if section == key else ""}>{label}</a>' for key, href, label in NAV)
+
+
 def page(*, path: str, title: str, description: str, body: str, section: str, trail: list[tuple[str, str]],
          ld: list[dict], og_type: str = "article") -> str:
     url = f"{SITE}{path}"
     image = f"{SITE}/og/{section}.png"
     full_title = f"{title} | Parity" if path != "/" else title
     graph = {"@context": "https://schema.org", "@graph": [org_ld(), crumbs_ld(trail), *ld]}
-    cur = ' aria-current="page"' if path in ("/learn/", "/ideas/", "/notes/") else ' aria-current="true"'
-    nav = "".join(f'<a href="{href}"{cur if section == key else ""}>{label}</a>'
-                  for key, href, label in (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes")))
+    nav = nav_html(section, path)
     crumb_html = " / ".join(f'<a href="{p}">{e(n)}</a>' for n, p in trail[:-1]) + (" / " if len(trail) > 1 else "")
     legal = "".join(f'<a href="{h}">{n}</a>' for h, n in LEGAL)
     return f"""<!doctype html>
@@ -290,10 +309,11 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#07080d">
+<meta name="theme-color" content="{SITE_JSON['themeColor']}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
 <meta property="og:site_name" content="Parity">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{e(title)}">
@@ -308,19 +328,21 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <meta name="twitter:image" content="{image}">
 {jsonld(graph)}
 <style>{CSS.strip()}</style>
+<!--parity-analytics--><script type="module" src="/a/boot.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap">
 <a class="brand" href="/"><img src="{LOGO}" width="154" height="36" alt="Parity home"></a>
-<nav class="site" aria-label="Site">{nav}<a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
+<nav class="site" aria-label="Site">{nav}</nav>
+<nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
-<main id="main"><div class="wrap">
+<main id="main" tabindex="-1"><div class="wrap">
 <p class="crumbs">{crumb_html}<span aria-current="page">{e(trail[-1][0])}</span></p>
 {body}
 <aside class="cta" aria-label="Sign up">
-<strong>See the tests behind every idea</strong>
-<p>Parity tests trading ideas against the S&amp;P 500 and shows every result, including the failures. Free to join.</p>
+<strong>See Parity's test results</strong>
+<p>Parity tests trading ideas against the S&amp;P 500. Members see every result, including the ones that failed. Accounts are free.</p>
 <a class="btn primary" href="/signup/">Create a free account</a>
 </aside>
 </div></main>
@@ -371,9 +393,9 @@ def build_learn(terms: list[dict], refs: dict) -> dict[str, str]:
         "".join(f'<li><a href="/learn/{t["id"]}/">{e(t["term"])}<small>{e(plain_text(t["simple"], 90))}</small></a></li>' for t in ts) +
         "</ul>" for c, ts in sorted(cats.items()))
     body = f"""<h1>Learn the words of trading and research</h1>
-<p class="lede">{len(terms)} terms, each explained three ways: in simple words, with an everyday comparison, and precisely.</p>
-<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on backtests that lie, with real mistakes we caught in our own research.</small></a></li>
-<li><a href="/learn/private-markets/">Private markets, explained simply<small>Private equity, venture, private credit and property funds: how their returns are measured, why they look calm, and what to check.</small></a></li></ul>
+<p class="lede">{len(terms)} terms. Each has a simple explanation, an everyday comparison and a precise definition.</p>
+<ul class="grid"><li><a href="/learn/academy/">Parity Academy<small>Short courses with step-by-step pictures: backtests, luck, how markets move, currencies, rates, crypto, private markets and news.</small></a></li><li><a href="/learn/edge-lab/">How to look for a trading edge without fooling yourself<small>Seven lessons on how backtests mislead, each with a mistake we found in our own research.</small></a></li>
+<li><a href="/learn/private-markets/">Private markets, explained simply<small>Private equity, venture, private credit and property funds: how their returns are measured, why their reported prices move less than share prices, and what to check.</small></a></li></ul>
 {groups}"""
     ld = {"@type": "DefinedTermSet", "@id": f"{SITE}/learn/#set", "name": "Parity glossary", "url": f"{SITE}/learn/",
           "hasDefinedTerm": [{"@id": f"{SITE}/learn/{t['id']}/#term"} for t in terms if slug_ok(t["id"])]}
@@ -429,8 +451,7 @@ def build_ideas(ideas: list[dict], refs: dict) -> dict[str, str]:
 {after}
 <section class="card"><h2>Where it came from</h2><p>{origin}{'. ' if origin and src_html else ''}{src_html}</p></section>
 <section class="card"><h2>The precise version</h2><p>{inline(how.get('precise', ''), {}, refs)}</p></section>
-{evidence}
-<p class="lede" style="font-size:14px;margin-top:24px">This page describes an idea. It is not a recommendation to buy, sell or hold anything.</p>"""
+{evidence}"""
         ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": a["name"][:110],
               "description": plain_text(how.get("simple", "")), "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}",
               "author": {"@id": f"{SITE}/#org"}, "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/ideas.png",
@@ -442,13 +463,13 @@ def build_ideas(ideas: list[dict], refs: dict) -> dict[str, str]:
     items = "".join(f'<li><a href="/ideas/{a["slug"]}/">{e(a["name"])}<small>{e(plain_text(a["how_it_works"]["simple"], 90))}</small></a></li>'
                     for a in ideas if slug_ok(a["slug"]))
     body = f"""<h1>Trading ideas, with the evidence and the risks</h1>
-<p class="lede">{len(ideas)} published trading ideas: what each one is, where it came from, what the evidence says and why it might fail.
-Reported numbers are the sources' claims until Parity's own tests say otherwise.</p>
+<p class="lede">{len(ideas)} published trading ideas. Each page says what the idea is, where it came from, what the evidence says and why it might fail.
+Reported numbers are the sources' own claims. Parity's results are marked separately.</p>
 <ul class="grid">{items}</ul>"""
     ld = {"@type": "CollectionPage", "@id": f"{SITE}/ideas/#page", "name": "Trading ideas", "url": f"{SITE}/ideas/",
           "publisher": {"@id": f"{SITE}/#org"}}
     pages["/ideas/"] = page(path="/ideas/", title="Trading ideas, with the evidence and the risks",
-                            description=f"{len(ideas)} trading strategy ideas from research papers and practitioners, each with its evidence, its risks and an honest verdict.",
+                            description=f"{len(ideas)} trading strategy ideas from research papers and practitioners, each with its reported evidence, its risks and Parity's verdict where we have tested it.",
                             body=body, section="ideas", trail=[("Home", "/"), ("Ideas", "/ideas/")], ld=[ld], og_type="website")
     return pages
 
@@ -461,7 +482,7 @@ def build_notes(notes: list[dict], refs: dict) -> dict[str, str]:
         body = f"""<h1>{e(n['title'])}</h1>
 <ul class="meta"><li class="pill">{e(n['kind'])} {e(n['id'])}</li>{f'<li class="pill">Updated {e(n["updated"])}</li>' if n['updated'] else ''}</ul>
 <div class="prose">{markdown(n['summary'], links, refs)}</div>
-<p class="lede" style="font-size:14px;margin-top:24px">This is the plain-words summary. The full note, with its reasoning and sources, is in the research side for members.</p>"""
+<p class="lede" style="font-size:14px;margin-top:24px">This is the plain-words summary. The full note, with its reasoning and sources, is on the research side for members.</p>"""
         ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": n["title"][:110], "description": plain_text(n["summary"]),
               "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
               "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/notes.png", "articleSection": n["kind"]}
@@ -529,7 +550,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
         more = [doc_link(k["doc"], k["label"]) for k in l["links"] if k.get("doc")]
         more += [x for x in (ref_link(r) for r in l["refs"]) if x]
         words = [anchor(f"/learn/{t}/", term_names[t]) for t in l["terms"] if t in term_names]
-        parts = [f'<section class="card" id="{e(l["id"])}"><h2>Lesson {i}</h2><h3>{e(l["title"])}</h3>',
+        parts = [f'<section class="card" id="{e(l["id"])}"><h3>{i}. {e(l["title"])}</h3>',
                  f'<p>{e(l["text"])}</p><p><strong>What we do:</strong> {e(l["do"])}</p>']
         if ex:
             parts.append(f"<p>Our example: {', '.join(ex)}</p>")
@@ -550,7 +571,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
     title = "How to look for a trading edge without fooling yourself"
     body = f"""<h1>{e(title)}</h1>
 <p class="lede">{e(lab["intro"])}</p>
-<h2>Seven lessons</h2>
+<h2>{len(lab["lessons"])} lessons</h2>
 {"".join(blocks)}
 <h2>Our own mistakes</h2>
 <p>Each of these looked like an edge in our backtests until we found the flaw.</p>
@@ -558,8 +579,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 <h2>Questions to ask about any idea</h2>
 <div class="prose"><ol>{checks}</ol></div>
 <p class="lede" style="font-size:14px">Members get an interactive version of this checklist that ranks the pitfalls for a specific idea.</p>
-{reading_html}
-<p class="lede" style="font-size:14px;margin-top:24px">This page explains research methods. It is not a recommendation to buy, sell or hold anything.</p>"""
+{reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(lab["intro"]),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
@@ -569,8 +589,16 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 
 # ---------------------------------------------------------------- Parity Academy (DEC-0028)
 
-ACADEMY_NOTE = ("Education only, not investment advice. Pictures use made-up or example numbers unless they say otherwise. "
-                "Members get the moving version of each picture and a quick check that remembers their progress.")
+ACADEMY_NOTE = ("Pictures use made-up or example numbers unless they say otherwise. "
+                "Members get the moving version of each picture and a quick check that saves their progress.")
+# Parity Academy, the signed-in course player (DEC-0042). The path works on every address
+# of the site; on endyland.com the app also answers at academy.endyland.com.
+ACADEMY_APP = "/academy/"
+
+
+def academy_app_link(path: str, label: str) -> str:
+    """A link from a public Academy page into the same place in Parity Academy (sign-in)."""
+    return f'<p><a class="btn" href="{ACADEMY_APP}#/{path}">{e(label)}</a></p>'
 
 
 def academy_link(k: dict, term_ids: set[str]) -> str:
@@ -581,6 +609,15 @@ def academy_link(k: dict, term_ids: set[str]) -> str:
         return f"/learn/{m.group(1)}/"
     if href.startswith("#/edges"):
         return "/learn/edge-lab/"
+    m = re.match(r"#/academy/([a-z0-9-]+)(?:/([a-z0-9-]+))?$", href)
+    if m:
+        return f"/learn/academy/{m.group(1)}/" + (f"{m.group(2)}/" if m.group(2) else "")
+    # Try settings, What if, Compare and Strategy search live in Parity Workbench (DEC-0043).
+    m = re.match(r"#/(lab|scenarios|compare|search)(\?.*)?$", href)
+    if m:
+        view = {"lab": "try", "scenarios": "whatif", "compare": "compare", "search": "search"}[m.group(1)]
+        keep = (m.group(2) or "") if view in ("whatif", "search") else ""
+        return f"/lab/#/{view}{keep}"
     return ("/research/" if k["space"] == "research" else "/app/") + href
 
 
@@ -628,6 +665,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
 {f'<p>Words: {", ".join(words)}</p>' if words else ''}
 <section class="card"><h2>Quick check</h2>{''.join(qs)}</section>
 {pager}
+{academy_app_link(f"{c['id']}/{l['id']}", "Open this lesson in Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
             ld = {"@type": "LearningResource", "@id": f"{SITE}{path}#lesson", "name": l["title"], "url": f"{SITE}{path}",
                   "description": plain_text(l["body"][0]), "learningResourceType": "Lesson", "timeRequired": f"PT{l['minutes']}M",
@@ -642,6 +680,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
 <p class="lede">{e(c['summary'])}</p>
 <ul class="meta"><li class="pill">{e(c['level'])}</li><li class="pill">{n} lessons</li><li class="pill">About {minutes} minutes</li></ul>
 <ul class="grid">{rows}</ul>
+{academy_app_link(c['id'], "Take this course in Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
         ld = {"@type": "Course", "@id": f"{SITE}{cpath}#course", "name": c["title"], "description": c["summary"], "url": f"{SITE}{cpath}",
               "provider": {"@id": f"{SITE}/#org"}, "inLanguage": "en", "isAccessibleForFree": True, "timeRequired": f"PT{minutes}M",
@@ -649,12 +688,13 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
         pages[cpath] = page(path=cpath, title=f"{c['title']}: a short course", description=plain_text(c["summary"]), body=body,
                             section="learn", ld=[ld], trail=[("Home", "/"), ("Learn", "/learn/"), ("Academy", base), (c["title"], cpath)])
     cards = "".join(
-        f'<section class="card"><h2>{e(c["level"])} &middot; {len(c["lessons"])} lessons</h2><h3><a href="{base}{c["id"]}/">{e(c["title"])}</a></h3>'
-        f'<p>{e(c["summary"])}</p></section>' for c in courses if slug_ok(c["id"]))
+        f'<section class="card"><h2 class="card-title"><a href="{base}{c["id"]}/">{e(c["title"])}</a></h2>'
+        f'<p>{e(c["summary"])}</p><p>{e(c["level"])}, {len(c["lessons"])} lessons</p></section>' for c in courses if slug_ok(c["id"]))
     total = sum(len(c["lessons"]) for c in courses)
     body = f"""<h1>Parity Academy</h1>
 <p class="lede">{len(courses)} short courses, {total} lessons of two or three minutes. Each lesson has a few plain paragraphs, a picture that explains the idea step by step, a link to the real page in Parity and a quick check.</p>
 {cards}
+{academy_app_link("", "Open Parity Academy")}
 <p class="lede" style="font-size:14px;margin-top:24px">{e(ACADEMY_NOTE)}</p>"""
     ld = {"@type": "ItemList", "@id": f"{SITE}{base}#courses", "name": "Parity Academy courses",
           "itemListElement": [{"@type": "ListItem", "position": k + 1, "url": f"{SITE}{base}{c['id']}/"} for k, c in enumerate(courses)]}
@@ -706,15 +746,14 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 {measures}
 <section class="card"><h2>{e(sm["title"])}</h2><p>{e(sm["text"])}</p><div class="prose">{items(sm["points"])}</div></section>
 <h2>Ways in for individuals</h2>
-<p>None of these is a recommendation. Each trades something away: the ability to sell, low fees, or a price set by a market.</p>
+<p>Each of these gives something up: easy selling, low fees or a price set by a market.</p>
 {routes}
 <h2>Before you trust any private markets number</h2>
 <div class="prose"><ol>{"".join(f"<li>{e(x)}</li>" for x in pm["checklist"])}</ol></div>
 <h2>Who has the data</h2>
 <div class="prose"><ul>{providers}</ul></div>
 <p class="lede" style="font-size:14px">Members get a calculator for IRR, TVPI, DPI and PME, counts of private offerings filed with the SEC, and a study of how much smoothing hides.</p>
-{reading_html}
-<p class="lede" style="font-size:14px;margin-top:24px">This page explains how private investments work. It is not a recommendation to buy, sell or hold anything.</p>"""
+{reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(pm["intro"]),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
@@ -724,7 +763,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/"]
+STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:
@@ -745,6 +784,17 @@ def fill_verification(out: Path) -> None:
     index.write_text(text.replace("<!--seo:verify-->", "\n    ".join(tags)))
 
 
+def write_academy_data(courses: list[dict], out: Path) -> None:
+    """The courses as one JSON file for the hosted MCP server (DEC-0051), which cannot read
+    academy/courses/ itself. Under /data/, so only signed-in people and the server read it."""
+    keep = ("id", "title", "minutes", "body", "terms", "check")
+    doc = [{"id": c["id"], "order": c["order"], "level": c["level"], "title": c["title"], "summary": c["summary"],
+            "lessons": [{k: lesson[k] for k in keep if k in lesson} for lesson in c["lessons"]]} for c in courses]
+    dest = out / "data" / "academy" / "courses.json"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(doc, ensure_ascii=False))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=str(ROOT / "web/dist"), help="the built site folder (default web/dist)")
@@ -759,6 +809,7 @@ def main() -> int:
     if "edge-lab" not in {t["id"] for t in terms}:  # a glossary term of that name would own the address
         pages.update(build_edge_lab(load_edge_lab(), notes, terms, refs))
     academy = load_academy()
+    write_academy_data(academy, out)
     if "academy" not in {t["id"] for t in terms}:  # same rule for /learn/academy/
         pages.update(build_academy(academy, terms, refs))
     if "private-markets" not in {t["id"] for t in terms}:
@@ -771,7 +822,20 @@ def main() -> int:
     lastmod = {f"/ideas/{a['slug']}/": a.get("last_reviewed", "") for a in ideas}
     lastmod.update({f"/notes/{n['id'].lower()}/": n["updated"] for n in notes})
     urls = [(p, "") for p in STATIC_PUBLIC] + [(p, lastmod.get(p, "")) for p in sorted(pages)]
-    (out / "sitemap.xml").write_text(sitemap(urls))
+
+    # Blog and News (DEC-0057). They go in sitemap.xml but not in seo-manifest.json, so the
+    # deploy never pushes them to IndexNow while the site is on its temporary address.
+    sys.path.insert(0, str(ROOT / "scripts/newsroom"))
+    from build import build_into  # noqa: PLC0415
+    from model import ValidationError  # noqa: PLC0415
+    try:
+        newsroom_urls = build_into(out)
+    except ValidationError as err:
+        print("build_public: the blog and news pages did not build. Fix these:", file=sys.stderr)
+        for p in err.problems:
+            print(f"  - {p}", file=sys.stderr)
+        return 1
+    (out / "sitemap.xml").write_text(sitemap(urls + newsroom_urls))
 
     manifest = {}
     for p, _ in urls:

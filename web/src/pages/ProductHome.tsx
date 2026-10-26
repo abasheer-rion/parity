@@ -2,10 +2,10 @@
 // a look, a plain-words box for asking, "what if", and how this year is going. Every
 // number shown here comes from the research side's gauntlet, with its verdict; the
 // product never shows search leads or ranks on return alone (DEC-0015).
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Sparkline } from "../ui/charts";
 import { Icon } from "../ui/icons";
-import { Badge, HeroGlow, LIFT, PageTransition, Reveal, Tilt } from "../ui";
+import { Badge, Button, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, Tilt } from "../ui";
 import { colorMap } from "../lib/colors";
 import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
@@ -14,10 +14,14 @@ import type { Report, StrategyRun } from "../lib/types";
 import { productInsights } from "../lib/insights";
 import { date } from "../lib/format";
 import { Insights } from "../components/Insights";
+import { Checklist } from "../onboarding/Checklist";
+import { useOnboarding } from "../onboarding/store";
+import { FirstRunTour } from "../onboarding/FirstRunTour";
+import { isDesktop } from "../desktop/bridge";
 
 const THEMES: { label: string; q: string; icon: string; what: string }[] = [
-  { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value in the world's money" },
-  { label: "Stock timing", q: "stock", icon: "chart", what: "When to be in the market and when to step out" },
+  { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value strategies on currencies" },
+  { label: "Stock timing", q: "stock", icon: "chart", what: "Rules for when to hold stocks and when to hold cash" },
   { label: "Industries", q: "industr", icon: "catalog", what: "Rotating between US industries" },
   { label: "Factors", q: "factor", icon: "flask", what: "Value, momentum, quality and size" },
   { label: "Stocks and bonds", q: "bond", icon: "ledger", what: "Balanced mixes like 60/40 and risk parity" },
@@ -47,6 +51,12 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
   const movers = [...tested].filter((r) => ytd(r) != null).sort((a, b) => (ytd(b) ?? 0) - (ytd(a) ?? 0));
   const beating = tested.filter((r) => r.gauntlet?.beats_sp500).length;
   const first = email ? email.split("@")[0].replace(/[._-].*$/, "") : "";
+  // On a first visit, wait (at most 1.5 seconds) for the checklist's data, so it does not push
+  // the page down when it arrives. Later visits draw it at once from this browser's copy.
+  const ob = useOnboarding();
+  const [late, setLate] = useState(false);
+  useEffect(() => { const t = window.setTimeout(() => setLate(true), 1500); return () => window.clearTimeout(t); }, []);
+  if (!ob.checked && !late) return <PageSkeleton parts={["stats", "chart", "table"]} label="Loading results" />;
 
   return (
     <PageTransition className="phome">
@@ -54,7 +64,7 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
         <HeroGlow />
         <div>
           <h1 className="display">{first ? `Hi ${first[0].toUpperCase()}${first.slice(1)}` : "Welcome"}</h1>
-          <p className="muted">{tested.length} strategies tested the same honest way. {beating === 0 ? "None beats simply holding the US market yet." : `${beating} beat simply holding the US market.`}</p>
+          <p className="muted">{tested.length} strategies, each run through the same tests. {beating === 0 ? "None beats holding the US stock market." : `${beating} beat holding the US stock market.`}</p>
         </div>
         <button className="ask" onClick={() => window.dispatchEvent(new Event("parity:search"))}>
           <Icon name="sparkle" size={16} />
@@ -62,10 +72,13 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
         </button>
       </section>
 
+      <Checklist />
+      <FirstRunTour areas={isDesktop() ? ["home", "desktop"] : ["home"]} />
+
       <Insights items={productInsights(report)} source={`the ${report.kind === "official" ? "official" : "nightly"} research run of ${date(report.generated_at)}`} />
 
       {picks.length > 0 && (
-        <div className="feat-row" aria-label="Top of the evidence">
+        <div className="feat-row" aria-label="Top strategies by verdict">
           {picks.slice(0, 3).map((r, i) => (
             <Reveal key={r.strategy} delay={i * 70}>
               <Tilt className="feat">
@@ -93,8 +106,8 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
         </Reveal>
 
         <Reveal as="section" delay={50} className={`pcard ${LIFT}`}>
-          <div className="pcard-head"><h2>More worth a look</h2><a href="#/strategies">Discover</a></div>
-          <p className="muted small">Ranked by how well they held up in testing, not by how much they made.</p>
+          <div className="pcard-head"><h2>More strategies</h2><a href="#/strategies">Discover</a></div>
+          <p className="muted small">Sorted by verdict, then by the luck-adjusted Sharpe ratio.</p>
           <ul className="plist">{picks.slice(3).map((r) => <Row key={r.strategy} r={r} color={colors[r.strategy]} showVerdict />)}</ul>
         </Reveal>
 
@@ -135,14 +148,13 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
         <Reveal as="section" delay={250} className={`pcard span2 build ${LIFT}`}>
           <div>
             <h2>Build a strategy by describing it <Badge tone="accent">Coming next</Badge></h2>
-            <p className="muted small">Type an idea in plain words, like "own the strongest currencies but step aside when fear is high", and Parity will turn it into a strategy, test it the same way as every other, and explain the result. Until then, try settings on an existing one.</p>
+            <p className="muted small">Planned: type an idea, like "own the strongest currencies but step aside when fear is high", and Parity turns it into a strategy and runs the same tests. For now, you can change the settings of an existing strategy.</p>
           </div>
-          <a className="btn-primary" href="#/lab">Try settings</a>
+          <Button variant="primary" href="#/lab">Try settings</Button>
         </Reveal>
       </div>
       <p className="muted small phome-foot">
-        Research, not investment advice. Results are backtests after trading costs; the past does not promise the future.
-        Results come from the <a href="/research/">research side</a>, kept separate on purpose: <a href="#/how">how Parity works</a>.
+        Results are backtests after trading costs. Past results do not predict future ones. They come from the <a href="/research/">research side</a>. See <a href="#/how">how Parity works</a>.
       </p>
     </PageTransition>
   );

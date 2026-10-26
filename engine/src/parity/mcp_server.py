@@ -157,16 +157,18 @@ SPEC_OPTIONS = {
     "about": "A spec is a small JSON object that fully describes one strategy, the same "
              "format the always-on search uses. The same spec always builds the same "
              "strategy. Pick a kind and fill its fields.",
-    "universes": {k: v[0] for k, v in search.UNIVERSES.items()}
+    "universes": {k: v[0] for k, v in search.ALL_UNIVERSES.items()}
     | {"mkt": "US stocks (trend and chart only)", "bond": "10y Treasuries (trend only)",
        "oil": "Brent oil (trend only)"},
     "kinds": {
-        "trend": {"fields": {"universe": "g10, fx21, ind, fac, mkt, bond or oil",
+        "trend": {"fields": {"universe": "g10, fx21, ind, fac, xg10, xwide, bonds, "
+                                         "energy, fac7, macro, mkt, bond or oil",
                              "lookback": "days, 2 to 756", "skip": "days to skip, 0 or 21",
                              "rebalance": "D, W or M", "long_only": "true or false"},
                   "example": {"kind": "trend", "universe": "g10", "lookback": 126, "skip": 0,
                               "rebalance": "M", "long_only": False}},
-        "rank": {"fields": {"universe": "g10, fx21, ind or fac",
+        "rank": {"fields": {"universe": "g10, fx21, ind, fac, xg10, xwide, bonds, "
+                                        "energy, fac7 or macro",
                             "rank_on": "momentum, reversal, low_vol, near_high; g10 also "
                                        "carry, carry_and_momentum, rate_change; ind also "
                                        "same_month",
@@ -232,6 +234,7 @@ _REQUIRED = {
     "policy": {"universe", "rank_on", "lookback", "k", "stress_off", "rebalance"},
 }
 _OPTIONAL = {"chart": {"window", "band", "entry", "exit"}, "cot": {"k", "entry"}}
+_NAMED = {*_REQUIRED, *search.WRAPPERS}
 _INTS = {"lookback": (2, 2520), "skip": (0, 252), "k": (1, 10), "window": (2, 1000),
          "entry": (1, 1000), "exit": (1, 1000), "delay": (0, 5)}
 _PAIR_POOL = set(search.WIDE) | set(search.IND)
@@ -241,6 +244,9 @@ _MIX_POOL = set(search.FAC) | set(search.IND) | {"eq.US_TOTAL", "bond.TR10", "bo
 
 def validate_spec(spec: dict) -> dict:
     """A normalised copy of `spec`, or ToolError saying exactly what is wrong."""
+    if isinstance(spec, dict) and spec.get("kind") in search.WRAPPERS:
+        raise ToolError(f"{spec['kind']} is a search combinator; evaluate or draft one of "
+                        "its plain parts instead.")
     if not isinstance(spec, dict) or spec.get("kind") not in _REQUIRED:
         raise ToolError(f"spec needs 'kind', one of {sorted(_REQUIRED)}. "
                         "Call spec_options for fields and examples.")
@@ -262,14 +268,15 @@ def validate_spec(spec: dict) -> dict:
     if "rebalance" in out and out["rebalance"] not in ("D", "W", "M"):
         raise ToolError("rebalance must be D, W or M")
     if kind in ("trend", "rank", "chart"):
-        ok = {"trend": [*search.UNIVERSES, "mkt", "bond", "oil"], "rank": list(search.UNIVERSES),
-              "chart": [*search.UNIVERSES, "mkt"]}[kind]
+        unis = list(search.ALL_UNIVERSES)
+        ok = {"trend": [*unis, "mkt", "bond", "oil"], "rank": unis,
+              "chart": [*unis, "mkt"]}[kind]
         if out["universe"] not in ok:
             raise ToolError(f"universe for {kind} must be one of {ok}")
     if kind == "rank":
         if out["rank_on"] not in search.SIGNAL_LABEL:
             raise ToolError(f"rank_on must be one of {sorted(search.SIGNAL_LABEL)}")
-        n = len(search.UNIVERSES[out["universe"]][1])
+        n = len(search.ALL_UNIVERSES[out["universe"]][1])
         if out["k"] * (2 if out["long_short"] else 1) > n:
             raise ToolError(f"k={out['k']} is too many for {n} assets")
     if kind == "timing":
@@ -619,7 +626,7 @@ class ParityTools:
     # the refine loop -------------------------------------------------------------
     def _count(self, sid, spec, res, bench, cfg, hypothesis) -> dict:
         """Record one try in mcp_trials and return its row of numbers."""
-        d = search.describe(spec) if spec.get("kind") in _REQUIRED else {
+        d = search.describe(spec) if spec.get("kind") in _NAMED else {
             "name": spec.get("name"), "family": None, "asset": None}
         row: dict = {}
         try:
@@ -709,7 +716,7 @@ class ParityTools:
         leads = []
         for _, r in df.iterrows():
             spec = json.loads(r["spec"])
-            d = search.describe(spec) if spec.get("kind") in _REQUIRED else {}
+            d = search.describe(spec) if spec.get("kind") in _NAMED else {}
             leads.append({"id": r["id"], "source": r["source"], "name": d.get("name", r["name"]),
                           "line": d.get("line"), "family": r["family"], "asset": r["asset"],
                           "sharpe": r["sharpe"], "cagr": r["cagr"], "max_dd": r["max_dd"],
@@ -967,25 +974,28 @@ def recipe_code(spec: dict, name: str, display: str, description: str) -> str:
     def assets(u):
         return repr(search._assets(u))
 
+    # Wide currencies carry the same cost floor as in the search.
+    floor = ", min_cost_bps=5.0" if spec.get("universe") == "xwide" else ""
+
     if k == "trend":
         block = "TrendBook"
         body = (f"universe={assets(spec['universe'])}, long_only={spec['long_only']}, "
                 f"funded={spec['long_only']}, lookback={spec['lookback']}, "
-                f"skip={spec['skip']}, rebalance={spec['rebalance']!r})")
+                f"skip={spec['skip']}, rebalance={spec['rebalance']!r}{floor})")
     elif k == "rank":
         block = "RankBook"
-        funded = not spec["long_short"] and spec["universe"] == "ind"
+        funded = not spec["long_short"] and spec["universe"] in search.FUNDED_RANK
         body = (f"universe={assets(spec['universe'])}, rank_on={spec['rank_on']!r}, "
                 f"long_short={spec['long_short']}, funded={funded}, "
                 f"lookback={spec['lookback']}, skip={spec['skip']}, k={spec['k']}, "
-                f"rebalance={spec['rebalance']!r})")
+                f"rebalance={spec['rebalance']!r}{floor})")
     elif k == "chart":
         block = "BreakoutBook" if spec["indicator"] == "breakout" else "OscillatorBook"
         params = "".join(f", {p}={spec[p]!r}" for p in ("window", "band", "entry", "exit")
                          if p in spec)
         body = (f"universe={assets(spec['universe'])}, long_only={spec['long_only']}, "
                 f"funded={spec['long_only']}, kind={spec['indicator']!r}, "
-                f"rebalance={spec['rebalance']!r}{params})")
+                f"rebalance={spec['rebalance']!r}{params}{floor})")
     elif k == "pair":
         block = "PairBook"
         body = (f"a={spec['a']!r}, b={spec['b']!r}, window={spec['window']}, "

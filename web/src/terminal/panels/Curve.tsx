@@ -74,7 +74,7 @@ function Curves() {
   );
 }
 
-const bp = (v: number | null) => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? MINUS : ""}${Math.abs(Math.round(v * 100))}`);
+const bp = (v: number | null) => (v == null ? "n/a" : `${v > 0 ? "+" : v < 0 ? MINUS : ""}${Math.abs(Math.round(v * 100))}`);
 
 function CurveBlock({ c }: { c: Curve }) {
   const pick = usePick();

@@ -58,7 +58,7 @@ export function researchInsights(report: Report, search: SearchDoc | null): Insi
     const passed = search.passed_luck_check;
     out.push({
       lead: "The search",
-      text: `${plural(search.trials, "variation")} tried. ${passed === 0 ? "None" : passed.toLocaleString("en-US")} passed the luck check, though ${search.beat_market.toLocaleString("en-US")} had a higher Sharpe ratio than the market.`,
+      text: `${plural(search.trials, "variation")} tried. ${passed === 0 ? "None" : passed.toLocaleString("en-US")} passed the luck check. ${search.beat_market.toLocaleString("en-US")} had a higher Sharpe ratio than the market.`,
       href: "#/search",
     });
     const fam = Object.entries(search.by_family).sort((a, b) => b[1] - a[1])[0];
@@ -71,7 +71,7 @@ export function researchInsights(report: Report, search: SearchDoc | null): Insi
   if (hardest && runs.length) out.push({ lead: "The hardest test", text: `"${hardest[0]}" failed for ${hardest[1]} of ${runs.length} strategies.`, href: "#/doc/REF-0006" });
 
   const closest = [...runs].sort((a, b) => (b.gauntlet!.passed - a.gauntlet!.passed) || ((b.metrics.deflated_sharpe ?? 0) - (a.metrics.deflated_sharpe ?? 0)))[0];
-  if (closest) out.push({ lead: "Closest to an answer", text: `${nameOf(closest)}, ${closest.gauntlet!.passed} of ${closest.gauntlet!.total} tests.`, href: `/app/#/strategy/${closest.strategy}` });
+  if (closest) out.push({ lead: "Most tests passed", text: `${nameOf(closest)}, ${closest.gauntlet!.passed} of ${closest.gauntlet!.total} tests.`, href: `/app/#/strategy/${closest.strategy}` });
 
   return out;
 }

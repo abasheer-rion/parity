@@ -1,0 +1,31 @@
+# Live feed probe (DEC-0063): every 30 minutes, connect to the public on-chain feed as a
+# signed-out visitor and fail if no price arrives within 5 s or no live update in 60 s.
+# A failed run is the alert (GitHub mails the repository's watchers); no secrets needed.
+name: Live feed probe
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Probe the public feed for 60 s
+        run: node web/scripts/live-probe.mjs wss://parity.endyland.com 60 | tee probe.json
+      - name: Summary
+        if: always()
+        run: |
+          echo '### Public live feed' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat probe.json >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"

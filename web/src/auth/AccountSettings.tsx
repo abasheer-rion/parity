@@ -22,7 +22,7 @@ export default function AccountSettings() {
         {team && <div style={{ marginTop: 8 }}><Badge tone="accent">Parity team</Badge></div>}
       </SettingsRow>
       <SettingsRow label="Password" help={`At least ${PASSWORD_MIN} characters, with letters and numbers. You may be asked for a code from your email first.`}>
-        <ChangePassword />
+        <ChangePassword email={email} />
       </SettingsRow>
       <SettingsRow label="Two-step sign-in" help="After your password, also ask for a code from an authenticator app such as 1Password, Google Authenticator or Authy.">
         <TwoStep />
@@ -38,7 +38,7 @@ export default function AccountSettings() {
       <SettingsRow label="Delete my account" help="Sends a request to the owner, who deletes the account and its sign-in. Research results are shared and are not deleted.">
         <DeleteRequest userId={session?.user.id} email={email} />
       </SettingsRow>
-      <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only, not investment advice.">
+      <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only. Not investment advice.">
         <LegalLinks className="start" />
       </SettingsRow>
     </>
@@ -112,7 +112,7 @@ function ChangeEmail({ current, pending }: { current: string; pending?: string }
   );
 }
 
-function ChangePassword() {
+function ChangePassword({ email }: { email: string }) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [again, setAgain] = useState("");
@@ -145,7 +145,7 @@ function ChangePassword() {
     <form className="auth-form account-stack" onSubmit={save} noValidate>
       <Notice>{error}</Notice>
       <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
-      <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules autoFocus />
+      <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus />
       <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain}
         error={again && password !== again ? "Does not match yet." : null} />
       {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus />}

@@ -2,6 +2,7 @@
 // An idle chip is quiet; an applied filter turns accent-tinted and gains a remove
 // button; "Reset" appears once anything is applied. The hooks hold the state.
 import { useMemo, useState, type ReactNode } from "react";
+import { hashQuery, setHashQuery } from "../lib/deeplink";
 import { Icon } from "./icons";
 
 export type SortDir = "asc" | "desc";
@@ -28,16 +29,21 @@ export function useSort<T, K extends string>(rows: T[], get: (row: T, key: K) =>
 
 export interface FilterDef<T> { id: string; label: string; test: (row: T) => boolean }
 
-/** A set of on/off filters plus a text search. */
-export function useFilters<T>(rows: T[], defs: FilterDef<T>[], text?: (row: T) => string) {
-  const [active, setActive] = useState<string[]>([]);
-  const [query, setQuery] = useState("");
+/**
+ * A set of on/off filters plus a text search. With `inLink`, both are kept in the page's
+ * link (?q=...&f=a,b), so Copy link and the back button reopen the same view (DEC-0038).
+ */
+export function useFilters<T>(rows: T[], defs: FilterDef<T>[], text?: (row: T) => string, inLink = false) {
+  const [active, setActiveState] = useState<string[]>(() => (inLink ? (hashQuery().get("f") ?? "").split(",").filter((id) => defs.some((d) => d.id === id)) : []));
+  const [query, setQueryState] = useState(() => (inLink ? hashQuery().get("q") ?? "" : ""));
+  const setQuery = (q: string) => { setQueryState(q); if (inLink) setHashQuery({ q }); };
+  const setActive = (fn: (a: string[]) => string[]) => setActiveState((a) => { const next = fn(a); if (inLink) setHashQuery({ f: next.join(",") }); return next; });
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return rows.filter((r) => active.every((id) => defs.find((d) => d.id === id)?.test(r) ?? true) && (!q || !text || text(r).toLowerCase().includes(q)));
   }, [rows, active, defs, query, text]);
   const toggle = (id: string) => setActive((a) => (a.includes(id) ? a.filter((x) => x !== id) : [...a, id]));
-  const reset = () => { setActive([]); setQuery(""); };
+  const reset = () => { setActive(() => []); setQuery(""); };
   return { filtered, active, toggle, reset, query, setQuery, count: active.length + (query ? 1 : 0) };
 }
 

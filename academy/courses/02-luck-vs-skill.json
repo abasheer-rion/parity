@@ -3,7 +3,7 @@
  "order": 2,
  "level": "Core",
  "title": "Luck vs skill",
- "summary": "Why the best of many backtests is usually luck, how the deflated Sharpe ratio and placebo tests catch it, and the eleven tests every Parity strategy faces.",
+ "summary": "Why the best of many backtests is usually luck, how the deflated Sharpe ratio and placebo tests catch it, and the 11 tests every Parity strategy runs through.",
  "docs": [
   "REF-0006",
   "REF-0007"
@@ -11,11 +11,11 @@
  "lessons": [
   {
    "id": "noise",
-   "title": "Paths that mean nothing",
+   "title": "Random paths",
    "minutes": 2,
    "body": [
     "Imagine 40 strategies that know nothing. Each one flips a fair coin every day to decide whether to buy or sell. None has any skill.",
-    "Plot their accounts and some still go up for a whole year, and one of them looks excellent. Nothing about its chart says it was luck. That is the trap: a good-looking backtest is easy to get by chance when you try enough ideas.",
+    "Plot their accounts and some still go up for a whole year, and one of them looks excellent. Nothing about its chart says it was luck. A good-looking backtest is easy to get by chance when you try enough ideas.",
     "Time does not fix this quickly. For a strategy with a Sharpe ratio of 0.5, telling it apart from zero takes roughly 16 years of data."
    ],
    "terms": [
@@ -51,7 +51,7 @@
       "n": 40
      },
      {
-      "caption": "The best one looks like a winner. It is pure luck.",
+      "caption": "The best one looks like a winner. It has no skill.",
       "n": 40,
       "best": 1
      }
@@ -59,7 +59,7 @@
    },
    "inParity": [
     {
-     "label": "Strategy search: thousands of variations, best first",
+     "label": "Strategy search: every variation tried, best first",
      "href": "#/search",
      "space": "research"
     }
@@ -199,7 +199,7 @@
    },
    "inParity": [
     {
-     "label": "The gauntlet's tests, including the deflated Sharpe",
+     "label": "The 11 tests, including the deflated Sharpe",
      "href": "#/doc/REF-0006",
      "space": "research"
     }
@@ -234,7 +234,7 @@
    "body": [
     "A **placebo test** runs a copy of the strategy that cannot know anything. Parity keeps the strategy's positions, size and trading, but slides them to random dates at least a year away. Timing is destroyed; everything else stays the same.",
     "It does this 500 times. If the real strategy's timing matters, it should beat at least 95% of those copies. If it only does as well as the random-date copies, its result came from something other than timing, such as just being in the market.",
-    "The test is harsh on slow strategies. Carry holds similar positions for years, so a copy shifted by a year often still holds the right currencies."
+    "The test is hard on slow strategies. Carry holds similar positions for years, so a copy shifted by a year often still holds the right currencies."
    ],
    "terms": [
     "placebo-test",
@@ -285,7 +285,7 @@
    },
    "inParity": [
     {
-     "label": "The gauntlet's reality checks",
+     "label": "The 5 luck tests",
      "href": "#/doc/REF-0006",
      "space": "research"
     }
@@ -315,10 +315,10 @@
   },
   {
    "id": "gauntlet",
-   "title": "The gauntlet: eleven tests",
+   "title": "The 11 tests",
    "minutes": 3,
    "body": [
-    "Every Parity strategy faces the same eleven tests, set before any results were seen. Six ask whether it beats the S&P 500: better return for the risk, more money at the same risk, the deflated Sharpe, double costs, every era and the last five years.",
+    "Every Parity strategy runs the same 11 tests, set before any results were seen. Six ask whether it beats the S&P 500: better return for the risk, more money at the same risk, the deflated Sharpe, double costs, every era and the last five years.",
     "Five ask whether anything is real at all: a range of results clearly above zero, the placebo, nearby settings, removing the best year, and how it does in the stock market's worst months.",
     "A strategy can fail the first group and pass the second. That means a real effect that is too small to beat stocks on its own, which can still be useful. The verdict on each strategy page comes from these two counts."
    ],
@@ -329,7 +329,7 @@
    ],
    "visual": {
     "kind": "gauntlet",
-    "alt": "Eleven gates in two rows, A1 to A6 and B1 to B5, light up one by one as pass or fail. In this example five A tests fail and four B tests pass.",
+    "alt": "11 gates in two rows, A1 to A6 and B1 to B5, light up one by one as pass or fail. In this example five A tests fail and four B tests pass.",
     "params": {
      "tests": [
       {
@@ -391,7 +391,7 @@
     },
     "steps": [
      {
-      "caption": "Eleven tests in two groups.",
+      "caption": "11 tests in two groups.",
       "upto": 0
      },
      {
@@ -412,7 +412,7 @@
      "space": "research"
     },
     {
-     "label": "The gauntlet in full",
+     "label": "All 11 tests",
      "href": "#/doc/REF-0006",
      "space": "research"
     }
@@ -429,7 +429,7 @@
      "why": "Group B says the effect looks real; group A says it does not beat stocks alone."
     },
     {
-     "q": "When were the gauntlet's pass marks set?",
+     "q": "When were the pass marks for the 11 tests set?",
      "options": [
       "After seeing the results",
       "Before seeing any results",

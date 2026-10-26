@@ -4,7 +4,7 @@ title: Public pages search engines can read, and a pipeline that keeps them fres
 type: decision
 status: accepted
 created: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-24
 authors: [ayan]
 tags: [process, ui]
 related: [DEC-0015, DEC-0019, DEC-0021, DEC-0022, GDE-0005]
@@ -17,7 +17,7 @@ related: [DEC-0015, DEC-0019, DEC-0021, DEC-0022, GDE-0005]
 Until now search engines could see almost nothing: the whole site told them "do not index", and everything useful sits behind sign-in. Now there are three new public sections, built from what we already write:
 
 - **Learn** (`/learn/`): every glossary term, explained simply, with an analogy and precisely.
-- **Ideas** (`/ideas/`): every trading idea in the catalog, with where it came from, the evidence, why it might fail and an honest verdict. Most say "not yet judged by Parity".
+- **Ideas** (`/ideas/`): every trading idea in the catalog, with where it came from, the evidence, why it might fail and Parity's verdict where we have tested it. Most say "not yet judged by Parity".
 - **Notes** (`/notes/`): the "In plain words" summary of each decision, research note and reference.
 
 They are plain, fast pages made when the site is built, so a new term or doc shows up by itself. The product, the research side, Sim World and the data stay behind sign-in and out of search. After every deploy, search engines that support IndexNow are told which pages changed. Once a week a job asks Google how we are doing and writes a short report. The Google part waits for the owner to verify the site ([GDE-0005](../guides/0005-google-search-console-and-the-seo-pipeline.md)).
@@ -35,7 +35,7 @@ The wall between product and research ([DEC-0015](0015-two-sides-a-product-app-a
    - The `noindex` header now applies only to those paths, to the sim address and to preview addresses (`web/public/_headers`).
    - The sign-in check (`web/functions/_middleware.ts`, `web/public/_routes.json`) is unchanged. The new sections were never in its list, so they are public.
 2. **The pages are made by a script at build time.** `scripts/seo/build_public.py` runs at the end of `npm run build`. It reads `docs/_system/glossary.json`, `catalog/algorithms/*.json` and the docs, and writes static HTML in the dark style of the front page, with a sign-up box. It reads no results, no ledger and nothing from `/data/`.
-3. **Each page carries what search and sharing need:** a title, a description, a canonical address, Open Graph and Twitter cards with a share image (`web/public/og/`), and schema.org data (Organization, WebSite, DefinedTerm, Article, BreadcrumbList).
+3. **Each page carries what search and sharing need:** a title, a description, a canonical address, Open Graph and Twitter cards with a share image (`/og/`, drawn at build since [DEC-0038](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)), and schema.org data (Organization, WebSite, DefinedTerm, Article, BreadcrumbList).
 4. **Honest wording on Ideas.** Reported numbers are labelled as the source's claims. The verdict comes from the catalog's research stage. Each page says it is not a recommendation.
 5. **The pipeline.**
    - Every production deploy rebuilds the pages and `sitemap.xml`, then sends only the changed addresses to IndexNow. The IndexNow key is a public file at the site root, by design.
@@ -61,5 +61,10 @@ The wall between product and research ([DEC-0015](0015-two-sides-a-product-app-a
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
+- [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
+- [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
+- [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
+- [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [GDE-0005: Google Search Console and the SEO pipeline](../guides/0005-google-search-console-and-the-seo-pipeline.md)
 <!-- backlinks:end -->

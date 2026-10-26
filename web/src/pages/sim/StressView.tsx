@@ -129,7 +129,7 @@ export function StressView({ data }: { data: WorldData }) {
           valueFmt={(_, __, r) => (r == null ? "n/a" : r.toFixed(1))}
           eyebrow={`Stress test · ${crisis.label} · your mix starts at 100`}
           initialFocus="mix"
-          honest={<>History replayed, not a forecast. The mix is bought at the start of each window and left alone, with no trading costs. Currencies are held as their value in US dollars. A mix that came through past crises can still fail in a new one.</>}
+          honest={<>The mix is bought at the start of each window and left alone, with no trading costs. Currencies are held as their value in US dollars. A mix that came through past crises can still fail in a new one.</>}
           below={() => (
             <Panel title="Every crisis, for this mix">
               <DataTable rows={results} rowKey={(r) => r.crisis.id} columns={cols} caption="What each past crisis did to the mix" initialSort={{ key: "ret", dir: "asc" }} />

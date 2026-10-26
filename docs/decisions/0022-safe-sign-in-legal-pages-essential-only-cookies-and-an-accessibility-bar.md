@@ -55,4 +55,9 @@ Sign-in worked for the simple case, but had gaps:
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
+- [DEC-0049: The desktop app opens on the log-in page, with a menu button and its own controls](0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)
+- [DEC-0053: Our own product analytics, opt-in, stored in Postgres](0053-our-own-product-analytics-opt-in-stored-in-postgres.md)
+- [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
+- [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
+- [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 <!-- backlinks:end -->

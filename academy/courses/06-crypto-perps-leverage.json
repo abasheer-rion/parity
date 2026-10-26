@@ -99,7 +99,7 @@
    "minutes": 2,
    "body": [
     "A **perpetual future**, or perp, is a bet on a coin's price that never expires. You can bet it goes up or down, usually with borrowed money.",
-    "Normal futures expire, and their price meets the coin's price at the end. A perp has no end, so it uses a different trick to stay close: the funding payment, covered in the next lesson.",
+    "Normal futures expire, and their price meets the coin's price at the end. A perp has no end, so it uses a funding payment to stay close, covered in the next lesson.",
     "The picture shows a perp's price tracking the coin's spot price closely, with a small gap that changes over time."
    ],
    "terms": [
@@ -643,7 +643,7 @@
    "minutes": 2,
    "body": [
     "**Crypto carry**, or the basis trade, holds a coin and bets against it with a perp at the same time. The two cancel out on price, so what is left is the funding the eager buyers pay.",
-    "It sounds risk free. It is not. The BIS documents that crypto carry has been large and very volatile, rising when demand for leveraged long bets is high. Funding can turn negative, the exchange can fail, and the short leg can be liquidated in a spike.",
+    "It is not risk free. The BIS documents that crypto carry has been large and very volatile, rising when demand for leveraged long bets is high. Funding can turn negative, the exchange can fail, and the short leg can be liquidated in a spike.",
     "Parity tests this idea as a strategy in its library."
    ],
    "terms": [

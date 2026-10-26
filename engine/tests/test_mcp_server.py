@@ -222,7 +222,9 @@ def test_draft_recipe_goes_to_the_drafts_folder_only(settings):
             "spec": CARRY, "name": name, "display_name": "x", "description": "x"})
 
 
-SPECS = [search.sample(random.Random(i)) for i in range(40)]
+# Plain specs only: combinators (gated, voltarget, offset, ensemble) live in the search.
+SPECS = [s for s in (search.sample(random.Random(i)) for i in range(120))
+         if s["kind"] not in search.WRAPPERS][:40]
 
 
 @pytest.mark.parametrize("spec", SPECS, ids=[f"{s['kind']}{i}" for i, s in enumerate(SPECS)])

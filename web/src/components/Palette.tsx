@@ -82,7 +82,7 @@ export function Palette({ report = null }: { report?: Report | null }) {
   const [q, setQ] = useState("");
   const [sel, setSel] = useState(0);
   const input = useRef<HTMLInputElement>(null);
-  const data = useDocs();
+  const data = useDocs(open);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -94,6 +94,14 @@ export function Palette({ report = null }: { report?: Report | null }) {
       }
     };
     const onOpen = () => setOpen(true);
+    // /app/?search (the 404 page's Search link, DEC-0055) opens search once, then drops the flag.
+    const q = new URLSearchParams(window.location.search);
+    if (q.has("search")) {
+      setOpen(true);
+      q.delete("search");
+      const rest = q.toString();
+      window.history.replaceState(window.history.state, "", `${window.location.pathname}${rest ? `?${rest}` : ""}${window.location.hash}`);
+    }
     document.addEventListener("keydown", onKey);
     window.addEventListener("parity:search", onOpen);
     return () => {
@@ -135,15 +143,15 @@ export function Palette({ report = null }: { report?: Report | null }) {
 
   return (
     <div className="palette-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
-      <div className="palette" role="dialog" aria-label="Search">
+      {/* Escape closes it wherever focus is inside, not only in the search box. */}
+      <div className="palette" role="dialog" aria-label="Search" onKeyDown={(e) => { if (e.key === "Escape") { e.stopPropagation(); setOpen(false); } }}>
         <input
           ref={input}
           value={q}
           placeholder="Search pages, strategies, words, docs, or ask a question"
           onChange={(e) => { setQ(e.target.value); setSel(0); }}
           onKeyDown={(e) => {
-            if (e.key === "Escape") setOpen(false);
-            else if (e.key === "ArrowDown") { e.preventDefault(); setSel((s) => Math.min(s + 1, total - 1)); }
+            if (e.key === "ArrowDown") { e.preventDefault(); setSel((s) => Math.min(s + 1, total - 1)); }
             else if (e.key === "ArrowUp") { e.preventDefault(); setSel((s) => Math.max(s - 1, 0)); }
             else if (e.key === "Enter") go(sel);
           }}

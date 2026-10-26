@@ -217,6 +217,8 @@ def test_export_writes_four_files_with_sources(tmp_path):
     out = tmp_path / "out" / "markets"
     crypto = json.loads((out / "crypto.json").read_text())
     assert crypto["coins"][0]["id"] == "bitcoin" and "bitcoin" in crypto["history"]
+    btc = crypto["history"]["bitcoin"]
+    assert len(btc["volumes"]) == len(btc["prices"]) and btc["volumes"][0][1] > 0
     assert crypto["sources"][0]["attribution"] == "Data provided by CoinGecko"
     perps = json.loads((out / "perps.json").read_text())
     assert perps["perps"][0]["coin"] == "BTC" and perps["perps"][0]["funding"]["hours"] == 48

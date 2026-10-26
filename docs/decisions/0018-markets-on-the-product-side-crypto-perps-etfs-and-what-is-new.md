@@ -54,6 +54,8 @@ Most crypto exchanges forbid showing their data on someone else's site. We read 
 
 - [DEC-0019: Real trading later, what it would legally take](0019-real-trading-later-what-it-would-legally-take.md)
 - [DEC-0029: Private markets, free proxies, an unsmoothing study and plain pages](0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md)
+- [DEC-0034: Demo accounts, paper trading on delayed data](0034-demo-accounts-paper-trading-on-delayed-data.md)
+- [DEC-0052: Live prices stream through our own edge, and every chart says how late they are](0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 <!-- backlinks:end -->

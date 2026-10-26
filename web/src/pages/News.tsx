@@ -2,9 +2,10 @@
 // afterwards, and the biggest market days since 1999 with the news for each.
 import { useEffect, useMemo, useState } from "react";
 import { Title } from "../components/Shell";
-import { Badge, Card, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, SearchInput, Segmented, Select, Tabs, type Column } from "../ui";
+import { useHashState } from "../lib/deeplink";
+import { Badge, Card, type Column, DataTable, Drawer, EmptyState, FilterBar, Icon, LineChart, PageSkeleton, SearchInput, Segmented, Select, TableScroll, Tabs, useResource } from "../ui";
 import { Archive, Impact as ImpactSearch } from "./NewsImpact";
-import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay, type RecordsDoc } from "../lib/news";
+import { loadNews, loadRecords, moveText, zText, zWord, type Article, type Horizon, type Impact, type NewsDoc, type RecordDay } from "../lib/news";
 
 type View = "latest" | "archive" | "impact" | "history";
 type SortKey = "newest" | "oldest" | "biggest";
@@ -25,9 +26,9 @@ export function News({ view: initial }: { view?: string }) {
     <>
       <div className="page-head">
         <Title label="News">News and market moves</Title>
-        <p>The newest headlines from central banks, government statistics offices and an open news index, how markets
-          moved afterwards compared with a normal day, an archive going back decades, and a tool to see which kinds of
-          news came before unusual moves. A big move after a headline does not prove the headline caused it.</p>
+        <p>The newest headlines from central banks, government statistics offices and an open news index, with how markets
+          moved afterwards compared with a normal day. The archive goes back to the 1970s. The impact tab shows which kinds
+          of news came before unusual moves. A big move after a headline does not prove the headline caused it.</p>
       </div>
       <Tabs label="News view" value={view} onChange={go} tabs={[["latest", "Latest"], ["archive", "Archive"], ["impact", "Impact search"], ["history", "Biggest days in history"]]} />
       <div style={{ height: 16 }} />
@@ -39,19 +40,20 @@ export function News({ view: initial }: { view?: string }) {
 // ------------------------------------------------------------------ latest
 
 function Latest() {
-  const [doc, setDoc] = useState<NewsDoc | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [q, setQ] = useState("");
-  const [ccy, setCcy] = useState("");
-  const [cmd, setCmd] = useState("");
-  const [region, setRegion] = useState("");
-  const [src, setSrc] = useState("");
-  const [cat, setCat] = useState("");
-  const [sort, setSort] = useState<SortKey>("newest");
-  const [horizon, setHorizon] = useState<Horizon>("1d");
+  // The filters live in the link, so Copy link and the back button reopen this view (DEC-0038).
+  const [q, setQ] = useHashState("q");
+  const [ccy, setCcy] = useHashState("ccy");
+  const [cmd, setCmd] = useHashState("cmd");
+  const [region, setRegion] = useHashState("region");
+  const [src, setSrc] = useHashState("src");
+  const [cat, setCat] = useHashState("cat");
+  const [sortRaw, setSort] = useHashState("sort", "newest");
+  const sort: SortKey = (["newest", "oldest", "biggest"] as const).includes(sortRaw as SortKey) ? (sortRaw as SortKey) : "newest";
+  const [horizonRaw, setHorizon] = useHashState("h", "1d");
+  const horizon: Horizon = (["1h", "1d", "1w", "1m"] as const).includes(horizonRaw as Horizon) ? (horizonRaw as Horizon) : "1d";
   const [open, setOpen] = useState<Article | null>(null);
 
-  useEffect(() => { loadNews().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
+  const { data: doc, error } = useResource("news", loadNews);
 
   const arts = doc?.articles ?? [];
   const opts = (vals: string[], all: string, label = (v: string) => v): [string, string][] =>
@@ -70,7 +72,7 @@ function Latest() {
   }, [arts, q, ccy, cmd, region, src, cat, sort, horizon]);
 
   if (error) return <EmptyState title="No news yet">{error}</EmptyState>;
-  if (!doc) return <p className="muted">Loading news</p>;
+  if (!doc) return <PageSkeleton parts={["table"]} label="Loading news" />;
   const count = [ccy, cmd, region, src, cat, q].filter(Boolean).length;
   const reset = () => { setCcy(""); setCmd(""); setRegion(""); setSrc(""); setCat(""); setQ(""); };
 
@@ -161,7 +163,7 @@ function ArticleDetail({ a, doc }: { a: Article; doc: NewsDoc }) {
         </>
       ) : <p className="muted">No price path for this item yet.</p>}
       {rows.length > 0 && (
-        <div className="table-wrap">
+        <TableScroll>
           <table className="mtable dense">
             <thead><tr><th className="left">Series</th><th>1 hour</th><th>1 day</th><th>1 week</th><th>1 month</th></tr></thead>
             <tbody>
@@ -176,7 +178,7 @@ function ArticleDetail({ a, doc }: { a: Article; doc: NewsDoc }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       )}
       <p className="muted small">One hour moves need intraday prices, which we do not have yet. z is the move divided by the normal move
         over the same length of time in the year before, so 1 is ordinary and 3 is rare. Other news on the same day may explain the move.</p>
@@ -206,12 +208,10 @@ function Sources({ doc }: { doc: NewsDoc }) {
 // ------------------------------------------------------------------ history
 
 function History() {
-  const [doc, setDoc] = useState<RecordsDoc | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { data: doc, error } = useResource("news-records", loadRecords);
   const [series, setSeries] = useState("eq.US_TOTAL");
-  useEffect(() => { loadRecords().then(setDoc).catch((e: Error) => setError(e.message)); }, []);
   if (error) return <EmptyState title="No records yet">{error}</EmptyState>;
-  if (!doc) return <p className="muted">Loading records</p>;
+  if (!doc) return <PageSkeleton parts={["table"]} label="Loading records" />;
   const meta = doc.series.find((s) => s.key === series) ?? doc.series[0];
   const rows = doc.records.filter((r) => r.series === meta?.key);
   const columns: Column<RecordDay>[] = [

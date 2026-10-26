@@ -6,6 +6,7 @@ import { Term } from "../Learn";
 import { addPractice, day, loadCrypto, pctText, usd, usdCompact, useMarket, type Coin, type CryptoDoc } from "../../lib/markets";
 import { Attribution, Checks, Loading, Risk, Sources, Stat, type Check } from "./shared";
 import { toast } from "../../ui";
+import { localDay } from "../../lib/format";
 
 export function coinChecks(c: Coin, doc: CryptoDoc): Check[] {
   const h = doc.history[c.id];
@@ -31,7 +32,7 @@ export function Crypto() {
 
   const follow = (c: Coin) => {
     if (c.price_usd == null) return;
-    addPractice({ kind: "coin", symbol: c.symbol, name: c.name, coinId: c.id, amount: 1000, entryPrice: c.price_usd, entryDate: new Date().toISOString().slice(0, 10) });
+    addPractice({ kind: "coin", symbol: c.symbol, name: c.name, coinId: c.id, amount: 1000, entryPrice: c.price_usd, entryDate: localDay() });
     toast(`Added a practice position of $1,000 in ${c.name}. No real money.`, { action: { label: "Open Practice", run: () => { window.location.hash = "#/markets/practice"; } } });
   };
 
@@ -80,7 +81,7 @@ export function Crypto() {
       )}
 
       <section style={{ marginTop: 16 }}>
-        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: 16 }}>The 100 largest coins</h2><span className="muted small">by market value, from {day(doc.fetched_at)}</span></div>
+        <div className="mk-card-head"><h2 style={{ margin: 0, fontSize: "var(--type-xl)" }}>The 100 largest coins</h2><span className="muted small">by market value, from {day(doc.fetched_at)}</span></div>
         <p className="muted small">Ordered by size, not by gains. Market value is price times coins in circulation. Practice adds a pretend position you can watch; it is not a purchase.</p>
         <div className="mk-table-scroll">
           <DataTable rows={doc.coins} columns={cols} rowKey={(c) => c.id} initialSort={{ key: "rank", dir: "asc" }} dense caption="The 100 largest coins by market value" />

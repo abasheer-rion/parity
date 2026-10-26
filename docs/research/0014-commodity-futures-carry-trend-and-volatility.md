@@ -150,5 +150,5 @@ So the testable version is: use last quarter's moves in commodity currencies to 
 - [EXP-0010: Oil volatility and commodity currency signals](../experiments/0010-oil-volatility-and-commodity-currency-signals.md)
 - [RES-0015: Famous currency and commodity traders and what their records teach](0015-famous-currency-and-commodity-traders-and-what-their-records-teach.md)
 - [RES-0016: Lesser-known strategies and what firms have published](0016-lesser-known-strategies-and-what-firms-have-published.md)
-- [LOG-0011: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
+- [LOG-0020: Emerging markets, energy futures and the next official runs](../log/2026-10-22-emerging-markets-energy-futures-and-the-next-official-runs.md)
 <!-- backlinks:end -->

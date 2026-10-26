@@ -92,10 +92,16 @@ def crypto_doc(root: Path) -> dict:
     history = {}
     if not daily.empty:
         for coin, g in daily.groupby("coin"):
-            s = g.sort_values("date").set_index("date")["price_usd"]
+            g = g.sort_values("date").set_index("date")
+            s = g["price_usd"]
             s.index = s.index.astype(str)
             history[coin] = {"stats": stats.price_stats(s),
                              "prices": [[d, _clean(v)] for d, v in s.items()]}
+            # Daily traded volume in USD, for the Trade charts' volume, VWAP and OBV.
+            if "volume_usd" in g:
+                vol = g["volume_usd"]
+                vol.index = vol.index.astype(str)
+                history[coin]["volumes"] = [[d, _clean(v)] for d, v in vol.items()]
     fetched = mk["fetched_at"].max() if not mk.empty else None
     return {"fetched_at": _iso(fetched), "coins": coins, "history": history,
             "sources": source_list(["coingecko-markets", "coingecko-history"], root)}

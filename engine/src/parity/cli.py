@@ -22,6 +22,16 @@
                                  simulated paths from blocks of real weekly returns (CSV)
     parity terminal export       write output/terminal/ for Parity Terminal (every series
                                  the site may show; --markets DIR adds crypto)
+    parity bots run --market stocks --start 1990
+                                 Bot Battle: seven trading-bot archetypes on one market
+                                 (win rate is not profit, DEC-0035); --synthetic N runs
+                                 them on N made-up paths with crashes instead
+    parity bots export           write output/bots/ for the Bot Battle page and the clips
+    parity sims run --forever    the always-on sims service (DEC-0037); `sims status`
+                                 shows whether the search and the sims are alive
+    parity profiles collect      public feedback on the products we profile (CMP docs),
+                                 only from sources whose terms allow it; `profiles
+                                 sources` lists each source and its terms
     parity new-strategy "Name" --family F --asset A
                                  create the files for a new strategy
     parity analyse NAME          strengths and weaknesses report for one strategy
@@ -37,6 +47,9 @@
     parity markets export DIR    write the Markets pages' JSON into DIR/markets
 
     parity mcp                   Parity tools for AI assistants (MCP over stdio, DEC-0025)
+
+    parity registry status       the data registry (DEC-0064): sources, series, rights,
+                                 status and health; `registry sync` copies the catalog in
 """
 
 from __future__ import annotations
@@ -74,8 +87,9 @@ def _data(args) -> int:
             print(json.dumps(rows, indent=1))
             return 0
         for r in rows:
-            print(f"{r['id']:<15} {r['status']:<13} {r['series']:>3} series  key: {r['key']}")
-            print(f"{'':<15} {r['name']}. {r['licence']}. Cost: {r['cost']}."
+            print(f"{r['id']:<17} {r['status']:<13} {r['series']:>3} series  key: {r['key']}")
+            print(f"{'':<17} {r['name']}. {r['licence']}. Cost: {r['cost']}."
+                  + (f" Reaches a screen: {r['feed']}." if r.get("feed") else "")
                   + (f" {r['note'][:1].upper()}{r['note'][1:]}." if r["note"] else ""))
         on = sum(r["status"] == "on" for r in rows)
         print(f"\n{on} of {len(rows)} providers on. Keys are read from the environment and "
@@ -307,6 +321,63 @@ def _terminal(args) -> int:
     return 0
 
 
+def _bots(args) -> int:
+    from . import bots
+
+    if args.action == "export":
+        index, runs = bots.export(n_paths=args.paths, summary_paths=args.summary_paths,
+                                  years=args.years)
+        out = Path(args.out) if args.out else DEFAULT_OUT
+        folder = out / "bots"
+        folder.mkdir(parents=True, exist_ok=True)
+        for run in runs:
+            (folder / f"{run['id']}.json").write_text(json.dumps(run, separators=(",", ":")))
+        (folder / "index.json").write_text(json.dumps(index, separators=(",", ":")))
+        size = sum(f.stat().st_size for f in folder.glob("*.json")) / 1e6
+        print(f"Wrote {folder}: {len(runs)} replays ({size:.1f} MB), data through "
+              f"{index['data_through']}")
+        return 0
+    if args.synthetic:
+        summary = bots.synthetic_summary(args.synthetic, args.seed, args.years)
+        if args.json:
+            print(json.dumps(summary, indent=2))
+            return 0
+        print(f"{args.synthetic} made-up paths of {args.years} years, $10,000 start each")
+        print(f"{'Bot':<20} {'Median win rate':>15} {'Ahead':>7} {'Stopped':>8} "
+              f"{'Median final':>13} {'Median worst fall':>18}")
+        for cls in bots.BOTS:
+            r = summary[cls.id]
+            wr = "n/a" if r["median_win_rate"] is None else f"{r['median_win_rate']:.0%}"
+            print(f"{cls.name:<20} {wr:>15} {r['ahead']:>7} {r['blown']:>8} "
+                  f"{r['median_final']:>13,.0f} {r['median_max_drawdown']:>18.0%}")
+    else:
+        try:
+            s = bots.load_market(args.market, args.start, args.end)
+        except (KeyError, FileNotFoundError) as e:
+            print(e, file=sys.stderr)
+            return 1
+        results = bots.battle(s.to_numpy(), s.index, args.cost_bps)
+        if args.json:
+            print(json.dumps([x for _, x in results], indent=2))
+            return 0
+        print(f"{bots.MARKETS[args.market][0]}, {s.index[0].date()} to {s.index[-1].date()}, "
+              f"$10,000 start, {args.cost_bps:g} bp a side")
+        print(f"{'Bot':<20} {'Trades':>7} {'Win rate':>9} {'Avg win':>9} {'Avg loss':>9} "
+              f"{'PF':>6} {'Expect.':>8} {'Final':>14} {'Worst fall':>11} {'Recovered':>10}")
+        for (_r, x), cls in zip(results, bots.BOTS, strict=True):
+            wr = "n/a" if x["win_rate"] is None else f"{x['win_rate']:.1%}"
+            pf = "n/a" if x["profit_factor"] is None else f"{x['profit_factor']:.2f}"
+            ex = "n/a" if x["expectancy"] is None else f"{x['expectancy']:,.0f}"
+            rec = ("stopped" if x["blown"] else "never" if x["days_to_recover"] is None
+                   else f"{x['days_to_recover'] / 365.25:.1f} yrs")
+            print(f"{cls.name:<20} {x['trades']:>7} {wr:>9} {x['avg_win']:>9,.0f} "
+                  f"{x['avg_loss']:>9,.0f} {pf:>6} {ex:>8} {x['final']:>14,.0f} "
+                  f"{x['max_drawdown']:>11.0%} {rec:>10}")
+    print("Expectancy per trade = win rate x average win - loss rate x average loss.")
+    print(bots.DISCLAIMER)
+    return 0
+
+
 def _serve(args) -> int:
     from . import api
 
@@ -382,14 +453,21 @@ def _search(args) -> int:
             search.run_forever(batch=args.batch, max_hours=args.hours)
             return 0
         out = search.run_batch(args.n, seed=args.seed)
-        print(f"tried {out['tried']}, failed {out['failed']}")
+        print(f"tried {out['tried']}, failed {out['failed']}, "
+              f"rejected {out['repeats']} repeats before backtesting")
+        if out["widened"]:
+            print(out["widened"])
     doc = search.export() if args.action in ("run", "export") else None
     df = search.load()
     good = df[df["error"].isna()].copy()
     if not len(good):
         print("nothing tried yet")
         return 0
-    good["deflated"] = search.deflate(good)
+    good["deflated"] = search.deflate(good, len(df))
+    con = search.connect()
+    level, share = search.widen_level(con), search.repeat_share(con)
+    print(f"widening level {level}" + ("" if share is None else
+          f", {share:.0%} of recent draws were repeats (widens above {search.WIDEN_AT:.0%})"))
     print(f"{len(df)} variations tried, {len(good)} ran, "
           f"{int(good['beats_market'].sum())} beat the market's Sharpe, "
           f"{int((good['deflated'] >= 0.95).sum())} pass the luck check")
@@ -397,6 +475,34 @@ def _search(args) -> int:
         print(f"  {r['deflated']:.2f}  Sharpe {r['sharpe']:.2f}  {r['cagr']:6.1%}  {r['name']}")
     if doc:
         print(f"wrote {len(doc['rows'])} rows to engine/output/search.json")
+    return 0
+
+
+def _sims(args) -> int:
+    from . import sims
+
+    if args.action == "run":
+        if args.forever:
+            sims.run_forever(paths=args.paths, world_n=args.world_paths,
+                             sleep_minutes=args.sleep_minutes, max_hours=args.hours)
+            return 0
+        out = sims.cycle(sims.connect(), args.paths, args.world_paths,
+                         exports=not args.no_exports)
+        for s in out["steps"]:
+            print(f"  {s['step']:<16} {'ok' if s['ok'] else 'FAILED'}  {s['seconds']:>6.1f}s"
+                  + (f"  {s['error']}" if not s["ok"] else ""))
+    if args.action in ("run", "export"):
+        doc = sims.export()
+        bots = doc["bots"]
+        print(f"wrote engine/output/sims.json: {bots['paths']:,} made-up paths per bot, "
+              f"{bots['crash_paths']:,} with a crash")
+        for b in bots["by_bot"].values():
+            share = b["blown_in_crash_share"]
+            print(f"  {b['name']:<20} stopped out on "
+                  f"{'n/a' if share is None else f'{share:.0%}'} of crash paths")
+        return 0
+    for line in sims.health():
+        print(line)
     return 0
 
 
@@ -439,6 +545,12 @@ def _markets(args) -> int:
     from .markets import cli as markets_cli
 
     return markets_cli.run(args)
+
+
+def _profiles(args) -> int:
+    from .profiles import cli as profiles_cli
+
+    return profiles_cli.run(args)
 
 
 def _mcp(_args) -> int:
@@ -574,6 +686,25 @@ def main(argv: list[str] | None = None) -> int:
     tm.add_argument("--markets", default=None, help="folder holding markets/crypto.json "
                     "from `parity markets export`; default: the local markets cache")
     tm.set_defaults(func=_terminal)
+    bt = sub.add_parser("bots", help="Bot Battle: trading-bot archetypes, win rate vs profit "
+                        "(DEC-0035)")
+    bt.add_argument("action", choices=["run", "export"])
+    bt.add_argument("--market", default="stocks", choices=["stocks", "EUR", "oil"])
+    bt.add_argument("--start", default="1990-01-01")
+    bt.add_argument("--end", default=None)
+    bt.add_argument("--cost-bps", type=float, default=2.0, help="cost per buy or sell")
+    bt.add_argument("--synthetic", type=int, default=0, metavar="N",
+                    help="run: use N made-up paths with crashes instead of a real market")
+    bt.add_argument("--seed", type=int, default=1)
+    bt.add_argument("--years", type=int, default=10, help="length of each made-up path")
+    bt.add_argument("--json", action="store_true")
+    bt.add_argument("--paths", type=int, default=12, help="export: made-up paths to replay")
+    bt.add_argument("--summary-paths", type=int, default=100,
+                    help="export: made-up paths behind the summary")
+    bt.add_argument("--out", default=None, help="export: folder; files go in <out>/bots "
+                    "(default output)")
+    bt.set_defaults(func=_bots)
+
     from .strategies.base import ASSETS, FAMILIES
 
     ns = sub.add_parser("new-strategy", help="create the files for a new strategy")
@@ -610,6 +741,18 @@ def main(argv: list[str] | None = None) -> int:
                     help="with --forever, exit after this long so the service can restart")
     se.set_defaults(func=_search)
 
+    sm = sub.add_parser("sims", help="the always-on sims: Bot Battle paths, Sim World paths "
+                        "and the site exports, on a loop (DEC-0037)")
+    sm.add_argument("action", choices=["run", "status", "export"])
+    sm.add_argument("--forever", action="store_true", help="keep going; for the service")
+    sm.add_argument("--paths", type=int, default=1000, help="made-up Bot Battle paths a cycle")
+    sm.add_argument("--world-paths", type=int, default=2000, help="Sim World paths a cycle")
+    sm.add_argument("--sleep-minutes", type=float, default=20.0, help="rest between cycles")
+    sm.add_argument("--hours", type=float, default=None,
+                    help="with --forever, exit after this long so the service can restart")
+    sm.add_argument("--no-exports", action="store_true", help="run: skip the site exports")
+    sm.set_defaults(func=_sims)
+
     sub.add_parser("mcp", help="Parity tools for AI assistants over MCP stdio (DEC-0025)"
                    ).set_defaults(func=_mcp)
 
@@ -620,6 +763,18 @@ def main(argv: list[str] | None = None) -> int:
     from .markets import cli as markets_cli
 
     markets_cli.add_parser(sub).set_defaults(func=_markets)
+
+    from .profiles import cli as profiles_cli
+
+    profiles_cli.add_parser(sub).set_defaults(func=_profiles)
+
+    from . import latency
+
+    latency.add_parser(sub).set_defaults(func=latency.run)
+
+    from .registry import cli as registry_cli
+
+    registry_cli.add_parser(sub).set_defaults(func=registry_cli.run)
 
     args = p.parse_args(argv)
     if args.cmd == "ticks" and not args.import_file and not args.date:
