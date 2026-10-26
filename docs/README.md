@@ -15,7 +15,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 23 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
-| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
+| [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 90 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
 ## Open questions right now
@@ -337,6 +337,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | ALG-0080 | [Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0081 | [Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md) | sourced | 2026-10-21 | [fx](TAGS.md#fx), [strategy](TAGS.md#strategy) |
 | ALG-0082 | [Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md) | sourced | 2026-10-21 | [strategy](TAGS.md#strategy) |
+| ALG-0099 | [Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md) | sourced | 2026-10-25 | [commodities](TAGS.md#commodities), [strategy](TAGS.md#strategy) |
+| ALG-0100 | [Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0101 | [Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0102 | [VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0103 | [Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md) | sourced | 2026-10-25 | [open-source](TAGS.md#open-source), [strategy](TAGS.md#strategy) |
+| ALG-0104 | [Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md) | sourced | 2026-10-25 | [momentum](TAGS.md#momentum), [strategy](TAGS.md#strategy) |
+| ALG-0105 | [Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
+| ALG-0106 | [Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md) | sourced | 2026-10-25 | [strategy](TAGS.md#strategy) |
 
 ## dataset
 

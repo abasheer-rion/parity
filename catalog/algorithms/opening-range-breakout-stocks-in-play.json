@@ -1,0 +1,79 @@
+{
+  "id": "ALG-0103",
+  "slug": "opening-range-breakout-stocks-in-play",
+  "name": "Opening range breakout on stocks in play (5-minute ORB)",
+  "family": "technical-indicator",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "day-trading",
+    "breakout",
+    "opening-range",
+    "stocks-in-play",
+    "retail"
+  ],
+  "origin": {
+    "type": "practitioner",
+    "first_published": 2024,
+    "authors": "Zarattini, Barbon, Aziz",
+    "source_title": "A Profitable Day Trading Strategy For The U.S. Equity Market (SSRN 4729284; Swiss Finance Institute Research Paper 24-98)",
+    "source_url": "https://doi.org/10.2139/ssrn.4729284"
+  },
+  "how_it_works": {
+    "simple": "Watch only the stocks with unusual trading that morning, usually because of news. If the first five minutes close up, buy; if down, sell short; get out by the close.",
+    "analogy": "Like joining the crowd that has already started running, but only on days when there is a real reason to run.",
+    "precise": "Stocks in play are screened by relative volume (opening price above $5, average volume of at least 1 million shares over 14 days, 14-day ATR above $0.50, per one summary). Trade in the direction of the first 5-minute candle, with a stop sized from ATR, and close at the end of the day. The paper holds the top 20 stocks by relative volume each day."
+  },
+  "rule": "Each day, rank liquid US stocks by opening relative volume and take the top 20. Go long if the first 5-minute bar closes above its open, short if below; stop-loss sized from the 14-day ATR (the exact fraction is in the paper, which we have not read); exit at the close.",
+  "data_needed": [
+    "5-minute bars for all US stocks",
+    "Daily volume and ATR"
+  ],
+  "economic_rationale": "News days bring informed order flow and attention, so the opening move tends to continue during the day for stocks with real news.",
+  "why_it_might_fail": "One of the authors sells day-trading education, and the paper's 2016 to 2023 sample is short. Intraday costs and short-sale constraints on news stocks are hard to model, and later costs could take most of the edge.",
+  "reported_results": [
+    {
+      "source": "Zarattini, Barbon and Aziz (2024), abstract",
+      "source_url": "https://ideas.repec.org/p/chf/rpseri/rp2498.html",
+      "period": "2016 to 2023",
+      "market": "US stocks, top 20 stocks in play",
+      "sharpe": 2.81,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Abstract: a portfolio of the top 20 stocks in play achieved total net performance of over 1,600%, a Sharpe ratio of 2.81 and an annualised alpha of 36%, against 198% for the S&P 500. The abstract says this holds after transaction costs but does not state the assumptions."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet.",
+  "implementations": [
+    {
+      "url": "https://www.quantconnect.com/research/18444/opening-range-breakout-for-stocks-in-play/",
+      "language": "Python",
+      "license": "unknown",
+      "notes": "QuantConnect replication; its own reported Sharpe is about 2.4 (from a search summary, not read by us)."
+    }
+  ],
+  "relevance": {
+    "score": 4,
+    "reason": "Opening range breakouts are among the most taught and botted day-trading rules, so a published, costed version gives Verify a reference point for day-trader logs."
+  },
+  "testable_with_free_data": false,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Needs intraday bars for thousands of stocks, which we do not have free. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}
