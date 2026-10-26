@@ -9,6 +9,9 @@ INSERT INTO source (id, name, kind, domain, is_primary, prior_confirmed, prior_r
   (246, 'Federal Reserve (press release)', 'agency', 'federalreserve.gov', true, 0, 0),
   (247, 'CBOT 30-day fed funds futures (front month, via Yahoo ZQ=F)', 'market', NULL, true, 0, 0);
 INSERT INTO entity (id, kind, name) VALUES (202, 'instrument', 'US policy-rate surprise (fed funds, pct points)');
+-- Its price CHECK (never its reason): the 3-month T-bill yield, the nearest daily-priced rate. Betas are measured on
+-- the part of its move SPY does not explain, so a fear day (yields and stocks down together) is not read as policy.
+INSERT INTO security (id, entity_id, ticker, exchange) VALUES (150, 202, '^IRX', 'INDEX');
 
 INSERT INTO source_doc (id, source_id, kind, url, title, published_at) VALUES
   (229, 246, 'press_release', 'https://www.federalreserve.gov/boarddocs/press/general/2001/20010103/', 'FOMC cuts the funds target 50bp to 6.0% between meetings; discount rate cut 25bp', '2001-01-03 13:13-05'),
