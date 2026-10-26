@@ -165,6 +165,12 @@ test.describe("views", () => {
 });
 
 test.describe("phone", () => {
+  test("the top bar's timeframe buttons all fit on screen", async ({ page }, info) => {
+    test.skip(info.project.name !== "phone", "phone layout");
+    await ready(page);
+    for (const tf of ["1D", "1W", "1M"]) await expect(page.getByRole("toolbar", { name: "Chart" }).getByRole("radio", { name: tf })).toBeInViewport({ ratio: 1 });
+  });
+
   test("the bottom bar switches between chart, ticket and positions", async ({ page }, info) => {
     test.skip(info.project.name !== "phone", "phone layout");
     await ready(page);
