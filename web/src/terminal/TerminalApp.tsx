@@ -103,7 +103,7 @@ function withPanel(s: WsState, fn: string, args: string[] = []): WsState {
   return { ...s, tree: updateLeaf(s.tree, s.focus, { fn, args, opts: {} }) };
 }
 
-const FKEYS: Record<string, number> = { F2: 0, F3: 1, F4: 2, F5: 3, F6: 4 };
+const FKEYS: Record<string, number> = { F2: 0, F3: 1, F4: 2, F5: 3, F6: 4, F7: 5 };
 
 function TermShell() {
   const index = useLoad(loadIndex);
@@ -290,7 +290,7 @@ function TermShell() {
       }
       if (e.key === "F1") { e.preventDefault(); run("HELP"); return; }
       if (e.key in FKEYS) { e.preventDefault(); switchWs(WORKSPACES[FKEYS[e.key]].id); return; }
-      if (ctrl && !e.shiftKey && !e.altKey && /^[1-5]$/.test(e.key)) { e.preventDefault(); switchWs(WORKSPACES[+e.key - 1].id); return; }
+      if (ctrl && !e.shiftKey && !e.altKey && /^[1-6]$/.test(e.key)) { e.preventDefault(); switchWs(WORKSPACES[+e.key - 1].id); return; }
       if (typing) return;
       if (ctrl && e.key.startsWith("Arrow")) {
         e.preventDefault();

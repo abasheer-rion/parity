@@ -18,7 +18,8 @@
                                  what markets did after past events like a scenario
     parity scenario export       write output/scenarios.json for the dashboard
     parity world export          write output/world.json for Sim World's map
-    parity world paths --asset EUR --asset oil --weeks 26
+    parity world stress          write output/stress.json: Monte Carlo stress tests of six mixes
+parity world paths --asset EUR --asset oil --weeks 26
                                  simulated paths from blocks of real weekly returns (CSV)
     parity terminal export       write output/terminal/ for Parity Terminal (every series
                                  the site may show; --markets DIR adds crypto)
@@ -262,6 +263,16 @@ def _world(args) -> int:
     from . import world
 
     levels = world.load_levels()
+    if args.action == "stress":
+        from . import stress
+
+        doc = stress.export(levels)
+        out = Path(args.out or DEFAULT_OUT / "stress.json")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(doc, separators=(",", ":")))
+        print(f"Wrote {out}: {len(doc['mixes'])} mixes, {doc['paths']:,} paths per run, "
+              f"history {doc['data_from']} to {doc['data_through']}")
+        return 0
     if args.action == "export":
         doc = world.export(levels, world.load_rates(), sc.load_events())
         out = Path(args.out or DEFAULT_OUT / "world.json")
@@ -661,9 +672,10 @@ def main(argv: list[str] | None = None) -> int:
     sc.set_defaults(func=_scenario)
 
     wd = sub.add_parser("world", help="Sim World's map file and simulated paths (DEC-0016)")
-    wd.add_argument("action", choices=["export", "paths"])
+    wd.add_argument("action", choices=["export", "paths", "stress"])
     wd.add_argument("--out", default=None,
-                    help="export: default output/world.json; paths: a CSV file, or - for stdout")
+                    help="export: default output/world.json; stress: output/stress.json; "
+                    "paths: a CSV file, or - for stdout")
     wd.add_argument("--asset", action="append", default=[], help="EUR, oil, stocks, ...")
     wd.add_argument("--weeks", type=int, default=26)
     wd.add_argument("--n", type=int, default=1000, help="number of paths")

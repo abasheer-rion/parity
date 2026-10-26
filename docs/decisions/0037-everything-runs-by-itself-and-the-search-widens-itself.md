@@ -44,7 +44,7 @@ The owner asked that everything should always run by itself, and keep running mo
    - One cycle runs:
      - Bot Battle on 1,000 fresh made-up paths. Seeds start at 1,000,000 and never repeat.
      - 2,000 Sim World bootstrap paths of 26 weeks for the euro, yen, oil, US stocks and an equal basket.
-     - `world export`, `scenario export`, `terminal export` and `bots export`, through the same command line code as by hand.
+     - `world export`, `world stress` (added by [DEC-0066](0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)), `scenario export`, `terminal export` and `bots export`, through the same command line code as by hand.
    - It keeps running totals and fixed-bin histograms, not the paths, so a million paths still cost a few hundred kilobytes in `engine/output/sims.db`. A step that fails is recorded, and the rest of the cycle still runs.
    - `scripts/sims-service/run.sh` and `install.sh` copy the search service's pattern:
      - launchd label `com.endyland.parity-sims`, running as the user;

@@ -91,6 +91,7 @@ jobs:
           parity fetch
           parity scenario export --out dist/data/scenarios.json
           parity world export --out dist/data/world.json
+          parity world stress --out dist/data/stress.json
           parity bots export --out dist/data
       - name: Copy news and market moves into the site
         run: |

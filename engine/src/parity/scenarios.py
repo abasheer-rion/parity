@@ -374,6 +374,89 @@ def library(studied: list[dict]) -> dict:
             "families": {f: e for f, e in by_family.items() if e["count"]}}
 
 
+# ---------------------------------------------------------------- echoes
+
+ECHO_DAYS = 60       # recent trading days checked
+ECHO_MIN_ASSETS = 6  # markets a day and an event must share before they are compared
+ECHO_MIN_SIM = 0.6   # cosine similarity kept as a resemblance
+# A day the Terminal flags: moves 1.5 daily volatilities in size on average, and pointing
+# the same way as a past event's first day with similarity 0.8 or more.
+ECHO_ALERT = {"min_size": 1.5, "min_sim": 0.8}
+
+
+def day_moves(prices: dict[str, pd.Series], days: int = ECHO_DAYS) -> list[dict]:
+    """Each recent trading day's 1-day move per market, in its own units and in daily
+    volatilities (the year before), from real closes only. A market with no close that
+    day is left out of that day."""
+    measures = {a.key: a.measure for a in ASSETS}
+    calendar = sorted(set().union(*(s.index[-(days + 5):] for s in prices.values())))[-days:]
+    out = []
+    for d in calendar:
+        moves = {}
+        for key, s in prices.items():
+            if d not in s.index:
+                continue
+            k = s.index.get_loc(d)
+            if k < VOL_WINDOW // 2:
+                continue
+            prev, now = float(s.iloc[k - 1]), float(s.iloc[k])
+            window = s.iloc[max(0, k - VOL_WINDOW):k].to_numpy(float)
+            if measures[key] == "pct":
+                if prev <= 0 or (window <= 0).any():
+                    continue
+                change = (now / prev - 1) * 100
+                daily = np.diff(np.log(window)) * 100
+            else:
+                change = _change(np.array([now - prev]), 0.0, measures[key])[0]
+                daily = _change(np.diff(window), 0.0, measures[key])
+            vol = float(np.std(daily, ddof=1)) if daily.size > 60 else float("nan")
+            if not vol or not math.isfinite(vol):
+                continue
+            moves[key] = {"close": round(now, 6), "change": round(float(change), 3),
+                          "vol": round(vol, 4), "z": round(float(change) / vol, 2)}
+        out.append({"date": pd.Timestamp(d).date().isoformat(), "moves": moves})
+    return out
+
+
+def resemblance(today: dict[str, float], event: dict[str, float],
+                min_assets: int = ECHO_MIN_ASSETS) -> tuple[float, int] | None:
+    """Cosine similarity of two sets of z-moves over the markets both have, and how many."""
+    shared = [k for k in today if k in event and event[k] is not None]
+    if len(shared) < min_assets:
+        return None
+    a = np.array([today[k] for k in shared], float)
+    b = np.array([event[k] for k in shared], float)
+    na, nb = np.linalg.norm(a), np.linalg.norm(b)
+    if not na or not nb:
+        return None
+    return float(a @ b / (na * nb)), len(shared)
+
+
+def echoes(studied: list[dict], prices: dict[str, pd.Series], days: int = ECHO_DAYS,
+           keep: int = 5) -> dict:
+    """Recent days whose moves looked like the first day after a past event.
+
+    For each day, the size of its moves (root mean square of the z-moves) and the past
+    events whose day-one z-moves point the same way (cosine similarity at least
+    ECHO_MIN_SIM). A resemblance is a pattern match on one day, not a cause.
+    """
+    firsts = {ev["id"]: {k: r["1d"]["z"] for k, r in ev.get("reactions", {}).items()
+                         if "1d" in r and r["1d"]["z"] is not None} for ev in studied}
+    out = []
+    for day in day_moves(prices, days):
+        z = {k: m["z"] for k, m in day["moves"].items()}
+        size = float(np.sqrt(np.mean(np.square(list(z.values()))))) if z else 0.0
+        hits = []
+        for eid, ez in firsts.items():
+            r = resemblance(z, ez)
+            if r and r[0] >= ECHO_MIN_SIM:
+                hits.append({"id": eid, "sim": round(r[0], 3), "shared": r[1]})
+        hits.sort(key=lambda h: -h["sim"])
+        out.append({**day, "size": round(size, 2), "matches": hits[:keep]})
+    return {"min_sim": ECHO_MIN_SIM, "min_assets": ECHO_MIN_ASSETS, "alert": ECHO_ALERT,
+            "days": out}
+
+
 # ---------------------------------------------------------------- export
 
 def export(events: list[dict], prices: dict[str, pd.Series]) -> dict:
@@ -395,6 +478,7 @@ def export(events: list[dict], prices: dict[str, pd.Series]) -> dict:
                     "min_score": MIN_SCORE, "max_analogues": MAX_ANALOGUES},
         "events": studied,
         "library": library(studied),
+        "echoes": echoes(studied, prices),
     }
 
 

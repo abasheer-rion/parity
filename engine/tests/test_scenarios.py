@@ -198,3 +198,28 @@ def test_library_direction_held_when_interval_clears_zero():
     lib = sc.library(sc.event_study(events, {"oil": s}))
     cell = lib["types"]["crypto_crash"]["assets"]["oil"]["1d"]
     assert cell["n"] == 6 and cell["held"] == "up" and cell["confidence"] == "thin"
+
+
+def test_resemblance_is_cosine_over_shared_markets():
+    today = {"a": 2.0, "b": -1.0, "c": 0.5, "d": 1.0, "e": 0.0, "f": 3.0}
+    same = {k: v * 3 for k, v in today.items()}
+    assert sc.resemblance(today, same)[0] == pytest.approx(1.0)
+    opposite = {k: -v for k, v in today.items()}
+    assert sc.resemblance(today, opposite)[0] == pytest.approx(-1.0)
+    assert sc.resemblance(today, {"a": 1.0, "b": 1.0}) is None  # too few shared markets
+
+
+def test_echoes_find_the_event_a_day_copies():
+    idx = pd.bdate_range("2019-01-01", "2020-06-30")
+    rng = np.random.default_rng(5)
+    prices = {}
+    for a in sc.ASSETS[:8]:
+        s = pd.Series(100 * np.exp(np.cumsum(rng.normal(0, 0.01, len(idx)))), index=idx)
+        prices[a.key] = s
+    studied = [{"id": "copy", "reactions": {}}]
+    days = sc.day_moves(prices, 5)
+    last = days[-1]["moves"]
+    studied[0]["reactions"] = {k: {"1d": {"change": m["change"], "z": m["z"] * 2}}
+                               for k, m in last.items()}
+    out = sc.echoes(studied, prices, days=5)
+    assert out["days"][-1]["matches"][0] == {"id": "copy", "sim": 1.0, "shared": len(last)}

@@ -97,6 +97,9 @@ export const WORKSPACES: WsDef[] = [
   { id: "simlab", label: "Sim lab", key: "5", make: () => row(0.6,
     leaf("CRIS"),
     col(0.5, leaf("SCEN"), leaf("STRS"))) },
+  { id: "world", label: "World", key: "6", make: () => row(0.55,
+    col(0.55, leaf("WMAP"), leaf("ECHO")),
+    col(0.5, leaf("MC"), row(0.5, leaf("LIB"), leaf("MIX")))) },
 ];
 
 export const WS_BY_ID: Record<string, WsDef> = Object.fromEntries(WORKSPACES.map((w) => [w.id, w]));
