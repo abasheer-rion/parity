@@ -35,8 +35,9 @@ export interface BookUpdate { s: string; snap: boolean; bids: Level[]; asks: Lev
  *  gives that instead), 24 h volume in the quote currency. Missing fields keep their value. */
 export interface BoardPatch { s: string; p?: number; o?: number; c?: number; v?: number; te: number; spark?: number[] }
 
-/** What one upstream message held. ready: the source accepted our sign-in. */
-export interface Parsed { t?: Trade[]; b?: BookUpdate[]; r?: BoardPatch[]; ready?: boolean; fail?: string }
+/** What one upstream message held. ready: the source accepted our sign-in. drop: the line is
+ *  no use (a refused subscription); close it and reconnect. */
+export interface Parsed { t?: Trade[]; b?: BookUpdate[]; r?: BoardPatch[]; ready?: boolean; fail?: string; drop?: boolean }
 
 export interface Adapter {
   id: string;
