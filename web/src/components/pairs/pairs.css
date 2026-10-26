@@ -1,0 +1,53 @@
+/* The Pairs results (src/components/pairs/PairsReport.tsx), on the research side and in the
+   Workbench. Tokens only (DEC-0058). Inside the Workbench (.plb) the shared names below
+   (--surface, --border, --text-2) already point at its quieter look. */
+
+.pr { display: grid; gap: var(--space-4); min-width: 0; }
+.pr-recipe { display: grid; gap: var(--space-4); min-width: 0; }
+.pr-card { min-width: 0; padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); display: flex; flex-direction: column; gap: var(--space-2); }
+.pr-card .pr-card { padding: var(--space-3); background: transparent; }
+.pr-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); }
+.pr .pr-h2 { margin: 0; font-size: var(--type-2xl); font-weight: var(--weight-medium); color: var(--color-text); line-height: 1.3; }
+.pr .pr-h3 { margin: 0; font-size: var(--type-lg); font-weight: var(--weight-medium); color: var(--color-text); line-height: 1.3; }
+.pr-line { margin: 0; max-width: 760px; color: var(--color-text-muted); font-size: var(--type-sm); line-height: 1.5; }
+.pr-verdict { margin: 0; color: var(--color-text); font-size: var(--type-md); line-height: 1.5; }
+.pr-dim { color: var(--color-text-faint); font-size: var(--type-xs); }
+.pr-foot { margin: 0; }
+.pr-none { margin: 0; padding: var(--space-4) 0; color: var(--color-text-muted); font-size: var(--type-sm); }
+
+.pr-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-3); margin: var(--space-2) 0 0; }
+.pr-stats div { min-width: 0; }
+.pr-stats dt { color: var(--color-text-faint); font-size: var(--type-xs); }
+.pr-stats dd { margin: 2px 0 0; color: var(--color-text); font-size: var(--type-3xl); font-weight: var(--weight-semibold); font-variant-numeric: var(--num-variant); }
+.pr-stats dd.pr-dd-sm { font-size: var(--type-md); font-weight: var(--weight-medium); line-height: 28px; }
+.pr-methods { margin: var(--space-2) 0 0; padding-left: var(--space-5); display: grid; gap: var(--space-1); color: var(--color-text-body); font-size: var(--type-sm); line-height: 1.5; }
+
+.pr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--space-4); min-width: 0; }
+.pr-grid > * { min-width: 0; }
+.pr-cell2 { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+.pr-pick { min-height: 24px; padding: 0; border: 0; background: transparent; color: var(--color-text); font: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); text-underline-offset: 3px; }
+.pr-pick:hover { text-decoration-color: currentColor; }
+.pr-pick[aria-current="true"] { font-weight: var(--weight-semibold); text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
+
+.pr .mtable td.good { color: var(--good); }
+.pr .mtable td.bad { color: var(--bad); }
+.pr-costs td.pr-used { outline: 2px solid var(--color-border-control); outline-offset: -4px; border-radius: var(--radius-sm); }
+.pr-details summary { min-height: 24px; cursor: pointer; color: var(--color-text-muted); font-size: var(--type-sm); }
+.pr-details[open] summary { margin-bottom: var(--space-2); }
+
+.pr-key { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin: 0; padding: 0; list-style: none; color: var(--color-text-muted); font-size: var(--type-xs); }
+.pr-key li { display: inline-flex; align-items: center; gap: var(--space-1h); }
+.pr-k-line { display: inline-block; width: 18px; height: 0; border-top: 2px solid; }
+.pr-k-dash { border-top-style: dashed; }
+.pr-k-box { display: inline-block; width: 12px; height: 12px; border-radius: var(--radius-xs); border: 1px solid var(--border); }
+.pr-k-long { background: var(--color-positive-soft); }
+.pr-k-short { background: var(--color-negative-soft); }
+
+.pr-sources { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
+.pr-sources li { display: flex; flex-direction: column; gap: 2px; font-size: var(--type-sm); }
+.pr-sources a { text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .pr-card { padding: var(--space-3); }
+  .pr .pr-h2 { font-size: var(--type-xl); }
+}

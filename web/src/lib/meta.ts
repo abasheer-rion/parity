@@ -298,6 +298,7 @@ export const ROUTES_META: Record<string, RouteMeta> = {
   registry: R("Data catalog", "Every data source and series: display rights, status, health, where it is used and the tests run when it arrived.", "research"),
   latency: R("Latency", "How old each source is, how long each job takes and how fast pages load their data.", "research"),
   edges: R("Edge Lab", "Seven checks for a backtest, each with a mistake from our own research.", "research"),
+  pairs: R("Pairs", "Pairs trading recipes tested after costs, with each pair's gap, hedge ratio, p-value and half-life over time.", "research"),
   competitors: R("Competitors", "What public posts praise and complain about in 22 trading products, counted by theme, and what Parity takes from each.", "research"),
   private: R("Private markets", "Property index smoothing, Form D counts, BDC loan marks and credit data from free sources.", "research"),
 };

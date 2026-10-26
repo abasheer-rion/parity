@@ -37,6 +37,7 @@ const PAGE_FILES = {
   Markets: () => import("./pages/markets/Markets"),
   Learn: () => import("./pages/Learn"),
   PrivateResearch: () => import("./pages/PrivateResearch"),
+  Pairs: () => import("./pages/Pairs"),
   Overview: () => import("./pages/Overview"),
   Settings: () => import("./pages/Settings"),
   SimLanding: () => import("./pages/SimLanding"),
@@ -70,6 +71,7 @@ const News = page(PAGE_FILES.News, "News");
 const Markets = page(PAGE_FILES.Markets, "Markets");
 const Learn = page(PAGE_FILES.Learn, "Learn");
 const PrivateResearch = page(PAGE_FILES.PrivateResearch, "PrivateResearch");
+const Pairs = page(PAGE_FILES.Pairs, "Pairs");
 const Overview = page(PAGE_FILES.Overview, "Overview");
 const Settings = page(PAGE_FILES.Settings, "Settings");
 const SimLanding = page(PAGE_FILES.SimLanding, "SimLanding");
@@ -104,7 +106,7 @@ const ROUTE_FILE: Record<string, () => Promise<unknown>> = {
   settings: PAGE_FILES.Settings, start: PAGE_FILES.Start, how: PAGE_FILES.HowItWorks, docs: PAGE_FILES.Reader, doc: PAGE_FILES.Reader,
   refs: PAGE_FILES.Reader, catalog: PAGE_FILES.Catalog, algo: PAGE_FILES.AlgorithmReport, ledger: PAGE_FILES.LedgerPage,
   sources: PAGE_FILES.DataSources, latency: PAGE_FILES.Latency, metrics: PAGE_FILES.Metrics, explore: PAGE_FILES.Explore, overview: PAGE_FILES.Overview,
-  signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors,
+  signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors, pairs: PAGE_FILES.Pairs,
   pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding, registry: PAGE_FILES.DataCatalog,
 };
 
@@ -170,7 +172,7 @@ export function App() {
 
 // Pages that read only what is bundled in the build, not the selected run.
 // The pricing page exists only when the payments flag is on (DEC-0046).
-const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors", "registry"];
+const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors", "registry", "pairs"];
 
 // The newest run is the largest file the dashboard reads: ask for it now, while the code and
 // the sign-in check are still arriving, unless the page opening does not read it.
@@ -288,6 +290,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "catalog" && <Catalog />}
       {route === "private" && <PrivateResearch />}
       {route === "competitors" && <Competitors focus={dec(arg)} />}
+      {route === "pairs" && <Pairs />}
       {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
