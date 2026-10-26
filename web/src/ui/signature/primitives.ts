@@ -278,7 +278,7 @@ export function bands(F: Frame, sc: Scales, list: Band[], o: { opacity?: number;
     const col = F.color(b.tone);
     out += rect(x0, box.y0, x1 - x0, box.y1 - box.y0, { fill: col, opacity: 0.1 });
     out += line(x0, box.y1, x1, box.y1, { stroke: col, sw: 2 * u, opacity: 0.8 });
-    if (b.label && o.labels !== false && textWidth(b.label, 10 * u) < x1 - x0 - 6 * u) out += text(F, x0 + 4 * u, box.y0 + 11 * u, b.label, { size: 10 * u, fill: col, weight: 600 });
+    if (b.label && o.labels !== false && x1 - x0 > 14 * u && x0 + textWidth(b.label, 10 * u) < box.x1 + F.L.right) out += text(F, x0 + 4 * u, box.y0 + 11 * u, b.label, { size: 10 * u, fill: col, weight: 600 });
   }
   return group(out, op);
 }
