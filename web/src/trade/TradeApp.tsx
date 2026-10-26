@@ -21,6 +21,7 @@ import type { Instrument } from "../lib/tradeData";
 import { AlertDialog, AlertsView } from "./AlertsView";
 import { ChartGrid, drawingsTable, findInst, IndicatorDialog } from "./ChartGrid";
 import { DemoProvider, useDemo } from "./demo";
+import { ModeBadge, TradingProvider } from "./trading";
 import { Dock, OrdersView } from "./Dock";
 import { Finder, type Command } from "./Finder";
 import { HOTKEYS, isTyping, MAC, startsSearch } from "./keys";
@@ -281,6 +282,7 @@ function TradeShell() {
   const noData = view !== "markets" && (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
+    <TradingProvider>
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>
       <div className="ptr" data-density={settings.density} data-mobile={mobile || undefined}>
         <SkipLink />
@@ -374,6 +376,7 @@ function TradeShell() {
         </Dialog>
         <Dialog open={confirm != null} onClose={() => setConfirm(null)} title="Confirm order" width={360}
           footer={<><Button variant="tertiary" onClick={() => setConfirm(null)}>Cancel</Button><Button variant="primary" onClick={() => { confirm?.go(); setConfirm(null); }}>Place</Button></>}>
+          <div className="bt-dialog-badge"><ModeBadge /></div>
           <p className="tabular">{confirm?.text}</p>
         </Dialog>
         <NameDialog open={saving} title="Save layout" initial={layoutName ?? `Layout ${layouts.rows.length + 1}`} onClose={() => setSaving(false)}
@@ -387,6 +390,7 @@ function TradeShell() {
         <FirstRunTour areas={["trade"]} ready={view === "chart" && mtab === "chart" && insts.status !== "loading" && !noData} />
       </div>
     </DemoProvider>
+    </TradingProvider>
   );
 }
 
