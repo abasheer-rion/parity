@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1670 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1681 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 20 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 936 |
+| [Web pages](#web-pages) | 947 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -4053,6 +4053,70 @@ Note: Read for DEC-0063 (public low-latency feed terms).
 
 Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### pyth-dev-forum-pyth-network-t-863
+
+dev-forum.pyth.network/t/863. (2026). *dev-forum.pyth.network*. <https://dev-forum.pyth.network/t/863>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-llms-txt
+
+docs.pyth.network/llms.txt. (2026). *docs.pyth.network*. <https://docs.pyth.network/llms.txt>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-oracle-integrity-staking
+
+docs.pyth.network/oracle-integrity-staking. (2026). *docs.pyth.network*. <https://docs.pyth.network/oracle-integrity-staking>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-pro-how-lazer-works
+
+docs.pyth.network/pro/how-lazer-works. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/how-lazer-works>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-pro-on-chain-fees
+
+docs.pyth.network/pro/on-chain-fees. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/on-chain-fees>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-pro-sponsored-feeds
+
+docs.pyth.network/pro/sponsored-feeds. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/sponsored-feeds>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-pro-understanding-price-data
+
+docs.pyth.network/pro/understanding-price-data. (2026). *docs.pyth.network*. <https://docs.pyth.network/pro/understanding-price-data>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-docs-pyth-network-whitepaper
+
+docs.pyth.network/whitepaper. (2026). *docs.pyth.network*. <https://docs.pyth.network/whitepaper>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
 ### pyth-hermes-api-key
 
 Pyth price feeds: Hermes API reference and API key requirement. (2026). *docs.pyth.network*. <https://docs.pyth.network/price-feeds/core/api-reference>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
@@ -4068,6 +4132,30 @@ Pyth plans: Free, Starter, Pro. (2026). *app.pyth.com*. <https://app.pyth.com/pr
 Note: Read for DEC-0063 (public low-latency feed terms).
 
 Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+
+### pyth-pyth-network-whitepaper
+
+pyth.network/whitepaper. (2026). *pyth.network*. <https://pyth.network/whitepaper>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-www-pyth-network-data-license
+
+www.pyth.network/data-license. (2026). *www.pyth.network*. <https://www.pyth.network/data-license>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
+
+### pyth-www-pyth-network-legal-terms-conditions
+
+www.pyth.network/legal/terms-conditions. (2026). *www.pyth.network*. <https://www.pyth.network/legal/terms-conditions>. Accessed 2026-10-26. Verification: ok (checked 2026-10-26).
+
+Note: Read for RES-0027 and DEC-0065.
+
+Cited in: nothing yet.
 
 ### tenderly-node-rpc
 

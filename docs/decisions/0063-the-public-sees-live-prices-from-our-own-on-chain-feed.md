@@ -99,6 +99,8 @@ On the live site, one client subscribed to all 14 symbols for 10 minutes ([REF-0
 ## Referenced by
 
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
+- [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
+- [RES-0027: How Pyth works and what we may take from it](../research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 <!-- backlinks:end -->

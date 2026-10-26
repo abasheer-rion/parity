@@ -42,6 +42,9 @@ export interface Tick {
   q: number;
   /** 1 when replayed to a viewer who just subscribed: drawn, but not timed. */
   r?: 1;
+  /** Confidence of an aggregate price such as the Parity price (DEC-0065): the true price
+   *  likely sits within p minus c and p plus c. */
+  c?: number;
 }
 
 /** One price level: [price, size]. */
