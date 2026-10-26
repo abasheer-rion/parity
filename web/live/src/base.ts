@@ -67,6 +67,11 @@ export interface Adapter {
   /** The market overview: upstream messages for every symbol, and/or a poll. */
   board?: { subscribe?(): string[]; unsubscribe?(): string[]; poll?: { every: number; run(): Promise<BoardPatch[]> } };
   parse(data: string): Parsed;
+  /** A source that runs its own lines (several sockets, its own failover) instead of one
+   *  socket to `url`: the fan-out calls this to open, sends subscribe messages through
+   *  send(), and closes it when nobody watches. emit() hands over what the lines carried
+   *  (an empty object still counts as a sign of life); note() says what went wrong. */
+  connect?(emit: (p: Parsed) => void, note: (why: string) => void): { send(m: string): void; close(): void; state?(): string };
   ping?(): string | null;
   pingEvery?: number;
 }

@@ -6,7 +6,6 @@
 // REF-0014. Terms were read on the date given.
 import type { FeedType } from "./protocol";
 import type { LiveTf } from "./candles";
-import { ONCHAIN_SYMBOLS } from "./onchainSymbols";
 
 /** display: terms allow showing the data on our site; internal: terms allow internal use
  *  only, so only team members see it; ask: terms are silent or unclear, so it waits for the
@@ -52,9 +51,9 @@ const READ = "2026-10-25";
 
 export const SOURCES: SourceMeta[] = [
   // Streamed through the fan-out today, to everyone.
-  { id: "onchain", name: "Parity on-chain (Base)", short: "On-chain", feed: "rt", covers: "14 tokens traded on Base (ETH, cbBTC, EURC, AERO, VIRTUAL and others), priced in USDC from every swap in the deepest Uniswap v3 and Aerodrome pools", licence: "display",
-    terms: "https://www.publicnode.com/terms", read: "2026-10-26", streams: true, board: true, fromCloses: true, symbols: ONCHAIN_SYMBOLS,
-    note: "Our own feed from public blockchain data, which has no licence. Each symbol is the volume-weighted price of its pools. A swap counts once its Base block is sealed, every 2 s." },
+  { id: "onchain", name: "Parity price", short: "Parity", feed: "rt", covers: "Our own price for every asset with deep DEX pools on Base, Arbitrum, BNB Chain, Optimism, Polygon or Ethereum, with a confidence band", licence: "display",
+    terms: "https://www.publicnode.com/terms", read: "2026-10-26", streams: true, board: true, fromCloses: true,
+    note: "Our own feed from public blockchain data, which has no licence. Each asset's price combines its pools on every chain the way Pyth combines its publishers: a weighted median with a confidence band, stale and outlying pools left out (DEC-0065). A swap counts once its block is sealed." },
   { id: "coingecko", name: "CoinGecko", short: "CoinGecko", feed: "delayed", delayMin: 1, covers: "The 100 largest coins, priced in US dollars, refreshed about once a minute", licence: "display",
     terms: "https://www.coingecko.com/en/api_terms", read: "2026-10-22", streams: true, tfs: ["5m", "1h", "1d"], fromCloses: true, board: true,
     note: "Display allowed with \"Data provided by CoinGecko\" linked next to the data. Prices are CoinGecko's own blend across exchanges, about a minute behind." },

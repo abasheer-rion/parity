@@ -39493,6 +39493,237 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "pyth-dev-forum-pyth-network-t-863",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "dev-forum.pyth.network/t/863",
+      "venue": "dev-forum.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://dev-forum.pyth.network/t/863",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-llms-txt",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/llms.txt",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/llms.txt",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-oracle-integrity-staking",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/oracle-integrity-staking",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/oracle-integrity-staking",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-how-lazer-works",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/how-lazer-works",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/how-lazer-works",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-on-chain-fees",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/on-chain-fees",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/on-chain-fees",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-sponsored-feeds",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/sponsored-feeds",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/sponsored-feeds",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-understanding-price-data",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/understanding-price-data",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/understanding-price-data",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-whitepaper",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/whitepaper",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/whitepaper",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-pyth-network-whitepaper",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "pyth.network/whitepaper",
+      "venue": "pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pyth.network/whitepaper",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-www-pyth-network-data-license",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "www.pyth.network/data-license",
+      "venue": "www.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pyth.network/data-license",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-www-pyth-network-legal-terms-conditions",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "www.pyth.network/legal/terms-conditions",
+      "venue": "www.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pyth.network/legal/terms-conditions",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0064.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

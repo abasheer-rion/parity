@@ -1,0 +1,3888 @@
+{
+ "at": "2026-10-26T08:54:51.461Z",
+ "minLiqUsd": 50000,
+ "tokens": [
+  {
+   "key": "bitcoin",
+   "sym": "BTC-USD",
+   "name": "Bitcoin",
+   "rank": 1,
+   "via": "WBTC",
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0x2f5e87c9312fa29aed5c179e456625d79015299c",
+     "base": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 21518407,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x7aea2e8a3843516afa07293a10ac8e49906dabd1",
+     "base": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 14557208,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x6bbc40579ad1bbd243895ca0acb086bb6300d636",
+     "base": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 10556514,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "base",
+     "pool": "0x8c7080564b5a792a33ef2fd473fba6364d5495e5",
+     "base": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 7215314,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed",
+     "base": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 34484484,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x46cf1cf8c69595804ba91dfdd8d6b960c9b0a7c4",
+     "base": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 6854891,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x4585fe77225b41b697c938b018e2ac67ac5a20c0",
+     "base": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 29531989,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x62edaf2a56c9fb55be5f9b1399ac067f6a37013b",
+     "base": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 5814406,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "ethereum",
+   "sym": "ETH-USD",
+   "name": "Ethereum",
+   "rank": 2,
+   "via": "WETH",
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x6c561b446416e1a00e8e93e221854d6ea4171372",
+     "base": "0x4200000000000000000000000000000000000006",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 37693893,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0xc6962004f452be9203591991d15f6b388e09e8d0",
+     "base": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 12456395,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+     "base": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 58595359,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x4e68ccd3e89f51c3074ca5072bbac773960dfa36",
+     "base": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 23520261,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8",
+     "base": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 17650229,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0xc473e2aee3441bf9240be85eb122abb059a3b57c",
+     "base": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 2376585,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0xd0b53d9277642d899df5c87a3966a349a798f224",
+     "base": "0x4200000000000000000000000000000000000006",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 2134971,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "optimism",
+     "pool": "0xc1738d90e2e26c35784a0d3e3d8a9f795074bca4",
+     "base": "0x4200000000000000000000000000000000000006",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 1960826,
+     "swaps": 69,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "binancecoin",
+   "sym": "BNB-USD",
+   "name": "BNB",
+   "rank": 4,
+   "via": "WBNB",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x172fcd41e0913e95784454622d1c3724f546f849",
+     "base": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 9426082,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x36696169c63e42cd08ce11f5deebbcebae652050",
+     "base": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 6880063,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x6fe9e9de56356f7edbfcbb29fab7cd69471a4869",
+     "base": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 2580950,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ripple",
+   "sym": "XRP-USD",
+   "name": "XRP",
+   "rank": 5,
+   "via": "Binance-Peg XRP",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xd15b00e81f98a7db25f1dc1ba6e983a4316c4cac",
+     "base": "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 289034,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x71f5a8f7d448e59b1ede00a19fe59e05d125e742",
+     "base": "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 235744,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x0adaf134ae0c4583b3a38fc3168a83e33162651e",
+     "base": "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 173375,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "solana",
+   "sym": "SOL-USD",
+   "name": "Solana",
+   "rank": 7,
+   "via": "Binance-Peg SOL",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xbffec96e8f3b5058b1817c14e4380758fada01ef",
+     "base": "0x570a5d26f7765ecb712c0924e4de545b89fd43df",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 574166,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x1e4600929edf7f36b4a7eac4c7571057d82a246c",
+     "base": "0x570a5d26f7765ecb712c0924e4de545b89fd43df",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 92226,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0xab46d39cb398fb3649ecba781180016fef75f50b",
+     "base": "0x570a5d26f7765ecb712c0924e4de545b89fd43df",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 88246,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "tron",
+   "sym": "TRX-USD",
+   "name": "TRON",
+   "rank": 8,
+   "via": "Binance-Peg TRX",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xf683113764e4499c473acd38fc4b37e71554e4ad",
+     "base": "0xce7de646e7208a4ef112cb6ed5038fa6cc6b12e3",
+     "decimals": 6,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 110374,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "chainlink",
+   "sym": "LINK-USD",
+   "name": "Chainlink",
+   "rank": 16,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xa6cc3c2531fdaa6ae1a3ca84c2855806728693e8",
+     "base": "0x514910771af9ca656af840dff83e8264ecf986ca",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 4827626,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x468b88941e7cc0b88c1869d68ab6b570bcef62ff",
+     "base": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 357436,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x0e1893beeb4d0913d26b9614b18aea29c56d94b9",
+     "base": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 328264,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "polygon",
+     "pool": "0x3dc10d7bfb94eeb009203e84a653e5764f71771d",
+     "base": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 171268,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x91308bc9ce8ca2db82aa30c65619856cc939d907",
+     "base": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 170347,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "polygon",
+     "pool": "0x3e31ab7f37c048fc6574189135d108df80f0ea26",
+     "base": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 141732,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xfad57d2039c21811c8f2b5d5b65308aa99d31559",
+     "base": "0x514910771af9ca656af840dff83e8264ecf986ca",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 344553,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "polygon",
+     "pool": "0x79e4240e33c121402dfc9009de266356c91f241d",
+     "base": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 66035,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "cardano",
+   "sym": "ADA-USD",
+   "name": "Cardano",
+   "rank": 18,
+   "via": "Binance-Peg ADA",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x673516e510d702ab5f2bbf0c6b545111a85f7ea7",
+     "base": "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 108238,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "near",
+   "sym": "NEAR-USD",
+   "name": "NEAR Protocol",
+   "rank": 20,
+   "via": "Binance-Peg NEAR",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xce6326fc06c2f3967884e5578bb33d0f30b63a33",
+     "base": "0x1fa4a73a3f0133f0025378af00236f3abdee5d63",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 193843,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x4a978a2d4fb7393063babfb0cee741b8bcd4dd4b",
+     "base": "0x1fa4a73a3f0133f0025378af00236f3abdee5d63",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 140121,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x0246913ec96765bca457b0a3608872bba37d1d15",
+     "base": "0x1fa4a73a3f0133f0025378af00236f3abdee5d63",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 100198,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "rain",
+   "sym": "RAIN-USD",
+   "name": "Rain",
+   "rank": 21,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0xd13040d4fe917ee704158cfcb3338dcd2838b245",
+     "base": "0x25118290e6a5f4139381d072181157035864099d",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 104335,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "uniswap",
+   "sym": "UNI-USD",
+   "name": "Uniswap",
+   "rank": 26,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801",
+     "base": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 3503184,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0xc24f7d8e51a64dc1238880bd00bb961d54cbeb29",
+     "base": "0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 197312,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x3470447f3cecffac709d3e783a307790b0208d60",
+     "base": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 399463,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0xbd045175d2a1451a015079f5f3f59ca5c05524ea",
+     "base": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 74573,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "polygon",
+     "pool": "0x357faf5843c7fd7fb4e34fbeabdac16eabe8a5bc",
+     "base": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 69979,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x913a4ed1636c474e6451b5e9249d94046a24bb33",
+     "base": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 69904,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x647d99772863e09f47435782cbb6c96ec4a75f12",
+     "base": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 58767,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x05477c22a5349cee601500da0489dad137fd6bfa",
+     "base": "0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 54744,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "usd1-wlfi",
+   "sym": "USD1-USD",
+   "name": "USD1",
+   "rank": 29,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x9c4ee895e4f6ce07ada631c508d1306db7502cce",
+     "base": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 2677330,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x4a3218606af9b4728a9f187e1c1a8c07fbc172a9",
+     "base": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 826693,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0xb3f27fe82bd1e5d7458e02b543cf0c6610ffad83",
+     "base": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 123013,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "the-open-network",
+   "sym": "GRAM-USD",
+   "name": "Gram (prev. Toncoin)",
+   "rank": 31,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x4b62fa30fea125e43780dc425c2be5acb4ba743b",
+     "base": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+     "decimals": 9,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 300813,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "tether-gold",
+   "sym": "XAUT-USD",
+   "name": "Tether Gold",
+   "rank": 33,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xc5c7c21f4e60770ca5991a8832127a40f5236f73",
+     "base": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+     "decimals": 6,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 2720249,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x6546055f46e866a4b9a4a13e81273e3152bae5da",
+     "base": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+     "decimals": 6,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 210043,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xa91f80380d9cc9c86eb98d2965a0ded9e2000791",
+     "base": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+     "decimals": 6,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 86568,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "quant-network",
+   "sym": "QNT-USD",
+   "name": "Quant",
+   "rank": 36,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x24ee2c6b9597f035088cda8575e9d5e15a84b9df",
+     "base": "0x4a220e6096b25eadb88358cb44068a3248254675",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 373528,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "shiba-inu",
+   "sym": "SHIB-USD",
+   "name": "Shiba Inu",
+   "rank": 38,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x5764a6f2212d502bc5970f9f129ffcd61e5d7563",
+     "base": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 108817,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ethena",
+   "sym": "ENA-USD",
+   "name": "Ethena",
+   "rank": 39,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xc3db44adc1fcdfd5671f555236eae49f4a8eea18",
+     "base": "0x57e114b691db790c35207b2e685d4a43181e6061",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 1539437,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ripple-usd",
+   "sym": "RLUSD-USD",
+   "name": "Ripple USD",
+   "rank": 41,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xcc6d2f26d363836f85a42d249e145ec0320d3e55",
+     "base": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1749278,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "bitway",
+   "sym": "BTW-USD",
+   "name": "Bitway",
+   "rank": 44,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xf7b5a9b7ef764606f900c9c1db39afc682049bc4",
+     "base": "0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 93545,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "aave",
+   "sym": "AAVE-USD",
+   "name": "Aave",
+   "rank": 48,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x5ab53ee1d50eef2c1dd3d5402789cd27bb52c1bb",
+     "base": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 2536841,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "polygon",
+     "pool": "0x2aceda63b5e958c45bd27d916ba701bc1dc08f7a",
+     "base": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 156936,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x3db70832f48f8c01ee041671f7bb1cfaa2677584",
+     "base": "0xba5ddd1f9d7f570dc94a51479a000e3bce967196",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 85607,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0xdd672b3b768a16b9bcb4ee1060d3e8221435beaa",
+     "base": "0xba5ddd1f9d7f570dc94a51479a000e3bce967196",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 83183,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x4a79b0168296c0ef7b8f314973b82ad406a29f1b",
+     "base": "0x63706e401c06ac8513145b7687a14804d17f814b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 72670,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x2e86514cfd61fb19c5cf2b879d536d273d6e693d",
+     "base": "0x63706e401c06ac8513145b7687a14804d17f814b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 67098,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x3373a22cb07cb49651b82cf6f174ef434e4dbaa8",
+     "base": "0xfb6115445bff7b52feb98650c87f44907e58f802",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 55834,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x4674abc5796e1334b5075326b39b748bee9eaa34",
+     "base": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 58964,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ondo-finance",
+   "sym": "ONDO-USD",
+   "name": "Ondo",
+   "rank": 49,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x7b1e5d984a43ee732de195628d20d05cfabc3cc7",
+     "base": "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 494755,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "falcon-finance",
+   "sym": "USDF-USD",
+   "name": "Falcon USD",
+   "rank": 51,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x24618d12b5ea15bb6fe3c81bbb9e011b5d5b107c",
+     "base": "0xb3b02e4a9fb2bd28cc2ff97b0ab3f6b3ec1ee9d2",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 356953,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xc275a7390966e4bcbf331b837cd7316c4a3efa83",
+     "base": "0xfa2b947eec368f42195f24f36d2af29f7c24cec2",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 253826,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "pepe",
+   "sym": "PEPE-USD",
+   "name": "Pepe",
+   "rank": 52,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xdd82975ab85e745c84e497fd75ba409ec02d4739",
+     "base": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 125327,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x11950d141ecb863f01007add7d1a342041227b58",
+     "base": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 89095,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "pax-gold",
+   "sym": "PAXG-USD",
+   "name": "PAX Gold",
+   "rank": 54,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x8a7e585048bda875e64024118c506b14f78166dd",
+     "base": "0x45804880de22913dafe09f4980848ece6ecbaf78",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 5702404,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x5ae13baaef0620fdae1d355495dc51a17adb4082",
+     "base": "0x45804880de22913dafe09f4980848ece6ecbaf78",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 328675,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xb431c70f800100d87554ac1142c4a94c5fe4c0c4",
+     "base": "0x45804880de22913dafe09f4980848ece6ecbaf78",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 133897,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "aster-2",
+   "sym": "ASTER-USD",
+   "name": "Aster",
+   "rank": 55,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xb040ea24a4ef35a3ed400b0ff26d8b6f30deecad",
+     "base": "0x000ae314e2a2172a039b26378814c252734f556a",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 414162,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0xaead6bd31dd66eb3a6216aaf271d0e661585b0b1",
+     "base": "0x000ae314e2a2172a039b26378814c252734f556a",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 188393,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x7e58f160b5b77b8b24cd9900c09a3e730215ac47",
+     "base": "0x000ae314e2a2172a039b26378814c252734f556a",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 110115,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "usdd",
+   "sym": "USDD-USD",
+   "name": "USDD",
+   "rank": 56,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8f6ef959fa19173bd4668b83e80f82442b2c99de",
+     "base": "0x45e51bc23d592eb2dba86da3985299f7895d66ba",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 51291,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "polkadot",
+   "sym": "DOT-USD",
+   "name": "Polkadot",
+   "rank": 57,
+   "via": "Binance-Peg DOT",
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x62f0546cbcd684f7c394d8549119e072527c41bc",
+     "base": "0x7083609fce4d1d8dc0c979aab8c869ea2c873402",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 57430,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "worldcoin-wld",
+   "sym": "WLD-USD",
+   "name": "Worldcoin",
+   "rank": 60,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x841820459769cd629b10a36fd12e603938cc2679",
+     "base": "0x163f8c2467924be0ae7b5347228cabf260318753",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 75749,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "sky",
+   "sym": "SKY-USD",
+   "name": "Sky",
+   "rank": 61,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x764510ab1d39cf300e7abe8f5b8977d18f290628",
+     "base": "0x56072c95faa701256059aa122697b133aded9279",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 454098,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "united-stables",
+   "sym": "U-USD",
+   "name": "United Stables",
+   "rank": 62,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xa0909f81785f87f3e79309f0e73a7d82208094e4",
+     "base": "0xce24439f2d9c6a2289f741120fe202248b666666",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 9706105,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x882e23dba77bfe0e514cf5bcdad7a58aceb01522",
+     "base": "0xce24439f2d9c6a2289f741120fe202248b666666",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 1337257,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "internet-computer",
+   "sym": "ICP-USD",
+   "name": "Internet Computer",
+   "rank": 63,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x4068038ab5490063a3ead93b3712ed082e62bd59",
+     "base": "0x00f3c42833c3170159af4e92dbb451fb3f708917",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 176128,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "morpho",
+   "sym": "MORPHO-USD",
+   "name": "Morpho",
+   "rank": 65,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x2f42df4af5312b492e9d7f7b2110d9c7bf2d9e4f",
+     "base": "0xbaa5cc21fd487b8fcc2f632f3f4e8d37262a0842",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 126465,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x2043b296ffc6b2d3bf4a3f3167d2afb3b0fbdbee",
+     "base": "0xbaa5cc21fd487b8fcc2f632f3f4e8d37262a0842",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 119780,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0xb5f0b4ae66c14f7efaa9aa1468e8fc536a3e288c",
+     "base": "0xbaa5cc21fd487b8fcc2f632f3f4e8d37262a0842",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 78822,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xc8219b876753a85025156b22176c2edea17aac53",
+     "base": "0x58d97b57bb95320f9a05dc918aef65434969c2b2",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 73158,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "venice-token",
+   "sym": "VVV-USD",
+   "name": "Venice Token",
+   "rank": 69,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x7ec6c9d993d9832aa654593f2dbc21303650bc6c",
+     "base": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL100",
+     "fee": 0.0005,
+     "liq": 1467907,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x1d2bdb7117a5a7d7fe4c1d95681a92e4df13bb69",
+     "base": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 513168,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x67a11022b7b6ed66f81233f6c8ed6e48f7826530",
+     "base": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 353311,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "arbitrum",
+   "sym": "ARB-USD",
+   "name": "Arbitrum",
+   "rank": 71,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0xc6f780497a95e246eb9449f5e4770916dcd6396a",
+     "base": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 753292,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x92c63d0e701caae670c9415d91c474f686298f00",
+     "base": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 66502,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x92fd143a8fa0c84e016c2765648b9733b0aa519e",
+     "base": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 65613,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "polygon-ecosystem-token",
+   "sym": "POL-USD",
+   "name": "POL (ex-MATIC)",
+   "rank": 76,
+   "via": "WPOL",
+   "pools": [
+    {
+     "chain": "polygon",
+     "pool": "0x9b08288c3be4f62bbf8d1c20ac9c5e6f9467d8b7",
+     "base": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 165122,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "render-token",
+   "sym": "RENDER-USD",
+   "name": "Render",
+   "rank": 79,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xe936f0073549ad8b1fa53583600d629ba9375161",
+     "base": "0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 121020,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x4628a0a564debfc8798eb55db5c91f2200486c24",
+     "base": "0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 71262,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "akedo",
+   "sym": "AKE-USD",
+   "name": "Akedo",
+   "rank": 88,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x4d3bf29ba30f8bfe4624e7678709afa195689c5d",
+     "base": "0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1755448,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "pancakeswap-token",
+   "sym": "CAKE-USD",
+   "name": "PancakeSwap",
+   "rank": 92,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x133b3d95bad5405d14d53473671200e9342896bf",
+     "base": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 1337194,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x7f51c8aaa6b0599abd16674e2b17fec7a9f674a1",
+     "base": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 1243693,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56",
+     "base": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 441569,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "ether-fi",
+   "sym": "ETHFI-USD",
+   "name": "Ether.fi",
+   "rank": 95,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x06f00544c0bc62e6db10f46d370dfccdc23d8189",
+     "base": "0xfe0c30065b384f05761f15d0cc899d4f9f9cc0eb",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 201861,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "aerodrome-finance",
+   "sym": "AERO-USD",
+   "name": "Aerodrome Finance",
+   "rank": 103,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x3d5d143381916280ff91407febeb52f2b60f33cf",
+     "base": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 623667,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0xbe00ff35af70e8415d0eb605a286d8a45466a4c1",
+     "base": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Aerodrome CL2000",
+     "fee": 0.01,
+     "liq": 127052,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x82321f3beb69f503380d6b233857d5c43562e2d0",
+     "base": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 111485,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "curve-dao-token",
+   "sym": "CRV-USD",
+   "name": "Curve DAO",
+   "rank": 104,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0xa95b0f5a65a769d82ab4f3e82842e45b8bbaf101",
+     "base": "0x11cdb42b0eb46d95f990bedd4695a6e3fa034978",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 172984,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x919fa96e88d67499339577fa202345436bcdaf79",
+     "base": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 88398,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x07b1c12be0d62fe548a2b4b025ab7a5ca8def21e",
+     "base": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 61724,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "usual-usd",
+   "sym": "USD0-USD",
+   "name": "Usual USD",
+   "rank": 105,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x4e665157291dbcb25152ebb01061e4012f58add2",
+     "base": "0x73a15fed60bf67631dc6cd7bc5b6e8da8190acf5",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 885818,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "true-usd",
+   "sym": "TUSD-USD",
+   "name": "TrueUSD",
+   "rank": 111,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xd881d9d0e0767719701305c614903f555d589586",
+     "base": "0x40af3827f39d0eacbf4a168f8d4ee67c121d11c9",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 504291,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "euro-coin",
+   "sym": "EURC-USD",
+   "name": "EURC",
+   "rank": 114,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x95dbb3c7546f22bce375900abfdd64a4e5bd73d6",
+     "base": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 462826,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0xe846373c1a92b167b4e9cd5d8e4d6b1db9e90ec7",
+     "base": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Aerodrome CL50",
+     "fee": 0.0005,
+     "liq": 91836,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0xc5e51044eb7318950b1afb044fccfb25782c48c1",
+     "base": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Aerodrome CL1",
+     "fee": 0.0001,
+     "liq": 57297,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "stable-2",
+   "sym": "STABLE-USD",
+   "name": "​​Stable",
+   "rank": 116,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xeaa6c7292ed954ca9dd72e769568d057b0525c9a",
+     "base": "0x011ebe7d75e2c9d1e0bd0be0bef5c36f0a90075f",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 383357,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "virtual-protocol",
+   "sym": "VIRTUAL-USD",
+   "name": "Virtuals Protocol",
+   "rank": 119,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x529d2863a1521d0b57db028168fde2e97120017c",
+     "base": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 187701,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x9c087eb773291e50cf6c6a90ef0f4500e349b903",
+     "base": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 112160,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x95a45a87dd4d3a1803039072f37e075f37b23d75",
+     "base": "0x44ff8620b8ca30902395a7bd3f2407e1a091bf73",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 79047,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "fetch-ai",
+   "sym": "FET-USD",
+   "name": "Artificial Superintelligence Alliance",
+   "rank": 120,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x948b54a93f5ad1df6b8bff6dc249d99ca2eca052",
+     "base": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 182790,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "derive",
+   "sym": "DRV-USD",
+   "name": "Derive",
+   "rank": 126,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0xa0e2bac96ab51c92d3284781aee1eec817f6f9c2",
+     "base": "0x9d0e8f5b25384c7310cb8c6ae32c8fbeb645d083",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 58134,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "spx6900",
+   "sym": "SPX-USD",
+   "name": "SPX6900",
+   "rank": 131,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x7c706586679af2ba6d1a9fc2da9c6af59883fdd3",
+     "base": "0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c",
+     "decimals": 8,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 61877,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "pendle",
+   "sym": "PENDLE-USD",
+   "name": "Pendle",
+   "rank": 132,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0xdbaeb7f0dfe3a0aafd798ccecb5b22e708f7852c",
+     "base": "0x0c880f6761f1af8d9aa9c466984b80dab9a8c9e8",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 241045,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x50e7b9293aef80c304234e86c84a01be8401c530",
+     "base": "0x0c880f6761f1af8d9aa9c466984b80dab9a8c9e8",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 137411,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x85bea4fbc57fa22b41fb1632f0d9a6a99390fd0a",
+     "base": "0xb3ed0a426155b79b898849803e3b36552f7ed507",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 95657,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0xc6af8e73e2261264ef95466b97b13e03bd88165e",
+     "base": "0x0c880f6761f1af8d9aa9c466984b80dab9a8c9e8",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 57907,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x57af956d3e2cca3b86f3d8c6772c03ddca3eaacb",
+     "base": "0x808507121b80c02388fad14726482e061b8da827",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 128736,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "falcon-finance-ff",
+   "sym": "FF-USD",
+   "name": "Falcon Finance",
+   "rank": 133,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x9f8f4615ff5143aee365fa34f34196fb85be7650",
+     "base": "0xac23b90a79504865d52b49b327328411a23d4db2",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 3552768,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "lido-dao",
+   "sym": "LDO-USD",
+   "name": "Lido DAO",
+   "rank": 140,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xa3f558aebaecaf0e11ca4b2199cc5ed341edfd74",
+     "base": "0x5a98fcbea516cf06857215779fd812ca3bef1b32",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 150315,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "unibase",
+   "sym": "UB-USD",
+   "name": "Unibase",
+   "rank": 141,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x916f992df86795f24de6c268cfb9031fbb1155da",
+     "base": "0x40b8129b786d766267a7a118cf8c07e31cdb6fde",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 2076071,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "olympus",
+   "sym": "OHM-USD",
+   "name": "Olympus",
+   "rank": 143,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x88051b0eea095007d3bef21ab287be961f3d8598",
+     "base": "0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5",
+     "decimals": 9,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 2325666,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x183ea22691c54806fe96555436dd312b6befac2f",
+     "base": "0x060cb087a9730e13aa191f31a6d86bff8dfcdcc0",
+     "decimals": 9,
+     "quote": "USDC",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 165123,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x584ec2562b937c4ac0452184d8d83346382b5d3a",
+     "base": "0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5",
+     "decimals": 9,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 55232,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "quack-ai",
+   "sym": "Q-USD",
+   "name": "Quack AI",
+   "rank": 145,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8bafe0bdd3eb9ae0539f5b32e771c1a72a189b7f",
+     "base": "0xc07e1300dc138601fa6b0b59f8d0fa477e690589",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1016640,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "optimism",
+   "sym": "OP-USD",
+   "name": "Optimism",
+   "rank": 151,
+   "pools": [
+    {
+     "chain": "optimism",
+     "pool": "0x68f5c0a2de713a54991e01858fd27a3832401849",
+     "base": "0x4200000000000000000000000000000000000042",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 97156,
+     "swaps": 22,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "shuffle-2",
+   "sym": "SHFL-USD",
+   "name": "Shuffle",
+   "rank": 162,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xd0a4c8a1a14530c7c9efdad0ba37e8cf4204d230",
+     "base": "0x8881562783028f5c1bcb985d2283d5e170d88888",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 4687718,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ethereum-name-service",
+   "sym": "ENS-USD",
+   "name": "Ethereum Name Service",
+   "rank": 168,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x92560c178ce069cc014138ed3c2f5221ba71f58a",
+     "base": "0xc18360217d8f7ab5e7c516566761ea12ce7f9d72",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 119578,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "frax",
+   "sym": "FRAX-USD",
+   "name": "Legacy Frax Dollar",
+   "rank": 170,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x10581399a549dbfffdbd9b070a0ba2f9f61620d2",
+     "base": "0x853d955acef822db058eb8505911ed77f175b99e",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 220927,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xc63b0708e2f7e69cb8a1df0e1389a98c35a76d52",
+     "base": "0x853d955acef822db058eb8505911ed77f175b99e",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 219416,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "bnb48-club-token",
+   "sym": "KOGE-USD",
+   "name": "KOGE",
+   "rank": 171,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xcf59b8c8baa2dea520e3d549f97d4e49ade17057",
+     "base": "0xe6df05ce8c8301223373cf5b969afcb1498c5528",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 55733,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "compound-governance-token",
+   "sym": "COMP-USD",
+   "name": "Compound",
+   "rank": 173,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x4786bb29a1589854204a4e62dcbe26a571224c0f",
+     "base": "0xc00e94cb662c3520282e6f5717214004a7f26888",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 1697857,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "syrup",
+   "sym": "SYRUP-USD",
+   "name": "Maple Finance",
+   "rank": 175,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x27941a235804f33d81adabb2d56589c5f6ea6556",
+     "base": "0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 142663,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "eigenlayer",
+   "sym": "EIGEN-USD",
+   "name": "EigenCloud (prev. EigenLayer)",
+   "rank": 180,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xc2c390c6cd3c4e6c2b70727d35a45e8a072f18ca",
+     "base": "0xec53bf9167f50cdeb3ae105f56099aaab9061f83",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 1875655,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xd640333b71b015092d9b3afcff3e427036304370",
+     "base": "0xec53bf9167f50cdeb3ae105f56099aaab9061f83",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 707384,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "societe-generale-forge-eurcv",
+   "sym": "EURCV-USD",
+   "name": "EUR CoinVertible",
+   "rank": 182,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x1f195908f2ee7a6fc15d33b30c82298f568e805c",
+     "base": "0x5f7827fdeb7c20b443265fc2f40845b715385ff2",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 1778220,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "usa",
+   "sym": "USAT-USD",
+   "name": "USAT",
+   "rank": 183,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x34cca44ed6d1e568fbd4c168581b08529d429a6a",
+     "base": "0x07041776f5007aca2a54844f50503a18a72a8b68",
+     "decimals": 6,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 58918,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "trust-wallet-token",
+   "sym": "TWT-USD",
+   "name": "Trust Wallet",
+   "rank": 187,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8ccb4544b3030dacf3d4d71c658f04e8688e25b1",
+     "base": "0x4b0f1812e5df2a09796481ff14017e6005508003",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 118267,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x3c01a8cb79f4561606c6dedfeb1f4695f8a174b2",
+     "base": "0x4b0f1812e5df2a09796481ff14017e6005508003",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 94438,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "instadapp",
+   "sym": "FLUID-USD",
+   "name": "Fluid",
+   "rank": 188,
+   "pools": [
+    {
+     "chain": "polygon",
+     "pool": "0xe30e4dfdbb10949c27501922f845e20cfa579f09",
+     "base": "0xf50d05a1402d0adafa880d36050736f9f6ee7dee",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 206442,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x3b3d1a85a248b70100e95437dbeebcae5e7ec7a1",
+     "base": "0x61e030a56d33e8260fdd81f03b162a79fe3449cd",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 136090,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xc1cd3d0913f4633b43fcddbcd7342bc9b71c676f",
+     "base": "0x6f40d4a6237c257fff2db00fa0510deeecd303eb",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 355990,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xcba27c8e7115b4eb50aa14999bc0866674a96ecb",
+     "base": "0x6f40d4a6237c257fff2db00fa0510deeecd303eb",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 107017,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "zama",
+   "sym": "ZAMA-USD",
+   "name": "Zama",
+   "rank": 189,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x4d68b530920d26c3b01c99fecc19e21011b72bbd",
+     "base": "0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 387635,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "agora-dollar",
+   "sym": "AUSD-USD",
+   "name": "AUSD",
+   "rank": 192,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xbafead7c60ea473758ed6c6021505e8bbd7e8e5d",
+     "base": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 11472810,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "axie-infinity",
+   "sym": "AXS-USD",
+   "name": "Axie Infinity",
+   "rank": 195,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x3019d4e366576a88d28b623afaf3ecb9ec9d9580",
+     "base": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 81527,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "chain-2",
+   "sym": "XCN-USD",
+   "name": "Onyxcoin",
+   "rank": 197,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0xcf307083dbf8b68be7f4bc24b0bc0d3bf79bfb54",
+     "base": "0x9c632e6aaa3ea73f91554f8a3cb2ed2f29605e0c",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 96125,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "origintrail",
+   "sym": "TRAC-USD",
+   "name": "OriginTrail",
+   "rank": 198,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xb1914469141ebb6e244e75cee3f35d43bf6b85e5",
+     "base": "0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 168727,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "useless-3",
+   "sym": "USELESS-USD",
+   "name": "Useless Coin",
+   "rank": 201,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x1b87567de134dbe30e29953c477f1cbc3d626b6b",
+     "base": "0xba38b3c706f7a515ff7c8db04daa0a134ec46d2b",
+     "decimals": 6,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 351690,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "coco-2",
+   "sym": "COCO-USD",
+   "name": "coco",
+   "rank": 202,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x27762d5f39cd3a0c75ae77c401fd7e460d9e6d66",
+     "base": "0x80f1ff15b887cb19295d88c8c16f89d47f6d8888",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 582471,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x48f1aa773766da69d82dd147e612f972283ff663",
+     "base": "0x80f1ff15b887cb19295d88c8c16f89d47f6d8888",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 52032,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "spacex-bstocks-tokenized-stock",
+   "sym": "SPCXB-USD",
+   "name": "SpaceX (bStocks Tokenized Stock)",
+   "rank": 203,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x66faad27cf481f82d0089ec8156b3aa3636010c7",
+     "base": "0xbe9d156892e55e7154bcd3cb0fea677f9d3103e1",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 649890,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x977daffc095b33872e2741c19568925015c35b4d",
+     "base": "0xbe9d156892e55e7154bcd3cb0fea677f9d3103e1",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 581225,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x51a45a72cc96ca3ba615e25e80a6af2740ae2e2d",
+     "base": "0xbe9d156892e55e7154bcd3cb0fea677f9d3103e1",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 348650,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "circle-internet-group-bstock",
+   "sym": "CRCLB-USD",
+   "name": "Circle Internet Group (bStocks Tokenized Stock)",
+   "rank": 205,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x29967c54c5bf12e8158c8894376064b30ebab297",
+     "base": "0x80f3d493ebce97e343c53d29a137942416b4ffc0",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 301440,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "gmt-token",
+   "sym": "GOMINING-USD",
+   "name": "GoMining Token",
+   "rank": 208,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xb297d74cbe67ba9a0fa92862c31e501228e8b00b",
+     "base": "0x7ddc52c4de30e94be3a6a0a2b259b2850f421989",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 73087,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "railgun",
+   "sym": "RAIL-USD",
+   "name": "Railgun",
+   "rank": 217,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x2837809fd68e4a4104af76bbec5b622b6146b2cb",
+     "base": "0xe76c6c83af64e4c60245d8c7de953df673a7a33d",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 2615143,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "dgrid-ai",
+   "sym": "DGAI-USD",
+   "name": "DGrid AI",
+   "rank": 230,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x0e6e1f47c64f517fc9dc35698718c7dfc708d534",
+     "base": "0x10d4183389e99233db3cc981c43443ebd28ebd5e",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1482101,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "1inch",
+   "sym": "1INCH-USD",
+   "name": "1INCH",
+   "rank": 235,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xe931b03260b2854e77e8da8378a1bc017b13cb97",
+     "base": "0x111111111117dc0aa78b770fa6a738034120c302",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 89617,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "aioz-network",
+   "sym": "AIOZ-USD",
+   "name": "AIOZ Network",
+   "rank": 236,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x80968a476e0235a026fd1f33aaac5a3b7b76110f",
+     "base": "0x33d08d8c7a168333a85285a68c0042b39fc3741d",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 529772,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x2a0330c7e979a4d18e5b0c987b877da24dd37d04",
+     "base": "0x626e8036deb333b408be468f951bdb42433cbf18",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 964125,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "apecoin",
+   "sym": "APE-USD",
+   "name": "ApeCoin",
+   "rank": 240,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xac4b3dacb91461209ae9d41ec517c2b9cb1b7daf",
+     "base": "0x4d224452801aced8b2f0aebe155379bb5d594381",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 54976,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "safepal",
+   "sym": "SFP-USD",
+   "name": "SafePal",
+   "rank": 242,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x64ebb904e169cb94e9788fcb68283b4c894ed881",
+     "base": "0xd41fdb03ba84762dd66a0af1a6c8540ff1ba5dfb",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 423233,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "theo-short-duration-us-treasury-fund",
+   "sym": "THBILL-USD",
+   "name": "Theo Short Duration US Treasury Fund",
+   "rank": 245,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0x5886e46e6dd497d7501f103a58ff4242bcaa2556",
+     "base": "0xfdd22ce6d1f66bc0ec89b20bf16ccb6670f55a5a",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 87078,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "geodnet",
+   "sym": "GEOD-USD",
+   "name": "Geodnet",
+   "rank": 250,
+   "pools": [
+    {
+     "chain": "polygon",
+     "pool": "0x39bfc628a34b07c5d65f207e59077dd3c8f10730",
+     "base": "0xac0f66379a6d7801d7726d5a943356a172549adb",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 94078,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "rollbit-coin",
+   "sym": "RLB-USD",
+   "name": "Rollbit Coin",
+   "rank": 252,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x33676385160f9d8f03a0db2821029882f7c79e93",
+     "base": "0x046eee2cc3188071c02bfc1745a6b17c656e3f3d",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 1247045,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x2322e5517a3cbc75a3f02d74c96f82dda120d841",
+     "base": "0x046eee2cc3188071c02bfc1745a6b17c656e3f3d",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 963488,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x510100d5143e011db24e2aa38abe85d73d5b2177",
+     "base": "0x046eee2cc3188071c02bfc1745a6b17c656e3f3d",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 295152,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "aethir",
+   "sym": "ATH-USD",
+   "name": "Aethir",
+   "rank": 258,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xd31d41dffa3589bb0c0183e46a1eed983a5e5978",
+     "base": "0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 164031,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "golem",
+   "sym": "GLM-USD",
+   "name": "Golem",
+   "rank": 261,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xfe4ec8f377be9e1e95a49d4e0d20f52d07b1ff0d",
+     "base": "0x7dd9c5cba05e151c895fde1cf355c9a1d5da6429",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 51480,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "zencash",
+   "sym": "ZEN-USD",
+   "name": "Horizen",
+   "rank": 266,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x0392b12a1ceb0cd13af5ea448cf5586ea609852d",
+     "base": "0xf43eb8de897fbc7f2502483b2bef7bb9ea179229",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL100",
+     "fee": 0.0005,
+     "liq": 1373517,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ultima",
+   "sym": "ULTIMA-USD",
+   "name": "Ultima",
+   "rank": 273,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xdc85c2bb53d927006b2db488a0cb4605fca48032",
+     "base": "0x5668a83b46016b494a30dd14066a451e5417a8b8",
+     "decimals": 6,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 87880,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "unity-usd",
+   "sym": "UUSD-USD",
+   "name": "Unity USD",
+   "rank": 276,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x1c3865814acbba11e7196df0b46c024472503196",
+     "base": "0x61a10e8556bed032ea176330e7f17d6a12a10000",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 8148646,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "prometeus",
+   "sym": "PROM-USD",
+   "name": "Prom",
+   "rank": 277,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x83e98cac01259a0d00729cfb722810472c421459",
+     "base": "0xaf53d56ff99f1322515e54fdde93ff8b3b7dafd5",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 74197,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "cheems-token",
+   "sym": "CHEEMS-USD",
+   "name": "Cheems Token",
+   "rank": 290,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x38231d4ef9d33ebea944c75a21301ff6986499c3",
+     "base": "0x0df0587216a4a1bb7d5082fdc491d93d2dd4b413",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 2983741,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "soon-2",
+   "sym": "SOON-USD",
+   "name": "SOON",
+   "rank": 291,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x0b2eb4332a15e5165477aad2c79721925920a383",
+     "base": "0xb9e1fd5a02d3a33b25a14d661414e6ed6954a721",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 439742,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "chip-2",
+   "sym": "CHIP-USD",
+   "name": "USD.AI",
+   "rank": 293,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0x49340dbb8fb5ece2f9b594e77ab774e65725e9d8",
+     "base": "0x0c1c1c109fe34733fca54b82d7b46b75cfb71f6e",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 547960,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "gmx",
+   "sym": "GMX-USD",
+   "name": "GMX",
+   "rank": 298,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0x80a9ae39310abf666a87c743d6ebbd0e8c42158e",
+     "base": "0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 394088,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "arbitrum",
+     "pool": "0x1aeedd3727a6431b8f070c0afaa81cc74f273882",
+     "base": "0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 89242,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "mag7-ssi",
+   "sym": "MAG7SSI-USD",
+   "name": "MAG7.ssi",
+   "rank": 299,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0xd364eb55e17700b54bd75feb3f14582ed7a29444",
+     "base": "0x9e6a46f294bb67c20f1d1e7afb0bbef614403b55",
+     "decimals": 8,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 999368,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "four",
+   "sym": "FORM-USD",
+   "name": "Four",
+   "rank": 306,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x7cb113b487e025b3a69537fca579559433240cb5",
+     "base": "0x5b73a93b4e5e4f1fd27d8b3f8c97d69908b5e284",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 163352,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "safe",
+   "sym": "SAFE-USD",
+   "name": "Safe",
+   "rank": 316,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x000ba527862e5b82cff0f7c66b646af023274aa1",
+     "base": "0x5afe3855358e112b5647b952709e6165e1c1eeee",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 112098,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "adi-token",
+   "sym": "ADI-USD",
+   "name": "ADI",
+   "rank": 324,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x41a561b972039a9ccb975a4c17b84c9f95099e15",
+     "base": "0x8b1484d57abbe239bb280661377363b03c89caea",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 1393648,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x854d6051c8c403cb27f6e0e304fd961f00aad4b9",
+     "base": "0x8b1484d57abbe239bb280661377363b03c89caea",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 275409,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "kava",
+   "sym": "KAVA-USD",
+   "name": "Kava",
+   "rank": 328,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x99e1a43e738b026a2cd4359409594debab61b48d",
+     "base": "0x9bafc8d4b487cebff201721702507a3e2c67ad79",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 138663,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "livepeer",
+   "sym": "LPT-USD",
+   "name": "Livepeer",
+   "rank": 335,
+   "pools": [
+    {
+     "chain": "arbitrum",
+     "pool": "0x4fd47e5102dfbf95541f64ed6fe13d4ed26d2546",
+     "base": "0x289ba1701c2f088cf0faf8b3705246331cb8a839",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 144408,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "ecomi",
+   "sym": "OMI-USD",
+   "name": "ECOMI",
+   "rank": 336,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x6e7b4416e3a2b873f6cd4840e6bee7d88f07da8f",
+     "base": "0x3792dbdd07e87413247df995e692806aa13d3299",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 104536,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "cow-protocol",
+   "sym": "COW-USD",
+   "name": "CoW Protocol",
+   "rank": 338,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xfbb81382cce6b9ce58f8645353f70d9db1bb69af",
+     "base": "0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 175944,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0xfcfdfc98062d13a11cec48c44e4613eb26a34293",
+     "base": "0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 61678,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "matrixdock-gold",
+   "sym": "XAUM-USD",
+   "name": "Matrixdock Gold",
+   "rank": 353,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x497e224d7008fe47349035ddd98bedb773e1f4c5",
+     "base": "0x23ae4fd8e7844cdbc97775496ebd0e8248656028",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 128140,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "velo",
+   "sym": "VELO-USD",
+   "name": "Velo",
+   "rank": 355,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x258474cd00b4f42842ed424e6c2c1da0087031b8",
+     "base": "0xf486ad071f3bee968384d2e39e2d8af0fcf6fd46",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 297211,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "dusk-network",
+   "sym": "DUSK-USD",
+   "name": "DUSK",
+   "rank": 356,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xff29d3e552155180809ea3a877408a4620058086",
+     "base": "0x940a2db1b7008b6c776d4faaca729d6d4a4aa551",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 77349,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "diem",
+   "sym": "DIEM-USD",
+   "name": "Diem",
+   "rank": 358,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x80d995189ecc593672ad4703b250a5e82672eb1d",
+     "base": "0xf4d97f2da56e8c3098f3a8d538db630a2606a024",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 97630,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "o1-exchange",
+   "sym": "O-USD",
+   "name": "o1.exchange",
+   "rank": 364,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x1a9b68ca1dcacb106c4b853e2d9c915f0cfe2e56",
+     "base": "0x500a02a20b0b0a3f3efccfc0559543f5743bd1c4",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 273573,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "moolah",
+   "sym": "MOOLAH-USD",
+   "name": "Moolah",
+   "rank": 366,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x0459f493ae6ce91953012097ce24f7c851a697c9",
+     "base": "0xbab528425edb1e0e36d3719bc3307d9c8cce8888",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 870311,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x04930d4f0a2092f2bf9065bde009d2f1281a6fed",
+     "base": "0xbab528425edb1e0e36d3719bc3307d9c8cce8888",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 140233,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "marscoin-4",
+   "sym": "MARSCOIN-USD",
+   "name": "MarsCoin",
+   "rank": 370,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x14ca9d552ed2cf0d5dfd1f89bc6793a464e2ed16",
+     "base": "0xfe189e97832da1573e4e4ff034f4ffc3a15c7777",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 71214,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "baby-doge-coin",
+   "sym": "BABYDOGE-USD",
+   "name": "Baby Doge Coin",
+   "rank": 372,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x61db764c20a2ebfb7e8a7a5afb0b2dd85a4cef5f",
+     "base": "0xc748673057861a797275cd8a068abb95a902e8de",
+     "decimals": 9,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 3291483,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x9f2ebe69a86c079f3d4c3b94a11932b676b72f74",
+     "base": "0xac57de9c1a09fec648e93eb98875b212db0d460b",
+     "decimals": 9,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 536286,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "banana-for-scale-2",
+   "sym": "BANANAS31-USD",
+   "name": "Banana For Scale",
+   "rank": 391,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x7f51bbf34156ba802deb0e38b7671dc4fa32041d",
+     "base": "0x3d4f0513e8a29669b960f9dbca61861548a9a760",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1465018,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "irys",
+   "sym": "IRYS-USD",
+   "name": "Irys",
+   "rank": 397,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x73de8b8d37fac1afe156f6533788a0eff197d636",
+     "base": "0x91152b4ef635403efbae860edd0f8c321d7c035d",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 271532,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "zignaly",
+   "sym": "ZIG-USD",
+   "name": "ZIG Finance",
+   "rank": 399,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x9fac151b7f1dbbb9d14ccd1ca5b990bc4da5cd1f",
+     "base": "0x8c907e0a72c3d55627e853f4ec6a96b0c8771145",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 413732,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "cross-2",
+   "sym": "ONE-USD",
+   "name": "ONEchain",
+   "rank": 407,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xe6e51ea572502dbdf8b40834d0619f9a9144d3a5",
+     "base": "0x6bf62ca91e397b5a7d1d6bce97d9092065d7a510",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 548143,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "dappos",
+   "sym": "DOS-USD",
+   "name": "DAPPOS",
+   "rank": 411,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xcbeaad783ffd2cea125e9d9b2ec21e639d20fa59",
+     "base": "0xb0f09ea9ae0515c3551080d4a745c8115aa30e37",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 499863,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "tagger",
+   "sym": "TAG-USD",
+   "name": "TAGGER",
+   "rank": 420,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xf0750c373ebbb3baeef7e03d8300caad1983d67c",
+     "base": "0x208bf3e7da9639f1eaefa2de78c23396b0682025",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 910482,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "usdu",
+   "sym": "USDU-USD",
+   "name": "USDu",
+   "rank": 422,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8aab5522d601bbb85501d703b55a272e47852120",
+     "base": "0xea953ea6634d55dac6697c436b1e81a679db5882",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 308996,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "strategy-tokenized-bstocks",
+   "sym": "MSTRB-USD",
+   "name": "Strategy (bStocks Tokenized Stock)",
+   "rank": 425,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x692081209619735f25700557078ab084d3e5d007",
+     "base": "0xe87afb3076aeb0f9b14e368de8145ae6a2826a14",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 91658,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "mubarak",
+   "sym": "MUBARAK-USD",
+   "name": "Mubarak",
+   "rank": 427,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x90a54475d512b8f3852351611c38fad30a513491",
+     "base": "0x5c85d6c6825ab4032337f11ee92a72df936b46f6",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 1888420,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "token-pocket",
+   "sym": "TPT-USD",
+   "name": "TokenPocket Token",
+   "rank": 433,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x5f8e4079aeb1447ce11626a5d95d18e1e307a4a1",
+     "base": "0xeca41281c24451168a37211f0bc2b8645af45092",
+     "decimals": 4,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 137979,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "aleo",
+   "sym": "ALEO-USD",
+   "name": "ALEO",
+   "rank": 439,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xf9d481c36bbf3309438c231a51d0ee6f5c095705",
+     "base": "0x6cfffa5bfd4277a04d83307feedfe2d18d944dd2",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 74679,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "goplus-security",
+   "sym": "GPS-USD",
+   "name": "GoPlus Security",
+   "rank": 441,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8943a75f4d0d1babea4cd77eabc323127714caa4",
+     "base": "0x9a4a67721573f2c9209dfff972c52be4e3f6642e",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 53791,
+     "swaps": null,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "toshi",
+   "sym": "TOSHI-USD",
+   "name": "Toshi",
+   "rank": 447,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0x4b0aaf3ebb163dd45f663b38b6d93f6093ebc2d3",
+     "base": "0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 459050,
+     "swaps": 54,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x27820f8b2e7c5dbe1eef6805577c222afde1a191",
+     "base": "0x6a2608dabe09bc1128eec7275b92dfb939d5db3f",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 87749,
+     "swaps": 377,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "holoworld",
+   "sym": "HOLO-USD",
+   "name": "Holoworld",
+   "rank": 448,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xf7f9fc41da4b8e0d52a642af2ad38509c3e40bf0",
+     "base": "0x1a5d7e4c3a7f940b240b7357a4bfed30d17f9497",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 186636,
+     "swaps": 1,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "bio-protocol",
+   "sym": "BIO-USD",
+   "name": "Bio Protocol",
+   "rank": 461,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0xbc51349d35f600f6c501a4cdc1dc79108d1fe3eb",
+     "base": "0x226a2fa2556c48245e57cd1cba4c6c9e67077dd2",
+     "decimals": 18,
+     "quote": "WBNB",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 173628,
+     "swaps": 1,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "base",
+     "pool": "0xd40bffa9c9e35493b88a2b6744c49d8716b00898",
+     "base": "0x226a2fa2556c48245e57cd1cba4c6c9e67077dd2",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 113308,
+     "swaps": 11,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "based-brett",
+   "sym": "BRETT-USD",
+   "name": "Brett",
+   "rank": 474,
+   "pools": [
+    {
+     "chain": "base",
+     "pool": "0xba3f945812a83471d709bce9c3ca699a19fb46f7",
+     "base": "0x532f27101965dd16442e59d40670faf5ebb142e4",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Uniswap v3 1%",
+     "fee": 0.01,
+     "liq": 703320,
+     "swaps": 1,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "base",
+     "pool": "0x4e829f8a5213c42535ab84aa40bd4adcce9cba02",
+     "base": "0x532f27101965dd16442e59d40670faf5ebb142e4",
+     "decimals": 18,
+     "quote": "WETH",
+     "dex": "Aerodrome CL200",
+     "fee": 0.003,
+     "liq": 328314,
+     "swaps": 11,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x3a08ae820cf1483ed3ac9c33cc100913299d0e12",
+     "base": "0xa7440029eca41deabd8775ef1d6086b37d4df8d6",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 169478,
+     "swaps": 9,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "fidelity-digital-dollar",
+   "sym": "FIDD-USD",
+   "name": "Fidelity Digital Dollar",
+   "rank": 475,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0xbb5b761415a58d944fcb81313b204f895637d20c",
+     "base": "0x7c135549504245b5eae64fc0e99fa5ebabb8e35d",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 1031706,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    },
+    {
+     "chain": "ethereum",
+     "pool": "0x31d0e24bdb9359a09d810623112e257dabf0e974",
+     "base": "0x7c135549504245b5eae64fc0e99fa5ebabb8e35d",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 982577,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "nvidia-bstocks",
+   "sym": "NVDAB-USD",
+   "name": "NVIDIA (bStocks Tokenized Stock)",
+   "rank": 476,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x8fb4243b553ac29ba088acf00b9b7da24bd6690c",
+     "base": "0x02fca66c1d1afb4e2a7884261eb00f63598a7436",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 0.25%",
+     "fee": 0.0025,
+     "liq": 1010547,
+     "swaps": 56,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    },
+    {
+     "chain": "bnb",
+     "pool": "0x18d52270d09ab842c87acd45977dcf64a82fa4ad",
+     "base": "0x02fca66c1d1afb4e2a7884261eb00f63598a7436",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "PancakeSwap v3 1%",
+     "fee": 0.01,
+     "liq": 133742,
+     "swaps": 2,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "chainopera-ai",
+   "sym": "COAI-USD",
+   "name": "ChainOpera AI",
+   "rank": 477,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x778121b464151fe5d931587c457e48fcaaa0dc7a",
+     "base": "0x0a8d6c86e1bce73fe4d0bd531e1a567306836ea5",
+     "decimals": 18,
+     "quote": "USDC",
+     "dex": "PancakeSwap v3 0.01%",
+     "fee": 0.0001,
+     "liq": 990406,
+     "swaps": 106,
+     "topic": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83"
+    }
+   ]
+  },
+  {
+   "key": "allunity-chf",
+   "sym": "CHFAU-USD",
+   "name": "AllUnity CHF",
+   "rank": 478,
+   "pools": [
+    {
+     "chain": "ethereum",
+     "pool": "0x77bdbdd5061ff363515e888f3ceb49298af5b8e2",
+     "base": "0xbd4dfc058eb95b8de5ceaf39966a1a70f5556f78",
+     "decimals": 6,
+     "quote": "USDC",
+     "dex": "Uniswap v3 0.05%",
+     "fee": 0.0005,
+     "liq": 84508,
+     "swaps": null,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  },
+  {
+   "key": "bulla-3",
+   "sym": "BULLA-USD",
+   "name": "BULLA",
+   "rank": 483,
+   "pools": [
+    {
+     "chain": "bnb",
+     "pool": "0x9950c1f3754fb8a3ebbaf24b8573cafc7474c00f",
+     "base": "0x595e21b20e78674f8a64c1566a20b2b316bc3511",
+     "decimals": 18,
+     "quote": "USDT",
+     "dex": "Uniswap v3 0.3%",
+     "fee": 0.003,
+     "liq": 67416,
+     "swaps": 266,
+     "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
+    }
+   ]
+  }
+ ]
+}

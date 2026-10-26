@@ -18,3 +18,4 @@
 .lvb-card dt { color: var(--text-2); }
 .lvb-card dd { margin: 0; text-align: right; }
 @media (prefers-reduced-motion: no-preference) { .lvb-dot { transition: background-color var(--dur-2); } }
+.lvb-conf { color: var(--text-2); font-size: var(--type-3xs); white-space: nowrap; }
