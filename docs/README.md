@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 62 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 63 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 18 |
@@ -33,11 +33,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - 2026-10-26 [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - 2026-10-26 [DEC-0062: Desktop builds are signed with Argus Vision certificates](decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - 2026-10-26 [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
-- 2026-10-25 [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 
 ## intent
 
@@ -113,6 +113,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0061 | [Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md) | accepted | 2026-10-26 | [ui](TAGS.md#ui) |
 | DEC-0062 | [Desktop builds are signed with Argus Vision certificates](decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra) |
 | DEC-0063 | [The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0064 | [One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## hypothesis
 

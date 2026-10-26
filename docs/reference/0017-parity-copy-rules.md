@@ -67,6 +67,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0060: A getting started checklist and first-run tours, and no bank details until a broker partner](../decisions/0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md)
 - [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
 - [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
+- [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](../decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
