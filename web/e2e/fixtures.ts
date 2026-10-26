@@ -7,11 +7,15 @@
 //     from the stubs)
 //   - console errors and warnings, uncaught exceptions, HTTP errors and failed requests
 //     failing the test, the same rules as scripts/smoke.mjs (see ALLOW and allowHttp)
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { test as base, expect, type ConsoleMessage, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { BASE, SUPABASE } from "./config";
 import { DataStub } from "./data";
 import { FakeDb, USER, sessionCookie, stubSupabase } from "./supabase";
+
+const FONTS = resolve(import.meta.dirname, "fonts");
 
 // Console messages that are not bugs. Keep this short and say why for each one.
 // Missing data files are handled separately: only the ones the stub left out on purpose pass.
@@ -58,8 +62,16 @@ export const test = base.extend<Fixtures>({
     });
     let live = signedIn;
     if (signedIn) await context.addCookies([sessionCookie()]);
-    // Anything not on this server: an empty reply (fonts get an empty stylesheet).
+    // Anything not on this server: an empty reply. Google Fonts is answered from e2e/fonts,
+    // so pages lay out with the real fonts on any machine (and the same way on a Mac and in CI).
     await context.route((url) => url.origin !== BASE && !url.href.startsWith(SUPABASE) && /^https?:/.test(url.protocol), (route) => {
+      const url = new URL(route.request().url());
+      if (url.hostname === "fonts.googleapis.com") {
+        const font = url.pathname.match(/^\/__e2e_fonts\/([a-z0-9-]+\.woff2)$/);
+        const headers = { "access-control-allow-origin": "*" };
+        if (font) return route.fulfill({ status: 200, contentType: "font/woff2", headers, body: readFileSync(resolve(FONTS, font[1])) });
+        return route.fulfill({ status: 200, contentType: "text/css", headers, body: readFileSync(resolve(FONTS, "fonts.css")) });
+      }
       const type = route.request().resourceType();
       if (type === "stylesheet") return route.fulfill({ status: 200, contentType: "text/css", body: "" });
       if (type === "font" || type === "image") return route.fulfill({ status: 204, body: "" });

@@ -6,7 +6,8 @@ sizes: desktop (1440x900) and phone (390x844). Headless only.
 
 Nothing leaves the machine. Supabase is a stand-in inside the browser (`e2e/supabase.ts`),
 with a made-up signed-in user and an in-memory database. `/data/` is served from small
-fixtures (`e2e/data.ts`). Every other outside address gets an empty answer.
+fixtures (`e2e/data.ts`). Google Fonts is answered from `e2e/fonts`, so pages lay out with
+the real fonts on any machine. Every other outside address gets an empty answer.
 
 Any console error or warning, uncaught exception, HTTP error or failed request fails a test
 (`e2e/fixtures.ts`). A test that expects one says so with `expectConsole` or `allowHttp`.
@@ -44,7 +45,7 @@ first-run tours, `consent: false` for the cookie notice.
 
 ## Screenshot baselines
 
-Baselines are made on Linux by CI, because fonts draw differently on a Mac. Locally the
+Baselines are made on Linux by CI, because text is smoothed differently on a Mac. Locally the
 visual tests skip (set `E2E_VISUAL=1` to run them anyway). They also skip when a baseline
 is missing, until it is made.
 

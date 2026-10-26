@@ -1,10 +1,10 @@
 // Screenshots of the key screens of every app at both sizes, compared with the baselines in
 // e2e/__screenshots__/visual.spec.ts/. The clock is fixed, motion is off, the front page's
-// moving background is masked, and fonts come from the system (the suite stubs Google
-// Fonts), so the same build gives the same pixels on the same machine.
+// moving background is masked, and the fonts are the real ones (served from e2e/fonts), so
+// the same build gives the same pixels on the same machine.
 //
-// Baselines are made on Linux by CI (.github/workflows/e2e-baselines.yml), because fonts
-// draw differently on a Mac. So these tests:
+// Baselines are made on Linux by CI (.github/workflows/e2e-baselines.yml), because text is
+// smoothed differently on a Mac. So these tests:
 //   - run only on Linux, unless E2E_VISUAL=1 is set
 //   - skip, with a message, when a baseline is missing, unless the run was asked to write
 //     them (--update-snapshots=missing, changed or all)
@@ -75,7 +75,6 @@ for (const s of SCREENS) {
       await still(page);
       await expect(page).toHaveScreenshot(file, {
         mask: (s.mask ?? []).map((m) => page.locator(m)),
-        maskColor: "#000000",
         fullPage: false,
       });
     });

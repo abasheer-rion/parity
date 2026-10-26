@@ -79,7 +79,8 @@ test.describe("chart", () => {
     await page.getByRole("button", { name: /^Search/ }).click();
     const palette = page.getByRole("dialog").first();
     await expect(palette).toBeVisible();
-    await page.keyboard.type("BTC");
+    // Type into the palette's own box (typing before it has focus would go to the page).
+    await palette.locator("input").first().fill("BTC");
     await expect(palette.getByText(/BTC/).first()).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(palette).toBeHidden();
