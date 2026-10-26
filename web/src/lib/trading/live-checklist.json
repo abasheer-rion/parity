@@ -1,0 +1,15 @@
+{
+  "about": "Registration items from REF-0020 'Before real trading through a broker partner'. Live trading stays refused until every item is done with evidence, this file is committed and the site is redeployed. See the REF 'Going live with real trading'.",
+  "complete": false,
+  "items": [
+    { "id": "partner-agreement", "item": "Broker partner picked (Alpaca Broker API) and its agreement signed", "who": "Owner", "done": false, "evidence": "" },
+    { "id": "lawyer-bd-opinion", "item": "Lawyer's opinion that Parity's role and pay stay outside broker-dealer registration", "who": "Lawyer", "done": false, "evidence": "" },
+    { "id": "partner-comms-review", "item": "Partner reviewed all trading screens and messages under FINRA Rules 2210 and 2214", "who": "Partner, team", "done": false, "evidence": "" },
+    { "id": "disclosures", "item": "Disclosures name the broker, SIPC, BrokerCheck and say Parity is not the broker", "who": "Lawyer, team", "done": false, "evidence": "" },
+    { "id": "customer-data", "item": "Customer data protection for data passed to and from the partner (GLBA, Safeguards Rule)", "who": "Lawyer, team", "done": false, "evidence": "" },
+    { "id": "complaints-records", "item": "Complaint handling and record keeping as the partner contract requires", "who": "Team", "done": false, "evidence": "" },
+    { "id": "crypto-licensed-party", "item": "Crypto: the partner is the licensed party; Parity never holds coins or money", "who": "Owner, lawyer", "done": false, "evidence": "" },
+    { "id": "regulatory-page", "item": "/legal/regulatory/ names the partner and its regulators", "who": "Team", "done": false, "evidence": "" },
+    { "id": "live-migration", "item": "A reviewed migration allows mode = 'live' rows in the broker tables", "who": "Team", "done": false, "evidence": "" }
+  ]
+}
