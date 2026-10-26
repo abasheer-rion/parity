@@ -30,6 +30,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
@@ -37,7 +38,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-26 [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - 2026-10-26 [DEC-0062: Desktop builds are signed with Argus Vision certificates](decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - 2026-10-26 [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
-- 2026-10-25 [RES-0026: Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 
 ## intent
 
@@ -204,7 +204,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0023 | [Motion system](reference/0023-motion-system.md) | current | 2026-10-25 | [ui](TAGS.md#ui) |
 | REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0025 | [Parity capacity and load test results](reference/0025-parity-capacity-and-load-test-results.md) | current | 2026-10-25 | [infra](TAGS.md#infra) |
-| REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## competitor
 

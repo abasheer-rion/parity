@@ -22,16 +22,9 @@ main footer a,
 /* A checkbox or radio drawn by the library hides the real input; its box shows the ring. */
 .ui-check input:focus-visible, .ui-radio input:focus-visible { outline: none !important; }
 
-/* Links in running text and in table row headers, where their colour is close to the text
-   around them (WCAG 1.4.1, axe link-in-text-block). */
-main :is(p, dd, .mk-banner, .mk-risk, th[scope="row"]) a:not([class]) { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
-
 /* An app's own link rule (".ptr a { color: inherit }") must not turn the primary button's
    text white on white. */
 .ui-btn.ui-btn-primary { color: var(--ds-text-on-primary); }
-
-/* A box that scrolls sideways and was made focusable (lib/a11y/scrollRegions.ts). */
-[data-a11y-region]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 
 /* A file or check input hidden for looks shows focus on its label instead. */
 label:has(> .sr-only:focus-visible), .sr-only:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
@@ -42,9 +35,5 @@ svg text.tick, svg .ax-label, svg text[data-label] { paint-order: stroke; stroke
 
 /* Round icon buttons never squeeze below their 32 px in a tight row (2.5.8). */
 .round-btn { flex: none; min-width: 32px; }
-
-/* Plain fields with no styling of their own lose the outline to "input:focus { outline: none }"
-   in styles.css; give them one back (WCAG 2.4.7). */
-select:not([class]):focus-visible, input:not([class]):focus-visible, textarea:not([class]):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
 /* Date fields put focus on a part inside them, which :focus-visible does not always see. */
 input:not([class]):is([type="date"], [type="time"], [type="month"], [type="week"], [type="datetime-local"]):focus { outline: 2px solid var(--color-focus); outline-offset: 1px; }

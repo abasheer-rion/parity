@@ -4,10 +4,10 @@ title: Accessibility audit, WCAG 2.2 AA
 type: reference
 status: current
 created: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-26
 authors: [ayan]
 tags: [process, ui]
-related: [REF-0009, DEC-0058, REF-0017]
+related: [DEC-0061, REF-0009, DEC-0058, REF-0017]
 ---
 
 # Accessibility audit, WCAG 2.2 AA
@@ -18,9 +18,10 @@ The owner asked for Parity to be ADA compliant. The usual yardstick is WCAG 2.2 
 
 ## Summary
 
-- axe-core, serious and critical: **39 before (7 critical, 32 serious, 6 rules), 0 after**. Moderate and minor: 0 before and after (the WCAG A and AA rules are all rated serious or critical).
+- axe-core, serious and critical: **39 before (7 critical, 32 serious, 6 rules), 0 after**, over 488 page views. Moderate and minor: 0 before and after (the WCAG A and AA rules are all rated serious or critical). Before is main at 857476b; after is this change on top of #122.
+- [DEC-0061](../decisions/0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md) (#122), merged while this work ran, fixed many of the same parts: keyboard-scrollable tables (`TableScroll`), underlined links in text, control edges at 3:1, a 2px focus ring that always wins, 24 px buttons, the live badge's name, and a contrast test on the tokens. Where both changed the same thing, #122's version was kept. This change adds the coverage around it: axe signed out, on the static pages and on the desktop app's own pages, the keyboard and structure checks on every page, Pause controls, chart summaries, and contrast measured on the real pixels.
 - Our own checks: **751 problems before, 0 after**. Most of the 751 were small targets (547 links on the Learn pages that turned out to be inline text, which the first version of the check counted wrongly, plus real ones in the Terminal and Trade), 45 pages with an animation loop running under reduced motion, and missing headings, skip links, focus outlines and chart text.
-- Both run in CI in the web job (`npm run a11y`, `npm run a11y:checks`) and fail the build on any problem.
+- Both run in CI in the web job (`npm run a11y`, `npm run a11y:checks`) and fail the build on any problem. #122's checks were folded in, not run twice: its axe run is the bypass half of `npm run a11y`, and its UI library keyboard walk (2px rings, at least 40 stops) and reduced motion check now live in `npm run a11y:checks`.
 - The public statement is [/legal/accessibility/](../../web/legal/accessibility/index.html).
 
 ## What runs
@@ -56,9 +57,9 @@ Both scripts start their own Vite servers on 127.0.0.1 and block every other hos
 
 | Area | Before | Fix |
 | --- | --- | --- |
-| Wide tables and code lines that scroll | 14 not reachable by keyboard | Focusable, named regions when they overflow (`web/src/lib/a11y/scrollRegions.ts`) |
-| Links in sentences and table row headers | 13 told apart by colour only | Underlined |
-| Live badge name | Visible words not in the name (3) | The details are hidden text after the visible words |
+| Wide tables and code lines that scroll | 14 not reachable by keyboard | Tables: #122's `TableScroll`. Code lines and Terminal stat lists: focusable when they overflow (`web/src/lib/a11y/scrollRegions.ts`) |
+| Links in sentences and table row headers | 13 told apart by colour only | Underlined (#122's rule) |
+| Live badge name | Visible words not in the name (3) | Fixed in #122 |
 | Markets table (Trade) | Rows not inside the row group | Spacer marked presentational, empty state is a row |
 | Small buttons | Bookmark and copy link 13 px wide on phones; Terminal panel buttons, segment buttons, rows and tape 18 to 22 px; Trade watchlist and Workbench price buttons 20 to 22 px | 24 px |
 | Desktop menu and palette | Rows marked as list options outside a list; palette field unnamed, no focus mark | Plain buttons in the menu; the palette is a named combobox with `aria-activedescendant`; a focus line under the field |
@@ -69,7 +70,7 @@ Both scripts start their own Vite servers on 127.0.0.1 and block every other hos
 | First-run tours | Kept focus but were not marked modal; focus fell to the page body when they ended | `aria-modal`; focus goes back where it was, or to the main area |
 | Charts | Line, bar, growth and fan charts had only a short name; Trade's chart canvas had none | A written summary of each chart (span, start, end, low, high per line) tied with `aria-describedby`; the Trade chart gets the same in hidden text |
 | Live and moving content | Prices, books, the markets board and the Terminal tape had no Pause | A Pause / Resume button (`web/src/components/PauseLive.tsx`); updates are held while paused and caught up on Resume (`web/src/lib/live/pause.ts`) |
-| Live regions | The animated number announced every frame; service status every minute; chart tooltips on every mouse move | The final number only; status and tooltips are not live regions |
+| Live regions | The animated number announced every frame; service status every minute; chart tooltips on every mouse move | The number is no longer a live region (#105); status and tooltips are not live regions |
 | Contrast | Primary buttons in Trade, Workbench and Academy not-found views were white on white; front page subtitle 2.96:1 over the red glow; chart labels crossed by lines | Button text colour restored; subtitle one step lighter; chart labels keep a dark halo or a background; Academy end labels no longer overlap |
 | Status messages | "Copied" on the connect page was not announced | A status region |
 
@@ -77,8 +78,8 @@ Both scripts start their own Vite servers on 127.0.0.1 and block every other hos
 
 From `web/`, after `npm ci` and `npx playwright install chromium`:
 
-1. `npm run a11y` (about 8 minutes). `A11Y_ONLY=/legal/` limits it to paths containing the text, `A11Y_MODES=bypass` to one mode (`bypass`, `signed-out`, `desktop`), `A11Y_JSON=out.json` writes every violation.
-2. `npm run a11y:checks` (about 11 minutes). `A11Y_ONLY` works the same; `A11Y_SKIP=motion,contrast,reflow,keyboard,forms,desktop` leaves parts out; `A11Y_DEBUG=<folder>` saves the pictures behind each low contrast reading.
+1. `npm run a11y` (about 8 minutes, axe only). `A11Y_ONLY=/legal/` limits it to paths containing the text, `A11Y_MODES=bypass` to one mode (`bypass`, `signed-out`, `desktop`), `A11Y_JSON=out.json` writes every violation.
+2. `npm run a11y:checks` (about 12 minutes). `A11Y_ONLY` works the same; `A11Y_SKIP=motion,contrast,reflow,keyboard,forms,desktop` leaves parts out; `A11Y_DEBUG=<folder>` saves the pictures behind each low contrast reading.
 
 Both are headless. Neither opens a window, starts Electron or reaches the internet.
 
