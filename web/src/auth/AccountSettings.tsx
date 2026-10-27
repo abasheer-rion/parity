@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { desktop, isDesktop } from "../desktop/bridge";
 import site from "../lib/site.json";
-import { LegalLinks } from "../legal/LegalLinks";
+import { LegalLinks, UpdatesLinks } from "../legal/LegalLinks";
 import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
 import { PASSKEYS_ENABLED, PASSWORD_MIN } from "./config";
@@ -53,6 +53,7 @@ export default function AccountSettings() {
       </SettingsRow>
       <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only. Not investment advice.">
         <LegalLinks className="start" />
+        <UpdatesLinks className="start" />
       </SettingsRow>
     </>
   );

@@ -11,7 +11,7 @@ const src = resolve(here, "../web/dist");
 const out = resolve(here, "build/web");
 
 // Server-only files: the Pages config, search engine files and the IndexNow key.
-const SKIP_TOP = new Set(["data", "local", "_headers", "_routes.json", "robots.txt", "sitemap.xml", "seo-manifest.json"]);
+const SKIP_TOP = new Set(["data", "local", "_headers", "_routes.json", "robots.txt", "sitemap.xml", "sitemaps", "seo-manifest.json"]);
 const banned = (rel) => {
   const top = rel.split(sep)[0];
   return SKIP_TOP.has(top) || /\.map$/.test(rel) || /(^|[\\/])\.env/.test(rel) || /^[0-9a-f]{32}\.txt$/.test(rel);

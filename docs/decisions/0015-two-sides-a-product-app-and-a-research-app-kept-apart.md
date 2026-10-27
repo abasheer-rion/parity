@@ -105,6 +105,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
+- [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](../research/0028-pairs-trading-and-statistical-arbitrage.md)

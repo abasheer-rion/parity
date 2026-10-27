@@ -170,6 +170,40 @@ jobs:
   # Every migration applied in order to a fresh Postgres 17 with Supabase stand-ins, the new
   # ones applied twice, then the SQL tests (supabase/tests/local.sh, DEC-0054). Migrations
   # apply to the hosted project by themselves on merge, so they are tried here first.
+  # Lighthouse CI (DEC-0073): SEO, speed and page weight of the public pages in the built
+  # site, headless. The budgets and the page list are in web/lighthouserc.json; the build
+  # runs build_public, so the Learn, Ideas, newsroom and update pages are all there.
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # the changelog page reads git history
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: npm run build
+      - name: Meta tags of every public page
+        run: python3 ../scripts/seo/meta_check.py --site-dir dist
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: lighthouse
+          path: web/.lighthouseci
+          if-no-files-found: ignore
+
   db:
     runs-on: ubuntu-latest
     steps:
@@ -246,6 +280,13 @@ jobs:
         run: |
           python3 scripts/newsroom/check.py
           NEWSROOM_NO_MEDIA=1 python3 -m unittest discover -s scripts/newsroom/tests
+      # Search and content automation (DEC-0073): the SEO scripts, the changelog, announcements
+      # and status pages, and the automatic posts (scripts/autopost/, when it is there).
+      - name: SEO, updates and autopost scripts
+        run: |
+          python3 -m unittest discover -s scripts/seo/tests
+          python3 -m unittest discover -s scripts/updates/tests
+          if [ -d scripts/autopost/tests ]; then python3 -m unittest discover -s scripts/autopost/tests -t .; fi
       - name: Ledger and registrations
         run: |
           pip install -q -e engine

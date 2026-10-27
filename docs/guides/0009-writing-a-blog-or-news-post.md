@@ -83,5 +83,6 @@ The SEO pipeline can propose a post through `scripts/newsroom/hook.py`. It lands
 ## Referenced by
 
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](../decisions/0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
+- [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](../decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->
