@@ -229,7 +229,9 @@ export function pills(F: Frame, items: Pill[], bounds?: Box): string {
   let out = "";
   for (const it of placed) {
     const lab = it.label ? `${it.label} ` : "";
-    const w = textWidth(lab, size * 0.92) + textWidth(it.value, size, 650) + 14 * u;
+    // A little wider than the estimate, with the text centred, so a fallback font that runs
+    // wider than Inter still sits inside the pill (the text needs the pill behind it for contrast).
+    const w = (textWidth(lab, size * 0.92) + textWidth(it.value, size, 650)) * 1.08 + 16 * u;
     let x = it.x + 9 * u;
     if (x + w > b.x1) x = it.x - 9 * u - w;
     x = Math.max(b.x0 + 2 * u, x);
@@ -238,7 +240,7 @@ export function pills(F: Frame, items: Pill[], bounds?: Box): string {
     // A short tie from the tip to a pill that was pushed away from it.
     if (Math.abs(it.py - it.y) > h * 0.6) g += line(it.x, it.y, x < it.x ? x + w : x, it.py, { stroke: it.color, sw: 1 * u, opacity: 0.5 });
     g += rect(x, y, w, h, { fill: it.color, rx: h / 2 });
-    g += `<text x="${r1(x + 7 * u)}" y="${r1(y + h / 2 + size * 0.36)}" font-size="${r1(size)}" fill="${F.th.onFill}" font-family="${F.th.font}" style="font-variant-numeric:tabular-nums">${it.label ? `<tspan font-size="${r1(size * 0.92)}" opacity="0.72">${escT(lab)}</tspan>` : ""}<tspan font-weight="650">${escT(it.value)}</tspan></text>`;
+    g += `<text x="${r1(x + w / 2)}" y="${r1(y + h / 2 + size * 0.36)}" font-size="${r1(size)}" text-anchor="middle" fill="${F.th.onFill}" font-family="${F.th.font}" style="font-variant-numeric:tabular-nums">${it.label ? `<tspan font-size="${r1(size * 0.92)}" opacity="0.72">${escT(lab)}</tspan>` : ""}<tspan font-weight="650">${escT(it.value)}</tspan></text>`;
     out += group(g, it.opacity ?? 1);
   }
   return out;
