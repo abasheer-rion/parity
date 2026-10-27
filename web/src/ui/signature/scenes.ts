@@ -15,7 +15,7 @@ import {
 } from "./core.ts";
 import { camera, fit, scales, niceTicks, type Domain } from "./camera.ts";
 import {
-  axes, bands, callout, caption, drawLine, headline, leadDot, parLine, pills, title, verdict, background, wrap,
+  axes, yAxisLabels, bands, callout, caption, drawLine, headline, leadDot, parLine, pills, title, verdict, background, wrap,
   type Band, type Pill, type Stat,
 } from "./primitives.ts";
 import { viewport, type Box, type SizeName, type ThemeName, type Theme, type Tone, type Viewport } from "./theme.ts";
@@ -185,7 +185,7 @@ const equity: Scene = (v, F) => {
   if (!zoomed && to > cam.x1) cam = { ...cam, x1: to };
   const sc = scales(cam, F.L.plot);
 
-  let out = axes(F, sc, { yFmt: fm, xTicks: xTicksFor(cam, P, n) });
+  let out = axes(F, sc, { yFmt: fm, xTicks: xTicksFor(cam, P, n), yLabelsLater: true });
   out += crossfade(F, steps, "bands", (b, op) => bands(F, sc, list(b).map((x) => ({
     from: X(num(x.from, 0)), to: X(num(x.to, 1)), label: str(x.label), tone: isTone(x.tone) ? x.tone : "muted",
   })) as Band[], { opacity: op }));
@@ -206,6 +206,7 @@ const equity: Scene = (v, F) => {
     tips[i] = r.tip ? { x: r.tip.x, y: r.tip.y, v: r.tip.v } : { x: NaN, y: NaN, v: NaN };
     if (r.tip && vis[i] > 0.01) tipPills.push({ x: r.tip.x, y: r.tip.y, value: fm(r.tip.v), label: S.length > 1 ? s.label : undefined, color: col, opacity: vis[i] });
   }
+  out += yAxisLabels(F, sc, { yFmt: fm });
   out += pills(F, tipPills);
 
   // Callouts that belong to one step: a ring on the point, a leader and a label.
@@ -347,12 +348,13 @@ const underwater: Scene = (v, F) => {
   for (let i = 0; i <= Math.min(n - 1, Math.floor(to)); i++) if (dd[i] < worstSoFar) { worstSoFar = dd[i]; worstAt = i; }
   dom.y0 = Math.min(dom.y0, worstSoFar * 1.05);
   const sb = scales(dom, bot);
-  let out = axes(F, sb, { yFmt: pct(0), xTicks: xTicksFor(dom, P, n), yCount: 3 });
+  let out = axes(F, sb, { yFmt: pct(0), xTicks: xTicksFor(dom, P, n), yCount: 3, yLabelsLater: true });
   // The waterline and the fill below it.
   out += line(bot.x0, sb.y(0), bot.x1, sb.y(0), { stroke: F.th.par, sw: 1.2 * u });
   out += text(F, bot.x1, sb.y(0) - 4 * u, str(P.highLabel, "Last high"), { size: 10 * u, fill: F.th.muted, anchor: "end" });
   const r = drawLine(F, sb, { values: dd, to, color: F.th.neg, area: 0.3, areaTo: 0, width: 1.8, dot: true });
   out += r.svg;
+  out += yAxisLabels(F, sb, { yFmt: pct(0), yCount: 3 });
   if (r.tip) out += pills(F, [{ x: r.tip.x, y: r.tip.y, value: pct(0)(r.tip.v), color: F.th.neg }]);
 
   if (split > 0.01) {

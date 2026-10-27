@@ -70,9 +70,27 @@ export interface AxisOptions {
   xCount?: number;
   /** Draw no y labels (bars carry their own numbers). */
   yLabels?: boolean;
+  /** Leave the y labels out here, to draw them on top of the lines later with `yAxisLabels`. */
+  yLabelsLater?: boolean;
 }
 
 /** Faint grid lines with their values sitting on them at the left, and labels along the bottom. */
+/** The y labels alone, each on a small backing so a line passing under it cannot hide it (WCAG 1.4.3). */
+export function yAxisLabels(F: Frame, sc: Scales, o: Pick<AxisOptions, "yFmt" | "yCount">): string {
+  const { box, d } = sc;
+  const u = F.u;
+  let out = "";
+  for (const v of niceTicks(d.y0, d.y1, o.yCount ?? (box.y1 - box.y0 > 200 * u ? 5 : 4))) {
+    const y = sc.y(v);
+    if (y < box.y0 - 1 || y > box.y1 + 1 || y - box.y0 <= 9 * u) continue;
+    const edge = clamp(Math.min(y - box.y0 + 4 * u, box.y1 - y + 10 * u) / (10 * u));
+    const t = o.yFmt(v), w = textWidth(t, 10 * u);
+    out += rect(box.x0 - 2 * u, y - 13 * u, w + 4 * u, 12 * u, { fill: F.th.halo, rx: 2 * u, opacity: 0.88 * edge });
+    out += text(F, box.x0, y - 3.5 * u, t, { size: 10 * u, fill: F.th.faint, opacity: edge, halo: false });
+  }
+  return out;
+}
+
 export function axes(F: Frame, sc: Scales, o: AxisOptions): string {
   const { box, d } = sc;
   const u = F.u;
@@ -84,7 +102,7 @@ export function axes(F: Frame, sc: Scales, o: AxisOptions): string {
     // Fade grid lines and labels that sit right at the top or bottom edge as the camera moves.
     const edge = clamp(Math.min(y - box.y0 + 4 * u, box.y1 - y + 10 * u) / (10 * u));
     out += line(box.x0, y, box.x1 + F.L.right * 0.15, y, { stroke: F.th.grid, opacity: F.th.gridOpacity * edge });
-    if (o.yLabels !== false && y - box.y0 > 9 * u) out += text(F, box.x0, y - 3.5 * u, o.yFmt(v), { size: 10 * u, fill: F.th.faint, opacity: edge });
+    if (o.yLabels !== false && !o.yLabelsLater && y - box.y0 > 9 * u) out += text(F, box.x0, y - 3.5 * u, o.yFmt(v), { size: 10 * u, fill: F.th.faint, opacity: edge });
   }
   const bottom = box.y1 + 14 * u;
   if (o.xTicks) {
