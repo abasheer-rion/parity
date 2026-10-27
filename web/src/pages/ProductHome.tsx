@@ -18,6 +18,7 @@ import { Checklist } from "../onboarding/Checklist";
 import { useOnboarding } from "../onboarding/store";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { isDesktop } from "../desktop/bridge";
+import { WhatsNew } from "../components/WhatsNew";
 
 const THEMES: { label: string; q: string; icon: string; what: string }[] = [
   { label: "Currencies", q: "currency", icon: "compare", what: "Carry, trend and value strategies on currencies" },
@@ -74,6 +75,8 @@ export function ProductHome({ report, email }: { report: Report; email?: string 
 
       <Checklist />
       <FirstRunTour areas={isDesktop() ? ["home", "desktop"] : ["home"]} />
+
+      <WhatsNew report={report} />
 
       <Insights items={productInsights(report)} source={`the ${report.kind === "official" ? "official" : "nightly"} research run of ${date(report.generated_at)}`} />
 

@@ -11,8 +11,8 @@
     <main id="main" tabindex="-1">
       <article class="lg-wrap">
         <h1>Cookie policy</h1>
-        <p class="lg-meta">Last updated: <time datetime="2026-10-25">25 October 2026</time></p>
-        <p>We use what Parity needs to work: a cookie that keeps you signed in, and a few settings saved in your browser. If you switch it on, we also use our own analytics, which keeps two random IDs in your browser. It is off unless you switch it on. We do not use advertising or any other company's tracking.</p>
+        <p class="lg-meta">Last updated: <time datetime="2026-10-26">26 October 2026</time></p>
+        <p>We use what Parity needs to work: a cookie that keeps you signed in, and a few settings saved in your browser. If you switch it on, we also use our own analytics, which keeps two random IDs in your browser. It is off unless you switch it on. Your analytics choice also decides whether page use can shape the order of what you see. We do not use advertising or any other company's tracking.</p>
 
         <h2 id="what">1. What cookies and browser storage are</h2>
         <p>A cookie is a small file a website saves in your browser and reads back later. Browser storage ("local storage") is similar, but the website's own code reads it, and it is never sent to our servers on its own.</p>
@@ -61,6 +61,7 @@
               <tr><td><code>parity.prefs.v1</code></td><td>Your settings: theme, bookmarks, reading options, starting amount, chart range and Sim World panels.</td><td>Until you clear it</td></tr>
               <tr><td><code>parity.practice.v1</code></td><td>Practice mode's pretend positions. No real money is involved.</td><td>Until you remove them or clear storage</td></tr>
               <tr><td><code>parity.scenarios.v1</code></td><td>Scenarios you saved in the scenario tool.</td><td>Until you delete them or clear storage</td></tr>
+              <tr><td><code>parity.p.session</code> (session storage)</td><td>Personalization only, when you are signed in with personalization on: a note that this visit's home page use was already counted, and which version of any experiment you are in, so the page does not ask again on every screen.</td><td>Deleted when you close the tab</td></tr>
               <tr><td><code>parity.a.vid</code></td><td>Analytics only, and only after you switch analytics on: a random visitor ID, so visits from this browser can be counted together. It is not your account ID and is made from nothing about you.</td><td>Until you switch analytics off (we then delete it) or clear storage</td></tr>
               <tr><td><code>parity.a.sid</code></td><td>Analytics only, and only after you switch analytics on: a random session ID and the time of your last action. A new one starts after 30 minutes without activity.</td><td>Until you switch analytics off (we then delete it) or clear storage</td></tr>
             </tbody>
@@ -99,6 +100,11 @@
         <p>If you are signed in, we also store a scrambled code made from your account ID with a secret key, so that one person's visits on several devices count once. The code cannot be turned back into your account ID. We do not store your IP address (our server uses a shortened form for one minute to stop floods, then forgets it), your browser type, your email address or the text on the page. We do not combine analytics with data from other companies, and we do not use it for advertising.</p>
         <p>We keep the single events for 13 months, then delete them. Daily totals with no IDs are kept for 25 months. Only named members of the Parity team can see the analytics. Switching analytics off stops it at once and deletes the two IDs from your browser. If you delete your account, we delete the events tied to it.</p>
         <p>Page timing is not analytics and uses no cookie or storage: on about one page load in ten the page sends a few anonymous speed numbers, with no ID, which we add to hourly totals. Do Not Track and Global Privacy Control turn it off. See the <a href="/legal/privacy/">privacy policy</a>.</p>
+
+        <h3 id="personalization">5.2 Personalization</h3>
+        <p>Personalization orders "What's new" and the home widgets from what you do in Parity. It sets no cookie. Its only browser item is <code>parity.p.session</code>, listed above. The profile itself is kept in our database, as the <a href="/legal/privacy/#personalization">privacy policy</a> explains.</p>
+        <p>Your analytics choice also decides what personalization may use. With analytics on, the pages you open and the controls you click can help order what you see. With analytics off, or if your browser sends Do Not Track or Global Privacy Control, personalization uses only things Parity stores to make its features work, such as finished lessons and demo orders, and never your page use.</p>
+        <p>Personalization has its own switch in Settings, Personalization, where you can also see and reset your profile. Switching it off there does not change your analytics choice, and switching analytics off does not switch personalization off.</p>
 
         <h2 id="third">6. Other companies</h2>
         <p>Some pages load fonts from Google Fonts. Google does not set cookies for this, but it receives your IP address. See the <a href="/legal/privacy/">privacy policy</a>.</p>

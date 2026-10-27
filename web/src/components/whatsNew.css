@@ -1,0 +1,13 @@
+/* What's new on the product home (DEC-0068). */
+.wn { margin: 0 0 20px; }
+.wn-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.wn-head h2 { margin: 0; font-size: var(--type-lg); }
+.wn-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.wn-card { min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.wn-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.wn-title { color: var(--text); font-weight: 600; text-decoration: none; }
+.wn-title:hover { color: var(--link); }
+.wn-line { margin: 0; color: var(--text-2); font-size: var(--type-sm); }
+.wn-why { font-size: var(--type-xs); color: var(--muted); }
+.wn-why ul { margin: 4px 0 0; padding-left: 18px; }
+@media (max-width: 900px) { .wn-list { grid-template-columns: minmax(0, 1fr); } }
