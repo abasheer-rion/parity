@@ -77,6 +77,12 @@ export const test = base.extend<Fixtures>({
       return route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
     });
     await context.route((url) => url.origin === BASE && /^\/(data|live|rum|e)(\/|$)|^\/stats\.json$/.test(url.pathname), (route) => data.handle(route));
+    // The static preview has no Pages Functions. /api/trade/status answers as production does
+    // with no broker keys: demo money, orders kept in the browser (DEC-0046).
+    await context.route((url) => url.origin === BASE && url.pathname === "/api/trade/status", (route) => route.fulfill({
+      status: 200, contentType: "application/json",
+      body: JSON.stringify({ mode: "demo", engine: "browser", badge: "Demo money", notes: [], limits: { maxOrderValue: 25000, maxQty: 10000, priceCollar: 0.1, shortingAllowed: false, ordersPerMinute: 20 } }),
+    }));
     await context.routeWebSocket((url) => !url.href.includes("supabase.co"), (ws) => { ws.onMessage(() => {}); });
     await stubSupabase(context, db, () => live);
     const allowed = (m: string, url: string) =>
