@@ -2,7 +2,7 @@
 // autocomplete hints for password managers, a password field with show and hide, the
 // front page's button with a loading state, messages screen readers announce, and a
 // submit helper that puts each error under the field it is about.
-import { useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import { PasswordMeter } from "./PasswordMeter";
 import { emailProblem } from "./rules";
 
@@ -44,6 +44,35 @@ export function useSubmit() {
     general: problem && !problem.field ? problem.message : null,
   };
 }
+
+/**
+ * A countdown for "send the email again". Supabase allows one email per address every
+ * 30 seconds, so the button counts down instead of failing.
+ */
+export function useCooldown() {
+  const [until, setUntil] = useState(0);
+  const [key, setKey] = useState("");
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (until <= now) return;
+    const timer = window.setTimeout(() => setNow(Date.now()), 1000);
+    return () => window.clearTimeout(timer);
+  }, [until, now]);
+  const left = Math.max(0, Math.ceil((until - now) / 1000));
+  return {
+    /** Whole seconds until another email to `address` can be asked for, or 0. */
+    leftFor: (address: string) => (address.trim().toLowerCase() === key ? left : 0),
+    start: (seconds: number, address: string) => {
+      const t = Date.now();
+      setNow(t);
+      setKey(address.trim().toLowerCase());
+      setUntil(t + seconds * 1000);
+    },
+  };
+}
+
+/** Seconds between emails to one address, matching the Supabase setting (smtp_max_frequency). */
+export const EMAIL_GAP_SECONDS = 30;
 
 /** A thrown error (often a dropped connection) in plain words. */
 export function friendlyThrown(err: unknown): string {
@@ -152,13 +181,13 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
 }
 
 /** The front page's button (`.btn`), full width, with a spinner while it works. */
-export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus }: {
+export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus, disabled }: {
   busy?: boolean; children: ReactNode; primary?: boolean; type?: "submit" | "button";
-  onClick?: () => void; autoFocus?: boolean;
+  onClick?: () => void; autoFocus?: boolean; disabled?: boolean;
 }) {
   return (
     <button type={type} className={`btn${primary ? " primary" : ""} pa-btn`} aria-busy={busy || undefined}
-      data-busy={busy || undefined} onClick={onClick} autoFocus={autoFocus}>
+      data-busy={busy || undefined} onClick={onClick} autoFocus={autoFocus} disabled={disabled}>
       {busy && <span className="pa-spin" aria-hidden="true" />}
       <span className="pa-btn-label">{children}</span>
       {/* Shown in place of the label once sign-in succeeds and the page starts to leave (nav.ts). */}

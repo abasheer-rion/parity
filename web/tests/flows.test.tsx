@@ -411,6 +411,29 @@ describe("forgot and reset password", () => {
     expect(h.supabase.auth.resetPasswordForEmail).toHaveBeenCalledWith("amanda@example.com", { redirectTo: "https://paritytrading.app/research/" });
   });
 
+  it("counts down instead of failing when an email was just sent", async () => {
+    at("/reset/");
+    h.supabase.auth.resetPasswordForEmail.mockResolvedValueOnce({ data: null, error: Object.assign(authError("over_email_send_rate_limit", "For security purposes, you can only request this after 27 seconds."), { status: 429 }) } as never);
+    page();
+    await screen.findByLabelText("Email");
+    type("Email", "amanda@example.com");
+    click("Send reset email");
+    const button = await screen.findByRole("button", { name: /Send again in 2\ds/ });
+    expect(button).toBeDisabled();
+    expect(screen.getByRole("status").textContent).toContain("You can send another in");
+    expect(screen.queryAllByRole("alert").map((a) => a.textContent).join("")).not.toContain("Too many emails");
+  });
+
+  it("says the email could not be sent when the mail service fails", async () => {
+    at("/reset/");
+    h.supabase.auth.resetPasswordForEmail.mockResolvedValueOnce({ data: null, error: Object.assign(authError("unexpected_failure", "Error sending recovery email"), { status: 500 }) } as never);
+    page();
+    await screen.findByLabelText("Email");
+    type("Email", "amanda@example.com");
+    click("Send reset email");
+    await alertSays("We could not send the email. Try again shortly.");
+  });
+
   it("says to check your email after sending the reset email", async () => {
     at("/reset/");
     page();
