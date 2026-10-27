@@ -36,6 +36,7 @@ The Academy pictures ([DEC-0028](0028-parity-academy-short-courses-with-moving-p
 7. **Motion follows [DEC-0017](0017-motion-on-the-site-3d-on-the-front-page-and-quiet-movement-in-the-app.md) and [REF-0023](../reference/0023-motion-system.md).** Moves take `dur-6`. It plays once when half on screen, waits while the tab is hidden, and stops at the end. Reduced motion shows whole steps only.
 8. **Accessibility ([DEC-0061](0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)).** The stage is an image with the visual's description. The current caption is announced. The slider has a text value ("Step 2 of 4"). The controls work from the keyboard. `signatureTable(visual)` builds the table behind every picture, and the player shows it on request.
 9. **Copy** follows [REF-0017](../reference/0017-parity-copy-rules.md).
+10. **"How it holds up" on every strategy page, under Verify and in Workbench Compare.** One section, `web/src/components/holdup/`, asks seven things of a record's daily returns: did it beat the market, could it be luck after every try (deflated Sharpe and p-values corrected by Bonferroni, Sidak and Holm), how wide are the error bars (block bootstrap of return and Sharpe), what does it move with (one-year rolling correlation to stocks and bonds), where does it win and lose (rates rising or falling, calm or volatile markets, named crises, decades), how bad did it get (the five deepest falls, the worst year and 12 months) and what has to stay true. Each block has a sentence built from its numbers, a signature picture and a data table. The numbers come from `engine/src/parity/metrics/holdup.py` on research runs. Verify builds the same shape in the browser from an upload's daily returns with `web/src/lib/holdup.ts`, a port the test `web/tests/holdup.test.ts` checks against the Python on a fixture (`scripts/holdup_fixture.py`); only the bootstrap differs, because the two languages use different random generators. A missing input (no benchmark, no rate series, an upload) is named with its reason, never filled in. Workbench Compare adds a "How they hold up" table of every strategy with the full section for the one picked.
 
 ## Alternatives considered
 
@@ -45,7 +46,7 @@ The Academy pictures ([DEC-0028](0028-parity-academy-short-courses-with-moving-p
 
 ## Consequences
 
-- Strategy pages, Verify and Workbench can show the "how it holds up" numbers as step-by-step pictures with tables.
+- Strategy pages, Verify and Workbench show the "how it holds up" numbers as step-by-step pictures with tables. Runs published before the engine computed them say so in place of the section. A public Verify badge does not keep these numbers.
 - The Academy courses can move to the new scenes lesson by lesson. The old `academy/scenes.ts` stays until every lesson has moved.
 - The clip renderer can draw the same scenes at 9:16 and 1:1.
 - `web/tests/signature.test.tsx` draws every scene at every step, between steps, at every size and in both themes, and checks the tables and the player.

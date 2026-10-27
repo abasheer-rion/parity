@@ -191,7 +191,8 @@ export function DataTable({ caption, head, rows, visible }: { caption: string; h
           {open ? "Hide the numbers" : "Show the numbers"}
         </button>
       )}
-      <div id={tableId} className={open ? "hu-table-wrap" : "hu-table-wrap sr-only"}>
+      {/* A wide table scrolls sideways inside its box; the box takes focus so keys can scroll it. */}
+      <div id={tableId} className={open ? "hu-table-wrap" : "hu-table-wrap sr-only"} tabIndex={open ? 0 : undefined} role={open ? "region" : undefined} aria-label={open ? caption : undefined}>
         <table className="mtable">
           <caption className={visible ? "hu-caption" : "sr-only"}>{caption}</caption>
           <thead><tr>{head.map((x, i) => <th key={i} scope="col" className={i ? "" : "left"}>{x}</th>)}</tr></thead>

@@ -120,21 +120,21 @@ export function mustText(m: HoldupMust): string {
   const v = m.values;
   switch (m.key) {
     case "costs_below_breakeven":
-      return `Trading costs stay under ${dec(v.breakeven_bps, 1)} basis points a trade, the level where the edge is gone. The backtest assumed ${dec(v.assumed_bps, 1)}.`;
+      return `Costs stay under break-even. The edge is gone at ${dec(v.breakeven_bps, 1)} basis points a trade, and the backtest assumed ${dec(v.assumed_bps, 1)}.`;
     case "correlation_to_stocks_persists":
       return `Its link to stocks stays near ${dec(v.full_period)}. Over one-year windows it has ranged from ${dec(v.min)} to ${dec(v.max)}.`;
     case "correlation_to_bonds_persists":
       return `Its link to bonds stays near ${dec(v.full_period)}. Over one-year windows it has ranged from ${dec(v.min)} to ${dec(v.max)}.`;
     case "not_reliant_on_crises":
-      return `The result does not come mostly from crises. Crisis days are ${pct(v.crisis_day_share, 0)} of the record and gave ${pct(v.crisis_return_share, 0)} of the growth.`;
+      return `Not mostly from crises: crisis days are ${pct(v.crisis_day_share, 0)} of the record and gave ${pct(v.crisis_return_share, 0)} of the growth.`;
     case "not_one_lucky_year":
-      return `It is more than one good year. Without its best year (${v.best_year}, ${pct(v.best_year_return, 0)}) the Sharpe is ${dec(v.sharpe_without)}.`;
+      return `More than one good year: without its best year (${v.best_year}, ${pct(v.best_year_return, 0)}) the Sharpe is ${dec(v.sharpe_without)}.`;
     case "enough_history":
       return v.years_needed == null
-        ? `The record is long enough to judge. At this Sharpe no length of record would pass the luck check at ${tries(v.n_trials ?? 1)}.`
-        : `The record is long enough to judge. It has ${dec(v.years, 1)} years and needs ${dec(v.years_needed, 1)} at ${tries(v.n_trials ?? 1)}.`;
+        ? `Long enough to judge: at this Sharpe no length of record would pass the luck check at ${tries(v.n_trials ?? 1)}.`
+        : `Long enough to judge: it has ${dec(v.years, 1)} years and needs ${dec(v.years_needed, 1)} at ${tries(v.n_trials ?? 1)}.`;
     case "survives_trial_count":
-      return `It survives the number of things tried. The luck check gives ${pct(v.probability, 0)} at ${tries(v.n_trials ?? 1)}, against the 95% line.`;
+      return `Survives the number of things tried: the luck check gives ${pct(v.probability, 0)} at ${tries(v.n_trials ?? 1)}, against the 95% line.`;
     default:
       return String(m.key).replace(/_/g, " ");
   }
