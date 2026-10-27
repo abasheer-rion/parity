@@ -12,6 +12,7 @@ import { loadDocIndex } from "./lib/docs";
 import { LegalLinks } from "./legal/LegalLinks";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { setStoreUser } from "./lib/userStore";
+import { syncConsent } from "./lib/personalize/api";
 import { useRouteMeta } from "./lib/deeplink";
 import { PAYMENTS_ENABLED } from "./lib/payments/flag";
 import { nameById, nameOf } from "./lib/strategyMeta";
@@ -164,7 +165,7 @@ function useHash(): string {
 export function App() {
   // Every page of the app needs a session (DEC-0012). The public pages (/, /login/,
   // /signup/, /reset/, /verify/) are a separate entry: src/auth/main.tsx.
-  return <AppGuard>{(user) => { setStoreUser(user.id); return <Dashboard email={user.email} onSignOut={user.signOut} />; }}</AppGuard>;
+  return <AppGuard>{(user) => { setStoreUser(user.id); syncConsent(); return <Dashboard email={user.email} onSignOut={user.signOut} />; }}</AppGuard>;
 }
 
 // Pages that read only what is bundled in the build, not the selected run.

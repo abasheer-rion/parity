@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 66 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 67 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
@@ -32,12 +32,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
+- 2026-10-26 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - 2026-10-26 [DEC-0067: One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
-- 2026-10-26 [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
-- 2026-10-26 [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 
 ## intent
 
@@ -117,6 +117,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0065 | [The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0066 | [Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0068 | [Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md) | accepted | 2026-10-26 | [kpis](TAGS.md#kpis), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -202,7 +203,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
-| REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
+| REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | REF-0023 | [Motion system](reference/0023-motion-system.md) | current | 2026-10-25 | [ui](TAGS.md#ui) |

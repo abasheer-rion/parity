@@ -112,6 +112,7 @@ const RESEARCH: NavItem[] = [
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
+    { id: "personalization", label: "Personalization" },
   ] },
 ];
 

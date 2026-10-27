@@ -70,6 +70,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](../decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](../decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](../decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](0026-accessibility-audit-wcag-2-2-aa.md)

@@ -431,6 +431,7 @@ Why the project exists and what success means.
 Metrics that tell us if something works and where to look next.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
+- [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
@@ -649,6 +650,7 @@ How the team works together.
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
 - [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [RES-0006: What trading courses and traders swear by, and what the evidence says](research/0006-courses-and-trader-beliefs.md)
 - [RES-0008: Independent audit of our methods and code](research/0008-independent-audit.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
@@ -845,6 +847,7 @@ The dashboard.
 - [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 - [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

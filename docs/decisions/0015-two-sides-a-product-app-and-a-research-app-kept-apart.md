@@ -103,6 +103,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
+- [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
