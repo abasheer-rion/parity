@@ -1,4 +1,4 @@
-// The legal pages (web/legal/**/index.html) and the API guide (web/developers/) are plain HTML. They share a head, a header
+// The legal pages (web/legal/**/index.html), the API guide (web/developers/) and the download page (web/download/) are plain HTML. They share a head, a header
 // and a footer, filled in at build time from the markers below so each page stays short:
 //   <!--legal:head-->     the stylesheet and the cookie notice script
 //   <!--legal:header-->   skip link, the logo, Log in and Sign up
@@ -30,6 +30,7 @@ const HEADER = `
         <img src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width="70" height="15" alt="" />
       </a>
       <nav class="lg-nav" aria-label="Account">
+        <a href="/download/">Download</a>
         <a href="/login/">Log in</a>
         <a class="lg-su" href="/signup/">Sign up</a>
       </nav>
@@ -39,6 +40,7 @@ const HEADER = `
 const FOOTER = `
     <footer class="lg-footer">
       <nav class="lg-legal" aria-label="Legal">
+        <a href="/download/">Download</a>
         ${LEGAL_LINKS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n        ")}
         <button type="button" data-cookie-prefs>Cookie settings</button>
       </nav>
@@ -52,7 +54,7 @@ export function parityLegal(): Plugin {
     transformIndexHtml: {
       order: "pre",
       handler(html, ctx) {
-        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/")) return html;
+        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/") && !ctx.path.startsWith("/download/")) return html;
         return html
           .replace("<!--legal:head-->", HEAD)
           .replace("<!--legal:header-->", HEADER)

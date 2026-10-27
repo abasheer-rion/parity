@@ -1,11 +1,14 @@
 // Settings > Account: email, password, two-step sign-in, passkeys, sign out, and a
 // request to delete the account.
 import { useEffect, useState } from "react";
+import { desktop, isDesktop } from "../desktop/bridge";
+import site from "../lib/site.json";
 import { LegalLinks } from "../legal/LegalLinks";
 import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
 import { PASSKEYS_ENABLED, PASSWORD_MIN } from "./config";
 import { Field, Notice, PasswordField, useSubmit } from "./form";
+import { passwordsMatch } from "./PasswordMeter";
 import { emailLanding } from "./redirect";
 import { codeProblem, emailProblem, passwordProblem } from "./rules";
 import { signOut, useSession, useTeamBadge } from "./session";
@@ -37,6 +40,12 @@ export default function AccountSettings() {
       </SettingsRow>
       <SettingsRow label="Delete my account" help="Sends a request to the owner, who deletes the account and its sign-in. Research results are shared and are not deleted.">
         <DeleteRequest userId={session?.user.id} email={email} />
+      </SettingsRow>
+      <SettingsRow label="Desktop app" help={isDesktop() ? "You are using the desktop app. It keeps you signed in and updates itself. Get it for another computer from the download page." : "Parity for Mac (Apple silicon and Intel) and Windows. It keeps you signed in and updates itself."}>
+        <nav className="legal-links start" aria-label="Desktop app">
+          {/* In the app, the page opens in the browser, so the download is a normal browser download. */}
+          <a href="/download/" onClick={(e) => { if (!desktop) return; e.preventDefault(); desktop.openExternal(`${site.origin}/download/`); }}>Download for Mac and Windows</a>
+        </nav>
       </SettingsRow>
       <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only. Not investment advice.">
         <LegalLinks className="start" />
@@ -125,7 +134,7 @@ function ChangePassword({ email }: { email: string }) {
   const save = run(async () => {
     const bad = passwordProblem(password);
     if (bad) return bad;
-    if (password !== again) return "The two passwords do not match.";
+    if (!passwordsMatch(password, again)) return "Passwords do not match.";
     if (needCode) { const c = codeProblem(nonce); if (c) return c; }
     const client = requireClient();
     const { error } = await client.auth.updateUser(needCode ? { password, nonce } : { password });
@@ -146,11 +155,10 @@ function ChangePassword({ email }: { email: string }) {
       <Notice>{error}</Notice>
       <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
       <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus />
-      <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain}
-        error={again && password !== again ? "Does not match yet." : null} />
+      <PasswordField label="Confirm password" auto="new-password" name="confirm-password" value={again} onChange={setAgain} match={password} />
       {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus />}
       <div className="account-actions">
-        <Button type="submit" variant="primary" loading={busy}>Save password</Button>
+        <Button type="submit" variant="primary" loading={busy} disabled={!passwordsMatch(password, again)}>Save password</Button>
         <Button onClick={reset}>Cancel</Button>
       </div>
     </form>

@@ -237,10 +237,35 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "short");
+    type("Confirm password", "short");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await alertSays("Use at least 10 characters.");
     expect(h.supabase.auth.signUp).not.toHaveBeenCalled();
+  });
+
+  it("keeps Create account off until the confirm field matches, then shows a tick", async () => {
+    at("/signup/");
+    page();
+    await toNewPassword();
+    const create = () => screen.getByRole("button", { name: "Create account" });
+    expect(create()).toBeDisabled();
+    type("Choose a password", "correct horse 42");
+    expect(create()).toBeDisabled();
+    type("Confirm password", "correct horse");
+    expect(screen.queryByText("Passwords do not match")).toBeNull();
+    type("Confirm password", "correct horse 43");
+    expect(screen.getByText("Passwords do not match")).toBeTruthy();
+    expect(create()).toBeDisabled();
+    type("Confirm password", "correct horse 42");
+    expect(screen.getByText("Passwords match")).toBeTruthy();
+    expect(create()).not.toBeDisabled();
+    for (const label of ["Choose a password", "Confirm password"]) {
+      const input = screen.getByLabelText(label);
+      expect(input).toHaveAttribute("autocomplete", "new-password");
+    }
+    expect(screen.getAllByRole("button", { name: "Show password" })).toHaveLength(2);
+    expect(screen.getByRole("list", { name: "Password rules" })).toBeTruthy();
   });
 
   it("asks for agreement to the terms", async () => {
@@ -248,6 +273,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     click("Create account");
     await alertSays("agree to the terms");
     expect(screen.getByRole("checkbox")).toHaveAttribute("aria-invalid", "true");
@@ -259,6 +285,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await screen.findByRole("heading", { name: "Check your email" });
@@ -275,6 +302,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await alertSays("Too many emails were sent.");
@@ -339,6 +367,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await screen.findByRole("heading", { name: "Welcome to Parity" });
@@ -461,7 +490,7 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 42");
+    type("Confirm password", "new password 42");
     click("Save password");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/research/"));
     expect(h.supabase.auth.updateUser).toHaveBeenCalledWith({ password: "new password 42" });
@@ -480,9 +509,11 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 43");
+    type("Confirm password", "new password 43");
+    expect(screen.getByText("Passwords do not match")).toBeTruthy();
+    expect(screen.getByLabelText("Confirm password")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("button", { name: "Save password" })).toBeDisabled();
     click("Save password");
-    await alertSays("do not match");
     expect(h.supabase.auth.updateUser).not.toHaveBeenCalled();
   });
 
@@ -495,7 +526,7 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 42");
+    type("Confirm password", "new password 42");
     click("Save password");
     await screen.findByLabelText("Code from the email");
     expect(h.supabase.auth.reauthenticate).toHaveBeenCalled();

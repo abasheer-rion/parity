@@ -7,6 +7,9 @@ import { desktop } from "../desktop/bridge";
 import { siteDomainOf } from "../lib/meta";
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./config";
 
+const COOKIE_DAYS_DESKTOP = 400;
+const RENEW_WITHIN_MS = 10 * 60 * 1000;
+
 // The Parity domain this page is on: paritytrading.app, or endyland.com while it redirects (DEC-0069).
 const cookieDomain = () => siteDomainOf(window.location.hostname);
 
@@ -35,7 +38,9 @@ export const supabase: SupabaseClient = bundledInDesktop() ? desktopClient() : c
     ...(cookieDomain() ? { domain: `.${cookieDomain()}` } : {}),
     sameSite: "lax",
     secure: window.location.protocol === "https:",
-    maxAge: 60 * 60 * 24 * 30,
+    // A browser keeps the session 30 days after the last visit. The desktop app keeps it
+    // 400 days, the longest a cookie may last, so it does not ask to log in again (DEC-0072).
+    maxAge: desktop ? COOKIE_DAYS_DESKTOP * 86400 : 60 * 60 * 24 * 30,
   },
   auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true },
 });
@@ -44,6 +49,24 @@ export const supabase: SupabaseClient = bundledInDesktop() ? desktopClient() : c
 // bundled copy can fetch /data/ if the connection drops mid-session.
 if (desktop && !bundledInDesktop()) {
   supabase.auth.onAuthStateChange((_event, session) => desktop?.setToken(session?.access_token ?? null));
+}
+
+// The desktop app asks for a check after sleep, unlock, reconnecting and every 30 minutes
+// (desktop/electron/session.js), so a window left open for days keeps a fresh token.
+desktop?.onSessionCheck?.(() => { void keepFresh(supabase); });
+
+/** Renews the session when its access token ends within 10 minutes. A failed renewal keeps the session for the next try. */
+export async function keepFresh(client: Pick<SupabaseClient, "auth">, now: number = Date.now()): Promise<"fresh" | "renewed" | "none" | "failed"> {
+  try {
+    const { data } = await client.auth.getSession();
+    const s = data.session;
+    if (!s) return "none";
+    if ((s.expires_at ?? 0) * 1000 - now > RENEW_WITHIN_MS) return "fresh";
+    const { error } = await client.auth.refreshSession();
+    return error ? "failed" : "renewed";
+  } catch {
+    return "failed";
+  }
 }
 
 /** Kept for the pages written before the client was always present. */

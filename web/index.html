@@ -227,6 +227,7 @@
       .more li:hover { background: color-mix(in srgb, var(--color-surface-overlay) 85%, transparent); }
       .more h3 { margin: 0; font-size: var(--type-2xl); font-weight: 600; letter-spacing: -0.01em; }
       .more p { margin: 0; color: var(--muted); font-size: var(--type-md); }
+      .more-app { margin: 20px 0 0; color: var(--muted); font-size: var(--type-md); }
       .more a { margin-top: auto; padding-top: 10px; color: var(--text); font-size: var(--type-md); font-weight: 500; text-decoration: none; }
       .more a::after { content: ""; position: absolute; inset: 0; }
 
@@ -321,6 +322,7 @@
       </a>
     </div>
     <nav class="corner corner-nav" aria-label="Account">
+      <a class="li" href="/download/">Download</a>
       <a class="li" href="/login/" data-auth="login">Log in</a>
       <a class="su" href="/signup/" data-auth="signup">Sign up</a>
     </nav>
@@ -503,6 +505,7 @@
             <li class="rv" style="--d: 2"><h3>Parity Terminal</h3><p><span data-stat="series_count">Over 100</span> daily market series, with sources named.</p><a href="/sim/">Open the terminal <span aria-hidden="true">&rarr;</span></a></li>
             <li class="rv" style="--d: 3"><h3>Sim World</h3><p>Past crises replayed across markets, and the range of paths a mix could take.</p><a href="https://sim.paritytrading.app/">Open Sim World <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
+          <p class="more-app rv">Parity is also an app for Mac and Windows. It keeps you signed in and updates itself. <a href="/download/">Download the app</a></p>
         </div>
       </section>
 
@@ -527,6 +530,7 @@
           <a href="/notes/">Notes</a>
           <a href="/blog/">Blog</a>
           <a href="/news/">News</a>
+          <a href="/download/">Download</a>
         </nav>
         <nav class="site-legal" aria-label="Legal">
           <a href="/legal/privacy/">Privacy</a>

@@ -3,7 +3,7 @@
 // front page's button with a loading state, messages screen readers announce, and a
 // submit helper that puts each error under the field it is about.
 import { useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
-import { PasswordMeter } from "./PasswordMeter";
+import { PasswordMatch, passwordsMatch, PasswordMeter } from "./PasswordMeter";
 import { emailProblem } from "./rules";
 
 /** An error from a form. With `field`, it shows under that field; without, above the button. */
@@ -108,15 +108,20 @@ export function Field({ label, value, onChange, type = "text", auto, name, autoF
 
 /**
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
- * off each rule as you type (for new passwords).
+ * off each rule as you type (for new passwords). With `match`, it is the confirm field for
+ * that password and says whether the two match.
  */
-export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error, email }: {
+export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error, email, match }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
   name?: string; autoFocus?: boolean; rules?: boolean; email?: string; aside?: ReactNode; error?: string | null;
+  match?: string;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
+  const [left, setLeft] = useState(false);
+  const confirm = match !== undefined;
+  const mismatch = confirm && value.length > 0 && !passwordsMatch(match, value) && (left || !match.startsWith(value));
+  const described = [rules ? `${id}-rules` : "", confirm ? `${id}-match` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="pa-field">
       <div className="pa-label-row">
@@ -136,8 +141,9 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
           spellCheck={false}
           autoCapitalize="none"
           autoCorrect="off"
-          aria-invalid={error ? true : undefined}
+          aria-invalid={error || mismatch ? true : undefined}
           aria-describedby={described}
+          onBlur={() => setLeft(true)}
           onChange={(e) => onChange(e.target.value)}
         />
         <button type="button" className="pa-pw-toggle" aria-controls={id} aria-pressed={shown}
@@ -146,18 +152,21 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
         </button>
       </div>
       {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
+      {confirm && <PasswordMatch password={match} value={value} id={`${id}-match`} left={left} />}
       {error && <span className="pa-error" id={`${id}-err`} role="alert">{error}</span>}
     </div>
   );
 }
 
 /** The front page's button (`.btn`), full width, with a spinner while it works. */
-export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus }: {
+export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus, disabled }: {
   busy?: boolean; children: ReactNode; primary?: boolean; type?: "submit" | "button";
   onClick?: () => void; autoFocus?: boolean;
+  /** Greyed out and not clickable, for example until the two passwords match. */
+  disabled?: boolean;
 }) {
   return (
-    <button type={type} className={`btn${primary ? " primary" : ""} pa-btn`} aria-busy={busy || undefined}
+    <button type={type} className={`btn${primary ? " primary" : ""} pa-btn`} aria-busy={busy || undefined} disabled={disabled}
       data-busy={busy || undefined} onClick={onClick} autoFocus={autoFocus}>
       {busy && <span className="pa-spin" aria-hidden="true" />}
       <span className="pa-btn-label">{children}</span>

@@ -29,6 +29,11 @@ if (trusted.includes(here)) {
     setToken: (token) => ipcRenderer.send("parity:token", typeof token === "string" ? token : null),
     notify: (title, body, href) => ipcRenderer.send("parity:notify", { title: String(title), body: String(body), href: typeof href === "string" ? href : undefined }),
     openExternal: (url) => ipcRenderer.send("parity:open", String(url)),
+    // Staying signed in (electron/session.js, DEC-0072): the app asks the page to check its
+    // session after sleep, unlock, a connection coming back and every 30 minutes.
+    onSessionCheck: (cb) => { if (typeof cb === "function") ipcRenderer.on("parity:session-check", () => { try { cb(); } catch { /* the next check tries again */ } }); },
+    // Who is signed in, for the bundled copy when the app starts offline. Id and email only.
+    savedUser: () => ipcRenderer.invoke("parity:saved-user"),
     setTicker: (items) => {
       if (!Array.isArray(items)) return;
       const clean = items.slice(0, 12).map((i) => ({

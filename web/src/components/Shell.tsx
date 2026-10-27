@@ -77,6 +77,7 @@ const RESEARCH: NavItem[] = [
   // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
   { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
+  { href: "#/pairs", label: "Pairs", icon: "link", routes: ["pairs"] },
   { href: "#/competitors", label: "Competitors", icon: "compare", routes: ["competitors"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
