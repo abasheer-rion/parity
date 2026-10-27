@@ -100,8 +100,8 @@ test.describe("panels", () => {
     const group = monitor.getByRole("combobox", { name: "Group" });
     const rows = monitor.getByRole("row");
     const all = await rows.count();
-    await group.click();
-    await page.getByRole("listbox", { name: "Group" }).getByRole("option").nth(1).click();
+    const value = await group.locator("option").nth(1).getAttribute("value");
+    await group.selectOption(value!);
     await expect.poll(() => rows.count()).toBeLessThan(all);
   });
 });
