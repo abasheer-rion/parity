@@ -73,16 +73,23 @@ async function run(api) {
       check("a second deep link stays on the wall", /^\/login\//.test(w.active.path || "") && api.windows().length === 1, w.active.path);
       // Drag: a press, a move of 120 by 40 and a release on the empty top of the log-in page,
       // which has no title bar above it, only an invisible drag region.
-      const [x0, y0] = w.win.getPosition();
       const tb = w.active.wc;
-      const at = (x, y) => ({ x, y, globalX: x0 + x, globalY: y0 + y });
-      tb.sendInputEvent({ type: "mouseMove", ...at(300, 19) });
-      tb.sendInputEvent({ type: "mouseDown", button: "left", clickCount: 1, ...at(300, 19) });
-      for (let i = 1; i <= 6; i++) { tb.sendInputEvent({ type: "mouseMove", button: "left", ...at(300 + i * 20, 19 + Math.round(i * 40 / 6)) }); await wait(60); }
-      tb.sendInputEvent({ type: "mouseUp", button: "left", clickCount: 1, ...at(420, 59) });
+      await until(() => js(tb, "document.readyState === 'complete' && !!document.documentElement.getAttribute('data-desktop-chrome')"), 8000);
+      await wait(400);
+      // Synthetic mouse input does not reach a page view reliably, so the press, the moves and
+      // the release are dispatched in the page, on whatever sits in the middle of its top row.
+      // The page bridge (preload.js) must turn them into a window move.
+      const [x0, y0] = w.win.getPosition();
+      const mx = Math.round(w.win.getContentBounds().width / 2) - 60;
+      const ev = (type, x, y) => `(() => { const t = document.elementFromPoint(${mx}, 19) || document.body; t.dispatchEvent(new PointerEvent("${type}", { bubbles: true, composed: true, pointerId: 7, isPrimary: true, button: 0, buttons: ${type === "pointerup" ? 0 : 1}, clientX: ${x}, clientY: ${y}, screenX: ${x0 + x}, screenY: ${y0 + y} })); return t.tagName; })()`;
+      await js(tb, ev("pointerdown", mx, 19));
+      for (let i = 1; i <= 6; i++) { await js(tb, ev("pointermove", mx + i * 20, 19 + Math.round(i * 40 / 6))); await wait(60); }
+      await js(tb, ev("pointerup", mx + 120, 59));
       await wait(500);
       const [x1, y1] = w.win.getPosition();
-      check("dragging the empty top of the page moves the window", Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3, `moved ${x1 - x0},${y1 - y0}`);
+      const moved = `moved ${x1 - x0},${y1 - y0}`;
+      const ok = Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3;
+      check("dragging the empty top of the page moves the window", ok, moved);
     }
 
     if (scenario === "offline") {

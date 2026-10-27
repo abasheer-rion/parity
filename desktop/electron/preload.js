@@ -185,9 +185,11 @@ html[data-desktop-chrome] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-re
   }, true);
   window.addEventListener("pointermove", (e) => {
     if (drag === null || e.pointerId !== drag) return;
+    // At most one message per 16 ms. A timer, not a frame callback: frames can stall while
+    // the window moves under the pointer.
     const first = queued === null;
     queued = { x: e.screenX, y: e.screenY };
-    if (first) requestAnimationFrame(() => { if (queued) ipcRenderer.send("parity:drag", "move", queued); queued = null; });
+    if (first) setTimeout(() => { if (queued) ipcRenderer.send("parity:drag", "move", queued); queued = null; }, 16);
   }, true);
   const stop = (e) => {
     if (drag === null || e.pointerId !== drag) return;
