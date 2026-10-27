@@ -10,6 +10,9 @@
 // are plain values from the tokens because the public pages draw these at build time.
 
 import { RAW } from "../ui/tokens.gen.ts";
+// Lessons moved to the signature chart system (DEC-0067) draw with it; the kinds below
+// stay for the lessons that have not moved yet.
+import { SCENES as SIGNATURE, renderSignature } from "../ui/signature/scenes.ts";
 
 export interface Step { caption: string; [key: string]: unknown }
 export interface Visual { kind: string; alt: string; params?: Record<string, unknown>; steps: Step[] }
@@ -681,7 +684,17 @@ const winrate: Render = (p, steps, s) => {
 export const KINDS: Record<string, Render> = { growth, paths, drawdown, costs, maxof, gauntlet, curve, bars, lines, event, leverage, jcurve, seesaw, trend, winrate };
 
 /** The inside of the picture at position s (0 to steps - 1), as SVG markup. */
+/** True when a picture uses one of the signature scenes, which the app plays with SignaturePlayer. */
+export function isSignature(v: Pick<Visual, "kind">): boolean {
+  return Object.prototype.hasOwnProperty.call(SIGNATURE, v.kind);
+}
+
+/** Every kind a lesson picture can use: the signature scenes and the older Academy kinds. */
+export const ALL_KINDS: string[] = [...Object.keys(SIGNATURE), ...Object.keys(KINDS)];
+
 export function renderScene(v: Visual, s: number): string {
+  // Signature scenes draw at the lesson size, which is this same 480 by 270 box.
+  if (isSignature(v)) return renderSignature(v, Math.max(0, Math.min(s, v.steps.length - 1)), { size: "lesson", theme: "dark" });
   const f = KINDS[v.kind];
   if (!f) return text(W / 2, H / 2, `Unknown picture: ${v.kind}`, { anchor: "middle" });
   const last = Math.max(0, v.steps.length - 1);
