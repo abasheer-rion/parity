@@ -72,12 +72,28 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+      # Egress (REF-0028): runs already copied by an earlier deploy are kept here, and the
+      # script downloads only runs whose fingerprint changed. Pull requests read main's copy.
+      - name: Restore copied runs
+        uses: actions/cache/restore@v6
+        with:
+          path: .site-data-cache
+          key: site-data-none
+          restore-keys: site-data-
       - name: Copy published runs into the site
         env:
           SITE_DATA_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SITE_DATA_CACHE: ${{ github.workspace }}/.site-data-cache
         run: |
           pip install "psycopg[binary]>=3.2"
           python3 ../scripts/export_site_data.py dist/data
+      - name: Keep copied runs for the next deploy
+        if: hashFiles('.site-data-cache/*.json') != ''
+        continue-on-error: true  # an identical copy is already saved
+        uses: actions/cache/save@v6
+        with:
+          path: .site-data-cache
+          key: site-data-${{ hashFiles('.site-data-cache/*.json') }}
       - name: Restore data cache (prices and news)
         uses: actions/cache/restore@v6
         with:
