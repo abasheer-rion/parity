@@ -278,14 +278,15 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
     return runs.filter((r) => !n || `${nameOf(r)} ${r.strategy} ${r.description ?? ""}`.toLowerCase().includes(n)).slice(0, 12);
   }, [runs, q]);
   if (error) return <div className="vf-panel"><EmptyState title="Our strategies are not available">{error}</EmptyState></div>;
-  if (!report) return <div className="vf-panel"><SkeletonTable rows={6} cols={2} label="Loading our strategies" /></div>;
+  // The loading panel keeps the loaded panel's height, so the page below it does not jump.
+  if (!report) return <div className="vf-panel vf-panel-wait"><SkeletonTable rows={6} cols={2} label="Loading our strategies" /></div>;
   const tries = (search?.trials ?? 0) + report.n_trials;
   const pick = (name: string) => {
     const r = runs.find((x) => x.strategy === name);
     if (!r) return;
     setHashQuery({ strategy: name });
     onResult(checkStrategy({ name: nameOf(r), equity: r.equity, tries, asset: tagsOf(r).asset,
-      gauntlet: r.gauntlet ? { verdict: r.gauntlet.verdict, passed: r.gauntlet.passed, total: r.gauntlet.total } : null }));
+      gauntlet: r.gauntlet ? { verdict: r.gauntlet.verdict, passed: r.gauntlet.passed, total: r.gauntlet.total } : null, holdup: r.holdup }));
   };
   return (
     <div className="vf-panel">

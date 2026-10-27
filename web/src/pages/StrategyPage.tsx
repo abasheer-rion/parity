@@ -5,6 +5,7 @@ import { useHashState } from "../lib/deeplink";
 import { labUrl } from "../lib/space";
 import { BarChart, HeroChart, LineChart, RANGES, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
+import { HoldupSection } from "../components/holdup/HoldupSection";
 import { Badge, Button } from "../ui";
 import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
@@ -120,6 +121,9 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
             }))}
           />
         </Card>
+
+        <HoldupSection holdup={run.holdup} name={nameOf(run)} id="holds-up"
+          missing="This run was published before these checks were added. They appear from the next research run." />
 
         {run.ic_decay.length > 0 && (
           <Card title="Signal information by horizon" help="The information coefficient: mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">

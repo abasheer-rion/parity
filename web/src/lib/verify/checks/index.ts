@@ -1,5 +1,7 @@
 // Running every check on a record and putting the result together: the verdict, the five
 // cards, the claim arithmetic and what the record was. Pure functions, no React.
+import { holdup as holdupOf } from "../../holdup";
+import type { Holdup } from "../../types";
 import { day } from "../csv";
 import { normaliseSymbol, type PriceBook } from "../prices";
 import { daysBetween, drawdowns, fromEquity, fromTrades, type ReturnSeries } from "../returns";
@@ -49,6 +51,21 @@ export interface Result {
   gauntlet?: { verdict: string; passed: number; total: number };
   /** Input B: the description, and the closest strategies we have tested. */
   description?: { text: string; claim: Claim; settings: number | null };
+  /**
+   * "How it holds up" (DEC-0067): for a file with daily returns, built here from them; for
+   * one of our strategies, the research run's own numbers. Never kept on a public badge.
+   */
+  holdup?: Holdup | null;
+}
+
+/** The "how it holds up" numbers for an uploaded record: daily returns only, nothing to compare against. */
+export function holdupForUpload(rs: ReturnSeries | null, tries: number): Holdup | null {
+  if (!rs || rs.periodsPerYear < 180 || rs.returns.length < 30) return null;
+  const why = "upload";
+  return holdupOf({
+    returns: { dates: rs.dates, values: rs.returns }, nTrials: tries,
+    names: { strategy: "your record" }, reasons: { benchmark: why, stocks: why, bonds: why, rates: why },
+  });
 }
 
 export const moneyText = (v: number) => {
@@ -149,6 +166,7 @@ export function checkFile({ parsed, answers, prices, triesDefaulted }: FileInput
     assets: assetClasses(trades), card1, card2, card3, card4, card5, claims: claimRows(answers.claim),
     verdict: verdict({ trades: trades ? trades.length : null, dailyReturns, card1, card2, card3, card4, card5, contradicted: claim.contradicted, money, pct: pctText }),
     notes,
+    holdup: holdupForUpload(rs, answers.tries),
   };
 }
 
@@ -158,6 +176,8 @@ export interface StrategyInput {
   tries: number;
   gauntlet?: { verdict: string; passed: number; total: number } | null;
   asset?: string;
+  /** The research run's "how it holds up" numbers, when the run has them. */
+  holdup?: Holdup | null;
 }
 
 /** Input C: one of our tested strategies, laid out in the same five cards, at our real number of tries. */
@@ -194,6 +214,7 @@ export function checkStrategy(x: StrategyInput): Result {
     verdict: verdict({ trades: null, dailyReturns: dailyLike, card1, card2, card3, card4, card5, contradicted: [], money: (v) => pctText(v, 2), pct: pctText }),
     notes: [`Built from the strategy's equity curve in our research run (${basisFor(rs.periodsPerYear)} values), with the ${x.tries.toLocaleString("en-US")} tries our research and search have counted.`],
     gauntlet: x.gauntlet ?? undefined,
+    holdup: x.holdup ?? null,
   };
 }
 

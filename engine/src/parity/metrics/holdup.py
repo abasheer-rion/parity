@@ -2,7 +2,9 @@
 
 One function, `holdup`, turns a strategy's daily returns (and, when available, the
 benchmark, a stock index, a bond index and an interest rate series) into a JSON-safe
-dict. The field names match `Holdup` in web/src/lib/types.ts; change both together.
+dict. The web has a line-for-line port in web/src/lib/holdup.ts that builds the same
+shape from uploaded returns; web/tests/holdup.test.ts checks the two agree on a fixture
+written by scripts/holdup_fixture.py. Change both together.
 
 Everything here is descriptive and fixed in advance: the windows, the bootstrap
 settings and the crisis dates are constants, not tuned to any result.
