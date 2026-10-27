@@ -292,3 +292,19 @@ SELECT count(*) FROM expose(202, '2000-01-01', '[
   ["XOM","NYSE","valuation",1,"oil major: priced on oil, low beta"],
   ["CVX","NYSE","valuation",1,"oil major: priced on oil, low beta"]
 ]'::jsonb);
+
+-- Fed-day 2-year yield (cases 25-39). The same reasons as the policy-rate surprise (202), per +1 point of tightening: a
+-- path surprise reaches stocks through the same discount rate, credit and demand channels. The size is the yield
+-- class's own scale, tuned across cases, not assumed. Three names that 2001 lacked: REITs, unprofitable growth, and
+-- regional banks (deposit-funded, their bond books lose value as yields rise: 2023 made that a reason, not a pattern).
+-- Schwab is re-reasoned, not copied: by 2018 most of its revenue was net interest on client cash (the drift logged from
+-- the 2020 cut, case 24), so higher short rates now help it.
+SELECT count(*) FROM expose(203, '2018-01-01', (
+  SELECT jsonb_agg(jsonb_build_array(s.ticker, s.exchange, l.attrs->>'channel', (l.attrs->>'elasticity')::numeric, l.attrs->>'why'))
+  FROM link l JOIN security s ON s.entity_id = l.src_id AND s.is_primary
+  WHERE l.dst_id = 202 AND l.rel = 'exposed_to' AND s.ticker <> 'SCHW') || '[
+  ["SCHW","NYSE","revenue",2,"broker-bank: most revenue is net interest on client sweep cash, which higher short rates widen"],
+  ["XLRE","NYSEArca","valuation",-3,"real estate: valued on cap rates that track yields; levered"],
+  ["ARKK","NYSEArca","valuation",-6,"unprofitable growth: all value in far-off cash flows, needs funding markets open"],
+  ["KRE","NYSEArca","credit",-2,"regional banks: bond books lose value and deposits reprice as yields rise"]
+]'::jsonb);

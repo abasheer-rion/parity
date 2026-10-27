@@ -21,6 +21,7 @@ case_argentina_2023
 case_brazil_2022
 case_dotcom_intel
 case_fed_surprises
+case_fed_powell_warsh
 exposures
 # Convention: case N numbers its case_step ids N*100 .. N*100+99 (auto-numbered steps stay below 100 per file order).
 rule_log
