@@ -9,7 +9,7 @@ import { Badge, Button, HeroGlow, LIFT, PageSkeleton, PageTransition, Reveal, Ti
 import { colorMap } from "../lib/colors";
 import { pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
-import { nameOf, tagsOf, verdictOf } from "../lib/strategyMeta";
+import { nameOf, taglineOf, tagsOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
 import { productInsights } from "../lib/insights";
 import { date } from "../lib/format";
@@ -175,6 +175,7 @@ function Feature({ r, color }: { r: StrategyRun; color: string }) {
         <Badge tone={v.tone}>{v.label}</Badge>
       </div>
       <strong className="feat-name">{nameOf(r)}</strong>
+      {taglineOf(r) && <span className="muted small">{taglineOf(r)}</span>}
       <Sparkline points={r.equity} width={240} height={56} fluid />
       <div className="feat-stats">
         <span><b>{g ? `${g.passed} of ${g.total}` : "None"}</b><span className="muted small">tests passed</span></span>
@@ -194,7 +195,7 @@ function Row({ r, color, showVerdict }: { r: StrategyRun; color: string; showVer
         <span className="acct-dot" style={{ background: color }} />
         <span className="pname">
           <span>{nameOf(r)}</span>
-          <span className="muted small">{showVerdict ? tagsOf(r).style || tagsOf(r).family : `${pct(r.metrics.cagr)} a year`}</span>
+          <span className="muted small" title={taglineOf(r) || undefined}>{showVerdict ? taglineOf(r) || tagsOf(r).style || tagsOf(r).family : `${pct(r.metrics.cagr)} a year`}</span>
         </span>
         <Sparkline points={r.equity} width={64} height={24} />
         {showVerdict ? <Badge tone={v.tone}>{v.label}</Badge> : <span className={`pval ${(y ?? 0) >= 0 ? "good" : "bad"}`}>{signedPct(y)}</span>}

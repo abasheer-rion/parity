@@ -201,7 +201,8 @@ function TermShell() {
   const strategy = useCallback((token: string) => {
     const n = token.trim().toLowerCase();
     if (!n) return null;
-    return runs.find((r) => r.strategy.toLowerCase() === n) ?? runs.find((r) => nameOf(r).toLowerCase() === n) ?? null;
+    return runs.find((r) => r.strategy.toLowerCase() === n) ?? runs.find((r) => nameOf(r).toLowerCase() === n)
+      ?? runs.find((r) => (r.display_name ?? "").toLowerCase() === n) ?? null;
   }, [runs]);
 
   const place = useCallback((fn: string, args: string[], newPanel: boolean) => {

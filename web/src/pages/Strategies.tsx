@@ -5,7 +5,7 @@ import { useHashState } from "../lib/deeplink";
 import { Title } from "../components/Shell";
 import { colorMap } from "../lib/colors";
 import { usePrefs } from "../lib/prefs";
-import { nameOf, verdictOf } from "../lib/strategyMeta";
+import { nameOf, searchTextOf, taglineOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
 import { Badge, DataTable, FilterBar, FilterChip, RANGES, SearchInput, Sparkline, Tabs, fmt, sliceRange, useFilters, type Column, type RangeKey } from "../ui";
 import { Term } from "./Learn";
@@ -28,7 +28,7 @@ export function Strategies({ report, query }: { report: Report; query?: string }
     { id: "stocks", label: "Stocks", test: (r: StrategyRun) => r.is_benchmark || FAMILY(r) === "stocks" },
     { id: "positive", label: "Positive Sharpe", test: (r: StrategyRun) => r.is_benchmark || (r.metrics.sharpe ?? 0) > 0 },
   ], []);
-  const f = useFilters(report.runs, defs, (r) => `${nameOf(r)} ${r.strategy} ${r.description ?? ""} ${r.summary}`, true);
+  const f = useFilters(report.runs, defs, searchTextOf, true);
   // Home's theme links open this page with a search already typed in (#/strategies?q=...).
   useEffect(() => { if (query && query !== f.query) f.setQuery(query); }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -39,8 +39,8 @@ export function Strategies({ report, query }: { report: Report; query?: string }
         <div className="strat-cell">
           <span className="acct-dot" style={{ background: colors[r.strategy] }} />
           <div>
-            <a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a>
-            {(r.description || r.summary) && <div className="muted small strat-line">{r.description || r.summary}</div>}
+            <a href={`#/strategy/${r.strategy}`} title={taglineOf(r) || undefined}>{nameOf(r)}</a>
+            {(taglineOf(r) || r.description || r.summary) && <div className="muted small strat-line">{taglineOf(r) || r.description || r.summary}</div>}
           </div>
         </div>
       ),

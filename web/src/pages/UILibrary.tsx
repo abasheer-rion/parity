@@ -777,10 +777,10 @@ function Overlays() {
         <Button icon="search" onClick={() => setCmd(true)}>Open palette</Button>
         <CommandPalette open={cmd} onClose={() => setCmd(false)} commands={GAL_COMMANDS} />
       </Item>
-      <Item title="Tour step" intro="One step of a product tour: a glass card pointing at a part of the page, with the count, Back, Next and Skip. Escape skips, arrow keys step." code={`<TourStep target="#search" title="Search" step={1} total={3} open onNext={next} onBack={back} onSkip={skip}>…</TourStep>`}>
+      <Item title="Tour step" intro="One step of a product tour: the page dims and blurs, the part being explained stays sharp, and a centred card shows with the count, Back, Next and Skip. Escape skips, arrow keys step." code={`<TourStep target="#search" title="Search" step={1} total={3} open onNext={next} onBack={back} onSkip={skip}>…</TourStep>`}>
         <Button onClick={() => setTour(1)}>Start a sample tour</Button>
-        <span id="gal-tour-a"><Badge tone="info">Step 1 points here</Badge></span>
-        <span id="gal-tour-b"><Badge tone="warning">Step 2 points here</Badge></span>
+        <span id="gal-tour-a"><Badge tone="info">Step 1 lights this up</Badge></span>
+        <span id="gal-tour-b"><Badge tone="warning">Step 2 lights this up</Badge></span>
         <TourStep open={tour > 0} target={tour === 1 ? "#gal-tour-a" : tour === 2 ? "#gal-tour-b" : null} step={tour} total={3}
           title={tour === 3 ? "That is all" : `Step ${tour}`} onNext={() => setTour((t) => (t >= 3 ? 0 : t + 1))} onBack={() => setTour((t) => Math.max(1, t - 1))} onSkip={() => setTour(0)}>
           {tour === 3 ? "A step with no target sits in the middle of the screen." : "The ring shows what this step is about."}

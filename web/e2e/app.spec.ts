@@ -23,7 +23,7 @@ test.describe("search", () => {
     const dialog = page.getByRole("dialog", { name: "Search" });
     await expect(dialog).toBeVisible();
     await dialog.getByRole("textbox").fill("currency carry");
-    await expect(dialog.getByRole("link").filter({ hasText: "Currency carry" }).first()).toBeVisible();
+    await expect(dialog.getByRole("link").filter({ hasText: "Classic Carry" }).first()).toBeVisible();
     await dialog.getByRole("textbox").press("Enter");
     await expect(dialog).toBeHidden();
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -116,7 +116,7 @@ test.describe("discover", () => {
     await page.getByRole("button", { name: "Currencies", exact: true }).click();
     await expect(count).not.toContainText("7 of 7");
     const rows = page.getByRole("table", { name: "Strategies" }).getByRole("rowgroup").nth(1).getByRole("row");
-    await expect(rows.filter({ hasText: "Stock trend, 10-month" })).toHaveCount(0);
+    await expect(rows.filter({ hasText: "Ten-Month Trend" })).toHaveCount(0);
     await page.getByRole("button", { name: "Currencies", exact: true }).click();
     await expect(count).toContainText("7 of 7");
   });
@@ -151,9 +151,9 @@ test.describe("discover", () => {
   test("a row opens its strategy page", async ({ page }) => {
     await open(page, "/app/#/strategies");
     await settled(page);
-    await page.getByRole("link", { name: "Currency carry", exact: true }).click();
+    await page.getByRole("link", { name: "Classic Carry", exact: true }).click();
     await expect(page).toHaveURL(/#\/strategy\/fx_carry/);
-    await expect(page.getByRole("heading", { level: 1, name: "Currency carry" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Classic Carry" })).toBeVisible();
   });
 });
 
@@ -175,14 +175,14 @@ test.describe("strategy page", () => {
   test("the charts name the strategy in plain words, not its code name", async ({ page }) => {
     await open(page, "/app/#/strategy/fx_carry");
     await settled(page);
-    await expect(page.getByRole("img", { name: "Drawdown of Currency carry" })).toHaveCount(1);
+    await expect(page.getByRole("img", { name: "Drawdown of Classic Carry" })).toHaveCount(1);
     await expect(page.getByRole("img", { name: /fx_carry/ })).toHaveCount(0);
   });
 
   test("the market line can be hidden and shown", async ({ page }) => {
     await open(page, "/app/#/strategy/fx_carry");
     await settled(page);
-    const market = page.getByRole("button", { name: "US stock market", exact: true });
+    const market = page.getByRole("button", { name: "US Market", exact: true });
     await expect(market).toHaveAttribute("aria-pressed", "true");
     await market.click();
     await expect(market).toHaveAttribute("aria-pressed", "false");
@@ -196,9 +196,9 @@ test.describe("strategy page", () => {
     await page.getByRole("button", { name: "Add to bookmarks" }).click();
     await expect(page.getByRole("button", { name: /Remove (from )?bookmark/ })).toBeVisible();
     await menu(page, isPhone(info.project.name));
-    await expect(page.getByRole("complementary").getByRole("link", { name: "Currency carry" })).toBeVisible();
+    await expect(page.getByRole("complementary").getByRole("link", { name: "Classic Carry" })).toBeVisible();
     await page.goto("/app/#/watchlist");
-    await expect(page.getByRole("main").getByText("Currency carry").first()).toBeVisible();
+    await expect(page.getByRole("main").getByText("Classic Carry").first()).toBeVisible();
   });
 
   test("a word in the key statistics opens its explanation", async ({ page }) => {
@@ -254,7 +254,7 @@ test.describe("verify", () => {
     await open(page, "/app/#/verify");
     await settled(page);
     await page.getByRole("radio", { name: "Pick a strategy" }).click();
-    await page.getByRole("button").filter({ hasText: "Currency carry" }).first().click();
+    await page.getByRole("button").filter({ hasText: "Classic Carry" }).first().click();
     await expect(page.getByText(/Luck check/).first()).toBeVisible({ timeout: 15_000 });
   });
 });

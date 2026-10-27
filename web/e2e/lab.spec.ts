@@ -11,15 +11,15 @@ async function ready(page: Page, path: string) {
 test.describe("views", () => {
   test("Try: picking a strategy selects it and only it", async ({ page }) => {
     await ready(page, "/lab/#/try");
-    await page.getByRole("button", { name: /^Stock trend, 10-month/ }).click();
-    await expect(page.getByRole("button", { name: /^Stock trend, 10-month/ })).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByRole("button", { name: /^Currency carry/ })).toHaveAttribute("aria-pressed", "false");
+    await page.getByRole("button", { name: /^Ten-Month Trend/ }).click();
+    await expect(page.getByRole("button", { name: /^Ten-Month Trend/ })).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("button", { name: /^Classic Carry/ })).toHaveAttribute("aria-pressed", "false");
   });
 
   test("Try: the find box narrows the strategies", async ({ page }) => {
     await ready(page, "/lab/#/try");
     await page.getByRole("searchbox", { name: "Find a strategy" }).fill("rsi");
-    await expect(page.getByRole("button", { name: /^Currency carry/ })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /^Classic Carry/ })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /RSI/ }).first()).toBeVisible();
   });
 

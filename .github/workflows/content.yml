@@ -46,10 +46,17 @@ jobs:
           parity fetch || true
           parity bots export
           parity world export
+      - name: Restore copied runs (REF-0028)
+        uses: actions/cache/restore@v6
+        with:
+          path: .site-data-cache
+          key: site-data-none
+          restore-keys: site-data-
       - name: Latest strategy results (for the strategy race)
         continue-on-error: true  # the race scene is skipped when this file is missing
         env:
           SITE_DATA_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SITE_DATA_CACHE: ${{ github.workspace }}/.site-data-cache
         run: |
           pip install -q "psycopg[binary]>=3.2"
           python3 scripts/export_site_data.py "$RUNNER_TEMP/site"

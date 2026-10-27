@@ -3,6 +3,7 @@
 // share image. Pure, so the functions and the tests can both use it.
 import { abs, OG_CARDS, ogImage, PRIVATE, type PageMeta } from "../meta";
 import { ASSET_LABEL, FAMILY_LABEL, nameById, tagsById } from "../strategyMeta";
+import { tagline } from "../strategyNames";
 import { KIND_WORDS, survivesWords, TRUST_LINE, VERDICT_COLOR, VERDICT_WORDS, type PublicBadge } from "../verify/badge";
 import type { BadgeCard } from "./card";
 import { RAW } from "../../ui/tokens.gen";
@@ -42,6 +43,7 @@ export function strategyCard(id: string) {
   return {
     kicker: kind ? `Parity strategy · ${kind}` : "Parity strategy",
     title: nameById(id),
+    tagline: tagline(id),
     sub: "Tested against the S&P 500: how it did, where it fails and whether the result could be luck.",
   };
 }
@@ -50,7 +52,7 @@ export function strategyCard(id: string) {
 export function strategyMeta(id: string): PageMeta {
   const c = strategyCard(id);
   return {
-    title: `${c.title} · Parity`, description: c.sub, path: `/s/${id}`,
+    title: `${c.title} · Parity`, description: c.tagline ? `${c.tagline} ${c.sub}` : c.sub, path: `/s/${id}`,
     image: isStrategyId(id) ? abs(`/og/strategy/${id}.png`) : ogImage("strategy"), robots: PRIVATE,
   };
 }

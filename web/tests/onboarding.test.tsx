@@ -7,6 +7,7 @@ import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { DOABLE, itemList, orderByInterests, progress } from "../src/onboarding/items";
 import { Tour, availableSteps, type GuidedStep } from "../src/ui/guidedTour";
+import { cardShift, holeClip } from "../src/ui/tour";
 import { base58Decode, base58Encode, checkAddress, looksSecret, toChecksumAddress } from "../src/lib/wallet/address";
 import { buildMessage, messageProblem, parseMessage, WINDOW_MS } from "../src/lib/wallet/siwe";
 import { checkProof, recoverEthereumAddress, verifySolana } from "../src/lib/wallet/verify";
@@ -168,6 +169,43 @@ describe("tour", () => {
     render(<Tour open steps={STEPS} label="Test tour" onEnd={onEnd} />);
     expect(onEnd).toHaveBeenCalledWith("none", 0);
     expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("draws a spotlight: a shade with a hole over the target, a ring round it, and a centred card", async () => {
+    page();
+    render(<Tour open steps={STEPS} label="Test tour" onEnd={() => {}} />);
+    const tip = await screen.findByRole("dialog");
+    expect(tip).toHaveAttribute("aria-modal", "true");
+    // Centred by its stylesheet, not placed beside the target.
+    expect(tip.style.left).toBe("");
+    expect(tip.style.top).toBe("");
+    const shade = document.querySelector<HTMLElement>(".ui-tour-shade")!;
+    const ring = document.querySelector<HTMLElement>(".ui-tour-ring")!;
+    // #a is at (10, 10), 100 by 30; the hole and ring add 6 on every side.
+    expect(ring.style.left).toBe("4px");
+    expect(ring.style.width).toBe("112px");
+    expect(shade.style.clipPath).toContain("evenodd");
+    expect(shade.style.clipPath).toContain("M14 4H106");
+  });
+
+  it("a click on the shade does not reach the page", async () => {
+    page();
+    const pageClicks = vi.fn();
+    document.body.addEventListener("click", pageClicks);
+    render(<Tour open steps={STEPS} label="Test tour" onEnd={() => {}} />);
+    await screen.findByRole("dialog");
+    fireEvent.click(document.querySelector(".ui-tour-shade")!);
+    document.body.removeEventListener("click", pageClicks);
+    expect(pageClicks).not.toHaveBeenCalled();
+  });
+
+  it("with no target the shade has no hole, and the card moves only when it would cover the target", () => {
+    expect(holeClip(400, 300, null)).toBe('path(evenodd, "M0 0H400V300H0Z")');
+    // A side bar target clear of the centred card: the card stays put.
+    expect(cardShift(1200, 800, 360, 200, { x: 10, y: 100, w: 200, h: 40 })).toBe(0);
+    // A target in the middle of the screen: the card moves into the larger free space.
+    expect(cardShift(1200, 800, 360, 200, { x: 500, y: 380, w: 200, h: 40 })).toBeGreaterThan(100);
+    expect(cardShift(1200, 800, 360, 200, { x: 500, y: 500, w: 200, h: 40 })).toBeLessThan(-100);
   });
 
   it("moves on when the current target disappears (a narrower window)", async () => {

@@ -6,7 +6,7 @@ import { hashQuery, setHashQuery } from "../lib/deeplink";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import { productUrl } from "../lib/space";
-import { nameOf } from "../lib/strategyMeta";
+import { nameOf, searchTextOf, taglineOf } from "../lib/strategyMeta";
 import type { Point, Report, StrategyRun } from "../lib/types";
 import { AnimatedNumber, Button, LineChart, Tooltip } from "../ui";
 
@@ -56,7 +56,7 @@ export function TryView({ report }: { report: Report }) {
 
   if (!runs.length) return <div className="lb-msg">No strategy in this run has a settings test.</div>;
   const needle = find.trim().toLowerCase();
-  const shown = needle ? runs.filter((r) => `${nameOf(r)} ${r.strategy}`.toLowerCase().includes(needle)) : runs;
+  const shown = needle ? runs.filter((r) => searchTextOf(r).toLowerCase().includes(needle)) : runs;
   const positive = variants.filter((v) => v.sharpe > 0).length;
   const benchSharpe = bench?.metrics.sharpe ?? null;
 
@@ -72,7 +72,7 @@ export function TryView({ report }: { report: Report }) {
         <ul className="lb-list" aria-label="Strategies">
           {shown.map((r) => (
             <li key={r.strategy}>
-              <button type="button" className={r.strategy === name ? "on" : ""} aria-pressed={r.strategy === name} onClick={() => pick(r.strategy)} title={r.strategy}>
+              <button type="button" className={r.strategy === name ? "on" : ""} aria-pressed={r.strategy === name} onClick={() => pick(r.strategy)} title={taglineOf(r) || r.strategy}>
                 <span className="lb-list-l">{nameOf(r)}</span>
                 <span className="lb-list-r tabular">{num(r.metrics.sharpe)}</span>
               </button>

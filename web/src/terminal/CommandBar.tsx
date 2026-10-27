@@ -3,7 +3,7 @@
 // functions, every series in the index and every strategy in the report; Up walks the
 // history, which is kept in the browser.
 import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { nameOf } from "../lib/strategyMeta";
+import { nameOf, taglineOf } from "../lib/strategyMeta";
 import { useTerm } from "./context";
 import { fmtChg, fmtLast, tone } from "./fmt";
 import { FN_BY_CODE, FUNCTIONS } from "./functions";
@@ -59,7 +59,7 @@ export const CommandBar = forwardRef<CommandBarHandle, { onLeave: () => void }>(
       const last = toks[toks.length - 1];
       const prefix = toks.slice(0, -1).join(" ") + " ";
       const strat = runs.filter((r) => last && (nameOf(r).toLowerCase().includes(last.toLowerCase()) || r.strategy.includes(last.toLowerCase()))).slice(0, 4)
-        .map((r): Sugg => ({ kind: "strategy", label: r.strategy, detail: nameOf(r), line: `${prefix}${r.strategy}` }));
+        .map((r): Sugg => ({ kind: "strategy", label: nameOf(r), detail: r.strategy, line: `${prefix}${r.strategy}` }));
       return [...seriesSugg(last, prefix), ...(first === "CMP" ? strat : [])];
     }
     const lower = raw.toLowerCase();
@@ -67,7 +67,7 @@ export const CommandBar = forwardRef<CommandBarHandle, { onLeave: () => void }>(
       .filter((x) => x.score >= 0).sort((a, b) => a.score - b.score)
       .map(({ f }): Sugg => ({ kind: "fn", label: f.code, detail: f.title, line: f.code, right: f.args }));
     const strat = runs.filter((r) => lower.length > 1 && (nameOf(r).toLowerCase().includes(lower) || r.strategy.toLowerCase().includes(lower))).slice(0, 5)
-      .map((r): Sugg => ({ kind: "strategy", label: nameOf(r), detail: "strategy", line: r.strategy }));
+      .map((r): Sugg => ({ kind: "strategy", label: nameOf(r), detail: taglineOf(r) || "strategy", line: r.strategy }));
     const ss = seriesSugg(raw, "");
     // An exact series code beats a function that merely starts with the same letters.
     const exactSeries = ss.length && ss[0].label.toLowerCase() === lower;
