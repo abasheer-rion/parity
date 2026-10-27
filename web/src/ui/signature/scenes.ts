@@ -748,7 +748,9 @@ const candles: Scene = (v, F) => {
   if (shown >= cs.length - 0.01) {
     const label = pctSigned(1)(change);
     const tone: Tone = change >= 0 ? "pos" : "neg";
-    out += text(F, x1, Math.max(y0 + 12 * F.u, Y(lastC) - 8 * F.u), label, { size: 12 * F.u, weight: 700, fill: F.color(tone), anchor: "end" });
+    // Above the highs of the last few candles, so the label never sits on a candle body.
+    const hi = Math.max(...cs.slice(-4).map((c) => c[1]));
+    out += text(F, x1, Math.max(y0 + 12 * F.u, Y(hi) - 6 * F.u), label, { size: 12 * F.u, weight: 700, fill: F.color(tone), anchor: "end" });
   }
   return out;
 };

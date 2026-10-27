@@ -139,7 +139,7 @@ function ClassicPlayer({ visual, autoPlay = true }: { visual: Visual; autoPlay?:
               </span>
               <Button size="sm" variant="primary" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</Button>
               {!reduced && (
-                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
+                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-label={`${playing ? "Pause" : step >= last ? "Replay" : "Play"} the animation`}>
                   {/* All three labels share one cell, so the button keeps the width of the
                       longest and the row never re-wraps as the picture plays. */}
                   {["Pause", "Replay", "Play"].map((l) => (
