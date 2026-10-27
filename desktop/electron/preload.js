@@ -10,8 +10,9 @@
 // data-desktop-header, and this file tells it how much room the window's controls need
 // (CSS variables --desktop-chrome-left, --desktop-chrome-right and --desktop-chrome-h on
 // <html data-desktop-chrome>), makes the row's empty parts drag the window, and tells the
-// main process whether such a row is showing at the top. Without one the window puts a
-// plain strip above the page instead.
+// main process whether such a row is showing at the top. A page without one still runs to
+// the top edge: its top row (the height of the controls) becomes an invisible drag region,
+// with every link, button and field in it left clickable.
 //
 // It also turns the mouse's back and forward buttons, and a two-finger swipe sideways on a
 // Mac trackpad that nothing on the page uses, into Back and Forward.
@@ -103,8 +104,17 @@ function chrome() {
   const CONTROLS = "a, button, input, select, textarea, label, summary, details, [role], [tabindex], [contenteditable], canvas, iframe, video";
   const style = document.createElement("style");
   style.textContent = `html[data-desktop-chrome] [data-desktop-header] { -webkit-app-region: drag; app-region: drag; }
-html[data-desktop-chrome] [data-desktop-header] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-region: no-drag; }`;
-  const addStyle = () => { if (!style.isConnected) (document.head || root).appendChild(style); };
+html[data-desktop-chrome] .parity-desktop-drag { position: fixed; z-index: -1; left: 0; top: 0; right: 0; height: var(--desktop-chrome-h); -webkit-app-region: drag; app-region: drag; }
+html[data-desktop-chrome][data-desktop-header-shown] .parity-desktop-drag { display: none; }
+html[data-desktop-chrome] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-region: no-drag; }`;
+  // The invisible drag region along the top of a page with no header row of its own.
+  const band = document.createElement("div");
+  band.className = "parity-desktop-drag";
+  band.setAttribute("aria-hidden", "true");
+  const addStyle = () => {
+    if (!style.isConnected) (document.head || root).appendChild(style);
+    if (document.body && !band.isConnected) document.body.prepend(band);
+  };
 
   /** The marked row at the window's top left, wide enough for the controls, or null. */
   const header = () => {
@@ -118,7 +128,9 @@ html[data-desktop-chrome] [data-desktop-header] :is(${CONTROLS}) { -webkit-app-r
   let timer = null;
   const check = () => {
     timer = null;
+    addStyle();
     const has = !!header();
+    root.toggleAttribute("data-desktop-header-shown", has);
     if (has !== told) { told = has; ipcRenderer.send("parity:chrome", { header: has }); }
   };
   function schedule() { if (!timer) timer = setTimeout(check, 120); }
@@ -136,19 +148,21 @@ html[data-desktop-chrome] [data-desktop-header] :is(${CONTROLS}) { -webkit-app-r
   // A press on the row's empty part: the system moves the window from the drag region on
   // Windows (the page never sees the press). A Mac view inside the window does not always get
   // the region, so the press arrives here and the window follows the pointer instead.
-  const emptyRow = (target) => {
+  const emptyRow = (target, y) => {
     const el = target instanceof Element ? target : null;
-    const row = el?.closest("[data-desktop-header]");
-    if (!row) return false;
+    if (!el) return false;
+    const row = el.closest("[data-desktop-header]");
     const hit = el.closest(CONTROLS);
+    // A page with no header row: anything in its top row that is not a control.
+    if (!row) return !told && y < insets.h && !hit;
     return !hit || hit === row || !row.contains(hit);
   };
-  window.addEventListener("dblclick", (e) => { if (emptyRow(e.target)) ipcRenderer.send("parity:drag", "dblclick"); });
+  window.addEventListener("dblclick", (e) => { if (emptyRow(e.target, e.clientY)) ipcRenderer.send("parity:drag", "dblclick"); });
   if (!mac) return;
   let drag = null;
   let queued = null;
   window.addEventListener("pointerdown", (e) => {
-    if (e.button !== 0 || e.detail > 1 || !emptyRow(e.target)) return;
+    if (e.button !== 0 || e.detail > 1 || !emptyRow(e.target, e.clientY)) return;
     drag = e.pointerId;
     ipcRenderer.send("parity:drag", "start", { x: e.screenX, y: e.screenY });
   }, true);

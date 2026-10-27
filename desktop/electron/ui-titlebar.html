@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="tokens.css" />
     <link rel="stylesheet" href="ui.css" />
     <style>
-      /* The window's controls (DEC-0049): no title bar and no title. Over a page with its own
-         header row this view is only as wide as its buttons and see-through, so the row shows
-         through; over a page without one it is a plain strip in the page colour. */
+      /* The window's controls (DEC-0049): no title bar and no title. The view is only as wide
+         as its buttons and see-through, so the page shows through it to the top edge. */
       html, body { height: 100%; overflow: hidden; background: transparent; user-select: none; -webkit-user-select: none; }
-      body.strip { background: var(--bg); }
       /* Windows moves the window natively from a drag region (with snapping). On a Mac a view
          inside the window does not reliably get one, so ui-titlebar.js moves it there. */
       body.win32, body.linux { -webkit-app-region: drag; }
       .bar { position: relative; height: 100%; display: flex; align-items: center; padding: 0 4px; }
-      body.darwin.strip:not(.fullscreen) .bar { padding-left: 76px; }
       .cluster { display: inline-flex; align-items: center; gap: 2px; flex: none; }
       .btn { -webkit-app-region: no-drag; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; min-width: 28px; padding: 0 6px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: default; }
       .btn:hover:not(:disabled) { color: var(--text); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }

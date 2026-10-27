@@ -61,7 +61,6 @@ function render(s) {
   overlay = s.overlay;
   document.body.classList.toggle("wall", s.wall);
   document.body.classList.toggle("fullscreen", s.fullscreen);
-  document.body.classList.toggle("strip", !!s.strip);
   $("back").disabled = !s.back;
   $("forward").disabled = !s.forward;
   $("back").hidden = s.wall && !s.back;

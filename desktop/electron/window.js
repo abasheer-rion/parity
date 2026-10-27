@@ -11,8 +11,9 @@
 //                data-desktop-header (web: Trade, Terminal, Lab, Academy, the app's sidebar);
 //                preload.js tells it how much room to leave on each side and makes its empty
 //                parts drag the window. Double-click them to zoom (Mac) or maximise (Windows).
-//                A page without one (the site, sign-in) sits under a plain 44 px strip in the
-//                page colour that holds the same controls, with no title.
+//                A page without one (the site, the log-in wall) still runs to the top edge:
+//                its top 44 px are an invisible drag region (preload.js) and the site's
+//                floating logo moves right of the controls (web/src/site/kit.css).
 //   Pages        one per section, kept loaded after you leave it (Settings can turn that off),
 //                so switching back is instant and keeps the page as you left it (page.js).
 //   Layer        ui-overlay.html, shown only while the menu, the command palette or Open link
@@ -194,20 +195,15 @@ class ParityWindow {
   /** Where the controls view starts: right of the Mac traffic lights, or at the left edge. */
   get leadX() { return this.ctx.platform === "darwin" && !this.win.isFullScreen() ? LEAD_X_MAC : 0; }
 
-  /** True when the page in front has no header row of its own, so it sits under a plain strip. */
-  get strip() { return !this.focusMode && !this.active?.header; }
-
   layout() {
     if (!this.alive) return;
     const { width, height } = this.win.getContentBounds();
     const chrome = !this.focusMode;
-    const strip = this.strip;
-    const top = strip ? CHROME_H : 0;
+    const top = 0; // every page runs to the window's top edge: there is no title bar strip
     const offline = !!this.active?.saved;
     const offH = offline ? OFFLINE_H : 0;
     const x = this.leadX;
-    if (strip) this.titlebar.setBounds({ x: 0, y: 0, width, height: CHROME_H });
-    else this.titlebar.setBounds({ x, y: 0, width: Math.max(0, Math.min(width - x, Math.ceil(this.lead.full))), height: chrome ? CHROME_H : 0 });
+    this.titlebar.setBounds({ x, y: 0, width: Math.max(0, Math.min(width - x, Math.ceil(this.lead.full))), height: chrome ? CHROME_H : 0 });
     this.titlebar.setVisible(chrome);
     // The offline line sits along the bottom, so the page's header row stays at the top.
     this.bar.setBounds({ x: 0, y: height - offH, width, height: offH });
@@ -448,7 +444,6 @@ class ParityWindow {
       wall: this.wall,
       focus: this.focusMode,
       fullscreen: this.win.isFullScreen(),
-      strip: this.strip,
       back: h.back || (!this.wall && this.trail.some((k) => this.pages.has(k))),
       forward: h.forward,
       section: this.active?.key || null,

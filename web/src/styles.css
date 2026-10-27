@@ -309,6 +309,8 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 html[data-desktop-chrome] .desktop-band { display: block; flex: none; position: sticky; top: 0; z-index: 2; height: var(--desktop-chrome-h); background: inherit; }
 html[data-desktop-chrome] .frame:not(.railed) { grid-template-columns: max(var(--side-w), var(--desktop-chrome-left)) minmax(0, 1fr); }
 html[data-desktop-chrome="win32"] .topbar { padding-right: calc(24px + var(--desktop-chrome-right)); }
+html[data-desktop-chrome] .frame.railed .main-col { padding-top: var(--desktop-chrome-h); }
+@media (max-width: 860px) { html[data-desktop-chrome] .main-col { padding-top: var(--desktop-chrome-h); } }
 
 /* Sidebar */
 .side {

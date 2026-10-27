@@ -58,7 +58,8 @@ async function run(api) {
       check("the log-in form is drawn", await hasForm(w));
       check("the title bar is loaded", w.titlebar.webContents.getURL().includes("ui-titlebar.html"));
       check("the window shows no title text", await js(w.titlebar.webContents, "!document.getElementById('title') && !document.querySelector('.title')"));
-      check("a page without a header row sits under the plain strip", w.strip === true && w.active.view.getBounds().y === 44, `${w.active.view.getBounds().y}`);
+      check("the log-in page runs to the top edge, with no strip above it", w.active.view.getBounds().y === 0, `${w.active.view.getBounds().y}`);
+      check("the controls view is see-through and only as wide as its buttons", w.titlebar.getBounds().width < 200, `${w.titlebar.getBounds().width}`);
       w.openOverlay("menu");
       check("the menu does not open on the wall", w.overlayMode === null);
       check("the title bar hides the menu button on the wall", await js(w.titlebar.webContents, "document.body.classList.contains('wall') && getComputedStyle(document.getElementById('menu')).display === 'none'"));
@@ -69,9 +70,10 @@ async function run(api) {
       await wait(1500);
       await settled(w);
       check("a second deep link stays on the wall", /^\/login\//.test(w.active.path || "") && api.windows().length === 1, w.active.path);
-      // Drag: a press, a move of 120 by 40 and a release on the title bar's empty middle.
+      // Drag: a press, a move of 120 by 40 and a release on the empty top of the log-in page,
+      // which has no title bar above it, only an invisible drag region.
       const [x0, y0] = w.win.getPosition();
-      const tb = w.titlebar.webContents;
+      const tb = w.active.wc;
       const at = (x, y) => ({ x, y, globalX: x0 + x, globalY: y0 + y });
       tb.sendInputEvent({ type: "mouseMove", ...at(300, 19) });
       tb.sendInputEvent({ type: "mouseDown", button: "left", clickCount: 1, ...at(300, 19) });
@@ -79,7 +81,7 @@ async function run(api) {
       tb.sendInputEvent({ type: "mouseUp", button: "left", clickCount: 1, ...at(420, 59) });
       await wait(500);
       const [x1, y1] = w.win.getPosition();
-      check("dragging the title bar moves the window", Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3, `moved ${x1 - x0},${y1 - y0}`);
+      check("dragging the empty top of the page moves the window", Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3, `moved ${x1 - x0},${y1 - y0}`);
     }
 
     if (scenario === "offline") {

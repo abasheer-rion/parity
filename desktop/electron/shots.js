@@ -44,8 +44,8 @@ async function captureWindow(w) {
   const pageY = w.active?.view.getBounds().y ?? 0;
   if (w.active?.saved) parts.push({ view: w.bar, y: w.bar.getBounds().y });
   if (w.active) parts.push({ view: w.active.view, y: pageY });
-  // The controls sit over the page's header row (or on their own strip above a page without one).
-  if (!w.focusMode) parts.push({ view: w.titlebar, y: 0, x: w.titlebar.getBounds().x, overlay: !w.strip });
+  // The controls sit over the page's top row.
+  if (!w.focusMode) parts.push({ view: w.titlebar, y: 0, x: w.titlebar.getBounds().x, overlay: true });
   if (w.overlayMode) parts.push({ view: w.overlay, y: w.overlay.getBounds().y, overlay: true });
   const { width, height } = w.win.getContentBounds();
   const imgs = [];
