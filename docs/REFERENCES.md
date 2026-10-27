@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1787 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1792 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,8 +11,8 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 46 |
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 63 |
-| [Software](#software) | 103 |
-| [Web pages](#web-pages) | 1042 |
+| [Software](#software) | 104 |
+| [Web pages](#web-pages) | 1046 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -3857,6 +3857,12 @@ LMAX-Exchange on GitHub. (n.d.). *github.com*. <https://github.com/LMAX-Exchange
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-af93d875
+
+Lighthouse CI. (n.d.). *GitHub*. <https://github.com/GoogleChrome/lighthouse-ci>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
 ### url-b3617053
 
 bloomberg/blazingmq. (n.d.). *github.com*. <https://github.com/bloomberg/blazingmq>. Accessed 2026-10-24. Verification: not checked.
@@ -6965,6 +6971,12 @@ Grafana pricing. (n.d.). *grafana.com*. <https://grafana.com/pricing/>. Accessed
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-6b415a56
+
+Indexing API Quickstart. (n.d.). *Google Search Central*. <https://developers.google.com/search/apis/indexing-api/v3/quickstart>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
 ### url-6b756381
 
 Cryptocurrency bubble. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Cryptocurrency_bubble>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
@@ -7238,6 +7250,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 No title recorded. (n.d.). *Dukascopy Bank SA*. <https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5>. Accessed 2026-10-21. Verification: error (checked 2026-10-21).
 
 Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
+
+### url-75a0b4a0
+
+Spam policies for Google web search. (n.d.). *Google Search Central*. <https://developers.google.com/search/docs/essentials/spam-policies>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
 ### url-75e61a74
 
@@ -8722,6 +8740,12 @@ Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 Comtrade policy. (n.d.). *uncomtrade.org*. <https://uncomtrade.org/docs/policy-on-comtrade-data-use/>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-ae28dca7
+
+Sitemaps XML format. (n.d.). *sitemaps.org*. <https://www.sitemaps.org/protocol.html>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
 ### url-ae5b1b37
 
@@ -10658,6 +10682,12 @@ Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DA
 Massive pricing. (n.d.). *massive.com*. <https://massive.com/pricing>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
+### url-fd2cc8bf
+
+IndexNow documentation. (n.d.). *IndexNow*. <https://www.indexnow.org/documentation>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
 ### url-fe036392
 

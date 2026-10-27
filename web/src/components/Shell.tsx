@@ -12,6 +12,7 @@ import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 import { IconButton } from "../ui";
+import { StatusBanner } from "./StatusBanner";
 
 // The setup ring at the top right of the product app (DEC-0075). Loaded after the page.
 const SetupButton = lazy(() => import("../onboarding/SetupButton").then((m) => ({ default: m.SetupButton })));
@@ -281,7 +282,7 @@ export function Shell({
         {!research && !full && (
           <div className="app-top">{(route === "" || route === "home") && <Suspense fallback={null}><SetupButton /></Suspense>}</div>
         )}
-        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}>{children}</main>
+        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}><StatusBanner />{children}</main>
       </div>
     </div>
   );

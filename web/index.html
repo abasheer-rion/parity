@@ -311,6 +311,8 @@
       :root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after { animation: none !important; transition: none !important; }
     </style>
     <script type="module" src="/src/site/main.ts"></script>
+    <!-- The warnings banner (DEC-0073): reads /status.json, shows nothing when all is well. -->
+    <script src="/status-banner.js" defer></script>
   </head>
   <body>
     <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -326,6 +328,7 @@
       <a class="li" href="/login/" data-auth="login">Log in</a>
       <a class="su" href="/signup/" data-auth="signup">Sign up</a>
     </nav>
+    <div class="status-slot" data-status-banner data-offset="64"></div>
     <main id="main" tabindex="-1">
       <section class="hero" id="top" aria-labelledby="hero-h">
         <div class="field-box" id="field-box" aria-hidden="true"><!--field-poster--></div>
@@ -531,6 +534,12 @@
           <a href="/blog/">Blog</a>
           <a href="/news/">News</a>
           <a href="/download/">Download</a>
+          <a href="/changelog/">Changelog</a>
+          <a href="/announcements/">Announcements</a>
+          <a href="/status/">Status</a>
+          <a href="/changelog/feed.xml">Changelog RSS</a>
+          <a href="/announcements/feed.xml">Announcements RSS</a>
+          <a href="/status/feed.xml">Status RSS</a>
         </nav>
         <nav class="site-legal" aria-label="Legal">
           <a href="/legal/privacy/">Privacy</a>

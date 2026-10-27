@@ -1,11 +1,20 @@
-# Weekly SEO report (DEC-0023). Rebuilds the public pages to count them, resubmits the
-# sitemap to Google Search Console and pulls clicks, impressions and top queries, then writes
-# a short markdown summary as an artifact and in the job summary.
+# Weekly SEO report (DEC-0023, DEC-0073). Builds the public pages, checks their titles,
+# descriptions, canonical links and JSON-LD, resubmits the sitemap to Google Search Console,
+# pulls clicks, impressions, queries and rankings for the last 28 days and the 28 before,
+# inspects a sample of URLs for index coverage, groups queries into keyword clusters, and
+# writes a short markdown summary to the job summary and an artifact.
+#
+# The Search Console properties come from web/src/lib/site.json: the URL-prefix property
+# https://<site>/ first, then its Domain property sc-domain:<host>, then any in GSC_SITE_URLS.
+# Google's Indexing API is not used: Google allows it only for job postings and live streams.
 # Google is optional: without the secret, or before the property is verified and the service
 # account is added as a user, the Google part says so and the job still passes.
+#
+# Kill switch: the job "seo_report" in content/seo/automation.toml, or the repository variable
+# SEO_AUTOMATION ("off", or a comma list of job names). Every step logs what it did to the
+# automation-log artifact (scripts/seo/automation.py).
 # Secrets: GSC_SERVICE_ACCOUNT_JSON (service account key for Search Console).
-# Variables (optional): GSC_SITE_URLS, comma list of properties to try
-#   (default sc-domain:paritytrading.app,https://paritytrading.app/).
+# Variables (optional): GSC_SITE_URLS (comma list of extra properties to try), SEO_AUTOMATION.
 name: SEO report
 
 on:
@@ -19,29 +28,57 @@ permissions:
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    env:
+      SEO_AUTOMATION: ${{ vars.SEO_AUTOMATION }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # the changelog pages read git history and tags
+          fetch-tags: true
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Build the public pages and sitemap
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22  # draws the Academy lesson pictures (web/scripts/academy-frames.ts)
+      - name: Kill switch
+        id: switch
+        run: |
+          if python3 scripts/seo/automation.py check seo_report; then echo "on=true" >> "$GITHUB_OUTPUT"; else echo "on=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Build the public pages and sitemaps
+        if: steps.switch.outputs.on == 'true'
         run: |
           mkdir -p seo-site
           python3 scripts/seo/build_public.py --out seo-site
-      - name: Search Console (submit sitemap, pull performance)
+      # Only the public pages are built here (no vite build), so the front page and /legal/
+      # are listed as not built. The deploy checks them on every pull request.
+      - name: Page checks and internal link suggestions
+        if: steps.switch.outputs.on == 'true'
+        run: python3 scripts/seo/meta_check.py --site-dir seo-site --allow-unbuilt --json seo-report/meta.json || true
+      - name: Search Console (submit sitemap, performance, URL Inspection sample)
+        if: steps.switch.outputs.on == 'true'
         env:
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
           GSC_SITE_URLS: ${{ vars.GSC_SITE_URLS }}
         run: |
           pip install -q "google-auth>=2.30" "requests>=2.32"
-          python3 scripts/seo/search_console.py --out seo-report/search_console.json
+          python3 scripts/seo/search_console.py --site-dir seo-site --out seo-report/search_console.json
+      - name: Keyword clusters
+        if: steps.switch.outputs.on == 'true'
+        run: python3 scripts/seo/keywords.py --gsc seo-report/search_console.json --out seo-report/keywords.json
       - name: Write the summary
+        if: steps.switch.outputs.on == 'true'
         run: |
-          python3 scripts/seo/seo_report.py --site-dir seo-site --gsc seo-report/search_console.json --out seo-report/summary.md
+          python3 scripts/seo/seo_report.py --site-dir seo-site --gsc seo-report/search_console.json \
+            --keywords seo-report/keywords.json --meta seo-report/meta.json --out seo-report/summary.md
           cat seo-report/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: seo-report
-          path: seo-report/
+          path: |
+            seo-report/
+            automation-log/
+          if-no-files-found: ignore
           retention-days: 90

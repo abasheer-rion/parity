@@ -19,3 +19,19 @@ export function LegalLinks({ className = "", cookieSettings = true }: { classNam
     </nav>
   );
 }
+
+/** Changelog, announcements and status, with their RSS feeds (DEC-0073). Built by scripts/updates/build.py. */
+export const UPDATE_PAGES = [
+  { href: "/changelog/", label: "Changelog" },
+  { href: "/announcements/", label: "Announcements" },
+  { href: "/status/", label: "Status" },
+] as const;
+
+export function UpdatesLinks({ className = "" }: { className?: string }) {
+  return (
+    <nav className={`legal-links ${className}`} aria-label="Updates">
+      {UPDATE_PAGES.map((p) => <a key={p.href} href={p.href}>{p.label}</a>)}
+      {UPDATE_PAGES.map((p) => <a key={`${p.href}feed`} href={`${p.href}feed.xml`}>{p.label} RSS</a>)}
+    </nav>
+  );
+}

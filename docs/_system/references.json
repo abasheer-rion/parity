@@ -42112,6 +42112,121 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-6b415a56",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Indexing API Quickstart",
+      "venue": "Google Search Central",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.google.com/search/apis/indexing-api/v3/quickstart",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-75a0b4a0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Spam policies for Google web search",
+      "venue": "Google Search Central",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-ae28dca7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Sitemaps XML format",
+      "venue": "sitemaps.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sitemaps.org/protocol.html",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-fd2cc8bf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IndexNow documentation",
+      "venue": "IndexNow",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.indexnow.org/documentation",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-af93d875",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Lighthouse CI",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/GoogleChrome/lighthouse-ci",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
     }
   ]
 }
