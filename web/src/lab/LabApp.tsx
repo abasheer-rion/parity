@@ -180,7 +180,7 @@ function LabShell() {
     <div className="plb" data-density={settings.density} data-mobile={mobile || undefined}>
       <div className="plb-glow" aria-hidden />
       <SkipLink />
-      <header className="lb-top">
+      <header className="lb-top" data-desktop-header>
         <button type="button" className="lb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
           <span aria-hidden>‹</span>
           <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />

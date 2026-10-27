@@ -72,6 +72,9 @@
 
 /* ---------- Top bar ---------- */
 .pac-top { display: flex; align-items: center; gap: 10px; padding: 0 12px 0 0; border-bottom: 1px solid var(--a-line); background: color-mix(in srgb, var(--color-canvas) 55%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); min-width: 0; }
+/* Desktop app: the window's controls sit at this row's left, over the page (desktop/electron/preload.js sets the variables). */
+html[data-desktop-chrome] .pac { --a-top: var(--desktop-chrome-h); }
+html[data-desktop-chrome] .pac-top { padding-left: var(--desktop-chrome-left); padding-right: calc(12px + var(--desktop-chrome-right)); }
 .pac-back { display: inline-flex; align-items: center; gap: 7px; height: 100%; padding: 0 14px; border: 0; border-right: 1px solid var(--a-line); background: transparent; color: var(--a-muted); font: inherit; font-size: var(--type-sm); cursor: pointer; flex: none; }
 .pac-back:hover { color: var(--a-text); background: var(--a-hover); }
 .pac-brand { font-size: var(--type-2xs); letter-spacing: .16em; color: var(--a-muted); white-space: nowrap; flex: none; }

@@ -286,7 +286,7 @@ function TradeShell() {
       <div className="ptr" data-density={settings.density} data-mobile={mobile || undefined}>
         <SkipLink />
         {isDesktop() && list.length > 0 && <DesktopTicker list={list} />}
-        <header className="tb">
+        <header className="tb" data-desktop-header>
           <button type="button" className="tb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden>‹</span>
             <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />

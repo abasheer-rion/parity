@@ -73,6 +73,42 @@ th { color: var(--text); font-weight: 600; border-bottom-color: var(--line-2); }
 .lg-legal a:is(:hover, :focus-visible), .lg-legal button:is(:hover, :focus-visible) { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 .lg-legal a[aria-current="page"] { color: var(--muted); }
 
+/* The AI app guides (web/connect/<app>/, DEC-0051): links between guides, numbered steps,
+   a box to copy an address or command, and diagrams drawn as inline SVG. */
+.gd-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 24px; }
+.gd-nav a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: var(--radius-pill); border: 1px solid var(--line-2); color: var(--muted); font-size: var(--type-sm); text-decoration: none; }
+.gd-nav a:hover { color: var(--text); }
+.gd-nav a[aria-current="page"] { color: var(--text); border-color: var(--color-border-max); background: var(--color-fill); }
+.gd-tools th code { word-break: normal; white-space: nowrap; }
+.gd-lead { color: var(--text); font-size: var(--type-lg); }
+.gd-steps { counter-reset: step; list-style: none; padding: 0; }
+.gd-steps > li { counter-increment: step; position: relative; padding: 0 0 0 40px; margin: 0 0 16px; }
+.gd-steps > li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: var(--radius-pill); border: 1px solid var(--line-2); color: var(--text); font-size: var(--type-sm); font-weight: 600; display: grid; place-items: center; }
+.gd-copy { display: flex; gap: 8px; align-items: stretch; margin: 6px 0 12px; }
+.gd-copy pre { flex: 1; min-width: 0; margin: 0; overflow-x: auto; padding: 10px 12px; border-radius: var(--radius-md); border: 1px solid var(--line-2); background: var(--color-fill); color: var(--text); font: var(--type-sm)/1.5 "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+.gd-copy button { appearance: none; flex: none; min-width: 72px; min-height: 40px; padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--line-2); background: none; color: var(--text); font: inherit; font-size: var(--type-sm); cursor: pointer; }
+.gd-copy button:hover { border-color: var(--color-border-max); }
+.gd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.gd-note { padding: 12px 14px; margin: 0 0 16px; border-radius: var(--radius-md); border: 1px solid var(--line-2); background: var(--color-fill); }
+.gd-note p:last-child { margin: 0; }
+.gd-fig { margin: 8px 0 20px; }
+.gd-fig svg { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid var(--line); background: var(--color-surface); }
+.gd-fig figcaption { margin-top: 6px; color: var(--faint); font-size: var(--type-sm); }
+.gd-fig .s-panel { fill: var(--color-surface-raised); stroke: var(--color-border-strong); }
+.gd-fig .s-field { fill: var(--color-input); stroke: var(--color-border-control); }
+.gd-fig .s-btn { fill: var(--color-primary); }
+.gd-fig .s-btn-text { fill: var(--color-on-primary); font: 600 var(--type-sm) Inter, sans-serif; }
+.gd-fig .s-quiet { fill: none; stroke: var(--color-border-strong); }
+.gd-fig .s-text { fill: var(--color-text); font: 500 var(--type-sm) Inter, sans-serif; }
+.gd-fig .s-title { fill: var(--color-text); font: 600 var(--type-md) Inter, sans-serif; }
+.gd-fig .s-muted { fill: var(--color-text-muted); font: 400 var(--type-xs) Inter, sans-serif; }
+.gd-fig .s-mono { fill: var(--color-text); font: 400 var(--type-xs) "IBM Plex Mono", ui-monospace, monospace; }
+.gd-fig .s-mark { fill: var(--color-accent); }
+.gd-fig .s-line { stroke: var(--color-text-muted); stroke-width: 1.5; fill: none; }
+.gd-fig .s-arrow { fill: var(--color-text-muted); }
+.gd-fig .s-tick { fill: none; stroke: var(--color-border-control); }
+.gd-fig .s-ok { fill: var(--color-positive); }
+
 @media (max-width: 520px) {
   .lg-top { padding: 16px 12px 0 10px; }
   main { padding-top: 40px; }

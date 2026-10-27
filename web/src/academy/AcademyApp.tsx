@@ -191,7 +191,7 @@ function AcademyShell() {
     <div className="pac" data-text={settings.text} data-mobile={mobile || undefined} data-player={route.view === "lesson" || undefined}>
       <div className="pac-orbs" aria-hidden><i /><i /><i /></div>
       <SkipLink />
-      <header className="pac-top">
+      <header className="pac-top" data-desktop-header>
         <button type="button" className="pac-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
           <span aria-hidden>‹</span>
           <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />

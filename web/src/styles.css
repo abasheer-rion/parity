@@ -305,6 +305,14 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .dotgrid { fill: var(--dot); }
 .icon { flex: none; }
 .frame { display: grid; grid-template-columns: var(--side-w) minmax(0, 1fr); min-height: 100vh; }
+/* Desktop app: the window's controls sit in a band at the top of the sidebar, which is at least
+   as wide as they need (desktop/electron/preload.js sets the variables). Hidden in a browser. */
+.desktop-band { display: none; }
+html[data-desktop-chrome] .desktop-band { display: block; flex: none; position: sticky; top: 0; z-index: 2; height: var(--desktop-chrome-h); background: inherit; }
+html[data-desktop-chrome] .frame:not(.railed) { grid-template-columns: max(var(--side-w), var(--desktop-chrome-left)) minmax(0, 1fr); }
+html[data-desktop-chrome="win32"] .topbar { padding-right: calc(24px + var(--desktop-chrome-right)); }
+html[data-desktop-chrome] .frame.railed .main-col { padding-top: var(--desktop-chrome-h); }
+@media (max-width: 860px) { html[data-desktop-chrome] .main-col { padding-top: var(--desktop-chrome-h); } }
 
 /* Sidebar */
 .side {

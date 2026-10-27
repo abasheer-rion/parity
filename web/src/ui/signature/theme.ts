@@ -130,7 +130,8 @@ export function layout(vp: Viewport, o: { pills?: boolean; head?: boolean; xAxis
     const headH = o.head === false ? 0 : (clip ? 0.2 : 0.22) * h;
     const head: Box = { x0: pad, y0: pad * (clip ? 2 : 0.6), x1: w - pad, y1: pad * (clip ? 2 : 0.6) + headH };
     const footH = clip ? h * 0.14 : 0;
-    const plot: Box = { x0: pad, y0: head.y1 + 10 * u, x1: w - pad - right, y1: h - pad * 0.8 - xAxis - footH };
+    // On clips, a gap between the axis labels and the burned-in caption below them.
+    const plot: Box = { x0: pad, y0: head.y1 + 10 * u, x1: w - pad - right, y1: h - pad * 0.8 - xAxis - footH - (clip ? 14 * u : 0) };
     return { head, plot, right, foot: { x0: pad, y0: h - footH - pad, x1: w - pad, y1: h - pad } };
   }
   // 16:9 lesson.
