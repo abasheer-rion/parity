@@ -7,6 +7,7 @@ import { ROUTES } from "./config";
 import { Splash } from "./form";
 import { go } from "./nav";
 import { withNext } from "./redirect";
+import { offlineUser } from "./offline";
 import { needsSecondStep, signOut, useSession } from "./session";
 
 /** The log-in address for the current page, so signing in comes straight back here. */
@@ -36,10 +37,21 @@ function SessionGuard({ children }: { children: (user: GuardUser) => ReactNode }
   const [state, setState] = useState<"checking" | "ok" | "failed">("checking");
   const [attempt, setAttempt] = useState(0);
 
+  const [offline, setOffline] = useState<GuardUser | null>(null);
+
   useEffect(() => {
     if (loading) return;
-    if (!session) { toLogin(); return; }
     let live = true;
+    if (!session) {
+      // The desktop app's bundled copy, started offline: signed in as the app's cookie says.
+      offlineUser().then((u) => {
+        if (!live) return;
+        if (u) setOffline({ email: u.email, id: u.id, signOut: () => void signOut() });
+        else toLogin();
+      }, () => { if (live) toLogin(); });
+      return () => { live = false; };
+    }
+    setOffline(null);
     needsSecondStep()
       .then((pending) => { if (!live) return; if (pending) toLogin(true); else setState("ok"); })
       .catch(() => { if (live) setState("failed"); });
@@ -54,6 +66,7 @@ function SessionGuard({ children }: { children: (user: GuardUser) => ReactNode }
       </Splash>
     );
   }
+  if (!session && offline) return <>{children(offline)}</>;
   if (!session || state !== "ok") return <Splash />;
   return <>{children({ email: session.user.email ?? null, id: session.user.id, signOut: () => void signOut() })}</>;
 }

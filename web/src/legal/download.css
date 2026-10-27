@@ -1,0 +1,13 @@
+/* The download page (web/download/, DEC-0072): three cards, one per installer, on the
+   legal pages' plain dark document. Colours and sizes come from the tokens only. */
+.dl-lead { font-size: var(--type-lg); color: var(--text); }
+.dl-grid { list-style: none; padding: 0; margin: 24px 0 8px; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.dl-card { margin: 0; padding: 18px; border: 1px solid var(--line); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+.dl-card h2 { margin: 0; font-size: var(--type-md); color: var(--text); }
+.dl-card p { margin: 0; font-size: var(--type-sm); }
+.dl-btn { display: inline-flex; align-items: center; justify-content: center; text-align: center; min-height: 40px; margin-top: auto; padding: 0 14px; border-radius: 9px; font-weight: 600; font-size: var(--type-sm); text-decoration: none; color: var(--color-canvas); background: var(--text); }
+.dl-btn:hover { background: var(--palette-white); color: var(--palette-black); }
+.dl-card[data-mine] { border-color: var(--line-2); }
+.dl-size { color: var(--faint); min-height: 1lh; }
+.dl-which { font-size: var(--type-sm); }
+.dl td code { word-break: break-all; font-size: var(--type-xs); }

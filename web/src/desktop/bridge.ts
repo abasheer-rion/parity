@@ -16,7 +16,14 @@ export interface ParityDesktop {
    * Older apps do not have it, so callers check it exists.
    */
   setTicker?: (items: DesktopTickerItem[]) => void;
+  /** Since app 0.2.4 (DEC-0072): the app asks the page to check its session after sleep, unlock, reconnecting and every 30 minutes. */
+  onSessionCheck?: (cb: () => void) => void;
+  /** Since app 0.2.4: who is signed in, for the bundled copy when the app starts offline. Id and email only, never a token. */
+  savedUser?: () => Promise<DesktopUser | null>;
 }
+
+/** The signed-in person as the app's session cookie names them. */
+export interface DesktopUser { id: string; email: string | null }
 
 /** One instrument in the menu bar ticker: the short symbol, the last price and the day's change, as shown in Trade. */
 export interface DesktopTickerItem { symbol: string; last: string; change: string; up: boolean | null }

@@ -20,8 +20,8 @@ const API = "https://api.github.com";
 
 export interface FeedEnv { DESKTOP_RELEASES_TOKEN?: string }
 
-export interface ReleaseAsset { id: number; name: string; size: number }
-export interface Release { tag_name: string; draft: boolean; prerelease: boolean; published_at: string | null; assets: ReleaseAsset[] }
+export interface ReleaseAsset { id: number; name: string; size: number; digest?: string | null; browser_download_url?: string }
+export interface Release { tag_name: string; draft: boolean; prerelease: boolean; published_at: string | null; html_url?: string; assets: ReleaseAsset[] }
 
 type Fetch = (input: string, init?: RequestInit) => Promise<Response>;
 

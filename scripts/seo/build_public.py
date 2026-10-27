@@ -283,7 +283,7 @@ def crumbs_ld(trail: list[tuple[str, str]]) -> dict:
 # The public sections, in the order the header lists them. Blog and News are built by
 # scripts/newsroom/build.py (DEC-0057).
 NAV = (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes"),
-       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"))
+       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"), ("download", "/download/", "Download"))
 
 
 def nav_html(section: str, path: str = "") -> str:
@@ -763,7 +763,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/"]
+STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:
