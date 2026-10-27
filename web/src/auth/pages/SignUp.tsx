@@ -6,6 +6,7 @@ import { useState } from "react";
 import { explain, requireClient } from "../client";
 import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
+import { passwordsMatch } from "../PasswordMeter";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem, passwordProblem } from "../rules";
 import { welcomeNew } from "../session";
@@ -16,6 +17,7 @@ export function SignUp() {
   const { next, email, setEmail, carry, show } = useFlow();
   const [step, setStep] = useState<"email" | "password">("email");
   const [password, setPassword] = useState("");
+  const [again, setAgain] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [sentTo, setSentTo] = useState<string | null>(carry.check ?? null);
   const form = useSubmit();
@@ -29,6 +31,7 @@ export function SignUp() {
   const submit = form.run(async () => {
     const bad = passwordProblem(password);
     if (bad) return { field: "password", message: bad };
+    if (!passwordsMatch(password, again)) return { field: "again", message: "Passwords do not match." };
     if (!agreed) return { field: "terms", message: "Please agree to the terms and the privacy policy to continue." };
     const { data, error } = await requireClient().auth.signUp({
       email: email.trim(),
@@ -52,6 +55,7 @@ export function SignUp() {
         <form className="pa-form" onSubmit={submit} noValidate>
           <input type="email" name="email" autoComplete="username" value={email.trim()} readOnly hidden />
           <PasswordField label="Choose a password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus error={form.errorFor("password")} />
+          <PasswordField label="Confirm password" auto="new-password" name="confirm-password" value={again} onChange={setAgain} match={password} error={form.errorFor("again")} />
           <label className="pa-check">
             <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required
               aria-invalid={termsError ? true : undefined} aria-describedby={termsError ? "pa-terms-err" : undefined} />
@@ -59,7 +63,7 @@ export function SignUp() {
           </label>
           {termsError && <span className="pa-error" id="pa-terms-err" role="alert">{termsError}</span>}
           <Notice>{form.general}</Notice>
-          <Submit busy={form.busy}>Create account</Submit>
+          <Submit busy={form.busy} disabled={!passwordsMatch(password, again)}>Create account</Submit>
         </form>
       </Screen>
     );

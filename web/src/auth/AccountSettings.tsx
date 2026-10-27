@@ -6,6 +6,7 @@ import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
 import { PASSKEYS_ENABLED, PASSWORD_MIN } from "./config";
 import { Field, Notice, PasswordField, useSubmit } from "./form";
+import { passwordsMatch } from "./PasswordMeter";
 import { emailLanding } from "./redirect";
 import { codeProblem, emailProblem, passwordProblem } from "./rules";
 import { signOut, useSession, useTeamBadge } from "./session";
@@ -125,7 +126,7 @@ function ChangePassword({ email }: { email: string }) {
   const save = run(async () => {
     const bad = passwordProblem(password);
     if (bad) return bad;
-    if (password !== again) return "The two passwords do not match.";
+    if (!passwordsMatch(password, again)) return "Passwords do not match.";
     if (needCode) { const c = codeProblem(nonce); if (c) return c; }
     const client = requireClient();
     const { error } = await client.auth.updateUser(needCode ? { password, nonce } : { password });
@@ -146,11 +147,10 @@ function ChangePassword({ email }: { email: string }) {
       <Notice>{error}</Notice>
       <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
       <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus />
-      <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain}
-        error={again && password !== again ? "Does not match yet." : null} />
+      <PasswordField label="Confirm password" auto="new-password" name="confirm-password" value={again} onChange={setAgain} match={password} />
       {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus />}
       <div className="account-actions">
-        <Button type="submit" variant="primary" loading={busy}>Save password</Button>
+        <Button type="submit" variant="primary" loading={busy} disabled={!passwordsMatch(password, again)}>Save password</Button>
         <Button onClick={reset}>Cancel</Button>
       </div>
     </form>

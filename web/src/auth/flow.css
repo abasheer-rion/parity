@@ -160,6 +160,8 @@
 .pa-btn { transition: background-color var(--dur-2), border-color var(--dur-2), color var(--dur-2), transform var(--dur-2) var(--pa-spring); }
 .pa-btn:active { transform: scale(.97); }
 .pa-btn[data-busy] { cursor: progress; }
+.pa-btn:disabled:not([data-busy]) { opacity: .5; cursor: not-allowed; }
+.pa-btn:disabled:not([data-busy]):active { transform: none; }
 .pa-btn[data-busy] .pa-btn-label { opacity: .75; }
 .pa-btn-label, .pa-spin { transition: opacity var(--dur-2), transform var(--dur-2) var(--ease); }
 

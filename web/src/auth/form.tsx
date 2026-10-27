@@ -3,7 +3,7 @@
 // messages that screen readers announce, and a small async-submit helper. The public
 // sign-in panel has its own, in the front page's style (fields.tsx, DEC-0044).
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { PasswordMeter } from "./PasswordMeter";
+import { PasswordMatch, passwordsMatch, PasswordMeter } from "./PasswordMeter";
 import { emailProblem } from "./rules";
 import "./auth.css";
 
@@ -58,15 +58,19 @@ export function Field({ label, value, onChange, type = "text", auto, hint, autoF
 
 /**
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
- * off each rule as the person types (for new passwords).
+ * off each rule as the person types (for new passwords). With `match`, it is the confirm
+ * field for that password and says whether the two match.
  */
-export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error, email }: {
+export function PasswordField({ label, value, onChange, auto, autoFocus, name, rules, error, email, match }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
-  autoFocus?: boolean; name?: string; rules?: boolean; email?: string; error?: string | null;
+  autoFocus?: boolean; name?: string; rules?: boolean; email?: string; error?: string | null; match?: string;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
+  const [left, setLeft] = useState(false);
+  const confirm = match !== undefined;
+  const mismatch = confirm && value.length > 0 && !passwordsMatch(match, value) && (left || !match.startsWith(value));
+  const described = [rules ? `${id}-rules` : "", confirm ? `${id}-match` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="ui-field auth-field">
       <label className="ui-field-label" htmlFor={id}>{label}</label>
@@ -82,8 +86,9 @@ export function PasswordField({ label, value, onChange, auto, autoFocus, name, r
           autoComplete={auto}
           spellCheck={false}
           autoCapitalize="none"
-          aria-invalid={error ? true : undefined}
+          aria-invalid={error || mismatch ? true : undefined}
           aria-describedby={described}
+          onBlur={() => setLeft(true)}
           onChange={(e) => onChange(e.target.value)}
         />
         <button type="button" className="auth-pw-toggle" aria-controls={id} aria-pressed={shown}
@@ -92,6 +97,7 @@ export function PasswordField({ label, value, onChange, auto, autoFocus, name, r
         </button>
       </div>
       {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
+      {confirm && <PasswordMatch password={match} value={value} id={`${id}-match`} left={left} />}
       {error && <span className="auth-field-error" id={`${id}-err`}>{error}</span>}
     </div>
   );

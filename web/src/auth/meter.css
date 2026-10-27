@@ -75,3 +75,25 @@
 @media (prefers-reduced-motion: reduce) {
   .pw-seg::after, .pw-word, .pw-rules li, .pw-mark, .pw-mark svg { transition: none !important; }
 }
+
+/* The line under a confirm-password field (PasswordMatch). */
+.pw-match {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 1.5em;
+  font-size: var(--type-sm);
+  line-height: 1.5;
+  color: var(--faint, var(--muted, currentColor));
+}
+.pw-match.bad { color: var(--bad); }
+.pw-match.ok { color: var(--good); }
+.pw-match.ok .pw-mark { background: var(--good); border-color: var(--good); animation: pw-pop var(--dur-4) var(--ease-spring); }
+.pw-match.ok .pw-mark svg { opacity: 1; transform: none; color: var(--palette-term-0); }
+.pw-match.ok .pw-mark path { stroke-dasharray: 12; stroke-dashoffset: 12; animation: pw-draw var(--dur-4) ease-out var(--dur-1) forwards; }
+@keyframes pw-pop { from { transform: scale(.4); } to { transform: none; } }
+@keyframes pw-draw { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pw-match .pw-mark, .pw-match .pw-mark path { animation: none !important; stroke-dashoffset: 0; }
+}
