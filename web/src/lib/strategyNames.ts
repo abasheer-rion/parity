@@ -150,6 +150,11 @@ export const STRATEGY_NAMES: Record<string, StrategyLabel> = {
   stocks_skip_weekend: { name: "Weekend Off", tagline: "Holds US stocks every night except over the weekend." },
   stocks_pre_fomc: { name: "Fed Day Drift", tagline: "Holds US stocks only over scheduled Fed announcement days." },
   stocks_fomc_even_weeks: { name: "Fed Cycle", tagline: "Holds US stocks in the even weeks of the Fed meeting cycle." },
+  pairs_distance_ind49: { name: "Close Twins", tagline: "Bets that gaps close between industries whose prices move alike." },
+  pairs_coint_ind49: { name: "Steady Gap", tagline: "Trades industry pairs whose price gap has stayed stable." },
+  pairs_coint_linked_ind49: { name: "Business Partners", tagline: "Trades hand-picked linked industries, like soft drinks and beer." },
+  pairs_kalman_linked_ind49: { name: "Moving Hedge", tagline: "Trades linked industries with a hedge that updates every day." },
+  pairs_pca_ind49: { name: "Snap Back", tagline: "Bets that an industry's move beyond the market fades." },
 };
 
 // Short id parts that read better spelled out or in capitals.

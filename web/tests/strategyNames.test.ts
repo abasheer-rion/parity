@@ -41,7 +41,8 @@ describe("strategy names", () => {
   });
 
   it("has no names for ids the engine does not know", () => {
-    expect(Object.keys(STRATEGY_NAMES).filter((id) => !KNOWN_IDS.includes(id))).toEqual([]);
+    const known = new Set([...KNOWN_IDS, ...engineIds()]);
+    expect(Object.keys(STRATEGY_NAMES).filter((id) => !known.has(id))).toEqual([]);
   });
 
   it("covers every strategy the engine declares by a literal id", () => {
