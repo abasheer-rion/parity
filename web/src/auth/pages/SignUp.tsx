@@ -4,7 +4,8 @@
 // person straight in.
 import { useState } from "react";
 import { explain, requireClient } from "../client";
-import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
+import { explainSend, waitSeconds } from "../errors";
+import { EMAIL_GAP_SECONDS, Field, LEAVING, Notice, PasswordField, Submit, TextButton, useCooldown, useSubmit, Who } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
 import { passwordsMatch } from "../PasswordMeter";
 import { emailLanding } from "../redirect";
@@ -38,7 +39,7 @@ export function SignUp() {
       password,
       options: { emailRedirectTo: emailLanding(next) },
     });
-    if (error) return explain(error);
+    if (error) return explainSend(error);
     track("sign_up", { method: "email" });
     if (data.session) { await welcomeNew(show); return LEAVING; }
     // No session: confirmation is on. Supabase answers the same way for an address that
@@ -89,6 +90,8 @@ export function CheckEmail({ email }: { email: string }) {
   const [resent, setResent] = useState(false);
   const form = useSubmit();
   const resend = useSubmit();
+  const cooldown = useCooldown();
+  const left = cooldown.leftFor(email);
 
   const verify = form.run(async () => {
     const bad = codeProblem(code);
@@ -100,9 +103,14 @@ export function CheckEmail({ email }: { email: string }) {
   });
 
   const again = resend.run(async () => {
+    if (left) return null;
     setResent(false);
     const { error } = await requireClient().auth.resend({ type: "signup", email, options: { emailRedirectTo: emailLanding(next) } });
-    if (error) return explain(error);
+    // One email per address every 30 seconds: count down instead of showing an error.
+    const wait = waitSeconds(error);
+    if (wait) { cooldown.start(wait, email); return null; }
+    if (error) return explainSend(error);
+    cooldown.start(EMAIL_GAP_SECONDS, email);
     setResent(true);
   });
 
@@ -116,7 +124,7 @@ export function CheckEmail({ email }: { email: string }) {
         <Submit busy={form.busy}>Confirm email</Submit>
       </form>
       <div className="pa-alt">
-        <TextButton onClick={() => void again()} disabled={resend.busy}>{resend.busy ? "Sending" : "Send the email again"}</TextButton>
+        <TextButton onClick={() => void again()} disabled={resend.busy || left > 0}>{resend.busy ? "Sending" : left ? `Send again in ${left}s` : "Send the email again"}</TextButton>
         <SwitchLink className="pa-text" to="login">Back to log in</SwitchLink>
       </div>
     </Screen>

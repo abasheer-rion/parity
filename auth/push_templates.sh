@@ -84,7 +84,8 @@ if settings:
         "password_required_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789",
         "mailer_otp_exp": 3600,
         "mailer_otp_length": 6,
-        "smtp_max_frequency": 60,
+        "smtp_max_frequency": 30,                         # seconds between emails to one address (web/src/auth/fields.tsx)
+        "rate_limit_otp": 60,                             # code sign-ins per hour
     })
 
 if smtp:
@@ -94,8 +95,8 @@ if smtp:
         "smtp_user": "resend",
         "smtp_pass": "<from Keychain: resend-api-key>",
         "smtp_admin_email": SMTP_FROM,
-        "smtp_sender_name": "Parity",
-        "rate_limit_email_sent": 100,                     # per hour; Supabase starts custom SMTP at 30
+        "smtp_sender_name": "Parity Trading",
+        "rate_limit_email_sent": 200,                     # per hour; Supabase starts custom SMTP at 30
     })
 
 for k, v in body.items():

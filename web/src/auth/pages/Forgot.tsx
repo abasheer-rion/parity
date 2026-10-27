@@ -1,7 +1,8 @@
 // Forgot password: email a reset link and code, then accept either.
 import { useState } from "react";
 import { explain, requireClient } from "../client";
-import { Field, Notice, Submit, TextButton, useSubmit } from "../fields";
+import { explainSend, waitSeconds } from "../errors";
+import { EMAIL_GAP_SECONDS, Field, Notice, Submit, TextButton, useCooldown, useSubmit } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem } from "../rules";
@@ -15,14 +16,21 @@ export function Forgot({ onSignedIn, wait }: { onSignedIn: () => void; wait?: bo
   const [code, setCode] = useState("");
   const [sent, setSent] = useState(false);
   const form = useSubmit();
+  const cooldown = useCooldown();
+  const left = cooldown.leftFor(email);
 
   const send = form.run(async () => {
     const bad = emailProblem(email);
     if (bad) return { field: "email", message: bad };
+    if (left) return null;
     // The link in the email goes to /verify/, which then opens /reset/ to choose the
     // password and carries on to `next` (see the recovery template and Verify.tsx).
     const { error } = await requireClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: emailLanding(next) });
-    if (error) return explain(error);
+    // One email per address every 30 seconds: count down instead of showing an error.
+    const wait = waitSeconds(error);
+    if (wait) { cooldown.start(wait, email); return null; }
+    if (error) return explainSend(error);
+    cooldown.start(EMAIL_GAP_SECONDS, email);
     setSent(true);
   });
 
@@ -55,7 +63,8 @@ export function Forgot({ onSignedIn, wait }: { onSignedIn: () => void; wait?: bo
       <form className="pa-form" onSubmit={send} noValidate>
         <Field label="Email" type="email" auto="username" value={email} onChange={setEmail} autoFocus error={form.errorFor("email")} />
         <Notice>{form.general}</Notice>
-        <Submit busy={form.busy}>Send reset email</Submit>
+        <Notice tone="info">{left ? `We just sent an email to this address. You can send another in ${left} seconds.` : null}</Notice>
+        <Submit busy={form.busy} disabled={left > 0}>{left ? `Send again in ${left}s` : "Send reset email"}</Submit>
       </form>
       <p className="pa-switch">Remembered it? <SwitchLink to="login">Back to log in</SwitchLink></p>
     </Screen>
