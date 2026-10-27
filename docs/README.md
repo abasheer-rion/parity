@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 74 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 75 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
@@ -32,12 +32,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
+- 2026-10-27 [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
 - 2026-10-27 [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - 2026-10-27 [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
 - 2026-10-27 [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - 2026-10-26 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
-- 2026-10-26 [REF-0029: Going live with real trading](reference/0029-going-live-with-real-trading.md)
 
 ## intent
 
@@ -125,6 +125,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0073 | [Search and content run by themselves, with caps, a log and a kill switch](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process) |
 | DEC-0075 | [The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0076 | [Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md) | accepted | 2026-10-27 | [kpis](TAGS.md#kpis), [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0077 | [New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

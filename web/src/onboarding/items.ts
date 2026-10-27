@@ -63,8 +63,8 @@ export function itemList(links: { connect: string; verify: string; trade: string
   ];
 }
 
-/** The welcome after sign-up (src/auth/pages/Welcome.tsx, DEC-0044) asks what the person
- *  wants to do first and keeps the picks in this browser under this key. */
+/** What the person wants to do first, from the first-run intro (DEC-0077, introRules.ts
+ *  picksFor). Saved with the account and copied into this browser under this key. */
 export const INTERESTS_KEY = "parity.interests.v1";
 const FOR_INTEREST: Record<string, Exclude<ItemId, "broker">> = { verify: "verify", trade: "trade", strategies: "watch", learn: "lesson" };
 

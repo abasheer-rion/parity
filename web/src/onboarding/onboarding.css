@@ -58,3 +58,20 @@
 .onb-pop { margin: 0; box-shadow: none; background: none; padding: 0; border: 0; }
 .onb-pop .onb-list { grid-template-columns: minmax(0, 1fr); }
 @media (max-width: 860px) { .setup-lbl { display: none; } }
+
+/* One clear next step on Home after the first-run intro (NextStep.tsx, DEC-0077): a big card
+   on the charcoal layers with one Invicta blue button. */
+.onb-next {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-6);
+  margin: 0 0 var(--space-6); padding: var(--space-8);
+  border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+  background:
+    radial-gradient(70% 120% at 0% 0%, color-mix(in srgb, var(--color-glow) 30%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
+}
+.onb-next-text { flex: 1 1 26rem; min-width: 0; }
+.onb-next-title { margin: 0; font-family: var(--font-display); font-size: var(--type-display-sm); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+.onb-next-body { margin: var(--space-3) 0 0; max-width: 60ch; color: var(--color-text-body); font-size: var(--type-xl); line-height: 1.5; }
+.onb-next-count { margin: var(--space-3) 0 0; color: var(--color-text-muted); font-size: var(--type-sm); }
+.onb-next-acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+@media (max-width: 640px) { .onb-next { padding: var(--space-5); } }

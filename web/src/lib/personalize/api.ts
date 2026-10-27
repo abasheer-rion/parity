@@ -24,6 +24,8 @@ export interface Profile {
   inputs: Record<string, number>;
   sources: string[];
   computed_at: string;
+  /** Client only: what the person said in the first-run intro (DEC-0077), mixed in by withStated. */
+  stated?: { asset: string[]; kind: string[] };
 }
 
 export interface WidgetState { widget_id: string; ignored_sessions: number; choice: WidgetChoice; last_used_at: string | null }

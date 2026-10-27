@@ -12,6 +12,8 @@ import { trackOutcome, useVariant } from "../lib/personalize/experiments";
 import { rank, type Ranked } from "../lib/personalize/rank";
 import { reloadPersonal, usePersonal } from "../lib/personalize/usePersonal";
 import { storeUserId } from "../lib/userStore";
+import { useOnboarding } from "../onboarding/store";
+import { withStated } from "../onboarding/introRules";
 import type { Report } from "../lib/types";
 import { Disclosure, IconButton } from "../ui";
 import "./whatsNew.css";
@@ -37,6 +39,8 @@ export function WhatsNew({ report }: { report: Report }) {
 
   const cands = useMemo(() => allCandidates({ report, ...extra }), [report, extra]);
   const on = !!personal?.settings.enabled;
+  const ob = useOnboarding().row;
+  const stated = useMemo(() => ({ goal: ob.intro_goal, level: ob.intro_level, markets: ob.intro_markets }), [ob.intro_goal, ob.intro_level, ob.intro_markets]);
 
   useEffect(() => {
     if (!on) { setArms([]); return; }
@@ -49,14 +53,15 @@ export function WhatsNew({ report }: { report: Report }) {
   const items: Ranked[] = useMemo(() => {
     if (!ready) return [];
     return rank(cands, {
-      profile: on ? personal?.profile ?? null : null,
+      // What the person said in the first-run intro counts until their own use outweighs it.
+      profile: on ? withStated(personal?.profile ?? null, stated) : null,
       arms: arms ?? [],
       feedback: personal?.feedback ?? [],
       seed: storeUserId() ?? "anon",
       order: on ? order.variant : "control",
       limit: 6,
     }).filter((r) => !gone.includes(r.item));
-  }, [ready, cands, on, personal, arms, order.variant, gone]);
+  }, [ready, cands, on, personal, arms, order.variant, gone, stated]);
 
   // One show per item per page view; the database counts at most one an hour.
   const shown = useRef(new Set<string>());

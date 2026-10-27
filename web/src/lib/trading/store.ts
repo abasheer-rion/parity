@@ -1,6 +1,6 @@
 // Where the trading service keeps orders, the audit log and warnings (DEC-0046). Production
 // uses Supabase's REST API with the service role key, the only role that can write these
-// tables (supabase/migrations/20261113120000_broker_sandbox.sql); tests use memoryStore().
+// tables (supabase/migrations/20261115000000_broker_sandbox.sql); tests use memoryStore().
 // Imported by Pages Functions, so nothing here may read import.meta.env.
 import type { AssetClass, OrderClass, OrderSide, OrderType, TimeInForce } from "./types";
 

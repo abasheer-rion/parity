@@ -1,4 +1,4 @@
--- Checks for 20261113120000_broker_sandbox.sql (DEC-0046), run by supabase/tests/local.sh after
+-- Checks for 20261115000000_broker_sandbox.sql (DEC-0046), run by supabase/tests/local.sh after
 -- every migration is applied. Each check raises an exception when a rule does not hold. Runs
 -- in one transaction that is rolled back.
 

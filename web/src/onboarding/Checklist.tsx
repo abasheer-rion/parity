@@ -4,20 +4,12 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Icon, Toggle } from "../ui";
 import { academyUrl, productUrl, tradeUrl } from "../lib/space";
-import { INTERESTS_KEY, itemList, orderByInterests, progress, type ItemState } from "./items";
+import { itemList, orderByInterests, progress, type ItemState } from "./items";
+import { picksOf } from "./introRules";
 import { refreshSignals, setChecklistHidden, setNotifyBrokerage, stampsOf, useOnboarding } from "./store";
 import "./onboarding.css";
 
 const WalletDialog = lazy(() => import("./Wallet").then((m) => ({ default: m.WalletDialog })));
-
-function readPicks(): string[] {
-  try {
-    const v = JSON.parse(window.localStorage.getItem(INTERESTS_KEY) ?? "[]");
-    return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
-  } catch {
-    return [];
-  }
-}
 
 /** Links from the product app to where each action happens. */
 export function productLinks() {
@@ -29,8 +21,9 @@ export { WalletDialog };
 
 export function useChecklist() {
   const s = useOnboarding();
-  // What the person picked in the welcome after sign-up comes first.
-  const items = useMemo(() => orderByInterests(itemList(productLinks()), readPicks()), []);
+  // What the person said in the first-run intro comes first (DEC-0077).
+  const picks = picksOf(s.row).join(",");
+  const items = useMemo(() => orderByInterests(itemList(productLinks()), picks ? picks.split(",") : []), [picks]);
   return { s, p: progress(items, stampsOf(s.row), s.signals, { mfaAvailable: s.mfaAvailable }) };
 }
 
