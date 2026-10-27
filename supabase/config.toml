@@ -151,7 +151,7 @@ max_indexes = 5
 enabled = true
 # The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
 # in emails.
-# Parity: local dev. The hosted project's site URL is https://paritytrading.app (DEC-0069),
+# Parity: local dev. The hosted project's site URL is https://paritytrading.app (DEC-0071),
 # set by auth/push_templates.sh --settings (this file only drives `supabase start`).
 site_url = "http://127.0.0.1:5173"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.

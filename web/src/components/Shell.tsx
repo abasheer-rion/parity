@@ -113,6 +113,7 @@ export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
     { id: "personalization", label: "Personalization" },
+    { id: "api-keys", label: "API keys" },
   ] },
 ];
 

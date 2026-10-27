@@ -65,7 +65,7 @@ async function report(ctx: ToolContext): Promise<Report> {
   return r;
 }
 
-async function termIndex(ctx: ToolContext): Promise<TermIndex> {
+export async function termIndex(ctx: Pick<ToolContext, "data">): Promise<TermIndex> {
   const t = await ctx.data.json<TermIndex>("/data/terminal/index.json");
   if (!t) throw new ToolError("The market data has not been published yet.");
   return t;
@@ -106,7 +106,7 @@ async function findLesson(ctx: ToolContext, course: string, lesson: string) {
   return { c, l };
 }
 
-function seriesRow(s: TermSeries) {
+export function seriesRow(s: TermSeries) {
   return {
     key: s.key, name: s.label, short: s.short, class: s.class, unit: s.unit, frequency: s.freq,
     first: s.first, as_of: s.asof, last: s.last, change_1w: round(s.chg?.w1 ?? null), change_1m: round(s.chg?.m1 ?? null),

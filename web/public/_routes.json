@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/trade", "/trade/*", "/academy", "/academy/*", "/lab", "/lab/*", "/data/*", "/badge/*", "/v/*", "/s/*", "/og/badge/*", "/og/strategy/*", "/api/payments/*", "/rum", "/e", "/desktop/updates/*", "/mcp", "/.well-known/oauth-protected-resource", "/.well-known/oauth-protected-resource/*", "/.well-known/oauth-authorization-server", "/live/*"],
+  "include": ["/", "/app", "/app/*", "/research", "/research/*", "/sim", "/sim/*", "/trade", "/trade/*", "/academy", "/academy/*", "/lab", "/lab/*", "/data/*", "/badge/*", "/v/*", "/s/*", "/og/badge/*", "/og/strategy/*", "/api/payments/*", "/rum", "/e", "/desktop/updates/*", "/mcp", "/.well-known/oauth-protected-resource", "/.well-known/oauth-protected-resource/*", "/.well-known/oauth-authorization-server", "/live/*", "/api/v1", "/api/v1/*", "/api/keys", "/api/keys/*"],
   "exclude": ["/v/"]
 }

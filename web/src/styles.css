@@ -545,6 +545,13 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .segmented { display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); background: var(--ds-background-input); }
 .segmented button { border: 0; border-radius: 7px; padding: 4px 14px; background: none; color: var(--text-2); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .segmented button.on { background: var(--ds-background-default); color: var(--ds-text-emphasized); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--color-border); }
+/* Settings > API keys (DEC-0071). */
+.api-keys, .api-key-log { list-style: none; padding: 0; margin: 0; }
+.api-keys .srow-help code, .api-scopes code { font-family: var(--font-mono); font-size: var(--fs-sm); }
+.api-key-log li { font-size: var(--fs-sm); color: var(--text-2); padding: 2px 0; }
+.api-scopes { border: 0; padding: 0; margin: 12px 0; display: flex; flex-direction: column; gap: 6px; }
+.api-secret { font-family: var(--font-mono); font-size: var(--fs-sm); padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--ds-background-input); white-space: pre-wrap; word-break: break-all; user-select: all; }
+.settings-note { font-size: var(--fs-sm); color: var(--text-2); margin: 8px 0; }
 .plain-list { list-style: none; padding: 0; margin: 0; }
 .plain-list li { padding: 2px 0; }
 

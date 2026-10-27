@@ -81,3 +81,12 @@ th { color: var(--text); font-weight: 600; border-bottom-color: var(--line-2); }
   html, body { background: var(--palette-white); color: var(--palette-black); }
   h1, h2, h3, strong, a, th { color: var(--palette-black); }
 }
+
+/* The API guide at /developers/ (DEC-0071) shares this page frame. */
+.lg-dev .lg-meta { margin: 0 0 16px; }
+.lg-dev .lg-lede { color: var(--text); font-size: var(--type-md); margin: 0 0 16px; }
+.lg-dev .lg-toc { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 24px; font-size: var(--type-sm); }
+.lg-dev pre { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--type-sm); line-height: 1.5; overflow-x: auto; padding: 12px 16px; margin: 0 0 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.lg-dev pre code { word-break: normal; }
+.lg-dev dt { color: var(--text); font-weight: 600; margin-top: 12px; scroll-margin-top: 16px; }
+.lg-dev dd { margin: 2px 0 0; }
