@@ -22,7 +22,7 @@ const SIZES = [
 
 const PRODUCT = ["", "start", "how", "learn", "settings", "verify", "strategies", "watchlist", "news", "news/archive", "news/impact", "news/history",
   "markets", "markets/new", "markets/crypto", "markets/perps", "markets/etfs", "markets/private", "markets/terms", "markets/practice", "ui"];
-const RESEARCH = ["", "docs", "search", "ledger", "catalog", "sim", "competitors", "private", "signals", "explore", "data", "registry", "latency", "sources", "refs", "settings", "ui"];
+const RESEARCH = ["", "docs", "search", "ledger", "catalog", "sim", "competitors", "pairs", "private", "signals", "explore", "data", "registry", "latency", "sources", "refs", "settings", "ui"];
 const SEEDS = [
   "/", "/login/", "/signup/", "/reset/", "/verify/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/",
   ...PRODUCT.map((r) => `/app/#/${r}`),

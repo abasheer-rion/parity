@@ -45,6 +45,14 @@ function localResults(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
       });
+      // The pairs engine writes its results here (src/lib/pairs.ts). Without it the page falls
+      // back to the committed snapshot, public/data/pairs.json.
+      server.middlewares.use("/local/pairs.json", (_req, res, next) => {
+        const path = resolve(OUTPUT, "./pairs.json");
+        if (!existsSync(path)) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
       // `parity sims export` (or the sims service) writes the sims' summary here (DEC-0037).
       server.middlewares.use("/local/sims.json", (_req, res, next) => {
         const path = resolve(OUTPUT, "./sims.json");

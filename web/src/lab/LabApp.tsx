@@ -9,6 +9,7 @@
 //   #/compare      Compare: league table, crises and correlation
 //   #/search       Strategy search (research, read only)
 //   #/edges        Edge Lab: the idea checklist and the lessons (research, read only)
+//   #/pairs        Pairs: statistical arbitrage recipes and pair charts (research, read only)
 //   #/settings     Settings
 import { LiveMini } from "../components/LiveMini";
 import { Suspense, useCallback, useEffect, useState } from "react";
@@ -32,6 +33,7 @@ import "./lab.css";
 // the main file (REF-0024).
 const CompareView = lazyPage(() => import("./CompareView").then((m) => ({ default: m.CompareView })));
 const EdgesView = lazyPage(() => import("./EdgesView").then((m) => ({ default: m.EdgesView })));
+const PairsView = lazyPage(() => import("./PairsView").then((m) => ({ default: m.PairsView })));
 const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default: m.SearchView })));
 const WhatIfView = lazyPage(() => import("./WhatIfView").then((m) => ({ default: m.WhatIfView })));
 const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
@@ -129,7 +131,7 @@ function LabShell() {
       if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || isTyping(e.target)) return;
       if (document.querySelector(".ui-dialog-backdrop, [aria-modal='true']")) return;
       if (e.key === "?") { e.preventDefault(); setKeysOpen(true); return; }
-      if (e.shiftKey && /^Digit[1-7]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
+      if (e.shiftKey && /^Digit[1-8]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
       if (e.shiftKey) return;
       if (e.key === "/") {
         const box = document.querySelector<HTMLInputElement>("[data-lab-find] input, input[data-lab-find]");
@@ -170,6 +172,7 @@ function LabShell() {
     : view === "whatif" ? <WhatIfView />
     : view === "search" ? <SearchView />
     : view === "edges" ? <EdgesView key={arg ?? ""} focus={arg} />
+    : view === "pairs" ? <PairsView />
     : view === "live" ? <div className="lb-live"><LiveMini height={360} /></div>
     : <SettingsView settings={settings} set={setSettings} />;
 

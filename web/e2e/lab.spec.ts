@@ -66,11 +66,13 @@ test.describe("views", () => {
 test.describe("keys", () => {
   test.beforeEach(({}, info) => { test.skip(info.project.name === "phone", "keyboard, desktop only"); });
 
-  test("Shift and 1 to 7 reach every view, Settings included", async ({ page }) => {
+  test("Shift and 1 to 8 reach every view, Settings included", async ({ page }) => {
     await ready(page, "/lab/#/try");
     await page.keyboard.press("Shift+Digit6");
-    await expect(page).toHaveURL(/#\/live$/);
+    await expect(page).toHaveURL(/#\/pairs$/);
     await page.keyboard.press("Shift+Digit7");
+    await expect(page).toHaveURL(/#\/live$/);
+    await page.keyboard.press("Shift+Digit8");
     await expect(page).toHaveURL(/#\/settings$/);
     await page.keyboard.press("Shift+Digit3");
     await expect(page).toHaveURL(/#\/compare/);
@@ -81,18 +83,18 @@ test.describe("keys", () => {
     await page.keyboard.press("Shift+Slash");
     const dialog = page.getByRole("dialog", { name: "Keys" });
     await expect(dialog).toBeVisible();
-    await expect(dialog).toContainText("Shift+1 to 7");
+    await expect(dialog).toContainText("Shift+1 to 8");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
   });
 });
 
 test.describe("phone tab bar", () => {
-  test("all seven views fit on one row", async ({ page }, info) => {
+  test("all eight views fit on one row", async ({ page }, info) => {
     test.skip(info.project.name !== "phone", "phone layout");
     await ready(page, "/lab/#/compare");
     const tabs = page.getByRole("navigation", { name: "Workbench" }).getByRole("link");
-    await expect(tabs).toHaveCount(7);
+    await expect(tabs).toHaveCount(8);
     const boxes = await tabs.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).map((r) => ({ top: Math.round(r.top), bottom: r.bottom, right: r.right })));
     expect(new Set(boxes.map((b) => b.top)).size, "one row").toBe(1);
     const vh = page.viewportSize()!.height;
