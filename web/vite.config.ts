@@ -202,7 +202,7 @@ function localScenarios(): Plugin {
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
-  "connect/index", "oauth/consent/index", "oauth/openrouter/index",
+  "connect/index", "connect/claude/index", "connect/chatgpt/index", "connect/gemini/index", "oauth/consent/index", "oauth/openrouter/index",
   "developers/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
   "download/index",
 ];

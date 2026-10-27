@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 27 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 28 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -31,13 +31,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-10-27 [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
+- 2026-10-27 [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - 2026-10-26 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - 2026-10-26 [REF-0028: Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md)
+- 2026-10-26 [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 - 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
 - 2026-10-26 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
-- 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
-- 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 
 ## intent
 
@@ -100,7 +100,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0048 | [The desktop app loads the live site and keeps a copy for offline](decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0049 | [The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
-| DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0052 | [Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0053 | [Our own product analytics, opt-in, stored in Postgres](decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
@@ -216,6 +216,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0025 | [Parity capacity and load test results](reference/0025-parity-capacity-and-load-test-results.md) | current | 2026-10-25 | [infra](TAGS.md#infra) |
 | REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 
 ## competitor

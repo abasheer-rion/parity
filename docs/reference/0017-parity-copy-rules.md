@@ -75,6 +75,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](0026-accessibility-audit-wcag-2-2-aa.md)
+- [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)
 <!-- backlinks:end -->

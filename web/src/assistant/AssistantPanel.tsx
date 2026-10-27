@@ -10,6 +10,11 @@ import { callTool, listTools } from "./mcpClient";
 import { startUrl } from "./openrouter";
 import "./assistant.css";
 import { Button, TextButton } from "../ui";
+import { ORIGIN, siteDomainOf } from "../lib/meta";
+
+// The how-to pages for adding Parity to an AI app live on the main site (DEC-0051), so the
+// subdomain apps (lab., trade.) link there rather than to a path on their own host.
+const connectHref = (app: string) => `${siteDomainOf(window.location.hostname) ? ORIGIN : window.location.origin}/connect/${app}/`;
 
 interface Line { who: "you" | "ai" | "note"; text: string; steps?: Step[] }
 
@@ -108,6 +113,7 @@ export default function AssistantPanel({ place }: { place: "workbench" | "verify
       </div>
       <div className="ai-log" aria-live="polite">
         {!lines.length && <p className="ai-small">Ask about a strategy, a market, a trading record or a word you do not know. Answers are research only, not investment advice.</p>}
+        {!lines.length && <p className="ai-small">Rather use Parity inside your own AI app? See <a href={connectHref("claude")}>Claude</a>, <a href={connectHref("chatgpt")}>ChatGPT</a> or <a href={connectHref("gemini")}>Gemini</a>.</p>}
         {lines.map((l, i) => (
           <div key={i} className={`ai-line ai-${l.who}`}>
             {l.steps?.length ? <div className="ai-steps">{l.steps.map((s, j) => <span key={j} className={s.isError ? "bad" : ""}>{s.name}</span>)}</div> : null}
