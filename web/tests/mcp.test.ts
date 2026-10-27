@@ -140,6 +140,9 @@ describe("transport", () => {
     expect(originAllowed(null, "paritytrading.app")).toBe(true);
     expect(originAllowed("http://localhost:6274", "paritytrading.app")).toBe(true);
     expect(originAllowed("http://evil.paritytrading.app", "paritytrading.app")).toBe(false);
+    expect(originAllowed("https://claude.ai", "paritytrading.app")).toBe(true);
+    expect(originAllowed("https://vscode.dev", "paritytrading.app")).toBe(true);
+    expect(originAllowed("https://claude.ai.evil.example", "paritytrading.app")).toBe(false);
   });
 
   it("has no stream or session: GET and DELETE are 405", async () => {

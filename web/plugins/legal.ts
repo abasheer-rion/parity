@@ -5,6 +5,7 @@
 //   <!--legal:footer-->   legal links, cookie settings and the "not investment advice" line
 // The same footer markup is copied by hand into web/index.html (its footer only).
 import type { Plugin } from "vite";
+import { fillGuide, isGuide } from "./guides";
 
 export const LEGAL_LINKS: [string, string][] = [
   ["/legal/privacy/", "Privacy"],
@@ -54,8 +55,9 @@ export function parityLegal(): Plugin {
     transformIndexHtml: {
       order: "pre",
       handler(html, ctx) {
-        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/") && !ctx.path.startsWith("/download/")) return html;
-        return html
+        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/") && !ctx.path.startsWith("/download/") && !isGuide(ctx.path)) return html;
+        const page = isGuide(ctx.path) ? fillGuide(html, ctx.path) : html;
+        return page
           .replace("<!--legal:head-->", HEAD)
           .replace("<!--legal:header-->", HEADER)
           .replace("<!--legal:footer-->", FOOTER);

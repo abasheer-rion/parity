@@ -4,7 +4,7 @@ title: AI apps connect to Parity through a hosted MCP server, and people bring t
 type: decision
 status: accepted
 created: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-27
 authors: [ayan]
 tags: [infra, process, ui]
 related: [RES-0024, DEC-0025, GDE-0006, DEC-0034, DEC-0040, DEC-0036]
@@ -32,7 +32,7 @@ The research behind this is [RES-0024](../research/0024-ai-apps-connecting-to-pa
 
 1. **Supabase Auth is the sign-in server.** We do not run our own. `/.well-known/oauth-protected-resource/mcp` names `https://ttqvpxvctnomfbeoqbbs.supabase.co/auth/v1`; a call without a valid token gets a 401 pointing there. `/.well-known/oauth-authorization-server` on our host copies Supabase's metadata for older apps.
 2. **The consent page is `/oauth/consent/`.** It shows which app is asking, where you return to, and what it can do, with "Also let it make changes" unticked. `/connect/` lists the apps you connected, with that same choice and Disconnect.
-3. **One endpoint, both MCP eras, no state.** `web/functions/mcp.ts` answers MCP 2026-07-28 (headers checked against the body, `server/discover`) and 2025-03-26 to 2025-11-25 (an `initialize` handshake, no session id). Every answer is plain JSON. GET and DELETE get 405. Browser calls are allowed only from our own domains and localhost.
+3. **One endpoint, both MCP eras, no state.** `web/functions/mcp.ts` answers MCP 2026-07-28 (headers checked against the body, `server/discover`) and 2025-03-26 to 2025-11-25 (an `initialize` handshake, no session id). Every answer is plain JSON. GET and DELETE get 405. Browser calls are allowed only from our own domains, localhost, and the web apps of AI clients (claude.ai, chatgpt.com, vscode.dev and a few more, listed in `web/src/lib/mcp/auth.ts`). That is safe because `/mcp` takes only a bearer token, never a cookie.
 4. **Read tools:**
    - `search_strategies` and `get_strategy`: tested strategies, with the gauntlet verdict and all 11 tests.
    - `search_leads`: the always-on search's best variations, with the luck check.
@@ -57,6 +57,7 @@ The research behind this is [RES-0024](../research/0024-ai-apps-connecting-to-pa
 - A connected app can read everything the person can read through Supabase directly, including their demo accounts and payment rows. That is the same as signing in as them, and the consent page says it acts as you.
 - An app holds a real Supabase token, so it could call the two change functions straight from the database rather than through `/mcp`. They still need the person's per-app permission, and each change needs a call started with `mcp_begin_call`, which counts it against the limit of 30 a day. The `MCP_WRITE_ENABLED` switch only hides the tools on `/mcp`, so the database rule is the real gate. Orders are always dated today, so an app cannot backdate one against prices it has already seen.
 - The `/oauth/` pages and `/.well-known/` are never cached by the service worker.
+- Each app has its own setup page: `/connect/claude/`, `/connect/chatgpt/` and `/connect/gemini/`, plain HTML built from `web/connect/<app>/index.html` with shared parts in `web/plugins/guides.ts`. `/connect/` stays the hub. The directory submission materials are in [REF-0027](../reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ## Owner steps
 
@@ -111,5 +112,6 @@ Run after owner step 1, on a test account.
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
+- [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](../reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

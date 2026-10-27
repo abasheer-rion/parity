@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). Shared blocks: plugins/guides.ts. -->
+    <!--legal:head-->
+  </head>
+  <body>
+    <!--legal:header-->
+    <main id="main" tabindex="-1">
+      <article class="lg-wrap">
+        <!--guide:nav-->
+        <h1>Connect Claude to Parity</h1>
+        <p class="lg-meta">Last checked against Anthropic's docs: <time datetime="2026-10-26">26 October 2026</time></p>
+        <p class="gd-lead">Add Parity to Claude and you can ask Claude about tested strategies, check a trading record with Verify, read market data and look up Academy lessons, all from a chat. Claude reads your Parity data as you and cannot change anything unless you allow it.</p>
+
+        <nav class="lg-toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#web">Claude on the web, desktop and phone</a></li>
+            <li><a href="#code">Claude Code</a></li>
+            <li><a href="#tools">What Claude can use</a></li>
+            <li><a href="#limits">What it can and cannot do</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#disconnect">Disconnect</a></li>
+            <li><a href="#trouble">If it does not work</a></li>
+          </ol>
+        </nav>
+
+        <h2>The address</h2>
+        <div class="gd-copy">
+          <pre id="url" tabindex="0"><!--guide:url--></pre>
+          <button type="button" data-copy="url" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <!--guide:flow-->
+
+        <h2 id="web">1. Claude on the web, desktop and phone</h2>
+        <p>Add Parity once on claude.ai and it works in Claude Desktop and the Claude phone app too. Every plan can add custom connectors. The free plan allows one.</p>
+        <ol class="gd-steps">
+          <li>On claude.ai, open <strong>Customize</strong>, then <strong>Connectors</strong>. On a Team or Enterprise plan, an owner adds it under <strong>Organization settings</strong>, then <strong>Connectors</strong>.</li>
+          <li>Choose <strong>Add</strong>, then <strong>Add custom connector</strong>.</li>
+          <li>Name it <strong>Parity</strong> and paste the address above as the server URL. Leave the advanced settings as they are. Choose <strong>Add</strong>.</li>
+          <li>Choose <strong>Connect</strong>. Claude opens Parity's log-in page. Log in with your Parity account.</li>
+          <li>Parity shows its Allow page. Check it names Claude and claude.ai, then choose <strong>Allow</strong>. You land back in Claude, connected.</li>
+          <li>In a chat, open the tools menu and make sure Parity is on. Then ask, for example, "Using Parity, which tested strategies beat the S&amp;P 500?"</li>
+        </ol>
+        <figure class="gd-fig">
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="claude-add-t claude-add-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="claude-add-t">Adding a custom connector in Claude</title>
+            <desc id="claude-add-d">A drawing of Claude's "Add custom connector" box. The Name field holds Parity. The Remote MCP server URL field holds https://paritytrading.app/mcp. Below are a collapsed Advanced settings link and an Add button.</desc>
+            <rect class="s-panel" x="110" y="16" width="500" height="268" rx="14" />
+            <text class="s-title" x="136" y="52">Add custom connector</text>
+            <text class="s-muted" x="136" y="74">Connect Claude to your data and tools.</text>
+            <text class="s-text" x="136" y="108">Name</text>
+            <rect class="s-field" x="136" y="116" width="448" height="34" rx="8" />
+            <text class="s-mono" x="148" y="138">Parity</text>
+            <text class="s-text" x="136" y="176">Remote MCP server URL</text>
+            <rect class="s-field" x="136" y="184" width="448" height="34" rx="8" />
+            <text class="s-mono" x="148" y="206">https://paritytrading.app/mcp</text>
+            <text class="s-muted" x="136" y="250">Advanced settings</text>
+            <rect class="s-btn" x="502" y="232" width="82" height="32" rx="8" />
+            <text class="s-btn-text" x="530" y="253">Add</text>
+          </svg>
+          <figcaption>Drawn by Parity to show the fields. Claude's own screen may look a little different.</figcaption>
+        </figure>
+        <!--guide:consent-->
+
+        <h2 id="code">2. Claude Code</h2>
+        <p>Run this in a terminal. Add <code>--scope user</code> after <code>add</code> to have Parity in every project.</p>
+        <div class="gd-copy">
+          <pre id="cc" tabindex="0">claude mcp add --transport http parity <!--guide:url--></pre>
+          <button type="button" data-copy="cc" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <ol class="gd-steps">
+          <li>Start Claude Code and type <code>/mcp</code>.</li>
+          <li>Choose <strong>parity</strong>, then sign in. Your browser opens Parity's log-in page and then the Allow page.</li>
+          <li>Back in Claude Code, ask "Use Parity to get the results of the fx_carry strategy."</li>
+        </ol>
+        <p>Claude Code can also run the local Parity server, which adds backtests. That needs the repository; see the <a href="https://github.com/abasheer-rion/parity/blob/main/docs/guides/0006-connecting-ai-tools-to-parity-with-mcp.md">developer guide</a>.</p>
+
+        <h2 id="tools">3. What Claude can use</h2>
+        <!--guide:tools-->
+
+        <h2 id="limits">4. What it can and cannot do</h2>
+        <!--guide:limits-->
+
+        <h2 id="privacy">5. Privacy</h2>
+        <!--guide:privacy-->
+
+        <h2 id="disconnect">6. Disconnect</h2>
+        <ul>
+          <li><strong>From Parity:</strong> open <a href="/connect/">Connect your AI</a>, find Claude under "Your connected apps" and choose <strong>Disconnect</strong>. Claude's next call fails and it has to ask you to log in again.</li>
+          <li><strong>From Claude:</strong> open <strong>Customize</strong>, then <strong>Connectors</strong>, choose Parity and remove it.</li>
+          <li>To stop changes but stay connected, untick "May make changes" for Claude on <a href="/connect/">Connect your AI</a>.</li>
+        </ul>
+
+        <h2 id="trouble">7. If it does not work</h2>
+        <ul>
+          <li><strong>The log-in page does not open.</strong> Check the address ends in <code>/mcp</code> with no space or slash after it. Allow pop-ups for claude.ai.</li>
+          <li><strong>"This request has expired or is not valid".</strong> The sign-in link is single use. Go back to Claude and choose Connect again.</li>
+          <li><strong>Claude says it cannot place an order.</strong> Changes are off. Tick "May make changes" for Claude on <a href="/connect/">Connect your AI</a>. Orders are demo orders only.</li>
+          <li><strong>"Too many calls".</strong> You reached 30 calls in a minute or 1000 in a day. Wait and ask again.</li>
+          <li><strong>Claude does not use Parity.</strong> Check Parity is switched on in the chat's tools menu, and name it in your question: "Using Parity, ...".</li>
+          <li><strong>Team or Enterprise.</strong> Only an owner can add a custom connector. Ask yours to add the address above.</li>
+          <li>Still stuck? Email <a href="mailto:contact@paritytrading.ai">contact@paritytrading.ai</a> with the time it failed and the message Claude showed.</li>
+        </ul>
+
+        <h2>Use your own model inside Parity</h2>
+        <!--guide:byom-->
+      </article>
+    </main>
+    <!--legal:footer-->
+  </body>
+</html>

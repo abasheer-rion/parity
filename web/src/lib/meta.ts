@@ -107,6 +107,7 @@ export const OG_CARDS: Record<string, OgCard> = {
   lab: { kicker: "Parity Workbench", title: "Try settings, what if, compare and search", sub: "Strategy settings, past events, side by side tables, the strategy search and the Edge Lab checklist in one full-screen tool." },
   strategy: { kicker: "Parity strategy", title: "A strategy, tested against the S&P 500", sub: "How it did, where it fails and whether the result could be luck." },
   login: { kicker: "Parity", title: "Log in to Parity", sub: "Check trading records and follow tested strategies." },
+  connect: { kicker: "Parity", title: "Connect your AI to Parity", sub: "Use Parity from Claude, ChatGPT, Gemini and other AI apps. Read only unless you allow changes." },
   legal: { kicker: "Parity legal", title: "Legal", sub: "Privacy, terms, cookies, accessibility and risk." },
   badge: { kicker: "Parity Verify", title: "A checked trading record", sub: "What Parity checked in the file, and what it could not." },
 };
@@ -154,6 +155,22 @@ export interface PageMeta {
 
 export const PRIVATE = "noindex, nofollow";
 
+/** The tags for one AI app guide under /connect/<app>/, with a breadcrumb and an article. */
+function guidePage(app: string, title: string, description: string): PageMeta {
+  const path = `/connect/${app}/`;
+  return {
+    title: `${title.replace(/ to Parity$/, "")} · Parity`, description, path, image: "connect", type: "article",
+    ld: [
+      { "@type": "TechArticle", "@id": `${abs(path)}#article`, headline: title, description, url: abs(path), inLanguage: "en", author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } },
+      { "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Parity", item: abs("/") },
+        { "@type": "ListItem", position: 2, name: "Connect your AI", item: abs("/connect/") },
+        { "@type": "ListItem", position: 3, name: title, item: abs(path) },
+      ] },
+    ],
+  };
+}
+
 /** One entry per built HTML file, keyed by its path under web/. */
 export const PAGES: Record<string, PageMeta> = {
   "index.html": {
@@ -167,7 +184,11 @@ export const PAGES: Record<string, PageMeta> = {
   "verify/index.html": { title: "Confirm · Parity", description: "Confirming your email address for Parity.", path: "/verify/", image: "login" },
   // AI apps connecting to Parity (DEC-0051): the how-to and connected apps, the consent page
   // Supabase Auth's OAuth server sends people to, and the OpenRouter sign-in return page.
-  "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "login", robots: PRIVATE },
+  "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "connect" },
+  // One how-to page per AI app (DEC-0051), plain HTML so it reads without the app's script.
+  "connect/claude/index.html": guidePage("claude", "Connect Claude to Parity", "Add Parity to Claude on the web, Claude Desktop and Claude Code: setup steps, the tools Claude can use, privacy, how to disconnect and fixes for common problems."),
+  "connect/chatgpt/index.html": guidePage("chatgpt", "Connect ChatGPT to Parity", "Add Parity to ChatGPT as an app with developer mode: setup steps, the tools ChatGPT can use, privacy, how to disconnect and fixes for common problems."),
+  "connect/gemini/index.html": guidePage("gemini", "Connect Gemini to Parity", "Add Parity to Gemini CLI: the settings to paste, signing in, the tools Gemini can use, privacy, how to disconnect and fixes for common problems."),
   "oauth/consent/index.html": { title: "Allow an AI app · Parity", description: "Choose whether an AI app may use Parity as you.", path: "/oauth/consent/", image: "login", robots: PRIVATE },
   "oauth/openrouter/index.html": { title: "Connecting OpenRouter · Parity", description: "Finishing the connection to your OpenRouter account.", path: "/oauth/openrouter/", image: "login", robots: PRIVATE },
   // Every /v/<id> serves this page; functions/v/[id].ts swaps in that badge's own tags.
