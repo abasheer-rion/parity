@@ -329,3 +329,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 :root[data-motion="reduced"] .pac-orbs i, :root[data-motion="reduced"] .pac-lesson { animation: none; }
 :root[data-motion="reduced"] .pac-bar > span { transition: none; }
+
+/* Progress with nothing started (DEC-0077): one line and one button. */
+.pac-start { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); margin: 0 0 var(--space-6); padding: var(--space-6); }
+.pac-start-title { margin: 0 0 var(--space-1); font-family: var(--font-display); font-size: var(--type-5xl); font-weight: 700; letter-spacing: -0.015em; }

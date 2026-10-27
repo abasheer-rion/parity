@@ -8,8 +8,9 @@ import { Button, Icon, PageTransition } from "../ui";
 import type { Report } from "../lib/types";
 import { greeting, saveFirstName, skipFirstName, useFirstName } from "../lib/firstName";
 import { useOnboarding, stampsOf } from "../onboarding/store";
-import { INTERESTS_KEY } from "../onboarding/items";
+import { picksOf } from "../onboarding/introRules";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
+import { NextStep } from "../onboarding/NextStep";
 import { isDesktop } from "../desktop/bridge";
 import { arrange, countSession, dropOn, getHomePlanner, isWidgetId, move, segmentOf, track, WIDGET_BY_ID, WIDGETS, type HomePlan, type WidgetId } from "./registry";
 import { saveLayout, useLayout } from "./layoutStore";
@@ -33,10 +34,6 @@ const BODY: Record<WidgetId, ComponentType<WidgetProps>> = {
   training: lazy(() => import("./widgets/Training")),
 };
 
-function readPicks(): string[] {
-  try { const v = JSON.parse(window.localStorage.getItem(INTERESTS_KEY) ?? "[]"); return Array.isArray(v) ? v.filter((x) => typeof x === "string") : []; } catch { return []; }
-}
-
 const SESSION_KEY = "parity.home.counted";
 // The engine's view of the widgets: registry order, and the account never folds.
 const PZ_WIDGETS = WIDGETS.map((w, i) => ({ id: w.id, order: i, required: w.id === "account" }));
@@ -44,7 +41,7 @@ const PZ_WIDGETS = WIDGETS.map((w, i) => ({ id: w.id, order: i, required: w.id =
 export function Home({ report }: { report: Report }) {
   const ob = useOnboarding();
   const stamps = stampsOf(ob.row);
-  const segment = segmentOf(readPicks(), { trade: !!stamps.trade, lesson: !!stamps.lesson, verify: !!stamps.verify, watch: !!stamps.watch });
+  const segment = segmentOf(picksOf(ob.row), { trade: !!stamps.trade, lesson: !!stamps.lesson, verify: !!stamps.verify, watch: !!stamps.watch });
   const layout = useLayout(segment);
   const [plan, setPlan] = useState<HomePlan | null>(null);
   const [editing, setEditing] = useState(false);
@@ -97,6 +94,7 @@ export function Home({ report }: { report: Report }) {
           <span>Ask anything: "what is carry", "does anything beat the market"</span>
         </button>
       </section>
+      <NextStep />
       {!name.name && !name.asked && <AskName />}
       <FirstRunTour areas={isDesktop() ? ["home", "desktop"] : ["home"]} />
 

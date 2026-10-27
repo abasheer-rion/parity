@@ -15,6 +15,7 @@ import { syncConsent } from "./lib/personalize/api";
 import { useRouteMeta } from "./lib/deeplink";
 import { PAYMENTS_ENABLED } from "./lib/payments/flag";
 import { nameById, nameOf } from "./lib/strategyMeta";
+import { IntroGate } from "./onboarding/IntroGate";
 
 // Every page is its own file, loaded when it is first opened, so the app starts with only
 // the frame and the page in front of you (REF-0024). The likely next pages load while idle.
@@ -323,6 +324,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       </Suspense>
       </ErrorBoundary>
       </div>
+      {/* The first-run intro (DEC-0077) opens over Home once per account. */}
+      {SPACE === "product" && (route === "" || route === "home") && <IntroGate report={report} />}
       <WhenIdle>
         <Popups />
         <Palette report={report} />

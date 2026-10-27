@@ -7,6 +7,7 @@
 //   3. "Show tours again" in Account settings brings them back, and Escape skips a tour.
 //   4. On a phone, steps whose targets are hidden are skipped and nothing scrolls sideways.
 //   5. The checklist shows, and the wallet dialog refuses a pasted seed phrase.
+//   7. The first-run intro (DEC-0077): every screen, the result, then Home's next step.
 // Screenshots of every tour and the checklist go to ONBOARDING_SHOTS (a temp folder if unset).
 //
 //   npm run onboarding
@@ -237,6 +238,47 @@ for (const [name, path, init] of AREAS) {
   check(await waitTip(page, 30000), "Trade tour opens on a phone");
   await page.waitForTimeout(300);
   await shot(page, "17-trade-tour-phone");
+  await ctx.close();
+}
+
+// ---------------------------------------------------------------- 7. the first-run intro (DEC-0077)
+// The local preview keeps its row in this browser, so the intro does not open by itself;
+// #/?intro=1 opens it the way a new account sees it. Full motion here, for the screenshots.
+for (const [size, tag] of [[{ width: 1440, height: 900 }, "desktop"], [{ width: 390, height: 844 }, "phone"]]) {
+  const ctx = await context(size, { onboarding: { tours_off: false, tours_seen: ["home"], checklist_hidden: false } });
+  const page = await ctx.newPage();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(String(e)));
+  await page.goto(`${BASE}/app/#/?intro=1`);
+  const intro = page.locator(".intro[role=dialog]");
+  const still = () => page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"), null, { timeout: 5000 }).catch(() => {});
+  check(await intro.waitFor({ state: "visible", timeout: 20000 }).then(() => true, () => false), `intro opens (${tag})`);
+  await still();
+  await shot(page, `20-intro-goal-${tag}`);
+  await intro.getByRole("button", { name: /Check a strategy or a bot/ }).click();
+  await intro.getByRole("heading", { name: "How much have you traded?" }).waitFor();
+  await still();
+  await shot(page, `21-intro-level-${tag}`);
+  await intro.getByRole("button", { name: /^A little/ }).click();
+  await intro.getByRole("heading", { name: "Which markets do you follow?" }).waitFor();
+  await intro.getByRole("button", { name: /^Stocks/ }).click();
+  await intro.getByRole("button", { name: /^Currencies/ }).click();
+  await still();
+  await shot(page, `22-intro-markets-${tag}`);
+  await intro.getByRole("button", { name: "Continue", exact: true }).click();
+  check(await intro.getByRole("heading", { name: /^Verify checked / }).waitFor({ timeout: 20000 }).then(() => true, () => false), `the last screen shows a real Verify result (${tag})`);
+  await still();
+  await shot(page, `23-intro-result-${tag}`);
+  const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  check(!wide, `no sideways scroll in the intro (${tag})`);
+  await intro.getByRole("button", { name: "Go to Home" }).click();
+  check(await intro.waitFor({ state: "detached", timeout: 5000 }).then(() => true, () => false), `Go to Home closes the intro (${tag})`);
+  check((await stored(page)).intro_status === "done", `the finished intro is saved (${tag})`);
+  check(await page.locator(".onb-next").waitFor({ state: "visible", timeout: 5000 }).then(() => true, () => false), `Home shows one next step after the intro (${tag})`);
+  await page.waitForTimeout(400);
+  await shot(page, `24-home-next-step-${tag}`);
+  check(errors.length === 0, `no page errors in the intro (${errors.join("; ")})`);
   await ctx.close();
 }
 

@@ -579,6 +579,16 @@ function ProgressView() {
         <h1 className="pac-h1">Progress</h1>
         <span className="pac-meta">Saved to your account</span>
       </div>
+      {!p.loading && p.rows.length === 0 && (
+        // Nothing started yet: say what to do first, with one button (DEC-0077).
+        <section className="pac-start pac-glass" aria-labelledby="pac-start-t">
+          <div>
+            <h2 id="pac-start-t" className="pac-start-title">You have not opened a lesson yet</h2>
+            <p className="pac-meta">{courses[0].lessons[0].title} is the first one. It takes {courses[0].lessons[0].minutes} minutes and ends with a quick check.</p>
+          </div>
+          <Button variant="accent" icon="play" href={lessonHref(courses[0], courses[0].lessons[0])}>Start the first lesson</Button>
+        </section>
+      )}
       <dl className="pac-totals pac-totals-row pac-glass">
         <div><dt>Lessons done</dt><dd>{p.doneCount}<small> of {totalLessons}</small></dd></div>
         <div><dt>Courses finished</dt><dd>{rows.filter((r) => r.done === r.c.lessons.length).length}<small> of {courses.length}</small></dd></div>

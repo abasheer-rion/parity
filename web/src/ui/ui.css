@@ -61,6 +61,9 @@
 /* "outline" is Mercury's floating button: a raised surface with a soft shadow. */
 .ui-btn-outline { background: var(--ds-background-surface-floating); color: var(--ds-text-default); box-shadow: var(--shadow-2); }
 .ui-btn-outline:hover { box-shadow: var(--shadow-3); color: var(--ds-text-emphasized); }
+.ui-btn-accent { background: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 8px 28px -14px var(--color-glow); }
+.ui-btn-accent .icon { color: var(--color-on-accent); }
+.ui-btn-accent:hover { background: var(--color-accent-hover); }
 .ui-btn-danger { background: var(--ds-background-destructive); color: var(--ds-text-destructive); }
 .ui-btn-danger .icon { color: var(--ds-icon-destructive); }
 .ui-btn-danger:hover { background: var(--ds-background-destructive-hovered); }
