@@ -257,6 +257,7 @@ How we write and organise these documents.
 - [GDE-0009: Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md)
 - [REF-0009: UI library](reference/0009-ui-library.md)
 - [REF-0017: Parity copy rules](reference/0017-parity-copy-rules.md)
+- [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 
 ## economics
 
@@ -439,6 +440,7 @@ Metrics that tell us if something works and where to look next.
 
 - [DEC-0006: What "beating the S&P 500" means for us](decisions/0006-how-we-define-beating-the-sp-500.md)
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
+- [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [EXP-0001: Baseline backtests of carry, trend and the commodity gap](experiments/0001-baseline-backtests.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0004: Glossary](reference/0004-glossary.md)
@@ -460,6 +462,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DEC-0036: Verify runs its checks in the browser and holds daily prices only](decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)
 - [DEC-0037: Everything runs by itself and the search widens itself](decisions/0037-everything-runs-by-itself-and-the-search-widens-itself.md)
 - [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
+- [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [HYP-0008: A slower commodity gap works where the weekly one did not](hypotheses/0008-monthly-commodity-gap.md)
 - [EXP-0002: The baseline gauntlet for carry, trend and the commodity gap](experiments/0002-baseline-gauntlet.md)
 - [EXP-0003: Pre-registered test of the monthly commodity gap](experiments/0003-monthly-commodity-gap.md)
@@ -695,6 +698,7 @@ How the team works together.
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - [LOG-0018: Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md)
 - [LOG-0019: Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md)
+- [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 
 ## strategy
 
@@ -865,6 +869,7 @@ The dashboard.
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
