@@ -16,6 +16,32 @@ const OUTPUT = process.env.PARITY_OUTPUT_DIR ? resolve(process.env.PARITY_OUTPUT
 
 // In local development the dashboard can read the engine's latest run straight
 // from disk, so you can see results without Supabase. This never runs in a build.
+// The download page's links (DEC-0072) are a Pages Function in production. The dev server
+// (and the smoke test that runs on it) answers them with a fixed sample and never calls GitHub.
+function localDownload(): Plugin {
+  const sample = {
+    version: "0.0.0", published: "2026-01-01T00:00:00Z", notes: "https://github.com/abasheer-rion/parity/releases",
+    files: [
+      { platform: "mac-arm64", label: "Mac with Apple silicon", name: "Parity-0.0.0-arm64.dmg", size: 141_000_000, sha256: "0".repeat(64), url: "https://github.com/abasheer-rion/parity/releases" },
+      { platform: "mac-intel", label: "Mac with Intel", name: "Parity-0.0.0-x64.dmg", size: 148_000_000, sha256: "0".repeat(64), url: "https://github.com/abasheer-rion/parity/releases" },
+      { platform: "windows", label: "Windows", name: "Parity-Setup-0.0.0.exe", size: 132_000_000, sha256: "0".repeat(64), url: "https://github.com/abasheer-rion/parity/releases" },
+    ],
+  };
+  return {
+    name: "parity-local-download",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/download/latest", (req, res) => {
+        const what = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        if (what === "info") { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(sample)); return; }
+        res.statusCode = 302;
+        res.setHeader("Location", sample.notes);
+        res.end();
+      });
+    },
+  };
+}
+
 function localResults(): Plugin {
   const file = resolve(OUTPUT, "./latest.json");
   return {
@@ -192,7 +218,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs
