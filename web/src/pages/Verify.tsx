@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { hashQuery, setHashQuery, useHashState } from "../lib/deeplink";
 import { Title } from "../components/Shell";
 import { loadReport, loadSearch } from "../lib/data";
-import { nameOf, tagsOf } from "../lib/strategyMeta";
+import { nameOf, searchTextOf, tagsOf } from "../lib/strategyMeta";
 import { checkDescription, checkFile, checkStrategy, type Result } from "../lib/verify/checks";
 import { MAX_BYTES, ParseError } from "../lib/verify/csv";
 import { closest, extract, searchVerdict, type Candidate, type Match } from "../lib/verify/describe";
@@ -275,7 +275,7 @@ function StrategyInput({ onResult }: { onResult: (r: Result) => void }) {
   const runs = useMemo(() => (report?.runs ?? []).filter((r) => !r.is_benchmark && r.equity.length > 30), [report]);
   const shown = useMemo(() => {
     const n = q.trim().toLowerCase();
-    return runs.filter((r) => !n || `${nameOf(r)} ${r.strategy} ${r.description ?? ""}`.toLowerCase().includes(n)).slice(0, 12);
+    return runs.filter((r) => !n || searchTextOf(r).toLowerCase().includes(n)).slice(0, 12);
   }, [runs, q]);
   if (error) return <div className="vf-panel"><EmptyState title="Our strategies are not available">{error}</EmptyState></div>;
   // The loading panel keeps the loaded panel's height, so the page below it does not jump.

@@ -7,7 +7,7 @@ import { hashQuery, setHashQuery } from "../lib/deeplink";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import { productUrl } from "../lib/space";
-import { nameOf, verdictOf } from "../lib/strategyMeta";
+import { nameById, nameOf, taglineOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
 import { Badge, Segmented, Select, Tooltip } from "../ui";
 import { HoldupSection } from "../components/holdup/HoldupSection";
@@ -46,8 +46,8 @@ export function CompareView({ report }: { report: Report }) {
   const ranked = useMemo(() => [...report.runs].sort((a, b) => SORTS[sort](b) - SORTS[sort](a)), [report, sort]);
   const cmp = report.comparison;
   const byId = Object.fromEntries(report.runs.map((r) => [r.strategy, r]));
-  const label = (id: string) => (byId[id] ? nameOf(byId[id]) : id);
-  const link = (id: string) => <a href={productUrl(`#/strategy/${encodeURIComponent(id)}`)} target="_blank" rel="noopener" title={id}>{label(id)}</a>;
+  const label = (id: string) => (byId[id] ? nameOf(byId[id]) : nameById(id));
+  const link = (id: string) => <a href={productUrl(`#/strategy/${encodeURIComponent(id)}`)} target="_blank" rel="noopener" title={taglineOf(id) || undefined}>{label(id)}</a>;
 
   return (
     <div className="lb-view lb-scroll">
