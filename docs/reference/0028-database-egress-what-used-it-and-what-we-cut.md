@@ -44,7 +44,10 @@ The database is on Supabase's free plan, which allows 5 GB of data sent out a mo
 
 ## Results
 
-RESULTS_PLACEHOLDER
+- **Before:** 3.27 GB sent from 00:47 to 05:26 UTC on 2026-10-27 (4.6 hours), about **0.70 GB an hour**; at the busiest stretch, 0.52 GB in 20 minutes. Each deploy read about 45 MB.
+- **After** (merged 05:26 UTC): 38 MB sent from 05:28 to 06:28 UTC (1.4 hours), about **27 MB an hour**, a drop of about 96%. Main's first deploy downloaded all 9 runs once to fill the cache; the next 9 deploys (main and pull requests) downloaded 0.
+- **On pace:** about 0.65 GB a day before, about 0.02 GB an hour now, which is roughly 0.6 GB a day at today's deploy rate and should fall further as fewer old pull request branches redeploy. Under the 5 GB a month allowance from here on.
+- The six-hourly check runs from a clean copy of main at `~/Projects/parity-wt/egress-ops` (the services' own checkout could not update itself at the time). Its report to the site waits on the health-table migration, which is queued behind another migration with a clashing version number.
 
 ## Options
 
