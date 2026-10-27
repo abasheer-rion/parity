@@ -67,5 +67,6 @@ The wall between product and research ([DEC-0015](0015-two-sides-a-product-app-a
 - [DEC-0057: Blog and news pages with labelled posts and real bylines](0057-blog-and-news-pages-with-labelled-posts-and-real-bylines.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [DEC-0069: Parity moves to paritytrading.app](0069-parity-moves-to-paritytrading-app.md)
+- [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [GDE-0005: Google Search Console and the SEO pipeline](../guides/0005-google-search-console-and-the-seo-pipeline.md)
 <!-- backlinks:end -->

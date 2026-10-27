@@ -10,6 +10,8 @@ With no previous manifest (first run), every URL is sent. Standard library only.
 The IndexNow key is public by design: it is the name and the content of a text file at the
 site root (web/public/<key>.txt), which proves we own the site. It is not a secret.
 Google does not use IndexNow; it reads sitemap.xml (see scripts/seo/search_console.py).
+The job "indexnow" in content/seo/automation.toml (or the SEO_AUTOMATION variable) switches it
+off, and every run logs one line saying what it did (scripts/seo/automation.py, DEC-0073).
 """
 from __future__ import annotations
 
@@ -21,6 +23,9 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from automation import enabled, log  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 ENDPOINT = "https://api.indexnow.org/indexnow"
@@ -48,11 +53,15 @@ def main() -> int:
     ap.add_argument("--previous")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
+    ok, why = enabled("indexnow")
+    if not ok:
+        log("indexnow", "skipped", why)
+        return 0
     data = json.loads(Path(args.manifest).read_text())
     site, now, before = data["site"].rstrip("/"), data["urls"], load(args.previous)
     changed = sorted(p for p, h in now.items() if before.get(p) != h)
     if not changed:
-        print("indexnow: nothing changed, nothing sent")
+        log("indexnow", "nothing_changed", f"0 of {len(now)} URLs changed, nothing sent")
         return 0
     key = find_key()
     host = site.split("://", 1)[1]
@@ -61,13 +70,14 @@ def main() -> int:
     for u in urls[:10]:
         print("  " + u)
     if args.dry_run:
+        log("indexnow", "dry_run", f"{len(urls)} URLs would be sent")
         return 0
     body = json.dumps({"host": host, "key": key, "keyLocation": f"{site}/{key}.txt", "urlList": urls}).encode()
     req = urllib.request.Request(ENDPOINT, data=body, headers={"Content-Type": "application/json; charset=utf-8"})
     for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=30) as res:
-                print(f"indexnow: accepted (HTTP {res.status})")
+                log("indexnow", "sent", f"{len(urls)} URLs accepted (HTTP {res.status})")
                 return 0
         except urllib.error.HTTPError as err:
             # 403 right after a deploy = the key file is not live yet, so wait and retry.
@@ -75,9 +85,9 @@ def main() -> int:
             if err.code == 403 and attempt < 3:
                 time.sleep(30)
                 continue
-            print(f"indexnow: not accepted (HTTP {err.code}); skipped this time")
+            log("indexnow", "not_accepted", f"HTTP {err.code} for {len(urls)} URLs; skipped this time")
         except urllib.error.URLError as err:
-            print(f"indexnow: could not reach IndexNow ({err.reason}); skipped this time")
+            log("indexnow", "unreachable", f"could not reach IndexNow ({err.reason}); skipped this time")
         return 0
     return 0
 

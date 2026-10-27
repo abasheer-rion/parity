@@ -111,10 +111,40 @@ def catalog_decades() -> Chart:
     return Chart(svg, f"Parity catalog, {dated} dated ideas", rows)
 
 
+def _signed_bars(rows: list[tuple[str, float, str]], top: int = 240) -> str:
+    """Bars left or right of a zero line, with the printed value beside each bar."""
+    biggest = max((abs(v) for _, v, _ in rows), default=1) or 1
+    mid, half = 980, 420
+    step = min(64, (H - top - 120) // max(1, len(rows)))
+    bar = int(step * 0.62)
+    out = [f'<path d="M{mid} {top - 16}V{top + step * len(rows)}" stroke="#a9b6ff" stroke-opacity=".35"/>']
+    for i, (label, v, text) in enumerate(rows):
+        y = top + i * step
+        w = max(3, round(half * abs(v) / biggest))
+        x = mid if v >= 0 else mid - w
+        fill = "#4f7cff" if v >= 0 else "#c2557a"
+        out.append(f'<text x="96" y="{y + bar * 0.72:.0f}" font-size="{min(26, bar)}" fill="#dfe2ec">{e(label)}</text>')
+        out.append(f'<rect x="{x}" y="{y}" width="{w}" height="{bar}" rx="4" fill="{fill}"/>')
+        tx, anchor = (x + w + 12, "start") if v >= 0 else (x - 12, "end")
+        out.append(f'<text x="{tx}" y="{y + bar * 0.72:.0f}" font-size="{min(24, bar)}" font-weight="600" fill="#f1f3f9" text-anchor="{anchor}">{e(text)}</text>')
+    return "\n".join(out)
+
+
+def data_chart(path: Path) -> Chart:
+    """A chart whose numbers were saved with an automatic post (content/newsroom/data/<name>.json,
+    DEC-0073), so the picture always matches the post's table."""
+    doc = json.loads(path.read_text())["chart"]
+    rows = [(str(r[0]), float(r[1]), str(r[2])) for r in doc["rows"]]
+    svg = _frame(doc["title"], doc["sub"], _signed_bars(rows), doc["foot"])
+    return Chart(svg, doc["source"], [(r[0], r[1]) for r in rows])
+
+
 CHARTS = {
     "catalog-evidence": catalog_evidence,
     "catalog-decades": catalog_decades,
 }
+for _f in sorted((ROOT / "content/newsroom/data").glob("*.json")):
+    CHARTS[_f.stem] = lambda _f=_f: data_chart(_f)
 
 
 def draw(name: str) -> Chart:

@@ -122,6 +122,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0070 | [Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | DEC-0071 | [People make their own API keys for a versioned Parity API](decisions/0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0072 | [Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0073 | [Search and content run by themselves, with caps, a log and a kill switch](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process) |
 | DEC-0075 | [The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0076 | [Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md) | accepted | 2026-10-27 | [kpis](TAGS.md#kpis), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0077 | [New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
@@ -182,7 +183,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-21 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
-| GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
+| GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-26 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
 | GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-26 | [ui](TAGS.md#ui) |
 | GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-26 | [process](TAGS.md#process) |
