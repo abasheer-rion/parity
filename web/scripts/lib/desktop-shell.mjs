@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 const shell = (p) => pathToFileURL(resolve(import.meta.dirname, "../../../desktop/electron", p)).href;
 
 export const DESKTOP_PAGES = [
-  { name: "title bar", url: shell("ui-titlebar.html"), viewport: { width: 1200, height: 38 } },
+  { name: "title bar", url: shell("ui-titlebar.html"), viewport: { width: 1200, height: 44 } },
   { name: "sections menu", url: `${shell("ui-overlay.html")}?mode=menu`, viewport: { width: 1200, height: 800 } },
   { name: "command palette", url: `${shell("ui-overlay.html")}?mode=palette`, viewport: { width: 1200, height: 800 } },
   { name: "open link", url: `${shell("ui-overlay.html")}?mode=link`, viewport: { width: 1200, height: 800 } },
