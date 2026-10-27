@@ -49,7 +49,9 @@ export function PairsReport({ doc, heading = 2 }: { doc: PairsDoc; heading?: 2 |
   }
 
   const recipe = doc.leaderboard.find((r) => r.id === recipeId) ?? doc.leaderboard[0] ?? null;
-  const recipePairs = recipe ? doc.pairs.filter((p) => p.recipe === recipe.id) : doc.pairs;
+  // A recipe that picks pairs afresh has no fixed pairs of its own; show the linked pairs then.
+  const ownPairs = recipe ? doc.pairs.filter((p) => p.recipe === recipe.id) : doc.pairs;
+  const recipePairs = ownPairs.length ? ownPairs : doc.pairs;
   const pair = recipePairs.find((p) => p.id === pairId) ?? recipePairs[0] ?? null;
   const methodName = (id: string) => doc.methods.find((m) => m.id === id)?.name ?? id;
   const H = `h${heading}` as "h2" | "h3";

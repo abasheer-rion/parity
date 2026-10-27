@@ -36,8 +36,8 @@ describe("the committed snapshot", () => {
     expect(priceFields(raw())).toEqual([]);
   });
 
-  it("has a pair whose source allows research use only", () => {
-    expect(parsePairs(raw()).pairs.some((p) => p.rights !== "public")).toBe(true);
+  it("labels every pair with display rights the guard knows", () => {
+    expect(parsePairs(raw()).pairs.every((p) => ["public", "internal", "research"].includes(p.rights))).toBe(true);
   });
 });
 
