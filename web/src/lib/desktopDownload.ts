@@ -8,7 +8,8 @@
 //   /download/latest/windows     a redirect to the newest Windows installer
 //   /download/latest/info        the version, date, sizes, SHA-256 checksums and links, as JSON
 //
-// Answers are kept 5 minutes in the data centre's cache, so a page view does not call GitHub.
+// The release is looked up once per 5 minutes per data centre, so a page view does not call
+// GitHub; if GitHub fails, the last good copy (up to a day old) is used.
 // No browser globals here, so the tests run it directly with a fake fetch and a fake cache.
 import { newestDesktopRelease, RELEASES_REPO, type FeedEnv, type Release } from "./desktopFeed";
 
@@ -77,30 +78,43 @@ async function newest(env: FeedEnv, fetcher: Fetch): Promise<DownloadInfo | "non
   }
 }
 
+/**
+ * The newest release's details: from the data centre's cache when fresh (5 minutes), else
+ * from GitHub, else the last good copy (kept a day), so a GitHub hiccup does not break the page.
+ */
+async function current(env: FeedEnv, ctx: Waiter, fetcher: Fetch, cache: CacheLike | null): Promise<DownloadInfo | "none" | "error"> {
+  const fresh = new Request("https://download.cache/latest/v1");
+  const kept = new Request("https://download.cache/latest/v1/stale");
+  const read = async (r: Request) => { const hit = await cache?.match(r).catch(() => undefined); return hit ? ((await hit.json()) as DownloadInfo) : null; };
+  const hit = await read(fresh);
+  if (hit) return hit;
+  const info = await newest(env, fetcher);
+  if (info === "error") return (await read(kept)) ?? "error";
+  if (info !== "none" && cache) {
+    const body = JSON.stringify(info);
+    const put = Promise.all([
+      cache.put(fresh, new Response(body, { headers: { "Cache-Control": `public, max-age=${DOWNLOAD_TTL}` } })),
+      cache.put(kept, new Response(body, { headers: { "Cache-Control": "public, max-age=86400" } })),
+    ]).catch(() => {});
+    if (ctx.waitUntil) ctx.waitUntil(put); else await put;
+  }
+  return info;
+}
+
 /** Answers one request to /download/latest/<what>. */
 export async function serveDownload(what: string, method: string, env: FeedEnv, ctx: Waiter = {}, fetcher: Fetch = fetch, cache: CacheLike | null = edgeCache()): Promise<Response> {
   if (method !== "GET" && method !== "HEAD") return json(405, { error: "GET only" }, "no-store");
   if (what !== "info" && !Object.hasOwn(PLATFORMS, what)) return json(404, { error: "Not found" }, "no-store");
-  const key = new Request(`https://download.cache/latest/${what}`);
-  const hit = await cache?.match(key).catch(() => undefined);
-  if (hit) return hit;
-
-  const info = await newest(env, fetcher);
-  if (info === "error") return json(502, { error: "Could not reach GitHub. Try again in a minute." }, "no-store");
-  if (info === "none") return json(404, { error: "No desktop release is published yet." }, "public, max-age=60");
-  let res: Response;
+  const info = await current(env, ctx, fetcher, cache);
   if (what === "info") {
-    res = json(200, info, `public, max-age=${DOWNLOAD_TTL}, stale-while-revalidate=86400`);
-  } else {
-    const file = info.files.find((f) => f.platform === what);
-    if (!file) return json(404, { error: `This release has no ${PLATFORMS[what as Platform].label} download.` }, "public, max-age=60");
-    res = new Response(null, { status: 302, headers: { Location: file.url, "Cache-Control": `public, max-age=${DOWNLOAD_TTL}` } });
+    if (info === "error") return json(502, { error: "Could not reach GitHub. Try again in a minute." }, "no-store");
+    if (info === "none") return json(404, { error: "No desktop release is published yet." }, "public, max-age=60");
+    return json(200, info, `public, max-age=${DOWNLOAD_TTL}, stale-while-revalidate=86400`);
   }
-  if (cache) {
-    const put = cache.put(key, res.clone()).catch(() => {});
-    if (ctx.waitUntil) ctx.waitUntil(put); else await put;
-  }
-  return res;
+  // A button never dead-ends: without a release to point at, it opens the releases page.
+  const file = typeof info === "object" ? info.files.find((f) => f.platform === what) : undefined;
+  if (!file) return new Response(null, { status: 302, headers: { Location: RELEASES_PAGE, "Cache-Control": "no-store" } });
+  return new Response(null, { status: 302, headers: { Location: file.url, "Cache-Control": `public, max-age=${DOWNLOAD_TTL}` } });
 }
 
 function edgeCache(): CacheLike | null {

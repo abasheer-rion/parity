@@ -56,7 +56,7 @@ The app never renews the token itself and never copies the refresh token, so rot
 
 - Fewer requests reach Pages and Functions for public pages. This does not change Supabase egress directly: public pages do not read the database. The egress fix is separate (pull request 151).
 - A public page edited and deployed can be stale in a browser for one view after its first 10 minutes. Signed-in pages and data never are.
-- The download page needs no edit when a version ships. If GitHub cannot be reached, the buttons answer an error for that request and the page says the details could not be loaded.
+- The download page needs no edit when a version ships. The release is looked up once per 5 minutes per data centre. If GitHub cannot be reached, the last good copy (up to a day old) is used; with none, a button opens the releases page and the page says the details could not be loaded.
 - A person who signs out in the app is signed out as before: the cookie is removed, not extended.
 - Owner step, optional: a Cloudflare token with Zone, Cache Purge on paritytrading.app as `CLOUDFLARE_PURGE_TOKEN`, and the zone id as `CLOUDFLARE_ZONE_ID`, in the repository's Actions secrets.
 

@@ -60,9 +60,23 @@ describe("serveDownload", () => {
   it("refuses unknown names and says when GitHub fails", async () => {
     expect((await serveDownload("linux", "GET", {}, {}, github(list), null)).status).toBe(404);
     expect((await serveDownload("info", "POST", {}, {}, github(list), null)).status).toBe(405);
-    const down = await serveDownload("windows", "GET", {}, {}, github([], 500), null);
+    const down = await serveDownload("info", "GET", {}, {}, github([], 500), null);
     expect(down.status).toBe(502);
     expect(down.headers.get("Cache-Control")).toBe("no-store");
-    expect((await serveDownload("windows", "GET", {}, {}, github([]), null)).status).toBe(404);
+    expect((await serveDownload("info", "GET", {}, {}, github([]), null)).status).toBe(404);
+  });
+
+  it("sends a button to the releases page when there is nothing to point at", async () => {
+    const res = await serveDownload("windows", "GET", {}, {}, github([], 500), null);
+    expect(res.status).toBe(302);
+    expect(res.headers.get("Location")).toBe("https://github.com/abasheer-rion/parity/releases");
+  });
+
+  it("uses the last good copy when GitHub fails after the fresh copy expired", async () => {
+    const cache = fakeCache();
+    await serveDownload("info", "GET", {}, {}, github(list), cache);
+    cache.store.delete("https://download.cache/latest/v1");
+    const res = await serveDownload("mac-intel", "GET", {}, {}, github([], 500), cache);
+    expect(res.headers.get("Location")).toContain("desktop-v0.2.3");
   });
 });
