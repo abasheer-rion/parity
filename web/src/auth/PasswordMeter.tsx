@@ -32,3 +32,31 @@ export function PasswordMeter({ value, rulesId, email }: { value: string; rulesI
     </div>
   );
 }
+
+/** True once a confirm field holds exactly the new password. */
+export function passwordsMatch(password: string, again: string): boolean {
+  return again.length > 0 && again === password;
+}
+
+/**
+ * The line under a confirm-password field. It says the two do not match once you have
+ * typed something that cannot become the password (or left the field), and shows a tick
+ * when they match. The room is always kept, so nothing below it moves.
+ */
+export function PasswordMatch({ password, value, id, left }: { password: string; value: string; id: string; left: boolean }) {
+  const match = passwordsMatch(password, value);
+  const off = !match && value.length > 0 && (left || !password.startsWith(value));
+  return (
+    <div className={`pw-match${match ? " ok" : ""}${off ? " bad" : ""}`} id={id} aria-live="polite" aria-atomic="true">
+      {match && (
+        <>
+          <span className="pw-mark" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3.5 7.4l2.4 2.4 4.6-5" /></svg>
+          </span>
+          Passwords match
+        </>
+      )}
+      {off && "Passwords do not match"}
+    </div>
+  );
+}

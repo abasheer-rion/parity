@@ -105,6 +105,7 @@ for (const size of sizes) {
     check(said === "Password strength: Strong", `${size.name}: the strength is announced in words`, said);
     const ticks = await page.locator(".pw-rules li.ok").count();
     check(ticks === 3, `${size.name}: every rule is ticked`, String(ticks));
+    await page.getByLabel("Confirm password").fill("rivetlamp47 quiet Ocean");
     await page.getByRole("checkbox").check();
     await frames(2, 30);
     await page.getByRole("button", { name: "Create account" }).click({ noWaitAfter: true });
