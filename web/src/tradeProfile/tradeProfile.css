@@ -37,7 +37,10 @@
 .tp-cal-week.neg { color: var(--color-negative); }
 
 .tp-optin { margin: var(--space-2) 0 var(--space-4); }
-.tp-optin .ui-field { width: 100%; max-width: 360px; }
+.tp-optin .ui-field { width: 100%; max-width: 360px; min-width: 0; }
+/* A select is as wide as its longest option (long country names), which pushed the page sideways at 320px. */
+.tp-optin .srow-l, .tp-optin .srow-r { min-width: 0; }
+.tp-optin .ui-select, .tp-optin select, .tp-optin input { width: 100%; min-width: 0; max-width: 100%; }
 .tp-trader { display: inline-flex; align-items: center; gap: var(--space-2h); }
 .tp-trader-text { display: flex; flex-direction: column; min-width: 0; }
 .tp-avatar {
