@@ -52,16 +52,20 @@
     <td align="center" style="padding:32px 12px;">
       <!--[if mso]><table role="presentation" width="520" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
-        <tr>
+        <!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
+     images (Outlook and Gmail do until the reader allows them). The glow behind the star
+     is a remote image used only as a background: blocked, the square stays solid. -->
+<tr>
   <td style="padding:0 4px 18px 4px;">
+    <a href="{{ .SiteURL }}" target="_blank" style="text-decoration:none;" aria-label="Parity Trading">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0">
       <tr>
-        <td style="vertical-align:middle;padding-right:10px;">
-          <a href="{{ .SiteURL }}" target="_blank" style="text-decoration:none;"><img src="https://paritytrading.app/email/parity-logo-v2.png" width="40" height="40" alt="Parity Trading" style="display:block;width:40px;height:40px;border:0;"></a>
-        </td>
-        <td class="p-text" style="vertical-align:middle;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:24px;font-weight:700;color:#141622;">Parity Trading</td>
+        <td role="img" aria-label="Parity Trading" width="40" height="40" align="center" valign="middle" bgcolor="#0d1220" background="https://paritytrading.app/email/parity-mark-glow.png" style="width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url('https://paritytrading.app/email/parity-mark-glow.png');background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:'Segoe UI Symbol','Apple Symbols','DejaVu Sans',Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;"><span aria-hidden="true" style="color:#5b8cff;">&#10042;</span></td>
+        <td style="width:12px;font-size:0;line-height:0;">&nbsp;</td>
+        <td class="p-text" style="vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;">PARITY <span style="color:#1F4FBF;">TRADING</span></td>
       </tr>
     </table>
+    </a>
   </td>
 </tr>
         <tr>
