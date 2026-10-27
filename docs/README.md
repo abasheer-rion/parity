@@ -78,7 +78,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
 | DEC-0027 | [New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
-| DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-26 | [ui](TAGS.md#ui) |
 | DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
 | DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0031 | [Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
@@ -182,8 +182,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
-| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
-| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-26 | [ui](TAGS.md#ui) |
+| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 | GDE-0009 | [Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## reference

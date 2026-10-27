@@ -33,7 +33,7 @@ export function headline(F: Frame, main: Stat | null, side: Stat[] = [], o: { op
   const lab = Math.max(10.5 * u, big * 0.3);
   const base = head.y0 + big * 0.92;
   let out = text(F, head.x0 - big * 0.03, base, main.value, { size: big, weight: 650, fill: main.tone ? F.color(main.tone) : F.th.ink, halo: false, track: -big * 0.02 });
-  out += text(F, head.x0, base + lab * 1.45, main.label, { size: lab, fill: F.th.muted, halo: false, track: 0.2 * u });
+  out += text(F, head.x0, base + lab * 1.7, main.label, { size: lab, fill: F.th.muted, halo: false, track: 0.2 * u });
   // Side stats, right aligned, one above the other.
   const mainW = Math.max(textWidth(main.value, big, 650), textWidth(main.label, lab));
   let x = head.x1;
@@ -42,7 +42,7 @@ export function headline(F: Frame, main: Stat | null, side: Stat[] = [], o: { op
     const w = Math.max(textWidth(st.value, sideBig, 600), textWidth(st.label, lab));
     if (x - w < head.x0 + mainW + 16 * u) break;
     out += text(F, x, base - sideBig * 0.05, st.value, { size: sideBig, weight: 600, fill: st.tone ? F.color(st.tone) : F.th.text, anchor: "end", halo: false });
-    out += text(F, x, base + lab * 1.45, st.label, { size: lab, fill: F.th.muted, anchor: "end", halo: false, track: 0.2 * u });
+    out += text(F, x, base + lab * 1.7, st.label, { size: lab, fill: F.th.muted, anchor: "end", halo: false, track: 0.2 * u });
     x -= w + 18 * u;
   }
   return group(out, o.opacity ?? 1);
@@ -70,9 +70,27 @@ export interface AxisOptions {
   xCount?: number;
   /** Draw no y labels (bars carry their own numbers). */
   yLabels?: boolean;
+  /** Leave the y labels out here, to draw them on top of the lines later with `yAxisLabels`. */
+  yLabelsLater?: boolean;
 }
 
 /** Faint grid lines with their values sitting on them at the left, and labels along the bottom. */
+/** The y labels alone, each on a small backing so a line passing under it cannot hide it (WCAG 1.4.3). */
+export function yAxisLabels(F: Frame, sc: Scales, o: Pick<AxisOptions, "yFmt" | "yCount">): string {
+  const { box, d } = sc;
+  const u = F.u;
+  let out = "";
+  for (const v of niceTicks(d.y0, d.y1, o.yCount ?? (box.y1 - box.y0 > 200 * u ? 5 : 4))) {
+    const y = sc.y(v);
+    if (y < box.y0 - 1 || y > box.y1 + 1 || y - box.y0 <= 9 * u) continue;
+    const edge = clamp(Math.min(y - box.y0 + 4 * u, box.y1 - y + 10 * u) / (10 * u));
+    const t = o.yFmt(v), w = textWidth(t, 10 * u);
+    out += rect(box.x0 - 2 * u, y - 13 * u, w + 4 * u, 12 * u, { fill: F.th.halo, rx: 2 * u, opacity: 0.88 * edge });
+    out += text(F, box.x0, y - 3.5 * u, t, { size: 10 * u, fill: F.th.faint, opacity: edge, halo: false });
+  }
+  return out;
+}
+
 export function axes(F: Frame, sc: Scales, o: AxisOptions): string {
   const { box, d } = sc;
   const u = F.u;
@@ -84,7 +102,7 @@ export function axes(F: Frame, sc: Scales, o: AxisOptions): string {
     // Fade grid lines and labels that sit right at the top or bottom edge as the camera moves.
     const edge = clamp(Math.min(y - box.y0 + 4 * u, box.y1 - y + 10 * u) / (10 * u));
     out += line(box.x0, y, box.x1 + F.L.right * 0.15, y, { stroke: F.th.grid, opacity: F.th.gridOpacity * edge });
-    if (o.yLabels !== false && y - box.y0 > 9 * u) out += text(F, box.x0, y - 3.5 * u, o.yFmt(v), { size: 10 * u, fill: F.th.faint, opacity: edge });
+    if (o.yLabels !== false && !o.yLabelsLater && y - box.y0 > 9 * u) out += text(F, box.x0, y - 3.5 * u, o.yFmt(v), { size: 10 * u, fill: F.th.faint, opacity: edge });
   }
   const bottom = box.y1 + 14 * u;
   if (o.xTicks) {
@@ -211,7 +229,9 @@ export function pills(F: Frame, items: Pill[], bounds?: Box): string {
   let out = "";
   for (const it of placed) {
     const lab = it.label ? `${it.label} ` : "";
-    const w = textWidth(lab, size * 0.92) + textWidth(it.value, size, 650) + 14 * u;
+    // A little wider than the estimate, with the text centred, so a fallback font that runs
+    // wider than Inter still sits inside the pill (the text needs the pill behind it for contrast).
+    const w = (textWidth(lab, size * 0.92) + textWidth(it.value, size, 650)) * 1.08 + 16 * u;
     let x = it.x + 9 * u;
     if (x + w > b.x1) x = it.x - 9 * u - w;
     x = Math.max(b.x0 + 2 * u, x);
@@ -220,7 +240,7 @@ export function pills(F: Frame, items: Pill[], bounds?: Box): string {
     // A short tie from the tip to a pill that was pushed away from it.
     if (Math.abs(it.py - it.y) > h * 0.6) g += line(it.x, it.y, x < it.x ? x + w : x, it.py, { stroke: it.color, sw: 1 * u, opacity: 0.5 });
     g += rect(x, y, w, h, { fill: it.color, rx: h / 2 });
-    g += `<text x="${r1(x + 7 * u)}" y="${r1(y + h / 2 + size * 0.36)}" font-size="${r1(size)}" fill="${F.th.onFill}" font-family="${F.th.font}" style="font-variant-numeric:tabular-nums">${it.label ? `<tspan font-size="${r1(size * 0.92)}" opacity="0.72">${escT(lab)}</tspan>` : ""}<tspan font-weight="650">${escT(it.value)}</tspan></text>`;
+    g += `<text x="${r1(x + w / 2)}" y="${r1(y + h / 2 + size * 0.36)}" font-size="${r1(size)}" text-anchor="middle" fill="${F.th.onFill}" font-family="${F.th.font}" style="font-variant-numeric:tabular-nums">${it.label ? `<tspan font-size="${r1(size * 0.92)}" opacity="0.72">${escT(lab)}</tspan>` : ""}<tspan font-weight="650">${escT(it.value)}</tspan></text>`;
     out += group(g, it.opacity ?? 1);
   }
   return out;

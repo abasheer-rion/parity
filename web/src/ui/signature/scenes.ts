@@ -15,7 +15,7 @@ import {
 } from "./core.ts";
 import { camera, fit, scales, niceTicks, type Domain } from "./camera.ts";
 import {
-  axes, bands, callout, caption, drawLine, headline, leadDot, parLine, pills, title, verdict, background, wrap,
+  axes, yAxisLabels, bands, callout, caption, drawLine, headline, leadDot, parLine, pills, title, verdict, background, wrap,
   type Band, type Pill, type Stat,
 } from "./primitives.ts";
 import { viewport, type Box, type SizeName, type ThemeName, type Theme, type Tone, type Viewport } from "./theme.ts";
@@ -185,7 +185,7 @@ const equity: Scene = (v, F) => {
   if (!zoomed && to > cam.x1) cam = { ...cam, x1: to };
   const sc = scales(cam, F.L.plot);
 
-  let out = axes(F, sc, { yFmt: fm, xTicks: xTicksFor(cam, P, n) });
+  let out = axes(F, sc, { yFmt: fm, xTicks: xTicksFor(cam, P, n), yLabelsLater: true });
   out += crossfade(F, steps, "bands", (b, op) => bands(F, sc, list(b).map((x) => ({
     from: X(num(x.from, 0)), to: X(num(x.to, 1)), label: str(x.label), tone: isTone(x.tone) ? x.tone : "muted",
   })) as Band[], { opacity: op }));
@@ -206,6 +206,7 @@ const equity: Scene = (v, F) => {
     tips[i] = r.tip ? { x: r.tip.x, y: r.tip.y, v: r.tip.v } : { x: NaN, y: NaN, v: NaN };
     if (r.tip && vis[i] > 0.01) tipPills.push({ x: r.tip.x, y: r.tip.y, value: fm(r.tip.v), label: S.length > 1 ? s.label : undefined, color: col, opacity: vis[i] });
   }
+  out += yAxisLabels(F, sc, { yFmt: fm });
   out += pills(F, tipPills);
 
   // Callouts that belong to one step: a ring on the point, a leader and a label.
@@ -347,12 +348,13 @@ const underwater: Scene = (v, F) => {
   for (let i = 0; i <= Math.min(n - 1, Math.floor(to)); i++) if (dd[i] < worstSoFar) { worstSoFar = dd[i]; worstAt = i; }
   dom.y0 = Math.min(dom.y0, worstSoFar * 1.05);
   const sb = scales(dom, bot);
-  let out = axes(F, sb, { yFmt: pct(0), xTicks: xTicksFor(dom, P, n), yCount: 3 });
+  let out = axes(F, sb, { yFmt: pct(0), xTicks: xTicksFor(dom, P, n), yCount: 3, yLabelsLater: true });
   // The waterline and the fill below it.
   out += line(bot.x0, sb.y(0), bot.x1, sb.y(0), { stroke: F.th.par, sw: 1.2 * u });
   out += text(F, bot.x1, sb.y(0) - 4 * u, str(P.highLabel, "Last high"), { size: 10 * u, fill: F.th.muted, anchor: "end" });
   const r = drawLine(F, sb, { values: dd, to, color: F.th.neg, area: 0.3, areaTo: 0, width: 1.8, dot: true });
   out += r.svg;
+  out += yAxisLabels(F, sb, { yFmt: pct(0), yCount: 3 });
   if (r.tip) out += pills(F, [{ x: r.tip.x, y: r.tip.y, value: pct(0)(r.tip.v), color: F.th.neg }]);
 
   if (split > 0.01) {
@@ -450,7 +452,10 @@ const distribution: Scene = (v, F) => {
     g += line(a, box.y0, a, box.y1, { stroke: F.th.accent, sw: 1 * u, opacity: 0.6, dash: `${r1(3 * u)} ${r1(3 * u)}` });
     g += line(sc.x(hi), box.y0, sc.x(hi), box.y1, { stroke: F.th.accent, sw: 1 * u, opacity: 0.6 * clamp(bandOp * 2 - 1), dash: `${r1(3 * u)} ${r1(3 * u)}` });
     const lab = str(B.label, "95% range");
-    g += text(F, (sc.x(lo) + sc.x(hi)) / 2, box.y0 - 4 * u, `${lab}: ${fm(lo)} to ${fm(hi)}`, { size: 10 * u, fill: F.th.accent, anchor: "middle", weight: 600 });
+    // Centred over the band, but kept inside the chart when the band sits near an edge.
+    const bl = `${lab}: ${fm(lo)} to ${fm(hi)}`, half = textWidth(bl, 10 * u, 600) / 2;
+    const bx = clamp((sc.x(lo) + sc.x(hi)) / 2, box.x0 + half, box.x1 - half);
+    g += text(F, bx, box.y0 - 4 * u, bl, { size: 10 * u, fill: F.th.accent, anchor: "middle", weight: 600 });
     out += group(g, clamp(bandOp * 1.5));
   }
   // Bars rise left to right.
@@ -468,7 +473,9 @@ const distribution: Scene = (v, F) => {
   if (Number.isFinite(par)) {
     const x = sc.x(par);
     out += line(x, box.y0, x, box.y1, { stroke: F.th.par, sw: 1.2 * u, dash: `${r1(4 * u)} ${r1(3 * u)}` });
-    out += text(F, x + 4 * u, box.y0 + 26 * u, str(P.parLabel, "Zero"), { size: 10 * u, fill: F.th.muted });
+    // The label goes on the side of the line away from the marker, so the two never overlap.
+    const left = markOp > 0.01 && Number.isFinite(mv) && mv > par;
+    out += text(F, left ? x - 4 * u : x + 4 * u, box.y0 + 26 * u, str(P.parLabel, "Zero"), { size: 10 * u, fill: F.th.muted, anchor: left ? "end" : "start" });
   }
   // The marker: one result, dropped onto the pile of others.
   let headlineStat: Stat | null = null;
@@ -794,6 +801,15 @@ function sample(n: number, max: number): number[] {
   return Array.from({ length: max }, (_, k) => Math.round((k * (n - 1)) / (max - 1)));
 }
 
+/** Indices for table rows. When several points share a label (months labelled by year), one row per label. */
+function samplePoints(P: Record<string, unknown>, n: number, max: number): number[] {
+  const labels = Array.isArray(P.labels) ? (P.labels as unknown[]).map((x) => String(x)) : null;
+  if (!labels) return sample(n, max);
+  const firsts: number[] = [];
+  for (let i = 0; i < n; i++) if (i === 0 || labels[i] !== labels[i - 1]) firsts.push(i);
+  return firsts.length === n ? sample(n, max) : sample(firsts.length, max).map((k) => firsts[k]);
+}
+
 /** The numbers behind a visual as a table: the text alternative every chart carries (WCAG 1.1.1). */
 export function signatureTable(v: SigVisual, max = 14): SigTable | null {
   const P = v.params ?? {};
@@ -810,20 +826,20 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
       const S = seriesOf(P), fm = fmtOf(P.fmt);
       if (!S.length) return null;
       const n = Math.max(...S.map((s) => s.values.length));
-      return { caption: v.alt, head: ["Point", ...S.map((s) => s.label)], rows: sample(n, max).map((i) => [pointLabel(P, i), ...S.map((s) => cell(fm, s.values[i]))]) };
+      return { caption: v.alt, head: ["Point", ...S.map((s) => s.label)], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...S.map((s) => cell(fm, s.values[i]))]) };
     }
     case "split": {
       const L = obj(P.left), R = obj(P.right), fm = fmtOf(P.fmt);
       const a = gappy(L.values), b = gappy(R.values);
       const n = Math.max(a.length, b.length);
-      return { caption: v.alt, head: ["Point", str(L.title, "Left"), str(R.title, "Right")], rows: sample(n, max).map((i) => [pointLabel(P, i), cell(fm, a[i]), cell(fm, b[i])]) };
+      return { caption: v.alt, head: ["Point", str(L.title, "Left"), str(R.title, "Right")], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), cell(fm, a[i]), cell(fm, b[i])]) };
     }
     case "underwater": {
       const values = gappy(P.values);
       const dd = values.length ? drawdownOf(values) : gappy(P.drawdown);
       let w = 0;
       dd.forEach((x, i) => { if (x < dd[w]) w = i; });
-      const rows = sample(dd.length, max).map((i) => [pointLabel(P, i), cell(pct(0), dd[i])]);
+      const rows = samplePoints(P, dd.length, max).map((i) => [pointLabel(P, i), cell(pct(0), dd[i])]);
       rows.push([`Worst, ${pointLabel(P, w)}`, cell(pct(0), dd[w])]);
       return { caption: v.alt, head: ["Point", "Below the high"], rows };
     }
@@ -845,7 +861,7 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
       const rows = list(P.rows).map((r) => ({ label: str(r.label), values: gappy(r.values) }));
       const fm = fmtOf(P.fmt ?? "num2");
       const n = Math.max(0, ...rows.map((r) => r.values.length));
-      return { caption: v.alt, head: ["Point", ...rows.map((r) => r.label)], rows: sample(n, max).map((i) => [pointLabel(P, i), ...rows.map((r) => cell(fm, r.values[i]))]) };
+      return { caption: v.alt, head: ["Point", ...rows.map((r) => r.label)], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...rows.map((r) => cell(fm, r.values[i]))]) };
     }
     case "regimes": {
       const fm = fmtOf(P.fmt ?? "pctSigned");

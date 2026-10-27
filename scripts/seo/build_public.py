@@ -111,17 +111,30 @@ def load_academy() -> list[dict]:
     return sorted(courses, key=lambda c: c["order"])
 
 
-def academy_frames() -> dict[str, list[str]]:
-    """Every lesson picture's step frames as SVG, drawn by the app's own code (needs Node 22.6+).
+def academy_frames() -> tuple[dict[str, list[str]], dict[str, dict]]:
+    """Every lesson picture's step frames as SVG, drawn by the app's own code (needs Node 22.6+),
+    and for signature pictures (DEC-0067) the table of numbers behind each one.
 
     Without Node the lesson pages still build, with the step captions but no picture."""
     try:
         out = subprocess.run(["node", "--experimental-strip-types", str(ROOT / "web/scripts/academy-frames.ts")],
                              capture_output=True, text=True, timeout=120, check=True).stdout
-        return json.loads(out)
+        data = json.loads(out)
+        return data.get("frames", {}), data.get("tables", {})
     except (OSError, subprocess.SubprocessError, json.JSONDecodeError) as err:
         print(f"build_public: no Academy pictures ({err.__class__.__name__}); pages keep their captions", file=sys.stderr)
-        return {}
+        return {}, {}
+
+
+def academy_table(t: dict | None) -> str:
+    """The numbers behind a picture as a plain table, folded under the still."""
+    if not t:
+        return ""
+    head = "".join(f'<th scope="col">{e(h)}</th>' for h in t["head"])
+    rows = "".join("<tr>" + "".join((f'<th scope="row">{e(c)}</th>' if j == 0 else f"<td>{e(c)}</td>") for j, c in enumerate(r)) + "</tr>"
+                   for r in t["rows"])
+    return (f'<details class="numbers"><summary>Show the numbers</summary><div class="table-wrap" tabindex="0" role="region" aria-label="Table: {e(t["caption"])}">'
+            f'<table><caption>{e(t["caption"])}</caption><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div></details>')
 def load_private_markets() -> dict:
     return json.loads((ROOT / "docs/_system/private-markets.json").read_text())
 
@@ -258,7 +271,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 .tablewrap{overflow-x:auto}
 .fig{background:#0c0e15;border:1px solid var(--line);border-radius:14px;padding:10px;margin:0 0 14px}.fig svg{display:block;width:100%;height:auto}
 .fig figcaption{padding:8px 6px 2px;font-size:14px;color:var(--muted)}.fig figcaption ol{margin:6px 0 0;padding-left:20px}
-details{margin:6px 0 0}summary{cursor:pointer;color:var(--blue-text)}.q{margin:0 0 16px}.q ul{margin:6px 0;padding-left:20px;color:#dfe2ec}
+details{margin:6px 0 0}summary{cursor:pointer;color:var(--blue-text)}.numbers .table-wrap{overflow-x:auto;margin-top:6px}.numbers table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}.numbers caption{text-align:left;padding:0 0 6px}.numbers th,.numbers td{padding:3px 10px 3px 0;text-align:right;border-bottom:1px solid var(--line)}.numbers th[scope=row],.numbers thead th:first-child{text-align:left}.q{margin:0 0 16px}.q ul{margin:6px 0;padding-left:20px;color:#dfe2ec}
 .pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 0}
 .cta{margin:48px 0 0;background:linear-gradient(135deg,#101633,#0c0e15);border:1px solid var(--line-2);border-radius:16px;padding:24px}
 .cta p{margin:0 0 14px;color:var(--muted)}.cta strong{color:var(--text);display:block;font-size:18px;margin-bottom:4px}
@@ -623,7 +636,7 @@ def academy_link(k: dict, term_ids: set[str]) -> str:
 
 def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[str, str]:
     term_names = {t["id"]: t["term"] for t in terms}
-    frames = academy_frames()
+    frames, tables = academy_frames()
     pages = {}
     base = "/learn/academy/"
     for c in courses:
@@ -642,7 +655,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
             svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-label="{e(v["alt"])}">{shot}</svg>'
                    if shot else f'<p>{e(v["alt"])}</p>')
             fig = (f'<figure class="fig">{svg}<figcaption>The picture, step by step (the still above is the last step):'
-                   f"<ol>{steps}</ol></figcaption></figure>")
+                   f"<ol>{steps}</ol>{academy_table(tables.get(c['id'] + '/' + l['id']))}</figcaption></figure>")
             body_text = "".join(f"<p>{inline(p, {}, refs)}</p>" for p in l["body"])
             links = "".join(f'<li><a href="{e(academy_link(k, set(term_names)))}">{e(k["label"])}</a></li>' for k in l["inParity"])
             words = [f'<a href="/learn/{t}/">{e(term_names[t])}</a>' for t in l["terms"] if t in term_names]

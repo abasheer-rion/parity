@@ -2,10 +2,13 @@
 // with Back and Next (or the arrow keys), tweening between step frames, and plays once
 // through on its own the first time it scrolls into view. With reduced motion it jumps
 // straight to each step frame and never plays on its own. "All steps" lays every frame
-// out side by side with its caption. Motion rules: DEC-0017.
+// out side by side with its caption. Motion rules: DEC-0017. Lessons drawn with the
+// signature chart system (DEC-0067) play in its own player instead, which adds the slider
+// and the data table behind the picture.
 import DOMPurify from "dompurify";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
-import { H, renderScene, W, type Visual } from "./scenes";
+import { H, isSignature, renderScene, W, type Visual } from "./scenes";
+import { SignaturePlayer } from "../ui/signature/Player";
 // Reduced motion follows the device and the Motion setting (REF-0023).
 import { useReducedMotion } from "../ui/presence";
 import { Button } from "../ui";
@@ -28,6 +31,11 @@ export function Frame({ visual, s }: { visual: Visual; s: number }) {
 }
 
 export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; autoPlay?: boolean }) {
+  if (isSignature(visual)) return <SignaturePlayer visual={visual} autoPlay={autoPlay} theme="dark" className="ac-visual ac-sig" />;
+  return <ClassicPlayer visual={visual} autoPlay={autoPlay} />;
+}
+
+function ClassicPlayer({ visual, autoPlay = true }: { visual: Visual; autoPlay?: boolean }) {
   const reduced = useReducedMotion();
   const last = visual.steps.length - 1;
   const [step, setStep] = useState(0);
