@@ -7,7 +7,7 @@ import { date } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
 import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
-import { Button, ErrorBoundary, lazyPage, PageSkeleton, preload, Toaster } from "./ui";
+import { Button, ErrorBoundary, lazyPage, ListSelect, PageSkeleton, preload, Toaster } from "./ui";
 import { loadDocIndex } from "./lib/docs";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { setStoreUser } from "./lib/userStore";
@@ -259,10 +259,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
     <>
       <span className="side-run-label">Results from{source === "local" && <span className="chip-badge">local run</span>}</span>
       {batches.length > 0 && (
-        <select className="run-picker" aria-label="Research run" value={batchId ?? ""} onChange={(e) => setBatchId(e.target.value || undefined)}>
-          <option value="">Latest run</option>
-          {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
-        </select>
+        <ListSelect className="side-lsel" label="Research run" value={batchId ?? ""} onChange={(v) => setBatchId(v || undefined)}
+          options={[["", "Latest run"], ...batches.map((b) => [b.id, `${b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}${date(b.generated_at)}`] as [string, string])]} />
       )}
     </>
   );

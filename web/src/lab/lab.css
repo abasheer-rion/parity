@@ -67,7 +67,7 @@ html[data-desktop-chrome] .lb-top { padding-left: var(--desktop-chrome-left); pa
 .lb-brand b { color: var(--l-text); font-weight: 600; }
 .plb h1.lb-viewname { margin: 0 0 0 6px; font: 500 var(--type-sm)/1 var(--font-text); letter-spacing: 0; color: var(--l-text); white-space: nowrap; }
 .lb-ro { height: 20px; padding: 0 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--l-text); font-size: var(--l-fs-s); line-height: 18px; white-space: nowrap; flex: none; }
-.lb-run select { height: 26px; max-width: 200px; padding: 0 6px; border: 1px solid var(--l-line-2); border-radius: 5px; background: var(--l-bg); color: var(--l-muted); font: inherit; }
+.lb-run .ui-lsel-btn { min-height: 26px; height: 26px; max-width: 200px; font-size: var(--l-fs); padding: 0 6px; border: 1px solid var(--l-line-2); border-radius: 5px; background: var(--l-bg); color: var(--l-muted); font: inherit; }
 
 /* ---------- Rail, main and footer ---------- */
 .lb-mid { display: flex; min-height: 0; min-width: 0; }
@@ -106,7 +106,7 @@ html[data-desktop-chrome] .lb-top { padding-left: var(--desktop-chrome-left); pa
 .lb-select { width: auto; max-width: 150px; }
 .lb-input:focus, .lb-select:focus-visible { outline: none; border-color: var(--l-line-3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--palette-white) 6%, transparent); }
 .lb-find { flex: 0 1 300px; min-width: 160px; }
-.plb .ui-select select { height: 28px; font-size: var(--l-fs); }
+.plb .ui-select select, .plb .ui-lsel-btn { min-height: 28px; height: 28px; font-size: var(--l-fs); }
 .plb .ui-field-label { font-size: var(--l-fs-s); }
 .lb-group { display: flex; flex-direction: column; gap: 4px; }
 .lb-chips { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
@@ -260,7 +260,7 @@ html[data-desktop-chrome] .lb-top { padding-left: var(--desktop-chrome-left); pa
 .plb[data-mobile] .lb-note { white-space: normal; }
 .plb[data-mobile] .lb-bar { flex-wrap: wrap; }
 .plb[data-mobile] .lb-bar > .lb-dim { white-space: normal; }
-.plb[data-mobile] .lb-run select { max-width: 120px; }
+.plb[data-mobile] .lb-run .ui-lsel-btn { max-width: 120px; }
 .plb[data-mobile] .lb-grow { flex: none; }
 .plb[data-mobile] .lb-box.lb-grow { max-height: 70vh; }
 .plb[data-mobile] .lb-set-row { flex-wrap: wrap; padding: 6px 0; }

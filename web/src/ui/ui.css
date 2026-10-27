@@ -95,6 +95,18 @@
 .ui-select { position: relative; display: inline-flex; align-items: center; }
 .ui-select select { appearance: none; height: 32px; padding: 0 30px 0 12px; border-radius: var(--radius-md); border: 1px solid var(--ds-border-input); background: var(--hover); color: var(--text); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .ui-select .icon { position: absolute; right: 10px; pointer-events: none; color: var(--muted); }
+/* ListSelect: the button looks like a field; its menu is the library's menu surface. */
+.ui-lsel { position: relative; display: inline-flex; max-width: 100%; }
+.ui-lsel-btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-2); max-width: 100%; min-height: 32px; padding: 0 var(--space-2h) 0 var(--space-3); border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); background: var(--ds-background-input); color: var(--color-text); font: inherit; font-size: var(--type-md); text-align: left; cursor: pointer; transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); }
+.ui-lsel-btn:hover, .ui-lsel-btn[aria-expanded="true"] { border-color: var(--ds-border-input-emphasized); background: var(--color-hover); }
+.ui-lsel-btn .icon { flex: none; color: var(--color-text-muted); transition: transform var(--dur-2) var(--ease-out); }
+.ui-lsel-btn[aria-expanded="true"] .icon { transform: rotate(180deg); }
+.ui-lsel-v { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-lsel-list { max-height: min(320px, 60vh); overflow-y: auto; overscroll-behavior: contain; }
+.ui-lsel-o { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); color: var(--color-text-body); font-size: var(--type-md); cursor: pointer; white-space: nowrap; }
+.ui-lsel-o.active { background: var(--color-row-hover); color: var(--color-text); }
+.ui-lsel-o[aria-selected="true"] { color: var(--color-text); font-weight: var(--weight-medium); }
+.ui-lsel-o .icon { color: var(--color-accent-text); }
 /* Choose one of a few: underline tabs, not a pill. The buttons never change size; one 2px
    Invicta line under the chosen option slides there with a transform (DEC-0075). */
 .ui-seg { position: relative; display: inline-flex; align-items: stretch; flex-wrap: wrap; gap: 0 var(--space-1); min-height: var(--control-h-md); max-width: 100%; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: inset 0 -1px 0 var(--color-border-strong); }

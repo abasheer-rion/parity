@@ -185,7 +185,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 /* Watchlist panel */
 .wm { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 .wm-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px; padding: 6px; flex: none; }
-.wm-head .ui-select, .wm-head .ui-select select { width: 100%; height: 28px; font-size: var(--tr-fs); }
+.wm-head .ui-select, .wm-head .ui-select select, .wm-head .ui-lsel, .wm-head .ui-lsel-btn { width: 100%; height: 28px; font-size: var(--tr-fs); }
 .wm .tt-wrap { flex: 1 1 auto; min-height: 0; }
 
 /* ---------- Dense tables ---------- */
@@ -237,11 +237,11 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .vcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .view .ui-filterbar { flex: none; }
 .dlg-fields { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-.dlg-fields .ui-select, .dlg-fields .ui-select select, .dlg-fields .tr-pick select { width: 100%; }
+.dlg-fields .ui-select, .dlg-fields .ui-select select, .dlg-fields .tr-pick select, .dlg-fields .ui-lsel, .dlg-fields .ui-lsel-btn { width: 100%; }
 
 /* Screener filters */
 .sc-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; flex: none; align-items: end; }
-.sc-filters .ui-select, .sc-filters .ui-select select { width: 100%; height: 28px; font-size: var(--tr-fs); }
+.sc-filters .ui-select, .sc-filters .ui-select select, .sc-filters .ui-lsel, .sc-filters .ui-lsel-btn { width: 100%; height: 28px; font-size: var(--tr-fs); }
 .sc-range { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .sc-range legend { padding: 0; margin-bottom: 3px; font-size: var(--tr-fs-s); color: var(--muted); }
 .sc-count { flex: none; height: 16px; }
@@ -254,7 +254,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .st-sec > .vh + .st-row { border-top: 0; }
 .st-label { flex: 1 1 auto; color: var(--text-body); }
 .st-ctl { display: inline-flex; align-items: center; gap: 6px; flex: none; }
-.st-ctl .ui-select select, .st-ctl .tr-pick select { width: 220px; height: 28px; font-size: var(--tr-fs); }
+.st-ctl .ui-select select, .st-ctl .tr-pick select, .st-ctl .ui-lsel-btn { width: 220px; min-height: 28px; height: 28px; font-size: var(--tr-fs); }
 .st-keys { margin-top: 6px; }
 .st-note { margin: 0 0 8px; color: var(--text-2); font-size: var(--tr-fs-s); line-height: 1.5; }
 .st-links { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 4px 0; }
@@ -332,7 +332,7 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .ptr[data-mobile] .view { padding: 6px; }
 .ptr[data-mobile] .vcols { grid-template-columns: minmax(0, 1fr); }
 .ptr[data-mobile] .st-row { flex-wrap: wrap; padding: 6px 0; }
-.ptr[data-mobile] .st-ctl .ui-select select, .ptr[data-mobile] .st-ctl .tr-pick select { width: 180px; }
+.ptr[data-mobile] .st-ctl .ui-select select, .ptr[data-mobile] .st-ctl .tr-pick select, .ptr[data-mobile] .st-ctl .ui-lsel-btn { width: 180px; }
 
 /* Shared UI pieces, made dense inside Trade */
 .ptr .ui-chip { height: 24px; font-size: var(--tr-fs); }

@@ -2,6 +2,7 @@
 // checkboxes. All are 32px tall by default with a 1px quiet border.
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Icon } from "./icons";
+import { ListSelect } from "./overlays";
 
 export function Input({ value, onChange, placeholder, type = "text", label, autoFocus }:
   { value: string; onChange: (v: string) => void; placeholder?: string; type?: string; label?: string; autoFocus?: boolean }) {
@@ -19,15 +20,9 @@ export function SearchInput({ value, onChange, placeholder = "Search", autoFocus
   );
 }
 
+/** Choose one from a list: opens Parity's own menu, not the browser's pop-up (ListSelect). */
 export function Select<T extends string>({ value, onChange, options, label }: { value: T; onChange: (v: T) => void; options: [T, string][]; label: string }) {
-  return (
-    <span className="ui-select">
-      <select value={value} onChange={(e) => onChange(e.target.value as T)} aria-label={label}>
-        {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-      </select>
-      <Icon name="chevronDown" size={13} />
-    </span>
-  );
+  return <ListSelect value={value} onChange={onChange} options={options} label={label} />;
 }
 
 /** Choose one of a few, as underline tabs. A blue line slides under the chosen option. */

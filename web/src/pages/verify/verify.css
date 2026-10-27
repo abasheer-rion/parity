@@ -17,7 +17,7 @@
 .vf-warn { color: var(--series-4); margin: 0; font-size: var(--fs-sm); }
 .vf-note { color: var(--text-2); margin: 6px 0 0; font-size: var(--fs-sm); }
 .vf-map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; padding: 4px 0 8px; }
-.vf-map .ui-select, .vf-map .ui-select select { width: 100%; }
+.vf-map .ui-select, .vf-map .ui-select select, .vf-map .ui-lsel, .vf-map .ui-lsel-btn { width: 100%; }
 .vf-questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
 .vf-claim { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border: 0; padding: 0; margin: 0; }
 .vf-claim legend { margin-bottom: 6px; }

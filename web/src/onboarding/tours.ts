@@ -43,7 +43,7 @@ export const TOURS: Record<Area, { label: string; steps: GuidedStep[] }> = {
   verify: {
     label: "Verify tour",
     steps: [
-      { id: "mode", target: ".ui-seg[aria-label='What to check']", title: "Choose what to check", body: "Upload a trade log, describe a bot in words, or pick one of our tested strategies." },
+      { id: "mode", target: ".ui-choices[aria-label='What to check']", title: "Choose what to check", body: "Upload a trade log, describe a bot in words, or pick one of our tested strategies." },
       { id: "privacy", target: ".vf-privacy", title: "Your file stays here", body: "An uploaded file is read and checked in this browser. It is never sent to our servers." },
       { id: "input", target: ".vf-input", title: "Fill in what you know", body: "Each answer changes which checks run. The luck check needs to know how many versions were tried." },
       { id: "result", target: ".vf-input ~ .ui-empty, .vf-result, .ui-empty", title: "Read the result", body: "Profit per trade, worst loss, the luck check and signs of tuning to past data, in plain words." },
