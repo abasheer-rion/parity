@@ -799,6 +799,15 @@ function sample(n: number, max: number): number[] {
   return Array.from({ length: max }, (_, k) => Math.round((k * (n - 1)) / (max - 1)));
 }
 
+/** Indices for table rows. When several points share a label (months labelled by year), one row per label. */
+function samplePoints(P: Record<string, unknown>, n: number, max: number): number[] {
+  const labels = Array.isArray(P.labels) ? (P.labels as unknown[]).map((x) => String(x)) : null;
+  if (!labels) return sample(n, max);
+  const firsts: number[] = [];
+  for (let i = 0; i < n; i++) if (i === 0 || labels[i] !== labels[i - 1]) firsts.push(i);
+  return firsts.length === n ? sample(n, max) : sample(firsts.length, max).map((k) => firsts[k]);
+}
+
 /** The numbers behind a visual as a table: the text alternative every chart carries (WCAG 1.1.1). */
 export function signatureTable(v: SigVisual, max = 14): SigTable | null {
   const P = v.params ?? {};
@@ -815,20 +824,20 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
       const S = seriesOf(P), fm = fmtOf(P.fmt);
       if (!S.length) return null;
       const n = Math.max(...S.map((s) => s.values.length));
-      return { caption: v.alt, head: ["Point", ...S.map((s) => s.label)], rows: sample(n, max).map((i) => [pointLabel(P, i), ...S.map((s) => cell(fm, s.values[i]))]) };
+      return { caption: v.alt, head: ["Point", ...S.map((s) => s.label)], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...S.map((s) => cell(fm, s.values[i]))]) };
     }
     case "split": {
       const L = obj(P.left), R = obj(P.right), fm = fmtOf(P.fmt);
       const a = gappy(L.values), b = gappy(R.values);
       const n = Math.max(a.length, b.length);
-      return { caption: v.alt, head: ["Point", str(L.title, "Left"), str(R.title, "Right")], rows: sample(n, max).map((i) => [pointLabel(P, i), cell(fm, a[i]), cell(fm, b[i])]) };
+      return { caption: v.alt, head: ["Point", str(L.title, "Left"), str(R.title, "Right")], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), cell(fm, a[i]), cell(fm, b[i])]) };
     }
     case "underwater": {
       const values = gappy(P.values);
       const dd = values.length ? drawdownOf(values) : gappy(P.drawdown);
       let w = 0;
       dd.forEach((x, i) => { if (x < dd[w]) w = i; });
-      const rows = sample(dd.length, max).map((i) => [pointLabel(P, i), cell(pct(0), dd[i])]);
+      const rows = samplePoints(P, dd.length, max).map((i) => [pointLabel(P, i), cell(pct(0), dd[i])]);
       rows.push([`Worst, ${pointLabel(P, w)}`, cell(pct(0), dd[w])]);
       return { caption: v.alt, head: ["Point", "Below the high"], rows };
     }
@@ -850,7 +859,7 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
       const rows = list(P.rows).map((r) => ({ label: str(r.label), values: gappy(r.values) }));
       const fm = fmtOf(P.fmt ?? "num2");
       const n = Math.max(0, ...rows.map((r) => r.values.length));
-      return { caption: v.alt, head: ["Point", ...rows.map((r) => r.label)], rows: sample(n, max).map((i) => [pointLabel(P, i), ...rows.map((r) => cell(fm, r.values[i]))]) };
+      return { caption: v.alt, head: ["Point", ...rows.map((r) => r.label)], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...rows.map((r) => cell(fm, r.values[i]))]) };
     }
     case "regimes": {
       const fm = fmtOf(P.fmt ?? "pctSigned");
