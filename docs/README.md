@@ -38,7 +38,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-26 [DEC-0071: People make their own API keys for a versioned Parity API](decisions/0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md)
 
 ## intent
 
