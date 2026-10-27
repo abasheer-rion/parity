@@ -597,6 +597,22 @@ ipcMain.on("parity:nav", (e, dir, source) => {
   else if (dir === "forward") w.forward();
 });
 
+// The page's header row (preload.js): whether it shows one, and presses on its empty part.
+ipcMain.on("parity:chrome", (e, msg) => {
+  if (!fromPage(e)) return;
+  pageWindowOf(e.sender)?.setHeader(e.sender, msg?.header === true);
+});
+
+ipcMain.on("parity:drag", (e, kind, at) => {
+  if (!fromPage(e)) return;
+  const w = pageWindowOf(e.sender);
+  if (!w || w.active?.wc !== e.sender) return;
+  if (kind === "start" && at) w.dragStart(Number(at.x), Number(at.y));
+  else if (kind === "move" && at) w.dragMove(Number(at.x), Number(at.y));
+  else if (kind === "end") w.dragEnd();
+  else if (kind === "dblclick") run("dblclick", w);
+});
+
 ipcMain.on("shell:do", (e, action, arg) => {
   if (!isShellSender(e)) return;
   const w = windowOf(e.sender);
@@ -617,6 +633,8 @@ ipcMain.on("shell:do", (e, action, arg) => {
     w.dragMove(Number(arg.x), Number(arg.y));
   } else if (action === "drag-end") {
     w.dragEnd();
+  } else if (action === "lead-size" && arg) {
+    w.setLead({ base: Number(arg.base), full: Number(arg.full) });
   } else if (action === "open-workspace" && typeof arg === "string") {
     w.closeOverlay();
     openWorkspace(arg);

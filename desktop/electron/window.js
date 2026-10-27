@@ -1,11 +1,19 @@
-// One Parity window (DEC-0049): a slim title bar on top, the page under it edge to edge, and
-// a see-through layer over the page for the menu and the command palette.
+// One Parity window (DEC-0049): the page fills the window to its top edge, the app's own
+// controls sit in the page's header row, and a see-through layer over the page holds the
+// menu and the command palette.
 //
-//   Title bar    38 px, drawn by the app (ui-titlebar.html). Drag it to move the window and
-//                double-click it to zoom (Mac) or maximise (Windows). It holds the menu button
-//                (right of the Mac traffic lights, at the left on Windows, where the system
-//                draws its own minimise, maximise and close buttons on the right), Back and
-//                Forward, the page title, a search button and, in Trade, Keep on top.
+//   Header row   44 px. There is no separate title bar and no title text. The Mac traffic
+//                lights sit over the page, centred on the row; on Windows the system draws
+//                minimise, maximise and close over its right end (titleBarOverlay, in the
+//                page's colour). Right of the traffic lights (at the left on Windows) a small
+//                see-through view (ui-titlebar.html) holds the menu button, Back, Forward,
+//                search (Cmd K) and, in Trade, Keep on top. A page marks its header row with
+//                data-desktop-header (web: Trade, Terminal, Lab, Academy, the app's sidebar);
+//                preload.js tells it how much room to leave on each side and makes its empty
+//                parts drag the window. Double-click them to zoom (Mac) or maximise (Windows).
+//                A page without one (the site, the log-in wall) still runs to the top edge:
+//                its top 44 px are an invisible drag region (preload.js) and the site's
+//                floating logo moves right of the controls (web/src/site/kit.css).
 //   Pages        one per section, kept loaded after you leave it (Settings can turn that off),
 //                so switching back is instant and keeps the page as you left it (page.js).
 //   Layer        ui-overlay.html, shown only while the menu, the command palette or Open link
@@ -19,7 +27,11 @@ const routes = require("./routes");
 const { Page } = require("./page");
 const TOKENS = require("./tokens");
 
-const TITLE_H = 38;
+const CHROME_H = 44;
+/** Where the controls start on a Mac, right of the traffic lights (which end near 66 px). */
+const LEAD_X_MAC = 72;
+/** Room the Windows minimise, maximise and close buttons take at the right. */
+const WIN_CONTROLS_W = 144;
 /** A view's contents, or null once they are closed (they read undefined then, see page.js). */
 const live = (v) => { const wc = v?.webContents; return wc && !wc.isDestroyed() ? wc : null; };
 const OFFLINE_H = 28;
@@ -50,11 +62,16 @@ class ParityWindow {
       backgroundColor: TOKENS["color-canvas"],
       show: false,
       ...(mac
-        ? { titleBarStyle: "hiddenInset", trafficLightPosition: { x: 14, y: 12 } }
-        : { titleBarStyle: "hidden", titleBarOverlay: { color: TOKENS["color-bar"], symbolColor: TOKENS["color-text-body"], height: TITLE_H }, icon: path.join(__dirname, "..", "assets", "icon.png") }),
+        ? { titleBarStyle: "hiddenInset", trafficLightPosition: { x: 14, y: Math.round(CHROME_H / 2 - 7) } }
+        : { titleBarStyle: "hidden", titleBarOverlay: { color: TOKENS["color-canvas"], symbolColor: TOKENS["color-text-body"], height: CHROME_H }, icon: path.join(__dirname, "..", "assets", "icon.png") }),
     });
 
+    // The controls' own width, measured by ui-titlebar.js: `base` without a passing message,
+    // `full` with it. The page leaves `base` free; a message may briefly overlap the header.
+    this.lead = { base: 168, full: 168 };
+    this.sentInsets = new Map();
     this.titlebar = this.shellView("ui-titlebar.html");
+    this.titlebar.setBackgroundColor("#00000000"); // tokens-ignore: fully transparent, not a colour
     this.bar = new WebContentsView({ webPreferences: { ...ctx.basePrefs } });
     this.bar.setBackgroundColor(TOKENS["color-bar"]);
     this.bar.webContents.loadURL(ctx.shellUrl("offline.html"));
@@ -175,18 +192,63 @@ class ParityWindow {
   owns(wc) { return !!wc && [this.titlebar, this.overlay].some((v) => v.webContents === wc); }
   ownsPage(wc) { return !!wc && [...this.pages.values()].some((p) => p.wc === wc); }
 
+  /** Where the controls view starts: right of the Mac traffic lights, or at the left edge. */
+  get leadX() { return this.ctx.platform === "darwin" && !this.win.isFullScreen() ? LEAD_X_MAC : 0; }
+
   layout() {
     if (!this.alive) return;
     const { width, height } = this.win.getContentBounds();
-    const top = this.focusMode ? 0 : TITLE_H;
+    const chrome = !this.focusMode;
+    const top = 0; // every page runs to the window's top edge: there is no title bar strip
     const offline = !!this.active?.saved;
-    this.titlebar.setBounds({ x: 0, y: 0, width, height: top });
-    this.titlebar.setVisible(top > 0);
-    this.bar.setBounds({ x: 0, y: top, width, height: offline ? OFFLINE_H : 0 });
+    const offH = offline ? OFFLINE_H : 0;
+    const x = this.leadX;
+    this.titlebar.setBounds({ x, y: 0, width: Math.max(0, Math.min(width - x, Math.ceil(this.lead.full))), height: chrome ? CHROME_H : 0 });
+    this.titlebar.setVisible(chrome);
+    // The offline line sits along the bottom, so the page's header row stays at the top.
+    this.bar.setBounds({ x: 0, y: height - offH, width, height: offH });
     this.bar.setVisible(offline);
-    const y = top + (offline ? OFFLINE_H : 0);
-    for (const p of this.pages.values()) p.view.setBounds({ x: 0, y, width, height: Math.max(0, height - y) });
-    this.overlay.setBounds({ x: 0, y: top, width, height: Math.max(0, height - top) });
+    for (const p of this.pages.values()) p.view.setBounds({ x: 0, y: top, width, height: Math.max(0, height - top - offH) });
+    const layerTop = chrome ? CHROME_H : 0;
+    this.overlay.setBounds({ x: 0, y: layerTop, width, height: Math.max(0, height - layerTop) });
+    this.sendInsets();
+  }
+
+  /** How much of the header row a page leaves free for the controls (preload.js reads it). */
+  insets() {
+    return { left: Math.ceil(this.leadX + this.lead.base + 6), right: this.ctx.platform === "win32" ? WIN_CONTROLS_W : 0, h: CHROME_H };
+  }
+
+  /** Tells each page the room to leave, when it changed (or to one page that asked). */
+  sendInsets(onlyTo = null) {
+    const i = this.insets();
+    const key = JSON.stringify(i);
+    for (const p of this.pages.values()) {
+      if (!p.alive || (onlyTo && p.wc !== onlyTo)) continue;
+      if (!onlyTo && this.sentInsets.get(p.wc.id) === key) continue;
+      this.sentInsets.set(p.wc.id, key);
+      p.wc.send("parity:insets", i);
+    }
+  }
+
+  /** The controls view measured itself (ui-titlebar.js). */
+  setLead(size) {
+    const n = (v) => (Number.isFinite(v) ? Math.max(40, Math.min(640, v)) : null);
+    const base = n(size?.base), full = n(size?.full);
+    if (base === null || full === null) return;
+    if (base === this.lead.base && full === this.lead.full) return;
+    this.lead = { base, full: Math.max(base, full) };
+    this.layout();
+  }
+
+  /** A page said whether it shows a header row the controls can sit in (preload.js). */
+  setHeader(wc, header) {
+    const page = [...this.pages.values()].find((p) => p.wc === wc);
+    if (!page) return;
+    this.sendInsets(wc);
+    if (page.header === !!header) return;
+    page.header = !!header;
+    if (page === this.active) { this.layout(); this.push(); }
   }
 
   // ------------------------------------------------------------ pages
@@ -214,6 +276,7 @@ class ParityWindow {
     page.view.setVisible(false);
     this.pages.set(key, page);
     this.win.contentView.addChildView(page.view);
+    this.win.contentView.addChildView(this.titlebar); // the controls stay over the page
     this.win.contentView.addChildView(this.overlay); // keep the layer on top
     this.layout();
     return page;
@@ -381,7 +444,6 @@ class ParityWindow {
       wall: this.wall,
       focus: this.focusMode,
       fullscreen: this.win.isFullScreen(),
-      title: this.wall ? "" : this.active?.title || "Parity",
       back: h.back || (!this.wall && this.trail.some((k) => this.pages.has(k))),
       forward: h.forward,
       section: this.active?.key || null,
@@ -531,4 +593,4 @@ class ParityWindow {
   }
 }
 
-module.exports = { ParityWindow, TITLE_H };
+module.exports = { ParityWindow, CHROME_H };

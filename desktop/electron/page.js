@@ -30,6 +30,8 @@ class Page {
     this.title = "Parity";
     this.usedAt = Date.now();
     this.watchdog = null;
+    /** True while the page shows a header row the window's controls sit in (window.js). */
+    this.header = false;
     this.view = new WebContentsView({
       webPreferences: {
         contextIsolation: true, sandbox: true, nodeIntegration: false, spellcheck: true,
@@ -39,7 +41,7 @@ class Page {
         // The hidden Trade page (main.js) keeps its timers running for alerts.
         backgroundThrottling: !background,
         preload: path.join(__dirname, "preload.js"),
-        additionalArguments: [`--parity-version=${ctx.version}`, `--parity-origins=${ctx.TRUSTED.join(",")}`],
+        additionalArguments: [`--parity-version=${ctx.version}`, `--parity-origins=${ctx.TRUSTED.join(",")}`, "--parity-chrome=inset"],
       },
     });
     this.view.setBackgroundColor(TOKENS["color-canvas"]);

@@ -47,11 +47,11 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 - **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to paritytrading.app and its sim., trade., academy. and lab. addresses stay in the app, and so do links to the old parity.endyland.com addresses; other links open in your browser.
 - **Offline,** the app shows the copy of the site it was built with, under a line that says "Offline, showing saved copy", and goes back to the live site when the connection returns.
 - **Never a black window.** A page that stops drawing is drawn again; one that stays empty reloads once, then shows Could not open with Retry. Problems are noted in a small log: `~/Library/Logs/Parity/parity.log` on a Mac, `%APPDATA%\Parity\logs\parity.log` on Windows, with no passwords or sign-in tokens ([DEC-0058](../docs/decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)).
-- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://paritytrading.appom/legal/cookies/#desktop) has the details.
+- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://paritytrading.app/legal/cookies/#desktop) has the details.
 
 ## Updates
 
-Pages are always current. For the app itself, Parity checks `https://paritytrading.appom/desktop/updates/` 15 seconds after launch and every 6 hours (Settings can turn it off; Parity, Check for updates checks now). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
+Pages are always current. For the app itself, Parity checks `https://paritytrading.app/desktop/updates/` 5 seconds after launch and every hour (Settings can turn it off; Parity, Check for updates checks now). It downloads a new version in the background, installs it when you quit and offers "Restart to update". That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
 
 - Windows: the update downloads in the background and Parity asks to restart.
 - Mac, signed and notarized: the same.
@@ -65,7 +65,7 @@ These need the owner's accounts. Nothing here is created by the build.
 
 1. On GitHub, Settings, Developer settings, Fine-grained tokens, Generate new token: resource owner `abasheer-rion`, only the repository `abasheer-rion/parity`, permission Contents: Read-only, an expiry you will remember.
 2. In Cloudflare, Workers & Pages, `parity-research`, Settings, Variables and Secrets, Production: add a secret named `DESKTOP_RELEASES_TOKEN` with that token.
-3. Redeploy the site (any merge to main does it). `https://paritytrading.appom/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
+3. Redeploy the site (any merge to main does it). `https://paritytrading.app/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
 
 **2. Sign and notarize the Mac app (five secrets).** With the Apple Developer account (another company's account works; its name shows as the developer):
 
@@ -97,16 +97,16 @@ npm run build:win    # dist/Parity-Setup-<version>.exe and latest.yml, on Window
 
 On this Mac, prefix the Mac build with `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer CSC_IDENTITY_AUTO_DISCOVERY=false`. `npm run icons` redraws the app and menu bar icons from the brand's starburst. `npm run shots` saves pictures of the windows to `~/Desktop/parity-app/shots/` by drawing each window's own views, so it needs no screen recording permission; `PARITY_SHOTS_STEPS` picks the steps (see `electron/shots.js`). `PARITY_LIVE_ORIGIN=https://10.255.255.1 npm start` points the app at an address that never answers, to see the offline copy, and `PARITY_LOG=1` prints each page the app loads, also in a packaged build. Against a local dev server started with `VITE_AUTH_BYPASS=1 npm run dev -- --port 5199`, `PARITY_DEV_URL=http://127.0.0.1:5199 PARITY_AUTH_BYPASS=1` treats the app as signed in, for screenshots; the bypass only works with a loopback dev address.
 
-The release workflow (`.github/workflows/desktop-release.yml`) builds both installers and the update files on GitHub's runners and attaches them to a draft release. Run it from the Actions tab, or push a tag such as `desktop-v0.2.0`. Publish the release to ship it.
+Releases are automatic. Each merge to main that changes `desktop/` (and every Monday, when `web/` changed since the last release) makes `.github/workflows/desktop-auto-release.yml` create a new tag `desktop-v<next patch>` and start `.github/workflows/desktop-release.yml` on it, which builds, signs, notarizes and checks both installers, publishes the release (not marked as the repository's latest) and waits until the update feed serves it. Installed copies update within the hour. To stop automatic releases set the repository variable `DESKTOP_AUTO_RELEASE` to `false`. By hand: push a tag such as `desktop-v0.3.0` (a higher version than the newest tag) for a draft release, and publish it to ship it.
 
 ## How it is put together
 
 | File | What it does |
 | --- | --- |
 | `electron/main.js` | Start-up, windows, the log-in wall, messages, the menu, settings |
-| `electron/window.js` | One window: title bar, pages, the menu layer, focus mode |
+| `electron/window.js` | One window: pages to the top edge, the controls in the page's header row, the menu layer, focus mode |
 | `electron/page.js` | One page view: live site or saved copy, links, the wall |
-| `electron/ui-titlebar.*`, `ui-overlay.*`, `ui-settings.*` | The app's own pages: title bar, menu and palette, Settings |
+| `electron/ui-titlebar.*`, `ui-overlay.*`, `ui-settings.*` | The app's own pages: the window controls (menu, Back, Forward, search), menu and palette, Settings |
 | `electron/preload.js`, `shell-preload.js` | The bridges for website pages and for the app's own pages |
 | `electron/tray.js`, `updater.js` | Menu bar item and updates |
 | `electron/routes.js`, `shortcuts.js`, `settings.js`, `workspace.js` | Plain logic with tests |
