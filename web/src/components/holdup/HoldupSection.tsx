@@ -3,10 +3,11 @@
 // would: did it beat the market, could it be luck, how wide are the error bars, what does
 // it move with, where does it win and lose, how bad did it get, and what has to stay true.
 // Every chart has a data table beside it (WCAG 1.1.1), and a missing input says why.
-import { useId, useState, type ReactNode } from "react";
+import { useId, useMemo, useState, type ReactNode } from "react";
 import type { Holdup, HoldupRegimeFamily } from "../../lib/types";
 import { Badge, Disclosure } from "../../ui";
-import { CorrHeatmap, curves, EquityChart, RangeChart, RegimeBars, UnderwaterChart } from "./charts";
+import { SignaturePlayer, type SigVisual } from "../../ui/signature";
+import { corrVisual, curves, equityVisual, rangeVisual, regimeVisual, underwaterVisual } from "./visuals";
 import {
   corrSentence, dec, FAMILY_HELP, FAMILY_TITLE, int, luckSentence, mustText, pct, pSentence, pText, rangeSentence,
   reasonText, regimeSentence, signedPct, tries, verdictLine,
@@ -29,6 +30,12 @@ export interface HoldupSectionProps {
 
 export function HoldupSection({ holdup: h, name, bench = "US stock market", level = 2, intro, id, missing }: HoldupSectionProps) {
   const titleId = useId();
+  const benchName = h?.sources.benchmark.available ? bench : "";
+  // One set of pictures per record: a new object would restart each player.
+  const pics = useMemo(() => (h ? {
+    equity: equityVisual(h, name, benchName), range: rangeVisual(h), corr: corrVisual(h),
+    regimes: regimeVisual(h), under: underwaterVisual(h, name),
+  } : null), [h, name, benchName]);
   const H = level === 2 ? "h2" : "h3";
   const Sub = level === 2 ? "h3" : "h4";
   if (!h) {
@@ -40,7 +47,6 @@ export function HoldupSection({ holdup: h, name, bench = "US stock market", leve
     );
   }
   const v = verdictLine(h);
-  const benchName = h.sources.benchmark.available ? bench : "";
   return (
     <section className="hu" aria-labelledby={titleId} id={id}>
       <H id={titleId} className="hu-title">How it holds up</H>
@@ -52,7 +58,7 @@ export function HoldupSection({ holdup: h, name, bench = "US stock market", leve
       </div>
 
       <Block title="Against the market" Sub={Sub} lead={equitySentence(h, name, benchName)}>
-        <EquityChart h={h} name={name} bench={benchName || "benchmark"} />
+        <Pic visual={pics?.equity} />
         <DataTable caption={`Growth of 1 dollar, ${name}${benchName ? ` and ${benchName}` : ""}, at the end of each year`}
           head={["Year end", name, ...(benchName ? [benchName] : [])]}
           rows={yearEnds(h).map((r) => [r.date, `${dec(r.s)}x`, ...(benchName ? [r.b == null ? "n/a" : `${dec(r.b)}x`] : [])])} />
@@ -79,7 +85,7 @@ export function HoldupSection({ holdup: h, name, bench = "US stock market", leve
       <Block title="How sure are the numbers?" Sub={Sub} lead={rangeSentence(h)}>
         {h.bootstrap ? (
           <>
-            <RangeChart h={h} />
+            <Pic visual={pics?.range} />
             <DataTable caption={`Ranges from ${int(h.bootstrap.n)} reshuffles of the record in ${h.bootstrap.block_days}-day blocks`}
               head={["Number", "This record", "Middle", "80% range", "95% range"]}
               rows={[
@@ -94,7 +100,7 @@ export function HoldupSection({ holdup: h, name, bench = "US stock market", leve
       <Block title="What it moves with" Sub={Sub} lead={corrSentence(h)}>
         {h.rolling_correlation?.dates.length ? (
           <>
-            <CorrHeatmap h={h} />
+            <Pic visual={pics?.corr} />
             <DataTable caption="Correlation of daily returns over the past year, at the end of each year"
               head={["Year end", ...(["stocks", "bonds"] as const).filter((k) => h.rolling_correlation!.series[k]).map((k) => (k === "stocks" ? "With stocks" : "With bonds"))]}
               rows={corrYearEnds(h)} />
@@ -103,11 +109,12 @@ export function HoldupSection({ holdup: h, name, bench = "US stock market", leve
       </Block>
 
       <Block title="Where it wins and where it loses" Sub={Sub} lead={regimeSentence(h)}>
+        <Pic visual={pics?.regimes} />
         <RegimeFamilies h={h} name={name} bench={benchName} Sub={Sub} />
       </Block>
 
       <Block title="Worst stretches" Sub={Sub} lead={worstSentence(h)}>
-        <UnderwaterChart h={h} name={name} bench={benchName || "benchmark"} />
+        <Pic visual={pics?.under} />
         <DataTable caption="The five deepest falls from a high"
           head={["Fall", "From the high on", "Low on", "Back to the high on", "Days"]}
           rows={h.worst_periods.drawdowns.map((d) => [pct(d.depth), d.start, d.trough, d.recovery ?? "not yet", int(d.days)])} visible />
@@ -158,6 +165,11 @@ function Block({ title, lead, children, Sub }: { title: string; lead: string; ch
   );
 }
 
+/** A signature chart (DEC-0067); the block's own data table is its text alternative. */
+function Pic({ visual }: { visual: SigVisual | null | undefined }) {
+  return visual ? <SignaturePlayer visual={visual} table={false} className="hu-pic" /> : null;
+}
+
 function Stat({ label, value, note, good }: { label: string; value: string; note?: string; good?: boolean | null }) {
   return (
     <div>
@@ -205,7 +217,6 @@ function RegimeFamilies({ h, name, bench, Sub }: { h: Holdup; name: string; benc
           <p className="hu-small">{FAMILY_HELP[f.family]}</p>
           {f.available && f.items.length ? (
             <>
-              <RegimeBars name={name} bench={bench || "benchmark"} family={f} />
               <DataTable caption={`${FAMILY_TITLE[f.family]}: return per year in each period`} head={regimeHead(f, name, bench)} rows={regimeRows(f, bench)} />
             </>
           ) : <p className="hu-empty">{reasonText(f.reason)}</p>}

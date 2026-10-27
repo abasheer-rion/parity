@@ -29,35 +29,7 @@ h4.hu-block-title { font-size: var(--type-xl); }
 .hu-note { font-size: var(--type-xs); color: var(--color-text-faint); }
 @media (max-width: 720px) { .hu-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-.hu-chart { margin: 0; }
-.hu-svg { display: block; width: 100%; height: auto; overflow: visible; }
-.hu-svg text { font-family: var(--font-text); }
-.hu-axis { font-size: var(--type-xs); fill: var(--color-text-muted); }
-.hu-bar { fill: var(--color-text-muted); opacity: 0.55; }
-.hu-band95 { fill: var(--color-accent); opacity: 0.1; }
-.hu-band80 { fill: var(--color-accent); opacity: 0.16; }
-.hu-zero { stroke: var(--color-benchmark); stroke-dasharray: 4 3; stroke-width: 1.2; }
-.hu-baseline { stroke: var(--color-border-strong); }
-.hu-mark { stroke: var(--color-accent); stroke-width: 2; }
-.hu-mark-dot { fill: var(--color-accent); }
-.hu-mark-label { font-size: var(--type-sm); font-weight: var(--weight-semibold); fill: var(--color-accent-text); }
-
-/* Correlation cells: positive in the accent, negative in the loss colour, five steps each. */
-.hu-heat-na { fill: var(--color-fill); }
-.hu-heat-p0, .hu-heat-n0 { fill: var(--color-fill-strong); }
-.hu-heat-p1 { fill: color-mix(in srgb, var(--series-1) 30%, var(--color-fill)); }
-.hu-heat-p2 { fill: color-mix(in srgb, var(--series-1) 50%, var(--color-fill)); }
-.hu-heat-p3 { fill: color-mix(in srgb, var(--series-1) 72%, var(--color-fill)); }
-.hu-heat-p4 { fill: var(--series-1); }
-.hu-heat-n1 { fill: color-mix(in srgb, var(--color-negative) 30%, var(--color-fill)); }
-.hu-heat-n2 { fill: color-mix(in srgb, var(--color-negative) 50%, var(--color-fill)); }
-.hu-heat-n3 { fill: color-mix(in srgb, var(--color-negative) 72%, var(--color-fill)); }
-.hu-heat-n4 { fill: var(--color-negative); }
-.hu-legend { display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: var(--type-xs); color: var(--color-text-muted); margin-top: var(--space-2); }
-.hu-legend i { display: inline-block; width: 12px; height: 12px; border-radius: var(--radius-xs); vertical-align: -2px; margin-right: var(--space-1); }
-.hu-legend .hu-heat-n4 { background: var(--color-negative); }
-.hu-legend .hu-heat-p0 { background: var(--color-fill-strong); }
-.hu-legend .hu-heat-p4 { background: var(--series-1); }
+.hu-pic { margin: 0; }
 
 .hu-families { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-8); }
 @media (max-width: 900px) { .hu-families { grid-template-columns: minmax(0, 1fr); } }
