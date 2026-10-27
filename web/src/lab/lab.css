@@ -59,6 +59,9 @@
 
 /* ---------- Top bar ---------- */
 .lb-top { display: flex; align-items: center; gap: 8px; padding: 0 8px 0 0; border-bottom: 1px solid var(--l-line); background: color-mix(in srgb, var(--color-canvas) 70%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); min-width: 0; }
+/* Desktop app: the window's controls sit at this row's left, over the page (desktop/electron/preload.js sets the variables). */
+html[data-desktop-chrome] .plb { --l-top: var(--desktop-chrome-h); }
+html[data-desktop-chrome] .lb-top { padding-left: var(--desktop-chrome-left); padding-right: calc(8px + var(--desktop-chrome-right)); }
 .lb-back { display: inline-flex; align-items: center; gap: 6px; height: 100%; padding: 0 12px; border: 0; border-right: 1px solid var(--l-line); background: transparent; color: var(--l-muted); font: inherit; cursor: pointer; flex: none; }
 .lb-back:hover { color: var(--l-text); background: var(--l-hover); }
 .lb-brand { font-size: var(--type-2xs); letter-spacing: .14em; color: var(--l-muted); white-space: nowrap; flex: none; }

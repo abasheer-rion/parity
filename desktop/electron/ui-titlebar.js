@@ -1,5 +1,6 @@
-// The title bar (DEC-0049). The whole bar drags the window; its buttons do not. Double-click
-// on the bar zooms or maximises the window, as the system does.
+// The window's controls (DEC-0049): menu, Back, Forward, search and Keep on top, in the page's
+// header row (window.js). There is no title. Empty parts drag the window; the buttons do
+// not. Double-click an empty part to zoom or maximise the window, as the system does.
 const shell = window.parityShell;
 const $ = (id) => document.getElementById(id);
 const mac = shell.platform === "darwin";
@@ -10,12 +11,10 @@ $("back").append(window.parityIcon("back", 16));
 $("forward").append(window.parityIcon("forward", 16));
 $("pin").append(window.parityIcon("pin", 15));
 $("search").append(window.parityIcon("search", 13));
-const label = document.createElement("span");
-label.textContent = "Search";
 const key = document.createElement("kbd");
-key.textContent = mac ? "Cmd K" : "Ctrl K";
-$("search").append(label, key);
-$("search").title = `Search sections, pages and commands (${key.textContent})`;
+key.textContent = mac ? "\u2318K" : "Ctrl K";
+$("search").append(key);
+$("search").title = `Search sections, pages and commands (${mac ? "Cmd K" : "Ctrl K"})`;
 $("back").title = mac ? "Back (Cmd [)" : "Back (Alt Left)";
 $("forward").title = mac ? "Forward (Cmd ])" : "Forward (Alt Right)";
 $("menu").title = "Sections";
@@ -62,7 +61,7 @@ function render(s) {
   overlay = s.overlay;
   document.body.classList.toggle("wall", s.wall);
   document.body.classList.toggle("fullscreen", s.fullscreen);
-  $("title").textContent = s.title || "";
+  document.body.classList.toggle("strip", !!s.strip);
   $("back").disabled = !s.back;
   $("forward").disabled = !s.forward;
   $("back").hidden = s.wall && !s.back;
@@ -71,6 +70,7 @@ function render(s) {
   $("pin").hidden = s.wall || !(s.section === "trade" || s.onTop);
   $("pin").setAttribute("aria-pressed", String(!!s.onTop));
   $("offline").hidden = !s.offline;
+  measure();
 }
 
 let flashTimer = null;
@@ -78,9 +78,25 @@ shell.on("shell:flash", (text) => {
   const f = $("flash");
   f.textContent = text;
   f.classList.add("on");
-  $("title").style.visibility = "hidden";
+  measure();
   clearTimeout(flashTimer);
-  flashTimer = setTimeout(() => { f.classList.remove("on"); $("title").style.visibility = ""; }, 1600);
+  flashTimer = setTimeout(() => { f.classList.remove("on"); f.textContent = ""; measure(); }, 1600);
 });
+
+// The window sizes this view to the buttons (and a passing message), and tells the page how
+// much of its header row to leave free (window.js, setLead).
+let sent = "";
+function measure() {
+  requestAnimationFrame(() => {
+    const base = Math.ceil($("cluster").getBoundingClientRect().width + 8);
+    const f = $("flash");
+    const full = f.textContent ? Math.ceil(base + f.getBoundingClientRect().width + 8) : base;
+    const key = `${base}/${full}`;
+    if (key === sent) return;
+    sent = key;
+    shell.send("lead-size", { base, full });
+  });
+}
+new ResizeObserver(measure).observe($("cluster"));
 shell.on("shell:state", render);
 shell.ask("state").then((s) => s && render(s));

@@ -3,46 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
-    <title>Parity title bar</title>
+    <title>Parity window controls</title>
     <link rel="stylesheet" href="tokens.css" />
     <link rel="stylesheet" href="ui.css" />
     <style>
-      html, body { height: 100%; overflow: hidden; background: var(--bar); user-select: none; -webkit-user-select: none; }
-      body { border-bottom: 1px solid var(--line); }
+      /* The window's controls (DEC-0049): no title bar and no title. Over a page with its own
+         header row this view is only as wide as its buttons and see-through, so the row shows
+         through; over a page without one it is a plain strip in the page colour. */
+      html, body { height: 100%; overflow: hidden; background: transparent; user-select: none; -webkit-user-select: none; }
+      body.strip { background: var(--bg); }
       /* Windows moves the window natively from a drag region (with snapping). On a Mac a view
          inside the window does not reliably get one, so ui-titlebar.js moves it there. */
       body.win32, body.linux { -webkit-app-region: drag; }
-      .bar { position: relative; height: 100%; display: flex; align-items: center; gap: 2px; padding: 0 10px; }
-      body.darwin .bar { padding-left: 80px; }
-      body.darwin.fullscreen .bar { padding-left: 10px; }
-      body.win32 .bar, body.linux .bar { padding-right: 150px; }
-      .btn { -webkit-app-region: no-drag; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 26px; min-width: 28px; padding: 0 6px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: default; }
+      .bar { position: relative; height: 100%; display: flex; align-items: center; padding: 0 4px; }
+      body.darwin.strip:not(.fullscreen) .bar { padding-left: 76px; }
+      .cluster { display: inline-flex; align-items: center; gap: 2px; flex: none; }
+      .btn { -webkit-app-region: no-drag; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; min-width: 28px; padding: 0 6px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: default; }
       .btn:hover:not(:disabled) { color: var(--text); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
       .btn[aria-pressed="true"], .btn[aria-expanded="true"] { color: var(--text); background: var(--color-pressed); }
       .btn:disabled { opacity: .35; }
       .btn.pin[aria-pressed="true"] { color: var(--accent); }
-      .search { padding: 0 8px 0 9px; border: 1px solid var(--line-2); color: var(--muted); }
-      .search span { font-size: var(--type-xs); }
-      .gap { flex: 1; }
-      .title { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 46%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--type-sm); color: var(--text-2); pointer-events: none; }
-      .flash { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 4px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--text); font-size: var(--type-xs); opacity: 0; transition: opacity var(--dur-2); pointer-events: none; white-space: nowrap; }
+      .search { padding: 0 6px 0 7px; margin-left: 4px; border: 1px solid var(--line-2); color: var(--muted); }
+      .flash { flex: none; margin-left: 8px; padding: 4px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--text); font-size: var(--type-xs); opacity: 0; transition: opacity var(--dur-2); pointer-events: none; white-space: nowrap; }
       .flash.on { opacity: 1; }
-      .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-warning); margin: 0 6px; }
-      body.wall .nav-only, body.wall .menu, body.wall .search, body.wall .pin, body.wall .title { display: none; }
+      .flash:empty { display: none; }
+      .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-warning); margin: 0 8px; }
+      body.wall .nav-only, body.wall .menu, body.wall .search, body.wall .pin { display: none; }
       [hidden] { display: none !important; }
     </style>
   </head>
   <body>
     <div class="bar" id="bar">
-      <button type="button" class="btn menu" id="menu" title="Sections" aria-label="Sections" aria-expanded="false"></button>
-      <button type="button" class="btn" id="back" title="Back" aria-label="Back"></button>
-      <button type="button" class="btn" id="forward" title="Forward" aria-label="Forward"></button>
-      <span class="title" id="title"></span>
+      <span class="cluster" id="cluster">
+        <button type="button" class="btn menu" id="menu" title="Sections" aria-label="Sections" aria-expanded="false"></button>
+        <button type="button" class="btn" id="back" title="Back" aria-label="Back"></button>
+        <button type="button" class="btn" id="forward" title="Forward" aria-label="Forward"></button>
+        <button type="button" class="btn search" id="search" aria-label="Search" title="Search sections, pages and commands"></button>
+        <button type="button" class="btn pin" id="pin" title="Keep this window on top" aria-label="Keep this window on top" aria-pressed="false" hidden></button>
+        <span class="dot" id="offline" title="Offline, showing saved copy" hidden></span>
+      </span>
       <span class="flash" id="flash" role="status" aria-live="polite"></span>
-      <span class="gap"></span>
-      <span class="dot" id="offline" title="Offline, showing saved copy" hidden></span>
-      <button type="button" class="btn pin" id="pin" title="Keep this window on top" aria-label="Keep this window on top" aria-pressed="false" hidden></button>
-      <button type="button" class="btn search" id="search" title="Search sections, pages and commands"></button>
     </div>
     <script src="icons.js"></script>
     <script src="ui-titlebar.js"></script>

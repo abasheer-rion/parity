@@ -6,6 +6,13 @@
 // addresses the main process trusts: the bundled copy (app://parity) and the website's own
 // addresses. Any other page gets nothing. The main process checks the sender again.
 //
+// The window has no title bar (window.js): a page marks its header row with
+// data-desktop-header, and this file tells it how much room the window's controls need
+// (CSS variables --desktop-chrome-left, --desktop-chrome-right and --desktop-chrome-h on
+// <html data-desktop-chrome>), makes the row's empty parts drag the window, and tells the
+// main process whether such a row is showing at the top. Without one the window puts a
+// plain strip above the page instead.
+//
 // It also turns the mouse's back and forward buttons, and a two-finger swipe sideways on a
 // Mac trackpad that nothing on the page uses, into Back and Forward.
 const { contextBridge, ipcRenderer } = require("electron");
@@ -32,6 +39,8 @@ if (trusted.includes(here)) {
       ipcRenderer.send("parity:ticker", clean);
     },
   });
+
+  if (arg("parity-chrome") === "inset") chrome();
 
   // Mouse buttons 4 and 5 (back and forward on most mice).
   window.addEventListener("mouseup", (e) => {
@@ -68,4 +77,94 @@ if (trusted.includes(here)) {
       }
     }, { passive: true });
   }
+}
+
+/** The header row hand-off described at the top of this file. */
+function chrome() {
+  const root = document.documentElement;
+  const mac = process.platform === "darwin";
+  let insets = { left: mac ? 246 : 174, right: process.platform === "win32" ? 144 : 0, h: 44 };
+  const apply = () => {
+    root.setAttribute("data-desktop-chrome", process.platform);
+    root.style.setProperty("--desktop-chrome-left", `${insets.left}px`);
+    root.style.setProperty("--desktop-chrome-right", `${insets.right}px`);
+    root.style.setProperty("--desktop-chrome-h", `${insets.h}px`);
+  };
+  apply();
+  ipcRenderer.on("parity:insets", (_e, i) => {
+    const ok = (v) => Number.isFinite(v) && v >= 0 && v <= 800;
+    if (!i || !ok(i.left) || !ok(i.right) || !ok(i.h)) return;
+    insets = { left: i.left, right: i.right, h: i.h };
+    apply();
+    schedule();
+  });
+
+  // Controls inside the row keep their clicks; everything else in it moves the window.
+  const CONTROLS = "a, button, input, select, textarea, label, summary, details, [role], [tabindex], [contenteditable], canvas, iframe, video";
+  const style = document.createElement("style");
+  style.textContent = `html[data-desktop-chrome] [data-desktop-header] { -webkit-app-region: drag; app-region: drag; }
+html[data-desktop-chrome] [data-desktop-header] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-region: no-drag; }`;
+  const addStyle = () => { if (!style.isConnected) (document.head || root).appendChild(style); };
+
+  /** The marked row at the window's top left, wide enough for the controls, or null. */
+  const header = () => {
+    for (const el of document.querySelectorAll("[data-desktop-header]")) {
+      const r = el.getBoundingClientRect();
+      if (r.top <= 1 && r.left >= -1 && r.left <= 1 && r.bottom >= 28 && r.width >= insets.left && getComputedStyle(el).visibility !== "hidden") return el;
+    }
+    return null;
+  };
+  let told = null;
+  let timer = null;
+  const check = () => {
+    timer = null;
+    const has = !!header();
+    if (has !== told) { told = has; ipcRenderer.send("parity:chrome", { header: has }); }
+  };
+  function schedule() { if (!timer) timer = setTimeout(check, 120); }
+
+  const start = () => {
+    addStyle();
+    check();
+    new MutationObserver(schedule).observe(document.body || root, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "hidden", "style", "data-desktop-header"] });
+    window.addEventListener("resize", schedule);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+  window.addEventListener("load", schedule);
+
+  // A press on the row's empty part: the system moves the window from the drag region on
+  // Windows (the page never sees the press). A Mac view inside the window does not always get
+  // the region, so the press arrives here and the window follows the pointer instead.
+  const emptyRow = (target) => {
+    const el = target instanceof Element ? target : null;
+    const row = el?.closest("[data-desktop-header]");
+    if (!row) return false;
+    const hit = el.closest(CONTROLS);
+    return !hit || hit === row || !row.contains(hit);
+  };
+  window.addEventListener("dblclick", (e) => { if (emptyRow(e.target)) ipcRenderer.send("parity:drag", "dblclick"); });
+  if (!mac) return;
+  let drag = null;
+  let queued = null;
+  window.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0 || e.detail > 1 || !emptyRow(e.target)) return;
+    drag = e.pointerId;
+    ipcRenderer.send("parity:drag", "start", { x: e.screenX, y: e.screenY });
+  }, true);
+  window.addEventListener("pointermove", (e) => {
+    if (drag === null || e.pointerId !== drag) return;
+    const first = queued === null;
+    queued = { x: e.screenX, y: e.screenY };
+    if (first) requestAnimationFrame(() => { if (queued) ipcRenderer.send("parity:drag", "move", queued); queued = null; });
+  }, true);
+  const stop = (e) => {
+    if (drag === null || e.pointerId !== drag) return;
+    if (queued) ipcRenderer.send("parity:drag", "move", queued);
+    queued = null;
+    drag = null;
+    ipcRenderer.send("parity:drag", "end");
+  };
+  window.addEventListener("pointerup", stop, true);
+  window.addEventListener("pointercancel", stop, true);
 }

@@ -1,0 +1,78 @@
+# Ships the desktop app by itself (DEC-0049). On each merge to main that changes desktop/, and
+# once a week when web/ changed since the last desktop release (the app carries an offline copy
+# of the site), this picks the next patch version, creates a NEW tag desktop-v<version> on that
+# commit (an existing tag is never moved or reused) and starts desktop-release.yml on the tag
+# with publish=true. That workflow builds, signs, notarizes and checks the Mac and Windows
+# builds, publishes the release (never marked as the repository's latest) and waits until the
+# update feed serves it. Installed apps then update themselves within the hour.
+#
+# Kill switch: set the repository variable DESKTOP_AUTO_RELEASE to false and nothing is
+# tagged or released. Delete it (or set it to anything else) to turn releases back on.
+name: Desktop auto release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "desktop/**"
+      - "!desktop/**/*.md"
+  schedule:
+    - cron: "0 15 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: desktop-auto-release
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    if: ${{ vars.DESKTOP_AUTO_RELEASE != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Pick the next version, or decide there is nothing to release
+        id: plan
+        run: |
+          set -euo pipefail
+          git fetch --tags --force --quiet origin
+          if [ -n "$(git tag -l 'desktop-v*' --points-at HEAD)" ]; then
+            echo "This commit is already released."; echo "release=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          last=$(git tag -l 'desktop-v*' --sort=-v:refname | head -1)
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ -n "$last" ] && git diff --quiet "$last" HEAD -- web desktop; then
+            echo "Nothing in web/ or desktop/ changed since $last."; echo "release=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          floor=$(node -p "require('./desktop/package.json').version")
+          top=$(printf '%s\n%s\n' "${last#desktop-v}" "$floor" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)
+          next="$top"
+          while git rev-parse -q --verify "refs/tags/desktop-v$next" >/dev/null || git ls-remote --exit-code --tags origin "refs/tags/desktop-v$next" >/dev/null 2>&1; do
+            IFS=. read -r major minor patch <<< "$next"
+            next="$major.$minor.$((patch + 1))"
+          done
+          echo "Last release: ${last:-none}. package.json: $floor. Next: $next."
+          echo "release=true" >> "$GITHUB_OUTPUT"
+          echo "version=$next" >> "$GITHUB_OUTPUT"
+      # A plain push of a new tag: git refuses if the tag already exists on GitHub.
+      - name: Create the tag
+        if: steps.plan.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          git tag "desktop-v$VERSION" "$GITHUB_SHA"
+          git push origin "refs/tags/desktop-v$VERSION"
+      # A tag pushed with this token does not start other workflows, so start the build here.
+      - name: Start the signed build and release
+        if: steps.plan.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          gh workflow run desktop-release.yml --ref "desktop-v$VERSION" -f publish=true
+          echo "Started the release of $VERSION: https://github.com/$GITHUB_REPOSITORY/actions/workflows/desktop-release.yml" >> "$GITHUB_STEP_SUMMARY"

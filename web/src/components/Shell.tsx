@@ -168,6 +168,8 @@ export function Shell({
     <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
       <SkipLink />
       <aside className="side" id="side" data-lenis-prevent>
+        {/* The desktop app's window controls sit here (desktop/electron/preload.js); hidden in a browser. */}
+        <div className="desktop-band" data-desktop-header aria-hidden="true" />
         <div className="org">
           <a className="org-button" href="#/">
             <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>

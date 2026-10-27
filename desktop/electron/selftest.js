@@ -57,6 +57,8 @@ async function run(api) {
       check("the window is on the log-in wall", w.wall === true);
       check("the log-in form is drawn", await hasForm(w));
       check("the title bar is loaded", w.titlebar.webContents.getURL().includes("ui-titlebar.html"));
+      check("the window shows no title text", await js(w.titlebar.webContents, "!document.getElementById('title') && !document.querySelector('.title')"));
+      check("a page without a header row sits under the plain strip", w.strip === true && w.active.view.getBounds().y === 44, `${w.active.view.getBounds().y}`);
       w.openOverlay("menu");
       check("the menu does not open on the wall", w.overlayMode === null);
       check("the title bar hides the menu button on the wall", await js(w.titlebar.webContents, "document.body.classList.contains('wall') && getComputedStyle(document.getElementById('menu')).display === 'none'"));

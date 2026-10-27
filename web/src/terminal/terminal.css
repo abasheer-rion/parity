@@ -108,6 +108,8 @@
 
 /* ---------- top bar ---------- */
 .term-top { display: flex; align-items: center; gap: 10px; padding: 5px 8px; background: var(--t-head); border-bottom: 1px solid var(--t-line); min-width: 0; }
+/* Desktop app: the window's controls sit at this row's left, over the page (desktop/electron/preload.js sets the variables). */
+html[data-desktop-chrome] .term-top { min-height: var(--desktop-chrome-h); padding-left: var(--desktop-chrome-left); padding-right: calc(8px + var(--desktop-chrome-right)); }
 .term-back { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px 0 6px; border: 1px solid var(--t-line-2); background: var(--t-panel); color: var(--t-text); font: inherit; font-size: var(--type-2xs); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; flex: none; }
 .term-back:hover { border-color: var(--t-amber); color: var(--t-amber); }
 .term-back-arrow { font-size: var(--type-lg); line-height: 1; margin-top: -2px; }

@@ -1,5 +1,10 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.4:
+
+- No bar along the top and no title. Pages reach the top of the window, and the menu button, Back, Forward and search (Cmd or Ctrl plus K) sit in the page's own header row. Drag an empty part of that row to move the window; double-click it to zoom.
+- Updates arrive by themselves. Parity checks at launch and every hour, downloads a new version in the background and installs it when you quit, or click "Restart to update".
+
 New in 0.2.3:
 
 - Parity moved to paritytrading.app. The app opens the new address and checks it for updates. Links to the old endyland.com addresses still open inside the app.
