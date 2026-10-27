@@ -11,7 +11,7 @@ import { thin, TOOLS, type Db } from "../src/lib/mcp/tools";
 import { wellKnown } from "../src/lib/mcp/wellknown";
 import { assetData } from "../functions/mcp";
 
-const ORIGIN = "https://parity.endyland.com";
+const ORIGIN = "https://paritytrading.app";
 
 const gauntletTests = Array.from({ length: 11 }, (_, i) => ({ id: `t${i}`, group: i < 6 ? "beat" : "real", name: `Test ${i}`, plain: "plain", passed: i % 2 === 0, value: "1", bar: "2" }));
 const equity: [string, number][] = Array.from({ length: 400 }, (_, i) => [`2020-01-${String((i % 28) + 1).padStart(2, "0")}`, 100 + i]);
@@ -70,7 +70,7 @@ function setup(opts: { write?: boolean; allowed?: boolean; begin?: Begin | Error
     audit: () => ({ begin, end }),
     enabled: true,
     writeEnabled: opts.write ?? false,
-    siteDomain: "endyland.com",
+    siteDomain: "paritytrading.app",
     now: () => new Date("2026-10-25T12:00:00Z"),
   };
   return { deps, rpc, select, begin, end };
@@ -134,12 +134,12 @@ describe("transport", () => {
   it("refuses an unexpected browser origin and allows our own", async () => {
     const { deps } = setup();
     expect((await handleMcp(post({}, { Origin: "https://evil.example" }), deps)).status).toBe(403);
-    const ok = await handleMcp(post({ jsonrpc: "2.0", id: 1, method: "ping" }, { Origin: "https://lab.endyland.com" }), deps);
+    const ok = await handleMcp(post({ jsonrpc: "2.0", id: 1, method: "ping" }, { Origin: "https://lab.paritytrading.app" }), deps);
     expect(ok.status).toBe(200);
-    expect(ok.headers.get("Access-Control-Allow-Origin")).toBe("https://lab.endyland.com");
-    expect(originAllowed(null, "endyland.com")).toBe(true);
-    expect(originAllowed("http://localhost:6274", "endyland.com")).toBe(true);
-    expect(originAllowed("http://evil.endyland.com", "endyland.com")).toBe(false);
+    expect(ok.headers.get("Access-Control-Allow-Origin")).toBe("https://lab.paritytrading.app");
+    expect(originAllowed(null, "paritytrading.app")).toBe(true);
+    expect(originAllowed("http://localhost:6274", "paritytrading.app")).toBe(true);
+    expect(originAllowed("http://evil.paritytrading.app", "paritytrading.app")).toBe(false);
   });
 
   it("has no stream or session: GET and DELETE are 405", async () => {

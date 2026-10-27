@@ -62,7 +62,7 @@ protocol.registerSchemesAsPrivileged([
 
 const WEB_ROOT = app.isPackaged ? path.join(process.resourcesPath, "web") : path.join(__dirname, "..", "build", "web");
 const DEV_URL = (process.env.PARITY_DEV_URL || "").replace(/\/$/, "") || null;
-const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://parity.endyland.com").replace(/\/$/, "");
+const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://paritytrading.app").replace(/\/$/, "");
 const TRUSTED = routes.trustedOrigins(ORIGIN).concat(DEV_URL ? [new URL(DEV_URL).origin] : []);
 const HIDDEN = process.env.PARITY_HIDDEN === "1" || (!!process.env.PARITY_SELFTEST && process.env.PARITY_VISIBLE !== "1");
 if (HIDDEN && process.platform === "darwin") { try { app.setActivationPolicy("prohibited"); } catch { /* older macOS */ } }
@@ -758,7 +758,7 @@ function buildMenu() {
         { label: "Terms of service", click: () => openPath("/legal/terms/") },
         { label: "Regulatory status", click: () => openPath("/legal/regulatory/") },
         { type: "separator" },
-        { label: "Open parity.endyland.com in the browser", click: () => shell.openExternal(ORIGIN) },
+        { label: `Open ${new URL(ORIGIN).host} in the browser`, click: () => shell.openExternal(ORIGIN) },
         { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },
       ],
     },

@@ -1,5 +1,5 @@
 // Parity Academy (DEC-0042): the courses as their own full-screen app at /academy/
-// (academy.endyland.com). Its own rail, top bar, settings and keys; a course library, a
+// (academy.paritytrading.app). Its own rail, top bar, settings and keys; a course library, a
 // course page and a focused lesson player with a progress rail, previous and next, the
 // arrow keys and a quick check. Progress and the place to continue from are saved to the
 // account (progress.ts). One Back button returns to Parity.

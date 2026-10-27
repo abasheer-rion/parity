@@ -25,7 +25,7 @@ export const THEME_COLOR: string = RAW["color-canvas"];
 
 /**
  * The domain whose subdomains share the sign-in cookie: parity.endyland.com gives
- * endyland.com, and an apex such as paritytrading.ai gives itself.
+ * endyland.com, and an apex such as paritytrading.app gives itself.
  */
 export function parentDomain(host: string): string {
   const parts = host.toLowerCase().split(".");
@@ -33,6 +33,44 @@ export function parentDomain(host: string): string {
 }
 
 export const SITE_DOMAIN: string = parentDomain(HOST);
+
+/**
+ * Domains Parity answered on before, still served while their addresses redirect to the
+ * new one (DEC-0069): each with its main host, where the front page and /app/ lived.
+ */
+export interface LegacyDomain { domain: string; main: string; until?: string }
+export const LEGACY_DOMAINS: LegacyDomain[] = (site as { legacy?: LegacyDomain[] }).legacy ?? [];
+
+/** Every domain whose hosts are Parity's: the current one first, then the old ones. */
+export const SITE_DOMAINS: string[] = [SITE_DOMAIN, ...LEGACY_DOMAINS.map((l) => l.domain)];
+
+/** The Parity domain a host belongs to (the current or an old one), or null for any other host. */
+export function siteDomainOf(hostname: string): string | null {
+  const host = hostname.toLowerCase();
+  return SITE_DOMAINS.find((d) => host === d || host.endsWith(`.${d}`)) ?? null;
+}
+
+/** The main host on a Parity domain: the site's own host, or an old domain's main host. */
+export function mainHostFor(domain: string): string {
+  return LEGACY_DOMAINS.find((l) => l.domain === domain)?.main ?? HOST;
+}
+
+/**
+ * The addresses of the main site and each full-screen app, on the domain of the page that
+ * asks. A page on an old domain keeps its links there, so its session cookie still applies
+ * until the redirects send it over; anywhere else gets the site's own addresses.
+ */
+export function originsFor(hostname: string) {
+  const domain = siteDomainOf(hostname) ?? SITE_DOMAIN;
+  return {
+    main: `https://${mainHostFor(domain)}`,
+    sim: `https://sim.${domain}`,
+    trade: `https://trade.${domain}`,
+    academy: `https://academy.${domain}`,
+    lab: `https://lab.${domain}`,
+  };
+}
+
 /** Parity Terminal's own address (DEC-0020, DEC-0024). */
 export const SIM_ORIGIN = `https://sim.${SITE_DOMAIN}`;
 /** Parity Trade's own address (DEC-0040). */

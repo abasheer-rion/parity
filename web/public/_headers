@@ -41,6 +41,14 @@
   X-Robots-Tag: noindex, nofollow
 /seo-manifest.json
   X-Robots-Tag: noindex
+https://sim.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://trade.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://academy.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://lab.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
 https://sim.endyland.com/*
   X-Robots-Tag: noindex, nofollow
 https://trade.endyland.com/*
@@ -48,6 +56,10 @@ https://trade.endyland.com/*
 https://academy.endyland.com/*
   X-Robots-Tag: noindex, nofollow
 https://lab.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://parity.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://www.paritytrading.app/*
   X-Robots-Tag: noindex, nofollow
 https://parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow

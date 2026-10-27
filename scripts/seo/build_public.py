@@ -592,7 +592,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 ACADEMY_NOTE = ("Pictures use made-up or example numbers unless they say otherwise. "
                 "Members get the moving version of each picture and a quick check that saves their progress.")
 # Parity Academy, the signed-in course player (DEC-0042). The path works on every address
-# of the site; on endyland.com the app also answers at academy.endyland.com.
+# of the site; on paritytrading.app the app also answers at academy.paritytrading.app.
 ACADEMY_APP = "/academy/"
 
 

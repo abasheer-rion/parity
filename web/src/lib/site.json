@@ -1,7 +1,14 @@
 {
-  "origin": "https://parity.endyland.com",
+  "origin": "https://paritytrading.app",
   "name": "Parity",
   "legalName": "Parity Trading, Inc.",
   "email": "contact@paritytrading.ai",
-  "themeColor": "#050608"
+  "themeColor": "#050608",
+  "legacy": [
+    {
+      "domain": "endyland.com",
+      "main": "parity.endyland.com",
+      "until": "2026-11-25"
+    }
+  ]
 }

@@ -39,7 +39,7 @@ DIST = HERE / "dist"
 PREVIEW = HERE / "preview.html"
 
 # Images in emails must be absolute URLs. The brand folder on the live site is public.
-ASSET_BASE = "https://parity.endyland.com"
+ASSET_BASE = "https://paritytrading.app"
 
 # The order emails appear in the preview and the README, with when each one is sent.
 EMAILS = {
@@ -57,13 +57,13 @@ EXTRA_VARS = {"email_change": {"NewEmail"}}
 
 # Sample values for the preview only.
 SAMPLE = {
-    "SiteURL": "https://parity.endyland.com",
+    "SiteURL": "https://paritytrading.app",
     "Email": "amanda@example.com",
     "NewEmail": "amanda.new@example.com",
     "Token": "482913",
     "TokenHash": "3f9a1c7e5b2d4f60a8e1c4b7",
     "ConfirmationURL": "https://ttqvpxvctnomfbeoqbbs.supabase.co/auth/v1/verify?token=sample",
-    "RedirectTo": "https://sim.endyland.com/sim/",
+    "RedirectTo": "https://sim.paritytrading.app/sim/",
 }
 
 TEXT_FOOTER = (

@@ -164,14 +164,14 @@ function localScenarios(): Plugin {
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
 //   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
-//                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
+//                            /sim/assets/: sim.paritytrading.app sends /app/* away, so the sim
 //                            must not load anything from /app/.
 //   vite build --mode trade  Parity Trade on its own (DEC-0040), /trade/, assets under
-//                            /trade/assets/, for the same reason (trade.endyland.com).
+//                            /trade/assets/, for the same reason (trade.paritytrading.app).
 //   vite build --mode academy  Parity Academy on its own (DEC-0042), /academy/, assets
-//                            under /academy/assets/ (academy.endyland.com).
+//                            under /academy/assets/ (academy.paritytrading.app).
 //   vite build --mode lab    Parity Workbench on its own (DEC-0043), /lab/, assets under
-//                            /lab/assets/ (lab.endyland.com).
+//                            /lab/assets/ (lab.paritytrading.app).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",

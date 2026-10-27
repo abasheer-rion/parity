@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: "22"
       - name: Probe the public feed for 60 s
-        run: node web/scripts/live-probe.mjs wss://parity.endyland.com 60 | tee probe.json
+        run: node web/scripts/live-probe.mjs wss://paritytrading.app 60 | tee probe.json
       - name: Summary
         if: always()
         run: |

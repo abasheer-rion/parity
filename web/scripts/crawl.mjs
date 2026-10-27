@@ -4,7 +4,7 @@
 //
 //   VITE_AUTH_BYPASS=1 npx vite --port 5199 --host 127.0.0.1   (in another terminal)
 //   CRAWL_BASE=http://127.0.0.1:5199 node scripts/crawl.mjs
-//   CRAWL_BASE=https://parity.endyland.com CRAWL_LIVE=1 node scripts/crawl.mjs   (signed out)
+//   CRAWL_BASE=https://paritytrading.app CRAWL_LIVE=1 node scripts/crawl.mjs   (signed out)
 //
 // CRAWL_JSON=path writes every finding. CRAWL_MAX caps the pages per size (default 400).
 // CRAWL_SIZES=desktop,phone picks the sizes. It never signs in and never types a password.

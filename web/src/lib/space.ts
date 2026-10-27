@@ -1,7 +1,7 @@
 // Which side of Parity this page is (DEC-0015). The product app lives at /app/ and the
 // research app at /research/; both load the same code, and each HTML file says which
 // side it is with <html data-space="...">.
-import { ACADEMY_ORIGIN, LAB_ORIGIN, ORIGIN, SIM_ORIGIN, SITE_DOMAIN, TRADE_ORIGIN } from "./meta";
+import { originsFor, siteDomainOf } from "./meta";
 
 export type Space = "product" | "research";
 
@@ -38,24 +38,26 @@ export function unknownRoute(route: string, arg: string | undefined, payments: b
 export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "/research/" };
 
 // ---------- Sim World, its own full-screen site (DEC-0020) ----------
-// sim.endyland.com serves web/sim/index.html, marked <html data-space="sim">. It shows only
+// sim.<domain> serves web/sim/index.html, marked <html data-space="sim">. It shows only
 // Sim World and one Back button; it still signs in and loads data like the other sides.
 
 /** True on the full-screen Sim World site. */
 export const IS_SIM = document.documentElement.dataset.space === "sim";
 
 // The addresses come from src/lib/site.json (DEC-0038), so a new domain is one edit there.
-const onSiteDomain = () => window.location.hostname === SITE_DOMAIN || window.location.hostname.endsWith(`.${SITE_DOMAIN}`);
+// A page on an old domain (endyland.com, DEC-0069) keeps its links on that domain.
+const onSiteDomain = () => siteDomainOf(window.location.hostname) !== null;
+const origins = () => originsFor(window.location.hostname);
 
 /** Where Sim World opens: its own subdomain on the site's domain, /sim/ elsewhere (previews, localhost). */
 export function simUrl(tab?: string): string {
   const hash = tab ? `#/${tab.replace(/^#?\/?/, "")}` : "";
-  return onSiteDomain() ? `${SIM_ORIGIN}/${hash}` : `/sim/${hash}`;
+  return onSiteDomain() ? `${origins().sim}/${hash}` : `/sim/${hash}`;
 }
 
 /** A research page by its hash, from anywhere (Sim World links back to docs and strategies). */
 export function researchUrl(hash = ""): string {
-  return onSiteDomain() ? `${ORIGIN}/research/${hash}` : `/research/${hash}`;
+  return onSiteDomain() ? `${origins().main}/research/${hash}` : `/research/${hash}`;
 }
 
 // ---------- Parity Trade, its own full-screen app (DEC-0040) ----------
@@ -65,18 +67,18 @@ export function researchUrl(hash = ""): string {
 /** True on the full-screen Parity Trade app. */
 export const IS_TRADE = document.documentElement.dataset.space === "trade";
 
-/** trade.<domain> is live (owner approved trade.endyland.com, 2026-10-24). Set false to fall back to /trade/. */
+/** trade.<domain> is live (owner approved trade.endyland.com 2026-10-24, trade.paritytrading.app 2026-10-26). Set false to fall back to /trade/. */
 export const TRADE_SUBDOMAIN = true;
 
 /** Where Parity Trade opens: its own subdomain on the site's domain, /trade/ elsewhere (previews, localhost). */
 export function tradeUrl(hash = ""): string {
   const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
-  return TRADE_SUBDOMAIN && onSiteDomain() ? `${TRADE_ORIGIN}/${h}` : `/trade/${h}`;
+  return TRADE_SUBDOMAIN && onSiteDomain() ? `${origins().trade}/${h}` : `/trade/${h}`;
 }
 
 /** A product app page by its hash, from anywhere (Parity Trade's Back button). */
 export function productUrl(hash = ""): string {
-  return onSiteDomain() ? `${ORIGIN}/app/${hash}` : `/app/${hash}`;
+  return onSiteDomain() ? `${origins().main}/app/${hash}` : `/app/${hash}`;
 }
 
 /** Where an old #/trade link of the product app now lives inside Parity Trade. */
@@ -98,13 +100,13 @@ export function tradeHashFor(oldHash: string): string {
 /** True on the full-screen Parity Academy app. */
 export const IS_ACADEMY = document.documentElement.dataset.space === "academy";
 
-/** academy.<domain> is live (owner approved and set up academy.endyland.com, 2026-10-24). Set false to fall back to /academy/. */
+/** academy.<domain> is live (academy.endyland.com 2026-10-24, academy.paritytrading.app 2026-10-26). Set false to fall back to /academy/. */
 export const ACADEMY_SUBDOMAIN = true;
 
 /** Where Parity Academy opens: its own subdomain on the site's domain, /academy/ elsewhere (previews, localhost). */
 export function academyUrl(hash = ""): string {
   const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
-  return ACADEMY_SUBDOMAIN && onSiteDomain() ? `${ACADEMY_ORIGIN}/${h}` : `/academy/${h}`;
+  return ACADEMY_SUBDOMAIN && onSiteDomain() ? `${origins().academy}/${h}` : `/academy/${h}`;
 }
 
 /** Where an old #/academy link of the product app now lives inside Parity Academy: #/academy/<course>/<lesson> becomes <course>/<lesson>. */
@@ -137,13 +139,13 @@ export function appLink(space: Space | "both", hash: string): string {
 /** True on the full-screen Parity Workbench app. */
 export const IS_LAB = document.documentElement.dataset.space === "lab";
 
-/** lab.<domain> is live (owner approved and set up lab.endyland.com, 2026-10-24). Set false to fall back to /lab/. */
+/** lab.<domain> is live (lab.endyland.com 2026-10-24, lab.paritytrading.app 2026-10-26). Set false to fall back to /lab/. */
 export const LAB_SUBDOMAIN = true;
 
 /** Where Parity Workbench opens: its own subdomain on the site's domain, /lab/ elsewhere (previews, localhost). */
 export function labUrl(hash = ""): string {
   const h = hash ? `#/${hash.replace(/^#?\/?/, "")}` : "";
-  return LAB_SUBDOMAIN && onSiteDomain() ? `${LAB_ORIGIN}/${h}` : `/lab/${h}`;
+  return LAB_SUBDOMAIN && onSiteDomain() ? `${origins().lab}/${h}` : `/lab/${h}`;
 }
 
 /** The product and research routes that now live in Parity Workbench, and the view each opens. */

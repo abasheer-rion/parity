@@ -108,7 +108,7 @@ function renderPalette() {
 
 async function openLink(value) {
   const res = await shell.ask("open-link", value);
-  if (!res?.ok) showError("That is not a Parity link. Paste an address on parity.endyland.com, a short link such as /s/fx_carry, or a parity:// link.");
+  if (!res?.ok) showError("That is not a Parity link. Paste an address on paritytrading.app, a short link such as /s/fx_carry, or a parity:// link.");
 }
 
 function showError(text) {
@@ -135,7 +135,7 @@ function showCard(mode) {
     tips.append(el("span", {}, el("kbd", {}, "Enter"), " open"), el("span", {}, el("kbd", {}, `${MOD} Enter`), " in a new window"), el("span", {}, el("kbd", {}, "Esc"), " close"));
     renderPalette();
   } else if (mode === "link") {
-    q.placeholder = "Paste a link: parity.endyland.com/..., /s/fx_carry, /v/... or parity://...";
+    q.placeholder = "Paste a link: paritytrading.app/..., /s/fx_carry, /v/... or parity://...";
     tips.append(el("span", {}, el("kbd", {}, "Enter"), " open in this window"), el("span", {}, el("kbd", {}, "Esc"), " close"));
   } else if (mode === "name") {
     q.placeholder = "Name this workspace, for example Morning trading";

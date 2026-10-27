@@ -37,7 +37,7 @@ from .. import latency
 from ..data import store
 from . import checks, db, fetch, net
 
-LIVE_STATUS = "https://parity.endyland.com/live/status"
+LIVE_STATUS = "https://paritytrading.app/live/status"
 RETIRE_AFTER_DAYS = 14
 RETRY_FIRST_HOURS = 6.0
 RETRY_MAX_HOURS = 48.0

@@ -37,7 +37,7 @@ export interface ServerDeps {
   enabled: boolean;
   /** The two tools that change anything. Off unless MCP_WRITE_ENABLED is "on". */
   writeEnabled: boolean;
-  siteDomain: string;
+  siteDomain: string | string[];
   extraOrigins?: string[];
   now?: () => Date;
   timeoutMs?: number;

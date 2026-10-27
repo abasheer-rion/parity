@@ -12,7 +12,7 @@ import { verifyToken } from "../src/lib/mcp/auth";
 import { handleMcp } from "../src/lib/mcp/server";
 import { supabaseAudit, supabaseDb } from "../src/lib/mcp/supabase";
 import type { Data } from "../src/lib/mcp/tools";
-import { SITE_DOMAIN } from "../src/lib/meta";
+import { SITE_DOMAINS } from "../src/lib/meta";
 
 interface Env {
   MCP_ENABLED?: string;
@@ -55,6 +55,6 @@ export const onRequest = async ({ request, env }: Context): Promise<Response> =>
     audit: (db) => supabaseAudit(db),
     enabled: env.MCP_ENABLED !== "off",
     writeEnabled: env.MCP_WRITE_ENABLED === "on",
-    siteDomain: SITE_DOMAIN,
+    siteDomain: SITE_DOMAINS, // paritytrading.app, and endyland.com while it redirects (DEC-0069)
     extraOrigins: (env.MCP_EXTRA_ORIGINS ?? "").split(",").map((s) => s.trim()).filter(Boolean),
   });

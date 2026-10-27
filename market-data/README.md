@@ -59,6 +59,6 @@ Secrets the worker and the Pages project read, all optional:
 
 ## Checking it works
 
-- `https://parity.endyland.com/live/status` lists every source's line, viewers, reconnects and the exchange-to-edge lag (p50, p95, p99).
+- `https://paritytrading.app/live/status` lists every source's line, viewers, reconnects and the exchange-to-edge lag (p50, p95, p99).
 - In Trade, the badge on each live chart shows the median exchange-to-screen time; click it for the 95th percentile, every hop, reconnects and lost updates.
 - The Latency page shows the same per feed from real browsers over 7 days.

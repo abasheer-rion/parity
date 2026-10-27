@@ -11,4 +11,4 @@ Disallow: /signup/
 Disallow: /reset/
 Disallow: /verify/
 
-Sitemap: https://parity.endyland.com/sitemap.xml
+Sitemap: https://paritytrading.app/sitemap.xml

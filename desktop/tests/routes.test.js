@@ -4,10 +4,10 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
-const { toAppPath, activeSection, visibleSections, resolveRequest, liveUrl, isTrusted, trustedOrigins } = require("../electron/routes");
+const { toAppPath, activeSection, visibleSections, resolveRequest, liveUrl, isTrusted, trustedOrigins, LEGACY_DOMAINS } = require("../electron/routes");
 const sections = require("../electron/sections");
 
-const O = "https://parity.endyland.com";
+const O = "https://paritytrading.app";
 
 test("parity:// links open the matching page", () => {
   assert.equal(toAppPath("parity://s/fx_carry", O), "/app/#/strategy/fx_carry");
@@ -19,23 +19,23 @@ test("parity:// links open the matching page", () => {
   assert.equal(toAppPath("parity://app/#/verify", O), "/app/#/verify");
   assert.equal(toAppPath("parity:///research/", O), "/research/");
   assert.equal(toAppPath("parity://login/?code=abc&next=%2Ftrade%2F", O), "/login/?code=abc&next=%2Ftrade%2F");
-  assert.equal(toAppPath(`parity://open?url=${encodeURIComponent("https://trade.endyland.com/#/alerts")}`, O), "/trade/#/alerts");
+  assert.equal(toAppPath(`parity://open?url=${encodeURIComponent("https://trade.paritytrading.app/#/alerts")}`, O), "/trade/#/alerts");
 });
 
 test("the website's three addresses stay in the app", () => {
-  assert.equal(toAppPath("https://parity.endyland.com/", O), "/");
-  assert.equal(toAppPath("https://parity.endyland.com/app/#/strategies", O), "/app/#/strategies");
-  assert.equal(toAppPath("https://parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
-  assert.equal(toAppPath("https://sim.endyland.com/", O), "/sim/");
-  assert.equal(toAppPath("https://sim.endyland.com/#/fx", O), "/sim/#/fx");
-  assert.equal(toAppPath("https://trade.endyland.com/#/alerts", O), "/trade/#/alerts");
-  assert.equal(toAppPath("https://academy.endyland.com/#/luck-vs-skill/noise", O), "/academy/#/luck-vs-skill/noise");
-  assert.equal(toAppPath("https://lab.endyland.com/#/search?q=carry", O), "/lab/#/search?q=carry");
-  assert.equal(toAppPath("https://trade.endyland.com/login/?next=x", O), "/login/?next=x");
+  assert.equal(toAppPath("https://paritytrading.app/", O), "/");
+  assert.equal(toAppPath("https://paritytrading.app/app/#/strategies", O), "/app/#/strategies");
+  assert.equal(toAppPath("https://paritytrading.app/s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(toAppPath("https://sim.paritytrading.app/", O), "/sim/");
+  assert.equal(toAppPath("https://sim.paritytrading.app/#/fx", O), "/sim/#/fx");
+  assert.equal(toAppPath("https://trade.paritytrading.app/#/alerts", O), "/trade/#/alerts");
+  assert.equal(toAppPath("https://academy.paritytrading.app/#/luck-vs-skill/noise", O), "/academy/#/luck-vs-skill/noise");
+  assert.equal(toAppPath("https://lab.paritytrading.app/#/search?q=carry", O), "/lab/#/search?q=carry");
+  assert.equal(toAppPath("https://trade.paritytrading.app/login/?next=x", O), "/login/?next=x");
 });
 
 test("other addresses open in the browser", () => {
-  for (const u of ["https://evil.example/", "http://parity.endyland.com/", "https://parity.endyland.com:8443/", "https://user@parity.endyland.com/", "javascript:alert(1)", "file:///etc/passwd", "//evil.example/x", "", null]) {
+  for (const u of ["https://evil.example/", "http://paritytrading.app/", "https://paritytrading.app:8443/", "https://user@paritytrading.app/", "javascript:alert(1)", "file:///etc/passwd", "//evil.example/x", "", null]) {
     assert.equal(toAppPath(u, O), null, String(u));
   }
 });
@@ -98,18 +98,18 @@ test("requests never leave the bundle", () => {
 });
 
 test("online, every path opens on the live site", () => {
-  assert.equal(liveUrl("/", O), "https://parity.endyland.com/");
-  assert.equal(liveUrl("/app/#/verify", O), "https://parity.endyland.com/app/#/verify");
-  assert.equal(liveUrl("/research/", O), "https://parity.endyland.com/research/");
-  assert.equal(liveUrl("/login/?next=%2Ftrade%2F", O), "https://parity.endyland.com/login/?next=%2Ftrade%2F");
-  assert.equal(liveUrl("/sim/", O), "https://sim.endyland.com/");
-  assert.equal(liveUrl("/sim/#/macro", O), "https://sim.endyland.com/#/macro");
-  assert.equal(liveUrl("/trade/#/chart?s=fx.EUR", O), "https://trade.endyland.com/#/chart?s=fx.EUR");
-  assert.equal(liveUrl("/trade", O), "https://trade.endyland.com/");
-  assert.equal(liveUrl("/academy/", O), "https://academy.endyland.com/");
-  assert.equal(liveUrl("/lab/#/search?q=carry", O), "https://lab.endyland.com/#/search?q=carry");
-  assert.equal(liveUrl("/v/AbCdEfGhIjKl", O), "https://parity.endyland.com/v/AbCdEfGhIjKl");
-  assert.equal(liveUrl("/legal/risk/", `${O}/`), "https://parity.endyland.com/legal/risk/");
+  assert.equal(liveUrl("/", O), "https://paritytrading.app/");
+  assert.equal(liveUrl("/app/#/verify", O), "https://paritytrading.app/app/#/verify");
+  assert.equal(liveUrl("/research/", O), "https://paritytrading.app/research/");
+  assert.equal(liveUrl("/login/?next=%2Ftrade%2F", O), "https://paritytrading.app/login/?next=%2Ftrade%2F");
+  assert.equal(liveUrl("/sim/", O), "https://sim.paritytrading.app/");
+  assert.equal(liveUrl("/sim/#/macro", O), "https://sim.paritytrading.app/#/macro");
+  assert.equal(liveUrl("/trade/#/chart?s=fx.EUR", O), "https://trade.paritytrading.app/#/chart?s=fx.EUR");
+  assert.equal(liveUrl("/trade", O), "https://trade.paritytrading.app/");
+  assert.equal(liveUrl("/academy/", O), "https://academy.paritytrading.app/");
+  assert.equal(liveUrl("/lab/#/search?q=carry", O), "https://lab.paritytrading.app/#/search?q=carry");
+  assert.equal(liveUrl("/v/AbCdEfGhIjKl", O), "https://paritytrading.app/v/AbCdEfGhIjKl");
+  assert.equal(liveUrl("/legal/risk/", `${O}/`), "https://paritytrading.app/legal/risk/");
 });
 
 test("a live address and its in-app path map onto each other", () => {
@@ -118,12 +118,29 @@ test("a live address and its in-app path map onto each other", () => {
   }
 });
 
+test("links on the old endyland.com addresses still open inside the app (DEC-0069)", () => {
+  assert.equal(toAppPath("https://parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
+  assert.equal(toAppPath("https://sim.endyland.com/#/fx", O), "/sim/#/fx");
+  assert.equal(toAppPath("https://trade.endyland.com/#/alerts", O), "/trade/#/alerts");
+  assert.equal(toAppPath("https://www.paritytrading.app/legal/risk/", O), "/legal/risk/");
+  assert.equal(toAppPath("https://endyland.com/", O), null);
+  // New pages always open on the new domain.
+  assert.equal(liveUrl("/sim/", O), "https://sim.paritytrading.app/");
+});
+
+test("the old domains match site.json's legacy list", () => {
+  const site = JSON.parse(fs.readFileSync(path.join(__dirname, "../../web/src/lib/site.json"), "utf8"));
+  assert.deepEqual(LEGACY_DOMAINS, site.legacy.map(({ domain, main }) => ({ domain, main })));
+  assert.equal(site.origin, O);
+});
+
 test("only the bundled copy and the website's addresses are trusted", () => {
-  assert.deepEqual(trustedOrigins(O), ["app://parity", "https://parity.endyland.com", "https://sim.endyland.com", "https://trade.endyland.com", "https://academy.endyland.com", "https://lab.endyland.com"]);
-  for (const u of ["app://parity/", "app://parity/trade/", "https://parity.endyland.com/app/", "https://SIM.endyland.com/#/fx", "https://trade.endyland.com/login/?next=x", "https://lab.endyland.com/"]) {
+  assert.deepEqual(trustedOrigins(O).sort(), ["app://parity", "https://paritytrading.app", "https://www.paritytrading.app", "https://sim.paritytrading.app", "https://trade.paritytrading.app", "https://academy.paritytrading.app", "https://lab.paritytrading.app",
+    "https://parity.endyland.com", "https://sim.endyland.com", "https://trade.endyland.com", "https://academy.endyland.com", "https://lab.endyland.com"].sort());
+  for (const u of ["app://parity/", "app://parity/trade/", "https://paritytrading.app/app/", "https://SIM.paritytrading.app/#/fx", "https://trade.paritytrading.app/login/?next=x", "https://lab.paritytrading.app/"]) {
     assert.ok(isTrusted(u, O), u);
   }
-  for (const u of ["app://other/", "http://parity.endyland.com/", "https://parity.endyland.com:8443/", "https://user@parity.endyland.com/", "https://evil.endyland.com/", "https://parity.endyland.com.evil.example/", "https://endyland.com/", "https://accounts.google.com/", "javascript:alert(1)", "file:///etc/passwd", "", "not a url"]) {
+  for (const u of ["app://other/", "http://paritytrading.app/", "https://paritytrading.app:8443/", "https://user@paritytrading.app/", "https://evil.paritytrading.app/", "https://paritytrading.app.evil.example/", "https://endyland.com/", "https://movie.endyland.com/", "https://evil.endyland.com/", "https://accounts.google.com/", "javascript:alert(1)", "file:///etc/passwd", "", "not a url"]) {
     assert.ok(!isTrusted(u, O), u);
   }
 });

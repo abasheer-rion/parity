@@ -5,7 +5,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 import site from "../src/lib/site.json";
-import { HOST, ORIGIN, PAGES, parentDomain, PRIVATE, routeMeta, SIM_ORIGIN, SIM_TABS, SITE_DOMAIN, withHead } from "../src/lib/meta";
+import { HOST, mainHostFor, ORIGIN, originsFor, PAGES, parentDomain, PRIVATE, routeMeta, SIM_ORIGIN, SIM_TABS, SITE_DOMAIN, SITE_DOMAINS, siteDomainOf, withHead } from "../src/lib/meta";
 import { shareUrl, withHashQuery } from "../src/lib/deeplink";
 import { badgeCardSvg, cardSvg, textWidth, wrap } from "../src/lib/og/card";
 import { badgeCard, badgeMeta, strategyCard, strategyMeta } from "../src/lib/og/share";
@@ -40,9 +40,22 @@ const count = (html: string, re: RegExp) => (html.match(re) ?? []).length;
 describe("the site address is one constant", () => {
   it("comes from site.json", () => {
     expect(ORIGIN).toBe(site.origin);
-    expect(HOST).toBe("parity.endyland.com");
-    expect(SITE_DOMAIN).toBe("endyland.com");
-    expect(SIM_ORIGIN).toBe("https://sim.endyland.com");
+    expect(HOST).toBe("paritytrading.app");
+    expect(SITE_DOMAIN).toBe("paritytrading.app");
+    expect(SIM_ORIGIN).toBe("https://sim.paritytrading.app");
+  });
+
+  it("keeps the old domain working while it redirects (DEC-0069)", () => {
+    expect(SITE_DOMAINS).toEqual(["paritytrading.app", "endyland.com"]);
+    expect(siteDomainOf("trade.paritytrading.app")).toBe("paritytrading.app");
+    expect(siteDomainOf("sim.endyland.com")).toBe("endyland.com");
+    expect(siteDomainOf("evil-paritytrading.app")).toBeNull();
+    expect(siteDomainOf("parity-research.pages.dev")).toBeNull();
+    expect(mainHostFor("endyland.com")).toBe("parity.endyland.com");
+    expect(mainHostFor("paritytrading.app")).toBe(HOST);
+    expect(originsFor("lab.endyland.com")).toEqual({ main: "https://parity.endyland.com", sim: "https://sim.endyland.com", trade: "https://trade.endyland.com", academy: "https://academy.endyland.com", lab: "https://lab.endyland.com" });
+    expect(originsFor("paritytrading.app").sim).toBe("https://sim.paritytrading.app");
+    expect(originsFor("127.0.0.1").main).toBe(ORIGIN);
   });
 
   it("works for an apex domain too", () => {
@@ -52,7 +65,7 @@ describe("the site address is one constant", () => {
 
   it("is not written out anywhere else in the page sources", () => {
     for (const f of ["src/lib/meta.ts", "plugins/meta.ts", "plugins/legal.ts", "src/lib/space.ts", "src/auth/redirect.ts", "src/auth/client.ts", "functions/_middleware.ts"]) {
-      expect(readFileSync(web(f), "utf8"), f).not.toMatch(/https:\/\/(parity|sim)\.endyland\.com|"endyland\.com"/);
+      expect(readFileSync(web(f), "utf8"), f).not.toMatch(/https:\/\/(parity|sim)\.endyland\.com|https:\/\/(sim\.)?paritytrading\.app|"(endyland\.com|paritytrading\.app)"/);
     }
   });
 });
@@ -83,7 +96,7 @@ describe("every page gets its tags from the table", () => {
     const types = ld["@graph"].map((n: { "@type": string }) => n["@type"]);
     expect(types).toEqual(["Organization", "WebSite", "SoftwareApplication"]);
     expect(ld["@graph"][0].name).toBe("Parity Trading, Inc.");
-    expect(html).toContain('<link rel="canonical" href="https://parity.endyland.com/" />');
+    expect(html).toContain('<link rel="canonical" href="https://paritytrading.app/" />');
   });
 
   it("marks the signed-in apps noindex and leaves public pages alone", () => {
@@ -109,7 +122,7 @@ describe("in-app pages", () => {
 });
 
 describe("deep links survive signing in", () => {
-  const at = { origin: "https://parity.endyland.com", hostname: "parity.endyland.com" };
+  const at = { origin: "https://paritytrading.app", hostname: "paritytrading.app" };
 
   it("puts the hash the browser carried back onto next", () => {
     expect(nextFromQuery("?next=%2Fapp%2F", at, "#/strategy/fx_carry")).toBe("/app/#/strategy/fx_carry");
@@ -130,10 +143,10 @@ describe("deep links survive signing in", () => {
 
 describe("short links", () => {
   it("turns a strategy page into /s/<id> and a Terminal view into /sim/<tab>", () => {
-    expect(shareUrl("https://parity.endyland.com/app/#/strategy/fx_carry")).toBe("https://parity.endyland.com/s/fx_carry");
-    expect(shareUrl("https://sim.endyland.com/#/scenario?type=war")).toBe("https://sim.endyland.com/sim/scenario?type=war");
-    expect(shareUrl("https://parity.endyland.com/sim/#/fx")).toBe("https://parity.endyland.com/sim/fx");
-    expect(shareUrl("https://parity.endyland.com/research/#/search?asset=fx")).toBe("https://parity.endyland.com/research/#/search?asset=fx");
+    expect(shareUrl("https://paritytrading.app/app/#/strategy/fx_carry")).toBe("https://paritytrading.app/s/fx_carry");
+    expect(shareUrl("https://sim.paritytrading.app/#/scenario?type=war")).toBe("https://sim.paritytrading.app/sim/scenario?type=war");
+    expect(shareUrl("https://paritytrading.app/sim/#/fx")).toBe("https://paritytrading.app/sim/fx");
+    expect(shareUrl("https://paritytrading.app/research/#/search?asset=fx")).toBe("https://paritytrading.app/research/#/search?asset=fx");
   });
 
   it("edits the hash query", () => {
@@ -156,11 +169,11 @@ describe("short links", () => {
 
   it("/sim/<tab> opens that workspace and passes other files through", async () => {
     const next = vi.fn(async () => new Response("asset"));
-    const res = await shortSim({ request: new Request("https://parity.endyland.com/sim/scenario?type=war&r=gulf"), params: { tab: "scenario" }, next });
+    const res = await shortSim({ request: new Request("https://paritytrading.app/sim/scenario?type=war&r=gulf"), params: { tab: "scenario" }, next });
     expect(res.status).toBe(302);
     expect(res.headers.get("Location")).toBe("/sim/#/scenario?type=war&r=gulf");
-    expect(await (await shortSim({ request: new Request("https://parity.endyland.com/sim/sw.js"), params: { tab: "sw.js" }, next })).text()).toBe("asset");
-    expect(await (await shortSim({ request: new Request("https://parity.endyland.com/sim/toString"), params: { tab: "toString" }, next })).text()).toBe("asset");
+    expect(await (await shortSim({ request: new Request("https://paritytrading.app/sim/sw.js"), params: { tab: "sw.js" }, next })).text()).toBe("asset");
+    expect(await (await shortSim({ request: new Request("https://paritytrading.app/sim/toString"), params: { tab: "toString" }, next })).text()).toBe("asset");
   });
 });
 
@@ -184,7 +197,7 @@ describe("share cards", () => {
     expect(c.detail).toBe("Self-reported backtest · 212 trades · 2020-01-02 to 2024-03-28");
     const svg = badgeCardSvg(c, '<svg viewBox="0 0 10 10"></svg>');
     expect(svg).toContain("Could be luck");
-    expect(svg).toContain("parity.endyland.com/v/AbCdEf123456");
+    expect(svg).toContain("paritytrading.app/v/AbCdEf123456");
     expect(badgeMeta(badge(), "AbCdEf123456").title).toBe("Could be luck: survives up to 4 tries · Parity Verify");
   });
 
@@ -209,7 +222,7 @@ describe("badge pages carry their own tags", () => {
 
   it("puts the verdict in the title and the badge's card in og:image", async () => {
     const fetcher = vi.fn(async () => new Response(JSON.stringify([badge()]), { status: 200 })) as unknown as typeof fetch;
-    const res = await badgePage({ request: new Request("https://parity.endyland.com/v/AbCdEf123456"), env, params: { id: "AbCdEf123456" } }, fetcher);
+    const res = await badgePage({ request: new Request("https://paritytrading.app/v/AbCdEf123456"), env, params: { id: "AbCdEf123456" } }, fetcher);
     const html = await res.text();
     expect(html).toContain("<title>Could be luck: survives up to 4 tries · Parity Verify</title>");
     expect(html).toContain(`content="${ORIGIN}/og/badge/AbCdEf123456.png"`);
@@ -221,7 +234,7 @@ describe("badge pages carry their own tags", () => {
   it("falls back to the general tags when the lookup fails", async () => {
     const fetcher = vi.fn(async () => new Response("down", { status: 500 })) as unknown as typeof fetch;
     vi.spyOn(console, "error").mockImplementation(() => {});
-    const res = await badgePage({ request: new Request("https://parity.endyland.com/v/AbCdEf123456"), env, params: { id: "AbCdEf123456" } }, fetcher);
+    const res = await badgePage({ request: new Request("https://paritytrading.app/v/AbCdEf123456"), env, params: { id: "AbCdEf123456" } }, fetcher);
     expect(await res.text()).toContain("<title>Verified record · Parity</title>");
   });
 });
