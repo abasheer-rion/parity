@@ -1,8 +1,6 @@
 Confirm your email
 
-Thanks for signing up to Parity. Confirm that {{ .Email }} is your address.
-
-Confirm my email:
+Welcome to Parity. Confirm {{ .Email }} and you are all set:
 {{ .SiteURL }}/verify/?type=email&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}
 
 Or type this code on the sign-up screen: {{ .Token }}
