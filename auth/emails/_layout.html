@@ -26,7 +26,8 @@
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -42,6 +43,7 @@
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 </style>
 </head>
@@ -54,8 +56,8 @@
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
         [[> header ]]
         <tr>
-          <td class="p-card" style="background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;">
-            [[ content ]]
+          <td class="p-card" style="background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;">
+            <!--body-->[[ content ]]<!--/body-->
           </td>
         </tr>
         [[> footer ]]

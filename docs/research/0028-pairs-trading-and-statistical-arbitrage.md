@@ -4,7 +4,7 @@ title: Pairs trading and statistical arbitrage, what the research says
 type: research
 status: current
 created: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 authors: [ayan]
 tags: [data, method, strategy]
 related: [DEC-0014, DEC-0015, DEC-0070, REF-0006]
@@ -43,6 +43,19 @@ Pairs trading bets on two prices that usually move together, such as Coca-Cola a
 We test four methods: distance, rolling cointegration with a half-life filter, Kalman hedge ratios and PCA residuals. Each picks its pairs at a formation date from past data only, trades for a fixed window, and pays trading costs and a borrow fee on short legs. Every variation, in the recipes and in the always-on search, counts toward the luck check. Results are in [DEC-0070](../decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md).
 
 Our long history is French's 49 US industry portfolios, which have a public licence. Industry pairs are a coarser test than stock pairs: an industry average has less of the company-specific noise that pairs trading feeds on. Single stocks need a market data licence; ours (Alpaca) allows research use only, so pages show statistics derived from them, never prices.
+
+### Single stocks, first run (27 October 2026)
+
+The owner allowed the team's Alpaca key for research on 27 October. All 87 stock and ETF series were fetched (daily, adjusted, June 2016 to October 2026) and the five stock recipes and 24 named stock pairs went through the 11 tests and the luck check, counted with every other pairs variation (502 in all, 458 of them from the always-on search).
+
+- Nothing passes the luck check. Every recipe's deflated Sharpe is 0.00.
+- Best recipe: named stock pairs with a moving hedge (Kalman), Sharpe 0.39 after costs and borrow, 5 of 11 tests. Labelled "real but small": too small to rely on.
+- The other four stock recipes lose money after costs (closest prices -0.91, all-sector cointegration -0.12, named pairs cointegrated -0.09, PCA leftovers -0.36).
+- Named pairs on their own, cointegration rules: 10 of 24 made money. The best were XLY and Home Depot (0.89, 6 trades), Visa and Mastercard (0.74, 8 trades) and GM and Ford (0.73, 3 trades). Samples this small are luck until shown otherwise.
+- Coca-Cola and PepsiCo, and UPS and FedEx, never traded: their gap never passed the cointegration test with a fast enough half-life.
+- The two share-class pairs are the textbook "always cointegrated" cases (BRK.A and BRK.B p-value 0.001, half-life under a day; GOOGL and GOOG 0.03) and barely pay: BRK Sharpe 0.05, GOOGL and GOOG -0.98. Costs take the gap.
+
+Survivorship applies: both stock lists are today's names. To rerun, put the Keychain keys `parity-alpaca-key-id` and `parity-alpaca-secret` into `ALPACA_KEY_ID` and `ALPACA_SECRET_KEY` for one process, run `parity fetch` on the `stk.*` keys, then `parity pairs report` and copy `engine/output/pairs.json` to `web/public/data/pairs.json`.
 
 Sources: Engle and Granger [link](https://doi.org/10.2307/1913236); Johansen [link](https://doi.org/10.2307/2938278); MacKinnon critical values [link](https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf); MacKinnon, Haug and Michelis [link](https://doi.org/10.1002/(SICI)1099-1255(199909/10)14:5%3C563::AID-JAE530%3E3.0.CO;2-R); Krauss [link](https://doi.org/10.1111/joes.12153); Elliott, van der Hoek and Malcolm [link](https://doi.org/10.1080/14697680500149370); D'Avolio [link](https://doi.org/10.1016/S0304-405X(02)00206-4); Engelberg, Reed and Ringgenberg [link](https://doi.org/10.1111/jofi.12601); Do and Faff 2012 [link](https://doi.org/10.1111/j.1475-6803.2012.01317.x); Vidyamurthy [link](https://www.wiley.com/en-us/Pairs+Trading%3A+Quantitative+Methods+and+Analysis-p-9780471460671).
 

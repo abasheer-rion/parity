@@ -357,6 +357,8 @@ AERO_SPACINGS = (1, 50, 100, 200, 2000)
 #: bar as web/scripts/onchain-discover.ts uses, 50,000).
 POOL_MIN_USD = 40_000
 ONCHAIN_REGISTRY = ROOT / "web/live/src/venues/onchain-registry.json"
+#: Pools the gate enrolled since the last refresh, joined to the feed at load (DEC-0078).
+ONCHAIN_ENROLLED = ROOT / "web/live/src/venues/onchain-enrolled.json"
 #: Base quote tokens the live feed prices against (web/live/src/venues/onchainRegistry.ts).
 BASE_QUOTES = {"USDC": ("0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", 6),
                "WETH": ("0x4200000000000000000000000000000000000006", 18)}
@@ -378,6 +380,10 @@ def onchain_config(path: Path = ONCHAIN_REGISTRY) -> tuple[dict[str, tuple[str, 
                 label = p.get("via") or t["sym"].removesuffix("-USD")
                 name = re.sub(r"[^A-Z0-9]", "", label.upper())
                 tokens.setdefault(name, (p["base"].lower(), int(p["decimals"])))
+    enrolled = path.with_name(ONCHAIN_ENROLLED.name)
+    if enrolled.exists():
+        for p in json.loads(enrolled.read_text()).get("pools", []):
+            pools.add(p["pool"].lower())
     return tokens, pools
 
 

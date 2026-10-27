@@ -66,8 +66,17 @@ Every link has the form `{{ .SiteURL }}/verify/?type=<type>&token_hash={{ .Token
 - Tables for layout and inline styles, so Gmail, Outlook and Apple Mail all show the same thing.
 - Light by default. Apple Mail, iOS Mail and Outlook switch to our dark surfaces (`#10101a`, `#171721`) when the reader uses dark mode. Gmail applies its own dark mode, and every colour still reads after it does.
 - One blue button (`#2f6bff`) per email, drawn twice: once for Outlook on Windows, once for everyone else.
-- The logo is a PNG at `https://paritytrading.app/brand/2026-10-21-starburst/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder is public.
+- The header is a dark band with the site logo (starburst and PARITY wordmark) as a 2x PNG, `web/public/email/parity-logo-on-dark@2x.png`, rendered from `web/public/brand/2026-10-22-wordmark/parity-wordmark-on-dark.svg`. Our own sender attaches it inline by Content-ID (`cid:parity-logo`), so it shows without "download images". The SMTP fallback links the hosted copy instead, and its alt text reads PARITY on the band.
 - Each email stays under 100 kB (Gmail cuts off longer ones). `build.py` checks.
+
+## Who sends the emails
+
+Since 27 October 2026 Supabase hands every auth email to our own sender, a Supabase Send Email hook: the Edge Function `supabase/functions/send-email`. It checks each call is signed with the hook secret (Standard Webhooks), picks the email for the action (sign-up, code, reset, email change, invite, reauthentication, plus short security notices), fills in every value and sends it through the Resend API with the logo attached inline. A secure email change sends two emails, one to each address, each with its own code and link.
+
+- Templates: `auth/build.py` writes `supabase/functions/send-email/templates.ts` and `logo.ts` from the same sources as `auth/dist/`. Tests: `deno test supabase/functions/send-email/compose.test.ts`.
+- Secrets (Edge Function secrets): `SEND_EMAIL_HOOK_SECRET` (Keychain `parity-send-email-hook-secret`, same value as on the hook) and `RESEND_API_KEY`.
+- Deploy: `SUPABASE_ACCESS_TOKEN=$(vault get supabase-access-token) supabase functions deploy send-email --project-ref ttqvpxvctnomfbeoqbbs --no-verify-jwt --use-api`.
+- Fallback: Supabase SMTP (Resend SMTP) stays configured with the same templates. `auth/send_email_hook.sh --off` switches back to it at once; `--on` switches our sender back on.
 
 ## Changing an email
 

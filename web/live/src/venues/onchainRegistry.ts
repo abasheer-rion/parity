@@ -162,3 +162,35 @@ export function proposePools(reg: Registry | null, proposals: Proposal[], opts: 
   }
   return { at: opts.now ?? new Date().toISOString(), minLiqUsd: minLiq, tokens };
 }
+
+/** One pool the data registry's gate enrolled (DEC-0078), with the asset it prices. */
+export interface EnrolledPool extends PoolEntry { token: string; series: string; enrolledAt: string }
+/** onchain-enrolled.json, written only by engine/src/parity/registry/feed.py (pool-enrol.yml). */
+export interface EnrolledList { at: string | null; pools: EnrolledPool[] }
+
+/** The same caps proposePools keeps: pools per asset and per chain. */
+export const ENROLL_MAX_POOLS = 8;
+export const ENROLL_MAX_PER_CHAIN = 3;
+
+/**
+ * Add the enrolled pools to the registry the fan-out streams. A pool joins only an asset the
+ * registry already prices, only when it is as deep as the registry's bar, quoted in a token we
+ * can price, not already listed, and while the asset stays within ENROLL_MAX_POOLS pools and
+ * ENROLL_MAX_PER_CHAIN per chain. Returns a new registry; neither input is changed.
+ */
+export function withEnrolled(reg: Registry, list: EnrolledList | null | undefined): Registry {
+  if (!list?.pools?.length) return reg;
+  const tokens = reg.tokens.map((t) => ({ ...t, pools: [...t.pools] }));
+  for (const e of list.pools) {
+    const t = tokens.find((x) => x.key === e.token);
+    if (!t || e.liq < reg.minLiqUsd || quoteUsd(e.chain, e.quote) == null) continue;
+    const pool = e.pool.toLowerCase();
+    if (t.pools.some((x) => x.chain === e.chain && x.pool.toLowerCase() === pool)) continue;
+    if (t.pools.length >= ENROLL_MAX_POOLS) continue;
+    if (t.pools.filter((x) => x.chain === e.chain).length >= ENROLL_MAX_PER_CHAIN) continue;
+    const { token: _t, series: _s, enrolledAt: _a, ...entry } = e;
+    void _t; void _s; void _a;
+    t.pools.push({ ...entry, pool, base: e.base.toLowerCase() });
+  }
+  return { ...reg, tokens };
+}

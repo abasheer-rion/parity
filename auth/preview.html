@@ -61,7 +61,8 @@
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -77,6 +78,7 @@
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -87,25 +89,20 @@
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your email&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your email&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Welcome to Parity. Confirm amanda@example.com and you are all set.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -134,7 +131,7 @@
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=email&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=email&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -180,7 +177,8 @@
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -196,6 +194,7 @@
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -206,25 +205,20 @@
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your email&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your email&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Welcome to Parity. Confirm amanda@example.com and you are all set.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -253,7 +247,7 @@
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=email&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=email&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -321,7 +315,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -337,6 +332,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -347,25 +343,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Your sign-in code&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Your sign-in code&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Type this code on the Parity sign-in screen.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 8px 0;&quot;&gt;
   &lt;tr&gt;
@@ -391,7 +382,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   &lt;/tr&gt;
 &lt;/table&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code and link work once and expire in 60 minutes. We will never ask you for this code.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code and link work once and expire in 60 minutes. We will never ask you for this code.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -437,7 +428,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -453,6 +445,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -463,25 +456,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Your sign-in code&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Your sign-in code&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Type this code on the Parity sign-in screen.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 8px 0;&quot;&gt;
   &lt;tr&gt;
@@ -507,7 +495,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   &lt;/tr&gt;
 &lt;/table&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code and link work once and expire in 60 minutes. We will never ask you for this code.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code and link work once and expire in 60 minutes. We will never ask you for this code.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -575,7 +563,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -591,6 +580,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -601,25 +591,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Reset your password&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Reset your password&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Tap the button to choose a new password for amanda@example.com.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -648,7 +633,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=recovery&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=recovery&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes. Your password stays the same until you pick a new one.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes. Your password stays the same until you pick a new one.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -694,7 +679,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -710,6 +696,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -720,25 +707,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Reset your password&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Reset your password&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Tap the button to choose a new password for amanda@example.com.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -767,7 +749,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=recovery&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=recovery&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes. Your password stays the same until you pick a new one.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The link and code work once and expire in 60 minutes. Your password stays the same until you pick a new one.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -835,7 +817,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -851,6 +834,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -861,25 +845,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your new email&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your new email&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Confirm the change from amanda@example.com to amanda.new@example.com.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -908,7 +887,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=email_change&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=email_change&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Both addresses get this email and both must confirm. Not you? Change your password.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Both addresses get this email and both must confirm. Not you? Change your password.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -954,7 +933,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -970,6 +950,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -980,25 +961,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your new email&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm your new email&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Confirm the change from amanda@example.com to amanda.new@example.com.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -1027,7 +1003,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=email_change&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=email_change&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Both addresses get this email and both must confirm. Not you? Change your password.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Both addresses get this email and both must confirm. Not you? Change your password.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1095,7 +1071,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -1111,6 +1088,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -1121,25 +1099,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;You are invited to Parity&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;You are invited to Parity&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Parity tests currency strategies against the S&amp;amp;P 500. Accept the invite and choose a password to get started.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -1159,7 +1132,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=invite&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=invite&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The invite works once.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The invite works once.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1205,7 +1178,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -1221,6 +1195,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -1231,25 +1206,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;You are invited to Parity&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;You are invited to Parity&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Parity tests currency strategies against the S&amp;amp;P 500. Accept the invite and choose a password to get started.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 24px 0;&quot;&gt;
   &lt;tr&gt;
@@ -1269,7 +1239,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;Button not working? Paste this into your browser:&lt;/p&gt;
 &lt;p style=&quot;margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;&quot;&gt;&lt;a class=&quot;p-link&quot; href=&quot;https://paritytrading.app/verify/?type=invite&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&quot; style=&quot;color:#1F4FBF;text-decoration:underline;&quot;&gt;https://paritytrading.app/verify/?type=invite&amp;amp;token_hash=3f9a1c7e5b2d4f60a8e1c4b7&amp;amp;next=https://sim.paritytrading.app/sim/&lt;/a&gt;&lt;/p&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The invite works once.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The invite works once.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1335,7 +1305,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -1351,6 +1322,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -1361,25 +1333,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm it is you&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm it is you&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Type this code to confirm the change to your Parity account.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 8px 0;&quot;&gt;
   &lt;tr&gt;
@@ -1390,7 +1357,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 22px 0;text-align:center;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#5b5f72;&quot;&gt;Tap or double-click the code to select it.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code works once and expires in 60 minutes. Not you? Change your password.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code works once and expires in 60 minutes. Not you? Change your password.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1436,7 +1403,8 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -1452,6 +1420,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 &lt;/style&gt;
 &lt;/head&gt;
@@ -1462,25 +1431,20 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
     &lt;td align=&quot;center&quot; style=&quot;padding:32px 12px;&quot;&gt;
       &lt;!--[if mso]&gt;&lt;table role=&quot;presentation&quot; width=&quot;520&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;![endif]--&gt;
       &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;max-width:520px;&quot;&gt;
-        &lt;!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. --&gt;
+        &lt;!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without &quot;download images&quot;. Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. --&gt;
 &lt;tr&gt;
-  &lt;td style=&quot;padding:0 4px 18px 4px;&quot;&gt;
-    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;&quot; aria-label=&quot;Parity Trading&quot;&gt;
-    &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
-      &lt;tr&gt;
-        &lt;td role=&quot;img&quot; aria-label=&quot;Parity Trading&quot; width=&quot;40&quot; height=&quot;40&quot; align=&quot;center&quot; valign=&quot;middle&quot; bgcolor=&quot;#0d1220&quot; background=&quot;../web/public/email/parity-mark-glow.png&quot; style=&quot;width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url(&#x27;../web/public/email/parity-mark-glow.png&#x27;);background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:&#x27;Segoe UI Symbol&#x27;,&#x27;Apple Symbols&#x27;,&#x27;DejaVu Sans&#x27;,Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;&quot;&gt;&lt;span aria-hidden=&quot;true&quot; style=&quot;color:#5b8cff;&quot;&gt;&amp;#10042;&lt;/span&gt;&lt;/td&gt;
-        &lt;td style=&quot;width:12px;font-size:0;line-height:0;&quot;&gt;&amp;nbsp;&lt;/td&gt;
-        &lt;td class=&quot;p-text&quot; style=&quot;vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;&quot;&gt;PARITY &lt;span style=&quot;color:#1F4FBF;&quot;&gt;TRADING&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;td class=&quot;p-band&quot; bgcolor=&quot;#0d1220&quot; align=&quot;left&quot; style=&quot;background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;&quot;&gt;
+    &lt;a href=&quot;https://paritytrading.app&quot; target=&quot;_blank&quot; style=&quot;text-decoration:none;color:#f4f7ff;&quot;&gt;
+      &lt;img src=&quot;../web/public/email/parity-logo-on-dark@2x.png&quot; width=&quot;176&quot; height=&quot;40&quot; alt=&quot;PARITY&quot; style=&quot;display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,&#x27;Times New Roman&#x27;,serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;&quot;&gt;
     &lt;/a&gt;
   &lt;/td&gt;
 &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;&quot;&gt;
-            &lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm it is you&lt;/h1&gt;
+          &lt;td class=&quot;p-card&quot; style=&quot;background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;&quot;&gt;
+            &lt;!--body--&gt;&lt;h1 class=&quot;p-text&quot; style=&quot;margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;&quot;&gt;Confirm it is you&lt;/h1&gt;
 &lt;p class=&quot;p-text&quot; style=&quot;margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;&quot;&gt;Type this code to confirm the change to your Parity account.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;margin:4px 0 8px 0;&quot;&gt;
   &lt;tr&gt;
@@ -1491,7 +1455,7 @@ Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
 &lt;/table&gt;
 &lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 22px 0;text-align:center;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#5b5f72;&quot;&gt;Tap or double-click the code to select it.&lt;/p&gt;
 &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;p-rule&quot; style=&quot;border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code works once and expires in 60 minutes. Not you? Change your password.&lt;/p&gt;
+&lt;p class=&quot;p-muted&quot; style=&quot;margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,&#x27;Segoe UI&#x27;,Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;&quot;&gt;The code works once and expires in 60 minutes. Not you? Change your password.&lt;/p&gt;&lt;!--/body--&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
