@@ -86,6 +86,9 @@ module.exports = {
   "color-warning-soft": "rgba(255, 176, 0, 0.12)",
   "color-info": "#8fb0ff",
   "color-info-soft": "rgba(143, 176, 255, 0.12)",
+  "color-table-head": "#1d1e24",
+  "color-table-head-text": "#d4d6de",
+  "color-row-hover": "rgba(62, 108, 230, 0.1)",
   "color-scrim": "rgba(0, 0, 0, 0.6)",
   "color-glow": "#1f4fbf",
   "color-glow-deep": "#0e2766",
@@ -112,6 +115,8 @@ module.exports = {
   "type-6xl": "28px",
   "type-7xl": "34px",
   "type-8xl": "44px",
+  "type-title": "34px",
+  "type-section": "20px",
   "type-display-sm": "clamp(28px, 4vw, 40px)",
   "type-display": "clamp(34px, 6vw, 68px)",
 };

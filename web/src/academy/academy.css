@@ -21,7 +21,6 @@
   --a-bad: var(--color-negative);
   --a-ease: var(--ease-glide);
   --a-top: 52px;
-  --a-legal: 26px;
   --a-rail: 56px;
   --a-fs: var(--type-xl);
   /* The shared UI library inside the Academy: no light blue, white focus. */
@@ -35,14 +34,14 @@
   --accent: var(--a-accent);
   --accent-soft: var(--color-accent-soft);
   position: fixed; inset: 0;
-  display: grid; grid-template-rows: var(--a-top) minmax(0, 1fr) var(--a-legal);
+  display: grid; grid-template-rows: var(--a-top) minmax(0, 1fr);
   background: var(--a-bg); color: var(--a-body);
   font-family: var(--font-text); font-size: var(--type-md);
   overflow: hidden; isolation: isolate;
 }
 .pac[data-text="large"] { --a-fs: var(--type-2xl); }
-.pac[data-mobile] { --a-top: 48px; grid-template-rows: var(--a-top) minmax(0, 1fr) var(--a-legal) 56px; }
-.pac[data-mobile][data-player] { grid-template-rows: var(--a-top) minmax(0, 1fr) var(--a-legal); }
+.pac[data-mobile] { --a-top: 48px; grid-template-rows: var(--a-top) minmax(0, 1fr) 56px; }
+.pac[data-mobile][data-player] { grid-template-rows: var(--a-top) minmax(0, 1fr); }
 .pac a:not(.ui-btn, .ui-iconbtn) { color: inherit; }
 .pac :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .pac kbd { font: 500 var(--type-2xs)/18px var(--font-mono); padding: 0 6px; border-radius: 4px; border: 1px solid var(--a-line-2); color: var(--a-muted); background: color-mix(in srgb, var(--palette-white) 3%, transparent); white-space: nowrap; }
@@ -92,15 +91,10 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* ---------- Rail, main and footer ---------- */
 .pac-mid { display: flex; min-height: 0; min-width: 0; }
 .pac-rail { width: var(--a-rail); flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0; border-right: 1px solid var(--a-line); background: color-mix(in srgb, var(--color-canvas) 40%, transparent); }
-.pac-rail-i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; color: var(--a-faint); text-decoration: none; }
-.pac-rail-i:hover { color: var(--a-text); background: var(--a-hover); }
-.pac-rail-i.on { color: var(--a-text); background: var(--color-fill); box-shadow: inset 2px 0 0 var(--a-accent); }
+.pac-rail-i { display: grid; place-items: center; height: 42px; color: var(--a-faint); text-decoration: none; }
 .pac-rail-i.end { margin-top: auto; }
 .pac main.pac-main { flex: 1 1 auto; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; outline: none; max-width: none; margin: 0; padding: 0; scrollbar-gutter: stable; }
-.pac footer.pac-legal { margin: 0; }
-.pac-legal { display: flex; align-items: center; padding: 0 14px; border-top: 1px solid var(--a-line); font-size: var(--type-2xs); color: var(--a-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: color-mix(in srgb, var(--color-canvas) 55%, transparent); }
-.pac-legal span { overflow: hidden; text-overflow: ellipsis; }
-.pac-page { max-width: 1240px; margin: 0 auto; padding: 28px 32px 48px; display: flex; flex-direction: column; gap: 22px; }
+.pac-page { padding: var(--space-6) var(--space-6) var(--space-12); display: flex; flex-direction: column; gap: 22px; }
 .pac-h1 { margin: 0; font-size: var(--type-6xl); font-weight: 600; line-height: 1.2; }
 .pac-h2 { margin: 0; font-size: var(--type-2xl); font-weight: 600; }
 .pac-h3 { margin: 0 0 8px; font-size: var(--type-sm); font-weight: 600; color: var(--a-muted) !important; letter-spacing: 0; }
@@ -147,7 +141,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Course page ---------- */
 .pac-course-hero { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
-.pac-lessons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; max-width: 900px; }
+.pac-lessons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .pac-lrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; text-decoration: none; color: var(--a-muted); }
 .pac-lrow:hover { border-color: var(--a-line-2); color: var(--a-text); }
 .pac-lrow-t { color: var(--a-text); font-size: var(--type-lg); font-weight: 500; display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
@@ -172,7 +166,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-lrail-list .pac-n { width: 24px; height: 24px; font-size: var(--type-2xs); }
 
 .pac main.pac-stage { grid-row: 1; grid-column: -2 / -1; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; outline: none; max-width: none; margin: 0; padding: 0; scrollbar-gutter: stable; }
-.pac-lesson { max-width: 1260px; margin: 0 auto; padding: 32px 40px 48px; display: flex; flex-direction: column; gap: 22px; animation: pac-in var(--dur-4) var(--a-ease) both; }
+.pac-lesson { padding: var(--space-8) var(--space-6) var(--space-12); display: flex; flex-direction: column; gap: 22px; animation: pac-in var(--dur-4) var(--a-ease) both; }
 @keyframes pac-in { from { opacity: 0; transform: translateY(6px); } }
 .pac-lesson-head { display: grid; gap: 6px; }
 .pac-lesson-t { margin: 0; font-size: var(--type-7xl); line-height: 1.12; font-weight: 600; letter-spacing: -0.025em; max-width: 26ch; }
@@ -260,7 +254,8 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-table td.l { overflow: hidden; text-overflow: ellipsis; }
 .pac-table th, .pac-table td { padding: 0 14px; height: 48px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--a-line); }
 .pac-table tbody tr:last-child td { border-bottom: 0; }
-.pac-table th { height: 38px; color: var(--a-muted); font-weight: 500; font-size: var(--type-xs); }
+.pac-table th { height: 38px; background: var(--color-table-head); color: var(--color-table-head-text); font-weight: var(--weight-bold); font-size: var(--type-xs); letter-spacing: .04em; text-transform: uppercase; border-bottom-color: var(--color-border-max); }
+.pac-table tbody tr:hover td { background: var(--color-row-hover); }
 .pac-table .l { text-align: left; }
 .pac-table td a:not(.pac-btn) { color: var(--a-text); font-weight: 500; text-decoration: none; }
 .pac-table td a:not(.pac-btn):hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -276,6 +271,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-keys td { padding: 6px 0; border-top: 1px solid var(--a-line); vertical-align: middle; }
 .pac-keys tr:first-child td { border-top: 0; }
 .pac-keys td:first-child { width: 42%; padding-right: 12px; }
+.pac-set-note { margin: 0 0 8px; color: var(--a-muted); font-size: var(--type-sm); line-height: 1.5; }
 .pac-links { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 4px 0; }
 .pac-links a { color: var(--a-text); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--palette-white) 30%, transparent); text-underline-offset: 3px; }
 
@@ -284,7 +280,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pac-tabs a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: var(--a-faint); font-size: var(--type-2xs); text-decoration: none; }
 .pac-tabs a.on { color: var(--a-text); }
 .pac[data-mobile] .pac-back { padding: 0 12px; }
-.pac[data-mobile] .pac-back-t, .pac[data-mobile] .pac-brand, .pac[data-mobile] .pac-chip-x, .pac[data-mobile] .pac-kbd-hint, .pac[data-mobile] .pac-legal-more { display: none; }
+.pac[data-mobile] .pac-back-t, .pac[data-mobile] .pac-brand, .pac[data-mobile] .pac-chip-x, .pac[data-mobile] .pac-kbd-hint { display: none; }
 .pac[data-mobile] .pac-chip { padding: 0 10px; }
 .pac[data-mobile] .pac-page { padding: 16px 16px 32px; gap: 16px; }
 .pac[data-mobile] .pac-hero, .pac[data-mobile] .pac-course-hero { grid-template-columns: minmax(0, 1fr); padding: 12px; gap: 12px; border-radius: 18px; }
@@ -320,7 +316,7 @@ a.pac-crumb:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 1180px) {
   .pac-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pac-player.rail-open { grid-template-columns: 248px minmax(0, 1fr); }
-  .pac-lesson { padding: 28px 28px 40px; }
+  .pac-lesson { padding: var(--space-7) var(--space-5) var(--space-10); }
 }
 @media (max-width: 1000px) {
   .pac-lesson-grid { grid-template-columns: minmax(0, 1fr); }

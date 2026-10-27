@@ -138,6 +138,11 @@
   --color-info: var(--palette-blue-300);
   --color-info-soft: color-mix(in srgb, var(--palette-blue-300) 12%, transparent);
 
+  /* Tables: a header row that reads as one band, and a row hover that is clearly there. */
+  --color-table-head: var(--palette-ink-3);
+  --color-table-head-text: var(--palette-grey-200);
+  --color-row-hover: color-mix(in srgb, var(--palette-invicta-500) 10%, transparent);
+
   --color-scrim: color-mix(in srgb, var(--palette-black) 60%, transparent);
   --color-glow: var(--palette-invicta-700);
   --color-glow-deep: var(--palette-invicta-900);
@@ -172,6 +177,9 @@
   --type-6xl: 28px;
   --type-7xl: 34px;
   --type-8xl: 44px;
+  /* The app's type hierarchy: a page title, then a section head, each a clear step up. */
+  --type-title: var(--type-7xl);
+  --type-section: var(--type-3xl);
   /* Fluid display sizes for the public pages' headlines. */
   --type-display-sm: clamp(28px, 4vw, 40px);
   --type-display: clamp(34px, 6vw, 68px);
@@ -182,6 +190,7 @@
   --weight-medium: 500;
   --weight-semibold: 530;
   --weight-bold: 600;
+  --weight-title: 650;
 
   --leading-tight: 1.15;
   --leading-snug: 1.35;

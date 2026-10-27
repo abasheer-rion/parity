@@ -22,7 +22,7 @@ import { date } from "../lib/format";
 import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
-import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, Toaster } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, ListSelect, Toaster } from "../ui";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { TryView } from "./TryView";
 import { KeyTable } from "./KeyTable";
@@ -148,20 +148,16 @@ function LabShell() {
   // The picked run follows into the other view that reads one.
   const hrefOf = (id: View) => `#/${id}${batchId && (id === "try" || id === "compare") ? `?run=${encodeURIComponent(batchId)}` : ""}`;
   const runPicker = needsRun && (batches.length > 0 || source === "local") ? (
-    <label className="lb-run" title="Which run the numbers come from">
-      <span className="sr-only">Run</span>
-      <select value={batchId ?? ""} onChange={(e) => {
-        const v = e.target.value || undefined;
+    <span className="lb-run">
+      <ListSelect label="Run" value={batchId ?? ""} options={[["", "Latest run"], ...batches.map((b) => [b.id, `${b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}${date(b.generated_at)}`] as [string, string])]} onChange={(val) => {
+        const v = val || undefined;
         setBatchId(v);
         const q = new URLSearchParams(window.location.hash.split("?")[1] ?? "");
         if (v) q.set("run", v); else q.delete("run");
         const s = q.toString();
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${window.location.hash.split("?")[0]}${s ? `?${s}` : ""}`);
-      }}>
-        <option value="">Latest run</option>
-        {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
-      </select>
-    </label>
+      }} />
+    </span>
   ) : null;
 
   const body = missing ? <NotFound heading="h2" address={hash} home="#/" homeLabel="Workbench home" body="There is no Workbench view at this address. The link may be mistyped, or the page may have moved." />
@@ -201,8 +197,8 @@ function LabShell() {
         {!mobile && (
           <nav className="lb-rail" aria-label="Workbench">
             {VIEWS.map((v, i) => (
-              <a key={v.id} href={hrefOf(v.id)} className={`lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
-                title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+              <a key={v.id} href={hrefOf(v.id)} className={`ui-rail-i ui-tipped lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
+                data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
             ))}
@@ -214,11 +210,6 @@ function LabShell() {
           </ErrorBoundary>
         </main>
       </div>
-
-      <footer className="lb-legal">
-        <span>Research and education only. Not investment advice. Backtests do not predict returns.</span>
-        <span className="lb-legal-r">{needsRun && report ? `Run ${date(report.generated_at)}` : ""}</span>
-      </footer>
 
       {mobile && (
         <nav className="lb-tabs" aria-label="Workbench">

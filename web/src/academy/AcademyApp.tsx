@@ -216,8 +216,8 @@ function AcademyShell() {
         {!mobile && (
           <nav className="pac-rail" aria-label="Academy">
             {views.map((v, i) => (
-              <a key={v.id} href={v.href} className={`pac-rail-i ${v.on ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={v.on ? "page" : undefined}
-                title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+              <a key={v.id} href={v.href} className={`ui-rail-i ui-tipped pac-rail-i ${v.on ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={v.on ? "page" : undefined}
+                data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
             ))}
@@ -238,8 +238,6 @@ function AcademyShell() {
           </main>
         )}
       </div>
-
-      <footer className="pac-legal"><span>{LEGAL}<span className="pac-legal-more">{LEGAL_MORE}</span></span></footer>
 
       {mobile && route.view !== "lesson" && (
         <nav className="pac-tabs" aria-label="Academy">
@@ -650,6 +648,7 @@ function SettingsView({ settings, set }: { settings: Settings; set: (p: Partial<
       </section>
       <section className="pac-set pac-glass" aria-labelledby="set-links">
         <h2 id="set-links" className="pac-h3">Links</h2>
+        <p className="pac-set-note">{LEGAL}{LEGAL_MORE}</p>
         <nav className="pac-links" aria-label="Links">
           <a href="/learn/academy/" target="_blank" rel="noopener">Public course pages</a>
           <a href={productUrl("#/learn")} target="_blank" rel="noopener">Glossary</a>

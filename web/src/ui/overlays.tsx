@@ -143,6 +143,66 @@ export function Menu({ trigger, items, placement = "bottom-end" }: { trigger: (o
   );
 }
 
+/**
+ * Choose one value from a list: a quiet button that opens a custom menu under it, not the
+ * browser's own pop-up. Keyboard as a native select: arrows, Home, End, a letter to jump,
+ * Enter or Space to choose, Escape to close. Focus stays on the button (the listbox's active
+ * option is announced through aria-activedescendant).
+ */
+export function ListSelect<T extends string>({ value, onChange, options, label, className = "" }: { value: T; onChange: (v: T) => void; options: [T, string][]; label: string; className?: string }) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const anchor = useRef<HTMLButtonElement>(null);
+  const float = useRef<HTMLDivElement>(null);
+  const id = useId();
+  const p = usePresence(open, "dur-1");
+  useAnchored(p.mounted, anchor, float, "bottom-start", 4);
+  const close = useCallback(() => setOpen(false), []);
+  useDismiss(open, close, [anchor, float]);
+  const index = Math.max(0, options.findIndex(([v]) => v === value));
+  const show = () => { setActive(index); setOpen(true); };
+  const choose = (i: number) => { const o = options[i]; if (o) onChange(o[0]); setOpen(false); anchor.current?.focus(); };
+  useEffect(() => { if (p.mounted) float.current?.querySelector<HTMLElement>(`[data-i="${active}"]`)?.scrollIntoView?.({ block: "nearest" }); }, [active, p.mounted]);
+  const onKey = (e: React.KeyboardEvent) => {
+    const last = options.length - 1;
+    if (!open) {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) { e.preventDefault(); show(); }
+      return;
+    }
+    if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => Math.min(last, a + 1)); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => Math.max(0, a - 1)); }
+    else if (e.key === "Home") { e.preventDefault(); setActive(0); }
+    else if (e.key === "End") { e.preventDefault(); setActive(last); }
+    else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(active); }
+    else if (e.key === "Tab") setOpen(false);
+    else if (e.key.length === 1) {
+      const k = e.key.toLowerCase();
+      const n = options.findIndex(([, l], i) => i > active && l.toLowerCase().startsWith(k));
+      const m = n >= 0 ? n : options.findIndex(([, l]) => l.toLowerCase().startsWith(k));
+      if (m >= 0) setActive(m);
+    }
+  };
+  return (
+    <span className={`ui-lsel ${className}`}>
+      <button ref={anchor} type="button" role="combobox" className="ui-lsel-btn" aria-label={label} aria-haspopup="listbox" aria-expanded={open}
+        aria-controls={open ? id : undefined} aria-activedescendant={open ? `${id}-${active}` : undefined} onClick={() => (open ? setOpen(false) : show())} onKeyDown={onKey}>
+        <span className="ui-lsel-v">{options[index]?.[1] ?? ""}</span>
+        <Icon name="chevronDown" size={13} />
+      </button>
+      {p.mounted && (
+        <div ref={float} id={id} role="listbox" aria-label={label} className="ui-menu ui-lsel-list ui-float" data-state={p.state} data-lenis-prevent>
+          {options.map(([v, l], i) => (
+            <div key={v} id={`${id}-${i}`} data-i={i} role="option" aria-selected={v === value} className={`ui-lsel-o ${i === active ? "active" : ""}`}
+              onPointerEnter={() => setActive(i)} onMouseDown={(e) => e.preventDefault()} onClick={() => choose(i)}>
+              <span>{l}</span>{v === value && <Icon name="check" size={13} />}
+            </div>
+          ))}
+        </div>
+      )}
+    </span>
+  );
+}
+
 // ---------- Modal surfaces: dialogs and drawers ----------
 
 let locks = 0;
