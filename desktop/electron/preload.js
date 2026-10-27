@@ -101,7 +101,9 @@ function chrome() {
   });
 
   // Controls inside the row keep their clicks; everything else in it moves the window.
-  const CONTROLS = "a, button, input, select, textarea, label, summary, details, [role], [tabindex], [contenteditable], canvas, iframe, video";
+  // Only things that take a click: a page-wide wrapper with a role or tabindex="-1" (a dialog,
+  // a focusable main) must not turn the whole top row into a control.
+  const CONTROLS = 'a[href], button, input, select, textarea, label, summary, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="switch"], [role="option"], [role="slider"], [contenteditable="true"], [contenteditable=""], [tabindex]:not([tabindex="-1"]), canvas, iframe, video';
   const style = document.createElement("style");
   style.textContent = `html[data-desktop-chrome] [data-desktop-header] { -webkit-app-region: drag; app-region: drag; }
 html[data-desktop-chrome] .parity-desktop-drag { position: fixed; z-index: -1; left: 0; top: 0; right: 0; height: var(--desktop-chrome-h); -webkit-app-region: drag; app-region: drag; }
