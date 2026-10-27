@@ -89,3 +89,17 @@ In the first test, 80,000 tokens of raw feeds became 1,000 tokens of stored item
 `promote` passes these details to the engine with each story, already in the shape of a claim: a size and unit, a duration in days, the people and the places.
 
 Rules miss some ways of saying things. When one slips through, add a rule to `facts.py` or a phrase with `terms --add`, then run `refacts`.
+
+## The bridge to the engine
+
+`bridge.py` turns material stories into engine events and freezes the calls. `funnel.py run` runs it every 10 minutes.
+
+```bash
+python3 bridge.py baseline --days 30   # once: 30 days of GDELT conflict counts per country pair (one file an hour)
+python3 bridge.py report --days 7      # what became a call, and why every other material story could not
+python3 bridge.py calls                # the frozen calls
+```
+
+The engine reads claims (who, what changed, by how much), not headlines. Today one kind of story carries enough on its own: a **new** conflict. A country pair escalates when its last 24 hours carry 3 times its median day over the 30 days before (at least 100 articles), and when two independent newsrooms or wires name both sides in a conflict headline. GDELT alone miscodes too often ("Israel fights United States (Jerusalem)"). The escalation becomes an eg event of kind `conflict`, `impact()` applies the conflict channel rules through the exposures, and the calls are kept in this database's `live_call` table, because `build.sh` drops `eg`. After a rebuild the bridge puts its events back under ids above 1,000,000, and the calls stay as they were frozen.
+
+Every other material story is kept in `bridge` with the reason it waits: no company named, the company is not in the graph, or what the mechanism would need that news does not give (a leader's record, a consensus number, the facility and its customers). The report counts these, so it says which link or mechanism to build next.

@@ -704,8 +704,11 @@ def cmd_run(promote_every=600):
                 promoted_at = time.monotonic()
                 try:
                     promote(30, say=log.info)
+                    import bridge  # imports this module, so loaded only here
+
+                    bridge.cmd_run(say=log.info)
                 except psycopg2.Error as e:  # eg mid-rebuild: try again next round
-                    log.info(f"promote skipped: {clip(str(e), 100)}")
+                    log.info(f"promote/bridge skipped: {clip(str(e), 100)}")
             if time.monotonic() - pruned_at > 86400:
                 pruned_at = time.monotonic()
                 with con.cursor() as cur:  # GDELT keeps every file public, so its rows can go
