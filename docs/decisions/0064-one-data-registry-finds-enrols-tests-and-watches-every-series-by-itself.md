@@ -116,4 +116,5 @@ The registry is one step of the sims service's cycle, already started with `nice
 ## Referenced by
 
 - [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
+- [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
 <!-- backlinks:end -->

@@ -456,6 +456,19 @@ def _new_strategy(args) -> int:
     return 0
 
 
+def _pairs(args) -> int:
+    from .pairs import research
+
+    out = args.out or research.OUT
+    doc = research.report(out, gauntlet=not args.quick)
+    print(f"{len(doc['leaderboard'])} recipes, {len(doc['pairs'])} pairs, "
+          f"{doc['trials']['total']} variations counted; wrote {out}")
+    for r in doc["leaderboard"]:
+        print(f"  {r['id']:<28} Sharpe {r['sharpe']}  deflated {r['deflated_sharpe']}  "
+              f"tests {r['tests_passed']}/{r['tests_total']}  {r['verdict']}")
+    return 0
+
+
 def _search(args) -> int:
     from . import search
 
@@ -752,6 +765,12 @@ def main(argv: list[str] | None = None) -> int:
     se.add_argument("--hours", type=float, default=None,
                     help="with --forever, exit after this long so the service can restart")
     se.set_defaults(func=_search)
+
+    pa = sub.add_parser("pairs", help="pairs and stat arb research report (DEC-0070)")
+    pa.add_argument("action", choices=["report"])
+    pa.add_argument("--quick", action="store_true", help="skip the gauntlet tests")
+    pa.add_argument("--out", type=Path, default=None, help="where to write pairs.json")
+    pa.set_defaults(func=_pairs)
 
     sm = sub.add_parser("sims", help="the always-on sims: Bot Battle paths, Sim World paths "
                         "and the site exports, on a loop (DEC-0037)")

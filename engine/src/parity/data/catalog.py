@@ -8,6 +8,8 @@ it comes from:
                  week after the month ends, then forward filled)
     cmd.<NAME>   commodity price in USD
     eq.<NAME>    equity index or ETF level
+    ind.<NAME>   French 12 US industries; ind49.<NAME> the 49 finer ones
+    stk.<TICKER> single US stocks and ETFs, research only (Alpaca, needs a key)
     risk.<NAME>  risk gauges such as the VIX
 
 Wider official data (REF-0015), all optional:
@@ -156,6 +158,46 @@ INDUSTRIES = ["NoDur", "Durbl", "Manuf", "Enrgy", "Chems", "BusEq", "Telcm", "Ut
 _INDUSTRIES = [Series(f"ind.{k}", "french", f"12_Industry_Portfolios_daily#{k}",
                       f"US {k} industry, value-weighted total return index (French 12 industries)",
                       required=False) for k in INDUSTRIES]
+
+# The 49 finer French industries, daily, for the pairs study (DEC-0070). Industry pairs
+# such as soft drinks against beer stand in for linked companies with a public licence.
+# `site=False`: research inputs, charted only as derived statistics.
+INDUSTRIES49 = {
+    "Agric": "Agriculture", "Food": "Food products", "Soda": "Candy and soda",
+    "Beer": "Beer and liquor", "Smoke": "Tobacco", "Toys": "Recreation", "Fun": "Entertainment",
+    "Books": "Printing and publishing", "Hshld": "Consumer goods", "Clths": "Apparel",
+    "Hlth": "Healthcare", "MedEq": "Medical equipment", "Drugs": "Pharmaceuticals",
+    "Chems": "Chemicals", "Rubbr": "Rubber and plastics", "Txtls": "Textiles",
+    "BldMt": "Construction materials", "Cnstr": "Construction", "Steel": "Steel",
+    "FabPr": "Fabricated products", "Mach": "Machinery", "ElcEq": "Electrical equipment",
+    "Autos": "Autos and trucks", "Aero": "Aircraft", "Ships": "Ships and railroad equipment",
+    "Guns": "Defense", "Gold": "Precious metals", "Mines": "Mining", "Coal": "Coal",
+    "Oil": "Oil and gas", "Util": "Utilities", "Telcm": "Telecoms",
+    "PerSv": "Personal services", "BusSv": "Business services", "Hardw": "Computers",
+    "Softw": "Software", "Chips": "Chips", "LabEq": "Measuring and control equipment",
+    "Paper": "Business supplies", "Boxes": "Shipping containers", "Trans": "Transport",
+    "Whlsl": "Wholesale", "Rtail": "Retail", "Meals": "Restaurants and hotels",
+    "Banks": "Banks", "Insur": "Insurance", "RlEst": "Real estate", "Fin": "Trading and finance",
+    "Other": "Other",
+}
+_INDUSTRIES49 = [Series(f"ind49.{k}", "french", f"49_Industry_Portfolios_daily#{k}",
+                        f"US {name} industry, value-weighted total return index "
+                        "(French 49 industries)", required=False, site=False)
+                 for k, name in INDUSTRIES49.items()]
+
+# Single US stocks and ETFs for the pairs study (DEC-0070): daily bars adjusted for splits
+# and dividends, from Alpaca, since 2016. Research only: Alpaca's terms allow the account
+# holder's own use, so the values are never shown, only statistics derived from them.
+# Needs ALPACA_KEY_ID and ALPACA_SECRET_KEY; skipped without them.
+def _stock_series() -> list[Series]:
+    from ..pairs.universe import stock_tickers
+
+    return [Series(f"stk.{t}", "alpaca", t, f"{t} daily close, adjusted for splits and "
+                   "dividends (Alpaca, research only)", required=False, site=False)
+            for t in stock_tickers()]
+
+
+_STOCKS = _stock_series()
 
 # Treasury total return indexes rebuilt from constant-maturity yields: each day earns
 # the yield plus duration times the yield change. A standard approximation, good to a
@@ -400,7 +442,8 @@ _WIDER = (_ECB_FX + _EA_CURVE + _ECB_MONEY + _UST_CURVE + _POLICY + _COT + _EIA
           + _FRED_MORE + _XFX + _BOND_TR5 + _PRIVATE)
 
 CATALOG: dict[str, Series] = {s.key: s for s in _FX + _RATES + _OTHER + _REER + _FX_WIDE
-                              + _YIELDS + _FACTORS + _INDUSTRIES + _BOND_TR
+                              + _YIELDS + _FACTORS + _INDUSTRIES + _INDUSTRIES49 + _STOCKS
+                              + _BOND_TR
                               + _WIDER}
 
 
