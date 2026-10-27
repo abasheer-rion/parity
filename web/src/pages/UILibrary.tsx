@@ -11,13 +11,14 @@ import {
   Num, ProgressBar, Spinner, ErrorState, Breadcrumb, Pagination, Avatar, Tag, Field, RadioGroup, Slider, Sheet, CommandPalette, TourStep, type Command,
 } from "../ui";
 import { usePrefs } from "../lib/prefs";
+import { EXAMPLES, SCENE_KINDS, SignaturePlayer } from "../ui/signature";
 import type { Point } from "../lib/types";
 import { RAW, type TokenName } from "../ui/tokens";
 
 const SECTIONS: { group: string; items: [string, string][] }[] = [
   { group: "Foundations", items: [["overview", "Overview"], ["colors", "Colour"], ["type", "Type"], ["space", "Space, radius, depth"], ["motion", "Motion"], ["icons", "Icons"]] },
   { group: "Components", items: [["text", "Text and numbers"], ["buttons", "Buttons"], ["inputs", "Inputs"], ["filters", "Filters and sorting"], ["tables", "Tables"], ["lists", "Long lists"], ["expand", "Expand and collapse"], ["cards", "Cards and stats"], ["navigation", "Navigation and identity"], ["overlays", "Overlays"], ["feedback", "Empty, loading and errors"]] },
-  { group: "Charts", items: [["charts", "How charts work"], ["hero", "Headline chart"], ["line", "Line and bar"], ["chartcolor", "Chart colour"]] },
+  { group: "Charts", items: [["charts", "How charts work"], ["hero", "Headline chart"], ["line", "Line and bar"], ["signature", "Signature charts"], ["chartcolor", "Chart colour"]] },
   { group: "Patterns", items: [["pages", "Page layouts"], ["steady", "Nothing jumps"], ["data", "Data that is ready"]] },
 ];
 
@@ -54,6 +55,7 @@ export function UILibrary({ section = "overview" }: { section?: string }) {
         {section === "feedback" && <Feedback />}
         {section === "charts" && <HowCharts />}
         {section === "hero" && <Hero />}
+        {section === "signature" && <Signature />}
         {section === "line" && <LineBar />}
         {section === "chartcolor" && <ChartColor />}
         {section === "pages" && <Pages />}
@@ -921,6 +923,24 @@ function LineBar() {
             { name: "Sample B", color: "var(--benchmark)", value: [0.18, 0.27, -0.19, 0.24, 0.23][i] },
           ],
         }))} />
+      </Item>
+    </>
+  );
+}
+
+function Signature() {
+  const [kind, setKind] = useState("equity");
+  return (
+    <>
+      <PageHeader title="Signature charts" description="Step-driven charts that teach one thing per step: lines that draw in with a dot and a live value, a camera that zooms between steps, callouts, split screens, falls below the high, distributions with a range, rolling correlation, wins and losses by kind of market, and a verdict. Example data. DEC-0067." />
+      <Item title="Pick a scene" col>
+        <Segmented value={kind} onChange={setKind} label="Scene" options={SCENE_KINDS.map((k) => [k, k[0].toUpperCase() + k.slice(1)] as [string, string])} />
+        <div className="sg-demo">
+          <SignaturePlayer visual={EXAMPLES[kind]} />
+        </div>
+      </Item>
+      <Item title="How to use it" col>
+        <p>Build a visual (a kind, the alt text, settings and steps) from engine numbers, then render <code>&lt;SignaturePlayer visual=&#123;v&#125; /&gt;</code>. Build scripts and the clip renderer call <code>renderSignature(v, s, &#123; size, theme &#125;)</code> for the same picture as SVG. Every chart offers its numbers as a table.</p>
       </Item>
     </>
   );

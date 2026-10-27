@@ -41,6 +41,16 @@ def iso(v) -> str | None:
     return v.isoformat() if v is not None else None
 
 
+def lift_holdup(run: dict) -> dict:
+    """The engine publishes the "how it holds up" numbers inside the gauntlet blob
+    (strategy_runs has no column for them); put them back at run.holdup for the web."""
+    g = run.get("gauntlet")
+    if isinstance(g, dict) and "holdup" in g:
+        g = dict(g)
+        return {**run, "gauntlet": g, "holdup": g.pop("holdup")}
+    return run
+
+
 def split_run(report: dict) -> tuple[dict, dict]:
     """The run without the settings tests, and the settings tests by strategy."""
     runs, tests = [], {}
@@ -95,7 +105,7 @@ def main(out: Path) -> int:
                 "series": b["series"],
                 "comparison": coverage.get("comparison"),
                 "source_checks": coverage.get("source_checks"),
-                "runs": cur.fetchall(),
+                "runs": [lift_holdup(r) for r in cur.fetchall()],
             }
             bid = str(b["id"])
             write_run(out / "batch", bid, report)

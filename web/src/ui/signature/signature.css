@@ -1,0 +1,53 @@
+/* The signature chart player (DEC-0067). The stage keeps its shape from the first paint:
+   16:9 for the lesson layout and 6:5 below 480px wide, the same breakpoint the player uses
+   to pick the phone layout, so nothing on the page moves when the picture draws. */
+.sg-player { container-type: inline-size; margin: 0; min-width: 0; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-surface); border: 1px solid var(--color-border); }
+.sg-stage { aspect-ratio: 16 / 9; padding: var(--space-3) var(--space-3) 0; box-sizing: content-box; }
+@container (max-width: 479px) { .sg-stage { aspect-ratio: 6 / 5; } }
+.sg-stage[data-size="square"] { aspect-ratio: 1 / 1; }
+.sg-stage[data-size="vertical"] { aspect-ratio: 9 / 16; }
+.sg-frame { line-height: 0; width: 100%; height: 100%; }
+.sg-svg { display: block; width: 100%; height: 100%; }
+.sg-frames .sg-frame { height: auto; }
+.sg-frames .sg-svg { height: auto; }
+
+.sg-player figcaption { padding: var(--space-3) var(--space-4) var(--space-4); }
+.sg-captions { display: grid; }
+.sg-captions > .sg-caption { grid-area: 1 / 1; visibility: hidden; }
+.sg-captions > .sg-caption[data-on] { visibility: visible; }
+.sg-caption { margin: 0 0 var(--space-2); color: var(--color-text-body); font-size: var(--type-md); line-height: 1.55; }
+.sg-n { display: inline-block; font-size: var(--type-2xs); color: var(--color-text-muted); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); padding: 0 var(--space-2); margin-right: var(--space-1h); font-variant-numeric: var(--num-variant); }
+
+/* The slider: a thin track, a round thumb, a clear focus ring. */
+.sg-scrub { display: block; width: 100%; margin: 0 0 var(--space-3); accent-color: var(--color-text); cursor: pointer; }
+.sg-scrub:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+.sg-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.sg-spacer { flex: 1 1 0; }
+.sg-play { display: inline-grid; place-items: center; }
+.sg-play > span { grid-area: 1 / 1; visibility: hidden; }
+.sg-play > span[data-on] { visibility: visible; }
+.sg-dots { display: inline-flex; gap: var(--space-1); padding: 0 var(--space-half); }
+.sg-dots span { width: var(--space-1h); height: var(--space-1h); border-radius: var(--radius-pill); background: var(--color-border-max); }
+.sg-dots span.past { background: var(--color-text-muted); }
+.sg-dots span.on { background: var(--color-text); }
+.sg-note { margin: var(--space-2) 0 0; font-size: var(--type-xs); color: var(--color-text-muted); }
+
+/* "All steps": every frame with its caption. */
+.sg-frames { list-style: none; margin: 0; padding: var(--space-3); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2h); }
+@container (max-width: 559px) { .sg-frames { grid-template-columns: minmax(0, 1fr); } }
+.sg-frames li { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-1h); }
+.sg-frames p { margin: var(--space-1h) var(--space-half) var(--space-half); font-size: var(--type-sm); color: var(--color-text-body); }
+
+/* The numbers behind the picture. */
+.sg-table-wrap { margin-top: var(--space-3); max-height: 320px; overflow: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.sg-table-wrap:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.sg-table { width: 100%; border-collapse: collapse; font-size: var(--type-sm); font-variant-numeric: var(--num-variant); }
+.sg-table caption { text-align: left; padding: var(--space-2) var(--space-3); color: var(--color-text-muted); font-size: var(--type-xs); }
+.sg-table th, .sg-table td { padding: var(--space-1h) var(--space-3); text-align: right; border-top: 1px solid var(--color-border); white-space: nowrap; }
+.sg-table th[scope="row"], .sg-table thead th:first-child { text-align: left; color: var(--color-text-body); font-weight: var(--fw-regular); }
+.sg-table thead th { color: var(--color-text-muted); font-weight: var(--fw-regular); position: sticky; top: 0; background: var(--color-surface-raised); }
+.sg-table td { color: var(--color-text); }
+
+/* The UI library demo keeps the player at a readable width. */
+.sg-demo { max-width: 760px; width: 100%; }
