@@ -21,6 +21,17 @@ export type Platform = keyof typeof PLATFORMS;
 
 export const DOWNLOAD_TTL = 300;
 
+const RELEASES_PAGE = `https://github.com/${RELEASES_REPO}/releases`;
+/** A fixed answer for the dev server and the E2E server, which never call GitHub. */
+export const SAMPLE_DOWNLOAD = {
+  version: "0.0.0", published: "2026-01-01T00:00:00Z", notes: RELEASES_PAGE,
+  files: [
+    { platform: "mac-arm64", label: "Mac with Apple silicon", name: "Parity-0.0.0-arm64.dmg", size: 141_000_000, sha256: "0".repeat(64), url: RELEASES_PAGE },
+    { platform: "mac-intel", label: "Mac with Intel", name: "Parity-0.0.0-x64.dmg", size: 148_000_000, sha256: "0".repeat(64), url: RELEASES_PAGE },
+    { platform: "windows", label: "Windows", name: "Parity-Setup-0.0.0.exe", size: 132_000_000, sha256: "0".repeat(64), url: RELEASES_PAGE },
+  ],
+} satisfies { version: string; published: string; notes: string; files: { platform: string; label: string; name: string; size: number; sha256: string | null; url: string }[] };
+
 export interface DownloadFile { platform: Platform; label: string; name: string; size: number; sha256: string | null; url: string }
 export interface DownloadInfo { version: string; published: string; notes: string; files: DownloadFile[] }
 

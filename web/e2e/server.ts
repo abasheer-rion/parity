@@ -6,11 +6,13 @@
 //     /login/?next=<where you were> and a code file or data file gets a plain 401
 //   - a missing page under an app folder goes to /<app>/#/<rest> (src/lib/notFound.ts)
 //   - /v/<id> opens the badge page, like functions/v/[id].ts
+//   - /download/latest/* answers a fixed sample, like functions/download/latest/[what].ts
 // The cookie's token is not checked here: the browser side of sign-in is what the suite
 // tests, and every call to Supabase is stubbed in the page (e2e/supabase.ts).
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer, type Server } from "node:http";
 import { extname, join, resolve } from "node:path";
+import { SAMPLE_DOWNLOAD } from "../src/lib/desktopDownload";
 import { appHashRedirect } from "../src/lib/notFound";
 
 const DIST = resolve(import.meta.dirname, "../dist");
@@ -62,6 +64,9 @@ export function startServer(port: number): Promise<Server> {
       return;
     }
     if (/^\/v\/[^/]+\/?$/.test(pathname)) return send(200, join(DIST, "v/index.html"));
+    // The download page's links, a Function in production (functions/download/latest/[what].ts).
+    if (pathname === "/download/latest/info") { res.writeHead(200, { "Content-Type": "application/json" }); res.end(JSON.stringify(SAMPLE_DOWNLOAD)); return; }
+    if (pathname.startsWith("/download/latest/")) { res.writeHead(302, { Location: SAMPLE_DOWNLOAD.notes }); res.end(); return; }
     const file = fileFor(pathname);
     if (file) return send(200, file);
     const to = appHashRedirect(url.pathname, url.search);
