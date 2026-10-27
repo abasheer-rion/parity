@@ -3,6 +3,7 @@
 import importlib.util
 import json
 import sys
+import types
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,6 +18,21 @@ def load(name: str, rel: str):
 
 
 check = load("egress_check", "scripts/egress-check/check.py")
+
+
+def load_export():
+    """The export script, with a stand-in for psycopg where it is not installed (CI)."""
+    try:
+        import psycopg  # noqa: F401
+    except ImportError:
+        fake = types.ModuleType("psycopg")
+        fake.Error = Exception
+        rows = types.ModuleType("psycopg.rows")
+        rows.dict_row = object()
+        fake.rows = rows
+        sys.modules.setdefault("psycopg", fake)
+        sys.modules.setdefault("psycopg.rows", rows)
+    return load("export_site_data", "scripts/export_site_data.py")
 
 METRICS = """# HELP node_network_transmit_bytes_total x
 node_network_transmit_bytes_total{service_type="db",device="ens5"} 1.5e+09
@@ -50,7 +66,7 @@ def test_first_run_uses_the_average_since_boot():
 
 
 def test_export_reuses_a_cached_run(tmp_path):
-    exp = load("export_site_data", "scripts/export_site_data.py")
+    exp = load_export()
     calls = []
     doc, hit = exp.cached(tmp_path, "batch.a.f1.json", lambda: calls.append(1) or {"x": 1})
     assert (doc, hit, calls) == ({"x": 1}, False, [1])
@@ -60,7 +76,7 @@ def test_export_reuses_a_cached_run(tmp_path):
 
 
 def test_export_keeps_officials_and_newest_exploratory():
-    exp = load("export_site_data", "scripts/export_site_data.py")
+    exp = load_export()
     rows = [{"kind": "exploratory"}] * 10 + [{"kind": "official"}]
     kept = exp.kept_batches(rows)
     assert len(kept) == exp.KEEP_EXPLORATORY + 1 and kept[-1]["kind"] == "official"
