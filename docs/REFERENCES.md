@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1757 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1787 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
-| [Web pages](#web-pages) | 1012 |
+| [Web pages](#web-pages) | 1042 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -4277,6 +4277,12 @@ Note: Linked in this repo as: FX data docs.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-00cdface
+
+13145358-anthropic-software-directory-policy. (n.d.). *support.claude.com*. <https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-00f23b97
 
 Federal Reserve issues FOMC statement. (n.d.). *Federal Reserve*. <https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -4363,6 +4369,12 @@ connection. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/conne
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-045b3caa
+
+quickstart.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/quickstart.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-0498644e
 
 Legal Information Institute (n.d.). 16 CFR Part 314. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-314>. Accessed 2026-10-25. Verification: unchecked.
@@ -4382,6 +4394,12 @@ Financial, Economic and Alternative Data | Nasdaq Data Link. (n.d.). *Nasdaq*. <
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-04e8250f
+
+custom-mcp-server.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/api/docs/guides/custom-mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-04eae960
 
@@ -4434,6 +4452,12 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 market data plans. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/about-market-data-api>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-075b10be
+
+plugin-guidelines. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/plugin-guidelines>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-079e8667
 
@@ -4690,6 +4714,12 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Algorithmic trading market size and share analysis. (n.d.). *mordorintelligence.com*. <https://www.mordorintelligence.com/industry-reports/algorithmic-trading-market>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-10f4a678
+
+connect. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-1139fcb8
 
@@ -5325,11 +5355,23 @@ Darwinex Zero pricing. (n.d.). *darwinexzero.com*. <https://www.darwinexzero.com
 
 Cited in: [CMP-0021](competitors/0021-darwinex.md).
 
+### url-2aa3d3ac
+
+releasing.md. (n.d.). *github.com*. <https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-2ab80190
 
 Iran-Iraq War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/iran-iraq-war-1980.json](../catalog/events/iran-iraq-war-1980.json).
+
+### url-2b02ed3d
+
+gemini. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/gemini/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-2b5c7556
 
@@ -5531,11 +5573,23 @@ Queues pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudfl
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-3528e093
+
+signup. (n.d.). *paritytrading.app*. <https://paritytrading.app/signup/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-35536a4f
 
 Collective2 help centre. (n.d.). *support.collective2.com*. <https://support.collective2.com/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
+
+### url-35597222
+
+terms. (n.d.). *paritytrading.app*. <https://paritytrading.app/legal/terms/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-35ccef7c
 
@@ -6191,6 +6245,12 @@ Medium guide, 2026. (n.d.). *arbitrageghost.medium.com*. <https://arbitrageghost
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 
+### url-507c40bc
+
+authentication.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/authentication.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-50b35a46
 
 Overfitting and Its Impact on the Investor | Man Group. (n.d.). *man.com*. <https://www.man.com/maninstitute/overfitting-and-its-impact-on-the-investor>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -6282,6 +6342,12 @@ Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithm
 CFTC Commitments of Traders: API documentation. (n.d.). *US Commodity Futures Trading Commission*. <https://publicreporting.cftc.gov/stories/s/COT-Help/p2fg-u73y/>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
+
+### url-53a8babb
+
+privacy. (n.d.). *paritytrading.app*. <https://paritytrading.app/legal/privacy/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-53b8bf02
 
@@ -6449,6 +6515,12 @@ Legal Information Institute (n.d.). 15 U.S.C. 80b-6. *law.cornell.edu*. <https:/
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-5a08a802
+
+chatgpt. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/chatgpt/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-5a565123
 
 California Attorney General (n.d.). California Attorney General, CCPA. *oag.ca.gov*. <https://oag.ca.gov/privacy/ccpa>. Accessed 2026-10-25. Verification: unchecked.
@@ -6468,6 +6540,12 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 publisher page. (n.d.). *systematicmoney.org*. <https://www.systematicmoney.org/leveraged-trading>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-5a7909cc
+
+submission.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/deploy/submission.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-5bac6c16
 
@@ -6597,6 +6675,12 @@ Interactive Brokers. (n.d.). *finviz.com*. <https://finviz.com/news/397937/inter
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-5f1b7398
+
+plugins. (n.d.). *platform.openai.com*. <https://platform.openai.com/plugins>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-5f332cb0
 
 JPMorgan Secures $500m Capacity in Numerai Following Breakthrough Year. (n.d.). *blog.numer.ai*. <https://blog.numer.ai/jpmorgan-secures-500m-capacity/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6716,6 +6800,12 @@ Cited in: [CMP-0014](competitors/0014-binance.md).
 eToro fees. (n.d.). *etoro.com*. <https://www.etoro.com/trading/fees/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0017](competitors/0017-etoro.md).
+
+### url-64d04381
+
+mcp-configuration. (n.d.). *code.visualstudio.com*. <https://code.visualstudio.com/docs/copilot/reference/mcp-configuration>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-65a06944
 
@@ -6849,6 +6939,12 @@ EODHD terms. (n.d.). *eodhd.com*. <https://eodhd.com/financial-apis/terms-condit
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-6a3ebbc5
+
+browse. (n.d.). *geminicli.com*. <https://geminicli.com/extensions/browse/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-6a66c019
 
 Disclaimer & copyright. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/home/disclaimer/html/index.en.html>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -6945,6 +7041,12 @@ TradingView about. (n.d.). *tradingview.com*. <https://www.tradingview.com/about
 
 Cited in: [CMP-0006](competitors/0006-tradingview.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-6dc62cd4
+
+app-review.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/deploy/app-review.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-6e2dd1ec
 
 CoinGecko API: API documentation. (n.d.). *CoinGecko*. <https://docs.coingecko.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7032,6 +7134,12 @@ Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.js
 FinCEN MSB definition. (n.d.). *fincen.gov*. <https://www.fincen.gov/money-services-business-definition>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-71c523c0
+
+oauth. (n.d.). *chatgpt.com*. <https://chatgpt.com/connector/oauth/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-71ff86b6
 
@@ -7378,6 +7486,12 @@ Free Forex & Currency Exchange Rate API - ExchangeRate Host. (n.d.). *exchangera
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7ead9252
+
+?assistant=on. (n.d.). *lab.paritytrading.app*. <https://lab.paritytrading.app/?assistant=on>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-7eb600d1
 
@@ -7758,6 +7872,12 @@ Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md
 MQL5 Signals. (n.d.). *mql5.com*. <https://www.mql5.com/en/signals>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
+
+### url-8b071788
+
+redirect. (n.d.). *vscode.dev*. <https://vscode.dev/redirect>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-8b0b2159
 
@@ -8863,6 +8983,12 @@ LMAX Group home. (n.d.). *lmax.com*. <https://www.lmax.com/>. Accessed 2026-10-2
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-b761cffa
+
+claude. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/claude/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-b78e3ad1
 
 Economic Calendar Snapshot of Latest Events | Trading Economics API Documentation. (n.d.). *docs.tradingeconomics.com*. <https://docs.tradingeconomics.com/economic_calendar/snapshot/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -8876,6 +9002,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 2001 Turkish economic crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2001_Turkish_economic_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/turkey-crisis-2001.json](../catalog/events/turkey-crisis-2001.json).
+
+### url-b821db22
+
+review-criteria.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/review-criteria.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-b8475b9d
 
@@ -8948,6 +9080,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 International sanctions during the Venezuelan crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/venezuela-oil-sanctions-2019.json](../catalog/events/venezuela-oil-sanctions-2019.json).
+
+### url-bb0e4823
+
+connector\_platform\_oauth\_redirect. (n.d.). *chatgpt.com*. <https://chatgpt.com/connector_platform_oauth_redirect>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-bb2fadee
 
@@ -9092,6 +9230,12 @@ Cited in: [catalog/events/libya-civil-war-2011.json](../catalog/events/libya-civ
 historical limits. (n.d.). *interactivebrokers.github.io*. <https://interactivebrokers.github.io/tws-api/historical_limitations.html>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-c44d07c8
+
+mcp-server.md. (n.d.). *github.com*. <https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-c4e1f49d
 
@@ -9601,6 +9745,12 @@ Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 
 Cited in: [catalog/events/texas-freeze-2021.json](../catalog/events/texas-freeze-2021.json).
 
+### url-d778b3f9
+
+auth.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/build/auth.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-d77d1338
 
 eToro CopyTrader. (n.d.). *etoro.com*. <https://www.etoro.com/copytrader/>. Accessed 2026-10-24. Verification: not checked.
@@ -9887,6 +10037,12 @@ MCP server/discover. (n.d.). *modelcontextprotocol.io*. <https://modelcontextpro
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
+### url-e3897a9e
+
+manage. (n.d.). *claude.ai*. <https://claude.ai/directory/manage>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-e4397e33
 
 No title recorded. (n.d.). *exchangerate.host*. <https://exchangerate.host/terms>. Accessed 2026-10-22. Verification: not checked.
@@ -9910,6 +10066,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 Alpaca paper trading: API documentation. (n.d.). *Alpaca Markets*. <https://docs.alpaca.markets/docs/paper-trading>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpaca.json](../catalog/datasets/alpaca.json), [DAT-0001](datasets/0001-alpaca.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-e5d01b8f
+
+install-links.md. (n.d.). *cursor.com*. <https://cursor.com/docs/mcp/install-links.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-e5daf9e8
 
@@ -10105,6 +10267,12 @@ funding. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/fundin
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-ed71fd79
+
+publish.md. (n.d.). *claude.com*. <https://claude.com/docs/directory/publish.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-edae72e8
 
 California Legislature (n.d.). Cal. Bus. and Prof. Code 17600 and following. *leginfo.legislature.ca.gov*. <https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=3.&chapter=1.&article=9>. Accessed 2026-10-25. Verification: unchecked.
@@ -10196,6 +10364,12 @@ Cited in: [catalog/events/ftx-collapse-2022.json](../catalog/events/ftx-collapse
 Robinhood Gold. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/gold/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md).
+
+### url-f17d4992
+
+mcp.md. (n.d.). *cursor.com*. <https://cursor.com/docs/mcp.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-f18557a0
 
@@ -10522,6 +10696,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 2014 Gaza War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2014_Gaza_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/gaza-war-2014.json](../catalog/events/gaza-war-2014.json).
+
+### url-ff5a1dac
+
+submission.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/submission.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-fff47c57
 

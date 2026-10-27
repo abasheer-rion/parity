@@ -8,7 +8,7 @@ const read = (p) => readFileSync(here(p), "utf8");
 
 export function routes() {
   const pages = read("src/lib/pages.ts");
-  const out = new Set(["/", "/login/", "/signup/", "/reset/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/"]);
+  const out = new Set(["/", "/login/", "/signup/", "/reset/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/"]);
   // Each page's hash and side. Pages that moved to their own app redirect, which is tested too.
   for (const m of pages.matchAll(/href: "(#\/[^"]*)", title: "[^"]*", space: "(product|research|both)"/g)) {
     const [, hash, space] = m;

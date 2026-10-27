@@ -1,8 +1,9 @@
 // The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, search,
 // a segmented switch between areas, nav with nested children for the active item,
-// bookmarks, the run picker and the account menu) and the page. There is no top bar:
-// on phones a small floating button opens the sidebar (DEC-0021).
-import { useEffect, useState, type ReactNode } from "react";
+// bookmarks, the run picker and the account menu) and the page. On the product side a
+// slim strip at the top right holds the setup ring (DEC-0075); on phones a small
+// floating button opens the sidebar (DEC-0021).
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
@@ -11,6 +12,9 @@ import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 import { IconButton } from "../ui";
+
+// The setup ring at the top right of the product app (DEC-0075). Loaded after the page.
+const SetupButton = lazy(() => import("../onboarding/SetupButton").then((m) => ({ default: m.SetupButton })));
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
@@ -273,6 +277,9 @@ export function Shell({
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
         <button className="menu-fab" aria-label="Open menu" aria-controls="side" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" size={18} /></button>
+        {!research && !full && (
+          <div className="app-top">{(route === "" || route === "home") && <Suspense fallback={null}><SetupButton /></Suspense>}</div>
+        )}
         <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}>{children}</main>
       </div>
     </div>

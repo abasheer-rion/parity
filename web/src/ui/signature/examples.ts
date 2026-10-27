@@ -22,6 +22,12 @@ function samples(seed: number, n: number, mean: number, sd: number): number[] {
 }
 
 export const EXAMPLES: Record<string, SigVisual> = {
+  candles: {
+    kind: "candles",
+    alt: "Example data. Twelve months of a strategy's value as candles, ending 6% above where it started.",
+    params: { candles: [[100, 102, 98, 101], [101, 104, 100, 103], [103, 103, 99, 100], [100, 101, 96, 97], [97, 100, 96, 99], [99, 103, 98, 102], [102, 105, 101, 104], [104, 104, 100, 101], [101, 103, 99, 102], [102, 106, 101, 105], [105, 107, 103, 104], [104, 107, 103, 106]] },
+    steps: [{ caption: "Each candle is one month: the box runs from where it opened to where it closed, the thin line from its high to its low." }],
+  },
   equity: {
     kind: "equity",
     alt: "Example data. A strategy and the US stock market from 2005 to 2024, each starting at $100.",
