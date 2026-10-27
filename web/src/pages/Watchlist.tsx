@@ -1,7 +1,7 @@
 // The strategies you follow: anything bookmarked from a strategy page.
 import { Title } from "../components/Shell";
 import { Sparkline } from "../ui/charts";
-import { Badge, EmptyState, TableScroll, TextButton } from "../ui";
+import { Badge, Button, EmptyState, TableScroll, TextButton } from "../ui";
 import { colorMap } from "../lib/colors";
 import { num, pct } from "../lib/format";
 import { toggleBookmark, usePrefs } from "../lib/prefs";
@@ -20,8 +20,9 @@ export function Watchlist({ report }: { report: Report }) {
         <p className="page-purpose">The strategies you follow. Add one with the bookmark button next to its name.</p>
       </div>
       {runs.length === 0 ? (
-        <EmptyState title="Nothing followed yet" action={<a href="#/strategies">Discover strategies</a>}>
-          Open any strategy and press the bookmark button beside its name.
+        <EmptyState title="Nothing followed yet" icon="bookmark"
+          action={<Button variant="accent" href="#/strategies">Find a strategy to follow</Button>}>
+          Open a strategy and press the bookmark beside its name. It shows up here with its verdict and its worst fall.
         </EmptyState>
       ) : (
         <TableScroll>

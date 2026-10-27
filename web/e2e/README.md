@@ -41,7 +41,7 @@ read `test-results/<test>/error-context.md` and the screenshot next to it.
 | `visual.spec.ts` | Screenshots of key screens, compared with `__screenshots__/` |
 
 Fixture options: `test.use({ signedIn: false })` for a visitor, `tours: true` for the
-first-run tours, `consent: false` for the cookie notice.
+first-run tours, `tours: true, intro: true` for the first-run intro of a new account, `consent: false` for the cookie notice.
 
 ## Screenshot baselines
 

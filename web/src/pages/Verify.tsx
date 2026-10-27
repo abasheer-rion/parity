@@ -37,6 +37,9 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
   const mode: Mode = rawMode === "describe" || rawMode === "strategy" ? rawMode : "file";
   const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
+  // The empty state's one button: check the example bot (remounts Describe so it runs it).
+  const [exampleRun, setExampleRun] = useState(0);
+  const tryExample = () => { setHashQuery({ example: "1", strategy: null }); setRawMode("describe"); setResult(null); setExampleRun((n) => n + 1); track("verify_example", {}); };
   // A result on screen is the checklist's "Run your first Verify check" (DEC-0060).
   useEffect(() => { if (result) signalDone("verify"); }, [result]);
   return (
@@ -52,7 +55,7 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
       <ChoiceCards<Mode> label="What to check" value={mode} onChange={change} options={MODES} />
       <div className="vf-input">
         {mode === "file" && <FileInput onResult={(r, file) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file }); }} />}
-        {mode === "describe" && <DescribeInput onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}
+        {mode === "describe" && <DescribeInput key={exampleRun} onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}
         {mode === "strategy" && <StrategyInput onResult={(r) => { track("verify_run", { mode }); setResult({ r, file: null }); }} />}
       </div>
       {result ? (
@@ -61,8 +64,9 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
           {share?.(result.r, result.file)}
         </ResultView>
       ) : (
-        <EmptyState title="Nothing checked yet" icon="checkCircle">
-          A bot that wins 99 trades in 100 can still lose money. <a href={LESSON}>See why in the Academy</a>, then check a record here.
+        <EmptyState title="Nothing checked yet" icon="checkCircle"
+          action={<Button variant="accent" icon="play" onClick={tryExample}>Check the example bot</Button>}>
+          Pick one of the three ways above. Or start with our example, a bot that wins 99 trades in 100 and still loses money. <a href={LESSON}>Why that happens</a> is in the Academy.
         </EmptyState>
       )}
       <Assistant place="verify" />

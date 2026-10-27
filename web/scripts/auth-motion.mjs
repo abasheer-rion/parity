@@ -111,14 +111,8 @@ for (const size of sizes) {
     await page.getByRole("button", { name: "Create account" }).click({ noWaitAfter: true });
     await frames(16, 30);
     check(await page.getByRole("heading", { name: "Welcome to Parity" }).count() === 1, `${size.name}: a new account sees the welcome`);
-    await page.getByRole("button", { name: "Continue" }).click({ noWaitAfter: true });
-    await frames(12, 30);
-    await page.getByRole("button", { name: "Practise on a demo account" }).click();
-    await page.getByRole("button", { name: "Check a trade log or a bot" }).click();
-    await frames(6, 30);
-    await page.getByRole("button", { name: "Continue" }).click({ noWaitAfter: true });
-    await frames(12, 30);
-    check(await page.getByRole("heading", { name: "Where to start" }).count() === 1, `${size.name}: the welcome ends on Verify or Trade`);
+    // One screen since DEC-0077: the questions are asked by the app's first-run intro.
+    check(await page.getByRole("button", { name: /Go to the app|Continue where you were/ }).count() === 1, `${size.name}: the welcome has one button onward`);
   });
 
   // 3. Log in succeeds (stubbed): the button turns into a check and the panel fades out.

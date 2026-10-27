@@ -62,4 +62,5 @@ A ninth line says "Link a brokerage account, coming later", with a "Notify me" s
 ## Referenced by
 
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
 <!-- backlinks:end -->

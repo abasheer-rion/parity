@@ -189,6 +189,17 @@ function TradeShell() {
     if (mobile) setMtab("ticket");
     setCue({ side, type, at: Date.now(), fire: settings.oneKey && type === "market" });
   }, [view, go, set, mobile, settings.oneKey]);
+  // The empty Positions table's button (blotter.tsx openTicket): open the ticket on a buy, never place it.
+  useEffect(() => {
+    const on = () => {
+      if (view !== "chart") go("chart");
+      set((l) => (l.side.open && l.side.ticket ? l : { ...l, side: { ...l.side, open: true, ticket: true } }));
+      if (mobile) setMtab("ticket");
+      setCue({ side: "buy", type: "market", at: Date.now(), fire: false });
+    };
+    window.addEventListener("parity:trade-order", on);
+    return () => window.removeEventListener("parity:trade-order", on);
+  }, [view, go, set, mobile]);
   const resetLayout = useCallback(() => { const f = freshLayout(settings); setLayoutState(f); writeLayout(f); setLayoutId(null); toast("Layout reset"); }, [settings]);
   const loadLayout = useCallback((id: string) => {
     const row = layouts.rows.find((r) => r.id === id);

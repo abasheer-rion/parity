@@ -121,7 +121,9 @@ function reasonFor(matched: string | null, c: Candidate, p: Profile | null, age:
   else if (age != null && age <= 30) why.push("Added in the last month.");
   if (matched) {
     const [k, v] = matched.split(":");
-    if (k === "asset") why.push(`You use ${ASSET_WORDS[v] ?? v.replace(/-/g, " ")} more than other markets.`);
+    if (k === "asset" && p?.stated?.asset.includes(v)) why.push(`You said you follow ${ASSET_WORDS[v] ?? v.replace(/-/g, " ")}.`);
+    else if (k === "kind" && p?.stated?.kind.includes(v)) why.push(`You said you came for ${KIND_WORDS[v] ?? v}.`);
+    else if (k === "asset") why.push(`You use ${ASSET_WORDS[v] ?? v.replace(/-/g, " ")} more than other markets.`);
     else if (k === "family") why.push(`You opened ${v.replace(/-/g, " ")} items before.`);
     else if (k === "kind") why.push(`You use ${KIND_WORDS[v] ?? v} often.`);
   }

@@ -16,7 +16,7 @@ const q = (v: number) => String(+v.toFixed(6));
 export function PositionsTable({ onSymbol, active }: { onSymbol?: (k: string) => void; active?: string }) {
   const d = useDemo();
   return (
-    <TTable<Holding> label="Positions" rows={d.holdings} rowKey={(h) => h.symbol} empty={d.loaded ? "No positions" : "Loading"} initial={{ key: "v", dir: "desc" }}
+    <TTable<Holding> label="Positions" rows={d.holdings} rowKey={(h) => h.symbol} empty={d.loaded ? <FirstOrder start={d.start} /> : "Loading"} initial={{ key: "v", dir: "desc" }}
       onRow={onSymbol ? (h) => onSymbol(h.symbol) : undefined} active={(h) => h.symbol === active}
       cols={[
         { key: "s", head: "Symbol", align: "left", sort: (h) => d.label(h.symbol), cell: (h) => d.label(h.symbol) },
@@ -28,6 +28,19 @@ export function PositionsTable({ onSymbol, active }: { onSymbol?: (k: string) =>
         { key: "p", head: "%", sort: (h) => (h.upl == null ? null : h.upl / h.cost), tone: (h) => h.upl, cell: (h) => (h.upl == null ? "" : fmt.signedPct(h.upl / h.cost, 2)) },
         { wide: true, key: "r", head: "Rlzd", sort: (h) => h.realized, tone: (h) => h.realized, cell: (h) => signedUsd(h.realized) },
       ]} />
+  );
+}
+
+/** Asks Trade to open the order ticket on a buy, without placing anything (TradeApp listens). */
+export const openTicket = () => window.dispatchEvent(new Event("parity:trade-order"));
+
+/** An empty demo account: what to do first, with one button (DEC-0077). */
+function FirstOrder({ start }: { start: number }) {
+  return (
+    <div className="tt-start">
+      <p><strong>No positions yet.</strong> The demo account starts with {usd(start)} of virtual money. Buy anything on the chart with the order ticket. Prices are delayed.</p>
+      <Button variant="accent" size="sm" icon="plus" onClick={openTicket}>Place a demo order</Button>
+    </div>
   );
 }
 
