@@ -17,6 +17,7 @@ Usage: python3 scripts/egress-check/check.py [--state FILE] [--dry-run]
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import os
 import sys
@@ -62,7 +63,7 @@ def summarise(samples: list[dict], now: float) -> dict:
     """Bytes in the last day and a 30-day projection from up to 30 days of samples."""
     samples = sorted(samples, key=lambda s: s["t"])
     last = samples[-1]
-    pairs = list(zip(samples, samples[1:]))
+    pairs = list(itertools.pairwise(samples))
     day = sum(sent_between(a, b) for a, b in pairs if b["t"] > now - DAY)
     month = [(a, b) for a, b in pairs if b["t"] > now - 30 * DAY]
     if month:

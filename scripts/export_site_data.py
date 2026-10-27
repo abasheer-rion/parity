@@ -177,7 +177,7 @@ def main(out: Path) -> int:
         for b in kept_batches(batches):
             name = f"batch.{b['id']}.{b['fp']}.json"
             used.add(name)
-            report, hit = cached(cache, name, lambda: fetch_report(cur, b["id"]))
+            report, hit = cached(cache, name, lambda bid=b["id"]: fetch_report(cur, bid))
             fetched += not hit
             bid = str(b["id"])
             write_run(out / "batch", bid, report)
