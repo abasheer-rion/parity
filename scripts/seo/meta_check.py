@@ -44,11 +44,15 @@ class Head(HTMLParser):
         self.ld: list[str] = []
         self.links: set[str] = set()
         self._in_title = self._in_ld = False
+        self._svg = 0  # <title> inside an inline SVG labels the drawing, not the page
+        self._title_done = False
         self._buf: list[str] = []
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
-        if tag == "title":
+        if tag == "svg":
+            self._svg += 1
+        elif tag == "title" and not self._svg and not self._title_done:
             self._in_title = True
         elif tag == "meta" and a.get("name") == "description":
             self.desc = a.get("content") or ""
@@ -62,8 +66,10 @@ class Head(HTMLParser):
             self.links.add(a["href"])
 
     def handle_endtag(self, tag):
-        if tag == "title":
-            self._in_title = False
+        if tag == "svg" and self._svg:
+            self._svg -= 1
+        elif tag == "title" and self._in_title:
+            self._in_title, self._title_done = False, True
         elif tag == "script" and self._in_ld:
             self._in_ld = False
             self.ld.append("".join(self._buf))

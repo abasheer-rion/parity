@@ -116,6 +116,12 @@ class MetaCheck(unittest.TestCase):
         self.assertIn("canonical link points at https://other.test/", text)
         self.assertIn("Article has no headline", text)
 
+    def test_svg_titles_are_not_the_page_title(self):
+        h = meta_check.Head()
+        h.feed('<html><head><title>Connect Claude · Parity</title></head><body>'
+               '<svg><title>Adding a custom connector</title></svg><title>stray</title></body></html>')
+        self.assertEqual(h.title, "Connect Claude · Parity")
+
     def test_keyword_plan_is_checked(self):
         plan = [{"path": "/", "keyword": "backtest", "cluster": "backtesting"}]
         with tempfile.TemporaryDirectory() as d, mock.patch.object(meta_check, "load_plan", return_value=plan):
