@@ -4,7 +4,7 @@ title: Writing a new Academy course
 type: guide
 status: current
 created: 2026-10-23
-updated: 2026-10-26
+updated: 2026-10-27
 authors: [ayan]
 tags: [ui]
 related: [DEC-0028, DEC-0067]
@@ -53,7 +53,7 @@ New lessons should use the signature chart system ([DEC-0067](../decisions/0067-
 
 | Signature kind | Shows | Step settings |
 | --- | --- | --- |
-| `equity` | Lines that draw in, with value pills at the tips | `to` (0 to 1), `zoom`, `show`, `callouts`, `bands`, `par`, `stat` |
+| `equity` | Lines that draw in, with value pills at the tips | `to` (0 to 1), `zoom`, `show`, `callouts`, `bands`, `par`, `stat`. A series with `role: "crowd"` is a faint background path (simulated tries, say) with no value pill; the table sums the crowd up as its highest and lowest |
 | `split` | Two charts side by side | `to`, `winner` (`left` or `right`) |
 | `underwater` | An account and how far below its last high it is | `to`, `worst`, `equity` |
 | `distribution` | Where one result sits in a pile of others | `grow`, `band`, `marker` |
@@ -61,7 +61,9 @@ New lessons should use the signature chart system ([DEC-0067](../decisions/0067-
 | `regimes` | Wins and losses by kind of market | `reveal`, `highlight` |
 | `scorecard` | Number cards | `reveal` |
 
-The `params` each signature kind reads are in `web/src/ui/signature/scenes.ts`, and `web/src/ui/signature/examples.ts` has one example of each. "Reading a backtest" uses `equity`, `split` and `underwater`, and "Luck vs skill" uses `distribution`. A lesson's numbers live in its JSON, so compute them once (seeded, from the formula the lesson teaches) and write the values in; the captions, alt text and quiz must quote the same numbers.
+The `params` each signature kind reads are in `web/src/ui/signature/scenes.ts`, and `web/src/ui/signature/examples.ts` has one example of each. "Reading a backtest" uses `equity`, `split` and `underwater`, and "Luck vs skill" uses `equity`, `distribution` and `scorecard`. A lesson's numbers live in its JSON, so compute them once (seeded, from the formula the lesson teaches, or from a real run) and write the values in; the captions, alt text and quiz must quote the same numbers.
+
+A lesson can use Parity's own results. "Luck vs skill" uses the carry strategy from official run 1 (`ledger/runs/RUN-000001.json`): its weekly record, its deflated Sharpe, its 500 placebo copies and its 11 tests, reproduced exactly from the run's code and data snapshot. Set `params.tag` to say where the numbers come from, such as "Real result, official run 1" or "Carry real, others simulated". Clips show the tag and switch the risk line to past results.
 
 The older kinds below still work for the courses that have not moved yet.
 

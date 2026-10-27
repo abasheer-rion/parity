@@ -4,7 +4,7 @@ title: Rendering shareable clips from the sims
 type: guide
 status: current
 created: 2026-10-23
-updated: 2026-10-26
+updated: 2026-10-27
 authors: [ayan]
 tags: [process]
 related: [DEC-0035, DEC-0067, GDE-0007]
@@ -71,7 +71,7 @@ The **Content clips** workflow (`.github/workflows/content.yml`) runs every Mond
 
 `npm run content -- --signature` renders clips in the signature chart style ([DEC-0067](../decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)) instead of the sim scenes. It needs no engine data. Each clip is one picture played step by step: the first step draws in, each step holds long enough to read its caption, and the last step holds on the verdict.
 
-- **Academy lessons.** Every lesson whose picture uses a signature scene, read from `academy/courses/`. Today that is the five lessons of "Reading a backtest" and three of "Luck vs skill".
+- **Academy lessons.** Every lesson whose picture uses a signature scene, read from `academy/courses/`. Today that is the five lessons of "Reading a backtest" and the five of "Luck vs skill".
 - **Methodology explainers.** Equity against a benchmark, a bootstrap distribution with its 95% range, wins and losses by kind of market, how far below its last high an account sat, and the numbers with a verdict. They use the example data in `web/src/ui/signature/examples.ts`.
 
 ```bash
@@ -81,7 +81,7 @@ npm run content -- --signature --formats vertical                  # 9:16 only
 npm run content -- --signature --stills                            # one PNG per step, no video
 ```
 
-They go to `~/Desktop/parity-clips/signature/` (`9x16/` and `1x1/`, with `manifest.json`) unless `--out` says otherwise. Every frame carries the Parity brand line, a tag saying the numbers are an example or hypothetical, and the risk line with the site address. The clip definitions are in `web/scripts/content/signature.ts`. A lesson moved to a signature scene becomes a clip with no other change.
+They go to `~/Desktop/parity-clips/signature/` (`9x16/` and `1x1/`, with `manifest.json`) unless `--out` says otherwise. Every frame carries the Parity brand line, a tag saying where the numbers come from (an example, hypothetical, or a real run when the lesson sets `params.tag`), and the risk line with the site address. A clip on real results says "Past results" in its risk line instead of "Hypothetical". The clip definitions are in `web/scripts/content/signature.ts`. A lesson moved to a signature scene becomes a clip with no other change.
 
 ### Adding a scene
 

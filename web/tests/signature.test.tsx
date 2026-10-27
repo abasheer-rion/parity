@@ -47,6 +47,19 @@ describe("signature scenes", () => {
     expect(renderSignature(v, 0, { size: "lesson" })).not.toContain(v.steps[0].caption);
   });
 
+  it("crowd series draw faint with no value pill and sum up as highest and lowest in the table", () => {
+    const crowd = [[100, 90, 80], [100, 110, 130], [100, 105, 95]].map((values, i) => ({ label: `Try ${i + 1}`, values, role: "crowd" }));
+    const v = { kind: "equity", alt: "Three tries and one strategy.", params: { fmt: "money", crowdLabel: "tries", series: [{ label: "Real", values: [100, 101, 120] }, ...crowd] }, steps: [{ caption: "All of them." }] };
+    const svg = renderSignature(v, 0);
+    expect(svg).not.toMatch(/NaN|undefined/);
+    // One pill, for the real series only: crowd lines get no value pill.
+    expect(svg.match(/\$120/g)?.length ?? 0).toBeGreaterThan(0);
+    expect(svg).not.toContain("Try 2 ");
+    const t = signatureTable(v)!;
+    expect(t.head).toEqual(["Point", "Real", "Highest of 3 tries", "Lowest of 3 tries"]);
+    expect(t.rows[t.rows.length - 1].slice(1)).toEqual(["$120", "$130", "$80"]);
+  });
+
   it("an unknown kind draws nothing rather than throwing", () => {
     expect(renderSignature({ kind: "nope", alt: "x", steps: [{ caption: "a" }] }, 0)).toBe("");
   });

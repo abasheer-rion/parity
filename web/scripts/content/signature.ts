@@ -24,6 +24,13 @@ export interface SigClip {
   tag: string;
   visual: SigVisual;
   social: { caption: string; hashtags: string[] };
+  /** The risk line at the foot of every frame (default RISK). */
+  risk?: string;
+}
+
+/** The risk line for a clip that shows real past results, alone or next to simulated ones. */
+export function riskFor(tag: string): string {
+  return /simulated/i.test(tag) ? "Past and simulated results, educational, not investment advice." : "Past results, educational, not investment advice.";
 }
 
 export type ClipSize = "vertical" | "square";
@@ -65,7 +72,7 @@ export function clipFrame(c: SigClip, s: number, size: ClipSize): string {
   const visual = { ...c.visual, params: { ...(c.visual.params ?? {}), tag: c.tag } };
   const body = renderSignature(visual, s, { size, theme: "dark", brand: "PARITY" });
   const y = size === "vertical" ? h * 0.965 : h - 12 * u;
-  const risk = `<text x="${w / 2}" y="${Math.round(y)}" font-size="${Math.round(9.5 * u)}" fill="${THEMES.dark.muted}" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif">${esc(`${RISK} ${SITE}`)}</text>`;
+  const risk = `<text x="${w / 2}" y="${Math.round(y)}" font-size="${Math.round(9.5 * u)}" fill="${THEMES.dark.muted}" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif">${esc(`${c.risk ?? RISK} ${SITE}`)}</text>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${body}${risk}</svg>`;
 }
 
@@ -77,12 +84,15 @@ function lessonClips(root: string): SigClip[] {
     const course = JSON.parse(readFileSync(join(dir, f), "utf8"));
     for (const l of course.lessons) {
       if (!Object.prototype.hasOwnProperty.call(SCENES, l.visual?.kind)) continue;
+      // A lesson on real engine numbers names them in params.tag (such as "Real result, official run 1").
+      const tag = typeof l.visual.params?.tag === "string" ? l.visual.params.tag : "";
       out.push({
         id: `academy-${course.id}-${l.id}`,
         title: `${course.title}: ${l.title}`,
-        tag: "Hypothetical example",
+        tag: tag || "Hypothetical example",
         visual: l.visual,
-        social: { caption: `${l.title}, from the free Parity Academy course "${course.title}". Hypothetical numbers, for learning.`, hashtags: TAGS },
+        risk: tag ? riskFor(tag) : RISK,
+        social: { caption: `${l.title}, from the free Parity Academy course "${course.title}". ${tag ? `${tag}, for learning.` : "Hypothetical numbers, for learning."}`, hashtags: TAGS },
       });
     }
   }

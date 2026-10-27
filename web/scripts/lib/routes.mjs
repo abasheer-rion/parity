@@ -23,6 +23,9 @@ export function routes() {
   const course = JSON.parse(courses);
   out.add(`/academy/#/${course.id}`);
   if (course.lessons?.[0]?.id) out.add(`/academy/#/${course.id}/${course.lessons[0].id}`);
+  // "Luck vs skill" draws background paths and number cards, which the first course does not.
+  const luck = JSON.parse(readFileSync(here("../academy/courses/02-luck-vs-skill.json"), "utf8"));
+  for (const id of ["noise", "gauntlet"]) if (luck.lessons?.some((l) => l.id === id)) out.add(`/academy/#/${luck.id}/${id}`);
   for (const m of read("src/terminal/layout.ts").matchAll(/\{ id: "([a-z]+)", label:/g)) out.add(`/sim/#/${m[1]}`);
   // A strategy page and an algorithm report, and the settings pages.
   out.add("/app/#/strategy/fx_carry");
