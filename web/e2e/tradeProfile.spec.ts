@@ -81,7 +81,8 @@ test("trade profile: calendar, a day's trades, ranking, opting in and the board 
   await ranked.getByRole("button", { name: /^Return/ }).click();
   await expect(firstCells()).toContainText("EUR/USD");
   await expect(ranked.locator("tbody tr").nth(1)).toContainText("+15.96%");
-  await ranked.getByRole("combobox", { name: "Market" }).selectOption("Crypto");
+  await ranked.getByRole("combobox", { name: "Market" }).click();
+  await page.getByRole("option", { name: "Crypto", exact: true }).click();
   await expect(ranked.locator("tbody tr")).toHaveCount(2);
 
   // The leaderboard: opt in with a handle and a country.
@@ -108,7 +109,8 @@ test("trade profile: calendar, a day's trades, ranking, opting in and the board 
   await expect(table.locator("tbody tr").nth(1)).toContainText("Less likely to be luck alone");
 
   // Europe only: ranks start again at 1 inside the region.
-  await board.getByRole("combobox", { name: "Region" }).selectOption("Europe");
+  await board.getByRole("combobox", { name: "Region" }).click();
+  await page.getByRole("option", { name: "Europe", exact: true }).click();
   await expect(table.locator("tbody tr")).toHaveCount(3);
   await expect(table.locator("tbody tr").nth(1)).toContainText("@bravo");
   await expect(table.locator("tbody tr").nth(1).locator("td").first()).toHaveText("1");
