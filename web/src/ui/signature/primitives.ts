@@ -33,7 +33,7 @@ export function headline(F: Frame, main: Stat | null, side: Stat[] = [], o: { op
   const lab = Math.max(10.5 * u, big * 0.3);
   const base = head.y0 + big * 0.92;
   let out = text(F, head.x0 - big * 0.03, base, main.value, { size: big, weight: 650, fill: main.tone ? F.color(main.tone) : F.th.ink, halo: false, track: -big * 0.02 });
-  out += text(F, head.x0, base + lab * 1.45, main.label, { size: lab, fill: F.th.muted, halo: false, track: 0.2 * u });
+  out += text(F, head.x0, base + lab * 1.7, main.label, { size: lab, fill: F.th.muted, halo: false, track: 0.2 * u });
   // Side stats, right aligned, one above the other.
   const mainW = Math.max(textWidth(main.value, big, 650), textWidth(main.label, lab));
   let x = head.x1;
@@ -42,7 +42,7 @@ export function headline(F: Frame, main: Stat | null, side: Stat[] = [], o: { op
     const w = Math.max(textWidth(st.value, sideBig, 600), textWidth(st.label, lab));
     if (x - w < head.x0 + mainW + 16 * u) break;
     out += text(F, x, base - sideBig * 0.05, st.value, { size: sideBig, weight: 600, fill: st.tone ? F.color(st.tone) : F.th.text, anchor: "end", halo: false });
-    out += text(F, x, base + lab * 1.45, st.label, { size: lab, fill: F.th.muted, anchor: "end", halo: false, track: 0.2 * u });
+    out += text(F, x, base + lab * 1.7, st.label, { size: lab, fill: F.th.muted, anchor: "end", halo: false, track: 0.2 * u });
     x -= w + 18 * u;
   }
   return group(out, o.opacity ?? 1);
