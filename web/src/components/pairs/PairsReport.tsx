@@ -24,9 +24,9 @@ function NoData({ children = "Not enough data." }: { children?: ReactNode }) {
 }
 
 /** A titled block with one plain line saying what it shows. */
-function Block({ title, line, children, id }: { title: string; line?: ReactNode; children: ReactNode; id?: string }) {
+function Block({ title, line, children, id, wide }: { title: string; line?: ReactNode; children: ReactNode; id?: string; wide?: boolean }) {
   return (
-    <section className="pr-card" aria-labelledby={id}>
+    <section className={`pr-card ${wide ? "pr-wide" : ""}`} aria-labelledby={id}>
       <h3 id={id} className="pr-h3">{title}</h3>
       {line && <p className="pr-line">{line}</p>}
       {children}
@@ -192,12 +192,18 @@ function RecipeDetail({ doc, recipe, H }: { doc: PairsDoc; recipe: PairsRecipe; 
           ) : <NoData />}
         </Block>
 
-        <Block title="Costs" line="Sharpe ratio if trading or borrowing cost more. Down: cost per trade. Across: yearly fee to borrow the leg that is sold.">
+        <Block title="Decay" line="Sharpe ratio in each period. Shrinking bars mean the edge is fading.">
+          {decay.length ? (
+            <BarChart groups={decay.map((d) => ({ label: d.period, values: [{ name: "Sharpe", color: "var(--series-3)", value: d.sharpe }] }))}
+              format={(v) => num(v, 1)} label={`${recipe.name}: Sharpe ratio by period`} height={200} />
+          ) : <NoData />}
+        </Block>
+        <Block wide title="Costs" line="Sharpe ratio if trading or borrowing cost more. Down: cost per trade. Across: yearly fee to borrow the leg that is sold.">
           {grid.costs.length && grid.borrows.length ? (
             <TableScroll label="Sharpe ratio by trading cost and borrow fee">
               <table className="mtable dense pr-costs">
                 <caption className="sr-only">Sharpe ratio by trading cost (rows) and borrow fee (columns)</caption>
-                <thead><tr><th scope="col" className="left">Trade cost</th>{grid.borrows.map((b) => <th key={b} scope="col">{b} bp fee</th>)}</tr></thead>
+                <thead><tr><th scope="col" className="left">Trade cost, borrow fee</th>{grid.borrows.map((b) => <th key={b} scope="col">{b} bp</th>)}</tr></thead>
                 <tbody>{grid.costs.map((c) => (
                   <tr key={c}>
                     <th scope="row" className="left">{c} bp</th>
@@ -214,12 +220,6 @@ function RecipeDetail({ doc, recipe, H }: { doc: PairsDoc; recipe: PairsRecipe; 
           {grid.costs.length > 0 && recipe.cost_bps != null && <p className="pr-dim pr-foot">The outlined cell is the cost used for the results above.</p>}
         </Block>
 
-        <Block title="Decay" line="Sharpe ratio in each period. Shrinking bars mean the edge is fading.">
-          {decay.length ? (
-            <BarChart groups={decay.map((d) => ({ label: d.period, values: [{ name: "Sharpe", color: "var(--series-3)", value: d.sharpe }] }))}
-              format={(v) => num(v, 1)} label={`${recipe.name}: Sharpe ratio by period`} height={200} />
-          ) : <NoData />}
-        </Block>
       </div>
 
       <Block title="Breakdowns" line="Trades closed early: a stop-out, the time limit, or the two stopped moving together.">
