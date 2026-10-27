@@ -59,6 +59,7 @@ async function run(api) {
       check("the title bar is loaded", w.titlebar.webContents.getURL().includes("ui-titlebar.html"));
       check("the window shows no title text", await js(w.titlebar.webContents, "!document.getElementById('title') && !document.querySelector('.title')"));
       check("the log-in page runs to the top edge, with no strip above it", w.active.view.getBounds().y === 0, `${w.active.view.getBounds().y}`);
+      check("the page is told the room the window controls need", await until(() => js(w.active.wc, "!!document.documentElement.getAttribute('data-desktop-chrome')"), 5000));
       check("the controls view is see-through and only as wide as its buttons", w.titlebar.getBounds().width < 200, `${w.titlebar.getBounds().width}`);
       w.openOverlay("menu");
       check("the menu does not open on the wall", w.overlayMode === null);

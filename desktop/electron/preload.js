@@ -82,16 +82,24 @@ if (trusted.includes(here)) {
 
 /** The header row hand-off described at the top of this file. */
 function chrome() {
-  const root = document.documentElement;
+  // The preload runs before the page's <html> exists, so every use looks it up again.
+  const html = () => document.documentElement;
   const mac = process.platform === "darwin";
   let insets = { left: mac ? 246 : 174, right: process.platform === "win32" ? 144 : 0, h: 44 };
   const apply = () => {
+    const root = html();
+    if (!root) return;
     root.setAttribute("data-desktop-chrome", process.platform);
     root.style.setProperty("--desktop-chrome-left", `${insets.left}px`);
     root.style.setProperty("--desktop-chrome-right", `${insets.right}px`);
     root.style.setProperty("--desktop-chrome-h", `${insets.h}px`);
   };
-  apply();
+  if (html()) apply();
+  else {
+    // Set the attributes as soon as <html> appears, before the page draws.
+    const early = new MutationObserver(() => { if (html()) { early.disconnect(); apply(); } });
+    early.observe(document, { childList: true });
+  }
   ipcRenderer.on("parity:insets", (_e, i) => {
     const ok = (v) => Number.isFinite(v) && v >= 0 && v <= 800;
     if (!i || !ok(i.left) || !ok(i.right) || !ok(i.h)) return;
@@ -114,7 +122,9 @@ html[data-desktop-chrome] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-re
   band.className = "parity-desktop-drag";
   band.setAttribute("aria-hidden", "true");
   const addStyle = () => {
-    if (!style.isConnected) (document.head || root).appendChild(style);
+    if (!html()) return;
+    if (!html().hasAttribute("data-desktop-chrome")) apply();
+    if (!style.isConnected) (document.head || html()).appendChild(style);
     if (document.body && !band.isConnected) document.body.prepend(band);
   };
 
@@ -132,7 +142,7 @@ html[data-desktop-chrome] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-re
     timer = null;
     addStyle();
     const has = !!header();
-    root.toggleAttribute("data-desktop-header-shown", has);
+    html()?.toggleAttribute("data-desktop-header-shown", has);
     if (has !== told) { told = has; ipcRenderer.send("parity:chrome", { header: has }); }
   };
   function schedule() { if (!timer) timer = setTimeout(check, 120); }
@@ -140,7 +150,7 @@ html[data-desktop-chrome] :is(${CONTROLS}) { -webkit-app-region: no-drag; app-re
   const start = () => {
     addStyle();
     check();
-    new MutationObserver(schedule).observe(document.body || root, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "hidden", "style", "data-desktop-header"] });
+    new MutationObserver(schedule).observe(document.body || html(), { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "hidden", "style", "data-desktop-header"] });
     window.addEventListener("resize", schedule);
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
