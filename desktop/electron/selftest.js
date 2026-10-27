@@ -76,22 +76,19 @@ async function run(api) {
       const tb = w.active.wc;
       await until(() => js(tb, "document.readyState === 'complete' && !!document.documentElement.getAttribute('data-desktop-chrome')"), 8000);
       await wait(400);
-      // Up to two tries: the first press can land while the log-in panel is still fading in.
-      let moved = "";
-      let ok = false;
-      for (let attempt = 0; attempt < 2 && !ok; attempt++) {
-        tb.focus();
-        const [x0, y0] = w.win.getPosition();
-        const at = (x, y) => ({ x, y, globalX: x0 + x, globalY: y0 + y });
-        tb.sendInputEvent({ type: "mouseMove", ...at(300, 19) });
-        tb.sendInputEvent({ type: "mouseDown", button: "left", clickCount: 1, ...at(300, 19) });
-        for (let i = 1; i <= 6; i++) { tb.sendInputEvent({ type: "mouseMove", button: "left", ...at(300 + i * 20, 19 + Math.round(i * 40 / 6)) }); await wait(60); }
-        tb.sendInputEvent({ type: "mouseUp", button: "left", clickCount: 1, ...at(420, 59) });
-        await wait(500);
-        const [x1, y1] = w.win.getPosition();
-        moved = `moved ${x1 - x0},${y1 - y0} (try ${attempt + 1})`;
-        ok = Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3;
-      }
+      // Synthetic mouse input does not reach a page view reliably, so the press, the moves and
+      // the release are dispatched in the page, on whatever sits in the middle of its top row.
+      // The page bridge (preload.js) must turn them into a window move.
+      const [x0, y0] = w.win.getPosition();
+      const mx = Math.round(w.win.getContentBounds().width / 2) - 60;
+      const ev = (type, x, y) => `(() => { const t = document.elementFromPoint(${mx}, 19) || document.body; t.dispatchEvent(new PointerEvent("${type}", { bubbles: true, composed: true, pointerId: 7, isPrimary: true, button: 0, buttons: ${type === "pointerup" ? 0 : 1}, clientX: ${x}, clientY: ${y}, screenX: ${x0 + x}, screenY: ${y0 + y} })); return t.tagName; })()`;
+      await js(tb, ev("pointerdown", mx, 19));
+      for (let i = 1; i <= 6; i++) { await js(tb, ev("pointermove", mx + i * 20, 19 + Math.round(i * 40 / 6))); await wait(60); }
+      await js(tb, ev("pointerup", mx + 120, 59));
+      await wait(500);
+      const [x1, y1] = w.win.getPosition();
+      const moved = `moved ${x1 - x0},${y1 - y0}`;
+      const ok = Math.abs(x1 - x0 - 120) <= 3 && Math.abs(y1 - y0 - 40) <= 3;
       check("dragging the empty top of the page moves the window", ok, moved);
     }
 
