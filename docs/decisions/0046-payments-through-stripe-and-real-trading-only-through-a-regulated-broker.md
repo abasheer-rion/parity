@@ -7,7 +7,7 @@ created: 2026-10-24
 updated: 2026-10-26
 authors: [ayan]
 tags: [crypto, fx, infra, process]
-related: [DEC-0019, DEC-0032, DEC-0034, DEC-0040, REF-0019, RES-0022, REF-0020, REF-0027]
+related: [DEC-0019, DEC-0032, DEC-0034, DEC-0040, REF-0019, RES-0022, REF-0020, REF-0029]
 ---
 
 # Payments through Stripe, and real trading only through a regulated broker
@@ -89,7 +89,7 @@ The owner accepted this decision for pretend money only: build buying and sellin
 - **No real identity or bank details are collected** while trading is not live. Sandbox accounts use Alpaca's published test values.
 - Orders pass server-side risk checks (size, price collars, no short selling, a pattern day trader warning), carry an idempotency key, are rate limited and land in an append-only audit log that each person can read for their own rows only. Broker failures go to a warnings table the team reads.
 
-The steps to turn on the sandbox and, later, to go live are in [REF-0027](../reference/0027-going-live-with-real-trading.md). Payments (section 1) and real trading (section 2) stay where they were: no charges, no real money.
+The steps to turn on the sandbox and, later, to go live are in [REF-0029](../reference/0029-going-live-with-real-trading.md). Payments (section 1) and real trading (section 2) stay where they were: no charges, no real money.
 
 ## Alternatives considered
 
@@ -116,7 +116,7 @@ The steps to turn on the sandbox and, later, to go live are in [REF-0027](../ref
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
 - [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
-- [REF-0027: Going live with real trading](../reference/0027-going-live-with-real-trading.md)
+- [REF-0029: Going live with real trading](../reference/0029-going-live-with-real-trading.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

@@ -156,7 +156,7 @@ When an item is decided, change the page, its "Last updated" date and this table
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](../decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](../decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
-- [REF-0027: Going live with real trading](0027-going-live-with-real-trading.md)
+- [REF-0029: Going live with real trading](0029-going-live-with-real-trading.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 - [LOG-0020: Trade profile and leaderboard docs and privacy policy](../log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 <!-- backlinks:end -->

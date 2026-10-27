@@ -59,5 +59,5 @@ Proposed, for the owner to accept or reject later. Nothing below is built.
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - [REF-0019: Latency budget and target architecture](../reference/0019-latency-budget-and-target-architecture.md)
 - [REF-0020: Compliance checklist before each new step](../reference/0020-compliance-checklist-before-each-new-step.md)
-- [REF-0027: Going live with real trading](../reference/0027-going-live-with-real-trading.md)
+- [REF-0029: Going live with real trading](../reference/0029-going-live-with-real-trading.md)
 <!-- backlinks:end -->

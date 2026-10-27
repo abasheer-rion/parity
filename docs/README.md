@@ -37,7 +37,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-27 [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - 2026-10-26 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
-- 2026-10-26 [REF-0028: Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md)
+- 2026-10-26 [REF-0029: Going live with real trading](reference/0029-going-live-with-real-trading.md)
 
 ## intent
 
@@ -218,8 +218,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0025 | [Parity capacity and load test results](reference/0025-parity-capacity-and-load-test-results.md) | current | 2026-10-25 | [infra](TAGS.md#infra) |
 | REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
-| REF-0027 | [Going live with real trading](reference/0027-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
+| REF-0029 | [Going live with real trading](reference/0029-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## competitor
 
