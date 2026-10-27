@@ -26,7 +26,8 @@
   /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
     .p-bg { background-color: #0d0f17 !important; }
-    .p-card { background-color: #161925 !important; border-color: #262a3b !important; border-top-color: #1F4FBF !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
     .p-text { color: #eceef6 !important; }
     .p-muted { color: #a0a4b8 !important; }
     .p-rule { border-color: #262a3b !important; }
@@ -42,6 +43,7 @@
   [data-ogsc] .p-link { color: #8fb0ff !important; }
   [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
   [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
   [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 </style>
 </head>
@@ -52,25 +54,20 @@
     <td align="center" style="padding:32px 12px;">
       <!--[if mso]><table role="presentation" width="520" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
-        <!-- The brand is drawn with text and table cells, so it shows even when the inbox blocks
-     images (Outlook and Gmail do until the reader allows them). The glow behind the star
-     is a remote image used only as a background: blocked, the square stays solid. -->
+        <!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without "download images". Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. -->
 <tr>
-  <td style="padding:0 4px 18px 4px;">
-    <a href="{{ .SiteURL }}" target="_blank" style="text-decoration:none;" aria-label="Parity Trading">
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td role="img" aria-label="Parity Trading" width="40" height="40" align="center" valign="middle" bgcolor="#0d1220" background="https://paritytrading.app/email/parity-mark-glow.png" style="width:40px;height:40px;min-width:40px;background-color:#0d1220;background-image:url('https://paritytrading.app/email/parity-mark-glow.png');background-size:40px 40px;background-position:center;background-repeat:no-repeat;border-radius:10px;text-align:center;vertical-align:middle;font-family:'Segoe UI Symbol','Apple Symbols','DejaVu Sans',Arial,sans-serif;font-size:27px;line-height:40px;font-weight:400;color:#5b8cff;mso-line-height-rule:exactly;"><span aria-hidden="true" style="color:#5b8cff;">&#10042;</span></td>
-        <td style="width:12px;font-size:0;line-height:0;">&nbsp;</td>
-        <td class="p-text" style="vertical-align:middle;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#141622;mso-line-height-rule:exactly;">PARITY <span style="color:#1F4FBF;">TRADING</span></td>
-      </tr>
-    </table>
+  <td class="p-band" bgcolor="#0d1220" align="left" style="background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;">
+    <a href="{{ .SiteURL }}" target="_blank" style="text-decoration:none;color:#f4f7ff;">
+      <img src="https://paritytrading.app/email/parity-logo-on-dark@2x.png" width="176" height="40" alt="PARITY" style="display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;">
     </a>
   </td>
 </tr>
         <tr>
-          <td class="p-card" style="background-color:#ffffff;border:1px solid #e3e6ef;border-top:4px solid #1F4FBF;border-radius:12px;padding:32px 36px;">
-            <h1 class="p-text" style="margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;">Confirm your new email</h1>
+          <td class="p-card" style="background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;">
+            <!--body--><h1 class="p-text" style="margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;">Confirm your new email</h1>
 <p class="p-text" style="margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;">Confirm the change from {{ .Email }} to {{ .NewEmail }}.</p>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 24px 0;">
   <tr>
@@ -99,7 +96,7 @@
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="p-rule" style="border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;">&nbsp;</td></tr></table>
 <p class="p-muted" style="margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">Button not working? Paste this into your browser:</p>
 <p style="margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;"><a class="p-link" href="{{ .SiteURL }}/verify/?type=email_change&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" style="color:#1F4FBF;text-decoration:underline;">{{ .SiteURL }}/verify/?type=email_change&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}</a></p>
-<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">Both addresses get this email and both must confirm. Not you? Change your password.</p>
+<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">Both addresses get this email and both must confirm. Not you? Change your password.</p><!--/body-->
           </td>
         </tr>
         <tr>

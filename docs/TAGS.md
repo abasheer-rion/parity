@@ -172,6 +172,7 @@ Sources, scrapers, caching and data quality.
 - [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
 - [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
 - [EXP-0005: Honest cash and delayed rates, before and after](experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)

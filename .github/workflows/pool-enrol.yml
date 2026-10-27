@@ -1,0 +1,77 @@
+# Enrolled Base pools go live by themselves (DEC-0078). Once a day: read the Base pools the
+# data registry's gate enrolled (public.data_series), check each one's depth again on a public
+# Base node, and add at most 3 new ones to web/live/src/venues/onchain-enrolled.json, which the
+# live fan-out worker joins to its pool list. When the list changes, the on-chain and registry
+# tests run here, the change is committed to main, and the site deploy (which deploys the
+# worker) is started.
+#
+# Caps live in engine/src/parity/registry/feed.py (depth bar, 3 a day, 8 per asset, 3 per
+# chain). Kill switch: set the repo variable POOL_AUTO_ENROL=off. Secret: SUPABASE_DB_URL (the
+# same read login the deploy uses). No outside text reaches a shell command: the summary is
+# the script's own JSON.
+name: Pool enrolment
+
+on:
+  schedule:
+    - cron: "41 5 * * *"  # daily 05:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write  # start deploy-web.yml after a change
+
+concurrency:
+  group: pool-enrol
+  cancel-in-progress: false
+
+jobs:
+  enrol:
+    if: vars.POOL_AUTO_ENROL != 'off'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Add enrolled pools
+        env:
+          SITE_DATA_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          POOL_AUTO_ENROL: ${{ vars.POOL_AUTO_ENROL }}
+        run: |
+          pip install -q "psycopg[binary]>=3.2"
+          python3 engine/src/parity/registry/feed.py > "$RUNNER_TEMP/enrol.json"
+          { echo '### Pool enrolment'; echo '```'; python3 -m json.tool "$RUNNER_TEMP/enrol.json"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if git diff --quiet -- web/live/src/venues/onchain-enrolled.json; then
+            echo "No change." >> "$GITHUB_STEP_SUMMARY"
+            echo "changed=false" >> "$GITHUB_ENV"
+          else
+            echo "changed=true" >> "$GITHUB_ENV"
+          fi
+      - uses: actions/setup-node@v7
+        if: env.changed == 'true'
+        with:
+          node-version: 22
+      - name: Test the new list
+        if: env.changed == 'true'
+        run: |
+          pip install -q -e "engine[dev]"
+          (cd engine && python3 -m pytest -q tests/test_registry_feed.py tests/test_registry_discovery.py)
+          cd web && npm ci --silent && npx vitest run tests/onchain.test.ts tests/live.test.ts && npx tsc --noEmit -p live
+      - name: Commit to main and deploy
+        if: env.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "parity-pool-enrol"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/live/src/venues/onchain-enrolled.json
+          git commit -m "data(live): enrol new Base pools into the on-chain feed"
+          pushed=no
+          for i in 1 2 3; do
+            if git pull --rebase -q origin main && git push origin HEAD:main; then pushed=yes; break; fi
+            sleep 10
+          done
+          [ "$pushed" = yes ] || { echo "Could not push to main." >> "$GITHUB_STEP_SUMMARY"; exit 1; }
+          gh workflow run deploy-web.yml --ref main
+          echo "Committed and started the site deploy." >> "$GITHUB_STEP_SUMMARY"

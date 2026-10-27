@@ -14,10 +14,12 @@
 // the subscription, or goes quiet, moves to its next node by itself.
 import { BARS, fromPrices, TF_MS, allowed, type AdapterDef, type BoardPatch, type Parsed, type Trade } from "../base";
 import REGISTRY from "./onchain-registry.json";
-import { CHAINS, chainDef, poolScore, quoteUsd, type ChainDef, type PoolEntry, type Registry } from "./onchainRegistry";
+import ENROLLED from "./onchain-enrolled.json";
+import { CHAINS, chainDef, poolScore, quoteUsd, withEnrolled, type ChainDef, type EnrolledList, type PoolEntry, type Registry } from "./onchainRegistry";
 import { aggregate, type Aggregate, type SourceQuote } from "./parityPrice";
 
-const REG = REGISTRY as unknown as Registry;
+// Pools the data registry enrolled since the last discovery refresh join here (DEC-0078).
+const REG = withEnrolled(REGISTRY as unknown as Registry, ENROLLED as unknown as EnrolledList);
 const SLOT0 = "0x3850c7bd";
 /** Volume weights fade by half every 5 minutes, so the pools trading now count most. */
 const HALF_LIFE_MS = 300_000;

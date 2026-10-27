@@ -209,7 +209,7 @@ def test_feed_candidates_pass_without_history(reg):
     r = _cand(reg, "onchain.0xabc", "onchain", "0xabc", "T", use="feed", rights="public")
     out = enrol.gate(reg, r)
     assert out["enrolled"]
-    assert "pool list" in db.get(reg, "onchain.0xabc")["reason"]
+    assert "pool-enrol" in db.get(reg, "onchain.0xabc")["reason"]
 
 
 def test_run_tries_each_candidate_at_most_once_a_day(reg, monkeypatch):
