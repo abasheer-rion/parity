@@ -185,6 +185,8 @@ export const PAGES: Record<string, PageMeta> = {
   "legal/accessibility/index.html": { title: "Accessibility statement · Parity", description: "Parity's accessibility target, the known gaps, and how to report a barrier.", path: "/legal/accessibility/", image: "legal" },
   "legal/risk/index.html": { title: "Risk notice · Parity", description: "Why backtests and simulations can mislead, and the risks of crypto, perpetual futures, leverage and ETFs.", path: "/legal/risk/", image: "legal" },
   "legal/regulatory/index.html": { title: "Regulatory status and your rights · Parity", description: "What Parity is and is not, the laws and exemptions it relies on, your rights, and where to complain.", path: "/legal/regulatory/", image: "legal" },
+  // The desktop app's download page (DEC-0072): links that always fetch the newest release.
+  "download/index.html": { title: "Download Parity for Mac and Windows · Parity", description: "Parity's desktop app for Mac (Apple silicon and Intel) and Windows: the newest version, its size, checksums and system requirements.", path: "/download/", image: "default" },
   // The signed-in apps. Their tags change with each page (ROUTES_META); these are what a
   // link preview shows, since the server answers a signed-out visitor with a redirect.
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },

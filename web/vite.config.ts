@@ -177,6 +177,7 @@ const SITE_PAGES = [
   "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
   "connect/index", "oauth/consent/index", "oauth/openrouter/index",
   "developers/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
+  "download/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 // Libraries that change rarely get their own files, so a deploy that only changes Parity's

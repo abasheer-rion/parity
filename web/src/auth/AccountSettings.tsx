@@ -1,6 +1,8 @@
 // Settings > Account: email, password, two-step sign-in, passkeys, sign out, and a
 // request to delete the account.
 import { useEffect, useState } from "react";
+import { desktop, isDesktop } from "../desktop/bridge";
+import site from "../lib/site.json";
 import { LegalLinks } from "../legal/LegalLinks";
 import { Badge, Button, Dialog, SettingsRow, toast } from "../ui";
 import { explain, requireClient } from "./client";
@@ -37,6 +39,12 @@ export default function AccountSettings() {
       </SettingsRow>
       <SettingsRow label="Delete my account" help="Sends a request to the owner, who deletes the account and its sign-in. Research results are shared and are not deleted.">
         <DeleteRequest userId={session?.user.id} email={email} />
+      </SettingsRow>
+      <SettingsRow label="Desktop app" help={isDesktop() ? "You are using the desktop app. It keeps you signed in and updates itself. Get it for another computer from the download page." : "Parity for Mac (Apple silicon and Intel) and Windows. It keeps you signed in and updates itself."}>
+        <nav className="legal-links start" aria-label="Desktop app">
+          {/* In the app, the page opens in the browser, so the download is a normal browser download. */}
+          <a href="/download/" onClick={(e) => { if (!desktop) return; e.preventDefault(); desktop.openExternal(`${site.origin}/download/`); }}>Download for Mac and Windows</a>
+        </nav>
       </SettingsRow>
       <SettingsRow label="Privacy and legal" help="What we keep about you, the rules for using Parity, and the cookies we use. Research and education only. Not investment advice.">
         <LegalLinks className="start" />

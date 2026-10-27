@@ -18,7 +18,7 @@ const SPACES = new Set(["product", "research", "sim", "trade", "academy", "lab"]
 export function appOf(pathname: string, space?: string | null): App | null {
   if (space && SPACES.has(space)) return space as App;
   const p = pathname.toLowerCase();
-  if (p === "/" || p === "/index.html" || /^\/(learn|ideas|notes)(\/|$)/.test(p)) return "site";
+  if (p === "/" || p === "/index.html" || /^\/(learn|ideas|notes|download)(\/|$)/.test(p)) return "site";
   if (/^\/(login|signup|reset|verify)(\/|$)/.test(p)) return "auth";
   if (/^\/legal(\/|$)/.test(p)) return "legal";
   // The API guide sits with Connect your AI: both are about other programs reaching Parity.

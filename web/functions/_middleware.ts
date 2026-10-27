@@ -13,6 +13,7 @@ import { createRemoteJWKSet, jwtVerify } from "jose";
 import { mainHostFor, siteDomainOf, SITE_DOMAIN } from "../src/lib/meta";
 import { wellKnown } from "../src/lib/mcp/wellknown";
 import { appHashRedirect } from "../src/lib/notFound";
+import { publicCacheFor } from "../src/lib/cachePolicy";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -59,10 +60,10 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
       forward = new Request(new URL(`${home}${url.search}`, url).toString(), request);
       url.pathname = home;
     } else if (SUBSITE_PUBLIC.test(url.pathname)) {
-      return next();
+      return withPublicCache(url.pathname, await next());
     }
   }
-  if (!PROTECTED.some((re) => re.test(url.pathname))) return next();
+  if (!PROTECTED.some((re) => re.test(url.pathname))) return withPublicCache(url.pathname, await next());
 
   // The desktop app (DEC-0041) has no cookie for this address: its main process sends the
   // same access token as a bearer header instead, checked the same way.
@@ -89,6 +90,20 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
   login.searchParams.set("next", url.pathname + url.search);
   return new Response(null, { status: 302, headers: { Location: login.pathname + login.search, "Cache-Control": "no-store" } });
 };
+
+/**
+ * A public answer that passed through here (the front page, say) gets the same caching as
+ * the static files in public/_headers (DEC-0072). Function answers that set their own
+ * Cache-Control keep it.
+ */
+export function withPublicCache(pathname: string, res: Response): Response {
+  const want = publicCacheFor(pathname, res.status);
+  const own = res.headers.get("Cache-Control");
+  if (!want || (own && !/^public, max-age=0, must-revalidate$/.test(own) && want !== "no-store")) return res;
+  const out = new Response(res.body, res);
+  out.headers.set("Cache-Control", want);
+  return out;
+}
 
 // Built files have a hash of their contents in the name (vite), so a copy never goes stale.
 const HASHED = /^\/(app|research|sim|trade|academy|lab)\/assets\/[^/]+-[A-Za-z0-9_-]{8}\.(js|css|woff2?|png|svg|webp|jpg)$/;

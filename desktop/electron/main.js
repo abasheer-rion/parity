@@ -38,6 +38,7 @@ const { Page } = require("./page");
 const { ParityTray } = require("./tray");
 const logfile = require("./logfile");
 const guard = require("./guard");
+const staySignedIn = require("./session");
 
 // Errors nobody caught: logged, and one plain message instead of Electron's raw box and a
 // quit (guard.js). Installed first, so it covers everything below.
@@ -208,6 +209,7 @@ function setOnline(value) {
     if (!(await check(2500))) return;
     log("the website answers again, going back to the live page");
     setOnline(true);
+    setTimeout(() => checkSessions("back online"), 5000);
     for (const w of windows) if (w.active?.saved && w.active.path) w.active.load(w.active.path);
   }, 15000);
 }
@@ -759,6 +761,7 @@ function buildMenu() {
         { label: "Regulatory status", click: () => openPath("/legal/regulatory/") },
         { type: "separator" },
         { label: `Open ${new URL(ORIGIN).host} in the browser`, click: () => shell.openExternal(ORIGIN) },
+        { label: "Download Parity for another computer", click: () => shell.openExternal(`${ORIGIN}/download/`) },
         { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },
       ],
     },
@@ -775,8 +778,8 @@ function buildMenu() {
  */
 function watchForBlankViews() {
   const all = (why) => { log(`repaint (${why})`); for (const w of windows) w.repaint(why); };
-  powerMonitor.on("resume", () => all("woke from sleep"));
-  powerMonitor.on("unlock-screen", () => all("screen unlocked"));
+  powerMonitor.on("resume", () => { all("woke from sleep"); setTimeout(() => checkSessions("woke from sleep"), 3000); });
+  powerMonitor.on("unlock-screen", () => { all("screen unlocked"); setTimeout(() => checkSessions("screen unlocked"), 3000); });
   screen.on("display-added", () => all("screen added"));
   screen.on("display-removed", () => all("screen removed"));
   screen.on("display-metrics-changed", () => all("screen changed"));
@@ -823,7 +826,9 @@ app.whenReady().then(async () => {
   tray = new ParityTray(ctx);
   buildMenu();
 
+  await extendSignIn(ses);
   await refreshSignedIn();
+  setInterval(() => checkSessions("every 30 minutes"), staySignedIn.CHECK_EVERY_MS).unref?.();
   const saved = ctx.settings.restoreWindows && state.windows.length ? state.windows : [{ ...(state.windows[0] || {}), path: state.lastPath || "/" }];
   if (pending) saved[0] = { ...saved[0], path: pending };
   pending = null;
@@ -842,6 +847,49 @@ app.whenReady().then(async () => {
   ctx.updates.sync();
   if (process.env.PARITY_SELFTEST) require("./selftest").run({ windows: () => [...windows].filter((w) => w.alive), openLink, newWindow }).catch((e) => { console.error(e); app.exit(1); });
   if (process.env.PARITY_SHOTS) require("./shots").run({ focused: focusedWindow, newWindow }).catch((e) => { console.error(e); app.quit(); });
+});
+
+// ---------------------------------------------------------------- staying signed in
+
+/** At launch: an auth cookie nearer than 300 days to expiring is moved out to 400 (session.js). */
+async function extendSignIn(ses) {
+  try {
+    const now = Date.now() / 1000;
+    for (const c of await ses.cookies.get({})) {
+      const next = staySignedIn.extended(c, now);
+      if (next) await ses.cookies.set(next).catch((e) => log(`could not extend the sign-in cookie (${e.message})`));
+    }
+  } catch (e) {
+    log(`could not read the sign-in cookies (${e.message})`);
+  }
+}
+
+/**
+ * Asks every page to check its session now (web/src/auth/client.ts renews a token that ends
+ * within 10 minutes). Called after sleep, unlock, the connection coming back and every
+ * 30 minutes, so a window left open overnight is still signed in in the morning.
+ */
+let lastCheck = 0;
+function checkSessions(why) {
+  if (!ctx.state.signedIn || ctx.state.online === false) return;
+  const now = Date.now();
+  if (now - lastCheck < 20_000) return; // sleep and unlock often arrive together
+  lastCheck = now;
+  log(`session check (${why})`);
+  for (const wc of require("electron").webContents.getAllWebContents()) {
+    if (!wc.isDestroyed() && isPageView(wc)) wc.send("parity:session-check");
+  }
+}
+
+// The bundled copy (app://parity) asks who is signed in when the app starts offline. It gets
+// an id and an email from the session cookie, never a token (session.js).
+ipcMain.handle("parity:saved-user", async (e) => {
+  if (!isPageView(e.sender) || !String(e.senderFrame?.url || "").startsWith(`${routes.APP_ORIGIN}/`)) return null;
+  try {
+    return staySignedIn.savedUser(await session.fromPartition(PARTITION).cookies.get({}));
+  } catch {
+    return null; // the copy shows the log-in page
+  }
 });
 
 app.on("activate", () => { if (ready) showAll(); });

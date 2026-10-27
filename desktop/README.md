@@ -4,7 +4,7 @@ The whole Parity site, loaded live so it always matches paritytrading.app: the f
 
 ## Install
 
-Download from the repository's Releases page: `Parity-<version>-arm64.dmg` for a Mac with Apple silicon (M1 or later), `Parity-<version>-x64.dmg` for an Intel Mac, `Parity-Setup-<version>.exe` for Windows.
+Download from [paritytrading.app/download](https://paritytrading.app/download/) or the repository's Releases page: `Parity-<version>-arm64.dmg` for a Mac with Apple silicon (M1 or later), `Parity-<version>-x64.dmg` for an Intel Mac, `Parity-Setup-<version>.exe` for Windows.
 
 From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)).
 
@@ -21,7 +21,7 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 
 ## Using it
 
-- **Log in first.** Signed out, the app shows only the log-in page. After you log in it opens the last page you used, Home the first time, and the other windows you had open. You stay signed in when you quit.
+- **Log in first.** Signed out, the app shows only the log-in page. After you log in it opens the last page you used, Home the first time, and the other windows you had open. You stay signed in when you quit, for up to 400 days without opening the app. The app renews your sign-in after sleep, when the connection comes back and every 30 minutes, and opens signed in when it starts offline ([DEC-0072](../docs/decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)).
 - **The menu button** at the top left (right of the traffic lights on a Mac) opens the sections and Account. Pick one, press Escape or click outside to close it. Alt-click a section, or the arrow at the end of its row, to open it in a new window.
 - **Move the window** by dragging the bar along the top. Double-click it to zoom (Mac) or maximise (Windows).
 - **Shortcuts** (Cmd on a Mac, Ctrl on Windows):
