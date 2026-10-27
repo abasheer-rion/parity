@@ -8,7 +8,7 @@
   border: 1px dashed var(--border-2); border-radius: var(--radius-lg); background: var(--surface); cursor: pointer;
   transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
 }
-.vf-drop:hover, .vf-drop.is-drag, .vf-drop:focus-within { border-color: var(--accent); background: var(--hover); }
+.vf-drop:hover, .vf-drop.is-drag, .vf-drop:has(:focus-visible) { border-color: var(--accent); background: var(--hover); }
 .vf-drop span { color: var(--text-2); font-size: var(--fs-sm); }
 .vf-found { margin: 0; }
 .vf-small, .vf-help { color: var(--text-2); font-size: var(--fs-sm); margin: 0; }

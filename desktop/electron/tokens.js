@@ -76,7 +76,7 @@ module.exports = {
   "color-accent-soft": "rgba(224, 48, 63, 0.16)",
   "color-on-accent": "#ffffff",
   "color-selected": "rgba(224, 48, 63, 0.12)",
-  "color-focus": "#f4f5f8",
+  "color-focus": "#2f6bff",
   "color-positive": "#36d07c",
   "color-positive-soft": "rgba(54, 208, 124, 0.12)",
   "color-negative": "#ff6b62",

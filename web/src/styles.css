@@ -284,10 +284,10 @@ kbd { font: var(--type-2xs) ui-monospace, SFMono-Regular, Menlo, monospace; bord
 }
 @media print { .doc-nav, .doc-rail, .pop, .palette-backdrop { display: none !important; } .reader { display: block; } }
 
-/* Accent and focus (Mercury: a grey focus ring, the accent only on primary and selection) */
+/* Accent and focus. The focus ring itself is set once, in a11y.css, for keyboard focus only.
+   A field you type into shows its focused border on click too; a select only from the keyboard. */
 select option { background: var(--surface-solid); color: var(--text-body); }
-:where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 1px; box-shadow: none; }
-input:focus, select:focus { outline: none; border-color: var(--ds-border-input-focused); }
+input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"], [type="reset"], [type="file"], [type="color"], [type="image"]):focus, select:focus-visible { outline: none; border-color: var(--ds-border-input-focused); }
 .chip.on, .tag.on { border-color: transparent; background: var(--accent-soft); color: var(--text); }
 .doc-nav li a.active { background: var(--ds-background-secondary); box-shadow: inset 2px 0 0 var(--accent); }
 .palette li.on a { background: var(--ds-background-secondary); }

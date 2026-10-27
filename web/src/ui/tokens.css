@@ -116,7 +116,9 @@
   --color-accent-soft: color-mix(in srgb, var(--palette-red-500) 16%, transparent);
   --color-on-accent: var(--palette-white);
   --color-selected: color-mix(in srgb, var(--palette-red-500) 12%, transparent);
-  --color-focus: var(--palette-grey-100);
+  /* The keyboard focus ring: brand blue, 4.5:1 on the canvas and 4.1:1 on the white
+     primary button, so it reads on either side of the ring (WCAG 1.4.11, 2.4.7). */
+  --color-focus: var(--palette-blue-500);
 
   /* Gains and losses always carry a sign or an arrow too (REF-0009 rule 3). */
   --color-positive: var(--palette-green-400);

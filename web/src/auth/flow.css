@@ -232,7 +232,7 @@
 .pa-foot .legal-links a:is(:hover, :focus-visible), .pa-foot .legal-links button:is(:hover, :focus-visible) { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 .pa-disclaimer { margin: 0; font-size: var(--type-xs); color: var(--faint); }
 
-.pa-shell :is(a, button, input):focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 8px; }
+.pa-shell :is(a, button, input):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 8px; }
 .pa-shell .pa-input:focus-visible { outline: none; border-radius: 10px; }
 
 @media (max-width: 520px) {

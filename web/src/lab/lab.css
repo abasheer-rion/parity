@@ -46,7 +46,7 @@
 .plb[data-density="comfortable"] { --l-row: 32px; --l-fs: var(--type-sm); --l-fs-s: var(--type-xs); --l-top: 46px; }
 .plb[data-mobile] { grid-template-rows: var(--l-top) minmax(0, 1fr) var(--l-legal) 54px; --l-side: 100%; }
 .plb a:not(.ui-btn, .ui-iconbtn) { color: inherit; }
-.plb :focus-visible { outline: 2px solid var(--l-text); outline-offset: -2px; }
+.plb :focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .plb .good { color: var(--good); }
 .plb .bad { color: var(--bad); }
 .plb kbd { font: 500 var(--type-3xs)/16px var(--font-mono); padding: 0 5px; border-radius: 3px; border: 1px solid var(--l-line-2); color: var(--l-muted); background: transparent; white-space: nowrap; }
@@ -108,7 +108,7 @@
 .lb-field-row > span:first-child { color: var(--l-body); }
 .lb-input, .lb-select { height: 28px; width: 100%; min-width: 0; padding: 0 8px; border: 1px solid var(--l-line-2); border-radius: 5px; background: color-mix(in srgb, var(--color-canvas) 70%, transparent); color: var(--l-text); font: inherit; }
 .lb-select { width: auto; max-width: 150px; }
-.lb-input:focus, .lb-select:focus { outline: none; border-color: var(--l-line-3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--palette-white) 6%, transparent); }
+.lb-input:focus, .lb-select:focus-visible { outline: none; border-color: var(--l-line-3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--palette-white) 6%, transparent); }
 .lb-find { flex: 0 1 300px; min-width: 160px; }
 .plb .ui-select select { height: 28px; font-size: var(--l-fs); }
 .plb .ui-field-label { font-size: var(--l-fs-s); }
@@ -222,7 +222,7 @@
 .lb-opt:hover { background: var(--l-hover); color: var(--l-text); }
 .lb-opt.on { border-color: color-mix(in srgb, var(--color-accent) 60%, transparent); background: var(--color-selected); color: var(--l-text); }
 .lb-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-.lb-opt:has(input:focus-visible) { outline: 2px solid var(--l-text); outline-offset: 2px; }
+.lb-opt:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .lb-reset { align-self: flex-start; }
 .lb-sum { margin: 0; }
 .lb-pitfalls { list-style: none; margin: 0; padding: 0; }
@@ -282,7 +282,7 @@
 /* The library's checkbox, select and segmented control at the Workbench's size */
 .plb .ui-check { font-size: var(--l-fs); gap: 6px; color: var(--l-body); }
 .plb .ui-check-box { width: 14px; height: 14px; }
-.plb .ui-check input:focus-visible + .ui-check-box { outline-color: var(--l-text); }
+.plb .ui-check input:focus-visible + .ui-check-box { outline-color: var(--color-focus); }
 .plb .ui-seg { height: 28px; }
 .plb .ui-seg button { height: 26px; }
 .lb-refs { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

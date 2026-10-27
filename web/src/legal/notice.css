@@ -45,7 +45,7 @@
 .cn-primary { background: var(--cn-blue); border-color: var(--cn-blue); color: var(--color-on-primary); }
 .cn-primary:hover { background: var(--color-primary-hover); }
 .cn-btn:focus-visible, .cn a:focus-visible, .cn-dialog a:focus-visible, .cn-switch input:focus-visible + span {
-  outline: 2px solid var(--cn-link);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
