@@ -75,7 +75,7 @@ def publish_search(doc: dict, top: int = 1000) -> None:
     import psycopg
 
     small = {**doc, "rows": doc["rows"][:top]}
-    with psycopg.connect(url) as conn:
+    with psycopg.connect(url, connect_timeout=20) as conn:
         conn.execute("insert into public.search_snapshots (generated_at, trials, doc) "
                      "values (%s, %s, %s)", (doc["generated_at"], doc["trials"], json.dumps(small)))
 

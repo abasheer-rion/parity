@@ -1274,6 +1274,9 @@ def _benchmark():
     return get("us_market_buy_hold")
 
 
+PUBLISH_RETRY_MINUTES = 15  # after a failed snapshot, try again this soon
+
+
 def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0,
                 publish_hours: float = 6.0, max_hours: float | None = None,
                 beat_minutes: float = 5.0) -> None:
@@ -1305,8 +1308,12 @@ def run_forever(batch: int = 50, pause: float = 5.0, refresh_hours: float = 24.0
             except Exception as exc:  # the site can wait; the search keeps going
                 # Only the error's type: database errors can quote the connection
                 # string, password included, and this goes to a log file.
-                print(f"publish failed: {type(exc).__name__}", flush=True)
+                code = getattr(exc, "sqlstate", None) or "no server reply"
+                print(f"publish failed: {type(exc).__name__} ({code}), "
+                      f"retrying in {PUBLISH_RETRY_MINUTES} min", flush=True)
                 timed("publish snapshot", t0, False, error=type(exc).__name__)
+                # A network blip should not leave the site stale for a full interval.
+                last_publish = t0 - publish_hours * 3600 + PUBLISH_RETRY_MINUTES * 60
         if time.time() - last_fetch > refresh_hours * 3600:
             t0 = time.time()
             try:
