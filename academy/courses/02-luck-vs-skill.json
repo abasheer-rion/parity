@@ -93,7 +93,7 @@
    "minutes": 3,
    "body": [
     "Trying many variations of an idea and keeping the best is called **multiple testing**, or data snooping. Every changed setting counts as a try, even the ones you forgot about.",
-    "The picture shows the Sharpe ratios of strategies with zero real skill, each over 10 years. With one try, the result is near zero. With 1,000 tries, the best one scores close to 1, which would look excellent on its own.",
+    "The picture shows the Sharpe ratios of 1,000 strategies with zero real skill, each over 10 years. Most land near zero. The best of the 1,000 scores 0.96, which would look excellent on its own.",
     "So the question is never only \"how good is this backtest?\". It is \"how good is it compared with the best I would expect from that many tries with no skill?\"."
    ],
    "terms": [
@@ -102,29 +102,111 @@
     "p-value"
    ],
    "visual": {
-    "kind": "maxof",
-    "alt": "A histogram of Sharpe ratios from strategies with no skill, centred on zero. As the number of tries grows from 1 to 1,000, the best one, marked in yellow, climbs toward 1.",
+    "kind": "distribution",
+    "alt": "A histogram of the Sharpe ratios of 1,000 strategies with no skill, each over 10 years, centred on zero. 95% of them land between -0.60 and 0.63. The best of the 1,000, marked, scores 0.96.",
     "params": {
-     "years": 10,
-     "max": 1000,
-     "seed": 3
+     "edges": [
+      -1.06,
+      -0.993,
+      -0.925,
+      -0.858,
+      -0.791,
+      -0.723,
+      -0.656,
+      -0.589,
+      -0.521,
+      -0.454,
+      -0.387,
+      -0.319,
+      -0.252,
+      -0.185,
+      -0.117,
+      -0.05,
+      0.017,
+      0.085,
+      0.152,
+      0.219,
+      0.287,
+      0.354,
+      0.421,
+      0.489,
+      0.556,
+      0.623,
+      0.691,
+      0.758,
+      0.825,
+      0.893,
+      0.96
+     ],
+     "counts": [
+      3,
+      3,
+      0,
+      2,
+      2,
+      9,
+      12,
+      14,
+      26,
+      40,
+      44,
+      43,
+      70,
+      88,
+      72,
+      95,
+      99,
+      85,
+      55,
+      61,
+      43,
+      37,
+      24,
+      27,
+      18,
+      16,
+      4,
+      4,
+      3,
+      1
+     ],
+     "fmt": "num2",
+     "par": 0,
+     "parLabel": "No skill",
+     "band": {
+      "lo": -0.6,
+      "hi": 0.63,
+      "label": "95% of no-skill tries"
+     },
+     "marker": {
+      "value": 0.96,
+      "label": "Best of 1,000",
+      "tone": "warn"
+     },
+     "countLabel": "No-skill strategies",
+     "beatLabel": "Of the no-skill tries it beats",
+     "ends": {
+      "low": "Worse",
+      "high": "Better"
+     }
     },
     "steps": [
      {
-      "caption": "One strategy with no skill: its Sharpe ratio lands near zero.",
-      "n": 1
+      "caption": "1,000 strategies with no skill, 10 years each. Each bar counts how many scored that Sharpe ratio.",
+      "grow": 1
      },
      {
-      "caption": "Ten tries: the best is already noticeably above zero.",
-      "n": 10
+      "caption": "95% of them land between -0.60 and 0.63. That spread is luck alone.",
+      "band": 1
      },
      {
-      "caption": "A hundred tries.",
-      "n": 100
+      "caption": "Keep only the best: the best of 10 scores 0.58, the best of 100 0.69 and the best of all 1,000 0.96.",
+      "marker": 1
      },
      {
-      "caption": "A thousand tries: the best looks excellent, with no skill at all.",
-      "n": 1000
+      "caption": "More tries give luck more chances, so the best one keeps climbing.",
+      "verdict": "The best of 1,000 no-skill tries scores 0.96. That is the score a backtest has to beat.",
+      "tone": "warn"
      }
     ]
    },
@@ -165,7 +247,7 @@
    "body": [
     "The **deflated Sharpe ratio** raises the bar for every extra try. It gives the chance, from 0 to 1, that a strategy's true Sharpe is above the best you would expect from that many unskilled tries. It also allows for fat tails and a short history.",
     "Parity wants at least 0.95 before a strategy counts as beating the market on that test. A strategy that would pass if it were the only idea tried can fail once the other 999 are counted.",
-    "The red line in the picture is a rough guide to what luck alone reaches. The real formula, from Bailey and Lopez de Prado (2014), is more careful, but the idea is the same: move the bar to where luck stops."
+    "In the picture, a strategy scoring 0.80 clears the bar for one try, 0.52, but falls short of where the best of 1,000 no-skill tries lands, 0.87 to 1.23. The real formula, from Bailey and Lopez de Prado (2014), is more careful, but the idea is the same: move the bar to where luck stops."
    ],
    "terms": [
     "deflated-sharpe-ratio",
@@ -173,27 +255,111 @@
     "fat-tails"
    ],
    "visual": {
-    "kind": "maxof",
-    "alt": "The same histogram of no-skill Sharpe ratios with a red dashed line showing about where luck alone reaches. The line moves right as the number of tries grows from 100 to 1,000.",
+    "kind": "distribution",
+    "alt": "The same histogram of 1,000 no-skill Sharpe ratios. A dashed line at 0.52 marks the bar for a single try. A strategy scoring 0.80 clears it. A shaded range from 0.87 to 1.23 shows where the best of 1,000 no-skill tries usually lands, and the strategy falls short of it.",
     "params": {
-     "years": 10,
-     "max": 1000,
-     "seed": 3
+     "edges": [
+      -1.06,
+      -0.993,
+      -0.925,
+      -0.858,
+      -0.791,
+      -0.723,
+      -0.656,
+      -0.589,
+      -0.521,
+      -0.454,
+      -0.387,
+      -0.319,
+      -0.252,
+      -0.185,
+      -0.117,
+      -0.05,
+      0.017,
+      0.085,
+      0.152,
+      0.219,
+      0.287,
+      0.354,
+      0.421,
+      0.489,
+      0.556,
+      0.623,
+      0.691,
+      0.758,
+      0.825,
+      0.893,
+      0.96
+     ],
+     "counts": [
+      3,
+      3,
+      0,
+      2,
+      2,
+      9,
+      12,
+      14,
+      26,
+      40,
+      44,
+      43,
+      70,
+      88,
+      72,
+      95,
+      99,
+      85,
+      55,
+      61,
+      43,
+      37,
+      24,
+      27,
+      18,
+      16,
+      4,
+      4,
+      3,
+      1
+     ],
+     "fmt": "num2",
+     "par": 0.52,
+     "parLabel": "Bar for one try",
+     "band": {
+      "lo": 0.87,
+      "hi": 1.23,
+      "label": "Best of 1,000 by luck"
+     },
+     "marker": {
+      "value": 0.8,
+      "label": "This strategy",
+      "tone": "accent"
+     },
+     "countLabel": "No-skill strategies",
+     "beatLabel": "Of the no-skill tries it beats",
+     "ends": {
+      "low": "Worse",
+      "high": "Better"
+     }
     },
     "steps": [
      {
-      "caption": "The best of 100 no-skill tries.",
-      "n": 100
+      "caption": "The same 1,000 no-skill strategies. The dashed line is the bar if only one idea had been tried.",
+      "grow": 1
      },
      {
-      "caption": "The red line: roughly what the best of 100 reaches by luck. A real edge has to clear it.",
-      "n": 100,
-      "hurdle": 1
+      "caption": "A strategy scores 0.80. Against one try it clears the bar of 0.52.",
+      "marker": 1
      },
      {
-      "caption": "With 1,000 tries the bar moves further right.",
-      "n": 1000,
-      "hurdle": 1
+      "caption": "But 1,000 ideas were tried. The best of 1,000 no-skill tries usually lands between 0.87 and 1.23.",
+      "band": 1
+     },
+     {
+      "caption": "The deflated Sharpe ratio moves the bar to where luck stops, so this strategy no longer passes.",
+      "verdict": "0.80 beats one try but not the best of 1,000. Counting every try, it may be luck.",
+      "tone": "warn"
      }
     ]
    },
@@ -224,6 +390,16 @@
      ],
      "answer": 0,
      "why": "More tries mean luck reaches higher, so the bar rises."
+    },
+    {
+     "q": "In the picture, why does the strategy scoring 0.80 fail once 1,000 tries are counted?",
+     "options": [
+      "Its Sharpe ratio is below zero",
+      "The best of 1,000 no-skill tries usually scores higher than 0.80",
+      "It traded too often"
+     ],
+     "answer": 1,
+     "why": "Luck alone usually produces a best score between 0.87 and 1.23 from 1,000 tries, so 0.80 is not evidence of skill."
     }
    ]
   },
@@ -241,45 +417,101 @@
     "p-value"
    ],
    "visual": {
-    "kind": "bars",
-    "alt": "Bar chart with example numbers. The real strategy has a Sharpe ratio of 0.6. A typical random-date copy scores 0.1. The top 5% of copies reach 0.45, so the real one clears the bar.",
+    "kind": "distribution",
+    "alt": "Example numbers. A histogram of the Sharpe ratios of 500 copies of a strategy moved to random dates, centred near 0.1. 95% of copies score below 0.44. The real strategy, marked, scores 0.60 and beats 100% of the copies.",
     "params": {
-     "labels": [
-      "Real timing",
-      "Typical copy",
-      "Top 5% of copies"
+     "edges": [
+      -0.66,
+      -0.612,
+      -0.564,
+      -0.516,
+      -0.468,
+      -0.42,
+      -0.372,
+      -0.323,
+      -0.275,
+      -0.227,
+      -0.179,
+      -0.131,
+      -0.083,
+      -0.035,
+      0.013,
+      0.061,
+      0.109,
+      0.157,
+      0.205,
+      0.253,
+      0.302,
+      0.35,
+      0.398,
+      0.446,
+      0.494,
+      0.542,
+      0.59
      ],
-     "colors": [
-      "good",
-      "faint",
-      "warn"
+     "counts": [
+      1,
+      0,
+      1,
+      2,
+      2,
+      2,
+      5,
+      7,
+      10,
+      14,
+      26,
+      33,
+      28,
+      41,
+      33,
+      42,
+      39,
+      46,
+      48,
+      39,
+      24,
+      18,
+      17,
+      15,
+      2,
+      5
      ],
-     "axis": false
+     "fmt": "num2",
+     "band": {
+      "lo": -0.66,
+      "hi": 0.44,
+      "label": "95% of copies"
+     },
+     "marker": {
+      "value": 0.6,
+      "label": "Real timing",
+      "tone": "pos"
+     },
+     "countLabel": "Random-date copies",
+     "beatLabel": "Of the copies it beats",
+     "ends": {
+      "low": "Worse",
+      "high": "Better"
+     }
     },
     "steps": [
      {
-      "caption": "Example: the real strategy's Sharpe ratio is 0.6.",
-      "values": [
-       0.6,
-       0,
-       0
-      ]
+      "caption": "Example: 500 copies of the strategy, each moved to random dates. Each bar counts copies with that Sharpe ratio.",
+      "grow": 1
      },
      {
-      "caption": "A typical copy on random dates scores about 0.1.",
-      "values": [
-       0.6,
-       0.1,
-       0
-      ]
+      "caption": "95% of the copies score below 0.44. That is the bar.",
+      "band": 1
      },
      {
-      "caption": "The best 5% of 500 copies reach 0.45. The real one beats them, so timing seems to matter.",
-      "values": [
-       0.6,
-       0.1,
-       0.45
-      ]
+      "caption": "The real strategy, on its real dates, scores 0.60.",
+      "marker": 1
+     },
+     {
+      "caption": "It beats more than 95% of the copies, so its timing seems to matter.",
+      "verdict": "The real timing beats 100% of 500 random-date copies. It passes the placebo test.",
+      "tone": "pos"
      }
     ]
    },

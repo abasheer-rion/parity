@@ -450,7 +450,10 @@ const distribution: Scene = (v, F) => {
     g += line(a, box.y0, a, box.y1, { stroke: F.th.accent, sw: 1 * u, opacity: 0.6, dash: `${r1(3 * u)} ${r1(3 * u)}` });
     g += line(sc.x(hi), box.y0, sc.x(hi), box.y1, { stroke: F.th.accent, sw: 1 * u, opacity: 0.6 * clamp(bandOp * 2 - 1), dash: `${r1(3 * u)} ${r1(3 * u)}` });
     const lab = str(B.label, "95% range");
-    g += text(F, (sc.x(lo) + sc.x(hi)) / 2, box.y0 - 4 * u, `${lab}: ${fm(lo)} to ${fm(hi)}`, { size: 10 * u, fill: F.th.accent, anchor: "middle", weight: 600 });
+    // Centred over the band, but kept inside the chart when the band sits near an edge.
+    const bl = `${lab}: ${fm(lo)} to ${fm(hi)}`, half = textWidth(bl, 10 * u, 600) / 2;
+    const bx = clamp((sc.x(lo) + sc.x(hi)) / 2, box.x0 + half, box.x1 - half);
+    g += text(F, bx, box.y0 - 4 * u, bl, { size: 10 * u, fill: F.th.accent, anchor: "middle", weight: 600 });
     out += group(g, clamp(bandOp * 1.5));
   }
   // Bars rise left to right.
@@ -468,7 +471,9 @@ const distribution: Scene = (v, F) => {
   if (Number.isFinite(par)) {
     const x = sc.x(par);
     out += line(x, box.y0, x, box.y1, { stroke: F.th.par, sw: 1.2 * u, dash: `${r1(4 * u)} ${r1(3 * u)}` });
-    out += text(F, x + 4 * u, box.y0 + 26 * u, str(P.parLabel, "Zero"), { size: 10 * u, fill: F.th.muted });
+    // The label goes on the side of the line away from the marker, so the two never overlap.
+    const left = markOp > 0.01 && Number.isFinite(mv) && mv > par;
+    out += text(F, left ? x - 4 * u : x + 4 * u, box.y0 + 26 * u, str(P.parLabel, "Zero"), { size: 10 * u, fill: F.th.muted, anchor: left ? "end" : "start" });
   }
   // The marker: one result, dropped onto the pile of others.
   let headlineStat: Stat | null = null;
