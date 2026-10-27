@@ -45,7 +45,7 @@ describe("the site address is one constant", () => {
     expect(SIM_ORIGIN).toBe("https://sim.paritytrading.app");
   });
 
-  it("keeps the old domain working while it redirects (DEC-0067)", () => {
+  it("keeps the old domain working while it redirects (DEC-0069)", () => {
     expect(SITE_DOMAINS).toEqual(["paritytrading.app", "endyland.com"]);
     expect(siteDomainOf("trade.paritytrading.app")).toBe("paritytrading.app");
     expect(siteDomainOf("sim.endyland.com")).toBe("endyland.com");

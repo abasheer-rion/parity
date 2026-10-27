@@ -12,7 +12,7 @@ const path = require("node:path");
 const APP_ORIGIN = "app://parity";
 
 /**
- * Domains the website answered on before, kept while their addresses redirect (DEC-0067):
+ * Domains the website answered on before, kept while their addresses redirect (DEC-0069):
  * links pasted from them still open inside the app. Mirrors "legacy" in src/lib/site.json
  * (a test keeps the two equal).
  */

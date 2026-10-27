@@ -55,6 +55,6 @@ export const onRequest = async ({ request, env }: Context): Promise<Response> =>
     audit: (db) => supabaseAudit(db),
     enabled: env.MCP_ENABLED !== "off",
     writeEnabled: env.MCP_WRITE_ENABLED === "on",
-    siteDomain: SITE_DOMAINS, // paritytrading.app, and endyland.com while it redirects (DEC-0067)
+    siteDomain: SITE_DOMAINS, // paritytrading.app, and endyland.com while it redirects (DEC-0069)
     extraOrigins: (env.MCP_EXTRA_ORIGINS ?? "").split(",").map((s) => s.trim()).filter(Boolean),
   });

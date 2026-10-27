@@ -20,7 +20,7 @@ describe("safeNext: allowed", () => {
     // Other paritytrading.app hosts keep their full address.
     ["https://sim.paritytrading.app/sim/", "https://sim.paritytrading.app/sim/"],
     ["https://sim.paritytrading.app/", "https://sim.paritytrading.app/"],
-    // The old domain still counts while its addresses redirect (DEC-0067).
+    // The old domain still counts while its addresses redirect (DEC-0069).
     ["https://parity.endyland.com/x", "https://parity.endyland.com/x"],
     ["https://sim.endyland.com/sim/", "https://sim.endyland.com/sim/"],
   ])("%s on parity -> %s", (raw, want) => {

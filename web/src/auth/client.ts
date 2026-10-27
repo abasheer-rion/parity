@@ -7,7 +7,7 @@ import { desktop } from "../desktop/bridge";
 import { siteDomainOf } from "../lib/meta";
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./config";
 
-// The Parity domain this page is on: paritytrading.app, or endyland.com while it redirects (DEC-0067).
+// The Parity domain this page is on: paritytrading.app, or endyland.com while it redirects (DEC-0069).
 const cookieDomain = () => siteDomainOf(window.location.hostname);
 
 // The desktop app (DEC-0041) loads the live site when online (DEC-0048), and there the

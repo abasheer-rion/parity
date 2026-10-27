@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 67 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 68 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
@@ -36,8 +36,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
+- 2026-10-26 [DEC-0069: Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md)
 - 2026-10-26 [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
-- 2026-10-26 [DEC-0067: One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
 
 ## intent
 
@@ -118,6 +118,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0066 | [Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0068 | [Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md) | accepted | 2026-10-26 | [kpis](TAGS.md#kpis), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0069 | [Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra) |
 
 ## hypothesis
 

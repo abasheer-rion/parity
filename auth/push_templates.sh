@@ -45,7 +45,7 @@ apply, settings, smtp = (os.environ[k] == "1" for k in ("APPLY", "SETTINGS", "SM
 
 # The production address. Every email link starts here ({{ .SiteURL }}).
 SITE_URL = os.environ.get("PARITY_SITE_URL", "https://paritytrading.app")
-# Resend sends from the verified domain paritytrading.app (DEC-0067; before that parity.endyland.com, LOG-0006).
+# Resend sends from the verified domain paritytrading.app (DEC-0069; before that parity.endyland.com, LOG-0006).
 SMTP_FROM = os.environ.get("PARITY_SMTP_FROM", "no-reply@paritytrading.app")
 
 subjects = json.loads((here / "dist" / "subjects.json").read_text())
@@ -58,7 +58,7 @@ if settings:
     body.update({
         "site_url": SITE_URL,
         # Where sign-in may send people back to: the site and every paritytrading.app app
-        # subdomain, the old endyland.com addresses while they redirect (DEC-0067), the
+        # subdomain, the old endyland.com addresses while they redirect (DEC-0069), the
         # pages.dev previews, and local development. Supabase falls back to the site URL
         # for anything else.
         "uri_allow_list": ",".join([

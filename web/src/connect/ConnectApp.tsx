@@ -8,7 +8,7 @@ import { supabase } from "../auth/client";
 import { SkipLink } from "../components/SkipLink";
 import { ORIGIN, siteDomainOf } from "../lib/meta";
 
-// On any Parity host the address to paste is the main one (paritytrading.app/mcp, DEC-0067);
+// On any Parity host the address to paste is the main one (paritytrading.app/mcp, DEC-0069);
 // previews and local dev show their own.
 const MCP_URL = `${siteDomainOf(window.location.hostname) ? ORIGIN : window.location.origin}/mcp`;
 

@@ -45,7 +45,7 @@ export const SPACE_ROOT: Record<Space, string> = { product: "/app/", research: "
 export const IS_SIM = document.documentElement.dataset.space === "sim";
 
 // The addresses come from src/lib/site.json (DEC-0038), so a new domain is one edit there.
-// A page on an old domain (endyland.com, DEC-0067) keeps its links on that domain.
+// A page on an old domain (endyland.com, DEC-0069) keeps its links on that domain.
 const onSiteDomain = () => siteDomainOf(window.location.hostname) !== null;
 const origins = () => originsFor(window.location.hostname);
 

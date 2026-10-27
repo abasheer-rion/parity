@@ -1,5 +1,5 @@
 ---
-id: DEC-0067
+id: DEC-0069
 title: Parity moves to paritytrading.app
 type: decision
 status: accepted

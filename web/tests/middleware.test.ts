@@ -149,7 +149,7 @@ describe("the sim host", () => {
     expect(res.headers.get("Location")).toBe("https://paritytrading.app/research/?x=1");
   });
 
-  it("on the old domain, sends them to the old main address until the redirects take over (DEC-0067)", async () => {
+  it("on the old domain, sends them to the old main address until the redirects take over (DEC-0069)", async () => {
     const res = await run("https://sim.endyland.com/research/?x=1").promise;
     expect(res.status).toBe(302);
     expect(res.headers.get("Location")).toBe("https://parity.endyland.com/research/?x=1");

@@ -118,7 +118,7 @@ test("a live address and its in-app path map onto each other", () => {
   }
 });
 
-test("links on the old endyland.com addresses still open inside the app (DEC-0067)", () => {
+test("links on the old endyland.com addresses still open inside the app (DEC-0069)", () => {
   assert.equal(toAppPath("https://parity.endyland.com/s/fx_carry", O), "/app/#/strategy/fx_carry");
   assert.equal(toAppPath("https://sim.endyland.com/#/fx", O), "/sim/#/fx");
   assert.equal(toAppPath("https://trade.endyland.com/#/alerts", O), "/trade/#/alerts");

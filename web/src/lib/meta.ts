@@ -36,7 +36,7 @@ export const SITE_DOMAIN: string = parentDomain(HOST);
 
 /**
  * Domains Parity answered on before, still served while their addresses redirect to the
- * new one (DEC-0067): each with its main host, where the front page and /app/ lived.
+ * new one (DEC-0069): each with its main host, where the front page and /app/ lived.
  */
 export interface LegacyDomain { domain: string; main: string; until?: string }
 export const LEGACY_DOMAINS: LegacyDomain[] = (site as { legacy?: LegacyDomain[] }).legacy ?? [];

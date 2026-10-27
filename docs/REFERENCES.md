@@ -6833,9 +6833,9 @@ Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-l
 
 Parity. (n.d.). *paritytrading.app*. <https://paritytrading.app>. Accessed 2026-10-26. Verification: not checked.
 
-Note: Parity's own address after DEC-0067.
+Note: Parity's own address after DEC-0069.
 
-Cited in: [DEC-0067](decisions/0067-parity-moves-to-paritytrading-app.md).
+Cited in: [DEC-0069](decisions/0069-parity-moves-to-paritytrading-app.md).
 
 ### url-6c55baa0
 
@@ -7767,7 +7767,7 @@ Cited in: [catalog/events/cyprus-deposit-levy-2013.json](../catalog/events/cypru
 
 Parity MCP server. (n.d.). *paritytrading.app*. <https://paritytrading.app/mcp>. Accessed 2026-10-26. Verification: not checked.
 
-Note: Parity's own address after DEC-0067.
+Note: Parity's own address after DEC-0069.
 
 Cited in: [GDE-0006](guides/0006-connecting-ai-tools-to-parity-with-mcp.md).
 
@@ -8057,9 +8057,9 @@ Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-you
 
 Parity OAuth consent page. (n.d.). *paritytrading.app*. <https://paritytrading.app/oauth/consent>. Accessed 2026-10-26. Verification: not checked.
 
-Note: Parity's own address after DEC-0067.
+Note: Parity's own address after DEC-0069.
 
-Cited in: [DEC-0067](decisions/0067-parity-moves-to-paritytrading-app.md).
+Cited in: [DEC-0069](decisions/0069-parity-moves-to-paritytrading-app.md).
 
 ### url-9aaa265c
 

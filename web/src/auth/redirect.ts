@@ -31,7 +31,7 @@ function originOf(url: URL): string {
 
 /**
  * True for the site's domain and any subdomain of it, over https on the default port, and
- * the same on an old domain still being moved from (endyland.com, DEC-0067).
+ * the same on an old domain still being moved from (endyland.com, DEC-0069).
  */
 export function isSiteHost(url: URL): boolean {
   return url.protocol === "https:" && url.port === "" && siteDomainOf(url.hostname) !== null;

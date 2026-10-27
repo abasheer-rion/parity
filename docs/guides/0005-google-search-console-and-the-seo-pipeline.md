@@ -48,7 +48,7 @@ The key was made once and stored as the GitHub secret `GSC_SERVICE_ACCOUNT_JSON`
 
 Open Search Console (search.google.com, then Search Console) with the personal Gmail and add a property. Pick one:
 
-- **Domain property `paritytrading.app` (preferred).** Parity moved there on 26 October 2026 ([DEC-0067](../decisions/0067-parity-moves-to-paritytrading-app.md)). Google shows a TXT record. Add it in Cloudflare DNS for `paritytrading.app` (type TXT, name `@`). Note the current DNS records first, so the change can be undone. This covers every subdomain.
+- **Domain property `paritytrading.app` (preferred).** Parity moved there on 26 October 2026 ([DEC-0069](../decisions/0069-parity-moves-to-paritytrading-app.md)). Google shows a TXT record. Add it in Cloudflare DNS for `paritytrading.app` (type TXT, name `@`). Note the current DNS records first, so the change can be undone. This covers every subdomain.
 - **URL-prefix property for paritytrading.app** (typed with `https` in front and a slash at the end). Choose the "HTML tag" method and copy only the `content` value. In GitHub, add a repository variable (not a secret) `GSC_VERIFICATION` with that value, then rerun "Deploy dashboard". The build puts the tag in the front page. Click Verify.
 
 ### 4. Let the service account in (owner)
@@ -74,5 +74,5 @@ In Bing Webmaster Tools, choose "Import from Google Search Console" after step 3
 ## Referenced by
 
 - [DEC-0023: Public pages search engines can read, and a pipeline that keeps them fresh](../decisions/0023-public-pages-search-engines-can-read-and-a-pipeline-that-keeps-them-fresh.md)
-- [DEC-0067: Parity moves to paritytrading.app](../decisions/0067-parity-moves-to-paritytrading-app.md)
+- [DEC-0069: Parity moves to paritytrading.app](../decisions/0069-parity-moves-to-paritytrading-app.md)
 <!-- backlinks:end -->

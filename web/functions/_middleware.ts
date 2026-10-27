@@ -34,7 +34,7 @@ const PROTECTED = [/^\/app(\/|$)/, /^\/research(\/|$)/, /^\/sim(\/|$)/, /^\/trad
 const SUBSITES: Record<string, string> = { sim: "/sim/", trade: "/trade/", academy: "/academy/", lab: "/lab/" };
 const SUBSITE_PUBLIC = /^\/(login|signup|reset|verify|assets|brand)(\/|$)|^\/(favicon|apple-touch-icon|icon-|manifest)/;
 /** The main address on the request's own Parity domain: paritytrading.app (site.json,
- *  DEC-0038), or parity.endyland.com for a request still on the old domain (DEC-0067). */
+ *  DEC-0038), or parity.endyland.com for a request still on the old domain (DEC-0069). */
 export function mainHost(hostname: string): string {
   return mainHostFor(siteDomainOf(hostname) ?? SITE_DOMAIN);
 }

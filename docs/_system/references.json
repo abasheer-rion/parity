@@ -41167,13 +41167,13 @@
       "accessed": "2026-10-26",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0067-parity-moves-to-paritytrading-app.md"
+        "docs/decisions/0069-parity-moves-to-paritytrading-app.md"
       ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false
       },
-      "note": "Parity's own address after DEC-0067"
+      "note": "Parity's own address after DEC-0069"
     },
     {
       "key": "url-8e76d327",
@@ -41195,7 +41195,7 @@
         "source": "repo",
         "doi_explicit": false
       },
-      "note": "Parity's own address after DEC-0067"
+      "note": "Parity's own address after DEC-0069"
     },
     {
       "key": "url-99d6ebbc",
@@ -41211,13 +41211,13 @@
       "accessed": "2026-10-26",
       "verification": "not checked",
       "used_in": [
-        "docs/decisions/0067-parity-moves-to-paritytrading-app.md"
+        "docs/decisions/0069-parity-moves-to-paritytrading-app.md"
       ],
       "metadata": {
         "source": "repo",
         "doi_explicit": false
       },
-      "note": "Parity's own address after DEC-0067"
+      "note": "Parity's own address after DEC-0069"
     }
   ]
 }
