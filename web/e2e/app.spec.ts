@@ -285,24 +285,27 @@ test.describe("practice positions", () => {
 });
 
 test.describe("getting started", () => {
-  test("the checklist hides and comes back from settings", async ({ page }) => {
+  test("the setup list opens from the ring at the top right and hides", async ({ page }) => {
     await open(page, "/app/#/");
     await settled(page);
+    const ring = page.locator(".setup-btn");
+    await ring.click();
     const list = page.getByRole("region", { name: "Getting started" });
     await expect(list).toBeVisible();
-    await list.getByRole("button", { name: "Hide the checklist" }).click();
-    await expect(list).toHaveCount(0);
+    await list.getByRole("button", { name: "Hide the setup list" }).click();
+    await expect(ring).toHaveCount(0);
   });
 
   test("Add wallet opens a dialog that Escape closes", async ({ page }) => {
     await open(page, "/app/#/");
     await settled(page);
+    await page.locator(".setup-btn").click();
     await page.getByRole("button", { name: "Add wallet" }).click();
-    const dialog = page.getByRole("dialog");
+    const dialog = page.getByRole("dialog", { name: /crypto wallet/ });
     await expect(dialog).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-    await expect(page.getByRole("button", { name: "Add wallet" })).toBeFocused();
+    await expect(page.locator(".setup-btn")).toBeFocused();
   });
 });
 

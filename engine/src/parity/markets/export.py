@@ -21,7 +21,7 @@ from pathlib import Path
 import pandas as pd
 
 from ..data.store import DEFAULT_DIR
-from . import private_export, sources, stats, store, themes
+from . import heatmap, private_export, sources, stats, store, themes
 
 SHOW_FILING_DAYS = 90
 FILING_KIND = {
@@ -201,6 +201,18 @@ def discover_doc(root: Path, etfs: dict | None = None) -> dict:
             "sources": source_list(["sec-filings", "sec-funds", "coingecko-trending"], root)}
 
 
+def heatmap_export(root: Path) -> dict:
+    """S&P 500 and Nasdaq-100 members sized by SEC public float (DEC-0075)."""
+    members = store.load("index_members", root)
+    floats = store.load("public_float", root)
+    tick = store.load("sec_tickers", root)
+    cik = dict(zip(tick["ticker"], tick["cik"], strict=True)) if not tick.empty else {}
+    doc = heatmap.heatmap_doc(members, floats, cik)
+    doc["fetched_at"] = store.state(root).get("sec-public-float", {}).get("ok_at")
+    doc["sources"] = source_list(["wiki-index-members", "sec-public-float"], root)
+    return doc
+
+
 def build(out: Path, root: Path = DEFAULT_DIR, include_ask: bool = True) -> dict:
     """Write the four files. include_ask=False leaves out sources whose display rights
     are still an open question (Hyperliquid), writing an empty perps file instead."""
@@ -213,7 +225,8 @@ def build(out: Path, root: Path = DEFAULT_DIR, include_ask: bool = True) -> dict
         perps = {**perps, "perps": [], "withheld": True}
     docs = {"crypto": crypto_doc(root), "perps": perps, "etfs": etfs,
             "discover": discover_doc(root, etfs),
-            "private": private_export.private_doc(root, source_list)}
+            "private": private_export.private_doc(root, source_list),
+            "heatmap": heatmap_export(root)}
     for name, doc in docs.items():
         body = _sanitize({"generated_at": stamp, **doc})
         (out / f"{name}.json").write_text(json.dumps(body, separators=(",", ":"),
@@ -223,4 +236,5 @@ def build(out: Path, root: Path = DEFAULT_DIR, include_ask: bool = True) -> dict
             "trending": len(docs["discover"]["trending_coins"]),
             "private_series": len(docs["private"]["series"]),
             "formd_quarters": len((docs["private"]["formd"] or {}).get("quarters", [])),
-            "bdcs": len((docs["private"]["bdc"] or {}).get("funds", []))}
+            "bdcs": len((docs["private"]["bdc"] or {}).get("funds", [])),
+            "heatmap": sum(len(i["rows"]) for i in docs["heatmap"]["indexes"].values())}

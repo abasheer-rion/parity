@@ -3,7 +3,9 @@
 // asked. Shows the spread of end values, the worst falls and how long they took to make
 // back, side by side, and replays the paths race-style. Preset mixes also show the sims
 // service's own run on 5,000 paths (stress.json). Reshuffled history, not a forecast.
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { recordRun } from "../../lib/activity";
+import { simUrl } from "../../lib/space";
 import { CRASHES, loadStress, PRESET_MIXES, simulate, summarise, weeklySimple, type StressDoc, type StressRun } from "../../lib/stress";
 import type { WorldData } from "../../lib/world";
 import { colorAt } from "../../pages/sim/play/data";
@@ -73,6 +75,12 @@ function Stress({ data }: { data: WorldData }) {
   }, [data, mixes.map((m) => JSON.stringify(m.weights)).join("|"), weeks, seed, crashDef, crashAt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const ok = result && "runs" in result ? result : null;
+  // List the run on the product home under "Sims running now" (DEC-0075).
+  const runKey = ok ? `${mixes.map((m) => m.label).join(", ")}|${weeks}|${crash}|${at}` : "";
+  useEffect(() => {
+    if (!runKey) return;
+    recordRun({ id: "stress", kind: "stress", label: "Stress test", detail: `${mixes.map((m) => m.label).join(", ")}: 2,000 paths over ${Math.round(weeks / 52)} years`, href: simUrl("world") });
+  }, [runKey]); // eslint-disable-line react-hooks/exhaustive-deps
   const runs: StressRun[] = ok ? ok.runs : [];
   const frames = runs[0]?.bands.weeks ?? [0];
   const pb = usePlayback(frames.length, { "1x": 8, "4x": 24, "16x": 90 }, `${weeks}-${crash}-${at}-${ids.join()}-${seed}`);

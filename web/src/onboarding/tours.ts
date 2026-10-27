@@ -23,11 +23,11 @@ export const TOURS: Record<Area, { label: string; steps: GuidedStep[] }> = {
   home: {
     label: "Home tour",
     steps: [
-      { id: "checklist", target: "[data-tour='checklist']", title: "Getting started", body: "A few first things to try. Each one ticks itself when you do it. Hide the list any time and bring it back from Account." },
+      { id: "checklist", target: "[data-tour='setup']", title: "Getting started", body: "Your setup list lives in this ring. It fills as you go, and each item ticks itself when you do it." },
       { id: "search", target: ".side-search", title: "Search or ask", body: `Find a page, a strategy or a word. Press ${MOD} K from anywhere.` },
       { id: "verify", target: ".side-nav a[href='#/verify']", title: "Verify", body: "Check a trade log or a bot's claims: profit per trade, worst loss, and whether the result could be luck." },
       { id: "apps", target: byText(".side-nav a", "Trade"), title: "Trade, Workbench and Academy", body: "Each opens as a full-screen app in a new tab. Trade uses a demo account with virtual money." },
-      { id: "ask", target: ".phome-hero .ask", title: "Ask a question", body: "Type a question in plain words. Parity searches its pages, strategies and glossary." },
+      { id: "ask", target: ".h2-hero .ask", title: "Ask a question", body: "Type a question in plain words. Parity searches its pages, strategies and glossary." },
       { id: "menu", target: ".menu-fab", title: "Menu", body: "Every page, search and your account are in here." },
       { id: "account", target: ".account-row", title: "Your account", body: "Settings, two-step sign-in, your wallets and the tours. Turn tours back on here any time." },
     ],

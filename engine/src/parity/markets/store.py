@@ -36,6 +36,9 @@ POLICY: dict[str, tuple[str, list[str], int | None]] = {
     # Private markets (DEC-0029). Form D counts replace whole quarters; BDC NAVs replace all.
     "formd": ("quarters", ["quarter"], None),
     "bdc_nav": ("replace", [], None),
+    "index_members": ("replace", [], None),
+    "public_float": ("replace", [], None),
+    "sec_tickers": ("replace", [], None),
 }
 TIME_COL = {"perps_snapshots": "fetched_at", "perps_funding": "time", "fund_filings": "fetched_at"}
 LIST_COLS = ("tickers", "themes")
