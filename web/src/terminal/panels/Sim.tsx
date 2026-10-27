@@ -75,7 +75,7 @@ export function BotsPanel() {
   useAsOf(ix.status === "ok" ? ix.data.data_through : null);
   return (
     <div className="term-scroll term-sim">
-      <div className="term-honest-strip">Hypothetical and educational. Not investment advice.</div>
+      <div className="term-honest-strip">Hypothetical and educational.</div>
       <div className="sw2 term-sw"><BotBattle /></div>
     </div>
   );

@@ -162,6 +162,8 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
             </ul>
           </section>
         )}
+
+        <p className="page-disclaimer">Research and education only. Not investment advice. Past results do not predict future returns.</p>
       </div>
 
       <aside className="rh-side">

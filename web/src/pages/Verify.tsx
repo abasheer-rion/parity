@@ -12,7 +12,7 @@ import { closest, extract, searchVerdict, type Candidate, type Match } from "../
 import { build, defaultMapping, describeParsed, FIELDS, parseText } from "../lib/verify/parse";
 import { loadPrices } from "../lib/verify/prices";
 import { FORMAT_LABEL, type Answers, type FormatId, type InputKind, type Parsed } from "../lib/verify/types";
-import { Button, Checkbox, Disclosure, EmptyState, Input, SearchInput, Segmented, Select, SkeletonTable, useResource } from "../ui";
+import { Button, Checkbox, ChoiceCards, Disclosure, EmptyState, Input, SearchInput, Segmented, Select, SkeletonTable, useResource, type Choice } from "../ui";
 import { Num, ResultView, pct } from "./verify/Result";
 import "./verify/verify.css";
 import { Assistant } from "../assistant/Mount";
@@ -22,6 +22,11 @@ import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 type Mode = "file" | "describe" | "strategy";
 const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
+const MODES: Choice<Mode>[] = [
+  { value: "file", title: "Upload a file", body: "A trade list or equity curve from MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
+  { value: "describe", title: "Describe a bot", body: "Say in your own words what it trades and what it claims.", icon: "quote" },
+  { value: "strategy", title: "Pick a strategy", body: "Check one of the strategies we have already tested.", icon: "catalog" },
+];
 
 export interface FileMeta { parsed: Parsed; sha256: string; name: string }
 
@@ -44,8 +49,7 @@ export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) =
           using prices that were not yet known.
         </p>
       </div>
-      <Segmented<Mode> label="What to check" value={mode} onChange={change}
-        options={[["file", "Upload a file"], ["describe", "Describe a bot"], ["strategy", "Pick a strategy"]]} />
+      <ChoiceCards<Mode> label="What to check" value={mode} onChange={change} options={MODES} />
       <div className="vf-input">
         {mode === "file" && <FileInput onResult={(r, file) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file }); }} />}
         {mode === "describe" && <DescribeInput onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}

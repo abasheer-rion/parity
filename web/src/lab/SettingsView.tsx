@@ -42,6 +42,7 @@ export function SettingsView({ settings, set }: { settings: Settings; set: (p: P
         </section>
         <section className="lb-box" aria-labelledby="ls-links">
           <h2 id="ls-links" className="lb-sub">Links</h2>
+          <p className="lb-note">Research and education only. Not investment advice. Backtests do not predict returns.</p>
           <nav className="lb-links" aria-label="Links">
             <a href={productUrl("#/strategies")} target="_blank" rel="noopener">All strategies</a>
             <a href={researchUrl("#/ledger")} target="_blank" rel="noopener">Official record</a>

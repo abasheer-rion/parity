@@ -201,8 +201,8 @@ function LabShell() {
         {!mobile && (
           <nav className="lb-rail" aria-label="Workbench">
             {VIEWS.map((v, i) => (
-              <a key={v.id} href={hrefOf(v.id)} className={`lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
-                title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+              <a key={v.id} href={hrefOf(v.id)} className={`ui-rail-i ui-tipped lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
+                data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
             ))}
@@ -214,11 +214,6 @@ function LabShell() {
           </ErrorBoundary>
         </main>
       </div>
-
-      <footer className="lb-legal">
-        <span>Research and education only. Not investment advice. Backtests do not predict returns.</span>
-        <span className="lb-legal-r">{needsRun && report ? `Run ${date(report.generated_at)}` : ""}</span>
-      </footer>
 
       {mobile && (
         <nav className="lb-tabs" aria-label="Workbench">

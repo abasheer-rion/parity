@@ -3,13 +3,12 @@ import { AppGuard } from "./auth";
 import { NotFound } from "./components/NotFound";
 import { Shell } from "./components/Shell";
 import { listBatches, loadReport, loadSearch, source, type BatchInfo } from "./lib/data";
-import { date, REPO_URL } from "./lib/format";
+import { date } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
 import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
 import { Button, ErrorBoundary, lazyPage, PageSkeleton, preload, Toaster } from "./ui";
 import { loadDocIndex } from "./lib/docs";
-import { LegalLinks } from "./legal/LegalLinks";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { setStoreUser } from "./lib/userStore";
 import { syncConsent } from "./lib/personalize/api";
@@ -321,12 +320,6 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
             route === "watchlist" ? <Watchlist report={report} /> :
             SPACE === "research" ? <ResearchHome report={report} /> :
             <ProductHome report={report} email={email} />}
-          <footer className="muted small">
-            {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
-            {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
-            Research and education only. Not investment advice.
-            <LegalLinks className="start app-legal" />
-          </footer>
         </div>
       )}
       </Suspense>
