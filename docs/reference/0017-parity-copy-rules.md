@@ -71,6 +71,7 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](../decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](../decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
+- [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](../decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](../decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
 - [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](../decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)

@@ -1,0 +1,11 @@
+/* The warnings banner (StatusBanner.tsx). web/public/status-banner.js injects the same rules
+   on the plain HTML pages. The colours come from LEVELS in src/lib/statusBanner.ts, set inline:
+   fixed text on its own background, at least 4.5:1 (DEC-0061). */
+.psb { display: flex; flex-direction: column; gap: 8px; width: calc(100% - 32px); max-width: 1120px; margin: 12px auto; }
+.psb[hidden] { display: none; }
+.psb-item { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 14px; border-radius: 12px; border: 1px solid; font: inherit; font-size: var(--type-md); line-height: 1.5; }
+.psb-text { flex: 1 1 240px; min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.psb-text a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.psb-x { flex: none; min-height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-size: var(--type-sm); cursor: pointer; }
+.psb-x:focus-visible, .psb-text a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+html.auth-open .psb { visibility: hidden; }

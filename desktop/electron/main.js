@@ -27,6 +27,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const routes = require("./routes");
+const help = require("./help");
 const TOKENS = require("./tokens");
 const SECTIONS = require("./sections");
 const settingsStore = require("./settings");
@@ -778,7 +779,9 @@ function buildMenu() {
         { label: "Terms of service", click: () => openPath("/legal/terms/") },
         { label: "Regulatory status", click: () => openPath("/legal/regulatory/") },
         { type: "separator" },
-        { label: `Open ${new URL(ORIGIN).host} in the browser`, click: () => shell.openExternal(ORIGIN) },
+        { label: "What's new", submenu: help.updateLinks(ORIGIN).map(({ label, url }) => ({ label, click: () => shell.openExternal(url) })) },
+        { type: "separator" },
+        { label: help.siteLabel(ORIGIN), click: () => shell.openExternal(ORIGIN) },
         { label: "Download Parity for another computer", click: () => shell.openExternal(`${ORIGIN}/download/`) },
         { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },
       ],

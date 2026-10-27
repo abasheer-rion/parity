@@ -156,12 +156,13 @@ export interface PageMeta {
 export const PRIVATE = "noindex, nofollow";
 
 /** The tags for one AI app guide under /connect/<app>/, with a breadcrumb and an article. */
+const GUIDES_PUBLISHED = "2026-10-27";
 function guidePage(app: string, title: string, description: string): PageMeta {
   const path = `/connect/${app}/`;
   return {
     title: `${title.replace(/ to Parity$/, "")} · Parity`, description, path, image: "connect", type: "article",
     ld: [
-      { "@type": "TechArticle", "@id": `${abs(path)}#article`, headline: title, description, url: abs(path), inLanguage: "en", author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } },
+      { "@type": "TechArticle", "@id": `${abs(path)}#article`, headline: title, description, url: abs(path), inLanguage: "en", datePublished: GUIDES_PUBLISHED, dateModified: GUIDES_PUBLISHED, author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } },
       { "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: "Parity", item: abs("/") },
         { "@type": "ListItem", position: 2, name: "Connect your AI", item: abs("/connect/") },
@@ -186,7 +187,7 @@ export const PAGES: Record<string, PageMeta> = {
   // Supabase Auth's OAuth server sends people to, and the OpenRouter sign-in return page.
   "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "connect" },
   // One how-to page per AI app (DEC-0051), plain HTML so it reads without the app's script.
-  "connect/claude/index.html": guidePage("claude", "Connect Claude to Parity", "Add Parity to Claude on the web, Claude Desktop and Claude Code: setup steps, the tools Claude can use, privacy, how to disconnect and fixes for common problems."),
+  "connect/claude/index.html": guidePage("claude", "Connect Claude to Parity", "Add Parity to Claude on the web, Claude Desktop and Claude Code: setup steps, the tools Claude can use, privacy, how to disconnect and fixes for common issues."),
   "connect/chatgpt/index.html": guidePage("chatgpt", "Connect ChatGPT to Parity", "Add Parity to ChatGPT as an app with developer mode: setup steps, the tools ChatGPT can use, privacy, how to disconnect and fixes for common problems."),
   "connect/gemini/index.html": guidePage("gemini", "Connect Gemini to Parity", "Add Parity to Gemini CLI: the settings to paste, signing in, the tools Gemini can use, privacy, how to disconnect and fixes for common problems."),
   "oauth/consent/index.html": { title: "Allow an AI app · Parity", description: "Choose whether an AI app may use Parity as you.", path: "/oauth/consent/", image: "login", robots: PRIVATE },

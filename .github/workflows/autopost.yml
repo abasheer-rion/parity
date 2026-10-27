@@ -1,0 +1,117 @@
+# Automatic newsroom posts (DEC-0073): scripts/autopost/ builds posts from Parity's own data,
+# checks them (caps, duplicates, length, every number against its data, the newsroom rules) and
+# commits the ones that pass straight to main, then starts "Deploy dashboard", because a push
+# made with GITHUB_TOKEN does not start other workflows.
+#   market_week       Saturdays
+#   news_commentary   every day; at most two a week (content/seo/automation.toml)
+#   press_release     Fridays
+# Stop it: repository variable SEO_AUTOMATION = off (or a list of jobs), or a switch in
+# content/seo/automation.toml. Every run logs what it did in the summary and the artifact.
+# Secrets (optional): PARITY_ANTHROPIC_API_KEY or PARITY_OPENAI_API_KEY, Parity-owned keys for
+# model redrafts of news commentary. Without them, posts come from templates.
+name: Auto posts
+
+on:
+  schedule:
+    - cron: "40 9 * * 6"   # Saturdays 09:40 UTC: market week
+    - cron: "10 13 * * *"  # daily 13:10 UTC: news commentary
+    - cron: "20 15 * * 5"  # Fridays 15:20 UTC: press release
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: "Comma list: market_week, news_commentary, press_release"
+        default: "market_week,news_commentary,press_release"
+      dry_run:
+        description: "Build and check, but write nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: autopost
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SEO_AUTOMATION: ${{ vars.SEO_AUTOMATION }}
+      AUTOMATION_LOG: automation-log/autopost.jsonl
+      PARITY_ANTHROPIC_API_KEY: ${{ secrets.PARITY_ANTHROPIC_API_KEY }}
+      PARITY_OPENAI_API_KEY: ${{ secrets.PARITY_OPENAI_API_KEY }}
+      EVENT: ${{ github.event_name }}
+      SCHEDULE: ${{ github.event.schedule }}
+      INPUT_JOBS: ${{ inputs.jobs }}
+      DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Which jobs, and which are switched on
+        id: gate
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ]; then jobs="$INPUT_JOBS"
+          elif [ "$SCHEDULE" = "40 9 * * 6" ]; then jobs=market_week
+          elif [ "$SCHEDULE" = "20 15 * * 5" ]; then jobs=press_release
+          else jobs=news_commentary; fi
+          on=""
+          for j in $(printf '%s' "$jobs" | tr -c 'a-z_,' ' ' | tr ',' ' '); do
+            if python3 scripts/seo/automation.py check "$j"; then on="$on,$j"; fi
+          done
+          on="${on#,}"
+          echo "jobs=$on" >> "$GITHUB_OUTPUT"
+          case "$on" in ""|press_release) echo "data=no" >> "$GITHUB_OUTPUT";; *) echo "data=yes" >> "$GITHUB_OUTPUT";; esac
+      - name: Restore data cache (prices and news)
+        if: steps.gate.outputs.data == 'yes'
+        uses: actions/cache/restore@v6
+        with:
+          path: engine/data
+          key: data-none
+          restore-keys: data-
+      - name: Export our data (terminal series and news impact)
+        if: steps.gate.outputs.data == 'yes'
+        continue-on-error: true  # a job with no data logs "nothing to post"
+        run: |
+          pip install -q -e engine
+          parity fetch
+          mkdir -p site-data
+          parity news export site-data
+          parity markets export site-data || true
+          parity terminal export --out site-data --markets site-data
+      - name: Build, check and write posts
+        if: steps.gate.outputs.jobs != ''
+        env:
+          JOBS: ${{ steps.gate.outputs.jobs }}
+        run: |
+          flag=""; [ "$DRY_RUN" = "true" ] && flag="--dry-run"
+          python3 -m scripts.autopost run --jobs "$JOBS" --data site-data $flag
+          python3 scripts/newsroom/check.py
+      - name: Commit to main and deploy
+        if: steps.gate.outputs.jobs != '' && env.DRY_RUN != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOBS: ${{ steps.gate.outputs.jobs }}
+        run: |
+          git add content/newsroom
+          if git diff --cached --quiet; then echo "No new posts." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data(newsroom): automatic posts for $JOBS"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          gh workflow run deploy-web.yml --ref main
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: automation-log
+          path: automation-log/
+          if-no-files-found: ignore
+          retention-days: 90
