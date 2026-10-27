@@ -21,10 +21,15 @@ const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 /** One frame of a picture. The markup is drawn by our own code, and still goes through DOMPurify. */
 export function Frame({ visual, s }: { visual: Visual; s: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const drawn = useRef("");
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="ac-svg" aria-hidden="true" focusable="false">${renderScene(visual, s)}</svg>`;
+    // Redraw only when the picture changed: a parent re-rendering with an equal visual must
+    // not touch the page, or a still frame counts as moving content (WCAG 2.2.2).
+    if (svg === drawn.current && el.firstChild) return;
+    drawn.current = svg;
     el.replaceChildren(DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true }, RETURN_DOM_FRAGMENT: true }));
   }, [visual, s]);
   return <div ref={ref} className="ac-frame" />;
