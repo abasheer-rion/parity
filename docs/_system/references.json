@@ -41218,6 +41218,270 @@
         "doi_explicit": false
       },
       "note": "Parity's own address after DEC-0069"
+    },
+    {
+      "key": "davolio2002",
+      "type": "paper",
+      "authors": [
+        "D'Avolio, Gene"
+      ],
+      "year": 2002,
+      "title": "The market for borrowing stock",
+      "venue": "Journal of Financial Economics 66(2-3), 271-306",
+      "doi": "10.1016/s0304-405x(02)00206-4",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/S0304-405X(02)00206-4",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "do2012",
+      "type": "paper",
+      "authors": [
+        "Do, Binh",
+        "Faff, Robert"
+      ],
+      "year": 2012,
+      "title": "ARE PAIRS TRADING PROFITS ROBUST TO TRADING COSTS?",
+      "venue": "Journal of Financial Research 35(2), 261-287",
+      "doi": "10.1111/j.1475-6803.2012.01317.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1475-6803.2012.01317.x",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "elliott2005",
+      "type": "paper",
+      "authors": [
+        "Elliott, Robert J.",
+        "Van Der Hoek *, John",
+        "Malcolm, William P."
+      ],
+      "year": 2005,
+      "title": "Pairs trading",
+      "venue": "Quantitative Finance 5(3), 271-276",
+      "doi": "10.1080/14697680500149370",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/14697680500149370",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "engelberg2018",
+      "type": "paper",
+      "authors": [
+        "Engelberg, Joseph E.",
+        "Reed, Adam V.",
+        "Ringgenberg, Matthew C."
+      ],
+      "year": 2018,
+      "title": "Short-Selling Risk",
+      "venue": "The Journal of Finance 73(2), 755-786",
+      "doi": "10.1111/jofi.12601",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12601",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "engle1987",
+      "type": "paper",
+      "authors": [
+        "Engle, Robert F.",
+        "Granger, C. W. J."
+      ],
+      "year": 1987,
+      "title": "Co-Integration and Error Correction: Representation, Estimation, and Testing",
+      "venue": "Econometrica 55(2), 251",
+      "doi": "10.2307/1913236",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/1913236",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "johansen1991",
+      "type": "paper",
+      "authors": [
+        "Johansen, Soren"
+      ],
+      "year": 1991,
+      "title": "Estimation and Hypothesis Testing of Cointegration Vectors in Gaussian Vector Autoregressive Models",
+      "venue": "Econometrica 59(6), 1551",
+      "doi": "10.2307/2938278",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2938278",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "krauss2016",
+      "type": "paper",
+      "authors": [
+        "Krauss, Christopher"
+      ],
+      "year": 2016,
+      "title": "STATISTICAL ARBITRAGE PAIRS TRADING STRATEGIES: REVIEW AND OUTLOOK",
+      "venue": "Journal of Economic Surveys 31(2), 513-545",
+      "doi": "10.1111/joes.12153",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/joes.12153",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "mackinnon1999",
+      "type": "paper",
+      "authors": [
+        "MacKinnon, James G.",
+        "Haug, Alfred A.",
+        "Michelis, Leo"
+      ],
+      "year": 1999,
+      "title": "Numerical distribution functions of likelihood ratio tests for cointegration",
+      "venue": "Journal of Applied Econometrics 14(5), 563-577",
+      "doi": "10.1002/(sici)1099-1255(199909/10)14:5<563::aid-jae530>3.0.co;2-r",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/(SICI)1099-1255(199909/10)14:5%3C563::AID-JAE530%3E3.0.CO;2-R",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "url-12fa0e62",
+      "type": "book",
+      "authors": [
+        "Vidyamurthy, Ganapathy"
+      ],
+      "year": 2004,
+      "title": "Pairs Trading: Quantitative Methods and Analysis",
+      "venue": "Wiley",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.wiley.com/en-us/Pairs+Trading%3A+Quantitative+Methods+and+Analysis-p-9780471460671",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3465fab3",
+      "type": "preprint",
+      "authors": [
+        "MacKinnon, James G."
+      ],
+      "year": 2010,
+      "title": "Critical Values for Cointegration Tests",
+      "venue": "Queen's Economics Department Working Paper 1227",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c7f4fb7f",
+      "type": "paper",
+      "authors": [
+        "MacKinnon, James G.",
+        "Haug, Alfred A.",
+        "Michelis, Leo"
+      ],
+      "year": 1999,
+      "title": "Numerical distribution functions of likelihood ratio tests for cointegration",
+      "venue": "Journal of Applied Econometrics 14(5), 563-577",
+      "doi": "10.1002/(sici)1099-1255(199909/10)14:5",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/(SICI)1099-1255(199909/10)14:5",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref-not-found",
+        "doi_explicit": true,
+        "crossref": "not found"
+      }
     }
   ]
 }

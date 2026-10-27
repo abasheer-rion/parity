@@ -7,10 +7,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 68 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 69 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 26 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-26 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
 - 2026-10-26 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
 - 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
 - 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-26 [DEC-0069: Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md)
-- 2026-10-26 [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
+- 2026-10-26 [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
 
 ## intent
 
@@ -119,6 +119,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0068 | [Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md) | accepted | 2026-10-26 | [kpis](TAGS.md#kpis), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0069 | [Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra) |
+| DEC-0070 | [Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## hypothesis
 
@@ -166,6 +167,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0025 | [Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md) | current | 2026-10-25 | [competitors](TAGS.md#competitors), [news](TAGS.md#news), [private-markets](TAGS.md#private-markets), [strategy](TAGS.md#strategy) |
 | RES-0026 | [Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 | RES-0027 | [How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md) | current | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| RES-0028 | [Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md) | current | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## guide
 

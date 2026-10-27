@@ -141,6 +141,12 @@ PROVIDERS: list[Provider] = [
     Provider("binanceus-live", "Binance.US trades, books and overview", "No public display",
              "https://www.binance.us/terms-of-use", feed="real-time", live="team",
              note="team only"),
+    Provider("alpaca", "Alpaca Market Data, daily US stock and ETF bars since 2016",
+             "The account holder's own use only; no redistribution. Research only here: "
+             "values feed statistics, never a page", "https://alpaca.markets/data",
+             key_env="ALPACA_KEY_ID", key_required=True,
+             cost="free (Basic plan: history since 2016, 200 calls a minute)",
+             note="pairs study (DEC-0070); also needs ALPACA_SECRET_KEY"),
     Provider("alpaca-live", "Alpaca Market Data, US stocks and ETFs (IEX free, SIP paid)",
              "The account holder's own subscription, team only", "https://alpaca.markets/data",
              key_env="ALPACA_KEY_ID", key_required=True, feed="real-time", live="team",

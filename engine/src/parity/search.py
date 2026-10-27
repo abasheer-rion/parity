@@ -53,6 +53,8 @@ UNIVERSES = {
 # Wider universes from the full catalog. New names only: an existing name must keep its
 # assets, or old spec ids would point at different strategies. Every asset here is a
 # daily, tradable price; monthly averages, spot gas and copper are never held.
+#: The pairs space's prices (DEC-0070), French's 49 industries.
+PAIRS_KEYS = [f"ind49.{k}" for k in catalog.INDUSTRIES49 if k != "Other"]
 MORE_UNIVERSES = {
     "xg10": ("G10 via ECB rates", S.XG10), "xwide": ("27 currencies", S.XWIDE),
     "bonds": ("Treasuries 2y 5y 10y", ["bond.TR2", "bond.TR5", "bond.TR10"]),
@@ -229,8 +231,9 @@ def _gate_series() -> list[str]:
     correctly, with weekly, monthly and quarterly data moved to the day they come out.
     Left out: real exchange rates (monthly averages with no publication lag set), the
     Yahoo cross-check, the lagged French market file, raw ECB crosses (the same
-    information as xfx.*) and futures positions in contracts (the percent is kept)."""
-    skip = ("reer.", "ecb.", "xfx.", "eq.SPY", "eq.US_MKT")
+    information as xfx.*), futures positions in contracts (the percent is kept), and the
+    pairs study's prices (ind49.*, stk.*), which the pairs search draws on (DEC-0070)."""
+    skip = ("reer.", "ecb.", "xfx.", "eq.SPY", "eq.US_MKT", "ind49.", "stk.")
     keys = []
     for key in catalog.CATALOG:
         if key.startswith(skip) or (key.startswith("cot.") and not key.endswith("_PCT")):
@@ -365,11 +368,48 @@ def _arrival(r: random.Random, ctx: Context | None = None) -> dict:
 
 
 #: US stocks held all the time: the base the arrival battery and sampler switch on and off.
+# --- the pairs space (DEC-0070) ----------------------------------------------------
+# Pair books on French's 49 industries: which method, which pairs it may choose from,
+# formation and trading windows, entry, exit and stop. Like arrivals, this sampler is
+# added in `run_batch`, outside SAMPLERS, so the original space draws what it always
+# drew. Its budget: at most PAIRS_BUDGET of each batch, at weight PAIRS_WEIGHT.
+PAIRS_WEIGHT = 2
+PAIRS_BUDGET = 0.15
+PAIR_POOLS = {"linked": "25 linked industry pairs", "grouped": "industry pairs in one sector"}
+
+
+def _pairsbook(r: random.Random, ctx: Context | None = None) -> dict:
+    g = _grid_for(ctx)
+    method = r.choice(["distance", "cointegration", "cointegration", "kalman", "pca"])
+    if method == "pca":
+        return {"kind": "pairsbook", "method": "pca",
+                "factors": r.choice([1, 2, 3, 4, 5, 8]),
+                "corr_window": r.choice(g([126, 252, 504], geo=True, lo=63, hi=756)),
+                "ou_window": r.choice(g([40, 60, 90], geo=True, lo=20, hi=126)),
+                "entry": r.choice(g([1.0, 1.25, 1.5, 2.0], integer=False, lo=0.5, hi=3.0)),
+                "exit": r.choice([0.25, 0.5, 0.75]), "hl_max": r.choice([10, 20, 30]),
+                "refit": r.choice([1, 5, 10])}
+    spec = {"kind": "pairsbook", "method": method,
+            "pool": "linked" if method == "kalman" else r.choice(list(PAIR_POOLS)),
+            "formation": r.choice(g([126, 252, 504], geo=True, lo=63, hi=756)),
+            "trading": r.choice(g([21, 63, 126, 252], geo=True, lo=10, hi=504)),
+            "top": r.choice([3, 5, 10, 20]),
+            "entry": r.choice(g([1.5, 2.0, 2.5, 3.0], integer=False, lo=1.0, hi=4.0)),
+            "exit": 0.0 if method == "distance" else r.choice([0.0, 0.25, 0.5, 1.0]),
+            "stop": r.choice([3.0, 4.0, 6.0])}
+    if method != "distance":
+        spec |= {"pmax": r.choice([0.01, 0.05, 0.10]), "hl_max": r.choice([20, 40, 60, 120])}
+    if method == "kalman":
+        spec["delta"] = r.choice([1e-8, 1e-7, 1e-6, 1e-5])
+    return spec
+
+
 HOLD_STOCKS = {"kind": "mix", "assets": [B.MKT], "scale": "fixed", "trend": False,
                "lookback": 252, "vol_target": None}
 
 
 SAMPLERS = BASE_SAMPLERS + [(_gated, 6), (_voltarget, 3), (_offset, 2), (_ensemble, 3)]
+_DEFAULT_SAMPLERS = SAMPLERS
 WRAPPER_SAMPLERS = (_gated, _voltarget, _offset, _ensemble)
 
 
@@ -385,7 +425,7 @@ def _draw(fn, r: random.Random, ctx: Context | None) -> dict:
     return fn(r, ctx) if fn in TAKES_CTX else fn(r)
 
 
-TAKES_CTX = {fn for fn, _ in SAMPLERS} | {_arrival}
+TAKES_CTX = {fn for fn, _ in SAMPLERS} | {_arrival, _pairsbook}
 #: The arrival sampler's weight, used only while the registry has enrolled series.
 ARRIVAL_WEIGHT = 2
 
@@ -630,6 +670,9 @@ def describe(spec: dict) -> dict:
         name = f"{_ulabel(spec['universe'])} {ind} {every}"
         line = f"Trades {_ulabel(spec['universe'])} on the {ind} chart signal."
         tags = ("value" if spec["indicator"] == "bollinger" else "trend", "chart indicator")
+    elif k == "pairsbook":
+        name, line = _describe_pairsbook(spec)
+        tags = ("value", "pairs")
     elif k == "pair":
         a, b = (SHORT.get(x, x.split(".", 1)[1]) for x in (spec["a"], spec["b"]))
         late = " next day" if spec["delay"] else ""
@@ -649,10 +692,28 @@ def describe(spec: dict) -> dict:
             "asset": _asset_class(spec)}
 
 
+PAIRS_METHOD = {"distance": "closest prices", "cointegration": "cointegrated",
+                "kalman": "moving hedge", "pca": "PCA leftovers"}
+
+
+def _describe_pairsbook(spec: dict) -> tuple[str, str]:
+    m = spec["method"]
+    if m == "pca":
+        return (f"Industry leftovers, {spec['factors']} factors at {spec['entry']}",
+                f"Bets each industry's move beyond {spec['factors']} market-wide forces "
+                "snaps back.")
+    pool = PAIR_POOLS[spec["pool"]]
+    return (f"Industry pairs, {PAIRS_METHOD[m]}, top {spec['top']} at {spec['entry']}σ",
+            f"Every {spec['trading']} days picks the best {spec['top']} of the {pool} "
+            f"over the past {spec['formation']} days and bets their gaps close.")
+
+
 def _asset_class(spec: dict) -> str:
     u = spec.get("universe")
     if spec["kind"] in WRAPPERS:
         return _wrapper_asset(spec)
+    if spec["kind"] == "pairsbook":
+        return "stocks"
     if u == "one":
         head = spec["asset"].split(".", 1)[0]
         return "fx" if head in ("fx", "xfx", "ecb") else "commodities" if head in (
@@ -700,6 +761,8 @@ def build(spec: dict) -> B.Block:
                  "kind": spec["indicator"], **floor}
         params = {key: spec[key] for key in ("window", "band", "entry", "exit") if key in spec}
         return type("SearchChart", (base,), attrs)(rebalance=spec["rebalance"], **params)
+    if k == "pairsbook":
+        return _pairsbook_strategy(spec)
     if k == "pair":
         cls = type("SearchPair", (B.PairBook,), {"name": "search", "summary": "",
                    "a": spec["a"], "b": spec["b"]})
@@ -713,6 +776,21 @@ def build(spec: dict) -> B.Block:
 
 
 COT_UNIVERSE = [f"fx.{c}" for c in S.COT_FX]
+
+
+def _pairsbook_strategy(spec: dict) -> B.Block:
+    from .strategies import _pairs as PB
+    from .strategies import pairs as PR
+
+    params = {k: v for k, v in spec.items() if k not in ("kind", "method", "pool")}
+    if spec["method"] == "pca":
+        cls = type("SearchPCA", (PB.PCABook,), {"name": "search", "summary": "",
+                   "universe": PR.IND49})
+        return cls(**params)
+    cands = PR.LINKED if spec["pool"] == "linked" else PR.GROUPED
+    cls = type("SearchPairs", (PB.PairsBook,), {"name": "search", "summary": "",
+               "candidates": cands, "method": spec["method"]})
+    return cls(**params)
 
 
 def _cot_strategy(spec: dict) -> B.Block:
@@ -1070,6 +1148,7 @@ def _panel() -> tuple[pd.DataFrame, str, set[str]]:
     # Series the data registry enrolled (DEC-0064), when their history is on this machine.
     keys += [k for k, s in _registry_series().items()
              if k not in keys and store._path(s, root).exists()]
+    keys += [k for k in PAIRS_KEYS if k not in keys and store._path(catalog.get(k), root).exists()]
     snap = store.coverage().get("fetched_at") or "unknown"
     return store.panel(keys), snap, set(keys)
 
@@ -1139,6 +1218,10 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
     ctx = Context(have=have, pool=_pool(con), level=level, arrivals=signals,
                   arrival_assets=assets)
     samplers = SAMPLERS + ([(_arrival, ARRIVAL_WEIGHT)] if signals or assets else [])
+    # A caller (or test) that swaps SAMPLERS gets exactly those samplers.
+    if SAMPLERS is _DEFAULT_SAMPLERS and all(k in have for k in PAIRS_KEYS):
+        samplers = samplers + [(_pairsbook, PAIRS_WEIGHT)]
+    pairs_cap, pairs_done = max(1, int(n * PAIRS_BUDGET)), 0
     stats_ = novelty(r, seen, ctx, samplers)
     base_w = [w for _, w in samplers]
     done = failed = repeats = 0
@@ -1147,6 +1230,9 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
             break
         weights = [w * (new + 1) / (drawn + 2) for w, (new, drawn) in zip(base_w, stats_,
                                                                            strict=True)]
+        if pairs_done >= pairs_cap:  # the pairs budget for this batch is spent
+            weights = [0.0 if fn is _pairsbook else w
+                       for (fn, _), w in zip(samplers, weights, strict=True)]
         i = r.choices(range(len(samplers)), weights=weights)[0]
         spec = _draw(samplers[i][0], r, ctx)
         sid = spec_id(spec)
@@ -1157,6 +1243,7 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
             continue
         stats_[i] = (new + 1, drawn + 1)
         seen.add(sid)
+        pairs_done += spec["kind"] == "pairsbook"
         d = describe(spec)
         row = {"id": sid, "spec": json.dumps(spec, sort_keys=True), **{k: d[k] for k in
                ("name", "line", "family", "style", "asset")}, "snapshot": snap,

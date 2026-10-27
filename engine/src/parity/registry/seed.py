@@ -31,7 +31,8 @@ SOURCE_RIGHTS = {
     "oanda": "internal", "bls": "public", "bea": "public", "onchain": "public",
     "coingecko-live": "public", "sec-tickers": "public", "hyperliquid-live": "internal",
     "kraken-live": "internal", "coinbase-live": "internal", "gemini-live": "internal",
-    "binanceus-live": "internal", "alpaca-live": "internal", "finnhub-live": "none",
+    "binanceus-live": "internal", "alpaca-live": "internal", "alpaca": "research",
+    "finnhub-live": "none",
     "exchanges-live": "none", "pyth": "none", "intrinio": "none", "massive-business": "none",
     "cboe-one": "none", "iex-tops": "none",
 }
@@ -43,6 +44,7 @@ ACCESS = {
     "bis": "SDMX REST API v2", "cftc": "Socrata API (CFTC Public Reporting)",
     "eia": "API v2 with a free key", "onchain": "log subscription to a public Base node",
     "coingecko-live": "REST, polled by our edge", "sec-tickers": "JSON file",
+    "alpaca": "REST: daily bars, adjusted for splits and dividends",
 }
 
 RATE_LIMITS = {
@@ -55,7 +57,9 @@ RATE_LIMITS = {
     "coingecko-live": "about 30 calls a minute without a key",
     "kraken": "about 1 public request a second", "coinbase": "10 public requests a second",
     "gemini": "120 public requests a minute", "binanceus": "1,200 request weight a minute",
-    "hyperliquid": "1,200 request weight a minute", "sec": "10 requests a second, with a "
+    "hyperliquid": "1,200 request weight a minute",
+    "alpaca": "200 calls a minute on the free plan; we pause 0.4 s",
+    "sec": "10 requests a second, with a "
     "contact in the user agent",
 }
 

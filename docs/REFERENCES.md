@@ -3,13 +3,13 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1746 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1757 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 333 |
-| [Preprints and working papers](#preprints-and-working-papers) | 45 |
-| [Books](#books) | 20 |
+| [Papers](#papers) | 342 |
+| [Preprints and working papers](#preprints-and-working-papers) | 46 |
+| [Books](#books) | 21 |
 | [Datasets](#datasets) | 63 |
 | [Software](#software) | 103 |
 | [Web pages](#web-pages) | 1012 |
@@ -207,7 +207,7 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 Avellaneda, Marco; Lee, Jeong-Hyun (2010). Statistical arbitrage in the US equities market. *Quantitative Finance 10(7), 761-782*. doi:10.1080/14697680903124632 <https://doi.org/10.1080/14697680903124632>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
+Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### bailey2012
 
@@ -225,7 +225,7 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### bailey2016
 
@@ -691,6 +691,12 @@ Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### davolio2002
+
+D'Avolio, Gene (2002). The market for borrowing stock. *Journal of Financial Economics 66(2-3), 271-306*. doi:10.1016/s0304-405x(02)00206-4 <https://doi.org/10.1016/s0304-405x(02)00206-4>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### debondt1985
 
 De Bondt, Werner F. M.; Thaler, Richard (1985). Does the Stock Market Overreact? *Journal of Finance 40(3), 793-805*. doi:10.1111/j.1540-6261.1985.tb05004.x <https://doi.org/10.1111/j.1540-6261.1985.tb05004.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -733,7 +739,13 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 
 Do, Binh; Faff, Robert (2010). Does Simple Pairs Trading Still Work? *Financial Analysts Journal 66(4), 83-95*. doi:10.2469/faj.v66.n4.1 <https://doi.org/10.2469/faj.v66.n4.1>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
+### do2012
+
+Do, Binh; Faff, Robert (2012). ARE PAIRS TRADING PROFITS ROBUST TO TRADING COSTS? *Journal of Financial Research 35(2), 261-287*. doi:10.1111/j.1475-6803.2012.01317.x <https://doi.org/10.1111/j.1475-6803.2012.01317.x>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### doskov2015
 
@@ -751,11 +763,29 @@ Du, Wenxin; Tepper, Alexander; Verdelhan, Adrien (2018). Deviations from Covered
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### elliott2005
+
+Elliott, Robert J.; Van Der Hoek \*, John; Malcolm, William P. (2005). Pairs trading. *Quantitative Finance 5(3), 271-276*. doi:10.1080/14697680500149370 <https://doi.org/10.1080/14697680500149370>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### engel2005
 
 Engel, Charles; West, Kenneth D. (2005). Exchange Rates and Fundamentals. *Journal of Political Economy 113(3), 485-517*. doi:10.1086/429137 <https://doi.org/10.1086/429137>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### engelberg2018
+
+Engelberg, Joseph E.; Reed, Adam V.; Ringgenberg, Matthew C. (2018). Short-Selling Risk. *The Journal of Finance 73(2), 755-786*. doi:10.1111/jofi.12601 <https://doi.org/10.1111/jofi.12601>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
+### engle1987
+
+Engle, Robert F.; Granger, C. W. J. (1987). Co-Integration and Error Correction: Representation, Estimation, and Testing. *Econometrica 55(2), 251*. doi:10.2307/1913236 <https://doi.org/10.2307/1913236>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### etula2019
 
@@ -911,7 +941,7 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Gatev, Evan; Goetzmann, William N.; Rouwenhorst, K. Geert (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. *Review of Financial Studies 19(3), 797-827*. doi:10.1093/rfs/hhj020 <https://doi.org/10.1093/rfs/hhj020>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### geltner1991
 
@@ -1215,6 +1245,12 @@ Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (2023). Is There a R
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### johansen1991
+
+Johansen, Soren (1991). Estimation and Hypothesis Testing of Cointegration Vectors in Gaussian Vector Autoregressive Models. *Econometrica 59(6), 1551*. doi:10.2307/2938278 <https://doi.org/10.2307/2938278>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### jorda2012
 
 Jordà, Òscar; Taylor, Alan (2012). The Carry Trade and Fundamentals: Nothing to Fear But FEER Itself. *Journal of International Economics 88, 74-90*. doi:10.3386/w15518 <https://doi.org/10.3386/w15518>. <http://www.nber.org/papers/w15518.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -1315,7 +1351,7 @@ Khandani, Amir E.; Lo, Andrew W. (2011). What happened to the quants in August 2
 
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
-Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### kilian2009
 
@@ -1368,6 +1404,12 @@ Korteweg, Arthur; Sorensen, Morten (2017). Skill and luck in private equity perf
 Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### krauss2016
+
+Krauss, Christopher (2016). STATISTICAL ARBITRAGE PAIRS TRADING STRATEGIES: REVIEW AND OUTLOOK. *Journal of Economic Surveys 31(2), 513-545*. doi:10.1111/joes.12153 <https://doi.org/10.1111/joes.12153>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### kroencke2014
 
@@ -1526,6 +1568,12 @@ Also at: <https://www.nber.org/system/files/working_papers/w19623/w19623.pdf>, <
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### mackinnon1999
+
+MacKinnon, James G.; Haug, Alfred A.; Michelis, Leo (1999). Numerical distribution functions of likelihood ratio tests for cointegration. *Journal of Applied Econometrics 14(5), 563-577*. doi:10.1002/(sici)1099-1255(199909/10)14:5\<563::aid-jae530\>3.0.co;2-r <https://doi.org/10.1002/(sici)1099-1255(199909/10)14:5<563::aid-jae530>3.0.co;2-r>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### magdonismail2004
 
@@ -2397,6 +2445,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-c7f4fb7f
+
+MacKinnon, James G.; Haug, Alfred A.; Michelis, Leo (1999). Numerical distribution functions of likelihood ratio tests for cointegration. *Journal of Applied Econometrics 14(5), 563-577*. doi:10.1002/(sici)1099-1255(199909/10)14:5 <https://doi.org/10.1002/(sici)1099-1255(199909/10)14:5>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### url-cd4e8812
 
 The reaction of asset markets to Swiss National Bank communication. (n.d.). <https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2675,7 +2729,7 @@ Cited in: [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-m
 
 Gatev, Evan; Goetzmann, William; Rouwenhorst, K. Geert (1999). Pairs Trading: Performance of a Relative Value Arbitrage Rule. *NBER Working Paper w7032*. doi:10.3386/w7032 <https://doi.org/10.3386/w7032>. <https://www.nber.org/system/files/working_papers/w7032/w7032.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### gencay2026
 
@@ -2819,6 +2873,12 @@ Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Tra
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-3465fab3
+
+MacKinnon, James G. (2010). Critical Values for Cointegration Tests. *Queen's Economics Department Working Paper 1227*. <https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### url-beed4701
 
 Stock Price Responses to Firm-Level News in Supply Chain Networks. (n.d.). *arxiv.org*. <https://arxiv.org/html/2409.06255v5>. Accessed 2026-10-25. Verification: not checked.
@@ -2871,7 +2931,7 @@ Chan (2013). Algorithmic Trading: Winning Strategies and Their Rationale. *Wiley
 
 Note: Mean reversion and momentum, with attention to backtest pitfalls.
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### chan2021
 
@@ -2996,6 +3056,12 @@ Tetlock, Philip E.; Gardner, Dan (2015). Superforecasting: The Art and Science o
 Note: Book; not read this session. Cited for a general idea, not a number.
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### url-12fa0e62
+
+Vidyamurthy, Ganapathy (2004). Pairs Trading: Quantitative Methods and Analysis. *Wiley*. <https://www.wiley.com/en-us/Pairs+Trading%3A+Quantitative+Methods+and+Analysis-p-9780471460671>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ## Datasets
 
