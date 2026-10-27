@@ -4,22 +4,21 @@
 // public.country_region() in supabase/migrations/20261112000000_trade_profile.sql: a
 // code missing here, or in another region, would rank a trader in the wrong place.
 //
-// Edge choices: Mexico, Central America and the Caribbean are Latin America. Egypt and the
-// rest of North Africa are Africa. Turkey is the Middle East. Russia is Europe. The
-// Caucasus and Central Asia are Asia. Antarctic and uninhabited codes (AQ, BV, GS, HM, TF)
-// have no region and are not offered.
+// Edge choices (as in the database): Mexico, Central America and the Caribbean are Latin
+// America. Egypt and the rest of North Africa are Africa. Turkey and Russia are Europe. The
+// Caucasus and Central Asia are Asia. US minor outlying islands are Oceania.
 
 export const REGIONS = ["Africa", "Asia", "Europe", "Latin America", "Middle East", "North America", "Oceania"] as const;
 export type Region = (typeof REGIONS)[number];
 
 const BY_REGION: Record<Region, string> = {
-  Africa: "AO BF BI BJ BW CD CF CG CI CM CV DJ DZ EG EH ER ET GA GH GM GN GQ GW KE KM LR LS LY MA MG ML MR MU MW MZ NA NE NG RE RW SC SD SH SL SN SO SS ST SZ TD TG TN TZ UG YT ZA ZM ZW",
+  Africa: "AO BF BI BJ BW CD CF CG CI CM CV DJ DZ EG EH ER ET GA GH GM GN GQ GW KE KM LR LS LY MA MG ML MR MU MW MZ NA NE NG RE RW SC SD SH SL SN SO SS ST SZ TD TF TG TN TZ UG YT ZA ZM ZW",
   Asia: "AF AM AZ BD BN BT CN GE HK ID IN IO JP KG KH KP KR KZ LA LK MM MN MO MV MY NP PH PK SG TH TJ TL TM TW UZ VN",
-  Europe: "AD AL AT AX BA BE BG BY CH CY CZ DE DK EE ES FI FO FR GB GG GI GR HR HU IE IM IS IT JE LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS RU SE SI SJ SK SM UA VA",
-  "Latin America": "AG AI AR AW BB BL BO BQ BR BS BZ CL CO CR CU CW DM DO EC FK GD GF GP GT GY HN HT JM KN KY LC MF MQ MS MX NI PA PE PR PY SR SV SX TC TT UY VC VE VG VI",
-  "Middle East": "AE BH IL IQ IR JO KW LB OM PS QA SA SY TR YE",
-  "North America": "BM CA GL PM UM US",
-  Oceania: "AS AU CK FJ FM GU KI MH MP NC NF NR NU NZ PF PG PN PW SB TK TO TV VU WF WS",
+  Europe: "AD AL AT AX BA BE BG BV BY CH CY CZ DE DK EE ES FI FO FR GB GG GI GR HR HU IE IM IS IT JE LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS RU SE SI SJ SK SM TR UA VA XK",
+  "Latin America": "AG AI AR AW BB BL BO BQ BR BS BZ CL CO CR CU CW DM DO EC FK GD GF GP GS GT GY HN HT JM KN KY LC MF MQ MS MX NI PA PE PR PY SR SV SX TC TT UY VC VE VG VI",
+  "Middle East": "AE BH IL IQ IR JO KW LB OM PS QA SA SY YE",
+  "North America": "BM CA GL PM US",
+  Oceania: "AS AU CC CK CX FJ FM GU HM KI MH MP NC NF NR NU NZ PF PG PN PW SB TK TO TV UM VU WF WS",
 };
 
 const REGION_OF = new Map<string, Region>();

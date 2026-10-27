@@ -36,6 +36,7 @@ const SCREENS: Screen[] = [
   { name: "app-strategy", path: "/app/#/strategy/fx_carry" },
   { name: "app-verify", path: "/app/#/verify" },
   { name: "app-settings", path: "/app/#/settings/account" },
+  { name: "app-trade-profile", path: "/app/#/settings/trade-profile" },
   { name: "research-home", path: "/research/#/" },
   { name: "research-catalog", path: "/research/#/catalog" },
   { name: "sim-overview", path: "/sim/#/overview" },

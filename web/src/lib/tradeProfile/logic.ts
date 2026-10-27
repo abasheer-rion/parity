@@ -271,12 +271,18 @@ export function boardFor(rows: BoardRow[], region: Region | "all"): BoardRow[] {
   });
 }
 
-/** Two upper-case letters for the avatar: from the display name if set, else the handle. */
+/**
+ * Two upper-case letters for the avatar, the same rule as trade_profile_private.initials in
+ * the database: with a display name of two or more words, the first letters of the first
+ * and last word; with one word, its first two letters; otherwise the handle's first two
+ * letters or digits.
+ */
 export function initials(displayName: string | null | undefined, handle: string | null | undefined): string {
-  const src = (displayName?.trim() || handle?.trim() || "").replace(/[^\p{L}\p{N}\s_]/gu, "");
-  const words = src.split(/[\s_]+/).filter(Boolean);
-  const out = words.length >= 2 ? words[0][0] + words[1][0] : (words[0] ?? "").slice(0, 2);
-  return (out || "?").toUpperCase();
+  const words = (displayName ?? "").replace(/[^\p{L}\p{N}\s]/gu, "").trim().split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  if (words.length === 1 && words[0].length >= 2) return words[0].slice(0, 2).toUpperCase();
+  const h = (handle ?? "").replace(/[^\p{L}\p{N}]/gu, "");
+  return (h.length >= 2 ? h.slice(0, 2) : (handle ?? "").slice(0, 2)).toUpperCase() || "?";
 }
 
 export const HANDLE_RE = /^[A-Za-z0-9_]{3,20}$/;

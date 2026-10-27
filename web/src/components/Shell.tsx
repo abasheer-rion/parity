@@ -119,6 +119,7 @@ export const SETTINGS_SECTIONS = [
     { id: "account", label: "Account" },
     { id: "personalization", label: "Personalization" },
     { id: "api-keys", label: "API keys" },
+    { id: "trade-profile", label: "Trade profile" },
   ] },
 ];
 

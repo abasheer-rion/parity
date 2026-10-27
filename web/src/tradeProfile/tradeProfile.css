@@ -1,0 +1,59 @@
+/* Settings > Trade profile. Day colours mix the positive or negative token into the
+   surface, from 10% for the smallest day to 45% for the month's largest. Text on every cell
+   is --color-text, which stays above 4.5:1 on the strongest mix (tests/tradeProfile.test.ts
+   checks it). */
+.tp-sec { margin-top: var(--space-8); }
+.tp-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.tp-head .settings-sub { margin: 0; }
+.tp-nav { display: flex; align-items: center; gap: var(--space-2); }
+.tp-nav-label { min-width: 9.5em; text-align: center; font-weight: var(--fw-medium); color: var(--color-text); }
+.tp-account { margin-top: var(--space-6); max-width: 320px; }
+.tp-filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: var(--space-3) 0; }
+.tp-dim { color: var(--color-text-muted); }
+.tp-sub { display: block; font-size: var(--fs-xs); }
+.tp-sym { color: var(--color-text); }
+.tp-sec .kstats { margin-top: var(--space-5); }
+
+.tp-cal-wrap { margin-top: var(--space-3); }
+.tp-cal { width: 100%; min-width: 336px; border-collapse: separate; border-spacing: var(--space-1); table-layout: fixed; }
+.tp-cal th { font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--color-text-muted); text-align: center; padding: var(--space-1) 0; }
+.tp-cal abbr { text-decoration: none; }
+.tp-cal td { padding: 0; height: 64px; vertical-align: top; }
+.tp-day-out { background: transparent; }
+.tp-day {
+  width: 100%; height: 100%; min-height: 44px; display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
+  padding: var(--space-1h); border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  background: var(--color-surface); color: var(--color-text); font: inherit; cursor: pointer; text-align: left;
+}
+.tp-day.pos { background: color-mix(in srgb, var(--color-positive) calc(10% + var(--heat) * 35%), var(--color-surface)); }
+.tp-day.neg { background: color-mix(in srgb, var(--color-negative) calc(10% + var(--heat) * 35%), var(--color-surface)); }
+.tp-day:hover { border-color: var(--color-text-muted); }
+.tp-day:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.tp-day-n { font-size: var(--fs-xs); color: var(--color-text); }
+.tp-day-v { font-family: var(--font-mono); font-size: var(--fs-xs); font-variant-numeric: var(--num-variant); text-align: right; white-space: nowrap; overflow: hidden; }
+.tp-cal-week { text-align: right; font-family: var(--font-mono); font-size: var(--fs-xs); font-variant-numeric: var(--num-variant); color: var(--color-text); vertical-align: middle; padding-right: var(--space-1); }
+.tp-cal th.tp-cal-week { font-family: inherit; text-align: right; width: 12%; }
+.tp-cal-week.pos { color: var(--color-positive); }
+.tp-cal-week.neg { color: var(--color-negative); }
+
+.tp-optin { margin: var(--space-2) 0 var(--space-4); }
+.tp-optin .ui-field { width: 100%; max-width: 360px; }
+.tp-trader { display: inline-flex; align-items: center; gap: var(--space-2h); }
+.tp-trader-text { display: flex; flex-direction: column; min-width: 0; }
+.tp-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--color-surface-raised); border: 1px solid var(--color-border); color: var(--color-text);
+  font-size: var(--fs-xs); font-weight: var(--fw-medium);
+}
+.tp-luck { display: inline-flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); min-width: 9em; }
+.tp-luck .ui-badge { white-space: normal; height: auto; min-height: 20px; padding-block: var(--space-half); }
+.tp-board .mtable th { white-space: normal; vertical-align: bottom; }
+
+@media (max-width: 640px) {
+  /* Phone: the day boxes are about 40px wide, so the amount drops the mono face and the padding tightens to keep "+$1.2k" whole. */
+  .tp-cal { border-spacing: var(--space-half); }
+  .tp-cal th.tp-cal-week { width: 11%; }
+  .tp-cal td { height: 52px; }
+  .tp-day { padding: var(--space-half) var(--space-half) var(--space-1); }
+  .tp-day-v, .tp-cal-week { font-family: inherit; letter-spacing: -0.03em; }
+}

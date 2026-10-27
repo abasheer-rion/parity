@@ -28,6 +28,7 @@ export function routes() {
   out.add("/app/#/strategy/fx_carry");
   out.add("/research/#/algo/fx-carry-g10");
   out.add("/app/#/settings");
+  out.add("/app/#/settings/trade-profile");
   // The team-only Metrics page is not in the page list; signed out it says so.
   out.add("/research/#/metrics");
   return [...out];
