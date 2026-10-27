@@ -17,10 +17,7 @@ h1 { font-weight: 440; letter-spacing: -0.02em; }
 .display { font-family: var(--font-serif); font-weight: 500; letter-spacing: 0.04em; font-feature-settings: normal; }
 h1.display { font-size: var(--type-7xl); line-height: 1.15; }
 
-/* Focus: always visible, never hidden by a glow. */
-:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm);
-}
+/* Focus: the ring is set once, in a11y.css (keyboard focus only, brand blue). */
 
 /* ---------- The frame: a sidebar and the page, no top bar ---------- */
 .side { border-right: 1px solid color-mix(in srgb, var(--palette-white) 4%, transparent); background: var(--color-bar); }

@@ -1,7 +1,7 @@
 // NEWS, KPI and HELP.
 import { useMemo } from "react";
 import { moveText, zText } from "../../lib/news";
-import { nameOf } from "../../lib/strategyMeta";
+import { nameOf, taglineOf } from "../../lib/strategyMeta";
 import type { StrategyRun } from "../../lib/types";
 import { useAsOf, useLoad, useTerm } from "../context";
 import { getNews } from "../data";
@@ -66,7 +66,7 @@ export function KpiPanel() {
   if (rep.status !== "ok") return <Empty title={rep.status === "missing" ? "No strategy results yet" : "Could not load results"}>{rep.message}</Empty>;
   const m = (r: StrategyRun) => r.metrics;
   const cols: TCol<StrategyRun>[] = [
-    { key: "name", label: "Strategy", align: "left", sort: (r) => nameOf(r), render: (r) => <span className="term-name strong" title={r.summary}>{nameOf(r)}{r.is_benchmark ? <span className="term-tag">BENCH</span> : null}</span> },
+    { key: "name", label: "Strategy", align: "left", sort: (r) => nameOf(r), render: (r) => <span className="term-name strong" title={taglineOf(r) || r.summary}>{nameOf(r)}{r.is_benchmark ? <span className="term-tag">BENCH</span> : null}</span> },
     { key: "sharpe", label: "Sharpe", sort: (r) => m(r).sharpe, render: (r) => fmtNum(m(r).sharpe, 2), title: "Return per unit of risk, per year" },
     { key: "cagr", label: "CAGR", sort: (r) => m(r).cagr, render: (r) => <span className={tone(m(r).cagr)}>{fmtPct(m(r).cagr, 1, true)}</span>, title: "Growth per year", className: "c-n3" },
     { key: "dd", label: "Worst fall", sort: (r) => m(r).max_drawdown, render: (r) => <span className="down">{fmtPct(m(r).max_drawdown, 1)}</span>, title: "Largest fall from a peak", className: "c-n2" },

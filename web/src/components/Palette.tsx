@@ -8,7 +8,8 @@ import { termById, terms } from "../lib/glossary";
 import { search, useDocs } from "../lib/docs";
 import { linkTo, searchPages } from "../lib/pages";
 import { SPACE } from "../lib/space";
-import { nameOf, verdictOf } from "../lib/strategyMeta";
+import { nameOf, taglineOf, verdictOf } from "../lib/strategyMeta";
+import { strategySearchText } from "../lib/strategyNames";
 import { num, pct } from "../lib/format";
 import type { Report, StrategyRun } from "../lib/types";
 import { dataFor, hrefFor } from "../pages/Reader";
@@ -22,10 +23,16 @@ function strategyItems(report: Report | null, q: string): Item[] {
   if (!report) return [];
   const out: Item[] = [];
   for (const r of report.runs) {
+    // Matches the shown name first, then the id (with or without underscores), then the
+    // tagline and older engine name, so "fx_carry", "fx carry" and "Classic Carry" all land.
     const name = nameOf(r).toLowerCase();
     const id = r.strategy.toLowerCase();
-    const score = name === q || id === q ? 90 : name.startsWith(q) ? 72 : name.includes(q) || id.includes(q) ? 52 : 0;
-    if (score) out.push({ key: `s:${r.strategy}`, href: `#/strategy/${r.strategy}`, kind: "strategy", title: nameOf(r), sub: verdictOf(r).label, score });
+    const idWords = id.replace(/_/g, " ");
+    const score = name === q || id === q || idWords === q ? 90 : name.startsWith(q) ? 72
+      : name.includes(q) || id.includes(q) || idWords.includes(q) ? 52
+      : q.length >= 4 && strategySearchText(r.strategy, r.display_name).toLowerCase().includes(q) ? 30 : 0;
+    const line = taglineOf(r);
+    if (score) out.push({ key: `s:${r.strategy}`, href: `#/strategy/${r.strategy}`, kind: "strategy", title: nameOf(r), sub: line ? `${verdictOf(r).label} · ${line}` : verdictOf(r).label, score });
   }
   return out;
 }

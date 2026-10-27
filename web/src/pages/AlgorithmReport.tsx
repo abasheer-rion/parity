@@ -6,6 +6,7 @@ import { algorithms, docPathFor, ledger, registrations, STAGES } from "../lib/ca
 import { docUrl, pct, REPO_URL } from "../lib/format";
 import { Term } from "./Learn";
 import { TableScroll } from "../ui";
+import { nameById } from "../lib/strategyMeta";
 
 type View = "simple" | "analogy" | "precise";
 
@@ -94,7 +95,7 @@ export function AlgorithmReport({ slug }: { slug: string }) {
         {a.research.notes && <p>{a.research.notes}</p>}
         <ul>
           {a.research.hypothesis && <li>Hypothesis: <a href={docUrl(docPathFor(a.research.hypothesis) ?? "README.md")} target="_blank" rel="noreferrer">{a.research.hypothesis}</a></li>}
-          {a.research.strategy && <li>Strategy in our engine: <code>{a.research.strategy}</code> (<a href={`#/strategy/${a.research.strategy}`}>latest nightly result</a>)</li>}
+          {a.research.strategy && <li>Strategy in our engine: <a href={`#/strategy/${a.research.strategy}`}>{nameById(a.research.strategy)}</a> (<code>{a.research.strategy}</code>, latest nightly result)</li>}
           {regs.map((r) => <li key={r.id}>Registered plan <a href="#/ledger"><strong>{r.id}</strong></a>: {r.title} ({r.created})</li>)}
           {a.research.verdict && <li>Verdict: <strong>{a.research.verdict}</strong></li>}
         </ul>

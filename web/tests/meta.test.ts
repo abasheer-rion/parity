@@ -158,7 +158,7 @@ describe("short links", () => {
     const res = await shortStrategy({ params: { id: "fx_carry" } });
     const html = await res.text();
     expect(res.headers.get("X-Robots-Tag")).toContain("noindex");
-    expect(html).toContain("<title>Currency carry · Parity</title>");
+    expect(html).toContain("<title>Classic Carry · Parity</title>");
     expect(html).toContain(`content="${ORIGIN}/og/strategy/fx_carry.png"`);
     expect(html).toContain('url=/app/#/strategy/fx_carry');
     expect(sharePage("fx_carry")).toBe(html);
@@ -209,10 +209,10 @@ describe("share cards", () => {
   });
 
   it("gives a strategy its name and kind, not its results", () => {
-    expect(strategyCard("fx_carry")).toMatchObject({ title: "Currency carry", kicker: "Parity strategy · Carry · Currencies · monthly" });
+    expect(strategyCard("fx_carry")).toMatchObject({ title: "Classic Carry", tagline: "Buys high interest rate currencies, funded by low rate ones.", kicker: "Parity strategy · Carry · Currencies · monthly" });
     expect(strategyCard("new_idea").title).toBe("New idea");
     expect(strategyMeta("fx_carry").path).toBe("/s/fx_carry");
-    expect(cardSvg(strategyCard("fx_carry"), "<svg></svg>")).toContain("Currency carry");
+    expect(cardSvg(strategyCard("fx_carry"), "<svg></svg>")).toContain("Classic Carry");
   });
 });
 

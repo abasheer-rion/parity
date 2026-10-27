@@ -8,6 +8,7 @@ import type { McpCaller } from "./auth";
 import { loadCourses, type McpCourse } from "./academy";
 import type { Schema } from "./schema";
 import type { Report, StrategyRun } from "../types";
+import { displayName, strategySearchText, tagline } from "../strategyNames";
 import type { SearchDoc } from "../data";
 import type { TermIndex, TermSeries } from "../../terminal/data";
 import type { ImpactDoc, RankRow } from "../newsImpact";
@@ -71,12 +72,13 @@ export async function termIndex(ctx: Pick<ToolContext, "data">): Promise<TermInd
   return t;
 }
 
-const runName = (r: StrategyRun) => r.display_name || r.strategy;
+const runName = (r: StrategyRun) => displayName(r.strategy, r.display_name);
 
 function runSummary(r: StrategyRun) {
   return {
     id: r.strategy,
     name: runName(r),
+    tagline: tagline(r.strategy) || null,
     benchmark: r.is_benchmark,
     tags: r.tags ?? null,
     verdict: r.gauntlet?.verdict ?? null,
@@ -196,7 +198,7 @@ export const TOOLS: Tool[] = [
       const q = str(a.query).toLowerCase().trim();
       const asset = str(a.asset).toLowerCase();
       const rows = r.runs.filter((run) =>
-        (!q || has([run.strategy, run.display_name, run.description, run.summary, ...Object.values(run.tags ?? {})], q))
+        (!q || has([strategySearchText(run.strategy, run.display_name), run.description, run.summary, ...Object.values(run.tags ?? {})], q))
         && (!asset || (run.tags?.asset ?? "").toLowerCase() === asset)
         && (typeof a.beats_sp500 !== "boolean" || (run.gauntlet?.beats_sp500 ?? false) === a.beats_sp500));
       return {
@@ -474,7 +476,7 @@ export const TOOLS: Tool[] = [
       const hit = (hay: (string | undefined)[]) => words.length > 0 && words.some((w) => has(hay, w));
       const results: { id: string; title: string; url: string }[] = [];
       const r = await ctx.data.json<Report>("/data/latest.json");
-      for (const run of r?.runs ?? []) if (hit([run.strategy, run.display_name, run.description, run.summary])) results.push({ id: `strategy:${run.strategy}`, title: `Strategy: ${runName(run)}`, url: strategyUrl(ctx.origin, run.strategy) });
+      for (const run of r?.runs ?? []) if (hit([strategySearchText(run.strategy, run.display_name), run.description, run.summary])) results.push({ id: `strategy:${run.strategy}`, title: `Strategy: ${runName(run)}`, url: strategyUrl(ctx.origin, run.strategy) });
       for (const c of await loadCourses(ctx.data)) for (const l of c.lessons) if (hit([c.title, l.title, ...l.terms])) results.push({ id: `lesson:${c.id}/${l.id}`, title: `Lesson: ${l.title}`, url: lessonUrl(ctx.origin, c.id, l.id) });
       const t = await ctx.data.json<TermIndex>("/data/terminal/index.json");
       for (const s of t?.series ?? []) if (hit([s.key, s.label])) results.push({ id: `series:${s.key}`, title: `Market series: ${s.label}`, url: `${ctx.origin}/trade/` });

@@ -11,7 +11,7 @@ import { num, pct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
 import type { Report, StrategyRun } from "../lib/types";
 import { ledger } from "../lib/catalog";
-import { nameOf } from "../lib/strategyMeta";
+import { nameOf, taglineOf } from "../lib/strategyMeta";
 
 export function Overview({ report, email }: { report: Report; email?: string | null }) {
   const prefs = usePrefs();
@@ -57,8 +57,8 @@ export function Overview({ report, email }: { report: Report; email?: string | n
           <section className="mcard span2">
             {view === "graph" ? (
               <HeroChart
-                title={<>US stock market <span className="chip-badge">benchmark</span></>}
-                main={{ name: "US stock market", points: bench.equity }}
+                title={<>{nameOf(bench)} <span className="chip-badge">benchmark</span></>}
+                main={{ name: nameOf(bench), points: bench.equity }}
                 amount={prefs.startingAmount}
                 range={range}
                 onRange={setRange}
@@ -179,7 +179,7 @@ function Movers({ title, icon, runs, year, market }: { title: string; icon: stri
       <ul>
         {runs.map((r) => (
           <li key={r.strategy}>
-            <a href={`#/strategy/${r.strategy}`} title={r.strategy}>{nameOf(r)}</a>
+            <a href={`#/strategy/${r.strategy}`} title={taglineOf(r) || undefined}>{nameOf(r)}</a>
             <span className={r.yearly[year] >= 0 ? "good" : "bad"}>{r.yearly[year] >= 0 ? "+" : "−"}{pct(Math.abs(r.yearly[year]))}</span>
           </li>
         ))}
