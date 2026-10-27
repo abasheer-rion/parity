@@ -123,7 +123,7 @@ ALPACA_BARS = "https://data.alpaca.markets/v2/stocks/bars"
 
 def fetch_alpaca(series: Series) -> pd.Series:
     """Daily bars for one US stock or ETF from Alpaca's market data API, adjusted for
-    splits and dividends, since 2016 (DEC-0070). Research only: the values feed
+    splits and dividends, since 2016 (DEC-0075). Research only: the values feed
     statistics and backtests and are never shown. Needs the team's ALPACA_KEY_ID and
     ALPACA_SECRET_KEY; without them the series is skipped. The free plan allows 200 calls
     a minute; we pause between pages."""

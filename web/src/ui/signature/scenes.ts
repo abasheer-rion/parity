@@ -708,7 +708,45 @@ const scorecard: Scene = (v, F) => {
 
 // ------------------------------------------------------------------ the registry
 
-export const SCENES: Record<string, Scene> = { equity, split, underwater, distribution, heatmap, regimes, scorecard };
+
+// ------------------------------------------------------------------ candles
+// A strategy's recent path as candles (DEC-0075): params.candles is [open, high, low, close]
+// per period, oldest first, from real results. The candles draw in left to right from s = -1
+// to 0; a dashed line marks the first open, and the last close carries a pill with the change.
+const candles: Scene = (v, F) => {
+  const P = v.params ?? {};
+  const raw = Array.isArray(P.candles) ? (P.candles as unknown[]) : [];
+  const cs = raw.map((c) => (Array.isArray(c) ? c.map(Number) : [])).filter((c) => c.length === 4 && c.every(Number.isFinite)) as number[][];
+  if (!cs.length) return "";
+  const { x0, x1, y0, y1 } = F.L.plot;
+  const lo = Math.min(...cs.map((c) => c[2])), hi = Math.max(...cs.map((c) => c[1]));
+  const pad = (hi - lo) * 0.08 || Math.abs(hi) * 0.01 || 1;
+  const Y = (val: number) => y1 - ((val - (lo - pad)) / (hi - lo + 2 * pad)) * (y1 - y0);
+  const step = (x1 - x0) / cs.length;
+  const bw = Math.max(1.5 * F.u, step * 0.62);
+  const shown = F.s < 0 ? easeOut(F.s + 1) * cs.length : cs.length;
+  let out = line(x0, Y(cs[0][0]), x1, Y(cs[0][0]), { stroke: F.th.par, sw: 1 * F.u, dash: `${3 * F.u} ${3 * F.u}`, opacity: 0.7 });
+  cs.forEach((c, i) => {
+    const a = clamp(shown - i);
+    if (a <= 0) return;
+    const up = c[3] >= c[0];
+    const col = up ? F.th.pos : F.th.neg;
+    const cx = x0 + step * (i + 0.5);
+    const top = Y(Math.max(c[0], c[3])), bot = Y(Math.min(c[0], c[3]));
+    out += group(line(cx, Y(c[1]), cx, Y(c[2]), { stroke: col, sw: 1.2 * F.u }) +
+      rect(cx - bw / 2, top, bw, Math.max(1 * F.u, bot - top), { fill: col, rx: 1 * F.u }), a);
+  });
+  const first = cs[0][0], lastC = cs[cs.length - 1][3];
+  const change = first ? lastC / first - 1 : 0;
+  if (shown >= cs.length - 0.01) {
+    const label = pctSigned(1)(change);
+    const tone: Tone = change >= 0 ? "pos" : "neg";
+    out += text(F, x1, Math.max(y0 + 12 * F.u, Y(lastC) - 8 * F.u), label, { size: 12 * F.u, weight: 700, fill: F.color(tone), anchor: "end" });
+  }
+  return out;
+};
+
+export const SCENES: Record<string, Scene> = { equity, split, underwater, distribution, heatmap, regimes, scorecard, candles };
 export const SCENE_KINDS = Object.keys(SCENES);
 
 /** Frame options per kind: which bands of the canvas a scene needs. */
@@ -761,6 +799,13 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
   const P = v.params ?? {};
   const cell = (f: Fmt, x: number) => (Number.isFinite(x) ? f(x) : "n/a");
   switch (v.kind) {
+    case "candles": {
+      const cs = (Array.isArray(P.candles) ? (P.candles as unknown[]) : []).filter((c): c is number[] => Array.isArray(c) && c.length === 4);
+      if (!cs.length) return null;
+      const labels = Array.isArray(P.labels) ? (P.labels as string[]) : [];
+      const f = (x: number) => (Number.isFinite(x) ? x.toFixed(2) : "n/a");
+      return { caption: v.alt, head: ["Period", "Open", "High", "Low", "Close"], rows: sample(cs.length, max).map((i) => [labels[i] ?? String(i + 1), f(cs[i][0]), f(cs[i][1]), f(cs[i][2]), f(cs[i][3])]) };
+    }
     case "equity": {
       const S = seriesOf(P), fm = fmtOf(P.fmt);
       if (!S.length) return null;

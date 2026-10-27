@@ -38,7 +38,7 @@ from datetime import UTC, date, datetime, timedelta
 import pandas as pd
 import requests
 
-from . import private, themes
+from . import heatmap, private, themes
 
 USER_AGENT = "parity-research/0.1 (private research project)"
 TIMEOUT = 30
@@ -116,6 +116,19 @@ SOURCES: list[Source] = [
            "Public information; may be copied or distributed; cite the SEC", "yes",
            "Source: SEC EDGAR XBRL", "https://www.sec.gov/edgar", needs_contact=True,
            max_age_hours=24),
+    Source("wiki-index-members", "S&P 500 and Nasdaq-100 members", "Wikipedia",
+           "Which companies are in each index, with sector, for the home heatmap",
+           "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+           "Text under CC BY-SA 4.0; reuse allowed with credit and a link", "yes",
+           "Index members from Wikipedia, CC BY-SA 4.0",
+           "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", max_age_hours=24),
+    Source("sec-public-float", "SEC public float", "US Securities and Exchange Commission",
+           "Each company's public float from its latest annual report (dei:EntityPublicFloat), "
+           "the box size on the home heatmap",
+           "https://www.sec.gov/privacy#dissemination",
+           "Public information; may be copied or distributed; cite the SEC", "yes",
+           "Source: SEC EDGAR XBRL", "https://www.sec.gov/edgar", needs_contact=True,
+           max_age_hours=24 * 7),
 ]
 BY_ID = {s.id: s for s in SOURCES}
 
@@ -502,6 +515,32 @@ def fetch_sec_bdc(src: Source) -> dict[str, pd.DataFrame]:
     return {"bdc_nav": pd.concat(frames, ignore_index=True)}
 
 
+def fetch_index_members(src: Source) -> dict[str, pd.DataFrame]:
+    frames = []
+    for index, page in heatmap.PAGES.items():
+        params = {"action": "parse", "page": page, "prop": "wikitext", "format": "json",
+                  "redirects": 1}
+        body = _request(src, heatmap.WIKI_API, params=params).json()
+        frames.append(heatmap.parse_members(body["parse"]["wikitext"]["*"], index))
+    return {"index_members": pd.concat(frames, ignore_index=True)}
+
+
+def fetch_public_float(src: Source) -> dict[str, pd.DataFrame]:
+    tickers = heatmap.parse_tickers(_request(src, heatmap.SEC_TICKERS, pause=SEC_PAUSE).json())
+    frames = []
+    for y, q in heatmap.recent_quarters(now().date()):
+        try:
+            url = heatmap.SEC_FRAME.format(y=y, q=q)
+            frames.append(heatmap.parse_float_frame(_request(src, url, pause=SEC_PAUSE).json()))
+        except RuntimeError:
+            continue  # a quarter with no frame yet
+    floats = heatmap.latest_floats(frames)
+    if floats.empty:
+        raise RuntimeError("no public float frame returned")
+    tick = pd.DataFrame(sorted(tickers.items()), columns=["ticker", "cik"])
+    return {"public_float": floats, "sec_tickers": tick}
+
+
 FETCHERS = {
     "coingecko-markets": fetch_coingecko_markets,
     "coingecko-history": fetch_coingecko_history,
@@ -512,6 +551,8 @@ FETCHERS = {
     "sec-filings": fetch_sec_filings,
     "sec-formd": fetch_sec_formd,
     "sec-bdc": fetch_sec_bdc,
+    "wiki-index-members": fetch_index_members,
+    "sec-public-float": fetch_public_float,
 }
 
 

@@ -56,6 +56,7 @@ Every button, field, table and panel on Parity now meets the WCAG 2.2 AA accessi
 ## Referenced by
 
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0075: The app home is a full-width grid of widgets each person arranges](0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
 <!-- backlinks:end -->
