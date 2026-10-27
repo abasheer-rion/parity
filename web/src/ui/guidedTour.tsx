@@ -7,8 +7,9 @@
 // Behaviour:
 //   - A step whose target is missing or hidden (a phone layout, a closed panel) is skipped,
 //     and the count only counts the steps that can be shown.
-//   - A veil takes clicks, so the page cannot be used half way through. It and the card are
-//     fixed layers, so the page never moves. The card's ring dims everything but the target.
+//   - A veil takes clicks, so the page cannot be used half way through, not even the target
+//     inside the spotlight. It and the card are fixed layers, so the page never moves. The
+//     card's shade dims and blurs everything but the target, and glides between targets.
 //   - Keyboard: Escape skips the tour, Left and Right move, Tab stays inside the card, and no
 //     other key reaches the page while the tour is open (so app hotkeys do not fire).
 //   - "Skip all tours" ends with "skip-all"; the caller turns every tour off.
@@ -27,6 +28,7 @@ export interface GuidedStep {
   target: TourTarget;
   title: string;
   body: string;
+  /** Ignored: the card is always centred. Kept so older step lists still compile. */
   placement?: "top" | "bottom" | "left" | "right";
 }
 
@@ -170,8 +172,9 @@ export function Tour({ steps, open, label, onEnd, onStep }: {
     <div className="ui-gtour" aria-label={label}>
       <div className="ui-gtour-veil" aria-hidden onPointerDown={(e) => e.preventDefault()} />
       {edgeStyle && <span ref={edge} className="ui-gtour-edge" style={edgeStyle} aria-hidden />}
-      <TourStep key={step.id} open modal target={target} title={step.title} step={pos + 1} total={avail.length}
-        placement={step.placement ?? "bottom"} onNext={() => go(1)} onBack={() => go(-1)} onSkip={() => end("skip", index)} onSkipAll={() => end("skip-all", index)}>
+      {/* One card for the whole tour (no key per step), so the spotlight glides between targets. */}
+      <TourStep open modal target={target} title={step.title} step={pos + 1} total={avail.length}
+        onNext={() => go(1)} onBack={() => go(-1)} onSkip={() => end("skip", index)} onSkipAll={() => end("skip-all", index)}>
         {step.body}
       </TourStep>
     </div>,
