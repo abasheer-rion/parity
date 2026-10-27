@@ -37,7 +37,7 @@ The old home was a centred column with a large checklist card in the middle and 
 ## Decision
 
 1. Widgets live in one registry (`web/src/home/registry.ts`) with stable ids. Every view, click, dismiss, fold, move, hide and restore goes through `track()`, which feeds product analytics (only with consent, DEC-0053) and any listener. `setHomePlanner()` lets the personalization engine rank, fold and hide widgets and fill What's new; until it is set, Home uses the default order for the person's segment. Once a person moves or hides a widget, their order wins.
-2. Layouts are stored in a new table, `home_layouts` (one row per person, own row only, migration `20261109000000_home_layouts.sql`), with a copy in the browser so Home draws in its final order at once.
+2. Layouts are stored in a new table, `home_layouts` (one row per person, own row only, migration `20261109060000_home_layouts.sql`), with a copy in the browser so Home draws in its final order at once.
 3. Every widget holds its height while it loads, so the page does not jump (`npm run cls` is 0.000 at desktop and phone width, 0.015 on a slow network).
 4. **Hooks are true.** What's new is the personalization engine's ranked feed (DEC-0068), drawn inside the widget. Its lines may grab attention, such as a bot that won most of its trades and still lost money, but each comes from our own data, says why it is there, and never says or implies that a strategy is a good investment.
 5. **Data we may show.**
