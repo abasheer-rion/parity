@@ -227,6 +227,19 @@ jobs:
       - name: Fetch the Artifact Signing token
         if: env.WIN_SIGN == '1'
         run: az account get-access-token --resource https://codesigning.azure.net --output none
+      # electron-builder installs the signing module itself and carries on when that fails, so a
+      # gallery hiccup broke the 0.2.4 build ("Invoke-TrustedSigning is not recognized").
+      # Install a known version here, with retries, and stop if the command is missing.
+      - name: Install the Artifact Signing module
+        if: env.WIN_SIGN == '1'
+        shell: pwsh
+        run: |
+          for ($i = 1; $i -le 4; $i++) {
+            try { Install-Module -Name TrustedSigning -RequiredVersion 0.5.8 -Force -Scope CurrentUser -Repository PSGallery -ErrorAction Stop; break }
+            catch { Write-Host "attempt $i failed: $_"; Start-Sleep -Seconds (15 * $i) }
+          }
+          Import-Module TrustedSigning -RequiredVersion 0.5.8 -ErrorAction Stop
+          Get-Command Invoke-TrustedSigning -ErrorAction Stop | Format-Table Name, Version
       - name: Build the Windows installer (signed when Azure signing is set up)
         run: npm run build:win
         working-directory: desktop
