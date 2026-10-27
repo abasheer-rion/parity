@@ -185,6 +185,8 @@ export const PAGES: Record<string, PageMeta> = {
   "legal/accessibility/index.html": { title: "Accessibility statement · Parity", description: "Parity's accessibility target, the known gaps, and how to report a barrier.", path: "/legal/accessibility/", image: "legal" },
   "legal/risk/index.html": { title: "Risk notice · Parity", description: "Why backtests and simulations can mislead, and the risks of crypto, perpetual futures, leverage and ETFs.", path: "/legal/risk/", image: "legal" },
   "legal/regulatory/index.html": { title: "Regulatory status and your rights · Parity", description: "What Parity is and is not, the laws and exemptions it relies on, your rights, and where to complain.", path: "/legal/regulatory/", image: "legal" },
+  // The desktop app's download page (DEC-0072): links that always fetch the newest release.
+  "download/index.html": { title: "Download Parity for Mac and Windows · Parity", description: "Parity's desktop app for Mac (Apple silicon and Intel) and Windows: the newest version, its size, checksums and system requirements.", path: "/download/", image: "default" },
   // The signed-in apps. Their tags change with each page (ROUTES_META); these are what a
   // link preview shows, since the server answers a signed-out visitor with a redirect.
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },
@@ -298,6 +300,7 @@ export const ROUTES_META: Record<string, RouteMeta> = {
   registry: R("Data catalog", "Every data source and series: display rights, status, health, where it is used and the tests run when it arrived.", "research"),
   latency: R("Latency", "How old each source is, how long each job takes and how fast pages load their data.", "research"),
   edges: R("Edge Lab", "Seven checks for a backtest, each with a mistake from our own research.", "research"),
+  pairs: R("Pairs", "Pairs trading recipes tested after costs, with each pair's gap, hedge ratio, p-value and half-life over time.", "research"),
   competitors: R("Competitors", "What public posts praise and complain about in 22 trading products, counted by theme, and what Parity takes from each.", "research"),
   private: R("Private markets", "Property index smoothing, Form D counts, BDC loan marks and credit data from free sources.", "research"),
 };

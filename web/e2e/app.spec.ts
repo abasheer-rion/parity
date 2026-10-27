@@ -313,7 +313,11 @@ test.describe("account settings", () => {
     await page.getByRole("button", { name: "Change password" }).click();
     const pw = page.getByLabel(/new password/i).first();
     await pw.fill("short1");
-    await page.getByRole("button", { name: /save|change password|update/i }).last().click();
+    const save = page.getByRole("button", { name: "Save password" });
+    await expect(save).toBeDisabled();
+    await page.getByLabel("Confirm password", { exact: true }).fill("short1");
+    await expect(page.getByText("Passwords match")).toBeVisible();
+    await save.click();
     await expect(page.getByText(/at least 10 characters/i).last()).toBeVisible();
   });
 
