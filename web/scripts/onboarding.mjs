@@ -121,14 +121,18 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
   await tip(page).locator(".ui-btn-primary").click();
   check(await noTip(page, 400), "Done closes the tour");
   check((await stored(page)).tours_seen?.includes("home"), "home is saved as seen");
+  await page.locator(".setup-btn").click();
+  await page.locator(".onb-pop").waitFor({ state: "visible" });
   await shot(page, "03-checklist");
-  check(await page.locator("[data-tour='checklist'] .onb-item").count() === 9, "the checklist lists 9 items (8 to do and brokerage)");
-  check(/coming later/.test((await page.locator("[data-tour='checklist'] [data-item='broker']").textContent()) ?? ""), "brokerage shows as coming later");
+  check(await page.locator(".onb-pop .onb-item").count() === 9, "the checklist lists 9 items (8 to do and brokerage)");
+  check(/coming later/.test((await page.locator(".onb-pop [data-item='broker']").textContent()) ?? ""), "brokerage shows as coming later");
+  await page.keyboard.press("Escape");
   await page.reload();
   check(await noTip(page), "home tour does not open again after a reload");
   check(errors.length === 0, `no page errors on home (${errors.join("; ")})`);
 
   // ---------------------------------------------------------------- 5. wallet dialog
+  await page.locator(".setup-btn").click();
   await page.locator("[data-item='wallet'] button").click();
   await page.locator(".wal-warn").waitFor({ state: "visible" });
   check(/never asks for your seed phrase/i.test((await page.locator(".wal-warn").textContent()) ?? ""), "the wallet dialog says Parity never asks for a seed phrase");
@@ -143,6 +147,8 @@ const shot = (page, name) => page.screenshot({ path: join(SHOTS, `${name}.png`) 
   await shot(page, "06-wallet-saved");
   await page.keyboard.press("Escape");
   await page.waitForTimeout(1500);
+  // The popover closed when the dialog opened: open it again to look.
+  if (!(await page.locator(".onb-pop").isVisible())) { await page.locator(".setup-btn").click(); await page.locator(".onb-pop").waitFor({ state: "visible" }); }
   check(await page.locator("[data-item='wallet'].done").count() === 1, "adding a wallet ticks the wallet item");
 
   // ---------------------------------------------------------------- 2. skip all in Trade

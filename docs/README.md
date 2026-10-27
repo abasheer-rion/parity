@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 71 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 72 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
@@ -122,6 +122,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0070 | [Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 | DEC-0071 | [People make their own API keys for a versioned Parity API](decisions/0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0072 | [Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0075 | [The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

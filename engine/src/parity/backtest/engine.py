@@ -161,7 +161,7 @@ def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None =
     drag = [c for c in held.columns if c in FACTOR_COST]
     inside = sum(held[c].abs() * FACTOR_COST[c] / TRADING_DAYS for c in drag) if drag else 0.0
     # Short legs of stock pairs pay a borrow fee, a year's rate charged daily on the short
-    # value (DEC-0070). Currencies and research factors have no stock to borrow.
+    # value (DEC-0075). Currencies and research factors have no stock to borrow.
     fee = getattr(strategy, "borrow_bps", 0.0) / 1e4
     short_cols = [c for c in held.columns if not c.startswith(("fx.", "xfx.", "factor."))]
     borrow = (held[short_cols].clip(upper=0).abs().sum(axis=1) * fee / TRADING_DAYS

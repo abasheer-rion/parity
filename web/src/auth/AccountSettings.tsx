@@ -13,6 +13,7 @@ import { emailLanding } from "./redirect";
 import { codeProblem, emailProblem, passwordProblem } from "./rules";
 import { signOut, useSession, useTeamBadge } from "./session";
 import { Passkeys, TwoStep } from "./SecuritySettings";
+import { saveFirstName, useFirstName } from "../lib/firstName";
 
 export default function AccountSettings() {
   const { session } = useSession();
@@ -20,6 +21,9 @@ export default function AccountSettings() {
   const team = useTeamBadge(session?.user.id);
   return (
     <>
+      <SettingsRow label="First name" help="What Home calls you. Only your first name, never your email.">
+        <FirstName />
+      </SettingsRow>
       <SettingsRow label="Email" help="The address you sign in with. Changing it sends a confirmation to both the old and the new address.">
         <ChangeEmail current={email} pending={session?.user.new_email} />
         {team && <div style={{ marginTop: 8 }}><Badge tone="accent">Parity team</Badge></div>}
@@ -51,6 +55,23 @@ export default function AccountSettings() {
         <LegalLinks className="start" />
       </SettingsRow>
     </>
+  );
+}
+
+function FirstName() {
+  const { name } = useFirstName();
+  const [v, setV] = useState("");
+  const [busy, setBusy] = useState(false);
+  useEffect(() => { setV(name ?? ""); }, [name]);
+  return (
+    <form style={{ display: "flex", gap: 8, flexWrap: "wrap" }} onSubmit={(e) => {
+      e.preventDefault();
+      setBusy(true);
+      void saveFirstName(v).then((err) => { setBusy(false); toast(err ?? "Saved", { tone: err ? "bad" : "good" }); });
+    }}>
+      <input className="ui-input" aria-label="First name" autoComplete="given-name" maxLength={30} value={v} onChange={(e) => setV(e.target.value)} style={{ width: 220 }} />
+      <Button type="submit" loading={busy} disabled={!v.trim() || v.trim() === name}>Save</Button>
+    </form>
   );
 }
 
