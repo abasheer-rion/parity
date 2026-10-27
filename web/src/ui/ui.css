@@ -95,15 +95,29 @@
 .ui-select { position: relative; display: inline-flex; align-items: center; }
 .ui-select select { appearance: none; height: 32px; padding: 0 30px 0 12px; border-radius: var(--radius-md); border: 1px solid var(--ds-border-input); background: var(--hover); color: var(--text); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .ui-select .icon { position: absolute; right: 10px; pointer-events: none; color: var(--muted); }
-.ui-seg { position: relative; display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); padding: 0; gap: 0; background: var(--ds-background-input); height: 32px; }
-.ui-seg button { position: relative; z-index: 1; border: 0; border-radius: 7px; height: 30px; background: none; color: var(--text-2); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color var(--dur-2) var(--ease-out); }
-.ui-seg-md button { padding: 5px 14px; font-size: var(--fs-sm); }
-.ui-seg-sm button { padding: 3px 10px; font-size: var(--fs-xs); }
-.ui-seg button:hover { color: var(--text); }
-.ui-seg button.on { color: var(--ds-text-emphasized); }
-/* The raised thumb behind the chosen option slides; the buttons themselves never change size. */
-.ui-seg-thumb { position: absolute; top: 0; left: 0; height: 30px; width: var(--ind-w, 0); transform: translateX(var(--ind-x, 0)); border-radius: 7px; background: var(--ds-background-default); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--color-border); pointer-events: none; }
-.ui-seg[data-ready] .ui-seg-thumb { transition: transform var(--dur-3) var(--ease-spring), width var(--dur-3) var(--ease-spring); }
+/* ListSelect: the button looks like a field; its menu is the library's menu surface. */
+.ui-lsel { position: relative; display: inline-flex; max-width: 100%; }
+.ui-lsel-btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-2); max-width: 100%; min-height: 32px; padding: 0 var(--space-2h) 0 var(--space-3); border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); background: var(--ds-background-input); color: var(--color-text); font: inherit; font-size: var(--type-md); text-align: left; cursor: pointer; transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); }
+.ui-lsel-btn:hover, .ui-lsel-btn[aria-expanded="true"] { border-color: var(--ds-border-input-emphasized); background: var(--color-hover); }
+.ui-lsel-btn .icon { flex: none; color: var(--color-text-muted); transition: transform var(--dur-2) var(--ease-out); }
+.ui-lsel-btn[aria-expanded="true"] .icon { transform: rotate(180deg); }
+.ui-lsel-v { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-lsel-list { max-height: min(320px, 60vh); overflow-y: auto; overscroll-behavior: contain; }
+.ui-lsel-o { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); color: var(--color-text-body); font-size: var(--type-md); cursor: pointer; white-space: nowrap; }
+.ui-lsel-o.active { background: var(--color-row-hover); color: var(--color-text); }
+.ui-lsel-o[aria-selected="true"] { color: var(--color-text); font-weight: var(--weight-medium); }
+.ui-lsel-o .icon { color: var(--color-accent-text); }
+/* Choose one of a few: underline tabs, not a pill. The buttons never change size; one 2px
+   Invicta line under the chosen option slides there with a transform (DEC-0075). */
+.ui-seg { position: relative; display: inline-flex; align-items: stretch; flex-wrap: wrap; gap: 0 var(--space-1); min-height: var(--control-h-md); max-width: 100%; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: inset 0 -1px 0 var(--color-border-strong); }
+.ui-seg button { position: relative; z-index: 1; flex: none; min-height: var(--control-h-md); border: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: none; color: var(--color-text-muted); font: inherit; font-weight: var(--weight-medium); cursor: pointer; display: inline-flex; align-items: center; gap: var(--space-1h); transition: color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); }
+.ui-seg-md button { padding: 0 var(--space-3); font-size: var(--type-md); }
+.ui-seg-sm, .ui-seg-sm button { min-height: var(--control-h-sm); }
+.ui-seg-sm button { padding: 0 var(--space-2h); font-size: var(--type-sm); }
+.ui-seg button:hover { color: var(--color-text); background: var(--color-hover); }
+.ui-seg button.on { color: var(--color-text); }
+.ui-seg-thumb { position: absolute; z-index: 2; left: 0; bottom: 0; width: 1px; height: 2px; border-radius: var(--radius-xs); background: var(--ind-color, var(--color-accent)); transform-origin: left center; transform: translate(var(--ind-x, 0), var(--ind-y, 0)) scaleX(var(--ind-s, 0)); pointer-events: none; }
+.ui-seg[data-ready] .ui-seg-thumb { transition: transform var(--dur-3) var(--ease-spring); }
 .ui-toggle { width: 40px; height: 24px; border-radius: 99px; border: 0; padding: 2px; background: var(--color-border-control); cursor: pointer; transition: background var(--dur-2); }
 .ui-toggle i { display: block; width: 20px; height: 20px; border-radius: 99px; background: var(--palette-white); box-shadow: var(--shadow-1); transition: transform var(--dur-2) var(--ease-spring); }
 .ui-toggle.on { background: var(--ds-background-input-checked); }
@@ -121,6 +135,35 @@
 .ui-tabs button.on { color: var(--accent); }
 .ui-tabs-ind { position: absolute; left: 0; bottom: 0; width: 1px; height: 2px; background: var(--ind-color, var(--accent)); transform-origin: left center; transform: translateX(var(--ind-x, 0)) scaleX(var(--ind-s, 0)); pointer-events: none; }
 .ui-tabs[data-ready] .ui-tabs-ind { transition: transform var(--dur-3) var(--ease-spring); }
+
+
+/* App rails (Workbench, Trade, Academy). The chosen item has no box: a 3px Invicta bar at
+   the rail's left edge and a blue icon. Items span the rail, so the bar sits on its edge. */
+.ui-rail-i { position: relative; width: 100%; border-radius: 0; background: none; transition: color var(--dur-1) var(--ease-out); }
+.ui-rail-i:hover { color: var(--color-text); background: none; }
+.ui-rail-i.on { color: var(--color-accent-text); background: none; box-shadow: none; }
+.ui-rail-i::before { content: ""; position: absolute; left: 0; top: 18%; bottom: 18%; width: 3px; border-radius: 0 var(--radius-xs) var(--radius-xs) 0; background: var(--color-accent); transform: scaleY(0); transition: transform var(--dur-2) var(--ease-out); pointer-events: none; }
+.ui-rail-i.on::before { transform: scaleY(1); }
+
+/* An instant tooltip from a data-tip attribute: shown on hover or keyboard focus, with no
+   delay and no movement, beside the element. The element keeps its aria-label for screen readers. */
+.ui-tipped { position: relative; }
+.ui-tipped::after { content: attr(data-tip); position: absolute; z-index: var(--z-tooltip); left: calc(100% + var(--space-2)); top: 50%; translate: 0 -50%; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--color-surface-inverted); box-shadow: var(--shadow-2); color: var(--color-text); font-family: var(--font-text); font-size: var(--type-xs); font-weight: var(--weight-medium); line-height: var(--leading-snug); letter-spacing: 0; text-transform: none; white-space: nowrap; pointer-events: none; visibility: hidden; opacity: 0; }
+.ui-tipped:hover::after, .ui-tipped:focus-visible::after { visibility: visible; opacity: 1; }
+
+/* Big choices: a row of cards with an icon, a title and a line. The chosen card takes an
+   Invicta edge, a tinted fill and a filled radio mark. */
+.ui-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-3); }
+.ui-choice { position: relative; display: flex; align-items: flex-start; gap: var(--space-3); min-height: 96px; padding: var(--space-4) var(--space-10) var(--space-4) var(--space-4); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); background: var(--color-surface); color: var(--color-text-muted); font: inherit; text-align: left; cursor: pointer; transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out); }
+.ui-choice:hover { border-color: var(--color-border-max); background: var(--color-surface-raised); }
+.ui-choice.on { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); box-shadow: inset 0 0 0 1px var(--color-accent); }
+.ui-choice-icon { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-fill); color: var(--color-text-muted); transition: color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); }
+.ui-choice.on .ui-choice-icon { background: var(--color-accent-soft); color: var(--color-accent-text); }
+.ui-choice-text { display: grid; gap: var(--space-1); min-width: 0; }
+.ui-choice-t { color: var(--color-text); font-size: var(--type-lg); font-weight: var(--weight-bold); line-height: var(--leading-snug); }
+.ui-choice-b { color: var(--color-text-muted); font-size: var(--type-sm); line-height: var(--leading-normal); }
+.ui-choice-mark { position: absolute; top: var(--space-4); right: var(--space-4); width: 18px; height: 18px; border: 2px solid var(--color-border-control); border-radius: var(--radius-pill); }
+.ui-choice.on .ui-choice-mark { border-color: var(--color-accent); background: radial-gradient(circle, var(--color-accent) 0 4px, transparent 4.5px); }
 
 /* Filters */
 .ui-filterbar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4); }
@@ -162,7 +205,7 @@
 .mcard.flush { padding: 0; overflow: hidden; }
 .ui-stat-label { font-size: var(--fs-sm); color: var(--text-2); margin-bottom: 4px; }
 .ui-stat-label .term-link { color: var(--text-2); }
-.ui-stat-value { font-weight: var(--fw-medium); letter-spacing: -0.02em; font-variant-numeric: var(--num-variant); }
+.ui-stat-value { font-weight: var(--weight-bold); letter-spacing: -0.02em; font-variant-numeric: var(--num-variant); }
 .ui-stat-sm .ui-stat-value { font-size: var(--type-2xl); }
 .ui-stat-md .ui-stat-value { font-size: var(--type-5xl); }
 .ui-stat-lg .ui-stat-value { font-size: var(--type-7xl); line-height: 1.15; }
@@ -171,13 +214,13 @@
 .kstats.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .ui-sec-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); border-bottom: 1px solid var(--border); margin-bottom: var(--space-4); }
 .ui-sec-head h2 { border: 0; margin: 0; padding-bottom: 12px; }
-.ui-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: var(--radius-sm); font-size: var(--fs-xs); font-weight: var(--fw-medium); white-space: nowrap; }
+.ui-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: var(--radius-sm); font-size: var(--fs-xs); font-weight: var(--weight-bold); white-space: nowrap; }
 .ui-badge-neutral { background: var(--hover); color: var(--text-2); box-shadow: inset 0 0 0 1px var(--border); }
-.ui-badge-accent { background: var(--color-accent-soft); color: var(--color-accent-text); }
-.ui-badge-warning { background: var(--color-warning-soft); color: var(--color-warning); }
+.ui-badge-accent { background: var(--color-accent-soft); color: var(--color-accent-text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 45%, transparent); }
+.ui-badge-warning { background: var(--color-warning-soft); color: var(--color-warning); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-warning) 35%, transparent); }
 .ui-badge-info { background: var(--color-info-soft); color: var(--color-info); }
-.ui-badge-good { background: color-mix(in srgb, var(--good) 14%, transparent); color: var(--good); }
-.ui-badge-bad { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
+.ui-badge-good { background: var(--color-positive-soft); color: var(--color-positive); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-positive) 35%, transparent); }
+.ui-badge-bad { background: var(--color-negative-soft); color: var(--color-negative); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-negative) 35%, transparent); }
 .ui-badge-dark { background: var(--text); color: var(--canvas); }
 .ui-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--text-2); }
 .ui-status i { width: 7px; height: 7px; border-radius: 99px; background: var(--muted); }
@@ -380,7 +423,7 @@
 
 /* Long tables in their own box: the header sticks, widths are fixed so nothing reflows. */
 .ui-table-box { overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; border-radius: var(--radius-md); }
-.ui-table-box thead th { position: sticky; top: 0; z-index: 2; background: var(--table-head-bg, var(--color-bar)); box-shadow: inset 0 -1px 0 var(--border); }
+.ui-table-box thead th { position: sticky; top: 0; z-index: 2; background: var(--table-head-bg, var(--color-table-head)); box-shadow: inset 0 -1px 0 var(--color-border-max); }
 .mtable.fixed { table-layout: fixed; }
 /* On a phone a fixed table keeps a readable width and scrolls sideways inside its box. */
 .ui-table-box .mtable.fixed { min-width: var(--table-min, 640px); }
@@ -395,7 +438,7 @@
 .mtable tr.ui-spacer, .mtable tr.ui-spacer td { padding: 0; border: 0; height: auto; }
 .sticky-first th:first-child, .sticky-first td:first-child { position: sticky; left: 0; z-index: 1; background: var(--table-head-bg, var(--color-bar)); }
 .sticky-first thead th:first-child { z-index: 3; }
-.sticky-first tr.row-link:hover td:first-child { background: linear-gradient(var(--hover), var(--hover)), var(--table-head-bg, var(--color-bar)); }
+.sticky-first tbody tr:hover td:first-child { background: linear-gradient(var(--color-row-hover), var(--color-row-hover)), var(--table-head-bg, var(--color-bar)); }
 
 /* Floating things: they grow out of the side they are attached to, and fade back into it. */
 .ui-float { transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-spring); transform-origin: top center; }

@@ -72,9 +72,11 @@ Every line of copy should state a fact a reader can check on the page. If a sent
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](../decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
 - [DEC-0068: Personalization learns from use, ranks What's new and runs experiments, with an off switch](../decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](../decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](../decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [GDE-0003: Writing and filing docs](../guides/0003-writing-docs.md)
 - [GDE-0009: Writing a blog or news post](../guides/0009-writing-a-blog-or-news-post.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](0026-accessibility-audit-wcag-2-2-aa.md)
+- [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0018: Bug sweep across every Parity app](../log/2026-10-25-bug-sweep-across-every-parity-app.md)
 <!-- backlinks:end -->

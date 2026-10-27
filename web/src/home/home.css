@@ -11,7 +11,7 @@
 .h2-name .ui-input { width: 200px; }
 .h2-err { color: var(--color-negative); font-size: var(--type-sm); }
 .h2-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-height: 32px; }
-.h2-edit { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 0; border-radius: var(--radius-pill); background: var(--ds-background-secondary); color: var(--text-body); font: inherit; font-size: var(--type-sm); cursor: pointer; }
+.h2-edit { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 0; border-radius: var(--radius-pill); background: var(--ds-background-secondary); color: var(--text-body); font: inherit; font-size: var(--type-sm); font-weight: var(--weight-medium); cursor: pointer; }
 .h2-edit.on { background: var(--color-accent); color: var(--color-on-accent); }
 .h2-hidden { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .h2-hidden .chip { display: inline-flex; align-items: center; gap: 4px; }
@@ -82,9 +82,10 @@
 .wnew-hook { display: block; font-size: var(--type-md); line-height: 1.4; color: var(--ds-text-title); }
 .tr-row .ui-progress { margin-top: 4px; }
 
-.seg-mini { display: inline-flex; gap: 2px; padding: 2px; border-radius: var(--radius-md); background: var(--ds-background-secondary); align-self: flex-start; }
-.seg-mini button { min-height: 28px; padding: 0 10px; border: 0; border-radius: var(--radius-sm); background: none; color: var(--ds-text-secondary); font: inherit; font-size: var(--type-sm); cursor: pointer; }
-.seg-mini button.on { background: var(--color-surface-overlay); color: var(--text); }
+.seg-mini { display: inline-flex; gap: var(--space-1); padding: 0; align-self: flex-start; box-shadow: inset 0 -1px 0 var(--color-border-strong); }
+.seg-mini button { min-height: 28px; padding: 0 10px; border: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: none; color: var(--color-text-muted); transition: color var(--dur-2) var(--ease-out); font: inherit; font-size: var(--type-sm); font-weight: var(--weight-medium); cursor: pointer; }
+.seg-mini button:hover { color: var(--color-text); }
+.seg-mini button.on { color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
 
 .acct-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
 .acct-stats b { display: block; font-size: var(--type-2xl); font-variant-numeric: var(--num-variant); }

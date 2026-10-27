@@ -206,7 +206,7 @@ export function SignaturePlayer({ visual, autoPlay = true, theme = "dark", size:
               </span>
               <Button size="sm" variant="primary" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</Button>
               {!reduced && (
-                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm sg-play" onClick={togglePlay} aria-pressed={playing}>
+                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm sg-play" onClick={togglePlay} aria-label={label}>
                   {/* All three labels share one cell, so the button keeps one width as it plays. */}
                   {["Pause", "Replay", "Play"].map((l) => <span key={l} aria-hidden={l !== label || undefined} data-on={l === label || undefined}>{l}</span>)}
                 </button>

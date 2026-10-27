@@ -151,3 +151,24 @@ test("the Windows build signs with Artifact Signing only when asked", () => {
   assert.equal(signed.codeSigningAccountName, "argus-signing");
   assert.equal(signed.certificateProfileName, "argus-public");
 });
+
+test("the window has no title bar strip and no title text", () => {
+  const read = (f) => fs.readFileSync(path.join(__dirname, "..", "electron", f), "utf8");
+  const html = read("ui-titlebar.html");
+  assert.ok(!/id="title"/.test(html) && !/class="title"/.test(html), "no title element");
+  for (const id of ["menu", "back", "forward", "search"]) assert.ok(html.includes(`id="${id}"`), `${id} kept`);
+  const win = read("window.js");
+  assert.match(win, /titleBarStyle: "hiddenInset"/);
+  assert.match(win, /titleBarOverlay: \{ color: TOKENS\["color-canvas"\]/);
+  const preload = read("preload.js");
+  assert.match(preload, /data-desktop-header\] \{ -webkit-app-region: drag/);
+  assert.match(preload, /-webkit-app-region: no-drag/);
+});
+
+test("the app looks for updates at launch and every hour", () => {
+  const src = fs.readFileSync(path.join(__dirname, "..", "electron", "updater.js"), "utf8");
+  assert.match(src, /const FIRST = 5000;/);
+  assert.match(src, /const EVERY = 60 \* 60 \* 1000;/);
+  assert.match(src, /autoInstallOnAppQuit = canInstall/);
+  assert.match(src, /"Restart to update"/);
+});

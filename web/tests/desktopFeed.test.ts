@@ -84,3 +84,47 @@ describe("serveFeed", () => {
     expect((await serveFeed("latest-mac.yml", "GET", env, github(list, { status: 401 }))).status).toBe(502);
   });
 });
+
+describe("serveFeed keeps GitHub's answers", () => {
+  const memory = () => {
+    const m = new Map<string, { body: string; savedAt: number }>();
+    return { m, store: { get: async (k: string) => m.get(k) ?? null, put: async (k: string, body: string) => { m.set(k, { body, savedAt: Date.now() }); } } };
+  };
+  const noWait = async () => {};
+  const list = [release("desktop-v0.2.0", "2026-10-25T00:00:00Z")];
+
+  it("asks GitHub once for many requests within five minutes", async () => {
+    const f = github(list);
+    const { store } = memory();
+    for (let i = 0; i < 20; i++) expect((await serveFeed("latest-mac.yml", "GET", {}, f, store, noWait)).status).toBe(200);
+    expect(f.mock.calls.filter(([u]) => String(u).includes("/releases?")).length).toBe(1);
+  });
+
+  it("tries again when GitHub fails once", async () => {
+    const ok = github(list);
+    let failed = false;
+    const f = vi.fn(async (url: string, init?: RequestInit) => {
+      if (!failed && url.includes("/releases?")) { failed = true; return new Response("busy", { status: 502 }); }
+      return ok(url, init);
+    });
+    const res = await serveFeed("latest-mac.yml", "GET", {}, f, memory().store, noWait);
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain("version: 0.2.0");
+  });
+
+  it("serves the last good answer when GitHub keeps failing", async () => {
+    const { m, store } = memory();
+    await serveFeed("latest-mac.yml", "GET", {}, github(list), store, noWait);
+    for (const v of m.values()) v.savedAt -= 60 * 60 * 1000; // an hour old: no longer fresh
+    const down = vi.fn(async () => new Response("rate limited", { status: 403 }));
+    const res = await serveFeed("latest-mac.yml", "GET", {}, down, store, noWait);
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain("version: 0.2.0");
+  });
+
+  it("still answers an error when nothing was ever kept", async () => {
+    const down = vi.fn(async () => new Response("down", { status: 503 }));
+    expect((await serveFeed("latest-mac.yml", "GET", {}, down, memory().store, noWait)).status).toBe(502);
+    expect(down).toHaveBeenCalledTimes(3);
+  });
+});

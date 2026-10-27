@@ -336,7 +336,7 @@ function TermShell() {
     <TermContext.Provider value={ctx}>
       <div className="ptm">
         <SkipLink />
-        <header className="term-top">
+        <header className="term-top" data-desktop-header>
           <button className="term-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden className="term-back-arrow">‹</span>
             <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />

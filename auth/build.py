@@ -67,9 +67,9 @@ SAMPLE = {
 }
 
 TEXT_FOOTER = (
-    "\n--\nSent by Parity to {{ .Email }}. Research only, not investment advice.\n"
-    "You are getting this because someone used this address on Parity ({{ .SiteURL }}).\n"
-    "If that was not you, you can ignore this email.\n"
+    "\n--\nDidn't ask for this? You can safely ignore this email.\n"
+    "Sent to {{ .Email }} by Parity Trading ({{ .SiteURL }}). Research only, not investment advice.\n"
+    "Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States\n"
 )
 
 META_RE = re.compile(r"\A<!--\s*\n(.*?)\n-->\s*\n", re.S)
@@ -182,7 +182,7 @@ def check_config(subjects: dict[str, str]):
 
 def sample(text: str) -> str:
     # The preview shows the logo from this checkout, so it works before the site is deployed.
-    text = text.replace(f"{ASSET_BASE}/brand/", "../web/public/brand/")
+    text = text.replace(f"{ASSET_BASE}/brand/", "../web/public/brand/").replace(f"{ASSET_BASE}/email/", "../web/public/email/")
     return GO_VAR_RE.sub(lambda m: SAMPLE.get(m.group(1), m.group(0)), text)
 
 

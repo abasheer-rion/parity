@@ -41482,6 +41482,636 @@
         "doi_explicit": true,
         "crossref": "not found"
       }
+    },
+    {
+      "key": "url-bb0e4823",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "connector_platform_oauth_redirect",
+      "venue": "chatgpt.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://chatgpt.com/connector_platform_oauth_redirect",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-71c523c0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "oauth",
+      "venue": "chatgpt.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://chatgpt.com/connector/oauth/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e3897a9e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "manage",
+      "venue": "claude.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.ai/directory/manage",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-507c40bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "authentication.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/authentication.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b821db22",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "review-criteria.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/review-criteria.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff5a1dac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "submission.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/submission.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ed71fd79",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "publish.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/directory/publish.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-64d04381",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp-configuration",
+      "venue": "code.visualstudio.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://code.visualstudio.com/docs/copilot/reference/mcp-configuration",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f17d4992",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp.md",
+      "venue": "cursor.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cursor.com/docs/mcp.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e5d01b8f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "install-links.md",
+      "venue": "cursor.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cursor.com/docs/mcp/install-links.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-04e8250f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "custom-mcp-server.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/api/docs/guides/custom-mcp-server.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d778b3f9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "auth.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/build/auth.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6dc62cd4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "app-review.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/deploy/app-review.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a7909cc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "submission.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/deploy/submission.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-075b10be",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "plugin-guidelines",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/plugin-guidelines",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-045b3caa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "quickstart.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/quickstart.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6a3ebbc5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "browse",
+      "venue": "geminicli.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://geminicli.com/extensions/browse/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2aa3d3ac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "releasing.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c44d07c8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp-server.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7ead9252",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "?assistant=on",
+      "venue": "lab.paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lab.paritytrading.app/?assistant=on",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-10f4a678",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "connect",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a08a802",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "chatgpt",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/chatgpt/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b761cffa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "claude",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/claude/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2b02ed3d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "gemini",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/gemini/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-53a8babb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "privacy",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/legal/privacy/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-35597222",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "terms",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/legal/terms/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3528e093",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "signup",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/signup/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5f1b7398",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "plugins",
+      "venue": "platform.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://platform.openai.com/plugins",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00cdface",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "13145358-anthropic-software-directory-policy",
+      "venue": "support.claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b071788",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "redirect",
+      "venue": "vscode.dev",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://vscode.dev/redirect",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

@@ -274,7 +274,6 @@ function TradeShell() {
     return () => window.removeEventListener("keydown", onKey);
   }, [finder.open, tool, layout.max, set, go, order, setGrid, toggleSide, toggleBottom, symbol, view, setTf, settings.typeToSearch, saveLayout]);
 
-  const asof = useMemo(() => list.reduce((m, s) => (s.asof > m ? s.asof : m), ""), [list]);
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
   // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
@@ -286,7 +285,7 @@ function TradeShell() {
       <div className="ptr" data-density={settings.density} data-mobile={mobile || undefined}>
         <SkipLink />
         {isDesktop() && list.length > 0 && <DesktopTicker list={list} />}
-        <header className="tb">
+        <header className="tb" data-desktop-header>
           <button type="button" className="tb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden>‹</span>
             <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />
@@ -325,8 +324,8 @@ function TradeShell() {
           {!mobile && (
             <nav className="rail" aria-label="Trade">
               {VIEWS.map((v, i) => (
-                <a key={v.id} href={`#/${v.id}`} className={`rail-i ${view === v.id ? "on" : ""} ${v.id === "settings" ? "rail-end" : ""}`} aria-current={view === v.id ? "page" : undefined}
-                  title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+                <a key={v.id} href={`#/${v.id}`} className={`ui-rail-i ui-tipped rail-i ${view === v.id ? "on" : ""} ${v.id === "settings" ? "rail-end" : ""}`} aria-current={view === v.id ? "page" : undefined}
+                  data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                   <Icon name={v.icon} size={17} />
                 </a>
               ))}
@@ -352,11 +351,6 @@ function TradeShell() {
             </ErrorBoundary>
           </main>
         </div>
-
-        <footer className="tr-legal">
-          <span>Demo account. Delayed data. Not advice.</span>
-          <span className="tr-legal-r tabular">{asof ? `Data ${asof}` : insts.status === "loading" ? "Loading" : ""}</span>
-        </footer>
 
         {mobile && (
           <nav className="mtabs" aria-label="Trade">

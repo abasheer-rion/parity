@@ -116,20 +116,30 @@ function ConnectPage() {
       <Copy text={MCP_URL} />
       <p className="cx-muted">Your AI app opens a Parity sign-in page the first time. Log in and choose Allow.</p>
 
-      <h2>Claude</h2>
-      <p>On claude.ai, Claude Desktop or the Claude app: Settings, then Connectors, then Add custom connector. Paste the address and choose Connect. The free plan allows one custom connector.</p>
-      <p>In Claude Code:</p>
+      <h2>Step-by-step guides</h2>
+      <ul className="cx-guides">
+        <li><a href="/connect/claude/"><strong>Claude</strong><span>claude.ai, Claude Desktop, the Claude app and Claude Code</span></a></li>
+        <li><a href="/connect/chatgpt/"><strong>ChatGPT</strong><span>chatgpt.com, as a custom MCP server with OAuth</span></a></li>
+        <li><a href="/connect/gemini/"><strong>Gemini</strong><span>Gemini CLI in your terminal</span></a></li>
+      </ul>
+
+      <h2>Claude Code</h2>
       <Copy text={`claude mcp add --transport http parity ${MCP_URL}`} />
       <p className="cx-muted">Then type /mcp in Claude Code and choose parity to sign in.</p>
 
-      <h2>ChatGPT</h2>
-      <p>Where your plan allows custom connectors: Settings, then Apps and Connectors. Turn on developer mode under Advanced, create a connector, paste the address and choose OAuth. ChatGPT asks before any tool that changes something.</p>
-
       <h2>Gemini CLI</h2>
-      <p>Add this to your Gemini CLI settings.json, then run /mcp auth parity:</p>
-      <Copy text={`"mcpServers": { "parity": { "httpUrl": "${MCP_URL}" } }`} />
+      <Copy text={`gemini mcp add --transport http parity ${MCP_URL}`} />
+      <p className="cx-muted">Then run /mcp auth parity in Gemini CLI.</p>
 
-      <h2>Cursor, VS Code, Codex and others</h2>
+      <h2>Cursor</h2>
+      <p>Add this to <code>~/.cursor/mcp.json</code>. Cursor opens Parity's sign-in when you turn the server on.</p>
+      <Copy text={`{ "mcpServers": { "parity": { "url": "${MCP_URL}" } } }`} />
+
+      <h2>VS Code</h2>
+      <p>Add this to <code>.vscode/mcp.json</code>, or run "MCP: Add Server" and choose HTTP. VS Code asks you to sign in to Parity the first time Copilot uses it.</p>
+      <Copy text={`{ "servers": { "parity": { "type": "http", "url": "${MCP_URL}" } } }`} />
+
+      <h2>Codex and others</h2>
       <p>Add an MCP server by its address (Streamable HTTP) and paste the address above. Each app signs you in with Parity the first time. In Codex, run codex mcp login parity after adding it.</p>
 
       <h2>Your connected apps</h2>
@@ -154,6 +164,7 @@ const SCOPE_WORDS: Record<string, string> = {
   email: "See your email address",
   profile: "See your name, if you set one",
   phone: "See your phone number, if you set one",
+  offline_access: "Stay connected until you disconnect it, without asking you to log in again",
 };
 
 type Details = { authorization_id: string; redirect_uri: string; client: { id: string; name: string; uri: string }; scope: string };

@@ -1,7 +1,8 @@
 /* Parity Verify (REF-0016). Dark-only tokens from ui/tokens.css. Sizes are fixed where
    content arrives late (the chart keeps its aspect), so nothing below jumps. */
-.vf-input { margin: 16px 0 24px; }
-.vf-panel { display: flex; flex-direction: column; gap: 14px; max-width: 880px; }
+.vf-input { margin: var(--space-5) 0 var(--space-6); }
+.vf-panel { display: flex; flex-direction: column; gap: 14px; }
+.vf-panel > p { max-width: 75ch; }
 .vf-privacy { margin: 0; color: var(--text-2); font-size: var(--fs-sm); }
 .vf-drop {
   display: flex; flex-direction: column; gap: 6px; padding: 28px 20px; min-height: 112px; justify-content: center;
@@ -16,7 +17,7 @@
 .vf-warn { color: var(--series-4); margin: 0; font-size: var(--fs-sm); }
 .vf-note { color: var(--text-2); margin: 6px 0 0; font-size: var(--fs-sm); }
 .vf-map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; padding: 4px 0 8px; }
-.vf-map .ui-select, .vf-map .ui-select select { width: 100%; }
+.vf-map .ui-select, .vf-map .ui-select select, .vf-map .ui-lsel, .vf-map .ui-lsel-btn { width: 100%; }
 .vf-questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
 .vf-claim { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border: 0; padding: 0; margin: 0; }
 .vf-claim legend { margin-bottom: 6px; }
@@ -77,10 +78,10 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 
 /* The public badge page, /v/<id> */
 .vb-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--canvas); color: var(--text); }
-.vb-header { display: flex; align-items: center; gap: 12px; padding: 16px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.vb-header { display: flex; align-items: center; gap: 12px; padding: var(--space-4) var(--space-6); width: 100%; }
 .vb-brand img { display: block; }
 .vb-tag { font-size: var(--fs-sm); color: var(--text-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
-.vb-main { flex: 1; min-height: 100vh; max-width: 1100px; width: 100%; margin: 0 auto; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+.vb-main { flex: 1; min-height: 100vh; width: 100%; padding: var(--space-2) var(--space-6) var(--space-10); display: flex; flex-direction: column; gap: 16px; }
 .vb-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
 .vb-title { margin: 4px 0 6px; font-size: var(--fs-2xl); overflow-wrap: anywhere; }
 .vb-badge { display: block; width: 320px; max-width: 100%; height: auto; aspect-ratio: 4 / 1; }
@@ -96,7 +97,7 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 .vb-share { font-size: var(--fs-sm); }
 .vb-share summary { cursor: pointer; color: var(--text-2); margin-bottom: 8px; }
 .vb-share textarea { margin-top: 8px; }
-.vb-footer { max-width: 1100px; width: 100%; margin: 0 auto; padding: 16px; color: var(--muted); font-size: var(--fs-xs); border-top: 1px solid var(--border); }
+.vb-footer { width: 100%; padding: var(--space-4) var(--space-6); color: var(--muted); font-size: var(--fs-xs); border-top: 1px solid var(--border); }
 .vb-page .skip { position: absolute; left: 12px; top: -60px; z-index: var(--z-sticky); padding: 10px 14px; border-radius: 8px; background: var(--color-primary); color: var(--color-on-primary); font-weight: 600; text-decoration: none; }
 .vb-page .skip:focus { top: 12px; }
 .vb-notice img { max-width: 100%; height: auto; }
@@ -104,3 +105,5 @@ svg.vf-num { border: 0; display: block; width: 100%; height: auto; }
 /* Strategy picker: the search, the help line and the list at its tallest (26rem). */
 .vf-panel-wait { min-height: calc(26rem + 84px); }
 @media (max-width: 600px) { .vf-panel-wait { min-height: calc(26rem + 108px); } }
+
+@media (max-width: 600px) { .vb-header, .vb-main, .vb-footer { padding-left: var(--space-4); padding-right: var(--space-4); } }

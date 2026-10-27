@@ -24,9 +24,10 @@
 
 .sg-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
 .sg-spacer { flex: 1 1 0; }
-.sg-play { display: inline-grid; place-items: center; }
-.sg-play > span { grid-area: 1 / 1; visibility: hidden; }
-.sg-play > span[data-on] { visibility: visible; }
+/* Under .sg-controls so the button's own display (flex, from .ui-btn) cannot win on load order. */
+.sg-controls .sg-play { display: inline-grid; place-items: center; }
+.sg-controls .sg-play > span { grid-area: 1 / 1; visibility: hidden; }
+.sg-controls .sg-play > span[data-on] { visibility: visible; }
 .sg-dots { display: inline-flex; gap: var(--space-1); padding: 0 var(--space-half); }
 .sg-dots span { width: var(--space-1h); height: var(--space-1h); border-radius: var(--radius-pill); background: var(--color-border-max); }
 .sg-dots span.past { background: var(--color-text-muted); }

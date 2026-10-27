@@ -73,7 +73,7 @@ export function HowItWorks() {
         <Reveal as="li" delay={240} className={LIFT}><span>4</span><div><strong>Official record</strong><p className="muted small">The run is sealed with a hash. Changing an old result breaks the hash.</p></div></Reveal>
         <Reveal as="li" delay={320} className={LIFT}><span>5</span><div><strong>Shown in the product</strong><p className="muted small">With its verdict in plain words.</p></div></Reveal>
       </ol>
-      <p className="muted small">Research and education only. Not investment advice. The full decision is DEC-0015 in the research docs.</p>
+      <p className="muted small">The full decision is DEC-0015 in the research docs.</p>
     </PageTransition>
   );
 }
