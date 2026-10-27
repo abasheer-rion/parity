@@ -1,11 +1,14 @@
 """A failed snapshot is retried within minutes, not after the full publish interval."""
 import sqlite3
 
-import psycopg
 import pytest
 
 from parity import search
 from parity.publish import supabase
+
+
+class OperationalError(Exception):
+    """Stands in for psycopg's, which the engine CI does not install."""
 
 
 def test_failed_publish_retries_soon(monkeypatch, capsys):
@@ -15,7 +18,7 @@ def test_failed_publish_retries_soon(monkeypatch, capsys):
     def fake_publish(doc):
         calls.append(clock["now"])
         if len(calls) == 1:
-            raise psycopg.OperationalError("connection failed")
+            raise OperationalError("connection failed")
 
     con = sqlite3.connect(":memory:")
     con.execute("create table trials (x)")
