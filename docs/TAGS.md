@@ -673,6 +673,7 @@ How the team works together.
 - [REF-0008: Where results live and how they are tagged](reference/0008-where-results-live.md)
 - [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
+- [REF-0028: Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md)
 - [LOG-0001: Project start](log/2026-10-20-project-start.md)
 - [LOG-0002: Catalog, ledger and lab](log/2026-10-20-catalog-ledger-and-lab.md)
 - [LOG-0004: Ayan work log, requests and outcomes](log/2026-10-21-ayan-work-log-requests-and-outcomes.md)

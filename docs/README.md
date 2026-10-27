@@ -12,7 +12,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 26 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 27 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -32,6 +32,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 - 2026-10-26 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
+- 2026-10-26 [REF-0028: Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md)
 - 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
 - 2026-10-26 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
@@ -214,6 +215,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0025 | [Parity capacity and load test results](reference/0025-parity-capacity-and-load-test-results.md) | current | 2026-10-25 | [infra](TAGS.md#infra) |
 | REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 
 ## competitor
 
