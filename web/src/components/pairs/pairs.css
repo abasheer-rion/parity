@@ -30,6 +30,8 @@
 .pr-pick:hover { text-decoration-color: currentColor; }
 .pr-pick[aria-current="true"] { font-weight: var(--weight-semibold); text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
 
+/* A chart redraws at its box's width a frame after a resize; until then it never pushes the page sideways. */
+.pr .chart { max-width: 100%; overflow-x: clip; }
 .pr .mtable td.good { color: var(--good); }
 .pr .mtable td.bad { color: var(--bad); }
 .pr-costs td.pr-used { outline: 2px solid var(--color-border-control); outline-offset: -4px; border-radius: var(--radius-sm); }
