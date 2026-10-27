@@ -21,7 +21,8 @@ export function appOf(pathname: string, space?: string | null): App | null {
   if (p === "/" || p === "/index.html" || /^\/(learn|ideas|notes)(\/|$)/.test(p)) return "site";
   if (/^\/(login|signup|reset|verify)(\/|$)/.test(p)) return "auth";
   if (/^\/legal(\/|$)/.test(p)) return "legal";
-  if (/^\/(connect|oauth)(\/|$)/.test(p)) return "connect";
+  // The API guide sits with Connect your AI: both are about other programs reaching Parity.
+  if (/^\/(connect|oauth|developers)(\/|$)/.test(p)) return "connect";
   if (/^\/v(\/|$)/.test(p)) return "badge";
   for (const [app, root] of Object.entries(APP_ROOTS)) if (p.startsWith(root!)) return app as App;
   return null;

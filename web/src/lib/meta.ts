@@ -36,7 +36,7 @@ export const SITE_DOMAIN: string = parentDomain(HOST);
 
 /**
  * Domains Parity answered on before, still served while their addresses redirect to the
- * new one (DEC-0069): each with its main host, where the front page and /app/ lived.
+ * new one (DEC-0071): each with its main host, where the front page and /app/ lived.
  */
 export interface LegacyDomain { domain: string; main: string; until?: string }
 export const LEGACY_DOMAINS: LegacyDomain[] = (site as { legacy?: LegacyDomain[] }).legacy ?? [];
@@ -177,6 +177,7 @@ export const PAGES: Record<string, PageMeta> = {
   },
   // Served by Cloudflare Pages, with status 404, at any address that does not exist (DEC-0055).
   "404.html": { title: "Page not found · Parity", description: "There is no Parity page at this address.", image: "default", robots: PRIVATE },
+  "developers/index.html": { title: "Parity API · Developers", description: "Call the Parity API from your own programs: tested strategies, market data, news impact and Verify checks. Keys, scopes, limits, errors and examples.", path: "/developers/", image: "legal" },
   "legal/index.html": { title: "Legal · Parity", description: "Parity's privacy policy, terms, cookie policy, accessibility statement, risk notice and regulatory status.", path: "/legal/", image: "legal" },
   "legal/privacy/index.html": { title: "Privacy policy · Parity", description: "What Parity collects, why, how long we keep it, who processes it, and your rights.", path: "/legal/privacy/", image: "legal" },
   "legal/terms/index.html": { title: "Terms of service · Parity", description: "The terms for using Parity, a research and education service. Not investment advice, not a broker.", path: "/legal/terms/", image: "legal" },
