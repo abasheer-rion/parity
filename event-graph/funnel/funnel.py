@@ -359,10 +359,19 @@ def poll_feed(cur, f):
         url = "https://data.alpaca.markets/v1beta1/news?" + urllib.parse.urlencode(
             {"start": start, "limit": 50, "sort": "asc", "include_content": "true"}
         )
+    elif f["adapter"] in S.KEY_PARAM:
+        param, env = S.KEY_PARAM[f["adapter"]]
+        url = f"{url}&{param}={urllib.parse.quote(os.environ[env])}"
     elif f["adapter"] == "sec_atom":
         hdr = {"User-Agent": os.environ["SEC_USER_AGENT"]}
 
-    fixed = f["adapter"] not in ("gdelt_doc", "gdelt_events", "alpaca_news")  # URL stays the same
+    fixed = f["adapter"] not in (
+        "gdelt_doc",
+        "gdelt_events",
+        "alpaca_news",
+        "nyt",
+        "guardian",
+    )  # URL stays the same
     status, body, rh = get(
         url, hdr, f["etag"] if fixed else None, f["last_modified"] if fixed else None
     )

@@ -284,6 +284,34 @@ def parse_ofac(body):
     return out
 
 
+def parse_nyt(body):
+    """NYT Times Newswire: every article the moment nytimes.com publishes it."""
+    return [
+        {
+            "ext_key": a.get("uri") or a["url"],
+            "url": a["url"],
+            "title": a.get("title"),
+            "published_at": ts(a.get("first_published_date") or a.get("published_date")),
+            "body": a,
+        }
+        for a in json.loads(body).get("results") or []
+        if a.get("url")
+    ]
+
+
+def parse_guardian(body):
+    return [
+        {
+            "ext_key": a["id"],
+            "url": a["webUrl"],
+            "title": a.get("webTitle"),
+            "published_at": ts(a.get("webPublicationDate")),
+            "body": a,
+        }
+        for a in json.loads(body)["response"].get("results", [])
+    ]
+
+
 PARSE = {
     "rss": feed_entries,
     "gdacs": feed_entries,
@@ -292,6 +320,8 @@ PARSE = {
     "gdelt_doc": parse_gdelt_doc,
     "gdelt_events": parse_gdelt_events,
     "alpaca_news": parse_alpaca,
+    "nyt": parse_nyt,
+    "guardian": parse_guardian,
     "usgs": parse_usgs,
     "fedreg_pi": parse_fedreg_pi,
     "ofac": parse_ofac,
@@ -462,6 +492,27 @@ def item_ofac(d, url):
     }
 
 
+def item_nyt(a, url):
+    return {
+        "title": a.get("title") or "",
+        "summary": clip(a.get("abstract")),
+        "text": clip(a.get("abstract"), TEXT_MAX),
+        "publisher": "nytimes.com",
+        "attrs": {"section": a.get("section"), "orgs": a.get("org_facet") or []},
+    }
+
+
+def item_guardian(a, url):
+    f = a.get("fields") or {}
+    return {
+        "title": a.get("webTitle") or "",
+        "summary": clip(f.get("trailText")),
+        "text": clip(f.get("trailText"), TEXT_MAX),
+        "publisher": "theguardian.com",
+        "attrs": {"section": a.get("sectionId")},
+    }
+
+
 TO_ITEM = {
     "rss": item_rss,
     "gdacs": item_gdacs,
@@ -470,6 +521,8 @@ TO_ITEM = {
     "gdelt_doc": item_gdelt_doc,
     "gdelt_events": item_gdelt_event,
     "alpaca_news": item_alpaca,
+    "nyt": item_nyt,
+    "guardian": item_guardian,
     "usgs": item_usgs,
     "fedreg_pi": item_fedreg_pi,
     "ofac": item_ofac,
@@ -479,6 +532,9 @@ TO_ITEM = {
 def to_item(adapter, body, url):
     return TO_ITEM[adapter](body, url)
 
+
+# Feeds whose key goes on the URL: (query parameter, env var). Added at poll time, never stored.
+KEY_PARAM = {"nyt": ("api-key", "NYT_API_KEY"), "guardian": ("api-key", "GUARDIAN_API_KEY")}
 
 # ───────────── the feeds ─────────────
 # (id, adapter, url, seconds between polls, license, env vars it needs). Checked against robots.txt
@@ -620,6 +676,23 @@ FEEDS = [
         60,
         "GDELT open data, free for any use with attribution",
         None,
+    ),
+    (
+        "nyt:newswire",
+        "nyt",
+        "https://api.nytimes.com/svc/news/v3/content/all/all.json?limit=50",
+        180,  # free key: 500 requests a day, 5 a minute
+        "NYT Developer API terms (free key; check commercial use)",
+        "NYT_API_KEY",
+    ),
+    (
+        "guardian:all",
+        "guardian",
+        "https://content.guardianapis.com/search?order-by=newest&page-size=50"
+        "&show-fields=trailText,byline",
+        180,  # developer key: 500 requests a day; commercial use needs a paid key
+        "Guardian Open Platform (developer key is non-commercial)",
+        "GUARDIAN_API_KEY",
     ),
     (
         "alpaca_news",
