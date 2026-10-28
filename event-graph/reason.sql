@@ -536,7 +536,7 @@ LANGUAGE sql STABLE AS $$
 
   -- ───── mechanism: driver (markets price the surprise) ─────
   -- A claim moves a driver by its SURPRISE, the part the market did not already expect:
-  --   'driver_move'        the driver moves by magnitude (odds points for an outcome, % for a price, points for a policy-rate surprise): e.g. an election
+  --   'driver_move'        the driver moves by magnitude (odds points for an outcome, % for a price, points for a policy-rate surprise or a Fed-day yield change): e.g. an election
   --                        resolves an outcome priced at 23.5% -> +76.5 points
   --   'earnings_surprise'  a company reports vs consensus: its own move = earnings_elasticity x (actual/consensus - 1)
   -- Every stock with a measured priced_on link to the driver (|t| >= min_t, known by t) moves beta x driver move.
@@ -544,7 +544,8 @@ LANGUAGE sql STABLE AS $$
   drv AS (
     SELECT DISTINCT ON (c.subject_id) c.id, c.subject_id, c.change, c.attrs, belief(c.id, ev.t) AS belief,
            CASE WHEN c.change = 'earnings_surprise' THEN 'earnings' WHEN c.attrs->>'unit' = 'points' THEN 'odds'
-                WHEN c.attrs->>'unit' = 'rate_points' THEN 'rate' ELSE 'price' END AS cls,
+                WHEN c.attrs->>'unit' = 'rate_points' THEN 'rate'
+                WHEN c.attrs->>'unit' = 'yield_points' THEN 'yield' ELSE 'price' END AS cls,
            coalesce(c.attrs->>'cause', 'any') AS cause,
            CASE c.change WHEN 'driver_move' THEN c.magnitude
                 -- a revenue miss is priced as the profit miss it causes: x operating leverage (gross / operating margin)
@@ -604,12 +605,12 @@ LANGUAGE sql STABLE AS $$
                            WHEN chk.agree IS NULL THEN (dp.j->>'conf_no_check')::numeric
                            ELSE (dp.j->>'conf_check_fails')::numeric END,
            d.why || ' -> ' || x.name || ' ' || CASE WHEN d.move >= 0 THEN '+' ELSE '' END || round(d.move, 1)
-             || CASE WHEN d.attrs->>'unit' IN ('points', 'rate_points') THEN ' pts' ELSE '%' END
+             || CASE WHEN d.attrs->>'unit' IN ('points', 'rate_points', 'yield_points') THEN ' pts' ELSE '%' END
              || ' -> ' || e.name || ' (' || w.why || ')'
              || CASE WHEN chk.agree THEN ' | check OK: has moved ' || chk.beta
-                       || CASE WHEN d.attrs->>'unit' = 'points' THEN '% per point' ELSE '% per 1%' END || ' with it (t ' || chk.t || ')'
+                       || CASE WHEN d.attrs->>'unit' IN ('points', 'rate_points', 'yield_points') THEN '% per point' ELSE '% per 1%' END || ' with it (t ' || chk.t || ')'
                      WHEN chk.agree IS NULL THEN ' | no price check: prior ' || round(w.el, 4)
-                       || CASE WHEN d.attrs->>'unit' IN ('points', 'rate_points') THEN '% per point' ELSE '% per 1%' END
+                       || CASE WHEN d.attrs->>'unit' IN ('points', 'rate_points', 'yield_points') THEN '% per point' ELSE '% per 1%' END
                      ELSE ' | CHECK FAILS: prices moved the other way (beta ' || chk.beta || ', t ' || chk.t || ')' END
              || ' [scale ' || d.cls || ' ' || d.sc || ']'
     FROM why_exposed w CROSS JOIN dp
