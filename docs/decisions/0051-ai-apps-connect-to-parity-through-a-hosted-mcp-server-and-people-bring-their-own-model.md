@@ -33,7 +33,7 @@ The research behind this is [RES-0024](../research/0024-ai-apps-connecting-to-pa
 1. **Supabase Auth is the sign-in server.** We do not run our own. `/.well-known/oauth-protected-resource/mcp` names `https://ttqvpxvctnomfbeoqbbs.supabase.co/auth/v1`; a call without a valid token gets a 401 pointing there. `/.well-known/oauth-authorization-server` on our host copies Supabase's metadata for older apps.
 2. **The consent page is `/oauth/consent/`.** It shows which app is asking, where you return to, and what it can do, with "Also let it make changes" unticked. `/connect/` lists the apps you connected, with that same choice and Disconnect.
 3. **One endpoint, both MCP eras, no state.** `web/functions/mcp.ts` answers MCP 2026-07-28 (headers checked against the body, `server/discover`) and 2025-03-26 to 2025-11-25 (an `initialize` handshake, no session id). Every answer is plain JSON. GET and DELETE get 405. Browser calls are allowed only from our own domains, localhost, and the web apps of AI clients (claude.ai, chatgpt.com, vscode.dev and a few more, listed in `web/src/lib/mcp/auth.ts`). That is safe because `/mcp` takes only a bearer token, never a cookie.
-4. **Read tools:**
+4. **Read tools** (the Verify tools were renamed and extended in [DEC-0082](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)):
    - `search_strategies` and `get_strategy`: tested strategies, with the gauntlet verdict and all 11 tests.
    - `search_leads`: the always-on search's best variations, with the luck check.
    - `verify_record` and `verify_description`: Verify's checks on numbers the app sends. They run in memory and are not stored.
@@ -109,6 +109,7 @@ Run after owner step 1, on a test account.
 - [DEC-0069: Parity moves to paritytrading.app](0069-parity-moves-to-paritytrading-app.md)
 - [DEC-0071: People make their own API keys for a versioned Parity API](0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md)
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
+- [DEC-0082: Verify tools and endpoints for AI apps and programs](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](../research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)

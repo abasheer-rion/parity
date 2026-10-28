@@ -60,6 +60,8 @@ interface Route {
   path: string;
   scope: Scope;
   summary: string;
+  /** An old path kept so callers do not break; the spec marks it deprecated. */
+  deprecated?: boolean;
   run(args: { params: Record<string, string>; query: URLSearchParams; body: unknown }, ctx: ToolContext): Promise<unknown>;
 }
 
@@ -127,8 +129,11 @@ export const ROUTES: Route[] = [
     method: "GET", path: "/verify/tests", scope: "read:verify", summary: "The checks Verify runs",
     async run() { return { method_version: METHOD_VERSION, tests: VERIFY_TESTS, note: NOTE }; },
   },
-  { method: "POST", path: "/verify", scope: "write:verify", summary: "Run Verify on a trade list or an equity curve", run: viaBody("verify_record") },
-  { method: "POST", path: "/verify/description", scope: "write:verify", summary: "Run Verify on a described bot", run: viaBody("verify_description") },
+  { method: "POST", path: "/verify/trades", scope: "write:verify", summary: "Verify a trade list or an equity curve", run: viaBody("verify_trades") },
+  { method: "POST", path: "/verify/strategy", scope: "read:verify", summary: "Verify one of Parity's tested strategies, or find the closest to a described rule set", run: viaBody("verify_strategy") },
+  { method: "POST", path: "/verify/claim", scope: "write:verify", summary: "Check the arithmetic of a seller's claim", run: viaBody("verify_claim") },
+  { method: "POST", path: "/verify", scope: "write:verify", summary: "Old name for POST /verify/trades", deprecated: true, run: viaBody("verify_record") },
+  { method: "POST", path: "/verify/description", scope: "write:verify", summary: "Old name for POST /verify/claim", deprecated: true, run: viaBody("verify_description") },
 ];
 
 function match(path: string): { routes: Route[]; params: Record<string, string> } {
@@ -215,7 +220,7 @@ export async function handleApi(request: Request, deps: ApiDeps): Promise<Respon
 
   // Open to everyone: the index, the spec, and the leaked-key report.
   if (request.method === "GET" && (path === "/" || path === "")) {
-    return ok({ name: "Parity API", version: "v1", docs: `${deps.site}/developers/`, openapi: `${deps.site}${API_BASE}/openapi.json`, endpoints: ROUTES.map((r) => ({ method: r.method, path: API_BASE + r.path, scope: r.scope, summary: r.summary })) }, { ...cors, "Cache-Control": "public, max-age=300" });
+    return ok({ name: "Parity API", version: "v1", docs: `${deps.site}/developers/`, openapi: `${deps.site}${API_BASE}/openapi.json`, endpoints: ROUTES.map((r) => ({ method: r.method, path: API_BASE + r.path, scope: r.scope, summary: r.summary, ...(r.deprecated ? { deprecated: true } : {}) })) }, { ...cors, "Cache-Control": "public, max-age=300" });
   }
   if (request.method === "GET" && path === "/openapi.json") return ok(openApi(deps.site, ROUTES), { ...cors, "Cache-Control": "public, max-age=300" });
   if (path === "/leaked-keys") return leaked(request, deps, P);

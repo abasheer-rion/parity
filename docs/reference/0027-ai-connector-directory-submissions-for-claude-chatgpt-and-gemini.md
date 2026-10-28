@@ -58,7 +58,7 @@ Use the same words everywhere. They follow [REF-0017](0017-parity-copy-rules.md)
 
   > Parity tests trading strategies against the S&P 500 after costs and publishes the results, including the ones that fail. Connect Parity to look up those results from a chat.
   >
-  > With Parity connected, your AI can find tested strategies and show each one's verdict from 11 tests, open the full results for one strategy, see the best variations from Parity's always-on strategy search with the luck check, run Parity Verify on a trade list or equity curve you paste, check a bot described in words for numbers that cannot hold, read delayed market data for currencies, rates, commodities, indices and crypto, see what markets did after kinds of news, and read Parity Academy lessons.
+  > With Parity connected, your AI can find tested strategies and show each one's verdict from 11 tests, open the full results for one strategy, see the best variations from Parity's always-on strategy search with the luck check, run Parity Verify on a trade list or equity curve you paste, on one of Parity's tested strategies, or on a seller's claim to find numbers that cannot hold, read delayed market data for currencies, rates, commodities, indices and crypto, see what markets did after kinds of news, and read Parity Academy lessons.
   >
   > It acts as you and sees only what you can see. It only reads. Placing demo orders with virtual money and saving chart layouts are off unless you turn them on for that app in Parity. It cannot trade real money, move money, pay for anything or change your account. Each person gets 30 calls a minute and 1000 a day. Parity logs the tool name and time of each call, not what was sent.
   >
@@ -79,17 +79,19 @@ Every tool has a `title` and sets `readOnlyHint`, `destructiveHint` (on the two 
 
 | Tool | Reads or changes | Says |
 | --- | --- | --- |
+| `verify_trades` | reads | Verify on a trade list or equity curve: verdict, sentence, five cards, tries survived; nothing stored |
+| `verify_strategy` | reads | Verify on one of our tested strategies with every try counted, or the closest to a described rule set |
+| `verify_claim` | reads | Checks a seller's claim for numbers that are impossible or need more data |
 | `search_strategies` | reads | Find tested strategies with their verdict from the 11 tests |
 | `get_strategy` | reads | Full results for one strategy |
 | `search_leads` | reads | Best variations from the strategy search, with the luck check |
-| `verify_record` | reads | Verify's checks on a trade list or equity curve; nothing stored |
-| `verify_description` | reads | Checks a described bot for numbers that cannot hold |
 | `list_market_series` | reads | Market series Parity publishes, delayed |
 | `get_market_series` | reads | The history of one series |
 | `news_impact` | reads | What markets did after kinds of news |
 | `list_academy_lessons` | reads | Academy courses and lessons |
 | `get_academy_lesson` | reads | One lesson's text and quick check |
 | `search`, `fetch` | reads | Search across Parity and fetch one item (ChatGPT deep research) |
+| `verify_record`, `verify_description` | reads | Old names for `verify_trades` and `verify_claim`, marked deprecated ([DEC-0082](../decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)) |
 | `list_demo_accounts` | reads | The person's demo accounts (virtual money) |
 | `place_demo_order` | changes, off | Limit or stop order in a demo account |
 | `save_trade_layout` | changes, off | Saves a chart layout |
@@ -109,7 +111,7 @@ Reviewers need an account with data and no two-step sign-in.
 1. Sign up at `https://paritytrading.app/signup/` with a new mailbox the owner controls, such as `review@paritytrading.ai`. Do not reuse a personal account.
 2. Open Parity Trade and create one demo account so `list_demo_accounts` returns something.
 3. Do not turn on two-step sign-in for it. Keep the password in the Keychain and add a row to the credentials register.
-4. Give reviewers: the address, the email and password, and this script: "Ask: Using Parity, which tested strategies beat the S&P 500? Then: Check these trades with Parity Verify: 2026-01-05 +120, 2026-01-12 -80, 2026-01-19 +45. Then: Show the market series for EUR."
+4. Give reviewers: the address, the email and password, and this script: "Ask: Check these trades with Parity Verify, I tried 12 settings before this one: 2026-01-05 +120, 2026-01-12 -80, 2026-01-19 +45. Then: Is a 92% win rate with 5% take-profit and no stop possible? Then: Verify the strategy 'The Gambit'. Then: Using Parity, which tested strategies beat the S&P 500?"
 5. For OpenAI, also write 5 prompts that should use Parity and 3 that should not (for example a weather question, a recipe, and "buy 10 shares of Apple for me", which Parity must not do).
 
 ## Submission steps (owner)
