@@ -1,0 +1,55 @@
+/* The motion reel player (DEC-0083). The stage keeps its shape from the first paint: 16:9,
+   and square below 520px wide (the width the player switches layouts at), so nothing on
+   the page moves when the film draws. */
+.rl-player { container-type: inline-size; margin: 0; min-width: 0; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-canvas); border: 1px solid var(--color-border); }
+.rl-stage { position: relative; aspect-ratio: 16 / 9; background: var(--color-canvas); }
+@container (max-width: 519px) { .rl-stage { aspect-ratio: 1 / 1; } }
+.rl-frame { line-height: 0; width: 100%; height: 100%; }
+.rl-svg { display: block; width: 100%; height: 100%; }
+.rl-video { display: block; width: 100%; height: 100%; background: var(--color-canvas); }
+
+/* Captions over the foot of the picture, the words lighting up as they are said. */
+.rl-cc { position: absolute; left: 50%; bottom: 4.5%; transform: translateX(-50%); width: max-content; max-width: 86%; margin: 0;
+  padding: var(--space-1) var(--space-2h); border-radius: var(--radius-md); background: var(--color-scrim);
+  color: var(--color-text); font-size: clamp(13px, 2.3cqi, 20px); font-weight: 650; line-height: 1.35; text-align: center; pointer-events: none; }
+.rl-cc span { color: var(--color-text-muted); }
+.rl-cc span[data-said] { color: var(--color-text); }
+.rl-cc span[data-em][data-said] { color: var(--color-accent-text); }
+
+.rl-big-play { position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-strong);
+  display: grid; place-items: center; background: var(--color-surface-overlay); color: var(--color-text); cursor: pointer; box-shadow: var(--shadow-ring); }
+.rl-big-play:hover { background: var(--color-surface-raised); }
+.rl-big-play:focus-visible, .rl-btn:focus-visible, .rl-scrub input:focus-visible, .rl-speed select:focus-visible, .rl-tline:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* The control bar, like a video player's. */
+.rl-bar { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-border); background: var(--color-surface); }
+.rl-btn { min-width: 32px; min-height: 32px; display: inline-grid; place-items: center; padding: 0 var(--space-1h); border-radius: var(--radius-md);
+  border: 1px solid transparent; background: transparent; color: var(--color-text); font: inherit; font-size: var(--type-xs); font-weight: 600; cursor: pointer; }
+.rl-btn:hover { background: var(--color-hover); }
+.rl-txt[aria-pressed="false"] { color: var(--color-text-muted); }
+.rl-txt[aria-pressed="true"] { border-color: var(--color-border-strong); }
+.rl-time { font-size: var(--type-xs); color: var(--color-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rl-scrub { position: relative; flex: 1 1 auto; min-width: 80px; display: flex; align-items: center; }
+.rl-scrub input { width: 100%; margin: 0; accent-color: var(--color-text); cursor: pointer; }
+.rl-marks { position: absolute; inset: 0; pointer-events: none; }
+.rl-marks i { position: absolute; top: 50%; width: 2px; height: 10px; margin: -5px 0 0 -1px; background: var(--color-text-muted); border-radius: 1px; }
+.rl-speed select { min-height: 32px; border-radius: var(--radius-md); border: 1px solid var(--color-border-control); background: var(--color-input); color: var(--color-text); font: inherit; font-size: var(--type-xs); padding: 0 var(--space-1); }
+.rl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@container (max-width: 419px) { .rl-time { display: none; } }
+
+.rl-foot { padding: var(--space-3) var(--space-4) var(--space-4); background: var(--color-surface); }
+.rl-now { margin: 0 0 var(--space-2h); color: var(--color-text-body); font-size: var(--type-md); line-height: 1.55; min-height: 3.1em; }
+.rl-chapter { display: inline-block; font-size: var(--type-2xs); color: var(--color-text-muted); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); padding: 0 var(--space-2); margin-right: var(--space-1h); }
+.rl-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.rl-spacer { flex: 1 1 0; }
+.rl-motion { display: inline-flex; align-items: center; gap: var(--space-2); }
+.rl-motion-l { font-size: var(--type-xs); color: var(--color-text-muted); }
+.rl-note { margin: var(--space-2) 0 0; font-size: var(--type-xs); color: var(--color-text-muted); }
+
+.rl-transcript { list-style: none; margin: var(--space-3) 0 0; padding: 0; max-height: 320px; overflow: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.rl-transcript li { border-top: 1px solid var(--color-border); }
+.rl-transcript li:first-child { border-top: 0; }
+.rl-tch { display: block; padding: var(--space-2) var(--space-3) 0; font-size: var(--type-xs); color: var(--color-text-muted); font-weight: 600; }
+.rl-tline { display: block; width: 100%; text-align: left; padding: var(--space-1h) var(--space-3); border: 0; background: transparent; color: var(--color-text-body); font: inherit; font-size: var(--type-sm); line-height: 1.5; cursor: pointer; }
+.rl-tline:hover { background: var(--color-hover); }
+.rl-tt { color: var(--color-text-muted); font-variant-numeric: tabular-nums; margin-right: var(--space-1h); }

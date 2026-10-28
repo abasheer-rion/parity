@@ -1,0 +1,11 @@
+{
+ "about": "Rendered lesson films (DEC-0083). Written by `cd web && npm run content -- --reels`; do not edit by hand.",
+ "reels": {
+  "reading-a-backtest-return": {
+   "hash": "9182612cc5e30a22",
+   "seconds": 37.6,
+   "mp4": "/content/academy/reading-a-backtest-return.mp4",
+   "vtt": "/content/academy/reading-a-backtest-return.vtt"
+  }
+ }
+}

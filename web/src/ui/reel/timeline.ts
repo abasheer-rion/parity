@@ -74,7 +74,7 @@ export interface Reel {
   /** Visuals other than the lesson's own, by name. */
   visuals?: Record<string, SigVisual>;
   beats: ReelBeat[];
-  /** The poster frame, in seconds. Default: the end of the last chart beat. */
+  /** The poster frame, in seconds. Default: the end of the last chart beat with the camera out. */
   poster?: number;
 }
 
@@ -221,7 +221,9 @@ export function plan(reel: Reel): ReelPlan {
   for (const b of out) if (b.chapter || !chapters.length) chapters.push({ title: b.chapter ?? "Start", at: b.start, end: b.end });
   for (let i = 0; i < chapters.length; i++) chapters[i].end = i < chapters.length - 1 ? chapters[i + 1].at : t;
 
-  const lastChart = [...out].reverse().find((b) => b.shot.kind === "chart");
+  // The poster: the last chart beat seen whole (camera out), else the last chart beat.
+  const charts = out.filter((b) => b.shot.kind === "chart");
+  const lastChart = [...charts].reverse().find((b) => b.cam1.z <= 1.05 && b.cam0.z <= 1.05) ?? charts[charts.length - 1];
   const poster = typeof reel.poster === "number" ? reel.poster : lastChart ? lastChart.end - 0.4 : t - 0.6;
   return { beats: out, seconds: t, chapters, pages: out.flatMap((b) => b.pages), poster: Math.max(0, Math.min(t, poster)) };
 }

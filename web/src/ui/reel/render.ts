@@ -166,22 +166,22 @@ function statementShot(c: ReelCanvas, Z: Zones, b: PlannedBeat, t: number, hasHe
   const widest = Math.max(1, ...lines.map((l) => textWidth(l.words.join(" "), 1, 800)));
   const size = Math.min(Z.statement, (c.w * 0.86) / (widest * 1.06));
   const lh = size * 1.12;
-  const mid = hasHead ? (Z.stage.y0 + Z.stage.y1) / 2 : c.h * (c.name === "vertical" ? 0.42 : 0.47);
+  const mid = hasHead ? (Z.stage.y0 + Z.stage.y1) / 2 : c.h * (c.name === "vertical" ? 0.42 : 0.5);
   const top = mid - (lines.length * lh) / 2 + size * 0.8;
   let out = "", k = 0;
   lines.forEach((l, li) => {
-    const space = textWidth(" ", size, 800);
-    const ws = l.words.map((w) => textWidth(w, size, 800) * 1.03);
-    let x = c.w / 2 - (ws.reduce((a, b2) => a + b2, 0) + space * (ws.length - 1)) / 2;
     const y = top + li * lh;
-    l.words.forEach((w, wi) => {
-      const p = easeOut(clamp((t - b.start - 0.1 - k * 0.12) / 0.34));
-      const cx = x + ws[wi] / 2;
-      const word = tx(cx, y, w, { size, weight: 800, fill: color(l.tone), anchor: "middle", track: -size * 0.01 });
-      out += layer(word, { opacity: p, scale: 1.18 - 0.18 * p, cx, cy: y - size * 0.35, dy: (1 - p) * 6 * c.u }, "", []);
-      x += ws[wi] + space;
-      k++;
-    });
+    // One text element per line, so the browser spaces the words; each word lights up in turn
+    // and the line pops in with its first word.
+    const first = k;
+    const spans = l.words.map((w, wi) => {
+      const p = easeOut(clamp((t - b.start - 0.1 - (first + wi) * 0.12) / 0.3));
+      return `<tspan${p < 0.995 ? ` fill-opacity="${r2(p)}"` : ""}>${esc(w)}${wi < l.words.length - 1 ? " " : ""}</tspan>`;
+    }).join("");
+    k += l.words.length;
+    const p = easeOut(clamp((t - b.start - 0.1 - first * 0.12) / 0.4));
+    const line = `<text x="${r1(c.w / 2)}" y="${r1(y)}" font-size="${r1(size)}" fill="${color(l.tone)}" text-anchor="middle" font-weight="800" letter-spacing="${r2(-size * 0.01)}" font-family="${TH.font}">${spans}</text>`;
+    out += layer(line, { opacity: Math.min(1, p * 1.6), scale: 1.12 - 0.12 * p, cx: c.w / 2, cy: y - size * 0.35, dy: (1 - p) * 6 * c.u }, "", []);
   });
   return out;
 }
@@ -247,7 +247,7 @@ function panelsShot(reel: Reel, main: SigVisual, c: ReelCanvas, Z: Zones, b: Pla
   const cols = grid2 ? 2 : m, rows = grid2 ? 2 : 1;
   const gap = 14 * u;
   const cw = (st.x1 - st.x0 - gap * (cols - 1)) / cols, ch = (st.y1 - st.y0 - gap * (rows - 1)) / rows;
-  const p = lerp(b.d0, b.d1, easeInOut(clamp((t - b.start - 0.05) / Math.max(0.9, (b.end - b.start) * 0.8))));
+  const p = lerp(b.d0, b.d1, easeInOut(clamp((t - b.start - 0.05) / Math.min(2.4, Math.max(0.9, (b.end - b.start) * 0.6)))));
   const fm = fmtOf(v.params?.fmt);
   let out = "";
   all.forEach((vals, k) => {
@@ -310,7 +310,8 @@ function gridShot(reel: Reel, main: SigVisual, c: ReelCanvas, Z: Zones, b: Plann
 function shotSvg(reel: Reel, main: SigVisual, c: ReelCanvas, Z: Zones, b: PlannedBeat, t: number, id: string, defs: string[]): string {
   switch (b.shot.kind) {
     case "chart": return chartShot(reel, main, c, Z, b, t, id, defs);
-    case "statement": return statementShot(c, Z, b, t, !!b.head);
+    // A slow push in, so a statement is never quite still.
+    case "statement": return layer(statementShot(c, Z, b, t, !!b.head), { scale: 1 + 0.035 * clamp((t - b.start) / Math.max(1, b.end - b.start)), cx: c.w / 2, cy: c.h * 0.48 }, "", []);
     case "panels": return panelsShot(reel, main, c, Z, b, t);
     case "grid": return gridShot(reel, main, c, Z, b, t);
     default: return "";

@@ -14,7 +14,7 @@ import { AppGuard } from "../auth";
 import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { LEGAL_PAGES } from "../legal/LegalLinks";
-import { courseById, courseMinutes, courses, totalLessons, type AcademyLink, type Course, type Lesson, type Question } from "../lib/academy";
+import { courseById, courseMinutes, courses, reelVideo, totalLessons, type AcademyLink, type Course, type Lesson, type Question } from "../lib/academy";
 import { termById } from "../lib/glossary";
 import { appLink, productUrl } from "../lib/space";
 import { setStoreUser } from "../lib/userStore";
@@ -22,6 +22,7 @@ import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { AnimatedNumber, Button, Dialog, Icon, LIFT, MotionControl, Popover, Segmented, STAGGER, Toaster, Toggle, toast, useMotionHelp } from "../ui";
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
+import { ReelPlayer } from "../ui/reel/ReelPlayer";
 import "./academy.css";
 import { isDesktop } from "../desktop/bridge";
 
@@ -457,7 +458,9 @@ function Player({ course: c, index, railOpen, setRailOpen, mobile, autoplay, mai
               </section>
             </div>
             <div className="pac-pic">
-              <VisualPlayer visual={l.visual} autoPlay={autoplay} />
+              {l.reel
+                ? <ReelPlayer reel={l.reel} visual={l.visual} video={reelVideo(c, l)} autoPlay={autoplay} title={l.title} className="ac-visual ac-reel" />
+                : <VisualPlayer visual={l.visual} autoPlay={autoplay} />}
             </div>
           </div>
           <QuickCheck key={`${c.id}/${l.id}`} course={c} lesson={l} />

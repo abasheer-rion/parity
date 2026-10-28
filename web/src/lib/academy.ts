@@ -6,13 +6,17 @@
 // The courses play in Parity Academy, its own app (src/academy/, DEC-0042), which keeps
 // progress in the person's account (src/academy/progress.ts).
 import type { Visual } from "../academy/scenes";
+import type { Reel } from "../ui/reel/timeline";
 import { appLink, type Space } from "./space";
+import reelFiles from "../../../academy/reels.json";
 
 export interface AcademyLink { label: string; href: string; space: Space | "both" }
 export interface Question { q: string; options: string[]; answer: number; why: string }
 export interface Lesson {
   id: string; title: string; minutes: number; body: string[]; terms: string[];
   visual: Visual; inParity: AcademyLink[]; check: Question[];
+  /** The lesson as a short film (DEC-0083), drawn from `visual`. */
+  reel?: Reel;
 }
 export interface Course { id: string; order: number; level: string; title: string; summary: string; docs: string[]; lessons: Lesson[] }
 
@@ -25,6 +29,19 @@ export const totalLessons = courses.reduce((n, c) => n + c.lessons.length, 0);
 
 export function courseMinutes(c: Course): number {
   return c.lessons.reduce((n, l) => n + l.minutes, 0);
+}
+
+/** A rendered lesson film (npm run content -- --reels): its MP4 and captions under /content/academy/. */
+export interface ReelFile { hash: string; seconds: number; mp4: string; vtt: string }
+const REEL_FILES = (reelFiles as { reels: Record<string, ReelFile> }).reels;
+
+/** The key of a lesson's film in academy/reels.json and its file names. */
+export const reelId = (c: Pick<Course, "id">, l: Pick<Lesson, "id">) => `${c.id}-${l.id}`;
+
+/** The pre-rendered film of a lesson, when there is one. */
+export function reelVideo(c: Pick<Course, "id">, l: Pick<Lesson, "id">): { mp4: string; vtt: string } | undefined {
+  const f = REEL_FILES[reelId(c, l)];
+  return f ? { mp4: f.mp4, vtt: f.vtt } : undefined;
 }
 
 /** A link from a lesson into Parity, opened from the Academy: the page in its own app. */
