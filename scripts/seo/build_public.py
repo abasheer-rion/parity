@@ -836,7 +836,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/"]
+STATIC_PUBLIC = ["/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/verify/", "/methodology/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:
@@ -877,8 +877,8 @@ def robots_txt() -> str:
     """dist/robots.txt. It is served only on the site's real address; functions/robots.txt.ts
     answers every other host with Disallow: / (DEC-0073)."""
     private = ["/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/", "/data/", "/login/", "/signup/",
-               "/reset/", "/verify/", "/connect/", "/oauth/", "/v/", "/badge/"]
-    lines = ["# Parity. Public: the front page, /legal/, /learn/, /ideas/, /notes/, /blog/, /news/, /authors/,",
+               "/reset/", "/connect/", "/oauth/", "/v/", "/badge/"]
+    lines = ["# Parity. Public: the front page, /verify/, /methodology/, /legal/, /learn/, /ideas/, /notes/, /blog/, /news/, /authors/,",
              "# /tags/, /changelog/, /announcements/ and /status/. The apps and their data sit behind sign-in.",
              "User-agent: *", "Allow: /", *[f"Disallow: {p}" for p in private], "", f"Sitemap: {SITE}/sitemap.xml", ""]
     return "\n".join(lines)

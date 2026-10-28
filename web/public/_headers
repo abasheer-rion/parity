@@ -29,8 +29,6 @@
   X-Robots-Tag: noindex, nofollow
 /reset/*
   X-Robots-Tag: noindex, nofollow
-/verify/*
-  X-Robots-Tag: noindex, nofollow
 /connect/*
   X-Robots-Tag: noindex, nofollow
 /oauth/*
