@@ -1,10 +1,18 @@
-// The legal pages (web/legal/**/index.html), the API guide (web/developers/) and the download page (web/download/) are plain HTML. They share a head, a header
+// The legal pages (web/legal/**/index.html), the API guide (web/developers/), the Verify
+// methodology (web/methodology/) and the download page (web/download/) are plain HTML. They share a head, a header
 // and a footer, filled in at build time from the markers below so each page stays short:
 //   <!--legal:head-->     the stylesheet and the cookie notice script
 //   <!--legal:header-->   skip link, the logo, Log in and Sign up
 //   <!--legal:footer-->   legal links, cookie settings and the "not investment advice" line
 // The same footer markup is copied by hand into web/index.html (its footer only).
+//
+// The methodology page also has <!--verify:name--> markers, filled from the code that runs
+// the checks (fillMethodology below), so the page cannot drift from it (REF-0030).
 import type { Plugin } from "vite";
+import { MAX_TRIES, LUCK_LINE } from "../src/lib/verify/dsr";
+import { MIN_RETURNS, MIN_TRADES } from "../src/lib/verify/checks/verdict";
+import { DRAWDOWN_LIMIT, WIPEOUT_LIMIT } from "../src/lib/verify/checks/tail";
+import { METHOD_CHANGELOG, METHOD_VERSION } from "../src/lib/verify/types";
 import { fillGuide, isGuide } from "./guides";
 
 export const LEGAL_LINKS: [string, string][] = [
@@ -42,6 +50,8 @@ const FOOTER = `
     <footer class="lg-footer">
       <nav class="lg-legal" aria-label="Legal">
         <a href="/download/">Download</a>
+        <a href="/verify/">Verify</a>
+        <a href="/methodology/">Methodology</a>
         ${LEGAL_LINKS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n        ")}
         <button type="button" data-cookie-prefs>Cookie settings</button>
       </nav>
@@ -49,14 +59,38 @@ const FOOTER = `
       <p>&copy; 2026 Parity</p>
     </footer>`;
 
+const escHtml = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** The values the methodology page prints, by marker name. */
+export const METHOD_VALUES: Record<string, string> = {
+  "method-version": METHOD_VERSION,
+  "min-trades": String(MIN_TRADES),
+  "min-returns": String(MIN_RETURNS),
+  "wipeout-limit": String(WIPEOUT_LIMIT),
+  "drawdown-limit": `${Math.round(DRAWDOWN_LIMIT * 100)}%`,
+  "luck-line": LUCK_LINE.toFixed(2),
+  "max-tries": MAX_TRIES.toLocaleString("en-US"),
+  changelog: METHOD_CHANGELOG.map((c) => `<tr><td><code>${escHtml(c.version)}</code></td><td>${c.date}</td><td>${escHtml(c.changes)}</td></tr>`).join("\n        "),
+};
+
+/** Fills every <!--verify:name--> marker. An unknown name fails the build, so a typo cannot ship. */
+export function fillMethodology(html: string): string {
+  return html.replace(/<!--verify:([a-z-]+)-->/g, (_, name: string) => {
+    if (!(name in METHOD_VALUES)) throw new Error(`methodology page: unknown marker <!--verify:${name}-->`);
+    return METHOD_VALUES[name];
+  });
+}
+
+const isMethodology = (path: string) => path.startsWith("/methodology/");
+
 export function parityLegal(): Plugin {
   return {
     name: "parity-legal",
     transformIndexHtml: {
       order: "pre",
       handler(html, ctx) {
-        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/") && !ctx.path.startsWith("/download/") && !isGuide(ctx.path)) return html;
-        const page = isGuide(ctx.path) ? fillGuide(html, ctx.path) : html;
+        if (!ctx.path.startsWith("/legal/") && !ctx.path.startsWith("/developers/") && !ctx.path.startsWith("/download/") && !isMethodology(ctx.path) && !isGuide(ctx.path)) return html;
+        const page = isGuide(ctx.path) ? fillGuide(html, ctx.path) : isMethodology(ctx.path) ? fillMethodology(html) : html;
         return page
           .replace("<!--legal:head-->", HEAD)
           .replace("<!--legal:header-->", HEADER)

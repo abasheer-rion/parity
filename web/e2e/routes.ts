@@ -5,7 +5,7 @@
 import { routes as appRoutes } from "../scripts/lib/routes.mjs";
 
 export const PUBLIC = [
-  "/verify/", "/v/e2e-missing-badge", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/",
+  "/verify/", "/methodology/", "/v/e2e-missing-badge", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/",
   "/blog/", "/blog/publish-the-failures-too/", "/news/", "/authors/", "/authors/ayan/", "/tags/", "/tags/backtests/",
   "/learn/", "/learn/a-book-and-b-book/", "/ideas/", "/ideas/betting-against-beta/", "/notes/", "/notes/dec-0001/",
   "/no-such-page-xyz/",
