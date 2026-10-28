@@ -31,6 +31,8 @@ const SCREENS: Screen[] = [
   { name: "site-blog", path: "/blog/", signedIn: false },
   { name: "site-learn", path: "/learn/", signedIn: false },
   { name: "site-404", path: "/no-such-page-xyz/", signedIn: false },
+  { name: "site-verify", path: "/verify/", signedIn: false },
+  { name: "site-methodology", path: "/methodology/", signedIn: false },
   { name: "app-home", path: "/app/#/" },
   { name: "app-strategies", path: "/app/#/strategies" },
   { name: "app-strategy", path: "/app/#/strategy/fx_carry" },

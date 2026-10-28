@@ -1,5 +1,6 @@
 // The public site, signed out: the front page, the cookie notice, the legal pages, the blog
 // and news, the glossary, ideas and notes, and the Connect and Verify pages.
+import { resolve } from "node:path";
 import { expect, open, settled, test } from "./fixtures";
 
 test.use({ signedIn: false });
@@ -235,9 +236,40 @@ test.describe("connect and verify pages", () => {
   });
 
   test("an incomplete email link says so and offers both ways back", async ({ page }) => {
-    await open(page, "/verify/");
+    await open(page, "/verify/?type=email");
     await expect(page.getByRole("heading", { name: "This link is not complete" })).toBeVisible();
     await page.getByRole("link", { name: "Reset password" }).click();
     await expect(page.getByRole("heading", { name: "Reset your password" })).toBeVisible();
+  });
+
+  // DEC-0081: /verify/ is the public checker, and every email link sent to it still confirms.
+  test("an email link on /verify/ still shows the confirm screen, not the checker", async ({ page }) => {
+    await open(page, "/verify/?type=email&token_hash=x");
+    await expect(page.getByRole("heading", { level: 1, name: "Confirm your email" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Confirm and continue" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Verify a trading record" })).toHaveCount(0);
+    await expect(page).toHaveTitle("Confirm · Parity");
+  });
+
+  test("/verify/ is the checker, and checks a file signed out without sending it", async ({ page }) => {
+    const sent: string[] = [];
+    await open(page, "/verify/");
+    await expect(page.getByRole("heading", { level: 1, name: "Verify a trading record" })).toBeVisible();
+    await expect(page).toHaveTitle("Verify a trading record · Parity");
+    await expect(page.getByRole("heading", { name: "Supported files" })).toBeVisible();
+    page.on("request", (r) => { if (r.postData()) sent.push(r.url()); });
+    await page.locator(".vp-tool input[type=file]").setInputFiles(resolve(import.meta.dirname, "../tests/fixtures/verify/kraken.csv"));
+    await expect(page.locator(".vf-found")).toContainText("Kraken trades, 3 closed trades");
+    await page.getByRole("button", { name: "Check this record" }).click();
+    await expect(page.locator(".vf-verdict")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Log in to publish" })).toHaveAttribute("href", "/login/?next=%2Fverify%2F");
+    expect(sent).toEqual([]);
+  });
+
+  test("the methodology page states the method version and how to cite it", async ({ page }) => {
+    await open(page, "/methodology/");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator("#cite")).toBeVisible();
+    await expect(page.locator("main")).toContainText("verify-1.0");
   });
 });

@@ -182,7 +182,20 @@ export const PAGES: Record<string, PageMeta> = {
   "login/index.html": { title: "Log in · Parity", description: "Log in to Parity to follow strategies tested against the S&P 500.", path: "/login/", image: "login" },
   "signup/index.html": { title: "Sign up · Parity", description: "Create a free Parity account to check trading records and follow strategies tested against the S&P 500.", path: "/signup/", image: "login" },
   "reset/index.html": { title: "Reset password · Parity", description: "Choose a new password for your Parity account.", path: "/reset/", image: "login" },
-  "verify/index.html": { title: "Confirm · Parity", description: "Confirming your email address for Parity.", path: "/verify/", image: "login" },
+  // The public Verify checker (DEC-0081). The same address is where every email link lands;
+  // src/verify/entry.ts loads the sign-in confirm screen when the address carries a token.
+  "verify/index.html": {
+    title: "Verify a trading record · Parity",
+    description: "Check a trade history from your broker or exchange for profit per trade, worst loss, luck and look-ahead. Checked in your browser, never sent. No sign-in.",
+    path: "/verify/", image: "verify", ld: [verifyAppLd()],
+  },
+  // How Verify judges a record, every check and threshold, kept citable (REF-0030).
+  "methodology/index.html": {
+    title: "Verify methodology · Parity",
+    description: "How Parity Verify judges a trading record: the verdict order, every check and threshold, the luck check, trust levels, versions and how to cite it.",
+    path: "/methodology/", image: "verify", type: "article",
+    ld: [{ "@type": "TechArticle", "@id": `${abs("/methodology/")}#article`, headline: "Parity Verify methodology", url: abs("/methodology/"), inLanguage: "en", datePublished: "2026-10-27", dateModified: "2026-10-27", author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } }],
+  },
   // AI apps connecting to Parity (DEC-0051): the how-to and connected apps, the consent page
   // Supabase Auth's OAuth server sends people to, and the OpenRouter sign-in return page.
   "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "connect" },

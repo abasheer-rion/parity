@@ -5,7 +5,9 @@
 // verify_badge_public(), which never lists badges and never returns an owner.
 import { useEffect, useState } from "react";
 import type { Result } from "../lib/verify/checks";
-import { embedSnippet, isBadgeId, NOT_ADVICE, socialLine, TRUST_LINE, VERDICT_WORDS, type PublicBadge } from "../lib/verify/badge";
+import { badgeAlt, isBadgeId, KIND_WORDS, NOT_ADVICE, survivesWords, TRUST_LINE, VERDICT_WORDS, type PublicBadge } from "../lib/verify/badge";
+import { trustLevel } from "../lib/verify/connect";
+import { Embeds } from "./verify/Embeds";
 import type { PublicCards } from "../lib/verify/publish";
 import { shortDate } from "../lib/verify/parse";
 import { NotFound } from "../components/NotFound";
@@ -52,7 +54,10 @@ export function VerifyBadge({ load = fetchBadge, path = window.location.pathname
       <a className="skip" href="#main">Skip to content</a>
       <header className="vb-header">
         <a href="/" className="vb-brand"><img src="/brand/2026-10-22-wordmark/parity-lockup-on-dark.svg" width="137" height="32" alt="Parity home" /></a>
-        <span className="vb-tag">Verify</span>
+        <nav className="vb-nav" aria-label="Verify">
+          <a href="/verify/">Check a record</a>
+          <a href="/methodology/">Methodology</a>
+        </nav>
       </header>
       <main id="main" tabIndex={-1} className="vb-main">
         {state.status === "loading" && <div aria-busy="true" aria-label="Loading the record"><Skeleton height={36} width="50%" /><Skeleton height={140} style={{ marginTop: 16 }} /><Skeleton height={420} style={{ marginTop: 16 }} /></div>}
@@ -90,15 +95,29 @@ function Live({ b }: { b: PublicBadge }) {
   const cards = b.cards as unknown as PublicCards;
   const r: Result = { ...cards, balance: null, triesDefaulted: false };
   const [check, setCheck] = useState<"same" | "different" | null>(null);
+  const range = b.date_from && b.date_to ? `${shortDate(b.date_from)} to ${shortDate(b.date_to)}` : "Not given";
   return (
     <>
       <div className="vb-top">
         <div>
           <h1 className="vb-title">{b.name}</h1>
-          <p className="vf-small">Checked on {shortDate(b.created_at.slice(0, 10))} with method {b.method_version}. {b.stated_tries?.toLocaleString("en-US")} {b.stated_tries === 1 ? "try" : "tries"} stated by the owner.</p>
+          <p className="vb-verdict">{VERDICT_WORDS[b.verdict!]}. {survivesWords(b.survives_tries)}.</p>
         </div>
-        <img src={badgeSrc(b)} width={320} height={80} alt={`Parity Verify badge: ${VERDICT_WORDS[b.verdict!]}`} className="vb-badge" />
+        <img src={badgeSrc(b)} width={320} height={80} alt={badgeAlt(b)} className="vb-badge" />
       </div>
+      <section className="vb-record" aria-labelledby="vb-record-h">
+        <h2 id="vb-record-h" className="sr-only">The record</h2>
+        <dl className="vb-facts">
+          <div><dt>Verdict</dt><dd>{VERDICT_WORDS[b.verdict!]}</dd></div>
+          <div><dt>Luck check</dt><dd>{survivesWords(b.survives_tries)}, at {b.stated_tries?.toLocaleString("en-US")} {b.stated_tries === 1 ? "try" : "tries"} stated by the owner</dd></div>
+          <div><dt>Trust level</dt><dd>{trustLevel("upload")}. {b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record"}</dd></div>
+          <div><dt>Trades</dt><dd>{b.trade_count == null ? "Not a trade list" : b.trade_count.toLocaleString("en-US")}</dd></div>
+          <div><dt>Period</dt><dd>{range}</dd></div>
+          <div><dt>Checked on</dt><dd>{shortDate(b.created_at.slice(0, 10))}</dd></div>
+          <div><dt>Record id</dt><dd><code>{b.id}</code></dd></div>
+          <div><dt>Method</dt><dd><a href="/methodology/">{b.method_version}</a>, the rules that judged it</dd></div>
+        </dl>
+      </section>
       <div className="vb-trust">
         <p><strong>{TRUST_LINE}</strong> {NOT_ADVICE}</p>
         <p className="vf-small">
@@ -116,9 +135,8 @@ function Live({ b }: { b: PublicBadge }) {
         <ResultView r={r} />
       </PublicLinks.Provider>
       <details className="vb-share">
-        <summary>Embed or share this badge</summary>
-        <textarea className="ui-input vf-textarea vf-code" readOnly rows={3} value={embedSnippet(b.id, origin)} aria-label="Embed code" />
-        <textarea className="ui-input vf-textarea" readOnly rows={2} value={socialLine(b, window.location.host)} aria-label="Text for a social post" />
+        <summary>Embed or share this record</summary>
+        <Embeds badge={b} origin={origin} host={window.location.host} />
       </details>
     </>
   );

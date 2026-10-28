@@ -16,13 +16,17 @@ const pctText = (v: number, d = 0) => `${(v * 100).toFixed(d)}%`;
 export interface FillsResult { fills: CheckRow; timing: CheckRow }
 
 /** Fills outside the day's range, and perfect timing, against the daily prices we hold. */
-export function fillChecks(trades: readonly Trade[], prices: PriceBook | null): FillsResult {
+export function fillChecks(trades: readonly Trade[], prices: PriceBook | null, missing?: string): FillsResult {
   const fillsLabel = "Fills outside the day's range";
   const timingLabel = "Perfect timing";
   const priced = trades.filter((t) => t.symbol && (t.entry != null || t.exit != null));
   if (!priced.length) {
     const why = `${NA}: the file has no symbols with entry or exit prices.`;
     return { fills: { id: "fills", label: fillsLabel, status: "na", detail: why }, timing: { id: "timing", label: timingLabel, status: "na", detail: why } };
+  }
+  // The prices were not loaded at all (signed out on the public page): say so, not that we hold none.
+  if (!prices && missing) {
+    return { fills: { id: "fills", label: fillsLabel, status: "na", detail: missing }, timing: { id: "timing", label: timingLabel, status: "na", detail: missing } };
   }
   const syms = [...new Set(priced.map((t) => t.symbol!))];
   const covered = prices ? syms.filter((s) => prices[normaliseSymbol(s)]) : [];

@@ -113,7 +113,13 @@ describe("the public badge page", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Holds up" })).toBeInTheDocument();
     expect(container.querySelectorAll(".vf-cards .mcard").length).toBeGreaterThanOrEqual(5);
     expect(screen.getByText("a".repeat(64))).toBeInTheDocument();
-    expect(screen.getByText(/Checked on 24 Oct 2026 with method verify-1.0/)).toBeInTheDocument();
+    // It reads as a record: the facts, the trust level and the method, linked to the methodology.
+    const facts = container.querySelector(".vb-facts")!;
+    expect(facts.textContent).toContain("Checked on24 Oct 2026");
+    expect(facts.textContent).toContain("Trust levelSelf-reported.");
+    expect(facts.querySelector('a[href="/methodology/"]')?.textContent).toBe("verify-1.0");
+    expect(facts.textContent).toContain("Record idAb3dEf6hIj9k");
+    expect(facts.textContent).not.toMatch(/owner_id|user_id/);
     expect(screen.getByText(/Verification is not a recommendation/)).toBeInTheDocument();
     // Links on the public page go to the public lessons and glossary, not into the app.
     expect(container.querySelector('a[href^="#/"]')).toBeNull();
