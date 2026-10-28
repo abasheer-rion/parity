@@ -4,7 +4,7 @@
   "version": "0.2.3",
   "private": true,
   "description": "Parity for Mac and Windows: the site, Verify, the product app, Research, Parity Terminal and Parity Trade, with windows, workspaces and a menu bar item.",
-  "author": "Parity Trading, Inc. <contact@paritytrading.ai>",
+  "author": "Parity Trading, Inc. <contact@paritytrading.app>",
   "license": "UNLICENSED",
   "main": "electron/main.js",
   "scripts": {

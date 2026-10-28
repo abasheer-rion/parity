@@ -13,7 +13,7 @@ import requests
 from ..data.sources import redact
 
 #: The SEC asks for a contact in the user agent; the address is the site's public one.
-CONTACT = "contact@paritytrading.ai"
+CONTACT = "contact@paritytrading.app"
 USER_AGENT = f"parity-research/0.1 (private research project; {CONTACT})"
 TIMEOUT = 30
 
