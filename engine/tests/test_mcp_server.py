@@ -269,3 +269,46 @@ def test_writes_stay_in_the_output_folder(settings):
                 settings.repo / "engine" / "src" / "parity" / "strategies" / "x.py"):
         with pytest.raises(ToolError):
             tools._safe_path(bad)
+
+
+def test_verify_claim_matches_the_hosted_rules(settings):
+    out = call(settings, "verify_claim", {"claim": {"winRate": 0.92, "takeProfit": 0.05}})
+    rows = {c["id"]: c for c in out["claims"]}
+    # The same words as web/src/lib/verify/checks/claims.ts.
+    assert rows["breakeven"]["status"] == "needs_more_data"
+    assert rows["breakeven"]["text"] == (
+        "A 92% win rate with a 5% take-profit and no stop needs the average loss to stay "
+        "under 57.5% of a position to break even (5% x 0.92 / 0.08). With no stop, nothing "
+        "keeps it there.")
+    assert rows["winrate"]["status"] == "needs_more_data"
+    assert out["verdict"]["id"] == "not_enough_data"
+    assert out["method_version"] == "verify-1.0"
+    bad = call(settings, "verify_claim", {"claim": {"winRate": 0.8, "takeProfit": 0.02,
+                                                    "stopLoss": 0.1, "maxDrawdown": 0.05,
+                                                    "maxLoss": 0.1}})
+    assert bad["impossible"] == 2 and bad["verdict"]["id"] == "does_not_hold_up"
+    grid = call(settings, "verify_claim", {"claim": {"grid": True}})
+    assert grid["claims"][0]["status"] == "loss_not_capped"
+    assert grid["verdict"]["id"] == "fragile"
+    monthly = call(settings, "verify_claim", {"claim": {"monthlyReturn": 0.2}})
+    text = monthly["claims"][0]["text"]
+    assert "792% a year" in text and "$79,497" in text
+    assert "error" in call(settings, "verify_claim", {"claim": {}})
+    assert "error" in call(settings, "verify_claim", {"claim": {"nope": 1}})
+
+
+def test_verify_strategy_reads_the_latest_report(settings):
+    assert "error" in call(settings, "verify_strategy", {"name": "fx_carry"})  # no report yet
+    report = {"generated_at": "2026-10-27", "n_trials": 40, "runs": [
+        {"strategy": "fx_carry_top1", "display_name": "Currency carry, one pair",
+         "is_benchmark": False, "metrics": {"years": 20, "cagr": 0.02, "sharpe": 0.3,
+                                            "max_drawdown": -0.3, "deflated_sharpe": 0.4},
+         "gauntlet": {"verdict": "Does not beat the S&P 500", "passed": 4, "total": 11}}]}
+    (settings.out_dir / "latest.json").write_text(json.dumps(report))
+    out = call(settings, "verify_strategy", {"name": "The Gambit"})
+    assert out["strategy"]["id"] == "fx_carry_top1"
+    assert out["gauntlet"]["passed"] == 4
+    assert out["luck_check"]["passes"] is False
+    assert out["luck_check"]["tries_in_report"] == 40
+    assert out["luck_check"]["search_trials_here"] == 30
+    assert "error" in call(settings, "verify_strategy", {"name": "nothing like it"})

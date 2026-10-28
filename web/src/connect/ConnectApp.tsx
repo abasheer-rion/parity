@@ -12,6 +12,13 @@ import { ORIGIN, siteDomainOf } from "../lib/meta";
 // previews and local dev show their own.
 const MCP_URL = `${siteDomainOf(window.location.hostname) ? ORIGIN : window.location.origin}/mcp`;
 
+// What an AI can verify (DEC-0082): a prompt to copy for each Verify tool and what comes back.
+const PROMPTS = [
+  { tool: "verify_trades", ask: "Check these 40 trades with Parity Verify. I tried 12 settings before this one.", back: "returns a verdict, one sentence written from the numbers, the profit per trade, the worst losses, the luck check after 12 tries, and what it could not check." },
+  { tool: "verify_claim", ask: "Is a 92% win rate with 5% take-profit and no stop possible?", back: "marks each claim impossible, needs more data or adds up, with the sums: here, losses must average under 57.5% of a position to break even." },
+  { tool: "verify_strategy", ask: "Verify the strategy 'The Gambit'.", back: "returns the verdict on our research numbers with every try we counted, and the tests it passed out of 11." },
+];
+
 interface Grant { id: string; name: string; uri: string; granted: string; write: boolean }
 
 function Shell({ title, children }: { title: string; children: React.ReactNode }) {
@@ -111,7 +118,20 @@ function ConnectedApps() {
 function ConnectPage() {
   return (
     <Shell title="Connect your AI to Parity">
-      <p className="cx-lead">Parity has no AI of its own. Add Parity to the AI app you already use and it can look up tested strategies and their 11 tests, run Verify on a trading record, read market data and news impact, and explain terms from the Academy. It acts as you, and sees only what you can see.</p>
+      <p className="cx-lead">Add Parity to the AI app you already use and it can verify a trade record, one of our tested strategies, or a seller's claim. It can also look up tested strategies and their 11 tests, read market data and news impact, and explain terms from the Academy. It acts as you, and sees only what you can see.</p>
+
+      <h2>What your AI can verify</h2>
+      <p>Three tools: <code>verify_trades</code>, <code>verify_strategy</code> and <code>verify_claim</code>. They run the same checks as Verify on the website, and nothing you send is saved. Copy a prompt:</p>
+      <ul className="cx-prompts">
+        {PROMPTS.map((p) => (
+          <li key={p.tool}>
+            <Copy text={p.ask} />
+            <p className="cx-muted"><code>{p.tool}</code> {p.back}</p>
+          </li>
+        ))}
+      </ul>
+      <p className="cx-muted">How the checks work: <a href="/methodology/">methodology</a>.</p>
+
       <h2>The address</h2>
       <Copy text={MCP_URL} />
       <p className="cx-muted">Your AI app opens a Parity sign-in page the first time. Log in and choose Allow.</p>
@@ -147,7 +167,7 @@ function ConnectPage() {
 
       <h2>What an app can and cannot do</h2>
       <ul className="cx-list">
-        <li>Read: tested strategies, the strategy search, Verify checks on numbers you give it, market data, news impact, Academy lessons and your demo accounts.</li>
+        <li>Read: Verify on trades, strategies and claims you give it, tested strategies, the strategy search, market data, news impact, Academy lessons and your demo accounts.</li>
         <li>Change: nothing, unless you tick "May make changes" for that app above. Then it can place limit and stop orders in your demo accounts (virtual money) and save Trade layouts.</li>
         <li>Never: real trades, payments, your password or account settings.</li>
         <li>Limits: 30 calls a minute and 1000 a day for each person. Each call is logged with the app and tool name. What you send and what comes back are not stored.</li>

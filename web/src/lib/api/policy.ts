@@ -8,8 +8,8 @@ export type Scope = (typeof SCOPES)[number];
 export const SCOPE_TEXT: Record<Scope, string> = {
   "read:strategies": "Tested strategies, their 11 test results and the strategy search leaderboard",
   "read:markets": "Market series, the market snapshot and news impact",
-  "read:verify": "Verify's list of checks and how each one is judged",
-  "write:verify": "Send numbers to Verify and get a check back (nothing is stored)",
+  "read:verify": "Verify's list of checks, and Verify on Parity's own tested strategies",
+  "write:verify": "Send trades, equity curves or claims to Verify and get a check back (nothing is stored)",
 };
 
 export const isScope = (s: unknown): s is Scope => typeof s === "string" && (SCOPES as readonly string[]).includes(s);

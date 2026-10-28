@@ -2,6 +2,7 @@
 // plain HTML; parityLegal() (plugins/legal.ts) fills these markers at build time so the
 // three pages say the same thing about tools, limits, privacy and disconnecting:
 //   <!--guide:nav-->      links between the guides, the current one marked
+//   <!--guide:verify-->   what the AI can verify, with prompts to copy (DEC-0082)
 //   <!--guide:flow-->     the diagram of how signing in works
 //   <!--guide:consent-->  the diagram of Parity's Allow page
 //   <!--guide:tools-->    what the AI can use, from src/lib/mcp/tools.ts
@@ -30,11 +31,12 @@ function nav(path: string): string {
 // Read tools in the order tools/list gives them, in words. The names are what the AI app
 // shows when it asks to use one.
 const TOOLS: [string, string][] = [
+  ["verify_trades", "Verify a trade list or equity curve: a verdict, one sentence, five cards and how many tries it survives. Nothing is saved."],
+  ["verify_strategy", "Verify one of Parity's tested strategies with every try we counted, or find the closest ones to a rule set in words."],
+  ["verify_claim", "Check a seller's claim, such as a win rate with a take-profit and no stop, and say which numbers cannot hold."],
   ["search_strategies", "Find strategies Parity has tested against the S&P 500, with each one's verdict from the 11 tests."],
   ["get_strategy", "Full results for one strategy: its settings, the 11 tests, yearly returns and its equity curve."],
   ["search_leads", "The best variations from Parity's always-on strategy search, with the luck check."],
-  ["verify_record", "Run Verify on a trade list or equity curve you give it. Nothing is saved."],
-  ["verify_description", "Check a bot or signal described in words for numbers that cannot hold."],
   ["list_market_series", "Market data Parity publishes: currencies, rates, commodities, indices and crypto, delayed."],
   ["get_market_series", "The history of one market series."],
   ["news_impact", "What markets did after kinds of news, compared with random days."],
@@ -42,7 +44,19 @@ const TOOLS: [string, string][] = [
   ["get_academy_lesson", "The text of one Academy lesson and its quick check."],
   ["search", "Search strategies, lessons and market series at once."],
   ["fetch", "The full text of an item found with search."],
+  ["verify_record", "Old name for verify_trades, kept so existing connections keep working."],
+  ["verify_description", "Old name for verify_claim, kept so existing connections keep working."],
   ["list_demo_accounts", "Your Parity Trade demo accounts (virtual money)."],
+];
+
+// What an AI can verify, with a prompt to copy for each tool and what comes back.
+const PROMPTS: [string, string, string][] = [
+  ["verify_trades", "Check these 40 trades with Parity Verify. I tried 12 settings before this one. Starting balance 10,000.",
+    "A verdict such as \"Could be luck\", one sentence written from the numbers, the profit per trade, the worst losses, the luck check after 12 tries, signs of peeking or tuning, and what it could not check."],
+  ["verify_claim", "Is a 92% win rate with 5% take-profit and no stop possible?",
+    "Each claim marked impossible, needs more data or adds up, with the sums: here, losses must average under 57.5% of a position to break even, and with no stop nothing keeps them there."],
+  ["verify_strategy", "Verify the strategy 'The Gambit'.",
+    "The verdict on our research numbers with every try our research and search have counted, the tests it passed out of 11, and how many tries it survives."],
 ];
 
 const WRITE_TOOLS: [string, string][] = [
@@ -53,6 +67,19 @@ const WRITE_TOOLS: [string, string][] = [
 const toolRows = (rows: [string, string][]) => rows.map(([n, d]) => `<tr><th scope="row"><code>${n}</code></th><td>${d}</td></tr>`).join("\n            ");
 
 const BLOCKS: Record<string, string> = {
+  verify: `
+        <h2 id="verify">What your AI can verify</h2>
+        <p>Paste a trade list, name one of our strategies, or quote a seller's claim, and your AI runs Parity Verify with three tools: <code>verify_trades</code>, <code>verify_strategy</code> and <code>verify_claim</code>. They run the same checks as Verify on the website. Nothing you send is saved. How the checks work: <a href="/methodology/">methodology</a>.</p>
+        <div class="lg-table-wrap gd-tools" tabindex="0" role="region" aria-label="Prompts to try">
+          <table>
+            <caption>Prompts to copy, and what comes back</caption>
+            <thead><tr><th scope="col">Ask</th><th scope="col">Tool</th><th scope="col">What comes back</th></tr></thead>
+            <tbody>
+            ${PROMPTS.map(([tool, ask, back]) => `<tr><td>"${ask}"</td><td><code>${tool}</code></td><td>${back}</td></tr>`).join("\n            ")}
+            </tbody>
+          </table>
+        </div>`,
+
   tools: `
         <div class="lg-table-wrap gd-tools" tabindex="0" role="region" aria-label="Read tools">
           <table>
@@ -77,7 +104,7 @@ const BLOCKS: Record<string, string> = {
 
   limits: `
         <ul>
-          <li><strong>Reads by default.</strong> A connected app can read tested strategies, market data, news impact, Academy lessons and your demo accounts, and run Verify on numbers it sends.</li>
+          <li><strong>Reads by default.</strong> A connected app can run Verify on trades, strategies and claims it sends, and read tested strategies, market data, news impact, Academy lessons and your demo accounts.</li>
           <li><strong>Changes need your consent.</strong> It can place demo orders or save Trade layouts only if you tick "May make changes" for that app, on the Allow page or later on <a href="/connect/">Connect your AI</a>. Changes are capped at 30 a day.</li>
           <li><strong>Never.</strong> It cannot place real trades, move money, pay for anything, or change your password, email or account settings.</li>
           <li><strong>It acts as you.</strong> It sees what you can see in Parity, and nothing of anyone else's.</li>

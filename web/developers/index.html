@@ -12,13 +12,150 @@
     <main id="main" tabindex="-1">
       <div class="lg-wrap lg-dev">
   <h1>Parity API</h1>
-  <p class="lg-lede">Read Parity's tested strategies and their 11 test results, the strategy search leaderboard, market data and news impact, and run Verify checks on your own numbers, from your own programs.</p>
-  <p class="lg-meta">Research and education only. Not investment advice. Market data is delayed, end of day.</p>
+  <p class="lg-lede">Verify a trade record, one of our tested strategies, or a seller's claim from your own programs. The API runs the same checks as Verify on the website and as the Verify tools AI apps use through Parity's MCP server. It also serves our tested strategies, market data and news impact.</p>
+  <p class="lg-meta">Verify reports what a record shows. It gives no advice. Market data is delayed, end of day.</p>
 
   <nav class="lg-toc" aria-label="On this page">
-    <a href="#start">Start</a><a href="#keys">Keys</a><a href="#scopes">Scopes</a><a href="#endpoints">Endpoints</a>
-    <a href="#examples">Examples</a><a href="#limits">Limits</a><a href="#errors">Errors</a><a href="#leaked">Leaked keys</a><a href="#security">Security</a>
+    <a href="#verify">Verify</a><a href="#start">Start</a><a href="#keys">Keys</a><a href="#scopes">Scopes</a><a href="#limits">Limits</a>
+    <a href="#errors">Errors</a><a href="#endpoints">All endpoints</a><a href="#examples">More examples</a><a href="#leaked">Leaked keys</a><a href="#security">Security</a>
   </nav>
+
+  <h2 id="verify">Verify a trade record in one request</h2>
+  <p>Three endpoints, each one POST with a JSON body. Each answers with a verdict (<code>holds_up</code>, <code>could_be_luck</code>, <code>fragile</code>, <code>does_not_hold_up</code> or <code>not_enough_data</code>), one sentence written from the numbers, the method version and <code>could_not_check</code>: the checks your input cannot run, and why. Nothing you send is stored. How each check works: <a href="/methodology/">methodology</a>. Every field: <a href="/api/v1/openapi.json"><code>/api/v1/openapi.json</code></a>.</p>
+  <div class="lg-table-wrap"><table>
+    <thead><tr><th>Endpoint</th><th>Scope</th><th>Send</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST /api/v1/verify/trades</code></td><td>write:verify</td><td>A trade list or an equity curve, how many things were tried, and whether it is real, demo or a backtest</td></tr>
+      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>The id or name of one of our tested strategies, or a rule set in words</td></tr>
+      <tr><td><code>POST /api/v1/verify/claim</code></td><td>write:verify</td><td>A seller's claim, in their words or as fields such as win rate, take-profit and stop</td></tr>
+    </tbody>
+  </table></div>
+  <p>The answers below were made by running the real checks on these bodies, then trimmed: long lists are cut to one item and some fields are left out.</p>
+
+  <h3 id="verify-trades">Trades: <code>POST /api/v1/verify/trades</code></h3>
+  <p>Send <code>kind</code> (<code>real</code>, <code>demo</code> or <code>backtest</code>), and <code>trades</code> (each with <code>close_time</code> and <code>pnl</code>) or <code>equity</code> (each with <code>date</code> and <code>equity</code>), up to 5,000 rows. Send <code>tries</code>: how many strategies, bots or settings were tried, counting this one. More tries make the luck check stricter. <code>starting_balance</code> turns trades into returns, and <code>claim</code> compares a seller's numbers with the record. Verify needs at least 30 trades or 60 daily values for a verdict.</p>
+  <h4>curl</h4>
+<pre tabindex="0"><code># trades.json holds 40 trades; the Python example below builds the same file.
+# {"kind": "demo", "tries": 12, "starting_balance": 10000,
+#  "trades": [{"close_time": "2026-01-05", "symbol": "EURUSD", "pnl": 120},
+#             {"close_time": "2026-01-06", "symbol": "EURUSD", "pnl": -80}, ...]}
+curl -s https://paritytrading.app/api/v1/verify/trades \
+  -H "Authorization: Bearer $PARITY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @trades.json</code></pre>
+  <h4>Python</h4>
+<pre tabindex="0"><code>import os, requests
+from datetime import date, timedelta
+
+pnl = [120, -80, 45, 60, -110, 75, 30, -40, 95, 20, -65, 50, 85, -30, 40, -90, 110, 25, -55, 70,
+       35, -45, 60, 15, -100, 80, 55, -20, 45, -70, 90, 30, -35, 65, -60, 40, 20, -85, 100, 50]
+trades = [{"close_time": (date(2026, 1, 5) + timedelta(days=i * 7 // 5)).isoformat(), "symbol": "EURUSD", "pnl": p}
+          for i, p in enumerate(pnl)]
+
+r = requests.post("https://paritytrading.app/api/v1/verify/trades",
+                  headers={"Authorization": f"Bearer {os.environ['PARITY_API_KEY']}"},
+                  json={"kind": "demo", "tries": 12, "starting_balance": 10000, "trades": trades}, timeout=30)
+r.raise_for_status()
+result = r.json()
+print(result["verdict"]["label"], "|", result["sentence"])</code></pre>
+  <h4>TypeScript</h4>
+<pre tabindex="0"><code>const res = await fetch("https://paritytrading.app/api/v1/verify/trades", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${process.env.PARITY_API_KEY}`, "Content-Type": "application/json" },
+  body: JSON.stringify({ kind: "demo", tries: 12, starting_balance: 10000, trades }), // trades as in the Python example
+});
+if (!res.ok) throw new Error(JSON.stringify(await res.json())); // RFC 9457 problem details
+const result: { verdict: { id: string; label: string }; sentence: string; survives_up_to_tries: number | null } = await res.json();
+console.log(result.verdict.id, result.survives_up_to_tries);</code></pre>
+  <h4>Answer (trimmed)</h4>
+<pre tabindex="0"><code>{
+  "verdict": {"id": "could_be_luck", "label": "Could be luck",
+              "sentence": "Makes 15.63 a trade on average over 40 trades, but after 12 tries the luck check is 0.435, below the 0.95 line (survives no tries), and the \"short sample\" check failed, and the \"concentration\" check failed."},
+  "survives_up_to_tries": 0,
+  "survives": "Survives no tries",
+  "kind": "demo", "tries": 12, "method_version": "verify-1.0",
+  "date_from": "2026-01-05", "date_to": "2026-02-28", "trades": 40, "starting_balance": 10000,
+  "profit_per_trade": {"basis": "trade", "n": 40, "winRate": 0.65, "expectancy": 15.625, "breakEven": 0.521178, "profitFactor": 1.70621},
+  "worst_losses": {"worstTrade": -110, "maxDrawdown": 0.0108428, "longestUnderwaterDays": 6, "red": false},
+  "luck_check": {"basis": "daily", "observations": 48, "tries": 12, "dsr": 0.434813, "survives": 0, "monthsMore": 7.13208},
+  "signs_of_peeking_or_editing": [{"id": "smooth", "label": "Too smooth", "status": "pass", "detail": "Autocorrelation -0.40 (0.3 is the line), 0 losing months of 2."}],
+  "signs_of_tuning": [{"id": "short", "label": "Short sample", "status": "fail", "detail": "Only 40 trades (100 is the line) and 1.8 months (12 is the line). A short record can look good by chance."}],
+  "could_not_check": [{"check": "Fills outside the day's range", "why": "The file has no symbols with entry or exit prices."}],
+  "methodology": "https://paritytrading.app/methodology/"
+}</code></pre>
+
+  <h3 id="verify-strategy">Strategy: <code>POST /api/v1/verify/strategy</code></h3>
+  <p>Send <code>strategy</code>: an id or name from our tested list, such as <code>fx_carry</code> or <code>The Gambit</code>. Verify runs on our research numbers with every try our research and strategy search have counted, and adds the gauntlet result (tests passed of 11). Or send <code>description</code>, a rule set in words, to get the closest strategies we have tested, each with an id to verify next. An unknown name answers 404.</p>
+  <h4>curl</h4>
+<pre tabindex="0"><code>curl -s https://paritytrading.app/api/v1/verify/strategy \
+  -H "Authorization: Bearer $PARITY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"strategy": "fx_carry"}'</code></pre>
+  <h4>Python</h4>
+<pre tabindex="0"><code>r = requests.post("https://paritytrading.app/api/v1/verify/strategy",
+                  headers={"Authorization": f"Bearer {os.environ['PARITY_API_KEY']}"},
+                  json={"description": "buys the highest-yielding currency and sells the lowest, monthly"}, timeout=30)
+for s in r.json()["closest"]:
+    print(s["name"], s["verdict"], s["luck_check"])</code></pre>
+  <h4>TypeScript</h4>
+<pre tabindex="0"><code>const res = await fetch("https://paritytrading.app/api/v1/verify/strategy", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${process.env.PARITY_API_KEY}`, "Content-Type": "application/json" },
+  body: JSON.stringify({ strategy: "The Gambit" }),
+});
+const { verdict, gauntlet, tries_counted } = await res.json();
+console.log(verdict.label, `${gauntlet.passed} of ${gauntlet.total} tests`, tries_counted.total);</code></pre>
+  <h4>Answer for <code>{"strategy": "fx_carry"}</code> (trimmed)</h4>
+  <p>Made from a stored research run of 21 October 2026, which had counted 16 tries. Live answers count every try of the current research and search, so their luck check is stricter.</p>
+<pre tabindex="0"><code>{
+  "mode": "strategy",
+  "strategy": {"id": "fx_carry", "name": "Classic Carry", "url": "https://paritytrading.app/app/#/strategy/fx_carry"},
+  "gauntlet": {"verdict": "Some signs of a real effect, not enough to rely on.", "passed": 5, "total": 11},
+  "tries_counted": {"research": 16, "search": 0, "total": 16},
+  "verdict": {"id": "holds_up", "label": "Holds up",
+              "sentence": "Makes 0.07% a period on average, and after 16 tries the luck check is 0.999, above the 0.95 line. Survives up to 1,231 tries."},
+  "survives_up_to_tries": 1231,
+  "kind": "backtest", "method_version": "verify-1.0", "date_from": "1999-01-15", "date_to": "2026-10-23",
+  "worst_losses": {"maxDrawdown": 0.138677, "longestUnderwaterDays": 1323, "red": false},
+  "luck_check": {"basis": "weekly", "observations": 1450, "tries": 16, "dsr": 0.998762, "survives": 1231},
+  "could_not_check": [{"check": "Fills outside the day's range", "why": "A strategy's backtest has positions, not fills."}]
+}</code></pre>
+
+  <h3 id="verify-claim">Claim: <code>POST /api/v1/verify/claim</code></h3>
+  <p>Send <code>text</code> (the seller's words), <code>claim</code> fields, or both. Fields win over the text. Rates are fractions: <code>0.92</code> means 92%. Fields: <code>winRate</code>, <code>takeProfit</code>, <code>stopLoss</code>, <code>avgLoss</code>, <code>monthlyReturn</code>, <code>maxDrawdown</code>, <code>maxLoss</code>, <code>tradesPerMonth</code>, <code>trades</code>, <code>months</code>, <code>leverage</code>, <code>grid</code>, <code>martingale</code>, <code>maxLossCapped</code>. Each claim comes back marked <code>impossible</code>, <code>needs_more_data</code>, <code>loss_not_capped</code> or <code>adds_up</code>, with the sums in words.</p>
+  <h4>curl</h4>
+<pre tabindex="0"><code>curl -s https://paritytrading.app/api/v1/verify/claim \
+  -H "Authorization: Bearer $PARITY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "92% win rate, 5% take-profit, no stop loss"}'</code></pre>
+  <h4>Python</h4>
+<pre tabindex="0"><code>r = requests.post("https://paritytrading.app/api/v1/verify/claim",
+                  headers={"Authorization": f"Bearer {os.environ['PARITY_API_KEY']}"},
+                  json={"claim": {"winRate": 0.92, "takeProfit": 0.05}}, timeout=30)
+for c in r.json()["claims"]:
+    print(c["status"], c["text"])</code></pre>
+  <h4>TypeScript</h4>
+<pre tabindex="0"><code>const res = await fetch("https://paritytrading.app/api/v1/verify/claim", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${process.env.PARITY_API_KEY}`, "Content-Type": "application/json" },
+  body: JSON.stringify({ text: "92% win rate, 5% take-profit, no stop loss" }),
+});
+const { impossible, needs_more_data, claims } = await res.json();
+console.log(impossible, needs_more_data, claims.map((c: { id: string }) =&gt; c.id));</code></pre>
+  <h4>Answer (trimmed)</h4>
+<pre tabindex="0"><code>{
+  "verdict": {"id": "not_enough_data", "label": "Not enough data", "sentence": "Nothing in the description fails on arithmetic, but a 92% win rate with a 5% take-profit and no stop needs the average loss to stay under 57.5% of a position to break even (5% x 0.92 / 0.08). With no stop, nothing keeps it there. A description cannot show an edge. Upload the bot's trade log to check it."},
+  "claims": [
+    {"id": "breakeven", "status": "needs_more_data", "text": "A 92% win rate with a 5% take-profit and no stop needs the average loss to stay under 57.5% of a position to break even (5% x 0.92 / 0.08). With no stop, nothing keeps it there."},
+    {"id": "winrate", "status": "needs_more_data", "text": "The win rate alone says nothing about profit. At 92%, the record loses money if the average loss is more than 11.5 times the average win, and the claim does not say how big losses are."}
+  ],
+  "impossible": 0, "needs_more_data": 2,
+  "claim_used": {"winRate": 0.92, "takeProfit": 0.05},
+  "found_in_text": ["win rate 92%", "take-profit 5%", "no stop-loss"],
+  "could_not_check": [{"check": "Whether the claimed results happened", "why": "A claim is not a record. Send the trade list or equity curve to verify_trades to check it."}],
+  "method_version": "verify-1.0"
+}</code></pre>
+  <p class="lg-meta">The old paths still work: <code>POST /api/v1/verify</code> answers as <code>/verify/trades</code> and <code>POST /api/v1/verify/description</code> as <code>/verify/claim</code>. The OpenAPI file marks them deprecated.</p>
 
   <h2 id="start">Start in three steps</h2>
   <ol>
@@ -45,12 +182,49 @@
     <tbody>
       <tr><td><code>read:strategies</code></td><td>Read tested strategies, their 11 test results and the strategy search leaderboard</td></tr>
       <tr><td><code>read:markets</code></td><td>Read market series, the market snapshot and news impact</td></tr>
-      <tr><td><code>read:verify</code></td><td>Read Verify's list of checks and how each one is judged</td></tr>
-      <tr><td><code>write:verify</code></td><td>Send numbers to Verify and get a check back. Nothing you send is stored</td></tr>
+      <tr><td><code>read:verify</code></td><td>Read Verify's list of checks, and run Verify on our own tested strategies</td></tr>
+      <tr><td><code>write:verify</code></td><td>Send trades, equity curves or claims to Verify and get a check back. Nothing you send is stored</td></tr>
     </tbody>
   </table></div>
 
-  <h2 id="endpoints">Endpoints</h2>
+  <h2 id="limits">Limits</h2>
+  <div class="lg-table-wrap"><table>
+    <thead><tr><th>Plan</th><th>A minute</th><th>A day</th></tr></thead>
+    <tbody>
+      <tr><td>Free</td><td>30</td><td>1,000</td></tr>
+      <tr><td>API Starter</td><td>300</td><td>20,000</td></tr>
+      <tr><td>Platform</td><td>1,200</td><td>200,000</td></tr>
+    </tbody>
+  </table></div>
+  <p>Every answer carries <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code> and <code>RateLimit-Reset</code>. Over a limit you get 429 with <code>Retry-After</code> in seconds. The daily count covers all your keys together and resets at 00:00 UTC. POST bodies can be up to 1 MB, and a Verify call up to 5,000 trades or equity points.</p>
+
+  <h2 id="errors">Errors</h2>
+  <p>Errors use RFC 9457 problem details, with <code>Content-Type: application/problem+json</code>:</p>
+<pre><code>{"type": "https://paritytrading.app/developers/#problem-insufficient-scope",
+ "title": "Scope missing", "status": 403,
+ "detail": "This endpoint needs the read:strategies scope (...)."}</code></pre>
+  <dl>
+    <dt id="problem-unauthorized"><code>unauthorized</code> 401</dt><dd>No key sent. Add the Authorization header.</dd>
+    <dt id="problem-invalid-key"><code>invalid-key</code> 401</dt><dd>Not a Parity key, copied wrong, or deleted.</dd>
+    <dt id="problem-revoked"><code>revoked</code> 401</dt><dd>The key was revoked by you, or because it leaked.</dd>
+    <dt id="problem-expired"><code>expired</code> 401</dt><dd>The key is past its expiry. Make or rotate a key.</dd>
+    <dt id="problem-insufficient-scope"><code>insufficient-scope</code> 403</dt><dd>The key lacks the scope this endpoint needs.</dd>
+    <dt id="problem-ip-not-allowed"><code>ip-not-allowed</code> 403</dt><dd>The request came from an address not on the key's list.</dd>
+    <dt id="problem-origin"><code>origin</code> 403</dt><dd>A browser on another site called the API. Call it from your server.</dd>
+    <dt id="problem-not-found"><code>not-found</code> 404</dt><dd>No such endpoint, strategy, series, topic or asset. Verify on a strategy name we have not tested answers 404.</dd>
+    <dt id="problem-method"><code>method</code> 405</dt><dd>Wrong method for this path. The Allow header lists the right one.</dd>
+    <dt id="problem-bad-request"><code>bad-request</code> 400</dt><dd>A parameter or body field is wrong. The detail says which.</dd>
+    <dt id="problem-bad-json"><code>bad-json</code> 400</dt><dd>The body is not valid JSON.</dd>
+    <dt id="problem-too-large"><code>too-large</code> 413</dt><dd>The body is over 1 MB. More than 5,000 trades or points is a 400 <code>bad-request</code>.</dd>
+    <dt id="problem-media-type"><code>media-type</code> 415</dt><dd>POST bodies must be <code>application/json</code>.</dd>
+    <dt id="problem-rate-limited"><code>rate-limited</code> 429</dt><dd>Too many requests this minute. Wait for Retry-After.</dd>
+    <dt id="problem-quota"><code>quota</code> 429</dt><dd>The daily quota is used. It resets at 00:00 UTC.</dd>
+    <dt id="problem-server-error"><code>server-error</code> 500</dt><dd>Our fault. Quote the X-Request-Id header if you report it.</dd>
+    <dt id="problem-unavailable"><code>unavailable</code> 503</dt><dd>We could not check your key just now. Try again shortly.</dd>
+    <dt id="problem-not-configured"><code>not-configured</code> 503</dt><dd>The API is not switched on yet.</dd>
+  </dl>
+
+  <h2 id="endpoints">All endpoints</h2>
   <div class="lg-table-wrap"><table>
     <thead><tr><th>Method and path</th><th>Scope</th><th>Returns</th></tr></thead>
     <tbody>
@@ -62,26 +236,22 @@
       <tr><td><code>GET /api/v1/markets/snapshot</code></td><td>read:markets</td><td>Latest value and change of every public series, and which live feeds exist. Query: <code>class</code></td></tr>
       <tr><td><code>GET /api/v1/news/impact</code></td><td>read:markets</td><td>What markets did after kinds of news. Query: <code>topic</code>, <code>asset</code>, <code>limit</code></td></tr>
       <tr><td><code>GET /api/v1/verify/tests</code></td><td>read:verify</td><td>The checks Verify runs</td></tr>
-      <tr><td><code>POST /api/v1/verify</code></td><td>write:verify</td><td>Verify's checks on a trade list or equity curve you send</td></tr>
-      <tr><td><code>POST /api/v1/verify/description</code></td><td>write:verify</td><td>Verify's arithmetic checks on a bot described in words</td></tr>
+      <tr><td><code>POST /api/v1/verify/trades</code></td><td>write:verify</td><td>Verify on a trade list or equity curve you send. See <a href="#verify-trades">Trades</a></td></tr>
+      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>Verify on one of our tested strategies, or the closest to a rule set in words. See <a href="#verify-strategy">Strategy</a></td></tr>
+      <tr><td><code>POST /api/v1/verify/claim</code></td><td>write:verify</td><td>The arithmetic of a seller's claim. See <a href="#verify-claim">Claim</a></td></tr>
+      <tr><td><code>POST /api/v1/verify</code></td><td>write:verify</td><td>Old path for <code>/verify/trades</code>, deprecated</td></tr>
+      <tr><td><code>POST /api/v1/verify/description</code></td><td>write:verify</td><td>Old path for <code>/verify/claim</code>, deprecated</td></tr>
       <tr><td><code>POST /api/v1/leaked-keys</code></td><td>none</td><td>Revokes keys you report as leaked. See <a href="#leaked">Leaked keys</a></td></tr>
     </tbody>
   </table></div>
   <p class="lg-meta">Only series whose terms let us show them to the public are in the API. Data that is for research or team use only never is.</p>
 
-  <h2 id="examples">Examples</h2>
+  <h2 id="examples">More examples</h2>
   <h3>curl</h3>
 <pre><code>export PARITY_API_KEY="pk_test_..."   # from Settings, API keys
 
 curl -s https://paritytrading.app/api/v1/strategies?query=carry \
-  -H "Authorization: Bearer $PARITY_API_KEY"
-
-curl -s https://paritytrading.app/api/v1/verify \
-  -H "Authorization: Bearer $PARITY_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"kind": "real", "starting_balance": 10000,
-       "trades": [{"close_time": "2026-01-05", "pnl": 120},
-                  {"close_time": "2026-01-06", "pnl": -80}]}'</code></pre>
+  -H "Authorization: Bearer $PARITY_API_KEY"</code></pre>
   <h3>Python</h3>
 <pre><code>import os, requests
 
@@ -112,43 +282,6 @@ async function parity&lt;T&gt;(path: string, init: RequestInit = {}): Promise&lt
 const { strategies } = await parity&lt;{ strategies: { id: string; verdict: string }[] }&gt;("/strategies?limit=5");
 console.log(strategies.map((s) =&gt; `${s.id}: ${s.verdict}`).join("\n"));</code></pre>
 
-  <h2 id="limits">Limits</h2>
-  <div class="lg-table-wrap"><table>
-    <thead><tr><th>Plan</th><th>A minute</th><th>A day</th></tr></thead>
-    <tbody>
-      <tr><td>Free</td><td>30</td><td>1,000</td></tr>
-      <tr><td>API Starter</td><td>300</td><td>20,000</td></tr>
-      <tr><td>Platform</td><td>1,200</td><td>200,000</td></tr>
-    </tbody>
-  </table></div>
-  <p>Every answer carries <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code> and <code>RateLimit-Reset</code>. Over a limit you get 429 with <code>Retry-After</code> in seconds. The daily count covers all your keys together and resets at 00:00 UTC. POST bodies can be up to 1 MB.</p>
-
-  <h2 id="errors">Errors</h2>
-  <p>Errors use RFC 9457 problem details, with <code>Content-Type: application/problem+json</code>:</p>
-<pre><code>{"type": "https://paritytrading.app/developers/#problem-insufficient-scope",
- "title": "Scope missing", "status": 403,
- "detail": "This endpoint needs the read:strategies scope (...)."}</code></pre>
-  <dl>
-    <dt id="problem-unauthorized"><code>unauthorized</code> 401</dt><dd>No key sent. Add the Authorization header.</dd>
-    <dt id="problem-invalid-key"><code>invalid-key</code> 401</dt><dd>Not a Parity key, copied wrong, or deleted.</dd>
-    <dt id="problem-revoked"><code>revoked</code> 401</dt><dd>The key was revoked by you, or because it leaked.</dd>
-    <dt id="problem-expired"><code>expired</code> 401</dt><dd>The key is past its expiry. Make or rotate a key.</dd>
-    <dt id="problem-insufficient-scope"><code>insufficient-scope</code> 403</dt><dd>The key lacks the scope this endpoint needs.</dd>
-    <dt id="problem-ip-not-allowed"><code>ip-not-allowed</code> 403</dt><dd>The request came from an address not on the key's list.</dd>
-    <dt id="problem-origin"><code>origin</code> 403</dt><dd>A browser on another site called the API. Call it from your server.</dd>
-    <dt id="problem-not-found"><code>not-found</code> 404</dt><dd>No such endpoint, strategy, series, topic or asset.</dd>
-    <dt id="problem-method"><code>method</code> 405</dt><dd>Wrong method for this path. The Allow header lists the right one.</dd>
-    <dt id="problem-bad-request"><code>bad-request</code> 400</dt><dd>A parameter or body field is wrong. The detail says which.</dd>
-    <dt id="problem-bad-json"><code>bad-json</code> 400</dt><dd>The body is not valid JSON.</dd>
-    <dt id="problem-too-large"><code>too-large</code> 413</dt><dd>The body is over 1 MB.</dd>
-    <dt id="problem-media-type"><code>media-type</code> 415</dt><dd>POST bodies must be <code>application/json</code>.</dd>
-    <dt id="problem-rate-limited"><code>rate-limited</code> 429</dt><dd>Too many requests this minute. Wait for Retry-After.</dd>
-    <dt id="problem-quota"><code>quota</code> 429</dt><dd>The daily quota is used. It resets at 00:00 UTC.</dd>
-    <dt id="problem-server-error"><code>server-error</code> 500</dt><dd>Our fault. Quote the X-Request-Id header if you report it.</dd>
-    <dt id="problem-unavailable"><code>unavailable</code> 503</dt><dd>We could not check your key just now. Try again shortly.</dd>
-    <dt id="problem-not-configured"><code>not-configured</code> 503</dt><dd>The API is not switched on yet.</dd>
-  </dl>
-
   <h2 id="leaked">Leaked keys</h2>
   <p>If a key ends up somewhere public, revoke it in Settings. If you cannot sign in, or you found someone else's key, send it to us and it is revoked at once. Holding the key is the proof, so no sign-in is needed:</p>
 <pre><code>curl -s https://paritytrading.app/api/v1/leaked-keys \
@@ -162,7 +295,7 @@ console.log(strategies.map((s) =&gt; `${s.id}: ${s.verdict}`).join("\n"));</code
     <li>Every key event (made, rotated, revoked, leaked) goes in a log you can see on the keys page.</li>
     <li>Browsers on other sites are refused. The API is for servers.</li>
   </ul>
-  <p class="lg-meta">The design and its reasons: DEC-0071 in the Parity repository.</p>
+  <p class="lg-meta">The design and its reasons: DEC-0071 and DEC-0082 in the Parity repository.</p>
       </div>
     </main>
     <!--legal:footer-->

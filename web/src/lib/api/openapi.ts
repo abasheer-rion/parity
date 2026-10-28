@@ -5,11 +5,12 @@ import { byName, TOOLS } from "../mcp/tools";
 import type { Schema } from "../mcp/schema";
 import { SCOPE_TEXT, SCOPES, type Scope } from "./policy";
 
-interface RouteLike { method: string; path: string; scope: Scope; summary: string }
+interface RouteLike { method: string; path: string; scope: Scope; summary: string; deprecated?: boolean }
 
 const TOOL_FOR: Record<string, string> = {
   "GET /strategies": "search_strategies", "GET /strategies/{id}": "get_strategy", "GET /search/leaderboard": "search_leads",
   "GET /markets/series": "list_market_series", "GET /markets/series/{key}": "get_market_series", "GET /news/impact": "news_impact",
+  "POST /verify/trades": "verify_trades", "POST /verify/strategy": "verify_strategy", "POST /verify/claim": "verify_claim",
   "POST /verify": "verify_record", "POST /verify/description": "verify_description",
 };
 
@@ -33,12 +34,14 @@ export function openApi(site: string, routes: RouteLike[]) {
       operationId: `${r.method.toLowerCase()}${r.path.replace(/\{(\w+)\}/g, "By_$1").replace(/[^A-Za-z0-9]+(\w)?/g, (_, c: string | undefined) => (c ?? "").toUpperCase())}`,
       summary: r.summary,
       description: t ? t.description : undefined,
+      ...(r.deprecated ? { deprecated: true } : {}),
       security: [{ bearer: [] }],
       "x-required-scope": r.scope,
       parameters: params,
       responses: {
         200: { description: "OK", headers: { "RateLimit-Limit": { schema: { type: "integer" } }, "RateLimit-Remaining": { schema: { type: "integer" } }, "RateLimit-Reset": { schema: { type: "integer" } } }, content: { "application/json": { schema: { type: "object" } } } },
         400: problemRef, 401: problemRef, 403: problemRef, 404: problemRef, 429: problemRef, 503: problemRef,
+        ...(r.method === "POST" ? { 413: problemRef, 415: problemRef } : {}),
       },
     };
     if (r.method === "POST" && t) op.requestBody = { required: true, content: { "application/json": { schema: t.inputSchema } } };
@@ -58,7 +61,7 @@ export function openApi(site: string, routes: RouteLike[]) {
     openapi: "3.1.0",
     info: {
       title: "Parity API", version: "1.0.0",
-      summary: "Tested strategies, market data, news impact and Verify checks.",
+      summary: "Verify trade records, tested strategies and claims, plus tested strategies, market data and news impact.",
       description: `Research only, not investment advice. Make a key in Settings, API keys. Guide: ${site}/developers/`,
       contact: { url: `${site}/developers/` },
     },
