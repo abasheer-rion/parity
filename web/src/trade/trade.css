@@ -435,6 +435,28 @@ textarea.ot-input, .ot-area { height: auto; padding: 6px 8px; font-family: var(-
 .tr-main > .view > :nth-child(2) { animation-delay: var(--stagger-step); }
 .tr-main > .view > :nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
 .tr-main > .view > :nth-child(n+4) { animation-delay: calc(var(--stagger-step) * 3); }
+
+/* Broker trading (DEC-0046): the permanent mode badge, the broker ticket, its preview and the sandbox card. */
+.mode-badge { display: inline-flex; flex: none; align-items: center; }
+.mb-list { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; height: 100%; }
+.mb-row { display: flex; justify-content: flex-end; align-items: center; flex: none; padding: 2px 6px; }
+.ot > .mb-row { padding: 0; }
+.mb-list > .tt-wrap { flex: 1 1 auto; height: auto; }
+.bt { display: flex; flex-direction: column; gap: 8px; }
+.bt .ot-head { align-items: flex-end; }
+.bt-sym { flex: 1 1 auto; }
+.bt-summary { margin: 0; color: var(--text); }
+.bt-msgs { margin: 0; padding: 6px 8px 6px 22px; border: 1px solid var(--tr-line); border-radius: 4px; font-size: var(--tr-fs-s); color: var(--color-warning); }
+.bt-msgs.bad { color: var(--bad); }
+.bt-actions { display: grid; grid-template-columns: 1fr 2fr; gap: 6px; }
+.bt-actions .ot-side { height: 34px; }
+.bt-check { display: flex; align-items: center; gap: 6px; font-size: var(--tr-fs-s); color: var(--text-2); cursor: pointer; }
+.bt-note { margin: 0; font-size: var(--tr-fs-s); color: var(--text-2); }
+.bt-sandbox { margin: 8px 10px 0; flex: none; }
+.view .bt-sandbox { margin: 0; }
+.bt-row-actions { display: inline-flex; gap: 2px; }
+.bt-dialog-badge { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+
 /* The empty Positions table (blotter.tsx FirstOrder): what to do, one button. */
 .tt-start { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); padding: var(--space-3); color: var(--muted); }
 .tt-start p { flex: 1 1 18rem; margin: 0; line-height: 1.5; }

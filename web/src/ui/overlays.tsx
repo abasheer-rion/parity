@@ -84,7 +84,11 @@ export function Popover({ trigger, children, placement = "bottom-start", width, 
   useAnchored(p.mounted, anchor, float, placement, 8);
   const close = useCallback(() => {
     set(false);
-    anchor.current?.querySelector<HTMLElement>("button, a, [tabindex]")?.focus();
+    const back = () => anchor.current?.querySelector<HTMLElement>("button, a, [tabindex]")?.focus();
+    back();
+    // A layout change while the card leaves (lazy content near the bottom of Home) can drop
+    // focus to the page; put it back once the exit is over, unless the person moved on.
+    window.setTimeout(() => { const a = document.activeElement; if (!a || a === document.body || float.current?.contains(a)) back(); }, 250);
   }, [set]);
   useDismiss(open, close, [anchor, float]);
   // Move focus into the card when it opens, so the keyboard follows the eye.
