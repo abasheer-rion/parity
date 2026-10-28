@@ -134,16 +134,19 @@ function pointLabel(P: Record<string, unknown>, i: number): string {
 
 // ------------------------------------------------------------------ equity: lines that draw in
 
-interface SeriesSpec { label: string; values: number[]; tone?: Tone; par: boolean }
+// A "crowd" series is one of many background paths (simulated tries, say): drawn thin and
+// faint, with no dot or value pill, and summed up as its highest and lowest in the table.
+interface SeriesSpec { label: string; values: number[]; tone?: Tone; par: boolean; crowd: boolean }
 
 function seriesOf(P: Record<string, unknown>): SeriesSpec[] {
   return list(P.series).map((s, i) => ({
-    label: str(s.label, `Series ${i + 1}`), values: gappy(s.values), tone: isTone(s.tone) ? s.tone : undefined, par: s.role === "par" || s.role === "benchmark",
+    label: str(s.label, `Series ${i + 1}`), values: gappy(s.values), tone: isTone(s.tone) ? s.tone : undefined, par: s.role === "par" || s.role === "benchmark", crowd: s.role === "crowd",
   })).filter((s) => s.values.length > 0);
 }
 
 function seriesColor(F: Frame, s: SeriesSpec, i: number): string {
   if (s.tone) return F.color(s.tone);
+  if (s.crowd) return F.th.muted;
   if (s.par) return F.th.par;
   return i === 0 ? F.th.accent : [F.th.pos, F.th.warn, F.th.alt, F.th.neg][(i - 1) % 4];
 }
@@ -193,11 +196,17 @@ const equity: Scene = (v, F) => {
 
   const tipPills: Pill[] = [];
   const tips: { x: number; y: number; v: number }[] = [];
-  // Par series first, so the main line sits on top.
-  const order = S.map((_, i) => i).sort((a, b) => Number(S[b].par) - Number(S[a].par));
+  // Crowd, then par series first, so the main line sits on top.
+  const under = (x: SeriesSpec) => (x.crowd ? 2 : x.par ? 1 : 0);
+  const order = S.map((_, i) => i).sort((a, b) => under(S[b]) - under(S[a]));
   for (const i of order) {
     const s = S[i];
     const col = seriesColor(F, s, i);
+    if (s.crowd) {
+      out += drawLine(F, sc, { values: s.values, to: Math.min(to, cam.x1), from: cam.x0 - 1, color: col, opacity: vis[i] * 0.45, width: 1.1, area: 0, dot: false }).svg;
+      tips[i] = { x: NaN, y: NaN, v: NaN };
+      continue;
+    }
     const r = drawLine(F, sc, {
       values: s.values, to: Math.min(to, cam.x1), from: cam.x0 - 1, color: col, opacity: vis[i],
       width: s.par ? 1.8 : 2.6, area: s.par || i > 0 ? 0 : 0.1, dot: !s.par || S.length === 1
@@ -828,7 +837,11 @@ export function signatureTable(v: SigVisual, max = 14): SigTable | null {
       const S = seriesOf(P), fm = fmtOf(P.fmt);
       if (!S.length) return null;
       const n = Math.max(...S.map((s) => s.values.length));
-      return { caption: v.alt, head: ["Point", ...S.map((s) => s.label)], rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...S.map((s) => cell(fm, s.values[i]))]) };
+      const own = S.filter((s) => !s.crowd), crowd = S.filter((s) => s.crowd);
+      const name = str(P.crowdLabel, "background paths");
+      const ext = (i: number, f: (...x: number[]) => number) => f(...crowd.map((s) => s.values[i]).filter(Number.isFinite));
+      const head = ["Point", ...own.map((s) => s.label), ...(crowd.length ? [`Highest of ${crowd.length} ${name}`, `Lowest of ${crowd.length} ${name}`] : [])];
+      return { caption: v.alt, head, rows: samplePoints(P, n, max).map((i) => [pointLabel(P, i), ...own.map((s) => cell(fm, s.values[i])), ...(crowd.length ? [cell(fm, ext(i, Math.max)), cell(fm, ext(i, Math.min))] : [])]) };
     }
     case "split": {
       const L = obj(P.left), R = obj(P.right), fm = fmtOf(P.fmt);

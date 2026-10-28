@@ -159,7 +159,7 @@ async function signatureMain() {
     manifest.push({
       id: c.id, title: c.title, seconds: Math.round(tl.seconds * 10) / 10, data: c.tag, alt: c.visual.alt,
       captions: c.visual.steps.map((st) => st.caption), caption: `${c.social.caption}\n\nTry it: ${SITE}`, hashtags: c.social.hashtags,
-      on_screen_risk_line: RISK, files,
+      on_screen_risk_line: c.risk ?? RISK, files,
     });
     console.log(`${c.id}: ${files.map((f) => `${f.file} ${(f.bytes / 1e6).toFixed(2)} MB`).join(", ")} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
   }
@@ -169,7 +169,7 @@ async function signatureMain() {
   const all = [...before.filter((b) => !manifest.some((m) => m.id === b.id)), ...manifest].sort((a, b) => order.indexOf(a.id as string) - order.indexOf(b.id as string));
   writeFileSync(join(OUT, "manifest.json"), JSON.stringify({
     generated_at: new Date().toISOString(), site: SITE, style: "signature charts (DEC-0067)",
-    rules: "Every number is labelled as example or hypothetical data in every frame, and the risk line is on screen in every frame. No clip says what to buy or promises a result. Post them yourself; this script never publishes.",
+    rules: "Every frame says where its numbers come from (example, hypothetical, simulated or a real run), and the risk line is on screen in every frame. No clip says what to buy or promises a result. Post them yourself; this script never publishes.",
     clips: all,
   }, null, 2));
   console.log(`Wrote ${join(OUT, "manifest.json")}`);

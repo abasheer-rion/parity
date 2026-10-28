@@ -33,11 +33,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
+- 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
+- 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - 2026-10-27 [DEC-0082: Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
 - 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - 2026-10-27 [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
-- 2026-10-27 [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
-- 2026-10-27 [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 
 ## intent
 
@@ -116,7 +116,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0064 | [One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0065 | [The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0066 | [Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
-| DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0068 | [Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md) | accepted | 2026-10-26 | [kpis](TAGS.md#kpis), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0069 | [Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra) |
 | DEC-0070 | [Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
@@ -188,8 +188,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
 | GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-26 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
-| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-26 | [ui](TAGS.md#ui) |
-| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-26 | [process](TAGS.md#process) |
+| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-27 | [ui](TAGS.md#ui) |
+| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-27 | [process](TAGS.md#process) |
 | GDE-0009 | [Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## reference

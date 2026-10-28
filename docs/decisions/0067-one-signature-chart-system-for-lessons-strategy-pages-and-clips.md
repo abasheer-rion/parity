@@ -4,7 +4,7 @@ title: One signature chart system for lessons, strategy pages and clips
 type: decision
 status: accepted
 created: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 authors: [ayan]
 tags: [process, ui]
 related: [DEC-0017, DEC-0028, DEC-0042, DEC-0058, DEC-0061, REF-0017, REF-0023]
@@ -47,7 +47,7 @@ The Academy pictures ([DEC-0028](0028-parity-academy-short-courses-with-moving-p
 ## Consequences
 
 - Strategy pages, Verify and Workbench show the "how it holds up" numbers as step-by-step pictures with tables. Runs published before the engine computed them say so in place of the section. A public Verify badge does not keep these numbers.
-- The Academy courses can move to the new scenes lesson by lesson. The old `academy/scenes.ts` stays until every lesson has moved. Moved so far: all of "Reading a backtest" (`equity`, `split`, `underwater`, each ending on a verdict) and three lessons of "Luck vs skill" (`distribution`). The Academy picks the signature player by the picture's kind, and `web/scripts/academy-frames.ts` gives the public pages the stills and the tables.
+- The Academy courses can move to the new scenes lesson by lesson. The old `academy/scenes.ts` stays until every lesson has moved. Moved so far: all of "Reading a backtest" (`equity`, `split`, `underwater`, each ending on a verdict) and all of "Luck vs skill" (`equity` with simulated no-skill paths, `distribution` and `scorecard`, on the carry strategy's real numbers from official run 1). The Academy picks the signature player by the picture's kind, and `web/scripts/academy-frames.ts` gives the public pages the stills and the tables.
 - The clip renderer draws the same scenes at 9:16 and 1:1: `npm run content -- --signature` renders every signature Academy lesson and five methodology explainers ([GDE-0008](../guides/0008-rendering-shareable-clips-from-the-sims.md)).
 - `web/tests/signature.test.tsx` draws every scene at every step, between steps, at every size and in both themes, and checks the tables and the player.
 
