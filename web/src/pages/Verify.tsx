@@ -23,7 +23,7 @@ import { FirstRunTour } from "../onboarding/FirstRunTour";
 type Mode = "file" | "describe" | "strategy";
 const LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
 const MODES: Choice<Mode>[] = [
-  { value: "file", title: "Upload a file", body: "A trade list or equity curve from MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
+  { value: "file", title: "Upload a file", body: "A trade history from your broker or exchange, MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
   { value: "describe", title: "Describe a bot", body: "Say in your own words what it trades and what it claims.", icon: "quote" },
   { value: "strategy", title: "Pick a strategy", body: "Check one of the strategies we have already tested.", icon: "catalog" },
 ];
@@ -153,7 +153,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
         <input ref={input} type="file" accept=".csv,.txt,.tsv,text/csv,text/plain" className="sr-only"
           onChange={(e) => { const f = e.target.files?.[0]; if (f) void read(f); e.target.value = ""; }} />
         <strong>{file ? file.name : "Drop a CSV here, or choose a file"}</strong>
-        <span>MetaTrader 4 or 5 history, a TradingView list of trades, any trade list with a close date and a profit, or an equity curve. Up to 5 MB and 50,000 rows.</span>
+        <span>Trade history from Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca or MetaTrader 4 and 5, a TradingView list of trades, any trade list with a close date and a profit, or an equity curve. Up to 5 MB and 50,000 rows.</span>
       </label>
       {error && <p className="vf-error" role="alert">{error}</p>}
 

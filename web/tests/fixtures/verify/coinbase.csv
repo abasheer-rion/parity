@@ -1,0 +1,6 @@
+portfolio,trade id,product,side,created at,size,size unit,price,fee,total,price/fee/total unit
+Example Person's portfolio,4001,BTC-USD,BUY,2024-01-03T10:00:00.000Z,2,BTC,100,1,-201,USD
+Example Person's portfolio,4002,BTC-USD,SELL,2024-01-03T15:00:00.000Z,1,BTC,110,0.5,109.5,USD
+Example Person's portfolio,4003,BTC-USD,SELL,2024-01-04T11:00:00.000Z,1,BTC,95,0.5,94.5,USD
+Example Person's portfolio,4004,BTC-USD,BUY,2024-01-05T09:00:00.000Z,1,BTC,120,0.6,-120.6,USD
+Example Person's portfolio,4005,BTC-USD,SELL,2024-01-05T14:00:00.000Z,1,BTC,115,0.6,114.4,USD
