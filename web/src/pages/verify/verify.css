@@ -147,6 +147,8 @@ html.vp-root, html.vp-root body { background: var(--canvas); }
 .vp-text { margin: 0 0 var(--space-4); max-width: 75ch; color: var(--text-2); }
 .vp-small { font-size: var(--fs-sm); }
 .vp-text a, .vp-card a { color: var(--color-accent-text); }
+/* Links inside text are underlined, so they do not rely on colour alone (WCAG 1.4.1). */
+.vp-main p a, .vp-main .ui-empty-body a { text-decoration: underline; text-underline-offset: 2px; }
 .vp-cards { list-style: none; padding: 0; margin: 0 0 var(--space-4); display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
 .vp-card { padding: var(--space-6); border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; gap: var(--space-2); }
 .vp-card h3 { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-bold); }

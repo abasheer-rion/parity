@@ -39,7 +39,7 @@
 
   <h2 id="verdict">The verdict</h2>
   <p>The verdicts are checked in this order and the first that applies wins.</p>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="The verdict"><table>
     <thead><tr><th>Order</th><th>Verdict</th><th>When</th></tr></thead>
     <tbody>
       <tr><td>1</td><td>Not enough data</td><td>Fewer than <!--verify:min-trades--> trades and fewer than <!--verify:min-returns--> daily returns</td></tr>
@@ -54,7 +54,7 @@
 
   <h2 id="expectancy">Card 1: win rate against expectancy</h2>
   <p>One result is a closed trade's profit after fees, or one period's return for an equity curve.</p>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 1: win rate against expectancy"><table>
     <thead><tr><th>Number</th><th>Definition</th></tr></thead>
     <tbody>
       <tr><td>Win rate</td><td>Share of results above zero</td></tr>
@@ -67,7 +67,7 @@
   </table></div>
 
   <h2 id="tail">Card 2: tail risk</h2>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 2: tail risk"><table>
     <thead><tr><th>Number</th><th>Definition</th></tr></thead>
     <tbody>
       <tr><td>Worst trade</td><td>The largest loss, in money and as a share of the account value before that trade (needs a balance)</td></tr>
@@ -83,7 +83,7 @@
 
   <h2 id="luck">Card 3: the luck check</h2>
   <p>The luck check is the deflated Sharpe ratio of Bailey and L&oacute;pez de Prado (2014): the probability that the true Sharpe ratio is above zero, once the number of things tried is allowed for. It is a line for line port of the function our research uses, tested against it to 3 decimal places.</p>
-  <pre><code>DSR = &Phi;( (SR &minus; SR0) &times; &radic;(T &minus; 1) / &radic;(1 &minus; skew &times; SR + (kurt &minus; 1) / 4 &times; SR&sup2;) )
+  <pre tabindex="0" aria-label="The luck check formula"><code>DSR = &Phi;( (SR &minus; SR0) &times; &radic;(T &minus; 1) / &radic;(1 &minus; skew &times; SR + (kurt &minus; 1) / 4 &times; SR&sup2;) )
 SR0 = &radic;V &times; ( (1 &minus; &gamma;) &times; &Phi;&#8315;&sup1;(1 &minus; 1/N) + &gamma; &times; &Phi;&#8315;&sup1;(1 &minus; 1/(N e)) ),  SR0 = 0 when N = 1
 V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
   <ul>
@@ -97,7 +97,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
 
   <h2 id="lookahead">Card 4: look-ahead and data flags</h2>
   <p>Every check is listed as passed, failed or "cannot be checked from this input". The last group is never hidden.</p>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 4: look-ahead and data flags"><table>
     <thead><tr><th>Check</th><th>Fails when</th></tr></thead>
     <tbody>
       <tr><td>Fills outside the day's range</td><td>Where we hold the day's high and low: an entry or exit price more than 0.1% outside them</td></tr>
@@ -112,7 +112,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
   <p><strong>The one-price-a-day limit.</strong> For major currency pairs, Bitcoin, Ether and the S&amp;P 500 we hold one price a day from free sources, not the day's high and low. So for these the fill check becomes "fills far from the day's price", which catches made-up or misdated prices but not small ones, and perfect timing cannot be checked. A symbol we hold nothing for, or a record checked without our daily price file (for example signed out), gets "cannot be checked from this input". The only request Verify makes after a file is chosen is for that price file.</p>
 
   <h2 id="overfit">Card 5: overfitting flags</h2>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 5: overfitting flags"><table>
     <thead><tr><th>Check</th><th>Fails when</th></tr></thead>
     <tbody>
       <tr><td>Short sample</td><td>Fewer than 100 trades, or less than 12 months (a month is 30.44 days)</td></tr>
@@ -151,7 +151,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
 
   <h2 id="changelog">Method versions</h2>
   <p>Changing a check or a threshold changes the method version, and every badge shows the version that judged it.</p>
-  <div class="lg-table-wrap"><table>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Method versions"><table>
     <thead><tr><th>Version</th><th>From</th><th>What changed</th></tr></thead>
     <tbody>
         <!--verify:changelog-->
@@ -159,8 +159,8 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
   </table></div>
 
   <h2 id="cite">Cite this</h2>
-<pre><code>Parity Trading, Inc. (2026). Parity Verify methodology, version <!--verify:method-version-->. https://paritytrading.app/methodology/</code></pre>
-<pre><code>@misc{parity_verify_methodology,
+<pre tabindex="0" aria-label="Citation, plain text"><code>Parity Trading, Inc. (2026). Parity Verify methodology, version <!--verify:method-version-->. https://paritytrading.app/methodology/</code></pre>
+<pre tabindex="0" aria-label="Citation, BibTeX"><code>@misc{parity_verify_methodology,
   author = {{Parity Trading, Inc.}},
   title  = {Parity Verify methodology, version <!--verify:method-version-->},
   year   = {2026},
