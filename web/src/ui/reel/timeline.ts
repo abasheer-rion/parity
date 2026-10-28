@@ -223,7 +223,7 @@ export function plan(reel: Reel): ReelPlan {
 
   // The poster: the last chart beat seen whole (camera out), else the last chart beat.
   const charts = out.filter((b) => b.shot.kind === "chart");
-  const lastChart = [...charts].reverse().find((b) => b.cam1.z <= 1.05 && b.cam0.z <= 1.05) ?? charts[charts.length - 1];
+  const lastChart = [...charts].reverse().find((b) => b.cam1.z <= 1.05) ?? charts[charts.length - 1];
   const poster = typeof reel.poster === "number" ? reel.poster : lastChart ? lastChart.end - 0.4 : t - 0.6;
   return { beats: out, seconds: t, chapters, pages: out.flatMap((b) => b.pages), poster: Math.max(0, Math.min(t, poster)) };
 }
