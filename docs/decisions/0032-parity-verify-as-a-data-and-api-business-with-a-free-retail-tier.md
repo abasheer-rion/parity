@@ -150,6 +150,7 @@ Rethinking means narrowing to the segment that did respond (for example, prop-fi
 - [DEC-0046: Payments through Stripe, and real trading only through a regulated broker](0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md)
 - [DEC-0071: People make their own API keys for a versioned Parity API](0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md)
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
+- [DEC-0080: The front page leads with Verify, three ways in and planned prices](0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)

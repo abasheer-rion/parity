@@ -882,6 +882,7 @@ The dashboard.
 - [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
+- [DEC-0080: The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - [RES-0021: How trading platforms lay out a workspace](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 - [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)

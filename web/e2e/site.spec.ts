@@ -5,35 +5,49 @@ import { expect, open, settled, test } from "./fixtures";
 test.use({ signedIn: false });
 
 test.describe("front page", () => {
-  test("shows the research counters from stats.json", async ({ page }) => {
+  test("leads with the Verify tagline and one main action", async ({ page }) => {
     await open(page, "/");
-    const hero = page.getByRole("region", { name: /lie detector/i });
-    await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(hero.getByRole("definition").first()).toHaveText("1,200");
-    await expect(hero.getByRole("definition").nth(1)).toHaveText("8");
-    await expect(hero.getByRole("definition").nth(2)).toHaveText("1");
+    const hero = page.getByRole("region", { name: /AI-native verification platform/ });
+    await expect(hero.getByRole("heading", { level: 1 })).toHaveText("AI-native verification platform for retail traders of all sizes.");
+    await expect(hero.getByRole("link", { name: "Verify a strategy or trade record" })).toHaveAttribute("href", "/verify/");
+    await expect(hero.getByRole("link", { name: "See how it works" })).toHaveAttribute("href", "/methodology/");
   });
 
-  test("How it works moves down to the checks", async ({ page }) => {
+  test("shows the counted tries from stats.json", async ({ page }) => {
     await open(page, "/");
-    await page.getByRole("link", { name: "How it works" }).click();
-    await expect(page).toHaveURL(/#verify$/);
-    await expect(page.locator("#verify")).toBeInViewport();
+    const proof = page.getByRole("region", { name: "Every try is counted." });
+    await expect(proof.getByRole("definition").first()).toHaveText("1,200");
+    await expect(proof.getByRole("definition").nth(1)).toHaveText("8");
+    await expect(proof.getByRole("definition").nth(2)).toHaveText("1");
   });
 
-  test("Check a strategy free asks a visitor to log in first and keeps the page", async ({ page }) => {
+  test("the corner nav leads with Verify, Developers and Connect AI", async ({ page }, info) => {
     await open(page, "/");
-    await page.getByRole("link", { name: "Check a strategy free" }).first().click();
-    await expect(page).toHaveURL(/\/login\/\?next=%2Fapp%2F#\/verify$/);
-    await expect(page.getByRole("heading", { name: "Log in to Parity" })).toBeVisible();
+    const nav = page.getByRole("navigation", { name: "Site" });
+    await expect(nav.getByRole("link").first()).toHaveText("Verify");
+    await expect(nav.getByRole("link", { name: "Verify" })).toHaveAttribute("href", "/verify/");
+    // Phones keep Verify, Log in and Sign up; the three ways in sit lower on the page.
+    if (info.project.name === "phone") return;
+    await expect(nav.getByRole("link", { name: "Developers" })).toHaveAttribute("href", "/developers/");
+    await expect(nav.getByRole("link", { name: "Connect AI" })).toHaveAttribute("href", "/connect/");
   });
 
-  test("Log in and Sign up in the header open their forms", async ({ page }) => {
+  test("three ways in, pricing that is not on sale and a business contact", async ({ page }) => {
     await open(page, "/");
-    await page.getByRole("navigation", { name: "Account" }).getByRole("link", { name: "Sign up" }).click();
+    const ways = page.getByRole("region", { name: "Three ways in." });
+    await expect(ways.getByRole("link", { name: /Open Verify/ })).toHaveAttribute("href", "/verify/");
+    await expect(ways.getByRole("link", { name: /Read the API docs/ })).toHaveAttribute("href", "/developers/");
+    await expect(ways.getByRole("link", { name: /Connect your AI/ })).toHaveAttribute("href", "/connect/");
+    await expect(page.getByRole("region", { name: "Checking is free today." })).toContainText("Paid plans are not on sale yet");
+    await expect(page.getByRole("link", { name: "Email contact@paritytrading.app" })).toHaveAttribute("href", /^mailto:contact@paritytrading\.app\?subject=/);
+  });
+
+  test("Log in and Sign up in the corner nav open their forms", async ({ page }) => {
+    await open(page, "/");
+    await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Sign up" }).click();
     await expect(page.getByRole("heading", { name: "Create your account" })).toBeVisible();
     await page.goBack();
-    await page.getByRole("navigation", { name: "Account" }).getByRole("link", { name: "Log in" }).click();
+    await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Log in" }).click();
     await expect(page.getByRole("heading", { name: "Log in to Parity" })).toBeVisible();
   });
 

@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 78 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 79 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
@@ -36,8 +36,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
 - 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - 2026-10-27 [DEC-0082: Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
+- 2026-10-27 [DEC-0080: The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
-- 2026-10-27 [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
 
 ## intent
 
@@ -128,6 +128,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0077 | [New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0078 | [Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md) | accepted | 2026-10-27 | [data](TAGS.md#data) |
 | DEC-0079 | [Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0080 | [The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md) | accepted | 2026-10-27 | [ui](TAGS.md#ui) |
 | DEC-0082 | [Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## hypothesis

@@ -92,7 +92,7 @@ export interface OgCard { kicker: string; title: string; sub: string }
 
 /** The words on each static share image. Keys are file names under /og/. */
 export const OG_CARDS: Record<string, OgCard> = {
-  default: { kicker: "Parity", title: "Check trading records and strategies", sub: "Trade logs checked for luck. Strategies backtested against the S&P 500, with every result shown." },
+  default: { kicker: "Parity", title: "AI-native verification for retail traders", sub: "Check algos, trades, strategies and claims on the web, through the API or from your AI." },
   learn: { kicker: "Parity Learn", title: "Learn the words of trading", sub: "Over 300 trading terms, each with a simple explanation, an everyday comparison and a precise definition." },
   ideas: { kicker: "Parity Ideas", title: "Trading ideas, with the evidence", sub: "Where each idea came from, what the evidence says and why it might fail." },
   notes: { kicker: "Parity Notes", title: "Parity research notes", sub: "How Parity decides, what the research found and how the numbers work." },
@@ -127,8 +127,8 @@ export function websiteLd() {
 export function verifyAppLd() {
   return {
     "@type": "SoftwareApplication", "@id": `${ORIGIN}/#verify`, name: "Parity Verify", applicationCategory: "FinanceApplication",
-    operatingSystem: "Web", url: abs("/app/#/verify"), publisher: { "@id": ORG_ID },
-    description: "Checks whether a trading record holds up: profit per trade, the worst loss, and whether the result could be luck.",
+    operatingSystem: "Web", url: abs("/verify/"), publisher: { "@id": ORG_ID },
+    description: "AI-native verification for retail traders: checks whether an algo, a trade record, a strategy or a claim holds up, with every try counted.",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   };
 }
@@ -175,8 +175,8 @@ function guidePage(app: string, title: string, description: string): PageMeta {
 /** One entry per built HTML file, keyed by its path under web/. */
 export const PAGES: Record<string, PageMeta> = {
   "index.html": {
-    title: "Parity: check trading records and strategies",
-    description: "Check a trade log for profit per trade, worst losses and luck, and see trading strategies backtested against the S&P 500 after costs.",
+    title: "Parity: AI-native verification for retail traders",
+    description: "AI-native verification platform for retail traders of all sizes. Check algos, trade logs, trading strategies and claims on the web, by API or from your AI.",
     path: "/", image: "default", type: "website", ld: [orgLd(), websiteLd(), verifyAppLd()], manifest: "/manifest.webmanifest",
   },
   "login/index.html": { title: "Log in · Parity", description: "Log in to Parity to follow strategies tested against the S&P 500.", path: "/login/", image: "login" },
