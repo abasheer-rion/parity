@@ -186,13 +186,13 @@ export const PAGES: Record<string, PageMeta> = {
   // src/verify/entry.ts loads the sign-in confirm screen when the address carries a token.
   "verify/index.html": {
     title: "Verify a trading record · Parity",
-    description: "Check a trade history from your broker or exchange: profit per trade, the worst loss, a luck check and signs of look-ahead. The file is checked in your browser and never sent. No sign-in needed.",
+    description: "Check a trade history from your broker or exchange for profit per trade, worst loss, luck and look-ahead. Checked in your browser, never sent. No sign-in.",
     path: "/verify/", image: "verify", ld: [verifyAppLd()],
   },
   // How Verify judges a record, every check and threshold, kept citable (REF-0030).
   "methodology/index.html": {
     title: "Verify methodology · Parity",
-    description: "How Parity Verify judges a trading record: the verdict order, every check and threshold, the luck check, trust levels, the method version, its changelog and how to cite it.",
+    description: "How Parity Verify judges a trading record: the verdict order, every check and threshold, the luck check, trust levels, versions and how to cite it.",
     path: "/methodology/", image: "verify", type: "article",
     ld: [{ "@type": "TechArticle", "@id": `${abs("/methodology/")}#article`, headline: "Parity Verify methodology", url: abs("/methodology/"), inLanguage: "en", datePublished: "2026-10-27", dateModified: "2026-10-27", author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } }],
   },

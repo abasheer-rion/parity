@@ -50,6 +50,8 @@ const FOOTER = `
     <footer class="lg-footer">
       <nav class="lg-legal" aria-label="Legal">
         <a href="/download/">Download</a>
+        <a href="/verify/">Verify</a>
+        <a href="/methodology/">Methodology</a>
         ${LEGAL_LINKS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n        ")}
         <button type="button" data-cookie-prefs>Cookie settings</button>
       </nav>
