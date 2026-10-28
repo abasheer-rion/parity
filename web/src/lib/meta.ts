@@ -176,7 +176,7 @@ function guidePage(app: string, title: string, description: string): PageMeta {
 export const PAGES: Record<string, PageMeta> = {
   "index.html": {
     title: "Parity: AI-native verification for retail traders",
-    description: "AI-native verification platform for retail traders of all sizes. Check algos, trades, strategies and claims on the web, through the API or from your AI.",
+    description: "AI-native verification platform for retail traders of all sizes. Check algos, trade logs, trading strategies and claims on the web, by API or from your AI.",
     path: "/", image: "default", type: "website", ld: [orgLd(), websiteLd(), verifyAppLd()], manifest: "/manifest.webmanifest",
   },
   "login/index.html": { title: "Log in · Parity", description: "Log in to Parity to follow strategies tested against the S&P 500.", path: "/login/", image: "login" },
