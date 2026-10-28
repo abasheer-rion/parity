@@ -1,4 +1,4 @@
-/* The motion reel player (DEC-0083). The stage keeps its shape from the first paint: 16:9,
+/* The motion reel player (DEC-0085). The stage keeps its shape from the first paint: 16:9,
    and square below 520px wide (the width the player switches layouts at), so nothing on
    the page moves when the film draws. */
 .rl-player { container-type: inline-size; margin: 0; min-width: 0; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-canvas); border: 1px solid var(--color-border); }
@@ -11,7 +11,7 @@
 /* Captions over the foot of the picture, the words lighting up as they are said. */
 .rl-cc { position: absolute; left: 50%; bottom: 4.5%; transform: translateX(-50%); width: max-content; max-width: 86%; margin: 0;
   padding: var(--space-1) var(--space-2h); border-radius: var(--radius-md); background: var(--color-scrim);
-  color: var(--color-text); font-size: clamp(13px, 2.3cqi, 20px); font-weight: 650; line-height: 1.35; text-align: center; pointer-events: none; }
+  color: var(--color-text); font-size: max(var(--type-sm), min(2.3cqi, var(--type-xl))); font-weight: 650; line-height: 1.35; text-align: center; pointer-events: none; }
 .rl-cc span { color: var(--color-text-muted); }
 .rl-cc span[data-said] { color: var(--color-text); }
 .rl-cc span[data-em][data-said] { color: var(--color-accent-text); }
@@ -28,7 +28,7 @@
 .rl-btn:hover { background: var(--color-hover); }
 .rl-txt[aria-pressed="false"] { color: var(--color-text-muted); }
 .rl-txt[aria-pressed="true"] { border-color: var(--color-border-strong); }
-.rl-time { font-size: var(--type-xs); color: var(--color-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rl-time { font-size: var(--type-xs); color: var(--color-text-muted); font-variant-numeric: var(--num-variant); white-space: nowrap; }
 .rl-scrub { position: relative; flex: 1 1 auto; min-width: 80px; display: flex; align-items: center; }
 .rl-scrub input { width: 100%; margin: 0; accent-color: var(--color-text); cursor: pointer; }
 .rl-marks { position: absolute; inset: 0; pointer-events: none; }
@@ -52,4 +52,4 @@
 .rl-tch { display: block; padding: var(--space-2) var(--space-3) 0; font-size: var(--type-xs); color: var(--color-text-muted); font-weight: 600; }
 .rl-tline { display: block; width: 100%; text-align: left; padding: var(--space-1h) var(--space-3); border: 0; background: transparent; color: var(--color-text-body); font: inherit; font-size: var(--type-sm); line-height: 1.5; cursor: pointer; }
 .rl-tline:hover { background: var(--color-hover); }
-.rl-tt { color: var(--color-text-muted); font-variant-numeric: tabular-nums; margin-right: var(--space-1h); }
+.rl-tt { color: var(--color-text-muted); font-variant-numeric: var(--num-variant); margin-right: var(--space-1h); }

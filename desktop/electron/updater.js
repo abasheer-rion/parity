@@ -11,7 +11,14 @@
 //   Mac, signed      the same. A Mac app can only replace itself when it is signed with a
 //                    Developer ID and notarized; the release build marks such builds.
 //   Mac, not signed  asks to download the new disk image in the browser instead.
+//
+// Pages load live, and a page offers "New version, reload" itself when the site deploys
+// (web/src/lib/siteVersion.ts). So a release that only refreshes the offline copy of the
+// site ("pages" in its update file's releaseName, set by the release workflow) downloads and
+// installs quietly when Parity quits, with no prompt. Only a change to the app itself asks
+// "Restart to update" (DEC-0086).
 const { app, dialog, shell } = require("electron");
+const { isPagesOnly, shouldPrompt } = require("./updatePolicy");
 
 const FEED = (process.env.PARITY_UPDATE_URL || "https://paritytrading.app/desktop/updates/").replace(/\/?$/, "/");
 const FIRST = 5000;
@@ -79,8 +86,11 @@ function create({ log = () => {}, enabled = () => true, parentWindow = () => nul
       const byHand = manual;
       manual = false;
       // Hourly checks find the same download again; ask once per version, unless asked by hand.
-      if (ready === info.version && !byHand) return;
+      // A pages-only update never asks: it installs when Parity quits.
+      const offered = ready === info.version;
       ready = info.version;
+      if (isPagesOnly(info)) status = `Version ${info.version} installs when you quit`;
+      if (!shouldPrompt(info, { byHand, alreadyOffered: offered })) { log(`update ${info.version} ready (${isPagesOnly(info) ? "pages only, installs at quit" : "app"})`); return; }
       ask({
         type: "info",
         message: `Parity ${info.version} is ready`,
@@ -124,4 +134,4 @@ function create({ log = () => {}, enabled = () => true, parentWindow = () => nul
   return { check, sync, status: () => status, canInstall, feed: FEED };
 }
 
-module.exports = { create, isSigned, FEED, FIRST, EVERY };
+module.exports = { create, isSigned, isPagesOnly, shouldPrompt, FEED, FIRST, EVERY };

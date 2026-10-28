@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:02.992
+Parity runs every strategy through 11 tests.
+
+2
+00:00:02.992 --> 00:00:04.896
+Here is carry.
+
+3
+00:00:05.196 --> 00:00:07.888
+Group A asks whether it beats the
+
+4
+00:00:07.888 --> 00:00:11.331
+S&P 500. It passes none of six.
+
+5
+00:00:11.631 --> 00:00:14.323
+Group B asks whether anything is real.
+
+6
+00:00:14.323 --> 00:00:16.996
+It passes three of five.
+
+7
+00:00:17.296 --> 00:00:18.450
+Reshuffled 1,000 times,
+
+8
+00:00:18.450 --> 00:00:21.142
+its Sharpe stays between 0.00 and 0.75.
+
+9
+00:00:21.142 --> 00:00:23.815
+The deflated Sharpe is 0.44.
+
+10
+00:00:24.115 --> 00:00:26.788
+3 of 11 tests passed.
+
+11
+00:00:27.088 --> 00:00:29.396
+Some signs of a real effect,
+
+12
+00:00:29.396 --> 00:00:31.319
+not enough to rely on.
+
+13
+00:00:31.319 --> 00:00:36.162
+Carry does not beat the S&P 500.

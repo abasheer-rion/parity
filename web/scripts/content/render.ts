@@ -10,7 +10,7 @@
 //                                                  lessons and methodology explainers, 9:16 and
 //                                                  1:1, into ~/Desktop/parity-clips/signature/
 //   npm run content -- --signature --stills        one PNG per step instead of video
-//   npm run content -- --reels                     the Academy lesson films (DEC-0083): 9:16 and
+//   npm run content -- --reels                     the Academy lesson films (DEC-0085): 9:16 and
 //                                                  1:1 clips with captions into
 //                                                  ~/Desktop/parity-clips/academy-motion/, and the
 //                                                  16:9 film the Academy plays with reduced motion
@@ -235,7 +235,7 @@ async function reelsMain() {
   const before = readJson<{ clips?: { id: string }[] }>(join(OUT, "manifest.json"))?.clips ?? [];
   const clips = [...before.filter((b) => !manifest.some((m) => m.id === b.id)), ...manifest].sort((a, b) => order.indexOf(a.id as string) - order.indexOf(b.id as string));
   writeFileSync(join(OUT, "manifest.json"), JSON.stringify({
-    generated_at: new Date().toISOString(), site: SITE, style: "Academy motion films (DEC-0083)",
+    generated_at: new Date().toISOString(), site: SITE, style: "Academy motion films (DEC-0085)",
     rules: "Every frame says what its numbers are and carries the risk line. No clip says what to buy or promises a result. Post them yourself; this script never publishes.",
     clips,
   }, null, 2));

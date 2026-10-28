@@ -3,7 +3,7 @@
 //   "system"   follow the device (the default): full motion, or reduced if the device asks
 //   "full"     full motion even when the device asks for less
 //   "reduced"  reduced motion even when the device does not ask for it
-//   "off"      nothing moves or fades by itself; videos play only when asked (DEC-0083)
+//   "off"      nothing moves or fades by itself; videos play only when asked (DEC-0085)
 // The choice is written to <html data-motion> so CSS can override the media query, and
 // "reduced" means less, not none: short fades and crossfades stay, movement goes
 // (no slides, rises, scales or counting numbers). "off" is written as "reduced" plus

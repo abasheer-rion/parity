@@ -15,7 +15,7 @@ export interface Question { q: string; options: string[]; answer: number; why: s
 export interface Lesson {
   id: string; title: string; minutes: number; body: string[]; terms: string[];
   visual: Visual; inParity: AcademyLink[]; check: Question[];
-  /** The lesson as a short film (DEC-0083), drawn from `visual`. */
+  /** The lesson as a short film (DEC-0085), drawn from `visual`. */
   reel?: Reel;
 }
 export interface Course { id: string; order: number; level: string; title: string; summary: string; docs: string[]; lessons: Lesson[] }

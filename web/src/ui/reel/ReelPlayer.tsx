@@ -1,4 +1,4 @@
-// The motion reel player (DEC-0083): a lesson's film, played like a video. It plays on its
+// The motion reel player (DEC-0085): a lesson's film, played like a video. It plays on its
 // own when it scrolls into view (Full motion and the lesson autoplay setting on), loops,
 // and pauses when it leaves the screen or the tab is hidden. Controls: play and pause, a
 // scrubber with chapters, the time, speed, captions, loop and the Motion choice.

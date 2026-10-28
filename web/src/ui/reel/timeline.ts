@@ -1,4 +1,4 @@
-// Motion reels (DEC-0083): an Academy lesson told as a short animated film instead of a
+// Motion reels (DEC-0085): an Academy lesson told as a short animated film instead of a
 // step player. A reel is a list of beats. Each beat is one spoken line (the caption, ready
 // for a voice-over), a big line at the top, and a shot: the lesson's signature chart with a
 // camera, a full-screen statement, a grid of small paths, or panels side by side. Beats run

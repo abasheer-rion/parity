@@ -9,6 +9,7 @@ import { SAMPLE_DOWNLOAD } from "./src/lib/desktopDownload";
 import { parityMeta, parityOg } from "./plugins/meta";
 import { parityNotFound } from "./plugins/notFound";
 import { paritySite } from "./plugins/site";
+import { parityVersion } from "./plugins/version";
 import react from "@vitejs/plugin-react";
 
 // The engine's output folder. PARITY_OUTPUT_DIR points the dev server at another one, such
@@ -219,7 +220,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg(), parityVersion()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

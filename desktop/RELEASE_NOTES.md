@@ -1,5 +1,10 @@
 Parity for Mac and Windows. The whole Parity site in one window, loaded live.
 
+New in 0.2.9:
+
+- Pages update without a restart. When the site has a new version, the page you are on shows "A new version of Parity is ready" with Reload. Reload keeps your page and what you typed.
+- Fewer restarts. An update that only refreshes the saved copy of the site installs by itself when you quit Parity. Parity asks you to restart only when the app itself changed.
+
 New in 0.2.4:
 
 - No bar along the top and no title. Pages reach the top of the window, and the menu button, Back, Forward and search (Cmd or Ctrl plus K) sit in the page's own header row. Drag an empty part of that row to move the window; double-click it to zoom.

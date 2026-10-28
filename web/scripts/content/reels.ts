@@ -1,4 +1,4 @@
-// The Academy lesson films (DEC-0083) for the clip renderer: every lesson with a `reel` in
+// The Academy lesson films (DEC-0085) for the clip renderer: every lesson with a `reel` in
 // academy/courses/*.json, the hash that says whether its rendered MP4 is still current,
 // and the risk line each one carries.
 //

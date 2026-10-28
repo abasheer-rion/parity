@@ -63,5 +63,6 @@ The owner mentioned AI visuals. Generated video costs money, cannot be checked a
 - [DEC-0035: Bot Battle and shareable clips: win rate is not profit](0035-bot-battle-and-shareable-clips-win-rate-is-not-profit.md)
 - [DEC-0042: Parity Academy, a full-screen course player of its own](0042-parity-academy-a-full-screen-course-player-of-its-own.md)
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0085: Academy lessons play as short motion films](0085-academy-lessons-play-as-short-motion-films.md)
 - [GDE-0007: Writing a new Academy course](../guides/0007-writing-a-new-academy-course.md)
 <!-- backlinks:end -->

@@ -72,8 +72,32 @@ jobs:
           path: desktop/build/web
           retention-days: 3
 
+  # Did the app itself change since the last desktop release, or only the pages it carries as
+  # its offline copy? The kind goes into the update files (releaseName), and installed apps
+  # offer "Restart to update" only for an app change; a pages-only update installs quietly
+  # when Parity quits (DEC-0086).
+  kind:
+    runs-on: ubuntu-latest
+    outputs:
+      kind: ${{ steps.kind.outputs.kind }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: App change or pages only
+        id: kind
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force --quiet origin
+          prev=$(git tag -l 'desktop-v*' --sort=-v:refname --merged HEAD | grep -vx "${GITHUB_REF_NAME}" | head -1 || true)
+          if [ -n "$prev" ] && git diff --quiet "$prev" HEAD -- desktop ':(exclude)desktop/**/*.md'; then kind=pages; else kind=app; fi
+          echo "Previous release: ${prev:-none}. Kind: $kind."
+          echo "kind=$kind" >> "$GITHUB_OUTPUT"
+
   mac:
-    needs: web
+    needs: [web, kind]
     runs-on: macos-latest
     outputs:
       signed: ${{ steps.build.outputs.signed }}
@@ -117,6 +141,7 @@ jobs:
           SECRET_APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
           SECRET_APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           SECRET_APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          PARITY_RELEASE_KIND: ${{ needs.kind.outputs.kind }}
         run: |
           if [ -n "$SECRET_CSC_LINK" ]; then
             export CSC_LINK="$SECRET_CSC_LINK" CSC_KEY_PASSWORD="$SECRET_CSC_KEY_PASSWORD"
@@ -183,7 +208,7 @@ jobs:
             desktop/dist/latest-mac.yml
 
   windows:
-    needs: web
+    needs: [web, kind]
     runs-on: windows-latest
     # The environment is what the Azure federated credential trusts
     # (repo:abasheer-rion/parity:environment:desktop-release).
@@ -246,6 +271,7 @@ jobs:
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
           PARITY_WIN_SIGN: ${{ env.WIN_SIGN }}
+          PARITY_RELEASE_KIND: ${{ needs.kind.outputs.kind }}
       - name: Verify the Windows signatures
         if: env.WIN_SIGN == '1'
         working-directory: desktop

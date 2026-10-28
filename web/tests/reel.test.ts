@@ -1,4 +1,4 @@
-// Motion reels (DEC-0083): the Academy lesson films. Checks the timeline (beats, caption
+// Motion reels (DEC-0085): the Academy lesson films. Checks the timeline (beats, caption
 // words, chapters, the voice-over files), that every film draws at every moment and size,
 // that the "Reading a backtest" and "Luck vs skill" lessons all have one, that the
 // pre-rendered MP4 of each is current, and that the player's markup survives sanitising.

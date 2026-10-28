@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 79 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 81 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-28 [DEC-0086: New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)
+- 2026-10-28 [DEC-0085: Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md)
 - 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 - 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
 - 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 - 2026-10-27 [DEC-0082: Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
-- 2026-10-27 [DEC-0080: The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
-- 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 
 ## intent
 
@@ -130,6 +130,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0079 | [Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0080 | [The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md) | accepted | 2026-10-27 | [ui](TAGS.md#ui) |
 | DEC-0082 | [Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0085 | [Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md) | accepted | 2026-10-28 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0086 | [New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md) | accepted | 2026-10-28 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

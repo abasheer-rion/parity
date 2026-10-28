@@ -1,4 +1,4 @@
-// Draws any moment of a motion reel (DEC-0083) as SVG: the brand strip, the big line at the
+// Draws any moment of a motion reel (DEC-0085) as SVG: the brand strip, the big line at the
 // top, the shot (the lesson's signature chart under a moving camera, a statement, a grid of
 // paths or panels side by side), and on clips the burned-in caption and the risk line.
 //
@@ -11,6 +11,7 @@
 import { clamp, decimate, easeInOut, easeOut, esc, lerp, path, r1, r2, textWidth } from "../signature/core.ts";
 import { fmtOf, renderSignature, seriesValues, tipAt, type SigVisual } from "../signature/scenes.ts";
 import { THEMES, toneColor, type Tone, type Viewport } from "../signature/theme.ts";
+import { RAW } from "../tokens.gen.ts";
 import { beatAt, pageAt, type PlannedBeat, type Reel, type ReelHead, type ReelPlan, type ReelShot } from "./timeline.ts";
 
 export type ReelSize = "wide" | "square" | "vertical";
@@ -38,6 +39,8 @@ interface Box { x0: number; y0: number; x1: number; y1: number }
 interface Zones { strip: number; headY: number; headSize: number; subY: number; stage: Box; capY: number; capSize: number; riskY: number; statement: number }
 
 const TH = THEMES.dark;
+/** Mask white: fully shown. */
+const WHITE = RAW["palette-white"];
 /** Seconds a cut and a change of the big line take. */
 const CUT = 0.4, SWAP = 0.32;
 /** The film fades in from black and out to black at its ends. */
@@ -153,7 +156,7 @@ function chartShot(reel: Reel, main: SigVisual, c: ReelCanvas, Z: Zones, b: Plan
   const fx = clamp(cam.x * W, W / (2 * z), W - W / (2 * z)), fy = clamp(cam.y * H, H / (2 * z), H - H / (2 * z));
   if (!defs.some((d) => d.includes(`id="${id}-clip"`))) {
     defs.push(`<clipPath id="${id}-clip"><rect x="0" y="${r1(st.y0 - 6 * c.u)}" width="${c.w}" height="${r1(H + 12 * c.u)}"/></clipPath>`);
-    defs.push(`<linearGradient id="${id}-edge" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.04" stop-color="#fff"/><stop offset="0.96" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>`);
+    defs.push(`<linearGradient id="${id}-edge" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="${WHITE}" stop-opacity="0"/><stop offset="0.04" stop-color="${WHITE}"/><stop offset="0.96" stop-color="${WHITE}"/><stop offset="1" stop-color="${WHITE}" stop-opacity="0"/></linearGradient>`);
     defs.push(`<mask id="${id}-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="${c.w}" height="${c.h}"><rect x="0" y="0" width="${c.w}" height="${c.h}" fill="url(#${id}-edge)"/></mask>`);
   }
   const tr = `translate(${r1(st.x0 + W / 2)} ${r1(st.y0 + H / 2)}) scale(${r2(z * 1000) / 1000}) translate(${r1(-fx)} ${r1(-fy)})`;
