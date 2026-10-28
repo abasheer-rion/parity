@@ -107,6 +107,7 @@ A product built to attract people creates pressure to show winners. A research p
 - [DEC-0070: Pairs and stat arb on 49 industries, with single stocks research only](0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md)
 - [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [RES-0012: Private markets, how they are measured and how individuals get in](../research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](../research/0028-pairs-trading-and-statistical-arbitrage.md)
 - [REF-0014: Markets data, crypto, perps and ETF sources and their terms](../reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)

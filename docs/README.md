@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 76 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 77 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
@@ -33,11 +33,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
+- 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - 2026-10-27 [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
 - 2026-10-27 [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
 - 2026-10-27 [DEC-0076: Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md)
 - 2026-10-27 [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
-- 2026-10-27 [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 
 ## intent
 
@@ -127,6 +127,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0076 | [Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md) | accepted | 2026-10-27 | [kpis](TAGS.md#kpis), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0077 | [New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0078 | [Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md) | accepted | 2026-10-27 | [data](TAGS.md#data) |
+| DEC-0079 | [Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
