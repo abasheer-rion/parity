@@ -107,6 +107,7 @@ The logo (the starburst and PARITY, no subtitle) is fixed in the top left. Log i
 - [DEC-0043: Parity Workbench, one full-screen tool for strategy work](0043-parity-workbench-one-full-screen-tool-for-strategy-work.md)
 - [DEC-0044: One sign-in panel that fades in over the front page](0044-one-sign-in-panel-that-fades-in-over-the-front-page.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
+- [DEC-0080: The front page leads with Verify, three ways in and planned prices](0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - [LOG-0016: Ayan work log, front page, Trade, links, copy and apps](../log/2026-10-25-ayan-work-log-front-page-trade-links-copy-and-apps.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

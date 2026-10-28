@@ -349,6 +349,9 @@ html[data-desktop-chrome] .frame.railed .main-col { padding-top: var(--desktop-c
 .side-item.active { background: var(--ds-background-secondary); color: var(--text); }
 .side-item.active .ico { color: var(--ds-icon-default); }
 .side-item.active:hover { background: var(--ds-background-secondary-hovered); }
+/* Verify leads the product list (DEC-0080): the accent icon and full-strength text. */
+.side-item.lead { color: var(--text); font-weight: var(--fw-medium); }
+.side-item.lead .ico { color: var(--color-accent-text); }
 .side-item .count { font-size: var(--fs-xs); line-height: 20px; letter-spacing: .2px; font-weight: var(--fw-medium); color: var(--muted); }
 .side-item .new { height: 20px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 4px; background: var(--ds-background-highlight); color: var(--text-body); font-size: var(--fs-xs); }
 /* Sidebar groups open with the library's Collapse (ui.css); only the inner layout is set here. */

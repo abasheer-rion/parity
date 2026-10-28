@@ -19,7 +19,7 @@ html, body { margin: 0; background: var(--bg); color: var(--text); }
 html { overflow-x: clip; }
 body { font: var(--type-xl)/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased; }
 
-/* The backdrop: slow, blurred red orbs deep behind dark frosted glass (DEC-0039).
+/* The backdrop: slow, blurred blue orbs deep behind dark frosted glass (DEC-0039).
    Fixed, so it never moves the layout; still for reduced motion. */
 .orbs { position: fixed; inset: 0; z-index: var(--z-backdrop); pointer-events: none; overflow: hidden; background: var(--bg); }
 .orbs i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; will-change: transform; }
@@ -78,8 +78,9 @@ html[data-desktop-chrome="win32"] .corner-nav { right: calc(16px + var(--desktop
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 10px; font-size: var(--type-lg); font-weight: 550; text-decoration: none; border: 1px solid var(--line-2); color: var(--text); white-space: nowrap; transition: background-color var(--dur-2), border-color var(--dur-2), transform var(--dur-2) var(--ease), color var(--dur-2); }
 .btn:hover { border-color: var(--line-3); background: color-mix(in srgb, var(--palette-white) 4%, transparent); }
 .btn:active { transform: scale(.985); }
-.btn.primary { background: var(--text); color: var(--color-canvas); border-color: var(--text); }
-.btn.primary:hover { background: var(--palette-white); color: var(--palette-black); }
+/* The main action is Invicta blue (white on it is 4.7:1, WCAG 1.4.3). */
+.btn.primary { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
+.btn.primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); color: var(--color-on-accent); }
 .btn .arr { transition: transform var(--dur-2) var(--ease); }
 .btn:hover .arr { transform: translateX(3px); }
 

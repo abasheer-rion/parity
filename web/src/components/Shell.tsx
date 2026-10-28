@@ -17,7 +17,7 @@ import { StatusBanner } from "./StatusBanner";
 // The setup ring at the top right of the product app (DEC-0075). Loaded after the page.
 const SetupButton = lazy(() => import("../onboarding/SetupButton").then((m) => ({ default: m.SetupButton })));
 
-interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
+interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string; /** The one item that stands out at the top of the list. */ lead?: boolean }
 
 // Plain names: say what the page does, not what we call it internally. Each item's
 // hover text comes from lib/pages.ts, the same words search and Start here use.
@@ -26,9 +26,10 @@ const START: NavItem = { href: "#/start", label: "Start here", icon: "sparkle", 
 const HOW: NavItem = { href: "#/how", label: "How Parity works", icon: "info", routes: ["how"] };
 const GLOSSARY: NavItem = { href: "#/learn", label: "Glossary", icon: "cap", routes: ["learn"] };
 
+// Verify comes first and stands out (DEC-0079, DEC-0080); everything else stays.
 const PRODUCT: NavItem[] = [
+  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"], lead: true },
   { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
-  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"] },
   { href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy"] },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   // Try settings, What if and Compare live in Parity Workbench, which opens in a new tab (DEC-0043).
@@ -225,7 +226,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""} ${n.lead ? "lead" : ""}`} aria-expanded={n.children ? active : undefined}
                         {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
