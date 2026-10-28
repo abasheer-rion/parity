@@ -69,7 +69,7 @@ Use the same words everywhere. They follow [REF-0017](0017-parity-copy-rules.md)
 - **Docs:** `https://paritytrading.app/connect/` and the page for that app.
 - **Privacy policy:** `https://paritytrading.app/legal/privacy/`
 - **Terms:** `https://paritytrading.app/legal/terms/`
-- **Support:** `contact@paritytrading.ai`
+- **Support:** `contact@paritytrading.app`
 - **Logo:** `web/public/icon-512.png` (512 by 512 PNG, square). Vector: `web/public/brand/2026-10-21/parity-icon-dark.svg`. OpenAI wants a square image from 48 to 4096 pixels. Anthropic gives no size, so send the 512 PNG.
 - **Screenshots:** neither directory needs them for a server with no on-screen widgets. If asked, take them from the three `/connect/<app>/` pages, which carry our own diagrams of each step.
 
@@ -108,7 +108,7 @@ Every tool has a `title` and sets `readOnlyHint`, `destructiveHint` (on the two 
 
 Reviewers need an account with data and no two-step sign-in.
 
-1. Sign up at `https://paritytrading.app/signup/` with a new mailbox the owner controls, such as `review@paritytrading.ai`. Do not reuse a personal account.
+1. Sign up at `https://paritytrading.app/signup/` with a new mailbox the owner controls, such as `review@paritytrading.app`. Do not reuse a personal account.
 2. Open Parity Trade and create one demo account so `list_demo_accounts` returns something.
 3. Do not turn on two-step sign-in for it. Keep the password in the Keychain and add a row to the credentials register.
 4. Give reviewers: the address, the email and password, and this script: "Ask: Check these trades with Parity Verify, I tried 12 settings before this one: 2026-01-05 +120, 2026-01-12 -80, 2026-01-19 +45. Then: Is a 92% win rate with 5% take-profit and no stop possible? Then: Verify the strategy 'The Gambit'. Then: Using Parity, which tested strategies beat the S&P 500?"
@@ -145,7 +145,7 @@ Reviewers need an account with data and no two-step sign-in.
   "website": "https://paritytrading.app/",
   "privacy_policy_url": "https://paritytrading.app/legal/privacy/",
   "terms_url": "https://paritytrading.app/legal/terms/",
-  "support_email": "contact@paritytrading.ai"
+  "support_email": "contact@paritytrading.app"
 }
 ```
 

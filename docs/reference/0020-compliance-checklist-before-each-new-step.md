@@ -124,7 +124,7 @@ On 25 October the owner asked for the public legal pages to read like other comp
 | Item | Page and section | Who | What the page says now |
 | --- | --- | --- | --- |
 | Lawyer review of all six legal pages and the legal index | All of `/legal/` | Owner, lawyer | No draft label. The regulatory page keeps "This page is general information, not legal advice." |
-| Postal address for Parity Trading, Inc. | Privacy 1, Regulatory 1 | Owner | Contact by email at contact@paritytrading.ai |
+| Postal address for Parity Trading, Inc. | Privacy 1, Regulatory 1 | Owner | Contact by email at contact@paritytrading.app |
 | Supabase backup period for our plan | Privacy 7 | Owner | Backup copies "expire on their schedule" |
 | Data processing agreements with each provider, and the Supabase region | Privacy 9 | Owner, lawyer | Relies on the safeguards in the providers' data processing terms, such as the standard contractual clauses |
 | Lawyer review of the research dataset wording and the sale of aggregate data, before launch | Privacy 3 | Owner, lawyer | The current wording, unchanged |

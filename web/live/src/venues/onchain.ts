@@ -23,7 +23,7 @@ const REG = withEnrolled(REGISTRY as unknown as Registry, ENROLLED as unknown as
 const SLOT0 = "0x3850c7bd";
 /** Volume weights fade by half every 5 minutes, so the pools trading now count most. */
 const HALF_LIFE_MS = 300_000;
-const UA = "parity-live (contact@paritytrading.ai)";
+const UA = "parity-live (contact@paritytrading.app)";
 
 export const ONCHAIN_SYMBOLS = REG.tokens.map((t) => t.sym);
 

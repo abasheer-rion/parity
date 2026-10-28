@@ -783,7 +783,7 @@ function buildMenu() {
         { type: "separator" },
         { label: help.siteLabel(ORIGIN), click: () => shell.openExternal(ORIGIN) },
         { label: "Download Parity for another computer", click: () => shell.openExternal(`${ORIGIN}/download/`) },
-        { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },
+        { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.app") },
       ],
     },
   ];
