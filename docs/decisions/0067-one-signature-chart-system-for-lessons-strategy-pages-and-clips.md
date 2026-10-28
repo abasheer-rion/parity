@@ -56,6 +56,7 @@ The Academy pictures ([DEC-0028](0028-parity-academy-short-courses-with-moving-p
 
 - [DEC-0028: Parity Academy, short courses with moving pictures](0028-parity-academy-short-courses-with-moving-pictures.md)
 - [DEC-0077: New accounts get a short full-screen intro that ends on a real Verify result](0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md)
+- [DEC-0085: Academy lessons play as short motion films](0085-academy-lessons-play-as-short-motion-films.md)
 - [GDE-0007: Writing a new Academy course](../guides/0007-writing-a-new-academy-course.md)
 - [GDE-0008: Rendering shareable clips from the sims](../guides/0008-rendering-shareable-clips-from-the-sims.md)
 <!-- backlinks:end -->

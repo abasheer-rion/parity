@@ -14,7 +14,7 @@ related: [REF-0009, DEC-0017]
 
 ## In plain words
 
-How things move in every Parity app: pages fade in and rise a little when they open, lists and cards come in one after another, numbers tick to their new value, charts draw in from left to right, and dialogs, drawers, menus and toasts slide or grow open. Everything uses the same timings. If a device asks for less motion, things still fade but nothing moves. A Motion setting in each app lets a person choose Match my device, Full or Reduced.
+How things move in every Parity app: pages fade in and rise a little when they open, lists and cards come in one after another, numbers tick to their new value, charts draw in from left to right, and dialogs, drawers, menus and toasts slide or grow open. Everything uses the same timings. If a device asks for less motion, things still fade but nothing moves. A Motion setting in each app lets a person choose Match my device, Full, Reduced or Off.
 
 ## Summary
 
@@ -67,7 +67,7 @@ Reduced motion reduces; it does not remove. When the device asks for less motion
 
 ## The Motion setting
 
-Each app's settings page has a Motion control: Match my device (the default), Full and Reduced. Parity Terminal has it at the end of HELP. The choice is kept in this browser under `parity.motion` and written to `<html data-motion>`, which the CSS reads to override the device. Full plays every animation even when the device asks for less. The front page follows the same choice. Code is in `web/src/ui/motionCore.ts` (no React), `web/src/ui/motionPref.ts` (hooks) and `web/src/ui/motionSetting.tsx` (the control).
+Each app's settings page has a Motion control: Match my device (the default), Full, Reduced and Off. Off ([DEC-0085](../decisions/0085-academy-lessons-play-as-short-motion-films.md)) is written as `data-motion="reduced"` plus `data-motion-off`, so every reduced-motion rule applies and the fades stop too; Academy films then show a still picture and play only when pressed. The Academy's film player offers Full, Reduced and Off on the film itself. Parity Terminal has it at the end of HELP. The choice is kept in this browser under `parity.motion` and written to `<html data-motion>`, which the CSS reads to override the device. Full plays every animation even when the device asks for less. The front page follows the same choice. Code is in `web/src/ui/motionCore.ts` (no React), `web/src/ui/motionPref.ts` (hooks) and `web/src/ui/motionSetting.tsx` (the control).
 
 ## Rules
 
@@ -86,5 +86,6 @@ Each app's settings page has a Motion control: Match my device (the default), Fu
 ## Referenced by
 
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](../decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
+- [DEC-0085: Academy lessons play as short motion films](../decisions/0085-academy-lessons-play-as-short-motion-films.md)
 - [REF-0009: UI library](0009-ui-library.md)
 <!-- backlinks:end -->

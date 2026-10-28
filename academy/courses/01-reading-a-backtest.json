@@ -244,7 +244,107 @@
      "answer": 1,
      "why": "$100 at 10% a year becomes about $1,745. At 3% it becomes about $243. $1,745 divided by $243 is about 7.2."
     }
-   ]
+   ],
+   "reel": {
+    "alt": "A 40 second film. $100 grows for 30 years at 10%, 7% and 3% a year. The lines start together, the gap opens after 15 years, and they end at $1,745, $761 and $243, more than 7 times apart.",
+    "tag": "Hypothetical example",
+    "beats": [
+     {
+      "chapter": "Three rates",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "$100"
+        },
+        {
+         "text": "three rates"
+        }
+       ]
+      },
+      "say": "Put *$100* away at three steady rates."
+     },
+     {
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 0,
+      "head": {
+       "tip": 0,
+       "sub": "10% a year"
+      },
+      "say": "*10%*, 7% and 3% a year. After five years they are close."
+     },
+     {
+      "chapter": "The gap opens",
+      "s": 1,
+      "cam": {
+       "z": 1.12,
+       "x": 0.55,
+       "y": 0.5
+      },
+      "say": "After fifteen years the gap opens: *$418*, $276 and $156."
+     },
+     {
+      "s": 2,
+      "cam": {
+       "z": 1,
+       "x": 0.5,
+       "y": 0.5
+      },
+      "say": "Each year's gain earns a return of its own the next year, so the lines *bend upward*."
+     },
+     {
+      "cam": {
+       "z": 1.3,
+       "x": 0.8,
+       "y": 0.42
+      },
+      "head": {
+       "text": "{n}",
+       "count": [
+        1,
+        7.2
+       ],
+       "fmt": "x",
+       "sub": "10% a year against 3%",
+       "tone": "pos"
+      },
+      "say": "By year thirty: *$1,745* against $243."
+     },
+     {
+      "chapter": "The lesson",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "A few points a year"
+        },
+        {
+         "text": "7x the money",
+         "tone": "pos"
+        }
+       ]
+      },
+      "head": null,
+      "say": "A few points a year became *more than seven times* the money."
+     },
+     {
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Same dates."
+        },
+        {
+         "text": "Same start."
+        }
+       ]
+      },
+      "say": "So compare returns over the *same dates*, from the same start."
+     }
+    ]
+   }
   },
   {
    "id": "volatility",
@@ -720,7 +820,100 @@
      "answer": 0,
      "why": "Volatility drag is about half the variance: 10% minus half of 0.3 squared, or 4.5 points, leaves about 5.5%."
     }
-   ]
+   ],
+   "reel": {
+    "alt": "A 40 second film. Two accounts with the same 10% average a year. Calm swings about 5% a year and ends at $267. Bumpy swings about 30% a year, falls 43% at its worst and ends at $173.",
+    "tag": "Hypothetical example",
+    "beats": [
+     {
+      "chapter": "Same average",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Same average"
+        },
+        {
+         "text": "different money"
+        }
+       ]
+      },
+      "say": "Two accounts. Same *10%* average a year. Different money at the end."
+     },
+     {
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 0,
+      "head": {
+       "tip": 0,
+       "sub": "Calm"
+      },
+      "say": "*Calm* swings about 5% a year around its average."
+     },
+     {
+      "s": 1,
+      "head": {
+       "tip": 1,
+       "sub": "Bumpy",
+       "tone": "warn"
+      },
+      "say": "*Bumpy* has the same average, with swings six times as large."
+     },
+     {
+      "chapter": "The fall",
+      "s": 2,
+      "cam": {
+       "z": 1.25,
+       "x": 0.38,
+       "y": 0.62
+      },
+      "head": {
+       "text": "{n}",
+       "count": [
+        0,
+        -0.43
+       ],
+       "fmt": "pct",
+       "sub": "Bumpy's worst fall",
+       "tone": "neg"
+      },
+      "say": "At its worst, Bumpy was *43% below* its high."
+     },
+     {
+      "chapter": "Ten years on",
+      "shot": {
+       "kind": "panels",
+       "series": [
+        0,
+        1
+       ]
+      },
+      "head": {
+       "text": "Same average",
+       "sub": "10% a year"
+      },
+      "say": "Ten years later, Calm has *$267*. Bumpy has *$173*."
+     },
+     {
+      "chapter": "The lesson",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Big swings"
+        },
+        {
+         "text": "drag on growth",
+         "tone": "warn"
+        }
+       ]
+      },
+      "head": null,
+      "say": "Calm grew 10.3% a year, Bumpy 5.6%. *Big swings drag on growth.*"
+     }
+    ]
+   }
   },
   {
    "id": "sharpe",
@@ -1170,7 +1363,95 @@
      "answer": 2,
      "why": "Sharpe uses the spread of returns, so a long left tail of rare big losses can sit behind a good score."
     }
-   ]
+   ],
+   "reel": {
+    "alt": "A 40 second film. Strategy A and strategy B both grow 8% a year and end at $216. B swings twice as far. The Sharpe ratio, return divided by volatility, is 1.0 for A and 0.5 for B.",
+    "tag": "Hypothetical example",
+    "beats": [
+     {
+      "chapter": "Two strategies",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Two strategies"
+        },
+        {
+         "text": "8% a year"
+        }
+       ]
+      },
+      "say": "Strategy A and strategy B both grow *8% a year*."
+     },
+     {
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 0,
+      "head": {
+       "tip": 0,
+       "sub": "Strategy A"
+      },
+      "say": "Halfway through, the two rides *look very different*."
+     },
+     {
+      "s": 1,
+      "head": {
+       "text": "$216",
+       "sub": "Both end here"
+      },
+      "say": "Both end at *$216*. B swings twice as far to get there."
+     },
+     {
+      "chapter": "The ratio",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Sharpe ratio"
+        },
+        {
+         "text": "return per bump",
+         "tone": "warn"
+        }
+       ]
+      },
+      "head": null,
+      "say": "The Sharpe ratio is return divided by volatility: *return per bump*."
+     },
+     {
+      "shot": {
+       "kind": "panels",
+       "series": [
+        0,
+        1
+       ],
+       "labels": [
+        "A: 8 over 8",
+        "B: 8 over 16"
+       ]
+      },
+      "head": {
+       "text": "1.0 against 0.5",
+       "sub": "Sharpe ratio"
+      },
+      "say": "A: 8 over 8 is *1.0*. B: 8 over 16 is *0.5*."
+     },
+     {
+      "chapter": "The lesson",
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 3,
+      "head": {
+       "text": "A wins",
+       "sub": "Same gain, half the ride",
+       "tone": "pos"
+      },
+      "say": "Same gain, *half the ride*. That is what a higher Sharpe ratio means."
+     }
+    ]
+   }
   },
   {
    "id": "drawdown",
@@ -1548,7 +1829,100 @@
      "answer": 1,
      "why": "After a 35% fall, 65% of the money is left. Getting back to 100% needs 100 divided by 65, a gain of about 53%."
     }
-   ]
+   ],
+   "reel": {
+    "alt": "A 40 second film. An account grows for four years, falls 35% below its high, then climbs back over 3.5 years. Getting back from a 35% fall needs a 53% gain.",
+    "tag": "Hypothetical example",
+    "beats": [
+     {
+      "chapter": "The worst fall",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Every strategy"
+        },
+        {
+         "text": "falls"
+        }
+       ]
+      },
+      "say": "Every strategy falls. The question is *how far*."
+     },
+     {
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 0,
+      "head": {
+       "tip": 0,
+       "sub": "Account value"
+      },
+      "say": "An account grows for four years. At each new high it is *0% below* its high."
+     },
+     {
+      "s": 1,
+      "cam": {
+       "z": 1.15,
+       "x": 0.45,
+       "y": 0.6
+      },
+      "head": {
+       "tip": 1,
+       "fmt": "pct",
+       "sub": "Below its last high",
+       "tone": "neg"
+      },
+      "say": "Then it falls. The red area is *how far below* its last high it sits."
+     },
+     {
+      "s": 2,
+      "cam": {
+       "z": 1,
+       "x": 0.5,
+       "y": 0.5
+      },
+      "head": {
+       "text": "-35%",
+       "sub": "Max drawdown",
+       "tone": "neg"
+      },
+      "say": "It climbs back slowly. The deepest point is the *max drawdown*: 35%."
+     },
+     {
+      "chapter": "The way back",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "-35%",
+         "tone": "neg"
+        },
+        {
+         "text": "needs +53%",
+         "tone": "pos"
+        }
+       ]
+      },
+      "head": null,
+      "say": "To get back from a 35% fall, the account needs a *53% gain*."
+     },
+     {
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "3.5 years"
+        },
+        {
+         "text": "to recover"
+        }
+       ]
+      },
+      "say": "Here that took *three and a half years*."
+     }
+    ]
+   }
   },
   {
    "id": "costs",
@@ -2280,7 +2654,102 @@
      "answer": 0,
      "why": "Real costs are uncertain. A strategy that only works at the exact cost guess is fragile."
     }
-   ]
+   ],
+   "reel": {
+    "alt": "A 45 second film. One strategy grows 8% a year before costs and trades its whole size 50 times a year. At 1 basis point a trade it ends at $206, at 2 basis points at $197, and at 16 basis points costs take all 8 points.",
+    "tag": "Hypothetical example",
+    "beats": [
+     {
+      "chapter": "Costs",
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Every trade"
+        },
+        {
+         "text": "costs a little"
+        }
+       ]
+      },
+      "say": "Every trade costs a little. A busy strategy pays it *again and again*."
+     },
+     {
+      "shot": {
+       "kind": "chart"
+      },
+      "s": 0,
+      "head": {
+       "tip": 0,
+       "sub": "Before costs"
+      },
+      "say": "Free trading: it grows *8% a year*, trading its whole size 50 times a year."
+     },
+     {
+      "s": 1,
+      "head": {
+       "tip": 1,
+       "sub": "1 basis point a trade"
+      },
+      "say": "At *1 basis point* a trade, Parity's default guess, it ends at $206."
+     },
+     {
+      "s": 2,
+      "head": {
+       "tip": 2,
+       "sub": "2 basis points a trade",
+       "tone": "warn"
+      },
+      "say": "At 2 basis points, the double-cost test: *$197*."
+     },
+     {
+      "chapter": "Break-even",
+      "s": 3,
+      "cam": {
+       "z": 1.2,
+       "x": 0.78,
+       "y": 0.55
+      },
+      "head": {
+       "tip": 3,
+       "sub": "16 basis points a trade",
+       "tone": "neg"
+      },
+      "say": "At *16 basis points*, costs take all 8 points. It ends where it started."
+     },
+     {
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "50 trades x 16 bp"
+        },
+        {
+         "text": "the whole 8%",
+         "tone": "neg"
+        }
+       ]
+      },
+      "head": null,
+      "say": "50 trades a year times 16 basis points is *800 basis points*: the whole 8%."
+     },
+     {
+      "shot": {
+       "kind": "statement",
+       "lines": [
+        {
+         "text": "Break-even 16 bp"
+        },
+        {
+         "text": "guess 1 bp",
+         "tone": "pos"
+        }
+       ]
+      },
+      "say": "Break-even is 16 basis points, *far above* the 1 basis point guess."
+     }
+    ]
+   }
   }
  ]
 }

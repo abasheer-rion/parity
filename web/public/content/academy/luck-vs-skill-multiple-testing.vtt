@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:02.992
+Make 1,000 strategies with no skill at
+
+2
+00:00:02.992 --> 00:00:05.281
+all, ten years each.
+
+3
+00:00:05.581 --> 00:00:08.273
+Each bar counts how many scored that
+
+4
+00:00:08.273 --> 00:00:09.792
+Sharpe ratio.
+
+5
+00:00:10.092 --> 00:00:12.785
+95% land between minus 0.60 and 0.63.
+
+6
+00:00:12.785 --> 00:00:15.458
+That spread is luck alone.
+
+7
+00:00:15.758 --> 00:00:17.296
+Keep only the best.
+
+8
+00:00:17.296 --> 00:00:18.450
+Best of 10:
+
+9
+00:00:18.450 --> 00:00:19.988
+0.58. Best of 100:
+
+10
+00:00:19.988 --> 00:00:22.662
+0.69. Best of 1,000: 0.96.
+
+11
+00:00:22.962 --> 00:00:25.269
+More tries give luck more chances,
+
+12
+00:00:25.269 --> 00:00:28.327
+so the best one keeps climbing.
+
+13
+00:00:28.627 --> 00:00:29.781
+After 1,000 tries,
+
+14
+00:00:29.781 --> 00:00:32.473
+0.96 is the score a backtest has
+
+15
+00:00:32.473 --> 00:00:35.392
+to beat.

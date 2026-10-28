@@ -74,14 +74,36 @@ test.describe("lesson", () => {
   });
 
   test("the picture steps move with Next and Back", async ({ page }) => {
-    await ready(page, LESSON);
+    await ready(page, "/academy/#/how-markets-move/risk-premia");
     const steps = page.getByRole("group", { name: /Picture steps/ });
     await expect(steps.getByRole("button", { name: "Back" })).toBeDisabled();
     await steps.getByRole("button", { name: "Next" }).click();
-    await expect(page.getByText(/^Step 2 of 4/).first()).toBeVisible();
+    await expect(page.getByText(/^Step 2 of 3/).first()).toBeVisible();
     await expect(steps.getByRole("button", { name: "Back" })).toBeEnabled();
     await steps.getByRole("button", { name: "Back" }).click();
-    await expect(page.getByText(/^Step 1 of 4/).first()).toBeVisible();
+    await expect(page.getByText(/^Step 1 of 3/).first()).toBeVisible();
+  });
+
+  // The lesson film (DEC-0085). These tests run with reduced motion, so it waits for a press
+  // and then plays the rendered MP4 with captions.
+  test("the lesson film waits for a press, then plays the rendered film", async ({ page }) => {
+    await ready(page, LESSON);
+    const film = page.getByRole("figure", { name: /Return and compounding: lesson film/ });
+    await expect(film.getByText(/waits for you/)).toBeVisible();
+    await film.getByRole("button", { name: /^Play the film/ }).click();
+    const video = film.locator("video");
+    await expect(video).toHaveAttribute("src", /\/content\/academy\/reading-a-backtest-return\.mp4$/);
+    await expect(video.locator("track[kind=captions]")).toHaveCount(1);
+  });
+
+  test("the film's Motion choice and transcript", async ({ page }) => {
+    await ready(page, LESSON);
+    const film = page.getByRole("figure", { name: /lesson film/ });
+    await film.getByRole("button", { name: "Transcript" }).click();
+    await expect(film.getByRole("button", { name: /Put \$100 away at three steady rates/ })).toBeVisible();
+    await film.getByRole("radiogroup", { name: "Motion" }).getByRole("radio", { name: "Full" }).click();
+    await expect(film.getByRole("button", { name: /^(Play|Pause)$/ })).toBeVisible();
+    await expect(film.getByRole("slider", { name: "Position in the film" })).toBeVisible();
   });
 
   test("Next goes to the next lesson", async ({ page }) => {

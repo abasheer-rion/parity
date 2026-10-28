@@ -51,7 +51,7 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 
 ## Updates
 
-Pages are always current. For the app itself, Parity checks `https://paritytrading.app/desktop/updates/` 5 seconds after launch and every hour (Settings can turn it off; Parity, Check for updates checks now). It downloads a new version in the background, installs it when you quit and offers "Restart to update". That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
+Pages are always current. When the site deploys a new version, a page that is already open shows "A new version of Parity is ready" with Reload; Reload keeps the page, its address and what was typed into its fields ([DEC-0086](../docs/decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)). For the app itself, Parity checks `https://paritytrading.app/desktop/updates/` 5 seconds after launch and every hour (Settings can turn it off; Parity, Check for updates checks now). It downloads a new version in the background and installs it when you quit. It offers "Restart to update" only when the app itself changed; a release that only refreshes the saved copy of the site installs quietly at quit (the release workflow marks it "pages" in the update file). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
 
 - Windows: the update downloads in the background and Parity asks to restart.
 - Mac, signed and notarized: the same.

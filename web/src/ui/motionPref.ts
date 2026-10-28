@@ -28,6 +28,11 @@ export function useMotionPref(): MotionPref {
   return useSyncExternalStore(subscribe, currentMotionPref, () => "system");
 }
 
+/** True when the choice is Off, live. */
+export function useMotionOff(): boolean {
+  return useSyncExternalStore(subscribe, () => currentMotionPref() === "off", () => false);
+}
+
 /** What plays now ("full" or "reduced"), live: follows the setting and the device. */
 export function useMotionLevel(): MotionLevel {
   return useSyncExternalStore(subscribe, motionLevel, () => "full");
