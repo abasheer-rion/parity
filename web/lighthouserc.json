@@ -1,0 +1,66 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "numberOfRuns": 3,
+      "url": [
+        "http://localhost/",
+        "http://localhost/learn/",
+        "http://localhost/ideas/betting-against-beta/",
+        "http://localhost/blog/",
+        "http://localhost/news/",
+        "http://localhost/changelog/",
+        "http://localhost/status/"
+      ],
+      "settings": {
+        "preset": "desktop",
+        "chromeFlags": "--no-sandbox --headless=new",
+        "skipAudits": ["is-on-https", "redirects-http", "uses-http2"]
+      }
+    },
+    "assert": {
+      "assertMatrix": [
+        {
+          "matchingUrlPattern": ".*",
+          "assertions": {
+            "categories:seo": ["error", { "minScore": 0.95, "aggregationMethod": "median-run" }],
+            "categories:performance": ["error", { "minScore": 0.8, "aggregationMethod": "median-run" }],
+            "categories:accessibility": ["warn", { "minScore": 0.95, "aggregationMethod": "median-run" }],
+            "categories:best-practices": ["warn", { "minScore": 0.9, "aggregationMethod": "median-run" }],
+            "document-title": "error",
+            "meta-description": "error",
+            "canonical": "error",
+            "hreflang": "error",
+            "crawlable-anchors": "error",
+            "link-text": "error",
+            "largest-contentful-paint": ["error", { "maxNumericValue": 2500, "aggregationMethod": "median-run" }],
+            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1, "aggregationMethod": "median-run" }],
+            "total-blocking-time": ["error", { "maxNumericValue": 300, "aggregationMethod": "median-run" }],
+            "resource-summary:script:size": ["error", { "maxNumericValue": 358400 }],
+            "resource-summary:stylesheet:size": ["error", { "maxNumericValue": 81920 }],
+            "resource-summary:image:size": ["error", { "maxNumericValue": 614400 }],
+            "resource-summary:font:size": ["error", { "maxNumericValue": 256000 }],
+            "resource-summary:total:size": ["error", { "maxNumericValue": 1433600 }],
+            "resource-summary:total:count": ["error", { "maxNumericValue": 40 }]
+          }
+        },
+        {
+          "matchingUrlPattern": "^https?://[^/]+/.+",
+          "assertions": {
+            "resource-summary:third-party:count": ["error", { "maxNumericValue": 0 }]
+          }
+        },
+        {
+          "matchingUrlPattern": "^https?://[^/]+/$",
+          "assertions": {
+            "resource-summary:third-party:count": ["error", { "maxNumericValue": 3 }]
+          }
+        }
+      ]
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./.lighthouseci"
+    }
+  }
+}

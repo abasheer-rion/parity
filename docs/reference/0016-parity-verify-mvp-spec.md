@@ -163,7 +163,7 @@ Only on request, after the result is shown. The person picks a name for the reco
 
 - a public page at `/v/<id>`, where `<id>` is a random 12-character string, not guessable or sequential;
 - an image (SVG, 320 by 80) and an embed snippet;
-- a plain-text line for social posts: "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. parity.endyland.com/v/<id>".
+- a plain-text line for social posts: "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. paritytrading.app/v/<id>".
 
 The public page shows the verdict, the five cards, the date it was checked, the method version and the SHA-256 hash of the uploaded file. Anyone with the same file can check that the hash matches.
 
@@ -228,6 +228,8 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 - [DEC-0038: Every page gets its tags from one table and every view has a link](../decisions/0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](../decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [DEC-0055: Addresses that do not exist get a real 404 and each app says not found](../decisions/0055-addresses-that-do-not-exist-get-a-real-404-and-each-app-says-not-found.md)
+- [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](../decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
+- [DEC-0082: Verify tools and endpoints for AI apps and programs](../decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [REF-0025: Parity capacity and load test results](0025-parity-capacity-and-load-test-results.md)
 - [LOG-0013: Parity Verify built and shipped](../log/2026-10-24-parity-verify-built-and-shipped.md)

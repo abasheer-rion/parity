@@ -1,0 +1,25 @@
+{
+  "id": "shanghai-lockdown-2022",
+  "name": "Shanghai locks down",
+  "date": "2022-03-28",
+  "type": "supply_chain_shock",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china"
+  ],
+  "severity": 2,
+  "commodities": [
+    "metals"
+  ],
+  "description": "China locked down Shanghai, home of the world's busiest container port, for about two months under its zero Covid policy.",
+  "sources": [
+    {
+      "title": "2022 Shanghai COVID-19 outbreak",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2022_Shanghai_COVID-19_outbreak"
+    }
+  ]
+}

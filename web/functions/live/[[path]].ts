@@ -31,7 +31,7 @@ interface Context { request: Request; env: Env; params: { path?: string[] }; wai
 
 /** Pages that may call /live with a sign-in from another origin: Parity's own addresses, its
  *  preview deploys and the desktop app's bundled copy. Exact hosts, not every subdomain. */
-const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/((www|trade|sim|academy|lab)\.)?parity\.endyland\.com|https:\/\/(trade|sim|academy|lab)\.endyland\.com|https:\/\/[a-z0-9-]+\.parity-research\.pages\.dev|https:\/\/parity-research\.pages\.dev)$/;
+const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/((www|trade|sim|academy|lab)\.)?paritytrading\.app|https:\/\/((www|trade|sim|academy|lab)\.)?parity\.endyland\.com|https:\/\/(trade|sim|academy|lab)\.endyland\.com|https:\/\/[a-z0-9-]+\.parity-research\.pages\.dev|https:\/\/parity-research\.pages\.dev)$/;
 
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("Origin") ?? "";

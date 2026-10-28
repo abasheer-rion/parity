@@ -11,7 +11,7 @@
 .auth-pw .ui-input { width: 100%; padding-right: 68px; }
 .auth-pw-toggle { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); min-height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: transparent; color: var(--a-muted); font: inherit; font-size: var(--type-sm); font-weight: 550; cursor: pointer; transition: color var(--dur-2), background-color var(--dur-2); }
 .auth-pw-toggle:hover { color: var(--a-text); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
-.auth-pw-toggle:focus-visible { outline: 2px solid var(--a-text); outline-offset: 2px; border-radius: 6px; }
+.auth-pw-toggle:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 6px; }
 .auth-field .pw-meter { margin-top: 2px; font-size: var(--type-xs); }
 .auth-check { display: flex; gap: 10px; align-items: flex-start; font-size: var(--type-sm); line-height: 19px; color: var(--a-muted); }
 .auth-check input { margin: 3px 0 0; width: 16px; height: 16px; flex: none; accent-color: var(--color-text); }

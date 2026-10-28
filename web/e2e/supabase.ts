@@ -121,7 +121,9 @@ async function rest(route: Route, db: FakeDb) {
     const next = [...all];
     for (const r of list) {
       const row = { id: newRowId(), user_id: USER.id, created_at: now, ...r };
-      const i = upsert ? next.findIndex((x) => x.id === row.id) : -1;
+      // An upsert matches on its on_conflict column (trader_profiles uses user_id), else id.
+      const key = url.searchParams.get("on_conflict") ?? "id";
+      const i = upsert ? next.findIndex((x) => x[key] === (row as RowT)[key]) : -1;
       if (i >= 0) next[i] = { ...next[i], ...row }; else next.push(row);
       made.push(row);
     }

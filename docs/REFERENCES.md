@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1681 sources. 196 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1792 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
-| [Papers](#papers) | 333 |
-| [Preprints and working papers](#preprints-and-working-papers) | 45 |
-| [Books](#books) | 20 |
+| [Papers](#papers) | 342 |
+| [Preprints and working papers](#preprints-and-working-papers) | 46 |
+| [Books](#books) | 21 |
 | [Datasets](#datasets) | 63 |
-| [Software](#software) | 103 |
-| [Web pages](#web-pages) | 947 |
+| [Software](#software) | 104 |
+| [Web pages](#web-pages) | 1046 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 84 |
 | [News](#news) | 5 |
@@ -207,7 +207,7 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 
 Avellaneda, Marco; Lee, Jeong-Hyun (2010). Statistical arbitrage in the US equities market. *Quantitative Finance 10(7), 761-782*. doi:10.1080/14697680903124632 <https://doi.org/10.1080/14697680903124632>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md).
+Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### bailey2012
 
@@ -225,7 +225,7 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### bailey2016
 
@@ -691,6 +691,12 @@ Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
 
+### davolio2002
+
+D'Avolio, Gene (2002). The market for borrowing stock. *Journal of Financial Economics 66(2-3), 271-306*. doi:10.1016/s0304-405x(02)00206-4 <https://doi.org/10.1016/s0304-405x(02)00206-4>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### debondt1985
 
 De Bondt, Werner F. M.; Thaler, Richard (1985). Does the Stock Market Overreact? *Journal of Finance 40(3), 793-805*. doi:10.1111/j.1540-6261.1985.tb05004.x <https://doi.org/10.1111/j.1540-6261.1985.tb05004.x>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -733,7 +739,13 @@ Cited in: [catalog/algorithms/volatility-managed-portfolios.json](../catalog/alg
 
 Do, Binh; Faff, Robert (2010). Does Simple Pairs Trading Still Work? *Financial Analysts Journal 66(4), 83-95*. doi:10.2469/faj.v66.n4.1 <https://doi.org/10.2469/faj.v66.n4.1>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
+### do2012
+
+Do, Binh; Faff, Robert (2012). ARE PAIRS TRADING PROFITS ROBUST TO TRADING COSTS? *Journal of Financial Research 35(2), 261-287*. doi:10.1111/j.1475-6803.2012.01317.x <https://doi.org/10.1111/j.1475-6803.2012.01317.x>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### doskov2015
 
@@ -751,11 +763,29 @@ Du, Wenxin; Tepper, Alexander; Verdelhan, Adrien (2018). Deviations from Covered
 
 Cited in: [REF-0004](reference/0004-glossary.md).
 
+### elliott2005
+
+Elliott, Robert J.; Van Der Hoek \*, John; Malcolm, William P. (2005). Pairs trading. *Quantitative Finance 5(3), 271-276*. doi:10.1080/14697680500149370 <https://doi.org/10.1080/14697680500149370>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### engel2005
 
 Engel, Charles; West, Kenneth D. (2005). Exchange Rates and Fundamentals. *Journal of Political Economy 113(3), 485-517*. doi:10.1086/429137 <https://doi.org/10.1086/429137>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0001](research/0001-reading-list.md).
+
+### engelberg2018
+
+Engelberg, Joseph E.; Reed, Adam V.; Ringgenberg, Matthew C. (2018). Short-Selling Risk. *The Journal of Finance 73(2), 755-786*. doi:10.1111/jofi.12601 <https://doi.org/10.1111/jofi.12601>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
+### engle1987
+
+Engle, Robert F.; Granger, C. W. J. (1987). Co-Integration and Error Correction: Representation, Estimation, and Testing. *Econometrica 55(2), 251*. doi:10.2307/1913236 <https://doi.org/10.2307/1913236>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### etula2019
 
@@ -911,7 +941,7 @@ Cited in: [REF-0004](reference/0004-glossary.md).
 
 Gatev, Evan; Goetzmann, William N.; Rouwenhorst, K. Geert (2006). Pairs Trading: Performance of a Relative-Value Arbitrage Rule. *Review of Financial Studies 19(3), 797-827*. doi:10.1093/rfs/hhj020 <https://doi.org/10.1093/rfs/hhj020>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### geltner1991
 
@@ -1215,6 +1245,12 @@ Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (2023). Is There a R
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### johansen1991
+
+Johansen, Soren (1991). Estimation and Hypothesis Testing of Cointegration Vectors in Gaussian Vector Autoregressive Models. *Econometrica 59(6), 1551*. doi:10.2307/2938278 <https://doi.org/10.2307/2938278>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### jorda2012
 
 Jordà, Òscar; Taylor, Alan (2012). The Carry Trade and Fundamentals: Nothing to Fear But FEER Itself. *Journal of International Economics 88, 74-90*. doi:10.3386/w15518 <https://doi.org/10.3386/w15518>. <http://www.nber.org/papers/w15518.pdf>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -1315,7 +1351,7 @@ Khandani, Amir E.; Lo, Andrew W. (2011). What happened to the quants in August 2
 
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
-Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### kilian2009
 
@@ -1368,6 +1404,12 @@ Korteweg, Arthur; Sorensen, Morten (2017). Skill and luck in private equity perf
 Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### krauss2016
+
+Krauss, Christopher (2016). STATISTICAL ARBITRAGE PAIRS TRADING STRATEGIES: REVIEW AND OUTLOOK. *Journal of Economic Surveys 31(2), 513-545*. doi:10.1111/joes.12153 <https://doi.org/10.1111/joes.12153>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### kroencke2014
 
@@ -1526,6 +1568,12 @@ Also at: <https://www.nber.org/system/files/working_papers/w19623/w19623.pdf>, <
 Note: Read for RES-0010 (full text).
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
+
+### mackinnon1999
+
+MacKinnon, James G.; Haug, Alfred A.; Michelis, Leo (1999). Numerical distribution functions of likelihood ratio tests for cointegration. *Journal of Applied Econometrics 14(5), 563-577*. doi:10.1002/(sici)1099-1255(199909/10)14:5\<563::aid-jae530\>3.0.co;2-r <https://doi.org/10.1002/(sici)1099-1255(199909/10)14:5<563::aid-jae530>3.0.co;2-r>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### magdonismail2004
 
@@ -2397,6 +2445,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-c7f4fb7f
+
+MacKinnon, James G.; Haug, Alfred A.; Michelis, Leo (1999). Numerical distribution functions of likelihood ratio tests for cointegration. *Journal of Applied Econometrics 14(5), 563-577*. doi:10.1002/(sici)1099-1255(199909/10)14:5 <https://doi.org/10.1002/(sici)1099-1255(199909/10)14:5>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### url-cd4e8812
 
 The reaction of asset markets to Swiss National Bank communication. (n.d.). <https://ideas.repec.org/a/eee/jimfin/v29y2010i3p486-503.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2675,7 +2729,7 @@ Cited in: [catalog/algorithms/fx-ml-smart-carry.json](../catalog/algorithms/fx-m
 
 Gatev, Evan; Goetzmann, William; Rouwenhorst, K. Geert (1999). Pairs Trading: Performance of a Relative Value Arbitrage Rule. *NBER Working Paper w7032*. doi:10.3386/w7032 <https://doi.org/10.3386/w7032>. <https://www.nber.org/system/files/working_papers/w7032/w7032.pdf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md).
+Cited in: [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### gencay2026
 
@@ -2819,6 +2873,12 @@ Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Tra
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### url-3465fab3
+
+MacKinnon, James G. (2010). Critical Values for Cointegration Tests. *Queen's Economics Department Working Paper 1227*. <https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+
 ### url-beed4701
 
 Stock Price Responses to Firm-Level News in Supply Chain Networks. (n.d.). *arxiv.org*. <https://arxiv.org/html/2409.06255v5>. Accessed 2026-10-25. Verification: not checked.
@@ -2871,7 +2931,7 @@ Chan (2013). Algorithmic Trading: Winning Strategies and Their Rationale. *Wiley
 
 Note: Mean reversion and momentum, with attention to backtest pitfalls.
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### chan2021
 
@@ -2996,6 +3056,12 @@ Tetlock, Philip E.; Gardner, Dan (2015). Superforecasting: The Art and Science o
 Note: Book; not read this session. Cited for a general idea, not a number.
 
 Cited in: [REF-0004](reference/0004-glossary.md).
+
+### url-12fa0e62
+
+Vidyamurthy, Ganapathy (2004). Pairs Trading: Quantitative Methods and Analysis. *Wiley*. <https://www.wiley.com/en-us/Pairs+Trading%3A+Quantitative+Methods+and+Analysis-p-9780471460671>. Accessed 2026-10-26. Verification: not checked.
+
+Cited in: [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ## Datasets
 
@@ -3791,6 +3857,12 @@ LMAX-Exchange on GitHub. (n.d.). *github.com*. <https://github.com/LMAX-Exchange
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-af93d875
+
+Lighthouse CI. (n.d.). *GitHub*. <https://github.com/GoogleChrome/lighthouse-ci>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
 ### url-b3617053
 
 bloomberg/blazingmq. (n.d.). *github.com*. <https://github.com/bloomberg/blazingmq>. Accessed 2026-10-24. Verification: not checked.
@@ -4211,6 +4283,12 @@ Note: Linked in this repo as: FX data docs.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-00cdface
+
+13145358-anthropic-software-directory-policy. (n.d.). *support.claude.com*. <https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-00f23b97
 
 Federal Reserve issues FOMC statement. (n.d.). *Federal Reserve*. <https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -4297,6 +4375,12 @@ connection. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/open-api/conne
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-045b3caa
+
+quickstart.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/quickstart.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-0498644e
 
 Legal Information Institute (n.d.). 16 CFR Part 314. *law.cornell.edu*. <https://www.law.cornell.edu/cfr/text/16/part-314>. Accessed 2026-10-25. Verification: unchecked.
@@ -4316,6 +4400,12 @@ Financial, Economic and Alternative Data | Nasdaq Data Link. (n.d.). *Nasdaq*. <
 Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-04e8250f
+
+custom-mcp-server.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/api/docs/guides/custom-mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-04eae960
 
@@ -4349,6 +4439,12 @@ Google Cloud quota project. (n.d.). *docs.cloud.google.com*. <https://docs.cloud
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
+### url-06b34613
+
+2023 Argentine general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2023_Argentine_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/argentina-election-2023.json](../catalog/events/argentina-election-2023.json).
+
 ### url-06e2ac82
 
 Arctic Shift. (n.d.). *arctic-shift.photon-reddit.com*. <https://arctic-shift.photon-reddit.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -4362,6 +4458,12 @@ Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
 market data plans. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/about-market-data-api>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-075b10be
+
+plugin-guidelines. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/plugin-guidelines>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-079e8667
 
@@ -4475,6 +4577,12 @@ No title recorded. (n.d.). *yougov.com*. <https://yougov.com/en-us/articles/5514
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-0c08671d
+
+COVID-19 pandemic in mainland China. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/COVID-19_pandemic_in_mainland_China>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/wuhan-lockdown-2020.json](../catalog/events/wuhan-lockdown-2020.json).
+
 ### url-0c117288
 
 Copy help. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-copy/>. Accessed 2026-10-24. Verification: not checked.
@@ -4518,6 +4626,12 @@ Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-you
 No title recorded. (n.d.). *US Department of the Treasury, Bureau of the Fiscal Service*. <https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?page[size]=1&sort=record_date>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/treasury-fiscal-data.json](../catalog/datasets/treasury-fiscal-data.json).
+
+### url-0d3a2754
+
+2019-present Sri Lankan economic crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2019%E2%80%93present_Sri_Lankan_economic_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/sri-lanka-default-2022.json](../catalog/events/sri-lanka-default-2022.json).
 
 ### url-0e04f482
 
@@ -4607,6 +4721,12 @@ Algorithmic trading market size and share analysis. (n.d.). *mordorintelligence.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-10f4a678
+
+connect. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-1139fcb8
 
 dYdX terms of use. (2026). *dYdX Operations Services*. <https://dydx.trade/terms>. Accessed 2026-10-25. Verification: not checked.
@@ -4631,6 +4751,12 @@ No title recorded. (n.d.). *investing.com*. <https://www.investing.com/economic-
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-1379c449
+
+2022 Shanghai COVID-19 outbreak. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2022_Shanghai_COVID-19_outbreak>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/shanghai-lockdown-2022.json](../catalog/events/shanghai-lockdown-2022.json).
+
 ### url-139ab1d1
 
 Interactive Brokers review, StockBrokers.com. (n.d.). *stockbrokers.com*. <https://www.stockbrokers.com/review/interactivebrokers>. Accessed 2026-10-24. Verification: not checked.
@@ -4654,6 +4780,12 @@ Cited in: [CMP-0009](competitors/0009-robinhood.md).
 No title recorded. (n.d.). *eia.gov*. <https://www.eia.gov/opendata/register.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-147edad7
+
+2022-2023 mpox outbreak. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2022%E2%80%932023_mpox_outbreak>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/mpox-emergency-2022.json](../catalog/events/mpox-emergency-2022.json).
 
 ### url-14d9d7fc
 
@@ -4703,7 +4835,7 @@ Cited in: [catalog/datasets/massive.json](../catalog/datasets/massive.json), [DA
 
 Euro area crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/European_debt_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
-Cited in: [catalog/events/greece-junk-downgrade-2010.json](../catalog/events/greece-junk-downgrade-2010.json).
+Cited in: [catalog/events/greece-junk-downgrade-2010.json](../catalog/events/greece-junk-downgrade-2010.json), [catalog/events/italy-yields-7-percent-2011.json](../catalog/events/italy-yields-7-percent-2011.json).
 
 ### url-15ad6ef3
 
@@ -4798,6 +4930,18 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 cTrader, Wikipedia. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/CTrader>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0005](competitors/0005-ctrader.md).
+
+### url-18fadaa6
+
+Western African Ebola virus epidemic. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Western_African_Ebola_virus_epidemic>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/ebola-emergency-2014.json](../catalog/events/ebola-emergency-2014.json).
+
+### url-190b96e1
+
+2017 French presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2017_French_presidential_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/french-election-2017.json](../catalog/events/french-election-2017.json).
 
 ### url-197d2a85
 
@@ -5049,6 +5193,12 @@ thinkorswim Tools tab. (n.d.). *toslc.thinkorswim.com*. <https://toslc.thinkorsw
 
 Cited in: [CMP-0008](competitors/0008-thinkorswim.md).
 
+### url-23443d3d
+
+Nationalisation of Northern Rock. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nationalisation_of_Northern_Rock>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/northern-rock-run-2007.json](../catalog/events/northern-rock-run-2007.json).
+
 ### url-23573826
 
 Coinbase app on the US App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id886427730>. Accessed 2026-10-24. Verification: not checked.
@@ -5120,6 +5270,12 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Claude connector authentication. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/authentication>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-278bf524
+
+Operation Sindoor. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Operation_Sindoor>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/operation-sindoor-2025.json](../catalog/events/operation-sindoor-2025.json).
 
 ### url-28169562
 
@@ -5205,11 +5361,23 @@ Darwinex Zero pricing. (n.d.). *darwinexzero.com*. <https://www.darwinexzero.com
 
 Cited in: [CMP-0021](competitors/0021-darwinex.md).
 
+### url-2aa3d3ac
+
+releasing.md. (n.d.). *github.com*. <https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-2ab80190
 
 Iran-Iraq War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/iran-iraq-war-1980.json](../catalog/events/iran-iraq-war-1980.json).
+
+### url-2b02ed3d
+
+gemini. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/gemini/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-2b5c7556
 
@@ -5223,11 +5391,23 @@ Robinhood status page. (n.d.). *status.robinhood.com*. <https://status.robinhood
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md).
 
+### url-2cd7e6d7
+
+SARS-CoV-2 Omicron variant. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/omicron-variant-2021.json](../catalog/events/omicron-variant-2021.json).
+
 ### url-2d46dac4
 
 academic liaison. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/academy/academic-liaison/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-2da45d8d
+
+OPEC+. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/OPEC%2B>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/opec-plus-surprise-cut-2023.json](../catalog/events/opec-plus-surprise-cut-2023.json).
 
 ### url-2de0d94d
 
@@ -5399,11 +5579,23 @@ Queues pricing. (n.d.). *developers.cloudflare.com*. <https://developers.cloudfl
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-3528e093
+
+signup. (n.d.). *paritytrading.app*. <https://paritytrading.app/signup/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-35536a4f
 
 Collective2 help centre. (n.d.). *support.collective2.com*. <https://support.collective2.com/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
+
+### url-35597222
+
+terms. (n.d.). *paritytrading.app*. <https://paritytrading.app/legal/terms/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-35ccef7c
 
@@ -5471,6 +5663,12 @@ Analytics Engine pricing. (n.d.). *developers.cloudflare.com*. <https://develope
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-37b440bc
+
+United States New Export Controls on Advanced Computing and Semiconductors to China. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/United_States_New_Export_Controls_on_Advanced_Computing_and_Semiconductors_to_China>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/us-chip-export-controls-2022.json](../catalog/events/us-chip-export-controls-2022.json).
+
 ### url-3836ad77
 
 App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/forex-calendar-market-news/id985947299>. Accessed 2026-10-24. Verification: not checked.
@@ -5537,6 +5735,12 @@ Funding. (n.d.). *Hyperliquid docs*. <https://hyperliquid.gitbook.io/hyperliquid
 
 Cited in: [REF-0004](reference/0004-glossary.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
+### url-3a3f2c19
+
+Venezuelan general strike of 2002-2003. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Venezuelan_general_strike_of_2002%E2%80%932003>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/venezuela-oil-strike-2002.json](../catalog/events/venezuela-oil-strike-2002.json).
+
 ### url-3a5722ad
 
 No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/bls/linksite.htm>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -5548,6 +5752,12 @@ Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](
 Marketaux: API documentation. (n.d.). *Marketaux (APILayer)*. <https://www.marketaux.com/documentation>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/marketaux.json](../catalog/datasets/marketaux.json), [DAT-0022](datasets/0022-marketaux.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-3a93f530
+
+2016 Turkish coup attempt. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2016_Turkish_coup_attempt>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/turkey-coup-attempt-2016.json](../catalog/events/turkey-coup-attempt-2016.json).
 
 ### url-3aeeae10
 
@@ -5595,6 +5805,12 @@ Note: Intro course: pandas, backtesting, simple ML and RL.
 
 Cited in: [RES-0001](research/0001-reading-list.md).
 
+### url-3c848282
+
+Red Sea crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Red_Sea_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/red-sea-shipping-attacks-2023.json](../catalog/events/red-sea-shipping-attacks-2023.json).
+
 ### url-3ccea4bb
 
 thinkorswim left sidebar. (n.d.). *toslc.thinkorswim.com*. <https://toslc.thinkorswim.com/center/howToTos/thinkManual/Left-Sidebar>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
@@ -5614,6 +5830,12 @@ Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantag
 FINRA v. Webull. (n.d.). *law360.com*. <https://www.law360.com/articles/2338179>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-3e1e9fc0
+
+Latin American debt crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Latin_American_debt_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/mexico-debt-crisis-1982.json](../catalog/events/mexico-debt-crisis-1982.json).
 
 ### url-3e3dd1bf
 
@@ -5644,6 +5866,12 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 Frankfurter: API documentation. (n.d.). *Frankfurter (open source project)*. <https://frankfurter.dev/docs/>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.json), [DAT-0014](datasets/0014-frankfurter.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-3fa7caaa
+
+January 2015 Greek legislative election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/January_2015_Greek_legislative_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/greek-election-2015.json](../catalog/events/greek-election-2015.json).
 
 ### url-3fdb8541
 
@@ -5813,6 +6041,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-4750faec
+
+1998-2002 Argentine great depression. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/argentina-default-2001.json](../catalog/events/argentina-default-2001.json).
+
 ### url-4763ad6c
 
 MCP servers. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader-ai-agent-connect/>. Accessed 2026-10-24. Verification: not checked.
@@ -5979,6 +6213,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/algorithms/fx-value-adjusted.json](../catalog/algorithms/fx-value-adjusted.json), [ALG-0016](algorithms/0016-fx-value-adjusted.md).
 
+### url-4f387a1e
+
+Post-2008 Irish economic downturn. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Post-2008_Irish_economic_downturn>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/ireland-bailout-2010.json](../catalog/events/ireland-bailout-2010.json).
+
 ### url-4fa3b8bc
 
 UK legislation.gov.uk (n.d.). RAO article 54. *legislation.gov.uk*. <https://www.legislation.gov.uk/uksi/2001/544/article/54>. Accessed 2026-10-25. Verification: unchecked.
@@ -6010,6 +6250,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 Medium guide, 2026. (n.d.). *arbitrageghost.medium.com*. <https://arbitrageghost.medium.com/funding-rate-arbitrage-in-2026-the-complete-guide-with-real-calculations-40e6cf341e52>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-507c40bc
+
+authentication.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/authentication.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-50b35a46
 
@@ -6103,6 +6349,12 @@ CFTC Commitments of Traders: API documentation. (n.d.). *US Commodity Futures Tr
 
 Cited in: [catalog/datasets/cftc-cot.json](../catalog/datasets/cftc-cot.json), [DAT-0039](datasets/0039-cftc-cot.md).
 
+### url-53a8babb
+
+privacy. (n.d.). *paritytrading.app*. <https://paritytrading.app/legal/privacy/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-53b8bf02
 
 Wikipedia, Bloomberg Terminal. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Bloomberg_Terminal>. Accessed 2026-10-24. Verification: not checked.
@@ -6130,6 +6382,12 @@ Cited in: [catalog/datasets/yahoo-chart.json](../catalog/datasets/yahoo-chart.js
 Strategy Tester. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/automated-trading/strategy-tester>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
+
+### url-558969f4
+
+Greek government-debt crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Greek_government-debt_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/greece-capital-controls-2015.json](../catalog/events/greece-capital-controls-2015.json), [catalog/events/greece-debt-swap-2012.json](../catalog/events/greece-debt-swap-2012.json).
 
 ### url-55bd9225
 
@@ -6245,6 +6503,12 @@ Cryptohopper pricing. (n.d.). *cryptohopper.com*. <https://www.cryptohopper.com/
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-595f0d4f
+
+Turkish currency and debt crisis, 2018. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Turkish_currency_and_debt_crisis,_2018>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/turkey-lira-crisis-2018.json](../catalog/events/turkey-lira-crisis-2018.json).
+
 ### url-5979fcf4
 
 Angel Investors Network. (n.d.). *angelinvestorsnetwork.com*. <https://angelinvestorsnetwork.com/venture-capital/equityzen-vs-hiive-2026>. Accessed 2026-10-25. Verification: not checked.
@@ -6256,6 +6520,12 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 Legal Information Institute (n.d.). 15 U.S.C. 80b-6. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-6>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-5a08a802
+
+chatgpt. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/chatgpt/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-5a565123
 
@@ -6276,6 +6546,12 @@ Cited in: [catalog/algorithms/avellaneda-stoikov-market-making.json](../catalog/
 publisher page. (n.d.). *systematicmoney.org*. <https://www.systematicmoney.org/leveraged-trading>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md), [RES-0006](research/0006-courses-and-trader-beliefs.md).
+
+### url-5a7909cc
+
+submission.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/deploy/submission.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-5bac6c16
 
@@ -6316,6 +6592,12 @@ Cited in: [CMP-0022](competitors/0022-collective2.md).
 Texas Legislature (n.d.). Tex. Bus. and Com. Code ch. 541. *statutes.capitol.texas.gov*. <https://statutes.capitol.texas.gov/Docs/BC/htm/BC.541.htm>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-5c40fff5
+
+Continental Illinois. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Continental_Illinois>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/continental-illinois-1984.json](../catalog/events/continental-illinois-1984.json).
 
 ### url-5c9ba0b0
 
@@ -6398,6 +6680,12 @@ Cited in: [CMP-0012](competitors/0012-lmax.md).
 Interactive Brokers. (n.d.). *finviz.com*. <https://finviz.com/news/397937/interactive-brokers-group-reports-brokerage-metrics-and-other-financial-information-for-september-2026-includes-reg-nms-execution-statistics>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-5f1b7398
+
+plugins. (n.d.). *platform.openai.com*. <https://platform.openai.com/plugins>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-5f332cb0
 
@@ -6518,6 +6806,12 @@ Cited in: [CMP-0014](competitors/0014-binance.md).
 eToro fees. (n.d.). *etoro.com*. <https://www.etoro.com/trading/fees/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0017](competitors/0017-etoro.md).
+
+### url-64d04381
+
+mcp-configuration. (n.d.). *code.visualstudio.com*. <https://code.visualstudio.com/docs/copilot/reference/mcp-configuration>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-65a06944
 
@@ -6651,6 +6945,12 @@ EODHD terms. (n.d.). *eodhd.com*. <https://eodhd.com/financial-apis/terms-condit
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-6a3ebbc5
+
+browse. (n.d.). *geminicli.com*. <https://geminicli.com/extensions/browse/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-6a66c019
 
 Disclaimer & copyright. (n.d.). *European Central Bank*. <https://www.ecb.europa.eu/home/disclaimer/html/index.en.html>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -6671,6 +6971,18 @@ Grafana pricing. (n.d.). *grafana.com*. <https://grafana.com/pricing/>. Accessed
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-6b415a56
+
+Indexing API Quickstart. (n.d.). *Google Search Central*. <https://developers.google.com/search/apis/indexing-api/v3/quickstart>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
+### url-6b756381
+
+Cryptocurrency bubble. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Cryptocurrency_bubble>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/crypto-crash-may-2021.json](../catalog/events/crypto-crash-may-2021.json).
+
 ### url-6b8331cb
 
 Tracking US Crude Oil Inventories with Python and the EIA API - DEV Community. (n.d.). *dev.to*. <https://dev.to/chat13f/tracking-us-crude-oil-inventories-with-python-and-the-eia-api-1n8k>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6690,6 +7002,14 @@ Cited in: [catalog/events/asian-financial-crisis-1997.json](../catalog/events/as
 Legal Information Institute (n.d.). 15 U.S.C. 80b-3a. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/80b-3a>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-6c14c160
+
+Parity. (n.d.). *paritytrading.app*. <https://paritytrading.app>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0069.
+
+Cited in: [DEC-0069](decisions/0069-parity-moves-to-paritytrading-app.md).
 
 ### url-6c55baa0
 
@@ -6733,6 +7053,12 @@ TradingView about. (n.d.). *tradingview.com*. <https://www.tradingview.com/about
 
 Cited in: [CMP-0006](competitors/0006-tradingview.md), [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-6dc62cd4
+
+app-review.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/deploy/app-review.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-6e2dd1ec
 
 CoinGecko API: API documentation. (n.d.). *CoinGecko*. <https://docs.coingecko.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -6744,6 +7070,12 @@ Cited in: [catalog/datasets/coingecko.json](../catalog/datasets/coingecko.json),
 DriveWealth. (n.d.). *drivewealth.com*. <https://www.drivewealth.com/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-6e9b1942
+
+Celsius Network. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Celsius_Network>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/celsius-freeze-2022.json](../catalog/events/celsius-freeze-2022.json).
 
 ### url-6ec5737a
 
@@ -6758,6 +7090,12 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 Kraken Pro app on the US App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id1473024338>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md), [CMP-0016](competitors/0016-kraken-pro.md).
+
+### url-6f2f9fee
+
+2019 Balakot airstrike. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2019_Balakot_airstrike>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/balakot-airstrike-2019.json](../catalog/events/balakot-airstrike-2019.json).
 
 ### url-6f92a084
 
@@ -6808,6 +7146,18 @@ Cited in: [catalog/datasets/frankfurter.json](../catalog/datasets/frankfurter.js
 FinCEN MSB definition. (n.d.). *fincen.gov*. <https://www.fincen.gov/money-services-business-definition>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-71c523c0
+
+oauth. (n.d.). *chatgpt.com*. <https://chatgpt.com/connector/oauth/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
+### url-71ff86b6
+
+2018 cryptocurrency crash. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2018_cryptocurrency_crash>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/crypto-crash-2018.json](../catalog/events/crypto-crash-2018.json).
 
 ### url-7214a18b
 
@@ -6900,6 +7250,18 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 No title recorded. (n.d.). *Dukascopy Bank SA*. <https://datafeed.dukascopy.com/datafeed/EURUSD/2024/00/02/10h_ticks.bi5>. Accessed 2026-10-21. Verification: error (checked 2026-10-21).
 
 Cited in: [catalog/datasets/dukascopy.json](../catalog/datasets/dukascopy.json), [DAT-0009](datasets/0009-dukascopy.md).
+
+### url-75a0b4a0
+
+Spam policies for Google web search. (n.d.). *Google Search Central*. <https://developers.google.com/search/docs/essentials/spam-policies>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
+### url-75e61a74
+
+Nord Stream. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Nord_Stream>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/nord-stream-shut-2022.json](../catalog/events/nord-stream-shut-2022.json).
 
 ### url-762064ae
 
@@ -7085,6 +7447,12 @@ Note: Linked in this repo as: development guide.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [RES-0005](research/0005-zen-apps-and-free-apis.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-7c7d7898
+
+2015-2016 Zika virus epidemic. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2015%E2%80%932016_Zika_virus_epidemic>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/zika-emergency-2016.json](../catalog/events/zika-emergency-2016.json).
+
 ### url-7c8f7c35
 
 TradingView shortcuts. (n.d.). *tradingview.com*. <https://www.tradingview.com/charting-library-docs/latest/getting_started/Shortcuts/>. Accessed 2026-10-24. Verification: ok (checked 2026-10-24).
@@ -7098,6 +7466,12 @@ Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md)
 November 2015 Paris attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/November_2015_Paris_attacks>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/paris-attacks-2015.json](../catalog/events/paris-attacks-2015.json).
+
+### url-7d1b4e1f
+
+1976 sterling crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1976_sterling_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/sterling-crisis-1976.json](../catalog/events/sterling-crisis-1976.json).
 
 ### url-7d1ddeb9
 
@@ -7130,6 +7504,12 @@ Free Forex & Currency Exchange Rate API - ExchangeRate Host. (n.d.). *exchangera
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-7ead9252
+
+?assistant=on. (n.d.). *lab.paritytrading.app*. <https://lab.paritytrading.app/?assistant=on>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-7eb600d1
 
@@ -7221,6 +7601,12 @@ Note: Linked in this repo as: Papers With Backtest replication.
 
 Cited in: [catalog/algorithms/fx-economic-momentum.json](../catalog/algorithms/fx-economic-momentum.json), [ALG-0007](algorithms/0007-fx-economic-momentum.md).
 
+### url-81c06e48
+
+International sanctions during the Russo-Ukrainian War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/International_sanctions_during_the_Russo-Ukrainian_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/russia-sectoral-sanctions-2014.json](../catalog/events/russia-sectoral-sanctions-2014.json).
+
 ### url-81e810cd
 
 Finviz groups and Why Is It Moving. (n.d.). *finviz.com*. <https://finviz.com/groups.ashx>. Accessed 2026-10-25. Verification: not checked.
@@ -7267,6 +7653,12 @@ No title recorded. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/researc
 
 Cited in: [catalog/algorithms/fx-commodity-terms-of-trade.json](../catalog/algorithms/fx-commodity-terms-of-trade.json), [ALG-0004](algorithms/0004-fx-commodity-terms-of-trade.md).
 
+### url-82d67e60
+
+2018 Italian general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2018_Italian_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/italy-election-2018.json](../catalog/events/italy-election-2018.json).
+
 ### url-83181dba
 
 Pilot - Stock Futures Forex Crypto - The Trading App and Platform Anyone Can Use. (n.d.). *pilottrading.co*. <https://pilottrading.co/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7287,6 +7679,12 @@ No title recorded. (n.d.). *parity.endyland.com*. <https://parity.endyland.com>.
 
 Cited in: [DEC-0051](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
 
+### url-83bb6c6d
+
+Dubai World. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Dubai_World>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/dubai-world-standstill-2009.json](../catalog/events/dubai-world-standstill-2009.json).
+
 ### url-8436b75b
 
 Edgewonk pricing. (n.d.). *edgewonk.com*. <https://edgewonk.com/pricing>. Accessed 2026-10-23. Verification: not checked.
@@ -7306,6 +7704,12 @@ The Modern Prop Trading Firm since 2015 | FTMO. (n.d.). *ftmo.com*. <https://ftm
 Note: Linked in this repo as: None.
 
 Cited in: [INT-0003](intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-84dc4669
+
+2024 French legislative election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2024_French_legislative_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/france-snap-election-2024.json](../catalog/events/france-snap-election-2024.json).
 
 ### url-85310524
 
@@ -7487,6 +7891,12 @@ MQL5 Signals. (n.d.). *mql5.com*. <https://www.mql5.com/en/signals>. Accessed 20
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-8b071788
+
+redirect. (n.d.). *vscode.dev*. <https://vscode.dev/redirect>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-8b0b2159
 
 European Union (n.d.). Regulation (EU) 2016/679. *eur-lex.europa.eu*. <https://eur-lex.europa.eu/eli/reg/2016/679/oj>. Accessed 2026-10-25. Verification: unchecked.
@@ -7550,6 +7960,20 @@ Cited in: [CMP-0014](competitors/0014-binance.md).
 real-time stocks. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/real-time-stock-pricing-data>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-8e488740
+
+2012-2013 Cypriot financial crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2012%E2%80%932013_Cypriot_financial_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/cyprus-deposit-levy-2013.json](../catalog/events/cyprus-deposit-levy-2013.json).
+
+### url-8e76d327
+
+Parity MCP server. (n.d.). *paritytrading.app*. <https://paritytrading.app/mcp>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0069.
+
+Cited in: [GDE-0006](guides/0006-connecting-ai-tools-to-parity-with-mcp.md).
 
 ### url-8e8b356a
 
@@ -7678,6 +8102,12 @@ Daily bar data in Forex do not match - QuantConnect.com. (n.d.). *quantconnect.c
 Note: Linked in this repo as: QuantConnect: daily bar data in Forex do not match, Dec 2024.
 
 Cited in: [RES-0003](research/0003-forums-and-practitioners.md).
+
+### url-934838c2
+
+Japanese yen. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Japanese_yen>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/japan-yen-intervention-2022.json](../catalog/events/japan-yen-intervention-2022.json).
 
 ### url-93f60550
 
@@ -7827,6 +8257,14 @@ OpenRouter OAuth PKCE. (n.d.). *openrouter.ai*. <https://openrouter.ai/docs/guid
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
 
+### url-99d6ebbc
+
+Parity OAuth consent page. (n.d.). *paritytrading.app*. <https://paritytrading.app/oauth/consent>. Accessed 2026-10-26. Verification: not checked.
+
+Note: Parity's own address after DEC-0069.
+
+Cited in: [DEC-0069](decisions/0069-parity-moves-to-paritytrading-app.md).
+
 ### url-9aaa265c
 
 LMAX Global trading. (n.d.). *lmax.com*. <https://www.lmax.com/global/trading/>. Accessed 2026-10-24. Verification: not checked.
@@ -7949,6 +8387,12 @@ Durable Objects pricing. (n.d.). *developers.cloudflare.com*. <https://developer
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-a21a688d
+
+Evergrande liquidity crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Evergrande_liquidity_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/evergrande-crisis-2021.json](../catalog/events/evergrande-crisis-2021.json).
+
 ### url-a24aa81b
 
 Coinbase status. (n.d.). *status.coinbase.com*. <https://status.coinbase.com>. Accessed 2026-10-24. Verification: not checked.
@@ -8053,6 +8497,12 @@ Darwinex Zero. (n.d.). *darwinexzero.com*. <https://www.darwinexzero.com/>. Acce
 
 Cited in: [CMP-0021](competitors/0021-darwinex.md).
 
+### url-a5c194f6
+
+October 27, 1997, mini-crash. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/October_27,_1997,_mini-crash>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/hong-kong-crash-1997.json](../catalog/events/hong-kong-crash-1997.json).
+
 ### url-a5cbdf1e
 
 St. Louis Fed Web Services: fred/series/observations. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/docs/api/fred/series_observations.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -8128,6 +8578,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 rate limits. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/introduction/rate-limits-overview>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-a791dfa4
+
+2002 Brazilian general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2002_Brazilian_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/brazil-election-2002.json](../catalog/events/brazil-election-2002.json).
 
 ### url-a8359cfb
 
@@ -8285,6 +8741,12 @@ Comtrade policy. (n.d.). *uncomtrade.org*. <https://uncomtrade.org/docs/policy-o
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-ae28dca7
+
+Sitemaps XML format. (n.d.). *sitemaps.org*. <https://www.sitemaps.org/protocol.html>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
+
 ### url-ae5b1b37
 
 Wikipedia, EBS. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Electronic_Broking_Services>. Accessed 2026-10-24. Verification: not checked.
@@ -8366,6 +8828,12 @@ Cited in: [CMP-0005](competitors/0005-ctrader.md).
 September 11 attacks. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/September_11_attacks>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/september-11-attacks-2001.json](../catalog/events/september-11-attacks-2001.json).
+
+### url-b14a352b
+
+Mt. Gox. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Mt._Gox>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/mt-gox-collapse-2014.json](../catalog/events/mt-gox-collapse-2014.json).
 
 ### url-b16f3589
 
@@ -8539,6 +9007,12 @@ LMAX Group home. (n.d.). *lmax.com*. <https://www.lmax.com/>. Accessed 2026-10-2
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-b761cffa
+
+claude. (n.d.). *paritytrading.app*. <https://paritytrading.app/connect/claude/>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-b78e3ad1
 
 Economic Calendar Snapshot of Latest Events | Trading Economics API Documentation. (n.d.). *docs.tradingeconomics.com*. <https://docs.tradingeconomics.com/economic_calendar/snapshot/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -8546,6 +9020,18 @@ Economic Calendar Snapshot of Latest Events | Trading Economics API Documentatio
 Note: Linked in this repo as: calendar docs.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-b7a514ed
+
+2001 Turkish economic crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2001_Turkish_economic_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/turkey-crisis-2001.json](../catalog/events/turkey-crisis-2001.json).
+
+### url-b821db22
+
+review-criteria.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/review-criteria.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-b8475b9d
 
@@ -8601,11 +9087,29 @@ fee schedule. (n.d.). *binance.com*. <https://www.binance.com/en/fee/schedule>. 
 
 Cited in: [CMP-0014](competitors/0014-binance.md).
 
+### url-bae37343
+
+Chinese stock bubble of 2007. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Chinese_stock_bubble_of_2007>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/china-stock-drop-2007.json](../catalog/events/china-stock-drop-2007.json).
+
 ### url-baf4f50a
 
 Databento dataset. (n.d.). *databento.com*. <https://databento.com/docs/datasets/glbx-mdp3.md>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-bafdce0d
+
+International sanctions during the Venezuelan crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/venezuela-oil-sanctions-2019.json](../catalog/events/venezuela-oil-sanctions-2019.json).
+
+### url-bb0e4823
+
+connector\_platform\_oauth\_redirect. (n.d.). *chatgpt.com*. <https://chatgpt.com/connector_platform_oauth_redirect>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-bb2fadee
 
@@ -8751,6 +9255,12 @@ historical limits. (n.d.). *interactivebrokers.github.io*. <https://interactiveb
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-c44d07c8
+
+mcp-server.md. (n.d.). *github.com*. <https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-c4e1f49d
 
 AI capabilities. (n.d.). *lseg.com*. <https://www.lseg.com/en/data-analytics/products/workspace/workspace-ai-capabilities>. Accessed 2026-10-24. Verification: not checked.
@@ -8768,6 +9278,12 @@ Cited in: [CMP-0019](competitors/0019-myfxbook.md), [RES-0020](research/0020-ver
 de Silva, Smith, So. (n.d.). *quantpedia.com*. <https://quantpedia.com/how-retail-losses-money-in-option-trading/>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-c5a6293e
+
+2007-2008 financial crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/bnp-paribas-funds-frozen-2007.json](../catalog/events/bnp-paribas-funds-frozen-2007.json).
 
 ### url-c5c4f9e9
 
@@ -8854,6 +9370,12 @@ Cited in: [CMP-0011](competitors/0011-oanda.md).
 Legal Information Institute (n.d.). 15 U.S.C. 8403. *law.cornell.edu*. <https://www.law.cornell.edu/uscode/text/15/8403>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-c8e506ed
+
+Russian financial crisis (2014-2017). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Russian_financial_crisis_(2014%E2%80%932017)>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/ruble-crisis-2014.json](../catalog/events/ruble-crisis-2014.json).
 
 ### url-c952ccf5
 
@@ -8965,6 +9487,12 @@ use cases. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/use-
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-ccce2123
+
+2021-2023 inflation surge. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/us-inflation-shock-2022.json](../catalog/events/us-inflation-shock-2022.json).
+
 ### url-ccf66f37
 
 No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://www.bls.gov/feed/bls_latest.rss>. Accessed 2026-10-21. Verification: not checked.
@@ -9024,6 +9552,12 @@ Cited in: [CMP-0003](competitors/0003-lseg-workspace.md).
 Interactive Brokers, Wikipedia. (n.d.). *en.wikipedia.org*. <https://en.wikipedia.org/wiki/Interactive_Brokers>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
+
+### url-cf4b8d16
+
+Terra (blockchain). (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Terra_(blockchain)>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/terra-luna-collapse-2022.json](../catalog/events/terra-luna-collapse-2022.json).
 
 ### url-cf72f580
 
@@ -9229,6 +9763,18 @@ Note: Linked in this repo as: TradingView trading terminal.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-d74ca887
+
+2021 Texas power crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2021_Texas_power_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/texas-freeze-2021.json](../catalog/events/texas-freeze-2021.json).
+
+### url-d778b3f9
+
+auth.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/plugins/build/auth.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
+
 ### url-d77d1338
 
 eToro CopyTrader. (n.d.). *etoro.com*. <https://www.etoro.com/copytrader/>. Accessed 2026-10-24. Verification: not checked.
@@ -9319,6 +9865,18 @@ MT5 for brokers. (n.d.). *metatrader5.com*. <https://www.metatrader5.com/en/brok
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-db7bf9f5
+
+2010 flash crash. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2010_flash_crash>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/flash-crash-2010.json](../catalog/events/flash-crash-2010.json).
+
+### url-dcc06cb1
+
+2024 Mexican general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2024_Mexican_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/mexico-election-2024.json](../catalog/events/mexico-election-2024.json).
+
 ### url-dcceb73b
 
 October 2024 Iranian strikes on Israel. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_on_Israel>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -9357,6 +9915,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-de92d636
+
+2024 Indian general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2024_Indian_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/india-election-2024.json](../catalog/events/india-election-2024.json).
+
 ### url-dec961b5
 
 derivatives guide. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/guides/derivatives/overview>. Accessed 2026-10-24. Verification: not checked.
@@ -9368,6 +9932,12 @@ Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 HBS Library. (n.d.). *library.hbs.edu*. <https://www.library.hbs.edu/databases-cases-and-more/datasets/factset-revere-supply-chain-relationships>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-e01ef720
+
+2019 United Kingdom general election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2019_United_Kingdom_general_election>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/uk-election-2019.json](../catalog/events/uk-election-2019.json).
 
 ### url-e0307c82
 
@@ -9441,11 +10011,23 @@ LMAX Global FAQs. (n.d.). *lmax.com*. <https://www.lmax.com/global/faqs/>. Acces
 
 Cited in: [CMP-0012](competitors/0012-lmax.md).
 
+### url-e2cebb0d
+
+Rusal. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Rusal>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/rusal-sanctions-2018.json](../catalog/events/rusal-sanctions-2018.json).
+
 ### url-e2d88183
 
 portfolio graphs. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/portfolio-graphs>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-e3036b25
+
+2008-2011 Icelandic financial crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2008%E2%80%932011_Icelandic_financial_crisis>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/iceland-banks-collapse-2008.json](../catalog/events/iceland-banks-collapse-2008.json).
 
 ### url-e319ebc8
 
@@ -9467,11 +10049,23 @@ Webull Corporation. (n.d.). *webullcorp.com*. <https://www.webullcorp.com/>. Acc
 
 Cited in: [CMP-0010](competitors/0010-webull.md).
 
+### url-e36983c4
+
+2010s oil glut. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2010s_oil_glut>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/opec-cut-2016.json](../catalog/events/opec-cut-2016.json).
+
 ### url-e37cf03c
 
 MCP server/discover. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/2026-07-28/server/discover>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-e3897a9e
+
+manage. (n.d.). *claude.ai*. <https://claude.ai/directory/manage>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-e4397e33
 
@@ -9496,6 +10090,12 @@ Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-cost
 Alpaca paper trading: API documentation. (n.d.). *Alpaca Markets*. <https://docs.alpaca.markets/docs/paper-trading>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpaca.json](../catalog/datasets/alpaca.json), [DAT-0001](datasets/0001-alpaca.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-e5d01b8f
+
+install-links.md. (n.d.). *cursor.com*. <https://cursor.com/docs/mcp/install-links.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-e5daf9e8
 
@@ -9627,6 +10227,12 @@ Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-l
 
 Cited in: [catalog/events/us-election-2020.json](../catalog/events/us-election-2020.json).
 
+### url-eaf8709f
+
+Bear Stearns. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Bear_Stearns>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/bear-stearns-rescue-2008.json](../catalog/events/bear-stearns-rescue-2008.json).
+
 ### url-eb6a0b68
 
 Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
@@ -9659,6 +10265,18 @@ Iraqi invasion of Kuwait. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Ir
 
 Cited in: [catalog/events/iraq-invades-kuwait-1990.json](../catalog/events/iraq-invades-kuwait-1990.json).
 
+### url-ecada088
+
+Second Nagorno-Karabakh War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/nagorno-karabakh-war-2020.json](../catalog/events/nagorno-karabakh-war-2020.json).
+
+### url-ecb2161d
+
+Wagner Group rebellion. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Wagner_Group_rebellion>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/wagner-rebellion-2023.json](../catalog/events/wagner-rebellion-2023.json).
+
 ### url-ed21317e
 
 St. Louis Fed Web Services: FRED® API Errors. (n.d.). *Federal Reserve Bank of St. Louis*. <https://fred.stlouisfed.org/docs/api/fred/errors.html>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -9672,6 +10290,12 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 funding. (n.d.). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/funding-accounts>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md), [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-ed71fd79
+
+publish.md. (n.d.). *claude.com*. <https://claude.com/docs/directory/publish.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-edae72e8
 
@@ -9753,11 +10377,23 @@ Market Replay. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader/>. 
 
 Cited in: [CMP-0005](competitors/0005-ctrader.md).
 
+### url-f15a36ec
+
+Bankruptcy of FTX. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Bankruptcy_of_FTX>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/ftx-collapse-2022.json](../catalog/events/ftx-collapse-2022.json).
+
 ### url-f165c281
 
 Robinhood Gold. (n.d.). *robinhood.com*. <https://robinhood.com/us/en/gold/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0009](competitors/0009-robinhood.md).
+
+### url-f17d4992
+
+mcp.md. (n.d.). *cursor.com*. <https://cursor.com/docs/mcp.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-f18557a0
 
@@ -9925,6 +10561,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-f9924197
+
+Samba effect. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Samba_effect>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/brazil-devaluation-1999.json](../catalog/events/brazil-devaluation-1999.json).
+
 ### url-f9ba5247
 
 No title recorded. (n.d.). *CoinGecko*. <https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -9948,6 +10590,12 @@ Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-comp
 Coinbase Advanced fees. (n.d.). *coinbase.com*. <https://www.coinbase.com/advanced-fees>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
+
+### url-fa52c890
+
+Taper tantrum. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Taper_tantrum>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/taper-tantrum-2013.json](../catalog/events/taper-tantrum-2013.json).
 
 ### url-fa6ceb8a
 
@@ -9999,6 +10647,12 @@ Note: Linked in this repo as: Numerai blog, Numerai Raises $30M Series C.
 
 Cited in: [catalog/algorithms/numerai-crowdsourced-ensemble.json](../catalog/algorithms/numerai-crowdsourced-ensemble.json), [ALG-0035](algorithms/0035-numerai-crowdsourced-ensemble.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-fc78e2d9
+
+2021 Suez Canal obstruction. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2021_Suez_Canal_obstruction>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/suez-canal-blocked-2021.json](../catalog/events/suez-canal-blocked-2021.json).
+
 ### url-fc8bf6e6
 
 Oil Shock of 1973-74. (n.d.). *Federal Reserve History*. <https://www.federalreservehistory.org/essays/oil-shock-of-1973-74>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -10028,6 +10682,12 @@ Cited in: [catalog/datasets/finnhub.json](../catalog/datasets/finnhub.json), [DA
 Massive pricing. (n.d.). *massive.com*. <https://massive.com/pricing>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
+### url-fd2cc8bf
+
+IndexNow documentation. (n.d.). *IndexNow*. <https://www.indexnow.org/documentation>. Accessed 2026-10-26. Verification: unverified.
+
+Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
 ### url-fe036392
 
@@ -10060,6 +10720,18 @@ Cited in: [RES-0006](research/0006-courses-and-trader-beliefs.md).
 Stripe API keys. (n.d.). *docs.stripe.com*. <https://docs.stripe.com/keys>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md).
+
+### url-feb140e4
+
+2014 Gaza War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2014_Gaza_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
+
+Cited in: [catalog/events/gaza-war-2014.json](../catalog/events/gaza-war-2014.json).
+
+### url-ff5a1dac
+
+submission.md. (n.d.). *claude.com*. <https://claude.com/docs/connectors/building/submission.md>. Accessed 2026-10-27. Verification: not checked.
+
+Cited in: [REF-0027](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md).
 
 ### url-fff47c57
 

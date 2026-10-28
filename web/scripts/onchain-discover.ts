@@ -45,7 +45,7 @@ async function batch(c: ChainDef, calls: { method: string; params: unknown[] }[]
     const part = calls.slice(i, i + 50).map((x) => ({ jsonrpc: "2.0", id: rid++, ...x }));
     for (let tries = 0; ; tries += 1) {
       try {
-        const res = await fetch(http(c), { method: "POST", headers: { "content-type": "application/json", "user-agent": "parity-discovery (contact@paritytrading.ai)" }, body: JSON.stringify(part) });
+        const res = await fetch(http(c), { method: "POST", headers: { "content-type": "application/json", "user-agent": "parity-discovery (contact@paritytrading.app)" }, body: JSON.stringify(part) });
         if (res.status === 429 || res.status >= 500) throw new Error(String(res.status));
         const body = (await res.json()) as { id: number; result?: string | unknown[] }[];
         const byId = new Map(body.map((r) => [r.id, r.result ?? null]));

@@ -1,0 +1,15 @@
+Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers LLC
+Statement,Data,Period,"January 1, 2024 - January 31, 2024"
+Account Information,Header,Field Name,Field Value
+Account Information,Data,Name,Example Person
+Account Information,Data,Account,U9876543
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,MTM P/L,Code
+Trades,Data,Order,Stocks,USD,AAPL,"2024-01-03, 10:00:00",2,100,101,-200,-1,201,0,2,O
+Trades,Data,Order,Stocks,USD,AAPL,"2024-01-03, 15:00:00",-1,110,111,110,-0.5,-100.5,9,1,C
+Trades,Data,Order,Stocks,USD,AAPL,"2024-01-04, 11:00:00",-1,95,96,95,-0.5,-100.5,-6,1,C
+Trades,Data,Order,Stocks,USD,AAPL,"2024-01-05, 09:00:00",-1,120,119,120,-0.6,-119.4,0,1,O
+Trades,Data,Order,Stocks,USD,AAPL,"2024-01-05, 14:00:00",1,115,114,-115,-0.6,119.4,3.8,1,C
+Trades,SubTotal,,Stocks,USD,AAPL,,0,,,0,-3.2,,6.8,5,
+Trades,Total,,Stocks,USD,,,,,,0,-3.2,,6.8,5,
+Open Positions,Header,DataDiscriminator,Asset Category,Currency,Symbol,Quantity

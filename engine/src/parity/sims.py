@@ -14,7 +14,8 @@ One cycle:
      histograms are kept, not the paths, so thousands of paths cost a few kilobytes.
   2. Sim World paths (`parity world paths`): fresh bootstrap paths of real weekly
      returns, added to running histograms of where each asset ended up.
-  3. The site files the deploy job also builds: `world export`, `scenario export`,
+  3. The site files the deploy job also builds: `world export`, `world stress` (Monte
+     Carlo stress tests, DEC-0066), `scenario export`,
      `terminal export` and `bots export`, into engine/output, so a broken export shows
      up here within the hour instead of at the next deploy.
   4. The competitor feedback collector (`parity profiles collect`), at most once a day:
@@ -201,7 +202,8 @@ def _cli(*argv: str) -> dict:
     return {}
 
 
-EXPORTS = [("world export", ("world", "export")), ("scenario export", ("scenario", "export")),
+EXPORTS = [("world export", ("world", "export")), ("world stress", ("world", "stress")),
+           ("scenario export", ("scenario", "export")),
            ("terminal export", ("terminal", "export")), ("bots export", ("bots", "export"))]
 
 

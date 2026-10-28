@@ -1,0 +1,26 @@
+{
+  "id": "red-sea-shipping-attacks-2023",
+  "name": "Ships avoid the Red Sea",
+  "date": "2023-12-18",
+  "type": "supply_chain_shock",
+  "regions": [
+    "middle_east",
+    "global"
+  ],
+  "actors": [
+    "yemen",
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "After Houthi attacks on ships, big shipping lines and BP paused Red Sea transits and the US announced a naval task force; freight rates rose sharply.",
+  "sources": [
+    {
+      "title": "Red Sea crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Red_Sea_crisis"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "bear-stearns-rescue-2008",
+  "name": "Bear Stearns rescued",
+  "date": "2008-03-14",
+  "type": "bank_run",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Bear Stearns ran out of cash as clients and lenders pulled out; the Fed backed an emergency loan and JPMorgan agreed to buy it two days later.",
+  "sources": [
+    {
+      "title": "Bear Stearns",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bear_Stearns"
+    }
+  ]
+}

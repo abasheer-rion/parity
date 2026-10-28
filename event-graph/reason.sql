@@ -683,7 +683,7 @@ $$;
 
 -- ───────────── driver betas: how a stock has moved with a driver, from prices only ─────────────
 -- Daily regression of the stock's move (vs its home benchmark; raw for a benchmark itself) on the driver's daily change
--- (% return for a price, points for odds). Asian/European closes come before a US-hours driver's close, so they are
+-- (% return for a price, points for odds and yields). Asian/European closes come before a US-hours driver's close, so they are
 -- matched to that driver's PREVIOUS session (not when the driver is itself an Asian/European stock). Only prices strictly before p_to count: the event day never measures itself.
 CREATE OR REPLACE FUNCTION driver_beta(p_sec bigint, p_drv bigint, p_from date, p_to date)
 RETURNS TABLE (beta numeric, tstat numeric, r2 numeric, n int) LANGUAGE sql STABLE AS $$
@@ -704,7 +704,8 @@ RETURNS TABLE (beta numeric, tstat numeric, r2 numeric, n int) LANGUAGE sql STAB
   -- Same-clock markets: the driver's change between the STOCK's consecutive sessions (odds trade on weekends, and the
   -- weekend is often when the news lands)
   dx0 AS (SELECT p.d, lead(p.d) OVER (ORDER BY p.d) AS next_d,
-                CASE WHEN ds.exchange = 'Polymarket' THEN p.close_adj - lag(p.close_adj) OVER (ORDER BY p.d)
+                CASE WHEN ds.exchange = 'Polymarket' OR ds.ticker IN ('^IRX', '^FVX', '^TNX')   -- odds and yields: points
+                     THEN p.close_adj - lag(p.close_adj) OVER (ORDER BY p.d)
                      ELSE 100 * (p.close_adj / lag(p.close_adj) OVER (ORDER BY p.d) - 1) END AS x
          FROM price_daily p JOIN security ds ON ds.id = p.security_id CROSS JOIN lagged
          WHERE p.security_id = p_drv AND p.d >= p_from AND p.d < p_to
@@ -745,7 +746,9 @@ BEGIN
   INSERT INTO link (src_id, dst_id, rel, attrs, evidence, confidence, source_id, valid_from, known_at)
   SELECT s.entity_id, p_driver_entity, 'priced_on',
          jsonb_build_object('beta', b.beta, 'tstat', b.tstat, 'r2', b.r2, 'n', b.n, 'window', v_from || '..' || p_to,
-                            'unit', CASE WHEN d.exchange = 'Polymarket' THEN '% per odds point' ELSE '% per 1% driver move' END),
+                            'unit', CASE WHEN d.exchange = 'Polymarket' THEN '% per odds point'
+                                         WHEN d.ticker IN ('^IRX', '^FVX', '^TNX') THEN '% per yield point'
+                                         ELSE '% per 1% driver move' END),
          'inferred_stats', least(1, abs(b.tstat) / 4)::real, p_doc, v_from,
          ((p_to - 1)::timestamp + interval '22 hours') AT TIME ZONE 'UTC'   -- last session's US close is in by then
   FROM security s CROSS JOIN security d CROSS JOIN LATERAL driver_beta(s.id, v_drv, v_from, p_to) b

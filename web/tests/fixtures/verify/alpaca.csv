@@ -1,0 +1,7 @@
+id,activity_type,transaction_time,type,price,qty,side,symbol,leaves_qty,order_id,cum_qty,order_status
+20240103100000000::a1,FILL,2024-01-03T10:00:00.000Z,fill,100,2,buy,AAPL,0,ord-0001,2,filled
+20240103150000000::a2,FILL,2024-01-03T15:00:00.000Z,fill,110,1,sell,AAPL,0,ord-0002,1,filled
+20240104110000000::a3,FILL,2024-01-04T11:00:00.000Z,fill,95,1,sell,AAPL,0,ord-0003,1,filled
+20240105090000000::a4,FILL,2024-01-05T09:00:00.000Z,fill,120,1,sell_short,AAPL,0,ord-0004,1,filled
+20240105140000000::a5,FILL,2024-01-05T14:00:00.000Z,fill,115,1,buy,AAPL,0,ord-0005,1,filled
+20240105200000000::a6,FEE,2024-01-05T20:00:00.000Z,,,,,,,,,

@@ -6,7 +6,8 @@ import type React from "react";
 import type { ReactNode } from "react";
 import { Icon } from "./icons";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "tertiary" | "outline" | "danger";
+/** "accent" is the Invicta blue call to action for a page's one next step (DEC-0077). */
+export type ButtonVariant = "primary" | "accent" | "secondary" | "ghost" | "tertiary" | "outline" | "danger";
 export type ButtonSize = "xs" | "sm" | "md" | "lg";
 
 interface Common { variant?: ButtonVariant; size?: ButtonSize; icon?: string; iconRight?: string; full?: boolean; loading?: boolean; className?: string; children?: ReactNode; title?: string }

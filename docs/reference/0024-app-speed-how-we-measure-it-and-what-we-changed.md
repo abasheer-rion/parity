@@ -53,7 +53,7 @@ Largest paint (LCP) in ms on the first and second visit, JS sent in KB (compress
 
 - **Code splitting.** Every product and research page is its own file, loaded when opened, started on hover and, for the usual next pages, a few seconds after load. The Terminal has its own entry and no longer downloads the dashboard (and the other way round). Workbench and Trade views other than the first load on demand. React and Supabase are their own files, so a deploy that changes only Parity's code leaves them cached.
 - **Docs only when shown.** The docs file (about 0.9 MB compressed) loaded on every product and research visit; now only the reader, the palette when opened and hover cards load it. The research home reads a small list of doc titles instead.
-- **Cache.** Built files have a content hash in their name. Signed in, the apps' built files are now kept a year (`private, max-age=31536000, immutable`) instead of checked on every visit, and the site's public built files the same, publicly. Pages and data are still checked each time.
+- **Cache.** Built files have a content hash in their name. Signed in, the apps' built files are now kept a year (`private, max-age=31536000, immutable`) instead of checked on every visit, and the site's public built files the same, publicly. Signed-in pages and data are still checked each time. Public pages are kept for up to 3 days since [DEC-0072](../decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md).
 - **Data.** The deploy writes each run three ways: the whole run, a `.lite.json` without the strategies' settings tests (about 40 percent smaller on the wire), and the settings tests alone, which only Workbench's Try settings reads. Until the next deploy writes them, the apps read the whole file as before. Each run is read once per page for five minutes, and the dashboard asks for it as soon as its code starts.
 - **First paint.** Web fonts no longer hold up the first paint, and each app paints its loading screen at once ([DEC-0059](../decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)).
 - **Desktop.** Windows show once drawn, the two most recent other sections open in the background, and the app's disk cache keeps built files between launches.
@@ -68,6 +68,7 @@ Largest paint (LCP) in ms on the first and second visit, JS sent in KB (compress
 ## Referenced by
 
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](../decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
+- [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](../decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
 - [REF-0025: Parity capacity and load test results](0025-parity-capacity-and-load-test-results.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

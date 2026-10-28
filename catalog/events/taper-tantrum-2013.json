@@ -1,0 +1,24 @@
+{
+  "id": "taper-tantrum-2013",
+  "name": "Taper tantrum",
+  "date": "2013-05-22",
+  "type": "rate_shock",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Fed chair Bernanke said bond buying could slow in coming meetings; the US 10-year yield rose about one percentage point within four months and money left emerging markets.",
+  "sources": [
+    {
+      "title": "Taper tantrum",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Taper_tantrum"
+    }
+  ]
+}

@@ -46,8 +46,7 @@ export function Start({ report }: { report: Report | null }) {
         <Title>Start here</Title>
         <p className="start-lead">
           Parity tests whether a trading strategy, mostly in currencies, can beat holding the US stock market. Every
-          idea goes through the same tests and every result is shown, including the failures. Research and education
-          only. Not investment advice.
+          idea goes through the same tests and every result is shown, including the failures.
         </p>
       </div>
 

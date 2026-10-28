@@ -44,9 +44,9 @@ api = f"https://api.supabase.com/v1/projects/{project}/config/auth"
 apply, settings, smtp = (os.environ[k] == "1" for k in ("APPLY", "SETTINGS", "SMTP"))
 
 # The production address. Every email link starts here ({{ .SiteURL }}).
-SITE_URL = os.environ.get("PARITY_SITE_URL", "https://parity.endyland.com")
-# Resend sends from the verified domain parity.endyland.com (LOG-0006).
-SMTP_FROM = os.environ.get("PARITY_SMTP_FROM", "no-reply@parity.endyland.com")
+SITE_URL = os.environ.get("PARITY_SITE_URL", "https://paritytrading.app")
+# Resend sends from the verified domain paritytrading.app (DEC-0069; before that parity.endyland.com, LOG-0006).
+SMTP_FROM = os.environ.get("PARITY_SMTP_FROM", "no-reply@paritytrading.app")
 
 subjects = json.loads((here / "dist" / "subjects.json").read_text())
 body = {}
@@ -57,10 +57,13 @@ for key, subject in subjects.items():
 if settings:
     body.update({
         "site_url": SITE_URL,
-        # Where sign-in may send people back to: the site, Sim World, Parity Trade, any endyland.com
-        # subdomain we add later, the old pages.dev address while it still works, and
-        # local development. Supabase falls back to the site URL for anything else.
+        # Where sign-in may send people back to: the site and every paritytrading.app app
+        # subdomain, the old endyland.com addresses while they redirect (DEC-0069), the
+        # pages.dev previews, and local development. Supabase falls back to the site URL
+        # for anything else.
         "uri_allow_list": ",".join([
+            "https://paritytrading.app/**",
+            "https://*.paritytrading.app/**",
             "https://parity.endyland.com/**",
             "https://sim.endyland.com/**",
             "https://trade.endyland.com/**",
@@ -81,7 +84,8 @@ if settings:
         "password_required_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789",
         "mailer_otp_exp": 3600,
         "mailer_otp_length": 6,
-        "smtp_max_frequency": 60,
+        "smtp_max_frequency": 30,                         # seconds between emails to one address (web/src/auth/fields.tsx)
+        "rate_limit_otp": 60,                             # code sign-ins per hour
     })
 
 if smtp:
@@ -91,8 +95,8 @@ if smtp:
         "smtp_user": "resend",
         "smtp_pass": "<from Keychain: resend-api-key>",
         "smtp_admin_email": SMTP_FROM,
-        "smtp_sender_name": "Parity",
-        "rate_limit_email_sent": 100,                     # per hour; Supabase starts custom SMTP at 30
+        "smtp_sender_name": "Parity Trading",
+        "rate_limit_email_sent": 200,                     # per hour; Supabase starts custom SMTP at 30
     })
 
 for k, v in body.items():

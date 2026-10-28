@@ -4,7 +4,7 @@
 // clicking a row lights up that currency's countries.
 import { useEffect, useMemo, useState } from "react";
 import { Button, Checkbox, Delta, KeyValues, LineChart, Segmented, fmt } from "../../ui";
-import type { Spec } from "../../lib/scenarios";
+import type { ScenarioEvent, Spec } from "../../lib/scenarios";
 import { humanize } from "../../lib/scenarios";
 import type { Point } from "../../lib/types";
 import {
@@ -12,7 +12,7 @@ import {
   signed, stepsFor, weeklyCorrelation, type Commodity, type Horizon, type StepSize, type WorldData,
 } from "../../lib/world";
 import { WindowSelect } from "./play/Controls";
-import { colorAt, crisisBands, dayMonthYear, monthYear, pct, tone, windowRange } from "./play/data";
+import { colorAt, crisisBands, CRISES, dayMonthYear, monthYear, pct, tone, windowRange } from "./play/data";
 import { Board, leaderOf, Stage, type BoardRow } from "./play/Stage";
 import { ratesForGap, usePlayback } from "./play/usePlayback";
 import { countryNames, MapLegend, WorldMap } from "./WorldMap";
@@ -23,8 +23,10 @@ const STEP_WORD: Record<StepSize, string> = { day: "day", week: "week", month: "
 const STEP_DAYS: Record<StepSize, number> = { day: 1.4, week: 7, month: 30.4 };
 export const IMPACT_SCALE: Record<Horizon, number> = { "1d": 1.5, "1w": 3, "1m": 5, "3m": 8 };
 
-export function MapView({ data, win, setWin, onScenario, onPaths, onPick }: {
+export function MapView({ data, win, setWin, onScenario, onPaths, onPick, events }: {
   data: WorldData; win: string; setWin: (w: string) => void;
+  /** Catalog events with names (the scenario file), for the country's event history. */
+  events?: ScenarioEvent[];
   onScenario: (patch: Partial<Spec>) => void; onPaths: (keys: string[]) => void;
   /** Told the currency of a country or row the person picks (the terminal links it). */
   onPick?: (code: string) => void;
@@ -148,7 +150,7 @@ export function MapView({ data, win, setWin, onScenario, onPaths, onPick }: {
       board={<Board rows={rows} name="Currency" headers={[measure === "carry" ? "Carry" : "Value", "Since start", "1 yr"]} picked={picked?.code} onPick={pick} playing={pb.playing}
         caption={<>Value: in US dollars (USD is an index). {measure === "carry" ? "Ranked by carry; only nine currencies have a rate." : measure === "step" ? `Ranked by this ${STEP_WORD[step]}'s move.` : "Ranked by the move since the start."} Click a row to light up its countries.</>} />}
       below={picked && repId ? (
-        <CountryPanel data={data} id={repId} name={picked.name ?? (picked.code === "EUR" ? "Euro area" : names[repId] ?? picked.code)} date={date} onClose={() => setPicked(null)}
+        <CountryPanel data={data} events={events} id={repId} name={picked.name ?? (picked.code === "EUR" ? "Euro area" : names[repId] ?? picked.code)} date={date} onClose={() => setPicked(null)}
           onScenario={() => {
             const regions = regionsOf(repId);
             onScenario({ regions: regions.slice(0, 1), actors: [actorOf(repId, names[repId] ?? "")] });
@@ -159,8 +161,38 @@ export function MapView({ data, win, setWin, onScenario, onPaths, onPick }: {
   );
 }
 
-function CountryPanel({ data, id, name, date, onClose, onScenario, onPaths }: {
-  data: WorldData; id: string; name: string; date: string; onClose: () => void; onScenario: () => void; onPaths: (code: string) => void;
+/** Correlation of weekly changes of two series over a set of frame positions. */
+function corrOver(data: WorldData, a: string, b: string, frames: number[]): number | null {
+  const sa = data.weekly.series[a], sb = data.weekly.series[b];
+  if (!sa || !sb) return null;
+  const xs: number[] = [], ys: number[] = [];
+  for (const i of frames) {
+    const a0 = sa[i - 1], a1 = sa[i], b0 = sb[i - 1], b1 = sb[i];
+    if (i < 1 || a0 == null || a1 == null || b0 == null || b1 == null || a0 <= 0 || b0 <= 0) continue;
+    xs.push(Math.log(a1 / a0)); ys.push(Math.log(b1 / b0));
+  }
+  const n = xs.length;
+  if (n < 26) return null;
+  const mx = xs.reduce((s, x) => s + x, 0) / n, my = ys.reduce((s, y) => s + y, 0) / n;
+  let sxy = 0, sxx = 0, syy = 0;
+  for (let i = 0; i < n; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) ** 2; syy += (ys[i] - my) ** 2; }
+  return sxx && syy ? sxy / Math.sqrt(sxx * syy) : null;
+}
+
+/** Which markets moved most with this currency in the replayed crises, against calmer weeks. */
+function contagion(data: WorldData, code: string): { key: string; crisis: number; calm: number; n: number }[] {
+  const dates = data.weekly.dates;
+  const inCrisis = new Set<number>();
+  for (const c of CRISES) { const [a, b] = windowRange(dates, c.id); for (let i = a; i <= b; i++) inCrisis.add(i); }
+  const crisis = [...inCrisis], calm = dates.map((_, i) => i).filter((i) => !inCrisis.has(i));
+  const others = data.assets.filter((x) => (x.group === "currencies" || ["oil", "stocks", "bonds10"].includes(x.key)) && x.key !== code).map((x) => x.key);
+  return others.map((k) => ({ key: k, crisis: corrOver(data, code, k, crisis), calm: corrOver(data, code, k, calm), n: crisis.length }))
+    .filter((r): r is { key: string; crisis: number; calm: number; n: number } => r.crisis != null && r.calm != null)
+    .sort((x, y) => Math.abs(y.crisis) - Math.abs(x.crisis)).slice(0, 6);
+}
+
+function CountryPanel({ data, events, id, name, date, onClose, onScenario, onPaths }: {
+  data: WorldData; events?: ScenarioEvent[]; id: string; name: string; date: string; onClose: () => void; onScenario: () => void; onPaths: (code: string) => void;
 }) {
   const code = currencyOf(id);
   const [years, setYears] = useState<"1" | "5" | "all">("5");
@@ -182,6 +214,11 @@ function CountryPanel({ data, id, name, date, onClose, onScenario, onPaths }: {
   const prod = producerOf(id);
   const note = code ? currencyNote(id, code) : null;
   const regions = regionsOf(id);
+  const actor = actorOf(id, name);
+  const linked = useMemo(() => (code ? contagion(data, code) : []), [data, code]);
+  const label = Object.fromEntries(data.assets.map((a) => [a.key, a.group === "currencies" ? `${a.key} ${a.label}` : a.label]));
+  const reactions = new Map(data.events.map((e) => [e.id, e.reactions]));
+  const history = (events ?? []).filter((e) => e.actors.includes(actor) || (code === "EUR" && e.actors.includes("eu"))).slice().reverse().slice(0, 8);
 
   return (
     <div className="sw2-card pb-country">
@@ -209,6 +246,18 @@ function CountryPanel({ data, id, name, date, onClose, onScenario, onPaths }: {
             <p className="muted small">"Moves with" is the correlation of weekly changes over the 3 years to this date: 1 together, 0 unrelated, below 0 opposite.</p>
             {prod.length > 0 && <p className="small">Big {prod.map((p) => COMMODITY_LABEL[p].toLowerCase()).join(" and ")} producer, so those prices can matter for its economy and currency.</p>}
             {regions.length > 0 && <p className="muted small">Region in the scenario list: {regions.map(humanize).join(", ")}.</p>}
+            {linked.length > 0 && (
+              <div className="pb-linked">
+                <span className="ui-field-label">Moved with {code} in the {CRISES.length} replayed crises (calmer weeks in brackets)</span>
+                <ul>{linked.map((r) => <li key={r.key}><span>{label[r.key] ?? r.key}</span><span><b className={tone(r.crisis)}>{r.crisis.toFixed(2)}</b> <span className="muted">({r.calm.toFixed(2)})</span></span></li>)}</ul>
+              </div>
+            )}
+            {history.length > 0 && (
+              <div className="pb-linked">
+                <span className="ui-field-label">Past events involving {name}, and {code} a month later</span>
+                <ul>{history.map((e) => { const r = reactions.get(e.id)?.[code]?.["1m"]; return <li key={e.id}><span>{e.date.slice(0, 4)} {e.name}</span><b className={tone(r)}>{r == null ? "n/a" : signed(r)}</b></li>; })}</ul>
+              </div>
+            )}
             <div className="sw2-links">
               <Button size="sm" icon="sparkle" onClick={onScenario}>Scenario here</Button>
               <Button size="sm" icon="graph" onClick={() => onPaths(code)}>Simulate {code}</Button>

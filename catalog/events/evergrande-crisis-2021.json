@@ -1,0 +1,25 @@
+{
+  "id": "evergrande-crisis-2021",
+  "name": "Evergrande fears hit markets",
+  "date": "2021-09-20",
+  "type": "financial_crisis",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china"
+  ],
+  "severity": 2,
+  "commodities": [
+    "metals"
+  ],
+  "description": "Fears that China Evergrande, the most indebted property developer in the world, would miss payments set off a global sell off.",
+  "sources": [
+    {
+      "title": "Evergrande liquidity crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Evergrande_liquidity_crisis"
+    }
+  ]
+}

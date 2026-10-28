@@ -87,6 +87,7 @@ The front page was plain HTML with no script, and the app's motion was limited t
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [DEC-0058: One token file for every app and a lint that blocks raw values](0058-one-token-file-for-every-app-and-a-lint-that-blocks-raw-values.md)
 - [DEC-0061: Every part meets WCAG 2.2 AA and CI fails on overlap or clipped numbers](0061-every-part-meets-wcag-2-2-aa-and-ci-fails-on-overlap-or-clipped-numbers.md)
+- [DEC-0067: One signature chart system for lessons, strategy pages and clips](0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 - [REF-0023: Motion system](../reference/0023-motion-system.md)
 <!-- backlinks:end -->

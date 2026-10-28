@@ -67,7 +67,7 @@
 .pa-screen > *, .pa-form > * { animation: pa-rise var(--dur-5) var(--pa-spring) both; animation-delay: var(--dur-4); }
 .pa-screen > .pa-title { animation-delay: var(--dur-1); }
 .pa-screen > .pa-lead { animation-delay: var(--dur-1); }
-.pa-screen > :is(.pa-steps, .pa-providers) { animation-delay: var(--dur-1); }
+.pa-screen > :is(.pa-providers) { animation-delay: var(--dur-1); }
 .pa-screen > .pa-form { animation: none; }
 .pa-form > :nth-child(1) { animation-delay: var(--dur-1); }
 .pa-form > :nth-child(2) { animation-delay: var(--dur-2); }
@@ -160,6 +160,8 @@
 .pa-btn { transition: background-color var(--dur-2), border-color var(--dur-2), color var(--dur-2), transform var(--dur-2) var(--pa-spring); }
 .pa-btn:active { transform: scale(.97); }
 .pa-btn[data-busy] { cursor: progress; }
+.pa-btn:disabled:not([data-busy]) { opacity: .5; cursor: not-allowed; }
+.pa-btn:disabled:not([data-busy]):active { transform: none; }
 .pa-btn[data-busy] .pa-btn-label { opacity: .75; }
 .pa-btn-label, .pa-spin { transition: opacity var(--dur-2), transform var(--dur-2) var(--ease); }
 
@@ -181,36 +183,7 @@
 .pa-switch a:hover { border-color: var(--text); }
 
 /* The welcome after signing up (pages/Welcome.tsx). */
-.pa-steps { display: flex; gap: 6px; margin-top: 20px; }
-.pa-steps span { width: 18px; height: 3px; border-radius: 99px; background: var(--line-2); transition: background-color var(--dur-3), width var(--dur-4) var(--pa-spring); }
-.pa-steps span.on { background: var(--text); }
-.pa-steps span.on:last-of-type { width: 28px; }
-.pa-screen > .pa-steps + .pa-form { margin-top: 24px; }
 .pa-copy { margin: 0; font-size: var(--pa-body); line-height: 1.6; color: var(--muted); }
-.pa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.pa-chip {
-  display: inline-flex; align-items: center; gap: 0; min-height: 38px; padding: 0 14px; border-radius: 999px;
-  border: 1px solid var(--line-2); background: color-mix(in srgb, var(--palette-white) 2%, transparent); color: var(--muted);
-  font: inherit; font-size: var(--pa-small); font-weight: 500; cursor: pointer;
-  transition: color var(--dur-2), background-color var(--dur-2), border-color var(--dur-2), gap var(--dur-3) var(--pa-spring), transform var(--dur-2) var(--pa-spring);
-}
-.pa-chip:hover { color: var(--text); border-color: var(--line-3); }
-.pa-chip:active { transform: scale(.96); }
-.pa-chip-tick { width: 0; opacity: 0; transform: scale(.4); transition: width var(--dur-3) var(--pa-spring), opacity var(--dur-2), transform var(--dur-4) var(--ease-spring); }
-.pa-chip[aria-pressed="true"] { gap: 6px; color: var(--text); border-color: color-mix(in srgb, var(--palette-white) 42%, transparent); background: var(--color-fill); }
-.pa-chip[aria-pressed="true"] .pa-chip-tick { width: 14px; opacity: 1; transform: none; }
-.pa-choice {
-  position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 44px 14px 16px; border-radius: 12px;
-  border: 1px solid var(--line-2); background: color-mix(in srgb, var(--palette-white) 2%, transparent); text-decoration: none;
-  transition: border-color var(--dur-2), background-color var(--dur-2), transform var(--dur-2) var(--pa-spring);
-}
-.pa-choice.first { border-color: var(--line-3); background: var(--color-hover); }
-.pa-choice:hover { border-color: color-mix(in srgb, var(--palette-white) 42%, transparent); background: color-mix(in srgb, var(--palette-white) 6%, transparent); }
-.pa-choice:active { transform: scale(.985); }
-.pa-choice-title { font-size: var(--pa-body); font-weight: 600; color: var(--text); }
-.pa-choice-text { font-size: var(--pa-small); line-height: 1.45; color: var(--muted); }
-.pa-choice-arr { position: absolute; right: 16px; top: 50%; margin-top: -8px; color: var(--muted); transition: transform var(--dur-2) var(--ease), color var(--dur-2); }
-.pa-choice:hover .pa-choice-arr { transform: translateX(3px); color: var(--text); }
 
 /* Messages. An empty live region stays in the page (so later messages are announced) but takes no room. */
 .pa-live:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -232,7 +205,7 @@
 .pa-foot .legal-links a:is(:hover, :focus-visible), .pa-foot .legal-links button:is(:hover, :focus-visible) { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 .pa-disclaimer { margin: 0; font-size: var(--type-xs); color: var(--faint); }
 
-.pa-shell :is(a, button, input):focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 8px; }
+.pa-shell :is(a, button, input):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 8px; }
 .pa-shell .pa-input:focus-visible { outline: none; border-radius: 10px; }
 
 @media (max-width: 520px) {
@@ -241,9 +214,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .pa-overlay, .pa-overlay.on, .pa-overlay.open, .pa-size[data-ready], .pa-screen > :not(.pa-title),
-  .pa-btn, .pa-btn-label, .pa-spin, .pa-done, .pa-chip, .pa-chip-tick, .pa-choice, .pa-choice-arr, .pa-steps span, .pa-input,
+  .pa-btn, .pa-btn-label, .pa-spin, .pa-done, .pa-input,
   .pa-leaving .pa-shell :is(.pa-main, .pa-corner) { transition: none !important; }
-  .pa-btn:active, .pa-chip:active, .pa-choice:active { transform: none; }
+  .pa-btn:active { transform: none; }
   .pa-leaving .pa-shell :is(.pa-main, .pa-corner) { filter: none; transform: none; }
   .pa-screen > *, .pa-form > *, .pa-error, .pa-notice { animation: none !important; }
   .pa-spin { animation-duration: var(--dur-pulse-slow); }

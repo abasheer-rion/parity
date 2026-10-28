@@ -52,7 +52,8 @@ test("the catalog lists every series and filters them", async ({ page, db }) => 
   await page.getByRole("searchbox", { name: "Search series, codes and tags" }).fill("xbt");
   await expect(page.getByRole("main")).toContainText("1 of 5 series");
   await page.getByRole("searchbox", { name: "Search series, codes and tags" }).fill("");
-  await page.getByRole("combobox", { name: "Display rights" }).selectOption("internal");
+  await page.getByRole("combobox", { name: "Display rights" }).click();
+  await page.getByRole("option", { name: "Team only" }).click();
   await expect(page.getByRole("main")).toContainText("1 of 5 series");
   expect(await badValues(page)).toEqual([]);
   expect(await sideways(page)).toBeLessThanOrEqual(1);

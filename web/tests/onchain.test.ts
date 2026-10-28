@@ -2,7 +2,8 @@
 // picking across chains, the registry, and the badge's plain words. No network.
 import { describe, expect, it } from "vitest";
 import { decodeSwap, livePool, onchain, ONCHAIN_SYMBOLS, poolPrice, poolQuote } from "../live/src/venues/onchain";
-import { CHAINS, proposePools, type PoolEntry, type Proposal } from "../live/src/venues/onchainRegistry";
+import { CHAINS, proposePools, withEnrolled, type EnrolledPool, type PoolEntry, type Proposal, type Registry } from "../live/src/venues/onchainRegistry";
+import ENROLLED from "../live/src/venues/onchain-enrolled.json";
 import { aggregate, weightedQuantile } from "../live/src/venues/parityPrice";
 import REG from "../live/src/venues/onchain-registry.json";
 import { sourceById } from "../src/lib/live/sources";
@@ -141,5 +142,35 @@ describe("badge words", () => {
     expect(badgeText({ ...base, refused: true })).toBe("Team only");
     expect(badgeText({ ...base, up: false, e2e: null, connecting: true })).toBe("Connecting");
     expect(secText(2140)).toBe("2.1 s");
+  });
+});
+
+describe("enrolled pools (DEC-0078)", () => {
+  const reg: Registry = { at: "x", minLiqUsd: 50_000, tokens: [{ key: "ethereum", sym: "ETH-USD", name: "Ethereum", rank: 2, pools: [pool()] }] };
+  const enrolled = (over: Partial<EnrolledPool> = {}): EnrolledPool => ({ ...pool({ pool: "0xABC0000000000000000000000000000000000001", dex: "Aerodrome CL100", liq: 900_000 }), token: "ethereum", series: "onchain.0xabc", enrolledAt: "2026-10-27T12:00:00Z", ...over });
+
+  it("joins an enrolled pool to its asset, without the list's own fields", () => {
+    const out = withEnrolled(reg, { at: "x", pools: [enrolled()] });
+    const pools = out.tokens[0].pools;
+    expect(pools).toHaveLength(2);
+    expect(pools[1].pool).toBe("0xabc0000000000000000000000000000000000001");
+    expect(pools[1]).not.toHaveProperty("series");
+    expect(pools[1]).not.toHaveProperty("token");
+    expect(reg.tokens[0].pools).toHaveLength(1); // input unchanged
+  });
+
+  it("keeps the depth bar, the per-chain cap, known assets and no duplicates", () => {
+    expect(withEnrolled(reg, { at: "x", pools: [enrolled({ liq: 10_000 })] }).tokens[0].pools).toHaveLength(1);
+    expect(withEnrolled(reg, { at: "x", pools: [enrolled({ token: "nope" })] }).tokens[0].pools).toHaveLength(1);
+    expect(withEnrolled(reg, { at: "x", pools: [enrolled({ pool: pool().pool })] }).tokens[0].pools).toHaveLength(1);
+    const many = [1, 2, 3, 4].map((i) => enrolled({ pool: `0x${String(i).padStart(40, "0")}` }));
+    expect(withEnrolled(reg, { at: "x", pools: many }).tokens[0].pools.filter((x) => x.chain === "base")).toHaveLength(3);
+    expect(withEnrolled(reg, null)).toBe(reg);
+  });
+
+  it("ships a list the worker can read", () => {
+    expect(Array.isArray((ENROLLED as { pools: unknown[] }).pools)).toBe(true);
+    const out = withEnrolled(REG as unknown as Registry, ENROLLED as { at: string | null; pools: EnrolledPool[] });
+    expect(out.tokens.length).toBe((REG as unknown as Registry).tokens.length);
   });
 });

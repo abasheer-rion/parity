@@ -1,0 +1,23 @@
+{
+  "id": "crypto-crash-may-2021",
+  "name": "Crypto crash after China's warning",
+  "date": "2021-05-19",
+  "type": "crypto_crash",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "china"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Bitcoin fell as much as 30% in a day after Chinese industry bodies warned against crypto, a week after Tesla stopped accepting bitcoin.",
+  "sources": [
+    {
+      "title": "Cryptocurrency bubble",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cryptocurrency_bubble"
+    }
+  ]
+}

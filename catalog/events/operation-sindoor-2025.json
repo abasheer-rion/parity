@@ -1,0 +1,23 @@
+{
+  "id": "operation-sindoor-2025",
+  "name": "India and Pakistan exchange strikes",
+  "date": "2025-05-07",
+  "type": "military_strike",
+  "regions": [
+    "south_asia"
+  ],
+  "actors": [
+    "india",
+    "pakistan"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "India struck targets in Pakistan after an attack in Kashmir, and four days of strikes followed until a ceasefire.",
+  "sources": [
+    {
+      "title": "Operation Sindoor",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Operation_Sindoor"
+    }
+  ]
+}

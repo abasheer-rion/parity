@@ -13,14 +13,11 @@ body { background: var(--color-canvas); }
 .main-col { background: radial-gradient(1100px 520px at 78% -220px, color-mix(in srgb, var(--color-accent) 7%, transparent), transparent 70%) no-repeat; }
 
 /* Type: Inter does the work; the serif is for a few big words only. */
-h1 { font-weight: 440; letter-spacing: -0.02em; }
+h1 { font-weight: var(--weight-title); letter-spacing: -0.025em; }
 .display { font-family: var(--font-serif); font-weight: 500; letter-spacing: 0.04em; font-feature-settings: normal; }
 h1.display { font-size: var(--type-7xl); line-height: 1.15; }
 
-/* Focus: always visible, never hidden by a glow. */
-:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm);
-}
+/* Focus: the ring is set once, in a11y.css (keyboard focus only, brand blue). */
 
 /* ---------- The frame: a sidebar and the page, no top bar ---------- */
 .side { border-right: 1px solid color-mix(in srgb, var(--palette-white) 4%, transparent); background: var(--color-bar); }
@@ -43,8 +40,6 @@ h1.display { font-size: var(--type-7xl); line-height: 1.15; }
 .menu-kbd { margin-left: auto; }
 
 .switcher { padding: 4px 10px 6px; }
-.seg { background: var(--color-hover); border-radius: 10px; }
-.seg a.on { background: var(--color-surface-overlay); border-color: var(--color-fill-strong); box-shadow: 0 1px 2px color-mix(in srgb, var(--palette-black) 50%, transparent); }
 .nav-wrap { gap: 14px; padding: 6px 0 32px; }
 .side-nav { gap: 2px; padding: 0 10px; }
 .side-item { height: 32px; font-size: var(--fs-14); color: var(--ds-text-secondary); }
@@ -172,4 +167,3 @@ h1.display { font-size: var(--type-7xl); line-height: 1.15; }
 .range-tabs button.on { border-bottom-color: var(--color-accent-text); }
 .ui-tabs-ind { background: var(--ind-color, var(--color-accent-text)); }
 .ui-popover { background: var(--color-surface-overlay); }
-.ui-seg-thumb { background: var(--color-surface-overlay); box-shadow: 0 0 0 1px var(--color-fill-strong), 0 1px 2px color-mix(in srgb, var(--palette-black) 50%, transparent); }

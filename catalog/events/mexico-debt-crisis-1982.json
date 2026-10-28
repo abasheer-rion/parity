@@ -1,0 +1,26 @@
+{
+  "id": "mexico-debt-crisis-1982",
+  "name": "Mexico says it cannot pay its debts",
+  "date": "1982-08-12",
+  "type": "sovereign_default",
+  "regions": [
+    "latin_america",
+    "north_america"
+  ],
+  "actors": [
+    "mexico",
+    "usa"
+  ],
+  "severity": 4,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Mexico told the US and the IMF it could no longer service its foreign debt, starting the Latin American debt crisis that hit US banks.",
+  "sources": [
+    {
+      "title": "Latin American debt crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Latin_American_debt_crisis"
+    }
+  ]
+}

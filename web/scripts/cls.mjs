@@ -29,7 +29,7 @@ const DEFAULT_PAGES = [
   "/research/#/catalog", "/research/#/signals", "/research/#/explore",
   "/research/#/data", "/research/#/sources", "/research/#/ui",
   // Parity Terminal
-  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/bots",
+  "/sim/", "/sim/#/macro", "/sim/#/fx", "/sim/#/commodities", "/sim/#/simlab", "/sim/#/world", "/sim/#/bots",
   // Parity Trade (DEC-0040)
   "/trade/", "/trade/#/markets", "/trade/#/watchlists", "/trade/#/screener", "/trade/#/portfolio", "/trade/#/orders", "/trade/#/alerts",
   "/trade/#/strategies", "/trade/#/settings",

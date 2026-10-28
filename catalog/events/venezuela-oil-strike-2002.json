@@ -1,0 +1,25 @@
+{
+  "id": "venezuela-oil-strike-2002",
+  "name": "Strike shuts Venezuela's oil industry",
+  "date": "2002-12-02",
+  "type": "oil_supply_shock",
+  "regions": [
+    "latin_america",
+    "global"
+  ],
+  "actors": [
+    "venezuela"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "A general strike against President Chavez halted most of Venezuela's oil output and exports for two months.",
+  "sources": [
+    {
+      "title": "Venezuelan general strike of 2002-2003",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Venezuelan_general_strike_of_2002%E2%80%932003"
+    }
+  ]
+}

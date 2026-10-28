@@ -10,7 +10,7 @@ body { margin: 0; background: var(--canvas); color: var(--text-body); font-famil
 a { color: var(--link); text-decoration: none; transition: color var(--dur-2) var(--ease-out); }
 a:hover { text-decoration: underline; }
 code, pre { font-family: var(--font-mono); font-size: var(--type-xs); }
-h1 { font-family: var(--font-display); font-size: var(--fs-2xl); line-height: 36px; font-weight: var(--fw-display); letter-spacing: -0.01em; color: var(--ds-text-title); margin: 0 0 4px; }
+h1 { font-family: var(--font-display); font-size: var(--type-title); line-height: var(--leading-tight); font-weight: var(--weight-title); letter-spacing: -0.025em; color: var(--ds-text-title); margin: 0 0 4px; }
 h2 { font-size: var(--fs-md); line-height: 24px; margin: 0; font-weight: var(--fw-medium); color: var(--ds-text-title); }
 main { max-width: 1120px; margin: 0 auto; padding: 24px; }
 footer { margin: 32px 0 8px; }
@@ -113,6 +113,8 @@ table.gauntlet th:not(:first-child) { text-align: left; }
 .filters label { display: inline-flex; gap: 6px; align-items: center; color: var(--text-2); font-size: var(--type-sm); }
 .filters input[type="search"] { flex: 1; min-width: 220px; }
 table.catalog td { vertical-align: top; }
+/* Short lists wrap, so the table fits the full-width page without cutting a number (DEC-0075). */
+table.catalog td.wrap-sm { white-space: normal; min-width: 120px; text-align: left; }
 table.catalog td.wrap, table td.wrap { white-space: normal; min-width: 200px; text-align: left; }
 /* Long identifiers without spaces (data source codes) break anywhere rather than widen the table. */
 table td.code-cell { min-width: 14ch; overflow-wrap: anywhere; }
@@ -284,10 +286,10 @@ kbd { font: var(--type-2xs) ui-monospace, SFMono-Regular, Menlo, monospace; bord
 }
 @media print { .doc-nav, .doc-rail, .pop, .palette-backdrop { display: none !important; } .reader { display: block; } }
 
-/* Accent and focus (Mercury: a grey focus ring, the accent only on primary and selection) */
+/* Accent and focus. The focus ring itself is set once, in a11y.css, for keyboard focus only.
+   A field you type into shows its focused border on click too; a select only from the keyboard. */
 select option { background: var(--surface-solid); color: var(--text-body); }
-:where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 1px; box-shadow: none; }
-input:focus, select:focus { outline: none; border-color: var(--ds-border-input-focused); }
+input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"], [type="reset"], [type="file"], [type="color"], [type="image"]):focus, select:focus-visible { outline: none; border-color: var(--ds-border-input-focused); }
 .chip.on, .tag.on { border-color: transparent; background: var(--accent-soft); color: var(--text); }
 .doc-nav li a.active { background: var(--ds-background-secondary); box-shadow: inset 2px 0 0 var(--accent); }
 .palette li.on a { background: var(--ds-background-secondary); }
@@ -303,6 +305,14 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .dotgrid { fill: var(--dot); }
 .icon { flex: none; }
 .frame { display: grid; grid-template-columns: var(--side-w) minmax(0, 1fr); min-height: 100vh; }
+/* Desktop app: the window's controls sit in a band at the top of the sidebar, which is at least
+   as wide as they need (desktop/electron/preload.js sets the variables). Hidden in a browser. */
+.desktop-band { display: none; }
+html[data-desktop-chrome] .desktop-band { display: block; flex: none; position: sticky; top: 0; z-index: 2; height: var(--desktop-chrome-h); background: inherit; }
+html[data-desktop-chrome] .frame:not(.railed) { grid-template-columns: max(var(--side-w), var(--desktop-chrome-left)) minmax(0, 1fr); }
+html[data-desktop-chrome="win32"] .topbar { padding-right: calc(24px + var(--desktop-chrome-right)); }
+html[data-desktop-chrome] .frame.railed .main-col { padding-top: var(--desktop-chrome-h); }
+@media (max-width: 860px) { html[data-desktop-chrome] .main-col { padding-top: var(--desktop-chrome-h); } }
 
 /* Sidebar */
 .side {
@@ -318,13 +328,12 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .org-name { font-size: var(--fs-14); line-height: 20px; font-weight: var(--fw-regular); color: var(--ds-text-title); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .org-badge { height: 20px; display: inline-flex; align-items: center; padding: 0 6px; border-radius: 6px; background: var(--ds-background-inverted); color: var(--ds-text-on-inverted); font-size: var(--fs-xs); line-height: 20px; letter-spacing: .2px; }
 .switcher { padding: 4px 8px; }
-.seg { --gap: 2px; display: flex; align-items: center; gap: var(--gap); height: 32px; padding: 2px; border-radius: 10px; background: var(--ds-background-secondary); }
-.seg a { position: relative; flex: auto; min-width: 0; height: 28px; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 2px; border: 1px solid transparent; border-radius: var(--radius-md); font-size: var(--fs-sm); line-height: 20px; letter-spacing: .1px; color: var(--text-2); text-decoration: none; transition: background-color var(--dur-2) ease-out, border-color var(--dur-2) ease-out, box-shadow var(--dur-2) ease-out, color var(--dur-2) ease-out; }
+.seg { --gap: var(--space-1); display: flex; align-items: stretch; gap: var(--gap); height: var(--control-h-md); padding: 0; border-radius: 0; background: none; box-shadow: inset 0 -1px 0 var(--color-border-strong); }
+.seg a { position: relative; flex: auto; min-width: 0; height: 100%; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 2px; border: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; font-size: var(--fs-sm); line-height: 20px; letter-spacing: .1px; color: var(--text-2); text-decoration: none; transition: background-color var(--dur-2) ease-out, border-color var(--dur-2) ease-out, box-shadow var(--dur-2) ease-out, color var(--dur-2) ease-out; }
 .seg a:hover { background: var(--hover); color: var(--text-body); text-decoration: none; }
-.seg a.on { background: var(--ds-background-default); border-color: var(--ds-border-input-emphasized); box-shadow: 0 1px 2px var(--color-border); color: var(--ds-text-title); }
+.seg a.on { background: none; color: var(--color-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
 .seg a .icon { opacity: 0; width: 13px; transition: opacity var(--dur-2) ease-out; }
 .seg a.on .icon { opacity: 1; }
-.seg a:not(.on) + a:not(.on)::before { content: ""; position: absolute; left: -2px; top: 50%; translate: 0 -50%; height: 12px; border-left: 1px solid var(--border-2); }
 
 .nav-wrap { display: flex; flex-direction: column; gap: 12px; padding: 8px 0 40px; }
 .side-nav { display: flex; flex-direction: column; gap: 6px; padding: 0 8px; }
@@ -402,11 +411,14 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .menu a:hover, .menu button:hover { background: var(--ds-background-secondary); color: var(--text); text-decoration: none; }
 
 /* Page */
-.main-col main { width: 100%; max-width: calc(var(--content-w) + 64px); margin: 0 auto; padding: 24px 32px 112px; }
-.main-col main.wide { max-width: 1440px; }
+/* App pages use the whole width beside the sidebar, with gutters that grow a little on big
+   screens (DEC-0075). Reading text keeps its own measure (.doc, .page-head p, .help). */
+.main-col main { width: 100%; max-width: none; margin: 0; padding: 24px clamp(16px, 2.4vw, 48px) 112px; }
 .chip-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 4px; background: var(--ds-background-secondary-high-contrast); color: var(--text-body); font-size: var(--fs-xs); letter-spacing: .2px; font-weight: var(--fw-regular); margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
 .title-row { display: flex; align-items: center; gap: 8px; padding-bottom: 16px; min-height: 40px; }
-.title-row h1 { margin: 0; }
+.title-row h1 { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+/* Phones: the page title steps down one size, and its buttons wrap under it if they must. */
+@media (max-width: 600px) { h1 { font-size: var(--type-6xl); } .title-row { flex-wrap: wrap; } }
 .title-actions { margin-left: auto; display: flex; gap: 8px; }
 .round-btn { display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; border: 0; padding: 0; background: var(--ds-background-secondary); color: var(--ds-icon-default); cursor: pointer; transition: background-color var(--dur-2) ease-out, color var(--dur-2) ease-out; }
 .round-btn:hover { background: var(--ds-background-secondary-hovered); color: var(--ds-icon-emphasized); text-decoration: none; }
@@ -430,7 +442,7 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .mcard.span2 { grid-column: span 2; }
 .mcard.span3 { grid-column: span 3; }
 .mcard-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.mcard-head h2 { font-size: var(--type-lg); font-weight: 500; color: var(--text); }
+.mcard-head h2 { font-size: var(--type-xl); font-weight: var(--weight-bold); color: var(--text); }
 .mcard-foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 12px; font-size: var(--type-md); }
 .big-num { font-size: var(--type-7xl); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 14px; font-variant-numeric: var(--num-variant); }
 .mid-num { font-size: var(--type-4xl); font-weight: 500; font-variant-numeric: var(--num-variant); }
@@ -459,9 +471,10 @@ button[type="submit"]:hover { background: var(--accent-hover); }
 .movers li a { color: var(--text); text-decoration: none; }
 td.good, span.good, strong.good, .mid-num.good { color: var(--good); }
 td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
-.seg-icons { display: inline-flex; border: 1px solid var(--border-2); border-radius: 9px; padding: 2px; gap: 2px; background: var(--hover); height: fit-content; }
-.seg-icons button { border: 0; padding: 5px 9px; border-radius: 7px; background: none; color: var(--muted); display: inline-grid; place-items: center; }
-.seg-icons button.on { background: var(--surface-solid); color: var(--text); box-shadow: 0 1px 2px color-mix(in srgb, var(--palette-black) 20%, transparent), inset 0 0 0 1px var(--border-2); }
+.seg-icons { display: inline-flex; gap: var(--space-1); height: fit-content; box-shadow: inset 0 -1px 0 var(--color-border-strong); }
+.seg-icons button { border: 0; padding: 6px 10px; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: none; color: var(--color-text-muted); display: inline-grid; place-items: center; cursor: pointer; }
+.seg-icons button:hover { color: var(--color-text); background: var(--color-hover); }
+.seg-icons button.on { color: var(--color-accent-text); box-shadow: inset 0 -2px 0 var(--color-accent); }
 .table-wrap.tall { max-height: 280px; overflow-y: auto; }
 
 /* Headline chart */
@@ -495,7 +508,7 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .crumbs { font-size: var(--type-sm); color: var(--text-2); margin-bottom: 6px; }
 .crumbs a { color: var(--text-2); }
 .rh-sec { margin-top: 36px; }
-.rh-sec h2 { font-size: var(--type-4xl); font-weight: 500; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.rh-sec h2 { font-size: var(--type-4xl); font-weight: var(--weight-bold); letter-spacing: -0.015em; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
 .rh-sec .lead { font-size: var(--type-xl); line-height: 1.6; color: var(--text); }
 .facts-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px 24px; margin-top: 18px; font-size: var(--type-lg); }
 .kstats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 24px; margin: 0; }
@@ -519,14 +532,15 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 
 /* Mercury tables */
 .mtable { width: 100%; border-collapse: collapse; font-size: var(--type-lg); }
-.mtable th { font-size: var(--type-sm); font-weight: 400; color: var(--muted); padding: 8px 16px 8px 0; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.mtable th { font-size: var(--type-xs); font-weight: var(--weight-bold); letter-spacing: .04em; text-transform: uppercase; color: var(--color-table-head-text); background: var(--color-table-head); padding: 10px 16px 10px 0; border-bottom: 1px solid var(--color-border-max); text-align: right; white-space: nowrap; }
 .mtable td { height: 48px; padding: 0 16px 0 0; border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: var(--num-variant); letter-spacing: -0.01em; white-space: nowrap; }
 .mtable .left { text-align: left; }
 .mtable th.sortable { cursor: pointer; }
-.mtable th.sorted { color: var(--text); }
+.mtable th.sorted { color: var(--color-accent-text); }
+.mtable th:first-child, .mtable td:first-child { padding-left: 12px; }
 .mtable th.sorted::after { content: " \2193"; }
 .mtable tr.row-link { cursor: pointer; }
-.mtable tr.row-link:hover td { background: var(--hover); }
+.mtable tbody tr:hover td { background: var(--color-row-hover); }
 .mtable tr.row-link:hover td:first-child { border-radius: 8px 0 0 8px; }
 .mtable tr.row-link:hover td:last-child { border-radius: 0 8px 8px 0; }
 .mtable td a { color: var(--text); }
@@ -545,12 +559,19 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .segmented { display: inline-flex; border: 1px solid var(--ds-border-input); border-radius: var(--radius-md); background: var(--ds-background-input); }
 .segmented button { border: 0; border-radius: 7px; padding: 4px 14px; background: none; color: var(--text-2); font: inherit; font-size: var(--fs-md); cursor: pointer; }
 .segmented button.on { background: var(--ds-background-default); color: var(--ds-text-emphasized); box-shadow: 0 0 0 1px var(--ds-border-input-emphasized), 0 1px 2px var(--color-border); }
+/* Settings > API keys (DEC-0071). */
+.api-keys, .api-key-log { list-style: none; padding: 0; margin: 0; }
+.api-keys .srow-help code, .api-scopes code { font-family: var(--font-mono); font-size: var(--fs-sm); }
+.api-key-log li { font-size: var(--fs-sm); color: var(--text-2); padding: 2px 0; }
+.api-scopes { border: 0; padding: 0; margin: 12px 0; display: flex; flex-direction: column; gap: 6px; }
+.api-secret { font-family: var(--font-mono); font-size: var(--fs-sm); padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--ds-background-input); white-space: pre-wrap; word-break: break-all; user-select: all; }
+.settings-note { font-size: var(--fs-sm); color: var(--text-2); margin: 8px 0; }
 .plain-list { list-style: none; padding: 0; margin: 0; }
 .plain-list li { padding: 2px 0; }
 
 /* Cards and tooltips in the new frame */
 .card { border-radius: 14px; padding: 20px 22px; }
-.card header h2 { font-size: var(--type-lg); }
+.card header h2 { font-size: var(--type-xl); font-weight: var(--weight-bold); }
 .tooltip { background: var(--color-surface-inverted); color: var(--palette-white); border: 0; border-radius: 8px; padding: 8px 14px; box-shadow: 0 0 2px color-mix(in srgb, var(--palette-white) 56%, transparent), 0 4px 14px color-mix(in srgb, var(--palette-black) 25%, transparent); font-size: var(--type-sm); }
 .tooltip .tt-title { color: color-mix(in srgb, var(--palette-white) 70%, transparent); }
 .tile { border-radius: 14px; }
@@ -675,6 +696,7 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 
 /* A one-line "what this page is for" under titles that lacked one. */
 .page-purpose { margin: 2px 0 16px; color: var(--text-2); max-width: 760px; }
+.page-disclaimer { margin: var(--space-6) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--border); color: var(--color-text-faint); font-size: var(--type-xs); }
 .verdict-line { margin: 4px 0 20px; color: var(--text-2); max-width: 640px; line-height: 1.6; }
 .doc-type-help { margin: -4px 0 10px; }
 .doc-type { cursor: help; border-bottom: 1px dotted var(--border); }
@@ -715,7 +737,6 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .pcard h2 { font-size: var(--type-lg); margin: 0; display: flex; align-items: center; gap: 8px; }
 .pcard-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
 .pcard-head a { font-size: var(--type-sm); }
-.phome { max-width: 1080px; }
 .phome-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin: 8px 0 20px; }
 .phome-hero h1 { font-size: var(--type-6xl); margin: 0; letter-spacing: -0.01em; }
 .phome-hero p { margin: 4px 0 0; }
@@ -724,6 +745,7 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .ask span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .phome-grid, .rgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .rgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width: 1680px) { .rgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .phome-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .pcard.span2 { grid-column: span 2; }
 .plist, .rlist { list-style: none; margin: 0; padding: 0; }
 .plist li a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--border); color: var(--text); text-decoration: none; }
@@ -741,7 +763,6 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .pcard .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .pcard.build { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .phome-foot { margin: 20px 0 8px; max-width: 760px; }
-.rhome { max-width: 1180px; }
 .rq { border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 14px; background: var(--surface-solid); }
 .rq h1 { font-size: var(--type-4xl); line-height: 1.35; margin: 6px 0 10px; max-width: 820px; }
 .rq .answer { margin: 0 0 14px; color: var(--text-2); }
@@ -824,3 +845,10 @@ td.bad, span.bad, strong.bad, .mid-num.bad { color: var(--bad); }
 .org-name .on-light { display: none; }
 :root[data-theme="light"] .org-name .on-dark { display: none; }
 :root[data-theme="light"] .org-name .on-light { display: block; }
+
+/* The strip at the top right of the product app that holds the setup ring (DEC-0075). It takes
+   no layout space, and main always keeps room for it, so nothing moves when the ring loads. */
+.main-col { position: relative; }
+.app-top { position: absolute; top: 12px; right: clamp(16px, 2.4vw, 48px); z-index: var(--z-nav); display: flex; align-items: center; gap: 8px; min-height: 32px; }
+.main-col:has(.app-top) > main { padding-top: 56px; }
+@media (max-width: 860px) { .app-top { top: 14px; right: 16px; } }

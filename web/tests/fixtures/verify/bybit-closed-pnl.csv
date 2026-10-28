@@ -1,0 +1,4 @@
+Contracts,Closing Direction,Qty,Entry Price,Exit Price,Closed P&L,Order No.,Trade Time(UTC+0)
+ETHUSDT,Sell,1,100,110,9,b-0002,2024-01-03 15:00:00
+ETHUSDT,Sell,1,100,95,-6,b-0003,2024-01-04 11:00:00
+ETHUSDT,Buy,1,120,115,3.8,b-0005,2024-01-05 14:00:00

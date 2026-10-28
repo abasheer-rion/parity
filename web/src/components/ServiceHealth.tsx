@@ -13,13 +13,19 @@ export function ServiceHealth({ className = "" }: { className?: string }) {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     let live = true;
+    let lastAt = 0;
     const load = () => {
+      lastAt = Date.now();
       loadHeartbeats().then((r) => { if (live) { setRows(r); setFailed(false); setNow(Date.now()); } }).catch(() => live && setFailed(true));
       loadHealthExtras().then((x) => { if (live) setExtras(healthExtras(x.fresh, x.steps, Date.now())); }).catch(() => live && setExtras([]));
     };
     load();
-    const t = window.setInterval(load, 60_000);
-    return () => { live = false; window.clearInterval(t); };
+    // Every five minutes, and only while the tab is visible (REF-0028): the line goes stale
+    // after two hours, and each open tab polling every minute added up to real egress.
+    const t = window.setInterval(() => { if (document.visibilityState === "visible") load(); }, 5 * 60_000);
+    const onShow = () => { if (document.visibilityState === "visible" && Date.now() - lastAt > 60_000) load(); };
+    document.addEventListener("visibilitychange", onShow);
+    return () => { live = false; window.clearInterval(t); document.removeEventListener("visibilitychange", onShow); };
   }, []);
   const extraLine = (
     <p className={`small muted service-health service-extra ${className}`} aria-hidden={extras?.length ? undefined : true}>

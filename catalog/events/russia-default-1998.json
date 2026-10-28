@@ -2,7 +2,7 @@
   "id": "russia-default-1998",
   "name": "Russia devalues and defaults",
   "date": "1998-08-17",
-  "type": "financial_crisis",
+  "type": "sovereign_default",
   "regions": [
     "russia_cis",
     "global"

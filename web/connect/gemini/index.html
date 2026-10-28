@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). Shared blocks: plugins/guides.ts. -->
+    <!--legal:head-->
+  </head>
+  <body>
+    <!--legal:header-->
+    <main id="main" tabindex="-1">
+      <article class="lg-wrap">
+        <!--guide:nav-->
+        <h1>Connect Gemini to Parity</h1>
+        <p class="lg-meta">Last checked against Google's docs: <time datetime="2026-10-26">26 October 2026</time></p>
+        <p class="gd-lead">Add Parity to Gemini CLI and Gemini can verify a trade record, one of our tested strategies or a seller's claim, and read tested strategies, market data and Academy lessons from your terminal. Gemini reads your Parity data as you and cannot change anything unless you allow it.</p>
+        <div class="gd-note">
+          <p><strong>Which Gemini?</strong> Gemini CLI, Google's Gemini in the terminal, connects to Parity today. We could not find a way in Google's docs to add your own server to the Gemini app on the web or phone. When Google adds one, this page will say how.</p>
+        </div>
+
+        <nav class="lg-toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#setup">Add Parity to Gemini CLI</a></li>
+            <li><a href="#signin">Sign in</a></li>
+            <li><a href="#tools">What Gemini can use</a></li>
+            <li><a href="#limits">What it can and cannot do</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#disconnect">Disconnect</a></li>
+            <li><a href="#trouble">If it does not work</a></li>
+          </ol>
+        </nav>
+
+        <!--guide:verify-->
+
+        <h2>The address</h2>
+        <div class="gd-copy">
+          <pre id="url" tabindex="0"><!--guide:url--></pre>
+          <button type="button" data-copy="url" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <!--guide:flow-->
+
+        <h2 id="setup">1. Add Parity to Gemini CLI</h2>
+        <p>Either run one command:</p>
+        <div class="gd-copy">
+          <pre id="cmd" tabindex="0">gemini mcp add --transport http parity <!--guide:url--></pre>
+          <button type="button" data-copy="cmd" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <p>Or add this to <code>~/.gemini/settings.json</code> (for every project) or <code>.gemini/settings.json</code> in one project. If the file already has <code>mcpServers</code>, add the <code>parity</code> entry inside it.</p>
+        <div class="gd-copy">
+          <pre id="json" tabindex="0">{
+  "mcpServers": {
+    "parity": { "httpUrl": "<!--guide:url-->" }
+  }
+}</pre>
+          <button type="button" data-copy="json" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <p>Use <code>httpUrl</code>, not <code>url</code>. In Gemini CLI, <code>url</code> means an older kind of server and will not connect.</p>
+
+        <h2 id="signin">2. Sign in</h2>
+        <ol class="gd-steps">
+          <li>Start Gemini CLI with <code>gemini</code>.</li>
+          <li>Type <code>/mcp auth parity</code>. Your browser opens Parity's log-in page.</li>
+          <li>Log in, check the Allow page names Gemini CLI and a localhost address, and choose <strong>Allow</strong>. The browser says you can close it.</li>
+          <li>Type <code>/mcp</code> to see Parity listed with its tools. Then ask, for example, "Use Parity to show the market series for EUR and its last value."</li>
+        </ol>
+        <figure class="gd-fig">
+          <svg viewBox="0 0 720 220" role="img" aria-labelledby="gem-t gem-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="gem-t">Signing in from Gemini CLI</title>
+            <desc id="gem-d">A drawing of a terminal. The person types /mcp auth parity. Gemini CLI says it is opening the browser to sign in, then that authentication succeeded. Then /mcp lists parity as ready with its tools.</desc>
+            <rect class="s-panel" x="40" y="16" width="640" height="188" rx="12" />
+            <circle class="s-tick" cx="62" cy="36" r="5" /><circle class="s-tick" cx="80" cy="36" r="5" /><circle class="s-tick" cx="98" cy="36" r="5" />
+            <text class="s-mono" x="64" y="76">&gt; /mcp auth parity</text>
+            <text class="s-muted" x="64" y="100">Opening your browser to sign in to parity...</text>
+            <text class="s-mono" x="64" y="124">Authentication with parity succeeded.</text>
+            <text class="s-mono" x="64" y="156">&gt; /mcp</text>
+            <circle class="s-ok" cx="70" cy="176" r="4" />
+            <text class="s-mono" x="82" y="180">parity - Ready (13 tools)</text>
+          </svg>
+          <figcaption>Drawn by Parity to show the steps. The exact wording in your terminal may differ.</figcaption>
+        </figure>
+        <!--guide:consent-->
+
+        <h2 id="tools">3. What Gemini can use</h2>
+        <!--guide:tools-->
+
+        <h2 id="limits">4. What it can and cannot do</h2>
+        <!--guide:limits-->
+
+        <h2 id="privacy">5. Privacy</h2>
+        <!--guide:privacy-->
+        <p>Gemini CLI keeps its sign-in for Parity on your computer, in <code>~/.gemini/</code>.</p>
+
+        <h2 id="disconnect">6. Disconnect</h2>
+        <ul>
+          <li><strong>From Parity:</strong> open <a href="/connect/">Connect your AI</a>, find Gemini CLI under "Your connected apps" and choose <strong>Disconnect</strong>. Its next call fails and it has to sign in again.</li>
+          <li><strong>From Gemini CLI:</strong> run <code>gemini mcp remove parity</code>, or delete the <code>parity</code> entry from <code>settings.json</code>.</li>
+          <li>To stop changes but stay connected, untick "May make changes" for Gemini CLI on <a href="/connect/">Connect your AI</a>.</li>
+        </ul>
+
+        <h2 id="trouble">7. If it does not work</h2>
+        <ul>
+          <li><strong>Parity shows as disconnected.</strong> Run <code>/mcp auth parity</code> again. Sign-ins expire.</li>
+          <li><strong>It never asks you to sign in.</strong> Check the entry says <code>httpUrl</code> and the address ends in <code>/mcp</code>.</li>
+          <li><strong>The browser does not open.</strong> Gemini CLI prints the sign-in link. Copy it into a browser on the same computer.</li>
+          <li><strong>"This request has expired or is not valid".</strong> The sign-in link is single use. Run <code>/mcp auth parity</code> again.</li>
+          <li><strong>"Too many calls".</strong> You reached 30 calls in a minute or 1000 in a day. Wait and ask again.</li>
+          <li>Still stuck? Email <a href="mailto:contact@paritytrading.app">contact@paritytrading.app</a> with the time it failed and what Gemini CLI printed.</li>
+        </ul>
+
+        <h2>Use your own model inside Parity</h2>
+        <!--guide:byom-->
+      </article>
+    </main>
+    <!--legal:footer-->
+  </body>
+</html>

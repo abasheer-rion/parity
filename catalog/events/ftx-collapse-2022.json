@@ -1,0 +1,23 @@
+{
+  "id": "ftx-collapse-2022",
+  "name": "FTX halts withdrawals",
+  "date": "2022-11-08",
+  "type": "crypto_crash",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "The FTX exchange stopped withdrawals after a run by customers and filed for bankruptcy three days later; its founder was later convicted of fraud.",
+  "sources": [
+    {
+      "title": "Bankruptcy of FTX",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX"
+    }
+  ]
+}

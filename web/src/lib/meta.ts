@@ -25,7 +25,7 @@ export const THEME_COLOR: string = RAW["color-canvas"];
 
 /**
  * The domain whose subdomains share the sign-in cookie: parity.endyland.com gives
- * endyland.com, and an apex such as paritytrading.ai gives itself.
+ * endyland.com, and an apex such as paritytrading.app gives itself.
  */
 export function parentDomain(host: string): string {
   const parts = host.toLowerCase().split(".");
@@ -33,6 +33,44 @@ export function parentDomain(host: string): string {
 }
 
 export const SITE_DOMAIN: string = parentDomain(HOST);
+
+/**
+ * Domains Parity answered on before, still served while their addresses redirect to the
+ * new one (DEC-0071): each with its main host, where the front page and /app/ lived.
+ */
+export interface LegacyDomain { domain: string; main: string; until?: string }
+export const LEGACY_DOMAINS: LegacyDomain[] = (site as { legacy?: LegacyDomain[] }).legacy ?? [];
+
+/** Every domain whose hosts are Parity's: the current one first, then the old ones. */
+export const SITE_DOMAINS: string[] = [SITE_DOMAIN, ...LEGACY_DOMAINS.map((l) => l.domain)];
+
+/** The Parity domain a host belongs to (the current or an old one), or null for any other host. */
+export function siteDomainOf(hostname: string): string | null {
+  const host = hostname.toLowerCase();
+  return SITE_DOMAINS.find((d) => host === d || host.endsWith(`.${d}`)) ?? null;
+}
+
+/** The main host on a Parity domain: the site's own host, or an old domain's main host. */
+export function mainHostFor(domain: string): string {
+  return LEGACY_DOMAINS.find((l) => l.domain === domain)?.main ?? HOST;
+}
+
+/**
+ * The addresses of the main site and each full-screen app, on the domain of the page that
+ * asks. A page on an old domain keeps its links there, so its session cookie still applies
+ * until the redirects send it over; anywhere else gets the site's own addresses.
+ */
+export function originsFor(hostname: string) {
+  const domain = siteDomainOf(hostname) ?? SITE_DOMAIN;
+  return {
+    main: `https://${mainHostFor(domain)}`,
+    sim: `https://sim.${domain}`,
+    trade: `https://trade.${domain}`,
+    academy: `https://academy.${domain}`,
+    lab: `https://lab.${domain}`,
+  };
+}
+
 /** Parity Terminal's own address (DEC-0020, DEC-0024). */
 export const SIM_ORIGIN = `https://sim.${SITE_DOMAIN}`;
 /** Parity Trade's own address (DEC-0040). */
@@ -69,6 +107,7 @@ export const OG_CARDS: Record<string, OgCard> = {
   lab: { kicker: "Parity Workbench", title: "Try settings, what if, compare and search", sub: "Strategy settings, past events, side by side tables, the strategy search and the Edge Lab checklist in one full-screen tool." },
   strategy: { kicker: "Parity strategy", title: "A strategy, tested against the S&P 500", sub: "How it did, where it fails and whether the result could be luck." },
   login: { kicker: "Parity", title: "Log in to Parity", sub: "Check trading records and follow tested strategies." },
+  connect: { kicker: "Parity", title: "Connect your AI to Parity", sub: "Use Parity from Claude, ChatGPT, Gemini and other AI apps. Read only unless you allow changes." },
   legal: { kicker: "Parity legal", title: "Legal", sub: "Privacy, terms, cookies, accessibility and risk." },
   badge: { kicker: "Parity Verify", title: "A checked trading record", sub: "What Parity checked in the file, and what it could not." },
 };
@@ -116,6 +155,23 @@ export interface PageMeta {
 
 export const PRIVATE = "noindex, nofollow";
 
+/** The tags for one AI app guide under /connect/<app>/, with a breadcrumb and an article. */
+const GUIDES_PUBLISHED = "2026-10-27";
+function guidePage(app: string, title: string, description: string): PageMeta {
+  const path = `/connect/${app}/`;
+  return {
+    title: `${title.replace(/ to Parity$/, "")} · Parity`, description, path, image: "connect", type: "article",
+    ld: [
+      { "@type": "TechArticle", "@id": `${abs(path)}#article`, headline: title, description, url: abs(path), inLanguage: "en", datePublished: GUIDES_PUBLISHED, dateModified: GUIDES_PUBLISHED, author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID } },
+      { "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Parity", item: abs("/") },
+        { "@type": "ListItem", position: 2, name: "Connect your AI", item: abs("/connect/") },
+        { "@type": "ListItem", position: 3, name: title, item: abs(path) },
+      ] },
+    ],
+  };
+}
+
 /** One entry per built HTML file, keyed by its path under web/. */
 export const PAGES: Record<string, PageMeta> = {
   "index.html": {
@@ -129,7 +185,11 @@ export const PAGES: Record<string, PageMeta> = {
   "verify/index.html": { title: "Confirm · Parity", description: "Confirming your email address for Parity.", path: "/verify/", image: "login" },
   // AI apps connecting to Parity (DEC-0051): the how-to and connected apps, the consent page
   // Supabase Auth's OAuth server sends people to, and the OpenRouter sign-in return page.
-  "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "login", robots: PRIVATE },
+  "connect/index.html": { title: "Connect your AI · Parity", description: "Add Parity to Claude, ChatGPT, Gemini CLI, Cursor and other AI apps, and manage the apps you connected.", path: "/connect/", image: "connect" },
+  // One how-to page per AI app (DEC-0051), plain HTML so it reads without the app's script.
+  "connect/claude/index.html": guidePage("claude", "Connect Claude to Parity", "Add Parity to Claude on the web, Claude Desktop and Claude Code: setup steps, the tools Claude can use, privacy, how to disconnect and fixes for common issues."),
+  "connect/chatgpt/index.html": guidePage("chatgpt", "Connect ChatGPT to Parity", "Add Parity to ChatGPT as an app with developer mode: setup steps, the tools ChatGPT can use, privacy, how to disconnect and fixes for common problems."),
+  "connect/gemini/index.html": guidePage("gemini", "Connect Gemini to Parity", "Add Parity to Gemini CLI: the settings to paste, signing in, the tools Gemini can use, privacy, how to disconnect and fixes for common problems."),
   "oauth/consent/index.html": { title: "Allow an AI app · Parity", description: "Choose whether an AI app may use Parity as you.", path: "/oauth/consent/", image: "login", robots: PRIVATE },
   "oauth/openrouter/index.html": { title: "Connecting OpenRouter · Parity", description: "Finishing the connection to your OpenRouter account.", path: "/oauth/openrouter/", image: "login", robots: PRIVATE },
   // Every /v/<id> serves this page; functions/v/[id].ts swaps in that badge's own tags.
@@ -139,6 +199,7 @@ export const PAGES: Record<string, PageMeta> = {
   },
   // Served by Cloudflare Pages, with status 404, at any address that does not exist (DEC-0055).
   "404.html": { title: "Page not found · Parity", description: "There is no Parity page at this address.", image: "default", robots: PRIVATE },
+  "developers/index.html": { title: "Parity API · Developers", description: "Call the Parity API from your own programs: tested strategies, market data, news impact and Verify checks. Keys, scopes, limits, errors and examples.", path: "/developers/", image: "legal" },
   "legal/index.html": { title: "Legal · Parity", description: "Parity's privacy policy, terms, cookie policy, accessibility statement, risk notice and regulatory status.", path: "/legal/", image: "legal" },
   "legal/privacy/index.html": { title: "Privacy policy · Parity", description: "What Parity collects, why, how long we keep it, who processes it, and your rights.", path: "/legal/privacy/", image: "legal" },
   "legal/terms/index.html": { title: "Terms of service · Parity", description: "The terms for using Parity, a research and education service. Not investment advice, not a broker.", path: "/legal/terms/", image: "legal" },
@@ -146,6 +207,8 @@ export const PAGES: Record<string, PageMeta> = {
   "legal/accessibility/index.html": { title: "Accessibility statement · Parity", description: "Parity's accessibility target, the known gaps, and how to report a barrier.", path: "/legal/accessibility/", image: "legal" },
   "legal/risk/index.html": { title: "Risk notice · Parity", description: "Why backtests and simulations can mislead, and the risks of crypto, perpetual futures, leverage and ETFs.", path: "/legal/risk/", image: "legal" },
   "legal/regulatory/index.html": { title: "Regulatory status and your rights · Parity", description: "What Parity is and is not, the laws and exemptions it relies on, your rights, and where to complain.", path: "/legal/regulatory/", image: "legal" },
+  // The desktop app's download page (DEC-0072): links that always fetch the newest release.
+  "download/index.html": { title: "Download Parity for Mac and Windows · Parity", description: "Parity's desktop app for Mac (Apple silicon and Intel) and Windows: the newest version, its size, checksums and system requirements.", path: "/download/", image: "default" },
   // The signed-in apps. Their tags change with each page (ROUTES_META); these are what a
   // link preview shows, since the server answers a signed-out visitor with a redirect.
   "app/index.html": { title: "Parity", description: OG_CARDS.app.sub, path: "/app/", image: "app", robots: PRIVATE, manifest: "/manifest.webmanifest" },
@@ -259,13 +322,14 @@ export const ROUTES_META: Record<string, RouteMeta> = {
   registry: R("Data catalog", "Every data source and series: display rights, status, health, where it is used and the tests run when it arrived.", "research"),
   latency: R("Latency", "How old each source is, how long each job takes and how fast pages load their data.", "research"),
   edges: R("Edge Lab", "Seven checks for a backtest, each with a mistake from our own research.", "research"),
+  pairs: R("Pairs", "Pairs trading recipes tested after costs, with each pair's gap, hedge ratio, p-value and half-life over time.", "research"),
   competitors: R("Competitors", "What public posts praise and complain about in 22 trading products, counted by theme, and what Parity takes from each.", "research"),
   private: R("Private markets", "Property index smoothing, Form D counts, BDC loan marks and credit data from free sources.", "research"),
 };
 
 /** Parity Terminal's workspaces and its old Sim World tabs (src/terminal/layout.ts, functions.ts). */
 export const SIM_TABS: Record<string, string> = {
-  overview: "Overview", macro: "Macro", fx: "FX", commodities: "Commodities", simlab: "Sim lab",
+  overview: "Overview", macro: "Macro", fx: "FX", commodities: "Commodities", simlab: "Sim lab", world: "World",
   map: "World map", crises: "Crises", scenario: "Scenario", paths: "Paths", stress: "Stress test", race: "Race",
   rates: "Rates", connections: "Connections", stocks: "Stocks", bots: "Bot Battle",
 };

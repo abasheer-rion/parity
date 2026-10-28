@@ -1,4 +1,4 @@
-// Parity Terminal's entry (/sim/, sim.endyland.com, DEC-0023), full screen. Its own bundle:
+// Parity Terminal's entry (/sim/, sim.paritytrading.app, DEC-0023), full screen. Its own bundle:
 // it never downloads the dashboard (REF-0024).
 import { setLiveApp } from "../lib/live/client";
 import { StrictMode } from "react";

@@ -1,8 +1,9 @@
 // The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, search,
 // a segmented switch between areas, nav with nested children for the active item,
-// bookmarks, the run picker and the account menu) and the page. There is no top bar:
-// on phones a small floating button opens the sidebar (DEC-0021).
-import { useEffect, useState, type ReactNode } from "react";
+// bookmarks, the run picker and the account menu) and the page. On the product side a
+// slim strip at the top right holds the setup ring (DEC-0075); on phones a small
+// floating button opens the sidebar (DEC-0021).
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
@@ -11,6 +12,10 @@ import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 import { IconButton } from "../ui";
+import { StatusBanner } from "./StatusBanner";
+
+// The setup ring at the top right of the product app (DEC-0075). Loaded after the page.
+const SetupButton = lazy(() => import("../onboarding/SetupButton").then((m) => ({ default: m.SetupButton })));
 
 interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
 
@@ -77,6 +82,7 @@ const RESEARCH: NavItem[] = [
   // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
   { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
+  { href: "#/pairs", label: "Pairs", icon: "link", routes: ["pairs"] },
   { href: "#/competitors", label: "Competitors", icon: "compare", routes: ["competitors"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
@@ -112,6 +118,9 @@ const RESEARCH: NavItem[] = [
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
+    { id: "personalization", label: "Personalization" },
+    { id: "api-keys", label: "API keys" },
+    { id: "trade-profile", label: "Trade profile" },
   ] },
 ];
 
@@ -167,6 +176,8 @@ export function Shell({
     <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
       <SkipLink />
       <aside className="side" id="side" data-lenis-prevent>
+        {/* The desktop app's window controls sit here (desktop/electron/preload.js); hidden in a browser. */}
+        <div className="desktop-band" data-desktop-header aria-hidden="true" />
         <div className="org">
           <a className="org-button" href="#/">
             <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>
@@ -268,7 +279,10 @@ export function Shell({
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
         <button className="menu-fab" aria-label="Open menu" aria-controls="side" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" size={18} /></button>
-        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}>{children}</main>
+        {!research && !full && (
+          <div className="app-top">{(route === "" || route === "home") && <Suspense fallback={null}><SetupButton /></Suspense>}</div>
+        )}
+        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}><StatusBanner />{children}</main>
       </div>
     </div>
   );

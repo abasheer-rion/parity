@@ -115,7 +115,7 @@ describe("webhook", () => {
 });
 
 describe("endpoints with the flag off", () => {
-  const post = (path: string) => new Request(`https://parity.endyland.com${path}`, { method: "POST", body: "{}" });
+  const post = (path: string) => new Request(`https://paritytrading.app${path}`, { method: "POST", body: "{}" });
   it("both answer 404 as if they did not exist", async () => {
     expect((await webhookFn({ request: post("/api/payments/webhook"), env: {} })).status).toBe(404);
     expect((await checkoutFn({ request: post("/api/payments/checkout"), env: { PAYMENTS_ENABLED: "off", STRIPE_SECRET_KEY: "sk_test_x" } })).status).toBe(404);
@@ -129,7 +129,7 @@ describe("endpoints with the flag off", () => {
 });
 
 describe("checkout", () => {
-  const input = { lookupKey: "pro_monthly", userId: USER, email: "a@example.com", origin: "https://parity.endyland.com" };
+  const input = { lookupKey: "pro_monthly", userId: USER, email: "a@example.com", origin: "https://paritytrading.app" };
 
   it("refuses a live key before any request", async () => {
     const fetcher = vi.fn();

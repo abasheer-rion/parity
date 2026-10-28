@@ -335,7 +335,7 @@ export class LiveHub {
     let ws: WorkerSocket | null = null;
     try {
       await a.prepare?.();
-      const res = await fetch(a.url.replace(/^ws/, "http"), { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.ai)" } });
+      const res = await fetch(a.url.replace(/^ws/, "http"), { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.app)" } });
       ws = (res as Response & { webSocket?: WorkerSocket }).webSocket ?? null;
       if (!ws) throw new Error(`upstream answered ${res.status}`);
     } catch (e) {

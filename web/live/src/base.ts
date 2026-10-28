@@ -143,7 +143,7 @@ export const pairOf = (base: string, quote: string) => `${base}-${quote}`.toUppe
 
 /** JSON from a public endpoint, or an error that names the status (the fan-out backs off on 429). */
 export async function getJson<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(url, { ...init, headers: { Accept: "application/json", "User-Agent": "parity-live (contact@paritytrading.ai)", ...(init?.headers ?? {}) } });
+  const res = await fetch(url, { ...init, headers: { Accept: "application/json", "User-Agent": "parity-live (contact@paritytrading.app)", ...(init?.headers ?? {}) } });
   if (!res.ok) throw new Error(`${new URL(url).hostname} ${res.status}`);
   return (await res.json()) as T;
 }

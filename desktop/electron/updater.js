@@ -1,18 +1,21 @@
 // New versions of the app itself (DEC-0049). Pages load live, so this is only for changes to
 // the app around them.
 //
-// The feed is public: https://parity.endyland.com/desktop/updates/, which serves the newest
-// published desktop release (web/src/lib/desktopFeed.ts). The app checks 15 seconds after
-// launch and every 6 hours while Settings allows it, and from "Check for updates" at any time.
+// The feed is public: https://paritytrading.app/desktop/updates/, which serves the newest
+// published desktop release (web/src/lib/desktopFeed.ts). Every merge that changes the app
+// publishes one (.github/workflows/desktop-auto-release.yml). The app checks 5 seconds after
+// launch and every hour while Settings allows it, and from "Check for updates" at any time.
 //
-//   Windows          downloads in the background, then asks to restart.
+//   Windows          downloads in the background, installs when Parity quits, and offers
+//                    "Restart to update" once per new version.
 //   Mac, signed      the same. A Mac app can only replace itself when it is signed with a
 //                    Developer ID and notarized; the release build marks such builds.
 //   Mac, not signed  asks to download the new disk image in the browser instead.
 const { app, dialog, shell } = require("electron");
 
-const FEED = (process.env.PARITY_UPDATE_URL || "https://parity.endyland.com/desktop/updates/").replace(/\/?$/, "/");
-const EVERY = 6 * 60 * 60 * 1000;
+const FEED = (process.env.PARITY_UPDATE_URL || "https://paritytrading.app/desktop/updates/").replace(/\/?$/, "/");
+const FIRST = 5000;
+const EVERY = 60 * 60 * 1000;
 
 /** True when the release build signed and notarized this copy (electron-builder.config.js sets it). */
 function isSigned() {
@@ -25,6 +28,7 @@ function create({ log = () => {}, enabled = () => true, parentWindow = () => nul
   let timer = null;
   let manual = false;
   let offered = null; // the version already offered this session
+  let ready = null; // the downloaded version already offered for a restart
   let status = "Not checked yet";
 
   const ask = (opts) => {
@@ -72,12 +76,16 @@ function create({ log = () => {}, enabled = () => true, parentWindow = () => nul
     });
     updater.on("update-downloaded", (info) => {
       status = `Version ${info.version} is ready to install`;
+      const byHand = manual;
       manual = false;
+      // Hourly checks find the same download again; ask once per version, unless asked by hand.
+      if (ready === info.version && !byHand) return;
+      ready = info.version;
       ask({
         type: "info",
         message: `Parity ${info.version} is ready`,
-        detail: "Restart Parity to use the new version. Your windows open where they were.",
-        buttons: ["Restart now", "Later"],
+        detail: "It installs when you quit Parity, or restart now. Your windows open where they were.",
+        buttons: ["Restart to update", "Later"],
         defaultId: 0,
         cancelId: 1,
       }).then(({ response }) => { if (response === 0) setImmediate(() => updater.quitAndInstall()); });
@@ -110,10 +118,10 @@ function create({ log = () => {}, enabled = () => true, parentWindow = () => nul
     timer = setTimeout(() => {
       check(false);
       timer = setInterval(() => check(false), EVERY);
-    }, 15000);
+    }, FIRST);
   }
 
   return { check, sync, status: () => status, canInstall, feed: FEED };
 }
 
-module.exports = { create, isSigned, FEED };
+module.exports = { create, isSigned, FEED, FIRST, EVERY };

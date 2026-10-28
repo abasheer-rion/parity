@@ -75,6 +75,7 @@ We wanted one server for every AI tool, not one integration per vendor. MCP is s
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
+- [DEC-0082: Verify tools and endpoints for AI apps and programs](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](../research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)

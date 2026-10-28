@@ -1,3 +1,5 @@
+-- Price checks for the rate driver: T-bill betas over the 120 days before each cut.
+SELECT measure_driver(202, d, 237) FROM unnest(ARRAY[DATE '2001-01-03', '2001-04-18', '2008-01-22', '2020-03-03']) d;
 -- Outcomes for cases 21-24: first session (the announcement came during or before it), vs SPY (SPY itself raw).
 SELECT case_auto_moves(c, d0, d1, ARRAY['SPY:NYSEArca','QQQ:Nasdaq','XLK:NYSEArca','XLF:NYSEArca','XLU:NYSEArca','XLP:NYSEArca',
          'XLE:NYSEArca','XLY:NYSEArca','IWM:NYSEArca','CSCO:Nasdaq','ORCL:Nasdaq','INTC:Nasdaq','MSFT:Nasdaq','AMZN:Nasdaq','EBAY:Nasdaq',

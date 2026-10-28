@@ -72,4 +72,5 @@ INT-0002 asks for a world simulator where people and AI models play out events, 
 - [DEC-0021: Dark only, no top bar, computed findings and a large scale sim](0021-dark-only-no-top-bar-computed-findings-and-a-large-scale-sim.md)
 - [DEC-0024: Parity Terminal, a market terminal of its own at the sim address](0024-parity-terminal-a-market-terminal-of-its-own-at-the-sim-address.md)
 - [DEC-0037: Everything runs by itself and the search widens itself](0037-everything-runs-by-itself-and-the-search-widens-itself.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 <!-- backlinks:end -->

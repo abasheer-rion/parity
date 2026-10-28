@@ -4,11 +4,11 @@
 // personal column (those were dropped on parse). Acceptance test 6 checks both rows.
 import type { Result } from "./checks";
 
-/** The part of a result a badge keeps: the verdict and the five cards, no balance. */
-export type PublicCards = Omit<Result, "balance" | "triesDefaulted" | "description" | "gauntlet">;
+/** The part of a result a badge keeps: the verdict and the five cards, no balance, and not the daily "how it holds up" numbers. */
+export type PublicCards = Omit<Result, "balance" | "triesDefaulted" | "description" | "gauntlet" | "holdup">;
 
 export function publicCards(r: Result): PublicCards {
-  const { balance: _b, triesDefaulted: _t, description: _d, gauntlet: _g, ...rest } = r;
+  const { balance: _b, triesDefaulted: _t, description: _d, gauntlet: _g, holdup: _h, ...rest } = r;
   // JSON has no Infinity: "never passes" is stored as -1.
   const card3 = rest.card3 && rest.card3.monthsMore === Infinity ? { ...rest.card3, monthsMore: -1 } : rest.card3;
   return { ...rest, card3 };

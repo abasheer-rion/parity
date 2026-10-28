@@ -1,0 +1,29 @@
+# Switches for every automated SEO and content job (DEC-0073).
+#
+# Two ways to stop a job:
+#   - here: set a switch to false and merge. `all = false` stops every job below.
+#   - without a commit: set the repository variable SEO_AUTOMATION to "off" (stops all), or
+#     to a comma list of switch names to stop only those, such as "news_commentary,press_release".
+# Every job checks its switch first (scripts/seo/automation.py), logs one line saying whether
+# it ran and what it did, and the log is in the job summary and the run's artifact.
+
+[switches]
+all = true
+indexnow = true          # tell IndexNow which public pages changed, after each deploy
+gsc_submit = true        # submit the sitemaps to Google Search Console, after each deploy
+gsc_verify = true        # verify the site in Search Console with the meta tag, after each deploy
+seo_report = true        # the weekly report: coverage, queries, clicks and rankings
+market_week = true       # the weekly market comparison post
+news_commentary = true   # commentary on the highest-impact new headlines
+press_release = true     # press releases from merged release notes
+status_probe = true      # warnings from the data health checks and the live feed probe
+
+# Volume caps for automatic posts, under Google's scaled content abuse policy: a few useful
+# posts built from our own data, never pages made in bulk to rank. A job that would pass a cap
+# writes nothing and logs why.
+[caps]
+market_week_per_week = 1
+news_commentary_per_week = 2
+press_release_per_week = 1
+auto_posts_per_week = 4     # all automatic posts together
+min_words = 250             # an automatic post shorter than this is not published

@@ -24,7 +24,7 @@ Everything the assistant tries is counted toward the luck check, so ask it for a
 - The server is `<repo>/engine/.venv/bin/parity mcp`, where `<repo>` is the full path to your checkout, for example `/Users/you/Projects/parity`.
 - Cursor and VS Code pick it up from the committed `.cursor/mcp.json` and `.vscode/mcp.json` when you open the repo.
 - Claude Code, Claude Desktop, Gemini CLI and Codex CLI need one line or one block of config, below.
-- ChatGPT, and anyone without the repo, can use the hosted server at `https://parity.endyland.com/mcp` instead. It signs you in with Parity and has fewer tools (no backtests). Setup for each app is on the site at `/connect/`; how it works is in [DEC-0051](../decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
+- ChatGPT, and anyone without the repo, can use the hosted server at `https://paritytrading.app/mcp` instead. It signs you in with Parity and has fewer tools (no backtests). Setup for each app is on the site at `/connect/`; how it works is in [DEC-0051](../decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md).
 
 ## Install
 
@@ -182,5 +182,6 @@ Set them in the `env` block of the tool's config if you need to. Every call is l
 - [DEC-0025: AI assistants get Parity tools through a local MCP server](../decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md)
 - [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](../decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - [RES-0024: AI apps connecting to Parity, and bringing your own model](../research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md)
+- [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](../reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

@@ -1,0 +1,24 @@
+{
+  "id": "italy-yields-7-percent-2011",
+  "name": "Italian 10-year yields pass 7%",
+  "date": "2011-11-09",
+  "type": "sovereign_default",
+  "regions": [
+    "europe",
+    "global"
+  ],
+  "actors": [
+    "italy",
+    "eu"
+  ],
+  "severity": 4,
+  "commodities": [],
+  "description": "Italy's 10-year borrowing cost rose above 7%, the level at which Greece, Ireland and Portugal had needed rescues, and Berlusconi agreed to resign.",
+  "sources": [
+    {
+      "title": "European debt crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/European_debt_crisis"
+    }
+  ]
+}

@@ -38,7 +38,8 @@ def test_every_new_series_is_optional_and_has_a_fetcher():
 
 def test_no_key_is_defined_twice():
     groups = [catalog._FX, catalog._RATES, catalog._OTHER, catalog._REER, catalog._FX_WIDE,
-              catalog._YIELDS, catalog._FACTORS, catalog._INDUSTRIES, catalog._BOND_TR,
+              catalog._YIELDS, catalog._FACTORS, catalog._INDUSTRIES, catalog._INDUSTRIES49,
+              catalog._STOCKS, catalog._BOND_TR,
               catalog._WIDER]
     assert sum(len(g) for g in groups) == len(catalog.CATALOG)
 

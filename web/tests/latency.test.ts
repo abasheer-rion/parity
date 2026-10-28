@@ -18,7 +18,7 @@ describe("the beacon", () => {
   beforeEach(() => _reset());
 
   it("keeps only data requests, as path patterns without ids", () => {
-    const here = "https://parity.endyland.com/trade/";
+    const here = "https://paritytrading.app/trade/";
     expect(endpointOf("/data/terminal/index.json", here)).toBe("/data/terminal/index.json");
     expect(endpointOf("/data/terminal/fx.EUR.json", here)).toBe("/data/terminal/:id.json");
     expect(endpointOf("/data/batch/7f3c2a91-1111.json", here)).toBe("/data/batch/:id.json");
@@ -40,13 +40,13 @@ describe("the beacon", () => {
 
   it("records nothing until sampled in", () => {
     rumAge("terminal/index", "2026-10-23");
-    onResource({ name: "https://parity.endyland.com/data/latest.json", responseEnd: 300, duration: 120, encodedBodySize: 5000, transferSize: 5300 });
+    onResource({ name: "https://paritytrading.app/data/latest.json", responseEnd: 300, duration: 120, encodedBodySize: 5000, transferSize: 5300 });
     expect(_queued()).toEqual([]);
   });
 
   it("notes time to first data once, each request, its size and cache hits", () => {
     _reset("trade");
-    const r = (name: string, end: number, enc: number, tx: number) => ({ name: `https://parity.endyland.com${name}`, responseEnd: end, duration: 80, encodedBodySize: enc, transferSize: tx });
+    const r = (name: string, end: number, enc: number, tx: number) => ({ name: `https://paritytrading.app${name}`, responseEnd: end, duration: 80, encodedBodySize: enc, transferSize: tx });
     onResource(r("/assets/app.js", 100, 9000, 9300));
     onResource(r("/data/terminal/index.json", 420, 40_000, 40_300));
     onResource(r("/data/terminal/fx.EUR.json", 600, 8000, 300));
@@ -58,7 +58,7 @@ describe("the beacon", () => {
 
   it("caps requests per endpoint and the whole payload", () => {
     _reset("sim");
-    for (let i = 0; i < 20; i++) onResource({ name: `https://parity.endyland.com/data/terminal/s${i}.json`, responseEnd: 10, duration: 5, encodedBodySize: 0, transferSize: 0 });
+    for (let i = 0; i < 20; i++) onResource({ name: `https://paritytrading.app/data/terminal/s${i}.json`, responseEnd: 10, duration: 5, encodedBodySize: 0, transferSize: 0 });
     expect(_queued().filter((e) => e.m === "fetch")).toHaveLength(3);
     const many: RumEvent[] = Array.from({ length: 70 }, (_, i) => ({ m: "fetch", e: "/data/x.json", v: i }));
     const body = payload("sim", [...many, { m: "ttd", v: 5 }]);
@@ -66,7 +66,7 @@ describe("the beacon", () => {
     expect(doc.ev).toHaveLength(40);
     expect(doc.ev[0].m).toBe("ttd");
     expect(body.length).toBeLessThan(2000);
-    expect(body).not.toMatch(/parity\.endyland|user|cookie|token/i);
+    expect(body).not.toMatch(/paritytrading\.app|user|cookie|token/i);
   });
 
   it("measures the age of what is shown and how late refreshes run", () => {
@@ -107,7 +107,7 @@ describe("the /rum function", () => {
   it("answers 204 and hands only the clean events to the database", async () => {
     const fetcher = vi.fn(async () => new Response("1"));
     const waits: Promise<unknown>[] = [];
-    const request = Object.assign(new Request("https://parity.endyland.com/rum", {
+    const request = Object.assign(new Request("https://paritytrading.app/rum", {
       method: "POST", body: JSON.stringify({ a: "site", ev: [{ m: "lcp", v: 900 }] }),
       headers: { "CF-Connecting-IP": "9.9.9.9", Cookie: "secret=1", "User-Agent": "UA" },
     }), { cf: { continent: "EU" } });
@@ -118,7 +118,7 @@ describe("the /rum function", () => {
     expect(url).toMatch(/\/rest\/v1\/rpc\/rum_ingest$/);
     expect(JSON.parse(init.body as string)).toEqual({ p_app: "site", p_region: "EU", p_events: [{ m: "lcp", e: "", v: 900 }] });
     expect(String(init.body)).not.toMatch(/9\.9\.9\.9|secret|UA/);
-    const get = await onRequest({ request: new Request("https://parity.endyland.com/rum"), waitUntil: () => {} }, fetcher as unknown as typeof fetch);
+    const get = await onRequest({ request: new Request("https://paritytrading.app/rum"), waitUntil: () => {} }, fetcher as unknown as typeof fetch);
     expect(get.status).toBe(405);
   });
 });

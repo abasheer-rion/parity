@@ -59,7 +59,7 @@ export function survivesWords(n: number | null): string {
   return `Survives up to ${n.toLocaleString("en-US")} ${n === 1 ? "try" : "tries"}`;
 }
 
-/** "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. parity.endyland.com/v/<id>" */
+/** "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. paritytrading.app/v/<id>" */
 export function socialLine(b: Pick<PublicBadge, "id" | "verdict" | "survives_tries" | "input_kind" | "trade_count">, host: string): string {
   const parts = [`Parity Verify: ${b.verdict ? VERDICT_WORDS[b.verdict] : "Withdrawn"}.`, `${survivesWords(b.survives_tries)}.`];
   const kind = b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record";

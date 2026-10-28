@@ -7,14 +7,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 64 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 78 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 19 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 26 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 29 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 19 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 20 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-26 [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
-- 2026-10-26 [REF-0026: Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md)
-- 2026-10-26 [REF-0018: Parity latency baseline](reference/0018-parity-latency-baseline.md)
-- 2026-10-26 [REF-0014: Markets data, crypto, perps and ETF sources and their terms](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md)
-- 2026-10-26 [REF-0009: UI library](reference/0009-ui-library.md)
-- 2026-10-26 [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
-- 2026-10-26 [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
-- 2026-10-26 [DEC-0063: The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
+- 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
+- 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
+- 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
+- 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
+- 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
+- 2026-10-27 [DEC-0082: Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
+- 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
+- 2026-10-27 [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
 
 ## intent
 
@@ -78,7 +78,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0025 | [AI assistants get Parity tools through a local MCP server](decisions/0025-ai-assistants-get-parity-tools-through-a-local-mcp-server.md) | accepted | 2026-10-23 | [method](TAGS.md#method), [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | DEC-0026 | [A news archive and an impact engine that ranks by evidence](decisions/0026-a-news-archive-and-an-impact-engine-that-ranks-by-evidence.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [news](TAGS.md#news) |
 | DEC-0027 | [New edge families from the wider data](decisions/0027-new-edge-families-from-the-wider-data.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
-| DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
+| DEC-0028 | [Parity Academy, short courses with moving pictures](decisions/0028-parity-academy-short-courses-with-moving-pictures.md) | accepted | 2026-10-26 | [ui](TAGS.md#ui) |
 | DEC-0029 | [Private markets, free proxies, an unsmoothing study and plain pages](decisions/0029-private-markets-free-proxies-an-unsmoothing-study-and-plain-pages.md) | accepted | 2026-10-23 | [data](TAGS.md#data), [private-markets](TAGS.md#private-markets), [ui](TAGS.md#ui) |
 | DEC-0030 | [Pages that hold still, open in place and come from one library](decisions/0030-pages-that-hold-still-open-in-place-and-come-from-one-library.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
 | DEC-0031 | [Trade charts, pro charting on delayed data](decisions/0031-trade-charts-pro-charting-on-delayed-data.md) | accepted | 2026-10-23 | [ui](TAGS.md#ui) |
@@ -96,11 +96,11 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0043 | [Parity Workbench, one full-screen tool for strategy work](decisions/0043-parity-workbench-one-full-screen-tool-for-strategy-work.md) | accepted | 2026-10-24 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0044 | [One sign-in panel that fades in over the front page](decisions/0044-one-sign-in-panel-that-fades-in-over-the-front-page.md) | accepted | 2026-10-25 | [ui](TAGS.md#ui) |
 | DEC-0045 | [We track how old our data is at every hop and how fast pages get it](decisions/0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md) | accepted | 2026-10-24 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
-| DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | proposed | 2026-10-24 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0046 | [Payments through Stripe, and real trading only through a regulated broker](decisions/0046-payments-through-stripe-and-real-trading-only-through-a-regulated-broker.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0047 | [Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md) | accepted | 2026-10-24 | [competitors](TAGS.md#competitors), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0048 | [The desktop app loads the live site and keeps a copy for offline](decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
-| DEC-0049 | [The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
-| DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0049 | [The desktop app opens on the log-in page, with a menu button and its own controls](decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0051 | [AI apps connect to Parity through a hosted MCP server, and people bring their own model](decisions/0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0052 | [Live prices stream through our own edge, and every chart says how late they are](decisions/0052-live-prices-stream-through-our-own-edge-and-every-chart-says-how-late-they-are.md) | accepted | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0053 | [Our own product analytics, opt-in, stored in Postgres](decisions/0053-our-own-product-analytics-opt-in-stored-in-postgres.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0054 | [The data model is strict, indexed and keeps an append-only trade ledger](decisions/0054-the-data-model-is-strict-indexed-and-keeps-an-append-only-trade-ledger.md) | accepted | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
@@ -115,6 +115,20 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0063 | [The public sees live prices from our own on-chain feed](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | DEC-0064 | [One data registry finds, enrols, tests and watches every series by itself](decisions/0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0065 | [The Parity price combines every pool the way Pyth combines publishers](decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md) | accepted | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0066 | [Sim World grows a scenario library, stress tests, a shock composer and live echoes](decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0067 | [One signature chart system for lessons, strategy pages and clips](decisions/0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0068 | [Personalization learns from use, ranks What's new and runs experiments, with an off switch](decisions/0068-personalization-learns-from-use-ranks-what-s-new-and-runs-experiments-with-an-off-switch.md) | accepted | 2026-10-26 | [kpis](TAGS.md#kpis), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0069 | [Parity moves to paritytrading.app](decisions/0069-parity-moves-to-paritytrading-app.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra) |
+| DEC-0070 | [Pairs and stat arb on 49 industries, with single stocks research only](decisions/0070-pairs-and-stat-arb-on-industries-with-stocks-research-only.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| DEC-0071 | [People make their own API keys for a versioned Parity API](decisions/0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md) | accepted | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0072 | [Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0073 | [Search and content run by themselves, with caps, a log and a kill switch](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process) |
+| DEC-0075 | [The app home is a full-width grid of widgets each person arranges](decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md) | accepted | 2026-10-26 | [data](TAGS.md#data), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0076 | [Trade profile, a private demo calendar and an opt-in leaderboard ranked by risk-adjusted return](decisions/0076-trade-profile-a-private-demo-calendar-and-an-opt-in-leaderboard-ranked-by-risk-adjusted-return.md) | accepted | 2026-10-27 | [kpis](TAGS.md#kpis), [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0077 | [New accounts get a short full-screen intro that ends on a real Verify result](decisions/0077-new-accounts-get-a-short-full-screen-intro-that-ends-on-a-real-verify-result.md) | accepted | 2026-10-27 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0078 | [Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md) | accepted | 2026-10-27 | [data](TAGS.md#data) |
+| DEC-0079 | [Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0082 | [Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## hypothesis
 
@@ -162,6 +176,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0025 | [Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md) | current | 2026-10-25 | [competitors](TAGS.md#competitors), [news](TAGS.md#news), [private-markets](TAGS.md#private-markets), [strategy](TAGS.md#strategy) |
 | RES-0026 | [Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 | RES-0027 | [How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md) | current | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra) |
+| RES-0028 | [Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md) | current | 2026-10-27 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
 
 ## guide
 
@@ -171,10 +186,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | GDE-0002 | [Adding or removing a strategy](guides/0002-adding-a-strategy.md) | current | 2026-10-21 | [process](TAGS.md#process), [strategy](TAGS.md#strategy) |
 | GDE-0003 | [Writing and filing docs](guides/0003-writing-docs.md) | current | 2026-10-21 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | GDE-0004 | [The research routine](guides/0004-the-research-routine.md) | current | 2026-10-20 | [method](TAGS.md#method), [process](TAGS.md#process) |
-| GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-22 | [process](TAGS.md#process) |
+| GDE-0005 | [Google Search Console and the SEO pipeline](guides/0005-google-search-console-and-the-seo-pipeline.md) | draft | 2026-10-26 | [process](TAGS.md#process) |
 | GDE-0006 | [Connecting AI tools to Parity with MCP](guides/0006-connecting-ai-tools-to-parity-with-mcp.md) | current | 2026-10-25 | [process](TAGS.md#process) |
-| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-23 | [ui](TAGS.md#ui) |
-| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-23 | [process](TAGS.md#process) |
+| GDE-0007 | [Writing a new Academy course](guides/0007-writing-a-new-academy-course.md) | current | 2026-10-27 | [ui](TAGS.md#ui) |
+| GDE-0008 | [Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md) | current | 2026-10-27 | [process](TAGS.md#process) |
 | GDE-0009 | [Writing a blog or news post](guides/0009-writing-a-blog-or-news-post.md) | current | 2026-10-25 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## reference
@@ -200,13 +215,16 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0017 | [Parity copy rules](reference/0017-parity-copy-rules.md) | current | 2026-10-24 | [docs](TAGS.md#docs), [ui](TAGS.md#ui) |
 | REF-0018 | [Parity latency baseline](reference/0018-parity-latency-baseline.md) | current | 2026-10-26 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0019 | [Latency budget and target architecture](reference/0019-latency-budget-and-target-architecture.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [fx](TAGS.md#fx), [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
-| REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-25 | [process](TAGS.md#process) |
+| REF-0020 | [Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md) | current | 2026-10-27 | [process](TAGS.md#process) |
 | REF-0021 | [Parity database schema and data model](reference/0021-parity-database-schema-and-data-model.md) | current | 2026-10-25 | [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | REF-0022 | [Product analytics events](reference/0022-product-analytics-events.md) | current | 2026-10-25 | [data](TAGS.md#data), [ui](TAGS.md#ui) |
 | REF-0023 | [Motion system](reference/0023-motion-system.md) | current | 2026-10-25 | [ui](TAGS.md#ui) |
 | REF-0024 | [App speed, how we measure it and what we changed](reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md) | current | 2026-10-25 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 | REF-0025 | [Parity capacity and load test results](reference/0025-parity-capacity-and-load-test-results.md) | current | 2026-10-25 | [infra](TAGS.md#infra) |
 | REF-0026 | [Accessibility audit, WCAG 2.2 AA](reference/0026-accessibility-audit-wcag-2-2-aa.md) | current | 2026-10-26 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
+| REF-0029 | [Going live with real trading](reference/0029-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## competitor
 
@@ -259,6 +277,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0017 | [Ayan work log, competitor profiles, feedback collector and architecture](log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md) | final | 2026-10-24 | [competitors](TAGS.md#competitors), [process](TAGS.md#process) |
 | LOG-0018 | [Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| LOG-0020 | [Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md) | final | 2026-10-27 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 
 ## algorithm
 

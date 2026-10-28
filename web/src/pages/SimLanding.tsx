@@ -10,6 +10,7 @@ const PARTS = [
   ["FX", "fx", "Currencies on an interactive world map, with detail and a side-by-side compare"],
   ["Commodities", "commodities", "Oil, gas and metals with positioning and compare"],
   ["Sim lab", "simlab", "Crises, scenarios, simulated paths, stress tests and the strategy race, replayed from history"],
+  ["World", "world", "The world map, Monte Carlo stress tests, the scenario library, a shock composer and days that looked like past events"],
 ] as const;
 
 export function SimLanding() {

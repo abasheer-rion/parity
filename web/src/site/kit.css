@@ -41,8 +41,9 @@ a { color: inherit; }
 img, svg { max-width: 100%; }
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 8px; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: 8px; }
 main:focus { outline: none; }
+html { -webkit-tap-highlight-color: transparent; }
 .num { font-variant-numeric: var(--num-variant); }
 
 /* Lenis smooth scroll (its stylesheet, inlined) */
@@ -63,6 +64,11 @@ body.leaving { opacity: 0; }
 .corner { position: fixed; z-index: var(--z-panel); top: 16px; display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 12px; transition: background-color var(--dur-3), border-color var(--dur-3), transform var(--dur-4) var(--ease), opacity var(--dur-4); border: 1px solid transparent; }
 .corner.solid { background: color-mix(in srgb, var(--color-surface) 55%, transparent); border-color: var(--line); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); }
 .corner-logo { left: 16px; view-transition-name: parity-logo; }
+/* Desktop app: no title bar. The corners sit in the window's top row, level with the Mac
+   traffic lights, and the logo moves right of the window's controls (desktop/electron/preload.js). */
+html[data-desktop-chrome] .corner { top: 0; }
+html[data-desktop-chrome] .corner-logo { left: var(--desktop-chrome-left); }
+html[data-desktop-chrome="win32"] .corner-nav { right: calc(16px + var(--desktop-chrome-right)); }
 .corner-logo a { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 8px; border-radius: 9px; text-decoration: none; }
 .corner-logo img { display: block; }
 .corner.away { opacity: 0; transform: translateY(-8px); pointer-events: none; }

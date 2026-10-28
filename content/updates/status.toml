@@ -1,0 +1,24 @@
+# Written entries for the status page and the site banner (DEC-0073).
+#
+# Add an [[entry]] when something is wrong or planned, then merge. It shows on /status/ and as
+# a banner across the site from `start` until `end`. After `end` it stays in the history.
+# Automatic warnings (live prices, the strategy search, the simulations, data series) come from
+# scripts/updates/status.py and need no entry here.
+#
+# Fields:
+#   id      short and unique, letters, digits and dashes (the banner remembers dismissals by it)
+#   level   "info", "warning" or "outage"
+#   title   one short sentence
+#   detail  one or two plain sentences: what people will notice and what to do
+#   start   when it began or begins, such as 2026-10-26T14:00:00Z
+#   end     optional: when it ended or will end
+#   link    optional: a page with more, such as "/announcements/" or a full https:// address
+#
+# Example:
+# [[entry]]
+# id = "maintenance-2026-11-02"
+# level = "info"
+# title = "Planned maintenance on Sunday"
+# detail = "Sign-in may be slow for a few minutes between 09:00 and 09:30 UTC."
+# start = 2026-11-02T08:00:00Z
+# end = 2026-11-02T09:30:00Z

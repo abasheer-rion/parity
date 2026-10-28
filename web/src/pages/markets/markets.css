@@ -1,7 +1,7 @@
 /* Markets pages (product side). Every class here starts with mk- so nothing leaks into
    other pages. Colours come from the shared tokens; nothing here animates. */
 
-.mk { max-width: 1080px; min-width: 0; }
+.mk { min-width: 0; }
 .mk-head p { max-width: 760px; }
 .mk-banner { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface-solid); margin: 0 0 16px; font-size: var(--fs-sm, var(--type-sm)); color: var(--text-2); }
 .mk-banner svg { flex: none; margin-top: 2px; color: var(--muted); }

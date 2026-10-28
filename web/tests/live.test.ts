@@ -114,8 +114,8 @@ describe("wire", () => {
   });
 
   it("connects to this site, the main address from the desktop app, and nothing from local dev", () => {
-    expect(liveOrigin({ protocol: "https:", host: "trade.endyland.com", hostname: "trade.endyland.com" })).toBe("wss://trade.endyland.com");
-    expect(liveOrigin({ protocol: "app:", host: "x", hostname: "x" })).toBe("wss://trade.endyland.com");
+    expect(liveOrigin({ protocol: "https:", host: "trade.paritytrading.app", hostname: "trade.paritytrading.app" })).toBe("wss://trade.paritytrading.app");
+    expect(liveOrigin({ protocol: "app:", host: "x", hostname: "x" })).toBe("wss://trade.paritytrading.app");
     expect(liveOrigin({ protocol: "http:", host: "localhost:5173", hostname: "localhost" })).toBeNull();
   });
 });

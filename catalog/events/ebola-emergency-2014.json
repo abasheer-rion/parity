@@ -1,0 +1,21 @@
+{
+  "id": "ebola-emergency-2014",
+  "name": "WHO declares Ebola an emergency",
+  "date": "2014-08-08",
+  "type": "pandemic",
+  "regions": [
+    "africa",
+    "global"
+  ],
+  "actors": [],
+  "severity": 1,
+  "commodities": [],
+  "description": "The World Health Organization declared the West African Ebola outbreak a public health emergency of international concern.",
+  "sources": [
+    {
+      "title": "Western African Ebola virus epidemic",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Western_African_Ebola_virus_epidemic"
+    }
+  ]
+}

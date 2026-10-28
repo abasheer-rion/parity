@@ -2,7 +2,7 @@
   "id": "black-wednesday-1992",
   "name": "UK leaves the ERM (Black Wednesday)",
   "date": "1992-09-16",
-  "type": "financial_crisis",
+  "type": "currency_crisis",
   "regions": [
     "europe"
   ],

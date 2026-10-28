@@ -6,6 +6,10 @@
 //   cd web && npm run content                      every scene, every format
 //   npm run content -- --scenes bot-battle --formats vertical,gif
 //   npm run content -- --examples                  also refresh web/public/content/*.gif
+//   npm run content -- --signature                 the signature clips (DEC-0067): Academy
+//                                                  lessons and methodology explainers, 9:16 and
+//                                                  1:1, into ~/Desktop/parity-clips/signature/
+//   npm run content -- --signature --stills        one PNG per step instead of video
 //
 // Reads engine/output/bots/ (parity bots export), engine/output/world.json (parity world
 // export) and engine/output/latest.json (a strategy run). A scene whose file is missing
@@ -13,10 +17,12 @@
 // git). Nothing is posted anywhere: people post the clips themselves.
 import { spawn, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium, type Page } from "playwright";
 import { allScenes, frame, RISK, SITE, type Data, type Layout, type Scene } from "./scenes.ts";
+import { clipFrame, positionAt, signatureClips, timeline, type ClipSize } from "./signature.ts";
 import type { BotRunFile, BotsIndex } from "../../src/lib/botStats.ts";
 import { RAW } from "../../src/ui/tokens.gen.ts";
 
@@ -29,8 +35,9 @@ function arg(name: string, fallback: string): string {
 }
 const flag = (name: string) => process.argv.includes(`--${name}`);
 
+const SIGNATURE = flag("signature");
 const DATA = resolve(arg("data", join(ROOT, "engine/output")));
-const OUT = resolve(arg("out", join(ROOT, "content/out")));
+const OUT = resolve(arg("out", SIGNATURE ? join(homedir(), "Desktop/parity-clips/signature") : join(ROOT, "content/out")));
 const FPS = Number(arg("fps", "30"));
 const FFMPEG = arg("ffmpeg", existsSync("/opt/homebrew/bin/ffmpeg") ? "/opt/homebrew/bin/ffmpeg" : "ffmpeg");
 const WANT = arg("scenes", "all");
@@ -85,13 +92,18 @@ async function show(page: Page, svg: string): Promise<void> {
 }
 
 async function renderVideo(page: Page, scene: Scene, layout: Layout, brand: { wordmark: string }, out: string): Promise<number> {
-  await page.setViewportSize({ width: layout.w, height: layout.h });
   const n = Math.round(scene.seconds * FPS);
+  return encode(page, layout, n, (i) => frame(scene, n > 1 ? i / (n - 1) : 1, layout, brand), out);
+}
+
+/** Photographs n frames in headless Chromium and pipes them to ffmpeg as one H.264 MP4. */
+async function encode(page: Page, layout: Layout, n: number, frameAt: (i: number) => string, out: string): Promise<number> {
+  await page.setViewportSize({ width: layout.w, height: layout.h });
   const enc = spawn(FFMPEG, ["-hide_banner", "-loglevel", "error", "-y", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "medium", "-crf", "20", "-r", String(FPS), "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
   const done = new Promise<void>((ok, fail) => enc.on("close", (code) => (code === 0 ? ok() : fail(new Error(`ffmpeg exited ${code}`)))));
   for (let i = 0; i < n; i++) {
-    await show(page, frame(scene, n > 1 ? i / (n - 1) : 1, layout, brand));
+    await show(page, frameAt(i));
     const shot = await page.screenshot({ type: "jpeg", quality: 92 });
     if (!enc.stdin.write(shot)) await new Promise((ok) => enc.stdin.once("drain", ok));
   }
@@ -100,7 +112,71 @@ async function renderVideo(page: Page, scene: Scene, layout: Layout, brand: { wo
   return n;
 }
 
+/** A headless page with Inter loaded (from Google Fonts when online; the system sans-serif otherwise). */
+async function openPage() {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ deviceScaleFactor: 1 });
+  await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=block">
+    <style>html,body{margin:0;background:${RAW["color-canvas"]};overflow:hidden}#r svg{display:block}</style></head><body><div id="r"></div></body></html>`, { waitUntil: "load", timeout: 15000 }).catch(() => {});
+  await page.evaluate(async () => { await Promise.race([document.fonts.ready, new Promise((ok) => setTimeout(ok, 4000))]); }).catch(() => {});
+  return { browser, page };
+}
+
+/** The signature clips: every Academy lesson on the signature scenes and the explainers, at 9:16 and 1:1. */
+async function signatureMain() {
+  const clips = signatureClips(ROOT).filter((c) => WANT === "all" || WANT.split(",").includes(c.id));
+  if (!clips.length) throw new Error(`No signature clips match ${WANT}.`);
+  const sizes = FORMATS.filter((f): f is ClipSize => f === "vertical" || f === "square");
+  if (!sizes.length) throw new Error("Signature clips come in --formats vertical and square.");
+  const folder = (size: ClipSize) => join(OUT, size === "vertical" ? "9x16" : "1x1");
+  const { browser, page } = await openPage();
+  if (flag("stills")) {
+    for (const c of clips) for (const size of sizes) {
+      const dir = join(folder(size), "stills");
+      mkdirSync(dir, { recursive: true });
+      await page.setViewportSize({ width: LAYOUTS[size].w, height: LAYOUTS[size].h });
+      for (let i = 0; i < c.visual.steps.length; i++) {
+        await show(page, clipFrame(c, i, size));
+        await page.screenshot({ path: join(dir, `${c.id}-step${i + 1}.png`) });
+      }
+    }
+    await browser.close();
+    console.log(`Wrote stills to ${OUT}`);
+    return;
+  }
+  const manifest: Record<string, unknown>[] = [];
+  for (const c of clips) {
+    const tl = timeline(c.visual);
+    const n = Math.round(tl.seconds * FPS);
+    const files: { format: string; file: string; bytes: number; frames: number; fps: number }[] = [];
+    const t0 = Date.now();
+    for (const size of sizes) {
+      mkdirSync(folder(size), { recursive: true });
+      const out = join(folder(size), `${c.id}.mp4`);
+      await encode(page, LAYOUTS[size], n, (i) => clipFrame(c, positionAt(tl.keys, i / FPS), size), out);
+      files.push({ format: size === "vertical" ? "mp4 9:16 1080x1920" : "mp4 1:1 1080x1080", file: relative(OUT, out), bytes: statSync(out).size, frames: n, fps: FPS });
+    }
+    manifest.push({
+      id: c.id, title: c.title, seconds: Math.round(tl.seconds * 10) / 10, data: c.tag, alt: c.visual.alt,
+      captions: c.visual.steps.map((st) => st.caption), caption: `${c.social.caption}\n\nTry it: ${SITE}`, hashtags: c.social.hashtags,
+      on_screen_risk_line: c.risk ?? RISK, files,
+    });
+    console.log(`${c.id}: ${files.map((f) => `${f.file} ${(f.bytes / 1e6).toFixed(2)} MB`).join(", ")} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
+  }
+  await browser.close();
+  const before = readJson<{ clips?: { id: string }[] }>(join(OUT, "manifest.json"))?.clips ?? [];
+  const order = signatureClips(ROOT).map((c) => c.id);
+  const all = [...before.filter((b) => !manifest.some((m) => m.id === b.id)), ...manifest].sort((a, b) => order.indexOf(a.id as string) - order.indexOf(b.id as string));
+  writeFileSync(join(OUT, "manifest.json"), JSON.stringify({
+    generated_at: new Date().toISOString(), site: SITE, style: "signature charts (DEC-0067)",
+    rules: "Every frame says where its numbers come from (example, hypothetical, simulated or a real run), and the risk line is on screen in every frame. No clip says what to buy or promises a result. Post them yourself; this script never publishes.",
+    clips: all,
+  }, null, 2));
+  console.log(`Wrote ${join(OUT, "manifest.json")}`);
+}
+
 async function main() {
+  if (SIGNATURE) return signatureMain();
   const data = loadData();
   const available = allScenes(data);
   const scenes = available.filter((s) => WANT === "all" || WANT.split(",").includes(s.id));

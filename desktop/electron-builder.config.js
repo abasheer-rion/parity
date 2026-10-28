@@ -43,7 +43,7 @@ module.exports = {
   protocols: [{ name: "Parity link", schemes: ["parity"] }],
   // The public update feed (web/src/lib/desktopFeed.ts). The release workflow attaches the
   // files to a GitHub release; publishing that release is what ships it.
-  publish: [{ provider: "generic", url: "https://parity.endyland.com/desktop/updates/" }],
+  publish: [{ provider: "generic", url: "https://paritytrading.app/desktop/updates/" }],
   mac: {
     category: "public.app-category.finance",
     icon: "assets/icon.icns",

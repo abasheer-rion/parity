@@ -4,7 +4,7 @@
 //
 //   VITE_AUTH_BYPASS=1 npx vite --port 5199 --host 127.0.0.1   (in another terminal)
 //   CRAWL_BASE=http://127.0.0.1:5199 node scripts/crawl.mjs
-//   CRAWL_BASE=https://parity.endyland.com CRAWL_LIVE=1 node scripts/crawl.mjs   (signed out)
+//   CRAWL_BASE=https://paritytrading.app CRAWL_LIVE=1 node scripts/crawl.mjs   (signed out)
 //
 // CRAWL_JSON=path writes every finding. CRAWL_MAX caps the pages per size (default 400).
 // CRAWL_SIZES=desktop,phone picks the sizes. It never signs in and never types a password.
@@ -22,9 +22,9 @@ const SIZES = [
 
 const PRODUCT = ["", "start", "how", "learn", "settings", "verify", "strategies", "watchlist", "news", "news/archive", "news/impact", "news/history",
   "markets", "markets/new", "markets/crypto", "markets/perps", "markets/etfs", "markets/private", "markets/terms", "markets/practice", "ui"];
-const RESEARCH = ["", "docs", "search", "ledger", "catalog", "sim", "competitors", "private", "signals", "explore", "data", "registry", "latency", "sources", "refs", "settings", "ui"];
+const RESEARCH = ["", "docs", "search", "ledger", "catalog", "sim", "competitors", "pairs", "private", "signals", "explore", "data", "registry", "latency", "sources", "refs", "settings", "ui"];
 const SEEDS = [
-  "/", "/login/", "/signup/", "/reset/", "/verify/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/",
+  "/", "/login/", "/signup/", "/reset/", "/verify/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/",
   ...PRODUCT.map((r) => `/app/#/${r}`),
   ...RESEARCH.map((r) => `/research/#/${r}`),
   ...["chart", "markets", "watchlists", "screener", "portfolio", "orders", "alerts", "strategies", "settings"].map((v) => `/trade/#/${v}`),

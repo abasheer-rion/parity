@@ -1,11 +1,14 @@
 // The order ticket on the demo account (DEC-0034): market, limit, stop, stop-limit,
 // trailing stop and bracket orders with the cost before you place it. Orders go to the
-// demo account's matching engine (lib/paper/matching.ts), never to a broker.
+// demo account's matching engine (lib/paper/matching.ts). When the server carries orders
+// (DEC-0046), the broker ticket in BrokerTicket.tsx takes its place.
 import { useEffect, useRef, useState, type Ref } from "react";
 import { checkBracket, checkOrder, estimate, heldQty, committedQty, type BracketInput, type OrderInput, type OrderType, type Side } from "../lib/paper/matching";
 import { digitsFor, priceText } from "../lib/tradeData";
 import { toast } from "../ui";
 import { useDemo, usd } from "./demo";
+import { BrokerTicket } from "./BrokerTicket";
+import { ModeBadge, useTrading } from "./trading";
 
 type TicketType = OrderType | "bracket";
 const TYPES: [TicketType, string][] = [
@@ -36,9 +39,14 @@ function Num({ label, value, onChange, inputRef, suffix }: { label: string; valu
   );
 }
 
-export function OrderTicket({ symbol, cue, confirm, onNeedConfirm }: {
-  symbol: string; cue?: Cue | null; confirm: boolean; onNeedConfirm?: (text: string, go: () => void) => void;
-}) {
+type TicketProps = { symbol: string; cue?: Cue | null; confirm: boolean; onNeedConfirm?: (text: string, go: () => void) => void };
+
+export function OrderTicket(props: TicketProps) {
+  const t = useTrading();
+  return t.server ? <BrokerTicket symbol={props.symbol} cue={props.cue} /> : <DemoTicket {...props} />;
+}
+
+function DemoTicket({ symbol, cue, confirm, onNeedConfirm }: TicketProps) {
   const d = useDemo();
   const [side, setSide] = useState<Side>("buy");
   const [type, setType] = useState<TicketType>("market");
@@ -111,6 +119,7 @@ export function OrderTicket({ symbol, cue, confirm, onNeedConfirm }: {
         <span className="ot-last tabular">{bar ? priceText(bar.close, digits) : "n/a"}</span>
         <span className="ot-asof">{bar?.time ?? ""}</span>
       </div>
+      <div className="mb-row"><ModeBadge /></div>
       <div className="ot-sides" role="radiogroup" aria-label="Side">
         <button type="button" role="radio" aria-checked={effSide === "buy"} className={`ot-side buy ${effSide === "buy" ? "on" : ""}`} onClick={() => setSide("buy")}>Buy</button>
         <button type="button" role="radio" aria-checked={effSide === "sell"} className={`ot-side sell ${effSide === "sell" ? "on" : ""}`}

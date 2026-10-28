@@ -31,6 +31,8 @@ export interface Fixtures {
   signedIn: boolean;
   /** First-run tours (DEC-0060). Off by default so they do not cover the page under test. */
   tours: boolean;
+  /** The first-run intro (DEC-0077) for a new account. Off by default: it covers Home. */
+  intro: boolean;
   /** The cookie choice already made. Off shows the cookie notice, as on a first visit. */
   consent: boolean;
   /** Extra console text this test expects (an offline test, say). */
@@ -46,14 +48,17 @@ export interface Fixtures {
 export const test = base.extend<Fixtures>({
   signedIn: [true, { option: true }],
   tours: [false, { option: true }],
+  intro: [false, { option: true }],
   consent: [true, { option: true }],
   expectConsole: [[], { option: true }],
   allowHttp: [[], { option: true }],
   db: async ({}, use) => { await use(new FakeDb()); },
   data: async ({}, use) => { await use(new DataStub()); },
   problems: async ({}, use) => { await use([]); },
-  context: async ({ context, signedIn, tours, consent, db, data, problems, expectConsole, allowHttp }, use, testInfo) => {
+  context: async ({ context, signedIn, tours, intro, consent, db, data, problems, expectConsole, allowHttp }, use, testInfo) => {
     if (!tours) db.seed("onboarding_state", [{ user_id: USER.id, tours_off: true, tours_seen: [], checklist_hidden: false }]);
+    // A new account with tours on and no row would get the intro first: only when asked.
+    else if (!intro) db.seed("onboarding_state", [{ user_id: USER.id, tours_off: false, tours_seen: [], checklist_hidden: false, intro_status: "skipped" }]);
     if (consent) await context.addInitScript(() => {
       try {
         localStorage.setItem("parity.consent.v1", JSON.stringify({ version: 2, essential: true, analytics: false, decidedAt: "2026-01-01T00:00:00.000Z" }));
@@ -77,6 +82,12 @@ export const test = base.extend<Fixtures>({
       return route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
     });
     await context.route((url) => url.origin === BASE && /^\/(data|live|rum|e)(\/|$)|^\/stats\.json$/.test(url.pathname), (route) => data.handle(route));
+    // The static preview has no Pages Functions. /api/trade/status answers as production does
+    // with no broker keys: demo money, orders kept in the browser (DEC-0046).
+    await context.route((url) => url.origin === BASE && url.pathname === "/api/trade/status", (route) => route.fulfill({
+      status: 200, contentType: "application/json",
+      body: JSON.stringify({ mode: "demo", engine: "browser", badge: "Demo money", notes: [], limits: { maxOrderValue: 25000, maxQty: 10000, priceCollar: 0.1, shortingAllowed: false, ordersPerMinute: 20 } }),
+    }));
     await context.routeWebSocket((url) => !url.href.includes("supabase.co"), (ws) => { ws.onMessage(() => {}); });
     await stubSupabase(context, db, () => live);
     const allowed = (m: string, url: string) =>

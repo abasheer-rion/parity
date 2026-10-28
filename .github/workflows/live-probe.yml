@@ -1,6 +1,14 @@
-# Live feed probe (DEC-0063): every 30 minutes, connect to the public on-chain feed as a
-# signed-out visitor and fail if no price arrives within 5 s or no live update in 60 s.
-# A failed run is the alert (GitHub mails the repository's watchers); no secrets needed.
+# Live feed probe (DEC-0063) and the status banner (DEC-0073). Every 30 minutes:
+#   1. connect to the public on-chain feed as a signed-out visitor; the probe fails if no price
+#      arrives within 5 s or no live update in 60 s. A failed run is the alert (GitHub mails the
+#      repository's watchers), so the job still fails at the end when the probe did.
+#   2. collect the warnings (scripts/updates/status.py): the probe result, the data health
+#      checks in service_heartbeats, and the manual entries in content/updates/status.toml.
+#   3. compare their ids with the live site's /status.json and, only when they differ, start
+#      a deploy (deploy-web.yml) so /status/ and the banner catch up. No deploy when nothing changed.
+# The output is kept as the artifact "status-auto" so the deploy can carry the probe warning.
+# Kill switch: status_probe in content/seo/automation.toml, or the SEO_AUTOMATION variable.
+# The probe itself always runs. Secrets: SUPABASE_DB_URL (optional, read-only SELECT).
 name: Live feed probe
 
 on:
@@ -10,18 +18,61 @@ on:
 
 permissions:
   contents: read
+  actions: write  # gh workflow run deploy-web.yml when the warnings change
+
+concurrency:
+  group: live-probe
+  cancel-in-progress: false
 
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
+    env:
+      SEO_AUTOMATION: ${{ vars.SEO_AUTOMATION }}
+      AUTOMATION_LOG: automation-log/status_probe.jsonl
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
       - name: Probe the public feed for 60 s
-        run: node web/scripts/live-probe.mjs wss://parity.endyland.com 60 | tee probe.json
+        id: probe
+        run: |
+          origin=$(node -p 'require("./web/src/lib/site.json").origin.replace(/^http/, "ws")')
+          set +e
+          node web/scripts/live-probe.mjs "$origin" 60 > probe.json
+          code=$?
+          set -e
+          cat probe.json
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Collect warnings and compare with the live site
+        id: status
+        env:
+          SITE_DATA_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          pip install -q "psycopg[binary]>=3.2"
+          python3 scripts/updates/status.py --probe probe.json --out status-auto.json --compare-live
+      - name: Keep the warnings for the deploy
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: status-auto
+          path: |
+            status-auto.json
+            automation-log/
+          if-no-files-found: ignore
+          retention-days: 2
+      - name: Redeploy the site so the banner shows the new warnings
+        if: steps.status.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy-web.yml --ref main
+          python3 scripts/seo/automation.py log status_probe redeploy "the warnings changed, deploy-web.yml started"
       - name: Summary
         if: always()
         run: |
@@ -29,3 +80,8 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           cat probe.json >> "$GITHUB_STEP_SUMMARY" || true
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - name: Fail when the probe failed (the alert)
+        if: steps.probe.outputs.code != '0'
+        run: |
+          echo "The live feed probe failed."
+          exit 1
