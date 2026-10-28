@@ -116,3 +116,43 @@ CREATE INDEX IF NOT EXISTS raw_todo ON raw (id) WHERE normalized_at IS NULL;
 CREATE INDEX IF NOT EXISTS raw_seen ON raw (seen_at);
 ALTER TABLE item ADD COLUMN IF NOT EXISTS raw_id bigint REFERENCES raw(id);
 ALTER TABLE feed ADD COLUMN IF NOT EXISTS needs text;   -- env var(s) that must be set, else the feed is skipped
+
+-- ───────────── the bridge to the engine (bridge.py) ─────────────
+-- Conflict articles per country pair per day, from GDELT: the baseline an escalation is measured against.
+CREATE TABLE IF NOT EXISTS conflict_day (
+  pair      text NOT NULL,                 -- 'RUS-UKR': the two ISO-3 codes in order
+  day       date NOT NULL,
+  articles  integer NOT NULL,              -- articles behind the day's root conflict events (CAMEO 18-20) ...
+  files     integer NOT NULL,              -- ... in this many of the day's 96 fifteen-minute files
+  PRIMARY KEY (pair, day)
+);
+-- What the bridge decided for each material story, and why: the list of what the engine cannot read yet.
+CREATE TABLE IF NOT EXISTS bridge (
+  story_id    bigint PRIMARY KEY REFERENCES story(id),
+  decided_at  timestamptz NOT NULL DEFAULT now(),
+  status      text NOT NULL,               -- 'event' (handed to the engine) or 'waiting' (nothing reads it yet)
+  reason      text NOT NULL,
+  escalation  bigint
+);
+-- An escalation the bridge handed to the engine as an event.
+CREATE TABLE IF NOT EXISTS escalation (
+  id           bigserial PRIMARY KEY,
+  pair         text NOT NULL,
+  detected_at  timestamptz NOT NULL DEFAULT now(),
+  articles_24h integer NOT NULL,
+  baseline     numeric NOT NULL,           -- median articles a day over the 30 days before
+  eg_event_id  bigint                      -- the event in eg; re-created after a rebuild, calls are not
+);
+-- What the engine called, frozen when it was said, kept here because build.sh drops eg. Scored later against prices.
+CREATE TABLE IF NOT EXISTS live_call (
+  id            bigserial PRIMARY KEY,
+  escalation_id bigint REFERENCES escalation(id),
+  made_at       timestamptz NOT NULL DEFAULT now(),
+  ticker        text,
+  name          text NOT NULL,
+  mechanism     text NOT NULL,
+  direction     smallint NOT NULL,
+  impact        numeric NOT NULL,          -- % abnormal return on the first session, for driver calls
+  conf          numeric NOT NULL,
+  path          text NOT NULL
+);
