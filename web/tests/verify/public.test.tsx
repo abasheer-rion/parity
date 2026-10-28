@@ -1,10 +1,10 @@
 // The public Verify page at /verify/ (DEC-0081): the address still confirms every email
 // link, anyone can check a file without signing in and without sending it, the embeds and
 // the small card, and the read-only connections scaffold that stays off.
-import { fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 
 if (!window.matchMedia) {
   Object.defineProperty(window, "matchMedia", { value: (q: string) => ({ matches: false, media: q, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, onchange: null, dispatchEvent: () => false }) });
@@ -22,6 +22,11 @@ import { parseText } from "../../src/lib/verify/parse";
 import { SIGNED_OUT_PRICES } from "../../src/pages/verify/Checker";
 import { AUTH_KEYS, isAuthLink } from "../../src/verify/dispatch";
 import { PublicVerify } from "../../src/verify/PublicVerify";
+
+// Unmount after each test, and let late timers (tooltips, toasts) run while the page still
+// exists, so nothing updates React after the test environment is gone.
+afterEach(() => cleanup());
+afterAll(() => new Promise((r) => setTimeout(r, 500)));
 
 const fx = (name: string) => readFileSync(join(import.meta.dirname, "../fixtures/verify", name), "utf8");
 
