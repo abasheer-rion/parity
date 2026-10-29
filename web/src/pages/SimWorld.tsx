@@ -1,7 +1,7 @@
 // Sim World (DEC-0016, DEC-0020): history replayed and reshuffled, never a forecast. Every
 // tab plays the same way as the strategy race: a big date, Play and the speed, event
 // bands on the timeline and a leaderboard that re-ranks as time moves. It runs full
-// screen on its own site (/sim/, sim.endyland.com); the research side links there.
+// screen on its own site (/sim/, sim.paritytrading.app); the research side links there.
 import { useEffect, useMemo, useState } from "react";
 import { EmptyState, Icon } from "../ui";
 import { loadScenarios, selectAnalogues, specFromQuery, specToQuery, EMPTY_SPEC, type Loaded, type Spec } from "../lib/scenarios";

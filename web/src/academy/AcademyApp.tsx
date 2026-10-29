@@ -1,5 +1,5 @@
 // Parity Academy (DEC-0042): the courses as their own full-screen app at /academy/
-// (academy.endyland.com). Its own rail, top bar, settings and keys; a course library, a
+// (academy.paritytrading.app). Its own rail, top bar, settings and keys; a course library, a
 // course page and a focused lesson player with a progress rail, previous and next, the
 // arrow keys and a quick check. Progress and the place to continue from are saved to the
 // account (progress.ts). One Back button returns to Parity.
@@ -14,7 +14,7 @@ import { AppGuard } from "../auth";
 import { NotFound } from "../components/NotFound";
 import { SkipLink } from "../components/SkipLink";
 import { LEGAL_PAGES } from "../legal/LegalLinks";
-import { courseById, courseMinutes, courses, totalLessons, type AcademyLink, type Course, type Lesson, type Question } from "../lib/academy";
+import { courseById, courseMinutes, courses, reelVideo, totalLessons, type AcademyLink, type Course, type Lesson, type Question } from "../lib/academy";
 import { termById } from "../lib/glossary";
 import { appLink, productUrl } from "../lib/space";
 import { setStoreUser } from "../lib/userStore";
@@ -22,6 +22,7 @@ import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { AnimatedNumber, Button, Dialog, Icon, LIFT, MotionControl, Popover, Segmented, STAGGER, Toaster, Toggle, toast, useMotionHelp } from "../ui";
 import { ProgressProvider, useProgress } from "./progress";
 import { Frame, VisualPlayer } from "./Visual";
+import { ReelPlayer } from "../ui/reel/ReelPlayer";
 import "./academy.css";
 import { isDesktop } from "../desktop/bridge";
 
@@ -191,7 +192,7 @@ function AcademyShell() {
     <div className="pac" data-text={settings.text} data-mobile={mobile || undefined} data-player={route.view === "lesson" || undefined}>
       <div className="pac-orbs" aria-hidden><i /><i /><i /></div>
       <SkipLink />
-      <header className="pac-top">
+      <header className="pac-top" data-desktop-header>
         <button type="button" className="pac-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
           <span aria-hidden>‹</span>
           <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />
@@ -216,8 +217,8 @@ function AcademyShell() {
         {!mobile && (
           <nav className="pac-rail" aria-label="Academy">
             {views.map((v, i) => (
-              <a key={v.id} href={v.href} className={`pac-rail-i ${v.on ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={v.on ? "page" : undefined}
-                title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+              <a key={v.id} href={v.href} className={`ui-rail-i ui-tipped pac-rail-i ${v.on ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={v.on ? "page" : undefined}
+                data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
             ))}
@@ -238,8 +239,6 @@ function AcademyShell() {
           </main>
         )}
       </div>
-
-      <footer className="pac-legal"><span>{LEGAL}<span className="pac-legal-more">{LEGAL_MORE}</span></span></footer>
 
       {mobile && route.view !== "lesson" && (
         <nav className="pac-tabs" aria-label="Academy">
@@ -459,7 +458,9 @@ function Player({ course: c, index, railOpen, setRailOpen, mobile, autoplay, mai
               </section>
             </div>
             <div className="pac-pic">
-              <VisualPlayer visual={l.visual} autoPlay={autoplay} />
+              {l.reel
+                ? <ReelPlayer reel={l.reel} visual={l.visual} video={reelVideo(c, l)} autoPlay={autoplay} title={l.title} className="ac-visual ac-reel" />
+                : <VisualPlayer visual={l.visual} autoPlay={autoplay} />}
             </div>
           </div>
           <QuickCheck key={`${c.id}/${l.id}`} course={c} lesson={l} />
@@ -581,6 +582,16 @@ function ProgressView() {
         <h1 className="pac-h1">Progress</h1>
         <span className="pac-meta">Saved to your account</span>
       </div>
+      {!p.loading && p.rows.length === 0 && (
+        // Nothing started yet: say what to do first, with one button (DEC-0077).
+        <section className="pac-start pac-glass" aria-labelledby="pac-start-t">
+          <div>
+            <h2 id="pac-start-t" className="pac-start-title">You have not opened a lesson yet</h2>
+            <p className="pac-meta">{courses[0].lessons[0].title} is the first one. It takes {courses[0].lessons[0].minutes} minutes and ends with a quick check.</p>
+          </div>
+          <Button variant="accent" icon="play" href={lessonHref(courses[0], courses[0].lessons[0])}>Start the first lesson</Button>
+        </section>
+      )}
       <dl className="pac-totals pac-totals-row pac-glass">
         <div><dt>Lessons done</dt><dd>{p.doneCount}<small> of {totalLessons}</small></dd></div>
         <div><dt>Courses finished</dt><dd>{rows.filter((r) => r.done === r.c.lessons.length).length}<small> of {courses.length}</small></dd></div>
@@ -650,6 +661,7 @@ function SettingsView({ settings, set }: { settings: Settings; set: (p: Partial<
       </section>
       <section className="pac-set pac-glass" aria-labelledby="set-links">
         <h2 id="set-links" className="pac-h3">Links</h2>
+        <p className="pac-set-note">{LEGAL}{LEGAL_MORE}</p>
         <nav className="pac-links" aria-label="Links">
           <a href="/learn/academy/" target="_blank" rel="noopener">Public course pages</a>
           <a href={productUrl("#/learn")} target="_blank" rel="noopener">Glossary</a>

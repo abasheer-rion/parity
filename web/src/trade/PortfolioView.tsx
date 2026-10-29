@@ -6,6 +6,8 @@ import { resetAccount, saveCosts, STARTING_CASH, costsOf, type AccountRow } from
 import type { Costs } from "../lib/paper/matching";
 import { PnlStrip, PositionsTable } from "./blotter";
 import { useDemo } from "./demo";
+import { BalancesStrip, BrokerPositionsTable, ExportButton, SandboxCard } from "./brokerBlotter";
+import { ModeBadge, useTrading } from "./trading";
 
 export function AccountBar() {
   const d = useDemo();
@@ -29,6 +31,32 @@ export function AccountBar() {
 }
 
 export function PortfolioView({ onSymbol }: { onSymbol: (k: string) => void }) {
+  return useTrading().server ? <BrokerPortfolioView /> : <DemoPortfolioView onSymbol={onSymbol} />;
+}
+
+function BrokerPortfolioView() {
+  const t = useTrading();
+  return (
+    <div className="view view-scroll">
+      <div className="vbar">
+        <strong>{t.mode === "sandbox" ? "Sandbox account" : "Demo account"}</strong>
+        <ModeBadge />
+        <span className="vbar-gap" />
+        <ExportButton />
+      </div>
+      {t.status?.notes.map((note) => <p key={note} className="bt-note">{note}</p>)}
+      {t.error && <p className="ot-problem">{t.error}</p>}
+      <SandboxCard />
+      <BalancesStrip wide />
+      <section className="vbox vbox-fill" aria-label="Positions">
+        <h2 className="vh">Positions</h2>
+        <BrokerPositionsTable />
+      </section>
+    </div>
+  );
+}
+
+function DemoPortfolioView({ onSymbol }: { onSymbol: (k: string) => void }) {
   const d = useDemo();
   if (d.error) return <div className="vmsg">{d.error}</div>;
   return (

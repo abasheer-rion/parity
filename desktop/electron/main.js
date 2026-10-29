@@ -27,6 +27,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const routes = require("./routes");
+const help = require("./help");
 const TOKENS = require("./tokens");
 const SECTIONS = require("./sections");
 const settingsStore = require("./settings");
@@ -38,6 +39,7 @@ const { Page } = require("./page");
 const { ParityTray } = require("./tray");
 const logfile = require("./logfile");
 const guard = require("./guard");
+const staySignedIn = require("./session");
 
 // Errors nobody caught: logged, and one plain message instead of Electron's raw box and a
 // quit (guard.js). Installed first, so it covers everything below.
@@ -62,7 +64,7 @@ protocol.registerSchemesAsPrivileged([
 
 const WEB_ROOT = app.isPackaged ? path.join(process.resourcesPath, "web") : path.join(__dirname, "..", "build", "web");
 const DEV_URL = (process.env.PARITY_DEV_URL || "").replace(/\/$/, "") || null;
-const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://parity.endyland.com").replace(/\/$/, "");
+const ORIGIN = (process.env.PARITY_LIVE_ORIGIN || readJson(path.join(WEB_ROOT, "desktop.json"))?.origin || "https://paritytrading.app").replace(/\/$/, "");
 const TRUSTED = routes.trustedOrigins(ORIGIN).concat(DEV_URL ? [new URL(DEV_URL).origin] : []);
 const HIDDEN = process.env.PARITY_HIDDEN === "1" || (!!process.env.PARITY_SELFTEST && process.env.PARITY_VISIBLE !== "1");
 if (HIDDEN && process.platform === "darwin") { try { app.setActivationPolicy("prohibited"); } catch { /* older macOS */ } }
@@ -208,6 +210,7 @@ function setOnline(value) {
     if (!(await check(2500))) return;
     log("the website answers again, going back to the live page");
     setOnline(true);
+    setTimeout(() => checkSessions("back online"), 5000);
     for (const w of windows) if (w.active?.saved && w.active.path) w.active.load(w.active.path);
   }, 15000);
 }
@@ -595,6 +598,22 @@ ipcMain.on("parity:nav", (e, dir, source) => {
   else if (dir === "forward") w.forward();
 });
 
+// The page's header row (preload.js): whether it shows one, and presses on its empty part.
+ipcMain.on("parity:chrome", (e, msg) => {
+  if (!fromPage(e)) return;
+  pageWindowOf(e.sender)?.setHeader(e.sender, msg?.header === true);
+});
+
+ipcMain.on("parity:drag", (e, kind, at) => {
+  if (!fromPage(e)) return;
+  const w = pageWindowOf(e.sender);
+  if (!w || w.active?.wc !== e.sender) return;
+  if (kind === "start" && at) w.dragStart(Number(at.x), Number(at.y));
+  else if (kind === "move" && at) w.dragMove(Number(at.x), Number(at.y));
+  else if (kind === "end") w.dragEnd();
+  else if (kind === "dblclick") run("dblclick", w);
+});
+
 ipcMain.on("shell:do", (e, action, arg) => {
   if (!isShellSender(e)) return;
   const w = windowOf(e.sender);
@@ -615,6 +634,8 @@ ipcMain.on("shell:do", (e, action, arg) => {
     w.dragMove(Number(arg.x), Number(arg.y));
   } else if (action === "drag-end") {
     w.dragEnd();
+  } else if (action === "lead-size" && arg) {
+    w.setLead({ base: Number(arg.base), full: Number(arg.full) });
   } else if (action === "open-workspace" && typeof arg === "string") {
     w.closeOverlay();
     openWorkspace(arg);
@@ -758,8 +779,11 @@ function buildMenu() {
         { label: "Terms of service", click: () => openPath("/legal/terms/") },
         { label: "Regulatory status", click: () => openPath("/legal/regulatory/") },
         { type: "separator" },
-        { label: "Open parity.endyland.com in the browser", click: () => shell.openExternal(ORIGIN) },
-        { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.ai") },
+        { label: "What's new", submenu: help.updateLinks(ORIGIN).map(({ label, url }) => ({ label, click: () => shell.openExternal(url) })) },
+        { type: "separator" },
+        { label: help.siteLabel(ORIGIN), click: () => shell.openExternal(ORIGIN) },
+        { label: "Download Parity for another computer", click: () => shell.openExternal(`${ORIGIN}/download/`) },
+        { label: "Email Parity", click: () => shell.openExternal("mailto:contact@paritytrading.app") },
       ],
     },
   ];
@@ -775,8 +799,8 @@ function buildMenu() {
  */
 function watchForBlankViews() {
   const all = (why) => { log(`repaint (${why})`); for (const w of windows) w.repaint(why); };
-  powerMonitor.on("resume", () => all("woke from sleep"));
-  powerMonitor.on("unlock-screen", () => all("screen unlocked"));
+  powerMonitor.on("resume", () => { all("woke from sleep"); setTimeout(() => checkSessions("woke from sleep"), 3000); });
+  powerMonitor.on("unlock-screen", () => { all("screen unlocked"); setTimeout(() => checkSessions("screen unlocked"), 3000); });
   screen.on("display-added", () => all("screen added"));
   screen.on("display-removed", () => all("screen removed"));
   screen.on("display-metrics-changed", () => all("screen changed"));
@@ -823,7 +847,9 @@ app.whenReady().then(async () => {
   tray = new ParityTray(ctx);
   buildMenu();
 
+  await extendSignIn(ses);
   await refreshSignedIn();
+  setInterval(() => checkSessions("every 30 minutes"), staySignedIn.CHECK_EVERY_MS).unref?.();
   const saved = ctx.settings.restoreWindows && state.windows.length ? state.windows : [{ ...(state.windows[0] || {}), path: state.lastPath || "/" }];
   if (pending) saved[0] = { ...saved[0], path: pending };
   pending = null;
@@ -842,6 +868,49 @@ app.whenReady().then(async () => {
   ctx.updates.sync();
   if (process.env.PARITY_SELFTEST) require("./selftest").run({ windows: () => [...windows].filter((w) => w.alive), openLink, newWindow }).catch((e) => { console.error(e); app.exit(1); });
   if (process.env.PARITY_SHOTS) require("./shots").run({ focused: focusedWindow, newWindow }).catch((e) => { console.error(e); app.quit(); });
+});
+
+// ---------------------------------------------------------------- staying signed in
+
+/** At launch: an auth cookie nearer than 300 days to expiring is moved out to 400 (session.js). */
+async function extendSignIn(ses) {
+  try {
+    const now = Date.now() / 1000;
+    for (const c of await ses.cookies.get({})) {
+      const next = staySignedIn.extended(c, now);
+      if (next) await ses.cookies.set(next).catch((e) => log(`could not extend the sign-in cookie (${e.message})`));
+    }
+  } catch (e) {
+    log(`could not read the sign-in cookies (${e.message})`);
+  }
+}
+
+/**
+ * Asks every page to check its session now (web/src/auth/client.ts renews a token that ends
+ * within 10 minutes). Called after sleep, unlock, the connection coming back and every
+ * 30 minutes, so a window left open overnight is still signed in in the morning.
+ */
+let lastCheck = 0;
+function checkSessions(why) {
+  if (!ctx.state.signedIn || ctx.state.online === false) return;
+  const now = Date.now();
+  if (now - lastCheck < 20_000) return; // sleep and unlock often arrive together
+  lastCheck = now;
+  log(`session check (${why})`);
+  for (const wc of require("electron").webContents.getAllWebContents()) {
+    if (!wc.isDestroyed() && isPageView(wc)) wc.send("parity:session-check");
+  }
+}
+
+// The bundled copy (app://parity) asks who is signed in when the app starts offline. It gets
+// an id and an email from the session cookie, never a token (session.js).
+ipcMain.handle("parity:saved-user", async (e) => {
+  if (!isPageView(e.sender) || !String(e.senderFrame?.url || "").startsWith(`${routes.APP_ORIGIN}/`)) return null;
+  try {
+    return staySignedIn.savedUser(await session.fromPartition(PARTITION).cookies.get({}));
+  } catch {
+    return null; // the copy shows the log-in page
+  }
 });
 
 app.on("activate", () => { if (ready) showAll(); });

@@ -5,8 +5,8 @@
    Nothing outside this file may write a raw colour, a font size in px, a duration or a
    curve: `npm run lint:styles` fails if it does.
 
-   The look is dark glass: near-black canvas, frosted panels with hairline borders, a red
-   glow behind the glass, white for the main action and red for the active thing.
+   The look is dark glass: near-black canvas, frosted panels with hairline borders, an Invicta
+   blue glow behind the glass, white for the main action and blue for the active thing.
 
    Layers, from raw to meaning:
      1. palette  --palette-*   raw values. Only this file uses them.
@@ -29,29 +29,37 @@
   /* ---------------------------------------------------------------- 1. palette */
   --palette-black: #000;
   --palette-white: #fff;
-  /* Inks: the near-blacks, from the page up. */
-  --palette-ink-0: #050608;
-  --palette-ink-1: #08090d;
-  --palette-ink-2: #0d0e15;
-  --palette-ink-3: #11131b;
-  --palette-ink-4: #161925;
-  --palette-ink-5: #1e2130;
+  /* Inks: soft graphite, from the page up, in the manner of Mercury's dark mode (DEC-0075): a
+     charcoal page, panels a step lighter, menus and tooltips a step above that. Not black. */
+  --palette-ink-0: #131418;
+  --palette-ink-1: #16171b;
+  --palette-ink-2: #191a1f;
+  --palette-ink-3: #1d1e24;
+  --palette-ink-4: #222329;
+  --palette-ink-5: #27282f;
   /* Solid hairlines for the dense Terminal grid, where glass would blur the numbers. */
   --palette-line-1: #22252c;
   --palette-line-2: #353a45;
-  /* Greys for text, light to faint. Contrast on ink-0: 18.6, 13.4, 8.1, 6.0, 4.0. */
+  /* Greys for text, light to faint. Contrast on ink-0: 16.9, 12.2, 7.4, 5.7, 4.0; on ink-5 grey-500 is 3.1. */
   --palette-grey-100: #f4f5f8;
   --palette-grey-200: #d4d6de;
   --palette-grey-300: #a4a8b6;
-  --palette-grey-400: #8b8f9d;
-  --palette-grey-500: #6c7186;
-  /* Red: the brand. 500 fills, 300 is the text-safe step, 700 and 900 glow. */
-  --palette-red-300: #ff8a93;
-  --palette-red-500: #e0303f;
+  --palette-grey-400: #9599a7;
+  --palette-grey-500: #717689;
+  /* Invicta blue: the brand (DEC-0075). The owner's name for a deep royal blue; no published
+     hex was found. The deep royal blue #1f4fbf (700) is the glow behind the glass. Controls need
+     3:1 on every panel (WCAG 1.4.11), which #1f4fbf misses on our blacks (2.2 to 2.8:1), so the
+     fill (500) is the nearest lighter step that passes: 3.0:1 on the lightest panel, white text
+     on it 4.7:1. 300 is the text-safe step (8.9:1), 600 the hover, 700 to 900 glow. Change these
+     values to change the brand blue everywhere. */
+  /* Loss red on light backgrounds (the signature charts' light theme). Not the accent. */
   --palette-red-600: #c42533;
-  --palette-red-700: #b21826;
-  --palette-red-800: #a01e28;
-  --palette-red-900: #780e1c;
+  --palette-invicta-300: #8fa8ff;
+  --palette-invicta-500: #3e6ce6;
+  --palette-invicta-600: #2c58c8;
+  --palette-invicta-700: #1f4fbf;
+  --palette-invicta-800: #173c94;
+  --palette-invicta-900: #0e2766;
   /* Signal colours */
   --palette-green-400: #36d07c;
   --palette-coral-400: #ff6b62;
@@ -95,7 +103,7 @@
      including glass over the glow, so a control can be found without its label (WCAG 1.4.11). */
   --color-border-control: var(--palette-grey-500);
   --color-hover: color-mix(in srgb, var(--palette-white) 5%, transparent);
-  --color-pressed: color-mix(in srgb, var(--palette-white) 9%, transparent);
+  --color-pressed: color-mix(in srgb, var(--palette-white) 7%, transparent);
   --color-fill: color-mix(in srgb, var(--palette-white) 7%, transparent);
   --color-fill-strong: color-mix(in srgb, var(--palette-white) 12%, transparent);
 
@@ -106,17 +114,19 @@
   --color-text-disabled: var(--palette-grey-500);
   --color-link: var(--palette-grey-100);
 
-  /* The main action is white; the active thing (tab, row, nav item) is red. */
+  /* The main action is white; the active thing (tab, row, nav item) is Invicta blue. */
   --color-primary: var(--palette-grey-100);
   --color-primary-hover: var(--palette-white);
   --color-on-primary: var(--palette-ink-0);
-  --color-accent: var(--palette-red-500);
-  --color-accent-hover: var(--palette-red-600);
-  --color-accent-text: var(--palette-red-300);
-  --color-accent-soft: color-mix(in srgb, var(--palette-red-500) 16%, transparent);
+  --color-accent: var(--palette-invicta-500);
+  --color-accent-hover: var(--palette-invicta-600);
+  --color-accent-text: var(--palette-invicta-300);
+  --color-accent-soft: color-mix(in srgb, var(--palette-invicta-500) 16%, transparent);
   --color-on-accent: var(--palette-white);
-  --color-selected: color-mix(in srgb, var(--palette-red-500) 12%, transparent);
-  --color-focus: var(--palette-grey-100);
+  --color-selected: color-mix(in srgb, var(--palette-invicta-500) 12%, transparent);
+  /* The keyboard focus ring: brand blue, 4.5:1 on the canvas and 4.1:1 on the white
+     primary button, so it reads on either side of the ring (WCAG 1.4.11, 2.4.7). */
+  --color-focus: var(--palette-blue-500);
 
   /* Gains and losses always carry a sign or an arrow too (REF-0009 rule 3). */
   --color-positive: var(--palette-green-400);
@@ -128,10 +138,15 @@
   --color-info: var(--palette-blue-300);
   --color-info-soft: color-mix(in srgb, var(--palette-blue-300) 12%, transparent);
 
+  /* Tables: a header row that reads as one band, and a row hover that is clearly there. */
+  --color-table-head: var(--palette-ink-3);
+  --color-table-head-text: var(--palette-grey-200);
+  --color-row-hover: color-mix(in srgb, var(--palette-invicta-500) 10%, transparent);
+
   --color-scrim: color-mix(in srgb, var(--palette-black) 60%, transparent);
-  --color-glow: var(--palette-red-700);
-  --color-glow-deep: var(--palette-red-900);
-  --color-glow-soft: var(--palette-red-800);
+  --color-glow: var(--palette-invicta-700);
+  --color-glow-deep: var(--palette-invicta-900);
+  --color-glow-soft: var(--palette-invicta-800);
 
   /* Chart series: categorical, always assigned in this order, by name (REF-0009). */
   --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
@@ -162,6 +177,9 @@
   --type-6xl: 28px;
   --type-7xl: 34px;
   --type-8xl: 44px;
+  /* The app's type hierarchy: a page title, then a section head, each a clear step up. */
+  --type-title: var(--type-7xl);
+  --type-section: var(--type-3xl);
   /* Fluid display sizes for the public pages' headlines. */
   --type-display-sm: clamp(28px, 4vw, 40px);
   --type-display: clamp(34px, 6vw, 68px);
@@ -172,6 +190,7 @@
   --weight-medium: 500;
   --weight-semibold: 530;
   --weight-bold: 600;
+  --weight-title: 650;
 
   --leading-tight: 1.15;
   --leading-snug: 1.35;
@@ -207,7 +226,7 @@
   --glass-blur: blur(16px) saturate(1.3);
   --glass-blur-strong: blur(24px) saturate(1.4);
   --card-sheen: linear-gradient(180deg, rgb(255 255 255 / .02), rgb(255 255 255 / 0) 120px);
-  /* The red light behind the glass. */
+  /* The blue light behind the glass. */
   --glow-accent: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow) 55%, transparent), transparent);
   --glow-deep: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow-deep) 50%, transparent), transparent);
   --glow-faint: radial-gradient(closest-side, color-mix(in srgb, var(--color-glow) 20%, transparent), transparent);

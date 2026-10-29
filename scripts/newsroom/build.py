@@ -437,7 +437,7 @@ class Newsroom:
 {head}
 {bp.jsonld(graph)}
 <style>{bp.CSS.strip()}{CSS.strip()}</style>
-{analytics}</head>
+{analytics}{"" if self.preview else bp.STATUS_BANNER + chr(10)}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap wide">
@@ -445,12 +445,14 @@ class Newsroom:
 <nav class="site" aria-label="Site">{bp.nav_html(section)}</nav>
 <nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
+{bp.STATUS_SLOT}
 <main id="main" tabindex="-1"><div class="wrap wide">
 <p class="crumbs">{crumbs}<span aria-current="page">{e(trail[-1][0])}</span></p>
 {body}
 </div></main>
 <footer><div class="wrap wide">
 <nav aria-label="Legal">{legal}</nav>
+{bp.updates_nav()}
 <p>&copy; 2026 {bp.ORG} &middot; <a href="mailto:{bp.CONTACT}">{bp.CONTACT}</a></p>
 </div></footer>
 <script>{SCRIPT}</script>
@@ -666,7 +668,7 @@ class Newsroom:
         body = ('<h1>Authors</h1><p class="lede">Posts are written by people on the Parity team, or under a house byline '
                 "when the work is the team's together. House bylines are named for Parity and are never presented as a person.</p>"
                 f'<ul class="grid">{"".join(cards)}</ul>')
-        self.pages["/authors/"] = self.shell(path="/authors/", title="Authors", description="Who writes the Parity blog and news posts.",
+        self.pages["/authors/"] = self.shell(path="/authors/", title="Authors", description="Who writes the Parity blog and news posts: the three team members and the house bylines.",
                                              body=body, section="blog", trail=[("Home", "/"), ("Authors", "/authors/")], ld=[])
 
     def tag_pages(self) -> None:
@@ -677,7 +679,7 @@ class Newsroom:
         for t, ps in tags.items():
             path, label = f"/tags/{t}/", t.replace("-", " ")
             body = f'<h1>Posts tagged {e(label)}</h1><ul class="nr-grid">{"".join(self.card(p) for p in ps)}</ul>'
-            self.pages[path] = self.shell(path=path, title=f"Posts tagged {label}", description=f"Parity blog and news posts tagged {label}.",
+            self.pages[path] = self.shell(path=path, title=f"Posts tagged {label}", description=f"Parity blog and news posts tagged {label}, newest first, each labelled as reporting, analysis or opinion.",
                                           body=body, section="blog", trail=[("Home", "/"), ("Tags", "/tags/"), (label, path)], ld=[])
         items = "".join(f'<li><a href="/tags/{t}/">{e(t.replace("-", " "))} ({len(ps)})</a></li>' for t, ps in sorted(tags.items()))
         body = f'<h1>Tags</h1><ul class="related">{items}</ul>' if items else "<h1>Tags</h1><p>No tags yet.</p>"

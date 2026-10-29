@@ -1,0 +1,5 @@
+SELECT measure_driver(200, '2024-11-06', 216);
+SELECT case_auto_moves(16, '2024-11-05', '2024-11-06', ARRAY['DJT:Nasdaq','TSLA:Nasdaq','JPM:NYSE','GS:NYSE','BAC:NYSE','WFC:NYSE','KRE:NYSEArca','IWM:NYSEArca','XLF:NYSEArca','COIN:Nasdaq','MSTR:Nasdaq','GEO:NYSE','CXW:NYSE','ENPH:Nasdaq','FSLR:Nasdaq','RUN:Nasdaq','TAN:NYSEArca','SEDG:Nasdaq','NEE:NYSE','LMT:NYSE','NOC:NYSE','UNH:NYSE','HUM:NYSE','CVS:NYSE','PFE:NYSE','MRNA:Nasdaq','NUE:NYSE','STLD:Nasdaq','CAT:NYSE','DE:NYSE','TLT:Nasdaq','GLD:NYSEArca','EWW:NYSEArca','FXI:NYSEArca','BABA:NYSE','PDD:Nasdaq','NIO:NYSE','TM:NYSE','AAPL:Nasdaq','NVDA:Nasdaq','XOM:NYSE','MXN=X:FX','EURUSD=X:FX','CNY=X:FX','BTC-USD:FX','VOW3:XETRA','BMW:XETRA','7203:TSE','005930:KRX','069500:KRX','1306:TSE','EXSA:XETRA','SPY:NYSEArca'], 216);
+INSERT INTO case_step (id, case_id, parent_id, role, entity_id, mechanism, direction, description, happened_at, public_at, evidence_doc) VALUES
+  (1600, 16, NULL, 'event', NULL, 'driver', NULL, 'Trump wins (odds 58 -> ~99); Republicans take the Senate. Read as tax cuts, deregulation, tariffs.', '2024-11-06', '2024-11-06 05:34-05', 214);
+SELECT case_auto_steps(16, 1600, 'driver', 2, 0.5);

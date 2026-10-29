@@ -81,4 +81,5 @@ Everything still replays or reshuffles history. Nothing in it is a forecast. The
 - [DEC-0038: Every page gets its tags from one table and every view has a link](0038-every-page-gets-its-tags-from-one-table-and-every-view-has-a-link.md)
 - [DEC-0040: Parity Trade, a full-screen trading app of its own](0040-parity-trade-a-full-screen-trading-app-of-its-own.md)
 - [DEC-0041: Parity as an installable site and a desktop app for Mac and Windows](0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 <!-- backlinks:end -->

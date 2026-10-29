@@ -1,0 +1,5 @@
+SELECT measure_driver(180, '2019-09-14', 211);
+SELECT case_auto_moves(14, '2019-09-13', '2019-09-16', ARRAY['FRO:NYSE','STNG:NYSE','DHT:NYSE','INSW:NYSE','VLO:NYSE','MPC:NYSE','PSX:NYSE','XOM:NYSE','CVX:NYSE','SHEL:LSE','BP:LSE','EQNR:NYSE','LNG:NYSE','LMT:NYSE','NOC:NYSE','RTX:NYSE','GD:NYSE','RHM:XETRA','BA:LSE','DAL:NYSE','UAL:Nasdaq','AAL:Nasdaq','LHA:XETRA','AF:EPA','CCL:NYSE','RCL:NYSE','NCLH:NYSE','LYB:NYSE','DOW:NYSE','BAS:XETRA','CF:NYSE','RELIANCE:NSE','BPCL:NSE','IOC:NSE','5020:TSE','010950:KRX','096770:KRX','9101:TSE','9104:TSE','9107:TSE','GLD:NYSEArca','LPG:NYSE','MATX:NYSE','ITA:NYSEArca','NIFTYBEES:NSE','069500:KRX','1306:TSE','EXSA:XETRA','ISF:LSE','SPY:NYSEArca'], 211);
+INSERT INTO case_step (id, case_id, parent_id, role, entity_id, mechanism, direction, description, happened_at, public_at, evidence_doc) VALUES
+  (1400, 14, NULL, 'event', 180, 'driver', NULL, 'Drone and missile strike on Saudi Aramco''s Abqaiq and Khurais plants knocks out ~5.7 mb/d (~5% of world supply); Brent +14.6% on the first session.', '2019-09-16', '2019-09-14 03:31+03', 210);
+SELECT case_auto_steps(14, 1400, 'driver', 2, 0.5);

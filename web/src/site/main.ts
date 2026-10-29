@@ -1,10 +1,9 @@
-// Motion for the public front page (web/index.html, DEC-0039). The page is complete
+// Motion for the public front page (web/index.html, DEC-0039, DEC-0080). The page is complete
 // without this script: every picture's finished state is the default. On top it adds:
 //   - the hero field (field.ts), after first paint, where WebGL can run it well
 //   - two scroll-driven scenes: Bot Battle's trades ticking in and the balance collapsing,
 //     and a Verify check (file in, five checks, verdict, "survives up to N tries")
-//   - three small framed demos that loop while on screen
-//   - counters and bars from /stats.json, sections that fade up, markets that light up
+//   - counters and bars from /stats.json, and sections that fade up
 //   - floating corner controls that step aside while you scroll down
 //   - the sign-in panel (DEC-0044): Log in and Sign up fade the page out and the panel in,
 //     over the same backdrop, with the form in the address (/#login, /#signup, /#reset)
@@ -119,10 +118,9 @@ const seenOnce = (els: HTMLElement[], cls: string, margin = "0px 0px -10% 0px") 
   }
 };
 seenOnce($$(".rv"), "in");
-seenOnce($$(".cv li"), "in", "0px 0px -18% 0px");
 
 // Counters: the HTML holds a real number (written in at deploy) or a fallback word.
-type Stats = Record<string, unknown> & { series_by_group?: Record<string, number> };
+type Stats = Record<string, unknown>;
 const counters = $$("[data-stat]");
 const targets = new Map<HTMLElement, number>();
 for (const el of counters) {
@@ -184,13 +182,6 @@ fetch("/stats.json", { cache: "no-cache" })
       }
     }
     setBars(st);
-    const groups = st.series_by_group;
-    if (groups) {
-      for (const el of $$("[data-groups]")) {
-        const n = (el.dataset.groups ?? "").split(",").reduce((a, g) => a + (groups[g] ?? 0), 0);
-        if (n > 0) el.textContent = `${fmt(n)} series`;
-      }
-    }
   })
   .catch(() => undefined);
 
@@ -263,35 +254,6 @@ if (verify) {
   });
 }
 runScenes();
-
-// The three small demos loop only while someone can see them.
-function loopWhileVisible(el: HTMLElement, tick?: (t: number) => void, period = 9000) {
-  if (reduce) return;
-  let raf = 0, t0 = 0;
-  const frame = (t: number) => { tick?.((t - t0) % period); raf = requestAnimationFrame(frame); };
-  new IntersectionObserver(([e]) => {
-    el.classList.toggle("looping", e.isIntersecting);
-    cancelAnimationFrame(raf); raf = 0;
-    if (e.isIntersecting && tick) { t0 = performance.now(); raf = requestAnimationFrame(frame); }
-  }, { threshold: 0.3 }).observe(el);
-}
-for (const d of $$("[data-demo]")) {
-  if (d.dataset.demo !== "gauntlet") { loopWhileVisible(d); continue; }
-  // The 11 tests tick on one by one; the score counts up with them, holds, then restarts.
-  const items = $$("#g-list li", d);
-  const out = document.getElementById("g-n");
-  const bar = document.getElementById("g-bar");
-  let last = -1;
-  loopWhileVisible(d, (t) => {
-    const k = t < 600 ? 0 : Math.min(items.length, Math.floor((t - 600) / 420) + 1);
-    if (k === last) return;
-    last = k;
-    items.forEach((li, i) => li.classList.toggle("on", i < k));
-    const passed = items.slice(0, k).filter((li) => !li.classList.contains("x")).length;
-    if (out) out.textContent = String(passed);
-    bar?.style.setProperty("--g", String(passed / items.length));
-  });
-}
 
 // The hero field, after the page has loaded, where it can run well. Reduced motion, data
 // saving, no WebGL or a low-power device keep the still picture.

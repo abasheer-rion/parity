@@ -105,6 +105,15 @@ export const loadPerps = () => get<PerpsDoc>("perps.json");
 export const loadDiscover = () => get<DiscoverDoc>("discover.json");
 /** Private markets (DEC-0029): Form D counts, BDC NAVs, FRED proxies and the unsmoothing study. */
 export const loadPrivate = () => get<PrivateDoc>("private.json");
+
+/** The home heatmap (DEC-0075): index members sized by SEC public float, largest first.
+ *  Rows are [ticker, name, sector, public float in dollars, float date]. */
+export interface HeatmapDoc {
+  generated_at: string; fetched_at: string | null; columns: string[];
+  indexes: Record<"sp500" | "ndx", { label: string; rows: [string, string, string, number, string][] }>;
+  missing: Record<string, number>; size: string; moves: null; sources: MarketSource[];
+}
+export const loadHeatmap = () => get<HeatmapDoc>("heatmap.json");
 export const loadEtfs = () => get<EtfsFile>("etfs.json").then((f): EtfsDoc => ({
   ...f,
   etfs: f.etfs.map((r) => {

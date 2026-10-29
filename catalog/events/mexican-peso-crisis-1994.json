@@ -2,7 +2,7 @@
   "id": "mexican-peso-crisis-1994",
   "name": "Mexico devalues the peso",
   "date": "1994-12-20",
-  "type": "financial_crisis",
+  "type": "currency_crisis",
   "regions": [
     "latin_america",
     "north_america"

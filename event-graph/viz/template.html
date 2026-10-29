@@ -1,0 +1,511 @@
+<title>Parity Event Graph</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: an instrument panel. Toolbar on top. Case write-ups read as a document; each case's web fills the left
+   with a reading column on the right that explains whatever you point at. Stacks to one column on phones. */
+:root {
+  --bg: #eef1f4;        /* cool paper */
+  --panel: #f8fafb;
+  --ink: #17212b;
+  --muted: #5d6b78;
+  --line: #c9d2da;
+  --accent: #2b59c3;    /* cobalt: selection, links */
+  --down: #c0392f;      /* hurt */
+  --up: #1d8656;        /* helped */
+  --warn: #b7791f;
+  --k-company: #2b59c3; --k-facility: #8a5a2b; --k-product: #6b4fa3; --k-instrument: #7a8794; --k-event: #c0392f;
+  --k-person: #0f7b83; --k-country: #5b6b2f; --k-agency: #9a3d6b;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10161c; --panel: #161e26; --ink: #e3e9ee; --muted: #93a2b0; --line: #2c3946;
+  --accent: #7ea2f2; --down: #f0796f; --up: #5cc98f; --warn: #e0a84a;
+  --k-company: #7ea2f2; --k-facility: #d29a62; --k-product: #b39ae6; --k-instrument: #8b98a5; --k-event: #f0796f;
+  --k-person: #55c2c9; --k-country: #a9bd6a; --k-agency: #e08ab4;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #10161c; --panel: #161e26; --ink: #e3e9ee; --muted: #93a2b0; --line: #2c3946;
+  --accent: #7ea2f2; --down: #f0796f; --up: #5cc98f; --warn: #e0a84a;
+  --k-company: #7ea2f2; --k-facility: #d29a62; --k-product: #b39ae6; --k-instrument: #8b98a5; --k-event: #f0796f;
+  --k-person: #55c2c9; --k-country: #a9bd6a; --k-agency: #e08ab4;
+  color-scheme: dark }
+
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14px; line-height: 1.45;
+       display: flex; flex-direction: column; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header { padding-block: 14px 10px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: end;
+         border-bottom: 1px solid var(--line); }
+h1 { font-family: var(--display); font-stretch: 80%; font-weight: 800; font-size: 22px; letter-spacing: -0.01em;
+     margin: 0; text-wrap: balance; }
+h1 small { display: block; font-family: var(--mono); font-weight: 400; font-size: 11px; color: var(--muted);
+           letter-spacing: 0.02em; font-stretch: 100%; }
+.group { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); font-weight: 600; }
+.seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.seg button { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--line);
+              background: var(--panel); color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.seg button:focus-visible, .node:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+main { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 0; }
+main.doc { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }
+#stage { position: relative; min-width: 0; min-height: 420px; }
+svg { width: 100%; height: 100%; display: block; cursor: grab; }
+svg:active { cursor: grabbing; }
+.edge { stroke: var(--line); stroke-width: 1.2; fill: none; }
+.edge.supplies { stroke: var(--muted); stroke-width: 1.6; }
+.edge.owns { stroke-dasharray: 3 3; }
+.edge.produces { stroke-dasharray: 1 3; stroke-linecap: round; }
+.edge.competes { stroke-dasharray: 8 3 2 3; }
+.edge.holds { stroke: var(--k-instrument); }
+.edge.hot { stroke: var(--down); stroke-width: 2.6; stroke-dasharray: none; }
+.edge.hot.up { stroke: var(--up); }
+.edge.dim, .node.dim { opacity: 0.18; }
+.node { cursor: pointer; }
+.node .shape { stroke: var(--bg); stroke-width: 1.5; }
+.node text { font-size: 11px; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; pointer-events: none; }
+.node .ring { fill: none; stroke-width: 2.5; }
+.node .ring.missed { stroke-dasharray: 3 3; }
+.node.sel .shape { stroke: var(--ink); stroke-width: 2.5; }
+.legend { position: absolute; left: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px;
+          color: var(--muted); background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 6px 8px; border-radius: 4px;
+          max-width: calc(100% - 24px); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 9px; height: 9px; display: inline-block; border-radius: 50%; }
+
+aside { border-left: 1px solid var(--line); background: var(--panel); overflow-y: auto; padding-block: 16px 28px;
+        display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+aside h2 { font-family: var(--display); font-stretch: 85%; font-size: 17px; margin: 0; text-wrap: balance; }
+aside h3 { margin: 0 0 6px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 12.5px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+.row { display: grid; grid-template-columns: 100px 1fr; gap: 8px; padding-block: 7px; border-top: 1px solid var(--line); font-size: 12.5px; }
+.row:first-of-type { border-top: 0; }
+.pill { font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+        padding: 2px 6px; border-radius: 3px; align-self: start; justify-self: start; border: 1px solid currentColor; white-space: nowrap; }
+.v-hit, .v-avoided { color: var(--up); } .v-missed, .v-wrong_direction { color: var(--down); }
+.v-false_alarm { color: var(--warn); } .v-unconfirmed { color: var(--muted); }
+.lesson { color: var(--muted); }
+.claim { padding-block: 8px; border-top: 1px solid var(--line); font-size: 12.5px; display: grid; gap: 4px; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar b { display: block; height: 100%; background: var(--accent); }
+.bar.low b { background: var(--down); }
+.meta { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.call { padding-block: 6px; border-top: 1px solid var(--line); font-size: 12px; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.path { font-family: var(--mono); font-size: 11px; color: var(--muted); overflow-wrap: anywhere; }
+p.note { margin: 0; color: var(--muted); font-size: 12.5px; max-width: 60ch; }
+a { color: var(--accent); }
+
+/* ── case write-up ── */
+#doc { padding-block: 22px 48px; display: grid; gap: 22px; max-width: 980px; width: 100%; margin-inline: auto; box-sizing: border-box; }
+#doc h2 { font-family: var(--display); font-stretch: 78%; font-weight: 800; font-size: clamp(24px, 4vw, 34px);
+          line-height: 1.05; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+#doc h3 { font-family: var(--display); font-stretch: 85%; font-size: 16px; margin: 0 0 8px; }
+#doc .lede { font-size: 16px; max-width: 68ch; margin: 0; }
+#doc .blind { color: var(--muted); font-size: 13px; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--mono); font-size: 11px; padding: 3px 7px; border-radius: 3px; background: var(--panel);
+        border: 1px solid var(--line); color: var(--muted); }
+.score { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+.score div { display: grid; }
+.score b { font-family: var(--mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+.story { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; padding-block: 9px; border-top: 1px solid var(--line); }
+.step:first-of-type { border-top: 0; }
+.step .arrow { font-family: var(--mono); font-weight: 600; }
+.step .who { font-weight: 600; }
+.step p { margin: 2px 0 0; max-width: 72ch; }
+.step .whynot { color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600;
+     padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); }
+td { padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.neg { color: var(--down); } .pos { color: var(--up); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+.cols > * { min-width: 0; }
+
+@media (max-width: 820px) {
+  main { grid-template-columns: 1fr; }
+  #stage { height: 62vh; min-height: 360px; }
+  aside { border-left: 0; border-top: 1px solid var(--line); overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header class="wrap">
+  <h1>Parity Event Graph<small id="stamp"></small></h1>
+  <div class="group"><span class="label">View</span>
+    <div class="seg" id="views">
+      <button id="v-cases" data-view="cases" aria-pressed="true">Case write-ups</button>
+      <button id="v-log" data-view="log" aria-pressed="false">Training log</button>
+      <span id="graph-views" style="display:contents"></span>
+      <button id="v-13f" data-view="13f" aria-pressed="false">Berkshire 13F</button>
+    </div></div>
+  <div class="group" id="moment-group"><span class="label">Replay as of</span>
+    <div class="seg" id="moments"></div></div>
+  <div class="group" id="case-group"><span class="label">Case</span>
+    <div class="seg" id="casepick"></div></div>
+</header>
+
+<main id="main">
+  <div id="stage">
+    <svg id="svg" role="img" aria-label="Network of entities and the links between them"></svg>
+    <div class="legend" id="legend"></div>
+  </div>
+  <aside class="wrap" id="panel" aria-live="polite"></aside>
+  <section class="wrap" id="doc" hidden></section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const DATA = /*DATA*/null;
+
+const KIND_SHAPE = { company: d3.symbolCircle, fund: d3.symbolCircle, facility: d3.symbolSquare, product: d3.symbolDiamond,
+                     instrument: d3.symbolCircle, event: d3.symbolTriangle, person: d3.symbolStar, country: d3.symbolWye,
+                     agency: d3.symbolCross };
+const KIND_COLOR = k => ({ fund: 'company', commodity: 'product', region: 'country', policy: 'agency' }[k] || k);
+const REL_NOTE = { supplies: 'supplies', owns: 'owns', produces: 'produces', input_of: 'is an input to', competes: 'competes with',
+                   holds: 'holds', issued: 'issued', leads: 'leads', sells_in: 'sells in', allied_with: 'is allied with',
+                   regulates: 'regulates' };
+const fmtUsd = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'B' : v >= 1e6 ? '$' + (v / 1e6).toFixed(0) + 'M' : '$' + v;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const signed = v => v == null ? '' : (v > 0 ? '+' : '') + Number(v).toFixed(1) + '%';
+const cls = v => v == null ? '' : v < 0 ? 'neg' : v > 0 ? 'pos' : '';
+
+// The Renesas fire is an event, not an entity; draw it as a node touching the facility it hit.
+const FIRE = { id: 'fire', kind: 'event', name: 'Fire · Naka N3', attrs: {} };
+const nodesAll = [...DATA.nodes, FIRE];
+const linksAll = [...DATA.links.map(l => ({ ...l, doc: l.source, source: l.src_id, target: l.dst_id })),
+                  { source: 'fire', target: 20, rel: 'hit', attrs: {}, synthetic: true }];
+const byName = new Map(nodesAll.map(n => [n.name, n.id]));
+const SHORT = { 1: 'Renesas fire', 2: 'Starbucks CEO', 3: 'Export controls', 4: 'Disney CEO', 5: 'Huawei ban', 6: 'Rusal sanction', 7: 'Rusal easing', 8: 'H20 curbs', 9: 'SVB run', 10: 'Backstop', 11: 'Iran war', 12: 'Korea chips', 13: 'Brazil (live)', 14: 'Abqaiq 2019', 15: 'Israel-Iran 2025', 16: 'US vote 2024', 17: 'Argentina 2023', 18: 'Brazil 2022', 19: 'Intel 2000', 20: 'Apple 2000' };
+const CASE_OF = Object.fromEntries(DATA.cases.map(c => ['c' + c.id, c.id]));
+const gv = document.getElementById('graph-views');
+DATA.cases.forEach(c => { const b = document.createElement('button'); b.id = 'v-c' + c.id; b.dataset.view = 'c' + c.id;
+  b.textContent = (SHORT[c.id] || c.title) + ' · web'; gv.appendChild(b); });
+const setFor = v => {
+  if (v === '13f') return new Set(linksAll.filter(l => l.rel === 'holds' || l.rel === 'issued').flatMap(l => [l.source, l.target]));
+  const ids = new Set(DATA.case_nodes[CASE_OF[v]] || []);
+  if (v === 'c1') ids.add('fire');
+  return ids;
+};
+
+let view = 'cases', moment = DATA.moments.length - 1, selected = null, caseId = 3;
+
+document.getElementById('stamp').textContent =
+  `${DATA.cases.length} cases · ${DATA.nodes.length} entities · ${DATA.links.length} links · exported ${DATA.exported.slice(0, 16).replace('T', ' ')}`;
+
+// ── controls ──
+const mBox = document.getElementById('moments');
+DATA.moments.forEach((m, i) => {
+  const b = document.createElement('button');
+  b.id = 'm-' + i; b.textContent = m.label;
+  b.onclick = () => { moment = i; selected = null; render(); };
+  mBox.appendChild(b);
+});
+const cBox = document.getElementById('casepick');
+DATA.cases.forEach(c => {
+  const b = document.createElement('button');
+  b.id = 'case-' + c.id; b.textContent = c.title;
+  b.onclick = () => { caseId = c.id; renderDoc(); };
+  cBox.appendChild(b);
+});
+document.querySelectorAll('#views button').forEach(b => b.onclick = () => { view = b.dataset.view; selected = null; show(); });
+
+function show() {
+  document.querySelectorAll('#views button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === view));
+  const doc = view === 'cases' || view === 'log';
+  document.getElementById('main').classList.toggle('doc', doc);
+  document.getElementById('stage').hidden = doc;
+  document.getElementById('panel').hidden = doc;
+  document.getElementById('doc').hidden = !doc;
+  document.getElementById('moment-group').hidden = view !== 'c1';
+  document.getElementById('case-group').hidden = view !== 'cases';
+  try { localStorage.setItem('peg-view', view); } catch (e) {}
+  if (view === 'log') renderLog(); else if (doc) renderDoc(); else build();
+}
+
+// ── case write-up ──
+const ROLE = { cause: 'Why it happened', condition: 'What shaped it', event: 'The event',
+               consequence: 'What it caused', could_have: 'Looked likely, didn’t happen' };
+function renderDoc() {
+  document.querySelectorAll('#casepick button').forEach(b => b.setAttribute('aria-pressed', b.id === 'case-' + caseId));
+  const c = DATA.cases.find(x => x.id === caseId);
+  const verdict = new Map((c.replay || []).map(r => [r.name, r]));
+  const counts = {};
+  (c.replay || []).forEach(r => counts[r.verdict] = (counts[r.verdict] || 0) + 1);
+  const fp = Object.entries(c.fingerprint).map(([k, v]) => `<span class="chip">${esc(k)}: ${esc(typeof v === 'object' ? JSON.stringify(v) : v)}</span>`).join('');
+  const steps = role => (c.steps || []).filter(s => s.role === role);
+  const stepRow = s => {
+    const r = s.entity ? verdict.get(s.entity) : null;
+    const arrow = s.role === 'could_have' ? '×' : s.dir > 0 ? '▲' : s.dir < 0 ? '▼' : '·';
+    return `<div class="step"><span class="arrow ${s.role === 'could_have' ? '' : cls(s.dir)}">${arrow}</span>
+      <div>${s.entity ? `<span class="who">${esc(s.entity)}</span>` : ''}<p>${esc(s.text)}</p>
+        ${s.why_not ? `<p class="whynot">Why not: ${esc(s.why_not)}</p>` : ''}
+        <div class="meta">public ${esc((s.public_at || '').slice(0, 16).replace('T', ' '))}</div></div>
+      ${r ? `<span class="pill v-${r.verdict}">${esc(r.verdict.replace('_', ' '))}</span>` : '<span></span>'}</div>`;
+  };
+  const section = role => steps(role).length ? `<div><h3>${ROLE[role]}</h3><div class="story">${steps(role).map(stepRow).join('')}</div></div>` : '';
+  const moves = (c.moves || []).filter(m => m.window === 'd1').sort((a, b) => (a.abnormal ?? a.raw ?? 0) - (b.abnormal ?? b.raw ?? 0));
+  const calib = (DATA.calibration || []);
+  const replayAt = (c.replay_at || '').slice(0, 16).replace('T', ' ');
+
+  document.getElementById('doc').innerHTML = `
+    <div style="display:grid;gap:10px">
+      <span class="label">Case ${c.id}</span>
+      <h2>${esc(c.title)}</h2>
+      <p class="blind">Blind version, used so a model can’t answer from memory: “${esc(c.anon_title)}”</p>
+      <p class="lede">${esc(c.summary)}</p>
+      <div class="chips">${fp}</div>
+    </div>
+    <div class="score">
+      ${['hit', 'avoided', 'wrong_direction', 'false_alarm', 'missed', 'unconfirmed'].filter(k => counts[k]).map(k =>
+        `<div><span class="pill v-${k}">${k.replace('_', ' ')}</span><b>${counts[k]}</b></div>`).join('')}
+      <p class="note" style="flex-basis:100%">Blind replay as of ${esc(replayAt)}: the engine saw only what was public then.
+        Hit = right company, right direction. Avoided = it correctly said nothing about something that didn’t happen.
+        Missed = it moved and the engine didn’t call it, usually because the graph lacks that link.</p>
+    </div>
+    <div class="cols">${section('cause')}${section('condition')}</div>
+    ${section('event')}
+    ${section('consequence')}
+    ${section('could_have')}
+    <div class="cols">
+      <div><h3>Market moves</h3><div class="tbl"><table>
+        <thead><tr><th>Ticker</th><th>Company</th><th>Window</th><th style="text-align:right">Move</th><th style="text-align:right">Vs market</th></tr></thead>
+        <tbody>${moves.map(m => `<tr><td class="num">${esc(m.ticker)}</td><td>${esc(m.name)}</td><td class="num">${esc(m.window)}</td>
+          <td class="n ${cls(m.raw)}">${signed(m.raw)}</td><td class="n ${cls(m.abnormal)}">${m.abnormal == null ? '<span class="meta">press figure</span>' : signed(m.abnormal)}</td></tr>`).join('')}</tbody>
+      </table></div></div>
+      <div><h3>Engine vs reality</h3><div class="tbl"><table>
+        <thead><tr><th>Company</th><th style="text-align:right">Called</th><th style="text-align:right">Actual</th><th>Verdict</th></tr></thead>
+        <tbody>${(c.replay || []).filter(r => r.impact != null || r.actual != null).map(r => `<tr><td>${esc(r.name)}</td>
+          <td class="n ${cls(r.impact)}">${r.impact == null ? '—' : (caseId === 1 ? Number(r.impact).toFixed(1) + ' od' : signed(r.impact))}</td>
+          <td class="n ${cls(r.actual)}">${r.actual == null ? '—' : signed(r.actual)}</td>
+          <td><span class="pill v-${r.verdict}">${esc(r.verdict.replace('_', ' '))}</span></td></tr>`).join('')}</tbody>
+      </table></div>
+      ${caseId === 1 ? '<p class="note">od = output-days lost; this case’s mechanism predicts lost production, not a price move.</p>' : ''}</div>
+    </div>
+    ${(c.analysts || []).length ? `<div><h3>What analysts said, and how it turned out</h3>
+      <p class="note">From public coverage of their notes. Next 4 weeks = the stock vs its market after the note.</p>
+      <div class="tbl"><table><thead><tr><th>Date</th><th>Firm</th><th>Company</th><th>Call</th><th>Why</th>
+        <th style="text-align:right">Next 4 weeks</th><th>How it turned out</th></tr></thead>
+      <tbody>${c.analysts.map(a => `<tr><td class="num">${esc(a.published)}</td><td>${esc(a.firm)}${a.analyst ? `<div class="meta">${esc(a.analyst)}</div>` : ''}</td>
+        <td>${esc(a.company)}</td>
+        <td>${esc(a.rating || a.kind)}${a.to != null ? `<div class="meta">${a.from != null ? esc(a.from) + ' → ' : ''}${esc(a.to)} ${esc(a.unit || '')}</div>` : ''}</td>
+        <td class="lesson">${esc(a.why)}</td>
+        <td class="n ${cls(a.next4w)}">${a.next4w == null ? '—' : signed(a.next4w)}</td>
+        <td class="lesson">${a.outcome != null ? 'Actual: ' + esc(a.outcome) + ' ' + esc(a.unit || '') + '. ' : ''}${esc(a.note || '')}</td></tr>`).join('')}</tbody></table></div></div>` : ''}
+    <div><h3>What Parity could have done</h3><div class="tbl"><table>
+      <thead><tr><th>Ticker</th><th>Action</th><th>Enter</th><th style="text-align:right">Payoff</th><th>Why</th></tr></thead>
+      <tbody>${(c.trades || []).map(t => `<tr><td class="num">${esc(t.ticker || '')}</td><td>${esc(t.action)}</td>
+        <td class="num">${esc((t.enter || '').slice(0, 16).replace('T', ' '))}</td>
+        <td class="n ${cls(t.payoff)}">${t.payoff == null ? '<span class="meta">needs prices</span>' : signed(t.payoff)}</td>
+        <td>${esc(t.why)}</td></tr>`).join('')}</tbody>
+    </table></div></div>
+    <div><h3>What history says about the rules</h3>
+      <p class="note">Across the latest replay of every case: how much bigger or smaller reality was than the engine’s call.
+        Proposed only; a mechanism needs three or more cases before its numbers change.</p>
+      <div class="tbl"><table><thead><tr><th>Mechanism</th><th style="text-align:right">Cases</th><th style="text-align:right">Calls</th>
+        <th style="text-align:right">Reality ÷ call</th><th style="text-align:right">Error now</th><th style="text-align:right">If scaled</th><th>Advice</th></tr></thead>
+        <tbody>${calib.map(k => `<tr><td>${esc(k.mechanism)}</td><td class="n">${k.cases}</td><td class="n">${k.calls}</td>
+          <td class="n">${Number(k.scale).toFixed(2)}×</td><td class="n">${Number(k.err_now).toFixed(1)} pts</td>
+          <td class="n">${Number(k.err_scaled).toFixed(1)} pts</td><td>${esc(k.advice)}</td></tr>`).join('')}</tbody></table></div></div>`;
+  try { localStorage.setItem('peg-case', caseId); } catch (e) {}
+}
+
+// ── training log ──
+const KIND_LABEL = { new_rule: 'new rule', tuned: 'tuned', proposed: 'proposed', rejected: 'rejected', open_question: 'open question' };
+function renderLog() {
+  const rows = DATA.rule_log || [];
+  const title = id => (DATA.cases.find(c => c.id === id) || {}).title || ('case ' + id);
+  document.getElementById('doc').innerHTML = `
+    <div style="display:grid;gap:10px"><span class="label">How the cases changed the engine</span>
+      <h2>Training log</h2>
+      <p class="lede">Each row is something a past case taught. A new rule can come from one clear case; a number only
+        changes when three or more independent cases agree, channel by channel. Proposed and rejected changes stay here
+        so the reasoning behind every rule can be traced.</p></div>
+    <div class="score">${Object.keys(KIND_LABEL).filter(k => rows.some(r => r.kind === k)).map(k =>
+      `<div><span class="pill v-${k === 'new_rule' || k === 'tuned' ? 'hit' : k === 'rejected' ? 'missed' : 'unconfirmed'}">${KIND_LABEL[k]}</span><b>${rows.filter(r => r.kind === k).length}</b></div>`).join('')}</div>
+    <div class="tbl"><table><thead><tr><th>Mechanism</th><th>Kind</th><th>Change</th><th>Evidence</th><th>Cases</th></tr></thead>
+      <tbody>${rows.map(r => `<tr><td class="num">${esc(r.mechanism)}</td>
+        <td><span class="pill v-${r.kind === 'new_rule' || r.kind === 'tuned' ? 'hit' : r.kind === 'rejected' ? 'missed' : 'unconfirmed'}">${esc(KIND_LABEL[r.kind])}</span></td>
+        <td>${esc(r.change)}</td><td class="lesson">${esc(r.evidence)}</td>
+        <td>${(r.cases || []).map(id => `<span class="chip" title="${esc(title(id))}">${id}</span>`).join(' ')}</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+// ── graph views ──
+const svg = d3.select('#svg'), root = svg.append('g');
+svg.call(d3.zoom().scaleExtent([0.2, 4]).on('zoom', e => root.attr('transform', e.transform)));
+svg.on('click', e => { if (e.target === svg.node()) { selected = null; render(); } });
+let sim, edgeSel, nodeSel, nodes, links;
+
+function build() {
+  const keep = setFor(view);
+  nodes = nodesAll.filter(n => keep.has(n.id)).map(n => ({ ...n }));
+  const ids = new Set(nodes.map(n => n.id));
+  links = linksAll.filter(l => ids.has(l.source) && ids.has(l.target)).map(l => ({ ...l }));
+  const { width, height } = document.getElementById('stage').getBoundingClientRect();
+
+  root.selectAll('*').remove();
+  root.append('defs').append('marker').attr('id', 'arrow').attr('viewBox', '0 0 10 10').attr('refX', 18).attr('refY', 5)
+      .attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto-start-reverse')
+      .append('path').attr('d', 'M0,0L10,5L0,10z').attr('fill', css('--muted'));
+  edgeSel = root.append('g').selectAll('line').data(links).join('line')
+      .attr('class', d => 'edge ' + d.rel).attr('marker-end', 'url(#arrow)')
+      .attr('stroke-width', d => d.rel === 'holds' && d.attrs.pct_of_portfolio ? 0.8 + Math.sqrt(d.attrs.pct_of_portfolio) : null);
+  edgeSel.append('title').text(d => edgeText(d));
+
+  nodeSel = root.append('g').selectAll('g').data(nodes).join('g').attr('class', 'node').attr('tabindex', 0)
+      .on('click', (e, d) => { e.stopPropagation(); selected = d.id; render(); })
+      .on('keydown', (e, d) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selected = d.id; render(); } })
+      .call(d3.drag().on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.2).restart(); d.fx = d.x; d.fy = d.y; })
+                     .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+                     .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); }));
+  nodeSel.append('circle').attr('class', 'ring').attr('r', 0);
+  nodeSel.append('path').attr('class', 'shape')
+      .attr('d', d => d3.symbol(KIND_SHAPE[d.kind] || d3.symbolCircle, size(d))())
+      .attr('fill', d => css('--k-' + KIND_COLOR(d.kind)) || css('--muted'));
+  nodeSel.append('text').attr('dx', 10).attr('dy', 4).text(d => label(d));
+
+  sim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(links).id(d => d.id).distance(l => l.rel === 'holds' ? 70 : l.rel === 'issued' ? 26 : 95).strength(0.6))
+      .force('charge', d3.forceManyBody().strength(view === '13f' ? -140 : -380))
+      .force('collide', d3.forceCollide(24))
+      .force('x', d3.forceX(width / 2).strength(0.06)).force('y', d3.forceY(height / 2).strength(0.08))
+      .on('tick', () => {
+        edgeSel.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+        nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+      });
+  sim.tick(240); sim.alpha(0.08);   // settle before the first paint so the page is readable at rest
+  render();
+}
+
+function size(d) { return d.kind === 'instrument' ? 40 : d.kind === 'event' ? 220 : ['company', 'fund', 'person'].includes(d.kind) ? 170 : 120; }
+function label(d) {
+  if (d.kind === 'instrument') return view === '13f' ? '' : (d.attrs.issuer_name || d.name);
+  return d.ticker && d.ticker !== d.name ? `${d.name} · ${d.ticker}` : d.name;
+}
+function nameOf(id) { return (nodesAll.find(n => n.id === id) || {}).name || id; }
+function edgeText(l) {
+  const s = nameOf(l.source?.id ?? l.source), t = nameOf(l.target?.id ?? l.target);
+  if (l.rel === 'hit') return `Fire hit ${t}`;
+  const a = Object.entries(l.attrs || {}).map(([k, v]) => `${k}=${v}`).join(', ');
+  return `${s} ${REL_NOTE[l.rel] || l.rel} ${t}${l.via ? ' (' + l.via + ')' : ''}${a ? ' · ' + a : ''}`;
+}
+
+// What each node's ring shows: case 1 uses the time-slider calls; cases 2-3 use their replay scorecard.
+function overlay() {
+  const out = new Map();
+  if (view === 'c1') {
+    DATA.moments[moment].calls.forEach(c => { const p = out.get(c.id);
+      if (!p || c.impact * c.conf > p.size) out.set(c.id, { size: c.impact, dir: c.dir, verdict: null }); });
+  } else if (CASE_OF[view]) {
+    const c = DATA.cases.find(x => x.id === CASE_OF[view]);
+    (c.replay || []).forEach(r => { const id = byName.get(r.name); if (id == null) return;
+      out.set(id, { size: Math.abs(r.impact ?? r.actual ?? 0), dir: Math.sign(r.impact ?? r.actual ?? 0), verdict: r.verdict }); });
+  }
+  return out;
+}
+
+function render() {
+  document.querySelectorAll('#moments button').forEach((b, i) => b.setAttribute('aria-pressed', i === moment));
+  const ov = overlay();
+  const on = id => id === 'fire' || (ov.has(id) && ov.get(id).size >= 0.1);
+  nodeSel.select('.ring')
+      .attr('r', d => on(d.id) && d.id !== 'fire' ? 9 + Math.sqrt(ov.get(d.id).size) * 2.2 : 0)
+      .attr('class', d => 'ring' + (ov.get(d.id)?.verdict === 'missed' ? ' missed' : ''))
+      .attr('stroke', d => { const o = ov.get(d.id); if (!o) return 'none';
+        return o.verdict === 'missed' ? css('--warn') : o.dir > 0 ? css('--up') : css('--down'); });
+  edgeSel.classed('hot', l => on(l.source.id) && on(l.target.id) && !['input_of', 'produces', 'allied_with'].includes(l.rel))
+         .classed('up', l => l.rel === 'competes');
+  const nbr = new Set([selected]);
+  if (selected != null) links.forEach(l => { if (l.source.id === selected) nbr.add(l.target.id); if (l.target.id === selected) nbr.add(l.source.id); });
+  nodeSel.classed('sel', d => d.id === selected).classed('dim', d => selected != null && !nbr.has(d.id));
+  edgeSel.classed('dim', l => selected != null && l.source.id !== selected && l.target.id !== selected);
+  legend();
+  panel();
+}
+
+function legend() {
+  const kinds = [...new Set(nodes.map(n => n.kind))];
+  document.getElementById('legend').innerHTML =
+    kinds.map(k => `<span><i style="background:var(--k-${KIND_COLOR(k)})"></i>${k}</span>`).join('') +
+    (view === '13f' ? '<span>line width = share of portfolio</span>'
+      : view === 'c1' ? '<span><i style="background:none;border:2px solid var(--down)"></i>ring = output-days lost</span>'
+      : '<span><i style="background:none;border:2px solid var(--down)"></i>ring = engine’s call</span><span><i style="background:none;border:2px dashed var(--warn)"></i>moved, not called</span>');
+}
+
+// ── reading panel ──
+function panel() {
+  const el = document.getElementById('panel');
+  if (selected != null) { el.innerHTML = nodePanel(selected); return; }
+  if (view === '13f') { el.innerHTML = holdingsPanel(); return; }
+  const c = DATA.cases.find(x => x.id === CASE_OF[view]);
+  const rep = view === 'c1' ? DATA.moments[moment].replay : c.replay;
+  const order = { hit: 0, avoided: 1, wrong_direction: 2, false_alarm: 3, unconfirmed: 4, missed: 5 };
+  el.innerHTML = `
+    <div><span class="label">Case ${c.id}</span><h2>${esc(c.title)}</h2>
+      <p class="note">${view === 'c1' ? 'Pick a moment above: the engine sees only what was public then.' : 'Blind replay as of ' + esc((c.replay_at || '').slice(0, 16).replace('T', ' ')) + '.'}
+        Rings show the engine’s call; dashed rings moved without being called.</p></div>
+    <div>${[...rep].sort((a, b) => order[a.verdict] - order[b.verdict]).map(r => `
+      <div class="row"><span class="pill v-${r.verdict}">${r.verdict.replace('_', ' ')}</span>
+        <div><b>${esc(r.name)}</b>${r.lesson ? `<div class="lesson">${esc(r.lesson)}</div>` : ''}</div></div>`).join('')}</div>
+    ${view === 'c1' ? `<div><h3 class="label">What came in about the fire</h3>
+      <p class="note">Belief is each claim's chance of being true, from who said it and their track record, at this moment.</p>
+      ${DATA.claims.map(claimRow).join('')}</div>` : ''}
+    <p class="note">Click any node to see its links and where each one came from. The full story is under Case write-ups.</p>`;
+}
+
+function claimRow(c) {
+  const key = ['b0320', 'b0322', 'b0331'][moment];
+  const seen = new Date(c.first_seen_at) <= momentTime();
+  const b = seen ? Number(c[key]) : null;
+  return `<div class="claim"><div><b>${esc(c.statement)}</b></div>
+    <div class="meta">${esc(c.sources)} · seen ${c.first_seen_at.slice(0, 10)} · settled: ${esc(c.resolution)}</div>
+    ${seen ? `<div class="bar ${b < 0.5 ? 'low' : ''}"><b style="width:${b * 100}%"></b></div>
+              <div class="meta">belief ${(b * 100).toFixed(0)}%${c.supersedes ? ' · revises an earlier claim' : ''}</div>`
+           : '<div class="meta">not public yet at this moment</div>'}</div>`;
+}
+function momentTime() { return new Date(['2021-03-19T03:00:00Z', '2021-03-21T11:00:00Z', '2021-03-31T00:00:00Z'][moment]); }
+
+function nodePanel(id) {
+  const n = nodesAll.find(x => x.id === id);
+  const out = linksAll.filter(l => (l.source?.id ?? l.source) === id), inc = linksAll.filter(l => (l.target?.id ?? l.target) === id);
+  const linkRow = l => `<div class="call"><div>${esc(edgeText(l))}</div>
+      ${l.synthetic ? '' : `<div class="meta">${esc(l.evidence)} · confidence ${l.confidence} · known ${esc(l.known)} · ${esc(l.doc)}</div>`}</div>`;
+  const o = overlay().get(id);
+  const rep = CASE_OF[view] ? (view === 'c1' ? DATA.moments[moment].replay : DATA.cases.find(x => x.id === CASE_OF[view]).replay).find(r => r.name === n.name) : null;
+  return `<div><span class="label">${esc(n.kind)}</span><h2>${esc(n.name)}${n.ticker && n.ticker !== n.name ? ' · ' + esc(n.ticker) : ''}</h2></div>
+    ${Object.keys(n.attrs || {}).length ? `<dl class="kv">${Object.entries(n.attrs).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
+    ${rep ? `<div><h3 class="label">Engine vs reality</h3><div class="row"><span class="pill v-${rep.verdict}">${esc(rep.verdict.replace('_', ' '))}</span>
+      <div>${rep.path ? `<div class="path">${esc(rep.path)}</div>` : ''}${rep.lesson ? `<div class="lesson">${esc(rep.lesson)}</div>` : ''}</div></div></div>` : ''}
+    ${out.length ? `<div><h3 class="label">Links out · ${out.length}</h3>${out.slice(0, 40).map(linkRow).join('')}</div>` : ''}
+    ${inc.length ? `<div><h3 class="label">Links in · ${inc.length}</h3>${inc.slice(0, 40).map(linkRow).join('')}</div>` : ''}
+    ${!out.length && !inc.length ? '<p class="note">No links yet: the sweep found it moved, but the graph doesn’t know why. That link is research to do.</p>' : ''}
+    <p class="note">Click empty space to go back.</p>`;
+}
+
+function holdingsPanel() {
+  const h = DATA.links.filter(l => l.rel === 'holds' && l.attrs.value_usd).sort((a, b) => b.attrs.value_usd - a.attrs.value_usd);
+  const total = h.reduce((s, l) => s + l.attrs.value_usd, 0);
+  return `<div><h2>Berkshire Hathaway · 13F</h2>
+      <p class="note">${h.length} positions, ${fmtUsd(total)}, filed ${esc(h[0]?.known)} for the quarter ending ${esc(h[0]?.valid_from)}.
+      Each position links holder → security → issuer, so a hit to an issuer reaches everyone who holds it.</p></div>
+    <div>${h.map(l => `<div class="row"><span class="num meta">${l.attrs.pct_of_portfolio.toFixed(1)}%</span>
+      <div><b>${esc(nameOf(l.dst_id))}</b><div class="meta">${fmtUsd(l.attrs.value_usd)} · ${l.attrs.shares.toLocaleString()} sh</div></div></div>`).join('')}</div>`;
+}
+
+let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(() => { if (view !== 'cases') build(); }, 200); });
+try { const v = localStorage.getItem('peg-view'); if (v && document.querySelector(`[data-view="${v}"]`)) view = v;
+      const c = Number(localStorage.getItem('peg-case')); if (DATA.cases.some(x => x.id === c)) caseId = c; } catch (e) {}
+show();
+</script>

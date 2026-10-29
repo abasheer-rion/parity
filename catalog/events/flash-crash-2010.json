@@ -1,0 +1,22 @@
+{
+  "id": "flash-crash-2010",
+  "name": "Flash crash",
+  "date": "2010-05-06",
+  "type": "financial_crisis",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "US share prices fell about 9% within minutes in the afternoon and mostly recovered within half an hour.",
+  "sources": [
+    {
+      "title": "2010 flash crash",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2010_flash_crash"
+    }
+  ]
+}

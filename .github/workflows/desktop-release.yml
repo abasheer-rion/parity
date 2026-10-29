@@ -1,8 +1,16 @@
 # Builds Parity for Mac and Windows (DEC-0041, DEC-0049) and attaches the installers and the
-# update files to a draft GitHub release. Run it from the Actions tab, or push a tag named
-# desktop-v<version>. Publishing the release is what ships it: the public update feed at
-# https://parity.endyland.com/desktop/updates/ serves the newest published desktop release
-# (web/src/lib/desktopFeed.ts).
+# update files to a GitHub release. Publishing the release is what ships it: the public update
+# feed at https://paritytrading.app/desktop/updates/ serves the newest published desktop release
+# (web/src/lib/desktopFeed.ts), and installed apps update themselves from it.
+#
+# Automatic releases: desktop-auto-release.yml creates a new tag desktop-v<next patch> on each
+# merge to main that changes desktop/ (and weekly when web/ changed), then starts this workflow
+# on that tag with publish=true. The version comes from the tag, so desktop/package.json is
+# only the floor. A published release must be signed and notarized on the Mac and signed on
+# Windows, or nothing is published. It is never marked as the repository's latest release.
+#
+# By hand: push a tag named desktop-v<version>, or run this from the Actions tab on a tag; the
+# result is a draft release unless publish is ticked.
 #
 # Signing (desktop/electron-builder.config.js) happens only when these secrets exist; without
 # them the build is ad hoc signed and not notarized, as before:
@@ -23,6 +31,11 @@ name: Desktop release
 
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish the release (installed apps update to it), instead of leaving a draft"
+        type: boolean
+        default: false
   push:
     tags: ["desktop-v*"]
 
@@ -59,9 +72,36 @@ jobs:
           path: desktop/build/web
           retention-days: 3
 
+  # Did the app itself change since the last desktop release, or only the pages it carries as
+  # its offline copy? The kind goes into the update files (releaseName), and installed apps
+  # offer "Restart to update" only for an app change; a pages-only update installs quietly
+  # when Parity quits (DEC-0086).
+  kind:
+    runs-on: ubuntu-latest
+    outputs:
+      kind: ${{ steps.kind.outputs.kind }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: App change or pages only
+        id: kind
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force --quiet origin
+          prev=$(git tag -l 'desktop-v*' --sort=-v:refname --merged HEAD | grep -vx "${GITHUB_REF_NAME}" | head -1 || true)
+          if [ -n "$prev" ] && git diff --quiet "$prev" HEAD -- desktop ':(exclude)desktop/**/*.md'; then kind=pages; else kind=app; fi
+          echo "Previous release: ${prev:-none}. Kind: $kind."
+          echo "kind=$kind" >> "$GITHUB_OUTPUT"
+
   mac:
-    needs: web
+    needs: [web, kind]
     runs-on: macos-latest
+    outputs:
+      signed: ${{ steps.build.outputs.signed }}
+      notarized: ${{ steps.build.outputs.notarized }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -75,6 +115,12 @@ jobs:
           path: desktop/build/web
       - run: npm ci
         working-directory: desktop
+      # A run on a desktop-v<version> tag builds that version, whatever package.json says.
+      - name: Take the version from the tag
+        if: github.ref_type == 'tag' && startsWith(github.ref_name, 'desktop-v')
+        shell: bash
+        working-directory: desktop
+        run: npm version "${GITHUB_REF_NAME#desktop-v}" --no-git-tag-version --allow-same-version
       - run: npm test
         working-directory: desktop
       # The running app: log-in wall on a deep link, title bar dragging, offline copy, menu,
@@ -95,6 +141,7 @@ jobs:
           SECRET_APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
           SECRET_APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           SECRET_APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          PARITY_RELEASE_KIND: ${{ needs.kind.outputs.kind }}
         run: |
           if [ -n "$SECRET_CSC_LINK" ]; then
             export CSC_LINK="$SECRET_CSC_LINK" CSC_KEY_PASSWORD="$SECRET_CSC_KEY_PASSWORD"
@@ -161,7 +208,7 @@ jobs:
             desktop/dist/latest-mac.yml
 
   windows:
-    needs: web
+    needs: [web, kind]
     runs-on: windows-latest
     # The environment is what the Azure federated credential trusts
     # (repo:abasheer-rion/parity:environment:desktop-release).
@@ -171,6 +218,8 @@ jobs:
       contents: write
     env:
       WIN_SIGN: ${{ vars.AZURE_CLIENT_ID != '' && '1' || '' }}
+    outputs:
+      signed: ${{ vars.AZURE_CLIENT_ID != '' && 'true' || '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -184,6 +233,12 @@ jobs:
           path: desktop/build/web
       - run: npm ci
         working-directory: desktop
+      # A run on a desktop-v<version> tag builds that version, whatever package.json says.
+      - name: Take the version from the tag
+        if: github.ref_type == 'tag' && startsWith(github.ref_name, 'desktop-v')
+        shell: bash
+        working-directory: desktop
+        run: npm version "${GITHUB_REF_NAME#desktop-v}" --no-git-tag-version --allow-same-version
       - name: Log in to Azure for signing (OIDC, no secret)
         if: env.WIN_SIGN == '1'
         uses: azure/login@v3
@@ -197,12 +252,26 @@ jobs:
       - name: Fetch the Artifact Signing token
         if: env.WIN_SIGN == '1'
         run: az account get-access-token --resource https://codesigning.azure.net --output none
+      # electron-builder installs the signing module itself and carries on when that fails, so a
+      # gallery hiccup broke the 0.2.4 build ("Invoke-TrustedSigning is not recognized").
+      # Install a known version here, with retries, and stop if the command is missing.
+      - name: Install the Artifact Signing module
+        if: env.WIN_SIGN == '1'
+        shell: pwsh
+        run: |
+          for ($i = 1; $i -le 4; $i++) {
+            try { Install-Module -Name TrustedSigning -RequiredVersion 0.5.8 -Force -Scope CurrentUser -Repository PSGallery -ErrorAction Stop; break }
+            catch { Write-Host "attempt $i failed: $_"; Start-Sleep -Seconds (15 * $i) }
+          }
+          Import-Module TrustedSigning -RequiredVersion 0.5.8 -ErrorAction Stop
+          Get-Command Invoke-TrustedSigning -ErrorAction Stop | Format-Table Name, Version
       - name: Build the Windows installer (signed when Azure signing is set up)
         run: npm run build:win
         working-directory: desktop
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
           PARITY_WIN_SIGN: ${{ env.WIN_SIGN }}
+          PARITY_RELEASE_KIND: ${{ needs.kind.outputs.kind }}
       - name: Verify the Windows signatures
         if: env.WIN_SIGN == '1'
         working-directory: desktop
@@ -231,31 +300,83 @@ jobs:
 
   # A Mac build that passed its checks is required. A Windows build that failed (including a
   # failed signature check) stops the release; one that was skipped is attached on a later run.
+  # Publishing also needs a signed and notarized Mac build and a signed Windows build.
   release:
     needs: [mac, windows]
     if: ${{ !cancelled() && needs.mac.result == 'success' && needs.windows.result != 'failure' }}
     runs-on: ubuntu-latest
+    env:
+      PUBLISH: ${{ inputs.publish == true && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/download-artifact@v7
         with:
           pattern: desktop-*
           path: out
-      - name: Attach the installers and update files to a draft release
+      - name: Refuse to publish an unsigned build
+        if: env.PUBLISH == 'true'
+        env:
+          MAC_SIGNED: ${{ needs.mac.outputs.signed }}
+          MAC_NOTARIZED: ${{ needs.mac.outputs.notarized }}
+          WIN_RESULT: ${{ needs.windows.result }}
+          WIN_SIGNED: ${{ needs.windows.outputs.signed }}
+        run: |
+          bad=0
+          [ "$MAC_SIGNED" = "true" ] || { echo "::error::The Mac build is not signed."; bad=1; }
+          [ "$MAC_NOTARIZED" = "true" ] || { echo "::error::The Mac build is not notarized."; bad=1; }
+          [ "$WIN_RESULT" = "success" ] || { echo "::error::There is no Windows build in this run."; bad=1; }
+          [ "$WIN_SIGNED" = "true" ] || { echo "::error::The Windows build is not signed."; bad=1; }
+          case "$GITHUB_REF" in refs/tags/desktop-v*) ;; *) echo "::error::Only a run on a desktop-v tag can publish."; bad=1;; esac
+          exit $bad
+      - name: Attach the installers and update files to the release
+        id: release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          version=$(node -p "require('./desktop/package.json').version")
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [[ "$GITHUB_REF_NAME" == desktop-v* ]]; then
+            version="${GITHUB_REF_NAME#desktop-v}"
+          else
+            version=$(node -p "require('./desktop/package.json').version")
+          fi
           tag="desktop-v${version}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
           # Every name must match latest-mac.yml and latest.yml exactly, so none has a space.
           mapfile -t files < <(find out -type f \( -name '*.dmg' -o -name '*.zip' -o -name '*.exe' -o -name '*.blockmap' -o -name 'latest*.yml' \))
           for f in "${files[@]}"; do case "$f" in *" "*) echo "file name has a space: $f"; exit 1;; esac; done
           need=(latest-mac.yml)
           if [ -d out/desktop-windows ]; then need+=(latest.yml); else echo "::warning::No Windows build in this run; the release has the Mac files only."; fi
           for n in "${need[@]}"; do printf '%s\n' "${files[@]}" | grep -q "/$n$" || { echo "missing $n"; exit 1; }; done
+          # The update files must name the version being released.
+          for y in $(printf '%s\n' "${files[@]}" | grep -E '/latest(-mac)?\.yml$'); do grep -q "^version: ${version}$" "$y" || { echo "$y does not say version $version"; exit 1; }; done
+          # The notes: the app's release notes, then what changed in the app since the last release.
+          cp desktop/RELEASE_NOTES.md "$RUNNER_TEMP/notes.md"
+          prev=$(git tag -l 'desktop-v*' --sort=-v:refname | grep -vx "$tag" | head -1 || true)
+          if [ -n "$prev" ]; then
+            { echo; echo "Changes since ${prev#desktop-v}:"; echo; git log --format='- %s' "$prev..$GITHUB_SHA" -- desktop web | head -40; } >> "$RUNNER_TEMP/notes.md"
+          fi
           printf 'attaching %s\n' "${files[@]}"
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release upload "$tag" "${files[@]}" --clobber
+            if [ "$PUBLISH" = "true" ]; then gh release edit "$tag" --draft=false --latest=false; fi
+          elif [ "$PUBLISH" = "true" ]; then
+            gh release create "$tag" "${files[@]}" --verify-tag --latest=false --title "Parity desktop ${version}" --notes-file "$RUNNER_TEMP/notes.md"
           else
-            gh release create "$tag" "${files[@]}" --draft --target "$GITHUB_SHA" --title "Parity desktop ${version}" --notes-file desktop/RELEASE_NOTES.md
+            gh release create "$tag" "${files[@]}" --draft --target "$GITHUB_SHA" --title "Parity desktop ${version}" --notes-file "$RUNNER_TEMP/notes.md"
           fi
+      # Installed apps read the feed, not GitHub: wait until it hands out the new version.
+      - name: Check the update feed serves the new version
+        if: env.PUBLISH == 'true'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          for i in $(seq 1 40); do
+            mac=$(curl -fsS "https://paritytrading.app/desktop/updates/latest-mac.yml?t=$i" | sed -n 's/^version: //p' || true)
+            win=$(curl -fsS "https://paritytrading.app/desktop/updates/latest.yml?t=$i" | sed -n 's/^version: //p' || true)
+            echo "feed: mac=$mac windows=$win"
+            if [ "$mac" = "$VERSION" ] && [ "$win" = "$VERSION" ]; then echo "The feed serves $VERSION."; exit 0; fi
+            sleep 30
+          done
+          echo "::error::The feed did not serve $VERSION within 20 minutes."
+          exit 1

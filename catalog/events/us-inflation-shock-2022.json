@@ -1,0 +1,24 @@
+{
+  "id": "us-inflation-shock-2022",
+  "name": "US inflation hits 8.6%",
+  "date": "2022-06-10",
+  "type": "rate_shock",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "fed"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "US consumer prices rose 8.6% from a year earlier, a 40-year high; two-year yields jumped and the Fed raised rates by 0.75 points five days later.",
+  "sources": [
+    {
+      "title": "2021-2023 inflation surge",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge"
+    }
+  ]
+}

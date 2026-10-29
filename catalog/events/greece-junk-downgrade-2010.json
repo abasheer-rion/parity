@@ -2,7 +2,7 @@
   "id": "greece-junk-downgrade-2010",
   "name": "Greece downgraded to junk",
   "date": "2010-04-27",
-  "type": "financial_crisis",
+  "type": "sovereign_default",
   "regions": [
     "europe"
   ],

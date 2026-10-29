@@ -11,13 +11,14 @@ import {
   Num, ProgressBar, Spinner, ErrorState, Breadcrumb, Pagination, Avatar, Tag, Field, RadioGroup, Slider, Sheet, CommandPalette, TourStep, type Command,
 } from "../ui";
 import { usePrefs } from "../lib/prefs";
+import { EXAMPLES, SCENE_KINDS, SignaturePlayer } from "../ui/signature";
 import type { Point } from "../lib/types";
 import { RAW, type TokenName } from "../ui/tokens";
 
 const SECTIONS: { group: string; items: [string, string][] }[] = [
   { group: "Foundations", items: [["overview", "Overview"], ["colors", "Colour"], ["type", "Type"], ["space", "Space, radius, depth"], ["motion", "Motion"], ["icons", "Icons"]] },
   { group: "Components", items: [["text", "Text and numbers"], ["buttons", "Buttons"], ["inputs", "Inputs"], ["filters", "Filters and sorting"], ["tables", "Tables"], ["lists", "Long lists"], ["expand", "Expand and collapse"], ["cards", "Cards and stats"], ["navigation", "Navigation and identity"], ["overlays", "Overlays"], ["feedback", "Empty, loading and errors"]] },
-  { group: "Charts", items: [["charts", "How charts work"], ["hero", "Headline chart"], ["line", "Line and bar"], ["chartcolor", "Chart colour"]] },
+  { group: "Charts", items: [["charts", "How charts work"], ["hero", "Headline chart"], ["line", "Line and bar"], ["signature", "Signature charts"], ["chartcolor", "Chart colour"]] },
   { group: "Patterns", items: [["pages", "Page layouts"], ["steady", "Nothing jumps"], ["data", "Data that is ready"]] },
 ];
 
@@ -54,6 +55,7 @@ export function UILibrary({ section = "overview" }: { section?: string }) {
         {section === "feedback" && <Feedback />}
         {section === "charts" && <HowCharts />}
         {section === "hero" && <Hero />}
+        {section === "signature" && <Signature />}
         {section === "line" && <LineBar />}
         {section === "chartcolor" && <ChartColor />}
         {section === "pages" && <Pages />}
@@ -775,10 +777,10 @@ function Overlays() {
         <Button icon="search" onClick={() => setCmd(true)}>Open palette</Button>
         <CommandPalette open={cmd} onClose={() => setCmd(false)} commands={GAL_COMMANDS} />
       </Item>
-      <Item title="Tour step" intro="One step of a product tour: a glass card pointing at a part of the page, with the count, Back, Next and Skip. Escape skips, arrow keys step." code={`<TourStep target="#search" title="Search" step={1} total={3} open onNext={next} onBack={back} onSkip={skip}>…</TourStep>`}>
+      <Item title="Tour step" intro="One step of a product tour: the page dims and blurs, the part being explained stays sharp, and a centred card shows with the count, Back, Next and Skip. Escape skips, arrow keys step." code={`<TourStep target="#search" title="Search" step={1} total={3} open onNext={next} onBack={back} onSkip={skip}>…</TourStep>`}>
         <Button onClick={() => setTour(1)}>Start a sample tour</Button>
-        <span id="gal-tour-a"><Badge tone="info">Step 1 points here</Badge></span>
-        <span id="gal-tour-b"><Badge tone="warning">Step 2 points here</Badge></span>
+        <span id="gal-tour-a"><Badge tone="info">Step 1 lights this up</Badge></span>
+        <span id="gal-tour-b"><Badge tone="warning">Step 2 lights this up</Badge></span>
         <TourStep open={tour > 0} target={tour === 1 ? "#gal-tour-a" : tour === 2 ? "#gal-tour-b" : null} step={tour} total={3}
           title={tour === 3 ? "That is all" : `Step ${tour}`} onNext={() => setTour((t) => (t >= 3 ? 0 : t + 1))} onBack={() => setTour((t) => Math.max(1, t - 1))} onSkip={() => setTour(0)}>
           {tour === 3 ? "A step with no target sits in the middle of the screen." : "The ring shows what this step is about."}
@@ -921,6 +923,24 @@ function LineBar() {
             { name: "Sample B", color: "var(--benchmark)", value: [0.18, 0.27, -0.19, 0.24, 0.23][i] },
           ],
         }))} />
+      </Item>
+    </>
+  );
+}
+
+function Signature() {
+  const [kind, setKind] = useState("equity");
+  return (
+    <>
+      <PageHeader title="Signature charts" description="Step-driven charts that teach one thing per step: lines that draw in with a dot and a live value, a camera that zooms between steps, callouts, split screens, falls below the high, distributions with a range, rolling correlation, wins and losses by kind of market, and a verdict. Example data. DEC-0067." />
+      <Item title="Pick a scene" col>
+        <Segmented value={kind} onChange={setKind} label="Scene" options={SCENE_KINDS.map((k) => [k, k[0].toUpperCase() + k.slice(1)] as [string, string])} />
+        <div className="sg-demo">
+          <SignaturePlayer visual={EXAMPLES[kind]} />
+        </div>
+      </Item>
+      <Item title="How to use it" col>
+        <p>Build a visual (a kind, the alt text, settings and steps) from engine numbers, then render <code>&lt;SignaturePlayer visual=&#123;v&#125; /&gt;</code>. Build scripts and the clip renderer call <code>renderSignature(v, s, &#123; size, theme &#125;)</code> for the same picture as SVG. Every chart offers its numbers as a table.</p>
       </Item>
     </>
   );

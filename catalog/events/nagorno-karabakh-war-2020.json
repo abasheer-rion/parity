@@ -1,0 +1,27 @@
+{
+  "id": "nagorno-karabakh-war-2020",
+  "name": "War over Nagorno-Karabakh",
+  "date": "2020-09-27",
+  "type": "war",
+  "regions": [
+    "russia_cis"
+  ],
+  "actors": [
+    "azerbaijan",
+    "armenia",
+    "turkey"
+  ],
+  "severity": 1,
+  "commodities": [
+    "oil",
+    "gas"
+  ],
+  "description": "Azerbaijan and Armenia fought a six-week war near pipelines that carry Caspian oil and gas to Turkey.",
+  "sources": [
+    {
+      "title": "Second Nagorno-Karabakh War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War"
+    }
+  ]
+}

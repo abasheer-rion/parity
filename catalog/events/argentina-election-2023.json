@@ -1,0 +1,22 @@
+{
+  "id": "argentina-election-2023",
+  "name": "Milei wins in Argentina",
+  "date": "2023-11-19",
+  "type": "election",
+  "regions": [
+    "latin_america"
+  ],
+  "actors": [
+    "argentina"
+  ],
+  "severity": 1,
+  "commodities": [],
+  "description": "Javier Milei, who promised to replace the peso with the dollar and shut the central bank, won Argentina's run off.",
+  "sources": [
+    {
+      "title": "2023 Argentine general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2023_Argentine_general_election"
+    }
+  ]
+}

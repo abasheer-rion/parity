@@ -1,0 +1,23 @@
+{
+  "id": "gaza-war-2014",
+  "name": "Israel and Hamas go to war in Gaza",
+  "date": "2014-07-08",
+  "type": "war",
+  "regions": [
+    "middle_east"
+  ],
+  "actors": [
+    "israel",
+    "hamas"
+  ],
+  "severity": 1,
+  "commodities": [],
+  "description": "Israel began a seven-week air and ground campaign in Gaza after rocket fire from Hamas.",
+  "sources": [
+    {
+      "title": "2014 Gaza War",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2014_Gaza_War"
+    }
+  ]
+}

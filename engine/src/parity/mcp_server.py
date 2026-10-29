@@ -8,6 +8,11 @@ search-style spec, read the search's leads, catalog data, scenarios, news impact
 glossary and the docs, and write a draft recipe for a human to review. Setup for each
 tool: docs/guides/0006-*.
 
+Verify (DEC-0082): verify_claim (the claim arithmetic, ported in verify_claims.py) and
+verify_strategy (a tested strategy's verdict from the latest report) run here. Checking a
+trade list or equity curve (verify_trades) runs only on the hosted server at /mcp and the
+API at /api/v1/verify/trades; the TypeScript checks are not ported.
+
 Safety rules, all enforced here:
 - Read-only on the repo. The only writes are a log (output/mcp.log), drafts
   (output/mcp_drafts/) and a trial counter in output/search.db.
@@ -45,10 +50,13 @@ from .backtest.engine import BacktestConfig, run
 from .data import catalog, providers
 from .data import store as data_store
 from .metrics import performance
+from .verify_claims import check_claim
 
 REPO = Path(__file__).resolve().parents[3]
 DISCLAIMER = "Research only, not investment advice."
 BENCH = "us_market_buy_hold"
+#: The hosted server, which has every Verify check (DEC-0051, DEC-0082).
+HOSTED_MCP = "https://paritytrading.app/mcp"
 BASE_KEYS = ("eq.US_TOTAL", "rate.USD", "rate.TBILL3M")
 # Places this server must never write, whatever a tool is asked to do.
 FORBIDDEN = ("ledger", "registrations")
@@ -847,6 +855,73 @@ class ParityTools:
                         "rare. This is what happened after the headline, not what it caused."}
 
     # docs -------------------------------------------------------------------------
+    # verify (DEC-0082) ------------------------------------------------------------
+    def verify_claim(self, claim: dict | None = None, settings: int | None = None,
+                     trades: int | None = None) -> dict:
+        if not claim:
+            raise ToolError("give claim fields such as {\"winRate\": 0.92, \"takeProfit\": "
+                            "0.05}. Rates are fractions: 0.92 means 92%.")
+        try:
+            out = check_claim(claim, settings, trades)
+        except ValueError as exc:
+            raise ToolError(str(exc)) from exc
+        return {**out, "hosted": "Reading a claim from the seller's own words, and checking "
+                "a trade record, run on the hosted server: " + HOSTED_MCP}
+
+    def _shown_names(self) -> dict[str, str]:
+        """The names people see on the site (web/src/lib/strategyNames.ts), such as
+        "The Gambit" for fx_carry_top1, so a strategy can be asked for by either."""
+        hit = self._cache.get("shown_names")
+        if hit is None:
+            path = self.s.repo / "web" / "src" / "lib" / "strategyNames.ts"
+            text = path.read_text() if path.exists() else ""
+            hit = dict(re.findall(r'^\s*(\w+): \{ name: "([^"]+)"', text, re.M))
+            self._cache["shown_names"] = hit
+        return hit
+
+    def verify_strategy(self, name: str) -> dict:
+        doc = self._latest()
+        if doc is None:
+            raise ToolError("no report yet (engine/output/latest.json); run `parity report` "
+                            "or use verify_strategy on the hosted server: " + HOSTED_MCP)
+        runs = [r for r in doc.get("runs", []) if not r.get("is_benchmark")]
+        key = re.sub(r"[^a-z0-9]+", "", re.sub(r"^the\s+", "", name.lower().strip()))
+        registry = strategies.available()
+
+        shown = self._shown_names()
+
+        def names(r: dict) -> list[str]:
+            cls = registry.get(r["strategy"])
+            plain = cls.label()["display_name"] if cls else r.get("display_name") or ""
+            return [r["strategy"], shown.get(r["strategy"], plain), plain]
+
+        def norm(x: str) -> str:
+            return re.sub(r"[^a-z0-9]+", "", re.sub(r"^the\s+", "", x.lower()))
+
+        hit = next((r for r in runs if any(norm(n) == key for n in names(r))), None)
+        if hit is None:
+            close = [r["strategy"] for r in runs if key and key in norm(" ".join(names(r)))][:8]
+            raise ToolError(f"No strategy matches '{name}'. "
+                            + (f"Close: {', '.join(close)}. " if close else "")
+                            + "Call list_strategies for every name.")
+        g, m = hit.get("gauntlet") or {}, hit.get("metrics") or {}
+        dsr = m.get("deflated_sharpe")
+        counts = self.trials.counts()
+        return {
+            "strategy": {"id": hit["strategy"], "name": names(hit)[1]},
+            "gauntlet": ({"verdict": g.get("verdict"), "passed": g.get("passed"),
+                          "total": g.get("total")} if g else None),
+            "luck_check": {"deflated_sharpe": dsr,
+                           "passes": None if dsr is None else dsr >= 0.95,
+                           "tries_in_report": doc.get("n_trials"),
+                           "search_trials_here": counts["search_trials"]},
+            "metrics": {k: m.get(k) for k in ("years", "cagr", "sharpe", "max_drawdown")},
+            "report_generated_at": doc.get("generated_at"),
+            "method": "The gauntlet verdict and luck check from the latest local report. "
+                      "The hosted verify_strategy adds Verify's five cards, counted at "
+                      "every try of the research and the search: " + HOSTED_MCP,
+        }
+
     def glossary(self, term: str) -> dict:
         g = json.loads((self.s.repo / "docs" / "_system" / "glossary.json").read_text())
         q = term.lower().strip()
@@ -1110,7 +1185,10 @@ read Parity's strategies, data, search results and docs, and let you evaluate ne
 specs. Every spec you try is counted as a trial, which raises the bar of the luck check
 (deflated Sharpe) for all results, so think before you try. Use the refine-strategy
 prompt for a disciplined loop. Nothing here is a result until a human registers it and
-runs it officially. Research only, not investment advice."""
+runs it officially. Verify: verify_claim checks a seller's numbers and verify_strategy gives
+a tested strategy's verdict here; checking a trade list or equity curve (verify_trades) runs
+on the hosted server at https://paritytrading.app/mcp. Research only, not investment
+advice."""
 
 KEY_DOCS = {"DEC-0014": "The strategy factory and the always-on search",
             "DEC-0009": "How returns are scored: excess returns, financing, frozen code",
@@ -1301,6 +1379,32 @@ def build_server(settings: Settings | None = None):
         args = {"currency": currency, "category": category, "query": query, "limit": limit}
         return await call("news_impact", args,
                           lambda: tools.news_impact(currency, category, query, limit))
+
+    @mcp.tool(annotations=read_only)
+    async def verify_claim(claim: dict, settings: int | None = None,
+                           trades: int | None = None) -> dict:
+        """Check the arithmetic of a trading claim, such as a bot seller's page, and say
+        which claims are impossible and which need more data. claim holds fields, with
+        rates as fractions (0.92 means 92%): winRate, takeProfit, stopLoss, avgLoss,
+        monthlyReturn, maxDrawdown, maxLoss, tradesPerMonth, trades, months, leverage,
+        grid, martingale, maxLossCapped. Example: {"winRate": 0.92, "takeProfit": 0.05}
+        for "92% win rate, 5% take-profit, no stop". settings and trades, when known, add
+        the many-settings check. Same rules as the hosted verify_claim; reading the
+        seller's own words, and verify_trades for a trade record, run on the hosted server
+        at https://paritytrading.app/mcp. A check, not advice."""
+        args = {"claim": claim, "settings": settings, "trades": trades}
+        return await call("verify_claim", args,
+                          lambda: tools.verify_claim(claim, settings, trades))
+
+    @mcp.tool(annotations=read_only)
+    async def verify_strategy(name: str) -> dict:
+        """Verify one of Parity's tested strategies by id or plain name (for example
+        fx_carry or "The Gambit"): its gauntlet verdict (tests passed of 11) and luck check
+        (deflated Sharpe, 0.95 passes) from the latest local report. The hosted
+        verify_strategy at https://paritytrading.app/mcp adds Verify's five cards. A check,
+        not advice."""
+        return await call("verify_strategy", {"name": name},
+                          lambda: tools.verify_strategy(name))
 
     @mcp.tool(annotations=read_only)
     async def glossary(term: str) -> dict:

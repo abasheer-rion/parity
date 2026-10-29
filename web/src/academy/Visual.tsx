@@ -2,10 +2,13 @@
 // with Back and Next (or the arrow keys), tweening between step frames, and plays once
 // through on its own the first time it scrolls into view. With reduced motion it jumps
 // straight to each step frame and never plays on its own. "All steps" lays every frame
-// out side by side with its caption. Motion rules: DEC-0017.
+// out side by side with its caption. Motion rules: DEC-0017. Lessons drawn with the
+// signature chart system (DEC-0067) play in its own player instead, which adds the slider
+// and the data table behind the picture.
 import DOMPurify from "dompurify";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
-import { H, renderScene, W, type Visual } from "./scenes";
+import { H, isSignature, renderScene, W, type Visual } from "./scenes";
+import { SignaturePlayer } from "../ui/signature/Player";
 // Reduced motion follows the device and the Motion setting (REF-0023).
 import { useReducedMotion } from "../ui/presence";
 import { Button } from "../ui";
@@ -18,16 +21,26 @@ const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 /** One frame of a picture. The markup is drawn by our own code, and still goes through DOMPurify. */
 export function Frame({ visual, s }: { visual: Visual; s: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const drawn = useRef("");
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="ac-svg" aria-hidden="true" focusable="false">${renderScene(visual, s)}</svg>`;
+    // Redraw only when the picture changed: a parent re-rendering with an equal visual must
+    // not touch the page, or a still frame counts as moving content (WCAG 2.2.2).
+    if (svg === drawn.current && el.firstChild) return;
+    drawn.current = svg;
     el.replaceChildren(DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true }, RETURN_DOM_FRAGMENT: true }));
   }, [visual, s]);
   return <div ref={ref} className="ac-frame" />;
 }
 
 export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; autoPlay?: boolean }) {
+  if (isSignature(visual)) return <SignaturePlayer visual={visual} autoPlay={autoPlay} theme="dark" className="ac-visual ac-sig" />;
+  return <ClassicPlayer visual={visual} autoPlay={autoPlay} />;
+}
+
+function ClassicPlayer({ visual, autoPlay = true }: { visual: Visual; autoPlay?: boolean }) {
   const reduced = useReducedMotion();
   const last = visual.steps.length - 1;
   const [step, setStep] = useState(0);
@@ -131,7 +144,7 @@ export function VisualPlayer({ visual, autoPlay = true }: { visual: Visual; auto
               </span>
               <Button size="sm" variant="primary" onClick={() => go(step + 1)} aria-disabled={step === last}>Next</Button>
               {!reduced && (
-                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-pressed={playing}>
+                <button type="button" className="ui-btn ui-btn-secondary ui-btn-sm ac-btn-play" onClick={togglePlay} aria-label={`${playing ? "Pause" : step >= last ? "Replay" : "Play"} the animation`}>
                   {/* All three labels share one cell, so the button keeps the width of the
                       longest and the row never re-wraps as the picture plays. */}
                   {["Pause", "Replay", "Play"].map((l) => (

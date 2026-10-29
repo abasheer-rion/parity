@@ -11,6 +11,7 @@ import {
 } from "../lib/metrics";
 import { Card, EmptyState, Segmented, StatTile, TableScroll } from "../ui";
 import { SpeedPanels } from "./Latency";
+import { PersonalMetrics } from "./MetricsPersonal";
 import "./metrics.css";
 
 type Load<T> = { state: "loading" } | { state: "ok"; data: T } | { state: "error"; message: string };
@@ -86,6 +87,7 @@ function Dashboard() {
       </div>
       <Retention retention={retention} />
       <Errors errors={errors} />
+      <PersonalMetrics />
       <h2 className="mx-section">Speed</h2>
       <SpeedPanels />
     </>

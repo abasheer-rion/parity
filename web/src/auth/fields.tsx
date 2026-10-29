@@ -2,8 +2,8 @@
 // autocomplete hints for password managers, a password field with show and hide, the
 // front page's button with a loading state, messages screen readers announce, and a
 // submit helper that puts each error under the field it is about.
-import { useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
-import { PasswordMeter } from "./PasswordMeter";
+import { useEffect, useId, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import { PasswordMatch, passwordsMatch, PasswordMeter } from "./PasswordMeter";
 import { emailProblem } from "./rules";
 
 /** An error from a form. With `field`, it shows under that field; without, above the button. */
@@ -44,6 +44,35 @@ export function useSubmit() {
     general: problem && !problem.field ? problem.message : null,
   };
 }
+
+/**
+ * A countdown for "send the email again". Supabase allows one email per address every
+ * 30 seconds, so the button counts down instead of failing.
+ */
+export function useCooldown() {
+  const [until, setUntil] = useState(0);
+  const [key, setKey] = useState("");
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (until <= now) return;
+    const timer = window.setTimeout(() => setNow(Date.now()), 1000);
+    return () => window.clearTimeout(timer);
+  }, [until, now]);
+  const left = Math.max(0, Math.ceil((until - now) / 1000));
+  return {
+    /** Whole seconds until another email to `address` can be asked for, or 0. */
+    leftFor: (address: string) => (address.trim().toLowerCase() === key ? left : 0),
+    start: (seconds: number, address: string) => {
+      const t = Date.now();
+      setNow(t);
+      setKey(address.trim().toLowerCase());
+      setUntil(t + seconds * 1000);
+    },
+  };
+}
+
+/** Seconds between emails to one address, matching the Supabase setting (smtp_max_frequency). */
+export const EMAIL_GAP_SECONDS = 30;
 
 /** A thrown error (often a dropped connection) in plain words. */
 export function friendlyThrown(err: unknown): string {
@@ -108,15 +137,20 @@ export function Field({ label, value, onChange, type = "text", auto, name, autoF
 
 /**
  * A password field with a Show / Hide button. With `rules`, a checklist under it ticks
- * off each rule as you type (for new passwords).
+ * off each rule as you type (for new passwords). With `match`, it is the confirm field for
+ * that password and says whether the two match.
  */
-export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error, email }: {
+export function PasswordField({ label, value, onChange, auto, name, autoFocus, rules, aside, error, email, match }: {
   label: string; value: string; onChange: (v: string) => void; auto: "current-password" | "new-password";
   name?: string; autoFocus?: boolean; rules?: boolean; email?: string; aside?: ReactNode; error?: string | null;
+  match?: string;
 }) {
   const id = useId();
   const [shown, setShown] = useState(false);
-  const described = [rules ? `${id}-rules` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
+  const [left, setLeft] = useState(false);
+  const confirm = match !== undefined;
+  const mismatch = confirm && value.length > 0 && !passwordsMatch(match, value) && (left || !match.startsWith(value));
+  const described = [rules ? `${id}-rules` : "", confirm ? `${id}-match` : "", error ? `${id}-err` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className="pa-field">
       <div className="pa-label-row">
@@ -136,8 +170,9 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
           spellCheck={false}
           autoCapitalize="none"
           autoCorrect="off"
-          aria-invalid={error ? true : undefined}
+          aria-invalid={error || mismatch ? true : undefined}
           aria-describedby={described}
+          onBlur={() => setLeft(true)}
           onChange={(e) => onChange(e.target.value)}
         />
         <button type="button" className="pa-pw-toggle" aria-controls={id} aria-pressed={shown}
@@ -146,18 +181,21 @@ export function PasswordField({ label, value, onChange, auto, name, autoFocus, r
         </button>
       </div>
       {rules && <PasswordMeter value={value} rulesId={`${id}-rules`} email={email} />}
+      {confirm && <PasswordMatch password={match} value={value} id={`${id}-match`} left={left} />}
       {error && <span className="pa-error" id={`${id}-err`} role="alert">{error}</span>}
     </div>
   );
 }
 
 /** The front page's button (`.btn`), full width, with a spinner while it works. */
-export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus }: {
+export function Submit({ busy, children, primary = true, type = "submit", onClick, autoFocus, disabled }: {
   busy?: boolean; children: ReactNode; primary?: boolean; type?: "submit" | "button";
   onClick?: () => void; autoFocus?: boolean;
+  /** Greyed out and not clickable, for example until the two passwords match. */
+  disabled?: boolean;
 }) {
   return (
-    <button type={type} className={`btn${primary ? " primary" : ""} pa-btn`} aria-busy={busy || undefined}
+    <button type={type} className={`btn${primary ? " primary" : ""} pa-btn`} aria-busy={busy || undefined} disabled={disabled}
       data-busy={busy || undefined} onClick={onClick} autoFocus={autoFocus}>
       {busy && <span className="pa-spin" aria-hidden="true" />}
       <span className="pa-btn-label">{children}</span>

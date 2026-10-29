@@ -81,7 +81,7 @@ export function HiddenSettings({ section, report, batches, batchId, setBatchId }
           <SettingsRow label="Generated">{report ? date(report.generated_at) : "n/a"}</SettingsRow>
           <SettingsRow label="Code version">{report?.git_sha ? <a href={`${REPO_URL}/commit/${report.git_sha}`} target="_blank" rel="noreferrer">{report.git_sha}</a> : "Local checkout"}</SettingsRow>
           <SettingsRow label="Trials counted" help="Used to deflate every Sharpe ratio.">{report?.n_trials ?? "n/a"}</SettingsRow>
-          <SettingsRow label="Data fetched">{report?.coverage.fetched_at ? date(report.coverage.fetched_at) : "n/a"} · <a href="#/data">Data health</a></SettingsRow>
+          <SettingsRow label="Data fetched">{report?.coverage.fetched_at ? date(report.coverage.fetched_at) : "n/a"} · <a href="#/data">This run's data</a></SettingsRow>
         </>
       )}
 
@@ -89,7 +89,7 @@ export function HiddenSettings({ section, report, batches, batchId, setBatchId }
 
       {section === "about" && (
         <>
-          <SettingsRow label="Parity" help="A research proof of concept: can a currency strategy beat the S&P 500? Not investment advice.">
+          <SettingsRow label="Parity" help="A research proof of concept: can a currency strategy beat the S&P 500? Research and education only. Not investment advice.">
             <a href="#/doc/INT-0001" data-doc="INT-0001">Initial intent</a>
           </SettingsRow>
           <SettingsRow label="Repository"><a href={REPO_URL} target="_blank" rel="noreferrer">abasheer-rion/parity</a></SettingsRow>

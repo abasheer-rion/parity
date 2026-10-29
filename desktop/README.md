@@ -1,10 +1,10 @@
 # Parity for Mac and Windows
 
-The whole Parity site, loaded live so it always matches parity.endyland.com: the front page and Verify, the product app (Strategies), Research, Parity Terminal, Parity Trade, Academy and Workbench. Every page uses the whole window, under a slim bar with a menu button. Built with Electron and electron-builder ([DEC-0041](../docs/decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md), [DEC-0048](../docs/decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md), [DEC-0049](../docs/decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)). Research and education only. Not investment advice. Trading in the app uses a demo account with delayed data and no real money.
+The whole Parity site, loaded live so it always matches paritytrading.app: the front page and Verify, the product app (Strategies), Research, Parity Terminal, Parity Trade, Academy and Workbench. Every page uses the whole window, under a slim bar with a menu button. Built with Electron and electron-builder ([DEC-0041](../docs/decisions/0041-parity-as-an-installable-site-and-a-desktop-app-for-mac-and-windows.md), [DEC-0048](../docs/decisions/0048-the-desktop-app-loads-the-live-site-and-keeps-a-copy-for-offline.md), [DEC-0049](../docs/decisions/0049-the-desktop-app-opens-on-the-log-in-page-with-a-menu-button-and-its-own-controls.md)). Research and education only. Not investment advice. Trading in the app uses a demo account with delayed data and no real money.
 
 ## Install
 
-Download from the repository's Releases page: `Parity-<version>-arm64.dmg` for a Mac with Apple silicon (M1 or later), `Parity-<version>-x64.dmg` for an Intel Mac, `Parity-Setup-<version>.exe` for Windows.
+Download from [paritytrading.app/download](https://paritytrading.app/download/) or the repository's Releases page: `Parity-<version>-arm64.dmg` for a Mac with Apple silicon (M1 or later), `Parity-<version>-x64.dmg` for an Intel Mac, `Parity-Setup-<version>.exe` for Windows.
 
 From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions/0062-desktop-builds-are-signed-with-argus-vision-certificates.md)).
 
@@ -21,7 +21,7 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 
 ## Using it
 
-- **Log in first.** Signed out, the app shows only the log-in page. After you log in it opens the last page you used, Home the first time, and the other windows you had open. You stay signed in when you quit.
+- **Log in first.** Signed out, the app shows only the log-in page. After you log in it opens the last page you used, Home the first time, and the other windows you had open. You stay signed in when you quit, for up to 400 days without opening the app. The app renews your sign-in after sleep, when the connection comes back and every 30 minutes, and opens signed in when it starts offline ([DEC-0072](../docs/decisions/0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)).
 - **The menu button** at the top left (right of the traffic lights on a Mac) opens the sections and Account. Pick one, press Escape or click outside to close it. Alt-click a section, or the arrow at the end of its row, to open it in a new window.
 - **Move the window** by dragging the bar along the top. Double-click it to zoom (Mac) or maximise (Windows).
 - **Shortcuts** (Cmd on a Mac, Ctrl on Windows):
@@ -44,14 +44,14 @@ From 0.2.2 the app is signed by Argus Vision, Inc. ([DEC-0062](../docs/decisions
 - **The menu bar item** (the tray on Windows) has quick actions and your active Trade watchlist's prices.
 - **Trade alerts** show as notifications. Turn on "Keep running when windows close" in Settings to get them with every window closed.
 - **A key to show or hide Parity** from any app can be set in Settings. It is off until you set one.
-- **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to parity.endyland.com and its sim., trade., academy. and lab. addresses stay in the app; other links open in your browser.
+- **Links.** `parity://` links open the app at a page, for example `parity://s/fx_carry`, `parity://trade/#/alerts` or `parity://sim/macro`. Links to paritytrading.app and its sim., trade., academy. and lab. addresses stay in the app, and so do links to the old parity.endyland.com addresses; other links open in your browser.
 - **Offline,** the app shows the copy of the site it was built with, under a line that says "Offline, showing saved copy", and goes back to the live site when the connection returns.
 - **Never a black window.** A page that stops drawing is drawn again; one that stays empty reloads once, then shows Could not open with Retry. Problems are noted in a small log: `~/Library/Logs/Parity/parity.log` on a Mac, `%APPDATA%\Parity\logs\parity.log` on Windows, with no passwords or sign-in tokens ([DEC-0058](../docs/decisions/0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)).
-- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://parity.endyland.com/legal/cookies/#desktop) has the details.
+- **Privacy.** The app keeps the sign-in cookie, its settings, your windows and your recent pages on the computer. It shows no cookie notice. The [cookie policy](https://paritytrading.app/legal/cookies/#desktop) has the details.
 
 ## Updates
 
-Pages are always current. For the app itself, Parity checks `https://parity.endyland.com/desktop/updates/` 15 seconds after launch and every 6 hours (Settings can turn it off; Parity, Check for updates checks now). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
+Pages are always current. When the site deploys a new version, a page that is already open shows "A new version of Parity is ready" with Reload; Reload keeps the page, its address and what was typed into its fields ([DEC-0086](../docs/decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)). For the app itself, Parity checks `https://paritytrading.app/desktop/updates/` 5 seconds after launch and every hour (Settings can turn it off; Parity, Check for updates checks now). It downloads a new version in the background and installs it when you quit. It offers "Restart to update" only when the app itself changed; a release that only refreshes the saved copy of the site installs quietly at quit (the release workflow marks it "pages" in the update file). That feed serves the newest **published** desktop release, so a draft release reaches nobody until it is published.
 
 - Windows: the update downloads in the background and Parity asks to restart.
 - Mac, signed and notarized: the same.
@@ -65,7 +65,7 @@ These need the owner's accounts. Nothing here is created by the build.
 
 1. On GitHub, Settings, Developer settings, Fine-grained tokens, Generate new token: resource owner `abasheer-rion`, only the repository `abasheer-rion/parity`, permission Contents: Read-only, an expiry you will remember.
 2. In Cloudflare, Workers & Pages, `parity-research`, Settings, Variables and Secrets, Production: add a secret named `DESKTOP_RELEASES_TOKEN` with that token.
-3. Redeploy the site (any merge to main does it). `https://parity.endyland.com/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
+3. Redeploy the site (any merge to main does it). `https://paritytrading.app/desktop/updates/latest-mac.yml` then answers with the newest published version; before that it answers 503.
 
 **2. Sign and notarize the Mac app (five secrets).** With the Apple Developer account (another company's account works; its name shows as the developer):
 
@@ -97,16 +97,16 @@ npm run build:win    # dist/Parity-Setup-<version>.exe and latest.yml, on Window
 
 On this Mac, prefix the Mac build with `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer CSC_IDENTITY_AUTO_DISCOVERY=false`. `npm run icons` redraws the app and menu bar icons from the brand's starburst. `npm run shots` saves pictures of the windows to `~/Desktop/parity-app/shots/` by drawing each window's own views, so it needs no screen recording permission; `PARITY_SHOTS_STEPS` picks the steps (see `electron/shots.js`). `PARITY_LIVE_ORIGIN=https://10.255.255.1 npm start` points the app at an address that never answers, to see the offline copy, and `PARITY_LOG=1` prints each page the app loads, also in a packaged build. Against a local dev server started with `VITE_AUTH_BYPASS=1 npm run dev -- --port 5199`, `PARITY_DEV_URL=http://127.0.0.1:5199 PARITY_AUTH_BYPASS=1` treats the app as signed in, for screenshots; the bypass only works with a loopback dev address.
 
-The release workflow (`.github/workflows/desktop-release.yml`) builds both installers and the update files on GitHub's runners and attaches them to a draft release. Run it from the Actions tab, or push a tag such as `desktop-v0.2.0`. Publish the release to ship it.
+Releases are automatic. Each merge to main that changes `desktop/` (and every Monday, when `web/` changed since the last release) makes `.github/workflows/desktop-auto-release.yml` create a new tag `desktop-v<next patch>` and start `.github/workflows/desktop-release.yml` on it, which builds, signs, notarizes and checks both installers, publishes the release (not marked as the repository's latest) and waits until the update feed serves it. Installed copies update within the hour. To stop automatic releases set the repository variable `DESKTOP_AUTO_RELEASE` to `false`. By hand: push a tag such as `desktop-v0.3.0` (a higher version than the newest tag) for a draft release, and publish it to ship it.
 
 ## How it is put together
 
 | File | What it does |
 | --- | --- |
 | `electron/main.js` | Start-up, windows, the log-in wall, messages, the menu, settings |
-| `electron/window.js` | One window: title bar, pages, the menu layer, focus mode |
+| `electron/window.js` | One window: pages to the top edge, the controls in the page's header row, the menu layer, focus mode |
 | `electron/page.js` | One page view: live site or saved copy, links, the wall |
-| `electron/ui-titlebar.*`, `ui-overlay.*`, `ui-settings.*` | The app's own pages: title bar, menu and palette, Settings |
+| `electron/ui-titlebar.*`, `ui-overlay.*`, `ui-settings.*` | The app's own pages: the window controls (menu, Back, Forward, search), menu and palette, Settings |
 | `electron/preload.js`, `shell-preload.js` | The bridges for website pages and for the app's own pages |
 | `electron/tray.js`, `updater.js` | Menu bar item and updates |
 | `electron/routes.js`, `shortcuts.js`, `settings.js`, `workspace.js` | Plain logic with tests |

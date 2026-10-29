@@ -18,7 +18,8 @@
                                  what markets did after past events like a scenario
     parity scenario export       write output/scenarios.json for the dashboard
     parity world export          write output/world.json for Sim World's map
-    parity world paths --asset EUR --asset oil --weeks 26
+    parity world stress          write output/stress.json: Monte Carlo stress tests of six mixes
+parity world paths --asset EUR --asset oil --weeks 26
                                  simulated paths from blocks of real weekly returns (CSV)
     parity terminal export       write output/terminal/ for Parity Terminal (every series
                                  the site may show; --markets DIR adds crypto)
@@ -262,6 +263,16 @@ def _world(args) -> int:
     from . import world
 
     levels = world.load_levels()
+    if args.action == "stress":
+        from . import stress
+
+        doc = stress.export(levels)
+        out = Path(args.out or DEFAULT_OUT / "stress.json")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(doc, separators=(",", ":")))
+        print(f"Wrote {out}: {len(doc['mixes'])} mixes, {doc['paths']:,} paths per run, "
+              f"history {doc['data_from']} to {doc['data_through']}")
+        return 0
     if args.action == "export":
         doc = world.export(levels, world.load_rates(), sc.load_events())
         out = Path(args.out or DEFAULT_OUT / "world.json")
@@ -442,6 +453,19 @@ def _new_strategy(args) -> int:
     print("\nNext steps:")
     for i, step in enumerate(out["next_steps"], 1):
         print(f"  {i}. {step}")
+    return 0
+
+
+def _pairs(args) -> int:
+    from .pairs import research
+
+    out = args.out or research.OUT
+    doc = research.report(out, gauntlet=not args.quick)
+    print(f"{len(doc['leaderboard'])} recipes, {len(doc['pairs'])} pairs, "
+          f"{doc['trials']['total']} variations counted; wrote {out}")
+    for r in doc["leaderboard"]:
+        print(f"  {r['id']:<28} Sharpe {r['sharpe']}  deflated {r['deflated_sharpe']}  "
+              f"tests {r['tests_passed']}/{r['tests_total']}  {r['verdict']}")
     return 0
 
 
@@ -661,9 +685,10 @@ def main(argv: list[str] | None = None) -> int:
     sc.set_defaults(func=_scenario)
 
     wd = sub.add_parser("world", help="Sim World's map file and simulated paths (DEC-0016)")
-    wd.add_argument("action", choices=["export", "paths"])
+    wd.add_argument("action", choices=["export", "paths", "stress"])
     wd.add_argument("--out", default=None,
-                    help="export: default output/world.json; paths: a CSV file, or - for stdout")
+                    help="export: default output/world.json; stress: output/stress.json; "
+                    "paths: a CSV file, or - for stdout")
     wd.add_argument("--asset", action="append", default=[], help="EUR, oil, stocks, ...")
     wd.add_argument("--weeks", type=int, default=26)
     wd.add_argument("--n", type=int, default=1000, help="number of paths")
@@ -740,6 +765,12 @@ def main(argv: list[str] | None = None) -> int:
     se.add_argument("--hours", type=float, default=None,
                     help="with --forever, exit after this long so the service can restart")
     se.set_defaults(func=_search)
+
+    pa = sub.add_parser("pairs", help="pairs and stat arb research report (DEC-0070)")
+    pa.add_argument("action", choices=["report"])
+    pa.add_argument("--quick", action="store_true", help="skip the gauntlet tests")
+    pa.add_argument("--out", type=Path, default=None, help="where to write pairs.json")
+    pa.set_defaults(func=_pairs)
 
     sm = sub.add_parser("sims", help="the always-on sims: Bot Battle paths, Sim World paths "
                         "and the site exports, on a loop (DEC-0037)")

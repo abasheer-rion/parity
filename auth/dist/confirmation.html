@@ -17,87 +17,93 @@
   body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
   table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
   img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
-  a { color: #2f6bff; }
+  a { color: #1F4FBF; }
+  .p-code { -webkit-user-select: all; user-select: all; }
   @media (max-width: 600px) {
     .p-card { padding: 28px 22px !important; }
-    .p-code { font-size: 26px !important; letter-spacing: 6px !important; }
+    .p-code { font-size: 32px !important; letter-spacing: 8px !important; }
   }
-  /* Apple Mail, iOS Mail and Outlook for Mac follow the reader's dark mode. */
+  /* Apple Mail, iOS Mail, Outlook for Mac and Gmail apps that honour dark mode. */
   @media (prefers-color-scheme: dark) {
-    .p-bg { background-color: #10101a !important; }
-    .p-card { background-color: #171721 !important; border-color: #2a2a3c !important; }
-    .p-text { color: #ececf4 !important; }
-    .p-muted { color: #9b9db2 !important; }
-    .p-rule { border-color: #2a2a3c !important; }
-    .p-codebox { background-color: #1f2440 !important; border-color: #2c3560 !important; }
-    .p-code { color: #a9c3ff !important; }
+    .p-bg { background-color: #0d0f17 !important; }
+    .p-card { background-color: #161925 !important; border-color: #262a3b !important; }
+    .p-band { background-color: #0d1220 !important; }
+    .p-text { color: #eceef6 !important; }
+    .p-muted { color: #a0a4b8 !important; }
+    .p-rule { border-color: #262a3b !important; }
+    .p-codebox { background-color: #1a2442 !important; border-color: #2b3a6b !important; }
+    .p-code { color: #a8c1ff !important; }
     .p-link { color: #8fb0ff !important; }
+    .p-pre { color: #0d0f17 !important; }
   }
   /* Outlook.com and the Outlook apps mark dark mode with these attributes. */
-  [data-ogsc] .p-text { color: #ececf4 !important; }
-  [data-ogsc] .p-muted { color: #9b9db2 !important; }
-  [data-ogsc] .p-code { color: #a9c3ff !important; }
-  [data-ogsb] .p-bg { background-color: #10101a !important; }
-  [data-ogsb] .p-card { background-color: #171721 !important; }
-  [data-ogsb] .p-codebox { background-color: #1f2440 !important; }
+  [data-ogsc] .p-text { color: #eceef6 !important; }
+  [data-ogsc] .p-muted { color: #a0a4b8 !important; }
+  [data-ogsc] .p-code { color: #a8c1ff !important; }
+  [data-ogsc] .p-link { color: #8fb0ff !important; }
+  [data-ogsb] .p-bg { background-color: #0d0f17 !important; }
+  [data-ogsb] .p-card { background-color: #161925 !important; }
+  [data-ogsb] .p-band { background-color: #0d1220 !important; }
+  [data-ogsb] .p-codebox { background-color: #1a2442 !important; }
 </style>
 </head>
-<body class="p-bg" style="margin:0;padding:0;background-color:#f3f4f8;">
-<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f3f4f8;opacity:0;">One step left. Confirm this address to finish creating your Parity account.&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;</div>
-<table role="presentation" class="p-bg" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f3f4f8;">
+<body class="p-bg" style="margin:0;padding:0;background-color:#f2f4f9;">
+<div class="p-pre" style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f2f4f9;opacity:0;">Your code is inside. One tap and you are in.&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;</div>
+<table role="presentation" class="p-bg" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f4f9;">
   <tr>
     <td align="center" style="padding:32px 12px;">
-      <!--[if mso]><table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
-        <tr>
-  <td style="padding:0 4px 20px 4px;">
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td style="vertical-align:middle;padding-right:10px;">
-          <img src="https://parity.endyland.com/brand/2026-10-21-starburst/parity-icon-dark.png" width="36" height="36" alt="Parity" style="display:block;width:36px;height:36px;border-radius:8px;">
-        </td>
-        <td class="p-text" style="vertical-align:middle;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:24px;font-weight:600;color:#16171f;">Parity</td>
-      </tr>
-    </table>
+      <!--[if mso]><table role="presentation" width="520" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+        <!-- The dark band and the logo, as on the site. The logo is a 2x PNG of the starburst and the
+     PARITY wordmark. Sent by our own sender (the Send Email hook) it is attached inline by
+     Content-ID, so it shows without "download images". Sent by the Supabase SMTP fallback it is
+     the hosted copy, and the alt text keeps the name readable on the band until images load. -->
+<tr>
+  <td class="p-band" bgcolor="#0d1220" align="left" style="background-color:#0d1220;border-radius:12px 12px 0 0;border-bottom:3px solid #1F4FBF;padding:22px 36px 20px 36px;">
+    <a href="{{ .SiteURL }}" target="_blank" style="text-decoration:none;color:#f4f7ff;">
+      <img src="https://paritytrading.app/email/parity-logo-on-dark@2x.png" width="176" height="40" alt="PARITY" style="display:block;width:176px;height:40px;max-width:176px;border:0;outline:none;text-decoration:none;color:#f4f7ff;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:40px;letter-spacing:6px;font-weight:700;">
+    </a>
   </td>
 </tr>
         <tr>
-          <td class="p-card" style="background-color:#ffffff;border:1px solid #e4e5ee;border-radius:12px;padding:36px 40px;">
-            <h1 class="p-text" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:600;color:#16171f;">Confirm your email</h1>
-<p class="p-text" style="margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#16171f;">Thanks for signing up to Parity. Confirm that {{ .Email }} is your address.</p>
+          <td class="p-card" style="background-color:#ffffff;border:1px solid #e3e6ef;border-top:0;border-radius:0 0 12px 12px;padding:32px 36px;">
+            <!--body--><h1 class="p-text" style="margin:0 0 10px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:30px;font-weight:700;color:#141622;">Confirm your email</h1>
+<p class="p-text" style="margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:24px;color:#141622;">Welcome to Parity. Confirm {{ .Email }} and you are all set.</p>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 24px 0;">
   <tr>
-    <td align="center" bgcolor="#2f6bff" style="border-radius:8px;background-color:#2f6bff;">
+    <td align="center" bgcolor="#1F4FBF" style="border-radius:8px;background-color:#1F4FBF;">
       <!--[if mso]>
-      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" style="height:44px;v-text-anchor:middle;width:240px;" arcsize="18%" stroke="f" fillcolor="#2f6bff">
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" style="height:46px;v-text-anchor:middle;width:240px;" arcsize="18%" stroke="f" fillcolor="#1F4FBF">
       <w:anchorlock/>
-      <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;">Confirm my email</center>
+      <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Confirm my email</center>
       </v:roundrect>
       <![endif]-->
       <!--[if !mso]><!-- -->
-      <a href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" target="_blank" style="display:inline-block;padding:12px 22px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;background-color:#2f6bff;">Confirm my email</a>
+      <a href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" target="_blank" style="display:inline-block;padding:13px 26px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;background-color:#1F4FBF;border:1px solid #1F4FBF;">Confirm my email</a>
       <!--<![endif]-->
     </td>
   </tr>
 </table>
-<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5d6070;">Or type this code on the sign-up screen:</p>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 24px 0;">
+<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">Or type this code on the sign-up screen:</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 8px 0;">
   <tr>
-    <td class="p-codebox" align="center" style="background-color:#eef2ff;border:1px solid #d9e2ff;border-radius:10px;padding:18px 12px;">
-      <span class="p-code" style="font-family:'SF Mono',SFMono-Regular,Menlo,Consolas,'Courier New',monospace;font-size:30px;line-height:36px;letter-spacing:8px;font-weight:600;color:#1d4fd8;">{{ .Token }}</span>
+    <td class="p-codebox" align="center" style="background-color:#eef2fc;border:1px solid #d3ddf5;border-radius:10px;padding:20px 12px;">
+      <span class="p-code" style="font-family:'SF Mono',SFMono-Regular,Menlo,Consolas,'Courier New',monospace;font-size:38px;line-height:44px;letter-spacing:10px;font-weight:700;color:#1F4FBF;-webkit-user-select:all;user-select:all;">{{ .Token }}</span>
     </td>
   </tr>
 </table>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="p-rule" style="border-top:1px solid #e4e5ee;font-size:0;line-height:0;height:20px;">&nbsp;</td></tr></table>
-<p class="p-muted" style="margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5d6070;">If the button does not work, paste this link into your browser:</p>
-<p style="margin:0 0 20px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;"><a class="p-link" href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" style="color:#2f6bff;text-decoration:underline;">{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}</a></p>
-<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5d6070;">The link and code work once and expire in 60 minutes.</p>
+<p class="p-muted" style="margin:0 0 22px 0;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#5b5f72;">Tap or double-click the code to select it.</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="p-rule" style="border-top:1px solid #e3e6ef;font-size:0;line-height:0;height:18px;">&nbsp;</td></tr></table>
+<p class="p-muted" style="margin:0 0 4px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">Button not working? Paste this into your browser:</p>
+<p style="margin:0 0 16px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;word-break:break-all;"><a class="p-link" href="{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}" style="color:#1F4FBF;text-decoration:underline;">{{ .SiteURL }}/verify/?type=email&amp;token_hash={{ .TokenHash }}&amp;next={{ .RedirectTo }}</a></p>
+<p class="p-muted" style="margin:0 0 12px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#5b5f72;">The link and code work once and expire in 60 minutes.</p><!--/body-->
           </td>
         </tr>
         <tr>
-  <td class="p-muted" style="padding:20px 8px 0 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#5d6070;">
-    Sent by Parity to {{ .Email }}. Research only, not investment advice.<br>
-    You are getting this because someone used this address on <a class="p-link" href="{{ .SiteURL }}" style="color:#5d6070;text-decoration:underline;">Parity</a>. If that was not you, you can ignore this email.
+  <td class="p-muted" style="padding:20px 8px 0 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#5b5f72;">
+    Didn&#8217;t ask for this? You can safely ignore this email.<br>
+    Sent to {{ .Email }} by <a class="p-link" href="{{ .SiteURL }}" style="color:#5b5f72;text-decoration:underline;">Parity Trading</a>. Research only, not investment advice.<br>
+    Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States
   </td>
 </tr>
       </table>

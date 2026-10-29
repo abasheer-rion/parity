@@ -1,26 +1,29 @@
-// Human names, tags and a plain strengths-and-weaknesses read for each strategy.
-// New runs carry display_name, description and tags from the engine; runs published
-// before that fall back to the table below. Internal ids never change.
+// Names, taglines, tags and a plain strengths-and-weaknesses read for each strategy.
+// Names and taglines come from strategyNames.ts, the one source of truth for what people
+// see; the engine's display_name is only used for a strategy that table does not know.
+// New runs carry tags from the engine; runs published before that fall back to the table
+// below. Internal ids never change.
 import type { Comparison, StrategyRun, StrategyTags } from "./types";
+import { displayName, strategySearchText, tagline } from "./strategyNames";
 
-const FALLBACK: Record<string, { name: string; tags: StrategyTags }> = {
-  us_market_buy_hold: { name: "US stock market", tags: { family: "benchmark", asset: "stocks", style: "buy and hold", horizon: "multi-year" } },
-  fx_carry: { name: "Currency carry", tags: { family: "carry", asset: "fx", style: "risk premium", horizon: "monthly" } },
-  fx_carry_trend_value: { name: "Carry, trend and value blend", tags: { family: "mixed", asset: "fx", style: "multi-factor", horizon: "monthly" } },
-  fx_commodity_gap: { name: "Oil currency gap", tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "monthly" } },
-  fx_dollar_carry: { name: "Dollar carry", tags: { family: "carry", asset: "fx", style: "timing", horizon: "monthly" } },
-  fx_ma_cross: { name: "Currency moving-average cross", tags: { family: "trend", asset: "fx", style: "momentum", horizon: "daily" } },
-  fx_rsi_reversion: { name: "Currency RSI bounce", tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "daily" } },
-  fx_tsmom: { name: "Currency trend", tags: { family: "trend", asset: "fx", style: "momentum", horizon: "monthly" } },
-  fx_value_reer: { name: "Currency value", tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "multi-month" } },
-  fx_xs_momentum: { name: "Currency winners", tags: { family: "trend", asset: "fx", style: "momentum", horizon: "monthly" } },
-  commodity_tsmom: { name: "Oil and gas trend", tags: { family: "trend", asset: "commodities", style: "momentum", horizon: "monthly" } },
-  stocks_golden_cross: { name: "Golden cross", tags: { family: "trend", asset: "stocks", style: "timing", horizon: "daily" } },
-  stocks_plus_fx_trend: { name: "Stocks plus currency trend", tags: { family: "mixed", asset: "mixed", style: "diversified", horizon: "monthly" } },
-  stocks_sell_in_may: { name: "Sell in May", tags: { family: "calendar", asset: "stocks", style: "seasonal", horizon: "multi-month" } },
-  stocks_trend_10m: { name: "Stock trend, 10-month", tags: { family: "trend", asset: "stocks", style: "timing", horizon: "monthly" } },
-  stocks_turn_of_month: { name: "Turn of the month", tags: { family: "calendar", asset: "stocks", style: "seasonal", horizon: "daily" } },
-  stocks_vol_managed: { name: "Calm-market stocks", tags: { family: "volatility", asset: "stocks", style: "risk scaling", horizon: "monthly" } },
+const FALLBACK: Record<string, { tags: StrategyTags }> = {
+  us_market_buy_hold: { tags: { family: "benchmark", asset: "stocks", style: "buy and hold", horizon: "multi-year" } },
+  fx_carry: { tags: { family: "carry", asset: "fx", style: "risk premium", horizon: "monthly" } },
+  fx_carry_trend_value: { tags: { family: "mixed", asset: "fx", style: "multi-factor", horizon: "monthly" } },
+  fx_commodity_gap: { tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "monthly" } },
+  fx_dollar_carry: { tags: { family: "carry", asset: "fx", style: "timing", horizon: "monthly" } },
+  fx_ma_cross: { tags: { family: "trend", asset: "fx", style: "momentum", horizon: "daily" } },
+  fx_rsi_reversion: { tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "daily" } },
+  fx_tsmom: { tags: { family: "trend", asset: "fx", style: "momentum", horizon: "monthly" } },
+  fx_value_reer: { tags: { family: "value", asset: "fx", style: "mean reversion", horizon: "multi-month" } },
+  fx_xs_momentum: { tags: { family: "trend", asset: "fx", style: "momentum", horizon: "monthly" } },
+  commodity_tsmom: { tags: { family: "trend", asset: "commodities", style: "momentum", horizon: "monthly" } },
+  stocks_golden_cross: { tags: { family: "trend", asset: "stocks", style: "timing", horizon: "daily" } },
+  stocks_plus_fx_trend: { tags: { family: "mixed", asset: "mixed", style: "diversified", horizon: "monthly" } },
+  stocks_sell_in_may: { tags: { family: "calendar", asset: "stocks", style: "seasonal", horizon: "multi-month" } },
+  stocks_trend_10m: { tags: { family: "trend", asset: "stocks", style: "timing", horizon: "monthly" } },
+  stocks_turn_of_month: { tags: { family: "calendar", asset: "stocks", style: "seasonal", horizon: "daily" } },
+  stocks_vol_managed: { tags: { family: "volatility", asset: "stocks", style: "risk scaling", horizon: "monthly" } },
 };
 
 function guessTags(r: StrategyRun): StrategyTags {
@@ -32,14 +35,20 @@ function guessTags(r: StrategyRun): StrategyTags {
 }
 
 export function nameOf(r: StrategyRun): string {
-  return r.display_name || nameById(r.strategy);
+  return displayName(r.strategy, r.display_name);
 }
 
 /** A strategy's name from its id alone, for share links that have no run to read (DEC-0038). */
 export function nameById(id: string): string {
-  if (FALLBACK[id]) return FALLBACK[id].name;
-  const s = id.replace(/_/g, " ");
-  return s ? s[0].toUpperCase() + s.slice(1) : id;
+  return displayName(id);
+}
+
+/** One plain sentence on what a strategy does, or "" when none is written yet. */
+export const taglineOf = (r: StrategyRun | string): string => tagline(typeof r === "string" ? r : r.strategy);
+
+/** Everything a search box should match for a run: name, tagline, id, description and summary. */
+export function searchTextOf(r: StrategyRun): string {
+  return `${strategySearchText(r.strategy, r.display_name)} ${r.description ?? ""} ${r.summary ?? ""}`;
 }
 
 export const tagsById = (id: string): StrategyTags | undefined => FALLBACK[id]?.tags;

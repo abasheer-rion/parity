@@ -68,15 +68,24 @@ export function challenge(origin: string, error?: "invalid_token"): string {
   return `Bearer ${parts.join(", ")}`;
 }
 
+/** The web apps of AI clients that may call /mcp from a page in the browser (VS Code for the
+ *  web, and the Claude and ChatGPT sites if they ever call from the page). Safe to allow: /mcp
+ *  takes only a bearer token, never a cookie, so another site cannot act as someone. */
+export const AI_APP_ORIGINS = [
+  "https://claude.ai", "https://claude.com", "https://chatgpt.com",
+  "https://vscode.dev", "https://insiders.vscode.dev", "https://gemini.google.com",
+];
+
 /** Origins that may call /mcp from a browser. Server-side apps (Claude, ChatGPT) send no
  *  Origin at all. The spec requires refusing a present but unexpected Origin. */
-export function originAllowed(origin: string | null, siteDomain: string, extra: string[] = []): boolean {
+export function originAllowed(origin: string | null, siteDomain: string | string[], extra: string[] = []): boolean {
   if (!origin) return true;
   let u: URL;
   try { u = new URL(origin); } catch { return false; }
-  if (extra.includes(u.origin)) return true;
+  if (extra.includes(u.origin) || AI_APP_ORIGINS.includes(u.origin)) return true;
   const host = u.hostname;
   if (u.protocol === "http:" && (host === "localhost" || host === "127.0.0.1")) return true;
   if (u.protocol !== "https:") return false;
-  return host === siteDomain || host.endsWith(`.${siteDomain}`) || host === "parity-research.pages.dev" || host.endsWith(".parity-research.pages.dev");
+  const domains = Array.isArray(siteDomain) ? siteDomain : [siteDomain];
+  return domains.some((d) => host === d || host.endsWith(`.${d}`)) || host === "parity-research.pages.dev" || host.endsWith(".parity-research.pages.dev");
 }

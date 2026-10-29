@@ -1,7 +1,8 @@
 // Form controls: text and search fields, selects, segmented choices, switches and
 // checkboxes. All are 32px tall by default with a 1px quiet border.
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Icon } from "./icons";
+import { ListSelect } from "./overlays";
 
 export function Input({ value, onChange, placeholder, type = "text", label, autoFocus }:
   { value: string; onChange: (v: string) => void; placeholder?: string; type?: string; label?: string; autoFocus?: boolean }) {
@@ -19,18 +20,12 @@ export function SearchInput({ value, onChange, placeholder = "Search", autoFocus
   );
 }
 
+/** Choose one from a list: opens Parity's own menu, not the browser's pop-up (ListSelect). */
 export function Select<T extends string>({ value, onChange, options, label }: { value: T; onChange: (v: T) => void; options: [T, string][]; label: string }) {
-  return (
-    <span className="ui-select">
-      <select value={value} onChange={(e) => onChange(e.target.value as T)} aria-label={label}>
-        {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-      </select>
-      <Icon name="chevronDown" size={13} />
-    </span>
-  );
+  return <ListSelect value={value} onChange={onChange} options={options} label={label} />;
 }
 
-/** Choose one of a few. A raised thumb slides behind the chosen option. */
+/** Choose one of a few, as underline tabs. A blue line slides under the chosen option. */
 export function Segmented<T extends string>({ value, onChange, options, label, size = "md" }:
   { value: T; onChange: (v: T) => void; options: [T, ReactNode][]; label?: string; size?: "sm" | "md" }) {
   const ind = useIndicator<HTMLDivElement>(Math.max(0, options.findIndex(([v]) => v === value)), [options.length]);
@@ -55,6 +50,43 @@ export function Segmented<T extends string>({ value, onChange, options, label, s
   );
 }
 
+export interface Choice<T extends string> { value: T; title: string; body?: ReactNode; icon?: string }
+
+/**
+ * Choose one of a few big options: a row of cards, each with an icon, a title and a line
+ * under it. A radio group: Tab reaches the chosen card, the arrow keys move and choose.
+ */
+export function ChoiceCards<T extends string>({ value, onChange, options, label }: { value: T; onChange: (v: T) => void; options: Choice<T>[]; label: string }) {
+  const id = useId();
+  return (
+    <div className="ui-choices" role="radiogroup" aria-label={label}
+      onKeyDown={(e) => {
+        const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        const i = Math.max(0, options.findIndex((o) => o.value === value));
+        const next = (i + step + options.length) % options.length;
+        onChange(options[next].value);
+        (e.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("[role=radio]")[next]?.focus();
+      }}>
+      {options.map((o, i) => {
+        const on = o.value === value;
+        return (
+          <button key={o.value} type="button" role="radio" aria-checked={on} tabIndex={on ? 0 : -1} className={`ui-choice ${on ? "on" : ""}`}
+            aria-labelledby={`${id}-${i}`} aria-describedby={o.body ? `${id}-${i}-b` : undefined} onClick={() => onChange(o.value)}>
+            {o.icon && <span className="ui-choice-icon" aria-hidden><Icon name={o.icon} size={20} /></span>}
+            <span className="ui-choice-text">
+              <span className="ui-choice-t" id={`${id}-${i}`}>{o.title}</span>
+              {o.body && <span className="ui-choice-b" id={`${id}-${i}-b`}>{o.body}</span>}
+            </span>
+            <span className="ui-choice-mark" aria-hidden />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Toggle({ on, onChange, label }: { on: boolean; onChange: (v: boolean) => void; label?: string }) {
   return <button role="switch" aria-checked={on} aria-label={label} className={`ui-toggle ${on ? "on" : ""}`} onClick={() => onChange(!on)}><i /></button>;
 }
@@ -75,11 +107,14 @@ export function Checkbox({ checked, onChange, label }: { checked: boolean; onCha
  */
 function useIndicator<T extends HTMLElement>(index: number, deps: unknown[] = []) {
   const ref = useRef<T>(null);
-  const [box, setBox] = useState<{ x: number; w: number; ready: boolean }>({ x: 0, w: 0, ready: false });
+  const [box, setBox] = useState<{ x: number; y: number; w: number; ready: boolean }>({ x: 0, y: 0, w: 0, ready: false });
   const measure = useCallback(() => {
-    const el = ref.current?.querySelectorAll<HTMLElement>("[data-ind]")[index];
-    if (!el) return;
-    setBox((b) => (b.x === el.offsetLeft && b.w === el.offsetWidth ? b : { x: el.offsetLeft, w: el.offsetWidth, ready: b.ready || b.w > 0 }));
+    const root = ref.current;
+    const el = root?.querySelectorAll<HTMLElement>("[data-ind]")[index];
+    if (!root || !el) return;
+    // y lifts the marker to the chosen option's row when a narrow screen wraps the options.
+    const y = Math.min(0, el.offsetTop + el.offsetHeight - root.clientHeight);
+    setBox((b) => (b.x === el.offsetLeft && b.w === el.offsetWidth && b.y === y ? b : { x: el.offsetLeft, y, w: el.offsetWidth, ready: b.ready || b.w > 0 }));
   }, [index]);
   useLayoutEffect(measure, [measure, ...deps]);
   useEffect(() => {
@@ -91,7 +126,7 @@ function useIndicator<T extends HTMLElement>(index: number, deps: unknown[] = []
     document.fonts?.ready.then(measure).catch(() => {});
     return () => ro.disconnect();
   }, [measure]);
-  const style = { "--ind-x": `${box.x}px`, "--ind-w": `${box.w}px`, "--ind-s": box.w } as CSSProperties;
+  const style = { "--ind-x": `${box.x}px`, "--ind-y": `${box.y}px`, "--ind-w": `${box.w}px`, "--ind-s": box.w } as CSSProperties;
   return { ref, style, ready: box.ready };
 }
 

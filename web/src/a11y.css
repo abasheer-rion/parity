@@ -11,14 +11,17 @@ main footer a,
 /* Brand blue text on its own soft tint was below 4.5:1 on dark surfaces. */
 .ui-badge-accent { color: var(--text); }
 
-/* Visible focus for every control, including ones that set outline: none. */
 /* Visible focus for every control, including ones that set outline: none. It wins over any
    component rule (WCAG 2.4.7), so a keyboard user always sees where they are. Things focused
-   by code only (tabindex="-1", such as <main> after a route change) are left alone. */
+   by code only (tabindex="-1", such as <main> after a route change) are left alone.
+   This is the one focus ring for the apps: :focus-visible only, so a mouse click or a tap
+   never draws a box, and a keyboard user always gets the brand-blue ring. */
 :is(a[href], button, input, select, textarea, summary, [role="tab"], [role="radio"], [role="menuitem"], [role="option"], [role="switch"], [role="checkbox"], [tabindex]:not([tabindex="-1"])):focus-visible {
   outline: 2px solid var(--color-focus) !important;
   outline-offset: 2px;
 }
+/* No grey flash on a tap (iOS and Android draw one over anything tappable). */
+html { -webkit-tap-highlight-color: transparent; }
 /* A checkbox or radio drawn by the library hides the real input; its box shows the ring. */
 .ui-check input:focus-visible, .ui-radio input:focus-visible { outline: none !important; }
 

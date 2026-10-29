@@ -79,6 +79,7 @@ export function SettingsView({ list, settings, set, onResetLayout, onLoadLayout 
 
         <section className="st-sec" aria-labelledby="st-legal">
           <h2 id="st-legal" className="vh">Legal</h2>
+          <p className="st-note">Demo account. Delayed data. Research and education only. Not investment advice.</p>
           <nav className="st-links" aria-label="Legal">
             {LEGAL_PAGES.map((p) => <a key={p.href} href={p.href} target="_blank" rel="noopener">{p.label}</a>)}
             <a href={productUrl("#/how")} target="_blank" rel="noopener">How Parity works</a>

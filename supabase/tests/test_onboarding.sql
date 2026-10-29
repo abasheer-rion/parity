@@ -110,7 +110,30 @@ update public.crypto_wallets set verified_at = now(), address = '0x0000000000000
 reset role;
 select pg_temp.expect((select verified_at is not null from public.crypto_wallets where address = '0xabcdef0000000000000000000000000000000001'), 'service role sets verified_at, address kept');
 
--- 8. Signed-out visitors get nothing ---------------------------------------------------------
+-- 8. The first-run intro (20261114000000, DEC-0077): own row, shape checks, never reopened --
+set local role authenticated;
+select pg_temp.as_user('11111111-1111-1111-1111-111111111111', null);
+update public.onboarding_state set intro_step = 2, intro_goal = 'verify', intro_level = 'new', intro_markets = '{fx,stocks}';
+select pg_temp.expect((select intro_step = 2 and intro_goal = 'verify' and intro_markets = '{fx,stocks}' from public.onboarding_state), 'A saves intro answers');
+select pg_temp.refused($$update public.onboarding_state set intro_goal = 'gamble'$$, 'unknown intro goal');
+select pg_temp.refused($$update public.onboarding_state set intro_level = 'pro'$$, 'unknown intro level');
+select pg_temp.refused($$update public.onboarding_state set intro_markets = '{fx,bonds}'$$, 'unknown market');
+select pg_temp.refused($$update public.onboarding_state set intro_step = 10$$, 'intro step out of range');
+select pg_temp.refused($$update public.onboarding_state set intro_status = 'maybe'$$, 'unknown intro status');
+update public.onboarding_state set intro_status = 'done';
+update public.onboarding_state set intro_status = null;
+select pg_temp.expect((select intro_status = 'done' from public.onboarding_state), 'a finished intro stays finished');
+update public.onboarding_state set intro_status = 'skipped';
+select pg_temp.expect((select intro_status = 'done' from public.onboarding_state), 'a finished intro is not turned into skipped');
+select pg_temp.as_user('22222222-2222-2222-2222-222222222222', null);
+update public.onboarding_state set intro_goal = 'trade', intro_markets = '{crypto}';
+select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'c1');
+update public.onboarding_state set intro_goal = 'learn';
+reset role;
+select pg_temp.expect((select intro_goal = 'verify' and intro_markets = '{fx,stocks}' from public.onboarding_state where user_id = '11111111-1111-1111-1111-111111111111'), 'B and an app token changed none of A''s answers');
+set local role authenticated;
+
+-- 9. Signed-out visitors get nothing ---------------------------------------------------------
 set local role anon;
 select pg_temp.refused($$select count(*) from public.onboarding_state$$, 'anon reads onboarding_state');
 select pg_temp.refused($$select count(*) from public.crypto_wallets$$, 'anon reads crypto_wallets');

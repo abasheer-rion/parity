@@ -39,6 +39,8 @@ function WithWorld({ children }: { children: (d: WorldData) => ReactNode }) {
 
 export function SimPanel({ fn }: { fn: string }) {
   const t = useTerm();
+  const scen = useLoad(getScen);
+  const scenEvents = scen.status === "ok" ? scen.data.events : undefined;
   if (fn === "RACE") return <RacePanel />;
   if (fn === "SCEN" || fn === "PATH") return <ScenPanel fn={fn} />;
   return (
@@ -47,7 +49,7 @@ export function SimPanel({ fn }: { fn: string }) {
         const w = { data, win: t.win, setWin: t.setWin };
         switch (fn) {
           case "WMAP": return (
-            <MapView {...w}
+            <MapView {...w} events={scenEvents}
               onScenario={(patch) => { t.setSpec((s) => ({ ...s, ...patch })); t.open("SCEN"); }}
               onPaths={(keys) => { t.setBasket(keys); t.open("PATH"); }}
               onPick={(code) => {
@@ -73,7 +75,7 @@ export function BotsPanel() {
   useAsOf(ix.status === "ok" ? ix.data.data_through : null);
   return (
     <div className="term-scroll term-sim">
-      <div className="term-honest-strip">Hypothetical and educational. Not investment advice.</div>
+      <div className="term-honest-strip">Hypothetical and educational.</div>
       <div className="sw2 term-sw"><BotBattle /></div>
     </div>
   );

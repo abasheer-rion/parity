@@ -92,9 +92,9 @@ describe("the badge image, embed and social line", () => {
     expect(s).toContain("on 2026-11-02");
   });
   it("writes the social line the spec describes", () => {
-    const line = socialLine({ id: "Ab3dEf6hIj9k", verdict: "could_be_luck", survives_tries: 4, input_kind: "backtest", trade_count: 212 }, "parity.endyland.com");
-    expect(line).toBe("Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. parity.endyland.com/v/Ab3dEf6hIj9k");
-    expect(embedSnippet("Ab3dEf6hIj9k", "https://parity.endyland.com")).toContain('src="https://parity.endyland.com/badge/Ab3dEf6hIj9k.svg" width="320" height="80"');
+    const line = socialLine({ id: "Ab3dEf6hIj9k", verdict: "could_be_luck", survives_tries: 4, input_kind: "backtest", trade_count: 212 }, "paritytrading.app");
+    expect(line).toBe("Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. paritytrading.app/v/Ab3dEf6hIj9k");
+    expect(embedSnippet("Ab3dEf6hIj9k", "https://paritytrading.app")).toContain('src="https://paritytrading.app/badge/Ab3dEf6hIj9k.svg" width="320" height="80"');
   });
 });
 
@@ -113,7 +113,13 @@ describe("the public badge page", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Holds up" })).toBeInTheDocument();
     expect(container.querySelectorAll(".vf-cards .mcard").length).toBeGreaterThanOrEqual(5);
     expect(screen.getByText("a".repeat(64))).toBeInTheDocument();
-    expect(screen.getByText(/Checked on 24 Oct 2026 with method verify-1.0/)).toBeInTheDocument();
+    // It reads as a record: the facts, the trust level and the method, linked to the methodology.
+    const facts = container.querySelector(".vb-facts")!;
+    expect(facts.textContent).toContain("Checked on24 Oct 2026");
+    expect(facts.textContent).toContain("Trust levelSelf-reported.");
+    expect(facts.querySelector('a[href="/methodology/"]')?.textContent).toBe("verify-1.0");
+    expect(facts.textContent).toContain("Record idAb3dEf6hIj9k");
+    expect(facts.textContent).not.toMatch(/owner_id|user_id/);
     expect(screen.getByText(/Verification is not a recommendation/)).toBeInTheDocument();
     // Links on the public page go to the public lessons and glossary, not into the app.
     expect(container.querySelector('a[href^="#/"]')).toBeNull();
@@ -173,7 +179,7 @@ describe("the share panel", async () => {
 describe("the badge page function, /v/<id>", () => {
   it("serves the built /v/ page for any id, out of search", async () => {
     const fetch = vi.fn(async (req: Request | string) => new Response(`<title>page for ${new URL(typeof req === "string" ? req : req.url).pathname}</title>`, { headers: { "Content-Type": "text/html" } }));
-    const res = await servePage({ request: new Request("https://parity.endyland.com/v/Ab3dEf6hIj9k"), env: { ASSETS: { fetch } }, params: { id: "Ab3dEf6hIj9k" } });
+    const res = await servePage({ request: new Request("https://paritytrading.app/v/Ab3dEf6hIj9k"), env: { ASSETS: { fetch } }, params: { id: "Ab3dEf6hIj9k" } });
     expect(await res.text()).toBe("<title>page for /v/</title>");
     expect(res.headers.get("X-Robots-Tag")).toBe("noindex, nofollow");
   });

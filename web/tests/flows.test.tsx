@@ -20,7 +20,7 @@ const { carryFromQuery, viewFromPath } = await import("../src/auth/views");
 const { AppGuard } = await import("../src/auth/AuthGate");
 const { signOut } = await import("../src/auth/session");
 
-function at(path: string, host = "https://parity.endyland.com") {
+function at(path: string, host = "https://paritytrading.app") {
   window.history.replaceState({}, "", new URL(path, host).pathname + new URL(path, host).search + new URL(path, host).hash);
 }
 const type = (label: string | RegExp, value: string) => fireEvent.change(screen.getByLabelText(label), { target: { value } });
@@ -78,12 +78,12 @@ describe("log in", () => {
   });
 
   it("returns to Sim World on its own host", async () => {
-    at("/login/?next=https%3A%2F%2Fsim.endyland.com%2Fsim%2F");
+    at("/login/?next=https%3A%2F%2Fsim.paritytrading.app%2Fsim%2F");
     page();
     await toPassword();
     type("Password", "correct horse 42");
     click("Log in");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.endyland.com/sim/"));
+    await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.paritytrading.app/sim/"));
   });
 
   it("shows a plain message under the password for a wrong password and does not navigate", async () => {
@@ -163,7 +163,7 @@ describe("log in", () => {
     await toPassword();
     click("Email me a code instead");
     await screen.findByLabelText("Code");
-    expect(h.supabase.auth.signInWithOtp).toHaveBeenCalledWith({ email: "amanda@example.com", options: { shouldCreateUser: false, emailRedirectTo: "https://parity.endyland.com/app/" } });
+    expect(h.supabase.auth.signInWithOtp).toHaveBeenCalledWith({ email: "amanda@example.com", options: { shouldCreateUser: false, emailRedirectTo: "https://paritytrading.app/app/" } });
     type("Code", "654321");
     click("Log in");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/app/"));
@@ -237,10 +237,35 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "short");
+    type("Confirm password", "short");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await alertSays("Use at least 10 characters.");
     expect(h.supabase.auth.signUp).not.toHaveBeenCalled();
+  });
+
+  it("keeps Create account off until the confirm field matches, then shows a tick", async () => {
+    at("/signup/");
+    page();
+    await toNewPassword();
+    const create = () => screen.getByRole("button", { name: "Create account" });
+    expect(create()).toBeDisabled();
+    type("Choose a password", "correct horse 42");
+    expect(create()).toBeDisabled();
+    type("Confirm password", "correct horse");
+    expect(screen.queryByText("Passwords do not match")).toBeNull();
+    type("Confirm password", "correct horse 43");
+    expect(screen.getByText("Passwords do not match")).toBeTruthy();
+    expect(create()).toBeDisabled();
+    type("Confirm password", "correct horse 42");
+    expect(screen.getByText("Passwords match")).toBeTruthy();
+    expect(create()).not.toBeDisabled();
+    for (const label of ["Choose a password", "Confirm password"]) {
+      const input = screen.getByLabelText(label);
+      expect(input).toHaveAttribute("autocomplete", "new-password");
+    }
+    expect(screen.getAllByRole("button", { name: "Show password" })).toHaveLength(2);
+    expect(screen.getByRole("list", { name: "Password rules" })).toBeTruthy();
   });
 
   it("asks for agreement to the terms", async () => {
@@ -248,6 +273,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     click("Create account");
     await alertSays("agree to the terms");
     expect(screen.getByRole("checkbox")).toHaveAttribute("aria-invalid", "true");
@@ -259,13 +285,14 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await screen.findByRole("heading", { name: "Check your email" });
     expect(h.supabase.auth.signUp).toHaveBeenCalledWith({
       email: "amanda@example.com",
       password: "correct horse 42",
-      options: { emailRedirectTo: "https://parity.endyland.com/research/" },
+      options: { emailRedirectTo: "https://paritytrading.app/research/" },
     });
   });
 
@@ -275,6 +302,7 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await alertSays("Too many emails were sent.");
@@ -288,32 +316,19 @@ describe("sign up and verify", () => {
     await screen.findByRole("heading", { name: "Welcome to Parity" });
     expect(h.supabase.auth.verifyOtp).toHaveBeenCalledWith({ email: "amanda@example.com", token: "123456", type: "signup" });
     expect(h.go).not.toHaveBeenCalled();
-    click("Skip for now");
+    click("Continue where you were");
     expect(h.go).toHaveBeenCalledWith("/research/");
   });
 
-  it("walks through the welcome: what Parity is, picks, then Verify or Trade", async () => {
+  it("shows a one-screen welcome that goes to the app, where the first-run intro asks the questions", async () => {
     at("/signup/?check=amanda%40example.com");
     page();
     type("Code from the email", "123456");
     click("Confirm email");
     await screen.findByRole("heading", { name: "Welcome to Parity" });
-    expect(screen.getByRole("img", { name: "Step 1 of 3" })).toBeTruthy();
-    click("Continue");
-    await screen.findByRole("heading", { name: "What do you want to do first?" });
-    const trade = screen.getByRole("button", { name: "Practise on a demo account" });
-    expect(trade).toHaveAttribute("aria-pressed", "false");
-    fireEvent.click(trade);
-    expect(trade).toHaveAttribute("aria-pressed", "true");
-    click("Continue");
-    await screen.findByRole("heading", { name: "Where to start" });
-    expect(JSON.parse(localStorage.getItem("parity.interests.v1") ?? "[]")).toEqual(["trade"]);
-    // Trade was picked and Verify was not, so Trade comes first.
-    const links = screen.getAllByRole("link").filter((a) => a.classList.contains("pa-choice"));
-    expect(links.map((a) => a.querySelector(".pa-choice-title")?.textContent)).toEqual(["Parity Trade", "Verify"]);
-    fireEvent.click(screen.getByRole("link", { name: /Verify/ }));
-    expect(h.go).toHaveBeenCalledWith("/app/#/verify");
-    expect(screen.getByRole("button", { name: "Go to the app" })).toBeTruthy();
+    expect(screen.getByText(/three short questions/)).toBeTruthy();
+    click("Go to the app");
+    expect(h.go).toHaveBeenCalledWith("/app/");
   });
 
   it("asks for the authenticator code instead of the welcome when the new account has one", async () => {
@@ -330,7 +345,7 @@ describe("sign up and verify", () => {
     page();
     click("Send the email again");
     expect(await screen.findByText(/Sent again/)).toBeTruthy();
-    expect(h.supabase.auth.resend).toHaveBeenCalledWith({ type: "signup", email: "amanda@example.com", options: { emailRedirectTo: "https://parity.endyland.com/app/" } });
+    expect(h.supabase.auth.resend).toHaveBeenCalledWith({ type: "signup", email: "amanda@example.com", options: { emailRedirectTo: "https://paritytrading.app/app/" } });
   });
 
   it("goes straight in when confirmation is off", async () => {
@@ -339,20 +354,20 @@ describe("sign up and verify", () => {
     page();
     await toNewPassword();
     type("Choose a password", "correct horse 42");
+    type("Confirm password", "correct horse 42");
     fireEvent.click(screen.getByRole("checkbox"));
     click("Create account");
     await screen.findByRole("heading", { name: "Welcome to Parity" });
-    click("Continue");
-    click("Skip for now");
+    click("Continue where you were");
     expect(h.go).toHaveBeenCalledWith("/sim/");
   });
 
   it("verifies an email link after one click and follows its next", async () => {
-    at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fsim.endyland.com%2Fsim%2F");
+    at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fsim.paritytrading.app%2Fsim%2F");
     page();
     expect(h.supabase.auth.verifyOtp).not.toHaveBeenCalled();
     click("Confirm and continue");
-    await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.endyland.com/sim/"));
+    await waitFor(() => expect(h.go).toHaveBeenCalledWith("https://sim.paritytrading.app/sim/"));
     expect(h.supabase.auth.verifyOtp).toHaveBeenCalledWith({ type: "email", token_hash: "abc" });
   });
 
@@ -362,7 +377,7 @@ describe("sign up and verify", () => {
     click("Confirm and continue");
     await screen.findByRole("heading", { name: "Welcome to Parity" });
     expect(path()).toBe("/verify/?type=signup&token_hash=abc&next=%2Fresearch%2F");
-    click("Skip for now");
+    click("Continue where you were");
     expect(h.go).toHaveBeenCalledWith("/research/");
   });
 
@@ -378,7 +393,7 @@ describe("sign up and verify", () => {
   });
 
   it("falls back to the app when an email link's next is the bare site address", async () => {
-    at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fparity.endyland.com");
+    at("/verify/?type=email&token_hash=abc&next=https%3A%2F%2Fparitytrading.app");
     page();
     click("Confirm and continue");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/app/"));
@@ -408,7 +423,30 @@ describe("forgot and reset password", () => {
     type("Email", "amanda@example.com");
     click("Send reset email");
     await screen.findByLabelText("Code from the email");
-    expect(h.supabase.auth.resetPasswordForEmail).toHaveBeenCalledWith("amanda@example.com", { redirectTo: "https://parity.endyland.com/research/" });
+    expect(h.supabase.auth.resetPasswordForEmail).toHaveBeenCalledWith("amanda@example.com", { redirectTo: "https://paritytrading.app/research/" });
+  });
+
+  it("counts down instead of failing when an email was just sent", async () => {
+    at("/reset/");
+    h.supabase.auth.resetPasswordForEmail.mockResolvedValueOnce({ data: null, error: Object.assign(authError("over_email_send_rate_limit", "For security purposes, you can only request this after 27 seconds."), { status: 429 }) } as never);
+    page();
+    await screen.findByLabelText("Email");
+    type("Email", "amanda@example.com");
+    click("Send reset email");
+    const button = await screen.findByRole("button", { name: /Send again in 2\ds/ });
+    expect(button).toBeDisabled();
+    expect(screen.getByRole("status").textContent).toContain("You can send another in");
+    expect(screen.queryAllByRole("alert").map((a) => a.textContent).join("")).not.toContain("Too many emails");
+  });
+
+  it("says the email could not be sent when the mail service fails", async () => {
+    at("/reset/");
+    h.supabase.auth.resetPasswordForEmail.mockResolvedValueOnce({ data: null, error: Object.assign(authError("unexpected_failure", "Error sending recovery email"), { status: 500 }) } as never);
+    page();
+    await screen.findByLabelText("Email");
+    type("Email", "amanda@example.com");
+    click("Send reset email");
+    await alertSays("We could not send the email. Try again shortly.");
   });
 
   it("says to check your email after sending the reset email", async () => {
@@ -446,7 +484,7 @@ describe("forgot and reset password", () => {
   });
 
   it("opens the new-password form from a recovery link, keeping next", async () => {
-    at("/verify/?type=recovery&token_hash=abc&next=https%3A%2F%2Fparity.endyland.com%2Fresearch%2F");
+    at("/verify/?type=recovery&token_hash=abc&next=https%3A%2F%2Fparitytrading.app%2Fresearch%2F");
     h.supabase.auth.verifyOtp.mockImplementationOnce(async () => { h.supabase.setSession(fakeSession()); return { data: { session: null, user: null }, error: null }; });
     page();
     click("Continue");
@@ -461,7 +499,7 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 42");
+    type("Confirm password", "new password 42");
     click("Save password");
     await waitFor(() => expect(h.go).toHaveBeenCalledWith("/research/"));
     expect(h.supabase.auth.updateUser).toHaveBeenCalledWith({ password: "new password 42" });
@@ -480,9 +518,11 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 43");
+    type("Confirm password", "new password 43");
+    expect(screen.getByText("Passwords do not match")).toBeTruthy();
+    expect(screen.getByLabelText("Confirm password")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("button", { name: "Save password" })).toBeDisabled();
     click("Save password");
-    await alertSays("do not match");
     expect(h.supabase.auth.updateUser).not.toHaveBeenCalled();
   });
 
@@ -495,7 +535,7 @@ describe("forgot and reset password", () => {
     page();
     await screen.findByLabelText("New password");
     type("New password", "new password 42");
-    type("Type it again", "new password 42");
+    type("Confirm password", "new password 42");
     click("Save password");
     await screen.findByLabelText("Code from the email");
     expect(h.supabase.auth.reauthenticate).toHaveBeenCalled();

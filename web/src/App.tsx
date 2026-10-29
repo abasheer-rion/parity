@@ -3,18 +3,19 @@ import { AppGuard } from "./auth";
 import { NotFound } from "./components/NotFound";
 import { Shell } from "./components/Shell";
 import { listBatches, loadReport, loadSearch, source, type BatchInfo } from "./lib/data";
-import { date, REPO_URL } from "./lib/format";
+import { date } from "./lib/format";
 import { applyTheme } from "./lib/prefs";
 import { scrollToTop } from "./lib/scroll";
 import type { Report } from "./lib/types";
-import { Button, ErrorBoundary, lazyPage, PageSkeleton, preload, Toaster } from "./ui";
+import { Button, ErrorBoundary, lazyPage, ListSelect, PageSkeleton, preload, Toaster } from "./ui";
 import { loadDocIndex } from "./lib/docs";
-import { LegalLinks } from "./legal/LegalLinks";
 import { academyHashFor, academyUrl, LAB_ROUTES, labHashFor, labUrl, otherSide, simUrl, SPACE, SPACE_ROOT, tradeHashFor, tradeUrl, unknownRoute } from "./lib/space";
 import { setStoreUser } from "./lib/userStore";
+import { syncConsent } from "./lib/personalize/api";
 import { useRouteMeta } from "./lib/deeplink";
 import { PAYMENTS_ENABLED } from "./lib/payments/flag";
 import { nameById, nameOf } from "./lib/strategyMeta";
+import { IntroGate } from "./onboarding/IntroGate";
 
 // Every page is its own file, loaded when it is first opened, so the app starts with only
 // the frame and the page in front of you (REF-0024). The likely next pages load while idle.
@@ -36,6 +37,7 @@ const PAGE_FILES = {
   Markets: () => import("./pages/markets/Markets"),
   Learn: () => import("./pages/Learn"),
   PrivateResearch: () => import("./pages/PrivateResearch"),
+  Pairs: () => import("./pages/Pairs"),
   Overview: () => import("./pages/Overview"),
   Settings: () => import("./pages/Settings"),
   SimLanding: () => import("./pages/SimLanding"),
@@ -52,6 +54,9 @@ const PAGE_FILES = {
   Pricing: () => import("./pages/Pricing"),
   Reader: () => import("./pages/Reader"),
   Share: () => import("./pages/verify/Share"),
+  DataCatalog: () => import("./pages/registry/DataCatalog"),
+  Candidates: () => import("./pages/registry/Candidates"),
+  DataHealth: () => import("./pages/registry/DataHealth"),
 };
 const AlgorithmReport = page(PAGE_FILES.AlgorithmReport, "AlgorithmReport");
 const Catalog = page(PAGE_FILES.Catalog, "Catalog");
@@ -66,6 +71,7 @@ const News = page(PAGE_FILES.News, "News");
 const Markets = page(PAGE_FILES.Markets, "Markets");
 const Learn = page(PAGE_FILES.Learn, "Learn");
 const PrivateResearch = page(PAGE_FILES.PrivateResearch, "PrivateResearch");
+const Pairs = page(PAGE_FILES.Pairs, "Pairs");
 const Overview = page(PAGE_FILES.Overview, "Overview");
 const Settings = page(PAGE_FILES.Settings, "Settings");
 const SimLanding = page(PAGE_FILES.SimLanding, "SimLanding");
@@ -80,6 +86,10 @@ const Verify = page(PAGE_FILES.Verify, "Verify");
 const Strategies = page(PAGE_FILES.Strategies, "Strategies");
 const StrategyPage = page(PAGE_FILES.StrategyPage, "StrategyPage");
 const Pricing = page(PAGE_FILES.Pricing, "Pricing");
+const DataCatalog = page(PAGE_FILES.DataCatalog, "DataCatalog");
+const SeriesPage = page(PAGE_FILES.DataCatalog, "SeriesPage");
+const Candidates = page(PAGE_FILES.Candidates, "Candidates");
+const DataHealth = page(PAGE_FILES.DataHealth, "DataHealth");
 // The command palette and the hover cards carry the catalog and glossary (about 190 kB), so
 // they arrive once the first page has drawn.
 const Palette = page(() => import("./components/Palette"), "Palette");
@@ -96,8 +106,8 @@ const ROUTE_FILE: Record<string, () => Promise<unknown>> = {
   settings: PAGE_FILES.Settings, start: PAGE_FILES.Start, how: PAGE_FILES.HowItWorks, docs: PAGE_FILES.Reader, doc: PAGE_FILES.Reader,
   refs: PAGE_FILES.Reader, catalog: PAGE_FILES.Catalog, algo: PAGE_FILES.AlgorithmReport, ledger: PAGE_FILES.LedgerPage,
   sources: PAGE_FILES.DataSources, latency: PAGE_FILES.Latency, metrics: PAGE_FILES.Metrics, explore: PAGE_FILES.Explore, overview: PAGE_FILES.Overview,
-  signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors,
-  pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding,
+  signals: PAGE_FILES.Signals, data: PAGE_FILES.DataPage, private: PAGE_FILES.PrivateResearch, competitors: PAGE_FILES.Competitors, pairs: PAGE_FILES.Pairs,
+  pricing: PAGE_FILES.Pricing, ui: PAGE_FILES.UILibrary, sim: PAGE_FILES.SimLanding, registry: PAGE_FILES.DataCatalog,
 };
 
 /** Loads a route's page file when the pointer or focus reaches a link to it. */
@@ -157,12 +167,12 @@ function useHash(): string {
 export function App() {
   // Every page of the app needs a session (DEC-0012). The public pages (/, /login/,
   // /signup/, /reset/, /verify/) are a separate entry: src/auth/main.tsx.
-  return <AppGuard>{(user) => { setStoreUser(user.id); return <Dashboard email={user.email} onSignOut={user.signOut} />; }}</AppGuard>;
+  return <AppGuard>{(user) => { setStoreUser(user.id); syncConsent(); return <Dashboard email={user.email} onSignOut={user.signOut} />; }}</AppGuard>;
 }
 
 // Pages that read only what is bundled in the build, not the selected run.
 // The pricing page exists only when the payments flag is on (DEC-0046).
-const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors"];
+const STANDALONE = [...(PAYMENTS_ENABLED ? ["pricing"] : []), "start", "how", "search", "news", "learn", "catalog", "algo", "ledger", "sources", "latency", "metrics", "docs", "doc", "refs", "settings", "ui", "scenarios", "sim", "markets", "edges", "academy", "private", "trade", "verify", "competitors", "registry", "pairs"];
 
 // The newest run is the largest file the dashboard reads: ask for it now, while the code and
 // the sign-in check are still arriving, unless the page opening does not read it.
@@ -250,10 +260,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
     <>
       <span className="side-run-label">Results from{source === "local" && <span className="chip-badge">local run</span>}</span>
       {batches.length > 0 && (
-        <select className="run-picker" aria-label="Research run" value={batchId ?? ""} onChange={(e) => setBatchId(e.target.value || undefined)}>
-          <option value="">Latest run</option>
-          {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
-        </select>
+        <ListSelect className="side-lsel" label="Research run" value={batchId ?? ""} onChange={(v) => setBatchId(v || undefined)}
+          options={[["", "Latest run"], ...batches.map((b) => [b.id, `${b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}${date(b.generated_at)}`] as [string, string])]} />
       )}
     </>
   );
@@ -280,6 +288,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "catalog" && <Catalog />}
       {route === "private" && <PrivateResearch />}
       {route === "competitors" && <Competitors focus={dec(arg)} />}
+      {route === "pairs" && <Pairs />}
       {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
@@ -288,6 +297,8 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "sources" && <DataSources focus={arg} />}
       {route === "pricing" && PAYMENTS_ENABLED && <Pricing />}
       {route === "latency" && <Latency />}
+      {route === "registry" && (arg === "candidates" ? <Candidates /> : arg === "health" ? <DataHealth /> :
+        arg === "s" && extra ? <SeriesPage id={dec(extra)!} /> : <DataCatalog key={hash} />)}
       {route === "metrics" && <Metrics />}
       {route === "settings" && (
         <Settings section={arg} />
@@ -308,17 +319,13 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
             route === "watchlist" ? <Watchlist report={report} /> :
             SPACE === "research" ? <ResearchHome report={report} /> :
             <ProductHome report={report} email={email} />}
-          <footer className="muted small">
-            {report.kind === "official" ? `Official run ${report.run_id ?? ""}` : "Exploratory nightly run"} generated {date(report.generated_at)}
-            {report.git_sha && <> from commit <a href={`${REPO_URL}/commit/${report.git_sha}`}>{report.git_sha}</a></>}.
-            Research and education only. Not investment advice.
-            <LegalLinks className="start app-legal" />
-          </footer>
         </div>
       )}
       </Suspense>
       </ErrorBoundary>
       </div>
+      {/* The first-run intro (DEC-0077) opens over Home once per account. */}
+      {SPACE === "product" && (route === "" || route === "home") && <IntroGate report={report} />}
       <WhenIdle>
         <Popups />
         <Palette report={report} />

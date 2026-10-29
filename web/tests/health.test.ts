@@ -40,3 +40,22 @@ describe("health line", () => {
     expect(healthParts(rows, NOW).map((p) => p.text).join(" ")).not.toMatch(/\u2014|\u2013/);
   });
 });
+
+describe("data registry part", () => {
+  it("adds the registry counts the sims service sends (DEC-0064)", () => {
+    const rows: Heartbeat[] = [{ service: "sims", reported_at: at(5), summary: { bot_paths: 10, data: { series: 366, live: 320, degraded: 4, candidate: 34 } } }];
+    const parts = healthParts(rows, NOW);
+    expect(parts.map((p) => p.text)[2]).toBe("data: 320 live, 4 degraded, 34 waiting");
+    expect(parts[2].stale).toBe(true);
+    expect(healthParts([{ service: "sims", reported_at: at(5), summary: {} }], NOW)).toHaveLength(2);
+  });
+});
+
+describe("egress part", () => {
+  it("shows only while the daily egress check warns (REF-0028)", () => {
+    const warn: Heartbeat = { service: "egress", reported_at: at(5), summary: { warn: true, gb_30d_projected: 6.2, limit_gb: 5 } };
+    const parts = healthParts([warn], NOW);
+    expect(parts.at(-1)).toEqual({ service: "egress", stale: true, text: "database transfer: 6.2 GB a month at this rate, plan allows 5 GB" });
+    expect(healthParts([{ ...warn, summary: { warn: false, gb_30d_projected: 1.2 } }], NOW)).toHaveLength(2);
+  });
+});

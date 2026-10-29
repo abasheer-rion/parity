@@ -16,20 +16,15 @@
     phrases
   funnel.py stats                     what each feed cost (bytes, polls, 304s) and how much the
     dedupe saved
+  funnel.py run                       poll forever (what launchd runs, via run.sh)
+  funnel.py normalize [--again]       read raw entries as items (--again: all of them, after a
+    rule change)
   funnel.py promote [--days N]        upsert material stories into eg.event_candidate (catalog
     'news'); safe after build.sh
 
-Feeds (only sources whose robots.txt or terms allow automated reading; checked 2026-10-26):
-  bw:*          Business Wire RSS. Press releases, often primary; "(NYSE: TEX)" tags give tickers
-    for free.
-  gdelt_doc:N   GDELT DOC 2.0 article search, the watched
-    companies' names in OR batches. One request per 5 s (GDELT's rule).
-  gdelt_events  GDELT's 15-minute event export (~100 KB): conflict, coercion and sanctions between
-    countries and groups.
-  alpaca_news   Alpaca news API (Benzinga), with tickers on every article. Off until ALPACA_KEY_ID
-    and ALPACA_SECRET_KEY are set.
-Not used: Yahoo Finance (feeds.finance.yahoo.com and query1 disallow all robots) and Google News
-  RSS (/rss is disallowed).
+Every entry lands whole in `raw` first (sources.py: FEEDS, parse, to_item); the rules read it
+  after, so they can be re-run over the past. Only sources whose robots.txt or terms allow
+  automated reading (checked 2026-10-26).
 
 Why it is cheap to read: a feed item is ~700 bytes and a digest line ~40 tokens, where a full
   article page is 100 KB+
@@ -38,11 +33,11 @@ a story is material.
 Set FUNNEL_UA to identify the funnel with a contact (default "ParityResearch/0.1 (research)").
 """
 
-import csv
 import gzip
 import hashlib
-import io
 import json
+import logging
+import logging.handlers
 import os
 import re
 import sys
@@ -50,15 +45,14 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
-import zipfile
 from datetime import UTC, datetime, timedelta
-from email.utils import parsedate_to_datetime
 
 import psycopg2
 import psycopg2.extras
 
 import facts as F
+import sources as S
+from sources import clip
 
 UA = os.environ.get("FUNNEL_UA", "ParityResearch/0.1 (research)")
 HOST_GAP = {
@@ -66,6 +60,8 @@ HOST_GAP = {
     "data.gdeltproject.org": 1.0,
     "feed.businesswire.com": 2.0,
     "data.alpaca.markets": 0.4,
+    "www.sec.gov": 0.2,
+    "www.nasdaqtrader.com": 2.0,
 }  # seconds between requests to one host
 US_EXCHANGES = {
     "NYSE",
@@ -87,7 +83,6 @@ applied advanced texas china japan korea india new royal standard central pacifi
   energy power capital
 bank banco grupo china taiwan hong euro asia""".split()
 )
-SUMMARY_MAX = 300
 JOIN, JOIN_TICKER = (
     0.5,
     0.35,
@@ -152,6 +147,7 @@ MATERIAL = {
     "policy",
     "conflict",
     "sanction",
+    "halt",
 }
 STOP = set(
     """a an the and or of to in on for with at by from as is are was be been it its this that new
@@ -168,15 +164,6 @@ CASHTAG = re.compile(r"(?<![\w$])\$([A-Z]{1,5})\b")
 TRACKING = re.compile(
     r"^(utm_|\.tsrc|ocid|cmpid|guccounter|guce_|ref$|src$|oc$|feedtype|cid$|mc_)", re.I
 )
-
-CAMEO_ROOT = {
-    "16": ("reduces relations with", "policy"),
-    "17": ("coerces", "coercion"),
-    "18": ("assaults", "conflict"),
-    "19": ("fights", "conflict"),
-    "20": ("uses mass violence against", "conflict"),
-}
-
 
 # ───────────── plumbing ─────────────
 
@@ -260,28 +247,6 @@ def kind_of(text):
     return None
 
 
-def clip(s, n=SUMMARY_MAX):
-    s = re.sub(r"<[^>]+>", " ", s or "")
-    s = re.sub(r"\s+", " ", s).strip()
-    return s if len(s) <= n else s[: n - 1].rsplit(" ", 1)[0] + "…"
-
-
-def ts(s):
-    if not s:
-        return None
-    try:
-        return parsedate_to_datetime(s)
-    except (TypeError, ValueError):
-        pass
-    for fmt in ("%Y%m%dT%H%M%SZ", "%Y%m%d%H%M%S", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S%z"):
-        try:
-            d = datetime.strptime(s.replace("UT", "+0000") if fmt.endswith("%z") else s, fmt)
-            return d if d.tzinfo else d.replace(tzinfo=UTC)
-        except ValueError:
-            continue
-    return None
-
-
 # ───────────── names -> tickers, from the graph ─────────────
 
 
@@ -350,107 +315,13 @@ class Matcher:
         return sorted(found)
 
 
-# ───────────── adapters: each returns (items, new cursor) ─────────────
-
-
-def rss(feed, body):
-    root = ET.fromstring(body)
-    out = []
-    for it in root.iter("item"):
-        t = (it.findtext("title") or "").strip()
-        link = (it.findtext("link") or "").strip()
-        if not t or not link:
-            continue
-        out.append(
-            {
-                "url": link,
-                "title": t,
-                "summary": clip(it.findtext("description")),
-                "text": clip(it.findtext("description"), 2000),
-                "publisher": urllib.parse.urlsplit(link).hostname,
-                "published_at": ts(it.findtext("pubDate")),
-            }
-        )
-    return out
-
-
-def gdelt_doc(feed, body):
-    if body.lstrip()[:1] != b"{":
-        raise RuntimeError(
-            clip(body.decode("utf-8", "replace"), 160)
-        )  # GDELT answers errors in plain text
-    out = []
-    for a in json.loads(body).get("articles", []):
-        if a.get("language") not in (None, "English"):
-            continue
-        out.append(
-            {
-                "url": a["url"],
-                "title": a["title"].strip(),
-                "summary": None,
-                "publisher": a.get("domain"),
-                "published_at": ts(a.get("seendate")),
-                "attrs": {"country": a.get("sourcecountry")},
-            }
-        )
-    return out
-
-
-def gdelt_events_rows(body):
-    """The 15-minute export (61 tab-separated columns). Keeps root events of conflict, coercion
-    and sanctions.
-    """
-    with zipfile.ZipFile(io.BytesIO(body)) as z:
-        text = z.read(z.namelist()[0]).decode("utf-8", "replace")
-    out = []
-    for r in csv.reader(io.StringIO(text), delimiter="\t"):
-        if len(r) < 61 or r[25] != "1" or r[28] not in CAMEO_ROOT:
-            continue
-        verb, kind = CAMEO_ROOT[r[28]]
-        if r[27] == "163":
-            verb, kind = "imposes sanctions or an embargo on", "sanction"
-        n_articles, goldstein = int(r[33] or 0), float(r[30] or 0)
-        # Between two countries, or a government, military or rebel group on one side:
-        # local crime is not a market event.
-        intl = bool(r[7] and r[17] and r[7] != r[17])
-        state = bool(
-            {"GOV", "MIL", "REB", "SPY"} & {r[12], r[13], r[22], r[23]} and (r[7] or r[17])
-        )
-        if not (intl or state or kind == "sanction"):
-            continue
-        if n_articles < 3 and kind != "sanction":
-            continue
-        a1, a2 = r[6] or r[7], r[16] or r[17]
-        where = r[52].split(",")[0] if r[52] else ""
-        out.append(
-            {
-                "url": r[60],
-                "title": f"{a1.title()} {verb} {(a2 or 'unnamed party').title()}"
-                + (f" ({where})" if where else ""),
-                "summary": None,
-                "publisher": urllib.parse.urlsplit(r[60]).hostname,
-                "published_at": ts(r[59]),
-                "kind": kind,
-                "material": kind == "sanction"
-                or (kind == "conflict" and intl and (r[28] in ("19", "20") or goldstein <= -9)),
-                "attrs": {
-                    "cameo": r[26],
-                    "goldstein": goldstein,
-                    "articles": n_articles,
-                    "countries": sorted({c for c in (r[7], r[17]) if c}),
-                },
-            }
-        )
-    return out
-
-
 def watch_terms(cur):
     cur.execute("SELECT term, label FROM watch_term")
     return cur.fetchall()
 
 
-def poll_feed(cur, f, matcher):
-    """Fetch one feed, store new items. Returns (status, bytes, items seen, items new)."""
+def poll_feed(cur, f):
+    """Fetch one feed and land every entry raw. Returns (status, bytes, entries, new entries)."""
     hdr, url, cursor = {}, f["arg"], f["cursor"]
     if f["adapter"] == "gdelt_doc":
         mins = (
@@ -480,16 +351,27 @@ def poll_feed(cur, f, matcher):
             return 304, len(body), 0, 0
         cursor = url
     elif f["adapter"] == "alpaca_news":
-        key, sec = os.environ.get("ALPACA_KEY_ID"), os.environ.get("ALPACA_SECRET_KEY")
-        if not (key and sec):
-            return 0, 0, 0, 0
-        hdr = {"APCA-API-KEY-ID": key, "APCA-API-SECRET-KEY": sec}
+        hdr = {
+            "APCA-API-KEY-ID": os.environ["ALPACA_KEY_ID"],
+            "APCA-API-SECRET-KEY": os.environ["ALPACA_SECRET_KEY"],
+        }
         start = cursor or (datetime.now(UTC) - timedelta(hours=6)).strftime("%Y-%m-%dT%H:%M:%SZ")
         url = "https://data.alpaca.markets/v1beta1/news?" + urllib.parse.urlencode(
-            {"start": start, "limit": 50, "sort": "asc", "include_content": "false"}
+            {"start": start, "limit": 50, "sort": "asc", "include_content": "true"}
         )
+    elif f["adapter"] in S.KEY_PARAM:
+        param, env = S.KEY_PARAM[f["adapter"]]
+        url = f"{url}&{param}={urllib.parse.quote(os.environ[env])}"
+    elif f["adapter"] == "sec_atom":
+        hdr = {"User-Agent": os.environ["SEC_USER_AGENT"]}
 
-    fixed = f["adapter"] == "rss"  # conditional GET only where the URL stays the same between polls
+    fixed = f["adapter"] not in (
+        "gdelt_doc",
+        "gdelt_events",
+        "alpaca_news",
+        "nyt",
+        "guardian",
+    )  # URL stays the same
     status, body, rh = get(
         url, hdr, f["etag"] if fixed else None, f["last_modified"] if fixed else None
     )
@@ -497,56 +379,24 @@ def poll_feed(cur, f, matcher):
         return 304, 0, 0, 0
     if status != 200:
         raise RuntimeError(f"HTTP {status}: {clip(body.decode('utf-8', 'replace'), 160)}")
-    if f["adapter"] == "rss":
-        items = rss(f, body)
-    elif f["adapter"] == "gdelt_doc":
-        items = gdelt_doc(f, body)
-    elif f["adapter"] == "gdelt_events":
-        items = gdelt_events_rows(body)
-    else:
-        news = json.loads(body).get("news", [])
-        items = [
-            {
-                "url": n["url"],
-                "title": n["headline"],
-                "summary": clip(n.get("summary")),
-                "text": clip(n.get("summary"), 2000),
-                "publisher": n.get("source"),
-                "published_at": ts(n["created_at"]),
-                "tickers": n.get("symbols", []),
-            }
-            for n in news
-            if n.get("url")
-        ]
-        if news:
-            cursor = max(n["created_at"] for n in news)
-    new, watch = 0, watch_terms(cur)
-    for it in items:
-        # The feed's whole description is read for names and details, then dropped; only
-        # 300 characters are kept.
-        full = f"{it['title']}. {it.get('text') or it.get('summary') or ''}"
-        if not english(full):
-            continue  # wires post translated copies of the same release
-        tickers = matcher.tickers(full, it.get("tickers") or [])
-        attrs = {
-            **it.get("attrs", {}),
-            **({"kind": it["kind"], "material": it["material"]} if "kind" in it else {}),
-        }
+    entries = S.parse(f["adapter"], body)
+    if f["adapter"] == "alpaca_news" and entries:
+        cursor = max(e["body"]["created_at"] for e in entries)
+    new = 0
+    for e in entries:
         cur.execute(
-            """INSERT INTO item (url_key, url, feed_id, publisher, title, summary, published_at,
-                 tickers, attrs, facts)
-                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (url_key) DO NOTHING""",
+            """INSERT INTO raw (feed_id, ext_key, version, url, title, published_at, backfill, body)
+               VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+               ON CONFLICT (feed_id, ext_key, version) DO NOTHING""",
             (
-                hashlib.sha256(canon(it["url"]).encode()).hexdigest(),
-                it["url"],
                 f["id"],
-                it.get("publisher"),
-                it["title"][:400],
-                it.get("summary"),
-                it.get("published_at"),
-                tickers,
-                json.dumps(attrs),
-                json.dumps(F.extract(full, watch)),
+                e["ext_key"][:1000],
+                e["version"],
+                e["url"],
+                e["title"],
+                e["published_at"],
+                f["polls"] == 0,
+                json.dumps(e["body"], default=str),
             ),
         )
         new += cur.rowcount
@@ -554,7 +404,53 @@ def poll_feed(cur, f, matcher):
         "UPDATE feed SET etag = %s, last_modified = %s, cursor = %s WHERE id = %s",
         (rh.get("ETag"), rh.get("Last-Modified"), cursor, f["id"]),
     )
-    return 200, len(body), len(items), new
+    return 200, len(body), len(entries), new
+
+
+def normalize(cur, matcher, again=False):
+    """Read raw entries as items: language, tickers, kind and details. Raw rows are never changed,
+    so `again` re-reads all of them after a rule changes (items it already made are kept)."""
+    cur.execute(
+        """SELECT r.id, r.feed_id, r.url, r.ext_key, r.published_at, r.body, f.adapter
+           FROM raw r JOIN feed f ON f.id = r.feed_id
+           WHERE %s OR r.normalized_at IS NULL ORDER BY r.id""",
+        (again,),
+    )
+    rows, watch, made = cur.fetchall(), watch_terms(cur), 0
+    for rid, fid, url, key, published, body, adapter in rows:
+        it = S.to_item(adapter, body, url)
+        cur.execute("UPDATE raw SET normalized_at = now() WHERE id = %s", (rid,))
+        if not it or not it.get("title"):
+            continue
+        full = f"{it['title']}. {it.get('text') or it.get('summary') or ''}"
+        if not english(full):
+            continue  # wires post translated copies of the same release
+        attrs = {
+            **it.get("attrs", {}),
+            **({"kind": it["kind"], "material": it["material"]} if "kind" in it else {}),
+        }
+        # one item per article; an entry with no link of its own is keyed by its source id
+        ukey = canon(url) if url and adapter not in ("halts", "gdelt_events") else f"{fid}|{key}"
+        cur.execute(
+            """INSERT INTO item (url_key, url, feed_id, publisher, title, summary, published_at,
+                 tickers, attrs, facts, raw_id)
+               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (url_key) DO NOTHING""",
+            (
+                hashlib.sha256(ukey.encode()).hexdigest(),
+                url or "",
+                fid,
+                it.get("publisher"),
+                it["title"][:400],
+                it.get("summary"),
+                published,
+                matcher.tickers(full, it.get("tickers") or []),
+                json.dumps(attrs),
+                json.dumps(F.extract(full, watch)),
+                rid,
+            ),
+        )
+        made += cur.rowcount
+    return len(rows), made
 
 
 # ───────────── dedupe: items -> stories ─────────────
@@ -647,29 +543,7 @@ def cmd_init():
     con = db()
     with con, con.cursor() as cur:
         cur.execute(open(os.path.join(os.path.dirname(__file__), "funnel.sql")).read())
-        feeds = [
-            (
-                "bw:home",
-                "rss",
-                "https://feed.businesswire.com/rss/home/?rss=G1QFDERJXkJeEFtRWA==",
-                300,
-                "Business Wire public RSS; robots.txt allows",
-            ),
-            (
-                "gdelt_events",
-                "gdelt_events",
-                None,
-                900,
-                "GDELT open data, free for any use with attribution",
-            ),
-            (
-                "alpaca_news",
-                "alpaca_news",
-                None,
-                120,
-                "Alpaca market data terms (Benzinga news); needs an account key",
-            ),
-        ]
+        feeds = list(S.FEEDS)
         names = sorted(
             {clean_name(n) for n in load_names()[0] if len(clean_name(n)) >= 4}, key=str.lower
         )
@@ -684,15 +558,17 @@ def cmd_init():
                     q,
                     1800,
                     "GDELT DOC API, free; one request per 5 seconds",
+                    None,
                 )
             )
-        for fid, adapter, arg, every, lic in feeds:
+        for fid, adapter, arg, every, lic, needs in feeds:
             cur.execute(
-                """INSERT INTO feed (id, adapter, arg, every_s, license) VALUES (%s,%s,%s,%s,%s)
-                           ON CONFLICT (id) DO UPDATE SET adapter = EXCLUDED.adapter, arg =
-                           EXCLUDED.arg,
-                             every_s = EXCLUDED.every_s, license = EXCLUDED.license""",
-                (fid, adapter, arg, every, lic),
+                """INSERT INTO feed (id, adapter, arg, every_s, license, needs)
+                   VALUES (%s,%s,%s,%s,%s,%s)
+                   ON CONFLICT (id) DO UPDATE SET adapter = EXCLUDED.adapter, arg = EXCLUDED.arg,
+                     every_s = EXCLUDED.every_s, license = EXCLUDED.license,
+                     needs = EXCLUDED.needs""",
+                (fid, adapter, arg, every, lic, needs),
             )
         cur.execute(
             "DELETE FROM feed f WHERE id LIKE 'gdelt_doc:%%' AND NOT (id = ANY(%s)) AND NOT EXISTS "
@@ -706,10 +582,12 @@ def cmd_init():
         )
 
 
-def cmd_poll(only=None, every=False):
-    matcher = Matcher()
-    con = db()
-    con.autocommit = True
+def ready(f):
+    return all(os.environ.get(v) for v in (f["needs"] or "").split())
+
+
+def poll_due(con, matcher, only=None, every=False, say=print):
+    """Poll every feed that is due, land entries raw, read them as items, dedupe into stories."""
     cur = con.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     cur.execute(
         "SELECT * FROM feed WHERE enabled AND (%s OR next_at <= now()) AND (%s::text IS NULL OR id "
@@ -719,19 +597,23 @@ def cmd_poll(only=None, every=False):
     throttled = (
         set()
     )  # adapters that answered 429 this run: their other feeds wait for the next run
+    landed = 0
     for f in cur.fetchall():
-        if f["adapter"] in throttled:
+        if f["adapter"] in throttled or not ready(f):
             with con.cursor() as c2:
                 c2.execute(
                     "UPDATE feed SET next_at = now() + make_interval(secs => every_s) "
                     "WHERE id = %s",
                     (f["id"],),
                 )
+            if not ready(f) and only:
+                say(f"{f['id']:<22} off (set {f['needs']})")
             continue
+        t0 = time.monotonic()
         try:
             with con.cursor() as c2:
                 c2.execute("BEGIN")
-                status, nbytes, seen, new = poll_feed(c2, f, matcher)
+                status, nbytes, seen, new = poll_feed(c2, f)
                 c2.execute(
                     """UPDATE feed SET polls = polls + 1, not_modified = not_modified + (%s =
                          304)::int,
@@ -743,10 +625,12 @@ def cmd_poll(only=None, every=False):
                     (status, nbytes, seen, new, status, f["id"]),
                 )
                 c2.execute("COMMIT")
-            print(
-                f"{f['id']:<14} {'off (no key)' if status == 0 else status} {nbytes / 1024:7.1f} "
-                f"KB {seen:4} items {new:4} new"
-            )
+            landed += new
+            if new or only or every:
+                say(
+                    f"{f['id']:<22} {status} {nbytes / 1024:7.1f} KB {seen:5} entries {new:5} new "
+                    f"({time.monotonic() - t0:.1f}s)"
+                )
         except Exception as e:  # noqa: BLE001 - one bad feed must not stop the others
             if "HTTP 429" in str(e):
                 throttled.add(f["adapter"])
@@ -759,11 +643,101 @@ def cmd_poll(only=None, every=False):
                               WHERE id = %s""",
                     (clip(str(e), 300), f["id"]),
                 )
-            print(f"{f['id']:<14} FAILED {clip(str(e), 120)}")
+            say(f"{f['id']:<22} FAILED {clip(str(e), 120)}")
     with con.cursor() as c2:
-        joined, started = cluster(c2)
-    print(f"dedupe: {started} new stories, {joined} copies joined to existing ones")
+        c2.execute("BEGIN")
+        try:
+            n_raw, n_items = normalize(c2, matcher)
+            joined, started = cluster(c2)
+        except Exception:
+            c2.execute("ROLLBACK")  # the raw rows stay unread and are tried again next round
+            raise
+        c2.execute("COMMIT")
+    if n_raw or only or every:
+        say(
+            f"landed {landed} raw; read {n_raw} -> {n_items} items -> {started} new stories, "
+            f"{joined} copies joined"
+        )
+    return landed
+
+
+def cmd_poll(only=None, every=False):
+    con = db()
+    con.autocommit = True
+    poll_due(con, Matcher(), only, every)
     con.close()
+
+
+def cmd_normalize(again):
+    con = db()
+    with con, con.cursor() as cur:
+        n_raw, n_items = normalize(cur, Matcher(), again)
+        joined, started = cluster(cur)
+    print(f"read {n_raw} raw -> {n_items} new items -> {started} new stories, {joined} joined")
+
+
+def cmd_run(promote_every=600):
+    """Forever: poll what is due, then sleep until the next feed is due. Made for launchd
+    (KeepAlive), so it survives the database restarting and never needs a person to start it."""
+    log = logging.getLogger("funnel")
+    h = logging.handlers.RotatingFileHandler(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "run.log"),
+        maxBytes=5_000_000,
+        backupCount=2,
+    )
+    h.setFormatter(logging.Formatter("%(asctime)s %(message)s", "%m-%d %H:%M:%S"))
+    log.addHandler(h)
+    log.setLevel(logging.INFO)
+    log.info("run: started")
+    con = matcher = None
+    names_at = promoted_at = beat_at = pruned_at = float("-inf")
+    landed = 0
+    while True:
+        try:
+            if con is None or con.closed:
+                con = db()
+                con.autocommit = True
+            if time.monotonic() - names_at > 3600:  # company names change after build.sh
+                matcher, names_at = Matcher(), time.monotonic()
+            landed += poll_due(con, matcher, say=log.info)
+            if time.monotonic() - promoted_at > promote_every:
+                promoted_at = time.monotonic()
+                try:
+                    promote(30, say=log.info)
+                    import bridge  # imports this module, so loaded only here
+
+                    bridge.cmd_run(say=log.info)
+                except psycopg2.Error as e:  # eg mid-rebuild: try again next round
+                    log.info(f"promote/bridge skipped: {clip(str(e), 100)}")
+            if time.monotonic() - pruned_at > 86400:
+                pruned_at = time.monotonic()
+                with con.cursor() as cur:  # GDELT keeps every file public, so its rows can go
+                    cur.execute(
+                        """DELETE FROM raw r WHERE feed_id = 'gdelt_events'
+                           AND seen_at < now() - interval '14 days'
+                           AND NOT EXISTS (SELECT 1 FROM item i WHERE i.raw_id = r.id)"""
+                    )
+                    log.info(f"pruned {cur.rowcount} old GDELT rows that made no item")
+            if time.monotonic() - beat_at > 3600:
+                log.info(f"heartbeat: {landed} raw entries landed this hour")
+                beat_at, landed = time.monotonic(), 0
+            with con.cursor() as cur:
+                cur.execute(
+                    "SELECT extract(epoch FROM min(next_at) - now()) FROM feed WHERE enabled"
+                )
+                wait = cur.fetchone()[0]
+            time.sleep(min(60, max(2, float(wait or 30))))
+        except psycopg2.Error as e:
+            log.info(f"database: {clip(str(e), 160)}; retrying in 30s")
+            try:
+                con.close()
+            except Exception:  # noqa: BLE001
+                pass
+            con = None
+            time.sleep(30)
+        except Exception as e:  # noqa: BLE001 - the runner must not die on one bad response
+            log.info(f"run: {type(e).__name__}: {clip(str(e), 160)}")
+            time.sleep(10)
 
 
 def line(r):
@@ -834,11 +808,16 @@ def cmd_refacts():
     con = db()
     with con, con.cursor() as cur:
         watch = watch_terms(cur)
-        cur.execute("SELECT id, title, summary FROM item")
-        for iid, title, summary in cur.fetchall():
+        cur.execute(
+            """SELECT i.id, i.title, i.summary, r.body, r.url, f.adapter FROM item i
+               LEFT JOIN raw r ON r.id = i.raw_id LEFT JOIN feed f ON f.id = r.feed_id"""
+        )
+        for iid, title, summary, body, url, adapter in cur.fetchall():
+            it = S.to_item(adapter, body, url) if body is not None else None
+            full = f"{title}. {(it and (it.get('text') or it.get('summary'))) or summary or ''}"
             cur.execute(
                 "UPDATE item SET facts = %s WHERE id = %s",
-                (json.dumps(F.extract(f"{title}. {summary or ''}", watch)), iid),
+                (json.dumps(F.extract(full, watch)), iid),
             )
         cur.execute(
             "SELECT story_id, array_agg(facts ORDER BY id) FROM item WHERE story_id IS NOT NULL "
@@ -851,8 +830,8 @@ def cmd_refacts():
                 merged = F.merge(merged, f)
             cur.execute("UPDATE story SET facts = %s WHERE id = %s", (json.dumps(merged), sid))
     print(
-        f"re-read {len(rows)} stories (from the stored 300-character summaries; new items read the "
-        f"full description)"
+        f"re-read {len(rows)} stories (full text from raw; items older than raw from their "
+        f"300-character summaries)"
     )
 
 
@@ -884,7 +863,26 @@ def cmd_stats():
         n_stories, n_material, line_chars = cur.fetchone()
         cur.execute("SELECT coalesce(sum(bytes_in), 0) FROM feed")
         raw = cur.fetchone()[0]
-    print(f"\n{n_items} items -> {n_stories} stories ({n_material} material).")
+        cur.execute(
+            """SELECT feed_id, count(*),
+                 percentile_cont(0.5) WITHIN GROUP (ORDER BY lag),
+                 percentile_cont(0.9) WITHIN GROUP (ORDER BY lag)
+               FROM raw, LATERAL (SELECT extract(epoch FROM seen_at - published_at)) l(lag)
+               WHERE NOT backfill AND published_at IS NOT NULL
+                 AND seen_at > now() - interval '24 hours' GROUP BY 1 ORDER BY 3"""
+        )
+        lags = cur.fetchall()
+        cur.execute("SELECT count(*), pg_size_pretty(pg_total_relation_size('raw')) FROM raw")
+        n_raw, raw_size = cur.fetchone()
+    if lags:
+        print("\nLag, last 24 hours (when we saw it minus when the source says it was posted):")
+        print(f"{'feed':<24}{'new':>6}{'median':>9}{'90%':>9}")
+        for fid, n, p50, p90 in lags:
+            print(f"{fid:<24}{n:>6}{p50 / 60:>8.1f}m{p90 / 60:>8.1f}m")
+    print(
+        f"\n{n_raw} raw entries ({raw_size}) -> {n_items} items -> {n_stories} stories "
+        f"({n_material} material)."
+    )
     print(
         f"Tokens to read it all (~4 characters a token): raw feeds ~{raw // 4:,}, stored items "
         f"~{chars // 4:,}, "
@@ -927,7 +925,7 @@ def claim_hint(f):
     return h
 
 
-def cmd_promote(days):
+def promote(days, say=print):
     con, eg = db(), db("eg")
     with (
         con,
@@ -983,7 +981,9 @@ def cmd_promote(days):
             "make_interval(days => %s)",
             (days,),
         )
-    print(f"{n} material stories upserted into eg.event_candidate (catalog 'news')")
+    eg.close()
+    con.close()
+    say(f"{n} material stories upserted into eg.event_candidate (catalog 'news')")
 
 
 def arg(flag, default=None, cast=str):
@@ -1007,6 +1007,10 @@ if __name__ == "__main__":
     elif cmd == "stats":
         cmd_stats()
     elif cmd == "promote":
-        cmd_promote(arg("--days", 30, int))
+        promote(arg("--days", 30, int))
+    elif cmd == "normalize":
+        cmd_normalize("--again" in sys.argv)
+    elif cmd == "run":
+        cmd_run(arg("--promote-every", 600, int))
     else:
         sys.exit(__doc__)

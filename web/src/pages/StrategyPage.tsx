@@ -5,6 +5,7 @@ import { useHashState } from "../lib/deeplink";
 import { labUrl } from "../lib/space";
 import { BarChart, HeroChart, LineChart, RANGES, type RangeKey } from "../ui/charts";
 import { GauntletCard } from "../components/GauntletCard";
+import { HoldupSection } from "../components/holdup/HoldupSection";
 import { Badge, Button } from "../ui";
 import { Title } from "../components/Shell";
 import { Card } from "../ui/layout";
@@ -13,7 +14,7 @@ import { colorMap } from "../lib/colors";
 import { mentions, useDocs } from "../lib/docs";
 import { num, pct, signedPct } from "../lib/format";
 import { usePrefs } from "../lib/prefs";
-import { nameOf, verdictOf } from "../lib/strategyMeta";
+import { nameOf, taglineOf, verdictOf } from "../lib/strategyMeta";
 import type { Report, StrategyRun } from "../lib/types";
 import { Term } from "./Learn";
 
@@ -62,11 +63,12 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
       <div className="rh-main">
         <div className="crumbs"><a href="#/strategies">Strategies</a> <span className="muted">/</span> {nameOf(run)}</div>
         <Title label={nameOf(run)} actions={<Badge tone={verdictOf(run).tone}>{verdictOf(run).label}</Badge>}>{nameOf(run)}</Title>
+        {taglineOf(run) && <p className="lead strat-tagline">{taglineOf(run)}</p>}
         <p className="verdict-line">{storyOf(run, bench, prefs.startingAmount)}</p>
         <HeroChart
           title={`Growth of $${prefs.startingAmount.toLocaleString()}`}
           main={{ name: nameOf(run), points: run.equity }}
-          compare={bench && !run.is_benchmark ? { name: "US stock market", points: bench.equity } : undefined}
+          compare={bench && !run.is_benchmark ? { name: nameOf(bench), points: bench.equity } : undefined}
           amount={prefs.startingAmount}
           range={range}
           onRange={setRange}
@@ -121,6 +123,9 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
           />
         </Card>
 
+        <HoldupSection holdup={run.holdup} name={nameOf(run)} id="holds-up"
+          missing="This run was published before these checks were added. They appear from the next research run." />
+
         {run.ic_decay.length > 0 && (
           <Card title="Signal information by horizon" help="The information coefficient: mean rank correlation between the signal and the return that follows. Where it peaks tells you how fast to trade.">
             <BarChart
@@ -157,6 +162,8 @@ export function StrategyPage({ report, name }: { report: Report; name: string })
             </ul>
           </section>
         )}
+
+        <p className="page-disclaimer">Research and education only. Not investment advice. Past results do not predict future returns.</p>
       </div>
 
       <aside className="rh-side">

@@ -45,17 +45,20 @@ test.describe("lesson", () => {
     await page.getByRole("radio", { name: "The steady yearly growth rate that gets from the start value to the end value" }).check();
     await expect(check).toBeDisabled();
     await page.getByRole("radio", { name: "Because of rounding" }).check();
+    await expect(check).toBeDisabled();
+    await page.getByRole("radio", { name: "About 3 times" }).check();
     await expect(check).toBeEnabled();
     await check.click();
-    await expect(page.getByRole("region", { name: "Quick check" }).getByText(/1 of 2|not quite|try again|correct/i).first()).toBeVisible();
+    await expect(page.getByRole("region", { name: "Quick check" }).getByText(/1 of 3|not quite|try again|correct/i).first()).toBeVisible();
   });
 
   test("all answers right counts the lesson as done", async ({ page }) => {
     await ready(page, LESSON);
     await page.getByRole("radio", { name: "The steady yearly growth rate that gets from the start value to the end value" }).check();
     await page.getByRole("radio", { name: "Because bumpier returns compound to less" }).check();
+    await page.getByRole("radio", { name: "About 7 times" }).check();
     await page.getByRole("button", { name: "Check my answers" }).click();
-    await expect(page.getByRole("region", { name: "Quick check" }).getByText(/2 of 2|all right|well done|correct/i).first()).toBeVisible();
+    await expect(page.getByRole("region", { name: "Quick check" }).getByText(/3 of 3|all right|well done|correct/i).first()).toBeVisible();
     await page.goto("/academy/#/progress");
     await expect(page.getByRole("main").getByText(/1 of 50/).first()).toBeVisible();
   });
@@ -71,7 +74,7 @@ test.describe("lesson", () => {
   });
 
   test("the picture steps move with Next and Back", async ({ page }) => {
-    await ready(page, LESSON);
+    await ready(page, "/academy/#/how-markets-move/risk-premia");
     const steps = page.getByRole("group", { name: /Picture steps/ });
     await expect(steps.getByRole("button", { name: "Back" })).toBeDisabled();
     await steps.getByRole("button", { name: "Next" }).click();
@@ -79,6 +82,28 @@ test.describe("lesson", () => {
     await expect(steps.getByRole("button", { name: "Back" })).toBeEnabled();
     await steps.getByRole("button", { name: "Back" }).click();
     await expect(page.getByText(/^Step 1 of 3/).first()).toBeVisible();
+  });
+
+  // The lesson film (DEC-0085). These tests run with reduced motion, so it waits for a press
+  // and then plays the rendered MP4 with captions.
+  test("the lesson film waits for a press, then plays the rendered film", async ({ page }) => {
+    await ready(page, LESSON);
+    const film = page.getByRole("figure", { name: /Return and compounding: lesson film/ });
+    await expect(film.getByText(/waits for you/)).toBeVisible();
+    await film.getByRole("button", { name: /^Play the film/ }).click();
+    const video = film.locator("video");
+    await expect(video).toHaveAttribute("src", /\/content\/academy\/reading-a-backtest-return\.mp4$/);
+    await expect(video.locator("track[kind=captions]")).toHaveCount(1);
+  });
+
+  test("the film's Motion choice and transcript", async ({ page }) => {
+    await ready(page, LESSON);
+    const film = page.getByRole("figure", { name: /lesson film/ });
+    await film.getByRole("button", { name: "Transcript" }).click();
+    await expect(film.getByRole("button", { name: /Put \$100 away at three steady rates/ })).toBeVisible();
+    await film.getByRole("radiogroup", { name: "Motion" }).getByRole("radio", { name: "Full" }).click();
+    await expect(film.getByRole("button", { name: /^(Play|Pause)$/ })).toBeVisible();
+    await expect(film.getByRole("slider", { name: "Position in the film" })).toBeVisible();
   });
 
   test("Next goes to the next lesson", async ({ page }) => {

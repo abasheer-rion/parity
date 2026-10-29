@@ -45,6 +45,7 @@ const paths: Record<string, ReactNode> = {
   plus: <path d="M8 3v10M3 8h10" />,
   close: <path d="M4 4l8 8M12 4l-8 8" />,
   download: <path d="M8 2.5v8M4.8 7.5 8 10.7l3.2-3.2M3 13.5h10" />,
+  upload: <path d="M8 10.5v-8M4.8 5.7 8 2.5l3.2 3.2M3 13.5h10" />,
   dots: <path d="M3.5 8h.01M8 8h.01M12.5 8h.01" />,
   sparkle: <path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z" />,
   palette: <><circle cx="8" cy="8" r="5.8" /><path d="M5.2 7.2h.01M7.2 5h.01M10.2 5.6h.01M8.5 11c0-1 .8-1.7 1.8-1.7H13" /></>,

@@ -4,7 +4,8 @@
     2. discover     every discoverer, at most once a day
     3. enrol        up to 5 candidates through the gate
     4. backtest     the arrival battery for up to 3 newly enrolled series
-    5. publish      every change to the site's database, when a writer URL is set
+    5. health       every enrolled series and live feed checked, healed where possible
+    6. publish      every change to the site's database, when a writer URL is set
 
 Each part has its own try, so one that fails is recorded and the rest still run.
 """
@@ -13,12 +14,13 @@ from __future__ import annotations
 
 import time
 
-from . import battery, db, discover, enrol, publish, sync
+from . import battery, db, discover, enrol, health, publish, sync
 
 ENROL_PER_CYCLE = 5
 
 
-def run(con=None, discovery: bool = True, send: bool = True, backtest: bool = True) -> dict:
+def run(con=None, discovery: bool = True, send: bool = True, backtest: bool = True,
+        check_health: bool = True) -> dict:
     con = con or db.connect()
     out: dict = {"parts": {}}
 
@@ -37,6 +39,8 @@ def run(con=None, discovery: bool = True, send: bool = True, backtest: bool = Tr
     part("enrol", lambda: enrol.run(con, ENROL_PER_CYCLE))
     if backtest:
         part("backtest", lambda: battery.run_due(con, battery.PER_CYCLE))
+    if check_health:
+        part("health", lambda: health.run(con))
     if send:
         part("publish", lambda: publish.try_publish(con))
     out["summary"] = summary(con)
@@ -63,10 +67,13 @@ def line(out: dict) -> str:
     enrolled = sum(r.get("enrolled", False) for r in
                    (out["parts"].get("enrol") or {}).get("result") or [])
     tested = len((out["parts"].get("backtest") or {}).get("result") or [])
+    hc = ((out["parts"].get("health") or {}).get("result") or {}).get("counts") or {}
+    hl = ", ".join(f"{k} {v}" for k, v in sorted(hc.items()))
     return (f"registry: {s['series']} series ({s.get('live', 0)} live, "
             f"{s.get('enrolled', 0)} enrolled, {s.get('candidate', 0)} candidates, "
             f"{s.get('degraded', 0)} degraded)"
             + (f", discovery added {added}" if added is not None else "")
             + (f", enrolled {enrolled}" if enrolled else "")
             + (f", tested {tested}" if tested else "")
+            + (f"; health {hl}" if hl else "")
             + (f"; failed: {', '.join(bad)}" if bad else ""))

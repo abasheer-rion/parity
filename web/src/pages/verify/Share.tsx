@@ -4,10 +4,11 @@
 // at 20 a day by the database (supabase/migrations/*_verify_badges.sql).
 import { useCallback, useEffect, useState } from "react";
 import type { Result } from "../../lib/verify/checks";
-import { badgeSvg, embedSnippet, NOT_ADVICE, newBadgeId, socialLine, TRUST_LINE, VERDICT_WORDS, type PublicBadge, type VerdictKey } from "../../lib/verify/badge";
+import { badgeAlt, badgeSvg, NOT_ADVICE, newBadgeId, TRUST_LINE, VERDICT_WORDS, type PublicBadge, type VerdictKey } from "../../lib/verify/badge";
+import { Embeds } from "./Embeds";
 import { badgeRecord, datasetRow } from "../../lib/verify/publish";
 import { Button, Checkbox, Input, toast } from "../../ui";
-import type { FileMeta } from "../Verify";
+import type { FileMeta } from "./Checker";
 
 /** The few database calls this panel makes; tests pass a stand-in. */
 export interface ShareDb {
@@ -113,21 +114,13 @@ export function SharePanel({ r, file, db = realDb }: { r: Result; file: FileMeta
         </div>
       ) : (
         <div className="vf-panel">
-          <img className="vf-badge-img" src={badgeSrc(published)} width={320} height={80} alt={`Parity Verify badge: ${published.verdict ? VERDICT_WORDS[published.verdict] : ""}`} />
+          <img className="vf-badge-img" src={badgeSrc(published)} width={320} height={80} alt={badgeAlt(published)} />
           <p className="vf-small">{TRUST_LINE} {NOT_ADVICE}</p>
           <div className="ui-field"><span className="ui-field-label">Public page</span>
             <span className="vf-copy"><a href={link} target="_blank" rel="noopener">{link}</a><Button size="sm" onClick={() => void copy(link)}>Copy</Button></span>
           </div>
-          <label className="ui-field"><span className="ui-field-label">Embed on a website</span>
-            <textarea className="ui-input vf-textarea vf-code" readOnly value={embedSnippet(published.id, origin)} rows={3} />
-          </label>
-          <label className="ui-field"><span className="ui-field-label">For a social post</span>
-            <textarea className="ui-input vf-textarea" readOnly value={socialLine(published, host)} rows={2} />
-          </label>
-          <div className="vf-row">
-            <Button size="sm" onClick={() => void copy(embedSnippet(published.id, origin))}>Copy embed</Button>
-            <Button size="sm" onClick={() => void copy(socialLine(published, host))}>Copy post</Button>
-          </div>
+          <h3 className="vf-sub">Show it elsewhere</h3>
+          <Embeds badge={published} origin={origin} host={host} />
           {contributed && <p className="vf-small">Also added to the research dataset, without your name.</p>}
         </div>
       )}

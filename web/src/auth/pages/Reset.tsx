@@ -5,6 +5,7 @@ import { explain, requireClient } from "../client";
 import { Field, LEAVING, Notice, PasswordField, Submit, useSubmit } from "../fields";
 import { Screen, useFlow } from "../flow";
 import { go } from "../nav";
+import { passwordsMatch } from "../PasswordMeter";
 import { codeProblem, passwordProblem } from "../rules";
 import { needsSecondStep, useSession } from "../session";
 import { Forgot } from "./Forgot";
@@ -31,7 +32,7 @@ export function Reset() {
   const save = form.run(async () => {
     const bad = passwordProblem(password);
     if (bad) return { field: "password", message: bad };
-    if (password !== again) return { field: "again", message: "The two passwords do not match." };
+    if (!passwordsMatch(password, again)) return { field: "again", message: "Passwords do not match." };
     if (needCode) { const c = codeProblem(nonce); if (c) return { field: "nonce", message: c }; }
     const client = requireClient();
     const { error } = await client.auth.updateUser(needCode ? { password, nonce } : { password });
@@ -54,19 +55,18 @@ export function Reset() {
   if (mfa === "unknown") return <Screen id="reset-wait" title={title} wait />;
   if (mfa === "needed") return <SecondStep title="Confirm it is you" onDone={() => setMfa("done")} />;
 
-  const againError = form.errorFor("again") ?? (again && password !== again ? "Does not match yet." : null);
   return (
     <Screen id="reset-choose" title={title} lead={session.session.user.email}>
       <form className="pa-form" onSubmit={save} noValidate>
         {/* Lets password managers save the new password against the right account. */}
         <input type="email" name="email" autoComplete="username" value={session.session.user.email ?? ""} readOnly hidden />
         <PasswordField label="New password" auto="new-password" value={password} onChange={setPassword} rules email={session.session.user.email} autoFocus error={form.errorFor("password")} />
-        <PasswordField label="Type it again" auto="new-password" name="confirm-password" value={again} onChange={setAgain} error={againError} />
+        <PasswordField label="Confirm password" auto="new-password" name="confirm-password" value={again} onChange={setAgain} match={password} error={form.errorFor("again")} />
         <Notice tone="info">{needCode ? "For safety, we emailed you a 6-digit code. Type it below, then save again." : null}</Notice>
         {needCode && <Field label="Code from the email" auto="one-time-code" value={nonce} onChange={setNonce} autoFocus error={form.errorFor("nonce")} />}
         <Notice>{form.general}</Notice>
         <Notice tone="good">{saved ? "Password saved. Opening Parity." : null}</Notice>
-        <Submit busy={form.busy}>Save password</Submit>
+        <Submit busy={form.busy} disabled={!passwordsMatch(password, again)}>Save password</Submit>
       </form>
     </Screen>
   );

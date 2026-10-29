@@ -1,0 +1,22 @@
+{
+  "id": "india-election-2024",
+  "name": "Modi's party loses its majority",
+  "date": "2024-06-04",
+  "type": "election",
+  "regions": [
+    "south_asia"
+  ],
+  "actors": [
+    "india"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Counting showed the BJP short of a majority on its own; Indian shares had their worst day in four years before recovering.",
+  "sources": [
+    {
+      "title": "2024 Indian general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2024_Indian_general_election"
+    }
+  ]
+}

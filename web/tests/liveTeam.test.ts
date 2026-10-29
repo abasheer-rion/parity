@@ -17,7 +17,7 @@ const jwt = (exp: number) => `${b64({ alg: "ES256" })}.${b64({ sub: "u1", exp })
 const verifyOk = async (token: string) => ({ userId: "u1", email: null, clientId: null, token });
 const verifyApp = async (token: string) => ({ userId: "u1", email: null, clientId: "app", token });
 const rpc = (answer: unknown, status = 200) => (async () => new Response(JSON.stringify(answer), { status })) as unknown as typeof fetch;
-const req = (headers: Record<string, string>) => new Request("https://trade.endyland.com/live/ws?src=kraken", { headers });
+const req = (headers: Record<string, string>) => new Request("https://trade.paritytrading.app/live/ws?src=kraken", { headers });
 
 describe("team gate", () => {
   afterEach(() => _forget());

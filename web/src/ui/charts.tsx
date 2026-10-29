@@ -104,18 +104,32 @@ function valueAt(points: Point[], d: string): number | null {
   return ans;
 }
 
+/** A level drawn across the chart, such as a trading band or a 0.05 test line. */
+export interface RefLine { value: number; name: string; color: string; dashed?: boolean }
+/** A stretch of dates shaded behind the lines, such as weeks with a position open. */
+export interface Shade { from: string; to: string; color: string }
+
 export function LineChart({
   series,
   height = 300,
   log = false,
   format,
   label,
+  refs = [],
+  shade = [],
+  shadeNote,
 }: {
   series: Series[];
   height?: number;
   log?: boolean;
   format: (v: number) => string;
   label: string;
+  /** Horizontal levels, always kept in view. Named in the written summary. */
+  refs?: RefLine[];
+  /** Date stretches shaded behind the lines. */
+  shade?: Shade[];
+  /** What the shading means, for the written summary. */
+  shadeNote?: string;
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
@@ -132,6 +146,7 @@ export function LineChart({
 
   const values = series.flatMap((s) => s.points.map((p) => p[1]));
   if (!dates.length || !values.length) return <p className="muted">No data.</p>;
+  if (!log) values.push(...refs.map((r) => r.value));
 
   let lo = Math.min(...values);
   let hi = Math.max(...values);
@@ -168,9 +183,23 @@ export function LineChart({
   return (
     <figure className="chart" ref={ref}>
       <Legend items={series} />
-      <ChartSummary id={sumId} text={seriesSummary(series, format)} />
+      <ChartSummary id={sumId} text={seriesSummary(series, format)
+        + (refs.length ? ` Lines across the chart: ${refs.map((r) => `${r.name} at ${format(r.value)}`).join(", ")}.` : "")
+        + (shade.length && shadeNote ? ` ${shadeNote}: ${shade.length} stretch${shade.length === 1 ? "" : "es"}.` : "")} />
       <svg width={width} height={height} role="img" aria-label={label} aria-describedby={sumId}>
         <DotGrid x={pad.left} y={pad.top} width={w} height={h} />
+        {shade.map((sp, i) => {
+          const i0 = dates.findIndex((d) => d >= sp.from);
+          if (i0 < 0) return null;
+          let i1 = i0;
+          while (i1 + 1 < dates.length && dates[i1 + 1] <= sp.to) i1++;
+          const x0 = x(i0);
+          return <rect key={i} x={x0} y={pad.top} width={Math.max(1, x(i1) - x0)} height={h} fill={sp.color} />;
+        })}
+        {!log && refs.map((r) => (
+          <line key={`${r.name}:${r.value}`} x1={pad.left} x2={pad.left + w} y1={y(r.value)} y2={y(r.value)}
+            stroke={r.color} strokeWidth={1} strokeDasharray={r.dashed ? "4 3" : undefined} />
+        ))}
         {yTicks.map((v) => (
           <g key={v}>
             <text className="tick" x={pad.left - 8} y={y(v)} dy="0.32em" textAnchor="end">

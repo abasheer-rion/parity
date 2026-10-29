@@ -3,7 +3,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AnimatedNumber } from "../src/ui/motion";
-import { applyMotionPref, currentMotionPref, MOTION_KEY, motionLevel, readMotionPref, resolveMotion, writeMotionPref } from "../src/ui/motionCore";
+import { applyMotionPref, currentMotionPref, MOTION_KEY, motionLevel, motionOff, readMotionPref, resolveMotion, writeMotionPref } from "../src/ui/motionCore";
 import { useMotionLevel } from "../src/ui/motionPref";
 import { MotionControl } from "../src/ui/motionSetting";
 import { easeOutCubic, progressAt, tickAt, tickerWidth } from "../src/ui/ticker";
@@ -16,6 +16,7 @@ function mockDevice(reduced: boolean) {
 beforeEach(() => {
   window.localStorage.clear();
   delete document.documentElement.dataset.motion;
+  delete document.documentElement.dataset.motionOff;
   mockDevice(false);
 });
 afterEach(() => {
@@ -88,6 +89,20 @@ describe("the Motion setting", () => {
     expect(document.documentElement.dataset.motion).toBe("reduced");
     expect(currentMotionPref()).toBe("reduced");
     expect(motionLevel()).toBe("reduced");
+  });
+
+  it("Off is reduced for every reduced-motion rule, and marks <html data-motion-off> (DEC-0085)", () => {
+    writeMotionPref("off");
+    expect(window.localStorage.getItem(MOTION_KEY)).toBe("off");
+    expect(document.documentElement.dataset.motion).toBe("reduced");
+    expect(document.documentElement.dataset.motionOff).toBe("1");
+    expect(currentMotionPref()).toBe("off");
+    expect(motionOff()).toBe(true);
+    expect(motionLevel()).toBe("reduced");
+    expect(resolveMotion("off", false)).toBe("reduced");
+    writeMotionPref("full");
+    expect(document.documentElement.dataset.motionOff).toBeUndefined();
+    expect(motionOff()).toBe(false);
   });
 
   it("applies a stored choice at start", () => {

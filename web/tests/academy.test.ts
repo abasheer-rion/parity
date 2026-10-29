@@ -4,7 +4,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { KINDS, renderScene } from "../src/academy/scenes";
+import { ALL_KINDS, isSignature, renderScene } from "../src/academy/scenes";
+import { renderSignature, signatureTable } from "../src/ui/signature/scenes";
 import { academyHref, courses } from "../src/lib/academy";
 import { termById } from "../src/lib/glossary";
 import { ROUTES } from "../src/lib/space";
@@ -62,7 +63,7 @@ describe("academy courses", () => {
             const route = k.href.replace(/^#\//, "").split(/[/?]/)[0];
             const side = k.space === "both" ? ROUTES.both : ROUTES[k.space];
             expect(side, `${l.id}: ${k.href} on ${k.space}`).toContain(route);
-            expect(academyHref(k)).toMatch(/^(https:\/\/parity\.endyland\.com\/(app|research)\/#\/|https:\/\/(trade|sim|academy|lab)\.endyland\.com\/(#\/|$)|\/(app|research|trade|sim|academy|lab)\/(#\/|$))/);
+            expect(academyHref(k)).toMatch(/^(https:\/\/paritytrading\.app\/(app|research)\/#\/|https:\/\/(trade|sim|academy|lab)\.paritytrading\.app\/(#\/|$)|\/(app|research|trade|sim|academy|lab)\/(#\/|$))/);
             const doc = k.href.match(/^#\/doc\/([A-Z]+-\d{4})/);
             if (doc) expect(DOCS, `${l.id}: ${doc[1]}`).toContain(doc[1]);
             const term = k.href.match(/^#\/learn\/([a-z0-9-]+)/);
@@ -87,7 +88,7 @@ describe("academy courses", () => {
       it("draws every picture at every step and in between, with alt text and captions", () => {
         for (const l of c.lessons) {
           const v = l.visual;
-          expect(KINDS[v.kind], `${l.id}: kind ${v.kind}`).toBeTruthy();
+          expect(ALL_KINDS, `${l.id}: kind ${v.kind}`).toContain(v.kind);
           expect(v.alt.length, `${l.id}: alt`).toBeGreaterThan(30);
           expect(v.steps.length).toBeGreaterThanOrEqual(2);
           for (const st of v.steps) expect(st.caption.length).toBeGreaterThan(5);
@@ -96,6 +97,20 @@ describe("academy courses", () => {
             expect(svg, `${l.id} at ${s}`).not.toMatch(/NaN|Infinity|undefined|Unknown picture/);
             expect(svg.length).toBeGreaterThan(200);
           }
+        }
+      });
+
+      it("ends every signature picture on a verdict, with the numbers behind it as a table", () => {
+        for (const l of c.lessons.filter((x) => isSignature(x.visual))) {
+          const v = l.visual;
+          const last = v.steps[v.steps.length - 1];
+          expect(typeof last.verdict === "string" && last.verdict.length > 20, `${l.id}: verdict on the last step`).toBe(true);
+          const t = signatureTable(v);
+          expect(t, `${l.id}: table`).toBeTruthy();
+          expect(t!.rows.length).toBeGreaterThan(1);
+          expect(t!.rows.flat().join(" ")).not.toMatch(/NaN|undefined/);
+          // Drawing in from empty (s from -1 to 0) works too, which the player does on first view.
+          for (const size of ["lesson", "compact", "vertical", "square"] as const) expect(renderSignature(v, -0.5, { size })).not.toMatch(/NaN|Infinity|undefined/);
         }
       });
 

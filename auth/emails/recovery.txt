@@ -1,8 +1,8 @@
 Reset your password
 
-We got a request to reset the password for {{ .Email }}. Choose a new one here:
+Choose a new password for {{ .Email }}:
 {{ .SiteURL }}/verify/?type=recovery&token_hash={{ .TokenHash }}&next={{ .RedirectTo }}
 
 Or type this code on the reset screen: {{ .Token }}
 
-If you did not ask for this, ignore this email. Your password stays the same.
+The link and code work once and expire in 60 minutes. Your password stays the same until you pick a new one.

@@ -7,6 +7,7 @@ import { explain } from "../../lib/verify/explain";
 import { shortDate } from "../../lib/verify/parse";
 import { Badge, KeyValues, MINUS, Panel, Tooltip } from "../../ui";
 import { termById } from "../../lib/glossary";
+import { HoldupSection } from "../../components/holdup/HoldupSection";
 
 /** On the public badge page (/v/<id>) links go to the public glossary and lessons, not into the app. */
 export const PublicLinks = createContext(false);
@@ -142,6 +143,14 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
           </Panel>
         )}
       </div>
+
+      {!pub && r.holdup !== undefined && r.source !== "description" && (
+        <HoldupSection holdup={r.holdup} name={r.source === "strategy" ? r.what : "Your record"} level={2} id="vf-holds-up"
+          intro={r.source === "strategy" && r.holdup
+            ? <>From our research run, on {r.holdup.sources.strategy.n?.toLocaleString("en-US")} days of daily returns, allowing for the {r.holdup.luck.n_trials.toLocaleString("en-US")} strategies in that run. The luck check above also counts the search's tries.</>
+            : r.holdup ? <>Built in this browser from the record's {r.holdup.sources.strategy.n?.toLocaleString("en-US")} daily returns, allowing for the {r.tries.toLocaleString("en-US")} {r.tries === 1 ? "try" : "tries"} you entered. An upload has no market series beside it, so the market comparisons are left out.</> : undefined}
+          missing={r.source === "strategy" ? "This research run was published before these checks were added." : "These checks need at least 30 days of daily returns: upload an equity curve, or a trade list with a starting balance."} />
+      )}
     </section>
   );
 }

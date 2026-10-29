@@ -1,8 +1,14 @@
 /*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The build id a long-open page compares with its own to offer a reload (DEC-0086). Never cached.
+/version.json
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
 
 # Search engines may index the public pages only (DEC-0023): the front page, /legal/,
 # /learn/, /ideas/, /notes/ and the newsroom (/blog/, /news/, /authors/, /tags/, DEC-0057).
@@ -28,8 +34,6 @@
   X-Robots-Tag: noindex, nofollow
 /reset/*
   X-Robots-Tag: noindex, nofollow
-/verify/*
-  X-Robots-Tag: noindex, nofollow
 /connect/*
   X-Robots-Tag: noindex, nofollow
 /oauth/*
@@ -41,6 +45,14 @@
   X-Robots-Tag: noindex, nofollow
 /seo-manifest.json
   X-Robots-Tag: noindex
+https://sim.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://trade.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://academy.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
+https://lab.paritytrading.app/*
+  X-Robots-Tag: noindex, nofollow
 https://sim.endyland.com/*
   X-Robots-Tag: noindex, nofollow
 https://trade.endyland.com/*
@@ -48,6 +60,10 @@ https://trade.endyland.com/*
 https://academy.endyland.com/*
   X-Robots-Tag: noindex, nofollow
 https://lab.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://parity.endyland.com/*
+  X-Robots-Tag: noindex, nofollow
+https://www.paritytrading.app/*
   X-Robots-Tag: noindex, nofollow
 https://parity-research.pages.dev/*
   X-Robots-Tag: noindex, nofollow
@@ -59,9 +75,76 @@ https://:branch.parity-research.pages.dev/*
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Public caching (DEC-0072, src/lib/cachePolicy.ts holds the same values for the middleware).
+# Each path gets Cache-Control from one rule only, because Pages joins two matching values
+# with a comma. Pages: fresh 10 minutes, then shown at once while a new copy loads, up to
+# 3 days. Pictures and icons: a day, then the same. Small hourly data: a minute. Sign-in
+# pages: never kept. Every deploy replaces the edge copies, so a deploy is never hidden.
+/developers/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/legal/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/learn/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/ideas/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/notes/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/blog/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/news/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/authors/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/tags/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/download/
+  Cache-Control: public, max-age=600, stale-while-revalidate=259200
+/brand/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/content/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/favicon.svg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/favicon-32.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/icon-*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/og/default.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=259200
+/sitemap.xml
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/robots.txt
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/manifest.webmanifest
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/stats.json
+  Cache-Control: public, max-age=60, stale-while-revalidate=600
+/seo-manifest.json
+  Cache-Control: public, max-age=60, stale-while-revalidate=600
+/login/*
+  Cache-Control: no-store
+/signup/*
+  Cache-Control: no-store
+/reset/*
+  Cache-Control: no-store
+/verify/*
+  Cache-Control: no-store
+/connect/*
+  Cache-Control: no-store
+/oauth/*
+  Cache-Control: no-store
+
 # The installable site (DEC-0041): the service worker must always be checked for a new
 # version, and the offline page is not for search.
 /sw.js
   Cache-Control: no-cache
 /offline.html
   X-Robots-Tag: noindex, nofollow
+# Images inside the auth emails (auth/emails). Mail apps fetch them through their own image
+# proxies, so they get a long cache and are open to any origin. New artwork gets a new file name.
+/email/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *

@@ -22,8 +22,8 @@ export const SERVER_INFO = { name: "parity", title: "Parity", version: "1.0.0" }
 const MAX_BODY = 512 * 1024;
 
 export const INSTRUCTIONS = [
-  "Parity tests trading strategies against the S&P 500 with an 11-test gauntlet that counts costs, risk and luck.",
-  "Use search_strategies and get_strategy for tested results, search_leads for the always-on search, verify_record or verify_description to check a trading record or a seller's claims, list_market_series and get_market_series for delayed market data, news_impact for what followed kinds of news, and the Academy tools to explain terms.",
+  "Parity Verify checks trading records and claims for retail traders. Use verify_trades for a trade list or equity curve (ask how many strategies, bots or settings were tried and send it as tries), verify_strategy for one of Parity's tested strategies or a rule set described in words, and verify_claim for a seller's claim such as a win rate, take-profit, stop, monthly return or drawdown.",
+  "Parity also tests trading strategies against the S&P 500 with an 11-test gauntlet that counts costs, risk and luck. Use search_strategies and get_strategy for tested results, search_leads for the always-on search, list_market_series and get_market_series for delayed market data, news_impact for what followed kinds of news, and the Academy tools to explain terms.",
   "Every result is research only, not investment advice. Most ideas fail once luck and costs are counted; say so plainly and do not present any strategy as a recommendation.",
 ].join(" ");
 
@@ -37,7 +37,7 @@ export interface ServerDeps {
   enabled: boolean;
   /** The two tools that change anything. Off unless MCP_WRITE_ENABLED is "on". */
   writeEnabled: boolean;
-  siteDomain: string;
+  siteDomain: string | string[];
   extraOrigins?: string[];
   now?: () => Date;
   timeoutMs?: number;

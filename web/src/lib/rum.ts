@@ -9,6 +9,7 @@
 // pattern, no user agent. Do Not Track and Global Privacy Control turn it off. It needs no
 // consent because it stores nothing in the browser and identifies no one; the privacy and
 // cookie pages say so. No browser globals at import time.
+import site from "./site.json";
 
 export type RumApp = "site" | "product" | "research" | "sim" | "trade" | "academy" | "lab" | "auth" | "verify";
 type Metric = "ttd" | "ttfb" | "fetch" | "bytes" | "age" | "lag" | "gap" | "lcp" | "inp" | "cls";
@@ -83,7 +84,7 @@ export function payload(name: string, events: RumEvent[]): string {
 
 export function endpointUrl(): string {
   const http = location.protocol === "http:" || location.protocol === "https:";
-  return http ? "/rum" : "https://parity.endyland.com/rum"; // the desktop app's pages are app://
+  return http ? "/rum" : `${site.origin.replace(/\/$/, "")}/rum`; // the desktop app's pages are app://
 }
 
 function flush(final: boolean) {

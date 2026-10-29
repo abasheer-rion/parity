@@ -2,9 +2,11 @@
 
 The front of Parity's news-impact engine. It reads news feeds, merges copies of the same story, tags each story with tickers, a kind of event and the details in its summary, and hands the important ones to the engine's triage queue. There is no AI model in it: every step is a text rule, so it costs no GPU time and reading its output costs very few tokens.
 
+It takes in everything first and sorts it later. Every entry from every source lands whole in the `raw` table the moment we see it, before any rule looks at it. The rules that pick tickers, kinds and details read from `raw` afterwards and can be re-run over the past when a rule changes (`normalize --again`). Nothing a rule drops is lost.
+
 **In plain words:** many outlets report the same thing. The funnel collects the headlines and short summaries, groups the copies into one story, notes which companies it is about and pulls out the numbers that matter (how much, for how long, who, where). Then it passes only the stories that could move a price to the reasoning engine.
 
-The rest of the engine (the world graph, the mechanisms, the past cases) is not in this repository yet. The funnel only needs its company names, read from the engine's database `eg`, and it writes to that database's `event_candidate` table.
+The rest of the engine (the world graph, the mechanisms, the past cases) is in [event-graph/](../README.md). The funnel only needs its company names, read from the engine's database `eg`, and it writes to that database's `event_candidate` table.
 
 ## Run it
 
@@ -12,34 +14,53 @@ Needs Python 3.11 or later, `psycopg2` and the engine's Postgres (by default the
 
 ```bash
 python3 funnel.py init                 # create the `funnel` database and its feeds; safe to re-run
+python3 funnel.py run                  # poll forever: what launchd runs (run.sh)
 python3 funnel.py poll                 # poll every feed that is due, once, then exit
+python3 funnel.py normalize --again    # re-read every raw entry after changing a rule in sources.py
 python3 funnel.py digest --material    # one line per story, details on the line under it
 python3 funnel.py find "force majeure" # stories that mention a word, phrase, name, place or ticker
 python3 funnel.py terms --add "letter of intent" --label LOI   # watch a new phrase
 python3 funnel.py refacts              # re-read stored stories after changing a rule or a phrase
-python3 funnel.py stats                # what each feed cost
+python3 funnel.py stats                # what each feed cost, and our lag behind each source
 python3 funnel.py promote              # hand material stories to eg.event_candidate (catalog 'news')
 ```
+
+### Always on
+
+`run.sh` starts the engine's Postgres if it is down, reads keys from `.env` (`SEC_USER_AGENT`, `ALPACA_KEY_ID`, `ALPACA_SECRET_KEY`, `NYT_API_KEY`, `GUARDIAN_API_KEY`, one `export NAME=value` a line; a feed without its key is skipped) and runs `funnel.py run`. That loop polls each feed on its own schedule (30 seconds for Nasdaq halts and SEC filings, 60 for the wires, the Fed and GDELT, up to 30 minutes for slow feeds), reads new entries into stories, hands material ones to the engine every 10 minutes and logs to `run.log`. To keep it running across logins and restarts:
+
+```bash
+cp com.parity.funnel.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.parity.funnel.plist
+```
+
+GDELT's event rows are about 100 MB a day. GDELT keeps every file public, so the runner deletes its rows after 14 days unless they became an item. Everything else is kept.
 
 The funnel keeps its own database, `funnel`, because the engine's build script drops and rebuilds `eg`. Run `promote` again after every rebuild; it updates rows rather than adding duplicates.
 
 ## Sources
 
-Only sources whose robots.txt or terms allow automated reading, checked on 26 October 2026. The funnel names itself honestly in every request (set `FUNNEL_UA` to add a contact) and never poses as a browser.
+Only sources whose robots.txt or terms allow automated reading, checked on 26 October 2026. The funnel names itself honestly in every request (set `FUNNEL_UA` to add a contact) and never poses as a browser. The full list with schedules is `FEEDS` in `sources.py`.
 
-| Feed | What it gives | Cost per poll |
-| --- | --- | --- |
-| Business Wire RSS | Press releases, often the company's own words; "(NYSE: TEX)" tags give the ticker | About 12 KB, or nothing when unchanged |
-| GDELT 15-minute event file | Conflict, coercion and sanctions between countries or with a government or military side | About 90 KB every 15 minutes |
-| GDELT article search | World news that names the engine's companies, in batches of 8 names | One request per 5 seconds, GDELT's rule |
-| Alpaca news (Benzinga) | Headlines and summaries with tickers on every article | Off until `ALPACA_KEY_ID` and `ALPACA_SECRET_KEY` are set |
+| Group | Feeds |
+| --- | --- |
+| Company press releases | Business Wire, PR Newswire |
+| Exchanges and filings | Nasdaq trading halts; SEC EDGAR's live feed of every filing (off until `SEC_USER_AGENT` is set: the SEC requires a real contact) |
+| US government | Federal Reserve press, Federal Register public inspection (documents on file before publication), OFAC recent actions, White House presidential actions, FDA, Justice Department, CFTC, EIA |
+| Other central banks and governments | ECB, Bank of England, Bank of Japan, European Commission |
+| Disasters and health | USGS earthquakes (M4.5+, last hour), GDACS alerts, National Hurricane Center (Atlantic), WHO |
+| Newsrooms (headline, link and summary) | CNBC, BBC Business, FT, Guardian Business, Al Jazeera, Seeking Alpha market currents, Investing.com, Nasdaq |
+| Newsroom APIs (keyed) | NYT Times Newswire (`NYT_API_KEY`), Guardian Open Platform (`GUARDIAN_API_KEY`), each polled every 3 minutes to stay inside the free 500-a-day limit. Both free keys are for non-commercial use: a paid licence is needed before customers see their text |
+| Aggregates | GDELT 15-minute event file (every row), GDELT article search for the engine's companies, Alpaca news (off until `ALPACA_KEY_ID` and `ALPACA_SECRET_KEY` are set) |
 
-Not used: Yahoo Finance (its news feeds and its `query1` API disallow all robots), Google News RSS (disallowed) and GlobeNewswire (refuses automated requests). On 26 October 2026 GDELT's article search refused every request from our network with "too many requests"; the funnel backs off, doubling the wait after each failure up to 6 hours.
+Not used, because robots.txt or the server refuses automated readers: Yahoo Finance, Google News RSS, GlobeNewswire, the weather.gov API, BLS, BEA, Dow Jones and MarketWatch feeds, Reddit, OPEC and the European Parliament. GDELT's article search has refused every request from our network with "too many requests" since 26 October 2026; the funnel backs off, doubling the wait after each failure up to 6 hours.
+
+Publisher RSS is read for the headline, link and summary. Check a publisher's terms before showing its text to paying users.
 
 ## Why it is cheap to read
 
 - The full article is never downloaded. A feed item is about 700 bytes; a full article page is 100 KB or more, tens of thousands of tokens.
-- The feed's whole description is read for details, then only 300 characters are kept.
+- The raw table keeps each entry whole; the story digest a person or model reads keeps 300 characters of summary.
 - Unchanged feeds answer "not modified" with no body, and a link seen before is skipped (tracking codes are stripped first, so two links to one article count once).
 - Copies of one story from several outlets become one line.
 
@@ -68,3 +89,17 @@ In the first test, 80,000 tokens of raw feeds became 1,000 tokens of stored item
 `promote` passes these details to the engine with each story, already in the shape of a claim: a size and unit, a duration in days, the people and the places.
 
 Rules miss some ways of saying things. When one slips through, add a rule to `facts.py` or a phrase with `terms --add`, then run `refacts`.
+
+## The bridge to the engine
+
+`bridge.py` turns material stories into engine events and freezes the calls. `funnel.py run` runs it every 10 minutes.
+
+```bash
+python3 bridge.py baseline --days 30   # once: 30 days of GDELT conflict counts per country pair (one file an hour)
+python3 bridge.py report --days 7      # what became a call, and why every other material story could not
+python3 bridge.py calls                # the frozen calls
+```
+
+The engine reads claims (who, what changed, by how much), not headlines. Today one kind of story carries enough on its own: a **new** conflict. A country pair escalates when its last 24 hours carry 3 times its median day over the 30 days before (at least 100 articles), and when two independent newsrooms or wires name both sides in a conflict headline. GDELT alone miscodes too often ("Israel fights United States (Jerusalem)"). The escalation becomes an eg event of kind `conflict`, `impact()` applies the conflict channel rules through the exposures, and the calls are kept in this database's `live_call` table, because `build.sh` drops `eg`. After a rebuild the bridge puts its events back under ids above 1,000,000, and the calls stay as they were frozen.
+
+Every other material story is kept in `bridge` with the reason it waits: no company named, the company is not in the graph, or what the mechanism would need that news does not give (a leader's record, a consensus number, the facility and its customers). The report counts these, so it says which link or mechanism to build next.

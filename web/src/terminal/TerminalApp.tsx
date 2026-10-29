@@ -1,4 +1,4 @@
-// Parity Terminal (DEC-0023): the full-screen site at /sim/ (sim.endyland.com), now a
+// Parity Terminal (DEC-0023): the full-screen site at /sim/ (sim.paritytrading.app), now a
 // dense, keyboard-first market terminal of its own. A command bar on top, workspaces of
 // tiled panels, a ticker tape along the bottom. Sim World's tabs live on as panels.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -103,7 +103,7 @@ function withPanel(s: WsState, fn: string, args: string[] = []): WsState {
   return { ...s, tree: updateLeaf(s.tree, s.focus, { fn, args, opts: {} }) };
 }
 
-const FKEYS: Record<string, number> = { F2: 0, F3: 1, F4: 2, F5: 3, F6: 4 };
+const FKEYS: Record<string, number> = { F2: 0, F3: 1, F4: 2, F5: 3, F6: 4, F7: 5 };
 
 function TermShell() {
   const index = useLoad(loadIndex);
@@ -201,7 +201,8 @@ function TermShell() {
   const strategy = useCallback((token: string) => {
     const n = token.trim().toLowerCase();
     if (!n) return null;
-    return runs.find((r) => r.strategy.toLowerCase() === n) ?? runs.find((r) => nameOf(r).toLowerCase() === n) ?? null;
+    return runs.find((r) => r.strategy.toLowerCase() === n) ?? runs.find((r) => nameOf(r).toLowerCase() === n)
+      ?? runs.find((r) => (r.display_name ?? "").toLowerCase() === n) ?? null;
   }, [runs]);
 
   const place = useCallback((fn: string, args: string[], newPanel: boolean) => {
@@ -290,7 +291,7 @@ function TermShell() {
       }
       if (e.key === "F1") { e.preventDefault(); run("HELP"); return; }
       if (e.key in FKEYS) { e.preventDefault(); switchWs(WORKSPACES[FKEYS[e.key]].id); return; }
-      if (ctrl && !e.shiftKey && !e.altKey && /^[1-5]$/.test(e.key)) { e.preventDefault(); switchWs(WORKSPACES[+e.key - 1].id); return; }
+      if (ctrl && !e.shiftKey && !e.altKey && /^[1-6]$/.test(e.key)) { e.preventDefault(); switchWs(WORKSPACES[+e.key - 1].id); return; }
       if (typing) return;
       if (ctrl && e.key.startsWith("Arrow")) {
         e.preventDefault();
@@ -335,7 +336,7 @@ function TermShell() {
     <TermContext.Provider value={ctx}>
       <div className="ptm">
         <SkipLink />
-        <header className="term-top">
+        <header className="term-top" data-desktop-header>
           <button className="term-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden className="term-back-arrow">‹</span>
             <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />

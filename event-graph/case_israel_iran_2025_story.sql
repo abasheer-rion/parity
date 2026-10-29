@@ -1,0 +1,5 @@
+SELECT measure_driver(180, '2025-06-13', 213);
+SELECT case_auto_moves(15, '2025-06-12', '2025-06-13', ARRAY['FRO:NYSE','STNG:NYSE','DHT:NYSE','INSW:NYSE','VLO:NYSE','MPC:NYSE','PSX:NYSE','XOM:NYSE','CVX:NYSE','SHEL:LSE','BP:LSE','EQNR:NYSE','LNG:NYSE','LMT:NYSE','NOC:NYSE','RTX:NYSE','GD:NYSE','RHM:XETRA','BA:LSE','DAL:NYSE','UAL:Nasdaq','AAL:Nasdaq','LHA:XETRA','AF:EPA','CCL:NYSE','RCL:NYSE','NCLH:NYSE','LYB:NYSE','DOW:NYSE','BAS:XETRA','CF:NYSE','RELIANCE:NSE','BPCL:NSE','IOC:NSE','5020:TSE','010950:KRX','096770:KRX','9101:TSE','9104:TSE','9107:TSE','GLD:NYSEArca','LPG:NYSE','MATX:NYSE','ITA:NYSEArca','NIFTYBEES:NSE','069500:KRX','1306:TSE','EXSA:XETRA','ISF:LSE','SPY:NYSEArca'], 213);
+INSERT INTO case_step (id, case_id, parent_id, role, entity_id, mechanism, direction, description, happened_at, public_at, evidence_doc) VALUES
+  (1500, 15, NULL, 'event', 180, 'driver', NULL, 'Israel strikes Iran''s nuclear and military sites; Iran answers with missiles; Brent +7.0% on the first session.', '2025-06-13', '2025-06-13 03:30+03:30', 212);
+SELECT case_auto_steps(15, 1500, 'driver', 2, 0.5);

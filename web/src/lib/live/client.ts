@@ -11,6 +11,7 @@ import { ClockOffset, hops, Reservoir, type HopTimes } from "./latency";
 import { BOARD, bookKey, parseServer, tradesKey, type BoardRow, type FeedType, type Level, type ServerMsg, type Tick, type TradeRow } from "./protocol";
 import { isInternal } from "./sources";
 import { holdable } from "./pause";
+import { TRADE_ORIGIN } from "../meta";
 
 export type LineState = "connecting" | "open" | "closed";
 
@@ -81,7 +82,7 @@ export function liveOrigin(loc: Pick<Location, "protocol" | "host" | "hostname">
   // Local dev can point at a preview deploy: VITE_LIVE_ORIGIN=wss://<id>.parity-research.pages.dev
   const dev = typeof import.meta !== "undefined" ? (import.meta.env?.VITE_LIVE_ORIGIN as string | undefined) : undefined;
   if (local) return dev || null;
-  return "wss://trade.endyland.com";
+  return TRADE_ORIGIN.replace(/^https:/, "wss:");
 }
 
 export class SourceLine {

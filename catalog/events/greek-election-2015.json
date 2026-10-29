@@ -1,0 +1,23 @@
+{
+  "id": "greek-election-2015",
+  "name": "Syriza wins in Greece",
+  "date": "2015-01-25",
+  "type": "election",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "greece",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The anti-austerity Syriza party won Greece's election, setting up a clash with the country's lenders.",
+  "sources": [
+    {
+      "title": "January 2015 Greek legislative election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/January_2015_Greek_legislative_election"
+    }
+  ]
+}

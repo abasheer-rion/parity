@@ -1,4 +1,4 @@
-# Same rules as engine/pyproject.toml; the funnel's own modules count as first-party for import order.
+# Same rules as engine/pyproject.toml; the engine's own modules count as first-party for import order.
 line-length = 100
 target-version = "py311"
 
@@ -6,4 +6,10 @@ target-version = "py311"
 select = ["E", "F", "I", "B", "UP"]
 
 [lint.isort]
-known-first-party = ["facts", "funnel"]
+known-first-party = ["bridge", "facts", "funnel", "sources", "yahoo"]
+
+[lint.per-file-ignores]
+# Research loaders: long lines are SQL statements, regexes and usage text, kept whole so they read as one unit.
+"catalog/*.py" = ["E501"]
+"edgar/*.py" = ["E501"]
+"prices/*.py" = ["E501"]

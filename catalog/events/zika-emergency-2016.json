@@ -1,0 +1,23 @@
+{
+  "id": "zika-emergency-2016",
+  "name": "WHO declares Zika an emergency",
+  "date": "2016-02-01",
+  "type": "pandemic",
+  "regions": [
+    "latin_america",
+    "global"
+  ],
+  "actors": [
+    "brazil"
+  ],
+  "severity": 1,
+  "commodities": [],
+  "description": "The World Health Organization declared the Zika outbreak in the Americas a public health emergency of international concern.",
+  "sources": [
+    {
+      "title": "2015-2016 Zika virus epidemic",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2015%E2%80%932016_Zika_virus_epidemic"
+    }
+  ]
+}
