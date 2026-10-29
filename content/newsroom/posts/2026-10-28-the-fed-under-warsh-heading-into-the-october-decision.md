@@ -1,6 +1,6 @@
 +++
-title = "The Fed under Warsh, heading into the October decision"
-dek = "Kevin Warsh has chaired four Fed meetings since Jerome Powell's last in April: a hold, a split hold, the first hike since 2023 and today's decision. Markets price a hold. We registered our news-impact engine's calls before the statement."
+title = "The Fed under Warsh holds in October, with two votes for a hike"
+dek = "The Fed kept rates at 3.75% to 4.00% on 28 October, 10-2, with Lisa Cook and Beth Hammack voting for a hike. It is Kevin Warsh's fourth meeting as chair. We registered our news-impact engine's calls before the statement."
 slug = "the-fed-under-warsh-heading-into-the-october-decision"
 date = 2026-10-28
 type = "News"
@@ -20,6 +20,12 @@ id = "fomc-apr"
 title = "FOMC statement, 29 April 2026"
 url = "https://www.atlantafed.org/news-and-events/2026/04/29/fomc-statement"
 publisher = "Federal Reserve Bank of Atlanta"
+
+[[sources]]
+id = "fomc-oct"
+title = "Federal Reserve issues FOMC statement, 28 October 2026"
+url = "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm"
+publisher = "Federal Reserve"
 
 [[sources]]
 id = "npr-jun"
@@ -88,7 +94,9 @@ url = "https://github.com/abasheer-rion/parity/blob/main/event-graph/calls/fed_2
 publisher = "Parity"
 +++
 
-The Federal Reserve announces its decision at 2:00pm Eastern today, with Chair Kevin Warsh's press conference at 2:30pm. Futures price a 91% chance that the target range stays at 3.75% to 4.00%[^fattail].
+The Federal Reserve kept its target range at 3.75% to 4.00% on 28 October. The vote was 10-2. Governor Lisa Cook and Cleveland Fed President Beth Hammack dissented: both wanted a quarter-point hike. The statement says more information will help the Committee decide what it needs to do to bring inflation back to 2%[^fomc-oct].
+
+The hold was expected. The day before, futures priced a 91% chance of it[^fattail].
 
 ## From Powell to Warsh
 
@@ -98,8 +106,9 @@ The Federal Reserve announces its decision at 2:00pm Eastern today, with Chair K
 | 17 June | Warsh (his first) | Held, 12-0; dropped the wording that pointed to cuts; nine officials saw a hike by year-end[^npr-jun] | +0.15 |
 | 29 July | Warsh | Held, 9-3; Hammack, Kashkari and Logan dissented for a hike[^cnbc-jul] | −0.04 |
 | 16 September | Warsh | Raised to 3.75-4.00%, 12-0, the first hike since 2023[^cnn-sep] | +0.07 |
+| 28 October | Warsh | Held, 10-2; Cook and Hammack dissented for a hike[^fomc-oct] | −0.03 |
 
-Yield changes are from the Treasury's daily par curve[^treasury]. In July the 30-year yield rose to its highest since 2007 while the 2-year fell, and Warsh said he would not call the decision a "pause"[^presser-jul].
+Yield changes are from the Treasury's daily par curve[^treasury]. In July the 30-year yield rose to its highest since 2007 while the 2-year fell, and Warsh said he would not call the decision a "pause"[^presser-jul]. On 28 October the same split showed again: the 2-year fell from 4.70% to 4.67%, while the 10-year rose from 4.99% to 5.05% and the 30-year from 5.30% to 5.37%[^treasury].
 
 ## What happened since September
 
@@ -112,6 +121,6 @@ Yield changes are from the Treasury's daily par curve[^treasury]. In July the 30
 
 Parity's news-impact engine replays past events blind and scores itself. We added 15 Fed decisions under Powell and Warsh, using each day's 2-year yield change as the surprise. The engine named the direction of 61 stock moves correctly and 51 wrongly. Homebuilders were right in 19 of 19, while the three Warsh meetings went 6 right and 15 wrong. The published 30-minute measure of Fed surprises agreed in sign with our measure on 6 of the 8 meetings it covers[^bauer-swanson].
 
-Before today's statement we registered the engine's calls for three outcomes, and our own expectation of a small fall in the 2-year yield, about 0.03 points[^call]. The calls will be locked from the actual 2-year move before the close and scored after it, including the ones that turn out wrong.
+Before the statement we registered the engine's calls for three outcomes, and our own expectation of a small fall in the 2-year yield, about 0.03 points[^call]. The 2-year fell by exactly that. We also wrote down the risk the engine cannot see: if the 30-year rose more than 0.05 points while the 2-year fell, the calls on long-duration stocks would likely be wrong. The 30-year rose 0.07. The stock calls have not been scored yet. When they are, we will publish the results, including the calls that turned out wrong.
 
 > [!note] This is a record of what we registered, not advice. The engine's past record on Fed days is shown above, failures included.

@@ -3,19 +3,19 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1792 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1808 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
 | [Papers](#papers) | 342 |
 | [Preprints and working papers](#preprints-and-working-papers) | 46 |
 | [Books](#books) | 21 |
-| [Datasets](#datasets) | 63 |
+| [Datasets](#datasets) | 64 |
 | [Software](#software) | 104 |
-| [Web pages](#web-pages) | 1046 |
+| [Web pages](#web-pages) | 1049 |
 | [Forum posts](#forum-posts) | 81 |
-| [Regulators](#regulators) | 84 |
-| [News](#news) | 5 |
+| [Regulators](#regulators) | 88 |
+| [News](#news) | 13 |
 
 ## Papers
 
@@ -3161,6 +3161,12 @@ CLS FX volume data (CLSMarketData). (n.d.). *CLS Group*. <https://www.cls-group.
 
 Cited in: [catalog/datasets/cls-fx-volume.json](../catalog/datasets/cls-fx-volume.json), [DAT-0040](datasets/0040-cls-fx-volume.md).
 
+### url-4e824862
+
+San Francisco Fed monetary policy surprises. (2026). *frbsf.org*. <https://www.frbsf.org/research-and-insights/data-and-indicators/monetary-policy-surprises/>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-524f65ce
 
 CFTC press releases. (n.d.). *US Commodity Futures Trading Commission*. <https://www.cftc.gov/PressRoom/PressReleases>. Accessed 2026-10-21. Verification: not checked.
@@ -4638,6 +4644,12 @@ Cited in: [catalog/events/sri-lanka-default-2022.json](../catalog/events/sri-lan
 Supabase OAuth flows. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/auth/oauth-server/oauth-flows>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-0e2591ce
+
+FatTail futures timeline. (2026). *fattail.ai*. <https://fattail.ai/warsh-data-vs-fedspeak/>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
 
 ### url-0e3aeacf
 
@@ -10443,6 +10455,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f47072f8
+
+event-graph/calls/fed\_2026-10-28.md. (2026). *github.com*. <https://github.com/abasheer-rion/parity/blob/main/event-graph/calls/fed_2026-10-28.md>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-f57ef087
 
 Disruptor technical paper. (n.d.). *lmax-exchange.github.io*. <https://lmax-exchange.github.io/disruptor/disruptor.html>. Accessed 2026-10-24. Verification: not checked.
@@ -10480,6 +10498,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 benchmarks. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/docs/performance/benchmarks/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-f6b243ed
+
+Kalshi odds. (2026). *news.kalshi.com*. <https://news.kalshi.com/p/interest-rate-odds-fed-october-2026>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
 
 ### url-f6f6c822
 
@@ -11417,6 +11441,12 @@ eToro Group Ltd., Form F-1/A registration statement (2025). (n.d.). *sec.gov*. <
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-3f26428c
+
+FOMC statement, 29 April 2026. (2026). *atlantafed.org*. <https://www.atlantafed.org/news-and-events/2026/04/29/fomc-statement>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-40d7e26e
 
 NFA Compliance Rule 2-29, communications with the public and promotional material. (n.d.). *nfa.futures.org*. <https://www.nfa.futures.org/rulebook/rules.aspx?RuleID=RULE%202-29&Section=4>. Accessed 2026-10-23. Verification: not checked.
@@ -11473,6 +11503,18 @@ Interactive Brokers Group, Form 10-Q for the quarter ended 30 June 2026. (n.d.).
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-523bc440
+
+Federal Reserve, FOMC statement, 28 October 2026. (2026). *federalreserve.gov*. <https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
+### url-525cd654
+
+July press conference transcript. (2026). *federalreserve.gov*. <https://www.federalreserve.gov/mediacenter/files/FOMCpresconf20260729.pdf>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-54f5a239
 
 FINRA (n.d.). FINRA, file a complaint. *finra.org*. <https://www.finra.org/investors/have-problem/file-complaint>. Accessed 2026-10-25. Verification: unchecked.
@@ -11498,6 +11540,12 @@ Accredited investors. (n.d.). *US Securities and Exchange Commission*. <https://
 Note: Opened for RES-0012 on 2026-10-23.
 
 Cited in: [REF-0004](reference/0004-glossary.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+
+### url-5adf5420
+
+Treasury daily par yield curve. (2026). *home.treasury.gov*. <https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
 
 ### url-5e096a75
 
@@ -11795,6 +11843,18 @@ The Block. (n.d.). *theblock.co*. <https://www.theblock.co/post/390544>. Accesse
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-062c5897
+
+NPR on the June meeting. (2026). *npr.org*. <https://www.npr.org/2026/06/17/nx-s1-5860084/fed-chief-warsh-first-fomc-meeting>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
+### url-1b96b022
+
+CNBC on September jobs. (2026). *cnbc.com*. <https://www.cnbc.com/2026/10/02/jobs-report-september-2026.html>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-2de6ba29
 
 A rare CME shift: Hedge funds abandon structural shorts to bet on a bitcoin rally. (n.d.). *coindesk.com*. <https://www.coindesk.com/markets/2026/08/10/a-rare-cme-shift-hedge-funds-abandon-structural-shorts-to-bet-on-a-bitcoin-rally>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -11802,6 +11862,18 @@ A rare CME shift: Hedge funds abandon structural shorts to bet on a bitcoin rall
 Note: Linked in this repo as: CoinDesk, A rare CME shift: hedge funds abandon structural shorts.
 
 Cited in: [catalog/algorithms/crypto-cash-and-carry-basis.json](../catalog/algorithms/crypto-cash-and-carry-basis.json), [ALG-0022](algorithms/0022-crypto-cash-and-carry-basis.md).
+
+### url-66181ece
+
+CNN on the September hike. (2026). *cnn.com*. <https://www.cnn.com/2026/09/16/economy/fed-rate-decision-september>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
+### url-6dc6be74
+
+CNBC on September CPI. (2026). *cnbc.com*. <https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
 
 ### url-8f833426
 
@@ -11811,14 +11883,38 @@ Note: Linked in this repo as: search 2.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-97653257
+
+straits.live brief. (2026). *straits.live*. <https://straits.live/briefs/2026-10-28>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
+### url-ada7183b
+
+investingLive preview. (2026). *investinglive.com*. <https://investinglive.com/central-banks/fomc-preview-a-hawkish-hold-as-markets-watch-for-signals-about-timing-and-extent-of-further-tightening/>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-bf42e4dd
 
 Bloomberg Terminal product page. (n.d.). *bloomberg.com*. <https://www.bloomberg.com/professional/products/bloomberg-terminal/>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0002](competitors/0002-bloomberg-terminal.md).
 
+### url-d9c0576f
+
+Euronews preview. (2026). *euronews.com*. <https://euronews.com/2026/10/27/what-to-expect-from-the-fed-as-warsh-weighs-hot-inflation-oil-and-us-midterms>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
+
 ### url-de8f21f9
 
 CNBC interview. (n.d.). *cnbc.com*. <https://www.cnbc.com/2023/04/12/chatgpt-may-be-able-to-predict-stock-movements-finance-professor-says.html>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-e63b8538
+
+CNBC on the July meeting. (2026). *cnbc.com*. <https://www.cnbc.com/2026/07/29/fed-rate-decision-july-2026.html>. Accessed 2026-10-28. Verification: unchecked.
+
+Cited in: [LOG-0021](log/2026-10-28-fed-under-warsh-post-and-live-call.md).
